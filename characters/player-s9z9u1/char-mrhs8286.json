@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 8,
-  "xp": 749,
+  "xp": 754,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -77,7 +77,7 @@
   "maxHealth": 65,
   "health": 65,
   "maxEnergy": 135,
-  "energy": 98,
+  "energy": 93,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1905,125 +1905,199 @@
         "player": "Sit with it a moment before speaking — let what she said settle, and let her see you actually heard it.",
         "summary": "Silas holds silence after Pell's story about her father — she stays open, fire burning low at the overhang camp.",
         "narration": "The fire pops once, a small sound. You don't fill it.\n\nYou look at the flame rather than her face — not to avoid her, but because some things land better when you give them the courtesy of not watching them arrive. Her father's angle. The year he died. The fact that she stopped correcting it. You let all of that sit in you the way a stone sits in a palm: present, real, neither held tight nor dropped.\n\nAfter a moment you look at her. She's still watching the fire, the wine bottle cradled in both hands, and there's something in her posture that is waiting without expecting — not braced for a response, just open to whether one comes.\n\n\"I think that's the best kind of mark,\" you say finally. \"The kind that carries something the piece didn't make.\" A beat. \"Not yours. His, and now yours, because you chose to keep it.\" You mean it plainly. You're not reaching for comfort or offering craft-philosophy — you just mean it, and you think she'll hear the difference.\n\nHuginn shifts on the stone lip, one wing adjusting, then settles back. Its silence tonight has a different texture than its usual dry patience — less like waiting for an ending, more like a thing that is content to be where it is. You notice that, briefly, and file it.\n\nThe pines beyond the ring are dark now, the last of the western light gone. The overhang holds its warmth. Pell hasn't answered yet, but she's still looking at the fire the same way — and the bottle is still in both hands."
+      },
+      {
+        "player": "Ask her the thing you've been circling since the forge — not about her father, but about whether she wants this to be what it's starting to feel like",
+        "summary": "Silas asks plainly whether Pell wants what this is becoming — she says yes, plainly, and passes the wine back.",
+        "narration": "The wine has gone around twice. The fire has settled into its last good hour — red-orange coals under a thin layer of ash, heat radiating into the flat stones at the perimeter, the overhang ceiling amber and close above you both.\n\nYou don't lead with it. You watch the fire a moment longer, and then you look at her — not at the middle distance, not at the wine, at her — and you say it plainly, the way you've been learning is the only way she actually hears a thing: \"I know what this is starting to feel like. I want to know if it feels the same to you. Not the work. Not the road. This.\"\n\nPell is quiet. Her thumbs turn the bottle slowly, one full rotation, the same way she turned the valve housing in her hands at the east furlong — not stalling, just making sure she knows what she's holding before she sets it down. Then she looks at you directly, and the open-faced expression from after the forge morning is back, the one she only seems to find when the armor is already off and she's stopped noticing.\n\n\"Yes,\" she says. No qualification. No filed note or patient recalibration. Just that — her voice flat and certain and a little rueful, like she's answering something that's been obvious to her for longer than she'd prefer. She holds your gaze for a moment, then looks back at the fire. \"I told you I was managing it badly.\" The corner of her mouth lifts, brief. She passes the bottle back across the stones between you."
       }
     ],
     "lastTurn": {
-      "narration": "The fire pops once, a small sound. You don't fill it.\n\nYou look at the flame rather than her face — not to avoid her, but because some things land better when you give them the courtesy of not watching them arrive. Her father's angle. The year he died. The fact that she stopped correcting it. You let all of that sit in you the way a stone sits in a palm: present, real, neither held tight nor dropped.\n\nAfter a moment you look at her. She's still watching the fire, the wine bottle cradled in both hands, and there's something in her posture that is waiting without expecting — not braced for a response, just open to whether one comes.\n\n\"I think that's the best kind of mark,\" you say finally. \"The kind that carries something the piece didn't make.\" A beat. \"Not yours. His, and now yours, because you chose to keep it.\" You mean it plainly. You're not reaching for comfort or offering craft-philosophy — you just mean it, and you think she'll hear the difference.\n\nHuginn shifts on the stone lip, one wing adjusting, then settles back. Its silence tonight has a different texture than its usual dry patience — less like waiting for an ending, more like a thing that is content to be where it is. You notice that, briefly, and file it.\n\nThe pines beyond the ring are dark now, the last of the western light gone. The overhang holds its warmth. Pell hasn't answered yet, but she's still looking at the fire the same way — and the bottle is still in both hands.",
-      "sceneSummary": "Silas holds silence after Pell's story about her father — she stays open, fire burning low at the overhang camp.",
+      "narration": "The wine has gone around twice. The fire has settled into its last good hour — red-orange coals under a thin layer of ash, heat radiating into the flat stones at the perimeter, the overhang ceiling amber and close above you both.\n\nYou don't lead with it. You watch the fire a moment longer, and then you look at her — not at the middle distance, not at the wine, at her — and you say it plainly, the way you've been learning is the only way she actually hears a thing: \"I know what this is starting to feel like. I want to know if it feels the same to you. Not the work. Not the road. This.\"\n\nPell is quiet. Her thumbs turn the bottle slowly, one full rotation, the same way she turned the valve housing in her hands at the east furlong — not stalling, just making sure she knows what she's holding before she sets it down. Then she looks at you directly, and the open-faced expression from after the forge morning is back, the one she only seems to find when the armor is already off and she's stopped noticing.\n\n\"Yes,\" she says. No qualification. No filed note or patient recalibration. Just that — her voice flat and certain and a little rueful, like she's answering something that's been obvious to her for longer than she'd prefer. She holds your gaze for a moment, then looks back at the fire. \"I told you I was managing it badly.\" The corner of her mouth lifts, brief. She passes the bottle back across the stones between you.",
+      "sceneSummary": "Silas asks plainly whether Pell wants what this is becoming — she says yes, plainly, and passes the wine back.",
       "choices": [
         {
-          "label": "Pass the wine back and ask what his name was — just his name, nothing more",
+          "label": "Move closer to her — not a word, just close the distance the fire-ring has been keeping between you",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "connect",
+            "physical",
             "careful"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Tell her something equally true about yourself — not the work, not the valley. Something from before.",
+          "label": "Tell her what you mean to do about it — not a plan, a direction. Something honest about what you want this road to hold.",
           "attribute": "social",
           "subAttribute": "presence",
-          "difficulty": 0,
-          "intentTags": [
-            "confide",
-            "connect"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Move closer to her and say nothing — let the quiet hold what words would only diminish",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "connect",
-            "careful"
+            "honest",
+            "bold"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Ask her the thing you've been circling since the forge — not about her father, but about whether she wants this to be what it's starting to feel like",
+          "label": "Ask what 'managing it badly' looks like to her — let her say more of it, in her own words, on her own terms",
           "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 15,
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
           "intentTags": [
-            "confide",
-            "risky",
-            "connect"
+            "listen",
+            "connect",
+            "careful"
           ],
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Say nothing — take the bottle, drink, and let the quiet hold it for now. Some things don't need more words tonight.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "connect",
+            "careful",
+            "rest"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
       "scene": {
-        "setting": "Far side of the mountain pass, evening — at the south-facing rock overhang, fire burning low in the flat-stone ring. Full dark beyond the treeline now, amber firelight on the dry overhang ceiling, wind cutting above the lip.",
+        "setting": "Far side of the mountain pass, evening — at the south-facing rock overhang, fire settled to red-orange coals in the flat-stone ring. Full dark beyond the treeline, amber light on the dry overhang ceiling, wind cutting above the lip.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Knees drawn up, boot heels on the perimeter stones, wine bottle cradled in both hands — watching the fire, open, waiting without expectation."
+            "state": "Knees drawn up, boot heels on the perimeter stones, bottle passed back — watching the fire, open, the corner of her mouth still lifted from the remark."
           },
           {
             "name": "Huginn",
-            "state": "Wing settled on the overhang's stone lip, facing the treeline — quieter than usual, content rather than watchful."
+            "state": "Wing settled on the overhang's stone lip, facing the treeline — quiet, attending nothing in particular."
           }
         ],
         "objects": [
           "Memory (spear, leaned against the overhang wall)",
-          "Resin Mountain Wine (open, passed back to Pell)",
+          "Resin Mountain Wine (open, passed back to Silas)",
           "Oilcloth Fold (Pell's, propped as windbreak)",
           "Valve Failure Timeline note — 'S-gate confirmed' annotated (in pocket)",
           "Contact Names Scrap (Sorel, Leth) (in pocket)",
           "River Purification Tabs vial (in inner pack pocket)",
-          "Fire-ring of flat stones — fire burning low",
+          "Fire-ring of flat stones — coals burning low",
           "Rock overhang — south-facing, dry underside",
           "Snowmelt runnel — thin, running east, twenty feet from overhang",
           "Preserved Trail Parcel x3 (remaining in pack)"
         ],
         "threads": [
+          "Pell has said yes — plainly, without qualification. What comes next is Silas's move.",
           "Fire-ring: same hand, twice — whose route is this, and which direction are they traveling?",
           "The pre-pass knowledge: whoever camped here knew the route before it opened publicly",
           "Edge District bearing — Leth and Sorel as first contacts",
-          "The buried vault head: six-week window, expert needed before week five",
-          "The evening between Silas and Pell — she told him about her father's mark; he named what it carried; she hasn't answered yet"
+          "The buried vault head: six-week window, expert needed before week five"
         ]
       },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "pell",
+          "name": "Pell",
+          "role": "Village blacksmith, Millbrook",
+          "note": "Said yes plainly to Silas's direct question — no qualification, no filed note. Passed the bottle back. Acknowledged she's been managing it badly and clearly finds that faintly rueful.",
+          "learned": [
+            "She has wanted this for longer than she'd prefer — her own word is 'managing'",
+            "When asked directly she answers directly — the armor being off changes how she speaks"
+          ],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "At the overhang camp with Silas — fire burning low, the evening open between them, the answer given.",
+          "bondType": "romantic",
+          "bondStage": "together"
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Pell said yes — plainly, without qualification — when Silas asked directly whether she wants what this is starting to feel like. The relationship has moved past mutual acknowledgment into something named and mutual.",
+          "subjectId": "pell"
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "pell",
+          "label": "Pell",
+          "kind": "person",
+          "entityId": "pell",
+          "fact": "Said yes plainly at the overhang camp when asked directly — no qualification. Acknowledged she's been managing it badly and clearly has been for longer than she'd prefer.",
+          "links": [
+            "millbrook",
+            "the-water-crisis",
+            "memory-the-spear"
+          ]
+        }
+      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief quiet beat — fire, a short exchange, the settling after a story told"
+        "why": "a direct exchange at the fire — a short beat"
       }
     },
     "sceneState": {
-      "setting": "Far side of the mountain pass, evening — at the south-facing rock overhang, fire burning low in the flat-stone ring. Full dark beyond the treeline now, amber firelight on the dry overhang ceiling, wind cutting above the lip.",
+      "setting": "Far side of the mountain pass, evening — at the south-facing rock overhang, fire settled to red-orange coals in the flat-stone ring. Full dark beyond the treeline, amber light on the dry overhang ceiling, wind cutting above the lip.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Knees drawn up, boot heels on the perimeter stones, wine bottle cradled in both hands — watching the fire, open, waiting"
+          "state": "Knees drawn up, boot heels on the perimeter stones, bottle passed back — watching the fire, open, the corner of her mout"
         },
         {
           "name": "Huginn",
-          "state": "Wing settled on the overhang's stone lip, facing the treeline — quieter than usual, content rather than watchful."
+          "state": "Wing settled on the overhang's stone lip, facing the treeline — quiet, attending nothing in particular."
         }
       ],
       "objects": [
         "Memory (spear, leaned against the overhang wall)",
-        "Resin Mountain Wine (open, passed back to Pell)",
+        "Resin Mountain Wine (open, passed back to Silas)",
         "Oilcloth Fold (Pell's, propped as windbreak)",
         "Valve Failure Timeline note — 'S-gate confirmed' annotated (in pocket)",
         "Contact Names Scrap (Sorel, Leth) (in pocket)",
         "River Purification Tabs vial (in inner pack pocket)",
-        "Fire-ring of flat stones — fire burning low",
+        "Fire-ring of flat stones — coals burning low",
         "Rock overhang — south-facing, dry underside",
         "Snowmelt runnel — thin, running east, twenty feet from overhang",
         "Preserved Trail Parcel x3 (remaining in pack)"
       ],
       "threads": [
+        "Pell has said yes — plainly, without qualification. What comes next is Silas's move.",
         "Fire-ring: same hand, twice — whose route is this, and which direction are they traveling?",
         "The pre-pass knowledge: whoever camped here knew the route before it opened publicly",
         "Edge District bearing — Leth and Sorel as first contacts",
-        "The buried vault head: six-week window, expert needed before week five",
-        "The evening between Silas and Pell — she told him about her father's mark; he named what it carried; she hasn't answered yet"
+        "The buried vault head: six-week window, expert needed before week five"
       ]
     }
   },
@@ -2172,8 +2246,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Asked if she's ready to push out of the valley — answered without hesitation. 'I didn't walk up here to turn back at the valve.' Now standing ready at the intake, facing northeast.",
-        "[d2] Received the northeast bearing without words — turned and is ready to move.",
         "[d2] Crossed the pass without hesitation — set oilcloth against the wind-side and walked like someone who had decided. Eating trail parcel, watching the far slope.",
         "[d2] Waiting at the outcrop edge for the Palework read — patient, not restless.",
         "[d2] Descended with Silas without instruction — matched his pace, read the terrain independently. First words at the overhang: 'Recent?' — practical, not alarmed.",
@@ -2181,17 +2253,19 @@
         "[d2] Received the Palework read on the fire-ring — filed 'before the pass opened' immediately and set it aside. Accepted the Resin Mountain Wine, drank first, and settled into the eveni",
         "[d2] Told Silas about her father's stamp, the three pieces before she understood the criterion, and why the mark stays oblique — his angle, his teaching, still present in the work.",
         "[d2] Your bond becomes romantic.",
-        "[d2] Your bond deepens — courting."
+        "[d2] Your bond deepens — courting.",
+        "[d2] Said yes plainly to Silas's direct question — no qualification, no filed note. Passed the bottle back. Acknowledged she's been managing it badly and clearly finds that faintly ruef",
+        "[d2] Your bond deepens — together."
       ],
       "knownFacts": [
-        "Intake sleeve has three to four weeks before running open",
-        "The structure behind the valve is not ending — it has more work to do",
         "The valve system is three staged gates in a linear southwest-to-northeast sequence — south gate here, middle at east furlong, head at the buried vault northeast",
         "Is ready to depart the valley today — no hesitation, no qualification",
         "The fire-ring was made by one person, twice, three weeks apart — a known waypoint on a route that predates the pass opening",
         "Her father taught her the maker's stamp — 'don't put your name on a thing until the thing says yes'",
         "The oblique angle in her maker's mark is her father's — she stopped correcting it the year he died",
-        "She was sixteen when the first piece said yes; she cried, and he pretended not to see"
+        "She was sixteen when the first piece said yes; she cried, and he pretended not to see",
+        "She has wanted this for longer than she'd prefer — her own word is 'managing'",
+        "When asked directly she answers directly — the armor being off changes how she speaks"
       ],
       "skillsObserved": [
         "field-kit discipline under weather change — oilcloth deploye",
@@ -2202,13 +2276,13 @@
         "reading a stain pattern independently against a known failur"
       ],
       "status": "active",
-      "statusNote": "At the overhang camp, evening — fire open, wine passing, guard down in a way she hasn't shown in daylight.",
+      "statusNote": "At the overhang camp with Silas — fire burning low, the evening open between them, the answer given.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
       },
       "bondType": "romantic",
-      "bondStage": "courting"
+      "bondStage": "together"
     },
     "mara-wells": {
       "id": "mara-wells",
@@ -2757,7 +2831,6 @@
         "label": "Pell",
         "kind": "person",
         "facts": [
-          "[d2] Found the old burn-scar at Silas's lower-left ribs — named it not a forge mark by texture alone, then answered it with her mouth and open hands rather than asking its origin aloud.",
           "[d2] Named how badly she wants this when asked directly — 'since the whetstone, and I don't think about things I'm not going to do.' Then showed him.",
           "[d2] When handed explicit permission and a plain statement of want, she leads — no announcement, no hesitation, the same quality of attention she gives iron.",
           "[d2] When the register of ironwork diagnosis doesn't fit, she finds plain speech and uses it — 'I am already behind, and I don't know when it happened.' Named plainly, cost paid without flinching.",
@@ -2780,7 +2853,8 @@
           "[d2] The oblique maker's mark was accuracy: she wouldn't claim what she hadn't fully earned. The collar's ring when both hands touched Memory felt to her like being named to something — she did not finish ",
           "[d2] Named the collar ring as a sentence she hadn't started — distinct from the satisfaction of finished work. Received Silas's completion without correction and walked with it open.",
           "[d2] Lost the spar on first tap — moving weight versus standing weight, the feint inside her own read. Paid the wager without deflection and named her held read about Sorel.",
-          "[d2] Her father gave her the maker's stamp at fourteen and told her not to put her name on a thing until it says yes. The oblique angle in her mark is his — she stopped correcting it the year he died. She "
+          "[d2] Her father gave her the maker's stamp at fourteen and told her not to put her name on a thing until it says yes. The oblique angle in her mark is his — she stopped correcting it the year he died. She ",
+          "[d2] Said yes plainly at the overhang camp when asked directly — no qualification. Acknowledged she's been managing it badly and clearly has been for longer than she'd prefer."
         ],
         "links": [
           "aldric-provisioning-deal",
@@ -3305,15 +3379,15 @@
     }
   },
   "tendencies": {
-    "strategic": 63.53863857201913,
-    "cerebral": 42.31239255672059,
-    "social": 57.91058643455098,
-    "generous": 14.934561591928283,
-    "cautious": 50.75981087659386,
-    "physical": 1.572003272328163,
-    "risky": 5.121328792467702,
-    "ruthless": 3.491647340449371,
-    "carousing": 2.1627318422099395
+    "strategic": 63.22094537915903,
+    "cerebral": 42.10083059393698,
+    "social": 57.621033502378225,
+    "generous": 14.85988878396864,
+    "cautious": 50.506011822210894,
+    "physical": 1.564143255966522,
+    "risky": 6.095722148505364,
+    "ruthless": 3.474189103747124,
+    "carousing": 2.15191818299889
   },
   "aptitudes": [
     "strategist",
@@ -3321,7 +3395,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 300,
+  "actionCount": 301,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3455,8 +3529,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13693&nologo=true",
-  "updatedAt": 1784179673130,
-  "rev": 412,
+  "updatedAt": 1784179781185,
+  "rev": 413,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3667,12 +3741,6 @@
   },
   "opLossPending": false,
   "establishedFacts": [
-    {
-      "id": "pell",
-      "text": "Bull boar taken on the scrub oak ridge on World-day 14 morning — Pell's strike, spear held. Silas's Palework channel through the runes misfired at the kill moment: the binding closed rather than passe",
-      "day": 1,
-      "subjectId": "pell"
-    },
     {
       "id": "corvin",
       "text": "Silas paid Corvin twenty cord-weight from the hunt proceeds — unprompted, before Corvin could leave. Corvin received it without ceremony and departed for his furlong.",
@@ -3906,6 +3974,12 @@
       "text": "The Attended End confirms Fen's intake iron sleeve has three to four weeks before it runs open — a loosening, not a collapse. The buried structure pressing through this valve is not ending.",
       "day": 2,
       "subjectId": "the-water-crisis"
+    },
+    {
+      "id": "pell",
+      "text": "Pell said yes — plainly, without qualification — when Silas asked directly whether she wants what this is starting to feel like. The relationship has moved past mutual acknowledgment into something na",
+      "day": 2,
+      "subjectId": "pell"
     }
   ],
   "practice": {
@@ -4018,7 +4092,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 103
+    "valley": 104
   },
   "foreclosed": [
     "rootkin",

@@ -117,81 +117,97 @@
         "player": "Use Total Focus — clear away the strangeness of the place and the cold arithmetic of Ossian's world, and just see this woman clearly: what does she actually need?",
         "summary": "Saehara attempts Total Focus to read the fallen Cogitant's needs — the thin lattice and the hall's abstraction break the attempt.",
         "narration": "You press the ability inward — try to pull the fog of this place back, to strip away the chalk-smell and Ossian's voice still ringing in the architecture of your thoughts, and just *see* her. What she needs. What the body in front of you is actually doing.\n\nIt doesn't land. The Cogitarium is wrong for it in some way you can't quite name — too abstract, too thin, the lattice here reduced to a pale suggestion of itself, and your own focus keeps skating across the surface of the hall's strange atmosphere instead of cutting through it. The woman's lips move. Her eyes are half-open and aimed at something a long way past the ceiling. You can see she's breathing. You can see the chalk ground into her palms, the faint blue tinge at her fingertips, the way her chest barely lifts. But you can't read through it — can't separate what the body is saying from the vast, humming silence of what the mind is still doing inside her.\n\nKon doesn't move from the shaft of window-light. The fox watches you across the hall with those banked-coal eyes — not disappointed, not urgent, just watching. Waiting to see what you do next without the focus to guide you."
+      },
+      {
+        "player": "Check her practically — not with any ability, just with your hands and eyes: her temperature, her pulse at the wrist, whether she's eaten, whether she's been here hours or days.",
+        "summary": "Saehara reads the fallen Cogitant by hand and eye — pulse slow, chalk-ground, dehydrated, hours from the critical threshold Ossian has been watching.",
+        "narration": "The woman's wrist is cold under your fingers, but the pulse is there — slow, deliberate, not panicked. A body that has decided it doesn't need much and is proving it. You press two fingers to the inside of her wrist and count. Maybe forty beats per minute. A sleeper's rhythm, except she isn't sleeping.\n\nYou look at her hands where the chalk is ground in — not dusted on, ground in, worked into the whorls of her fingertips the way river-mud works into a fisherman's palms over years. She was at the wall before she was on the floor. How long she's been down here is harder to read. The chalk hasn't smeared from her lying on it, which means she fell and stayed where she fell, and no one turned her or moved her. Hours, then. Her lips are dry. There's a faint smell about her — not unwashed, exactly, but the particular staleness of a body run on nothing but itself for too long, burning reserves in the wrong order.\n\nShe has not eaten. This is not a guess. The wrists, the hollows above the collarbone, the way the skin of her face is pulled just slightly too tight over the structure beneath — her body is consuming itself to keep the calculation running. It's doing the job she asked it to do.\n\nKon pads across the chalk-dust floor and settles close to her, not touching, just present — the faint warmth of the fox-thing's coat coming off it like a hearthstone an hour after the fire's out. Kon watches her face with the particular stillness it reserves for things it doesn't know how to classify. From across the hall, Ossian speaks without being asked. \"She has been on the floor for four hours and twelve minutes.\" A pause. \"I calculated the intervention threshold at six hours. You have arrived one hour and forty-eight minutes ahead of my estimate. This is consistent with your classification.\""
       }
     ],
     "lastTurn": {
-      "narration": "You press the ability inward — try to pull the fog of this place back, to strip away the chalk-smell and Ossian's voice still ringing in the architecture of your thoughts, and just *see* her. What she needs. What the body in front of you is actually doing.\n\nIt doesn't land. The Cogitarium is wrong for it in some way you can't quite name — too abstract, too thin, the lattice here reduced to a pale suggestion of itself, and your own focus keeps skating across the surface of the hall's strange atmosphere instead of cutting through it. The woman's lips move. Her eyes are half-open and aimed at something a long way past the ceiling. You can see she's breathing. You can see the chalk ground into her palms, the faint blue tinge at her fingertips, the way her chest barely lifts. But you can't read through it — can't separate what the body is saying from the vast, humming silence of what the mind is still doing inside her.\n\nKon doesn't move from the shaft of window-light. The fox watches you across the hall with those banked-coal eyes — not disappointed, not urgent, just watching. Waiting to see what you do next without the focus to guide you.",
-      "sceneSummary": "Saehara attempts Total Focus to read the fallen Cogitant's needs — the thin lattice and the hall's abstraction break the attempt.",
+      "narration": "The woman's wrist is cold under your fingers, but the pulse is there — slow, deliberate, not panicked. A body that has decided it doesn't need much and is proving it. You press two fingers to the inside of her wrist and count. Maybe forty beats per minute. A sleeper's rhythm, except she isn't sleeping.\n\nYou look at her hands where the chalk is ground in — not dusted on, ground in, worked into the whorls of her fingertips the way river-mud works into a fisherman's palms over years. She was at the wall before she was on the floor. How long she's been down here is harder to read. The chalk hasn't smeared from her lying on it, which means she fell and stayed where she fell, and no one turned her or moved her. Hours, then. Her lips are dry. There's a faint smell about her — not unwashed, exactly, but the particular staleness of a body run on nothing but itself for too long, burning reserves in the wrong order.\n\nShe has not eaten. This is not a guess. The wrists, the hollows above the collarbone, the way the skin of her face is pulled just slightly too tight over the structure beneath — her body is consuming itself to keep the calculation running. It's doing the job she asked it to do.\n\nKon pads across the chalk-dust floor and settles close to her, not touching, just present — the faint warmth of the fox-thing's coat coming off it like a hearthstone an hour after the fire's out. Kon watches her face with the particular stillness it reserves for things it doesn't know how to classify. From across the hall, Ossian speaks without being asked. \"She has been on the floor for four hours and twelve minutes.\" A pause. \"I calculated the intervention threshold at six hours. You have arrived one hour and forty-eight minutes ahead of my estimate. This is consistent with your classification.\"",
+      "sceneSummary": "Saehara reads the fallen Cogitant by hand and eye — pulse slow, chalk-ground, dehydrated, hours from the critical threshold Ossian has been watching.",
       "choices": [
         {
-          "label": "Check her practically — not with any ability, just with your hands and eyes: her temperature, her pulse at the wrist, whether she's eaten, whether she's been here hours or days.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "help",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Call across the hall to Ossian — ask plainly: what does a Cogitant need when they collapse? Is there anything that's ever brought one back?",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "help",
-            "ask"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Take water from the Waterskin — hold it to her lips and try to get something into her. It won't fix whatever is wrong, but it's real and it's something and she's cold.",
+          "label": "Try to get water into her — uncap the Waterskin and coax her lips apart; she's dehydrated and burning fuel.",
           "attribute": "practical",
           "subAttribute": "craft",
-          "difficulty": 15,
+          "axes": {},
+          "difficulty": 0,
           "intentTags": [
             "help",
             "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Speak to her — not loudly, not a command. Just your voice, close to her ear, something specific and grounded: your name, where you came from, the smell of the river back east. Something that goes the direction of a body remembering it has a world.",
+          "label": "Stand and face Ossian. Four hours. He has been watching the clock and hasn't moved. Ask him: what happens at six hours?",
           "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 15,
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
           "intentTags": [
-            "help",
-            "careful",
-            "persuade"
+            "confront",
+            "study"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Look at the other drifting Cogitants at the edges of the hall — study their patterns; see if any of them are close to this same edge.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Something else — act as you see fit.",
+          "attribute": "mental",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         }
       ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
       "scene": {
-        "setting": "Entrance hall of the Cogitarium — high pale stone, bluish morning light through tall windows, chalk-dust thick underfoot. Saehara kneels beside the fallen Cogitant at the hall's far edge, ability spent and unrewarded. Mist still faint through the outer arch.",
+        "setting": "Entrance hall of the Cogitarium — high pale stone, bluish morning light through tall windows, chalk-dust thick underfoot. Saehara kneels beside the fallen Cogitant at the hall's far edge. Mist still faint through the outer arch.",
         "npcsPresent": [
           {
             "name": "Ossian",
-            "state": "Seated cross-legged at the center of the hall, watching Saehara at the far edge — same stillness as always, gaze tracking"
+            "state": "Seated cross-legged at the center of the hall, watching Saehara — just announced the four-hour mark and the six-hour threshold without being asked"
           },
           {
             "name": "Araveth",
@@ -199,7 +215,7 @@
           },
           {
             "name": "Fallen Cogitant",
-            "state": "Collapsed on the chalk-dust floor — alive, breathing shallowly, lips moving in silent calculation, eyes half-open and fixed on something past the ceiling"
+            "state": "Collapsed on the chalk-dust floor at the hall's far edge — alive, pulse slow at forty beats per minute, lips dry, chalk ground into both hands, lips still moving in silent calculation"
           },
           {
             "name": "Drifting Cogitants",
@@ -207,40 +223,115 @@
           },
           {
             "name": "Kon",
-            "state": "Sitting in the shaft of window-light, coat banked low, watching Saehara with quiet attentive eyes"
+            "state": "Settled close to the fallen Cogitant in the chalk dust, not touching — watching her face with quiet stillness, coat faintly warm"
           }
         ],
         "objects": [
-          "Wall of dense chalk notation — twenty-two-day watershed model, deterioration visible around day nine and fourteen",
-          "Outer arch (mist faintly visible beyond)",
-          "Fallen Cogitant's robes pooled in chalk dust — chalk ground into both her hands, fingertips faintly blue",
-          "Shaft of window-light (Kon sitting in it)",
+          "Wall of dense chalk notation — twenty-two-day watershed model, deterioration visible around days nine and fourteen",
+          "Outer arch — mist faintly visible beyond",
+          "Fallen Cogitant's robes pooled in chalk dust — chalk ground into both hands",
+          "Waterskin at Saehara's side",
           "Katana at Saehara's waist",
-          "Waterskin (at Saehara's side)"
+          "Traveler's Pack on Saehara's back"
         ],
         "threads": [
-          "Fallen Cogitant is alive but unreachable — lips moving, eyes open to something elsewhere; Total Focus failed to clarify her condition",
-          "Kon watches from the light — not alarmed, but waiting",
-          "Ossian's gaze on Saehara — tracking from across the hall",
-          "No other Cogitant has moved toward the fallen woman",
+          "Fallen Cogitant is alive but unreachable — pulse slow, dehydrated, body consuming itself; Ossian has set a six-hour intervention threshold",
+          "One hour and forty-eight minutes remain before Ossian's calculated threshold",
+          "Kon watches the fallen woman with unusual stillness — does not classify her the way it classifies ordinary things",
+          "Ossian is observing the clock and doing nothing — this may be calculation, or it may be something worse",
           "The four conditions for source-remediation stand unmet"
         ]
       },
-      "characterDeltas": {
-        "health": 0,
-        "energy": -4
-      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "ossian",
+          "name": "Ossian",
+          "role": "Cogitant — seated thinker, first contact at the Cogitarium",
+          "note": "Announced the fallen Cogitant's floor-time (four hours twelve minutes) and his calculated intervention threshold (six hours) without being prompted — has been watching and timing her decline",
+          "learned": [
+            "Has been tracking the fallen Cogitant's collapse to the minute",
+            "Set a personal intervention threshold at six hours — implying some form of action was planned, just not yet"
+          ],
+          "skillsObserved": [
+            "precise temporal tracking without any visible instrument"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Seated at hall center, watching Saehara tend to the fallen Cogitant — timing her decline with precision"
+        },
+        {
+          "op": "update",
+          "npcId": "fallen-cogitant",
+          "name": "Fallen Cogitant",
+          "role": "Cogitant — collapsed at the hall's far edge",
+          "note": "Saehara checked her vitals by hand: pulse forty beats per minute, lips dry, chalk ground into fingertips, body consuming itself — she has been on the floor four hours and twelve minutes per Ossian",
+          "learned": [
+            "Pulse slow but present — approximately forty beats per minute",
+            "Lips dry — severely dehydrated",
+            "Chalk ground into fingertips — was working at the wall before she fell",
+            "Body is in a state of self-consumption — burning reserves to sustain the calculation",
+            "Has been on the floor four hours and twelve minutes"
+          ],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "injured",
+          "statusNote": "Collapsed on the hall floor — alive but unreachable, dehydrated and body-failing; one hour forty-eight minutes from Ossian's calculated intervention threshold"
+        },
+        {
+          "op": "update",
+          "npcId": "kon",
+          "name": "Kon",
+          "role": "Companion — Glade-touched fox-thing",
+          "note": "Crossed the hall to settle close to the fallen Cogitant — not touching, just present and warm. Watches her face with the stillness it reserves for things it cannot classify.",
+          "learned": [
+            "Treats the fallen Cogitant as something that doesn't fit its existing categories — unusual stillness"
+          ],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Settled in the chalk dust beside the fallen Cogitant, watchful and warm"
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "the-collapsing-cogitants",
+          "label": "The Collapsing Cogitants",
+          "kind": "event",
+          "entityId": "fallen-cogitant",
+          "fact": "The fallen Cogitant's pulse runs at forty beats per minute — slow but present. She is severely dehydrated, chalk worked into her fingertips, body consuming itself to sustain a calculation she hasn't stopped running. Ossian has been timing her decline: four hours and twelve minutes on the floor, with a calculated intervention threshold at six hours.",
+          "links": [
+            "cogitarium",
+            "cogitants",
+            "ossian",
+            "the-cogitariums-calculated-crisis"
+          ]
+        },
+        {
+          "topic": "ossian",
+          "label": "Ossian",
+          "kind": "person",
+          "entityId": "ossian",
+          "fact": "Ossian set a private six-hour intervention threshold for the fallen Cogitant and has been tracking her collapse to the minute — he had a plan, deferred. What the plan was, he has not said.",
+          "links": [
+            "cogitarium",
+            "cogitants",
+            "the-collapsing-cogitants"
+          ]
+        }
+      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief focused attempt and its aftermath"
-      }
+        "why": "a careful hands-on check of the fallen Cogitant — a few quiet minutes at her side"
+      },
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Entrance hall of the Cogitarium — high pale stone, bluish morning light through tall windows, chalk-dust thick underfoot. Saehara kneels beside the fallen Cogitant at the hall's far edge, ability spent and unrewarded. Mist still faint through the outer arch.",
+      "setting": "Entrance hall of the Cogitarium — high pale stone, bluish morning light through tall windows, chalk-dust thick underfoot. Saehara kneels beside the fallen Cogitant at the hall's far edge. Mist still faint through the outer arch.",
       "npcsPresent": [
         {
           "name": "Ossian",
-          "state": "Seated cross-legged at the center of the hall, watching Saehara at the far edge — same stillness as always, gaze trackin"
+          "state": "Seated cross-legged at the center of the hall, watching Saehara — just announced the four-hour mark and the six-hour thr"
         },
         {
           "name": "Araveth",
@@ -248,7 +339,7 @@
         },
         {
           "name": "Fallen Cogitant",
-          "state": "Collapsed on the chalk-dust floor — alive, breathing shallowly, lips moving in silent calculation, eyes half-open and fi"
+          "state": "Collapsed on the chalk-dust floor at the hall's far edge — alive, pulse slow at forty beats per minute, lips dry, chalk "
         },
         {
           "name": "Drifting Cogitants",
@@ -256,22 +347,22 @@
         },
         {
           "name": "Kon",
-          "state": "Sitting in the shaft of window-light, coat banked low, watching Saehara with quiet attentive eyes"
+          "state": "Settled close to the fallen Cogitant in the chalk dust, not touching — watching her face with quiet stillness, coat fain"
         }
       ],
       "objects": [
         "Wall of dense chalk notation — twenty-two-day watershed model, deterioration vis",
-        "Outer arch (mist faintly visible beyond)",
-        "Fallen Cogitant's robes pooled in chalk dust — chalk ground into both her hands,",
-        "Shaft of window-light (Kon sitting in it)",
+        "Outer arch — mist faintly visible beyond",
+        "Fallen Cogitant's robes pooled in chalk dust — chalk ground into both hands",
+        "Waterskin at Saehara's side",
         "Katana at Saehara's waist",
-        "Waterskin (at Saehara's side)"
+        "Traveler's Pack on Saehara's back"
       ],
       "threads": [
-        "Fallen Cogitant is alive but unreachable — lips moving, eyes open to something elsewhere; Total Focus failed to clarify her condition",
-        "Kon watches from the light — not alarmed, but waiting",
-        "Ossian's gaze on Saehara — tracking from across the hall",
-        "No other Cogitant has moved toward the fallen woman",
+        "Fallen Cogitant is alive but unreachable — pulse slow, dehydrated, body consuming itself; Ossian has set a six-hour intervention threshold",
+        "One hour and forty-eight minutes remain before Ossian's calculated threshold",
+        "Kon watches the fallen woman with unusual stillness — does not classify her the way it classifies ordinary things",
+        "Ossian is observing the clock and doing nothing — this may be calculation, or it may be something worse",
         "The four conditions for source-remediation stand unmet"
       ]
     }
@@ -367,16 +458,20 @@
       },
       "relationship": 0,
       "history": [
-        "[d1] Saehara crossed the hall and knelt beside her — found her breathing shallowly, eyes half-open, skin cold, lips still moving. Kon followed and watched her face with particular still"
+        "[d1] Saehara crossed the hall and knelt beside her — found her breathing shallowly, eyes half-open, skin cold, lips still moving. Kon followed and watched her face with particular still",
+        "[d1] Saehara checked her vitals by hand: pulse forty beats per minute, lips dry, chalk ground into fingertips, body consuming itself — she has been on the floor four hours and twelve mi"
       ],
       "knownFacts": [
         "Is alive but unreachable — still calculating, visibly, behind closed eyes",
         "Cold to the touch — body-temperature reduced to minimum",
-        "Chalk ground into both hands — she was working before she fell"
+        "Chalk ground into both hands — she was working before she fell",
+        "Pulse slow but present — approximately forty beats per minute",
+        "Lips dry — severely dehydrated",
+        "Chalk ground into fingertips — was working at the wall before she fell"
       ],
       "skillsObserved": [],
       "status": "injured",
-      "statusNote": "Collapsed in the Cogitarium entrance hall — alive, barely present, still calculating silently; no other Cogitant has gone to her",
+      "statusNote": "Collapsed on the hall floor — alive but unreachable, dehydrated and body-failing; one hour forty-eight minutes from Ossian's calculated intervention threshold",
       "lastSeen": {
         "locationId": "the_cogitarium",
         "day": 1
@@ -581,13 +676,15 @@
         "facts": [
           "[d1] Name of the cross-legged Cogitant who first received Saehara. Offered it plainly when asked — a coordinate, not an introduction.",
           "[d1] The chalk wall shows visible deterioration in particulate concentration around day nine and again around day fourteen — the watershed is getting worse, not stable.",
-          "[d1] Ossian modeled every probable respondent category and assigned a combined 0.003 probability to someone like Saehara arriving: no settlement, no mandate, a Glade-changed companion, challenged the evacu"
+          "[d1] Ossian modeled every probable respondent category and assigned a combined 0.003 probability to someone like Saehara arriving: no settlement, no mandate, a Glade-changed companion, challenged the evacu",
+          "[d1] Ossian set a private six-hour intervention threshold for the fallen Cogitant and has been tracking her collapse to the minute — he had a plan, deferred. What the plan was, he has not said."
         ],
         "links": [
           "cogitarium",
           "cogitants",
           "the-cogitariums-calculated-crisis",
-          "araveth"
+          "araveth",
+          "the-collapsing-cogitants"
         ],
         "aliases": [
           "The Cogitarium's Calculated Crisis",
@@ -603,7 +700,8 @@
         "kind": "event",
         "facts": [
           "[d1] A Cogitant collapsed at the hall's far edge — the third this week, per Ossian. He noted it with statistical flatness: 'The calculation continues. The body does not always.' No other Cogitant reacted. ",
-          "[d1] The third Cogitant to collapse this week is a thin woman with chalk on both hands — alive, cold, lips still moving in silent calculation. She did not stop working when she fell. Kon watched her and di"
+          "[d1] The third Cogitant to collapse this week is a thin woman with chalk on both hands — alive, cold, lips still moving in silent calculation. She did not stop working when she fell. Kon watched her and di",
+          "[d1] The fallen Cogitant's pulse runs at forty beats per minute — slow but present. She is severely dehydrated, chalk worked into her fingertips, body consuming itself to sustain a calculation she hasn't s"
         ],
         "links": [
           "cogitarium",
@@ -613,19 +711,20 @@
         ],
         "aliases": [],
         "createdDay": 1,
-        "updatedDay": 1
+        "updatedDay": 1,
+        "entityId": "fallen-cogitant"
       }
     }
   },
   "tendencies": {
-    "strategic": 1.935941796697312,
-    "social": 2.9161161686189687,
-    "cerebral": 2.950522009981266,
-    "generous": 1.995,
-    "cautious": 1.995
+    "strategic": 1.9262620877138255,
+    "social": 2.9015355877758737,
+    "cerebral": 3.9357693999313597,
+    "generous": 2.9850250000000003,
+    "cautious": 2.9850250000000003
   },
   "aptitudes": [],
-  "actionCount": 9,
+  "actionCount": 10,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -638,8 +737,8 @@
       "at": "2026-07-16T02:18:04.820Z"
     }
   ],
-  "updatedAt": 1784171632093,
-  "rev": 31,
+  "updatedAt": 1784171699450,
+  "rev": 32,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -647,7 +746,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "somatic_reaches": 10
+    "somatic_reaches": 11
   },
   "opLossPending": false,
   "establishedFacts": [

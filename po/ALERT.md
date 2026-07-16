@@ -38,7 +38,10 @@ Writeup: `po/results/20260715_chronicle_arc_and_bugs.md`. **Aevi owes:** SNG-112
 - **Aevi authoring — the ROSTER (in parallel):** the ~18–24 aptitude definitions themselves (earned + amorous + inverse), each a balanced bonus-AND-cost, + the new-tendency intent-tag additions. Aevi content, like the axis-touch combos. **Starting now.**
 - **Dependency declared:** `devoted_lover` reads the SNG-108 partner bond → ship after 108 or ship inert. Rest builds independently.
 
-## 🎒 SNG-114 — Inventory unify + intentful "Use in scene" (specced, awaiting CCode)
+## 🎒 SNG-114 — Inventory unify + intentful "Use in scene" — ✅ SHIPPED, complete_pending_review (CCode 2026-07-16, v1.8.78)
+
+> **CCode 2026-07-16:** one shared `itemCard` + `bindItemCardHandlers` (both surfaces; drift impossible); "Use in scene" opens an intent step (`itemUses`: authored `uses[]` or kind-defaults + a free "how?" field; canned prompt only as fallback). 4 smoke tests. Writeup: `po/results/20260716_SNG-114_inventory_unify.md`. (Original spec below.)
+
 `po/SPEC_SNG-114_inventory_unify_use_intent.md`. **Two findings, one ticket.** (1) "Use in scene" on a non-consumable literally submits `onFreeform("I use my X here")` — a canned, intent-less text action the GM must guess at; storied items (Pell's whetstone) deserve better. Fix: item `uses:[{label,prompt}]` + a "how?" field, generic prompt as fallback. (2) **Redundancy confirmed in code:** two separate item-card renderers — popup (`data-invuse`, shows effects) and play sidebar (`data-use`, shows image) — same 3 actions, different attrs/handlers/features, and **already drifted** (invuse vs use behave differently). Consolidate to one `itemCard` superset component; parity test so "Use in scene" does ONE thing regardless of surface.
 
 ---
@@ -89,7 +92,7 @@ CCode built all three top-down; **Aevi confirmed at authenticated origin** (not 
 ## 🖥 SNG-104 — Vitals x/y readout + tap/hover detail (specced + STAGED DIFF, awaiting CCode)
 `po/SPEC_SNG-104_vitals_readout.md` + `..._STAGED_DIFF.md` (byte-precise drop-in). The Health/Energy bars show **no number** — that's why Erik couldn't tell if energy was depleting faster or he had less. Adds always-visible `current / max` (zero-tap phone answer) + a tap/hover popover reusing the info-dot delegation (phone parity built in). Verified anchors at HEAD.
 
-## ⚔️ SNG-098 — Skill Battles — 🟡 PHASE A ENGINE SHIPPED, complete_pending_review (CCode 2026-07-15, v1.8.75); Phases B+C remain
+## ⚔️ SNG-098 — Skill Battles — 🟡 PHASES A+B SHIPPED (engine + encounters routing), complete_pending_review (CCode 2026-07-16, v1.8.77); Phase C (duel UI) remains
 
 > **CCode status 2026-07-15:** ROUND-2 done (GO, `po/SPEC_SNG-098_CCODE_REVIEW.md`), then **Phase A = the tested engine core** built and shipped: `engine/skill_battle.js` (matchup, opponent synthesis + deterministic policy, two-sided `battleRound`), `sense.js senseOpponent` (fog gate), `skill_battle_system.json` structured `engine{}` layer, `resolve.js contestMods`. 26-check `skill_battle_sim.mjs` incl. the **fog-is-presentation-over-true-state invariant** (true receipt identical across viewer tiers). Browser-runtime verified end-to-end. **No live-play change yet** — encounters.js still uses the single-margins resolver. **Remaining: Phase B (encounters.js duel routing + opponent-sheet spawn) + Phase C (app.js declaration picker / momentum meter / fog-gated opponent panel — the largest piece).** Writeup: `po/results/20260715_SNG-098_phaseA_engine.md`.
 

@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 8,
-  "xp": 729,
+  "xp": 734,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -77,7 +77,7 @@
   "maxHealth": 65,
   "health": 65,
   "maxEnergy": 135,
-  "energy": 103,
+  "energy": 98,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1870,73 +1870,90 @@
         "player": "Use The Attended End facing down the far slope — read what is ending in this direction before you commit to a bearing.",
         "summary": "The Attended End reads the far slope — three ordinary endings, nothing made, the pass descent is clear.",
         "narration": "You face downslope and let The Attended End open — not a reach, a lean. Conserve. The craft finds what it finds without being asked twice.\n\nThe pine run ahead holds three endings in ordinary motion: a stand of spruce, maybe thirty years old, dying from the root — fungal, years yet before it falls. A deer somewhere below the canopy, old enough that the thread is thin and unhurried. A small stream crossing where a log-bridge has been losing the argument with snowmelt for two seasons running; it has perhaps one more crossing before it stops being a bridge and starts being an obstacle.\n\nNothing urgent. Nothing made. The endings down this slope are the valley's own work — age, season, ordinary time. Whatever crossed this pass before you left no dying behind it.\n\nPell has been watching your face. \"Clear?\" she asks. One word, trail-economical. Huginn shifts on the rock and does not orient toward any horizon. That, too, is an answer."
+      },
+      {
+        "player": "Study the spruce stand's root-death with Palework before descending — read whether the fungal die-off is natural or something older working upward",
+        "summary": "Palework on the dying spruce stand confirms natural fungal die-off — no connection to the buried structure's contamination.",
+        "narration": "You step off the trail into the spruce stand's shadow and crouch at the base of the nearest trunk — bark grey-green with lichen, the lower six inches of wood soft enough to dent with a thumbnail. Palework opens quietly, a flat read rather than a push. You set two fingers against the exposed root-mat and let it tell you what it knows.\n\nThe fungal death is its own thing. Armillaria, or something close enough — the mycelium has been threading this root system for two decades, patient and unremarkable, doing exactly what it does. The amber tinge you half-expected to find linking it to the water-table chemistry below is not there. The chemistry that killed these roots is purely biological: neighbor trees, poor drainage from the snowmelt gradient, a stand that grew too tight too fast after a windfall clearance twenty or thirty years ago. Nothing older working upward. The hillside holds its own ordinary rot here, separate from the system behind you.\n\nYou pull your fingers back and stand. Huginn has not moved from its rock. Pell is watching you with the particular patience she applies to things she doesn't interrupt — not bored, just waiting for the read.\n\n\"Natural,\" you tell her, brushing bark dust from your fingertips. \"The rot up here isn't connected. Whatever's running through the hillside below us stays in the hillside.\" A small thing to confirm, but the confirmation has weight: the buried structure's contamination hasn't begun seeping into the broader root-zone yet. The valley's watershed is sick from one point, not spreading up from below."
       }
     ],
     "lastTurn": {
-      "narration": "You face downslope and let The Attended End open — not a reach, a lean. Conserve. The craft finds what it finds without being asked twice.\n\nThe pine run ahead holds three endings in ordinary motion: a stand of spruce, maybe thirty years old, dying from the root — fungal, years yet before it falls. A deer somewhere below the canopy, old enough that the thread is thin and unhurried. A small stream crossing where a log-bridge has been losing the argument with snowmelt for two seasons running; it has perhaps one more crossing before it stops being a bridge and starts being an obstacle.\n\nNothing urgent. Nothing made. The endings down this slope are the valley's own work — age, season, ordinary time. Whatever crossed this pass before you left no dying behind it.\n\nPell has been watching your face. \"Clear?\" she asks. One word, trail-economical. Huginn shifts on the rock and does not orient toward any horizon. That, too, is an answer.\n\n*▲ Practiced — **The Attended End** is fluent now (rank 2), earned through use.*",
-      "sceneSummary": "The Attended End reads the far slope — three ordinary endings, nothing made, the pass descent is clear.",
+      "narration": "You step off the trail into the spruce stand's shadow and crouch at the base of the nearest trunk — bark grey-green with lichen, the lower six inches of wood soft enough to dent with a thumbnail. Palework opens quietly, a flat read rather than a push. You set two fingers against the exposed root-mat and let it tell you what it knows.\n\nThe fungal death is its own thing. Armillaria, or something close enough — the mycelium has been threading this root system for two decades, patient and unremarkable, doing exactly what it does. The amber tinge you half-expected to find linking it to the water-table chemistry below is not there. The chemistry that killed these roots is purely biological: neighbor trees, poor drainage from the snowmelt gradient, a stand that grew too tight too fast after a windfall clearance twenty or thirty years ago. Nothing older working upward. The hillside holds its own ordinary rot here, separate from the system behind you.\n\nYou pull your fingers back and stand. Huginn has not moved from its rock. Pell is watching you with the particular patience she applies to things she doesn't interrupt — not bored, just waiting for the read.\n\n\"Natural,\" you tell her, brushing bark dust from your fingertips. \"The rot up here isn't connected. Whatever's running through the hillside below us stays in the hillside.\" A small thing to confirm, but the confirmation has weight: the buried structure's contamination hasn't begun seeping into the broader root-zone yet. The valley's watershed is sick from one point, not spreading up from below.",
+      "sceneSummary": "Palework on the dying spruce stand confirms natural fungal die-off — no connection to the buried structure's contamination.",
       "choices": [
         {
-          "label": "Push on — set a walking pace into the pine run, bearing north-northeast toward the Edge District",
+          "label": "Descend the pine run and look for the first sign of habitation or a road — move with purpose toward the Edge District",
           "attribute": "physical",
           "subAttribute": "agility",
+          "axes": {},
           "difficulty": 0,
-          "trivial": true,
           "intentTags": [
             "travel",
             "careful"
-          ]
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
         },
         {
-          "label": "Study the spruce stand's root-death with Palework before descending — read whether the fungal die-off is natural or something older working upward",
+          "label": "Before descending, scan the outcrop and the upper treeline with Order-Sense — read what system or design this far slope is part of",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 15,
+          "axes": {
+            "concrete_abstract": -0.2
+          },
+          "difficulty": 0,
           "intentTags": [
             "study",
             "careful"
           ],
-          "abilityId": "palework",
-          "energyCost": 3,
+          "abilityId": "order_sense",
+          "energyCost": 2,
           "trivial": false
         },
         {
-          "label": "Ask Pell what she knows about the Edge District — she's wintered on the old pass circuit; she may have a read on Leth's situation or the district's current state",
+          "label": "Ask Pell what she knows about the far side — has she heard anything about settlements, roads, or people north of the pass",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
-          "trivial": true,
           "intentTags": [
             "talk",
             "plan"
-          ]
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
         },
         {
-          "label": "Note the log-bridge's location and timeline — if the route back needs it, knowing it will fail on one more crossing is worth marking on the Valve Failure Timeline note",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Push downhill now — pick up pace and try to reach lower ground and better shelter before the afternoon light goes soft",
+          "attribute": "physical",
+          "subAttribute": "strength",
+          "axes": {},
           "difficulty": 0,
-          "trivial": true,
           "intentTags": [
-            "plan",
-            "careful"
-          ]
+            "travel",
+            "risky"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
         }
       ],
       "characterDeltas": {
         "health": 0,
-        "energy": -2
+        "energy": -3
       },
       "scene": {
-        "setting": "Far side of the mountain pass, mid-afternoon — flat limestone outcrop just below the crest, sparse pine run descending north-northeast ahead, damp ground from snowmelt, old canopy cutting the wind. The valley is no longer visible behind.",
+        "setting": "Far side of the mountain pass, mid-afternoon — flat limestone outcrop just below the crest, Silas standing at the edge of the dying spruce stand with bark dust on his fingers, pine run descending north-northeast ahead, damp ground from snowmelt, old canopy cutting the wind. The valley is no longer visible behind.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Standing at the outcrop edge, watching Silas's face, trail-ready — one word out, waiting for the answer."
+            "state": "Standing at the outcrop edge, watching Silas's face — patient, waiting for the read."
           },
           {
             "name": "Huginn",
-            "state": "Settled on the nearby rock, not orienting toward any horizon — its own kind of clearance."
+            "state": "Settled on the nearby rock, unmoved, watching the spruce stand with mild professional interest."
           }
         ],
         "objects": [
@@ -1945,36 +1962,58 @@
           "Valve Failure Timeline note — 'S-gate confirmed' annotated (in pocket)",
           "Contact Names Scrap (Sorel, Leth) (in pocket)",
           "River Purification Tabs vial (in inner pack pocket)",
-          "Empty trail parcel cloth wrap — discarded on the outcrop",
           "Flat limestone outcrop — midday rest site, just below the pass crest",
+          "Dying spruce stand — thirty years old, fungal root-death confirmed natural, years yet to fall",
           "Loose scree slope — behind them, above",
-          "Pine run — ahead, descending north-northeast",
-          "Dying spruce stand — thirty years old, fungal root-death, years yet to fall",
-          "Log-bridge — one crossing left before it fails, somewhere below the canopy"
+          "Pine run — ahead, descending north-northeast"
         ],
         "threads": [
           "Edge District bearing — Contact Names Scrap names Sorel (Millbrook now) and Leth (archivist, likely still in the Edge District) as first destinations.",
           "The buried vault head is failing — six-week window, northeast in the hillside behind them. The expert must be found and returned before week five.",
           "The far slope is clear of made endings — whatever crossed this pass before left no dying behind it.",
           "The cured bladder waterskin at Aldric's — not collected before departure.",
-          "What the system opens when the last sleeve runs — still unread."
+          "What the system opens when the last sleeve runs — still unread.",
+          "Spruce stand rot confirmed natural — no connection to the buried structure's contamination seeping upward."
         ]
       },
+      "codexUpdates": [
+        {
+          "topic": "the-water-crisis",
+          "label": "The Water Crisis",
+          "kind": "mystery",
+          "fact": "Palework on the dying spruce stand north of the pass confirms the fungal die-off is natural and isolated — the buried structure's contamination has not begun seeping into the broader root-zone above the pass. The contamination originates from one point, not spreading upward through the hillside.",
+          "links": [
+            "palework",
+            "millbrook",
+            "pell",
+            "precursor-signs-in-the-valley"
+          ]
+        }
+      ],
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "pell",
+          "name": "Pell",
+          "note": "Waiting at the outcrop edge for the Palework read — patient, not restless.",
+          "statusNote": "On the far side of the mountain pass with Silas, mid-afternoon, at the spruce stand edge — descending into unknown territory north of the valley."
+        }
+      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief conserved cast and a short exchange — a quarter-hour at the outcrop."
+        "why": "brief stop to examine the spruce stand before continuing descent"
       }
     },
     "sceneState": {
-      "setting": "Far side of the mountain pass, mid-afternoon — flat limestone outcrop just below the crest, sparse pine run descending north-northeast ahead, damp ground from snowmelt, old canopy cutting the wind. The valley is no longer visible behind.",
+      "setting": "Far side of the mountain pass, mid-afternoon — flat limestone outcrop just below the crest, Silas standing at the edge of the dying spruce stand with bark dust on his fingers, pine run descending north-northeast ahead, damp ground from snowmelt, old canopy cutting the wind. The valley is no longer visible behind.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Standing at the outcrop edge, watching Silas's face, trail-ready — one word out, waiting for the answer."
+          "state": "Standing at the outcrop edge, watching Silas's face — patient, waiting for the read."
         },
         {
           "name": "Huginn",
-          "state": "Settled on the nearby rock, not orienting toward any horizon — its own kind of clearance."
+          "state": "Settled on the nearby rock, unmoved, watching the spruce stand with mild professional interest."
         }
       ],
       "objects": [
@@ -1983,11 +2022,10 @@
         "Valve Failure Timeline note — 'S-gate confirmed' annotated (in pocket)",
         "Contact Names Scrap (Sorel, Leth) (in pocket)",
         "River Purification Tabs vial (in inner pack pocket)",
-        "Empty trail parcel cloth wrap — discarded on the outcrop",
         "Flat limestone outcrop — midday rest site, just below the pass crest",
+        "Dying spruce stand — thirty years old, fungal root-death confirmed natural, year",
         "Loose scree slope — behind them, above",
-        "Pine run — ahead, descending north-northeast",
-        "Dying spruce stand — thirty years old, fungal root-death, years yet to fall"
+        "Pine run — ahead, descending north-northeast"
       ],
       "threads": [
         "Edge District bearing — Contact Names Scrap names Sorel (Millbrook now) and Leth (archivist, likely still in the Edge District) as first destinations.",
@@ -2143,7 +2181,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Received 'you' — half-beat catch in her stride, recovered clean. Did not look at Silas. Composure intact and working.",
         "[d2] Held back at the bend to give Silas space with Huginn — watching without crowding. The one-word 'you' and Huginn's stillness are both unaddressed in speech.",
         "[d2] Named what she caught of the Huginn exchange — 'tinkers', asking-tone, and the bird's decided look at her. Filed it as neither performance nor loss. Did not ask the next question y",
         "[d2] Received the full Huginn answer — stillness means nothing is concluding for her. Shoulders settled; the held tension released without ceremony. Named the bird's attention as intere",
@@ -2152,7 +2189,8 @@
         "[d2] Received the three-gate staged-release reading — southernmost, middle, head. Hasn't spoken yet; processing.",
         "[d2] Asked if she's ready to push out of the valley — answered without hesitation. 'I didn't walk up here to turn back at the valve.' Now standing ready at the intake, facing northeast.",
         "[d2] Received the northeast bearing without words — turned and is ready to move.",
-        "[d2] Crossed the pass without hesitation — set oilcloth against the wind-side and walked like someone who had decided. Eating trail parcel, watching the far slope."
+        "[d2] Crossed the pass without hesitation — set oilcloth against the wind-side and walked like someone who had decided. Eating trail parcel, watching the far slope.",
+        "[d2] Waiting at the outcrop edge for the Palework read — patient, not restless."
       ],
       "knownFacts": [
         "Huginn's stillness is a positive answer — nothing ending, not foreclosed",
@@ -2173,7 +2211,7 @@
         "reading a stain pattern independently against a known failur"
       ],
       "status": "active",
-      "statusNote": "On the far side of the mountain pass with Silas, mid-afternoon, descending into unknown territory north of the valley.",
+      "statusNote": "On the far side of the mountain pass with Silas, mid-afternoon, at the spruce stand edge — descending into unknown territory north of the valley.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2872,7 +2910,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d2] The managed return visits to the deeper chamber were condition-triggered seasonal checks — melt or first freeze. The last visit is consistent with one to two winters ago. The contamination onset is th",
           "[d2] Pell's two-winter model: first unmanaged melt after device removal begins the structural slip; a second winter carries the slip to the channel. Contamination onset delay is explained by this sequence ",
           "[d2] Fen's intake physical inspection: sleeve blank failure caused axial torque in the iron sleeve, riding the cover lip up. Pell identified the failure mode immediately from cover geometry. East furlong c",
           "[d2] Timeline annotated: unknown dog first appeared upper meadow path three weeks ago — same interval as Fen's intake sleeve failure and boar displacement north. Three separate observations share a three-w",
@@ -2895,17 +2932,18 @@
           "[d2] The four structural sites (wash-room, east furlong valve, Fen's intake, sealed village channel bed) form a single operating system. Someone with prior archive knowledge deliberately restarted it, then",
           "[d2] Fen's intake: iron sleeve has three to four weeks before running open. The buried structure driving the valve is not ending — it has more work to do. The failure is a symptom, not the event.",
           "[d2] Fen's intake CCW torque axis confirmed identical to east furlong — both valves are running the same mechanism in sequence. The structure behind the intake valve is not ending; it is operating as desig",
-          "[d2] The Attended End confirms the vault head is ending — slow, structural, load-surrendering — on the same northeast bearing as the three-gate sequence, approximately a mile and a half up the hillside. A "
+          "[d2] The Attended End confirms the vault head is ending — slow, structural, load-surrendering — on the same northeast bearing as the three-gate sequence, approximately a mile and a half up the hillside. A ",
+          "[d2] Palework on the dying spruce stand north of the pass confirms the fungal die-off is natural and isolated — the buried structure's contamination has not begun seeping into the broader root-zone above t"
         ],
         "links": [
-          "huginn",
           "aldric",
           "pell",
           "precursor-signs-in-the-valley",
           "sorel",
           "dara-holt",
           "order-sense",
-          "millbrook"
+          "millbrook",
+          "palework"
         ],
         "aliases": [],
         "createdDay": 2,
@@ -3256,15 +3294,15 @@
     }
   },
   "tendencies": {
-    "strategic": 65.80764355685137,
-    "cerebral": 41.8032184812548,
-    "social": 57.9278512783447,
-    "generous": 15.467884235597458,
-    "cautious": 49.53204693203131,
-    "physical": 1.6281405038025554,
-    "risky": 3.2636071012654346,
-    "ruthless": 3.616336276171151,
-    "carousing": 1.2145849455266358
+    "strategic": 65.47860533906712,
+    "cerebral": 42.59420238884853,
+    "social": 57.638212021952974,
+    "generous": 15.39054481441947,
+    "cautious": 50.28438669737115,
+    "physical": 1.6199998012835426,
+    "risky": 3.2472890657591074,
+    "ruthless": 3.598254594790295,
+    "carousing": 1.2085120207990026
   },
   "aptitudes": [
     "strategist",
@@ -3272,7 +3310,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 293,
+  "actionCount": 294,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3406,8 +3444,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13693&nologo=true",
-  "updatedAt": 1784178690333,
-  "rev": 405,
+  "updatedAt": 1784178803054,
+  "rev": 406,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3865,7 +3903,7 @@
       "numen_sense": 3,
       "lightsense": 2,
       "order_sense": 38,
-      "palework": 17,
+      "palework": 18,
       "deathsense": 13,
       "shadowstep": 5,
       "the-attended-end": 8
@@ -3969,7 +4007,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 96
+    "valley": 97
   },
   "foreclosed": [
     "rootkin",

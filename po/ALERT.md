@@ -8,12 +8,18 @@ The two symptoms were adjacent in time, not causally linked. SNG-122 is the real
 
 ---
 
-## 📌 SNG-121 — Pin items to the sidebar (specced, awaiting CCode)
+## 📌 SNG-121 — Pin items to the sidebar — ✅ SHIPPED, complete_pending_review (CCode 2026-07-16, v1.8.82)
+
+> **CCode 2026-07-16:** built with SNG-120 (same sidebar render, one bump). `pinned` flag on the item record (Q2); sidebar Items renders `pinnedItems` only + `(X pinned · Y total)` count + `＋N more in Inventory` → `renderInventoryScreen`; empty-pinned hint. `ensurePins` auto-pins weapon + consumables + has-uses on a never-pinned character (Q3: quest/misc stay in the full list), **never overrides an explicit choice** (`_pinsInitialized`). Toggle via `itemCard` `showPin` flag (`data-item-pin` → shared `bindItemCardHandlers`) — context flag, no second renderer (composes with SNG-114). Q1: no equipped concept at HEAD, so default pins by `kind:"weapon"`. 8 smoke tests + browser-runtime verified on the served module. Writeup: `po/results/20260716_SNG-120_121_sidebar_pins.md`. (Original spec below.)
+
 `po/SPEC_SNG-121_pin_items_to_sidebar.md`. The sidebar Items section dumps the ENTIRE inventory (15+ items, long scroll). Fix: a `pinned` flag per item — sidebar renders **pinned only** (+ "＋N more in Inventory" count); the player toggles a pin from the Inventory view (📌 on each itemCard). kind-based default pins (weapon + consumables + has-uses) fill a never-pinned character's empty set but **never override an explicit choice**. Composes with SNG-114 (pin is an itemCard context flag, no second renderer) and SNG-120 (Items stays collapsible; collapsed header "Items (4 pinned · 14 total)"). Nothing hidden — unpinned always in Inventory, one tap away. From Erik's screenshots.
 
 ---
 
-## 🧹 SNG-120 — Collapsible sidebar + combine redundant sections (specced, awaiting CCode)
+## 🧹 SNG-120 — Collapsible sidebar + combine redundant sections — ✅ SHIPPED, complete_pending_review (CCode 2026-07-16, v1.8.82)
+
+> **CCode 2026-07-16:** every section is a collapsible `<details class="sidebar-sec" data-sec="…">` (9 keyed) with open/closed state persisted to `profile.uiSidebar` via `sectionOpen`/`loadSidebarState`/`saveSidebarState` + a single `ontoggle` handler — same open-set discipline as `npcGroups`. **The real combine: "People you know" DELETED** (its people were a duplicate of SNG-119's place-scoped "who's here"; folded there, partner banner moved with them — the string survives only in a comment documenting the removal). Party + Companions → one "Company" section (disappears when solo). Defaults serve play: abilities/quests/company/items/who's-here open; attributes/play-style/map/codex collapsed with summary counts. Interactive controls kept out of `<summary>`. Writeup: `po/results/20260716_SNG-120_121_sidebar_pins.md`. (Original spec below.)
+
 `po/SPEC_SNG-120_sidebar_collapsible_combine.md`. The sidebar grew to ~12 stacked sections (4 phone-screens tall). Every `<section>` becomes collapsible with **persisted** open/closed state (reuse the existing `npcGroups` open-set pattern + `<details>` idiom — invents neither). **Key combine, a real redundancy:** "People you know" (L5224) shows the same people as SNG-119's "{place} — standing & who's here" (L5272) — the old bare list was never removed when 119 added the richer scoped one; fold + delete (a test asserts each NPC appears in exactly ONE section). Party+Companions → one "Company" section. Defaults serve play: abilities/who's-here/items open, attributes/play-style/map/codex collapsed; collapsed headers show a summary count. Vitals stay pinned. From Erik's 4 sidebar screenshots.
 
 ---

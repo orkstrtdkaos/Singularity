@@ -1,4 +1,10 @@
-# PIPELINE ALERT — Singularity## ⚡ SNG-113 — Aptitudes expansion — ✅ PROMOTED (Erik 2026-07-14) → CCode ROUND 2 (engine) + Aevi authoring (roster) in parallel
+# PIPELINE ALERT — Singularity## 🌱 SNG-101b — Native-grants-at-creation — SPEC + CONTENT AUTHORED (awaiting CCode ROUND 2)
+
+`po/SPEC_SNG-101b_native_grants_at_creation.md` + content `po/SNG-101b_native_grants.json`. **Completes SNG-101's deferred native-grant piece** — held until natives were tagged (done this session, 247/247), now unblocked. **LLW finding:** the reader functions CCode earlier reported "built" are ABSENT at HEAD (`nativeGrantsFor` not in progression.js) — origin wins; this spec builds them for real. **Data-driven grant model:** primary tradition's L1 anchors always + Tier-II basics matching build lean (mental/physical/practical/social, fallback mental), capped at grantCap=5 — the caster/martial/artificer split falls out of `ability.attribute` tags, no per-tradition hand-authoring. Content table authored for all 27 traditions. Wiring: `nativeGrantsFor`/`applyNativeGrants` (creation) + `retroNativeGrants` (one-time, versioned, modeled on `retroLevelGrants`, **Law-14-safe — only adds rank 1, never lowers earned ranks**). **Live proof of the gap: Silas** (L7 primary ashwarden, had 2 of 7 basics — hand-corrected this session, save commit ede3b056). Independent of SNG-098.
+
+---
+
+## ⚡ SNG-113 — Aptitudes expansion — ✅ PROMOTED (Erik 2026-07-14) → CCode ROUND 2 (engine) + Aevi authoring (roster) in parallel
 
 `po/SPEC_SNG-113_aptitudes_expansion.md` (v3, ROUND-2-ready). **Erik promoted.** Split two ways:
 - **CCode ROUND 2 — the MECHANISM:** background `grantsAptitudes`; move `DECAY` to rules + raise (~0.975) + hysteresis (earn at threshold / keep until threshold−margin — **requires `deriveAptitudes` to track held state; it's stateless today, stated as a requirement not a question**); inverse-threshold engine for innocence (held while composite worldliness < ceiling); route orphaned `romantic`/`flirt` tags → new `amorous` tendency; "fading" surfacing. Three genuine confirm-at-HEAD questions remain.

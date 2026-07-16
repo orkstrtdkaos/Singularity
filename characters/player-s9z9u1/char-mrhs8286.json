@@ -2054,58 +2054,77 @@
         "player": "Let her sleep another few minutes — check the descent with Huginn first, read what the bird sees on the far slope.",
         "summary": "Silas reads the descent at dawn — Huginn marks the leftmost chimney smoke below, quiet but deliberate.",
         "narration": "The gray light is thin and cold but real — enough to see by. You ease out from under the bedroll without waking her, moving slow, one deliberate inch at a time until your weight is off the canvas and onto the stone floor of the overhang. Pell doesn't stir. One hand is still curled where your forearm was; she'll find the empty space in a minute and pull the bedroll tighter without opening her eyes.\n\nHuginn watches you cross to the lip. You crouch beside the bird and look down.\n\nThe descent is pine-run for the first quarter mile — dense, damp, the snowmelt still sitting in the needle-mat. Below that the slope opens into a narrow rocky cut before the first shelf of the Edge District's outer settlements shows itself: gray stone buildings, smoke from two or three chimneys, a track worn pale against the darker ground. No movement yet at this hour, but the smoke means hearth-fires lit, which means people up. The far slope is still in shadow.\n\nHuginn turns its head — slow, deliberate — toward the leftmost chimney smoke. One croak, short and dry, then it settles back to watching. Not alarm. Something to note, filed without urgency, the way the bird files everything that is ending quietly rather than suddenly. Whatever is running down there, it has been running for a while.\n\nYou let Pell sleep another five minutes. The descent is clear."
+      },
+      {
+        "player": "Let her sleep a little longer — get a fire going from the coal-ash and have something warm ready before you move.",
+        "summary": "Silas rebuilds the fire and warms breakfast while Pell sleeps on — the overhang alive again with a small flame and the smell of dried perch.",
+        "narration": "The coal-ash still holds a thread of warmth at its center — you find it with the back of your hand before you touch anything else. Not dead. You scrape the ash aside with the flat of your knife, lay three fingers of dry pine bark from the windward side of your pack where it stayed out of the damp, and breathe on it once, slow and even. The bark catches in under a minute: a small yellow flame, tentative, then settled.\n\nYou feed it carefully — two thin sticks, then a wrist-thick branch from the deadfall you'd pulled in last night before the fire went cold. The smoke goes straight up in the still air, no wind to pull it sideways. By the time the branch has caught properly the warmth is already reaching the low stone ceiling of the overhang and bending back down.\n\nThe preserved trail parcel comes out of the pack by feel — you open one of Aldric's cloth-wrapped parcels, the dried perch, and set two strips on the flat stone close enough to the fire to warm through without scorching. While they heat you fill a cup with water from one of the waterskins and set it at the fire's edge. Not enough to boil, but enough to take the cold bite out. Huginn watches from the lip, unimpressed by the domesticity of it, or perhaps merely keeping its counsel.\n\nPell's breathing shifts — not waking, but lighter. The hand that was curled where your arm was has found the edge of the bedroll and pulled it close. She has maybe five minutes before the smell of warm fish decides the question for her."
       }
     ],
     "lastTurn": {
-      "narration": "The gray light is thin and cold but real — enough to see by. You ease out from under the bedroll without waking her, moving slow, one deliberate inch at a time until your weight is off the canvas and onto the stone floor of the overhang. Pell doesn't stir. One hand is still curled where your forearm was; she'll find the empty space in a minute and pull the bedroll tighter without opening her eyes.\n\nHuginn watches you cross to the lip. You crouch beside the bird and look down.\n\nThe descent is pine-run for the first quarter mile — dense, damp, the snowmelt still sitting in the needle-mat. Below that the slope opens into a narrow rocky cut before the first shelf of the Edge District's outer settlements shows itself: gray stone buildings, smoke from two or three chimneys, a track worn pale against the darker ground. No movement yet at this hour, but the smoke means hearth-fires lit, which means people up. The far slope is still in shadow.\n\nHuginn turns its head — slow, deliberate — toward the leftmost chimney smoke. One croak, short and dry, then it settles back to watching. Not alarm. Something to note, filed without urgency, the way the bird files everything that is ending quietly rather than suddenly. Whatever is running down there, it has been running for a while.\n\nYou let Pell sleep another five minutes. The descent is clear.",
-      "sceneSummary": "Silas reads the descent at dawn — Huginn marks the leftmost chimney smoke below, quiet but deliberate.",
+      "narration": "The coal-ash still holds a thread of warmth at its center — you find it with the back of your hand before you touch anything else. Not dead. You scrape the ash aside with the flat of your knife, lay three fingers of dry pine bark from the windward side of your pack where it stayed out of the damp, and breathe on it once, slow and even. The bark catches in under a minute: a small yellow flame, tentative, then settled.\n\nYou feed it carefully — two thin sticks, then a wrist-thick branch from the deadfall you'd pulled in last night before the fire went cold. The smoke goes straight up in the still air, no wind to pull it sideways. By the time the branch has caught properly the warmth is already reaching the low stone ceiling of the overhang and bending back down.\n\nThe preserved trail parcel comes out of the pack by feel — you open one of Aldric's cloth-wrapped parcels, the dried perch, and set two strips on the flat stone close enough to the fire to warm through without scorching. While they heat you fill a cup with water from one of the waterskins and set it at the fire's edge. Not enough to boil, but enough to take the cold bite out. Huginn watches from the lip, unimpressed by the domesticity of it, or perhaps merely keeping its counsel.\n\nPell's breathing shifts — not waking, but lighter. The hand that was curled where your arm was has found the edge of the bedroll and pulled it close. She has maybe five minutes before the smell of warm fish decides the question for her.",
+      "sceneSummary": "Silas rebuilds the fire and warms breakfast while Pell sleeps on — the overhang alive again with a small flame and the smell of dried perch.",
       "choices": [
         {
-          "label": "Wake Pell gently — tell her what Huginn marked, then pack up and start down.",
-          "trivial": true
-        },
-        {
-          "label": "Let her sleep a little longer — get a fire going from the coal-ash and have something warm ready before you move.",
-          "trivial": true
-        },
-        {
-          "label": "Use Order-Sense on the leftmost chimney smoke — read what design that building is part of, who runs it, what it holds.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
+          "label": "Let the smell do the work — stay quiet and wait for her to surface in her own time.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
           "intentTags": [
-            "study",
-            "scout"
+            "calm"
           ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false
+          "trivial": true
         },
         {
-          "label": "Or tell me what you do.",
+          "label": "Pour the warm water and set it where she'll reach it when she opens her eyes — a small thing, but hers first.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "help"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Go over the descent plan while she sleeps — Contact Names Scrap out, Leth and Sorel's names reviewed, the morning's first moves mapped.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 0,
+          "intentTags": [
+            "plan"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Something else entirely.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [],
           "trivial": true
         }
       ],
       "characterDeltas": {
-        "health": 0,
-        "energy": 0
+        "inventoryRemove": []
       },
       "scene": {
-        "setting": "Far side of the mountain pass, dawn — south-facing rock overhang, coals dead and cold, pale gray light building off the pass. The Edge District's outer settlements are visible below: gray stone buildings, two or three chimney-smokes, a pale track.",
+        "setting": "Far side of the mountain pass, early dawn — south-facing rock overhang, small fire now burning, pale gray light building off the pass. The Edge District's outer settlements visible below: gray stone buildings, two or three chimney-smokes, a pale track.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Asleep under the bedroll, one hand curled where Silas's arm was — breathing slow, face toward the overhang wall."
+            "state": "Asleep under the bedroll, breathing lighter now — one hand curled around the bedroll's edge, five minutes from the smell of warm fish making the decision for her."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the stone lip at the overhang's edge — has turned its head toward the leftmost chimney smoke below, croaked once, and settled back to watching."
+            "state": "Perched on the stone lip at the overhang's edge, watching Silas tend the fire with the attentive disinterest of something that has seen every form of the morning routine."
           }
         ],
         "objects": [
           "Memory (spear, leaned against the overhang wall)",
+          "Small fire (rebuilt from coal-ash — a branch caught, warmth reaching the low ceiling)",
+          "Two strips of dried perch (warming on the flat stone near the fire)",
+          "Cup of water (set at the fire's edge, warming)",
           "Empty Resin Mountain Wine bottle (on the flat stone)",
-          "Cup (on the flat stone, empty)",
           "Pell's shirt (on the stone)",
           "Silas's shirt (on the stone beside Pell's)",
           "Oilcloth Fold (propped as windbreak)",
@@ -2118,77 +2137,43 @@
           "Huginn has marked the leftmost chimney smoke below — quiet, not urgent, but deliberate.",
           "The descent to the Edge District begins this morning — Leth and Sorel as first contacts.",
           "The buried vault head: six-week window, expert needed before week five.",
-          "Pell is still asleep — the morning's first exchange hasn't happened yet."
+          "Pell is waking — the morning's first exchange is minutes away."
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "note": "Asleep at dawn at the overhang camp — Silas eased out without waking her.",
-          "statusNote": "At the overhang camp on the far side of the pass — asleep under the shared bedroll, Silas watching the descent above her.",
-          "status": "active"
-        },
-        {
-          "op": "update",
-          "npcId": "huginn",
-          "name": "Huginn",
-          "note": "Marked the leftmost chimney smoke in the Edge District below — one short croak, deliberate, then settled. Not alarm; something to note.",
-          "learned": [
-            "The leftmost chimney smoke in the Edge District outer settlement carries something worth attending — Huginn flagged it quietly at dawn."
-          ],
-          "statusNote": "At the overhang stone lip, watching the descent below — has marked the leftmost chimney smoke."
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "edge-district-outer-settlement",
-          "label": "Edge District — Outer Settlement",
-          "kind": "place",
-          "fact": "Visible from the pass overhang at dawn: gray stone buildings, two or three chimney-smokes, a pale worn track. Huginn marked the leftmost chimney smoke at dawn — quiet, not urgent, something running there for a while.",
-          "links": [
-            "huginn",
-            "the-water-crisis",
-            "sorel",
-            "leth"
-          ]
-        }
-      ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A few quiet minutes at the overhang lip reading the descent before waking Pell."
+        "hoursPassed": 0.5,
+        "why": "A quiet half-hour of fire-building and breakfast preparation before Pell surfaces."
       }
     },
     "sceneState": {
-      "setting": "Far side of the mountain pass, dawn — south-facing rock overhang, coals dead and cold, pale gray light building off the pass. The Edge District's outer settlements are visible below: gray stone buildings, two or three chimney-smokes, a pale track.",
+      "setting": "Far side of the mountain pass, early dawn — south-facing rock overhang, small fire now burning, pale gray light building off the pass. The Edge District's outer settlements visible below: gray stone buildings, two or three chimney-smokes, a pale track.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Asleep under the bedroll, one hand curled where Silas's arm was — breathing slow, face toward the overhang wall."
+          "state": "Asleep under the bedroll, breathing lighter now — one hand curled around the bedroll's edge, five minutes from the smell"
         },
         {
           "name": "Huginn",
-          "state": "Perched on the stone lip at the overhang's edge — has turned its head toward the leftmost chimney smoke below, croaked o"
+          "state": "Perched on the stone lip at the overhang's edge, watching Silas tend the fire with the attentive disinterest of somethin"
         }
       ],
       "objects": [
         "Memory (spear, leaned against the overhang wall)",
+        "Small fire (rebuilt from coal-ash — a branch caught, warmth reaching the low cei",
+        "Two strips of dried perch (warming on the flat stone near the fire)",
+        "Cup of water (set at the fire's edge, warming)",
         "Empty Resin Mountain Wine bottle (on the flat stone)",
-        "Cup (on the flat stone, empty)",
         "Pell's shirt (on the stone)",
         "Silas's shirt (on the stone beside Pell's)",
         "Oilcloth Fold (propped as windbreak)",
         "Bedroll (open, Pell still under it)",
-        "Valve Failure Timeline note — 'S-gate confirmed' annotated (in pocket)",
-        "Contact Names Scrap (Sorel, Leth) (in pocket)",
-        "River Purification Tabs vial (in inner pack pocket)"
+        "Valve Failure Timeline note — 'S-gate confirmed' annotated (in pocket)"
       ],
       "threads": [
         "Huginn has marked the leftmost chimney smoke below — quiet, not urgent, but deliberate.",
         "The descent to the Edge District begins this morning — Leth and Sorel as first contacts.",
         "The buried vault head: six-week window, expert needed before week five.",
-        "Pell is still asleep — the morning's first exchange hasn't happened yet."
+        "Pell is waking — the morning's first exchange is minutes away."
       ]
     }
   },
@@ -3669,8 +3654,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784217412972,
-  "rev": 453,
+  "updatedAt": 1784217525659,
+  "rev": 454,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4233,7 +4218,7 @@
   "syncedAt": 1784184597860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 135
+    "valley": 136
   },
   "foreclosed": [
     "rootkin",

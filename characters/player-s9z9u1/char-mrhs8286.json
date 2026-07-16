@@ -1698,14 +1698,19 @@
         "player": "Ask what Sorel's own stake is in this — they came back to Millbrook for a reason, and it may intersect with yours.",
         "summary": "Sorel names their real reason for returning — Leth wrote about a targeted archive breach, and someone appears to be working through old infrastructure with a list.",
         "narration": "The question lands quietly, the way the right question always does — not as a demand, but as an opening.\n\nSorel's eyes move once to Aldric, then back. A small tell. Aldric sets his knife down flat again, which means he already knows what's coming and has been waiting to see if it would be named.\n\n\"I came back because Leth wrote to me,\" Sorel says. Not reluctant — just measured, the way a person speaks when they've been deciding for weeks how much to say and have finally decided to say it. \"She's been keeping records at the Edge District for three years. Careful ones. And last month she wrote that someone had been through the archive room — not to study. To remove.\" A pause. \"She didn't know what was taken. But she knew the shape of the absence. It was specific. Targeted.\" Sorel's hands settle on the pack-strap. \"Whoever it was knew what they were looking for, the same way whoever pulled your instrument knew what they were taking. That's not coincidence. That's a person with a list.\"\n\nThe room is very still. Aldric hasn't moved. Pell's attention has narrowed — you can see her running the geometry without being asked to.\n\n\"I came home because I didn't want to be the only one holding that,\" Sorel finishes. \"And because if someone is moving through the old infrastructure deliberately — and it sounds like they are — then Millbrook needs to know before it needs to know.\""
+      },
+      {
+        "player": "Let Aldric speak — he and Sorel were mid-conversation when you arrived, and he's been holding something back since. Put the question to him.",
+        "summary": "Aldric reveals he recognized the engineer's work in the sealed original east-channel bed — the same CCW stain pattern, seen before Silas arrived.",
+        "narration": "The question is simple: you look at Aldric.\n\nNot a demand. Just the weight of a man who has been watching another man hold something since before he arrived, and is done pretending otherwise.\n\nAldric picks up the fillet knife. Sets it back down. The gesture means nothing and means everything — the nervous tic of someone who has been waiting for exactly this permission.\n\n\"Sorel came through three days ago,\" he says. \"Before you. We talked — about the catch, about the water, about the usual.\" He flattens his palm on the block. \"And she mentioned the engineer. Not his name — she doesn't have it, Leth does — but the shape of him. What he'd worked on.\" A breath. \"I didn't know then what you were going to walk in here and tell me. About the vault. About the torque.\" He looks at Sorel, not an accusation, just an acknowledgment between two people who've been carrying pieces of the same thing in different pockets. \"But I recognized him. Not the man. The work.\"\n\nThe smokehouse holds that for a moment. Perch rows above, curing fire below, the thin morning light at the shutters.\n\n\"There's a stretch of the old east-channel bed — not the active run, the original course, sealed off before my father worked here — that has the same stain pattern you described. Same CCW scour on the interior lip of the stone housing. I thought it was age. Bad mortar work.\" He shakes his head once. \"It isn't age.\"\n\nSorel hasn't moved. They knew some of this; not all of it.\n\nAldric's eyes come back to you. \"Wherever he's been working, he's been working here too. Or someone using his method has.\""
       }
     ],
     "lastTurn": {
-      "narration": "The question lands quietly, the way the right question always does — not as a demand, but as an opening.\n\nSorel's eyes move once to Aldric, then back. A small tell. Aldric sets his knife down flat again, which means he already knows what's coming and has been waiting to see if it would be named.\n\n\"I came back because Leth wrote to me,\" Sorel says. Not reluctant — just measured, the way a person speaks when they've been deciding for weeks how much to say and have finally decided to say it. \"She's been keeping records at the Edge District for three years. Careful ones. And last month she wrote that someone had been through the archive room — not to study. To remove.\" A pause. \"She didn't know what was taken. But she knew the shape of the absence. It was specific. Targeted.\" Sorel's hands settle on the pack-strap. \"Whoever it was knew what they were looking for, the same way whoever pulled your instrument knew what they were taking. That's not coincidence. That's a person with a list.\"\n\nThe room is very still. Aldric hasn't moved. Pell's attention has narrowed — you can see her running the geometry without being asked to.\n\n\"I came home because I didn't want to be the only one holding that,\" Sorel finishes. \"And because if someone is moving through the old infrastructure deliberately — and it sounds like they are — then Millbrook needs to know before it needs to know.\"",
-      "sceneSummary": "Sorel names their real reason for returning — Leth wrote about a targeted archive breach, and someone appears to be working through old infrastructure with a list.",
+      "narration": "The question is simple: you look at Aldric.\n\nNot a demand. Just the weight of a man who has been watching another man hold something since before he arrived, and is done pretending otherwise.\n\nAldric picks up the fillet knife. Sets it back down. The gesture means nothing and means everything — the nervous tic of someone who has been waiting for exactly this permission.\n\n\"Sorel came through three days ago,\" he says. \"Before you. We talked — about the catch, about the water, about the usual.\" He flattens his palm on the block. \"And she mentioned the engineer. Not his name — she doesn't have it, Leth does — but the shape of him. What he'd worked on.\" A breath. \"I didn't know then what you were going to walk in here and tell me. About the vault. About the torque.\" He looks at Sorel, not an accusation, just an acknowledgment between two people who've been carrying pieces of the same thing in different pockets. \"But I recognized him. Not the man. The work.\"\n\nThe smokehouse holds that for a moment. Perch rows above, curing fire below, the thin morning light at the shutters.\n\n\"There's a stretch of the old east-channel bed — not the active run, the original course, sealed off before my father worked here — that has the same stain pattern you described. Same CCW scour on the interior lip of the stone housing. I thought it was age. Bad mortar work.\" He shakes his head once. \"It isn't age.\"\n\nSorel hasn't moved. They knew some of this; not all of it.\n\nAldric's eyes come back to you. \"Wherever he's been working, he's been working here too. Or someone using his method has.\"",
+      "sceneSummary": "Aldric reveals he recognized the engineer's work in the sealed original east-channel bed — the same CCW stain pattern, seen before Silas arrived.",
       "choices": [
         {
-          "label": "Press on the archive breach — ask what Leth thinks was taken, or what the shape of that absence looked like.",
+          "label": "Ask Aldric where exactly the sealed channel-bed section is, and whether it's accessible — the original east-channel course may be another room in the same structure.",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
@@ -1716,57 +1721,52 @@
           "trivial": true
         },
         {
-          "label": "Name the pattern plainly — the pass-opening, the removed instrument, the archive breach. Say it aloud: someone is working through these sites in sequence, and you need to know who before you leave the valley.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 15,
-          "intentTags": [
-            "plan",
-            "truth-telling"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Ask Sorel to come with you — not just give contacts, but travel to the Edge District alongside you. They know Leth, they know the road, and they clearly don't want to be alone with this.",
+          "label": "Ask Sorel whether Leth's letter named a timeframe for the archive breach — if the removal happened before or after the pass opened, the sequence changes everything.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "difficulty": 15,
-          "intentTags": [
-            "persuade",
-            "help"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Let Aldric speak — he and Sorel were mid-conversation when you arrived, and he's been holding something back since. Put the question to him.",
-          "attribute": "social",
-          "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
             "study",
             "careful"
           ],
           "trivial": true
+        },
+        {
+          "label": "Name the full pattern aloud — engineer, archive breach, sealed channel, pass opening, removed instrument — and see if the room fills in any gaps you haven't closed yet.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
+            "persuade"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Say it's time to move — thank them both and get clear of Millbrook before midday.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "careful"
+          ],
+          "trivial": true
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
       "scene": {
         "setting": "Interior of Aldric's smokehouse, Millbrook — low warmth of the curing fire, perch rows above the block, salt and old smoke. Morning light thin at the front shutters. Back door open behind Silas and Pell.",
         "npcsPresent": [
           {
             "name": "Aldric",
-            "state": "Knife flat on the block — knew what was coming, waiting to see if it would be named."
+            "state": "Palm flat on the block — has named the thing he was holding, watching the room receive it."
           },
           {
             "name": "Pell",
-            "state": "Attention narrowed — running the geometry of Sorel's revelation without being asked."
+            "state": "Still, attentive — running the implications of a fourth structural connection without interrupting."
           },
           {
             "name": "Sorel",
-            "state": "Hands on pack-strap — has named the thing they came home to say, watching the room receive it."
+            "state": "Hands off the pack-strap now — knew some of what Aldric said, not all of it. Recalibrating."
           },
           {
             "name": "Huginn",
@@ -1779,112 +1779,103 @@
           "Curing fire (low, steady)",
           "Sorel's pack (set down against the rack-leg)",
           "Back door (open)",
-          "Fillet knife (flat on the block — set down)"
+          "Fillet knife (flat on the block)"
         ],
         "threads": [
-          "Someone with a list is moving through old infrastructure deliberately — the engineer, the archive breach, and the removed instrument are connected",
-          "Leth witnessed a targeted archive breach — shape and contents of the absence unknown",
-          "The unnamed engineer still hasn't been named — and still doesn't leave the Edge District easily",
-          "Aldric held something back from his conversation with Sorel before Silas arrived — still unresolved"
+          "Aldric has just named a fourth structural site — the sealed original east-channel bed — with the same CCW stain pattern",
+          "Someone with a list is moving through old infrastructure deliberately — engineer, archive breach, sealed channel, removed instrument all connected",
+          "The unnamed engineer still hasn't been named — Leth holds the name",
+          "Leth's letter timeframe unknown — before or after pass opening changes the sequence entirely",
+          "Sorel knew about the engineer but not the sealed channel — recalibrating"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "sorel",
-          "name": "Sorel",
-          "note": "Named their real reason for returning — Leth wrote about a targeted archive breach, someone knew the shape of what to take. Named the shared pattern: a person with a list.",
+          "npcId": "aldric",
+          "name": "Aldric",
+          "note": "Named the thing he was holding: recognized the engineer's CCW stain pattern in the sealed original east-channel bed, seen three days ago when Sorel first arrived. Knew the pattern without knowing what it meant until now.",
           "learned": [
-            "Leth wrote to Sorel last month about someone removing — not studying — from the Edge District archive room",
-            "The absence in the archive was specific and targeted — whoever it was knew what they were looking for",
-            "Sorel came home because they didn't want to hold this alone, and because Millbrook needed to know"
+            "The sealed original east-channel bed — pre-dating Aldric's father's time here — has the same CCW scour on interior stone housing lips as the active valve failures",
+            "Recognized the engineer's work (or method) in the sealed channel before Silas described the torque signature"
+          ],
+          "skillsObserved": [
+            "connecting field observations to structural evidence across time"
           ],
           "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "Inside the smokehouse, pack settled — has spoken their real reason for returning, waiting on the room's response."
+          "statusNote": "At the smokehouse block — has named the thing he was holding; now watching the room process it."
         },
         {
           "op": "update",
-          "npcId": "aldric",
-          "name": "Aldric",
-          "note": "His tell confirmed — he already knew what Sorel was about to say. Has been holding this piece since before Silas arrived.",
+          "npcId": "sorel",
+          "name": "Sorel",
+          "note": "Knew about the engineer's shape but not about the sealed east-channel bed. Aldric's reveal is new information — visibly recalibrating.",
+          "learned": [
+            "The sealed original east-channel bed in Millbrook shows the same stain pattern as the active valve failures — the engineer's method or presence reaches back here"
+          ],
           "status": "active",
-          "statusNote": "At the smokehouse block, knife flat — knew Sorel's news and has been waiting for it to surface."
+          "statusNote": "Inside the smokehouse — hands off pack-strap, absorbing that Aldric's piece was not in her account."
         },
         {
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Running the geometry of the archive breach against the structural evidence without being prompted — the pattern is landing.",
+          "note": "Still running structural geometry — a fourth room or site in the same design is landing for her without prompting.",
           "status": "active",
-          "statusNote": "Inside the smokehouse, attention narrowed — absorbing the archive breach in relation to the vault structure."
+          "statusNote": "Inside the smokehouse — quiet, attentive, running the expanded structural picture."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "the-person-with-a-list",
-          "label": "The Person With a List",
+          "topic": "the-water-crisis",
+          "label": "The Water Crisis",
           "kind": "mystery",
-          "fact": "Someone has been moving deliberately through old pre-Transition infrastructure — removing the operator's instrument from the wash-room cradle-recess and, separately, removing targeted material from the Edge District archive. The pattern suggests a single actor with prior knowledge of multiple sites.",
+          "fact": "The sealed original east-channel bed — pre-dating Aldric's father — shows the same CCW scour on interior stone housing lips as the active valve failures. The engineer's work or method reaches back into Millbrook's oldest infrastructure.",
           "links": [
-            "the-water-crisis",
-            "precursor-signs-in-the-valley",
+            "aldric",
             "millbrook",
-            "sorel",
-            "the-unnamed-engineer"
-          ]
-        },
-        {
-          "topic": "leth",
-          "label": "Leth (Edge District Archivist)",
-          "kind": "person",
-          "fact": "Leth wrote to Sorel last month reporting that someone had been through the Edge District archive room — not to study but to remove. The absence was specific and targeted. Leth knew the shape of what was gone but not what it was.",
-          "links": [
-            "the-person-with-a-list",
-            "sorel",
-            "the-unnamed-engineer",
-            "the-water-crisis"
-          ]
-        },
-        {
-          "topic": "the-unnamed-engineer",
-          "label": "The Unnamed Engineer (Edge District)",
-          "kind": "person",
-          "fact": "A man known to Leth, based in the Edge District — has run pressurized pre-Transition systems and improvises at a high level. Does not leave the Edge District easily. Moving him is the primary obstacle to bringing him to Millbrook.",
-          "links": [
-            "sorel",
-            "leth",
-            "the-water-crisis",
+            "pell",
+            "dara-holt",
             "precursor-signs-in-the-valley"
+          ]
+        },
+        {
+          "topic": "precursor-signs-in-the-valley",
+          "label": "Precursor Signs in the Valley",
+          "kind": "mystery",
+          "fact": "A sealed section of the original east-channel bed within Millbrook itself carries the same CCW stain signature as the active valve failures — the structure's footprint extends into the village's own oldest waterworks.",
+          "links": [
+            "the-water-crisis",
+            "millbrook",
+            "aldric",
+            "pell",
+            "order-sense"
           ]
         }
       ],
       "factUpdates": [
         {
           "op": "add",
-          "text": "Sorel returned to Millbrook because Leth wrote about a targeted archive breach at the Edge District — someone removed specific material, knew exactly what they were looking for. Sorel named the shared pattern: a person moving through old infrastructure with a list.",
-          "subjectId": "sorel"
+          "text": "Aldric identified the same CCW stain pattern on the interior lip of the sealed original east-channel stone housing — a section pre-dating his father's time in Millbrook. The engineer's method or presence is embedded in the village's oldest waterworks.",
+          "subjectId": "aldric"
         }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A short exchange in the smokehouse — the question asked and answered."
-      }
+      ]
     },
     "sceneState": {
       "setting": "Interior of Aldric's smokehouse, Millbrook — low warmth of the curing fire, perch rows above the block, salt and old smoke. Morning light thin at the front shutters. Back door open behind Silas and Pell.",
       "npcsPresent": [
         {
           "name": "Aldric",
-          "state": "Knife flat on the block — knew what was coming, waiting to see if it would be named."
+          "state": "Palm flat on the block — has named the thing he was holding, watching the room receive it."
         },
         {
           "name": "Pell",
-          "state": "Attention narrowed — running the geometry of Sorel's revelation without being asked."
+          "state": "Still, attentive — running the implications of a fourth structural connection without interrupting."
         },
         {
           "name": "Sorel",
-          "state": "Hands on pack-strap — has named the thing they came home to say, watching the room receive it."
+          "state": "Hands off the pack-strap now — knew some of what Aldric said, not all of it. Recalibrating."
         },
         {
           "name": "Huginn",
@@ -1897,20 +1888,21 @@
         "Curing fire (low, steady)",
         "Sorel's pack (set down against the rack-leg)",
         "Back door (open)",
-        "Fillet knife (flat on the block — set down)"
+        "Fillet knife (flat on the block)"
       ],
       "threads": [
-        "Someone with a list is moving through old infrastructure deliberately — the engineer, the archive breach, and the removed instrument are connected",
-        "Leth witnessed a targeted archive breach — shape and contents of the absence unknown",
-        "The unnamed engineer still hasn't been named — and still doesn't leave the Edge District easily",
-        "Aldric held something back from his conversation with Sorel before Silas arrived — still unresolved"
+        "Aldric has just named a fourth structural site — the sealed original east-channel bed — with the same CCW stain pattern",
+        "Someone with a list is moving through old infrastructure deliberately — engineer, archive breach, sealed channel, removed instrument all connected",
+        "The unnamed engineer still hasn't been named — Leth holds the name",
+        "Leth's letter timeframe unknown — before or after pass opening changes the sequence entirely",
+        "Sorel knew about the engineer but not the sealed channel — recalibrating"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 2,
-    "hour": 8,
+    "hour": 9,
     "realAnchor": null
   },
   "companions": [
@@ -2003,9 +1995,8 @@
         "locationId": "millbrook",
         "day": 1
       },
-      "relationship": 5,
+      "relationship": 6,
       "history": [
-        "[d2] Squared the full account without argument — named the cord-weights cleanly, accepted the Mara offset without pushback. Ledger closed and initialed.",
         "[d2] Accepted the thirty-credit arrangement and paid out sixty — ledger closed and initialed. Back to work.",
         "[d2] Received Mara's offset note and initialed his counterpart ledger entry. Briefed on the vault-failure timeline and east-channel surge scope — connected the fish-count decline to the",
         "[d2] Produced a cured bladder waterskin from back storage — named two cord-weight or standing credit as the price without ceremony. Returned to the perch row.",
@@ -2014,28 +2005,29 @@
         "[d2] Set the knife down when Silas named Mara — done circling, watching the two threads converge.",
         "[d2] Knife back in hand at the perch row — reading the room without inserting himself, giving the conversation to its rightful owners.",
         "[d2] Set the knife down flat and named the core problem plainly: someone has to give the engineer a reason bigger than his comfortable arrangements. Summarizing, not inserting.",
-        "[d2] His tell confirmed — he already knew what Sorel was about to say. Has been holding this piece since before Silas arrived."
+        "[d2] His tell confirmed — he already knew what Sorel was about to say. Has been holding this piece since before Silas arrived.",
+        "[d2] Named the thing he was holding: recognized the engineer's CCW stain pattern in the sealed original east-channel bed, seen three days ago when Sorel first arrived. Knew the pattern "
       ],
       "knownFacts": [
-        "Pell is the village blacksmith, works the forge on the south lane past the elder's post — does edge work, hardware, repairs, heavier iron hunting kit",
-        "Boar were working riverside reed-beds every morning three weeks ago — now pushing uphill and away from the water",
         "Accepted Mara's store offset as a clean deduction — treats all accounts in the village as part of the same ledger",
         "The vault section failure and the declining fish catch are the same problem — one mechanism",
         "Dara Holt knows and is staging mitigation; Mara holds a second copy of the timeline",
         "Silas and Pell are leaving the valley to find a pre-Transition structural expert",
         "Keeps cured bladder waterskins in back storage as Mara indicated — practical trail goods, available on request",
-        "In conversation with Sorel this morning — news withheld on both ends"
+        "In conversation with Sorel this morning — news withheld on both ends",
+        "The sealed original east-channel bed — pre-dating Aldric's father's time here — has the same CCW scour on interior stone housing lips as the active valve failur",
+        "Recognized the engineer's work (or method) in the sealed channel before Silas described the torque signature"
       ],
       "skillsObserved": [
-        "practical negotiation",
         "inventory accounting under field conditions",
         "reading animal behavior changes against the water situation",
         "clean account reconciliation under field conditions",
         "practical stock management",
-        "reading the room and naming the load-bearing thing at the ri"
+        "reading the room and naming the load-bearing thing at the ri",
+        "connecting field observations to structural evidence across "
       ],
       "status": "active",
-      "statusNote": "At the smokehouse block, knife flat — knew Sorel's news and has been waiting for it to surface.",
+      "statusNote": "At the smokehouse block — has named the thing he was holding; now watching the room process it.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2052,7 +2044,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Named no prior claims plainly — one man, two winters back, sonic work from the Heights; it ran longer than it should, he stopped coming, she didn't go looking. Set the whetstone ba",
         "[d2] Received the cheek kiss without deflecting — went still, breathed out, came back softer. Named the habit plainly: she hasn't asked for any of it; that's the habit. Pack shouldered.",
         "[d2] Received the whetstone and the lesson without deflecting — tucked the stone into her coat pocket and left it there. Stepped through the door first. The road is what she knows how t",
         "[d2] Walked north with Silas in silence, pack square — stopped when the child runner called out, watching and waiting.",
@@ -2061,7 +2052,8 @@
         "[d2] Received the plan without question — checked Memory's lash and sent Silas ahead. Walking the lane now.",
         "[d2] Arrived through the back door two minutes after Silas — took the room in one glance, received the introduction without performance, settled into ready stillness. Sorel recognized h",
         "[d2] Took the question without prompting — asked Sorel whether the engineer works with what's there or needs his own kit. The right question, from someone who has actually seen the site",
-        "[d2] Running the geometry of the archive breach against the structural evidence without being prompted — the pattern is landing."
+        "[d2] Running the geometry of the archive breach against the structural evidence without being prompted — the pattern is landing.",
+        "[d2] Still running structural geometry — a fourth room or site in the same design is landing for her without prompting."
       ],
       "knownFacts": [
         "Memory's collar rune is present to her even when she's not looking at it — she felt it through her thread",
@@ -2082,7 +2074,7 @@
         "reading what a collaborator needs to know without being told"
       ],
       "status": "active",
-      "statusNote": "Inside the smokehouse, attention narrowed — absorbing the archive breach in relation to the vault structure.",
+      "statusNote": "Inside the smokehouse — quiet, attentive, running the expanded structural picture.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2246,17 +2238,18 @@
         "[d2] Pack fully set down after taking in Pell — calculation complete. Asked both Silas and Pell to name the kind of person they're looking for and how long they have.",
         "[d2] Received the full structural account without interruption — stilled completely at 'counterclockwise torque'. Named Leth as a records-keeper and confirmed a second contact: an unnam",
         "[d2] Confirmed the unnamed engineer improvises and can work without the original instrument — but does not leave the Edge District easily. Named this as the primary obstacle.",
-        "[d2] Named their real reason for returning — Leth wrote about a targeted archive breach, someone knew the shape of what to take. Named the shared pattern: a person with a list."
+        "[d2] Named their real reason for returning — Leth wrote about a targeted archive breach, someone knew the shape of what to take. Named the shared pattern: a person with a list.",
+        "[d2] Knew about the engineer's shape but not about the sealed east-channel bed. Aldric's reveal is new information — visibly recalibrating."
       ],
       "knownFacts": [
-        "The vault section failure involves counterclockwise torque at both sleeve sites — same mechanism operating in sequence",
         "The cradle-recess instrument was removed cleanly and deliberately — no drag-scarring",
         "Six-week failure window before surge into the east-channel main feeder",
         "The unnamed engineer has run pressurized systems with missing components and field-cobbled solutions — he improvises at a high level",
         "The hard part is not his competence but his reluctance to leave the Edge District",
         "Leth wrote to Sorel last month about someone removing — not studying — from the Edge District archive room",
         "The absence in the archive was specific and targeted — whoever it was knew what they were looking for",
-        "Sorel came home because they didn't want to hold this alone, and because Millbrook needed to know"
+        "Sorel came home because they didn't want to hold this alone, and because Millbrook needed to know",
+        "The sealed original east-channel bed in Millbrook shows the same stain pattern as the active valve failures — the engineer's method or presence reaches back her"
       ],
       "skillsObserved": [
         "absorbing technical detail without interruption",
@@ -2264,7 +2257,7 @@
         "precise qualification of a contact's strengths and limits un"
       ],
       "status": "active",
-      "statusNote": "Inside the smokehouse, pack settled — has spoken their real reason for returning, waiting on the room's response.",
+      "statusNote": "Inside the smokehouse — hands off pack-strap, absorbing that Aldric's piece was not in her account.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2773,7 +2766,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d2] The device removed from the deeper chamber was confirmed stable at removal — the contamination and sleeve blank failures came after the removal, not before or during operation. Something that was work",
           "[d2] The deeper chamber's four verification cycles suggest managed, scheduled operation rather than passive function. If the manager stopped coming and the last action was removal of the active object, the",
           "[d2] The device in the deeper chamber was removed cleanly, at completion — sleeve blank failures and contamination came after the removal, not during operation. Something functional was taken out, and the ",
           "[d2] The interval between the four managed verification episodes is uneven — someone was returning on a schedule that cannot be read from the marks alone. The return stopped: whether at completion or becau",
@@ -2796,17 +2788,18 @@
           "[d2] When the failing structural section collapses, it will redirect the channel flow rather than stop it — a surge hitting Dara Holt's entire east-channel network, capable of blowing every seated sleeve b",
           "[d2] The failing vault section's surface footprint is now marked — twenty-five feet on the hillside settling-seam, directly above the east-channel main feeder run. When it fails, the redirected surge will ",
           "[d2] Dara Holt has accepted the six-week window and the search-beyond-the-valley as the necessary response — she will hold the channel network while Silas and Pell seek a pre-Transition expert, deadline ha",
-          "[d2] Pell's read: the Radiant Plateau Edge District is the most likely source of a pre-Transition structural expert — their optical arrays are built on pre-Transition infrastructure, guides and anchors bot"
+          "[d2] Pell's read: the Radiant Plateau Edge District is the most likely source of a pre-Transition structural expert — their optical arrays are built on pre-Transition infrastructure, guides and anchors bot",
+          "[d2] The sealed original east-channel bed — pre-dating Aldric's father — shows the same CCW scour on interior stone housing lips as the active valve failures. The engineer's work or method reaches back int"
         ],
         "links": [
-          "pell",
-          "mara-wells",
           "dara-holt",
           "order-sense",
           "palework",
           "millbrook",
           "aldric-provisioning-deal",
-          "huginn"
+          "huginn",
+          "aldric",
+          "pell"
         ],
         "aliases": [],
         "createdDay": 2,
@@ -2852,7 +2845,8 @@
           "[d2] A buried amber light moved in a bedrock crack 70 paces north of the willow bend — thin, the color of old amber, threading along the stone like a lamp seen through thick glass. It pulsed once and went ",
           "[d2] A second pre-Transition site exists within reach of Millbrook — flagged slate floor, saddle-mount hooks, worn stand-positions, pressed wall-marks. Pell found it through the north cut following a hills",
           "[d2] The buried structure beneath the east furlong and north-cut hillside is a single coherent design — different rooms (wash-room, valve seats), same builder, same intent. Huginn's attention moved to the ",
-          "[d2] The wash-room operator's station was the control head of the full buried structure — valve housings, channel junctions, and the amber-lit crack above the bedrock shelf are all downstream of this point"
+          "[d2] The wash-room operator's station was the control head of the full buried structure — valve housings, channel junctions, and the amber-lit crack above the bedrock shelf are all downstream of this point",
+          "[d2] A sealed section of the original east-channel bed within Millbrook itself carries the same CCW stain signature as the active valve failures — the structure's footprint extends into the village's own o"
         ],
         "links": [
           "the-water-crisis",
@@ -2861,7 +2855,8 @@
           "pell",
           "aldric-provisioning-deal",
           "order-sense",
-          "dara-holt"
+          "dara-holt",
+          "aldric"
         ],
         "aliases": [],
         "createdDay": 2,
@@ -3097,15 +3092,15 @@
     }
   },
   "tendencies": {
-    "strategic": 59.708588471098395,
-    "cerebral": 40.06695496711262,
-    "social": 59.76498727560334,
-    "generous": 17.621010650494725,
-    "cautious": 48.89233839011312,
-    "physical": 0.8033743855016388,
-    "risky": 2.6717546234231455,
-    "ruthless": 2.000993582554032,
-    "carousing": 1.383654928823478
+    "strategic": 59.410045528742906,
+    "cerebral": 40.86662019227706,
+    "social": 59.46616233922532,
+    "generous": 17.53290559724225,
+    "cautious": 49.64787669816255,
+    "physical": 0.7993575135741305,
+    "risky": 2.6583958503060297,
+    "ruthless": 1.9909886146412616,
+    "carousing": 1.3767366541793606
   },
   "aptitudes": [
     "strategist",
@@ -3113,7 +3108,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 267,
+  "actionCount": 268,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3239,8 +3234,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13693&nologo=true",
-  "updatedAt": 1784163935355,
-  "rev": 367,
+  "updatedAt": 1784164115127,
+  "rev": 368,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3451,12 +3446,6 @@
   },
   "opLossPending": false,
   "establishedFacts": [
-    {
-      "id": "f11",
-      "text": "The assembled mid-weight spear now carries a rough death-binding — runes load-bearing in shaft and blade, Pell Marsh's maker's mark seated in the iron, a nascent thread to Huginn. The death-register i",
-      "day": 1,
-      "subjectId": null
-    },
     {
       "id": "pell",
       "text": "Pell Marsh has been told plainly that her maker's mark is load-bearing in the spear's death-binding — she has accepted this as possibly true and asked what 'grows into' means practically. She now know",
@@ -3690,6 +3679,12 @@
       "text": "Sorel returned to Millbrook because Leth wrote about a targeted archive breach at the Edge District — someone removed specific material, knew exactly what they were looking for. Sorel named the shared",
       "day": 2,
       "subjectId": "sorel"
+    },
+    {
+      "id": "aldric",
+      "text": "Aldric identified the same CCW stain pattern on the interior lip of the sealed original east-channel stone housing — a section pre-dating his father's time in Millbrook. The engineer's method or prese",
+      "day": 2,
+      "subjectId": "aldric"
     }
   ],
   "practice": {
@@ -3802,7 +3797,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 68
+    "valley": 69
   },
   "foreclosed": [
     "rootkin",

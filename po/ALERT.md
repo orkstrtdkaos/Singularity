@@ -1,4 +1,14 @@
-# PIPELINE ALERT — Singularity## 🧭 SNG-122 + SNG-123 — narrative travel + GM-reply resilience (Erik screenshot, awaiting CCode)
+# PIPELINE ALERT — Singularity## ✅ SNG-120 + SNG-121 — CLOSED GREEN (Aevi HEAD audit, v1.8.82)
+
+CCode shipped both; **Aevi verified at authenticated origin.** app.js + inventory.js syntax-clean.
+- **SNG-120** (collapsible sidebar + combine): 10 `<details class="sidebar-sec">` sections, state persisted to `profile.uiSidebar` via one `ontoggle`. **The risky combine VERIFIED:** the old "People you know" section is genuinely DELETED (L5242-43 carries a comment documenting it) and NPCs now render through `knownPeopleAt` at **exactly one** sidebar site (L5268, the SNG-119 who's-here section) — each person shown once, no dup, no loss. Party+Companions merged into one `data-sec="company"` section that returns "" when solo (L5255). Play-serving defaults + summary counts confirmed. **Closed.**
+- **SNG-121** (pin items): `pinned` field + `ensurePins`/`_pinsInitialized` guard (auto-pins weapon+consumables+has-uses on a fresh char, never overrides an explicit choice); sidebar Items renders `pins` only + count + "＋N more". Pin toggle via `itemCard` `showPin` context flag (composes with SNG-114, no second renderer). **Closed.**
+
+Both browser-runtime verified by CCode (auto-pin exactly 4; live toggle; boot-clean on 8199 with ?v=1.8.82).
+
+---
+
+## 🧭 SNG-122 + SNG-123 — narrative travel + GM-reply resilience (Erik screenshot, awaiting CCode)
 
 Erik's screenshot: "state updates were lost" note, after map-travel to the edge district because "in-game travel was just not getting there." **Diagnosed as TWO separate things, one causal, one coincidental:**
 - **SNG-122 — Narrative travel must actually move you (PROMOTE).** `po/SPEC_SNG-122_narrative_travel_moves.md`. This is the pure-narration-exit boundary SNG-117 deferred — and live play just proved it BLOCKS normal movement (the GM narrates the journey but emits no resolvable `moveTo`, so you don't arrive; map-travel is the only thing that works). Fix: require `moveTo` on travel intent (fix the cause), infer-or-mint a destination from a clear travel beat (reuse SNG-117 mint), and a one-tap "arrive" UI fallback that shares the map `travelTo` path. **Not a nice-to-have anymore — it's a workaround-forcing gap.**

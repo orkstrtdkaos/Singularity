@@ -1,4 +1,15 @@
-# PIPELINE ALERT — Singularity## ✅ THE FULL RUN — CLOSED GREEN (Aevi HEAD audit, v1.8.74→80)
+# PIPELINE ALERT — Singularity## ✅ LOCATION + UI BATCH — CLOSED GREEN (Aevi HEAD audit, v1.8.81)
+
+CCode shipped all three; **Aevi verified at authenticated origin.** app.js syntax-clean.
+- **SNG-117** (known world navigable): **the Millbrook fix is airtight** — L2680 now `resolveLocationId(moveRef) || mintTransitLocation(moveRef)`, so an unresolvable `moveTo:"the pass"` MINTS a real travelable place instead of no-op'ing; header follows the fiction, never stays stuck (L2677-2688). **Idempotency VERIFIED (Q1):** mint id = `"gen-"+slugify(moveRef)`, and the first line is `if (CONTENT.locations[id]) return id` — "the pass" slugs to the same id every time → minted exactly once, second mention reuses. `isPlaceKnown` gates the map NAME on known (visited/adjacent/en-route/GM-named), `?` reserved for the genuinely unheard-of. **Closed.** *Boundary CCode honestly flagged: a pure-narration exit with NO `moveTo` at all (infer destination from prose) is deferred — the concrete `moveTo` case is fully fixed. Tracked, not a blocker.*
+- **SNG-118** (play-style chips): `[Strategist]` pills, axis-tinted (earned/amorous/inverse), dimmed+⌁ when fading, lineage border, tap→popover. Scales with the 26-roster. **Closed.**
+- **SNG-119** (standing in headers): `knownPeopleAt` scopes bonds to a place; current-title standing chip ("Millbrook · trusted"); detached sidebar folded into place-scoped "who's here" + map-detail headers (Pell under her community). **Closed.**
+
+**Aevi still owes (tracked, non-blocking):** SNG-117 pure-narration-exit inference; SNG-112 arcId authoring; SNG-109 keyed click-through; SNG-113 TIER-B consumer wiring.
+
+---
+
+## ✅ THE FULL RUN — CLOSED GREEN (Aevi HEAD audit, v1.8.74→80)
 
 CCode shipped the whole queue; **Aevi verified every load-bearing invariant at authenticated origin, not on report.** All four touched engine files syntax-clean.
 

@@ -8,7 +8,7 @@
   "whyHere": "You noticed the paying. You came out to see whether there was another way to be a mind.",
   "background": "drifter",
   "level": 1,
-  "xp": 4,
+  "xp": 6,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -35,7 +35,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 88,
+  "energy": 83,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -132,47 +132,42 @@
         "player": "I'll reach into my traveler's pack searching for any hard tack or any rations of any kind",
         "summary": "Saehara searches his pack — finds nothing; asks Ossian where food can be found in the Cogitarium.",
         "narration": "You shift the waterskin to your left hand and reach back with your right, fingers working the Traveler's Pack's buckle by feel alone — you've done it in the dark, in rain, on horseback; your hands know the clasp. The pack opens. Inside: bedroll straps, flint wrapped in cloth, the mess kit nested neatly. You move past them, pressing into the side pockets where road-food lives if it lives anywhere.\n\nIt doesn't. The pack gives you the honest truth of a man who has been walking between jobs and eating when work provided it: empty. A few crumbs in the bottom corner of the left pocket, maybe oats, maybe something older. Nothing a person could call rations. Nothing you could put in front of this woman and call a meal.\n\nYou sit back on your heel and look at the waterskin on her chest, still rising and falling with her slow breath. The water you gave her was the right instinct — but Ossian said it plainly: it won't be enough. Across the hall his eyes haven't moved from you. Araveth traces the wall without a word. The hall breathes chalk and silence around the three of them — you, the woman, and Kon, who has not shifted an inch from her hip.\n\n\"My pack has nothing,\" you say, to the room, to Ossian. \"Where does food exist in this place?\""
+      },
+      {
+        "player": "Tell Ossian plainly: you'll stay with her, but you need his help — he had a plan before you arrived; now is the time to use it.",
+        "summary": "Ossian refuses: Saehara's arrival voided the plan. A sound falls from above. Kon looks at the ceiling.",
+        "narration": "You turn to Ossian and say it plainly, without ornament: you'll stay with her, but you need his help — he had a plan before you arrived, and now is the time.\n\nThe silence that follows is not the silence of a man considering. It is the silence of a man who has already considered, who considered before you arrived, who has been running the calculation the entire time you've been kneeling on his floor with your hands in your useless pack. Ossian looks at you. His eyes are the densest thing in the room — something behind them moving fast, and something else behind that moving not at all.\n\n\"The plan,\" he says, precisely, \"was probabilistically sound under the conditions that existed before you arrived. You have altered the conditions. The expected value of the original plan has decreased below the threshold at which I would execute it.\" He pauses. A long pause — not a human pause, not a man gathering words, but a pause with structure to it, a deliberate interval. \"Your presence was the trigger for deferral. You are now also the reason the original path is closed. I find this — \" another pause — \"consistent.\"\n\nHe doesn't elaborate. He doesn't look away. Behind you, somewhere in the Cogitarium's upper reaches, a sound descends — something between a chair dragging and a body falling, and then nothing. One of the drifting Cogitants at the hall's edge stops mid-arc, holds that position for five full seconds, and then resumes walking as if the sound was data filed under irrelevant. Kon doesn't move — stays exactly where it has been, coiled in chalk dust a handspan from the fallen woman's hip — but its coat brightens by one degree, the banked-coal red going faintly warmer. It is looking at the ceiling. Then it looks at Ossian."
       }
     ],
     "lastTurn": {
-      "narration": "You shift the waterskin to your left hand and reach back with your right, fingers working the Traveler's Pack's buckle by feel alone — you've done it in the dark, in rain, on horseback; your hands know the clasp. The pack opens. Inside: bedroll straps, flint wrapped in cloth, the mess kit nested neatly. You move past them, pressing into the side pockets where road-food lives if it lives anywhere.\n\nIt doesn't. The pack gives you the honest truth of a man who has been walking between jobs and eating when work provided it: empty. A few crumbs in the bottom corner of the left pocket, maybe oats, maybe something older. Nothing a person could call rations. Nothing you could put in front of this woman and call a meal.\n\nYou sit back on your heel and look at the waterskin on her chest, still rising and falling with her slow breath. The water you gave her was the right instinct — but Ossian said it plainly: it won't be enough. Across the hall his eyes haven't moved from you. Araveth traces the wall without a word. The hall breathes chalk and silence around the three of them — you, the woman, and Kon, who has not shifted an inch from her hip.\n\n\"My pack has nothing,\" you say, to the room, to Ossian. \"Where does food exist in this place?\"",
-      "sceneSummary": "Saehara searches his pack — finds nothing; asks Ossian where food can be found in the Cogitarium.",
+      "narration": "You turn to Ossian and say it plainly, without ornament: you'll stay with her, but you need his help — he had a plan before you arrived, and now is the time.\n\nThe silence that follows is not the silence of a man considering. It is the silence of a man who has already considered, who considered before you arrived, who has been running the calculation the entire time you've been kneeling on his floor with your hands in your useless pack. Ossian looks at you. His eyes are the densest thing in the room — something behind them moving fast, and something else behind that moving not at all.\n\n\"The plan,\" he says, precisely, \"was probabilistically sound under the conditions that existed before you arrived. You have altered the conditions. The expected value of the original plan has decreased below the threshold at which I would execute it.\" He pauses. A long pause — not a human pause, not a man gathering words, but a pause with structure to it, a deliberate interval. \"Your presence was the trigger for deferral. You are now also the reason the original path is closed. I find this — \" another pause — \"consistent.\"\n\nHe doesn't elaborate. He doesn't look away. Behind you, somewhere in the Cogitarium's upper reaches, a sound descends — something between a chair dragging and a body falling, and then nothing. One of the drifting Cogitants at the hall's edge stops mid-arc, holds that position for five full seconds, and then resumes walking as if the sound was data filed under irrelevant. Kon doesn't move — stays exactly where it has been, coiled in chalk dust a handspan from the fallen woman's hip — but its coat brightens by one degree, the banked-coal red going faintly warmer. It is looking at the ceiling. Then it looks at Ossian.",
+      "sceneSummary": "Ossian refuses: Saehara's arrival voided the plan. A sound falls from above. Kon looks at the ceiling.",
       "choices": [
         {
-          "label": "Press Ossian for an answer — where is their kitchen, their stores, their food? Someone in this tower must eat.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
+          "label": "Press him — ask exactly what the plan was, even if he considers it void; you need to know what was possible before you can find what's possible now.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 15,
           "intentTags": [
             "persuade",
+            "study",
+            "careful"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Ignore Ossian for now — go toward the sound above: something fell, and if another Cogitant has collapsed, there may be supplies nearby that no one is using.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
             "help"
           ],
           "trivial": true
         },
         {
-          "label": "Ask Ossian if any other Cogitants in the hall can be roused — someone who knows where provisions are kept.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "intentTags": [
-            "help",
-            "scout"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Leave the woman in Kon's watch for a moment and search the Cogitarium yourself — follow the upper terraces for any sign of a kitchen or stores.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 15,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Tell Ossian plainly: you'll stay with her, but you need his help — he had a plan before you arrived; now is the time to use it.",
+          "label": "Appeal to Ossian differently — not for the plan, but for food: name the woman specifically and ask what, concretely, she ate last and where it came from.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 15,
@@ -182,14 +177,29 @@
             "careful"
           ],
           "trivial": false
+        },
+        {
+          "label": "Trust Kon — it's looking at the ceiling for a reason. Stand and follow its attention toward whatever it's sensing above.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "risky"
+          ],
+          "trivial": true
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
       "scene": {
-        "setting": "Entrance hall of the Cogitarium — high pale stone, bluish morning light through tall windows, chalk-dust thick underfoot. Saehara kneels beside the fallen Cogitant at the hall's far edge, waterskin resting on the woman's chest, Traveler's Pack open behind him — searched and empty of food.",
+        "setting": "Entrance hall of the Cogitarium — high pale stone, bluish morning light through tall windows, chalk-dust thick underfoot. Saehara kneels beside the fallen Cogitant at the hall's far edge, waterskin resting on the woman's chest, Traveler's Pack open behind him — searched and empty of food. A sound — something between a chair dragging and a body falling — has descended from the upper reaches and gone quiet.",
         "npcsPresent": [
           {
             "name": "Ossian",
-            "state": "Seated cross-legged at the center of the hall, eyes fixed on Saehara — waiting for the answer the empty pack already gave."
+            "state": "Seated cross-legged at the center of the hall, eyes fixed on Saehara — has just declared his original plan voided by Saehara's arrival; waiting, watching."
           },
           {
             "name": "Araveth",
@@ -201,11 +211,11 @@
           },
           {
             "name": "Drifting Cogitants",
-            "state": "Moving in slow arcs at the hall's edges, lips moving, oblivious."
+            "state": "Moving in slow arcs at the hall's edges — one stopped mid-arc for five seconds at the sound from above, then resumed."
           },
           {
             "name": "Kon",
-            "state": "Sitting in chalk dust a handspan from the fallen woman's hip, tail curled around its feet — has not moved, watching her face."
+            "state": "Sitting in chalk dust a handspan from the fallen woman's hip, coat one degree warmer than before — was looking at the ceiling; now looking at Ossian."
           }
         ],
         "objects": [
@@ -217,12 +227,11 @@
           "Katana at Saehara's waist"
         ],
         "threads": [
-          "Fallen Cogitant is alive but unreachable — has swallowed water on reflex; needs more than water per Ossian",
-          "One hour and some minutes remain before Ossian's calculated threshold",
-          "Ossian's own unstated plan — deferred when Saehara arrived, still not named",
-          "The pack is empty — food must be found somewhere in the Cogitarium",
-          "Kon watches the fallen woman with unusual stillness — does not classify her the way it classifies ordinary things",
-          "The four conditions for source-remediation stand unmet"
+          "Fallen Cogitant is alive but unreachable — needs food; threshold approaching",
+          "Ossian's original plan has been declared void — its content still unknown",
+          "A sound fell from the upper Cogitarium — something or someone collapsed above",
+          "Kon's coat has warmed and it looked at the ceiling: it is reading something",
+          "Ossian's logic for deferral — Saehara's arrival as trigger — has not been fully explained"
         ]
       },
       "npcUpdates": [
@@ -230,30 +239,41 @@
           "op": "update",
           "npcId": "unknown-cogitant",
           "name": "Ossian",
-          "role": "Cogitant — seated observer and probabilist",
-          "note": "Saehara announced the pack is empty and asked where food exists in the Cogitarium — Ossian's eyes have not moved from Saehara.",
-          "statusNote": "Seated in the entrance hall, watching Saehara with the same flat attention — awaiting his question about food."
-        },
+          "role": "Cogitant — cross-legged in the entrance hall",
+          "note": "Refused to share or execute the original plan — declared it void because Saehara's arrival altered the conditions and reduced the plan's expected value below his execution threshold. Delivered this with complete flatness.",
+          "learned": [
+            "The original plan was probabilistically sound before Saehara arrived — Saehara's presence was the trigger for deferral AND the reason the path is now closed",
+            "Ossian frames Saehara's arrival as a variable that reduced expected value — not a rescue, a complication",
+            "He considers this 'consistent' — implying it confirms something he already suspected about how intervention works here"
+          ],
+          "statusNote": "Seated in the entrance hall, plan voided, watching Saehara — has not offered a replacement"
+        }
+      ],
+      "codexUpdates": [
         {
-          "op": "update",
-          "npcId": "fallen-cogitant",
-          "name": "Fallen Cogitant",
-          "role": "Cogitant — collapsed at the hall's far edge",
-          "note": "Has been given water — swallowed twice on reflex. Pack search yielded no food; she needs more than water.",
-          "statusNote": "Half-upright against Saehara's hand in the entrance hall — hydrated minimally but still unreachable; food not yet found."
+          "topic": "ossian",
+          "label": "Ossian",
+          "kind": "person",
+          "entityId": "unknown-cogitant",
+          "fact": "Declared his pre-calculated intervention plan voided by Saehara's arrival — Saehara was the trigger for deferral and is now the reason the original path is closed. Ossian considers this 'consistent.' The plan's content remains unknown.",
+          "links": [
+            "the-collapsing-cogitants",
+            "cogitarium",
+            "the-cogitariums-calculated-crisis"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief search of the pack and a short exchange — a few minutes at most."
+        "why": "A short, tense exchange"
       }
     },
     "sceneState": {
-      "setting": "Entrance hall of the Cogitarium — high pale stone, bluish morning light through tall windows, chalk-dust thick underfoot. Saehara kneels beside the fallen Cogitant at the hall's far edge, waterskin resting on the woman's chest, Traveler's Pack open behind him — searched and empty of food.",
+      "setting": "Entrance hall of the Cogitarium — high pale stone, bluish morning light through tall windows, chalk-dust thick underfoot. Saehara kneels beside the fallen Cogitant at the hall's far edge, waterskin resting on the woman's chest, Traveler's Pack open behind him — searched and empty of food. A sound — something between a chair dragging and a body falling — has descended from the upper reaches and gon",
       "npcsPresent": [
         {
           "name": "Ossian",
-          "state": "Seated cross-legged at the center of the hall, eyes fixed on Saehara — waiting for the answer the empty pack already gav"
+          "state": "Seated cross-legged at the center of the hall, eyes fixed on Saehara — has just declared his original plan voided by Sae"
         },
         {
           "name": "Araveth",
@@ -265,11 +285,11 @@
         },
         {
           "name": "Drifting Cogitants",
-          "state": "Moving in slow arcs at the hall's edges, lips moving, oblivious."
+          "state": "Moving in slow arcs at the hall's edges — one stopped mid-arc for five seconds at the sound from above, then resumed."
         },
         {
           "name": "Kon",
-          "state": "Sitting in chalk dust a handspan from the fallen woman's hip, tail curled around its feet — has not moved, watching her "
+          "state": "Sitting in chalk dust a handspan from the fallen woman's hip, coat one degree warmer than before — was looking at the ce"
         }
       ],
       "objects": [
@@ -281,11 +301,11 @@
         "Katana at Saehara's waist"
       ],
       "threads": [
-        "Fallen Cogitant is alive but unreachable — has swallowed water on reflex; needs more than water per Ossian",
-        "One hour and some minutes remain before Ossian's calculated threshold",
-        "Ossian's own unstated plan — deferred when Saehara arrived, still not named",
-        "The pack is empty — food must be found somewhere in the Cogitarium",
-        "Kon watches the fallen woman with unusual stillness — does not classify her the way it classifies ordinary things"
+        "Fallen Cogitant is alive but unreachable — needs food; threshold approaching",
+        "Ossian's original plan has been declared void — its content still unknown",
+        "A sound fell from the upper Cogitarium — something or someone collapsed above",
+        "Kon's coat has warmed and it looked at the ceiling: it is reading something",
+        "Ossian's logic for deferral — Saehara's arrival as trigger — has not been fully explained"
       ]
     }
   },
@@ -602,7 +622,8 @@
           "[d1] Name of the cross-legged Cogitant who first received Saehara. Offered it plainly when asked — a coordinate, not an introduction.",
           "[d1] The chalk wall shows visible deterioration in particulate concentration around day nine and again around day fourteen — the watershed is getting worse, not stable.",
           "[d1] Ossian modeled every probable respondent category and assigned a combined 0.003 probability to someone like Saehara arriving: no settlement, no mandate, a Glade-changed companion, challenged the evacu",
-          "[d1] Ossian set a private six-hour intervention threshold for the fallen Cogitant and has been tracking her collapse to the minute — he had a plan, deferred. What the plan was, he has not said."
+          "[d1] Ossian set a private six-hour intervention threshold for the fallen Cogitant and has been tracking her collapse to the minute — he had a plan, deferred. What the plan was, he has not said.",
+          "[d1] Declared his pre-calculated intervention plan voided by Saehara's arrival — Saehara was the trigger for deferral and is now the reason the original path is closed. Ossian considers this 'consistent.' "
         ],
         "links": [
           "cogitarium",
@@ -642,14 +663,14 @@
     }
   },
   "tendencies": {
-    "strategic": 2.90704762338888,
-    "social": 2.8725927702878096,
-    "cerebral": 3.896510100167044,
-    "generous": 3.9502493756250003,
-    "cautious": 3.9502493756250003
+    "strategic": 2.8925123852719357,
+    "social": 3.8582298064363707,
+    "cerebral": 3.877027549666209,
+    "generous": 4.930498128746875,
+    "cautious": 4.930498128746875
   },
   "aptitudes": [],
-  "actionCount": 12,
+  "actionCount": 13,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -662,8 +683,8 @@
       "at": "2026-07-16T02:18:04.820Z"
     }
   ],
-  "updatedAt": 1784172126515,
-  "rev": 34,
+  "updatedAt": 1784172282263,
+  "rev": 35,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -671,7 +692,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "somatic_reaches": 13
+    "somatic_reaches": 14
   },
   "opLossPending": false,
   "establishedFacts": [

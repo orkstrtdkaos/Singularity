@@ -3,7 +3,8 @@
 
 import { loadContent, loreForLocation, eventsForGM, getPlayerKey, setPlayerKey, hasChosenPlayer, listPlayers, listCharacters, saveCharacter, loadCharacter, saveProfile, loadProfile, exportSave, importSave, adoptRemoteCharacter, preserveRecovery, dedupePlayers, findProfileByName, resolveLocationId } from "./engine/state.js";
 import { resolveAction, successChance, applyEnergyCost } from "./engine/resolve.js";
-import { senseAction, senseTier } from "./engine/sense.js";
+import { senseAction, senseTier, senseOpponent } from "./engine/sense.js";
+import { synthesizeOpponentSheet } from "./engine/skill_battle.js";
 import { recordDeed, standingWith, standingWithPeople, reputationSummary } from "./engine/reputation.js";
 import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt } from "./engine/chronicle.js";
 import { newProfile, updateProfile, aptitudeMods, profileInsight, ensureCharacterStyle, ensureRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, revokeAdultGate, RATING_ORDER, RATING_LEVEL } from "./engine/playerprofile.js";
@@ -40,9 +41,9 @@ import { noteCoUseAndRefresh, refreshEvolvingItems, evolvedItemsForGM, currentSt
 import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarrativeKind, canIncapacitate } from "./engine/random_encounters.js";
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
-import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
+import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.78";
+const APP_VERSION = "1.8.79";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2328,6 +2329,8 @@ async function enterPlay() {
   } else {
     startScene(undefined, news, backfillAside);
   }
+  // SNG-098 C: a skill-battle in progress resumes into the contest panel (never stranded mid-fight on reload).
+  if (character.activeEncounter?.state?.mode === "skill_battle") renderSkillBattle();
 }
 
 async function startScene(prompt = "(Scene opening — set the scene where the character currently is and present the situation.)", news = [], aside = null) {
@@ -2838,11 +2841,16 @@ async function onChoice(choice) {
   // starting an encounter (GM-offered choice carrying a real encounterId)
   if (choice.encounterId && (CONTENT.encounters?.[choice.encounterId] || character.customEncounters?.[choice.encounterId]) && !character.activeEncounter) {
     const def = CONTENT.encounters?.[choice.encounterId] || character.customEncounters[choice.encounterId];
-    character.activeEncounter = { defId: def.id, state: startEncounter(def) };
+    // SNG-098 C: a duel runs as a two-sided SKILL BATTLE (the contest panel) when the engine is loaded and
+    // the def doesn't opt out; the classic single-margins duel stays the fallback (skillBattle:false).
+    const isSB = !!(CONTENT.skillBattle?.engine && def.type === "duel" && def.skillBattle !== false);
+    const oppSheet = isSB ? synthesizeOpponentSheet(def.opponent, CONTENT.skillBattle.engine) : null;
+    character.activeEncounter = { defId: def.id, state: startEncounter(def, { oppSheet }) };
     saveCharacter(character);
     renderPlay(null, { thinking: "…", playerBeat: { label: choice.label } });
-    const result = await runGM({ resolution: null, playerInput: `(The encounter "${def.name}" begins: ${def.setup} Narrate the opening and offer round choices.)` });
+    const result = await runGM({ resolution: null, playerInput: `(The encounter "${def.name}" begins: ${def.setup} Narrate the opening${isSB ? " of the contest (the mechanics play out in a panel — just set the scene and the stakes)" : " and offer round choices"}.)` });
     if (result) renderPlay(result.turn, { playerBeat: { label: choice.label }, degraded: result.degraded });
+    if (isSB) renderSkillBattle(); // take over the rounds with the contest panel
     return;
   }
   // trivial actions — no real chance of failure, no cost: no dice, no energy
@@ -4938,6 +4946,118 @@ function openUseIntent(item) {
   how.onkeydown = e => { if (e.key === "Enter") document.getElementById("use-go").click(); };
   document.getElementById("use-go").onclick = () => { const h = how.value.trim(); submit(h ? `I use my ${nm} — ${h}` : `I use my ${nm} here`); };
   document.getElementById("use-cancel").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
+}
+
+// ---------- SNG-098 C: the skill-battle panel (two-sided contest + fog of war) ----------
+// A duel runs here as a round-by-round exchange: you declare a skill + intensity, the engine resolves BOTH
+// sides (skill_battle.js), the momentum meter moves, and how much of the opponent's move you see is gated by
+// your senseTier (fog). The engine (Phases A+B) is tested; this is the presentation + input loop over it.
+
+let sbIntensity = "standard";     // the player's current intensity dial
+let sbLastPlayerFn = null;        // the last function the player showed — the opponent may READ it next round
+
+/** The player's declarable contest skills: their abilities (function + tier + energy), plus the steel-and-wit
+ *  fallbacks that always work (a plain strike, a raised guard) so a caster stripped of the lattice still fights. */
+function playerBattleSkills() {
+  const out = [];
+  for (const a of character.abilities || []) {
+    const def = fullCatalog()[a.abilityId];
+    const fn = (def?.functions || [])[0];
+    if (!fn) continue;
+    out.push({ id: a.abilityId, function: fn, tier: a.level || 1, attribute: def.attribute || "practical", name: def.name || a.abilityId, energyCost: effectiveEnergyCost(def, character, CONTENT.rules) });
+  }
+  out.push({ id: "_strike", function: "strike", tier: 1, attribute: "physical", name: "A plain strike" });
+  out.push({ id: "_guard", function: "shield", tier: 1, attribute: "physical", name: "Raise a guard" });
+  return out.slice(0, 12);
+}
+
+function renderSkillBattle(lastRound = null) {
+  const enc = activeEnc();
+  if (!enc || enc.state?.mode !== "skill_battle") { renderPlay(character.activeScene?.lastTurn || null, {}); return; }
+  const st = enc.state, def = enc.def, sb = CONTENT.skillBattle.engine, steps = CONTENT.intensity.steps;
+  const meterMax = sb.momentum?.meterMax ?? 10;
+  const mods = aptitudeMods(character, CONTENT.rules.playerAptitudes);
+  const scout = !!lastRound?._scout;
+  const fog = lastRound?.opponent ? senseOpponent(character, lastRound.opponent, CONTENT.rules, sb, { scouting: scout, buyTier: scout ? (sb.revealActionBuysTier ?? 1) : 0, aptitudeMods: mods }) : null;
+  const skills = playerBattleSkills();
+  window._sbSkills = skills; // handler lookup
+  const momPct = Math.round(((st.momentum + meterMax) / (2 * meterMax)) * 100);
+  const oppTired = st.opponentEnergy != null && fog && fog.tier >= 2 ? (st.opponentEnergy < 15 ? "spent" : st.opponentEnergy < 40 ? "tiring" : "still fresh") : null;
+  chrome(`<div class="screen sb-screen" style="max-width:640px">
+    <h2>⚔ ${esc(def.name || "The contest")}</h2>
+    <div class="sb-opponent">${esc(def.opponent?.name || "your opponent")}${fog?.label ? ` — <span class="hint">${esc(fog.label)}</span>` : ""}${oppTired ? ` <span class="cost">(${oppTired})</span>` : ""}</div>
+    <div class="sb-meter" title="Momentum — fill it to prevail; empty it and you are overcome.">
+      <div class="sb-meter-fill" style="width:${Math.max(0, Math.min(100, momPct))}%"></div><div class="sb-meter-mid"></div>
+    </div>
+    <div class="sb-vitals">You: ${character.health}/${character.maxHealth} hp · ${character.energy} energy</div>
+    <div class="sb-fog">${fog ? `
+      <div class="sb-fog-line">${esc(fog.revealed.outcome || "They move.")}${fog.revealed.intent ? ` — gathering to <strong>${esc(fog.revealed.intent)}</strong>` : ""}${fog.revealed.band ? ` <span class="hint">(${esc(fog.revealed.band)})</span>` : ""}</div>
+      ${fog.revealed.skill ? `<div class="sb-fog-line">${esc(fog.revealed.skill)}${fog.revealed.intensity ? ` · ${esc(fog.revealed.intensity)}` : ""}${fog.revealed.breakdown ? ` <button class="data-link" data-breakdown='${esc(JSON.stringify(fog.revealed.breakdown))}'>see their math</button>` : ""}</div>` : ""}` :
+      `<div class="hint">You size each other up. Strike — or read them first.</div>`}</div>
+    ${st.log?.length ? `<details class="sb-log"><summary>Round log (${st.round - 1})</summary>${st.log.map(l => `<div class="hint">${esc(l)}</div>`).join("")}</details>` : ""}
+    <div class="sb-intensity">Intensity: ${["conserve", "standard", "surge"].map(i => `<button class="opt sb-int ${sbIntensity === i ? "on" : ""}" data-sbint="${i}">${i}</button>`).join("")}</div>
+    <div class="sb-skills">${skills.map((s, i) => `<button class="btn secondary sb-skill" data-sbskill="${i}" style="display:block; width:100%; text-align:left; margin:4px 0">${esc(s.name)} <span class="cost">${esc(s.function)} · T${s.tier}${s.energyCost ? ` · ${s.energyCost}e` : ""}</span></button>`).join("")}</div>
+    <div class="sb-actions" style="display:flex; gap:8px; margin-top:10px; flex-wrap:wrap">
+      <button class="btn secondary" id="sb-read" title="Spend the round reading them — no attack, but you see their next move more clearly">👁 Read them</button>
+      <button class="btn secondary" id="sb-flee">Break away</button>
+      <button class="btn secondary" id="sb-yield">Yield</button>
+    </div>
+  </div>`);
+  for (const b of app.querySelectorAll("[data-sbint]")) b.onclick = () => { sbIntensity = b.dataset.sbint; renderSkillBattle(lastRound); };
+  for (const b of app.querySelectorAll("[data-sbskill]")) b.onclick = () => sbDeclare(window._sbSkills[Number(b.dataset.sbskill)], { intensity: sbIntensity });
+  document.getElementById("sb-read").onclick = () => sbDeclare({ function: "shield", tier: 1, attribute: "mental", name: "reading them" }, { intensity: "conserve", scouting: true });
+  document.getElementById("sb-flee").onclick = () => sbFlee();
+  document.getElementById("sb-yield").onclick = () => sbEnd(skillBattleRound(enc.state, enc.def, {}, { character, rules: CONTENT.rules, sb, steps, yield: true }));
+}
+
+/** Resolve one declared round: apply the player's health/energy attrition, advance the state, and either
+ *  re-render the panel (fog view of what just happened) or end the contest. */
+function sbDeclare(skill, { intensity = "standard", scouting = false } = {}) {
+  const enc = activeEnc(); if (!enc) return;
+  const sb = CONTENT.skillBattle.engine, steps = CONTENT.intensity.steps;
+  const decl = { function: skill.function, tier: skill.tier || 1, attribute: skill.attribute || "practical", intensity, name: skill.name };
+  const rr = skillBattleRound(enc.state, enc.def, decl, { character, rules: CONTENT.rules, sb, steps, seenTendency: sbLastPlayerFn, rng: Math.random });
+  if (!scouting) sbLastPlayerFn = skill.function; // reading doesn't show them a real tendency
+  character.health = Math.max(0, Math.min(character.maxHealth, character.health + (rr.deltas?.health || 0)));
+  character.energy = Math.max(0, character.energy + (rr.deltas?.energy || 0));
+  character.activeEncounter = { defId: enc.def.id, state: rr.state };
+  saveCharacter(character);
+  if (checkIncapacitation(character)) { sbEnd({ ...rr, ended: true, outcome: "incapacitated" }); return; }
+  if (rr.ended) { sbEnd(rr); return; }
+  renderSkillBattle({ opponent: rr.opponent, _scout: scouting });
+}
+
+/** Try to break away — a quick physical roll against the flee difficulty, resolved through the same lifecycle. */
+function sbFlee() {
+  const enc = activeEnc(); if (!enc) return;
+  const fleeAction = { label: "break away", attribute: "physical", axes: {}, difficulty: enc.def.opponent?.fleeDifficulty ?? 15, tags: [] };
+  const res = resolveAction({ character, action: fleeAction, location: hereNow(), rules: CONTENT.rules, aptitudeMods: aptitudeMods(character, CONTENT.rules.playerAptitudes) });
+  const rr = skillBattleRound(enc.state, enc.def, {}, { character, rules: CONTENT.rules, sb: CONTENT.skillBattle.engine, steps: CONTENT.intensity.steps, flee: true, fleeResolution: res });
+  character.health = Math.max(0, character.health + (rr.deltas?.health || 0));
+  character.activeEncounter = rr.ended ? null : { defId: enc.def.id, state: rr.state };
+  saveCharacter(character);
+  if (rr.ended) sbEnd(rr); else renderSkillBattle(null);
+}
+
+/** The contest ends: clear it, then hand the outcome to the GM to narrate the aftermath and return to the scene. */
+async function sbEnd(rr) {
+  const enc = activeEnc(); const def = enc?.def;
+  character.activeEncounter = null; saveCharacter(character);
+  sbLastPlayerFn = null; sbIntensity = "standard";
+  const nm = def?.opponent?.name || "your opponent";
+  const outLine = {
+    opponent_fell: `You have beaten ${nm} — they go down.`,
+    opponent_yielded: `${nm} yields to you.`,
+    yielded: `You yield the contest to ${nm}.`,
+    fled: `You break away from the fight.`,
+    player_overcome: `${nm} overcomes you.`,
+    stalemate: `Neither of you can finish it — you both break, spent.`,
+    incapacitated: `You fall, overcome.`
+  }[rr.outcome] || "The contest ends.";
+  renderPlay(null, { thinking: "…" });
+  const result = await runGM({ resolution: null, playerInput: `(The skill-battle with ${nm} has resolved — outcome: ${rr.outcome}. ${outLine} Narrate the aftermath in one beat and return to the scene.)` });
+  if (result) renderPlay(result.turn, {});
+  else renderPlay(character.activeScene?.lastTurn || null, { aside: outLine });
 }
 
 // ---------- play rendering ----------

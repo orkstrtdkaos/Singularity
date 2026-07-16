@@ -611,3 +611,19 @@ img[data-lightbox] { cursor: zoom-in; }
 /* SNG-106 — tappable roll chance → component breakdown */
 .roll-chance { border-bottom: 1px dotted var(--accent); cursor: help; }
 .roll-chance:hover, .roll-chance:focus { color: var(--accent); outline: none; }
+
+/* SNG-098 C — the skill-battle contest panel */
+.sb-screen h2 { margin-bottom: 4px; }
+.sb-opponent { font-size: 14px; color: var(--ink); margin-bottom: 8px; }
+.sb-meter { position: relative; height: 14px; border: 1px solid var(--border); border-radius: 7px; background: var(--panel2); overflow: hidden; margin-bottom: 6px; }
+.sb-meter-fill { height: 100%; background: linear-gradient(90deg, var(--accent2, #7a9), var(--accent)); transition: width .25s; }
+.sb-meter-mid { position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: var(--border); }
+.sb-vitals { font-family: var(--font-ui); font-size: 12px; color: var(--ink-dim); margin-bottom: 8px; }
+.sb-fog { background: var(--panel2); border: 1px solid var(--border); border-radius: 6px; padding: 8px; margin-bottom: 8px; min-height: 20px; }
+.sb-fog-line { font-size: 13px; line-height: 1.4; }
+.sb-log { margin-bottom: 8px; font-size: 12px; }
+.sb-log summary { cursor: pointer; color: var(--ink-dim); }
+.sb-intensity { font-family: var(--font-ui); font-size: 12px; margin-bottom: 6px; display: flex; gap: 6px; align-items: center; }
+.sb-int { text-transform: capitalize; }
+.sb-int.on { border-color: var(--accent); color: var(--accent); }
+.data-link { background: none; border: none; color: var(--accent); cursor: pointer; font-size: 12px; text-decoration: underline dotted; padding: 0; }

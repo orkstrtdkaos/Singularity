@@ -2045,110 +2045,116 @@
         "player": "Say her name back to her — quietly, against her ear — then give her what she asked for.",
         "summary": "Silas says her name against her ear and gives her what she asked for — Pell fully unguarded, the overhang holding it close.",
         "narration": "You say her name against her ear — just 'Pell', nothing else, the word quiet enough that only she can hear it over the fire's low breath. Her hands press tighter on your forearms the instant it lands.\n\nThen you give her what she asked for.\n\nThe rhythm comes back hard and you feel her exhale it — a long, open sound she doesn't try to catch — her head falling back against your shoulder, throat bare in the firelight, hands gripping rather than holding now. You keep one hand where it is and bring the other up along her sternum, her collarbone, to rest at the base of her throat, not pressing, only present, and she arches into it like she's been waiting for the specific weight of that. Her hips are no longer chasing; they're answering.\n\nShe says your name once more, differently — not asking, not managing, just the fact of you — and then she stops talking entirely. The overhang holds the sounds the same way it holds warmth: close, private, real. Huginn is a dark shape on the stone lip and does not move. The last of the coals burns orange-red below you, throwing the light long and low across the rock, and what happens next happens in that light, unhurried, until Pell's breath goes ragged and her hands finally let go of your forearms and she says yes again, or something that means yes, smaller than a word."
+      },
+      {
+        "player": "Stay close after — hold her in the warmth while the coals finish, and say nothing for a while.",
+        "summary": "Silas holds Pell in the warmth while the coals finish — the overhang quiet, Huginn attending, morning not yet arrived.",
+        "narration": "The overhang holds the silence like a palm cupped around a candle flame. You stay where you are — her back against your chest, your arm across her, her breathing slowing in the way that happens when a body is deciding it is finally safe to stop. The coals throw their last orange light across the stone and across her, and you don't speak.\n\nHuginn is motionless on the lip of rock above. Not watching, exactly — attending. There is a difference, and you know it. The bird has sat with enough endings to know when something is the opposite.\n\nPell's hand finds your forearm after a while and rests there without gripping — just rests, the way you'd rest a hand on a table you trusted. Her breathing has gone all the way down. The pine smell of the far side of the pass comes in at the overhang's edge where the oilcloth doesn't quite reach, and the wine on the flat stone catches the last red glow and doesn't ask to be touched.\n\nThe coals settle once — a soft collapse of ash, the light dropping a degree. Morning is not far. The Edge District is a day's walk down the far slope, Leth's name in your pocket, the vault's clock running. But that is morning. This is still tonight, and you hold her in it, and say nothing for a while."
       }
     ],
     "lastTurn": {
-      "narration": "You say her name against her ear — just 'Pell', nothing else, the word quiet enough that only she can hear it over the fire's low breath. Her hands press tighter on your forearms the instant it lands.\n\nThen you give her what she asked for.\n\nThe rhythm comes back hard and you feel her exhale it — a long, open sound she doesn't try to catch — her head falling back against your shoulder, throat bare in the firelight, hands gripping rather than holding now. You keep one hand where it is and bring the other up along her sternum, her collarbone, to rest at the base of her throat, not pressing, only present, and she arches into it like she's been waiting for the specific weight of that. Her hips are no longer chasing; they're answering.\n\nShe says your name once more, differently — not asking, not managing, just the fact of you — and then she stops talking entirely. The overhang holds the sounds the same way it holds warmth: close, private, real. Huginn is a dark shape on the stone lip and does not move. The last of the coals burns orange-red below you, throwing the light long and low across the rock, and what happens next happens in that light, unhurried, until Pell's breath goes ragged and her hands finally let go of your forearms and she says yes again, or something that means yes, smaller than a word.",
-      "sceneSummary": "Silas says her name against her ear and gives her what she asked for — Pell fully unguarded, the overhang holding it close.",
+      "narration": "The overhang holds the silence like a palm cupped around a candle flame. You stay where you are — her back against your chest, your arm across her, her breathing slowing in the way that happens when a body is deciding it is finally safe to stop. The coals throw their last orange light across the stone and across her, and you don't speak.\n\nHuginn is motionless on the lip of rock above. Not watching, exactly — attending. There is a difference, and you know it. The bird has sat with enough endings to know when something is the opposite.\n\nPell's hand finds your forearm after a while and rests there without gripping — just rests, the way you'd rest a hand on a table you trusted. Her breathing has gone all the way down. The pine smell of the far side of the pass comes in at the overhang's edge where the oilcloth doesn't quite reach, and the wine on the flat stone catches the last red glow and doesn't ask to be touched.\n\nThe coals settle once — a soft collapse of ash, the light dropping a degree. Morning is not far. The Edge District is a day's walk down the far slope, Leth's name in your pocket, the vault's clock running. But that is morning. This is still tonight, and you hold her in it, and say nothing for a while.",
+      "sceneSummary": "Silas holds Pell in the warmth while the coals finish — the overhang quiet, Huginn attending, morning not yet arrived.",
       "choices": [
         {
-          "label": "Stay close after — hold her in the warmth while the coals finish, and say nothing for a while.",
+          "label": "Pour the last of the Resin Mountain Wine — share it quietly before the fire goes entirely cold.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
           "difficulty": 0,
-          "intentTags": [
-            "romantic"
-          ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Pour the last of the Resin Mountain Wine — share it in the quiet after.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
           "intentTags": [
             "romantic"
           ],
           "abilityId": null,
           "energyCost": null,
+          "axes": {},
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Say something — small, not large. Not the morning's plans. Something that belongs to tonight.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
           "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask her something you've been holding — not about the road ahead, something about her.",
-          "attribute": "social",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 0,
           "intentTags": [
-            "romantic"
+            "romantic",
+            "comfort"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
+          "axes": {},
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Bank what's left of the fire and settle in for sleep — the Edge District is a long walk from here and morning comes early.",
+          "label": "Let her sleep — bank what's left of the coals, tuck the oilcloth closer, keep watch until she's under.",
           "attribute": "practical",
           "subAttribute": "wits",
-          "axes": {},
           "difficulty": 0,
+          "trivial": true,
           "intentTags": [
-            "sustain"
+            "sustain",
+            "guard"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
+          "axes": {},
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Huginn quietly — not about Pell, the bird has answered that — ask about the far slope. What's ending down there that the bird can already see?",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "trivial": false,
+          "intentTags": [
+            "study",
+            "scout"
+          ],
+          "abilityId": "deathsense",
+          "energyCost": 2,
+          "axes": {
+            "death_life": -0.3
+          },
           "encounterId": null,
           "emergenceId": null
         }
       ],
-      "deeds": [],
       "characterDeltas": {
         "health": 0,
         "energy": 0
       },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "Far side of the mountain pass, evening — south-facing rock overhang, fire burned to low orange-red coals throwing warm amber light across the stone. Pell's head against Silas's shoulder, hands released from his forearms, both of them warm in the close air of the overhang.",
+        "setting": "Far side of the mountain pass, late evening — south-facing rock overhang, coals now orange-red fading toward grey, light lower than before, pine-smell from the open valley side coming in at the oilcloth's edge.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Against Silas's chest, open-faced, breathing slower now — the last of the management gone, nothing held back."
+            "state": "Back against Silas's chest, her hand resting on his forearm without gripping — breathing slow, fully down, the management completely gone."
           },
           {
             "name": "Huginn",
-            "state": "Motionless on the stone lip. Unmoved. A dark shape in the low light."
+            "state": "Motionless on the stone lip above — attending, not watching; the distinction is legible."
           }
         ],
         "objects": [
           "Memory (spear, leaned against the overhang wall)",
-          "Resin Mountain Wine (open, last pour remaining, on the flat stone — still untouched)",
+          "Resin Mountain Wine (last pour, on the flat stone — still untouched, catching the fading coals)",
           "Pell's shirt (on the stone)",
           "Silas's shirt (dropped on the stone beside Pell's)",
-          "Oilcloth Fold (Pell's, propped as windbreak)",
+          "Oilcloth Fold (propped as windbreak, not quite reaching the edge)",
           "Valve Failure Timeline note — 'S-gate confirmed' annotated (in pocket)",
           "Contact Names Scrap (Sorel, Leth) (in pocket)",
           "River Purification Tabs vial (in inner pack pocket)",
-          "Fire-ring of flat stones — coals orange-red and burning low",
-          "Rock overhang — south-facing, dry underside, holding warmth close"
+          "Fire-ring of flat stones — coals orange-red fading, one recent ash-collapse"
         ],
         "threads": [
           "The last pour of Resin Mountain Wine sits untouched on the flat stone.",
-          "The coals are burning very low — the fire will not last much longer.",
-          "Edge District bearing — Leth and Sorel as first contacts.",
+          "The coals are nearly spent — the fire's last warmth is the warmth that remains now.",
+          "Edge District bearing — Leth and Sorel as first contacts; the descent begins in the morning.",
           "The buried vault head: six-week window, expert needed before week five.",
-          "Morning will come early on the far side of the pass."
+          "Huginn is attending the night side of the pass — the bird can see what is ending on the far slope."
         ]
       },
       "npcUpdates": [
@@ -2156,86 +2162,60 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "role": "Village blacksmith, Millbrook",
-          "note": "Fully unguarded at the close — said Silas's name plainly, stopped managing, stayed present through to the end without armor. The habit broke entirely for the length of the overhang.",
+          "note": "Resting fully against Silas in the overhang's quiet — hand on his forearm, breathing all the way down, no management. The habit has not returned.",
           "learned": [
-            "Names Silas plainly, without management, when the last of it is taken from her.",
-            "Stops talking when the management has nowhere left to go — presence instead of words."
+            "Stays in the warmth without reassembling the armor — the rest after is as unguarded as the moment itself."
           ],
-          "relationshipDelta": 1,
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the overhang camp on the far side of the pass, warm against Silas, armor down — the road to the Edge District begins in the morning.",
+          "statusNote": "At the overhang camp on the far side of the pass — warm against Silas, armor fully down, breathing slow. The descent to the Edge District begins at morning.",
           "bondType": "romantic",
           "bondStage": "together"
-        }
-      ],
-      "factUpdates": [
+        },
         {
-          "op": "add",
-          "text": "Pell was fully unguarded at the overhang camp on World-day 16 evening — the habit broke entirely, no management, no ledger-close. She said Silas's name and stopped trying to hold anything back.",
-          "subjectId": "pell"
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "The overhang camp on the far side of the pass holds this night — Pell unguarded, the last of the coals burning low, Huginn attending from the stone lip.",
-          "subPlace": {
-            "name": "Far-Side Overhang Camp",
-            "note": "South-facing rock overhang, one night's camp from the pass mouth — fire-ring of flat stones, dry underside, holds warmth close. Site of the first night beyond the valley.",
-            "visited": true
-          }
+          "op": "update",
+          "npcId": "huginn",
+          "name": "Huginn",
+          "note": "Motionless on the stone lip through the quiet after — attending the night side of the pass, unhurried.",
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "On the lip of the overhang, attending the far slope — present through the whole of it, unmoved."
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A short beat — the quiet close of the scene, a few minutes in the warmth of the overhang."
-      },
-      "codexUpdates": [
-        {
-          "topic": "pell",
-          "label": "Pell",
-          "kind": "person",
-          "entityId": "pell",
-          "fact": "Fully unguarded at the overhang camp on World-day 16 evening — said Silas's name plainly, stopped managing, the habit broke entirely through to the end. No ledger-close; no armor.",
-          "links": [
-            "millbrook",
-            "memory-the-spear",
-            "the-unnamed-gift"
-          ]
-        }
-      ],
-      "sceneEnded": false
+        "hoursPassed": 0.5,
+        "why": "A half-hour of quiet in the overhang while the coals fade — not yet sleep, not yet morning."
+      }
     },
     "sceneState": {
-      "setting": "Far side of the mountain pass, evening — south-facing rock overhang, fire burned to low orange-red coals throwing warm amber light across the stone. Pell's head against Silas's shoulder, hands released from his forearms, both of them warm in the close air of the overhang.",
+      "setting": "Far side of the mountain pass, late evening — south-facing rock overhang, coals now orange-red fading toward grey, light lower than before, pine-smell from the open valley side coming in at the oilcloth's edge.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Against Silas's chest, open-faced, breathing slower now — the last of the management gone, nothing held back."
+          "state": "Back against Silas's chest, her hand resting on his forearm without gripping — breathing slow, fully down, the managemen"
         },
         {
           "name": "Huginn",
-          "state": "Motionless on the stone lip. Unmoved. A dark shape in the low light."
+          "state": "Motionless on the stone lip above — attending, not watching; the distinction is legible."
         }
       ],
       "objects": [
         "Memory (spear, leaned against the overhang wall)",
-        "Resin Mountain Wine (open, last pour remaining, on the flat stone — still untouc",
+        "Resin Mountain Wine (last pour, on the flat stone — still untouched, catching th",
         "Pell's shirt (on the stone)",
         "Silas's shirt (dropped on the stone beside Pell's)",
-        "Oilcloth Fold (Pell's, propped as windbreak)",
+        "Oilcloth Fold (propped as windbreak, not quite reaching the edge)",
         "Valve Failure Timeline note — 'S-gate confirmed' annotated (in pocket)",
         "Contact Names Scrap (Sorel, Leth) (in pocket)",
         "River Purification Tabs vial (in inner pack pocket)",
-        "Fire-ring of flat stones — coals orange-red and burning low",
-        "Rock overhang — south-facing, dry underside, holding warmth close"
+        "Fire-ring of flat stones — coals orange-red fading, one recent ash-collapse"
       ],
       "threads": [
         "The last pour of Resin Mountain Wine sits untouched on the flat stone.",
-        "The coals are burning very low — the fire will not last much longer.",
-        "Edge District bearing — Leth and Sorel as first contacts.",
+        "The coals are nearly spent — the fire's last warmth is the warmth that remains now.",
+        "Edge District bearing — Leth and Sorel as first contacts; the descent begins in the morning.",
         "The buried vault head: six-week window, expert needed before week five.",
-        "Morning will come early on the far side of the pass."
+        "Huginn is attending the night side of the pass — the bird can see what is ending on the far slope."
       ]
     }
   },
@@ -2384,7 +2364,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Named plainly by Silas — Pell Marsh — and asked directly. Answered yes without qualification or armor. The ledger she is always managing is open.",
         "[d2] Named two wants plainly and without armor — slower, and don't stop looking at her. The second one came quieter, like she hadn't decided to say it.",
         "[d2] The slap landed and broke her rhythm for a half-second — she exhaled it out and pressed back with her weight. Still unguarded; answering in motion.",
         "[d2] Went still at the mouth on her neck — then tilted her head to give more, leaned her full weight back into Silas, let the pace have her. Hips beginning to answer the rhythm, asking ",
@@ -2393,17 +2372,18 @@
         "[d2] Drawn back against Silas's chest — angle changed, hold changed; hands on his forearms, face open in the firelight, breath short and climbing.",
         "[d2] Asked plainly for the pace back — named it with the armor down, no management, no qualifier.",
         "[d2] Asked plainly — 'more, please' — the please smaller than the rest, unmanaged, not taken back.",
-        "[d2] Fully unguarded at the close — said Silas's name plainly, stopped managing, stayed present through to the end without armor. The habit broke entirely for the length of the overhang"
+        "[d2] Fully unguarded at the close — said Silas's name plainly, stopped managing, stayed present through to the end without armor. The habit broke entirely for the length of the overhang",
+        "[d2] Resting fully against Silas in the overhang's quiet — hand on his forearm, breathing all the way down, no management. The habit has not returned."
       ],
       "knownFacts": [
-        "Her body's asking comes before her words do — she rolls her hips into the pace rather than speaking it.",
         "Names want without management when the moment takes the ledger from her — the second half of the ask was the one she hadn't decided to say.",
         "Stays in the open rather than recovering composure once it has slipped.",
         "Names Silas plainly, without management, when the moment takes the last of her composure.",
         "Names the request plainly when the slow pace makes evasion impossible — the ask comes through without ledger-close.",
         "Names what she wants without the ledger when the slow pace makes evasion impossible — the please comes from below the accounting.",
         "Names Silas plainly, without management, when the last of it is taken from her.",
-        "Stops talking when the management has nowhere left to go — presence instead of words."
+        "Stops talking when the management has nowhere left to go — presence instead of words.",
+        "Stays in the warmth without reassembling the armor — the rest after is as unguarded as the moment itself."
       ],
       "skillsObserved": [
         "reading a stain pattern independently against a known failur",
@@ -2414,7 +2394,7 @@
         "setting terms and holding them cleanly through the full sequ"
       ],
       "status": "active",
-      "statusNote": "At the overhang camp on the far side of the pass, warm against Silas, armor down — the road to the Edge District begins in the morning.",
+      "statusNote": "At the overhang camp on the far side of the pass — warm against Silas, armor fully down, breathing slow. The descent to the Edge District begins at morning.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -3534,16 +3514,16 @@
     }
   },
   "tendencies": {
-    "strategic": 52.72890353419382,
-    "cerebral": 35.113847503915146,
-    "social": 50.62839792778543,
-    "generous": 12.39376661515456,
-    "cautious": 45.5763176209025,
-    "physical": 3.062795044575206,
-    "risky": 8.62421475981742,
-    "ruthless": 3.792292122784583,
-    "carousing": 2.662956127984264,
-    "amorous": 2.925625
+    "strategic": 51.41068094583897,
+    "cerebral": 34.236001316317264,
+    "social": 49.36268797959079,
+    "generous": 12.083922449775695,
+    "cautious": 44.436909680379934,
+    "physical": 2.986225168460826,
+    "risky": 8.408609390821985,
+    "ruthless": 3.6974848197149686,
+    "carousing": 2.5963822247846573,
+    "amorous": 3.852484375
   },
   "aptitudes": [
     "strategist",
@@ -3556,7 +3536,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 321,
+  "actionCount": 322,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3698,8 +3678,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784184220397,
-  "rev": 444,
+  "updatedAt": 1784184384534,
+  "rev": 445,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4262,7 +4242,7 @@
   "syncedAt": 1784183539045,
   "teachers": {},
   "regionsKnown": {
-    "valley": 131
+    "valley": 132
   },
   "foreclosed": [
     "rootkin",

@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 7,
-  "xp": 691,
+  "xp": 696,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -43,8 +43,8 @@
     "violence_peace": 0.09798375000000001,
     "chaos_order": 0.15848824448093873,
     "mechanical_spiritual": 0.16517695395990592,
-    "concrete_abstract": -0.08911942715239332,
-    "death_life": -0.16426900924655935,
+    "concrete_abstract": -0.09466345579477364,
+    "death_life": -0.15105555878423138,
     "emotional_logical": 0.048249999999999994,
     "falsehood_truth": 0.04000000000000001,
     "demonic_angelic": 0.03,
@@ -54,7 +54,7 @@
   "maxHealth": 60,
   "health": 60,
   "maxEnergy": 130,
-  "energy": 44,
+  "energy": 39,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1743,93 +1743,109 @@
         "player": "Ask her about what she thinks she hadn't earned, then as about what she felt when the collar rang when we both touched it.",
         "summary": "Pell names the oblique mark as accuracy, not modesty — and admits the collar rang like being named to something she isn't saying aloud.",
         "narration": "The road flattens for a stretch between two fence-lines, the wet grass pressing close on either side, and you let the question come out plainly. \"What do you think you hadn't earned?\" Not accusatory — genuine. The oblique mark is sitting between you like a stone neither of you has stepped over yet.\n\nPell walks three paces before she answers. The oilcloth shifts on her shoulders. \"A maker's mark is a claim,\" she says. \"You cut it into your own work and you're saying: this is mine, I know what I'm doing, hold me to it.\" Her eyes stay on the road ahead. \"I'd been at the forge two years. I knew my way around the pit, I could set a weld, I could read a heat. But I didn't know the limits of what I didn't know yet.\" A pause, long enough that Huginn has time to drop from the air to a fence-post and back up again. \"The oblique meant I wasn't making the full claim. It's not modesty. It's not — \" she stops, and starts again more cleanly. \"It's accuracy. I'd rather cut the mark wrong and be honest about it than cut it straight and be lying.\"\n\nYou let that settle for a moment, then: \"And the collar. When we both had our hands on it and it rang.\"\n\nShe is quiet longer this time. The mist is thinning ahead, and you can see the treeline rising against the grey-white sky. When Pell speaks again, her voice has dropped a register — not softer, just less managed. \"I didn't expect it.\" She glances at you, just briefly, and looks away again. \"I've set bindings before. I know what a clean seat sounds like when the rune takes. That was not that.\" Her jaw shifts. \"It felt like — like being named to something. Not the spear. Not the repair.\" She doesn't finish the sentence. Huginn croaks once from the fence-post twenty yards ahead and she looks at him flatly. \"Your bird has bad timing.\"\n\n\"He always does,\" you say. But you heard the unfinished sentence, and so did she, and neither of you pretend otherwise."
+      },
+      {
+        "player": "Finish her sentence for her — name what you think she was going to say.",
+        "summary": "Silas finishes Pell's sentence — a collar ring like being named to something she hadn't started; she receives it and walks with it open.",
+        "narration": "The road is quiet for another twenty paces before you say it.\n\n\"Being named to something you weren't ready to put a word to yet.\" You don't look at her. The wet fence-posts move past on both sides, and Huginn rides the grey air ahead without a wingbeat. \"Not belonging to it, not claiming it — just recognized by it. The way the collar rang wasn't a confirmation. It was an introduction.\"\n\nPell doesn't answer immediately. Her boots find the dry edge of a rut and she stays there, and you can feel her deciding whether to let you be right or to correct you on a technicality. She does neither. \"Something like that,\" she says at last, and her voice has the texture of a thing set down carefully. \"I've had work ring before. A weld that seated true, a temper that hit the mark. Those ring like — like finishing a sentence correctly.\" A pause. \"This was different. It rang like a sentence I hadn't started.\"\n\nHuginn drops to a fence-post thirty yards ahead and faces back toward you both. Watching. The mist is thinning enough now that you can see the treeline properly — dark and wet, a quarter mile north, and the pale smear of the road running into it.\n\nShe doesn't finish the thought further. But she doesn't close it either — just walks with it open between you, which is its own kind of answer."
       }
     ],
     "lastTurn": {
-      "narration": "The road flattens for a stretch between two fence-lines, the wet grass pressing close on either side, and you let the question come out plainly. \"What do you think you hadn't earned?\" Not accusatory — genuine. The oblique mark is sitting between you like a stone neither of you has stepped over yet.\n\nPell walks three paces before she answers. The oilcloth shifts on her shoulders. \"A maker's mark is a claim,\" she says. \"You cut it into your own work and you're saying: this is mine, I know what I'm doing, hold me to it.\" Her eyes stay on the road ahead. \"I'd been at the forge two years. I knew my way around the pit, I could set a weld, I could read a heat. But I didn't know the limits of what I didn't know yet.\" A pause, long enough that Huginn has time to drop from the air to a fence-post and back up again. \"The oblique meant I wasn't making the full claim. It's not modesty. It's not — \" she stops, and starts again more cleanly. \"It's accuracy. I'd rather cut the mark wrong and be honest about it than cut it straight and be lying.\"\n\nYou let that settle for a moment, then: \"And the collar. When we both had our hands on it and it rang.\"\n\nShe is quiet longer this time. The mist is thinning ahead, and you can see the treeline rising against the grey-white sky. When Pell speaks again, her voice has dropped a register — not softer, just less managed. \"I didn't expect it.\" She glances at you, just briefly, and looks away again. \"I've set bindings before. I know what a clean seat sounds like when the rune takes. That was not that.\" Her jaw shifts. \"It felt like — like being named to something. Not the spear. Not the repair.\" She doesn't finish the sentence. Huginn croaks once from the fence-post twenty yards ahead and she looks at him flatly. \"Your bird has bad timing.\"\n\n\"He always does,\" you say. But you heard the unfinished sentence, and so did she, and neither of you pretend otherwise.",
-      "sceneSummary": "Pell names the oblique mark as accuracy, not modesty — and admits the collar rang like being named to something she isn't saying aloud.",
+      "narration": "The road is quiet for another twenty paces before you say it.\n\n\"Being named to something you weren't ready to put a word to yet.\" You don't look at her. The wet fence-posts move past on both sides, and Huginn rides the grey air ahead without a wingbeat. \"Not belonging to it, not claiming it — just recognized by it. The way the collar rang wasn't a confirmation. It was an introduction.\"\n\nPell doesn't answer immediately. Her boots find the dry edge of a rut and she stays there, and you can feel her deciding whether to let you be right or to correct you on a technicality. She does neither. \"Something like that,\" she says at last, and her voice has the texture of a thing set down carefully. \"I've had work ring before. A weld that seated true, a temper that hit the mark. Those ring like — like finishing a sentence correctly.\" A pause. \"This was different. It rang like a sentence I hadn't started.\"\n\nHuginn drops to a fence-post thirty yards ahead and faces back toward you both. Watching. The mist is thinning enough now that you can see the treeline properly — dark and wet, a quarter mile north, and the pale smear of the road running into it.\n\nShe doesn't finish the thought further. But she doesn't close it either — just walks with it open between you, which is its own kind of answer.",
+      "sceneSummary": "Silas finishes Pell's sentence — a collar ring like being named to something she hadn't started; she receives it and walks with it open.",
       "choices": [
         {
-          "label": "Finish her sentence for her — name what you think she was going to say.",
+          "label": "Say nothing — let it sit. Walk beside her and let the open sentence be enough.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {
-            "death_life": 0.1,
-            "concrete_abstract": -0.2
-          },
-          "difficulty": 15,
+          "axes": {},
+          "difficulty": 0,
           "intentTags": [
-            "press",
-            "name",
-            "risky"
+            "careful",
+            "wait"
           ],
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Let it stand unfinished — tell her you felt it too, and leave it at that.",
+          "label": "Tell her what Memory rang like from your side — not a mirror of hers, the actual thing you heard when it rang.",
           "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "emotional_logical": -0.2
-          },
+          "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "acknowledge",
-            "careful"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask when she cut the full mark straight for the first time — and whether she thought she'd earned it then.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "concrete_abstract": -0.1
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study",
+            "open",
             "connect"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Look for a flat stretch of road ahead — call the spar now, before the thought goes cold.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {
-            "violence_peace": -0.1,
-            "chaos_order": 0.1
-          },
-          "difficulty": 15,
+          "label": "Turn it practical — ask what she wants to know about the rune-work before you're standing at a failed valve housing.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": 0,
           "intentTags": [
-            "spar",
-            "physical",
+            "plan",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Huginn directly — out loud, in front of Pell — whether the spear rang for him too.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "risky",
             "gamble"
           ],
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
       "scene": {
-        "setting": "The upper meadow north of Millbrook — old stone road between two fence-lines, wet grass, mist thinning to the north. Treeline visible against grey-white sky ahead.",
+        "setting": "Old stone road between two fence-lines north of Millbrook — wet grass, mist thinning, treeline visible a quarter mile ahead. Huginn perched on a fence-post thirty yards north, facing back.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Walking beside Silas, oilcloth on, eyes on the road — the unfinished sentence still in the air between them."
+            "state": "Walking beside Silas, oilcloth on, the open sentence still between them — received but not closed."
           },
           {
             "name": "Huginn",
-            "state": "Perched on a fence-post twenty yards ahead, watching them both with unhurried patience."
+            "state": "Perched on a fence-post thirty yards ahead, watching them both, facing back down the road."
           }
         ],
         "objects": [
           "Memory (spear, in Silas's left hand)",
           "Pell's oilcloth",
-          "Muddy stone road north — wheel-ruts with standing water",
+          "Muddy stone road — wheel-ruts with standing water",
           "Fence-posts, two lines, wet grass pressing between them"
         ],
         "threads": [
-          "Pell's unfinished sentence — 'being named to something' — sits open between them.",
+          "Pell's sentence — 'a sentence I hadn't started' — sits open between them, received but unfinished.",
           "Spar terms agreed — first tap, flat ground — waiting for flat road.",
           "The actor who moved through the archive is ahead of them on the road.",
           "Leth holds the engineer's name and the thread to the archive breach."
@@ -1840,14 +1856,15 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Named the oblique mark as accuracy not modesty — she'd rather cut wrong and be honest than straight and lying. Named the collar ring as 'being named to something' and did not finish the sentence.",
+          "role": "Village blacksmith, Millbrook",
+          "note": "Received Silas's completion of her sentence without correction — named the collar ring as a sentence she hadn't started, and walked with it open.",
           "learned": [
-            "Cut the maker's mark oblique because she couldn't claim full competence honestly — accuracy, not modesty",
-            "The collar's ring when both hands touched Memory felt like being named to something — her words, unfinished"
+            "Describes the collar ring as different from a work-ring — not finishing a sentence correctly, but a sentence not yet started"
           ],
+          "skillsObserved": [],
           "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "Walking north with Silas toward Fen's intake — the unfinished sentence between them, the spar terms agreed and waiting for flat ground."
+          "statusNote": "Walking north with Silas toward Fen's intake — the open sentence between them, the spar terms waiting for flat ground."
         }
       ],
       "codexUpdates": [
@@ -1856,39 +1873,39 @@
           "label": "Pell",
           "kind": "person",
           "entityId": "pell",
-          "fact": "The oblique maker's mark was accuracy: she wouldn't claim what she hadn't fully earned. The collar's ring when both hands touched Memory felt to her like being named to something — she did not finish saying what.",
+          "fact": "Named the collar ring as a sentence she hadn't started — distinct from the satisfaction of finished work. Received Silas's completion without correction and walked with it open.",
           "links": [
+            "memory-the-spear",
             "millbrook",
-            "the-unnamed-gift",
-            "memory-the-spear"
+            "the-unnamed-gift"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short stretch of walking and talking on the north road — a few minutes at most."
+        "why": "A few minutes walking and talking on the north road — a short beat."
       }
     },
     "sceneState": {
-      "setting": "The upper meadow north of Millbrook — old stone road between two fence-lines, wet grass, mist thinning to the north. Treeline visible against grey-white sky ahead.",
+      "setting": "Old stone road between two fence-lines north of Millbrook — wet grass, mist thinning, treeline visible a quarter mile ahead. Huginn perched on a fence-post thirty yards north, facing back.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Walking beside Silas, oilcloth on, eyes on the road — the unfinished sentence still in the air between them."
+          "state": "Walking beside Silas, oilcloth on, the open sentence still between them — received but not closed."
         },
         {
           "name": "Huginn",
-          "state": "Perched on a fence-post twenty yards ahead, watching them both with unhurried patience."
+          "state": "Perched on a fence-post thirty yards ahead, watching them both, facing back down the road."
         }
       ],
       "objects": [
         "Memory (spear, in Silas's left hand)",
         "Pell's oilcloth",
-        "Muddy stone road north — wheel-ruts with standing water",
+        "Muddy stone road — wheel-ruts with standing water",
         "Fence-posts, two lines, wet grass pressing between them"
       ],
       "threads": [
-        "Pell's unfinished sentence — 'being named to something' — sits open between them.",
+        "Pell's sentence — 'a sentence I hadn't started' — sits open between them, received but unfinished.",
         "Spar terms agreed — first tap, flat ground — waiting for flat road.",
         "The actor who moved through the archive is ahead of them on the road.",
         "Leth holds the engineer's name and the thread to the archive breach."
@@ -2040,7 +2057,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Running the geometry of the archive breach against the structural evidence without being prompted — the pattern is landing.",
         "[d2] Still running structural geometry — a fourth room or site in the same design is landing for her without prompting.",
         "[d2] Named the four-site pattern as a single operating system, deliberately restarted. Placed the outbound boot prints as the actor's departure vector — they went out, not in.",
         "[d2] Already through the back door before the farewells finished — facing north, pace set, no ceremony.",
@@ -2049,17 +2065,18 @@
         "[d2] Named her spar condition plainly — when she taps you, tell her what you were thinking, not what went wrong. Same offer in return. Accepted 'flat ground, first tap' without ceremony",
         "[d2] Named Silas's stance plainly — weight-back, butt-grounded, watching the road, not the gap. A step cost when the first move is his. Then walked without ceremony.",
         "[d2] Read standing weight versus moving weight as two distinct reads — named the oblique maker's mark plainly: a line she hadn't earned, and she'd make the same choice again.",
-        "[d2] Named the oblique mark as accuracy not modesty — she'd rather cut wrong and be honest than straight and lying. Named the collar ring as 'being named to something' and did not finis"
+        "[d2] Named the oblique mark as accuracy not modesty — she'd rather cut wrong and be honest than straight and lying. Named the collar ring as 'being named to something' and did not finis",
+        "[d2] Received Silas's completion of her sentence without correction — named the collar ring as a sentence she hadn't started, and walked with it open."
       ],
       "knownFacts": [
-        "Packs forge-worker style: compact, oilcloth on top, shelter first",
         "Silas assessed her kit while she was walking and will own it when called on it",
         "Wants to understand how Silas's head works when it's moving — spar is as much diagnostic as sport",
         "Silas's weight sits back — ready-stance, half-second read before committing. Spear butt grounded is his tell. Costs him initiative when he's the one attacking.",
         "Distinguishes standing-weight read from moving-weight read as separate diagnostic tools",
         "The oblique on her maker's mark was a deliberate choice — not error, not modesty, but a refusal to claim what she hadn't earned",
         "Cut the maker's mark oblique because she couldn't claim full competence honestly — accuracy, not modesty",
-        "The collar's ring when both hands touched Memory felt like being named to something — her words, unfinished"
+        "The collar's ring when both hands touched Memory felt like being named to something — her words, unfinished",
+        "Describes the collar ring as different from a work-ring — not finishing a sentence correctly, but a sentence not yet started"
       ],
       "skillsObserved": [
         "naming a technical and personal observation in the same regi",
@@ -2070,7 +2087,7 @@
         "reads a fighter's stance from walking observation, names it "
       ],
       "status": "active",
-      "statusNote": "Walking north with Silas toward Fen's intake — the unfinished sentence between them, the spar terms agreed and waiting for flat ground.",
+      "statusNote": "Walking north with Silas toward Fen's intake — the open sentence between them, the spar terms waiting for flat ground.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2618,7 +2635,6 @@
         "label": "Pell",
         "kind": "person",
         "facts": [
-          "[d2] Two more craft-marks found: a compression line at the left floating rib from years of a working belt, and a small circular scar high on the right ribcage — precise, the shape of something hot that was",
           "[d2] Two more craft-scars found below: a curved tong-slip scar on the outer left hip (old, silver, traced and kissed) and a small precise round scar at the inner hipbone crest — flat, the shape of a rivet ",
           "[d2] Spent the full early morning of World-day 15 with Silas in the forge — honest and unhurried from start to finish. Her only register is plain: plain permission, plain staying, plain reckoning at the en",
           "[d2] Found the old burn-scar at Silas's lower-left ribs — named it not a forge mark by texture alone, then answered it with her mouth and open hands rather than asking its origin aloud.",
@@ -2641,7 +2657,8 @@
           "[d2] Deathsense confirms the repair complete — death-register runs clean end to end, load-bearing through the deepened transverse, caught by the capacitor. The maker's mark's oblique axis reads as Pell's s",
           "[d2] Named 'Memory' at dawn in Pell's forge — the name given over wine and starfruit, in the presence of Pell and Huginn. The oblique axis of Pell's maker's mark interpreted as room made: for something fou",
           "[d2] Reads a fighter's ready-stance from walking observation — named Silas's weight-back posture and grounded spear-butt as tells before the first spar word was spoken.",
-          "[d2] The oblique maker's mark was accuracy: she wouldn't claim what she hadn't fully earned. The collar's ring when both hands touched Memory felt to her like being named to something — she did not finish "
+          "[d2] The oblique maker's mark was accuracy: she wouldn't claim what she hadn't fully earned. The collar's ring when both hands touched Memory felt to her like being named to something — she did not finish ",
+          "[d2] Named the collar ring as a sentence she hadn't started — distinct from the satisfaction of finished work. Received Silas's completion without correction and walked with it open."
         ],
         "links": [
           "huginn",
@@ -3110,15 +3127,15 @@
     }
   },
   "tendencies": {
-    "strategic": 60.28739634899589,
-    "cerebral": 41.43771506158988,
-    "social": 62.35132978440289,
-    "generous": 16.928382352698968,
-    "cautious": 47.93605002232743,
-    "physical": 0.7717961835381156,
-    "risky": 2.566736080863126,
-    "ruthless": 1.92234061499875,
-    "carousing": 1.3292676648295816
+    "strategic": 59.98595936725091,
+    "cerebral": 41.230526486281924,
+    "social": 62.03957313548088,
+    "generous": 16.843740440935473,
+    "cautious": 47.69636977221579,
+    "physical": 0.7679372026204251,
+    "risky": 3.5539024004588105,
+    "ruthless": 1.9127289119237563,
+    "carousing": 1.3226213265054336
   },
   "aptitudes": [
     "strategist",
@@ -3126,7 +3143,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 275,
+  "actionCount": 276,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3252,8 +3269,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13693&nologo=true",
-  "updatedAt": 1784171356028,
-  "rev": 378,
+  "updatedAt": 1784171553561,
+  "rev": 379,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3815,7 +3832,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 77
+    "valley": 78
   },
   "foreclosed": [
     "rootkin",

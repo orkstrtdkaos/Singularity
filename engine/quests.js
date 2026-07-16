@@ -167,6 +167,7 @@ export function structuredQuestRecord(def) {
     premise: def.premise || "", stakes: def.stakes || "", axis: def.axis || null,
     traditions: def.traditions || [], giver: def.giver || null, legend: def.legend || null,
     region: def.region || null, tier: def.tier || null,
+    arcId: def.arcId || null, locationId: def.locationId || null,   // SNG-112: shared-arc key + own place (parallel player quests)
     stages: (def.stages || []).map(s => ({ id: s.id, objective: s.objective, condition: s.condition, change: s.change })),
     routes: def.routes || {},
     outcomes: (def.outcomes || []).map(o => ({
@@ -322,16 +323,51 @@ export function resolveStructuredQuest(character, questId, outcomeId, ctx = {}) 
   return { ok: true, outcome, applied, xp };
 }
 
-/** Which authored quests are STARTABLE for a character here: not already in the log, and either
- *  their giver is present in the scene or their region matches the character's current region. */
+/** SNG-112: has the player already TOUCHED this quest's thread? True when they already KNOW one
+ *  of its people (its giver or legend is in their npc registry, disposition, or codex), or another
+ *  quest they hold references the same people. A continuation surfaces; a cold unrelated arc does not.
+ *  Region is deliberately NOT a thread signal — a shared region is not a shared story. */
+export function threadTouched(def, character) {
+  const ids = [def.giver, def.legend, ...(def.entities || [])].filter(Boolean).map(x => slugify(x));
+  if (!ids.length) return false;
+  const known = new Set();
+  for (const k of Object.keys(character.npcRegistry || {})) known.add(slugify(k));
+  for (const k of Object.keys(character.peopleDisposition || {})) known.add(slugify(k));
+  for (const t of Object.values(character.codex?.topics || {})) { if (t.entityId) known.add(slugify(t.entityId)); if (t.id) known.add(slugify(t.id)); }
+  if (ids.some(id => known.has(id))) return true;
+  // another quest already on the same thread's people (giver/legend by id or resolved entity id)
+  for (const q of character.quests || []) {
+    const qref = [q.giver, q.giverEntityId, q.legend].filter(Boolean).map(x => slugify(x));
+    if (qref.some(r => ids.includes(r))) return true;
+  }
+  return false;
+}
+
+/** Which authored quests are STARTABLE for a character here. SNG-112: sharing a REGION is no longer
+ *  enough — a region holds many places and threads, so a bare region match used to push an unrelated
+ *  arc into the scene (Cellaceron's Fendt quest surfaced to off-thread, far-away Silas). A real
+ *  connection must hold: the giver is present, the player is AT or ADJACENT to the quest's location
+ *  (its own locationId, else the giver's home via ctx.npcHomes), or the player has already TOUCHED the
+ *  quest's thread. Region is a soft signal ONLY on an explicit browse surface (ctx.board — a quest
+ *  board the player chose to open), never an automatic interruption. Parallel arcs: a player already
+ *  holding a quest on a shared def.arcId is not offered a second instance of the same arc. */
 export function availableStructuredQuests(character, catalog = [], ctx = {}) {
   const have = new Set((character.quests || []).map(q => q.id));
+  const heldArcs = new Set((character.quests || []).map(q => q.arcId).filter(Boolean));
   const sceneNames = (ctx.sceneNpcNames || []).map(n => String(n).toLowerCase());
+  const near = new Set([ctx.locationId, ...(ctx.adjacentLocationIds || [])].filter(Boolean)); // at OR adjacent
+  const npcHomes = ctx.npcHomes || {};
+  const noContext = !ctx.region && !ctx.locationId && !ctx.sceneNpcNames && !ctx.board; // e.g. a bare board → offer all
   return (catalog || []).filter(isRealQuest).filter(def => {
     if (have.has(slugify(def.id))) return false;
-    if (ctx.region && def.region && def.region === ctx.region) return true;
-    if (def.giver && sceneNames.some(n => namesMatch(n, def.giver))) return true;
-    return !ctx.region && !ctx.sceneNpcNames; // no context → offer all (e.g. a quest board)
+    if (def.arcId && heldArcs.has(def.arcId)) return false;                 // one instance per shared arc
+    if (noContext) return true;
+    if (def.giver && sceneNames.some(n => namesMatch(n, def.giver))) return true;   // (1) giver present
+    const questLoc = def.locationId || (def.giver ? npcHomes[slugify(def.giver)] : null); // (2) proximity
+    if (questLoc && near.has(questLoc)) return true;
+    if (threadTouched(def, character)) return true;                          // (3) thread touched
+    if (ctx.board && ctx.region && def.region && def.region === ctx.region) return true; // (4) explicit browse only
+    return false;
   });
 }
 

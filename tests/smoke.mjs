@@ -10,7 +10,7 @@ import { newProfile, updateProfile, aptitudeMods, deriveAptitudes, ensureCharact
 import { normalizeInventory, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, resolveInventoryItem, dedupeInventory } from "../engine/inventory.js";
 import { newClock, readClock, advanceClock, getWorldEpoch, absoluteWorldDay, worldDate, worldDayAt, relativeWorldDays } from "../engine/worldtime.js";
 import { companionBonus, companionsForGM, activeCompanions } from "../engine/companions.js";
-import { applyQuestUpdates, questsForGM, slugify, resolveQuest, dedupeQuests, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM } from "../engine/quests.js";
+import { applyQuestUpdates, questsForGM, slugify, resolveQuest, dedupeQuests, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, threadTouched } from "../engine/quests.js";
 import { sanitizeScene, buildTurnContext, sanitizeIntent, narrativeRegister, ratingRegister, renderSceneHistory } from "../engine/gm.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, findExistingNpc, prettifyNpcName, relationshipBand } from "../engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
@@ -2613,10 +2613,51 @@ await (async () => {
   const legRes = resolveStructuredQuest(legacyChar, "legacy_q", "o1", { worldDay: 5 });
   check("SNG-BOUNDARY-1: a legacy prose-only outcome still resolves via the fallback parser", legRes.ok && legacyChar.peopleDisposition.verist >= 1 && legacyChar.chronicle.some(c => c.kind === "quest_resolved"));
 
-  // availability gating: region match offers it, already-held excludes it
-  const fresh = { quests: [] };
-  const avail = availableStructuredQuests(fresh, defs, { region: ledger.region });
-  check("SNG-065: a quest is offered where its region matches, and not once it's in the log", avail.some(d => d.id === ledger.id) && !availableStructuredQuests(char, defs, { region: ledger.region }).some(d => d.id === ledger.id));
+  // availability gating: already-held excludes it (char holds the ledger from above, now resolved)
+  check("SNG-065: a quest already in the log is never re-offered", !availableStructuredQuests(char, defs, { locationId: "radiant_plateau_edge", npcHomes: { fendt: "radiant_plateau_edge" } }).some(d => d.id === ledger.id));
+})();
+
+// --- SNG-112: quest offers gated by proximity/thread, not bare region ---
+(() => {
+  const qf = JSON.parse(readFileSync(join(root, "content/packs/valley/quests.json"), "utf8"));
+  const defs = qf.quests || [];
+  const ledger = defs.find(d => d.id === "the_edge_district_ledger"); // region valley, giver fendt (home radiant_plateau_edge), no locationId
+  const homes = { fendt: "radiant_plateau_edge" };
+  const offers = ctx => availableStructuredQuests({ quests: [] }, defs, ctx).some(d => d.id === ledger.id);
+  const off = (ctx, extra) => availableStructuredQuests({ quests: [], ...extra }, defs, ctx).some(d => d.id === ledger.id);
+
+  // THE LEAK, CLOSED: sharing the region but far from the place and off the thread → NOT offered.
+  check("SNG-112: bare region match no longer pushes a quest into the scene",
+    !offers({ region: "valley", locationId: "somewhere_else", adjacentLocationIds: [], sceneNpcNames: [], npcHomes: homes }));
+  // proximity: AT the quest's place (giver's home) → offered.
+  check("SNG-112: a quest is offered when the player is AT its location (the giver's home)",
+    offers({ region: "valley", locationId: "radiant_plateau_edge", sceneNpcNames: [], npcHomes: homes }));
+  // proximity: ADJACENT to the quest's place → offered.
+  check("SNG-112: a quest is offered when the player is ADJACENT to its location",
+    offers({ region: "valley", locationId: "elsewhere", adjacentLocationIds: ["radiant_plateau_edge"], sceneNpcNames: [], npcHomes: homes }));
+  // giver present (regression — the pre-existing real connection is kept).
+  check("SNG-112: giver present still offers the quest regardless of place",
+    offers({ region: "valley", locationId: "far_away", sceneNpcNames: ["Fendt"], npcHomes: homes }));
+  // thread touched: the player already KNOWS the giver → a continuation surfaces even when far.
+  check("SNG-112: a quest surfaces when its thread is already touched (giver known), even far off",
+    off({ region: "valley", locationId: "far_away", npcHomes: homes }, { peopleDisposition: { fendt: 2 } }));
+  check("SNG-112: threadTouched is true when the giver is in the codex, false for a stranger",
+    threadTouched(ledger, { codex: { topics: { t1: { entityId: "fendt", facts: [] } } } }) &&
+    !threadTouched(ledger, { npcRegistry: {}, peopleDisposition: {}, codex: { topics: {} } }));
+  // explicit browse surface: a quest board the player opened may list region quests (player-initiated, not a push).
+  check("SNG-112: region listing returns ONLY on an explicit board browse (ctx.board)",
+    offers({ region: "valley", board: true }) && !offers({ region: "valley" }));
+  // no context at all → offer all (a bare board with no place still lists everything).
+  check("SNG-112: no context → offer all (backward-safe for context-free callers)", offers({}));
+
+  // parallel player quests on a shared arc: holding one instance suppresses another on the same arcId.
+  const arcA = { id: "fendt_silas", name: "Silas & Fendt", arcId: "fendt_ledger", giver: "fendt", stakes: "s", stages: [{ id: "s1", objective: "o", condition: "c", change: "ch" }], outcomes: [{ id: "o1", name: "done", summary: "x" }] };
+  const arcB = { id: "fendt_canon", name: "The Canonical Fendt", arcId: "fendt_ledger", giver: "fendt", stakes: "s", stages: [{ id: "s1", objective: "o", condition: "c", change: "ch" }], outcomes: [{ id: "o1", name: "done", summary: "x" }] };
+  const arcChar = { quests: [] };
+  const startedArc = startStructuredQuest(arcChar, arcA, {});
+  check("SNG-112: a structured quest record carries its arcId (shared-arc key)", startedArc.ok && arcChar.quests[0].arcId === "fendt_ledger");
+  const arcAvail = availableStructuredQuests(arcChar, [arcB], { sceneNpcNames: ["Fendt"], npcHomes: {} });
+  check("SNG-112: holding one instance of a shared arc suppresses another instance of the same arc", !arcAvail.some(d => d.id === "fendt_canon"));
 })();
 
 // --- SNG-056: the GM moveTo op resolves a place ref to the authoritative location id ---

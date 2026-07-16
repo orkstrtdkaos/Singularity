@@ -7,7 +7,7 @@ import { senseAction, senseTier } from "./engine/sense.js";
 import { recordDeed, standingWith, reputationSummary } from "./engine/reputation.js";
 import { newProfile, updateProfile, aptitudeMods, profileInsight, ensureCharacterStyle, ensureRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, revokeAdultGate, RATING_ORDER, RATING_LEVEL } from "./engine/playerprofile.js";
 import { gmTurn, parseIntent, gmAsk, generateBio, suggestBuild, extractGambit, sanitizeScene, narrativeRegister, ratingRegister } from "./engine/gm.js";
-import { applyQuestUpdates, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM } from "./engine/quests.js";
+import { applyQuestUpdates, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, slugify } from "./engine/quests.js";
 import { applyStateOps, describeCorrection } from "./engine/corrections.js";
 import { getApiKey, setApiKey, callClaudeJSON } from "./engine/claude.js";
 import { generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight } from "./engine/generate.js";
@@ -41,7 +41,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.69";
+const APP_VERSION = "1.8.70";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1583,6 +1583,23 @@ function sharedCanonForGM() {
 /** The current location with the world's spectrum drift applied. */
 function hereNow() {
   return effectiveLocation(CONTENT.locations[character.currentLocationId], character.worldState);
+}
+
+/** SNG-112: the context that decides which authored quests are STARTABLE here — the player's exact
+ *  location + its adjacent locations (proximity), scene NPCs (giver present), and a giver→home map so
+ *  a quest can be offered near its own place, not merely anywhere in a shared region. Region is passed
+ *  but is only a soft signal (a quest board sets ctx.board; the scene never region-pushes). */
+function questOfferContext(character, sceneState) {
+  const here = CONTENT.locations?.[character.currentLocationId];
+  const npcHomes = {};
+  for (const [id, n] of Object.entries(CONTENT.npcs || {})) if (n?.homeLocation) npcHomes[slugify(id)] = n.homeLocation;
+  return {
+    region: here?.regionId || here?.region,
+    locationId: character.currentLocationId,
+    adjacentLocationIds: here?.connections || [],
+    sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name),
+    npcHomes
+  };
 }
 
 // ---------- character creation ----------
@@ -4134,9 +4151,8 @@ function renderQuestLog() {
       <span class="quest-title">${esc(x.title)}</span>${x.structured ? ` <span class="cost">structured${x.axis ? " · " + esc(String(x.axis).replace(/_/g, "↔")) : ""}</span>` : x.giver ? ` <span class="cost">from ${esc(x.giver)}${x.giverEntityId && character.codex?.topics?.[x.giverEntityId] ? " ◈" : ""}</span>` : ""}
       <div class="quest-note">${esc(stageLabel(x))}</div></button>`;
   const section = (title, list) => list.length ? `<div class="codex-group"><div class="codex-group-title">${title} (${list.length})</div>${list.map(row).join("")}</div>` : "";
-  // SNG-065: authored quests startable HERE (giver present / region match).
-  const here = CONTENT.locations?.[character.currentLocationId];
-  const avail = availableStructuredQuests(character, CONTENT.quests || [], { region: here?.regionId || here?.region, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) });
+  // SNG-065/SNG-112: authored quests startable HERE — giver present, at/adjacent to the quest's place, or thread already touched (not bare region).
+  const avail = availableStructuredQuests(character, CONTENT.quests || [], questOfferContext(character, sceneState));
   const availSection = avail.length ? `<div class="codex-group"><div class="codex-group-title">Available here (${avail.length})</div>${avail.map(def => `
       <div class="quest" style="margin:3px 0">
         <span class="quest-title">${esc(def.name)}</span> <span class="cost">${esc(String(def.axis || "").replace(/_/g, "↔"))}</span>
@@ -4859,7 +4875,7 @@ function renderPlay(turn, opts = {}) {
         return `<button class="quest quest-click" data-quest="${esc(q.id)}"><span class="quest-title">${esc(q.title)}</span>${q.structured ? ` <span class="cost">✦</span>` : ""}
           <div class="quest-note">${esc(q.structured ? (stage?.objective || "resolve") : (q.progress?.length ? q.progress[q.progress.length - 1] : q.summary))}</div>
         </button>`; }).join("") || "<div class='insight'>no undertakings yet — the valley will provide</div>"}
-      ${(() => { const here = CONTENT.locations?.[character.currentLocationId]; const avail = availableStructuredQuests(character, CONTENT.quests || [], { region: here?.regionId || here?.region, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) }); return avail.length ? `<div class="hint" style="margin-top:4px">✦ ${avail.length} quest${avail.length === 1 ? "" : "s"} to take up here</div>` : ""; })()}
+      ${(() => { const avail = availableStructuredQuests(character, CONTENT.quests || [], questOfferContext(character, sceneState)); return avail.length ? `<div class="hint" style="margin-top:4px">✦ ${avail.length} quest${avail.length === 1 ? "" : "s"} to take up here</div>` : ""; })()}
       <button class="opt" id="open-questlog" style="display:block;width:100%;margin-top:4px">📜 Quest Log${(character.quests || []).some(q => q.status !== "active") ? ` — ${(character.quests || []).filter(q => q.status === "completed" || q.status === "resolved").length} done · ${(character.quests || []).filter(q => q.status === "failed").length} failed` : ""}</button>
     </section>
     ${syncEnabled() ? `<section><h3>Party</h3>

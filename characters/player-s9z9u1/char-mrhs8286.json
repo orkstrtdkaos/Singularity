@@ -1875,33 +1875,34 @@
         "player": "Study the spruce stand's root-death with Palework before descending — read whether the fungal die-off is natural or something older working upward",
         "summary": "Palework on the dying spruce stand confirms natural fungal die-off — no connection to the buried structure's contamination.",
         "narration": "You step off the trail into the spruce stand's shadow and crouch at the base of the nearest trunk — bark grey-green with lichen, the lower six inches of wood soft enough to dent with a thumbnail. Palework opens quietly, a flat read rather than a push. You set two fingers against the exposed root-mat and let it tell you what it knows.\n\nThe fungal death is its own thing. Armillaria, or something close enough — the mycelium has been threading this root system for two decades, patient and unremarkable, doing exactly what it does. The amber tinge you half-expected to find linking it to the water-table chemistry below is not there. The chemistry that killed these roots is purely biological: neighbor trees, poor drainage from the snowmelt gradient, a stand that grew too tight too fast after a windfall clearance twenty or thirty years ago. Nothing older working upward. The hillside holds its own ordinary rot here, separate from the system behind you.\n\nYou pull your fingers back and stand. Huginn has not moved from its rock. Pell is watching you with the particular patience she applies to things she doesn't interrupt — not bored, just waiting for the read.\n\n\"Natural,\" you tell her, brushing bark dust from your fingertips. \"The rot up here isn't connected. Whatever's running through the hillside below us stays in the hillside.\" A small thing to confirm, but the confirmation has weight: the buried structure's contamination hasn't begun seeping into the broader root-zone yet. The valley's watershed is sick from one point, not spreading up from below."
+      },
+      {
+        "player": "Push downhill now — pick up pace and try to reach lower ground and better shelter before the afternoon light goes soft",
+        "summary": "Silas and Pell descend two miles from the pass crest to a natural rock overhang with an old fire-ring — someone camps here.",
+        "narration": "The descent from the outcrop is straightforward once you commit to it — loose scree for the first fifty feet, then the ground firms under pine duff and the slope eases into something you can cover at a real pace. Pell falls in behind you without instruction, reading the terrain the same way you do: weight back on the loose sections, weight forward on the compacted, let the legs absorb rather than fight.\n\nHuginn drops from the rock and glides ahead, threading the canopy without effort, landing periodically on a branch just far enough down the slope that it functions as a waypoint. You've stopped wondering whether this is navigation or amusement. Probably both.\n\nBy the time the light begins to flatten and lose its angle, you've covered something like two miles of descent — the pine run thickens around you, the air loses the pass's mineral edge and picks up cold resin and damp needle-fall, and the ground underfoot is genuinely wet now, snowmelt working through the duff to a thin runnel that parallels your line before turning east. Ahead, maybe a hundred yards, the pines thin around a rock shelf that juts from the hillside — a natural overhang, south-facing, the underside dry where the slope sheds water around it. A fire-ring of flat stones sits just inside the overhang's shadow. Old ash, rain-unscattered. Someone camps here, or has.\n\nPell moves up beside you and looks at the ring without comment for a moment. \"Recent?\" she says, not alarmed — practical. The fire-ring is the question. The overhang itself is exactly what you need before the light goes."
       }
     ],
     "lastTurn": {
-      "narration": "You step off the trail into the spruce stand's shadow and crouch at the base of the nearest trunk — bark grey-green with lichen, the lower six inches of wood soft enough to dent with a thumbnail. Palework opens quietly, a flat read rather than a push. You set two fingers against the exposed root-mat and let it tell you what it knows.\n\nThe fungal death is its own thing. Armillaria, or something close enough — the mycelium has been threading this root system for two decades, patient and unremarkable, doing exactly what it does. The amber tinge you half-expected to find linking it to the water-table chemistry below is not there. The chemistry that killed these roots is purely biological: neighbor trees, poor drainage from the snowmelt gradient, a stand that grew too tight too fast after a windfall clearance twenty or thirty years ago. Nothing older working upward. The hillside holds its own ordinary rot here, separate from the system behind you.\n\nYou pull your fingers back and stand. Huginn has not moved from its rock. Pell is watching you with the particular patience she applies to things she doesn't interrupt — not bored, just waiting for the read.\n\n\"Natural,\" you tell her, brushing bark dust from your fingertips. \"The rot up here isn't connected. Whatever's running through the hillside below us stays in the hillside.\" A small thing to confirm, but the confirmation has weight: the buried structure's contamination hasn't begun seeping into the broader root-zone yet. The valley's watershed is sick from one point, not spreading up from below.",
-      "sceneSummary": "Palework on the dying spruce stand confirms natural fungal die-off — no connection to the buried structure's contamination.",
+      "narration": "The descent from the outcrop is straightforward once you commit to it — loose scree for the first fifty feet, then the ground firms under pine duff and the slope eases into something you can cover at a real pace. Pell falls in behind you without instruction, reading the terrain the same way you do: weight back on the loose sections, weight forward on the compacted, let the legs absorb rather than fight.\n\nHuginn drops from the rock and glides ahead, threading the canopy without effort, landing periodically on a branch just far enough down the slope that it functions as a waypoint. You've stopped wondering whether this is navigation or amusement. Probably both.\n\nBy the time the light begins to flatten and lose its angle, you've covered something like two miles of descent — the pine run thickens around you, the air loses the pass's mineral edge and picks up cold resin and damp needle-fall, and the ground underfoot is genuinely wet now, snowmelt working through the duff to a thin runnel that parallels your line before turning east. Ahead, maybe a hundred yards, the pines thin around a rock shelf that juts from the hillside — a natural overhang, south-facing, the underside dry where the slope sheds water around it. A fire-ring of flat stones sits just inside the overhang's shadow. Old ash, rain-unscattered. Someone camps here, or has.\n\nPell moves up beside you and looks at the ring without comment for a moment. \"Recent?\" she says, not alarmed — practical. The fire-ring is the question. The overhang itself is exactly what you need before the light goes.",
+      "sceneSummary": "Silas and Pell descend two miles from the pass crest to a natural rock overhang with an old fire-ring — someone camps here.",
       "choices": [
         {
-          "label": "Descend the pine run and look for the first sign of habitation or a road — move with purpose toward the Edge District",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
+          "label": "Read the fire-ring with Palework — how old, who made it, what ended here last",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "travel",
+            "study",
             "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
+          "abilityId": "palework",
+          "energyCost": 3,
           "trivial": true
         },
         {
-          "label": "Before descending, scan the outcrop and the upper treeline with Order-Sense — read what system or design this far slope is part of",
+          "label": "Read the overhang's place in the larger terrain with Order-Sense — does this camp sit on a deliberate line, a route, a pattern?",
           "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "concrete_abstract": -0.2
-          },
+          "subAttribute": "reason",
           "difficulty": 0,
           "intentTags": [
             "study",
@@ -1909,51 +1910,44 @@
           ],
           "abilityId": "order_sense",
           "energyCost": 2,
+          "trivial": true
+        },
+        {
+          "label": "Make camp at the overhang now — fire-ring, trail parcel, shelter before dark. The questions can wait till morning.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "difficulty": 0,
+          "intentTags": [
+            "careful"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Scout the tree-line east and west before settling — someone who camps here regularly might be close.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
           "trivial": false
-        },
-        {
-          "label": "Ask Pell what she knows about the far side — has she heard anything about settlements, roads, or people north of the pass",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "talk",
-            "plan"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Push downhill now — pick up pace and try to reach lower ground and better shelter before the afternoon light goes soft",
-          "attribute": "physical",
-          "subAttribute": "strength",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "travel",
-            "risky"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
         }
       ],
       "characterDeltas": {
         "health": 0,
-        "energy": -3
+        "energy": 0
       },
       "scene": {
-        "setting": "Far side of the mountain pass, mid-afternoon — flat limestone outcrop just below the crest, Silas standing at the edge of the dying spruce stand with bark dust on his fingers, pine run descending north-northeast ahead, damp ground from snowmelt, old canopy cutting the wind. The valley is no longer visible behind.",
+        "setting": "Far side of the mountain pass, late afternoon — two miles below the crest, at a south-facing rock overhang with a dry underside. A fire-ring of flat stones sits just inside the shadow, filled with old ash that rain hasn't reached. Pine run dense around the shelf; a thin snowmelt runnel runs east nearby.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Standing at the outcrop edge, watching Silas's face — patient, waiting for the read."
+            "state": "Standing beside Silas, looking at the fire-ring — practical, not alarmed, waiting on his read."
           },
           {
             "name": "Huginn",
-            "state": "Settled on the nearby rock, unmoved, watching the spruce stand with mild professional interest."
+            "state": "Perched somewhere in the canopy above the overhang, watching the treeline."
           }
         ],
         "objects": [
@@ -1962,58 +1956,42 @@
           "Valve Failure Timeline note — 'S-gate confirmed' annotated (in pocket)",
           "Contact Names Scrap (Sorel, Leth) (in pocket)",
           "River Purification Tabs vial (in inner pack pocket)",
-          "Flat limestone outcrop — midday rest site, just below the pass crest",
-          "Dying spruce stand — thirty years old, fungal root-death confirmed natural, years yet to fall",
-          "Loose scree slope — behind them, above",
-          "Pine run — ahead, descending north-northeast"
+          "Fire-ring of flat stones — old ash, rain-unscattered, dry",
+          "Rock overhang — south-facing, dry underside, adequate shelter",
+          "Snowmelt runnel — thin, running east, twenty feet from overhang"
         ],
         "threads": [
-          "Edge District bearing — Contact Names Scrap names Sorel (Millbrook now) and Leth (archivist, likely still in the Edge District) as first destinations.",
-          "The buried vault head is failing — six-week window, northeast in the hillside behind them. The expert must be found and returned before week five.",
-          "The far slope is clear of made endings — whatever crossed this pass before left no dying behind it.",
-          "The cured bladder waterskin at Aldric's — not collected before departure.",
-          "What the system opens when the last sleeve runs — still unread.",
-          "Spruce stand rot confirmed natural — no connection to the buried structure's contamination seeping upward."
+          "Fire-ring: someone camps here — how recently, and are they close?",
+          "Edge District bearing — Leth and Sorel as first contacts.",
+          "The buried vault head: six-week window, expert needed before week five.",
+          "What the system opens when the last sleeve runs — still unread."
         ]
       },
-      "codexUpdates": [
-        {
-          "topic": "the-water-crisis",
-          "label": "The Water Crisis",
-          "kind": "mystery",
-          "fact": "Palework on the dying spruce stand north of the pass confirms the fungal die-off is natural and isolated — the buried structure's contamination has not begun seeping into the broader root-zone above the pass. The contamination originates from one point, not spreading upward through the hillside.",
-          "links": [
-            "palework",
-            "millbrook",
-            "pell",
-            "precursor-signs-in-the-valley"
-          ]
-        }
-      ],
+      "timeOps": {
+        "hoursPassed": 2,
+        "why": "Two miles of descent from the pass crest to the overhang camp, late afternoon arrival"
+      },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Waiting at the outcrop edge for the Palework read — patient, not restless.",
-          "statusNote": "On the far side of the mountain pass with Silas, mid-afternoon, at the spruce stand edge — descending into unknown territory north of the valley."
+          "note": "Descended with Silas without instruction — matched his pace, read the terrain independently. First words at the overhang: 'Recent?' — practical, not alarmed.",
+          "statusNote": "On the far side of the mountain pass with Silas, late afternoon, at a rock overhang two miles below the crest — evaluating the fire-ring.",
+          "status": "active"
         }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "brief stop to examine the spruce stand before continuing descent"
-      }
+      ]
     },
     "sceneState": {
-      "setting": "Far side of the mountain pass, mid-afternoon — flat limestone outcrop just below the crest, Silas standing at the edge of the dying spruce stand with bark dust on his fingers, pine run descending north-northeast ahead, damp ground from snowmelt, old canopy cutting the wind. The valley is no longer visible behind.",
+      "setting": "Far side of the mountain pass, late afternoon — two miles below the crest, at a south-facing rock overhang with a dry underside. A fire-ring of flat stones sits just inside the shadow, filled with old ash that rain hasn't reached. Pine run dense around the shelf; a thin snowmelt runnel runs east nearby.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Standing at the outcrop edge, watching Silas's face — patient, waiting for the read."
+          "state": "Standing beside Silas, looking at the fire-ring — practical, not alarmed, waiting on his read."
         },
         {
           "name": "Huginn",
-          "state": "Settled on the nearby rock, unmoved, watching the spruce stand with mild professional interest."
+          "state": "Perched somewhere in the canopy above the overhang, watching the treeline."
         }
       ],
       "objects": [
@@ -2022,16 +2000,14 @@
         "Valve Failure Timeline note — 'S-gate confirmed' annotated (in pocket)",
         "Contact Names Scrap (Sorel, Leth) (in pocket)",
         "River Purification Tabs vial (in inner pack pocket)",
-        "Flat limestone outcrop — midday rest site, just below the pass crest",
-        "Dying spruce stand — thirty years old, fungal root-death confirmed natural, year",
-        "Loose scree slope — behind them, above",
-        "Pine run — ahead, descending north-northeast"
+        "Fire-ring of flat stones — old ash, rain-unscattered, dry",
+        "Rock overhang — south-facing, dry underside, adequate shelter",
+        "Snowmelt runnel — thin, running east, twenty feet from overhang"
       ],
       "threads": [
-        "Edge District bearing — Contact Names Scrap names Sorel (Millbrook now) and Leth (archivist, likely still in the Edge District) as first destinations.",
-        "The buried vault head is failing — six-week window, northeast in the hillside behind them. The expert must be found and returned before week five.",
-        "The far slope is clear of made endings — whatever crossed this pass before left no dying behind it.",
-        "The cured bladder waterskin at Aldric's — not collected before departure.",
+        "Fire-ring: someone camps here — how recently, and are they close?",
+        "Edge District bearing — Leth and Sorel as first contacts.",
+        "The buried vault head: six-week window, expert needed before week five.",
         "What the system opens when the last sleeve runs — still unread."
       ]
     }
@@ -2039,7 +2015,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 2,
-    "hour": 15,
+    "hour": 17,
     "realAnchor": null
   },
   "companions": [
@@ -2181,7 +2157,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Held back at the bend to give Silas space with Huginn — watching without crowding. The one-word 'you' and Huginn's stillness are both unaddressed in speech.",
         "[d2] Named what she caught of the Huginn exchange — 'tinkers', asking-tone, and the bird's decided look at her. Filed it as neither performance nor loss. Did not ask the next question y",
         "[d2] Received the full Huginn answer — stillness means nothing is concluding for her. Shoulders settled; the held tension released without ceremony. Named the bird's attention as intere",
         "[d2] Crouching at the valve housing base, reading the stain independently — asked about the axis before Silas finished speaking.",
@@ -2190,7 +2165,8 @@
         "[d2] Asked if she's ready to push out of the valley — answered without hesitation. 'I didn't walk up here to turn back at the valve.' Now standing ready at the intake, facing northeast.",
         "[d2] Received the northeast bearing without words — turned and is ready to move.",
         "[d2] Crossed the pass without hesitation — set oilcloth against the wind-side and walked like someone who had decided. Eating trail parcel, watching the far slope.",
-        "[d2] Waiting at the outcrop edge for the Palework read — patient, not restless."
+        "[d2] Waiting at the outcrop edge for the Palework read — patient, not restless.",
+        "[d2] Descended with Silas without instruction — matched his pace, read the terrain independently. First words at the overhang: 'Recent?' — practical, not alarmed."
       ],
       "knownFacts": [
         "Huginn's stillness is a positive answer — nothing ending, not foreclosed",
@@ -2211,7 +2187,7 @@
         "reading a stain pattern independently against a known failur"
       ],
       "status": "active",
-      "statusNote": "On the far side of the mountain pass with Silas, mid-afternoon, at the spruce stand edge — descending into unknown territory north of the valley.",
+      "statusNote": "On the far side of the mountain pass with Silas, late afternoon, at a rock overhang two miles below the crest — evaluating the fire-ring.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -3294,15 +3270,15 @@
     }
   },
   "tendencies": {
-    "strategic": 65.47860533906712,
-    "cerebral": 42.59420238884853,
-    "social": 57.638212021952974,
-    "generous": 15.39054481441947,
-    "cautious": 50.28438669737115,
-    "physical": 1.6199998012835426,
-    "risky": 3.2472890657591074,
-    "ruthless": 3.598254594790295,
-    "carousing": 1.2085120207990026
+    "strategic": 65.15121231237178,
+    "cerebral": 42.38123137690429,
+    "social": 57.35002096184321,
+    "generous": 15.313592090347374,
+    "cautious": 50.032964763884294,
+    "physical": 1.611899802277125,
+    "risky": 4.231052620430312,
+    "ruthless": 3.5802633218163438,
+    "carousing": 1.2024694606950075
   },
   "aptitudes": [
     "strategist",
@@ -3310,7 +3286,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 294,
+  "actionCount": 295,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3444,8 +3420,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13693&nologo=true",
-  "updatedAt": 1784178803054,
-  "rev": 406,
+  "updatedAt": 1784178938474,
+  "rev": 407,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4007,7 +3983,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 97
+    "valley": 98
   },
   "foreclosed": [
     "rootkin",

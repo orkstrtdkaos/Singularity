@@ -7,7 +7,7 @@ import { senseAction, senseTier, senseOpponent } from "./engine/sense.js";
 import { synthesizeOpponentSheet } from "./engine/skill_battle.js";
 import { recordDeed, standingWith, standingWithPeople, reputationSummary } from "./engine/reputation.js";
 import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt } from "./engine/chronicle.js";
-import { newProfile, updateProfile, aptitudeMods, profileInsight, grantAptitudes, ensureCharacterStyle, ensureRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, revokeAdultGate, RATING_ORDER, RATING_LEVEL } from "./engine/playerprofile.js";
+import { newProfile, updateProfile, aptitudeMods, profileInsight, grantAptitudes, fadingAptitudes, ensureCharacterStyle, ensureRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, revokeAdultGate, RATING_ORDER, RATING_LEVEL } from "./engine/playerprofile.js";
 import { gmTurn, parseIntent, gmAsk, generateBio, suggestBuild, extractGambit, sanitizeScene, narrativeRegister, ratingRegister } from "./engine/gm.js";
 import { applyQuestUpdates, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, slugify } from "./engine/quests.js";
 import { applyStateOps, describeCorrection } from "./engine/corrections.js";
@@ -19,11 +19,11 @@ import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, AD
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { substrateVerdict, locationDensity, carriedSubstrate } from "./engine/substrate.js"; // SNG-090
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage, deleteGalleryImage } from "./engine/art.js";
-import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay } from "./engine/worldmap.js";
+import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities } from "./engine/traditions.js";
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs } from "./engine/companions.js";
-import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, setNpcName, nameIsUnknown } from "./engine/npcs.js";
+import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
 import { initWorldState, runWorldTick, syncSharedWorld, advanceGeneratedOffscreen, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
@@ -43,7 +43,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.80";
+const APP_VERSION = "1.8.81";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -52,6 +52,8 @@ app.addEventListener("click", e => { const b = e.target.closest?.("[data-help]")
 app.addEventListener("click", e => { const el = e.target.closest?.("[data-vital]"); if (el) { e.preventDefault(); showVitalDetail(el); } });
 // SNG-106: tap the roll's chance → the full component breakdown (the resolver's retained math, verbatim).
 app.addEventListener("click", e => { const el = e.target.closest?.("[data-breakdown]"); if (el) { e.preventDefault(); try { showBreakdownPopover(JSON.parse(el.dataset.breakdown)); } catch { /* malformed — no popup */ } } });
+// SNG-118: tap a play-style aptitude chip → its effect + description (reuses the one popover surface).
+app.addEventListener("click", e => { const el = e.target.closest?.("[data-aptchip]"); if (el) { e.preventDefault(); showPopoverText(el.dataset.aptchip); } });
 
 /** SNG-084: the authored one-sentence explanation for a mechanic, by id (helper_text.json). */
 function helpEntry(id) { return CONTENT?.helpText?.[id] || null; }
@@ -2672,9 +2674,13 @@ function applyTurn(turn, resolution, playerWords = null) {
   // are here", GM context) agrees with the prose — instead of the header showing a stale place.
   const moveRef = turn.moveTo && (turn.moveTo.location || turn.moveTo.id || turn.moveTo);
   if (moveRef) {
-    const destId = resolveLocationId(moveRef, CONTENT.locations);
+    // SNG-117: the header follows the fiction even to a place with no record yet — resolve it, or MINT it
+    // (a named-but-unrecorded destination like "the pass" becomes a real, travelable place). Never no-op
+    // and leave the header asserting a place the fiction has left.
+    let destId = resolveLocationId(moveRef, CONTENT.locations) || mintTransitLocation(moveRef);
     if (destId && destId !== character.currentLocationId) {
       character.currentLocationId = destId;
+      addKnownPlace(destId);
       noteGeneratedAttention(destId, "revisit", readClock(character.clock).day);
       notePlaceVisit(character, destId, readClock(character.clock).day);
       try { notePerception(character, destId, CONTENT.locations[destId], { visited: true, usedAbilityIds: [] }, CONTENT.rules); } catch { /* perception is a convenience */ }
@@ -3076,9 +3082,42 @@ function maybeWorldPressure(turn, resolution) {
   quietTurns = 0;     // space them out — another threshold of quiet before the next push
 }
 
+/** SNG-117: mark a place KNOWN by name (GM-named destination, en-route, minted transit place) so the map
+ *  surfaces its name + it becomes a travel target — even before it's ever entered. Idempotent. */
+function addKnownPlace(id) {
+  if (!id) return;
+  character.knownPlaces = character.knownPlaces || [];
+  if (!character.knownPlaces.includes(id)) character.knownPlaces = [...character.knownPlaces, id].slice(-80);
+}
+
+/** SNG-117: turn a named-but-unrecorded destination ("the pass") into a REAL, travelable place — a
+ *  lightweight generated location adjacent to where you left, with a stable id + map coord. Idempotent
+ *  (keyed off the normalized name, so "the pass" mints exactly once — Q1). Deterministic (no model call);
+ *  the world-gen path can flesh it out later. Returns the id. */
+function mintTransitLocation(moveRef) {
+  ensureGenerated(character);
+  const id = "gen-" + slugify(String(moveRef));
+  if (CONTENT.locations[id]) { addKnownPlace(id); return id; } // already a real place — reuse, never dup
+  const here = CONTENT.locations[character.currentLocationId];
+  const existing = {}; for (const l of Object.values(CONTENT.locations)) if (l.map) existing[l.id] = l.map;
+  const name = String(moveRef).replace(/[-_]+/g, " ").replace(/\b\w/g, c => c.toUpperCase()).slice(0, 60);
+  const rec = {
+    id, name, regionId: here?.regionId || here?.region || null,
+    descriptionSeed: `A place the road led to — ${name}. The fiction brought you here before the map knew its name.`,
+    tags: ["transitional"], connections: here ? [here.id] : [], _gen: true, _mintedAs: "transit",
+    map: coordForGenerated(id, here?.map, existing)
+  };
+  character.generated.location[id] = rec;   // persists on the save (hydrateGeneratedIntoContent revives it)
+  CONTENT.locations[id] = rec;              // live this session
+  if (here && Array.isArray(here.connections) && !here.connections.includes(id)) here.connections = [...here.connections, id]; // bidirectional reach
+  addKnownPlace(id);
+  return id;
+}
+
 async function travelTo(locId) {
   if (busy) return;
   noteGeneratedAttention(locId, "revisit", readClock(character.clock).day); // §2: returning to a grown place keeps it alive
+  addKnownPlace(locId); // SNG-117: somewhere you've been is known
   character.currentLocationId = locId;
   character.activeScene = null;
   sceneTurns = [];
@@ -3164,6 +3203,7 @@ function renderMap(selectedId = null) {
   }
   const stage = character.worldState?.eventStages?.water_crisis?.stage ?? 1;
   const isVisited = id => (character.placeMemory?.[id]?.visits || 0) > 0 || id === here;
+  const isKnown = id => isPlaceKnown(character, id, CONTENT.locations); // SNG-117: heard-of / adjacent / en-route, not just visited
   // SNG-046 Layer 1: every location gets stable coords (authored kept; coordless + generated
   // placed deterministically), a tag-derived icon, and a disposition terrain tint.
   const pos = autoMapPositions(locs);
@@ -3197,9 +3237,12 @@ function renderMap(selectedId = null) {
       const pm = character.placeMemory?.[l.id];
       const dl = Math.max(0, Math.min(4, l.dangerLevel | 0)); // SNG-080: graduated danger, findable on the map
       const cls = `map-node ${terrainClass(l)} dl${dl} ${l.id === here ? "here" : ""} ${reachable ? "reachable" : ""} ${visited ? "" : "unvisited"} ${dl >= 3 ? "danger" : ""} ${selectedId === l.id ? "selected" : ""}`;
+      const known = isKnown(l.id); // SNG-117
       const tip = visited
         ? `${l.name}${l.id === here ? " — you are here" : ""}${pm?.visits ? ` · ${pm.visits} visit${pm.visits > 1 ? "s" : ""}` : ""}${dl >= 1 ? ` · ${dangerLabel(dl)}` : ""}${reachable ? " · one travel away" : ""}`
-        : `Unknown place — you've only heard of it${reachable ? " · one travel away" : ""}`;
+        : known
+          ? `${l.name} — you know of it, not yet been${reachable ? " · one travel away" : ""}`
+          : `Unknown place — you've only heard of it${reachable ? " · one travel away" : ""}`;
       return `<g class="${cls}" data-mapsel="${esc(l.id)}">
         <title>${esc(tip)}</title>
         <circle class="hit" cx="${P.x}" cy="${P.y}" r="24"/>
@@ -3211,7 +3254,7 @@ function renderMap(selectedId = null) {
           const sx = P.x + Math.cos(ang) * 22, sy = P.y + Math.sin(ang) * 22;
           return `<circle cx="${sx}" cy="${sy}" r="4" class="map-satellite ${sp.visited ? "visited" : "heard"}"><title>${esc(sp.name)}${sp.note ? " — " + esc(sp.note) : ""}${sp.visited ? "" : " (heard of)"}</title></circle>`;
         }).join(""); })() : ""}
-        <text x="${P.x}" y="${P.y + (P.y > 300 ? 32 : -20)}" text-anchor="middle" class="map-label">${esc(visited ? l.name : "?")}</text>
+        <text x="${P.x}" y="${P.y + (P.y > 300 ? 32 : -20)}" text-anchor="middle" class="map-label">${esc(known ? l.name : "?")}</text>
         ${visited && pm?.visits > 1 ? `<text x="${P.x}" y="${P.y + (P.y > 300 ? 46 : -6)}" text-anchor="middle" class="map-visits">×${pm.visits}</text>` : ""}
       </g>`; }).join("")}
     ${kg.map(e => `<g class="map-kg ${e.kind} ${e.discovered ? "met" : "heard"}" ${e.topicId ? `data-kgtopic="${esc(e.topicId)}"` : ""}>
@@ -3227,15 +3270,18 @@ function renderMap(selectedId = null) {
   if (selectedId && CONTENT.locations[selectedId]) {
     const l = CONTENT.locations[selectedId];
     const visited = isVisited(l.id);
+    const known = isKnown(l.id); // SNG-117
     const pm = character.placeMemory?.[l.id];
     const reachable = connectedToHere.includes(l.id);
     details = `<div class="map-details">
       <div class="map-details-head">
-        <h3>${esc(visited ? l.name : "An unknown place")}</h3>
+        <h3>${esc(known ? l.name : "An unknown place")}${!visited && known ? ` <span class="hint">— known of, not yet been</span>` : ""}</h3>
         ${(l.dangerLevel | 0) >= 1 ? `<span class="rep-band danger-chip dl${Math.min(4, l.dangerLevel | 0)}">${esc(dangerLabel(Math.min(4, l.dangerLevel | 0)))}</span>${infoDot("world.danger")}` : `<span class="rep-band trusted">safe</span>`}
         ${visited ? (() => { const d = locationDensity(l, CONTENT.substrateModel); if (d == null) return ""; const lab = d < 0.34 ? "thin lattice" : d > 0.66 ? "dense lattice" : "even lattice"; return `<span class="rep-band" title="Substrate density here: ${Math.round(d * 100)}%. Continuous craft thrives dense, starves thin; Returned craft the reverse.">${lab}</span>`; })() : ""}
         ${l.id === here ? `<span class="rep-band trusted">you are here</span>` : ""}
+        ${(() => { const s = l.communityId ? standingWith(character, l.communityId, CONTENT.rules) : null; return s?.score ? `<span class="rep-band ${s.band}" title="Your standing here — ${s.band} (${s.score})">${esc(s.band)}</span>` : ""; })()}
       </div>
+      ${(() => { const ppl = knownPeopleAt(character, l.id, { locations: CONTENT.locations, npcs: CONTENT.npcs }); return ppl.length ? `<div class="loc-people"><span class="hint">You know here: </span>${ppl.map(p => `<span class="known-here">${esc(p.name)} <span class="cost">${esc(p.label)}</span></span>`).join(", ")}</div>` : ""; })()}
       ${visited && locationImageFor(l.id) ? `<img class="location-image" src="${esc(locationImageFor(l.id))}" alt="${esc(l.name)}" data-lightbox="location" loading="lazy" onerror="this.style.display='none'">` : ""}
       ${visited
         ? `<p class="map-details-desc">${esc(l.descriptionSeed)}</p>${/* SNG-076: authored descriptionSeed renders IN FULL */""}
@@ -3746,6 +3792,23 @@ function renderLevelUp(status = "") {
   document.getElementById("lvl-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
 }
 
+/** SNG-118: play-style as tight, tappable aptitude chips (replacing the prose wall). Each chip is colored by
+ *  axis (earned / amorous / inverse), dimmed when FADING (SNG-113 "loss is legible"), and border-marked for a
+ *  lineage grant. Tap → the one popover surface shows its effect + description + mods. Scales with the roster. */
+function aptitudeChips() {
+  const held = (CONTENT.rules.playerAptitudes || []).filter(a => character.aptitudes?.includes(a.id));
+  if (!held.length) return `<span class="insight">No marked tendencies yet — play a while and who you are will show.</span>`;
+  const fading = fadingAptitudes(character, CONTENT.rules.playerAptitudes, CONTENT.rules);
+  const lineage = new Set(character.grantedAptitudes || []);
+  return `<div class="aptitude-chips">${held.map(a => {
+    const name = a.id.replace(/_/g, " ");
+    const isFading = fading.has(a.id), isLineage = lineage.has(a.id);
+    const modLine = Object.entries(a.mods || {}).map(([k, v]) => `${k.replace(/([A-Z])/g, " $1").toLowerCase().trim()} ${v > 0 ? "+" : ""}${v}`).join(", ");
+    const detail = `${name}${isLineage ? " · lineage" : ""}${isFading ? " · fading" : ""}\n${a.description || ""}${modLine ? `\n\n${modLine}` : ""}`;
+    return `<button class="aptitude-chip axis-${esc(a.axis || "earned")}${isFading ? " fading" : ""}${isLineage ? " lineage" : ""}" data-aptchip="${esc(detail)}" title="tap for detail">${esc(name)}${isFading ? " ⌁" : ""}</button>`;
+  }).join("")}</div>`;
+}
+
 function renderCharacterScreen() {
   const rules = CONTENT.rules;
   const cap = rules.leveling?.subAttributeCap ?? 20;
@@ -3832,7 +3895,7 @@ function renderCharacterScreen() {
       </div>`;
     })()}
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Play-style (${esc(character.name)}'s own)</h3>
-      <div class="insight">${esc(profileInsight(character, rules.playerAptitudes, rules))}</div></div>
+      ${aptitudeChips()}</div>
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Active quests ${infoDot("quest.routes")}</h3>
       ${(character.quests || []).filter(q => q.status === "active").map(q => `<div class="codex-fact"><strong>${esc(q.title)}</strong> — ${esc(q.progress?.slice(-1)[0] || q.summary)}</div>`).join("") || "<div class='insight'>none</div>"}</div>
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Companions ${infoDot("companion.bond")}</h3>
@@ -5206,10 +5269,14 @@ function renderPlay(turn, opts = {}) {
     <section><h3>Items</h3>
       ${(character.inventory || []).map(it => itemCard(it, { open: examinedItem === it.name, toggleAttr: "data-examine" })).join("") || "<div class='insight'>empty-handed</div>"}
     </section>
-    <section><h3>Standing here</h3>
-      ${rep ? `<span class="rep-band ${rep.band}">${rep.band} (${rep.score})</span>` : `<span class="insight">no community claims this place</span>`}
-    </section>
-    <section><h3>Play-style</h3><div class="insight">${esc(profileInsight(character, rules.playerAptitudes, rules))}</div></section>
+    ${(() => { // SNG-119: standing + the people you'd find HERE, scoped to this place (folded from the old detached list)
+      const here = knownPeopleAt(character, character.currentLocationId, { locations: CONTENT.locations, npcs: CONTENT.npcs });
+      if (!rep && !here.length) return "";
+      return `<section><h3>${esc(location.name)} — standing &amp; who's here</h3>
+      ${rep ? `<div style="margin-bottom:4px"><span class="rep-band ${rep.band}">${rep.band} (${rep.score})</span></div>` : ""}
+      ${here.length ? here.map(p => `<div class="known-npc"><span class="npc-name">${esc(p.name)}</span> <span class="rep-band ${p.bondType === "romantic" ? "trusted" : ""}">${esc(p.label)}</span></div>`).join("") : `<span class="insight">no one you know is here right now</span>`}
+    </section>`; })()}
+    <section><h3>Play-style</h3>${aptitudeChips()}</section>
     <section><h3>Map & Rest</h3>
       <button class="opt map-open" id="open-map" style="margin:2px 0 6px; display:block; width:100%">🗺 Open Map — travel & places</button>
       <button class="opt" id="do-breather" style="margin-top:8px; display:block; width:100%">Breather (+${recoveryEnergy("breather", character, rules)} energy, 1h)</button>
@@ -5225,7 +5292,7 @@ function renderPlay(turn, opts = {}) {
   const time = readClock(character.clock);
   let main = `<div class="play">
     ${banner ? `<img class="scene-banner" src="${esc(banner)}" alt="${esc(location.name)}" onerror="this.style.display='none'">` : ""}
-    <div class="location-tag" ${sceneState?.setting ? `title="${esc(sceneState.setting)}"` : ""}>${esc(location.name)}<span class="time-tag" title="Your journey clock (local, play-paced) · the shared world calendar (SNG-041, real-time)">${esc(time.label)} <span class="world-day-tag">· world-day ${absoluteWorldDay()}</span></span></div>
+    <div class="location-tag" ${sceneState?.setting ? `title="${esc(sceneState.setting)}"` : ""}>${esc(location.name)}${rep ? ` <span class="rep-band loc-standing ${rep.band}" title="Your standing with ${esc(CONTENT.locations[character.currentLocationId]?.name || "the people here")} — ${rep.band} (${rep.score})">· ${esc(rep.band)}</span>` : ""}<span class="time-tag" title="Your journey clock (local, play-paced) · the shared world calendar (SNG-041, real-time)">${esc(time.label)} <span class="world-day-tag">· world-day ${absoluteWorldDay()}</span></span></div>
     ${(() => { const e = activeEnc(); if (!e) return ""; const st = e.state, d = e.def;
       let status = "";
       if (d.type === "duel") status = `${esc(d.opponent.name)}: ${"▮".repeat(Math.max(0, st.opponentHealth))}${"▯".repeat(Math.max(0, d.opponent.health - st.opponentHealth))} · you: ${character.health}/${character.maxHealth}${st.tactic ? ` · tactic: ${esc(st.tactic)}` : ""}`;

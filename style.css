@@ -627,3 +627,18 @@ img[data-lightbox] { cursor: zoom-in; }
 .sb-int { text-transform: capitalize; }
 .sb-int.on { border-color: var(--accent); color: var(--accent); }
 .data-link { background: none; border: none; color: var(--accent); cursor: pointer; font-size: 12px; text-decoration: underline dotted; padding: 0; }
+
+/* SNG-118 — play-style aptitude chips */
+.aptitude-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.aptitude-chip { font-family: var(--font-ui); font-size: 12px; text-transform: capitalize; padding: 3px 10px; border-radius: 12px; border: 1px solid var(--border); background: var(--panel2); color: var(--ink); cursor: pointer; line-height: 1.4; }
+.aptitude-chip:hover, .aptitude-chip:focus { border-color: var(--accent); outline: none; }
+.aptitude-chip.axis-earned { background: color-mix(in srgb, var(--accent) 12%, var(--panel2)); }
+.aptitude-chip.axis-amorous { background: color-mix(in srgb, #c76 22%, var(--panel2)); border-color: color-mix(in srgb, #c76 40%, var(--border)); }
+.aptitude-chip.axis-inverse { background: color-mix(in srgb, #7a9 20%, var(--panel2)); border-color: color-mix(in srgb, #7a9 40%, var(--border)); font-style: italic; }
+.aptitude-chip.lineage { border-width: 2px; border-color: var(--accent2, #7a9); }
+.aptitude-chip.fading { opacity: 0.55; font-style: italic; }
+
+/* SNG-119 — standing folded into location headers */
+.loc-standing { cursor: help; }
+.loc-people { font-family: var(--font-ui); font-size: 12px; color: var(--ink-dim); margin-top: 6px; line-height: 1.5; }
+.known-here { color: var(--ink); }

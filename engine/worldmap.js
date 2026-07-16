@@ -145,6 +145,20 @@ export function kgOverlayEntities(character, positions, npcs = {}) {
   return out;
 }
 
+/** SNG-117: a place is KNOWN — its name surfaces + it becomes a travel target — by ANY means, not just by
+ *  having been visited: you are there, you have visited, it is ADJACENT to where you stand (one travel away),
+ *  or the fiction named it (GM destination / en-route / rumour — tracked on character.knownPlaces). "Known"
+ *  is wider than "visited"; only the genuinely unheard-of stays a "?". Pure. */
+export function isPlaceKnown(character, locId, locations = {}) {
+  if (!locId || !character) return false;
+  if (locId === character.currentLocationId) return true;
+  if ((character.placeMemory?.[locId]?.visits || 0) > 0) return true;
+  if ((character.knownPlaces || []).includes(locId)) return true;
+  const here = locations[character.currentLocationId];
+  if (here && Array.isArray(here.connections) && here.connections.includes(locId)) return true; // adjacent — one travel away
+  return false;
+}
+
 /** SNG-083: "show what you know" — people AND rumours on the map, in the same grammar the map uses
  *  for places: SOLID = met/known firsthand, DIMMED = heard-of only (from the codex, active quest
  *  threads, news, and the away-digest). Turns the map from a travel tool into an intelligence board.

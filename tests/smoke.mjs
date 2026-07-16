@@ -13,7 +13,7 @@ import { companionBonus, companionsForGM, activeCompanions, partnerAdjacentNpcs 
 import { applyQuestUpdates, questsForGM, slugify, resolveQuest, dedupeQuests, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, threadTouched } from "../engine/quests.js";
 import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt } from "../engine/chronicle.js";
 import { sanitizeScene, buildTurnContext, sanitizeIntent, narrativeRegister, ratingRegister, renderSceneHistory } from "../engine/gm.js";
-import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, findExistingNpc, prettifyNpcName, relationshipBand, advanceBond, relationshipLabel, isPartnerAdjacent } from "../engine/npcs.js";
+import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, findExistingNpc, prettifyNpcName, relationshipBand, advanceBond, relationshipLabel, isPartnerAdjacent, knownPeopleAt } from "../engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
 import { initWorldState, runWorldTick, advanceGeneratedOffscreen, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "../engine/worldtick.js";
 import { assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "../engine/gambit.js";
@@ -39,7 +39,7 @@ import { planPlayerDedup, dedupePlayers, resolvePlayerKey, findProfileByName, re
 import { applyStateOps, describeCorrection } from "../engine/corrections.js";
 import { isEventfulTurn, pressureTier, pressureDirective } from "../engine/pacing.js";
 import { revokeAdultGate } from "../engine/playerprofile.js";
-import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, convexHull, regionShape, knownOverlay } from "../engine/worldmap.js";
+import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, convexHull, regionShape, knownOverlay, isPlaceKnown } from "../engine/worldmap.js";
 import { loadLegends, tierBirthWeight, tierForArc, legendSurfacing, legendDeploymentForGM, LEGEND_TIER_WEIGHT } from "../engine/legends.js";
 import { buildTraditionIndex, traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities } from "../engine/traditions.js";
 
@@ -2976,6 +2976,37 @@ await (async () => {
   check("SNG-083: a met person renders SOLID (discovered=true)", ov2.some(e => e.kind === "person" && e.label === "Fendt" && e.discovered === true));
   check("SNG-083: nothing to show → an empty list (the UI shows the empty state, never a silent no-op)", knownOverlay({ npcRegistry: {}, codex: { topics: {} }, quests: [] }, positions, content).length === 0);
 })();
+
+// --- SNG-119: standing + known people scoped to a PLACE (folded into location headers) ---
+{
+  const locations = { millbrook: { id: "millbrook", name: "Millbrook", communityId: "valley.millbrook" }, faraway: { id: "faraway", name: "The Far Reach", communityId: "valley.far" } };
+  const npcsCat = { pell: { id: "pell", communityId: "valley.millbrook" } };
+  const char = { npcRegistry: {
+    pell: { id: "pell", name: "Pell", relationship: 8, bondType: "romantic", bondStage: "partner", firstMet: { locationId: "greywater" } },   // scoped by community
+    hela: { id: "hela", name: "Hela", relationship: 4, firstMet: { locationId: "millbrook" } },                                              // scoped by first-met location
+    stranger: { id: "stranger", name: "A Stranger", relationship: 1, firstMet: { locationId: "faraway" } }
+  } };
+  const atMill = knownPeopleAt(char, "millbrook", { locations, npcs: npcsCat });
+  const names = atMill.map(p => p.name).sort();
+  check("SNG-119: known people are scoped to a place — met-here + community-here show, others don't", names.join(",") === "Hela,Pell" && !names.includes("A Stranger"));
+  check("SNG-119: a scoped person carries its relationship label (Pell reads as her bond)", atMill.find(p => p.id === "pell")?.label === "partner · devoted");
+  check("SNG-119: a place with no one you know returns an empty list (graceful header)", knownPeopleAt(char, "faraway", { locations, npcs: {} }).length === 1 && knownPeopleAt({ npcRegistry: {} }, "millbrook", { locations, npcs: npcsCat }).length === 0);
+}
+
+// --- SNG-117: the known world is navigable — a place is KNOWN by any means, not just visited ---
+{
+  const locs = { millbrook: { id: "millbrook", name: "Millbrook", connections: ["echo_river_crossing"] },
+    echo_river_crossing: { id: "echo_river_crossing", name: "Echo River Crossing", connections: ["millbrook", "archive_hollow"] },
+    archive_hollow: { id: "archive_hollow", name: "Archive Hollow", connections: ["echo_river_crossing"] },
+    far_off: { id: "far_off", name: "The Far Reach", connections: [] } };
+  const c = { currentLocationId: "millbrook", placeMemory: { archive_hollow: { visits: 2 } }, knownPlaces: ["far_off"] };
+  check("SNG-117: where you stand is known", isPlaceKnown(c, "millbrook", locs));
+  check("SNG-117: a place ADJACENT to where you stand is known (one travel away — no more '?')", isPlaceKnown(c, "echo_river_crossing", locs));
+  check("SNG-117: a VISITED place is known even when far", isPlaceKnown(c, "archive_hollow", locs));
+  check("SNG-117: a GM-named / en-route place (knownPlaces) is known before you ever enter it", isPlaceKnown(c, "far_off", locs));
+  check("SNG-117: a genuinely unheard-of, non-adjacent, unvisited place stays UNKNOWN (a '?')", !isPlaceKnown({ currentLocationId: "millbrook", placeMemory: {}, knownPlaces: [] }, "archive_hollow", locs));
+  check("SNG-117: a null/absent id is never 'known'", !isPlaceKnown(c, null, locs) && !isPlaceKnown(c, "nope", locs));
+}
 
 // --- SNG-113: aptitudes are SITUATIONAL — decay bites, hysteresis holds, grants seed, innocence erodes ---
 {

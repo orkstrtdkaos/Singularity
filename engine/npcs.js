@@ -150,6 +150,22 @@ export function nameIsUnknown(n) {
   return /unknown|unnamed|\bthe\b|warden|keeper|stranger|figure|man|woman|guard|clerk|scout|elder|apprentice|dock-?master/.test(name);
 }
 
+/** SNG-119: the people you know who belong to a PLACE — registry NPCs first-met/last-seen there, or whose
+ *  authored home/community matches it. So a location's header shows who you'd actually find there (Pell under
+ *  her community), not everyone you've ever met. Pure. */
+export function knownPeopleAt(character, locId, { locations = {}, npcs = {} } = {}) {
+  if (!locId) return [];
+  const community = locations[locId]?.communityId || null;
+  const out = [];
+  for (const n of Object.values(character?.npcRegistry || {})) {
+    const cat = npcs[n.id];
+    const here = n.firstMet?.locationId === locId || n.lastSeen?.locationId === locId
+      || cat?.homeLocation === locId || (community && cat?.communityId === community);
+    if (here) out.push({ id: n.id, name: n.name, label: relationshipLabel(n), status: n.status, bondType: n.bondType || null });
+  }
+  return out;
+}
+
 export function relationshipBand(score) {
   if (score >= 7) return "devoted";
   if (score >= 4) return "ally";

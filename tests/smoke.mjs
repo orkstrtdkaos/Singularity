@@ -9,10 +9,10 @@ import { recordDeed, standingWith, reputationSummary, knownTags } from "../engin
 import { newProfile, updateProfile, aptitudeMods, deriveAptitudes, ensureCharacterStyle, defaultRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, ensureRating, RATING_LEVEL } from "../engine/playerprofile.js";
 import { normalizeInventory, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, resolveInventoryItem, dedupeInventory } from "../engine/inventory.js";
 import { newClock, readClock, advanceClock, getWorldEpoch, absoluteWorldDay, worldDate, worldDayAt, relativeWorldDays } from "../engine/worldtime.js";
-import { companionBonus, companionsForGM, activeCompanions } from "../engine/companions.js";
+import { companionBonus, companionsForGM, activeCompanions, partnerAdjacentNpcs } from "../engine/companions.js";
 import { applyQuestUpdates, questsForGM, slugify, resolveQuest, dedupeQuests, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, threadTouched } from "../engine/quests.js";
 import { sanitizeScene, buildTurnContext, sanitizeIntent, narrativeRegister, ratingRegister, renderSceneHistory } from "../engine/gm.js";
-import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, findExistingNpc, prettifyNpcName, relationshipBand } from "../engine/npcs.js";
+import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, findExistingNpc, prettifyNpcName, relationshipBand, advanceBond, relationshipLabel, isPartnerAdjacent } from "../engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
 import { initWorldState, runWorldTick, advanceGeneratedOffscreen, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "../engine/worldtick.js";
 import { assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "../engine/gambit.js";
@@ -698,6 +698,45 @@ check('SNG-111: a genuinely different later name still becomes an alias', warden
   check('SNG-111: nameExtend composes the surname (Pell → Pell Marsh), keeps the given name', pell.name === 'Pell Marsh' && pell.aliases.includes('Pell'));
   applyNpcUpdates(c, [{ op: 'update', npcId: 'pell', nameExtend: 'Marsh' }], { day: 3 });
   check('SNG-111: nameExtend is idempotent (learning Marsh twice does not double it)', pell.name === 'Pell Marsh');
+}
+
+// --- SNG-108: relationship arcs — bondType + romantic stage, gated, minor-safe, party-adjacent ---
+{
+  // NO LEAPING: even with a high score, the arc advances ONE step per beat (courting → together → committed → partner).
+  const n = { name: "Pell", relationship: 9, history: [], status: "active" };
+  advanceBond(n, { bondType: "romantic", bondStage: "courting" }, rules, 1);
+  check("SNG-108: bondType sets the KIND; a romantic bond opens at courting", n.bondType === "romantic" && n.bondStage === "courting");
+  advanceBond(n, { bondStage: "partner" }, rules, 2); // asks to jump straight to partner...
+  check("SNG-108: a romantic stage advances ONE step per beat, never leaps (→ together, not → partner)", n.bondStage === "together");
+  advanceBond(n, { bondStage: "partner" }, rules, 3);
+  check("SNG-108: another beat → committed (still one step)", n.bondStage === "committed");
+  advanceBond(n, { bondStage: "partner" }, rules, 4);
+  check("SNG-108: another beat → partner", n.bondStage === "partner");
+  check("SNG-108: the bond type is orthogonal to the score (advancing the arc never moved relationship)", n.relationship === 9);
+  check("SNG-108: relationshipLabel reads type+stage+band", relationshipLabel(n) === "partner · devoted");
+  check("SNG-108: isPartnerAdjacent is true at partner stage", isPartnerAdjacent(n, rules) === true);
+
+  // SCORE FLOOR: a low score holds the arc back — you can't reach "together" (floor 4) at relationship 2.
+  const low = { name: "Kite", relationship: 2, history: [], status: "active" };
+  advanceBond(low, { bondType: "romantic", bondStage: "courting" }, rules, 1);
+  advanceBond(low, { bondStage: "together" }, rules, 2);
+  check("SNG-108: a stage is held back when the score floor isn't met (score 2 can't reach together)", low.bondStage === "courting");
+
+  // absolute minor-protection: a romantic bond is REFUSED on a minor subject, at any stage.
+  const kid = { name: "A youngster", role: "child of the mill", relationship: 9, history: [], status: "active" };
+  const refused = advanceBond(kid, { bondType: "romantic", bondStage: "courting" }, rules, 1);
+  check("SNG-108: a romantic bond is refused on a minor subject (same floor as art/romance)", refused.refused === "minor" && !kid.bondType && !kid.bondStage);
+
+  // party-adjacency surfaces a partner-stage romantic NPC — a companion by relationship, not recruitment.
+  const char = { npcRegistry: { pell: { id: "pell", name: "Pell", relationship: 8, bondType: "romantic", bondStage: "partner", status: "active" }, sef: { id: "sef", name: "Sef", relationship: 6, bondType: "mentor", status: "active" } } };
+  const partners = partnerAdjacentNpcs(char, rules);
+  check("SNG-108: partnerAdjacentNpcs surfaces the partner-stage romantic bond, and only that", partners.length === 1 && partners[0].id === "pell" && partners[0].label === "partner · devoted");
+
+  // wired end-to-end through applyNpcUpdates with rules in ctx (the live path).
+  const live = { npcRegistry: {} };
+  applyNpcUpdates(live, [{ op: "meet", npcId: "wren", name: "Wren", role: "ferrywoman" }], { day: 1, rules });
+  applyNpcUpdates(live, [{ op: "update", npcId: "wren", relationshipDelta: 2, bondType: "romantic", bondStage: "courting" }], { day: 2, rules });
+  check("SNG-108: applyNpcUpdates wires bondType/bondStage through with the rules from ctx", live.npcRegistry.wren.bondType === "romantic" && live.npcRegistry.wren.bondStage === "courting");
 }
 check('revealName cannot create a person', (applyNpcUpdates({ npcRegistry: {} }, [{ op: 'update', npcId: 'ghost', revealName: 'X' }], {}), true));
 // customName

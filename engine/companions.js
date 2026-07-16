@@ -3,6 +3,17 @@
 // (content/packs/*/companions/); a character carries only the ids of who travels
 // with them. Same law as everywhere: data describes, engine computes, GM narrates.
 
+import { isPartnerAdjacent, relationshipLabel } from "./npcs.js";
+
+/** SNG-108: romantic partners at the party-adjacent stage travel with you in all but the mechanics.
+ *  They are NOT recruited companions (no catalog def / assistTags) — they're a companion by
+ *  RELATIONSHIP, surfaced with their bond stage so "his woman, basically in the party" reads true. */
+export function partnerAdjacentNpcs(character, rules = null) {
+  return Object.values(character?.npcRegistry || {})
+    .filter(n => isPartnerAdjacent(n, rules) && n.status !== "dead" && n.status !== "departed")
+    .map(n => ({ id: n.id, name: n.name, label: relationshipLabel(n), status: n.status }));
+}
+
 /** Assist bonus: +N once per companion whose assistTags intersect the action's
  *  intent tags (capped). Data-driven from rules.baseChance. */
 export function ensureBonds(character) {

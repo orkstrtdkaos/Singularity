@@ -20,8 +20,8 @@ import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode,
 import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities } from "./engine/traditions.js";
-import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond } from "./engine/companions.js";
-import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, setNpcName, nameIsUnknown } from "./engine/npcs.js";
+import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs } from "./engine/companions.js";
+import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, setNpcName, nameIsUnknown } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
 import { initWorldState, runWorldTick, syncSharedWorld, advanceGeneratedOffscreen, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
@@ -41,7 +41,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.70";
+const APP_VERSION = "1.8.71";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1328,7 +1328,7 @@ async function handleGenerateRequests(turn) {
   ensureGenerated(character);
   const location = hereNow();
   const time = readClock(character.clock);
-  const memCtx = { locationId: location.id, day: time.day, entities: codexEntities() };
+  const memCtx = { locationId: location.id, day: time.day, entities: codexEntities(), rules: CONTENT.rules };
   const notes = [];
   for (const req of reqs.slice(0, 3)) {
     const type = req?.type;
@@ -2518,7 +2518,7 @@ function applyTurn(turn, resolution, playerWords = null) {
     }
   }
   // people & places remember (typed ops, clamped)
-  const memCtx = { locationId: location.id, day: readClock(character.clock).day, entities: codexEntities() };
+  const memCtx = { locationId: location.id, day: readClock(character.clock).day, entities: codexEntities(), rules: CONTENT.rules };
   applyNpcUpdates(character, turn.npcUpdates || [], memCtx);
   // legacy relationshipDeltas: tolerated but may only UPDATE existing people —
   // this path once minted duplicate id-named registry entries
@@ -4856,6 +4856,7 @@ function renderPlay(turn, opts = {}) {
       }).join("")}</details>` : ""}
     </section>
     <section><h3>People you know</h3>
+      ${(() => { const partners = partnerAdjacentNpcs(character, CONTENT.rules); return partners.length ? `<div class="partner-adjacent" style="margin-bottom:6px">${partners.map(p => `<div class="known-npc partner"><span class="npc-name">❤ ${esc(p.name)}</span> <span class="rep-band trusted" title="A committed partner — with you in all but the mechanics">${esc(p.label)} · with you</span></div>`).join("")}</div>` : ""; })()}
       ${(() => {
         const groups = groupNpcsByLocation(character.npcRegistry || {});
         const keys = Object.keys(groups);
@@ -4865,7 +4866,7 @@ function renderPlay(turn, opts = {}) {
           const open = npcGroupsOpen.has(k) || (k === character.currentLocationId && !npcGroupsClosed.has(k));
           const label = k === "elsewhere" ? "Elsewhere" : (CONTENT.locations[k]?.name || k);
           return `<details class="npc-group" data-npcgroup="${esc(k)}" ${open ? "open" : ""}><summary>${esc(label)} <span class="cost">(${groups[k].length})</span></summary>
-            ${groups[k].map(n => `<div class="known-npc" title="${esc((n.statusNote ? "Now: " + n.statusNote + " | " : "") + ((n.history || []).slice(-2).join(" | ") || n.description || ""))}"><span class="npc-name">${esc(n.name)}${nameIsUnknown(n) ? ` <button class="npc-setname" data-setname="${esc(n.id)}" title="You know their name — set it">✎ name</button>` : ""}</span> <span class="rep-band ${["ally", "devoted", "friendly"].includes(relationshipBand(n.relationship)) ? "trusted" : ["hostile", "enemy", "wary"].includes(relationshipBand(n.relationship)) ? "wary" : ""}">${relationshipBand(n.relationship)}</span></div>`).join("")}
+            ${groups[k].map(n => `<div class="known-npc" title="${esc((n.statusNote ? "Now: " + n.statusNote + " | " : "") + ((n.history || []).slice(-2).join(" | ") || n.description || ""))}"><span class="npc-name">${esc(n.name)}${nameIsUnknown(n) ? ` <button class="npc-setname" data-setname="${esc(n.id)}" title="You know their name — set it">✎ name</button>` : ""}</span> ${n.bondType && n.bondType !== "platonic" ? `<span class="rep-band bond ${n.bondType === "romantic" ? "trusted" : ""}" title="A bond with its own path — ${esc(relationshipLabel(n))}">${n.bondType === "romantic" ? "❤ " : ""}${esc(relationshipLabel(n))}</span>` : `<span class="rep-band ${["ally", "devoted", "friendly"].includes(relationshipBand(n.relationship)) ? "trusted" : ["hostile", "enemy", "wary"].includes(relationshipBand(n.relationship)) ? "wary" : ""}">${relationshipBand(n.relationship)}</span>`}</div>`).join("")}
           </details>`;
         }).join("");
       })()}

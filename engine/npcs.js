@@ -6,8 +6,17 @@
 // (Offscreen NPC evolution — them growing while you're away — is world-tick work, v0.4.)
 
 import { slugify } from "./quests.js";
+import { isMinorSubject } from "./art.js";
 
 const CAPS = { registry: 40, history: 10, knownFacts: 8, skills: 6 };
+
+// SNG-108: relationship KIND + arc, orthogonal to the −10..+10 score. The score is INTENSITY; the
+// bondType is the NATURE of the bond; a romantic bond additionally carries a growth STAGE tended by
+// play (courting → together → committed → partner). Stage is set by GM op on a real relational beat,
+// never auto-inferred, never leaping past what the score supports, and never romantic for a minor.
+export const BOND_TYPES = ["platonic", "mentor", "student", "rival", "family", "romantic", "sworn"];
+export const ROMANTIC_STAGES = ["courting", "together", "committed", "partner"];
+const DEFAULT_STAGE_FLOORS = { courting: 2, together: 4, committed: 6, partner: 8 };
 
 /** Fuzzy-find an existing person before ever creating a new one — the GM refers
  *  to the same human as "davan", "davan-channel-worker", or "Davan" across turns. */
@@ -111,6 +120,8 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
     if (typeof u.relationshipDelta === "number") {
       n.relationship = Math.max(-10, Math.min(10, n.relationship + Math.max(-2, Math.min(2, u.relationshipDelta))));
     }
+    // SNG-108: bond KIND + romantic STAGE — applied AFTER the score so the stage floor sees the fresh value.
+    if (u.bondType || u.bondStage) advanceBond(n, { bondType: u.bondType, bondStage: u.bondStage }, ctx.rules, ctx.day);
     if (u.status && ["active", "injured", "missing", "dead", "departed"].includes(u.status)) n.status = u.status;
     if (u.statusNote) n.statusNote = String(u.statusNote).slice(0, 160);
     n.lastSeen = { locationId: ctx.locationId || null, day: ctx.day ?? null };
@@ -149,6 +160,54 @@ export function relationshipBand(score) {
   return "neutral";
 }
 
+/** SNG-108: set/advance an NPC bond's KIND (bondType) and — for a romantic bond — its STAGE, gated:
+ *  romantic is REFUSED for a minor (same floor as art/romance); a stage may advance at most one step
+ *  per beat and only if the relationship score meets that stage's floor (no leaping to "partner" at
+ *  relationship 2). Additive + logged; never silently rewrites. Returns {changed, refused?}. */
+export function advanceBond(n, { bondType, bondStage } = {}, rules = null, day = null) {
+  if (!n) return { changed: false };
+  const floors = rules?.bond?.stageFloors || DEFAULT_STAGE_FLOORS;
+  let changed = false;
+  if (bondType === "romantic" && isMinorSubject(n)) { // absolute minor-protection
+    n.history = [...(n.history || []), `[d${day ?? "?"}] (a romantic turn was declined — protected)`].slice(-CAPS.history);
+    return { changed: false, refused: "minor" };
+  }
+  if (bondType && BOND_TYPES.includes(bondType) && bondType !== n.bondType) {
+    n.bondType = bondType; changed = true;
+    n.history = [...(n.history || []), `[d${day ?? "?"}] Your bond becomes ${bondType}.`].slice(-CAPS.history);
+  }
+  if (bondStage && (n.bondType || bondType) === "romantic" && ROMANTIC_STAGES.includes(bondStage)) {
+    const wantIdx = ROMANTIC_STAGES.indexOf(bondStage);
+    const curIdx = n.bondStage ? ROMANTIC_STAGES.indexOf(n.bondStage) : -1;
+    const cappedIdx = Math.min(wantIdx, curIdx + 1); // never leap past the next stage
+    if (cappedIdx > curIdx) {
+      const target = ROMANTIC_STAGES[cappedIdx];
+      if ((n.relationship ?? 0) >= (floors[target] ?? 0)) { // score must support the stage
+        n.bondStage = target; changed = true;
+        n.history = [...(n.history || []), `[d${day ?? "?"}] Your bond deepens — ${target}.`].slice(-CAPS.history);
+      }
+    }
+  }
+  return { changed };
+}
+
+/** SNG-108: human label combining the bond's KIND, romantic STAGE, and score band — "committed
+ *  partner · devoted", "rival · wary", or just the band for a plain acquaintance. */
+export function relationshipLabel(n) {
+  const band = relationshipBand(n?.relationship ?? 0);
+  const type = n?.bondType && n.bondType !== "platonic" ? n.bondType : null;
+  if (type === "romantic" && n.bondStage) {
+    const word = { courting: "courting", together: "together", committed: "committed partner", partner: "partner" }[n.bondStage] || n.bondStage;
+    return `${word} · ${band}`;
+  }
+  return type ? `${type} · ${band}` : band;
+}
+
+/** SNG-108: a romantic bond at the party-adjacent stage — a companion by relationship, not recruitment. */
+export function isPartnerAdjacent(n, rules = null) {
+  return n?.bondType === "romantic" && n?.bondStage === (rules?.bond?.partyAdjacentStage || "partner");
+}
+
 /** Registry block for the GM: people relevant to this scene/location first, then
  *  the strongest other bonds. The GM must treat these as established fact. */
 export function npcRegistryForGM(character, { locationId = null, sceneNpcNames = [] } = {}) {
@@ -167,6 +226,7 @@ export function npcRegistryForGM(character, { locationId = null, sceneNpcNames =
   if (!pick.length) return null;
   return pick.map(n =>
     `- ${n.name}${n.role ? ` (${n.role})` : ""} — ${relationshipBand(n.relationship)} (${n.relationship}), status: ${n.status}.` +
+    (n.bondType && n.bondType !== "platonic" ? ` BOND: ${relationshipLabel(n)} — established fact; honor the KIND of this relationship.` : "") +
     (n.description ? ` ${n.description}` : "") +
     (n.statusNote ? ` CURRENT SITUATION: ${n.statusNote}.` : "") +
     (n.skillsObserved.length ? ` Skills seen: ${n.skillsObserved.join(", ")}.` : "") +

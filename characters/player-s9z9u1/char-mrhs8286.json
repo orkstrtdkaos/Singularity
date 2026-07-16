@@ -2030,16 +2030,21 @@
         "player": "Pull her back from the stone and against your chest — change the angle, change the hold",
         "summary": "Silas draws Pell back against his chest — angle changed, hold changed, the climb continuing.",
         "narration": "The pull is simple and she comes willingly — you draw her back off the stone and against your chest, her weight settling into you, and the angle shifts entirely. Her back is warm against your front, her head falling to the side to find your shoulder, both your hands now free to move where they will. The cold air reaches the stone where she was braced; here, pressed together, there is only heat.\n\nShe makes a low sound at the change — part surprise, part satisfaction — and her hands find your forearms where they cross her body, not pulling, just holding the contact, feeling the motion from a new position. The fire has burned lower, the coals painting everything in red and amber. Huginn has not stirred. The wine sits on its flat stone, last pour still in the glass.\n\nYou are at the angle now where you can watch her face if you choose — the line of her jaw, her eyes half-closed, the way her mouth opens slightly when the rhythm catches right. This is the part she called managing. She is not managing it.\n\nHer hands tighten on your forearms. Her breath is short and climbing. The coals throw their slow light across both of you, and the overhang holds everything in."
+      },
+      {
+        "player": "Slow it back down — draw it out, make her ask.",
+        "summary": "Silas draws down the rhythm — Pell names what she wants plainly, armor gone.",
+        "narration": "You slow. Not a pause — a deliberate withdrawal of the rhythm she's been answering, like pulling a tide back from the shore just as it was reaching full. Your hips ease to half the pace, then slower still, and you feel the change move through her immediately — a small frustrated sound at the back of her throat, her hands tightening on your forearms, the rolling pressure of her hips trying to chase what you've taken back.\n\nYou let her chase it. Your hand stays where it is, unhurried, pressure steady but not urgent, and you put your mouth close to her ear — not speaking yet, just the warmth of your breath there, a presence that makes the waiting specific. The coals throw red light across the stone and across her face, turned slightly toward you now, the line of her jaw taut. She is not managing anything. She is entirely here, entirely waiting, and she knows you know it.\n\nShe lasts a few breaths. Then: \"Silas.\" The way she says it is not a question and not a name — it is a request with all the armor stripped off, the vowel stretched slightly as her hips roll back into the slow pace and find nothing given. Her hands press harder into your forearms. \"Don't—\" A short exhale. She tips her head back against your shoulder, bares her throat to the firelight, and finishes it plainly, quietly, the way she finishes things she has decided: \"give me the pace back.\"\n\nThe wine sits untouched on the flat stone. Huginn is motionless on the lip of the rock. The overhang holds the heat of the fire and the sound of her breathing and nothing else."
       }
     ],
     "lastTurn": {
-      "narration": "The pull is simple and she comes willingly — you draw her back off the stone and against your chest, her weight settling into you, and the angle shifts entirely. Her back is warm against your front, her head falling to the side to find your shoulder, both your hands now free to move where they will. The cold air reaches the stone where she was braced; here, pressed together, there is only heat.\n\nShe makes a low sound at the change — part surprise, part satisfaction — and her hands find your forearms where they cross her body, not pulling, just holding the contact, feeling the motion from a new position. The fire has burned lower, the coals painting everything in red and amber. Huginn has not stirred. The wine sits on its flat stone, last pour still in the glass.\n\nYou are at the angle now where you can watch her face if you choose — the line of her jaw, her eyes half-closed, the way her mouth opens slightly when the rhythm catches right. This is the part she called managing. She is not managing it.\n\nHer hands tighten on your forearms. Her breath is short and climbing. The coals throw their slow light across both of you, and the overhang holds everything in.",
-      "sceneSummary": "Silas draws Pell back against his chest — angle changed, hold changed, the climb continuing.",
+      "narration": "You slow. Not a pause — a deliberate withdrawal of the rhythm she's been answering, like pulling a tide back from the shore just as it was reaching full. Your hips ease to half the pace, then slower still, and you feel the change move through her immediately — a small frustrated sound at the back of her throat, her hands tightening on your forearms, the rolling pressure of her hips trying to chase what you've taken back.\n\nYou let her chase it. Your hand stays where it is, unhurried, pressure steady but not urgent, and you put your mouth close to her ear — not speaking yet, just the warmth of your breath there, a presence that makes the waiting specific. The coals throw red light across the stone and across her face, turned slightly toward you now, the line of her jaw taut. She is not managing anything. She is entirely here, entirely waiting, and she knows you know it.\n\nShe lasts a few breaths. Then: \"Silas.\" The way she says it is not a question and not a name — it is a request with all the armor stripped off, the vowel stretched slightly as her hips roll back into the slow pace and find nothing given. Her hands press harder into your forearms. \"Don't—\" A short exhale. She tips her head back against your shoulder, bares her throat to the firelight, and finishes it plainly, quietly, the way she finishes things she has decided: \"give me the pace back.\"\n\nThe wine sits untouched on the flat stone. Huginn is motionless on the lip of the rock. The overhang holds the heat of the fire and the sound of her breathing and nothing else.",
+      "sceneSummary": "Silas draws down the rhythm — Pell names what she wants plainly, armor gone.",
       "choices": [
         {
-          "label": "Stay here — hold her, keep the pace, and let her climb the rest of the way.",
+          "label": "Give her what she asked for — harder, all the way through.",
           "attribute": "physical",
-          "subAttribute": "agility",
+          "subAttribute": "strength",
           "difficulty": 0,
           "intentTags": [
             "romantic"
@@ -2047,17 +2052,7 @@
           "trivial": true
         },
         {
-          "label": "Put your mouth to her ear and say her name — just that.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "romantic"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Slow it back down — draw it out, make her ask.",
+          "label": "Hold the slow pace — make her ask again, more plainly.",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
@@ -2067,9 +2062,19 @@
           "trivial": true
         },
         {
-          "label": "Do something else entirely.",
+          "label": "Turn her to face you — change everything: angle, eye contact, what's possible.",
           "attribute": "physical",
           "subAttribute": "agility",
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Answer her with your mouth at her ear — say what you want instead of just doing it.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
             "romantic"
@@ -2082,15 +2087,15 @@
         "energy": 0
       },
       "scene": {
-        "setting": "Far side of the mountain pass, evening — south-facing rock overhang, fire burned down to low red coals throwing warm amber light across the stone. Silas has drawn Pell back against his chest — she leans into him fully, hands on his forearms, face visible in the firelight.",
+        "setting": "Far side of the mountain pass, evening — south-facing rock overhang, fire burned to low red coals throwing warm amber light across the stone. Silas has drawn Pell back against his chest — she leans into him, hands holding his forearms, face tipped toward him, throat bare in the firelight.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Leaning back against Silas's chest, hands holding his forearms, breath short and climbing — face open, nothing managed."
+            "state": "Drawn back against Silas's chest, hands pressing into his forearms — head tipped back against his shoulder, throat exposed, waiting on his answer."
           },
           {
             "name": "Huginn",
-            "state": "Head still tucked under one wing on the stone lip. Unmoved."
+            "state": "Motionless on the stone lip, head still tucked. Unmoved."
           }
         ],
         "objects": [
@@ -2106,7 +2111,7 @@
           "Rock overhang — south-facing, dry underside"
         ],
         "threads": [
-          "Pell climbing — the moment is close.",
+          "Pell asked plainly for the pace back — Silas holds the answer.",
           "The last pour of Resin Mountain Wine sits untouched on the flat stone.",
           "The coals are burning low — the fire will not last much longer.",
           "Edge District bearing — Leth and Sorel as first contacts.",
@@ -2118,29 +2123,30 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Drawn back against Silas's chest — angle changed, hold changed; hands on his forearms, face open in the firelight, breath short and climbing.",
+          "note": "Asked plainly for the pace back — named it with the armor down, no management, no qualifier.",
+          "learned": [
+            "Names the request plainly when the slow pace makes evasion impossible — the ask comes through without ledger-close."
+          ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the overhang camp, far side of the pass — fully unguarded, climbing, nothing managed.",
-          "bondType": "romantic",
-          "bondStage": "together"
+          "statusNote": "At the overhang camp, far side of the pass — fully unguarded, climbing, nothing managed."
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A short beat — position change, the moment continuing."
+        "hoursPassed": 0,
+        "why": "A single held moment — the scene has not advanced."
       }
     },
     "sceneState": {
-      "setting": "Far side of the mountain pass, evening — south-facing rock overhang, fire burned down to low red coals throwing warm amber light across the stone. Silas has drawn Pell back against his chest — she leans into him fully, hands on his forearms, face visible in the firelight.",
+      "setting": "Far side of the mountain pass, evening — south-facing rock overhang, fire burned to low red coals throwing warm amber light across the stone. Silas has drawn Pell back against his chest — she leans into him, hands holding his forearms, face tipped toward him, throat bare in the firelight.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Leaning back against Silas's chest, hands holding his forearms, breath short and climbing — face open, nothing managed."
+          "state": "Drawn back against Silas's chest, hands pressing into his forearms — head tipped back against his shoulder, throat expos"
         },
         {
           "name": "Huginn",
-          "state": "Head still tucked under one wing on the stone lip. Unmoved."
+          "state": "Motionless on the stone lip, head still tucked. Unmoved."
         }
       ],
       "objects": [
@@ -2156,7 +2162,7 @@
         "Rock overhang — south-facing, dry underside"
       ],
       "threads": [
-        "Pell climbing — the moment is close.",
+        "Pell asked plainly for the pace back — Silas holds the answer.",
         "The last pour of Resin Mountain Wine sits untouched on the flat stone.",
         "The coals are burning low — the fire will not last much longer.",
         "Edge District bearing — Leth and Sorel as first contacts.",
@@ -2309,7 +2315,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Watched Silas undress without looking away — measuring rather than performing. Settled into a low open stance and is waiting. The game is plainly named on both sides now.",
         "[d2] Pulled Silas into her from behind, arms crossed forward across his chest — held the position longer than the technique required, then shifted grip deliberately. Said 'there' into h",
         "[d2] Silas reversed the hold — she let him move, curious about where it was going. Arms came up to cover his hands, not to stop them. Head back against his shoulder, breath slower. No a",
         "[d2] Named plainly by Silas — Pell Marsh — and asked directly. Answered yes without qualification or armor. The ledger she is always managing is open.",
@@ -2318,17 +2323,18 @@
         "[d2] Went still at the mouth on her neck — then tilted her head to give more, leaned her full weight back into Silas, let the pace have her. Hips beginning to answer the rhythm, asking ",
         "[d2] Named what she wants plainly and without armor — harder, and don't stop watching. The second ask came quieter, less decided, and she didn't take it back.",
         "[d2] Said Silas's name — stripped of everything except what it means right now. Fully unguarded, climbing.",
-        "[d2] Drawn back against Silas's chest — angle changed, hold changed; hands on his forearms, face open in the firelight, breath short and climbing."
+        "[d2] Drawn back against Silas's chest — angle changed, hold changed; hands on his forearms, face open in the firelight, breath short and climbing.",
+        "[d2] Asked plainly for the pace back — named it with the armor down, no management, no qualifier."
       ],
       "knownFacts": [
-        "Silas named the grapple plainly and without qualification — she read the double meaning and chose the stance anyway",
         "Leads with patience when she has the advantage — technique shifts to something else once the hold is established",
         "'Yes' — no qualifier, no close — the first time she has not managed the answer before it reached her mouth",
         "She wants to be watched — and naming it cost her something small and real.",
         "Her body's asking comes before her words do — she rolls her hips into the pace rather than speaking it.",
         "Names want without management when the moment takes the ledger from her — the second half of the ask was the one she hadn't decided to say.",
         "Stays in the open rather than recovering composure once it has slipped.",
-        "Names Silas plainly, without management, when the moment takes the last of her composure."
+        "Names Silas plainly, without management, when the moment takes the last of her composure.",
+        "Names the request plainly when the slow pace makes evasion impossible — the ask comes through without ledger-close."
       ],
       "skillsObserved": [
         "reading a stain pattern independently against a known failur",
@@ -3459,15 +3465,16 @@
     }
   },
   "tendencies": {
-    "strategic": 56.889863723063506,
-    "cerebral": 37.8847627278034,
-    "social": 54.62360234289633,
-    "generous": 13.371787511082315,
-    "cautious": 49.17285065051266,
-    "physical": 3.3044873118699436,
-    "risky": 9.30477156776606,
-    "ruthless": 4.091550698059868,
-    "carousing": 2.873096178138419
+    "strategic": 55.46761712998692,
+    "cerebral": 36.93764365960831,
+    "social": 53.258012284323925,
+    "generous": 13.037492823305257,
+    "cautious": 47.94352938424984,
+    "physical": 3.221875129073195,
+    "risky": 9.07215227857191,
+    "ruthless": 3.9892619306083716,
+    "carousing": 2.8012687736849586,
+    "amorous": 1
   },
   "aptitudes": [
     "strategist",
@@ -3480,7 +3487,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 318,
+  "actionCount": 319,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3622,8 +3629,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784183920611,
-  "rev": 441,
+  "updatedAt": 1784184021683,
+  "rev": 442,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4186,7 +4193,7 @@
   "syncedAt": 1784183539045,
   "teachers": {},
   "regionsKnown": {
-    "valley": 128
+    "valley": 129
   },
   "foreclosed": [
     "rootkin",

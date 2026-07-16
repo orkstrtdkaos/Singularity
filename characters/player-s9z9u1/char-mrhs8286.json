@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 7,
-  "xp": 668,
+  "xp": 673,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -54,7 +54,7 @@
   "maxHealth": 60,
   "health": 60,
   "maxEnergy": 130,
-  "energy": 67,
+  "energy": 63,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1658,145 +1658,174 @@
         "player": "Let Pell know that you'll shadow step to get to the smokehouse as fast as possible.  Have her meet you there.",
         "summary": "Silas shadowsteps to the smokehouse ahead of Pell — arrives unseen at the back door, Sorel still unaware.",
         "narration": "The north gate is thirty yards ahead, pale track open, meadow light just beginning to warm. You turn back toward Pell instead.\n\n\"Smokehouse shadow,\" you say, low enough that it's just the two of you. You tip your chin toward the nearest shadow — the gate's dry-stone wall throws a good one this time of morning, dark against the frost-pale ground. \"I can be there before Aldric's had time to explain our absence. Meet me.\"\n\nPell looks at the shadow, looks at you, and her expression does the small thing it does when she is filing new information under practical. \"Go,\" she says, and reaches across both packs to check Memory's lash without breaking eye contact. \"I know the lane.\"\n\nHuginn lifts off your shoulder and is simply gone — somewhere between here and there, already ahead of you, the way he gets. Pip Cotter watches with the wide-eyed gravity of a child who has just understood that the morning got interesting, starfruit pinched between her fingers.\n\nYou step into the gate's shadow, feel the cold swallow the light, and step out of the smokehouse's rear overhang shadow on the other side — salt and wood-smoke landing on you all at once. The back door is two strides ahead. Whatever Sorel is doing inside, you have arrived ahead of the news of your coming."
+      },
+      {
+        "player": "Pause at the back door and use Order-Sense on the interior — read what situation Sorel is actually in before you step through.",
+        "summary": "Silas reads the smokehouse interior through Order-Sense — Sorel is present and circling something with Aldric, news withheld on both ends.",
+        "narration": "The back-door shadow is still cold and deep — frost on the latch-iron, salt and woodsmoke catching at the back of your throat. You settle one shoulder against the overhang post and let Order-Sense open quietly, the way you'd open a hand rather than reach.\n\nThe substrate is thin here. The sense comes in at about half weight — shapes and relationships, not fine grain. But it's enough.\n\nSorel is at the smoking rack. Standing, not seated — someone who arrived recently and hasn't found their ease yet. Aldric is on the far side of the block, knife in hand, the familiar rhythm of the morning perch row. Between them: a conversation that has been going for some time without going anywhere, the structural pattern of two people who know each other well enough to talk without saying the thing they're actually circling. The design of it reads as: *news being withheld on both ends*.\n\nNothing armed. Nothing cornered. No urgency in the physical arrangement that suggests Sorel is leaving soon, but the pack reads as present — the weight distribution of someone who hasn't put it down yet.\n\nHuginn shifts one talon on the ridge above you and looks at the door with the patient attention he gives to things that are about to change."
       }
     ],
     "lastTurn": {
-      "narration": "The north gate is thirty yards ahead, pale track open, meadow light just beginning to warm. You turn back toward Pell instead.\n\n\"Smokehouse shadow,\" you say, low enough that it's just the two of you. You tip your chin toward the nearest shadow — the gate's dry-stone wall throws a good one this time of morning, dark against the frost-pale ground. \"I can be there before Aldric's had time to explain our absence. Meet me.\"\n\nPell looks at the shadow, looks at you, and her expression does the small thing it does when she is filing new information under practical. \"Go,\" she says, and reaches across both packs to check Memory's lash without breaking eye contact. \"I know the lane.\"\n\nHuginn lifts off your shoulder and is simply gone — somewhere between here and there, already ahead of you, the way he gets. Pip Cotter watches with the wide-eyed gravity of a child who has just understood that the morning got interesting, starfruit pinched between her fingers.\n\nYou step into the gate's shadow, feel the cold swallow the light, and step out of the smokehouse's rear overhang shadow on the other side — salt and wood-smoke landing on you all at once. The back door is two strides ahead. Whatever Sorel is doing inside, you have arrived ahead of the news of your coming.",
-      "sceneSummary": "Silas shadowsteps to the smokehouse ahead of Pell — arrives unseen at the back door, Sorel still unaware.",
+      "narration": "The back-door shadow is still cold and deep — frost on the latch-iron, salt and woodsmoke catching at the back of your throat. You settle one shoulder against the overhang post and let Order-Sense open quietly, the way you'd open a hand rather than reach.\n\nThe substrate is thin here. The sense comes in at about half weight — shapes and relationships, not fine grain. But it's enough.\n\nSorel is at the smoking rack. Standing, not seated — someone who arrived recently and hasn't found their ease yet. Aldric is on the far side of the block, knife in hand, the familiar rhythm of the morning perch row. Between them: a conversation that has been going for some time without going anywhere, the structural pattern of two people who know each other well enough to talk without saying the thing they're actually circling. The design of it reads as: *news being withheld on both ends*.\n\nNothing armed. Nothing cornered. No urgency in the physical arrangement that suggests Sorel is leaving soon, but the pack reads as present — the weight distribution of someone who hasn't put it down yet.\n\nHuginn shifts one talon on the ridge above you and looks at the door with the patient attention he gives to things that are about to change.",
+      "sceneSummary": "Silas reads the smokehouse interior through Order-Sense — Sorel is present and circling something with Aldric, news withheld on both ends.",
       "choices": [
         {
-          "label": "Walk in through the back door directly — let Aldric see you arrive and make the introduction.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "approach",
-            "open"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Pause at the back door and use Order-Sense on the interior — read what situation Sorel is actually in before you step through.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "scout",
-            "study"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Press your ear to the door first — catch what's being said before you're seen.",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "careful",
-            "scout"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Wait outside for Pell — go in together, let her read the room alongside you.",
+          "label": "Step through now — walk in before Pell arrives; meet Sorel on your own terms first.",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "help"
+            "approach",
+            "direct"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Wait for Pell — hold the overhang shadow until she rounds the lane; enter together.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "careful",
+            "wait"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Knock once and wait — announce yourself at the threshold; let Aldric make the introduction.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "careful",
+            "social"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use The Attended End on Sorel through the wall — read what's ending for this person before you put your face in front of them.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "death_life": -0.3
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "the-attended-end",
+          "energyCost": 2,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
       "characterDeltas": {
         "health": 0,
-        "energy": -7,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
+        "energy": -2
       },
       "scene": {
-        "setting": "Rear of Aldric's smokehouse, Millbrook — back-door overhang, shadow still deep at this hour. Salt and wood-smoke heavy on the cold air. The back door is two strides ahead, closed but not latched.",
+        "setting": "Rear of Aldric's smokehouse, Millbrook — back-door overhang, shadow still deep at this hour. Salt and woodsmoke heavy on the cold air. The back door is two strides ahead, closed but not latched.",
         "npcsPresent": [
           {
             "name": "Huginn",
-            "state": "Already here — perched on the smokehouse roof ridge, watching the door, head angled down."
+            "state": "Perched on the smokehouse roof ridge, one talon shifted, watching the door with patient attention."
+          },
+          {
+            "name": "Sorel (inside)",
+            "state": "Standing at the smoking rack, pack not yet set down, mid-conversation with Aldric — news circling on both ends."
+          },
+          {
+            "name": "Aldric (inside)",
+            "state": "At the smoking block, knife in hand, morning perch row — holding his own piece of the unspoken exchange."
           }
         ],
         "objects": [
-          "Smokehouse back door — closed, two strides ahead",
+          "Smokehouse back door — closed, frost on the latch-iron, two strides ahead",
           "Rear overhang shadow — the step-through point, still dark",
           "Memory (spear, across Silas's pack)"
         ],
         "threads": [
-          "Sorel is inside the smokehouse — unaware of Silas's arrival",
-          "Pell is on the south lane, walking — two to three minutes behind",
-          "Pip Cotter is at the north gate with her starfruit, errand complete"
+          "Sorel inside, pack not yet put down — news withheld on both ends with Aldric",
+          "Pell is two minutes behind on the south lane",
+          "Pip Cotter at the north gate, errand complete"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "role": "Village blacksmith, Millbrook",
-          "note": "Received the plan without question — checked Memory's lash and sent Silas ahead. Walking the lane now.",
-          "statusNote": "On the south lane, walking to the smokehouse — two to three minutes behind Silas.",
-          "relationshipDelta": 0
-        },
+          "npcId": "aldric",
+          "name": "Aldric",
+          "role": "Smokehouse operator, Millbrook",
+          "note": "Inside at the morning perch row, in a circling conversation with Sorel — neither saying the load-bearing thing yet.",
+          "learned": [
+            "In conversation with Sorel this morning — news withheld on both ends"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At his smokehouse block, working the morning perch row — in mid-conversation with Sorel, both holding something back."
+        }
+      ],
+      "codexUpdates": [
         {
-          "op": "update",
-          "npcId": "pip-cotter",
-          "name": "Pip Cotter",
-          "role": "Mara's errand-runner",
-          "note": "Watched the shadowstep with starfruit in hand — errand complete, dismissed.",
-          "statusNote": "At the north gate end of the south lane, errand done, starfruit in hand.",
-          "relationshipDelta": 0
+          "topic": "sorel",
+          "label": "Sorel",
+          "kind": "person",
+          "fact": "Observed through Order-Sense at Aldric's smokehouse — standing, pack not yet down, in a long circling conversation with Aldric where news is withheld on both ends. Arrived recently. Not armed, not cornered, not leaving immediately.",
+          "links": [
+            "millbrook",
+            "aldric",
+            "the-water-crisis",
+            "mara-wells"
+          ]
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.1,
-        "why": "A quick exchange and a shadowstep — less than ten minutes elapsed."
+        "hoursPassed": 0.25,
+        "why": "A brief pause at the smokehouse back door — Order-Sense read, Pell still two minutes behind."
       }
     },
     "sceneState": {
-      "setting": "Rear of Aldric's smokehouse, Millbrook — back-door overhang, shadow still deep at this hour. Salt and wood-smoke heavy on the cold air. The back door is two strides ahead, closed but not latched.",
+      "setting": "Rear of Aldric's smokehouse, Millbrook — back-door overhang, shadow still deep at this hour. Salt and woodsmoke heavy on the cold air. The back door is two strides ahead, closed but not latched.",
       "npcsPresent": [
         {
           "name": "Huginn",
-          "state": "Already here — perched on the smokehouse roof ridge, watching the door, head angled down."
+          "state": "Perched on the smokehouse roof ridge, one talon shifted, watching the door with patient attention."
+        },
+        {
+          "name": "Sorel (inside)",
+          "state": "Standing at the smoking rack, pack not yet set down, mid-conversation with Aldric — news circling on both ends."
+        },
+        {
+          "name": "Aldric (inside)",
+          "state": "At the smoking block, knife in hand, morning perch row — holding his own piece of the unspoken exchange."
         }
       ],
       "objects": [
-        "Smokehouse back door — closed, two strides ahead",
+        "Smokehouse back door — closed, frost on the latch-iron, two strides ahead",
         "Rear overhang shadow — the step-through point, still dark",
         "Memory (spear, across Silas's pack)"
       ],
       "threads": [
-        "Sorel is inside the smokehouse — unaware of Silas's arrival",
-        "Pell is on the south lane, walking — two to three minutes behind",
-        "Pip Cotter is at the north gate with her starfruit, errand complete"
+        "Sorel inside, pack not yet put down — news withheld on both ends with Aldric",
+        "Pell is two minutes behind on the south lane",
+        "Pip Cotter at the north gate, errand complete"
       ]
     }
   },
@@ -1898,7 +1927,6 @@
       },
       "relationship": 5,
       "history": [
-        "[d1] Accepted Silas's trade offer without ceremony — provisioning in exchange for hunting, with an explicit ask for information about the upstream situation. Named himself. Made space f",
         "[d1] Accepted two rabbits and the pigeon — confirmed the work was good. Provided a parcel of dried perch and salted pork. Directed Silas to Mara Wells (red door, east of the well) for t",
         "[d1] Silas gave his name; Aldric received it with a chin-dip and named Pell the blacksmith (south lane, past the elder's post) as the village source for heavier iron — snare hardware, s",
         "[d1] Silas invoked his name to confirm the referral to Pell — name landed clean.",
@@ -1907,17 +1935,18 @@
         "[d2] Accepted the thirty-credit arrangement and paid out sixty — ledger closed and initialed. Back to work.",
         "[d2] Received Mara's offset note and initialed his counterpart ledger entry. Briefed on the vault-failure timeline and east-channel surge scope — connected the fish-count decline to the",
         "[d2] Produced a cured bladder waterskin from back storage — named two cord-weight or standing credit as the price without ceremony. Returned to the perch row.",
-        "[d2] Took the standing credit deduction without ceremony — ledger marked, waterskin handed over, knife back in the perch row. Sent Silas off with 'safe road' to the block."
+        "[d2] Took the standing credit deduction without ceremony — ledger marked, waterskin handed over, knife back in the perch row. Sent Silas off with 'safe road' to the block.",
+        "[d2] Inside at the morning perch row, in a circling conversation with Sorel — neither saying the load-bearing thing yet."
       ],
       "knownFacts": [
-        "No bowyer currently in Millbrook — position unfilled since two winters ago",
         "Pell is the village blacksmith, works the forge on the south lane past the elder's post — does edge work, hardware, repairs, heavier iron hunting kit",
         "Boar were working riverside reed-beds every morning three weeks ago — now pushing uphill and away from the water",
         "Accepted Mara's store offset as a clean deduction — treats all accounts in the village as part of the same ledger",
         "The vault section failure and the declining fish catch are the same problem — one mechanism",
         "Dara Holt knows and is staging mitigation; Mara holds a second copy of the timeline",
         "Silas and Pell are leaving the valley to find a pre-Transition structural expert",
-        "Keeps cured bladder waterskins in back storage as Mara indicated — practical trail goods, available on request"
+        "Keeps cured bladder waterskins in back storage as Mara indicated — practical trail goods, available on request",
+        "In conversation with Sorel this morning — news withheld on both ends"
       ],
       "skillsObserved": [
         "supply accounting",
@@ -1928,7 +1957,7 @@
         "practical stock management"
       ],
       "status": "active",
-      "statusNote": "At his smokehouse block, working the morning perch row — watching the downstream end while Silas is gone.",
+      "statusNote": "At his smokehouse block, working the morning perch row — in mid-conversation with Sorel, both holding something back.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2278,9 +2307,9 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-15T18:50:59.786Z",
-    "lastTickWorldDay": 15,
-    "lastCanonWorldDay": 15
+    "lastSharedReadAt": "2026-07-16T00:06:39.857Z",
+    "lastTickWorldDay": 16,
+    "lastCanonWorldDay": 16
   },
   "domains": {
     "primary": "ashwarden",
@@ -2479,14 +2508,6 @@
         "label": "Pell",
         "kind": "person",
         "facts": [
-          "[d2] Pell found a pre-Transition wash-room site four or five years ago through the north cut — dressed slate floor, close-fitted old mortar, two hip-height saddle-mount ring-hooks (wide mounts, for somethi",
-          "[d2] Confirmed the northeast line runs toward her wash-room site — a mile and a half as the crow goes. Named the valve housing as the working end without hesitation.",
-          "[d2] Lost the race to the wash-room site by three strides — Silas used a second shadowstep to the finishing shadow. Arrived second, breathing hard, processing it cleanly.",
-          "[d2] When she has no fast deflection ready, her face goes quiet — and the quiet is warmer than the usual register. She closes distance deliberately, on her own terms, when she's decided.",
-          "[d2] Kissed a second time at the wash-room site — leaned in rather than away, held her hand at his jaw, said 'alright' with the same unflurried certainty as the first time. The armor was fully down.",
-          "[d2] Accepted date three: last light, Disputed Zone interference ridge, food with fat. Knows the ridge. Moved immediately to read the site without ceremony.",
-          "[d2] Named date four herself — a snowmelt-fed pool three hours north of the interference ridge, clean water, night. No salt-perch, no spear. Said it without hesitation or deflection.",
-          "[d2] Has stayed in the valley by choice, not inability — but said plainly that the work may not stay here. Open, conditionally, to what lies past the pass. Asked what it leads to.",
           "[d2] Has a deep lateral burn scar inside the left forearm — first real forging day, age sixteen. A second knotted scar at the shoulder-blade margin, origin unstated. Met Silas's palework scars with her own",
           "[d2] Traces scars with a smith's attention — pressure-aware, reading depth and surface. Went still and deliberate under Silas's touch on her forearm and shoulder. Asked 'how far down?' about the scars belo",
           "[d2] Two more craft-marks found: a compression line at the left floating rib from years of a working belt, and a small circular scar high on the right ribcage — precise, the shape of something hot that was",
@@ -2502,22 +2523,32 @@
           "[d2] At the forge morning's close, Pell admitted she already wants Silas — names it as a problem she is managing badly, and is content that she is. The declaration of bond was received with her cheek to hi",
           "[d2] Pell can feel the collar rune at range — her thread in Memory is live. The spear is growing; both makers are present in it, and it will deepen as it attends more endings.",
           "[d2] Named no prior claims: one man from the Harmonic Heights two winters back, came for iron fittings three times over a season. She let it run longer than it should have. He stopped coming; she didn't go",
-          "[d2] She names her own not-asking as a habit — long-standing, unsentimental about it. The road is what she knows how to want openly. The other wanting she carries without words for it, and does not intend "
+          "[d2] She names her own not-asking as a habit — long-standing, unsentimental about it. The road is what she knows how to want openly. The other wanting she carries without words for it, and does not intend ",
+          "[d2] Pell identified her maker's mark in the blade on sight, confirmed the binding closed rather than passed at the kill moment, and asked to be shown what it was supposed to do. The examination is now ope",
+          "[d2] The binding fault is structural: the transverse rune-line is too shallow to close the circuit at kill-speed. The maker's mark was not the problem — it was the thing the binding protected. Repair requi",
+          "[d2] Palework demonstrated on the spent rune-wax made the ability's intent legible to Pell — she now understands what the channel was supposed to carry and where the transverse fault prevented it from land",
+          "[d2] Pell has agreed to plan the repair as a shared undertaking. The repair question is now three-way: deepen the transverse channel, rewrite the rune into deeper iron, and determine whether Pell's maker's",
+          "[d2] Upgrade completed rough: transverse deepened, maker's mark re-seated with slight axial variance, memory-capacitor installed at collar (north quarter loose). Death-register now readable before and afte",
+          "[d2] Memory-capacitor at the collar north quarter pressed flush before the pitch set — Order-Sense found the correction window. The spear is now fully seated: transverse deepened, maker's mark re-seated ob",
+          "[d2] Deathsense confirms the repair complete — death-register runs clean end to end, load-bearing through the deepened transverse, caught by the capacitor. The maker's mark's oblique axis reads as Pell's s",
+          "[d2] Named 'Memory' at dawn in Pell's forge — the name given over wine and starfruit, in the presence of Pell and Huginn. The oblique axis of Pell's maker's mark interpreted as room made: for something fou"
         ],
         "links": [
-          "precursor-signs-in-the-valley",
-          "mountain-pass",
-          "millbrook",
-          "the-death-bound-spear",
           "deathsense",
           "the-attended-end",
           "forge-south-pit",
-          "huginn"
+          "huginn",
+          "aldric-provisioning-deal",
+          "the-unnamed-gift",
+          "palework",
+          "order-sense"
         ],
         "aliases": [
           "Pell Marsh",
           "The Death-Bound Spear (Memory)",
-          "Memory"
+          "Memory",
+          "The Death-Bound Spear",
+          "Deathbound Runic Spear"
         ],
         "createdDay": 1,
         "entityId": "pell",
@@ -2601,40 +2632,6 @@
         "createdDay": 1,
         "updatedDay": 1
       },
-      "death-bound-spear": {
-        "id": "death-bound-spear",
-        "label": "The Death-Bound Spear",
-        "kind": "lore",
-        "facts": [
-          "[d1] The Huginn-thread is now present and mutual — not a tether but a mutual registration, like a name between two who already knew each other's faces. The binding is still rough, but oriented. The spear k",
-          "[d1] The rough death-binding on the spear closed rather than passed a Palework channel at the kill moment — the runes acted as a fist, not a gate. Whether this is a flaw in the binding's youth, an incompat",
-          "[d1] The rune-channel did not misfire — it sealed. At the kill moment the death-register read Pell's maker's mark as 'still becoming' (unfinished intention in the ironwork) and held the Palework channel ra",
-          "[d1] Pell's maker's mark is a live, unfinished anchor in the binding — the spear sealed at the kill to protect it. The Palework channel remains inside, unspent. The binding may need the mark to finish beco",
-          "[d2] Pell identified her maker's mark in the blade on sight, confirmed the binding closed rather than passed at the kill moment, and asked to be shown what it was supposed to do. The examination is now ope",
-          "[d2] The binding fault is structural: the transverse rune-line is too shallow to close the circuit at kill-speed. The maker's mark was not the problem — it was the thing the binding protected. Repair requi",
-          "[d2] Palework demonstrated on the spent rune-wax made the ability's intent legible to Pell — she now understands what the channel was supposed to carry and where the transverse fault prevented it from land",
-          "[d2] Pell has agreed to plan the repair as a shared undertaking. The repair question is now three-way: deepen the transverse channel, rewrite the rune into deeper iron, and determine whether Pell's maker's",
-          "[d2] Upgrade completed rough: transverse deepened, maker's mark re-seated with slight axial variance, memory-capacitor installed at collar (north quarter loose). Death-register now readable before and afte",
-          "[d2] Memory-capacitor at the collar north quarter pressed flush before the pitch set — Order-Sense found the correction window. The spear is now fully seated: transverse deepened, maker's mark re-seated ob",
-          "[d2] Deathsense confirms the repair complete — death-register runs clean end to end, load-bearing through the deepened transverse, caught by the capacitor. The maker's mark's oblique axis reads as Pell's s",
-          "[d2] Named 'Memory' at dawn in Pell's forge — the name given over wine and starfruit, in the presence of Pell and Huginn. The oblique axis of Pell's maker's mark interpreted as room made: for something fou"
-        ],
-        "links": [
-          "pell",
-          "huginn",
-          "millbrook",
-          "aldric-provisioning-deal",
-          "the-unnamed-gift",
-          "deathsense",
-          "palework",
-          "order-sense"
-        ],
-        "aliases": [
-          "Deathbound Runic Spear"
-        ],
-        "createdDay": 1,
-        "updatedDay": 2
-      },
       "palework-relay-limit": {
         "id": "palework-relay-limit",
         "label": "Palework's Relay Limit",
@@ -2644,7 +2641,7 @@
         ],
         "links": [
           "millbrook",
-          "death-bound-spear",
+          "pell",
           "huginn",
           "aldric-provisioning-deal"
         ],
@@ -2887,7 +2884,8 @@
         "kind": "person",
         "facts": [
           "[d2] Spotted at Millbrook's smokehouse on World-day 15 — present in the village after a season of silence. Mara's message urgent enough to send Pip running.",
-          "[d2] Sorel — spice-broker, Edge District contact, not heard from in a season — has returned to Millbrook without announcement and is currently at Aldric's smokehouse on World-day 15 morning."
+          "[d2] Sorel — spice-broker, Edge District contact, not heard from in a season — has returned to Millbrook without announcement and is currently at Aldric's smokehouse on World-day 15 morning.",
+          "[d2] Observed through Order-Sense at Aldric's smokehouse — standing, pack not yet down, in a long circling conversation with Aldric where news is withheld on both ends. Arrived recently. Not armed, not cor"
         ],
         "links": [
           "mara-wells",
@@ -2903,15 +2901,15 @@
     }
   },
   "tendencies": {
-    "strategic": 61.146552707057474,
-    "cerebral": 39.69120216488036,
-    "social": 61.190031683998924,
-    "generous": 18.341977979682397,
-    "cautious": 47.81640849067909,
-    "physical": 0.836244616190515,
-    "risky": 2.781070021574848,
-    "ruthless": 2.082864652695809,
-    "carousing": 1.4402674590771396
+    "strategic": 61.840819943522185,
+    "cerebral": 40.49274615405596,
+    "social": 60.88408152557893,
+    "generous": 18.250268089783987,
+    "cautious": 47.57732644822569,
+    "physical": 0.8320633931095625,
+    "risky": 2.7671646714669738,
+    "ruthless": 2.0724503294323298,
+    "carousing": 1.433066121781754
   },
   "aptitudes": [
     "strategist",
@@ -2919,7 +2917,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 259,
+  "actionCount": 260,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3045,8 +3043,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13693&nologo=true",
-  "updatedAt": 1784160096919,
-  "rev": 354,
+  "updatedAt": 1784161128290,
+  "rev": 357,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3503,7 +3501,7 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 36,
+      "order_sense": 37,
       "palework": 17,
       "deathsense": 13,
       "shadowstep": 4,
@@ -3533,7 +3531,7 @@
     ]
   },
   "companionBonds": {
-    "marrow": 7.5
+    "marrow": 7.75
   },
   "customAbilities": {
     "the-attended-end": {
@@ -3608,7 +3606,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 60
+    "valley": 61
   },
   "foreclosed": [
     "rootkin",

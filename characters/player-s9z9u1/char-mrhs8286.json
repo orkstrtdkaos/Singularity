@@ -39,7 +39,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.6102476428448208,
+    "spectrumId": -0.6297352607025798,
     "violence_peace": 0.09798375000000001,
     "chaos_order": 0.15848824448093873,
     "mechanical_spiritual": 0.16517695395990592,
@@ -54,7 +54,7 @@
   "maxHealth": 60,
   "health": 60,
   "maxEnergy": 130,
-  "energy": 74,
+  "energy": 67,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1653,20 +1653,26 @@
         "player": "Show Pell the note and decide together - give Pip one piece of dried starfruit as a thank you for a job well done.",
         "summary": "Mara's note shared with Pell; Pip paid in starfruit for a job well done — Sorel at the smokehouse changes the calculus.",
         "narration": "You hold the cloth scrap out to Pell without comment. She takes it with two fingers, reads it once, reads it again the way she reads anything load-bearing, and hands it back.\n\n'Sorel,' she says. Not a question — she's filing it. 'Your contact from the edge district is currently standing in Aldric's smokehouse.' A beat. 'Which is behind us.'\n\nHuginn makes a sound that could be agreement or commentary. It is impossible to tell.\n\nYou reach into the traveler's pack and find the dried starfruit by feel — the sealed packet, cloth-wrapped tight. You open it at the fold and work one piece free without tearing the rest, then crouch down to Pip Cotter's level and hold it out on your palm the way you held the whetstone to Pell not ten minutes ago. Different weight entirely — this is for a job done well and the kid knows it.\n\nPip takes it with both hands, examines it the way a serious person examines an unfamiliar thing, and bites off a corner. Whatever she expected, the tartness catches her. She holds her ground. Four feet back, Pell watches this with something that is not quite a smile but occupies the same space.\n\nYou straighten up. North gate thirty yards ahead, morning track beyond it, Sorel behind you at the smokehouse — a contact who went quiet for a season and is now, without announcement, present. The road can wait a few minutes."
+      },
+      {
+        "player": "Let Pell know that you'll shadow step to get to the smokehouse as fast as possible.  Have her meet you there.",
+        "summary": "Silas shadowsteps to the smokehouse ahead of Pell — arrives unseen at the back door, Sorel still unaware.",
+        "narration": "The north gate is thirty yards ahead, pale track open, meadow light just beginning to warm. You turn back toward Pell instead.\n\n\"Smokehouse shadow,\" you say, low enough that it's just the two of you. You tip your chin toward the nearest shadow — the gate's dry-stone wall throws a good one this time of morning, dark against the frost-pale ground. \"I can be there before Aldric's had time to explain our absence. Meet me.\"\n\nPell looks at the shadow, looks at you, and her expression does the small thing it does when she is filing new information under practical. \"Go,\" she says, and reaches across both packs to check Memory's lash without breaking eye contact. \"I know the lane.\"\n\nHuginn lifts off your shoulder and is simply gone — somewhere between here and there, already ahead of you, the way he gets. Pip Cotter watches with the wide-eyed gravity of a child who has just understood that the morning got interesting, starfruit pinched between her fingers.\n\nYou step into the gate's shadow, feel the cold swallow the light, and step out of the smokehouse's rear overhang shadow on the other side — salt and wood-smoke landing on you all at once. The back door is two strides ahead. Whatever Sorel is doing inside, you have arrived ahead of the news of your coming."
       }
     ],
     "lastTurn": {
-      "narration": "You hold the cloth scrap out to Pell without comment. She takes it with two fingers, reads it once, reads it again the way she reads anything load-bearing, and hands it back.\n\n'Sorel,' she says. Not a question — she's filing it. 'Your contact from the edge district is currently standing in Aldric's smokehouse.' A beat. 'Which is behind us.'\n\nHuginn makes a sound that could be agreement or commentary. It is impossible to tell.\n\nYou reach into the traveler's pack and find the dried starfruit by feel — the sealed packet, cloth-wrapped tight. You open it at the fold and work one piece free without tearing the rest, then crouch down to Pip Cotter's level and hold it out on your palm the way you held the whetstone to Pell not ten minutes ago. Different weight entirely — this is for a job done well and the kid knows it.\n\nPip takes it with both hands, examines it the way a serious person examines an unfamiliar thing, and bites off a corner. Whatever she expected, the tartness catches her. She holds her ground. Four feet back, Pell watches this with something that is not quite a smile but occupies the same space.\n\nYou straighten up. North gate thirty yards ahead, morning track beyond it, Sorel behind you at the smokehouse — a contact who went quiet for a season and is now, without announcement, present. The road can wait a few minutes.",
-      "sceneSummary": "Mara's note shared with Pell; Pip paid in starfruit for a job well done — Sorel at the smokehouse changes the calculus.",
+      "narration": "The north gate is thirty yards ahead, pale track open, meadow light just beginning to warm. You turn back toward Pell instead.\n\n\"Smokehouse shadow,\" you say, low enough that it's just the two of you. You tip your chin toward the nearest shadow — the gate's dry-stone wall throws a good one this time of morning, dark against the frost-pale ground. \"I can be there before Aldric's had time to explain our absence. Meet me.\"\n\nPell looks at the shadow, looks at you, and her expression does the small thing it does when she is filing new information under practical. \"Go,\" she says, and reaches across both packs to check Memory's lash without breaking eye contact. \"I know the lane.\"\n\nHuginn lifts off your shoulder and is simply gone — somewhere between here and there, already ahead of you, the way he gets. Pip Cotter watches with the wide-eyed gravity of a child who has just understood that the morning got interesting, starfruit pinched between her fingers.\n\nYou step into the gate's shadow, feel the cold swallow the light, and step out of the smokehouse's rear overhang shadow on the other side — salt and wood-smoke landing on you all at once. The back door is two strides ahead. Whatever Sorel is doing inside, you have arrived ahead of the news of your coming.",
+      "sceneSummary": "Silas shadowsteps to the smokehouse ahead of Pell — arrives unseen at the back door, Sorel still unaware.",
       "choices": [
         {
-          "label": "Turn back to the smokehouse to find Sorel now",
+          "label": "Walk in through the back door directly — let Aldric see you arrive and make the introduction.",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "approach",
-            "contact"
+            "open"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -1675,43 +1681,46 @@
           "emergenceId": null
         },
         {
-          "label": "Send Pip ahead to tell Aldric to keep Sorel talking",
-          "attribute": "social",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "plan",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Pell what she knows about Sorel before you walk in",
+          "label": "Pause at the back door and use Order-Sense on the interior — read what situation Sorel is actually in before you step through.",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "careful"
+            "scout",
+            "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Head north and let it go — Sorel will still be here on your return",
+          "label": "Press your ear to the door first — catch what's being said before you're seen.",
           "attribute": "mental",
-          "subAttribute": "reason",
+          "subAttribute": "wits",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "careful",
-            "plan"
+            "scout"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Wait outside for Pell — go in together, let her read the room alongside you.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "careful",
+            "help"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -1722,37 +1731,28 @@
       ],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
+        "energy": -7,
         "inventoryAdd": [],
         "inventoryRemove": [],
         "xp": 0
       },
       "scene": {
-        "setting": "North end of Millbrook's south lane, thirty yards short of the north gate — village behind, track north open ahead, upper meadow in early-spring mid-morning light. Frost softening on the pale track.",
+        "setting": "Rear of Aldric's smokehouse, Millbrook — back-door overhang, shadow still deep at this hour. Salt and wood-smoke heavy on the cold air. The back door is two strides ahead, closed but not latched.",
         "npcsPresent": [
           {
-            "name": "Pell",
-            "state": "Pack square, Memory across both packs — note read and returned, watching Silas."
-          },
-          {
             "name": "Huginn",
-            "state": "On Silas's shoulder, silent, oriented north."
-          },
-          {
-            "name": "Pip Cotter",
-            "state": "Eating a piece of dried starfruit with the gravity of someone who has earned it, watching Silas for dismissal."
+            "state": "Already here — perched on the smokehouse roof ridge, watching the door, head angled down."
           }
         ],
         "objects": [
-          "Mara's cloth scrap (folded, read)",
-          "Dried Starfruit sealed packet (one piece removed, remainder intact)",
-          "Memory (spear, across both packs)",
-          "North gate — thirty yards ahead, open"
+          "Smokehouse back door — closed, two strides ahead",
+          "Rear overhang shadow — the step-through point, still dark",
+          "Memory (spear, across Silas's pack)"
         ],
         "threads": [
-          "Sorel spotted at the smokehouse — Edge District contact, unannounced return after a season's silence",
-          "Pip waiting for dismissal or further instruction",
-          "North road and Fen's intake valve site remain the planned first stop"
+          "Sorel is inside the smokehouse — unaware of Silas's arrival",
+          "Pell is on the south lane, walking — two to three minutes behind",
+          "Pip Cotter is at the north gate with her starfruit, errand complete"
         ]
       },
       "npcUpdates": [
@@ -1761,73 +1761,42 @@
           "npcId": "pell",
           "name": "Pell",
           "role": "Village blacksmith, Millbrook",
-          "note": "Read Mara's note, filed 'Sorel' without ceremony, watching Silas decide.",
-          "learned": [
-            "Sorel has returned to Millbrook unexpectedly after a season's absence — currently at the smokehouse"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Standing just short of the north gate, pack square, Memory across both packs — waiting on Silas's call."
+          "note": "Received the plan without question — checked Memory's lash and sent Silas ahead. Walking the lane now.",
+          "statusNote": "On the south lane, walking to the smokehouse — two to three minutes behind Silas.",
+          "relationshipDelta": 0
         },
         {
           "op": "update",
           "npcId": "pip-cotter",
           "name": "Pip Cotter",
           "role": "Mara's errand-runner",
-          "note": "Given a piece of dried starfruit by Silas as thanks for the run — eating it with serious attention.",
-          "learned": [
-            "Dried starfruit is tart and unfamiliar"
-          ],
-          "relationshipDelta": 1,
-          "status": "active",
-          "statusNote": "At the north-lane junction, eating starfruit, waiting for dismissal."
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "sorel",
-          "label": "Sorel",
-          "kind": "person",
-          "fact": "Sorel — spice-broker, Edge District contact, not heard from in a season — has returned to Millbrook without announcement and is currently at Aldric's smokehouse on World-day 15 morning.",
-          "links": [
-            "millbrook",
-            "aldric",
-            "the-water-crisis",
-            "mountain-pass"
-          ]
+          "note": "Watched the shadowstep with starfruit in hand — errand complete, dismissed.",
+          "statusNote": "At the north gate end of the south lane, errand done, starfruit in hand.",
+          "relationshipDelta": 0
         }
       ],
       "timeOps": {
         "hoursPassed": 0.1,
-        "why": "A brief exchange — note shared, starfruit given, no movement yet."
+        "why": "A quick exchange and a shadowstep — less than ten minutes elapsed."
       }
     },
     "sceneState": {
-      "setting": "North end of Millbrook's south lane, thirty yards short of the north gate — village behind, track north open ahead, upper meadow in early-spring mid-morning light. Frost softening on the pale track.",
+      "setting": "Rear of Aldric's smokehouse, Millbrook — back-door overhang, shadow still deep at this hour. Salt and wood-smoke heavy on the cold air. The back door is two strides ahead, closed but not latched.",
       "npcsPresent": [
         {
-          "name": "Pell",
-          "state": "Pack square, Memory across both packs — note read and returned, watching Silas."
-        },
-        {
           "name": "Huginn",
-          "state": "On Silas's shoulder, silent, oriented north."
-        },
-        {
-          "name": "Pip Cotter",
-          "state": "Eating a piece of dried starfruit with the gravity of someone who has earned it, watching Silas for dismissal."
+          "state": "Already here — perched on the smokehouse roof ridge, watching the door, head angled down."
         }
       ],
       "objects": [
-        "Mara's cloth scrap (folded, read)",
-        "Dried Starfruit sealed packet (one piece removed, remainder intact)",
-        "Memory (spear, across both packs)",
-        "North gate — thirty yards ahead, open"
+        "Smokehouse back door — closed, two strides ahead",
+        "Rear overhang shadow — the step-through point, still dark",
+        "Memory (spear, across Silas's pack)"
       ],
       "threads": [
-        "Sorel spotted at the smokehouse — Edge District contact, unannounced return after a season's silence",
-        "Pip waiting for dismissal or further instruction",
-        "North road and Fen's intake valve site remain the planned first stop"
+        "Sorel is inside the smokehouse — unaware of Silas's arrival",
+        "Pell is on the south lane, walking — two to three minutes behind",
+        "Pip Cotter is at the north gate with her starfruit, errand complete"
       ]
     }
   },
@@ -1976,7 +1945,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Watched Silas undress from across the forge-floor, forge-face coming apart as she watched — then crossed to him without hesitation, hands finding his belt with the same methodical ",
         "[d2] Silas set the tempo this time — she met it, unguarded throughout, verdict afterward: 'Thorough. Again.'",
         "[d2] Received Silas's plain declaration of bond and desire — pressed her cheek into his palm once, then laid her hand flat on his sternum and admitted she's managing wanting him badly. ",
         "[d2] Held Memory with Silas — felt the collar at range, admitted it unprompted. Received the 'managing it badly' observation without deflecting. The tinker/farmhand question is landing.",
@@ -1985,7 +1953,8 @@
         "[d2] Received the whetstone and the lesson without deflecting — tucked the stone into her coat pocket and left it there. Stepped through the door first. The road is what she knows how t",
         "[d2] Walked north with Silas in silence, pack square — stopped when the child runner called out, watching and waiting.",
         "[d2] Stopped and waiting without impatience — reading Silas's expression off the note.",
-        "[d2] Read Mara's note, filed 'Sorel' without ceremony, watching Silas decide."
+        "[d2] Read Mara's note, filed 'Sorel' without ceremony, watching Silas decide.",
+        "[d2] Received the plan without question — checked Memory's lash and sent Silas ahead. Walking the lane now."
       ],
       "knownFacts": [
         "She acknowledged Huginn's thread in the spear as evidence of her current reasoning failing",
@@ -2006,7 +1975,7 @@
         "naming a technical and personal observation in the same regi"
       ],
       "status": "active",
-      "statusNote": "Standing just short of the north gate, pack square, Memory across both packs — waiting on Silas's call.",
+      "statusNote": "On the south lane, walking to the smokehouse — two to three minutes behind Silas.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2934,15 +2903,15 @@
     }
   },
   "tendencies": {
-    "strategic": 60.44879669051002,
-    "cerebral": 39.89065544209081,
-    "social": 61.49751928040093,
-    "generous": 18.434148723298893,
-    "cautious": 48.056691950431244,
-    "physical": 0.8404468504427287,
-    "risky": 2.7950452478139174,
-    "ruthless": 2.0933313092420187,
-    "carousing": 1.4475049839971252
+    "strategic": 61.146552707057474,
+    "cerebral": 39.69120216488036,
+    "social": 61.190031683998924,
+    "generous": 18.341977979682397,
+    "cautious": 47.81640849067909,
+    "physical": 0.836244616190515,
+    "risky": 2.781070021574848,
+    "ruthless": 2.082864652695809,
+    "carousing": 1.4402674590771396
   },
   "aptitudes": [
     "strategist",
@@ -2950,7 +2919,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 258,
+  "actionCount": 259,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3076,8 +3045,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13693&nologo=true",
-  "updatedAt": 1784159621313,
-  "rev": 353,
+  "updatedAt": 1784160096919,
+  "rev": 354,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3639,7 +3608,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 59
+    "valley": 60
   },
   "foreclosed": [
     "rootkin",

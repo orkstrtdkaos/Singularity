@@ -77,7 +77,7 @@
   "maxHealth": 70,
   "health": 70,
   "maxEnergy": 140,
-  "energy": 138,
+  "energy": 140,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -2069,99 +2069,111 @@
         "player": "Say something — the morning deserves a word, after last night. Name what you're looking at.",
         "summary": "Silas names what he's looking at — Pell, and the smoke. She holds his wrist and drinks her tea.",
         "narration": "The dried perch is crisp at the edges and warm all the way through. Pell sits up with the bedroll around her shoulders, one collar still folded wrong, her thumb resting along the inside of your wrist — not measuring, just there. You tell her plainly: you're looking at her mostly, and at Huginn's chimney. She drinks from the spruce-tip cup without releasing your wrist and says the chimney will keep. Huginn makes a sound from the stone lip that is approximately 'not wrong.'"
+      },
+      {
+        "player": "Eat breakfast here before moving — finish the perch and the tea, give this morning its full weight before the Edge District claims the day",
+        "summary": "Breakfast finished at the overhang camp — the morning given its full weight before the descent begins.",
+        "narration": "The perch comes off the flat stone in two pieces — yours and hers, the same portion, the same heat. You eat without hurry. The spruce-tip tea has steeped long enough to lose the raw edge; it tastes of cold forest and something faintly bitter that clears the back of the throat. Pell finishes hers with both hands around the cup, the bedroll still over her shoulders, her collar still folded wrong. You don't fix it. She doesn't either.\n\nThe chimney smoke below has thickened since first light — someone down there has been at their fire longer than you have at yours. The Edge District waking up in stages, gray stone buildings pulling themselves out of the dark. Huginn watches from the lip with the particular stillness it holds when it has already filed an observation and is waiting to see if you'll ask. You don't, yet. You finish your perch and wipe your fingers on the oilcloth.\n\nWhen the food is gone and the cup is empty, the morning has a different quality — not the stretch before the day, but the day itself, beginning. Pell sets the cup on the flat stone next to the empty wine bottle and looks down at the pale track winding toward the outer settlements. \"First contact,\" she says. Not a question. The contact names scrap is in your pocket — Sorel's letter to Leth already written, or being written, from Millbrook. You're coming in a few days ahead of the paper.\n\nYou kick ash over the coals, tuck the oilcloth fold under your arm, and shoulder Memory. The descent is clear. Whatever the leftmost chimney smoke means to Huginn, the bird drops from the stone lip and banks left without being told, already reading the road ahead."
       }
     ],
     "lastTurn": {
-      "narration": "The dried perch is crisp at the edges and warm all the way through. Pell sits up with the bedroll around her shoulders, one collar still folded wrong, her thumb resting along the inside of your wrist — not measuring, just there. You tell her plainly: you're looking at her mostly, and at Huginn's chimney. She drinks from the spruce-tip cup without releasing your wrist and says the chimney will keep. Huginn makes a sound from the stone lip that is approximately 'not wrong.'",
-      "sceneSummary": "Silas names what he's looking at — Pell, and the smoke. She holds his wrist and drinks her tea.",
+      "narration": "The perch comes off the flat stone in two pieces — yours and hers, the same portion, the same heat. You eat without hurry. The spruce-tip tea has steeped long enough to lose the raw edge; it tastes of cold forest and something faintly bitter that clears the back of the throat. Pell finishes hers with both hands around the cup, the bedroll still over her shoulders, her collar still folded wrong. You don't fix it. She doesn't either.\n\nThe chimney smoke below has thickened since first light — someone down there has been at their fire longer than you have at yours. The Edge District waking up in stages, gray stone buildings pulling themselves out of the dark. Huginn watches from the lip with the particular stillness it holds when it has already filed an observation and is waiting to see if you'll ask. You don't, yet. You finish your perch and wipe your fingers on the oilcloth.\n\nWhen the food is gone and the cup is empty, the morning has a different quality — not the stretch before the day, but the day itself, beginning. Pell sets the cup on the flat stone next to the empty wine bottle and looks down at the pale track winding toward the outer settlements. \"First contact,\" she says. Not a question. The contact names scrap is in your pocket — Sorel's letter to Leth already written, or being written, from Millbrook. You're coming in a few days ahead of the paper.\n\nYou kick ash over the coals, tuck the oilcloth fold under your arm, and shoulder Memory. The descent is clear. Whatever the leftmost chimney smoke means to Huginn, the bird drops from the stone lip and banks left without being told, already reading the road ahead.",
+      "sceneSummary": "Breakfast finished at the overhang camp — the morning given its full weight before the descent begins.",
       "choices": [
         {
-          "label": "Read the leftmost chimney smoke — use Order-Sense to see what structure or pattern it's part of before you descend",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "concrete_abstract": -0.3,
-            "mechanical_spiritual": 0.2
-          },
+          "label": "Descend directly and find a place to ask after Leth — the archivist is the more durable contact; Sorel's letter names you, Leth keeps records, and an archivist will know the Edge District's layout before you do.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "study",
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Watch the settlement from the treeline first — Huginn has flagged the leftmost chimney, and Aldric's name appeared in red chalk on the Edge District accountability board. Something is moving down there. Get a read before you walk in.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "scout",
             "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Let Pell take point on the first approach — she's a blacksmith, a trade-type; in a district full of stone-workers and craftspeople, her hands will read better than yours at an unknown door.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Order-Sense on the settlement from the treeline — before you descend, read the structure of what you're walking into: the design of the Edge District, what it's part of, what's missing from it right now.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "study"
           ],
           "abilityId": "order_sense",
           "energyCost": 2,
-          "trivial": false
-        },
-        {
-          "label": "Break camp together — pack Memory, the oilcloth, and the remaining trail parcels, and start the descent",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Eat breakfast here before moving — finish the perch and the tea, give this morning its full weight before the Edge District claims the day",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "sustain"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Ask Huginn directly about the chimney — one croak, one direction, whatever it will give you",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "mechanical_spiritual": 0.2
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 11,
+        "inventoryRemove": [
+          "Preserved Trail Parcel x4"
+        ]
+      },
       "scene": {
-        "setting": "Far side of the mountain pass, early dawn — south-facing rock overhang, small fire burning steadily, pale gray light building. The Edge District's outer settlements visible below: gray stone buildings, two or three chimney-smokes, a pale track.",
+        "setting": "Far side of the mountain pass, early morning — south-facing rock overhang, fire now kicked to ash, pale gray light fully up. The Edge District's outer settlements visible below: gray stone buildings, chimney smokes thickening, a pale track descending.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Sitting up with the bedroll around her shoulders, shirt back on but collar still folded wrong, one hand around the spruce-tip cup, the other loose on Silas's wrist — looking at him with nothing managed."
+            "state": "Standing, bedroll shouldered, looking down at the pale track — collar still folded wrong, cup set aside on the flat stone."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the stone lip, watching the leftmost chimney smoke below — quiet, deliberate attention."
+            "state": "Dropped from the stone lip, banking left down the slope — already reading the road ahead."
           }
         ],
         "objects": [
-          "Memory (spear, leaned against the overhang wall)",
-          "Small fire (burning steadily, reliable heat)",
-          "Two strips of dried perch (warming on the flat stone — Pell's strip set within her reach)",
-          "Cup of spruce-tip water (in Pell's hand, going faintly gold)",
+          "Memory (spear, shouldered)",
           "Empty Resin Mountain Wine bottle (on the flat stone)",
-          "Pell's shirt (on — collar still folded wrong)",
-          "Oilcloth Fold (propped as windbreak)",
-          "Bedroll (around Pell's shoulders)",
-          "Valve Failure Timeline note — 'S-gate confirmed' annotated (in pocket)"
+          "Empty spruce-tip cup (on the flat stone)",
+          "Oilcloth Fold (under Silas's arm)",
+          "Valve Failure Timeline note — 'S-gate confirmed' annotated (in pocket)",
+          "Contact Names Scrap (Sorel, Leth) (in pocket)",
+          "Bedroll (shouldered by Pell)",
+          "Cold ash (where the fire was)"
         ],
         "threads": [
-          "Huginn has marked the leftmost chimney smoke below — quiet, not urgent, but deliberate.",
-          "The descent to the Edge District begins this morning — Leth and Sorel as first contacts.",
+          "Huginn has banked left down the slope — the leftmost chimney smoke was marked deliberately; what it means is not yet clear.",
+          "The descent to the Edge District begins now — Leth and Sorel as first contacts, arriving ahead of Sorel's letter.",
           "The buried vault head: six-week window, expert needed before week five.",
-          "Pell is awake — the morning's first real exchange concluded; the armor is still down."
+          "The accountability board incident — Fendt's name in red chalk, a falsified ledger removed — is live in the district below."
         ]
       },
       "npcUpdates": [
@@ -2169,55 +2181,57 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Held Silas's wrist through the first exchange of the morning — nothing managed, nothing filed. Told him the chimney would keep. The armor is still down from last night.",
-          "learned": [
-            "The morning after the pass camp: still unguarded, still present — no reassembly overnight or at dawn."
-          ],
-          "status": "active",
-          "statusNote": "Awake at the overhang camp, bedroll around her shoulders, spruce-tip tea in hand — the night's openness intact into morning."
+          "role": "Village blacksmith, Millbrook",
+          "note": "Ate breakfast quietly, named 'first contact' without being asked — the armor still down, the morning held without management.",
+          "statusNote": "Standing at the overhang camp, ready to descend — bedroll shouldered, present and unguarded into the morning.",
+          "relationshipDelta": 0
         },
         {
           "op": "update",
           "npcId": "huginn",
           "name": "Huginn",
-          "note": "Made a sound approximating 'not wrong' at Pell's remark about the chimney. Continues to watch the leftmost smoke below — quiet but deliberate.",
-          "status": "active",
-          "statusNote": "At the stone lip of the overhang, attending the leftmost chimney smoke in the Edge District below."
+          "role": "Companion — Ashwarden-touched carrion bird",
+          "note": "Dropped from the stone lip without being told and banked left — already scouting the descent toward the leftmost chimney smoke.",
+          "statusNote": "In the air above the descent path, banking toward the Edge District's leftmost chimney smoke.",
+          "relationshipDelta": 0
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief morning exchange over tea — the first real words of the day."
-      }
+        "hoursPassed": 0.5,
+        "why": "A quiet breakfast eaten without hurry — the morning given its full weight before the descent."
+      },
+      "inventoryRemove": [
+        "Preserved Trail Parcel x4"
+      ],
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Far side of the mountain pass, early dawn — south-facing rock overhang, small fire burning steadily, pale gray light building. The Edge District's outer settlements visible below: gray stone buildings, two or three chimney-smokes, a pale track.",
+      "setting": "Far side of the mountain pass, early morning — south-facing rock overhang, fire now kicked to ash, pale gray light fully up. The Edge District's outer settlements visible below: gray stone buildings, chimney smokes thickening, a pale track descending.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Sitting up with the bedroll around her shoulders, shirt back on but collar still folded wrong, one hand around the spruc"
+          "state": "Standing, bedroll shouldered, looking down at the pale track — collar still folded wrong, cup set aside on the flat ston"
         },
         {
           "name": "Huginn",
-          "state": "Perched on the stone lip, watching the leftmost chimney smoke below — quiet, deliberate attention."
+          "state": "Dropped from the stone lip, banking left down the slope — already reading the road ahead."
         }
       ],
       "objects": [
-        "Memory (spear, leaned against the overhang wall)",
-        "Small fire (burning steadily, reliable heat)",
-        "Two strips of dried perch (warming on the flat stone — Pell's strip set within h",
-        "Cup of spruce-tip water (in Pell's hand, going faintly gold)",
+        "Memory (spear, shouldered)",
         "Empty Resin Mountain Wine bottle (on the flat stone)",
-        "Pell's shirt (on — collar still folded wrong)",
-        "Oilcloth Fold (propped as windbreak)",
-        "Bedroll (around Pell's shoulders)",
-        "Valve Failure Timeline note — 'S-gate confirmed' annotated (in pocket)"
+        "Empty spruce-tip cup (on the flat stone)",
+        "Oilcloth Fold (under Silas's arm)",
+        "Valve Failure Timeline note — 'S-gate confirmed' annotated (in pocket)",
+        "Contact Names Scrap (Sorel, Leth) (in pocket)",
+        "Bedroll (shouldered by Pell)",
+        "Cold ash (where the fire was)"
       ],
       "threads": [
-        "Huginn has marked the leftmost chimney smoke below — quiet, not urgent, but deliberate.",
-        "The descent to the Edge District begins this morning — Leth and Sorel as first contacts.",
+        "Huginn has banked left down the slope — the leftmost chimney smoke was marked deliberately; what it means is not yet clear.",
+        "The descent to the Edge District begins now — Leth and Sorel as first contacts, arriving ahead of Sorel's letter.",
         "The buried vault head: six-week window, expert needed before week five.",
-        "Pell is awake — the morning's first real exchange concluded; the armor is still down."
+        "The accountability board incident — Fendt's name in red chalk, a falsified ledger removed — is live in the district below."
       ]
     }
   },
@@ -2366,7 +2380,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Drawn back against Silas's chest — angle changed, hold changed; hands on his forearms, face open in the firelight, breath short and climbing.",
         "[d2] Asked plainly for the pace back — named it with the armor down, no management, no qualifier.",
         "[d2] Asked plainly — 'more, please' — the please smaller than the rest, unmanaged, not taken back.",
         "[d2] Fully unguarded at the close — said Silas's name plainly, stopped managing, stayed present through to the end without armor. The habit broke entirely for the length of the overhang",
@@ -2375,7 +2388,8 @@
         "[d2] Slept through the mountain night fully against Silas — the bedroll pulled tight, no armor reassembled overnight. Waking into the first morning on the far side of the pass.",
         "[d3] Asleep at dawn at the overhang camp — Silas eased out without waking her.",
         "[d3] Woke to a forehead kiss at dawn — found Silas's wrist before opening her eyes, looked at him in the morning light with nothing taken back from the night.",
-        "[d3] Held Silas's wrist through the first exchange of the morning — nothing managed, nothing filed. Told him the chimney would keep. The armor is still down from last night."
+        "[d3] Held Silas's wrist through the first exchange of the morning — nothing managed, nothing filed. Told him the chimney would keep. The armor is still down from last night.",
+        "[d3] Ate breakfast quietly, named 'first contact' without being asked — the armor still down, the morning held without management."
       ],
       "knownFacts": [
         "Names Silas plainly, without management, when the moment takes the last of her composure.",
@@ -2396,7 +2410,7 @@
         "setting terms and holding them cleanly through the full sequ"
       ],
       "status": "active",
-      "statusNote": "Awake at the overhang camp, bedroll around her shoulders, spruce-tip tea in hand — the night's openness intact into morning.",
+      "statusNote": "Standing at the overhang camp, ready to descend — bedroll shouldered, present and unguarded into the morning.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 3
@@ -3533,17 +3547,17 @@
     }
   },
   "tendencies": {
-    "strategic": 47.22335457405159,
-    "cerebral": 30.16519331765303,
-    "social": 43.493251791460025,
-    "generous": 10.647092029386032,
-    "cautious": 39.15316974558228,
-    "physical": 2.631150135332207,
-    "risky": 7.408789521394448,
-    "ruthless": 3.2578379509125233,
-    "carousing": 2.2876611965725937,
-    "amorous": 6.273095282171783,
-    "patient": 0.9268593749999999
+    "strategic": 46.0427707097003,
+    "cerebral": 29.411063484711704,
+    "social": 42.405920496673524,
+    "generous": 10.380914728651382,
+    "cautious": 38.17434050194272,
+    "physical": 2.5653713819489017,
+    "risky": 7.223569783359586,
+    "ruthless": 3.17639200213971,
+    "carousing": 2.2304696666582786,
+    "amorous": 6.116267900117489,
+    "patient": 1.9036878906249999
   },
   "aptitudes": [
     "strategist",
@@ -3556,7 +3570,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 327,
+  "actionCount": 328,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3698,8 +3712,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784223058100,
-  "rev": 456,
+  "updatedAt": 1784223221591,
+  "rev": 457,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4262,7 +4276,7 @@
   "syncedAt": 1784184597860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 138
+    "valley": 139
   },
   "foreclosed": [
     "rootkin",

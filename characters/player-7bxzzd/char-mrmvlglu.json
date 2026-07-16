@@ -8,7 +8,7 @@
   "whyHere": "You noticed the paying. You came out to see whether there was another way to be a mind.",
   "background": "drifter",
   "level": 1,
-  "xp": 2,
+  "xp": 4,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -35,7 +35,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 96,
+  "energy": 88,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -112,71 +112,82 @@
         "player": "Go to the fallen Cogitant — cross the hall and check on them",
         "summary": "Saehara crosses the hall and kneels beside the fallen Cogitant — alive, lips moving, calculating still, cold and far away.",
         "narration": "You cross the hall without ceremony. The chalk-dust floor is soft underfoot — years of it, settled into the stone — and the drifting Cogitants at the edges do not register your passage. They move in slow arcs, lips shaping silent calculations, eyes somewhere behind the visible world. None of them look at the figure on the ground.\n\nThe fallen Cogitant is a woman, or was before the Cogitarium had its years with her. She is thin in the way Ossian is thin — not starved, but given away, the flesh redistributed by long forgetting until what remains is the minimum the mind allows. Her robes are the same pale grey as the walls, and they have pooled around her with a kind of terrible neatness, as though she arranged herself on the way down. Her chest rises. Shallowly, but it rises. There is chalk on her fingers — on both hands, ground into the whorls — and her eyes are half-open, fixed on a point in the middle distance that has nothing to do with the ceiling above her.\n\nShe is alive. She is also somewhere else entirely — whatever she was calculating has not stopped; you can see it in the faint movement of her lips, the micro-adjustments of her gaze tracking something you cannot see. Her skin is cold when your fingers find her wrist to take a pulse. Not alarming cold — the cold of a room kept at thinking temperature, of a body that has decided warmth is overhead.\n\nKon has followed you. The fox-thing sits two feet back, coat banked low, and watches the woman's face with the particular stillness it reserves for the thin places — not afraid, not retreating, but attentive in a way that is not purely animal. It does not go hot. Whatever this is, the Glade does not name it as Precursor-strange. It is something older and more ordinary: a body running out of reasons to maintain itself."
+      },
+      {
+        "player": "Use Total Focus — clear away the strangeness of the place and the cold arithmetic of Ossian's world, and just see this woman clearly: what does she actually need?",
+        "summary": "Saehara attempts Total Focus to read the fallen Cogitant's needs — the thin lattice and the hall's abstraction break the attempt.",
+        "narration": "You press the ability inward — try to pull the fog of this place back, to strip away the chalk-smell and Ossian's voice still ringing in the architecture of your thoughts, and just *see* her. What she needs. What the body in front of you is actually doing.\n\nIt doesn't land. The Cogitarium is wrong for it in some way you can't quite name — too abstract, too thin, the lattice here reduced to a pale suggestion of itself, and your own focus keeps skating across the surface of the hall's strange atmosphere instead of cutting through it. The woman's lips move. Her eyes are half-open and aimed at something a long way past the ceiling. You can see she's breathing. You can see the chalk ground into her palms, the faint blue tinge at her fingertips, the way her chest barely lifts. But you can't read through it — can't separate what the body is saying from the vast, humming silence of what the mind is still doing inside her.\n\nKon doesn't move from the shaft of window-light. The fox watches you across the hall with those banked-coal eyes — not disappointed, not urgent, just watching. Waiting to see what you do next without the focus to guide you."
       }
     ],
     "lastTurn": {
-      "narration": "You cross the hall without ceremony. The chalk-dust floor is soft underfoot — years of it, settled into the stone — and the drifting Cogitants at the edges do not register your passage. They move in slow arcs, lips shaping silent calculations, eyes somewhere behind the visible world. None of them look at the figure on the ground.\n\nThe fallen Cogitant is a woman, or was before the Cogitarium had its years with her. She is thin in the way Ossian is thin — not starved, but given away, the flesh redistributed by long forgetting until what remains is the minimum the mind allows. Her robes are the same pale grey as the walls, and they have pooled around her with a kind of terrible neatness, as though she arranged herself on the way down. Her chest rises. Shallowly, but it rises. There is chalk on her fingers — on both hands, ground into the whorls — and her eyes are half-open, fixed on a point in the middle distance that has nothing to do with the ceiling above her.\n\nShe is alive. She is also somewhere else entirely — whatever she was calculating has not stopped; you can see it in the faint movement of her lips, the micro-adjustments of her gaze tracking something you cannot see. Her skin is cold when your fingers find her wrist to take a pulse. Not alarming cold — the cold of a room kept at thinking temperature, of a body that has decided warmth is overhead.\n\nKon has followed you. The fox-thing sits two feet back, coat banked low, and watches the woman's face with the particular stillness it reserves for the thin places — not afraid, not retreating, but attentive in a way that is not purely animal. It does not go hot. Whatever this is, the Glade does not name it as Precursor-strange. It is something older and more ordinary: a body running out of reasons to maintain itself.",
-      "sceneSummary": "Saehara crosses the hall and kneels beside the fallen Cogitant — alive, lips moving, calculating still, cold and far away.",
+      "narration": "You press the ability inward — try to pull the fog of this place back, to strip away the chalk-smell and Ossian's voice still ringing in the architecture of your thoughts, and just *see* her. What she needs. What the body in front of you is actually doing.\n\nIt doesn't land. The Cogitarium is wrong for it in some way you can't quite name — too abstract, too thin, the lattice here reduced to a pale suggestion of itself, and your own focus keeps skating across the surface of the hall's strange atmosphere instead of cutting through it. The woman's lips move. Her eyes are half-open and aimed at something a long way past the ceiling. You can see she's breathing. You can see the chalk ground into her palms, the faint blue tinge at her fingertips, the way her chest barely lifts. But you can't read through it — can't separate what the body is saying from the vast, humming silence of what the mind is still doing inside her.\n\nKon doesn't move from the shaft of window-light. The fox watches you across the hall with those banked-coal eyes — not disappointed, not urgent, just watching. Waiting to see what you do next without the focus to guide you.",
+      "sceneSummary": "Saehara attempts Total Focus to read the fallen Cogitant's needs — the thin lattice and the hall's abstraction break the attempt.",
       "choices": [
         {
-          "label": "Try to bring her back — speak to her, touch her face, do something bodily and immediate to pull her attention to the here and now",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 15,
-          "intentTags": [
-            "help",
-            "connect",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Look her over practically — check for injury, feel for fever or cold, see if there's something physical that needs attending before anything else",
+          "label": "Check her practically — not with any ability, just with your hands and eyes: her temperature, her pulse at the wrist, whether she's eaten, whether she's been here hours or days.",
           "attribute": "practical",
           "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
-            "help",
             "study",
+            "help",
             "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Turn back to Ossian and ask, plainly: what does she need, and why has no one gone to her?",
+          "label": "Call across the hall to Ossian — ask plainly: what does a Cogitant need when they collapse? Is there anything that's ever brought one back?",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "challenge",
             "help",
-            "direct"
+            "ask"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Use Total Focus — clear away the strangeness of the place and the cold arithmetic of Ossian's world, and just see this woman clearly: what does she actually need?",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
+          "label": "Take water from the Waterskin — hold it to her lips and try to get something into her. It won't fix whatever is wrong, but it's real and it's something and she's cold.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "difficulty": 15,
           "intentTags": [
-            "study",
-            "careful",
-            "help"
+            "help",
+            "careful"
           ],
-          "abilityId": "total_focus",
-          "energyCost": 4,
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Speak to her — not loudly, not a command. Just your voice, close to her ear, something specific and grounded: your name, where you came from, the smell of the river back east. Something that goes the direction of a body remembering it has a world.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 15,
+          "intentTags": [
+            "help",
+            "careful",
+            "persuade"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "scene": {
-        "setting": "Entrance hall of the Cogitarium — high pale stone, bluish morning light through tall windows, chalk-dust thick underfoot. Saehara kneels beside the fallen Cogitant at the hall's far edge. Mist still faint through the outer arch.",
+        "setting": "Entrance hall of the Cogitarium — high pale stone, bluish morning light through tall windows, chalk-dust thick underfoot. Saehara kneels beside the fallen Cogitant at the hall's far edge, ability spent and unrewarded. Mist still faint through the outer arch.",
         "npcsPresent": [
           {
             "name": "Ossian",
@@ -188,69 +199,44 @@
           },
           {
             "name": "Fallen Cogitant",
-            "state": "Collapsed on the chalk-dust floor — alive, breathing shallowly, lips moving in silent calculation, eyes half-open and fixed on nothing present, cold to the touch"
+            "state": "Collapsed on the chalk-dust floor — alive, breathing shallowly, lips moving in silent calculation, eyes half-open and fixed on something past the ceiling"
           },
           {
             "name": "Drifting Cogitants",
             "state": "Moving in slow arcs at the hall's edges, lips moving, oblivious — none have looked at the fallen woman"
+          },
+          {
+            "name": "Kon",
+            "state": "Sitting in the shaft of window-light, coat banked low, watching Saehara with quiet attentive eyes"
           }
         ],
         "objects": [
-          "Wall of dense chalk notation — twenty-two-day watershed model, deterioration visible around days nine and fourteen",
+          "Wall of dense chalk notation — twenty-two-day watershed model, deterioration visible around day nine and fourteen",
           "Outer arch (mist faintly visible beyond)",
-          "Fallen Cogitant's robes pooled in chalk dust — chalk ground into both her hands",
-          "Shaft of window-light (Kon sitting in it, coat banked low, watching the fallen woman's face)",
-          "Katana at Saehara's waist"
+          "Fallen Cogitant's robes pooled in chalk dust — chalk ground into both her hands, fingertips faintly blue",
+          "Shaft of window-light (Kon sitting in it)",
+          "Katana at Saehara's waist",
+          "Waterskin (at Saehara's side)"
         ],
         "threads": [
-          "Fallen Cogitant is alive but unreachable — lips moving, eyes open to something elsewhere; her condition is unclear",
-          "Kon watches the woman with attentive stillness — not a Precursor read, something else",
+          "Fallen Cogitant is alive but unreachable — lips moving, eyes open to something elsewhere; Total Focus failed to clarify her condition",
+          "Kon watches from the light — not alarmed, but waiting",
           "Ossian's gaze on Saehara — tracking from across the hall",
           "No other Cogitant has moved toward the fallen woman",
-          "The four conditions for source-remediation stand unmet",
-          "Araveth has not acknowledged Saehara's presence"
+          "The four conditions for source-remediation stand unmet"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "meet",
-          "npcId": "fallen-cogitant",
-          "name": "Fallen Cogitant",
-          "role": "Cogitant — collapsed at the hall's far edge",
-          "description": "A thin woman, chalk ground into both hands, robes pooled around her with terrible neatness — alive, lips moving in silent calculation, cold to the touch and present somewhere else entirely.",
-          "note": "Saehara crossed the hall and knelt beside her — found her breathing shallowly, eyes half-open, skin cold, lips still moving. Kon followed and watched her face with particular stillness.",
-          "learned": [
-            "Is alive but unreachable — still calculating, visibly, behind closed eyes",
-            "Cold to the touch — body-temperature reduced to minimum",
-            "Chalk ground into both hands — she was working before she fell",
-            "Kon did not read her as Precursor-strange"
-          ],
-          "status": "injured",
-          "statusNote": "Collapsed in the Cogitarium entrance hall — alive, barely present, still calculating silently; no other Cogitant has gone to her"
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "the-collapsing-cogitants",
-          "label": "The Collapsing Cogitants",
-          "kind": "event",
-          "fact": "The third Cogitant to collapse this week is a thin woman with chalk on both hands — alive, cold, lips still moving in silent calculation. She did not stop working when she fell. Kon watched her and did not read Precursor-strangeness; this is something older: a body running out of reasons.",
-          "links": [
-            "cogitarium",
-            "cogitants",
-            "ossian",
-            "the-cogitariums-calculated-crisis",
-            "fallen-cogitant"
-          ]
-        }
-      ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -4
+      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "crossing the hall and kneeling to examine the fallen Cogitant — a few minutes at most"
+        "why": "a brief focused attempt and its aftermath"
       }
     },
     "sceneState": {
-      "setting": "Entrance hall of the Cogitarium — high pale stone, bluish morning light through tall windows, chalk-dust thick underfoot. Saehara kneels beside the fallen Cogitant at the hall's far edge. Mist still faint through the outer arch.",
+      "setting": "Entrance hall of the Cogitarium — high pale stone, bluish morning light through tall windows, chalk-dust thick underfoot. Saehara kneels beside the fallen Cogitant at the hall's far edge, ability spent and unrewarded. Mist still faint through the outer arch.",
       "npcsPresent": [
         {
           "name": "Ossian",
@@ -267,18 +253,23 @@
         {
           "name": "Drifting Cogitants",
           "state": "Moving in slow arcs at the hall's edges, lips moving, oblivious — none have looked at the fallen woman"
+        },
+        {
+          "name": "Kon",
+          "state": "Sitting in the shaft of window-light, coat banked low, watching Saehara with quiet attentive eyes"
         }
       ],
       "objects": [
         "Wall of dense chalk notation — twenty-two-day watershed model, deterioration vis",
         "Outer arch (mist faintly visible beyond)",
-        "Fallen Cogitant's robes pooled in chalk dust — chalk ground into both her hands",
-        "Shaft of window-light (Kon sitting in it, coat banked low, watching the fallen w",
-        "Katana at Saehara's waist"
+        "Fallen Cogitant's robes pooled in chalk dust — chalk ground into both her hands,",
+        "Shaft of window-light (Kon sitting in it)",
+        "Katana at Saehara's waist",
+        "Waterskin (at Saehara's side)"
       ],
       "threads": [
-        "Fallen Cogitant is alive but unreachable — lips moving, eyes open to something elsewhere; her condition is unclear",
-        "Kon watches the woman with attentive stillness — not a Precursor read, something else",
+        "Fallen Cogitant is alive but unreachable — lips moving, eyes open to something elsewhere; Total Focus failed to clarify her condition",
+        "Kon watches from the light — not alarmed, but waiting",
         "Ossian's gaze on Saehara — tracking from across the hall",
         "No other Cogitant has moved toward the fallen woman",
         "The four conditions for source-remediation stand unmet"
@@ -627,14 +618,14 @@
     }
   },
   "tendencies": {
-    "strategic": 1.9456701474344844,
-    "social": 2.9307700187125314,
-    "cerebral": 1.9603236281218752,
-    "generous": 1,
-    "cautious": 1
+    "strategic": 1.935941796697312,
+    "social": 2.9161161686189687,
+    "cerebral": 2.950522009981266,
+    "generous": 1.995,
+    "cautious": 1.995
   },
   "aptitudes": [],
-  "actionCount": 8,
+  "actionCount": 9,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -647,8 +638,8 @@
       "at": "2026-07-16T02:18:04.820Z"
     }
   ],
-  "updatedAt": 1784171432177,
-  "rev": 30,
+  "updatedAt": 1784171632093,
+  "rev": 31,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -656,7 +647,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "somatic_reaches": 9
+    "somatic_reaches": 10
   },
   "opLossPending": false,
   "establishedFacts": [
@@ -672,7 +663,7 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "total_focus": 1
+      "total_focus": 2
     },
     "coActivations": {},
     "aspirations": [

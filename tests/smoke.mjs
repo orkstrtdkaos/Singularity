@@ -683,8 +683,22 @@ applyNpcUpdates(rvChar, [{ op: 'meet', npcId: 'tuning-warden', name: 'The Tuning
 applyNpcUpdates(rvChar, [{ op: 'update', npcId: 'tuning-warden', revealName: 'Maren' }], { day: 2 });
 const warden = rvChar.npcRegistry['tuning-warden'];
 check('revealName updates display, keeps id, logs history', warden.name === 'Maren' && warden.aliases.includes('The Tuning-Warden') && warden.history.some(h => h.includes('revealed')));
+// SNG-111: a fuller name CONTAINING the known one composes (extension), not aliases — "Maren" → "Maren the Grey".
 applyNpcUpdates(rvChar, [{ op: 'update', npcId: 'tuning-warden', revealName: 'Maren the Grey' }], { day: 3 });
-check('second reveal becomes alias, name stays', warden.name === 'Maren' && warden.aliases.includes('Maren the Grey'));
+check('SNG-111: a fuller name containing the known one composes (not aliased)', warden.name === 'Maren the Grey' && warden.aliases.includes('Maren'));
+// a genuinely DIFFERENT later name (no token overlap) still becomes an alias — identity isn't silently rewritten.
+applyNpcUpdates(rvChar, [{ op: 'update', npcId: 'tuning-warden', revealName: 'Corvin' }], { day: 4 });
+check('SNG-111: a genuinely different later name still becomes an alias', warden.name === 'Maren the Grey' && warden.aliases.includes('Corvin'));
+// nameExtend: learn a surname on an already-named person → appends the new token, keeps the given name.
+{
+  const c = { npcRegistry: {} };
+  applyNpcUpdates(c, [{ op: 'meet', npcId: 'pell', name: 'Pell', role: 'marsh guide' }], { day: 1 });
+  applyNpcUpdates(c, [{ op: 'update', npcId: 'pell', nameExtend: 'Marsh' }], { day: 2 });
+  const pell = c.npcRegistry.pell;
+  check('SNG-111: nameExtend composes the surname (Pell → Pell Marsh), keeps the given name', pell.name === 'Pell Marsh' && pell.aliases.includes('Pell'));
+  applyNpcUpdates(c, [{ op: 'update', npcId: 'pell', nameExtend: 'Marsh' }], { day: 3 });
+  check('SNG-111: nameExtend is idempotent (learning Marsh twice does not double it)', pell.name === 'Pell Marsh');
+}
 check('revealName cannot create a person', (applyNpcUpdates({ npcRegistry: {} }, [{ op: 'update', npcId: 'ghost', revealName: 'X' }], {}), true));
 // customName
 const { nameItem, findItem, displayName: dName, inventoryForGM: invGM } = await import('../engine/inventory.js');

@@ -62,13 +62,35 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
     if (u.description && !n.description) n.description = String(u.description).slice(0, 240);
     if (u.revealName) {
       const newName = prettifyNpcName(String(u.revealName).slice(0, 60));
+      const curTokens = new Set(String(n.name || "").toLowerCase().split(/\s+/).filter(Boolean));
+      const newTokens = String(newName || "").toLowerCase().split(/\s+/).filter(Boolean);
+      // SNG-111: a fuller name that CONTAINS the known one ("Pell Marsh" when we know "Pell") is a surname
+      // EXTENSION — compose it, don't shunt it to aliases and lose the composition.
+      const isExtension = n.nameRevealed && newName && newName !== n.name && curTokens.size && newTokens.length > curTokens.size && [...curTokens].every(t => newTokens.includes(t));
       if (!n.nameRevealed && newName && newName !== n.name) {
         n.aliases = [...(n.aliases || []), n.name].slice(-4);
         n.history = [...n.history, `[d${ctx.day ?? "?"}] Their name is revealed: ${newName} (was known as "${n.name}")`].slice(-CAPS.history);
         n.name = newName;
         n.nameRevealed = true;
+      } else if (isExtension) {
+        n.aliases = [...new Set([...(n.aliases || []), n.name])].slice(-4); // keep the given name for match continuity
+        n.history = [...n.history, `[d${ctx.day ?? "?"}] You learn more of their name — ${newName}`].slice(-CAPS.history);
+        n.name = newName;
       } else if (n.nameRevealed && newName && newName !== n.name && !(n.aliases || []).includes(newName)) {
-        n.aliases = [...(n.aliases || []), newName].slice(-4); // later renames become aliases
+        n.aliases = [...(n.aliases || []), newName].slice(-4); // a genuinely different later name → alias
+      }
+    }
+    // SNG-111: learn MORE of a known name — append only the new token(s) ("Pell" + "Marsh" → "Pell Marsh").
+    // Idempotent (learning "Marsh" twice doesn't double it); keeps the given name as an alias.
+    if (u.nameExtend && n.name) {
+      const have = new Set(String(n.name).toLowerCase().split(/\s+/).filter(Boolean));
+      const add = prettifyNpcName(String(u.nameExtend).slice(0, 60)).split(/\s+/).filter(t => t && !have.has(t.toLowerCase()));
+      if (add.length) {
+        const composed = `${n.name} ${add.join(" ")}`.slice(0, 60).trim();
+        n.aliases = [...new Set([...(n.aliases || []), n.name])].slice(-4);
+        n.history = [...n.history, `[d${ctx.day ?? "?"}] You learn more of their name: ${add.join(" ")} — ${composed}`].slice(-CAPS.history);
+        n.name = composed;
+        n.nameRevealed = true;
       }
     }
     if (u.note) n.history = [...n.history, `[d${ctx.day ?? "?"}] ${String(u.note).slice(0, 180)}`].slice(-CAPS.history);

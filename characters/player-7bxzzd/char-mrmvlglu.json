@@ -202,71 +202,72 @@
         "player": "Arrive and go straight to Lenten — ask the first sensible-looking person where to find the builder",
         "summary": "Saehara arrives at Waymarker and is directed to Lenten's long shed across the work-yard.",
         "narration": "The woodsmoke smell arrives before Waymarker does.\n\nYou come over a low rise and the settlement opens below you — not large, maybe forty structures clustered around a central work-yard, the kind of place that builds things and knows it. Scaffolding on two buildings at the near edge. Stacked timber. The sound of a draw-plane somewhere inside, a clean sustained scrape that means someone is already at work. Morning light catches the dust on the yard's packed earth. A dog lifts its head from a doorstep, decides you're not interesting, and puts it down again.\n\nThe first person you find is a woman in an apron carrying a bucket of iron fixings toward the scaffolding — you step into her path and ask for Lenten. She looks at you: a stranger with a fox at his heels and a limp woman across his back, arrived from the direction of nowhere in particular. Her eyes move from the Cogitant's grey robes to your face. Whatever she makes of it, she answers without fuss. Lenten's at the long shed. That one. A tilt of her head toward a low building at the yard's far edge, its wide doors open, the draw-plane sound coming from inside.\n\nKon has already angled that way. You follow, the Cogitant's weight familiar now in the way of things you've carried too long — the ache has gone past complaint and settled into something quieter. Her lips are still moving against your jaw. Whatever count she is running, it hasn't stopped. You cross the yard, step through the open doors into the smell of fresh wood and sawdust and the particular cool dark of a working shed, and look for Lenten."
+      },
+      {
+        "player": "Set the Cogitant down first — find a bench, get her off your back before you say a word",
+        "summary": "Saehara lowers the fallen Cogitant onto a workbench and takes stock of the shed.",
+        "narration": "The first bench you find is the nearest one — long, heavy, sawdust-thick along its edge. You turn, get your knees against it, and lower the Cogitant by degrees: one hand at her back, the other catching her legs as the weight transfers. She settles onto the wood with that terrible neatness she seems to carry even unconscious, robes pooling around her, chalk-grey hands folded in her lap as if she arranged them herself. Her lips are still moving.\n\nYou straighten and feel your back make its opinions known — a deep ache from the base of your spine up through both shoulders, the kind that will be louder tomorrow. You roll your neck once, hear it crack, and breathe.\n\nKon has already moved deeper into the shed, nose low, the way it navigates unfamiliar spaces — methodical, unhurried, reading the place on its own terms. The draw-plane sound has stopped. Somewhere in the dimmer interior, past the stacked timber and the tool-hung wall, there is probably a person who noticed you come in and is deciding whether to say so.\n\nThe Cogitant's chest rises and falls. Small, steady. You have time to find Lenten before that changes — not much, but some."
       }
     ],
     "lastTurn": {
-      "narration": "The woodsmoke smell arrives before Waymarker does.\n\nYou come over a low rise and the settlement opens below you — not large, maybe forty structures clustered around a central work-yard, the kind of place that builds things and knows it. Scaffolding on two buildings at the near edge. Stacked timber. The sound of a draw-plane somewhere inside, a clean sustained scrape that means someone is already at work. Morning light catches the dust on the yard's packed earth. A dog lifts its head from a doorstep, decides you're not interesting, and puts it down again.\n\nThe first person you find is a woman in an apron carrying a bucket of iron fixings toward the scaffolding — you step into her path and ask for Lenten. She looks at you: a stranger with a fox at his heels and a limp woman across his back, arrived from the direction of nowhere in particular. Her eyes move from the Cogitant's grey robes to your face. Whatever she makes of it, she answers without fuss. Lenten's at the long shed. That one. A tilt of her head toward a low building at the yard's far edge, its wide doors open, the draw-plane sound coming from inside.\n\nKon has already angled that way. You follow, the Cogitant's weight familiar now in the way of things you've carried too long — the ache has gone past complaint and settled into something quieter. Her lips are still moving against your jaw. Whatever count she is running, it hasn't stopped. You cross the yard, step through the open doors into the smell of fresh wood and sawdust and the particular cool dark of a working shed, and look for Lenten.",
-      "sceneSummary": "Saehara arrives at Waymarker and is directed to Lenten's long shed across the work-yard.",
+      "narration": "The first bench you find is the nearest one — long, heavy, sawdust-thick along its edge. You turn, get your knees against it, and lower the Cogitant by degrees: one hand at her back, the other catching her legs as the weight transfers. She settles onto the wood with that terrible neatness she seems to carry even unconscious, robes pooling around her, chalk-grey hands folded in her lap as if she arranged them herself. Her lips are still moving.\n\nYou straighten and feel your back make its opinions known — a deep ache from the base of your spine up through both shoulders, the kind that will be louder tomorrow. You roll your neck once, hear it crack, and breathe.\n\nKon has already moved deeper into the shed, nose low, the way it navigates unfamiliar spaces — methodical, unhurried, reading the place on its own terms. The draw-plane sound has stopped. Somewhere in the dimmer interior, past the stacked timber and the tool-hung wall, there is probably a person who noticed you come in and is deciding whether to say so.\n\nThe Cogitant's chest rises and falls. Small, steady. You have time to find Lenten before that changes — not much, but some.",
+      "sceneSummary": "Saehara lowers the fallen Cogitant onto a workbench and takes stock of the shed.",
       "choices": [
         {
-          "label": "Call out Lenten's name — state plainly what you're carrying and why you've come",
+          "label": "Call into the shed — announce yourself plainly and ask for Lenten by name",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "help",
-            "direct"
+            "approach",
+            "honest"
           ],
           "trivial": true
         },
         {
-          "label": "Watch the shed a moment before speaking — read who leads before committing to the first face",
+          "label": "Follow Kon deeper into the shed — let the fox lead you to whoever stopped working",
           "attribute": "mental",
-          "subAttribute": "wits",
-          "difficulty": 15,
+          "subAttribute": "insight",
+          "difficulty": 0,
           "intentTags": [
-            "scout",
-            "careful"
+            "careful",
+            "scout"
           ],
-          "trivial": false
+          "trivial": true
         },
         {
-          "label": "Set the Cogitant down first — find a bench, get her off your back before you say a word",
+          "label": "Check the Cogitant first — water, temperature, whether she can swallow anything — before you speak to anyone",
           "attribute": "practical",
           "subAttribute": "craft",
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "prepare"
+            "help",
+            "careful"
           ],
           "trivial": true
         },
         {
-          "label": "Let Kon go in ahead — see how the workers react to it before you open your mouth",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
+          "label": "Stand in the middle of the shed and simply wait — let whoever is here come to you on their own terms",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
           "intentTags": [
-            "scout",
-            "careful"
+            "careful",
+            "patient"
           ],
-          "trivial": false
+          "trivial": true
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
       "scene": {
-        "setting": "Interior of Lenten's long shed at the edge of Waymarker's central work-yard — wide doors open to morning light, smells of fresh wood and sawdust, the sound of a draw-plane still running somewhere inside.",
+        "setting": "Interior of Lenten's long shed at the edge of Waymarker's central work-yard — wide doors open to afternoon light, smells of fresh wood and sawdust, draw-plane sound recently stopped.",
         "npcsPresent": [
           {
             "name": "Fallen Cogitant",
-            "state": "Slung across Saehara's back — grip on his collar, lips still moving in silent count"
+            "state": "Settled on the nearest workbench — robes pooled, chalk hands in lap, lips still moving in silent count, breathing small and steady"
           },
           {
             "name": "Kon",
-            "state": "Moving into the shed ahead, coat catching the dim interior light"
+            "state": "Moving deeper into the shed, nose low, reading the space"
           }
         ],
         "objects": [
@@ -274,12 +275,13 @@
           "Stacked timber along one wall",
           "Tools on pegs — planes, chisels, draw-knives",
           "Katana at Saehara's waist",
-          "Traveler's Pack — riding over the Cogitant's weight",
-          "Waterskin — secured, accessible"
+          "Traveler's Pack",
+          "Waterskin — secured, accessible",
+          "Fallen Cogitant — settled on the nearest bench"
         ],
         "threads": [
-          "Lenten not yet located inside the shed",
-          "Fallen Cogitant: needs food and rest within two days",
+          "Lenten not yet located — draw-plane sound stopped, someone deeper in the shed",
+          "Fallen Cogitant needs food and water within two days",
           "Brenn the runner: stopped coming nineteen days ago — reason unknown",
           "Third terrace: Cogitant unseen four days — left behind, unresolved"
         ]
@@ -289,67 +291,33 @@
           "op": "update",
           "npcId": "fallen-cogitant",
           "name": "Fallen Cogitant",
-          "note": "Carried across the yard into the long shed — lips still moving, weight still on Saehara's back",
+          "note": "Lowered from Saehara's back onto the nearest workbench — settled with chalk hands in lap, lips still moving, breathing steady",
           "status": "injured",
-          "statusNote": "On Saehara's back inside Lenten's shed at Waymarker — breathing shallowed, severely dehydrated, needs food within two days"
+          "statusNote": "On a workbench inside Lenten's shed at Waymarker — breathing shallowed, severely dehydrated, needs food within two days"
         }
       ],
       "questUpdates": [
         {
           "op": "progress",
           "questId": "cogitarium-supply-line",
-          "note": "Arrived at Waymarker — directed to Lenten's long shed at the yard's far edge. Lenten not yet found."
+          "note": "Cogitant safely off Saehara's back and on a workbench. Lenten not yet found — somewhere deeper in the shed."
         }
       ],
-      "moveTo": {
-        "location": "waymarker",
-        "why": "Three hours northeast along the dry-stone wall — arrived on foot carrying the fallen Cogitant"
-      },
       "timeOps": {
-        "hoursPassed": 3,
-        "why": "The walk from the Cogitarium to Waymarker — eleven kilometers at pace under load"
-      },
-      "generateRequest": [
-        {
-          "type": "npc",
-          "hint": "Lenten — a builder at Waymarker who arranged the Cogitarium supply line; practical, settled, probably cautious about the evacuation proposal fallout",
-          "why": "Saehara has arrived at Lenten's shed and is about to make contact — Lenten needs a stable, persistent identity"
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "Saehara arrived carrying a fallen Cogitant — workers in the yard saw the grey robes; the settlement now knows a Cogitant was brought in",
-          "subPlace": {
-            "name": "Lenten's Long Shed",
-            "note": "The builder's working shed at the far edge of the central work-yard — wide doors, draw-plane sound, fresh timber smell",
-            "visited": true
-          }
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "waymarker",
-          "label": "Waymarker",
-          "kind": "place",
-          "fact": "A settlement of roughly forty structures around a central work-yard — builders, scaffolding, stacked timber. Practical and functional. Workers noticed the Cogitant's grey robes without fuss.",
-          "links": [
-            "cogitarium-supply-line",
-            "lenten",
-            "the-cogitariums-calculated-crisis"
-          ]
-        }
-      ]
+        "hoursPassed": 0.25,
+        "why": "A moment to set down the Cogitant and take stock — no meaningful time elapsed"
+      }
     },
     "sceneState": {
-      "setting": "Interior of Lenten's long shed at the edge of Waymarker's central work-yard — wide doors open to morning light, smells of fresh wood and sawdust, the sound of a draw-plane still running somewhere inside.",
+      "setting": "Interior of Lenten's long shed at the edge of Waymarker's central work-yard — wide doors open to afternoon light, smells of fresh wood and sawdust, draw-plane sound recently stopped.",
       "npcsPresent": [
         {
           "name": "Fallen Cogitant",
-          "state": "Slung across Saehara's back — grip on his collar, lips still moving in silent count"
+          "state": "Settled on the nearest workbench — robes pooled, chalk hands in lap, lips still moving in silent count, breathing small "
         },
         {
           "name": "Kon",
-          "state": "Moving into the shed ahead, coat catching the dim interior light"
+          "state": "Moving deeper into the shed, nose low, reading the space"
         }
       ],
       "objects": [
@@ -357,12 +325,13 @@
         "Stacked timber along one wall",
         "Tools on pegs — planes, chisels, draw-knives",
         "Katana at Saehara's waist",
-        "Traveler's Pack — riding over the Cogitant's weight",
-        "Waterskin — secured, accessible"
+        "Traveler's Pack",
+        "Waterskin — secured, accessible",
+        "Fallen Cogitant — settled on the nearest bench"
       ],
       "threads": [
-        "Lenten not yet located inside the shed",
-        "Fallen Cogitant: needs food and rest within two days",
+        "Lenten not yet located — draw-plane sound stopped, someone deeper in the shed",
+        "Fallen Cogitant needs food and water within two days",
         "Brenn the runner: stopped coming nineteen days ago — reason unknown",
         "Third terrace: Cogitant unseen four days — left behind, unresolved"
       ]
@@ -396,7 +365,8 @@
         "Ossian named the runner (Brenn, freckled, jaw scar) and the Waymarker contact (Lenten the builder). The payment was notation — applied theoretical work. A third possibility raised: the evacuation proposal may have poisoned the arrangement before the runner stopped coming.",
         "Saehara has left the Cogitarium and is en route to Waymarker — the fallen Cogitant on his back, three hours of path ahead.",
         "Junction cairn passed — Waymarker now visible by its smoke, thirty minutes ahead. Lenten and Brenn are the names to use.",
-        "Arrived at Waymarker — directed to Lenten's long shed at the yard's far edge. Lenten not yet found."
+        "Arrived at Waymarker — directed to Lenten's long shed at the yard's far edge. Lenten not yet found.",
+        "Cogitant safely off Saehara's back and on a workbench. Lenten not yet found — somewhere deeper in the shed."
       ],
       "aliases": [],
       "startedAt": "2026-07-16T03:39:50.282Z"
@@ -505,7 +475,6 @@
       },
       "relationship": 0,
       "history": [
-        "[d1] Saehara checked her vitals by hand: pulse forty beats per minute, lips dry, chalk ground into fingertips, body consuming itself — she has been on the floor four hours and twelve mi",
         "[d1] Received water — swallowed twice on reflex, throat still working, lips still moving; body taking the minimum",
         "[d1] Has been given water — swallowed twice on reflex. Pack search yielded no food; she needs more than water.",
         "[d1] Unattended now — waterskin on her chest, lips still moving. Saehara has risen and stands at the stair.",
@@ -514,7 +483,8 @@
         "[d1] Lifted from the entrance hall floor and carried out of the Cogitarium by Saehara — now slung across his back on the northeast path toward Waymarker",
         "[d1] Weight has settled into Saehara's back — manageable but taxing; lips still moving against his jaw in silent count",
         "[d1] Carried northeast along the dry-stone wall — grip firm on Saehara's collar, lips still moving, breathing has shallowed slightly",
-        "[d1] Carried across the yard into the long shed — lips still moving, weight still on Saehara's back"
+        "[d1] Carried across the yard into the long shed — lips still moving, weight still on Saehara's back",
+        "[d1] Lowered from Saehara's back onto the nearest workbench — settled with chalk hands in lap, lips still moving, breathing steady"
       ],
       "knownFacts": [
         "Chalk ground into both hands — she was working before she fell",
@@ -528,7 +498,7 @@
       ],
       "skillsObserved": [],
       "status": "injured",
-      "statusNote": "On Saehara's back inside Lenten's shed at Waymarker — breathing shallowed, severely dehydrated, needs food within two days",
+      "statusNote": "On a workbench inside Lenten's shed at Waymarker — breathing shallowed, severely dehydrated, needs food within two days",
       "lastSeen": {
         "locationId": "the_cogitarium",
         "day": 1
@@ -855,16 +825,20 @@
         "label": "Lenten (Waymarker Builder)",
         "kind": "person",
         "facts": [
-          "[d1] A builder at Waymarker who arranged the supply line with the Cogitarium. Paid in notation — applied theoretical work. The name Saehara should use if there is doubt at Waymarker."
+          "[d1] A builder at Waymarker who arranged the supply line with the Cogitarium. Paid in notation — applied theoretical work. The name Saehara should use if there is doubt at Waymarker.",
+          "[d1] Builder at Waymarker — the one who made the Cogitarium's supply line work, and who knows exactly what it cost to make it work"
         ],
         "links": [
           "waymarker",
           "cogitarium-supply-line",
           "the-cogitariums-calculated-crisis"
         ],
-        "aliases": [],
+        "aliases": [
+          "Lenten"
+        ],
         "createdDay": 1,
-        "updatedDay": 1
+        "updatedDay": 1,
+        "entityId": "lenten"
       },
       "brenn": {
         "id": "brenn",
@@ -885,22 +859,30 @@
     }
   },
   "tendencies": {
-    "strategic": 19.155773740225793,
-    "social": 7.497899578636689,
-    "cerebral": 8.4133062916734,
-    "generous": 9.53673273558913,
-    "cautious": 9.454436121066951,
-    "risky": 0.9369146928798039
+    "strategic": 20.059994871524665,
+    "social": 7.460410080743506,
+    "cerebral": 8.371239760215033,
+    "generous": 9.489049071911184,
+    "cautious": 10.407163940461617,
+    "risky": 0.9322301194154049
   },
   "aptitudes": [
     "strategist",
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 27,
+  "actionCount": 28,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
+    {
+      "kind": "npc",
+      "prompt": "Lenten",
+      "url": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%20of%20Lenten%2C%20Builder%20at%20Waymarker%20%E2%80%94%20the%20one%20who%20made%20the%20Cogitarium's%20supply%20line%20work%2C%20and%20who%20knows%20exactly%20what%20it%20cost%20to%20make%20it%20work.%20Speaks%20in%20load-bearing%20sentences%20%E2%80%94%20nothing%20decorative%2C%20nothing%20wasted%2C%20but%20not%20cold.%20Measures%20what%20he%20says%20the%20way%20he%20measures%20timber%3A%20cut%20once%2C%20cut%20right.%20Has%20a%20builder's%20habit%20of%20naming%20the%20thing%20underneath%20the%20thing%20%E2%80%94%20the%20joist%20behind%20the%20wall%2C%20the%20assumption%20behind%20the%20proposal.%20Goes%20quiet%20when%20he's%20calculating%2C%20and%20the%20quiet%20feels%20occupied%2C%20not%20absent.%20Early-spring%20mud%20still%20on%20his%20boots.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=51640&nologo=true",
+      "caption": "Lenten",
+      "worldDay": 16,
+      "at": "2026-07-16T03:57:17.387Z"
+    },
     {
       "kind": "portrait",
       "prompt": "Saehara Makashi",
@@ -910,16 +892,81 @@
       "at": "2026-07-16T02:18:04.820Z"
     }
   ],
-  "updatedAt": 1784174221068,
-  "rev": 54,
+  "updatedAt": 1784174474960,
+  "rev": 56,
   "generated": {
     "schemaVersion": 1,
-    "npc": {},
+    "npc": {
+      "lenten": {
+        "schemaVersion": 1,
+        "id": "lenten",
+        "name": "Lenten",
+        "role": "Builder at Waymarker — the one who made the Cogitarium's supply line work, and who knows exactly what it cost to make it work",
+        "homeLocation": "the_cogitarium",
+        "communityId": "builder.waymarker",
+        "personality": {
+          "warmth": 0.5,
+          "trust": 0.4,
+          "candor": 0.6,
+          "patience": 0.7
+        },
+        "spectrum": {
+          "body_mind": 0.65,
+          "emotional_logical": 0.6,
+          "concrete_abstract": 0.55,
+          "dark_light": -0.35
+        },
+        "voiceHints": "Speaks in load-bearing sentences — nothing decorative, nothing wasted, but not cold. Measures what he says the way he measures timber: cut once, cut right. Has a builder's habit of naming the thing underneath the thing — the joist behind the wall, the assumption behind the proposal. Goes quiet when he's calculating, and the quiet feels occupied, not absent. Early-spring mud still on his boots.",
+        "knowledge": [
+          "The Cogitarium supply line in full — every dependency, every seasonal choke point, every person who makes it hold",
+          "Which parts of the evacuation proposal would snap the line immediately, and which would fray it slow",
+          "What Waymarker's builders actually believe, as opposed to what they've been willing to say out loud",
+          "That abstract plans have a weight and it falls on specific people — he has watched it fall"
+        ],
+        "wants": "For the decision — whatever it turns out to be — to be made by people who have walked the route and felt the cold, not only by people who have thought about it well.",
+        "fears": "That the evacuation debate will be resolved at the level of argument before anyone has checked what argument costs on the ground, and that he will have been too careful to say so clearly enough.",
+        "reactsToReputation": {
+          "practical": "opens up, visibly; offers the real numbers",
+          "theoretical": "listens with full patience, then asks the one grounding question that hasn't been asked yet",
+          "trustworthy": "takes longer to decide than you'd expect, because he weighs it, but once decided it holds"
+        },
+        "currentState": "Sitting in his shed at Waymarker in the thin early-spring light, with a logbook open and a concern he hasn't voiced yet sitting beside it like a second presence in the room.",
+        "functions": [
+          "reveal",
+          "bind"
+        ],
+        "universalRole": "Quartermaster-Witness",
+        "roleMethod": "Cogitarium method — sustains the system by mapping its true shape, reveals the hidden load-bearing truth before the structure is tested by weight it was never designed to carry",
+        "_gen": {
+          "entityId": "lenten",
+          "type": "npc",
+          "birthWeight": 1,
+          "engagementScore": 0,
+          "tier": "fresh",
+          "rating": "R+",
+          "provenance": {
+            "playerKey": "player-7bxzzd",
+            "characterId": "char-mrmvlglu",
+            "locationId": "the_cogitarium",
+            "day": 1,
+            "worldDay": null,
+            "hint": "Lenten — a builder at Waymarker who arranged the Cogitarium supply line; practical, settled, probably cautious about the",
+            "why": "Saehara has arrived at Lenten's shed and is about to make contact — Lenten needs a stable, persistent identity"
+          },
+          "attentionHistory": [],
+          "createdDay": 1,
+          "repaired": false,
+          "stubbed": false,
+          "romanceEligible": true
+        },
+        "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%20of%20Lenten%2C%20Builder%20at%20Waymarker%20%E2%80%94%20the%20one%20who%20made%20the%20Cogitarium's%20supply%20line%20work%2C%20and%20who%20knows%20exactly%20what%20it%20cost%20to%20make%20it%20work.%20Speaks%20in%20load-bearing%20sentences%20%E2%80%94%20nothing%20decorative%2C%20nothing%20wasted%2C%20but%20not%20cold.%20Measures%20what%20he%20says%20the%20way%20he%20measures%20timber%3A%20cut%20once%2C%20cut%20right.%20Has%20a%20builder's%20habit%20of%20naming%20the%20thing%20underneath%20the%20thing%20%E2%80%94%20the%20joist%20behind%20the%20wall%2C%20the%20assumption%20behind%20the%20proposal.%20Goes%20quiet%20when%20he's%20calculating%2C%20and%20the%20quiet%20feels%20occupied%2C%20not%20absent.%20Early-spring%20mud%20still%20on%20his%20boots.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=51640&nologo=true"
+      }
+    },
     "location": {},
     "arc": {}
   },
   "regionsKnown": {
-    "somatic_reaches": 27
+    "somatic_reaches": 28
   },
   "opLossPending": false,
   "establishedFacts": [

@@ -11,13 +11,10 @@
 >
 > So an "NPC party member" is the missing **body** that unifies these: a person who travels with you and carries a ROLE, each role wiring to the system that already implements it. A trainer-in-your-party IS `teachers[trad]={met,willing}` — now visible as the person who makes that learning possible.
 
-## ⚖ THE ONE RULING ERIK OWES (load-bearing framing)
-**Is an NPC party member a NEW category, or is "companion" one ROLE within a unified "your company"?**
-- **(A) UNIFY (Aevi's recommendation):** one concept — *your company* — where companion / trainer / liaison / partner are **roles** an NPC-in-it can hold (several at once: Pell = partner + liaison; Huginn = companion[beast]). The bond/bonus/GM machinery is SHARED. **Feasible now** — `companionLine` already has `role` + `knowledge`; this turns on fields that exist rather than forking the system.
-- **(B) PARALLEL:** companions stay beasts/familiars; NPC party members are a separate humanoid category with their own roles. Two systems side by side.
-Recommend **(A)** — the code is already generic (role field present, id-keyed catalog), "roles" is more expressive (a real ally is often partner AND teacher AND faction-tie), and it avoids forking working bond/bonus code. Erik's call; the spec below assumes (A) and notes the (B) deltas.
+## ✅ ERIK'S RULING — LOCKED (2026-07-16): UNIFY (A)
+**One concept — "your company."** companion / trainer / liaison / partner / ally are **ROLES** an NPC-in-your-company holds, and **roles stack freely** on one person (Pell can be partner + liaison; a mentor can be trainer + ally). The bond/bonus/GM machinery is SHARED across all of them. Huginn is a company member whose role is `companion` (beast). **Feasible now** — `companionLine` already carries `role` + `knowledge`, and `activeCompanions` is id-keyed against a catalog (generic, not beast-specific), so this turns on fields that exist rather than forking the system. No parallel humanoid category is built.
 
-## THE MODEL (assuming A — unify)
+## THE MODEL — unified company, roles wire to existing systems
 An NPC in your **company** is a record with one or more **roles**, each wiring to an existing system:
 | Role | What it wires to (exists today) | Benefit surfaced |
 |---|---|---|
@@ -50,8 +47,7 @@ A company member lists their **roles + benefits + what they can teach** (the `kn
 - **Recruitment is consensual + earned** — bond threshold + the NPC's willingness; you don't conscript people. Minor NPCs can never be recruited to a romantic/partner role (existing floors).
 - **Composes, doesn't duplicate** — this extends the SNG-120 Company section and the SNG-100b teacher gate; it is not a parallel party system.
 
-## OPEN QUESTIONS — ERIK (framing) then CCODE (build)
-1. **[ERIK]** Unify (A) or parallel (B)? (Recommend A.)
-2. **[ERIK]** Can a partner (Pell) also be a trainer/liaison — do roles freely stack — or is a person one role at a time? (Recommend free stacking; it's more real.)
-3. **[CCODE]** Confirm `activeCompanions`/`companionBonus` generalize to a humanoid company member without breaking Huginn (the beast path stays valid as role=companion).
-4. **[CCODE]** Does the teacher gate read a single `teachers[trad]` today — can a company trainer populate it transiently (present) vs the durable `markTeacher` (met once)? Clarify transient-presence vs permanent-taught.
+## OPEN QUESTIONS — CCODE ROUND 2 (design settled; build confirmations)
+1. Confirm `activeCompanions`/`companionBonus` generalize to a humanoid company member without breaking Huginn (beast path stays valid as role=companion).
+2. The teacher gate reads `teachers[trad]` — can a company `trainer` populate it while present (transient) distinct from the durable `markTeacher` (met-once)? Clarify present-in-company vs permanently-taught (recommend: presence sets willing+met transiently; once they've actually taught you a skill, `markTeacher` makes met durable so parting doesn't erase that you were taught).
+3. Roles stack (ruling: yes) — confirm the record holds `roles[]` and every wire (bonus/teacher/liaison/partner) reads its own role independently so one NPC firing multiple benefits is clean.

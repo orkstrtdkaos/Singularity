@@ -35,7 +35,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 46,
+  "energy": 56,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -227,182 +227,131 @@
         "player": "Ask Lenten to get the supply runner moving tonight, then tell them you need to go back to the Cogitarium — the third terrace won't wait for you to rest",
         "summary": "Saehara commits to returning to the Cogitarium tonight; Lenten agrees to dispatch a runner before evening.",
         "narration": "You lean forward on the crate, elbows on knees. \"The runner — can they go before evening? Tonight if possible.\" You keep your voice level, not urgent, because urgency would let Lenten think there's room to negotiate the timeline. \"The Cogitants at the top of the building have eight to twelve days. That's Ossian's number, and Ossian doesn't pad. Regular deliveries starting again is the thing that matters most right now.\"\n\nLenten nods once — the compact, decisive kind that means it's already done in their head. They move to the shed's far corner and pull a length of rope off a peg, setting it on the half-planed board as if it needs to be somewhere while they think. \"I'll have someone on the path before the light turns. They know the route.\" A pause. \"I'll make sure they know about the dry-stone section.\"\n\nYou stand. Your legs register the eleven kilometers without enthusiasm, but they hold. \"Good. I'm going back.\" You pick up your Traveler's Pack and settle the straps — the weight is lighter now without the Cogitant across your shoulders, though your back hasn't quite registered that yet. \"There's a Cogitant on the third terrace who hasn't been seen in four days. Something fell. I heard it moving when I left.\" You glance at the woman on the bench — still chewing on reflex, lips still tracing silent notation, chalk hands folded in her lap like a completed proof. \"She's in good hands here.\"\n\nLenten watches you from across the bench. There's something in the look — not quite gratitude, not quite calculation, somewhere between the two. \"You carried her eleven kilometers and you're going back tonight.\" It isn't a question. Kon uncurls from near the timber stack, shakes once, and moves to the open shed doors — already oriented, already done with Waymarker. The afternoon light outside is going gold at the edges. Three hours back means arriving in the early dark."
+      },
+      {
+        "player": "Take a few minutes to eat and drink before the return march — the road back will demand it",
+        "summary": "Saehara eats and drinks before the return march — Lenten feeds the Cogitant; Kon waits at the door.",
+        "narration": "The clay pot still has bread in it — Lenten doesn't object when you pull a piece off and sit back down on the crate. You eat without ceremony, the same way you walked: practical, no performance. The bread is dense and a little dry, the kind baked to last, and it does what it needs to do. You wash it down from your waterskin, two long pulls, and feel the hollow in your chest fill slightly. Not enough. Enough for the road.\n\nKon hasn't moved from the doorway. The fox sits framed in the afternoon light, coat the color of banked coals, already facing northeast. Waiting with the particular patience of something that has decided and is simply letting you catch up.\n\nLenten watches you eat without comment. They've coiled the rope and set it aside, and their hands are curved at their sides the way hands get when the day's work is already planned and running in the head. The fallen Cogitant on the bench swallows another small piece of bread on reflex — Lenten's doing, patient and quiet, not looking at her while they do it. The chalk hands are still in her lap. Her lips still move. Her breathing is steady.\n\n\"Wall-path section,\" Lenten says, not looking up from the Cogitant. \"About a kilometer out from the Cogitarium. The dry-stone drops off sharp on the right — your runner will know, but remind whoever goes tonight anyway.\" They glance at you then. \"Road back is the same road you came in on. You know what it costs.\""
       }
     ],
     "lastTurn": {
-      "narration": "You lean forward on the crate, elbows on knees. \"The runner — can they go before evening? Tonight if possible.\" You keep your voice level, not urgent, because urgency would let Lenten think there's room to negotiate the timeline. \"The Cogitants at the top of the building have eight to twelve days. That's Ossian's number, and Ossian doesn't pad. Regular deliveries starting again is the thing that matters most right now.\"\n\nLenten nods once — the compact, decisive kind that means it's already done in their head. They move to the shed's far corner and pull a length of rope off a peg, setting it on the half-planed board as if it needs to be somewhere while they think. \"I'll have someone on the path before the light turns. They know the route.\" A pause. \"I'll make sure they know about the dry-stone section.\"\n\nYou stand. Your legs register the eleven kilometers without enthusiasm, but they hold. \"Good. I'm going back.\" You pick up your Traveler's Pack and settle the straps — the weight is lighter now without the Cogitant across your shoulders, though your back hasn't quite registered that yet. \"There's a Cogitant on the third terrace who hasn't been seen in four days. Something fell. I heard it moving when I left.\" You glance at the woman on the bench — still chewing on reflex, lips still tracing silent notation, chalk hands folded in her lap like a completed proof. \"She's in good hands here.\"\n\nLenten watches you from across the bench. There's something in the look — not quite gratitude, not quite calculation, somewhere between the two. \"You carried her eleven kilometers and you're going back tonight.\" It isn't a question. Kon uncurls from near the timber stack, shakes once, and moves to the open shed doors — already oriented, already done with Waymarker. The afternoon light outside is going gold at the edges. Three hours back means arriving in the early dark.",
-      "sceneSummary": "Saehara commits to returning to the Cogitarium tonight; Lenten agrees to dispatch a runner before evening.",
+      "narration": "The clay pot still has bread in it — Lenten doesn't object when you pull a piece off and sit back down on the crate. You eat without ceremony, the same way you walked: practical, no performance. The bread is dense and a little dry, the kind baked to last, and it does what it needs to do. You wash it down from your waterskin, two long pulls, and feel the hollow in your chest fill slightly. Not enough. Enough for the road.\n\nKon hasn't moved from the doorway. The fox sits framed in the afternoon light, coat the color of banked coals, already facing northeast. Waiting with the particular patience of something that has decided and is simply letting you catch up.\n\nLenten watches you eat without comment. They've coiled the rope and set it aside, and their hands are curved at their sides the way hands get when the day's work is already planned and running in the head. The fallen Cogitant on the bench swallows another small piece of bread on reflex — Lenten's doing, patient and quiet, not looking at her while they do it. The chalk hands are still in her lap. Her lips still move. Her breathing is steady.\n\n\"Wall-path section,\" Lenten says, not looking up from the Cogitant. \"About a kilometer out from the Cogitarium. The dry-stone drops off sharp on the right — your runner will know, but remind whoever goes tonight anyway.\" They glance at you then. \"Road back is the same road you came in on. You know what it costs.\"",
+      "sceneSummary": "Saehara eats and drinks before the return march — Lenten feeds the Cogitant; Kon waits at the door.",
       "choices": [
         {
-          "label": "Leave immediately — follow Kon back the way you came; use the last light while you have it",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 0,
+          "label": "Stand, settle the pack, and go — no more words needed",
+          "trivial": true,
           "intentTags": [
-            "move",
-            "careful"
-          ],
-          "trivial": true
+            "depart"
+          ]
         },
         {
-          "label": "Ask Lenten for anything useful before you go — food, a lamp, anything for the third terrace",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
+          "label": "Leave Lenten a clear instruction for the Cogitant — what to watch for in the next few hours",
+          "trivial": true,
           "intentTags": [
-            "ask",
-            "plan"
-          ],
-          "trivial": true
+            "help",
+            "inform"
+          ]
         },
         {
-          "label": "Take a few minutes to eat and drink before the return march — the road back will demand it",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
+          "label": "Ask Lenten one thing before you leave — the runner's name, so you can tell Ossian the line is held by a real person",
+          "trivial": true,
           "intentTags": [
-            "rest",
-            "careful"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask Lenten to send word to Ossian with the runner — confirm the supply line is reopening and ask if there's any message for the third terrace",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 0,
-          "intentTags": [
-            "plan",
-            "help"
-          ],
-          "trivial": true
+            "gather-information"
+          ]
         }
       ],
       "characterDeltas": {
         "health": 0,
-        "energy": 0
+        "energy": 10
       },
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "cogitarium-supply-line",
-          "note": "Lenten has committed to dispatching a runner before evening — the supply line is effectively reopened pending departure. The formal arrangement resumes tonight."
-        }
-      ],
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "lenten",
-          "name": "Lenten",
-          "note": "Committed to sending a runner before evening with awareness of the dry-stone section. Watched Saehara stand and prepare to leave — registered it fully.",
-          "learned": [
-            "Saehara is returning to the Cogitarium tonight — the third terrace won't wait",
-            "The runner should be warned specifically about the dry-stone wall-path section"
-          ],
-          "skillsObserved": [
-            "decisive resource deployment"
-          ],
-          "relationshipDelta": 1,
-          "statusNote": "Present in the long shed at Waymarker — runner dispatch underway before evening"
-        },
-        {
-          "op": "update",
-          "npcId": "fallen-cogitant",
-          "name": "Fallen Cogitant",
-          "note": "Still on the workbench, eating on reflex — chalk hands folded, lips moving. Under Lenten's care.",
-          "statusNote": "Receiving food and water from Lenten in the long shed — two-day window still running; condition holding"
-        }
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Lenten has committed to dispatching a supply runner to the Cogitarium before evening — the supply line is formally reopening tonight.",
-          "subjectId": "lenten"
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "cogitarium-supply-line",
-          "label": "Cogitarium Supply Line",
-          "kind": "mystery",
-          "fact": "Lenten has committed to sending a runner before evening — supply line formally resuming. Runner will be warned about the dry-stone section where Brenn fell.",
-          "links": [
-            "cogitarium",
-            "waymarker",
-            "lenten",
-            "brenn-missing-runner",
-            "the-cogitariums-calculated-crisis"
-          ]
-        }
-      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "a short meal and brief exchange before departure"
+      },
       "scene": {
-        "setting": "Interior of Lenten's long shed, Waymarker — afternoon light going gold through the wide open doors, smell of sawdust and linseed oil. Saehara is standing, pack resettled on shoulders, preparing to depart.",
+        "setting": "Interior of Lenten's long shed, Waymarker — afternoon light going gold through the wide open doors, smell of sawdust and linseed oil. Saehara is seated on a crate, finishing bread and water, pack at shoulder, preparing to stand.",
         "npcsPresent": [
           {
             "name": "Fallen Cogitant",
-            "state": "Seated on the workbench, chalk hands in lap, eating bread on reflex — lips still moving in silent notation"
+            "state": "Seated on the workbench, chalk hands in lap, swallowing bread on reflex — Lenten administering it quietly; lips still moving in silent notation"
           },
           {
             "name": "Lenten",
-            "state": "Standing across the bench, watching Saehara prepare to leave — rope in hand from the far peg, runner dispatch already decided"
+            "state": "Standing near the bench, rope coiled and set aside, watching Saehara finish eating — already thinking ahead to the runner dispatch"
           },
           {
             "name": "Kon",
-            "state": "At the open shed doors, already oriented northeast — done with Waymarker, waiting"
+            "state": "Sitting framed in the open doorway, coat banked-coal red in the afternoon light, already oriented northeast — waiting"
           }
         ],
         "objects": [
+          "Clay pot with remaining bread — on the bench beside the Cogitant",
+          "Tin cup with water — at the Cogitant's side",
+          "Coiled rope — set aside on the half-planed board",
           "Workbenches — long, heavy, sawdust-covered",
-          "Half-planed board on Lenten's bench",
           "Stacked timber along one wall",
-          "Tools on pegs — planes, chisels, draw-knives, rope now pulled down",
-          "Tin cup with water — at the Cogitant's lips",
-          "Clay pot and torn bread — on the bench beside the Cogitant",
+          "Tools on pegs — planes, chisels, draw-knives",
           "Katana at Saehara's waist",
-          "Traveler's Pack — resettled on Saehara's shoulders",
+          "Traveler's Pack — on Saehara's shoulders",
           "Waterskin — secured"
         ],
         "threads": [
-          "Runner not yet departed — Lenten committed but dispatch not witnessed",
+          "Runner not yet departed — Lenten committed, dispatch imminent before evening",
           "Third terrace Cogitant: four days unseen, dragging sound — Saehara returning tonight",
           "Fallen Cogitant's two-day window still running under Lenten's care",
           "Return march to Cogitarium: eleven kilometers, arriving in early dark"
         ]
       },
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief exchange — Saehara committing to the return, Lenten committing to the runner; a few minutes at most"
-      }
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "lenten",
+          "name": "Lenten",
+          "note": "Quietly fed the fallen Cogitant while Saehara ate — reminded Saehara about the dry-stone wall-path drop before departure",
+          "learned": [
+            "Wall-path section about a kilometer from the Cogitarium has a sharp drop on the right — hazard the new runner must be warned about"
+          ],
+          "statusNote": "Present in the long shed at Waymarker — runner dispatch underway before evening; feeding the fallen Cogitant"
+        },
+        {
+          "op": "update",
+          "npcId": "fallen-cogitant",
+          "name": "Fallen Cogitant",
+          "note": "Swallowed another piece of bread on reflex — Lenten administering sustenance patiently; condition holding",
+          "statusNote": "On the workbench in Lenten's shed — eating on reflex, lips moving, breathing steady; two-day window still running"
+        }
+      ]
     },
     "sceneState": {
-      "setting": "Interior of Lenten's long shed, Waymarker — afternoon light going gold through the wide open doors, smell of sawdust and linseed oil. Saehara is standing, pack resettled on shoulders, preparing to depart.",
+      "setting": "Interior of Lenten's long shed, Waymarker — afternoon light going gold through the wide open doors, smell of sawdust and linseed oil. Saehara is seated on a crate, finishing bread and water, pack at shoulder, preparing to stand.",
       "npcsPresent": [
         {
           "name": "Fallen Cogitant",
-          "state": "Seated on the workbench, chalk hands in lap, eating bread on reflex — lips still moving in silent notation"
+          "state": "Seated on the workbench, chalk hands in lap, swallowing bread on reflex — Lenten administering it quietly; lips still mo"
         },
         {
           "name": "Lenten",
-          "state": "Standing across the bench, watching Saehara prepare to leave — rope in hand from the far peg, runner dispatch already de"
+          "state": "Standing near the bench, rope coiled and set aside, watching Saehara finish eating — already thinking ahead to the runne"
         },
         {
           "name": "Kon",
-          "state": "At the open shed doors, already oriented northeast — done with Waymarker, waiting"
+          "state": "Sitting framed in the open doorway, coat banked-coal red in the afternoon light, already oriented northeast — waiting"
         }
       ],
       "objects": [
+        "Clay pot with remaining bread — on the bench beside the Cogitant",
+        "Tin cup with water — at the Cogitant's side",
+        "Coiled rope — set aside on the half-planed board",
         "Workbenches — long, heavy, sawdust-covered",
-        "Half-planed board on Lenten's bench",
         "Stacked timber along one wall",
-        "Tools on pegs — planes, chisels, draw-knives, rope now pulled down",
-        "Tin cup with water — at the Cogitant's lips",
-        "Clay pot and torn bread — on the bench beside the Cogitant",
+        "Tools on pegs — planes, chisels, draw-knives",
         "Katana at Saehara's waist",
-        "Traveler's Pack — resettled on Saehara's shoulders",
+        "Traveler's Pack — on Saehara's shoulders",
         "Waterskin — secured"
       ],
       "threads": [
-        "Runner not yet departed — Lenten committed but dispatch not witnessed",
+        "Runner not yet departed — Lenten committed, dispatch imminent before evening",
         "Third terrace Cogitant: four days unseen, dragging sound — Saehara returning tonight",
         "Fallen Cogitant's two-day window still running under Lenten's care",
         "Return march to Cogitarium: eleven kilometers, arriving in early dark"
@@ -548,7 +497,6 @@
       },
       "relationship": 0,
       "history": [
-        "[d1] Unattended. Waterskin on her chest. Lips still moving. No food. No one watching her.",
         "[d1] Kon has moved to sit beside her, warming the air. Ossian confirmed transport is calculably favorable — fifty-one kilograms, thermoregulation compromised, but food at Waymarker chan",
         "[d1] Lifted from the entrance hall floor and carried out of the Cogitarium by Saehara — now slung across his back on the northeast path toward Waymarker",
         "[d1] Weight has settled into Saehara's back — manageable but taxing; lips still moving against his jaw in silent count",
@@ -557,7 +505,8 @@
         "[d1] Lowered from Saehara's back onto the nearest workbench — settled with chalk hands in lap, lips still moving, breathing steady",
         "[d1] Swallowing water and bread on reflex — Lenten is administering basic sustenance; condition holding",
         "[d1] Now swallowing a second mouthful of bread on reflex — condition holding, two-day window still running from this morning's departure",
-        "[d1] Still on the workbench, eating on reflex — chalk hands folded, lips moving. Under Lenten's care."
+        "[d1] Still on the workbench, eating on reflex — chalk hands folded, lips moving. Under Lenten's care.",
+        "[d1] Swallowed another piece of bread on reflex — Lenten administering sustenance patiently; condition holding"
       ],
       "knownFacts": [
         "Pulse slow but present — approximately forty beats per minute",
@@ -571,7 +520,7 @@
       ],
       "skillsObserved": [],
       "status": "injured",
-      "statusNote": "Receiving food and water from Lenten in the long shed — two-day window still running; condition holding",
+      "statusNote": "On the workbench in Lenten's shed — eating on reflex, lips moving, breathing steady; two-day window still running",
       "lastSeen": {
         "locationId": "the_cogitarium",
         "day": 1
@@ -591,17 +540,18 @@
         "[d1] Surfaced from the shed when Saehara called out — took in the Cogitant on the bench and asked how long she'd been like this.",
         "[d1] Received Ossian's assessment from Saehara without hesitation — moved immediately to food and water for the Cogitant, then asked for the full situation",
         "[d1] Received the full account — nineteen days, Ossian's timelines, broken supply line. Revealed that Brenn returned hurt two weeks ago (bad ankle on the wall-path dry-stone section) an",
-        "[d1] Committed to sending a runner before evening with awareness of the dry-stone section. Watched Saehara stand and prepare to leave — registered it fully."
+        "[d1] Committed to sending a runner before evening with awareness of the dry-stone section. Watched Saehara stand and prepare to leave — registered it fully.",
+        "[d1] Quietly fed the fallen Cogitant while Saehara ate — reminded Saehara about the dry-stone wall-path drop before departure"
       ],
       "knownFacts": [
-        "The fallen Cogitant had two to three days when Saehara left the Cogitarium this morning",
         "Saehara carried her eleven kilometers on foot",
         "The Cogitarium sent only one person",
         "Brenn came back hurt roughly two weeks ago — ankle injury on the dry-stone wall-path about a kilometer out",
         "Lenten did not know the runs had stopped — assumed Brenn had recovered and returned to the route",
         "Lenten holds themselves responsible for the gap, though quietly",
         "Saehara is returning to the Cogitarium tonight — the third terrace won't wait",
-        "The runner should be warned specifically about the dry-stone wall-path section"
+        "The runner should be warned specifically about the dry-stone wall-path section",
+        "Wall-path section about a kilometer from the Cogitarium has a sharp drop on the right — hazard the new runner must be warned about"
       ],
       "skillsObserved": [
         "rapid situational assessment",
@@ -610,7 +560,7 @@
         "decisive resource deployment"
       ],
       "status": "active",
-      "statusNote": "Present in the long shed at Waymarker — runner dispatch underway before evening",
+      "statusNote": "Present in the long shed at Waymarker — runner dispatch underway before evening; feeding the fallen Cogitant",
       "lastSeen": {
         "locationId": "the_cogitarium",
         "day": 1
@@ -978,19 +928,19 @@
     }
   },
   "tendencies": {
-    "strategic": 20.661793955864965,
-    "social": 7.312317215098464,
-    "cerebral": 8.20506647058691,
-    "generous": 9.300686709239866,
-    "cautious": 10.20057653916596,
-    "risky": 0.9137248860125932
+    "strategic": 20.55848498608564,
+    "social": 7.275755629022972,
+    "cerebral": 8.164041138233976,
+    "generous": 9.254183275693666,
+    "cautious": 11.14957365647013,
+    "risky": 0.9091562615825302
   },
   "aptitudes": [
     "strategist",
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 32,
+  "actionCount": 33,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1011,8 +961,8 @@
       "at": "2026-07-16T02:18:04.820Z"
     }
   ],
-  "updatedAt": 1784174817199,
-  "rev": 60,
+  "updatedAt": 1784174912936,
+  "rev": 61,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1060,7 +1010,7 @@
           "entityId": "lenten",
           "type": "npc",
           "birthWeight": 1,
-          "engagementScore": 8,
+          "engagementScore": 10,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -1073,6 +1023,10 @@
             "why": "Saehara has arrived at Lenten's shed and is about to make contact — Lenten needs a stable, persistent identity"
           },
           "attentionHistory": [
+            {
+              "kind": "interact",
+              "day": 1
+            },
             {
               "kind": "interact",
               "day": 1
@@ -1103,7 +1057,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "somatic_reaches": 32
+    "somatic_reaches": 33
   },
   "opLossPending": false,
   "establishedFacts": [

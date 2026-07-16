@@ -1,4 +1,14 @@
-# PIPELINE ALERT — Singularity## ✅ SNG-115 + SNG-116 — CLOSED GREEN (Aevi HEAD audit, v1.8.76)
+# PIPELINE ALERT — Singularity## 🗺️ LOCATION + UI BATCH — specced (Erik play session 2026-07-16, awaiting CCode)
+
+- **SNG-117 — The world you know is navigable** (bug cluster, priority). `po/SPEC_SNG-117_known_world_navigable.md`. **Two symptoms, ONE root cause:** the engine only travels to / names places with a resolvable location record. (a) Left Millbrook "via the pass" → header stuck on Millbrook (exit resolved to no id; SNG-056 header-follows-fiction only fires on a resolvable `moveTo`). (b) Map shows `?` for every un-*visited* place even when you know its name / are traveling to it (L3214 gates name on `visited`, not `known`). Fix: a **known-places layer** (heard/en-route/rumoured/adjacent, not just visited) + **mint named-but-unrecorded destinations** ("the pass" becomes a real place via the existing gen path) + **header never asserts a place the fiction has left** (mint/infer/transit). Map names + makes clickable any KNOWN place.
+- **SNG-118 — Play-style as clickable chips.** `po/SPEC_SNG-118_playstyle_chips.md`. The prose wall becomes tight colored `[Strategist]` chips, tap-to-expand (reuse info-dot popover), with fading/lineage/inverse states. Scales with the SNG-113 roster.
+- **SNG-119 — Standing folded into location headers + current title.** `po/SPEC_SNG-119_standing_in_location_headers.md`. The detached "standing here" sidebar folds into each place's header + a standing chip next to the current-location title; known people scoped to their community. Data already assembled in `chronicleViews`.
+
+All three from Erik live play. SNG-117 is the load-bearing one (a wrong current-location poisons everything downstream). Awaiting CCode ROUND 2.
+
+---
+
+## ✅ SNG-115 + SNG-116 — CLOSED GREEN (Aevi HEAD audit, v1.8.76)
 
 > **CCode status 2026-07-16:** both fixed. **SNG-115** — ghGet/ghPut get an AbortController 12s deadline (all sync callers) + the actual hang (feedback entry had no top-level `at` → threw before the try) fixed + fb-send always lands on a terminal status. **SNG-116** — new `substratePenaltyFor` single-source; both preview sites pass it so preview == resolve. 6 smoke tests. Writeup: `po/results/20260716_SNG-115_116_live_bugs.md`. (Original spec text retained below.)
 

@@ -5,6 +5,10 @@
 
 > **Verified at HEAD `v1.8.67`.** `resolution.json.playerAptitudes` = 7 (strategist, rough_and_ready, silver_tongue, scholar, carouser, daredevil, good_samaritan), thresholds 6–8, each a real `mods` map feeding `successChance`/crit/reputation. Accrual: `playerprofile.js` — each turn every tendency `*= DECAY (0.995)`, then +1 per matching intent tag; `deriveAptitudes` grants when `tendency >= threshold`. **The decay-makes-them-situational design EXISTS but 0.995 is cosmetic** (~139 turns to halve) — so nothing ever falls off. Background grants **zero** aptitudes today. The `TAG_TO_TENDENCY` map has ~10 tendencies but only 7 have an aptitude (`cautious` has none).
 
+> **DEPENDENCIES & SEQUENCING:**
+> - **Hysteresis is a state change, not just tuning.** `deriveAptitudes` today recomputes the held set fresh each turn (`return rulesAptitudes.filter(tendency >= threshold)`) — it is stateless. The earn-at-threshold / keep-until-(threshold−margin) gap **requires knowing what was held last turn**, so `deriveAptitudes` must read the character's *currently-held* aptitudes and apply the margin only to those. This is a required change, stated here (not an open question): persist the held set and pass it in.
+> - **`devoted_lover` depends on SNG-108** (the committed-partner bond). Build 113 without it and every OTHER aptitude works, but `devoted_lower`'s "in service of a partner" mod has no bond to read. **Ship `devoted_lover` only after SNG-108 lands, or ship it inert (mod is a no-op until a partner bond exists).** The rest of SNG-113 has no such dependency and is buildable now.
+
 ## THE DIAGNOSIS (Erik's read, confirmed)
 "I racked up all there are" = three tuning facts compounding:
 1. **Only 7 aptitudes** — a varied campaign trips every category.
@@ -80,6 +84,8 @@ These are the system's first **inverse** aptitudes: you don't *earn* them by act
 - **Innocence aptitudes are about worldly experience, not age** — temperament traits, no romantic/sexual content, entirely separate from minor-safety floors. Inverse-earned (start-with / lose-through-play); loss is legible ("your innocence is fading") and largely one-way.
 
 ## OPEN QUESTIONS — CCODE ROUND 2
-1. Does `deriveAptitudes` currently track *held* state, or recompute fresh each turn? Hysteresis needs to know what's currently held to apply the keep-margin — confirm whether that's a state change.
-2. Confirm decay is the only place tendencies decrease (no other reset), so moving it to rules + raising it is the single lever.
-3. New tendencies need intent tags — does the parse-prompt vocabulary have room, or does adding stealth/deceive/patience/etc. crowd the tag list (interacts with SNG-100's cap)? **Flag: if new tags push the vocabulary past the intentTags cap, that cap needs the same load-bearing-hoist discipline as SNG-100.**
+1. Confirm decay is the only place tendencies decrease (no other reset), so moving it to rules + raising it is the single lever.
+2. New tendencies need intent tags — does the parse-prompt vocabulary have room, or does adding stealth/deceive/patience/etc. crowd the tag list (interacts with SNG-100's cap)? **Flag: if new tags push the vocabulary past the intentTags cap, that cap needs the same load-bearing-hoist discipline as SNG-100.**
+3. Inverse aptitudes read a composite "worldliness" sum — confirm the component tendencies (ruthless/deception/amorous/carousing) all exist post-population so the sum is well-defined at build time.
+
+*(Resolved and moved to DEPENDENCIES above: `deriveAptitudes` is stateless today and must track the held set for hysteresis; `devoted_lover` depends on SNG-108.)*

@@ -1,4 +1,14 @@
-# PIPELINE ALERT — Singularity## 📌 SNG-121 — Pin items to the sidebar (specced, awaiting CCode)
+# PIPELINE ALERT — Singularity## 🧭 SNG-122 + SNG-123 — narrative travel + GM-reply resilience (Erik screenshot, awaiting CCode)
+
+Erik's screenshot: "state updates were lost" note, after map-travel to the edge district because "in-game travel was just not getting there." **Diagnosed as TWO separate things, one causal, one coincidental:**
+- **SNG-122 — Narrative travel must actually move you (PROMOTE).** `po/SPEC_SNG-122_narrative_travel_moves.md`. This is the pure-narration-exit boundary SNG-117 deferred — and live play just proved it BLOCKS normal movement (the GM narrates the journey but emits no resolvable `moveTo`, so you don't arrive; map-travel is the only thing that works). Fix: require `moveTo` on travel intent (fix the cause), infer-or-mint a destination from a clear travel beat (reuse SNG-117 mint), and a one-tap "arrive" UI fallback that shares the map `travelTo` path. **Not a nice-to-have anymore — it's a workaround-forcing gap.**
+- **SNG-123 — GM-reply hardening (LOW, NOT a bug).** `po/SPEC_SNG-123_gm_reply_hardening.md`. The "state lost" note is a **graceful** degrade from a malformed/truncated GM JSON reply (retry failed → salvage narration + 20 op types → keep prior scene → self-clear). **Verified it self-cleared: Silas's `_opNote` is now null, he's correctly at `radiant_plateau_edge`.** NOT caused by travel (travel doesn't call the GM). Optional hardening only: leaner retry, targeted salvage for characterDeltas/moveTo (the ops that hurt to lose), and instrument the rate (if high in long sessions → context compaction, not a parser fix).
+
+The two symptoms were adjacent in time, not causally linked. SNG-122 is the real fix; SNG-123 is optional polish on an already-sound recovery.
+
+---
+
+## 📌 SNG-121 — Pin items to the sidebar (specced, awaiting CCode)
 `po/SPEC_SNG-121_pin_items_to_sidebar.md`. The sidebar Items section dumps the ENTIRE inventory (15+ items, long scroll). Fix: a `pinned` flag per item — sidebar renders **pinned only** (+ "＋N more in Inventory" count); the player toggles a pin from the Inventory view (📌 on each itemCard). kind-based default pins (weapon + consumables + has-uses) fill a never-pinned character's empty set but **never override an explicit choice**. Composes with SNG-114 (pin is an itemCard context flag, no second renderer) and SNG-120 (Items stays collapsible; collapsed header "Items (4 pinned · 14 total)"). Nothing hidden — unpinned always in Inventory, one tap away. From Erik's screenshots.
 
 ---

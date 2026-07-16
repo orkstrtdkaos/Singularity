@@ -8,6 +8,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { matchupBonus, synthesizeOpponentSheet, opponentPolicy, battleRound } from "../engine/skill_battle.js";
 import { senseOpponent } from "../engine/sense.js";
+import { startEncounter, skillBattleRound, sanitizeNewEncounter } from "../engine/encounters.js";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const rj = rel => JSON.parse(readFileSync(join(root, rel), "utf8"));
@@ -88,6 +89,25 @@ check("SNG-098 FOG: a 'read them' action BUYS a tier (scouting/buyTier raises wh
   senseOpponent(viewerBlind, oppRound, rules, sb, { buyTier: 1 }).tier === 1);
 check("SNG-098 FOG: never fabricates a number — a low-tier reveal contains no numeric field",
   Object.values(fog0.revealed).every(v => typeof v !== "number"));
+
+// ---- Phase B: encounters routing (spawn + round → the classic duel lifecycle) ----
+const duelDef = { id: "d1", type: "duel", opponent: { name: "Raider", health: 4, threat: 30, yieldAt: 0, tacticTags: ["berserker"] } };
+check("SNG-098 B: sanitizeNewEncounter accepts an AUTHORED opponent.skills[] (set-piece override)",
+  (() => { const e = sanitizeNewEncounter({ type: "duel", name: "Duel", opponent: { name: "Sef", skills: [{ function: "reveal", name: "the read", tier: 3 }] } }); return e.opponent.skills?.[0]?.function === "reveal" && e.opponent.skills[0].tier === 3; })());
+check("SNG-098 B: a classic duel (no sheet) stays the single-margins duel — no skill-battle fields",
+  (() => { const st = startEncounter(duelDef); return st.mode === undefined && st.opponentHealth === 4; })());
+const oppS = synthesizeOpponentSheet(duelDef.opponent, sb);
+const sbState = startEncounter(duelDef, { oppSheet: oppS });
+check("SNG-098 B: a duel spawned WITH a sheet runs as a skill battle (mode + momentum + opponentSheet)",
+  sbState.mode === "skill_battle" && sbState.momentum === 0 && !!sbState.opponentSheet && sbState.opponentEnergy > 0);
+const char = { attributes: { practical: 4, mental: 3 }, energy: 100 };
+const rr = skillBattleRound(sbState, duelDef, { function: "reveal", tier: 3, attribute: "mental", intensity: "surge", name: "the read" }, { character: char, rules, sb, steps, rng: seqRng([0.15, 0.85]) });
+check("SNG-098 B: a skill-battle round returns a fog-gateable opponent receipt + shifts momentum + spends the player's energy",
+  !!rr.opponent?.breakdown && rr.state.momentum !== 0 && rr.deltas.energy < 0);
+check("SNG-098 B: yielding ends the contest via the classic lifecycle outcome", skillBattleRound(sbState, duelDef, {}, { character: char, rules, sb, steps, yield: true }).outcome === "yielded");
+// a decisive momentum swing resolves to a duel outcome (opponent_fell / opponent_yielded)
+const crush = skillBattleRound({ ...sbState, momentum: 9 }, duelDef, { function: "strike", tier: 4, attribute: "practical", intensity: "surge", name: "the blow" }, { character: char, rules, sb, steps, rng: seqRng([0.02, 0.98]) });
+check("SNG-098 B: a decisive skill-battle win maps to a classic duel outcome (opponent_fell/yielded) + ends", crush.ended && /opponent_(fell|yielded)/.test(crush.outcome || ""));
 
 console.log(failures === 0 ? "\nSkill-battle sim: all checks passed." : `\nSkill-battle sim: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

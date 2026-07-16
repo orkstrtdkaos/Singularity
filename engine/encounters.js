@@ -5,11 +5,18 @@
 // narrates round receipts and proposes choices — it never advances state.
 // Incapacitation, never engine-imposed death.
 
+import { battleRound, opponentPolicy } from "./skill_battle.js";
+
 // ---------- lifecycle ----------
 
-export function startEncounter(def) {
+export function startEncounter(def, { oppSheet = null } = {}) {
   const base = { schemaVersion: 1, encounterId: def.id, type: def.type, status: "active", round: 1, log: [] };
-  if (def.type === "duel") return { ...base, opponentHealth: def.opponent.health, tactic: null };
+  if (def.type === "duel") {
+    // SNG-098: when the app hands us a synthesized/authored opponent SHEET, this duel runs as a two-sided
+    // SKILL BATTLE (momentum + attrition + fog); without a sheet it stays the classic single-margins duel.
+    if (oppSheet) return { ...base, opponentHealth: def.opponent.health, tactic: null, mode: "skill_battle", opponentSheet: oppSheet, momentum: 0, opponentEnergy: oppSheet.energy ?? 40 };
+    return { ...base, opponentHealth: def.opponent.health, tactic: null };
+  }
   if (def.type === "challenge") return { ...base, stageIndex: 0, stagesDone: [] };
   if (def.type === "puzzle") return { ...base, attempts: 0, hintsRevealed: 0, solved: false };
   return null;
@@ -70,6 +77,39 @@ export function duelRound(state, def, resolution, rules, opts = {}) {
   }
   s.log = [...state.log, `r${state.round}: ${resolution.degree}${opts.flee ? " (flee)" : ""}${opts.yield ? " (yield)" : ""} → ${events.join(" ")}`].slice(-12);
   return { state: s, deltas, events, ended, outcome };
+}
+
+/** SNG-098: ONE round of a skill-battle-typed duel. The player declares {function,tier,attribute,intensity};
+ *  the engine picks the opponent's move (opponentPolicy) and resolves BOTH rolls (battleRound), then maps the
+ *  contest onto the same duel lifecycle: the momentum meter filling / a crushing blow / exhaustion ENDS it,
+ *  mapping to the familiar outcomes (opponent_fell/opponent_yielded/yielded/fled/player_overcome/stalemate).
+ *  yield & flee reuse the classic exits. The returned `opponent` receipt is the TRUE round — the caller gates
+ *  its display with senseOpponent (fog). Never advances beyond a resolution the engine actually computed. */
+export function skillBattleRound(state, def, playerDecl, { character, rules, sb, steps, seenTendency = null, rng = Math.random, flee = false, yield: doYield = false, fleeResolution = null } = {}) {
+  const cfg = rules.encounters?.duel || {};
+  if (doYield) return { state: { ...state, status: "ended" }, ended: true, outcome: "yielded", deltas: { health: 0, energy: 0 }, events: ["You yield the contest."], player: null, opponent: null };
+  if (flee) { // break away — reuse the classic flee check on an injected resolution
+    const clean = fleeResolution && ["crit_success", "success", "partial"].includes(fleeResolution.degree);
+    if (clean) return { state: { ...state, status: "ended" }, ended: true, outcome: "fled", deltas: { health: 0, energy: 0 }, events: ["You break away clean."], player: null, opponent: null };
+    return { state, ended: false, outcome: null, deltas: { health: -(cfg.fleeFailFreeHit ?? 1) * (cfg.playerHealthPerHit ?? 4), energy: 0 }, events: ["The escape fails — you take a hit breaking off."], player: null, opponent: null };
+  }
+  const oppSheet = state.opponentSheet;
+  const oppDecl = opponentPolicy(oppSheet, state, seenTendency, sb);
+  const before = character.energy ?? 0;
+  const r = battleRound({
+    playerDecl, oppDecl,
+    playerSheet: { attributes: character.attributes || {}, subAttributes: character.subAttributes || {}, alignment: character.alignment || {}, skills: character.skills || {}, energy: before },
+    oppSheet, state: { momentum: state.momentum || 0, round: state.round, playerEnergy: before, opponentEnergy: state.opponentEnergy ?? oppSheet.energy }, rules, sb, steps, rng
+  });
+  const s = { ...state, round: state.round + 1, momentum: r.state.momentum, opponentEnergy: r.state.opponentEnergy };
+  const deltas = { health: 0, energy: r.state.playerEnergy - before }; // the player's own energy attrition (<= 0)
+  const events = []; let ended = false, outcome = null;
+  if (r.resolved === "player") { s.status = "ended"; ended = true; outcome = (def.opponent.yieldAt ?? 0) > 0 ? "opponent_yielded" : "opponent_fell"; events.push(`You prevail — ${def.opponent.name} ${outcome === "opponent_yielded" ? "yields" : "breaks"}.`); }
+  else if (r.resolved === "opponent") { s.status = "ended"; ended = true; outcome = "player_overcome"; deltas.health -= (cfg.playerHealthPerHit ?? 4); events.push(`${def.opponent.name} overwhelms you.`); }
+  else if (r.resolved === "stalemate") { s.status = "ended"; ended = true; outcome = "stalemate"; events.push("Both of you are spent — it ends unresolved."); }
+  else events.push(r.roundWinner === "player" ? "You press the advantage." : r.roundWinner === "opponent" ? "You give ground." : "Neither gains an inch.");
+  s.log = [...(state.log || []), `r${state.round}: ${playerDecl.function} vs ${oppDecl.function} → momentum ${Math.round(s.momentum)}${outcome ? " — " + outcome : ""}`].slice(-12);
+  return { state: s, player: r.player, opponent: r.opponent, oppDecl, ended, outcome, deltas, events, roundWinner: r.roundWinner };
 }
 
 /** Player incapacitation check (app calls after applying deltas). */
@@ -205,7 +245,12 @@ export function sanitizeNewEncounter(raw) {
     opponent: { name: String(o.name).slice(0, 60), health: Math.max(2, Math.min(8, o.health | 0 || 4)),
       threat: Math.max(10, Math.min(70, o.threat | 0 || 35)), yieldAt: Math.max(0, Math.min(3, o.yieldAt | 0)),
       fleeDifficulty: Math.max(0, Math.min(30, o.fleeDifficulty | 0 || 15)),
-      tacticTags: (Array.isArray(o.tacticTags) ? o.tacticTags : []).slice(0, 4).map(t => String(t).slice(0, 30)) } };
+      tacticTags: (Array.isArray(o.tacticTags) ? o.tacticTags : []).slice(0, 4).map(t => String(t).slice(0, 30)),
+      // SNG-098: optional AUTHORED skill sheet — a set-piece opponent can carry real, tradition-specific
+      // skills; absent, the engine synthesizes a modest sheet from threat + tacticTags. Clamped.
+      ...(Array.isArray(o.skills) && o.skills.length ? { skills: o.skills.slice(0, 5).map(s => ({
+        function: String(s.function || "strike").slice(0, 20), name: String(s.name || s.function || "a skill").slice(0, 40),
+        tier: Math.max(1, Math.min(5, s.tier | 0 || 1)), attribute: String(s.attribute || "practical").slice(0, 12) })) } : {}) } };
 }
 
 /** SNG-002b (ratified): a lethal encounter is always OFFERED, never imposed.

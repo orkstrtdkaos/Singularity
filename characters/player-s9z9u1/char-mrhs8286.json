@@ -39,7 +39,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.6350442691448743,
+    "spectrumId": -0.6532920556876306,
     "violence_peace": 0.09798375000000001,
     "chaos_order": 0.15848824448093873,
     "mechanical_spiritual": 0.16517695395990592,
@@ -1753,79 +1753,85 @@
         "player": "Call the spar now that conditions allow - if you win she tells you fully what she hasn't said.",
         "summary": "Silas wins the spar and Pell names her read: Sorel knows more than she said.",
         "narration": "Flat ground called; spar run; first tap landed; Pell names what she's been holding — Sorel may have the engineer's name and is filing it as 'reluctant contact' rather than witness.\n\n*You feel it settle into you — a new steadiness. (Level 8: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
+      },
+      {
+        "player": "Back up — the spar was physical, play it out properly, then we continue north toward Fen's intake.",
+        "summary": "Spar concluded — Pell wins on first tap (moving weight); names her read on Sorel; both turn north toward Fen's intake.",
+        "narration": "The ground under your boots is still wet from the squall, and you give it a beat — Memory's butt comes up off the stone, weight shifts forward, stance opens. Pell reads it the moment it happens. She's already moving.\n\nShe comes in low and lateral, not at the spear — at the space beside the spear. Standing weight was your tell and she's corrected for it, keeping her feet under her, not committing. You get the feint you expected, step off-line, bring Memory's shaft across at belt height — not the blade end, the grip — and she catches it on her forearm, rolls with it, and that half-step back you read as her preparing is actually her loading. First tap: her knuckles, flat and quick, on the back of your leading hand. No force. The point.\n\nShe takes a breath. You take one. Huginn watches from the east fence-post with the expression it always has, which is to say the expression of a bird that has seen everything and found it slightly slower than expected.\n\nPell exhales through her nose and steps back to road-distance. \"Moving weight,\" she says, as though naming the mechanism closes it. \"I had your standing tell. Hadn't fully counted for the difference.\" She doesn't look embarrassed — she looks like someone who has updated a file. The oilcloth goes back on her shoulder. \"Right then. Sorel has the name. I'd put cord on it. She's filing him as a reluctant contact because that way the shape of what he knows stays at one remove from her.\" A short pause. \"That's my read. I could be wrong.\" She clearly doesn't think she's wrong.\n\nThen she turns north, the road still flat between the fence-lines, Fen's intake twenty minutes ahead. \"Come on,\" she says, without waiting. Huginn lifts from the post with one soundless wingbeat and angles north over the wet grass, and the morning opens ahead of you — early and clear and smelling of cold stone and river."
       }
     ],
     "lastTurn": {
-      "narration": "Flat ground called; spar run; first tap landed; Pell names what she's been holding — Sorel may have the engineer's name and is filing it as 'reluctant contact' rather than witness.\n\n*You feel it settle into you — a new steadiness. (Level 8: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*",
-      "sceneSummary": "Silas wins the spar and Pell names her read: Sorel knows more than she said.",
+      "narration": "The ground under your boots is still wet from the squall, and you give it a beat — Memory's butt comes up off the stone, weight shifts forward, stance opens. Pell reads it the moment it happens. She's already moving.\n\nShe comes in low and lateral, not at the spear — at the space beside the spear. Standing weight was your tell and she's corrected for it, keeping her feet under her, not committing. You get the feint you expected, step off-line, bring Memory's shaft across at belt height — not the blade end, the grip — and she catches it on her forearm, rolls with it, and that half-step back you read as her preparing is actually her loading. First tap: her knuckles, flat and quick, on the back of your leading hand. No force. The point.\n\nShe takes a breath. You take one. Huginn watches from the east fence-post with the expression it always has, which is to say the expression of a bird that has seen everything and found it slightly slower than expected.\n\nPell exhales through her nose and steps back to road-distance. \"Moving weight,\" she says, as though naming the mechanism closes it. \"I had your standing tell. Hadn't fully counted for the difference.\" She doesn't look embarrassed — she looks like someone who has updated a file. The oilcloth goes back on her shoulder. \"Right then. Sorel has the name. I'd put cord on it. She's filing him as a reluctant contact because that way the shape of what he knows stays at one remove from her.\" A short pause. \"That's my read. I could be wrong.\" She clearly doesn't think she's wrong.\n\nThen she turns north, the road still flat between the fence-lines, Fen's intake twenty minutes ahead. \"Come on,\" she says, without waiting. Huginn lifts from the post with one soundless wingbeat and angles north over the wet grass, and the morning opens ahead of you — early and clear and smelling of cold stone and river.",
+      "sceneSummary": "Spar concluded — Pell wins on first tap (moving weight); names her read on Sorel; both turn north toward Fen's intake.",
       "choices": [
         {
-          "label": "Ask Pell to name what she'd do with it — if she had the name and the road was hers.",
+          "label": "Walk north with Pell toward Fen's intake — talk about the engineer's name on the way",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
+          "trivial": true,
           "intentTags": [
-            "connect",
-            "learn"
-          ],
-          "trivial": true
+            "talk",
+            "move"
+          ]
         },
         {
-          "label": "Turn back south toward Sorel — if the name is in Millbrook, press for it now before the letter goes to Leth.",
+          "label": "Ask Pell directly: how does she think Sorel acquired the name in the first place?",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "trivial": true,
+          "intentTags": [
+            "probe",
+            "study"
+          ]
+        },
+        {
+          "label": "Let it rest — walk north in quiet and use Order-Sense on the road ahead before you reach the intake",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 15,
+          "trivial": false,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 2
+        },
+        {
+          "label": "Name it plainly to Pell: if Sorel has the name, you go back and ask her before you leave the valley",
           "attribute": "social",
           "subAttribute": "presence",
-          "difficulty": 15,
-          "intentTags": [
-            "persuade",
-            "confront"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Keep walking north — trust the chain Mara built; the name comes through Leth.",
-          "attribute": "practical",
-          "subAttribute": "wits",
           "difficulty": 0,
+          "trivial": true,
           "intentTags": [
-            "careful",
+            "decide",
             "plan"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask Pell what the adjustment cost her — she named your tell, you named hers. Make it even.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "connect",
-            "reflect"
-          ],
-          "trivial": true
+          ]
         }
       ],
       "scene": {
-        "setting": "Old stone road between two fence-lines north of Millbrook — flat stretch, mist thinned, wheel-ruts shallowing on good stone. Oilcloth on the east fence-post. Huginn on the post directly east of the spar ground.",
+        "setting": "Old stone road between two fence-lines north of Millbrook — flat stretch, squall passed, clear cold morning. Fen's intake twenty minutes north.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Standing on the spar ground, oilcloth draped on the fence-post, hands open, looking at Silas directly — the unguarded register, something named."
+            "state": "Walking north, oilcloth resettled, wager paid — named her Sorel read and moving."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the east fence-post of the spar ground, wings folded, watching both of them."
+            "state": "Airborne, angling north low over the wet grass ahead of them."
           }
         ],
         "objects": [
           "Memory (spear, in Silas's left hand)",
-          "Pell's oilcloth (on east fence-post)",
-          "Muddy stone road — wheel-ruts shallowing on flat section",
-          "Fence-posts, two lines, wet grass"
+          "Pell's oilcloth (on her shoulder)",
+          "Stone road — wheel-ruts, wet grass verge, fence-posts two lines"
         ],
         "threads": [
-          "Pell's read: Sorel may know the engineer's name and is filing it as 'reluctant contact' — not evidence, but named.",
-          "Pell's open sentence — 'a sentence I hadn't started' — partially closed but not all the way.",
-          "Fen's intake is still the destination, twenty minutes north."
+          "Pell's read: Sorel likely has the engineer's name — filed as reluctant contact, not witness.",
+          "Fen's intake: twenty minutes north, first valve site to inspect together.",
+          "The question of whether to return and press Sorel before leaving the valley."
         ]
       },
       "npcUpdates": [
@@ -1833,7 +1839,7 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Lost the spar on first tap — moving-weight read cost her a half-step back; she accepted the result and paid the wager. Named her held read: Sorel likely has the engineer's name, filed under reluctant contact rather than witness.",
+          "note": "Lost the spar on first tap — moving-weight read cost her a half-step back; she accepted the result and paid the wager. Named her held read: Sorel likely has the engineer's name, filing him as reluctant contact rather than witness.",
           "learned": [
             "Moving weight and standing weight are two distinct reads — she'd read Silas's standing tell and hadn't fully accounted for the mobile feint.",
             "Believes Sorel is holding the engineer's name back, framing it as reluctant rather than witness to avoid responsibility for what gets done with it."
@@ -1841,86 +1847,47 @@
           "skillsObserved": [
             "rapid tactical adjustment under pressure",
             "paying a wager cleanly without deflection",
-            "naming a speculative read as speculative without withdrawing it"
+            "naming a speculative read as speculative without withdrawing"
           ],
-          "relationshipDelta": 1,
+          "relationshipDelta": 0,
+          "status": "active",
           "statusNote": "Walking north with Silas toward Fen's intake — open, unguarded, the spar wager paid."
         },
         {
           "op": "update",
-          "npcId": "sorel",
-          "name": "Sorel",
-          "note": "Pell's read (not confirmed): Sorel may have the engineer's name and is filing it as reluctant contact rather than naming him as a witness — to avoid being responsible for what Silas does with it.",
-          "learned": [
-            "Pell suspects Sorel is holding more than she said — specifically a name, not just a shape."
-          ],
-          "statusNote": "In Millbrook — writing to Leth tonight with Silas's request. The question of what else she's holding is now live."
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "sorel",
-          "label": "Sorel",
-          "kind": "person",
-          "entityId": "sorel",
-          "fact": "Pell's read (unconfirmed): Sorel may have the engineer's name and is filing him as 'reluctant contact' rather than naming him as a witness — to avoid being the one responsible for what Silas does with it.",
-          "links": [
-            "the-water-crisis",
-            "millbrook",
-            "pell",
-            "the-actor-with-a-list"
-          ]
-        },
-        {
-          "topic": "pell",
-          "label": "Pell",
-          "kind": "person",
-          "entityId": "pell",
-          "fact": "Lost the spar on first tap — moving weight versus standing weight, the feint inside her own read. Paid the wager without deflection and named her held read about Sorel.",
-          "links": [
-            "sorel",
-            "the-water-crisis",
-            "millbrook"
-          ]
+          "npcId": "huginn",
+          "name": "Huginn",
+          "note": "Watched the spar from the east fence-post. Lifted north with one wingbeat when Pell turned.",
+          "status": "active",
+          "statusNote": "Airborne ahead, angling north over the wet grass toward Fen's intake."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short exchange on the road — the spar itself, a minute; the conversation, a few more."
-      },
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "sceneEnded": false
+        "why": "A short spar and a few words — a quarter-hour at most."
+      }
     },
     "sceneState": {
-      "setting": "Old stone road between two fence-lines north of Millbrook — flat stretch, mist thinned, wheel-ruts shallowing on good stone. Oilcloth on the east fence-post. Huginn on the post directly east of the spar ground.",
+      "setting": "Old stone road between two fence-lines north of Millbrook — flat stretch, squall passed, clear cold morning. Fen's intake twenty minutes north.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Standing on the spar ground, oilcloth draped on the fence-post, hands open, looking at Silas directly — the unguarded re"
+          "state": "Walking north, oilcloth resettled, wager paid — named her Sorel read and moving."
         },
         {
           "name": "Huginn",
-          "state": "Perched on the east fence-post of the spar ground, wings folded, watching both of them."
+          "state": "Airborne, angling north low over the wet grass ahead of them."
         }
       ],
       "objects": [
         "Memory (spear, in Silas's left hand)",
-        "Pell's oilcloth (on east fence-post)",
-        "Muddy stone road — wheel-ruts shallowing on flat section",
-        "Fence-posts, two lines, wet grass"
+        "Pell's oilcloth (on her shoulder)",
+        "Stone road — wheel-ruts, wet grass verge, fence-posts two lines"
       ],
       "threads": [
-        "Pell's read: Sorel may know the engineer's name and is filing it as 'reluctant contact' — not evidence, but named.",
-        "Pell's open sentence — 'a sentence I hadn't started' — partially closed but not all the way.",
-        "Fen's intake is still the destination, twenty minutes north."
+        "Pell's read: Sorel likely has the engineer's name — filed as reluctant contact, not witness.",
+        "Fen's intake: twenty minutes north, first valve site to inspect together.",
+        "The question of whether to return and press Sorel before leaving the valley."
       ]
     }
   },
@@ -2069,7 +2036,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Named the four-site pattern as a single operating system, deliberately restarted. Placed the outbound boot prints as the actor's departure vector — they went out, not in.",
         "[d2] Already through the back door before the farewells finished — facing north, pace set, no ceremony.",
         "[d2] Walking north ahead of Silas, oilcloth out against the squall, named her weapons before he could ask — cross-peen hammer and heavy belt knife. Caught him assessing and called it pl",
         "[d2] Received 'both' plainly — a short nod that cost her something. Answered the spar proposal with 'terms?' without saying no.",
@@ -2078,6 +2044,7 @@
         "[d2] Read standing weight versus moving weight as two distinct reads — named the oblique maker's mark plainly: a line she hadn't earned, and she'd make the same choice again.",
         "[d2] Named the oblique mark as accuracy not modesty — she'd rather cut wrong and be honest than straight and lying. Named the collar ring as 'being named to something' and did not finis",
         "[d2] Received Silas's completion of her sentence without correction — named the collar ring as a sentence she hadn't started, and walked with it open.",
+        "[d2] Lost the spar on first tap — moving-weight read cost her a half-step back; she accepted the result and paid the wager. Named her held read: Sorel likely has the engineer's name, fi",
         "[d2] Lost the spar on first tap — moving-weight read cost her a half-step back; she accepted the result and paid the wager. Named her held read: Sorel likely has the engineer's name, fi"
       ],
       "knownFacts": [
@@ -3142,15 +3109,15 @@
     }
   },
   "tendencies": {
-    "strategic": 60.68602957041466,
-    "cerebral": 41.02437385385051,
-    "social": 61.72937526980348,
-    "generous": 16.759521738730797,
-    "cautious": 47.45788792335471,
-    "physical": 1.764097516607323,
-    "risky": 3.536132888456516,
-    "ruthless": 2.9031652673641375,
-    "carousing": 1.3160082198729064
+    "strategic": 60.382599422562585,
+    "cerebral": 40.81925198458126,
+    "social": 61.42072839345446,
+    "generous": 16.675724130037143,
+    "cautious": 48.22059848373794,
+    "physical": 1.7552770290242863,
+    "risky": 3.5184522240142337,
+    "ruthless": 2.888649441027317,
+    "carousing": 1.3094281787735418
   },
   "aptitudes": [
     "strategist",
@@ -3158,7 +3125,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 277,
+  "actionCount": 278,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3284,8 +3251,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13693&nologo=true",
-  "updatedAt": 1784171715661,
-  "rev": 380,
+  "updatedAt": 1784173839855,
+  "rev": 381,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3847,7 +3814,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 79
+    "valley": 80
   },
   "foreclosed": [
     "rootkin",

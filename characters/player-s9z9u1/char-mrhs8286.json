@@ -71,7 +71,7 @@
     "emotional_logical": 0.048249999999999994,
     "falsehood_truth": 0.04000000000000001,
     "demonic_angelic": 0.03,
-    "value": 0.03
+    "value": 0.0435
   },
   "attunement": 8,
   "maxHealth": 65,
@@ -1930,67 +1930,72 @@
         "player": "Move closer to her — not a declaration, just closing the space between you on the flat rock — and let what she said land before either of you speaks again.",
         "summary": "Silas closes the distance at the overhang camp — Pell rests her head against his, and names staying as the thing that matters.",
         "narration": "You set the wine bottle down on the flat stone and shift your weight toward her — not a dramatic close, just the few inches that turn sitting-near into sitting-together. Your shoulder finds hers. She doesn't pull away. She adjusts, almost without thinking, so the contact settles rather than presses.\n\nHuginn makes no sound. The coals breathe. Out past the overhang lip the dark has gone full and the wind cuts through the pines in long slow passes, but here under the rock it is amber and still.\n\nPell looks at the fire for a moment. Then she tips her head, just slightly, and rests it against the side of yours. Not a grand gesture — the way a carpenter leans on a bench they've worked at for years, comfortable with the weight. Her hands stay in her lap, open.\n\n\"I think,\" she says quietly, \"you should stop looking at what you are and start looking at what you did.\" A pause. The fire. \"You were there. With the animal. You stayed.\" Her shoulder is solid against yours. \"Whatever name that has — you didn't run from it. That's not strange. That's just you.\""
+      },
+      {
+        "player": "You're a good woman Pell Marsh.  And you look fantastic naked in the forgelight... kind of intimidating... I keep wanting to challenge you just to have you beat me, so I get to be in closer contact with you longer. ",
+        "summary": "Silas tells Pell plainly she's good and looks fantastic by forgelight — she tries not to let the smile through, takes his hand, and tells him he could just ask.",
+        "narration": "You say it plain, the way things said by a low fire at the end of a long road tend to come out — not rehearsed, not clever, just honest.\n\n\"You're a good woman, Pell Marsh. And you look fantastic naked in the forgelight.\" A beat. \"Kind of intimidating, if I'm being truthful. I keep wanting to challenge you just to have you beat me, so I get to stay in closer contact with you longer.\"\n\nShe doesn't move her head from yours for a moment. Then she does — just enough to look at you sideways, close enough that you can see the exact shape of the expression working its way across her face: the brief flicker of surprise, the war between dignity and pleasure, and then the helpless thing underneath both of them. Her mouth pulls. She tries not to let it.\n\n\"That,\" she says, \"is the most honest thing you've said all night.\" Her voice has dropped out of the even register she holds it in when she is being careful. She is not being careful now. \"The forgelight. Of all the — \" She stops. Breathes. The hand in her lap turns over, and her fingers find yours without ceremony, without declaration, just the same practical directness she brings to everything she does that matters. \"You could just ask,\" she says. Her thumb moves against the back of your hand, once. \"For the closer contact. You don't have to let me win something first.\" She says it very quietly, like she is telling you something she has worked out recently and is still deciding what to do with. Her head tips back against yours. She's warm, and she smells of woodsmoke and pine-tar salve and the last of the mountain wine. \"Although,\" she adds, after a pause that has real weight in it, \"I would win.\""
       }
     ],
     "lastTurn": {
-      "narration": "You set the wine bottle down on the flat stone and shift your weight toward her — not a dramatic close, just the few inches that turn sitting-near into sitting-together. Your shoulder finds hers. She doesn't pull away. She adjusts, almost without thinking, so the contact settles rather than presses.\n\nHuginn makes no sound. The coals breathe. Out past the overhang lip the dark has gone full and the wind cuts through the pines in long slow passes, but here under the rock it is amber and still.\n\nPell looks at the fire for a moment. Then she tips her head, just slightly, and rests it against the side of yours. Not a grand gesture — the way a carpenter leans on a bench they've worked at for years, comfortable with the weight. Her hands stay in her lap, open.\n\n\"I think,\" she says quietly, \"you should stop looking at what you are and start looking at what you did.\" A pause. The fire. \"You were there. With the animal. You stayed.\" Her shoulder is solid against yours. \"Whatever name that has — you didn't run from it. That's not strange. That's just you.\"",
-      "sceneSummary": "Silas closes the distance at the overhang camp — Pell rests her head against his, and names staying as the thing that matters.",
+      "narration": "You say it plain, the way things said by a low fire at the end of a long road tend to come out — not rehearsed, not clever, just honest.\n\n\"You're a good woman, Pell Marsh. And you look fantastic naked in the forgelight.\" A beat. \"Kind of intimidating, if I'm being truthful. I keep wanting to challenge you just to have you beat me, so I get to stay in closer contact with you longer.\"\n\nShe doesn't move her head from yours for a moment. Then she does — just enough to look at you sideways, close enough that you can see the exact shape of the expression working its way across her face: the brief flicker of surprise, the war between dignity and pleasure, and then the helpless thing underneath both of them. Her mouth pulls. She tries not to let it.\n\n\"That,\" she says, \"is the most honest thing you've said all night.\" Her voice has dropped out of the even register she holds it in when she is being careful. She is not being careful now. \"The forgelight. Of all the — \" She stops. Breathes. The hand in her lap turns over, and her fingers find yours without ceremony, without declaration, just the same practical directness she brings to everything she does that matters. \"You could just ask,\" she says. Her thumb moves against the back of your hand, once. \"For the closer contact. You don't have to let me win something first.\" She says it very quietly, like she is telling you something she has worked out recently and is still deciding what to do with. Her head tips back against yours. She's warm, and she smells of woodsmoke and pine-tar salve and the last of the mountain wine. \"Although,\" she adds, after a pause that has real weight in it, \"I would win.\"",
+      "sceneSummary": "Silas tells Pell plainly she's good and looks fantastic by forgelight — she tries not to let the smile through, takes his hand, and tells him he could just ask.",
       "choices": [
         {
-          "label": "Say nothing — just let this be what it is for now. Let the quiet hold.",
+          "label": "Take her at her word — ask plainly for the closer contact she just named",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
-          "trivial": true,
           "intentTags": [
-            "rest",
-            "present"
-          ]
+            "direct",
+            "honest",
+            "intimate"
+          ],
+          "trivial": true
         },
         {
-          "label": "Ask her what she wants from the road ahead — not the work, just what she's hoping for by the time you reach the Edge District.",
+          "label": "Tell her you like winning better — and that her winning was never a deterrent, it was the point",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "flirt",
+            "honest",
+            "playful"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Say nothing — and let the held hand and the fire do the rest for a while",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
-          "trivial": true,
           "intentTags": [
-            "connect",
-            "ask"
-          ]
+            "quiet",
+            "present",
+            "intimate"
+          ],
+          "trivial": true
         },
         {
-          "label": "Tell her what you're actually afraid of finding at the Edge District — not the expert, but what the breach in the archive might mean about who restarted the system.",
-          "attribute": "mental",
+          "label": "Ask what she would do if you just asked — let her say what she means by it",
+          "attribute": "social",
           "subAttribute": "insight",
           "difficulty": 0,
-          "trivial": true,
           "intentTags": [
-            "confide",
-            "name-the-fear"
-          ]
-        },
-        {
-          "label": "The fire is almost out — tend it, settle the camp properly, and let the night arrange itself from there.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "difficulty": 0,
-          "trivial": true,
-          "intentTags": [
-            "rest",
-            "settle"
-          ]
+            "honest",
+            "curious",
+            "intimate"
+          ],
+          "trivial": true
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
       "scene": {
         "setting": "Far side of the mountain pass, evening — at the south-facing rock overhang, fire settled to low red-orange coals in the flat-stone ring. Full dark beyond the treeline, amber light on the overhang ceiling, wind cutting above the lip.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Shoulder against Silas's, head resting against his, hands open in her lap — quiet, present."
+            "state": "Head tipped back against Silas's, her fingers threaded through his without ceremony, a smile she is not quite successfully suppressing."
           },
           {
             "name": "Huginn",
@@ -1999,7 +2004,7 @@
         ],
         "objects": [
           "Memory (spear, leaned against the overhang wall)",
-          "Resin Mountain Wine (open, last third remaining, set on the flat stone between them)",
+          "Resin Mountain Wine (open, last third remaining, set on the flat stone)",
           "Oilcloth Fold (Pell's, propped as windbreak)",
           "Valve Failure Timeline note — 'S-gate confirmed' annotated (in pocket)",
           "Contact Names Scrap (Sorel, Leth) (in pocket)",
@@ -2010,8 +2015,9 @@
           "Preserved Trail Parcel x3 (remaining in pack)"
         ],
         "threads": [
-          "Pell has named staying as the thing that matters — the fear Silas named has been held and answered.",
-          "The fire is burning low — the night is still ahead of them.",
+          "Pell has told Silas he could simply ask — the invitation is live and unresolved.",
+          "Her hand is in his — the first unceremonious physical reach she has made.",
+          "The fire is burning low; the night ahead is long and unscheduled.",
           "Edge District bearing — Leth and Sorel as first contacts.",
           "The buried vault head: six-week window, expert needed before week five."
         ]
@@ -2021,28 +2027,36 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Received Silas closing the distance — adjusted naturally, rested her head against his without declaration. Named the thing that matters: he stayed, and that is not strange, that is him.",
+          "note": "Silas told her she looks fantastic by forgelight and that he keeps provoking challenges just to have her beat him and stay close. She tried to hold her composure, lost the war, and took his hand — told him plainly he could just ask for the closer contact.",
           "learned": [
-            "Staying with the animal was the act — she names it as ground, not strangeness"
+            "Silas finds her intimidating in the best possible way — not in spite of her competence but because of it",
+            "The forgelight compliment landed and landed hard — she couldn't suppress it",
+            "She has just made the first physical reach of the evening, unprompted, taking his hand without ceremony"
           ],
           "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "At the overhang camp, shoulder against Silas's, present and unguarded.",
+          "statusNote": "At the overhang camp, hand in Silas's, head against his, the armor fully down — told him he could ask plainly for what he wants.",
           "bondType": "romantic",
           "bondStage": "together"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A quiet moment at the fire — no more than a few minutes pass."
-      }
+        "why": "a warm exchange by the fire — a few minutes, not more"
+      },
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
+      "ledgerEvents": []
     },
     "sceneState": {
       "setting": "Far side of the mountain pass, evening — at the south-facing rock overhang, fire settled to low red-orange coals in the flat-stone ring. Full dark beyond the treeline, amber light on the overhang ceiling, wind cutting above the lip.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Shoulder against Silas's, head resting against his, hands open in her lap — quiet, present."
+          "state": "Head tipped back against Silas's, her fingers threaded through his without ceremony, a smile she is not quite successful"
         },
         {
           "name": "Huginn",
@@ -2051,7 +2065,7 @@
       ],
       "objects": [
         "Memory (spear, leaned against the overhang wall)",
-        "Resin Mountain Wine (open, last third remaining, set on the flat stone between t",
+        "Resin Mountain Wine (open, last third remaining, set on the flat stone)",
         "Oilcloth Fold (Pell's, propped as windbreak)",
         "Valve Failure Timeline note — 'S-gate confirmed' annotated (in pocket)",
         "Contact Names Scrap (Sorel, Leth) (in pocket)",
@@ -2062,8 +2076,9 @@
         "Preserved Trail Parcel x3 (remaining in pack)"
       ],
       "threads": [
-        "Pell has named staying as the thing that matters — the fear Silas named has been held and answered.",
-        "The fire is burning low — the night is still ahead of them.",
+        "Pell has told Silas he could simply ask — the invitation is live and unresolved.",
+        "Her hand is in his — the first unceremonious physical reach she has made.",
+        "The fire is burning low; the night ahead is long and unscheduled.",
         "Edge District bearing — Leth and Sorel as first contacts.",
         "The buried vault head: six-week window, expert needed before week five."
       ]
@@ -2214,7 +2229,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Received the Palework read on the fire-ring — filed 'before the pass opened' immediately and set it aside. Accepted the Resin Mountain Wine, drank first, and settled into the eveni",
         "[d2] Told Silas about her father's stamp, the three pieces before she understood the criterion, and why the mark stays oblique — his angle, his teaching, still present in the work.",
         "[d2] Your bond becomes romantic.",
         "[d2] Your bond deepens — courting.",
@@ -2223,17 +2237,18 @@
         "[d2] Named what managing it badly looks like — the ledger, the note that lasted three seconds, the bottle held between them.",
         "[d2] Received Silas's offer plainly — 'I don't know what to do with that yet, but I heard it, I'll keep it.' The armor still down; the rules she's been operating on named as rules.",
         "[d2] Held Silas's vulnerability plainly — named strangeness as where the work is, and the resurrection not as unsettling but as ground. Said: 'you were there, that's not the same as hav",
-        "[d2] Received Silas closing the distance — adjusted naturally, rested her head against his without declaration. Named the thing that matters: he stayed, and that is not strange, that is"
+        "[d2] Received Silas closing the distance — adjusted naturally, rested her head against his without declaration. Named the thing that matters: he stayed, and that is not strange, that is",
+        "[d2] Silas told her she looks fantastic by forgelight and that he keeps provoking challenges just to have her beat him and stay close. She tried to hold her composure, lost the war, and"
       ],
       "knownFacts": [
-        "When asked directly she answers directly — the armor being off changes how she speaks",
-        "Managing it badly means knowing what she wants and spending energy making sure it doesn't show — filing things, treating the want like a ledger she can close",
-        "Silas has told her explicitly she can want things out loud around him and he won't make it strange",
         "She doesn't yet know what to do with that — but she's keeping it",
         "Silas grew up in a Wright hold and came to the Ashwarden craft later — the two sit in him uneasily",
         "Silas resurrected a rabbit three days ago and does not know what to call what that makes him",
         "His specific fear is that he is too strange for someone as grounded as her to accept",
-        "Staying with the animal was the act — she names it as ground, not strangeness"
+        "Staying with the animal was the act — she names it as ground, not strangeness",
+        "Silas finds her intimidating in the best possible way — not in spite of her competence but because of it",
+        "The forgelight compliment landed and landed hard — she couldn't suppress it",
+        "She has just made the first physical reach of the evening, unprompted, taking his hand without ceremony"
       ],
       "skillsObserved": [
         "field-kit discipline under weather change — oilcloth deploye",
@@ -2244,7 +2259,7 @@
         "reading a stain pattern independently against a known failur"
       ],
       "status": "active",
-      "statusNote": "At the overhang camp, shoulder against Silas's, present and unguarded.",
+      "statusNote": "At the overhang camp, hand in Silas's, head against his, the armor fully down — told him he could ask plainly for what he wants.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -3364,15 +3379,15 @@
     }
   },
   "tendencies": {
-    "strategic": 61.965978042423124,
-    "cerebral": 41.265108082545055,
-    "social": 57.4722272128524,
-    "generous": 14.564912570949902,
-    "cautious": 51.478542141100355,
-    "physical": 1.533094231241548,
-    "risky": 5.974719019806284,
-    "ruthless": 3.4052247151145605,
-    "carousing": 2.1092015324522198
+    "strategic": 61.65614815221101,
+    "cerebral": 41.05878254213233,
+    "social": 58.18486607678814,
+    "generous": 14.492088008095152,
+    "cautious": 51.22114943039485,
+    "physical": 1.5254287600853405,
+    "risky": 5.944845424707252,
+    "ruthless": 3.3881985915389876,
+    "carousing": 2.0986555247899585
   },
   "aptitudes": [
     "strategist",
@@ -3380,7 +3395,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 305,
+  "actionCount": 306,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3514,8 +3529,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13693&nologo=true",
-  "updatedAt": 1784180403664,
-  "rev": 417,
+  "updatedAt": 1784180636327,
+  "rev": 418,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4077,7 +4092,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 108
+    "valley": 109
   },
   "foreclosed": [
     "rootkin",

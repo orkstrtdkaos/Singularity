@@ -1,4 +1,18 @@
-# PIPELINE ALERT — Singularity## 🌱 SNG-101b — Native-grants-at-creation — SPEC + CONTENT AUTHORED (awaiting CCode ROUND 2)
+# PIPELINE ALERT — Singularity## ✅ CHARACTER CHRONICLE ARC + 3 BUGS — CLOSED GREEN (Aevi HEAD audit, v1.8.68→73)
+
+CCode shipped all six; **Aevi verified each at authenticated origin, not on report.** Two came in *cleaner than the specs named them* — noted as improvements.
+- **SNG-105** (recovery scales, v1.8.68): landed as `recoveryEnergy(kind,character,rules) = Math.max(base, round(frac×maxEnergy))` — scales with the pool, floors at the flat base **by construction** (never worse than today), `recoveryFractions` as a clean separate config key, and the GM RECOVERY GUIDE calls it so it shows the per-character number (SNG-103 principle). Cleaner than the inline-`fraction` sketch. **Closed.**
+- **SNG-111** (progressive naming, v1.8.69): `nameExtend` + contains-current-name heuristic ("Pell"→"Pell Marsh"), old name kept as alias. **Closed.**
+- **SNG-112** (quest gating, v1.8.70): offers gated on proximity/thread not bare region + parallel-arc suppression. **Engine-ready but `arcId` parallel-quest mechanism is INERT until Aevi authors arcIds on shared-arc quests — Aevi content, owed.** Gate itself closed.
+- **SNG-108** (relationship arcs, v1.8.71): `bondType`/`bondStage` + romantic growth path. **Minor-safety VERIFIED absolute** — `advanceBond` first check is `bondType==="romantic" && isMinorSubject(n)` → refuse+log+return before any change; stage logic score-floor-gated and cannot leap stages (`Math.min(wantIdx, curIdx+1)`). **Closed.**
+- **SNG-109** (Chronicle page, v1.8.72): split into `majorDeeds`/`majorStateHash`/`chronicleIsStale`/`buildChroniclePrompt` — cache invalidates on a major-state hash (cleaner than the vaguer spec). **One eyes-on owed:** full DOM click-through was blocked by the dev harness lacking an API key; CCode verified the engine chain via in-browser module import. Worth a play-with-key pass. Engine **closed**; UI click-through pending a keyed play session.
+- **SNG-110** (earned portrait, v1.8.73): provenance gear (`itemProvenancePhrase`), opt-in companion (`opts.withCompanion`), one-off override (`opts.appearanceOverride`), image delete. **Floors ordering VERIFIED** — L217 `assemble → sanitizeImagePrompt → URL`, "THE FLOORS run AFTER every addition"; player appearance/companion cannot smuggle past minor-protection or the rating ceiling. **Closed.**
+
+Writeup: `po/results/20260715_chronicle_arc_and_bugs.md`. **Aevi owes:** SNG-112 arcId authoring on shared-arc quests; SNG-109 keyed browser click-through next play.
+
+---
+
+## 🌱 SNG-101b — Native-grants-at-creation — SPEC + CONTENT AUTHORED (awaiting CCode ROUND 2)
 
 `po/SPEC_SNG-101b_native_grants_at_creation.md` + content `po/SNG-101b_native_grants.json`. **Completes SNG-101's deferred native-grant piece** — held until natives were tagged (done this session, 247/247), now unblocked. **LLW finding:** the reader functions CCode earlier reported "built" are ABSENT at HEAD (`nativeGrantsFor` not in progression.js) — origin wins; this spec builds them for real. **Data-driven grant model:** primary tradition's L1 anchors always + Tier-II basics matching build lean (mental/physical/practical/social, fallback mental), capped at grantCap=5 — the caster/martial/artificer split falls out of `ability.attribute` tags, no per-tradition hand-authoring. Content table authored for all 27 traditions. Wiring: `nativeGrantsFor`/`applyNativeGrants` (creation) + `retroNativeGrants` (one-time, versioned, modeled on `retroLevelGrants`, **Law-14-safe — only adds rank 1, never lowers earned ranks**). **Live proof of the gap: Silas** (L7 primary ashwarden, had 2 of 7 basics — hand-corrected this session, save commit ede3b056). Independent of SNG-098.
 

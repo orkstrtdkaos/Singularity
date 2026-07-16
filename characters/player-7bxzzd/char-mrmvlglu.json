@@ -27,7 +27,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.05,
+    "spectrumId": -0.0475,
     "body_mind": 0.03,
     "concrete_abstract": 0.025
   },
@@ -97,88 +97,93 @@
         "player": "Turn toward the wall of notation — the subject you still don't know. Ask the cross-legged Cogitant what it depicts, directly.",
         "summary": "Saehara learns the wall of notation is a twenty-two-day chalk model of the dying watershed, maintained without pause by a Cogitant named Araveth.",
         "narration": "You turn from the Cogitant's precise, dismantling gaze and let your eyes travel to the wall. Up close it is denser than it appeared from the arch — a surface covered edge to edge in chalk loops, branching tallies, and notated rows so fine they might be a scribe's work, if scribes worked at a pace just past what the hand should manage. The standing Cogitant's finger moves without pause, tracing a loop near the center as though redrawing something already drawn, already true.\n\nYou ask the cross-legged Cogitant what the wall depicts. Plainly. No preamble.\n\nA moment of that characteristic stillness — not pause, not hesitation, the interval of a thought already complete being handed forward into speech. \"That,\" the Cogitant says, \"is the watershed. Every tributary from the headwaters to the lower delta. Particulate concentrations mapped by day of observation — twenty-two days of data. Flow-rate adjustments. Sediment shift. What you see in chalk is a working model of a dying river system drawn at the only scale that allows accurate prediction.\" Its voice has the same ruled-line quality as before, thin and exact. \"Araveth has been maintaining it continuously for eleven days.\"\n\nThe standing Cogitant — Araveth, apparently — does not react to its own name. The finger continues its loop. Now that you know what you're looking at, the notation rearranges itself in your perception: this cluster a tributary, that column a date-row, those branching marks concentrations that thicken as the days advance. The river is getting worse. The chalk says so in seventeen places at once. Kon sits in the window-light behind you, still and dim, watching the wall the way it watches things that have not yet decided what they are."
+      },
+      {
+        "player": "\"Well now I've been introduced to Araveth, what is your name?\" I'll ask the seated Cogitant as I also study the wall of notation closer.",
+        "summary": "Saehara learns the seated Cogitant's name: Ossian. Examines the watershed wall up close — deterioration visible between days nine and fourteen.",
+        "narration": "You keep your eyes on the wall as you ask it — the question addressed over your shoulder to the cross-legged Cogitant, voice easy, as though you're simply filling in the last gap in an introduction already half-made. Araveth has a name. The standing figure has a name. It seems only reasonable the one who spoke first should have one too.\n\nThe pause is the same as all the others — not reluctance, but the interval of retrieval, a name being located among more important data. \"Ossian,\" it says. No elaboration. The word is offered the way one states a coordinate — accurate, sufficient, requiring no decoration.\n\nYou step closer to the wall. What seemed from a distance like dense notation reveals itself, up close, to be something far more considered: the Echo River rendered in chalk at full systemic scale, every tributary labeled, sediment columns notated in tight rows, concentrations marked with numerals so small your eyes have to work for them. Day one through day twenty-two, tallied in a margin column at the left edge. You can see where the numbers change — a subtle thickening of the particulate marks around day nine, then again around day fourteen. Getting worse. Araveth's finger traces one of these concentration markers now, redrawing a curve that was already there, as though the act of tracing keeps the river honest.\n\nKon has not moved from the shaft of window-light. Watching Ossian, or watching you — you can't tell which."
       }
     ],
     "lastTurn": {
-      "narration": "You turn from the Cogitant's precise, dismantling gaze and let your eyes travel to the wall. Up close it is denser than it appeared from the arch — a surface covered edge to edge in chalk loops, branching tallies, and notated rows so fine they might be a scribe's work, if scribes worked at a pace just past what the hand should manage. The standing Cogitant's finger moves without pause, tracing a loop near the center as though redrawing something already drawn, already true.\n\nYou ask the cross-legged Cogitant what the wall depicts. Plainly. No preamble.\n\nA moment of that characteristic stillness — not pause, not hesitation, the interval of a thought already complete being handed forward into speech. \"That,\" the Cogitant says, \"is the watershed. Every tributary from the headwaters to the lower delta. Particulate concentrations mapped by day of observation — twenty-two days of data. Flow-rate adjustments. Sediment shift. What you see in chalk is a working model of a dying river system drawn at the only scale that allows accurate prediction.\" Its voice has the same ruled-line quality as before, thin and exact. \"Araveth has been maintaining it continuously for eleven days.\"\n\nThe standing Cogitant — Araveth, apparently — does not react to its own name. The finger continues its loop. Now that you know what you're looking at, the notation rearranges itself in your perception: this cluster a tributary, that column a date-row, those branching marks concentrations that thicken as the days advance. The river is getting worse. The chalk says so in seventeen places at once. Kon sits in the window-light behind you, still and dim, watching the wall the way it watches things that have not yet decided what they are.",
-      "sceneSummary": "Saehara learns the wall of notation is a twenty-two-day chalk model of the dying watershed, maintained without pause by a Cogitant named Araveth.",
+      "narration": "You keep your eyes on the wall as you ask it — the question addressed over your shoulder to the cross-legged Cogitant, voice easy, as though you're simply filling in the last gap in an introduction already half-made. Araveth has a name. The standing figure has a name. It seems only reasonable the one who spoke first should have one too.\n\nThe pause is the same as all the others — not reluctance, but the interval of retrieval, a name being located among more important data. \"Ossian,\" it says. No elaboration. The word is offered the way one states a coordinate — accurate, sufficient, requiring no decoration.\n\nYou step closer to the wall. What seemed from a distance like dense notation reveals itself, up close, to be something far more considered: the Echo River rendered in chalk at full systemic scale, every tributary labeled, sediment columns notated in tight rows, concentrations marked with numerals so small your eyes have to work for them. Day one through day twenty-two, tallied in a margin column at the left edge. You can see where the numbers change — a subtle thickening of the particulate marks around day nine, then again around day fourteen. Getting worse. Araveth's finger traces one of these concentration markers now, redrawing a curve that was already there, as though the act of tracing keeps the river honest.\n\nKon has not moved from the shaft of window-light. Watching Ossian, or watching you — you can't tell which.",
+      "sceneSummary": "Saehara learns the seated Cogitant's name: Ossian. Examines the watershed wall up close — deterioration visible between days nine and fourteen.",
       "choices": [
         {
-          "label": "Ask the cross-legged Cogitant what, exactly, Araveth is calculating right now — what the model is still trying to solve",
+          "label": "Ask Ossian what Araveth is still calculating — the model is twenty-two days in; something on the wall must be changing.",
           "attribute": "mental",
           "subAttribute": "reason",
           "axes": {
-            "body_mind": 0.7,
             "concrete_abstract": 0.4
           },
           "difficulty": 0,
           "intentTags": [
             "study",
-            "probe"
+            "question"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Step closer to the wall and study the chalk model yourself — look for what the concentrations are doing day by day, and where they point",
+          "label": "Examine Araveth directly — eleven days at the wall without rest. Step close, look at their face, their hands, their physical state.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "body_mind": 0.6,
-            "concrete_abstract": 0.3
+            "body_mind": -0.3
           },
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
             "study",
-            "careful"
+            "observe"
           ],
-          "abilityId": "total_focus",
-          "energyCost": 4,
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
         },
         {
-          "label": "Address Araveth directly — speak to the standing Cogitant for the first time and ask what they see in it that others haven't",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "body_mind": 0.5
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "persuade",
-            "connect"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Ask the cross-legged Cogitant plainly: if someone were going to attempt the source anyway — against the odds — where would they begin, and what would they need to understand first?",
+          "label": "Ask Ossian why they called you 'the deviation' — the word had weight and they used it precisely; you want to know what it means.",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {
-            "body_mind": 0.4,
-            "concrete_abstract": 0.4
+            "concrete_abstract": 0.3
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "question",
+            "direct"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Tell Ossian plainly: you're still thinking about the four conditions. Ask which one they consider the hardest barrier — not all of them are equal.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "concrete_abstract": 0.5
           },
           "difficulty": 0,
           "intentTags": [
             "plan",
-            "probe"
+            "question",
+            "direct"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
       "scene": {
-        "setting": "Entrance hall of the Cogitarium — high pale stone, bluish window-light, chalk-dust and ozone. Morning. Mist still faintly visible through the outer arch. The wall of notation now known to be a twenty-two-day chalk model of the Echo River watershed.",
+        "setting": "Entrance hall of the Cogitarium — high pale stone, bluish window-light, chalk-dust and ozone. Morning. Mist still faintly visible through the outer arch. Saehara stands close to the notation wall.",
         "npcsPresent": [
           {
-            "name": "Cross-legged Cogitant",
-            "state": "Eyes on Saehara, having just named the wall's subject and Araveth — watching for next input"
+            "name": "Ossian (cross-legged Cogitant)",
+            "state": "Seated, eyes on Saehara — has just given his name, watching for next input"
           },
           {
             "name": "Araveth",
-            "state": "Standing at the wall, finger tracing chalk loops without pause or reaction to their own name being spoken"
+            "state": "Standing at the wall, finger tracing chalk loops without pause or acknowledgment"
           },
           {
             "name": "Drifting Cogitants (background)",
@@ -186,87 +191,72 @@
           }
         ],
         "objects": [
-          "Wall of dense chalk notation — now identified as a twenty-two-day watershed model: tributaries, particulate concentrations by day, flow-rate adjustments, sediment shifts. Concentrations thicken toward the present.",
-          "Shaft of window-light (Kon sitting in it, coat dimmed toward ash, very still — watching the wall)",
+          "Wall of dense chalk notation — twenty-two-day watershed model; concentration markers thickening around day nine and day fourteen",
+          "Shaft of window-light (Kon sitting in it, coat dimmed toward ash, watching Ossian or Saehara — very still)",
           "Outer arch behind you (mist faintly visible)",
           "Katana at waist (confirmed present)"
         ],
         "threads": [
-          "The wall is a working model of a dying river — concentrations are worsening; what Araveth is still calculating is unknown",
-          "Araveth has maintained the model for eleven days without apparent rest — their physical state is unexamined",
-          "The Cogitant's assessment of Saehara as 'the deviation' remains unexplained",
-          "Kon went cold and still during the Cogitant's recitation of the four conditions — what it sensed is unknown",
-          "The four conditions for source-remediation stand unmet; the Cogitant has not closed that door"
+          "Ossian named; his use of 'the deviation' still unexplained",
+          "Araveth's physical state unexamined — eleven days at the wall without apparent rest",
+          "The concentration markers on the wall are worsening — day nine and fourteen show clear deterioration",
+          "Kon went cold and still during the four conditions recitation — what it sensed is unknown",
+          "The four conditions for source-remediation stand unmet; Ossian has not closed that door"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "unknown-cogitant",
-          "name": "Unknown Cogitant",
-          "note": "Named the wall's subject — a twenty-two-day chalk watershed model — and identified the standing Cogitant as Araveth",
-          "learned": [
-            "The wall is a working model of the Echo River from headwaters to delta, tracking particulate concentrations over twenty-two days of observation",
-            "The standing Cogitant is named Araveth, and has maintained the model continuously for eleven days"
-          ],
-          "statusNote": "Seated in the entrance hall, watching Saehara after naming the wall and Araveth"
-        },
-        {
-          "op": "meet",
-          "npcId": "araveth",
-          "name": "Araveth",
-          "role": "Cogitant — keeper of the chalk watershed model",
-          "description": "Stands rigid before the notation wall, finger tracing chalk loops without pause — has not turned or reacted through any exchange, including the speaking of their own name. Eleven days at the wall.",
-          "note": "Named by the cross-legged Cogitant; has not yet acknowledged Saehara's presence",
-          "learned": [
-            "Has maintained the chalk watershed model continuously for eleven days",
-            "Has not reacted to their own name being spoken aloud"
-          ],
-          "statusNote": "Standing at the wall of notation in the entrance hall, finger moving without pause — has not acknowledged Saehara"
+          "npcId": "ossian",
+          "name": "Ossian",
+          "note": "Gave his name when asked — without hesitation or decoration. A coordinate, not an introduction.",
+          "revealName": "Ossian",
+          "statusNote": "Seated in the entrance hall, watching Saehara — named now, still watching for the next input.",
+          "relationshipDelta": 0
         }
       ],
       "codexUpdates": [
         {
-          "topic": "araveth",
-          "label": "Araveth",
+          "topic": "ossian",
+          "label": "Ossian",
           "kind": "person",
-          "entityId": "araveth",
-          "fact": "A Cogitant who has maintained a chalk model of the Echo River watershed for eleven days without apparent pause — has not reacted to speech, their own name, or Saehara's presence. The model tracks twenty-two days of particulate data across every tributary from headwaters to delta.",
+          "entityId": "ossian",
+          "fact": "Name of the cross-legged Cogitant who first received Saehara. Offered it plainly when asked — a coordinate, not an introduction.",
           "links": [
-            "echo-river-crisis",
             "cogitarium",
             "cogitants",
             "the-cogitariums-calculated-crisis"
           ]
         },
         {
-          "topic": "the-chalk-watershed-model",
-          "label": "The Chalk Watershed Model",
-          "kind": "event",
-          "fact": "A wall-covering chalk notation in the Cogitarium's entrance hall — a working model of the Echo River system at full scale: tributaries, daily particulate concentrations, flow rates, sediment shifts. Twenty-two days of data. Concentrations thicken toward the present. Maintained by Araveth for eleven days continuously.",
+          "topic": "the-cogitariums-calculated-crisis",
+          "label": "The Cogitarium's Calculated Crisis",
+          "kind": "mystery",
+          "entityId": "ossian",
+          "fact": "The chalk wall shows visible deterioration in particulate concentration around day nine and again around day fourteen — the watershed is getting worse, not stable.",
           "links": [
-            "araveth",
-            "echo-river-crisis",
             "cogitarium",
-            "the-cogitariums-calculated-crisis"
+            "cogitants",
+            "araveth",
+            "ossian"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange — a question asked, a name given, a wall identified"
+        "why": "A brief exchange — one question, one name given, a closer look at the wall."
       }
     },
     "sceneState": {
-      "setting": "Entrance hall of the Cogitarium — high pale stone, bluish window-light, chalk-dust and ozone. Morning. Mist still faintly visible through the outer arch. The wall of notation now known to be a twenty-two-day chalk model of the Echo River watershed.",
+      "setting": "Entrance hall of the Cogitarium — high pale stone, bluish window-light, chalk-dust and ozone. Morning. Mist still faintly visible through the outer arch. Saehara stands close to the notation wall.",
       "npcsPresent": [
         {
-          "name": "Cross-legged Cogitant",
-          "state": "Eyes on Saehara, having just named the wall's subject and Araveth — watching for next input"
+          "name": "Ossian (cross-legged Cogitant)",
+          "state": "Seated, eyes on Saehara — has just given his name, watching for next input"
         },
         {
           "name": "Araveth",
-          "state": "Standing at the wall, finger tracing chalk loops without pause or reaction to their own name being spoken"
+          "state": "Standing at the wall, finger tracing chalk loops without pause or acknowledgment"
         },
         {
           "name": "Drifting Cogitants (background)",
@@ -274,17 +264,17 @@
         }
       ],
       "objects": [
-        "Wall of dense chalk notation — now identified as a twenty-two-day watershed mode",
-        "Shaft of window-light (Kon sitting in it, coat dimmed toward ash, very still — w",
+        "Wall of dense chalk notation — twenty-two-day watershed model; concentration mar",
+        "Shaft of window-light (Kon sitting in it, coat dimmed toward ash, watching Ossia",
         "Outer arch behind you (mist faintly visible)",
         "Katana at waist (confirmed present)"
       ],
       "threads": [
-        "The wall is a working model of a dying river — concentrations are worsening; what Araveth is still calculating is unknown",
-        "Araveth has maintained the model for eleven days without apparent rest — their physical state is unexamined",
-        "The Cogitant's assessment of Saehara as 'the deviation' remains unexplained",
-        "Kon went cold and still during the Cogitant's recitation of the four conditions — what it sensed is unknown",
-        "The four conditions for source-remediation stand unmet; the Cogitant has not closed that door"
+        "Ossian named; his use of 'the deviation' still unexplained",
+        "Araveth's physical state unexamined — eleven days at the wall without apparent rest",
+        "The concentration markers on the wall are worsening — day nine and fourteen show clear deterioration",
+        "Kon went cold and still during the four conditions recitation — what it sensed is unknown",
+        "The four conditions for source-remediation stand unmet; Ossian has not closed that door"
       ]
     }
   },
@@ -490,21 +480,7 @@
         "label": "The Cogitarium's Calculated Crisis",
         "kind": "mystery",
         "facts": [
-          "[d1] A Cogitant had calculated a 94.7% probability that no one would come to aid them — implying they know of a crisis serious enough to need outside help, and had nearly given up on receiving it."
-        ],
-        "links": [
-          "cogitarium",
-          "cogitants"
-        ],
-        "aliases": [],
-        "createdDay": 1,
-        "updatedDay": 1
-      },
-      "echo-river-crisis": {
-        "id": "echo-river-crisis",
-        "label": "The Echo River Crisis",
-        "kind": "mystery",
-        "facts": [
+          "[d1] A Cogitant had calculated a 94.7% probability that no one would come to aid them — implying they know of a crisis serious enough to need outside help, and had nearly given up on receiving it.",
           "[d1] The Cogitarium calculated the source of the river's gray-green discoloration: a nanite reclamation site in the upper Disputed Zone, active and releasing particulate into the watershed. Their answer — "
         ],
         "links": [
@@ -512,7 +488,9 @@
           "cogitants",
           "the-cogitariums-calculated-crisis"
         ],
-        "aliases": [],
+        "aliases": [
+          "The Echo River Crisis"
+        ],
         "createdDay": 1,
         "updatedDay": 1
       },
@@ -521,14 +499,19 @@
         "label": "The Evacuation Calculation",
         "kind": "event",
         "facts": [
-          "[d1] Three settlement representatives were presented the Cogitarium's evacuation answer and none acted. The Cogitant described their reception as 'instructive' — which may mean they learned something about"
+          "[d1] Three settlement representatives were presented the Cogitarium's evacuation answer and none acted. The Cogitant described their reception as 'instructive' — which may mean they learned something about",
+          "[d1] A wall-covering chalk notation in the Cogitarium's entrance hall — a working model of the Echo River system at full scale: tributaries, daily particulate concentrations, flow rates, sediment shifts. T"
         ],
         "links": [
-          "echo-river-crisis",
+          "cogitarium-crisis",
           "cogitants",
-          "cogitarium"
+          "cogitarium",
+          "araveth",
+          "the-cogitariums-calculated-crisis"
         ],
-        "aliases": [],
+        "aliases": [
+          "The Chalk Watershed Model"
+        ],
         "createdDay": 1,
         "updatedDay": 1
       },
@@ -540,7 +523,7 @@
           "[d1] The Cogitarium calculated source-remediation requires: (1) direct interface with the site's instruction architecture; (2) pre-Transition override syntax; (3) sufficient nanite-dense substrate at the s"
         ],
         "links": [
-          "echo-river-crisis",
+          "cogitarium-crisis",
           "cogitarium",
           "cogitants",
           "the-cogitariums-calculated-crisis"
@@ -557,7 +540,7 @@
           "[d1] A Cogitant who has maintained a chalk model of the Echo River watershed for eleven days without apparent pause — has not reacted to speech, their own name, or Saehara's presence. The model tracks twen"
         ],
         "links": [
-          "echo-river-crisis",
+          "cogitarium-crisis",
           "cogitarium",
           "cogitants",
           "the-cogitariums-calculated-crisis"
@@ -567,32 +550,36 @@
         "entityId": "araveth",
         "updatedDay": 1
       },
-      "the-chalk-watershed-model": {
-        "id": "the-chalk-watershed-model",
-        "label": "The Chalk Watershed Model",
-        "kind": "event",
+      "ossian": {
+        "id": "ossian",
+        "label": "Ossian",
+        "kind": "person",
         "facts": [
-          "[d1] A wall-covering chalk notation in the Cogitarium's entrance hall — a working model of the Echo River system at full scale: tributaries, daily particulate concentrations, flow rates, sediment shifts. T"
+          "[d1] Name of the cross-legged Cogitant who first received Saehara. Offered it plainly when asked — a coordinate, not an introduction.",
+          "[d1] The chalk wall shows visible deterioration in particulate concentration around day nine and again around day fourteen — the watershed is getting worse, not stable."
         ],
         "links": [
-          "araveth",
-          "echo-river-crisis",
           "cogitarium",
-          "the-cogitariums-calculated-crisis"
+          "cogitants",
+          "the-cogitariums-calculated-crisis",
+          "araveth"
         ],
-        "aliases": [],
+        "aliases": [
+          "The Cogitarium's Calculated Crisis"
+        ],
         "createdDay": 1,
+        "entityId": "ossian",
         "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "strategic": 1.975149500625,
-    "social": 1.97014975,
-    "cerebral": 1.9900250000000002
+    "strategic": 1.965273753121875,
+    "social": 2.96029900125,
+    "cerebral": 1.9800748750000001
   },
   "aptitudes": [],
-  "actionCount": 5,
+  "actionCount": 6,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -605,8 +592,8 @@
       "at": "2026-07-16T02:18:04.820Z"
     }
   ],
-  "updatedAt": 1784170528150,
-  "rev": 25,
+  "updatedAt": 1784170966940,
+  "rev": 28,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -614,7 +601,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "somatic_reaches": 6
+    "somatic_reaches": 7
   },
   "opLossPending": false,
   "establishedFacts": [],

@@ -1,0 +1,25 @@
+# Results — Narrative travel + reply salvage (SNG-122 · 123)
+
+Date: 2026-07-16 · HEAD `d11100b` · **v1.8.83** · `npm test` green · browser-runtime verified. Status: **both shipped, complete_pending_review.**
+
+The workaround-forcing bug Erik hit ("in-game travel was just not getting there — I used map travel"): a travel beat where the GM narrated the journey but emitted no `moveTo`, so `currentLocationId` never changed. This is the pure-narration-exit boundary SNG-117 deferred, now promoted.
+
+## ROUND-2 answers
+- **Q1 (reliable travel-intent signal?)** — none existed at HEAD; the 34-tag vocabulary had no move verb. Built one: a `travel` intent tag added to *both* the free-text parser (`parseIntent`) and the GM choice vocab, plus a `travelTo` destination field on the parser, plus a phrase-regex fallback. `travel` is **hoisted past the 6-tag cap** alongside romantic/flirt — it gates the directive + arrival, exactly the SNG-100 lesson (a gating tag emitted last was being silently sliced).
+- **Q2 (enumerate known adjacent places for the GM?)** — yes: `here.connections` gives adjacent ids; the directive lists the ones that pass `isPlaceKnown`, with names + ids, so the GM's `moveTo` target resolves to a real place.
+
+## SNG-122 — fix the cause, then never strand
+1. **The cause — force `moveTo` on travel intent.** In `runGM`, `travelIntentOf(resolution.action)` detects a travel turn and `buildTravelDirective` pushes a forceful block into the **uncached player tier**: *"The player is TRAVELING to {dest}. You MUST emit moveTo this turn … Places reachable from here: …".* The GM contract's `moveTo` guidance is also strengthened ("narrating the journey without moveTo strands the player") and now states the engine mints any named place, so the GM never withholds `moveTo` for fear a place "doesn't exist." This is the cheapest, highest-leverage half — most travel turns now move correctly through the GM's own `moveTo` (the existing app.js L2691 apply resolves-or-mints it).
+2. **The safety net — one-tap arrive.** If a travel beat still produced no arrival, `applyTurn` stashes `character._pendingArrival` and `renderPlay` shows a prominent **"→ Arrive at {place}"** button that runs the map's own `travelTo` (resolve-or-mint). Narrative and map travel converge on one arrival path; the player is never stranded. The affordance is tied to the travel beat — any non-travel turn clears it, an arrival clears it.
+3. **Trust discipline (the guard against over-moving).** `travelIntentOf` trusts the parser's *explicit* `travelTo` (an LLM-classified GO/HEAD intent) enough to mint an unmapped destination, but a **guessed** signal (the phrase-regex or a bare `travel` tag) must resolve to a **real/known place** to count. So `"I go for his throat"` (an attack that pattern-matches "go for …") never becomes a phantom trip — verified.
+
+## SNG-123 — fold-in (complements 122)
+`salvageOps` gets a targeted regex recovery for the two ops that hurt most to lose from a **truncated** reply — `moveTo` (a location) and `characterDeltas` (HP/energy) — even when the surrounding JSON's brackets are unbalanced so the balanced-bracket scan gave up. A cut-off travel beat no longer loses the move; a cut-off combat beat no longer loses the vitals. Only fills gaps the scan missed; well-formed replies are untouched. (The other SNG-123 asks — leaner retry, rate instrumentation — are LOW/"instrument first, decide after" and left for a later pass; the recovery path was already graceful, this only reduces what's lost.)
+
+## Verification
+- **9 new smoke tests:** `travel` survives the 6-tag cap; `travelTo` carried through (and null/none/empty → null); the directive lands in the *uncached* player tier (fires this turn, not stale) and a normal beat has no travel block; `salvageOps` recovers a truncated `moveTo.location` (+ its `why`) and truncated `characterDeltas` health/energy; a well-formed reply still parses (no regression). `npm test` fully green.
+- **Browser-runtime, served modules + reproduced glue:** served `gm.js` `sanitizeIntent`/`salvageOps` behave as tested; `travelIntentOf`'s exact logic (against a stub world) resolves trusted + guessed destinations, honors an unmapped trusted place (mint on arrival), and **rejects the false positive** (`"go for his throat"` → not travel) plus `"look around"`, an unresolvable guessed phrase, etc. — 7/7.
+- Fresh port 8203 boot-clean, `?v=1.8.83` on both css/js, no console errors. The in-play *feel* (typing "head to the edge district" and actually arriving, the arrive button on a stubborn beat) is the part to eyeball in a keyed play session.
+
+## Files
+`engine/gm.js` (moveTo guidance + travel choice vocab; parseIntent travel tag + travelTo; sanitizeIntent hoist + passthrough; tierParts travelDirective in the player tier; salvageOps targeted moveTo/characterDeltas recovery) · `app.js` (travelIntentOf / buildTravelDirective / arriveAtPending; runGM directive; applyTurn pending-arrival stash; renderPlay arrive banner + handler; freeform/choice carry travelTo+exactWords) · `style.css` (.arrive-banner / .arrive-btn) · `tests/smoke.mjs` · `index.html`.

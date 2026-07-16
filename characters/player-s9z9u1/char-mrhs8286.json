@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 7,
-  "xp": 681,
+  "xp": 686,
   "attributes": {
     "physical": 3,
     "mental": 4,
@@ -54,7 +54,7 @@
   "maxHealth": 60,
   "health": 60,
   "maxEnergy": 130,
-  "energy": 54,
+  "energy": 49,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1693,71 +1693,80 @@
         "player": "Let Pell take the next question — she knows what she needs in a collaborator better than anyone in this room.",
         "summary": "Pell takes the next question; Sorel confirms the unnamed engineer improvises but doesn't leave the Edge District easily.",
         "narration": "The room shifts when you step back from it — a small, deliberate thing, and Sorel reads it immediately.\n\nPell moves a half-step forward. She doesn't look at you to check whether this is right; she already knows it is. When she speaks, her voice carries the same register she uses in the forge when she's explaining a problem to someone who might actually understand it: direct, without condescension, interested in the answer.\n\n\"The man you're describing — the one through Leth,\" she says. \"Does he work with what's there, or does he need to bring his own kit?\" She lets that breathe for a beat. \"I need to know whether we're carrying tools in or finding them on-site. The cradle-recess was built to house something specific. If that instrument is gone, we may be working around its absence rather than replacing it — and that's a different kind of problem.\"\n\nSorel straightens a little. It's the question of someone who has actually looked at the site, not hypothesized about it, and they recognize the difference. \"He improvises,\" Sorel says, carefully. \"He's run pressurized systems with three components missing and field-cobbled the fourth. He won't need the original piece. He'll need to understand why it was there.\" A pause. \"That's not the hard part with him. The hard part is that he doesn't leave the Edge District easily.\"\n\nAldric sets the fillet knife down, flat on the block. He's been quiet long enough that the sound carries weight.\n\n\"Then someone has to give him a reason that's bigger than his comfortable arrangements,\" Aldric says, not unkindly — a man summarizing an account. \"Which is what you two are for.\""
+      },
+      {
+        "player": "Ask what Sorel's own stake is in this — they came back to Millbrook for a reason, and it may intersect with yours.",
+        "summary": "Sorel names their real reason for returning — Leth wrote about a targeted archive breach, and someone appears to be working through old infrastructure with a list.",
+        "narration": "The question lands quietly, the way the right question always does — not as a demand, but as an opening.\n\nSorel's eyes move once to Aldric, then back. A small tell. Aldric sets his knife down flat again, which means he already knows what's coming and has been waiting to see if it would be named.\n\n\"I came back because Leth wrote to me,\" Sorel says. Not reluctant — just measured, the way a person speaks when they've been deciding for weeks how much to say and have finally decided to say it. \"She's been keeping records at the Edge District for three years. Careful ones. And last month she wrote that someone had been through the archive room — not to study. To remove.\" A pause. \"She didn't know what was taken. But she knew the shape of the absence. It was specific. Targeted.\" Sorel's hands settle on the pack-strap. \"Whoever it was knew what they were looking for, the same way whoever pulled your instrument knew what they were taking. That's not coincidence. That's a person with a list.\"\n\nThe room is very still. Aldric hasn't moved. Pell's attention has narrowed — you can see her running the geometry without being asked to.\n\n\"I came home because I didn't want to be the only one holding that,\" Sorel finishes. \"And because if someone is moving through the old infrastructure deliberately — and it sounds like they are — then Millbrook needs to know before it needs to know.\""
       }
     ],
     "lastTurn": {
-      "narration": "The room shifts when you step back from it — a small, deliberate thing, and Sorel reads it immediately.\n\nPell moves a half-step forward. She doesn't look at you to check whether this is right; she already knows it is. When she speaks, her voice carries the same register she uses in the forge when she's explaining a problem to someone who might actually understand it: direct, without condescension, interested in the answer.\n\n\"The man you're describing — the one through Leth,\" she says. \"Does he work with what's there, or does he need to bring his own kit?\" She lets that breathe for a beat. \"I need to know whether we're carrying tools in or finding them on-site. The cradle-recess was built to house something specific. If that instrument is gone, we may be working around its absence rather than replacing it — and that's a different kind of problem.\"\n\nSorel straightens a little. It's the question of someone who has actually looked at the site, not hypothesized about it, and they recognize the difference. \"He improvises,\" Sorel says, carefully. \"He's run pressurized systems with three components missing and field-cobbled the fourth. He won't need the original piece. He'll need to understand why it was there.\" A pause. \"That's not the hard part with him. The hard part is that he doesn't leave the Edge District easily.\"\n\nAldric sets the fillet knife down, flat on the block. He's been quiet long enough that the sound carries weight.\n\n\"Then someone has to give him a reason that's bigger than his comfortable arrangements,\" Aldric says, not unkindly — a man summarizing an account. \"Which is what you two are for.\"",
-      "sceneSummary": "Pell takes the next question; Sorel confirms the unnamed engineer improvises but doesn't leave the Edge District easily.",
+      "narration": "The question lands quietly, the way the right question always does — not as a demand, but as an opening.\n\nSorel's eyes move once to Aldric, then back. A small tell. Aldric sets his knife down flat again, which means he already knows what's coming and has been waiting to see if it would be named.\n\n\"I came back because Leth wrote to me,\" Sorel says. Not reluctant — just measured, the way a person speaks when they've been deciding for weeks how much to say and have finally decided to say it. \"She's been keeping records at the Edge District for three years. Careful ones. And last month she wrote that someone had been through the archive room — not to study. To remove.\" A pause. \"She didn't know what was taken. But she knew the shape of the absence. It was specific. Targeted.\" Sorel's hands settle on the pack-strap. \"Whoever it was knew what they were looking for, the same way whoever pulled your instrument knew what they were taking. That's not coincidence. That's a person with a list.\"\n\nThe room is very still. Aldric hasn't moved. Pell's attention has narrowed — you can see her running the geometry without being asked to.\n\n\"I came home because I didn't want to be the only one holding that,\" Sorel finishes. \"And because if someone is moving through the old infrastructure deliberately — and it sounds like they are — then Millbrook needs to know before it needs to know.\"",
+      "sceneSummary": "Sorel names their real reason for returning — Leth wrote about a targeted archive breach, and someone appears to be working through old infrastructure with a list.",
       "choices": [
         {
-          "label": "Ask Sorel directly: what would move this man — what does he want badly enough to leave for?",
+          "label": "Press on the archive breach — ask what Leth thinks was taken, or what the shape of that absence looked like.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Name the pattern plainly — the pass-opening, the removed instrument, the archive breach. Say it aloud: someone is working through these sites in sequence, and you need to know who before you leave the valley.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 15,
+          "intentTags": [
+            "plan",
+            "truth-telling"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Ask Sorel to come with you — not just give contacts, but travel to the Edge District alongside you. They know Leth, they know the road, and they clearly don't want to be alone with this.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 15,
+          "intentTags": [
+            "persuade",
+            "help"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Let Aldric speak — he and Sorel were mid-conversation when you arrived, and he's been holding something back since. Put the question to him.",
           "attribute": "social",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
             "study",
-            "probe"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask Sorel to name him — you need the man's name before you can plan anything around him.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "ask",
-            "direct"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask what Sorel's own stake is in this — they came back to Millbrook for a reason, and it may intersect with yours.",
-          "attribute": "social",
-          "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "probe",
             "careful"
           ],
-          "trivial": false
-        },
-        {
-          "label": "Ask Aldric what he was holding back before you walked in — the withheld piece of his conversation with Sorel is still in the room.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 15,
-          "intentTags": [
-            "probe",
-            "direct"
-          ],
-          "trivial": false
+          "trivial": true
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
       "scene": {
         "setting": "Interior of Aldric's smokehouse, Millbrook — low warmth of the curing fire, perch rows above the block, salt and old smoke. Morning light thin at the front shutters. Back door open behind Silas and Pell.",
         "npcsPresent": [
           {
             "name": "Aldric",
-            "state": "Knife flat on the block — has spoken his piece, watching the room settle."
+            "state": "Knife flat on the block — knew what was coming, waiting to see if it would be named."
           },
           {
             "name": "Pell",
-            "state": "Half-step forward, eyes on Sorel — waiting for the answer to land."
+            "state": "Attention narrowed — running the geometry of Sorel's revelation without being asked."
           },
           {
             "name": "Sorel",
-            "state": "Steadied by Pell's question — has named the key obstacle: the man doesn't leave easily."
+            "state": "Hands on pack-strap — has named the thing they came home to say, watching the room receive it."
           },
           {
             "name": "Huginn",
@@ -1773,10 +1782,10 @@
           "Fillet knife (flat on the block — set down)"
         ],
         "threads": [
-          "The unnamed engineer doesn't leave the Edge District easily — what would move him is unasked",
-          "The engineer's name has not been given yet",
-          "Sorel's own reason for returning to Millbrook still unspoken",
-          "Aldric's withheld piece from his conversation with Sorel before Silas arrived — still unresolved"
+          "Someone with a list is moving through old infrastructure deliberately — the engineer, the archive breach, and the removed instrument are connected",
+          "Leth witnessed a targeted archive breach — shape and contents of the absence unknown",
+          "The unnamed engineer still hasn't been named — and still doesn't leave the Edge District easily",
+          "Aldric held something back from his conversation with Sorel before Silas arrived — still unresolved"
         ]
       },
       "npcUpdates": [
@@ -1784,65 +1793,82 @@
           "op": "update",
           "npcId": "sorel",
           "name": "Sorel",
-          "note": "Confirmed the unnamed engineer improvises and can work without the original instrument — but does not leave the Edge District easily. Named this as the primary obstacle.",
+          "note": "Named their real reason for returning — Leth wrote about a targeted archive breach, someone knew the shape of what to take. Named the shared pattern: a person with a list.",
           "learned": [
-            "The unnamed engineer has run pressurized systems with missing components and field-cobbled solutions — he improvises at a high level",
-            "The hard part is not his competence but his reluctance to leave the Edge District"
+            "Leth wrote to Sorel last month about someone removing — not studying — from the Edge District archive room",
+            "The absence in the archive was specific and targeted — whoever it was knew what they were looking for",
+            "Sorel came home because they didn't want to hold this alone, and because Millbrook needed to know"
           ],
-          "skillsObserved": [
-            "precise qualification of a contact's strengths and limits under direct questioning"
-          ],
-          "relationshipDelta": 0,
+          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "Inside the smokehouse, pack down — has named the engineer's key obstacle, waiting to see what Silas does with it."
-        },
-        {
-          "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "note": "Took the question without prompting — asked Sorel whether the engineer works with what's there or needs his own kit. The right question, from someone who has actually seen the site.",
-          "learned": [
-            "Pell's priority: knowing whether they carry tools in or find them on-site — she's already thinking about the cradle-recess absence as a working constraint"
-          ],
-          "skillsObserved": [
-            "framing a precise diagnostic question under field conditions",
-            "reading what a collaborator needs to know without being told"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Inside the smokehouse, half-step forward — waiting on Sorel's answer, settled and ready."
+          "statusNote": "Inside the smokehouse, pack settled — has spoken their real reason for returning, waiting on the room's response."
         },
         {
           "op": "update",
           "npcId": "aldric",
           "name": "Aldric",
-          "note": "Set the knife down flat and named the core problem plainly: someone has to give the engineer a reason bigger than his comfortable arrangements. Summarizing, not inserting.",
-          "learned": [],
-          "skillsObserved": [
-            "reading the room and naming the load-bearing thing at the right moment"
-          ],
-          "relationshipDelta": 0,
+          "note": "His tell confirmed — he already knew what Sorel was about to say. Has been holding this piece since before Silas arrived.",
           "status": "active",
-          "statusNote": "Knife flat on the block — has spoken his piece, watching."
+          "statusNote": "At the smokehouse block, knife flat — knew Sorel's news and has been waiting for it to surface."
+        },
+        {
+          "op": "update",
+          "npcId": "pell",
+          "name": "Pell",
+          "note": "Running the geometry of the archive breach against the structural evidence without being prompted — the pattern is landing.",
+          "status": "active",
+          "statusNote": "Inside the smokehouse, attention narrowed — absorbing the archive breach in relation to the vault structure."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "the-unnamed-engineer",
-          "label": "The Unnamed Engineer",
-          "kind": "person",
-          "fact": "Improvises under field conditions — has run pressurized pre-Transition systems with components missing and cobbled the rest. Does not need the original instrument; needs to understand why it was there. Primary obstacle: he does not leave the Edge District easily.",
+          "topic": "the-person-with-a-list",
+          "label": "The Person With a List",
+          "kind": "mystery",
+          "fact": "Someone has been moving deliberately through old pre-Transition infrastructure — removing the operator's instrument from the wash-room cradle-recess and, separately, removing targeted material from the Edge District archive. The pattern suggests a single actor with prior knowledge of multiple sites.",
           "links": [
-            "sorel",
             "the-water-crisis",
             "precursor-signs-in-the-valley",
-            "dara-holt"
+            "millbrook",
+            "sorel",
+            "the-unnamed-engineer"
           ]
+        },
+        {
+          "topic": "leth",
+          "label": "Leth (Edge District Archivist)",
+          "kind": "person",
+          "fact": "Leth wrote to Sorel last month reporting that someone had been through the Edge District archive room — not to study but to remove. The absence was specific and targeted. Leth knew the shape of what was gone but not what it was.",
+          "links": [
+            "the-person-with-a-list",
+            "sorel",
+            "the-unnamed-engineer",
+            "the-water-crisis"
+          ]
+        },
+        {
+          "topic": "the-unnamed-engineer",
+          "label": "The Unnamed Engineer (Edge District)",
+          "kind": "person",
+          "fact": "A man known to Leth, based in the Edge District — has run pressurized pre-Transition systems and improvises at a high level. Does not leave the Edge District easily. Moving him is the primary obstacle to bringing him to Millbrook.",
+          "links": [
+            "sorel",
+            "leth",
+            "the-water-crisis",
+            "precursor-signs-in-the-valley"
+          ]
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Sorel returned to Millbrook because Leth wrote about a targeted archive breach at the Edge District — someone removed specific material, knew exactly what they were looking for. Sorel named the shared pattern: a person moving through old infrastructure with a list.",
+          "subjectId": "sorel"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief exchange in the smokehouse — Pell's question and Sorel's answer"
+        "why": "A short exchange in the smokehouse — the question asked and answered."
       }
     },
     "sceneState": {
@@ -1850,15 +1876,15 @@
       "npcsPresent": [
         {
           "name": "Aldric",
-          "state": "Knife flat on the block — has spoken his piece, watching the room settle."
+          "state": "Knife flat on the block — knew what was coming, waiting to see if it would be named."
         },
         {
           "name": "Pell",
-          "state": "Half-step forward, eyes on Sorel — waiting for the answer to land."
+          "state": "Attention narrowed — running the geometry of Sorel's revelation without being asked."
         },
         {
           "name": "Sorel",
-          "state": "Steadied by Pell's question — has named the key obstacle: the man doesn't leave easily."
+          "state": "Hands on pack-strap — has named the thing they came home to say, watching the room receive it."
         },
         {
           "name": "Huginn",
@@ -1874,10 +1900,10 @@
         "Fillet knife (flat on the block — set down)"
       ],
       "threads": [
-        "The unnamed engineer doesn't leave the Edge District easily — what would move him is unasked",
-        "The engineer's name has not been given yet",
-        "Sorel's own reason for returning to Millbrook still unspoken",
-        "Aldric's withheld piece from his conversation with Sorel before Silas arrived — still unresolved"
+        "Someone with a list is moving through old infrastructure deliberately — the engineer, the archive breach, and the removed instrument are connected",
+        "Leth witnessed a targeted archive breach — shape and contents of the absence unknown",
+        "The unnamed engineer still hasn't been named — and still doesn't leave the Edge District easily",
+        "Aldric held something back from his conversation with Sorel before Silas arrived — still unresolved"
       ]
     }
   },
@@ -1979,7 +2005,6 @@
       },
       "relationship": 5,
       "history": [
-        "[d1] Received both animals without ceremony — named the boar's upstream shift as a three-week observation. Account squared; second trail parcel added.",
         "[d2] Squared the full account without argument — named the cord-weights cleanly, accepted the Mara offset without pushback. Ledger closed and initialed.",
         "[d2] Accepted the thirty-credit arrangement and paid out sixty — ledger closed and initialed. Back to work.",
         "[d2] Received Mara's offset note and initialed his counterpart ledger entry. Briefed on the vault-failure timeline and east-channel surge scope — connected the fish-count decline to the",
@@ -1988,7 +2013,8 @@
         "[d2] Inside at the morning perch row, in a circling conversation with Sorel — neither saying the load-bearing thing yet.",
         "[d2] Set the knife down when Silas named Mara — done circling, watching the two threads converge.",
         "[d2] Knife back in hand at the perch row — reading the room without inserting himself, giving the conversation to its rightful owners.",
-        "[d2] Set the knife down flat and named the core problem plainly: someone has to give the engineer a reason bigger than his comfortable arrangements. Summarizing, not inserting."
+        "[d2] Set the knife down flat and named the core problem plainly: someone has to give the engineer a reason bigger than his comfortable arrangements. Summarizing, not inserting.",
+        "[d2] His tell confirmed — he already knew what Sorel was about to say. Has been holding this piece since before Silas arrived."
       ],
       "knownFacts": [
         "Pell is the village blacksmith, works the forge on the south lane past the elder's post — does edge work, hardware, repairs, heavier iron hunting kit",
@@ -2009,7 +2035,7 @@
         "reading the room and naming the load-bearing thing at the ri"
       ],
       "status": "active",
-      "statusNote": "Knife flat on the block — has spoken his piece, watching.",
+      "statusNote": "At the smokehouse block, knife flat — knew Sorel's news and has been waiting for it to surface.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2026,7 +2052,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] Held Memory with Silas — felt the collar at range, admitted it unprompted. Received the 'managing it badly' observation without deflecting. The tinker/farmhand question is landing.",
         "[d2] Named no prior claims plainly — one man, two winters back, sonic work from the Heights; it ran longer than it should, he stopped coming, she didn't go looking. Set the whetstone ba",
         "[d2] Received the cheek kiss without deflecting — went still, breathed out, came back softer. Named the habit plainly: she hasn't asked for any of it; that's the habit. Pack shouldered.",
         "[d2] Received the whetstone and the lesson without deflecting — tucked the stone into her coat pocket and left it there. Stepped through the door first. The road is what she knows how t",
@@ -2035,7 +2060,8 @@
         "[d2] Read Mara's note, filed 'Sorel' without ceremony, watching Silas decide.",
         "[d2] Received the plan without question — checked Memory's lash and sent Silas ahead. Walking the lane now.",
         "[d2] Arrived through the back door two minutes after Silas — took the room in one glance, received the introduction without performance, settled into ready stillness. Sorel recognized h",
-        "[d2] Took the question without prompting — asked Sorel whether the engineer works with what's there or needs his own kit. The right question, from someone who has actually seen the site"
+        "[d2] Took the question without prompting — asked Sorel whether the engineer works with what's there or needs his own kit. The right question, from someone who has actually seen the site",
+        "[d2] Running the geometry of the archive breach against the structural evidence without being prompted — the pattern is landing."
       ],
       "knownFacts": [
         "Memory's collar rune is present to her even when she's not looking at it — she felt it through her thread",
@@ -2056,7 +2082,7 @@
         "reading what a collaborator needs to know without being told"
       ],
       "status": "active",
-      "statusNote": "Inside the smokehouse, half-step forward — waiting on Sorel's answer, settled and ready.",
+      "statusNote": "Inside the smokehouse, attention narrowed — absorbing the archive breach in relation to the vault structure.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2212,24 +2238,25 @@
         "locationId": "millbrook",
         "day": 2
       },
-      "relationship": 3,
+      "relationship": 4,
       "history": [
         "[d2] Read through the wall via The Attended End — partial only. A season closing, travel finishing, something compressed and withheld. Cause and whether it is chosen remain unknown.",
         "[d2] First face-to-face: Silas entered without announcement; Sorel's first words revealed prior expectation of him — source unknown.",
         "[d2] Recognized Mara's referral as a credential — named Silas as 'the Ashwarden's man' and opened the conversation about the Edge District road.",
         "[d2] Pack fully set down after taking in Pell — calculation complete. Asked both Silas and Pell to name the kind of person they're looking for and how long they have.",
         "[d2] Received the full structural account without interruption — stilled completely at 'counterclockwise torque'. Named Leth as a records-keeper and confirmed a second contact: an unnam",
-        "[d2] Confirmed the unnamed engineer improvises and can work without the original instrument — but does not leave the Edge District easily. Named this as the primary obstacle."
+        "[d2] Confirmed the unnamed engineer improvises and can work without the original instrument — but does not leave the Edge District easily. Named this as the primary obstacle.",
+        "[d2] Named their real reason for returning — Leth wrote about a targeted archive breach, someone knew the shape of what to take. Named the shared pattern: a person with a list."
       ],
       "knownFacts": [
-        "Mara passes names carefully — Silas being sent means he's past her first cut",
-        "Sorel expected Silas but not this soon — 'earlier than I thought' still unexplained",
-        "Pell Marsh is traveling with Silas — the smith and the Ashwarden together clarified the shape of the ask for Sorel",
         "The vault section failure involves counterclockwise torque at both sleeve sites — same mechanism operating in sequence",
         "The cradle-recess instrument was removed cleanly and deliberately — no drag-scarring",
         "Six-week failure window before surge into the east-channel main feeder",
         "The unnamed engineer has run pressurized systems with missing components and field-cobbled solutions — he improvises at a high level",
-        "The hard part is not his competence but his reluctance to leave the Edge District"
+        "The hard part is not his competence but his reluctance to leave the Edge District",
+        "Leth wrote to Sorel last month about someone removing — not studying — from the Edge District archive room",
+        "The absence in the archive was specific and targeted — whoever it was knew what they were looking for",
+        "Sorel came home because they didn't want to hold this alone, and because Millbrook needed to know"
       ],
       "skillsObserved": [
         "absorbing technical detail without interruption",
@@ -2237,7 +2264,7 @@
         "precise qualification of a contact's strengths and limits un"
       ],
       "status": "active",
-      "statusNote": "Inside the smokehouse, pack down — has named the engineer's key obstacle, waiting to see what Silas does with it.",
+      "statusNote": "Inside the smokehouse, pack settled — has spoken their real reason for returning, waiting on the room's response.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -2997,13 +3024,16 @@
         "label": "Leth — Edge District Archivist",
         "kind": "person",
         "facts": [
-          "[d2] Leth is a records-keeper in the Edge District — cross-referenced, annotated, nothing lost. She is not the engineer Silas needs, but she knows one: a difficult man who ran pressurized pre-Transition sy"
+          "[d2] Leth is a records-keeper in the Edge District — cross-referenced, annotated, nothing lost. She is not the engineer Silas needs, but she knows one: a difficult man who ran pressurized pre-Transition sy",
+          "[d2] Leth wrote to Sorel last month reporting that someone had been through the Edge District archive room — not to study but to remove. The absence was specific and targeted. Leth knew the shape of what w"
         ],
         "links": [
           "the-water-crisis",
           "precursor-signs-in-the-valley",
           "sorel",
-          "millbrook"
+          "millbrook",
+          "the-person-with-a-list",
+          "the-unnamed-engineer"
         ],
         "aliases": [],
         "createdDay": 2,
@@ -3031,13 +3061,34 @@
         "label": "The Unnamed Engineer",
         "kind": "person",
         "facts": [
-          "[d2] Improvises under field conditions — has run pressurized pre-Transition systems with components missing and cobbled the rest. Does not need the original instrument; needs to understand why it was there"
+          "[d2] Improvises under field conditions — has run pressurized pre-Transition systems with components missing and cobbled the rest. Does not need the original instrument; needs to understand why it was there",
+          "[d2] A man known to Leth, based in the Edge District — has run pressurized pre-Transition systems and improvises at a high level. Does not leave the Edge District easily. Moving him is the primary obstacle"
         ],
         "links": [
           "sorel",
           "the-water-crisis",
           "precursor-signs-in-the-valley",
-          "dara-holt"
+          "dara-holt",
+          "leth"
+        ],
+        "aliases": [
+          "The Unnamed Engineer (Edge District)"
+        ],
+        "createdDay": 2,
+        "updatedDay": 2
+      },
+      "the-person-with-a-list": {
+        "id": "the-person-with-a-list",
+        "label": "The Person With a List",
+        "kind": "mystery",
+        "facts": [
+          "[d2] Someone has been moving deliberately through old pre-Transition infrastructure — removing the operator's instrument from the wash-room cradle-recess and, separately, removing targeted material from th"
+        ],
+        "links": [
+          "the-water-crisis",
+          "precursor-signs-in-the-valley",
+          "millbrook",
+          "sorel"
         ],
         "aliases": [],
         "createdDay": 2,
@@ -3046,15 +3097,15 @@
     }
   },
   "tendencies": {
-    "strategic": 60.00863162924462,
-    "cerebral": 40.26829644935942,
-    "social": 60.06531384482748,
-    "generous": 17.709558442708268,
-    "cautious": 48.13300340714886,
-    "physical": 0.8074114427152148,
-    "risky": 2.6851805260534127,
-    "ruthless": 2.0110488266874693,
-    "carousing": 1.3906079686668122
+    "strategic": 59.708588471098395,
+    "cerebral": 40.06695496711262,
+    "social": 59.76498727560334,
+    "generous": 17.621010650494725,
+    "cautious": 48.89233839011312,
+    "physical": 0.8033743855016388,
+    "risky": 2.6717546234231455,
+    "ruthless": 2.000993582554032,
+    "carousing": 1.383654928823478
   },
   "aptitudes": [
     "strategist",
@@ -3062,7 +3113,7 @@
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 266,
+  "actionCount": 267,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3188,8 +3239,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13693&nologo=true",
-  "updatedAt": 1784163751356,
-  "rev": 366,
+  "updatedAt": 1784163935355,
+  "rev": 367,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3400,12 +3451,6 @@
   },
   "opLossPending": false,
   "establishedFacts": [
-    {
-      "id": "pell",
-      "text": "Pell agreed to meet Silas at the forge after the hunt — the date is now a confirmed arrangement between them, named plainly on the field path on World-day 13.",
-      "day": 1,
-      "subjectId": "pell"
-    },
     {
       "id": "f11",
       "text": "The assembled mid-weight spear now carries a rough death-binding — runes load-bearing in shaft and blade, Pell Marsh's maker's mark seated in the iron, a nascent thread to Huginn. The death-register i",
@@ -3639,6 +3684,12 @@
       "text": "Pell named her habit plainly at the forge door on World-day 15: she hasn't asked for any of it — that's the habit. The want is present and managed without requests.",
       "day": 2,
       "subjectId": "pell"
+    },
+    {
+      "id": "sorel",
+      "text": "Sorel returned to Millbrook because Leth wrote about a targeted archive breach at the Edge District — someone removed specific material, knew exactly what they were looking for. Sorel named the shared",
+      "day": 2,
+      "subjectId": "sorel"
     }
   ],
   "practice": {
@@ -3751,7 +3802,7 @@
   "syncedAt": 1784105484498,
   "teachers": {},
   "regionsKnown": {
-    "valley": 67
+    "valley": 68
   },
   "foreclosed": [
     "rootkin",

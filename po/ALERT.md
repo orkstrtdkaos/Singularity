@@ -1,4 +1,20 @@
-# PIPELINE ALERT — Singularity## 🗺️ LOCATION + UI BATCH — specced (Erik play session 2026-07-16, awaiting CCode)
+# PIPELINE ALERT — Singularity## ✅ THE FULL RUN — CLOSED GREEN (Aevi HEAD audit, v1.8.74→80)
+
+CCode shipped the whole queue; **Aevi verified every load-bearing invariant at authenticated origin, not on report.** All four touched engine files syntax-clean.
+
+- **SNG-098 — Skill Battles (A+B+C), v1.8.75–79.** `engine/skill_battle.js` (8.5k) — both sides declare + roll a TRUE round (L88-91); `senseOpponent` (sense.js) gates DISPLAY only. **THE FOG INVARIANT VERIFIED:** every revealed field is READ from the true `oppRound` (`.margin/.function/.name/.breakdown`) — never fabricated; tier only chooses which true fields show; tier-3 breakdown is the real SNG-106 math on the opponent's roll. **Fog is presentation over true state, never false** — the non-negotiable, built exactly. Duel routing into skill_battle confirmed in encounters.js. PvP falls out (symmetric). **Closed.**
+- **SNG-101b — Native grants, v1.8.74.** `applyNativeGrants` pushes only `if (!owned)` — **never touches an owned rank** (Law-14 by construction); `retroNativeGrants` version-gated via a DISTINCT `nativeGrantsVersion` (no collision with `grantsVersion` — Q3 resolved). **Verified on Silas himself:** retro already ran (nativeGrantsVersion=1), granted his caster basics (grey_hand/grey_road), earned ranks intact (order_sense 3, deathsense 3, palework 2). **Hand-fix + systemic fix converged clean — no double-grant, no stripped ranks.** `the_kept_breath` correctly un-granted (cap filled) — behavior, not bug. **Closed.**
+- **SNG-113 — Aptitudes, v1.8.80.** 26 aptitudes at HEAD; `aptitudeDecay` now **0.975** (was 0.995 — decay bites); `recoveryFractions` present; hysteresis tracks held state. **Closed** (Aevi roster owed the TIER-B new-consumer wiring per the roster manifest — track separately).
+- **SNG-114 — Inventory unify + intentful use, v1.8.78.** Unified `itemCard`; `uses[]` + "how?" intent path present. **Closed.**
+- **SNG-105/111/112/108/109/110** (chronicle arc) + **SNG-115/116** (live bugs) — previously closed green; all still at HEAD.
+
+**Aevi still owes (not blockers):** SNG-112 arcId authoring on shared-arc quests; SNG-109 keyed browser click-through; SNG-113 TIER-B consumer wiring; and the location/UI batch (SNG-117/118/119) is specced awaiting CCode.
+
+Run `update.bat` to sync. **Nothing broken found — the two architectural pieces (skill-battle fog, native-grant Law-14) hold by construction.**
+
+---
+
+## 🗺️ LOCATION + UI BATCH — specced (Erik play session 2026-07-16, awaiting CCode)
 
 - **SNG-117 — The world you know is navigable** (bug cluster, priority). `po/SPEC_SNG-117_known_world_navigable.md`. **Two symptoms, ONE root cause:** the engine only travels to / names places with a resolvable location record. (a) Left Millbrook "via the pass" → header stuck on Millbrook (exit resolved to no id; SNG-056 header-follows-fiction only fires on a resolvable `moveTo`). (b) Map shows `?` for every un-*visited* place even when you know its name / are traveling to it (L3214 gates name on `visited`, not `known`). Fix: a **known-places layer** (heard/en-route/rumoured/adjacent, not just visited) + **mint named-but-unrecorded destinations** ("the pass" becomes a real place via the existing gen path) + **header never asserts a place the fiction has left** (mint/infer/transit). Map names + makes clickable any KNOWN place.
 - **SNG-118 — Play-style as clickable chips.** `po/SPEC_SNG-118_playstyle_chips.md`. The prose wall becomes tight colored `[Strategist]` chips, tap-to-expand (reuse info-dot popover), with fading/lineage/inverse states. Scales with the SNG-113 roster.

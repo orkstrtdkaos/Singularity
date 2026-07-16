@@ -11,10 +11,11 @@ const MODEL_MAP = {
   "generate": "claude-sonnet-4-6",
   "intent-parse": "claude-haiku-4-5-20251001",
   "chronicle-compress": "claude-haiku-4-5-20251001",
+  "chronicle": "claude-sonnet-4-6",
   _default: "claude-sonnet-4-6"
 };
 
-const BUDGETS = { "gm-narrate": 8000, "gm-meta": 1024, "bio-gen": 1024, "world-tick": 1024, "generate": 1500, "intent-parse": 1024, "chronicle-compress": 1024, _default: 2048 };
+const BUDGETS = { "gm-narrate": 8000, "gm-meta": 1024, "bio-gen": 1024, "world-tick": 1024, "generate": 1500, "intent-parse": 1024, "chronicle-compress": 1024, "chronicle": 768, _default: 2048 };
 
 // Minimum cacheable prefix, per model (Anthropic silently skips caching below this,
 // with no write premium). A breakpoint on a sub-min block is wasted — we fold small

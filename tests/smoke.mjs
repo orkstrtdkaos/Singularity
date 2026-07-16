@@ -11,6 +11,7 @@ import { normalizeInventory, addItem, removeItem, consumeItem, equipmentBonus, i
 import { newClock, readClock, advanceClock, getWorldEpoch, absoluteWorldDay, worldDate, worldDayAt, relativeWorldDays } from "../engine/worldtime.js";
 import { companionBonus, companionsForGM, activeCompanions, partnerAdjacentNpcs } from "../engine/companions.js";
 import { applyQuestUpdates, questsForGM, slugify, resolveQuest, dedupeQuests, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, threadTouched } from "../engine/quests.js";
+import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt } from "../engine/chronicle.js";
 import { sanitizeScene, buildTurnContext, sanitizeIntent, narrativeRegister, ratingRegister, renderSceneHistory } from "../engine/gm.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, findExistingNpc, prettifyNpcName, relationshipBand, advanceBond, relationshipLabel, isPartnerAdjacent } from "../engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
@@ -737,6 +738,55 @@ check('SNG-111: a genuinely different later name still becomes an alias', warden
   applyNpcUpdates(live, [{ op: "meet", npcId: "wren", name: "Wren", role: "ferrywoman" }], { day: 1, rules });
   applyNpcUpdates(live, [{ op: "update", npcId: "wren", relationshipDelta: 2, bondType: "romantic", bondStage: "courting" }], { day: 2, rules });
   check("SNG-108: applyNpcUpdates wires bondType/bondStage through with the rules from ctx", live.npcRegistry.wren.bondType === "romantic" && live.npcRegistry.wren.bondStage === "courting");
+}
+
+// --- SNG-109: the Chronicle — assembles from real state; cache invalidates on major change, not per turn ---
+{
+  const c = {
+    name: "Silas", level: 5,
+    deeds: [
+      { description: "helped clear the channel gate", weight: 1, worldDay: 3 },
+      { description: "broke the overseer's false ledger open in public", weight: 3, worldDay: 9 },
+      { description: "stood down a raider at the crossing", weight: 2, worldDay: 12 },
+      { description: "shared a meal with the ferry-folk", weight: 1, worldDay: 5 }
+    ],
+    npcRegistry: { pell: { id: "pell", name: "Pell", relationship: 8, bondType: "romantic", bondStage: "committed" } },
+    domains: { primary: "ashwarden", secondary: null, tertiary: null },
+    bio: { motivation: "to make the district honest" }
+  };
+  // major deeds sort by SALIENCE (|weight|), then recency; N cap honored.
+  const md = majorDeeds(c, 3);
+  check("SNG-109: majorDeeds sorts by weight then recency, capped at N", md.length === 3 && md[0].weight === 3 && md[1].weight === 2 && md[2].weight === 1);
+  check("SNG-109: a negative-weight deed is still 'major' (a feared reputation is a chronicle)", majorDeeds({ deeds: [{ description: "burned the toll-house", weight: -3 }, { description: "tipped a barkeep", weight: 1 }] }, 1)[0].weight === -3);
+
+  // cache invalidation: a ROUTINE (weight-1) deed does NOT churn the hash; a MAJOR deed / bond stage / ceiling does.
+  const h0 = majorStateHash(c);
+  c.deeds.push({ description: "bought bread", weight: 1, worldDay: 13 });
+  check("SNG-109: a routine (weight-1) deed does NOT invalidate the chronicle cache", majorStateHash(c) === h0);
+  c.deeds.push({ description: "toppled the overseer", weight: 3, worldDay: 14 });
+  check("SNG-109: a MAJOR deed (|w|>=2) invalidates the cache", majorStateHash(c) !== h0);
+  const h1 = majorStateHash(c);
+  c.npcRegistry.pell.bondStage = "partner";
+  check("SNG-109: advancing a bond STAGE invalidates the cache", majorStateHash(c) !== h1);
+  const h2 = majorStateHash(c);
+  c.domainCeilings = { veilwright: 2 };
+  check("SNG-109: a domain ceiling change invalidates the cache", majorStateHash(c) !== h2);
+
+  // chronicleIsStale: absent → stale; matching hash → fresh; state moves → stale again.
+  check("SNG-109: an absent paragraph reads stale", chronicleIsStale(c) === true);
+  c.chronicleCache = { hash: majorStateHash(c), text: "You have become…", at: "t" };
+  check("SNG-109: a paragraph whose hash matches the state is fresh", chronicleIsStale(c) === false);
+  c.deeds.push({ description: "a new legend", weight: 3, worldDay: 20 });
+  check("SNG-109: once the major state moves, the cached paragraph reads stale again", chronicleIsStale(c) === true);
+
+  // buildChroniclePrompt assembles from real state, passes the content ceiling, and invents nothing.
+  const { system, user } = buildChroniclePrompt(c, { bonds: [{ name: "Pell", label: "partner · devoted" }], standing: [{ who: "Ashwardens", band: "trusted" }], arc: "to make the district honest — Ashwarden", ratingLine: "PG-13 CEILING." });
+  check("SNG-109: the prompt carries the passed content ceiling (AUP-bounded like the GM)", system.includes("PG-13 CEILING."));
+  check("SNG-109: the prompt assembles the real deeds, bond, and standing", user.includes("overseer") && user.includes("Pell: partner · devoted") && user.includes("Ashwardens: trusted"));
+
+  // empty-state is graceful — a brand-new character produces a valid, honest prompt.
+  const fresh = buildChroniclePrompt({ name: "New" }, {});
+  check("SNG-109: empty state is graceful (no deeds/bonds → honest 'nothing yet' prompt, no crash)", fresh.user.includes("nothing of note yet") && fresh.user.includes("no close ties yet"));
 }
 check('revealName cannot create a person', (applyNpcUpdates({ npcRegistry: {} }, [{ op: 'update', npcId: 'ghost', revealName: 'X' }], {}), true));
 // customName

@@ -4,12 +4,13 @@
 import { loadContent, loreForLocation, eventsForGM, getPlayerKey, setPlayerKey, hasChosenPlayer, listPlayers, listCharacters, saveCharacter, loadCharacter, saveProfile, loadProfile, exportSave, importSave, adoptRemoteCharacter, preserveRecovery, dedupePlayers, findProfileByName, resolveLocationId } from "./engine/state.js";
 import { resolveAction, successChance, applyEnergyCost } from "./engine/resolve.js";
 import { senseAction, senseTier } from "./engine/sense.js";
-import { recordDeed, standingWith, reputationSummary } from "./engine/reputation.js";
+import { recordDeed, standingWith, standingWithPeople, reputationSummary } from "./engine/reputation.js";
+import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt } from "./engine/chronicle.js";
 import { newProfile, updateProfile, aptitudeMods, profileInsight, ensureCharacterStyle, ensureRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, revokeAdultGate, RATING_ORDER, RATING_LEVEL } from "./engine/playerprofile.js";
 import { gmTurn, parseIntent, gmAsk, generateBio, suggestBuild, extractGambit, sanitizeScene, narrativeRegister, ratingRegister } from "./engine/gm.js";
 import { applyQuestUpdates, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, slugify } from "./engine/quests.js";
 import { applyStateOps, describeCorrection } from "./engine/corrections.js";
-import { getApiKey, setApiKey, callClaudeJSON } from "./engine/claude.js";
+import { getApiKey, setApiKey, callClaude, callClaudeJSON } from "./engine/claude.js";
 import { generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight } from "./engine/generate.js";
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, ghList, fetchRepoJSON } from "./engine/sync.js";
 import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName } from "./engine/inventory.js";
@@ -41,7 +42,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.71";
+const APP_VERSION = "1.8.72";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3799,6 +3800,7 @@ function renderCharacterScreen() {
       ${activeCompanions(character, CONTENT.companions).map(c => `<div class="codex-fact"><strong>${esc(c.name)}</strong> — assists: ${(c.assistTags || []).join(", ")}</div>`).join("") || "<div class='insight'>traveling alone</div>"}</div>
     <button class="btn" id="cs-levelup" style="margin-top:10px; margin-right:8px">⬆ Level Up${character.skillPoints ? ` (${character.skillPoints})` : ""}</button>
     <button class="btn secondary" id="cs-skillgraph" style="margin-top:10px; margin-right:8px">✦ Skill Wheel</button>
+    <button class="btn secondary" id="cs-chronicle" style="margin-top:10px; margin-right:8px" title="The story so far — the deeds, bonds, and standing you've accreted, read back to you">📜 The Chronicle</button>
     <button class="btn secondary" id="cs-repair" style="margin-top:10px; margin-right:8px" title="Fix what the game got wrong at creation — domains, background, form, or an ability you never chose. No arguing with the GM.">🔧 Repair character</button>
     <button class="btn secondary" id="cs-back" style="margin-top:10px">Back</button>
   </div>`);
@@ -3842,6 +3844,7 @@ function renderCharacterScreen() {
   const luBtn2 = document.getElementById("cs-levelup"); if (luBtn2) luBtn2.onclick = () => renderLevelUp();
   const sgBtn = document.getElementById("cs-skillgraph"); if (sgBtn) sgBtn.onclick = () => renderSkillWheel();
   const repBtn = document.getElementById("cs-repair"); if (repBtn) repBtn.onclick = () => renderRepairScreen();
+  const chrBtn = document.getElementById("cs-chronicle"); if (chrBtn) chrBtn.onclick = () => renderChronicle();
   // SNG-053 form editor: describe the character's physical form so the portrait renders it
   const formB = document.getElementById("cs-form");
   if (formB) formB.onclick = () => {
@@ -4173,6 +4176,89 @@ function renderQuestLog() {
     if (r.ok) { saveCharacter(character); renderQuestDetail(r.quest.id); } else alert(r.why || "Couldn't start that.");
   };
   document.getElementById("ql-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
+}
+
+// ---------- SNG-109: THE CHRONICLE — the accreted self, read back to the player ----------
+// One page that WITNESSES what the character's attention has made real: a generated "story so far"
+// paragraph (cached, regenerated only on major-state change), major deeds, relationships (SNG-108
+// bonds), standing, and the arc. Read-only — the Chronicle displays state, never mutates it. The
+// engine assembles the prompt (chronicle.js); app owns the cached model call + the content ceiling.
+
+/** Assemble the display + prompt views from state that already exists. */
+function chronicleViewCtx(character) {
+  const reg = character.npcRegistry || {};
+  const bonds = Object.values(reg)
+    .filter(n => (n.bondType && n.bondType !== "platonic") || Math.abs(n.relationship || 0) >= 4)
+    .sort((a, b) => Math.abs(b.relationship || 0) - Math.abs(a.relationship || 0))
+    .slice(0, 8)
+    .map(n => ({ name: n.name, label: relationshipLabel(n) }));
+  const traditions = [character.domains?.primary, character.domains?.secondary, character.domains?.tertiary].filter(Boolean);
+  const standing = [];
+  for (const t of traditions) { const s = standingWithPeople(character, t, CONTENT.rules); if (s.score) standing.push({ who: traditionLabel(t), band: s.band }); }
+  const home = CONTENT.locations?.[character.currentLocationId]?.communityId;
+  if (home) { const s = standingWith(character, home, CONTENT.rules); if (s.score) standing.push({ who: CONTENT.locations[character.currentLocationId]?.name || home, band: s.band }); }
+  const dshape = traditions.map(traditionLabel).join(" · ");
+  const fore = (character.foreclosed || []).length ? ` Foreclosed (braid-only): ${character.foreclosed.map(traditionLabel).join(", ")}.` : "";
+  const aim = character.bio?.currentAim || character.bio?.motivation || "";
+  const arc = `${aim ? aim + " — " : ""}${dshape}${fore}`.trim();
+  return { bonds, standing, arc, ratingLine: ratingLineForGM() };
+}
+
+/** Write (or rewrite) the cached "story so far" paragraph. Cached by major-state hash — only regenerates
+ *  when the major state changed or the player asks (cost + churn guard). Never per-turn. */
+async function ensureChronicleParagraph(force = false) {
+  if (!getApiKey()) return;
+  if (character._chronicleBusy) return;
+  if (!force && !chronicleIsStale(character)) return;
+  const { system, user } = buildChroniclePrompt(character, chronicleViewCtx(character));
+  character._chronicleBusy = true; character._chronicleError = null; renderChronicle();
+  try {
+    const text = await callClaude([{ role: "user", content: user }], { task: "chronicle", system });
+    character.chronicleCache = { hash: majorStateHash(character), text: String(text || "").trim(), at: new Date().toISOString() };
+    saveCharacter(character);
+  } catch (e) {
+    character._chronicleError = e?.message === "NO_API_KEY" ? "Add your API key in Settings to write the chronicle." : "Couldn't write the chronicle just now — try again.";
+  } finally {
+    character._chronicleBusy = false; renderChronicle();
+  }
+}
+
+function renderChronicle() {
+  const cache = character.chronicleCache;
+  const stale = chronicleIsStale(character);
+  const deeds = majorDeeds(character, 8);
+  const ctx = chronicleViewCtx(character);
+  const paraHtml = character._chronicleBusy
+    ? `<div class="insight">writing your story…</div>`
+    : cache?.text
+      ? `<p class="chronicle-para">${esc(cache.text)}</p>${stale ? `<div class="hint">the story has moved on since this was written — regenerate to catch it up</div>` : ""}`
+      : `<div class="insight">${getApiKey() ? "Your story is just beginning — generate the chronicle to read it." : "Add your API key in Settings to write the chronicle."}</div>`;
+  chrome(`<div class="screen" style="max-width:680px">
+    <h2>The Chronicle</h2>
+    ${character.portrait ? `<img class="cs-portrait" src="${esc(character.portrait)}" alt="${esc(character.name)}" data-lightbox="portrait" onerror="this.style.display='none'">` : ""}
+    <h3 style="margin-top:6px">${esc(character.name)}${character.level ? ` · level ${character.level}` : ""}</h3>
+    ${character._chronicleError ? `<div class="hint">${esc(character._chronicleError)}</div>` : ""}
+    <section><h3>The story so far</h3>
+      ${paraHtml}
+      ${getApiKey() ? `<button class="btn secondary" id="chr-regen" style="margin-top:6px" ${character._chronicleBusy ? "disabled" : ""}>↻ ${cache?.text ? "Regenerate" : "Write it"}</button>` : ""}
+    </section>
+    <section><h3>Major deeds${deeds.length ? ` (${deeds.length})` : ""}</h3>
+      ${deeds.length ? deeds.map(d => `<div class="chronicle-deed"><span class="rep-band ${(d.weight | 0) >= 0 ? "trusted" : "wary"}">${(d.weight | 0) > 0 ? "+" : ""}${d.weight | 0}</span> ${esc(d.description)}${d.worldDay != null ? ` <span class="cost">day ${d.worldDay}</span>` : ""}</div>`).join("") : "<div class='insight'>no deeds yet — the valley is waiting</div>"}
+    </section>
+    <section><h3>Relationships</h3>
+      ${ctx.bonds.length ? ctx.bonds.map(b => `<div class="known-npc"><span class="npc-name">${esc(b.name)}</span> <span class="rep-band trusted">${esc(b.label)}</span></div>`).join("") : "<div class='insight'>no close ties yet</div>"}
+    </section>
+    <section><h3>Standing</h3>
+      ${ctx.standing.length ? ctx.standing.map(s => `<div class="known-npc"><span class="npc-name">${esc(s.who)}</span> <span class="rep-band">${esc(s.band)}</span></div>`).join("") : "<div class='insight'>not yet known anywhere</div>"}
+    </section>
+    <section><h3>The arc</h3>
+      <div class="chronicle-arc">${ctx.arc ? esc(ctx.arc) : "<span class='insight'>their path is still forming</span>"}</div>
+    </section>
+    <button class="btn secondary" id="chr-back" style="margin-top:12px">Back</button>
+  </div>`);
+  const rb = document.getElementById("chr-regen"); if (rb) rb.onclick = () => ensureChronicleParagraph(true);
+  document.getElementById("chr-back").onclick = () => renderCharacterScreen();
+  if (!cache?.text && !character._chronicleBusy && getApiKey()) ensureChronicleParagraph(false); // write once on first open
 }
 
 // ---------- SNG-061: THE LIBRARY (the world's guide — open, readable, no discovery gate) ----------

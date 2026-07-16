@@ -107,179 +107,181 @@
         "player": "Ask Ossian why they called you 'the deviation' — the word had weight and they used it precisely; you want to know what it means.",
         "summary": "Ossian defines 'the deviation'; a Cogitant collapses at the hall's far edge — the third this week.",
         "narration": "Ossian explains 'the deviation' with complete precision: Saehara falls outside every modeled category of probable respondent. Then a Cogitant collapses at the hall's edge. Ossian notes it like a datum."
+      },
+      {
+        "player": "Go to the fallen Cogitant — cross the hall and check on them",
+        "summary": "Saehara crosses the hall and kneels beside the fallen Cogitant — alive, lips moving, calculating still, cold and far away.",
+        "narration": "You cross the hall without ceremony. The chalk-dust floor is soft underfoot — years of it, settled into the stone — and the drifting Cogitants at the edges do not register your passage. They move in slow arcs, lips shaping silent calculations, eyes somewhere behind the visible world. None of them look at the figure on the ground.\n\nThe fallen Cogitant is a woman, or was before the Cogitarium had its years with her. She is thin in the way Ossian is thin — not starved, but given away, the flesh redistributed by long forgetting until what remains is the minimum the mind allows. Her robes are the same pale grey as the walls, and they have pooled around her with a kind of terrible neatness, as though she arranged herself on the way down. Her chest rises. Shallowly, but it rises. There is chalk on her fingers — on both hands, ground into the whorls — and her eyes are half-open, fixed on a point in the middle distance that has nothing to do with the ceiling above her.\n\nShe is alive. She is also somewhere else entirely — whatever she was calculating has not stopped; you can see it in the faint movement of her lips, the micro-adjustments of her gaze tracking something you cannot see. Her skin is cold when your fingers find her wrist to take a pulse. Not alarming cold — the cold of a room kept at thinking temperature, of a body that has decided warmth is overhead.\n\nKon has followed you. The fox-thing sits two feet back, coat banked low, and watches the woman's face with the particular stillness it reserves for the thin places — not afraid, not retreating, but attentive in a way that is not purely animal. It does not go hot. Whatever this is, the Glade does not name it as Precursor-strange. It is something older and more ordinary: a body running out of reasons to maintain itself."
       }
     ],
     "lastTurn": {
-      "narration": "Ossian explains 'the deviation' with complete precision: Saehara falls outside every modeled category of probable respondent. Then a Cogitant collapses at the hall's edge. Ossian notes it like a datum.",
-      "sceneSummary": "Ossian defines 'the deviation'; a Cogitant collapses at the hall's far edge — the third this week.",
+      "narration": "You cross the hall without ceremony. The chalk-dust floor is soft underfoot — years of it, settled into the stone — and the drifting Cogitants at the edges do not register your passage. They move in slow arcs, lips shaping silent calculations, eyes somewhere behind the visible world. None of them look at the figure on the ground.\n\nThe fallen Cogitant is a woman, or was before the Cogitarium had its years with her. She is thin in the way Ossian is thin — not starved, but given away, the flesh redistributed by long forgetting until what remains is the minimum the mind allows. Her robes are the same pale grey as the walls, and they have pooled around her with a kind of terrible neatness, as though she arranged herself on the way down. Her chest rises. Shallowly, but it rises. There is chalk on her fingers — on both hands, ground into the whorls — and her eyes are half-open, fixed on a point in the middle distance that has nothing to do with the ceiling above her.\n\nShe is alive. She is also somewhere else entirely — whatever she was calculating has not stopped; you can see it in the faint movement of her lips, the micro-adjustments of her gaze tracking something you cannot see. Her skin is cold when your fingers find her wrist to take a pulse. Not alarming cold — the cold of a room kept at thinking temperature, of a body that has decided warmth is overhead.\n\nKon has followed you. The fox-thing sits two feet back, coat banked low, and watches the woman's face with the particular stillness it reserves for the thin places — not afraid, not retreating, but attentive in a way that is not purely animal. It does not go hot. Whatever this is, the Glade does not name it as Precursor-strange. It is something older and more ordinary: a body running out of reasons to maintain itself.",
+      "sceneSummary": "Saehara crosses the hall and kneels beside the fallen Cogitant — alive, lips moving, calculating still, cold and far away.",
       "choices": [
         {
-          "label": "Go to the fallen Cogitant — cross the hall and check on them",
+          "label": "Try to bring her back — speak to her, touch her face, do something bodily and immediate to pull her attention to the here and now",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 15,
+          "intentTags": [
+            "help",
+            "connect",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
+        },
+        {
+          "label": "Look her over practically — check for injury, feel for fever or cold, see if there's something physical that needs attending before anything else",
           "attribute": "practical",
           "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
             "help",
+            "study",
             "careful"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Ask Ossian why he keeps watching Kon — the word Glade moved something in him",
+          "label": "Turn back to Ossian and ask, plainly: what does she need, and why has no one gone to her?",
           "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "challenge",
+            "help",
+            "direct"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Use Total Focus — clear away the strangeness of the place and the cold arithmetic of Ossian's world, and just see this woman clearly: what does she actually need?",
+          "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
             "study",
-            "careful"
+            "careful",
+            "help"
           ],
-          "trivial": true
-        },
-        {
-          "label": "Ask Ossian what meeting the four conditions would actually take — not probability, but path",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 0,
-          "intentTags": [
-            "plan",
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Or act as you see fit.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 0,
-          "intentTags": [],
-          "trivial": true
+          "abilityId": "total_focus",
+          "energyCost": 4,
+          "trivial": false
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
       "scene": {
-        "setting": "Entrance hall of the Cogitarium — high pale stone, bluish window-light, chalk-dust and ozone. Morning. Mist still faintly visible through the outer arch. Saehara stands close to the notation wall. A Cogitant has just collapsed at the far edge of the hall — robes pooled around them, unacknowledged by anyone else present.",
+        "setting": "Entrance hall of the Cogitarium — high pale stone, bluish morning light through tall windows, chalk-dust thick underfoot. Saehara kneels beside the fallen Cogitant at the hall's far edge. Mist still faint through the outer arch.",
         "npcsPresent": [
           {
             "name": "Ossian",
-            "state": "Seated cross-legged, gaze on Saehara — just answered the deviation question; now watching Kon"
+            "state": "Seated cross-legged at the center of the hall, watching Saehara at the far edge — same stillness as always, gaze tracking"
           },
           {
             "name": "Araveth",
-            "state": "Standing at the wall, finger tracing chalk loops without pause or acknowledgment"
+            "state": "Standing at the notation wall, finger tracing chalk loops without pause — has not turned"
           },
           {
             "name": "Fallen Cogitant",
-            "state": "Collapsed at the hall's far edge — robes settled in chalk dust, motionless"
+            "state": "Collapsed on the chalk-dust floor — alive, breathing shallowly, lips moving in silent calculation, eyes half-open and fixed on nothing present, cold to the touch"
           },
           {
             "name": "Drifting Cogitants",
-            "state": "Moving slowly at the hall's edges, oblivious — one fewer now"
+            "state": "Moving in slow arcs at the hall's edges, lips moving, oblivious — none have looked at the fallen woman"
           }
         ],
         "objects": [
-          "Wall of dense chalk notation — twenty-two-day watershed model; deterioration visible between days nine and fourteen",
-          "Shaft of window-light (Kon sitting in it, coat dimmed toward ash, watching Ossian)",
-          "Outer arch behind you (mist faintly visible)",
-          "Katana at waist (confirmed present)",
-          "Fallen Cogitant's robe pooled in chalk dust at the hall's far edge"
+          "Wall of dense chalk notation — twenty-two-day watershed model, deterioration visible around days nine and fourteen",
+          "Outer arch (mist faintly visible beyond)",
+          "Fallen Cogitant's robes pooled in chalk dust — chalk ground into both her hands",
+          "Shaft of window-light (Kon sitting in it, coat banked low, watching the fallen woman's face)",
+          "Katana at Saehara's waist"
         ],
         "threads": [
-          "Ossian's gaze moved to Kon twice — once on 'the deviation', once on the word 'Glade'; unaddressed",
-          "A Cogitant has collapsed — the third this week; no one reacted; their status unknown",
-          "The four conditions for source-remediation stand unmet — Ossian has not closed that door",
-          "Kon went cold and still during the four conditions recitation — its read of the hall is unknown",
-          "Araveth has not acknowledged Saehara's presence in eleven days of continuous work"
+          "Fallen Cogitant is alive but unreachable — lips moving, eyes open to something elsewhere; her condition is unclear",
+          "Kon watches the woman with attentive stillness — not a Precursor read, something else",
+          "Ossian's gaze on Saehara — tracking from across the hall",
+          "No other Cogitant has moved toward the fallen woman",
+          "The four conditions for source-remediation stand unmet",
+          "Araveth has not acknowledged Saehara's presence"
         ]
       },
       "npcUpdates": [
         {
-          "op": "update",
-          "npcId": "ossian",
-          "name": "Ossian",
-          "note": "Explained 'the deviation' with full precision: Saehara is outside every modeled respondent category — no settlement, no mandate, a Glade-changed companion, and challenged the evacuation answer on first hearing. Combined probability of such an arrival was 0.003. His gaze moved to Kon at the word 'Glade'.",
+          "op": "meet",
+          "npcId": "fallen-cogitant",
+          "name": "Fallen Cogitant",
+          "role": "Cogitant — collapsed at the hall's far edge",
+          "description": "A thin woman, chalk ground into both hands, robes pooled around her with terrible neatness — alive, lips moving in silent calculation, cold to the touch and present somewhere else entirely.",
+          "note": "Saehara crossed the hall and knelt beside her — found her breathing shallowly, eyes half-open, skin cold, lips still moving. Kon followed and watched her face with particular stillness.",
           "learned": [
-            "Combined probability of Saehara's arrival profile was 0.003 — the deviation is a term from an existing calculation",
-            "Ossian noted the fallen Cogitant flatly: 'That is the third this week. The calculation continues. The body does not always.'",
-            "Ossian watched Kon specifically when he said the word 'Glade'"
+            "Is alive but unreachable — still calculating, visibly, behind closed eyes",
+            "Cold to the touch — body-temperature reduced to minimum",
+            "Chalk ground into both hands — she was working before she fell",
+            "Kon did not read her as Precursor-strange"
           ],
-          "statusNote": "Seated in the entrance hall, watching Saehara and Kon — has just explained the deviation and noted a third collapse this week without apparent concern"
+          "status": "injured",
+          "statusNote": "Collapsed in the Cogitarium entrance hall — alive, barely present, still calculating silently; no other Cogitant has gone to her"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "the-deviation",
-          "label": "The Deviation (Ossian's Term)",
-          "kind": "mystery",
-          "entityId": "ossian",
-          "fact": "Ossian modeled every probable respondent category and assigned a combined 0.003 probability to someone like Saehara arriving: no settlement, no mandate, a Glade-changed companion, challenged the evacuation answer on first hearing. 'Deviation' is precise — Saehara falls outside their distribution. Ossian watched Kon specifically when he said 'Glade'.",
-          "links": [
-            "cogitarium",
-            "cogitants",
-            "the-cogitariums-calculated-crisis",
-            "araveth"
-          ]
-        },
-        {
-          "topic": "cogitant-collapse",
+          "topic": "the-collapsing-cogitants",
           "label": "The Collapsing Cogitants",
           "kind": "event",
-          "fact": "A Cogitant collapsed at the hall's far edge — the third this week, per Ossian. He noted it with statistical flatness: 'The calculation continues. The body does not always.' No other Cogitant reacted. The rate of collapse appears to be accelerating.",
+          "fact": "The third Cogitant to collapse this week is a thin woman with chalk on both hands — alive, cold, lips still moving in silent calculation. She did not stop working when she fell. Kon watched her and did not read Precursor-strangeness; this is something older: a body running out of reasons.",
           "links": [
             "cogitarium",
             "cogitants",
             "ossian",
-            "the-cogitariums-calculated-crisis"
+            "the-cogitariums-calculated-crisis",
+            "fallen-cogitant"
           ]
-        }
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "A Cogitant collapsed in the entrance hall — the third this week. Ossian noted it without alarm. The Cogitarium's bodies are failing at an accelerating rate.",
-          "subjectId": "ossian"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short exchange — Ossian answered the deviation question and a Cogitant collapsed; a quarter-hour at most"
+        "why": "crossing the hall and kneeling to examine the fallen Cogitant — a few minutes at most"
       }
     },
     "sceneState": {
-      "setting": "Entrance hall of the Cogitarium — high pale stone, bluish window-light, chalk-dust and ozone. Morning. Mist still faintly visible through the outer arch. Saehara stands close to the notation wall. A Cogitant has just collapsed at the far edge of the hall — robes pooled around them, unacknowledged by anyone else present.",
+      "setting": "Entrance hall of the Cogitarium — high pale stone, bluish morning light through tall windows, chalk-dust thick underfoot. Saehara kneels beside the fallen Cogitant at the hall's far edge. Mist still faint through the outer arch.",
       "npcsPresent": [
         {
           "name": "Ossian",
-          "state": "Seated cross-legged, gaze on Saehara — just answered the deviation question; now watching Kon"
+          "state": "Seated cross-legged at the center of the hall, watching Saehara at the far edge — same stillness as always, gaze trackin"
         },
         {
           "name": "Araveth",
-          "state": "Standing at the wall, finger tracing chalk loops without pause or acknowledgment"
+          "state": "Standing at the notation wall, finger tracing chalk loops without pause — has not turned"
         },
         {
           "name": "Fallen Cogitant",
-          "state": "Collapsed at the hall's far edge — robes settled in chalk dust, motionless"
+          "state": "Collapsed on the chalk-dust floor — alive, breathing shallowly, lips moving in silent calculation, eyes half-open and fi"
         },
         {
           "name": "Drifting Cogitants",
-          "state": "Moving slowly at the hall's edges, oblivious — one fewer now"
+          "state": "Moving in slow arcs at the hall's edges, lips moving, oblivious — none have looked at the fallen woman"
         }
       ],
       "objects": [
-        "Wall of dense chalk notation — twenty-two-day watershed model; deterioration vis",
-        "Shaft of window-light (Kon sitting in it, coat dimmed toward ash, watching Ossia",
-        "Outer arch behind you (mist faintly visible)",
-        "Katana at waist (confirmed present)",
-        "Fallen Cogitant's robe pooled in chalk dust at the hall's far edge"
+        "Wall of dense chalk notation — twenty-two-day watershed model, deterioration vis",
+        "Outer arch (mist faintly visible beyond)",
+        "Fallen Cogitant's robes pooled in chalk dust — chalk ground into both her hands",
+        "Shaft of window-light (Kon sitting in it, coat banked low, watching the fallen w",
+        "Katana at Saehara's waist"
       ],
       "threads": [
-        "Ossian's gaze moved to Kon twice — once on 'the deviation', once on the word 'Glade'; unaddressed",
-        "A Cogitant has collapsed — the third this week; no one reacted; their status unknown",
-        "The four conditions for source-remediation stand unmet — Ossian has not closed that door",
-        "Kon went cold and still during the four conditions recitation — its read of the hall is unknown",
-        "Araveth has not acknowledged Saehara's presence in eleven days of continuous work"
+        "Fallen Cogitant is alive but unreachable — lips moving, eyes open to something elsewhere; her condition is unclear",
+        "Kon watches the woman with attentive stillness — not a Precursor read, something else",
+        "Ossian's gaze on Saehara — tracking from across the hall",
+        "No other Cogitant has moved toward the fallen woman",
+        "The four conditions for source-remediation stand unmet"
       ]
     }
   },
@@ -358,6 +360,32 @@
       "skillsObserved": [],
       "status": "active",
       "statusNote": "Standing at the wall of notation in the entrance hall, finger moving without pause — has not acknowledged Saehara",
+      "lastSeen": {
+        "locationId": "the_cogitarium",
+        "day": 1
+      }
+    },
+    "fallen-cogitant": {
+      "id": "fallen-cogitant",
+      "name": "Fallen Cogitant",
+      "role": "Cogitant — collapsed at the hall's far edge",
+      "description": "A thin woman, chalk ground into both hands, robes pooled around her with terrible neatness — alive, lips moving in silent calculation, cold to the touch and present somewhere else entirely.",
+      "firstMet": {
+        "locationId": "the_cogitarium",
+        "day": 1
+      },
+      "relationship": 0,
+      "history": [
+        "[d1] Saehara crossed the hall and knelt beside her — found her breathing shallowly, eyes half-open, skin cold, lips still moving. Kon followed and watched her face with particular still"
+      ],
+      "knownFacts": [
+        "Is alive but unreachable — still calculating, visibly, behind closed eyes",
+        "Cold to the touch — body-temperature reduced to minimum",
+        "Chalk ground into both hands — she was working before she fell"
+      ],
+      "skillsObserved": [],
+      "status": "injured",
+      "statusNote": "Collapsed in the Cogitarium entrance hall — alive, barely present, still calculating silently; no other Cogitant has gone to her",
       "lastSeen": {
         "locationId": "the_cogitarium",
         "day": 1
@@ -583,7 +611,8 @@
         "label": "The Collapsing Cogitants",
         "kind": "event",
         "facts": [
-          "[d1] A Cogitant collapsed at the hall's far edge — the third this week, per Ossian. He noted it with statistical flatness: 'The calculation continues. The body does not always.' No other Cogitant reacted. "
+          "[d1] A Cogitant collapsed at the hall's far edge — the third this week, per Ossian. He noted it with statistical flatness: 'The calculation continues. The body does not always.' No other Cogitant reacted. ",
+          "[d1] The third Cogitant to collapse this week is a thin woman with chalk on both hands — alive, cold, lips still moving in silent calculation. She did not stop working when she fell. Kon watched her and di"
         ],
         "links": [
           "cogitarium",
@@ -598,12 +627,14 @@
     }
   },
   "tendencies": {
-    "strategic": 1.9554473843562656,
-    "social": 2.94549750624375,
-    "cerebral": 1.9701745006250002
+    "strategic": 1.9456701474344844,
+    "social": 2.9307700187125314,
+    "cerebral": 1.9603236281218752,
+    "generous": 1,
+    "cautious": 1
   },
   "aptitudes": [],
-  "actionCount": 7,
+  "actionCount": 8,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -616,8 +647,8 @@
       "at": "2026-07-16T02:18:04.820Z"
     }
   ],
-  "updatedAt": 1784171152423,
-  "rev": 29,
+  "updatedAt": 1784171432177,
+  "rev": 30,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -625,7 +656,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "somatic_reaches": 8
+    "somatic_reaches": 9
   },
   "opLossPending": false,
   "establishedFacts": [

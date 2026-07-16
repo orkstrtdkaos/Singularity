@@ -31,7 +31,10 @@ Writeup: `po/results/20260715_chronicle_arc_and_bugs.md`. **Aevi owes:** SNG-112
 
 ---
 
-## ⚡ SNG-113 — Aptitudes expansion — ✅ PROMOTED (Erik 2026-07-14) → CCode ROUND 2 (engine) + Aevi authoring (roster) in parallel
+## ⚡ SNG-113 — Aptitudes expansion — ✅ SHIPPED, complete_pending_review (CCode 2026-07-16, v1.8.80)
+
+> **CCode 2026-07-16:** mechanism + roster live. Decay→rules (0.975, bites) + hysteresis (keepMargin 4) + fading; inverse aptitudes (innocence, worldliness-ceiling, one-way); background grantsAptitudes (all 40 backgrounds, seeded at creation, lineage-marked); romantic/flirt→amorous tendency; Aevi 26-roster merged (curved thresholds + tiered depth); the 20 TIER-B consumers all built in resolve.js as situational named lines; content_ci asserts every mod key has a consumer. 14 smoke tests + browser-runtime verified. Tuning (decay/thresholds/grant-map) is Erik-playtestable. Writeup: `po/results/20260716_SNG-113_aptitudes.md`. (Original split note below.)
+
 
 `po/SPEC_SNG-113_aptitudes_expansion.md` (v3, ROUND-2-ready). **Erik promoted.** Split two ways:
 - **CCode ROUND 2 — the MECHANISM:** background `grantsAptitudes`; move `DECAY` to rules + raise (~0.975) + hysteresis (earn at threshold / keep until threshold−margin — **requires `deriveAptitudes` to track held state; it's stateless today, stated as a requirement not a question**); inverse-threshold engine for innocence (held while composite worldliness < ceiling); route orphaned `romantic`/`flirt` tags → new `amorous` tendency; "fading" surfacing. Three genuine confirm-at-HEAD questions remain.

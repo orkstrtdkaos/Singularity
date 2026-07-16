@@ -212,71 +212,80 @@
         "player": "Call into the shed — announce yourself plainly and ask for Lenten by name",
         "summary": "Saehara calls for Lenten in the shed and is answered — the builder surfaces from the dim and takes in the Cogitant on the bench.",
         "narration": "The shed smells of fresh shavings and linseed oil. You turn toward the deeper dark past the stacked timber and raise your voice to a carrying level — not a shout, just the flat projection of someone who's walked far enough to be done with being quiet about it.\n\n\"Lenten. I'm looking for Lenten. My name is Saehara Makashi — I've come from the Cogitarium.\"\n\nThe draw-plane sound, which had already stopped, stays stopped. Kon is somewhere ahead of you in the dimmer part of the shed, nose down, moving in slow arcs. Then a shape resolves: a broad person in a leather apron sets down a half-planed board and turns. They are somewhere past fifty, hair cut short and practical, hands so habituated to the work they are still curved as if holding a tool even empty. They take in Saehara. They take in the Cogitant on the bench — the grey robes, the chalk hands, the lips still moving — and their face does something complicated and then goes still.\n\n\"I'm Lenten.\" The voice is even, the way a person's voice goes even when they are deciding something quickly. Their eyes move from the woman on the bench back to you, and they make the calculation — carrier, arrival, condition — in roughly two seconds. \"How long has she been like this?\""
+      },
+      {
+        "player": "Answer directly — give Lenten the facts as Ossian laid them out: two to three days when you left, three hours of travel since, she needs food and water now.",
+        "summary": "Saehara delivers Ossian's assessment; Lenten moves immediately to food and water for the Cogitant, then asks for the full picture.",
+        "narration": "Lenten's eyes move from you to the Cogitant on the bench and back. You give them the facts the way Ossian gave them to you — clean and in order.\n\n\"She was at two, maybe three days when I left the Cogitarium. That was this morning — three hours of walking. She swallowed water on the road but nothing solid. She needs food now. Water too, more of it.\" You pause, then add: \"Ossian said her mass and the cold were the main factors. She's warmer now than she was.\"\n\nLenten doesn't interrupt. Their gaze tracks to the Cogitant's chalk hands, her moving lips, the slow shallow rise and fall of her chest — the rapid, precise assessment of someone who makes calculations with their eyes before they open their mouth. A beat of quiet. Kon has stopped its slow arcs somewhere near the far timber stack and is watching Lenten the way it watches things it hasn't decided about yet.\n\n\"Right,\" Lenten says. The word lands like a decision already made. They move to a rough shelf at the shed's back wall — a tin cup, a covered clay pot, a heel of hard bread wrapped in cloth. They bring it all to the bench, pour water into the cup, and press it gently to the Cogitant's lips. Her throat moves. The animal reflex is still there, still working. Lenten tears the bread into small pieces without comment, sets them within reach, and straightens.\n\nThey look at you then — really look, the way they looked at the Cogitant, measuring. \"You walked her eleven kilometers on your back.\" It isn't a question. \"The Cogitarium sent one person.\" A pause, shorter this time. \"Tell me the rest of it.\""
       }
     ],
     "lastTurn": {
-      "narration": "The shed smells of fresh shavings and linseed oil. You turn toward the deeper dark past the stacked timber and raise your voice to a carrying level — not a shout, just the flat projection of someone who's walked far enough to be done with being quiet about it.\n\n\"Lenten. I'm looking for Lenten. My name is Saehara Makashi — I've come from the Cogitarium.\"\n\nThe draw-plane sound, which had already stopped, stays stopped. Kon is somewhere ahead of you in the dimmer part of the shed, nose down, moving in slow arcs. Then a shape resolves: a broad person in a leather apron sets down a half-planed board and turns. They are somewhere past fifty, hair cut short and practical, hands so habituated to the work they are still curved as if holding a tool even empty. They take in Saehara. They take in the Cogitant on the bench — the grey robes, the chalk hands, the lips still moving — and their face does something complicated and then goes still.\n\n\"I'm Lenten.\" The voice is even, the way a person's voice goes even when they are deciding something quickly. Their eyes move from the woman on the bench back to you, and they make the calculation — carrier, arrival, condition — in roughly two seconds. \"How long has she been like this?\"",
-      "sceneSummary": "Saehara calls for Lenten in the shed and is answered — the builder surfaces from the dim and takes in the Cogitant on the bench.",
+      "narration": "Lenten's eyes move from you to the Cogitant on the bench and back. You give them the facts the way Ossian gave them to you — clean and in order.\n\n\"She was at two, maybe three days when I left the Cogitarium. That was this morning — three hours of walking. She swallowed water on the road but nothing solid. She needs food now. Water too, more of it.\" You pause, then add: \"Ossian said her mass and the cold were the main factors. She's warmer now than she was.\"\n\nLenten doesn't interrupt. Their gaze tracks to the Cogitant's chalk hands, her moving lips, the slow shallow rise and fall of her chest — the rapid, precise assessment of someone who makes calculations with their eyes before they open their mouth. A beat of quiet. Kon has stopped its slow arcs somewhere near the far timber stack and is watching Lenten the way it watches things it hasn't decided about yet.\n\n\"Right,\" Lenten says. The word lands like a decision already made. They move to a rough shelf at the shed's back wall — a tin cup, a covered clay pot, a heel of hard bread wrapped in cloth. They bring it all to the bench, pour water into the cup, and press it gently to the Cogitant's lips. Her throat moves. The animal reflex is still there, still working. Lenten tears the bread into small pieces without comment, sets them within reach, and straightens.\n\nThey look at you then — really look, the way they looked at the Cogitant, measuring. \"You walked her eleven kilometers on your back.\" It isn't a question. \"The Cogitarium sent one person.\" A pause, shorter this time. \"Tell me the rest of it.\"",
+      "sceneSummary": "Saehara delivers Ossian's assessment; Lenten moves immediately to food and water for the Cogitant, then asks for the full picture.",
       "choices": [
         {
-          "label": "Answer directly — give Lenten the facts as Ossian laid them out: two to three days when you left, three hours of travel since, she needs food and water now.",
+          "label": "Give Lenten the full situation — the nineteen missing days, the remaining Cogitants' timelines, the broken supply line, Brenn's absence",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
             "inform",
+            "honest",
             "direct"
           ],
           "trivial": true
         },
         {
-          "label": "Answer the question and pivot to the supply line in the same breath — she needs care, and the whole Cogitarium needs resupply; nineteen days, more Cogitants in the same state.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "inform",
-            "persuade",
-            "direct"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask about Brenn first — the runner who stopped coming. Let Lenten's reaction tell you something before you show all your cards.",
+          "label": "Ask about Brenn first — the runner stopped coming and you need to know why before you lay out what you're asking of Waymarker",
           "attribute": "social",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "read",
             "probe",
-            "careful"
-          ]
+            "careful",
+            "gather-information"
+          ],
+          "trivial": true
         },
         {
-          "label": "Something else — say what you do.",
+          "label": "Lay it out as a proposition — the Cogitarium has eight to twelve days, Waymarker had an arrangement that worked, you're here to rebuild it; what does Lenten need to say yes?",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 15,
+          "intentTags": [
+            "negotiate",
+            "direct",
+            "appeal"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Take the waterskin from your pack and drink — let Lenten see you've been carrying this alone, let the silence do some of the work before you speak",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "freeform"
+            "quiet",
+            "deliberate",
+            "human-moment"
           ],
           "trivial": true
         }
       ],
       "scene": {
-        "setting": "Interior of Lenten's long shed at the far edge of Waymarker's central work-yard — wide doors open to afternoon light, smells of fresh wood, sawdust, and linseed oil. Lenten stands deeper in the shed, half-planed board set aside, leather apron, eyes on the Cogitant.",
+        "setting": "Interior of Lenten's long shed at the far edge of Waymarker's central work-yard — wide doors open to afternoon light, smells of fresh wood, sawdust, and linseed oil. The fallen Cogitant is on the nearest workbench receiving water and bread from Lenten.",
         "npcsPresent": [
           {
             "name": "Fallen Cogitant",
-            "state": "Settled on the nearest workbench — robes pooled, chalk hands in lap, lips still moving in silent count, breathing small and even."
+            "state": "Settled on the nearest workbench — robes pooled, chalk hands in lap, lips still moving; swallowing water and bread that Lenten presses to her, on reflex"
           },
           {
             "name": "Lenten",
-            "state": "Standing in the dimmer part of the shed, apron on, board set down — measuring Saehara and the Cogitant with quick, practical eyes. Waiting for the answer."
+            "state": "Standing at the bench, having just given food and water to the Cogitant — looking at Saehara squarely, waiting for the rest of the story"
           },
           {
             "name": "Kon",
-            "state": "Moving in slow arcs deeper in the shed, nose low, reading the space."
+            "state": "Still near the far timber stack, watching Lenten — not moving, not settled; making up its mind"
           }
         ],
         "objects": [
@@ -284,58 +293,77 @@
           "Half-planed board on Lenten's bench",
           "Stacked timber along one wall",
           "Tools on pegs — planes, chisels, draw-knives",
+          "Tin cup with water — now at the Cogitant's lips",
+          "Clay pot and torn bread heel — on the bench beside the Cogitant",
           "Katana at Saehara's waist",
           "Traveler's Pack",
-          "Waterskin — secured, accessible",
-          "Fallen Cogitant — settled on the nearest bench"
+          "Waterskin — secured, accessible"
         ],
         "threads": [
-          "Lenten is waiting for an answer — how long has the Cogitant been like this?",
-          "Fallen Cogitant needs food and water within two days",
+          "Lenten is asking for the full picture — waiting",
+          "Fallen Cogitant is being fed and watered — two-day window still running",
           "Brenn the runner: stopped coming nineteen days ago — reason unknown",
-          "Supply line to the Cogitarium needs reopening",
+          "Supply line to the Cogitarium needs formal reopening",
           "Third terrace: Cogitant unseen four days — left behind, unresolved"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
+          "op": "update",
           "npcId": "lenten",
           "name": "Lenten",
-          "role": "Builder at Waymarker — the one who arranged the Cogitarium's supply line",
-          "description": "Broad, past fifty, leather apron, short practical hair. Hands curved even empty. Makes calculations fast and goes quiet while doing it.",
-          "note": "Surfaced from the shed when Saehara called out — took in the Cogitant on the bench and asked how long she'd been like this.",
+          "note": "Received Ossian's assessment from Saehara without hesitation — moved immediately to food and water for the Cogitant, then asked for the full situation",
           "learned": [
-            "Lenten is observant and quick to assess — registered the Cogitant's condition in seconds",
-            "Voice goes even when deciding quickly"
+            "The fallen Cogitant had two to three days when Saehara left the Cogitarium this morning",
+            "Saehara carried her eleven kilometers on foot",
+            "The Cogitarium sent only one person"
           ],
           "skillsObserved": [
-            "rapid situational assessment"
+            "rapid triage assessment",
+            "decisive action under uncertainty"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Present in the long shed at Waymarker, waiting for Saehara's answer about the Cogitant's condition."
+          "statusNote": "Present in the long shed at Waymarker — has just given the Cogitant food and water, now waiting for Saehara's full account"
+        },
+        {
+          "op": "update",
+          "npcId": "fallen-cogitant",
+          "name": "Fallen Cogitant",
+          "note": "Swallowing water and bread on reflex — Lenten is administering basic sustenance; condition holding",
+          "learned": [
+            "Receiving water and bread from Lenten"
+          ],
+          "status": "injured",
+          "statusNote": "On workbench in Lenten's shed — receiving food and water; two-day window is still running from the Cogitarium departure this morning"
+        }
+      ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "cogitarium-supply-line",
+          "note": "Cogitant delivered to Waymarker and receiving care. Lenten is present and engaged — now asking for the full situation before any formal arrangement can be discussed."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief exchange — calling out, Lenten surfacing, first question asked"
+        "why": "A short exchange — delivering the facts and watching Lenten respond"
       }
     },
     "sceneState": {
-      "setting": "Interior of Lenten's long shed at the far edge of Waymarker's central work-yard — wide doors open to afternoon light, smells of fresh wood, sawdust, and linseed oil. Lenten stands deeper in the shed, half-planed board set aside, leather apron, eyes on the Cogitant.",
+      "setting": "Interior of Lenten's long shed at the far edge of Waymarker's central work-yard — wide doors open to afternoon light, smells of fresh wood, sawdust, and linseed oil. The fallen Cogitant is on the nearest workbench receiving water and bread from Lenten.",
       "npcsPresent": [
         {
           "name": "Fallen Cogitant",
-          "state": "Settled on the nearest workbench — robes pooled, chalk hands in lap, lips still moving in silent count, breathing small "
+          "state": "Settled on the nearest workbench — robes pooled, chalk hands in lap, lips still moving; swallowing water and bread that "
         },
         {
           "name": "Lenten",
-          "state": "Standing in the dimmer part of the shed, apron on, board set down — measuring Saehara and the Cogitant with quick, pract"
+          "state": "Standing at the bench, having just given food and water to the Cogitant — looking at Saehara squarely, waiting for the r"
         },
         {
           "name": "Kon",
-          "state": "Moving in slow arcs deeper in the shed, nose low, reading the space."
+          "state": "Still near the far timber stack, watching Lenten — not moving, not settled; making up its mind"
         }
       ],
       "objects": [
@@ -343,16 +371,17 @@
         "Half-planed board on Lenten's bench",
         "Stacked timber along one wall",
         "Tools on pegs — planes, chisels, draw-knives",
+        "Tin cup with water — now at the Cogitant's lips",
+        "Clay pot and torn bread heel — on the bench beside the Cogitant",
         "Katana at Saehara's waist",
         "Traveler's Pack",
-        "Waterskin — secured, accessible",
-        "Fallen Cogitant — settled on the nearest bench"
+        "Waterskin — secured, accessible"
       ],
       "threads": [
-        "Lenten is waiting for an answer — how long has the Cogitant been like this?",
-        "Fallen Cogitant needs food and water within two days",
+        "Lenten is asking for the full picture — waiting",
+        "Fallen Cogitant is being fed and watered — two-day window still running",
         "Brenn the runner: stopped coming nineteen days ago — reason unknown",
-        "Supply line to the Cogitarium needs reopening",
+        "Supply line to the Cogitarium needs formal reopening",
         "Third terrace: Cogitant unseen four days — left behind, unresolved"
       ]
     }
@@ -386,7 +415,8 @@
         "Saehara has left the Cogitarium and is en route to Waymarker — the fallen Cogitant on his back, three hours of path ahead.",
         "Junction cairn passed — Waymarker now visible by its smoke, thirty minutes ahead. Lenten and Brenn are the names to use.",
         "Arrived at Waymarker — directed to Lenten's long shed at the yard's far edge. Lenten not yet found.",
-        "Cogitant safely off Saehara's back and on a workbench. Lenten not yet found — somewhere deeper in the shed."
+        "Cogitant safely off Saehara's back and on a workbench. Lenten not yet found — somewhere deeper in the shed.",
+        "Cogitant delivered to Waymarker and receiving care. Lenten is present and engaged — now asking for the full situation before any formal arrangement can be discussed."
       ],
       "aliases": [],
       "startedAt": "2026-07-16T03:39:50.282Z"
@@ -495,7 +525,6 @@
       },
       "relationship": 0,
       "history": [
-        "[d1] Received water — swallowed twice on reflex, throat still working, lips still moving; body taking the minimum",
         "[d1] Has been given water — swallowed twice on reflex. Pack search yielded no food; she needs more than water.",
         "[d1] Unattended now — waterskin on her chest, lips still moving. Saehara has risen and stands at the stair.",
         "[d1] Unattended. Waterskin on her chest. Lips still moving. No food. No one watching her.",
@@ -504,21 +533,22 @@
         "[d1] Weight has settled into Saehara's back — manageable but taxing; lips still moving against his jaw in silent count",
         "[d1] Carried northeast along the dry-stone wall — grip firm on Saehara's collar, lips still moving, breathing has shallowed slightly",
         "[d1] Carried across the yard into the long shed — lips still moving, weight still on Saehara's back",
-        "[d1] Lowered from Saehara's back onto the nearest workbench — settled with chalk hands in lap, lips still moving, breathing steady"
+        "[d1] Lowered from Saehara's back onto the nearest workbench — settled with chalk hands in lap, lips still moving, breathing steady",
+        "[d1] Swallowing water and bread on reflex — Lenten is administering basic sustenance; condition holding"
       ],
       "knownFacts": [
-        "Chalk ground into both hands — she was working before she fell",
         "Pulse slow but present — approximately forty beats per minute",
         "Lips dry — severely dehydrated",
         "Chalk ground into fingertips — was working at the wall before she fell",
         "Swallowed water on animal reflex — body still functioning at minimum",
         "Approximately fifty-one kilograms",
         "Thermoregulation compromised — cold air accelerates decline unless she is carried and kept warm",
-        "Ossian's verdict: transport to Waymarker is favorable"
+        "Ossian's verdict: transport to Waymarker is favorable",
+        "Receiving water and bread from Lenten"
       ],
       "skillsObserved": [],
       "status": "injured",
-      "statusNote": "On a workbench inside Lenten's shed at Waymarker — breathing shallowed, severely dehydrated, needs food within two days",
+      "statusNote": "On workbench in Lenten's shed — receiving food and water; two-day window is still running from the Cogitarium departure this morning",
       "lastSeen": {
         "locationId": "the_cogitarium",
         "day": 1
@@ -535,17 +565,23 @@
       },
       "relationship": 0,
       "history": [
-        "[d1] Surfaced from the shed when Saehara called out — took in the Cogitant on the bench and asked how long she'd been like this."
+        "[d1] Surfaced from the shed when Saehara called out — took in the Cogitant on the bench and asked how long she'd been like this.",
+        "[d1] Received Ossian's assessment from Saehara without hesitation — moved immediately to food and water for the Cogitant, then asked for the full situation"
       ],
       "knownFacts": [
         "Lenten is observant and quick to assess — registered the Cogitant's condition in seconds",
-        "Voice goes even when deciding quickly"
+        "Voice goes even when deciding quickly",
+        "The fallen Cogitant had two to three days when Saehara left the Cogitarium this morning",
+        "Saehara carried her eleven kilometers on foot",
+        "The Cogitarium sent only one person"
       ],
       "skillsObserved": [
-        "rapid situational assessment"
+        "rapid situational assessment",
+        "rapid triage assessment",
+        "decisive action under uncertainty"
       ],
       "status": "active",
-      "statusNote": "Present in the long shed at Waymarker, waiting for Saehara's answer about the Cogitant's condition.",
+      "statusNote": "Present in the long shed at Waymarker — has just given the Cogitant food and water, now waiting for Saehara's full account",
       "lastSeen": {
         "locationId": "the_cogitarium",
         "day": 1
@@ -906,19 +942,19 @@
     }
   },
   "tendencies": {
-    "strategic": 19.959694897167044,
-    "social": 7.4231080303397885,
-    "cerebral": 8.329383561413959,
-    "generous": 9.441603826551628,
-    "cautious": 10.355128120759309,
-    "risky": 0.9275689688183278
+    "strategic": 19.85989642268121,
+    "social": 7.385992490188089,
+    "cerebral": 8.28773664360689,
+    "generous": 9.394395807418869,
+    "cautious": 10.303352480155512,
+    "risky": 0.9229311239742362
   },
   "aptitudes": [
     "strategist",
     "scholar",
     "good_samaritan"
   ],
-  "actionCount": 29,
+  "actionCount": 30,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -939,8 +975,8 @@
       "at": "2026-07-16T02:18:04.820Z"
     }
   ],
-  "updatedAt": 1784174517914,
-  "rev": 57,
+  "updatedAt": 1784174566603,
+  "rev": 58,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -988,8 +1024,8 @@
           "entityId": "lenten",
           "type": "npc",
           "birthWeight": 1,
-          "engagementScore": 2,
-          "tier": "fresh",
+          "engagementScore": 4,
+          "tier": "established",
           "rating": "R+",
           "provenance": {
             "playerKey": "player-7bxzzd",
@@ -1001,6 +1037,10 @@
             "why": "Saehara has arrived at Lenten's shed and is about to make contact — Lenten needs a stable, persistent identity"
           },
           "attentionHistory": [
+            {
+              "kind": "interact",
+              "day": 1
+            },
             {
               "kind": "interact",
               "day": 1
@@ -1019,7 +1059,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "somatic_reaches": 29
+    "somatic_reaches": 30
   },
   "opLossPending": false,
   "establishedFacts": [

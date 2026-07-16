@@ -1,0 +1,409 @@
+{
+  "schemaVersion": 1,
+  "id": "char-mrmvjtwp",
+  "playerKey": "player-7fah99",
+  "name": "Aelyn Kantoro",
+  "origin": "rootkin",
+  "nativeTradition": "rootkin",
+  "whyHere": "You were sent, or you were seeded, or you simply wanted to see something finish inside a single lifetime.",
+  "background": "warden",
+  "level": 1,
+  "xp": 0,
+  "attributes": {
+    "physical": 3,
+    "mental": 3,
+    "social": 3,
+    "practical": 3
+  },
+  "skills": {},
+  "abilities": [
+    {
+      "abilityId": "lifesense",
+      "level": 1
+    },
+    {
+      "abilityId": "prism_sight",
+      "level": 1
+    }
+  ],
+  "alignment": {},
+  "attunement": 1,
+  "maxHealth": 30,
+  "health": 30,
+  "maxEnergy": 100,
+  "energy": 100,
+  "inventory": [
+    {
+      "id": "travelers_pack",
+      "name": "Traveler's Pack",
+      "kind": "tool",
+      "qty": 1,
+      "description": "A worn canvas pack with good straps — bedroll, flint, mess kit, fifty small comforts of the road.",
+      "bonusTags": [
+        "retreat",
+        "careful"
+      ],
+      "consumable": false
+    },
+    {
+      "id": "waterskin",
+      "name": "Waterskin",
+      "kind": "consumable",
+      "qty": 1,
+      "description": "Boiled and refilled at the last clean spring. Worth more every week the river runs gray.",
+      "effects": {
+        "energy": 10
+      },
+      "consumable": true
+    }
+  ],
+  "deeds": [],
+  "relationships": {},
+  "chronicle": [],
+  "currentLocationId": "the_heartroot",
+  "activeScene": {
+    "locationId": "the_heartroot",
+    "turns": [
+      {
+        "player": null,
+        "summary": "Aelyn arrives at the Heartroot at dawn — a stranger in the grown city, Branch wide with recognition, the river's wrongness still in her gut.",
+        "narration": "The Heartroot receives you the way old things receive all things — without urgency. You came through the outer gate an hour before sunrise, following a root-road that the city had grown into the forest floor over what must have been centuries, and now you stand in a hall that is also, unmistakably, a tree. The ceiling arches thirty feet above in living wood, breathing visibly in the early light — a slow expansion and contraction you first thought was your own tired eyes, until you touched the bark and felt it under your palm. The floor is soft with moss that has been here longer than most nations. Morning light comes in through gaps the wood has grown specifically to admit it: oval, warm, purposeful.\n\nBranch stands beside your left knee, roots finding purchase in the moss with the soft sound of paper tearing. It has been doing that the whole walk here — a quiet, recurring grip-and-release, as if the road itself needed reassurance. Now, in this hall, it stills completely. The buds at its shoulders open, one by one, four small pale petals each. That is how you have come to read it: stillness and open buds mean something close to wonder.\n\n\"Root,\" it says, at last. One word, offered carefully, the way it offers all new words. It means: I recognize this. I am home in a way I did not know I missed.\n\nYou are not home. You came from somewhere much quieter — your mother's forest, the hidden refuge where the trees are old and the air is clean and everything you ever knew is ending slowly, has been ending, is now over. She died ten days ago. You packed your Traveler's Pack, took your waterskin from the spring while it still ran clear, and walked out of the only world you had ever known. The outside found you before you found it: the Echo River where you forded it yesterday ran gray-green in the early light, wrong in a way that sat in your stomach all day. You had heard the patrol reports. Seeing it is different.\n\nThe hall is not empty. Three Rootkin move through it at the slow, deliberate pace of people who have nowhere to be in the next hour and would like it that way. One tends a sapling in a planter — the sapling is, you realize after a moment, looking back at you. Not the incurious animal gaze of a plant. The direct, assessing gaze of a child."
+      }
+    ],
+    "lastTurn": {
+      "narration": "The Heartroot receives you the way old things receive all things — without urgency. You came through the outer gate an hour before sunrise, following a root-road that the city had grown into the forest floor over what must have been centuries, and now you stand in a hall that is also, unmistakably, a tree. The ceiling arches thirty feet above in living wood, breathing visibly in the early light — a slow expansion and contraction you first thought was your own tired eyes, until you touched the bark and felt it under your palm. The floor is soft with moss that has been here longer than most nations. Morning light comes in through gaps the wood has grown specifically to admit it: oval, warm, purposeful.\n\nBranch stands beside your left knee, roots finding purchase in the moss with the soft sound of paper tearing. It has been doing that the whole walk here — a quiet, recurring grip-and-release, as if the road itself needed reassurance. Now, in this hall, it stills completely. The buds at its shoulders open, one by one, four small pale petals each. That is how you have come to read it: stillness and open buds mean something close to wonder.\n\n\"Root,\" it says, at last. One word, offered carefully, the way it offers all new words. It means: I recognize this. I am home in a way I did not know I missed.\n\nYou are not home. You came from somewhere much quieter — your mother's forest, the hidden refuge where the trees are old and the air is clean and everything you ever knew is ending slowly, has been ending, is now over. She died ten days ago. You packed your Traveler's Pack, took your waterskin from the spring while it still ran clear, and walked out of the only world you had ever known. The outside found you before you found it: the Echo River where you forded it yesterday ran gray-green in the early light, wrong in a way that sat in your stomach all day. You had heard the patrol reports. Seeing it is different.\n\nThe hall is not empty. Three Rootkin move through it at the slow, deliberate pace of people who have nowhere to be in the next hour and would like it that way. One tends a sapling in a planter — the sapling is, you realize after a moment, looking back at you. Not the incurious animal gaze of a plant. The direct, assessing gaze of a child.",
+      "sceneSummary": "Aelyn arrives at the Heartroot at dawn — a stranger in the grown city, Branch wide with recognition, the river's wrongness still in her gut.",
+      "choices": [
+        {
+          "label": "Approach the Rootkin tending the sapling — introduce yourself and ask where a newcomer would sleep and eat.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "help",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Open your senses with Lifesense — take the quiet moment to feel the hall and whatever living things move through its walls before anyone notices you doing it.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "lifesense",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Crouch to Branch's level and ask it, quietly, what it feels here — let it lead you somewhere that matters to it.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "careful",
+            "help"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Find the edge of the hall and look out toward the city's interior — you want to see what a place that has been growing for four hundred years actually looks like in the morning light before you meet anyone.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "scene": {
+        "setting": "Interior of a living-wood hall near the Heartroot's entrance gate — thirty-foot arched ceiling of breathing bark, moss underfoot, oval light-gaps admitting early spring dawn. Outdoors visible through the wide open far end of the hall.",
+        "npcsPresent": [
+          {
+            "name": "Rootkin tender (unnamed)",
+            "state": "Moving slowly around a large planter, adjusting the sapling within it — the sapling is watching Aelyn."
+          },
+          {
+            "name": "Two other Rootkin (unnamed)",
+            "state": "Moving through the hall at the far end, unhurried, not yet noticing the newcomer."
+          },
+          {
+            "name": "Sapling (unnamed — child?)",
+            "state": "Upright in the planter, looking directly at Aelyn with full attention."
+          }
+        ],
+        "objects": [
+          "Large root-planter holding a small sapling",
+          "Traveler's Pack (worn canvas, Aelyn's)",
+          "Waterskin (Aelyn's)",
+          "Patches of soft old moss across the floor",
+          "Oval light-gaps in the bark ceiling, admitting dawn"
+        ],
+        "threads": [
+          "The sapling child is watching Aelyn with direct attention — it noticed her the moment she entered.",
+          "Branch has gone still and open-budded — its first homecoming reaction is unresolved.",
+          "Aelyn is a stranger here with no local reputation and no established contact."
+        ]
+      },
+      "npcUpdates": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Aelyn's mother has died. Aelyn left the hidden refuge and entered the wider valley for the first time.",
+          "subjectId": null
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "heartroot",
+          "label": "The Heartroot",
+          "kind": "place",
+          "entityId": "heartroot",
+          "fact": "A city grown over four centuries by the Rootkin — living wood halls, breathing ceilings, floors of old moss. The Rootkin who planted it are still alive and consider it unfinished.",
+          "links": [
+            "branch"
+          ]
+        },
+        {
+          "topic": "echo-river-discoloration",
+          "label": "The Echo River — Gray-Green",
+          "kind": "mystery",
+          "fact": "The Echo River runs gray-green on bad mornings. Fish catches are down. Aelyn saw it herself when she forded it yesterday.",
+          "links": [
+            "heartroot"
+          ]
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0,
+        "why": "Scene opens at early morning — no time has passed yet."
+      },
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "Interior of a living-wood hall near the Heartroot's entrance gate — thirty-foot arched ceiling of breathing bark, moss underfoot, oval light-gaps admitting early spring dawn. Outdoors visible through the wide open far end of the hall.",
+      "npcsPresent": [
+        {
+          "name": "Rootkin tender (unnamed)",
+          "state": "Moving slowly around a large planter, adjusting the sapling within it — the sapling is watching Aelyn."
+        },
+        {
+          "name": "Two other Rootkin (unnamed)",
+          "state": "Moving through the hall at the far end, unhurried, not yet noticing the newcomer."
+        },
+        {
+          "name": "Sapling (unnamed — child?)",
+          "state": "Upright in the planter, looking directly at Aelyn with full attention."
+        }
+      ],
+      "objects": [
+        "Large root-planter holding a small sapling",
+        "Traveler's Pack (worn canvas, Aelyn's)",
+        "Waterskin (Aelyn's)",
+        "Patches of soft old moss across the floor",
+        "Oval light-gaps in the bark ceiling, admitting dawn"
+      ],
+      "threads": [
+        "The sapling child is watching Aelyn with direct attention — it noticed her the moment she entered.",
+        "Branch has gone still and open-budded — its first homecoming reaction is unresolved.",
+        "Aelyn is a stranger here with no local reputation and no established contact."
+      ]
+    }
+  },
+  "clock": {
+    "schemaVersion": 1,
+    "day": 1,
+    "hour": 8,
+    "realAnchor": null
+  },
+  "companions": [
+    "sprig"
+  ],
+  "companionNames": {
+    "sprig": "Branch"
+  },
+  "quests": [],
+  "npcRegistry": {},
+  "placeMemory": {
+    "the_heartroot": {
+      "visits": 1,
+      "notes": [],
+      "flags": {}
+    }
+  },
+  "worldState": {
+    "schemaVersion": 1,
+    "lastTickDay": 1,
+    "eventStages": {
+      "water_crisis": {
+        "stage": 1,
+        "sinceDay": 1
+      }
+    },
+    "spectrumDrift": {},
+    "news": [
+      {
+        "day": 1,
+        "worldDay": 16,
+        "text": "The Water Crisis stands at Discoloration across the valley: The Echo River runs gray-green on bad mornings. Fish catches are down. Communities murmur but cooperate."
+      },
+      {
+        "day": 1,
+        "worldDay": 11,
+        "text": "This reaches your area — The lower filtration ledger — containing three weeks of falsified purity readings under Fendt's initials — has been removed from the array-office in the Edge District. (near radiant plateau edge)",
+        "impactsLocal": true
+      },
+      {
+        "day": 1,
+        "worldDay": 12,
+        "text": "Word reaches you: A dead animal was brought back to life in Millbrook's upper meadow — no known ability in the valley's three civilizations accounts for it cleanly (near millbrook)"
+      },
+      {
+        "day": 1,
+        "worldDay": 13,
+        "text": "Word reaches you: A death-binding ceremony was completed at Pell's forge in Millbrook — runes pressed into wood and iron with a maker's mark seated into the blade. The spear holds a nascent thread to Huginn and an open (near millbrook)"
+      },
+      {
+        "day": 1,
+        "worldDay": 13,
+        "text": "Word reaches you: Sow killed cleanly in the north wood — boar sounder now reduced; piglets scattered north into deeper scrub (near millbrook)"
+      },
+      {
+        "day": 1,
+        "worldDay": 13,
+        "text": "Word reaches you: Bull boar taken on the scrub oak ridge north of Millbrook — the hunt party completed the job, both animals down. (near millbrook)"
+      }
+    ],
+    "unseenNews": [],
+    "lastSharedReadAt": "2026-07-16T02:13:02.942Z",
+    "lastTickWorldDay": 16,
+    "lastCanonWorldDay": 16
+  },
+  "domains": {
+    "primary": "rootkin",
+    "secondary": "seraphic",
+    "tertiary": "verist"
+  },
+  "form": "A young woman in her mid-twenties with light blonde, faintly wavy hair cut in curtain bangs, the rest falling to the small of her back — usually worn in a french braid with the bangs left loose. Dark nature-green tank top, brown heavy-material fitted trousers, and natural leather armor pieces worn light for speed. A recurve bow across her back, a dagger at her hip. Something in her eyes is very still and very watchful, like a forest that knows it is being observed.",
+  "bio": {
+    "hometown": "She lives in a secret safe haven in a pure nature forest, untouched by nanites. Her mother is an extremely powerful pure nature magic woman, and her father is a pure nanite that urged them to hide, and when nature no longer touched him, he fully succumbed to the nanites and is now an all powerful nanite, not remembering his love, nor his child (Aelyn)",
+    "residence": "In the hidden forest with her dying mother, and other pure nature people",
+    "livelihood": "They don't have a financial system",
+    "hobbies": "patrol, practice archery, make fairy houses, talk to Branch, climb through the trees, write in her journal",
+    "motivation": "Her mother dies, and she decides to go to the nanite world, to figure out why she is different than the pure nature people.",
+    "story": "Aelyn is a young woman in her mid twenties, born of both the worlds of pure nature (her mother) and of the world of pure nanites (her father). she has light blonde, ever so slightly wavy hair, with curtain bangs and the rest of the hair falling to the small of her back. she often wears it in a french braid with her bangs left out. she lives in a secluded, pure nature, hidden refuge in a lush beautiful forest, hidden from the nanites to protect the nature's natural magic. her mother has told her that her father died due to nanite corruption, when in reality he is still alive as an angelic nanite, that has become corrupted by the fabricated power of technology. They loved each other so much, and her father was actually the one who told the pure nature people to hide themselves from the nanites, so their magic wouldn't die. But after they left and he was no longer touched by the magic of nature, the nanites fully corrupted him because it was evolving too much, too fast. Her mother grieved him, in a way even though he didn't die, which greatly hindered her powers, locking them away in a way. \n\nAelyn is an expert archer. She is also handy with a dagger and other bladed weapons when necessary. She wears a base outfit of a dark, nature green tank top and tighter, brown slightly thicker material jeans. She has natural crafted leather armor pieces that allow for basic protection but to keep agility to use her bow. She is extremely agile, able to maneuver through trees and all nature foliage with ease and expertise. She has some outside knowledge of the nanite world, keeping up with this small protected civilization's patrol reports. \n\nHer heritage being of both innate worlds is hidden because she has never left pure nature, so her nanite aspects have been what would be considered dormant. Both her mother and her father are extremely powerful in their respective worlds.  \n\nAelyn is a grounded, smart woman who is extremely empathetic, but guarded. She isn't scared of the outside world, but rather intimidated by how it consumes the natural world. She craves balance, but also stands by her morals and what's right. Her mother is dying, and she feels lost, unsure of what to do without her. She possesses both great natural, nature magic, and also a hidden, vast nanite power. she has yet to discover both."
+  },
+  "subAttributes": {
+    "strength": 3,
+    "agility": 3,
+    "reason": 3,
+    "insight": 3,
+    "presence": 3,
+    "rapport": 3,
+    "craft": 3,
+    "wits": 3
+  },
+  "pendingSubPoints": 2,
+  "skillPoints": 0,
+  "discoveries": [],
+  "codex": {
+    "schemaVersion": 1,
+    "topics": {
+      "heartroot": {
+        "id": "heartroot",
+        "label": "The Heartroot",
+        "kind": "place",
+        "facts": [
+          "[d1] A city grown over four centuries by the Rootkin — living wood halls, breathing ceilings, floors of old moss. The Rootkin who planted it are still alive and consider it unfinished."
+        ],
+        "links": [
+          "branch"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "heartroot",
+        "updatedDay": 1
+      },
+      "echo-river-discoloration": {
+        "id": "echo-river-discoloration",
+        "label": "The Echo River — Gray-Green",
+        "kind": "mystery",
+        "facts": [
+          "[d1] The Echo River runs gray-green on bad mornings. Fish catches are down. Aelyn saw it herself when she forded it yesterday."
+        ],
+        "links": [
+          "heartroot"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
+      }
+    }
+  },
+  "tendencies": {},
+  "aptitudes": [],
+  "actionCount": 0,
+  "grantsVersion": 1,
+  "reconcileVersion": 5,
+  "gallery": [
+    {
+      "kind": "portrait",
+      "prompt": "Aelyn Kantoro",
+      "url": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20mid-twenties%20with%20light%20blonde%2C%20faintly%20wavy%20hair%20cut%20in%20curtain%20bangs%2C%20the%20rest%20falling%20to%20the%20small%20of%20her%20back%20%E2%80%94%20usually%20worn%20in%20a%20french%20braid%20with%20the%20bangs%20left%20loose.%20Dark%20nature-green%20tank%20to%2C%20full-body%20character%20portrait%2C%20named%20Aelyn%20Kantoro%2C%20of%20the%20rootkin%2C%20warden%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Her%20mother%20dies%2C%20and%20she%20decides%20to%20go%20to%20the%20nanite%20world%2C%20to%20figure%20out%20why%20she%20is%20different%20than%20the%20pure%20nature%20peop%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=5064&nologo=true",
+      "caption": "Aelyn Kantoro — rootkin",
+      "worldDay": 16,
+      "at": "2026-07-16T02:13:02.378Z"
+    }
+  ],
+  "portrait": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20mid-twenties%20with%20light%20blonde%2C%20faintly%20wavy%20hair%20cut%20in%20curtain%20bangs%2C%20the%20rest%20falling%20to%20the%20small%20of%20her%20back%20%E2%80%94%20usually%20worn%20in%20a%20french%20braid%20with%20the%20bangs%20left%20loose.%20Dark%20nature-green%20tank%20to%2C%20full-body%20character%20portrait%2C%20named%20Aelyn%20Kantoro%2C%20of%20the%20rootkin%2C%20warden%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Her%20mother%20dies%2C%20and%20she%20decides%20to%20go%20to%20the%20nanite%20world%2C%20to%20figure%20out%20why%20she%20is%20different%20than%20the%20pure%20nature%20peop%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=5064&nologo=true",
+  "updatedAt": 1784168024984,
+  "rev": 3,
+  "generated": {
+    "schemaVersion": 1,
+    "npc": {},
+    "location": {},
+    "arc": {}
+  },
+  "regionsKnown": {
+    "the_quickwood": 1
+  },
+  "opLossPending": false,
+  "establishedFacts": [
+    {
+      "id": "f1",
+      "text": "Aelyn's mother has died. Aelyn left the hidden refuge and entered the wider valley for the first time.",
+      "day": 1,
+      "subjectId": null
+    }
+  ]
+}

@@ -4,6 +4,7 @@
 
 import { callClaude, callClaudeJSON, parseLooseJSON } from "./claude.js";
 import { reputationSummary } from "./reputation.js";
+import { recoveryEnergy } from "./progression.js";
 
 const GM_SYSTEM = `You are the Game Master for SINGULARITY, a narrative RPG set in the Valley of Echoes — a post-de-technologizing world of nanite-mediated power systems, fifteen years after humanity chose to step back from its own technology.
 
@@ -152,7 +153,10 @@ export function tierParts(ctx) {
   // ---- TIER 1: rules/constitution (constant; GM_SYSTEM is prepended in gmTurn) ----
   if (rules?.recovery) {
     const rec = rules.recovery;
-    system.push(`## RECOVERY GUIDE (rule 8 — when the character eats, drinks, or rests in-scene, grant EXACTLY these through characterDeltas energy/health + timeAdvanceHours; never more; meals require food to actually exist in inventory or scene)\nmeal +${rec.meal} energy · hearty meal +${rec.heartyMeal} · drink +${rec.drink} · breather (1h off their feet) +${rec.breather.energy} energy +${rec.breather.health} health · full sleep (${rec.sleep.hours}h) +${rec.sleep.energy} energy +${rec.sleep.health} health · meditation: ENGINE-APPLIED (never grant energy for it yourself — the resolution block will show what it restored; just narrate the centering)`);
+    // SNG-105: the guide shows THIS character's scaled restore (energy grows with maxEnergy) — the SNG-103
+    // effective-number principle, so the GM grants the real amount for a big pool, never the flat base.
+    const rv = k => recoveryEnergy(k, character, rules);
+    system.push(`## RECOVERY GUIDE (rule 8 — when the character eats, drinks, or rests in-scene, grant EXACTLY these through characterDeltas energy/health + timeAdvanceHours; never more; meals require food to actually exist in inventory or scene)\nmeal +${rv("meal")} energy · hearty meal +${rv("heartyMeal")} · drink +${rv("drink")} · breather (1h off their feet) +${rv("breather")} energy +${rec.breather.health} health · full sleep (${rec.sleep.hours}h) +${rv("sleep")} energy +${rec.sleep.health} health · meditation: ENGINE-APPLIED (never grant energy for it yourself — the resolution block will show what it restored; just narrate the centering)`);
   }
   // SNG-BATCH-9 §3 consumer (a): narrate to THIS player's content ceiling — no more intense,
   // and no less where the grain calls for it. The two floors are absolute regardless.

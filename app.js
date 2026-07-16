@@ -25,7 +25,7 @@ import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicate
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
 import { initWorldState, runWorldTick, syncSharedWorld, advanceGeneratedOffscreen, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
-import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility, autoAdvancePracticedRanks, markDefiningMoment, promotionEligible, promote, acquirable, acquireDomain } from "./engine/progression.js";
+import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility, autoAdvancePracticedRanks, markDefiningMoment, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy } from "./engine/progression.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, mergeInto, mergeCodexTopics, suggestMerges, markNotSame } from "./engine/codex.js";
 import { reconcile, topReconcileVersion } from "./engine/reconcile.js";
 import { ensurePractice, recordUse, declareAspiration, dropAspiration, recordAspirationProgress, aspirationRipe, practiceRankReady, ripeCombos, ripeBranches, emergenceNoticeForGM, acceptCombo, acceptBranch, validEmergenceId } from "./engine/practice.js";
@@ -41,7 +41,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.67";
+const APP_VERSION = "1.8.68";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3041,12 +3041,14 @@ async function rest(kind = "sleep") {
   if (busy) return;
   const rec = CONTENT.rules.recovery || {};
   const r = kind === "breather" ? (rec.breather || { energy: 10, health: 1, hours: 1 }) : (rec.sleep || { energy: 40, health: 3, hours: 8 });
-  character.energy = Math.min(character.maxEnergy, character.energy + r.energy);
+  // SNG-105: energy restore scales with the pool (a night is always ~a third of maxEnergy); health/hours flat.
+  const gainE = recoveryEnergy(kind, character, CONTENT.rules);
+  character.energy = Math.min(character.maxEnergy, character.energy + gainE);
   character.health = Math.min(character.maxHealth, character.health + r.health);
   if (kind === "breather") {
     advanceClock(character.clock, r.hours);
     saveCharacter(character);
-    renderPlay(character.activeScene?.lastTurn || null, { aside: `You take an hour off your feet. (+${r.energy} energy, +${r.health} health)` });
+    renderPlay(character.activeScene?.lastTurn || null, { aside: `You take an hour off your feet. (+${gainE} energy, +${r.health} health)` });
     return;
   }
   sceneTurns = [];
@@ -4905,8 +4907,8 @@ function renderPlay(turn, opts = {}) {
     <section><h3>Play-style</h3><div class="insight">${esc(profileInsight(character, rules.playerAptitudes))}</div></section>
     <section><h3>Map & Rest</h3>
       <button class="opt map-open" id="open-map" style="margin:2px 0 6px; display:block; width:100%">🗺 Open Map — travel & places</button>
-      <button class="opt" id="do-breather" style="margin-top:8px; display:block; width:100%">Breather (+${rules.recovery?.breather?.energy ?? 10} energy, 1h)</button>
-      <button class="opt" id="do-rest" style="margin-top:4px; display:block; width:100%">Sleep (+${rules.recovery?.sleep?.energy ?? 40} energy, ${rules.recovery?.sleep?.hours ?? 8}h)</button>
+      <button class="opt" id="do-breather" style="margin-top:8px; display:block; width:100%">Breather (+${recoveryEnergy("breather", character, rules)} energy, 1h)</button>
+      <button class="opt" id="do-rest" style="margin-top:4px; display:block; width:100%">Sleep (+${recoveryEnergy("sleep", character, rules)} energy, ${rules.recovery?.sleep?.hours ?? 8}h)</button>
     </section>
     <section><h3>Codex &amp; Library</h3>
       <button class="opt" id="open-codex" style="display:block; width:100%">${Object.keys(character.codex?.topics || {}).length} topic${Object.keys(character.codex?.topics || {}).length === 1 ? "" : "s"} discovered — open Codex</button>

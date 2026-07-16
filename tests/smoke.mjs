@@ -16,7 +16,7 @@ import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicate
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
 import { initWorldState, runWorldTick, advanceGeneratedOffscreen, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "../engine/worldtick.js";
 import { assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "../engine/gambit.js";
-import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, autoAdvancePracticedRanks, markDefiningMoment, meetsStandingBar, promotionEligible, promote, acquirable, acquireDomain } from "../engine/progression.js";
+import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, autoAdvancePracticedRanks, markDefiningMoment, meetsStandingBar, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy } from "../engine/progression.js";
 import { standingWithPeople } from "../engine/reputation.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, resolveTopic, namesMatch, mergeCodexTopics, mergeInto, suggestMerges, markNotSame } from "../engine/codex.js";
 import { reconcile, reconcileContent, CHARACTER_STEPS, CONTENT_STEPS, topReconcileVersion } from "../engine/reconcile.js";
@@ -341,6 +341,15 @@ check("ability law carries rank grants and limits", law.includes("Standing Wave"
   const fresh = { abilities: [{ abilityId: "palework", level: 1 }], attributes: {}, level: 1, discoveries: [] };
   const gmFresh = abilitiesForGM(fresh, { palework: ab }, null, eRules);
   check("SNG-103: an undiscounted ability still reads base (no phantom discount line)", /Palework.*6 energy\)/s.test(gmFresh) && !/discounted/.test(gmFresh));
+}
+
+// --- SNG-105: energy recovery scales with the pool (a night is ~a constant fraction), floor unchanged ---
+{
+  const rr = { recovery: { sleep: { energy: 40, health: 3, hours: 8 }, breather: { energy: 10, health: 1, hours: 1 }, meal: 10 }, recoveryFractions: { sleep: 0.32, breather: 0.08, meal: 0.08 } };
+  check("SNG-105: at a small pool the flat floor binds — low levels unchanged", recoveryEnergy("sleep", { maxEnergy: 100 }, rr) === 40);
+  check("SNG-105: at a big pool the fraction beats the floor — recovery scales up", recoveryEnergy("sleep", { maxEnergy: 200 }, rr) === 64);
+  check("SNG-105: sleep is ~a constant fraction of the pool once above the floor", Math.abs(recoveryEnergy("sleep", { maxEnergy: 300 }, rr) / 300 - 0.32) < 0.01);
+  check("SNG-105: breather floors at 10, scales above (16 at max 200)", recoveryEnergy("breather", { maxEnergy: 100 }, rr) === 10 && recoveryEnergy("breather", { maxEnergy: 200 }, rr) === 16);
 }
 
 // --- novel use & discoveries ---

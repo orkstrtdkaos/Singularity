@@ -102,6 +102,17 @@ export function effectiveEnergyCost(abilityDef, character, rules) {
   return Math.max(floor, base - levelDiscount - rankDiscount);
 }
 
+/** SNG-105: energy a given recovery restores for THIS character — scaled with the pool so a night's
+ *  rest is always ~the same FRACTION of maxEnergy, not a flat amount that shrinks as the pool grows.
+ *  `max(flat base, round(fraction × maxEnergy))` — the flat base is a floor, so low levels never get
+ *  worse than today; scaling only ever adds. Fractions live in rules.recoveryFractions (tunable). */
+export function recoveryEnergy(kind, character, rules) {
+  const entry = rules?.recovery?.[kind];
+  const base = typeof entry === "number" ? entry : (entry?.energy || 0);
+  const frac = rules?.recoveryFractions?.[kind] ?? 0;
+  return Math.max(base, Math.round(frac * (character?.maxEnergy || 100)));
+}
+
 export function spendSubPoint(character, sub, rules) {
   const cap = rules.leveling?.subAttributeCap ?? 6;
   if (!SUBS.includes(sub) || (character.pendingSubPoints || 0) < 1) return false;

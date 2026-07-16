@@ -77,7 +77,7 @@
   "maxHealth": 70,
   "health": 70,
   "maxEnergy": 140,
-  "energy": 120,
+  "energy": 140,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -2044,16 +2044,31 @@
         "player": "Pour the last of the Resin Mountain Wine — share it quietly before the fire goes entirely cold.",
         "summary": "The last of the Resin Mountain Wine shared quietly — bottle empty, coals nearly out, morning unspoken.",
         "narration": "The wine is still on the flat stone where you left it, catching the last of the orange light in the dark glass. You reach for it without disturbing her — a slow extension of your arm while she stays settled against your chest — and your fingers close around the neck. The wax seal is already broken from before. You pour into the cup, two fingers' worth, and hold it so she can take it first.\n\nShe does, without looking. Her fingers find the cup by feel, and she drinks half, and passes it back the same way. The Resin Mountain Wine tastes the way it always does — dark and strange, the resin-note at the back of the throat, and something underneath that you still cannot name. It is better in the quiet.\n\nYou drink what remains and set the cup back on the flat stone. The bottle is empty. The fire has gone from orange to deep red at the center, the outer coals already grey and still. Huginn hasn't moved. The oilcloth holds most of the wind but not the pine-smell, which comes in at the edge and fills the space between you and the open valley side — cold and clean against the warmth of her back on your chest.\n\nThe descent to the Edge District begins in the morning. Neither of you says it."
+      },
+      {
+        "player": "Sleep — pull the bedroll over and let the night finish.",
+        "summary": "Silas and Pell sleep through the mountain night — morning breaks gray and cold at the overhang camp, the descent ahead.",
+        "narration": "You ease the bedroll out one-handed — the canvas stiff with cold but dry — and shake it open across both of you without breaking the hold. The oilcloth windbreak takes the last of the outside chill. Pell makes a small sound of acceptance and pulls the edge of the bedroll tighter without waking, or without admitting she was awake — with her, the difference is not always available.\n\nThe coals dim to a dull orange line at the center of the fire-ring and then to nothing particular. The pine smell off the valley below deepens as the temperature drops, clean and resinous, and somewhere down the slope a night bird calls once and is answered by nothing. Huginn shifts on the stone lip above — one adjustment of weight, claws clicking on rock — and settles again.\n\nYou sleep. Properly, which is a thing you have not done in some nights. The bedroll is narrow for two and the ground is stone under the pack you've folded for a pillow, and none of it matters. Pell's breathing sets the pace and your body follows it down.\n\nMorning comes in gray and cold, the sky above the pass a flat pale color that hasn't decided yet whether it will be clear. Huginn is already off the stone lip — perched on Memory's shaft where it leans against the overhang wall, watching the descent into the valley below with the particular attention the bird gives to things it already knows the shape of. The Edge District lies down that slope. You have contacts to find and an expert to persuade. The coals are long dead."
       }
     ],
     "lastTurn": {
-      "narration": "The wine is still on the flat stone where you left it, catching the last of the orange light in the dark glass. You reach for it without disturbing her — a slow extension of your arm while she stays settled against your chest — and your fingers close around the neck. The wax seal is already broken from before. You pour into the cup, two fingers' worth, and hold it so she can take it first.\n\nShe does, without looking. Her fingers find the cup by feel, and she drinks half, and passes it back the same way. The Resin Mountain Wine tastes the way it always does — dark and strange, the resin-note at the back of the throat, and something underneath that you still cannot name. It is better in the quiet.\n\nYou drink what remains and set the cup back on the flat stone. The bottle is empty. The fire has gone from orange to deep red at the center, the outer coals already grey and still. Huginn hasn't moved. The oilcloth holds most of the wind but not the pine-smell, which comes in at the edge and fills the space between you and the open valley side — cold and clean against the warmth of her back on your chest.\n\nThe descent to the Edge District begins in the morning. Neither of you says it.",
-      "sceneSummary": "The last of the Resin Mountain Wine shared quietly — bottle empty, coals nearly out, morning unspoken.",
+      "narration": "You ease the bedroll out one-handed — the canvas stiff with cold but dry — and shake it open across both of you without breaking the hold. The oilcloth windbreak takes the last of the outside chill. Pell makes a small sound of acceptance and pulls the edge of the bedroll tighter without waking, or without admitting she was awake — with her, the difference is not always available.\n\nThe coals dim to a dull orange line at the center of the fire-ring and then to nothing particular. The pine smell off the valley below deepens as the temperature drops, clean and resinous, and somewhere down the slope a night bird calls once and is answered by nothing. Huginn shifts on the stone lip above — one adjustment of weight, claws clicking on rock — and settles again.\n\nYou sleep. Properly, which is a thing you have not done in some nights. The bedroll is narrow for two and the ground is stone under the pack you've folded for a pillow, and none of it matters. Pell's breathing sets the pace and your body follows it down.\n\nMorning comes in gray and cold, the sky above the pass a flat pale color that hasn't decided yet whether it will be clear. Huginn is already off the stone lip — perched on Memory's shaft where it leans against the overhang wall, watching the descent into the valley below with the particular attention the bird gives to things it already knows the shape of. The Edge District lies down that slope. You have contacts to find and an expert to persuade. The coals are long dead.",
+      "sceneSummary": "Silas and Pell sleep through the mountain night — morning breaks gray and cold at the overhang camp, the descent ahead.",
       "choices": [
         {
-          "label": "Sleep — pull the bedroll over and let the night finish.",
-          "attribute": "physical",
-          "subAttribute": "endurance",
+          "label": "Wake Pell with a hand on her shoulder and get moving — Edge District before the morning is half gone.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "lead"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Eat before descending — open a Preserved Trail Parcel and split it here in the overhang before the cold gets worse.",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "difficulty": 0,
           "intentTags": [
             "sustain"
@@ -2061,69 +2076,66 @@
           "trivial": true
         },
         {
-          "label": "Say something small — not important, just your voice in the quiet before dark.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "comfort"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Check Huginn — ask what it sees on the night side of the far slope.",
+          "label": "Let her sleep another few minutes — check the descent with Huginn first, read what the bird sees on the far slope.",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "scout",
-            "study"
+            "scout"
           ],
-          "trivial": true
+          "trivial": true,
+          "abilityId": "deathsense"
         },
         {
-          "label": "Or do something else entirely.",
+          "label": "Study the Contact Names Scrap — settle who you go to first, Leth or Sorel's connection, and plan the approach before you're in the district.",
           "attribute": "mental",
-          "subAttribute": "wits",
+          "subAttribute": "reason",
           "difficulty": 0,
-          "intentTags": [],
+          "intentTags": [
+            "plan",
+            "careful"
+          ],
           "trivial": true
         }
       ],
       "characterDeltas": {
-        "inventoryRemove": [
-          "Resin Mountain Wine"
-        ]
+        "health": 3,
+        "energy": 45
+      },
+      "timeOps": {
+        "hoursPassed": 8,
+        "why": "full night's sleep at the overhang camp — coals dead, morning arrived"
       },
       "scene": {
-        "setting": "Far side of the mountain pass, late evening — south-facing rock overhang, coals now deep red fading to grey at the center, outer coals already still, pine-smell coming in at the oilcloth's edge from the open valley side.",
+        "setting": "Far side of the mountain pass, early morning — south-facing rock overhang, coals dead and cold, pale gray light coming in off the pass, pine-smell rising from the descent below.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Back against Silas's chest, hand resting on his forearm without gripping — breathing slow, the wine taken and returned without looking, fully settled."
+            "state": "Asleep or nearly so under the bedroll, one edge pulled tight — breathing slow, face turned toward the overhang wall."
           },
           {
             "name": "Huginn",
-            "state": "Motionless on the stone lip above — attending the night side of the pass."
+            "state": "Perched on Memory's shaft where it leans against the overhang wall — watching the descent below, fully alert."
           }
         ],
         "objects": [
-          "Memory (spear, leaned against the overhang wall)",
+          "Memory (spear, leaned against the overhang wall — Huginn perched on shaft)",
           "Empty Resin Mountain Wine bottle (on the flat stone)",
           "Cup (on the flat stone, empty)",
           "Pell's shirt (on the stone)",
           "Silas's shirt (on the stone beside Pell's)",
-          "Oilcloth Fold (propped as windbreak, not quite reaching the edge)",
+          "Oilcloth Fold (propped as windbreak)",
+          "Bedroll (open across both of them)",
           "Valve Failure Timeline note — 'S-gate confirmed' annotated (in pocket)",
           "Contact Names Scrap (Sorel, Leth) (in pocket)",
           "River Purification Tabs vial (in inner pack pocket)",
-          "Fire-ring of flat stones — coals deep red at center, outer coals grey and still"
+          "Fire-ring of flat stones — coals dead and cold"
         ],
         "threads": [
-          "The descent to the Edge District begins in the morning — Leth and Sorel as first contacts.",
+          "The descent to the Edge District begins this morning — Leth and Sorel as first contacts.",
           "The buried vault head: six-week window, expert needed before week five.",
-          "Huginn is attending the night side of the pass — the bird can see what is ending on the far slope.",
-          "The bottle is empty. What remains is what remains."
+          "Huginn is watching the descent — the bird's attention may mean something is already underway below.",
+          "The bottle is empty. The overhang held what it held. Morning requires something different."
         ]
       },
       "npcUpdates": [
@@ -2131,48 +2143,55 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Took the wine by feel, drank half, passed it back — no words exchanged. Fully settled against Silas in the quiet after.",
-          "statusNote": "At the overhang camp on the far side of the pass — warm against Silas, armor fully down, breathing slow. The descent to the Edge District begins at morning.",
-          "status": "active"
+          "note": "Slept through the mountain night fully against Silas — the bedroll pulled tight, no armor reassembled overnight. Waking into the first morning on the far side of the pass.",
+          "statusNote": "At the overhang camp on the far side of the pass — asleep under the shared bedroll, the descent to the Edge District ahead at morning."
+        },
+        {
+          "op": "update",
+          "npcId": "huginn",
+          "name": "Huginn",
+          "note": "Attended the full night from the stone lip — now perched on Memory's shaft, watching the descent below with focused attention.",
+          "statusNote": "Perched on Memory at the overhang camp, watching the slope toward the Edge District at dawn."
         }
-      ]
+      ],
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Far side of the mountain pass, late evening — south-facing rock overhang, coals now deep red fading to grey at the center, outer coals already still, pine-smell coming in at the oilcloth's edge from the open valley side.",
+      "setting": "Far side of the mountain pass, early morning — south-facing rock overhang, coals dead and cold, pale gray light coming in off the pass, pine-smell rising from the descent below.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Back against Silas's chest, hand resting on his forearm without gripping — breathing slow, the wine taken and returned w"
+          "state": "Asleep or nearly so under the bedroll, one edge pulled tight — breathing slow, face turned toward the overhang wall."
         },
         {
           "name": "Huginn",
-          "state": "Motionless on the stone lip above — attending the night side of the pass."
+          "state": "Perched on Memory's shaft where it leans against the overhang wall — watching the descent below, fully alert."
         }
       ],
       "objects": [
-        "Memory (spear, leaned against the overhang wall)",
+        "Memory (spear, leaned against the overhang wall — Huginn perched on shaft)",
         "Empty Resin Mountain Wine bottle (on the flat stone)",
         "Cup (on the flat stone, empty)",
         "Pell's shirt (on the stone)",
         "Silas's shirt (on the stone beside Pell's)",
-        "Oilcloth Fold (propped as windbreak, not quite reaching the edge)",
+        "Oilcloth Fold (propped as windbreak)",
+        "Bedroll (open across both of them)",
         "Valve Failure Timeline note — 'S-gate confirmed' annotated (in pocket)",
         "Contact Names Scrap (Sorel, Leth) (in pocket)",
-        "River Purification Tabs vial (in inner pack pocket)",
-        "Fire-ring of flat stones — coals deep red at center, outer coals grey and still"
+        "River Purification Tabs vial (in inner pack pocket)"
       ],
       "threads": [
-        "The descent to the Edge District begins in the morning — Leth and Sorel as first contacts.",
+        "The descent to the Edge District begins this morning — Leth and Sorel as first contacts.",
         "The buried vault head: six-week window, expert needed before week five.",
-        "Huginn is attending the night side of the pass — the bird can see what is ending on the far slope.",
-        "The bottle is empty. What remains is what remains."
+        "Huginn is watching the descent — the bird's attention may mean something is already underway below.",
+        "The bottle is empty. The overhang held what it held. Morning requires something different."
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
-    "day": 2,
-    "hour": 20,
+    "day": 3,
+    "hour": 4,
     "realAnchor": null
   },
   "companions": [
@@ -2314,7 +2333,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d2] The slap landed and broke her rhythm for a half-second — she exhaled it out and pressed back with her weight. Still unguarded; answering in motion.",
         "[d2] Went still at the mouth on her neck — then tilted her head to give more, leaned her full weight back into Silas, let the pace have her. Hips beginning to answer the rhythm, asking ",
         "[d2] Named what she wants plainly and without armor — harder, and don't stop watching. The second ask came quieter, less decided, and she didn't take it back.",
         "[d2] Said Silas's name — stripped of everything except what it means right now. Fully unguarded, climbing.",
@@ -2323,7 +2341,8 @@
         "[d2] Asked plainly — 'more, please' — the please smaller than the rest, unmanaged, not taken back.",
         "[d2] Fully unguarded at the close — said Silas's name plainly, stopped managing, stayed present through to the end without armor. The habit broke entirely for the length of the overhang",
         "[d2] Resting fully against Silas in the overhang's quiet — hand on his forearm, breathing all the way down, no management. The habit has not returned.",
-        "[d2] Took the wine by feel, drank half, passed it back — no words exchanged. Fully settled against Silas in the quiet after."
+        "[d2] Took the wine by feel, drank half, passed it back — no words exchanged. Fully settled against Silas in the quiet after.",
+        "[d2] Slept through the mountain night fully against Silas — the bedroll pulled tight, no armor reassembled overnight. Waking into the first morning on the far side of the pass."
       ],
       "knownFacts": [
         "Names want without management when the moment takes the ledger from her — the second half of the ask was the one she hadn't decided to say.",
@@ -2344,7 +2363,7 @@
         "setting terms and holding them cleanly through the full sequ"
       ],
       "status": "active",
-      "statusNote": "At the overhang camp on the far side of the pass — warm against Silas, armor fully down, breathing slow. The descent to the Edge District begins at morning.",
+      "statusNote": "At the overhang camp on the far side of the pass — asleep under the shared bedroll, the descent to the Edge District ahead at morning.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 2
@@ -3464,16 +3483,17 @@
     }
   },
   "tendencies": {
-    "strategic": 50.12541392219299,
-    "cerebral": 33.38010128340933,
-    "social": 48.128620780101016,
-    "generous": 11.781824388531302,
-    "cautious": 43.325986938370434,
-    "physical": 2.9115695392493053,
-    "risky": 8.198394156051435,
-    "ruthless": 3.6050476992220943,
-    "carousing": 2.5314726691650407,
-    "amorous": 4.7561722656250005
+    "strategic": 48.872278574138164,
+    "cerebral": 32.5455987513241,
+    "social": 46.92540526059849,
+    "generous": 11.48727877881802,
+    "cautious": 42.242837264911174,
+    "physical": 2.8387803007680725,
+    "risky": 7.993434302150149,
+    "ruthless": 3.514921506741542,
+    "carousing": 2.4681858524359144,
+    "amorous": 4.637267958984375,
+    "patient": 1
   },
   "aptitudes": [
     "strategist",
@@ -3486,7 +3506,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 323,
+  "actionCount": 324,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3628,8 +3648,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784184512945,
-  "rev": 446,
+  "updatedAt": 1784184597860,
+  "rev": 447,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4192,7 +4212,7 @@
   "syncedAt": 1784183539045,
   "teachers": {},
   "regionsKnown": {
-    "valley": 133
+    "valley": 134
   },
   "foreclosed": [
     "rootkin",

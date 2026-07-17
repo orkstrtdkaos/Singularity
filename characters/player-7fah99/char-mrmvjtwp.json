@@ -37,14 +37,14 @@
     }
   ],
   "alignment": {
-    "death_life": 0.25038318226672845,
+    "death_life": 0.24786402315339204,
     "destruction_creation": 0.020000000000000004
   },
   "attunement": 1,
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 0,
+  "energy": 10,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -57,18 +57,6 @@
         "careful"
       ],
       "consumable": false
-    },
-    {
-      "id": "waterskin",
-      "name": "Waterskin",
-      "kind": "consumable",
-      "qty": 1,
-      "description": "Boiled and refilled at the last clean spring. Worth more every week the river runs gray.",
-      "effects": {
-        "energy": 10
-      },
-      "consumable": true,
-      "pinned": true
     }
   ],
   "deeds": [],
@@ -247,18 +235,41 @@
         "player": "Look at Branch — ask it what it heard in the wall.",
         "summary": "Branch identifies something wrong in the root-wall to the left — and it has a direction.",
         "narration": "You crouch down to Branch's level. The root-lattice floor is warm under your knee.\n\n\"What did you hear?\" You say it the way you'd ask a tree — not urgently, not quietly, just aimed.\n\nBranch doesn't turn from the wall. Its buds stay fully open, motionless, and for a long breath it simply continues attending whatever it's attending. Then it creaks — low, deliberate, a single note that vibrates in your sternum more than your ears.\n\n\"Wrong,\" it says.\n\nThat's the whole word. It waits to see if you need more, which is how Branch has always operated — one thing at a time, each thing meant. Its root-tips press slightly deeper into the gaps of the floor lattice, and its nearest bud turns a fraction of a degree toward you. Still listening to the wall. Still talking to you. It has learned to do both.\n\n\"Wrong,\" it says again. Not for emphasis. Confirmation. The creak drops in pitch, almost imperceptibly, the way a root deepens when it finds resistance. Then it tilts one bud — the left one, the one closest to the wall — sideways, the same gesture it made before when the Root-That-Remembers gave it a partial answer. Whatever it senses in that root-wall is directional. It has a location."
+      },
+      {
+        "player": "Ask Branch to lead — let it walk you to the wrongness, following its pace.",
+        "summary": "Branch leads Aelyn along the left root-wall and stops at the site of the wrongness — pressing a root-tip flat against it.",
+        "narration": "You rise from your crouch and take a half-step back, giving Branch room.\n\n\"Lead,\" you say — one word, because that's the currency Branch trades in.\n\nIt doesn't look at you. It doesn't need to. The root-tips it had pressed into the lattice floor lift and resettle, lift and resettle, moving it laterally along the left wall with the same unhurried patience it brings to everything. The motion isn't quite walking — more like a wave passing through it from rear to front, each root finding a new gap in the lattice, gripping, releasing. You follow a body-length behind and let it set the pace.\n\nThe chamber is longer than it first appeared. The amber light holds even throughout, no brighter at the far end than here, no shadow pooling ahead. The left root-wall runs beside you — enormous fused roots, dark with age, their surfaces worn to something almost like skin. Branch moves along it the way a hand moves along a familiar surface in the dark: not searching, reading. Its buds stay fully open. Occasionally one dips toward the wall, holds, lifts again. You don't hurry it.\n\nThen Branch stops. Not gradually — it simply stops, root-tips pressing firmly into the lattice, and its buds all angle toward one section of the wall at once. The section looks no different from any other: same dark root-surface, same smooth age, same sourceless amber catching the grain. But Branch tilts two buds sideways in the direction it named before — *wrong* — and presses one root-tip flat against the surface itself, holding the contact deliberately, the way it held the question about the chamber and waited for you to understand the answer."
       }
     ],
     "lastTurn": {
-      "narration": "You crouch down to Branch's level. The root-lattice floor is warm under your knee.\n\n\"What did you hear?\" You say it the way you'd ask a tree — not urgently, not quietly, just aimed.\n\nBranch doesn't turn from the wall. Its buds stay fully open, motionless, and for a long breath it simply continues attending whatever it's attending. Then it creaks — low, deliberate, a single note that vibrates in your sternum more than your ears.\n\n\"Wrong,\" it says.\n\nThat's the whole word. It waits to see if you need more, which is how Branch has always operated — one thing at a time, each thing meant. Its root-tips press slightly deeper into the gaps of the floor lattice, and its nearest bud turns a fraction of a degree toward you. Still listening to the wall. Still talking to you. It has learned to do both.\n\n\"Wrong,\" it says again. Not for emphasis. Confirmation. The creak drops in pitch, almost imperceptibly, the way a root deepens when it finds resistance. Then it tilts one bud — the left one, the one closest to the wall — sideways, the same gesture it made before when the Root-That-Remembers gave it a partial answer. Whatever it senses in that root-wall is directional. It has a location.",
-      "sceneSummary": "Branch identifies something wrong in the root-wall to the left — and it has a direction.",
+      "narration": "You rise from your crouch and take a half-step back, giving Branch room.\n\n\"Lead,\" you say — one word, because that's the currency Branch trades in.\n\nIt doesn't look at you. It doesn't need to. The root-tips it had pressed into the lattice floor lift and resettle, lift and resettle, moving it laterally along the left wall with the same unhurried patience it brings to everything. The motion isn't quite walking — more like a wave passing through it from rear to front, each root finding a new gap in the lattice, gripping, releasing. You follow a body-length behind and let it set the pace.\n\nThe chamber is longer than it first appeared. The amber light holds even throughout, no brighter at the far end than here, no shadow pooling ahead. The left root-wall runs beside you — enormous fused roots, dark with age, their surfaces worn to something almost like skin. Branch moves along it the way a hand moves along a familiar surface in the dark: not searching, reading. Its buds stay fully open. Occasionally one dips toward the wall, holds, lifts again. You don't hurry it.\n\nThen Branch stops. Not gradually — it simply stops, root-tips pressing firmly into the lattice, and its buds all angle toward one section of the wall at once. The section looks no different from any other: same dark root-surface, same smooth age, same sourceless amber catching the grain. But Branch tilts two buds sideways in the direction it named before — *wrong* — and presses one root-tip flat against the surface itself, holding the contact deliberately, the way it held the question about the chamber and waited for you to understand the answer.",
+      "sceneSummary": "Branch leads Aelyn along the left root-wall and stops at the site of the wrongness — pressing a root-tip flat against it.",
       "choices": [
         {
-          "label": "Press your palm flat against the root-wall where Branch is attending — open Lifesense and try to feel what it feels.",
+          "label": "Press your palm against the wall beside Branch's root-tip — open through the Grove and listen for what Branch heard.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "death_life": 0.3
+            "death_life": 0.6,
+            "destruction_creation": 0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "the_speaking_grove",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Lifesense on the wall itself — feel for what's alive in there, and whether its vigor is off.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "death_life": 0.5
           },
           "difficulty": 0,
           "intentTags": [
@@ -271,54 +282,34 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Branch to lead — let it walk you to the wrongness, following its pace.",
+          "label": "Use Prism Sight on the wall — look for heat traces, recent change, anything the light reads differently here.",
           "attribute": "mental",
-          "subAttribute": "insight",
+          "subAttribute": "reason",
           "axes": {
-            "death_life": 0.2
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Call up to Maren — ask if she knows what's in this part of the wall, and whether the Rootkin have named the wrongness yet.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "death_life": 0.1
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Open the Speaking Grove toward the root-wall — ask it the way you'd ask any living thing: what's wrong here?",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": 0.3,
             "destruction_creation": -0.1
           },
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "abilityId": "the_speaking_grove",
+          "abilityId": "prism_sight",
           "energyCost": 4,
           "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Call up to Maren — tell her Branch has found the place, and ask if she knows what's behind this section of wall.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         }
@@ -333,19 +324,19 @@
         {
           "op": "progress",
           "questId": "the-root-that-remembers",
-          "note": "Branch confirms something wrong in the root-wall to the left — and its bud gives it a direction. The unnamed city-wrongness the Root communicated has a location."
+          "note": "Branch led Aelyn along the left root-wall and stopped at the site of the wrongness — pressing a root-tip against it. The location of the city's unnamed illness is found."
         }
       ],
       "scene": {
-        "setting": "Interior of the Root-That-Remembers' chamber — amber light, even and sourceless. Root-lattice floor warm underfoot. Aelyn crouched beside Branch at the root-wall to the left. Maren still at the threshold above, watching.",
+        "setting": "Interior of the Root-That-Remembers' chamber — amber light, even and sourceless. Root-lattice floor warm underfoot. Aelyn standing a body-length from the left root-wall where Branch has stopped and pressed a root-tip flat against a specific section.",
         "npcsPresent": [
           {
             "name": "Branch",
-            "state": "Buds fully open, one tilted sideways toward the left wall — pressing root-tips slightly deeper into the lattice. Still attending. Still listening."
+            "state": "Stopped at a section of the left root-wall, all buds angled toward it, one root-tip pressed flat against the surface — holding contact deliberately."
           },
           {
             "name": "Maren",
-            "state": "Silhouette at the threshold far above, perfectly still, watching."
+            "state": "Silhouette at the threshold far above, watching."
           },
           {
             "name": "Sapling-child",
@@ -365,12 +356,12 @@
           "Enormous fused roots — floor, walls, ceiling, worn smooth and dark with age",
           "Root-lattice floor — intentional, broad, solid and slightly warm underfoot",
           "Sourceless amber light — even, warm, no point of origin visible",
-          "Left root-wall — where Branch attends; something wrong, directional",
+          "Left root-wall — specific section where Branch has stopped; looks no different from the rest",
           "Traveler's Pack (Aelyn's, worn canvas)",
           "Waterskin (Aelyn's)"
         ],
         "threads": [
-          "Branch has confirmed 'wrong' in the left root-wall — its bud has given it a direction.",
+          "Branch has pressed a root-tip flat against a specific section of the left root-wall — the site of the wrongness.",
           "The Root-That-Remembers communicated two needs: the northeast thread (Aelyn's father) and this local wrongness.",
           "A SNG-075 cache is unresolved — something left behind in or near the passage, not yet found.",
           "Maren waits above."
@@ -379,42 +370,62 @@
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "rootkin-tender",
-          "name": "Maren",
-          "note": "Remains at the threshold above, watching. Has not spoken since Aelyn descended.",
-          "statusNote": "At the threshold of the deep grain passage above the chamber, watching Aelyn and Branch.",
-          "status": "active"
+          "npcId": "branch",
+          "name": "Branch",
+          "note": "Led Aelyn along the left root-wall at its own pace and stopped precisely at the site of the wrongness — pressing a root-tip flat against it in deliberate contact.",
+          "learned": [
+            "Branch navigates by something other than sight — it reads the wall through contact and bud-sense, not appearance."
+          ],
+          "skillsObserved": [
+            "wayfinding through root-contact",
+            "precise location of wrongness"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Stopped at the wrongness site in the Root-That-Remembers' chamber, holding contact with the left root-wall."
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "A specific section of the left root-wall in the Root-That-Remembers' chamber has been identified by Branch as the site of the city's wrongness — visually indistinguishable from the surrounding wall.",
+          "subPlace": {
+            "name": "The Wrongness Site",
+            "note": "A section of the left root-wall deep in the Root-That-Remembers' chamber — located by Branch, who pressed a root-tip flat against it. Indistinguishable by eye; wrong by sense.",
+            "visited": true
+          }
         }
       ],
       "codexUpdates": [
         {
-          "topic": "branch",
-          "label": "Branch",
-          "kind": "person",
-          "entityId": "branch",
-          "fact": "Branch attended the left root-wall in the chamber and confirmed 'wrong' — twice, deliberately — with a directional bud-tilt. It senses a location for the city's unnamed wrongness.",
+          "topic": "the-root-that-remembers",
+          "label": "The Root-That-Remembers",
+          "kind": "place",
+          "entityId": "heartroot",
+          "fact": "The city's wrongness has a precise location: a section of the left root-wall deep in the Root-That-Remembers' chamber, identified by Branch through root-contact and bud-sense. It looks no different from the surrounding wall.",
           "links": [
+            "branch",
             "heartroot",
             "the-root-that-remembers",
-            "sapling-child-heartroot"
+            "the-root-that-remembers"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange with Branch in the chamber — one question, one answer."
-      }
+        "why": "A short traversal of the chamber's length at Branch's unhurried pace."
+      },
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Interior of the Root-That-Remembers' chamber — amber light, even and sourceless. Root-lattice floor warm underfoot. Aelyn crouched beside Branch at the root-wall to the left. Maren still at the threshold above, watching.",
+      "setting": "Interior of the Root-That-Remembers' chamber — amber light, even and sourceless. Root-lattice floor warm underfoot. Aelyn standing a body-length from the left root-wall where Branch has stopped and pressed a root-tip flat against a specific section.",
       "npcsPresent": [
         {
           "name": "Branch",
-          "state": "Buds fully open, one tilted sideways toward the left wall — pressing root-tips slightly deeper into the lattice. Still a"
+          "state": "Stopped at a section of the left root-wall, all buds angled toward it, one root-tip pressed flat against the surface — h"
         },
         {
           "name": "Maren",
-          "state": "Silhouette at the threshold far above, perfectly still, watching."
+          "state": "Silhouette at the threshold far above, watching."
         },
         {
           "name": "Sapling-child",
@@ -434,12 +445,12 @@
         "Enormous fused roots — floor, walls, ceiling, worn smooth and dark with age",
         "Root-lattice floor — intentional, broad, solid and slightly warm underfoot",
         "Sourceless amber light — even, warm, no point of origin visible",
-        "Left root-wall — where Branch attends; something wrong, directional",
+        "Left root-wall — specific section where Branch has stopped; looks no different f",
         "Traveler's Pack (Aelyn's, worn canvas)",
         "Waterskin (Aelyn's)"
       ],
       "threads": [
-        "Branch has confirmed 'wrong' in the left root-wall — its bud has given it a direction.",
+        "Branch has pressed a root-tip flat against a specific section of the left root-wall — the site of the wrongness.",
         "The Root-That-Remembers communicated two needs: the northeast thread (Aelyn's father) and this local wrongness.",
         "A SNG-075 cache is unresolved — something left behind in or near the passage, not yet found.",
         "Maren waits above."
@@ -469,14 +480,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Aelyn stepped across the threshold into the deep grain passage, Branch at her side. Maren remained above. The descent has begun.",
         "Aelyn spoke her presence into the passage as she descended — the Root-That-Remembers heard. The pulse in the walls deepened. The descent continues.",
         "The Root confirmed it knows both Aelyn's green inheritance and her father's — both threads woven together, long recognized. The chamber is opening below. The descent is nearly complete.",
         "The Root confirmed it knows Aelyn's father — not just his echo in her, but the thread of him, alive and pointing outward into the valley. The chamber waits one step below.",
         "The Root confirmed Aelyn's father is findable — the thread points northeast, real and large, measured in the way old roots measure distance. The chamber waits one step below.",
         "Aelyn made herself legible through the Grove — the Root-That-Remembers read her fully, both natures at once. It is now waiting for her question.",
         "The Root-That-Remembers answered Aelyn's offer with two needs: a northeast thread (her father), and something wrong within the city itself — unnamed, present, and already noticed by Branch.",
-        "Branch confirms something wrong in the root-wall to the left — and its bud gives it a direction. The unnamed city-wrongness the Root communicated has a location."
+        "Branch confirms something wrong in the root-wall to the left — and its bud gives it a direction. The unnamed city-wrongness the Root communicated has a location.",
+        "Branch led Aelyn along the left root-wall and stopped at the site of the wrongness — pressing a root-tip against it. The location of the city's unnamed illness is found."
       ],
       "aliases": [],
       "startedAt": "2026-07-17T04:11:12.462Z"
@@ -524,7 +535,8 @@
       "notes": [
         "[d1] A passage into the deep grain was disclosed — grown four hundred years ago, located beneath or adjacent to the entrance hall. Aelyn now knows it exists.",
         "[d1] The deep grain passage has been physically located — far end of the entrance hall, where the floor slopes downward and the moss thickens. The opening is grown heartwood, barely shoulder-width, framed ",
-        "[d1] Aelyn crossed the threshold of the deep grain passage and began descending — the first time anyone has entered with the Root-That-Remembers' recognition."
+        "[d1] Aelyn crossed the threshold of the deep grain passage and began descending — the first time anyone has entered with the Root-That-Remembers' recognition.",
+        "[d1] A specific section of the left root-wall in the Root-That-Remembers' chamber has been identified by Branch as the site of the city's wrongness — visually indistinguishable from the surrounding wall."
       ],
       "flags": {},
       "vectorsKnown": [
@@ -536,6 +548,12 @@
           "day": 1,
           "visited": true,
           "note": "A narrow corridor of pale heartwood and old roots, descending from the entrance hall's far end into warm amber dark. Mar"
+        },
+        "the-wrongness-site": {
+          "name": "The Wrongness Site",
+          "day": 1,
+          "visited": true,
+          "note": "A section of the left root-wall deep in the Root-That-Remembers' chamber — located by Branch, who pressed a root-tip fla"
         }
       }
     }
@@ -629,7 +647,8 @@
           "[d1] The entrance hall was deliberately planted above the deep grain — not for proximity to the Root-That-Remembers, but as an act of worthiness. The city's oldest roots predate both the city and the Rootk",
           "[d1] Located at the far end of the entrance hall where the floor slopes downward and the moss thickens. A grown opening of pale heartwood, barely shoulder-width, descending into the deep grain. Old roots l",
           "[d1] Aelyn crossed the threshold and descended. The passage is warmer than the hall above, narrower than expected, the enormous root-walls smooth with age. Maren did not follow. Branch did.",
-          "[d1] The Root-That-Remembers holds a part of itself that is not-well — not failing, not broken, but wrong and unnamed. Branch sensed it too, attending the left root-wall in the chamber. The city has not sp"
+          "[d1] The Root-That-Remembers holds a part of itself that is not-well — not failing, not broken, but wrong and unnamed. Branch sensed it too, attending the left root-wall in the chamber. The city has not sp",
+          "[d1] The city's wrongness has a precise location: a section of the left root-wall deep in the Root-That-Remembers' chamber, identified by Branch through root-contact and bud-sense. It looks no different fr"
         ],
         "links": [
           "branch",
@@ -642,7 +661,8 @@
         "aliases": [
           "The Heartroot — Something in the Wood",
           "The Deep Grain Passage",
-          "The Unnamed Wrongness in the Heartroot"
+          "The Unnamed Wrongness in the Heartroot",
+          "The Root-That-Remembers"
         ],
         "createdDay": 1,
         "entityId": "heartroot",
@@ -842,15 +862,15 @@
     }
   },
   "tendencies": {
-    "cerebral": 10.008466198455649,
-    "cautious": 6.73689123451747,
-    "generous": 1.1301284957827586,
-    "social": 5.262985250911217,
-    "strategic": 2.2404933524221136,
-    "devotion": 2.484858854397356
+    "cerebral": 9.758254543494257,
+    "cautious": 7.568468953654533,
+    "generous": 1.1018752833881897,
+    "social": 5.131410619638436,
+    "strategic": 2.1844810186115606,
+    "devotion": 2.422737383037422
   },
   "aptitudes": [],
-  "actionCount": 33,
+  "actionCount": 34,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -872,8 +892,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20mid-twenties%20with%20light%20blonde%2C%20faintly%20wavy%20hair%20cut%20in%20curtain%20bangs%2C%20the%20rest%20falling%20to%20the%20small%20of%20her%20back%20%E2%80%94%20usually%20worn%20in%20a%20french%20braid%20with%20the%20bangs%20left%20loose.%20Dark%20nature-green%20tank%20to%2C%20full-body%20character%20portrait%2C%20named%20Aelyn%20Kantoro%2C%20of%20the%20rootkin%2C%20warden%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Her%20mother%20dies%2C%20and%20she%20decides%20to%20go%20to%20the%20nanite%20world%2C%20to%20figure%20out%20why%20she%20is%20different%20than%20the%20pure%20nature%20peop%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=73420&nologo=true",
-  "updatedAt": 1784263875448,
-  "rev": 48,
+  "updatedAt": 1784263996887,
+  "rev": 50,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -881,7 +901,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "the_quickwood": 34
+    "the_quickwood": 35
   },
   "opLossPending": false,
   "establishedFacts": [

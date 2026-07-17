@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "id": "the_name_that_travels",
+  "name": "The Name That Travels",
+  "region": "valley",
+  "tier": "legendary",
+  "arcId": "saehara_prestige_arc",
+  "boundToCharacter": "Saehara Makashi",
+  "boundToPlayer": "player-7bxzzd",
+  "giver": null,
+  "legend": null,
+  "kind": "recurring_challenge",
+  "axis": "mechanical_spiritual",
+  "traditions": ["cogitant", "syllogist", "blazeborn"],
+  "premise": "A blade honed as sharply as Saehara's does not stay secret. The way he reads a room before he draws, the stillness of the wicker-hatted ronin with the kanji for Honor on his back — word of it travels the way wind carries a scent. And where a name travels, others come to measure themselves against it. This is the oldest road a swordsman walks: musha shugyō, the warrior's pilgrimage, in which the blade is refined not in the dojo but on the road, against every hand that rises to test it. Saehara did not ask for challengers. His skill asked for them.",
+  "stakes": "Every duel won carves the name deeper — and a deeper name draws a longer line of those who would make THEIR name by ending his. This is the swordsman's paradox, and it is the engine of his arc: prestige is not a prize he keeps but a fire he feeds, and each victory raises the stakes of the next challenge. He can climb it (become the name every duelist measures against — the sword-saint of the valley), redefine it (the ronin who writes rather than kills — victory by refusing the frame, filling his book instead of a graveyard), or be undone by it (meet the one blade faster than his, and learn what his name costs). The book he is writing will have a title by the end. What the title IS depends on which road he walks.",
+  "recurrence": {
+    "trigger": "prestige",
+    "note": "Challengers surface as Saehara's renown (deeds-driven reputation) crosses rising thresholds — the more famous the blade, the more (and stronger) the hands that rise to test it. Each duel runs as a SNG-098 skill battle with a guaranteed decline/flee path. Wins feed deeds → reputation → the next, harder challenger. Losses are not death by default (yield/flee exist) but they cost the name.",
+    "escalationBands": [
+      { "band": "unknown", "challengers": ["road_duelist_low"], "note": "wandering blades, dojo-yaburi hopefuls testing an unproven name" },
+      { "band": "known", "challengers": ["school_champion", "rival_ronin"], "note": "champions of local ryūha (sword-schools) come to defend their lineage's honor" },
+      { "band": "renowned", "challengers": ["sworn_rival", "blazeborn_kensei"], "note": "named duelists and mages whose own prestige demands they face him" },
+      { "band": "legendary", "challengers": ["the_last_blade"], "note": "the one challenge that defines the arc — the blade that may be faster than his" }
+    ]
+  },
+  "stages": [
+    {
+      "id": "s1",
+      "title": "The first to come looking",
+      "objective": "Answer (or decline) the first challenger who sought you by name.",
+      "condition": "A duelist finds Saehara specifically — not a random encounter, but someone who came because of the name. Face them (skill battle) or turn them away (there is always a decline path; even refusing writes something).",
+      "change": "Codex: the name has begun to travel. Word of the ronin with the Honor-kanji is loose in the valley.",
+      "unlockHint": "Saehara's renown becomes a live, rising value — challengers now scale to it."
+    },
+    {
+      "id": "s2",
+      "title": "The schools take notice",
+      "objective": "Meet the challenge of a ryūha — a sword-school defending its lineage.",
+      "condition": "A school champion or rival ronin challenges not just Saehara but what his nameless, masterless way IMPLIES about their tradition. The duel is about more than the blade — it's about whether a ronin's road can stand against a lineage.",
+      "change": "Codex: the ryūha have a position on Saehara now — some hostile, some curious. A rival may become a sworn one, or a student.",
+      "unlockHint": "Prestige crosses into 'renowned' — the challengers now include mages (blazeborn) who bring fire against steel, and duelists whose own names ride on the outcome."
+    },
+    {
+      "id": "s3",
+      "title": "The last blade",
+      "objective": "Face the challenge that decides what your name means.",
+      "condition": "The defining duel — a blade (or a fire, or a mind) that may genuinely be his equal or better. This is the Ganryūjima beat: the one that the book will be about. The GM lets Saehara's whole arc of choices — how he's won, whom he's spared, whether he's killed for the name or refused to — shape who this last challenger is and what the duel costs.",
+      "change": "Codex: the title of the book is written. Whether it reads as a saint's name, a killer's, or a teacher's is Saehara's to earn.",
+      "unlockHint": "This is the hinge. Climb / redefine / undone — the GM never forecloses which; Saehara's choices across every prior duel decide it."
+    }
+  ],
+  "routes": [
+    { "id": "kensei", "name": "Become the name (the sword-saint's road)", "note": "Win, and keep winning, until the name IS the measure — every duelist in the valley sharpens against the memory of him. The classic ascent; it asks whether a name won on others' defeats is a thing worth becoming." },
+    { "id": "brush", "name": "The ronin who writes (redefine the frame)", "note": "His true motivation — the book. Victory by REFUSING the duel's terms: sparing, teaching, out-thinking (cogitant/syllogist) rather than out-cutting. The pen fills instead of the grave. The rarest road, and the one his own bio points toward — 'another way to be a mind.'" },
+    { "id": "ganryu", "name": "The blade that costs (undone by the name)", "note": "Meet the one faster hand, and learn what the name was worth. Not a fail-state — a tragic/tempering road; the book's title becomes something humbler and truer for it." }
+  ],
+  "outcomes": [
+    { "id": "saint", "when": "kensei", "text": "The valley's duelists measure themselves against Saehara Makashi the way sailors measure a storm. The wind he called home now carries his name. The book's title: what a name costs to keep." },
+    { "id": "teacher", "when": "brush", "text": "The ronin who could have been the deadliest blade chose the quill. Students, not corpses, mark his road. The book teaches generations, exactly as he dreamed — its title written in his own hand at last." },
+    { "id": "tempered", "when": "ganryu", "text": "He met the blade that was faster, and lived — or his story passed to the one who tells it. The name is humbler now, and truer. The book's title carries the weight of what the road actually taught, not what he set out to prove." }
+  ],
+  "notes_for_gm": "This arc is BOUND to Saehara Makashi (Brayden's character) — a cogitant RONIN (mind-tradition as blade-discipline: he reads the opponent, his stillness before the draw IS his power; honor the wicker hat, the Honor-kanji, the katana+tanto, the book he's writing, 'The Wind' as home, the village of Chisai). Pull from authentic samurai tradition: musha shugyō (the dueling pilgrimage), dōjō-yaburi (school-challenging), ryūha (sword-lineages), zanshin (lingering awareness), mushin (no-mind — his cogitant edge), the Ganryūjima duel as the s3 model. Magic/fantasy is welcome and canon: challengers can be blazeborn mages bringing fire, mind-duelists, fae blades — steel is only one language of the contest (only 2 of 24 traditions fight by hitting things; a duel here can be fought in any idiom). RECURRENCE is the heart: challengers surface as his deeds-driven reputation rises, scaling with the escalation bands; each runs as a SNG-098 skill battle with a guaranteed decline/flee path — never force a lethal duel, always let him choose the terms (this enables the 'brush' route where he WINS by refusing to cut). His book is the throughline — every duel is a page; its title is the arc's resolution. Let his choices (spare/kill/teach/refuse) steer which of the three roads the s3 'last blade' becomes; never foreclose it. Register: the quiet dignity of a good samurai story — restraint, honor, the weight of the draw — not gratuitous carnage."
+}

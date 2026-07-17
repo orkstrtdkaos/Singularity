@@ -32,6 +32,7 @@ import { homeClassOf, isCrossClass, skillPointCost, forkFor, forkPending, chosen
 import { combinationThresholdMet, ripeAxisTouchCombinations } from "../engine/practice.js";
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, familyClass, FUNCTION_FAMILIES, FAMILY_COLOR, FAMILY_GLYPH, FAMILY_SHAPE, shapeOfFamily } from "../engine/functions.js";
 import { arcSeed, fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc } from "../engine/personalArc.js";
+import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "../engine/entityDetail.js";
 import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, applySurgeBacklash, surgeBacklash, intensityOptions } from "../engine/intensity.js";
 import { validate, missingRequired, defaultFor } from "../engine/genschema.js";
 import { generate, ensureGenerated, resolveExisting, mintId, repairEntity, stubEntity, birthWeightOf, buildGeneratePrompt, generatedRecords, GEN_TYPES, isMinorEntity, enforceFloors, recordAttention, effectiveWeight, recomputeTier, isDormant, isSurfaceable, livingWorldForGM, findGenerated, nominationsFor } from "../engine/generate.js";
@@ -3528,6 +3529,44 @@ await (async () => {
   const activeAelyn = { name: "Aelyn Kantoro", playerKey: "player-7fah99", domains: { primary: "rootkin" }, quests: [{ ...good, structured: true, status: "active", stageIndex: 0 }] };
   check("SNG-133: a generated arc's embedded legend surfaces to the GM (stage-gated, never foreclosed)",
     /LEGEND — Caelum/.test(structuredQuestsForGM(activeAelyn)) && /never foreclose/i.test(structuredQuestsForGM(activeAelyn)));
+}
+
+// --- SNG-134: one shared entity-detail for skill/name/item; relationship paragraph; (story/CG = UI) ---
+{
+  // SKILL detail — owned rank, next-rank text, effective cost (+base), function families, ripe
+  const sk = skillDetail({ name: "Palework", description: "the grey craft of ending", functions: ["strike"] }, {
+    tradition: "Ashwarden", tier: 2, owned: true, level: 2, maxRank: 3, effCost: 3, baseCost: 6, families: ["HARM"], rankText: "practiced 4/6 to rank 3", ripe: false });
+  check("SNG-134: skillDetail shows rank, next-rank progress, effective cost (+base), and function family",
+    /Rank 2\/3/.test(sk) && /practiced 4\/6/.test(sk) && /⚡ 3 energy.*base 6/.test(sk) && /HARM/.test(sk));
+  check("SNG-134: an unlearned skill reads 'Not yet learned'; a ripe one flags mastery",
+    /Not yet learned/.test(skillDetail({ name: "X" }, { owned: false })) && /ripe for mastery/.test(skillDetail({ name: "Y" }, { owned: true, ripe: true })));
+
+  // NPC detail — the relationship label + role + last-seen (resolved via locations) + last history beat
+  const pell = { id: "pell", name: "Pell", role: "a marsh-warden", relationship: 8, bondType: "romantic", bondStage: "partner", lastSeen: { locationId: "millbrook" }, history: ["[d3] you mended the weir together"] };
+  const nd = npcDetail(pell, { locations: { millbrook: { name: "Millbrook" } } });
+  check("SNG-134: npcDetail gives the bond label + role + last-seen place + the latest beat",
+    /Pell — .*partner/.test(nd) && /marsh-warden/.test(nd) && /Last seen: Millbrook/.test(nd) && /mended the weir/.test(nd));
+
+  // ITEM detail — name/qty, pinned, in-scene uses
+  const it = itemDetail({ name: "Healing Draught", kind: "consumable", qty: 2, description: "a green tincture", pinned: true });
+  check("SNG-134: itemDetail shows qty, pinned state, and the in-scene uses", /Healing Draught ×2/.test(it) && /pinned/.test(it) && /Use in scene/.test(it));
+
+  // CONSISTENCY (the ask): the SAME entity yields the SAME detail regardless of caller — pure by construction
+  check("SNG-134: the same entity gives identical detail wherever it's rendered (pure formatter)",
+    npcDetail(pell, { locations: { millbrook: { name: "Millbrook" } } }) === npcDetail(pell, { locations: { millbrook: { name: "Millbrook" } } }));
+
+  // relationshipsParagraph — bonds → prose, grouped by depth; empty when there are no bonds
+  const ch = { npcRegistry: {
+    pell: { name: "Pell", relationship: 9, bondType: "romantic", bondStage: "partner" },
+    calvar: { name: "Calvar", relationship: 8, bondType: "sworn" },
+    aldric: { name: "Aldric", relationship: 5 }, mara: { name: "Mara", relationship: 4 },
+    vex: { name: "Vex", relationship: -6, bondType: "rival" }
+  } };
+  const para = relationshipsParagraph(ch);
+  check("SNG-134: relationshipsParagraph reads bonds into prose — partner closest, allies as a circle, a foe named",
+    /closest to Pell/.test(para) && /Aldric/.test(para) && /Mara/.test(para) && /Vex/.test(para) && para.endsWith("."));
+  check("SNG-134: no bonds → an empty paragraph (a new character isn't given a phantom social life)",
+    relationshipsParagraph({ npcRegistry: {} }) === "" && relationshipsParagraph({ npcRegistry: { stranger: { name: "A Stranger", relationship: 1 } } }) === "");
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

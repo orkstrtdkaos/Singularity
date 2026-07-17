@@ -26,6 +26,7 @@ import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf,
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges } from "./engine/company.js";
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
 import { fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc } from "./engine/personalArc.js";
+import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./engine/entityDetail.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
 import { initWorldState, runWorldTick, syncSharedWorld, advanceGeneratedOffscreen, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
@@ -46,7 +47,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.93";
+const APP_VERSION = "1.8.94";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -57,6 +58,33 @@ app.addEventListener("click", e => { const el = e.target.closest?.("[data-vital]
 app.addEventListener("click", e => { const el = e.target.closest?.("[data-breakdown]"); if (el) { e.preventDefault(); try { showBreakdownPopover(JSON.parse(el.dataset.breakdown)); } catch { /* malformed — no popup */ } } });
 // SNG-118: tap a play-style aptitude chip → its effect + description (reuses the one popover surface).
 app.addEventListener("click", e => { const el = e.target.closest?.("[data-aptchip]"); if (el) { e.preventDefault(); showPopoverText(el.dataset.aptchip); } });
+// SNG-134 Part 2: ONE hover/tap detail for a skill / name / item, everywhere they appear (data-entity="kind:id").
+// Same entity → same detail, no matter the render site (the consistency ask). Reuses the one popover surface.
+app.addEventListener("click", e => { const el = e.target.closest?.("[data-entity]"); if (el) { e.preventDefault(); e.stopPropagation(); const txt = entityHover(el.dataset.entity); if (txt) showPopoverText(txt); } });
+
+// SNG-134: resolve "kind:id" → the shared detail text, gathering the live values the pure formatters need.
+function entityHover(spec) {
+  if (!character || !spec) return "";
+  const i = String(spec).indexOf(":"); if (i < 0) return "";
+  const kind = spec.slice(0, i), id = spec.slice(i + 1);
+  try {
+    if (kind === "skill") {
+      const ab = fullCatalog()[id]; if (!ab) return "";
+      const owned = (character.abilities || []).find(a => a.abilityId === id);
+      const rp = owned ? rankProgress(character, id) : null;
+      return skillDetail(ab, {
+        tradition: traditionLabel(abilityTradition(ab) || ab.powerSystem || ""), tier: tierOf(ab.levelReq),
+        owned: !!owned, level: owned?.level, maxRank: CONTENT.rules?.leveling?.maxAbilityRank ?? 3,
+        effCost: (() => { try { return effectiveEnergyCost(ab, character, CONTENT.rules); } catch { return ab.energyCost ?? null; } })(),
+        baseCost: ab.energyCost ?? null, families: familiesOfAbility(ab, FN_INDEX),
+        rankText: rp?.text, ripe: !!rp?.ripe || aspirationRipe(character, id, CONTENT.rules)
+      });
+    }
+    if (kind === "npc") { const n = character.npcRegistry?.[id]; return n ? npcDetail(n, { locations: CONTENT.locations }) : ""; }
+    if (kind === "item") { const it = (character.inventory || []).find(x => (x.name === id || x.customName === id)); return it ? itemDetail(it) : ""; }
+  } catch { /* a hover never throws */ }
+  return "";
+}
 
 /** SNG-084: the authored one-sentence explanation for a mechanic, by id (helper_text.json). */
 function helpEntry(id) { return CONTENT?.helpText?.[id] || null; }
@@ -864,12 +892,16 @@ function renderSettings(note = "") {
     <div class="field"><label>Developer mode</label>
       <label class="rating-check"><input type="checkbox" id="set-dev" ${(() => { try { return localStorage.getItem("singularity.devPersist") === "1"; } catch { return false; } })() ? "checked" : ""}> Show developer tools (the 🧪 Legs panel, test-encounter buttons, the scenario runner)</label>
       <div class="hint">Off by default — normal play never shows dev tools. ${isDevMode() ? `<strong>Dev mode is currently ON</strong>${(() => { try { return new URLSearchParams(location.search).get("dev") === "1"; } catch { return false; } })() ? " for this URL (reload without <code>?dev=1</code> for a clean player view)" : /^(localhost|127\\.0\\.0\\.1)/.test(location.hostname) ? " because this is a local dev host" : ""}. ` : ""}Ticking this box is a deliberate, persistent opt-in on this browser; untick + Save to turn it fully off.</div></div>
+    <div class="field"><label>World-authorship</label>
+      <label class="rating-check"><input type="checkbox" id="set-contentgen" ${profile.contentGenerator ? "checked" : ""}> My play authors the world — what I create through play more readily becomes shared canon</label>
+      <div class="hint">When on, the people and places you bring into being carry more weight (SNG-128 world-authorship), so your play persists into the family's shared valley more readily. On for the family's storytellers.</div></div>
     <button class="btn" id="set-save">Save</button>
     <div class="footer-note">Save data is in this browser. Use Export on the Characters screen to move it.</div>
   </div>`);
   document.getElementById("set-save").onclick = () => {
     profile.displayName = document.getElementById("set-player").value.trim();
     profile.pacing = document.getElementById("set-pacing").value; // SNG-127: world-liveliness preference
+    profile.contentGenerator = document.getElementById("set-contentgen").checked; // SNG-134 P4: canon-author toggle (SNG-132 engine reads it)
     saveProfile(profile);
     setApiKey(document.getElementById("set-key").value);
     setArtMode(document.getElementById("set-art").value);
@@ -4063,7 +4095,11 @@ function renderCharacterScreen() {
     </div>
     ${Object.values(b).some(v => v) ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Story</h3>
       ${["hometown", "residence", "livelihood", "hobbies", "motivation"].filter(k => b[k]).map(k => `<div class="codex-fact"><strong style="text-transform:capitalize">${k}:</strong> ${esc(b[k])}</div>`).join("")}
-      ${b.story ? `<p class="map-details-desc" style="margin-top:8px">${esc(b.story)}</p>` : ""}</div>` : ""}
+      ${(() => { // SNG-134 P1: the story EVOLVES — show the lived "story so far" (SNG-109 paragraph) once it
+        // exists; the creation seed is the first line, superseded as deeds accrue (not frozen forever).
+        const lived = character.chronicleCache?.text;
+        return lived ? `<p class="map-details-desc" style="margin-top:8px">${esc(lived)}</p><div class="hint">— your story so far, as it has grown</div>`
+          : (b.story ? `<p class="map-details-desc" style="margin-top:8px">${esc(b.story)}</p>` : ""); })()}</div>` : ""}
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Attributes ${infoDot("growth.attributes")} <span class="hint" style="text-transform:none">(knee at ${soft}: full value to there, +5/point beyond, cap ${cap})</span></h3>
       ${SUBS.map(sub => { const v = character.subAttributes?.[sub] ?? 0; return `
         <div class="cs-attr"><span class="cs-attr-name" title="${esc(SUB_DESC[sub])}">${sub}</span>
@@ -4539,7 +4575,7 @@ function chronicleViewCtx(character) {
     .filter(n => (n.bondType && n.bondType !== "platonic") || Math.abs(n.relationship || 0) >= 4)
     .sort((a, b) => Math.abs(b.relationship || 0) - Math.abs(a.relationship || 0))
     .slice(0, 8)
-    .map(n => ({ name: n.name, label: relationshipLabel(n) }));
+    .map(n => ({ id: n.id, name: n.name, label: relationshipLabel(n) })); // SNG-134: id → the shared name-hover
   const traditions = [character.domains?.primary, character.domains?.secondary, character.domains?.tertiary].filter(Boolean);
   const standing = [];
   for (const t of traditions) { const s = standingWithPeople(character, t, CONTENT.rules); if (s.score) standing.push({ who: traditionLabel(t), band: s.band }); }
@@ -4607,13 +4643,22 @@ function renderChronicle() {
       ${deeds.length ? deeds.map(d => `<div class="chronicle-deed"><span class="rep-band ${(d.weight | 0) >= 0 ? "trusted" : "wary"}">${(d.weight | 0) > 0 ? "+" : ""}${d.weight | 0}</span> ${esc(d.description)}${d.worldDay != null ? ` <span class="cost">day ${d.worldDay}</span>` : ""}</div>`).join("") : "<div class='insight'>no deeds yet — the valley is waiting</div>"}
     </section>
     <section><h3>Relationships</h3>
-      ${ctx.bonds.length ? ctx.bonds.map(b => `<div class="known-npc"><span class="npc-name">${esc(b.name)}</span> <span class="rep-band trusted">${esc(b.label)}</span></div>`).join("") : "<div class='insight'>no close ties yet</div>"}
+      ${(() => { const rp = relationshipsParagraph(character); return rp ? `<p class="chronicle-para" style="margin-bottom:8px">${esc(rp)}</p>` : ""; })()}
+      ${ctx.bonds.length ? ctx.bonds.map(b => `<div class="known-npc"><span class="npc-name entity-hover" ${b.id ? `data-entity="npc:${esc(b.id)}"` : ""}>${esc(b.name)}</span> <span class="rep-band trusted">${esc(b.label)}</span></div>`).join("") : "<div class='insight'>no close ties yet</div>"}
     </section>
     <section><h3>Standing</h3>
       ${ctx.standing.length ? ctx.standing.map(s => `<div class="known-npc"><span class="npc-name">${esc(s.who)}</span> <span class="rep-band">${esc(s.band)}</span></div>`).join("") : "<div class='insight'>not yet known anywhere</div>"}
     </section>
     <section><h3>The arc</h3>
-      <div class="chronicle-arc">${ctx.arc ? esc(ctx.arc) : "<span class='insight'>their path is still forming</span>"}</div>
+      ${(() => { // SNG-134 P1: show the SNG-133 personal arc (premise + current stage), not the frozen aim.
+        const pa = character.personalArc;
+        if (pa && pa.premise) {
+          const taken = (character.quests || []).find(q => q.arcId === pa.arcId);
+          const stage = taken ? (pa.stages[taken.stageIndex] || pa.stages[pa.stages.length - 1]) : null;
+          return `<div class="chronicle-arc"><strong>${esc(pa.name)}</strong><p class="map-details-desc" style="margin-top:2px">${esc(pa.premise)}</p><div class="hint">${stage ? "Now: " + esc(stage.objective) : "a thread waiting to be pulled — it will find you in play"}</div></div>`;
+        }
+        return `<div class="chronicle-arc">${ctx.arc ? esc(ctx.arc) : "<span class='insight'>their path is still forming</span>"}</div>`;
+      })()}
     </section>
     <section><h3>World authorship <span class="cost">what you've made real</span></h3>
       <div class="authorship-grid">
@@ -5490,7 +5535,7 @@ function renderPlay(turn, opts = {}) {
           const rank = rankExpression(character, ab, a.level, CONTENT.branchForks) || ab?.tree?.find(t => t.rank === a.level);
           const p = rankProgress(character, a.abilityId); // ability-arch v2: earned, not bought
           return `<div class="ability" title="${esc(rank ? "CAN: " + rank.grants + " | CANNOT: " + rank.cannot : ab?.description || "")}">
-            <span class="name">${esc(ab?.name || a.abilityId)}</span> <span class="tier-badge" title="Tier ${tierOf(ab.levelReq)}">${tierOf(ab.levelReq)}</span> rank ${a.level}${rank ? ` — <em>${esc(rank.name)}${rank.forked ? " ⑂" : ""}</em>` : ""}
+            <span class="name entity-hover" data-entity="skill:${esc(a.abilityId)}">${esc(ab?.name || a.abilityId)}</span> <span class="tier-badge" title="Tier ${tierOf(ab.levelReq)}">${tierOf(ab.levelReq)}</span> rank ${a.level}${rank ? ` — <em>${esc(rank.name)}${rank.forked ? " ⑂" : ""}</em>` : ""}
             <span class="cost">(${effectiveEnergyCost(ab, character, CONTENT.rules)} energy${effectiveEnergyCost(ab, character, CONTENT.rules) < ab.energyCost ? `, was ${ab.energyCost}` : ""})</span>
             ${functionChips(ab)}
             <div class="hint ${p.ripe ? "practiced" : ""}">${esc(p.text)}</div></div>`;
@@ -5579,7 +5624,7 @@ function renderPlay(turn, opts = {}) {
       const hereP = knownPeopleAt(character, character.currentLocationId, { locations: CONTENT.locations, npcs: CONTENT.npcs });
       const partners = partnerAdjacentNpcs(character, CONTENT.rules);
       if (!rep && !hereP.length && !partners.length) return "";
-      const body = `${partners.length ? `<div class="partner-adjacent" style="margin-bottom:6px">${partners.map(p => `<div class="known-npc partner"><span class="npc-name">❤ ${esc(p.name)}</span> <span class="rep-band trusted" title="A committed partner — with you in all but the mechanics">${esc(p.label)} · with you</span></div>`).join("")}</div>` : ""}${rep ? `<div style="margin-bottom:4px"><span class="rep-band ${rep.band}">${rep.band} (${rep.score})</span></div>` : ""}${hereP.length ? hereP.map(p => `<div class="known-npc"><span class="npc-name">${esc(p.name)}</span> <span class="rep-band ${p.bondType === "romantic" ? "trusted" : ""}">${esc(p.label)}</span></div>`).join("") : `<span class="insight">no one you know is here right now</span>`}`;
+      const body = `${partners.length ? `<div class="partner-adjacent" style="margin-bottom:6px">${partners.map(p => `<div class="known-npc partner"><span class="npc-name entity-hover" ${p.id ? `data-entity="npc:${esc(p.id)}"` : ""}>❤ ${esc(p.name)}</span> <span class="rep-band trusted" title="A committed partner — with you in all but the mechanics">${esc(p.label)} · with you</span></div>`).join("")}</div>` : ""}${rep ? `<div style="margin-bottom:4px"><span class="rep-band ${rep.band}">${rep.band} (${rep.score})</span></div>` : ""}${hereP.length ? hereP.map(p => `<div class="known-npc"><span class="npc-name entity-hover" ${p.id ? `data-entity="npc:${esc(p.id)}"` : ""}>${esc(p.name)}</span> <span class="rep-band ${p.bondType === "romantic" ? "trusted" : ""}">${esc(p.label)}</span></div>`).join("") : `<span class="insight">no one you know is here right now</span>`}`;
       return `<details class="sidebar-sec" data-sec="whoshere"${sectionOpen("whoshere", true) ? " open" : ""}><summary><span class="sec-title">${esc(location.name)} — who's here</span>${rep ? ` <span class="sec-sum">· ${rep.band}</span>` : ""}</summary><div class="sec-body">${body}</div></details>`;
     })()}
     <details class="sidebar-sec" data-sec="playstyle"${sectionOpen("playstyle", false) ? " open" : ""}><summary><span class="sec-title">Play-style</span></summary><div class="sec-body">${aptitudeChips()}</div></details>

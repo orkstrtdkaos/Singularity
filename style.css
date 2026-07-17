@@ -720,3 +720,7 @@ img[data-lightbox] { cursor: zoom-in; }
 .company-action { font-size: 11px; line-height: 1; padding: 2px 5px; background: none; border: 1px solid var(--border); color: var(--ink-dim); border-radius: 5px; }
 .company-action:hover { color: var(--ink); border-color: var(--ink-dim); }
 .company-action.recruit { color: var(--accent2); border-color: var(--accent2); }
+
+/* SNG-134: a hoverable/tappable entity (skill · name · item) — subtle affordance, one detail everywhere */
+.entity-hover { cursor: help; border-bottom: 1px dotted var(--ink-dim); }
+.entity-hover:hover { color: var(--accent2); border-bottom-color: var(--accent2); }

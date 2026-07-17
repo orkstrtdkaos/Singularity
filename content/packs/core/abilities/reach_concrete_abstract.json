@@ -759,6 +759,158 @@
     }
    ],
    "nativeOrCombination": "native"
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_binding_figure",
+   "name": "The Binding Figure",
+   "levelReq": 4,
+   "energyCost": 11,
+   "powerSystem": "reach_concrete_abstract",
+   "tradition": "figurist",
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": 0.6,
+    "chaos_order": 0.3
+   },
+   "functions": [
+    "bind",
+    "make"
+   ],
+   "narrationHints": "You draw the figure and the thing it describes becomes bound to obey it — the map, for a while, ruling the territory.",
+   "description": "The Figurist art of the binding sign — a figure drawn so true that reality briefly consents to match it, the abstract pattern given authority over the concrete thing. To draw it right is to legislate, briefly, what is.",
+   "notFor": "It binds through the figure's truth, so a false or sloppy figure binds nothing — and the world only consents for a while. Reality always resumes being itself; the figure rules until it doesn't.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Binding Figure",
+     "grants": "Draw a binding figure that compels a concrete thing to match its abstract pattern for a time.",
+     "cannot": "It fails if the figure is untrue, it holds only for a while before reality resumes, and a figure that binds the world binds you to its upkeep while it lasts."
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "CREATE",
+    "INVESTIGATE"
+   ],
+   "challengeProfile": {
+    "CREATE": 4,
+    "INVESTIGATE": 3
+   },
+   "harmRung": "binding"
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_true_name",
+   "name": "The True Name",
+   "levelReq": 5,
+   "energyCost": 14,
+   "powerSystem": "reach_concrete_abstract",
+   "tradition": "figurist",
+   "attribute": "mental",
+   "axes": {
+    "concrete_abstract": 0.9
+   },
+   "functions": [
+    "bind",
+    "reveal"
+   ],
+   "narrationHints": "You find the one figure that is not a description of the thing but the thing's own name — and a thing called by its true name has no choice but to turn and answer.",
+   "description": "The Figurist capstone — the true figure, the sign that IS the thing rather than describes it. To know a thing's true name is to hold a handle on its very being. The deepest and most dangerous Figurist working, because names cut both ways.",
+   "notFor": "One true name, found at enormous cost, and it must be TRUE — a guessed name binds nothing and warns the thing you tried. And to speak a true name is to be known by it in turn: the naming runs both directions.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The True Name",
+     "grants": "Find and speak a thing's true name, gaining a hold on its very being.",
+     "cannot": "A false name fails and forewarns, the finding costs nearly all you have, and to name truly is to be truly named — you cannot hold a thing's name without offering your own."
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "INVESTIGATE"
+   ],
+   "challengeProfile": {
+    "INVESTIGATE": 5
+   },
+   "harmRung": "severe"
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_keystone_blow",
+   "name": "The Keystone Blow",
+   "levelReq": 4,
+   "energyCost": 11,
+   "powerSystem": "reach_concrete_abstract",
+   "tradition": "mason",
+   "attribute": "physical",
+   "axes": {
+    "concrete_abstract": -0.6
+   },
+   "functions": [
+    "break",
+    "reveal"
+   ],
+   "narrationHints": "You do not batter the wall. You find the one stone the whole thing is truly resting on, and you strike THAT, and the wall discovers it was only ever an agreement between stones.",
+   "description": "The Mason art of the keystone blow — reading a made structure to its single load-bearing truth and striking exactly there, so the whole comes down for the cost of one perfect blow. To break well is to understand first.",
+   "notFor": "It breaks the made, not the living or the grown — and it needs a real keystone; some things bear their load everywhere at once and have no single stone to strike. Read wrong and you have merely hit a wall.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Keystone Blow",
+     "grants": "Find and strike a structure's single load-bearing point, bringing the whole down with one blow.",
+     "cannot": "It works only on made structures with a true keystone, it fails on distributed loads, and a thing brought down cannot be un-broken — you understood it in order to end it."
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "FIGHT",
+    "INVESTIGATE"
+   ],
+   "challengeProfile": {
+    "FIGHT": 4,
+    "INVESTIGATE": 3
+   },
+   "harmRung": "moderate"
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_unmaking_of_walls",
+   "name": "The Unmaking of Walls",
+   "levelReq": 5,
+   "energyCost": 13,
+   "powerSystem": "reach_concrete_abstract",
+   "tradition": "mason",
+   "attribute": "physical",
+   "axes": {
+    "concrete_abstract": -0.9
+   },
+   "functions": [
+    "break"
+   ],
+   "narrationHints": "You put your hand flat against the made thing and remember it, stone by stone, back to the un-built quarry it came from — and it goes, willingly almost, back to being nothing that was ever a wall.",
+   "description": "The Mason capstone — the unmaking of a made thing back to its raw un-built state, a whole edifice returned to stone and dust as if it had never risen. The great and grieving gift of those who know building best.",
+   "notFor": "One structure, once, at enormous cost — it unmakes only what was made, never the grown or living, and it cannot be reversed; an unmade wall does not remember how to be a wall. Those who build best grieve this most.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Unmaking of Walls",
+     "grants": "Unmake a whole built structure back to its raw, un-built material.",
+     "cannot": "It touches only the made, it costs nearly all you have, and it CANNOT be undone — the ones who understand building are the ones who feel the unmaking most."
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "FIGHT"
+   ],
+   "challengeProfile": {
+    "FIGHT": 5
+   },
+   "harmRung": "severe"
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

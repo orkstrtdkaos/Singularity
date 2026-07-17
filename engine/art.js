@@ -20,7 +20,7 @@ export const ART_MODES = ["off", "static", "generate"];
 
 export function getArtMode() {
   const m = localStorage.getItem("singularity.artMode");
-  return ART_MODES.includes(m) ? m : "static";
+  return ART_MODES.includes(m) ? m : "generate";
 }
 export function setArtMode(m) { if (ART_MODES.includes(m)) localStorage.setItem("singularity.artMode", m); }
 

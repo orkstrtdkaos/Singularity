@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "id": "saehara_challengers",
+  "kind": "challenger_pool",
+  "arcId": "saehara_prestige_arc",
+  "note": "The blades and powers that rise to test Saehara's name, keyed to his prestige band (see the_name_that_travels.recurrence). Authored to be RICH and authentic — samurai tradition first, magic/fantasy woven in. Each is a duel opponent (SNG-098 skill battle) with a decline/flee path. The GM picks by band and may mint variations.",
+  "challengers": [
+    {
+      "id": "road_duelist_low",
+      "name": "A wandering blade",
+      "band": "unknown",
+      "concept": "A dōjō-yaburi hopeful — young, hungry, testing an unproven name to make their own. Competent, not yet dangerous. The first rung.",
+      "style": "straightforward kenjutsu; more nerve than mastery",
+      "traditions": ["somatic"],
+      "duelStakes": "prestige only — a loss here is a bruised pride, not a grave",
+      "voiceHints": "Eager, a little too loud, trying on a swagger that doesn't quite fit yet. Bows correctly, at least."
+    },
+    {
+      "id": "school_champion",
+      "name": "Ito of the Still-Water School",
+      "band": "known",
+      "concept": "Champion of a local ryūha, sent to defend the lineage's honor against a masterless ronin whose very existence is an argument that schools don't matter. Disciplined, patient, fights for something larger than himself.",
+      "style": "Still-Water kenjutsu — defensive, counter-timed, waits for the opponent to overcommit; zanshin held long after each exchange",
+      "traditions": ["somatic", "stillhold"],
+      "duelStakes": "the school's honor vs. the ronin's road — a philosophical duel as much as a physical one",
+      "voiceHints": "Formal, measured, genuinely respectful even as he means to defeat you. Speaks of his school the way others speak of family."
+    },
+    {
+      "id": "rival_ronin",
+      "name": "Kaede the Unlineaged",
+      "band": "known",
+      "concept": "Another masterless blade — a mirror of Saehara walking the same pilgrimage. Not an enemy, exactly; a rival who understands the road because she walks it too. Recurs: she may lose, return, sharpen, become a sworn rival or a friend.",
+      "style": "adaptive, self-taught, unpredictable — no school's tells because she has no school",
+      "traditions": ["cogitant", "somatic"],
+      "duelStakes": "two roads, one question — whose way of being masterless is truer",
+      "voiceHints": "Dry, knowing, treats the duel as a conversation. The only one who calls Saehara by what he is rather than what he's becoming."
+    },
+    {
+      "id": "sworn_rival",
+      "name": "Ren of the Crimson Ledger",
+      "band": "renowned",
+      "concept": "A named duelist whose OWN prestige now demands he face Saehara — two rising names cannot both go unmeasured. He keeps a ledger of every duel he's fought; Saehara is the entry he's been waiting to write.",
+      "style": "precise, record-keeping, studies his opponent's past duels before fighting — comes prepared with counters",
+      "traditions": ["syllogist", "somatic"],
+      "duelStakes": "two renowns collide — the valley will talk about this one for years",
+      "voiceHints": "Cold courtesy, the manner of a man who has already imagined this duel a hundred times. Writes in his ledger before and after."
+    },
+    {
+      "id": "blazeborn_kensei",
+      "name": "Suzu of the Ember Draw",
+      "band": "renowned",
+      "concept": "The fantasy layer made flesh — a sword-saint whose blade is fire. She proves steel is only one language: her draw ignites, her strikes carry heat, her iaijutsu is a discipline of flame. Magic and swordsmanship as one art.",
+      "style": "iaijutsu fused with blazeborn fire-craft — the draw itself is an ignition; fast, aggressive, punishes hesitation",
+      "traditions": ["blazeborn", "somatic"],
+      "duelStakes": "can a mind-guided blade (cogitant) read a fire that changes as it burns? steel vs. flame",
+      "voiceHints": "Warm, fierce, almost joyful in the contest — she loves a worthy blade the way fire loves dry wood. No cruelty, all intensity."
+    },
+    {
+      "id": "the_last_blade",
+      "name": "The Blade Without a Name",
+      "band": "legendary",
+      "concept": "The Ganryūjima beat — the challenge that defines the arc. A duelist who may genuinely be Saehara's equal or better, and who (fittingly) has refused a name, as Saehara nearly is one. Who they truly are, and what the duel costs, the GM shapes from how Saehara has walked the whole arc: whom he spared, whether he killed for the name, whether he chose the brush over the blade.",
+      "style": "a mirror and a culmination — the GM builds their style to answer Saehara's own; if he's been merciful, they test his mercy; if he's killed, they are the reckoning; if he's chosen the pen, they are the blade that asks if the pen was cowardice or wisdom",
+      "traditions": ["cogitant", "precursor"],
+      "duelStakes": "the title of the book — saint, killer, or teacher — is written here",
+      "voiceHints": "Still. Utterly still. The stillness Saehara himself carries, reflected back and deepened. Says little; what they say, Saehara will remember for the rest of the story."
+    }
+  ]
+}

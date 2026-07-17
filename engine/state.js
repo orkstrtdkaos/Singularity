@@ -133,7 +133,9 @@ export async function loadContent() {
   // leaves quests empty (freeform GM quests still work), never breaks load.
   let quests = [];
   for (const path of valley.provides.quests || []) {
-    try { const qf = await fetchJSON(`content/packs/valley/${path}`); quests = quests.concat(qf.quests || (Array.isArray(qf) ? qf : [])); }
+    // SNG-132: accept an aggregated file ({quests:[…]}), a bare array, OR a single standalone quest/arc
+    // object (a hand-authored or generated bound arc, e.g. the_reaching_light).
+    try { const qf = await fetchJSON(`content/packs/valley/${path}`); quests = quests.concat(qf.quests || (Array.isArray(qf) ? qf : (qf && qf.id ? [qf] : []))); }
     catch { /* quests optional */ }
   }
   const region = await fetchJSON("world/regions/valley.json");

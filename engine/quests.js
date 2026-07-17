@@ -364,6 +364,12 @@ export function availableStructuredQuests(character, catalog = [], ctx = {}) {
   return (catalog || []).filter(isRealQuest).filter(def => {
     if (have.has(slugify(def.id))) return false;
     if (def.arcId && heldArcs.has(def.arcId)) return false;                 // one instance per shared arc
+    // SNG-132: a BOUND legendary arc follows its CHARACTER, not a location — it ignores the proximity gate
+    // and surfaces ONLY for the character/player it's bound to (never anyone else, even on a bare board).
+    if (def.boundToCharacter || def.boundToPlayer) {
+      return (def.boundToCharacter && character?.name && namesMatch(character.name, def.boundToCharacter))
+        || (def.boundToPlayer && character?.playerKey && character.playerKey === def.boundToPlayer);
+    }
     if (noContext) return true;
     if (def.giver && sceneNames.some(n => namesMatch(n, def.giver))) return true;   // (1) giver present
     const questLoc = def.locationId || (def.giver ? npcHomes[slugify(def.giver)] : null); // (2) proximity
@@ -384,13 +390,23 @@ export function routesForCharacter(quest, character) {
   return [...open, ...other];
 }
 
-/** GM block for structured quests: stakes + current stage + the routes the character's domains open. */
-export function structuredQuestsForGM(character) {
+/** GM block for structured quests: stakes + current stage + the routes the character's domains open.
+ *  SNG-132: for a BOUND legendary arc, also surface its `legend` NPC as a distant, turning-toward-this-
+ *  character presence — escalating ONLY as stages complete (pass `opts.npcs` to name the legend). */
+export function structuredQuestsForGM(character, opts = {}) {
   const active = (character.quests || []).filter(q => q.structured && q.status === "active");
   if (!active.length) return null;
+  const npcs = opts.npcs || {};
   return active.map(q => {
     const stage = q.stages[q.stageIndex] || q.stages[q.stages.length - 1];
     const open = routesForCharacter(q, character).filter(r => r.open).map(r => r.trad);
-    return `- [${q.id}] ${q.title} (axis: ${q.axis || "?"}) — STAKES: ${q.stakes}\n  Now: ${stage?.objective || "resolve"}${stage?.condition ? ` (${stage.condition})` : ""}${open.length ? `\n  This character's domains open: ${open.join(", ")}` : ""}`;
+    let line = `- [${q.id}] ${q.title} (axis: ${q.axis || "?"}) — STAKES: ${q.stakes}\n  Now: ${stage?.objective || "resolve"}${stage?.condition ? ` (${stage.condition})` : ""}${open.length ? `\n  This character's domains open: ${open.join(", ")}` : ""}`;
+    if (q.legend && (q.boundToCharacter || q.boundToPlayer)) {
+      const leg = npcs[q.legend];
+      const legName = leg?.name || q.legend;
+      const si = (q.stageIndex || 0) + 1, n = q.stages.length;
+      line += `\n  LEGEND — ${legName}: a distant, turning-toward-this-character presence (${leg?.role || "a legendary force"}). This arc FOLLOWS ${character.name || "them"}; make ${legName} felt as a slow gravity, escalating ONLY as stages complete (now stage ${si}/${n}) — never dump the whole arc. The ending is HERS to decide; never foreclose it.`;
+    }
+    return line;
   }).join("\n");
 }

@@ -3457,5 +3457,37 @@ await (async () => {
     shapeOfFamily("HARM") === "diamond" && shapeOfFamily(undefined) === "circle" && shapeOfFamily(null) === "circle");
 }
 
+// --- SNG-132: bound legendary arcs follow their character; content-generators mint heavier content ---
+{
+  const arc = { id: "reaching-light", arcId: "aelyn_father_arc", title: "The Reaching Light", stakes: "a father consumed", region: "valley",
+    boundToCharacter: "Aelyn Kantoro", boundToPlayer: "player-7fah99", legend: "the_lightless_seraph",
+    stages: [{ objective: "the reaching light" }, { objective: "the mother's last word" }, { objective: "the anomaly and the daughter" }],
+    routes: { rootkin: "release", seraphic: "reach" }, outcomes: [{ id: "reach", name: "Reach him", effects: [] }, { id: "release", name: "Release him", effects: [] }] };
+  const aelyn = { name: "Aelyn Kantoro", playerKey: "player-7fah99", quests: [], domains: { primary: "rootkin", secondary: "seraphic" } };
+  const other = { name: "Silas Weir", playerKey: "player-s9z9u1", quests: [], domains: {} };
+
+  // a bound arc surfaces for its character even with NO proximity context (it follows the character), never for others
+  check("SNG-132: a bound arc surfaces for its bound CHARACTER ignoring proximity (no location context)",
+    availableStructuredQuests(aelyn, [arc], {}).some(d => d.id === "reaching-light"));
+  check("SNG-132: a bound arc NEVER surfaces for a different character (even on a bare board)",
+    !availableStructuredQuests(other, [arc], {}).some(d => d.id === "reaching-light") && !availableStructuredQuests(other, [arc], { board: true, region: "valley" }).some(d => d.id === "reaching-light"));
+  // binding by playerKey alone also matches (a renamed character keeps their arc)
+  check("SNG-132: binding matches by playerKey too (arc follows the player, not just the name)",
+    availableStructuredQuests({ name: "Renamed", playerKey: "player-7fah99", quests: [] }, [arc], {}).some(d => d.id === "reaching-light"));
+
+  // the legend NPC surfaces to the GM as a stage-gated following presence (named from the npcs catalog)
+  const activeAelyn = { name: "Aelyn Kantoro", playerKey: "player-7fah99", domains: { primary: "rootkin" },
+    quests: [{ ...arc, structured: true, status: "active", stageIndex: 0 }] };
+  const gm = structuredQuestsForGM(activeAelyn, { npcs: { the_lightless_seraph: { name: "Caelum Kantoro", role: "the fallen Seraph" } } });
+  check("SNG-132: the bound arc feeds the GM its LEGEND as a stage-gated following presence, ending never foreclosed",
+    /LEGEND — Caelum Kantoro/.test(gm) && /stage 1\/3/.test(gm) && /never foreclose/i.test(gm));
+
+  // content-generator: a flagged author's minted content starts heavier (persists into shared canon more readily)
+  const plain = birthWeightOf({ character: { level: 4 } });
+  const boosted = birthWeightOf({ character: { level: 4 }, contentGenerator: true });
+  check("SNG-132: a content-generator's birthWeight is boosted above a plain author's (heavier realness)", boosted > plain);
+  check("SNG-132: the boost never eclipses authored core (weight 100 still outranks a level-4 generator's mint)", boosted < 100);
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

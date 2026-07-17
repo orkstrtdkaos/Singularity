@@ -45,7 +45,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.90";
+const APP_VERSION = "1.8.91";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1409,7 +1409,7 @@ async function handleGenerateRequests(turn) {
       location, character, playerKey: getPlayerKey(), day: time.day, season: time.season || null,
       hint: req.hint, why: req.why, birthPower: character.level,
       rating: ratingCeilingNow(),                              // §3 consumer (b+c): generate to the ceiling + tag the entity
-
+      contentGenerator: !!profile?.contentGenerator,          // SNG-132: a family author's content persists more readily
       known: { authored, generated: character.generated?.[type] || {} },
       examples: pickExamples(type, location), substrate: CONTENT.substrate, genBudget: budget
     };
@@ -2478,7 +2478,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
     inventoryDetail: inventoryForGM(character),
     companionsDetail: companionsForGM(activeCompanions(character, CONTENT.companions), character, CONTENT.rules),
     questsDetail: questsForGM(character),
-    structuredQuestsDetail: structuredQuestsForGM(character),
+    structuredQuestsDetail: structuredQuestsForGM(character, { npcs: CONTENT.npcs }),
     sceneState,
     npcRegistryDetail: npcRegistryForGM(character, { locationId: character.currentLocationId, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) }),
     placeMemoryDetail: placeMemoryForGM(character, character.currentLocationId),
@@ -3308,7 +3308,7 @@ async function onAsk(text) {
     inventoryDetail: inventoryForGM(character),
     companionsDetail: companionsForGM(activeCompanions(character, CONTENT.companions), character, CONTENT.rules),
     questsDetail: questsForGM(character),
-    structuredQuestsDetail: structuredQuestsForGM(character),
+    structuredQuestsDetail: structuredQuestsForGM(character, { npcs: CONTENT.npcs }),
     sceneState,
     npcRegistryDetail: npcRegistryForGM(character, { locationId: character.currentLocationId, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) }),
     placeMemoryDetail: placeMemoryForGM(character, character.currentLocationId),
@@ -4415,7 +4415,7 @@ function renderQuestDetail(questId, guidance = null, loading = false) {
       region: { ...CONTENT.region, activeEvents: eventsForGM(buildRegionView(CONTENT, character), CONTENT.events) },
       recentTurns: sceneTurns.slice(-4), timeLabel: time.label,
       questsDetail: questsForGM(character),
-      structuredQuestsDetail: structuredQuestsForGM(character),
+      structuredQuestsDetail: structuredQuestsForGM(character, { npcs: CONTENT.npcs }),
       npcRegistryDetail: npcRegistryForGM(character, { locationId: character.currentLocationId, sceneNpcNames: [] }),
       codexDetail: codexForGM(character, { locationId: character.currentLocationId, questTitles: [q.title] })
     }, `Give me practical guidance on my quest "${q.title}": what are 2-3 sensible next steps from where I am, who might help or know more, and roughly how difficult does this look? Spoiler-safe only.`);

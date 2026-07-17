@@ -190,7 +190,11 @@ export function enforceFloors(entity, type, context = {}, schema = {}) {
  *  of the character the entity was generated for (the spec's "born strong" road). */
 export function birthWeightOf(context = {}) {
   const lvl = Number(context.birthPower ?? context.character?.level ?? 1);
-  return Math.max(1, Math.round(lvl));
+  const base = Math.max(1, Math.round(lvl));
+  // SNG-132: a flagged CONTENT-GENERATOR (a family author — Brooklyn/Brayden) mints content that starts
+  // MORE real, so what they make through play persists into shared family canon more readily (SNG-128).
+  // A multiplier boost — additive to the realness model, and authored core (weight 100) still outranks.
+  return context.contentGenerator ? Math.max(base + 1, Math.round(base * (context.contentGeneratorBoost || 1.5))) : base;
 }
 
 /** Attach the `_gen` sidecar: entityId, birth-weight, engagement/tier, rating-tag, provenance,

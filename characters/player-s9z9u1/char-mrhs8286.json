@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 10,
-  "xp": 950,
+  "xp": 955,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -85,7 +85,7 @@
   "maxHealth": 75,
   "health": 75,
   "maxEnergy": 145,
-  "energy": 101,
+  "energy": 97,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -675,136 +675,141 @@
         "player": "Wait at the door and let Pell take it — she named her strategy, and you read the room. Hand it to her.",
         "summary": "Calvar opens his door — he has been waiting, and he says so plainly.",
         "narration": "You step back one pace on the landing — not retreating, just clearing the threshold — and angle your shoulder toward Pell. The gesture is small enough that it doesn't announce itself. She reads it anyway. Her hand comes off Memory's shaft and she moves up the last step without hesitation, settling in front of the door the way she settles in front of a workbench: weight even, attention forward, nothing wasted.\n\nHuginn stays on your pack strap and goes very still. The lamp-line through the shutter gap doesn't change.\n\nA moment. Two. Then the sound of a chair shifting weight — the specific creak of someone who has been sitting at a table deciding something, and has decided. Footsteps cross the upper floor, deliberate but unhurried. A latch lifts.\n\nThe door opens inward. The man who opens it is somewhere past sixty, broad through the chest and narrow through the shoulders in the way of someone who spent decades leaning over drafting surfaces. His hands are the giveaway — the right index finger slightly curled, stained at the knuckle in the way of someone who used a ruling pen for years and never fully stopped. He looks at Pell first. Then at you. Then at Huginn, for one longer beat than the others, with the measured non-reaction of someone who has learned to receive strange things without flinching.\n\n\"I wondered,\" he says, and his voice is level and carries the particular tiredness of someone who has been wondering for a while, \"what shape it would come in.\" He steps back from the threshold — not wide open, not a welcome exactly, but a clearance. An invitation with conditions still attached. \"Come in, then.\""
+      },
+      {
+        "player": "Say nothing yet — step inside, look at what the room holds, and let Order-Sense read the design before you commit to a shape",
+        "summary": "Silas crosses into Calvar's room and reads the design — a node built for receiving, not hiding; a man who arranged his space for this arrival.",
+        "narration": "You cross the threshold behind Pell without a word.\n\nThe room is small and purposeful — drafting surface to the left, a single lamp on its corner, a shelf of ruled papers bundled with cotton cord. A stool. A coat on a hook. The bed is against the far wall, made with the precision of someone who has slept alone in orderly rooms for a long time. Calvar stands a pace back from the door, weight on his heels, watching the three of you arrive the way a man watches weather he has been tracking for a week.\n\nYou let Order-Sense open, quietly, the way you'd set a hand flat on a surface to feel for heat. Not a push — just a listening. The lattice is thin here, the substrate starved, and the craft comes back half-fed: impressions rather than certainties, the shape of a design rather than its full blueprint.\n\nWhat it gives you: this room is a node, not a terminus. The drafting surface holds work that feeds outward — documents meant to reach other hands. The lamp's position is deliberate, the chair angled toward the door rather than the window. Calvar arranged this room for receiving, not for hiding. The design he is part of is larger than the room, and he knows it, and he has been waiting here for someone to arrive who is also part of it — though he does not yet know if you are the right shape.\n\nHuginn drops from your pack strap to the back of the empty stool without invitation and folds its wings. Calvar watches it land. He does not flinch. Whatever he was expecting, the bird does not exceed it."
       }
     ],
     "lastTurn": {
-      "narration": "You step back one pace on the landing — not retreating, just clearing the threshold — and angle your shoulder toward Pell. The gesture is small enough that it doesn't announce itself. She reads it anyway. Her hand comes off Memory's shaft and she moves up the last step without hesitation, settling in front of the door the way she settles in front of a workbench: weight even, attention forward, nothing wasted.\n\nHuginn stays on your pack strap and goes very still. The lamp-line through the shutter gap doesn't change.\n\nA moment. Two. Then the sound of a chair shifting weight — the specific creak of someone who has been sitting at a table deciding something, and has decided. Footsteps cross the upper floor, deliberate but unhurried. A latch lifts.\n\nThe door opens inward. The man who opens it is somewhere past sixty, broad through the chest and narrow through the shoulders in the way of someone who spent decades leaning over drafting surfaces. His hands are the giveaway — the right index finger slightly curled, stained at the knuckle in the way of someone who used a ruling pen for years and never fully stopped. He looks at Pell first. Then at you. Then at Huginn, for one longer beat than the others, with the measured non-reaction of someone who has learned to receive strange things without flinching.\n\n\"I wondered,\" he says, and his voice is level and carries the particular tiredness of someone who has been wondering for a while, \"what shape it would come in.\" He steps back from the threshold — not wide open, not a welcome exactly, but a clearance. An invitation with conditions still attached. \"Come in, then.\"",
-      "sceneSummary": "Calvar opens his door — he has been waiting, and he says so plainly.",
+      "narration": "You cross the threshold behind Pell without a word.\n\nThe room is small and purposeful — drafting surface to the left, a single lamp on its corner, a shelf of ruled papers bundled with cotton cord. A stool. A coat on a hook. The bed is against the far wall, made with the precision of someone who has slept alone in orderly rooms for a long time. Calvar stands a pace back from the door, weight on his heels, watching the three of you arrive the way a man watches weather he has been tracking for a week.\n\nYou let Order-Sense open, quietly, the way you'd set a hand flat on a surface to feel for heat. Not a push — just a listening. The lattice is thin here, the substrate starved, and the craft comes back half-fed: impressions rather than certainties, the shape of a design rather than its full blueprint.\n\nWhat it gives you: this room is a node, not a terminus. The drafting surface holds work that feeds outward — documents meant to reach other hands. The lamp's position is deliberate, the chair angled toward the door rather than the window. Calvar arranged this room for receiving, not for hiding. The design he is part of is larger than the room, and he knows it, and he has been waiting here for someone to arrive who is also part of it — though he does not yet know if you are the right shape.\n\nHuginn drops from your pack strap to the back of the empty stool without invitation and folds its wings. Calvar watches it land. He does not flinch. Whatever he was expecting, the bird does not exceed it.",
+      "sceneSummary": "Silas crosses into Calvar's room and reads the design — a node built for receiving, not hiding; a man who arranged his space for this arrival.",
       "choices": [
         {
-          "label": "Let Pell lead with the professional case — Fendt's testimony, the seventh-band falsification, the six-week window",
+          "label": "Let Pell open — professional case first, the evidence chain: Fendt's testimony, Rennic in the intake log, the diagram Calvar left with Leth",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.8
+          },
           "difficulty": 0,
           "intentTags": [
             "persuade",
             "careful"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Open with what you brought — lay Fendt's Testimony on his table without preamble and watch what his hands do",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "persuade"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Say nothing yet — step inside, look at what the room holds, and let Order-Sense read the design before you commit to a shape",
+          "label": "Name what Order-Sense showed — this room is a node, his design reaches outward, and you are here to ask him to reach with you",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 0,
+          "axes": {
+            "concrete_abstract": 0.5
+          },
+          "difficulty": 15,
           "intentTags": [
-            "scout",
+            "persuade",
             "study"
           ],
           "abilityId": "order_sense",
           "energyCost": 2,
-          "trivial": true
+          "trivial": false
         },
         {
-          "label": "Ask him directly what shape he expected — he said it first, and that phrasing has weight",
+          "label": "Lay Fendt's Testimony on the drafting surface — no preamble, let the document speak first and watch what recognition does to his face",
           "attribute": "social",
           "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.9
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "persuade",
+            "gamble"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
+        },
+        {
+          "label": "Ask him plainly: 'You said you wondered what shape it would come in. What shape were you hoping for?'",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.6
+          },
           "difficulty": 0,
           "intentTags": [
             "persuade",
             "study"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         }
       ],
-      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0
+        "energy": -2
       },
-      "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "find-the-engineer",
-          "note": "Calvar opened his door — said 'I wondered what shape it would come in.' He is present, waiting, and has stepped back from the threshold."
-        }
-      ],
       "scene": {
-        "setting": "Calvar's room above the cooperage, east lane, Edge District — evening, early-spring. Threshold of the upper door, now open. Lamp-warmth inside, one chair pushed back from a drafting surface.",
+        "setting": "Calvar's room above the cooperage, east lane, Edge District — evening, early-spring. Inside now: lamp on the drafting surface corner, ruled papers bundled on a shelf, coat on a hook, bed against the far wall. Calvar standing a pace back from the door, weight on his heels, watching.",
         "npcsPresent": [
           {
             "name": "Calvar",
-            "state": "Standing at the open door, weight on the frame — he has stepped back to clear the threshold, watching the three of them without flinching at Huginn."
+            "state": "Standing a pace back from the threshold, weight on his heels — watching all three arrivals settle, the bird's landing noted without flinching. Waiting."
           },
           {
             "name": "Pell",
-            "state": "At the threshold, first across — Memory under her right arm, weight even, reading the room."
+            "state": "Inside the threshold, Memory under her right arm, weight even. Reading the room; strategy held in reserve."
           },
           {
             "name": "Huginn",
-            "state": "On Silas's pack strap, very still — its long beat on Calvar has resolved into watchful quiet."
+            "state": "Settled on the back of the empty stool, wings folded. Very still."
           }
         ],
         "objects": [
-          "Calvar's door — upper landing, now open inward",
-          "Shuttered window, upper left — lamp burning inside, light steady",
-          "Drafting surface visible through the doorway — a chair pushed back from it",
+          "Drafting surface — left of the door, lamp on its corner, papers ruled and stacked",
+          "Shelf of bundled documents — cotton-cord tied, organized",
+          "Empty stool — Huginn now perched on its back",
+          "Coat on a hook by the door",
+          "Bed against the far wall — made precisely",
           "Memory (spear) — under Pell's right arm",
           "Fendt's Testimony — folded page in Silas's coat"
         ],
         "threads": [
-          "Calvar said 'I wondered what shape it would come in' — the phrasing implies he anticipated this visit and possibly knows why they've come",
-          "Pell's strategy: professional case first, her father's name held in reserve",
-          "Huginn held a long beat on Calvar — that attention has not been explained"
+          "Calvar said 'I wondered what shape it would come in' — what shape was he hoping for?",
+          "Order-Sense reads this room as a node: documents meant to reach other hands, chair angled for receiving — Calvar knows he is part of a larger design",
+          "Huginn landed on the stool without invitation; Calvar did not flinch — his expectations are wider than ordinary",
+          "Pell's strategy: professional case first, her father's name held in reserve"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
+          "op": "update",
           "npcId": "calvar",
           "name": "Calvar",
-          "role": "Pre-Transition filtration engineer, Edge District",
-          "description": "Past sixty, broad-chested, with the stained ruling-pen knuckle of someone who spent decades at a drafting surface and never fully stopped. Opens his door with the measured non-reaction of a man who has learned to receive strange things.",
-          "note": "Opened his door without alarm — said 'I wondered what shape it would come in' and stepped back from the threshold. Not a full welcome; a clearance with conditions attached.",
+          "note": "Watched all three enter without moving — the bird landing on his stool did not exceed whatever he was expecting. Weight on heels, patient. Waiting for whoever speaks first.",
           "learned": [
-            "Has been waiting for someone to arrive — the phrasing 'I wondered' implies anticipation, not surprise",
-            "Looked at Huginn for one longer beat than the others, with deliberate non-reaction — not unfamiliar with the strange"
+            "Did not flinch at Huginn's landing — his expectations are wider than ordinary visitors",
+            "Room arranged for receiving: chair angled toward the door, lamp positioned for a working meeting, documents meant to travel outward"
           ],
-          "skillsObserved": [
-            "receiving unexpected visitors without flinching"
-          ],
-          "relationshipDelta": 1,
+          "skillsObserved": [],
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "In his room above the cooperage on the east lane — door now open, threshold cleared for Silas and Pell."
-        }
-      ],
-      "factUpdates": [
+          "statusNote": "In his room above the cooperage — threshold cleared, three visitors inside, waiting for the conversation to begin"
+        },
         {
-          "op": "add",
-          "text": "Calvar opened his door on the first knock — said 'I wondered what shape it would come in' and stepped back from the threshold. He was expecting someone to come, and he is present and willing to hear them.",
-          "subjectId": "calvar"
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "Calvar's door opened on the first knock — World-day 17 evening. He was inside, waiting, and admitted Silas and Pell without incident.",
-          "subPlace": {
-            "name": "Cooperage — East Lane (Calvar's Room)",
-            "note": "Door opened. Calvar present, admitted visitors — lamp burning, drafting surface visible inside. World-day 17 evening.",
-            "visited": true
-          }
+          "op": "update",
+          "npcId": "pell",
+          "name": "Pell",
+          "note": "Crossed the threshold cleanly — inside now, reading the room. Strategy intact: professional case first.",
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Inside Calvar's room, Memory under her right arm — professional case ready, father's name held in reserve"
         }
       ],
       "codexUpdates": [
@@ -813,10 +818,10 @@
           "label": "Calvar — the Engineer",
           "kind": "person",
           "entityId": "calvar",
-          "fact": "Opened his door on the first knock and said 'I wondered what shape it would come in' — he was expecting someone to arrive and is willing to receive them. He looked at Huginn for a long beat without flinching.",
+          "fact": "Order-Sense reads his room as a node, not a terminus — documents meant to reach other hands, chair angled toward the door for receiving. He arranged this space for an arrival he anticipated. He is part of a larger design and knows it; he does not yet know if Silas is the right shape.",
           "links": [
             "find-the-engineer",
-            "leth-archive-complaint",
+            "the-edge-district-ledger",
             "the-water-crisis",
             "radiant-plateau-edge"
           ]
@@ -824,36 +829,39 @@
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief wait on the landing and the door opening — a few minutes at most"
+        "why": "Crossing the threshold and reading the room — a brief, quiet beat"
       }
     },
     "sceneState": {
-      "setting": "Calvar's room above the cooperage, east lane, Edge District — evening, early-spring. Threshold of the upper door, now open. Lamp-warmth inside, one chair pushed back from a drafting surface.",
+      "setting": "Calvar's room above the cooperage, east lane, Edge District — evening, early-spring. Inside now: lamp on the drafting surface corner, ruled papers bundled on a shelf, coat on a hook, bed against the far wall. Calvar standing a pace back from the door, weight on his heels, watching.",
       "npcsPresent": [
         {
           "name": "Calvar",
-          "state": "Standing at the open door, weight on the frame — he has stepped back to clear the threshold, watching the three of them "
+          "state": "Standing a pace back from the threshold, weight on his heels — watching all three arrivals settle, the bird's landing no"
         },
         {
           "name": "Pell",
-          "state": "At the threshold, first across — Memory under her right arm, weight even, reading the room."
+          "state": "Inside the threshold, Memory under her right arm, weight even. Reading the room; strategy held in reserve."
         },
         {
           "name": "Huginn",
-          "state": "On Silas's pack strap, very still — its long beat on Calvar has resolved into watchful quiet."
+          "state": "Settled on the back of the empty stool, wings folded. Very still."
         }
       ],
       "objects": [
-        "Calvar's door — upper landing, now open inward",
-        "Shuttered window, upper left — lamp burning inside, light steady",
-        "Drafting surface visible through the doorway — a chair pushed back from it",
+        "Drafting surface — left of the door, lamp on its corner, papers ruled and stacke",
+        "Shelf of bundled documents — cotton-cord tied, organized",
+        "Empty stool — Huginn now perched on its back",
+        "Coat on a hook by the door",
+        "Bed against the far wall — made precisely",
         "Memory (spear) — under Pell's right arm",
         "Fendt's Testimony — folded page in Silas's coat"
       ],
       "threads": [
-        "Calvar said 'I wondered what shape it would come in' — the phrasing implies he anticipated this visit and possibly knows why they've come",
-        "Pell's strategy: professional case first, her father's name held in reserve",
-        "Huginn held a long beat on Calvar — that attention has not been explained"
+        "Calvar said 'I wondered what shape it would come in' — what shape was he hoping for?",
+        "Order-Sense reads this room as a node: documents meant to reach other hands, chair angled for receiving — Calvar knows he is part of a larger design",
+        "Huginn landed on the stool without invitation; Calvar did not flinch — his expectations are wider than ordinary",
+        "Pell's strategy: professional case first, her father's name held in reserve"
       ]
     }
   },
@@ -1279,7 +1287,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d3] Gone still in listening mode — waiting for Silas's move, not cutting in.",
         "[d3] Chin lifted a fraction when Fendt mentioned the hand that forms threes — something registered, not yet named.",
         "[d3] Named what she filed when Fendt mentioned the hand that forms threes — her father was a filtration engineer at the Radiant council archive before the Transition, with a distinctive",
         "[d3] Confirmed the margin notation as her father's hand — plain, certain, without performance. The authorship is named.",
@@ -1288,7 +1295,8 @@
         "[d3] Took Fendt's folded page from his hand and passed it to Silas without a word — a small, precise gesture of commitment. Walked the full day back to Millbrook without asking to stop.",
         "[d3] Confirmed the route without deliberation — array office, then Calvar. Took Memory in hand and was already moving.",
         "[d3] Moved before Silas reached the array office door — already oriented east. Stopped two paces from the cooperage stair, reading the lamp-line in the upper window.",
-        "[d3] Named her approach plainly — professional case first, her father's name held in reserve. Waiting on Silas's call for who goes up first."
+        "[d3] Named her approach plainly — professional case first, her father's name held in reserve. Waiting on Silas's call for who goes up first.",
+        "[d3] Crossed the threshold cleanly — inside now, reading the room. Strategy intact: professional case first."
       ],
       "knownFacts": [
         "Pell's father had a crate of old marking instruments and graduated lenses in the workshop — tools she was told not to touch",
@@ -1309,7 +1317,7 @@
         "holding partial knowledge without performance — named the ha"
       ],
       "status": "active",
-      "statusNote": "At the cooperage stair on the east lane, Memory under her right arm, strategy named and waiting.",
+      "statusNote": "Inside Calvar's room, Memory under her right arm — professional case ready, father's name held in reserve",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 3
@@ -1633,17 +1641,20 @@
       },
       "relationship": 1,
       "history": [
-        "[d3] Opened his door without alarm — said 'I wondered what shape it would come in' and stepped back from the threshold. Not a full welcome; a clearance with conditions attached."
+        "[d3] Opened his door without alarm — said 'I wondered what shape it would come in' and stepped back from the threshold. Not a full welcome; a clearance with conditions attached.",
+        "[d3] Watched all three enter without moving — the bird landing on his stool did not exceed whatever he was expecting. Weight on heels, patient. Waiting for whoever speaks first."
       ],
       "knownFacts": [
         "Has been waiting for someone to arrive — the phrasing 'I wondered' implies anticipation, not surprise",
-        "Looked at Huginn for one longer beat than the others, with deliberate non-reaction — not unfamiliar with the strange"
+        "Looked at Huginn for one longer beat than the others, with deliberate non-reaction — not unfamiliar with the strange",
+        "Did not flinch at Huginn's landing — his expectations are wider than ordinary visitors",
+        "Room arranged for receiving: chair angled toward the door, lamp positioned for a working meeting, documents meant to travel outward"
       ],
       "skillsObserved": [
         "receiving unexpected visitors without flinching"
       ],
       "status": "active",
-      "statusNote": "In his room above the cooperage on the east lane — door now open, threshold cleared for Silas and Pell.",
+      "statusNote": "In his room above the cooperage — threshold cleared, three visitors inside, waiting for the conversation to begin",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 3
@@ -2803,7 +2814,8 @@
           "[d3] The diagram Calvar left with Leth is not a full array schematic — it is specifically the seventh-band section, a proof-of-authorship anchor. He brought Leth the piece that establishes he designed the ",
           "[d3] Calvar left the diagram with Leth with specific verbal instructions: hold it off the shelves, under the cord, until someone came asking about the seventh band or the lower filtration ledge. He anticip",
           "[d3] Deathsense read him at close range — his own ending is decades off, nothing urgent. The arrangement he is attending is a decision's ending: he left instructions with Leth and has been waiting three da",
-          "[d3] Opened his door on the first knock and said 'I wondered what shape it would come in' — he was expecting someone to arrive and is willing to receive them. He looked at Huginn for a long beat without fl"
+          "[d3] Opened his door on the first knock and said 'I wondered what shape it would come in' — he was expecting someone to arrive and is willing to receive them. He looked at Huginn for a long beat without fl",
+          "[d3] Order-Sense reads his room as a node, not a terminus — documents meant to reach other hands, chair angled toward the door for receiving. He arranged this space for an arrival he anticipated. He is par"
         ],
         "links": [
           "find-the-engineer",
@@ -2904,18 +2916,18 @@
     }
   },
   "tendencies": {
-    "strategic": 23.407560512336225,
-    "cerebral": 23.24887096012695,
-    "social": 19.90872240269771,
-    "generous": 5.451025294603372,
-    "cautious": 17.070019614275093,
-    "physical": 0.7804897132269567,
-    "risky": 2.197702035798859,
-    "ruthless": 0.9663868944242407,
-    "carousing": 0.678599068634274,
-    "amorous": 1.860816025691918,
-    "patient": 1.2460990063437132,
-    "stealth": 0.7962355085707052
+    "strategic": 23.82237149952782,
+    "cerebral": 23.667649186123775,
+    "social": 19.411004342630267,
+    "generous": 5.314749662238288,
+    "cautious": 16.643269123918216,
+    "physical": 0.7609774703962827,
+    "risky": 2.1427594849038876,
+    "ruthless": 0.9422272220636347,
+    "carousing": 0.6616340919184172,
+    "amorous": 1.81429562504962,
+    "patient": 1.2149465311851204,
+    "stealth": 0.7763296208564376
   },
   "aptitudes": [
     "strategist",
@@ -2926,7 +2938,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 375,
+  "actionCount": 376,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3092,8 +3104,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784296718366,
-  "rev": 542,
+  "updatedAt": 1784297318883,
+  "rev": 543,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3349,8 +3361,8 @@
           "entityId": "calvar",
           "type": "npc",
           "birthWeight": 10,
-          "engagementScore": 6,
-          "tier": "established",
+          "engagementScore": 9,
+          "tier": "nominated",
           "rating": "R+",
           "provenance": {
             "playerKey": "player-s9z9u1",
@@ -3368,6 +3380,14 @@
             },
             {
               "kind": "fact",
+              "day": 3
+            },
+            {
+              "kind": "fact",
+              "day": 3
+            },
+            {
+              "kind": "interact",
               "day": 3
             },
             {
@@ -3737,7 +3757,7 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 43,
+      "order_sense": 44,
       "palework": 22,
       "deathsense": 15,
       "shadowstep": 9,
@@ -3839,7 +3859,7 @@
   "syncedAt": 1784292613822,
   "teachers": {},
   "regionsKnown": {
-    "valley": 190
+    "valley": 191
   },
   "foreclosed": [
     "rootkin",
@@ -3876,10 +3896,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-17T12:35:15.912Z",
-      "lastAt": "2026-07-17T13:58:38.365Z",
+      "lastAt": "2026-07-17T14:08:38.882Z",
       "startDay": 17,
       "endDay": 17,
-      "beats": 13,
+      "beats": 14,
       "_recapBusy": false,
       "_recapError": null,
       "recap": "Day seventeen passed through Silas Weir like weather through an open window — present, felt, and gone without leaving a mark anyone could name. No blood on his hands, no new doors opened or closed, no word carried to ears that needed it. He existed inside the hours, which is its own kind of labor, the kind that leaves no scar but slowly shapes the bone beneath. The world held its breath, and Silas held his alongside it."

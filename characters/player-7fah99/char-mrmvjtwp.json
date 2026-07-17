@@ -8,7 +8,7 @@
   "whyHere": "You were sent, or you were seeded, or you simply wanted to see something finish inside a single lifetime.",
   "background": "warden",
   "level": 1,
-  "xp": 63,
+  "xp": 68,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -37,13 +37,13 @@
     }
   ],
   "alignment": {
-    "death_life": 0.14988305156249995
+    "death_life": 0.17238889898437496
   },
   "attunement": 1,
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 27,
+  "energy": 23,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -196,80 +196,68 @@
         "player": "Reach one hand back to Branch before you step — its roots, its age, the connection. Whatever is below, you don't go entirely alone.",
         "summary": "Aelyn reaches back to Branch, and together they step across the threshold into the deep grain passage.",
         "narration": "You reach back without looking. Your hand finds Branch at shoulder height — not bark exactly, more like the first inch beneath bark, warm and faintly yielding, the way green wood feels when it's just decided to be a tree. Its roots stop their restless grip-release against the moss. All five buds are open. It does not pull you back or push you forward. It simply holds.\n\nMaren watches this and says nothing. Whatever she sees in it, she keeps. The passage waits ahead of you, its pale heartwood walls slow-lit by the deep root-pulse below — a light with no obvious source, amber and faint, the color of something that has been patient a very long time.\n\nYou step across the threshold. The moss gives way to old root beneath your boot, and the temperature shifts — not cold, warmer, the close warmth of deep soil in early spring. The passage is narrow enough that you can touch both walls without fully extending your arms. The roots framing it are enormous up close, their surfaces smooth with age, and against your Lifesense they read like a slow tide: entirely present, entirely unconcerned with urgency. Something much older than the hall above attends from below.\n\nBranch follows, its root-steps finding the corridor floor with careful deliberateness. Behind you, Maren does not descend — her feet stay at the threshold. You hear her exhale once, quietly. Then the passage takes you, and the entrance hall recedes into amber and root-lit dark."
+      },
+      {
+        "player": "Speak into the passage as you descend — not loudly, but clearly. Let the Root-That-Remembers hear your voice before you arrive. Answer its waiting with the plain fact of your presence.",
+        "summary": "Aelyn speaks her presence into the deep grain passage — the Root-That-Remembers hears, and the pulse in the walls answers.",
+        "narration": "Your voice comes out steadier than you expected. Not loud — the passage doesn't invite loudness. The words settle into the amber dark the way a stone settles into still water: 'I'm here. I heard you. I'm coming down.'\n\nThe roots respond. Not instantly, and not with anything you could call movement — but the slow pulse in the walls deepens by a beat, the way breathing deepens when something sleeping hears its name. The amber light below doesn't brighten, exactly. It sharpens. The air against your face is warmer than the air behind you, and carries the smell of very old earth — not rot, not soil exactly, but the deep mineral something that exists only where roots have been drinking the same water for centuries. Your voice is still moving through the grain, you realize. Still going down.\n\nBranch makes a sound beside you — a soft creak, low and held. Not alarm. Recognition, maybe. Its buds have not closed since the threshold. It takes one root-step forward and then another, deliberate, matching your pace. Whatever the Root-That-Remembers is doing with the pulse in the walls, Branch feels it too.\n\nAbove you, framed in the threshold's pale heartwood, Maren has not moved. Her silhouette is still, arms at her sides, watching the two of you descend into the grain that predates everything she knows. You do not feel alone. The passage has heard you, and it is waiting — not with the patience of something that doubts you'll arrive, but with the patience of something that already knew you would."
       }
     ],
     "lastTurn": {
-      "narration": "You reach back without looking. Your hand finds Branch at shoulder height — not bark exactly, more like the first inch beneath bark, warm and faintly yielding, the way green wood feels when it's just decided to be a tree. Its roots stop their restless grip-release against the moss. All five buds are open. It does not pull you back or push you forward. It simply holds.\n\nMaren watches this and says nothing. Whatever she sees in it, she keeps. The passage waits ahead of you, its pale heartwood walls slow-lit by the deep root-pulse below — a light with no obvious source, amber and faint, the color of something that has been patient a very long time.\n\nYou step across the threshold. The moss gives way to old root beneath your boot, and the temperature shifts — not cold, warmer, the close warmth of deep soil in early spring. The passage is narrow enough that you can touch both walls without fully extending your arms. The roots framing it are enormous up close, their surfaces smooth with age, and against your Lifesense they read like a slow tide: entirely present, entirely unconcerned with urgency. Something much older than the hall above attends from below.\n\nBranch follows, its root-steps finding the corridor floor with careful deliberateness. Behind you, Maren does not descend — her feet stay at the threshold. You hear her exhale once, quietly. Then the passage takes you, and the entrance hall recedes into amber and root-lit dark.",
-      "sceneSummary": "Aelyn reaches back to Branch, and together they step across the threshold into the deep grain passage.",
+      "narration": "Your voice comes out steadier than you expected. Not loud — the passage doesn't invite loudness. The words settle into the amber dark the way a stone settles into still water: 'I'm here. I heard you. I'm coming down.'\n\nThe roots respond. Not instantly, and not with anything you could call movement — but the slow pulse in the walls deepens by a beat, the way breathing deepens when something sleeping hears its name. The amber light below doesn't brighten, exactly. It sharpens. The air against your face is warmer than the air behind you, and carries the smell of very old earth — not rot, not soil exactly, but the deep mineral something that exists only where roots have been drinking the same water for centuries. Your voice is still moving through the grain, you realize. Still going down.\n\nBranch makes a sound beside you — a soft creak, low and held. Not alarm. Recognition, maybe. Its buds have not closed since the threshold. It takes one root-step forward and then another, deliberate, matching your pace. Whatever the Root-That-Remembers is doing with the pulse in the walls, Branch feels it too.\n\nAbove you, framed in the threshold's pale heartwood, Maren has not moved. Her silhouette is still, arms at her sides, watching the two of you descend into the grain that predates everything she knows. You do not feel alone. The passage has heard you, and it is waiting — not with the patience of something that doubts you'll arrive, but with the patience of something that already knew you would.",
+      "sceneSummary": "Aelyn speaks her presence into the deep grain passage — the Root-That-Remembers hears, and the pulse in the walls answers.",
       "choices": [
         {
-          "label": "Descend slowly, one hand trailing the root-wall, Lifesense reading the passage ahead as you go — feel your way toward whatever waits below.",
+          "label": "Keep descending steadily — follow the amber light down until the passage opens or the Root-That-Remembers makes itself known.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "death_life": 0.7
-          },
           "difficulty": 0,
           "intentTags": [
             "careful",
-            "scout"
+            "travel"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Open Lifesense as you walk — track the pulse in the walls, how it changes the deeper you go, whether it narrows on you or spreads.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "scout",
+            "study"
           ],
           "abilityId": "lifesense",
           "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         },
         {
-          "label": "Speak into the passage as you descend — not loudly, but clearly. Let the Root-That-Remembers hear your voice before you arrive. Answer its waiting with the plain fact of your presence.",
+          "label": "Speak again as you descend — not to announce yourself this time, but to ask a plain question: what do you want me to know?",
           "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "death_life": 0.6
-          },
-          "difficulty": 0,
+          "subAttribute": "rapport",
+          "difficulty": 15,
           "intentTags": [
-            "devote"
+            "plan",
+            "persuade"
           ],
           "abilityId": "the_speaking_grove",
           "energyCost": 4,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         },
         {
-          "label": "Descend in silence. Let Branch set the pace — it has roots, it knows soil. Follow its reading of the passage rather than your own.",
+          "label": "Watch Branch — its roots, its buds, the creak it made. It reads this place differently than you do. Let it lead for a few steps.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "death_life": 0.5
-          },
           "difficulty": 0,
           "intentTags": [
+            "study",
             "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Stop partway down and hold still — give yourself and Branch a moment to adjust to the shift in air and light and feel before going any deeper.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": 0.5
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         }
       ],
       "deeds": [],
@@ -282,46 +270,46 @@
         {
           "op": "progress",
           "questId": "the-root-that-remembers",
-          "note": "Aelyn stepped across the threshold into the deep grain passage, Branch at her side. Maren remained above. The descent has begun."
+          "note": "Aelyn spoke her presence into the passage as she descended — the Root-That-Remembers heard. The pulse in the walls deepened. The descent continues."
         }
       ],
       "scene": {
-        "setting": "Interior of the deep grain passage — a narrow corridor of pale heartwood and enormous old roots, descending into amber root-lit warmth beneath the Heartroot's entrance hall. Warmer than above; no morning light reaches here. Aelyn and Branch are on the passage stairs, several steps below the threshold.",
+        "setting": "Interior of the deep grain passage — narrow pale heartwood corridor, enormous old roots in the walls, amber root-pulse light from below. Warmer and darker than the entrance hall above. Aelyn and Branch are several steps below the threshold, descending.",
         "npcsPresent": [
           {
             "name": "Maren",
-            "state": "Standing at the threshold above — feet at the entrance, watching but not descending. Present but not following."
+            "state": "Silhouette in the threshold above — still, arms at sides, watching the descent without speaking."
           },
           {
             "name": "Branch",
-            "state": "Descending behind Aelyn, root-steps careful and deliberate on the corridor floor, all five buds open."
+            "state": "Descending beside Aelyn, one careful root-step at a time, all five buds open, a low creak of recognition settled in it."
           },
           {
             "name": "Sapling-child",
-            "state": "Back in the entrance hall above, highest branch still dipped toward the floor — attending downward."
+            "state": "In the entrance hall above, highest branch still dipped toward the floor — attending downward."
           },
           {
             "name": "Closer Rootkin",
-            "state": "Stepped back near the threshold above, watching openly."
+            "state": "Near the threshold above, watching openly."
           },
           {
             "name": "Farther Rootkin",
-            "state": "Shifted fractionally at the hall's far end, aware but still."
+            "state": "Shifted at the hall's far end, aware but still."
           }
         ],
         "objects": [
-          "Enormous old roots framing the corridor walls — pale, smooth with age, slow-pulsed",
-          "Amber root-lit warmth from below — no obvious source",
+          "Enormous old roots framing the corridor walls — pale, smooth with age, slow-pulsing, the pulse now one beat deeper",
+          "Amber root-lit warmth from below — no obvious source, sharpened slightly after Aelyn's voice",
           "Traveler's Pack (Aelyn's, worn canvas)",
           "Waterskin (Aelyn's)",
           "Old root lattice underfoot — the passage floor"
         ],
         "threads": [
-          "The Root-That-Remembers waits below — its attention fixed upward, patient, certain.",
-          "Branch descends with Aelyn — its reading of the passage may surface something hers does not.",
+          "The Root-That-Remembers heard Aelyn's voice — the pulse deepened in answer; its center still lies below.",
+          "Branch made a sound of recognition — it is reading something in the grain the passage does not show Aelyn yet.",
           "Maren holds the threshold above — not following, watching.",
           "A SNG-075 cache is unresolved — something left behind in or near the passage, not yet found.",
-          "The descent has begun but the Root-That-Remembers has not yet been reached."
+          "The descent continues — the Root-That-Remembers has not yet been reached."
         ]
       },
       "npcUpdates": [
@@ -329,80 +317,78 @@
           "op": "update",
           "npcId": "rootkin-tender",
           "name": "Maren",
-          "note": "Held the threshold — did not descend. Exhaled once, quietly, as Aelyn stepped across. Her keeping of the hall extends to the passage's mouth but not below.",
-          "statusNote": "Standing at the threshold of the deep grain passage, watching Aelyn descend — feet at the entrance, not following.",
-          "status": "active"
-        }
-      ],
-      "placeUpdates": [
+          "note": "Watched in silence as Aelyn spoke into the passage before descending — did not move, did not speak. Her stillness read as witness, not warning.",
+          "statusNote": "Standing at the threshold above the deep grain passage, watching Aelyn and Branch descend."
+        },
         {
-          "note": "Aelyn crossed the threshold of the deep grain passage and began descending — the first time anyone has entered with the Root-That-Remembers' recognition.",
-          "subPlace": {
-            "name": "The Deep Grain Passage",
-            "note": "A narrow corridor of pale heartwood and old roots, descending from the entrance hall's far end into warm amber dark. Maren does not descend. The passage reads alive and patient.",
-            "visited": true
-          }
+          "op": "update",
+          "npcId": "branch",
+          "name": "Branch",
+          "note": "Made a low creak of recognition as the Root-That-Remembers answered Aelyn's voice — buds fully open, descending steadily beside her.",
+          "learned": [
+            "Branch reads the Root-That-Remembers' pulse differently than Aelyn — its creak suggests recognition, not just awareness."
+          ],
+          "statusNote": "Descending the deep grain passage beside Aelyn, all five buds open, root-steps careful and deliberate."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "the-deep-grain-passage",
-          "label": "The Deep Grain Passage",
-          "kind": "place",
-          "entityId": "heartroot",
-          "fact": "Aelyn crossed the threshold and descended. The passage is warmer than the hall above, narrower than expected, the enormous root-walls smooth with age. Maren did not follow. Branch did.",
+          "topic": "the-root-that-remembers",
+          "label": "The Root-That-Remembers",
+          "kind": "mystery",
+          "entityId": "the-root-that-remembers",
+          "fact": "When Aelyn spoke her presence into the passage — plain words, not ability-use — the slow pulse in the root-walls deepened by a beat and the amber light below sharpened. The Root-That-Remembers heard her voice and answered with what it had: attention, and warmth.",
           "links": [
-            "the-root-that-remembers",
             "heartroot",
             "branch",
-            "rootkin-tender",
-            "the-root-that-remembers"
+            "the-deep-grain-passage",
+            "the-watching-presence",
+            "the-frequency-beneath-the-grove"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short, deliberate crossing of the threshold and the first steps of descent — a few minutes at most."
-      },
-      "sceneEnded": false
+        "why": "A slow, careful descent — a few minutes of walking and listening in the passage."
+      }
     },
     "sceneState": {
-      "setting": "Interior of the deep grain passage — a narrow corridor of pale heartwood and enormous old roots, descending into amber root-lit warmth beneath the Heartroot's entrance hall. Warmer than above; no morning light reaches here. Aelyn and Branch are on the passage stairs, several steps below the threshold.",
+      "setting": "Interior of the deep grain passage — narrow pale heartwood corridor, enormous old roots in the walls, amber root-pulse light from below. Warmer and darker than the entrance hall above. Aelyn and Branch are several steps below the threshold, descending.",
       "npcsPresent": [
         {
           "name": "Maren",
-          "state": "Standing at the threshold above — feet at the entrance, watching but not descending. Present but not following."
+          "state": "Silhouette in the threshold above — still, arms at sides, watching the descent without speaking."
         },
         {
           "name": "Branch",
-          "state": "Descending behind Aelyn, root-steps careful and deliberate on the corridor floor, all five buds open."
+          "state": "Descending beside Aelyn, one careful root-step at a time, all five buds open, a low creak of recognition settled in it."
         },
         {
           "name": "Sapling-child",
-          "state": "Back in the entrance hall above, highest branch still dipped toward the floor — attending downward."
+          "state": "In the entrance hall above, highest branch still dipped toward the floor — attending downward."
         },
         {
           "name": "Closer Rootkin",
-          "state": "Stepped back near the threshold above, watching openly."
+          "state": "Near the threshold above, watching openly."
         },
         {
           "name": "Farther Rootkin",
-          "state": "Shifted fractionally at the hall's far end, aware but still."
+          "state": "Shifted at the hall's far end, aware but still."
         }
       ],
       "objects": [
         "Enormous old roots framing the corridor walls — pale, smooth with age, slow-puls",
-        "Amber root-lit warmth from below — no obvious source",
+        "Amber root-lit warmth from below — no obvious source, sharpened slightly after A",
         "Traveler's Pack (Aelyn's, worn canvas)",
         "Waterskin (Aelyn's)",
         "Old root lattice underfoot — the passage floor"
       ],
       "threads": [
-        "The Root-That-Remembers waits below — its attention fixed upward, patient, certain.",
-        "Branch descends with Aelyn — its reading of the passage may surface something hers does not.",
+        "The Root-That-Remembers heard Aelyn's voice — the pulse deepened in answer; its center still lies below.",
+        "Branch made a sound of recognition — it is reading something in the grain the passage does not show Aelyn yet.",
         "Maren holds the threshold above — not following, watching.",
         "A SNG-075 cache is unresolved — something left behind in or near the passage, not yet found.",
-        "The descent has begun but the Root-That-Remembers has not yet been reached."
+        "The descent continues — the Root-That-Remembers has not yet been reached."
       ]
     }
   },
@@ -431,7 +417,8 @@
       "progress": [
         "Maren revealed the passage; Branch confirmed: Down.",
         "Maren led Aelyn to the passage. It is open. The first step has not yet been taken.",
-        "Aelyn stepped across the threshold into the deep grain passage, Branch at her side. Maren remained above. The descent has begun."
+        "Aelyn stepped across the threshold into the deep grain passage, Branch at her side. Maren remained above. The descent has begun.",
+        "Aelyn spoke her presence into the passage as she descended — the Root-That-Remembers heard. The pulse in the walls deepened. The descent continues."
       ],
       "aliases": [],
       "startedAt": "2026-07-17T04:11:12.462Z"
@@ -704,7 +691,8 @@
           "[d1] The recognition runs both ways. When Aelyn followed the Root's attending attention back to its source, the Root responded — not with words but with the quality of something that has been waiting. Not ",
           "[d1] The Rootkin named it not from understanding but from observation — something was already here when they planted the first hall, its roots going deeper than theirs ever followed. It chose this soil bef",
           "[d1] A passage into the deep grain exists — grown by the Rootkin four hundred years ago. No Rootkin who walked it ever heard anything back. The Root-That-Remembers was not listening to them. It was listeni",
-          "[d1] The passage into the deep grain is alive — old roots framing it, slow-pulsed, with the Root-That-Remembers as a distributed field below. Nothing hostile. It waits with total certainty that Aelyn will "
+          "[d1] The passage into the deep grain is alive — old roots framing it, slow-pulsed, with the Root-That-Remembers as a distributed field below. Nothing hostile. It waits with total certainty that Aelyn will ",
+          "[d1] When Aelyn spoke her presence into the passage — plain words, not ability-use — the slow pulse in the root-walls deepened by a beat and the amber light below sharpened. The Root-That-Remembers heard h"
         ],
         "links": [
           "heartroot",
@@ -763,15 +751,15 @@
     }
   },
   "tendencies": {
-    "cerebral": 7.058967561389144,
-    "cautious": 6.319923698750345,
-    "generous": 1.4557328039808843,
-    "social": 5.727378329766436,
-    "strategic": 1.8340683010253906,
-    "devotion": 0.9506249999999999
+    "cerebral": 6.882493372354415,
+    "cautious": 6.161925606281586,
+    "generous": 1.4193394838813622,
+    "social": 5.584193871522276,
+    "strategic": 1.7882165934997558,
+    "devotion": 1.9268593749999998
   },
   "aptitudes": [],
-  "actionCount": 23,
+  "actionCount": 24,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -793,8 +781,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20mid-twenties%20with%20light%20blonde%2C%20faintly%20wavy%20hair%20cut%20in%20curtain%20bangs%2C%20the%20rest%20falling%20to%20the%20small%20of%20her%20back%20%E2%80%94%20usually%20worn%20in%20a%20french%20braid%20with%20the%20bangs%20left%20loose.%20Dark%20nature-green%20tank%20to%2C%20full-body%20character%20portrait%2C%20named%20Aelyn%20Kantoro%2C%20of%20the%20rootkin%2C%20warden%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Her%20mother%20dies%2C%20and%20she%20decides%20to%20go%20to%20the%20nanite%20world%2C%20to%20figure%20out%20why%20she%20is%20different%20than%20the%20pure%20nature%20peop%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=73420&nologo=true",
-  "updatedAt": 1784261955849,
-  "rev": 38,
+  "updatedAt": 1784262263544,
+  "rev": 39,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -802,7 +790,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "the_quickwood": 24
+    "the_quickwood": 25
   },
   "opLossPending": false,
   "establishedFacts": [
@@ -862,7 +850,7 @@
     "schemaVersion": 1,
     "uses": {
       "lifesense": 5,
-      "the_speaking_grove": 3
+      "the_speaking_grove": 4
     },
     "coActivations": {},
     "aspirations": []

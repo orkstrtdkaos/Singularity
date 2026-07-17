@@ -26,6 +26,25 @@
 - **Antipole structure:** rootkin (and its kin) sit antipodal to the nanite deep-power on the great circle; the two deep-power families are opposite poles of one axis (fabricated vs living substrate). Confirm rootkin's ring position IS antipodal to the nanite cluster; if not, note the geometry.
 - **Center braidstrength:** folk/Valley origins get a `braidAffinity` bonus — cheaper/earlier access to cross-pole braid abilities (the diameter-lines of SNG-073), OR a unique "hold both" move only the center can make. The center's identity becomes *the one place that can braid the poles*.
 
+## ⚠ RULING 2 CORRECTED against the authored ring (2026-07-17) — verified in traditions.json
+My original ruling 2 claimed **rootkin is the anti-pole to the nanite deep-power (seraphic/abyssal)**. **That is geometrically FALSE, verified in `traditions.json` ring data:**
+- `rootkin`: axis `death_life`, pole `life`, **antipode `ashwarden`** (ring pos 17 ↔ 5, the life↔death diameter).
+- `seraphic`: axis `demonic_angelic`, **antipode `abyssal`** (pos 14 ↔ 2, the angelic↔demonic diameter).
+- rootkin↔seraphic = 3 steps; rootkin↔abyssal = 9 steps. **They are on DIFFERENT diameters — not opposite poles of one axis.**
+
+**Corrected framing (adopted, CCode-recommended option a):** the fabricated-substrate keepers (seraphic/abyssal) and the living-substrate keeper (rootkin) are **two DISTINCT deep-power families, not two poles of one axis.** Each keeps a different deep substrate their kin gave up — fabricated (nanite/precursor) vs living (the green current). The parallel is real and thematically intact; the "antipodal" claim was wrong and is withdrawn. The ring is NOT moved (positions feed all ringDistance/kin-gate math per SNG-125 — high blast radius; out of scope).
+
+## ✅ AUTHORED + VALIDATED (2026-07-17) — data now real, wiring is a clean CCode change
+Authored against the ACTUAL structure (not the imagined origin-array shape), content_ci + full suite **green LOCALLY before ship**:
+- **`innatePrecursor` on origins** (the real shape CCode's wiring table wants): `seraphic.innatePrecursor=["address_sense"]`, `abyssal.innatePrecursor=["latticespeak"]` — pointing at REAL `powerSystem:"precursor"` ability ids (address_sense T3, latticespeak T3), NOT the reach_* capstones I originally (wrongly) flagged. The two tier-V capstones (the_kept_flame/the_hollow_that_holds) remain the PATH-EARNED variant, already learnable at T5; their `innatePrecursor:true` boolean is documentary only.
+- **`innateLivingCurrent` authored** — `rootkin.innateLivingCurrent=["quicken_the_ground"]`, backed by a NEW `powerSystem:"living_current"` ability file (quicken_the_ground T3, the_green_road T4) — the nature parallel, routing through its own gate mirroring precursor.
+- **`braidAffinity` authored** — `valleyfolk.braidAffinity={discount:2,…}` — the center holds both; cross-pole braids cost 2 less. The one people who can braid the poles.
+
+## CCODE WIRING NOW UNBLOCKED (the clean ~10-line change CCode scoped)
+1. Seed `character.precursorAccess` from `originRecord(origin).innatePrecursor` in `finish()` — **validating each id is actually `powerSystem:"precursor"`** so a mis-authored id can't fake a grant. + version-gated retro for existing keeper characters (mirror `retroNativeGrants`).
+2. A parallel `livingCurrentAccess` gate (mirror the precursor gate at progression.js:253 for `powerSystem:"living_current"`), seeded from `innateLivingCurrent`.
+3. `braidAffinity.discount` read in the cross-pole braid cost path.
+
 ## HOW IT WIRES (existing vectors, one new grant)
 | Piece | Mechanism (exists) | Change |
 |---|---|---|

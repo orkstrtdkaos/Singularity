@@ -1,4 +1,9 @@
-# PIPELINE ALERT — Singularity## ✅ SNG-128 + 126 + 124 — CLOSED GREEN (Aevi HEAD audit, v1.8.86→89)
+# PIPELINE ALERT — Singularity## 🎡 SNG-129 — Skill wheel readability: room + function shapes + precursor path (specced, awaiting CCode)
+`po/SPEC_SNG-129_wheel_readability_shapes_precursor.md`. From Erik's wheel screenshot. (1) **Label collision** — labels render at a FIXED offset with no de-collision (L3662/3668), so dense owned spokes pile into an unreadable center; fix via zoom-gate + de-collide + radial spacing + move detail to a side panel. (2) **Function SHAPES** — every node is a `<circle>` today (function = a tiny color dot only); add `nodeShape(family)` giving each of the 8 families (HARM/RESTORE/PROTECT/KNOW/SHAPE/INFLUENCE/MOVE/SUSTAIN) a distinct silhouette + retained color (redundant encoding). (3) **Precursor path** — VERIFIED precursor is narrative-locked (learnable only when the GM emits `unlockPrecursor`, "a door never on any list"); the wheel gives no signal it's story-gated not tier-gated. Add a sealed precursor node state + honest tap-explanation ("earned through play, not bought"), NEVER a fake learn button. Guards: shape+color redundant (accessibility), tradition geometry preserved, no fake precursor purchase.
+
+---
+
+## ✅ SNG-128 + 126 + 124 — CLOSED GREEN (Aevi HEAD audit, v1.8.86→89)
 
 CCode shipped all three; **Aevi verified at authenticated origin.** app.js + company.js + functions.js syntax-clean.
 - **SNG-128** (World-Authorship Chronicle, v1.8.86): authorship readout (authored-vs-novel, persistence tiers, weighted world-effect), session marker (L2561 advances per beat after a real-time gap), family board. Brooklyn's intuition → a number. **Closed.**

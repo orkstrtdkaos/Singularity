@@ -751,75 +751,80 @@
         "player": "Use The Attended End on Calvar's decision — read what is ending in him now that he has said yes, and whether anything in that ending needs to be named",
         "summary": "The Attended End reads Calvar's yes as the clean close of a three-year private refusal — the bundle, once moved, releases him from the waiting room.",
         "narration": "You let The Attended End settle into the room like a hand placed flat on a surface — no announcement, no expenditure of will beyond the quiet opening of that particular attention. Conserved. Restrained. Just the reading.\n\nWhat is ending in Calvar is not the assumption about Pell's father — that broke already, loudly, in the room's air. What is ending now is quieter: a long practiced refusal. Three years of telling himself he had nothing left to prove, no one left to prove it to. That story is done. He said yes and the story closed, and The Attended End reads the closing as clean — no rot at the edge, no grief in the grain. The ending is not a loss. It is a door that was locked from the inside, and he just turned the key.\n\nThere is one more thing the craft shows you, small and worth naming: the bundle on the drafting surface is the last thing he has been holding back. Once it moves — once he carries it out of this room and down the road to Millbrook — there is nothing left here that needs him. The room above the cooperage was never the life. It was the waiting room.\n\nYou hold it quietly. Nothing here demands saying aloud — Calvar knows his own decision better than your reading of it can tell him. But the shape of it settles in you as useful: he is not being asked to sacrifice something. He is being released from it."
+      },
+      {
+        "player": "Cross the room to Pell — stand beside her at the drafting surface, close, and let her know without words that the space is still hers but you are there.",
+        "summary": "Silas stands beside Pell at the drafting surface — two shadows, one lamp, her father's letters between them and no words needed.",
+        "narration": "You cross the room in three quiet steps and stand beside Pell at the drafting surface — close enough that your arm is at hers, not touching. The lamp on the corner throws your joined shadow up the wall, one shape with two heads. You don't look at her. You look at the letters.\n\nHer father's hand is on the page in front of you both: the distinctive threes, the band notations running down the margin in the same compressed column Fendt recognized from memory. The ink is old enough that it's faded at the edges and sharp at the center, the way old ink goes when it was laid with care. You read the same surface she is reading, and you don't say anything.\n\nHuginn shifts on the stool-back behind you — a single, small adjustment of weight, the way it moves when a room has settled into what it needed to be. Calvar, two paces to the other side, has gone still in the way of a man who knows when his presence should be reduced to a warmth in the room rather than a face.\n\nPell exhales — not a release exactly, something smaller and more controlled than release, the breath of someone who has been measuring their own breathing without noticing. Her hands are still loosened on the edge of the drafting surface. She doesn't move them toward the letters and she doesn't move them away."
       }
     ],
     "lastTurn": {
-      "narration": "You let The Attended End settle into the room like a hand placed flat on a surface — no announcement, no expenditure of will beyond the quiet opening of that particular attention. Conserved. Restrained. Just the reading.\n\nWhat is ending in Calvar is not the assumption about Pell's father — that broke already, loudly, in the room's air. What is ending now is quieter: a long practiced refusal. Three years of telling himself he had nothing left to prove, no one left to prove it to. That story is done. He said yes and the story closed, and The Attended End reads the closing as clean — no rot at the edge, no grief in the grain. The ending is not a loss. It is a door that was locked from the inside, and he just turned the key.\n\nThere is one more thing the craft shows you, small and worth naming: the bundle on the drafting surface is the last thing he has been holding back. Once it moves — once he carries it out of this room and down the road to Millbrook — there is nothing left here that needs him. The room above the cooperage was never the life. It was the waiting room.\n\nYou hold it quietly. Nothing here demands saying aloud — Calvar knows his own decision better than your reading of it can tell him. But the shape of it settles in you as useful: he is not being asked to sacrifice something. He is being released from it.",
-      "sceneSummary": "The Attended End reads Calvar's yes as the clean close of a three-year private refusal — the bundle, once moved, releases him from the waiting room.",
+      "narration": "You cross the room in three quiet steps and stand beside Pell at the drafting surface — close enough that your arm is at hers, not touching. The lamp on the corner throws your joined shadow up the wall, one shape with two heads. You don't look at her. You look at the letters.\n\nHer father's hand is on the page in front of you both: the distinctive threes, the band notations running down the margin in the same compressed column Fendt recognized from memory. The ink is old enough that it's faded at the edges and sharp at the center, the way old ink goes when it was laid with care. You read the same surface she is reading, and you don't say anything.\n\nHuginn shifts on the stool-back behind you — a single, small adjustment of weight, the way it moves when a room has settled into what it needed to be. Calvar, two paces to the other side, has gone still in the way of a man who knows when his presence should be reduced to a warmth in the room rather than a face.\n\nPell exhales — not a release exactly, something smaller and more controlled than release, the breath of someone who has been measuring their own breathing without noticing. Her hands are still loosened on the edge of the drafting surface. She doesn't move them toward the letters and she doesn't move them away.",
+      "sceneSummary": "Silas stands beside Pell at the drafting surface — two shadows, one lamp, her father's letters between them and no words needed.",
       "choices": [
         {
-          "label": "Name the road plainly: you leave at first light — travel light, one pack each, and the road to Millbrook takes two days on foot.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "intentTags": [
-            "lead"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask Calvar about the annex copy — the one sent to the Filtration Council annex fourteen years ago. Whether it still exists may determine the lodgment's strength.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Cross the room to Pell — stand beside her at the drafting surface, close, and let her know without words that the space is still hers but you are there.",
+          "label": "Wait — let her speak first, however long it takes",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "comfort"
+            "calm",
+            "sustain"
           ],
           "trivial": true
         },
         {
-          "label": "Ask Calvar what he would say to her father, if the road opened that possibility — not as a plan, just as a question the room might hold.",
-          "attribute": "social",
+          "label": "Name what you see in the letters — not interpretation, just what's there: the band designations, the margin method, the hand that taught Calvar",
+          "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
             "study",
-            "comfort"
+            "help"
           ],
-          "trivial": false
+          "trivial": true
+        },
+        {
+          "label": "Ask Calvar, quietly, whether Pell's father knew what he was building — whether the seventh-band specification was designed to last, or expected to be replaced",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "negotiate"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Name the road to Millbrook — the practical shape of it, the time, what Calvar will need to bring — and let that be the thing that moves the room forward",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
+            "lead"
+          ],
+          "trivial": true
         }
       ],
-      "characterDeltas": {
-        "energy": -2
-      },
       "scene": {
-        "setting": "Calvar's room above the cooperage, east lane, Edge District — evening, early-spring. Lamp steady on the drafting surface corner. Silas at the wall beside the door; Pell at the drafting surface, hands loosened on the edge, eyes lifted from the letters. Calvar standing, decision made, waiting for the road to be named.",
+        "setting": "Calvar's room above the cooperage, east lane, Edge District — evening, early-spring. Lamp steady on the drafting surface corner. Silas standing beside Pell at the drafting surface, arm at hers, not touching; her father's letters open between them.",
         "npcsPresent": [
           {
-            "name": "Calvar",
-            "state": "Standing at the drafting surface — the decision is in him, settled; waiting for the shape of the road"
+            "name": "Pell",
+            "state": "Standing at the drafting surface beside Silas — hands loosened on the edge, a controlled exhale, eyes still on her father's letters. Not yet spoken."
           },
           {
-            "name": "Pell",
-            "state": "Hands loosened on the edge of the drafting surface, eyes up from the letters — present and listening, not yet speaking"
+            "name": "Calvar",
+            "state": "Standing two paces to the side — reduced to a warmth in the room, giving the moment its space. Decision settled in him; waiting."
           },
           {
             "name": "Huginn",
-            "state": "On the stool-back — watching the room, unhurried"
+            "state": "On the stool-back — shifted once to acknowledge the room settling, now still and watchful."
           }
         ],
         "objects": [
-          "Drafting surface — lamp on its corner, bundle open, letters and calibration page",
+          "Drafting surface — lamp on its corner, bundle open, letters and calibration page in view",
           "Fendt's Testimony (folded page) — in Silas's inventory",
           "Cord — untied, coiled on the drafting surface edge",
           "Memory (spear) — leaned against the wall by Pell",
@@ -829,40 +834,31 @@
           "Bed against the far wall — made precisely"
         ],
         "threads": [
-          "Pell has not yet spoken since Calvar said yes — she lifted her eyes but has not addressed him",
-          "The road to Millbrook needs to be named — Calvar has asked for it explicitly",
-          "The third copy at the Filtration Council annex in the lower Plateau district — status still unknown",
+          "Pell has not yet spoken — her exhale was the first real movement; she is present and close to something",
+          "The road to Millbrook needs to be named — Calvar is waiting for its shape",
+          "The third copy at the Filtration Council annex in the lower Plateau district — status unknown",
           "The six-week window for Fendt's formal lodgment is the working clock"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "calvar",
-          "name": "Calvar",
-          "note": "The Attended End read his yes as a clean ending — a three-year private refusal closed, not a sacrifice. The bundle moving is his release from the waiting room. He does not need to be told this; it is read, held, and filed.",
-          "statusNote": "In his room above the cooperage — has said yes to traveling with Silas and Pell; the bundle is the last thing holding him here; waiting for the road to be named."
-        }
-      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A quiet moment of reading — the craft settles and closes; no more than a quarter-hour has passed in the room."
+        "why": "a quiet crossing of the room and a shared stillness — no more than a few minutes"
       }
     },
     "sceneState": {
-      "setting": "Calvar's room above the cooperage, east lane, Edge District — evening, early-spring. Lamp steady on the drafting surface corner. Silas at the wall beside the door; Pell at the drafting surface, hands loosened on the edge, eyes lifted from the letters. Calvar standing, decision made, waiting for the road to be named.",
+      "setting": "Calvar's room above the cooperage, east lane, Edge District — evening, early-spring. Lamp steady on the drafting surface corner. Silas standing beside Pell at the drafting surface, arm at hers, not touching; her father's letters open between them.",
       "npcsPresent": [
         {
-          "name": "Calvar",
-          "state": "Standing at the drafting surface — the decision is in him, settled; waiting for the shape of the road"
+          "name": "Pell",
+          "state": "Standing at the drafting surface beside Silas — hands loosened on the edge, a controlled exhale, eyes still on her fathe"
         },
         {
-          "name": "Pell",
-          "state": "Hands loosened on the edge of the drafting surface, eyes up from the letters — present and listening, not yet speaking"
+          "name": "Calvar",
+          "state": "Standing two paces to the side — reduced to a warmth in the room, giving the moment its space. Decision settled in him; "
         },
         {
           "name": "Huginn",
-          "state": "On the stool-back — watching the room, unhurried"
+          "state": "On the stool-back — shifted once to acknowledge the room settling, now still and watchful."
         }
       ],
       "objects": [
@@ -876,9 +872,9 @@
         "Bed against the far wall — made precisely"
       ],
       "threads": [
-        "Pell has not yet spoken since Calvar said yes — she lifted her eyes but has not addressed him",
-        "The road to Millbrook needs to be named — Calvar has asked for it explicitly",
-        "The third copy at the Filtration Council annex in the lower Plateau district — status still unknown",
+        "Pell has not yet spoken — her exhale was the first real movement; she is present and close to something",
+        "The road to Millbrook needs to be named — Calvar is waiting for its shape",
+        "The third copy at the Filtration Council annex in the lower Plateau district — status unknown",
         "The six-week window for Fendt's formal lodgment is the working clock"
       ]
     }
@@ -2962,18 +2958,18 @@
     }
   },
   "tendencies": {
-    "strategic": 19.00666231827639,
-    "cerebral": 22.227278815057883,
-    "social": 21.85717531951886,
-    "generous": 5.787298618976278,
-    "cautious": 13.393881747134207,
-    "physical": 0.5760001172962111,
-    "risky": 1.6219004670394213,
-    "ruthless": 0.7131919295136441,
-    "carousing": 0.5008049901316003,
-    "amorous": 1.3732791488483584,
-    "patient": 0.9196190054178938,
-    "stealth": 0.5876204882136226
+    "strategic": 18.53149576031948,
+    "cerebral": 21.671596844681435,
+    "social": 22.310745936530886,
+    "generous": 5.642616153501871,
+    "cautious": 13.059034703455852,
+    "physical": 0.5616001143638059,
+    "risky": 1.5813529553634358,
+    "ruthless": 0.6953621312758029,
+    "carousing": 0.4882848653783103,
+    "amorous": 1.3389471701271494,
+    "patient": 0.8966285302824464,
+    "stealth": 0.572929976008282
   },
   "aptitudes": [
     "strategist",
@@ -2984,7 +2980,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 387,
+  "actionCount": 388,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3150,8 +3146,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784312185833,
-  "rev": 555,
+  "updatedAt": 1784312534062,
+  "rev": 556,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3973,7 +3969,7 @@
   "syncedAt": 1784292613822,
   "teachers": {},
   "regionsKnown": {
-    "valley": 202
+    "valley": 203
   },
   "foreclosed": [
     "rootkin",
@@ -4021,10 +4017,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-17T17:39:40.705Z",
-      "lastAt": "2026-07-17T18:16:25.832Z",
+      "lastAt": "2026-07-17T18:22:14.062Z",
       "startDay": 17,
       "endDay": 17,
-      "beats": 10
+      "beats": 11
     }
   ],
   "company": [

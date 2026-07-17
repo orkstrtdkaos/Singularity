@@ -653,6 +653,83 @@
    },
    "tradition": "harmonic",
    "nativeOrCombination": "native"
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_sustained_chord",
+   "name": "The Sustained Chord",
+   "levelReq": 4,
+   "energyCost": 12,
+   "powerSystem": "harmonic",
+   "tradition": "harmonic",
+   "attribute": "practical",
+   "axes": {
+    "space_time": 0.7,
+    "dark_light": -0.2
+   },
+   "functions": [
+    "empower",
+    "sustain"
+   ],
+   "narrationHints": "You strike the chord and instead of fading it HOLDS — a resonance that keeps sounding, keeping everything tuned to it steady and strong for as long as you carry the note.",
+   "description": "The Harmonic art of the chord that does not fade — a sustained resonance that holds everything attuned to it in strength and coherence, a field of steadiness sung rather than built.",
+   "notFor": "It empowers and steadies but does not strike; a chord holds a thing together, it does not tear one apart. And you must carry the note the whole while — stop singing and the chord, and everything it held, lets go at once.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Sustained Chord",
+     "grants": "Sustain a resonant chord that holds all attuned to it in strength and coherence.",
+     "cannot": "It cannot harm, only hold; it ends the instant you stop carrying it; and a chord that holds many depends entirely on the one voice sustaining it."
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "DEFEND",
+    "CREATE"
+   ],
+   "challengeProfile": {
+    "DEFEND": 4,
+    "CREATE": 3
+   }
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_worldsong",
+   "name": "The Worldsong",
+   "levelReq": 5,
+   "energyCost": 13,
+   "powerSystem": "harmonic",
+   "tradition": "harmonic",
+   "attribute": "practical",
+   "axes": {
+    "space_time": 0.9
+   },
+   "functions": [
+    "empower",
+    "reveal"
+   ],
+   "narrationHints": "For a moment you hear it — the whole resonance of a place across time, every note it has ever sounded still ringing faintly — and you sing WITH it, and the place remembers what it was and could be.",
+   "description": "The Harmonic capstone — the song of a place across all its time, heard and joined. To sing the Worldsong is to touch what a place has been and might become, and to move it, gently, toward its truest note.",
+   "notFor": "One place, once, at enormous cost — and it moves a place only toward what is already latent in it; the Worldsong reveals and encourages, it does not overwrite. You cannot sing a place into being what it never had in it to be.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Worldsong",
+     "grants": "Hear and join a place's resonance across all its time, moving it toward its truest note.",
+     "cannot": "It costs nearly all you have, it can only draw out what is already latent, and to hear a place's whole song is to carry, after, the weight of every note it ever sounded — including the grievous ones."
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "CREATE",
+    "INVESTIGATE"
+   ],
+   "challengeProfile": {
+    "CREATE": 5,
+    "INVESTIGATE": 4
+   }
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

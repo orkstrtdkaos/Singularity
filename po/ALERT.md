@@ -1,4 +1,12 @@
-# PIPELINE ALERT — Singularity## 🎡 SNG-129 wheel — PROTOTYPE APPROVED, encoding LOCKED → CCode build
+# PIPELINE ALERT — Singularity## ⚡ SNG-131 rulings LOCKED+EXPANDED + 🌿 Nature parallel + 🕯️ center braidstrength
+Erik ruled: (1) deep-power peoples innate precursor **as a base, growing along chosen lines** like any skill; (2) **NATURE gets the parallel** — living-substrate innate access, **ROOTKIN as the anti-pole** to the nanite deep-power (fabricated vs living substrate, antipodal); (3) **the center/Millbrook holds BOTH and earns its own BRAIDSTRENGTH** — folk `braidAffinity`, the one place that can braid the poles. `po/SPEC_SNG-131_*` updated. Aevi authors `innatePrecursor`/`innateLivingCurrent`/`braidAffinity` with SNG-130.
+
+## 🕯️ SNG-132 — Aelyn's father arc AUTHORED + shipped + family content-generators
+`po/SPEC_SNG-132_bound_arcs_family_generators.md`. **Authored + shipped to origin:** NPC `the_lightless_seraph` (Caelum Kantoro — Aelyn's fallen-Seraph father, all-powerful nanite who optimized away his memory of loving her, reaching for "the anomaly") + arc `the_reaching_light` (arcId `aelyn_father_arc`: the reaching light → the mother's last word → the anomaly and the daughter; routes reach/release/**become-the-braid**). **Drawn directly from Brooklyn's authored bio** — she'd already written the whole tragedy into her character (hidden forest, dying nature-magic mother, father consumed by nanites, dormant dual heritage; domains primary-rootkin/**secondary-seraphic** = the living antipole carrying the radiant inheritance). Ties to SNG-131 (father = fabricated-substrate deep-power; mother = living-current; Aelyn = antipodal-both). CCode wiring owed: bound arc follows the character + paces across sessions + ending never foreclosed; flag Brooklyn/Brayden as canon content-generators (lower promotion threshold so their play persists — SNG-128).
+
+---
+
+## 🎡 SNG-129 wheel — PROTOTYPE APPROVED, encoding LOCKED → CCode build
 `po/SPEC_SNG-129_*`. Erik reviewed the interactive prototype and approved. LOCKED: 8 family SHAPES (HARM diamond · RESTORE cross · PROTECT shield · KNOW ring · SHAPE triangle · INFLUENCE hexagon · MOVE chevron · SUSTAIN capsule; shape=primary family, color retained); function-filter highlight/dim; precursor SEALED state (dashed hollow + ✦, honest "earned through play" tap-explanation, no learn button); label de-collide + effective cost. Ready to build the approved encoding.
 
 ## 🪜 SNG-130 — Fill the capstone tiers (histogram-confirmed; Aevi content + CCode)

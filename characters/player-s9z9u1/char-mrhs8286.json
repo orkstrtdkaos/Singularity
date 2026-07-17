@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 10,
-  "xp": 922,
+  "xp": 927,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -68,7 +68,7 @@
   "alignment": {
     "spectrumId": -0.6124330052913572,
     "violence_peace": 0.09798375000000001,
-    "chaos_order": 0.17728564064404723,
+    "chaos_order": 0.19842135861184484,
     "mechanical_spiritual": 0.17191810626191062,
     "concrete_abstract": -0.05328384007186973,
     "death_life": -0.18344632172699882,
@@ -81,7 +81,7 @@
   "maxHealth": 75,
   "health": 75,
   "maxEnergy": 145,
-  "energy": 127,
+  "energy": 123,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -606,36 +606,38 @@
         "player": "Ask Leth directly — has anyone else handled or viewed this diagram since Calvar left it?",
         "summary": "Leth confirms no one was given access to the diagram — someone entered her room during the night and added the symbol without her knowledge.",
         "narration": "You lift your fingers from the corner of the diagram and look up at Leth. The lamp between you holds the room in amber — her face, the shelves behind her, the open roll.\n\n\"Has anyone else handled this since Calvar left it? Seen it, even?\"\n\nLeth's answer is immediate, and that itself is telling. \"No. He brought it himself — morning, three days ago, before the first light-guide shift. Set it on the desk, told me to keep it off the shelves and under the cord until someone came asking about the seventh band or the lower filtration ledge. Those were his words, exactly.\" A pause. \"I filed Sorel's letter this morning. No one came before you.\"\n\nShe looks at the diagram, then at you, then at your fingers hovering near the lower-right corner. \"Something's been added.\" It isn't a question. She has noticed the way your hand was positioned — the archivist's eye has been tracking you since you touched it. \"I did not add it. The roll has been under the cord on this desk, in this room, with the door propped — but I sleep in the next room, and I am not awake every hour.\" Her voice carries no defensiveness, only the flat precision of a woman filing an accurate report. \"Someone came in during the night. One of the two nights since he left it.\"\n\nPell straightens in the door frame. Outside, Huginn shifts on the sign-board — one small repositioning, weight to the other foot, the way the bird moves when something has just been confirmed rather than discovered. The Edge District evening presses at the open door: the faint braid of light rising from the street guides below, the smell of lamp oil and cooling stone."
+      },
+      {
+        "player": "Use Order-Sense on the room itself — read what design the archive room is part of and how the entry was made",
+        "summary": "Order-Sense traces the archive room's design and locates the shared rear corridor — the entry route used to add the symbol.",
+        "narration": "You turn from the diagram and let Order-Sense widen — a quiet cast, two energy drawn through the thin lattice with the deliberate economy of someone who knows the substrate is running at half-depth. No surge; just attention opened a little further than ordinary looking.\n\nThe archive room resolves. Low stone building, yes — but Order-Sense shows you the design it belongs to: a chain of three such rooms sharing a roof-line and a common rear access corridor. Leth's is the middle one. The door to that corridor is not the propped-front door — it is a second door, flush with the shelving on the east wall, visible now because Order-Sense shows you the seam where it sits. The latch side is on the right. It has been used recently: the dust on the floor in front of it is disturbed in a short arc, the kind a door's base sweeps through when it opens inward.\n\nThat is how the entry was made. Not through the front, where Leth would have heard it. Through the shared corridor that connects all three rooms — a route any tenant in the row would know, and any insider."
       }
     ],
     "lastTurn": {
-      "narration": "You lift your fingers from the corner of the diagram and look up at Leth. The lamp between you holds the room in amber — her face, the shelves behind her, the open roll.\n\n\"Has anyone else handled this since Calvar left it? Seen it, even?\"\n\nLeth's answer is immediate, and that itself is telling. \"No. He brought it himself — morning, three days ago, before the first light-guide shift. Set it on the desk, told me to keep it off the shelves and under the cord until someone came asking about the seventh band or the lower filtration ledge. Those were his words, exactly.\" A pause. \"I filed Sorel's letter this morning. No one came before you.\"\n\nShe looks at the diagram, then at you, then at your fingers hovering near the lower-right corner. \"Something's been added.\" It isn't a question. She has noticed the way your hand was positioned — the archivist's eye has been tracking you since you touched it. \"I did not add it. The roll has been under the cord on this desk, in this room, with the door propped — but I sleep in the next room, and I am not awake every hour.\" Her voice carries no defensiveness, only the flat precision of a woman filing an accurate report. \"Someone came in during the night. One of the two nights since he left it.\"\n\nPell straightens in the door frame. Outside, Huginn shifts on the sign-board — one small repositioning, weight to the other foot, the way the bird moves when something has just been confirmed rather than discovered. The Edge District evening presses at the open door: the faint braid of light rising from the street guides below, the smell of lamp oil and cooling stone.",
-      "sceneSummary": "Leth confirms no one was given access to the diagram — someone entered her room during the night and added the symbol without her knowledge.",
+      "narration": "You turn from the diagram and let Order-Sense widen — a quiet cast, two energy drawn through the thin lattice with the deliberate economy of someone who knows the substrate is running at half-depth. No surge; just attention opened a little further than ordinary looking.\n\nThe archive room resolves. Low stone building, yes — but Order-Sense shows you the design it belongs to: a chain of three such rooms sharing a roof-line and a common rear access corridor. Leth's is the middle one. The door to that corridor is not the propped-front door — it is a second door, flush with the shelving on the east wall, visible now because Order-Sense shows you the seam where it sits. The latch side is on the right. It has been used recently: the dust on the floor in front of it is disturbed in a short arc, the kind a door's base sweeps through when it opens inward.\n\nThat is how the entry was made. Not through the front, where Leth would have heard it. Through the shared corridor that connects all three rooms — a route any tenant in the row would know, and any insider.",
+      "sceneSummary": "Order-Sense traces the archive room's design and locates the shared rear corridor — the entry route used to add the symbol.",
       "choices": [
         {
-          "label": "Use Order-Sense on the room itself — read what design the archive room is part of and how the entry was made",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Examine the east-wall door now — check what's on the other side of the corridor and whether it's still passable",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {
-            "chaos_order": 0.6
+            "chaos_order": 0.3
           },
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
-            "study",
-            "careful"
+            "scout"
           ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
         },
         {
-          "label": "Ask Leth what she knows about the four characters — does she recognize the script or the hand",
+          "label": "Ask Leth who else occupies the other rooms in this row — and whether any of them would have known Calvar was leaving something",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
-            "falsehood_truth": 0.5
+            "falsehood_truth": 0.4
           },
           "difficulty": 0,
           "intentTags": [
@@ -643,16 +645,14 @@
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Go to Calvar now — cross the district to the cooperage on the east lane and find him tonight",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Go to Calvar tonight — he needs to know someone added to his diagram before you bring him anything else",
+          "attribute": "social",
+          "subAttribute": "presence",
           "axes": {
-            "concrete_abstract": 0.3
+            "falsehood_truth": 0.5
           },
           "difficulty": 0,
           "intentTags": [
@@ -660,72 +660,69 @@
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Roll the diagram and take it with Leth's permission — Calvar needs to know someone marked his proof",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Read the four characters themselves through Order-Sense — what design are they part of, what larger thing do they belong to",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {
-            "falsehood_truth": 0.4
+            "concrete_abstract": 0.4
           },
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
-            "negotiate"
+            "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false
         }
       ],
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0
+        "energy": -2
       },
       "ledgerEvents": [],
       "questUpdates": [
         {
           "op": "progress",
           "questId": "find-the-engineer",
-          "note": "Confirmed: the diagram was added to during the night after Calvar left it with Leth — someone entered the archive room without permission and marked the proof. Calvar does not know."
+          "note": "Order-Sense traces the entry route — a shared rear corridor through the east-wall door, disturbed dust confirming recent use. The intruder knew the building's design."
         }
       ],
       "scene": {
-        "setting": "Leth's archive room in the Edge District — low stone building, door propped with a round river rock, lamp steady on the slanted desk, full dark outside. The document roll lies open, Calvar's diagram visible; the fresher ink at the lower-right corner now confirmed as a night addition by an unknown hand.",
+        "setting": "Leth's archive room in the Edge District — low stone building, middle of a three-room row sharing a rear corridor. Lamp steady on the slanted desk, full dark outside. The east-wall door, flush with shelving, now visible as the entry point — disturbed dust arc on the floor in front of it.",
         "npcsPresent": [
           {
             "name": "Leth",
-            "state": "Standing at the desk, eyes on the diagram — filing the new information with the same flat precision she gives everything; not shaken, but the archivist's calm has a sharper edge now"
+            "state": "Standing at the desk, watching Silas — reading the quality of his attention on the room"
           },
           {
             "name": "Pell",
-            "state": "Straightened in the door frame — listening, reading the room's new weight"
+            "state": "Still in the door frame, gaze shifting from Silas to the east-wall seam"
           },
           {
             "name": "Huginn",
-            "state": "On the sign board outside, weight shifted — attending to the confirmation, not the discovery"
+            "state": "On the sign board outside, weight settled — attending"
           }
         ],
         "objects": [
           "Slanted writing desk",
           "Sorel's letter — filed at upper-right corner of the desk",
-          "Opened document roll — diagram in Calvar's hand, two notation columns, lower-right corner marked by an unknown hand within the last forty-eight hours",
+          "Opened document roll — diagram in Calvar's hand, two notation columns, lower-right corner marked",
           "Dark waxed cord — untied, set aside",
           "Floor-to-ceiling shelving, every bundle tied and labeled",
-          "Round river rock propping the door",
+          "East-wall door — flush with shelving, latch side right, disturbed dust arc on floor in front",
+          "Round river rock propping the front door",
           "Memory (spear) — leaning against the wall beside Silas",
           "Fendt's Testimony — folded page in Silas's coat"
         ],
         "threads": [
-          "Someone entered Leth's archive room during one of the two nights since Calvar left the diagram — the entry method is unknown",
-          "The four characters at the lower-right corner were written by an unidentified hand with deliberate force — their meaning is still unread",
-          "Calvar does not know the diagram has been marked by another hand",
-          "Calvar is above the cooperage on the east lane — not yet approached"
+          "East-wall door connects to a shared rear corridor between three rooms — the entry route used to add the symbol",
+          "The four characters at the lower-right corner of the diagram remain unread in meaning",
+          "Calvar does not know his diagram has been marked",
+          "Who else occupies the other rooms in this row is not yet known"
         ]
       },
       "npcUpdates": [
@@ -733,76 +730,61 @@
           "op": "update",
           "npcId": "leth",
           "name": "Leth",
-          "note": "Confirmed no authorized access to the diagram since Calvar left it — but acknowledges someone could have entered during the night; the archivist's room is not sealed. Filing the fact with professional precision.",
-          "learned": [
-            "The diagram was left with specific instructions: keep it off the shelves, under the cord, until someone came asking about the seventh band or the lower filtration ledge — those were Calvar's exact words",
-            "Calvar brought it himself before the first light-guide shift, morning, three days ago",
-            "Leth did not add the fresher notation — she recognizes someone entered during one of the two nights since",
-            "The room was accessible: door propped, Leth sleeping in the next room, not awake every hour"
-          ],
-          "skillsObserved": [
-            "tracking a visitor's physical attention and inferring what they read from it",
-            "accurate self-reporting without defensiveness under implication"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At her archive room in the Edge District — now aware that someone entered her room at night and marked Calvar's proof without her knowledge"
+          "note": "Watched Silas read the room with Order-Sense — has not seen the east-wall door named as entry point yet; will have to account for that.",
+          "statusNote": "At her archive room in the Edge District — the entry route through the shared rear corridor is about to be named to her."
         }
       ],
       "factUpdates": [
         {
           "op": "add",
-          "text": "Someone entered Leth's archive room during one of the two nights after Calvar left his diagram — they added four characters in deliberate, fast-pressed ink to the lower-right corner without Leth's knowledge or permission. Entry method unknown. Calvar does not know.",
+          "text": "The intruder entered Leth's archive room through a shared rear corridor connecting three rooms in the same row — an east-wall door, flush with shelving, with disturbed dust confirming recent use. Access required knowledge of the building's interior design.",
           "subjectId": "leth"
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "Leth's archive room is the middle of a three-room row sharing a common rear access corridor. The east-wall door (flush with shelving, latch on right) was the intruder's entry point — disturbed dust arc on the floor confirms recent use.",
+          "subPlace": {
+            "name": "Leth's Archive Room — Rear Corridor",
+            "note": "Shared rear corridor connecting three rooms in the same row; used by the unknown intruder to access Leth's room and mark Calvar's diagram.",
+            "visited": false
+          }
         }
       ],
       "codexUpdates": [
         {
-          "topic": "calvar",
-          "label": "Calvar — the Engineer",
-          "kind": "person",
-          "entityId": "calvar",
-          "fact": "Calvar left the diagram with Leth with specific verbal instructions: hold it off the shelves, under the cord, until someone came asking about the seventh band or the lower filtration ledge. He anticipated someone would come. He did not anticipate someone would mark it first.",
+          "topic": "leth-archive-complaint",
+          "label": "Leth's Archive Complaint",
+          "kind": "event",
+          "entityId": "leth",
+          "fact": "Entry was made through a shared rear corridor — an east-wall door flush with the shelving in Leth's room, connecting three rooms in the same row. The intruder knew the building's interior layout: this was not a stranger guessing.",
           "links": [
             "find-the-engineer",
-            "leth-archive-complaint",
+            "calvar",
             "the-document-roll-leth-s-desk",
             "radiant-plateau-edge"
-          ]
-        },
-        {
-          "topic": "the-document-roll-leth-s-desk",
-          "label": "The Document Roll — Leth's Desk",
-          "kind": "mystery",
-          "fact": "Leth did not add the fresher notation — confirmed. An unknown actor entered her archive room during one of the two nights after Calvar left the diagram. The entry was undetected; the room was accessible but not public. Whoever added the symbol knew the diagram was there.",
-          "links": [
-            "calvar",
-            "find-the-engineer",
-            "leth",
-            "radiant-plateau-edge",
-            "leth-archive-complaint"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief direct exchange — one question, one answer"
+        "why": "A brief, focused use of Order-Sense — a few minutes of quiet attention"
       }
     },
     "sceneState": {
-      "setting": "Leth's archive room in the Edge District — low stone building, door propped with a round river rock, lamp steady on the slanted desk, full dark outside. The document roll lies open, Calvar's diagram visible; the fresher ink at the lower-right corner now confirmed as a night addition by an unknown hand.",
+      "setting": "Leth's archive room in the Edge District — low stone building, middle of a three-room row sharing a rear corridor. Lamp steady on the slanted desk, full dark outside. The east-wall door, flush with shelving, now visible as the entry point — disturbed dust arc on the floor in front of it.",
       "npcsPresent": [
         {
           "name": "Leth",
-          "state": "Standing at the desk, eyes on the diagram — filing the new information with the same flat precision she gives everything"
+          "state": "Standing at the desk, watching Silas — reading the quality of his attention on the room"
         },
         {
           "name": "Pell",
-          "state": "Straightened in the door frame — listening, reading the room's new weight"
+          "state": "Still in the door frame, gaze shifting from Silas to the east-wall seam"
         },
         {
           "name": "Huginn",
-          "state": "On the sign board outside, weight shifted — attending to the confirmation, not the discovery"
+          "state": "On the sign board outside, weight settled — attending"
         }
       ],
       "objects": [
@@ -811,15 +793,16 @@
         "Opened document roll — diagram in Calvar's hand, two notation columns, lower-rig",
         "Dark waxed cord — untied, set aside",
         "Floor-to-ceiling shelving, every bundle tied and labeled",
-        "Round river rock propping the door",
+        "East-wall door — flush with shelving, latch side right, disturbed dust arc on fl",
+        "Round river rock propping the front door",
         "Memory (spear) — leaning against the wall beside Silas",
         "Fendt's Testimony — folded page in Silas's coat"
       ],
       "threads": [
-        "Someone entered Leth's archive room during one of the two nights since Calvar left the diagram — the entry method is unknown",
-        "The four characters at the lower-right corner were written by an unidentified hand with deliberate force — their meaning is still unread",
-        "Calvar does not know the diagram has been marked by another hand",
-        "Calvar is above the cooperage on the east lane — not yet approached"
+        "East-wall door connects to a shared rear corridor between three rooms — the entry route used to add the symbol",
+        "The four characters at the lower-right corner of the diagram remain unread in meaning",
+        "Calvar does not know his diagram has been marked",
+        "Who else occupies the other rooms in this row is not yet known"
       ]
     }
   },
@@ -873,7 +856,8 @@
         "Leth found at her archive room — she has Sorel's letter, knows the shape of the ask, and is ready to give the engineer's name after covering her own ground first.",
         "Leth is covering her ground — archive breach first, then the engineer's name. She has a document roll on her desk and is sequencing deliberately.",
         "Leth named Calvar — above the cooperage on the east lane. She opened the document roll: a diagram in his own hand, left three days ago. He knows something is changing and came to Leth first. His location is confirmed; the question is whether he'll go.",
-        "Confirmed: the diagram was added to during the night after Calvar left it with Leth — someone entered the archive room without permission and marked the proof. Calvar does not know."
+        "Confirmed: the diagram was added to during the night after Calvar left it with Leth — someone entered the archive room without permission and marked the proof. Calvar does not know.",
+        "Order-Sense traces the entry route — a shared rear corridor through the east-wall door, disturbed dust confirming recent use. The intruder knew the building's design."
       ],
       "aliases": [],
       "startedAt": "2026-07-16T19:11:11.950Z"
@@ -1553,7 +1537,8 @@
         "[d3] Set her sequence plainly — two things before the name: the archive breach and what it means for the engineer. Has a document roll on the desk. Pausing before the second.",
         "[d3] Completed her sequence — named Calvar above the cooperage on the east lane. Opened the document roll: a diagram in Calvar's own hand, left with her three days ago. Stated plainly t",
         "[d3] Watched Silas use Palework on the fresher ink — did not interrupt or ask; is waiting",
-        "[d3] Confirmed no authorized access to the diagram since Calvar left it — but acknowledges someone could have entered during the night; the archivist's room is not sealed. Filing the fa"
+        "[d3] Confirmed no authorized access to the diagram since Calvar left it — but acknowledges someone could have entered during the night; the archivist's room is not sealed. Filing the fa",
+        "[d3] Watched Silas read the room with Order-Sense — has not seen the east-wall door named as entry point yet; will have to account for that."
       ],
       "knownFacts": [
         "The taker knew the working layout of the secondary stack, third tier, east corner — not public knowledge",
@@ -1574,7 +1559,7 @@
         "accurate self-reporting without defensiveness under implicat"
       ],
       "status": "active",
-      "statusNote": "At her archive room in the Edge District — now aware that someone entered her room at night and marked Calvar's proof without her knowledge",
+      "statusNote": "At her archive room in the Edge District — the entry route through the shared rear corridor is about to be named to her.",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 3
@@ -1696,7 +1681,8 @@
       "visits": 2,
       "notes": [
         "[d3] Rear of the narrow-colonnaded administrative building: a small iron-banded service door, not latched, with a cloth-wrapped bundle tied with a single cord leaning against the wall beside it. Found on W",
-        "[d3] Leth named Calvar — engineer, above the cooperage on the east lane — and opened the document roll he left with her three days ago: a diagram in his own hand with the distinctive three-formation notati"
+        "[d3] Leth named Calvar — engineer, above the cooperage on the east lane — and opened the document roll he left with her three days ago: a diagram in his own hand with the distinctive three-formation notati",
+        "[d3] Leth's archive room is the middle of a three-room row sharing a common rear access corridor. The east-wall door (flush with shelving, latch on right) was the intruder's entry point — disturbed dust ar"
       ],
       "flags": {},
       "lastVisit": 3,
@@ -1719,6 +1705,12 @@
           "day": 3,
           "visited": false,
           "note": "The cooperage on the east lane of the Edge District, above which Calvar has his room. He has lived here for fifteen year"
+        },
+        "leth-s-archive-room-rear-corridor": {
+          "name": "Leth's Archive Room — Rear Corridor",
+          "day": 3,
+          "visited": false,
+          "note": "Shared rear corridor connecting three rooms in the same row; used by the unknown intruder to access Leth's room and mark"
         }
       }
     }
@@ -1767,7 +1759,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-17T03:02:22.571Z",
+    "lastSharedReadAt": "2026-07-17T12:30:36.451Z",
     "lastTickWorldDay": 17,
     "lastCanonWorldDay": 17
   },
@@ -2629,16 +2621,18 @@
         "facts": [
           "[d3] Leth filed a formal breach complaint two weeks ago to the district records office. The removed material was historical calibration files — old array-setup records, pre-Transition provenance documentat",
           "[d3] Leth is physically present at her archive room in the Edge District — Sorel's letter arrived this morning. She refers to the engineer as 'Grael's engineer', a framing that suggests she knows the polit",
-          "[d3] Leth dates the breach precisely at six weeks ago. The taker knew the working layout — secondary stack, third tier, east corner — not the public-facing organization. This is insider knowledge or prior "
+          "[d3] Leth dates the breach precisely at six weeks ago. The taker knew the working layout — secondary stack, third tier, east corner — not the public-facing organization. This is insider knowledge or prior ",
+          "[d3] Entry was made through a shared rear corridor — an east-wall door flush with the shelving in Leth's room, connecting three rooms in the same row. The intruder knew the building's interior layout: this"
         ],
         "links": [
-          "fendt-and-the-falsified-ledger",
           "find-the-engineer",
           "the-edge-district-ledger",
           "radiant-plateau-edge",
           "sorel",
           "overseer-grael",
-          "the-water-crisis"
+          "the-water-crisis",
+          "calvar",
+          "the-document-roll-leth-s-desk"
         ],
         "aliases": [
           "Leth — Edge District Archivist"
@@ -2734,17 +2728,17 @@
     }
   },
   "tendencies": {
-    "strategic": 26.26153799263882,
-    "cerebral": 26.57876548334603,
-    "social": 22.849893183515718,
-    "generous": 4.991960315067058,
-    "cautious": 20.302910332565613,
-    "physical": 1.084693853994622,
-    "risky": 3.0542797050924126,
-    "ruthless": 1.3430464325134674,
-    "carousing": 0.9430902503900537,
-    "amorous": 2.5860888007575724,
-    "patient": 1.7317793056636896
+    "strategic": 25.60499954282285,
+    "cerebral": 26.91429634626238,
+    "social": 22.278645853927824,
+    "generous": 4.867161307190382,
+    "cautious": 20.795337574251473,
+    "physical": 1.0575765076447565,
+    "risky": 2.9779227124651024,
+    "ruthless": 1.3094702717006308,
+    "carousing": 0.9195129941303023,
+    "amorous": 2.521436580738633,
+    "patient": 1.6884848230220975
   },
   "aptitudes": [
     "strategist",
@@ -2755,7 +2749,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 362,
+  "actionCount": 363,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2905,8 +2899,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784258397417,
-  "rev": 517,
+  "updatedAt": 1784291715917,
+  "rev": 522,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3199,12 +3193,6 @@
   "opLossPending": false,
   "establishedFacts": [
     {
-      "id": "mara-wells",
-      "text": "Mara's ledger confirms four iron sleeve blank failures in three weeks — Fen's intake (World-day minus-18) and east furlong farmer (World-day minus-9) confirmed; two additional failures unidentified. T",
-      "day": 2,
-      "subjectId": "mara-wells"
-    },
-    {
       "id": "the-water-crisis",
       "text": "Palework on the bedrock shelf confirms: the amber light is a very old ended thing venting through a crack that opened no more than a season ago. The iron in the channel and the old ending below share ",
       "day": 2,
@@ -3437,6 +3425,12 @@
       "text": "Someone entered Leth's archive room during one of the two nights after Calvar left his diagram — they added four characters in deliberate, fast-pressed ink to the lower-right corner without Leth's kno",
       "day": 3,
       "subjectId": "leth"
+    },
+    {
+      "id": "leth",
+      "text": "The intruder entered Leth's archive room through a shared rear corridor connecting three rooms in the same row — an east-wall door, flush with shelving, with disturbed dust confirming recent use. Acce",
+      "day": 3,
+      "subjectId": "leth"
     }
   ],
   "practice": {
@@ -3444,7 +3438,7 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 42,
+      "order_sense": 43,
       "palework": 21,
       "deathsense": 15,
       "shadowstep": 8,
@@ -3548,10 +3542,10 @@
       "at": "2026-07-13T12:11:17.802Z"
     }
   ],
-  "syncedAt": 1784184597860,
+  "syncedAt": 1784258397417,
   "teachers": {},
   "regionsKnown": {
-    "valley": 177
+    "valley": 178
   },
   "foreclosed": [
     "rootkin",
@@ -3584,6 +3578,25 @@
       "startDay": 17,
       "endDay": 17,
       "beats": 8
+    },
+    {
+      "id": "sess-2",
+      "startedAt": "2026-07-17T12:35:15.912Z",
+      "lastAt": "2026-07-17T12:35:15.912Z",
+      "startDay": 17,
+      "endDay": 17,
+      "beats": 1
+    }
+  ],
+  "company": [
+    {
+      "npcId": "pell",
+      "roles": [
+        "ally"
+      ],
+      "teaches": null,
+      "liaisonFor": null,
+      "joinedDay": 17
     }
   ]
 }

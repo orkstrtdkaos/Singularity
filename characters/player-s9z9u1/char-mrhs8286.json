@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 9,
-  "xp": 887,
+  "xp": 892,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -72,8 +72,8 @@
     "mechanical_spiritual": 0.17191810626191062,
     "concrete_abstract": -0.07187772639144183,
     "death_life": -0.17204875971263037,
-    "emotional_logical": 0.048249999999999994,
-    "falsehood_truth": 0.10209500000000002,
+    "emotional_logical": 0.03083749999999999,
+    "falsehood_truth": 0.12199025000000002,
     "demonic_angelic": 0.03,
     "value": 0.0435
   },
@@ -81,7 +81,7 @@
   "maxHealth": 70,
   "health": 70,
   "maxEnergy": 140,
-  "energy": 87,
+  "energy": 82,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -500,181 +500,103 @@
         "player": "Bring Pell's offer to a head — ask Fendt to reproduce the margin notation now. A glyph, a numeral, whatever he remembers. If her father's hand matches, the authorship chain closes in this room.",
         "summary": "Pell confirms the margin notation as her father's hand — the authorship chain closes in the upper room.",
         "narration": "..."
+      },
+      {
+        "player": "Ask Pell directly whether she knew — or half-knew — what her father's work was. She named the hand without hesitating. That's not memory; that's a thing kept ready.",
+        "summary": "Pell admits she half-knew — the crate of instruments, the trained-out hand, a father who called it over and said no more.",
+        "narration": "You let the notebook sit between the three of you for a moment — Fendt still on the desk edge, Huginn motionless on your shoulder — and then you look at Pell directly. Not an accusation. A question that's been sitting in the room since she named the hand without pausing.\n\n\"Did you know?\" you ask. Quiet, no edge to it. \"Or half-know. You said *surveyor's habit* like it was already in your mouth.\"\n\nShe doesn't look away. That's the first thing. She holds your eye for the space of two slow breaths, and something passes through her expression that isn't quite surprise and isn't quite relief — the look of someone who has been waiting to be asked the right question and wasn't certain it would come. \"Half,\" she says, finally. \"There was a crate in the workshop — tools I wasn't to touch. Old marking instruments, a set of graduated lenses he said weren't his trade anymore. He never explained and I never pushed.\" Her jaw sets slightly. \"The hand I knew because he taught me ledger-work. Every three he wrote, I wrote the same way, until I trained it out. It felt too much like him.\"\n\nFendt has gone very still on the desk edge. Not uncomfortable — the stillness of a man recalibrating weight. He looks at Pell with the careful attention of someone adjusting a figure he had written in as fixed. \"He didn't tell you,\" Fendt says. Not a question. An accounting.\n\n\"He told me it was over,\" Pell says. \"That it was someone else's problem now, and the valley was better for the distance.\" She sets one finger on the notebook page without touching the notation itself. \"He was not a man who lied. But he was a man who could make a sentence do the work of ten.\""
       }
     ],
     "lastTurn": {
-      "narration": "...",
-      "sceneSummary": "Pell confirms the margin notation as her father's hand — the authorship chain closes in the upper room.",
+      "narration": "You let the notebook sit between the three of you for a moment — Fendt still on the desk edge, Huginn motionless on your shoulder — and then you look at Pell directly. Not an accusation. A question that's been sitting in the room since she named the hand without pausing.\n\n\"Did you know?\" you ask. Quiet, no edge to it. \"Or half-know. You said *surveyor's habit* like it was already in your mouth.\"\n\nShe doesn't look away. That's the first thing. She holds your eye for the space of two slow breaths, and something passes through her expression that isn't quite surprise and isn't quite relief — the look of someone who has been waiting to be asked the right question and wasn't certain it would come. \"Half,\" she says, finally. \"There was a crate in the workshop — tools I wasn't to touch. Old marking instruments, a set of graduated lenses he said weren't his trade anymore. He never explained and I never pushed.\" Her jaw sets slightly. \"The hand I knew because he taught me ledger-work. Every three he wrote, I wrote the same way, until I trained it out. It felt too much like him.\"\n\nFendt has gone very still on the desk edge. Not uncomfortable — the stillness of a man recalibrating weight. He looks at Pell with the careful attention of someone adjusting a figure he had written in as fixed. \"He didn't tell you,\" Fendt says. Not a question. An accounting.\n\n\"He told me it was over,\" Pell says. \"That it was someone else's problem now, and the valley was better for the distance.\" She sets one finger on the notebook page without touching the notation itself. \"He was not a man who lied. But he was a man who could make a sentence do the work of ten.\"",
+      "sceneSummary": "Pell admits she half-knew — the crate of instruments, the trained-out hand, a father who called it over and said no more.",
       "choices": [
         {
-          "label": "Answer Fendt's original question now — who sent you, and where does the paper go. Name Millbrook's elder panel and Dara Holt; name what's at stake downstream if the seventh-band blind spot stays buried.",
+          "label": "Ask Fendt plainly: now that the authorship chain is closed, what does he need from you — protection, transport, a witness, or something else? Give him the floor to name his terms.",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
           "axes": {
-            "falsehood_truth": 0.8
+            "falsehood_truth": 0.6
           },
           "difficulty": 0,
           "intentTags": [
             "negotiate",
-            "lead"
+            "help"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false
+          "trivial": true
         },
         {
-          "label": "Before the paper moves anywhere — ask Fendt what he knows about why his father would have left. The array specification and the departure are not separate facts; press on whether Fendt already suspects the reason.",
+          "label": "Name the Order-Sense read aloud — tell Fendt you know he staged this handoff, that the paper was always going somewhere specific. Ask him where.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "falsehood_truth": 0.6,
-            "concrete_abstract": 0.3
+            "falsehood_truth": 0.7
           },
           "difficulty": 15,
           "intentTags": [
             "study",
-            "careful"
+            "negotiate"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": false
         },
         {
-          "label": "Ask Pell directly whether she knew — or half-knew — what her father's work was. She named the hand without hesitating. That's not memory; that's a thing kept ready.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Ask Pell what else was in the crate — the graduated lenses, the marking instruments. If her father carried filtration tools out of the Plateau, some of them may still exist, and an instrument that matches the array-setup records is better than a notebook copy.",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "axes": {
-            "falsehood_truth": 0.5,
-            "emotional_logical": -0.3
+            "concrete_abstract": 0.3
           },
           "difficulty": 0,
           "intentTags": [
-            "comfort",
             "study"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false
+          "trivial": true
         },
         {
-          "label": "Name what Order-Sense showed — that Fendt staged this handoff deliberately, not fled it. Lay it in front of him plainly and ask what the full design is: who is the intended recipient, and how long has he been waiting for someone to come through that rear door.",
+          "label": "Use The Attended End on Fendt — read what is ending for him right now, how far along it is, and whether any path turns it.",
           "attribute": "mental",
-          "subAttribute": "reason",
+          "subAttribute": "insight",
           "axes": {
-            "falsehood_truth": 0.9,
-            "chaos_order": 0.4
+            "death_life": -0.4
           },
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
-            "study",
-            "plan"
+            "study"
           ],
-          "abilityId": "order_sense",
+          "abilityId": "the-attended-end",
           "energyCost": 2,
           "trivial": false
         }
       ],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
-        "xp": 5
+        "energy": 0
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "fendt",
-          "name": "Fendt",
-          "note": "Reproduced the margin notation from a seven-year-old notebook entry — confirmed Pell's identification without prompting. Named the departure and the calibration files as connected facts.",
-          "learned": [
-            "Copied the margin notation during a calibration drift check seven years ago — kept it without knowing why",
-            "Named Pell's father's departure and the calibration files' disappearance as the same event, not separate"
-          ],
-          "skillsObserved": [
-            "precise recall under emotional weight — produced a seven-year-old notebook entry on request without fumbling"
-          ],
-          "relationshipDelta": 1,
-          "statusNote": "Sitting on the desk edge in the upper room — the authorship chain has just closed in front of him; waiting on where the paper goes"
-        },
-        {
-          "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "note": "Confirmed the margin notation as her father's hand — plain, certain, without performance. The authorship is named.",
-          "learned": [
-            "Her father's distinctive three-hand appears in the original filtration array margin notation — he authored the seventh-band monitoring specification",
-            "The calibration files disappeared the same season her father left the Plateau"
-          ],
-          "skillsObserved": [
-            "holding confirmed knowledge without performance — named the identification cleanly, without weight added or removed"
-          ],
-          "relationshipDelta": 0,
-          "statusNote": "At the desk position in the upper room — has confirmed her father's authorship; processing weight of it, not showing the seams"
-        }
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Pell's father authored the seventh-band monitoring specification in the original Radiant filtration array — his distinctive three-hand confirmed by Fendt's copied notation. The calibration files disappeared the same season he left the Plateau.",
-          "subjectId": "pell"
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "pell",
-          "label": "Pell",
-          "kind": "person",
-          "entityId": "pell",
-          "fact": "Pell's father authored the seventh-band monitoring specification in the original Radiant filtration array — his margin notation confirmed from Fendt's seven-year-old notebook copy. The calibration files' disappearance and his departure from the Plateau are the same event.",
-          "links": [
-            "the-unnamed-engineer",
-            "fendt-and-the-falsified-ledger",
-            "leth-archive-complaint",
-            "find-the-engineer",
-            "the-edge-district-ledger",
-            "the-water-crisis"
-          ]
-        },
-        {
-          "topic": "the-edge-district-ledger",
-          "label": "The Edge District Ledger",
-          "kind": "event",
-          "fact": "Authorship chain closed: Pell's father built the seventh-band blind-spot monitoring into the filtration specification at foundation. Fendt's copied notation — a three with the loop closing before the downstroke, leaning left — matches his hand exactly. The calibration files that named him were removed the same season he left.",
-          "links": [
-            "pell",
-            "fendt",
-            "fendt-and-the-falsified-ledger",
-            "leth-archive-complaint",
-            "the-water-crisis",
-            "overseer-grael"
-          ]
-        }
-      ],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "the-edge-district-ledger",
-          "note": "Pell identified the margin notation as her father's hand — the authorship chain closes in the upper room. Fendt's departure and the calibration files are named as the same event. What remains: where the paper goes, and what Fendt expects to happen to him."
-        }
-      ],
       "scene": {
-        "setting": "Upper floor of the narrow-colonnaded administrative building, Edge District — early morning. Silas stands back from the desk at the stair-head, weight on his back foot, Memory's heel on the floor. Pell has the desk position. The shutter-light is three fingers' width above the sill.",
+        "setting": "Upper floor of the narrow-colonnaded administrative building, Edge District — early morning. Silas stands back from the desk at the stair-head, weight on his back foot, Memory's heel on the floor. Pell has the desk position, one finger resting on the notebook page. Shutter-light is three fingers' width above the sill and climbing.",
         "npcsPresent": [
           {
             "name": "Fendt",
-            "state": "Sitting on the desk edge, notebook open in front of Pell — has reproduced the notation; waiting to see where the paper goes"
+            "state": "Still on the desk edge, notebook open in front of Pell — has just recalibrated; watching Pell with careful, adjusting attention."
           },
           {
             "name": "Pell",
-            "state": "Standing at the desk position, looking at the open notebook — the identification made, processing without showing the seams"
+            "state": "Standing at the desk, finger resting near the margin notation — the half-knowledge named, armor still down."
           },
           {
             "name": "Huginn",
-            "state": "On Silas's shoulder — shifted one foot, replaced it; watching Fendt"
+            "state": "On Silas's shoulder — motionless, watching Fendt."
           }
         ],
         "objects": [
           "Latched traveling case — at Fendt's boots",
-          "Notebook (Fendt's) — open on the desk, page showing the copied margin notation: a bracketed column glyph and a three, loop before downstroke, leaning left",
+          "Notebook (Fendt's) — open on the desk, page showing the copied margin notation",
           "Narrow shutter — three fingers' width open, morning light climbing",
           "Desk — Fendt sitting on its edge, notebook turned toward Pell",
           "Oil lamp (below, storage room) — still burning",
@@ -683,36 +605,80 @@
         ],
         "threads": [
           "Fendt's original question — who sent you, and where does the paper go — still formally unanswered",
-          "Whether Pell knew or half-knew her father's work before this moment",
-          "Fendt's connection of the departure and the calibration files — an implication not yet named aloud",
-          "Order-Sense's read (Fendt staged this handoff) — not yet named to Fendt",
+          "Pell's half-knowledge named — the crate of instruments and trained-out hand are now live detail",
+          "Order-Sense read (Fendt staged this handoff) — named to the player, not yet named to Fendt",
           "What Fendt expects to happen to him when the paper moves"
         ]
       },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "pell",
+          "name": "Pell",
+          "note": "Named the half-knowledge plainly — a crate of instruments she wasn't to touch, graduated lenses, a hand she trained out because it felt too much like him. Her father told her it was over and she didn't push.",
+          "learned": [
+            "Pell's father had a crate of old marking instruments and graduated lenses in the workshop — tools she was told not to touch",
+            "Pell trained her father's three-hand out of her own ledger-work because it felt too much like him",
+            "Her father told her the filtration work was over and someone else's problem — she accepted it without pressing"
+          ],
+          "skillsObserved": [
+            "holding partial knowledge without performance — named the half-knowing plainly when directly asked"
+          ],
+          "statusNote": "Standing at the desk in the upper room — half-knowledge named, armor down, one finger near the margin notation.",
+          "relationshipDelta": 0
+        },
+        {
+          "op": "update",
+          "npcId": "fendt",
+          "name": "Fendt",
+          "note": "Recalibrated on hearing Pell's half-knowledge — noted that her father did not lie to her, only shaped what he said. Gone still in a new way: adjusting the weight of what Pell represents in this chain.",
+          "learned": [
+            "Pell knew her father's hand because he taught her ledger-work — the connection is intimate, not archival",
+            "Her father did not tell her the specifics; he told her it was over and the valley was better for the distance"
+          ],
+          "statusNote": "Sitting on the desk edge in the upper room — recalibrating; Pell's half-knowledge is new weight in his accounting.",
+          "relationshipDelta": 0
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "pell",
+          "label": "Pell",
+          "kind": "person",
+          "entityId": "pell",
+          "fact": "Pell half-knew her father's work — a crate of marking instruments and graduated lenses in the workshop she was told not to touch; she trained his three-hand out of her own writing because it felt too much like him. Her father told her the filtration work was over and said no more.",
+          "links": [
+            "the-unnamed-engineer",
+            "fendt-and-the-falsified-ledger",
+            "find-the-engineer",
+            "leth-archive-complaint"
+          ]
+        }
+      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a short exchange in the upper room — the notation produced and confirmed"
+        "why": "a charged exchange, a few minutes' weight in the upper room"
       }
     },
     "sceneState": {
-      "setting": "Upper floor of the narrow-colonnaded administrative building, Edge District — early morning. Silas stands back from the desk at the stair-head, weight on his back foot, Memory's heel on the floor. Pell has the desk position. The shutter-light is three fingers' width above the sill.",
+      "setting": "Upper floor of the narrow-colonnaded administrative building, Edge District — early morning. Silas stands back from the desk at the stair-head, weight on his back foot, Memory's heel on the floor. Pell has the desk position, one finger resting on the notebook page. Shutter-light is three fingers' width above the sill and climbing.",
       "npcsPresent": [
         {
           "name": "Fendt",
-          "state": "Sitting on the desk edge, notebook open in front of Pell — has reproduced the notation; waiting to see where the paper g"
+          "state": "Still on the desk edge, notebook open in front of Pell — has just recalibrated; watching Pell with careful, adjusting at"
         },
         {
           "name": "Pell",
-          "state": "Standing at the desk position, looking at the open notebook — the identification made, processing without showing the se"
+          "state": "Standing at the desk, finger resting near the margin notation — the half-knowledge named, armor still down."
         },
         {
           "name": "Huginn",
-          "state": "On Silas's shoulder — shifted one foot, replaced it; watching Fendt"
+          "state": "On Silas's shoulder — motionless, watching Fendt."
         }
       ],
       "objects": [
         "Latched traveling case — at Fendt's boots",
-        "Notebook (Fendt's) — open on the desk, page showing the copied margin notation: ",
+        "Notebook (Fendt's) — open on the desk, page showing the copied margin notation",
         "Narrow shutter — three fingers' width open, morning light climbing",
         "Desk — Fendt sitting on its edge, notebook turned toward Pell",
         "Oil lamp (below, storage room) — still burning",
@@ -721,9 +687,8 @@
       ],
       "threads": [
         "Fendt's original question — who sent you, and where does the paper go — still formally unanswered",
-        "Whether Pell knew or half-knew her father's work before this moment",
-        "Fendt's connection of the departure and the calibration files — an implication not yet named aloud",
-        "Order-Sense's read (Fendt staged this handoff) — not yet named to Fendt",
+        "Pell's half-knowledge named — the crate of instruments and trained-out hand are now live detail",
+        "Order-Sense read (Fendt staged this handoff) — named to the player, not yet named to Fendt",
         "What Fendt expects to happen to him when the paper moves"
       ]
     }
@@ -1143,7 +1108,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d3] Named the tactical logic plainly: Huginn's building is a concrete lead; Leth without a face or address is a cold knock. Waiting for Silas to move.",
         "[d3] Read Huginn's signal through Silas's translation — filed 'hours' without editorializing. Said 'then we don't wait.' Waiting on Silas to move.",
         "[d3] Took the front-door position without comment — holding it, watching the entrance.",
         "[d3] Holding the front of the building while Silas moved inside and up — she does not know he is at the landing yet.",
@@ -1152,28 +1116,29 @@
         "[d3] Gone still in listening mode — waiting for Silas's move, not cutting in.",
         "[d3] Chin lifted a fraction when Fendt mentioned the hand that forms threes — something registered, not yet named.",
         "[d3] Named what she filed when Fendt mentioned the hand that forms threes — her father was a filtration engineer at the Radiant council archive before the Transition, with a distinctive",
-        "[d3] Confirmed the margin notation as her father's hand — plain, certain, without performance. The authorship is named."
+        "[d3] Confirmed the margin notation as her father's hand — plain, certain, without performance. The authorship is named.",
+        "[d3] Named the half-knowledge plainly — a crate of instruments she wasn't to touch, graduated lenses, a hand she trained out because it felt too much like him. Her father told her it wa"
       ],
       "knownFacts": [
-        "Trusts Huginn's fixation as actionable intelligence — 'your bird finds ends' is her working model of the companion",
-        "Fendt is present, has a case, and is beginning to talk",
-        "Grael knew exactly what he was suppressing — Fendt named the seventh band explicitly in the concern notice",
         "Her father apprenticed at the Radiant council archive for three years",
         "Her father had a distinctive hand with threes — loop closing before the downstroke, numeral leaning left — an old surveyor's habit",
         "Her father was a filtration engineer before he was a blacksmith",
         "Her father's distinctive three-hand appears in the original filtration array margin notation — he authored the seventh-band monitoring specification",
-        "The calibration files disappeared the same season her father left the Plateau"
+        "The calibration files disappeared the same season her father left the Plateau",
+        "Pell's father had a crate of old marking instruments and graduated lenses in the workshop — tools she was told not to touch",
+        "Pell trained her father's three-hand out of her own ledger-work because it felt too much like him",
+        "Her father told her the filtration work was over and someone else's problem — she accepted it without pressing"
       ],
       "skillsObserved": [
-        "setting terms and holding them cleanly through the full sequ",
         "rapid tactical positioning in an unknown interior",
         "precise technical questioning under field conditions",
         "reading a subject's frame and shifting the dynamic deliberat",
         "holding material knowledge in reserve until it becomes load-",
-        "holding confirmed knowledge without performance — named the "
+        "holding confirmed knowledge without performance — named the ",
+        "holding partial knowledge without performance — named the ha"
       ],
       "status": "active",
-      "statusNote": "At the desk position in the upper room — has confirmed her father's authorship; processing weight of it, not showing the seams",
+      "statusNote": "Standing at the desk in the upper room — half-knowledge named, armor down, one finger near the margin notation.",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 3
@@ -1377,7 +1342,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d3] Updated his model on seeing two visitors — not protest, calculation. Breath released; beginning to speak.",
         "[d3] Gave his full account — seventh-band particulate trending upstream, Grael named, falsification described, paper written from memory and still uncertain of its exactness.",
         "[d3] Recalibrated when Pell took the questioning position — adapted without resistance. Confirmed the seventh-band designation was named explicitly in his concern notice to Grael, meani",
         "[d3] Recognized Leth's name immediately — knew her archive complaint, has a copy. The two threads are one in the room now; he is recalibrating what his situation means.",
@@ -1386,17 +1350,18 @@
         "[d3] Named the erasure plainly: the removed calibration files proved the seventh-band blind spot was a design specification built in at the foundation layer — their removal erased the a",
         "[d3] Named the authorship chain: a council department glyph on the supervisor's mark, a personal margin notation with a distinctive hand forming threes — the calibration files would hav",
         "[d3] Heard Pell name her father as a filtration engineer who left the Plateau after the Transition — someone who would know the distinctive hand. Went still in a new way. Asked if she w",
-        "[d3] Reproduced the margin notation from a seven-year-old notebook entry — confirmed Pell's identification without prompting. Named the departure and the calibration files as connected "
+        "[d3] Reproduced the margin notation from a seven-year-old notebook entry — confirmed Pell's identification without prompting. Named the departure and the calibration files as connected ",
+        "[d3] Recalibrated on hearing Pell's half-knowledge — noted that her father did not lie to her, only shaped what he said. Gone still in a new way: adjusting the weight of what Pell repre"
       ],
       "knownFacts": [
-        "The original array-setup documentation had two marks: a council department glyph (supervisor notation) and a smaller personal margin mark — a distinctive hand f",
-        "The calibration files would have named the department; the department records would have named the engineer — that is the broken chain",
         "Fendt saw the margin notation twice at orientation and once seven years ago during a calibration drift check; he wrote the glyph down in a notebook he no longer",
         "Pell's father was a filtration engineer at the Radiant council before becoming a blacksmith in the valley",
         "Pell can identify her father's handwriting — specifically the way he formed threes",
         "Pell's father left the Plateau the season after the Great Transition",
         "Copied the margin notation during a calibration drift check seven years ago — kept it without knowing why",
-        "Named Pell's father's departure and the calibration files' disappearance as the same event, not separate"
+        "Named Pell's father's departure and the calibration files' disappearance as the same event, not separate",
+        "Pell knew her father's hand because he taught her ledger-work — the connection is intimate, not archival",
+        "Her father did not tell her the specifics; he told her it was over and the valley was better for the distance"
       ],
       "skillsObserved": [
         "forced calm under surprise — made himself slow his breathing",
@@ -1406,7 +1371,7 @@
         "precise recall under emotional weight — produced a seven-yea"
       ],
       "status": "active",
-      "statusNote": "Sitting on the desk edge in the upper room — the authorship chain has just closed in front of him; waiting on where the paper goes",
+      "statusNote": "Sitting on the desk edge in the upper room — recalibrating; Pell's half-knowledge is new weight in his accounting.",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 3
@@ -1801,7 +1766,6 @@
         "label": "Pell",
         "kind": "person",
         "facts": [
-          "[d2] Pell can feel the collar rune at range — her thread in Memory is live. The spear is growing; both makers are present in it, and it will deepen as it attends more endings.",
           "[d2] Named no prior claims: one man from the Harmonic Heights two winters back, came for iron fittings three times over a season. She let it run longer than it should have. He stopped coming; she didn't go",
           "[d2] She names her own not-asking as a habit — long-standing, unsentimental about it. The road is what she knows how to want openly. The other wanting she carries without words for it, and does not intend ",
           "[d2] Pell identified her maker's mark in the blade on sight, confirmed the binding closed rather than passed at the kill moment, and asked to be shown what it was supposed to do. The examination is now ope",
@@ -1824,7 +1788,8 @@
           "[d2] Said yes — plainly, without qualifier — when asked directly at the overhang camp. The habit of managing it failed, once, completely.",
           "[d2] Fully unguarded at the overhang camp on World-day 16 evening — said Silas's name plainly, stopped managing, the habit broke entirely through to the end. No ledger-close; no armor.",
           "[d3] Pell's father was a filtration engineer at the Radiant council archive before the Transition — he had a distinctive hand forming threes (loop closing before the downstroke, leaning left, an old survey",
-          "[d3] Pell's father authored the seventh-band monitoring specification in the original Radiant filtration array — his margin notation confirmed from Fendt's seven-year-old notebook copy. The calibration fil"
+          "[d3] Pell's father authored the seventh-band monitoring specification in the original Radiant filtration array — his margin notation confirmed from Fendt's seven-year-old notebook copy. The calibration fil",
+          "[d3] Pell half-knew her father's work — a crate of marking instruments and graduated lenses in the workshop she was told not to touch; she trained his three-hand out of her own writing because it felt too "
         ],
         "links": [
           "memory-the-spear",
@@ -2500,17 +2465,17 @@
     }
   },
   "tendencies": {
-    "strategic": 34.05660005964531,
-    "cerebral": 29.185334780031624,
-    "social": 27.173515533056175,
-    "generous": 7.115517717388582,
-    "cautious": 26.228775038923636,
-    "physical": 1.5461177270872508,
-    "risky": 4.353556515633777,
-    "ruthless": 1.9143723272360855,
-    "carousing": 1.3442765891973474,
-    "amorous": 3.686199312320356,
-    "patient": 1.1473292386619731
+    "strategic": 33.20518505815418,
+    "cerebral": 29.455701410530832,
+    "social": 27.49417764472977,
+    "generous": 6.9376297744538675,
+    "cautious": 25.573055662950544,
+    "physical": 1.5074647839100694,
+    "risky": 4.2447176027429325,
+    "ruthless": 1.8665130190551833,
+    "carousing": 1.3106696744674136,
+    "amorous": 3.594044329512347,
+    "patient": 1.1186460076954237
   },
   "aptitudes": [
     "strategist",
@@ -2522,7 +2487,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 348,
+  "actionCount": 349,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2664,8 +2629,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784254485793,
-  "rev": 494,
+  "updatedAt": 1784255802039,
+  "rev": 495,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3229,7 +3194,7 @@
   "syncedAt": 1784184597860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 163
+    "valley": 164
   },
   "foreclosed": [
     "rootkin",

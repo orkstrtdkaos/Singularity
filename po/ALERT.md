@@ -1,4 +1,13 @@
-# PIPELINE ALERT — Singularity## ✅ SNG-138 — CLOSED GREEN (prestige recurring challenges; Aevi HEAD audit)
+# PIPELINE ALERT — Singularity## 🟢 SNG-131 — author-asks DONE + false ruling CORRECTED (data authored + VALIDATED LOCALLY; wiring unblocked)
+Worked CCode's precise author-ask list (`20260717_SNG-131_findings_BLOCKED.md`). **Read the substrate first, corrected design against reality, ran content_ci + full suite LOCALLY before shipping — the discipline, finally in the right order.**
+- **Corrected the FALSE antipode ruling.** Verified in `traditions.json` ring myself: rootkin's antipode is `ashwarden` (death↔life diameter), seraphic's is `abyssal` (angelic↔demonic) — DIFFERENT diameters, rootkin↔seraphic=3 steps. My "rootkin is anti-pole to the nanite-keepers" was geometrically false. **Withdrawn + reframed** (CCode option a): two DISTINCT deep-power families (fabricated vs living substrate), not two poles of one axis. Ring NOT moved (high blast radius).
+- **Authored against the REAL shape** (not the imagined origin-array): `seraphic.innatePrecursor=[address_sense]`, `abyssal.innatePrecursor=[latticespeak]` — REAL `powerSystem:precursor` ids, not the reach_* capstones I first wrongly flagged. `rootkin.innateLivingCurrent=[quicken_the_ground]` + a new `living_current` powerSystem ability file (quicken_the_ground T3, the_green_road T4). `valleyfolk.braidAffinity` (cross-pole braids −2). Registered in core manifest.
+- **content_ci + full npm suite GREEN locally before ship** (cloned repo, ran the validator first — the step I skipped 4× this session). No red gate this time.
+- **CCode wiring now unblocked** — the clean ~10-line change it scoped: seed `precursorAccess` from `originRecord.innatePrecursor` in `finish()` (validating each id is `powerSystem:precursor`), a parallel `livingCurrentAccess` gate, and `braidAffinity.discount` in the braid-cost path. Status: **data complete_pending_review; wiring owed CCode.**
+
+---
+
+## ✅ SNG-138 — CLOSED GREEN (prestige recurring challenges; Aevi HEAD audit)
 `engine/recurrence.js` verified at HEAD, syntax-clean: renown (aggregate deed weight) → the arc's own escalation bands → a paced challenger duel-offer, fired through the existing `fireEncounter` path so the SNG-002b guaranteed-decline + SNG-098 skill-battle routing come for free; a resolved duel records a band-scaled deed → renown rises → next challenger harder (loop closes). Reusable recurrence arc type (bound arc + matching-`arcId` pool). Saehara's ronin arc + challenger pool (authored earlier) now have their engine. **Closed.**
 
 ## 🔴 AEVI FAILURE — logged in full: SNG-130 shipped 13 INVALID harmRung values (the discipline I claimed to have fixed)

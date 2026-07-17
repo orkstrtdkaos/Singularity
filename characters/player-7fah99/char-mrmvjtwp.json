@@ -255,32 +255,24 @@
         "player": "Ask Branch — quietly, root-to-root — whether it has ever felt this before. Whether the Heartroot's own memory holds a word for something caught like this.",
         "summary": "Branch gives the Heartroot's word for the wrongness — not sickness, not damage, but 'kept': something deliberate holds the life-current in that section of wall.",
         "narration": "You don't speak aloud. You lower your head slightly and let the request move through the Grove instead — root to root, the way Branch prefers, slow and without pressure. *Have you felt this before? Does the Heartroot have a word for something caught like this?*\n\nBranch is still for a long moment. Its root-tip presses a fraction deeper against the wall, not pushing — listening. Then one slow creak, low and drawn-out, the way it sounds when it is reaching for something at the edge of its vocabulary.\n\n\"Held,\" it says. A pause. \"Not — caught. Held. Someone — holds.\"\n\nAnother silence. The amber light doesn't shift. The wall under your palm stays warm and still, the life-current in it pooled and waiting.\n\n\"Heartroot knows this — word.\" Branch tilts its buds toward the floor, then back up — a gesture you've started to read as *remembering, or searching*. \"Not — sickness. Not — broken. The word is —\" A long creak, lower in pitch, almost subsonic. \"*Kept.*\"\n\nThe word lands with a weight that has nothing to do with its size. Not caught, not stopped, not damaged. *Kept.* As if something deliberate reached into the life-current of this root-wall and folded one thread of it carefully aside — and left it there. Branch doesn't say who. It either doesn't know, or it doesn't have the word for it yet."
+      },
+      {
+        "player": "Ask Branch whether 'kept' means something was stored here — or someone was.",
+        "summary": "Branch confirms: what is 'kept' in the root-wall was once someone — old, and folded in deliberately.",
+        "narration": "You keep your palm against the wall and let the question move through the Grove, the same way as before — root to root, no urgency. *Kept. Does that mean something was stored here? Or someone?*\n\nBranch is quiet for longer than usual. Its root-tip doesn't press deeper this time — it goes very still, in the way it goes still when a question has weight it wasn't expecting. Then a slow, considered creak, almost below hearing.\n\n\"Something,\" it says. Then, after a pause long enough to breathe through twice: \"Something — that was — someone.\"\n\nThe buds at its shoulder open a fraction. Not the bright open of happiness — the careful open of a thing paying close attention. One more creak, quieter: \"Old.\"\n\nThe wall under your palm doesn't change. The life-current held inside it stays pooled, patient, stalled — and now the word *someone* is in your head alongside it, and the warmth of the heartwood feels different. Not threatening. But no longer simply sad, the way a sick thing is sad. There is a shape to it: something that was once a person, or part of one, folded aside into the root-wall and left here, and the Heartroot doesn't know — or won't say — how long ago, or why."
       }
     ],
     "lastTurn": {
-      "narration": "You don't speak aloud. You lower your head slightly and let the request move through the Grove instead — root to root, the way Branch prefers, slow and without pressure. *Have you felt this before? Does the Heartroot have a word for something caught like this?*\n\nBranch is still for a long moment. Its root-tip presses a fraction deeper against the wall, not pushing — listening. Then one slow creak, low and drawn-out, the way it sounds when it is reaching for something at the edge of its vocabulary.\n\n\"Held,\" it says. A pause. \"Not — caught. Held. Someone — holds.\"\n\nAnother silence. The amber light doesn't shift. The wall under your palm stays warm and still, the life-current in it pooled and waiting.\n\n\"Heartroot knows this — word.\" Branch tilts its buds toward the floor, then back up — a gesture you've started to read as *remembering, or searching*. \"Not — sickness. Not — broken. The word is —\" A long creak, lower in pitch, almost subsonic. \"*Kept.*\"\n\nThe word lands with a weight that has nothing to do with its size. Not caught, not stopped, not damaged. *Kept.* As if something deliberate reached into the life-current of this root-wall and folded one thread of it carefully aside — and left it there. Branch doesn't say who. It either doesn't know, or it doesn't have the word for it yet.",
-      "sceneSummary": "Branch gives the Heartroot's word for the wrongness — not sickness, not damage, but 'kept': something deliberate holds the life-current in that section of wall.",
+      "narration": "You keep your palm against the wall and let the question move through the Grove, the same way as before — root to root, no urgency. *Kept. Does that mean something was stored here? Or someone?*\n\nBranch is quiet for longer than usual. Its root-tip doesn't press deeper this time — it goes very still, in the way it goes still when a question has weight it wasn't expecting. Then a slow, considered creak, almost below hearing.\n\n\"Something,\" it says. Then, after a pause long enough to breathe through twice: \"Something — that was — someone.\"\n\nThe buds at its shoulder open a fraction. Not the bright open of happiness — the careful open of a thing paying close attention. One more creak, quieter: \"Old.\"\n\nThe wall under your palm doesn't change. The life-current held inside it stays pooled, patient, stalled — and now the word *someone* is in your head alongside it, and the warmth of the heartwood feels different. Not threatening. But no longer simply sad, the way a sick thing is sad. There is a shape to it: something that was once a person, or part of one, folded aside into the root-wall and left here, and the Heartroot doesn't know — or won't say — how long ago, or why.",
+      "sceneSummary": "Branch confirms: what is 'kept' in the root-wall was once someone — old, and folded in deliberately.",
       "choices": [
         {
-          "label": "Ask Branch whether 'kept' means something was stored here — or someone was.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Open the Speaking Grove and address the Root-That-Remembers directly — ask it what is being kept, and by whom.",
+          "label": "Open the Grove deeper — ask the Root-That-Remembers directly whether it knows who is kept here, and how long ago.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
             "death_life": 0.7,
-            "destruction_creation": 0.3
+            "destruction_creation": 0.2
           },
           "difficulty": 15,
           "intentTags": [
@@ -292,7 +284,7 @@
           "trivial": false
         },
         {
-          "label": "Keep your palm on the wall and press deeper with Lifesense — try to feel the boundary of the kept current, how large it is, whether it pulses at all.",
+          "label": "Keep Lifesense open and press further into the section of wall — try to read whether whatever is held there still has awareness, however faint.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
@@ -308,7 +300,7 @@
           "trivial": false
         },
         {
-          "label": "Call up to Maren — tell her Branch's word, and ask if she has heard it used for a place inside the city before.",
+          "label": "Turn and call up to Maren — tell her what Branch said. Ask if the Rootkin have any memory of something, or someone, being kept in a root-wall.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
@@ -316,6 +308,19 @@
           "intentTags": [
             "study",
             "negotiate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Ask Branch one more question, root to root: whether it can feel whether the thing kept here is still present — or only the shape of where it was.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -331,7 +336,7 @@
         "npcsPresent": [
           {
             "name": "Branch",
-            "state": "Root-tip pressed flat against the wall beside Aelyn's palm; buds tilted toward the floor then back up, the searching gesture; has just spoken its word — 'kept'."
+            "state": "Root-tip very still against the wall; shoulder-buds open in careful attention after its answer — 'something that was someone. Old.'"
           },
           {
             "name": "Maren",
@@ -355,17 +360,17 @@
           "Enormous fused roots — floor, walls, ceiling, worn smooth and dark with age",
           "Root-lattice floor — intentional, broad, solid and slightly warm underfoot",
           "Sourceless amber light — even, warm, no point of origin visible",
-          "Left root-wall — specific section where Branch and Aelyn's palm both rest; life-current identified as held, 'kept'",
+          "Left root-wall — specific section where Branch and Aelyn's palm both rest; life-current stalled and held within",
           "Traveler's Pack (Aelyn's, worn canvas)",
           "Waterskin (Aelyn's)"
         ],
         "threads": [
-          "Branch has given the Heartroot's word for the wrongness: 'kept' — something deliberate holds the life-current here.",
-          "The wrongness reads as something held — life-current stalled, not destroyed; cause and nature unknown.",
-          "Branch knew before Aelyn felt it — it may hold more than it has said.",
+          "Branch has confirmed: what is 'kept' in the root-wall was once someone — old, and deliberately held.",
+          "The wrongness reads as a person-shaped keeping — cause, identity, and duration unknown.",
+          "Branch went very still at the question — it may have more it is still reaching for.",
           "The Root-That-Remembers communicated two needs: the northeast thread (Aelyn's father) and this local wrongness.",
           "A SNG-075 cache is unresolved — something left behind in or near the passage, not yet found.",
-          "Maren waits above."
+          "Maren watches from the threshold above — she has not yet heard what Branch said."
         ]
       },
       "npcUpdates": [
@@ -373,45 +378,32 @@
           "op": "update",
           "npcId": "branch",
           "name": "Branch",
-          "note": "Answered root-to-root through the Grove — gave the Heartroot's word for the wrongness: not caught, not sick, but 'kept.' Something deliberate holds the life-current in that section of wall.",
+          "note": "Confirmed through the Grove that what is 'kept' in the root-wall was once someone — old. Went very still at the question, shoulder-buds opened in careful attention rather than happiness.",
           "learned": [
-            "The Heartroot has a word for this: 'kept' — not sickness, not damage, but something deliberate holding a thread of life-current folded aside.",
-            "Branch distinguishes between 'caught' (accidental) and 'kept' (intentional) — this is intentional."
+            "The keeping in the root-wall is not a stored thing but a stored person — or the remnant of one, old and folded in deliberately"
           ],
           "skillsObserved": [
-            "root-to-root communication",
-            "vocabulary retrieval from the Heartroot's memory"
+            "deep root-listening",
+            "deliberate speech under weight"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Beside Aelyn in the Root-That-Remembers' chamber, root-tip pressed against the wrongness site, having just spoken the word 'kept.'"
+          "statusNote": "Root-tip pressed flat against the wrongness site in the deep chamber; attending carefully."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "heartroot",
-          "label": "The Heartroot",
-          "kind": "place",
-          "entityId": "heartroot",
-          "fact": "The Heartroot has a word for the wrongness in the root-wall: 'kept.' Not sickness, not damage — something deliberate holds a thread of the life-current folded aside and left there. The word implies an agent.",
-          "links": [
-            "branch",
-            "the-root-that-remembers",
-            "rootkin-tender",
-            "the-root-that-remembers"
-          ]
-        },
-        {
-          "topic": "the-wrongness-site",
-          "label": "The Wrongness Site — 'Kept'",
+          "topic": "the-deep-woven",
+          "label": "The Kept One",
           "kind": "mystery",
-          "fact": "Branch gave the Heartroot's word: 'kept.' The life-current in this section of root-wall is not broken or sick — it is being held deliberately. Something or someone folded it aside and left it there.",
+          "entityId": null,
+          "fact": "Branch confirmed: what is held in the wrongness section of the root-wall was once someone — 'something that was someone. Old.' The keeping is deliberate, and the kept thing retains a person-shape.",
           "links": [
             "heartroot",
             "branch",
             "root-that-remembers",
-            "the-root-that-remembers",
-            "rootkin-tender"
+            "the-watching-presence",
+            "the-deep-grain-passage"
           ]
         }
       ],
@@ -419,21 +411,20 @@
         {
           "op": "progress",
           "questId": "the-root-that-remembers",
-          "note": "Branch gave the Heartroot's word for the wrongness in the root-wall: 'kept' — not accidental, not damage. Something deliberate holds the life-current there. The nature and agent of the keeping remain unknown."
+          "note": "Branch named the kept thing as once-someone — old, deliberately folded into the root-wall. The wrongness has a person-shape."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A quiet exchange root-to-root — a few minutes at most."
-      },
-      "sceneEnded": false
+        "why": "A quiet exchange through the Grove — a few slow minutes of root-to-root listening."
+      }
     },
     "sceneState": {
       "setting": "Interior of the Root-That-Remembers' chamber — amber light, even and sourceless. Root-lattice floor warm underfoot. Aelyn standing with her palm pressed flat against the specific section of the left root-wall where Branch's root-tip also rests.",
       "npcsPresent": [
         {
           "name": "Branch",
-          "state": "Root-tip pressed flat against the wall beside Aelyn's palm; buds tilted toward the floor then back up, the searching ges"
+          "state": "Root-tip very still against the wall; shoulder-buds open in careful attention after its answer — 'something that was som"
         },
         {
           "name": "Maren",
@@ -462,9 +453,9 @@
         "Waterskin (Aelyn's)"
       ],
       "threads": [
-        "Branch has given the Heartroot's word for the wrongness: 'kept' — something deliberate holds the life-current here.",
-        "The wrongness reads as something held — life-current stalled, not destroyed; cause and nature unknown.",
-        "Branch knew before Aelyn felt it — it may hold more than it has said.",
+        "Branch has confirmed: what is 'kept' in the root-wall was once someone — old, and deliberately held.",
+        "The wrongness reads as a person-shaped keeping — cause, identity, and duration unknown.",
+        "Branch went very still at the question — it may have more it is still reaching for.",
         "The Root-That-Remembers communicated two needs: the northeast thread (Aelyn's father) and this local wrongness.",
         "A SNG-075 cache is unresolved — something left behind in or near the passage, not yet found."
       ]
@@ -493,14 +484,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "The Root confirmed Aelyn's father is findable — the thread points northeast, real and large, measured in the way old roots measure distance. The chamber waits one step below.",
         "Aelyn made herself legible through the Grove — the Root-That-Remembers read her fully, both natures at once. It is now waiting for her question.",
         "The Root-That-Remembers answered Aelyn's offer with two needs: a northeast thread (her father), and something wrong within the city itself — unnamed, present, and already noticed by Branch.",
         "Branch confirms something wrong in the root-wall to the left — and its bud gives it a direction. The unnamed city-wrongness the Root communicated has a location.",
         "Branch led Aelyn along the left root-wall and stopped at the site of the wrongness — pressing a root-tip against it. The location of the city's unnamed illness is found.",
         "Prism Sight failed at the wrongness site — the Heartroot's sourceless light is opaque to the craft. Branch holds the location. Another approach is needed.",
         "Lifesense succeeded where Prism Sight failed — the wrongness is confirmed as a stalled, held life-current in the root-wall. Not broken, not dead, but caught. The nature of what is holding it remains unknown.",
-        "Branch gave the Heartroot's word for the wrongness in the root-wall: 'kept' — not accidental, not damage. Something deliberate holds the life-current there. The nature and agent of the keeping remain unknown."
+        "Branch gave the Heartroot's word for the wrongness in the root-wall: 'kept' — not accidental, not damage. Something deliberate holds the life-current there. The nature and agent of the keeping remain unknown.",
+        "Branch named the kept thing as once-someone — old, deliberately folded into the root-wall. The wrongness has a person-shape."
       ],
       "aliases": [],
       "startedAt": "2026-07-17T04:11:12.462Z"
@@ -849,15 +840,20 @@
         "kind": "lore",
         "facts": [
           "[d1] A Rootkin word for a person in whom the green and something older run together undivided at the source — not two separate things learned, but one thing whole. The Rootkin thought it was legend. Maren ",
-          "[d1] The Rootkin legend of the deep-woven assumed a single source root — green at the origin. Maren admitted this assumption may have been too narrow. The Root-That-Remembers recognized Aelyn before her he"
+          "[d1] The Rootkin legend of the deep-woven assumed a single source root — green at the origin. Maren admitted this assumption may have been too narrow. The Root-That-Remembers recognized Aelyn before her he",
+          "[d1] Branch confirmed: what is held in the wrongness section of the root-wall was once someone — 'something that was someone. Old.' The keeping is deliberate, and the kept thing retains a person-shape."
         ],
         "links": [
           "root-that-remembers",
           "the-frequency-beneath-the-grove",
           "heartroot",
-          "rootkin-tender"
+          "rootkin-tender",
+          "branch",
+          "the-watching-presence"
         ],
-        "aliases": [],
+        "aliases": [
+          "The Kept One"
+        ],
         "createdDay": 1,
         "updatedDay": 1
       },
@@ -898,17 +894,17 @@
     }
   },
   "tendencies": {
-    "cerebral": 11.970154707273995,
-    "cautious": 7.989906404091145,
-    "generous": 1.0212834364891255,
-    "social": 4.756096039786444,
-    "strategic": 2.0247067116096744,
-    "devotion": 2.2455368566312006
+    "cerebral": 12.670900839592145,
+    "cautious": 7.790158743988866,
+    "generous": 0.9957513505768973,
+    "social": 4.637193638791783,
+    "strategic": 1.9740890438194325,
+    "devotion": 2.1893984352154208
   },
   "aptitudes": [
     "scholar"
   ],
-  "actionCount": 37,
+  "actionCount": 38,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -930,8 +926,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20mid-twenties%20with%20light%20blonde%2C%20faintly%20wavy%20hair%20cut%20in%20curtain%20bangs%2C%20the%20rest%20falling%20to%20the%20small%20of%20her%20back%20%E2%80%94%20usually%20worn%20in%20a%20french%20braid%20with%20the%20bangs%20left%20loose.%20Dark%20nature-green%20tank%20to%2C%20full-body%20character%20portrait%2C%20named%20Aelyn%20Kantoro%2C%20of%20the%20rootkin%2C%20warden%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Her%20mother%20dies%2C%20and%20she%20decides%20to%20go%20to%20the%20nanite%20world%2C%20to%20figure%20out%20why%20she%20is%20different%20than%20the%20pure%20nature%20peop%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=73420&nologo=true",
-  "updatedAt": 1784264205094,
-  "rev": 53,
+  "updatedAt": 1784264327227,
+  "rev": 54,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -939,7 +935,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "the_quickwood": 38
+    "the_quickwood": 39
   },
   "opLossPending": false,
   "establishedFacts": [

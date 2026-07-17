@@ -102,8 +102,10 @@ export async function loadContent() {
     locations[loc.id] = loc;
   }
   const npcs = {};
-  for (const path of valley.provides.npcs) {
-    const npc = await fetchJSON(`content/packs/valley/${path}`);
+  const challengerPools = {}; // SNG-138: a challenger_pool is a COLLECTION (challengers[]), not a single NPC —
+  for (const path of valley.provides.npcs) {                              // keep it loaded (manifest intent) but out
+    const npc = await fetchJSON(`content/packs/valley/${path}`);          // of the single-NPC registry so it never
+    if (npc && (npc.kind === "challenger_pool" || Array.isArray(npc.challengers))) { if (npc.id) challengerPools[npc.id] = npc; continue; } // pollutes name-resolution / GM reuse
     npcs[npc.id] = npc;
   }
   const events = {};
@@ -180,7 +182,7 @@ export async function loadContent() {
   try { legends = loadLegends(await fetchJSON("content/packs/valley/lore/legends.json")); } catch { /* no legends */ }
   for (const fig of legends.roster) if (fig.id && !npcs[fig.id]) npcs[fig.id] = fig;
 
-  const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, regions, accords, helpText, substrateModel, romanceGuidance, skillBattle, functionVocabulary, startingLocation: valley.startingLocation };
+  const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, challengerPools, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, regions, accords, helpText, substrateModel, romanceGuidance, skillBattle, functionVocabulary, startingLocation: valley.startingLocation };
   // SNG-022: bring every loaded record up to current (derive missing additive fields,
   // flag dangling cross-refs). In-memory only — Pages files are static.
   try { reconcileContent(content); } catch (err) { console.warn("[loadContent] reconcile skipped:", err.message); }

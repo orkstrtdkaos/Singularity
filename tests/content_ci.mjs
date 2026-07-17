@@ -236,8 +236,11 @@ for (const pack of PACKS) {
   const runDir = (dir, schema, label, skip = () => false) => {
     let bad = 0, total = 0;
     for (const f of readdirSync(join(root, dir)).filter(n => n.endsWith(".json"))) {
-      if (skip(f)) continue; total++;
-      const r = validate(rj(`${dir}/${f}`), schema);
+      if (skip(f)) continue;
+      const obj = rj(`${dir}/${f}`);
+      if (obj && (obj.kind === "challenger_pool" || Array.isArray(obj.challengers))) continue; // a COLLECTION (SNG-138 pool), not a single entity
+      total++;
+      const r = validate(obj, schema);
       if (!r.valid) { bad++; if (bad <= 5) fail(`${label} schema: ${f} — ${(r.errors || []).join("; ")}`); }
     }
     check(`all ${total} ${label} validate against the schema`, bad === 0, `${bad} invalid`);

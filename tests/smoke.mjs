@@ -7,7 +7,7 @@ import { resolveAction, successChance, spectrumAlignment, applyEnergyCost } from
 import { senseTier, renderSense } from "../engine/sense.js";
 import { recordDeed, standingWith, reputationSummary, knownTags } from "../engine/reputation.js";
 import { newProfile, updateProfile, aptitudeMods, deriveAptitudes, grantAptitudes, fadingAptitudes, ensureCharacterStyle, defaultRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, ensureRating, RATING_LEVEL } from "../engine/playerprofile.js";
-import { normalizeInventory, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, resolveInventoryItem, dedupeInventory, itemUses, ensurePins, togglePin, pinnedItems } from "../engine/inventory.js";
+import { normalizeInventory, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, resolveInventoryItem, dedupeInventory, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates } from "../engine/inventory.js";
 import { newClock, readClock, advanceClock, getWorldEpoch, absoluteWorldDay, worldDate, worldDayAt, relativeWorldDays } from "../engine/worldtime.js";
 import { companionBonus, companionsForGM, activeCompanions, partnerAdjacentNpcs } from "../engine/companions.js";
 import { applyQuestUpdates, questsForGM, slugify, resolveQuest, dedupeQuests, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, threadTouched } from "../engine/quests.js";
@@ -40,7 +40,7 @@ import { applyCodexUpdates as applyCodexUpdatesGen } from "../engine/codex.js";
 import { ensureCanonStore, promotionCandidates, buildCanonRecord, findCanonCollision, resolveContradiction, promoteInto, mergeCanonStores, lensDecision, canonForViewer, adaptView, AUTHORED_CANON_WEIGHT, contributionsBy } from "../engine/canon.js";
 import { sanitizeImagePrompt, assembleImagePrompt, characterPromptSeed, npcPromptSeed, imageURLFor, ensureImage, isMinorSubject, addGalleryImage, ensureGallery, itemProvenancePhrase, deleteGalleryImage } from "../engine/art.js";
 import { planPlayerDedup, dedupePlayers, resolvePlayerKey, findProfileByName, resolveLocationId } from "../engine/state.js";
-import { applyStateOps, describeCorrection } from "../engine/corrections.js";
+import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM } from "../engine/corrections.js";
 import { isEventfulTurn, pressureTier, pressureDirective } from "../engine/pacing.js";
 import { revokeAdultGate } from "../engine/playerprofile.js";
 import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, convexHull, regionShape, knownOverlay, isPlaceKnown } from "../engine/worldmap.js";
@@ -1777,10 +1777,18 @@ check("fresh character: no phantom xp or levels", fsum.xpGained === 0 && fresh.l
   const npcDir = join(root, "content/packs/valley/npcs");
   let npcOk = 0, npcBad = 0;
   for (const fn of readdirSync(npcDir).filter(n => n.endsWith(".json") && n !== "legends.json")) {
-    const r = validate(rj("content/packs/valley/npcs/" + fn), npcSchema);
+    const obj = rj("content/packs/valley/npcs/" + fn);
+    if (obj && (obj.kind === "challenger_pool" || Array.isArray(obj.challengers))) continue; // a COLLECTION (SNG-138 pool), not a single NPC — like legends.json
+    const r = validate(obj, npcSchema);
     if (r.valid) npcOk++; else { npcBad++; }
   }
   check("all authored NPCs validate against npc.schema.json", npcBad === 0 && npcOk >= 29);
+
+  // SNG-138 challenger pools are a COLLECTION shape (not single NPCs) — validate their own structure so the file isn't dark
+  const poolFiles = readdirSync(npcDir).filter(n => n.endsWith(".json")).map(n => rj("content/packs/valley/npcs/" + n)).filter(o => o && (o.kind === "challenger_pool" || Array.isArray(o.challengers)));
+  for (const pool of poolFiles) {
+    check(`challenger pool ${pool.id} carries a non-empty challengers[] each with id + name + concept`, Array.isArray(pool.challengers) && pool.challengers.length > 0 && pool.challengers.every(c => c.id && c.name && c.concept));
+  }
 
   // every authored location validates
   let locOk = 0, locBad = 0;
@@ -3041,6 +3049,78 @@ await (async () => {
   // an explicit refuse op lands in refused; abilities/inventory fields are forbidden
   check("SNG-070: an explicit refuse is recorded, and abilities/inventory are forbidden fields", applyStateOps(base(), [{ op: "refuse", what: "500 xp" }], ctx).refused.length === 1 && applyStateOps(base(), [{ op: "correctField", field: "abilities", to: "x" }], ctx).refused.length === 1);
   check("SNG-070: describeCorrection gives a human line", /background corrected/.test(describeCorrection({ field: "background", to: "duelist" })));
+})();
+
+// --- SNG-137: GM reliability — new corrections (rank/bond/vital/attribute/merge), anomaly detection, item evolution ---
+(() => {
+  const ctx = { worldDay: 20, nowISO: "2026-07-16T00:00:00Z" };
+
+  // correctAbilityRank — only LOWERS a wrongly-high rank; a raise is refused (power is earned)
+  const cr = { abilities: [{ abilityId: "palework", level: 3 }] };
+  const rr = applyStateOps(cr, [{ op: "correctAbilityRank", id: "palework", to: 1, why: "set too high at creation" }], ctx);
+  check("SNG-137: correctAbilityRank LOWERS a wrong rank + logs from→to", rr.applied.length === 1 && cr.abilities[0].level === 1 && cr.corrections.some(x => x.kind === "abilityRank" && x.from === 3 && x.to === 1));
+  check("SNG-137: correctAbilityRank REFUSES a raise (repair, not wish)", applyStateOps({ abilities: [{ abilityId: "palework", level: 1 }] }, [{ op: "correctAbilityRank", id: "palework", to: 3 }], ctx).applied.length === 0);
+
+  // correctBond — sets a relationship right; a romantic bond on a MINOR is absolutely refused
+  const cb = { npcRegistry: { pell: { name: "Pell", bondType: "platonic", bondStage: null, relationship: 2 } } };
+  const rb = applyStateOps(cb, [{ op: "correctBond", id: "pell", bondType: "mentor", relationship: 5, why: "she's his teacher" }], ctx);
+  check("SNG-137: correctBond sets a relationship right", rb.applied.length === 1 && cb.npcRegistry.pell.bondType === "mentor" && cb.npcRegistry.pell.relationship === 5);
+  const cbMinor = { npcRegistry: { kid: { name: "Wren", isMinor: true, bondType: "platonic" } } };
+  check("SNG-137: correctBond REFUSES romantic on a minor (absolute)", applyStateOps(cbMinor, [{ op: "correctBond", id: "kid", bondType: "romantic" }], ctx).refused.length === 1 && cbMinor.npcRegistry.kid.bondType === "platonic");
+
+  // correctVital — re-syncs a vital past its max; can only LOWER current health/energy (recovery is earned)
+  const cv = { health: 90, maxHealth: 30, energy: 10, maxEnergy: 50 };
+  const rv = applyStateOps(cv, [{ op: "correctVital", vital: "health", to: 30, why: "desynced past max" }], ctx);
+  check("SNG-137: correctVital re-syncs a vital past its max", rv.applied.length === 1 && cv.health === 30);
+  check("SNG-137: correctVital cannot raise current health (no heal-wish)", applyStateOps({ health: 5, maxHealth: 30 }, [{ op: "correctVital", vital: "health", to: 30 }], ctx).applied.length === 0);
+
+  // correctAttribute — only LOWERS a mis-set sub; parents rederive
+  const ca = { subAttributes: { strength: 8, agility: 3 }, attributes: {} };
+  const rca = applyStateOps(ca, [{ op: "correctAttribute", sub: "strength", to: 3, why: "set too high" }], ctx);
+  check("SNG-137: correctAttribute LOWERS a mis-set sub", rca.applied.length === 1 && ca.subAttributes.strength === 3);
+  check("SNG-137: correctAttribute REFUSES a raise (growth is earned)", applyStateOps({ subAttributes: { strength: 3 } }, [{ op: "correctAttribute", sub: "strength", to: 8 }], ctx).applied.length === 0);
+
+  // mergeEntity — folds one split record into another; the survivor keeps history + gains an alias
+  const cm = { npcRegistry: {
+    silas_a: { name: "Silas", history: ["met at the weir"], knownFacts: ["a wright"], relationship: 3 },
+    silas_b: { name: "Silas", history: ["fought the raider"], knownFacts: ["carries a scar"], relationship: 5 } } };
+  const rm = applyStateOps(cm, [{ op: "mergeEntity", fromId: "silas_b", intoId: "silas_a", why: "one person, two records" }], ctx);
+  check("SNG-137: mergeEntity folds a duplicate into one survivor", rm.applied.length === 1 && !cm.npcRegistry.silas_b && cm.npcRegistry.silas_a.history.length === 2 && cm.npcRegistry.silas_a.relationship === 5);
+  check("SNG-137: mergeEntity refuses when the two ids aren't distinct known people", applyStateOps({ npcRegistry: { a: { name: "A" } } }, [{ op: "mergeEntity", fromId: "a", intoId: "a" }], ctx).refused.length === 1);
+
+  // detectAnomalies — flags a duplicate person, a rank over practice, and a vital past max (pure, advisory)
+  const rules = { practice: { useRankThreshold: { "2": 8, "3": 16 } } };
+  const dchar = {
+    npcRegistry: { p1: { name: "Pell" }, p2: { name: "Pell" } },
+    abilities: [{ abilityId: "palework", level: 3 }],
+    practice: { uses: { palework: 4 } },
+    health: 90, maxHealth: 30, energy: 5, maxEnergy: 50 };
+  const anoms = detectAnomalies(dchar, { rules });
+  check("SNG-137: detectAnomalies flags a duplicate person (mergeable)", anoms.some(a => a.kind === "dupNpc" && a.fromId && a.intoId));
+  const ro = anoms.find(a => a.kind === "rankOverPractice");
+  check("SNG-137: detectAnomalies flags a rank over practice + suggests a supportable rank", ro && ro.abilityId === "palework" && ro.suggestRank === 1);
+  check("SNG-137: detectAnomalies flags a vital past its max", anoms.some(a => a.kind === "vitalDesync" && a.vital === "health"));
+  check("SNG-137: detectAnomalies is silent on a clean character (no false positives)", detectAnomalies({ npcRegistry: { p1: { name: "Pell" } }, abilities: [{ abilityId: "palework", level: 1 }], practice: { uses: {} }, health: 20, maxHealth: 30, energy: 20, maxEnergy: 30 }, { rules }).length === 0);
+  check("SNG-137: anomaliesForGM formats a POSSIBLE ERROR block naming the repair op", /mergeEntity|correctAbilityRank|correctVital/.test(anomaliesForGM(anoms)) && anomaliesForGM([]) === "");
+
+  // applyItemUpdates — evolves an OWNED item (bounded); never creates an unowned one; effects stay clamped
+  const iu = { inventory: [{ name: "Belt Knife", kind: "weapon", bonusTags: ["cut"] }] };
+  const ri = applyItemUpdates(iu, [{ name: "Belt Knife", description: "notched from the raider fight", provenance: "taken at the weir", addUse: { label: "pry", prompt: "pry a latch" } }]);
+  check("SNG-137: applyItemUpdates evolves an owned item's description/provenance/use", ri.length === 1 && iu.inventory[0].description.includes("notched") && iu.inventory[0].provenance.includes("weir") && iu.inventory[0].uses.length === 1);
+  check("SNG-137: applyItemUpdates never creates an unowned item", applyItemUpdates(iu, [{ name: "Ghost Sword", description: "does not exist" }]).length === 0 && !iu.inventory.some(i => i.name === "Ghost Sword"));
+  const iu2 = { inventory: [{ name: "Draught", kind: "consumable" }] };
+  applyItemUpdates(iu2, [{ name: "Draught", effects: { health: 500 } }]);
+  check("SNG-137: applyItemUpdates keeps effects clamped (evolution, not inflation)", iu2.inventory[0].effects.health <= 15);
+
+  // gm.js contract — raw-source checks that the reliability rules shipped
+  const gmSrc = readFileSync(join(root, "engine/gm.js"), "utf8");
+  check("SNG-137: rule 19B is imperative — MUST emit markDefiningMoment on a decisive ripe craft", /RIPE FOR MASTERY[\s\S]{0,400}MUST emit "markDefiningMoment"/.test(gmSrc));
+  check("SNG-137: the RIPE block names the ripe crafts inline (masteryDetail) with a MUST", /RIPE FOR MASTERY[\s\S]{0,300}\$\{?masteryDetail\}?[\s\S]{0,200}MUST emit "markDefiningMoment"/.test(gmSrc));
+  check("SNG-137: stateOps rule carries the widened repair vocabulary", /correctAbilityRank[\s\S]{0,200}correctBond[\s\S]{0,200}correctVital[\s\S]{0,200}mergeEntity/.test(gmSrc));
+  check("SNG-137: 'acknowledge means emit — same turn' is in the stateOps rule", /ACKNOWLEDGE MEANS EMIT/i.test(gmSrc));
+  check("SNG-137: itemUpdates is a reply-format key AND a rule (items grow with the story)", /"itemUpdates":\s*\[/.test(gmSrc) && /ITEMS GROW WITH THE STORY/i.test(gmSrc));
+  check("SNG-137: itemUpdates survives a malformed reply (in the salvageOps key list)", /const keys = \[[\s\S]*?"itemUpdates"[\s\S]*?\]/.test(gmSrc));
+  check("SNG-137: a POSSIBLE ERROR block (anomalyDetail) is rendered into the scene", /anomalyDetail\b/.test(gmSrc) && /POSSIBLE ERROR/.test(gmSrc));
 })();
 
 // --- SNG-076: authored prose is not truncated mid-word ---

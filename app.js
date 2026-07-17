@@ -10,11 +10,11 @@ import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, tou
 import { newProfile, updateProfile, aptitudeMods, profileInsight, grantAptitudes, fadingAptitudes, ensureCharacterStyle, ensureRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, revokeAdultGate, RATING_ORDER, RATING_LEVEL } from "./engine/playerprofile.js";
 import { gmTurn, parseIntent, gmAsk, generateBio, suggestBuild, extractGambit, sanitizeScene, narrativeRegister, ratingRegister } from "./engine/gm.js";
 import { applyQuestUpdates, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, slugify } from "./engine/quests.js";
-import { applyStateOps, describeCorrection } from "./engine/corrections.js";
+import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM } from "./engine/corrections.js";
 import { getApiKey, setApiKey, callClaude, callClaudeJSON } from "./engine/claude.js";
 import { generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight } from "./engine/generate.js";
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, ghList, fetchRepoJSON, raceTimeout } from "./engine/sync.js";
-import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems } from "./engine/inventory.js";
+import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates } from "./engine/inventory.js";
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { substrateVerdict, locationDensity, carriedSubstrate } from "./engine/substrate.js"; // SNG-090
@@ -47,7 +47,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.95";
+const APP_VERSION = "1.8.96";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2526,6 +2526,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   const romanceGuidanceDetail = ((resolution?.action?.intentTags || []).some(t => /^(romantic|flirt)$/i.test(String(t))) && CONTENT.romanceGuidance?.text) ? CONTENT.romanceGuidance.text : null;
   if (romanceGuidanceDetail) autoVerifyLeg("romance-flirt", "a flirtatious action was tagged romantic and the romance guidance loaded in play — the one live-model surface"); // ROMANCE leg auto-detect (dev-only)
   const masteryDetail = masteryReadyForGM(); // ability-arch v2: owned rank-2 crafts ripe for a defining moment
+  const anomalyDetail = anomaliesForGM(detectAnomalies(character, { rules: CONTENT.rules })); // SNG-137: surface likely errors so the GM can repair them
   // SNG-122: if the player's action this turn is a travel intent, force the GM to emit moveTo to the named
   // destination (+ enumerate reachable known places so its target resolves). Fixes the CAUSE — the deferred
   // SNG-117 no-moveTo boundary that blocked normal in-fiction travel.
@@ -2566,6 +2567,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
     substrateDetail,      // SNG-090: the lattice density is thin/crowding the craft here
     romanceGuidanceDetail, // romance: pulled craft guidance on a flirtatious/romantic beat
     masteryDetail,        // ability-arch v2: rank-2 crafts ripe for a GM-marked defining moment
+    anomalyDetail,        // SNG-137: POSSIBLE ERROR — a consistency check the GM may repair this turn
     availableEncounters: activeEnc() ? null : listAvailableEncounters(),
     partyDetail: partyBlockForGM(sharedScene, character.id),
     ratingDetail: ratingLineForGM(), // SNG-BATCH-9 §3 consumer (a): narrate to this player's ceiling
@@ -2638,6 +2640,9 @@ function applyTurn(turn, resolution, playerWords = null) {
   if (d.xp) character.xp += Math.max(0, Math.min(25, d.xp | 0));
   for (const item of d.inventoryAdd || []) addItem(character, item, CONTENT.items);
   for (const item of d.inventoryRemove || []) removeItem(character, typeof item === "string" ? item : item?.name);
+  // SNG-137: items EVOLVE — the GM grows an owned item's story (description/name/provenance/use); bounded,
+  // no power inflation. A light note so the player sees the thing they carry changed.
+  if (turn.itemUpdates?.length) { const iu = applyItemUpdates(character, turn.itemUpdates); if (iu.length) turn.narration = (turn.narration || "") + "\n\n" + iu.map(u => `*✦ ${u.name} has changed — ${u.changed.join(", ")}.*`).join("\n"); }
 
   // deeds → reputation (day-stamped so news spread knows when they happened; SNG-041 also
   // stamps the shared absolute world-day so a deed dates the same on every character's calendar)
@@ -4329,6 +4334,11 @@ function repairLogLine(e) {
     case "quest": txt = `quest ${esc(e.id)} → <strong>${esc(e.to?.status || "?")}</strong>`; break;
     case "location": txt = `re-anchored → <strong>${esc(e.to)}</strong>`; break;
     case "codexFact": txt = `codex fact ${esc(e.id)} corrected`; break;
+    case "abilityRank": txt = `${esc(e.id)} rank: <s class="hint">${esc(String(e.from))}</s> → <strong>${esc(String(e.to))}</strong>`; break;
+    case "bond": txt = `relationship with ${esc(e.id)} set right`; break;
+    case "vital": txt = `${esc(e.field)}: <s class="hint">${esc(String(e.from))}</s> → <strong>${esc(String(e.to))}</strong>`; break;
+    case "attribute": txt = `${esc(e.field)}: <s class="hint">${esc(String(e.from))}</s> → <strong>${esc(String(e.to))}</strong>`; break;
+    case "merge": txt = `merged a duplicate record into <strong>${esc(e.into)}</strong>`; break;
     default: txt = "corrected";
   }
   return `<div class="codex-fact">${txt}${day}${e.why ? `<div class="hint">${esc(e.why)}</div>` : ""}</div>`;
@@ -4344,11 +4354,18 @@ function renderRepairScreen(note = "") {
   const tradOptions = (sel) => `<option value="">— none —</option>` +
     (idx ? ringOrder(idx).map(t => `<option value="${esc(t)}" ${sel === t ? "selected" : ""}>${esc(traditionLabel(t))}</option>`).join("") : "");
   const log = (character.corrections || []).slice().reverse();
+  const anomalies = detectAnomalies(character, { rules: CONTENT.rules }); // SNG-137: cheap consistency check, advisory
   chrome(`<div class="screen" style="max-width:720px">
     <h2>🔧 Repair ${esc(character.name)}</h2>
     <p class="hint" style="margin-bottom:6px">Fix what the game got wrong when this character was made — no arguing with the GM. Every change is validated, logged, and reversible.</p>
     <p class="hint" style="margin-bottom:14px"><strong>Repair, not wish:</strong> you can correct data that is <em>wrong</em>, but nothing here grants power — xp, levels, and abilities still come from play. Stripping an ability you never chose is a repair, not a loss; it frees your breadth so you can re-pick with your own skill points.</p>
     ${note ? `<div class="cs-block" style="border-left:3px solid var(--accent)"><div style="white-space:pre-wrap">${esc(note)}</div></div>` : ""}
+
+    ${anomalies.length ? `<div class="cs-block" style="border-left:3px solid #c0392b">
+      <h3 class="codex-title" style="font-size:15px">⚠ Issues the game spotted <span class="hint" style="text-transform:none">— ${anomalies.length}</span></h3>
+      <p class="hint" style="margin-bottom:8px">These look like data that drifted. Tick to fix, then Apply — each is a <strong>repair</strong> (two records merged into one, a vital re-synced to its max, or a rank set back to what practice earned), never a loss of anything you earned.</p>
+      ${anomalies.map((an, i) => `<label class="rating-check"><input type="checkbox" data-fix="${i}" checked> ${esc(an.note)}${an.kind === "rankOverPractice" ? ` <span class="hint">(→ rank ${an.suggestRank})</span>` : ""}</label>`).join("")}
+    </div>` : ""}
 
     <div class="field"><label>Why this repair (optional — recorded in the log)</label>
       <input id="rp-why" placeholder="e.g. I was meant to be an Ashwarden, not a Wright"></div>
@@ -4416,6 +4433,14 @@ function renderRepairScreen(note = "") {
     for (const cb of app.querySelectorAll("[data-strip]:checked")) ops.push({ op: "removeEntity", kind: "ability", id: cb.dataset.strip, why });
     for (const cb of app.querySelectorAll("[data-rmcomp]:checked")) ops.push({ op: "removeEntity", kind: "companion", id: cb.dataset.rmcomp, why });
     for (const sel of app.querySelectorAll("[data-quest]")) { if (sel.value) ops.push({ op: "unstickQuest", questId: sel.dataset.quest, toStatus: sel.value, why }); }
+    // SNG-137: one-click fixes for the anomalies the game spotted — each maps to a repair op
+    for (const cb of app.querySelectorAll("[data-fix]:checked")) {
+      const an = anomalies[Number(cb.dataset.fix)];
+      if (!an) continue;
+      if (an.kind === "dupNpc") ops.push({ op: "mergeEntity", fromId: an.fromId, intoId: an.intoId, why });
+      else if (an.kind === "rankOverPractice") ops.push({ op: "correctAbilityRank", id: an.abilityId, to: an.suggestRank ?? an.level - 1, why });
+      else if (an.kind === "vitalDesync") ops.push({ op: "correctVital", vital: an.vital, to: an.max, why });
+    }
     if (!ops.length) { renderRepairScreen("Nothing changed — adjust a field, then Apply."); return; }
     // applyStateOps caps at 6 ops per call by design — chunk so a big repair applies fully.
     const ctx = { backgrounds: CONTENT.backgrounds || [], traditionIndex: CONTENT.traditionIndex, locations: CONTENT.locations, resolveLocationId, worldDay: absoluteWorldDay(), nowISO: new Date().toISOString() };

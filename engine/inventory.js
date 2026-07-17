@@ -191,6 +191,27 @@ export function removeItem(character, name, qty = 1) {
   return true;
 }
 
+/** SNG-137: EVOLVE an owned item's story as the fiction earns it — description / a truer name / provenance /
+ *  tags / a new use grow past the shop-fresh line (Memory the spear that drinks a death). Bounded to OWNED
+ *  items (never creates one); it DEEPENS the item, it does NOT inflate power (qty untouched, effects stay
+ *  clamped). Returns [{name, changed:[fields]}]. */
+export function applyItemUpdates(character, ops = []) {
+  const applied = [];
+  for (const op of (ops || []).slice(0, 6)) {
+    const it = findItem(character, op?.name || op?.customName || "");
+    if (!it) continue; // an unowned item is never created through an update — only add creates
+    const changed = [];
+    if (op.description != null) { it.description = String(op.description).slice(0, 300); changed.push("description"); }
+    if (op.customName != null && String(op.customName).trim()) { it.customName = String(op.customName).slice(0, 60); changed.push("name"); }
+    if (op.provenance != null) { it.provenance = String(op.provenance).slice(0, 120); changed.push("provenance"); }
+    if (Array.isArray(op.bonusTags)) { it.bonusTags = op.bonusTags.map(t => String(t).slice(0, 24)).slice(0, 4); changed.push("tags"); }
+    if (op.addUse && op.addUse.label) { it.uses = [...(it.uses || []), { label: String(op.addUse.label).slice(0, 40), prompt: String(op.addUse.prompt || op.addUse.label).slice(0, 160) }].slice(-5); changed.push("use"); }
+    if (op.effects) { const fx = clampEffects(op.effects); if (fx) { it.effects = fx; changed.push("effects"); } } // still clamped — evolution, not inflation
+    if (changed.length) applied.push({ name: it.customName || it.name, changed });
+  }
+  return applied;
+}
+
 function clampEffects(fx) {
   if (!fx || typeof fx !== "object") return undefined;
   const out = {};

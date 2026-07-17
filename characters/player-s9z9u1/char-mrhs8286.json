@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 10,
-  "xp": 917,
+  "xp": 922,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -81,7 +81,7 @@
   "maxHealth": 75,
   "health": 75,
   "maxEnergy": 145,
-  "energy": 132,
+  "energy": 127,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -596,27 +596,21 @@
         "player": "Study the diagram itself — use Order-Sense to read what design it is part of and what it is not showing",
         "summary": "Order-Sense reads the diagram as a proof-of-authorship anchor, not a full map — and reveals a second hand in fresher ink at the lower-right corner.",
         "narration": "You step to the desk and let Order-Sense open — two energy drawn thin through the starved lattice, the field pressing back like a hand through wet canvas. The diagram steadies under your attention anyway.\n\nCalvar's notation is clean and practiced: two columns of band tolerances, instrument callouts, a set of reference marks at the lower margin. What the diagram shows is the seventh-band monitoring array as he left it — calibration points, cross-reference intervals, the spatial relationship of the lower filtration ledge to the intake manifold. Clear, precise, complete on its own terms.\n\nOrder-Sense does not read documents. It reads designs. And what it shows you is the shape this diagram is a fragment of — the larger thing it was cut from. The diagram is not a record of the full array. It is specifically the seventh-band section. The rest of the design is present in its absence: the upper bands, the primary intake, the northeastern branching conduit that the seventh band was built to monitor. Not described. Not drawn. Deliberately excluded. Calvar did not bring Leth a full accounting of what he built. He brought her the piece that proves he built it — the piece that proves his authorship of the tolerance specifications now in someone else's hands. A statement of origin, not a map. An anchor.\n\nAnd in the lower-right corner, partially obscured by the dark waxed cord when it was tied: a second line in fresher ink, a different hand entirely. Not Calvar's three-formation. Smaller, flatter, written in haste — four characters and a symbol you don't recognize, but the hand is controlled even at speed. Someone else has been here since Calvar left this. Someone read it and marked it."
+      },
+      {
+        "player": "Say nothing to Leth yet — use Palework on the fresher ink itself: read how recently it was written and what state the hand was in",
+        "summary": "Palework reads the fresher ink as added within forty-eight hours — fast, deliberate hand, a symbol written with unusual care, added after Calvar left the diagram with Leth.",
+        "narration": "You rest two fingers at the lower-right corner of the diagram without quite touching the ink — close enough that Palework can find its edge. Three energy draws down, but you hold it light, barely a pressure. Reading the already-finished is what this craft does best, and the ink is finished enough.\n\nWhat comes back is recent. The ink dried within the last forty-eight hours — no more. And it came from a hand that was working fast. Not panicked, not trembling, but moving with the compressed economy of someone who has very little time and knows it. The four characters were pressed in with the kind of deliberate force you use when you need the mark to stay, whatever else happens. The unrecognized symbol beside them is different — it went on last, and the hand slowed for it, deliberate in a way the characters were not. Whatever that symbol means to whoever wrote it, they wanted to get it right.\n\nLeth is watching you. She has not moved and has not asked. Pell's gaze drops from your face to the corner of the diagram and back up — she's read that you read something.\n\nCalvar left this diagram three days ago. Whatever is in that lower-right corner was added after he was gone."
       }
     ],
     "lastTurn": {
-      "narration": "You step to the desk and let Order-Sense open — two energy drawn thin through the starved lattice, the field pressing back like a hand through wet canvas. The diagram steadies under your attention anyway.\n\nCalvar's notation is clean and practiced: two columns of band tolerances, instrument callouts, a set of reference marks at the lower margin. What the diagram shows is the seventh-band monitoring array as he left it — calibration points, cross-reference intervals, the spatial relationship of the lower filtration ledge to the intake manifold. Clear, precise, complete on its own terms.\n\nOrder-Sense does not read documents. It reads designs. And what it shows you is the shape this diagram is a fragment of — the larger thing it was cut from. The diagram is not a record of the full array. It is specifically the seventh-band section. The rest of the design is present in its absence: the upper bands, the primary intake, the northeastern branching conduit that the seventh band was built to monitor. Not described. Not drawn. Deliberately excluded. Calvar did not bring Leth a full accounting of what he built. He brought her the piece that proves he built it — the piece that proves his authorship of the tolerance specifications now in someone else's hands. A statement of origin, not a map. An anchor.\n\nAnd in the lower-right corner, partially obscured by the dark waxed cord when it was tied: a second line in fresher ink, a different hand entirely. Not Calvar's three-formation. Smaller, flatter, written in haste — four characters and a symbol you don't recognize, but the hand is controlled even at speed. Someone else has been here since Calvar left this. Someone read it and marked it.",
-      "sceneSummary": "Order-Sense reads the diagram as a proof-of-authorship anchor, not a full map — and reveals a second hand in fresher ink at the lower-right corner.",
+      "narration": "You rest two fingers at the lower-right corner of the diagram without quite touching the ink — close enough that Palework can find its edge. Three energy draws down, but you hold it light, barely a pressure. Reading the already-finished is what this craft does best, and the ink is finished enough.\n\nWhat comes back is recent. The ink dried within the last forty-eight hours — no more. And it came from a hand that was working fast. Not panicked, not trembling, but moving with the compressed economy of someone who has very little time and knows it. The four characters were pressed in with the kind of deliberate force you use when you need the mark to stay, whatever else happens. The unrecognized symbol beside them is different — it went on last, and the hand slowed for it, deliberate in a way the characters were not. Whatever that symbol means to whoever wrote it, they wanted to get it right.\n\nLeth is watching you. She has not moved and has not asked. Pell's gaze drops from your face to the corner of the diagram and back up — she's read that you read something.\n\nCalvar left this diagram three days ago. Whatever is in that lower-right corner was added after he was gone.",
+      "sceneSummary": "Palework reads the fresher ink as added within forty-eight hours — fast, deliberate hand, a symbol written with unusual care, added after Calvar left the diagram with Leth.",
       "choices": [
         {
-          "label": "Ask Leth directly: who else has seen this diagram since Calvar left it?",
+          "label": "Ask Leth directly — has anyone else handled or viewed this diagram since Calvar left it?",
           "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "negotiate"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Show Leth the second notation — ask if she recognizes the hand or the symbol",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
             "study"
@@ -624,55 +618,66 @@
           "trivial": true
         },
         {
-          "label": "Say nothing to Leth yet — use Palework on the fresher ink itself: read how recently it was written and what state the hand was in",
+          "label": "Describe what you read — tell Leth and Pell plainly: someone added to this after Calvar left, within two days, in a hurry",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "persuade"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Use Order-Sense on the symbol specifically — read what design or system that mark belongs to",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {
+            "chaos_order": 0.6
+          },
           "difficulty": 15,
           "intentTags": [
-            "study",
-            "careful"
+            "study"
           ],
-          "abilityId": "palework",
-          "energyCost": 3,
+          "abilityId": "order_sense",
+          "energyCost": 2,
           "trivial": false
         },
         {
-          "label": "Ask Leth: does Calvar know the diagram is here — did he intend for someone else to find it, or was he leaving it only with her?",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Leave the diagram and go straight to the cooperage — Calvar is there now and may not be by morning",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "negotiate"
+            "travel"
           ],
           "trivial": true
         }
       ],
       "characterDeltas": {
         "health": 0,
-        "energy": -2
+        "energy": -3
       },
       "scene": {
-        "setting": "Leth's archive room in the Edge District — low stone building, door propped with a round river rock, lamp steady on the slanted desk, full dark outside now. The document roll lies open on the desk, Calvar's diagram visible — Order-Sense has read its design shape; the second notation in fresher ink at the lower-right corner is now visible.",
+        "setting": "Leth's archive room in the Edge District — low stone building, door propped with a round river rock, lamp steady on the slanted desk, full dark outside. The document roll lies open, Calvar's diagram visible; Silas's fingers rest near the lower-right corner where the fresher ink is.",
         "npcsPresent": [
           {
             "name": "Leth",
-            "state": "Standing at the desk, watching Silas read the diagram — composed, giving the study its room, not yet asked anything"
+            "state": "Standing at the desk, watching Silas with steady professional attention — she has not moved or asked"
           },
           {
             "name": "Pell",
-            "state": "At the door frame, arms loose — her eyes have moved to the lower-right corner where Silas is looking; she's registered that something changed in how he's attending to it"
+            "state": "At the door frame, eyes moving between Silas's face and the diagram's lower-right corner — she knows he read something"
           },
           {
             "name": "Huginn",
-            "state": "On the sign board outside the open door — eye still on the diagram, unhurried, attending"
+            "state": "On the sign board outside the open door, eye still on the diagram"
           }
         ],
         "objects": [
           "Slanted writing desk",
           "Sorel's letter — filed at upper-right corner of the desk",
-          "Opened document roll — diagram in Calvar's hand, two notation columns, distinctive three-formation at top",
-          "Second notation in fresher ink — lower-right corner, smaller flatter hand, four characters and an unrecognized symbol",
+          "Opened document roll — diagram in Calvar's hand, two notation columns, distinctive three-formation hand",
+          "Second notation in fresher ink — lower-right corner, smaller flatter hand, four characters and an unrecognized symbol; dried within forty-eight hours, written fast except for the final symbol",
           "Dark waxed cord — untied, set aside",
           "Floor-to-ceiling shelving, every bundle tied and labeled",
           "Round river rock propping the door",
@@ -680,60 +685,58 @@
           "Fendt's Testimony — folded page in Silas's coat"
         ],
         "threads": [
-          "Second notation in fresher ink on the diagram — different hand, not Calvar's, written after he left it; four characters and an unrecognized symbol",
-          "Who else has accessed this diagram since Calvar left it three days ago",
-          "The diagram is a proof-of-authorship anchor, not a full map — what Calvar's strategic intent was in leaving it",
+          "The fresher ink was added within forty-eight hours — after Calvar left the diagram; someone else accessed it",
+          "The final symbol was written slowly and deliberately — it matters to whoever wrote it",
+          "Leth has not been asked whether anyone else handled the diagram",
           "Calvar is above the cooperage on the east lane — has not been approached",
           "Whether Calvar knows the diagram has been marked by another hand"
         ]
       },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "leth",
+          "name": "Leth",
+          "note": "Watched Silas use Palework on the fresher ink — did not interrupt or ask; is waiting",
+          "statusNote": "At her archive room in the Edge District — holding steady, waiting for Silas to share what he read from the diagram"
+        }
+      ],
       "codexUpdates": [
         {
-          "topic": "calvar",
-          "label": "Calvar",
-          "kind": "person",
-          "entityId": "calvar",
-          "fact": "The diagram Calvar left with Leth is not a full array schematic — it is specifically the seventh-band section, a proof-of-authorship anchor. He brought Leth the piece that establishes he designed the calibration tolerances now in someone else's hands. Strategic, not archival.",
+          "topic": "the-document-roll-leth-s-desk",
+          "label": "The Document Roll — Leth's Desk",
+          "kind": "mystery",
+          "entityId": null,
+          "fact": "Palework confirms the fresher ink at the lower-right corner was added within forty-eight hours of this reading — after Calvar left the diagram with Leth three days ago. The hand was working fast under time pressure for the four characters; the final symbol was written slowly, deliberately, as if its accuracy mattered above all. Someone accessed this diagram after Calvar and before Silas.",
           "links": [
             "find-the-engineer",
             "leth-archive-complaint",
-            "the-water-crisis",
-            "radiant-plateau-edge"
-          ]
-        },
-        {
-          "topic": "the-document-roll-leth-desk",
-          "label": "The Document Roll — Leth's Desk",
-          "kind": "mystery",
-          "fact": "Order-Sense confirms the diagram shows only the seventh-band section — deliberate exclusion of the upper bands, primary intake, and northeastern branching conduit. The larger design is present in its absence. More urgently: a second notation in fresher ink sits at the lower-right corner, written in a smaller, flatter, controlled hand — not Calvar's. Four characters and an unrecognized symbol, written after he left the diagram.",
-          "links": [
-            "calvar",
-            "find-the-engineer",
             "leth",
+            "calvar",
             "radiant-plateau-edge",
-            "leth-archive-complaint"
+            "the-water-crisis"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a focused study of the diagram under Order-Sense — a short, concentrated beat"
+        "why": "a brief, careful Palework reading — a minute of concentrated attention"
       }
     },
     "sceneState": {
-      "setting": "Leth's archive room in the Edge District — low stone building, door propped with a round river rock, lamp steady on the slanted desk, full dark outside now. The document roll lies open on the desk, Calvar's diagram visible — Order-Sense has read its design shape; the second notation in fresher ink at the lower-right corner is now visible.",
+      "setting": "Leth's archive room in the Edge District — low stone building, door propped with a round river rock, lamp steady on the slanted desk, full dark outside. The document roll lies open, Calvar's diagram visible; Silas's fingers rest near the lower-right corner where the fresher ink is.",
       "npcsPresent": [
         {
           "name": "Leth",
-          "state": "Standing at the desk, watching Silas read the diagram — composed, giving the study its room, not yet asked anything"
+          "state": "Standing at the desk, watching Silas with steady professional attention — she has not moved or asked"
         },
         {
           "name": "Pell",
-          "state": "At the door frame, arms loose — her eyes have moved to the lower-right corner where Silas is looking; she's registered t"
+          "state": "At the door frame, eyes moving between Silas's face and the diagram's lower-right corner — she knows he read something"
         },
         {
           "name": "Huginn",
-          "state": "On the sign board outside the open door — eye still on the diagram, unhurried, attending"
+          "state": "On the sign board outside the open door, eye still on the diagram"
         }
       ],
       "objects": [
@@ -748,9 +751,9 @@
         "Fendt's Testimony — folded page in Silas's coat"
       ],
       "threads": [
-        "Second notation in fresher ink on the diagram — different hand, not Calvar's, written after he left it; four characters and an unrecognized symbol",
-        "Who else has accessed this diagram since Calvar left it three days ago",
-        "The diagram is a proof-of-authorship anchor, not a full map — what Calvar's strategic intent was in leaving it",
+        "The fresher ink was added within forty-eight hours — after Calvar left the diagram; someone else accessed it",
+        "The final symbol was written slowly and deliberately — it matters to whoever wrote it",
+        "Leth has not been asked whether anyone else handled the diagram",
         "Calvar is above the cooperage on the east lane — has not been approached",
         "Whether Calvar knows the diagram has been marked by another hand"
       ]
@@ -1483,7 +1486,8 @@
       "history": [
         "[d3] Received Silas and Pell with Sorel's letter already in hand. Named them as Grael's engineer's seekers without being told. Announced she has ground to cover first.",
         "[d3] Set her sequence plainly — two things before the name: the archive breach and what it means for the engineer. Has a document roll on the desk. Pausing before the second.",
-        "[d3] Completed her sequence — named Calvar above the cooperage on the east lane. Opened the document roll: a diagram in Calvar's own hand, left with her three days ago. Stated plainly t"
+        "[d3] Completed her sequence — named Calvar above the cooperage on the east lane. Opened the document roll: a diagram in Calvar's own hand, left with her three days ago. Stated plainly t",
+        "[d3] Watched Silas use Palework on the fresher ink — did not interrupt or ask; is waiting"
       ],
       "knownFacts": [
         "She knows Silas is looking for 'Grael's engineer' — that framing is hers, and it carries weight",
@@ -1504,7 +1508,7 @@
         "reading a subject's decision-state from behavioral evidence "
       ],
       "status": "active",
-      "statusNote": "At her archive room in the Edge District — has given the engineer's name (Calvar) and shown the diagram he left with her three days ago.",
+      "statusNote": "At her archive room in the Edge District — holding steady, waiting for Silas to share what he read from the diagram",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 3
@@ -2604,7 +2608,8 @@
         "kind": "mystery",
         "facts": [
           "[d3] Huginn's attention fixed on Leth's unopened document roll — preservation-weight paper, tied with dark waxed cord, set deliberately on the desk rather than filed with the others. The bird attends to en",
-          "[d3] Order-Sense confirms the diagram shows only the seventh-band section — deliberate exclusion of the upper bands, primary intake, and northeastern branching conduit. The larger design is present in its "
+          "[d3] Order-Sense confirms the diagram shows only the seventh-band section — deliberate exclusion of the upper bands, primary intake, and northeastern branching conduit. The larger design is present in its ",
+          "[d3] Palework confirms the fresher ink at the lower-right corner was added within forty-eight hours of this reading — after Calvar left the diagram with Leth three days ago. The hand was working fast under"
         ],
         "links": [
           "find-the-engineer",
@@ -2660,17 +2665,17 @@
     }
   },
   "tendencies": {
-    "strategic": 27.62554949915984,
-    "cerebral": 25.881673092277218,
-    "social": 24.03670551849122,
-    "generous": 5.251240305133001,
-    "cautious": 20.331792591784996,
-    "physical": 1.1410323250436525,
-    "risky": 3.212917507000566,
-    "ruthless": 1.4128036107965471,
-    "carousing": 0.9920738991611348,
-    "amorous": 2.7204089948797607,
-    "patient": 1.8217270802510872
+    "strategic": 26.934910761680843,
+    "cerebral": 26.234631264970286,
+    "social": 23.43578788052894,
+    "generous": 5.119959297504676,
+    "cautious": 20.823497776990372,
+    "physical": 1.1125065169175612,
+    "risky": 3.1325945693255517,
+    "ruthless": 1.3774835205266334,
+    "carousing": 0.9672720516821064,
+    "amorous": 2.6523987700077667,
+    "patient": 1.77618390324481
   },
   "aptitudes": [
     "strategist",
@@ -2682,7 +2687,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 360,
+  "actionCount": 361,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2832,8 +2837,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784258142601,
-  "rev": 515,
+  "updatedAt": 1784258287468,
+  "rev": 516,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3368,7 +3373,7 @@
       "numen_sense": 3,
       "lightsense": 2,
       "order_sense": 42,
-      "palework": 20,
+      "palework": 21,
       "deathsense": 15,
       "shadowstep": 8,
       "the-attended-end": 12,
@@ -3474,7 +3479,7 @@
   "syncedAt": 1784184597860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 175
+    "valley": 176
   },
   "foreclosed": [
     "rootkin",
@@ -3503,10 +3508,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-07-17T03:03:05.063Z",
-      "lastAt": "2026-07-17T03:15:42.599Z",
+      "lastAt": "2026-07-17T03:18:07.466Z",
       "startDay": 17,
       "endDay": 17,
-      "beats": 6
+      "beats": 7
     }
   ]
 }

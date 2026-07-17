@@ -85,7 +85,7 @@
   "maxHealth": 85,
   "health": 85,
   "maxEnergy": 155,
-  "energy": 149,
+  "energy": 155,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -911,44 +911,19 @@
         "player": "Let the rune carry one last thing across the threshold — not words, not craft-grain, just the plain fact of being here with her",
         "summary": "Silas lets the rune carry only presence — the plain fact of being here — and Pell receives it; the night settles fully around what has been named.",
         "narration": "You let the rune carry one last thing — not a mark, not grain, not the Ashwarden's texture or the Wright's signature. Just the plain fact of sitting here. The threshold takes it without effort, the way still water takes a reflection: no distortion, nothing added, the thing itself and nothing else.\n\nAcross the conduit-light and the partition's wood grain and the six inches of settled quiet between you, Pell's hand on your wrist goes slightly more still. Not tighter. Stiller. The way a thing goes still when it has received exactly what it was waiting for and did not know it was waiting.\n\nHuginn does not move on the rafter. The rain ticks at the diffusion panels. The collar rune settles the last fraction it had left to settle — a thread pulled smooth, no tension remaining anywhere in its length. Memory stands in the corner and holds the whole evening in its grain without comment.\n\nPell turns her head and sets it against your shoulder. Her thumb doesn't move again. The room breathes its junction-conduit light through the floor, slow and directionless, and the night holds everything that has been named without requiring either of you to do anything more with it."
+      },
+      {
+        "player": "When she moves toward sleep, take her to bed — carry the evening's weight into rest properly",
+        "summary": "Silas carries Pell to bed as she drifts toward sleep — the evening's weight set down properly, the night held.",
+        "narration": "She doesn't announce it — there is no announcement left in her. You feel it first through the rune, that slight change in her weight against your shoulder, the way her breathing has gone slower and more deliberate without her choosing it. Then you feel it through the actual physics of her: the hand on your wrist gone heavy, the head against your shoulder not leaning now but resting, the difference between a person who is present and a person who is almost somewhere else.\n\nYou move carefully. One arm under her knees, one at her back — she makes a small sound that is not quite protest and not quite anything, the sound of someone whose body is complying before her will has caught up. She is not light; she is a blacksmith, she is made of deliberate use, and you carry her the way you would carry something you intend to keep. The partition is close. The bed on her side is thick-mattressed, the linen cedar-cool, and you set her down with the second towel still across her shoulders and pull the blanket from the foot of the bed over her without ceremony.\n\nShe settles without opening her eyes. Her hand finds the edge of the blanket and folds it once, a small habitual act, and then is still. The junction conduit sends its pale even light through the floor on both sides of the partition — the same light, undifferentiated, holding you both in it. Huginn shifts once on the rafter and does not shift again. The rain at the diffusion panels has gone quieter, or you have stopped hearing it the same way.\n\nYou stand at the edge of the bed for a moment. The collar rune on Memory's shaft is a settled thing in the corner — no grain running, no thread extended, just the threshold present and at rest. Calvar's lamp in the east-lane window will be the morning's first signal. First light is not far. You take your own side of the partition, pull the blanket up, and let the evening carry you the rest of the way down."
       }
     ],
     "lastTurn": {
-      "narration": "You let the rune carry one last thing — not a mark, not grain, not the Ashwarden's texture or the Wright's signature. Just the plain fact of sitting here. The threshold takes it without effort, the way still water takes a reflection: no distortion, nothing added, the thing itself and nothing else.\n\nAcross the conduit-light and the partition's wood grain and the six inches of settled quiet between you, Pell's hand on your wrist goes slightly more still. Not tighter. Stiller. The way a thing goes still when it has received exactly what it was waiting for and did not know it was waiting.\n\nHuginn does not move on the rafter. The rain ticks at the diffusion panels. The collar rune settles the last fraction it had left to settle — a thread pulled smooth, no tension remaining anywhere in its length. Memory stands in the corner and holds the whole evening in its grain without comment.\n\nPell turns her head and sets it against your shoulder. Her thumb doesn't move again. The room breathes its junction-conduit light through the floor, slow and directionless, and the night holds everything that has been named without requiring either of you to do anything more with it.",
-      "sceneSummary": "Silas lets the rune carry only presence — the plain fact of being here — and Pell receives it; the night settles fully around what has been named.",
+      "narration": "She doesn't announce it — there is no announcement left in her. You feel it first through the rune, that slight change in her weight against your shoulder, the way her breathing has gone slower and more deliberate without her choosing it. Then you feel it through the actual physics of her: the hand on your wrist gone heavy, the head against your shoulder not leaning now but resting, the difference between a person who is present and a person who is almost somewhere else.\n\nYou move carefully. One arm under her knees, one at her back — she makes a small sound that is not quite protest and not quite anything, the sound of someone whose body is complying before her will has caught up. She is not light; she is a blacksmith, she is made of deliberate use, and you carry her the way you would carry something you intend to keep. The partition is close. The bed on her side is thick-mattressed, the linen cedar-cool, and you set her down with the second towel still across her shoulders and pull the blanket from the foot of the bed over her without ceremony.\n\nShe settles without opening her eyes. Her hand finds the edge of the blanket and folds it once, a small habitual act, and then is still. The junction conduit sends its pale even light through the floor on both sides of the partition — the same light, undifferentiated, holding you both in it. Huginn shifts once on the rafter and does not shift again. The rain at the diffusion panels has gone quieter, or you have stopped hearing it the same way.\n\nYou stand at the edge of the bed for a moment. The collar rune on Memory's shaft is a settled thing in the corner — no grain running, no thread extended, just the threshold present and at rest. Calvar's lamp in the east-lane window will be the morning's first signal. First light is not far. You take your own side of the partition, pull the blanket up, and let the evening carry you the rest of the way down.",
+      "sceneSummary": "Silas carries Pell to bed as she drifts toward sleep — the evening's weight set down properly, the night held.",
       "choices": [
         {
-          "label": "Stay until she's ready to sleep — let the night end when it ends",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "sustain"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Before sleep, speak once — ask if she wants Calvar's signal (the lamp in the window) to be her task in the morning, or yours",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "plan"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Let the night be what it is — sleep here beside her, no bed, just this",
+          "label": "Sleep — let the night do its work",
           "attribute": "physical",
           "subAttribute": "endurance",
           "axes": {},
@@ -958,64 +933,90 @@
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "When she moves toward sleep, take her to bed — carry the evening's weight into rest properly",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
+          "label": "Before sleep — check Memory's rune one last time: is the threshold settled for the road?",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "chaos_order": 0.3
+          },
           "difficulty": 0,
           "intentTags": [
-            "romantic"
+            "study"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
+        },
+        {
+          "label": "Lie awake a moment — run over what the morning needs: Calvar's lamp, first light departure, the annex",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "chaos_order": 0.4
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Something is moving at the third hour — the conduit's pulse, the world acting on its own clock; don't sleep yet",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "mechanical_spiritual": 0.3
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "scout"
+          ],
+          "abilityId": "the-attended-end",
+          "energyCost": 2,
+          "trivial": false
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -2,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "The Low Lamp Inn, lower tier of the Edge District — Silas and Pell seated together at the trough's edge in the tallow-candleless room, the junction conduit's pale glow rising through stone floor, early-spring rain at the diffusion panels, Huginn still on the rafter.",
+        "setting": "The Low Lamp Inn, lower tier of the Edge District — both sides of the partition in the candleless room, junction-conduit light pale and even through the stone floor, early-spring rain quieted at the diffusion panels. Pell is in her bed, settled. Silas at his own side.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Head against Silas's shoulder, hand easy and still on his wrist — fully settled, not ready to move."
+            "state": "In her bed on the far side of the partition — blanket drawn, hand folded at the edge, asleep or nearly so."
           },
           {
             "name": "Huginn",
-            "state": "Still on the rafter, one foot resettled, attending in the unhurried way it attends everything."
+            "state": "Still on the rafter, one foot resettled, attending in the way it attends everything — unhurried."
           }
         ],
         "objects": [
-          "Memory (spear) — leaned in the corner, collar rune live and fully settled",
+          "Memory (spear) — leaned in the corner, collar rune settled and at rest",
           "Partition — wooden, does not reach the ceiling; both sides one shared space",
-          "Stone bath trough (Pell's side) — Silas and Pell seated at its edge",
+          "Stone bath trough (Pell's side) — empty, cool",
           "Stone bath trough (Silas's side) — abandoned, water cold",
           "Copper kettle — emptied, set back near the coals",
           "Tallow candle on the window sill — burned out, wick cold",
-          "Second towel — across Pell's shoulders",
           "Low lantern bracket over the inn door — burning oil",
           "Boots — off, at the bed's foot"
         ],
         "threads": [
-          "Soul wife — named and received; the night is theirs",
-          "Calvar's lamp in the window — the morning's first signal; departure at first light",
-          "The Edge District Ledger quest remains active — Grael, the annex, the intake log unresolved"
+          "Calvar's lamp in the east-lane window — the morning's first signal; first light departure is the next move",
+          "The Edge District Ledger quest remains active — Grael, the annex, the intake log unresolved",
+          "The conduit beneath the inn cycles strangely at the third hour — a live seed, unresolved"
         ]
+      },
+      "timeOps": {
+        "hoursPassed": 8,
+        "why": "a full night's sleep — carried her to bed at evening's close, first light approaching"
+      },
+      "characterDeltas": {
+        "health": 3,
+        "energy": 50
       },
       "npcUpdates": [
         {
@@ -1023,71 +1024,45 @@
           "npcId": "pell",
           "name": "Pell",
           "role": "Village blacksmith, Millbrook — traveling companion",
-          "note": "Received the plain fact of Silas's presence through the rune — no grain, no mark, just being here. Her hand went still on his wrist in a way that had nothing left to wait for. Head against his shoulder. The night fully held.",
-          "learned": [
-            "The rune can carry plain presence — not craft, not signal, just the fact of being here — and she received it without effort"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At the Low Lamp Inn — soul wife named and received; seated at the trough's edge, head on Silas's shoulder, the night theirs before first light."
+          "note": "Carried to bed without ceremony as she drifted toward sleep — settled without opening her eyes, hand folding the blanket edge once from habit, then still.",
+          "statusNote": "Asleep at the Low Lamp Inn — soul wife named and received, the night fully set down; first light departure ahead.",
+          "status": "active"
         }
-      ],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "codexUpdates": [
-        {
-          "topic": "pell",
-          "label": "Pell",
-          "kind": "person",
-          "entityId": "pell",
-          "fact": "Memory's rune can carry plain presence across the threshold — not grain, not craft-mark, just the fact of being here. Pell received it; her hand went still in a way that had nothing left to wait for.",
-          "links": [
-            "the-attended-end",
-            "find-the-engineer",
-            "the-low-lamp-inn"
-          ]
-        }
-      ],
-      "timeOps": {
-        "hoursPassed": 0,
-        "why": "A quiet moment — a breath, not a beat of time"
-      },
-      "sceneEnded": false
+      ]
     },
     "sceneState": {
-      "setting": "The Low Lamp Inn, lower tier of the Edge District — Silas and Pell seated together at the trough's edge in the tallow-candleless room, the junction conduit's pale glow rising through stone floor, early-spring rain at the diffusion panels, Huginn still on the rafter.",
+      "setting": "The Low Lamp Inn, lower tier of the Edge District — both sides of the partition in the candleless room, junction-conduit light pale and even through the stone floor, early-spring rain quieted at the diffusion panels. Pell is in her bed, settled. Silas at his own side.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Head against Silas's shoulder, hand easy and still on his wrist — fully settled, not ready to move."
+          "state": "In her bed on the far side of the partition — blanket drawn, hand folded at the edge, asleep or nearly so."
         },
         {
           "name": "Huginn",
-          "state": "Still on the rafter, one foot resettled, attending in the unhurried way it attends everything."
+          "state": "Still on the rafter, one foot resettled, attending in the way it attends everything — unhurried."
         }
       ],
       "objects": [
-        "Memory (spear) — leaned in the corner, collar rune live and fully settled",
+        "Memory (spear) — leaned in the corner, collar rune settled and at rest",
         "Partition — wooden, does not reach the ceiling; both sides one shared space",
-        "Stone bath trough (Pell's side) — Silas and Pell seated at its edge",
+        "Stone bath trough (Pell's side) — empty, cool",
         "Stone bath trough (Silas's side) — abandoned, water cold",
         "Copper kettle — emptied, set back near the coals",
         "Tallow candle on the window sill — burned out, wick cold",
-        "Second towel — across Pell's shoulders",
         "Low lantern bracket over the inn door — burning oil",
         "Boots — off, at the bed's foot"
       ],
       "threads": [
-        "Soul wife — named and received; the night is theirs",
-        "Calvar's lamp in the window — the morning's first signal; departure at first light",
-        "The Edge District Ledger quest remains active — Grael, the annex, the intake log unresolved"
+        "Calvar's lamp in the east-lane window — the morning's first signal; first light departure is the next move",
+        "The Edge District Ledger quest remains active — Grael, the annex, the intake log unresolved",
+        "The conduit beneath the inn cycles strangely at the third hour — a live seed, unresolved"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
-    "day": 3,
-    "hour": 20,
+    "day": 4,
+    "hour": 4,
     "realAnchor": null
   },
   "companions": [
@@ -1506,7 +1481,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d3] Felt Silas's attention extend through the rune without words — a deliberate exhale on the other side of the partition, something set down. Rooted, present, not ending.",
         "[d3] Sent the grain of her ironsense across Memory's rune-threshold without being told how — craft-knowledge as a physical fact, two hundred heats and their corrections, handed over cle",
         "[d3] Received the Ashwarden-Wright grain of Weir through Memory's rune-threshold — accepted it into the same depth she sent her ironsense from; went very still with the breath of someon",
         "[d3] Silas reached one quiet thread through the rune to find what she did with the mark — found her holding it, the ledger down, not managing it",
@@ -1515,7 +1489,8 @@
         "[d3] Your bond deepens — committed.",
         "[d3] Settled beside Silas at the trough's edge — shoulder to his, hand on his wrist, thumb moving once and staying. The habit is fully down. No accounting for the space between them.",
         "[d3] Let the quiet run — head against Silas's shoulder, hand on his wrist, the last of the habit fully down. Not ready to move; that is exactly right.",
-        "[d3] Received the plain fact of Silas's presence through the rune — no grain, no mark, just being here. Her hand went still on his wrist in a way that had nothing left to wait for. Head"
+        "[d3] Received the plain fact of Silas's presence through the rune — no grain, no mark, just being here. Her hand went still on his wrist in a way that had nothing left to wait for. Head",
+        "[d3] Carried to bed without ceremony as she drifted toward sleep — settled without opening her eyes, hand folding the blanket edge once from habit, then still."
       ],
       "knownFacts": [
         "The rune-threshold carries craft-grain, not just warmth — she sent ironsense deliberately and it crossed clean",
@@ -1536,7 +1511,7 @@
         "ironsense transmitted deliberately through a rune-threshold"
       ],
       "status": "active",
-      "statusNote": "At the Low Lamp Inn — soul wife named and received; seated at the trough's edge, head on Silas's shoulder, the night theirs before first light.",
+      "statusNote": "Asleep at the Low Lamp Inn — soul wife named and received, the night fully set down; first light departure ahead.",
       "lastSeen": {
         "locationId": "the-low-lamp-inn",
         "day": 3
@@ -2153,14 +2128,14 @@
   "subAttributes": {
     "strength": 3,
     "agility": 3,
-    "reason": 4,
+    "reason": 5,
     "insight": 5,
     "presence": 6,
     "rapport": 4,
     "craft": 6,
     "wits": 5
   },
-  "pendingSubPoints": 1,
+  "pendingSubPoints": 0,
   "skillPoints": 2,
   "discoveries": [],
   "codex": {
@@ -3268,20 +3243,20 @@
     }
   },
   "tendencies": {
-    "strategic": 10.758160314568023,
-    "cerebral": 19.95138912734678,
-    "social": 18.940825619027237,
-    "generous": 2.5740892119548673,
-    "cautious": 8.322032021667654,
-    "physical": 0.2561947785371388,
-    "risky": 2.2191881484780422,
-    "ruthless": 0.3172152972709551,
-    "carousing": 0.22274930105800383,
-    "amorous": 8.811857084912203,
-    "patient": 2.1035788376217126,
-    "stealth": 0.2613633162931382,
-    "devotion": 3.0736934050763,
-    "craft": 0.70155967750146
+    "strategic": 10.489206306703823,
+    "cerebral": 19.45260439916311,
+    "social": 18.467304978551557,
+    "generous": 2.5097369816559953,
+    "cautious": 8.113981221125963,
+    "physical": 0.24978990907371032,
+    "risky": 2.1637084447660913,
+    "ruthless": 0.3092849148391812,
+    "carousing": 0.21718056853155374,
+    "amorous": 9.591560657789397,
+    "patient": 2.05098936668117,
+    "stealth": 0.2548292333858097,
+    "devotion": 2.9968510699493924,
+    "craft": 0.6840206855639235
   },
   "aptitudes": [
     "strategist",
@@ -3291,7 +3266,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 419,
+  "actionCount": 420,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3473,8 +3448,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=11860&nologo=true",
-  "updatedAt": 1784328367093,
-  "rev": 597,
+  "updatedAt": 1784328468874,
+  "rev": 599,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4399,7 +4374,7 @@
   "syncedAt": 1784292613822,
   "teachers": {},
   "regionsKnown": {
-    "valley": 234
+    "valley": 235
   },
   "foreclosed": [
     "rootkin",
@@ -4448,10 +4423,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-17T17:39:40.705Z",
-      "lastAt": "2026-07-17T22:46:07.093Z",
+      "lastAt": "2026-07-17T22:47:48.874Z",
       "startDay": 17,
       "endDay": 17,
-      "beats": 42
+      "beats": 43
     }
   ],
   "company": [

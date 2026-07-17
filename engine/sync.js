@@ -30,8 +30,8 @@ function ghFetch(url, opts) {
 
 export function getSyncConfig() {
   return {
-    owner: localStorage.getItem("singularity.gh.owner") || "",
-    repo: localStorage.getItem("singularity.gh.repo") || "",
+    owner: localStorage.getItem("singularity.gh.owner") || "orkstrtdkaos",
+    repo: localStorage.getItem("singularity.gh.repo") || "Singularity",
     pat: localStorage.getItem("singularity.gh.pat") || ""
   };
 }

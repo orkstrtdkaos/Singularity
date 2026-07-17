@@ -8,7 +8,7 @@
   "whyHere": "You were sent, or you were seeded, or you simply wanted to see something finish inside a single lifetime.",
   "background": "warden",
   "level": 1,
-  "xp": 89,
+  "xp": 91,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -38,13 +38,13 @@
   ],
   "alignment": {
     "death_life": 0.24786402315339204,
-    "destruction_creation": 0.020000000000000004
+    "destruction_creation": 0.014000000000000002
   },
   "attunement": 1,
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 10,
+  "energy": 4,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -240,99 +240,89 @@
         "player": "Ask Branch to lead — let it walk you to the wrongness, following its pace.",
         "summary": "Branch leads Aelyn along the left root-wall and stops at the site of the wrongness — pressing a root-tip flat against it.",
         "narration": "You rise from your crouch and take a half-step back, giving Branch room.\n\n\"Lead,\" you say — one word, because that's the currency Branch trades in.\n\nIt doesn't look at you. It doesn't need to. The root-tips it had pressed into the lattice floor lift and resettle, lift and resettle, moving it laterally along the left wall with the same unhurried patience it brings to everything. The motion isn't quite walking — more like a wave passing through it from rear to front, each root finding a new gap in the lattice, gripping, releasing. You follow a body-length behind and let it set the pace.\n\nThe chamber is longer than it first appeared. The amber light holds even throughout, no brighter at the far end than here, no shadow pooling ahead. The left root-wall runs beside you — enormous fused roots, dark with age, their surfaces worn to something almost like skin. Branch moves along it the way a hand moves along a familiar surface in the dark: not searching, reading. Its buds stay fully open. Occasionally one dips toward the wall, holds, lifts again. You don't hurry it.\n\nThen Branch stops. Not gradually — it simply stops, root-tips pressing firmly into the lattice, and its buds all angle toward one section of the wall at once. The section looks no different from any other: same dark root-surface, same smooth age, same sourceless amber catching the grain. But Branch tilts two buds sideways in the direction it named before — *wrong* — and presses one root-tip flat against the surface itself, holding the contact deliberately, the way it held the question about the chamber and waited for you to understand the answer."
+      },
+      {
+        "player": "Use Prism Sight on the wall — look for heat traces, recent change, anything the light reads differently here.",
+        "summary": "Prism Sight failed — the Heartroot's sourceless light gives it nothing to read.",
+        "narration": "You raise your eyes to the wall section and open Prism Sight — a conserved reach, careful, not pressing. The amber light of the chamber is what stops you almost immediately.\n\nThe sourceless glow fills the space from everywhere at once, and that is exactly the problem. Prism Sight reads light — heat-traces in it, bends and distortions, the warm ghost of a hand or a body's passage. But the Heartroot's light doesn't come from anywhere, which means it doesn't go anywhere either. There are no shadows to read. No gradient of warm and cool where a recent change might stand out. The chamber is evenly, completely, patiently lit in a way that strips all the information the craft depends on.\n\nThe substrate doesn't help. You can feel the lattice starved beneath this place — thin, distant, as if the Heartroot's own deep grain has been here long enough to simply displace the nanite mesh. The sight flickers at the edges of its useful range and finds nothing. The wall looks exactly the way it looks: smooth, old, warm with ambient light that tells you nothing about the wall itself.\n\nBranch has not moved. Its root-tip rests flat against the specific section — patient, certain — and its buds stay aimed at the surface with the same unblinking attention as before. Whatever it senses there, it senses through a different channel entirely. One the light cannot touch."
       }
     ],
     "lastTurn": {
-      "narration": "You rise from your crouch and take a half-step back, giving Branch room.\n\n\"Lead,\" you say — one word, because that's the currency Branch trades in.\n\nIt doesn't look at you. It doesn't need to. The root-tips it had pressed into the lattice floor lift and resettle, lift and resettle, moving it laterally along the left wall with the same unhurried patience it brings to everything. The motion isn't quite walking — more like a wave passing through it from rear to front, each root finding a new gap in the lattice, gripping, releasing. You follow a body-length behind and let it set the pace.\n\nThe chamber is longer than it first appeared. The amber light holds even throughout, no brighter at the far end than here, no shadow pooling ahead. The left root-wall runs beside you — enormous fused roots, dark with age, their surfaces worn to something almost like skin. Branch moves along it the way a hand moves along a familiar surface in the dark: not searching, reading. Its buds stay fully open. Occasionally one dips toward the wall, holds, lifts again. You don't hurry it.\n\nThen Branch stops. Not gradually — it simply stops, root-tips pressing firmly into the lattice, and its buds all angle toward one section of the wall at once. The section looks no different from any other: same dark root-surface, same smooth age, same sourceless amber catching the grain. But Branch tilts two buds sideways in the direction it named before — *wrong* — and presses one root-tip flat against the surface itself, holding the contact deliberately, the way it held the question about the chamber and waited for you to understand the answer.",
-      "sceneSummary": "Branch leads Aelyn along the left root-wall and stops at the site of the wrongness — pressing a root-tip flat against it.",
+      "narration": "You raise your eyes to the wall section and open Prism Sight — a conserved reach, careful, not pressing. The amber light of the chamber is what stops you almost immediately.\n\nThe sourceless glow fills the space from everywhere at once, and that is exactly the problem. Prism Sight reads light — heat-traces in it, bends and distortions, the warm ghost of a hand or a body's passage. But the Heartroot's light doesn't come from anywhere, which means it doesn't go anywhere either. There are no shadows to read. No gradient of warm and cool where a recent change might stand out. The chamber is evenly, completely, patiently lit in a way that strips all the information the craft depends on.\n\nThe substrate doesn't help. You can feel the lattice starved beneath this place — thin, distant, as if the Heartroot's own deep grain has been here long enough to simply displace the nanite mesh. The sight flickers at the edges of its useful range and finds nothing. The wall looks exactly the way it looks: smooth, old, warm with ambient light that tells you nothing about the wall itself.\n\nBranch has not moved. Its root-tip rests flat against the specific section — patient, certain — and its buds stay aimed at the surface with the same unblinking attention as before. Whatever it senses there, it senses through a different channel entirely. One the light cannot touch.",
+      "sceneSummary": "Prism Sight failed — the Heartroot's sourceless light gives it nothing to read.",
       "choices": [
         {
-          "label": "Press your palm against the wall beside Branch's root-tip — open through the Grove and listen for what Branch heard.",
+          "label": "Press your palm flat against the wall where Branch's root-tip rests — open Lifesense and read whatever lives in that section of root, however faintly.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "death_life": 0.6,
-            "destruction_creation": 0.2
+            "death_life": 0.6
           },
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
-            "study"
-          ],
-          "abilityId": "the_speaking_grove",
-          "energyCost": 4,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Lifesense on the wall itself — feel for what's alive in there, and whether its vigor is off.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": 0.5
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study"
+            "study",
+            "careful"
           ],
           "abilityId": "lifesense",
           "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         },
         {
-          "label": "Use Prism Sight on the wall — look for heat traces, recent change, anything the light reads differently here.",
+          "label": "Use the Speaking Grove — speak to the wall section itself, the living wood, and ask what it feels from the inside.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "death_life": 0.7,
+            "destruction_creation": 0.3
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "the_speaking_grove",
+          "energyCost": 4,
+          "trivial": false
+        },
+        {
+          "label": "Step back and look at the full wall — use your eyes and your warden's instinct, not your craft. What does a trained eye catch that power missed?",
           "attribute": "mental",
           "subAttribute": "reason",
-          "axes": {
-            "destruction_creation": -0.1
-          },
-          "difficulty": 0,
+          "axes": {},
+          "difficulty": 15,
           "intentTags": [
+            "scout",
             "study"
           ],
-          "abilityId": "prism_sight",
-          "energyCost": 4,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
         },
         {
-          "label": "Call up to Maren — tell her Branch has found the place, and ask if she knows what's behind this section of wall.",
+          "label": "Call up to Maren — tell her Branch has found the site of the wrongness and ask what she knows about this section of wall.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "negotiate",
+            "help"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         }
       ],
-      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0
+        "energy": -4
       },
-      "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "the-root-that-remembers",
-          "note": "Branch led Aelyn along the left root-wall and stopped at the site of the wrongness — pressing a root-tip against it. The location of the city's unnamed illness is found."
-        }
-      ],
       "scene": {
         "setting": "Interior of the Root-That-Remembers' chamber — amber light, even and sourceless. Root-lattice floor warm underfoot. Aelyn standing a body-length from the left root-wall where Branch has stopped and pressed a root-tip flat against a specific section.",
         "npcsPresent": [
           {
             "name": "Branch",
-            "state": "Stopped at a section of the left root-wall, all buds angled toward it, one root-tip pressed flat against the surface — holding contact deliberately."
+            "state": "Root-tip pressed flat against the specific section of the left root-wall; buds aimed at the surface, fully open, unmoving."
           },
           {
             "name": "Maren",
@@ -356,72 +346,54 @@
           "Enormous fused roots — floor, walls, ceiling, worn smooth and dark with age",
           "Root-lattice floor — intentional, broad, solid and slightly warm underfoot",
           "Sourceless amber light — even, warm, no point of origin visible",
-          "Left root-wall — specific section where Branch has stopped; looks no different from the rest",
+          "Left root-wall — specific section where Branch has stopped; looks no different from the surrounding surface",
           "Traveler's Pack (Aelyn's, worn canvas)",
           "Waterskin (Aelyn's)"
         ],
         "threads": [
           "Branch has pressed a root-tip flat against a specific section of the left root-wall — the site of the wrongness.",
+          "Prism Sight found nothing — the sourceless ambient light stripped all heat-trace information.",
           "The Root-That-Remembers communicated two needs: the northeast thread (Aelyn's father) and this local wrongness.",
           "A SNG-075 cache is unresolved — something left behind in or near the passage, not yet found.",
           "Maren waits above."
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "branch",
-          "name": "Branch",
-          "note": "Led Aelyn along the left root-wall at its own pace and stopped precisely at the site of the wrongness — pressing a root-tip flat against it in deliberate contact.",
-          "learned": [
-            "Branch navigates by something other than sight — it reads the wall through contact and bud-sense, not appearance."
-          ],
-          "skillsObserved": [
-            "wayfinding through root-contact",
-            "precise location of wrongness"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Stopped at the wrongness site in the Root-That-Remembers' chamber, holding contact with the left root-wall."
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "A specific section of the left root-wall in the Root-That-Remembers' chamber has been identified by Branch as the site of the city's wrongness — visually indistinguishable from the surrounding wall.",
-          "subPlace": {
-            "name": "The Wrongness Site",
-            "note": "A section of the left root-wall deep in the Root-That-Remembers' chamber — located by Branch, who pressed a root-tip flat against it. Indistinguishable by eye; wrong by sense.",
-            "visited": true
-          }
-        }
-      ],
       "codexUpdates": [
         {
-          "topic": "the-root-that-remembers",
-          "label": "The Root-That-Remembers",
-          "kind": "place",
+          "topic": "the-wrongness-site",
+          "label": "The Wrongness Site",
+          "kind": "mystery",
           "entityId": "heartroot",
-          "fact": "The city's wrongness has a precise location: a section of the left root-wall deep in the Root-That-Remembers' chamber, identified by Branch through root-contact and bud-sense. It looks no different from the surrounding wall.",
+          "fact": "Prism Sight cannot read the wrongness site — the Heartroot's sourceless ambient light gives the craft no gradient, no shadow, no heat-trace to parse. The wrongness must be approached through a different sense.",
           "links": [
+            "root-that-remembers",
             "branch",
             "heartroot",
-            "the-root-that-remembers",
             "the-root-that-remembers"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short traversal of the chamber's length at Branch's unhurried pace."
+        "why": "a brief attempt at Prism Sight, quickly abandoned when the craft found nothing"
       },
-      "sceneEnded": false
+      "deeds": [],
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-root-that-remembers",
+          "note": "Prism Sight failed at the wrongness site — the Heartroot's sourceless light is opaque to the craft. Branch holds the location. Another approach is needed."
+        }
+      ],
+      "npcUpdates": []
     },
     "sceneState": {
       "setting": "Interior of the Root-That-Remembers' chamber — amber light, even and sourceless. Root-lattice floor warm underfoot. Aelyn standing a body-length from the left root-wall where Branch has stopped and pressed a root-tip flat against a specific section.",
       "npcsPresent": [
         {
           "name": "Branch",
-          "state": "Stopped at a section of the left root-wall, all buds angled toward it, one root-tip pressed flat against the surface — h"
+          "state": "Root-tip pressed flat against the specific section of the left root-wall; buds aimed at the surface, fully open, unmovin"
         },
         {
           "name": "Maren",
@@ -451,6 +423,7 @@
       ],
       "threads": [
         "Branch has pressed a root-tip flat against a specific section of the left root-wall — the site of the wrongness.",
+        "Prism Sight found nothing — the sourceless ambient light stripped all heat-trace information.",
         "The Root-That-Remembers communicated two needs: the northeast thread (Aelyn's father) and this local wrongness.",
         "A SNG-075 cache is unresolved — something left behind in or near the passage, not yet found.",
         "Maren waits above."
@@ -480,14 +453,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Aelyn spoke her presence into the passage as she descended — the Root-That-Remembers heard. The pulse in the walls deepened. The descent continues.",
         "The Root confirmed it knows both Aelyn's green inheritance and her father's — both threads woven together, long recognized. The chamber is opening below. The descent is nearly complete.",
         "The Root confirmed it knows Aelyn's father — not just his echo in her, but the thread of him, alive and pointing outward into the valley. The chamber waits one step below.",
         "The Root confirmed Aelyn's father is findable — the thread points northeast, real and large, measured in the way old roots measure distance. The chamber waits one step below.",
         "Aelyn made herself legible through the Grove — the Root-That-Remembers read her fully, both natures at once. It is now waiting for her question.",
         "The Root-That-Remembers answered Aelyn's offer with two needs: a northeast thread (her father), and something wrong within the city itself — unnamed, present, and already noticed by Branch.",
         "Branch confirms something wrong in the root-wall to the left — and its bud gives it a direction. The unnamed city-wrongness the Root communicated has a location.",
-        "Branch led Aelyn along the left root-wall and stopped at the site of the wrongness — pressing a root-tip against it. The location of the city's unnamed illness is found."
+        "Branch led Aelyn along the left root-wall and stopped at the site of the wrongness — pressing a root-tip against it. The location of the city's unnamed illness is found.",
+        "Prism Sight failed at the wrongness site — the Heartroot's sourceless light is opaque to the craft. Branch holds the location. Another approach is needed."
       ],
       "aliases": [],
       "startedAt": "2026-07-17T04:11:12.462Z"
@@ -540,7 +513,8 @@
       ],
       "flags": {},
       "vectorsKnown": [
-        "death_life"
+        "death_life",
+        "destruction_creation"
       ],
       "subPlaces": {
         "the-deep-grain-passage": {
@@ -648,7 +622,8 @@
           "[d1] Located at the far end of the entrance hall where the floor slopes downward and the moss thickens. A grown opening of pale heartwood, barely shoulder-width, descending into the deep grain. Old roots l",
           "[d1] Aelyn crossed the threshold and descended. The passage is warmer than the hall above, narrower than expected, the enormous root-walls smooth with age. Maren did not follow. Branch did.",
           "[d1] The Root-That-Remembers holds a part of itself that is not-well — not failing, not broken, but wrong and unnamed. Branch sensed it too, attending the left root-wall in the chamber. The city has not sp",
-          "[d1] The city's wrongness has a precise location: a section of the left root-wall deep in the Root-That-Remembers' chamber, identified by Branch through root-contact and bud-sense. It looks no different fr"
+          "[d1] The city's wrongness has a precise location: a section of the left root-wall deep in the Root-That-Remembers' chamber, identified by Branch through root-contact and bud-sense. It looks no different fr",
+          "[d1] Prism Sight cannot read the wrongness site — the Heartroot's sourceless ambient light gives the craft no gradient, no shadow, no heat-trace to parse. The wrongness must be approached through a differe"
         ],
         "links": [
           "branch",
@@ -662,7 +637,8 @@
           "The Heartroot — Something in the Wood",
           "The Deep Grain Passage",
           "The Unnamed Wrongness in the Heartroot",
-          "The Root-That-Remembers"
+          "The Root-That-Remembers",
+          "The Wrongness Site"
         ],
         "createdDay": 1,
         "entityId": "heartroot",
@@ -862,15 +838,15 @@
     }
   },
   "tendencies": {
-    "cerebral": 9.758254543494257,
-    "cautious": 7.568468953654533,
-    "generous": 1.1018752833881897,
-    "social": 5.131410619638436,
-    "strategic": 2.1844810186115606,
-    "devotion": 2.422737383037422
+    "cerebral": 10.5142981799069,
+    "cautious": 7.37925722981317,
+    "generous": 1.074328401303485,
+    "social": 5.003125354147476,
+    "strategic": 2.1298689931462715,
+    "devotion": 2.3621689484614863
   },
   "aptitudes": [],
-  "actionCount": 34,
+  "actionCount": 35,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -892,8 +868,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20mid-twenties%20with%20light%20blonde%2C%20faintly%20wavy%20hair%20cut%20in%20curtain%20bangs%2C%20the%20rest%20falling%20to%20the%20small%20of%20her%20back%20%E2%80%94%20usually%20worn%20in%20a%20french%20braid%20with%20the%20bangs%20left%20loose.%20Dark%20nature-green%20tank%20to%2C%20full-body%20character%20portrait%2C%20named%20Aelyn%20Kantoro%2C%20of%20the%20rootkin%2C%20warden%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Her%20mother%20dies%2C%20and%20she%20decides%20to%20go%20to%20the%20nanite%20world%2C%20to%20figure%20out%20why%20she%20is%20different%20than%20the%20pure%20nature%20peop%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=73420&nologo=true",
-  "updatedAt": 1784263996887,
-  "rev": 50,
+  "updatedAt": 1784264067630,
+  "rev": 51,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -901,7 +877,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "the_quickwood": 35
+    "the_quickwood": 36
   },
   "opLossPending": false,
   "establishedFacts": [
@@ -967,7 +943,8 @@
     "schemaVersion": 1,
     "uses": {
       "lifesense": 5,
-      "the_speaking_grove": 6
+      "the_speaking_grove": 6,
+      "prism_sight": 1
     },
     "coActivations": {},
     "aspirations": []

@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 10,
-  "xp": 940,
+  "xp": 945,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -71,9 +71,9 @@
     "chaos_order": 0.19842135861184484,
     "mechanical_spiritual": 0.17191810626191062,
     "concrete_abstract": -0.05328384007186973,
-    "death_life": -0.18344632172699882,
+    "death_life": -0.1942740056406489,
     "emotional_logical": 0.03083749999999999,
-    "falsehood_truth": 0.13589073750000003,
+    "falsehood_truth": 0.15909620062500002,
     "demonic_angelic": 0.03,
     "value": 0.0435
   },
@@ -81,7 +81,7 @@
   "maxHealth": 75,
   "health": 75,
   "maxEnergy": 145,
-  "energy": 110,
+  "energy": 105,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -626,20 +626,42 @@
         "player": "Go now — let Leth lead you to the rear corridor and use Shadowstep to cross into Vash's room without sound or light",
         "summary": "Silas Shadowsteps through the rear corridor into Vash's east room — and finds a folded page in the same hand as the diagram notation.",
         "narration": "Leth takes the lamp off the desk and carries it to the front door — she lifts the round river rock aside with one foot, sets the door back into its frame without latching it, and gestures you toward the east-wall shelving. The seam you named with Order-Sense is obvious to you now and invisible to anyone who hasn't looked for it. She puts two fingers on the latch side and eases the door inward, slow, on well-fitted hinges that give nothing away.\n\nThe rear corridor is the width of a handcart and smells of cold stone and old chalk dust. No lamp out here — Leth holds hers low, pointed at her own feet, enough to show you the three doors: the one behind you, the survey office left, the east room right. Ten feet, no more. She stops at the midpoint and nods once at the right-hand door, then looks away, which is the kind of honesty that doesn't need words. What happens past this is yours.\n\nThe east room's door sits in its frame with a thin line of dark at the threshold — not sealed, not locked, just closed. And there are shadows here: the corner where wall meets floor to your left, the deeper dark pooled at the survey office door to your right, and the shadow of the east room's own threshold where no light has touched for hours. Plenty of dark touching dark. You let your weight off your heels and find the shadow at the left corner — it takes your weight like water taking a stone — and step.\n\nYou arrive in the east room without sound. No creak, no air-move, no warning scrape of boot on stone. The Shadowstep deposits you inside the threshold with a precision that feels like something clicking into place: you are exactly where you intended, exactly as dark and still as the room itself. Vash's grinding wheel occupies the center — a heavy disc on an iron spindle, surrounded by the particular debris of the trade: lens-blanks at different stages of polish, a ranked row of shaping stones, two cloth pads darkened with rouge compound, and along the east wall, above a low shelf of paper-wrapped parcels, a cord strung between two pegs. From the cord hang four thin glass circles on wire loops, each no larger than a palm. And on the shelf beneath them, half-hidden behind a covered tin, a folded page in handwriting you have seen once tonight already — the deliberate, fast-pressed hand that added four characters to Calvar's diagram."
+      },
+      {
+        "player": "Use Palework on the folded page — read the hand's state, its age, what urgency or fear ran through the person who wrote it",
+        "summary": "Palework reads Vash's folded page — three days old, written the morning Calvar came, decided rather than frightened.",
+        "narration": "You press two fingers against the folded page without lifting it from the shelf — a light contact, nothing that would disturb the position. Palework moves through the paper the way water finds a low place: without announcement, without effort.\n\nThe hand is Vash's. The ink is three days old — set the same morning Calvar left the diagram with Leth, within a few hours of that corridor conversation. Not a considered piece of work: the strokes are small and fast, but they are not frightened. The pressure is even, controlled, the marks placed with the care of someone who knew exactly what they were writing and why. There is no trembling in the paper, no bleed where a grip tightened. Whoever wrote this was not afraid. They were decided.\n\nFour characters — the same four as on the diagram. A record, or a duplicate, or a key. The paper itself is ordinary lens-wrapping stock, the kind Vash would have by the ream. Whatever it says, it was not written in secret from their own work — it was written inside it, invisibly, because the materials were already to hand.\n\nThe rest of the room stands around you in the thin line of light under Leth's door. The cord of glass circles. The grinding wheel. The paper-wrapped parcels. The tinned shelf. Vash will be back before the district fully wakes."
       }
     ],
     "lastTurn": {
-      "narration": "Leth takes the lamp off the desk and carries it to the front door — she lifts the round river rock aside with one foot, sets the door back into its frame without latching it, and gestures you toward the east-wall shelving. The seam you named with Order-Sense is obvious to you now and invisible to anyone who hasn't looked for it. She puts two fingers on the latch side and eases the door inward, slow, on well-fitted hinges that give nothing away.\n\nThe rear corridor is the width of a handcart and smells of cold stone and old chalk dust. No lamp out here — Leth holds hers low, pointed at her own feet, enough to show you the three doors: the one behind you, the survey office left, the east room right. Ten feet, no more. She stops at the midpoint and nods once at the right-hand door, then looks away, which is the kind of honesty that doesn't need words. What happens past this is yours.\n\nThe east room's door sits in its frame with a thin line of dark at the threshold — not sealed, not locked, just closed. And there are shadows here: the corner where wall meets floor to your left, the deeper dark pooled at the survey office door to your right, and the shadow of the east room's own threshold where no light has touched for hours. Plenty of dark touching dark. You let your weight off your heels and find the shadow at the left corner — it takes your weight like water taking a stone — and step.\n\nYou arrive in the east room without sound. No creak, no air-move, no warning scrape of boot on stone. The Shadowstep deposits you inside the threshold with a precision that feels like something clicking into place: you are exactly where you intended, exactly as dark and still as the room itself. Vash's grinding wheel occupies the center — a heavy disc on an iron spindle, surrounded by the particular debris of the trade: lens-blanks at different stages of polish, a ranked row of shaping stones, two cloth pads darkened with rouge compound, and along the east wall, above a low shelf of paper-wrapped parcels, a cord strung between two pegs. From the cord hang four thin glass circles on wire loops, each no larger than a palm. And on the shelf beneath them, half-hidden behind a covered tin, a folded page in handwriting you have seen once tonight already — the deliberate, fast-pressed hand that added four characters to Calvar's diagram.",
-      "sceneSummary": "Silas Shadowsteps through the rear corridor into Vash's east room — and finds a folded page in the same hand as the diagram notation.",
+      "narration": "You press two fingers against the folded page without lifting it from the shelf — a light contact, nothing that would disturb the position. Palework moves through the paper the way water finds a low place: without announcement, without effort.\n\nThe hand is Vash's. The ink is three days old — set the same morning Calvar left the diagram with Leth, within a few hours of that corridor conversation. Not a considered piece of work: the strokes are small and fast, but they are not frightened. The pressure is even, controlled, the marks placed with the care of someone who knew exactly what they were writing and why. There is no trembling in the paper, no bleed where a grip tightened. Whoever wrote this was not afraid. They were decided.\n\nFour characters — the same four as on the diagram. A record, or a duplicate, or a key. The paper itself is ordinary lens-wrapping stock, the kind Vash would have by the ream. Whatever it says, it was not written in secret from their own work — it was written inside it, invisibly, because the materials were already to hand.\n\nThe rest of the room stands around you in the thin line of light under Leth's door. The cord of glass circles. The grinding wheel. The paper-wrapped parcels. The tinned shelf. Vash will be back before the district fully wakes.",
+      "sceneSummary": "Palework reads Vash's folded page — three days old, written the morning Calvar came, decided rather than frightened.",
       "choices": [
         {
-          "label": "Use Order-Sense on the east room — read what design Vash's work here is part of, and what the four glass circles and the folded page belong to",
+          "label": "Open and read the folded page now — whatever it says, you need it before Vash returns",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "falsehood_truth": 0.7,
+            "chaos_order": 0.4
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Use Order-Sense on the folded page — read what larger design these four characters are part of before you open it",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "chaos_order": 0.7
+            "chaos_order": 0.6,
+            "concrete_abstract": 0.4
           },
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
             "study"
           ],
@@ -648,47 +670,29 @@
           "trivial": false
         },
         {
-          "label": "Read the folded page first — take it to what little light comes under the door and read what Vash wrote",
+          "label": "Examine the four glass circles on the cord — they were here with the page; they may be the same work",
           "attribute": "mental",
-          "subAttribute": "reason",
+          "subAttribute": "insight",
           "axes": {
-            "falsehood_truth": 0.8
+            "concrete_abstract": 0.4
           },
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "careful"
+            "study"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Use Palework on the folded page — read the hand's state, its age, what urgency or fear ran through the person who wrote it",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.4,
-            "falsehood_truth": 0.6
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "palework",
-          "energyCost": 3,
-          "trivial": false
-        },
-        {
-          "label": "Examine the four glass circles on the cord — hold them up, look through them, feel what they are before touching the page",
-          "attribute": "mental",
+          "label": "Take the folded page and step back through the rear corridor to Leth now — read it in her lamp-light with her present",
+          "attribute": "practical",
           "subAttribute": "wits",
           "axes": {
-            "concrete_abstract": 0.3
+            "falsehood_truth": 0.5
           },
           "difficulty": 0,
           "intentTags": [
-            "study",
             "careful"
           ],
           "abilityId": null,
@@ -698,14 +702,14 @@
       ],
       "characterDeltas": {
         "health": 0,
-        "energy": -4
+        "energy": -3
       },
       "scene": {
-        "setting": "Vash's east room, Edge District — entered silently via Shadowstep from the rear corridor. Stone-walled, no lamp, the only light a thin line under the door from Leth's lamp in the corridor. Grinding wheel at center; lens-work debris on every surface.",
+        "setting": "Vash's east room, Edge District — stone-walled, entered via Shadowstep through the rear corridor. No lamp; thin line of light under the door from Leth's lamp in the corridor outside. Grinding wheel at center, lens-work debris on every surface.",
         "npcsPresent": [
           {
             "name": "Leth",
-            "state": "Waiting in the rear corridor, lamp low, facing away — she has done her part"
+            "state": "Waiting in the rear corridor, lamp low, facing away — her part done, holding the threshold"
           },
           {
             "name": "Pell",
@@ -713,7 +717,7 @@
           },
           {
             "name": "Huginn",
-            "state": "Still on the sign board outside — attending from a distance"
+            "state": "On the sign board outside — attending from a distance"
           }
         ],
         "objects": [
@@ -721,76 +725,47 @@
           "Lens-blanks at multiple stages of polish",
           "Ranked row of shaping stones",
           "Two cloth pads darkened with rouge compound",
-          "Cord strung between two wall pegs — four thin glass circles on wire loops, each palm-sized",
+          "Cord strung between two wall pegs — four thin glass circles on wire loops",
           "Low shelf along east wall — paper-wrapped parcels",
-          "Folded page on the shelf, half-hidden behind a covered tin — in the same fast-pressed hand as the diagram notation",
+          "Folded page on the shelf, half-hidden behind a covered tin — three days old, Vash's hand, written the morning Calvar came",
           "Memory (spear) — left leaning in Leth's archive room",
           "Fendt's Testimony — folded page in Silas's coat"
         ],
         "threads": [
-          "Folded page in Vash's hand — content unknown",
+          "Folded page on shelf — content still unread; four characters match the diagram annotation",
           "Four glass circles on the cord — purpose unknown",
-          "Vash arrives before first light — the room will not be empty long",
-          "Leth waiting in the corridor — cannot hold the lamp all night",
+          "Vash returns before first light — the room will not be empty long",
+          "Leth waiting in the corridor — cannot hold the lamp indefinitely",
           "The four characters on Calvar's diagram remain uninterpreted"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "leth",
-          "name": "Leth",
-          "note": "Led Silas to the rear corridor midpoint and named the east room door with a single nod — then looked away. Her part of the work is done and she knows it.",
-          "learned": [
-            "Held the lamp and the boundary simultaneously — showed Silas the threshold without crossing it herself"
-          ],
-          "skillsObserved": [
-            "holding the boundary of her own authority precisely — going exactly as far as she said and no further"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Waiting in the rear corridor with a low lamp — Silas is inside Vash's room; she is the exit route"
-        }
-      ],
       "codexUpdates": [
         {
           "topic": "vash-lens-grinder-east-room",
           "label": "Vash — Lens-Grinder, East Room",
           "kind": "person",
           "entityId": "vash",
-          "fact": "Vash's east room contains four thin glass circles on a cord and a folded page in the same fast-pressed hand as the characters added to Calvar's diagram — confirming Vash as the diagram-marker and suggesting a pre-existing written record of whatever they added.",
+          "fact": "The folded page is three days old — written the same morning Calvar left the diagram with Leth, within hours of the corridor conversation. The hand is even, the pressure controlled. Vash was not frightened when they wrote it. They were decided. The paper is ordinary lens-wrapping stock — the work was invisible because the materials were already to hand.",
           "links": [
+            "find-the-engineer",
             "leth-archive-complaint",
             "calvar",
             "the-document-roll-leth-s-desk",
-            "radiant-plateau-edge",
-            "find-the-engineer"
+            "radiant-plateau-edge"
           ]
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "Vash's east room entered silently via Shadowstep — grinding wheel, lens-blanks, four glass circles on a cord, and a folded page in Vash's hand on the shelf. The room connects to the rear corridor through a door that is not locked.",
-          "subPlace": {
-            "name": "Vash's East Room — Rear Corridor Row",
-            "note": "Lens-grinder's workroom east of Leth's archive in the same three-room row. Grinding wheel at center; cord of four palm-sized glass circles; folded page in Vash's hand on the east shelf. Connects to shared rear corridor.",
-            "visited": true
-          }
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short, quiet corridor crossing — minutes only"
-      },
-      "imagePrompt": "A figure stands motionless inside a stone workroom in full dark, arrived from shadow. At center, a heavy grinding wheel. Along the far wall, four small glass circles hang on wire loops from a cord strung between two pegs, catching the faint line of lamplight under the door — each one a perfect dim moon. On the shelf below, a folded page half-hidden behind a tin. The room holds its breath.",
-      "momentArt": "https://image.pollinations.ai/prompt/A%20figure%20stands%20motionless%20inside%20a%20stone%20workroom%20in%20full%20dark%2C%20arrived%20from%20shadow.%20At%20center%2C%20a%20heavy%20grinding%20wheel.%20Along%20the%20far%20wall%2C%20four%20small%20glass%20circles%20hang%20on%20wire%20loops%20from%20a%20cord%20strung%20between%20two%20pegs%2C%20catching%20the%20faint%20line%20of%20lamplight%20under%20the%20door%20%E2%80%94%20each%20one%20a%20perfect%20dim%20m%2C%20dark%2C%20intense%2C%20dramatic%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=22802&nologo=true"
+        "why": "A brief read in the dark — no movement, quiet work"
+      }
     },
     "sceneState": {
-      "setting": "Vash's east room, Edge District — entered silently via Shadowstep from the rear corridor. Stone-walled, no lamp, the only light a thin line under the door from Leth's lamp in the corridor. Grinding wheel at center; lens-work debris on every surface.",
+      "setting": "Vash's east room, Edge District — stone-walled, entered via Shadowstep through the rear corridor. No lamp; thin line of light under the door from Leth's lamp in the corridor outside. Grinding wheel at center, lens-work debris on every surface.",
       "npcsPresent": [
         {
           "name": "Leth",
-          "state": "Waiting in the rear corridor, lamp low, facing away — she has done her part"
+          "state": "Waiting in the rear corridor, lamp low, facing away — her part done, holding the threshold"
         },
         {
           "name": "Pell",
@@ -798,7 +773,7 @@
         },
         {
           "name": "Huginn",
-          "state": "Still on the sign board outside — attending from a distance"
+          "state": "On the sign board outside — attending from a distance"
         }
       ],
       "objects": [
@@ -806,17 +781,17 @@
         "Lens-blanks at multiple stages of polish",
         "Ranked row of shaping stones",
         "Two cloth pads darkened with rouge compound",
-        "Cord strung between two wall pegs — four thin glass circles on wire loops, each ",
+        "Cord strung between two wall pegs — four thin glass circles on wire loops",
         "Low shelf along east wall — paper-wrapped parcels",
-        "Folded page on the shelf, half-hidden behind a covered tin — in the same fast-pr",
+        "Folded page on the shelf, half-hidden behind a covered tin — three days old, Vas",
         "Memory (spear) — left leaning in Leth's archive room",
         "Fendt's Testimony — folded page in Silas's coat"
       ],
       "threads": [
-        "Folded page in Vash's hand — content unknown",
+        "Folded page on shelf — content still unread; four characters match the diagram annotation",
         "Four glass circles on the cord — purpose unknown",
-        "Vash arrives before first light — the room will not be empty long",
-        "Leth waiting in the corridor — cannot hold the lamp all night",
+        "Vash returns before first light — the room will not be empty long",
+        "Leth waiting in the corridor — cannot hold the lamp indefinitely",
         "The four characters on Calvar's diagram remain uninterpreted"
       ]
     }
@@ -2760,7 +2735,8 @@
           "[d3] Occupies the east room of the same three-room row as Leth's archive. Does piecework for the optics weavers — in before first light, gone by midday. Was on the grinding wheel the morning Calvar came an",
           "[d3] Piecework lens-grinder of the Edge District — the one whose wheel was turning before the district woke, and who understands the array's optical layer the way water understands a crack",
           "[d3] Leth confirmed the rear corridor access does not lock from the archive side — Vash could have entered during either night after Calvar left the diagram. Leth has agreed to lead Silas to the corridor d",
-          "[d3] Vash's east room contains four thin glass circles on a cord and a folded page in the same fast-pressed hand as the characters added to Calvar's diagram — confirming Vash as the diagram-marker and sugg"
+          "[d3] Vash's east room contains four thin glass circles on a cord and a folded page in the same fast-pressed hand as the characters added to Calvar's diagram — confirming Vash as the diagram-marker and sugg",
+          "[d3] The folded page is three days old — written the same morning Calvar left the diagram with Leth, within hours of the corridor conversation. The hand is even, the pressure controlled. Vash was not frigh"
         ],
         "links": [
           "leth-archive-complaint",
@@ -2779,18 +2755,18 @@
     }
   },
   "tendencies": {
-    "strategic": 24.70723387313607,
-    "cerebral": 25.89639289006153,
-    "social": 21.62417177201788,
-    "generous": 4.51117408720666,
-    "cautious": 20.274353586984734,
-    "physical": 0.9802247008903016,
-    "risky": 2.7601155840737093,
-    "ruthless": 1.2136947976095267,
-    "carousing": 0.8522592390439906,
-    "amorous": 2.337017133325546,
-    "patient": 1.5649879877632467,
-    "stealth": 1
+    "strategic": 24.089553026307666,
+    "cerebral": 26.24898306780999,
+    "social": 21.083567477717434,
+    "generous": 4.398394735026494,
+    "cautious": 19.767494747310117,
+    "physical": 0.955719083368044,
+    "risky": 2.6911126944718666,
+    "ruthless": 1.1833524276692886,
+    "carousing": 0.8309527580678908,
+    "amorous": 2.278591704992407,
+    "patient": 1.5258632880691654,
+    "stealth": 0.975
   },
   "aptitudes": [
     "strategist",
@@ -2801,7 +2777,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 366,
+  "actionCount": 367,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2967,8 +2943,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784292232086,
-  "rev": 527,
+  "updatedAt": 1784292465236,
+  "rev": 528,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3298,8 +3274,8 @@
           "entityId": "vash",
           "type": "npc",
           "birthWeight": 10,
-          "engagementScore": 2,
-          "tier": "fresh",
+          "engagementScore": 3,
+          "tier": "established",
           "rating": "R",
           "provenance": {
             "playerKey": "player-s9z9u1",
@@ -3311,6 +3287,10 @@
             "why": "Leth has just named Vash as the person who was on the grinding wheel the morning Calvar came — potentially the overhear "
           },
           "attentionHistory": [
+            {
+              "kind": "fact",
+              "day": 3
+            },
             {
               "kind": "fact",
               "day": 3
@@ -3581,7 +3561,7 @@
       "numen_sense": 3,
       "lightsense": 2,
       "order_sense": 43,
-      "palework": 21,
+      "palework": 22,
       "deathsense": 15,
       "shadowstep": 9,
       "the-attended-end": 12,
@@ -3687,7 +3667,7 @@
   "syncedAt": 1784258397417,
   "teachers": {},
   "regionsKnown": {
-    "valley": 181
+    "valley": 182
   },
   "foreclosed": [
     "rootkin",
@@ -3724,10 +3704,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-17T12:35:15.912Z",
-      "lastAt": "2026-07-17T12:43:52.066Z",
+      "lastAt": "2026-07-17T12:47:45.233Z",
       "startDay": 17,
       "endDay": 17,
-      "beats": 4
+      "beats": 5
     }
   ],
   "company": [

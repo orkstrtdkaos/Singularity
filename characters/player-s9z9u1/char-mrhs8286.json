@@ -77,7 +77,7 @@
     "concrete_abstract": -0.05328384007186973,
     "death_life": -0.1942740056406489,
     "emotional_logical": 0.03083749999999999,
-    "falsehood_truth": 0.22624260501085935,
+    "falsehood_truth": 0.24493047476031637,
     "demonic_angelic": 0.03,
     "value": 0.0435
   },
@@ -680,111 +680,95 @@
         "player": "Say nothing yet — step inside, look at what the room holds, and let Order-Sense read the design before you commit to a shape",
         "summary": "Silas crosses into Calvar's room and reads the design — a node built for receiving, not hiding; a man who arranged his space for this arrival.",
         "narration": "You cross the threshold behind Pell without a word.\n\nThe room is small and purposeful — drafting surface to the left, a single lamp on its corner, a shelf of ruled papers bundled with cotton cord. A stool. A coat on a hook. The bed is against the far wall, made with the precision of someone who has slept alone in orderly rooms for a long time. Calvar stands a pace back from the door, weight on his heels, watching the three of you arrive the way a man watches weather he has been tracking for a week.\n\nYou let Order-Sense open, quietly, the way you'd set a hand flat on a surface to feel for heat. Not a push — just a listening. The lattice is thin here, the substrate starved, and the craft comes back half-fed: impressions rather than certainties, the shape of a design rather than its full blueprint.\n\nWhat it gives you: this room is a node, not a terminus. The drafting surface holds work that feeds outward — documents meant to reach other hands. The lamp's position is deliberate, the chair angled toward the door rather than the window. Calvar arranged this room for receiving, not for hiding. The design he is part of is larger than the room, and he knows it, and he has been waiting here for someone to arrive who is also part of it — though he does not yet know if you are the right shape.\n\nHuginn drops from your pack strap to the back of the empty stool without invitation and folds its wings. Calvar watches it land. He does not flinch. Whatever he was expecting, the bird does not exceed it."
+      },
+      {
+        "player": "Ask him plainly: 'You said you wondered what shape it would come in. What shape were you hoping for?'",
+        "summary": "Calvar names what he was waiting for — honest strangers who followed the chain from the river end — and asks to hear what they found before he speaks.",
+        "narration": "You let the room settle for three breaths — Pell steady at your left, Huginn a dark weight on the stool behind you, Calvar still watching with that patient, tracking-weather look — and then you ask it plainly.\n\n\"You said you wondered what shape it would come in. What shape were you hoping for?\"\n\nCalvar looks at you for a moment without moving. Not surprised by the directness; something closer to relieved by it. He crosses to the drafting surface, not hurried, and sets one hand flat on the nearest bundled papers the way you'd press a wound you'd been walking on.\n\n\"Honest, mostly.\" His voice is dry and unhurried — the voice of a man who has given up waiting for things to be easier. \"I left the diagram with Leth because I wanted someone outside the hierarchy to read it. I didn't know who. I knew the shape: someone who'd followed the chain from the river end, not from the council end. Someone the board couldn't trace back to me through the usual paths.\" He glances at Huginn, briefly and without alarm, then back to you. \"The bird was not what I pictured, but it isn't wrong.\"\n\nHe pulls the chair out from the drafting surface and doesn't sit in it — angles it toward the three of you instead. An offering, not a retreat. \"I've been waiting three days. I'd like to hear what you found before I tell you what I know, if that's acceptable — I want to know how much of the chain you've closed on your own. It matters for what I say next.\""
       }
     ],
     "lastTurn": {
-      "narration": "You cross the threshold behind Pell without a word.\n\nThe room is small and purposeful — drafting surface to the left, a single lamp on its corner, a shelf of ruled papers bundled with cotton cord. A stool. A coat on a hook. The bed is against the far wall, made with the precision of someone who has slept alone in orderly rooms for a long time. Calvar stands a pace back from the door, weight on his heels, watching the three of you arrive the way a man watches weather he has been tracking for a week.\n\nYou let Order-Sense open, quietly, the way you'd set a hand flat on a surface to feel for heat. Not a push — just a listening. The lattice is thin here, the substrate starved, and the craft comes back half-fed: impressions rather than certainties, the shape of a design rather than its full blueprint.\n\nWhat it gives you: this room is a node, not a terminus. The drafting surface holds work that feeds outward — documents meant to reach other hands. The lamp's position is deliberate, the chair angled toward the door rather than the window. Calvar arranged this room for receiving, not for hiding. The design he is part of is larger than the room, and he knows it, and he has been waiting here for someone to arrive who is also part of it — though he does not yet know if you are the right shape.\n\nHuginn drops from your pack strap to the back of the empty stool without invitation and folds its wings. Calvar watches it land. He does not flinch. Whatever he was expecting, the bird does not exceed it.",
-      "sceneSummary": "Silas crosses into Calvar's room and reads the design — a node built for receiving, not hiding; a man who arranged his space for this arrival.",
+      "narration": "You let the room settle for three breaths — Pell steady at your left, Huginn a dark weight on the stool behind you, Calvar still watching with that patient, tracking-weather look — and then you ask it plainly.\n\n\"You said you wondered what shape it would come in. What shape were you hoping for?\"\n\nCalvar looks at you for a moment without moving. Not surprised by the directness; something closer to relieved by it. He crosses to the drafting surface, not hurried, and sets one hand flat on the nearest bundled papers the way you'd press a wound you'd been walking on.\n\n\"Honest, mostly.\" His voice is dry and unhurried — the voice of a man who has given up waiting for things to be easier. \"I left the diagram with Leth because I wanted someone outside the hierarchy to read it. I didn't know who. I knew the shape: someone who'd followed the chain from the river end, not from the council end. Someone the board couldn't trace back to me through the usual paths.\" He glances at Huginn, briefly and without alarm, then back to you. \"The bird was not what I pictured, but it isn't wrong.\"\n\nHe pulls the chair out from the drafting surface and doesn't sit in it — angles it toward the three of you instead. An offering, not a retreat. \"I've been waiting three days. I'd like to hear what you found before I tell you what I know, if that's acceptable — I want to know how much of the chain you've closed on your own. It matters for what I say next.\"",
+      "sceneSummary": "Calvar names what he was waiting for — honest strangers who followed the chain from the river end — and asks to hear what they found before he speaks.",
       "choices": [
         {
-          "label": "Let Pell open — professional case first, the evidence chain: Fendt's testimony, Rennic in the intake log, the diagram Calvar left with Leth",
+          "label": "Lay out the chain cleanly: Fendt's testimony, Grael named, Vash's eyewitness account, Rennic in the intake log, the four marks added to the diagram — give him the full picture",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "persuade",
+            "negotiate"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Let Pell anchor the professional case first — the ledger chain, Grael, the six-week window — and hold the father's notation until Calvar shows what he knows about the seventh-band authorship",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.8
-          },
           "difficulty": 0,
           "intentTags": [
             "persuade",
             "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Name what Order-Sense showed — this room is a node, his design reaches outward, and you are here to ask him to reach with you",
+          "label": "Give him the shape without the detail — the river end, the board, the archive breach, the diagram — and ask what he knows before you hand over anything that names names",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "concrete_abstract": 0.5
-          },
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
-            "persuade",
-            "study"
+            "negotiate",
+            "careful"
           ],
-          "abilityId": "order_sense",
+          "trivial": true
+        },
+        {
+          "label": "Read him first — let Order-Sense or The Attended End sit quietly on the room while Pell gives him the opening summary; you want to know what is ending here and how the design wants to close before you commit to a shape",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "the-attended-end",
           "energyCost": 2,
-          "trivial": false
-        },
-        {
-          "label": "Lay Fendt's Testimony on the drafting surface — no preamble, let the document speak first and watch what recognition does to his face",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "falsehood_truth": 0.9
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "persuade",
-            "gamble"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Ask him plainly: 'You said you wondered what shape it would come in. What shape were you hoping for?'",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.6
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "persuade",
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -2
-      },
       "scene": {
-        "setting": "Calvar's room above the cooperage, east lane, Edge District — evening, early-spring. Inside now: lamp on the drafting surface corner, ruled papers bundled on a shelf, coat on a hook, bed against the far wall. Calvar standing a pace back from the door, weight on his heels, watching.",
+        "setting": "Calvar's room above the cooperage, east lane, Edge District — evening, early-spring. Lamp on the drafting surface corner, bundled ruled papers on the shelf, coat on a hook, bed against the far wall. Calvar has pulled the chair out from the drafting surface and angled it toward the three visitors — an offering, not a retreat.",
         "npcsPresent": [
           {
             "name": "Calvar",
-            "state": "Standing a pace back from the threshold, weight on his heels — watching all three arrivals settle, the bird's landing noted without flinching. Waiting."
+            "state": "Standing beside the drafting surface, one hand flat on the bundled papers, chair angled toward the visitors — waiting to hear what they found."
           },
           {
             "name": "Pell",
-            "state": "Inside the threshold, Memory under her right arm, weight even. Reading the room; strategy held in reserve."
+            "state": "Left of Silas, weight even, Memory under her arm. Professional case intact; father's name held."
           },
           {
             "name": "Huginn",
-            "state": "Settled on the back of the empty stool, wings folded. Very still."
+            "state": "On the stool's back, wings folded. Calvar looked at it once without alarm — it was not what he pictured, but he didn't say it was wrong."
           }
         ],
         "objects": [
           "Drafting surface — left of the door, lamp on its corner, papers ruled and stacked",
           "Shelf of bundled documents — cotton-cord tied, organized",
-          "Empty stool — Huginn now perched on its back",
+          "Chair — angled toward the visitors, pulled from the drafting surface",
+          "Empty stool — Huginn perched on its back",
           "Coat on a hook by the door",
           "Bed against the far wall — made precisely",
           "Memory (spear) — under Pell's right arm",
           "Fendt's Testimony — folded page in Silas's coat"
         ],
         "threads": [
-          "Calvar said 'I wondered what shape it would come in' — what shape was he hoping for?",
-          "Order-Sense reads this room as a node: documents meant to reach other hands, chair angled for receiving — Calvar knows he is part of a larger design",
-          "Huginn landed on the stool without invitation; Calvar did not flinch — his expectations are wider than ordinary",
-          "Pell's strategy: professional case first, her father's name held in reserve"
+          "Calvar is waiting to hear what chain they've closed before he speaks — what he says next depends on what they know",
+          "He left the diagram with Leth because he wanted someone outside the hierarchy — he chose his shape deliberately",
+          "The bird was not what he pictured — but he said it isn't wrong; his expectations are wider than ordinary",
+          "Pell's strategy: professional case first, father's name held until the room earns it"
         ]
       },
       "npcUpdates": [
@@ -792,24 +776,18 @@
           "op": "update",
           "npcId": "calvar",
           "name": "Calvar",
-          "note": "Watched all three enter without moving — the bird landing on his stool did not exceed whatever he was expecting. Weight on heels, patient. Waiting for whoever speaks first.",
+          "note": "Named what he was waiting for — honest strangers who followed the chain from the river end. Asked to hear what they found before he speaks; pulled the chair out and angled it toward them.",
           "learned": [
-            "Did not flinch at Huginn's landing — his expectations are wider than ordinary visitors",
-            "Room arranged for receiving: chair angled toward the door, lamp positioned for a working meeting, documents meant to travel outward"
+            "He left the diagram with Leth deliberately — he wanted someone outside the hierarchy to read it, someone untraceable back through the usual paths",
+            "He has been waiting three days",
+            "He wants to know how much of the chain they've closed before he commits to what he says next",
+            "He accepted Huginn's presence without alarm — 'not what I pictured, but it isn't wrong'"
           ],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "In his room above the cooperage — threshold cleared, three visitors inside, waiting for the conversation to begin"
-        },
-        {
-          "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "note": "Crossed the threshold cleanly — inside now, reading the room. Strategy intact: professional case first.",
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Inside Calvar's room, Memory under her right arm — professional case ready, father's name held in reserve"
+          "skillsObserved": [
+            "precise self-positioning under uncertainty — named what he needed without naming what he feared"
+          ],
+          "relationshipDelta": 1,
+          "statusNote": "In his room above the cooperage — threshold cleared, chair angled for the visitors, waiting to hear the chain before he speaks."
         }
       ],
       "codexUpdates": [
@@ -818,50 +796,52 @@
           "label": "Calvar — the Engineer",
           "kind": "person",
           "entityId": "calvar",
-          "fact": "Order-Sense reads his room as a node, not a terminus — documents meant to reach other hands, chair angled toward the door for receiving. He arranged this space for an arrival he anticipated. He is part of a larger design and knows it; he does not yet know if Silas is the right shape.",
+          "fact": "Left the diagram with Leth as a deliberate gambit — he wanted someone outside the Radiant hierarchy to follow the chain from the river end, not the council end, so it couldn't be traced back to him through usual paths. He has been waiting three days for exactly this arrival. He will speak — but he wants to know how much they've closed before he decides what to say.",
           "links": [
             "find-the-engineer",
-            "the-edge-district-ledger",
+            "leth-archive-complaint",
             "the-water-crisis",
-            "radiant-plateau-edge"
+            "the-document-roll-leth-s-desk",
+            "the-edge-district-ledger"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "Crossing the threshold and reading the room — a brief, quiet beat"
+        "why": "A short exchange at the threshold — the room settling, a direct question answered."
       }
     },
     "sceneState": {
-      "setting": "Calvar's room above the cooperage, east lane, Edge District — evening, early-spring. Inside now: lamp on the drafting surface corner, ruled papers bundled on a shelf, coat on a hook, bed against the far wall. Calvar standing a pace back from the door, weight on his heels, watching.",
+      "setting": "Calvar's room above the cooperage, east lane, Edge District — evening, early-spring. Lamp on the drafting surface corner, bundled ruled papers on the shelf, coat on a hook, bed against the far wall. Calvar has pulled the chair out from the drafting surface and angled it toward the three visitors — an offering, not a retreat.",
       "npcsPresent": [
         {
           "name": "Calvar",
-          "state": "Standing a pace back from the threshold, weight on his heels — watching all three arrivals settle, the bird's landing no"
+          "state": "Standing beside the drafting surface, one hand flat on the bundled papers, chair angled toward the visitors — waiting to"
         },
         {
           "name": "Pell",
-          "state": "Inside the threshold, Memory under her right arm, weight even. Reading the room; strategy held in reserve."
+          "state": "Left of Silas, weight even, Memory under her arm. Professional case intact; father's name held."
         },
         {
           "name": "Huginn",
-          "state": "Settled on the back of the empty stool, wings folded. Very still."
+          "state": "On the stool's back, wings folded. Calvar looked at it once without alarm — it was not what he pictured, but he didn't s"
         }
       ],
       "objects": [
         "Drafting surface — left of the door, lamp on its corner, papers ruled and stacke",
         "Shelf of bundled documents — cotton-cord tied, organized",
-        "Empty stool — Huginn now perched on its back",
+        "Chair — angled toward the visitors, pulled from the drafting surface",
+        "Empty stool — Huginn perched on its back",
         "Coat on a hook by the door",
         "Bed against the far wall — made precisely",
         "Memory (spear) — under Pell's right arm",
         "Fendt's Testimony — folded page in Silas's coat"
       ],
       "threads": [
-        "Calvar said 'I wondered what shape it would come in' — what shape was he hoping for?",
-        "Order-Sense reads this room as a node: documents meant to reach other hands, chair angled for receiving — Calvar knows he is part of a larger design",
-        "Huginn landed on the stool without invitation; Calvar did not flinch — his expectations are wider than ordinary",
-        "Pell's strategy: professional case first, her father's name held in reserve"
+        "Calvar is waiting to hear what chain they've closed before he speaks — what he says next depends on what they know",
+        "He left the diagram with Leth because he wanted someone outside the hierarchy — he chose his shape deliberately",
+        "The bird was not what he pictured — but he said it isn't wrong; his expectations are wider than ordinary",
+        "Pell's strategy: professional case first, father's name held until the room earns it"
       ]
     }
   },
@@ -1639,22 +1619,27 @@
         "locationId": "radiant_plateau_edge",
         "day": 3
       },
-      "relationship": 1,
+      "relationship": 2,
       "history": [
         "[d3] Opened his door without alarm — said 'I wondered what shape it would come in' and stepped back from the threshold. Not a full welcome; a clearance with conditions attached.",
-        "[d3] Watched all three enter without moving — the bird landing on his stool did not exceed whatever he was expecting. Weight on heels, patient. Waiting for whoever speaks first."
+        "[d3] Watched all three enter without moving — the bird landing on his stool did not exceed whatever he was expecting. Weight on heels, patient. Waiting for whoever speaks first.",
+        "[d3] Named what he was waiting for — honest strangers who followed the chain from the river end. Asked to hear what they found before he speaks; pulled the chair out and angled it towar"
       ],
       "knownFacts": [
         "Has been waiting for someone to arrive — the phrasing 'I wondered' implies anticipation, not surprise",
         "Looked at Huginn for one longer beat than the others, with deliberate non-reaction — not unfamiliar with the strange",
         "Did not flinch at Huginn's landing — his expectations are wider than ordinary visitors",
-        "Room arranged for receiving: chair angled toward the door, lamp positioned for a working meeting, documents meant to travel outward"
+        "Room arranged for receiving: chair angled toward the door, lamp positioned for a working meeting, documents meant to travel outward",
+        "He left the diagram with Leth deliberately — he wanted someone outside the hierarchy to read it, someone untraceable back through the usual paths",
+        "He has been waiting three days",
+        "He wants to know how much of the chain they've closed before he commits to what he says next"
       ],
       "skillsObserved": [
-        "receiving unexpected visitors without flinching"
+        "receiving unexpected visitors without flinching",
+        "precise self-positioning under uncertainty — named what he n"
       ],
       "status": "active",
-      "statusNote": "In his room above the cooperage — threshold cleared, three visitors inside, waiting for the conversation to begin",
+      "statusNote": "In his room above the cooperage — threshold cleared, chair angled for the visitors, waiting to hear the chain before he speaks.",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 3
@@ -2815,7 +2800,8 @@
           "[d3] Calvar left the diagram with Leth with specific verbal instructions: hold it off the shelves, under the cord, until someone came asking about the seventh band or the lower filtration ledge. He anticip",
           "[d3] Deathsense read him at close range — his own ending is decades off, nothing urgent. The arrangement he is attending is a decision's ending: he left instructions with Leth and has been waiting three da",
           "[d3] Opened his door on the first knock and said 'I wondered what shape it would come in' — he was expecting someone to arrive and is willing to receive them. He looked at Huginn for a long beat without fl",
-          "[d3] Order-Sense reads his room as a node, not a terminus — documents meant to reach other hands, chair angled toward the door for receiving. He arranged this space for an arrival he anticipated. He is par"
+          "[d3] Order-Sense reads his room as a node, not a terminus — documents meant to reach other hands, chair angled toward the door for receiving. He arranged this space for an arrival he anticipated. He is par",
+          "[d3] Left the diagram with Leth as a deliberate gambit — he wanted someone outside the Radiant hierarchy to follow the chain from the river end, not the council end, so it couldn't be traced back to him th"
         ],
         "links": [
           "find-the-engineer",
@@ -2916,18 +2902,18 @@
     }
   },
   "tendencies": {
-    "strategic": 23.82237149952782,
-    "cerebral": 23.667649186123775,
-    "social": 19.411004342630267,
-    "generous": 5.314749662238288,
-    "cautious": 16.643269123918216,
-    "physical": 0.7609774703962827,
-    "risky": 2.1427594849038876,
-    "ruthless": 0.9422272220636347,
-    "carousing": 0.6616340919184172,
-    "amorous": 1.81429562504962,
-    "patient": 1.2149465311851204,
-    "stealth": 0.7763296208564376
+    "strategic": 23.226812212039622,
+    "cerebral": 24.07595795647068,
+    "social": 19.92572923406451,
+    "generous": 5.181880920682331,
+    "cautious": 16.22718739582026,
+    "physical": 0.7419530336363757,
+    "risky": 2.0891904977812903,
+    "ruthless": 0.9186715415120439,
+    "carousing": 0.6450932396204567,
+    "amorous": 1.7689382344233795,
+    "patient": 1.1845728679054923,
+    "stealth": 0.7569213803350267
   },
   "aptitudes": [
     "strategist",
@@ -2938,7 +2924,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 376,
+  "actionCount": 377,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3104,8 +3090,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784297318883,
-  "rev": 543,
+  "updatedAt": 1784298370855,
+  "rev": 544,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3361,7 +3347,7 @@
           "entityId": "calvar",
           "type": "npc",
           "birthWeight": 10,
-          "engagementScore": 9,
+          "engagementScore": 12,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -3380,6 +3366,14 @@
             },
             {
               "kind": "fact",
+              "day": 3
+            },
+            {
+              "kind": "fact",
+              "day": 3
+            },
+            {
+              "kind": "interact",
               "day": 3
             },
             {
@@ -3859,7 +3853,7 @@
   "syncedAt": 1784292613822,
   "teachers": {},
   "regionsKnown": {
-    "valley": 191
+    "valley": 192
   },
   "foreclosed": [
     "rootkin",
@@ -3896,10 +3890,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-17T12:35:15.912Z",
-      "lastAt": "2026-07-17T14:08:38.882Z",
+      "lastAt": "2026-07-17T14:26:10.854Z",
       "startDay": 17,
       "endDay": 17,
-      "beats": 14,
+      "beats": 15,
       "_recapBusy": false,
       "_recapError": null,
       "recap": "Day seventeen passed through Silas Weir like weather through an open window — present, felt, and gone without leaving a mark anyone could name. No blood on his hands, no new doors opened or closed, no word carried to ears that needed it. He existed inside the hours, which is its own kind of labor, the kind that leaves no scar but slowly shapes the bone beneath. The world held its breath, and Silas held his alongside it."

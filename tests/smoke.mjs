@@ -31,6 +31,7 @@ import { recordCoUse, coUseCount, currentStage, refreshEvolvingItems, noteCoUseA
 import { homeClassOf, isCrossClass, skillPointCost, forkFor, forkPending, chosenFork, setFork, rankExpression, forkPaths, skillGraphModel, nativeGrantsFor, combinationsAvailableFor } from "../engine/skilltree.js";
 import { combinationThresholdMet, ripeAxisTouchCombinations } from "../engine/practice.js";
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, familyClass, FUNCTION_FAMILIES, FAMILY_COLOR, FAMILY_GLYPH, FAMILY_SHAPE, shapeOfFamily } from "../engine/functions.js";
+import { arcSeed, fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc } from "../engine/personalArc.js";
 import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, applySurgeBacklash, surgeBacklash, intensityOptions } from "../engine/intensity.js";
 import { validate, missingRequired, defaultFor } from "../engine/genschema.js";
 import { generate, ensureGenerated, resolveExisting, mintId, repairEntity, stubEntity, birthWeightOf, buildGeneratePrompt, generatedRecords, GEN_TYPES, isMinorEntity, enforceFloors, recordAttention, effectiveWeight, recomputeTier, isDormant, isSurfaceable, livingWorldForGM, findGenerated, nominationsFor } from "../engine/generate.js";
@@ -3487,6 +3488,46 @@ await (async () => {
   const boosted = birthWeightOf({ character: { level: 4 }, contentGenerator: true });
   check("SNG-132: a content-generator's birthWeight is boosted above a plain author's (heavier realness)", boosted > plain);
   check("SNG-132: the boost never eclipses authored core (weight 100 still outranks a level-4 generator's mint)", boosted < 100);
+}
+
+// --- SNG-133: every backstory seeds a personal quest arc (bound to the character, SNG-132 runs it) ---
+{
+  const rich = { name: "Aelyn Kantoro", playerKey: "player-7fah99", origin: "rootkin", domains: { primary: "rootkin", secondary: "seraphic" },
+    bio: { motivation: "to find what happened to my father", story: "A hidden forest, a mother whose nature-magic was dying, a father consumed by the nanites he never gave up — he told us to hide, and it took him.", hometown: "the hidden forest" } };
+  const thin = { name: "Grix", playerKey: "player-z", origin: "valley", domains: { primary: "wright" }, bio: { story: "" }, whyHere: "I wander." };
+
+  // fallback: ALWAYS a valid bound arc (never zero) — passes isRealQuest so SNG-132's gate can surface it
+  const fa = fallbackPersonalArc(rich);
+  check("SNG-133: a personal arc is a valid bound structured quest (stakes + 3 stages + outcomes) — isRealQuest",
+    isRealQuest(fa) && fa.stages.length === 3 && fa.boundToCharacter === "Aelyn Kantoro" && fa.boundToPlayer === "player-7fah99" && /_personal_arc$/.test(fa.arcId));
+  check("SNG-133: the fallback seeds premise/stakes from the bio (motivation + home), routes from domains",
+    /father/i.test(fa.premise) && !!fa.stakes && !!fa.routes.rootkin);
+  // a thin bio STILL gets an arc (never zero) — scaled down to a modest hook
+  const ft = fallbackPersonalArc(thin);
+  check("SNG-133: a thin/empty backstory still yields a bound arc (never a wall of nothing)", isRealQuest(ft) && ft.boundToCharacter === "Grix" && ft.stages.length === 3);
+  check("SNG-133: arcSeed flags a thin bio (modest hook) vs a rich one (epic)", arcSeed(thin).thin === true && arcSeed(rich).thin === false);
+
+  // the fallback arc surfaces ONLY for its own character via the SNG-132 bound gate (no proximity)
+  check("SNG-133: the personal arc surfaces for its character via the SNG-132 bound gate, not for a stranger",
+    availableStructuredQuests({ name: "Aelyn Kantoro", playerKey: "player-7fah99", quests: [] }, [fa], {}).some(d => d.id === fa.id)
+    && !availableStructuredQuests({ name: "Someone", playerKey: "player-q", quests: [] }, [fa], {}).some(d => d.id === fa.id));
+
+  // the model prompt is facts-only, ceiling-bound, exemplar-guided
+  const p = buildPersonalArcPrompt(rich, { ratingLine: "PG-13 ceiling." });
+  check("SNG-133: the arc prompt uses the bio facts + the SNG-132 exemplar + the ceiling, invents nothing",
+    p.user.includes("father") && /exemplar|Reaching Light/i.test(p.system) && p.system.includes("PG-13 ceiling.") && /ONLY what the bio gives/i.test(p.system));
+
+  // sanitize: a well-formed model arc becomes the bound-arc shape (+ embedded legend NPC); malformed → fallback
+  const good = sanitizePersonalArc({ name: "The Vanished Father", premise: "a father lost to the machine", stakes: "reclaim or release", legend: { name: "Caelum", role: "the fallen one" }, stages: [{ objective: "a" }, { objective: "b" }, { objective: "c" }], routes: { reach: "reach him", release: "let him go" } }, rich);
+  check("SNG-133: sanitizePersonalArc coerces a model arc into the bound shape + embeds the legend NPC",
+    good.boundToPlayer === "player-7fah99" && good.stages.length === 3 && good.legendNpc?.name === "Caelum" && good.legend === "caelum" && good.outcomes.length === 2 && isRealQuest(good));
+  check("SNG-133: a malformed model reply falls back to the light arc (never a broken arc)",
+    isRealQuest(sanitizePersonalArc({ garbage: true }, rich)) && sanitizePersonalArc(null, rich).boundToCharacter === "Aelyn Kantoro");
+
+  // structuredQuestsForGM surfaces the personal arc's EMBEDDED legend (no catalog entry needed)
+  const activeAelyn = { name: "Aelyn Kantoro", playerKey: "player-7fah99", domains: { primary: "rootkin" }, quests: [{ ...good, structured: true, status: "active", stageIndex: 0 }] };
+  check("SNG-133: a generated arc's embedded legend surfaces to the GM (stage-gated, never foreclosed)",
+    /LEGEND — Caelum/.test(structuredQuestsForGM(activeAelyn)) && /never foreclose/i.test(structuredQuestsForGM(activeAelyn)));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

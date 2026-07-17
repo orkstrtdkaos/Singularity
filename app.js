@@ -25,6 +25,7 @@ import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ri
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs } from "./engine/companions.js";
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges } from "./engine/company.js";
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
+import { fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc } from "./engine/personalArc.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
 import { initWorldState, runWorldTick, syncSharedWorld, advanceGeneratedOffscreen, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
@@ -45,7 +46,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.91";
+const APP_VERSION = "1.8.92";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2015,7 +2016,13 @@ function renderCreate() {
     if (state._prologueReconcileNote) character._creationAside = state._prologueReconcileNote;
     ensureGallery(character);
     ensureCharacterPortrait(character); // SNG-035: born seeing the character (no-op unless art=generate)
+    // SNG-133: every character is born with a PRIMARY personal arc from the story they wrote. Seed a light
+    // fallback SYNCHRONOUSLY (never zero, no latency), then enrich it via the model in the background so
+    // creation isn't blocked; SNG-132's runtime surfaces + paces it (bound to this character).
+    character.personalArc = fallbackPersonalArc(character);
+    character._creationAside = [character._creationAside, `✦ Your story has become a thread here: *${character.personalArc.name}*.`].filter(Boolean).join(" ");
     saveCharacter(character); saveProfile(profile);
+    enrichPersonalArc(character); // best-effort, non-blocking (no-op without an API key)
     enterPlay();
   }
 
@@ -4496,7 +4503,7 @@ function renderQuestLog() {
       <div class="quest-note">${esc(stageLabel(x))}</div></button>`;
   const section = (title, list) => list.length ? `<div class="codex-group"><div class="codex-group-title">${title} (${list.length})</div>${list.map(row).join("")}</div>` : "";
   // SNG-065/SNG-112: authored quests startable HERE — giver present, at/adjacent to the quest's place, or thread already touched (not bare region).
-  const avail = availableStructuredQuests(character, CONTENT.quests || [], questOfferContext(character, sceneState));
+  const avail = availableStructuredQuests(character, [...(CONTENT.quests || []), ...(character.personalArc ? [character.personalArc] : [])], questOfferContext(character, sceneState));
   const availSection = avail.length ? `<div class="codex-group"><div class="codex-group-title">Available here (${avail.length})</div>${avail.map(def => `
       <div class="quest" style="margin:3px 0">
         <span class="quest-title">${esc(def.name)}</span> <span class="cost">${esc(String(def.axis || "").replace(/_/g, "↔"))}</span>
@@ -4668,6 +4675,22 @@ async function ensureSessionRecap(sessionId, force = false) {
   raw._recapBusy = false;
   saveCharacter(character);
   renderChronicle();
+}
+
+// SNG-133: enrich the seeded personal arc via the model (best-effort) — a richer premise/stakes/stages/
+// routes + a catalyst legend NPC, drawn from the bio (the SNG-132 arc as the quality bar). No API key →
+// the fallback arc simply stands. Non-blocking; the arc is bound to the character (SNG-132 runs it).
+async function enrichPersonalArc(char) {
+  if (!char || !getApiKey()) return; // no key → the light fallback arc stands
+  try {
+    const { system, user } = buildPersonalArcPrompt(char, { ratingLine: ratingLineForGM() });
+    const raw = await callClaudeJSON([{ role: "user", content: user }], { task: "generate", system });
+    const arc = sanitizePersonalArc(raw, char);
+    if (arc && arc.premise) {
+      char.personalArc = arc; // the legend NPC rides embedded (arc.legendNpc); the GM registers it on first meeting
+      saveCharacter(char);
+    }
+  } catch { /* the fallback arc stands — a hiccup never blocks creation */ }
 }
 
 // ---------- SNG-061: THE LIBRARY (the world's guide — open, readable, no discovery gate) ----------
@@ -5522,7 +5545,7 @@ function renderPlay(turn, opts = {}) {
         return `<button class="quest quest-click" data-quest="${esc(q.id)}"><span class="quest-title">${esc(q.title)}</span>${q.structured ? ` <span class="cost">✦</span>` : ""}
           <div class="quest-note">${esc(q.structured ? (stage?.objective || "resolve") : (q.progress?.length ? q.progress[q.progress.length - 1] : q.summary))}</div>
         </button>`; }).join("") || "<div class='insight'>no undertakings yet — the valley will provide</div>"}
-      ${(() => { const avail = availableStructuredQuests(character, CONTENT.quests || [], questOfferContext(character, sceneState)); return avail.length ? `<div class="hint" style="margin-top:4px">✦ ${avail.length} quest${avail.length === 1 ? "" : "s"} to take up here</div>` : ""; })()}
+      ${(() => { const avail = availableStructuredQuests(character, [...(CONTENT.quests || []), ...(character.personalArc ? [character.personalArc] : [])], questOfferContext(character, sceneState)); return avail.length ? `<div class="hint" style="margin-top:4px">✦ ${avail.length} quest${avail.length === 1 ? "" : "s"} to take up here</div>` : ""; })()}
       <button class="opt" id="open-questlog" style="display:block;width:100%;margin-top:4px">📜 Quest Log${(character.quests || []).some(q => q.status !== "active") ? ` — ${(character.quests || []).filter(q => q.status === "completed" || q.status === "resolved").length} done · ${(character.quests || []).filter(q => q.status === "failed").length} failed` : ""}</button>
     </div></details>
     ${(() => { // SNG-120/126: Company — Party (players) + Companions (catalog) + Allies (NPC party members, roles)

@@ -401,9 +401,9 @@ export function structuredQuestsForGM(character, opts = {}) {
     const stage = q.stages[q.stageIndex] || q.stages[q.stages.length - 1];
     const open = routesForCharacter(q, character).filter(r => r.open).map(r => r.trad);
     let line = `- [${q.id}] ${q.title} (axis: ${q.axis || "?"}) — STAKES: ${q.stakes}\n  Now: ${stage?.objective || "resolve"}${stage?.condition ? ` (${stage.condition})` : ""}${open.length ? `\n  This character's domains open: ${open.join(", ")}` : ""}`;
-    if (q.legend && (q.boundToCharacter || q.boundToPlayer)) {
-      const leg = npcs[q.legend];
-      const legName = leg?.name || q.legend;
+    if ((q.legend || q.legendNpc) && (q.boundToCharacter || q.boundToPlayer)) {
+      const leg = q.legendNpc || npcs[q.legend] || null; // SNG-133: a generated arc carries its legend inline
+      const legName = leg?.name || q.legend || "a distant force";
       const si = (q.stageIndex || 0) + 1, n = q.stages.length;
       line += `\n  LEGEND — ${legName}: a distant, turning-toward-this-character presence (${leg?.role || "a legendary force"}). This arc FOLLOWS ${character.name || "them"}; make ${legName} felt as a slow gravity, escalating ONLY as stages complete (now stage ${si}/${n}) — never dump the whole arc. The ending is HERS to decide; never foreclose it.`;
     }

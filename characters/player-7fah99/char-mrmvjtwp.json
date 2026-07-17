@@ -8,7 +8,7 @@
   "whyHere": "You were sent, or you were seeded, or you simply wanted to see something finish inside a single lifetime.",
   "background": "warden",
   "level": 1,
-  "xp": 33,
+  "xp": 40,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -43,7 +43,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 54,
+  "energy": 49,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -151,70 +151,106 @@
         "player": "Use Lifesense again — but this time reach not just toward the presence, but alongside it. Feel whether the Root-That-Remembers is still attending in the same way, or whether the sapling's disclosure changed something in its orientation.",
         "summary": "Lifesense finds the Root-That-Remembers has narrowed its attention from the room to Aelyn specifically.",
         "narration": "You press both palms flat against the moss this time, not just fingertips. The Lifesense opens differently than it did before — less like casting a line down and more like leaning against something that is already leaning back.\n\nThe Root-That-Remembers is still there. But the attending has shifted. Before, it felt like warmth diffusing toward a sound — curious, oriented, general. Now it has a quality you don't have a clean word for: the way a person stops scanning a room because they have found the face they were looking for. The warmth below hasn't intensified. It has narrowed. It is not listening to the conversation anymore. It is listening to you.\n\nBranch makes a small sound — a dry creak, like a door that has been left in the sun. One bud tilts upward.\n\nYou surface from the sense slowly, the moss cold under your palms where the morning hasn't reached yet. Maren has not moved. She is watching you the way she watches everything — as though she has all the time the city has, and she does."
+      },
+      {
+        "player": "Stay quiet and turn your attention inward — not to the Root-That-Remembers, but to yourself. The narrowing of its focus raises a question: what does it recognize in you that it is listening for?",
+        "summary": "Aelyn turns Lifesense inward and recognizes a frequency in herself that predates her craft — the register the Root-That-Remembers is listening for.",
+        "narration": "You don't reach outward this time. You let the Lifesense fold back on itself — not a cast line but a held breath — and turn it the only direction left: inward.\n\nWhat you find is not a neat answer. It is more like catching yourself in a mirror at an odd angle and recognizing the shape before you recognize the face. There is something in you that hums faintly at the same register as the warmth below. Not loud. Not structured. More like the frequency a tuning fork remembers after the sound has stopped. You have felt it before in small moments — when you climbed the high beeches at home and the bark seemed to receive your weight gladly, when Branch first moved toward you before you called it, when you spoke into the sapling's quiet just an hour ago and the word landed without resistance. You assumed it was the Grove. The Grove is part of it. But the groove is older than the ability. It runs somewhere deeper in you, and you have no name for it yet.\n\nWhat the Root-That-Remembers recognizes, you think, is not your craft. It is the register underneath your craft — the frequency that was there before you had a word for what you could do. Whether that register came from your mother's world or from something else you were born carrying, you cannot say. You only know that you have always had it, and until this moment you did not realize that something very old and very large might be able to hear it.\n\nYou lift your palms from the moss slowly. Maren is still watching you. Branch has one bud tipped fully open. The entrance hall holds its breath."
       }
     ],
     "lastTurn": {
-      "narration": "You press both palms flat against the moss this time, not just fingertips. The Lifesense opens differently than it did before — less like casting a line down and more like leaning against something that is already leaning back.\n\nThe Root-That-Remembers is still there. But the attending has shifted. Before, it felt like warmth diffusing toward a sound — curious, oriented, general. Now it has a quality you don't have a clean word for: the way a person stops scanning a room because they have found the face they were looking for. The warmth below hasn't intensified. It has narrowed. It is not listening to the conversation anymore. It is listening to you.\n\nBranch makes a small sound — a dry creak, like a door that has been left in the sun. One bud tilts upward.\n\nYou surface from the sense slowly, the moss cold under your palms where the morning hasn't reached yet. Maren has not moved. She is watching you the way she watches everything — as though she has all the time the city has, and she does.",
-      "sceneSummary": "Lifesense finds the Root-That-Remembers has narrowed its attention from the room to Aelyn specifically.",
+      "narration": "You don't reach outward this time. You let the Lifesense fold back on itself — not a cast line but a held breath — and turn it the only direction left: inward.\n\nWhat you find is not a neat answer. It is more like catching yourself in a mirror at an odd angle and recognizing the shape before you recognize the face. There is something in you that hums faintly at the same register as the warmth below. Not loud. Not structured. More like the frequency a tuning fork remembers after the sound has stopped. You have felt it before in small moments — when you climbed the high beeches at home and the bark seemed to receive your weight gladly, when Branch first moved toward you before you called it, when you spoke into the sapling's quiet just an hour ago and the word landed without resistance. You assumed it was the Grove. The Grove is part of it. But the groove is older than the ability. It runs somewhere deeper in you, and you have no name for it yet.\n\nWhat the Root-That-Remembers recognizes, you think, is not your craft. It is the register underneath your craft — the frequency that was there before you had a word for what you could do. Whether that register came from your mother's world or from something else you were born carrying, you cannot say. You only know that you have always had it, and until this moment you did not realize that something very old and very large might be able to hear it.\n\nYou lift your palms from the moss slowly. Maren is still watching you. Branch has one bud tipped fully open. The entrance hall holds its breath.",
+      "sceneSummary": "Aelyn turns Lifesense inward and recognizes a frequency in herself that predates her craft — the register the Root-That-Remembers is listening for.",
       "choices": [
         {
-          "label": "Tell Maren plainly: it shifted. It's not attending the conversation anymore — it's attending me. And ask what that has meant before, for the old ones who went down.",
+          "label": "Tell Maren what you just found — that it isn't the Grove it hears. Something older. Ask whether she has heard the Rootkin speak of a person carrying a different kind of root.",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {
+            "death_life": 0.3
+          },
           "difficulty": 0,
           "intentTags": [
-            "persuade"
+            "persuade",
+            "help"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Say nothing to Maren yet — reach instead through the Grove and ask the sapling directly whether it has ever felt the Root-That-Remembers focus this narrowly on a single person.",
+          "label": "Say nothing yet. Ask Maren if you may walk the edge of the entrance hall — closer to where the deep grain begins — and feel whether the narrowing shifts with your position.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "the_speaking_grove",
-          "energyCost": 4,
-          "trivial": false
-        },
-        {
-          "label": "Ask Maren the question you haven't asked yet: what happened to the old ones who went down to listen. Did they come back the same?",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "axes": {
+            "death_life": 0.5
+          },
           "difficulty": 0,
           "intentTags": [
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Stay quiet and turn your attention inward — not to the Root-That-Remembers, but to yourself. The narrowing of its focus raises a question: what does it recognize in you that it is listening for?",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "study",
+            "scout",
             "careful"
           ],
-          "trivial": false
+          "abilityId": "lifesense",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Maren the question you haven't asked yet: what happened to the old ones who went down to listen — did they come back changed, or not come back at all?",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "death_life": 0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Open your journal and write down what you felt — the frequency, the groove beneath the Grove, the recognition. Some things need to be named before they can be used.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
+      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -3
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 2
       },
+      "ledgerEvents": [],
+      "questUpdates": [],
       "scene": {
-        "setting": "Interior of the living-wood entrance hall — thirty-foot arched ceiling of breathing bark, moss underfoot, oval light-gaps advancing with the morning. Aelyn kneels at the planter's edge, both palms pressed flat into the moss. Maren stands one step away, watching steadily.",
+        "setting": "Interior of the living-wood entrance hall — thirty-foot arched ceiling of breathing bark, moss underfoot, oval light-gaps advancing with the morning. Aelyn kneels at the planter's edge, palms lifted from the moss, turned inward a moment ago. Maren stands one step away, watching steadily.",
         "npcsPresent": [
           {
             "name": "Maren",
-            "state": "Standing one step away, watching Aelyn surface from Lifesense — still waiting, unhurried."
+            "state": "Standing one step away, watching Aelyn surface from the inward turn — patient, reading something in her stillness."
           },
           {
             "name": "Branch",
-            "state": "One bud tilting slowly upward after a small creak — alert but still."
+            "state": "One bud tipped fully open, alert and still — watching Aelyn."
           },
           {
             "name": "Sapling-child",
@@ -229,15 +265,15 @@
           "Large root-planter holding the sapling-child",
           "Traveler's Pack (Aelyn's, worn canvas)",
           "Waterskin (Aelyn's)",
-          "Patches of old moss across the floor — both palms pressed into it",
+          "Patches of old moss across the floor — palms just lifted from it",
           "Oval light-gaps in the bark ceiling, morning light advancing"
         ],
         "threads": [
-          "The Root-That-Remembers has narrowed its attention from the room to Aelyn specifically — what that means is unspoken.",
-          "Maren's original question — what Aelyn intends to do with what she knows — still hangs unanswered.",
-          "What happened to the old ones who went down to listen is still unasked.",
-          "The two distant Rootkin are listening closely now.",
-          "Whether the sapling has felt this kind of focused attention before is unknown."
+          "The Root-That-Remembers has narrowed its attention to Aelyn specifically — she now suspects it recognizes a frequency in her older than her craft.",
+          "What that frequency is — from her mother's world, her father's, or something she was born carrying — is unnamed.",
+          "Maren's original question about Aelyn's intentions still hangs unanswered.",
+          "What happened to the old ones who went down to listen has not been asked.",
+          "The two distant Rootkin are listening closely."
         ]
       },
       "npcUpdates": [
@@ -245,43 +281,49 @@
           "op": "update",
           "npcId": "rootkin-tender",
           "name": "Maren",
-          "note": "Watched Aelyn press both palms into the moss and use Lifesense a second time — has not moved, is waiting for what she surfaces with.",
-          "learned": [
-            "The Root-That-Remembers has narrowed from attending the room to attending Aelyn specifically — Maren does not yet know this."
-          ],
-          "statusNote": "Standing one step from Aelyn in the entrance hall, watching her surface from a second Lifesense — waiting with full attention."
+          "note": "Watched Aelyn turn inward — reading something in the stillness that followed.",
+          "statusNote": "Standing one step from Aelyn in the entrance hall, watching her surface from an inward turn — waiting, unhurried.",
+          "relationshipDelta": 0
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Aelyn turned Lifesense inward and found a frequency in herself — older than her Grove-craft — that hums at the same register as the Root-That-Remembers. She does not yet know its origin.",
+          "subjectId": null
         }
       ],
       "codexUpdates": [
         {
-          "topic": "root-that-remembers",
-          "label": "The Root-That-Remembers",
+          "topic": "aelyn-inner-frequency",
+          "label": "The Frequency Beneath the Grove",
           "kind": "mystery",
-          "fact": "After the sapling's direction was spoken aloud, the Root-That-Remembers shifted its attention — no longer the whole room, but Aelyn specifically. It recognized something in her, and is now listening for it.",
+          "fact": "Lifesense turned inward revealed a resonance in Aelyn that predates her ability — a frequency the Root-That-Remembers recognized before she did. It is not the Grove itself but the register underneath it, present in small moments she has always taken for granted. Its origin — her mother's nature, her father's other world, or something born between them — is unknown.",
           "links": [
+            "root-that-remembers",
             "heartroot",
-            "sapling-child-heartroot",
-            "branch",
-            "rootkin-tender",
-            "the-watching-presence"
+            "the-watching-presence",
+            "branch"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief, still moment of sensing — barely a quarter hour has passed."
-      }
+        "why": "a brief inward turn and a few moments of quiet"
+      },
+      "placeUpdates": [],
+      "generateRequest": []
     },
     "sceneState": {
-      "setting": "Interior of the living-wood entrance hall — thirty-foot arched ceiling of breathing bark, moss underfoot, oval light-gaps advancing with the morning. Aelyn kneels at the planter's edge, both palms pressed flat into the moss. Maren stands one step away, watching steadily.",
+      "setting": "Interior of the living-wood entrance hall — thirty-foot arched ceiling of breathing bark, moss underfoot, oval light-gaps advancing with the morning. Aelyn kneels at the planter's edge, palms lifted from the moss, turned inward a moment ago. Maren stands one step away, watching steadily.",
       "npcsPresent": [
         {
           "name": "Maren",
-          "state": "Standing one step away, watching Aelyn surface from Lifesense — still waiting, unhurried."
+          "state": "Standing one step away, watching Aelyn surface from the inward turn — patient, reading something in her stillness."
         },
         {
           "name": "Branch",
-          "state": "One bud tilting slowly upward after a small creak — alert but still."
+          "state": "One bud tipped fully open, alert and still — watching Aelyn."
         },
         {
           "name": "Sapling-child",
@@ -296,15 +338,15 @@
         "Large root-planter holding the sapling-child",
         "Traveler's Pack (Aelyn's, worn canvas)",
         "Waterskin (Aelyn's)",
-        "Patches of old moss across the floor — both palms pressed into it",
+        "Patches of old moss across the floor — palms just lifted from it",
         "Oval light-gaps in the bark ceiling, morning light advancing"
       ],
       "threads": [
-        "The Root-That-Remembers has narrowed its attention from the room to Aelyn specifically — what that means is unspoken.",
-        "Maren's original question — what Aelyn intends to do with what she knows — still hangs unanswered.",
-        "What happened to the old ones who went down to listen is still unasked.",
-        "The two distant Rootkin are listening closely now.",
-        "Whether the sapling has felt this kind of focused attention before is unknown."
+        "The Root-That-Remembers has narrowed its attention to Aelyn specifically — she now suspects it recognizes a frequency in her older than her craft.",
+        "What that frequency is — from her mother's world, her father's, or something she was born carrying — is unnamed.",
+        "Maren's original question about Aelyn's intentions still hangs unanswered.",
+        "What happened to the old ones who went down to listen has not been asked.",
+        "The two distant Rootkin are listening closely."
       ]
     }
   },
@@ -576,17 +618,34 @@
         "aliases": [],
         "createdDay": 1,
         "updatedDay": 1
+      },
+      "aelyn-inner-frequency": {
+        "id": "aelyn-inner-frequency",
+        "label": "The Frequency Beneath the Grove",
+        "kind": "mystery",
+        "facts": [
+          "[d1] Lifesense turned inward revealed a resonance in Aelyn that predates her ability — a frequency the Root-That-Remembers recognized before she did. It is not the Grove itself but the register underneath "
+        ],
+        "links": [
+          "root-that-remembers",
+          "heartroot",
+          "the-watching-presence",
+          "branch"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "cerebral": 6.7332089647587425,
-    "cautious": 4.43119134616536,
-    "generous": 0.7763296208564376,
-    "social": 2.763216593499756
+    "cerebral": 7.564878740639774,
+    "cautious": 5.320411562511225,
+    "generous": 0.7569213803350267,
+    "social": 2.6941361786622617
   },
   "aptitudes": [],
-  "actionCount": 14,
+  "actionCount": 15,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -608,8 +667,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20mid-twenties%20with%20light%20blonde%2C%20faintly%20wavy%20hair%20cut%20in%20curtain%20bangs%2C%20the%20rest%20falling%20to%20the%20small%20of%20her%20back%20%E2%80%94%20usually%20worn%20in%20a%20french%20braid%20with%20the%20bangs%20left%20loose.%20Dark%20nature-green%20tank%20to%2C%20full-body%20character%20portrait%2C%20named%20Aelyn%20Kantoro%2C%20of%20the%20rootkin%2C%20warden%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Her%20mother%20dies%2C%20and%20she%20decides%20to%20go%20to%20the%20nanite%20world%2C%20to%20figure%20out%20why%20she%20is%20different%20than%20the%20pure%20nature%20peop%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=73420&nologo=true",
-  "updatedAt": 1784259535789,
-  "rev": 29,
+  "updatedAt": 1784260075690,
+  "rev": 30,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -617,7 +676,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "the_quickwood": 15
+    "the_quickwood": 16
   },
   "opLossPending": false,
   "establishedFacts": [
@@ -644,6 +703,12 @@
       "text": "The deep grain beneath the entrance hall predates the Rootkin and the city itself — its roots run deeper than anyone has mapped. The Rootkin planted the first hall above it not to be near it but to be",
       "day": 1,
       "subjectId": "heartroot"
+    },
+    {
+      "id": "f5",
+      "text": "Aelyn turned Lifesense inward and found a frequency in herself — older than her Grove-craft — that hums at the same register as the Root-That-Remembers. She does not yet know its origin.",
+      "day": 1,
+      "subjectId": null
     }
   ],
   "syncedAt": 1784175920678,

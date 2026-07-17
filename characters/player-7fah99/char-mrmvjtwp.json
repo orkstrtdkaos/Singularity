@@ -8,7 +8,7 @@
   "whyHere": "You were sent, or you were seeded, or you simply wanted to see something finish inside a single lifetime.",
   "background": "warden",
   "level": 1,
-  "xp": 8,
+  "xp": 13,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -41,7 +41,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 87,
+  "energy": 79,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -99,14 +99,19 @@
         "player": "Acknowledge the sapling's greeting properly — you've been listening but haven't said hello. Meet it where it is.",
         "summary": "Aelyn greets the sapling properly; the tender's attention sharpens with quiet decision.",
         "narration": "You turn fully toward the sapling and do what you should have done from the start — you acknowledge it. Not with words. You press two fingers to the moss at the edge of its planter, an old gesture from home, the kind your mother used when she wanted a tree to know it had been seen. Then you lift your chin just slightly in its direction, the way you'd greet a person across a crowded room.\n\nThe sapling's raised branch dips once, slow and deliberate, and then rises again. The small fierce warmth you felt through Lifesense brightens for a moment — pleased, maybe, or simply more attentive. One of its smaller roots shifts against the soil in the planter, resettling, the way a person shifts their weight when they've been standing still too long and someone has finally noticed.\n\nBranch makes a sound — not a word, just a low creak of what you've come to recognize as satisfaction. Its buds stay fully open but the rigidity in them eases a fraction. It was waiting for you to do that.\n\nThe tender by the planter has not moved, but the angle of her attention has. She is watching you both now — you, Branch, and the sapling — with the particular stillness of someone who has made a decision about something and is waiting to see if they were right."
+      },
+      {
+        "player": "Ask the sapling directly — reach through the Grove once more, and ask where the watching thing is centered within the hall.",
+        "summary": "The sapling gave Aelyn a direction — down, into the hall's deepest roots — and the tender spoke for the first time.",
+        "narration": "You settle the request into the Grove again — the same patient open-handedness, the same held breath. The sapling receives it without hesitation this time. You asked a direction, and it gives you one.\n\nA pressure builds in your left shoulder. Not pain — more like the way you feel a fire's warmth on one side of your face when the other is in cool air. The sapling's branch tilts fractionally, and through the Grove you get something clear enough to be almost spatial: inward. Deeper. Below the entrance hall, below the planter, down through the root-floor and the old soil beneath, where the Heartroot's deepest grain runs. Not a room. Not a chamber. A center — the way a seed has a center before anything grows from it.\n\nYou open your eyes. The hall looks unchanged — bark ceiling exhaling slow, moss underfoot, the two distant Rootkin still moving unhurried at the far end. But you find yourself looking at the floor differently, at the seam where the planter's roots disappear into the ground, and you know the direction now even if you don't know what's at the end of it.\n\nBranch makes a soft sound, a low single creak — not a word, just acknowledgment. It felt the question go through. Beside you, the tender takes one deliberate step closer, unhurried, and speaks for the first time. Her voice is the kind that has never been in a hurry about anything. \"You speak to the young one.\" It is not a question."
       }
     ],
     "lastTurn": {
-      "narration": "You turn fully toward the sapling and do what you should have done from the start — you acknowledge it. Not with words. You press two fingers to the moss at the edge of its planter, an old gesture from home, the kind your mother used when she wanted a tree to know it had been seen. Then you lift your chin just slightly in its direction, the way you'd greet a person across a crowded room.\n\nThe sapling's raised branch dips once, slow and deliberate, and then rises again. The small fierce warmth you felt through Lifesense brightens for a moment — pleased, maybe, or simply more attentive. One of its smaller roots shifts against the soil in the planter, resettling, the way a person shifts their weight when they've been standing still too long and someone has finally noticed.\n\nBranch makes a sound — not a word, just a low creak of what you've come to recognize as satisfaction. Its buds stay fully open but the rigidity in them eases a fraction. It was waiting for you to do that.\n\nThe tender by the planter has not moved, but the angle of her attention has. She is watching you both now — you, Branch, and the sapling — with the particular stillness of someone who has made a decision about something and is waiting to see if they were right.",
-      "sceneSummary": "Aelyn greets the sapling properly; the tender's attention sharpens with quiet decision.",
+      "narration": "You settle the request into the Grove again — the same patient open-handedness, the same held breath. The sapling receives it without hesitation this time. You asked a direction, and it gives you one.\n\nA pressure builds in your left shoulder. Not pain — more like the way you feel a fire's warmth on one side of your face when the other is in cool air. The sapling's branch tilts fractionally, and through the Grove you get something clear enough to be almost spatial: inward. Deeper. Below the entrance hall, below the planter, down through the root-floor and the old soil beneath, where the Heartroot's deepest grain runs. Not a room. Not a chamber. A center — the way a seed has a center before anything grows from it.\n\nYou open your eyes. The hall looks unchanged — bark ceiling exhaling slow, moss underfoot, the two distant Rootkin still moving unhurried at the far end. But you find yourself looking at the floor differently, at the seam where the planter's roots disappear into the ground, and you know the direction now even if you don't know what's at the end of it.\n\nBranch makes a soft sound, a low single creak — not a word, just acknowledgment. It felt the question go through. Beside you, the tender takes one deliberate step closer, unhurried, and speaks for the first time. Her voice is the kind that has never been in a hurry about anything. \"You speak to the young one.\" It is not a question.",
+      "sceneSummary": "The sapling gave Aelyn a direction — down, into the hall's deepest roots — and the tender spoke for the first time.",
       "choices": [
         {
-          "label": "Meet the tender's eyes and introduce yourself — you're a stranger here and she's been waiting long enough.",
+          "label": "Answer the tender honestly — yes, through the Grove, and that the sapling showed me where the old thing is centered.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
@@ -119,71 +124,71 @@
           "trivial": true
         },
         {
-          "label": "Let Branch speak — gesture for it to introduce the two of you in its own time, in its own words.",
+          "label": "Answer carefully — yes, I speak to the green — without volunteering what the sapling just told me. Watch how she responds.",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "lead"
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Ask the sapling directly — reach through the Grove once more, and ask where the watching thing is centered within the hall.",
-          "attribute": "mental",
+          "label": "Ask her what she decided just now — she's been watching and making up her mind since I arrived; I want to know what she concluded.",
+          "attribute": "social",
           "subAttribute": "insight",
           "axes": {},
           "difficulty": 15,
           "intentTags": [
             "study"
           ],
-          "abilityId": "the_speaking_grove",
-          "energyCost": 4,
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false
         },
         {
-          "label": "Use Lifesense again — follow the distributed warmth in the walls outward from this hall, try to find where it concentrates.",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Ask the tender if anyone has ever gone down — to where the hall's roots run deepest — and what they found.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {},
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
-            "study",
-            "scout"
+            "study"
           ],
-          "abilityId": "lifesense",
-          "energyCost": 3,
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
         }
       ],
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0
+        "energy": -4,
+        "xp": 0
       },
       "ledgerEvents": [],
       "questUpdates": [],
       "scene": {
-        "setting": "Interior of a living-wood hall near the Heartroot's entrance gate — thirty-foot arched ceiling of breathing bark, moss underfoot, oval light-gaps admitting early spring dawn. Aelyn is crouched at Branch's level near the center of the hall, two fingers just lifted from the moss at the planter's edge after greeting the sapling.",
+        "setting": "Interior of a living-wood hall near the Heartroot's entrance gate — thirty-foot arched ceiling of breathing bark, moss underfoot, oval light-gaps admitting early spring dawn. Aelyn is crouched at Branch's level near the center of the hall, two fingers lifted from the moss at the planter's edge. The tender has taken one step closer and just spoken.",
         "npcsPresent": [
           {
             "name": "Rootkin tender (unnamed)",
-            "state": "Has shifted the angle of her attention — watching Aelyn, Branch, and the sapling with quiet deliberateness, as if she has reached a decision and is now confirming it."
+            "state": "Has stepped one pace closer to Aelyn and spoken — 'You speak to the young one.' — watching and waiting for an answer."
           },
           {
             "name": "Two other Rootkin (unnamed)",
-            "state": "Moving through the hall at the far end, still unhurried, not yet noticing the newcomer."
+            "state": "Moving through the hall at the far end, still unhurried, not yet paying attention to the newcomer."
           },
           {
             "name": "Sapling (Branch's child)",
-            "state": "Raised branch dipped once in acknowledgment and risen again — bright and attentive, one root resettled in the planter soil."
+            "state": "Branch tilted fractionally during the Grove-question, now still again — attentive, root resettled in the planter."
           },
           {
             "name": "Branch",
-            "state": "Buds still fully splayed but tension eased slightly — low creak of satisfaction, listening posture maintained, one root flat against the moss floor."
+            "state": "Made a soft single creak of acknowledgment after Aelyn's Grove-reach; buds still fully open, listening posture maintained."
           }
         ],
         "objects": [
@@ -194,64 +199,79 @@
           "Oval light-gaps in the bark ceiling admitting dawn"
         ],
         "threads": [
-          "The watching thing predates the hall — its center within the city is still unknown.",
-          "The tender has reached some quiet internal decision about Aelyn and is waiting to act on it.",
-          "Branch is still in its listening posture — something has its full attention.",
+          "The watching thing is centered below — down through the root-floor and the deepest grain beneath the planter. Direction known, nature unknown.",
+          "The tender has spoken and is waiting for an answer.",
+          "Branch felt the Grove-question pass and creaked once — it is listening.",
           "The distributed warmth in the walls remains partially unread.",
-          "Aelyn is still a stranger here with no established contact or local reputation."
+          "Aelyn is still a stranger here with no established local reputation."
         ]
       },
       "npcUpdates": [
         {
-          "op": "update",
-          "npcId": "branch",
-          "name": "Branch",
-          "note": "Made a sound of satisfaction when Aelyn greeted the sapling — was waiting for it.",
+          "op": "meet",
+          "npcId": "heartroot-tender",
+          "name": "Rootkin Tender",
+          "role": "Keeper of the entrance hall and the sapling-child within",
+          "description": "A Rootkin of unhurried manner and deliberate attention — she has been watching Aelyn since arrival and has now decided something.",
+          "note": "Stepped closer and spoke her first words after watching Aelyn use the Grove with the sapling — 'You speak to the young one.'",
           "learned": [
-            "Branch was aware Aelyn had not yet acknowledged the sapling, and it mattered to it."
+            "She noticed Aelyn using the Grove with the sapling-child",
+            "She reached some quiet internal decision before approaching"
           ],
-          "statusNote": "Present in the Heartroot entrance hall, listening posture, buds fully open.",
-          "relationshipDelta": 1
+          "skillsObserved": [
+            "patient observation",
+            "deliberate approach"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Present in the entrance hall, one step from Aelyn, waiting for her answer."
         }
       ],
-      "factUpdates": [],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "The watching presence is centered below the Heartroot's entrance hall — down through the root-floor and the deepest grain, where the city's oldest roots run. The sapling gave Aelyn the direction.",
+          "subjectId": "the-watching-presence"
+        }
+      ],
       "placeUpdates": [],
       "codexUpdates": [
         {
-          "topic": "sapling-child-heartroot",
-          "label": "The Sapling-Child of the Heartroot",
-          "kind": "person",
-          "fact": "The sapling acknowledged Aelyn's greeting with a deliberate dip of its raised branch — it was waiting to be seen. Its warmth through Lifesense brightened briefly in response.",
+          "topic": "the-watching-presence",
+          "label": "The Watching Presence",
+          "kind": "mystery",
+          "entityId": null,
+          "fact": "Its center lies below the entrance hall — down through the root-floor into the Heartroot's deepest grain. The sapling gave the direction clearly: inward, below, where the oldest roots run.",
           "links": [
             "heartroot",
-            "branch",
-            "the-watching-presence"
+            "sapling-child-heartroot",
+            "branch"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief quiet exchange — a greeting, a gesture, a moment of mutual recognition."
+        "why": "A quiet exchange — a Grove-reach and the tender's first words."
       }
     },
     "sceneState": {
-      "setting": "Interior of a living-wood hall near the Heartroot's entrance gate — thirty-foot arched ceiling of breathing bark, moss underfoot, oval light-gaps admitting early spring dawn. Aelyn is crouched at Branch's level near the center of the hall, two fingers just lifted from the moss at the planter's edge after greeting the sapling.",
+      "setting": "Interior of a living-wood hall near the Heartroot's entrance gate — thirty-foot arched ceiling of breathing bark, moss underfoot, oval light-gaps admitting early spring dawn. Aelyn is crouched at Branch's level near the center of the hall, two fingers lifted from the moss at the planter's edge. The tender has taken one step closer and just spoken.",
       "npcsPresent": [
         {
           "name": "Rootkin tender (unnamed)",
-          "state": "Has shifted the angle of her attention — watching Aelyn, Branch, and the sapling with quiet deliberateness, as if she ha"
+          "state": "Has stepped one pace closer to Aelyn and spoken — 'You speak to the young one.' — watching and waiting for an answer."
         },
         {
           "name": "Two other Rootkin (unnamed)",
-          "state": "Moving through the hall at the far end, still unhurried, not yet noticing the newcomer."
+          "state": "Moving through the hall at the far end, still unhurried, not yet paying attention to the newcomer."
         },
         {
           "name": "Sapling (Branch's child)",
-          "state": "Raised branch dipped once in acknowledgment and risen again — bright and attentive, one root resettled in the planter so"
+          "state": "Branch tilted fractionally during the Grove-question, now still again — attentive, root resettled in the planter."
         },
         {
           "name": "Branch",
-          "state": "Buds still fully splayed but tension eased slightly — low creak of satisfaction, listening posture maintained, one root "
+          "state": "Made a soft single creak of acknowledgment after Aelyn's Grove-reach; buds still fully open, listening posture maintaine"
         }
       ],
       "objects": [
@@ -262,11 +282,11 @@
         "Oval light-gaps in the bark ceiling admitting dawn"
       ],
       "threads": [
-        "The watching thing predates the hall — its center within the city is still unknown.",
-        "The tender has reached some quiet internal decision about Aelyn and is waiting to act on it.",
-        "Branch is still in its listening posture — something has its full attention.",
+        "The watching thing is centered below — down through the root-floor and the deepest grain beneath the planter. Direction known, nature unknown.",
+        "The tender has spoken and is waiting for an answer.",
+        "Branch felt the Grove-question pass and creaked once — it is listening.",
         "The distributed warmth in the walls remains partially unread.",
-        "Aelyn is still a stranger here with no established contact or local reputation."
+        "Aelyn is still a stranger here with no established local reputation."
       ]
     }
   },
@@ -283,7 +303,36 @@
     "sprig": "Branch"
   },
   "quests": [],
-  "npcRegistry": {},
+  "npcRegistry": {
+    "heartroot-tender": {
+      "id": "heartroot-tender",
+      "name": "Rootkin Tender",
+      "role": "Keeper of the entrance hall and the sapling-child within",
+      "description": "A Rootkin of unhurried manner and deliberate attention — she has been watching Aelyn since arrival and has now decided something.",
+      "firstMet": {
+        "locationId": "the_heartroot",
+        "day": 1
+      },
+      "relationship": 0,
+      "history": [
+        "[d1] Stepped closer and spoke her first words after watching Aelyn use the Grove with the sapling — 'You speak to the young one.'"
+      ],
+      "knownFacts": [
+        "She noticed Aelyn using the Grove with the sapling-child",
+        "She reached some quiet internal decision before approaching"
+      ],
+      "skillsObserved": [
+        "patient observation",
+        "deliberate approach"
+      ],
+      "status": "active",
+      "statusNote": "Present in the entrance hall, one step from Aelyn, waiting for her answer.",
+      "lastSeen": {
+        "locationId": "the_heartroot",
+        "day": 1
+      }
+    }
+  },
   "placeMemory": {
     "the_heartroot": {
       "visits": 1,
@@ -427,7 +476,8 @@
         "label": "The Watching Presence",
         "kind": "mystery",
         "facts": [
-          "[d1] Something ancient occupies the heart of the Heartroot — predating the city, perhaps predating the Rootkin who built it. It watches. The sapling senses it without fear. The Grove confirmed its presence"
+          "[d1] Something ancient occupies the heart of the Heartroot — predating the city, perhaps predating the Rootkin who built it. It watches. The sapling senses it without fear. The Grove confirmed its presence",
+          "[d1] Its center lies below the entrance hall — down through the root-floor into the Heartroot's deepest grain. The sapling gave the direction clearly: inward, below, where the oldest roots run."
         ],
         "links": [
           "heartroot",
@@ -457,12 +507,12 @@
     }
   },
   "tendencies": {
-    "cerebral": 1.901859375,
-    "cautious": 0.9268593749999999,
-    "generous": 1
+    "cerebral": 2.8543128906249997,
+    "cautious": 0.9036878906249999,
+    "generous": 0.975
   },
   "aptitudes": [],
-  "actionCount": 4,
+  "actionCount": 5,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -484,8 +534,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20mid-twenties%20with%20light%20blonde%2C%20faintly%20wavy%20hair%20cut%20in%20curtain%20bangs%2C%20the%20rest%20falling%20to%20the%20small%20of%20her%20back%20%E2%80%94%20usually%20worn%20in%20a%20french%20braid%20with%20the%20bangs%20left%20loose.%20Dark%20nature-green%20tank%20to%2C%20full-body%20character%20portrait%2C%20named%20Aelyn%20Kantoro%2C%20of%20the%20rootkin%2C%20warden%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Her%20mother%20dies%2C%20and%20she%20decides%20to%20go%20to%20the%20nanite%20world%2C%20to%20figure%20out%20why%20she%20is%20different%20than%20the%20pure%20nature%20peop%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=73420&nologo=true",
-  "updatedAt": 1784250226522,
-  "rev": 19,
+  "updatedAt": 1784250343023,
+  "rev": 20,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -493,7 +543,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "the_quickwood": 5
+    "the_quickwood": 6
   },
   "opLossPending": false,
   "establishedFacts": [
@@ -502,6 +552,12 @@
       "text": "Aelyn's mother has died. Aelyn left the hidden refuge and entered the wider valley for the first time.",
       "day": 1,
       "subjectId": null
+    },
+    {
+      "id": "the-watching-presence",
+      "text": "The watching presence is centered below the Heartroot's entrance hall — down through the root-floor and the deepest grain, where the city's oldest roots run. The sapling gave Aelyn the direction.",
+      "day": 1,
+      "subjectId": "the-watching-presence"
     }
   ],
   "syncedAt": 1784175920678,
@@ -511,7 +567,7 @@
     "schemaVersion": 1,
     "uses": {
       "lifesense": 1,
-      "the_speaking_grove": 1
+      "the_speaking_grove": 2
     },
     "coActivations": {},
     "aspirations": []

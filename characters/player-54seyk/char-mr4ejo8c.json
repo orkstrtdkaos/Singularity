@@ -6,7 +6,7 @@
   "origin": "valley",
   "background": "craftsman",
   "level": 9,
-  "xp": 845,
+  "xp": 850,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -56,10 +56,10 @@
     "concrete_abstract": 0.19154640595832478,
     "death_life": 0.1059612828125,
     "violence_peace": 0.32649243243214565,
-    "chaos_order": 0.29935306239500864,
+    "chaos_order": 0.3043854092752582,
     "emotional_logical": -0.03142062057508806,
     "falsehood_truth": 0.4344166593212099,
-    "mechanical_spiritual": 0.3288032641042249,
+    "mechanical_spiritual": 0.33736310089901367,
     "demonic_angelic": 0.1272314375,
     "dark_light": 0.13885334374999997,
     "space_time": -0.005676249999999997,
@@ -71,7 +71,7 @@
   "maxHealth": 65,
   "health": 64,
   "maxEnergy": 140,
-  "energy": 59,
+  "energy": 53,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -929,116 +929,97 @@
         "player": "Send the original four-second tone — not the elaboration, not the ratio; just the count it first gave you, as plainly as you received it",
         "summary": "The plain four-second count returned without elaboration — the chamber answered with a single beat and a warmth at the fourth crystal.",
         "narration": "You strip the reply down to its simplest form — no elaboration, no ratio, no shaped phrase. Just the count it first sent you, returned as plainly as you received it. Four seconds. Four seconds. Four seconds. You let the Waystaff carry it without interpretation, the matrix sleeve conducting your intent downward through the ash grain as cleanly as water follows a channel. No comment. No question. Here is what you gave me; I am giving it back unchanged.\n\nThe seam receives it.\n\nNot with silence — with attention. The residual floor-warmth that had cut off returns in a narrow band directly beneath the grip-end, subtle enough that you almost miss it. Not the broad pulse of before, not the pulling weight that took the taper's light. Something more careful. The three charged crystals don't resume their cycling, but the one that had been sitting shallow in your pocket — the fourth, the under-loaded one — warms against your hip. A single degree, no more. Localized. Deliberate.\n\nTeva's hand is still lifted from the floor, her eyes steady on you. \"It started again,\" she says quietly. \"One beat. Just one.\" She isn't asking. She sets her palm flat on the earth and waits."
+      },
+      {
+        "player": "Send another plain count — patient, unhurried. Hold the conversation at its simplest and see if the chamber builds from this foundation.",
+        "summary": "A second plain count draws two answering beats — the chamber may be learning to count back.",
+        "narration": "You send it again. Same count, same weight, same nothing added. Four seconds. Four seconds. Four seconds. The Waystaff carries it down without comment, the lattice sitting open between your palm and the floor like a hand held out rather than a fist raised.\n\nThe chamber answers.\n\nTwo beats this time — not one. They arrive clean and separate at the four-second interval, and the fourth crystal at your hip warms a second time, a fraction deeper than before. Not quite seated. Not a full resonance. But it holds the warmth longer than the first time, as though the chamber is learning the difference between a greeting and a conversation. Teva's palm presses harder against the earth. \"Two,\" she says, very quietly. \"It's counting.\"\n\nAevi hasn't moved. Still hard-white at the berm-crest, every mote locked northeast-by-east, but there's something different in the quality of the attention — the swarm has pulled fractionally tighter, the way a person goes still when they've heard a word they recognize but weren't expecting to hear. It does not speak. It does not turn toward you. It waits.\n\nThe seam beneath the floor holds a steady threadbare warmth in that narrow band under the grip-end. Whatever it is doing with the count, it isn't rushing."
       }
     ],
     "lastTurn": {
-      "narration": "You strip the reply down to its simplest form — no elaboration, no ratio, no shaped phrase. Just the count it first sent you, returned as plainly as you received it. Four seconds. Four seconds. Four seconds. You let the Waystaff carry it without interpretation, the matrix sleeve conducting your intent downward through the ash grain as cleanly as water follows a channel. No comment. No question. Here is what you gave me; I am giving it back unchanged.\n\nThe seam receives it.\n\nNot with silence — with attention. The residual floor-warmth that had cut off returns in a narrow band directly beneath the grip-end, subtle enough that you almost miss it. Not the broad pulse of before, not the pulling weight that took the taper's light. Something more careful. The three charged crystals don't resume their cycling, but the one that had been sitting shallow in your pocket — the fourth, the under-loaded one — warms against your hip. A single degree, no more. Localized. Deliberate.\n\nTeva's hand is still lifted from the floor, her eyes steady on you. \"It started again,\" she says quietly. \"One beat. Just one.\" She isn't asking. She sets her palm flat on the earth and waits.",
-      "sceneSummary": "The plain four-second count returned without elaboration — the chamber answered with a single beat and a warmth at the fourth crystal.",
+      "narration": "You send it again. Same count, same weight, same nothing added. Four seconds. Four seconds. Four seconds. The Waystaff carries it down without comment, the lattice sitting open between your palm and the floor like a hand held out rather than a fist raised.\n\nThe chamber answers.\n\nTwo beats this time — not one. They arrive clean and separate at the four-second interval, and the fourth crystal at your hip warms a second time, a fraction deeper than before. Not quite seated. Not a full resonance. But it holds the warmth longer than the first time, as though the chamber is learning the difference between a greeting and a conversation. Teva's palm presses harder against the earth. \"Two,\" she says, very quietly. \"It's counting.\"\n\nAevi hasn't moved. Still hard-white at the berm-crest, every mote locked northeast-by-east, but there's something different in the quality of the attention — the swarm has pulled fractionally tighter, the way a person goes still when they've heard a word they recognize but weren't expecting to hear. It does not speak. It does not turn toward you. It waits.\n\nThe seam beneath the floor holds a steady threadbare warmth in that narrow band under the grip-end. Whatever it is doing with the count, it isn't rushing.",
+      "sceneSummary": "A second plain count draws two answering beats — the chamber may be learning to count back.",
       "choices": [
         {
-          "label": "Send another plain count — patient, unhurried. Hold the conversation at its simplest and see if the chamber builds from this foundation.",
+          "label": "Send three counts and wait — extend the sequence one step, see if it mirrors or builds",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "mechanical_spiritual": 0.5,
-            "chaos_order": 0.4
-          },
           "difficulty": 15,
           "intentTags": [
-            "sustain",
-            "careful"
+            "careful",
+            "study"
           ],
           "abilityId": "sonic_resonance",
           "energyCost": 4,
           "trivial": false
         },
         {
-          "label": "Ask Teva what the single beat felt like in her tissue — whether it matched the chamber's original count or something changed.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
+          "label": "Hold the count where it is — send two beats back, matching what the chamber just gave you",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
+            "careful",
             "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Draw the fourth crystal from your pocket and place it grip-end-adjacent on the floor — it warmed for a reason; offer it as a second point of contact.",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {
-            "mechanical_spiritual": 0.6,
-            "chaos_order": 0.5
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
+          "abilityId": "sonic_resonance",
+          "energyCost": 4,
           "trivial": false
         },
         {
-          "label": "Turn to Aevi — it has been silent and locked on that bearing since before the pulse. Ask it plainly what it recognized at the shimmer crossing.",
+          "label": "Ask Teva quietly — does the two-beat feel like the count resuming, or something new starting in her tissue?",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Ask Aevi directly, now — what did it recognize at the shimmer crossing, and does it recognize this?",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
           "trivial": true
         }
       ],
-      "deeds": [],
       "characterDeltas": {
         "health": 0,
         "energy": -4
       },
-      "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "second-river-rising",
-          "note": "The plain four-second count returned without framing drew a single answering beat from the chamber and warmed the fourth shallow crystal — the chamber responds to honesty of repetition, not elaboration or mirroring."
-        }
-      ],
       "scene": {
-        "setting": "Disputed Zone — northern alcove camp, night. Dry root-mat roof, earthen berm at entry. Beeswax taper cold and spent. Floor-warmth returned in a narrow band beneath the Waystaff grip-end after the plain count; fourth crystal warm at Cellaceron's hip.",
+        "setting": "Disputed Zone — northern alcove camp, night. Dry root-mat roof, earthen berm at entry. Beeswax taper cold and spent. Narrow band of floor-warmth beneath the Waystaff grip-end, holding steady after two answering beats.",
         "npcsPresent": [
           {
             "name": "Teva",
-            "state": "Palm flat on the earth, waiting — has named a single resumed beat in her tissue, watching Cellaceron steadily."
+            "state": "Palm flat on the earth, has named the two-beat count aloud — watching Cellaceron steadily, waiting"
           },
           {
             "name": "Aevi",
-            "state": "Hard-white, fully contracted at berm-crest, every mote locked northeast-by-east. Still silent."
+            "state": "Hard-white, fully contracted at berm-crest, every mote locked northeast-by-east — pulled fractionally tighter than before but still silent"
           }
         ],
         "objects": [
-          "Waystaff — grip-end to floor, three charged crystals holding charge, not cycling",
+          "Waystaff — grip-end to floor, three charged crystals holding charge",
           "beeswax taper — cold and spent",
           "Traveler's Pack",
           "Waterskin",
           "cordage coil",
           "oilcloth square — used, damp",
           "relay counterfoil — in pocket",
-          "resonance crystals — untuned (four nodes: three charged in Waystaff lattice, one shallow and warm in pocket)",
+          "resonance crystals — untuned (four nodes: three charged in Waystaff lattice, one shallow-warm at hip)",
           "bark-press paper (three sheets)",
           "liverwort mat — pressed flat on Cellaceron's forearm, diminished"
         ],
         "threads": [
-          "The chamber answered a plain four-second count with a single beat and a warmth in the fourth crystal — it may be calibrating to simplicity rather than structure",
-          "The fourth shallow crystal warmed at the hip — it did not seat fully in the Waystaff; the chamber may be addressing it separately",
-          "Teva felt one beat resume in her tissue — her read may lead the field-read",
-          "Aevi has been silent and locked northeast-by-east since the shimmer crossing — has not named what it recognized",
-          "Two bearings unresolved: the shaped corridor and the northeast-by-east seam"
+          "The chamber answered two beats — Teva reads it as counting; the sequence may be building",
+          "The fourth shallow crystal warmed a second time, fractionally deeper — it is being addressed separately from the Waystaff",
+          "Aevi has pulled tighter but still has not spoken — it recognized something and has not named it",
+          "Two bearings still unresolved: the shaped corridor and the northeast-by-east seam"
         ]
       },
       "npcUpdates": [
@@ -1046,30 +1027,15 @@
           "op": "update",
           "npcId": "aevi",
           "name": "Aevi",
-          "note": "Remained hard-white and locked on bearing throughout the plain-count exchange. The chamber's single answering beat did not shift its posture.",
-          "statusNote": "Hard-white, fully contracted at berm-crest, every mote locked northeast-by-east. Has not spoken since the shimmer crossing."
+          "note": "Pulled fractionally tighter at the second answering beat — motes condensed further but still silent, attention absolute on the northeast-by-east bearing",
+          "statusNote": "Hard-white, fully contracted at berm-crest, every mote locked northeast-by-east — tightened at the two-beat response; has not spoken"
         },
         {
           "op": "update",
-          "npcId": "teva",
+          "npcId": "teva-anselvar-missing-apprentice",
           "name": "Teva",
-          "note": "Named one resumed beat in her tissue after the plain-count reply. Palm now flat on the earth, waiting alongside Cellaceron.",
-          "statusNote": "In the alcove camp, palm on the floor, tracking the chamber's responses through tissue-read. Stable and alert."
-        }
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "The chamber answered a plain, unelaborated four-second count — the original frequency returned without framing — with a single beat of resumed pulse and a warmth in the fourth shallow crystal. Mirroring the three-two-three ratio silenced it; returning to simplicity reopened contact.",
-          "subjectId": "second-river-rising"
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "Day 8 night: plain four-second count (unreflected) drew a single answering beat from the seam and warmed the fourth shallow crystal at Cellaceron's hip — contact reestablished at minimum complexity after the mirrored-ratio silence.",
-          "flag": {
-            "chamber_contact_state": "single_beat_resumed_plain_count"
-          }
+          "note": "Named the two-beat count aloud without prompting — her tissue-read is tracking ahead of or alongside the field-read",
+          "statusNote": "Palm to earth in the alcove camp, tracking the chamber's count in her tissue in real time"
         }
       ],
       "codexUpdates": [
@@ -1077,35 +1043,53 @@
           "topic": "the-chamber-beyond-the-threshold",
           "label": "The Chamber's Question",
           "kind": "mystery",
-          "fact": "Day 8 night: returning the plain four-second count without elaboration or ratio reopened contact after the mirrored-ratio silence — one beat resumed, fourth shallow crystal warmed. The chamber responds to unornamented repetition; it went silent when given its own pattern back, but answered when given the original count plainly.",
+          "fact": "Day 8 night: a second plain four-second count drew two answering beats — each clean and separate at the interval, with the fourth shallow crystal warming a fraction deeper. The chamber may be learning to count back rather than merely acknowledging contact. Teva named it before the field-read resolved.",
           "links": [
             "second-river-rising",
+            "teva-anselvar-missing-apprentice",
             "scored-mark-forward-alcove",
-            "teva-directional-interval-count",
             "northern-alcove-camp",
-            "resonance-crystal-staff-translator-frame"
+            "teva-directional-interval-count"
           ]
+        }
+      ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "second-river-rising",
+          "note": "Two answering beats returned on the second plain count — the chamber appears to be building a counting sequence rather than merely confirming contact. Teva's tissue-read is tracking the pattern directly."
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "Day 8 night: second plain count drew two answering beats at the four-second interval; fourth shallow crystal warmed a second time, fractionally deeper. Chamber response is sequential — may be learning to count back.",
+          "subPlace": {
+            "name": "Northern Alcove Camp",
+            "note": "Chamber has now answered twice: one beat on first plain count, two beats on second — sequential pattern building",
+            "visited": true
+          }
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief, contained exchange — sending one count and receiving one beat"
-      }
+        "why": "a short exchange in the dark — one count sent, two beats received"
+      },
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Disputed Zone — northern alcove camp, night. Dry root-mat roof, earthen berm at entry. Beeswax taper cold and spent. Floor-warmth returned in a narrow band beneath the Waystaff grip-end after the plain count; fourth crystal warm at Cellaceron's hip.",
+      "setting": "Disputed Zone — northern alcove camp, night. Dry root-mat roof, earthen berm at entry. Beeswax taper cold and spent. Narrow band of floor-warmth beneath the Waystaff grip-end, holding steady after two answering beats.",
       "npcsPresent": [
         {
           "name": "Teva",
-          "state": "Palm flat on the earth, waiting — has named a single resumed beat in her tissue, watching Cellaceron steadily."
+          "state": "Palm flat on the earth, has named the two-beat count aloud — watching Cellaceron steadily, waiting"
         },
         {
           "name": "Aevi",
-          "state": "Hard-white, fully contracted at berm-crest, every mote locked northeast-by-east. Still silent."
+          "state": "Hard-white, fully contracted at berm-crest, every mote locked northeast-by-east — pulled fractionally tighter than befor"
         }
       ],
       "objects": [
-        "Waystaff — grip-end to floor, three charged crystals holding charge, not cycling",
+        "Waystaff — grip-end to floor, three charged crystals holding charge",
         "beeswax taper — cold and spent",
         "Traveler's Pack",
         "Waterskin",
@@ -1117,11 +1101,10 @@
         "liverwort mat — pressed flat on Cellaceron's forearm, diminished"
       ],
       "threads": [
-        "The chamber answered a plain four-second count with a single beat and a warmth in the fourth crystal — it may be calibrating to simplicity rather than structure",
-        "The fourth shallow crystal warmed at the hip — it did not seat fully in the Waystaff; the chamber may be addressing it separately",
-        "Teva felt one beat resume in her tissue — her read may lead the field-read",
-        "Aevi has been silent and locked northeast-by-east since the shimmer crossing — has not named what it recognized",
-        "Two bearings unresolved: the shaped corridor and the northeast-by-east seam"
+        "The chamber answered two beats — Teva reads it as counting; the sequence may be building",
+        "The fourth shallow crystal warmed a second time, fractionally deeper — it is being addressed separately from the Waystaff",
+        "Aevi has pulled tighter but still has not spoken — it recognized something and has not named it",
+        "Two bearings still unresolved: the shaped corridor and the northeast-by-east seam"
       ]
     }
   },
@@ -1143,14 +1126,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Scored mark read via Resonant Sight braid: a Harmonic survey cross (two paths cross here) corrected by an older diagonal in a different hand (neither is the right one). Two-handed authorship, two diff",
         "Resonant Sight reads a third bearing beneath the forward alcove's diagonal mark — not the corridor path, not the shimmer edge, but a seam running northeast-by-east that would intersect the corridor mi",
         "The chamber's four-second pulse traveled northeast-by-east through the seam beneath the alcove camp and pulled the conserved charge from the banked beeswax taper — recognizing it as a tuned vessel. Th",
         "The Waystaff speaks the four-second frequency back into the seam without giving up its charge — the chamber recognizes it as a reply-capable instrument, not merely a tuned vessel to draw from. An exch",
         "The chamber distinguishes between a reflected signal and a deliberately shaped reply — it has adjusted its response accordingly. A harmonic fold in the return pulse suggests the exchange can carry str",
         "Chamber's harmonic fold parsed: the elaboration is a three-two-three interval ratio nested inside the four-count — a structured sub-pulse with directional preference. The chamber is asking something, ",
         "The chamber refused the mirrored three-two-three ratio — went silent mid-beat. The exchange is not about reflection; the chamber wants a distinct answer, not its own question returned.",
-        "The plain four-second count returned without framing drew a single answering beat from the chamber and warmed the fourth shallow crystal — the chamber responds to honesty of repetition, not elaboration or mirroring."
+        "The plain four-second count returned without framing drew a single answering beat from the chamber and warmed the fourth shallow crystal — the chamber responds to honesty of repetition, not elaboration or mirroring.",
+        "Two answering beats returned on the second plain count — the chamber appears to be building a counting sequence rather than merely confirming contact. Teva's tissue-read is tracking the pattern directly."
       ],
       "startedAt": "2026-07-03T18:55:17.042Z"
     },
@@ -1379,7 +1362,6 @@
       },
       "relationship": 2,
       "history": [
-        "[d8] Held berm-crest watch without instruction after camp was established; motes deeper blue-teal, constellation tighter than at shimmer crossing; has not spoken about what it recognize",
         "[d8] Two motes brightened briefly during the Light Well banking — acknowledgment, not alarm. Returned immediately to berm-crest watch.",
         "[d8] Acknowledged solo departure with a single brightened mote, then returned to berm-crest watch without comment.",
         "[d8] Motes warmer than at any point since shimmer crossing — acknowledged the seam report with a single brightened mote. Has not named what it recognized at entry. Held berm-crest watch",
@@ -1388,7 +1370,8 @@
         "[d8] Shifted orientation — every mote now fractionally turned toward the grip-end and the pulse-point at the floor. Still hard-white, still silent, but attention now precisely directed ",
         "[d8] Fully contracted to hard-white at the elaborated return pulse — every mote locked on the northeast-by-east bearing. Has not spoken. The intensity of attention suggests recognition ",
         "[d8] Maintained full hard-white contraction through the Sonic Resonance parse — every mote still locked northeast-by-east. The silence is deliberate and sustained, not absence.",
-        "[d8] Remained hard-white and locked on bearing throughout the plain-count exchange. The chamber's single answering beat did not shift its posture."
+        "[d8] Remained hard-white and locked on bearing throughout the plain-count exchange. The chamber's single answering beat did not shift its posture.",
+        "[d8] Pulled fractionally tighter at the second answering beat — motes condensed further but still silent, attention absolute on the northeast-by-east bearing"
       ],
       "knownFacts": [
         "The Disputed Zone interference layer registers differently to Aevi than the shimmer boundary — something inside is recognizable to it.",
@@ -1413,7 +1396,7 @@
         "locationId": "harmonic_heights_terrace",
         "day": 8
       },
-      "statusNote": "Hard-white, fully contracted at berm-crest, every mote locked northeast-by-east. Has not spoken since the shimmer crossing."
+      "statusNote": "Hard-white, fully contracted at berm-crest, every mote locked northeast-by-east — tightened at the two-beat response; has not spoken"
     },
     "waystation-runner-heights": {
       "id": "waystation-runner-heights",
@@ -1608,7 +1591,6 @@
     "harmonic_heights_terrace": {
       "visits": 1,
       "notes": [
-        "[d8] Forward alcove located twenty paces east-southeast of main camp: three-sided stone, dry earthen floor, no natural roof, sheltered from shimmer-draft. Viable as a rest point before corridor entry.",
         "[d8] Lateral thermal-differential band confirmed running east-southeast from moisture-dark soil anomaly toward corridor bearing — slow, persistent, the ground releasing something sub-thermal. Root-stress i",
         "[d8] Lungwort and ground ivy at the thermal band's stone gap destroyed by a Greenlore surge on day 8 night — root structure shredded, ground ivy runners snapped. No viable poultice materials remain at this",
         "[d8] Forward stone alcove yielded a thumb-width of liverwort mat (harvested day 8 night) and a scored mark on the north inner face — two crossed lines, one diagonal through them, chest height, old hand. No",
@@ -1619,7 +1601,8 @@
         "[d8] Day 8 night: Waystaff placed grip-end to pulse-point floor — three charged crystals began cycling blue-white at four-second interval, repeating the seam's frequency back into the ground without surren",
         "[d8] Day 8 night: shaped tone sent through Waystaff produced an elaborated return — harmonic fold in the chamber's reply confirmed the exchange is bidirectional and structure-capable, not merely frequency-",
         "[d8] Sonic Resonance parse of the chamber's elaborated reply confirmed: harmonic fold carries a three-two-three interval ratio — a nested directional question, not raw frequency. Two independent reads (fie",
-        "[d8] Day 8 night: plain four-second count (unreflected) drew a single answering beat from the seam and warmed the fourth shallow crystal at Cellaceron's hip — contact reestablished at minimum complexity af"
+        "[d8] Day 8 night: plain four-second count (unreflected) drew a single answering beat from the seam and warmed the fourth shallow crystal at Cellaceron's hip — contact reestablished at minimum complexity af",
+        "[d8] Day 8 night: second plain count drew two answering beats at the four-second interval; fourth shallow crystal warmed a second time, fractionally deeper. Chamber response is sequential — may be learning"
       ],
       "flags": {
         "resonance_niche_tone_event": "day2_night_second_river_frequency",
@@ -1693,7 +1676,7 @@
           "name": "Northern Alcove Camp",
           "day": 8,
           "visited": true,
-          "note": "Full dark now; banked taper provides close-work light for underground; Waystaff and Aevi on watch; Teva's bearing-count "
+          "note": "Chamber has now answered twice: one beat on first plain count, two beats on second — sequential pattern building"
         },
         "shaped-corridor-entrance": {
           "name": "Shaped Corridor Entrance",
@@ -1933,7 +1916,8 @@
           "[d8] Day 8 night: when sent a deliberately shaped tone rather than a reflection, the chamber elaborated its return pulse with a harmonic fold — an active distinction between voice and mirror. The exchange ",
           "[d8] Day 8 night: the chamber's harmonic fold contains a three-two-three sub-pulse ratio nested inside the four-second count — a structured interval suggesting directional preference. The elaboration is a ",
           "[d8] Day 8 night: sending the three-two-three ratio back as a mirror silenced the chamber mid-beat — the count stopped in Teva's tissue simultaneously. The chamber did not want its own pattern reflected; i",
-          "[d8] Day 8 night: returning the plain four-second count without elaboration or ratio reopened contact after the mirrored-ratio silence — one beat resumed, fourth shallow crystal warmed. The chamber respond"
+          "[d8] Day 8 night: returning the plain four-second count without elaboration or ratio reopened contact after the mirrored-ratio silence — one beat resumed, fourth shallow crystal warmed. The chamber respond",
+          "[d8] Day 8 night: a second plain four-second count drew two answering beats — each clean and separate at the interval, with the fourth shallow crystal warming a fraction deeper. The chamber may be learning"
         ],
         "links": [
           "the-chamber-beyond-the-threshold",
@@ -2104,7 +2088,7 @@
     "uses": {
       "prism_sight": 11,
       "keen_appraisal": 9,
-      "sonic_resonance": 16,
+      "sonic_resonance": 17,
       "motes-vigil": 4,
       "light_well": 2,
       "greenlore": 4
@@ -2278,14 +2262,14 @@
   "customEncounters": {},
   "reconcileVersion": 5,
   "tendencies": {
-    "cerebral": 55.15625000287121,
-    "strategic": 73.99945162511177,
-    "cautious": 65.7310342816548,
-    "social": 43.562860122679226,
-    "generous": 21.724717925323045,
-    "risky": 4.498304820678249,
-    "carousing": 0.4736062828055891,
-    "patient": 1
+    "cerebral": 53.77734375279943,
+    "strategic": 72.14946533448398,
+    "cautious": 65.08775842461343,
+    "social": 42.47378861961224,
+    "generous": 21.18159997718997,
+    "risky": 4.385847200161293,
+    "carousing": 0.46176612573544934,
+    "patient": 1.975
   },
   "aptitudes": [
     "strategist",
@@ -2298,9 +2282,9 @@
     "stalwart",
     "peacemaker"
   ],
-  "actionCount": 179,
-  "updatedAt": 1784308479512,
-  "rev": 41,
+  "actionCount": 180,
+  "updatedAt": 1784308581259,
+  "rev": 42,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -2310,7 +2294,7 @@
   "syncedAt": 1783791225006,
   "teachers": {},
   "regionsKnown": {
-    "valley": 2
+    "valley": 3
   },
   "company": [],
   "foreclosed": [],
@@ -2345,10 +2329,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-07-17T17:12:48.946Z",
-      "lastAt": "2026-07-17T17:14:39.508Z",
+      "lastAt": "2026-07-17T17:16:21.254Z",
       "startDay": 17,
       "endDay": 17,
-      "beats": 2
+      "beats": 3
     }
   ],
   "_pendingArrival": null

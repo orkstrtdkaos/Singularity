@@ -24,6 +24,7 @@ import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal } from "./engine/traditions.js";
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs } from "./engine/companions.js";
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges } from "./engine/company.js";
+import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, FAMILY_GLYPH, familyClass } from "./engine/functions.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
 import { initWorldState, runWorldTick, syncSharedWorld, advanceGeneratedOffscreen, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
@@ -44,7 +45,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.87";
+const APP_VERSION = "1.8.88";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -120,6 +121,7 @@ function showVitalDetail(el) {
 }
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
+let FN_INDEX = { families: [], verbToFamily: {}, byFamily: {} }; // SNG-124: function-family index (built at load)
 let character = null;    // active character
 let profile = null;      // the player's profile (the human)
 let sceneTurns = [];     // recent beats: {summary, narration} for scene continuity
@@ -200,6 +202,7 @@ let pendingRankAdvances = []; // ability-arch v2: abilities that auto-advanced t
   wireLightbox(); // SNG-053: click any image → larger view
   try {
     CONTENT = await loadContent();
+    FN_INDEX = buildFunctionIndex(CONTENT.functionVocabulary); // SNG-124: verb→function-family index for coverage + badges
   } catch (err) {
     app.innerHTML = `<div class="boot">Failed to load content packs: ${esc(err.message)}<br>Serve this folder over HTTP (packs load via fetch).</div>`;
     return;
@@ -1180,12 +1183,28 @@ function traditionColor(id) {
   return `hsl(${h} 55% 62%)`;
 }
 
-// SNG-047: an ability's FUNCTIONS as small labelled chips — what it DOES at a glance.
-const FN_ICON = { heal: "✚", shield: "⛨", strike: "⚔", reveal: "◉", conceal: "◌", bind: "⛓", move: "➤", break: "✷", ward: "⬡" };
+// SNG-047/124: an ability's FUNCTIONS as small chips — what it DOES at a glance. All 24 verbs carry an
+// icon; SNG-124 promotes them to COLORED badges by their 8-family (color = the family, glyph = the verb).
+const FN_ICON = {
+  strike: "⚔", break: "✷", hinder: "⛓", heal: "✚", mend: "🪡", restore: "♺", empower: "🔆",
+  shield: "⛨", ward: "⬡", resist: "🜛", reveal: "◉", foresee: "◇", track: "⇶", make: "✦", transform: "⟳",
+  summon: "❈", bind: "⛓", command: "❖", deceive: "◑", conceal: "◌", move: "➤", travel: "➤", open: "⎔", sustain: "∞"
+};
+// SNG-124: the family a verb belongs to → a CSS class (`.fn-fam-harm`, etc.) coloring the badge.
+function fnFamilyClass(verb) { const fam = FN_INDEX?.verbToFamily?.[verb]; return fam ? familyClass(fam) : ""; }
 function functionChips(ab) {
   const fns = ab?.functions || [];
   if (!fns.length) return "";
-  return `<span class="fn-chips">${fns.map(f => `<span class="fn-chip" title="${esc(f)}">${FN_ICON[f] || "•"} ${esc(f)}</span>`).join("")}</span>`;
+  return `<span class="fn-chips">${fns.map(f => `<span class="fn-chip ${fnFamilyClass(f)}" title="${esc(FN_INDEX?.verbToFamily?.[f] || "")}${FN_INDEX?.verbToFamily?.[f] ? " · " : ""}${esc(f)}">${FN_ICON[f] || "•"} ${esc(f)}</span>`).join("")}</span>`;
+}
+
+// SNG-124: the ONE gate for "is there anything to spend in the Level Up modal" — unspent skill points OR
+// a ripe aspiration (deepening is EARNED through use, not bought, so a 0-point character has nothing to
+// do there). Both level-up affordances (character screen + sidebar) share this so they can't diverge.
+function canLevelUp(character) {
+  if (!character) return false;
+  if ((character.skillPoints || 0) > 0) return true;
+  return (character.practice?.aspirations || []).some(a => aspirationRipe(character, a.abilityId, CONTENT?.rules || {}));
 }
 
 /** SNG-031 + SNG-043 Part A: is this turn genuinely a "make a plan" moment? A gambit is a
@@ -3878,6 +3897,26 @@ function renderLevelUp(status = "") {
     <p class="hint" style="margin-bottom:10px">You have <strong>${sp} skill point${sp === 1 ? "" : "s"}</strong> — points <strong>learn new crafts</strong> (breadth). <strong>Depth is earned through use</strong>, not bought. <span class="cap-line">${breadthUsed(character)} of ${breadthCap(character, CONTENT.skillCapacity)} crafts${cap ? " — at capacity" : ""}</span> ${infoDot("lock.capacity")}</p>
     ${status ? `<div class="cs-block" style="border-left:3px solid var(--accent)">${esc(status)}</div>` : ""}
 
+    ${(() => { // SNG-124: "Suggested for you" — recommend skills that fill FUNCTION-COVERAGE gaps / suit your
+      // build / are ripe. Reads the same learnable set below; each suggestion learns in place (data-lvllearn).
+      const cov = functionCoverage(character, fullCatalog(), FN_INDEX);
+      const suggestions = recommendSkills(character, learnable, {
+        fnIndex: FN_INDEX, traditionIndex: CONTENT.traditionIndex, catalog: fullCatalog(),
+        ripe: new Set(learnable.filter(ab => aspirationRipe(character, ab.id, rules)).map(ab => ab.id)),
+        effectiveCost: ab => effectiveEnergyCost(ab, character, rules), max: 4
+      });
+      if (!suggestions.length) return "";
+      const gap = cov.missing.length ? `Your kit has no <strong>${cov.missing.join(", ")}</strong> yet — gaps worth filling.` : `Your kit already touches all ${cov.covered.length} function families.`;
+      return `<div class="cs-block sug-block"><h3 class="codex-title" style="font-size:15px">Suggested for you <span class="hint" style="text-transform:none">— what would round out your kit</span></h3>
+        <div class="hint" style="margin-bottom:6px">${gap}</div>
+        ${suggestions.map(s => { const ab = fullCatalog()[s.abilityId]; return `<div class="cs-ability sug-row">
+          <div><strong>${esc(s.name)}</strong> ${functionChips(ab)}${s.cost != null ? ` <span class="hint" title="energy to use (effective)">⚡${s.cost}</span>` : ""}</div>
+          <div class="hint">✦ ${esc(s.why)}</div>
+          <button class="btn" data-lvllearn="${esc(s.abilityId)}">Learn</button>
+        </div>`; }).join("")}
+      </div>`;
+    })()}
+
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Your crafts ${infoDot("ability.ranks")} <span class="hint" style="text-transform:none">— depth is earned through use, not points</span></h3>
       ${rankRows.map(r => { const p = rankProgress(character, r.a.abilityId); return `<div class="cs-ability">
         <div><strong>${esc(r.ab.name)}</strong> <span class="cs-ranks">${[1, 2, 3].map(n => `<span class="${n <= r.a.level ? "cs-rank-on" : "cs-rank-off"}">${n <= r.a.level ? "●" : "○"}</span>`).join("")}</span> <span class="hint">${r.now ? esc(r.now.name) : ""}</span></div>
@@ -4015,7 +4054,7 @@ function renderCharacterScreen() {
       ${(character.quests || []).filter(q => q.status === "active").map(q => `<div class="codex-fact"><strong>${esc(q.title)}</strong> — ${esc(q.progress?.slice(-1)[0] || q.summary)}</div>`).join("") || "<div class='insight'>none</div>"}</div>
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Companions ${infoDot("companion.bond")}</h3>
       ${activeCompanions(character, CONTENT.companions).map(c => `<div class="codex-fact"><strong>${esc(c.name)}</strong> — assists: ${(c.assistTags || []).join(", ")}</div>`).join("") || "<div class='insight'>traveling alone</div>"}</div>
-    <button class="btn" id="cs-levelup" style="margin-top:10px; margin-right:8px">⬆ Level Up${character.skillPoints ? ` (${character.skillPoints})` : ""}</button>
+    ${canLevelUp(character) ? `<button class="btn" id="cs-levelup" style="margin-top:10px; margin-right:8px">⬆ Level Up${character.skillPoints ? ` (${character.skillPoints})` : ""}</button>` : ""}
     <button class="btn secondary" id="cs-skillgraph" style="margin-top:10px; margin-right:8px">✦ Skill Wheel</button>
     <button class="btn secondary" id="cs-chronicle" style="margin-top:10px; margin-right:8px" title="The story so far — the deeds, bonds, and standing you've accreted, read back to you">📜 The Chronicle</button>
     <button class="btn secondary" id="cs-repair" style="margin-top:10px; margin-right:8px" title="Fix what the game got wrong at creation — domains, background, form, or an ability you never chose. No arguing with the GM.">🔧 Repair character</button>
@@ -5345,7 +5384,7 @@ function renderPlay(turn, opts = {}) {
       ${SUBS.map(s => `<div style="text-transform:capitalize" title="${esc(SUB_DESC[s])} (${SUB_OF[s]})">${s}</div><div>${(character.subAttributes?.[s] ?? 0) > 6 ? (character.subAttributes[s] + " ●●●●●●⁺") : "●".repeat(character.subAttributes?.[s] ?? 0) + "○".repeat(Math.max(0, 4 - (character.subAttributes?.[s] ?? 0)))}${character.pendingSubPoints > 0 && (character.subAttributes?.[s] ?? 0) < (CONTENT.rules.leveling?.subAttributeCap ?? 6) ? ` <button class="grow-btn" data-grow="${s}">+</button>` : ""}</div>`).join("")}
     </div></div></details>
     <details class="sidebar-sec" data-sec="abilities"${sectionOpen("abilities", true) ? " open" : ""}><summary><span class="sec-title">Abilities</span>${character.skillPoints > 0 ? ` <span class="grow-badge">${character.skillPoints} skill pt</span>` : ""}</summary><div class="sec-body">
-      ${character.skillPoints > 0 || (character.practice?.aspirations || []).some(a => aspirationRipe(character, a.abilityId, CONTENT.rules)) ? `<button class="opt" id="sidebar-levelup" title="Spend your skill points" style="padding:2px 8px; margin-bottom:6px; display:block">⬆ Level Up</button>` : ""}
+      ${canLevelUp(character) ? `<button class="opt" id="sidebar-levelup" title="Spend your skill points" style="padding:2px 8px; margin-bottom:6px; display:block">⬆ Level Up</button>` : ""}
       ${(() => {
         // SNG-047: group owned abilities by type/tradition (same taxonomy as the skill graph),
         // show each ability's FUNCTIONS as chips (what it DOES at a glance).

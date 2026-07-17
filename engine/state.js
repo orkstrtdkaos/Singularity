@@ -55,6 +55,7 @@ export async function loadContent() {
   const intensity = await loadRule("intensity_scaling", { steps: {} });
   const branchForks = await loadRule("branch_forks", { forks: {} });
   const romanceGuidance = await loadRule("romance_guidance", null); // pulled into the GM prompt on romantic intent
+  const functionVocabulary = await loadRule("function_vocabulary", { families: {} }); // SNG-124: the 8 function families (verb→family), for coverage + badges
   // SNG-101b: by-right native-grant table (anchors + lean-matched basics per tradition). Merged INTO the
   // rules bag so nativeGrantIdsFor(character, rules) reads it directly; absence leaves grants a no-op.
   const nativeGrants = await loadRule("native_grants", { traditionNativeGrants: {}, grantCap: 5 });
@@ -177,7 +178,7 @@ export async function loadContent() {
   try { legends = loadLegends(await fetchJSON("content/packs/valley/lore/legends.json")); } catch { /* no legends */ }
   for (const fig of legends.roster) if (fig.id && !npcs[fig.id]) npcs[fig.id] = fig;
 
-  const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, regions, accords, helpText, substrateModel, romanceGuidance, skillBattle, startingLocation: valley.startingLocation };
+  const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, regions, accords, helpText, substrateModel, romanceGuidance, skillBattle, functionVocabulary, startingLocation: valley.startingLocation };
   // SNG-022: bring every loaded record up to current (derive missing additive fields,
   // flag dangling cross-refs). In-memory only — Pages files are static.
   try { reconcileContent(content); } catch (err) { console.warn("[loadContent] reconcile skipped:", err.message); }

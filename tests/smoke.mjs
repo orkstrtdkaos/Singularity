@@ -30,6 +30,7 @@ import { typeAffinity, vectorAffinity, locationAffinity, affinityReceipt } from 
 import { recordCoUse, coUseCount, currentStage, refreshEvolvingItems, noteCoUseAndRefresh, evolvedItemsForGM } from "../engine/evolution.js";
 import { homeClassOf, isCrossClass, skillPointCost, forkFor, forkPending, chosenFork, setFork, rankExpression, forkPaths, skillGraphModel, nativeGrantsFor, combinationsAvailableFor } from "../engine/skilltree.js";
 import { combinationThresholdMet, ripeAxisTouchCombinations } from "../engine/practice.js";
+import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, familyClass, FUNCTION_FAMILIES } from "../engine/functions.js";
 import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, applySurgeBacklash, surgeBacklash, intensityOptions } from "../engine/intensity.js";
 import { validate, missingRequired, defaultFor } from "../engine/genschema.js";
 import { generate, ensureGenerated, resolveExisting, mintId, repairEntity, stubEntity, birthWeightOf, buildGeneratePrompt, generatedRecords, GEN_TYPES, isMinorEntity, enforceFloors, recordAttention, effectiveWeight, recomputeTier, isDormant, isSurfaceable, livingWorldForGM, findGenerated, nominationsFor } from "../engine/generate.js";
@@ -3401,6 +3402,50 @@ await (async () => {
   const contrib = contributionsBy(store);
   check("SNG-128: contributionsBy tallies promoted vs variant per contributing player, with weight",
     contrib.pk1.promoted === 1 && contrib.pk1.variant === 0 && contrib.pk2.variant === 1 && contrib.pk1.characters.includes("hero"));
+}
+
+// --- SNG-124 (Phase A): function families as a legible axis — coverage + recommendations ---
+{
+  const vocab = JSON.parse(readFileSync(join(root, "content/packs/core/rules/function_vocabulary.json"), "utf8"));
+  const fx = buildFunctionIndex(vocab);
+  check("SNG-124: buildFunctionIndex inverts the AUTHORED vocab into 8 families + a verb→family map",
+    fx.families.length === 8 && fx.verbToFamily.strike === "HARM" && fx.verbToFamily.heal === "RESTORE" && fx.verbToFamily.reveal === "KNOW" && fx.verbToFamily.ward === "PROTECT");
+  check("SNG-124: familyClass yields the CSS class for a family badge", familyClass("HARM") === "fn-fam-harm");
+  check("SNG-124: familiesOfAbility maps an ability's verbs to its families (deduped)",
+    familiesOfAbility({ functions: ["strike", "break"] }, fx).join() === "HARM" && familiesOfAbility({ functions: ["heal", "reveal"] }, fx).sort().join() === "KNOW,RESTORE");
+
+  // coverage: a kit of pure HARM has HARM covered and the other 7 families MISSING
+  const cat = {
+    a_strike: { id: "a_strike", name: "Strike", functions: ["strike"] },
+    a_heal: { id: "a_heal", name: "Mending Hand", functions: ["heal", "mend"], tradition: "somatic", nativeOrCombination: "native", levelReq: 1, energyCost: 6 },
+    a_reveal: { id: "a_reveal", name: "Prism Sight", functions: ["reveal"], levelReq: 1, energyCost: 4 },
+    a_break: { id: "a_break", name: "Sunder", functions: ["break"], levelReq: 1, energyCost: 5 }
+  };
+  const hero = { abilities: [{ abilityId: "a_strike", level: 1 }], domains: { primary: "somatic" }, tendencies: {} };
+  const cov = functionCoverage(hero, cat, fx);
+  check("SNG-124: functionCoverage reads owned abilities' functions — HARM covered, RESTORE among the missing",
+    cov.covered.includes("HARM") && cov.missing.includes("RESTORE") && cov.missing.includes("KNOW") && cov.byFamily.HARM === 1);
+
+  // recommend: a RESTORE skill FILLS a gap and should outrank a redundant HARM skill; a ripe one tops all
+  const learnable = [cat.a_heal, cat.a_reveal, cat.a_break];
+  const recs = recommendSkills(hero, learnable, { fnIndex: fx, catalog: cat, effectiveCost: ab => ab.energyCost });
+  check("SNG-124: recommendSkills ranks a gap-filling skill above a redundant one (function-gap = highest value)",
+    recs[0].abilityId !== "a_break" && recs.some(r => r.abilityId === "a_heal" && /gap/i.test(r.why)));
+  check("SNG-124: a redundant-family skill (another HARM) scores low or is dropped",
+    !recs.some(r => r.abilityId === "a_break" && r.score >= recs[0].score));
+  // a ripe aspiration outranks everything (ready + free)
+  const recsRipe = recommendSkills(hero, learnable, { fnIndex: fx, catalog: cat, ripe: new Set(["a_reveal"]), effectiveCost: ab => ab.energyCost });
+  check("SNG-124: a RIPE aspiration is surfaced first, marked ready-to-learn", recsRipe[0].abilityId === "a_reveal" && /ready/i.test(recsRipe[0].why));
+  check("SNG-124: recommendations carry the effective energy cost + their function families", recs.every(r => r.cost != null && Array.isArray(r.families)));
+
+  // every CORE ability's `functions` verbs are known to the vocabulary (no orphan verb → grey badge)
+  const abilityFiles = readdirSync(join(root, "content/packs/core/abilities")).filter(f => f.endsWith(".json"));
+  let orphan = null, checked = 0;
+  for (const f of abilityFiles) {
+    const arr = JSON.parse(readFileSync(join(root, "content/packs/core/abilities", f), "utf8"));
+    for (const ab of (Array.isArray(arr) ? arr : arr.abilities || [])) for (const v of ab.functions || []) { checked++; if (!fx.verbToFamily[v]) orphan = `${ab.id}:${v}`; }
+  }
+  check("SNG-124: every core ability's function verb maps to a known family (no orphan verbs)", checked > 100 && orphan === null);
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

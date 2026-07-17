@@ -677,3 +677,16 @@ img[data-lightbox] { cursor: zoom-in; }
 .family-row.you { background: rgba(212,162,74,0.08); border-radius: 6px; padding: 5px 8px; }
 .fam-rank { color: var(--ink-dim); font-family: var(--font-ui); font-size: 12px; width: 16px; }
 .fam-stats { font-size: 12px; color: var(--ink-dim); font-family: var(--font-ui); margin-left: auto; }
+
+/* SNG-124 — function-family colored badges (color = family, glyph = verb). Function ≠ tradition palette. */
+.fn-chip.fn-fam-harm      { color:#e58a7a; border-color:#7a3b34; background:rgba(192,91,77,0.14); }
+.fn-chip.fn-fam-restore   { color:#8fc06e; border-color:#4a6b38; background:rgba(123,160,91,0.14); }
+.fn-chip.fn-fam-protect   { color:#e0b25a; border-color:#7a5f2a; background:rgba(212,162,74,0.14); }
+.fn-chip.fn-fam-know      { color:#6fb0d8; border-color:#345a72; background:rgba(90,140,200,0.14); }
+.fn-chip.fn-fam-shape     { color:#d99a5a; border-color:#7a532a; background:rgba(210,140,60,0.14); }
+.fn-chip.fn-fam-influence { color:#b48fd0; border-color:#553a72; background:rgba(150,110,200,0.14); }
+.fn-chip.fn-fam-move      { color:#5fc0b6; border-color:#2f6b64; background:rgba(90,168,160,0.14); }
+.fn-chip.fn-fam-sustain   { color:#9aa2ad; border-color:#454b55; background:rgba(120,128,140,0.14); }
+.sug-block { border-left: 3px solid var(--accent2); }
+.sug-row { border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+.sug-row .btn { margin-top: 4px; }

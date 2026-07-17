@@ -11,6 +11,7 @@ import { slugify } from "./quests.js";
 import { meetsLearnGate, meetsRank3Gate, atCapacity, skillPointCost, rankExpression, forkPending } from "./skilltree.js";
 import { domainAccess, traditionOf, isFolkTradition, antipodeOf } from "./traditions.js";
 import { standingWithPeople } from "./reputation.js";
+import { trainerFor } from "./company.js";
 
 // Practiced enough for `targetRank`? Inlined (not imported from practice.js) to avoid a circular
 // import — practice.js already imports discoveryKey from here. Mirrors practice.js practiceRankReady.
@@ -391,8 +392,12 @@ export function meetsStandingBar(character, traditionId, tier, rules, opts = {})
   const requiresTeacher = opts.requiresTeacher ?? g.requiresTeacher ?? true;
   const { score } = standingWithPeople(character, traditionId, rules);
   if (score < threshold) return { ok: false, why: `deep standing with this people is not yet earned (standing ${score} of ${threshold})` };
+  // SNG-126: a willing teacher can be the durable `teachers[trad]` (markTeacher, met-once) OR a TRAINER
+  // travelling in your company right now (their presence sets the gate; part ways and it closes for tiers
+  // not yet taken — Law 14 keeps what's already learned). One gate, two ways to satisfy it — no fork.
   const t = character?.teachers?.[traditionId];
-  if (requiresTeacher && !(t && t.met && t.willing)) return { ok: false, why: "greatness is taught, not bought — a willing teacher of this people is required for its capstones" };
+  const companyTrainer = trainerFor(character).has(traditionId);
+  if (requiresTeacher && !((t && t.met && t.willing) || companyTrainer)) return { ok: false, why: "greatness is taught, not bought — a willing teacher of this people is required for its capstones" };
   return { ok: true };
 }
 

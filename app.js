@@ -23,6 +23,7 @@ import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverl
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal } from "./engine/traditions.js";
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs } from "./engine/companions.js";
+import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges } from "./engine/company.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
 import { initWorldState, runWorldTick, syncSharedWorld, advanceGeneratedOffscreen, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
@@ -43,7 +44,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.86";
+const APP_VERSION = "1.8.87";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1068,6 +1069,7 @@ function migrate(c) {
   // per people; regionsKnown: turns spent among a people's region.
   if (!c.teachers) c.teachers = {};
   if (!c.regionsKnown) c.regionsKnown = {};
+  ensureCompany(c); // SNG-126: the NPC-company roster (recruited allies/trainers/liaisons)
   // SNG-101: make the build-time closed-opposite set EXPLICIT (additive; the primary+secondary antipodes
   // that domainAccess already computes). Promotion appends promoted-domain antipodes to it. domainCeilings
   // / domainsAcquired stay unset → absent ⇒ station-derived ceilings, exactly as before.
@@ -4354,6 +4356,7 @@ function renderStructuredQuestDetail(q) {
     const day = readClock(character.clock).day;
     const r = resolveStructuredQuest(character, q.id, b.dataset.outcome, {
       worldDay: absoluteWorldDay(), nowISO: new Date().toISOString(),
+      liaisonMult: liaisonFactions(character), // SNG-126: a company liaison speeds standing with their people
       // both sinks land the machine-readable effects[] durably: propagating world-events + pinned facts
       recordEvent: ev => applyFactUpdates(character, [{ op: "add", text: ev.text }], { day }),
       recordFact: f => applyFactUpdates(character, [{ op: "add", text: f.text }], { day }),
@@ -5414,14 +5417,23 @@ function renderPlay(turn, opts = {}) {
       ${(() => { const avail = availableStructuredQuests(character, CONTENT.quests || [], questOfferContext(character, sceneState)); return avail.length ? `<div class="hint" style="margin-top:4px">✦ ${avail.length} quest${avail.length === 1 ? "" : "s"} to take up here</div>` : ""; })()}
       <button class="opt" id="open-questlog" style="display:block;width:100%;margin-top:4px">📜 Quest Log${(character.quests || []).some(q => q.status !== "active") ? ` — ${(character.quests || []).filter(q => q.status === "completed" || q.status === "resolved").length} done · ${(character.quests || []).filter(q => q.status === "failed").length} failed` : ""}</button>
     </div></details>
-    ${(() => { // SNG-120: Company — Party (other players, sync) + Companions (NPCs), folded into one section
+    ${(() => { // SNG-120/126: Company — Party (players) + Companions (catalog) + Allies (NPC party members, roles)
       const comps = (character.companions || []).filter(id => CONTENT.companions[id]);
       const partyOn = syncEnabled();
-      if (!partyOn && !comps.length) return ""; // solo + no companions → the section disappears
-      const count = (sharedScene?.party?.length || 0) + comps.length;
+      // SNG-126: the unified NPC-people half — recruited members (with roles) + partner-adjacent NPCs,
+      // plus present NPCs bonded strongly enough to ask along.
+      const roster = companyRoster(character, { rules: CONTENT.rules });
+      const inRoster = id => roster.some(r => r.npcId === id);
+      const recruitable = (knownPeopleAt(character, character.currentLocationId, { locations: CONTENT.locations, npcs: CONTENT.npcs }) || [])
+        .filter(p => !inRoster(p.id) && isRecruitable(character.npcRegistry?.[p.id]));
+      if (!partyOn && !comps.length && !roster.length && !recruitable.length) return ""; // truly solo → the section disappears
+      const count = (sharedScene?.party?.length || 0) + comps.length + roster.length;
       const partyBody = partyOn ? `<div class="company-group"><div class="sys-label">Party</div>${sharedScene ? `${sharedScene.party.map(m => `<div class="known-npc"><span class="npc-name">${m.characterId === character.id ? "you" : esc(m.name)}</span>${sharedScene.turn === m.characterId ? `<span class="rep-band trusted">turn</span>` : ""}</div>`).join("")}<div class="hint">${isMyTurn(sharedScene, character.id) ? "Your turn — act." : "Waiting for " + esc(sharedScene.party.find(m => m.characterId === sharedScene.turn)?.name || "…")}</div><button class="opt" id="party-leave" style="display:block; width:100%; margin-top:4px">Leave shared scene</button>` : `<button class="opt" id="party-find" style="display:block; width:100%">Find or start a party here</button>`}</div>` : "";
       const compBody = comps.length ? `<div class="company-group"><div class="sys-label">Companions</div>${comps.map(id => { const c = CONTENT.companions[id]; const dn = character.companionNames?.[id] || c.name; const b = bondOf(character, c.id, CONTENT.rules); return `<div class="companion"><span class="companion-name">${esc(dn)}</span>${dn !== c.name ? ` <span class="hint">(${esc(c.name)})</span>` : ""} <span class="rep-band ${b.bond >= 3 ? "trusted" : ""}" title="bond grows through shared deeds, assists, and encounters">bond ${b.bond}${b.stage === 2 ? " · stage 2" : ""}</span> <span class="cost">${esc(c.role)}</span><button class="opt companion-rename" data-rename="${esc(id)}" title="Name them">✎</button><button class="opt companion-part" data-part="${esc(id)}">Part ways</button></div>`; }).join("")}</div>` : "";
-      return `<details class="sidebar-sec" data-sec="company"${sectionOpen("company", true) ? " open" : ""}><summary><span class="sec-title">Company</span>${count ? ` <span class="sec-sum">(${count})</span>` : ""}</summary><div class="sec-body">${partyBody}${compBody}</div></details>`;
+      const allyBody = (roster.length || recruitable.length) ? `<div class="company-group"><div class="sys-label">Allies</div>${
+        roster.map(r => `<div class="companion"><span class="companion-name">${esc(r.name)}</span> <span class="cost" title="roles they hold in your company">${esc(roleBadges(r.roles))}</span>${r.teaches ? ` <span class="rep-band trusted" title="a trainer — their presence lets you learn this people's capstones">teaches ${esc(traditionLabel(r.teaches))}</span>` : ""}${r.liaisonFor ? ` <span class="rep-band" title="a liaison — faster standing with their people">liaison</span>` : ""}${r.recruited ? `<button class="opt ally-part" data-partally="${esc(r.npcId)}">Part ways</button>` : ""}</div>`).join("")
+      }${recruitable.map(p => `<div class="companion"><span class="companion-name">${esc(p.name)}</span> <span class="hint">${esc(p.label || "at your side")}</span><button class="opt ally-recruit" data-recruit="${esc(p.id)}" title="Ask them to travel with you">＋ Recruit</button></div>`).join("")}</div>` : "";
+      return `<details class="sidebar-sec" data-sec="company"${sectionOpen("company", true) ? " open" : ""}><summary><span class="sec-title">Company</span>${count ? ` <span class="sec-sum">(${count})</span>` : ""}</summary><div class="sec-body">${partyBody}${compBody}${allyBody}</div></details>`;
     })()}
     ${(() => { // SNG-121: Items — the PINNED quick-access set; the rest is one tap away in the full Inventory
       ensurePins(character);
@@ -5634,8 +5646,26 @@ function renderPlay(turn, opts = {}) {
     const c = CONTENT.companions[btn.dataset.part];
     if (!confirm(`Part ways with ${character.companionNames?.[c.id] || c.name}?`)) return;
     character.companions = character.companions.filter(id => id !== c.id);
+    if (character.companionBonds) delete character.companionBonds[c.id]; // SNG-126: clean part-ways — no orphan bond/name state
+    if (character.companionNames) delete character.companionNames[c.id];
     saveCharacter(character);
     renderPlay(character.activeScene?.lastTurn || null, { aside: `${character.companionNames?.[c.id] || c.name} drifts on — for now.` });
+  };
+  // SNG-126: recruit a strong-bonded present NPC into your company (roles from their authored record),
+  // and part ways with a recruited ally. partner is bond-derived (SNG-108), never set here.
+  for (const btn of app.querySelectorAll("[data-recruit]")) btn.onclick = () => {
+    const id = btn.dataset.recruit; const cat = CONTENT.npcs[id] || {}; const nm = character.npcRegistry?.[id]?.name || cat.name || "They";
+    if (!confirm(`Ask ${nm} to travel with you?`)) return;
+    recruit(character, id, { roles: offeredRoles(cat), teaches: cat.teaches || null, liaisonFor: cat.liaisonFor || null, day: absoluteWorldDay() });
+    saveCharacter(character);
+    renderPlay(character.activeScene?.lastTurn || null, { aside: `${nm} joins your company${cat.teaches ? ` — they can teach you the ${traditionLabel(cat.teaches)} craft` : ""}${cat.liaisonFor ? `, and speak for you among their people` : ""}.` });
+  };
+  for (const btn of app.querySelectorAll("[data-partally]")) btn.onclick = () => {
+    const id = btn.dataset.partally; const nm = character.npcRegistry?.[id]?.name || "They";
+    if (!confirm(`Part ways with ${nm}?`)) return;
+    partCompany(character, id);
+    saveCharacter(character);
+    renderPlay(character.activeScene?.lastTurn || null, { aside: `${nm} parts from your company — the road may cross again.` });
   };
   // SNG-057: rename a companion (the GM + portraits use the chosen name)
   for (const btn of app.querySelectorAll("[data-rename]")) btn.onclick = () => {

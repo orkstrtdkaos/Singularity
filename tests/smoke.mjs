@@ -18,6 +18,7 @@ import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/p
 import { initWorldState, runWorldTick, advanceGeneratedOffscreen, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "../engine/worldtick.js";
 import { assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "../engine/gambit.js";
 import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, autoAdvancePracticedRanks, markDefiningMoment, meetsStandingBar, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy, nativeGrantIdsFor, applyNativeGrants, retroNativeGrants } from "../engine/progression.js";
+import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, liaisonMultiplierFor, roleBadges, COMPANY_ROLES } from "../engine/company.js";
 import { standingWithPeople } from "../engine/reputation.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, resolveTopic, namesMatch, mergeCodexTopics, mergeInto, suggestMerges, markNotSame } from "../engine/codex.js";
 import { reconcile, reconcileContent, CHARACTER_STEPS, CONTENT_STEPS, topReconcileVersion } from "../engine/reconcile.js";
@@ -2422,7 +2423,53 @@ await (async () => {
   // an unwilling teacher does not count
   const unwilling = { peopleDisposition: { umbral: 12 }, teachers: { umbral: { met: true, willing: false } } };
   check("an unwilling teacher does not clear the capstone bar", meetsStandingBar(unwilling, "umbral", 4, rules).ok === false);
+  // SNG-126: a TRAINER travelling in your company satisfies the SAME teacher gate (no fork) — standing +
+  // a present trainer opens the capstone even with no durable teachers[] entry.
+  const withTrainer = { peopleDisposition: { umbral: 12 }, teachers: {}, company: [{ npcId: "sorel", roles: ["trainer", "ally"], teaches: "umbral" }] };
+  check("SNG-126: a company trainer for the tradition clears the capstone teacher gate", meetsStandingBar(withTrainer, "umbral", 4, rules).ok === true);
+  check("SNG-126: a company trainer for a DIFFERENT tradition does not clear it", meetsStandingBar({ peopleDisposition: { blazeborn: 12 }, teachers: {}, company: [{ npcId: "sorel", roles: ["trainer"], teaches: "umbral" }] }, "blazeborn", 4, rules).ok === false);
 })();
+
+// --- SNG-126: NPC party members with ROLES — one unified company, roles stack + wire to existing systems ---
+{
+  const npcReg = { pell: { id: "pell", name: "Pell", relationship: 7, bondType: "romantic", bondStage: "partner" }, sorel: { id: "sorel", name: "Sorel", relationship: 6 }, gruff: { id: "gruff", name: "Gruff", relationship: 1 } };
+  const ch = { npcRegistry: npcReg };
+
+  // recruit — roles STACK on one person; partner is refused here (bond-derived only)
+  recruit(ch, "sorel", { roles: ["trainer", "ally"], teaches: "somatic" });
+  recruit(ch, "sorel", { roles: ["liaison", "partner"], liaisonFor: "somatic" }); // stacks liaison, drops partner
+  const sorel = ch.company.find(m => m.npcId === "sorel");
+  check("SNG-126: recruit stacks roles on one NPC (trainer+ally+liaison), refusing partner (bond-derived)",
+    sorel.roles.includes("trainer") && sorel.roles.includes("ally") && sorel.roles.includes("liaison") && !sorel.roles.includes("partner"));
+  check("SNG-126: recruit carries the taught tradition + liaison people", sorel.teaches === "somatic" && sorel.liaisonFor === "somatic");
+
+  // trainerFor + liaisonFactions read their own role independently (one NPC fires multiple benefits)
+  check("SNG-126: trainerFor = the traditions the company can teach", trainerFor(ch).has("somatic"));
+  check("SNG-126: liaisonFactions maps the people → a >1 standing multiplier", liaisonFactions(ch).somatic > 1 && liaisonMultiplierFor(ch, "somatic") > 1 && liaisonMultiplierFor(ch, "umbral") === 1);
+
+  // the unified roster: recruited Sorel + partner-adjacent Pell (derived partner+ally, never recruited)
+  const roster = companyRoster(ch);
+  const rSorel = roster.find(r => r.npcId === "sorel"), rPell = roster.find(r => r.npcId === "pell");
+  check("SNG-126: companyRoster folds in a partner-adjacent NPC with derived partner+ally roles", rPell && rPell.roles.includes("partner") && rPell.roles.includes("ally") && rPell.recruited === false);
+  check("SNG-126: a recruited member is flagged recruited (gets a part-ways control); a derived partner is not", rSorel.recruited === true && rPell.recruited === false);
+
+  // isRecruitable — a strong bond (band >= ally) can be asked along; a faint acquaintance cannot
+  check("SNG-126: isRecruitable gates on a strong-enough bond (ally band), not a faint one",
+    isRecruitable(npcReg.sorel) === true && isRecruitable(npcReg.gruff) === false);
+
+  // offeredRoles derives roles from an authored NPC record (teaches → trainer, liaisonFor → liaison)
+  check("SNG-126: offeredRoles reads the authored record — ally always, +trainer if it teaches, +liaison if it represents a people",
+    offeredRoles({ teaches: "somatic", liaisonFor: "somatic" }).sort().join() === ["ally", "liaison", "trainer"].sort().join() && offeredRoles({}).join() === "ally");
+
+  // part ways removes the membership + its benefits (already-learned stays — Law 14, not tested here)
+  partCompany(ch, "sorel");
+  check("SNG-126: partCompany removes the member and its benefits (trainerFor/liaison now empty)", !ch.company.some(m => m.npcId === "sorel") && !trainerFor(ch).has("somatic"));
+
+  // the master_taro reference content declares the fields the engine reads
+  const taro = JSON.parse(readFileSync(join(root, "content/packs/valley/npcs/master_taro.json"), "utf8"));
+  check("SNG-126: the reference NPC (master_taro) declares recruitable + teaches + liaisonFor for the engine to read",
+    taro.recruitable === true && taro.teaches === "somatic" && offeredRoles(taro).includes("trainer"));
+}
 
 // --- SNG-101: domain promotion (raise a ceiling, foreclose the antipode; keep the ground) ---
 (() => {

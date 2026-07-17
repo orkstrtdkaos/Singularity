@@ -229,7 +229,9 @@ function applyQuestEffects(character, quest, effects, ctx = {}) {
         break;
       }
       case "disposition": {
-        if (e.people && Number.isFinite(e.delta)) { character.peopleDisposition[e.people] = (character.peopleDisposition[e.people] || 0) + e.delta; applied.push({ type: "disposition", people: e.people, delta: e.delta }); }
+        // SNG-126: a company LIAISON for this people speeds reputation while they travel with you
+        // (ctx.liaisonMult is { [people]: multiplier }, supplied by the app from liaisonFactions).
+        if (e.people && Number.isFinite(e.delta)) { const gain = Math.round(e.delta * (ctx.liaisonMult?.[e.people] || 1)); character.peopleDisposition[e.people] = (character.peopleDisposition[e.people] || 0) + gain; applied.push({ type: "disposition", people: e.people, delta: gain }); }
         break;
       }
       case "codex_fact": {
@@ -286,7 +288,8 @@ function applyQuestProse(character, quest, prose, ctx = {}) {
     const dm = c.match(/([A-Za-z][\w'-]*(?:\s+[A-Za-z][\w'-]*)?)\s+disposition[^.]*?\b(strongly\s+raised|raised|lowered|wary\s+respect)/i);
     if (dm) {
       const who = slugify(dm[1].trim()); const word = dm[2].toLowerCase();
-      const delta = /lower/.test(word) ? -1 : /strong/.test(word) ? 2 : 1;
+      const base = /lower/.test(word) ? -1 : /strong/.test(word) ? 2 : 1;
+      const delta = base < 0 ? base : Math.round(base * (ctx.liaisonMult?.[who] || 1)); // SNG-126: a liaison speeds gains, not penalties
       character.peopleDisposition[who] = (character.peopleDisposition[who] || 0) + delta;
       applied.push({ type: "disposition", people: who, delta });
     }

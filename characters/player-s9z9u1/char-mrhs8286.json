@@ -756,47 +756,52 @@
         "player": "Cross the room to Pell — stand beside her at the drafting surface, close, and let her know without words that the space is still hers but you are there.",
         "summary": "Silas stands beside Pell at the drafting surface — two shadows, one lamp, her father's letters between them and no words needed.",
         "narration": "You cross the room in three quiet steps and stand beside Pell at the drafting surface — close enough that your arm is at hers, not touching. The lamp on the corner throws your joined shadow up the wall, one shape with two heads. You don't look at her. You look at the letters.\n\nHer father's hand is on the page in front of you both: the distinctive threes, the band notations running down the margin in the same compressed column Fendt recognized from memory. The ink is old enough that it's faded at the edges and sharp at the center, the way old ink goes when it was laid with care. You read the same surface she is reading, and you don't say anything.\n\nHuginn shifts on the stool-back behind you — a single, small adjustment of weight, the way it moves when a room has settled into what it needed to be. Calvar, two paces to the other side, has gone still in the way of a man who knows when his presence should be reduced to a warmth in the room rather than a face.\n\nPell exhales — not a release exactly, something smaller and more controlled than release, the breath of someone who has been measuring their own breathing without noticing. Her hands are still loosened on the edge of the drafting surface. She doesn't move them toward the letters and she doesn't move them away."
+      },
+      {
+        "player": "Put your arm around Pell Marsh - Let her know you are here with and for her.  Whatever comes, we will face it together... with Huginn.",
+        "summary": "Silas puts his arm around Pell at the drafting surface — Huginn lands beside the letters; Calvar holds the room still.",
+        "narration": "You lift your arm and set it around Pell's shoulders — not a gesture, not a comfort offered at arm's length, but a real settling weight. Your hand finds the curve of her far shoulder and stays there. She doesn't startle. She leans, just slightly, the way a wall leans into what it's built against: not collapsing, not performing ease, just accepting the fact of you beside her.\n\nThe letters are still on the drafting surface. Her father's hand — those compressed threes, the band notations running down the margin — is exactly where it was. She is not done reading. You don't need her to be. Your arm is there for the duration, and she knows it.\n\nHuginn drops from the stool-back to the edge of the drafting surface with a single soft landing, a wingspan's breadth from the letters. It settles. Looks at the page. Looks at Pell. Does not say anything, which is the most it ever says. It is not here as an omen. It is here because something is ending and it takes that work seriously, and what is ending in this room right now is the shape of a loss Pell has been carrying for seven years without knowing it had a name. Huginn stays. That is enough.\n\nCalvar, two paces to the side, makes a small movement — shifts his weight, exhales through his nose — and then goes still again. He is giving the room what it needs. He is good at that, it turns out. The lamp holds steady on the drafting surface corner. The three of you and the bird and the letters and the light: a thing that will hold as long as it needs to."
       }
     ],
     "lastTurn": {
-      "narration": "You cross the room in three quiet steps and stand beside Pell at the drafting surface — close enough that your arm is at hers, not touching. The lamp on the corner throws your joined shadow up the wall, one shape with two heads. You don't look at her. You look at the letters.\n\nHer father's hand is on the page in front of you both: the distinctive threes, the band notations running down the margin in the same compressed column Fendt recognized from memory. The ink is old enough that it's faded at the edges and sharp at the center, the way old ink goes when it was laid with care. You read the same surface she is reading, and you don't say anything.\n\nHuginn shifts on the stool-back behind you — a single, small adjustment of weight, the way it moves when a room has settled into what it needed to be. Calvar, two paces to the other side, has gone still in the way of a man who knows when his presence should be reduced to a warmth in the room rather than a face.\n\nPell exhales — not a release exactly, something smaller and more controlled than release, the breath of someone who has been measuring their own breathing without noticing. Her hands are still loosened on the edge of the drafting surface. She doesn't move them toward the letters and she doesn't move them away.",
-      "sceneSummary": "Silas stands beside Pell at the drafting surface — two shadows, one lamp, her father's letters between them and no words needed.",
+      "narration": "You lift your arm and set it around Pell's shoulders — not a gesture, not a comfort offered at arm's length, but a real settling weight. Your hand finds the curve of her far shoulder and stays there. She doesn't startle. She leans, just slightly, the way a wall leans into what it's built against: not collapsing, not performing ease, just accepting the fact of you beside her.\n\nThe letters are still on the drafting surface. Her father's hand — those compressed threes, the band notations running down the margin — is exactly where it was. She is not done reading. You don't need her to be. Your arm is there for the duration, and she knows it.\n\nHuginn drops from the stool-back to the edge of the drafting surface with a single soft landing, a wingspan's breadth from the letters. It settles. Looks at the page. Looks at Pell. Does not say anything, which is the most it ever says. It is not here as an omen. It is here because something is ending and it takes that work seriously, and what is ending in this room right now is the shape of a loss Pell has been carrying for seven years without knowing it had a name. Huginn stays. That is enough.\n\nCalvar, two paces to the side, makes a small movement — shifts his weight, exhales through his nose — and then goes still again. He is giving the room what it needs. He is good at that, it turns out. The lamp holds steady on the drafting surface corner. The three of you and the bird and the letters and the light: a thing that will hold as long as it needs to.",
+      "sceneSummary": "Silas puts his arm around Pell at the drafting surface — Huginn lands beside the letters; Calvar holds the room still.",
       "choices": [
         {
-          "label": "Wait — let her speak first, however long it takes",
+          "label": "Let her finish reading — hold the silence until she speaks first, whatever she needs to say",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "calm",
-            "sustain"
+            "comfort",
+            "calm"
           ],
           "trivial": true
         },
         {
-          "label": "Name what you see in the letters — not interpretation, just what's there: the band designations, the margin method, the hand that taught Calvar",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Name her father quietly — not as a question, just as an acknowledgment that he was real and the work was his",
+          "attribute": "social",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "study",
+            "comfort",
+            "calm"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask her — plainly, no ceremony — if she wants to bring anything of his with her when we leave, beyond what's already in the investigation",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "comfort",
             "help"
           ],
           "trivial": true
         },
         {
-          "label": "Ask Calvar, quietly, whether Pell's father knew what he was building — whether the seventh-band specification was designed to last, or expected to be replaced",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "negotiate"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Name the road to Millbrook — the practical shape of it, the time, what Calvar will need to bring — and let that be the thing that moves the room forward",
+          "label": "Name the road to Calvar — the shape of tomorrow, where we sleep tonight, how we move — and let the practical work be what holds the room forward",
           "attribute": "practical",
           "subAttribute": "wits",
           "difficulty": 0,
@@ -807,58 +812,90 @@
           "trivial": true
         }
       ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
+      "ledgerEvents": [],
       "scene": {
-        "setting": "Calvar's room above the cooperage, east lane, Edge District — evening, early-spring. Lamp steady on the drafting surface corner. Silas standing beside Pell at the drafting surface, arm at hers, not touching; her father's letters open between them.",
+        "setting": "Calvar's room above the cooperage, east lane, Edge District — evening, early-spring. Lamp steady on the drafting surface corner. Silas standing beside Pell at the drafting surface, arm around her shoulders; her father's letters open between them.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Standing at the drafting surface beside Silas — hands loosened on the edge, a controlled exhale, eyes still on her father's letters. Not yet spoken."
+            "state": "Leaning slightly into Silas's arm — still reading, or holding the page with her eyes, not yet ready to speak"
           },
           {
             "name": "Calvar",
-            "state": "Standing two paces to the side — reduced to a warmth in the room, giving the moment its space. Decision settled in him; waiting."
+            "state": "Two paces to the side — still, giving the room what it needs, weight settled"
           },
           {
             "name": "Huginn",
-            "state": "On the stool-back — shifted once to acknowledge the room settling, now still and watchful."
+            "state": "Landed on the edge of the drafting surface a wingspan from the letters — watching Pell, not performing anything, just present"
           }
         ],
         "objects": [
-          "Drafting surface — lamp on its corner, bundle open, letters and calibration page in view",
+          "Drafting surface — lamp on its corner, bundle open, letters and calibration page",
           "Fendt's Testimony (folded page) — in Silas's inventory",
           "Cord — untied, coiled on the drafting surface edge",
           "Memory (spear) — leaned against the wall by Pell",
           "Chair — to one side of the drafting surface",
-          "Empty stool — Huginn perched on its back",
+          "Empty stool — Huginn vacated, now perched on drafting surface edge",
           "Coat on a hook by the door",
           "Bed against the far wall — made precisely"
         ],
         "threads": [
-          "Pell has not yet spoken — her exhale was the first real movement; she is present and close to something",
+          "Pell has not yet spoken — she is leaning in, reading or holding the page, close to something",
           "The road to Millbrook needs to be named — Calvar is waiting for its shape",
           "The third copy at the Filtration Council annex in the lower Plateau district — status unknown",
           "The six-week window for Fendt's formal lodgment is the working clock"
         ]
       },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "pell",
+          "name": "Pell",
+          "note": "Accepted Silas's arm around her shoulders without startling — leaned in slightly, reading still. Has not spoken.",
+          "learned": [
+            "Silas's arm is there for the duration — she knows it without being told"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "In Calvar's room above the cooperage — Silas's arm around her, her father's letters still open before her, not yet spoken"
+        },
+        {
+          "op": "update",
+          "npcId": "calvar",
+          "name": "Calvar",
+          "note": "Shifted weight, exhaled, went still — holding the room, giving it what it needs.",
+          "learned": [
+            "Has the instinct to hold a room still when it needs holding"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "In his room above the cooperage — two paces to the side, committed to travel, waiting for the road to be named"
+        }
+      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a quiet crossing of the room and a shared stillness — no more than a few minutes"
+        "why": "A quiet settling moment — the room finding its shape after Calvar's yes"
       }
     },
     "sceneState": {
-      "setting": "Calvar's room above the cooperage, east lane, Edge District — evening, early-spring. Lamp steady on the drafting surface corner. Silas standing beside Pell at the drafting surface, arm at hers, not touching; her father's letters open between them.",
+      "setting": "Calvar's room above the cooperage, east lane, Edge District — evening, early-spring. Lamp steady on the drafting surface corner. Silas standing beside Pell at the drafting surface, arm around her shoulders; her father's letters open between them.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Standing at the drafting surface beside Silas — hands loosened on the edge, a controlled exhale, eyes still on her fathe"
+          "state": "Leaning slightly into Silas's arm — still reading, or holding the page with her eyes, not yet ready to speak"
         },
         {
           "name": "Calvar",
-          "state": "Standing two paces to the side — reduced to a warmth in the room, giving the moment its space. Decision settled in him; "
+          "state": "Two paces to the side — still, giving the room what it needs, weight settled"
         },
         {
           "name": "Huginn",
-          "state": "On the stool-back — shifted once to acknowledge the room settling, now still and watchful."
+          "state": "Landed on the edge of the drafting surface a wingspan from the letters — watching Pell, not performing anything, just pr"
         }
       ],
       "objects": [
@@ -867,12 +904,12 @@
         "Cord — untied, coiled on the drafting surface edge",
         "Memory (spear) — leaned against the wall by Pell",
         "Chair — to one side of the drafting surface",
-        "Empty stool — Huginn perched on its back",
+        "Empty stool — Huginn vacated, now perched on drafting surface edge",
         "Coat on a hook by the door",
         "Bed against the far wall — made precisely"
       ],
       "threads": [
-        "Pell has not yet spoken — her exhale was the first real movement; she is present and close to something",
+        "Pell has not yet spoken — she is leaning in, reading or holding the page, close to something",
         "The road to Millbrook needs to be named — Calvar is waiting for its shape",
         "The third copy at the Filtration Council annex in the lower Plateau district — status unknown",
         "The six-week window for Fendt's formal lodgment is the working clock"
@@ -1301,7 +1338,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d3] Moved before Silas reached the array office door — already oriented east. Stopped two paces from the cooperage stair, reading the lamp-line in the upper window.",
         "[d3] Named her approach plainly — professional case first, her father's name held in reserve. Waiting on Silas's call for who goes up first.",
         "[d3] Crossed the threshold cleanly — inside now, reading the room. Strategy intact: professional case first.",
         "[d3] Standing steady at Silas's left — professional case intact, father's name still held. Watching Calvar's face as the full chain lands.",
@@ -1310,17 +1346,18 @@
         "[d3] Eyes on the open bundle — her father's letters visible. Has not yet spoken since Calvar opened it.",
         "[d3] Reading her father's letters where they lie on Calvar's drafting surface — both hands on the edge, not picking them up yet. Silas stepped back and gave her the space without commen",
         "[d3] Still reading her father's letters — has not spoken. Silas gave her the space without comment and held it while naming the clock to Calvar.",
-        "[d3] Eyes lifted from her father's letters when Calvar said yes — shoulders dropped, hands loosened. Has not spoken yet but is present and listening."
+        "[d3] Eyes lifted from her father's letters when Calvar said yes — shoulders dropped, hands loosened. Has not spoken yet but is present and listening.",
+        "[d3] Accepted Silas's arm around her shoulders without startling — leaned in slightly, reading still. Has not spoken."
       ],
       "knownFacts": [
-        "She reads Fendt's situation as solvable on a known timeline; her father's situation as a different kind of problem requiring a different decision",
         "She holds two things at once — Fendt's six-week window and her father's unasked-for reappearance — without letting either collapse the other",
         "Has physically handled the testimony — made the relay action herself without being asked",
         "Pell's strategy: Fendt testimony, runner's name, Vash's account first — her father's notation held until the room earns it",
         "Calvar knew her father directly — was taught the specification method by him",
         "Calvar believed her father dead — seven years",
         "Her father's correspondence to Calvar is physically present — the seventh-band margin notations are in his hand on the top sheet; she is reading it where it lie",
-        "Calvar said yes before she had to ask — heard Silas name the training thread (her father taught Calvar) without being asked to confirm it"
+        "Calvar said yes before she had to ask — heard Silas name the training thread (her father taught Calvar) without being asked to confirm it",
+        "Silas's arm is there for the duration — she knows it without being told"
       ],
       "skillsObserved": [
         "rapid tactical positioning in an unknown interior",
@@ -1331,7 +1368,7 @@
         "holding partial knowledge without performance — named the ha"
       ],
       "status": "active",
-      "statusNote": "In Calvar's room above the cooperage — reading her father's letters; present as Calvar agrees to travel; not yet spoken since the decision was made",
+      "statusNote": "In Calvar's room above the cooperage — Silas's arm around her, her father's letters still open before her, not yet spoken",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 3
@@ -1655,7 +1692,6 @@
       },
       "relationship": 7,
       "history": [
-        "[d3] Pell gave him the professional opening — Grael named, six-week window named, chain from the river end named. Calvar's hand hasn't moved from the bundled papers. He is waiting to co",
         "[d3] Heard the complete chain laid out — Leth, Vash, Rennic, Fendt — and watched Fendt's Testimony placed on his drafting surface. Eyes on the folded page; hand still flat on the bundle",
         "[d3] Pell named her father — Calvar went still, pressed his hand on the bundled papers, crossed to the window, then turned back and said 'He taught me the specification method. I though",
         "[d3] Asked plainly whether Pell's father is alive — the professional non-reaction is entirely gone; seven years of held assumption breaking open visibly",
@@ -1664,17 +1700,18 @@
         "[d3] Standing two feet from Pell, watching her read — said nothing, which was the right call. The room has settled into what it was arranged to hold.",
         "[d3] Named the third copy's destination: the Filtration Council annex in the lower Plateau district, sent fourteen years ago. Acknowledged the six-week clock without flinching. Now seat",
         "[d3] Said yes — named Grael's method as the thing he understands, named his own failure to move three years ago, and asked for the road. He is now committed to traveling with Silas and ",
-        "[d3] The Attended End read his yes as a clean ending — a three-year private refusal closed, not a sacrifice. The bundle moving is his release from the waiting room. He does not need to "
+        "[d3] The Attended End read his yes as a clean ending — a three-year private refusal closed, not a sacrifice. The bundle moving is his release from the waiting room. He does not need to ",
+        "[d3] Shifted weight, exhaled, went still — holding the room, giving it what it needs."
       ],
       "knownFacts": [
-        "Calvar filed the calibration material as personal correspondence — that is why Rennic missed it",
         "The bundle contains Pell's father's own letters to Calvar, margins annotated with band designations in his hand",
         "Calvar sent copies to three places before the district secondary stack was cleared — the bundle is one; two others exist or existed",
         "The third copy of the seventh-band calibration files was sent to the Filtration Council annex in the lower Plateau district approximately fourteen years ago",
         "Calvar is uncertain whether the annex still holds records from that period or whether anyone there would know to look",
         "Agreed to travel — will vouch as pre-Transition calibration author and attest to the seventh-band specification",
         "Named his own delay plainly: told himself he had nothing left to prove and no one left to prove it to — that assumption is now broken",
-        "Understands that his presence outside the Radiant hierarchy changes Grael's method from functional to defeatable"
+        "Understands that his presence outside the Radiant hierarchy changes Grael's method from functional to defeatable",
+        "Has the instinct to hold a room still when it needs holding"
       ],
       "skillsObserved": [
         "receiving unexpected visitors without flinching",
@@ -1684,7 +1721,7 @@
         "identifying the structural flaw in Grael's appeal-capture me"
       ],
       "status": "active",
-      "statusNote": "In his room above the cooperage — has said yes to traveling with Silas and Pell; the bundle is the last thing holding him here; waiting for the road to be named",
+      "statusNote": "In his room above the cooperage — two paces to the side, committed to travel, waiting for the road to be named",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 3
@@ -2958,18 +2995,18 @@
     }
   },
   "tendencies": {
-    "strategic": 18.53149576031948,
-    "cerebral": 21.671596844681435,
-    "social": 22.310745936530886,
-    "generous": 5.642616153501871,
-    "cautious": 13.059034703455852,
-    "physical": 0.5616001143638059,
-    "risky": 1.5813529553634358,
-    "ruthless": 0.6953621312758029,
-    "carousing": 0.4882848653783103,
-    "amorous": 1.3389471701271494,
-    "patient": 0.8966285302824464,
-    "stealth": 0.572929976008282
+    "strategic": 18.06820836631149,
+    "cerebral": 21.1298069235644,
+    "social": 23.752977288117613,
+    "generous": 5.501550749664324,
+    "cautious": 12.732558835869456,
+    "physical": 0.5475601115047107,
+    "risky": 1.54181913147935,
+    "ruthless": 0.6779780779939079,
+    "carousing": 0.47607774374385253,
+    "amorous": 1.3054734908739707,
+    "patient": 0.8742128170253852,
+    "stealth": 0.558606726608075
   },
   "aptitudes": [
     "strategist",
@@ -2980,7 +3017,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 388,
+  "actionCount": 389,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3146,8 +3183,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784312534062,
-  "rev": 556,
+  "updatedAt": 1784312674096,
+  "rev": 557,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3403,7 +3440,7 @@
           "entityId": "calvar",
           "type": "npc",
           "birthWeight": 10,
-          "engagementScore": 39,
+          "engagementScore": 41,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -3417,10 +3454,6 @@
           },
           "attentionHistory": [
             {
-              "kind": "fact",
-              "day": 3
-            },
-            {
               "kind": "interact",
               "day": 3
             },
@@ -3506,6 +3539,10 @@
             },
             {
               "kind": "fact",
+              "day": 3
+            },
+            {
+              "kind": "interact",
               "day": 3
             },
             {
@@ -3969,7 +4006,7 @@
   "syncedAt": 1784292613822,
   "teachers": {},
   "regionsKnown": {
-    "valley": 203
+    "valley": 204
   },
   "foreclosed": [
     "rootkin",
@@ -4017,10 +4054,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-17T17:39:40.705Z",
-      "lastAt": "2026-07-17T18:22:14.062Z",
+      "lastAt": "2026-07-17T18:24:34.095Z",
       "startDay": 17,
       "endDay": 17,
-      "beats": 11
+      "beats": 12
     }
   ],
   "company": [

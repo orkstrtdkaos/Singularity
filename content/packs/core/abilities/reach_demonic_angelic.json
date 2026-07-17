@@ -869,6 +869,192 @@
     }
    ],
    "nativeOrCombination": "native"
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_deep_covenant",
+   "name": "The Deep Covenant",
+   "levelReq": 4,
+   "energyCost": 12,
+   "powerSystem": "reach_demonic_angelic",
+   "tradition": "abyssal",
+   "attribute": "social",
+   "axes": {
+    "demonic_angelic": -0.6
+   },
+   "functions": [
+    "command",
+    "bind"
+   ],
+   "narrationHints": "You do not raise your voice. You offer the terms, and the terms are already inside them, and they find themselves agreeing to a thing they will spend years explaining to themselves.",
+   "description": "The Abyssal art of the binding pact — a covenant offered so precisely to the hollow in someone that refusing it feels like refusing themselves. Not domination. Invitation, with a hook already set.",
+   "notFor": "It only binds what already wanted the bargain; a whole soul with nothing owed has nothing for the hook to catch. And a covenant witnessed and named aloud by a third party can be broken.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Deep Covenant",
+     "grants": "Bind a willing-if-they-knew-it party to a lasting pact that shapes their choices toward your end.",
+     "cannot": "It cannot compel the truly unwilling, it frays when spoken plainly by a witness, and every covenant you set is a thread that runs both ways — they are bound to you, and you to the keeping of it."
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "SOCIAL"
+   ],
+   "challengeProfile": {
+    "SOCIAL": 4
+   },
+   "harmRung": "binding"
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_drowning_deep",
+   "name": "The Drowning Deep",
+   "levelReq": 5,
+   "energyCost": 14,
+   "powerSystem": "reach_demonic_angelic",
+   "tradition": "abyssal",
+   "attribute": "social",
+   "axes": {
+    "demonic_angelic": -0.9
+   },
+   "functions": [
+    "command"
+   ],
+   "narrationHints": "The floor of the world opens under one person's certainty and they feel, for one endless moment, exactly how far down it goes — and how alone they are at the top of that fall.",
+   "description": "The deepest Abyssal working — you show someone the full depth beneath their footing, the vertigo of a self with no floor. Most who receive it never stand quite the same way again. The Abyssals do it anyway.",
+   "notFor": "One person, once, and it costs you enormously. It cannot touch someone at genuine peace with their own depths — they simply look down and are not afraid. And it cannot be undone: you cannot un-show a person the deep.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Drowning Deep",
+     "grants": "Show one person the abyss beneath their certainty — a lasting vertigo that reshapes who they are.",
+     "cannot": "It costs nearly all you have, it fails against genuine peace, and it CANNOT BE TAKEN BACK — you have shown them the deep and they have seen it."
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "SOCIAL"
+   ],
+   "challengeProfile": {
+    "SOCIAL": 5
+   },
+   "harmRung": "severe"
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_unfaltering_light",
+   "name": "The Unfaltering Light",
+   "levelReq": 4,
+   "energyCost": 12,
+   "powerSystem": "reach_demonic_angelic",
+   "tradition": "seraphic",
+   "attribute": "mental",
+   "axes": {
+    "demonic_angelic": 0.6
+   },
+   "functions": [
+    "ward",
+    "empower"
+   ],
+   "narrationHints": "The light does not flare. It simply does not stop — a steadiness that outlasts the thing trying to break it, until the breaking tires first.",
+   "description": "The Seraphic art of the light that does not gutter — a radiance sustained past all reason to sustain it, warding a place or a person through what should overwhelm them.",
+   "notFor": "It shields but does not strike; it can hold a line and never take ground. And holding it burns you as surely as it warms them — a light that never falters is paid for by the one who carries it.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Unfaltering Light",
+     "grants": "Sustain an unbreakable ward of radiance over a person or place, outlasting the assault against it.",
+     "cannot": "It cannot attack, only endure; it drains you the whole while it holds; and if you fall, the light falls with you."
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "DEFEND"
+   ],
+   "challengeProfile": {
+    "DEFEND": 4
+   }
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_kept_flame",
+   "name": "The Kept Flame",
+   "levelReq": 5,
+   "energyCost": 13,
+   "powerSystem": "reach_demonic_angelic",
+   "tradition": "seraphic",
+   "attribute": "mental",
+   "axes": {
+    "demonic_angelic": 0.9,
+    "mechanical_spiritual": 0.4
+   },
+   "functions": [
+    "empower",
+    "ward"
+   ],
+   "narrationHints": "For a moment you are lit from a source that was old before the Transition — the substrate itself answering, the way it answered when your kind first refused to give it up. It is the most yourself you will ever feel, and the most not-yours.",
+   "description": "The Seraphic capstone that IS a precursor act — the radiance drawn straight from the fabricated substrate your people never surrendered. This is why the Seraphs are what they are: the light is the nanites, kept flowing, and keeping them flowing is a precursor working few living things can survive channeling.",
+   "notFor": "It draws on the substrate directly — power beyond the ordinary tiers, and a standing cost to keep it lit; let it lapse and the flame does not politely dim, it gutters and takes something of you with it. Only a people who never gave up the nanites can hold this without being unmade.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Kept Flame",
+     "grants": "Channel the fabricated substrate directly as sustained radiant power — a precursor-tier working innate to your kind.",
+     "cannot": "It carries an ongoing upkeep the whole time it burns, it can unmake one who is not substrate-born, and it marks you to anything that reads the substrate — you are a lit thing in a dark room, and not everything in the dark is friendly."
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "DEFEND"
+   ],
+   "challengeProfile": {
+    "DEFEND": 5
+   },
+   "innatePrecursor": true
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_hollow_that_holds",
+   "name": "The Hollow That Holds",
+   "levelReq": 5,
+   "energyCost": 13,
+   "powerSystem": "reach_demonic_angelic",
+   "tradition": "abyssal",
+   "attribute": "social",
+   "axes": {
+    "demonic_angelic": -0.9,
+    "mechanical_spiritual": 0.4
+   },
+   "functions": [
+    "command",
+    "bind"
+   ],
+   "narrationHints": "You open the hollow in yourself — the one your people never filled, never closed, never gave up — and for a moment it is not an absence but a MOUTH, and the substrate pours through it, and you are the deepest thing in any room.",
+   "description": "The Abyssal capstone that IS a precursor act — the deep hollow the Abyssals kept, where their ancestors declined to give the nanites up, opened as a channel to the substrate itself. Where the Seraphs keep the light, the Abyssals kept the depth; both drink from the same well, and neither can stop.",
+   "notFor": "It draws the substrate through the kept hollow — power past the ordinary tiers, at a standing cost, and let it lapse and the hollow does not simply close, it HUNGERS. Only a people who kept the deep can channel it without being swallowed by it.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Hollow That Holds",
+     "grants": "Channel the fabricated substrate through the kept Abyssal hollow — a precursor-tier working innate to your kind.",
+     "cannot": "It carries an ongoing upkeep while open, it can swallow one who is not abyssal-born, and it marks you to anything that reads the substrate — the deep calls to the deep, and not all of it is on your side."
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "SOCIAL"
+   ],
+   "challengeProfile": {
+    "SOCIAL": 5
+   },
+   "harmRung": "severe",
+   "innatePrecursor": true
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

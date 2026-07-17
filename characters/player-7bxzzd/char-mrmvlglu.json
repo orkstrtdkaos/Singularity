@@ -8,7 +8,7 @@
   "whyHere": "You noticed the paying. You came out to see whether there was another way to be a mind.",
   "background": "drifter",
   "level": 1,
-  "xp": 33,
+  "xp": 38,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -24,18 +24,33 @@
     {
       "abilityId": "read_the_fight",
       "level": 1
+    },
+    {
+      "abilityId": "order_sense",
+      "level": 1,
+      "native": true
+    },
+    {
+      "abilityId": "the_established_route",
+      "level": 1,
+      "native": true
+    },
+    {
+      "abilityId": "latticework",
+      "level": 1,
+      "native": true
     }
   ],
   "alignment": {
     "spectrumId": -0.1382253125,
-    "body_mind": 0.03,
-    "concrete_abstract": 0.03875
+    "body_mind": 0.0485,
+    "concrete_abstract": 0.0468125
   },
   "attunement": 1,
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 56,
+  "energy": 51,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -58,15 +73,16 @@
       "effects": {
         "energy": 10
       },
-      "consumable": true
+      "consumable": true,
+      "pinned": true
     }
   ],
   "deeds": [],
   "relationships": {},
   "chronicle": [],
-  "currentLocationId": "the_cogitarium",
+  "currentLocationId": "old_switchback",
   "activeScene": {
-    "locationId": "the_cogitarium",
+    "locationId": "old_switchback",
     "turns": [
       {
         "player": null,
@@ -257,20 +273,62 @@
         "player": "Climb fast — Kon is already moving; whatever is up there has waited four days",
         "summary": "Saehara, Kon, and Ossian reach the third-terrace landing — the dragging sound is clearly within, and Kon defers to Saehara at the half-open door.",
         "narration": "The stairwell takes you in like a throat swallowing — pale stone narrowing, the chalk smell deepening into something older and staler as you climb. Kon is already two flights up, coat a dim coal-glow in the failing light, moving without hesitation. You follow.\n\nOssian comes behind you. You can hear them — bare feet on stone, each step placed with the economy of someone who has climbed these stairs ten thousand times and never thought about it. They don't speak. The dragging sound grows as you rise: slow, rhythmic, deliberate. Not the sound of someone in pain. Not the sound of someone trying to get somewhere. Something with a pattern to it, like a task being repeated.\n\nThe second terrace opens on your left as you pass — a long room, chalk-white, empty of people but not of work. Notation covers every surface you can see: the walls, a low table, three boards propped against a window that lets in the last grey-orange of the evening sky. No one. The dragging sound is not here.\n\nThe third terrace: a door standing half-open, the sound coming clearly now from beyond it. Kon stops outside, one forepaw lifted, coat reading warm and steady — not the sharp heat of Precursor warning, just the low amber of attention. The fox looks at the gap in the door, then back at you, then at the gap. Waiting for you to go first, which is unusual enough to note.\n\nOssian steps up beside you on the landing. 'Four days, two nights, and approximately six hours,' they say quietly. Their voice has gone careful in a way it wasn't on the floor below. 'I have not heard that sound before.'"
+      },
+      {
+        "player": "Use Read the Fight before you open the door — read whatever is in that room before you walk into it",
+        "summary": "Saehara reads the third-terrace room through sound before entering — a body at sustained work, not collapse.",
+        "narration": "You don't open the door yet. You stop a half-step back, let your breathing slow, and read.\n\nThe dragging sound resolves: fabric on stone, regular as a tide. Your mind assembles the room behind the door from what the sound gives you — one person, seated or prone, moving something with their arm. Not locomotion. Not distress. Repetition. A chalk arm sweeping a notation surface, or a hand pulling and resetting the same object, or someone turning pages with extreme deliberateness. The interval is constant, roughly four seconds, which means the body doing it isn't deteriorating in the way collapse looks — this is sustained, controlled effort, just very slow. Not a body failing. A body that has subordinated itself so completely to a single task that its economy has become inhuman.\n\nKon hasn't moved. Still a half-step back, one forepaw lifted, heat coming off the coat in a low steady pulse. Not alarm — Kon reads alarm differently, flare and stillness together. This is more like watchfulness. The fox is waiting for you to decide whether this place pulls you in.\n\nOssian stands behind your shoulder, very still. You can feel them listening.\n\nYou've read what you can from here. Whatever is in that room is not a fight and not an emergency, but it is not nothing. The door waits, half-open, the dragging sound coming through it patient and indifferent as a clock."
       }
     ],
     "lastTurn": {
-      "narration": "The stairwell takes you in like a throat swallowing — pale stone narrowing, the chalk smell deepening into something older and staler as you climb. Kon is already two flights up, coat a dim coal-glow in the failing light, moving without hesitation. You follow.\n\nOssian comes behind you. You can hear them — bare feet on stone, each step placed with the economy of someone who has climbed these stairs ten thousand times and never thought about it. They don't speak. The dragging sound grows as you rise: slow, rhythmic, deliberate. Not the sound of someone in pain. Not the sound of someone trying to get somewhere. Something with a pattern to it, like a task being repeated.\n\nThe second terrace opens on your left as you pass — a long room, chalk-white, empty of people but not of work. Notation covers every surface you can see: the walls, a low table, three boards propped against a window that lets in the last grey-orange of the evening sky. No one. The dragging sound is not here.\n\nThe third terrace: a door standing half-open, the sound coming clearly now from beyond it. Kon stops outside, one forepaw lifted, coat reading warm and steady — not the sharp heat of Precursor warning, just the low amber of attention. The fox looks at the gap in the door, then back at you, then at the gap. Waiting for you to go first, which is unusual enough to note.\n\nOssian steps up beside you on the landing. 'Four days, two nights, and approximately six hours,' they say quietly. Their voice has gone careful in a way it wasn't on the floor below. 'I have not heard that sound before.'",
-      "sceneSummary": "Saehara, Kon, and Ossian reach the third-terrace landing — the dragging sound is clearly within, and Kon defers to Saehara at the half-open door.",
+      "narration": "You don't open the door yet. You stop a half-step back, let your breathing slow, and read.\n\nThe dragging sound resolves: fabric on stone, regular as a tide. Your mind assembles the room behind the door from what the sound gives you — one person, seated or prone, moving something with their arm. Not locomotion. Not distress. Repetition. A chalk arm sweeping a notation surface, or a hand pulling and resetting the same object, or someone turning pages with extreme deliberateness. The interval is constant, roughly four seconds, which means the body doing it isn't deteriorating in the way collapse looks — this is sustained, controlled effort, just very slow. Not a body failing. A body that has subordinated itself so completely to a single task that its economy has become inhuman.\n\nKon hasn't moved. Still a half-step back, one forepaw lifted, heat coming off the coat in a low steady pulse. Not alarm — Kon reads alarm differently, flare and stillness together. This is more like watchfulness. The fox is waiting for you to decide whether this place pulls you in.\n\nOssian stands behind your shoulder, very still. You can feel them listening.\n\nYou've read what you can from here. Whatever is in that room is not a fight and not an emergency, but it is not nothing. The door waits, half-open, the dragging sound coming through it patient and indifferent as a clock.",
+      "sceneSummary": "Saehara reads the third-terrace room through sound before entering — a body at sustained work, not collapse.",
       "choices": [
         {
-          "label": "Push the door open and step through — see what four days and a dragging sound have made of a Cogitant",
+          "label": "Push the door open slowly and enter — let whoever is inside register your presence before you speak",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Speak through the gap first — state your name and ask if you may enter",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "careful",
+            "persuade"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Tell Ossian what you read and ask what they know about who is on this terrace — they named this room, they must have a candidate",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Let Kon decide — step back, gesture toward the door, and see whether the fox leads or holds",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "body_mind": 0.6,
-            "concrete_abstract": 0.3
-          },
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "scout",
@@ -279,83 +337,45 @@
           "abilityId": null,
           "energyCost": null,
           "trivial": true
-        },
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -3
+      },
+      "ledgerEvents": [],
+      "questUpdates": [
         {
-          "label": "Use Read the Fight before you open the door — read whatever is in that room before you walk into it",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "body_mind": 0.4,
-            "concrete_abstract": 0.2
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "read_the_fight",
-          "energyCost": 3,
-          "trivial": false
-        },
-        {
-          "label": "Ask Ossian what they know about this Cogitant before you open that door — four days is a long time to know nothing",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "body_mind": 0.5,
-            "concrete_abstract": 0.3
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Watch Kon a moment longer — the fox deferred, which it doesn't do; understand what it's telling you before you move",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "body_mind": 0.2,
-            "concrete_abstract": 0.4
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
+          "op": "progress",
+          "questId": "third-terrace-collapse",
+          "note": "Read the Fight confirms: not violence, not acute collapse — a body at sustained, controlled, inhuman repetition. The Cogitant is alive and working."
         }
       ],
       "scene": {
-        "setting": "Third-terrace landing of the Cogitarium — pale stone, chalk-cold air thicker and staler than the floors below, evening light a dim grey-orange through a half-seen window. The third-terrace door stands half-open before them. The dragging sound comes clearly from within.",
+        "setting": "Third-terrace landing of the Cogitarium — pale stone, chalk-cold air thicker and staler than the floors below, evening light a dim grey-orange through a half-seen window. The third-terrace door stands half-open before them.",
         "npcsPresent": [
           {
             "name": "Ossian",
-            "state": "Standing beside Saehara on the landing — bare feet on stone, voice gone careful, eyes on the half-open door"
+            "state": "Standing a half-step behind Saehara's shoulder, very still, listening."
           },
           {
             "name": "Kon",
-            "state": "One forepaw lifted outside the door, coat warm amber, looking at the gap and then back at Saehara — waiting, unusually deferential"
+            "state": "One forepaw lifted, coat radiating a low steady warmth — watchful, not alarmed. Waiting on Saehara."
           }
         ],
         "objects": [
-          "Half-open door — third terrace, source of the dragging sound",
+          "Half-open door — third terrace, dragging sound continuing within at a four-second interval",
           "Traveler's Pack — on Saehara's shoulders",
           "Waterskin — secured",
           "Katana at Saehara's waist",
-          "Second-terrace notation — walls, table, and boards covered in chalk work, visible through the open terrace as they passed"
+          "Second-terrace notation — walls, table, and boards covered in chalk work, visible below"
         ],
         "threads": [
-          "Dragging sound — slow, rhythmic, deliberate — coming from within the third-terrace room",
-          "Kon deferred at the door: unusual behavior, worth understanding",
-          "Ossian has gone careful in a way they weren't below — 'I have not heard that sound before'",
-          "Third-terrace Cogitant: four days unseen, nature of collapse still unknown"
+          "Dragging sound — read as sustained controlled repetition, four-second interval, not distress — a body subordinated entirely to a task",
+          "Kon holding at the door: low warmth, watchful, not alarmed — waiting for Saehara's lead",
+          "Ossian listening behind Saehara's shoulder — hasn't named who is on this terrace",
+          "Third-terrace Cogitant: four days unseen, nature of task still unknown"
         ]
       },
       "npcUpdates": [
@@ -363,11 +383,9 @@
           "op": "update",
           "npcId": "ossian",
           "name": "Ossian",
-          "note": "Climbed the stairs behind Saehara in silence — voice went careful on the third-terrace landing; admitted they have not heard the dragging sound before",
-          "learned": [
-            "Ossian has not heard the third-terrace dragging sound before — it is outside their model"
-          ],
-          "statusNote": "On the third-terrace landing beside Saehara — standing, voice careful, eyes on the half-open door"
+          "note": "Held silent on the landing while Saehara read the room — listening, not leading.",
+          "statusNote": "On the third-terrace landing beside Saehara — standing still, listening, has not named who is inside.",
+          "relationshipDelta": 0
         }
       ],
       "codexUpdates": [
@@ -375,8 +393,7 @@
           "topic": "third-terrace-collapse",
           "label": "The Third Terrace",
           "kind": "mystery",
-          "entityId": null,
-          "fact": "The dragging sound is slow, rhythmic, and deliberate — not pain or struggle, but something repeated. Ossian has not heard it before. Kon deferred at the door rather than leading. The room is beyond a half-open door on the third-terrace landing.",
+          "fact": "Read the Fight resolved the dragging sound: one person, sustained and controlled, four-second repetition. Not collapse or distress — a body at inhuman sustained work, likely a Cogitant who has subordinated all physical economy to a single task.",
           "links": [
             "cogitarium",
             "cogitants",
@@ -386,42 +403,39 @@
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "a quick stairwell climb — two flights to the third-terrace landing"
+        "hoursPassed": 0,
+        "why": "A moment on the landing — no time has passed."
       },
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "third-terrace-collapse",
-          "note": "Reached the third-terrace landing — dragging sound confirmed within the half-open room; Ossian and Kon both reading it as outside normal parameters."
-        }
-      ],
+      "moveTo": {
+        "location": "old_switchback",
+        "why": "After the third-terrace encounter resolves, Saehara departs the Cogitarium and travels the road south toward the Old Switchback."
+      },
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Third-terrace landing of the Cogitarium — pale stone, chalk-cold air thicker and staler than the floors below, evening light a dim grey-orange through a half-seen window. The third-terrace door stands half-open before them. The dragging sound comes clearly from within.",
+      "setting": "Third-terrace landing of the Cogitarium — pale stone, chalk-cold air thicker and staler than the floors below, evening light a dim grey-orange through a half-seen window. The third-terrace door stands half-open before them.",
       "npcsPresent": [
         {
           "name": "Ossian",
-          "state": "Standing beside Saehara on the landing — bare feet on stone, voice gone careful, eyes on the half-open door"
+          "state": "Standing a half-step behind Saehara's shoulder, very still, listening."
         },
         {
           "name": "Kon",
-          "state": "One forepaw lifted outside the door, coat warm amber, looking at the gap and then back at Saehara — waiting, unusually d"
+          "state": "One forepaw lifted, coat radiating a low steady warmth — watchful, not alarmed. Waiting on Saehara."
         }
       ],
       "objects": [
-        "Half-open door — third terrace, source of the dragging sound",
+        "Half-open door — third terrace, dragging sound continuing within at a four-secon",
         "Traveler's Pack — on Saehara's shoulders",
         "Waterskin — secured",
         "Katana at Saehara's waist",
         "Second-terrace notation — walls, table, and boards covered in chalk work, visibl"
       ],
       "threads": [
-        "Dragging sound — slow, rhythmic, deliberate — coming from within the third-terrace room",
-        "Kon deferred at the door: unusual behavior, worth understanding",
-        "Ossian has gone careful in a way they weren't below — 'I have not heard that sound before'",
-        "Third-terrace Cogitant: four days unseen, nature of collapse still unknown"
+        "Dragging sound — read as sustained controlled repetition, four-second interval, not distress — a body subordinated entirely to a task",
+        "Kon holding at the door: low warmth, watchful, not alarmed — waiting for Saehara's lead",
+        "Ossian listening behind Saehara's shoulder — hasn't named who is on this terrace",
+        "Third-terrace Cogitant: four days unseen, nature of task still unknown"
       ]
     }
   },
@@ -472,7 +486,8 @@
       "progress": [
         "Saehara has offered to climb. Kon is already oriented toward the stairwell. A second sound — slow drag — has just fallen from above.",
         "Saehara is moving to the stairwell with Ossian — the dragging sound from above continues; the climb begins now.",
-        "Reached the third-terrace landing — dragging sound confirmed within the half-open room; Ossian and Kon both reading it as outside normal parameters."
+        "Reached the third-terrace landing — dragging sound confirmed within the half-open room; Ossian and Kon both reading it as outside normal parameters.",
+        "Read the Fight confirms: not violence, not acute collapse — a body at sustained, controlled, inhuman repetition. The Cogitant is alive and working."
       ],
       "aliases": [],
       "startedAt": "2026-07-16T03:39:50.283Z"
@@ -490,7 +505,6 @@
       },
       "relationship": 0,
       "history": [
-        "[d1] Watched Saehara push Read the Fight outward across the hall searching for a non-Cogitant presence. Said nothing. Has not moved.",
         "[d1] Disclosed that the supply runner from Waymarker stopped coming nineteen days ago — the Cogitarium sent no request for resupply and no word came back. He believes the settlements re",
         "[d1] Saehara proposed a division of labor — Waymarker runner for resupply, Saehara taking the third terrace. Ossian is deliberating; no answer given yet.",
         "[d1] Delivered survival estimates unprompted by Saehara's framing — had the numbers already. Eight to twelve days for Araveth and upper-terrace Cogitants; two to three for the fallen wo",
@@ -499,7 +513,8 @@
         "[d1] Last seen cross-legged in the entrance hall as Saehara departed — hands folded, already calculating",
         "[d1] Surfaced from calculation to acknowledge Saehara's return — first question was the fallen Cogitant's status, not the supply line",
         "[d1] Received the fallen Cogitant's status — acknowledged the two-day window margin as 'acceptable', cited Lenten's competence as accounting for forty percent of the variance. Rose and ",
-        "[d1] Climbed the stairs behind Saehara in silence — voice went careful on the third-terrace landing; admitted they have not heard the dragging sound before"
+        "[d1] Climbed the stairs behind Saehara in silence — voice went careful on the third-terrace landing; admitted they have not heard the dragging sound before",
+        "[d1] Held silent on the landing while Saehara read the room — listening, not leading."
       ],
       "knownFacts": [
         "No external map exists",
@@ -520,7 +535,7 @@
         "resource-state assessment under uncertainty"
       ],
       "status": "active",
-      "statusNote": "On the third-terrace landing beside Saehara — standing, voice careful, eyes on the half-open door",
+      "statusNote": "On the third-terrace landing beside Saehara — standing still, listening, has not named who is inside.",
       "lastSeen": {
         "locationId": "the_cogitarium",
         "day": 1
@@ -661,6 +676,13 @@
           "note": "The builder's working shed at the far edge of the central work-yard — wide doors, draw-plane sound, fresh timber smell"
         }
       }
+    },
+    "old_switchback": {
+      "visits": 1,
+      "notes": [],
+      "flags": {},
+      "lastVisit": 1,
+      "vectorsKnown": []
     }
   },
   "worldState": {
@@ -704,17 +726,28 @@
         "day": 1,
         "worldDay": 13,
         "text": "Word reaches you: Bull boar taken on the scrub oak ridge north of Millbrook — the hunt party completed the job, both animals down. (near millbrook)"
+      },
+      {
+        "day": 1,
+        "worldDay": 17,
+        "text": "This reaches your area — Fendt has left the Edge District and is walking to Millbrook — his testimony names Overseer Grael explicitly; when he arrives, the paper becomes a political event in both settlements. (near radiant plateau edge)",
+        "impactsLocal": true
+      },
+      {
+        "day": 1,
+        "worldDay": 17,
+        "text": "Lenten: Lenten spent part of the evening re-walking a section of the coldest stretch of the supply route alone, muttering figures under his breath — not to recalculate anything, but to remind himself what the numbers actually feel like when the wind is in your face."
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-16T03:54:05.930Z",
-    "lastTickWorldDay": 16,
-    "lastCanonWorldDay": 16
+    "lastSharedReadAt": "2026-07-17T19:34:17.603Z",
+    "lastTickWorldDay": 17,
+    "lastCanonWorldDay": 17
   },
   "domains": {
-    "primary": "cogitant",
-    "secondary": "syllogist",
-    "tertiary": "blazeborn"
+    "primary": "lattice",
+    "secondary": "marcher",
+    "tertiary": "somatic"
   },
   "form": "Tall elven male, pale skin with a faint yellow undertone, sharp and still features beneath a wicker bamboo hat. Black robes bearing a glowing kanji for 'Honor' across the back. At his hip a long katana with a light-blue-wrapped handle and a tanto with a white-wrapped handle, both blades showing Damascus wave-pattern steel. A worn satchel carries loose pages and a quill.",
   "bio": {
@@ -782,22 +815,26 @@
           "[d1] Saehara proposed a division of labor to Ossian: a Cogitant sent to Waymarker to reopen the supply line; Saehara climbing to the third terrace. A slow dragging sound fell from above as the proposal was",
           "[d1] Ossian's calculation: seven days is the safe window for a Waymarker run. Araveth and the upper-terrace Cogitants have eight to twelve days; the fallen woman on the floor has two, possibly three; the t",
           "[d1] The road northeast to the Cogitarium reads clean — Kon registered no Precursor activity or thin-place warnings on the return march. The dry-stone wall hazard is navigable in low light by watching wher",
-          "[d1] Saehara has returned to the Cogitarium after the supply-line run. Ossian's first question on return was the fallen Cogitant's status — the body, not the logistics. The third terrace remains uninvestig"
+          "[d1] Saehara has returned to the Cogitarium after the supply-line run. Ossian's first question on return was the fallen Cogitant's status — the body, not the logistics. The third terrace remains uninvestig",
+          "[d1] The runner was named Brenn — young, freckled, jaw scar, came to the east archway. Payment was notation: applied theoretical work (tensile loads, grain storage). The Waymarker contact is Lenten the bui",
+          "[d1] The supply gap was caused by Brenn's injury — not by the evacuation dismissal, though the timing coincided. Lenten can dispatch a replacement runner before evening. The line can be formally reopened.",
+          "[d1] Lenten has committed to sending a runner before evening — supply line formally resuming. Runner will be warned about the dry-stone section where Brenn fell."
         ],
         "links": [
-          "cogitarium",
-          "cogitants",
           "the-cogitariums-calculated-crisis",
           "ossian",
           "the-collapsing-cogitants",
-          "cogitarium-supply-line",
-          "third-terrace-collapse"
+          "third-terrace-collapse",
+          "waymarker",
+          "brenn-missing-runner",
+          "lenten"
         ],
         "aliases": [
           "The Echo River Crisis",
           "The Cogitarium's Supply Silence",
           "Cogitarium Survival Window",
-          "The Cogitarium"
+          "The Cogitarium",
+          "Cogitarium Supply Line"
         ],
         "createdDay": 1,
         "updatedDay": 1,
@@ -931,29 +968,8 @@
         ],
         "links": [
           "cogitarium",
-          "cogitarium-supply-line",
+          "cogitarium-crisis",
           "the-cogitariums-calculated-crisis",
-          "lenten"
-        ],
-        "aliases": [],
-        "createdDay": 1,
-        "updatedDay": 1
-      },
-      "cogitarium-supply-line": {
-        "id": "cogitarium-supply-line",
-        "label": "Cogitarium Supply Line",
-        "kind": "mystery",
-        "facts": [
-          "[d1] The runner was named Brenn — young, freckled, jaw scar, came to the east archway. Payment was notation: applied theoretical work (tensile loads, grain storage). The Waymarker contact is Lenten the bui",
-          "[d1] The supply gap was caused by Brenn's injury — not by the evacuation dismissal, though the timing coincided. Lenten can dispatch a replacement runner before evening. The line can be formally reopened.",
-          "[d1] Lenten has committed to sending a runner before evening — supply line formally resuming. Runner will be warned about the dry-stone section where Brenn fell."
-        ],
-        "links": [
-          "cogitarium",
-          "waymarker",
-          "the-cogitariums-calculated-crisis",
-          "ossian",
-          "brenn-missing-runner",
           "lenten"
         ],
         "aliases": [],
@@ -966,11 +982,12 @@
         "kind": "person",
         "facts": [
           "[d1] A builder at Waymarker who arranged the supply line with the Cogitarium. Paid in notation — applied theoretical work. The name Saehara should use if there is doubt at Waymarker.",
-          "[d1] Builder at Waymarker — the one who made the Cogitarium's supply line work, and who knows exactly what it cost to make it work"
+          "[d1] Builder at Waymarker — the one who made the Cogitarium's supply line work, and who knows exactly what it cost to make it work",
+          "[d1] [while away] Lenten spent part of the evening re-walking a section of the coldest stretch of the supply route alone, muttering figures under his breath — not to recalculate anything, but to remind him"
         ],
         "links": [
           "waymarker",
-          "cogitarium-supply-line",
+          "cogitarium-crisis",
           "the-cogitariums-calculated-crisis"
         ],
         "aliases": [
@@ -990,7 +1007,7 @@
         ],
         "links": [
           "waymarker",
-          "cogitarium-supply-line",
+          "cogitarium-crisis",
           "the-cogitariums-calculated-crisis",
           "lenten"
         ],
@@ -1004,7 +1021,8 @@
         "label": "The Third Terrace",
         "kind": "mystery",
         "facts": [
-          "[d1] The dragging sound is slow, rhythmic, and deliberate — not pain or struggle, but something repeated. Ossian has not heard it before. Kon deferred at the door rather than leading. The room is beyond a "
+          "[d1] The dragging sound is slow, rhythmic, and deliberate — not pain or struggle, but something repeated. Ossian has not heard it before. Kon deferred at the door rather than leading. The room is beyond a ",
+          "[d1] Read the Fight resolved the dragging sound: one person, sustained and controlled, four-second repetition. Not collapse or distress — a body at inhuman sustained work, likely a Cogitant who has subordi"
         ],
         "links": [
           "cogitarium",
@@ -1019,18 +1037,20 @@
     }
   },
   "tendencies": {
-    "strategic": 21.034711723754807,
-    "social": 7.095671605224117,
-    "cerebral": 7.96197094049838,
-    "generous": 9.025130700781558,
-    "cautious": 11.858682681312999,
-    "risky": 0.8866535105013078
+    "strategic": 20.508843930660937,
+    "social": 6.9182798150935145,
+    "cerebral": 8.762921666985921,
+    "generous": 8.799502433262019,
+    "cautious": 12.562215614280174,
+    "risky": 0.8644871727387751
   },
   "aptitudes": [
     "strategist",
-    "good_samaritan"
+    "good_samaritan",
+    "tactician",
+    "stalwart"
   ],
-  "actionCount": 38,
+  "actionCount": 39,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1051,8 +1071,8 @@
       "at": "2026-07-16T02:18:04.820Z"
     }
   ],
-  "updatedAt": 1784175417087,
-  "rev": 66,
+  "updatedAt": 1784316994292,
+  "rev": 73,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1142,7 +1162,15 @@
           "repaired": false,
           "stubbed": false,
           "romanceEligible": true,
-          "lastAttentionDay": 1
+          "lastAttentionDay": 1,
+          "promotedWorldDay": 16,
+          "canonTier": "canonical",
+          "offscreen": [
+            {
+              "worldDay": 17,
+              "note": "Lenten spent part of the evening re-walking a section of the coldest stretch of the supply route alone, muttering figures under his breath — not to recalculate anything, but to remind himself what the numbers actually feel like when the wind is in your face."
+            }
+          ]
         },
         "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%20of%20Lenten%2C%20Builder%20at%20Waymarker%20%E2%80%94%20the%20one%20who%20made%20the%20Cogitarium's%20supply%20line%20work%2C%20and%20who%20knows%20exactly%20what%20it%20cost%20to%20make%20it%20work.%20Speaks%20in%20load-bearing%20sentences%20%E2%80%94%20nothing%20decorative%2C%20nothing%20wasted%2C%20but%20not%20cold.%20Measures%20what%20he%20says%20the%20way%20he%20measures%20timber%3A%20cut%20once%2C%20cut%20right.%20Has%20a%20builder's%20habit%20of%20naming%20the%20thing%20underneath%20the%20thing%20%E2%80%94%20the%20joist%20behind%20the%20wall%2C%20the%20assumption%20behind%20the%20proposal.%20Goes%20quiet%20when%20he's%20calculating%2C%20and%20the%20quiet%20feels%20occupied%2C%20not%20absent.%20Early-spring%20mud%20still%20on%20his%20boots.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=51640&nologo=true"
       }
@@ -1151,7 +1179,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "somatic_reaches": 38
+    "somatic_reaches": 39
   },
   "opLossPending": false,
   "establishedFacts": [
@@ -1180,7 +1208,7 @@
     "schemaVersion": 1,
     "uses": {
       "total_focus": 4,
-      "read_the_fight": 3
+      "read_the_fight": 4
     },
     "coActivations": {
       "read_the_fight+total_focus": 1
@@ -1201,5 +1229,51 @@
   ],
   "forkChoices": {},
   "backfillVersion": 1,
-  "portrait": "https://image.pollinations.ai/prompt/Tall%20elven%20male%2C%20pale%20skin%20with%20a%20faint%20yellow%20undertone%2C%20sharp%20and%20still%20features%20beneath%20a%20wicker%20bamboo%20hat.%20Black%20robes%20bearing%20a%20glowing%20kanji%20for%20'Honor'%20across%20the%20back.%20At%20his%20hip%20a%20long%20katana%20with%20a%20light-blue-%2C%20full-body%20character%20portrait%2C%20named%20Saehara%20Makashi%2C%20of%20the%20cogitant%2C%20drifter%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20He%20had%20a%20vision%20of%20writing%20his%20own%20life%20in%20a%20book%20and%20teaching%20generations%20to%20come%20with%20the%20knowledge%20he%20drafts%20into%20the%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=51817&nologo=true"
+  "portrait": "https://image.pollinations.ai/prompt/Tall%20elven%20male%2C%20pale%20skin%20with%20a%20faint%20yellow%20undertone%2C%20sharp%20and%20still%20features%20beneath%20a%20wicker%20bamboo%20hat.%20Black%20robes%20bearing%20a%20glowing%20kanji%20for%20'Honor'%20across%20the%20back.%20At%20his%20hip%20a%20long%20katana%20with%20a%20light-blue-%2C%20full-body%20character%20portrait%2C%20named%20Saehara%20Makashi%2C%20of%20the%20cogitant%2C%20drifter%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20He%20had%20a%20vision%20of%20writing%20his%20own%20life%20in%20a%20book%20and%20teaching%20generations%20to%20come%20with%20the%20knowledge%20he%20drafts%20into%20the%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=51817&nologo=true",
+  "corrections": [
+    {
+      "kind": "domain",
+      "field": "primary",
+      "from": "cogitant",
+      "to": "lattice",
+      "why": "repaired via the Repair panel",
+      "worldDay": 16,
+      "at": "2026-07-16T04:32:54.612Z"
+    },
+    {
+      "kind": "domain",
+      "field": "secondary",
+      "from": "syllogist",
+      "to": "marcher",
+      "why": "repaired via the Repair panel",
+      "worldDay": 16,
+      "at": "2026-07-16T04:32:54.612Z"
+    },
+    {
+      "kind": "domain",
+      "field": "tertiary",
+      "from": "blazeborn",
+      "to": "somatic",
+      "why": "repaired via the Repair panel",
+      "worldDay": 16,
+      "at": "2026-07-16T04:32:54.612Z"
+    }
+  ],
+  "company": [],
+  "nativeGrantsVersion": 1,
+  "_pinsInitialized": true,
+  "sessions": [
+    {
+      "id": "sess-1",
+      "startedAt": "2026-07-17T19:36:34.289Z",
+      "lastAt": "2026-07-17T19:36:34.289Z",
+      "startDay": 17,
+      "endDay": 17,
+      "beats": 1
+    }
+  ],
+  "knownPlaces": [
+    "old_switchback"
+  ],
+  "_pendingArrival": null
 }

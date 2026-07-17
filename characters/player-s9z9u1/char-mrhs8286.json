@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 10,
-  "xp": 970,
+  "xp": 980,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -85,7 +85,7 @@
   "maxHealth": 75,
   "health": 75,
   "maxEnergy": 145,
-  "energy": 87,
+  "energy": 82,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -418,6 +418,22 @@
       "_bonusApplied": 0.4,
       "day": 3,
       "worldDay": 17
+    },
+    {
+      "at": "2026-07-17T18:13:29.357Z",
+      "locationId": "radiant_plateau_edge",
+      "communityId": "valley.millbrook",
+      "description": "Persuaded Calvar — pre-Transition filtration engineer and author of the seventh-band specification — to leave the Edge District and travel to Millbrook to attest against Overseer Grael",
+      "tags": [
+        "persuade",
+        "help",
+        "justice"
+      ],
+      "weight": 2,
+      "spread": [],
+      "_bonusApplied": 0.15,
+      "day": 3,
+      "worldDay": 17
     }
   ],
   "relationships": {},
@@ -725,93 +741,98 @@
         "player": "Tell Calvar plainly what the six-week clock means — Fendt is walking to Millbrook, the formal lodgment needs to move, and the third copy's location may determine whether it can",
         "summary": "Silas names the six-week clock and the lodgment window; Calvar reveals the third copy went to the Filtration Council annex in the lower Plateau district fourteen years ago.",
         "narration": "You speak from the wall — still giving Pell her space, voice low enough that it doesn't interrupt her reading so much as run alongside it. \"Calvar. There's a clock running.\" You lay it out plainly: Fendt is already on the road to Millbrook, carrying his written testimony and a starfruit token for the woman who'll receive him there. The formal lodgment has to move before the administrative review closes — six weeks from now, maybe five and a half by the time the paper reaches the right hands outside the Radiant hierarchy. If it doesn't land in that window, Grael's machinery grinds to completion on its own. Fendt stripped, exiled, the filtration failure buried with him, and the method confirmed as something that works.\n\nYou pause there. Let that sit.\n\n\"You said three copies. One is here.\" You glance at the bundle without pointing at it — Pell is still reading, hands flat on the surface, and you will not pull that anchor loose. \"The other two. Where did they go? Because Grael's runner found the archive copy. If one of the others is somewhere that can be reached before the window closes, it goes into the formal lodgment with Fendt's testimony. The chain is already long — Leth's breach complaint, Vash's eyewitness account, Rennic in the intake log, Fendt naming Grael by name with the preliminary notice receipt date. A second copy of the calibration files in your own hand would close it.\"\n\nCalvar has been listening with the flat attention of a man who has already thought about most of this and is listening for the parts he hasn't. He pulls the chair out from the drafting surface corner and sits — not with the weight of someone giving up, but with the deliberateness of someone settling in to work. \"The district secondary stack — Rennic cleared that. The archive copy, Leth held — I know she filed it because she told me when I brought her the diagram. The third.\" He rubs the heel of his palm along the edge of the table slowly. \"I sent it to the Filtration Council annex in the lower Plateau district. Fourteen years ago, before the changes. Whether the annex still holds records from that period, or whether anyone there would know to look — that I cannot tell you.\""
+      },
+      {
+        "player": "Ask Calvar to travel with us... Pell especially could use the training in precursor and substrate technologies... just as her father had trained Calvar.  And we could all work together to expose Grael AND save the valley.",
+        "summary": "Calvar agrees to travel — named Grael's method, named his own failure to act sooner, and asked for the road.",
+        "narration": "You push off the wall and speak directly to Calvar — not as a supplicant, not as someone making a case, but as someone naming a thing that is already true and waiting to be acknowledged. \"Come with us.\" The room is quiet enough that Pell's stillness at the drafting surface is its own kind of listening. \"Pell has her father's hand in those margins. She has the eye for it — she already saw what Fendt's notation meant before I could explain it. What she doesn't have is the years behind it. The substrate work, the Precursor layer, the way the seventh band sits inside a larger design she hasn't been taught to read yet.\" You look at Calvar steadily. \"Her father trained you. That's not a small thing to walk away from.\"\n\nCalvar does not answer immediately. He looks at the bundle — at Pell's hands on its edge, at the letters he has been carrying for seven years as something between a grief and an obligation. His palm moves once more along the drafting surface edge, the old habit of a man who thinks with his hands, and then it stops.\n\n\"Grael's method works because it stays inside the room,\" he says finally. His voice is measured, but something in it has shifted — the hedged distance of the first hour gone, replaced by the flat clarity of someone who has made a decision and is watching himself make it. \"The paper never reaches outside jurisdiction because it never needs to. The man named on the board appeals to the same hierarchy that named him. The annex copy — if it still exists — changes that. Fendt's testimony changes that. A pre-Transition calibration author, present and willing to attest, changes that completely.\"\n\nHe looks at Pell then, not at you. \"I should have gone to Millbrook three years ago. I told myself I had nothing left to prove and no one left to prove it to.\" A pause. Huginn shifts on the stool-back and does not look away. \"Tell me the road.\"\n\nPell lifts her eyes from the letters. She doesn't say anything yet — but her shoulders have dropped a quarter-inch, and her hands have loosened on the surface edge. She'll speak when she's ready, and Calvar is already waiting for it."
       }
     ],
     "lastTurn": {
-      "narration": "You speak from the wall — still giving Pell her space, voice low enough that it doesn't interrupt her reading so much as run alongside it. \"Calvar. There's a clock running.\" You lay it out plainly: Fendt is already on the road to Millbrook, carrying his written testimony and a starfruit token for the woman who'll receive him there. The formal lodgment has to move before the administrative review closes — six weeks from now, maybe five and a half by the time the paper reaches the right hands outside the Radiant hierarchy. If it doesn't land in that window, Grael's machinery grinds to completion on its own. Fendt stripped, exiled, the filtration failure buried with him, and the method confirmed as something that works.\n\nYou pause there. Let that sit.\n\n\"You said three copies. One is here.\" You glance at the bundle without pointing at it — Pell is still reading, hands flat on the surface, and you will not pull that anchor loose. \"The other two. Where did they go? Because Grael's runner found the archive copy. If one of the others is somewhere that can be reached before the window closes, it goes into the formal lodgment with Fendt's testimony. The chain is already long — Leth's breach complaint, Vash's eyewitness account, Rennic in the intake log, Fendt naming Grael by name with the preliminary notice receipt date. A second copy of the calibration files in your own hand would close it.\"\n\nCalvar has been listening with the flat attention of a man who has already thought about most of this and is listening for the parts he hasn't. He pulls the chair out from the drafting surface corner and sits — not with the weight of someone giving up, but with the deliberateness of someone settling in to work. \"The district secondary stack — Rennic cleared that. The archive copy, Leth held — I know she filed it because she told me when I brought her the diagram. The third.\" He rubs the heel of his palm along the edge of the table slowly. \"I sent it to the Filtration Council annex in the lower Plateau district. Fourteen years ago, before the changes. Whether the annex still holds records from that period, or whether anyone there would know to look — that I cannot tell you.\"",
-      "sceneSummary": "Silas names the six-week clock and the lodgment window; Calvar reveals the third copy went to the Filtration Council annex in the lower Plateau district fourteen years ago.",
+      "narration": "You push off the wall and speak directly to Calvar — not as a supplicant, not as someone making a case, but as someone naming a thing that is already true and waiting to be acknowledged. \"Come with us.\" The room is quiet enough that Pell's stillness at the drafting surface is its own kind of listening. \"Pell has her father's hand in those margins. She has the eye for it — she already saw what Fendt's notation meant before I could explain it. What she doesn't have is the years behind it. The substrate work, the Precursor layer, the way the seventh band sits inside a larger design she hasn't been taught to read yet.\" You look at Calvar steadily. \"Her father trained you. That's not a small thing to walk away from.\"\n\nCalvar does not answer immediately. He looks at the bundle — at Pell's hands on its edge, at the letters he has been carrying for seven years as something between a grief and an obligation. His palm moves once more along the drafting surface edge, the old habit of a man who thinks with his hands, and then it stops.\n\n\"Grael's method works because it stays inside the room,\" he says finally. His voice is measured, but something in it has shifted — the hedged distance of the first hour gone, replaced by the flat clarity of someone who has made a decision and is watching himself make it. \"The paper never reaches outside jurisdiction because it never needs to. The man named on the board appeals to the same hierarchy that named him. The annex copy — if it still exists — changes that. Fendt's testimony changes that. A pre-Transition calibration author, present and willing to attest, changes that completely.\"\n\nHe looks at Pell then, not at you. \"I should have gone to Millbrook three years ago. I told myself I had nothing left to prove and no one left to prove it to.\" A pause. Huginn shifts on the stool-back and does not look away. \"Tell me the road.\"\n\nPell lifts her eyes from the letters. She doesn't say anything yet — but her shoulders have dropped a quarter-inch, and her hands have loosened on the surface edge. She'll speak when she's ready, and Calvar is already waiting for it.",
+      "sceneSummary": "Calvar agrees to travel — named Grael's method, named his own failure to act sooner, and asked for the road.",
       "choices": [
         {
-          "label": "Ask Calvar directly whether he would be willing to walk to the annex himself and vouch for the material — his name on the specification would carry more weight than a courier",
+          "label": "Tell Calvar the road: Millbrook first, then the valley structure — brief him on everything he'll need to know before he packs",
           "attribute": "social",
           "subAttribute": "rapport",
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
-            "persuade",
-            "negotiate"
+            "plan",
+            "help"
           ],
-          "trivial": false
+          "trivial": true
         },
         {
-          "label": "Read the annex copy's fate with Order-Sense — see whether the third copy is still there and intact, or whether it too has been touched",
+          "label": "Give Pell the space — wait for her to speak to Calvar first before you say another word",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "careful"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask Calvar directly about the Filtration Council annex — whether the third copy survived, and who there he'd trust to receive it",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "plan"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Use The Attended End on Calvar's decision — read what is ending in him now that he has said yes, and whether anything in that ending needs to be named",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "abilityId": "order_sense",
+          "abilityId": "the-attended-end",
           "energyCost": 2,
           "trivial": false
-        },
-        {
-          "label": "Let Pell finish reading and ask her — quietly, when she's ready — whether her father's letters tell her anything about where else he might have lodged the specification",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "comfort",
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Name the annex plainly: go there yourself tomorrow, early, before the morning collection round — find the annex keeper and see what fourteen years has left",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "plan",
-            "travel"
-          ],
-          "trivial": true
         }
       ],
       "characterDeltas": {
         "health": 0,
-        "energy": 0
+        "energy": 0,
+        "xp": 5
       },
       "scene": {
-        "setting": "Calvar's room above the cooperage, east lane, Edge District — evening, early-spring. Lamp steady on the drafting surface corner. Silas at the wall beside the door; Pell at the drafting surface with both hands on the edge, reading her father's letters where they lie. Calvar now seated in the chair at the drafting surface corner.",
+        "setting": "Calvar's room above the cooperage, east lane, Edge District — evening, early-spring. Lamp steady on the drafting surface corner. Silas at the wall beside the door; Pell at the drafting surface, hands loosened on the edge, eyes now lifted from the letters. Calvar standing, having made his decision.",
         "npcsPresent": [
           {
             "name": "Calvar",
-            "state": "Seated in the chair at the drafting surface corner — palm moving slowly along the table edge, turning the question of the annex over in his mind"
+            "state": "Standing at the drafting surface — palm stilled, decision made, waiting for the road to be named"
           },
           {
             "name": "Pell",
-            "state": "Both hands on the surface edge, eyes on the open bundle — reading the top letter where it lies; has not picked anything up"
+            "state": "Eyes lifted from the letters — shoulders dropped, hands loosened; not yet speaking, but present and listening"
           },
           {
             "name": "Huginn",
-            "state": "On the stool-back — settled, wings folded, watching Calvar with the flat patience of something that has heard the word 'fourteen years' before and found it instructive"
+            "state": "On the stool-back — watching Calvar, unhurried, neither approving nor disapproving"
           }
         ],
         "objects": [
-          "Drafting surface — lamp on its corner, bundle open, Fendt's Testimony (folded page) beside it",
-          "Bundle (open) — ruled papers and letters in two hands, seventh-band margin notations in Pell's father's hand, calibration pages tucked beneath",
+          "Drafting surface — lamp on its corner, bundle open, letters and calibration pages visible",
+          "Fendt's Testimony (folded page) — in Silas's inventory",
           "Cord — untied, coiled on the drafting surface edge",
           "Memory (spear) — leaned against the wall by Pell",
-          "Chair — Calvar now seated in it",
+          "Chair — to one side of the drafting surface",
           "Empty stool — Huginn perched on its back",
           "Coat on a hook by the door",
           "Bed against the far wall — made precisely"
         ],
         "threads": [
-          "Pell is reading her father's letters — she has not spoken and has not picked them up yet",
-          "The third copy of the calibration files is at the Filtration Council annex in the lower Plateau district — fourteen years old, status unknown",
-          "The six-week window for Fendt's formal lodgment is the working clock",
-          "Calvar's willingness to act — vouch, travel, or simply provide — is an open question"
+          "Pell has not yet spoken since Calvar said yes — she lifted her eyes but has not addressed him",
+          "The road to Millbrook needs to be named — Calvar has asked for it explicitly",
+          "The third copy at the Filtration Council annex in the lower Plateau district — status still unknown, Calvar's read on it unasked",
+          "The six-week window for Fendt's formal lodgment is the working clock"
         ]
       },
       "npcUpdates": [
@@ -819,105 +840,119 @@
           "op": "update",
           "npcId": "calvar",
           "name": "Calvar",
-          "note": "Named the third copy's destination: the Filtration Council annex in the lower Plateau district, sent fourteen years ago. Acknowledged the six-week clock without flinching. Now seated, working through the implications.",
+          "note": "Said yes — named Grael's method as the thing he understands, named his own failure to move three years ago, and asked for the road. He is now committed to traveling with Silas and Pell.",
           "learned": [
-            "The third copy of the seventh-band calibration files was sent to the Filtration Council annex in the lower Plateau district approximately fourteen years ago",
-            "Calvar is uncertain whether the annex still holds records from that period or whether anyone there would know to look"
+            "Agreed to travel — will vouch as pre-Transition calibration author and attest to the seventh-band specification",
+            "Named his own delay plainly: told himself he had nothing left to prove and no one left to prove it to — that assumption is now broken",
+            "Understands that his presence outside the Radiant hierarchy changes Grael's method from functional to defeatable"
           ],
-          "statusNote": "In his room above the cooperage — seated at the drafting surface, processing the six-week window and the annex question"
+          "skillsObserved": [
+            "precise self-accounting of delay and its cause",
+            "identifying the structural flaw in Grael's appeal-capture method from first principles"
+          ],
+          "relationshipDelta": 2,
+          "status": "active",
+          "statusNote": "In his room above the cooperage — has said yes to traveling with Silas and Pell; waiting for the road to be named"
         },
         {
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Still reading her father's letters — has not spoken. Silas gave her the space without comment and held it while naming the clock to Calvar.",
-          "statusNote": "At Calvar's drafting surface — reading her father's letters where they lie, both hands on the edge, not yet speaking"
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "find-the-engineer",
-          "label": "Find the Engineer",
-          "kind": "event",
-          "entityId": "calvar",
-          "fact": "The third copy of the seventh-band calibration files was sent by Calvar to the Filtration Council annex in the lower Plateau district approximately fourteen years ago — before the administrative changes. Whether it still exists and whether anyone at the annex would know to look is unknown.",
-          "links": [
-            "the-edge-district-ledger",
-            "radiant-plateau-edge",
-            "overseer-grael",
-            "fendt",
-            "calvar"
-          ]
-        },
-        {
-          "topic": "the-edge-district-ledger",
-          "label": "The Edge District Ledger",
-          "kind": "event",
-          "fact": "The formal lodgment path is now mapped: Fendt's testimony, Leth's breach complaint, Vash's eyewitness account, and Rennic in the intake log form the chain. A second copy of the calibration files — from Calvar's own hand — would close it. The annex in the lower Plateau district may hold that copy.",
-          "links": [
-            "find-the-engineer",
-            "fendt",
-            "overseer-grael",
-            "calvar",
-            "radiant-plateau-edge"
-          ]
+          "note": "Eyes lifted from her father's letters when Calvar said yes — shoulders dropped, hands loosened. Has not spoken yet but is present and listening.",
+          "learned": [
+            "Calvar said yes before she had to ask — heard Silas name the training thread (her father taught Calvar) without being asked to confirm it"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "In Calvar's room above the cooperage — reading her father's letters; present as Calvar agrees to travel; not yet spoken since the decision was made"
         }
       ],
       "questUpdates": [
         {
           "op": "progress",
           "questId": "find-the-engineer",
-          "note": "Third copy of the calibration files identified: Filtration Council annex, lower Plateau district, sent fourteen years ago. Status of the copy unknown — the next step is the annex."
+          "note": "Calvar has agreed to travel with the group — he will vouch as the pre-Transition calibration author and can attest to the seventh-band specification outside the Radiant hierarchy. The road to Millbrook is the next step."
         },
         {
           "op": "progress",
           "questId": "the-edge-district-ledger",
-          "note": "Calvar named the six-week window without objection. The annex copy is now the key variable in whether the formal lodgment can be closed before the review window shuts."
+          "note": "A pre-Transition author willing to attest in person changes Grael's appeal-capture method from functional to defeatable — Calvar named this himself. The annex copy and the formal lodgment remain the open variables."
         }
       ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A quiet exchange of critical information — a few minutes at most, Pell still reading, the lamp unchanged"
-      }
+      "codexUpdates": [
+        {
+          "topic": "calvar",
+          "label": "Calvar — the Engineer",
+          "kind": "person",
+          "entityId": "calvar",
+          "fact": "Agreed to travel with Silas and Pell to Millbrook — will vouch as the pre-Transition calibration author and attest to the seventh-band specification outside the Radiant hierarchy. Named his own three-year delay without defensiveness: he told himself he had nothing left to prove and no one left to prove it to.",
+          "links": [
+            "find-the-engineer",
+            "the-edge-district-ledger",
+            "overseer-grael",
+            "radiant-plateau-edge",
+            "pell"
+          ]
+        }
+      ],
+      "deeds": [
+        {
+          "description": "Persuaded Calvar — pre-Transition filtration engineer and author of the seventh-band specification — to leave the Edge District and travel to Millbrook to attest against Overseer Grael",
+          "tags": [
+            "persuade",
+            "help",
+            "justice"
+          ],
+          "weight": 2,
+          "communityId": "valley.millbrook"
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Calvar has agreed to travel with Silas and Pell — he will attest as the pre-Transition calibration author outside the Radiant hierarchy, changing Grael's appeal-capture method from functional to defeatable.",
+          "subjectId": "calvar"
+        }
+      ]
     },
     "sceneState": {
-      "setting": "Calvar's room above the cooperage, east lane, Edge District — evening, early-spring. Lamp steady on the drafting surface corner. Silas at the wall beside the door; Pell at the drafting surface with both hands on the edge, reading her father's letters where they lie. Calvar now seated in the chair at the drafting surface corner.",
+      "setting": "Calvar's room above the cooperage, east lane, Edge District — evening, early-spring. Lamp steady on the drafting surface corner. Silas at the wall beside the door; Pell at the drafting surface, hands loosened on the edge, eyes now lifted from the letters. Calvar standing, having made his decision.",
       "npcsPresent": [
         {
           "name": "Calvar",
-          "state": "Seated in the chair at the drafting surface corner — palm moving slowly along the table edge, turning the question of th"
+          "state": "Standing at the drafting surface — palm stilled, decision made, waiting for the road to be named"
         },
         {
           "name": "Pell",
-          "state": "Both hands on the surface edge, eyes on the open bundle — reading the top letter where it lies; has not picked anything "
+          "state": "Eyes lifted from the letters — shoulders dropped, hands loosened; not yet speaking, but present and listening"
         },
         {
           "name": "Huginn",
-          "state": "On the stool-back — settled, wings folded, watching Calvar with the flat patience of something that has heard the word '"
+          "state": "On the stool-back — watching Calvar, unhurried, neither approving nor disapproving"
         }
       ],
       "objects": [
-        "Drafting surface — lamp on its corner, bundle open, Fendt's Testimony (folded pa",
-        "Bundle (open) — ruled papers and letters in two hands, seventh-band margin notat",
+        "Drafting surface — lamp on its corner, bundle open, letters and calibration page",
+        "Fendt's Testimony (folded page) — in Silas's inventory",
         "Cord — untied, coiled on the drafting surface edge",
         "Memory (spear) — leaned against the wall by Pell",
-        "Chair — Calvar now seated in it",
+        "Chair — to one side of the drafting surface",
         "Empty stool — Huginn perched on its back",
         "Coat on a hook by the door",
         "Bed against the far wall — made precisely"
       ],
       "threads": [
-        "Pell is reading her father's letters — she has not spoken and has not picked them up yet",
-        "The third copy of the calibration files is at the Filtration Council annex in the lower Plateau district — fourteen years old, status unknown",
-        "The six-week window for Fendt's formal lodgment is the working clock",
-        "Calvar's willingness to act — vouch, travel, or simply provide — is an open question"
+        "Pell has not yet spoken since Calvar said yes — she lifted her eyes but has not addressed him",
+        "The road to Millbrook needs to be named — Calvar has asked for it explicitly",
+        "The third copy at the Filtration Council annex in the lower Plateau district — status still unknown, Calvar's read on it unasked",
+        "The six-week window for Fendt's formal lodgment is the working clock"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 3,
-    "hour": 18,
+    "hour": 19,
     "realAnchor": null
   },
   "companions": [
@@ -960,14 +995,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Vash's folded page confirms Calvar's authorship via lens-grinder authentication marks — and names Grael's runner as the person who removed the calibration files from the secondary stack six weeks ago.",
         "Vash's testimony relayed to Leth — Grael's runner identified by schedule and pack description; Leth names the optics array intake collection log as the route to the runner's name. Calvar is east lane, above the cooperage.",
         "Rennic's name and six-week schedule confirmed in the intake log. Silas and Pell now stand at the cooperage on the east lane — Calvar's lamp is burning in the upper room.",
         "Calvar opened his door — said 'I wondered what shape it would come in.' He is present, waiting, and has stepped back from the threshold.",
         "Order-Sense confirms: Calvar's room is a transit node. He has been waiting to hand something outward. His isolation is ending — not him. The chain has one remaining step.",
         "Calvar has heard the complete chain — Leth, Vash, Rennic, Fendt's Testimony now on his drafting surface. One step remains: what he has been holding in those bundled papers, and where the calibration files went.",
         "Calvar revealed the bundle — a second record of the seventh-band method survives as personal correspondence, missed by Grael's runner. Three copies were made; one is here. The other two destinations are the next question.",
-        "Third copy of the calibration files identified: Filtration Council annex, lower Plateau district, sent fourteen years ago. Status of the copy unknown — the next step is the annex."
+        "Third copy of the calibration files identified: Filtration Council annex, lower Plateau district, sent fourteen years ago. Status of the copy unknown — the next step is the annex.",
+        "Calvar has agreed to travel with the group — he will vouch as the pre-Transition calibration author and can attest to the seventh-band specification outside the Radiant hierarchy. The road to Millbrook is the next step."
       ],
       "aliases": [],
       "startedAt": "2026-07-16T19:11:11.950Z"
@@ -1214,14 +1249,14 @@
         "s1"
       ],
       "progress": [
-        "Fendt names the sequence: the actor cleared the foundational calibration records before the pass opened — not a cover-up of an error, but a preparation. The seventh band was targeted in advance.",
         "Codex: Fendt's account is recorded — and it does not match the board.",
         "Fendt has named the authorship chain: a council department glyph and a personal margin notation with a distinctive hand. The calibration files that would have completed the chain are gone. The design is pre-Transition, fifteen years before Fendt's tenure, and built to be used. The margin glyph is the surviving breadcrumb.",
         "Pell has named her father as a filtration engineer who left the Plateau after the Transition — and offered to identify the margin notation if Fendt can reproduce the glyph. The authorship chain may resolve in this room.",
         "Pell identified the margin notation as her father's hand — the authorship chain closes in the upper room. Fendt's departure and the calibration files are named as the same event. What remains: where the paper goes, and what Fendt expects to happen to him.",
         "Fendt's cooperation secured — written testimony in hand, Fendt walking to Mara Wells in Millbrook. The paper exists and the authorship chain is closed. What remains: finding a receiving authority outside the Radiant hierarchy to lodge it formally before the six-week window expires.",
         "The calibration files Grael's runner removed from Leth's archive are not the only record — Calvar's personal correspondence holds the same data in Pell's father's own hand. A formal lodgment path may not require recovering the originals.",
-        "Calvar named the six-week window without objection. The annex copy is now the key variable in whether the formal lodgment can be closed before the review window shuts."
+        "Calvar named the six-week window without objection. The annex copy is now the key variable in whether the formal lodgment can be closed before the review window shuts.",
+        "A pre-Transition author willing to attest in person changes Grael's appeal-capture method from functional to defeatable — Calvar named this himself. The annex copy and the formal lodgment remain the open variables."
       ],
       "aliases": [],
       "startedAt": "2026-07-16T21:27:42.515Z",
@@ -1336,7 +1371,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d3] Confirmed the route without deliberation — array office, then Calvar. Took Memory in hand and was already moving.",
         "[d3] Moved before Silas reached the array office door — already oriented east. Stopped two paces from the cooperage stair, reading the lamp-line in the upper window.",
         "[d3] Named her approach plainly — professional case first, her father's name held in reserve. Waiting on Silas's call for who goes up first.",
         "[d3] Crossed the threshold cleanly — inside now, reading the room. Strategy intact: professional case first.",
@@ -1345,17 +1379,18 @@
         "[d3] Holding the weight of Calvar's question — her father named, Calvar's seven-year assumption visible; she has not answered yet",
         "[d3] Eyes on the open bundle — her father's letters visible. Has not yet spoken since Calvar opened it.",
         "[d3] Reading her father's letters where they lie on Calvar's drafting surface — both hands on the edge, not picking them up yet. Silas stepped back and gave her the space without commen",
-        "[d3] Still reading her father's letters — has not spoken. Silas gave her the space without comment and held it while naming the clock to Calvar."
+        "[d3] Still reading her father's letters — has not spoken. Silas gave her the space without comment and held it while naming the clock to Calvar.",
+        "[d3] Eyes lifted from her father's letters when Calvar said yes — shoulders dropped, hands loosened. Has not spoken yet but is present and listening."
       ],
       "knownFacts": [
-        "She is not looking for her father — but she will not turn away if the work brings them there",
         "She reads Fendt's situation as solvable on a known timeline; her father's situation as a different kind of problem requiring a different decision",
         "She holds two things at once — Fendt's six-week window and her father's unasked-for reappearance — without letting either collapse the other",
         "Has physically handled the testimony — made the relay action herself without being asked",
         "Pell's strategy: Fendt testimony, runner's name, Vash's account first — her father's notation held until the room earns it",
         "Calvar knew her father directly — was taught the specification method by him",
         "Calvar believed her father dead — seven years",
-        "Her father's correspondence to Calvar is physically present — the seventh-band margin notations are in his hand on the top sheet; she is reading it where it lie"
+        "Her father's correspondence to Calvar is physically present — the seventh-band margin notations are in his hand on the top sheet; she is reading it where it lie",
+        "Calvar said yes before she had to ask — heard Silas name the training thread (her father taught Calvar) without being asked to confirm it"
       ],
       "skillsObserved": [
         "rapid tactical positioning in an unknown interior",
@@ -1366,7 +1401,7 @@
         "holding partial knowledge without performance — named the ha"
       ],
       "status": "active",
-      "statusNote": "At Calvar's drafting surface — reading her father's letters where they lie, both hands on the edge, not yet speaking",
+      "statusNote": "In Calvar's room above the cooperage — reading her father's letters; present as Calvar agrees to travel; not yet spoken since the decision was made",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 3
@@ -1688,9 +1723,8 @@
         "locationId": "radiant_plateau_edge",
         "day": 3
       },
-      "relationship": 5,
+      "relationship": 7,
       "history": [
-        "[d3] Watched all three enter without moving — the bird landing on his stool did not exceed whatever he was expecting. Weight on heels, patient. Waiting for whoever speaks first.",
         "[d3] Named what he was waiting for — honest strangers who followed the chain from the river end. Asked to hear what they found before he speaks; pulled the chair out and angled it towar",
         "[d3] Pell gave him the professional opening — Grael named, six-week window named, chain from the river end named. Calvar's hand hasn't moved from the bundled papers. He is waiting to co",
         "[d3] Heard the complete chain laid out — Leth, Vash, Rennic, Fendt — and watched Fendt's Testimony placed on his drafting surface. Eyes on the folded page; hand still flat on the bundle",
@@ -1699,25 +1733,28 @@
         "[d3] The Attended End reads his room — the seven-year assumption is ending, not him. The weight of the held grief is clearing. The bundled papers were always going to be passed.",
         "[d3] Opened the bundle — named it as Pell's father's own correspondence, margin-notated with seventh-band designations. A second record of the method the runner was sent to erase. Named",
         "[d3] Standing two feet from Pell, watching her read — said nothing, which was the right call. The room has settled into what it was arranged to hold.",
-        "[d3] Named the third copy's destination: the Filtration Council annex in the lower Plateau district, sent fourteen years ago. Acknowledged the six-week clock without flinching. Now seat"
+        "[d3] Named the third copy's destination: the Filtration Council annex in the lower Plateau district, sent fourteen years ago. Acknowledged the six-week clock without flinching. Now seat",
+        "[d3] Said yes — named Grael's method as the thing he understands, named his own failure to move three years ago, and asked for the road. He is now committed to traveling with Silas and "
       ],
       "knownFacts": [
-        "He used the seventh-band specification method for eleven years and credits it directly to his teaching",
-        "The seven years of carrying Pell's father as dead are concluding — the assumption breaking open, not Calvar himself closing off",
-        "His willingness is intact and undiminished by Pell's name for her father — if anything the weight is lifting",
         "Calvar filed the calibration material as personal correspondence — that is why Rennic missed it",
         "The bundle contains Pell's father's own letters to Calvar, margins annotated with band designations in his hand",
         "Calvar sent copies to three places before the district secondary stack was cleared — the bundle is one; two others exist or existed",
         "The third copy of the seventh-band calibration files was sent to the Filtration Council annex in the lower Plateau district approximately fourteen years ago",
-        "Calvar is uncertain whether the annex still holds records from that period or whether anyone there would know to look"
+        "Calvar is uncertain whether the annex still holds records from that period or whether anyone there would know to look",
+        "Agreed to travel — will vouch as pre-Transition calibration author and attest to the seventh-band specification",
+        "Named his own delay plainly: told himself he had nothing left to prove and no one left to prove it to — that assumption is now broken",
+        "Understands that his presence outside the Radiant hierarchy changes Grael's method from functional to defeatable"
       ],
       "skillsObserved": [
         "receiving unexpected visitors without flinching",
         "precise self-positioning under uncertainty — named what he n",
-        "measured disclosure — named the three copies without being a"
+        "measured disclosure — named the three copies without being a",
+        "precise self-accounting of delay and its cause",
+        "identifying the structural flaw in Grael's appeal-capture me"
       ],
       "status": "active",
-      "statusNote": "In his room above the cooperage — seated at the drafting surface, processing the six-week window and the annex question",
+      "statusNote": "In his room above the cooperage — has said yes to traveling with Silas and Pell; waiting for the road to be named",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 3
@@ -2887,7 +2924,8 @@
           "[d3] Calvar was taught the seventh-band specification method directly by Pell's father — a mentor relationship. He believed Pell's father dead. The name landing in the room visibly moved him: seven years o",
           "[d3] Calvar wrote to Pell's father after the Great Transition — letters that eventually stopped. He read the silence as death, held that assumption for seven years. The two men had a genuine mentor-student",
           "[d3] Calvar filed a copy of the seventh-band calibration files as personal correspondence — Pell's father's own letters with margin notations in his hand. Rennic missed it. Calvar sent copies to three loca",
-          "[d3] The third copy of the seventh-band calibration files was sent by Calvar to the Filtration Council annex in the lower Plateau district approximately fourteen years ago — before the administrative chang"
+          "[d3] The third copy of the seventh-band calibration files was sent by Calvar to the Filtration Council annex in the lower Plateau district approximately fourteen years ago — before the administrative chang",
+          "[d3] Agreed to travel with Silas and Pell to Millbrook — will vouch as the pre-Transition calibration author and attest to the seventh-band specification outside the Radiant hierarchy. Named his own three-"
         ],
         "links": [
           "the-water-crisis",
@@ -2990,18 +3028,18 @@
     }
   },
   "tendencies": {
-    "strategic": 18.968218086286804,
-    "cerebral": 22.329813349173318,
-    "social": 20.94114432033542,
-    "generous": 6.0878880935976625,
-    "cautious": 14.08955344866189,
-    "physical": 0.6059172831518329,
-    "risky": 1.7061411882071493,
-    "ruthless": 0.7502347713490011,
-    "carousing": 0.5268165576663777,
-    "amorous": 1.4446065997089899,
-    "patient": 0.9673835691443985,
-    "stealth": 0.6181412104811282
+    "strategic": 19.494012634129632,
+    "cerebral": 21.771568015443982,
+    "social": 22.417615712327034,
+    "generous": 5.935690891257721,
+    "cautious": 13.737314612445342,
+    "physical": 0.5907693510730371,
+    "risky": 1.6634876585019707,
+    "ruthless": 0.731478902065276,
+    "carousing": 0.5136461437247183,
+    "amorous": 1.4084914347162651,
+    "patient": 0.9431989799157885,
+    "stealth": 0.6026876802191
   },
   "aptitudes": [
     "strategist",
@@ -3012,7 +3050,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 385,
+  "actionCount": 386,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3178,8 +3216,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784311761606,
-  "rev": 552,
+  "updatedAt": 1784312009358,
+  "rev": 553,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3435,7 +3473,7 @@
           "entityId": "calvar",
           "type": "npc",
           "birthWeight": 10,
-          "engagementScore": 34,
+          "engagementScore": 37,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -3457,10 +3495,6 @@
               "day": 3
             },
             {
-              "kind": "fact",
-              "day": 3
-            },
-            {
               "kind": "interact",
               "day": 3
             },
@@ -3530,6 +3564,14 @@
             },
             {
               "kind": "interact",
+              "day": 3
+            },
+            {
+              "kind": "interact",
+              "day": 3
+            },
+            {
+              "kind": "fact",
               "day": 3
             },
             {
@@ -3649,12 +3691,6 @@
   },
   "opLossPending": false,
   "establishedFacts": [
-    {
-      "id": "pell",
-      "text": "Pell has named the breach-from-within as a valve — deliberate design or a conditional mechanism the structure was always built to trigger. Neither interpretation is accidental. The sealed rooms may be",
-      "day": 2,
-      "subjectId": "pell"
-    },
     {
       "id": "pell",
       "text": "Pell has confirmed that the pre-Transition wash-room site (flagged floor, saddle-mount hooks) and the failed east-channel valve sites are the same structure — different rooms, same construction, built",
@@ -3888,6 +3924,12 @@
       "text": "Calvar was directly taught the seventh-band specification method by Pell's father — he knew him as a mentor, and believed him dead. The connection between the specification's authorship and Calvar's o",
       "day": 3,
       "subjectId": "calvar"
+    },
+    {
+      "id": "calvar",
+      "text": "Calvar has agreed to travel with Silas and Pell — he will attest as the pre-Transition calibration author outside the Radiant hierarchy, changing Grael's appeal-capture method from functional to defea",
+      "day": 3,
+      "subjectId": "calvar"
     }
   ],
   "practice": {
@@ -3997,7 +4039,7 @@
   "syncedAt": 1784292613822,
   "teachers": {},
   "regionsKnown": {
-    "valley": 200
+    "valley": 201
   },
   "foreclosed": [
     "rootkin",
@@ -4045,10 +4087,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-17T17:39:40.705Z",
-      "lastAt": "2026-07-17T18:09:21.604Z",
+      "lastAt": "2026-07-17T18:13:29.357Z",
       "startDay": 17,
       "endDay": 17,
-      "beats": 8
+      "beats": 9
     }
   ],
   "company": [

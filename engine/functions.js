@@ -97,5 +97,7 @@ function prettyTrad(t) { return String(t || "").replace(/[-_]+/g, " ").replace(/
 // classes; this map is the single source the badges/wheel read). Function ≠ tradition, its own palette.
 export const FUNCTION_FAMILIES = ["HARM", "RESTORE", "PROTECT", "KNOW", "SHAPE", "INFLUENCE", "MOVE", "SUSTAIN"];
 export const FAMILY_GLYPH = { HARM: "⚔", RESTORE: "✚", PROTECT: "⛨", KNOW: "◉", SHAPE: "✦", INFLUENCE: "⛓", MOVE: "➤", SUSTAIN: "∞" };
+// SNG-124 Phase B: the family colors as raw values (for SVG fills on the wheel — the CSS classes cover DOM).
+export const FAMILY_COLOR = { HARM: "#e58a7a", RESTORE: "#8fc06e", PROTECT: "#e0b25a", KNOW: "#6fb0d8", SHAPE: "#d99a5a", INFLUENCE: "#b48fd0", MOVE: "#5fc0b6", SUSTAIN: "#9aa2ad" };
 /** The CSS class suffix for a family (lower-case) — `.fn-fam-harm`, etc. */
 export function familyClass(family) { return `fn-fam-${String(family || "").toLowerCase()}`; }

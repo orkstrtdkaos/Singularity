@@ -30,7 +30,7 @@ import { typeAffinity, vectorAffinity, locationAffinity, affinityReceipt } from 
 import { recordCoUse, coUseCount, currentStage, refreshEvolvingItems, noteCoUseAndRefresh, evolvedItemsForGM } from "../engine/evolution.js";
 import { homeClassOf, isCrossClass, skillPointCost, forkFor, forkPending, chosenFork, setFork, rankExpression, forkPaths, skillGraphModel, nativeGrantsFor, combinationsAvailableFor } from "../engine/skilltree.js";
 import { combinationThresholdMet, ripeAxisTouchCombinations } from "../engine/practice.js";
-import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, familyClass, FUNCTION_FAMILIES } from "../engine/functions.js";
+import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, familyClass, FUNCTION_FAMILIES, FAMILY_COLOR, FAMILY_GLYPH } from "../engine/functions.js";
 import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, applySurgeBacklash, surgeBacklash, intensityOptions } from "../engine/intensity.js";
 import { validate, missingRequired, defaultFor } from "../engine/genschema.js";
 import { generate, ensureGenerated, resolveExisting, mintId, repairEntity, stubEntity, birthWeightOf, buildGeneratePrompt, generatedRecords, GEN_TYPES, isMinorEntity, enforceFloors, recordAttention, effectiveWeight, recomputeTier, isDormant, isSurfaceable, livingWorldForGM, findGenerated, nominationsFor } from "../engine/generate.js";
@@ -3446,6 +3446,9 @@ await (async () => {
     for (const ab of (Array.isArray(arr) ? arr : arr.abilities || [])) for (const v of ab.functions || []) { checked++; if (!fx.verbToFamily[v]) orphan = `${ab.id}:${v}`; }
   }
   check("SNG-124: every core ability's function verb maps to a known family (no orphan verbs)", checked > 100 && orphan === null);
+  // Phase B: the wheel overlay's color + glyph maps cover all 8 families (no undefined fill on a node dot)
+  check("SNG-124 Phase B: FAMILY_COLOR + FAMILY_GLYPH cover all 8 families (wheel dots never undefined)",
+    FUNCTION_FAMILIES.every(f => FAMILY_COLOR[f] && FAMILY_GLYPH[f]) && Object.keys(FAMILY_COLOR).length === 8);
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

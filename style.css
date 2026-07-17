@@ -690,3 +690,16 @@ img[data-lightbox] { cursor: zoom-in; }
 .sug-block { border-left: 3px solid var(--accent2); }
 .sug-row { border-bottom: 1px solid var(--border); padding-bottom: 6px; }
 .sug-row .btn { margin-top: 4px; }
+
+/* SNG-124 Phase B: the skill-wheel function overlay */
+.fn-filter-row { display:flex; flex-wrap:wrap; gap:5px; align-items:center; margin:6px 0 8px; }
+.fn-filter { font-family:var(--font-ui); font-size:11px; padding:2px 8px; border-radius:12px; background:transparent; border:1px solid var(--border); color:var(--ink-dim); cursor:pointer; }
+.fn-filter:hover { filter:brightness(1.15); }
+.fn-filter.on { font-weight:600; }
+#fn-filter-clear { color:var(--ink-dim); border-color:var(--border); }
+.wheel-node-label { fill:var(--ink-dim); font-family:var(--font-ui); font-size:8px; pointer-events:none; }
+.wheel-node-label.owned { fill:var(--ink); }
+.wheel-fn-dot { pointer-events:none; }
+.wheel-node.fn-dim { opacity:0.22; }
+.wheel-node.fn-match circle:not(.hit) { stroke-width:2.4; }
+.wheel-node.fn-match .wheel-node-label { fill:var(--ink); }

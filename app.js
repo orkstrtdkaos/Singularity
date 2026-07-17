@@ -24,7 +24,7 @@ import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal } from "./engine/traditions.js";
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs } from "./engine/companions.js";
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges } from "./engine/company.js";
-import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, FAMILY_GLYPH, familyClass } from "./engine/functions.js";
+import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, familyClass } from "./engine/functions.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
 import { initWorldState, runWorldTick, syncSharedWorld, advanceGeneratedOffscreen, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
@@ -45,7 +45,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.88";
+const APP_VERSION = "1.8.89";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -122,6 +122,7 @@ function showVitalDetail(el) {
 
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
 let FN_INDEX = { families: [], verbToFamily: {}, byFamily: {} }; // SNG-124: function-family index (built at load)
+let wheelFnFilter = new Set(); // SNG-124 Phase B: active function-family filter on the skill wheel
 let character = null;    // active character
 let profile = null;      // the player's profile (the human)
 let sceneTurns = [];     // recent beats: {summary, narration} for scene continuity
@@ -3504,9 +3505,14 @@ function buildWheelModel() {
   const mk = (ab, x, y, ang) => {
     const trad = traditionOf(ab, idx);
     const v = domainAccess(ab, ab.levelReq || 1, domains, idx);
+    const isOwned = owned.has(ab.id);
     nodes.push({ id: ab.id, name: ab.name, tier: tierOf(ab.levelReq), levelReq: ab.levelReq || 1, cls: trad || ab.powerSystem || "learned",
-      x, y, ang, owned: owned.has(ab.id), band: v.band, allowed: v.allowed, penalty: v.penalty, closed: v.band === "closed",
-      barred: !v.allowed && v.band !== "closed", dim: v.penalty > 1, isFolk: trad && isFolkTradition(trad, idx), isPrecursor: ab.powerSystem === "precursor" });
+      x, y, ang, owned: isOwned, band: v.band, allowed: v.allowed, penalty: v.penalty, closed: v.band === "closed",
+      barred: !v.allowed && v.band !== "closed", dim: v.penalty > 1, isFolk: trad && isFolkTradition(trad, idx), isPrecursor: ab.powerSystem === "precursor",
+      // SNG-124: function overlay + cost-at-a-glance. `reachable` = learnable now (allowed, not owned, level met).
+      functions: ab.functions || [], families: familiesOfAbility(ab, FN_INDEX), energyCost: ab.energyCost ?? null,
+      effCost: (() => { try { return effectiveEnergyCost(ab, character, CONTENT.rules); } catch { return ab.energyCost ?? null; } })(),
+      reachable: v.allowed && !isOwned && (character.level || 1) >= (ab.levelReq || 1) });
   };
   // spokes: fan same-tier abilities by a small angular offset around the spoke
   for (const [trad, abs] of Object.entries(byTrad)) {
@@ -3646,11 +3652,20 @@ function renderSkillWheel(selectedId = null, status = "") {
         <text x="${lp.x}" y="${lp.y + 3}" text-anchor="middle" class="wheel-pole-label">${esc(String(rn.pole).slice(0, 12))}</text></g>`; }).join("")}
     ${/* ability nodes */""}
     ${m.nodes.map(nd => { const r = 5 + (nd.levelReq - 1) * 1.2;
-      const cls = `wheel-node ${nd.owned ? "owned" : ""} ${nd.closed ? "closed" : ""} ${nd.barred ? "barred" : ""} ${nd.dim ? "dim" : ""} ${nd.isFolk ? "folk" : ""} ${nd.isPrecursor ? "precursor" : ""} ${selectedId === nd.id ? "selected" : ""}`;
-      return `<g class="${cls}" data-wheelnode="${esc(nd.id)}"><title>${esc(nd.name + " — " + traditionLabel(nd.cls) + " · Tier " + nd.tier + (nd.owned ? " (owned)" : nd.closed ? " · CLOSED (your antipode)" : nd.barred ? " · barred" : nd.dim ? " · costs more" : ""))}</title>
+      // SNG-124 Phase B: FUNCTION OVERLAY — a family filter highlights matching nodes across all traditions
+      // (both axes at once); a family dot shows WHAT a node does; owned/reachable nodes label themselves.
+      const filterOn = wheelFnFilter.size > 0;
+      const matched = filterOn && (nd.families || []).some(f => wheelFnFilter.has(f));
+      const fam = (nd.families || [])[0];
+      const showLabel = (nd.owned || matched || selectedId === nd.id) && nd.name;
+      const cls = `wheel-node ${nd.owned ? "owned" : ""} ${nd.closed ? "closed" : ""} ${nd.barred ? "barred" : ""} ${nd.dim ? "dim" : ""} ${nd.isFolk ? "folk" : ""} ${nd.isPrecursor ? "precursor" : ""} ${selectedId === nd.id ? "selected" : ""} ${filterOn ? (matched ? "fn-match" : "fn-dim") : ""}`;
+      const lp = wheelPt(nd.ang, wheelTierRadius(nd.levelReq) + 12);
+      return `<g class="${cls}" data-wheelnode="${esc(nd.id)}"><title>${esc(nd.name + " — " + traditionLabel(nd.cls) + " · Tier " + nd.tier + ((nd.functions || []).length ? " · " + nd.functions.join(", ") : "") + (nd.effCost != null ? " · ⚡" + nd.effCost : "") + (nd.owned ? " (owned)" : nd.closed ? " · CLOSED (your antipode)" : nd.barred ? " · barred" : nd.dim ? " · costs more" : ""))}</title>
         <circle class="hit" cx="${nd.x}" cy="${nd.y}" r="13"/>
         <circle cx="${nd.x}" cy="${nd.y}" r="${r}" fill="${nd.owned ? traditionColor(nd.cls) : "#20242c"}" stroke="${nd.closed ? "var(--danger)" : traditionColor(nd.cls)}"/>
+        ${fam && !nd.closed ? `<circle cx="${nd.x + r + 1.5}" cy="${nd.y - r - 1.5}" r="2.4" fill="${FAMILY_COLOR[fam] || "var(--ink-dim)"}" class="wheel-fn-dot"/>` : ""}
         ${nd.closed ? `<line x1="${nd.x - r - 2}" y1="${nd.y - r - 2}" x2="${nd.x + r + 2}" y2="${nd.y + r + 2}" class="wheel-node-strike"/>` : ""}
+        ${showLabel ? `<text x="${lp.x}" y="${lp.y + 2}" text-anchor="middle" class="wheel-node-label ${nd.owned ? "owned" : ""}">${esc(String(nd.name).slice(0, 16))}${nd.effCost != null && (nd.owned || nd.reachable) ? ` ⚡${nd.effCost}` : ""}</text>` : ""}
       </g>`; }).join("")}
   </g></svg>`;
 
@@ -3668,7 +3683,8 @@ function renderSkillWheel(selectedId = null, status = "") {
     <div class="map-details-head"><h3>${esc(sel.name)}</h3>
       <span class="rep-band" style="border-color:${traditionColor(sel.cls)};color:${traditionColor(sel.cls)}">${esc(traditionLabel(sel.cls))} · Tier ${sel.tier}</span>
       ${sel.owned ? `<span class="rep-band trusted">owned</span>` : ""}</div>
-    <div class="hint">${esc(gateLine)}${selAb?.energyCost ? ` · energy ${selAb.energyCost}` : ""}${(selAb?.functions || []).length ? ` · ${selAb.functions.join(", ")}` : ""}</div>
+    <div class="hint">${esc(gateLine)}${sel.effCost != null ? ` · ⚡${sel.effCost} energy${selAb?.energyCost && sel.effCost !== selAb.energyCost ? ` (base ${selAb.energyCost})` : ""}` : ""}</div>
+    ${(selAb?.functions || []).length ? `<div style="margin:4px 0">${functionChips(selAb)}</div>` : ""}
     <p class="map-details-desc">${esc(selAb?.description || "")}</p>
     ${selAb?.notFor ? `<div class="hint"><em>cannot: ${esc(selAb.notFor)}</em></div>` : ""}
     ${skillSelectionActions(selAb)}
@@ -3677,6 +3693,12 @@ function renderSkillWheel(selectedId = null, status = "") {
   chrome(`<div class="screen" style="max-width:980px">
     <h2>The Skill Wheel ${infoDot("circle.what")}</h2>
     <p class="hint" style="margin-bottom:8px">The great circle IS your skill tree. Your <strong>people's spoke</strong> runs out to its capstone; <strong>kin</strong> stand beside you; the <strong>folk crafts</strong> sit at the centre (open to all); <strong>precursor</strong> rings the outside; a <strong>braid you know</strong> draws a line through the middle; and your <strong>antipode is dark, struck through</strong>, across the wheel. Depth = mastery. <strong>Tap a node to learn or deepen it here.</strong> Scroll to zoom, drag to pan.</p>
+    ${/* SNG-124 Phase B: function-family filter — tap a family to light up every craft that does it, across all traditions (both axes at once). */""}
+    <div class="fn-filter-row">
+      <span class="hint" style="margin-right:2px">By function:</span>
+      ${FUNCTION_FAMILIES.map(f => `<button class="fn-filter ${familyClass(f)} ${wheelFnFilter.has(f) ? "on" : ""}" data-fnfilter="${f}" title="${f} — highlight every craft that can ${f.toLowerCase()}" style="${wheelFnFilter.has(f) ? `background:${FAMILY_COLOR[f]};color:var(--bg);border-color:${FAMILY_COLOR[f]}` : `color:${FAMILY_COLOR[f]};border-color:${FAMILY_COLOR[f]}`}">${FAMILY_GLYPH[f]} ${f}</button>`).join("")}
+      ${wheelFnFilter.size ? `<button class="fn-filter" id="fn-filter-clear" title="Clear the function filter">✕ clear</button>` : ""}
+    </div>
     <p class="hint" style="margin-bottom:8px"><span class="grow-badge">${character.skillPoints || 0} skill point${(character.skillPoints || 0) === 1 ? "" : "s"}</span> · ${breadthUsed(character)} of ${breadthCap(character, CONTENT.skillCapacity)} crafts${atCapacity(character, CONTENT.skillCapacity) ? " — at capacity" : ""}</p>
     ${status ? `<div class="cs-block" style="border-left:3px solid var(--accent); margin-bottom:8px">${esc(status)}</div>` : ""}
     <div class="graph-wrap" id="graph-wrap">
@@ -3698,6 +3720,12 @@ function renderSkillWheel(selectedId = null, status = "") {
     if (_graphDidPan) { _graphDidPan = false; return; }
     renderSkillWheel(g.dataset.wheelnode === selectedId ? null : g.dataset.wheelnode);
   };
+  // SNG-124 Phase B: toggle a function-family filter (preserves zoom/selection).
+  for (const b of app.querySelectorAll("[data-fnfilter]")) b.onclick = () => {
+    const f = b.dataset.fnfilter; if (wheelFnFilter.has(f)) wheelFnFilter.delete(f); else wheelFnFilter.add(f);
+    renderSkillWheel(selectedId, status);
+  };
+  const fnClear = document.getElementById("fn-filter-clear"); if (fnClear) fnClear.onclick = () => { wheelFnFilter = new Set(); renderSkillWheel(selectedId, status); };
   wireSkillSelectionActions((id, msg) => renderSkillWheel(id, msg)); // SNG-097: learn/deepen in place
   document.getElementById("wheel-back").onclick = () => { graphView = null; renderCharacterScreen(); };
   document.getElementById("wheel-list").onclick = () => { graphView = null; renderSkillGraph(); };

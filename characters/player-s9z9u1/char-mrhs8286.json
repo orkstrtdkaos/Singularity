@@ -715,24 +715,19 @@
         "player": "Speak quietly to Calvar — tell him the ending you read, that the wait is over and the bundle is the next step: what is in it?",
         "summary": "Calvar reveals the bundle: Pell's father's own letters, margin-notated with seventh-band designations — a second record of the method Grael's runner was sent to erase.",
         "narration": "You speak quietly — not across the room, just into it, the way you'd set something down on a surface rather than place it with ceremony. \"The wait is over. What you were holding for is here.\" A pause, then: \"What's in the bundle?\"\n\nCalvar looks at you for a moment — measuring the shape of what you just did, how you knew to say it that way. His hand lifts from the bundled papers and he crosses back to the drafting surface, not hurried. He unties the cord with two practiced pulls and sets it aside.\n\n\"Calvar sent copies of the seventh-band calibration files to three places before Rennic cleared the district secondary stack.\" He is speaking to both of you now, but his eyes are on Pell. \"One copy is here — the one they missed, because it wasn't filed as calibration work. It was filed as correspondence. My own, from the days I was still writing letters that came back.\" He touches the top of the stack without opening it. \"Your father's replies. Every notation he made on the margins is his hand, including the band designations. The files they removed from Leth's room are not the only record of his method.\"\n\nHuginn makes a small sound — not a word, just a quiet acknowledgment, the kind it reserves for moments when the design closes. The lamp holds steady on the drafting surface. Calvar leaves the bundle open and steps back."
+      },
+      {
+        "player": "Let Pell look at the letters — step back and give her the space without comment",
+        "summary": "Pell reads her father's letters where they lie — Silas steps back and gives her the space without comment.",
+        "narration": "You take one step back and then another, until your shoulders find the wall beside the door. No words — nothing is needed. The space between Pell and the drafting surface is hers now.\n\nShe moves forward. Not quickly. She sets Memory's shaft against the wall with the same careful economy she uses for everything that matters, and then she puts both hands on the edge of the surface and looks down at the open bundle. The letters are there — a stack of them, ruled paper gone slightly amber at the edges, tied into the bundle with the calibration pages tucked beneath. Her father's hand is in the margins of every sheet: the distinctive threes, the column notation she recognized in Fendt's scrawl, now written by the man who taught it. Seven years of silence in a pile of correspondence that kept arriving and then stopped.\n\nShe doesn't pick them up. Not yet. She reads the top sheet where it lies — just her eyes moving, her hands flat on the surface edge, holding the table rather than the paper. Calvar watches her from two feet away and says nothing, which is exactly right. Huginn shifts once on the stool-back, a single quiet adjustment of weight, and then goes still again.\n\nThe lamp holds steady. The cord sits coiled on the surface edge where Calvar set it aside. Fendt's Testimony waits in its fold. The room has arrived at the thing it was arranged to hold, and it is content to hold it quietly — no urgency from you, no prompting, just the two of them and the letters and the distance that's closing between a daughter and the fact of a living father."
       }
     ],
     "lastTurn": {
-      "narration": "You speak quietly — not across the room, just into it, the way you'd set something down on a surface rather than place it with ceremony. \"The wait is over. What you were holding for is here.\" A pause, then: \"What's in the bundle?\"\n\nCalvar looks at you for a moment — measuring the shape of what you just did, how you knew to say it that way. His hand lifts from the bundled papers and he crosses back to the drafting surface, not hurried. He unties the cord with two practiced pulls and sets it aside.\n\n\"Calvar sent copies of the seventh-band calibration files to three places before Rennic cleared the district secondary stack.\" He is speaking to both of you now, but his eyes are on Pell. \"One copy is here — the one they missed, because it wasn't filed as calibration work. It was filed as correspondence. My own, from the days I was still writing letters that came back.\" He touches the top of the stack without opening it. \"Your father's replies. Every notation he made on the margins is his hand, including the band designations. The files they removed from Leth's room are not the only record of his method.\"\n\nHuginn makes a small sound — not a word, just a quiet acknowledgment, the kind it reserves for moments when the design closes. The lamp holds steady on the drafting surface. Calvar leaves the bundle open and steps back.",
-      "sceneSummary": "Calvar reveals the bundle: Pell's father's own letters, margin-notated with seventh-band designations — a second record of the method Grael's runner was sent to erase.",
+      "narration": "You take one step back and then another, until your shoulders find the wall beside the door. No words — nothing is needed. The space between Pell and the drafting surface is hers now.\n\nShe moves forward. Not quickly. She sets Memory's shaft against the wall with the same careful economy she uses for everything that matters, and then she puts both hands on the edge of the surface and looks down at the open bundle. The letters are there — a stack of them, ruled paper gone slightly amber at the edges, tied into the bundle with the calibration pages tucked beneath. Her father's hand is in the margins of every sheet: the distinctive threes, the column notation she recognized in Fendt's scrawl, now written by the man who taught it. Seven years of silence in a pile of correspondence that kept arriving and then stopped.\n\nShe doesn't pick them up. Not yet. She reads the top sheet where it lies — just her eyes moving, her hands flat on the surface edge, holding the table rather than the paper. Calvar watches her from two feet away and says nothing, which is exactly right. Huginn shifts once on the stool-back, a single quiet adjustment of weight, and then goes still again.\n\nThe lamp holds steady. The cord sits coiled on the surface edge where Calvar set it aside. Fendt's Testimony waits in its fold. The room has arrived at the thing it was arranged to hold, and it is content to hold it quietly — no urgency from you, no prompting, just the two of them and the letters and the distance that's closing between a daughter and the fact of a living father.",
+      "sceneSummary": "Pell reads her father's letters where they lie — Silas steps back and gives her the space without comment.",
       "choices": [
         {
-          "label": "Ask who the third copy went to — Calvar said three places",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask Calvar directly: does he know where Pell's father is now",
+          "label": "Ask Calvar quietly where the other two copies went — he named three; one is here",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
@@ -742,151 +737,134 @@
           "trivial": true
         },
         {
-          "label": "Let Pell look at the letters — step back and give her the space without comment",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Read the room with Order-Sense — the design of what Calvar built here: three copies, sent where, to whom, and why that shape",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "help"
+            "study"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": true
+        },
+        {
+          "label": "Wait — let Pell finish reading before anyone asks anything; the letters have waited seven years, and so can the questions",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "sustain"
           ],
           "trivial": true
         },
         {
-          "label": "Name the practical need: the calibration files need to reach a lodgment authority before the six-week window closes — ask Calvar where he thinks the second copy went and whether it's recoverable",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "label": "Tell Calvar plainly what the six-week clock means — Fendt is walking to Millbrook, the formal lodgment needs to move, and the third copy's location may determine whether it can",
+          "attribute": "social",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "plan"
+            "persuade",
+            "negotiate"
           ],
           "trivial": true
         }
       ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
       "scene": {
-        "setting": "Calvar's room above the cooperage, east lane, Edge District — evening, early-spring. Lamp steady on the drafting surface corner, Fendt's Testimony beside the now-open bundle of ruled papers and letters.",
+        "setting": "Calvar's room above the cooperage, east lane, Edge District — evening, early-spring. Lamp steady on the drafting surface corner. Silas at the wall beside the door; Pell at the drafting surface with both hands on the edge, reading her father's letters where they lie.",
         "npcsPresent": [
           {
             "name": "Calvar",
-            "state": "Standing back from the drafting surface — bundle untied and open, hand at his side, watching Pell"
+            "state": "Standing two feet from Pell — watching her read without speaking, cord set aside"
           },
           {
             "name": "Pell",
-            "state": "Still forward of Silas — eyes on the open bundle; the letters are visible, her father's hand in them"
+            "state": "Both hands on the surface edge, eyes on the open bundle — reading the top letter where it lies; has not picked anything up"
           },
           {
             "name": "Huginn",
-            "state": "On the stool's back — settled, wings folded, the small sound already gone"
+            "state": "On the stool-back — settled, wings folded, one quiet shift and then still"
           }
         ],
         "objects": [
-          "Drafting surface — lamp on its corner, Fendt's Testimony (folded page) placed beside the open bundle",
-          "Bundle (open) — bundled ruled papers and a stack of letters in two hands: Calvar's and another's, with margin notations",
-          "Cord — untied, set aside on the drafting surface edge",
+          "Drafting surface — lamp on its corner, bundle open, Fendt's Testimony (folded page) beside it",
+          "Bundle (open) — ruled papers and letters in two hands, seventh-band margin notations in her father's hand visible on the top sheet",
+          "Cord — untied, coiled on the drafting surface edge",
+          "Memory (spear) — leaned against the wall by Pell",
           "Chair — angled toward the visitors",
           "Empty stool — Huginn perched on its back",
           "Coat on a hook by the door",
-          "Bed against the far wall — made precisely",
-          "Memory (spear) — under Pell's right arm"
+          "Bed against the far wall — made precisely"
         ],
         "threads": [
+          "Pell is reading her father's letters — she has not spoken and has not picked them up yet",
           "Calvar named three copies of the calibration files — one is here; where did the other two go?",
-          "Pell has not yet spoken since Calvar opened the bundle",
-          "The destination of Grael's removed calibration files remains partially unconfirmed — what the runner took, and where it went",
-          "The six-week window for Fendt's formal lodgment is the working clock"
+          "The six-week window for Fendt's formal lodgment is the working clock",
+          "The destination of Grael's removed calibration files remains partially unconfirmed"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "calvar",
-          "name": "Calvar",
-          "note": "Opened the bundle — named it as Pell's father's own correspondence, margin-notated with seventh-band designations. A second record of the method the runner was sent to erase. Named three copies; one is here.",
+          "npcId": "pell",
+          "name": "Pell",
+          "note": "Reading her father's letters where they lie on Calvar's drafting surface — both hands on the edge, not picking them up yet. Silas stepped back and gave her the space without comment.",
+          "statusNote": "In Calvar's room — reading her father's letters in the open bundle; has not yet spoken or reached for the pages",
           "learned": [
-            "Calvar filed the calibration material as personal correspondence — that is why Rennic missed it",
-            "The bundle contains Pell's father's own letters to Calvar, margins annotated with band designations in his hand",
-            "Calvar sent copies to three places before the district secondary stack was cleared — the bundle is one; two others exist or existed"
-          ],
-          "skillsObserved": [
-            "measured disclosure — named the three copies without being asked, paced the reveal"
-          ],
-          "relationshipDelta": 1,
-          "status": "active",
-          "statusNote": "In his room above the cooperage — bundle now open, cooperating fully; waiting on the next question"
+            "Her father's correspondence to Calvar is physically present — the seventh-band margin notations are in his hand on the top sheet; she is reading it where it lies"
+          ]
         },
         {
           "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "note": "Eyes on the open bundle — her father's letters visible. Has not yet spoken since Calvar opened it.",
-          "status": "active",
-          "statusNote": "In Calvar's room — looking at her father's letters in the open bundle; has not spoken"
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "calvar",
-          "label": "Calvar — the Engineer",
-          "kind": "person",
-          "entityId": "calvar",
-          "fact": "Calvar filed a copy of the seventh-band calibration files as personal correspondence — Pell's father's own letters with margin notations in his hand. Rennic missed it. Calvar sent copies to three locations before the secondary stack was cleared; the bundle in his room is one. The other two locations are not yet named.",
-          "links": [
-            "fendt-and-the-falsified-ledger",
-            "the-edge-district-ledger",
-            "find-the-engineer",
-            "overseer-grael",
-            "pell",
-            "radiant-plateau-edge"
-          ]
-        }
-      ],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "find-the-engineer",
-          "note": "Calvar revealed the bundle — a second record of the seventh-band method survives as personal correspondence, missed by Grael's runner. Three copies were made; one is here. The other two destinations are the next question."
-        },
-        {
-          "op": "progress",
-          "questId": "the-edge-district-ledger",
-          "note": "The calibration files Grael's runner removed from Leth's archive are not the only record — Calvar's personal correspondence holds the same data in Pell's father's own hand. A formal lodgment path may not require recovering the originals."
+          "npcId": "calvar",
+          "name": "Calvar",
+          "note": "Standing two feet from Pell, watching her read — said nothing, which was the right call. The room has settled into what it was arranged to hold.",
+          "statusNote": "In his room above the cooperage — bundle open, standing near Pell as she reads; waiting without pressure"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief exchange in Calvar's room — minutes only"
+        "why": "A quiet moment held — Pell reading, the room settling; a few minutes only"
       }
     },
     "sceneState": {
-      "setting": "Calvar's room above the cooperage, east lane, Edge District — evening, early-spring. Lamp steady on the drafting surface corner, Fendt's Testimony beside the now-open bundle of ruled papers and letters.",
+      "setting": "Calvar's room above the cooperage, east lane, Edge District — evening, early-spring. Lamp steady on the drafting surface corner. Silas at the wall beside the door; Pell at the drafting surface with both hands on the edge, reading her father's letters where they lie.",
       "npcsPresent": [
         {
           "name": "Calvar",
-          "state": "Standing back from the drafting surface — bundle untied and open, hand at his side, watching Pell"
+          "state": "Standing two feet from Pell — watching her read without speaking, cord set aside"
         },
         {
           "name": "Pell",
-          "state": "Still forward of Silas — eyes on the open bundle; the letters are visible, her father's hand in them"
+          "state": "Both hands on the surface edge, eyes on the open bundle — reading the top letter where it lies; has not picked anything "
         },
         {
           "name": "Huginn",
-          "state": "On the stool's back — settled, wings folded, the small sound already gone"
+          "state": "On the stool-back — settled, wings folded, one quiet shift and then still"
         }
       ],
       "objects": [
-        "Drafting surface — lamp on its corner, Fendt's Testimony (folded page) placed be",
-        "Bundle (open) — bundled ruled papers and a stack of letters in two hands: Calvar",
-        "Cord — untied, set aside on the drafting surface edge",
+        "Drafting surface — lamp on its corner, bundle open, Fendt's Testimony (folded pa",
+        "Bundle (open) — ruled papers and letters in two hands, seventh-band margin notat",
+        "Cord — untied, coiled on the drafting surface edge",
+        "Memory (spear) — leaned against the wall by Pell",
         "Chair — angled toward the visitors",
         "Empty stool — Huginn perched on its back",
         "Coat on a hook by the door",
-        "Bed against the far wall — made precisely",
-        "Memory (spear) — under Pell's right arm"
+        "Bed against the far wall — made precisely"
       ],
       "threads": [
+        "Pell is reading her father's letters — she has not spoken and has not picked them up yet",
         "Calvar named three copies of the calibration files — one is here; where did the other two go?",
-        "Pell has not yet spoken since Calvar opened the bundle",
-        "The destination of Grael's removed calibration files remains partially unconfirmed — what the runner took, and where it went",
-        "The six-week window for Fendt's formal lodgment is the working clock"
+        "The six-week window for Fendt's formal lodgment is the working clock",
+        "The destination of Grael's removed calibration files remains partially unconfirmed"
       ]
     }
   },
@@ -1312,7 +1290,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d3] Named her priority plainly — Fendt first, the paper lodged, Grael named. Her father held in reserve: not looking for him, not turning away if the work leads there.",
         "[d3] Took Fendt's folded page from his hand and passed it to Silas without a word — a small, precise gesture of commitment. Walked the full day back to Millbrook without asking to stop.",
         "[d3] Confirmed the route without deliberation — array office, then Calvar. Took Memory in hand and was already moving.",
         "[d3] Moved before Silas reached the array office door — already oriented east. Stopped two paces from the cooperage stair, reading the lamp-line in the upper window.",
@@ -1321,17 +1298,18 @@
         "[d3] Standing steady at Silas's left — professional case intact, father's name still held. Watching Calvar's face as the full chain lands.",
         "[d3] Named her father to Calvar — stepped forward, level voice, no preamble. Has not yet responded to Calvar's 'I thought he was dead.'",
         "[d3] Holding the weight of Calvar's question — her father named, Calvar's seven-year assumption visible; she has not answered yet",
-        "[d3] Eyes on the open bundle — her father's letters visible. Has not yet spoken since Calvar opened it."
+        "[d3] Eyes on the open bundle — her father's letters visible. Has not yet spoken since Calvar opened it.",
+        "[d3] Reading her father's letters where they lie on Calvar's drafting surface — both hands on the edge, not picking them up yet. Silas stepped back and gave her the space without commen"
       ],
       "knownFacts": [
-        "Her father told her the filtration work was over and someone else's problem — she accepted it without pressing",
         "She is not looking for her father — but she will not turn away if the work brings them there",
         "She reads Fendt's situation as solvable on a known timeline; her father's situation as a different kind of problem requiring a different decision",
         "She holds two things at once — Fendt's six-week window and her father's unasked-for reappearance — without letting either collapse the other",
         "Has physically handled the testimony — made the relay action herself without being asked",
         "Pell's strategy: Fendt testimony, runner's name, Vash's account first — her father's notation held until the room earns it",
         "Calvar knew her father directly — was taught the specification method by him",
-        "Calvar believed her father dead — seven years"
+        "Calvar believed her father dead — seven years",
+        "Her father's correspondence to Calvar is physically present — the seventh-band margin notations are in his hand on the top sheet; she is reading it where it lie"
       ],
       "skillsObserved": [
         "rapid tactical positioning in an unknown interior",
@@ -1342,7 +1320,7 @@
         "holding partial knowledge without performance — named the ha"
       ],
       "status": "active",
-      "statusNote": "In Calvar's room — looking at her father's letters in the open bundle; has not spoken",
+      "statusNote": "In Calvar's room — reading her father's letters in the open bundle; has not yet spoken or reached for the pages",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 3
@@ -1674,7 +1652,8 @@
         "[d3] Pell named her father — Calvar went still, pressed his hand on the bundled papers, crossed to the window, then turned back and said 'He taught me the specification method. I though",
         "[d3] Asked plainly whether Pell's father is alive — the professional non-reaction is entirely gone; seven years of held assumption breaking open visibly",
         "[d3] The Attended End reads his room — the seven-year assumption is ending, not him. The weight of the held grief is clearing. The bundled papers were always going to be passed.",
-        "[d3] Opened the bundle — named it as Pell's father's own correspondence, margin-notated with seventh-band designations. A second record of the method the runner was sent to erase. Named"
+        "[d3] Opened the bundle — named it as Pell's father's own correspondence, margin-notated with seventh-band designations. A second record of the method the runner was sent to erase. Named",
+        "[d3] Standing two feet from Pell, watching her read — said nothing, which was the right call. The room has settled into what it was arranged to hold."
       ],
       "knownFacts": [
         "Calvar believed Pell's father to be dead — seven years of that assumption carried in his posture",
@@ -1692,7 +1671,7 @@
         "measured disclosure — named the three copies without being a"
       ],
       "status": "active",
-      "statusNote": "In his room above the cooperage — bundle now open, cooperating fully; waiting on the next question",
+      "statusNote": "In his room above the cooperage — bundle open, standing near Pell as she reads; waiting without pressure",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 3
@@ -2961,18 +2940,18 @@
     }
   },
   "tendencies": {
-    "strategic": 19.953418105232668,
-    "cerebral": 23.489612990583375,
-    "social": 19.924938141049754,
-    "generous": 5.378449013646457,
-    "cautious": 14.821357999907315,
-    "physical": 0.6373883320466356,
-    "risky": 1.7947573314473628,
-    "ruthless": 0.789201600367128,
-    "carousing": 0.5541791533637109,
-    "amorous": 1.5196387636649467,
-    "patient": 1.0176290010723457,
-    "stealth": 0.6502471642142047
+    "strategic": 19.45458265260185,
+    "cerebral": 22.90237266581879,
+    "social": 19.42681468752351,
+    "generous": 6.243987788305295,
+    "cautious": 14.450824049909631,
+    "physical": 0.6214536237454696,
+    "risky": 1.7498883981611788,
+    "ruthless": 0.7694715603579498,
+    "carousing": 0.5403246745296182,
+    "amorous": 1.4816477945733229,
+    "patient": 0.9921882760455369,
+    "stealth": 0.6339909851088495
   },
   "aptitudes": [
     "strategist",
@@ -2983,7 +2962,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 383,
+  "actionCount": 384,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3149,8 +3128,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784310981504,
-  "rev": 550,
+  "updatedAt": 1784311450589,
+  "rev": 551,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3406,7 +3385,7 @@
           "entityId": "calvar",
           "type": "npc",
           "birthWeight": 10,
-          "engagementScore": 29,
+          "engagementScore": 31,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -3497,6 +3476,10 @@
             },
             {
               "kind": "fact",
+              "day": 3
+            },
+            {
+              "kind": "interact",
               "day": 3
             }
           ],
@@ -3956,7 +3939,7 @@
   "syncedAt": 1784292613822,
   "teachers": {},
   "regionsKnown": {
-    "valley": 198
+    "valley": 199
   },
   "foreclosed": [
     "rootkin",
@@ -4004,10 +3987,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-17T17:39:40.705Z",
-      "lastAt": "2026-07-17T17:56:21.503Z",
+      "lastAt": "2026-07-17T18:04:10.588Z",
       "startDay": 17,
       "endDay": 17,
-      "beats": 6
+      "beats": 7
     }
   ],
   "company": [

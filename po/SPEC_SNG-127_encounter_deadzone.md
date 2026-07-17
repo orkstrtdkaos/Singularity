@@ -29,6 +29,10 @@ Add to `random_encounters.json triggerRules`:
 ### 4. Make the rates tunable (so "crank it" is a config edit, not a code hunt)
 Move the fallback rate, cooldown, and cap into `rules`/the table so future tuning (yours or Aevi's) is a JSON change with no code edit. Right now the key rate is a hardcoded fallback — that's why it was invisible.
 
+### 5. Player-selectable pacing (Erik) — a setting, not just a config file
+Expose the encounter frequency as a **player setting**: a simple pacing selector in the profile/settings —
+**Calm · Balanced · Eventful · Relentless** — each a named multiplier on the `onNarrativeTime` rate + the click-path rates (e.g. Calm ×0.5, Balanced ×1, Eventful ×1.6, Relentless ×2.4) and a matching cooldown (Calm 3, Balanced 1, Eventful 1, Relentless 0). Stored on the profile (a UI preference, like the SNG-120 sidebar state). The engine reads `pacing` → resolves the multiplier → applies to the rates in #1–#3. **This is the durable form of "crank it": every player (and every family member on their own character) dials the world to the liveliness they want.** Default **Balanced**; a new/family player can be started on **Eventful** so their first sessions feel alive.
+
 ## EXPECTED FEEL AFTER
 - A normal session of narrative play turns something up every few beats (mix of the 7 flavors — beneficial/benign/beautiful/dangerous/theft/chase/fight, danger-weighted), instead of near-silence.
 - Fights specifically: high-danger locations (cloudform 3, bedrock 2) now skew toward dangerous/fight per the existing `flavorWeightByDanger`, so moving through danger produces combat — which, with SNG-098 skill battles shipped, drops into the real duel panel.
@@ -47,7 +51,8 @@ Move the fallback rate, cooldown, and cap into `rules`/the table so future tunin
 - **Decline/flee always offered before a lethal engagement** (SNG-002b, `lethalRule`) — cranking frequency must NOT remove the escape path. More encounters, same consent-before-danger.
 - **Don't interrupt intimate/grief/combat beats** — those suppressors stay; "regularly" ≠ "in the middle of a kiss."
 - **Danger-weighting preserved** — safe places still skew kind, dangerous places skew fights; the valley stays "hopeful-strange, not grim."
-- **Tunable, not hardcoded** — the point is that the next "make it more/less" is a config change, so we never again have an invisible 4% fallback.
+- **Tunable, not hardcoded** — the next "make it more/less" is a config change, never an invisible fallback.
+- **Player-selectable pacing** — each character/player picks their own liveliness (Calm→Relentless); a family playing together can each dial their own experience.
 
 ## OPEN QUESTIONS — CCODE ROUND 2
 1. Confirm `maybeNarrativeEncounter` is actually called every narrative GM turn (if it's only called on certain turn kinds, that's an additional suppressor to check).

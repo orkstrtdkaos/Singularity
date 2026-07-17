@@ -765,6 +765,193 @@
     }
    ],
    "nativeOrCombination": "native"
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_inescapable_conclusion",
+   "name": "The Inescapable Conclusion",
+   "levelReq": 4,
+   "energyCost": 11,
+   "powerSystem": "reach_emotional_logical",
+   "tradition": "syllogist",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": 0.6
+   },
+   "functions": [
+    "bind",
+    "reveal"
+   ],
+   "narrationHints": "You lay the premises down one at a time, each one they must agree to, until they arrive — of their own reasoning — at a conclusion they would have run from if they'd seen it coming.",
+   "description": "The Syllogist art of the inescapable argument — a chain of reasoning so sound that agreeing to the start compels agreeing to the end, binding a mind by its own logic. Not deception; the opposite. The trap is that it is TRUE.",
+   "notFor": "It binds only the reasonable — a mind that will simply refuse a true conclusion cannot be caught by one. And a true argument binds you too; you cannot walk someone to a conclusion you are unwilling to stand on yourself.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Inescapable Conclusion",
+     "grants": "Bind a reasoning mind to a conclusion by an argument it cannot honestly escape.",
+     "cannot": "It fails against those who refuse reason itself, it binds its wielder to the same truth, and a conclusion someone was walked into by force of logic can curdle into resentment of the one who walked them."
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "SOCIAL",
+    "INVESTIGATE"
+   ],
+   "challengeProfile": {
+    "SOCIAL": 4,
+    "INVESTIGATE": 3
+   },
+   "harmRung": "binding"
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_proof",
+   "name": "The Proof",
+   "levelReq": 5,
+   "energyCost": 13,
+   "powerSystem": "reach_emotional_logical",
+   "tradition": "syllogist",
+   "attribute": "mental",
+   "axes": {
+    "emotional_logical": 0.9
+   },
+   "functions": [
+    "reveal",
+    "bind"
+   ],
+   "narrationHints": "You assemble it whole — the complete proof, every step airtight, of a thing that is simply TRUE — and lay it before the world, and the world has no honest answer but to accept it.",
+   "description": "The Syllogist capstone — a complete, irrefutable proof of a true thing, assembled and offered so soundly that no honest mind can deny it. The deepest gift of the logical kind, and the loneliest: to be right past all argument is to be right, often, alone.",
+   "notFor": "One proof, once, at enormous cost — it can only prove what is actually true; there is no proof of a falsehood, only clever forgery that the next sound mind unpicks. And a proof, once offered, is loose in the world; you cannot un-prove a thing.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Proof",
+     "grants": "Assemble and offer a complete, irrefutable proof of a true thing.",
+     "cannot": "It proves only the true, it costs nearly all you have, and to be irrefutably right is a lonely country — the proof convinces, but conviction is not love."
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "SOCIAL"
+   ],
+   "challengeProfile": {
+    "INVESTIGATE": 5,
+    "SOCIAL": 4
+   }
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_shared_grief",
+   "name": "The Shared Grief",
+   "levelReq": 3,
+   "energyCost": 7,
+   "powerSystem": "reach_emotional_logical",
+   "tradition": "threnodist",
+   "attribute": "social",
+   "axes": {
+    "emotional_logical": -0.4,
+    "death_life": 0.1
+   },
+   "functions": [
+    "empower",
+    "reveal"
+   ],
+   "narrationHints": "You take up the lament and others find their own grief given shape in it — not lessened, but no longer carried alone, the weight spread across every voice that joins.",
+   "description": "The Threnodist art of the shared lament — a song of grief that lets many carry one sorrow together, so no single heart bears the whole. The mourning-singers' first true gift.",
+   "notFor": "It shares grief, it does not erase it — a sorrow sung together is still a sorrow. And the one who leads the lament carries the gathering-point; you hold the grief of all who join while you sing.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Shared Grief",
+     "grants": "Lead a shared lament that spreads one grief across many, so none carries it alone.",
+     "cannot": "It cannot remove grief, only distribute its weight; the singer bears the gathering of it; and a grief shared is a grief made real to everyone who joins the song."
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "SOCIAL"
+   ],
+   "challengeProfile": {
+    "SOCIAL": 3
+   }
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_names_of_the_lost",
+   "name": "The Names of the Lost",
+   "levelReq": 4,
+   "energyCost": 11,
+   "powerSystem": "reach_emotional_logical",
+   "tradition": "threnodist",
+   "attribute": "social",
+   "axes": {
+    "emotional_logical": -0.6,
+    "death_life": 0.2
+   },
+   "functions": [
+    "empower",
+    "reveal"
+   ],
+   "narrationHints": "You sing the names — all of them, every one lost — and for the length of the song they are not gone, exactly; they are HELD, present in the keeping of their names.",
+   "description": "The Threnodist art of the naming-song — a lament that holds the lost present through the keeping of their names, so that for a while the dead are not absent but attended. The deep work of those who refuse to let go be the same as forget.",
+   "notFor": "It holds the lost in memory, it does not return them — a name kept is not a life restored. And to sing all the names is to carry all the losses at once, for the length of the song and after.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Names of the Lost",
+     "grants": "Sing the names of the lost, holding them present in memory for the length of the lament.",
+     "cannot": "It cannot restore the dead, only attend them; it lays every named loss on the singer at once; and the song ends, and they are gone again, and you chose to feel that twice."
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "SOCIAL"
+   ],
+   "challengeProfile": {
+    "SOCIAL": 4
+   }
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_last_lament",
+   "name": "The Last Lament",
+   "levelReq": 5,
+   "energyCost": 13,
+   "powerSystem": "reach_emotional_logical",
+   "tradition": "threnodist",
+   "attribute": "social",
+   "axes": {
+    "emotional_logical": -0.9,
+    "death_life": 0.3
+   },
+   "functions": [
+    "empower"
+   ],
+   "narrationHints": "You sing the whole of it — every grief you have ever held, gathered into one lament so complete that those who hear it are, at the end, somehow lighter, having grieved fully at last the thing they never finished grieving.",
+   "description": "The Threnodist capstone — the complete lament, all grief given full voice at once, that lets those who hear it finally finish a mourning they could not finish alone. The greatest and costliest gift of the singers: to be grieved completely is to be freed.",
+   "notFor": "One lament, once, at enormous cost — it lets others complete a grief, but the singer must carry the whole of it to give it, and a grief fully sung is fully felt. It cannot make loss not have happened; it can only let it be, at last, mourned.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Last Lament",
+     "grants": "Sing a complete lament that lets all who hear finish a grief they could not finish alone.",
+     "cannot": "It costs nearly all you have, it makes the singer feel every grief entire, and it does not undo loss — it only, mercifully, completes the mourning of it."
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "SOCIAL"
+   ],
+   "challengeProfile": {
+    "SOCIAL": 5
+   }
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

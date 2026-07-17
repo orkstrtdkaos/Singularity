@@ -11,6 +11,10 @@ Erik ruled: (1) deep-power peoples innate precursor **as a base, growing along c
 
 ---
 
+## 🎡 SNG-129 wheel — ✅ SHIPPED, complete_pending_review (CCode 2026-07-16, v1.8.90)
+
+> **CCode 2026-07-16:** built the approved encoding. **Shapes** — `FAMILY_SHAPE` (HARM diamond·RESTORE cross·PROTECT shield·KNOW ring·SHAPE triangle·INFLUENCE hexagon·MOVE chevron·SUSTAIN capsule); new `wheelNodeShape()` SVG primitive replaces the bare circle (silhouette=primary family, color retained → redundant/accessible; secondary families as dots); CSS retargeted circle→`.wnode-shape`. **Precursor** — sealed node state (dashed hollow ring + ✦) distinct from too-high/closed; tap → honest "a door opens only when the fiction earns it, no button" explanation; unlocked shows ✦ learnable. **De-collide** — labels owned/selected (+matched at zoom≥1.25), greedy nudge apart, name + ⚡effective cost. 4 smoke tests + browser-verified (every shape → valid SVG; sealed classification); boot-clean on 8225. **⚠ Also fixed 2 inherited SNG-132 content gate-failures** (Aevi's `the_lightless_seraph` red-gated the suite): widened npc.schema.json wants/fears→string|array + reactsToReputation→object|boolean (never rewrote her prose), and registered the NPC in the valley manifest whitelist (needed for SNG-132 to load anyway). Writeup: `po/results/20260716_SNG-129_wheel_readability.md`. (Original spec below.)
+
 ## 🎡 SNG-129 wheel — PROTOTYPE APPROVED, encoding LOCKED → CCode build
 `po/SPEC_SNG-129_*`. Erik reviewed the interactive prototype and approved. LOCKED: 8 family SHAPES (HARM diamond · RESTORE cross · PROTECT shield · KNOW ring · SHAPE triangle · INFLUENCE hexagon · MOVE chevron · SUSTAIN capsule; shape=primary family, color retained); function-filter highlight/dim; precursor SEALED state (dashed hollow + ✦, honest "earned through play" tap-explanation, no learn button); label de-collide + effective cost. Ready to build the approved encoding.
 

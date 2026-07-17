@@ -8,6 +8,10 @@
 
 ---
 
+## 🎨 SNG-136 — Portraits reflect lived growth — ✅ SHIPPED, complete_pending_review (CCode 2026-07-16, v1.8.95)
+
+> **CCode 2026-07-16:** additions to existing art plumbing. **P1** `characterPromptSeed` folds in the LIVED record — level-band clause + latest major deed (|w|≥2) + personal-arc stage (bounded); the every-2-levels `refreshPortraitMilestone` regen now shows who they've become ("seasoned, bearing the marks of what they've done, ended the raider-lord at the weir"). **P2** new `npcPromptSeed(npc,character)` (look+role+bond-to-player) used by the assembleImagePrompt npc branch; pure `npcPortraitTier(n)` (partner/committed/sworn/**devoted-band** — catches Pell); `ensureBondPortraits(character)` mints one portrait per NPC per tier (dedup via `_portraitTier`) → addGalleryImage, run after each turn's npcUpdates AND once on load as the retro backfill; `pruneEmptyGalleryTiles` drops the Vash blank; art-off no-op, rating-lensed + minor-safe, no empty tile on failed gen. 6 smoke tests + browser-verified; boot-clean 8235. Writeup: `po/results/20260716_SNG-136_portraits_growth.md`. (Spec below.)
+
 ## 🎨 SNG-136 — Portraits reflect lived growth (Erik gallery screenshot; CCode-buildable)
 `po/SPEC_SNG-136_portraits_reflect_growth.md`. **Two confirmed gaps, both additions to existing plumbing:** (1) `characterPromptSeed` does NOT read chronicle/deeds/level (only creation-static form+gear) — so level-up regens show who the character WAS, not who they've become; fold in `majorDeeds`+level+arc stage (bounded), ties to SNG-134 lived-story. (2) **NO NPC-portrait-on-milestone exists at all** — Pell has 0 renders because nothing is built to fire; add `npcPromptSeed` + trigger on high `bondStage` (committed/devoted/partner) → `addGalleryImage`, a one-time retro backfill for NPCs already past a high milestone (Pell), and no-empty-tiles (the blank Vash tile = failed gen should retry/drop). Reuses gallery + bond machinery; high-milestones-only, deduped, rating-lensed, minor-safe.
 

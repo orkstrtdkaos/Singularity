@@ -823,6 +823,82 @@
     }
    ],
    "nativeOrCombination": "native"
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_perfect_veil",
+   "name": "The Perfect Veil",
+   "levelReq": 4,
+   "energyCost": 12,
+   "powerSystem": "reach_falsehood_truth",
+   "tradition": "veilwright",
+   "attribute": "mental",
+   "axes": {
+    "falsehood_truth": -0.6
+   },
+   "functions": [
+    "conceal",
+    "deceive"
+   ],
+   "narrationHints": "The thing is simply not seen — not hidden, not disguised, but veiled so completely that the eye slides past the place it should be and finds nothing there to wonder about.",
+   "description": "The Veilwright art of the perfect veil — a concealment so total that the hidden thing is not merely unseen but un-looked-for, the very question of it smoothed away. The deep gift of those who keep secrets for a living.",
+   "notFor": "It conceals, it does not defend — a veiled thing struck by accident is still struck. And a perfect veil over a thing you love means no one comes to help it either; concealment cuts both ways.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Perfect Veil",
+     "grants": "Veil a thing so completely it is not merely unseen but un-looked-for.",
+     "cannot": "It hides but does not protect, it cuts off help as surely as harm, and a thing kept perfectly secret is a thing kept perfectly alone."
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "INVESTIGATE",
+    "DEFEND"
+   ],
+   "challengeProfile": {
+    "INVESTIGATE": 4,
+    "DEFEND": 3
+   }
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_useful_lie",
+   "name": "The Necessary Fiction",
+   "levelReq": 5,
+   "energyCost": 13,
+   "powerSystem": "reach_falsehood_truth",
+   "tradition": "veilwright",
+   "attribute": "mental",
+   "axes": {
+    "falsehood_truth": -0.9
+   },
+   "functions": [
+    "deceive"
+   ],
+   "narrationHints": "You craft the lie so whole, so consistent, so much MORE coherent than the messy truth, that the world briefly prefers it — and for a while, because everyone acts on it, the fiction is functionally real.",
+   "description": "The Veilwright capstone — a fiction so complete it becomes, for a time, functionally true because all act upon it. The most dangerous Veilwright gift: a lie that good is nearly indistinguishable from a truth, even to its maker.",
+   "notFor": "One fiction, once, at enormous cost — and it holds only while unexamined; a necessary fiction meets a determined truth and loses, always, eventually. And the gravest risk is your own: a lie you tell this well, you can come to believe.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Necessary Fiction",
+     "grants": "Craft a fiction so complete it functions as true for as long as it goes unexamined.",
+     "cannot": "It fails against determined truth, it costs nearly all you have, and its deepest danger is to its maker — tell a lie well enough and you may forget it was one."
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "SOCIAL",
+    "INVESTIGATE"
+   ],
+   "challengeProfile": {
+    "SOCIAL": 5,
+    "INVESTIGATE": 4
+   },
+   "harmRung": "binding"
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

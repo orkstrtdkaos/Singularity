@@ -961,78 +961,75 @@
         "player": "Answer her — 'I haven't finished paying attention yet' — and keep going.",
         "summary": "Silas continues the unhurried inventory of Pell in the heated bath, and she receives it entirely without management.",
         "narration": "You say it against the curve of her shoulder: *I haven't finished paying attention yet.*\n\nShe laughs — a real one, low and unguarded, the sound of it moving through her back and into your chest. Her hands tighten on your forearms, not pulling, just holding the fact of you there. Then she settles again, the laugh releasing into the steam, and you feel her give the weight of her back to you more completely than she had before — a decision, not a drift.\n\nSo you continue. Unhurriedly. The heel of your palm along the line of her ribs, learning the architecture of her — the way the muscle sits under the skin at her side, the softer place just beneath it, the change in texture where the water has warmed her all the way through. You name nothing aloud this time. The naming is in the attention: the pause where she breathes a little differently, the way your thumb finds the small of her back and her hips answer it without instruction. She is paying attention to you paying attention. That is what the habit fully down looks like — she does not manage what she feels when you find a place that matters; she simply lets you know you've found it.\n\nSomewhere across the room, Huginn shifts on the window ledge. The sound of the Edge District carries up from below — someone crossing a grated conduit walk, the low sound of a draft-animal on the lane — distant and clean and entirely outside this room. The warm stone floor holds the junction conduit's steady heat. The steam rises. You are in no hurry and she is not asking you to be."
+      },
+      {
+        "player": "Are you ready for what's after the bath now?",
+        "summary": "Pell confirms readiness for the road — Huginn weighs in with characteristic economy.",
+        "narration": "You ask it quietly, your chin at her temple, the steam still rising around you both. *Are you ready for what's after the bath now?*\n\nHuginn, on the window ledge, turns his head forty-five degrees. One eye. The lane below continues in total indifference to the question.\n\nA single croak. Flat, dry, timed with the precision of something that has attended ten thousand endings and knows exactly what this is not. He ruffles once — the great gray-black feathers settling with the sound of a book being closed — and looks back at the lane.\n\nPell's shoulders move. Not tension — the low laugh again, the real one, the one that travels through her whole back and into your chest before it reaches her face. Her hands tighten once on your forearms.\n\n\"Huginn,\" she says, to the room, to no one, to the bird specifically. \"Yes. We're ready.\""
       }
     ],
     "lastTurn": {
-      "narration": "You say it against the curve of her shoulder: *I haven't finished paying attention yet.*\n\nShe laughs — a real one, low and unguarded, the sound of it moving through her back and into your chest. Her hands tighten on your forearms, not pulling, just holding the fact of you there. Then she settles again, the laugh releasing into the steam, and you feel her give the weight of her back to you more completely than she had before — a decision, not a drift.\n\nSo you continue. Unhurriedly. The heel of your palm along the line of her ribs, learning the architecture of her — the way the muscle sits under the skin at her side, the softer place just beneath it, the change in texture where the water has warmed her all the way through. You name nothing aloud this time. The naming is in the attention: the pause where she breathes a little differently, the way your thumb finds the small of her back and her hips answer it without instruction. She is paying attention to you paying attention. That is what the habit fully down looks like — she does not manage what she feels when you find a place that matters; she simply lets you know you've found it.\n\nSomewhere across the room, Huginn shifts on the window ledge. The sound of the Edge District carries up from below — someone crossing a grated conduit walk, the low sound of a draft-animal on the lane — distant and clean and entirely outside this room. The warm stone floor holds the junction conduit's steady heat. The steam rises. You are in no hurry and she is not asking you to be.",
-      "sceneSummary": "Silas continues the unhurried inventory of Pell in the heated bath, and she receives it entirely without management.",
+      "narration": "You ask it quietly, your chin at her temple, the steam still rising around you both. *Are you ready for what's after the bath now?*\n\nHuginn, on the window ledge, turns his head forty-five degrees. One eye. The lane below continues in total indifference to the question.\n\nA single croak. Flat, dry, timed with the precision of something that has attended ten thousand endings and knows exactly what this is not. He ruffles once — the great gray-black feathers settling with the sound of a book being closed — and looks back at the lane.\n\nPell's shoulders move. Not tension — the low laugh again, the real one, the one that travels through her whole back and into your chest before it reaches her face. Her hands tighten once on your forearms.\n\n\"Huginn,\" she says, to the room, to no one, to the bird specifically. \"Yes. We're ready.\"",
+      "sceneSummary": "Pell confirms readiness for the road — Huginn weighs in with characteristic economy.",
       "choices": [
         {
-          "label": "Stay in the water with her — follow where this goes.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "trivial": true,
-          "intentTags": [
-            "romantic"
-          ],
-          "abilityId": null,
-          "energyCost": null
-        },
-        {
-          "label": "Ask her — quietly, no pressure — what she wants to do about the road. Calvar's lamp, the morning already gone past first light.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "trivial": true,
-          "intentTags": [
-            "calm",
-            "plan"
-          ],
-          "abilityId": null,
-          "energyCost": null
-        },
-        {
-          "label": "Let the morning settle — hold her in the water a little longer, then begin to think about when to go.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "trivial": true,
-          "intentTags": [
-            "sustain",
-            "plan"
-          ],
-          "abilityId": null,
-          "energyCost": null
-        },
-        {
-          "label": "Check Calvar's east-lane window from the bath-room — see if the lamp is lit, read whether departure is still on.",
+          "label": "Get out of the bath, dress, and collect your things — find Calvar at his room or on the east lane; it's past first light and his lamp will tell you whether he's waited",
           "attribute": "practical",
           "subAttribute": "wits",
           "difficulty": 0,
-          "trivial": true,
+          "intentTags": [
+            "travel"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Before you move — check the conduit pulse from the third hour. Run The Attended End on the floor above the junction conduit and see if the Low Lamp itself is ending something",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "the-attended-end",
+          "energyCost": 2,
+          "trivial": false
+        },
+        {
+          "label": "Dress and take a moment with Pell before the road — ask her plainly: does she want to know, on this side of the valley, what her father was trying to teach her? Name it before Calvar is standing next to her",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "comfort"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Go to the window and check on Calvar's signal yourself — is the lamp in the east-lane window still burning, or is he already gone?",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
           "intentTags": [
             "scout"
           ],
-          "abilityId": null,
-          "energyCost": null
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "The Low Lamp Inn bath trough room — midday now, junction conduit warmth steady beneath the stone floor, steam rising in slow columns, gray diffusion-panel light filling the space evenly. Silas behind Pell in the trough, her back against his chest, the water still heated and clear.",
+        "setting": "The Low Lamp Inn bath trough room — midday, junction conduit warmth steady beneath the stone floor, steam rising in slow columns, gray diffusion-panel light filling the space evenly. Silas behind Pell in the trough, her back against his chest, the water still heated and clear.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Back against Silas's chest, hands on his forearms, head settled against his shoulder — entirely present, the laugh still in her exhale."
+            "state": "Back against Silas's chest, hands on his forearms, shoulders still loose — the real laugh just finished moving through her"
           },
           {
             "name": "Huginn",
-            "state": "On the window ledge, watching the lane below — the room fully ceded."
+            "state": "On the window ledge, one eye toward the lane below, feathers settled, entirely composed after his editorial"
           }
         ],
         "objects": [
           "Memory (spear) — leaned in the corner, collar rune settled and at rest",
-          "Bath trough — filled with heated cistern water, steam rising, both Silas and Pell",
+          "Bath trough — filled with heated cistern water, steam rising, both Silas and Pell within",
           "Partition — wooden, does not reach the ceiling",
           "Copper kettle — emptied, set back near the coals",
           "Tallow candle on the window sill — burned out, wick cold",
@@ -1040,10 +1037,10 @@
           "Boots — off, at Silas's bed's foot"
         ],
         "threads": [
-          "Calvar's lamp in the east-lane window — the morning's departure signal; not yet checked; well past first light now",
-          "First light departure — now past; the group is assembled but the road to Millbrook has not been taken",
+          "Calvar's lamp in the east-lane window — the morning departure signal; well past first light; not yet checked",
+          "First light departure — now past; group assembled but road to Millbrook not yet taken",
           "The Edge District Ledger quest remains active — Grael, the annex, the intake log unresolved",
-          "The conduit pulse at the third hour — not an ending, not resolved",
+          "The conduit pulse at the third hour — not an ending, not yet resolved",
           "Pell's response to the naming — held warmly, nothing yet returned in words"
         ]
       },
@@ -1052,34 +1049,26 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Received 'I haven't finished paying attention yet' with an unguarded laugh — gave her weight to Silas more completely than before. Entirely present, no habit remaining.",
-          "statusNote": "In the bath trough with Silas — the habit entirely down, holding his forearms, at rest.",
-          "learned": [
-            "Her laugh is real and low when it is not managed — it moves through her whole back."
-          ]
+          "note": "Said 'yes, we're ready' to Huginn on behalf of both of them — unguarded, warm, not performing it",
+          "statusNote": "In the bath trough with Silas — the habit entirely down, holding his forearms, at rest; confirmed readiness for the road",
+          "status": "active"
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "A slow midmorning in the bath — unhurried, time passing without urgency."
-      },
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
-      "ledgerEvents": []
+        "hoursPassed": 0,
+        "why": "a brief quiet exchange — no time passes"
+      }
     },
     "sceneState": {
-      "setting": "The Low Lamp Inn bath trough room — midday now, junction conduit warmth steady beneath the stone floor, steam rising in slow columns, gray diffusion-panel light filling the space evenly. Silas behind Pell in the trough, her back against his chest, the water still heated and clear.",
+      "setting": "The Low Lamp Inn bath trough room — midday, junction conduit warmth steady beneath the stone floor, steam rising in slow columns, gray diffusion-panel light filling the space evenly. Silas behind Pell in the trough, her back against his chest, the water still heated and clear.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Back against Silas's chest, hands on his forearms, head settled against his shoulder — entirely present, the laugh still"
+          "state": "Back against Silas's chest, hands on his forearms, shoulders still loose — the real laugh just finished moving through h"
         },
         {
           "name": "Huginn",
-          "state": "On the window ledge, watching the lane below — the room fully ceded."
+          "state": "On the window ledge, one eye toward the lane below, feathers settled, entirely composed after his editorial"
         }
       ],
       "objects": [
@@ -1092,10 +1081,10 @@
         "Boots — off, at Silas's bed's foot"
       ],
       "threads": [
-        "Calvar's lamp in the east-lane window — the morning's departure signal; not yet checked; well past first light now",
-        "First light departure — now past; the group is assembled but the road to Millbrook has not been taken",
+        "Calvar's lamp in the east-lane window — the morning departure signal; well past first light; not yet checked",
+        "First light departure — now past; group assembled but road to Millbrook not yet taken",
         "The Edge District Ledger quest remains active — Grael, the annex, the intake log unresolved",
-        "The conduit pulse at the third hour — not an ending, not resolved",
+        "The conduit pulse at the third hour — not an ending, not yet resolved",
         "Pell's response to the naming — held warmly, nothing yet returned in words"
       ]
     }
@@ -1522,7 +1511,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d3] Carried to bed without ceremony as she drifted toward sleep — settled without opening her eyes, hand folding the blanket edge once from habit, then still.",
         "[d4] Slept through the night on her side of the partition — carried there by Silas, settled without ceremony.",
         "[d4] Drew Silas's hand to her sternum and held it there without fully waking — a body-decision, not a considered one. The grip is deliberate even in half-sleep.",
         "[d4] Responded to Silas's touch at the shallow end of waking — drew his hand to her collarbone, pressed back into him. The habit is entirely down. She is letting the morning be what it ",
@@ -1531,7 +1519,8 @@
         "[d4] Received 'you are what comes after' without management — went still in the way of a thing correctly named, then crossed to the bath without reconsidering anything. Now settled agai",
         "[d4] Received Silas's full attention in the bath without self-consciousness — let him look, then asked plainly whether he was getting in.",
         "[d4] Received the full inventory of Silas's attention — every place named, every place touched. Her hands on his forearms the whole time. Her response: 'You have been paying a great dea",
-        "[d4] Received 'I haven't finished paying attention yet' with an unguarded laugh — gave her weight to Silas more completely than before. Entirely present, no habit remaining."
+        "[d4] Received 'I haven't finished paying attention yet' with an unguarded laugh — gave her weight to Silas more completely than before. Entirely present, no habit remaining.",
+        "[d4] Said 'yes, we're ready' to Huginn on behalf of both of them — unguarded, warm, not performing it"
       ],
       "knownFacts": [
         "Her body answers before the habit can close the ledger — she drew his hand up to her collarbone without fully waking",
@@ -1552,7 +1541,7 @@
         "ironsense transmitted deliberately through a rune-threshold"
       ],
       "status": "active",
-      "statusNote": "In the bath trough with Silas — the habit entirely down, holding his forearms, at rest.",
+      "statusNote": "In the bath trough with Silas — the habit entirely down, holding his forearms, at rest; confirmed readiness for the road",
       "lastSeen": {
         "locationId": "the-low-lamp-inn",
         "day": 4
@@ -3502,8 +3491,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=11860&nologo=true",
-  "updatedAt": 1784331431096,
-  "rev": 608,
+  "updatedAt": 1784331521529,
+  "rev": 609,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4432,7 +4421,7 @@
   "syncedAt": 1784292613822,
   "teachers": {},
   "regionsKnown": {
-    "valley": 244
+    "valley": 245
   },
   "foreclosed": [
     "rootkin",
@@ -4481,10 +4470,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-17T17:39:40.705Z",
-      "lastAt": "2026-07-17T23:37:11.095Z",
+      "lastAt": "2026-07-17T23:38:41.528Z",
       "startDay": 17,
       "endDay": 17,
-      "beats": 52
+      "beats": 53
     }
   ],
   "company": [

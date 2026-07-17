@@ -8,7 +8,7 @@
   "whyHere": "You were sent, or you were seeded, or you simply wanted to see something finish inside a single lifetime.",
   "background": "warden",
   "level": 1,
-  "xp": 84,
+  "xp": 89,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -37,13 +37,14 @@
     }
   ],
   "alignment": {
-    "death_life": 0.2214559813333984
+    "death_life": 0.25038318226672845,
+    "destruction_creation": 0.020000000000000004
   },
   "attunement": 1,
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 4,
+  "energy": 0,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -231,83 +232,76 @@
         "player": "Enter in silence — let the chamber speak first before you do.",
         "summary": "Aelyn enters the Root-That-Remembers' chamber in silence and is received — the chamber's attention encompasses her, and the deep-woven frequency stirs in answer.",
         "narration": "The last step down is the quietest thing you have done in weeks.\n\nThe passage doesn't widen so much as release — you step through and the chamber simply exists around you, larger than the passage suggested, the amber light the same sourceless even warmth you felt from above but now all-surrounding. The roots here are enormous. Not the finger-thick tendrils of a young tree but something closer to walls, worn to a deep almost-black by four centuries of slow movement, their surfaces smooth and slightly warm beneath the light. They run floor to ceiling in every direction, and where they cross each other they have fused — not tangled, fused, grown together into a single interlocking body. The floor underfoot is root-lattice, broad and intentional, and it gives very slightly under your weight the way old wood does: with the ease of something that has held much heavier things.\n\nBranch settles at your knee immediately. You feel its roots re-grip the lattice beneath you, a small careful spreading, like it is saying hello to the floor in the only way it knows how. Its buds are fully open and motionless.\n\nYou don't speak. You said you wouldn't, and the chamber seems to already know this — there is no expectation of sound, no waiting-silence that presses for a voice. What there is instead is attention. Not the attention of a person watching you, but the attention of something very large that is already aware of every part of itself and has simply included you in that awareness. You are standing inside a thing that is also looking at you from the inside. It is not uncomfortable. It is one of the stranger things you have ever felt.\n\nThe warmth against your sternum — that frequency Maren named, the deep-woven — hums very faintly, like a string touched by a passing hand. Not a sound. A recognition."
+      },
+      {
+        "player": "Reach into the Speaking Grove — not to ask, not to speak, but to make yourself legible. Let the Root-That-Remembers read you the way you would read a tree: by being still and present.",
+        "summary": "Aelyn opens herself to the Root-That-Remembers through the Grove — and is read, fully, both natures at once.",
+        "narration": "The chamber doesn't rush you.\n\nYou let your hands fall open at your sides and still yourself the way you still yourself before a shot — not absence of thought, but absence of insistence. The Grove opens in you like a slow exhale: not reaching, not asking, just present. Legible. You let the Root-That-Remembers look.\n\nIt does. The attention that encompasses you shifts — you feel it move through the deep-woven frequency the way a root moves through wet soil, patient and thorough and entirely without apology. It reads the green your mother gave you: the warmth of it, the deep-listening quality, the way your lifesense moves through living things like water finding level. And then it reads the other thing — the thread your father left, the part that hums at a different register, bright and structural where the green is fluid. Both. It holds them simultaneously, the way it told you before: not apart. You feel, briefly and unmistakably, what it is like to be fully seen by something that has been waiting a very long time to see you.\n\nBranch creaks softly at your knee — one low sound, satisfied. Its buds, still open, catch the amber light. The reading settles. No words come this time, no partial answer in the language of the Grove. What arrives instead is simpler: a quality of being known. The Root-That-Remembers has finished its question. Whatever it needed to understand about you, it understands. The chamber holds that fact the way it holds the warmth — steadily, from no single source, everywhere at once. It is waiting, now, for yours."
       }
     ],
     "lastTurn": {
-      "narration": "The last step down is the quietest thing you have done in weeks.\n\nThe passage doesn't widen so much as release — you step through and the chamber simply exists around you, larger than the passage suggested, the amber light the same sourceless even warmth you felt from above but now all-surrounding. The roots here are enormous. Not the finger-thick tendrils of a young tree but something closer to walls, worn to a deep almost-black by four centuries of slow movement, their surfaces smooth and slightly warm beneath the light. They run floor to ceiling in every direction, and where they cross each other they have fused — not tangled, fused, grown together into a single interlocking body. The floor underfoot is root-lattice, broad and intentional, and it gives very slightly under your weight the way old wood does: with the ease of something that has held much heavier things.\n\nBranch settles at your knee immediately. You feel its roots re-grip the lattice beneath you, a small careful spreading, like it is saying hello to the floor in the only way it knows how. Its buds are fully open and motionless.\n\nYou don't speak. You said you wouldn't, and the chamber seems to already know this — there is no expectation of sound, no waiting-silence that presses for a voice. What there is instead is attention. Not the attention of a person watching you, but the attention of something very large that is already aware of every part of itself and has simply included you in that awareness. You are standing inside a thing that is also looking at you from the inside. It is not uncomfortable. It is one of the stranger things you have ever felt.\n\nThe warmth against your sternum — that frequency Maren named, the deep-woven — hums very faintly, like a string touched by a passing hand. Not a sound. A recognition.",
-      "sceneSummary": "Aelyn enters the Root-That-Remembers' chamber in silence and is received — the chamber's attention encompasses her, and the deep-woven frequency stirs in answer.",
+      "narration": "The chamber doesn't rush you.\n\nYou let your hands fall open at your sides and still yourself the way you still yourself before a shot — not absence of thought, but absence of insistence. The Grove opens in you like a slow exhale: not reaching, not asking, just present. Legible. You let the Root-That-Remembers look.\n\nIt does. The attention that encompasses you shifts — you feel it move through the deep-woven frequency the way a root moves through wet soil, patient and thorough and entirely without apology. It reads the green your mother gave you: the warmth of it, the deep-listening quality, the way your lifesense moves through living things like water finding level. And then it reads the other thing — the thread your father left, the part that hums at a different register, bright and structural where the green is fluid. Both. It holds them simultaneously, the way it told you before: not apart. You feel, briefly and unmistakably, what it is like to be fully seen by something that has been waiting a very long time to see you.\n\nBranch creaks softly at your knee — one low sound, satisfied. Its buds, still open, catch the amber light. The reading settles. No words come this time, no partial answer in the language of the Grove. What arrives instead is simpler: a quality of being known. The Root-That-Remembers has finished its question. Whatever it needed to understand about you, it understands. The chamber holds that fact the way it holds the warmth — steadily, from no single source, everywhere at once. It is waiting, now, for yours.",
+      "sceneSummary": "Aelyn opens herself to the Root-That-Remembers through the Grove — and is read, fully, both natures at once.",
       "choices": [
         {
-          "label": "Sit down on the root-lattice floor — cross-legged, unhurried — and let the chamber settle around you. Let it take as long as it takes.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": 0.6,
-            "destruction_creation": 0.2
-          },
+          "label": "Ask what the Root-That-Remembers would have you do — now that it knows you fully, ask if it has something it needs from you.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "devote"
+            "ask"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Turn Lifesense outward into the chamber — not searching, just open. Let it read what is here without demanding it.",
+          "label": "Ask about the thread northeast more specifically — the Root has now read both sides of you; press for what it knows about your father's current state, not just his location.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "death_life": 0.7,
-            "destruction_creation": 0.3
-          },
           "difficulty": 15,
           "intentTags": [
             "study"
           ],
-          "abilityId": "lifesense",
-          "energyCost": 3,
+          "abilityId": null,
+          "energyCost": null,
           "trivial": false
         },
         {
-          "label": "Reach into the Speaking Grove — not to ask, not to speak, but to make yourself legible. Let the Root-That-Remembers read you the way you would read a tree: by being still and present.",
+          "label": "Sit with what just happened — don't push. Sit on the root-lattice floor, let Branch settle against you, and give the chamber the quiet it seems to be offering.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "death_life": 0.8,
-            "destruction_creation": 0.4
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "devote",
-            "study"
-          ],
-          "abilityId": "the_speaking_grove",
-          "energyCost": 4,
-          "trivial": false
-        },
-        {
-          "label": "Watch Branch — let its response to the chamber tell you something before you form any response of your own.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": 0.5
-          },
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "sustain"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Ask Branch what it received — it creaked when the Root finished reading you. Something landed in it too.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "ask"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
       "scene": {
-        "setting": "Interior of the Root-That-Remembers' chamber — Aelyn has stepped fully inside. The chamber is large, amber-lit from no visible source, warm, walled and floored entirely by enormous fused roots worn smooth and dark with age. The root-lattice floor gives slightly underfoot. Branch is at her knee, roots re-gripped, buds open.",
+        "setting": "Interior of the Root-That-Remembers' chamber — Aelyn stands fully inside, hands open at her sides, the reading complete. Amber light, sourceless and even, fills the large fused-root chamber. The root-lattice floor is slightly warm underfoot.",
         "npcsPresent": [
           {
             "name": "Branch",
-            "state": "Settled at Aelyn's knee, buds fully open and motionless, roots spread carefully into the chamber's lattice floor — present, calm, greeting the floor in its own way."
+            "state": "Settled at Aelyn's knee, buds open and catching the amber light, one satisfied creak given — now still and waiting."
           },
           {
             "name": "Maren",
@@ -335,12 +329,11 @@
           "Waterskin (Aelyn's)"
         ],
         "threads": [
-          "The Root-That-Remembers' full attention is now present — Aelyn is inside it, and it knows she came in silence.",
-          "The deep-woven frequency stirred on entry — a recognition, not a demand.",
+          "The Root-That-Remembers has finished reading Aelyn — it is waiting for her question now.",
+          "The deep-woven frequency stirred and was read — both natures known, held together.",
           "The thread northeast: Aelyn's father is findable, real, large, and distant.",
-          "Branch re-gripped the chamber floor immediately — it seems to recognize something here.",
-          "A SNG-075 cache is unresolved — something left behind in or near the passage, not yet found.",
-          "Maren waits above — she said she would not follow, but she is watching."
+          "Branch received something when the Root finished its reading — it creaked once, satisfied.",
+          "A SNG-075 cache is unresolved — something left behind in or near the passage, not yet found."
         ]
       },
       "npcUpdates": [
@@ -348,47 +341,68 @@
           "op": "update",
           "npcId": "rootkin-tender",
           "name": "Maren",
-          "note": "Watching from above as Aelyn stepped fully into the chamber in silence — she has not moved.",
-          "statusNote": "Standing at the passage threshold above the chamber, watching Aelyn descend — still and silent."
+          "note": "Held her position at the threshold above throughout the reading — still watching, still.",
+          "statusNote": "Standing at the threshold of the deep grain passage above, watching Aelyn in the chamber below.",
+          "status": "active"
+        },
+        {
+          "op": "update",
+          "npcId": "branch",
+          "name": "Branch",
+          "note": "Creaked once — low, satisfied — when the Root finished reading Aelyn. Buds remain open. Something landed in it during the reading.",
+          "learned": [
+            "The Root-That-Remembers read Aelyn fully in Branch's presence — Branch responded as if it received something in the same moment."
+          ],
+          "statusNote": "Settled at Aelyn's knee in the Root-That-Remembers' chamber, buds open, still and present.",
+          "status": "active"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "the-root-that-remembers",
+          "topic": "root-that-remembers",
           "label": "The Root-That-Remembers",
           "kind": "mystery",
           "entityId": "root-that-remembers",
-          "fact": "Aelyn entered the chamber in silence — and the Root's attention encompassed her immediately, from the inside, the way something very large includes a new part of itself. Not a greeting; an already-knowing.",
+          "fact": "The Root-That-Remembers read Aelyn fully through the Grove — both the green from her mother and the structural thread from her father, held simultaneously, not apart. It has finished its question and is now waiting for hers.",
           "links": [
             "heartroot",
             "the-frequency-beneath-the-grove",
             "branch",
-            "the-deep-grain-passage"
+            "the-deep-woven",
+            "the-speaking-grove"
           ]
         },
         {
           "topic": "the-frequency-beneath-the-grove",
           "label": "The Frequency Beneath the Grove",
           "kind": "mystery",
-          "fact": "On entering the chamber, the deep-woven frequency stirred faintly — like a string touched by a passing hand. Not sound. Recognition. It responded to being inside the Root-That-Remembers.",
+          "fact": "When Aelyn opened through the Grove and made herself legible, the deep-woven frequency was read by the Root-That-Remembers — both its green aspect and its other, structural aspect recognized and held together.",
           "links": [
             "root-that-remembers",
             "heartroot",
+            "branch",
             "the-deep-woven"
           ]
         }
       ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-root-that-remembers",
+          "note": "Aelyn made herself legible through the Grove — the Root-That-Remembers read her fully, both natures at once. It is now waiting for her question."
+        }
+      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short careful descent and the first still moments inside the chamber."
+        "why": "A brief, still exchange — the reading took only moments in human time."
       }
     },
     "sceneState": {
-      "setting": "Interior of the Root-That-Remembers' chamber — Aelyn has stepped fully inside. The chamber is large, amber-lit from no visible source, warm, walled and floored entirely by enormous fused roots worn smooth and dark with age. The root-lattice floor gives slightly underfoot. Branch is at her knee, roots re-gripped, buds open.",
+      "setting": "Interior of the Root-That-Remembers' chamber — Aelyn stands fully inside, hands open at her sides, the reading complete. Amber light, sourceless and even, fills the large fused-root chamber. The root-lattice floor is slightly warm underfoot.",
       "npcsPresent": [
         {
           "name": "Branch",
-          "state": "Settled at Aelyn's knee, buds fully open and motionless, roots spread carefully into the chamber's lattice floor — prese"
+          "state": "Settled at Aelyn's knee, buds open and catching the amber light, one satisfied creak given — now still and waiting."
         },
         {
           "name": "Maren",
@@ -416,10 +430,10 @@
         "Waterskin (Aelyn's)"
       ],
       "threads": [
-        "The Root-That-Remembers' full attention is now present — Aelyn is inside it, and it knows she came in silence.",
-        "The deep-woven frequency stirred on entry — a recognition, not a demand.",
+        "The Root-That-Remembers has finished reading Aelyn — it is waiting for her question now.",
+        "The deep-woven frequency stirred and was read — both natures known, held together.",
         "The thread northeast: Aelyn's father is findable, real, large, and distant.",
-        "Branch re-gripped the chamber floor immediately — it seems to recognize something here.",
+        "Branch received something when the Root finished its reading — it creaked once, satisfied.",
         "A SNG-075 cache is unresolved — something left behind in or near the passage, not yet found."
       ]
     }
@@ -453,7 +467,8 @@
         "Aelyn spoke her presence into the passage as she descended — the Root-That-Remembers heard. The pulse in the walls deepened. The descent continues.",
         "The Root confirmed it knows both Aelyn's green inheritance and her father's — both threads woven together, long recognized. The chamber is opening below. The descent is nearly complete.",
         "The Root confirmed it knows Aelyn's father — not just his echo in her, but the thread of him, alive and pointing outward into the valley. The chamber waits one step below.",
-        "The Root confirmed Aelyn's father is findable — the thread points northeast, real and large, measured in the way old roots measure distance. The chamber waits one step below."
+        "The Root confirmed Aelyn's father is findable — the thread points northeast, real and large, measured in the way old roots measure distance. The chamber waits one step below.",
+        "Aelyn made herself legible through the Grove — the Root-That-Remembers read her fully, both natures at once. It is now waiting for her question."
       ],
       "aliases": [],
       "startedAt": "2026-07-17T04:11:12.462Z"
@@ -736,7 +751,8 @@
           "[d1] When asked directly whether it knows both sides of Aelyn's nature — her mother's green and her father's nanite inheritance — it answered yes, both, known together. It holds the two threads as already ",
           "[d1] The Root-That-Remembers knows Aelyn's father — not just the thread of him in her, but him, what he became. It holds both ends of the root: one buried in the deep green, one pointing outward into the v",
           "[d1] When asked whether Aelyn's father is findable, the Root answered: yes, but partially. The thread points northeast — real, large in the way the Root measures large things, distant in the way old roots ",
-          "[d1] Aelyn entered the chamber in silence — and the Root's attention encompassed her immediately, from the inside, the way something very large includes a new part of itself. Not a greeting; an already-kno"
+          "[d1] Aelyn entered the chamber in silence — and the Root's attention encompassed her immediately, from the inside, the way something very large includes a new part of itself. Not a greeting; an already-kno",
+          "[d1] The Root-That-Remembers read Aelyn fully through the Grove — both the green from her mother and the structural thread from her father, held simultaneously, not apart. It has finished its question and "
         ],
         "links": [
           "heartroot",
@@ -761,7 +777,8 @@
           "[d1] Lifesense turned inward revealed a resonance in Aelyn that predates her ability — a frequency the Root-That-Remembers recognized before she did. It is not the Grove itself but the register underneath ",
           "[d1] Maren gave Aelyn's inward frequency a name: the deep-woven. It is older than the Grove and not learned — it is something Aelyn was born carrying, recognized by the Root-That-Remembers before she reach",
           "[d1] The Root-That-Remembers does not simply recognize the frequency Aelyn carries — it knows it, the way a root knows its specific water-table: intimately, by absence and presence both. Aelyn was expected",
-          "[d1] On entering the chamber, the deep-woven frequency stirred faintly — like a string touched by a passing hand. Not sound. Recognition. It responded to being inside the Root-That-Remembers."
+          "[d1] On entering the chamber, the deep-woven frequency stirred faintly — like a string touched by a passing hand. Not sound. Recognition. It responded to being inside the Root-That-Remembers.",
+          "[d1] When Aelyn opened through the Grove and made herself legible, the deep-woven frequency was read by the Root-That-Remembers — both its green aspect and its other, structural aspect recognized and held "
         ],
         "links": [
           "root-that-remembers",
@@ -813,15 +830,15 @@
     }
   },
   "tendencies": {
-    "cerebral": 8.693704153832018,
-    "cautious": 7.268514961633171,
-    "generous": 1.2193095589962164,
-    "social": 5.678299635164414,
-    "strategic": 2.417295884202621,
-    "devotion": 1.6553038095960957
+    "cerebral": 9.476361549986217,
+    "cautious": 7.086802087592342,
+    "generous": 1.188826820021311,
+    "social": 5.536342144285304,
+    "strategic": 2.3568634870975553,
+    "devotion": 2.613921214356193
   },
   "aptitudes": [],
-  "actionCount": 30,
+  "actionCount": 31,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -843,8 +860,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20mid-twenties%20with%20light%20blonde%2C%20faintly%20wavy%20hair%20cut%20in%20curtain%20bangs%2C%20the%20rest%20falling%20to%20the%20small%20of%20her%20back%20%E2%80%94%20usually%20worn%20in%20a%20french%20braid%20with%20the%20bangs%20left%20loose.%20Dark%20nature-green%20tank%20to%2C%20full-body%20character%20portrait%2C%20named%20Aelyn%20Kantoro%2C%20of%20the%20rootkin%2C%20warden%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Her%20mother%20dies%2C%20and%20she%20decides%20to%20go%20to%20the%20nanite%20world%2C%20to%20figure%20out%20why%20she%20is%20different%20than%20the%20pure%20nature%20peop%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=73420&nologo=true",
-  "updatedAt": 1784263545802,
-  "rev": 45,
+  "updatedAt": 1784263670588,
+  "rev": 46,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -852,7 +869,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "the_quickwood": 31
+    "the_quickwood": 32
   },
   "opLossPending": false,
   "establishedFacts": [
@@ -912,7 +929,7 @@
     "schemaVersion": 1,
     "uses": {
       "lifesense": 5,
-      "the_speaking_grove": 5
+      "the_speaking_grove": 6
     },
     "coActivations": {},
     "aspirations": []

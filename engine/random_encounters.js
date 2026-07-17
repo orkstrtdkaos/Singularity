@@ -147,6 +147,8 @@ export function synthesizeDuelDef(entry) {
   return {
     schemaVersion: 1, id: "re-" + entry.id, type: "duel", name: titleFromFlavor(entry),
     setup: entry.seed, lethal: false, avoidable: true, fromRandom: true, flavor: entry.flavor,
+    // SNG-138: a prestige-challenge entry carries these so the resolved duel can feed renown (harmless when absent)
+    _challengeBand: entry._challengeBand || undefined, _challenger: entry._challenger || undefined,
     opponent: {
       name: o.name || "the aggressor", health, threat, yieldAt,
       fleeDifficulty: Math.max(0, Math.min(30, o.fleeDifficulty | 0 || 15)),

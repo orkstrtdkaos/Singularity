@@ -44,10 +44,11 @@ import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, ap
 import { noteCoUseAndRefresh, refreshEvolvingItems, evolvedItemsForGM, currentStage } from "./engine/evolution.js";
 import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarrativeKind, canIncapacitate, resolvePacing, beatHours } from "./engine/random_encounters.js";
+import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "./engine/recurrence.js";
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.96";
+const APP_VERSION = "1.8.97";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3167,12 +3168,41 @@ async function fireEncounter(entryOrFlavor, { dev = false, news = [] } = {}) {
   return true;
 }
 
+/** SNG-138: the def catalog a prestige-recurrence arc is resolved from (authored arcs + a generated
+ *  personal arc — a backstory arc can BE a recurrence arc). */
+function recurrenceArcDefs() { return [...(CONTENT.quests || []), ...(character.personalArc ? [character.personalArc] : [])]; }
+
+/** SNG-138: a rising name draws challengers. When the bound character has an ACTIVE prestige-recurrence
+ *  arc, occasionally (paced by renown + the player's pacing) surface a challenger as a duel OFFER instead
+ *  of a generic encounter — the offer carries the guaranteed decline path, and engaging routes into the
+ *  existing SNG-098 skill battle. Returns a duel entry or null. A blade finds you on the move, not at rest. */
+function challengerOfferFor(trigger, paceMult) {
+  if (trigger !== "onTravel" && trigger !== "onEnterLocation") return null;
+  const arc = findPrestigeArc(character.quests || [], recurrenceArcDefs());
+  if (!arc?.def?.recurrence) return null;
+  const pool = challengerPoolFor(arc.def, CONTENT.challengerPools || {});
+  if (!pool?.challengers?.length) return null;
+  if (character._challengeCooldown > 0) { character._challengeCooldown--; return null; } // "regularly", not "constantly"
+  const renown = renownScore(character);
+  const band = bandForRenown(renown, arc.def.recurrence.escalationBands, arc.def.recurrence.bandThresholds || null);
+  if (!shouldFireChallenger(renown, band, paceMult, Math.random)) return null;
+  const ch = pickChallenger(challengersForBand(band, arc.def.recurrence.escalationBands), pool.challengers, Math.random, character._lastChallengerId);
+  if (!ch) return null;
+  character._lastChallengerId = ch.id;
+  character._challengeCooldown = challengeCooldown(paceMult);
+  return challengerToDuelEntry(ch, band, { arcId: arc.def.arcId });
+}
+
 /** On a trigger (travel/rest/enter/tick), maybe roll one encounter. Returns true if
  *  one fired (so the caller skips the normal arrival/rest scene). */
 async function maybeRandomEncounter(trigger, news = []) {
   const table = CONTENT.randomEncounters;
-  // SNG-127: the button click-paths (travel/enter/rest) honor the player's pacing multiplier too.
-  if (!table || !rollTrigger(trigger, hereNow(), table, Math.random, resolvePacing(profile?.pacing, table).mult)) return false;
+  if (!table) return false;
+  const pace = resolvePacing(profile?.pacing, table); // SNG-127: click-paths honor the player's pacing too
+  // SNG-138: a prestige challenger gets its own paced roll, ahead of the generic encounter
+  const challenger = challengerOfferFor(trigger, pace.mult);
+  if (challenger) return fireEncounter(challenger, { news });
+  if (!rollTrigger(trigger, hereNow(), table, Math.random, pace.mult)) return false;
   const entry = pickEncounter(table, hereNow(), Math.random, {});
   if (!entry) return false;
   return fireEncounter(entry, { news });
@@ -5526,6 +5556,17 @@ async function sbEnd(rr) {
   character.activeEncounter = null; saveCharacter(character);
   sbLastPlayerFn = null; sbIntensity = "standard";
   const nm = def?.opponent?.name || "your opponent";
+  // SNG-138: a resolved PRESTIGE-CHALLENGE duel feeds renown — band-scaled (beating a renowned duelist
+  // counts more than a road-hopeful); a loss costs the name modestly; a clean break is neutral.
+  if (def?._challengeBand) {
+    const won = rr.outcome === "opponent_fell" || rr.outcome === "opponent_yielded";
+    const lost = rr.outcome === "player_overcome" || rr.outcome === "yielded" || rr.outcome === "incapacitated";
+    const w = won ? challengeDeedWeight(def._challengeBand) : lost ? challengeLossWeight(def._challengeBand) : 0;
+    if (w !== 0) {
+      recordDeed(character, { description: `${won ? "bested" : "lost to"} ${nm} — a ${def._challengeBand} duel`, weight: w, communityId: hereNow()?.communityId, tags: ["duel", "prestige"] }, aptitudeMods(character, CONTENT.rules.playerAptitudes));
+      saveCharacter(character);
+    }
+  }
   const outLine = {
     opponent_fell: `You have beaten ${nm} — they go down.`,
     opponent_yielded: `${nm} yields to you.`,

@@ -26,6 +26,7 @@ import { sceneImage, locationImage } from "../engine/art.js";
 import { resolveSaveConflict, raceTimeout } from "../engine/sync.js";
 import { namesMatch as nm2, smartClamp } from "../engine/namematch.js";
 import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf, narrativeTimeChance, rollNarrativeTime, classifyNarrativeKind, resolvePacing, beatHours } from "../engine/random_encounters.js";
+import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "../engine/recurrence.js";
 import { typeAffinity, vectorAffinity, locationAffinity, affinityReceipt } from "../engine/affinities.js";
 import { recordCoUse, coUseCount, currentStage, refreshEvolvingItems, noteCoUseAndRefresh, evolvedItemsForGM } from "../engine/evolution.js";
 import { homeClassOf, isCrossClass, skillPointCost, forkFor, forkPending, chosenFork, setFork, rankExpression, forkPaths, skillGraphModel, nativeGrantsFor, combinationsAvailableFor } from "../engine/skilltree.js";
@@ -3121,6 +3122,79 @@ await (async () => {
   check("SNG-137: itemUpdates is a reply-format key AND a rule (items grow with the story)", /"itemUpdates":\s*\[/.test(gmSrc) && /ITEMS GROW WITH THE STORY/i.test(gmSrc));
   check("SNG-137: itemUpdates survives a malformed reply (in the salvageOps key list)", /const keys = \[[\s\S]*?"itemUpdates"[\s\S]*?\]/.test(gmSrc));
   check("SNG-137: a POSSIBLE ERROR block (anomalyDetail) is rendered into the scene", /anomalyDetail\b/.test(gmSrc) && /POSSIBLE ERROR/.test(gmSrc));
+})();
+
+// --- SNG-138: prestige-driven recurring challenges (renown → band → paced challenger duel-offers) ---
+(() => {
+  const bands = [
+    { band: "unknown", challengers: ["road_duelist_low"] },
+    { band: "known", challengers: ["school_champion", "rival_ronin"] },
+    { band: "renowned", challengers: ["sworn_rival", "blazeborn_kensei"] },
+    { band: "legendary", challengers: ["the_last_blade"] }
+  ];
+
+  // renown = aggregate deed weight (fame travels; wins raise, losses lower)
+  check("SNG-138: renownScore sums deed weights across all deeds", renownScore({ deeds: [{ weight: 3 }, { weight: 2 }, { weight: -1 }] }) === 4);
+  check("SNG-138: renownScore is 0 for a fresh (deedless) character", renownScore({}) === 0);
+
+  // renown → band walks the escalationBands by threshold
+  check("SNG-138: a fresh name is 'unknown'", bandForRenown(0, bands) === "unknown");
+  check("SNG-138: renown 6 → 'known', 16 → 'renowned', 30 → 'legendary'", bandForRenown(6, bands) === "known" && bandForRenown(16, bands) === "renowned" && bandForRenown(30, bands) === "legendary");
+  check("SNG-138: below-first-threshold renown stays at the first band (never null-drops)", bandForRenown(-5, bands) === "unknown");
+  check("SNG-138: an arc may override thresholds", bandForRenown(3, bands, { unknown: 0, known: 2 }) === "known");
+  check("SNG-138: challengersForBand returns that band's ids", JSON.stringify(challengersForBand("renowned", bands)) === JSON.stringify(["sworn_rival", "blazeborn_kensei"]));
+
+  // find the active bound prestige arc from held quests + the def catalog (instance carries arcId, def carries recurrence)
+  const arcDef = { id: "the_name_that_travels", arcId: "saehara_prestige_arc", recurrence: { trigger: "prestige", escalationBands: bands } };
+  const quests = [{ id: "the-name-that-travels", arcId: "saehara_prestige_arc", structured: true, status: "active" }];
+  check("SNG-138: findPrestigeArc resolves the active arc's def by arcId", findPrestigeArc(quests, [arcDef])?.def === arcDef);
+  check("SNG-138: findPrestigeArc ignores a non-prestige arc", findPrestigeArc([{ id: "x", arcId: "z", structured: true, status: "active" }], [{ id: "x", arcId: "z", recurrence: { trigger: "thread" } }]) === null);
+  check("SNG-138: findPrestigeArc ignores an INACTIVE prestige arc (not yet taken / resolved)", findPrestigeArc([{ ...quests[0], status: "available" }], [arcDef]) === null);
+
+  // pool resolves by arcId; pick filters to eligible ids + avoids an immediate repeat
+  const pool = { arcId: "saehara_prestige_arc", challengers: [
+    { id: "road_duelist_low", name: "A wandering blade", band: "unknown", concept: "young, hungry", style: "more nerve than mastery", traditions: ["somatic"] },
+    { id: "sworn_rival", name: "Ren of the Crimson Ledger", band: "renowned", concept: "a named duelist", style: "precise, studies his opponent's past duels", traditions: ["syllogist", "somatic"], duelStakes: "two renowns collide" },
+    { id: "blazeborn_kensei", name: "The Fire-Kensei", band: "renowned", concept: "magic and blade as one art", style: "aggressive, blazeborn fire", traditions: ["blazeborn"] }
+  ] };
+  check("SNG-138: challengerPoolFor resolves the pool by shared arcId", challengerPoolFor(arcDef, { saehara_challengers: pool }) === pool);
+  check("SNG-138: pickChallenger filters to the eligible band ids", ["sworn_rival", "blazeborn_kensei"].includes(pickChallenger(["sworn_rival", "blazeborn_kensei"], pool.challengers, () => 0).id));
+  check("SNG-138: pickChallenger avoids an immediate repeat when it can", pickChallenger(["sworn_rival", "blazeborn_kensei"], pool.challengers, () => 0, "sworn_rival").id === "blazeborn_kensei");
+
+  // adapter → a valid duel ENTRY the offer/synth path expects
+  const entry = challengerToDuelEntry(pool.challengers[1], "renowned", { arcId: "saehara_prestige_arc" });
+  check("SNG-138: challengerToDuelEntry builds a routing:'duel' entry with an opponent block", entry.routing === "duel" && entry.opponent?.name === "Ren of the Crimson Ledger" && Array.isArray(entry.opponent.tacticTags) && entry.opponent.tacticTags.length > 0);
+  check("SNG-138: threat scales by band (legendary hits harder than unknown)", challengerToDuelEntry(pool.challengers[0], "legendary", {}).opponent.threat > challengerToDuelEntry(pool.challengers[0], "unknown", {}).opponent.threat);
+  check("SNG-138: the seed threads the challenger's traditions (fought in their idiom)", /syllogist|somatic/.test(entry.seed) && entry._challengeBand === "renowned");
+  check("SNG-138: the entry flows through synthesizeDuelDef and the band survives onto the def", (() => { const d = synthesizeDuelDef(entry); return d.type === "duel" && d._challengeBand === "renowned" && d.opponent.name === "Ren of the Crimson Ledger"; })());
+  check("SNG-138: buildOffer gives a challenger duel the guaranteed decline path (SNG-002b)", (() => { const o = buildOffer(entry, { abilities: [] }, {}, {}); return o.routing === "duel" && o.choices.some(c => c.trivial && /refuse|back away/i.test(c.label)); })());
+
+  // win/loss feeds renown, band-scaled; the loop closes
+  check("SNG-138: a win's deed weight scales by band (renowned > unknown)", challengeDeedWeight("renowned") > challengeDeedWeight("unknown") && challengeDeedWeight("legendary") >= challengeDeedWeight("renowned"));
+  check("SNG-138: a loss costs renown modestly (negative, small)", challengeLossWeight("renowned") < 0 && challengeLossWeight("renowned") >= -3);
+
+  // paced fire test — a famous name draws more; always/never rng bounds; higher band = higher chance
+  check("SNG-138: shouldFireChallenger fires on a low roll and holds on a high roll", shouldFireChallenger(20, "renowned", 1, () => 0) === true && shouldFireChallenger(20, "renowned", 1, () => 0.99) === false);
+  check("SNG-138: a higher band draws challengers more often (at the same middling roll)", (() => { const roll = () => 0.3; return shouldFireChallenger(30, "legendary", 1, roll) === true && shouldFireChallenger(0, "unknown", 1, roll) === false; })());
+  check("SNG-138: the cooldown is positive and shorter when pacing is cranked", challengeCooldown(2.4) >= 1 && challengeCooldown(2.4) < challengeCooldown(0.5));
+
+  // end-to-end against the REAL authored content (the arc + pool on disk)
+  const rjLocal = (rel) => JSON.parse(readFileSync(join(root, rel), "utf8"));
+  const realArc = rjLocal("content/packs/valley/quests/the_name_that_travels.json");
+  const realPool = rjLocal("content/packs/valley/npcs/saehara_challengers.json");
+  check("SNG-138: the authored arc carries a prestige recurrence block with escalationBands", realArc.recurrence?.trigger === "prestige" && Array.isArray(realArc.recurrence.escalationBands) && realArc.recurrence.escalationBands.length >= 3);
+  check("SNG-138: every escalationBand's challenger ids exist in the authored pool", (() => { const ids = new Set(realPool.challengers.map(c => c.id)); return realArc.recurrence.escalationBands.every(b => (b.challengers || []).every(id => ids.has(id))); })());
+  check("SNG-138: end-to-end on real content — a renowned Saehara draws a real challenger as a valid duel", (() => {
+    const heldQuests = [{ id: realArc.id, arcId: realArc.arcId, structured: true, status: "active" }];
+    const found = findPrestigeArc(heldQuests, [realArc]);
+    if (!found) return false;
+    const band = bandForRenown(20, found.def.recurrence.escalationBands); // renowned tier
+    const p = challengerPoolFor(found.def, { [realPool.id]: realPool });
+    const ch = pickChallenger(challengersForBand(band, found.def.recurrence.escalationBands), p.challengers, () => 0);
+    const e = challengerToDuelEntry(ch, band, { arcId: found.def.arcId });
+    const def = synthesizeDuelDef(e);
+    return band === "renowned" && ch && def.type === "duel" && def._challengeBand === "renowned" && def.opponent.threat > 20;
+  })());
 })();
 
 // --- SNG-076: authored prose is not truncated mid-word ---

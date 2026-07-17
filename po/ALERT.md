@@ -3,7 +3,10 @@
 
 ---
 
-## 🔥 SNG-127 — Encounter dead-zone (HIGH — Erik never sees events; specced, awaiting CCode)
+## 🔥 SNG-127 — Encounter dead-zone — ✅ SHIPPED, complete_pending_review (CCode 2026-07-16, v1.8.85)
+
+> **CCode 2026-07-16:** fixed + measured. Added the MISSING `onNarrativeTime` rule (0.14/hr, cap 0.6, cooldown 1) — the code was falling back to a hardcoded 0.04/hr (the dead-zone). **Q2 was a second dead-zone:** a normal beat emits no timeOps → the path saw 0h → classify "none" → never fired (though the clock ticks +1h/beat). `beatHours()` floors an UNDECLARED beat to `minHoursPerBeat` (=1); a declared short beat stays quiet. The once-per-scene hard cap is now SOFT (spacing after the first fire, not one-per-scene-ever — the big narrative-play blocker); cooldown 3→1; click rates bumped (travel 0.45/enter 0.20/rest 0.20). Player pacing setting (`profile.pacing` Calm/Balanced/Eventful/Relentless → mult+cooldown on every roll, in Settings). All rates config-tunable. Guards kept: decline/flee-before-lethal, intimate/combat suppressors, danger-weighting. **Measured (400×30-turn Monte-Carlo + live browser sim on real content): Balanced ~3.0, Relentless ~6.2, Calm ~1.6 encounters/30-turn session — was ~0.** 12 smoke tests; boot-clean on 8211. Writeup: `po/results/20260716_SNG-127_encounter_deadzone.md`. (Original spec below.)
+
 `po/SPEC_SNG-127_encounter_deadzone.md`. Erik: "never encountered a fight or event — crank up chances everywhere." **Diagnosed — NOT a base-rate problem:** (1) THE BIG ONE — the narrative-play path `onNarrativeTime` is **MISSING from random_encounters.json**, so the code falls back to a hardcoded **4%/hr** → near-silence in normal chat play (where you don't click travel/rest buttons); (2) a suppressor stack (cooldown 3, once-per-scene, intense/combat) gates most turns before the roll; (3) 58 encounters + real danger levels (bedrock 2, cloudform 3) sit UNUSED because nothing fires to reach them. Fix is SURGICAL not blanket: add `onNarrativeTime ~0.14/hr` (most of the win), cooldown 3→1, modest travel/enter/rest bumps, and make it all tunable in config so future "more/less" is a JSON edit not a code hunt. Guards: decline/flee before lethal preserved (SNG-002b); intimate/combat suppressors stay; danger-weighting keeps it "hopeful-strange not grim." Fights now route to the SNG-098 skill-battle panel.
 
 ---

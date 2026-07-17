@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 11,
-  "xp": 1056,
+  "xp": 1061,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -73,7 +73,7 @@
     "spectrumId": -0.5439555105160936,
     "violence_peace": 0.09798375000000001,
     "chaos_order": 0.2085002906812526,
-    "mechanical_spiritual": 0.17191810626191062,
+    "mechanical_spiritual": 0.19332220094881508,
     "concrete_abstract": -0.05328384007186973,
     "death_life": -0.19456030535861646,
     "emotional_logical": 0.03083749999999999,
@@ -85,7 +85,7 @@
   "maxHealth": 80,
   "health": 72,
   "maxEnergy": 150,
-  "energy": 112,
+  "energy": 110,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -841,35 +841,38 @@
         "player": "Try the corrected form now, while the failure-shape is still fresh — use The Raised Thing as a held-open threshold rather than a conduit, and see if the rune accepts it.",
         "summary": "Silas holds Memory's rune open as a threshold — restrained, steady — and the connection settles into something real.",
         "narration": "You don't reach for the thread this time. You hold still, and you hold the door open.\n\nThe Raised Thing settles differently when you stop asking it to carry anything — it rises the way a lintel rises, just enough clearance, no ambition beyond that. Not a conduit. A threshold. The rune catches, a quiet click like a latch finding its seat, and Memory's collar-light returns to the corner of the room: low, steady, nothing dramatic. The ache behind your sternum eases. The copper taste fades.\n\nThrough the threshold, her presence arrives — not sensation, not vision, not anything as elaborate as what you were trying before. Just warmth in the water. Weight of a body at rest. The specific quality of a person who has decided that the evening is good and is not managing it. You don't push further than that. The threshold holds what it can hold; you let it.\n\nOn the other side of the partition, Pell goes quiet in a new way. Not the silence of receiving something unexpected — the silence of something she was already attending to, arriving properly. After a moment she makes a small sound, not words, just acknowledgment. The evening continues. The candle has burned another finger's width. Huginn shifts one talon on the rafter and does not comment, which is as close as it comes to approval."
+      },
+      {
+        "player": "Rest in the warmth of it — stay present through the threshold without adding anything, and let the evening breathe",
+        "summary": "Silas rests in the threshold's warmth — the rune holds, the evening holds, nothing added.",
+        "narration": "You do nothing more. That is the whole of it.\n\nThe threshold holds without tending — that is what a threshold does, and you have finally built one that knows its own business. Warmth crosses. Weight of a body at rest crosses. The specific quality of someone not performing their ease, but actually having it, crosses. You let it arrive and you don't reach after it. The inn's junction conduit hums faintly beneath the stone floor, its light rising pale and directionless through the trough's base, and the two warmths — the water's and Pell's — sit together in you without hierarchy. The tallow candle has burned another finger's width. Huginn shifts one talon on the rafter and is still again.\n\nPell doesn't say anything. Neither do you. The partition doesn't reach the ceiling, and the silence on her side is the kind that isn't empty — it has weight and temperature. You can feel her not closing the door, through the threshold and through the cedar-oiled quiet both, and the two confirmations agree with each other completely.\n\nThe water cools another degree. The collar rune holds, low and steady in Memory's corner, and you are aware without having to think about it that this is what the thing was always for — not a conduit, not a claim, just the fact of being present to someone across a small distance, in a room warm enough that nothing urgent needs doing. The inn sits over its conduit and hums. The early-spring rain ticks against the diffusion panels. You breathe."
       }
     ],
     "lastTurn": {
-      "narration": "You don't reach for the thread this time. You hold still, and you hold the door open.\n\nThe Raised Thing settles differently when you stop asking it to carry anything — it rises the way a lintel rises, just enough clearance, no ambition beyond that. Not a conduit. A threshold. The rune catches, a quiet click like a latch finding its seat, and Memory's collar-light returns to the corner of the room: low, steady, nothing dramatic. The ache behind your sternum eases. The copper taste fades.\n\nThrough the threshold, her presence arrives — not sensation, not vision, not anything as elaborate as what you were trying before. Just warmth in the water. Weight of a body at rest. The specific quality of a person who has decided that the evening is good and is not managing it. You don't push further than that. The threshold holds what it can hold; you let it.\n\nOn the other side of the partition, Pell goes quiet in a new way. Not the silence of receiving something unexpected — the silence of something she was already attending to, arriving properly. After a moment she makes a small sound, not words, just acknowledgment. The evening continues. The candle has burned another finger's width. Huginn shifts one talon on the rafter and does not comment, which is as close as it comes to approval.",
-      "sceneSummary": "Silas holds Memory's rune open as a threshold — restrained, steady — and the connection settles into something real.",
+      "narration": "You do nothing more. That is the whole of it.\n\nThe threshold holds without tending — that is what a threshold does, and you have finally built one that knows its own business. Warmth crosses. Weight of a body at rest crosses. The specific quality of someone not performing their ease, but actually having it, crosses. You let it arrive and you don't reach after it. The inn's junction conduit hums faintly beneath the stone floor, its light rising pale and directionless through the trough's base, and the two warmths — the water's and Pell's — sit together in you without hierarchy. The tallow candle has burned another finger's width. Huginn shifts one talon on the rafter and is still again.\n\nPell doesn't say anything. Neither do you. The partition doesn't reach the ceiling, and the silence on her side is the kind that isn't empty — it has weight and temperature. You can feel her not closing the door, through the threshold and through the cedar-oiled quiet both, and the two confirmations agree with each other completely.\n\nThe water cools another degree. The collar rune holds, low and steady in Memory's corner, and you are aware without having to think about it that this is what the thing was always for — not a conduit, not a claim, just the fact of being present to someone across a small distance, in a room warm enough that nothing urgent needs doing. The inn sits over its conduit and hums. The early-spring rain ticks against the diffusion panels. You breathe.",
+      "sceneSummary": "Silas rests in the threshold's warmth — the rune holds, the evening holds, nothing added.",
       "choices": [
         {
-          "label": "Rest in the warmth of it — stay present through the threshold without adding anything, and let the evening breathe",
+          "label": "Lie here quietly until the water goes cold — then dress and sit by Memory in the dark before bed",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "mechanical_spiritual": 0.6
+            "mechanical_spiritual": 0.3
           },
           "difficulty": 0,
           "intentTags": [
             "sustain"
           ],
-          "abilityId": "the_raised_thing",
+          "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Speak over the partition — tell her what you found: a threshold, not a conduit. Let her know what she's feeling through it is real, not accidental.",
+          "label": "Speak low over the partition — not the rune, your actual voice — and ask if she's warm enough, or if she wants the kettle refilled",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
-            "falsehood_truth": 0.7
+            "mechanical_spiritual": 0.2
           },
           "difficulty": 0,
           "intentTags": [
@@ -877,79 +880,74 @@
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Ask Huginn — it has been watching the whole time and has an opinion it hasn't offered",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Get out, dry off, and check Memory's rune up close — run a hand over the collar-mark and confirm the threshold's form with your fingers as well as your sense",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "axes": {
-            "mechanical_spiritual": 0.5
+            "mechanical_spiritual": 0.4,
+            "chaos_order": 0.3
           },
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false
         },
         {
-          "label": "Let the water cool a little more and attend to what Pell said earlier — 'Something just changed.' Give her the full account now that the rune is steady.",
+          "label": "Let the quiet run until Pell breaks it — whatever she says next, let her set the pace of the rest of the evening",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {
-            "falsehood_truth": 0.6
+            "mechanical_spiritual": 0.1
           },
           "difficulty": 0,
           "intentTags": [
-            "calm"
+            "sustain"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         }
       ],
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -2
+        "energy": 0
       },
       "ledgerEvents": [],
       "questUpdates": [],
       "scene": {
-        "setting": "The Low Lamp Inn, lower tier of the Edge District — two-room space divided by a wooden partition that does not reach the ceiling; Silas in the stone bath trough, water cooling but still warm, Memory's collar rune live again in the corner — low and steady.",
+        "setting": "The Low Lamp Inn, lower tier of the Edge District — two-room space divided by a wooden partition that does not reach the ceiling; Silas in the stone bath trough, water cooling further, Memory's collar rune live in the corner — low and steady, threshold form holding.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Behind the partition in her own bath trough — gone quiet in a new way, attending to the threshold presence without naming it, the evening decided."
+            "state": "Behind the partition in her own bath trough — quiet, not closed, the silence warm and weighted."
           },
           {
             "name": "Huginn",
-            "state": "On the rafter above — one talon shifted, watching; made no comment, which is as close as it comes to approval."
+            "state": "On the rafter above — one talon shifted after Silas settled; watching, still, making no comment."
           }
         ],
         "objects": [
           "Tallow candle on the window sill — burned down another finger's width",
-          "Memory (spear) — leaned in the corner, collar rune live again, low and steady",
+          "Memory (spear) — leaned in the corner, collar rune live and steady",
           "Partition — wooden, does not reach the ceiling",
-          "Stone bath trough (Silas's side) — water cooling, still warm",
+          "Stone bath trough (Silas's side) — water cooling",
           "Stone bath trough (Pell's side) — Pell at rest behind partition",
           "Copper kettle — emptied, set back near the coals",
           "Low lantern bracket over the inn door — burning oil",
           "Boots — off, at the bed's foot"
         ],
         "threads": [
-          "Pell said 'Something just changed' earlier — Silas has confirmed it began to explain; she is still waiting for the full account",
-          "Memory's rune-thread is live again — a threshold, not a conduit; not yet tested further",
-          "Huginn is watching with particular attention and has an unvoiced opinion",
-          "Calvar packs by first light — lamp in the window is the departure signal"
+          "Memory's threshold holds — the rune live and low; the form has not been tested past this evening's quiet",
+          "Calvar packs by first light — lamp in the window is the departure signal",
+          "The Edge District Ledger quest active — Grael, the annex, and the optics array intake log still unresolved",
+          "Huginn watching with particular attention and no voiced opinion"
         ]
       },
       "npcUpdates": [
@@ -957,77 +955,49 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Felt the threshold settle through Memory's rune — went quiet in a new way, attending without naming it. The evening continues; the armor stays down.",
-          "learned": [
-            "The rune-thread has been restored as a threshold — what she feels through it is real and deliberate, not accident"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "In her stone bath trough behind the partition — the thread live and present to her, the evening open."
+          "note": "Quiet on her side of the partition — not closed, not performing. The silence has weight and temperature. She is not managing the evening.",
+          "statusNote": "In her stone bath trough behind the partition — the threshold present to her, the evening open and unheld."
         },
         {
           "op": "update",
           "npcId": "huginn",
           "name": "Huginn",
-          "note": "Watched the corrected form land without comment — the silence is its approval.",
-          "status": "active",
-          "statusNote": "On the rafter above the bath room — watching, unvoiced opinion still held."
-        }
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Memory's collar rune has been restored as a threshold — The Raised Thing held open as a lintel, not a conduit. Warmth and presence cross; sensation does not. The form is repeatable.",
-          "subjectId": "pell"
-        }
-      ],
-      "placeUpdates": [],
-      "codexUpdates": [
-        {
-          "topic": "pell",
-          "label": "Pell",
-          "kind": "person",
-          "entityId": "pell",
-          "fact": "Memory's rune-thread restored as a threshold on World-day 17 evening — warmth and presence cross, sensation does not. Pell received the corrected form without alarm; went quiet in a new way, attending.",
-          "links": [
-            "find-the-engineer",
-            "huginn",
-            "the-edge-district-ledger"
-          ]
+          "note": "Shifted one talon when Silas settled; made no comment. Its silence is timed, and the timing is not disapproval.",
+          "statusNote": "On the rafter above Silas — watching, patient, unhurried."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A quiet moment in the bath — the rune settling, the evening breathing."
+        "why": "A quiet beat in the bath — the evening breathes; no real time lost"
       }
     },
     "sceneState": {
-      "setting": "The Low Lamp Inn, lower tier of the Edge District — two-room space divided by a wooden partition that does not reach the ceiling; Silas in the stone bath trough, water cooling but still warm, Memory's collar rune live again in the corner — low and steady.",
+      "setting": "The Low Lamp Inn, lower tier of the Edge District — two-room space divided by a wooden partition that does not reach the ceiling; Silas in the stone bath trough, water cooling further, Memory's collar rune live in the corner — low and steady, threshold form holding.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Behind the partition in her own bath trough — gone quiet in a new way, attending to the threshold presence without namin"
+          "state": "Behind the partition in her own bath trough — quiet, not closed, the silence warm and weighted."
         },
         {
           "name": "Huginn",
-          "state": "On the rafter above — one talon shifted, watching; made no comment, which is as close as it comes to approval."
+          "state": "On the rafter above — one talon shifted after Silas settled; watching, still, making no comment."
         }
       ],
       "objects": [
         "Tallow candle on the window sill — burned down another finger's width",
-        "Memory (spear) — leaned in the corner, collar rune live again, low and steady",
+        "Memory (spear) — leaned in the corner, collar rune live and steady",
         "Partition — wooden, does not reach the ceiling",
-        "Stone bath trough (Silas's side) — water cooling, still warm",
+        "Stone bath trough (Silas's side) — water cooling",
         "Stone bath trough (Pell's side) — Pell at rest behind partition",
         "Copper kettle — emptied, set back near the coals",
         "Low lantern bracket over the inn door — burning oil",
         "Boots — off, at the bed's foot"
       ],
       "threads": [
-        "Pell said 'Something just changed' earlier — Silas has confirmed it began to explain; she is still waiting for the full account",
-        "Memory's rune-thread is live again — a threshold, not a conduit; not yet tested further",
-        "Huginn is watching with particular attention and has an unvoiced opinion",
-        "Calvar packs by first light — lamp in the window is the departure signal"
+        "Memory's threshold holds — the rune live and low; the form has not been tested past this evening's quiet",
+        "Calvar packs by first light — lamp in the window is the departure signal",
+        "The Edge District Ledger quest active — Grael, the annex, and the optics array intake log still unresolved",
+        "Huginn watching with particular attention and no voiced opinion"
       ]
     }
   },
@@ -1453,7 +1423,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d3] Received the assignment to learn her father's craft from Calvar — recognized it as a gift, not a memorial. Said 'Lead' and picked up her pack. The armor is still down.",
         "[d3] Dropped back without being asked, gave space, let the work happen — then fell in beside Silas with one quiet touch and no question.",
         "[d3] Walked the lighted streets in comfortable silence, settled into the inn's smaller room — armor down, bath taken, present and easy on the other side of the partition.",
         "[d3] Answered the offer with dry deflection followed by a lowered voice and 'the water's going cold' — not a refusal, a decision being made aloud.",
@@ -1462,7 +1431,8 @@
         "[d3] Heard her name spoken plainly over the partition — the warmth returned through the thread, acknowledged without deflection. Answered 'I know' in her actual voice, stripped of manag",
         "[d3] Heard or felt the thread go cold — spoke plainly across the partition, not alarmed, paying attention: 'Something just changed.'",
         "[d3] Felt the rune go cold through the thread; named it plainly and flatly — 'Something just changed.' Is waiting for Silas's explanation.",
-        "[d3] Felt the threshold settle through Memory's rune — went quiet in a new way, attending without naming it. The evening continues; the armor stays down."
+        "[d3] Felt the threshold settle through Memory's rune — went quiet in a new way, attending without naming it. The evening continues; the armor stays down.",
+        "[d3] Quiet on her side of the partition — not closed, not performing. The silence has weight and temperature. She is not managing the evening."
       ],
       "knownFacts": [
         "The Low Lamp Inn is where they are staying — smaller room behind the partition is hers tonight",
@@ -1483,7 +1453,7 @@
         "holding partial knowledge without performance — named the ha"
       ],
       "status": "active",
-      "statusNote": "In her stone bath trough behind the partition — the thread live and present to her, the evening open.",
+      "statusNote": "In her stone bath trough behind the partition — the threshold present to her, the evening open and unheld.",
       "lastSeen": {
         "locationId": "the-low-lamp-inn",
         "day": 3
@@ -3189,20 +3159,20 @@
     }
   },
   "tendencies": {
-    "strategic": 15.3346331888432,
-    "cerebral": 21.78978940087973,
-    "social": 22.333917252738736,
-    "generous": 3.669095152563854,
-    "cautious": 9.442225283297057,
-    "physical": 0.3651788817874379,
-    "risky": 2.028270274846826,
-    "ruthless": 0.45215725396403644,
-    "carousing": 0.317505849040961,
-    "amorous": 6.20754706158335,
-    "patient": 0.5830301591697111,
-    "stealth": 0.37254609219269774,
-    "devotion": 1.6999233991957052,
-    "craft": 1
+    "strategic": 14.95126735912212,
+    "cerebral": 21.245044665857737,
+    "social": 21.775569321420267,
+    "generous": 3.5773677737497573,
+    "cautious": 9.206169651214632,
+    "physical": 0.35604940974275195,
+    "risky": 1.9775635179756554,
+    "ruthless": 0.44085332261493554,
+    "carousing": 0.30956820281493697,
+    "amorous": 6.052358385043766,
+    "patient": 1.5684544051904683,
+    "stealth": 0.3632324398878803,
+    "devotion": 1.6574253142158126,
+    "craft": 0.975
   },
   "aptitudes": [
     "strategist",
@@ -3213,7 +3183,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 405,
+  "actionCount": 406,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3395,8 +3365,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=11860&nologo=true",
-  "updatedAt": 1784319532190,
-  "rev": 583,
+  "updatedAt": 1784319734436,
+  "rev": 584,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4218,7 +4188,7 @@
       "shadowstep": 9,
       "the-attended-end": 19,
       "wildcraft": 3,
-      "the_raised_thing": 2
+      "the_raised_thing": 3
     },
     "coActivations": {
       "lightsense+numen_sense": 1,
@@ -4321,7 +4291,7 @@
   "syncedAt": 1784292613822,
   "teachers": {},
   "regionsKnown": {
-    "valley": 220
+    "valley": 221
   },
   "foreclosed": [
     "rootkin",
@@ -4370,10 +4340,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-17T17:39:40.705Z",
-      "lastAt": "2026-07-17T20:18:52.189Z",
+      "lastAt": "2026-07-17T20:22:14.436Z",
       "startDay": 17,
       "endDay": 17,
-      "beats": 28
+      "beats": 29
     }
   ],
   "company": [

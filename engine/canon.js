@@ -91,10 +91,30 @@ export function buildCanonRecord(record, { worldDay = null, tier = "canonical" }
     rating: g.rating || null,
     tier,                                  // 'canonical' | 'variant'
     provenance: g.provenance || null,
+    // SNG-128: a friendly attribution alias so the authorship readout can name WHO authored this shared
+    // record without reaching into provenance (the data was always there; this surfaces it cleanly).
+    contributedBy: g.provenance ? { playerKey: g.provenance.playerKey || null, characterId: g.provenance.characterId || null } : null,
     promotedWorldDay: worldDay,
     birthWeight: g.birthWeight ?? null
   };
   return authored;
+}
+
+/** SNG-128: per-contributor tally of the SHARED canon store — how much of the world each player has made
+ *  real. Reads `_canon.contributedBy` (or falls back to `_canon.provenance`) on every canonical + variant
+ *  record. Returns { [playerKey]: { promoted, variant, weight, characters:Set→[] } }. Pure. */
+export function contributionsBy(store) {
+  const s = ensureCanonStore(store);
+  const out = {};
+  const who = r => r?._canon?.contributedBy || r?._canon?.provenance || {};
+  const bump = (rec, key) => {
+    const w = who(rec); const pk = w.playerKey || "unknown";
+    const e = out[pk] || (out[pk] = { playerKey: pk, promoted: 0, variant: 0, weight: 0, _chars: new Set() });
+    e[key]++; e.weight += (rec?._canon?.weight ?? 1); if (w.characterId) e._chars.add(w.characterId);
+  };
+  for (const rec of Object.values(s.entities)) bump(rec, "promoted");
+  for (const rec of s.variants) bump(rec, "variant");
+  return Object.fromEntries(Object.entries(out).map(([k, e]) => [k, { playerKey: e.playerKey, promoted: e.promoted, variant: e.variant, weight: e.weight, characters: [...e._chars] }]));
 }
 
 /** Realness weight of any record — a canon record (`_canon.weight`), an authored-content record

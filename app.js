@@ -6,7 +6,7 @@ import { resolveAction, successChance, applyEnergyCost } from "./engine/resolve.
 import { senseAction, senseTier, senseOpponent } from "./engine/sense.js";
 import { synthesizeOpponentSheet } from "./engine/skill_battle.js";
 import { recordDeed, standingWith, standingWithPeople, reputationSummary } from "./engine/reputation.js";
-import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt } from "./engine/chronicle.js";
+import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, touchSession, endSession, sessionLog, buildSessionPrompt, authorshipStats, crossCharacterAuthorship } from "./engine/chronicle.js";
 import { newProfile, updateProfile, aptitudeMods, profileInsight, grantAptitudes, fadingAptitudes, ensureCharacterStyle, ensureRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, revokeAdultGate, RATING_ORDER, RATING_LEVEL } from "./engine/playerprofile.js";
 import { gmTurn, parseIntent, gmAsk, generateBio, suggestBuild, extractGambit, sanitizeScene, narrativeRegister, ratingRegister } from "./engine/gm.js";
 import { applyQuestUpdates, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, slugify } from "./engine/quests.js";
@@ -43,7 +43,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.85";
+const APP_VERSION = "1.8.86";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2536,6 +2536,9 @@ function applyTurn(turn, resolution, playerWords = null) {
   const location = CONTENT.locations[character.currentLocationId];
   const dayNow = readClock(character.clock).day;
   const mods = aptitudeMods(character, CONTENT.rules.playerAptitudes);
+  // SNG-128: advance the session marker each played beat (a new session after a real-time gap). Cheap;
+  // the World-Authorship Chronicle reads these boundaries for its per-session log.
+  try { touchSession(character, { nowISO: new Date().toISOString(), worldDay: absoluteWorldDay() }); } catch { /* session marker is best-effort */ }
 
   // deltas from the GM (bounded trust: clamp everything)
   const d = turn.characterDeltas || {};
@@ -4455,6 +4458,19 @@ function renderChronicle() {
   const stale = chronicleIsStale(character);
   const deeds = majorDeeds(character, 8);
   const ctx = chronicleViewCtx(character);
+  // SNG-128: the World-Authorship readout + per-session log + the family comparison.
+  const auth = authorshipStats(character, CONTENT);
+  const sessions = sessionLog(character);
+  const myKey = profile?.playerKey;
+  // Family compare: YOUR characters always (they're yours), plus other players' characters only if that
+  // player opted in (privacy — a chronicle is private until shared). Only shown when 2+ are visible.
+  let family = [];
+  try {
+    const loaded = listCharacters().map(e => (e.id === character.id ? character : loadCharacter(e.id))).filter(Boolean);
+    const visible = loaded.filter(c => c.playerKey === myKey || loadProfile(c.playerKey)?.sharedChronicle);
+    family = crossCharacterAuthorship(visible, CONTENT);
+  } catch { /* family view is best-effort */ }
+  const nameOfPlayer = pk => { try { return loadProfile(pk)?.displayName || pk; } catch { return pk; } };
   const paraHtml = character._chronicleBusy
     ? `<div class="insight">writing your story…</div>`
     : cache?.text
@@ -4481,11 +4497,66 @@ function renderChronicle() {
     <section><h3>The arc</h3>
       <div class="chronicle-arc">${ctx.arc ? esc(ctx.arc) : "<span class='insight'>their path is still forming</span>"}</div>
     </section>
+    <section><h3>World authorship <span class="cost">what you've made real</span></h3>
+      <div class="authorship-grid">
+        <div class="auth-stat"><span class="auth-num">${auth.authoredCount}</span><span class="auth-label">authored places &amp; people you've walked among</span></div>
+        <div class="auth-stat"><span class="auth-num accent">${auth.novelCount}</span><span class="auth-label">called into being through your play</span></div>
+        <div class="auth-stat"><span class="auth-num">${auth.persisted.shared}</span><span class="auth-label">now shared-world canon</span></div>
+        <div class="auth-stat"><span class="auth-num accent">${auth.worldEffect}</span><span class="auth-label">world-effect — your fingerprint on the shared world</span></div>
+      </div>
+      <div class="hint" style="margin-top:6px">Of the world you've touched, <strong>${auth.authoredCount}</strong> ${auth.authoredCount === 1 ? "place/person was" : "were"} written before you — and you <strong>called ${auth.novelCount} new ${auth.novelCount === 1 ? "one" : "ones"} into being</strong>.${auth.novelCount ? ` Of those, ${auth.persisted.shared} ${auth.persisted.shared === 1 ? "is" : "are"} now canon the whole valley reads${auth.persisted.rumor ? `, ${auth.persisted.rumor} live${auth.persisted.rumor === 1 ? "s" : ""} on as rumor others may yet confirm` : ""}; ${auth.persisted.personal} real to you, not yet shared.` : ""}</div>
+      ${auth.topAttention.length ? `<div style="margin-top:8px"><div class="sys-label">What you're making real right now</div>${auth.topAttention.map(t => `<div class="known-npc"><span class="npc-name">${esc(t.name)}</span> <span class="cost">${esc(t.type || "")} · ${esc(t.tier)}</span> <span class="rep-band ${t.tier === "nominated" ? "trusted" : ""}" title="realness weight — the closer to promotion, the more real">weight ${t.weight}</span></div>`).join("")}</div>` : ""}
+      <label class="rating-check" style="margin-top:10px"><input type="checkbox" id="chr-share" ${profile?.sharedChronicle ? "checked" : ""}> Share my chronicle with the family (they can see these authorship stats)</label>
+    </section>
+    <section><h3>Sessions${sessions.length ? ` (${sessions.length})` : ""}</h3>
+      ${sessions.length ? sessions.map(s => {
+        const raw = (character.sessions || []).find(x => x.id === s.id) || {};
+        const span = s.startDay != null && s.endDay != null ? (s.startDay === s.endDay ? `day ${s.startDay}` : `days ${s.startDay}–${s.endDay}`) : "";
+        const title = `${s.ended ? "▪" : "▸"} ${span || s.id} · ${s.beats} beat${s.beats === 1 ? "" : "s"}${s.deeds.length ? ` · ${s.deeds.length} deed${s.deeds.length === 1 ? "" : "s"}` : ""}`;
+        const recap = raw._recapBusy ? `<div class="insight">writing the recap…</div>` : raw.recap ? `<p class="chronicle-para">${esc(raw.recap)}</p>` : "";
+        return `<details class="session-entry"><summary>${esc(title)}</summary><div class="sec-body">
+          ${recap}
+          ${getApiKey() && !raw.recap ? `<button class="btn secondary session-recap" data-sess="${esc(s.id)}" style="margin:2px 0 6px" ${raw._recapBusy ? "disabled" : ""}>✍ Write session recap</button>` : ""}
+          ${s.deeds.length ? `${s.deeds.map(d => `<div class="chronicle-deed"><span class="rep-band ${d.weight >= 0 ? "trusted" : "wary"}">${d.weight > 0 ? "+" : ""}${d.weight}</span> ${esc(d.description)}</div>`).join("")}` : "<div class='insight'>a quiet span — no deeds of note</div>"}
+          ${s.placesMinted.length ? `<div class="hint">✦ Places you made: ${s.placesMinted.map(esc).join(", ")}</div>` : ""}
+          ${s.peopleMet.length ? `<div class="hint">✦ People first met: ${s.peopleMet.map(esc).join(", ")}</div>` : ""}
+          ${s.canonPromoted.length ? `<div class="hint">★ Became shared-world canon: ${s.canonPromoted.map(esc).join(", ")}</div>` : ""}
+        </div></details>`;
+      }).join("") : "<div class='insight'>your first session is being written now — play on</div>"}
+      ${(character.sessions || []).length && !(character.sessions[character.sessions.length - 1] || {}).ended ? `<button class="btn secondary" id="chr-endsession" style="margin-top:6px">End this session</button>` : ""}
+    </section>
+    ${family.length >= 2 ? `<section><h3>Across the family <span class="cost">who's authored the valley</span></h3>
+      ${family.map((f, i) => `<div class="family-row${f.id === character.id ? " you" : ""}"><span class="fam-rank">${i + 1}</span> <span class="npc-name">${esc(f.name)}</span> <span class="cost">L${f.level}${f.playerKey && f.playerKey !== myKey ? " · " + esc(nameOfPlayer(f.playerKey)) : ""}</span><div class="fam-stats">${f.novelCount} made · ${f.shared} canon · <strong>world-effect ${f.worldEffect}</strong></div></div>`).join("")}
+      <div class="hint" style="margin-top:6px">Your family co-authors one valley. World-effect is how much of the shared world bears each person's fingerprint.</div>
+    </section>` : ""}
     <button class="btn secondary" id="chr-back" style="margin-top:12px">Back</button>
   </div>`);
   const rb = document.getElementById("chr-regen"); if (rb) rb.onclick = () => ensureChronicleParagraph(true);
+  const share = document.getElementById("chr-share"); if (share) share.onchange = (e) => { if (profile) { profile.sharedChronicle = e.target.checked; saveProfile(profile); } };
+  const endBtn = document.getElementById("chr-endsession"); if (endBtn) endBtn.onclick = () => { endSession(character); saveCharacter(character); renderChronicle(); };
+  for (const b of app.querySelectorAll(".session-recap")) b.onclick = () => ensureSessionRecap(b.dataset.sess);
   document.getElementById("chr-back").onclick = () => renderCharacterScreen();
   if (!cache?.text && !character._chronicleBusy && getApiKey()) ensureChronicleParagraph(false); // write once on first open
+}
+
+/** SNG-128: generate a one-paragraph recap for ONE session on demand (lazy, cached on the session).
+ *  Reuses the chronicle voice + the same content ceiling as the GM; app owns the model call. */
+async function ensureSessionRecap(sessionId, force = false) {
+  const raw = (character.sessions || []).find(x => x.id === sessionId);
+  if (!raw || (raw.recap && !force) || raw._recapBusy) return;
+  const entry = sessionLog(character).find(x => x.id === sessionId);
+  if (!entry) return;
+  raw._recapBusy = true; raw._recapError = null; renderChronicle();
+  try {
+    const { system, user } = buildSessionPrompt(character, entry, { ratingLine: ratingLineForGM() });
+    const text = await callClaude([{ role: "user", content: user }], { task: "chronicle", system });
+    raw.recap = String(text || "").trim();
+  } catch (e) {
+    raw._recapError = "Couldn't write the recap — try again.";
+  }
+  raw._recapBusy = false;
+  saveCharacter(character);
+  renderChronicle();
 }
 
 // ---------- SNG-061: THE LIBRARY (the world's guide — open, readable, no discovery gate) ----------

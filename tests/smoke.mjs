@@ -11,7 +11,7 @@ import { normalizeInventory, addItem, removeItem, consumeItem, equipmentBonus, i
 import { newClock, readClock, advanceClock, getWorldEpoch, absoluteWorldDay, worldDate, worldDayAt, relativeWorldDays } from "../engine/worldtime.js";
 import { companionBonus, companionsForGM, activeCompanions, partnerAdjacentNpcs } from "../engine/companions.js";
 import { applyQuestUpdates, questsForGM, slugify, resolveQuest, dedupeQuests, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, threadTouched } from "../engine/quests.js";
-import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt } from "../engine/chronicle.js";
+import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, touchSession, endSession, sessionLog, buildSessionPrompt, authorshipStats, crossCharacterAuthorship } from "../engine/chronicle.js";
 import { sanitizeScene, buildTurnContext, sanitizeIntent, narrativeRegister, ratingRegister, renderSceneHistory, tierParts } from "../engine/gm.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, findExistingNpc, prettifyNpcName, relationshipBand, advanceBond, relationshipLabel, isPartnerAdjacent, knownPeopleAt } from "../engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
@@ -33,7 +33,7 @@ import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, ap
 import { validate, missingRequired, defaultFor } from "../engine/genschema.js";
 import { generate, ensureGenerated, resolveExisting, mintId, repairEntity, stubEntity, birthWeightOf, buildGeneratePrompt, generatedRecords, GEN_TYPES, isMinorEntity, enforceFloors, recordAttention, effectiveWeight, recomputeTier, isDormant, isSurfaceable, livingWorldForGM, findGenerated, nominationsFor } from "../engine/generate.js";
 import { applyCodexUpdates as applyCodexUpdatesGen } from "../engine/codex.js";
-import { ensureCanonStore, promotionCandidates, buildCanonRecord, findCanonCollision, resolveContradiction, promoteInto, mergeCanonStores, lensDecision, canonForViewer, adaptView, AUTHORED_CANON_WEIGHT } from "../engine/canon.js";
+import { ensureCanonStore, promotionCandidates, buildCanonRecord, findCanonCollision, resolveContradiction, promoteInto, mergeCanonStores, lensDecision, canonForViewer, adaptView, AUTHORED_CANON_WEIGHT, contributionsBy } from "../engine/canon.js";
 import { sanitizeImagePrompt, assembleImagePrompt, characterPromptSeed, imageURLFor, ensureImage, isMinorSubject, addGalleryImage, ensureGallery, itemProvenancePhrase, deleteGalleryImage } from "../engine/art.js";
 import { planPlayerDedup, dedupePlayers, resolvePlayerKey, findProfileByName, resolveLocationId } from "../engine/state.js";
 import { applyStateOps, describeCorrection } from "../engine/corrections.js";
@@ -3276,6 +3276,84 @@ await (async () => {
   const whole = '{"moveTo": {"location": "millbrook", "why": "led home"}, "characterDeltas": {"health": 2, "energy": 0}}';
   const wOps = salvageOps(whole);
   check("SNG-123: a well-formed moveTo/characterDeltas still parses normally (no regression)", wOps.moveTo?.location === "millbrook" && wOps.characterDeltas?.health === 2);
+}
+
+// --- SNG-128: the World-Authorship Chronicle — surfaces authored/novel/persisted from real provenance ---
+{
+  // a character with authored places/people walked + novel (minted) content at various persistence tiers
+  const mk = (id, type, patch = {}) => ({ id, name: id, _gen: { type, birthWeight: 2, engagementScore: 4, tier: "established", createdDay: 3, provenance: { playerKey: "pk1", characterId: "hero", worldDay: 3 }, ...patch } });
+  const hero = {
+    id: "hero", name: "Hero", level: 4, playerKey: "pk1",
+    placeMemory: { millbrook: { visits: 2 }, echo_river: { visits: 1 }, "gen-the-pass": { visits: 1 } }, // 2 authored + 1 novel id
+    npcRegistry: { pell: { id: "pell" }, "gen-tollhand": { id: "gen-tollhand" } },                        // 1 authored + 1 novel id
+    generated: {
+      location: {
+        "gen-the-pass": mk("gen-the-pass", "location", { promotedWorldDay: 6, canonTier: "canonical", engagementScore: 10, tier: "nominated" }), // SHARED
+        "gen-hollow": mk("gen-hollow", "location", { promotedWorldDay: null, engagementScore: 6 }),          // personal
+      },
+      npc: {
+        "gen-tollhand": mk("gen-tollhand", "npc", { promotedWorldDay: 7, canonTier: "variant", engagementScore: 9 }), // RUMOR/variant
+        "gen-warden": mk("gen-warden", "npc", { promotedWorldDay: null, engagementScore: 8, tier: "nominated" }),      // personal (ripe)
+      },
+      arc: {}
+    }
+  };
+  const CONTENT = { locations: { millbrook: { id: "millbrook", name: "Millbrook" }, echo_river: { id: "echo_river", name: "Echo River" } }, npcs: { pell: { id: "pell", name: "Pell" } } };
+
+  const a = authorshipStats(hero, CONTENT);
+  check("SNG-128: authored count = authored places walked + authored people known (novel ids excluded)", a.authoredCount === 3); // millbrook, echo_river, pell
+  check("SNG-128: novel count = every minted record across types", a.novelCount === 4);
+  check("SNG-128: persistence tiers split shared / personal / rumor from the real _gen tiers",
+    a.persisted.shared === 1 && a.persisted.rumor === 1 && a.persisted.personal === 2);
+  // world-effect = weighted sum over SHARED entities only (gen-the-pass: birth 2 + floor(10/2)=5 → 7)
+  check("SNG-128: world-effect is the WEIGHTED fingerprint of promoted-shared content (Q3), not a bare count", a.worldEffect === 7);
+  check("SNG-128: top-attention lists the not-yet-shared entities you've invested most in, by score",
+    a.topAttention.length === 2 && a.topAttention[0].name === "gen-warden" && a.topAttention[0].score === 8);
+  check("SNG-128: honest names — the shared one and the rumor one are surfaced by name",
+    a.sharedNames.includes("gen-the-pass") && a.rumorNames.includes("gen-tollhand"));
+
+  // sessions: a real-time gap starts a new one; within-gap extends; endSession closes; next touch reopens
+  const c2 = { sessions: [], deeds: [], generated: { npc: {}, location: {}, arc: {} } };
+  touchSession(c2, { nowISO: "2026-07-16T10:00:00Z", worldDay: 1 });
+  touchSession(c2, { nowISO: "2026-07-16T10:30:00Z", worldDay: 1 }); // +30m → same session
+  check("SNG-128: beats within the gap extend ONE session", c2.sessions.length === 1 && c2.sessions[0].beats === 2);
+  touchSession(c2, { nowISO: "2026-07-16T20:00:00Z", worldDay: 2 }); // +9.5h → new session
+  check("SNG-128: a real-time gap starts a NEW session", c2.sessions.length === 2);
+  endSession(c2);
+  check("SNG-128: endSession marks the current session ended", c2.sessions[1].ended === true);
+  touchSession(c2, { nowISO: "2026-07-16T20:05:00Z", worldDay: 2 }); // even within gap, ended → new
+  check("SNG-128: a touch after an explicit end opens a fresh session", c2.sessions.length === 3);
+
+  // sessionLog scopes deeds to the session (by real time) + generated by world-day range, newest first
+  const c3 = {
+    sessions: [{ id: "sess-1", startedAt: "2026-07-16T10:00:00Z", lastAt: "2026-07-16T11:00:00Z", startDay: 1, endDay: 1, beats: 4 }],
+    deeds: [{ description: "saved the mill", weight: 3, worldDay: 1, at: "2026-07-16T10:30:00Z" }, { description: "old deed", weight: 1, worldDay: 0, at: "2026-07-15T09:00:00Z" }],
+    generated: { location: { "gen-x": { id: "gen-x", name: "The Hollow", _gen: { type: "location", createdDay: 1, promotedWorldDay: 1, canonTier: "canonical" } } }, npc: {}, arc: {} }
+  };
+  const log = sessionLog(c3);
+  check("SNG-128: sessionLog scopes deeds to the session by real time (excludes an earlier deed)", log[0].deeds.length === 1 && log[0].deeds[0].description === "saved the mill");
+  check("SNG-128: sessionLog surfaces places minted + canon promoted in the session's day range", log[0].placesMinted.includes("The Hollow") && log[0].canonPromoted.includes("The Hollow"));
+
+  // buildSessionPrompt reuses the chronicle voice, facts-only, ceiling-bound
+  const sp = buildSessionPrompt(c3, log[0], { ratingLine: "PG-13 ceiling." });
+  check("SNG-128: buildSessionPrompt yields a facts-only, ceiling-bound {system,user} recap prompt",
+    /ONE.*paragraph/i.test(sp.system) && /invent nothing/i.test(sp.system) && sp.system.includes("PG-13 ceiling.") && sp.user.includes("saved the mill"));
+
+  // cross-character family comparison, sorted by world-effect
+  const fam = crossCharacterAuthorship([hero, { id: "b", name: "Brayden", level: 2, playerKey: "pk2", generated: { npc: {}, location: {}, arc: {} }, placeMemory: {}, npcRegistry: {} }], CONTENT);
+  check("SNG-128: crossCharacterAuthorship ranks members by world-effect (the biggest author first)",
+    fam.length === 2 && fam[0].name === "Hero" && fam[0].worldEffect === 7 && fam[1].worldEffect === 0);
+
+  // canon.js: buildCanonRecord stamps contributedBy from provenance; contributionsBy tallies per player
+  const cr = buildCanonRecord({ id: "gen-z", name: "Z", _gen: { type: "location", birthWeight: 2, engagementScore: 8, provenance: { playerKey: "pk1", characterId: "hero" } } }, { worldDay: 5 });
+  check("SNG-128: buildCanonRecord stamps a friendly contributedBy from provenance (no data invented)",
+    cr._canon.contributedBy.playerKey === "pk1" && cr._canon.contributedBy.characterId === "hero");
+  const store = ensureCanonStore({}, "valley");
+  store.entities["gen-z"] = cr;
+  store.variants.push(buildCanonRecord({ id: "gen-w", name: "W", _gen: { type: "npc", birthWeight: 1, provenance: { playerKey: "pk2", characterId: "bray" } } }, { worldDay: 6, tier: "variant" }));
+  const contrib = contributionsBy(store);
+  check("SNG-128: contributionsBy tallies promoted vs variant per contributing player, with weight",
+    contrib.pk1.promoted === 1 && contrib.pk1.variant === 0 && contrib.pk2.variant === 1 && contrib.pk1.characters.includes("hero"));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

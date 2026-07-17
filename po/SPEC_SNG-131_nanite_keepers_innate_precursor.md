@@ -16,6 +16,16 @@
 - **The fiction:** these peoples don't "learn" that precursor craft — they were *born touching the substrate*; the power is what keeps them what they are. A seraph's radiance IS a precursor act. Cutting them off from it would unmake them. So the grant is *innate necessity*, not achievement.
 - **Cost/balance:** an innate precursor grant is powerful — balance by (a) making it a SPECIFIC 1–2 abilities tied to that people's nature (not free pick), (b) possibly a standing energy/upkeep cost ("keeping the powers flowing" — the substrate demands feeding), (c) NOT stacking with the SNG-130 capstone unless authored as the same ability.
 
+## ✅ ERIK'S RULINGS — LOCKED + EXPANDED (2026-07-16)
+1. **Deep-power (substrate-keeper) peoples have innate precursor access AS A BASE** — and it GROWS along the lines they choose, exactly like every other skill. So precursor stops being purely fiction-gated for them: they start with a base touch and deepen it through the normal progression (practice, tier, teacher) along their chosen spoke. Innate floor + earned growth.
+2. **The NATURE path gets a parallel structure — with ROOTKIN as its ANTI-POLE.** Nature/life peoples have their OWN innate access to a deep power (the living substrate — call it the *quick*, the green current, nature's own precursor-equivalent), growing the same way. **Rootkin are the anti-pole to the nanite-substrate**: where the nanite-keepers tap the fabricated substrate, the nature-keepers tap the living one, and Rootkin sit at the far pole from the nanite deep-power — the living refusal of it. Two innate-deep-power families, antipodal: fabricated-substrate (seraphic/abyssal/old-gods) vs living-substrate (nature/rootkin-adjacent).
+3. **The CENTER (Millbrook / folk) makes room for BOTH — and earns its own BRAIDSTRENGTH for it.** The folk center gave up neither and mastered neither; its gift is that it can HOLD both poles at once. That holding is a braid — the center has a distinctive *braidstrength* (a bonus to cross-pole braid abilities, or unique access to holding-both moves) precisely because it stands where both substrates cross. The Valley's weakness (no deep pole) is also its singular strength (it can braid what the poles cannot).
+
+## NATURE PARALLEL + CENTER BRAIDSTRENGTH — new sub-specs (author with SNG-130/131)
+- **Living-substrate innate access:** nature-keeper peoples declare `innateLivingCurrent: [abilityId…]` (parallel to `innatePrecursor`) — the green-current equivalent, grown along the spoke.
+- **Antipole structure:** rootkin (and its kin) sit antipodal to the nanite deep-power on the great circle; the two deep-power families are opposite poles of one axis (fabricated vs living substrate). Confirm rootkin's ring position IS antipodal to the nanite cluster; if not, note the geometry.
+- **Center braidstrength:** folk/Valley origins get a `braidAffinity` bonus — cheaper/earlier access to cross-pole braid abilities (the diameter-lines of SNG-073), OR a unique "hold both" move only the center can make. The center's identity becomes *the one place that can braid the poles*.
+
 ## HOW IT WIRES (existing vectors, one new grant)
 | Piece | Mechanism (exists) | Change |
 |---|---|---|
@@ -31,8 +41,8 @@
 - **Balanced** — innate precursor is strong; bound it to specific abilities + optional upkeep + balance_sim.
 - **Composes with SNG-125 axis rules** — a keeper-people's primary is still origin-seeded; the precursor grant rides on origin, orthogonal to the primary/secondary/tertiary domains.
 
-## OPEN QUESTIONS — ERIK (design) then CCODE/AEVI
-1. **[ERIK]** Innate-at-creation, path-earned-at-mastery, or BOTH (some peoples born with it, others earn it along the spoke)? (Recommend both — richer: seraphs born radiant, a mortal-touched people earns it.)
-2. **[ERIK]** Should innate precursor carry an UPKEEP cost ("what it takes to keep those powers flowing" reads like it should cost something ongoing)? (Recommend yes — a small standing substrate/energy draw; it's thematically perfect and it balances the power.)
-3. **[ERIK]** Which specific peoples are substrate-keepers — just seraphic + abyssal, or a named set from `peoples_of_kind` deep clusters (divine/titanic/fae)? (Needs your canon call on who kept the nanites.)
-4. **[AEVI/CCODE]** Author the `innatePrecursor` origin field + the specific precursor abilities per keeper-people (coordinate with SNG-130 capstones so a tier-V and a precursor grant can be the same ability where it fits).
+## OPEN QUESTIONS — CCODE/AEVI (design settled by rulings above)
+1. **[AEVI]** Author `innatePrecursor` (nanite-keepers) + `innateLivingCurrent` (nature-keepers) origin fields + the specific base abilities per keeper-people, growing along the spoke.
+2. **[AEVI]** Author the center `braidAffinity` bonus (cheaper cross-pole braids for folk/Valley origins) — ties to the SNG-073 braid/diameter system.
+3. **[CCODE]** Confirm rootkin ring position is antipodal to the nanite deep-power cluster (the two-substrate axis); wire innate grants into `precursorAccess`/a living-current equivalent at creation; wire `braidAffinity` into braid ability cost/access.
+4. **[BOTH]** Balance: innate deep-power (either substrate) bounded to a FEW base abilities + optional upkeep; the center braidstrength bounded so "holds both" isn't strictly better than committing to a pole.

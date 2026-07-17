@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 10,
-  "xp": 902,
+  "xp": 907,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -66,7 +66,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.6446663213593234,
+    "spectrumId": -0.6124330052913572,
     "violence_peace": 0.09798375000000001,
     "chaos_order": 0.1655638322568918,
     "mechanical_spiritual": 0.17191810626191062,
@@ -81,7 +81,7 @@
   "maxHealth": 75,
   "health": 75,
   "maxEnergy": 145,
-  "energy": 145,
+  "energy": 140,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -244,6 +244,30 @@
       "kind": "quest",
       "qty": 1,
       "description": "A single page in Fendt's hand — dates, seventh-band designations, the nine-day gap, Grael's name, and the receipt date of the preliminary concern notice. One copy. The other is in the lining of Fendt's traveling case.",
+      "consumable": false
+    },
+    {
+      "id": null,
+      "name": "Brass Wire Coil (fine)",
+      "kind": "tool",
+      "qty": 1,
+      "description": "A coil of fine brass wire from Fendt's shop — used for sealing sample vessels; precise enough for binding or rune-work.",
+      "consumable": false
+    },
+    {
+      "id": null,
+      "name": "Chalk Dust Tin (wax-sealed)",
+      "kind": "tool",
+      "qty": 1,
+      "description": "Brilliant white chalk dust in a sealed tin — for marking surfaces in poor light or wet conditions.",
+      "consumable": true
+    },
+    {
+      "id": null,
+      "name": "Pre-Transition Filter Cloth",
+      "kind": "tool",
+      "qty": 1,
+      "description": "A tight-woven square of filtering cloth, pre-Transition manufacture — can strain contaminated water through multiple passes.",
       "consumable": false
     }
   ],
@@ -532,77 +556,60 @@
         "player": "Fendt - we will carry this burden.  We will save the valley.  We need your cooperation and assistance.  Write down everything - we will protect you if needed, but it won't come to that. Go  to Millbrook and tell Mara Wells we sent you - give her this (give him a piece of dried starfruit) and she'll know what to do.  We will bring justice and get to the bottom of this.  We will find the engineer who can help us stop what is coming.",
         "summary": "Fendt writes down everything, accepts the starfruit token, and agrees to walk to Millbrook and find Mara Wells. Silas and Pell depart the Edge District and reach Millbrook by evening.",
         "narration": "You pull the sealed packet of dried starfruit from your pack — old pass circuit goods, three or four winters old, still good — and set it on the desk between you and Fendt. Not a ceremony. A key.\n\n\"Fendt.\" You keep your voice level, not a rallying speech, just a man naming what is real. \"We'll carry this. Write down everything you know — the readings, the dates, the gap between when you filed your concern notice and when Grael rewrote the ledger. All of it. Keep nothing in your head that isn't also on paper somewhere we can reach it. Then go to Millbrook. Find a woman named Mara Wells — she keeps the supply store. Give her the starfruit and tell her we sent you. She'll know what to do with you, and she will not ask you questions you don't want answering in public.\" You let that land for a moment. \"You won't need protecting. Grael's method works because the machinery is quiet. We're going to make it loud.\"\n\nFendt looks at the dried starfruit for two breaths. Then he picks it up — gently, which tells you more than his face does — and tucks it into his coat pocket beside the real readings. He opens his notebook to a clean page and writes for three minutes without pausing: dates, band designations, the nine-day gap between the fifth and sixth falsified entries, Grael's name, the preliminary notice he filed and the date it was received. He tears the page out with care, folds it once, and holds it out to you. \"One copy with you. One stays in the lining of the case.\" He nods at the traveling case at his boots. \"If something goes wrong before I reach Millbrook, the case goes with whoever finds me.\"\n\nPell says nothing. She takes the folded page from Fendt and hands it to you — her fingers steady, her expression somewhere between resolved and the kind of still that comes after a decision you can't undo. Huginn shifts once on your shoulder, resettles, and is quiet. You leave the building the way you came, through the rear service lane, past the cloth-wrapped bundle still leaning against the iron-banded door, into the early light of the Edge District.\n\nThe road back to Millbrook takes most of the day — the pass descent, the valley floor opening beneath you in long afternoon gold, the north road into familiar smoke and the smell of the river running gray-green at its edges. You arrive as the cookhouse fires are being banked for the evening, Memory on your shoulder, Pell one step behind, the real readings folded into your coat and Fendt somewhere behind you on the road with a piece of starfruit and a direction.\n\n*You feel it settle into you — a new steadiness. (Level 10: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
+      },
+      {
+        "player": "Gather any useful supplies or tools from Fendt's shop before leaving to make our way to find the engineer. ",
+        "summary": "Silas scavenges Fendt's shop for useful supplies, then a passing traveler warns of gray seepage at the lower ford.",
+        "narration": "Fendt's shop is small and carefully kept — the kind of order a man maintains when the rest of his situation is unraveling. While Pell checks the road and Huginn settles on the window ledge, you move through the back room with a practical eye: shelves of graduated vessels, a rack of glass rods, labeled jars of reagent powder. Most of it is Edge District filtration work, too specialized to carry. But the useful things present themselves readily, the way they do in a well-run space.\n\nA coil of fine brass wire on a hook by the door — the kind used to seal sample vessels, precise enough for binding work. A small wax-sealed tin of chalk dust, brilliant white, for marking surfaces in dark conditions. And on the lowest shelf, half-hidden behind a set of measuring cylinders, a folded square of filtering cloth: tight-woven, pre-Transition make by the feel of it, the kind that could strain contaminated water through three times and still hold. You tuck all three into the Traveler's Pack without ceremony.\n\nPell appears at the doorway as you straighten. She reads the pack's new weight in one glance and gives a small nod — she'd have looked in the same places. Huginn steps off the window ledge and returns to your shoulder, and the three of you walk out into the afternoon light. The road south through the valley will take what remains of the day. Fendt's door swings shut behind you.\n\nHalf a mile out, where the pine run opens onto the old trade track, you meet a woman coming the other way — a thin, road-worn figure with a pack nearly as loaded as yours, her coat tied at the waist with orange cord. She stops when she sees you and holds up one open hand: a traveler's greeting, nothing asked for. \"The ford at the lower crossing is passable,\" she says, without preamble, \"but the stones on the east side have been seeping something gray. Don't fill your skins there.\" She looks at Huginn once, unbothered, then steps aside to let you pass. No name offered. No price. The valley is not only teeth."
       }
     ],
     "lastTurn": {
-      "narration": "You pull the sealed packet of dried starfruit from your pack — old pass circuit goods, three or four winters old, still good — and set it on the desk between you and Fendt. Not a ceremony. A key.\n\n\"Fendt.\" You keep your voice level, not a rallying speech, just a man naming what is real. \"We'll carry this. Write down everything you know — the readings, the dates, the gap between when you filed your concern notice and when Grael rewrote the ledger. All of it. Keep nothing in your head that isn't also on paper somewhere we can reach it. Then go to Millbrook. Find a woman named Mara Wells — she keeps the supply store. Give her the starfruit and tell her we sent you. She'll know what to do with you, and she will not ask you questions you don't want answering in public.\" You let that land for a moment. \"You won't need protecting. Grael's method works because the machinery is quiet. We're going to make it loud.\"\n\nFendt looks at the dried starfruit for two breaths. Then he picks it up — gently, which tells you more than his face does — and tucks it into his coat pocket beside the real readings. He opens his notebook to a clean page and writes for three minutes without pausing: dates, band designations, the nine-day gap between the fifth and sixth falsified entries, Grael's name, the preliminary notice he filed and the date it was received. He tears the page out with care, folds it once, and holds it out to you. \"One copy with you. One stays in the lining of the case.\" He nods at the traveling case at his boots. \"If something goes wrong before I reach Millbrook, the case goes with whoever finds me.\"\n\nPell says nothing. She takes the folded page from Fendt and hands it to you — her fingers steady, her expression somewhere between resolved and the kind of still that comes after a decision you can't undo. Huginn shifts once on your shoulder, resettles, and is quiet. You leave the building the way you came, through the rear service lane, past the cloth-wrapped bundle still leaning against the iron-banded door, into the early light of the Edge District.\n\nThe road back to Millbrook takes most of the day — the pass descent, the valley floor opening beneath you in long afternoon gold, the north road into familiar smoke and the smell of the river running gray-green at its edges. You arrive as the cookhouse fires are being banked for the evening, Memory on your shoulder, Pell one step behind, the real readings folded into your coat and Fendt somewhere behind you on the road with a piece of starfruit and a direction.\n\n*You feel it settle into you — a new steadiness. (Level 10: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*",
-      "sceneSummary": "Fendt writes down everything, accepts the starfruit token, and agrees to walk to Millbrook and find Mara Wells. Silas and Pell depart the Edge District and reach Millbrook by evening.",
+      "narration": "Fendt's shop is small and carefully kept — the kind of order a man maintains when the rest of his situation is unraveling. While Pell checks the road and Huginn settles on the window ledge, you move through the back room with a practical eye: shelves of graduated vessels, a rack of glass rods, labeled jars of reagent powder. Most of it is Edge District filtration work, too specialized to carry. But the useful things present themselves readily, the way they do in a well-run space.\n\nA coil of fine brass wire on a hook by the door — the kind used to seal sample vessels, precise enough for binding work. A small wax-sealed tin of chalk dust, brilliant white, for marking surfaces in dark conditions. And on the lowest shelf, half-hidden behind a set of measuring cylinders, a folded square of filtering cloth: tight-woven, pre-Transition make by the feel of it, the kind that could strain contaminated water through three times and still hold. You tuck all three into the Traveler's Pack without ceremony.\n\nPell appears at the doorway as you straighten. She reads the pack's new weight in one glance and gives a small nod — she'd have looked in the same places. Huginn steps off the window ledge and returns to your shoulder, and the three of you walk out into the afternoon light. The road south through the valley will take what remains of the day. Fendt's door swings shut behind you.\n\nHalf a mile out, where the pine run opens onto the old trade track, you meet a woman coming the other way — a thin, road-worn figure with a pack nearly as loaded as yours, her coat tied at the waist with orange cord. She stops when she sees you and holds up one open hand: a traveler's greeting, nothing asked for. \"The ford at the lower crossing is passable,\" she says, without preamble, \"but the stones on the east side have been seeping something gray. Don't fill your skins there.\" She looks at Huginn once, unbothered, then steps aside to let you pass. No name offered. No price. The valley is not only teeth.",
+      "sceneSummary": "Silas scavenges Fendt's shop for useful supplies, then a passing traveler warns of gray seepage at the lower ford.",
       "choices": [
         {
-          "label": "Go straight to Mara's store — brief her on Fendt, the real readings, and the six-week window before he arrives.",
+          "label": "Thank her and ask if she's seen anything else unusual on the road — the water, the pass, any strangers moving through",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
-          "trivial": true,
           "intentTags": [
-            "help",
-            "lead"
+            "persuade",
+            "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "axes": {
-            "falsehood_truth": 0.6
-          }
+          "trivial": true
         },
         {
-          "label": "Find Dara Holt first — the vault-failure clock is running and she needs to know what the Edge District turned up before Fendt walks into town.",
+          "label": "Ask where she came from and whether she passed through the Edge District recently — she moves like someone who knows these roads",
           "attribute": "social",
           "subAttribute": "presence",
-          "difficulty": 0,
-          "trivial": true,
+          "difficulty": 15,
           "intentTags": [
-            "help",
-            "plan"
+            "persuade",
+            "negotiate"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "axes": {
-            "falsehood_truth": 0.4,
-            "chaos_order": 0.4
-          }
+          "trivial": false
         },
         {
-          "label": "Use Order-Sense on the folded page of Fendt's testimony — read what design it belongs to, and whether the chain of people it points toward is complete or has gaps.",
+          "label": "Nod thanks and move on — the road south is the priority, and the warning is already useful enough",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "travel"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Use The Attended End on the woman — she stopped without being asked and offered something freely; read what is ending for her",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 15,
-          "trivial": false,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "axes": {
-            "chaos_order": 0.6,
-            "falsehood_truth": 0.5
-          }
-        },
-        {
-          "label": "Before anything else — find somewhere quiet, sit down with Pell, and take stock of what the day in the Edge District has cost both of you.",
-          "attribute": "social",
-          "subAttribute": "rapport",
           "difficulty": 0,
-          "trivial": true,
           "intentTags": [
-            "calm",
-            "comfort"
+            "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "axes": {
-            "emotional_logical": -0.3
-          }
+          "abilityId": "the-attended-end",
+          "energyCost": 2,
+          "trivial": false
         }
       ],
       "characterDeltas": {
@@ -610,180 +617,124 @@
         "energy": 0,
         "inventoryAdd": [
           {
-            "name": "Fendt's Testimony (folded page)",
-            "kind": "quest",
-            "description": "A single page in Fendt's hand — dates, seventh-band designations, the nine-day gap, Grael's name, and the receipt date of the preliminary concern notice. One copy. The other is in the lining of Fendt's traveling case.",
-            "consumable": false,
+            "name": "Brass Wire Coil (fine)",
+            "kind": "tool",
+            "description": "A coil of fine brass wire from Fendt's shop — used for sealing sample vessels; precise enough for binding or rune-work.",
+            "consumable": false
+          },
+          {
+            "name": "Chalk Dust Tin (wax-sealed)",
+            "kind": "tool",
+            "description": "Brilliant white chalk dust in a sealed tin — for marking surfaces in poor light or wet conditions.",
+            "consumable": true,
             "effects": {}
+          },
+          {
+            "name": "Pre-Transition Filter Cloth",
+            "kind": "tool",
+            "description": "A tight-woven square of filtering cloth, pre-Transition manufacture — can strain contaminated water through multiple passes.",
+            "consumable": false
           }
-        ],
-        "inventoryRemove": [
-          "Dried Starfruit (sealed packet)"
-        ],
-        "xp": 0
-      },
-      "timeOps": {
-        "hoursPassed": 9,
-        "why": "Morning in the Edge District through a full day's walk back down the pass and valley road to Millbrook — arriving at dusk."
-      },
-      "moveTo": {
-        "location": "millbrook",
-        "why": "A day's walk down from the Edge District through the pass and valley floor, arriving by evening."
+        ]
       },
       "scene": {
-        "setting": "Millbrook — the main track, dusk, early spring. Cookhouse fires banked, the river smell on the air running faintly gray-green. The supply store's lamp is lit. The road from the north is quiet behind them.",
+        "setting": "The old trade track south from the Edge District, half a mile out from Fendt's shop — late afternoon, early spring, pine run opening onto open road. A road-worn traveler with orange-cord belt has just stopped them heading the other way.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "One step behind Silas on the road into the village — settled, carrying the weight of the day's decisions without showing it."
+            "state": "Standing at Silas's shoulder, pack settled, reading the stranger with calm attention."
           },
           {
             "name": "Huginn",
-            "state": "On Silas's shoulder, weight-settled and quiet."
+            "state": "On Silas's shoulder, weight-settled, watching the stranger without agitation."
+          },
+          {
+            "name": "Road Traveler (unnamed)",
+            "state": "Standing aside on the track, hand open, warning given, waiting to see if anything more is needed of her."
           }
         ],
         "objects": [
-          "Fendt's Testimony — folded page in Silas's coat",
+          "Traveler's Pack — now holding brass wire coil, chalk dust tin, and filter cloth in addition to existing kit",
           "Memory (spear) — road-lashed at Silas's back",
-          "Mara's store — lamp lit in the window"
+          "Fendt's Testimony — folded page in Silas's coat"
         ],
         "threads": [
-          "Fendt is on the road behind them — will reach Millbrook within a day or two",
-          "The folded testimony names Grael but does not yet name who receives it outside the Radiant hierarchy",
-          "The six-week window on Fendt's ending is running",
-          "The vault-failure clock (three to four weeks on the iron sleeve) is also running",
-          "Pell's father — held in reserve; the work may bring them there"
+          "The road traveler has offered a warning about gray seepage at the lower ford — she may know more about conditions on the road",
+          "Fendt is walking to Millbrook behind them — will reach Mara Wells within a day or two",
+          "The six-week window on Fendt's ending continues to run",
+          "The engineer — Leth's contact — still needs to be found"
         ]
       },
       "npcUpdates": [
         {
-          "op": "update",
-          "npcId": "fendt",
-          "name": "Fendt",
-          "role": "Filtration engineer, Edge District",
-          "note": "Accepted the starfruit, wrote three minutes of testimony without pausing, tore the page out carefully and handed it over. Keeping a second copy in the case lining. Now on the road to Millbrook.",
+          "op": "meet",
+          "npcId": "road-traveler",
+          "name": "Road Traveler",
+          "role": "Passing traveler, southbound on the Edge District trade track",
+          "description": "Thin, road-worn, pack heavily loaded, coat tied with orange cord — moves like someone who knows these roads and asks for nothing.",
+          "note": "Stopped unprompted to warn Silas and Pell about gray seepage at the lower ford's east bank. No name given, no price asked.",
           "learned": [
-            "Will carry the second copy in the traveling case lining as a failsafe",
-            "Has agreed to walk to Millbrook and present the starfruit to Mara Wells as the token of introduction",
-            "Named Grael explicitly in the written testimony with the receipt date of the preliminary concern notice"
+            "The lower ford's east-side stones are seeping something gray — unsafe for filling waterskins"
           ],
-          "skillsObserved": [
-            "disciplined disclosure under pressure — three minutes of testimony without being prompted to include specific details"
-          ],
-          "relationshipDelta": 1,
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "On the road from the Edge District to Millbrook — carrying the starfruit token and a duplicate copy of his testimony in the case lining. Expected to arrive within a day."
-        },
-        {
-          "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "role": "Village blacksmith, Millbrook — traveling companion",
-          "note": "Took Fendt's folded page from his hand and passed it to Silas without a word — a small, precise gesture of commitment. Walked the full day back to Millbrook without asking to stop.",
-          "learned": [
-            "Has physically handled the testimony — made the relay action herself without being asked"
-          ],
-          "statusNote": "Arrived with Silas in Millbrook at dusk — holding both threads (Fendt's six-week window and her father's unnamed situation) without letting either collapse."
-        }
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Fendt agreed to walk to Millbrook and present himself to Mara Wells — the dried starfruit is his token of introduction. He carries a duplicate of his written testimony in the lining of his traveling case.",
-          "subjectId": "fendt"
-        },
-        {
-          "op": "add",
-          "text": "Silas now holds Fendt's written testimony: dates, seventh-band designations, the nine-day gap in falsified entries, Grael named as the receiving authority, and the preliminary concern notice receipt date."
-        }
-      ],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "the-edge-district-ledger",
-          "note": "Fendt's cooperation secured — written testimony in hand, Fendt walking to Mara Wells in Millbrook. The paper exists and the authorship chain is closed. What remains: finding a receiving authority outside the Radiant hierarchy to lodge it formally before the six-week window expires."
+          "statusNote": "On the trade track heading north, warning given and stepping aside."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "fendt",
-          "label": "Fendt",
-          "kind": "person",
-          "entityId": "fendt",
-          "fact": "Agreed to walk to Millbrook with the dried starfruit as introduction to Mara Wells. Wrote and surrendered a full page of testimony — dates, band designations, nine-day gap, Grael named with the preliminary notice receipt date. Keeping a second copy in the traveling case lining as a failsafe.",
-          "links": [
-            "the-edge-district-ledger",
-            "overseer-grael",
-            "mara-wells",
-            "radiant-plateau-edge"
-          ]
-        },
-        {
-          "topic": "the-edge-district-ledger",
-          "label": "The Edge District Ledger",
+          "topic": "the-water-crisis",
+          "label": "The Water Crisis",
           "kind": "event",
-          "fact": "Written testimony secured from Fendt — names Grael, the seven falsified entries, and the nine-day gap. One copy with Silas; one in Fendt's case lining. Fendt on the road to Mara Wells. The remaining gap: a receiving authority outside the Radiant hierarchy to lodge the paper formally.",
+          "fact": "A passing traveler on the Edge District trade track reports gray seepage from the east-side stones at the lower ford crossing — the contamination is spreading into surface water beyond the main river channel.",
           "links": [
-            "fendt",
-            "overseer-grael",
-            "mara-wells",
             "millbrook",
-            "the-water-crisis"
+            "dara-holt",
+            "aldric"
           ]
         }
       ],
-      "deeds": [
+      "placeUpdates": [
         {
-          "description": "Persuaded Fendt to commit his testimony to paper and walk to Millbrook — moved the falsified ledger thread from evidence-held to evidence-carried.",
-          "tags": [
-            "justice",
-            "cooperation",
-            "valley-crisis"
-          ],
-          "weight": 2,
-          "communityId": "valley.millbrook"
+          "note": "The lower ford crossing, half a mile south of the Edge District on the trade track, is showing gray seepage from east-side stones as of World-day 17 — a passing traveler warned against filling waterskins there.",
+          "subPlace": {
+            "name": "Lower Ford Crossing",
+            "note": "East-side stones seeping gray as of World-day 17 — contamination spreading into the ford. Not safe for water collection.",
+            "visited": false
+          }
         }
       ],
-      "ledgerEvents": [
-        {
-          "what": "Fendt has left the Edge District and is walking to Millbrook — his testimony names Overseer Grael explicitly; when he arrives, the paper becomes a political event in both settlements.",
-          "tags": [
-            "water-crisis",
-            "radiant-plateau",
-            "millbrook",
-            "justice"
-          ],
-          "visibility": "witnessed",
-          "spectrumDeltas": {
-            "falsehood_truth": 0.05
-          },
-          "impactsLocal": true
-        }
-      ]
+      "timeOps": {
+        "hoursPassed": 0.5,
+        "why": "A short scavenge of Fendt's shop and a brief stop on the road — less than half an hour of movement"
+      }
     },
     "sceneState": {
-      "setting": "Millbrook — the main track, dusk, early spring. Cookhouse fires banked, the river smell on the air running faintly gray-green. The supply store's lamp is lit. The road from the north is quiet behind them.",
+      "setting": "The old trade track south from the Edge District, half a mile out from Fendt's shop — late afternoon, early spring, pine run opening onto open road. A road-worn traveler with orange-cord belt has just stopped them heading the other way.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "One step behind Silas on the road into the village — settled, carrying the weight of the day's decisions without showing"
+          "state": "Standing at Silas's shoulder, pack settled, reading the stranger with calm attention."
         },
         {
           "name": "Huginn",
-          "state": "On Silas's shoulder, weight-settled and quiet."
+          "state": "On Silas's shoulder, weight-settled, watching the stranger without agitation."
+        },
+        {
+          "name": "Road Traveler (unnamed)",
+          "state": "Standing aside on the track, hand open, warning given, waiting to see if anything more is needed of her."
         }
       ],
       "objects": [
-        "Fendt's Testimony — folded page in Silas's coat",
+        "Traveler's Pack — now holding brass wire coil, chalk dust tin, and filter cloth ",
         "Memory (spear) — road-lashed at Silas's back",
-        "Mara's store — lamp lit in the window"
+        "Fendt's Testimony — folded page in Silas's coat"
       ],
       "threads": [
-        "Fendt is on the road behind them — will reach Millbrook within a day or two",
-        "The folded testimony names Grael but does not yet name who receives it outside the Radiant hierarchy",
-        "The six-week window on Fendt's ending is running",
-        "The vault-failure clock (three to four weeks on the iron sleeve) is also running",
-        "Pell's father — held in reserve; the work may bring them there"
+        "The road traveler has offered a warning about gray seepage at the lower ford — she may know more about conditions on the road",
+        "Fendt is walking to Millbrook behind them — will reach Mara Wells within a day or two",
+        "The six-week window on Fendt's ending continues to run",
+        "The engineer — Leth's contact — still needs to be found"
       ]
     }
   },
@@ -1471,13 +1422,36 @@
         "locationId": "radiant_plateau_edge",
         "day": 3
       }
+    },
+    "road-traveler": {
+      "id": "road-traveler",
+      "name": "Road Traveler",
+      "role": "Passing traveler, southbound on the Edge District trade track",
+      "description": "Thin, road-worn, pack heavily loaded, coat tied with orange cord — moves like someone who knows these roads and asks for nothing.",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 3
+      },
+      "relationship": 0,
+      "history": [
+        "[d3] Stopped unprompted to warn Silas and Pell about gray seepage at the lower ford's east bank. No name given, no price asked."
+      ],
+      "knownFacts": [
+        "The lower ford's east-side stones are seeping something gray — unsafe for filling waterskins"
+      ],
+      "skillsObserved": [],
+      "status": "active",
+      "statusNote": "On the trade track heading north, warning given and stepping aside.",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 3
+      }
     }
   },
   "placeMemory": {
     "millbrook": {
       "visits": 2,
       "notes": [
-        "[d2] Order-Sense confirms the wash-room cradle-recess was an operator's station — the head of the buried structure's channel system. The instrument held here was cylindrical, iron-sheathed, ~5 ft tall, til",
         "[d2] Two river-pebble markers placed on the hillside settling-seam — south and north ends of the failing vault section, twenty-five feet apart, forty feet northeast of the wash-room entrance. Directly abov",
         "[d2] The forge interior was the site of the full early-morning between Silas and Pell on World-day 15 — the relationship carries that weight now alongside the spear-work and the repair.",
         "[d2] The forge morning between Silas and Pell concluded here on World-day 15 — Pell's unguarded finish and her open-faced aftermath are part of what this place now holds.",
@@ -1488,7 +1462,8 @@
         "[d2] The Attended End read on World-day 16: intake sleeve has 3–4 weeks before running open. The structure behind it is not ending — it has more work to do.",
         "[d2] Valve Failure Timeline note annotated with 'S-gate confirmed' at Fen's intake — the three-gate sequence is now fully mapped in writing.",
         "[d2] Silas and Pell crossed the pass on World-day 16 mid-morning — the valley is now behind them. The far side descends into pine run, damp from snowmelt.",
-        "[d2] The overhang camp on the far side of the pass holds this night — Pell unguarded, the last of the coals burning low, Huginn attending from the stone lip."
+        "[d2] The overhang camp on the far side of the pass holds this night — Pell unguarded, the last of the coals burning low, Huginn attending from the stone lip.",
+        "[d3] The lower ford crossing, half a mile south of the Edge District on the trade track, is showing gray seepage from east-side stones as of World-day 17 — a passing traveler warned against filling watersk"
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -2010,7 +1985,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d2] Pell's two-winter model: first unmanaged melt after device removal begins the structural slip; a second winter carries the slip to the channel. Contamination onset delay is explained by this sequence ",
           "[d2] Fen's intake physical inspection: sleeve blank failure caused axial torque in the iron sleeve, riding the cover lip up. Pell identified the failure mode immediately from cover geometry. East furlong c",
           "[d2] Timeline annotated: unknown dog first appeared upper meadow path three weeks ago — same interval as Fen's intake sleeve failure and boar displacement north. Three separate observations share a three-w",
           "[d2] Pell confirms the wash-room site and east-channel valve failures share identical construction — same depth, same dressed stone, same finished margins. The structure was built to act on the water. The ",
@@ -2033,7 +2007,8 @@
           "[d2] Fen's intake: iron sleeve has three to four weeks before running open. The buried structure driving the valve is not ending — it has more work to do. The failure is a symptom, not the event.",
           "[d2] Fen's intake CCW torque axis confirmed identical to east furlong — both valves are running the same mechanism in sequence. The structure behind the intake valve is not ending; it is operating as desig",
           "[d2] The Attended End confirms the vault head is ending — slow, structural, load-surrendering — on the same northeast bearing as the three-gate sequence, approximately a mile and a half up the hillside. A ",
-          "[d2] Palework on the dying spruce stand north of the pass confirms the fungal die-off is natural and isolated — the buried structure's contamination has not begun seeping into the broader root-zone above t"
+          "[d2] Palework on the dying spruce stand north of the pass confirms the fungal die-off is natural and isolated — the buried structure's contamination has not begun seeping into the broader root-zone above t",
+          "[d3] A passing traveler on the Edge District trade track reports gray seepage from the east-side stones at the lower ford crossing — the contamination is spreading into surface water beyond the main river "
         ],
         "links": [
           "aldric",
@@ -2047,7 +2022,7 @@
         ],
         "aliases": [],
         "createdDay": 2,
-        "updatedDay": 2,
+        "updatedDay": 3,
         "entityId": "the-water-crisis"
       },
       "dara-holt-the-ditch-mother": {
@@ -2548,17 +2523,17 @@
     }
   },
   "tendencies": {
-    "strategic": 31.77653706976012,
-    "cerebral": 28.251917999551225,
-    "social": 29.433236307933203,
-    "generous": 6.430207196731702,
-    "cautious": 23.70262638860255,
-    "physical": 1.3972078674493968,
-    "risky": 3.934256304329812,
-    "ruthless": 1.72999509027085,
-    "carousing": 1.2148064753083203,
-    "amorous": 3.3311736809741075,
-    "patient": 1.0368275395388256
+    "strategic": 32.982123643016116,
+    "cerebral": 27.545620049562444,
+    "social": 28.69740540023487,
+    "generous": 6.26945201681341,
+    "cautious": 23.110060728887486,
+    "physical": 1.3622776707631619,
+    "risky": 3.8358998967215667,
+    "ruthless": 1.6867452130140788,
+    "carousing": 1.1844363134256122,
+    "amorous": 3.2478943389497545,
+    "patient": 1.010906851050355
   },
   "aptitudes": [
     "strategist",
@@ -2570,7 +2545,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 352,
+  "actionCount": 353,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2712,8 +2687,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784256809431,
-  "rev": 503,
+  "updatedAt": 1784257104460,
+  "rev": 504,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3202,7 +3177,7 @@
     ]
   },
   "companionBonds": {
-    "marrow": 9.75
+    "marrow": 10
   },
   "customAbilities": {
     "the-attended-end": {
@@ -3277,7 +3252,7 @@
   "syncedAt": 1784184597860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 167
+    "valley": 168
   },
   "foreclosed": [
     "rootkin",

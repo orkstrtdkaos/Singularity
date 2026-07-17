@@ -73,7 +73,7 @@
     "concrete_abstract": -0.05328384007186973,
     "death_life": -0.18344632172699882,
     "emotional_logical": 0.03083749999999999,
-    "falsehood_truth": 0.12199025000000002,
+    "falsehood_truth": 0.13589073750000003,
     "demonic_angelic": 0.03,
     "value": 0.0435
   },
@@ -611,118 +611,94 @@
         "player": "Use Order-Sense on the room itself — read what design the archive room is part of and how the entry was made",
         "summary": "Order-Sense traces the archive room's design and locates the shared rear corridor — the entry route used to add the symbol.",
         "narration": "You turn from the diagram and let Order-Sense widen — a quiet cast, two energy drawn through the thin lattice with the deliberate economy of someone who knows the substrate is running at half-depth. No surge; just attention opened a little further than ordinary looking.\n\nThe archive room resolves. Low stone building, yes — but Order-Sense shows you the design it belongs to: a chain of three such rooms sharing a roof-line and a common rear access corridor. Leth's is the middle one. The door to that corridor is not the propped-front door — it is a second door, flush with the shelving on the east wall, visible now because Order-Sense shows you the seam where it sits. The latch side is on the right. It has been used recently: the dust on the floor in front of it is disturbed in a short arc, the kind a door's base sweeps through when it opens inward.\n\nThat is how the entry was made. Not through the front, where Leth would have heard it. Through the shared corridor that connects all three rooms — a route any tenant in the row would know, and any insider."
+      },
+      {
+        "player": "Ask Leth who else occupies the other rooms in this row — and whether any of them would have known Calvar was leaving something",
+        "summary": "Leth names the other two occupants — an empty survey office to the west, and Vash the lens-grinder to the east, who was working the morning Calvar came.",
+        "narration": "You turn toward the east-wall seam — the door still flush with the shelving, dust arc undisturbed since you named it — and nod toward it before looking back at Leth.\n\n\"The other rooms in this row. Who occupies them?\"\n\nLeth sets both hands flat on the slanted desk, not in tension but in the manner of someone organizing what they know before they give it. \"The west room is a measuring office — survey instruments, calibration weights. It hasn't been used in three weeks; the surveyor team was pulled to the upper array for the season.\" She pauses. \"Empty, is my understanding. The east room belongs to a lens-grinder named Vash. Does piecework for the optics weavers — in before first light, gone by midday. We share the corridor, not conversation.\"\n\nShe looks at the east-wall door herself now, with the expression of someone revising a long-held assumption. \"I told no one Calvar was coming. He told me in the corridor, on his way out, while I was coming back from the records office. Vash was still working at that hour — I heard the wheel. If sound carries, it carries both ways.\" A breath. \"I didn't think of Vash as someone who would — \" She stops. Recalibrates. \"I haven't thought of Vash at all. That may have been the point.\"\n\nPell shifts in the doorframe. Her gaze moves from Leth to the east wall and back, measuring something."
       }
     ],
     "lastTurn": {
-      "narration": "You turn from the diagram and let Order-Sense widen — a quiet cast, two energy drawn through the thin lattice with the deliberate economy of someone who knows the substrate is running at half-depth. No surge; just attention opened a little further than ordinary looking.\n\nThe archive room resolves. Low stone building, yes — but Order-Sense shows you the design it belongs to: a chain of three such rooms sharing a roof-line and a common rear access corridor. Leth's is the middle one. The door to that corridor is not the propped-front door — it is a second door, flush with the shelving on the east wall, visible now because Order-Sense shows you the seam where it sits. The latch side is on the right. It has been used recently: the dust on the floor in front of it is disturbed in a short arc, the kind a door's base sweeps through when it opens inward.\n\nThat is how the entry was made. Not through the front, where Leth would have heard it. Through the shared corridor that connects all three rooms — a route any tenant in the row would know, and any insider.",
-      "sceneSummary": "Order-Sense traces the archive room's design and locates the shared rear corridor — the entry route used to add the symbol.",
+      "narration": "You turn toward the east-wall seam — the door still flush with the shelving, dust arc undisturbed since you named it — and nod toward it before looking back at Leth.\n\n\"The other rooms in this row. Who occupies them?\"\n\nLeth sets both hands flat on the slanted desk, not in tension but in the manner of someone organizing what they know before they give it. \"The west room is a measuring office — survey instruments, calibration weights. It hasn't been used in three weeks; the surveyor team was pulled to the upper array for the season.\" She pauses. \"Empty, is my understanding. The east room belongs to a lens-grinder named Vash. Does piecework for the optics weavers — in before first light, gone by midday. We share the corridor, not conversation.\"\n\nShe looks at the east-wall door herself now, with the expression of someone revising a long-held assumption. \"I told no one Calvar was coming. He told me in the corridor, on his way out, while I was coming back from the records office. Vash was still working at that hour — I heard the wheel. If sound carries, it carries both ways.\" A breath. \"I didn't think of Vash as someone who would — \" She stops. Recalibrates. \"I haven't thought of Vash at all. That may have been the point.\"\n\nPell shifts in the doorframe. Her gaze moves from Leth to the east wall and back, measuring something.",
+      "sceneSummary": "Leth names the other two occupants — an empty survey office to the west, and Vash the lens-grinder to the east, who was working the morning Calvar came.",
       "choices": [
         {
-          "label": "Examine the east-wall door now — check what's on the other side of the corridor and whether it's still passable",
+          "label": "Ask Leth whether Vash knows Calvar — or knows the filtration array work at all",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Step to the east-wall door and open the corridor — see whether the east room shows light or signs of recent use",
           "attribute": "practical",
           "subAttribute": "wits",
-          "axes": {
-            "chaos_order": 0.3
-          },
           "difficulty": 0,
           "intentTags": [
             "scout"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Ask Leth who else occupies the other rooms in this row — and whether any of them would have known Calvar was leaving something",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.4
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Go to Calvar tonight — he needs to know someone added to his diagram before you bring him anything else",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "falsehood_truth": 0.5
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "travel"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Read the four characters themselves through Order-Sense — what design are they part of, what larger thing do they belong to",
+          "label": "Use Order-Sense on the shared corridor itself — read the design of the whole row and what access each room actually has",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "concrete_abstract": 0.4
-          },
-          "difficulty": 15,
+          "difficulty": 0,
+          "abilityId": "order_sense",
+          "energyCost": 2,
           "intentTags": [
             "study"
           ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
+          "trivial": true
+        },
+        {
+          "label": "Tell Leth plainly what you think happened — Vash heard Calvar's corridor conversation and added the symbol — and ask if she can get you into the east room tonight",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 15,
+          "intentTags": [
+            "persuade",
+            "plan"
+          ],
           "trivial": false
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -2
-      },
-      "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "find-the-engineer",
-          "note": "Order-Sense traces the entry route — a shared rear corridor through the east-wall door, disturbed dust confirming recent use. The intruder knew the building's design."
-        }
-      ],
       "scene": {
-        "setting": "Leth's archive room in the Edge District — low stone building, middle of a three-room row sharing a rear corridor. Lamp steady on the slanted desk, full dark outside. The east-wall door, flush with shelving, now visible as the entry point — disturbed dust arc on the floor in front of it.",
+        "setting": "Leth's archive room in the Edge District — low stone building, middle of a three-room row sharing a rear corridor. Lamp steady on the slanted desk, full dark outside. East-wall door, flush with shelving, latch side right, disturbed dust arc visible on the floor.",
         "npcsPresent": [
           {
             "name": "Leth",
-            "state": "Standing at the desk, watching Silas — reading the quality of his attention on the room"
+            "state": "Hands flat on the slanted desk — revising her assumption about Vash; looking at the east-wall door now"
           },
           {
             "name": "Pell",
-            "state": "Still in the door frame, gaze shifting from Silas to the east-wall seam"
+            "state": "Shifted in the doorframe — measuring the east wall and Leth in the same glance"
           },
           {
             "name": "Huginn",
-            "state": "On the sign board outside, weight settled — attending"
+            "state": "On the sign board outside, weight settled, attending"
           }
         ],
         "objects": [
           "Slanted writing desk",
           "Sorel's letter — filed at upper-right corner of the desk",
-          "Opened document roll — diagram in Calvar's hand, two notation columns, lower-right corner marked",
+          "Opened document roll — diagram in Calvar's hand, four characters at lower-right in fresher ink",
           "Dark waxed cord — untied, set aside",
           "Floor-to-ceiling shelving, every bundle tied and labeled",
-          "East-wall door — flush with shelving, latch side right, disturbed dust arc on floor in front",
+          "East-wall door — flush with shelving, latch side right, disturbed dust arc on floor",
           "Round river rock propping the front door",
           "Memory (spear) — leaning against the wall beside Silas",
           "Fendt's Testimony — folded page in Silas's coat"
         ],
         "threads": [
-          "East-wall door connects to a shared rear corridor between three rooms — the entry route used to add the symbol",
+          "West room: empty survey office, unused three weeks — corridor access confirmed",
+          "East room: Vash the lens-grinder — in before first light, gone by midday, heard the wheel on the morning Calvar came",
+          "Vash may have overheard Calvar naming the seventh band or the lower filtration ledge in the corridor",
           "The four characters at the lower-right corner of the diagram remain unread in meaning",
-          "Calvar does not know his diagram has been marked",
-          "Who else occupies the other rooms in this row is not yet known"
+          "Calvar does not know his diagram has been marked"
         ]
       },
       "npcUpdates": [
@@ -730,67 +706,79 @@
           "op": "update",
           "npcId": "leth",
           "name": "Leth",
-          "note": "Watched Silas read the room with Order-Sense — has not seen the east-wall door named as entry point yet; will have to account for that.",
-          "statusNote": "At her archive room in the Edge District — the entry route through the shared rear corridor is about to be named to her."
-        }
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "The intruder entered Leth's archive room through a shared rear corridor connecting three rooms in the same row — an east-wall door, flush with shelving, with disturbed dust confirming recent use. Access required knowledge of the building's interior design.",
-          "subjectId": "leth"
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "Leth's archive room is the middle of a three-room row sharing a common rear access corridor. The east-wall door (flush with shelving, latch on right) was the intruder's entry point — disturbed dust arc on the floor confirms recent use.",
-          "subPlace": {
-            "name": "Leth's Archive Room — Rear Corridor",
-            "note": "Shared rear corridor connecting three rooms in the same row; used by the unknown intruder to access Leth's room and mark Calvar's diagram.",
-            "visited": false
-          }
+          "note": "Named the other two room occupants — empty survey office to the west, Vash the lens-grinder to the east. Acknowledged she told no one Calvar was coming but Vash was on the wheel that morning and sound carries both ways. Recognized she has not thought of Vash as a factor — said plainly that may have been the point.",
+          "learned": [
+            "West room: survey instruments and calibration weights — empty, surveyor team pulled to the upper array three weeks ago",
+            "East room: Vash, a lens-grinder doing piecework for the optics weavers — in before first light, gone by midday",
+            "Vash was on the grinding wheel the morning Calvar came and spoke in the corridor — sound carries both ways",
+            "Leth told no one else Calvar was coming; the corridor conversation was the only exposure"
+          ],
+          "skillsObserved": [
+            "revising a held assumption without defensiveness when presented with new structure"
+          ],
+          "statusNote": "At her archive room in the Edge District — has now named Vash as the most plausible vector for the corridor overhear"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "leth-archive-complaint",
-          "label": "Leth's Archive Complaint",
-          "kind": "event",
-          "entityId": "leth",
-          "fact": "Entry was made through a shared rear corridor — an east-wall door flush with the shelving in Leth's room, connecting three rooms in the same row. The intruder knew the building's interior layout: this was not a stranger guessing.",
+          "topic": "vash-the-lens-grinder",
+          "label": "Vash — Lens-Grinder, East Room",
+          "kind": "person",
+          "fact": "Occupies the east room of the same three-room row as Leth's archive. Does piecework for the optics weavers — in before first light, gone by midday. Was on the grinding wheel the morning Calvar came and spoke in the corridor. Leth has never thought of Vash as a factor — which may have been the point.",
           "links": [
-            "find-the-engineer",
+            "leth-archive-complaint",
             "calvar",
             "the-document-roll-leth-s-desk",
             "radiant-plateau-edge"
           ]
         }
       ],
+      "generateRequest": [
+        {
+          "type": "npc",
+          "hint": "Vash — a lens-grinder in the Edge District, east room of the same row as Leth's archive, does piecework for the optics weavers; quiet, early hours, probably knows more about the array's optical layer than anyone would expect from a pieceworker",
+          "why": "Leth has just named Vash as the person who was on the grinding wheel the morning Calvar came — potentially the overhear vector for the fresher notation on the diagram; will need a stable identity if Silas tries to find or confront them"
+        }
+      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief, focused use of Order-Sense — a few minutes of quiet attention"
-      }
+        "why": "a short exchange in the archive room"
+      },
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "find-the-engineer",
+          "note": "Vash the lens-grinder named as occupant of the east room — was on the wheel the morning Calvar came and spoke in the corridor. Most plausible vector for who knew to mark the diagram."
+        }
+      ],
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Leth's archive room in the Edge District — low stone building, middle of a three-room row sharing a rear corridor. Lamp steady on the slanted desk, full dark outside. The east-wall door, flush with shelving, now visible as the entry point — disturbed dust arc on the floor in front of it.",
+      "setting": "Leth's archive room in the Edge District — low stone building, middle of a three-room row sharing a rear corridor. Lamp steady on the slanted desk, full dark outside. East-wall door, flush with shelving, latch side right, disturbed dust arc visible on the floor.",
       "npcsPresent": [
         {
           "name": "Leth",
-          "state": "Standing at the desk, watching Silas — reading the quality of his attention on the room"
+          "state": "Hands flat on the slanted desk — revising her assumption about Vash; looking at the east-wall door now"
         },
         {
           "name": "Pell",
-          "state": "Still in the door frame, gaze shifting from Silas to the east-wall seam"
+          "state": "Shifted in the doorframe — measuring the east wall and Leth in the same glance"
         },
         {
           "name": "Huginn",
-          "state": "On the sign board outside, weight settled — attending"
+          "state": "On the sign board outside, weight settled, attending"
         }
       ],
       "objects": [
         "Slanted writing desk",
         "Sorel's letter — filed at upper-right corner of the desk",
-        "Opened document roll — diagram in Calvar's hand, two notation columns, lower-rig",
+        "Opened document roll — diagram in Calvar's hand, four characters at lower-right ",
         "Dark waxed cord — untied, set aside",
         "Floor-to-ceiling shelving, every bundle tied and labeled",
         "East-wall door — flush with shelving, latch side right, disturbed dust arc on fl",
@@ -799,10 +787,11 @@
         "Fendt's Testimony — folded page in Silas's coat"
       ],
       "threads": [
-        "East-wall door connects to a shared rear corridor between three rooms — the entry route used to add the symbol",
+        "West room: empty survey office, unused three weeks — corridor access confirmed",
+        "East room: Vash the lens-grinder — in before first light, gone by midday, heard the wheel on the morning Calvar came",
+        "Vash may have overheard Calvar naming the seventh band or the lower filtration ledge in the corridor",
         "The four characters at the lower-right corner of the diagram remain unread in meaning",
-        "Calvar does not know his diagram has been marked",
-        "Who else occupies the other rooms in this row is not yet known"
+        "Calvar does not know his diagram has been marked"
       ]
     }
   },
@@ -857,7 +846,8 @@
         "Leth is covering her ground — archive breach first, then the engineer's name. She has a document roll on her desk and is sequencing deliberately.",
         "Leth named Calvar — above the cooperage on the east lane. She opened the document roll: a diagram in his own hand, left three days ago. He knows something is changing and came to Leth first. His location is confirmed; the question is whether he'll go.",
         "Confirmed: the diagram was added to during the night after Calvar left it with Leth — someone entered the archive room without permission and marked the proof. Calvar does not know.",
-        "Order-Sense traces the entry route — a shared rear corridor through the east-wall door, disturbed dust confirming recent use. The intruder knew the building's design."
+        "Order-Sense traces the entry route — a shared rear corridor through the east-wall door, disturbed dust confirming recent use. The intruder knew the building's design.",
+        "Vash the lens-grinder named as occupant of the east room — was on the wheel the morning Calvar came and spoke in the corridor. Most plausible vector for who knew to mark the diagram."
       ],
       "aliases": [],
       "startedAt": "2026-07-16T19:11:11.950Z"
@@ -1538,28 +1528,29 @@
         "[d3] Completed her sequence — named Calvar above the cooperage on the east lane. Opened the document roll: a diagram in Calvar's own hand, left with her three days ago. Stated plainly t",
         "[d3] Watched Silas use Palework on the fresher ink — did not interrupt or ask; is waiting",
         "[d3] Confirmed no authorized access to the diagram since Calvar left it — but acknowledges someone could have entered during the night; the archivist's room is not sealed. Filing the fa",
-        "[d3] Watched Silas read the room with Order-Sense — has not seen the east-wall door named as entry point yet; will have to account for that."
+        "[d3] Watched Silas read the room with Order-Sense — has not seen the east-wall door named as entry point yet; will have to account for that.",
+        "[d3] Named the other two room occupants — empty survey office to the west, Vash the lens-grinder to the east. Acknowledged she told no one Calvar was coming but Vash was on the wheel th"
       ],
       "knownFacts": [
-        "The taker knew the working layout of the secondary stack, third tier, east corner — not public knowledge",
-        "She will not give the name until both things are covered",
-        "The seventh-band monitoring specification and calibration tolerances Calvar designed are now in someone else's hands — his authorship of the design cannot be pr",
         "Calvar came to Leth three days ago and left a diagram — a diagram in his own distinctive hand",
         "Calvar has not left the Edge District since the Transition — fifteen years, watching the array run on his own specifications",
         "The diagram was left with specific instructions: keep it off the shelves, under the cord, until someone came asking about the seventh band or the lower filtrati",
         "Calvar brought it himself before the first light-guide shift, morning, three days ago",
-        "Leth did not add the fresher notation — she recognizes someone entered during one of the two nights since"
+        "Leth did not add the fresher notation — she recognizes someone entered during one of the two nights since",
+        "West room: survey instruments and calibration weights — empty, surveyor team pulled to the upper array three weeks ago",
+        "East room: Vash, a lens-grinder doing piecework for the optics weavers — in before first light, gone by midday",
+        "Vash was on the grinding wheel the morning Calvar came and spoke in the corridor — sound carries both ways"
       ],
       "skillsObserved": [
-        "sequencing disclosure deliberately under unknown visitor con",
         "reading a listener's quality — 'good' at the held silence",
         "sequencing disclosure to maximum clarity — withheld the name",
         "reading a subject's decision-state from behavioral evidence ",
         "tracking a visitor's physical attention and inferring what t",
-        "accurate self-reporting without defensiveness under implicat"
+        "accurate self-reporting without defensiveness under implicat",
+        "revising a held assumption without defensiveness when presen"
       ],
       "status": "active",
-      "statusNote": "At her archive room in the Edge District — the entry route through the shared rear corridor is about to be named to her.",
+      "statusNote": "At her archive room in the Edge District — has now named Vash as the most plausible vector for the corridor overhear",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 3
@@ -2724,21 +2715,38 @@
         "aliases": [],
         "createdDay": 3,
         "updatedDay": 3
+      },
+      "vash-the-lens-grinder": {
+        "id": "vash-the-lens-grinder",
+        "label": "Vash — Lens-Grinder, East Room",
+        "kind": "person",
+        "facts": [
+          "[d3] Occupies the east room of the same three-room row as Leth's archive. Does piecework for the optics weavers — in before first light, gone by midday. Was on the grinding wheel the morning Calvar came an"
+        ],
+        "links": [
+          "leth-archive-complaint",
+          "calvar",
+          "the-document-roll-leth-s-desk",
+          "radiant-plateau-edge"
+        ],
+        "aliases": [],
+        "createdDay": 3,
+        "updatedDay": 3
       }
     }
   },
   "tendencies": {
-    "strategic": 25.60499954282285,
-    "cerebral": 26.91429634626238,
-    "social": 22.278645853927824,
-    "generous": 4.867161307190382,
-    "cautious": 20.795337574251473,
-    "physical": 1.0575765076447565,
-    "risky": 2.9779227124651024,
-    "ruthless": 1.3094702717006308,
-    "carousing": 0.9195129941303023,
-    "amorous": 2.521436580738633,
-    "patient": 1.6884848230220975
+    "strategic": 24.964874554252276,
+    "cerebral": 27.241438937605817,
+    "social": 21.72167970757963,
+    "generous": 4.745482274510622,
+    "cautious": 20.275454134895185,
+    "physical": 1.0311370949536376,
+    "risky": 2.9034746446534747,
+    "ruthless": 1.276733514908115,
+    "carousing": 0.8965251692770447,
+    "amorous": 2.458400666220167,
+    "patient": 1.6462727024465449
   },
   "aptitudes": [
     "strategist",
@@ -2749,7 +2757,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 363,
+  "actionCount": 364,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2899,8 +2907,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784291715917,
-  "rev": 522,
+  "updatedAt": 1784291868084,
+  "rev": 523,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3545,7 +3553,7 @@
   "syncedAt": 1784258397417,
   "teachers": {},
   "regionsKnown": {
-    "valley": 178
+    "valley": 179
   },
   "foreclosed": [
     "rootkin",
@@ -3582,10 +3590,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-17T12:35:15.912Z",
-      "lastAt": "2026-07-17T12:35:15.912Z",
+      "lastAt": "2026-07-17T12:37:48.077Z",
       "startDay": 17,
       "endDay": 17,
-      "beats": 1
+      "beats": 2
     }
   ],
   "company": [

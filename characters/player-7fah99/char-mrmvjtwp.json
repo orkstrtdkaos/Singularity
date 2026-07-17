@@ -8,7 +8,7 @@
   "whyHere": "You were sent, or you were seeded, or you simply wanted to see something finish inside a single lifetime.",
   "background": "warden",
   "level": 1,
-  "xp": 23,
+  "xp": 28,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -41,7 +41,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 68,
+  "energy": 60,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -124,46 +124,50 @@
         "player": "Use Lifesense — reach down through the floor toward whatever is below and feel whether the Root-That-Remembers is aware of this conversation right now.",
         "summary": "Lifesense confirms the Root-That-Remembers is aware — distributed, slow, attending.",
         "narration": "You press two fingers a little harder into the moss and let Lifesense go downward — not out across the hall, but *down*, the way you'd lower a hand into dark water to feel for a current. The familiar warmth of the ability moves through you, and you send it into the floor.\n\nWhat comes back is not nothing.\n\nIt is not the crisp warmth of a body, not the close heat of the sapling above you. It is something slower — distributed through the root-floor the way heat moves through stone left all day in sun. Settled. Occupying. And it is not simply *there*. There is an orientation to it, a toward-ness that you've never felt in a living thing before: diffuse attention, like the moment before a very old tree decides to drop a branch. The Root-That-Remembers is not asleep. It registers this conversation the way a deep lake registers a stone dropped at its surface — not ignoring it, not answering it, simply *aware* that something has touched the air above.\n\nYou lift your fingers from the moss slowly. Maren is still watching. Branch has gone still at the planter's edge, all five buds tipped downward, as if it too felt something move through the floor."
+      },
+      {
+        "player": "Say nothing to Maren yet — sit with what you felt and reach through the Grove to Branch quietly, to see if the companion felt the same attention moving through the floor.",
+        "summary": "Aelyn reaches through the Grove to Branch — the companion felt the Root-That-Remembers attending too, its buds turned down in deliberate stillness.",
+        "narration": "You don't answer Maren's question yet. You let it rest there between you, unanswered but not refused, and turn your attention inward — or rather, downward, and sideways, toward Branch.\n\nThe Grove opens quietly, the way it does when you're not asking for much. Not a request this time. More like pressing your hand flat against a door to feel whether there's warmth on the other side. You reach toward Branch through the green — through the moss underfoot and the roots threaded beneath it — and what comes back is immediate and small: the companion's awareness, close and present, like a hand already extended in your direction. It felt it too. Not the same way you did — Branch doesn't have Lifesense, doesn't read vigor and warmth the way you do — but it is standing at the planter's edge with all five buds tipped down toward the floor, and through the Grove you sense something that in a person you'd call stillness-on-purpose. The kind that means you are listening very hard.\n\nBranch doesn't look up. But one bud opens, just partway, facing you.\n\nMaren hasn't moved. She is patient in the way the hall itself is patient — not waiting for you to hurry, just present, her question still in the air. The sapling beside Branch keeps its branch raised. The light through the oval gaps in the bark ceiling has shifted a little, morning pulling further in, and somewhere at the far end of the hall the two other Rootkin have gone quiet too, though they haven't turned."
       }
     ],
     "lastTurn": {
-      "narration": "You press two fingers a little harder into the moss and let Lifesense go downward — not out across the hall, but *down*, the way you'd lower a hand into dark water to feel for a current. The familiar warmth of the ability moves through you, and you send it into the floor.\n\nWhat comes back is not nothing.\n\nIt is not the crisp warmth of a body, not the close heat of the sapling above you. It is something slower — distributed through the root-floor the way heat moves through stone left all day in sun. Settled. Occupying. And it is not simply *there*. There is an orientation to it, a toward-ness that you've never felt in a living thing before: diffuse attention, like the moment before a very old tree decides to drop a branch. The Root-That-Remembers is not asleep. It registers this conversation the way a deep lake registers a stone dropped at its surface — not ignoring it, not answering it, simply *aware* that something has touched the air above.\n\nYou lift your fingers from the moss slowly. Maren is still watching. Branch has gone still at the planter's edge, all five buds tipped downward, as if it too felt something move through the floor.",
-      "sceneSummary": "Lifesense confirms the Root-That-Remembers is aware — distributed, slow, attending.",
+      "narration": "You don't answer Maren's question yet. You let it rest there between you, unanswered but not refused, and turn your attention inward — or rather, downward, and sideways, toward Branch.\n\nThe Grove opens quietly, the way it does when you're not asking for much. Not a request this time. More like pressing your hand flat against a door to feel whether there's warmth on the other side. You reach toward Branch through the green — through the moss underfoot and the roots threaded beneath it — and what comes back is immediate and small: the companion's awareness, close and present, like a hand already extended in your direction. It felt it too. Not the same way you did — Branch doesn't have Lifesense, doesn't read vigor and warmth the way you do — but it is standing at the planter's edge with all five buds tipped down toward the floor, and through the Grove you sense something that in a person you'd call stillness-on-purpose. The kind that means you are listening very hard.\n\nBranch doesn't look up. But one bud opens, just partway, facing you.\n\nMaren hasn't moved. She is patient in the way the hall itself is patient — not waiting for you to hurry, just present, her question still in the air. The sapling beside Branch keeps its branch raised. The light through the oval gaps in the bark ceiling has shifted a little, morning pulling further in, and somewhere at the far end of the hall the two other Rootkin have gone quiet too, though they haven't turned.",
+      "sceneSummary": "Aelyn reaches through the Grove to Branch — the companion felt the Root-That-Remembers attending too, its buds turned down in deliberate stillness.",
       "choices": [
         {
-          "label": "Tell Maren plainly what you just felt — not what the sapling said, but what Lifesense told you just now: it is awake, and it is attending to this conversation.",
+          "label": "Tell Maren what you felt — not what the sapling said, but what Lifesense found: that the Root-That-Remembers is awake and attending this conversation right now.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "help"
+            "persuade"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Ask Maren whether anyone has ever felt it respond — not in words, but in the way a room changes when something in it turns its attention on you.",
+          "label": "Ask Maren the thing you've been circling: whether anyone has gone down to where the oldest roots run — and whether visitors are permitted to.",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "negotiate"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Ask Maren to take you to the place closest to where the deepest roots run — the place in the hall that is most directly above it.",
+          "label": "Ask Maren directly what she knows of Branch — she recognized it when she saw it, and she hasn't said what she sees.",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "insight",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "travel",
             "study"
           ],
           "abilityId": null,
@@ -171,40 +175,36 @@
           "trivial": true
         },
         {
-          "label": "Say nothing to Maren yet — sit with what you felt and reach through the Grove to Branch quietly, to see if the companion felt the same attention moving through the floor.",
+          "label": "Say nothing more to Maren yet — let Branch speak if it wants to. It felt what you felt; it may have something to say that you don't.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "study",
             "careful"
           ],
-          "abilityId": "the_speaking_grove",
-          "energyCost": 4,
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
         }
       ],
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -3,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
+        "energy": -4
       },
       "ledgerEvents": [],
       "questUpdates": [],
       "scene": {
-        "setting": "Interior of the living-wood entrance hall — thirty-foot arched ceiling of breathing bark, moss underfoot, oval light-gaps filling with early spring morning light. Aelyn is crouched near the planter's edge, fingers just lifted from the moss. Maren stands one step away, watching. Branch has gone still at the planter's edge, all five buds tipped downward.",
+        "setting": "Interior of the living-wood entrance hall — thirty-foot arched ceiling of breathing bark, moss underfoot, oval light-gaps filling with early spring morning light, now pulling further in as the morning advances. Aelyn is crouched near the planter's edge, two fingers pressed into the moss. Maren stands one step away, her question still unanswered.",
         "npcsPresent": [
           {
             "name": "Maren",
-            "state": "Standing close, eyes on Aelyn — waiting, expression careful but open, the question 'why do you ask?' still hanging between them."
+            "state": "Standing close, patient, her question 'why do you ask?' still in the air — watching Aelyn with careful attention, not pressing."
           },
           {
             "name": "Branch",
-            "state": "Gone still at the planter's edge, all five buds tipped downward as if sensing the same movement through the floor."
+            "state": "At the planter's edge, all five buds tipped downward toward the floor, one bud opened partway and facing Aelyn — still, deliberate, listening hard."
           },
           {
             "name": "Sapling-child",
@@ -212,7 +212,7 @@
           },
           {
             "name": "Two other Rootkin",
-            "state": "Moving through the far end of the hall, unhurried, not attending to the newcomer."
+            "state": "At the far end of the hall, gone quiet — not attending the newcomer, but no longer moving either."
           }
         ],
         "objects": [
@@ -220,15 +220,14 @@
           "Traveler's Pack (Aelyn's, worn canvas)",
           "Waterskin (Aelyn's)",
           "Patches of old moss across the floor",
-          "Oval light-gaps in the bark ceiling, filling with morning light"
+          "Oval light-gaps in the bark ceiling, morning light advancing"
         ],
         "threads": [
           "Maren's question 'why do you ask?' remains unanswered.",
-          "The Root-That-Remembers is confirmed awake and attending — Aelyn knows this; Maren does not yet.",
-          "Branch has gone still — its buds tipped down, possibly responding to what moved through the floor.",
+          "The Root-That-Remembers is confirmed awake and attending — Aelyn and Branch both felt it; Maren does not yet know this.",
+          "Branch felt the presence too — its buds are down, one open toward Aelyn, but it has not spoken.",
           "Branch's recognition by Maren is still unaddressed — she noticed it, hasn't named what she sees.",
-          "The direction the sapling gave Aelyn — inward, below — remains unshared with Maren.",
-          "Maren named the Root-That-Remembers but flagged the limits of Rootkin understanding — it hasn't spoken in any way they recognize."
+          "The direction the sapling gave Aelyn — inward, below — remains unshared with Maren."
         ]
       },
       "npcUpdates": [
@@ -236,53 +235,41 @@
           "op": "update",
           "npcId": "rootkin-tender",
           "name": "Maren",
-          "note": "Stood watching while Aelyn pressed fingers into the moss and used Lifesense downward — registered Branch going still, has not yet been told what Aelyn found.",
-          "learned": [
-            "Aelyn used an ability directed downward through the floor — toward the Root-That-Remembers — while in conversation with her"
-          ],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Standing in the entrance hall, waiting for Aelyn's answer, watching carefully."
-        }
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "The Root-That-Remembers is awake and attending — Lifesense confirmed distributed, slow awareness oriented toward the conversation above it.",
-          "subjectId": "the-watching-presence"
+          "note": "Held her unanswered question with patience while Aelyn reached through the Grove to Branch — watching, not pressing.",
+          "statusNote": "Standing in the entrance hall, her question still open — waiting with deliberate patience."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "the-watching-presence",
-          "label": "The Root-That-Remembers",
-          "kind": "mystery",
-          "fact": "Lifesense reached it through the root-floor: distributed warmth, slow as stone-held heat, with a quality of oriented attention — not sleep, not speech, but awareness. It registered this conversation the way a deep lake registers a stone.",
+          "topic": "branch",
+          "label": "Branch",
+          "kind": "person",
+          "entityId": null,
+          "fact": "Branch felt the Root-That-Remembers attending through the floor — its buds tipped down in deliberate stillness, the Grove confirmed its awareness was oriented the same direction as Aelyn's Lifesense.",
           "links": [
             "heartroot",
-            "sapling-child-heartroot",
-            "branch",
-            "rootkin-tender"
+            "the-watching-presence",
+            "root-that-remembers"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A quiet minute of Lifesense use and stillness in the entrance hall."
+        "why": "A quiet moment of Grove-use and held silence — a breath or two, no more."
       },
+      "factUpdates": [],
       "placeUpdates": []
     },
     "sceneState": {
-      "setting": "Interior of the living-wood entrance hall — thirty-foot arched ceiling of breathing bark, moss underfoot, oval light-gaps filling with early spring morning light. Aelyn is crouched near the planter's edge, fingers just lifted from the moss. Maren stands one step away, watching. Branch has gone still at the planter's edge, all five buds tipped downward.",
+      "setting": "Interior of the living-wood entrance hall — thirty-foot arched ceiling of breathing bark, moss underfoot, oval light-gaps filling with early spring morning light, now pulling further in as the morning advances. Aelyn is crouched near the planter's edge, two fingers pressed into the moss. Maren stands one step away, her question still unanswered.",
       "npcsPresent": [
         {
           "name": "Maren",
-          "state": "Standing close, eyes on Aelyn — waiting, expression careful but open, the question 'why do you ask?' still hanging betwe"
+          "state": "Standing close, patient, her question 'why do you ask?' still in the air — watching Aelyn with careful attention, not pr"
         },
         {
           "name": "Branch",
-          "state": "Gone still at the planter's edge, all five buds tipped downward as if sensing the same movement through the floor."
+          "state": "At the planter's edge, all five buds tipped downward toward the floor, one bud opened partway and facing Aelyn — still, "
         },
         {
           "name": "Sapling-child",
@@ -290,7 +277,7 @@
         },
         {
           "name": "Two other Rootkin",
-          "state": "Moving through the far end of the hall, unhurried, not attending to the newcomer."
+          "state": "At the far end of the hall, gone quiet — not attending the newcomer, but no longer moving either."
         }
       ],
       "objects": [
@@ -298,12 +285,12 @@
         "Traveler's Pack (Aelyn's, worn canvas)",
         "Waterskin (Aelyn's)",
         "Patches of old moss across the floor",
-        "Oval light-gaps in the bark ceiling, filling with morning light"
+        "Oval light-gaps in the bark ceiling, morning light advancing"
       ],
       "threads": [
         "Maren's question 'why do you ask?' remains unanswered.",
-        "The Root-That-Remembers is confirmed awake and attending — Aelyn knows this; Maren does not yet.",
-        "Branch has gone still — its buds tipped down, possibly responding to what moved through the floor.",
+        "The Root-That-Remembers is confirmed awake and attending — Aelyn and Branch both felt it; Maren does not yet know this.",
+        "Branch felt the presence too — its buds are down, one open toward Aelyn, but it has not spoken.",
         "Branch's recognition by Maren is still unaddressed — she noticed it, hasn't named what she sees.",
         "The direction the sapling gave Aelyn — inward, below — remains unshared with Maren."
       ]
@@ -485,11 +472,14 @@
         "label": "Branch",
         "kind": "person",
         "facts": [
-          "[d1] In the Heartroot's entrance hall, Branch fixed all five buds open on the sapling-child and spoke its first deliberate words here: 'Old. Very. Old. And. Watching.' — a warning or a recognition, not yet"
+          "[d1] In the Heartroot's entrance hall, Branch fixed all five buds open on the sapling-child and spoke its first deliberate words here: 'Old. Very. Old. And. Watching.' — a warning or a recognition, not yet",
+          "[d1] Branch felt the Root-That-Remembers attending through the floor — its buds tipped down in deliberate stillness, the Grove confirmed its awareness was oriented the same direction as Aelyn's Lifesense."
         ],
         "links": [
           "heartroot",
-          "sapling-child-heartroot"
+          "sapling-child-heartroot",
+          "the-watching-presence",
+          "root-that-remembers"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -567,13 +557,13 @@
     }
   },
   "tendencies": {
-    "cerebral": 5.4812673703126515,
-    "cautious": 1.8166518036622619,
-    "generous": 0.8810956933593749,
-    "social": 0.9506249999999999
+    "cerebral": 6.3442356860548355,
+    "cautious": 2.7712355085707054,
+    "generous": 0.8590683010253904,
+    "social": 0.9268593749999999
   },
   "aptitudes": [],
-  "actionCount": 9,
+  "actionCount": 10,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -595,8 +585,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20mid-twenties%20with%20light%20blonde%2C%20faintly%20wavy%20hair%20cut%20in%20curtain%20bangs%2C%20the%20rest%20falling%20to%20the%20small%20of%20her%20back%20%E2%80%94%20usually%20worn%20in%20a%20french%20braid%20with%20the%20bangs%20left%20loose.%20Dark%20nature-green%20tank%20to%2C%20full-body%20character%20portrait%2C%20named%20Aelyn%20Kantoro%2C%20of%20the%20rootkin%2C%20warden%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Her%20mother%20dies%2C%20and%20she%20decides%20to%20go%20to%20the%20nanite%20world%2C%20to%20figure%20out%20why%20she%20is%20different%20than%20the%20pure%20nature%20peop%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=73420&nologo=true",
-  "updatedAt": 1784258438851,
-  "rev": 24,
+  "updatedAt": 1784258558988,
+  "rev": 25,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -604,7 +594,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "the_quickwood": 10
+    "the_quickwood": 11
   },
   "opLossPending": false,
   "establishedFacts": [
@@ -634,7 +624,7 @@
     "schemaVersion": 1,
     "uses": {
       "lifesense": 2,
-      "the_speaking_grove": 2
+      "the_speaking_grove": 3
     },
     "coActivations": {},
     "aspirations": []

@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 11,
-  "xp": 1023,
+  "xp": 1028,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -85,7 +85,7 @@
   "maxHealth": 80,
   "health": 80,
   "maxEnergy": 150,
-  "energy": 146,
+  "energy": 141,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -821,24 +821,29 @@
         "player": "Send something back through the thread — not words, just the same warmth returned",
         "summary": "Silas returns Pell's warmth through Memory's thread — not words, just the echo given back.",
         "narration": "The thread is already warm when you find it — Memory's rune carrying Pell's presence the way a hearthstone carries afternoon heat long after the fire has gone down. You felt her a moment ago: at rest, turned toward something, unheld. Now you do something small with that knowledge.\n\nYou don't reach further. You don't try to speak through it or see through her eyes or push anything across the channel that could be mistaken for a claim on her quiet. You simply... return what was there. The warmth she sent without meaning to — the fact of her at rest — you gather it, hold it for a moment in whatever part of you Order-Sense opens when it's reading the whole design of a thing, and give it back. An echo. Hers, returned.\n\nAcross the partition, nothing audible changes. Water settles faintly. Huginn shifts one talon on the rafter, unhurried. Then, after a few seconds, you hear her exhale — slow, deliberate, the kind of breath that isn't relief and isn't surprise and is something else entirely. The kind a person makes when they realize a door they'd thought was shut is standing open, and they've known about the door for a while.\n\nThe thread holds. Neither of you pulls it tighter. It just sits there between you, carrying the warmth in both directions now — a fact rather than a message, present the way a candle is present in a room where two people have decided not to talk for a while."
+      },
+      {
+        "player": "Speak softly over the partition — not a question, just her name, to acknowledge you felt her feel it.",
+        "summary": "Silas speaks Pell's name across the partition — she answers 'I know' — the thread holds, steady.",
+        "narration": "\"Pell.\"\n\nJust that. Her name, spoken quietly into the warm air above the partition — not a question, not a bid, not a door being pushed. Only the word, carrying the weight of what just passed between you through the thread: I felt you feel it. That is all.\n\nThe water on her side shifts. A small sound — the settling of a body that has gone still, then settled again, differently. The silence that follows is not the silence of nothing happening. It is the silence of something being received and held, turned over in careful hands, not yet answered because the answer is still being understood.\n\nThen, low — not the dry register she uses when she's managing a room, not the working voice she saves for things that need managing at all — just hers, stripped to its actual grain:\n\n\"I know.\"\n\nTwo words. The same weight yours carried, returned in kind. The thread between you hums faint through Memory's rune — not warmer, just steadier. The candle on the sill has burned another finger's width. Huginn shifts one talon on the rafter and does not otherwise move."
       }
     ],
     "lastTurn": {
-      "narration": "The thread is already warm when you find it — Memory's rune carrying Pell's presence the way a hearthstone carries afternoon heat long after the fire has gone down. You felt her a moment ago: at rest, turned toward something, unheld. Now you do something small with that knowledge.\n\nYou don't reach further. You don't try to speak through it or see through her eyes or push anything across the channel that could be mistaken for a claim on her quiet. You simply... return what was there. The warmth she sent without meaning to — the fact of her at rest — you gather it, hold it for a moment in whatever part of you Order-Sense opens when it's reading the whole design of a thing, and give it back. An echo. Hers, returned.\n\nAcross the partition, nothing audible changes. Water settles faintly. Huginn shifts one talon on the rafter, unhurried. Then, after a few seconds, you hear her exhale — slow, deliberate, the kind of breath that isn't relief and isn't surprise and is something else entirely. The kind a person makes when they realize a door they'd thought was shut is standing open, and they've known about the door for a while.\n\nThe thread holds. Neither of you pulls it tighter. It just sits there between you, carrying the warmth in both directions now — a fact rather than a message, present the way a candle is present in a room where two people have decided not to talk for a while.",
-      "sceneSummary": "Silas returns Pell's warmth through Memory's thread — not words, just the echo given back.",
+      "narration": "\"Pell.\"\n\nJust that. Her name, spoken quietly into the warm air above the partition — not a question, not a bid, not a door being pushed. Only the word, carrying the weight of what just passed between you through the thread: I felt you feel it. That is all.\n\nThe water on her side shifts. A small sound — the settling of a body that has gone still, then settled again, differently. The silence that follows is not the silence of nothing happening. It is the silence of something being received and held, turned over in careful hands, not yet answered because the answer is still being understood.\n\nThen, low — not the dry register she uses when she's managing a room, not the working voice she saves for things that need managing at all — just hers, stripped to its actual grain:\n\n\"I know.\"\n\nTwo words. The same weight yours carried, returned in kind. The thread between you hums faint through Memory's rune — not warmer, just steadier. The candle on the sill has burned another finger's width. Huginn shifts one talon on the rafter and does not otherwise move.",
+      "sceneSummary": "Silas speaks Pell's name across the partition — she answers 'I know' — the thread holds, steady.",
       "choices": [
         {
-          "label": "Say nothing — hold the quiet. Let the thread speak for both of you and see what she does with it.",
+          "label": "Let the silence live — stay in the water and let the evening be what it is. Don't push past this.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "romantic"
+            "calm"
           ],
           "trivial": true
         },
         {
-          "label": "Speak softly over the partition — not a question, just her name, to acknowledge you felt her feel it.",
+          "label": "Speak again — one thing more, honest and plain: that you meant it, and you'll be here in the morning.",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
@@ -848,63 +853,55 @@
           "trivial": false
         },
         {
-          "label": "Try something more deliberate through the thread — not warmth this time, but attention. Let her know you are entirely here, with her, tonight.",
+          "label": "Ask Huginn softly — what did the bird feel change just now, if anything?",
           "attribute": "mental",
           "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Get out of the bath, dry off, and knock gently on the partition — not to push past the moment, but to be in the same room for whatever comes next.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 15,
           "intentTags": [
             "romantic",
-            "devote"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false
-        },
-        {
-          "label": "Climb out of the bath and step around the partition — the thread has said enough; let the rest of it be in the same room.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "intentTags": [
-            "romantic"
+            "careful"
           ],
           "trivial": false
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -2
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "The Low Lamp Inn, lower tier of the Edge District — two-room space divided by a wooden partition that does not reach the ceiling; Silas reclined in the second stone bath trough around the far end of the kitchen hearth, water hot, early-spring night, the thread through Memory humming faint and present, warmth now running in both directions.",
+        "setting": "The Low Lamp Inn, lower tier of the Edge District — two-room space divided by a wooden partition that does not reach the ceiling; Silas reclined in the second stone bath trough around the far end of the kitchen hearth, water hot, early-spring night, the thread through Memory humming faint and steady, two words hanging warm in the air between them.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "In her stone bath trough behind the partition — warm, at rest, has exhaled slowly in response to the returned warmth through the thread. The door she knew about is standing open."
+            "state": "In her stone bath trough behind the partition — gone still in the water after answering, holding the exchange, not closed and not yet moving."
           },
           {
             "name": "Huginn",
-            "state": "On the rafter above — shifted one talon when the thread ran warm, wings still folded, watching with its usual unhurried attention."
+            "state": "On the rafter above — shifted one talon, wings folded, watching with its usual unhurried attention."
           }
         ],
         "objects": [
           "Tallow candle on the window sill — burned down another finger's width",
-          "Memory (spear) — leaned in the corner, collar rune live and humming, thread warm in both directions now",
+          "Memory (spear) — leaned in the corner, collar rune live and humming, thread steady",
           "Partition — wooden, does not reach the ceiling",
           "Stone bath trough (Silas's side) — water hot, Silas reclined",
-          "Stone bath trough (Pell's side) — warmed, Pell at rest",
+          "Stone bath trough (Pell's side) — warmed, Pell at rest and still",
           "Copper kettle — emptied, set back near the coals",
           "Low lantern bracket over the inn door — burning oil",
           "Boots — off, at the bed's foot"
         ],
         "threads": [
+          "Pell said 'I know' — the exchange is complete but the evening is not settled yet",
           "Huginn's word — 'quiet' — what is ending in Silas is named but not yet understood",
           "Calvar packs by first light — lamp in the window is the signal",
           "The annex in the lower Plateau district — third copy, unknown standing",
-          "The thread through Memory now runs warm in both directions — Pell's exhale named the open door; neither has pulled it tighter yet"
+          "The thread through Memory runs steady in both directions — neither has pulled it tighter yet"
         ]
       },
       "npcUpdates": [
@@ -912,67 +909,48 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Felt the warmth returned through Memory's thread — exhaled slowly, the kind of breath made when a door you knew about is standing open. Did not speak. Did not close it.",
+          "note": "Heard her name spoken plainly over the partition — the warmth returned through the thread, acknowledged without deflection. Answered 'I know' in her actual voice, stripped of management.",
           "learned": [
-            "Silas can send through Memory's thread deliberately — not words, warmth; she received it"
+            "She received the returned warmth without closing the door — answered in her own grain, not the working register"
           ],
           "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "In her stone bath trough behind the partition — the thread between them warm in both directions now, the door open, waiting to see what he does next."
-        }
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Silas returned Pell's warmth through Memory's rune-thread on World-day 17 evening — a deliberate act, not words, not a claim: the warmth she carried, given back. Pell received it; her exhale confirmed the open door. The thread now runs warm in both directions.",
-          "subjectId": "pell"
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "pell",
-          "label": "Pell",
-          "kind": "person",
-          "entityId": "pell",
-          "fact": "Memory's rune-thread carries warmth in both directions now — Silas returned what she sent without meaning to, and she received it without closing the door. The thread is a fact between them, not a word.",
-          "links": [
-            "find-the-engineer",
-            "the-edge-district-ledger"
-          ]
+          "statusNote": "In her stone bath trough behind the partition — gone still after 'I know', holding the exchange, not closed and not yet moving."
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "a quiet moment in the bath, the thread work and its echo — a few minutes at most"
+        "hoursPassed": 0.1,
+        "why": "A brief, quiet exchange — barely a few words between two people already still."
       }
     },
     "sceneState": {
-      "setting": "The Low Lamp Inn, lower tier of the Edge District — two-room space divided by a wooden partition that does not reach the ceiling; Silas reclined in the second stone bath trough around the far end of the kitchen hearth, water hot, early-spring night, the thread through Memory humming faint and present, warmth now running in both directions.",
+      "setting": "The Low Lamp Inn, lower tier of the Edge District — two-room space divided by a wooden partition that does not reach the ceiling; Silas reclined in the second stone bath trough around the far end of the kitchen hearth, water hot, early-spring night, the thread through Memory humming faint and steady, two words hanging warm in the air between them.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "In her stone bath trough behind the partition — warm, at rest, has exhaled slowly in response to the returned warmth thr"
+          "state": "In her stone bath trough behind the partition — gone still in the water after answering, holding the exchange, not close"
         },
         {
           "name": "Huginn",
-          "state": "On the rafter above — shifted one talon when the thread ran warm, wings still folded, watching with its usual unhurried "
+          "state": "On the rafter above — shifted one talon, wings folded, watching with its usual unhurried attention."
         }
       ],
       "objects": [
         "Tallow candle on the window sill — burned down another finger's width",
-        "Memory (spear) — leaned in the corner, collar rune live and humming, thread warm",
+        "Memory (spear) — leaned in the corner, collar rune live and humming, thread stea",
         "Partition — wooden, does not reach the ceiling",
         "Stone bath trough (Silas's side) — water hot, Silas reclined",
-        "Stone bath trough (Pell's side) — warmed, Pell at rest",
+        "Stone bath trough (Pell's side) — warmed, Pell at rest and still",
         "Copper kettle — emptied, set back near the coals",
         "Low lantern bracket over the inn door — burning oil",
         "Boots — off, at the bed's foot"
       ],
       "threads": [
+        "Pell said 'I know' — the exchange is complete but the evening is not settled yet",
         "Huginn's word — 'quiet' — what is ending in Silas is named but not yet understood",
         "Calvar packs by first light — lamp in the window is the signal",
         "The annex in the lower Plateau district — third copy, unknown standing",
-        "The thread through Memory now runs warm in both directions — Pell's exhale named the open door; neither has pulled it tighter yet"
+        "The thread through Memory runs steady in both directions — neither has pulled it tighter yet"
       ]
     }
   },
@@ -1398,7 +1376,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d3] Finished reading her father's letters — left them flat on the surface, unreclaimed. Named what he made small: called himself a clerk, made it sound like he just wanted out. Not ang",
         "[d3] Named the shape of her father without bitterness: he planned for her without telling her he was planning. The specification method was the first thing he taught her — so she'd have",
         "[d3] Placed her hand on Memory's shaft under Huginn's eye — witnessed her father's shape named and settled into the spear. Lifted her hand and said 'alright.' Now looking at Calvar, ask",
         "[d3] Heard the attempt and its failure without watching it — turned to Calvar and asked the road's practical question: what does he take, and when do they move?",
@@ -1407,17 +1384,18 @@
         "[d3] Walked the lighted streets in comfortable silence, settled into the inn's smaller room — armor down, bath taken, present and easy on the other side of the partition.",
         "[d3] Answered the offer with dry deflection followed by a lowered voice and 'the water's going cold' — not a refusal, a decision being made aloud.",
         "[d3] Let Silas bring the hot water and look his fill — held eye contact, unhurried, no armor; sent him to his own bath with 'your turn, don't use all the coals'; armor fully down for th",
-        "[d3] Felt the warmth returned through Memory's thread — exhaled slowly, the kind of breath made when a door you knew about is standing open. Did not speak. Did not close it."
+        "[d3] Felt the warmth returned through Memory's thread — exhaled slowly, the kind of breath made when a door you knew about is standing open. Did not speak. Did not close it.",
+        "[d3] Heard her name spoken plainly over the partition — the warmth returned through the thread, acknowledged without deflection. Answered 'I know' in her actual voice, stripped of manag"
       ],
       "knownFacts": [
-        "She has arrived at a reading of him that is neither anger nor grief: recognition of a man who protected by not naming what he was protecting",
         "The ritual received Calvar's three-year refusal and her father's clerk-story as finished things — named, witnessed, settled into Memory",
         "The plan named aloud: she learns from Calvar on the road, Calvar brings his standing to bear, Silas and Huginn work the Ashwarden thread",
         "Tonight is theirs — inn, soft beds, warm baths",
         "The Low Lamp Inn is where they are staying — smaller room behind the partition is hers tonight",
         "Her deflection is a tempo, not a wall — she uses dryness to slow a thing down just enough to be sure of it",
         "She looked at him with the steady attention she gives things she's decided to keep — the armor down, the evening decided, no management.",
-        "Silas can send through Memory's thread deliberately — not words, warmth; she received it"
+        "Silas can send through Memory's thread deliberately — not words, warmth; she received it",
+        "She received the returned warmth without closing the door — answered in her own grain, not the working register"
       ],
       "skillsObserved": [
         "rapid tactical positioning in an unknown interior",
@@ -1428,7 +1406,7 @@
         "holding partial knowledge without performance — named the ha"
       ],
       "status": "active",
-      "statusNote": "In her stone bath trough behind the partition — the thread between them warm in both directions now, the door open, waiting to see what he does next.",
+      "statusNote": "In her stone bath trough behind the partition — gone still after 'I know', holding the exchange, not closed and not yet moving.",
       "lastSeen": {
         "locationId": "the-low-lamp-inn",
         "day": 3
@@ -3134,19 +3112,19 @@
     }
   },
   "tendencies": {
-    "strategic": 15.890036081939673,
-    "cerebral": 20.875337156319144,
-    "social": 23.66225383185098,
-    "generous": 4.060135352733641,
-    "cautious": 9.396607359012169,
-    "physical": 0.40409845653113313,
-    "risky": 1.1378599685956439,
-    "ruthless": 0.5003467000662362,
-    "carousing": 0.3513445873678474,
-    "amorous": 4.791546651785534,
-    "patient": 0.645167612865191,
-    "stealth": 0.41225084020439956,
-    "devotion": 1.881095693359375
+    "strategic": 15.49278517989118,
+    "cerebral": 20.353453727411164,
+    "social": 23.070697486054705,
+    "generous": 3.9586319689153,
+    "cautious": 9.161692175036864,
+    "physical": 0.39399599511785477,
+    "risky": 1.1094134693807527,
+    "ruthless": 0.48783803256458025,
+    "carousing": 0.3425609726836512,
+    "amorous": 5.6717579854908955,
+    "patient": 0.6290384225435612,
+    "stealth": 0.40194456919928956,
+    "devotion": 1.8340683010253906
   },
   "aptitudes": [
     "strategist",
@@ -3157,7 +3135,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 401,
+  "actionCount": 402,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3339,8 +3317,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=11860&nologo=true",
-  "updatedAt": 1784318849482,
-  "rev": 579,
+  "updatedAt": 1784319001235,
+  "rev": 580,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4263,7 +4241,7 @@
   "syncedAt": 1784292613822,
   "teachers": {},
   "regionsKnown": {
-    "valley": 216
+    "valley": 217
   },
   "foreclosed": [
     "rootkin",
@@ -4312,10 +4290,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-17T17:39:40.705Z",
-      "lastAt": "2026-07-17T20:07:29.481Z",
+      "lastAt": "2026-07-17T20:10:01.235Z",
       "startDay": 17,
       "endDay": 17,
-      "beats": 24
+      "beats": 25
     }
   ],
   "company": [

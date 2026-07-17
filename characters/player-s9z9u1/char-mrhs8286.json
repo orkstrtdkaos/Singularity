@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 11,
-  "xp": 1079,
+  "xp": 1084,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -75,7 +75,7 @@
     "chaos_order": 0.2085002906812526,
     "mechanical_spiritual": 0.19332220094881508,
     "concrete_abstract": -0.05328384007186973,
-    "death_life": -0.20483229009068565,
+    "death_life": -0.20959067558615135,
     "emotional_logical": 0.03083749999999999,
     "falsehood_truth": 0.2726839510223006,
     "demonic_angelic": 0.03,
@@ -85,7 +85,7 @@
   "maxHealth": 80,
   "health": 72,
   "maxEnergy": 150,
-  "energy": 148,
+  "energy": 144,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -861,69 +861,94 @@
         "player": "Use The Attended End on yourself — quietly, eyes open, to see whether the teaching Huginn gave you registers differently now against your own grain.",
         "summary": "Silas turns The Attended End inward and confirms Huginn's teaching is real — present in the grain, still settling.",
         "narration": "You turn the craft inward, quiet and unannounced.\n\nThe Attended End has always read endings in things outside you — a truce, a building, a road worn past its last repair. Turning it on yourself feels less like a tool-use and more like looking over your own shoulder. The candle holds its flame without guttering. The threshold hums in the corner. And what the craft finds in you is — not an ending. Not a near-ending. What it finds instead is a shape: something that arrived tonight and is still arriving, still settling into place. The texture Huginn gave you reads against your own grain the way a new callus reads — present, functional, not yet at home in the skin. The grain hasn't finished accepting it.\n\nWhat you learn, plainly and without softening: it is there. The accumulated weight of ten thousand attended endings now sits in you as felt knowledge rather than theory, and The Attended End can measure its depth the way you'd measure water in a trough. Full. Not yet organized into use. The teaching is real — the craft confirms it — but the capability is a seed, not a tool, and seeds do not rush.\n\nHuginn does not look down. The candle burns. Pell's warmth crosses the threshold, even and unhurried, and the evening holds everything it is holding without complaint."
+      },
+      {
+        "player": "Try the new texture deliberately — hold the threshold and see if you can feel Huginn's ending-sense extend to Pell through the rune",
+        "summary": "Silas threads Huginn's ending-sense through Memory's rune — reads Pell as rooted, present, not ending.",
+        "narration": "The threshold is already there — you don't reach for it, just attend to it, the way you'd settle weight onto a known beam.\n\nWhat changes is subtle. The rune's warmth has been Pell-shaped since the evening began — her presence an ambient fact, like the light rising through the stone floor. But now you let Huginn's texture move alongside it: that old, patient sensitivity to how a living thing breathes in its current hour. Not searching for an ending. Just letting the reading rest against what you already feel through the rune.\n\nPell is not ending. What comes back is the opposite of that — a kind of density, a settled presence, the quality of something that has decided where it is. The texture Huginn gave you reads her the way it would read a well-rooted thing: not dormant, not urgent, simply *here* and intending to remain. You can feel the water around her, the slight shift of her weight in the trough as she resettles, and underneath all of it the steady, unhurried pulse of someone at rest in their own grain.\n\nHuginn does not move on the rafter. But the timing of its silence feels like a comment."
       }
     ],
     "lastTurn": {
-      "narration": "You turn the craft inward, quiet and unannounced.\n\nThe Attended End has always read endings in things outside you — a truce, a building, a road worn past its last repair. Turning it on yourself feels less like a tool-use and more like looking over your own shoulder. The candle holds its flame without guttering. The threshold hums in the corner. And what the craft finds in you is — not an ending. Not a near-ending. What it finds instead is a shape: something that arrived tonight and is still arriving, still settling into place. The texture Huginn gave you reads against your own grain the way a new callus reads — present, functional, not yet at home in the skin. The grain hasn't finished accepting it.\n\nWhat you learn, plainly and without softening: it is there. The accumulated weight of ten thousand attended endings now sits in you as felt knowledge rather than theory, and The Attended End can measure its depth the way you'd measure water in a trough. Full. Not yet organized into use. The teaching is real — the craft confirms it — but the capability is a seed, not a tool, and seeds do not rush.\n\nHuginn does not look down. The candle burns. Pell's warmth crosses the threshold, even and unhurried, and the evening holds everything it is holding without complaint.",
-      "sceneSummary": "Silas turns The Attended End inward and confirms Huginn's teaching is real — present in the grain, still settling.",
+      "narration": "The threshold is already there — you don't reach for it, just attend to it, the way you'd settle weight onto a known beam.\n\nWhat changes is subtle. The rune's warmth has been Pell-shaped since the evening began — her presence an ambient fact, like the light rising through the stone floor. But now you let Huginn's texture move alongside it: that old, patient sensitivity to how a living thing breathes in its current hour. Not searching for an ending. Just letting the reading rest against what you already feel through the rune.\n\nPell is not ending. What comes back is the opposite of that — a kind of density, a settled presence, the quality of something that has decided where it is. The texture Huginn gave you reads her the way it would read a well-rooted thing: not dormant, not urgent, simply *here* and intending to remain. You can feel the water around her, the slight shift of her weight in the trough as she resettles, and underneath all of it the steady, unhurried pulse of someone at rest in their own grain.\n\nHuginn does not move on the rafter. But the timing of its silence feels like a comment.",
+      "sceneSummary": "Silas threads Huginn's ending-sense through Memory's rune — reads Pell as rooted, present, not ending.",
       "choices": [
         {
-          "label": "Sleep — let the evening close and the teaching finish settling overnight",
-          "attribute": "physical",
-          "subAttribute": "endurance",
-          "difficulty": 0,
-          "intentTags": [
-            "sustain"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Call quietly over the partition — tell Pell what the craft just showed you",
+          "label": "Tell her what you just felt — not as a report, as something you want her to know",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.6,
+            "emotional_logical": -0.4
+          },
           "difficulty": 0,
           "intentTags": [
+            "romantic",
             "comfort"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Try the new texture deliberately — hold the threshold and see if you can feel Huginn's ending-sense extend to Pell through the rune",
+          "label": "Try extending the same reading outward through the rune — see if Pell can feel you attend her, without naming what you're doing",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "death_life": -0.3
+            "mechanical_spiritual": 0.4,
+            "concrete_abstract": 0.3
           },
           "difficulty": 15,
           "intentTags": [
-            "study",
-            "risky"
+            "romantic",
+            "careful"
           ],
           "abilityId": "the-attended-end",
           "energyCost": 2,
           "trivial": false
         },
         {
-          "label": "Watch for Calvar's lamp — step to the window and check whether his departure signal is showing yet",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Ask Huginn plainly what its silence meant — the timing was a comment and you want to hear it said",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.5
+          },
           "difficulty": 0,
           "intentTags": [
-            "scout"
+            "study"
           ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Step out of the cooling water, dry off, and go to bed — let the evening close on what it is",
+          "attribute": "physical",
+          "subAttribute": "strength",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "sustain"
+          ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -2
+      },
       "scene": {
         "setting": "The Low Lamp Inn, lower tier of the Edge District — two-room space divided by a wooden partition that does not reach the ceiling; Silas in the stone bath trough, water now well-cooled, Memory's collar rune live and low in the corner, threshold form holding; the junction conduit's pale light rising through the stone floor.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Behind the partition in her own bath trough — quiet, warm, present through the threshold."
+            "state": "Behind the partition in her own bath trough — at rest, present through the threshold, the steady pulse of someone settled in their own grain."
           },
           {
             "name": "Huginn",
-            "state": "On the rafter — still, watching the candle, the teaching given and complete."
+            "state": "On the rafter — still, watching, the timing of its silence deliberate."
           }
         ],
         "objects": [
@@ -937,8 +962,9 @@
           "Boots — off, at the bed's foot"
         ],
         "threads": [
-          "Huginn's teaching has settled and been confirmed real by The Attended End — present in the grain, not yet organized into use",
-          "Memory's threshold holds — the rune live and low; the form has not been tested past this evening's quiet",
+          "Huginn's silence after the reading — timed, and the timing is a comment",
+          "Huginn's teaching confirmed real and present in Silas's grain, still settling",
+          "Memory's threshold holds — rune live and low, the form repeatable",
           "Calvar packs by first light — lamp in the window is the departure signal",
           "The Edge District Ledger quest active — Grael, the annex, and the optics array intake log still unresolved",
           "The partition between Silas and Pell — open overhead, the evening warm on both sides"
@@ -950,29 +976,47 @@
           "label": "Huginn",
           "kind": "person",
           "entityId": "huginn",
-          "fact": "The Attended End confirms Huginn's teaching is real and present in Silas's grain — the texture of accumulated endings sits in him as felt knowledge, not yet organized into reliable use. The craft can measure its depth: full, still settling.",
+          "fact": "Huginn's ending-texture can be threaded through Memory's rune alongside The Attended End — held lightly, it reads a living person's current hour without searching for an ending. Pell read as rooted, dense, present: not ending, intending to remain.",
           "links": [
+            "pell",
             "the-attended-end",
-            "deathsense",
             "radiant-plateau-edge"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a quiet internal moment — the craft turned inward, the evening barely moved"
-      }
+        "why": "a quiet internal act — no more than a few minutes of focused attention"
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "pell",
+          "name": "Pell",
+          "note": "Read through Memory's rune with Huginn's texture — present, rooted, not ending. The craft confirmed what the evening already knew.",
+          "statusNote": "In her stone bath trough behind the partition — the threshold present to her, the evening open and unheld.",
+          "relationshipDelta": 0
+        },
+        {
+          "op": "update",
+          "npcId": "huginn",
+          "name": "Huginn",
+          "note": "Held its silence after Silas threaded the ending-texture through the rune — the timing was a comment, and Silas recognized it as one.",
+          "statusNote": "On the rafter at the Low Lamp Inn — teaching complete, watching the close of the evening.",
+          "relationshipDelta": 0
+        }
+      ]
     },
     "sceneState": {
       "setting": "The Low Lamp Inn, lower tier of the Edge District — two-room space divided by a wooden partition that does not reach the ceiling; Silas in the stone bath trough, water now well-cooled, Memory's collar rune live and low in the corner, threshold form holding; the junction conduit's pale light rising through the stone floor.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Behind the partition in her own bath trough — quiet, warm, present through the threshold."
+          "state": "Behind the partition in her own bath trough — at rest, present through the threshold, the steady pulse of someone settle"
         },
         {
           "name": "Huginn",
-          "state": "On the rafter — still, watching the candle, the teaching given and complete."
+          "state": "On the rafter — still, watching, the timing of its silence deliberate."
         }
       ],
       "objects": [
@@ -986,11 +1030,11 @@
         "Boots — off, at the bed's foot"
       ],
       "threads": [
-        "Huginn's teaching has settled and been confirmed real by The Attended End — present in the grain, not yet organized into use",
-        "Memory's threshold holds — the rune live and low; the form has not been tested past this evening's quiet",
+        "Huginn's silence after the reading — timed, and the timing is a comment",
+        "Huginn's teaching confirmed real and present in Silas's grain, still settling",
+        "Memory's threshold holds — rune live and low, the form repeatable",
         "Calvar packs by first light — lamp in the window is the departure signal",
-        "The Edge District Ledger quest active — Grael, the annex, and the optics array intake log still unresolved",
-        "The partition between Silas and Pell — open overhead, the evening warm on both sides"
+        "The Edge District Ledger quest active — Grael, the annex, and the optics array intake log still unresolved"
       ]
     }
   },
@@ -1416,7 +1460,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d3] Dropped back without being asked, gave space, let the work happen — then fell in beside Silas with one quiet touch and no question.",
         "[d3] Walked the lighted streets in comfortable silence, settled into the inn's smaller room — armor down, bath taken, present and easy on the other side of the partition.",
         "[d3] Answered the offer with dry deflection followed by a lowered voice and 'the water's going cold' — not a refusal, a decision being made aloud.",
         "[d3] Let Silas bring the hot water and look his fill — held eye contact, unhurried, no armor; sent him to his own bath with 'your turn, don't use all the coals'; armor fully down for th",
@@ -1425,7 +1468,8 @@
         "[d3] Heard or felt the thread go cold — spoke plainly across the partition, not alarmed, paying attention: 'Something just changed.'",
         "[d3] Felt the rune go cold through the thread; named it plainly and flatly — 'Something just changed.' Is waiting for Silas's explanation.",
         "[d3] Felt the threshold settle through Memory's rune — went quiet in a new way, attending without naming it. The evening continues; the armor stays down.",
-        "[d3] Quiet on her side of the partition — not closed, not performing. The silence has weight and temperature. She is not managing the evening."
+        "[d3] Quiet on her side of the partition — not closed, not performing. The silence has weight and temperature. She is not managing the evening.",
+        "[d3] Read through Memory's rune with Huginn's texture — present, rooted, not ending. The craft confirmed what the evening already knew."
       ],
       "knownFacts": [
         "The Low Lamp Inn is where they are staying — smaller room behind the partition is hers tonight",
@@ -2171,7 +2215,8 @@
           "[d2] Huginn's stillness when asked about Pell's futures means she is not foreclosed — no endings in motion for her, no roads concluding. The bird watches her out of interest, not as a harbinger.",
           "[d3] Accepts a learning-bond when approached through threshold-attention rather than reaching. Teaches by texture-transfer — the feel of reading an ending's approach while its subject is still alive. The p",
           "[d3] Huginn reads endings not as discrete events but as a field condition — a thickening in the air around a living thing long before the ending arrives. This texture has been transferred to Silas: the fee",
-          "[d3] The Attended End confirms Huginn's teaching is real and present in Silas's grain — the texture of accumulated endings sits in him as felt knowledge, not yet organized into reliable use. The craft can "
+          "[d3] The Attended End confirms Huginn's teaching is real and present in Silas's grain — the texture of accumulated endings sits in him as felt knowledge, not yet organized into reliable use. The craft can ",
+          "[d3] Huginn's ending-texture can be threaded through Memory's rune alongside The Attended End — held lightly, it reads a living person's current hour without searching for an ending. Pell read as rooted, d"
         ],
         "links": [
           "millbrook",
@@ -3158,20 +3203,20 @@
     }
   },
   "tendencies": {
-    "strategic": 13.857722319933828,
-    "cerebral": 23.567418820843983,
-    "social": 21.13351557152076,
-    "generous": 3.315716858922841,
-    "cautious": 8.532824649068761,
-    "physical": 0.330007733383286,
-    "risky": 1.8329232862937173,
-    "ruthless": 0.40860903506555246,
-    "carousing": 0.28692619098092564,
-    "amorous": 5.609685110037674,
-    "patient": 1.4537366697108343,
-    "stealth": 0.3366653922142057,
-    "devotion": 1.5362001908432465,
-    "craft": 0.9036878906249999
+    "strategic": 13.511279261935481,
+    "cerebral": 23.97823335032288,
+    "social": 20.605177682232743,
+    "generous": 3.23282393744977,
+    "cautious": 8.319504032842042,
+    "physical": 0.3217575400487038,
+    "risky": 2.787100204136374,
+    "ruthless": 0.39839380918891365,
+    "carousing": 0.2797530362064025,
+    "amorous": 5.469442982286732,
+    "patient": 1.4173932529680633,
+    "stealth": 0.32824875740885057,
+    "devotion": 1.4977951860721654,
+    "craft": 0.8810956933593749
   },
   "aptitudes": [
     "strategist",
@@ -3181,7 +3226,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 409,
+  "actionCount": 410,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3363,8 +3408,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=11860&nologo=true",
-  "updatedAt": 1784324503951,
-  "rev": 587,
+  "updatedAt": 1784324846110,
+  "rev": 588,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4184,7 +4229,7 @@
       "palework": 22,
       "deathsense": 18,
       "shadowstep": 9,
-      "the-attended-end": 20,
+      "the-attended-end": 21,
       "wildcraft": 3,
       "the_raised_thing": 3
     },
@@ -4289,7 +4334,7 @@
   "syncedAt": 1784292613822,
   "teachers": {},
   "regionsKnown": {
-    "valley": 224
+    "valley": 225
   },
   "foreclosed": [
     "rootkin",
@@ -4338,10 +4383,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-17T17:39:40.705Z",
-      "lastAt": "2026-07-17T21:41:43.950Z",
+      "lastAt": "2026-07-17T21:47:26.109Z",
       "startDay": 17,
       "endDay": 17,
-      "beats": 32
+      "beats": 33
     }
   ],
   "company": [

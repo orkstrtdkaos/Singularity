@@ -352,6 +352,16 @@ export function saveCharacter(c, { stamp = true } = {}) {
   localStorage.setItem(LS.characterIndex, JSON.stringify(idx));
 }
 
+/** SNG-139: delete a character from THIS device — remove its save blob + drop it from the local index.
+ *  Local-only by design: a shared-world sync copy in the family repo is separate and is NOT touched here
+ *  (deleting a character must never silently nuke shared canon). Destructive; callers confirm first. */
+export function deleteCharacter(id) {
+  localStorage.removeItem(LS.character(id));
+  const idx = listCharacters().filter(e => e.id !== id);
+  localStorage.setItem(LS.characterIndex, JSON.stringify(idx));
+  return idx;
+}
+
 /** SNG-BATCH-7 Phase 2: write a version pulled from the sync repo to local storage,
  *  preserving its updatedAt/rev and marking THIS as the last synced point. */
 export function adoptRemoteCharacter(remote) {

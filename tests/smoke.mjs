@@ -40,7 +40,7 @@ import { generate, ensureGenerated, resolveExisting, mintId, repairEntity, stubE
 import { applyCodexUpdates as applyCodexUpdatesGen } from "../engine/codex.js";
 import { ensureCanonStore, promotionCandidates, buildCanonRecord, findCanonCollision, resolveContradiction, promoteInto, mergeCanonStores, lensDecision, canonForViewer, adaptView, AUTHORED_CANON_WEIGHT, contributionsBy } from "../engine/canon.js";
 import { sanitizeImagePrompt, assembleImagePrompt, characterPromptSeed, npcPromptSeed, imageURLFor, ensureImage, isMinorSubject, addGalleryImage, ensureGallery, itemProvenancePhrase, deleteGalleryImage } from "../engine/art.js";
-import { planPlayerDedup, dedupePlayers, resolvePlayerKey, findProfileByName, resolveLocationId } from "../engine/state.js";
+import { planPlayerDedup, dedupePlayers, resolvePlayerKey, findProfileByName, resolveLocationId, deleteCharacter, saveCharacter, listCharacters } from "../engine/state.js";
 import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM } from "../engine/corrections.js";
 import { isEventfulTurn, pressureTier, pressureDirective } from "../engine/pacing.js";
 import { revokeAdultGate } from "../engine/playerprofile.js";
@@ -3195,6 +3195,48 @@ await (async () => {
     const def = synthesizeDuelDef(e);
     return band === "renowned" && ch && def.type === "duel" && def._challengeBand === "renowned" && def.opponent.threat > 20;
   })());
+})();
+
+// --- SNG-139: chronicle/portrait fixes (canon count, delete character, Pell portrait tier) ---
+(() => {
+  // Item 1: sessionLog splits promoted records into canonical (banner) vs variant (rumor) — the two readouts agree
+  const c = { deeds: [], sessions: [], generated: {
+    location: {
+      "gen-canon": { id: "gen-canon", name: "The Verified Hollow", _gen: { type: "location", createdDay: 1, promotedWorldDay: 1, canonTier: "canonical" } },
+      "gen-rumor": { id: "gen-rumor", name: "The Contested Spire", _gen: { type: "location", createdDay: 1, promotedWorldDay: 1, canonTier: "variant" } }
+    }, npc: {}, arc: {}
+  } };
+  touchSession(c, { nowISO: "2026-07-17T10:00:00Z", worldDay: 1 });
+  const log = sessionLog(c);
+  check("SNG-139: sessionLog's 'became canon' banner lists ONLY canonical-tier promotions", log[0].canonPromoted.includes("The Verified Hollow") && !log[0].canonPromoted.includes("The Contested Spire"));
+  check("SNG-139: sessionLog surfaces a variant promotion as rumor, not canon", log[0].canonRumored.includes("The Contested Spire") && !log[0].canonRumored.includes("The Verified Hollow"));
+  check("SNG-139: banner (canonical) + rumor (variant) partition the promoted total — no double-count, no miss", log[0].canonPromoted.length + log[0].canonRumored.length === 2);
+  const auth = authorshipStats(c, {});
+  check("SNG-139: the authorship card agrees with the banner — shared==canonical count, rumor==variant count", auth.persisted.shared === log[0].canonPromoted.length && auth.persisted.rumor === log[0].canonRumored.length);
+
+  // Item 3: Pell (together·devoted, relationship >= 7) DOES reach a portrait tier — the SNG-136 wiring would fire
+  check("SNG-139: a devoted bond (Pell — score>=7, bondStage together) reaches the 'devoted' portrait tier", npcPortraitTier({ name: "Pell", bondStage: "together", bondType: "romantic", relationship: 8 }) === "devoted");
+  check("SNG-139: a passing acquaintance reaches NO portrait tier (high-milestones only, unchanged)", npcPortraitTier({ name: "Stranger", relationship: 2 }) === null);
+
+  // Item 5: deleteCharacter removes the save + drops it from the index; leaves others intact
+  const before = listCharacters().length;
+  const idBase = "sng139-del-test-" + before;
+  saveCharacter({ id: idBase + "-keep", name: "Keeper", level: 1, origin: "wright", deeds: [] });
+  saveCharacter({ id: idBase + "-gone", name: "Doomed", level: 1, origin: "mason", deeds: [] });
+  check("SNG-139: both test characters are in the roster index before delete", listCharacters().some(e => e.id === idBase + "-gone") && listCharacters().some(e => e.id === idBase + "-keep"));
+  deleteCharacter(idBase + "-gone");
+  check("SNG-139: deleteCharacter drops the character from the index", !listCharacters().some(e => e.id === idBase + "-gone"));
+  check("SNG-139: deleteCharacter removes the save blob from storage", localStorage.getItem("singularity.character." + idBase + "-gone") === null);
+  check("SNG-139: deleteCharacter leaves the OTHER character untouched", listCharacters().some(e => e.id === idBase + "-keep") && localStorage.getItem("singularity.character." + idBase + "-keep") !== null);
+  deleteCharacter(idBase + "-keep"); // cleanup
+
+  // app.js raw-source assertions — the wiring shipped
+  const appSrc = readFileSync(join(root, "app.js"), "utf8");
+  check("SNG-139: migrate clears the transient _chronicleBusy flag on load (un-wedges 'writing your story…')", /function migrate\(c\)[\s\S]{0,400}delete c\._chronicleBusy/.test(appSrc));
+  check("SNG-139: the gallery exposes a 'Set as portrait' pick that pins the choice", /data-galpick/.test(appSrc) && /character\.portraitPinned = true/.test(appSrc));
+  check("SNG-139: an auto level-up regen respects a pinned portrait (pin beats auto)", /if \(c\.portraitPinned\) return null;/.test(appSrc));
+  check("SNG-139: the roster has a confirm-gated delete control wired to deleteCharacter", /data-del=/.test(appSrc) && /deleteCharacter\(id\)/.test(appSrc));
+  check("SNG-139: the session-log render shows the rumor line alongside the canon banner", /canonRumored/.test(appSrc));
 })();
 
 // --- SNG-076: authored prose is not truncated mid-word ---

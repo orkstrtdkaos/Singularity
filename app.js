@@ -1,7 +1,7 @@
 // app.js — Singularity v0.1 shell: character creation, the play loop, settings.
 // Engine does the math (resolve/sense/reputation/profile); GM model does the words.
 
-import { loadContent, loreForLocation, eventsForGM, getPlayerKey, setPlayerKey, hasChosenPlayer, listPlayers, listCharacters, saveCharacter, loadCharacter, saveProfile, loadProfile, exportSave, importSave, adoptRemoteCharacter, preserveRecovery, dedupePlayers, findProfileByName, resolveLocationId } from "./engine/state.js";
+import { loadContent, loreForLocation, eventsForGM, getPlayerKey, setPlayerKey, hasChosenPlayer, listPlayers, listCharacters, saveCharacter, loadCharacter, deleteCharacter, saveProfile, loadProfile, exportSave, importSave, adoptRemoteCharacter, preserveRecovery, dedupePlayers, findProfileByName, resolveLocationId } from "./engine/state.js";
 import { resolveAction, successChance, applyEnergyCost } from "./engine/resolve.js";
 import { senseAction, senseTier, senseOpponent } from "./engine/sense.js";
 import { synthesizeOpponentSheet } from "./engine/skill_battle.js";
@@ -48,7 +48,7 @@ import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challe
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.97";
+const APP_VERSION = "1.8.98";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -947,7 +947,7 @@ function renderRoster() {
     <div id="roster">${chars.map(c => `
       <div class="roster-item">
         <div><strong>${esc(c.name)}</strong> <span class="hint">${esc(c.origin)} · level ${c.level}</span></div>
-        <div><button class="btn" data-play="${esc(c.id)}">Play</button></div>
+        <div style="display:flex; gap:6px"><button class="btn" data-play="${esc(c.id)}">Play</button><button class="btn secondary roster-del" data-del="${esc(c.id)}" title="Delete this character from this device">Delete</button></div>
       </div>`).join("")}</div>
     <div style="margin-top:16px; display:flex; gap:8px; flex-wrap:wrap;">
       <button class="btn" id="new-char">New Character</button>
@@ -989,6 +989,17 @@ function renderRoster() {
       character = c;
       if (pull.note) character._reconcileNotes = [...(character._reconcileNotes || []), pull.note];
       saveCharacter(character); enterPlay();
+    };
+  }
+  // SNG-139: restore character delete — confirm-gated, local to this device (shared-world sync copy untouched).
+  for (const btn of app.querySelectorAll("[data-del]")) {
+    btn.onclick = () => {
+      const id = btn.dataset.del;
+      const c = listCharacters().find(x => x.id === id);
+      if (!confirm(`Delete ${c?.name || "this character"}? This removes them from THIS device and cannot be undone.${syncEnabled() ? "\n\nAny shared-world copy your family syncs is separate and is NOT touched." : ""}`)) return;
+      deleteCharacter(id);
+      if (character?.id === id) character = null; // don't keep a just-deleted character loaded
+      renderRoster();
     };
   }
 }
@@ -1084,6 +1095,11 @@ async function renderDiscoverCharacters(entry) {
  *  objects (re-linked to the catalog), and characters gain a clock. */
 function migrate(c) {
   if (!c) return c;
+  // SNG-139: transient render flags must never persist. If a chronicle/recap generation was interrupted
+  // (reload, crash, navigation) mid-flight, its busy flag was saved `true` and would wedge the paragraph
+  // on "writing your story…" forever. Clear them on load so a stale busy self-heals.
+  delete c._chronicleBusy; delete c._chronicleError;
+  (c.sessions || []).forEach(s => { if (s) delete s._recapBusy; });
   normalizeInventory(c, CONTENT.items);
   if (!c.clock) c.clock = newClock();
   if (!c.companions) c.companions = [];
@@ -1396,6 +1412,7 @@ function ensureLocationImage(locId) {
  *  character visibly grows. Returns a short note if a new portrait landed, else null. */
 function refreshPortraitMilestone(c, prevLevel) {
   if (!imagesEnabled() || c.level <= prevLevel) return null;
+  if (c.portraitPinned) return null; // SNG-139: a user-chosen portrait wins — auto-regen never overrides a pinned pick
   const tier = lvl => Math.ceil(lvl / 2);
   if (tier(c.level) === tier(prevLevel)) return null;
   const url = ensureCharacterPortrait(c, { force: true, milestone: `level ${c.level}` });
@@ -4333,7 +4350,8 @@ function renderGallery() {
       <figure class="gallery-item">
         <img src="${esc(g.url)}" alt="${esc(g.caption || g.kind)}" data-lightbox="gallery" data-lbgroup="gallery" data-lbindex="${gi}" loading="lazy" onerror="this.parentElement.style.display='none'">
         <button class="gallery-del" data-galdel="${esc(g.url)}" title="Remove this image">✕</button>
-        <figcaption>${esc(g.caption || g.kind)}${character.portrait === g.url ? ` <span class="rep-band trusted">portrait</span>` : ""}${g.worldDay ? ` <span class="hint">· world-day ${g.worldDay}</span>` : ""}</figcaption>
+        ${character.portrait === g.url ? "" : `<button class="gallery-pick" data-galpick="${esc(g.url)}" title="Make this the character's portrait">★ Set as portrait</button>`}
+        <figcaption>${esc(g.caption || g.kind)}${character.portrait === g.url ? ` <span class="rep-band trusted">portrait${character.portraitPinned ? " · pinned" : ""}</span>` : ""}${g.worldDay ? ` <span class="hint">· world-day ${g.worldDay}</span>` : ""}</figcaption>
       </figure>`).join("")}</div>`
       : "<div class='insight'>No images yet — a portrait is minted at creation (with art on), and the world fills in as you play.</div>"}
     <button class="btn secondary" id="gal-back" style="margin-top:14px">Back</button>
@@ -4342,9 +4360,15 @@ function renderGallery() {
     const url = b.dataset.galdel;
     if (!confirm("Remove this image?")) return;
     const { wasPortrait } = deleteGalleryImage(character, url);
-    if (wasPortrait && imagesEnabled()) ensureCharacterPortrait(character, { force: true, milestone: "reforged" }); // never leave the character imageless
+    if (wasPortrait) { character.portraitPinned = false; if (imagesEnabled()) ensureCharacterPortrait(character, { force: true, milestone: "reforged" }); } // the pinned face is gone → unpin + never leave the character imageless
     saveCharacter(character);
     renderGallery();
+  };
+  // SNG-139: the player curates their own face — pick any gallery image as the portrait. A user pick PINS
+  // it, so an auto level-up regen (refreshPortraitMilestone) never silently overrides the chosen one.
+  for (const b of app.querySelectorAll("[data-galpick]")) b.onclick = () => {
+    character.portrait = b.dataset.galpick; character.portraitPinned = true;
+    saveCharacter(character); renderGallery();
   };
   document.getElementById("gal-back").onclick = () => renderCharacterScreen();
 }
@@ -4770,6 +4794,7 @@ function renderChronicle() {
           ${s.placesMinted.length ? `<div class="hint">✦ Places you made: ${s.placesMinted.map(esc).join(", ")}</div>` : ""}
           ${s.peopleMet.length ? `<div class="hint">✦ People first met: ${s.peopleMet.map(esc).join(", ")}</div>` : ""}
           ${s.canonPromoted.length ? `<div class="hint">★ Became shared-world canon: ${s.canonPromoted.map(esc).join(", ")}</div>` : ""}
+          ${s.canonRumored?.length ? `<div class="hint">◦ Live on as rumor others may yet confirm: ${s.canonRumored.map(esc).join(", ")}</div>` : ""}
         </div></details>`;
       }).join("") : "<div class='insight'>your first session is being written now — play on</div>"}
       ${(character.sessions || []).length && !(character.sessions[character.sessions.length - 1] || {}).ended ? `<button class="btn secondary" id="chr-endsession" style="margin-top:6px">End this session</button>` : ""}

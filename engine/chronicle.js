@@ -105,13 +105,17 @@ export function sessionLog(character) {
     ));
     const placesMinted = locs.filter(r => inDayRange(genCreatedDay(r), s));
     const peopleMet = npcs.filter(r => inDayRange(genCreatedDay(r), s));
-    const canonPromoted = all.filter(r => r._gen?.promotedWorldDay != null && inDayRange(r._gen.promotedWorldDay, s));
+    // SNG-139: a promotion is only "became canon" if its tier is canonical; a collision-loser lands as a
+    // variant (rumor). Split so the session banner agrees with the authorship card (which counts canonical
+    // as shared, variant as rumor) — one tier field, all readouts consistent.
+    const promoted = all.filter(r => r._gen?.promotedWorldDay != null && inDayRange(r._gen.promotedWorldDay, s));
     return {
       id: s.id, startedAt: s.startedAt, endedAt: s.lastAt, startDay: s.startDay, endDay: s.endDay, beats: s.beats || 0, ended: !!s.ended,
       deeds: sDeeds.map(d => ({ description: d.description, weight: d.weight | 0, worldDay: d.worldDay ?? d.day ?? null })),
       placesMinted: placesMinted.map(r => r.name || r.id),
       peopleMet: peopleMet.map(r => r.name || r.id),
-      canonPromoted: canonPromoted.map(r => r.name || r.id)
+      canonPromoted: promoted.filter(r => r._gen.canonTier === "canonical").map(r => r.name || r.id),
+      canonRumored: promoted.filter(r => r._gen.canonTier === "variant").map(r => r.name || r.id)
     };
   });
 }

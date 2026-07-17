@@ -64,5 +64,143 @@
       }
     }
   },
-  "variants": []
+  "variants": [
+    {
+      "schemaVersion": 1,
+      "id": "calvar",
+      "name": "Calvar",
+      "role": "Pre-Transition filtration engineer, author of the seventh-band monitoring specification — a man who stopped moving fifteen years ago because the light in one room told him everything he still needed to know",
+      "homeLocation": "radiant_plateau_edge",
+      "communityId": "valley.edge_district",
+      "personality": {
+        "warmth": 0.6,
+        "trust": 0.3,
+        "candor": 0.7,
+        "patience": 0.9
+      },
+      "spectrum": {
+        "dark_light": 0.85,
+        "falsehood_truth": 0.8,
+        "concrete_abstract": 0.75,
+        "emotional_logical": 0.4,
+        "material_spiritual": 0.7
+      },
+      "physicalDetail": "Late fifties, though early-spring morning light makes him look older — the kind of age that comes from stillness, not hardship. Hands still precise. Keeps the window above the cooperage angled so the first plateau light crosses his drafting surface at exactly the seventh-band frequency. He has calibrated this by hand, yearly, for fifteen years.",
+      "voiceHints": "Unhurried in a way that is not rudeness — he simply will not be rushed past the part that matters. Speaks about light the way other engineers speak about load-bearing calculations: not reverently, but exactly. When he senses evasion he goes very quiet and waits, and the waiting is harder than argument. Will not leave a sentence technically imprecise even when it costs him emotionally.",
+      "functions": [
+        "reveal",
+        "bind"
+      ],
+      "abilities": {
+        "reveal": "Calvar reads spectral signatures in ambient light the way others read handwriting — he can identify filtration drift, contamination band, or a falsified purity reading from the quality of illumination in a room. This is not mysticism; it is fifteen years of sitting still with the seventh band until it became a language.",
+        "bind": "The seventh-band specification is a living instrument to him. He knows every node it touches, every engineer who trained under it, every deviation that has ever been logged. Persuading him is not a social act — it is a technical one. Give him a true reading and he is bound to it. Give him a false one and you have lost him entirely."
+      },
+      "knowledge": [
+        "The seventh-band monitoring specification in its entirety, including three unpublished addenda he chose not to file",
+        "What the diagram he left with Leth three days ago means — and what it does not mean, which is the more important half",
+        "That the seventh-band readings have been drifting in a direction that has no name in the pre-Transition literature, and has had no name for eleven months",
+        "The cooperage below him has been storing something other than barrels for two seasons; he has not reported it because the light it emits is not dangerous — it is, in a way he cannot yet specify, attentive",
+        "That leaving the room means losing the calibration, and that losing the calibration means the specification becomes a document rather than a living thing"
+      ],
+      "wants": "To be given a reason to leave that is technically sound — not an appeal to safety, not an appeal to duty, but a reading he cannot take from this window. He will go if the data requires it. He will not go for sentiment.",
+      "fears": "That the drift in the seventh band is not contamination but communication, and that moving before he understands it will mean the message arrives and no one is left who can read it.",
+      "reactsToReputation": {
+        "truthful": "he opens the second notebook, the one he has not shown anyone",
+        "technically_credible": "he treats you as a colleague and the conversation shifts from persuasion to collaboration",
+        "evasive_or_political": "he answers every question accurately and volunteers nothing; the diagram becomes the whole of what you get",
+        "kind_without_substance": "gentle, patient, immovable"
+      },
+      "relationshipToLeth": "Trusts Leth's judgment about people, not about urgency. The diagram was a gift, not an alarm — he expected Leth to sit with it for a month, not three days.",
+      "currentState": "Early spring has shifted the morning angle two degrees north. He has been recalibrating since first light. The seventh-band reading this morning was the clearest it has been in eleven months, and he is not certain whether this means the drift is resolving or peaking.",
+      "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%20of%20Calvar%2C%20Pre-Transition%20filtration%20engineer%2C%20author%20of%20the%20seventh-band%20monitoring%20specification%20%E2%80%94%20a%20man%20who%20stopped%20moving%20fifteen%20years%20ago%20because%20the%20light%20in%20one%20room%20told%20him%20everything%20he%20still%20needed%20to%20know.%20Unhurried%20in%20a%20way%20that%20is%20not%20rudeness%20%E2%80%94%20he%20simply%20will%20not%20be%20rushed%20past%20the%20part%20that%20matters.%20Speaks%20about%20light%20the%20way%20other%20engineers%20speak%20about%20load-bearing%20calculations%3A%20not%20reverently%2C%20but%20exactly.%20When%20he%20senses%20evasion%20he%20goes%20very%20quiet%20and%20waits%2C%20and%20the%20waiting%20is%20harder%20than%20argument.%20Will%20not%20leave%20a%20sentence%20technically%20imprecise%20even%20when%20it%20costs%20him%20emotionally.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=65863&nologo=true",
+      "_canon": {
+        "entityId": "calvar",
+        "type": "npc",
+        "weight": 30,
+        "rating": "R+",
+        "tier": "variant",
+        "provenance": {
+          "playerKey": "player-s9z9u1",
+          "characterId": "char-mrhs8286",
+          "locationId": "radiant_plateau_edge",
+          "day": 3,
+          "worldDay": null,
+          "hint": "Calvar — pre-Transition filtration engineer, late fifties or older, living above the cooperage on the east lane of the E",
+          "why": "Named by Leth as the engineer the party must find and persuade to leave the Edge District; the party will go to him next"
+        },
+        "contributedBy": {
+          "playerKey": "player-s9z9u1",
+          "characterId": "char-mrhs8286"
+        },
+        "promotedWorldDay": 17,
+        "birthWeight": 10,
+        "rivalId": "calvar"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "vash",
+      "name": "Vash",
+      "role": "Piecework lens-grinder of the Edge District — the one whose wheel was turning before the district woke, and who understands the array's optical layer the way water understands a crack",
+      "homeLocation": "radiant_plateau_edge",
+      "communityId": "valley.edge_district",
+      "personality": {
+        "warmth": 0.5,
+        "trust": 0.35,
+        "candor": 0.7,
+        "patience": 0.9
+      },
+      "spectrum": {
+        "dark_light": 0.75,
+        "falsehood_truth": 0.72,
+        "concrete_abstract": 0.65,
+        "emotional_logical": 0.45
+      },
+      "functions": [
+        "reveal",
+        "conceal"
+      ],
+      "voiceHints": "Unhurried. Speaks in the cadence of someone who has spent years listening to the pitch of a wheel and knows that rushing ruins the curve. Does not perform ignorance but does not announce knowledge either — waits to see whether you are asking the real question or the surface one. When she decides you mean it, she will tell you exactly what she heard, what she saw, and what she made of it, in that order, without decoration.",
+      "knowledge": [
+        "The fresher notation on the diagram — she heard Calvar speak it aloud, half to himself, while waiting for Leth's door; she did not know what it meant then and has been turning it over since",
+        "The optical layer of the array at a depth the weavers who commission her work do not suspect: she grinds to tolerances they specify without understanding why, and she has come to understand why",
+        "Which lenses in the eastern relay cluster were reground on non-standard prescription, and whose chit authorized it — she kept the chit because the prescription was wrong in an interesting way",
+        "That Leth's archive door carries sound badly, and that the east room is the worst-kept secret on the row"
+      ],
+      "wants": "To understand what she overheard well enough to know whether she should have said something sooner. She is not afraid of consequence — she is afraid of having held a piece of something important and not known what it was a piece of.",
+      "fears": "Being made into a witness for something she only half-understood. That the half she missed is the half that matters.",
+      "physicalDetail": "Fine-grained abrasive dust has settled permanently into the creases of her hands and the inner corners of her eyes. In early-spring light, standing near a window, she looks briefly like she is made of the same material she works.",
+      "dailyPattern": "At the wheel before first light. Done by mid-morning. Afternoons she is difficult to find — she walks the valley rim, which the district assumes is idleness and which is not.",
+      "reactsToReputation": {
+        "curious": "she meets curiosity with curiosity; will ask what you already know before she adds to it",
+        "authoritative": "goes quiet and literal; answers only exactly what is asked, nothing adjacent",
+        "truthful": "opens — will produce the chit; will tell you what she heard word for word including her uncertainty about one syllable",
+        "threatening": "does not flinch, does not flee; looks at you with the patience of someone who has learned that pressure applied wrong ruins the work"
+      },
+      "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%20of%20Vash%2C%20Piecework%20lens-grinder%20of%20the%20Edge%20District%20%E2%80%94%20the%20one%20whose%20wheel%20was%20turning%20before%20the%20district%20woke%2C%20and%20who%20understands%20the%20array's%20optical%20layer%20the%20way%20water%20understands%20a%20crack.%20Unhurried.%20Speaks%20in%20the%20cadence%20of%20someone%20who%20has%20spent%20years%20listening%20to%20the%20pitch%20of%20a%20wheel%20and%20knows%20that%20rushing%20ruins%20the%20curve.%20Does%20not%20perform%20ignorance%20but%20does%20not%20announce%20knowledge%20either%20%E2%80%94%20waits%20to%20see%20whether%20you%20are%20asking%20the%20real%20question%20or%20the%20surface%20one.%20When%20she%20decides%20you%20mean%20it%2C%20she%20will%20tell%20you%20exactly%20what%20she%20heard%2C%20what%20she%20saw%2C%20and%20what%20she%20made%20of%20it%2C%20in%20that%20order%2C%20without%20decoration.%2C%20dark%2C%20intense%2C%20dramatic%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=12224&nologo=true",
+      "_canon": {
+        "entityId": "vash",
+        "type": "npc",
+        "weight": 14,
+        "rating": "R",
+        "tier": "variant",
+        "provenance": {
+          "playerKey": "player-s9z9u1",
+          "characterId": "char-mrhs8286",
+          "locationId": "radiant_plateau_edge",
+          "day": 3,
+          "worldDay": null,
+          "hint": "Vash — a lens-grinder in the Edge District, east room of the same row as Leth's archive, does piecework for the optics w",
+          "why": "Leth has just named Vash as the person who was on the grinding wheel the morning Calvar came — potentially the overhear "
+        },
+        "contributedBy": {
+          "playerKey": "player-s9z9u1",
+          "characterId": "char-mrhs8286"
+        },
+        "promotedWorldDay": 17,
+        "birthWeight": 10,
+        "rivalId": "vash"
+      }
+    }
+  ]
 }

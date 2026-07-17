@@ -879,6 +879,149 @@
     }
    ],
    "nativeOrCombination": "native"
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_far_step",
+   "name": "The Far Step",
+   "levelReq": 4,
+   "energyCost": 11,
+   "powerSystem": "reach_space_time",
+   "tradition": "horizon",
+   "attribute": "physical",
+   "axes": {
+    "space_time": -0.6
+   },
+   "functions": [
+    "travel"
+   ],
+   "narrationHints": "You take one step and the horizon that was a day's walk is under your feet — distance folding to meet a will that simply declined to accept it.",
+   "description": "The Horizon art of the far step — collapsing a great distance into a single stride, arriving where the eye could only reach. The wandering peoples' deepest gift: no place is truly far.",
+   "notFor": "It moves you, not others or things beyond what you carry — and it needs a place you can see or truly know; you cannot far-step to a horizon you have never met. Arrive somewhere unready and you arrive alone and far from help.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Far Step",
+     "grants": "Cross a great visible or known distance in a single step.",
+     "cannot": "It carries only you and what you bear, it needs a seen or known destination, and it strands you as easily as it delivers you — far is far, whichever way you stepped."
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "TRAVEL"
+   ],
+   "challengeProfile": {
+    "TRAVEL": 4
+   }
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_edge_of_the_map",
+   "name": "The Edge of the Map",
+   "levelReq": 5,
+   "energyCost": 13,
+   "powerSystem": "reach_space_time",
+   "tradition": "horizon",
+   "attribute": "physical",
+   "axes": {
+    "space_time": -0.9
+   },
+   "functions": [
+    "travel",
+    "reveal"
+   ],
+   "narrationHints": "You step past the last known place, off the edge of every map, and stand somewhere the world had not gotten around to deciding yet — and by standing there, you help it decide.",
+   "description": "The Horizon capstone — the step beyond the known world entirely, into the unmapped, where the traveller does not just find new places but helps CALL them into being by arriving. The furthest gift of the wandering kind.",
+   "notFor": "One passage beyond the known, at enormous cost — and where you arrive is not yet fixed; you shape it by arriving, which means you cannot know what you are stepping into, only that your step will help make it. There is no far-step home from the edge; you walk back.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Edge of the Map",
+     "grants": "Step beyond the known world into the unmapped, helping call a new place into being by arriving.",
+     "cannot": "It costs nearly all you have, the destination is unfixed until you make it, and there is no quick way back — the edge of the map is reached by stepping and left by walking."
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "TRAVEL"
+   ],
+   "challengeProfile": {
+    "TRAVEL": 5
+   }
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_held_hour",
+   "name": "The Held Hour",
+   "levelReq": 4,
+   "energyCost": 12,
+   "powerSystem": "reach_space_time",
+   "tradition": "hourkeeper",
+   "attribute": "mental",
+   "axes": {
+    "space_time": 0.6
+   },
+   "functions": [
+    "bind",
+    "foresee"
+   ],
+   "narrationHints": "You take the hour and HOLD it — not stopping time, but holding one hour of it open, refusing to let it pass until what needs doing in it is done.",
+   "description": "The Hourkeeper art of the held hour — keeping a single hour open past its natural passing, a pocket of kept time in which the necessary can be finished. The timekeepers' patient gift.",
+   "notFor": "It holds time, it does not reverse it — a held hour ends and cannot be held twice over the same ground. And holding an hour costs you the holding of it; you do not rest inside kept time, you carry it.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Held Hour",
+     "grants": "Hold a single hour open past its passing, keeping time for what must be finished.",
+     "cannot": "It cannot rewind, only delay the passing; the same hour cannot be re-held; and the one holding time does not get to rest in it."
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "DEFEND"
+   ],
+   "challengeProfile": {
+    "DEFEND": 4
+   }
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_kept_hour",
+   "name": "The Long Foreseeing",
+   "levelReq": 5,
+   "energyCost": 14,
+   "powerSystem": "reach_space_time",
+   "tradition": "hourkeeper",
+   "attribute": "mental",
+   "axes": {
+    "space_time": 0.9
+   },
+   "functions": [
+    "foresee",
+    "bind"
+   ],
+   "narrationHints": "You follow one thread of what-will-be all the way down — not a glimpse but the whole long braid of consequence, every branch, to where it finally comes to rest.",
+   "description": "The Hourkeeper capstone — the long foreseeing, one possible future traced to its very end rather than glimpsed. To see this far is to carry a certainty most are mercifully spared, and to be bound to what you have seen.",
+   "notFor": "One thread, once, at enormous cost — and what you see, you are bound by; a foreseeing this deep changes how you act, and acting changes the future you saw. You cannot un-know the end you followed to.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Long Foreseeing",
+     "grants": "Trace one possible future to its very end, seeing the whole braid of its consequence.",
+     "cannot": "It costs nearly all you have, it binds you to what you've seen, and the deepest mercy of not-knowing is one you have chosen to give up."
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "INVESTIGATE"
+   ],
+   "challengeProfile": {
+    "INVESTIGATE": 5
+   }
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

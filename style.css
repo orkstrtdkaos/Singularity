@@ -709,3 +709,14 @@ img[data-lightbox] { cursor: zoom-in; }
 .wheel-node.fn-dim { opacity:0.22; }
 .wheel-node.fn-match .wnode-shape { stroke-width:2.4; }
 .wheel-node.fn-match .wheel-node-label { fill:var(--ink); }
+
+/* SNG-135: tighten the Company section — one clean flex row per member */
+.company-group { margin-bottom: 6px; }
+.company-row { display: flex; align-items: center; gap: 6px; padding: 2px 0; font-family: var(--font-ui); font-size: 12px; }
+.company-row .company-name { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ink); }
+.company-badge { flex: 0 0 auto; font-size: 10px; color: var(--ink-dim); background: var(--panel2); border: 1px solid var(--border); border-radius: 8px; padding: 0 5px; white-space: nowrap; }
+.company-badge.on { color: var(--accent2); border-color: var(--accent2); }
+.company-actions { flex: 0 0 auto; display: inline-flex; gap: 3px; }
+.company-action { font-size: 11px; line-height: 1; padding: 2px 5px; background: none; border: 1px solid var(--border); color: var(--ink-dim); border-radius: 5px; }
+.company-action:hover { color: var(--ink); border-color: var(--ink-dim); }
+.company-action.recruit { color: var(--accent2); border-color: var(--accent2); }

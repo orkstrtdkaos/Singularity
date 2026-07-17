@@ -18,7 +18,7 @@ import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equi
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { substrateVerdict, locationDensity, carriedSubstrate } from "./engine/substrate.js"; // SNG-090
-import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage, deleteGalleryImage } from "./engine/art.js";
+import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed } from "./engine/art.js";
 import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal } from "./engine/traditions.js";
@@ -27,7 +27,7 @@ import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offe
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
 import { fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc } from "./engine/personalArc.js";
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./engine/entityDetail.js";
-import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown } from "./engine/npcs.js";
+import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
 import { initWorldState, runWorldTick, syncSharedWorld, advanceGeneratedOffscreen, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
@@ -47,7 +47,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.94";
+const APP_VERSION = "1.8.95";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1337,6 +1337,34 @@ function ensureCharacterPortrait(c, { force = false, milestone = null, promptOpt
   return url;
 }
 
+/** SNG-136 P2: an NPC who has crossed a HIGH bond milestone (partner/committed/sworn/devoted) earns a
+ *  dedicated portrait — one per NPC per tier, deduped via `n._portraitTier`. Idempotent: runs after each
+ *  turn's npc updates AND once on load (the retro backfill — Pell, already devoted, gets one). Art-off =
+ *  no-op; rating-lensed + minor-safe via ensureImage's floors; a failed gen leaves no gallery tile. */
+function ensureBondPortraits(c) {
+  if (!c || !imagesEnabled()) return;
+  for (const n of Object.values(c.npcRegistry || {})) {
+    const tier = npcPortraitTier(n);
+    if (!tier || n._portraitTier === tier) continue;  // not a milestone, or already portrayed at this tier
+    try {
+      const url = ensureImage(n, "npc", { ratingLevel: viewerRatingLevel(), seedKey: `${n.id}-${tier}`, force: true, promptOpts: { character: c } });
+      if (url) { // no empty tile — only record when the mint actually resolved
+        n._portraitTier = tier; n.image = url;
+        addGalleryImage(c, { kind: "portrait", prompt: npcPromptSeed(n, c), url, caption: `${n.name} — ${relationshipLabel(n)}`, worldDay: absoluteWorldDay() });
+      }
+    } catch { /* a milestone portrait is a grace, never a blocker */ }
+  }
+}
+
+/** SNG-136: drop any gallery entries that never resolved to a real image URL (the blank Vash-style tile
+ *  from a failed generation) — pruned once on load so the gallery never shows an empty card. */
+function pruneEmptyGalleryTiles(c) {
+  if (!c?.gallery?.length) return;
+  const before = c.gallery.length;
+  c.gallery = c.gallery.filter(g => g && typeof g.url === "string" && g.url.trim());
+  if (c.gallery.length !== before) saveCharacter(c);
+}
+
 /** SNG-046 Layer 3: the persisted image for a location (no minting) — an authored/born-with
  *  image on the record, else this character's cached generate-once image. For display. */
 function locationImageFor(locId) {
@@ -2386,6 +2414,8 @@ async function enterPlay() {
   sceneState = null;
   flushFeedbackQueue(); // SNG-066: send any feedback captured while sync was off
   hydrateGeneratedIntoContent(character); // SNG-BATCH-9: make this character's grown world live + revisitable
+  pruneEmptyGalleryTiles(character); // SNG-136: drop any failed-gen blank tiles
+  ensureBondPortraits(character);    // SNG-136: retro backfill — an already-devoted bond (Pell) gets its portrait once
   if (character.sharedSceneId && syncEnabled()) {
     fetchScene(character.sharedSceneId).then(sc => {
       if (sc && sc.party.some(m => m.characterId === character.id)) { sharedScene = sc; seenBeats = sc.beats.length; if (!partyPoll) partyPoll = setInterval(pollPartyScene, 20000); }
@@ -2654,6 +2684,7 @@ function applyTurn(turn, resolution, playerWords = null) {
   applyPlaceUpdates(character, location.id, turn.placeUpdates || [], memCtx);
   applyCodexUpdates(character, turn.codexUpdates || [], memCtx);
   applyFactUpdates(character, turn.factUpdates || [], memCtx);
+  ensureBondPortraits(character); // SNG-136: a bond that crossed a high milestone this turn earns a portrait
   // §2 engagement: interacting with a grown NPC or accreting a fact about a grown entity is
   // attention — it keeps them real + surfacing. (Revisiting a grown place is signaled in travelTo.)
   for (const u of turn.npcUpdates || []) noteGeneratedAttention(u.npcId, "interact", memCtx.day);

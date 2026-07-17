@@ -176,6 +176,18 @@ export function relationshipBand(score) {
   return "neutral";
 }
 
+/** SNG-136: has this NPC crossed a HIGH bond milestone that earns a dedicated portrait? Returns the tier
+ *  name (a person who MATTERS) or null. Romantic committed/partner, a sworn tie, or a devoted-band bond
+ *  (score ≥ 7 — Pell). The higher milestones only, never every acquaintance. Pure. */
+export function npcPortraitTier(n) {
+  if (!n) return null;
+  if (n.bondStage === "partner") return "partner";
+  if (n.bondStage === "committed") return "committed";
+  if (n.bondType === "sworn") return "sworn";
+  if (relationshipBand(Number(n.relationship) || 0) === "devoted") return "devoted";
+  return null;
+}
+
 /** SNG-108: set/advance an NPC bond's KIND (bondType) and — for a romantic bond — its STAGE, gated:
  *  romantic is REFUSED for a minor (same floor as art/romance); a stage may advance at most one step
  *  per beat and only if the relationship score meets that stage's floor (no leaping to "partner" at

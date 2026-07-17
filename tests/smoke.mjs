@@ -13,7 +13,7 @@ import { companionBonus, companionsForGM, activeCompanions, partnerAdjacentNpcs 
 import { applyQuestUpdates, questsForGM, slugify, resolveQuest, dedupeQuests, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, threadTouched } from "../engine/quests.js";
 import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, touchSession, endSession, sessionLog, buildSessionPrompt, authorshipStats, crossCharacterAuthorship } from "../engine/chronicle.js";
 import { sanitizeScene, buildTurnContext, sanitizeIntent, narrativeRegister, ratingRegister, renderSceneHistory, tierParts } from "../engine/gm.js";
-import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, findExistingNpc, prettifyNpcName, relationshipBand, advanceBond, relationshipLabel, isPartnerAdjacent, knownPeopleAt } from "../engine/npcs.js";
+import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, findExistingNpc, prettifyNpcName, relationshipBand, advanceBond, relationshipLabel, isPartnerAdjacent, knownPeopleAt, npcPortraitTier } from "../engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
 import { initWorldState, runWorldTick, advanceGeneratedOffscreen, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "../engine/worldtick.js";
 import { assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "../engine/gambit.js";
@@ -38,7 +38,7 @@ import { validate, missingRequired, defaultFor } from "../engine/genschema.js";
 import { generate, ensureGenerated, resolveExisting, mintId, repairEntity, stubEntity, birthWeightOf, buildGeneratePrompt, generatedRecords, GEN_TYPES, isMinorEntity, enforceFloors, recordAttention, effectiveWeight, recomputeTier, isDormant, isSurfaceable, livingWorldForGM, findGenerated, nominationsFor } from "../engine/generate.js";
 import { applyCodexUpdates as applyCodexUpdatesGen } from "../engine/codex.js";
 import { ensureCanonStore, promotionCandidates, buildCanonRecord, findCanonCollision, resolveContradiction, promoteInto, mergeCanonStores, lensDecision, canonForViewer, adaptView, AUTHORED_CANON_WEIGHT, contributionsBy } from "../engine/canon.js";
-import { sanitizeImagePrompt, assembleImagePrompt, characterPromptSeed, imageURLFor, ensureImage, isMinorSubject, addGalleryImage, ensureGallery, itemProvenancePhrase, deleteGalleryImage } from "../engine/art.js";
+import { sanitizeImagePrompt, assembleImagePrompt, characterPromptSeed, npcPromptSeed, imageURLFor, ensureImage, isMinorSubject, addGalleryImage, ensureGallery, itemProvenancePhrase, deleteGalleryImage } from "../engine/art.js";
 import { planPlayerDedup, dedupePlayers, resolvePlayerKey, findProfileByName, resolveLocationId } from "../engine/state.js";
 import { applyStateOps, describeCorrection } from "../engine/corrections.js";
 import { isEventfulTurn, pressureTier, pressureDirective } from "../engine/pacing.js";
@@ -3567,6 +3567,30 @@ await (async () => {
     /closest to Pell/.test(para) && /Aldric/.test(para) && /Mara/.test(para) && /Vex/.test(para) && para.endsWith("."));
   check("SNG-134: no bonds → an empty paragraph (a new character isn't given a phantom social life)",
     relationshipsParagraph({ npcRegistry: {} }) === "" && relationshipsParagraph({ npcRegistry: { stranger: { name: "A Stranger", relationship: 1 } } }) === "");
+}
+
+// --- SNG-136: portraits reflect lived growth — chronicle in the seed, NPC portraits on bond milestones ---
+{
+  // P1: the character seed folds in the LIVED record — a level-11 char with deeds differs from level-1
+  const base = { name: "Silas", origin: "valley", background: "medic", appearance: "a gaunt man in grey", inventory: [] };
+  const green = characterPromptSeed({ ...base, level: 1, deeds: [] });
+  const lived = characterPromptSeed({ ...base, level: 11, deeds: [{ description: "ended the raider-lord at the weir", weight: 3 }, { description: "a routine errand", weight: 1 }] });
+  check("SNG-136: a level-11 seed with deeds differs from the level-1 creation seed (the lived record reaches the picture)", lived !== green && lived.length > green.length);
+  check("SNG-136: the seed folds in the latest MAJOR deed + a level-band clause, bounded", /raider-lord at the weir/.test(lived) && /(hard road|marks of what|no longer untested)/.test(lived) && !/routine errand/.test(lived));
+  check("SNG-136: a fresh character's seed is unchanged (seed motivation still shows until deeds accrue)", /grey/.test(green));
+
+  // P2: npcPromptSeed builds from the NPC + their bond to the player
+  const pell = { id: "pell", name: "Pell", role: "a marsh-warden", appearance: "sharp-eyed, river-mud on her boots", relationship: 9, bondType: "romantic", bondStage: "partner" };
+  const ns = npcPromptSeed(pell, { name: "Silas" });
+  check("SNG-136: npcPromptSeed weaves the NPC's look + role + their bond to the player", /Pell/.test(ns) && /marsh-warden/.test(ns) && /partner romantic to Silas/.test(ns));
+
+  // npcPortraitTier — the HIGH milestones only (partner/committed/sworn/devoted-band), never every acquaintance
+  check("SNG-136: npcPortraitTier fires on partner/committed/sworn and a devoted-band bond (Pell), never a mere acquaintance",
+    npcPortraitTier({ bondStage: "partner" }) === "partner" && npcPortraitTier({ bondStage: "committed" }) === "committed" &&
+    npcPortraitTier({ bondType: "sworn" }) === "sworn" && npcPortraitTier({ relationship: 8 }) === "devoted" &&
+    npcPortraitTier({ relationship: 3 }) === null && npcPortraitTier({ bondStage: "courting" }) === null);
+  check("SNG-136: an already-portrayed tier is not re-fired (dedup by tier) — the caller checks _portraitTier",
+    npcPortraitTier(pell) === "partner"); // the app skips when n._portraitTier === this tier
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

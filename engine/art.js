@@ -176,17 +176,41 @@ export function characterPromptSeed(character = {}, opts = {}) {
   if (character.background) bits.push(String(character.background).replace(/[-_]/g, " "));
   const gear = (character.inventory || []).map(itemProvenancePhrase).filter(Boolean).slice(0, 3);
   if (gear.length) bits.push(`carrying ${gear.join(", ")}`);
+  // SNG-136 P1: fold in the LIVED record — level-band, the latest major deed, the current arc stage — so a
+  // regen shows who they've BECOME, not who they were at creation. Bounded to a few evocative clauses
+  // (coherence + prompt length). Same source that feeds the SNG-134 lived header story.
+  const lvl = Number(character.level) || 1;
+  if (lvl >= 5) bits.push(lvl >= 12 ? "long-marked by a hard road, the years written on them" : lvl >= 8 ? "seasoned, bearing the marks of what they've done" : "no longer untested");
+  const topDeed = (character.deeds || []).filter(d => d?.description && Math.abs(d.weight | 0) >= 2).sort((a, b) => Math.abs(b.weight | 0) - Math.abs(a.weight | 0))[0];
+  if (topDeed) bits.push(String(topDeed.description).slice(0, 90));
+  const pa = character.personalArc; const taken = pa && (character.quests || []).find(q => q.arcId === pa.arcId);
+  const stage = taken && pa.stages ? pa.stages[taken.stageIndex] : null;
+  if (stage?.objective) bits.push(`amid ${String(stage.objective).slice(0, 60)}`);
   const arc = character.bio?.motivation || character.currentAim;
-  if (arc) bits.push(String(arc).slice(0, 120));
+  if (arc && !topDeed) bits.push(String(arc).slice(0, 120)); // seed motivation only until real deeds accrue
   const co = opts.withCompanion;
   if (co?.name) bits.push(`alongside ${co.name}${co.appearance ? `, ${String(co.appearance).slice(0, 140)}` : ""}`);
+  return bits.join(", ");
+}
+
+/** SNG-136 P2: the portrait seed for an NPC who has crossed a bond milestone — built from their form/
+ *  description + role + their relationship TO the player (a devoted partner, a sworn ally). Rating-lensed
+ *  + minor-safe downstream (ensureImage runs the floors). Pure. */
+export function npcPromptSeed(npc = {}, character = {}) {
+  const lead = String(npc.appearance || npc.form || formOf(npc) || npc.description || npc.role || npc.name || "a person").slice(0, 200);
+  const bits = [`${lead}, character portrait`];
+  if (npc.name) bits.push(`named ${npc.name}`);
+  if (npc.role) bits.push(String(npc.role).slice(0, 100));
+  const label = [npc.bondStage, npc.bondType].filter(Boolean).join(" ").trim();
+  if (label) bits.push(`${label} to ${character.name || "the traveler"}`);
+  if (npc.voiceHints) bits.push(String(npc.voiceHints).slice(0, 100));
   return bits.join(", ");
 }
 
 /** Assemble the raw (pre-floors) descriptive prompt for a subject of a given kind. Pure. */
 export function assembleImagePrompt(kind, subject = {}, ctx = {}) {
   if (kind === "character") return characterPromptSeed(subject, ctx);
-  if (kind === "npc") return `${formOf(subject)}, character portrait of ${subject.name || "a figure"}, ${subject.role || ""}. ${subject.voiceHints || ""}`.trim();
+  if (kind === "npc") return npcPromptSeed(subject, ctx.character || {}); // SNG-136: richer seed w/ bond-to-player
   if (kind === "location") return `${subject.name || "a place"}: ${(subject.descriptionSeed || subject.encounterFlavor || "").slice(0, 300)}`;
   if (kind === "item") return `single item on plain dark background, ${subject.name}: ${subject.description || subject.kind || ""}`;
   if (kind === "moment") return String(subject.prompt || subject).slice(0, 300);

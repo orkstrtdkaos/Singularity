@@ -601,34 +601,19 @@
         "player": "Say nothing to Leth yet — use Palework on the fresher ink itself: read how recently it was written and what state the hand was in",
         "summary": "Palework reads the fresher ink as added within forty-eight hours — fast, deliberate hand, a symbol written with unusual care, added after Calvar left the diagram with Leth.",
         "narration": "You rest two fingers at the lower-right corner of the diagram without quite touching the ink — close enough that Palework can find its edge. Three energy draws down, but you hold it light, barely a pressure. Reading the already-finished is what this craft does best, and the ink is finished enough.\n\nWhat comes back is recent. The ink dried within the last forty-eight hours — no more. And it came from a hand that was working fast. Not panicked, not trembling, but moving with the compressed economy of someone who has very little time and knows it. The four characters were pressed in with the kind of deliberate force you use when you need the mark to stay, whatever else happens. The unrecognized symbol beside them is different — it went on last, and the hand slowed for it, deliberate in a way the characters were not. Whatever that symbol means to whoever wrote it, they wanted to get it right.\n\nLeth is watching you. She has not moved and has not asked. Pell's gaze drops from your face to the corner of the diagram and back up — she's read that you read something.\n\nCalvar left this diagram three days ago. Whatever is in that lower-right corner was added after he was gone."
+      },
+      {
+        "player": "Ask Leth directly — has anyone else handled or viewed this diagram since Calvar left it?",
+        "summary": "Leth confirms no one was given access to the diagram — someone entered her room during the night and added the symbol without her knowledge.",
+        "narration": "You lift your fingers from the corner of the diagram and look up at Leth. The lamp between you holds the room in amber — her face, the shelves behind her, the open roll.\n\n\"Has anyone else handled this since Calvar left it? Seen it, even?\"\n\nLeth's answer is immediate, and that itself is telling. \"No. He brought it himself — morning, three days ago, before the first light-guide shift. Set it on the desk, told me to keep it off the shelves and under the cord until someone came asking about the seventh band or the lower filtration ledge. Those were his words, exactly.\" A pause. \"I filed Sorel's letter this morning. No one came before you.\"\n\nShe looks at the diagram, then at you, then at your fingers hovering near the lower-right corner. \"Something's been added.\" It isn't a question. She has noticed the way your hand was positioned — the archivist's eye has been tracking you since you touched it. \"I did not add it. The roll has been under the cord on this desk, in this room, with the door propped — but I sleep in the next room, and I am not awake every hour.\" Her voice carries no defensiveness, only the flat precision of a woman filing an accurate report. \"Someone came in during the night. One of the two nights since he left it.\"\n\nPell straightens in the door frame. Outside, Huginn shifts on the sign-board — one small repositioning, weight to the other foot, the way the bird moves when something has just been confirmed rather than discovered. The Edge District evening presses at the open door: the faint braid of light rising from the street guides below, the smell of lamp oil and cooling stone."
       }
     ],
     "lastTurn": {
-      "narration": "You rest two fingers at the lower-right corner of the diagram without quite touching the ink — close enough that Palework can find its edge. Three energy draws down, but you hold it light, barely a pressure. Reading the already-finished is what this craft does best, and the ink is finished enough.\n\nWhat comes back is recent. The ink dried within the last forty-eight hours — no more. And it came from a hand that was working fast. Not panicked, not trembling, but moving with the compressed economy of someone who has very little time and knows it. The four characters were pressed in with the kind of deliberate force you use when you need the mark to stay, whatever else happens. The unrecognized symbol beside them is different — it went on last, and the hand slowed for it, deliberate in a way the characters were not. Whatever that symbol means to whoever wrote it, they wanted to get it right.\n\nLeth is watching you. She has not moved and has not asked. Pell's gaze drops from your face to the corner of the diagram and back up — she's read that you read something.\n\nCalvar left this diagram three days ago. Whatever is in that lower-right corner was added after he was gone.",
-      "sceneSummary": "Palework reads the fresher ink as added within forty-eight hours — fast, deliberate hand, a symbol written with unusual care, added after Calvar left the diagram with Leth.",
+      "narration": "You lift your fingers from the corner of the diagram and look up at Leth. The lamp between you holds the room in amber — her face, the shelves behind her, the open roll.\n\n\"Has anyone else handled this since Calvar left it? Seen it, even?\"\n\nLeth's answer is immediate, and that itself is telling. \"No. He brought it himself — morning, three days ago, before the first light-guide shift. Set it on the desk, told me to keep it off the shelves and under the cord until someone came asking about the seventh band or the lower filtration ledge. Those were his words, exactly.\" A pause. \"I filed Sorel's letter this morning. No one came before you.\"\n\nShe looks at the diagram, then at you, then at your fingers hovering near the lower-right corner. \"Something's been added.\" It isn't a question. She has noticed the way your hand was positioned — the archivist's eye has been tracking you since you touched it. \"I did not add it. The roll has been under the cord on this desk, in this room, with the door propped — but I sleep in the next room, and I am not awake every hour.\" Her voice carries no defensiveness, only the flat precision of a woman filing an accurate report. \"Someone came in during the night. One of the two nights since he left it.\"\n\nPell straightens in the door frame. Outside, Huginn shifts on the sign-board — one small repositioning, weight to the other foot, the way the bird moves when something has just been confirmed rather than discovered. The Edge District evening presses at the open door: the faint braid of light rising from the street guides below, the smell of lamp oil and cooling stone.",
+      "sceneSummary": "Leth confirms no one was given access to the diagram — someone entered her room during the night and added the symbol without her knowledge.",
       "choices": [
         {
-          "label": "Ask Leth directly — has anyone else handled or viewed this diagram since Calvar left it?",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Describe what you read — tell Leth and Pell plainly: someone added to this after Calvar left, within two days, in a hurry",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "intentTags": [
-            "persuade"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Use Order-Sense on the symbol specifically — read what design or system that mark belongs to",
+          "label": "Use Order-Sense on the room itself — read what design the archive room is part of and how the entry was made",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
@@ -636,48 +621,100 @@
           },
           "difficulty": 15,
           "intentTags": [
-            "study"
+            "study",
+            "careful"
           ],
           "abilityId": "order_sense",
           "energyCost": 2,
-          "trivial": false
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Leave the diagram and go straight to the cooperage — Calvar is there now and may not be by morning",
+          "label": "Ask Leth what she knows about the four characters — does she recognize the script or the hand",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.5
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Go to Calvar now — cross the district to the cooperage on the east lane and find him tonight",
           "attribute": "practical",
           "subAttribute": "wits",
+          "axes": {
+            "concrete_abstract": 0.3
+          },
           "difficulty": 0,
           "intentTags": [
             "travel"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Roll the diagram and take it with Leth's permission — Calvar needs to know someone marked his proof",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.4
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "negotiate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
+      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -3
+        "energy": 0
       },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "find-the-engineer",
+          "note": "Confirmed: the diagram was added to during the night after Calvar left it with Leth — someone entered the archive room without permission and marked the proof. Calvar does not know."
+        }
+      ],
       "scene": {
-        "setting": "Leth's archive room in the Edge District — low stone building, door propped with a round river rock, lamp steady on the slanted desk, full dark outside. The document roll lies open, Calvar's diagram visible; Silas's fingers rest near the lower-right corner where the fresher ink is.",
+        "setting": "Leth's archive room in the Edge District — low stone building, door propped with a round river rock, lamp steady on the slanted desk, full dark outside. The document roll lies open, Calvar's diagram visible; the fresher ink at the lower-right corner now confirmed as a night addition by an unknown hand.",
         "npcsPresent": [
           {
             "name": "Leth",
-            "state": "Standing at the desk, watching Silas with steady professional attention — she has not moved or asked"
+            "state": "Standing at the desk, eyes on the diagram — filing the new information with the same flat precision she gives everything; not shaken, but the archivist's calm has a sharper edge now"
           },
           {
             "name": "Pell",
-            "state": "At the door frame, eyes moving between Silas's face and the diagram's lower-right corner — she knows he read something"
+            "state": "Straightened in the door frame — listening, reading the room's new weight"
           },
           {
             "name": "Huginn",
-            "state": "On the sign board outside the open door, eye still on the diagram"
+            "state": "On the sign board outside, weight shifted — attending to the confirmation, not the discovery"
           }
         ],
         "objects": [
           "Slanted writing desk",
           "Sorel's letter — filed at upper-right corner of the desk",
-          "Opened document roll — diagram in Calvar's hand, two notation columns, distinctive three-formation hand",
-          "Second notation in fresher ink — lower-right corner, smaller flatter hand, four characters and an unrecognized symbol; dried within forty-eight hours, written fast except for the final symbol",
+          "Opened document roll — diagram in Calvar's hand, two notation columns, lower-right corner marked by an unknown hand within the last forty-eight hours",
           "Dark waxed cord — untied, set aside",
           "Floor-to-ceiling shelving, every bundle tied and labeled",
           "Round river rock propping the door",
@@ -685,11 +722,10 @@
           "Fendt's Testimony — folded page in Silas's coat"
         ],
         "threads": [
-          "The fresher ink was added within forty-eight hours — after Calvar left the diagram; someone else accessed it",
-          "The final symbol was written slowly and deliberately — it matters to whoever wrote it",
-          "Leth has not been asked whether anyone else handled the diagram",
-          "Calvar is above the cooperage on the east lane — has not been approached",
-          "Whether Calvar knows the diagram has been marked by another hand"
+          "Someone entered Leth's archive room during one of the two nights since Calvar left the diagram — the entry method is unknown",
+          "The four characters at the lower-right corner were written by an unidentified hand with deliberate force — their meaning is still unread",
+          "Calvar does not know the diagram has been marked by another hand",
+          "Calvar is above the cooperage on the east lane — not yet approached"
         ]
       },
       "npcUpdates": [
@@ -697,53 +733,82 @@
           "op": "update",
           "npcId": "leth",
           "name": "Leth",
-          "note": "Watched Silas use Palework on the fresher ink — did not interrupt or ask; is waiting",
-          "statusNote": "At her archive room in the Edge District — holding steady, waiting for Silas to share what he read from the diagram"
+          "note": "Confirmed no authorized access to the diagram since Calvar left it — but acknowledges someone could have entered during the night; the archivist's room is not sealed. Filing the fact with professional precision.",
+          "learned": [
+            "The diagram was left with specific instructions: keep it off the shelves, under the cord, until someone came asking about the seventh band or the lower filtration ledge — those were Calvar's exact words",
+            "Calvar brought it himself before the first light-guide shift, morning, three days ago",
+            "Leth did not add the fresher notation — she recognizes someone entered during one of the two nights since",
+            "The room was accessible: door propped, Leth sleeping in the next room, not awake every hour"
+          ],
+          "skillsObserved": [
+            "tracking a visitor's physical attention and inferring what they read from it",
+            "accurate self-reporting without defensiveness under implication"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At her archive room in the Edge District — now aware that someone entered her room at night and marked Calvar's proof without her knowledge"
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Someone entered Leth's archive room during one of the two nights after Calvar left his diagram — they added four characters in deliberate, fast-pressed ink to the lower-right corner without Leth's knowledge or permission. Entry method unknown. Calvar does not know.",
+          "subjectId": "leth"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "the-document-roll-leth-s-desk",
-          "label": "The Document Roll — Leth's Desk",
-          "kind": "mystery",
-          "entityId": null,
-          "fact": "Palework confirms the fresher ink at the lower-right corner was added within forty-eight hours of this reading — after Calvar left the diagram with Leth three days ago. The hand was working fast under time pressure for the four characters; the final symbol was written slowly, deliberately, as if its accuracy mattered above all. Someone accessed this diagram after Calvar and before Silas.",
+          "topic": "calvar",
+          "label": "Calvar — the Engineer",
+          "kind": "person",
+          "entityId": "calvar",
+          "fact": "Calvar left the diagram with Leth with specific verbal instructions: hold it off the shelves, under the cord, until someone came asking about the seventh band or the lower filtration ledge. He anticipated someone would come. He did not anticipate someone would mark it first.",
           "links": [
             "find-the-engineer",
             "leth-archive-complaint",
-            "leth",
+            "the-document-roll-leth-s-desk",
+            "radiant-plateau-edge"
+          ]
+        },
+        {
+          "topic": "the-document-roll-leth-s-desk",
+          "label": "The Document Roll — Leth's Desk",
+          "kind": "mystery",
+          "fact": "Leth did not add the fresher notation — confirmed. An unknown actor entered her archive room during one of the two nights after Calvar left the diagram. The entry was undetected; the room was accessible but not public. Whoever added the symbol knew the diagram was there.",
+          "links": [
             "calvar",
+            "find-the-engineer",
+            "leth",
             "radiant-plateau-edge",
-            "the-water-crisis"
+            "leth-archive-complaint"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief, careful Palework reading — a minute of concentrated attention"
+        "why": "a brief direct exchange — one question, one answer"
       }
     },
     "sceneState": {
-      "setting": "Leth's archive room in the Edge District — low stone building, door propped with a round river rock, lamp steady on the slanted desk, full dark outside. The document roll lies open, Calvar's diagram visible; Silas's fingers rest near the lower-right corner where the fresher ink is.",
+      "setting": "Leth's archive room in the Edge District — low stone building, door propped with a round river rock, lamp steady on the slanted desk, full dark outside. The document roll lies open, Calvar's diagram visible; the fresher ink at the lower-right corner now confirmed as a night addition by an unknown hand.",
       "npcsPresent": [
         {
           "name": "Leth",
-          "state": "Standing at the desk, watching Silas with steady professional attention — she has not moved or asked"
+          "state": "Standing at the desk, eyes on the diagram — filing the new information with the same flat precision she gives everything"
         },
         {
           "name": "Pell",
-          "state": "At the door frame, eyes moving between Silas's face and the diagram's lower-right corner — she knows he read something"
+          "state": "Straightened in the door frame — listening, reading the room's new weight"
         },
         {
           "name": "Huginn",
-          "state": "On the sign board outside the open door, eye still on the diagram"
+          "state": "On the sign board outside, weight shifted — attending to the confirmation, not the discovery"
         }
       ],
       "objects": [
         "Slanted writing desk",
         "Sorel's letter — filed at upper-right corner of the desk",
-        "Opened document roll — diagram in Calvar's hand, two notation columns, distincti",
-        "Second notation in fresher ink — lower-right corner, smaller flatter hand, four ",
+        "Opened document roll — diagram in Calvar's hand, two notation columns, lower-rig",
         "Dark waxed cord — untied, set aside",
         "Floor-to-ceiling shelving, every bundle tied and labeled",
         "Round river rock propping the door",
@@ -751,11 +816,10 @@
         "Fendt's Testimony — folded page in Silas's coat"
       ],
       "threads": [
-        "The fresher ink was added within forty-eight hours — after Calvar left the diagram; someone else accessed it",
-        "The final symbol was written slowly and deliberately — it matters to whoever wrote it",
-        "Leth has not been asked whether anyone else handled the diagram",
-        "Calvar is above the cooperage on the east lane — has not been approached",
-        "Whether Calvar knows the diagram has been marked by another hand"
+        "Someone entered Leth's archive room during one of the two nights since Calvar left the diagram — the entry method is unknown",
+        "The four characters at the lower-right corner were written by an unidentified hand with deliberate force — their meaning is still unread",
+        "Calvar does not know the diagram has been marked by another hand",
+        "Calvar is above the cooperage on the east lane — not yet approached"
       ]
     }
   },
@@ -808,7 +872,8 @@
         "Arrived in the Edge District. Huginn is watching a specific building. Pell advises starting there before pursuing Leth.",
         "Leth found at her archive room — she has Sorel's letter, knows the shape of the ask, and is ready to give the engineer's name after covering her own ground first.",
         "Leth is covering her ground — archive breach first, then the engineer's name. She has a document roll on her desk and is sequencing deliberately.",
-        "Leth named Calvar — above the cooperage on the east lane. She opened the document roll: a diagram in his own hand, left three days ago. He knows something is changing and came to Leth first. His location is confirmed; the question is whether he'll go."
+        "Leth named Calvar — above the cooperage on the east lane. She opened the document roll: a diagram in his own hand, left three days ago. He knows something is changing and came to Leth first. His location is confirmed; the question is whether he'll go.",
+        "Confirmed: the diagram was added to during the night after Calvar left it with Leth — someone entered the archive room without permission and marked the proof. Calvar does not know."
       ],
       "aliases": [],
       "startedAt": "2026-07-16T19:11:11.950Z"
@@ -1487,28 +1552,29 @@
         "[d3] Received Silas and Pell with Sorel's letter already in hand. Named them as Grael's engineer's seekers without being told. Announced she has ground to cover first.",
         "[d3] Set her sequence plainly — two things before the name: the archive breach and what it means for the engineer. Has a document roll on the desk. Pausing before the second.",
         "[d3] Completed her sequence — named Calvar above the cooperage on the east lane. Opened the document roll: a diagram in Calvar's own hand, left with her three days ago. Stated plainly t",
-        "[d3] Watched Silas use Palework on the fresher ink — did not interrupt or ask; is waiting"
+        "[d3] Watched Silas use Palework on the fresher ink — did not interrupt or ask; is waiting",
+        "[d3] Confirmed no authorized access to the diagram since Calvar left it — but acknowledges someone could have entered during the night; the archivist's room is not sealed. Filing the fa"
       ],
       "knownFacts": [
-        "She knows Silas is looking for 'Grael's engineer' — that framing is hers, and it carries weight",
-        "She will give the name, but on her own sequence",
-        "The breach was six weeks ago — calibration files, pre-Transition provenance",
         "The taker knew the working layout of the secondary stack, third tier, east corner — not public knowledge",
         "She will not give the name until both things are covered",
         "The seventh-band monitoring specification and calibration tolerances Calvar designed are now in someone else's hands — his authorship of the design cannot be pr",
         "Calvar came to Leth three days ago and left a diagram — a diagram in his own distinctive hand",
-        "Calvar has not left the Edge District since the Transition — fifteen years, watching the array run on his own specifications"
+        "Calvar has not left the Edge District since the Transition — fifteen years, watching the array run on his own specifications",
+        "The diagram was left with specific instructions: keep it off the shelves, under the cord, until someone came asking about the seventh band or the lower filtrati",
+        "Calvar brought it himself before the first light-guide shift, morning, three days ago",
+        "Leth did not add the fresher notation — she recognizes someone entered during one of the two nights since"
       ],
       "skillsObserved": [
-        "rapid temporal inference from a single data point",
-        "composure and sequencing under an unknown visitor",
         "sequencing disclosure deliberately under unknown visitor con",
         "reading a listener's quality — 'good' at the held silence",
         "sequencing disclosure to maximum clarity — withheld the name",
-        "reading a subject's decision-state from behavioral evidence "
+        "reading a subject's decision-state from behavioral evidence ",
+        "tracking a visitor's physical attention and inferring what t",
+        "accurate self-reporting without defensiveness under implicat"
       ],
       "status": "active",
-      "statusNote": "At her archive room in the Edge District — holding steady, waiting for Silas to share what he read from the diagram",
+      "statusNote": "At her archive room in the Edge District — now aware that someone entered her room at night and marked Calvar's proof without her knowledge",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 3
@@ -2609,7 +2675,8 @@
         "facts": [
           "[d3] Huginn's attention fixed on Leth's unopened document roll — preservation-weight paper, tied with dark waxed cord, set deliberately on the desk rather than filed with the others. The bird attends to en",
           "[d3] Order-Sense confirms the diagram shows only the seventh-band section — deliberate exclusion of the upper bands, primary intake, and northeastern branching conduit. The larger design is present in its ",
-          "[d3] Palework confirms the fresher ink at the lower-right corner was added within forty-eight hours of this reading — after Calvar left the diagram with Leth three days ago. The hand was working fast under"
+          "[d3] Palework confirms the fresher ink at the lower-right corner was added within forty-eight hours of this reading — after Calvar left the diagram with Leth three days ago. The hand was working fast under",
+          "[d3] Leth did not add the fresher notation — confirmed. An unknown actor entered her archive room during one of the two nights after Calvar left the diagram. The entry was undetected; the room was accessib"
         ],
         "links": [
           "find-the-engineer",
@@ -2629,14 +2696,16 @@
         "facts": [
           "[d3] His name is Calvar. He lives above the cooperage on the east lane of the Edge District. He authored the seventh-band monitoring specification and the calibration tolerances for the lower filtration re",
           "[d3] Pre-Transition filtration engineer, author of the seventh-band monitoring specification — a man who stopped moving fifteen years ago because the light in one room told him everything he still needed t",
-          "[d3] The diagram Calvar left with Leth is not a full array schematic — it is specifically the seventh-band section, a proof-of-authorship anchor. He brought Leth the piece that establishes he designed the "
+          "[d3] The diagram Calvar left with Leth is not a full array schematic — it is specifically the seventh-band section, a proof-of-authorship anchor. He brought Leth the piece that establishes he designed the ",
+          "[d3] Calvar left the diagram with Leth with specific verbal instructions: hold it off the shelves, under the cord, until someone came asking about the seventh band or the lower filtration ledge. He anticip"
         ],
         "links": [
           "find-the-engineer",
           "leth-archive-complaint",
           "fendt-and-the-falsified-ledger",
           "the-water-crisis",
-          "radiant-plateau-edge"
+          "radiant-plateau-edge",
+          "the-document-roll-leth-s-desk"
         ],
         "aliases": [
           "Calvar"
@@ -2665,29 +2734,28 @@
     }
   },
   "tendencies": {
-    "strategic": 26.934910761680843,
-    "cerebral": 26.234631264970286,
-    "social": 23.43578788052894,
-    "generous": 5.119959297504676,
-    "cautious": 20.823497776990372,
-    "physical": 1.1125065169175612,
-    "risky": 3.1325945693255517,
-    "ruthless": 1.3774835205266334,
-    "carousing": 0.9672720516821064,
-    "amorous": 2.6523987700077667,
-    "patient": 1.77618390324481
+    "strategic": 26.26153799263882,
+    "cerebral": 26.57876548334603,
+    "social": 22.849893183515718,
+    "generous": 4.991960315067058,
+    "cautious": 20.302910332565613,
+    "physical": 1.084693853994622,
+    "risky": 3.0542797050924126,
+    "ruthless": 1.3430464325134674,
+    "carousing": 0.9430902503900537,
+    "amorous": 2.5860888007575724,
+    "patient": 1.7317793056636896
   },
   "aptitudes": [
     "strategist",
     "silver_tongue",
     "scholar",
-    "good_samaritan",
     "tactician",
     "orator",
     "sage",
     "stalwart"
   ],
-  "actionCount": 361,
+  "actionCount": 362,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2837,8 +2905,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784258287468,
-  "rev": 516,
+  "updatedAt": 1784258397417,
+  "rev": 517,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3094,7 +3162,7 @@
           "entityId": "calvar",
           "type": "npc",
           "birthWeight": 10,
-          "engagementScore": 1,
+          "engagementScore": 2,
           "tier": "fresh",
           "rating": "R+",
           "provenance": {
@@ -3107,6 +3175,10 @@
             "why": "Named by Leth as the engineer the party must find and persuade to leave the Edge District; the party will go to him next"
           },
           "attentionHistory": [
+            {
+              "kind": "fact",
+              "day": 3
+            },
             {
               "kind": "fact",
               "day": 3
@@ -3126,12 +3198,6 @@
   },
   "opLossPending": false,
   "establishedFacts": [
-    {
-      "id": "pell",
-      "text": "Pell agreed to walk north with Silas after the farmer's sleeve job to inspect the failed east-channel valve sites — Fen's intake is the first destination, twenty minutes north of the upper meadow.",
-      "day": 2,
-      "subjectId": "pell"
-    },
     {
       "id": "mara-wells",
       "text": "Mara's ledger confirms four iron sleeve blank failures in three weeks — Fen's intake (World-day minus-18) and east furlong farmer (World-day minus-9) confirmed; two additional failures unidentified. T",
@@ -3365,6 +3431,12 @@
       "text": "The engineer's name is Calvar. He lives above the cooperage on the east lane of the Edge District. He authored the seventh-band monitoring specification. He came to Leth three days ago and left a diag",
       "day": 3,
       "subjectId": "calvar"
+    },
+    {
+      "id": "leth",
+      "text": "Someone entered Leth's archive room during one of the two nights after Calvar left his diagram — they added four characters in deliberate, fast-pressed ink to the lower-right corner without Leth's kno",
+      "day": 3,
+      "subjectId": "leth"
     }
   ],
   "practice": {
@@ -3479,7 +3551,7 @@
   "syncedAt": 1784184597860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 176
+    "valley": 177
   },
   "foreclosed": [
     "rootkin",
@@ -3508,10 +3580,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-07-17T03:03:05.063Z",
-      "lastAt": "2026-07-17T03:18:07.466Z",
+      "lastAt": "2026-07-17T03:19:57.416Z",
       "startDay": 17,
       "endDay": 17,
-      "beats": 7
+      "beats": 8
     }
   ]
 }

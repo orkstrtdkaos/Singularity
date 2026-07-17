@@ -1,4 +1,9 @@
-# PIPELINE ALERT — Singularity## ⚡ SNG-131 rulings LOCKED+EXPANDED + 🌿 Nature parallel + 🕯️ center braidstrength
+# PIPELINE ALERT — Singularity## 🧵 SNG-133 — Every backstory seeds a personal quest arc at creation (the Aelyn pattern, systematized)
+`po/SPEC_SNG-133_backstory_personal_arc.md`. Erik: make Aelyn's case universal — every character's backstory generates their PRIMARY personal quest arc. **Verified it's a hookup, not a new engine:** bio is captured at creation (`renderBioStep` L1926 → `finish()` L1959), and `generate.js` already lists `"arc"` in `GEN_TYPES` — nothing connects them today (Aelyn's arc was a manual one-off). Add `generatePersonalArc(character)` after the bio write: seed premise/stakes/catalyst-NPC/3-stages/open-routes from `motivation`+`story`+domains+origin, bind to the character (SNG-132), with the shipped `the_reaching_light` arc as the few-shot exemplar AND the quality bar. Scales to input (rich bio → epic, thin → modest hook, empty → origin thread; never zero). Never forecloses the ending. Produces the bound arcs SNG-132 knows how to run + pace.
+
+---
+
+## ⚡ SNG-131 rulings LOCKED+EXPANDED + 🌿 Nature parallel + 🕯️ center braidstrength
 Erik ruled: (1) deep-power peoples innate precursor **as a base, growing along chosen lines** like any skill; (2) **NATURE gets the parallel** — living-substrate innate access, **ROOTKIN as the anti-pole** to the nanite deep-power (fabricated vs living substrate, antipodal); (3) **the center/Millbrook holds BOTH and earns its own BRAIDSTRENGTH** — folk `braidAffinity`, the one place that can braid the poles. `po/SPEC_SNG-131_*` updated. Aevi authors `innatePrecursor`/`innateLivingCurrent`/`braidAffinity` with SNG-130.
 
 ## 🕯️ SNG-132 — Aelyn's father arc AUTHORED + shipped + family content-generators

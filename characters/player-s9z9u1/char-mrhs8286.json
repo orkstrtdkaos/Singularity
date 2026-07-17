@@ -70,7 +70,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.5337818141933365,
+    "spectrumId": -0.5070927234836696,
     "violence_peace": 0.09798375000000001,
     "chaos_order": 0.2085002906812526,
     "mechanical_spiritual": 0.23279962203849028,
@@ -951,68 +951,77 @@
         "player": "Take in the scene of her in the steaming water in all it's exquisite detail.",
         "summary": "Silas studies Pell in the bath trough — she receives it without management and asks if he's getting in.",
         "narration": "The bath trough is wide enough that she can stretch — and she has, her arms along the rim, shoulders just above the waterline, the steam rising off her skin in slow columns that the junction conduit warmth keeps replacing. The water is still clear enough to see through to her hips, her legs bent at the knee, the line of her thighs. She has her head tipped back against the copper-banded edge, eyes half-closed, the morning settling on her face without demanding anything from it.\n\nYou learn her the way you'd learn a new piece of ground — methodically, without hurry. The angle of her collarbone, the small depression at the base of her throat where the steam collects and then disperses. Her shoulders are broader than you'd have thought with clothes between you — a blacksmith's shoulders, built by two hundred heats, and they sit with the unselfconscious solidity of someone who has never thought of them as anything other than useful. The water catches the conduit light from below and moves it across her in slow patterns: the underside of her chin, the long line of her neck, the place where her ribs meet her sternum. Her breath is even. She knows you're watching. She is not hurrying the moment into something else.\n\nShe opens one eye and looks at you sideways, the weight of her attention unhurried and direct. The habit is entirely gone — there is no ledger, no management, no closing. Just her, in the water, in the morning, letting you look at what she is. She holds the look for a long beat. Then: \"Are you going to get in, or are you going to stand there doing whatever that is you're doing with your face?\"\n\nHuginn, on the window ledge, examines the street below with pointed interest."
+      },
+      {
+        "player": "Describe to Pell, from right behind her in the bath, exactly what you've been paying attention to to make this face... and let your hands show her those places as you describe them in poetic detail.",
+        "summary": "Silas names every place he's been paying attention to, and shows her.",
+        "narration": "You describe to Pell exactly what you've been watching — the collarbone, the breath, the hips, the hands — and let your hands trace each place as you name it. She listens with nothing managed, her hands on your forearms, her head tipped back against your shoulder."
       }
     ],
     "lastTurn": {
-      "narration": "The bath trough is wide enough that she can stretch — and she has, her arms along the rim, shoulders just above the waterline, the steam rising off her skin in slow columns that the junction conduit warmth keeps replacing. The water is still clear enough to see through to her hips, her legs bent at the knee, the line of her thighs. She has her head tipped back against the copper-banded edge, eyes half-closed, the morning settling on her face without demanding anything from it.\n\nYou learn her the way you'd learn a new piece of ground — methodically, without hurry. The angle of her collarbone, the small depression at the base of her throat where the steam collects and then disperses. Her shoulders are broader than you'd have thought with clothes between you — a blacksmith's shoulders, built by two hundred heats, and they sit with the unselfconscious solidity of someone who has never thought of them as anything other than useful. The water catches the conduit light from below and moves it across her in slow patterns: the underside of her chin, the long line of her neck, the place where her ribs meet her sternum. Her breath is even. She knows you're watching. She is not hurrying the moment into something else.\n\nShe opens one eye and looks at you sideways, the weight of her attention unhurried and direct. The habit is entirely gone — there is no ledger, no management, no closing. Just her, in the water, in the morning, letting you look at what she is. She holds the look for a long beat. Then: \"Are you going to get in, or are you going to stand there doing whatever that is you're doing with your face?\"\n\nHuginn, on the window ledge, examines the street below with pointed interest.",
-      "sceneSummary": "Silas studies Pell in the bath trough — she receives it without management and asks if he's getting in.",
+      "narration": "You describe to Pell exactly what you've been watching — the collarbone, the breath, the hips, the hands — and let your hands trace each place as you name it. She listens with nothing managed, her hands on your forearms, her head tipped back against your shoulder.",
+      "sceneSummary": "Silas names every place he's been paying attention to, and shows her.",
       "choices": [
         {
-          "label": "Get in with her — settle in behind her the way the morning started",
+          "label": "Answer her — 'I haven't finished paying attention yet' — and keep going.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
+          "trivial": true,
           "intentTags": [
             "romantic"
-          ],
-          "trivial": true
+          ]
         },
         {
-          "label": "Answer her — tell her exactly what your face is doing",
+          "label": "Turn her toward you — face to face in the water — and let what comes next come.",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
+          "trivial": true,
           "intentTags": [
             "romantic"
-          ],
-          "trivial": true
+          ]
         },
         {
-          "label": "Get in facing her — this is a different conversation than the bed was",
+          "label": "Hold still. Let the moment be what it is — her back against you, your hands where they are, the steam between you and the ceiling.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "trivial": true,
+          "intentTags": [
+            "sustain"
+          ]
+        },
+        {
+          "label": "Ask her what SHE has been paying attention to.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
+          "trivial": true,
           "intentTags": [
             "romantic"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Check Calvar's east-lane window first — make sure the lamp signal hasn't gone up already",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "scout"
-          ],
-          "trivial": true
+          ]
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
       "scene": {
-        "setting": "The Low Lamp Inn bath trough room — midmorning, junction conduit warmth keeping the cistern water heated, steam rising in slow columns, gray diffusion-panel light filling the space evenly from the panels and below.",
+        "setting": "The Low Lamp Inn bath trough room — midmorning edging toward midday, junction conduit warmth steady beneath the stone floor, steam rising in slow columns, gray diffusion-panel light filling the space evenly. Silas behind Pell in the trough, her back against his chest, the water still heated and clear.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "In the bath trough, arms along the rim, shoulders above the waterline, head tipped back — entirely present, watching Silas sidelong with one eye open, no management."
+            "state": "Back against Silas's chest, arms resting on his forearms, head tipped back — entirely present, the habit entirely down, the ghost of a response forming at her lips."
           },
           {
             "name": "Huginn",
-            "state": "On the window ledge, examining the street below with deliberate interest — the room ceded completely."
+            "state": "On the window ledge, examining the street below — the room ceded completely."
           }
         ],
         "objects": [
           "Memory (spear) — leaned in the corner, collar rune settled and at rest",
-          "Bath trough — filled with heated cistern water, steam rising, Pell within",
+          "Bath trough — filled with heated cistern water, steam rising, both Silas and Pell within",
           "Partition — wooden, does not reach the ceiling",
           "Copper kettle — emptied, set back near the coals",
           "Tallow candle on the window sill — burned out, wick cold",
@@ -1021,9 +1030,10 @@
         ],
         "threads": [
           "Calvar's lamp in the east-lane window — the morning's first departure signal; not yet checked",
-          "First light departure pending — the group is assembled and the road to Millbrook is the next step",
+          "First light departure — now well past first light; the group is assembled and the road to Millbrook is the next step",
           "The Edge District Ledger quest remains active — Grael, the annex, the intake log unresolved",
-          "The conduit pulse at the third hour — not an ending, not resolved"
+          "The conduit pulse at the third hour — not an ending, not resolved",
+          "Pell's response to the naming — half-formed, not yet spoken"
         ]
       },
       "npcUpdates": [
@@ -1031,34 +1041,38 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Received Silas's full attention in the bath without self-consciousness — let him look, then asked plainly whether he was getting in.",
+          "note": "Received the full inventory of Silas's attention — every place named, every place touched. Her hands on his forearms the whole time. Her response: 'You have been paying a great deal of attention.' Nothing managed in it.",
           "learned": [
-            "Her shoulders are a blacksmith's shoulders — broad, built, utterly unselfconscious about it"
+            "Silas has been reading her body the way he reads worked ground — methodically, without hurry, since before the forge",
+            "She lets go at the hip — the ledger closes there; he named it and she felt him name it"
           ],
-          "statusNote": "In the bath trough at the Low Lamp — entirely present, no management, waiting for Silas to get in or answer.",
-          "relationshipDelta": 0
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "In the bath trough with Silas — entirely present, the habit fully down, listening.",
+          "bondType": "romantic",
+          "bondStage": "committed"
         }
       ],
       "timeOps": {
-        "hoursPassed": 0,
-        "why": "a short beat — a look and a word"
+        "hoursPassed": 0.25,
+        "why": "A slow, unhurried intimate exchange in the bath — a quarter hour of full presence."
       }
     },
     "sceneState": {
-      "setting": "The Low Lamp Inn bath trough room — midmorning, junction conduit warmth keeping the cistern water heated, steam rising in slow columns, gray diffusion-panel light filling the space evenly from the panels and below.",
+      "setting": "The Low Lamp Inn bath trough room — midmorning edging toward midday, junction conduit warmth steady beneath the stone floor, steam rising in slow columns, gray diffusion-panel light filling the space evenly. Silas behind Pell in the trough, her back against his chest, the water still heated and clear.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "In the bath trough, arms along the rim, shoulders above the waterline, head tipped back — entirely present, watching Sil"
+          "state": "Back against Silas's chest, arms resting on his forearms, head tipped back — entirely present, the habit entirely down, "
         },
         {
           "name": "Huginn",
-          "state": "On the window ledge, examining the street below with deliberate interest — the room ceded completely."
+          "state": "On the window ledge, examining the street below — the room ceded completely."
         }
       ],
       "objects": [
         "Memory (spear) — leaned in the corner, collar rune settled and at rest",
-        "Bath trough — filled with heated cistern water, steam rising, Pell within",
+        "Bath trough — filled with heated cistern water, steam rising, both Silas and Pel",
         "Partition — wooden, does not reach the ceiling",
         "Copper kettle — emptied, set back near the coals",
         "Tallow candle on the window sill — burned out, wick cold",
@@ -1067,9 +1081,10 @@
       ],
       "threads": [
         "Calvar's lamp in the east-lane window — the morning's first departure signal; not yet checked",
-        "First light departure pending — the group is assembled and the road to Millbrook is the next step",
+        "First light departure — now well past first light; the group is assembled and the road to Millbrook is the next step",
         "The Edge District Ledger quest remains active — Grael, the annex, the intake log unresolved",
-        "The conduit pulse at the third hour — not an ending, not resolved"
+        "The conduit pulse at the third hour — not an ending, not resolved",
+        "Pell's response to the naming — half-formed, not yet spoken"
       ]
     }
   },
@@ -1495,7 +1510,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d3] Let the quiet run — head against Silas's shoulder, hand on his wrist, the last of the habit fully down. Not ready to move; that is exactly right.",
         "[d3] Received the plain fact of Silas's presence through the rune — no grain, no mark, just being here. Her hand went still on his wrist in a way that had nothing left to wait for. Head",
         "[d3] Carried to bed without ceremony as she drifted toward sleep — settled without opening her eyes, hand folding the blanket edge once from habit, then still.",
         "[d4] Slept through the night on her side of the partition — carried there by Silas, settled without ceremony.",
@@ -1504,17 +1518,18 @@
         "[d4] Said 'good morning' plainly at first light — no management, no ledger, the habit entirely absent. Pulled Silas's hand in rather than holding it still. The whole of her is present.",
         "[d4] Named what she wants at first light — the bath, together, and whatever comes after — in the plain register that has nothing left to manage.",
         "[d4] Received 'you are what comes after' without management — went still in the way of a thing correctly named, then crossed to the bath without reconsidering anything. Now settled agai",
-        "[d4] Received Silas's full attention in the bath without self-consciousness — let him look, then asked plainly whether he was getting in."
+        "[d4] Received Silas's full attention in the bath without self-consciousness — let him look, then asked plainly whether he was getting in.",
+        "[d4] Received the full inventory of Silas's attention — every place named, every place touched. Her hands on his forearms the whole time. Her response: 'You have been paying a great dea"
       ],
       "knownFacts": [
-        "The stillness after a thing is correctly named — she inhabits it without effort, no ledger-close, no management",
-        "The stillness after naming — she inhabits it without effort, the full weight of the evening set on solid ground",
         "The rune can carry plain presence — not craft, not signal, just the fact of being here — and she received it without effort",
         "Her body answers before the habit can close the ledger — she drew his hand up to her collarbone without fully waking",
         "Her body answers before the habit can and then the habit doesn't return — she pulled him in, not held him off",
         "She names desire plainly and without management when the habit is down — no hedging, no ledger-close",
         "Silas named her as what comes after — a plain fact, set down without a ledger to close it in; she received it in the register that goes all the way through",
-        "Her shoulders are a blacksmith's shoulders — broad, built, utterly unselfconscious about it"
+        "Her shoulders are a blacksmith's shoulders — broad, built, utterly unselfconscious about it",
+        "Silas has been reading her body the way he reads worked ground — methodically, without hurry, since before the forge",
+        "She lets go at the hip — the ledger closes there; he named it and she felt him name it"
       ],
       "skillsObserved": [
         "precise technical questioning under field conditions",
@@ -1525,7 +1540,7 @@
         "ironsense transmitted deliberately through a rune-threshold"
       ],
       "status": "active",
-      "statusNote": "In the bath trough at the Low Lamp — entirely present, no management, waiting for Silas to get in or answer.",
+      "statusNote": "In the bath trough with Silas — entirely present, the habit fully down, listening.",
       "lastSeen": {
         "locationId": "the-low-lamp-inn",
         "day": 4
@@ -3268,20 +3283,20 @@
     }
   },
   "tendencies": {
-    "strategic": 8.785671024979745,
-    "cerebral": 17.29333791641539,
-    "social": 17.299780097990343,
-    "generous": 2.1021345977305126,
-    "cautious": 6.7962024606299885,
-    "physical": 0.20922192798120812,
-    "risky": 1.8123040041205085,
-    "ruthless": 0.259054444665586,
-    "carousing": 0.181908618473527,
-    "amorous": 15.47662580011676,
-    "patient": 2.5769597529149264,
-    "stealth": 0.21344282366194153,
-    "devotion": 2.510137263160359,
-    "craft": 0.572929976008282
+    "strategic": 8.566029249355251,
+    "cerebral": 16.861004468505005,
+    "social": 17.867285595540583,
+    "generous": 2.04958123278725,
+    "cautious": 6.626297399114239,
+    "physical": 0.20399137978167792,
+    "risky": 1.7669964040174957,
+    "ruthless": 0.25257808354894634,
+    "carousing": 0.1773609030116888,
+    "amorous": 16.089710155113842,
+    "patient": 2.5125357590920534,
+    "stealth": 0.208106753070393,
+    "devotion": 2.44738383158135,
+    "craft": 0.558606726608075
   },
   "aptitudes": [
     "strategist",
@@ -3293,7 +3308,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 427,
+  "actionCount": 428,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3475,8 +3490,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=11860&nologo=true",
-  "updatedAt": 1784330900881,
-  "rev": 606,
+  "updatedAt": 1784331358498,
+  "rev": 607,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4405,7 +4420,7 @@
   "syncedAt": 1784292613822,
   "teachers": {},
   "regionsKnown": {
-    "valley": 242
+    "valley": 243
   },
   "foreclosed": [
     "rootkin",
@@ -4454,10 +4469,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-17T17:39:40.705Z",
-      "lastAt": "2026-07-17T23:28:20.880Z",
+      "lastAt": "2026-07-17T23:35:58.497Z",
       "startDay": 17,
       "endDay": 17,
-      "beats": 50
+      "beats": 51
     }
   ],
   "company": [

@@ -61,12 +61,42 @@ export function antipodeOf(traditionId, index) {
   return t?.opposite || t?.ring?.antipode || null;
 }
 
-/** The ring-neighbours (steps === 1) of a tradition — used to constrain the tertiary pick. */
+/** The ring-neighbours (steps === 1) of a tradition — the kin band (SNG-125 secondary), and historically
+ *  the tertiary constraint (now freed). */
 export function neighborsOf(traditionId, index) {
   const t = index?.byId?.[traditionId];
   if (t?.ring?.neighbors) return t.ring.neighbors;
   if (Array.isArray(t?.adjacent)) return t.adjacent.filter(a => a.steps === 1).map(a => a.traditionId);
   return [];
+}
+
+/** SNG-125: is `candidate` KIN-ADJACENT to `primary` — the existing ring-neighbour / step-1 band the
+ *  access model already uses (domainAccess "adjacent"). A secondary domain must be kin to the primary,
+ *  giving a build a concentrated CORE (primary + kin secondary) rather than three free picks. Reuses the
+ *  ring geometry; invents no second distance (Erik ruling 1). Pure. */
+export function isKinAdjacent(candidate, primary, index) {
+  if (!candidate || !primary || candidate === primary) return false;
+  return ringDistance(candidate, primary, index) === 1 || (neighborsOf(primary, index) || []).includes(candidate);
+}
+
+/** SNG-125: the legal SECONDARY options for a primary — kin-adjacent, non-folk, not the primary or its
+ *  antipode. (Tertiary stays free — anywhere legal — so it isn't enumerated here.) Pure. */
+export function kinSecondaryOptions(primary, index) {
+  if (!primary || !index) return [];
+  const anti = antipodeOf(primary, index);
+  return ringOrder(index).filter(t => t !== primary && t !== anti && !isFolkTradition(t, index) && isKinAdjacent(t, primary, index));
+}
+
+/** SNG-125: are these built domains legal under the new axis model? GRANDFATHER-TOLERANT (Erik ruling 2):
+ *  the adjacency constraint gates a NEW builder selection only (`enforce:true`); loaded saves are never
+ *  re-validated, so an existing non-adjacent secondary (Silas: cogitant) stays fully legal. Access math
+ *  (caps/foreclosure/promotion) is untouched — this is a SELECTION predicate, not an access rewrite. Pure. */
+export function domainsLegal(domains = {}, index, { enforce = false } = {}) {
+  if (!enforce) return { legal: true, reason: "grandfathered — the kin constraint gates new selection only" };
+  const { primary, secondary } = domains || {};
+  if (primary && secondary && !isKinAdjacent(secondary, primary, index))
+    return { legal: false, reason: "your secondary must be kin-adjacent to your primary" };
+  return { legal: true, reason: "" };
 }
 
 /** All non-folk tradition ids in ring order (for the great-circle picker). */
@@ -127,10 +157,11 @@ export function domainAccess(ability, tier, domains, index, opts = {}) {
   return { allowed: true, penalty, band: "far", reason: `${Number.isFinite(steps) ? steps : "many"} steps from your nearest domain — costs more` };
 }
 
-/** SNG-062: crystallize domains from the tradition-tags a player ACCRUED by how they played the
- *  prologue. The heaviest tag is the PRIMARY; the SECONDARY is the 2nd-heaviest if it's within 3
- *  ring-steps of the primary (and not its antipode), else a ring-neighbour of the primary; the
- *  TERTIARY is a ring-neighbour of the secondary (not the primary, not an antipode of either).
+/** SNG-062 + SNG-125: crystallize domains from the tradition-tags a player ACCRUED by how they played
+ *  the prologue. The heaviest tag is the PRIMARY; the SECONDARY is the heaviest tag that is KIN-ADJACENT
+ *  to the primary (Erik ruling 1 — a concentrated core), snapped to a kin option so the prologue never
+ *  produces an illegal build; the TERTIARY is now FREE (ruling 4) — the heaviest remaining legal pole
+ *  (not the primary/secondary or a closed antipode), no longer bound to the secondary.
  *  Pure. Returns { primary, secondary, tertiary } or null if no pole tags. */
 export function crystallizeDomains(tags = {}, index) {
   if (!index) return null;
@@ -140,15 +171,15 @@ export function crystallizeDomains(tags = {}, index) {
   if (!ranked.length) return null;
   const primary = ranked[0];
   const antiP = antipodeOf(primary, index);
-  const nbrsP = new Set(neighborsOf(primary, index));
-  let secondary = ranked.find(t => t !== primary && t !== antiP && (ringDistance(t, primary, index) ?? 99) <= 3)
-    || [...nbrsP].find(Boolean) || null;
+  // SNG-125: secondary must be KIN-ADJACENT to primary — the heaviest-tagged kin, else the first kin option.
+  const kin = kinSecondaryOptions(primary, index);
+  const kinSet = new Set(kin);
+  let secondary = ranked.find(t => t !== primary && kinSet.has(t)) || kin[0] || null;
+  // SNG-125: tertiary is FREE — the heaviest remaining legal pole, not bound to the secondary's neighbours.
   let tertiary = null;
   if (secondary) {
     const antiS = antipodeOf(secondary, index);
-    const nbrsS = new Set(neighborsOf(secondary, index));
-    tertiary = ranked.find(t => t !== primary && t !== secondary && t !== antiP && t !== antiS && nbrsS.has(t))
-      || [...nbrsS].find(t => t !== primary && t !== antiP) || null;
+    tertiary = ranked.find(t => t !== primary && t !== secondary && t !== antiP && t !== antiS && !isFolkTradition(t, index)) || null;
   }
   return { primary, secondary, tertiary };
 }

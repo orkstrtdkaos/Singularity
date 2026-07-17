@@ -41,7 +41,7 @@ import { isEventfulTurn, pressureTier, pressureDirective } from "../engine/pacin
 import { revokeAdultGate } from "../engine/playerprofile.js";
 import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, convexHull, regionShape, knownOverlay, isPlaceKnown } from "../engine/worldmap.js";
 import { loadLegends, tierBirthWeight, tierForArc, legendSurfacing, legendDeploymentForGM, LEGEND_TIER_WEIGHT } from "../engine/legends.js";
-import { buildTraditionIndex, traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities } from "../engine/traditions.js";
+import { buildTraditionIndex, traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal } from "../engine/traditions.js";
 
 // stub localStorage for worldtime settings in Node
 const store = new Map();
@@ -2654,7 +2654,7 @@ await (async () => {
   check("SNG-055: the index reads all 24 ring stations + ability→tradition map", ringOrder(idx).length === 24 && Object.keys(idx.abilityToTradition).length > 100);
   // umbral ↔ blazeborn are antipodal (dark_light); 12 steps apart
   check("SNG-055: antipode == the axis-opposite (umbral↔blazeborn)", antipodeOf("umbral", idx) === "blazeborn" && ringDistance("umbral", "blazeborn", idx) === 12);
-  check("SNG-055: ring-neighbours are 1 step; tertiary is constrained to secondary's neighbours", neighborsOf("umbral", idx).every(n => ringDistance("umbral", n, idx) === 1) && neighborsOf("umbral", idx).length === 2);
+  check("SNG-055: ring-neighbours are 1 step (the kin band; SNG-125 binds the SECONDARY to it)", neighborsOf("umbral", idx).every(n => ringDistance("umbral", n, idx) === 1) && neighborsOf("umbral", idx).length === 2);
   check("SNG-055: folk traditions are open", isFolkTradition("radiant_folk", idx) || isFolkTradition("harmonic", idx));
 
   // pick a real pole ability + its tradition to exercise the access bands
@@ -2679,6 +2679,37 @@ await (async () => {
   check("SNG-055: a far tradition is learnable but costs extra", far && domainAccess({ id: "f", tradition: far, levelReq: 1 }, 1, domains, idx).allowed && domainAccess({ id: "f", tradition: far, levelReq: 1 }, 1, domains, idx).penalty >= 2);
   // folk is always open, no penalty, even with domains chosen
   check("SNG-055: folk stays open with a penalty of 1", domainAccess({ id: "lb", tradition: "radiant_folk", levelReq: 1 }, 3, domains, idx).allowed && domainAccess({ id: "lb", tradition: "radiant_folk", levelReq: 1 }, 3, domains, idx).penalty === 1);
+
+  // --- SNG-125: the SECONDARY is bound to the primary's KIN band; the TERTIARY is freed ---
+  const kinN = neighborsOf("umbral", idx);            // umbral's ring-neighbours (the kin band)
+  const antipode = antipodeOf("umbral", idx);          // blazeborn — never kin
+  const farT = ringOrder(idx).find(t => t !== "umbral" && t !== antipode && ringDistance(t, "umbral", idx) >= 3);
+  check("SNG-125: isKinAdjacent — a ring-neighbour of the primary IS kin", isKinAdjacent(kinN[0], "umbral", idx) === true);
+  check("SNG-125: isKinAdjacent — the antipode is NOT kin, nor is a far tradition, nor the primary itself",
+    isKinAdjacent(antipode, "umbral", idx) === false && isKinAdjacent(farT, "umbral", idx) === false && isKinAdjacent("umbral", "umbral", idx) === false);
+  const kinOpts = kinSecondaryOptions("umbral", idx);
+  check("SNG-125: kinSecondaryOptions — exactly the kin neighbours, excluding primary/antipode/folk",
+    kinOpts.length === kinN.length && kinOpts.every(t => kinN.includes(t)) && !kinOpts.includes("umbral") && !kinOpts.includes(antipode));
+
+  // domainsLegal: enforce (new builder) refuses a non-kin secondary; a kin secondary passes
+  check("SNG-125: a NEW build with a non-kin secondary is refused (enforce) with a reason",
+    domainsLegal({ primary: "umbral", secondary: farT }, idx, { enforce: true }).legal === false);
+  check("SNG-125: a NEW build with a kin secondary is legal (enforce)",
+    domainsLegal({ primary: "umbral", secondary: kinN[0] }, idx, { enforce: true }).legal === true);
+  // GRANDFATHER (Erik ruling 2): a LOADED character with a non-kin secondary is ALWAYS legal — the
+  // constraint gates selection, never a save. (Silas: cogitant secondary must keep playing.)
+  check("SNG-125: a LOADED non-kin build is grandfathered legal (default / enforce:false)",
+    domainsLegal({ primary: "umbral", secondary: farT }, idx).legal === true && domainsLegal({ primary: "umbral", secondary: farT }, idx, { enforce: false }).legal === true);
+  // access math is UNCHANGED — a non-kin (grandfathered) secondary still reads as a full secondary domain
+  check("SNG-125: access math untouched — a grandfathered non-kin secondary still gets secondary access to III",
+    domainAccess({ id: "gf", tradition: farT, levelReq: 1 }, 3, { primary: "umbral", secondary: farT }, idx).band === "secondary");
+
+  // crystallizeDomains SNG-125: secondary is snapped to a KIN of primary; tertiary is FREE (may be far)
+  const cd = crystallizeDomains({ umbral: 10, [farT]: 8, [kinN[0]]: 6, [kinN[1]]: 1 }, idx);
+  check("SNG-125: crystallize picks a KIN secondary even when a FAR tradition outranks it (snapped, never illegal)",
+    cd.primary === "umbral" && kinN.includes(cd.secondary) && isKinAdjacent(cd.secondary, "umbral", idx));
+  check("SNG-125: crystallize's tertiary is FREE — the far tradition can land there (no secondary-neighbour binding)",
+    cd.tertiary === farT || (cd.tertiary && cd.tertiary !== cd.secondary && cd.tertiary !== "umbral"));
 
   // migration: infer domains from held abilities (nobody loses one — grandfathered)
   const inf = inferDomains([{ abilityId: "umbracraft" }, { abilityId: "umbracraft" }, { abilityId: "false_true" }], { umbracraft: { tradition: "umbral" }, false_true: { tradition: "veilwright" } }, idx);

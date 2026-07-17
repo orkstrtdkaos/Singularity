@@ -21,7 +21,7 @@ import { substrateVerdict, locationDensity, carriedSubstrate } from "./engine/su
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage, deleteGalleryImage } from "./engine/art.js";
 import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
-import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities } from "./engine/traditions.js";
+import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal } from "./engine/traditions.js";
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs } from "./engine/companions.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
@@ -43,7 +43,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.83";
+const APP_VERSION = "1.8.84";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1811,21 +1811,23 @@ function renderCreate() {
     const antiP = d.primary ? antipodeOf(d.primary, idx) : null;
     const antiS = d.secondary ? antipodeOf(d.secondary, idx) : null;
     const closed = new Set([antiP, antiS].filter(Boolean));
-    const terNbrs = d.secondary ? new Set(neighborsOf(d.secondary, idx)) : new Set();
+    // SNG-125: the SECONDARY must be KIN-ADJACENT to the primary (a concentrated core); the TERTIARY is
+    // FREE — anywhere legal, no longer bound to the secondary's neighbours (Erik rulings 1 + 4).
+    const kinSet = d.primary ? new Set(kinSecondaryOptions(d.primary, idx)) : new Set();
     const selectable = (t) => {
       if (closed.has(t)) return false;
       if (phase === "primary") return true;
-      if (phase === "secondary") return t !== d.primary;
-      if (phase === "tertiary") return t !== d.primary && t !== d.secondary && terNbrs.has(t);
+      if (phase === "secondary") return t !== d.primary && kinSet.has(t);
+      if (phase === "tertiary") return t !== d.primary && t !== d.secondary;
       return false;
     };
     const svg = domainCircleSVG(idx, { primary: d.primary, secondary: d.secondary, tertiary: d.tertiary, closed, selectable,
       centerTop: phase === "done" ? "your domains" : "choose your " + phase,
-      centerSub: phase === "tertiary" ? "a neighbour of your secondary" : phase === "done" ? "" : "the opposite pole closes" });
+      centerSub: phase === "secondary" ? "kin to your primary" : phase === "tertiary" ? "free — your wildcard reach" : phase === "done" ? "" : "the opposite pole closes" });
     const slot = (label, t) => `<div class="dom-slot"><span class="dom-slot-label">${label}</span> ${t ? `<strong>${esc(traditionLabel(t))}</strong>` : "<em>—</em>"}</div>`;
     chrome(`<div class="screen" style="max-width:640px">
       <h2>Your place on the Great Circle</h2>
-      <p class="hint" style="margin-bottom:8px">Twelve axes, twenty-four peoples — a ring where every craft sits opposite its antithesis. Your <strong>primary</strong> is who you are (all you can master); <strong>secondary</strong> reaches tier III; <strong>tertiary</strong> (a neighbour of your secondary) reaches tier II. The <strong>opposite pole</strong> of what you choose is closed to you forever — only the great braids cross it.</p>
+      <p class="hint" style="margin-bottom:8px">Twelve axes, twenty-four peoples — a ring where every craft sits opposite its antithesis. Your <strong>primary</strong> is who you are (all you can master); your <strong>secondary</strong> (<em>kin to your primary</em>) reaches tier III — a concentrated core; your <strong>tertiary</strong> is a <em>free wildcard</em>, reaching anywhere on the ring to tier II. The <strong>opposite pole</strong> of your primary and secondary is closed to you forever — only the great braids cross it.</p>
       ${svg}
       <div class="dom-slots">${slot("Primary", d.primary)}${slot("Secondary", d.secondary)}${slot("Tertiary", d.tertiary)}</div>
       ${closed.size ? `<div class="hint">Closed to you: ${[...closed].map(t => esc(traditionLabel(t))).join(", ")}</div>` : ""}
@@ -2023,18 +2025,22 @@ function renderCreate() {
   // ---------- SNG-086: THE THIRD DOOR — "describe yourself" → a placement on the great circle ----------
 
   /** The model proposes poles + prose; here the ENGINE validates every id against the ring and
-   *  enforces the geometry (secondary ≠ primary/antipode; tertiary a ring-neighbour of secondary,
-   *  never a closed pole). Design Law 1 — the model never owns ring geometry. */
+   *  enforces the geometry. SNG-125: secondary must be KIN-ADJACENT to the primary (a concentrated core);
+   *  tertiary is FREE — barred only from the primary/secondary and the two closed poles, no longer bound
+   *  to the secondary's neighbours (Erik rulings 1 + 4). Design Law 1 — the model never owns ring geometry. */
   function sanitizeSuggestedDomains(sug, idx) {
     const ok = id => id && idx.byId?.[id] && !isFolkTradition(id, idx);
     let primary = ok(sug?.primary?.traditionId) ? sug.primary.traditionId : null;
     let secondary = ok(sug?.secondary?.traditionId) ? sug.secondary.traditionId : null;
     let tertiary = ok(sug?.tertiary?.traditionId) ? sug.tertiary.traditionId : null;
     const antiP = primary ? antipodeOf(primary, idx) : null;
-    if (secondary && (secondary === primary || secondary === antiP)) secondary = null;
+    // SNG-125: an illegal (non-kin) secondary is snapped to the heaviest legal kin option, never dropped to
+    // nothing when the model was close — keeps the third-door build complete and legal.
+    if (secondary && (secondary === primary || secondary === antiP || !isKinAdjacent(secondary, primary, idx))) {
+      secondary = primary ? (kinSecondaryOptions(primary, idx)[0] || null) : null;
+    }
     const antiS = secondary ? antipodeOf(secondary, idx) : null;
-    const terNbrs = secondary ? new Set(neighborsOf(secondary, idx)) : new Set();
-    if (tertiary && (tertiary === primary || tertiary === secondary || tertiary === antiP || tertiary === antiS || !terNbrs.has(tertiary))) tertiary = null;
+    if (tertiary && (tertiary === primary || tertiary === secondary || tertiary === antiP || tertiary === antiS)) tertiary = null;
     return { primary, secondary, tertiary };
   }
 

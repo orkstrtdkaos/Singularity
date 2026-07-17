@@ -1,4 +1,20 @@
-# PIPELINE ALERT — Singularity## ⚙️ Config defaults CHANGED (Aevi direct, verified) + 🧵 SNG-134 refinements specced
+# PIPELINE ALERT — Singularity## ✅ SNG-129 + 132 + 133 — CLOSED GREEN (Aevi HEAD audit, v1.8.90→92)
+
+CCode shipped all three; **Aevi verified at authenticated origin.** personalArc.js syntax-clean.
+- **SNG-129** (wheel readability, v1.8.90): `FAMILY_SHAPE` (8 silhouettes) confirmed; sealed precursor state + honest "earned through play" path; de-collided labels. The approved-prototype encoding, built. **Closed.**
+- **SNG-132** (bound legendary arcs, v1.8.91): NPC + arc now REGISTERED in valley manifest (the load-gap — verified both `the_lightless_seraph` + `the_reaching_light` present); bound-arc proximity-bypass + stage-gated legend presence; `contentGenerator` weight boost verified in generate.js L197 (`base × boost`, floored base+1) reading the profile flag (L1413). Brooklyn/Brayden ×1.5; **Erik's profiles now flagged too.** **Closed.**
+- **SNG-133** (backstory→personal arc, v1.8.92): `engine/personalArc.js` — **never-zero guarantee VERIFIED by construction:** `fallbackPersonalArc` runs SYNC at creation (app.js L2022) and derives a REAL premise from motivation/hometown/floor ("a question you left home to answer") + bound routes from the primary domain — never a stub; `enrichPersonalArc` is best-effort/non-blocking/no-op-without-key (L2025); `sanitizePersonalArc` falls back to the guaranteed arc on bad model output (L42). Worst case = a real fallback arc, never nothing. **Closed.**
+
+### ⚠ AEVI CONTENT BUGS — logged (CCode's correct catches, from the SNG-132 authored content)
+Two issues in Aevi's authored father-arc content blocked the test gate; CCode fixed both to go green:
+1. **Schema too narrow for the authored NPC** — `the_lightless_seraph` used rich `wants`/`fears` (strings) + `reactsToReputation` (bool) that `npc.schema.json` didn't allow. CCode widened the schema (string-or-array, object-or-boolean) rather than gut the prose — correct call. **Lesson: validate authored content against the schema before shipping (grep the schema, or run content_ci locally).**
+2. **NPC + arc were on disk but UNLISTED in the valley manifest** — so the arc never loaded (and SNG-132 couldn't work at all). CCode registered both. **Lesson (already a standing rule): manifest files require updating whenever new ability/item/NPC/quest files are added — I added the files without registering them.** Both now verified present in `content/packs/valley/manifest.json`.
+
+No downstream harm (caught at the gate), but both are my authoring misses on the content-write discipline. Logged.
+
+---
+
+## ⚙️ Config defaults CHANGED (Aevi direct, verified) + 🧵 SNG-134 refinements specced
 **Done directly (Erik's shown defaults):** artMode static→**generate**; pacing balanced→**eventful**; time ratio 24→**3** (mode already story); sync **owner=orkstrtdkaos, repo=Singularity prefilled, PAT blank**; Erik's profiles (player-s9z9u1, player-54seyk) flagged **contentGenerator=true** (authors canon like Brooklyn/Brayden). All 4 engine files syntax-clean.
 
 **`po/SPEC_SNG-134_story_evolves_hover_relationships.md`** (awaiting CCode): (1) **story EVOLVES** — the header "Story/Motivation" and "The arc" share ONE root (bio+whyHere) and grow past the creation-seed via the SNG-109 chronicle-paragraph machinery (seed = first line, not the frozen whole); (2) **hover-detail EVERYWHERE** a skill/name/item appears — one `entityHover(kind,id,character)` registry (skill→next rank/cost/use, name→bond/standing, item→uses/provenance), reuse SNG-104/106 popover, consistent across every surface; (3) **relationship summary paragraph** in the chronicle (bonds→prose, evolves); (4) **contentGenerator SETTING** toggle (per-profile; wires to SNG-132 canon weight; Erik's flags already set).

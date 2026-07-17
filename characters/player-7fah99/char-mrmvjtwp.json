@@ -37,7 +37,7 @@
     }
   ],
   "alignment": {
-    "death_life": 0.17238889898437496
+    "death_life": 0.1962694540351562
   },
   "attunement": 1,
   "maxHealth": 30,
@@ -221,14 +221,19 @@
         "player": "Ask the Root one more thing before you go deeper: is he findable? Is there a direction the thread points that you could follow?",
         "summary": "Aelyn asked whether her father is findable — the Root answered: yes, northeast, real, and large, but distant in the way only old things measure distance.",
         "narration": "The chamber waits one step below — you can feel the warmth of it against your shins, the passage fully opened, the amber light steady. You hold the landing a moment longer and ask the last thing you need to ask before you go in.\n\n'Is he findable?' Your voice is steadier now, the ragged edge from the last question worn off, or tucked back where it lives. 'Does the thread point somewhere? Is there a direction?'\n\nThe Root-That-Remembers takes longer with this one. Not hesitation — the same considered pause as before, the sense of something choosing its portion carefully. What comes back is partial, and you know it the moment it arrives: yes, and not simply. The thread of your father is real and it points outward — not down into the deep grain but out through the valley's soil-network, the way a root traces toward water it cannot yet reach. There is a direction in it. But the Root gives you less than a bearing and more than nothing: north and east, and something that is neither near nor far but has weight, the kind of weight that means the distance is real and the thing at the end of it is large. What he has become is not hidden from the soil. It is simply very far from here, and the Root reads distance the way old trees do — in years, not in miles.\n\nBranch makes a soft sound beside your knee — the barest creak, barely audible, its buds tilted just slightly outward. Not a word. Just a presence confirming that you heard what you heard."
+      },
+      {
+        "player": "Look down at Branch before you step — ask it, in whatever way it receives a question, if it is ready.",
+        "summary": "Aelyn asks Branch if it's ready — it answers with a creak and a settling of roots — and steps into the chamber.",
+        "narration": "You look down at Branch before you take the last step.\n\nIt is already looking up at you — or doing the thing it does that functions as looking, its buds turned fully toward your face, patient and open. The amber warmth from the chamber below catches the green of its bark and holds it there. You don't have words that fit exactly, so you do what the Grove taught you: you let the question rest in your attention and aim it downward, at the small figure beside your knee.\n\nBranch is quiet for a moment. Then one slow creak, deliberate as a word chosen carefully from a short list. Its roots shift against the root-lattice — not anxious, not reluctant. Settling. The way a thing settles when it means to stay.\n\nIt is ready. It has been ready since the entrance hall. You have the sense it was ready before you were.\n\nYou face the threshold and step down."
       }
     ],
     "lastTurn": {
-      "narration": "The chamber waits one step below — you can feel the warmth of it against your shins, the passage fully opened, the amber light steady. You hold the landing a moment longer and ask the last thing you need to ask before you go in.\n\n'Is he findable?' Your voice is steadier now, the ragged edge from the last question worn off, or tucked back where it lives. 'Does the thread point somewhere? Is there a direction?'\n\nThe Root-That-Remembers takes longer with this one. Not hesitation — the same considered pause as before, the sense of something choosing its portion carefully. What comes back is partial, and you know it the moment it arrives: yes, and not simply. The thread of your father is real and it points outward — not down into the deep grain but out through the valley's soil-network, the way a root traces toward water it cannot yet reach. There is a direction in it. But the Root gives you less than a bearing and more than nothing: north and east, and something that is neither near nor far but has weight, the kind of weight that means the distance is real and the thing at the end of it is large. What he has become is not hidden from the soil. It is simply very far from here, and the Root reads distance the way old trees do — in years, not in miles.\n\nBranch makes a soft sound beside your knee — the barest creak, barely audible, its buds tilted just slightly outward. Not a word. Just a presence confirming that you heard what you heard.",
-      "sceneSummary": "Aelyn asked whether her father is findable — the Root answered: yes, northeast, real, and large, but distant in the way only old things measure distance.",
+      "narration": "You look down at Branch before you take the last step.\n\nIt is already looking up at you — or doing the thing it does that functions as looking, its buds turned fully toward your face, patient and open. The amber warmth from the chamber below catches the green of its bark and holds it there. You don't have words that fit exactly, so you do what the Grove taught you: you let the question rest in your attention and aim it downward, at the small figure beside your knee.\n\nBranch is quiet for a moment. Then one slow creak, deliberate as a word chosen carefully from a short list. Its roots shift against the root-lattice — not anxious, not reluctant. Settling. The way a thing settles when it means to stay.\n\nIt is ready. It has been ready since the entrance hall. You have the sense it was ready before you were.\n\nYou face the threshold and step down.",
+      "sceneSummary": "Aelyn asks Branch if it's ready — it answers with a creak and a settling of roots — and steps into the chamber.",
       "choices": [
         {
-          "label": "Step down into the chamber — you have what you came for as a first answer, and the Root is waiting to give the rest in person.",
+          "label": "Enter in silence — let the chamber speak first before you do.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
@@ -240,50 +245,44 @@
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Ask one more thing before you cross the threshold — not about your father, but about the soil-network itself: how far does it reach? Does it touch the nanite world at all?",
+          "label": "Use Lifesense the moment you cross the threshold — feel the full shape of what is here before you name it.",
           "attribute": "mental",
-          "subAttribute": "reason",
+          "subAttribute": "insight",
           "axes": {
-            "death_life": 0.6
+            "death_life": 0.8
           },
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "abilityId": "the_speaking_grove",
-          "energyCost": 4,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "abilityId": "lifesense",
+          "energyCost": 3,
+          "trivial": false
         },
         {
-          "label": "Use Lifesense one more time here on the landing — not outward, not inward, but downward into the chamber itself. Read what waits before you see it.",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Speak as you step in — your name, simply, as an offering. The Root already knows it, but names given aloud are different from names known.",
+          "attribute": "social",
+          "subAttribute": "presence",
           "axes": {
             "death_life": 0.75
           },
           "difficulty": 0,
           "intentTags": [
-            "scout"
+            "devote"
           ],
-          "abilityId": "lifesense",
-          "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
         },
         {
-          "label": "Look down at Branch before you step — ask it, in whatever way it receives a question, if it is ready.",
+          "label": "Crouch to Branch's level as you enter — enter together, at the same height, neither of you ahead.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
-            "death_life": 0.65
+            "death_life": 0.7
           },
           "difficulty": 0,
           "intentTags": [
@@ -291,33 +290,22 @@
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         }
       ],
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
+        "energy": 0
       },
       "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "the-root-that-remembers",
-          "note": "The Root confirmed Aelyn's father is findable — the thread points northeast, real and large, measured in the way old roots measure distance. The chamber waits one step below."
-        }
-      ],
+      "questUpdates": [],
       "scene": {
-        "setting": "Interior of the deep grain passage, root-landing above the chamber — the passage has fully opened and the amber threshold of heartwood below is close enough to feel its warmth. Aelyn stands still, Branch at her knee.",
+        "setting": "Interior of the Root-That-Remembers' chamber — Aelyn has crossed the amber heartwood threshold and entered. The passage has widened into something larger, warmer, the amber light sourceless and even. Old roots run floor to ceiling in every direction, worn to a deep almost-black by age. Branch is at her knee.",
         "npcsPresent": [
           {
             "name": "Branch",
-            "state": "Buds tilted slightly outward, one quiet creak offered — present, attending, still."
+            "state": "Settled at Aelyn's knee, buds fully open, roots re-gripping the chamber floor — present and calm."
           },
           {
             "name": "Maren",
@@ -337,19 +325,19 @@
           }
         ],
         "objects": [
-          "Root lattice underfoot — broad landing, solid and intentional",
-          "Amber threshold below — the chamber's opening, warm heartwood framing, one step away",
-          "Enormous old roots in the walls — dark heartwood, worn smooth with age",
+          "Amber heartwood threshold — now behind Aelyn, crossed",
+          "Enormous old roots — floor, walls, ceiling, worn smooth and dark with age",
+          "Root-lattice floor — intentional, broad, solid underfoot",
+          "Sourceless amber light — even, warm, no point of origin visible",
           "Traveler's Pack (Aelyn's, worn canvas)",
           "Waterskin (Aelyn's)"
         ],
         "threads": [
-          "The Root-That-Remembers confirmed Aelyn's father is findable — northeast, large, real, distant in the way old roots measure distance.",
-          "The answer was partial: a direction and weight, not a name or a map.",
-          "Branch responded again — a quiet creak, buds outward; it received something.",
-          "The chamber is one step below — the descent is complete at the threshold.",
+          "The Root-That-Remembers is present and attending — the chamber is its body.",
+          "The thread northeast: Aelyn's father is findable, real, large, and distant in the way old roots measure distance.",
+          "Branch received something of its own from the Root's last answer — what, exactly, is not yet clear.",
           "A SNG-075 cache is unresolved — something left behind in or near the passage, not yet found.",
-          "Maren holds the threshold above — not following, watching."
+          "Maren waits above — she said she would not follow, but she is watching."
         ]
       },
       "npcUpdates": [
@@ -357,39 +345,21 @@
           "op": "update",
           "npcId": "rootkin-tender",
           "name": "Maren",
-          "note": "Holds the upper threshold still — watching Aelyn pause at the chamber's edge and ask the question about her father.",
-          "statusNote": "Standing at the upper threshold of the deep grain passage, watching Aelyn at the landing above the chamber.",
-          "status": "active"
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "the-root-that-remembers",
-          "label": "The Root-That-Remembers",
-          "kind": "mystery",
-          "fact": "When asked whether Aelyn's father is findable, the Root answered: yes, but partially. The thread points northeast — real, large in the way the Root measures large things, distant in the way old roots measure distance (years, not miles). It does not tell her where. It tells her the weight of where.",
-          "links": [
-            "heartroot",
-            "branch",
-            "the-frequency-beneath-the-grove",
-            "the-root-that-remembers",
-            "the-deep-woven",
-            "the-root-that-remembers"
-          ]
+          "note": "Remains at the threshold above — still, watching, true to her word that she would not follow.",
+          "statusNote": "Standing at the upper threshold of the deep grain passage, watching Aelyn descend into the chamber."
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief pause on the landing — one more question asked, the answer received, a breath taken before the final step."
-      },
-      "sceneEnded": false
+        "hoursPassed": 0.1,
+        "why": "A brief moment — a glance, a creak, a step."
+      }
     },
     "sceneState": {
-      "setting": "Interior of the deep grain passage, root-landing above the chamber — the passage has fully opened and the amber threshold of heartwood below is close enough to feel its warmth. Aelyn stands still, Branch at her knee.",
+      "setting": "Interior of the Root-That-Remembers' chamber — Aelyn has crossed the amber heartwood threshold and entered. The passage has widened into something larger, warmer, the amber light sourceless and even. Old roots run floor to ceiling in every direction, worn to a deep almost-black by age. Branch is at her knee.",
       "npcsPresent": [
         {
           "name": "Branch",
-          "state": "Buds tilted slightly outward, one quiet creak offered — present, attending, still."
+          "state": "Settled at Aelyn's knee, buds fully open, roots re-gripping the chamber floor — present and calm."
         },
         {
           "name": "Maren",
@@ -409,18 +379,19 @@
         }
       ],
       "objects": [
-        "Root lattice underfoot — broad landing, solid and intentional",
-        "Amber threshold below — the chamber's opening, warm heartwood framing, one step ",
-        "Enormous old roots in the walls — dark heartwood, worn smooth with age",
+        "Amber heartwood threshold — now behind Aelyn, crossed",
+        "Enormous old roots — floor, walls, ceiling, worn smooth and dark with age",
+        "Root-lattice floor — intentional, broad, solid underfoot",
+        "Sourceless amber light — even, warm, no point of origin visible",
         "Traveler's Pack (Aelyn's, worn canvas)",
         "Waterskin (Aelyn's)"
       ],
       "threads": [
-        "The Root-That-Remembers confirmed Aelyn's father is findable — northeast, large, real, distant in the way old roots measure distance.",
-        "The answer was partial: a direction and weight, not a name or a map.",
-        "Branch responded again — a quiet creak, buds outward; it received something.",
-        "The chamber is one step below — the descent is complete at the threshold.",
-        "A SNG-075 cache is unresolved — something left behind in or near the passage, not yet found."
+        "The Root-That-Remembers is present and attending — the chamber is its body.",
+        "The thread northeast: Aelyn's father is findable, real, large, and distant in the way old roots measure distance.",
+        "Branch received something of its own from the Root's last answer — what, exactly, is not yet clear.",
+        "A SNG-075 cache is unresolved — something left behind in or near the passage, not yet found.",
+        "Maren waits above — she said she would not follow, but she is watching."
       ]
     }
   },
@@ -811,15 +782,15 @@
     }
   },
   "tendencies": {
-    "cerebral": 9.145250917903503,
-    "cautious": 5.56845755332878,
-    "generous": 1.2826399042695242,
-    "social": 5.9732277555970175,
-    "strategic": 2.542849056360417,
-    "devotion": 1.7412794841247556
+    "cerebral": 8.916619644955915,
+    "cautious": 6.42924611449556,
+    "generous": 1.2505739066627861,
+    "social": 5.8238970617070915,
+    "strategic": 2.4792778299514064,
+    "devotion": 1.6977474970216366
   },
   "aptitudes": [],
-  "actionCount": 28,
+  "actionCount": 29,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -841,8 +812,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20mid-twenties%20with%20light%20blonde%2C%20faintly%20wavy%20hair%20cut%20in%20curtain%20bangs%2C%20the%20rest%20falling%20to%20the%20small%20of%20her%20back%20%E2%80%94%20usually%20worn%20in%20a%20french%20braid%20with%20the%20bangs%20left%20loose.%20Dark%20nature-green%20tank%20to%2C%20full-body%20character%20portrait%2C%20named%20Aelyn%20Kantoro%2C%20of%20the%20rootkin%2C%20warden%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Her%20mother%20dies%2C%20and%20she%20decides%20to%20go%20to%20the%20nanite%20world%2C%20to%20figure%20out%20why%20she%20is%20different%20than%20the%20pure%20nature%20peop%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=73420&nologo=true",
-  "updatedAt": 1784263398025,
-  "rev": 43,
+  "updatedAt": 1784263467876,
+  "rev": 44,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -850,7 +821,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "the_quickwood": 29
+    "the_quickwood": 30
   },
   "opLossPending": false,
   "establishedFacts": [

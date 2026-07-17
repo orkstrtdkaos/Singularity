@@ -1149,6 +1149,81 @@
     }
    ],
    "nativeOrCombination": "native"
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_revealing_burn",
+   "name": "The Revealing Burn",
+   "levelReq": 4,
+   "energyCost": 11,
+   "powerSystem": "reach_dark_light",
+   "tradition": "blazeborn",
+   "attribute": "mental",
+   "axes": {
+    "dark_light": 0.6
+   },
+   "functions": [
+    "reveal",
+    "strike"
+   ],
+   "narrationHints": "The fire does not spread — it CLARIFIES, burning away everything false in a space until only what is truly there remains, standing in the light of its own burning.",
+   "description": "The Blazeborn art of the fire that reveals — a flame that consumes the false, the hidden, the disguised, leaving only the true thing exposed in the light it casts. To burn, here, is to uncover.",
+   "notFor": "It burns away concealment, not flesh by default — but truth exposed can wound worse than fire, and you do not get to choose what the burn reveals. Sometimes it is your own thing that stands revealed.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Revealing Burn",
+     "grants": "Burn away all falsehood and concealment in a place, exposing what is truly there.",
+     "cannot": "It cannot un-reveal what it shows, it does not discriminate whose secret burns free, and a fire lit to expose another can just as easily light you."
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "FIGHT",
+    "INVESTIGATE"
+   ],
+   "challengeProfile": {
+    "FIGHT": 3,
+    "INVESTIGATE": 4
+   },
+   "harmRung": "moderate"
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_last_light",
+   "name": "The Last Light",
+   "levelReq": 5,
+   "energyCost": 14,
+   "powerSystem": "reach_dark_light",
+   "tradition": "blazeborn",
+   "attribute": "mental",
+   "axes": {
+    "dark_light": 0.9
+   },
+   "functions": [
+    "strike"
+   ],
+   "narrationHints": "You give it everything — every ember you have ever kept — in one light so total that for a heartbeat there is no shadow anywhere, and then there is nothing left in you to burn.",
+   "description": "The Blazeborn capstone — the whole of your inner fire spent at once, a light so absolute it unmakes any darkness in reach. The greatest thing they do, and the one that leaves them cold and empty after.",
+   "notFor": "One blaze, once, and it empties you utterly — you will be ash-cold and defenseless after. It illuminates all but sustains nothing; when it is done, it is DONE, and so, for a while, are you.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Last Light",
+     "grants": "Spend your entire inner fire in one absolute light that unmakes all shadow in reach.",
+     "cannot": "It leaves you spent to nothing and cold after, it cannot be held or sustained, and it cannot be half-given — the last light is all of it or none."
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "FIGHT"
+   ],
+   "challengeProfile": {
+    "FIGHT": 5
+   },
+   "harmRung": "severe"
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

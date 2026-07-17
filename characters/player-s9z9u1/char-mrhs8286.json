@@ -66,7 +66,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.6124330052913572,
+    "spectrumId": -0.5818113550267894,
     "violence_peace": 0.09798375000000001,
     "chaos_order": 0.2085002906812526,
     "mechanical_spiritual": 0.17191810626191062,
@@ -641,42 +641,36 @@
         "player": "Replace the page and return to Leth's archive — show her what Vash wrote and ask whether she knows Grael's runner",
         "summary": "Vash's testimony shared with Leth — she names the optics array intake log as the route to the runner's identity; Calvar's address confirmed above the cooperage on the east lane.",
         "narration": "You fold the page back along its three panels — spine first, then left, then right, matching the original creases exactly — and set it on the low shelf in the same position: spine toward the wall, leading edge flush with the shelf lip. The grinding wheel catches what little light seeps under the door and throws nothing back. You leave the room as you found it.\n\nThe rear corridor receives you the same way it let you in — cold stone, chalk dust, Leth's lamp still angled at her own feet. She hears you before she sees you, doesn't start. Her posture asks the question.\n\n\"Vash heard Calvar name the seventh band,\" you say, low, close. \"Copied four verification characters from a binding receipt into the diagram's lower corner — an authentication mark. And wrote down what they saw six weeks ago. Grael's runner came to the district secondary stack on the first and third morning of each week — cut-cord pack, says he collects from the optics array. On one of those visits he removed Calvar's calibration files. Vash watched it. Wrote it down. Left it where the right person would find it.\"\n\nLeth is quiet for a moment. She lifts the lamp a fraction — not to see you better, to think. Then: \"Grael's runner. Cut-cord pack.\" She says it the way someone says a number they've been adding up for a while and finally arrived at the sum. \"I know the schedule. First and third morning, yes — I've seen the pack. I don't know a name. But I know who would: the optics array intake keeps a collection log. Every collector, every visit, dated and initialed. It's a working document — not archived, not restricted. It lives in the array-office foyer.\" She pauses. \"Calvar's building is east lane, above the cooperage. If you're going there tonight, the array-office is on the way.\""
+      },
+      {
+        "player": "Vash wanted the right person to have his note and testimony.  Pell and I are that right person.  Will you (Leth) let him know while we're out?  Then Turn to Pell, array office then Calvar's?  Or is there anything else?",
+        "summary": "Leth agrees to notify Vash; Silas and Pell set their route — array office, then Calvar above the cooperage.",
+        "narration": "Leth takes the question the way she takes most things — straight in, no visible reaction while she sorts it. \"I'll send word to Vash tonight,\" she says. \"He'll want to know the page found the right hands.\" A beat. \"He's been sitting on it three days.\" She lifts the lamp slightly, checking the corridor in both directions, then nods once toward the archive room. Her part of this is done and she knows it — same as when she led you to the door and looked away.\n\nPell is waiting at the archive room threshold, Memory leaning against the wall beside her. She has the posture of someone who has been tracking the conversation through the stone and drawn most of it out already. When you turn to her she meets it directly — not quite a question, more a reading.\n\n\"Array office, then Calvar,\" you say. \"Unless there's something else here.\"\n\nPell glances once at Leth, then back. \"There isn't,\" she says, and straightens from the wall. No ceremony. She reaches past you for the spear and settles it in her grip, and the motion is so habitual it barely registers — just the quiet competence of someone who was already moving before the decision was named. Huginn's shape is visible at the edge of the lamplight, through the corridor's southern angle: a still shadow on the sign board outside, attending."
       }
     ],
     "lastTurn": {
-      "narration": "You fold the page back along its three panels — spine first, then left, then right, matching the original creases exactly — and set it on the low shelf in the same position: spine toward the wall, leading edge flush with the shelf lip. The grinding wheel catches what little light seeps under the door and throws nothing back. You leave the room as you found it.\n\nThe rear corridor receives you the same way it let you in — cold stone, chalk dust, Leth's lamp still angled at her own feet. She hears you before she sees you, doesn't start. Her posture asks the question.\n\n\"Vash heard Calvar name the seventh band,\" you say, low, close. \"Copied four verification characters from a binding receipt into the diagram's lower corner — an authentication mark. And wrote down what they saw six weeks ago. Grael's runner came to the district secondary stack on the first and third morning of each week — cut-cord pack, says he collects from the optics array. On one of those visits he removed Calvar's calibration files. Vash watched it. Wrote it down. Left it where the right person would find it.\"\n\nLeth is quiet for a moment. She lifts the lamp a fraction — not to see you better, to think. Then: \"Grael's runner. Cut-cord pack.\" She says it the way someone says a number they've been adding up for a while and finally arrived at the sum. \"I know the schedule. First and third morning, yes — I've seen the pack. I don't know a name. But I know who would: the optics array intake keeps a collection log. Every collector, every visit, dated and initialed. It's a working document — not archived, not restricted. It lives in the array-office foyer.\" She pauses. \"Calvar's building is east lane, above the cooperage. If you're going there tonight, the array-office is on the way.\"",
-      "sceneSummary": "Vash's testimony shared with Leth — she names the optics array intake log as the route to the runner's identity; Calvar's address confirmed above the cooperage on the east lane.",
+      "narration": "Leth takes the question the way she takes most things — straight in, no visible reaction while she sorts it. \"I'll send word to Vash tonight,\" she says. \"He'll want to know the page found the right hands.\" A beat. \"He's been sitting on it three days.\" She lifts the lamp slightly, checking the corridor in both directions, then nods once toward the archive room. Her part of this is done and she knows it — same as when she led you to the door and looked away.\n\nPell is waiting at the archive room threshold, Memory leaning against the wall beside her. She has the posture of someone who has been tracking the conversation through the stone and drawn most of it out already. When you turn to her she meets it directly — not quite a question, more a reading.\n\n\"Array office, then Calvar,\" you say. \"Unless there's something else here.\"\n\nPell glances once at Leth, then back. \"There isn't,\" she says, and straightens from the wall. No ceremony. She reaches past you for the spear and settles it in her grip, and the motion is so habitual it barely registers — just the quiet competence of someone who was already moving before the decision was named. Huginn's shape is visible at the edge of the lamplight, through the corridor's southern angle: a still shadow on the sign board outside, attending.",
+      "sceneSummary": "Leth agrees to notify Vash; Silas and Pell set their route — array office, then Calvar above the cooperage.",
       "choices": [
         {
-          "label": "Go to the array-office first — pull the collection log and get the runner's name before you knock on Calvar's door",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 15,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Go straight to Calvar — east lane, above the cooperage. The runner's name can wait; the man who designed the seventh band cannot",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Head to the array office foyer now — check the intake collection log for Grael's runner by name and schedule",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "difficulty": 0,
           "intentTags": [
-            "travel"
+            "travel",
+            "scout"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Use Order-Sense on the building itself before you go anywhere — read what the cooperage block is part of, and whether Calvar's room connects to anything you should know about",
+          "label": "Before leaving: use Order-Sense on the rear corridor itself — see what design this three-room row is actually part of",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 0,
+          "axes": {
+            "chaos_order": 0.6
+          },
+          "difficulty": 15,
           "intentTags": [
             "study"
           ],
@@ -685,58 +679,54 @@
           "trivial": false
         },
         {
-          "label": "Ask Leth directly — has she ever had reason to notice Grael's runner herself, any detail beyond the pack and the schedule",
+          "label": "Ask Leth one more thing before you go: does she know whether Calvar has had any visitors since he left the diagram — anyone asking at the cooperage for him",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Skip the log — go straight to Calvar above the cooperage. The runner's name matters less than what Calvar can tell you himself",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "travel"
+          ],
           "trivial": true
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "find-the-engineer",
-          "note": "Vash's testimony relayed to Leth — Grael's runner identified by schedule and pack description; Leth names the optics array intake collection log as the route to the runner's name. Calvar is east lane, above the cooperage."
-        }
-      ],
+      "characterDeltas": {},
       "scene": {
-        "setting": "Rear corridor of the three-room row — cold stone, chalk dust, handcart-wide. Leth's lamp angled low. The east-room door closed behind Silas; the west survey office dark; archive room door to the south.",
+        "setting": "Rear corridor of the three-room row — cold stone, chalk dust, handcart-wide. Leth's lamp angled low. South: archive room door. East: Vash's room, closed. West: dark survey office. Exit to the service lane north.",
         "npcsPresent": [
           {
             "name": "Leth",
-            "state": "Lamp lifted a fraction, processing what Silas told her — named the optics array intake collection log and Calvar's address without prompting"
+            "state": "Lamp lowered, agreement given — will send word to Vash tonight. Her posture has settled; she's waiting for them to leave so she can begin."
           },
           {
             "name": "Pell",
-            "state": "Waiting at the archive room threshold or just within — has not crossed into the corridor"
+            "state": "Upright from the wall, Memory in hand, ready to move — already composing the route."
           },
           {
             "name": "Huginn",
-            "state": "On the sign board outside, attending from a distance"
+            "state": "Still shape on the sign board outside, visible through the corridor's southern angle."
           }
         ],
         "objects": [
           "Leth's low lamp",
-          "Three corridor doors — archive room (south), west survey office (dark), east room (Vash's, now closed)",
-          "Memory (spear) — leaning in Leth's archive room",
+          "Three corridor doors — archive room (south), west survey office (dark), east room (Vash's, closed)",
+          "Memory (spear) — now in Pell's grip",
           "Fendt's Testimony — folded page in Silas's coat"
         ],
         "threads": [
-          "Optics array intake collection log — in the array-office foyer, on the way to the cooperage; holds the runner's name and visit dates",
-          "Calvar above the cooperage on the east lane — the next and final threshold",
-          "Vash's folded page replaced exactly — the room will not show the visit",
-          "Leth named the array-office route unprompted — she is helping more than her role requires"
+          "Optics array intake collection log — array-office foyer, records runner name and visit dates by schedule",
+          "Calvar above the cooperage on the east lane — the final threshold",
+          "Leth will notify Vash tonight that his page reached the right hands",
+          "Vash's folded page replaced exactly in his room — the room will not show the visit"
         ]
       },
       "npcUpdates": [
@@ -744,88 +734,69 @@
           "op": "update",
           "npcId": "leth",
           "name": "Leth",
-          "note": "Received Vash's testimony from Silas without flinching — recognized the cut-cord pack and the first-and-third schedule immediately. Named the optics array intake collection log (array-office foyer, not restricted) as the route to the runner's identity. Volunteered Calvar's address again. Helping beyond her stated role.",
+          "note": "Agreed to send word to Vash tonight — named the three-day wait without editorializing. Her part is finished and she is comfortable with that.",
           "learned": [
-            "Vash's folded page names Grael's runner as the calibration-file remover — cut-cord pack, first-and-third-morning collection schedule",
-            "The four characters Vash added to Calvar's diagram are authentication marks copied from a binding receipt — confirming the diagram's authorship",
-            "The optics array intake log is a live working document in the array-office foyer, not archived — holds collector names, visit dates, initials"
-          ],
-          "skillsObserved": [
-            "immediate cross-referencing of a new witness account against known operational detail",
-            "naming the next investigative resource without being asked"
+            "Vash has been holding his page for three days — waiting for the right person"
           ],
           "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "Standing in the rear corridor with Silas — has named the array-office collection log as the route to the runner's identity and confirmed Calvar's address above the cooperage"
-        }
-      ],
-      "factUpdates": [
+          "statusNote": "In the rear corridor — will contact Vash tonight; her involvement complete"
+        },
         {
-          "op": "add",
-          "text": "The optics array intake collection log — a live, non-restricted working document in the array-office foyer — records every collector visit by name, date, and initials. Leth confirms it would hold the identity of Grael's runner (cut-cord pack, first-and-third-morning schedule).",
-          "subjectId": "leth"
+          "op": "update",
+          "npcId": "pell",
+          "name": "Pell",
+          "note": "Confirmed the route without deliberation — array office, then Calvar. Took Memory in hand and was already moving.",
+          "status": "active",
+          "statusNote": "In the rear corridor with Silas — ready to move to the array office foyer"
         }
       ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "a brief corridor exchange before departure"
+      },
       "codexUpdates": [
         {
           "topic": "vash-lens-grinder-east-room",
           "label": "Vash — Lens-Grinder, East Room",
           "kind": "person",
           "entityId": "vash",
-          "fact": "Vash's testimony relayed to Leth — confirmed: the four characters added to Calvar's diagram are authentication marks from a binding receipt, and the folded page explicitly names Grael's runner (cut-cord pack, first-and-third-morning) as the person who removed the calibration files.",
+          "fact": "Leth will notify Vash tonight that his folded page reached the right hands — he has been waiting three days for that confirmation.",
           "links": [
-            "find-the-engineer",
             "leth-archive-complaint",
-            "calvar",
-            "overseer-grael",
-            "the-document-roll-leth-s-desk"
-          ]
-        },
-        {
-          "topic": "optics-array-intake-log",
-          "label": "Optics Array Intake Collection Log",
-          "kind": "lore",
-          "fact": "A live working document kept in the array-office foyer — not archived, not restricted. Records every collector visit to the optics array by name, date, and initials. Leth believes it holds the name of Grael's runner.",
-          "links": [
-            "find-the-engineer",
-            "overseer-grael",
-            "radiant-plateau-edge",
-            "vash-lens-grinder-east-room"
+            "the-document-roll-leth-s-desk",
+            "find-the-engineer"
           ]
         }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief exchange in the rear corridor — Silas relays what the page said, Leth responds"
-      }
+      ]
     },
     "sceneState": {
-      "setting": "Rear corridor of the three-room row — cold stone, chalk dust, handcart-wide. Leth's lamp angled low. The east-room door closed behind Silas; the west survey office dark; archive room door to the south.",
+      "setting": "Rear corridor of the three-room row — cold stone, chalk dust, handcart-wide. Leth's lamp angled low. South: archive room door. East: Vash's room, closed. West: dark survey office. Exit to the service lane north.",
       "npcsPresent": [
         {
           "name": "Leth",
-          "state": "Lamp lifted a fraction, processing what Silas told her — named the optics array intake collection log and Calvar's addre"
+          "state": "Lamp lowered, agreement given — will send word to Vash tonight. Her posture has settled; she's waiting for them to leave"
         },
         {
           "name": "Pell",
-          "state": "Waiting at the archive room threshold or just within — has not crossed into the corridor"
+          "state": "Upright from the wall, Memory in hand, ready to move — already composing the route."
         },
         {
           "name": "Huginn",
-          "state": "On the sign board outside, attending from a distance"
+          "state": "Still shape on the sign board outside, visible through the corridor's southern angle."
         }
       ],
       "objects": [
         "Leth's low lamp",
         "Three corridor doors — archive room (south), west survey office (dark), east roo",
-        "Memory (spear) — leaning in Leth's archive room",
+        "Memory (spear) — now in Pell's grip",
         "Fendt's Testimony — folded page in Silas's coat"
       ],
       "threads": [
-        "Optics array intake collection log — in the array-office foyer, on the way to the cooperage; holds the runner's name and visit dates",
-        "Calvar above the cooperage on the east lane — the next and final threshold",
-        "Vash's folded page replaced exactly — the room will not show the visit",
-        "Leth named the array-office route unprompted — she is helping more than her role requires"
+        "Optics array intake collection log — array-office foyer, records runner name and visit dates by schedule",
+        "Calvar above the cooperage on the east lane — the final threshold",
+        "Leth will notify Vash tonight that his page reached the right hands",
+        "Vash's folded page replaced exactly in his room — the room will not show the visit"
       ]
     }
   },
@@ -1251,7 +1222,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d3] Holding the front of the building while Silas moved inside and up — she does not know he is at the landing yet.",
         "[d3] Came up from the rear door in under two minutes — took a covering position without being told, silent, reading the room.",
         "[d3] Took the questioning position without prompting when Silas stepped back — read the geometry and moved into it. Pulled the band-designation admission from Fendt with two precise que",
         "[d3] Gone still in listening mode — waiting for Silas's move, not cutting in.",
@@ -1260,7 +1230,8 @@
         "[d3] Confirmed the margin notation as her father's hand — plain, certain, without performance. The authorship is named.",
         "[d3] Named the half-knowledge plainly — a crate of instruments she wasn't to touch, graduated lenses, a hand she trained out because it felt too much like him. Her father told her it wa",
         "[d3] Named her priority plainly — Fendt first, the paper lodged, Grael named. Her father held in reserve: not looking for him, not turning away if the work leads there.",
-        "[d3] Took Fendt's folded page from his hand and passed it to Silas without a word — a small, precise gesture of commitment. Walked the full day back to Millbrook without asking to stop."
+        "[d3] Took Fendt's folded page from his hand and passed it to Silas without a word — a small, precise gesture of commitment. Walked the full day back to Millbrook without asking to stop.",
+        "[d3] Confirmed the route without deliberation — array office, then Calvar. Took Memory in hand and was already moving."
       ],
       "knownFacts": [
         "The calibration files disappeared the same season her father left the Plateau",
@@ -1281,7 +1252,7 @@
         "holding partial knowledge without performance — named the ha"
       ],
       "status": "active",
-      "statusNote": "Arrived with Silas in Millbrook at dusk — holding both threads (Fendt's six-week window and her father's unnamed situation) without letting either collapse.",
+      "statusNote": "In the rear corridor with Silas — ready to move to the array office foyer",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 3
@@ -1556,9 +1527,8 @@
         "locationId": "millbrook",
         "day": 3
       },
-      "relationship": 4,
+      "relationship": 5,
       "history": [
-        "[d3] Received Silas and Pell with Sorel's letter already in hand. Named them as Grael's engineer's seekers without being told. Announced she has ground to cover first.",
         "[d3] Set her sequence plainly — two things before the name: the archive breach and what it means for the engineer. Has a document roll on the desk. Pausing before the second.",
         "[d3] Completed her sequence — named Calvar above the cooperage on the east lane. Opened the document roll: a diagram in Calvar's own hand, left with her three days ago. Stated plainly t",
         "[d3] Watched Silas use Palework on the fresher ink — did not interrupt or ask; is waiting",
@@ -1567,17 +1537,18 @@
         "[d3] Named the other two room occupants — empty survey office to the west, Vash the lens-grinder to the east. Acknowledged she told no one Calvar was coming but Vash was on the wheel th",
         "[d3] Accepted Silas's account of Vash without argument — checked it against what she actually knows, not against what she feared. Agreed to walk him to the corridor door; named that she",
         "[d3] Led Silas to the rear corridor midpoint and named the east room door with a single nod — then looked away. Her part of the work is done and she knows it.",
-        "[d3] Received Vash's testimony from Silas without flinching — recognized the cut-cord pack and the first-and-third schedule immediately. Named the optics array intake collection log (ar"
+        "[d3] Received Vash's testimony from Silas without flinching — recognized the cut-cord pack and the first-and-third schedule immediately. Named the optics array intake collection log (ar",
+        "[d3] Agreed to send word to Vash tonight — named the three-day wait without editorializing. Her part is finished and she is comfortable with that."
       ],
       "knownFacts": [
-        "Vash was on the grinding wheel the morning Calvar came and spoke in the corridor — sound carries both ways",
         "The rear corridor access does not lock from the archive side",
         "She has a key to the west survey office — corridor is common to all three rooms",
         "She is revising her assumption about Vash from possibility to probability",
         "Held the lamp and the boundary simultaneously — showed Silas the threshold without crossing it herself",
         "Vash's folded page names Grael's runner as the calibration-file remover — cut-cord pack, first-and-third-morning collection schedule",
         "The four characters Vash added to Calvar's diagram are authentication marks copied from a binding receipt — confirming the diagram's authorship",
-        "The optics array intake log is a live working document in the array-office foyer, not archived — holds collector names, visit dates, initials"
+        "The optics array intake log is a live working document in the array-office foyer, not archived — holds collector names, visit dates, initials",
+        "Vash has been holding his page for three days — waiting for the right person"
       ],
       "skillsObserved": [
         "accurate self-reporting without defensiveness under implicat",
@@ -1588,7 +1559,7 @@
         "naming the next investigative resource without being asked"
       ],
       "status": "active",
-      "statusNote": "Standing in the rear corridor with Silas — has named the array-office collection log as the route to the runner's identity and confirmed Calvar's address above ",
+      "statusNote": "In the rear corridor — will contact Vash tonight; her involvement complete",
       "lastSeen": {
         "locationId": "radiant_plateau_edge",
         "day": 3
@@ -2773,7 +2744,8 @@
           "[d3] Vash's east room contains four thin glass circles on a cord and a folded page in the same fast-pressed hand as the characters added to Calvar's diagram — confirming Vash as the diagram-marker and sugg",
           "[d3] The folded page is three days old — written the same morning Calvar left the diagram with Leth, within hours of the corridor conversation. The hand is even, the pressure controlled. Vash was not frigh",
           "[d3] Vash is an eyewitness to the file removal — Grael's runner (cut-cord pack, optics array collector, first and third mornings) took the calibration files from the secondary stack six weeks ago. Vash add",
-          "[d3] Vash's testimony relayed to Leth — confirmed: the four characters added to Calvar's diagram are authentication marks from a binding receipt, and the folded page explicitly names Grael's runner (cut-co"
+          "[d3] Vash's testimony relayed to Leth — confirmed: the four characters added to Calvar's diagram are authentication marks from a binding receipt, and the folded page explicitly names Grael's runner (cut-co",
+          "[d3] Leth will notify Vash tonight that his folded page reached the right hands — he has been waiting three days for that confirmation."
         ],
         "links": [
           "leth-archive-complaint",
@@ -2827,18 +2799,18 @@
     }
   },
   "tendencies": {
-    "strategic": 22.900131345633724,
-    "cerebral": 25.92793952883687,
-    "social": 21.042566333505132,
-    "generous": 5.18122399498456,
-    "cautious": 18.791474694161682,
-    "physical": 0.9085304536267468,
-    "risky": 2.558239005182318,
-    "ruthless": 1.1249244015531175,
-    "carousing": 0.7899244656382887,
-    "amorous": 2.1660862395584073,
-    "patient": 1.4505237882207505,
-    "stealth": 0.9268593749999999
+    "strategic": 23.32762806199288,
+    "cerebral": 25.279741040615946,
+    "social": 21.516502175167503,
+    "generous": 5.051693395109946,
+    "cautious": 18.32168782680764,
+    "physical": 0.8858171922860781,
+    "risky": 2.49428303005276,
+    "ruthless": 1.0968012915142895,
+    "carousing": 0.7701763539973314,
+    "amorous": 2.111934083569447,
+    "patient": 1.4142606935152318,
+    "stealth": 0.9036878906249999
   },
   "aptitudes": [
     "strategist",
@@ -2849,7 +2821,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 369,
+  "actionCount": 370,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3015,8 +2987,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784293980987,
-  "rev": 533,
+  "updatedAt": 1784294208342,
+  "rev": 534,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3346,8 +3318,8 @@
           "entityId": "vash",
           "type": "npc",
           "birthWeight": 10,
-          "engagementScore": 7,
-          "tier": "established",
+          "engagementScore": 8,
+          "tier": "nominated",
           "rating": "R",
           "provenance": {
             "playerKey": "player-s9z9u1",
@@ -3373,6 +3345,10 @@
             },
             {
               "kind": "interact",
+              "day": 3
+            },
+            {
+              "kind": "fact",
               "day": 3
             },
             {
@@ -3751,7 +3727,7 @@
   "syncedAt": 1784292613822,
   "teachers": {},
   "regionsKnown": {
-    "valley": 184
+    "valley": 185
   },
   "foreclosed": [
     "rootkin",
@@ -3788,10 +3764,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-17T12:35:15.912Z",
-      "lastAt": "2026-07-17T13:13:00.984Z",
+      "lastAt": "2026-07-17T13:16:48.341Z",
       "startDay": 17,
       "endDay": 17,
-      "beats": 7
+      "beats": 8
     }
   ],
   "company": [

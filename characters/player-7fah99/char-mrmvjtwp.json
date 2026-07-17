@@ -114,85 +114,81 @@
         "player": "Give your name and where you're from — but hold back what the sapling told you. That feels like yours to carry a little longer.",
         "summary": "Aelyn gives her name and origin; the tender reveals hers — Maren — and notices Branch.",
         "narration": "You give her your name — Aelyn Kantoro — and watch it settle into the space between you the way names do here, slowly, with weight. Then you tell her the shorter truth: you came from the forest. The hidden one, to the east, where the trees are old enough to remember the valley before the Transition. You don't name the refuge. You don't explain your mother, or Branch, or the way you felt the hall breathing before you'd taken three steps inside. Those are yours.\n\nWhat the sapling told you — that stays with you too. Not from distrust. From something more like care. You're not sure the tender needs to hear it from you when she could ask the sapling herself. And you're not sure yet what it means to carry that knowledge outward.\n\nThe tender receives your name without repeating it, which feels correct. She lets the silence after it stand for a moment — not empty, just full of something else. Then she gives you hers, with the same unhurried plainness: 'Maren.' She inclines her head a fraction, and the gesture carries the same weight as a handshake would, somewhere else. Branch gives one slow, satisfied creak from the planter's edge.\n\n'The forest to the east,' Maren says, not quite a question. Her eyes move to Branch — to the small Rootkin child still listening with all five buds open — and something in her expression shifts. Not surprise. More like a piece of something fitting into a place she'd been leaving open. She looks back at you. 'And you brought one of ours with you.'"
+      },
+      {
+        "player": "Ask Maren about the thing below — not what the sapling told you, but whether the Heartroot has a name for what lives in its deepest grain.",
+        "summary": "Maren names the presence below — the Root-That-Remembers — and turns the question back on Aelyn.",
+        "narration": "Maren has your name now, and Branch's presence registered in her eyes — a quick, private recognition she hasn't named yet. You let the quiet settle for one more breath before you ask.\n\n'The Heartroot grew around something,' you say, keeping your voice as level as hers. 'Something older than the hall. Does the city have a name for what lives in its deepest grain?'\n\nMaren is quiet long enough that you hear Branch shift its roots on the moss — one soft creak, unhurried. Then she exhales slowly and looks at the floor, or maybe through it, the way you look at a body of water when you're thinking about depth.\n\n'We call it the Root-That-Remembers,' she says. 'Or some of us do. Others say you shouldn't call it anything, because naming it implies you understand it, and we don't.' She looks up at you. 'It was here before the first Rootkin put the first seed in this ground. We grew the hall around it because it seemed — right. The way you build a house around a good hearth.' A pause. 'It hasn't spoken to anyone alive. Not in any way we recognize as speech.' Her eyes flick briefly to the planter — to the sapling, then to Branch — and back to you. Something careful enters her expression. 'Why do you ask?'"
       }
     ],
     "lastTurn": {
-      "narration": "You give her your name — Aelyn Kantoro — and watch it settle into the space between you the way names do here, slowly, with weight. Then you tell her the shorter truth: you came from the forest. The hidden one, to the east, where the trees are old enough to remember the valley before the Transition. You don't name the refuge. You don't explain your mother, or Branch, or the way you felt the hall breathing before you'd taken three steps inside. Those are yours.\n\nWhat the sapling told you — that stays with you too. Not from distrust. From something more like care. You're not sure the tender needs to hear it from you when she could ask the sapling herself. And you're not sure yet what it means to carry that knowledge outward.\n\nThe tender receives your name without repeating it, which feels correct. She lets the silence after it stand for a moment — not empty, just full of something else. Then she gives you hers, with the same unhurried plainness: 'Maren.' She inclines her head a fraction, and the gesture carries the same weight as a handshake would, somewhere else. Branch gives one slow, satisfied creak from the planter's edge.\n\n'The forest to the east,' Maren says, not quite a question. Her eyes move to Branch — to the small Rootkin child still listening with all five buds open — and something in her expression shifts. Not surprise. More like a piece of something fitting into a place she'd been leaving open. She looks back at you. 'And you brought one of ours with you.'",
-      "sceneSummary": "Aelyn gives her name and origin; the tender reveals hers — Maren — and notices Branch.",
+      "narration": "Maren has your name now, and Branch's presence registered in her eyes — a quick, private recognition she hasn't named yet. You let the quiet settle for one more breath before you ask.\n\n'The Heartroot grew around something,' you say, keeping your voice as level as hers. 'Something older than the hall. Does the city have a name for what lives in its deepest grain?'\n\nMaren is quiet long enough that you hear Branch shift its roots on the moss — one soft creak, unhurried. Then she exhales slowly and looks at the floor, or maybe through it, the way you look at a body of water when you're thinking about depth.\n\n'We call it the Root-That-Remembers,' she says. 'Or some of us do. Others say you shouldn't call it anything, because naming it implies you understand it, and we don't.' She looks up at you. 'It was here before the first Rootkin put the first seed in this ground. We grew the hall around it because it seemed — right. The way you build a house around a good hearth.' A pause. 'It hasn't spoken to anyone alive. Not in any way we recognize as speech.' Her eyes flick briefly to the planter — to the sapling, then to Branch — and back to you. Something careful enters her expression. 'Why do you ask?'",
+      "sceneSummary": "Maren names the presence below — the Root-That-Remembers — and turns the question back on Aelyn.",
       "choices": [
         {
-          "label": "Tell Maren that Branch came with you by its own choice — or something close to it. Let her read what she will from that.",
+          "label": "Tell her what the sapling showed you — the direction, the center below. She's answered honestly; she's earned it.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
           "difficulty": 0,
+          "trivial": true,
           "intentTags": [
-            "calm"
+            "help"
           ],
           "abilityId": null,
-          "energyCost": null,
-          "trivial": true
+          "energyCost": null
         },
         {
-          "label": "Ask Maren about the thing below — not what the sapling told you, but whether the Heartroot has a name for what lives in its deepest grain.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Ask Maren what a visitor does, here — not the ceiling, not the age of things. What does she think you should see first?",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "plan"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Crouch back to Branch's level and ask it quietly — in the language of the green — what it makes of being home.",
+          "label": "Ask what she means by 'not in any way we recognize as speech' — has it communicated in some way they don't recognize?",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {},
           "difficulty": 0,
+          "trivial": true,
           "intentTags": [
             "study"
           ],
-          "abilityId": "the_speaking_grove",
-          "energyCost": 4,
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null
+        },
+        {
+          "label": "Use Lifesense — reach down through the floor toward whatever is below and feel whether the Root-That-Remembers is aware of this conversation right now.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "trivial": false,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "lifesense",
+          "energyCost": 3
+        },
+        {
+          "label": "Ask about Branch — she recognized it. Say it came from here, and ask what that means to her people.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "trivial": true,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null
         }
       ],
-      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
+        "energy": 0
       },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "Interior of the living-wood entrance hall — thirty-foot arched ceiling of breathing bark, moss underfoot, oval light-gaps filling with early spring morning light. Aelyn is crouched near the planter's edge, two fingers still brushing the moss. Maren stands one step away, having just given her name and now watching Branch.",
+        "setting": "Interior of the living-wood entrance hall — thirty-foot arched ceiling of breathing bark, moss underfoot, oval light-gaps filling with early spring morning light. Aelyn is crouched near the planter's edge, two fingers still brushing the moss. Maren stands one step away, having just named the Root-That-Remembers and now watching Aelyn with something careful in her expression.",
         "npcsPresent": [
           {
-            "name": "Maren (Rootkin Tender)",
-            "state": "Standing close, eyes moved to Branch with quiet recognition — waiting, unhurried."
+            "name": "Maren",
+            "state": "Standing close, eyes on Aelyn — waiting for the answer to 'why do you ask?', her expression careful but open."
           },
           {
             "name": "Branch",
-            "state": "At the planter's edge, all five buds open, giving one slow creak — listening."
+            "state": "At the planter's edge, all five buds open, roots shifting once on the moss — listening."
           },
           {
             "name": "Sapling-child",
@@ -211,11 +207,11 @@
           "Oval light-gaps in the bark ceiling, filling with morning light"
         ],
         "threads": [
-          "Maren has given her name and noticed Branch — she's waiting on what Aelyn will say about it.",
-          "The watching thing is centered below — down through the root-floor and the deepest grain. Direction known, nature unknown.",
-          "Branch is listening, buds open.",
-          "Aelyn is still a stranger here with no established local reputation.",
-          "What the sapling told Aelyn remains unshared."
+          "Maren has asked 'why do you ask?' — she wants to know what prompted the question.",
+          "She named the Root-That-Remembers but flagged the limits of Rootkin understanding — it hasn't spoken in any way they recognize.",
+          "Branch's recognition by Maren is still unaddressed — she noticed it, hasn't named what she sees.",
+          "The direction the sapling gave Aelyn — inward, below — remains unshared with Maren.",
+          "Aelyn is still a stranger here with no established local reputation."
         ]
       },
       "npcUpdates": [
@@ -223,56 +219,51 @@
           "op": "update",
           "npcId": "rootkin-tender",
           "name": "Maren",
-          "role": "Keeper of the entrance hall and the sapling-child within",
-          "note": "Gave her name — Maren — in exchange for Aelyn's. Noticed Branch immediately and recognized it as Rootkin.",
+          "note": "Named the presence below — 'the Root-That-Remembers' — and admitted the Rootkin don't fully understand it; it was here before them and hasn't spoken in any recognizable way. Turned the question back on Aelyn.",
           "learned": [
-            "Her name is Maren",
-            "She recognized Branch as one of the Rootkin — her people's kin",
-            "She registered something significant in the fact that Aelyn brought Branch with her"
+            "She knows the Root-That-Remembers by name and by the Rootkin practice of building around it rather than disturbing it.",
+            "She is aware some Rootkin refuse to name it at all — naming implies understanding they don't have.",
+            "She noticed Aelyn's question was pointed — not tourist curiosity — and wants to know what prompted it."
           ],
           "skillsObserved": [
-            "patient observation",
-            "deliberate speech",
-            "discernment"
+            "careful honesty",
+            "measured disclosure"
           ],
-          "relationshipDelta": 1,
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Standing in the entrance hall, having exchanged names with Aelyn — now watching Branch with quiet recognition.",
-          "revealName": "Maren"
+          "statusNote": "Standing in the entrance hall, having named the Root-That-Remembers and waiting on Aelyn's answer."
         }
       ],
-      "factUpdates": [],
-      "placeUpdates": [],
       "codexUpdates": [
         {
-          "topic": "rootkin-tender",
-          "label": "Maren",
-          "kind": "person",
-          "entityId": "rootkin-tender",
-          "fact": "Her name is Maren. She gave it in exchange for Aelyn's, with the gravity of a handshake. She is the keeper of the entrance hall. She recognized Branch immediately as Rootkin kin and marked it as significant that Aelyn brought one with her.",
+          "topic": "the-watching-presence",
+          "label": "The Root-That-Remembers",
+          "kind": "mystery",
+          "entityId": null,
+          "fact": "The Rootkin call it the Root-That-Remembers — or some do; others refuse to name it at all. It predates the hall and the Rootkin who planted it. They grew the city around it deliberately, the way you'd build a house around a good hearth. It has not spoken in any way the Rootkin recognize as speech.",
           "links": [
             "heartroot",
+            "sapling-child-heartroot",
             "branch",
-            "sapling-child-heartroot"
+            "rootkin-tender"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief exchange of names — minutes only"
-      },
-      "sceneEnded": false
+        "why": "a brief exchange of questions in the entrance hall"
+      }
     },
     "sceneState": {
-      "setting": "Interior of the living-wood entrance hall — thirty-foot arched ceiling of breathing bark, moss underfoot, oval light-gaps filling with early spring morning light. Aelyn is crouched near the planter's edge, two fingers still brushing the moss. Maren stands one step away, having just given her name and now watching Branch.",
+      "setting": "Interior of the living-wood entrance hall — thirty-foot arched ceiling of breathing bark, moss underfoot, oval light-gaps filling with early spring morning light. Aelyn is crouched near the planter's edge, two fingers still brushing the moss. Maren stands one step away, having just named the Root-That-Remembers and now watching Aelyn with something careful in her expression.",
       "npcsPresent": [
         {
-          "name": "Maren (Rootkin Tender)",
-          "state": "Standing close, eyes moved to Branch with quiet recognition — waiting, unhurried."
+          "name": "Maren",
+          "state": "Standing close, eyes on Aelyn — waiting for the answer to 'why do you ask?', her expression careful but open."
         },
         {
           "name": "Branch",
-          "state": "At the planter's edge, all five buds open, giving one slow creak — listening."
+          "state": "At the planter's edge, all five buds open, roots shifting once on the moss — listening."
         },
         {
           "name": "Sapling-child",
@@ -291,11 +282,11 @@
         "Oval light-gaps in the bark ceiling, filling with morning light"
       ],
       "threads": [
-        "Maren has given her name and noticed Branch — she's waiting on what Aelyn will say about it.",
-        "The watching thing is centered below — down through the root-floor and the deepest grain. Direction known, nature unknown.",
-        "Branch is listening, buds open.",
-        "Aelyn is still a stranger here with no established local reputation.",
-        "What the sapling told Aelyn remains unshared."
+        "Maren has asked 'why do you ask?' — she wants to know what prompted the question.",
+        "She named the Root-That-Remembers but flagged the limits of Rootkin understanding — it hasn't spoken in any way they recognize.",
+        "Branch's recognition by Maren is still unaddressed — she noticed it, hasn't named what she sees.",
+        "The direction the sapling gave Aelyn — inward, below — remains unshared with Maren.",
+        "Aelyn is still a stranger here with no established local reputation."
       ]
     }
   },
@@ -535,17 +526,34 @@
         "createdDay": 1,
         "entityId": "rootkin-tender",
         "updatedDay": 1
+      },
+      "the-watching-presence": {
+        "id": "the-watching-presence",
+        "label": "The Root-That-Remembers",
+        "kind": "mystery",
+        "facts": [
+          "[d1] The Rootkin call it the Root-That-Remembers — or some do; others refuse to name it at all. It predates the hall and the Rootkin who planted it. They grew the city around it deliberately, the way you'd"
+        ],
+        "links": [
+          "heartroot",
+          "sapling-child-heartroot",
+          "branch",
+          "rootkin-tender"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "cerebral": 3.68838119165039,
-    "cautious": 0.8590683010253904,
-    "generous": 0.9268593749999999,
-    "social": 1
+    "cerebral": 4.59617166185913,
+    "cautious": 0.8375915934997556,
+    "generous": 0.9036878906249999,
+    "social": 0.975
   },
   "aptitudes": [],
-  "actionCount": 7,
+  "actionCount": 8,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -567,8 +575,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20mid-twenties%20with%20light%20blonde%2C%20faintly%20wavy%20hair%20cut%20in%20curtain%20bangs%2C%20the%20rest%20falling%20to%20the%20small%20of%20her%20back%20%E2%80%94%20usually%20worn%20in%20a%20french%20braid%20with%20the%20bangs%20left%20loose.%20Dark%20nature-green%20tank%20to%2C%20full-body%20character%20portrait%2C%20named%20Aelyn%20Kantoro%2C%20of%20the%20rootkin%2C%20warden%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Her%20mother%20dies%2C%20and%20she%20decides%20to%20go%20to%20the%20nanite%20world%2C%20to%20figure%20out%20why%20she%20is%20different%20than%20the%20pure%20nature%20peop%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=73420&nologo=true",
-  "updatedAt": 1784250895629,
-  "rev": 22,
+  "updatedAt": 1784251143014,
+  "rev": 23,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -576,7 +584,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "the_quickwood": 8
+    "the_quickwood": 9
   },
   "opLossPending": false,
   "establishedFacts": [

@@ -8,6 +8,13 @@
 > - **Shapes:** every node is a `<circle>` (L3665); function is shown ONLY by a tiny 2.4px colored dot beside it (L3666, SNG-124). So function = color, shape = always-circle. Erik wants shape to carry function too.
 > - **Precursor:** VERIFIED a real, deliberate gate — precursor abilities are learnable ONLY when `character.precursorAccess` lists them (progression.js L253), and that list is populated ONLY when the GM emits `unlockPrecursor` in the fiction ("when the fiction earns it", L2656; narration: *"A door opens that was never on any list"*). **The mechanic is beautiful — the outer ring can't be shopped, only lived into — but the wheel gives NO signal that precursor nodes are narrative-locked rather than tier-locked.** Erik's question IS the discoverability bug.
 
+## ✅ PROTOTYPE APPROVED — encoding LOCKED (Erik, 2026-07-16)
+Interactive prototype reviewed and approved. Locked decisions for the build:
+- **8 family shapes (LOCKED):** HARM=diamond · RESTORE=cross · PROTECT=shield · KNOW=ring · SHAPE=triangle · INFLUENCE=hexagon · MOVE=chevron · SUSTAIN=capsule. Shape carries the PRIMARY family (`families[0]`); color retained (redundant encoding). Multi-function nodes: primary shape + secondary family dots.
+- **Function filter (LOCKED):** tap a family chip → matching-shape nodes highlight, rest dim; each chip shows its shape+color. `clear` resets.
+- **Precursor sealed state (LOCKED):** dashed hollow outline + ✦ mark on the outer ring; visibly different from too-high/closed. Tap → the honest narrative-path explanation ("a door opens only when the fiction earns it… no learn button"). This is the approved treatment.
+- **Label de-collision (LOCKED as direction):** label owned + filter-matched + selected only; nudge overlapping labels apart; owned labels show name + effective cost (⚡N). Dense spokes still want the fuller fix (arc-spread + zoom-gate) — build the de-collide first, add arc-spread if a spoke still crowds.
+
 ## PART 1 — Give it room (fix label collision)
 - **Collision-avoided labels.** Don't place every label at the same fixed offset. Options (recommend a mix): (a) only label owned + selected + filter-matched nodes at full zoom, glyph-only otherwise (partly there — tighten it); (b) a lightweight de-collision pass — nudge labels radially/tangentially off each other, or leader-line a crowded cluster; (c) **zoom-gated labels** — at low zoom show shapes only, labels fade in as you zoom into a region (the spec-4 intent of SNG-124 that didn't fully land).
 - **Spread dense spokes.** An owned primary tradition stacks many nodes at similar angles/radii — give tier rings more radial spacing and/or fan a spoke's nodes across a small arc so they don't overlap. More breathing room per node.

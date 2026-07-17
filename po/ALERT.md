@@ -1,4 +1,22 @@
-# PIPELINE ALERT — Singularity## ⚔️ SNG-138 — Prestige recurring challenges: Brayden's ronin arc AUTHORED+shipped, recurrence wiring specced
+# PIPELINE ALERT — Singularity## ✅ SNG-137 — CLOSED GREEN (Aevi HEAD audit, v1.8.96)
+
+CCode shipped; **Aevi verified the load-bearing guards line-by-line at origin** (a repair op that doesn't refuse over-reach is a cheat surface — keyword presence isn't enough). corrections.js + inventory.js + state.js syntax-clean.
+- **P1 mastery:** rule 19B now imperative on a decisive ripe-craft beat (anti-inflation kept); RIPE FOR MASTERY names the ripe crafts inline. Answers Erik's "2 skills won't promote" — they're waiting for a defining beat, by design; the GM is now prompted to reliably mark it. **Closed.**
+- **P2 error-fixing — all 5 new ops "repair-not-wish" VERIFIED BY CONSTRUCTION:**
+  - `correctAbilityRank`: `if (!(want < a.level)) refuse` — "power is earned through play"; can only LOWER. ✓
+  - `correctBond`: `if (bondType==="romantic" && isMinorSubject(n)) refuse` BEFORE any mutation — absolute minor floor, same pattern as SNG-108. ✓
+  - `correctAttribute`: `clampN(to, 1, cur)` + `if (!(want < cur)) refuse` — only lowers. ✓
+  - `correctVital`: clamped to valid ranges, current capped at max. ✓
+  - `mergeEntity`: dedup, logged. ✓
+  All logged/reversible/in the Repair panel; `detectAnomalies` surfaces likely errors as one-click fixes. **Closed.**
+- **P3 item evolution:** `applyItemUpdates` (inventory.js) — `if (!it) continue; // an unowned item is never created through an update — only add creates`; capped 6 ops, field-length clamps. The frozen-spear fix, bounded. **Closed.**
+
+### ⚠ AEVI CONTENT BUG (SNG-138) — logged, CCode's correct catch + fix
+My `saehara_challengers.json` is a `challenger_pool` COLLECTION (challengers[]), but the loader hydrated it into the runtime NPC registry as a nameless phantom — polluting name-resolution + GM reuse, and red-gating the suite. **CCode's fix VERIFIED at HEAD:** `state.js` L108 routes `kind==="challenger_pool"` / `challengers[]` files into a separate `content.challengerPools` store (still loads per the manifest intent), test dirs skip collection shapes, + a structural check added. **My content authoring miss (3rd this session): a collection-shaped file needs a collection home, not the NPC registry — check the loader's expected shape before authoring a new content KIND.** SNG-138's recurrence wiring now has a clean data home. My saehara_challengers content is correct + intact; only its routing was wrong.
+
+---
+
+## ⚔️ SNG-138 — Prestige recurring challenges: Brayden's ronin arc AUTHORED+shipped, recurrence wiring specced
 `po/SPEC_SNG-138_prestige_recurring_challenges.md`. Erik: Brayden's Ronin regularly challenged by rivals seeking prestige, samurai-authentic + magic/fantasy. **Authored + shipped + manifest-registered:** arc `the_name_that_travels` (musha shugyō; prestige feeds challengers feeds prestige; 3 routes kensei/brush/ganryu; the book's TITLE is the resolution — from Brayden's authored bio: cogitant ronin, wicker hat, Honor-kanji, katana+tanto, The Wind) + 6-challenger pool (road-hopeful → ryūha champion → rival ronin → ledger sworn-rival → **blazeborn fire-kensei** → the nameless last blade/Ganryūjima). **Composes with built systems:** duels already run as SNG-098 skill battles w/ decline path; reputation is a deeds-view (wins raise renown). Wiring owed: renown→band tracker + surface challengers as PACED duel-OFFERS (decline guaranteed — enables the 'brush' win-by-refusal route) on the SNG-127 tick; win→deeds→renown→harder next. Reusable `recurrence` arc type (ties SNG-133). **Manifest registration done this time** (the discipline missed on the father-arc ship).
 
 ---

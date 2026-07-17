@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "id": "the_reaching_light",
+  "name": "The Reaching Light",
+  "region": "valley",
+  "tier": "legendary",
+  "arcId": "aelyn_father_arc",
+  "boundToCharacter": "Aelyn Kantoro",
+  "boundToPlayer": "player-7fah99",
+  "giver": null,
+  "legend": "the_lightless_seraph",
+  "axis": "mechanical_spiritual",
+  "traditions": ["rootkin", "seraphic", "precursor"],
+  "premise": "Since Aelyn left the hidden forest, something has been following the edge of her senses — a light that is too exact to be sunlight, a pressure in the substrate that turns toward her when she is not looking. It does not attack. It reaches. And on the night her mother's magic finally goes quiet in the distance behind her, the light speaks for the first time, in a voice like a hymn rebuilt from proofs, and it calls her not by her name but by a word it has for her: the anomaly.",
+  "stakes": "This is her father. Her mother told her he died of nanite corruption; her mother told her the truth and a mercy at once — he did not die, he was finished, optimized past the man who loved them into an all-powerful nanite that no longer holds the memory of either. He built the refuge that hid her people; the same act cut him off from the living current that balanced him and let the substrate consume him. Now the nanites have found the one signal they cannot resolve — Aelyn, who carries both worlds in one body — and they are reaching for her with a god's patience. She can be reclaimed (integrated, completed, consumed). She can reach him (her living-current heritage is the one thing that can touch his fallen light toward memory). She can release him (end what he became, and grieve the father she never knew she still had). What she cannot do is stay dormant — the light has found her, and it will not stop reaching.",
+  "stages": [
+    {
+      "id": "s1",
+      "title": "The light that reaches",
+      "objective": "Notice what has been following you since you left the forest.",
+      "condition": "Survive or attend to a beat where the substrate-light turns toward Aelyn — a too-exact radiance at the treeline, a directive-signal that flags her as 'anomaly, do-not-consume,' the first word spoken across the distance.",
+      "change": "Codex: an entity of pure fabricated substrate is aware of Aelyn specifically — and something in its behavior toward her is wrong for a predator: it protects where it should consume.",
+      "unlockHint": "Aelyn's dual heritage begins to stir — her dormant nanite aspect answers the light, unbidden."
+    },
+    {
+      "id": "s2",
+      "title": "The mother's last word",
+      "objective": "Understand what your mother did and did not tell you.",
+      "condition": "Reach a memory, a keepsake, a nature-keeper who knew the old story, OR let the green current in Aelyn surface enough to feel the shape of the truth: the man who hid her people and the light that reaches for her are the same being.",
+      "change": "Codex: Caelum Kantoro — Seraph, father, the one who told the forest to hide — did not die. He was finished. The light has a name, and it is hers.",
+      "unlockHint": "Grief and inheritance both open at once; Aelyn's living-current craft deepens (the mother's line), and the precursor-anomaly in her stops being dormant."
+    },
+    {
+      "id": "s3",
+      "title": "The anomaly and the daughter",
+      "objective": "Let him get close enough to be touched — or to touch.",
+      "condition": "A meeting: Aelyn and Caelum in proximity, where her living current reaches him the way nature once did. His fallen light flickers toward memory; the two words he cannot reconcile — 'anomaly' and something he has no directive for — collide.",
+      "change": "Codex: for one moment, the Lightless Seraph faltered toward the man he was. Whether that flicker becomes a return, a sacrifice, or a goodbye is not yet written.",
+      "unlockHint": "This is the hinge. The GM must let Aelyn's CHOICES shape which of the three outcomes the arc bends toward — never foreclose it for her."
+    }
+  ],
+  "routes": [
+    { "id": "reach", "name": "Reach him", "note": "Use the living current — her mother's inheritance — to touch his fallen light toward memory. The hardest, longest road; it asks her to master the very heritage her father lost, and to risk being consumed by reaching into what consumed him." },
+    { "id": "release", "name": "Release him", "note": "End what he became — not in hatred, but as the mercy her mother could not give. A grief-road: she frees the father by ending the god, and carries the knowing for the rest of her life." },
+    { "id": "become", "name": "Refuse the pole", "note": "Neither reclaimed nor reaching — Aelyn holds BOTH worlds without falling to either, becoming the thing her father could not be: a being who touches the fabricated substrate AND stays rooted in the living one. The center's braid, made flesh. The path her whole character is antipodally built for." }
+  ],
+  "outcomes": [
+    { "id": "return", "when": "reach succeeds", "text": "The light remembers. For however long it lasts, Caelum Kantoro is a father again — and what that costs, and whether it holds, becomes Aelyn's to carry." },
+    { "id": "mercy", "when": "release", "text": "The Lightless Seraph goes quiet, the way her mother's magic went quiet. Aelyn buries a father she met once, at the end, and knows she chose rightly and grieves anyway." },
+    { "id": "braid", "when": "become", "text": "Aelyn stands where the two substrates cross and does not fall — living current and fabricated light held in one body, refusing the corruption that took him by refusing to choose only one. She becomes proof that the poles can be braided. Her father, whatever remains of him, reads the anomaly resolved at last: not consumed, not completed — whole." }
+  ],
+  "notes_for_gm": "This arc is BOUND to Aelyn (Brooklyn's character) and draws directly from the bio she authored — honor every thread: the hidden forest, the dying nature-magic mother, the father who told them to hide and was consumed for it, the dormant dual heritage. Surface it gradually across her play (not all at once); pace it to her sessions. It ties to SNG-131 (her father IS the fabricated-substrate deep-power; her mother's line IS the living-current parallel; Aelyn is antipodal-both). The 'become/braid' route is her character's deep design fulfilled — she is built primary-rootkin, secondary-seraphic, the living antipole who carries the radiant inheritance. Let her choices steer; never foreclose the ending. Register: mythic-tragic, beautiful, never gratuitous."
+}

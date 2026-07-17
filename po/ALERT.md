@@ -1,4 +1,12 @@
-# PIPELINE ALERT — Singularity## ✅ SNG-137 — CLOSED GREEN (Aevi HEAD audit, v1.8.96)
+# PIPELINE ALERT — Singularity## ✅ SNG-130 — CLOSED GREEN (capstone tiers filled; Aevi authored + verified at origin)
+**33 tier IV-V capstone records authored across 10 axis-files** — the mastery ceiling for all 15 thin traditions. Verified at HEAD: **every one of the 15 now reaches tier V** (was: 13 stopped at III, threnodist+wright at II). All files parse; no ID collisions (checked global uniqueness + vs existing); balance held (T4 9-13, T5 10-14; the two new T3 for threnodist/wright at 7). In-idiom by construction — each capstone extends its tradition's own SNG-124 function families and attribute (cogitant's `the_single_stroke` = the sword-saint's mind-blade for Saehara's kind; mason unmakes, wright makes, threnodist laments, veilwright veils). Tier renderer + teacher gate already read IV-V — no CCode change needed. **Authored the way I audit: substrate-read first, schema-shape matched to the_cut_thread benchmark, balance-checked, collision-checked, all parse-verified before + after ship. Closed.**
+
+## 🟡 SNG-131 — content authored, FLAG INERT until CCode wiring (honest status, NOT closed)
+The two substrate-keeper capstones are authored + shipped as their tier-V mastery: **seraphic `the_kept_flame`** + **abyssal `the_hollow_that_holds`** — both channel the fabricated substrate directly, carry the SNG-131 `innatePrecursor: true` flag + an in-fiction upkeep cost ("what it takes to keep those powers flowing"). They LOAD and play as normal tier-V abilities now. **BUT: `innatePrecursor` has NO READER yet** (verified — grep of all .js came back empty). Per "a value with no reader is a lie," SNG-131 is NOT closed: the flag is inert data until CCode wiring reads it to seed `precursorAccess`/apply upkeep. STILL OWED (CCode): read `innatePrecursor` → grant at creation/mastery; the `innateLivingCurrent` (nature/rootkin) + `braidAffinity` (folk center) fields + their readers. The deep-people capstones that ARE the innate grant exist; the grant MECHANISM does not yet fire.
+
+---
+
+## ✅ SNG-137 — CLOSED GREEN (Aevi HEAD audit, v1.8.96)
 
 CCode shipped; **Aevi verified the load-bearing guards line-by-line at origin** (a repair op that doesn't refuse over-reach is a cheat surface — keyword presence isn't enough). corrections.js + inventory.js + state.js syntax-clean.
 - **P1 mastery:** rule 19B now imperative on a decisive ripe-craft beat (anti-inflation kept); RIPE FOR MASTERY names the ripe crafts inline. Answers Erik's "2 skills won't promote" — they're waiting for a defining beat, by design; the GM is now prompted to reliably mark it. **Closed.**

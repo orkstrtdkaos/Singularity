@@ -39,11 +39,11 @@ import { newSharedScene, addMember, removeMember, isMyTurn, mergeBeat, setEncoun
 import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, applySurgeBacklash, intensityOptions } from "./engine/intensity.js";
 import { noteCoUseAndRefresh, refreshEvolvingItems, evolvedItemsForGM, currentStage } from "./engine/evolution.js";
 import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
-import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarrativeKind, canIncapacitate } from "./engine/random_encounters.js";
+import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarrativeKind, canIncapacitate, resolvePacing, beatHours } from "./engine/random_encounters.js";
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.84";
+const APP_VERSION = "1.8.85";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -167,9 +167,9 @@ let seenBeats = 0;       // remote beats already rendered
 // SNG-075: encounters in narrative play — an encounter selected by the narrative-time roll waits
 // here to be WOVEN into the next GM turn (never a modal). One per scene + a turn cooldown.
 let pendingWeave = null;        // { seed, flavor, perilous, loreTier } to inject next turn
-let sceneEncounterFired = false;// one narrative encounter per scene
+let sceneEncounterFired = false;// SNG-127: fired in THIS scene? (adds spacing after the first, not a hard cap)
 let turnsSinceEncounter = 99;   // cooldown counter (turns since the last narrative encounter)
-const NARRATIVE_ENCOUNTER_COOLDOWN = 3;
+// SNG-127: the cooldown is now the player's pacing (resolvePacing → cooldown), read per-turn from config.
 // SNG-080: the world must push. Track quiet turns; past a threshold, the world ACTS.
 let quietTurns = 0;             // consecutive uneventful GM turns
 let pressureStreak = 0;         // pressures applied in the current idle streak (escalation level)
@@ -831,6 +831,11 @@ function renderSettings(note = "") {
         <option value="generate" ${artMode === "generate" ? "selected" : ""}>Generate — also create missing art (Pollinations, free)</option>
       </select>
       <div class="hint">Generated art builds from each location/item's own description with a fixed seed, so places look consistent between visits.</div></div>
+    <div class="field"><label>World pacing — how often things happen</label>
+      <select id="set-pacing">
+        ${[["calm", "Calm — the world is mostly quiet"], ["balanced", "Balanced — something turns up now and then"], ["eventful", "Eventful — the world is busy around you"], ["relentless", "Relentless — barely a quiet moment"]].map(([v, label]) => `<option value="${v}" ${(profile.pacing || "balanced") === v ? "selected" : ""}>${esc(label)}</option>`).join("")}
+      </select>
+      <div class="hint">How often random encounters (a windfall, a stranger, a chase, a fight) surface in play — a per-character preference. Danger still skews dangerous places toward trouble and kind places toward grace; this only sets the frequency. A new player or a family member might enjoy <em>Eventful</em>.</div></div>
     <div class="field"><label>Time passage</label>
       <select id="set-time-mode">
         <option value="story" ${ts.mode === "story" ? "selected" : ""}>Story time — the clock moves with play</option>
@@ -858,6 +863,7 @@ function renderSettings(note = "") {
   </div>`);
   document.getElementById("set-save").onclick = () => {
     profile.displayName = document.getElementById("set-player").value.trim();
+    profile.pacing = document.getElementById("set-pacing").value; // SNG-127: world-liveliness preference
     saveProfile(profile);
     setApiKey(document.getElementById("set-key").value);
     setArtMode(document.getElementById("set-art").value);
@@ -3065,7 +3071,8 @@ async function fireEncounter(entryOrFlavor, { dev = false, news = [] } = {}) {
  *  one fired (so the caller skips the normal arrival/rest scene). */
 async function maybeRandomEncounter(trigger, news = []) {
   const table = CONTENT.randomEncounters;
-  if (!table || !rollTrigger(trigger, hereNow(), table, Math.random)) return false;
+  // SNG-127: the button click-paths (travel/enter/rest) honor the player's pacing multiplier too.
+  if (!table || !rollTrigger(trigger, hereNow(), table, Math.random, resolvePacing(profile?.pacing, table).mult)) return false;
   const entry = pickEncounter(table, hereNow(), Math.random, {});
   if (!entry) return false;
   return fireEncounter(entry, { news });
@@ -3078,22 +3085,29 @@ function maybeNarrativeEncounter(turn, resolution) {
   turnsSinceEncounter++;
   const table = CONTENT.randomEncounters;
   if (!table) return;
-  // SUPPRESSION CONDITIONS: a live encounter · a gambit in play · a scene that just ended · one
-  // already woven this scene · still within the cooldown · an explicitly intense/intimate beat.
+  // SNG-127: the player's chosen pacing (Calm→Relentless) resolves a rate multiplier + a cooldown; a
+  // config-tunable rate/floor means "crank it" is a JSON edit or a setting, never a code hunt.
+  const pace = resolvePacing(profile?.pacing, table);
+  // SUPPRESSION CONDITIONS (kept): a live encounter · a gambit in play · a scene that just ended · an
+  // explicitly intense/intimate beat · during combat. SNG-127: the once-per-scene gate is now SOFT —
+  // it adds spacing after the first fire, not a permanent one-per-scene cap (that was the dead-zone).
   if (activeEnc() || gambitDraft) return;
   if (turn?.sceneEnded) return;
-  if (sceneEncounterFired) return;
-  if (turnsSinceEncounter <= NARRATIVE_ENCOUNTER_COOLDOWN) return;
   if (sceneState?.intense || sceneState?.intimate) return;
+  const spacing = pace.cooldown + (sceneEncounterFired ? 2 : 0);
+  if (turnsSinceEncounter <= spacing) return;
   const intentTags = resolution?.action?.intentTags || resolution?.intentTags || [];
   if (intentTags.some(t => /intimate|climax|grief|vigil|mourn/.test(String(t).toLowerCase()))) return;
-  const hoursPassed = Number(turn?.timeOps?.hoursPassed) || 0;
+  // SNG-127 (Q2): an UNDECLARED beat (GM omits timeOps → 0h, yet the clock ticked +1h) is floored to
+  // minHoursPerBeat so it still counts as "time passing" — otherwise classify returns "none" and the
+  // whole narrative path never fires. A declared short beat keeps its real (quiet) hours.
+  const hoursPassed = beatHours(turn, table);
   const kind = classifyNarrativeKind({ intentTags, why: turn?.timeOps?.why || "", hoursPassed });
   if (kind === "none") return;
   const loc = hereNow();
-  const fired = kind === "rest" ? rollTrigger("onRest", loc, table, Math.random)
-    : kind === "travel" ? rollTrigger("onTravel", loc, table, Math.random)
-    : rollNarrativeTime(hoursPassed, loc, table, Math.random);
+  const fired = kind === "rest" ? rollTrigger("onRest", loc, table, Math.random, pace.mult)
+    : kind === "travel" ? rollTrigger("onTravel", loc, table, Math.random, pace.mult)
+    : rollNarrativeTime(hoursPassed, loc, table, Math.random, pace.mult);
   if (!fired) return;
   const entry = pickEncounter(table, loc, Math.random, {});
   if (!entry) return;

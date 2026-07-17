@@ -51,13 +51,26 @@ export function isEligible(entry, location, { ignoreDanger = false } = {}) {
 }
 
 /** Should a trigger fire at all this moment? Pure; rng injectable. */
-export function rollTrigger(trigger, location, table, rng = Math.random) {
+export function rollTrigger(trigger, location, table, rng = Math.random, mult = 1) {
   const tr = table?.triggerRules?.[trigger];
   if (!tr) return false;
   if (trigger === "onRest" && isSafeRest(location)) return false;
-  // danger nudges the base chance up a little — dangerous roads are eventful roads
-  const chance = Math.min(0.9, (tr.chance || 0) * (1 + dangerOf(location) * 0.1));
+  // danger nudges the base chance up a little — dangerous roads are eventful roads. SNG-127: `mult` is
+  // the player's pacing multiplier (Calm→Relentless), applied uniformly to every click-path rate.
+  const chance = Math.min(0.9, (tr.chance || 0) * (1 + dangerOf(location) * 0.1) * (mult || 1));
   return rng() < chance;
+}
+
+// ---------- SNG-127: player-selectable pacing (profile.pacing) ----------
+/** Resolve a pacing key → { mult, cooldown } from the content table's `pacingModes` (with a safe
+ *  hardcoded fallback). `mult` scales every encounter roll; `cooldown` is the quiet-beats gate.
+ *  Default `balanced` (mult 1, cooldown 1). Pure. */
+export function resolvePacing(key, table) {
+  const modes = table?.triggerRules?.pacingModes || {};
+  const fallback = { calm: { mult: 0.5, cooldown: 3 }, balanced: { mult: 1, cooldown: 1 }, eventful: { mult: 1.6, cooldown: 1 }, relentless: { mult: 2.4, cooldown: 0 } };
+  const k = (typeof key === "string" && (modes[key] || fallback[key])) ? key : "balanced";
+  const m = modes[k] || fallback[k];
+  return { key: k, mult: Number.isFinite(m?.mult) ? m.mult : 1, cooldown: Number.isFinite(m?.cooldown) ? m.cooldown : 1 };
 }
 
 // ---------- SNG-075: encounters fire in NARRATIVE play, bound to narrative TIME ----------
@@ -68,16 +81,26 @@ export function rollTrigger(trigger, location, table, rng = Math.random) {
 
 /** Probability that a stretch of narrative time turns something up. ~ratePerHour × hours,
  *  danger-weighted, clamped. Pure. */
-export function narrativeTimeChance(hoursPassed, location, table) {
+export function narrativeTimeChance(hoursPassed, location, table, mult = 1) {
   const tr = table?.triggerRules?.onNarrativeTime || {};
-  const ratePerHour = Number.isFinite(tr.ratePerHour) ? tr.ratePerHour : 0.04; // ~4%/hr (spec)
+  const ratePerHour = Number.isFinite(tr.ratePerHour) ? tr.ratePerHour : 0.14; // SNG-127: 0.14/hr (was 0.04 fallback → the dead-zone)
   const cap = Number.isFinite(tr.maxChance) ? tr.maxChance : 0.6;
+  // Honors the hours as given — the caller floors an UNDECLARED beat to minHoursPerBeat (a declared
+  // short exchange stays quiet). SNG-127: `mult` is the player's pacing multiplier.
   const h = Math.max(0, Number(hoursPassed) || 0);
   const base = Math.min(cap, ratePerHour * h);
-  return Math.min(0.9, base * (1 + dangerOf(location) * 0.1));
+  return Math.min(0.9, base * (1 + dangerOf(location) * 0.1) * (mult || 1));
 }
-export function rollNarrativeTime(hoursPassed, location, table, rng = Math.random) {
-  return rng() < narrativeTimeChance(hoursPassed, location, table);
+/** SNG-127: what a beat's hours are worth for the narrative-time roll. A DECLARED timeOps value is
+ *  honored as-is (a 20-min exchange stays quiet); an UNDECLARED beat (the GM omits timeOps, yet the
+ *  clock still ticks ~1h) is floored to `minHoursPerBeat` so the whole path isn't silently seeing 0h. */
+export function beatHours(turn, table) {
+  const declared = turn?.timeOps && Number.isFinite(Number(turn.timeOps.hoursPassed));
+  if (declared) return Math.max(0, Number(turn.timeOps.hoursPassed));
+  return Number(table?.triggerRules?.onNarrativeTime?.minHoursPerBeat) || 0;
+}
+export function rollNarrativeTime(hoursPassed, location, table, rng = Math.random, mult = 1) {
+  return rng() < narrativeTimeChance(hoursPassed, location, table, mult);
 }
 
 /** Classify what a GM turn's elapsed fiction was — a rest, a journey, or just time passing —

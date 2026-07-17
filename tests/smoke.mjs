@@ -24,7 +24,7 @@ import { reconcile, reconcileContent, CHARACTER_STEPS, CONTENT_STEPS, topReconci
 import { sceneImage, locationImage } from "../engine/art.js";
 import { resolveSaveConflict, raceTimeout } from "../engine/sync.js";
 import { namesMatch as nm2, smartClamp } from "../engine/namematch.js";
-import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf, narrativeTimeChance, rollNarrativeTime, classifyNarrativeKind } from "../engine/random_encounters.js";
+import { rollTrigger, pickEncounter, buildOffer, isEligible, flavorMultiplier, synthesizeDuelDef, synthesizeChallengeDef, canIncapacitate, dangerOf, narrativeTimeChance, rollNarrativeTime, classifyNarrativeKind, resolvePacing, beatHours } from "../engine/random_encounters.js";
 import { typeAffinity, vectorAffinity, locationAffinity, affinityReceipt } from "../engine/affinities.js";
 import { recordCoUse, coUseCount, currentStage, refreshEvolvingItems, noteCoUseAndRefresh, evolvedItemsForGM } from "../engine/evolution.js";
 import { homeClassOf, isCrossClass, skillPointCost, forkFor, forkPending, chosenFork, setFork, rankExpression, forkPaths, skillGraphModel, nativeGrantsFor, combinationsAvailableFor } from "../engine/skilltree.js";
@@ -2879,9 +2879,10 @@ await (async () => {
 (() => {
   const table = { triggerRules: { onNarrativeTime: {}, onTravel: { chance: 0.35 }, onRest: { chance: 0.15 } }, encounters: [] };
   const quiet = { dangerLevel: 0 }, road = { dangerLevel: 2 };
-  // a quick exchange stays quiet; a half-day's walk is likely eventful; a trek caps out
-  check("SNG-075: a 20-minute beat is nearly silent (~1%)", narrativeTimeChance(0.33, quiet, table) < 0.03);
-  check("SNG-075: a half-day walk (~6h) is eventful (~24%)", narrativeTimeChance(6, quiet, table) > 0.2 && narrativeTimeChance(6, quiet, table) < 0.35);
+  // SNG-127: the fallback rate is now 0.14/hr (was 0.04 → the dead-zone). A DECLARED short exchange
+  // still stays modest; a half-day's walk is now very likely eventful; a trek caps out.
+  check("SNG-127: a declared 20-minute beat stays modest (a real short exchange isn't loud)", narrativeTimeChance(0.33, quiet, table) < 0.08);
+  check("SNG-127: a half-day walk (~6h) is now very likely eventful (hits the cap)", narrativeTimeChance(6, quiet, table) >= 0.5 && narrativeTimeChance(6, quiet, table) <= 0.6 + 1e-9);
   check("SNG-075: chance rises with hours and is capped", narrativeTimeChance(72, quiet, table) === narrativeTimeChance(72, quiet, table) && narrativeTimeChance(72, quiet, table) <= 0.6 * 1.0 + 1e-9);
   check("SNG-075: danger nudges the chance up", narrativeTimeChance(6, road, table) > narrativeTimeChance(6, quiet, table));
   check("SNG-075: zero elapsed time never fires", narrativeTimeChance(0, road, table) === 0 && rollNarrativeTime(0, road, table, () => 0) === false);
@@ -2889,6 +2890,62 @@ await (async () => {
   check("SNG-075: a sleep/camp beat classifies as REST", classifyNarrativeKind({ why: "bedded down for the night", hoursPassed: 8 }) === "rest" && classifyNarrativeKind({ intentTags: ["camp"], hoursPassed: 8 }) === "rest");
   check("SNG-075: a road/journey beat classifies as TRAVEL", classifyNarrativeKind({ why: "a day on the road", hoursPassed: 10 }) === "travel" && classifyNarrativeKind({ intentTags: ["journey"], hoursPassed: 6 }) === "travel");
   check("SNG-075: plain elapsed time classifies as TIME; a zero-hour beat is NONE", classifyNarrativeKind({ why: "a long talk", hoursPassed: 3 }) === "time" && classifyNarrativeKind({ why: "a quick word", hoursPassed: 0 }) === "none");
+})();
+
+// --- SNG-127: the encounter dead-zone — the world must actually happen (real config + pacing + sim) ---
+(() => {
+  const table = JSON.parse(readFileSync(join(root, "content/packs/valley/events/random_encounters.json"), "utf8"));
+  const quiet = { dangerLevel: 0 };
+
+  // THE DEAD-ZONE FIX (Q2): a normal beat with no timeOps used to be seen as 0h → classify "none" → never
+  // fires. beatHours floors an UNDECLARED beat to minHoursPerBeat (=1, ADVANCE.beat), so it now counts.
+  check("SNG-127: an UNDECLARED beat (no timeOps) is floored to a real hour (was 0 → the dead-zone)",
+    beatHours({}, table) === 1 && beatHours({ timeOps: {} }, table) === 1);
+  check("SNG-127: a DECLARED short beat keeps its real (quiet) hours — a 20-min exchange isn't loud",
+    beatHours({ timeOps: { hoursPassed: 0.33 } }, table) === 0.33);
+  check("SNG-127: the floored undeclared beat now produces a real, non-zero narrative-time chance",
+    narrativeTimeChance(beatHours({}, table), quiet, table) > 0 && classifyNarrativeKind({ hoursPassed: beatHours({}, table) }) === "time");
+
+  // the config carries the fix (rate up from the 0.04 fallback; a real onNarrativeTime + pacing modes)
+  check("SNG-127: config supplies onNarrativeTime (rate 0.14, cooldown, floor) + the 4 pacing modes",
+    table.triggerRules.onNarrativeTime.ratePerHour === 0.14 && !!table.triggerRules.pacingModes.calm && !!table.triggerRules.pacingModes.relentless);
+  check("SNG-127: the click-path rates were bumped (travel 0.45, enter 0.20, rest 0.20)",
+    table.triggerRules.onTravel.chance === 0.45 && table.triggerRules.onEnterLocation.chance === 0.2 && table.triggerRules.onRest.chance === 0.2);
+
+  // pacing: resolves modes from config, defaults to balanced, unknown → balanced
+  check("SNG-127: resolvePacing reads the config modes + defaults/falls back to balanced",
+    resolvePacing("relentless", table).mult === 2.4 && resolvePacing("relentless", table).cooldown === 0 &&
+    resolvePacing(undefined, table).key === "balanced" && resolvePacing("nonsense", table).key === "balanced");
+  check("SNG-127: pacing scales the chance — Relentless > Balanced > Calm on the same beat",
+    narrativeTimeChance(2, quiet, table, resolvePacing("relentless", table).mult) > narrativeTimeChance(2, quiet, table, resolvePacing("balanced", table).mult) &&
+    narrativeTimeChance(2, quiet, table, resolvePacing("balanced", table).mult) > narrativeTimeChance(2, quiet, table, resolvePacing("calm", table).mult));
+
+  // THE ACCEPTANCE CRITERION: a simulated narrative session produces encounters (not zero). This
+  // reproduces the app's gate — undeclared beats (floored), soft scene spacing, pacing cooldown/mult —
+  // over many sessions so the result is statistically stable, not a single flaky roll.
+  const simSession = (pacingKey, turns) => {
+    const pace = resolvePacing(pacingKey, table);
+    let since = 99, sceneFired = false, count = 0;
+    for (let i = 0; i < turns; i++) {
+      since++;
+      const spacing = pace.cooldown + (sceneFired ? 2 : 0);
+      if (since <= spacing) continue;
+      const h = beatHours({}, table); // a normal beat: GM omits timeOps → floored
+      if (classifyNarrativeKind({ hoursPassed: h }) === "none") continue;
+      if (rollNarrativeTime(h, quiet, table, Math.random, pace.mult)) { count++; sceneFired = true; since = 0; }
+    }
+    return count;
+  };
+  const sessions = 400;
+  let balTotal = 0, calmTotal = 0, relTotal = 0, balZero = 0;
+  for (let s = 0; s < sessions; s++) {
+    const b = simSession("balanced", 30); balTotal += b; if (b === 0) balZero++;
+    calmTotal += simSession("calm", 30);
+    relTotal += simSession("relentless", 30);
+  }
+  check("SNG-127: a 30-turn narrative session AVERAGES multiple encounters (the dead-zone is gone)", balTotal / sessions > 1.5 && balTotal > 0);
+  check("SNG-127: most balanced 30-turn sessions are NOT silent (near-zero dead-zone rate)", balZero / sessions < 0.25);
+  check("SNG-127: pacing genuinely changes frequency — Relentless >> Balanced >> Calm over 30 turns", relTotal > balTotal && balTotal > calmTotal);
 })();
 
 // --- SNG-070: GM corrections — the game self-heals (REPAIR, not WISH) ---

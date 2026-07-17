@@ -31,11 +31,11 @@
     },
     "voiceHints": { "type": "string", "description": "how they talk + a tell; the taste-carrier for in-character voice" },
     "knowledge": { "type": "array", "items": { "type": "string" }, "description": "what they know that a player could learn" },
-    "wants": { "type": "string", "description": "the active desire that makes them move; a generated NPC gets one at birth (SNG-021 world-tick advances it)" },
-    "fears": { "type": "string" },
+    "wants": { "type": ["string", "array"], "items": { "type": "string" }, "description": "the active desire that makes them move; a generated NPC gets one at birth (SNG-021 world-tick advances it). A richly-authored legendary NPC (SNG-132) may carry an ARRAY of layered wants." },
+    "fears": { "type": ["string", "array"], "items": { "type": "string" }, "description": "what they fear; a string, or an array of layered fears for a richly-authored NPC" },
     "reactsToReputation": {
-      "type": "object",
-      "description": "reputationTag -> how they respond to a character carrying it",
+      "type": ["object", "boolean"],
+      "description": "reputationTag -> how they respond to a character carrying it; or `true` when a legendary NPC (SNG-132) reacts to reputation via its own GM notes rather than a tag map",
       "additionalProperties": { "type": "string" }
     },
     "universalRole": { "type": "string", "description": "loose worldwide role (mediator/warrior/warden/keeper/maker/seeker/healer/...) whose METHOD comes from locale+disposition (universal_roles.json)" },

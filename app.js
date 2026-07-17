@@ -24,7 +24,7 @@ import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal } from "./engine/traditions.js";
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs } from "./engine/companions.js";
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges } from "./engine/company.js";
-import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, familyClass } from "./engine/functions.js";
+import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
 import { initWorldState, runWorldTick, syncSharedWorld, advanceGeneratedOffscreen, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
@@ -45,7 +45,7 @@ import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarr
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.89";
+const APP_VERSION = "1.8.90";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3512,7 +3512,8 @@ function buildWheelModel() {
       // SNG-124: function overlay + cost-at-a-glance. `reachable` = learnable now (allowed, not owned, level met).
       functions: ab.functions || [], families: familiesOfAbility(ab, FN_INDEX), energyCost: ab.energyCost ?? null,
       effCost: (() => { try { return effectiveEnergyCost(ab, character, CONTENT.rules); } catch { return ab.energyCost ?? null; } })(),
-      reachable: v.allowed && !isOwned && (character.level || 1) >= (ab.levelReq || 1) });
+      reachable: v.allowed && !isOwned && (character.level || 1) >= (ab.levelReq || 1),
+      precursorUnlocked: ab.powerSystem === "precursor" && (character.precursorAccess || []).includes(ab.id) }); // SNG-129: narrative-earned
   };
   // spokes: fan same-tier abilities by a small angular offset around the spoke
   for (const [trad, abs] of Object.entries(byTrad)) {
@@ -3611,6 +3612,24 @@ function wireSkillSelectionActions(rerender) {
   // through use (rank 2 auto) and a GM-marked defining moment (rank 3).
 }
 
+// SNG-129: the node SILHOUETTE for a function family (shape carries the primary family; color retained →
+// redundant encoding for accessibility). Returns one SVG element centered at (cx,cy) with "radius" r.
+function wheelNodeShape(kind, cx, cy, r, { fill, stroke, sw = 1.5, cls = "" } = {}) {
+  const a = `fill="${fill}" stroke="${stroke}" stroke-width="${sw}" class="wnode-shape${cls ? " " + cls : ""}"`;
+  const poly = pts => `<polygon points="${pts.map(p => `${(cx + p[0]).toFixed(1)},${(cy + p[1]).toFixed(1)}`).join(" ")}" ${a}/>`;
+  switch (kind) {
+    case "diamond":  return poly([[0, -r * 1.25], [r * 1.15, 0], [0, r * 1.25], [-r * 1.15, 0]]);
+    case "triangle": return poly([[0, -r * 1.3], [r * 1.2, r * 0.9], [-r * 1.2, r * 0.9]]);
+    case "hexagon":  { const p = []; for (let i = 0; i < 6; i++) { const ang = Math.PI / 6 + i * Math.PI / 3; p.push([Math.cos(ang) * r * 1.2, Math.sin(ang) * r * 1.2]); } return poly(p); }
+    case "chevron":  return poly([[-r * 1.1, -r], [r * 0.2, -r], [r * 1.2, 0], [r * 0.2, r], [-r * 1.1, r], [-r * 0.2, 0]]);
+    case "cross":    { const t = r * 0.42, R = r * 1.2; return poly([[-t, -R], [t, -R], [t, -t], [R, -t], [R, t], [t, t], [t, R], [-t, R], [-t, t], [-R, t], [-R, -t], [-t, -t]]); }
+    case "shield":   return `<path d="M ${cx} ${(cy - r * 1.3).toFixed(1)} L ${(cx + r * 1.1).toFixed(1)} ${(cy - r * 0.5).toFixed(1)} L ${(cx + r * 1.1).toFixed(1)} ${(cy + r * 0.35).toFixed(1)} Q ${cx} ${(cy + r * 1.5).toFixed(1)} ${(cx - r * 1.1).toFixed(1)} ${(cy + r * 0.35).toFixed(1)} L ${(cx - r * 1.1).toFixed(1)} ${(cy - r * 0.5).toFixed(1)} Z" ${a}/>`;
+    case "capsule":  { const w = r * 1.5, h = r * 0.95; return `<rect x="${(cx - w).toFixed(1)}" y="${(cy - h).toFixed(1)}" width="${(w * 2).toFixed(1)}" height="${(h * 2).toFixed(1)}" rx="${h.toFixed(1)}" ${a}/>`; }
+    case "ring":     return `<circle cx="${cx}" cy="${cy}" r="${(r * 1.15).toFixed(1)}" fill="${fill === "#20242c" ? "#20242c" : "transparent"}" stroke="${stroke}" stroke-width="${(sw + 1).toFixed(1)}" class="wnode-shape${cls ? " " + cls : ""}"/>${fill !== "#20242c" ? `<circle cx="${cx}" cy="${cy}" r="${(r * 0.45).toFixed(1)}" fill="${fill}" stroke="none"/>` : ""}`;
+    default:         return `<circle cx="${cx}" cy="${cy}" r="${r.toFixed(1)}" ${a}/>`;
+  }
+}
+
 function renderSkillWheel(selectedId = null, status = "") {
   const idx = CONTENT.traditionIndex;
   if (!idx) { renderSkillGraph(selectedId); return; } // no ring loaded → fall back to the list graph
@@ -3650,23 +3669,41 @@ function renderSkillWheel(selectedId = null, status = "") {
       return `<g class="wheel-trad ${rn.closed ? "closed" : rn.isPrimary ? "primary" : rn.isSecondary ? "secondary" : rn.isTertiary ? "tertiary" : rn.kin ? "kin" : ""}">
         <circle cx="${rn.x}" cy="${rn.y}" r="7" fill="${rn.closed ? "transparent" : traditionColor(rn.t)}" stroke="${traditionColor(rn.t)}"/>
         <text x="${lp.x}" y="${lp.y + 3}" text-anchor="middle" class="wheel-pole-label">${esc(String(rn.pole).slice(0, 12))}</text></g>`; }).join("")}
-    ${/* ability nodes */""}
-    ${m.nodes.map(nd => { const r = 5 + (nd.levelReq - 1) * 1.2;
-      // SNG-124 Phase B: FUNCTION OVERLAY — a family filter highlights matching nodes across all traditions
-      // (both axes at once); a family dot shows WHAT a node does; owned/reachable nodes label themselves.
+    ${/* ability nodes — SNG-129: function SHAPES (silhouette = primary family) + precursor SEALED state +
+        de-collided labels (owned/selected always; matched added at zoom). */""}
+    ${(() => {
       const filterOn = wheelFnFilter.size > 0;
-      const matched = filterOn && (nd.families || []).some(f => wheelFnFilter.has(f));
-      const fam = (nd.families || [])[0];
-      const showLabel = (nd.owned || matched || selectedId === nd.id) && nd.name;
-      const cls = `wheel-node ${nd.owned ? "owned" : ""} ${nd.closed ? "closed" : ""} ${nd.barred ? "barred" : ""} ${nd.dim ? "dim" : ""} ${nd.isFolk ? "folk" : ""} ${nd.isPrecursor ? "precursor" : ""} ${selectedId === nd.id ? "selected" : ""} ${filterOn ? (matched ? "fn-match" : "fn-dim") : ""}`;
-      const lp = wheelPt(nd.ang, wheelTierRadius(nd.levelReq) + 12);
-      return `<g class="${cls}" data-wheelnode="${esc(nd.id)}"><title>${esc(nd.name + " — " + traditionLabel(nd.cls) + " · Tier " + nd.tier + ((nd.functions || []).length ? " · " + nd.functions.join(", ") : "") + (nd.effCost != null ? " · ⚡" + nd.effCost : "") + (nd.owned ? " (owned)" : nd.closed ? " · CLOSED (your antipode)" : nd.barred ? " · barred" : nd.dim ? " · costs more" : ""))}</title>
-        <circle class="hit" cx="${nd.x}" cy="${nd.y}" r="13"/>
-        <circle cx="${nd.x}" cy="${nd.y}" r="${r}" fill="${nd.owned ? traditionColor(nd.cls) : "#20242c"}" stroke="${nd.closed ? "var(--danger)" : traditionColor(nd.cls)}"/>
-        ${fam && !nd.closed ? `<circle cx="${nd.x + r + 1.5}" cy="${nd.y - r - 1.5}" r="2.4" fill="${FAMILY_COLOR[fam] || "var(--ink-dim)"}" class="wheel-fn-dot"/>` : ""}
-        ${nd.closed ? `<line x1="${nd.x - r - 2}" y1="${nd.y - r - 2}" x2="${nd.x + r + 2}" y2="${nd.y + r + 2}" class="wheel-node-strike"/>` : ""}
-        ${showLabel ? `<text x="${lp.x}" y="${lp.y + 2}" text-anchor="middle" class="wheel-node-label ${nd.owned ? "owned" : ""}">${esc(String(nd.name).slice(0, 16))}${nd.effCost != null && (nd.owned || nd.reachable) ? ` ⚡${nd.effCost}` : ""}</text>` : ""}
-      </g>`; }).join("")}
+      const zoomed = (graphView?.k || 1) >= 1.25;
+      // de-collision: gather label-bearing nodes, greedily nudge overlapping label anchors downward.
+      const labelSet = m.nodes.filter(nd => nd.name && (nd.owned || selectedId === nd.id || (zoomed && filterOn && (nd.families || []).some(f => wheelFnFilter.has(f)))));
+      const placed = [], labelAt = {};
+      for (const nd of labelSet) {
+        const lp = wheelPt(nd.ang, wheelTierRadius(nd.levelReq) + 12); let y = lp.y + 2, guard = 0;
+        while (guard++ < 40 && placed.some(p => Math.abs(p.x - lp.x) < 44 && Math.abs(p.y - y) < 10)) y += 10;
+        placed.push({ x: lp.x, y }); labelAt[nd.id] = { x: lp.x, y };
+      }
+      return m.nodes.map(nd => {
+        const r = 5 + (nd.levelReq - 1) * 1.2;
+        const matched = filterOn && (nd.families || []).some(f => wheelFnFilter.has(f));
+        const fam = (nd.families || [])[0];
+        const sealed = nd.isPrecursor && !nd.precursorUnlocked;   // narrative-locked, NOT tier-locked
+        const opened = nd.isPrecursor && nd.precursorUnlocked;
+        const fill = nd.owned ? traditionColor(nd.cls) : sealed ? "transparent" : "#20242c";
+        const stroke = nd.closed ? "var(--danger)" : traditionColor(nd.cls);
+        const cls = `wheel-node ${nd.owned ? "owned" : ""} ${nd.closed ? "closed" : ""} ${nd.barred ? "barred" : ""} ${nd.dim ? "dim" : ""} ${nd.isFolk ? "folk" : ""} ${nd.isPrecursor ? "precursor" : ""} ${sealed ? "precursor-sealed" : ""} ${opened ? "precursor-open" : ""} ${selectedId === nd.id ? "selected" : ""} ${filterOn ? (matched ? "fn-match" : "fn-dim") : ""}`;
+        const secondaries = (nd.families || []).slice(1, 3);
+        const lbl = labelAt[nd.id];
+        const title = nd.name + " — " + traditionLabel(nd.cls) + " · Tier " + nd.tier + ((nd.functions || []).length ? " · " + nd.functions.join(", ") : "") + (nd.effCost != null ? " · ⚡" + nd.effCost : "") + (sealed ? " · SEALED (precursor — earned through play, never bought)" : nd.owned ? " (owned)" : nd.closed ? " · CLOSED (your antipode)" : nd.barred ? " · barred" : nd.dim ? " · costs more" : "");
+        return `<g class="${cls}" data-wheelnode="${esc(nd.id)}"><title>${esc(title)}</title>
+          <circle class="hit" cx="${nd.x}" cy="${nd.y}" r="13"/>
+          ${wheelNodeShape(sealed ? "ring" : shapeOfFamily(fam), nd.x, nd.y, r, { fill, stroke, sw: sealed ? 1.3 : 1.5, cls: sealed ? "precursor-seal-shape" : "" })}
+          ${sealed ? `<text x="${nd.x}" y="${(nd.y + 3).toFixed(1)}" text-anchor="middle" class="precursor-mark">✦</text>` : opened ? `<text x="${(nd.x + r + 2).toFixed(1)}" y="${(nd.y - r).toFixed(1)}" class="precursor-mark open">✦</text>` : ""}
+          ${!sealed && !nd.closed ? secondaries.map((sf, i) => `<circle cx="${(nd.x + r + 2).toFixed(1)}" cy="${(nd.y - r - 1 + i * 4).toFixed(1)}" r="1.9" fill="${FAMILY_COLOR[sf] || "var(--ink-dim)"}" class="wheel-fn-dot"/>`).join("") : ""}
+          ${nd.closed ? `<line x1="${nd.x - r - 2}" y1="${nd.y - r - 2}" x2="${nd.x + r + 2}" y2="${nd.y + r + 2}" class="wheel-node-strike"/>` : ""}
+          ${lbl ? `<text x="${lbl.x.toFixed(1)}" y="${lbl.y.toFixed(1)}" text-anchor="middle" class="wheel-node-label ${nd.owned ? "owned" : ""}">${esc(String(nd.name).slice(0, 16))}${nd.effCost != null && (nd.owned || nd.reachable) ? ` ⚡${nd.effCost}` : ""}</text>` : ""}
+        </g>`;
+      }).join("");
+    })()}
   </g></svg>`;
 
   const sel = selectedId ? m.nodes.find(nd => nd.id === selectedId) : null;
@@ -3679,15 +3716,19 @@ function renderSkillWheel(selectedId = null, status = "") {
     : sel.band === "folk" ? "open — a folk craft of the Valley"
     : sel.band === "far" ? `costs more — ${sel.penalty}× skill points, ${Math.max(2, sel.penalty)} steps out`
     : "learnable") : "";
+  const sealedSel = sel && sel.isPrecursor && !sel.precursorUnlocked; // SNG-129: narrative-locked precursor
   const details = sel ? `<div class="map-details">
     <div class="map-details-head"><h3>${esc(sel.name)}</h3>
       <span class="rep-band" style="border-color:${traditionColor(sel.cls)};color:${traditionColor(sel.cls)}">${esc(traditionLabel(sel.cls))} · Tier ${sel.tier}</span>
-      ${sel.owned ? `<span class="rep-band trusted">owned</span>` : ""}</div>
-    <div class="hint">${esc(gateLine)}${sel.effCost != null ? ` · ⚡${sel.effCost} energy${selAb?.energyCost && sel.effCost !== selAb.energyCost ? ` (base ${selAb.energyCost})` : ""}` : ""}</div>
+      ${sel.owned ? `<span class="rep-band trusted">owned</span>` : sealedSel ? `<span class="rep-band" style="border-color:var(--accent);color:var(--accent)">✦ sealed</span>` : ""}</div>
+    <div class="hint">${sealedSel ? "✦ a precursor craft of the substrate — outside the poles" : esc(gateLine)}${!sealedSel && sel.effCost != null ? ` · ⚡${sel.effCost} energy${selAb?.energyCost && sel.effCost !== selAb.energyCost ? ` (base ${selAb.energyCost})` : ""}` : ""}</div>
     ${(selAb?.functions || []).length ? `<div style="margin:4px 0">${functionChips(selAb)}</div>` : ""}
     <p class="map-details-desc">${esc(selAb?.description || "")}</p>
     ${selAb?.notFor ? `<div class="hint"><em>cannot: ${esc(selAb.notFor)}</em></div>` : ""}
-    ${skillSelectionActions(selAb)}
+    ${sealedSel
+      ? `<div class="precursor-seal-note">Precursor crafts aren't taught or bought. <strong>A door opens only when the fiction earns it</strong> — walking the Old Roads, a precursor-touched teacher, a discovery in play. There's no button; keep playing toward it, and one day it may open.</div>`
+      : sel.precursorUnlocked ? `<div class="hint" style="color:var(--accent)">✦ a door has opened — this precursor craft was earned, and can be learned.</div>${skillSelectionActions(selAb)}`
+      : skillSelectionActions(selAb)}
   </div>` : "";
 
   chrome(`<div class="screen" style="max-width:980px">

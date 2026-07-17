@@ -30,7 +30,7 @@ import { typeAffinity, vectorAffinity, locationAffinity, affinityReceipt } from 
 import { recordCoUse, coUseCount, currentStage, refreshEvolvingItems, noteCoUseAndRefresh, evolvedItemsForGM } from "../engine/evolution.js";
 import { homeClassOf, isCrossClass, skillPointCost, forkFor, forkPending, chosenFork, setFork, rankExpression, forkPaths, skillGraphModel, nativeGrantsFor, combinationsAvailableFor } from "../engine/skilltree.js";
 import { combinationThresholdMet, ripeAxisTouchCombinations } from "../engine/practice.js";
-import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, familyClass, FUNCTION_FAMILIES, FAMILY_COLOR, FAMILY_GLYPH } from "../engine/functions.js";
+import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, familyClass, FUNCTION_FAMILIES, FAMILY_COLOR, FAMILY_GLYPH, FAMILY_SHAPE, shapeOfFamily } from "../engine/functions.js";
 import { INTENSITIES, scaledEnergy, effectMod, autoIntensity, shouldBacklash, applySurgeBacklash, surgeBacklash, intensityOptions } from "../engine/intensity.js";
 import { validate, missingRequired, defaultFor } from "../engine/genschema.js";
 import { generate, ensureGenerated, resolveExisting, mintId, repairEntity, stubEntity, birthWeightOf, buildGeneratePrompt, generatedRecords, GEN_TYPES, isMinorEntity, enforceFloors, recordAttention, effectiveWeight, recomputeTier, isDormant, isSurfaceable, livingWorldForGM, findGenerated, nominationsFor } from "../engine/generate.js";
@@ -3449,6 +3449,12 @@ await (async () => {
   // Phase B: the wheel overlay's color + glyph maps cover all 8 families (no undefined fill on a node dot)
   check("SNG-124 Phase B: FAMILY_COLOR + FAMILY_GLYPH cover all 8 families (wheel dots never undefined)",
     FUNCTION_FAMILIES.every(f => FAMILY_COLOR[f] && FAMILY_GLYPH[f]) && Object.keys(FAMILY_COLOR).length === 8);
+
+  // SNG-129: every family maps to a DISTINCT node shape (silhouette carries the primary family), with a fallback
+  check("SNG-129: FAMILY_SHAPE gives each of the 8 families a distinct silhouette (redundant with color)",
+    FUNCTION_FAMILIES.every(f => FAMILY_SHAPE[f]) && new Set(FUNCTION_FAMILIES.map(f => FAMILY_SHAPE[f])).size === 8);
+  check("SNG-129: shapeOfFamily resolves a known family + falls back to 'circle' for a family-less node",
+    shapeOfFamily("HARM") === "diamond" && shapeOfFamily(undefined) === "circle" && shapeOfFamily(null) === "circle");
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

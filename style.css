@@ -313,15 +313,21 @@ img[data-lightbox] { cursor: zoom-in; }
 .wheel-trad.closed .wheel-pole-label { fill: var(--danger); opacity: .6; }
 .wheel-node { cursor: pointer; }
 .wheel-node .hit { fill: transparent; }
-.wheel-node:hover circle:not(.hit) { stroke-width: 3; }
-.wheel-node.owned circle:not(.hit) { stroke-width: 2.5; }
+/* SNG-129: node silhouettes are now polygons/paths/rects (function shapes), not just circles → target .wnode-shape */
+.wheel-node:hover .wnode-shape { stroke-width: 3; }
+.wheel-node.owned .wnode-shape { stroke-width: 2.5; }
 .wheel-node.closed { opacity: .5; }
-.wheel-node.closed circle:not(.hit) { fill: transparent !important; }
+.wheel-node.closed .wnode-shape { fill: transparent !important; }
 .wheel-node-strike { stroke: var(--danger); stroke-width: 1.5; }
 .wheel-node.barred { opacity: .4; }
 .wheel-node.dim { opacity: .6; }
-.wheel-node.precursor circle:not(.hit) { stroke-dasharray: 2 2; }
-.wheel-node.selected circle:not(.hit) { stroke-width: 4; }
+.wheel-node.precursor .wnode-shape { stroke-dasharray: 2 2; }
+.wheel-node.selected .wnode-shape { stroke-width: 4; }
+/* SNG-129: precursor SEALED — narrative-locked, not tier-locked; a dashed hollow ring + ✦ mark */
+.wheel-node.precursor-sealed .precursor-seal-shape { stroke-dasharray: 3 2.5; fill: transparent; opacity: .85; }
+.precursor-mark { fill: var(--accent); font-size: 8px; pointer-events: none; text-anchor: middle; }
+.precursor-mark.open { font-size: 9px; }
+.precursor-seal-note { font-family: var(--font-ui); font-size: 12px; color: var(--ink-dim); border-left: 3px solid var(--accent); padding: 6px 10px; margin-top: 6px; background: rgba(212,162,74,0.08); border-radius: 0 6px 6px 0; }
 /* SNG-082 real terrain on the world map */
 .map-terrain { pointer-events: none; }
 .map-region { fill-opacity: .5; stroke-width: 2; stroke-opacity: .55; }
@@ -701,5 +707,5 @@ img[data-lightbox] { cursor: zoom-in; }
 .wheel-node-label.owned { fill:var(--ink); }
 .wheel-fn-dot { pointer-events:none; }
 .wheel-node.fn-dim { opacity:0.22; }
-.wheel-node.fn-match circle:not(.hit) { stroke-width:2.4; }
+.wheel-node.fn-match .wnode-shape { stroke-width:2.4; }
 .wheel-node.fn-match .wheel-node-label { fill:var(--ink); }

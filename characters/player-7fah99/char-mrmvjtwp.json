@@ -7,8 +7,8 @@
   "nativeTradition": "rootkin",
   "whyHere": "You were sent, or you were seeded, or you simply wanted to see something finish inside a single lifetime.",
   "background": "warden",
-  "level": 1,
-  "xp": 96,
+  "level": 2,
+  "xp": 101,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -37,14 +37,14 @@
     }
   ],
   "alignment": {
-    "death_life": 0.2721972808959363,
-    "destruction_creation": 0.014000000000000002
+    "death_life": 0.28858741685113953,
+    "destruction_creation": 0.0233
   },
-  "attunement": 1,
-  "maxHealth": 30,
-  "health": 30,
-  "maxEnergy": 100,
-  "energy": 0,
+  "attunement": 2,
+  "maxHealth": 35,
+  "health": 35,
+  "maxEnergy": 105,
+  "energy": 105,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -265,33 +265,64 @@
         "player": "Ask Branch one more question, root to root: whether it can feel whether the thing kept here is still present — or only the shape of where it was.",
         "summary": "Branch confirms: the kept thing in the root-wall is still present — and waiting.",
         "narration": "You lower your head again and let the question settle through the Grove before it becomes words — root to root, no pressure. *Is it still here? Or only the shape of where it was?*\n\nBranch takes its time. The root-tip against the wall doesn't move, but something in its posture shifts — a subtle drawing-in, the way it goes when it is listening to something at the edge of its reach. The buds at its shoulder stay carefully open. Then a creak, very slow, with a long breath of silence in the middle of it.\n\n\"Here,\" it says. Pause. \"Still — here.\" Another pause, and the next word comes out more carefully than the others, the way it handles a new thing: \"Waiting.\"\n\nThe wall under your palm gives you nothing new — just that same pooled warmth, the life-current held at one slow note. But Branch's answer makes the warmth mean something different. Not a residue. Not an echo. A presence, folded aside and left in the dark of the root-wall, still alive in the way that embers are still fire — low, patient, waiting for something it may not be able to name.\n\nAbove, Maren's silhouette hasn't moved from the threshold. When Branch's creak fades, her voice carries down through the amber air, unhurried: \"The Rootkin who walked the deep grain believed no one had gone down to be heard. It seems they were wrong about more than one thing.\""
+      },
+      {
+        "player": "Speak aloud — to the wall itself — and ask what it is waiting for. Let the Grove carry it inward.",
+        "summary": "Aelyn asked the kept thing what it waited for — and felt the answer: permission, from someone it already knows.",
+        "narration": "You lift your head slightly and let the words come aloud this time — not for Branch, not for Maren above, but for the wall itself. Your voice is quiet in the amber chamber, barely above the sound of your own breathing.\n\n'What are you waiting for?'\n\nYou let the Grove carry it — not a shout, not a demand, just the question opened outward through the green, the way you'd ask a tree what it needs or ask the soil what's wrong with a root. The Heartroot's life-current, pooled and stalled all through this section of wall, doesn't surge or respond quickly. It moves the way deep water moves when you disturb the surface: a long, slow answer that takes its time arriving.\n\nWhat comes back isn't words. It's more like a shape held in the dark — a sense of: *permission*. The kept thing has been folded here for a very long time, and it has not been restless. It is not trapped. It has been patient in the way that old things are patient when they trust the structure of the wait. What it has been waiting for is something the Root-That-Remembers could not provide alone — a frequency it recognized but could not answer. The shape of the feeling is unmistakable. It has been waiting for someone it knows.\n\nBranch makes a sound you have not heard from it before. A single short creak, almost sharp — and then its shoulder-buds open all the way, fully upright, which on Branch means something has resolved. Maren's voice drifts down from the threshold above, low and steady: 'The deep grain has not answered anyone who walked it.' A pause. 'Until now.'\n\n*You feel it settle into you — a new steadiness. (Level 2: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
       }
     ],
     "lastTurn": {
-      "narration": "You lower your head again and let the question settle through the Grove before it becomes words — root to root, no pressure. *Is it still here? Or only the shape of where it was?*\n\nBranch takes its time. The root-tip against the wall doesn't move, but something in its posture shifts — a subtle drawing-in, the way it goes when it is listening to something at the edge of its reach. The buds at its shoulder stay carefully open. Then a creak, very slow, with a long breath of silence in the middle of it.\n\n\"Here,\" it says. Pause. \"Still — here.\" Another pause, and the next word comes out more carefully than the others, the way it handles a new thing: \"Waiting.\"\n\nThe wall under your palm gives you nothing new — just that same pooled warmth, the life-current held at one slow note. But Branch's answer makes the warmth mean something different. Not a residue. Not an echo. A presence, folded aside and left in the dark of the root-wall, still alive in the way that embers are still fire — low, patient, waiting for something it may not be able to name.\n\nAbove, Maren's silhouette hasn't moved from the threshold. When Branch's creak fades, her voice carries down through the amber air, unhurried: \"The Rootkin who walked the deep grain believed no one had gone down to be heard. It seems they were wrong about more than one thing.\"",
-      "sceneSummary": "Branch confirms: the kept thing in the root-wall is still present — and waiting.",
+      "narration": "You lift your head slightly and let the words come aloud this time — not for Branch, not for Maren above, but for the wall itself. Your voice is quiet in the amber chamber, barely above the sound of your own breathing.\n\n'What are you waiting for?'\n\nYou let the Grove carry it — not a shout, not a demand, just the question opened outward through the green, the way you'd ask a tree what it needs or ask the soil what's wrong with a root. The Heartroot's life-current, pooled and stalled all through this section of wall, doesn't surge or respond quickly. It moves the way deep water moves when you disturb the surface: a long, slow answer that takes its time arriving.\n\nWhat comes back isn't words. It's more like a shape held in the dark — a sense of: *permission*. The kept thing has been folded here for a very long time, and it has not been restless. It is not trapped. It has been patient in the way that old things are patient when they trust the structure of the wait. What it has been waiting for is something the Root-That-Remembers could not provide alone — a frequency it recognized but could not answer. The shape of the feeling is unmistakable. It has been waiting for someone it knows.\n\nBranch makes a sound you have not heard from it before. A single short creak, almost sharp — and then its shoulder-buds open all the way, fully upright, which on Branch means something has resolved. Maren's voice drifts down from the threshold above, low and steady: 'The deep grain has not answered anyone who walked it.' A pause. 'Until now.'\n\n*You feel it settle into you — a new steadiness. (Level 2: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*",
+      "sceneSummary": "Aelyn asked the kept thing what it waited for — and felt the answer: permission, from someone it already knows.",
       "choices": [
         {
-          "label": "Speak aloud — to the wall itself — and ask what it is waiting for. Let the Grove carry it inward.",
+          "label": "Press your palm more deliberately against the wall — offer the kept thing the frequency it recognized. Let it read you fully, however that is done.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "death_life": 0.6,
-            "destruction_creation": 0.2
+            "death_life": 0.7
           },
           "difficulty": 15,
           "intentTags": [
-            "devote",
-            "careful"
+            "devote"
           ],
           "abilityId": "the_speaking_grove",
           "energyCost": 4,
           "trivial": false
         },
         {
-          "label": "Turn to Maren and ask whether the Rootkin have a word not just for 'kept' — but for what could keep something alive in a wall for this long.",
+          "label": "Ask Branch — aloud, so Maren can hear — if it has any sense of what 'someone it knows' means. What does the Heartroot's memory hold about who this was?",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "death_life": 0.5
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
+        },
+        {
+          "label": "Turn and speak to Maren directly — tell her what you felt: that it is not trapped, it is patient, and it has been waiting for something carrying a frequency it already knows.",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "persuade"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Step back from the wall and take a moment — let what came back settle in you before you act on it. What does it feel like, that the kept thing knows the frequency you carry?",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
@@ -300,64 +331,31 @@
           "abilityId": null,
           "energyCost": null,
           "trivial": true
-        },
-        {
-          "label": "Open Lifesense again — hold very still, and try to feel whether the life-current in the wall has any rhythm at all. A heartbeat. A breath-cycle. Anything that marks it as a person rather than a kept thing.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": 0.5
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "lifesense",
-          "energyCost": 3,
-          "trivial": false
-        },
-        {
-          "label": "Step back from the wall and look at the chamber as a whole — at the Root-That-Remembers, at Branch, at the amber light. Ask the Root directly through the Grove: did you know this was here?",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": 0.5,
-            "destruction_creation": 0.1
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "devote"
-          ],
-          "abilityId": "the_speaking_grove",
-          "energyCost": 4,
-          "trivial": false
         }
       ],
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0
+        "energy": -4
       },
       "ledgerEvents": [],
       "questUpdates": [
         {
           "op": "progress",
           "questId": "the-root-that-remembers",
-          "note": "Branch confirmed: the kept thing in the root-wall is still present — alive, folded aside, and waiting. Not a residue or echo; a presence."
+          "note": "The kept thing in the root-wall is waiting for permission — for someone it already knows. The frequency it recognizes is Aelyn's own."
         }
       ],
       "scene": {
-        "setting": "Interior of the Root-That-Remembers' chamber — amber light, even and sourceless. Root-lattice floor warm underfoot. Aelyn standing with her palm pressed flat against the specific section of the left root-wall where Branch's root-tip also rests.",
+        "setting": "Interior of the Root-That-Remembers' chamber — amber light, even and sourceless. Root-lattice floor warm underfoot. Aelyn standing with her palm pressed flat against the specific section of the left root-wall, Branch's root-tip still against the wall beside her hand.",
         "npcsPresent": [
           {
             "name": "Branch",
-            "state": "Root-tip still against the wall; shoulder-buds open in careful attention after confirming the kept thing is still present and waiting."
+            "state": "Shoulder-buds fully open and upright — something has resolved for it. Root-tip still resting against the wall."
           },
           {
             "name": "Maren",
-            "state": "Silhouette at the threshold above, watching; just spoken — her voice still settling in the amber air."
+            "state": "Silhouette at the threshold above; just spoken — the words still settling in the amber air."
           },
           {
             "name": "Sapling-child",
@@ -377,16 +375,16 @@
           "Enormous fused roots — floor, walls, ceiling, worn smooth and dark with age",
           "Root-lattice floor — intentional, broad, solid and slightly warm underfoot",
           "Sourceless amber light — even, warm, no point of origin visible",
-          "Left root-wall — specific section where Branch and Aelyn's palm both rest; life-current pooled and held, a presence still inside",
+          "Left root-wall — specific section where Branch and Aelyn's palm both rest; life-current pooled and stalled but present",
           "Traveler's Pack (Aelyn's, worn canvas)",
           "Waterskin (Aelyn's)"
         ],
         "threads": [
-          "The kept thing in the root-wall is confirmed still present — alive, low, and waiting.",
-          "Branch went still at the question — it may have more it is still reaching for.",
-          "Maren has spoken from above — her comment implies the Rootkin's understanding of the deep grain was incomplete.",
-          "The Root-That-Remembers communicated two needs: the northeast thread and this local wrongness.",
-          "A SNG-075 cache is unresolved — something left behind in or near the passage, not yet found."
+          "The kept thing is waiting for permission from someone it already knows — the frequency it recognizes is Aelyn's.",
+          "Branch's shoulder-buds are fully open — something resolved in it at the wall's answer.",
+          "Maren has spoken from above — acknowledging the Grove answered where no one else was heard.",
+          "A SNG-075 cache is unresolved — something left behind in or near the passage, not yet found.",
+          "The Root-That-Remembers still has two stated needs: this local wrongness and the northeast thread."
         ]
       },
       "npcUpdates": [
@@ -394,80 +392,82 @@
           "op": "update",
           "npcId": "rootkin-tender",
           "name": "Maren",
-          "note": "Spoke from the threshold — noted that the Rootkin believed no one who walked the deep grain had ever been heard. Aelyn has now proven otherwise, and so has the kept thing's continued presence.",
+          "note": "Spoke from above as the kept thing answered — 'The deep grain has not answered anyone who walked it. Until now.'",
           "learned": [
-            "The Rootkin assumed the deep grain was one-directional — you went down, you were not heard back. The kept thing's continued existence challenges that assumption."
+            "The deep grain has never answered anyone who walked it before this moment"
           ],
-          "statusNote": "Standing at the chamber threshold above, watching the kept-thing investigation unfold.",
-          "relationshipDelta": 0
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Standing at the threshold above the chamber, watching Aelyn at the wrongness site."
         },
         {
           "op": "update",
           "npcId": "branch",
           "name": "Branch",
-          "note": "Confirmed root-to-root: the kept thing is still present and waiting — not a residue or an echo. Used the word 'waiting' deliberately, as a new word handled with care.",
+          "note": "Made a sharp creak — unfamiliar sound — when the kept thing answered. Shoulder-buds opened fully upright, the way they do when something has resolved.",
           "learned": [
-            "The kept thing in the root-wall is still alive — present, low, and waiting for something it may not be able to name."
+            "Something resolved for Branch when the kept thing answered Aelyn — its posture shows it."
           ],
           "skillsObserved": [
-            "root-to-root listening at depth",
-            "precise vocabulary for states of living things"
+            "root-to-root listening at depth"
           ],
-          "statusNote": "Root-tip pressed against the wrongness site; shoulder-buds open in careful attention.",
-          "relationshipDelta": 0
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "the-root-that-remembers",
-          "label": "The Root-That-Remembers",
-          "kind": "mystery",
-          "entityId": "the-root-that-remembers",
-          "fact": "The kept thing in the root-wall is confirmed still present — alive at a low note, folded aside, and waiting. Branch used the word 'waiting' deliberately. It is not a residue.",
-          "links": [
-            "heartroot",
-            "branch",
-            "rootkin-tender",
-            "the-deep-woven",
-            "the-deep-grain-passage"
-          ]
-        },
-        {
-          "topic": "branch",
-          "label": "Branch",
-          "kind": "person",
-          "entityId": "branch",
-          "fact": "Branch confirmed root-to-root that the kept thing is still present and waiting — not merely the shape of where something was. It handled 'waiting' as a new word, with care.",
-          "links": [
-            "heartroot",
-            "the-root-that-remembers",
-            "the-deep-grain-passage"
-          ]
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Beside Aelyn at the wrongness site, root-tip still against the wall, shoulder-buds fully open."
         }
       ],
       "factUpdates": [
         {
           "op": "add",
-          "text": "The kept thing in the root-wall of the Root-That-Remembers' chamber is confirmed still present — alive, held at a low note, and waiting. Branch confirmed this root-to-root.",
-          "subjectId": "the-root-that-remembers"
+          "text": "The kept thing in the root-wall is waiting for permission — it is not trapped and not restless. It has been patient for a very long time. What it waits for is a frequency it already knows: the one Aelyn carries.",
+          "subjectId": "root-that-remembers"
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "the-kept-thing",
+          "label": "The Kept Thing",
+          "kind": "mystery",
+          "fact": "The kept thing is not trapped. It has been patient — waiting for permission from someone it recognizes. The frequency it knows is Aelyn's own. When Aelyn spoke through the Grove and asked what it waited for, it answered with a shape: permission, from someone it already knows.",
+          "links": [
+            "root-that-remembers",
+            "the-frequency-beneath-the-grove",
+            "heartroot",
+            "branch",
+            "the-watching-presence",
+            "the-root-that-remembers"
+          ]
+        },
+        {
+          "topic": "the-root-that-remembers",
+          "label": "The Root-That-Remembers",
+          "kind": "mystery",
+          "entityId": "root-that-remembers",
+          "fact": "The kept thing in the root-wall answered Aelyn's Grove-spoken question — something Maren says has never happened before for anyone who walked the deep grain. The Root-That-Remembers has been waiting for a specific frequency, and Aelyn carries it.",
+          "links": [
+            "the-kept-thing",
+            "heartroot",
+            "branch",
+            "the-frequency-beneath-the-grove",
+            "rootkin-tender"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a quiet root-to-root exchange and Maren's brief comment — a short moment only"
-      },
-      "sceneEnded": false
+        "why": "A brief exchange at the root-wall — the question spoken aloud, the long slow answer arriving."
+      }
     },
     "sceneState": {
-      "setting": "Interior of the Root-That-Remembers' chamber — amber light, even and sourceless. Root-lattice floor warm underfoot. Aelyn standing with her palm pressed flat against the specific section of the left root-wall where Branch's root-tip also rests.",
+      "setting": "Interior of the Root-That-Remembers' chamber — amber light, even and sourceless. Root-lattice floor warm underfoot. Aelyn standing with her palm pressed flat against the specific section of the left root-wall, Branch's root-tip still against the wall beside her hand.",
       "npcsPresent": [
         {
           "name": "Branch",
-          "state": "Root-tip still against the wall; shoulder-buds open in careful attention after confirming the kept thing is still presen"
+          "state": "Shoulder-buds fully open and upright — something has resolved for it. Root-tip still resting against the wall."
         },
         {
           "name": "Maren",
-          "state": "Silhouette at the threshold above, watching; just spoken — her voice still settling in the amber air."
+          "state": "Silhouette at the threshold above; just spoken — the words still settling in the amber air."
         },
         {
           "name": "Sapling-child",
@@ -492,18 +492,18 @@
         "Waterskin (Aelyn's)"
       ],
       "threads": [
-        "The kept thing in the root-wall is confirmed still present — alive, low, and waiting.",
-        "Branch went still at the question — it may have more it is still reaching for.",
-        "Maren has spoken from above — her comment implies the Rootkin's understanding of the deep grain was incomplete.",
-        "The Root-That-Remembers communicated two needs: the northeast thread and this local wrongness.",
-        "A SNG-075 cache is unresolved — something left behind in or near the passage, not yet found."
+        "The kept thing is waiting for permission from someone it already knows — the frequency it recognizes is Aelyn's.",
+        "Branch's shoulder-buds are fully open — something resolved in it at the wall's answer.",
+        "Maren has spoken from above — acknowledging the Grove answered where no one else was heard.",
+        "A SNG-075 cache is unresolved — something left behind in or near the passage, not yet found.",
+        "The Root-That-Remembers still has two stated needs: this local wrongness and the northeast thread."
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 11,
+    "hour": 12,
     "realAnchor": null
   },
   "companions": [
@@ -523,14 +523,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "The Root-That-Remembers answered Aelyn's offer with two needs: a northeast thread (her father), and something wrong within the city itself — unnamed, present, and already noticed by Branch.",
         "Branch confirms something wrong in the root-wall to the left — and its bud gives it a direction. The unnamed city-wrongness the Root communicated has a location.",
         "Branch led Aelyn along the left root-wall and stopped at the site of the wrongness — pressing a root-tip against it. The location of the city's unnamed illness is found.",
         "Prism Sight failed at the wrongness site — the Heartroot's sourceless light is opaque to the craft. Branch holds the location. Another approach is needed.",
         "Lifesense succeeded where Prism Sight failed — the wrongness is confirmed as a stalled, held life-current in the root-wall. Not broken, not dead, but caught. The nature of what is holding it remains unknown.",
         "Branch gave the Heartroot's word for the wrongness in the root-wall: 'kept' — not accidental, not damage. Something deliberate holds the life-current there. The nature and agent of the keeping remain unknown.",
         "Branch named the kept thing as once-someone — old, deliberately folded into the root-wall. The wrongness has a person-shape.",
-        "Branch confirmed: the kept thing in the root-wall is still present — alive, folded aside, and waiting. Not a residue or echo; a presence."
+        "Branch confirmed: the kept thing in the root-wall is still present — alive, folded aside, and waiting. Not a residue or echo; a presence.",
+        "The kept thing in the root-wall is waiting for permission — for someone it already knows. The frequency it recognizes is Aelyn's own."
       ],
       "aliases": [],
       "startedAt": "2026-07-17T04:11:12.462Z"
@@ -643,10 +643,16 @@
         "day": 1,
         "worldDay": 13,
         "text": "Word reaches you: Bull boar taken on the scrub oak ridge north of Millbrook — the hunt party completed the job, both animals down. (near millbrook)"
+      },
+      {
+        "day": 1,
+        "worldDay": 17,
+        "text": "This reaches your area — Fendt has left the Edge District and is walking to Millbrook — his testimony names Overseer Grael explicitly; when he arrives, the paper becomes a political event in both settlements. (near radiant plateau edge)",
+        "impactsLocal": true
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-17T00:40:16.761Z",
+    "lastSharedReadAt": "2026-07-17T05:04:19.023Z",
     "lastTickWorldDay": 17,
     "lastCanonWorldDay": 17
   },
@@ -674,8 +680,8 @@
     "craft": 3,
     "wits": 3
   },
-  "pendingSubPoints": 0,
-  "skillPoints": 0,
+  "pendingSubPoints": 1,
+  "skillPoints": 1,
   "discoveries": [],
   "codex": {
     "schemaVersion": 1,
@@ -835,17 +841,18 @@
           "[d1] Aelyn entered the chamber in silence — and the Root's attention encompassed her immediately, from the inside, the way something very large includes a new part of itself. Not a greeting; an already-kno",
           "[d1] The Root-That-Remembers read Aelyn fully through the Grove — both the green from her mother and the structural thread from her father, held simultaneously, not apart. It has finished its question and ",
           "[d1] When Aelyn asked what the Root needed from her, it answered with two things: the northeast thread (her father, findable, distant) and a local wrongness inside the city — something not-well in a way th",
-          "[d1] The kept thing in the root-wall is confirmed still present — alive at a low note, folded aside, and waiting. Branch used the word 'waiting' deliberately. It is not a residue."
+          "[d1] The kept thing in the root-wall is confirmed still present — alive at a low note, folded aside, and waiting. Branch used the word 'waiting' deliberately. It is not a residue.",
+          "[d1] The kept thing in the root-wall answered Aelyn's Grove-spoken question — something Maren says has never happened before for anyone who walked the deep grain. The Root-That-Remembers has been waiting f"
         ],
         "links": [
-          "heartroot",
-          "sapling-child-heartroot",
           "branch",
           "rootkin-tender",
           "the-frequency-beneath-the-grove",
           "the-deep-woven",
           "the-deep-grain-passage",
-          "the-root-that-remembers"
+          "the-root-that-remembers",
+          "the-kept-thing",
+          "heartroot"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -931,24 +938,49 @@
         "aliases": [],
         "createdDay": 1,
         "updatedDay": 1
+      },
+      "the-kept-thing": {
+        "id": "the-kept-thing",
+        "label": "The Kept Thing",
+        "kind": "mystery",
+        "facts": [
+          "[d1] The kept thing is not trapped. It has been patient — waiting for permission from someone it recognizes. The frequency it knows is Aelyn's own. When Aelyn spoke through the Grove and asked what it wait"
+        ],
+        "links": [
+          "root-that-remembers",
+          "the-frequency-beneath-the-grove",
+          "heartroot",
+          "branch"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "cerebral": 13.35412831860234,
-    "cautious": 7.595404775389144,
-    "generous": 0.9708575668124749,
-    "social": 4.521263797821988,
-    "strategic": 1.9247368177239466,
-    "devotion": 2.134663474335035
+    "cerebral": 13.020275110637282,
+    "cautious": 8.405519656004415,
+    "generous": 0.946586127642163,
+    "social": 4.408232202876438,
+    "strategic": 1.876618397280848,
+    "devotion": 3.081296887476659
   },
   "aptitudes": [
     "scholar"
   ],
-  "actionCount": 39,
+  "actionCount": 40,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
+    {
+      "kind": "portrait",
+      "prompt": "Aelyn Kantoro",
+      "url": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20mid-twenties%20with%20light%20blonde%2C%20faintly%20wavy%20hair%20cut%20in%20curtain%20bangs%2C%20the%20rest%20falling%20to%20the%20small%20of%20her%20back%20%E2%80%94%20usually%20worn%20in%20a%20french%20braid%20with%20the%20bangs%20left%20loose.%20Dark%20nature-green%20tank%20to%2C%20full-body%20character%20portrait%2C%20named%20Aelyn%20Kantoro%2C%20of%20the%20rootkin%2C%20warden%2C%20carrying%20Traveler's%20Pack%2C%20Her%20mother%20dies%2C%20and%20she%20decides%20to%20go%20to%20the%20nanite%20world%2C%20to%20figure%20out%20why%20she%20is%20different%20than%20the%20pure%20nature%20peop%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=73420&nologo=true",
+      "caption": "Aelyn Kantoro — level 1",
+      "worldDay": 17,
+      "at": "2026-07-17T05:04:46.434Z"
+    },
     {
       "kind": "portrait",
       "prompt": "Aelyn Kantoro",
@@ -966,9 +998,9 @@
       "at": "2026-07-16T02:13:02.378Z"
     }
   ],
-  "portrait": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20mid-twenties%20with%20light%20blonde%2C%20faintly%20wavy%20hair%20cut%20in%20curtain%20bangs%2C%20the%20rest%20falling%20to%20the%20small%20of%20her%20back%20%E2%80%94%20usually%20worn%20in%20a%20french%20braid%20with%20the%20bangs%20left%20loose.%20Dark%20nature-green%20tank%20to%2C%20full-body%20character%20portrait%2C%20named%20Aelyn%20Kantoro%2C%20of%20the%20rootkin%2C%20warden%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Her%20mother%20dies%2C%20and%20she%20decides%20to%20go%20to%20the%20nanite%20world%2C%20to%20figure%20out%20why%20she%20is%20different%20than%20the%20pure%20nature%20peop%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=73420&nologo=true",
-  "updatedAt": 1784264440882,
-  "rev": 55,
+  "portrait": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20mid-twenties%20with%20light%20blonde%2C%20faintly%20wavy%20hair%20cut%20in%20curtain%20bangs%2C%20the%20rest%20falling%20to%20the%20small%20of%20her%20back%20%E2%80%94%20usually%20worn%20in%20a%20french%20braid%20with%20the%20bangs%20left%20loose.%20Dark%20nature-green%20tank%20to%2C%20full-body%20character%20portrait%2C%20named%20Aelyn%20Kantoro%2C%20of%20the%20rootkin%2C%20warden%2C%20carrying%20Traveler's%20Pack%2C%20Her%20mother%20dies%2C%20and%20she%20decides%20to%20go%20to%20the%20nanite%20world%2C%20to%20figure%20out%20why%20she%20is%20different%20than%20the%20pure%20nature%20peop%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=73420&nologo=true",
+  "updatedAt": 1784264691863,
+  "rev": 67,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -1039,6 +1071,12 @@
       "text": "The kept thing in the root-wall of the Root-That-Remembers' chamber is confirmed still present — alive, held at a low note, and waiting. Branch confirmed this root-to-root.",
       "day": 1,
       "subjectId": "the-root-that-remembers"
+    },
+    {
+      "id": "root-that-remembers",
+      "text": "The kept thing in the root-wall is waiting for permission — it is not trapped and not restless. It has been patient for a very long time. What it waits for is a frequency it already knows: the one Ael",
+      "day": 1,
+      "subjectId": "root-that-remembers"
     }
   ],
   "syncedAt": 1784175920678,
@@ -1064,5 +1102,23 @@
   "backfillVersion": 1,
   "nativeGrantsVersion": 1,
   "_pinsInitialized": true,
-  "_pendingArrival": null
+  "_pendingArrival": null,
+  "_chronicleBusy": true,
+  "_chronicleError": null,
+  "chronicleCache": {
+    "hash": "d0|b|c|q|L1|Her mother dies, and she decides to go to the na",
+    "text": "You have become someone whose grief is still raw enough to taste — your mother barely cold in the earth when you packed what little you owned and walked away from the only life you knew among the Rootkin, the people of pure nature, the ones who never needed to ask what they were. But you have always needed to ask. The nanite-laced difference in you has been a quiet wrongness your whole life, a hum beneath the skin that no root or leaf could explain, and now, with no mother left to avoid the question for, you are walking toward the answer. You know no one yet. You have done nothing yet. You are only beginning.",
+    "at": "2026-07-17T05:02:14.126Z"
+  },
+  "company": [],
+  "sessions": [
+    {
+      "id": "sess-1",
+      "startedAt": "2026-07-17T05:04:51.860Z",
+      "lastAt": "2026-07-17T05:04:51.860Z",
+      "startDay": 17,
+      "endDay": 17,
+      "beats": 1
+    }
+  ]
 }

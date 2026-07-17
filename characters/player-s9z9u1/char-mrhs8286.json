@@ -418,9 +418,9 @@
   ],
   "relationships": {},
   "chronicle": [],
-  "currentLocationId": "millbrook",
+  "currentLocationId": "radiant_plateau_edge",
   "activeScene": {
-    "locationId": "millbrook",
+    "locationId": "radiant_plateau_edge",
     "turns": [
       {
         "player": null,
@@ -571,112 +571,196 @@
         "player": "Let her go with only the nod — keep moving south toward Leth and the engineer before the afternoon runs out.",
         "summary": "The road traveler departs southbound; Silas, Pell, and Huginn press south toward the Edge District and Leth.",
         "narration": "You hold the nod a beat longer than courtesy requires — enough that she knows it was received, not just returned. Then you shift Memory's lash at your shoulder and step back onto the track.\n\nShe doesn't watch you go. By the time Pell falls into step beside you and Huginn lifts from the fence post at the road's edge, the traveler is already moving again, southbound, the orange cord at her coat swinging with the rhythm of a walk that knows where it's going. You don't look back either. The afternoon is still long enough, barely, to reach the Edge District before the light goes.\n\nThe pine run thins out over the next quarter mile, the canopy opening onto open road, last season's grass flat and straw-colored at the verges. The trade track here is well-worn — two ruts and a center strip of compressed earth, the kind of road that accumulates use without anyone deciding to build it. Pell walks on your left, pack settled, saying nothing yet. Huginn rides your right shoulder, facing forward.\n\n\"Leth first,\" Pell says, not a question. She's been running the sequence since you left Fendt's shop. \"If she has his name and you have the shape of what he'd need to hear, that's a shorter conversation than wandering the district asking after a difficult man who doesn't want to be found.\" She glances at Huginn. \"Unless the bird has a preference.\" Huginn does not dignify this. Pell almost smiles."
+      },
+      {
+        "player": "Head straight to Leth — find the archivist and get the engineer's name before she closes up for the day",
+        "summary": "Silas and Pell find Leth in her archive room at the Edge District — she has Sorel's letter and is ready to talk.",
+        "narration": "The Edge District resolves out of the afternoon haze as the pine run gives way entirely — a compact settlement pressed against the cliff face, buildings of pale stone and salvaged timber running in two crooked rows along a central lane. The kind of place that has been a stopping point for so long it forgot to become a destination. Lanterns are just beginning to glow in a few windows, though the sun is still above the ridge.\n\nPell reads the scrap from her coat pocket without breaking stride. \"Archivist type. Kept careful records.\" She folds it back. \"That means a building with more organization than the rest of them.\"\n\nHuginn lifts from your shoulder and angles left without being asked — toward a low stone building set slightly back from the lane, its door propped open with a round river rock, a small board above it scratched with what might once have been a proper sign. The bird lands on the board's edge and settles, watching the entrance.\n\nInside, the smell is old paper and lamp-smoke. The room is lined floor to ceiling with wooden shelving — not chaotic, not precious, just relentlessly organized, every bundle and ledger tied and labeled in a small tight hand. A woman in her mid-fifties stands at a slanted desk near the window, writing without looking up. She finishes the line before she speaks. \"The bird on my sign is yours, I assume.\" She sets the pen in its groove. \"Sorel sent a letter. It arrived this morning, which means you left the day before yesterday.\" She studies you both with the flat professional attention of someone whose job is to notice what things actually are. \"You're looking for Grael's engineer. Sit down — I have ground to cover before I hand you a name.\""
       }
     ],
     "lastTurn": {
-      "narration": "You hold the nod a beat longer than courtesy requires — enough that she knows it was received, not just returned. Then you shift Memory's lash at your shoulder and step back onto the track.\n\nShe doesn't watch you go. By the time Pell falls into step beside you and Huginn lifts from the fence post at the road's edge, the traveler is already moving again, southbound, the orange cord at her coat swinging with the rhythm of a walk that knows where it's going. You don't look back either. The afternoon is still long enough, barely, to reach the Edge District before the light goes.\n\nThe pine run thins out over the next quarter mile, the canopy opening onto open road, last season's grass flat and straw-colored at the verges. The trade track here is well-worn — two ruts and a center strip of compressed earth, the kind of road that accumulates use without anyone deciding to build it. Pell walks on your left, pack settled, saying nothing yet. Huginn rides your right shoulder, facing forward.\n\n\"Leth first,\" Pell says, not a question. She's been running the sequence since you left Fendt's shop. \"If she has his name and you have the shape of what he'd need to hear, that's a shorter conversation than wandering the district asking after a difficult man who doesn't want to be found.\" She glances at Huginn. \"Unless the bird has a preference.\" Huginn does not dignify this. Pell almost smiles.",
-      "sceneSummary": "The road traveler departs southbound; Silas, Pell, and Huginn press south toward the Edge District and Leth.",
+      "narration": "The Edge District resolves out of the afternoon haze as the pine run gives way entirely — a compact settlement pressed against the cliff face, buildings of pale stone and salvaged timber running in two crooked rows along a central lane. The kind of place that has been a stopping point for so long it forgot to become a destination. Lanterns are just beginning to glow in a few windows, though the sun is still above the ridge.\n\nPell reads the scrap from her coat pocket without breaking stride. \"Archivist type. Kept careful records.\" She folds it back. \"That means a building with more organization than the rest of them.\"\n\nHuginn lifts from your shoulder and angles left without being asked — toward a low stone building set slightly back from the lane, its door propped open with a round river rock, a small board above it scratched with what might once have been a proper sign. The bird lands on the board's edge and settles, watching the entrance.\n\nInside, the smell is old paper and lamp-smoke. The room is lined floor to ceiling with wooden shelving — not chaotic, not precious, just relentlessly organized, every bundle and ledger tied and labeled in a small tight hand. A woman in her mid-fifties stands at a slanted desk near the window, writing without looking up. She finishes the line before she speaks. \"The bird on my sign is yours, I assume.\" She sets the pen in its groove. \"Sorel sent a letter. It arrived this morning, which means you left the day before yesterday.\" She studies you both with the flat professional attention of someone whose job is to notice what things actually are. \"You're looking for Grael's engineer. Sit down — I have ground to cover before I hand you a name.\"",
+      "sceneSummary": "Silas and Pell find Leth in her archive room at the Edge District — she has Sorel's letter and is ready to talk.",
       "choices": [
         {
-          "label": "Head straight to Leth — find the archivist and get the engineer's name before she closes up for the day",
+          "label": "Sit and listen — let Leth cover her ground at her own pace before asking anything",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "travel"
+            "calm"
           ],
           "trivial": true
         },
         {
-          "label": "Ask Huginn to orient — the bird watched a specific building last time; see if that instinct still holds now that you're on the road back in",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "scout"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Talk through the approach with Pell while you walk — she's been running the sequence; hear how she'd frame the ask to Leth, and what she'd leave out",
+          "label": "Ask her to start with the archive breach — what was taken, and when exactly",
           "attribute": "mental",
           "subAttribute": "reason",
           "difficulty": 0,
           "intentTags": [
-            "plan"
+            "study"
           ],
           "trivial": true
         },
         {
-          "label": "Watch the road ahead — the gray seepage at the lower ford is less than half a mile south; check it directly before crossing, not around it",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Show her Fendt's testimony before she begins — let her read it and see what she adds",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "scout",
-            "careful"
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask about the engineer first — name, location, and what he would need to hear to say yes",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "negotiate"
           ],
           "trivial": true
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
       "scene": {
-        "setting": "The old trade track south toward the Edge District — pine run thinning to open road, afternoon light long and low at the travelers' backs, the ford crossing half a mile ahead.",
+        "setting": "Leth's archive room in the Edge District — a low stone building set back from the central lane, door propped open, interior lined wall-to-wall with labeled ledger bundles and document stacks. A slanted desk near the window, lamp just lit, late afternoon light coming through the gap in the door.",
         "npcsPresent": [
           {
+            "name": "Leth",
+            "state": "Standing at her slanted desk, pen set aside, studying Silas and Pell with flat professional attention — she has Sorel's letter and is ready to talk but has her own sequence."
+          },
+          {
             "name": "Pell",
-            "state": "Walking on Silas's left, pack settled, running the sequence — Leth first, engineer second."
+            "state": "Standing just inside the door, contact scrap folded back in her coat, watching Leth assess them."
           },
           {
             "name": "Huginn",
-            "state": "On Silas's right shoulder, facing forward, declining to comment on Pell's question."
+            "state": "Perched on the archive's sign board outside the open door, attending."
           }
         ],
         "objects": [
+          "Slanted writing desk with pen and ledger",
+          "Floor-to-ceiling shelving — every bundle tied and labeled in small tight hand",
+          "Round river rock propping the door",
+          "Sorel's letter — somewhere on Leth's desk or in her keeping",
           "Memory (spear) — road-lashed at Silas's back",
-          "Fendt's Testimony — folded page in Silas's coat",
-          "Brass Wire Coil (fine), Chalk Dust Tin, Pre-Transition Filter Cloth — in pack from Fendt's shop"
+          "Fendt's Testimony — folded page in Silas's coat"
         ],
         "threads": [
-          "The lower ford's east-side stones are seeping gray — half a mile ahead on this road",
-          "Leth's location in the Edge District is known by description but not by address",
-          "The engineer's name is still unconfirmed — Sorel described reluctance, not refusal",
-          "Fendt is walking to Millbrook behind them — will reach Mara Wells within a day or two"
+          "Leth has ground she wants to cover before handing over the engineer's name — she sets the sequence",
+          "The archive breach: what was taken, when, and by whom",
+          "The engineer's name and what he would need to hear to leave the Edge District",
+          "Huginn chose this building without prompting — what it knows about it is unspoken"
         ]
       },
+      "npcUpdates": [
+        {
+          "op": "meet",
+          "npcId": "leth",
+          "name": "Leth",
+          "role": "Archivist, Edge District",
+          "description": "A woman in her mid-fifties with the flat professional attention of someone whose job is to notice what things actually are — keeps relentlessly organized records, filed Sorel's letter this morning, and sets her own sequence before she gives you anything.",
+          "note": "Received Silas and Pell with Sorel's letter already in hand. Named them as Grael's engineer's seekers without being told. Announced she has ground to cover first.",
+          "learned": [
+            "Sorel's letter arrived this morning — she calculated the departure date from it immediately",
+            "She knows Silas is looking for 'Grael's engineer' — that framing is hers, and it carries weight",
+            "She will give the name, but on her own sequence"
+          ],
+          "skillsObserved": [
+            "rapid temporal inference from a single data point",
+            "composure and sequencing under an unknown visitor"
+          ],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "At her archive room in the Edge District — has Sorel's letter, knows the situation, ready to talk on her own terms."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "leth-archive-complaint",
+          "label": "Leth — Edge District Archivist",
+          "kind": "person",
+          "entityId": "leth",
+          "fact": "Leth is physically present at her archive room in the Edge District — Sorel's letter arrived this morning. She refers to the engineer as 'Grael's engineer', a framing that suggests she knows the political shape of what Silas is walking into. She has her own sequence before she will give the name.",
+          "links": [
+            "find-the-engineer",
+            "the-edge-district-ledger",
+            "sorel",
+            "overseer-grael",
+            "millbrook"
+          ]
+        }
+      ],
+      "placeUpdates": [
+        {
+          "subPlace": {
+            "name": "Leth's Archive Room",
+            "note": "A low stone building set back from the Edge District's central lane — floor-to-ceiling labeled shelving, slanted desk by the window, door propped with a river rock. Leth works here and keeps records others don't.",
+            "visited": true
+          }
+        }
+      ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "brief exchange with the road traveler and the first quarter mile south on the track"
-      }
+        "hoursPassed": 1,
+        "why": "The walk from the lower ford into the Edge District and locating Leth's building — a short afternoon transit."
+      },
+      "moveTo": {
+        "location": "radiant-plateau-edge",
+        "why": "Silas and Pell walked south from the lower ford and entered the Edge District before the light went."
+      },
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "find-the-engineer",
+          "note": "Leth found at her archive room — she has Sorel's letter, knows the shape of the ask, and is ready to give the engineer's name after covering her own ground first."
+        }
+      ],
+      "deeds": [],
+      "ledgerEvents": [],
+      "factUpdates": [],
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The old trade track south toward the Edge District — pine run thinning to open road, afternoon light long and low at the travelers' backs, the ford crossing half a mile ahead.",
+      "setting": "Leth's archive room in the Edge District — a low stone building set back from the central lane, door propped open, interior lined wall-to-wall with labeled ledger bundles and document stacks. A slanted desk near the window, lamp just lit, late afternoon light coming through the gap in the door.",
       "npcsPresent": [
         {
+          "name": "Leth",
+          "state": "Standing at her slanted desk, pen set aside, studying Silas and Pell with flat professional attention — she has Sorel's "
+        },
+        {
           "name": "Pell",
-          "state": "Walking on Silas's left, pack settled, running the sequence — Leth first, engineer second."
+          "state": "Standing just inside the door, contact scrap folded back in her coat, watching Leth assess them."
         },
         {
           "name": "Huginn",
-          "state": "On Silas's right shoulder, facing forward, declining to comment on Pell's question."
+          "state": "Perched on the archive's sign board outside the open door, attending."
         }
       ],
       "objects": [
+        "Slanted writing desk with pen and ledger",
+        "Floor-to-ceiling shelving — every bundle tied and labeled in small tight hand",
+        "Round river rock propping the door",
+        "Sorel's letter — somewhere on Leth's desk or in her keeping",
         "Memory (spear) — road-lashed at Silas's back",
-        "Fendt's Testimony — folded page in Silas's coat",
-        "Brass Wire Coil (fine), Chalk Dust Tin, Pre-Transition Filter Cloth — in pack fr"
+        "Fendt's Testimony — folded page in Silas's coat"
       ],
       "threads": [
-        "The lower ford's east-side stones are seeping gray — half a mile ahead on this road",
-        "Leth's location in the Edge District is known by description but not by address",
-        "The engineer's name is still unconfirmed — Sorel described reluctance, not refusal",
-        "Fendt is walking to Millbrook behind them — will reach Mara Wells within a day or two"
+        "Leth has ground she wants to cover before handing over the engineer's name — she sets the sequence",
+        "The archive breach: what was taken, when, and by whom",
+        "The engineer's name and what he would need to hear to leave the Edge District",
+        "Huginn chose this building without prompting — what it knows about it is unspoken"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 3,
-    "hour": 17,
+    "hour": 18,
     "realAnchor": null
   },
   "companions": [
@@ -719,7 +803,8 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Arrived in the Edge District. Huginn is watching a specific building. Pell advises starting there before pursuing Leth."
+        "Arrived in the Edge District. Huginn is watching a specific building. Pell advises starting there before pursuing Leth.",
+        "Leth found at her archive room — she has Sorel's letter, knows the shape of the ask, and is ready to give the engineer's name after covering her own ground first."
       ],
       "aliases": [],
       "startedAt": "2026-07-16T19:11:11.950Z"
@@ -1383,6 +1468,35 @@
         "locationId": "millbrook",
         "day": 3
       }
+    },
+    "leth": {
+      "id": "leth",
+      "name": "Leth",
+      "role": "Archivist, Edge District",
+      "description": "A woman in her mid-fifties with the flat professional attention of someone whose job is to notice what things actually are — keeps relentlessly organized records, filed Sorel's letter this morning, and sets her own sequence before she gives",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 3
+      },
+      "relationship": 1,
+      "history": [
+        "[d3] Received Silas and Pell with Sorel's letter already in hand. Named them as Grael's engineer's seekers without being told. Announced she has ground to cover first."
+      ],
+      "knownFacts": [
+        "Sorel's letter arrived this morning — she calculated the departure date from it immediately",
+        "She knows Silas is looking for 'Grael's engineer' — that framing is hers, and it carries weight",
+        "She will give the name, but on her own sequence"
+      ],
+      "skillsObserved": [
+        "rapid temporal inference from a single data point",
+        "composure and sequencing under an unknown visitor"
+      ],
+      "status": "active",
+      "statusNote": "At her archive room in the Edge District — has Sorel's letter, knows the situation, ready to talk on her own terms.",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 3
+      }
     }
   },
   "placeMemory": {
@@ -1497,7 +1611,7 @@
       "lastVisit": 3
     },
     "radiant_plateau_edge": {
-      "visits": 1,
+      "visits": 2,
       "notes": [
         "[d3] Rear of the narrow-colonnaded administrative building: a small iron-banded service door, not latched, with a cloth-wrapped bundle tied with a single cord leaning against the wall beside it. Found on W"
       ],
@@ -2424,17 +2538,23 @@
         "label": "Leth's Archive Complaint",
         "kind": "event",
         "facts": [
-          "[d3] Leth filed a formal breach complaint two weeks ago to the district records office. The removed material was historical calibration files — old array-setup records, pre-Transition provenance documentat"
+          "[d3] Leth filed a formal breach complaint two weeks ago to the district records office. The removed material was historical calibration files — old array-setup records, pre-Transition provenance documentat",
+          "[d3] Leth is physically present at her archive room in the Edge District — Sorel's letter arrived this morning. She refers to the engineer as 'Grael's engineer', a framing that suggests she knows the polit"
         ],
         "links": [
           "fendt-and-the-falsified-ledger",
           "find-the-engineer",
           "the-edge-district-ledger",
-          "radiant-plateau-edge"
+          "radiant-plateau-edge",
+          "sorel",
+          "overseer-grael"
         ],
-        "aliases": [],
+        "aliases": [
+          "Leth — Edge District Archivist"
+        ],
         "createdDay": 3,
-        "updatedDay": 3
+        "updatedDay": 3,
+        "entityId": "leth"
       },
       "the-edge-district-ledger": {
         "id": "the-edge-district-ledger",
@@ -2460,17 +2580,17 @@
     }
   },
   "tendencies": {
-    "strategic": 31.353631288142196,
-    "cerebral": 27.160555059615298,
-    "social": 27.280471008598273,
-    "generous": 5.959897823483248,
-    "cautious": 21.969001480398667,
-    "physical": 1.2950152107692308,
-    "risky": 3.6465023393209393,
-    "ruthless": 1.6034621681215087,
-    "carousing": 1.1259547704502224,
-    "amorous": 3.0875295559641103,
-    "patient": 0.9609933252797437
+    "strategic": 30.56979050593864,
+    "cerebral": 26.481541183124914,
+    "social": 26.598459233383316,
+    "generous": 5.810900377896166,
+    "cautious": 21.4197764433887,
+    "physical": 1.2626398305,
+    "risky": 3.5553397808379157,
+    "ruthless": 1.563375613918471,
+    "carousing": 1.097805901188967,
+    "amorous": 3.0103413170650075,
+    "patient": 0.93696849214775
   },
   "aptitudes": [
     "strategist",
@@ -2482,7 +2602,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 355,
+  "actionCount": 356,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2624,8 +2744,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784257385064,
-  "rev": 508,
+  "updatedAt": 1784257482143,
+  "rev": 509,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3189,7 +3309,7 @@
   "syncedAt": 1784184597860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 170
+    "valley": 171
   },
   "foreclosed": [
     "rootkin",
@@ -3218,10 +3338,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-07-17T03:03:05.063Z",
-      "lastAt": "2026-07-17T03:03:05.063Z",
+      "lastAt": "2026-07-17T03:04:42.141Z",
       "startDay": 17,
       "endDay": 17,
-      "beats": 1
+      "beats": 2
     }
   ]
 }

@@ -3,6 +3,10 @@
 
 ---
 
+## 🧹 SNG-135 — Tighten the Company section — ✅ SHIPPED, complete_pending_review (CCode 2026-07-16, v1.8.93)
+
+> **CCode 2026-07-16:** layout only, SNG-126 intact. Each member (Companions/Allies/recruitable) is now a single `.company-row` flex line — name (ellipsis) · inline `.company-badge` (bond/roles) · compact `.company-action` (small ✎/✕/＋, not a full-width bar). Companion description → row title (hover). Tighter `.company-group`; still collapsible `data-sec="company"`. All 4 SNG-126 data hooks preserved (data-rename/part/partally/recruit) → handlers unchanged; roster/roles/recruit gating untouched. npm test green (no regression), boot-clean 8231. Writeup: `po/results/20260716_SNG-135_company_tighten.md`. (Original spec below.)
+
 ## 🧹 SNG-135 — Tighten the Company section (Erik screenshot; CCode-buildable NOW)
 `po/SPEC_SNG-135_company_section_tighten.md`. Company (Companions/Allies/recruitable) reads heavy — each member stacks name + badge + a FULL-WIDTH action button over ~3 rows (L5562-5567). Fix: ONE tight flex row per member (name · inline role/bond badge · compact action), demote full-width buttons to small inline controls, move companion description to hover/tap. **Layout only — SNG-126 roster/roles/recruit gating/part-ways all UNCHANGED.** Composes with SNG-120 collapse + SNG-134 hover.
 

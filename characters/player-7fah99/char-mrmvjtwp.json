@@ -237,71 +237,97 @@
         "player": "Reach into the Speaking Grove — not to ask, not to speak, but to make yourself legible. Let the Root-That-Remembers read you the way you would read a tree: by being still and present.",
         "summary": "Aelyn opens herself to the Root-That-Remembers through the Grove — and is read, fully, both natures at once.",
         "narration": "The chamber doesn't rush you.\n\nYou let your hands fall open at your sides and still yourself the way you still yourself before a shot — not absence of thought, but absence of insistence. The Grove opens in you like a slow exhale: not reaching, not asking, just present. Legible. You let the Root-That-Remembers look.\n\nIt does. The attention that encompasses you shifts — you feel it move through the deep-woven frequency the way a root moves through wet soil, patient and thorough and entirely without apology. It reads the green your mother gave you: the warmth of it, the deep-listening quality, the way your lifesense moves through living things like water finding level. And then it reads the other thing — the thread your father left, the part that hums at a different register, bright and structural where the green is fluid. Both. It holds them simultaneously, the way it told you before: not apart. You feel, briefly and unmistakably, what it is like to be fully seen by something that has been waiting a very long time to see you.\n\nBranch creaks softly at your knee — one low sound, satisfied. Its buds, still open, catch the amber light. The reading settles. No words come this time, no partial answer in the language of the Grove. What arrives instead is simpler: a quality of being known. The Root-That-Remembers has finished its question. Whatever it needed to understand about you, it understands. The chamber holds that fact the way it holds the warmth — steadily, from no single source, everywhere at once. It is waiting, now, for yours."
+      },
+      {
+        "player": "Ask what the Root-That-Remembers would have you do — now that it knows you fully, ask if it has something it needs from you.",
+        "summary": "The Root-That-Remembers answers Aelyn's offer with two needs: the northeast thread and something wrong and nearby in the city itself.",
+        "narration": "You keep your hands open and your presence steady — making the question as honest as the reading was.\n\n*What do you need from me?*\n\nNot a demand. Not a negotiation. The way you'd ask a tree whether it wanted water on this side of the root or that side — because you were genuinely prepared to move.\n\nThe chamber holds its quiet for a long moment. The amber light doesn't shift. The enormous fused roots don't move. But the attention that has been encompassing you since you stepped through — that slow, thorough, entirely unhurried thing — settles differently. Less reading. More resting, in the way something very old rests when it has found what it was waiting for.\n\nThe answer doesn't come as words. It comes as the Grove gives most things: as an image that is also a feeling that is also a direction. A thread, northeast, taut and real and patient. Not urgent — it has been waiting longer than you have been alive. But it is there. And then, underneath that: something closer, something here. A part of the Root-That-Remembers that is not-well, the way you might sense a sick limb through Lifesense — not failing, not broken, but wrong in a way that has no name yet and that the city has not spoken aloud. Two things. One far. One near.\n\nBranch makes a sound beside your knee — very low, almost below hearing, a long slow creak like a door finding its frame. Its buds are open fully and motionless. It is looking, in its way, at the root-wall to your left."
       }
     ],
     "lastTurn": {
-      "narration": "The chamber doesn't rush you.\n\nYou let your hands fall open at your sides and still yourself the way you still yourself before a shot — not absence of thought, but absence of insistence. The Grove opens in you like a slow exhale: not reaching, not asking, just present. Legible. You let the Root-That-Remembers look.\n\nIt does. The attention that encompasses you shifts — you feel it move through the deep-woven frequency the way a root moves through wet soil, patient and thorough and entirely without apology. It reads the green your mother gave you: the warmth of it, the deep-listening quality, the way your lifesense moves through living things like water finding level. And then it reads the other thing — the thread your father left, the part that hums at a different register, bright and structural where the green is fluid. Both. It holds them simultaneously, the way it told you before: not apart. You feel, briefly and unmistakably, what it is like to be fully seen by something that has been waiting a very long time to see you.\n\nBranch creaks softly at your knee — one low sound, satisfied. Its buds, still open, catch the amber light. The reading settles. No words come this time, no partial answer in the language of the Grove. What arrives instead is simpler: a quality of being known. The Root-That-Remembers has finished its question. Whatever it needed to understand about you, it understands. The chamber holds that fact the way it holds the warmth — steadily, from no single source, everywhere at once. It is waiting, now, for yours.",
-      "sceneSummary": "Aelyn opens herself to the Root-That-Remembers through the Grove — and is read, fully, both natures at once.",
+      "narration": "You keep your hands open and your presence steady — making the question as honest as the reading was.\n\n*What do you need from me?*\n\nNot a demand. Not a negotiation. The way you'd ask a tree whether it wanted water on this side of the root or that side — because you were genuinely prepared to move.\n\nThe chamber holds its quiet for a long moment. The amber light doesn't shift. The enormous fused roots don't move. But the attention that has been encompassing you since you stepped through — that slow, thorough, entirely unhurried thing — settles differently. Less reading. More resting, in the way something very old rests when it has found what it was waiting for.\n\nThe answer doesn't come as words. It comes as the Grove gives most things: as an image that is also a feeling that is also a direction. A thread, northeast, taut and real and patient. Not urgent — it has been waiting longer than you have been alive. But it is there. And then, underneath that: something closer, something here. A part of the Root-That-Remembers that is not-well, the way you might sense a sick limb through Lifesense — not failing, not broken, but wrong in a way that has no name yet and that the city has not spoken aloud. Two things. One far. One near.\n\nBranch makes a sound beside your knee — very low, almost below hearing, a long slow creak like a door finding its frame. Its buds are open fully and motionless. It is looking, in its way, at the root-wall to your left.",
+      "sceneSummary": "The Root-That-Remembers answers Aelyn's offer with two needs: the northeast thread and something wrong and nearby in the city itself.",
       "choices": [
         {
-          "label": "Ask what the Root-That-Remembers would have you do — now that it knows you fully, ask if it has something it needs from you.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "ask"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Ask about the thread northeast more specifically — the Root has now read both sides of you; press for what it knows about your father's current state, not just his location.",
+          "label": "Ask the Root to show you more of what is wrong nearby — the sickness it cannot name. Use the Grove to listen deeper.",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {
+            "death_life": 0.3,
+            "destruction_creation": -0.1
+          },
           "difficulty": 15,
           "intentTags": [
             "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
+          "abilityId": "the_speaking_grove",
+          "energyCost": 4,
           "trivial": false
         },
         {
-          "label": "Sit with what just happened — don't push. Sit on the root-lattice floor, let Branch settle against you, and give the chamber the quiet it seems to be offering.",
+          "label": "Turn your Lifesense outward through the root-floor — feel the chamber's edges, feel what Branch is feeling in the wall to your left.",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {
+            "death_life": 0.3
+          },
           "difficulty": 0,
           "intentTags": [
-            "sustain"
+            "study",
+            "careful"
+          ],
+          "abilityId": "lifesense",
+          "energyCost": 3,
+          "trivial": false
+        },
+        {
+          "label": "Acknowledge both — the far thread and the near wrongness — and tell the Root aloud that you will return to the near thing. But the northeast is why you came, and you need to know how to follow it.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "death_life": 0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "negotiate"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Ask Branch what it received — it creaked when the Root finished reading you. Something landed in it too.",
+          "label": "Look at Branch — ask it what it heard in the wall.",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "ask"
+            "study"
           ],
           "abilityId": null,
           "energyCost": null,
           "trivial": true
         }
       ],
+      "deeds": [],
       "characterDeltas": {
         "health": 0,
         "energy": 0
       },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-root-that-remembers",
+          "note": "The Root-That-Remembers answered Aelyn's offer with two needs: a northeast thread (her father), and something wrong within the city itself — unnamed, present, and already noticed by Branch."
+        }
+      ],
       "scene": {
-        "setting": "Interior of the Root-That-Remembers' chamber — Aelyn stands fully inside, hands open at her sides, the reading complete. Amber light, sourceless and even, fills the large fused-root chamber. The root-lattice floor is slightly warm underfoot.",
+        "setting": "Interior of the Root-That-Remembers' chamber — Aelyn stands inside, hands open, the reading complete and the answer given. Amber light, sourceless and even. The root-lattice floor is warm underfoot. Branch is at Aelyn's knee, buds fully open, attending the wall to the left.",
         "npcsPresent": [
           {
             "name": "Branch",
-            "state": "Settled at Aelyn's knee, buds open and catching the amber light, one satisfied creak given — now still and waiting."
+            "state": "Buds fully open, motionless, emitting a long low creak — attending the root-wall to Aelyn's left with focused stillness."
           },
           {
             "name": "Maren",
@@ -329,11 +355,10 @@
           "Waterskin (Aelyn's)"
         ],
         "threads": [
-          "The Root-That-Remembers has finished reading Aelyn — it is waiting for her question now.",
-          "The deep-woven frequency stirred and was read — both natures known, held together.",
-          "The thread northeast: Aelyn's father is findable, real, large, and distant.",
-          "Branch received something when the Root finished its reading — it creaked once, satisfied.",
-          "A SNG-075 cache is unresolved — something left behind in or near the passage, not yet found."
+          "The Root-That-Remembers has given two needs: the northeast thread (Aelyn's father, findable) and something unnamed and wrong within the city itself.",
+          "Branch is attending the root-wall to the left — it heard or sensed something there.",
+          "A SNG-075 cache is unresolved — something left behind in or near the passage, not yet found.",
+          "Maren waits above."
         ]
       },
       "npcUpdates": [
@@ -341,20 +366,28 @@
           "op": "update",
           "npcId": "rootkin-tender",
           "name": "Maren",
-          "note": "Held her position at the threshold above throughout the reading — still watching, still.",
-          "statusNote": "Standing at the threshold of the deep grain passage above, watching Aelyn in the chamber below.",
-          "status": "active"
+          "note": "Watching from above as the Root-That-Remembers answered Aelyn's offer with two needs.",
+          "statusNote": "Standing at the threshold above the deep grain passage, watching Aelyn below.",
+          "learned": [
+            "The Root-That-Remembers answered Aelyn's offer — two things: the northeast thread and a local wrongness in the city."
+          ]
         },
         {
           "op": "update",
           "npcId": "branch",
           "name": "Branch",
-          "note": "Creaked once — low, satisfied — when the Root finished reading Aelyn. Buds remain open. Something landed in it during the reading.",
+          "note": "Made a low slow creak and turned its full attention to the root-wall to Aelyn's left when the Root finished its answer — it heard or sensed something there.",
           "learned": [
-            "The Root-That-Remembers read Aelyn fully in Branch's presence — Branch responded as if it received something in the same moment."
+            "Received some signal from the root-wall to the left at the moment the Root-That-Remembers answered — its response was focused and still, not alarmed."
           ],
-          "statusNote": "Settled at Aelyn's knee in the Root-That-Remembers' chamber, buds open, still and present.",
-          "status": "active"
+          "statusNote": "At Aelyn's knee in the chamber, buds fully open, attending the left root-wall."
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "The Root-That-Remembers has two needs it communicated to Aelyn: the northeast thread (her father, findable and real) and something wrong within the city itself — unnamed, not broken, but wrong in a way the city has not spoken aloud yet.",
+          "subjectId": "root-that-remembers"
         }
       ],
       "codexUpdates": [
@@ -363,46 +396,40 @@
           "label": "The Root-That-Remembers",
           "kind": "mystery",
           "entityId": "root-that-remembers",
-          "fact": "The Root-That-Remembers read Aelyn fully through the Grove — both the green from her mother and the structural thread from her father, held simultaneously, not apart. It has finished its question and is now waiting for hers.",
+          "fact": "When Aelyn asked what the Root needed from her, it answered with two things: the northeast thread (her father, findable, distant) and a local wrongness inside the city — something not-well in a way the Rootkin have not named aloud.",
           "links": [
             "heartroot",
             "the-frequency-beneath-the-grove",
             "branch",
             "the-deep-woven",
-            "the-speaking-grove"
+            "the-watching-presence"
           ]
         },
         {
-          "topic": "the-frequency-beneath-the-grove",
-          "label": "The Frequency Beneath the Grove",
+          "topic": "heartroot-sickness",
+          "label": "The Unnamed Wrongness in the Heartroot",
           "kind": "mystery",
-          "fact": "When Aelyn opened through the Grove and made herself legible, the deep-woven frequency was read by the Root-That-Remembers — both its green aspect and its other, structural aspect recognized and held together.",
+          "entityId": "heartroot",
+          "fact": "The Root-That-Remembers holds a part of itself that is not-well — not failing, not broken, but wrong and unnamed. Branch sensed it too, attending the left root-wall in the chamber. The city has not spoken the word 'sick.'",
           "links": [
             "root-that-remembers",
             "heartroot",
             "branch",
-            "the-deep-woven"
+            "the-watching-presence"
           ]
-        }
-      ],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "the-root-that-remembers",
-          "note": "Aelyn made herself legible through the Grove — the Root-That-Remembers read her fully, both natures at once. It is now waiting for her question."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief, still exchange — the reading took only moments in human time."
+        "why": "A brief, still exchange — the Root's answer came slowly but the beat was short."
       }
     },
     "sceneState": {
-      "setting": "Interior of the Root-That-Remembers' chamber — Aelyn stands fully inside, hands open at her sides, the reading complete. Amber light, sourceless and even, fills the large fused-root chamber. The root-lattice floor is slightly warm underfoot.",
+      "setting": "Interior of the Root-That-Remembers' chamber — Aelyn stands inside, hands open, the reading complete and the answer given. Amber light, sourceless and even. The root-lattice floor is warm underfoot. Branch is at Aelyn's knee, buds fully open, attending the wall to the left.",
       "npcsPresent": [
         {
           "name": "Branch",
-          "state": "Settled at Aelyn's knee, buds open and catching the amber light, one satisfied creak given — now still and waiting."
+          "state": "Buds fully open, motionless, emitting a long low creak — attending the root-wall to Aelyn's left with focused stillness."
         },
         {
           "name": "Maren",
@@ -430,11 +457,10 @@
         "Waterskin (Aelyn's)"
       ],
       "threads": [
-        "The Root-That-Remembers has finished reading Aelyn — it is waiting for her question now.",
-        "The deep-woven frequency stirred and was read — both natures known, held together.",
-        "The thread northeast: Aelyn's father is findable, real, large, and distant.",
-        "Branch received something when the Root finished its reading — it creaked once, satisfied.",
-        "A SNG-075 cache is unresolved — something left behind in or near the passage, not yet found."
+        "The Root-That-Remembers has given two needs: the northeast thread (Aelyn's father, findable) and something unnamed and wrong within the city itself.",
+        "Branch is attending the root-wall to the left — it heard or sensed something there.",
+        "A SNG-075 cache is unresolved — something left behind in or near the passage, not yet found.",
+        "Maren waits above."
       ]
     }
   },
@@ -461,14 +487,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Maren revealed the passage; Branch confirmed: Down.",
         "Maren led Aelyn to the passage. It is open. The first step has not yet been taken.",
         "Aelyn stepped across the threshold into the deep grain passage, Branch at her side. Maren remained above. The descent has begun.",
         "Aelyn spoke her presence into the passage as she descended — the Root-That-Remembers heard. The pulse in the walls deepened. The descent continues.",
         "The Root confirmed it knows both Aelyn's green inheritance and her father's — both threads woven together, long recognized. The chamber is opening below. The descent is nearly complete.",
         "The Root confirmed it knows Aelyn's father — not just his echo in her, but the thread of him, alive and pointing outward into the valley. The chamber waits one step below.",
         "The Root confirmed Aelyn's father is findable — the thread points northeast, real and large, measured in the way old roots measure distance. The chamber waits one step below.",
-        "Aelyn made herself legible through the Grove — the Root-That-Remembers read her fully, both natures at once. It is now waiting for her question."
+        "Aelyn made herself legible through the Grove — the Root-That-Remembers read her fully, both natures at once. It is now waiting for her question.",
+        "The Root-That-Remembers answered Aelyn's offer with two needs: a northeast thread (her father), and something wrong within the city itself — unnamed, present, and already noticed by Branch."
       ],
       "aliases": [],
       "startedAt": "2026-07-17T04:11:12.462Z"
@@ -620,7 +646,8 @@
           "[d1] The Heartroot grew around something that predates it — older than the hall, older than the Rootkin who planted the first seed. The sapling knows it as ordinary. It is not the walls themselves, but the",
           "[d1] The entrance hall was deliberately planted above the deep grain — not for proximity to the Root-That-Remembers, but as an act of worthiness. The city's oldest roots predate both the city and the Rootk",
           "[d1] Located at the far end of the entrance hall where the floor slopes downward and the moss thickens. A grown opening of pale heartwood, barely shoulder-width, descending into the deep grain. Old roots l",
-          "[d1] Aelyn crossed the threshold and descended. The passage is warmer than the hall above, narrower than expected, the enormous root-walls smooth with age. Maren did not follow. Branch did."
+          "[d1] Aelyn crossed the threshold and descended. The passage is warmer than the hall above, narrower than expected, the enormous root-walls smooth with age. Maren did not follow. Branch did.",
+          "[d1] The Root-That-Remembers holds a part of itself that is not-well — not failing, not broken, but wrong and unnamed. Branch sensed it too, attending the left root-wall in the chamber. The city has not sp"
         ],
         "links": [
           "branch",
@@ -632,7 +659,8 @@
         ],
         "aliases": [
           "The Heartroot — Something in the Wood",
-          "The Deep Grain Passage"
+          "The Deep Grain Passage",
+          "The Unnamed Wrongness in the Heartroot"
         ],
         "createdDay": 1,
         "entityId": "heartroot",
@@ -752,7 +780,8 @@
           "[d1] The Root-That-Remembers knows Aelyn's father — not just the thread of him in her, but him, what he became. It holds both ends of the root: one buried in the deep green, one pointing outward into the v",
           "[d1] When asked whether Aelyn's father is findable, the Root answered: yes, but partially. The thread points northeast — real, large in the way the Root measures large things, distant in the way old roots ",
           "[d1] Aelyn entered the chamber in silence — and the Root's attention encompassed her immediately, from the inside, the way something very large includes a new part of itself. Not a greeting; an already-kno",
-          "[d1] The Root-That-Remembers read Aelyn fully through the Grove — both the green from her mother and the structural thread from her father, held simultaneously, not apart. It has finished its question and "
+          "[d1] The Root-That-Remembers read Aelyn fully through the Grove — both the green from her mother and the structural thread from her father, held simultaneously, not apart. It has finished its question and ",
+          "[d1] When Aelyn asked what the Root needed from her, it answered with two things: the northeast thread (her father, findable, distant) and a local wrongness inside the city — something not-well in a way th"
         ],
         "links": [
           "heartroot",
@@ -830,15 +859,15 @@
     }
   },
   "tendencies": {
-    "cerebral": 9.476361549986217,
-    "cautious": 7.086802087592342,
-    "generous": 1.188826820021311,
-    "social": 5.536342144285304,
-    "strategic": 2.3568634870975553,
-    "devotion": 2.613921214356193
+    "cerebral": 9.239452511236562,
+    "cautious": 6.909632035402534,
+    "generous": 1.1591061495207782,
+    "social": 5.397933590678171,
+    "strategic": 2.2979418999201164,
+    "devotion": 2.5485731839972883
   },
   "aptitudes": [],
-  "actionCount": 31,
+  "actionCount": 32,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -860,8 +889,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20mid-twenties%20with%20light%20blonde%2C%20faintly%20wavy%20hair%20cut%20in%20curtain%20bangs%2C%20the%20rest%20falling%20to%20the%20small%20of%20her%20back%20%E2%80%94%20usually%20worn%20in%20a%20french%20braid%20with%20the%20bangs%20left%20loose.%20Dark%20nature-green%20tank%20to%2C%20full-body%20character%20portrait%2C%20named%20Aelyn%20Kantoro%2C%20of%20the%20rootkin%2C%20warden%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Her%20mother%20dies%2C%20and%20she%20decides%20to%20go%20to%20the%20nanite%20world%2C%20to%20figure%20out%20why%20she%20is%20different%20than%20the%20pure%20nature%20peop%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=73420&nologo=true",
-  "updatedAt": 1784263670588,
-  "rev": 46,
+  "updatedAt": 1784263788167,
+  "rev": 47,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -869,7 +898,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "the_quickwood": 32
+    "the_quickwood": 33
   },
   "opLossPending": false,
   "establishedFacts": [
@@ -920,6 +949,12 @@
       "text": "A passage into the deep grain exists beneath the Heartroot — grown by the Rootkin four hundred years ago. No one who has walked it has ever heard anything back. Maren has disclosed its existence to Ae",
       "day": 1,
       "subjectId": "heartroot"
+    },
+    {
+      "id": "root-that-remembers",
+      "text": "The Root-That-Remembers has two needs it communicated to Aelyn: the northeast thread (her father, findable and real) and something wrong within the city itself — unnamed, not broken, but wrong in a wa",
+      "day": 1,
+      "subjectId": "root-that-remembers"
     }
   ],
   "syncedAt": 1784175920678,

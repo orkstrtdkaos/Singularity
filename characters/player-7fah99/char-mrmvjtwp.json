@@ -8,7 +8,7 @@
   "whyHere": "You were sent, or you were seeded, or you simply wanted to see something finish inside a single lifetime.",
   "background": "warden",
   "level": 1,
-  "xp": 28,
+  "xp": 33,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -36,12 +36,14 @@
       "native": true
     }
   ],
-  "alignment": {},
+  "alignment": {
+    "death_life": 0.034999999999999996
+  },
   "attunement": 1,
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 60,
+  "energy": 54,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -144,112 +146,98 @@
         "player": "Tell Maren what the sapling gave you — the direction inward, below — and ask whether that matches where the deep grain actually runs.",
         "summary": "Aelyn shared the sapling's direction with Maren; the deep grain runs exactly where the sapling pointed — below the entrance hall, from before the Rootkin were.",
         "narration": "You decide the direction is no longer yours alone to carry. 'The sapling told me something,' you say. 'When I asked where the presence was centered — it gave me a direction. Inward. Below. Down through the root-floor into the oldest grain.' You watch Maren's face as you say it.\n\nShe doesn't look surprised. She looks, if anything, like someone who has just confirmed the spelling of a word she already knew how to say. 'Yes,' she says simply. 'That is where they go.' A pause — not hesitation, just her rhythm. 'The deep grain runs beneath the whole entrance hall. It is why we planted the first hall here, above this spot. Not to be near it. To be worthy of it.' Her gaze moves briefly to the floor, the way you'd glance at something load-bearing. 'It runs down further than we have ever fully mapped. Old roots, from before this city was a thought in anyone's mind. From before us.'\n\nBranch makes a small sound — a single, slow creak, like a floorboard settling in winter. One bud tips toward the floor. Just that.\n\nMaren looks at you steadily. 'The sapling gave you the direction,' she says, and there is nothing accusatory in it — only weight. 'Which means it trusted you with something it could have kept. And the Root-That-Remembers attended while it did.' The two distant Rootkin at the far end of the hall have not moved, but you feel the quality of their stillness change — more listening, less waiting. Maren's voice stays level. 'Tell me, Aelyn Kantoro — what do you want to do with that?'"
+      },
+      {
+        "player": "Use Lifesense again — but this time reach not just toward the presence, but alongside it. Feel whether the Root-That-Remembers is still attending in the same way, or whether the sapling's disclosure changed something in its orientation.",
+        "summary": "Lifesense finds the Root-That-Remembers has narrowed its attention from the room to Aelyn specifically.",
+        "narration": "You press both palms flat against the moss this time, not just fingertips. The Lifesense opens differently than it did before — less like casting a line down and more like leaning against something that is already leaning back.\n\nThe Root-That-Remembers is still there. But the attending has shifted. Before, it felt like warmth diffusing toward a sound — curious, oriented, general. Now it has a quality you don't have a clean word for: the way a person stops scanning a room because they have found the face they were looking for. The warmth below hasn't intensified. It has narrowed. It is not listening to the conversation anymore. It is listening to you.\n\nBranch makes a small sound — a dry creak, like a door that has been left in the sun. One bud tilts upward.\n\nYou surface from the sense slowly, the moss cold under your palms where the morning hasn't reached yet. Maren has not moved. She is watching you the way she watches everything — as though she has all the time the city has, and she does."
       }
     ],
     "lastTurn": {
-      "narration": "You decide the direction is no longer yours alone to carry. 'The sapling told me something,' you say. 'When I asked where the presence was centered — it gave me a direction. Inward. Below. Down through the root-floor into the oldest grain.' You watch Maren's face as you say it.\n\nShe doesn't look surprised. She looks, if anything, like someone who has just confirmed the spelling of a word she already knew how to say. 'Yes,' she says simply. 'That is where they go.' A pause — not hesitation, just her rhythm. 'The deep grain runs beneath the whole entrance hall. It is why we planted the first hall here, above this spot. Not to be near it. To be worthy of it.' Her gaze moves briefly to the floor, the way you'd glance at something load-bearing. 'It runs down further than we have ever fully mapped. Old roots, from before this city was a thought in anyone's mind. From before us.'\n\nBranch makes a small sound — a single, slow creak, like a floorboard settling in winter. One bud tips toward the floor. Just that.\n\nMaren looks at you steadily. 'The sapling gave you the direction,' she says, and there is nothing accusatory in it — only weight. 'Which means it trusted you with something it could have kept. And the Root-That-Remembers attended while it did.' The two distant Rootkin at the far end of the hall have not moved, but you feel the quality of their stillness change — more listening, less waiting. Maren's voice stays level. 'Tell me, Aelyn Kantoro — what do you want to do with that?'",
-      "sceneSummary": "Aelyn shared the sapling's direction with Maren; the deep grain runs exactly where the sapling pointed — below the entrance hall, from before the Rootkin were.",
+      "narration": "You press both palms flat against the moss this time, not just fingertips. The Lifesense opens differently than it did before — less like casting a line down and more like leaning against something that is already leaning back.\n\nThe Root-That-Remembers is still there. But the attending has shifted. Before, it felt like warmth diffusing toward a sound — curious, oriented, general. Now it has a quality you don't have a clean word for: the way a person stops scanning a room because they have found the face they were looking for. The warmth below hasn't intensified. It has narrowed. It is not listening to the conversation anymore. It is listening to you.\n\nBranch makes a small sound — a dry creak, like a door that has been left in the sun. One bud tilts upward.\n\nYou surface from the sense slowly, the moss cold under your palms where the morning hasn't reached yet. Maren has not moved. She is watching you the way she watches everything — as though she has all the time the city has, and she does.",
+      "sceneSummary": "Lifesense finds the Root-That-Remembers has narrowed its attention from the room to Aelyn specifically.",
       "choices": [
         {
-          "label": "Answer honestly: you don't know yet. Ask Maren what she thinks the Root-That-Remembers wants from you — or whether want is even the right word for something that old.",
+          "label": "Tell Maren plainly: it shifted. It's not attending the conversation anymore — it's attending me. And ask what that has meant before, for the old ones who went down.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
-          "trivial": true,
           "intentTags": [
-            "negotiate"
+            "persuade"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "axes": {}
+          "trivial": true
         },
         {
-          "label": "Ask Maren to take you to the deep grain — not to disturb it, just to be closer. If it's already attending, going toward it seems more honest than staying here and letting it listen through a floor.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 15,
-          "trivial": false,
-          "intentTags": [
-            "lead",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "axes": {
-            "death_life": 0.6,
-            "destruction_creation": 0.3
-          }
-        },
-        {
-          "label": "Use Lifesense again — but this time reach not just toward the presence, but alongside it. Feel whether the Root-That-Remembers is still attending in the same way, or whether the sapling's disclosure changed something in its orientation.",
+          "label": "Say nothing to Maren yet — reach instead through the Grove and ask the sapling directly whether it has ever felt the Root-That-Remembers focus this narrowly on a single person.",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 15,
-          "trivial": false,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "the_speaking_grove",
+          "energyCost": 4,
+          "trivial": false
+        },
+        {
+          "label": "Ask Maren the question you haven't asked yet: what happened to the old ones who went down to listen. Did they come back the same?",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Stay quiet and turn your attention inward — not to the Root-That-Remembers, but to yourself. The narrowing of its focus raises a question: what does it recognize in you that it is listening for?",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
           "intentTags": [
             "study",
             "careful"
           ],
-          "abilityId": "lifesense",
-          "energyCost": 3,
-          "axes": {
-            "death_life": 0.7
-          }
-        },
-        {
-          "label": "Ask what the old Rootkin found when they went down to listen — not what it costs, but what they came back with. What the deep grain actually told them.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 0,
-          "trivial": true,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "axes": {}
+          "trivial": false
         }
       ],
-      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0
+        "energy": -3
       },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "Interior of the living-wood entrance hall — thirty-foot arched ceiling of breathing bark, moss underfoot, oval light-gaps advancing with the morning. Aelyn crouched near the planter's edge, two fingers pressed into the moss. Maren stands one step away, having just confirmed the deep grain runs exactly where the sapling pointed.",
+        "setting": "Interior of the living-wood entrance hall — thirty-foot arched ceiling of breathing bark, moss underfoot, oval light-gaps advancing with the morning. Aelyn kneels at the planter's edge, both palms pressed flat into the moss. Maren stands one step away, watching steadily.",
         "npcsPresent": [
           {
             "name": "Maren",
-            "state": "Watching Aelyn steadily, having asked plainly what Aelyn intends to do with what she knows."
+            "state": "Standing one step away, watching Aelyn surface from Lifesense — still waiting, unhurried."
           },
           {
             "name": "Branch",
-            "state": "One bud tipped toward the floor, quiet and still after its small creak."
+            "state": "One bud tilting slowly upward after a small creak — alert but still."
           },
           {
             "name": "Sapling-child",
-            "state": "In the planter, branch raised, listening."
+            "state": "Branch raised in the planter, listening."
           },
           {
             "name": "Two other Rootkin",
-            "state": "At the far end of the hall — stillness deepened, listening harder now."
+            "state": "At the far end of the hall, stillness deepened — listening harder now."
           }
         ],
         "objects": [
           "Large root-planter holding the sapling-child",
           "Traveler's Pack (Aelyn's, worn canvas)",
           "Waterskin (Aelyn's)",
-          "Patches of old moss across the floor",
+          "Patches of old moss across the floor — both palms pressed into it",
           "Oval light-gaps in the bark ceiling, morning light advancing"
         ],
         "threads": [
-          "Maren's direct question: what do you want to do with what you know?",
-          "The deep grain confirmed — old roots predating the Rootkin, running deeper than anyone has mapped.",
+          "The Root-That-Remembers has narrowed its attention from the room to Aelyn specifically — what that means is unspoken.",
+          "Maren's original question — what Aelyn intends to do with what she knows — still hangs unanswered.",
+          "What happened to the old ones who went down to listen is still unasked.",
           "The two distant Rootkin are listening closely now.",
-          "What the old Rootkin found when they went down, and what it cost them, is still unasked.",
-          "Whether the Root-That-Remembers' attention has shifted since the sapling's direction was spoken aloud."
+          "Whether the sapling has felt this kind of focused attention before is unknown."
         ]
       },
       "npcUpdates": [
@@ -257,15 +245,11 @@
           "op": "update",
           "npcId": "rootkin-tender",
           "name": "Maren",
-          "note": "Confirmed the deep grain runs exactly where the sapling pointed — beneath the entrance hall, below the oldest roots, predating the Rootkin entirely. Asked Aelyn plainly what she intends to do with what she knows.",
+          "note": "Watched Aelyn press both palms into the moss and use Lifesense a second time — has not moved, is waiting for what she surfaces with.",
           "learned": [
-            "The deep grain runs beneath the entrance hall — why the first hall was planted here, not to be near it but to be worthy of it",
-            "The roots run deeper than the Rootkin have fully mapped — from before the city, possibly before the Rootkin themselves",
-            "Aelyn shared the sapling's direction willingly and honestly"
+            "The Root-That-Remembers has narrowed from attending the room to attending Aelyn specifically — Maren does not yet know this."
           ],
-          "relationshipDelta": 1,
-          "status": "active",
-          "statusNote": "Standing in the entrance hall with Aelyn, waiting for her answer about what she intends."
+          "statusNote": "Standing one step from Aelyn in the entrance hall, watching her surface from a second Lifesense — waiting with full attention."
         }
       ],
       "codexUpdates": [
@@ -273,72 +257,54 @@
           "topic": "root-that-remembers",
           "label": "The Root-That-Remembers",
           "kind": "mystery",
-          "fact": "The deep grain runs directly below the entrance hall — the Rootkin planted the first hall above this spot not to be near it, but to be worthy of it. The roots run deeper than the Rootkin have ever fully mapped, predating the city and possibly the Rootkin themselves.",
+          "fact": "After the sapling's direction was spoken aloud, the Root-That-Remembers shifted its attention — no longer the whole room, but Aelyn specifically. It recognized something in her, and is now listening for it.",
           "links": [
             "heartroot",
             "sapling-child-heartroot",
-            "the-watching-presence",
-            "rootkin-tender"
-          ]
-        },
-        {
-          "topic": "heartroot",
-          "label": "The Heartroot",
-          "kind": "place",
-          "entityId": "heartroot",
-          "fact": "The entrance hall was deliberately planted above the deep grain — not for proximity to the Root-That-Remembers, but as an act of worthiness. The city's oldest roots predate both the city and the Rootkin who built it.",
-          "links": [
-            "root-that-remembers",
+            "branch",
             "rootkin-tender",
-            "sapling-child-heartroot"
+            "the-watching-presence"
           ]
-        }
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "The deep grain beneath the entrance hall predates the Rootkin and the city itself — its roots run deeper than anyone has mapped. The Rootkin planted the first hall above it not to be near it but to be worthy of it.",
-          "subjectId": "heartroot"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange — the sharing of the sapling's direction and Maren's confirmation."
+        "why": "A brief, still moment of sensing — barely a quarter hour has passed."
       }
     },
     "sceneState": {
-      "setting": "Interior of the living-wood entrance hall — thirty-foot arched ceiling of breathing bark, moss underfoot, oval light-gaps advancing with the morning. Aelyn crouched near the planter's edge, two fingers pressed into the moss. Maren stands one step away, having just confirmed the deep grain runs exactly where the sapling pointed.",
+      "setting": "Interior of the living-wood entrance hall — thirty-foot arched ceiling of breathing bark, moss underfoot, oval light-gaps advancing with the morning. Aelyn kneels at the planter's edge, both palms pressed flat into the moss. Maren stands one step away, watching steadily.",
       "npcsPresent": [
         {
           "name": "Maren",
-          "state": "Watching Aelyn steadily, having asked plainly what Aelyn intends to do with what she knows."
+          "state": "Standing one step away, watching Aelyn surface from Lifesense — still waiting, unhurried."
         },
         {
           "name": "Branch",
-          "state": "One bud tipped toward the floor, quiet and still after its small creak."
+          "state": "One bud tilting slowly upward after a small creak — alert but still."
         },
         {
           "name": "Sapling-child",
-          "state": "In the planter, branch raised, listening."
+          "state": "Branch raised in the planter, listening."
         },
         {
           "name": "Two other Rootkin",
-          "state": "At the far end of the hall — stillness deepened, listening harder now."
+          "state": "At the far end of the hall, stillness deepened — listening harder now."
         }
       ],
       "objects": [
         "Large root-planter holding the sapling-child",
         "Traveler's Pack (Aelyn's, worn canvas)",
         "Waterskin (Aelyn's)",
-        "Patches of old moss across the floor",
+        "Patches of old moss across the floor — both palms pressed into it",
         "Oval light-gaps in the bark ceiling, morning light advancing"
       ],
       "threads": [
-        "Maren's direct question: what do you want to do with what you know?",
-        "The deep grain confirmed — old roots predating the Rootkin, running deeper than anyone has mapped.",
+        "The Root-That-Remembers has narrowed its attention from the room to Aelyn specifically — what that means is unspoken.",
+        "Maren's original question — what Aelyn intends to do with what she knows — still hangs unanswered.",
+        "What happened to the old ones who went down to listen is still unasked.",
         "The two distant Rootkin are listening closely now.",
-        "What the old Rootkin found when they went down, and what it cost them, is still unasked.",
-        "Whether the Root-That-Remembers' attention has shifted since the sapling's direction was spoken aloud."
+        "Whether the sapling has felt this kind of focused attention before is unknown."
       ]
     }
   },
@@ -598,7 +564,8 @@
           "[d1] Lifesense reached it through the root-floor: distributed warmth, slow as stone-held heat, with a quality of oriented attention — not sleep, not speech, but awareness. It registered this conversation t",
           "[d1] Maren confirmed: the Root-That-Remembers has not made itself known to a visitor in a long time — not to anyone who came through the entrance. Its attention toward this conversation is unusual.",
           "[d1] The Rootkin grow the city around it deliberately — like a city around a well. They tend the distance. Older Rootkin walk the deep grain to listen; no one, in Maren's memory, has gone down to be heard ",
-          "[d1] The deep grain runs directly below the entrance hall — the Rootkin planted the first hall above this spot not to be near it, but to be worthy of it. The roots run deeper than the Rootkin have ever ful"
+          "[d1] The deep grain runs directly below the entrance hall — the Rootkin planted the first hall above this spot not to be near it, but to be worthy of it. The roots run deeper than the Rootkin have ever ful",
+          "[d1] After the sapling's direction was spoken aloud, the Root-That-Remembers shifted its attention — no longer the whole room, but Aelyn specifically. It recognized something in her, and is now listening f"
         ],
         "links": [
           "heartroot",
@@ -613,13 +580,13 @@
     }
   },
   "tendencies": {
-    "cerebral": 5.88021432282948,
-    "cautious": 3.519170611451651,
-    "generous": 0.7962355085707052,
-    "social": 2.8340683010253906
+    "cerebral": 6.7332089647587425,
+    "cautious": 4.43119134616536,
+    "generous": 0.7763296208564376,
+    "social": 2.763216593499756
   },
   "aptitudes": [],
-  "actionCount": 13,
+  "actionCount": 14,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -641,8 +608,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20mid-twenties%20with%20light%20blonde%2C%20faintly%20wavy%20hair%20cut%20in%20curtain%20bangs%2C%20the%20rest%20falling%20to%20the%20small%20of%20her%20back%20%E2%80%94%20usually%20worn%20in%20a%20french%20braid%20with%20the%20bangs%20left%20loose.%20Dark%20nature-green%20tank%20to%2C%20full-body%20character%20portrait%2C%20named%20Aelyn%20Kantoro%2C%20of%20the%20rootkin%2C%20warden%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Her%20mother%20dies%2C%20and%20she%20decides%20to%20go%20to%20the%20nanite%20world%2C%20to%20figure%20out%20why%20she%20is%20different%20than%20the%20pure%20nature%20peop%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=73420&nologo=true",
-  "updatedAt": 1784259425621,
-  "rev": 28,
+  "updatedAt": 1784259535789,
+  "rev": 29,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -650,7 +617,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "the_quickwood": 14
+    "the_quickwood": 15
   },
   "opLossPending": false,
   "establishedFacts": [
@@ -685,7 +652,7 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "lifesense": 2,
+      "lifesense": 3,
       "the_speaking_grove": 3
     },
     "coActivations": {},

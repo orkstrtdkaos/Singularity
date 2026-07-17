@@ -278,14 +278,19 @@
         "player": "Use Read the Fight before you open the door — read whatever is in that room before you walk into it",
         "summary": "Saehara reads the third-terrace room through sound before entering — a body at sustained work, not collapse.",
         "narration": "You don't open the door yet. You stop a half-step back, let your breathing slow, and read.\n\nThe dragging sound resolves: fabric on stone, regular as a tide. Your mind assembles the room behind the door from what the sound gives you — one person, seated or prone, moving something with their arm. Not locomotion. Not distress. Repetition. A chalk arm sweeping a notation surface, or a hand pulling and resetting the same object, or someone turning pages with extreme deliberateness. The interval is constant, roughly four seconds, which means the body doing it isn't deteriorating in the way collapse looks — this is sustained, controlled effort, just very slow. Not a body failing. A body that has subordinated itself so completely to a single task that its economy has become inhuman.\n\nKon hasn't moved. Still a half-step back, one forepaw lifted, heat coming off the coat in a low steady pulse. Not alarm — Kon reads alarm differently, flare and stillness together. This is more like watchfulness. The fox is waiting for you to decide whether this place pulls you in.\n\nOssian stands behind your shoulder, very still. You can feel them listening.\n\nYou've read what you can from here. Whatever is in that room is not a fight and not an emergency, but it is not nothing. The door waits, half-open, the dragging sound coming through it patient and indifferent as a clock."
+      },
+      {
+        "player": "Push the door open slowly and enter — let whoever is inside register your presence before you speak",
+        "summary": "Saehara enters the third terrace and finds the lost Cogitant alive at the center of the room — seated, chalk-covered, arm moving in ceaseless repetition across a board.",
+        "narration": "You press two fingers to the door and push. The hinges give without sound — whoever maintains this tower oils what matters — and the third terrace opens in front of you.\n\nThe room is long and low-ceilinged, a single window at the far end letting in the last of the evening's grey-orange light. Every surface is covered in chalk. Not the careful notation of the entrance hall, not Araveth's watershed arcs — this is something denser, more compressed, lines running over lines where the available stone has run out and the work continued anyway. A pallet in the corner has been untouched long enough to gather chalk-dust. A cup stands beside it, empty and dry.\n\nThe Cogitant is in the center of the room. She is seated on the bare floor, legs folded under her, back to the door. Her robe is grey with chalk from hem to shoulder. Her right arm moves: reaches forward to the low board she has dragged to arm's length in front of her, makes a mark, resets. Reaches, marks, resets. The four-second interval. She has been doing this so long the floor around her has a faint groove in the chalk-dust where her arm travels. She does not turn. She does not pause.\n\nKon stops just inside the threshold, one forepaw raised, coat a steady quiet warmth — not the hot alarm of a Precursor site, not the sharp heat of something wrong. Something between attention and recognition, as though the room is familiar to the fox in a way it shouldn't be. Ossian halts behind your shoulder, says nothing. The dragging sound continues, exactly as it has for four days, possibly longer."
       }
     ],
     "lastTurn": {
-      "narration": "You don't open the door yet. You stop a half-step back, let your breathing slow, and read.\n\nThe dragging sound resolves: fabric on stone, regular as a tide. Your mind assembles the room behind the door from what the sound gives you — one person, seated or prone, moving something with their arm. Not locomotion. Not distress. Repetition. A chalk arm sweeping a notation surface, or a hand pulling and resetting the same object, or someone turning pages with extreme deliberateness. The interval is constant, roughly four seconds, which means the body doing it isn't deteriorating in the way collapse looks — this is sustained, controlled effort, just very slow. Not a body failing. A body that has subordinated itself so completely to a single task that its economy has become inhuman.\n\nKon hasn't moved. Still a half-step back, one forepaw lifted, heat coming off the coat in a low steady pulse. Not alarm — Kon reads alarm differently, flare and stillness together. This is more like watchfulness. The fox is waiting for you to decide whether this place pulls you in.\n\nOssian stands behind your shoulder, very still. You can feel them listening.\n\nYou've read what you can from here. Whatever is in that room is not a fight and not an emergency, but it is not nothing. The door waits, half-open, the dragging sound coming through it patient and indifferent as a clock.",
-      "sceneSummary": "Saehara reads the third-terrace room through sound before entering — a body at sustained work, not collapse.",
+      "narration": "You press two fingers to the door and push. The hinges give without sound — whoever maintains this tower oils what matters — and the third terrace opens in front of you.\n\nThe room is long and low-ceilinged, a single window at the far end letting in the last of the evening's grey-orange light. Every surface is covered in chalk. Not the careful notation of the entrance hall, not Araveth's watershed arcs — this is something denser, more compressed, lines running over lines where the available stone has run out and the work continued anyway. A pallet in the corner has been untouched long enough to gather chalk-dust. A cup stands beside it, empty and dry.\n\nThe Cogitant is in the center of the room. She is seated on the bare floor, legs folded under her, back to the door. Her robe is grey with chalk from hem to shoulder. Her right arm moves: reaches forward to the low board she has dragged to arm's length in front of her, makes a mark, resets. Reaches, marks, resets. The four-second interval. She has been doing this so long the floor around her has a faint groove in the chalk-dust where her arm travels. She does not turn. She does not pause.\n\nKon stops just inside the threshold, one forepaw raised, coat a steady quiet warmth — not the hot alarm of a Precursor site, not the sharp heat of something wrong. Something between attention and recognition, as though the room is familiar to the fox in a way it shouldn't be. Ossian halts behind your shoulder, says nothing. The dragging sound continues, exactly as it has for four days, possibly longer.",
+      "sceneSummary": "Saehara enters the third terrace and finds the lost Cogitant alive at the center of the room — seated, chalk-covered, arm moving in ceaseless repetition across a board.",
       "choices": [
         {
-          "label": "Push the door open slowly and enter — let whoever is inside register your presence before you speak",
+          "label": "Step into her line of sight — place yourself where she could see you if her eyes were tracking",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {},
@@ -298,21 +303,7 @@
           "trivial": true
         },
         {
-          "label": "Speak through the gap first — state your name and ask if you may enter",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "careful",
-            "persuade"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Tell Ossian what you read and ask what they know about who is on this terrace — they named this room, they must have a candidate",
+          "label": "Read what she's marking on the board — get close enough to see the notation before you speak",
           "attribute": "mental",
           "subAttribute": "reason",
           "axes": {},
@@ -325,13 +316,28 @@
           "trivial": true
         },
         {
-          "label": "Let Kon decide — step back, gesture toward the door, and see whether the fox leads or holds",
+          "label": "Use Order-Sense on the room itself — read the structure of what she's been building across every surface",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {
+            "concrete_abstract": 0.3
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": false
+        },
+        {
+          "label": "Speak quietly — say your name, say you're from below, give her something to anchor to without demanding she surface",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "scout",
+            "calm",
             "careful"
           ],
           "abilityId": null,
@@ -339,103 +345,133 @@
           "trivial": true
         }
       ],
-      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -3
+        "energy": 0
       },
-      "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "third-terrace-collapse",
-          "note": "Read the Fight confirms: not violence, not acute collapse — a body at sustained, controlled, inhuman repetition. The Cogitant is alive and working."
-        }
-      ],
       "scene": {
-        "setting": "Third-terrace landing of the Cogitarium — pale stone, chalk-cold air thicker and staler than the floors below, evening light a dim grey-orange through a half-seen window. The third-terrace door stands half-open before them.",
+        "setting": "Third terrace of the Cogitarium — long, low-ceilinged stone room, every surface covered in chalk notation dense enough to run over itself. A single window at the far end admits the last grey-orange evening light. A pallet in the corner is chalk-dusty and unused. The door stands open behind Saehara.",
         "npcsPresent": [
           {
+            "name": "Third-Terrace Cogitant",
+            "state": "Seated on the bare floor at center room, back to the door, chalk-grey robe from hem to shoulder — right arm moving in steady four-second repetition: reach, mark, reset. Has not turned or paused."
+          },
+          {
             "name": "Ossian",
-            "state": "Standing a half-step behind Saehara's shoulder, very still, listening."
+            "state": "Standing just behind Saehara's shoulder in the doorway — silent, watching."
           },
           {
             "name": "Kon",
-            "state": "One forepaw lifted, coat radiating a low steady warmth — watchful, not alarmed. Waiting on Saehara."
+            "state": "Just inside the threshold, one forepaw raised, coat a steady quiet warmth — attention fixed on the room, not alarmed."
           }
         ],
         "objects": [
-          "Half-open door — third terrace, dragging sound continuing within at a four-second interval",
-          "Traveler's Pack — on Saehara's shoulders",
+          "Low chalk board — dragged to arm's length before the Cogitant, surface covered in notation",
+          "Chalk-groove in the floor dust — where her arm has traveled, over and over",
+          "Dry empty cup beside the unused pallet",
+          "Traveler's Pack on Saehara's shoulders",
           "Waterskin — secured",
-          "Katana at Saehara's waist",
-          "Second-terrace notation — walls, table, and boards covered in chalk work, visible below"
+          "Katana at Saehara's waist"
         ],
         "threads": [
-          "Dragging sound — read as sustained controlled repetition, four-second interval, not distress — a body subordinated entirely to a task",
-          "Kon holding at the door: low warmth, watchful, not alarmed — waiting for Saehara's lead",
-          "Ossian listening behind Saehara's shoulder — hasn't named who is on this terrace",
-          "Third-terrace Cogitant: four days unseen, nature of task still unknown"
+          "Third-terrace Cogitant: alive, seated, working — has not registered the entry; nature and content of her notation unknown",
+          "Kon's warmth: steady and attentive, not alarm — the room reads as familiar to the fox in some way",
+          "Ossian has still not named who this Cogitant is",
+          "The notation covers every surface — what she has been building for four days is visible but unread"
         ]
       },
       "npcUpdates": [
         {
+          "op": "meet",
+          "npcId": "third-terrace-cogitant",
+          "name": "Third-Terrace Cogitant",
+          "role": "Cogitant — the one missing from the third terrace for four days",
+          "description": "Seated on the bare floor at the center of a chalk-covered room, robe grey from hem to shoulder, arm moving in ceaseless four-second repetition across a low board — alive, working, unreachable.",
+          "note": "Saehara entered the room. The Cogitant did not turn or pause.",
+          "learned": [
+            "Alive and physically functional — sustained repetition, not collapse",
+            "Has been working long enough that the floor-dust shows a groove where her arm travels",
+            "The pallet in the corner is chalk-dusty and unused — she has not slept",
+            "The cup beside the pallet is empty and dry — she has not drunk"
+          ],
+          "status": "active",
+          "statusNote": "Seated on the third-terrace floor of the Cogitarium — alive, working in ceaseless repetition, no external awareness registered."
+        },
+        {
           "op": "update",
           "npcId": "ossian",
           "name": "Ossian",
-          "note": "Held silent on the landing while Saehara read the room — listening, not leading.",
-          "statusNote": "On the third-terrace landing beside Saehara — standing still, listening, has not named who is inside.",
-          "relationshipDelta": 0
+          "note": "Followed Saehara into the doorway — standing behind the shoulder, silent. Has not named the Cogitant.",
+          "status": "active",
+          "statusNote": "On the third-terrace threshold behind Saehara — watching, silent, not leading."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "third-terrace-collapse",
-          "label": "The Third Terrace",
-          "kind": "mystery",
-          "fact": "Read the Fight resolved the dragging sound: one person, sustained and controlled, four-second repetition. Not collapse or distress — a body at inhuman sustained work, likely a Cogitant who has subordinated all physical economy to a single task.",
+          "topic": "third-terrace-cogitant",
+          "label": "Third-Terrace Cogitant",
+          "kind": "person",
+          "entityId": "third-terrace-cogitant",
+          "fact": "Found alive on the third-terrace floor — seated, chalk-covered from hem to shoulder, arm moving in ceaseless four-second repetition across a low board. Pallet unused and dust-covered. Cup empty and dry. Has not surfaced to register entry. Kon's warmth was steady and attentive, not alarmed — the room read as somehow familiar to the fox.",
           "links": [
             "cogitarium",
             "cogitants",
-            "the-cogitariums-calculated-crisis",
+            "third-terrace-collapse",
             "ossian"
           ]
         }
       ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "third-terrace-collapse",
+          "note": "Saehara entered the third terrace. The missing Cogitant is alive — seated on the bare floor, arm moving in sustained repetition across a low board. Not collapse, not distress. Unreachable but present. What she's been building for four days covers every surface."
+        }
+      ],
+      "placeUpdates": [
+        {
+          "subPlace": {
+            "name": "Third Terrace",
+            "note": "Long low-ceilinged room — every wall, board, and surface covered in dense chalk notation. A Cogitant found here after four days unseen: seated, working without pause, pallet unused, cup dry.",
+            "visited": true
+          }
+        }
+      ],
       "timeOps": {
-        "hoursPassed": 0,
-        "why": "A moment on the landing — no time has passed."
-      },
-      "moveTo": {
-        "location": "old_switchback",
-        "why": "After the third-terrace encounter resolves, Saehara departs the Cogitarium and travels the road south toward the Old Switchback."
+        "hoursPassed": 0.1,
+        "why": "Crossing the threshold — a moment, no more."
       },
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Third-terrace landing of the Cogitarium — pale stone, chalk-cold air thicker and staler than the floors below, evening light a dim grey-orange through a half-seen window. The third-terrace door stands half-open before them.",
+      "setting": "Third terrace of the Cogitarium — long, low-ceilinged stone room, every surface covered in chalk notation dense enough to run over itself. A single window at the far end admits the last grey-orange evening light. A pallet in the corner is chalk-dusty and unused. The door stands open behind Saehara.",
       "npcsPresent": [
         {
+          "name": "Third-Terrace Cogitant",
+          "state": "Seated on the bare floor at center room, back to the door, chalk-grey robe from hem to shoulder — right arm moving in st"
+        },
+        {
           "name": "Ossian",
-          "state": "Standing a half-step behind Saehara's shoulder, very still, listening."
+          "state": "Standing just behind Saehara's shoulder in the doorway — silent, watching."
         },
         {
           "name": "Kon",
-          "state": "One forepaw lifted, coat radiating a low steady warmth — watchful, not alarmed. Waiting on Saehara."
+          "state": "Just inside the threshold, one forepaw raised, coat a steady quiet warmth — attention fixed on the room, not alarmed."
         }
       ],
       "objects": [
-        "Half-open door — third terrace, dragging sound continuing within at a four-secon",
-        "Traveler's Pack — on Saehara's shoulders",
+        "Low chalk board — dragged to arm's length before the Cogitant, surface covered i",
+        "Chalk-groove in the floor dust — where her arm has traveled, over and over",
+        "Dry empty cup beside the unused pallet",
+        "Traveler's Pack on Saehara's shoulders",
         "Waterskin — secured",
-        "Katana at Saehara's waist",
-        "Second-terrace notation — walls, table, and boards covered in chalk work, visibl"
+        "Katana at Saehara's waist"
       ],
       "threads": [
-        "Dragging sound — read as sustained controlled repetition, four-second interval, not distress — a body subordinated entirely to a task",
-        "Kon holding at the door: low warmth, watchful, not alarmed — waiting for Saehara's lead",
-        "Ossian listening behind Saehara's shoulder — hasn't named who is on this terrace",
-        "Third-terrace Cogitant: four days unseen, nature of task still unknown"
+        "Third-terrace Cogitant: alive, seated, working — has not registered the entry; nature and content of her notation unknown",
+        "Kon's warmth: steady and attentive, not alarm — the room reads as familiar to the fox in some way",
+        "Ossian has still not named who this Cogitant is",
+        "The notation covers every surface — what she has been building for four days is visible but unread"
       ]
     }
   },
@@ -487,7 +523,8 @@
         "Saehara has offered to climb. Kon is already oriented toward the stairwell. A second sound — slow drag — has just fallen from above.",
         "Saehara is moving to the stairwell with Ossian — the dragging sound from above continues; the climb begins now.",
         "Reached the third-terrace landing — dragging sound confirmed within the half-open room; Ossian and Kon both reading it as outside normal parameters.",
-        "Read the Fight confirms: not violence, not acute collapse — a body at sustained, controlled, inhuman repetition. The Cogitant is alive and working."
+        "Read the Fight confirms: not violence, not acute collapse — a body at sustained, controlled, inhuman repetition. The Cogitant is alive and working.",
+        "Saehara entered the third terrace. The missing Cogitant is alive — seated on the bare floor, arm moving in sustained repetition across a low board. Not collapse, not distress. Unreachable but present. What she's been building for four days covers every surface."
       ],
       "aliases": [],
       "startedAt": "2026-07-16T03:39:50.283Z"
@@ -505,7 +542,6 @@
       },
       "relationship": 0,
       "history": [
-        "[d1] Disclosed that the supply runner from Waymarker stopped coming nineteen days ago — the Cogitarium sent no request for resupply and no word came back. He believes the settlements re",
         "[d1] Saehara proposed a division of labor — Waymarker runner for resupply, Saehara taking the third terrace. Ossian is deliberating; no answer given yet.",
         "[d1] Delivered survival estimates unprompted by Saehara's framing — had the numbers already. Eight to twelve days for Araveth and upper-terrace Cogitants; two to three for the fallen wo",
         "[d1] Gave directions to Waymarker: eleven kilometers northeast, junction cairn then dry-stone wall, three hours. Confirmed no map exists for external use. Calculated that carrying the f",
@@ -514,7 +550,8 @@
         "[d1] Surfaced from calculation to acknowledge Saehara's return — first question was the fallen Cogitant's status, not the supply line",
         "[d1] Received the fallen Cogitant's status — acknowledged the two-day window margin as 'acceptable', cited Lenten's competence as accounting for forty percent of the variance. Rose and ",
         "[d1] Climbed the stairs behind Saehara in silence — voice went careful on the third-terrace landing; admitted they have not heard the dragging sound before",
-        "[d1] Held silent on the landing while Saehara read the room — listening, not leading."
+        "[d1] Held silent on the landing while Saehara read the room — listening, not leading.",
+        "[d1] Followed Saehara into the doorway — standing behind the shoulder, silent. Has not named the Cogitant."
       ],
       "knownFacts": [
         "No external map exists",
@@ -535,9 +572,9 @@
         "resource-state assessment under uncertainty"
       ],
       "status": "active",
-      "statusNote": "On the third-terrace landing beside Saehara — standing still, listening, has not named who is inside.",
+      "statusNote": "On the third-terrace threshold behind Saehara — watching, silent, not leading.",
       "lastSeen": {
-        "locationId": "the_cogitarium",
+        "locationId": "old_switchback",
         "day": 1
       },
       "aliases": [
@@ -651,6 +688,32 @@
         "locationId": "the_cogitarium",
         "day": 1
       }
+    },
+    "third-terrace-cogitant": {
+      "id": "third-terrace-cogitant",
+      "name": "Third-Terrace Cogitant",
+      "role": "Cogitant — the one missing from the third terrace for four days",
+      "description": "Seated on the bare floor at the center of a chalk-covered room, robe grey from hem to shoulder, arm moving in ceaseless four-second repetition across a low board — alive, working, unreachable.",
+      "firstMet": {
+        "locationId": "old_switchback",
+        "day": 1
+      },
+      "relationship": 0,
+      "history": [
+        "[d1] Saehara entered the room. The Cogitant did not turn or pause."
+      ],
+      "knownFacts": [
+        "Alive and physically functional — sustained repetition, not collapse",
+        "Has been working long enough that the floor-dust shows a groove where her arm travels",
+        "The pallet in the corner is chalk-dusty and unused — she has not slept"
+      ],
+      "skillsObserved": [],
+      "status": "active",
+      "statusNote": "Seated on the third-terrace floor of the Cogitarium — alive, working in ceaseless repetition, no external awareness registered.",
+      "lastSeen": {
+        "locationId": "old_switchback",
+        "day": 1
+      }
     }
   },
   "placeMemory": {
@@ -682,7 +745,15 @@
       "notes": [],
       "flags": {},
       "lastVisit": 1,
-      "vectorsKnown": []
+      "vectorsKnown": [],
+      "subPlaces": {
+        "third-terrace": {
+          "name": "Third Terrace",
+          "day": 1,
+          "visited": true,
+          "note": "Long low-ceilinged room — every wall, board, and surface covered in dense chalk notation. A Cogitant found here after fo"
+        }
+      }
     }
   },
   "worldState": {
@@ -1033,16 +1104,34 @@
         "aliases": [],
         "createdDay": 1,
         "updatedDay": 1
+      },
+      "third-terrace-cogitant": {
+        "id": "third-terrace-cogitant",
+        "label": "Third-Terrace Cogitant",
+        "kind": "person",
+        "facts": [
+          "[d1] Found alive on the third-terrace floor — seated, chalk-covered from hem to shoulder, arm moving in ceaseless four-second repetition across a low board. Pallet unused and dust-covered. Cup empty and dr"
+        ],
+        "links": [
+          "cogitarium",
+          "cogitants",
+          "third-terrace-collapse",
+          "ossian"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "third-terrace-cogitant",
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "strategic": 20.508843930660937,
-    "social": 6.9182798150935145,
-    "cerebral": 8.762921666985921,
-    "generous": 8.799502433262019,
-    "cautious": 12.562215614280174,
-    "risky": 0.8644871727387751
+    "strategic": 19.996122832394413,
+    "social": 6.7453228197161765,
+    "cerebral": 8.543848625311274,
+    "generous": 8.579514872430469,
+    "cautious": 13.248160223923168,
+    "risky": 0.8428749934203057
   },
   "aptitudes": [
     "strategist",
@@ -1050,7 +1139,7 @@
     "tactician",
     "stalwart"
   ],
-  "actionCount": 39,
+  "actionCount": 40,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -1071,8 +1160,8 @@
       "at": "2026-07-16T02:18:04.820Z"
     }
   ],
-  "updatedAt": 1784316994292,
-  "rev": 73,
+  "updatedAt": 1784319229095,
+  "rev": 74,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1179,7 +1268,8 @@
     "arc": {}
   },
   "regionsKnown": {
-    "somatic_reaches": 39
+    "somatic_reaches": 39,
+    "valley": 1
   },
   "opLossPending": false,
   "establishedFacts": [
@@ -1266,10 +1356,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-07-17T19:36:34.289Z",
-      "lastAt": "2026-07-17T19:36:34.289Z",
+      "lastAt": "2026-07-17T20:13:49.093Z",
       "startDay": 17,
       "endDay": 17,
-      "beats": 1
+      "beats": 2
     }
   ],
   "knownPlaces": [

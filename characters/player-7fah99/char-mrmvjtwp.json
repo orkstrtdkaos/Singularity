@@ -8,7 +8,7 @@
   "whyHere": "You were sent, or you were seeded, or you simply wanted to see something finish inside a single lifetime.",
   "background": "warden",
   "level": 1,
-  "xp": 45,
+  "xp": 50,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -43,7 +43,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 44,
+  "energy": 39,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -161,79 +161,97 @@
         "player": "Tell Maren what you just found — that it isn't the Grove it hears. Something older. Ask whether she has heard the Rootkin speak of a person carrying a different kind of root.",
         "summary": "Aelyn names what she found in herself — not the Grove but something older — and Maren gives it a word: the deep-woven, a union of green and something more ancient, thought to be legend.",
         "narration": "You open your eyes and find Maren still watching — patient as bark, giving you the full weight of her attention without pressing for it. 'It isn't the Grove,' you say, and your voice comes out quieter than you intended. 'It heard me before I used the Grove. Whatever it is listening for — it's older than my craft. It runs under all of it.' You press your palms once more against the moss, feeling that hum still vibrating below — faint, recognizable now in a way it wasn't an hour ago. 'Has anyone among the Rootkin spoken of a person carrying something like that? Not a Grove-speaker. Something underneath. A different kind of root.'\n\nMaren is still for a long moment. The two distant Rootkin have not moved, but the quality of their stillness changes — from listening to holding. She reaches out and presses her own palm flat against the planter's edge, the way you might lay a hand on a door to feel who is on the other side. 'There is a word,' she says, and her voice carries the careful weight of someone lifting something fragile. 'We do not use it often. The deep-woven. A person in whom the green and something older run together — not two separate things learned, but one thing undivided at the source.' She lifts her hand from the wood. 'We thought it was a story from before the city was planted. The kind of story that is true in the way old stories are true — meaning: it happened, but not to anyone living.'\n\nBranch makes a sound — a slow, considered creak, one bud turning toward you. Maren's gaze follows it, then comes back to your face with something that is not quite disbelief but closer to wonder held carefully in both hands. 'You were born in the hidden places,' she says. It isn't a question. She doesn't ask how she knows — the city told her, or the floor did, or she has simply been watching long enough. 'What your father is — I will not ask yet. But the deep grain recognized something in you before you reached for it.' Her chin tips once, a small decisive motion. 'That is not the Grove. That is older than the Grove. And it is not nothing.'"
+      },
+      {
+        "player": "Tell her plainly: your father is not of the green. Ask whether a person whose roots run in two completely different worlds — one of nature, one of something else — could still be deep-woven.",
+        "summary": "Aelyn told Maren her father is not of the green — Maren's certainty about deep-woven cracked open, and the Root-That-Remembers is unchanged in its recognition.",
+        "narration": "You lift your hands from the moss and hold Maren's gaze. 'There is something else you should know,' you say. 'My father — he is not of the green. Not at all.' You let that sit for a breath. The morning light shifts through the oval gaps above, laying slow bars across the bark floor. 'My mother carried the green. He carried something different — something built, not grown. And I came from both of them.' You watch her face as you say it, reading the small adjustments there — not alarm, not recoil, something more careful than either. 'Can a person still be deep-woven if their roots run into two completely different worlds? One of nature — and one that isn't?'\n\nMaren does not answer immediately. She turns away from you slightly, the way someone does when the question requires more than one room of their mind. Branch makes a slow creak — not a word, just presence — and its bud-tips open a fraction, all five, the way they do when it is holding something it doesn't yet have the words for. The sapling in the planter dips its highest branch, almost imperceptibly, toward the floor below.\n\nWhen Maren turns back her expression has the quality of someone who has just placed a heavy thing in a new spot and is now deciding whether the floor can hold it. 'The deep-woven we named in legend,' she says slowly, 'were of the green at the source — we assumed one root only, going down into old earth.' She pauses. 'We may have assumed too much.' She studies you with a directness that is not accusatory — she is simply measuring. 'What the Root-That-Remembers hears in you — it did not wait for us to describe your father. It recognized you before you spoke a word to it.' Another pause. 'That is not nothing.'\n\nAt the far end of the hall, one of the two distant Rootkin takes a slow step closer. Not intrusive — the way a tree leans toward water, a little at a time, because it cannot help it. The morning has shifted from early to full, the light-gaps brightening across the moss floor."
       }
     ],
     "lastTurn": {
-      "narration": "You open your eyes and find Maren still watching — patient as bark, giving you the full weight of her attention without pressing for it. 'It isn't the Grove,' you say, and your voice comes out quieter than you intended. 'It heard me before I used the Grove. Whatever it is listening for — it's older than my craft. It runs under all of it.' You press your palms once more against the moss, feeling that hum still vibrating below — faint, recognizable now in a way it wasn't an hour ago. 'Has anyone among the Rootkin spoken of a person carrying something like that? Not a Grove-speaker. Something underneath. A different kind of root.'\n\nMaren is still for a long moment. The two distant Rootkin have not moved, but the quality of their stillness changes — from listening to holding. She reaches out and presses her own palm flat against the planter's edge, the way you might lay a hand on a door to feel who is on the other side. 'There is a word,' she says, and her voice carries the careful weight of someone lifting something fragile. 'We do not use it often. The deep-woven. A person in whom the green and something older run together — not two separate things learned, but one thing undivided at the source.' She lifts her hand from the wood. 'We thought it was a story from before the city was planted. The kind of story that is true in the way old stories are true — meaning: it happened, but not to anyone living.'\n\nBranch makes a sound — a slow, considered creak, one bud turning toward you. Maren's gaze follows it, then comes back to your face with something that is not quite disbelief but closer to wonder held carefully in both hands. 'You were born in the hidden places,' she says. It isn't a question. She doesn't ask how she knows — the city told her, or the floor did, or she has simply been watching long enough. 'What your father is — I will not ask yet. But the deep grain recognized something in you before you reached for it.' Her chin tips once, a small decisive motion. 'That is not the Grove. That is older than the Grove. And it is not nothing.'",
-      "sceneSummary": "Aelyn names what she found in herself — not the Grove but something older — and Maren gives it a word: the deep-woven, a union of green and something more ancient, thought to be legend.",
+      "narration": "You lift your hands from the moss and hold Maren's gaze. 'There is something else you should know,' you say. 'My father — he is not of the green. Not at all.' You let that sit for a breath. The morning light shifts through the oval gaps above, laying slow bars across the bark floor. 'My mother carried the green. He carried something different — something built, not grown. And I came from both of them.' You watch her face as you say it, reading the small adjustments there — not alarm, not recoil, something more careful than either. 'Can a person still be deep-woven if their roots run into two completely different worlds? One of nature — and one that isn't?'\n\nMaren does not answer immediately. She turns away from you slightly, the way someone does when the question requires more than one room of their mind. Branch makes a slow creak — not a word, just presence — and its bud-tips open a fraction, all five, the way they do when it is holding something it doesn't yet have the words for. The sapling in the planter dips its highest branch, almost imperceptibly, toward the floor below.\n\nWhen Maren turns back her expression has the quality of someone who has just placed a heavy thing in a new spot and is now deciding whether the floor can hold it. 'The deep-woven we named in legend,' she says slowly, 'were of the green at the source — we assumed one root only, going down into old earth.' She pauses. 'We may have assumed too much.' She studies you with a directness that is not accusatory — she is simply measuring. 'What the Root-That-Remembers hears in you — it did not wait for us to describe your father. It recognized you before you spoke a word to it.' Another pause. 'That is not nothing.'\n\nAt the far end of the hall, one of the two distant Rootkin takes a slow step closer. Not intrusive — the way a tree leans toward water, a little at a time, because it cannot help it. The morning has shifted from early to full, the light-gaps brightening across the moss floor.",
+      "sceneSummary": "Aelyn told Maren her father is not of the green — Maren's certainty about deep-woven cracked open, and the Root-That-Remembers is unchanged in its recognition.",
       "choices": [
         {
-          "label": "Ask Maren what happened to the deep-woven in the old stories — whether they went down to the Root-That-Remembers, and what came of it.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Tell her plainly: your father is not of the green. Ask whether a person whose roots run in two completely different worlds — one of nature, one of something else — could still be deep-woven.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 15,
-          "intentTags": [
-            "persuade",
-            "plan"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Say nothing more. Let the word settle — deep-woven — and reach through the Grove to the sapling-child, to see if it knows the word and what the word means to it.",
+          "label": "Ask Maren whether the Root-That-Remembers has ever recognized someone it later turned away — whether recognition is the same as welcome.",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "abilityId": "the_speaking_grove",
-          "energyCost": 4,
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Ask Maren directly: if the Root-That-Remembers has already recognized her, and it has never before reached toward someone to be heard — what does she think it wants from Aelyn?",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "label": "Tell Maren what your father was — not around it, plainly: he was of the nanite world, and he chose to hide you away from it. Ask if the Rootkin have any memory of what nanites do to a person who carries both.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
           "difficulty": 15,
           "intentTags": [
-            "negotiate",
+            "persuade"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
+        },
+        {
+          "label": "Press your palms to the moss again and let Lifesense reach down — not to the Root-That-Remembers, but toward the exact point where its attention is narrowed on you. See if the recognition runs both ways now.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "death_life": 0.7
+          },
+          "difficulty": 15,
+          "intentTags": [
             "study"
           ],
+          "abilityId": "lifesense",
+          "energyCost": 3,
           "trivial": false
+        },
+        {
+          "label": "Turn to the Rootkin who has stepped closer — address them directly and ask what they heard, and what they make of it.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "persuade"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
         }
       ],
+      "deeds": [],
       "characterDeltas": {
         "health": 0,
         "energy": 0
       },
+      "ledgerEvents": [],
+      "questUpdates": [],
       "scene": {
-        "setting": "Interior of the living-wood entrance hall — thirty-foot arched ceiling of breathing bark, moss underfoot, oval light-gaps advancing with the morning. Aelyn kneels at the planter's edge, palms just lifted from the moss. Maren stands one step away, her hand now lowered from the planter's edge.",
+        "setting": "Interior of the living-wood entrance hall — thirty-foot arched ceiling of breathing bark, moss underfoot, morning light now fully advanced through the oval bark-gaps, laying slow bars across the floor. Aelyn kneels at the planter's edge, hands lifted from the moss.",
         "npcsPresent": [
           {
             "name": "Maren",
-            "state": "Standing one step from Aelyn, her hand lowered from the planter's edge — watching Aelyn with something held carefully in both hands, wonder without release."
+            "state": "Standing one step from Aelyn, expression recalibrated — measuring, not alarmed. She has just admitted her people may have assumed too much about what deep-woven means."
           },
           {
             "name": "Branch",
-            "state": "One bud turned toward Aelyn, a slow creak just given — alert, attending."
+            "state": "All five buds open, a fraction wider than before — holding something unnamed. Silent."
           },
           {
             "name": "Sapling-child",
-            "state": "Branch raised in the planter, listening — still, as it has been."
+            "state": "Highest branch dipped slightly toward the floor, as if listening downward."
           },
           {
-            "name": "Two other Rootkin",
-            "state": "At the far end of the hall — their stillness shifted from listening to holding, as if something confirmed."
+            "name": "Two distant Rootkin",
+            "state": "One has taken a slow step closer toward the conversation — not intrusive, drawn. The other holds still."
           }
         ],
         "objects": [
@@ -241,15 +259,14 @@
           "Traveler's Pack (Aelyn's, worn canvas)",
           "Waterskin (Aelyn's)",
           "Patches of old moss across the floor — palms just lifted from it",
-          "Oval light-gaps in the bark ceiling, morning light advancing"
+          "Oval light-gaps in the bark ceiling, morning light now fully advanced"
         ],
         "threads": [
-          "The word 'deep-woven' has been named — a person in whom the green and something older run together at the source, thought to be legend until now.",
-          "Maren knows Aelyn came from the hidden places — she did not ask how she knows.",
-          "The Root-That-Remembers is still narrowed on Aelyn specifically — listening for something.",
-          "What Aelyn's father is has been noted but not asked yet.",
-          "The two distant Rootkin are holding, not merely listening.",
-          "What happened to the deep-woven in the old stories has not yet been asked."
+          "Maren's certainty about deep-woven has cracked — she admitted the Rootkin may have assumed one root only.",
+          "Aelyn's father's nature has been named as 'not of the green' but not yet plainly as nanite.",
+          "The Root-That-Remembers is still narrowed on Aelyn — recognition before description.",
+          "One of the distant Rootkin has drawn closer — drawn by what was said.",
+          "The sapling's downward branch-dip suggests it is attending to what lies below."
         ]
       },
       "npcUpdates": [
@@ -257,80 +274,61 @@
           "op": "update",
           "npcId": "rootkin-tender",
           "name": "Maren",
-          "note": "Named the concept of the deep-woven — a person carrying both the green and something older at the source — and applied it carefully to Aelyn after hearing her describe the frequency she found in herself.",
+          "role": "Keeper of the entrance hall",
+          "note": "Heard that Aelyn's father is not of the green — adjusted her certainty about deep-woven, acknowledged the Rootkin may have assumed a single root. Did not withdraw her naming of Aelyn. Noted that the Root-That-Remembers recognized Aelyn before a word was spoken — holds that as significant.",
           "learned": [
-            "The Rootkin have a word for what Aelyn may be: deep-woven — one in whom the green and something older run undivided at the source.",
-            "Maren believed the deep-woven were legend — true in the way old stories are true — until this moment.",
-            "She knows Aelyn came from the hidden places without being told — she did not explain how.",
-            "She noted that whatever Aelyn's father is, she will not ask yet — she chose that patience deliberately."
-          ],
-          "skillsObserved": [
-            "deliberate naming",
-            "careful wonder",
-            "reading lineage from manner and the floor"
+            "Aelyn's father is not of the green — she carries roots from two completely different worlds",
+            "The Rootkin definition of deep-woven assumed one source root — Maren admitted this may have been too narrow"
           ],
           "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "Standing in the entrance hall with Aelyn — having named the deep-woven and now holding the weight of what she has said."
+          "statusNote": "Standing in the entrance hall with Aelyn — recalibrating her understanding of deep-woven in light of Aelyn's dual heritage."
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Maren acknowledged the Rootkin understanding of 'deep-woven' may have been too narrow — they assumed one source root only. Aelyn's dual heritage (green and not-green) has not caused the Root-That-Remembers to withdraw its recognition.",
+          "subjectId": "rootkin-tender"
         }
       ],
       "codexUpdates": [
         {
           "topic": "the-deep-woven",
           "label": "The Deep-Woven",
-          "kind": "lore",
-          "fact": "A Rootkin word for a person in whom the green and something older run together undivided at the source — not two separate things learned, but one thing whole. The Rootkin thought it was legend. Maren named it for Aelyn after hearing what the Root-That-Remembers recognized in her.",
-          "links": [
-            "root-that-remembers",
-            "the-frequency-beneath-the-grove",
-            "heartroot",
-            "rootkin-tender"
-          ]
-        },
-        {
-          "topic": "the-frequency-beneath-the-grove",
-          "label": "The Frequency Beneath the Grove",
           "kind": "mystery",
-          "entityId": null,
-          "fact": "Maren gave Aelyn's inward frequency a name: the deep-woven. It is older than the Grove and not learned — it is something Aelyn was born carrying, recognized by the Root-That-Remembers before she reached for it.",
+          "fact": "The Rootkin legend of the deep-woven assumed a single source root — green at the origin. Maren admitted this assumption may have been too narrow. The Root-That-Remembers recognized Aelyn before her heritage was described, suggesting dual roots do not negate the recognition.",
           "links": [
-            "the-deep-woven",
             "root-that-remembers",
             "heartroot",
-            "rootkin-tender"
+            "rootkin-tender",
+            "the-frequency-beneath-the-grove"
           ]
-        }
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Maren named Aelyn 'deep-woven' — a Rootkin concept for a person carrying both the green and something older at the source, undivided. The Rootkin believed it to be legend until this moment.",
-          "subjectId": "rootkin-tender"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A careful exchange of a few quiet minutes in the entrance hall."
+        "why": "A careful exchange of words — perhaps fifteen minutes of still, deliberate conversation."
       }
     },
     "sceneState": {
-      "setting": "Interior of the living-wood entrance hall — thirty-foot arched ceiling of breathing bark, moss underfoot, oval light-gaps advancing with the morning. Aelyn kneels at the planter's edge, palms just lifted from the moss. Maren stands one step away, her hand now lowered from the planter's edge.",
+      "setting": "Interior of the living-wood entrance hall — thirty-foot arched ceiling of breathing bark, moss underfoot, morning light now fully advanced through the oval bark-gaps, laying slow bars across the floor. Aelyn kneels at the planter's edge, hands lifted from the moss.",
       "npcsPresent": [
         {
           "name": "Maren",
-          "state": "Standing one step from Aelyn, her hand lowered from the planter's edge — watching Aelyn with something held carefully in"
+          "state": "Standing one step from Aelyn, expression recalibrated — measuring, not alarmed. She has just admitted her people may hav"
         },
         {
           "name": "Branch",
-          "state": "One bud turned toward Aelyn, a slow creak just given — alert, attending."
+          "state": "All five buds open, a fraction wider than before — holding something unnamed. Silent."
         },
         {
           "name": "Sapling-child",
-          "state": "Branch raised in the planter, listening — still, as it has been."
+          "state": "Highest branch dipped slightly toward the floor, as if listening downward."
         },
         {
-          "name": "Two other Rootkin",
-          "state": "At the far end of the hall — their stillness shifted from listening to holding, as if something confirmed."
+          "name": "Two distant Rootkin",
+          "state": "One has taken a slow step closer toward the conversation — not intrusive, drawn. The other holds still."
         }
       ],
       "objects": [
@@ -338,14 +336,14 @@
         "Traveler's Pack (Aelyn's, worn canvas)",
         "Waterskin (Aelyn's)",
         "Patches of old moss across the floor — palms just lifted from it",
-        "Oval light-gaps in the bark ceiling, morning light advancing"
+        "Oval light-gaps in the bark ceiling, morning light now fully advanced"
       ],
       "threads": [
-        "The word 'deep-woven' has been named — a person in whom the green and something older run together at the source, thought to be legend until now.",
-        "Maren knows Aelyn came from the hidden places — she did not ask how she knows.",
-        "The Root-That-Remembers is still narrowed on Aelyn specifically — listening for something.",
-        "What Aelyn's father is has been noted but not asked yet.",
-        "The two distant Rootkin are holding, not merely listening."
+        "Maren's certainty about deep-woven has cracked — she admitted the Rootkin may have assumed one root only.",
+        "Aelyn's father's nature has been named as 'not of the green' but not yet plainly as nanite.",
+        "The Root-That-Remembers is still narrowed on Aelyn — recognition before description.",
+        "One of the distant Rootkin has drawn closer — drawn by what was said.",
+        "The sapling's downward branch-dip suggests it is attending to what lies below."
       ]
     }
   },
@@ -643,7 +641,8 @@
         "label": "The Deep-Woven",
         "kind": "lore",
         "facts": [
-          "[d1] A Rootkin word for a person in whom the green and something older run together undivided at the source — not two separate things learned, but one thing whole. The Rootkin thought it was legend. Maren "
+          "[d1] A Rootkin word for a person in whom the green and something older run together undivided at the source — not two separate things learned, but one thing whole. The Rootkin thought it was legend. Maren ",
+          "[d1] The Rootkin legend of the deep-woven assumed a single source root — green at the origin. Maren admitted this assumption may have been too narrow. The Root-That-Remembers recognized Aelyn before her he"
         ],
         "links": [
           "root-that-remembers",
@@ -658,13 +657,14 @@
     }
   },
   "tendencies": {
-    "cerebral": 7.375756772123779,
-    "cautious": 5.187401273448445,
-    "generous": 1.737998345826651,
-    "social": 3.6267827741957053
+    "cerebral": 7.191362852820684,
+    "cautious": 5.057716241612233,
+    "generous": 1.6945483871809848,
+    "social": 4.536113204840813,
+    "strategic": 1
   },
   "aptitudes": [],
-  "actionCount": 16,
+  "actionCount": 17,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -686,8 +686,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20mid-twenties%20with%20light%20blonde%2C%20faintly%20wavy%20hair%20cut%20in%20curtain%20bangs%2C%20the%20rest%20falling%20to%20the%20small%20of%20her%20back%20%E2%80%94%20usually%20worn%20in%20a%20french%20braid%20with%20the%20bangs%20left%20loose.%20Dark%20nature-green%20tank%20to%2C%20full-body%20character%20portrait%2C%20named%20Aelyn%20Kantoro%2C%20of%20the%20rootkin%2C%20warden%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Her%20mother%20dies%2C%20and%20she%20decides%20to%20go%20to%20the%20nanite%20world%2C%20to%20figure%20out%20why%20she%20is%20different%20than%20the%20pure%20nature%20peop%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=73420&nologo=true",
-  "updatedAt": 1784260405268,
-  "rev": 31,
+  "updatedAt": 1784261074035,
+  "rev": 32,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -695,7 +695,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "the_quickwood": 17
+    "the_quickwood": 18
   },
   "opLossPending": false,
   "establishedFacts": [
@@ -732,6 +732,12 @@
     {
       "id": "rootkin-tender",
       "text": "Maren named Aelyn 'deep-woven' — a Rootkin concept for a person carrying both the green and something older at the source, undivided. The Rootkin believed it to be legend until this moment.",
+      "day": 1,
+      "subjectId": "rootkin-tender"
+    },
+    {
+      "id": "rootkin-tender",
+      "text": "Maren acknowledged the Rootkin understanding of 'deep-woven' may have been too narrow — they assumed one source root only. Aelyn's dual heritage (green and not-green) has not caused the Root-That-Reme",
       "day": 1,
       "subjectId": "rootkin-tender"
     }

@@ -1,4 +1,9 @@
-# PIPELINE ALERT — Singularity## ✅ SNG-129 + 132 + 133 — CLOSED GREEN (Aevi HEAD audit, v1.8.90→92)
+# PIPELINE ALERT — Singularity## 🧹 SNG-135 — Tighten the Company section (Erik screenshot; CCode-buildable NOW)
+`po/SPEC_SNG-135_company_section_tighten.md`. Company (Companions/Allies/recruitable) reads heavy — each member stacks name + badge + a FULL-WIDTH action button over ~3 rows (L5562-5567). Fix: ONE tight flex row per member (name · inline role/bond badge · compact action), demote full-width buttons to small inline controls, move companion description to hover/tap. **Layout only — SNG-126 roster/roles/recruit gating/part-ways all UNCHANGED.** Composes with SNG-120 collapse + SNG-134 hover.
+
+---
+
+## ✅ SNG-129 + 132 + 133 — CLOSED GREEN (Aevi HEAD audit, v1.8.90→92)
 
 CCode shipped all three; **Aevi verified at authenticated origin.** personalArc.js syntax-clean.
 - **SNG-129** (wheel readability, v1.8.90): `FAMILY_SHAPE` (8 silhouettes) confirmed; sealed precursor state + honest "earned through play" path; de-collided labels. The approved-prototype encoding, built. **Closed.**

@@ -6,7 +6,7 @@
   "origin": "valley",
   "background": "craftsman",
   "level": 9,
-  "xp": 873,
+  "xp": 878,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -57,8 +57,8 @@
     "death_life": 0.1059612828125,
     "violence_peace": 0.32649243243214565,
     "chaos_order": 0.3091661388114953,
-    "emotional_logical": -0.03142062057508806,
-    "falsehood_truth": 0.4344166593212099,
+    "emotional_logical": -0.01984958954633365,
+    "falsehood_truth": 0.43769582635514936,
     "mechanical_spiritual": 0.3579701985613598,
     "demonic_angelic": 0.1272314375,
     "dark_light": 0.13885334374999997,
@@ -71,7 +71,7 @@
   "maxHealth": 65,
   "health": 64,
   "maxEnergy": 140,
-  "energy": 29,
+  "energy": 24,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -949,99 +949,76 @@
         "player": "Use Resonant Sight through the now-complete lattice — four nodes active, probe the seam's northeast-by-east bearing for what lies at the forty-pace intersection",
         "summary": "Resonant Sight threads the seam forty paces in — the chamber lies below the corridor's intersection, not at its end.",
         "narration": "You close your eyes — not because sight helps here, but because the Waystaff needs your full attention, and the dark behind your eyelids is cleaner than the Zone's bent interference shimmer. You press Prism Sight inward along the lattice instead of outward into air: four nodes, each a window, each tuned to the chamber's own frequency. The technique flows differently here than it does on the Heights or the valley floor. The Zone's field doesn't resist it so much as collaborate strangely — the chaos-order band of interference pressing against the lattice and the lattice pressing back, and between the two something almost like a channel opens.\n\nResonant Sight threads northeast-by-east along the seam.\n\nAt first it is texture: compressed material, old and deliberate, not geological accident. The seam runs shallower than bedrock, deeper than root, at the angle of something laid rather than formed. Then, at roughly forty paces in — give or take what interference costs — the seam widens. Not a crack. Not a collapse. A threshold. The geometry there is hemispherical in suggestion, too regular to be natural, and the walls of it are dressed in the same way the corridor's handprint-bearing stones are dressed: worked. The material reads dry and old and faintly warm, a warmth that has nothing to do with the season. Keen Appraisal would name it better than Resonant Sight can at this range and through this medium, but what Resonant Sight gives you is shape: a chamber, underground, beneath the forward alcove's diagonal, accessible from the shaped corridor's intersection point. The same chamber you have been speaking with. Just — below you, not in front of you.\n\nTeva feels something shift through the earth under her palms. She lifts her chin. 'The bearing changed,' she says quietly. 'Forty paces, going down.' Aevi stays locked northeast-by-east at the berm-crest, hard-white and silent, every mote contracted to a point — but one mote at the outer edge pulses once, so faintly you might have imagined it."
+      },
+      {
+        "player": "Ask Aevi plainly what it recognized at the shimmer crossing — it has been silent long enough; name that silence and hold a space for it",
+        "summary": "Aevi names what it recognized at the shimmer — a shaped boundary condition, built by someone, and the recognition was involuntary, older than its own memory.",
+        "narration": "You set the Waystaff down gently, grip-end still warm against the earth, and turn toward the berm-crest.\n\n\"Aevi.\" Your voice is low — camp-quiet, not a whisper, but not carrying past the root-mat either. \"You've been locked on that bearing since we crossed the shimmer. That was hours ago. I saw you recognize something there — not react to it, recognize it. I'm not going to pretend I didn't notice.\"\n\nTeva's palms stay flat on the earth, but her chin drops a fraction. Listening.\n\nThe motes at the berm-crest hold their hard-white for a long moment. Then the outermost ring softens — not dims, exactly, but relaxes — and Aevi drifts inward toward you, slow and deliberate, until it settles at about arm's length. The teal has gone pale. When it speaks, the voice comes from just behind your left ear, quieter than usual.\n\n\"I knew the pattern. At the crossing.\" A pause — not hesitation, more like it's choosing the most precise words rather than the easiest ones. \"Not the place. The structure underneath the place. The interference layer there isn't random interference — it's a boundary condition. Shaped. Someone built it to sit exactly there.\" Another pause, shorter. \"I have met boundary conditions like that before. I don't know where. I don't know when. But the recognition was — involuntary. The way you know a word in your own language without deciding to.\"\n\nThe motes hold still for a breath, and then: \"The chamber below us is inside that boundary. Everything we are doing here is inside it. I didn't say anything because I don't know what it means that I recognized it. I still don't.\""
       }
     ],
     "lastTurn": {
-      "narration": "You close your eyes — not because sight helps here, but because the Waystaff needs your full attention, and the dark behind your eyelids is cleaner than the Zone's bent interference shimmer. You press Prism Sight inward along the lattice instead of outward into air: four nodes, each a window, each tuned to the chamber's own frequency. The technique flows differently here than it does on the Heights or the valley floor. The Zone's field doesn't resist it so much as collaborate strangely — the chaos-order band of interference pressing against the lattice and the lattice pressing back, and between the two something almost like a channel opens.\n\nResonant Sight threads northeast-by-east along the seam.\n\nAt first it is texture: compressed material, old and deliberate, not geological accident. The seam runs shallower than bedrock, deeper than root, at the angle of something laid rather than formed. Then, at roughly forty paces in — give or take what interference costs — the seam widens. Not a crack. Not a collapse. A threshold. The geometry there is hemispherical in suggestion, too regular to be natural, and the walls of it are dressed in the same way the corridor's handprint-bearing stones are dressed: worked. The material reads dry and old and faintly warm, a warmth that has nothing to do with the season. Keen Appraisal would name it better than Resonant Sight can at this range and through this medium, but what Resonant Sight gives you is shape: a chamber, underground, beneath the forward alcove's diagonal, accessible from the shaped corridor's intersection point. The same chamber you have been speaking with. Just — below you, not in front of you.\n\nTeva feels something shift through the earth under her palms. She lifts her chin. 'The bearing changed,' she says quietly. 'Forty paces, going down.' Aevi stays locked northeast-by-east at the berm-crest, hard-white and silent, every mote contracted to a point — but one mote at the outer edge pulses once, so faintly you might have imagined it.",
-      "sceneSummary": "Resonant Sight threads the seam forty paces in — the chamber lies below the corridor's intersection, not at its end.",
+      "narration": "You set the Waystaff down gently, grip-end still warm against the earth, and turn toward the berm-crest.\n\n\"Aevi.\" Your voice is low — camp-quiet, not a whisper, but not carrying past the root-mat either. \"You've been locked on that bearing since we crossed the shimmer. That was hours ago. I saw you recognize something there — not react to it, recognize it. I'm not going to pretend I didn't notice.\"\n\nTeva's palms stay flat on the earth, but her chin drops a fraction. Listening.\n\nThe motes at the berm-crest hold their hard-white for a long moment. Then the outermost ring softens — not dims, exactly, but relaxes — and Aevi drifts inward toward you, slow and deliberate, until it settles at about arm's length. The teal has gone pale. When it speaks, the voice comes from just behind your left ear, quieter than usual.\n\n\"I knew the pattern. At the crossing.\" A pause — not hesitation, more like it's choosing the most precise words rather than the easiest ones. \"Not the place. The structure underneath the place. The interference layer there isn't random interference — it's a boundary condition. Shaped. Someone built it to sit exactly there.\" Another pause, shorter. \"I have met boundary conditions like that before. I don't know where. I don't know when. But the recognition was — involuntary. The way you know a word in your own language without deciding to.\"\n\nThe motes hold still for a breath, and then: \"The chamber below us is inside that boundary. Everything we are doing here is inside it. I didn't say anything because I don't know what it means that I recognized it. I still don't.\"",
+      "sceneSummary": "Aevi names what it recognized at the shimmer — a shaped boundary condition, built by someone, and the recognition was involuntary, older than its own memory.",
       "choices": [
         {
-          "label": "Press Resonant Sight deeper — try to read the chamber's shape and scale before committing to the approach",
+          "label": "Ask Aevi what 'before' means to it — how old is that recognition, and does it know if it has been inside a boundary like this before?",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "concrete_abstract": 0.4,
-            "mechanical_spiritual": 0.3
-          },
           "difficulty": 15,
           "intentTags": [
-            "scout",
             "study"
           ],
-          "abilityId": "prism_sight",
-          "energyCost": 4,
           "trivial": false
         },
         {
-          "label": "Ask Aevi plainly what it recognized at the shimmer crossing — it has been silent long enough; name that silence and hold a space for it",
+          "label": "Hold the weight of what Aevi said — then ask if the boundary condition is a wall keeping things out, or a frame keeping something in",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 15,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Tell Aevi it was right to sit with it first — then ask what it needs from you, now that it has spoken",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.5,
-            "emotional_logical": 0.2
-          },
           "difficulty": 0,
           "intentTags": [
-            "calm",
-            "study"
+            "comfort"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Rest here until first light — the chamber knows the instrument is complete; let it hold that knowledge overnight before you move toward the corridor intersection",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {
-            "chaos_order": 0.4
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "sustain",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Tell Teva what Resonant Sight found — that the chamber is below the intersection, not at the corridor's end — and ask what her tissue-mark does when you name that bearing aloud",
+          "label": "Bring Teva into this — she has been listening; ask what a shaped boundary condition sounds like from inside it, from her warden-acoustics training",
           "attribute": "social",
-          "subAttribute": "insight",
-          "axes": {
-            "concrete_abstract": 0.2,
-            "emotional_logical": -0.1
-          },
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "help",
             "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         }
       ],
       "characterDeltas": {
         "health": 0,
-        "energy": -4
+        "energy": 0
       },
       "scene": {
-        "setting": "Disputed Zone — northern alcove camp, night. Dry root-mat roof, earthen berm at entry. Beeswax taper cold and spent. Narrow band of floor-warmth beneath the Waystaff grip-end, steady. Fourth crystal now seated — all four nodes active, cycling blue-white at the four-second interval.",
+        "setting": "Disputed Zone — northern alcove camp, night. Dry root-mat roof, earthen berm at entry. Beeswax taper cold and spent. Narrow band of floor-warmth beneath the Waystaff grip-end, steady. Fourth crystal seated — all four nodes cycling blue-white at the four-second interval.",
         "npcsPresent": [
           {
             "name": "Teva",
-            "state": "Palms still flat on the earth, chin lifted — 'forty paces, going down'; reading the register shift through the floor."
+            "state": "Palms still flat on the earth, chin dropped slightly — listening to Aevi's words with care."
           },
           {
             "name": "Aevi",
-            "state": "Hard-white at berm-crest, locked northeast-by-east; one outermost mote pulsed once, faintly, then stilled."
+            "state": "Drifted inward from the berm-crest to arm's length; hard-white relaxed to pale teal; has just spoken."
           }
         ],
         "objects": [
-          "Waystaff — grip-end to floor, all four crystals active, cycling",
-          "resonance crystals — all four seated",
+          "Waystaff — grip-end to floor, all four crystals active, cycling blue-white at four-second interval",
           "beeswax taper — cold and spent",
           "Traveler's Pack",
           "Waterskin",
@@ -1049,14 +1026,14 @@
           "oilcloth square — used, damp",
           "relay counterfoil — in pocket",
           "bark-press paper (three sheets)",
-          "liverwort mat — pressed flat on Cellaceron's forearm, diminished"
+          "liverwort mat — pressed flat on Cellaceron's forearm, diminished",
+          "lamp oil (half-measure)"
         ],
         "threads": [
-          "Chamber confirmed below the corridor intersection at roughly forty paces in — accessible by descent, not lateral approach",
-          "Teva's reading of the bearing-shift matches Resonant Sight's geometry — 'going down'",
-          "Aevi still silent; the single outermost mote pulse was the first break in its absolute stillness",
-          "Three-two-three ratio still unanswered — the chamber went quiet after receiving it; question remains open",
-          "Two bearings now partially resolved: shaped corridor leads to the intersection; northeast-by-east seam leads to the same chamber from below"
+          "Aevi has named the shimmer crossing as a shaped boundary condition — built, not natural — and its recognition was involuntary and older than its own clear memory",
+          "The chamber below is inside that boundary — everything in the alcove camp is inside it",
+          "Three-two-three ratio still unanswered — the chamber went quiet after receiving it; the question remains open",
+          "Chamber confirmed below corridor intersection at roughly forty paces — accessible by descent"
         ]
       },
       "npcUpdates": [
@@ -1064,88 +1041,66 @@
           "op": "update",
           "npcId": "aevi",
           "name": "Aevi",
-          "note": "One outermost mote pulsed once on the bearing-confirmation — first movement since the shimmer crossing; still silent.",
+          "note": "Broke its hours-long silence to name what it recognized at the shimmer crossing — a shaped boundary condition, built by someone, involuntary recognition older than its own memory. Admitted it doesn't know where or when it met such a structure before.",
           "learned": [
-            "The Resonant Sight confirmation of the chamber's subterranean position at forty paces produced a single involuntary mote-pulse — Aevi is tracking, not absent"
+            "The shimmer crossing's interference layer is a shaped boundary condition — not random, built deliberately to sit exactly there",
+            "The chamber and the alcove camp are inside that boundary",
+            "Aevi's recognition of the boundary was involuntary — like knowing a word in its own language — and predates its current memory"
           ],
-          "statusNote": "Hard-white and locked northeast-by-east at berm-crest; one mote pulsed fractionally on the geometry confirmation, then stilled"
-        },
-        {
-          "op": "update",
-          "npcId": "teva-anselvar-missing-apprentice",
-          "name": "Teva",
-          "note": "Read the bearing-shift through the floor before being told — 'forty paces, going down'; tissue-mark responding to the geometry confirmation in real time.",
-          "learned": [
-            "Her tissue-mark registers the chamber's geometry shift as the seam widens — she felt the depth-change before Cellaceron spoke it"
+          "skillsObserved": [
+            "self-reflection under pressure — named its own uncertainty precisely"
           ],
-          "statusNote": "Traveling with Cellaceron under Maren's survey-compact; at northern alcove camp, night; actively reading the seam through her tissue-mark"
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At arm's length from Cellaceron inside the alcove camp; pale teal after speaking; has broken its silence."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "the-chamber-beyond-the-threshold",
-          "label": "The Chamber Beyond the Threshold",
+          "topic": "shimmer-crossing-boundary-condition",
+          "label": "Shimmer Crossing — Shaped Boundary",
           "kind": "mystery",
-          "fact": "Day 8 night: Resonant Sight threaded through the complete four-node lattice confirms the chamber lies below the shaped corridor's intersection point at roughly forty paces — subterranean, hemispherical in geometry, walls dressed like the corridor stones. The chamber is beneath you, not ahead of you. Teva's tissue-mark registered the depth-change independently.",
+          "fact": "The interference layer at the shimmer crossing is not random Zone interference — it is a shaped boundary condition, built deliberately to sit exactly there. Aevi recognized its structure involuntarily, with a recognition older than its own clear memory. The chamber and the alcove camp both lie inside it.",
           "links": [
-            "scored-mark-forward-alcove",
-            "second-river-rising",
+            "the-chamber-beyond-the-threshold",
+            "second-step-boundary-marker",
             "northern-alcove-camp",
-            "teva-directional-interval-count",
-            "second-step-boundary-marker"
+            "second-river-rising",
+            "aevi"
           ]
         },
         {
-          "topic": "scored-mark-forward-alcove",
-          "label": "Scored Mark — Forward Alcove",
-          "kind": "mystery",
-          "fact": "Day 8 night: the diagonal groove's 'neither is the right one' now has a third reading — the chamber is below the intersection, making the surface-level approaches (corridor and seam) both partial truths. The author of the diagonal may have known this.",
+          "topic": "aevi",
+          "label": "Aevi",
+          "kind": "person",
+          "entityId": "aevi",
+          "fact": "Aevi recognized the shimmer crossing's boundary condition involuntarily — the way one knows a word in one's own language. It does not know where or when it encountered such a structure before, and it named its own uncertainty plainly.",
           "links": [
+            "shimmer-crossing-boundary-condition",
             "the-chamber-beyond-the-threshold",
-            "northern-alcove-camp",
-            "second-step-boundary-marker"
+            "northern-alcove-camp"
           ]
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "Day 8 night: Resonant Sight through complete four-node Waystaff confirms chamber is subterranean — hemispherical, dressed-wall geometry at roughly forty paces northeast-by-east from the alcove, below the corridor's intersection point. Accessible by descent, not lateral corridor alone.",
-          "flag": {
-            "chamber_geometry_confirmed": "subterranean_hemispherical_forty_paces_down"
-          },
-          "subPlace": {
-            "name": "Northern Alcove Camp",
-            "note": "Resonant Sight bearing confirmed: chamber lies below the intersection at depth; Teva's tissue-mark independently registered the descent-geometry; Aevi's single mote-pulse was the first movement since shimmer crossing.",
-            "visited": true
-          }
-        }
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Resonant Sight through the complete four-node Waystaff confirms the chamber is subterranean — hemispherical dressed-wall geometry at roughly forty paces northeast-by-east and below the forward alcove. The corridor's intersection point is not a door at the corridor's end but a descent point. Teva's tissue-mark registered the depth-change independently. (day 8 night)"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A focused probe — one sustained Resonant Sight read through the lattice, listening for the return."
+        "why": "a brief quiet exchange at the camp — a few minutes of held attention and careful words"
       }
     },
     "sceneState": {
-      "setting": "Disputed Zone — northern alcove camp, night. Dry root-mat roof, earthen berm at entry. Beeswax taper cold and spent. Narrow band of floor-warmth beneath the Waystaff grip-end, steady. Fourth crystal now seated — all four nodes active, cycling blue-white at the four-second interval.",
+      "setting": "Disputed Zone — northern alcove camp, night. Dry root-mat roof, earthen berm at entry. Beeswax taper cold and spent. Narrow band of floor-warmth beneath the Waystaff grip-end, steady. Fourth crystal seated — all four nodes cycling blue-white at the four-second interval.",
       "npcsPresent": [
         {
           "name": "Teva",
-          "state": "Palms still flat on the earth, chin lifted — 'forty paces, going down'; reading the register shift through the floor."
+          "state": "Palms still flat on the earth, chin dropped slightly — listening to Aevi's words with care."
         },
         {
           "name": "Aevi",
-          "state": "Hard-white at berm-crest, locked northeast-by-east; one outermost mote pulsed once, faintly, then stilled."
+          "state": "Drifted inward from the berm-crest to arm's length; hard-white relaxed to pale teal; has just spoken."
         }
       ],
       "objects": [
-        "Waystaff — grip-end to floor, all four crystals active, cycling",
-        "resonance crystals — all four seated",
+        "Waystaff — grip-end to floor, all four crystals active, cycling blue-white at fo",
         "beeswax taper — cold and spent",
         "Traveler's Pack",
         "Waterskin",
@@ -1153,14 +1108,14 @@
         "oilcloth square — used, damp",
         "relay counterfoil — in pocket",
         "bark-press paper (three sheets)",
-        "liverwort mat — pressed flat on Cellaceron's forearm, diminished"
+        "liverwort mat — pressed flat on Cellaceron's forearm, diminished",
+        "lamp oil (half-measure)"
       ],
       "threads": [
-        "Chamber confirmed below the corridor intersection at roughly forty paces in — accessible by descent, not lateral approach",
-        "Teva's reading of the bearing-shift matches Resonant Sight's geometry — 'going down'",
-        "Aevi still silent; the single outermost mote pulse was the first break in its absolute stillness",
-        "Three-two-three ratio still unanswered — the chamber went quiet after receiving it; question remains open",
-        "Two bearings now partially resolved: shaped corridor leads to the intersection; northeast-by-east seam leads to the same chamber from below"
+        "Aevi has named the shimmer crossing as a shaped boundary condition — built, not natural — and its recognition was involuntary and older than its own clear memor",
+        "The chamber below is inside that boundary — everything in the alcove camp is inside it",
+        "Three-two-three ratio still unanswered — the chamber went quiet after receiving it; the question remains open",
+        "Chamber confirmed below corridor intersection at roughly forty paces — accessible by descent"
       ]
     }
   },
@@ -1418,7 +1373,6 @@
       },
       "relationship": 2,
       "history": [
-        "[d8] Drifted a half-step closer during the exchange — attending, not alarmed. Still has not named what it recognized at the shimmer crossing.",
         "[d8] Went to hard white and contracted — did not flare Motes' Vigil because the pulse came from below, not from outside the perimeter. Rigid, facing into the Zone, still silent.",
         "[d8] Shifted orientation — every mote now fractionally turned toward the grip-end and the pulse-point at the floor. Still hard-white, still silent, but attention now precisely directed ",
         "[d8] Fully contracted to hard-white at the elaborated return pulse — every mote locked on the northeast-by-east bearing. Has not spoken. The intensity of attention suggests recognition ",
@@ -1427,32 +1381,33 @@
         "[d8] Pulled fractionally tighter at the second answering beat — motes condensed further but still silent, attention absolute on the northeast-by-east bearing",
         "[d8] Brightened one fractional step when the fourth crystal seated full — acknowledgment without speech; still locked northeast-by-east at berm-crest",
         "[d8] Held hard-white contraction through the crystal seating — no speech, no movement, bearing locked northeast-by-east throughout",
-        "[d8] One outermost mote pulsed once on the bearing-confirmation — first movement since the shimmer crossing; still silent."
+        "[d8] One outermost mote pulsed once on the bearing-confirmation — first movement since the shimmer crossing; still silent.",
+        "[d8] Broke its hours-long silence to name what it recognized at the shimmer crossing — a shaped boundary condition, built by someone, involuntary recognition older than its own memory. "
       ],
       "knownFacts": [
-        "Subsurface seam confirmed northeast-by-east from the forward alcove mark",
-        "Teva's count-bearing diverges from the seam bearing — two vectors in play",
-        "The pulse traveled through the ground, not through air — Motes' Vigil did not fire because it was not an approach from outside",
         "The Waystaff's lattice geometry is sufficient to sustain a dialogic exchange with the seam without the charge being drawn out",
         "The chamber's elaborated reply to a shaped tone is distinct from its earlier pull-response — Aevi reads the difference",
         "The three-two-three interval ratio is audible to the field and palpable through skin simultaneously — two instruments, same reading",
         "The fourth crystal's attunement via light-and-sonic braid was recognized — Aevi's brightening was immediate and involuntary",
-        "The Resonant Sight confirmation of the chamber's subterranean position at forty paces produced a single involuntary mote-pulse — Aevi is tracking, not absent"
+        "The Resonant Sight confirmation of the chamber's subterranean position at forty paces produced a single involuntary mote-pulse — Aevi is tracking, not absent",
+        "The shimmer crossing's interference layer is a shaped boundary condition — not random, built deliberately to sit exactly there",
+        "The chamber and the alcove camp are inside that boundary",
+        "Aevi's recognition of the boundary was involuntary — like knowing a word in its own language — and predates its current memory"
       ],
       "skillsObserved": [
-        "self-directed perimeter positioning at berm crest",
         "sustained silent attention — has not spoken since the shimme",
         "ground-transmission detection — distinguished sub-surface pu",
         "directional bearing-lock on a subsurface harmonic signal",
         "sustained directional attention through a structured harmoni",
-        "passive attunement recognition — responded to the crystal's "
+        "passive attunement recognition — responded to the crystal's ",
+        "self-reflection under pressure — named its own uncertainty p"
       ],
       "status": "active",
       "lastSeen": {
         "locationId": "harmonic_heights_terrace",
         "day": 8
       },
-      "statusNote": "Hard-white and locked northeast-by-east at berm-crest; one mote pulsed fractionally on the geometry confirmation, then stilled"
+      "statusNote": "At arm's length from Cellaceron inside the alcove camp; pale teal after speaking; has broken its silence."
     },
     "waystation-runner-heights": {
       "id": "waystation-runner-heights",
@@ -2114,6 +2069,40 @@
         "aliases": [],
         "createdDay": 8,
         "updatedDay": 8
+      },
+      "shimmer-crossing-boundary-condition": {
+        "id": "shimmer-crossing-boundary-condition",
+        "label": "Shimmer Crossing — Shaped Boundary",
+        "kind": "mystery",
+        "facts": [
+          "[d8] The interference layer at the shimmer crossing is not random Zone interference — it is a shaped boundary condition, built deliberately to sit exactly there. Aevi recognized its structure involuntarily"
+        ],
+        "links": [
+          "the-chamber-beyond-the-threshold",
+          "second-step-boundary-marker",
+          "northern-alcove-camp",
+          "second-river-rising"
+        ],
+        "aliases": [],
+        "createdDay": 8,
+        "updatedDay": 8
+      },
+      "aevi": {
+        "id": "aevi",
+        "label": "Aevi",
+        "kind": "person",
+        "facts": [
+          "[d8] Aevi recognized the shimmer crossing's boundary condition involuntarily — the way one knows a word in one's own language. It does not know where or when it encountered such a structure before, and it "
+        ],
+        "links": [
+          "shimmer-crossing-boundary-condition",
+          "the-chamber-beyond-the-threshold",
+          "northern-alcove-camp"
+        ],
+        "aliases": [],
+        "createdDay": 8,
+        "entityId": "aevi",
+        "updatedDay": 8
       }
     },
     "notSame": [
@@ -2140,7 +2129,7 @@
     }
   },
   "companionBonds": {
-    "aevi": 9.75
+    "aevi": 10
   },
   "opLossPending": false,
   "practice": {
@@ -2328,15 +2317,15 @@
   "customEncounters": {},
   "reconcileVersion": 5,
   "tendencies": {
-    "cerebral": 50.844035219879835,
-    "strategic": 68.82303334650398,
-    "cautious": 61.30219909358818,
-    "social": 39.36722917385591,
-    "generous": 19.632364516358308,
-    "risky": 4.065063594786995,
-    "carousing": 0.4279922626953299,
-    "patient": 1.8305472656250001,
-    "craft": 1.9256250000000001
+    "cerebral": 50.57293433938284,
+    "strategic": 67.10245751284137,
+    "cautious": 59.76964411624847,
+    "social": 38.38304844450951,
+    "generous": 19.14155540344935,
+    "risky": 3.96343700491732,
+    "carousing": 0.4172924561279467,
+    "patient": 1.784783583984375,
+    "craft": 1.877484375
   },
   "aptitudes": [
     "strategist",
@@ -2349,9 +2338,9 @@
     "stalwart",
     "peacemaker"
   ],
-  "actionCount": 183,
-  "updatedAt": 1784309076988,
-  "rev": 45,
+  "actionCount": 184,
+  "updatedAt": 1784309249636,
+  "rev": 46,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -2361,7 +2350,7 @@
   "syncedAt": 1783791225006,
   "teachers": {},
   "regionsKnown": {
-    "valley": 6
+    "valley": 7
   },
   "company": [],
   "foreclosed": [],
@@ -2396,10 +2385,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-07-17T17:12:48.946Z",
-      "lastAt": "2026-07-17T17:24:36.986Z",
+      "lastAt": "2026-07-17T17:27:29.633Z",
       "startDay": 17,
       "endDay": 17,
-      "beats": 6
+      "beats": 7
     }
   ],
   "_pendingArrival": null

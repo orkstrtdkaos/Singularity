@@ -18,6 +18,14 @@
 - **Visibility — surface likely errors so the GM CAN see them.** A light consistency check each turn can flag probable errors into the GM context ("POSSIBLE ERROR: this NPC has two registry entries; this ability's rank exceeds its practice") so the GM knows to repair. The engine already has the data; make the anomaly visible so the fix can be chosen.
 - **Repair panel discoverability.** The 🔧 panel is the player's direct fix path but is easy to miss. When the GM emits a `refuse` on a repair the channel can't make (or a player asks to fix something out of character), point them to the Repair panel explicitly.
 
+## PART 3 — Add people/places reliably, and let ITEMS EVOLVE (Erik: "Memory is stuck at the mundane midweight-spear description")
+> **Verified at HEAD:** the GM CAN add people/places — `generateRequest` (gm.js L54/77: `type: npc|location|arc`) mints them when the fiction reaches for something not already known, and `npcUpdates`/`placeUpdates` apply (L300). **But there is NO item-update op anywhere.** The applied-ops list (L300) has `characterDeltas.inventoryAdd` (CREATE an item) but nothing to UPDATE an existing one — no `itemUpdates`, no growing-item structure. **So Memory the spear was added once with its midweight description and is FROZEN — the GM has no verb to evolve it.** That is exactly Erik's report.
+
+- **New `itemUpdates` op** (parallel to `npcUpdates`/`placeUpdates`): the GM can UPDATE an owned item's evolving fields — `description`, `name` (a spear that earns a truer name), `properties`/`tags`, `provenance` (what it's been through), `uses`. Applied like the other update ops (bounded, the item must already be owned). So Memory can grow: "the Deathbound spear, its haft worn to your grip, the runes along it now answering your deathsense" — a description that reflects what it's become, not the shop-fresh line.
+- **Growing-item support:** an item can carry an evolving `description` + a provenance log (beats it was part of). `itemUpdates` appends/rewrites these as the fiction earns it. Ties to the portrait seed (SNG-136) — an evolved item description feeds a truer portrait too.
+- **Prompt the GM to use it.** Add to the op vocabulary + a rule: *when a significant item is central to a beat that changes it — a weapon that drinks a death, a tool that breaks and is reforged, a keepsake that gains meaning — emit `itemUpdates` so the item's description grows with the story. A legendary/growing item should NOT stay at its creation description across a whole campaign.*
+- **Confirm add-people/places reliability** (same as Part 1/2): the `generateRequest` path works, but strengthen the prompt so the GM reliably emits it when the fiction names a NEW person/place — an acknowledged-new-face that never gets a `generateRequest` is the same forgot-the-op gap. When narration introduces someone/somewhere not in KNOWN PEOPLE / place ids, it MUST emit `generateRequest`.
+
 ## ENGINE / UI SURFACES
 | Module | Change |
 |---|---|
@@ -25,7 +33,9 @@
 | `engine/corrections.js` | New ops: `correctAbilityRank·correctBond·correctVital·correctAttribute·mergeEntity` — bounded, logged, repair-not-wish. |
 | `engine/*` (consistency) | A light `detectAnomalies(character)` (dup entities, rank>practice, vital desync) → feeds the GM POSSIBLE ERROR block + the Repair panel. |
 | `app.js` Repair panel (L4270) | Expose the new correction ops; point players here on a refused/out-of-channel repair. |
-| `tests/*` | The ripe block names the specific ripe crafts; a decisive use of a ripe craft yields markDefiningMoment (sim a defining beat); a prose acknowledgment of an error co-occurs with the matching stateOp; each new correction op fixes its target + is logged + refuses over-reach; detectAnomalies flags a seeded dup/rank error; Repair panel applies the new ops. |
+| `engine/gm.js` + `app.js` (ops) | New `itemUpdates` op (update owned item description/name/properties/provenance/uses); add to the applied-ops list (L300) + the GM op vocabulary + a rule to evolve significant items; strengthen `generateRequest` prompting so new people/places reliably mint. |
+| `engine/*` (items) | Growing-item support: evolving `description` + provenance log on the item record; `applyItemUpdates(character, ops)` bounded to owned items. |
+| `tests/*` | The ripe block names the specific ripe crafts; a decisive use of a ripe craft yields markDefiningMoment (sim a defining beat); a prose acknowledgment of an error co-occurs with the matching stateOp; each new correction op fixes its target + is logged + refuses over-reach; detectAnomalies flags a seeded dup/rank error; Repair panel applies the new ops; **`itemUpdates` evolves an owned item's description/name (Memory the spear grows past its creation line) and refuses to update an unowned item; a narration introducing a NEW person/place emits `generateRequest`.** |
 
 ## GUARDS
 - **Mechanics unchanged** — mastery stays a GM-marked defining beat (not accumulation); repairs stay "repair not wish." This ticket makes the GM more RELIABLE at the existing rules, it doesn't relax them.

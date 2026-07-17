@@ -890,6 +890,77 @@
     }
    ],
    "nativeOrCombination": "native"
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_self_mending_work",
+   "name": "The Self-Mending Work",
+   "levelReq": 4,
+   "energyCost": 12,
+   "powerSystem": "reach_mechanical_spiritual",
+   "tradition": "enginewright",
+   "attribute": "practical",
+   "axes": {
+    "mechanical_spiritual": -0.6
+   },
+   "functions": [
+    "make",
+    "mend"
+   ],
+   "narrationHints": "You build the repair INTO the thing — so that when it breaks, and it will, it knows how to find its own way back to whole without you.",
+   "description": "The Enginewright art of the work that mends itself — a mechanism, a structure, a system built with its own healing folded in, so it survives its maker. To build this well is to build something that no longer needs you.",
+   "notFor": "It makes durable things, not living ones — a self-mending work is still a work, patient and unfeeling. And building the mending in costs far more than building the thing; you pay the whole future's repairs up front.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Self-Mending Work",
+     "grants": "Build a mechanism or structure that repairs itself, enduring long past its making.",
+     "cannot": "It cannot mend the living, only the made; it costs the future's repairs at the moment of making; and a thing built to outlast you will — with all the grief that carries."
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "CREATE"
+   ],
+   "challengeProfile": {
+    "CREATE": 4
+   }
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_deep_works",
+   "name": "The Deep Works",
+   "levelReq": 5,
+   "energyCost": 13,
+   "powerSystem": "reach_mechanical_spiritual",
+   "tradition": "enginewright",
+   "attribute": "practical",
+   "axes": {
+    "mechanical_spiritual": -0.9
+   },
+   "functions": [
+    "make"
+   ],
+   "narrationHints": "It is too large to see the whole of at once — a work of such scale and precision that finishing it is less like building and more like agreeing to spend a piece of your life becoming the kind of person who could.",
+   "description": "The Enginewright capstone — a great work of the deep kind, a mechanism or edifice at the scale the dwarven-mechanical peoples are named for. The making of it changes the maker; you do not finish a Deep Work the same person who began it.",
+   "notFor": "One great work, built over real time and enormous cost — it is not a thing you produce in a beat but a thing you commit a season of yourself to. And a Deep Work, once made, is a fact of the world; it cannot be quietly unmade.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Deep Works",
+     "grants": "Commit to and complete a great work of deep making — a mechanism or edifice at world-scale.",
+     "cannot": "It demands real time and nearly all you have, it changes who you are in the building, and once made it is permanent — the world now has this thing in it, and so do you."
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "CREATE"
+   ],
+   "challengeProfile": {
+    "CREATE": 5
+   }
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

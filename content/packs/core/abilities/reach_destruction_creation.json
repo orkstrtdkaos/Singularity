@@ -763,6 +763,185 @@
     }
    ],
    "nativeOrCombination": "native"
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_undoing_word",
+   "name": "The Undoing Word",
+   "levelReq": 4,
+   "energyCost": 12,
+   "powerSystem": "reach_destruction_creation",
+   "tradition": "unmaker",
+   "attribute": "physical",
+   "axes": {
+    "destruction_creation": -0.6
+   },
+   "functions": [
+    "break"
+   ],
+   "narrationHints": "You speak the undoing of one thing — not destroy it, UNMAKE it, so that it does not fall or burn but simply stops having been assembled, and is only its parts again.",
+   "description": "The Unmaker art of the undoing — returning a made or bound thing to its unassembled state, so it is not destroyed but un-done, its making reversed. The clean art of those who end things properly.",
+   "notFor": "It unmakes the assembled, not the living or the truly singular — you cannot unmake a person, a soul, a genuine unity. And unmaking is not free of grief just because it is clean; a thing un-done is still gone.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Undoing Word",
+     "grants": "Unmake an assembled thing back to its unbound parts, reversing its making.",
+     "cannot": "It cannot touch the living or the singular, it costs dearly, and un-done is still gone — cleanness is not the same as no loss."
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "FIGHT"
+   ],
+   "challengeProfile": {
+    "FIGHT": 4
+   },
+   "harmRung": "severe"
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_last_unmaking",
+   "name": "The Last Unmaking",
+   "levelReq": 5,
+   "energyCost": 14,
+   "powerSystem": "reach_destruction_creation",
+   "tradition": "unmaker",
+   "attribute": "physical",
+   "axes": {
+    "destruction_creation": -0.9
+   },
+   "functions": [
+    "break"
+   ],
+   "narrationHints": "You unmake something that was never supposed to be unmakeable — a bound working, an ancient pact, a thing the world had decided was permanent — and the world, briefly, has to agree it was wrong.",
+   "description": "The Unmaker capstone — the undoing of a thing meant to be permanent, a working or bond the world held as fixed. The deepest and most feared Unmaker gift, because some things were made permanent for good reason.",
+   "notFor": "One permanent thing, once, at enormous cost — and the world resists; unmaking the fixed takes everything and cannot be repeated soon. And you do not always know WHY a thing was made permanent until you have unmade it.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Last Unmaking",
+     "grants": "Unmake a thing meant to be permanent — a fixed working, an ancient bond.",
+     "cannot": "It costs nearly all you have, the world resists the unmaking of the fixed, and some things were sealed for reasons you learn only after you have broken the seal."
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "FIGHT"
+   ],
+   "challengeProfile": {
+    "FIGHT": 5
+   },
+   "harmRung": "severe"
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_true_making",
+   "name": "The True Making",
+   "levelReq": 3,
+   "energyCost": 7,
+   "powerSystem": "reach_destruction_creation",
+   "tradition": "wright",
+   "attribute": "physical",
+   "axes": {
+    "destruction_creation": 0.5
+   },
+   "functions": [
+    "make",
+    "mend"
+   ],
+   "narrationHints": "You make the thing properly — not quickly, not cleverly, but TRULY, so that it is exactly what it should be and will hold because it was made right the first time.",
+   "description": "The Wright art of true making — building a thing correctly and completely, so it is sound to its core and endures because nothing in it was cut short. The maker's first real mastery: not fast, but right.",
+   "notFor": "It makes sound things, not living or magical ones — a true making is still a made thing. And making truly costs time and care; you cannot rush a true making and have it stay true.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The True Making",
+     "grants": "Make a thing truly and completely, sound to its core and enduring.",
+     "cannot": "It makes the made, not the living; it cannot be hurried without ceasing to be true; and a thing made right outlasts its maker, with all that carries."
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "CREATE"
+   ],
+   "challengeProfile": {
+    "CREATE": 3
+   }
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_reforging",
+   "name": "The Reforging",
+   "levelReq": 4,
+   "energyCost": 11,
+   "powerSystem": "reach_destruction_creation",
+   "tradition": "wright",
+   "attribute": "physical",
+   "axes": {
+    "destruction_creation": 0.7
+   },
+   "functions": [
+    "make",
+    "mend"
+   ],
+   "narrationHints": "You take the broken thing and do not merely mend it — you reforge it, so that where it broke is now where it is strongest, the break itself made into the making.",
+   "description": "The Wright art of reforging — remaking a broken thing so that its breaking becomes its strength, the flaw worked into a truer form. The deep gift of makers who know that broken is not the same as ruined.",
+   "notFor": "It reforges the made, not the living — a broken bone or a broken heart is not a Wright's work. And reforging asks the thing be truly broken first; you cannot reforge what has only been scratched.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Reforging",
+     "grants": "Reforge a broken thing so its break becomes its strength.",
+     "cannot": "It works on the made, not the living; it needs a true break to work with; and the reforged thing is changed — stronger, but no longer the thing it was before it broke."
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "CREATE"
+   ],
+   "challengeProfile": {
+    "CREATE": 4
+   }
+  },
+  {
+   "schemaVersion": 1,
+   "id": "the_masterwork",
+   "name": "The Masterwork",
+   "levelReq": 5,
+   "energyCost": 13,
+   "powerSystem": "reach_destruction_creation",
+   "tradition": "wright",
+   "attribute": "physical",
+   "axes": {
+    "destruction_creation": 0.9
+   },
+   "functions": [
+    "make"
+   ],
+   "narrationHints": "You make the one thing — the work that holds everything you have ever learned about making, so complete and so right that it will teach the next maker who studies it long after you are gone.",
+   "description": "The Wright capstone — the masterwork, the single making that gathers a lifetime's craft into one true thing, sound enough to teach across generations. The maker's greatest gift and their legacy both: to make a thing that outlasts and instructs.",
+   "notFor": "One masterwork, once, over real time and enormous cost — it is not produced in a beat but committed to; and a masterwork, once made, is a fact and a teacher in the world. It cannot be casually surpassed, even by you.",
+   "tree": [
+    {
+     "rank": 1,
+     "name": "The Masterwork",
+     "grants": "Make a single masterwork that gathers a lifetime's craft into one enduring, teaching thing.",
+     "cannot": "It demands real time and nearly all you have, it stands as a permanent fact and teacher, and you may never make its equal again — a masterwork is, often, the making you are measured by ever after."
+    }
+   ],
+   "gated": "learned",
+   "nativeOrCombination": "native",
+   "challengeTypes": [
+    "CREATE"
+   ],
+   "challengeProfile": {
+    "CREATE": 5
+   }
   }
  ],
  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

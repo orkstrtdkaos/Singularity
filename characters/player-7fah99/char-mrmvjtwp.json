@@ -24,6 +24,16 @@
     {
       "abilityId": "prism_sight",
       "level": 1
+    },
+    {
+      "abilityId": "staunch",
+      "level": 1,
+      "native": true
+    },
+    {
+      "abilityId": "the_speaking_grove",
+      "level": 1,
+      "native": true
     }
   ],
   "alignment": {},
@@ -54,7 +64,8 @@
       "effects": {
         "energy": 10
       },
-      "consumable": true
+      "consumable": true,
+      "pinned": true
     }
   ],
   "deeds": [],
@@ -73,21 +84,25 @@
         "player": "Open your senses with Lifesense — take the quiet moment to feel the hall and whatever living things move through its walls before anyone notices you doing it.",
         "summary": "Aelyn reads the hall with Lifesense — five living signatures, the city's walls holding something that isn't quite life, and a sapling-child that waves hello.",
         "narration": "The reach comes quietly — you let it out the way you'd open a hand, not a door. Lifesense moves through the hall in a slow pulse, and the world returns in warmth-shapes: the tender near the planter, deliberate and unhurried, a steady ember of vitality. The two at the far end, similarly calm, similarly slow — these are not people in a hurry and their bodies know it. The sapling in the planter reads bright, almost startlingly so, a small fierce heat compared to the even glow of the adult Rootkin around it.\n\nThe walls themselves — that's where the partial slips. You feel *something* in the wood, distributed and faint, a warmth that isn't quite alive in any way you have a word for, and isn't quite not. It moves in the grain, slow as sap. You can't hold it long enough to understand it before it diffuses and you lose the thread.\n\nBranch, beside your knee, has gone very still. Its buds are wide open. When you glance down, it is looking at the sapling in the planter with an attention that is, for something that moves like weather, almost urgent.\n\nThe sapling looks back at you. Then, with the deliberateness of something that has thought carefully about the action, it raises one thin branch in a gesture that is almost certainly a greeting."
+      },
+      {
+        "player": "Crouch down to Branch's level and ask quietly what it sees — let it speak first.",
+        "summary": "Branch speaks its first real words in the Heartroot — 'old, very old, and watching' — as the sapling-child waits for acknowledgment.",
+        "narration": "You lower yourself to one knee on the moss, bringing your face level with Branch's shoulder-height crown. Up close, the buds are fully splayed — five of them, stiff and wide-open, the posture it takes when something has caught all of its attention at once. You've seen it fix on a thriving oak with that same still hunger, and on a dying one with something closer to grief. This is neither.\n\n\"Branch,\" you say quietly, your voice barely above the sound the bark makes in the morning — that slow, pressured exhale. \"What do you see?\"\n\nA long pause. The kind that would be uncomfortable with anyone else. Then, in the slow creak that is its voice, one word at a time: \"Old.\" Another pause, longer. \"Very. Old. And.\" The buds quiver slightly. \"Watching.\"\n\nAcross the room, the sapling-child still holds its thin branch extended in your direction — a greeting that has been waiting, patient and unhurried, for however long a three-year-old grown-hall person considers reasonable. The tender near the planter has stopped adjusting the soil entirely. She does not look at you directly, but her hands are still, and the quiet way she's not-looking is its own kind of attention."
       }
     ],
     "lastTurn": {
-      "narration": "The reach comes quietly — you let it out the way you'd open a hand, not a door. Lifesense moves through the hall in a slow pulse, and the world returns in warmth-shapes: the tender near the planter, deliberate and unhurried, a steady ember of vitality. The two at the far end, similarly calm, similarly slow — these are not people in a hurry and their bodies know it. The sapling in the planter reads bright, almost startlingly so, a small fierce heat compared to the even glow of the adult Rootkin around it.\n\nThe walls themselves — that's where the partial slips. You feel *something* in the wood, distributed and faint, a warmth that isn't quite alive in any way you have a word for, and isn't quite not. It moves in the grain, slow as sap. You can't hold it long enough to understand it before it diffuses and you lose the thread.\n\nBranch, beside your knee, has gone very still. Its buds are wide open. When you glance down, it is looking at the sapling in the planter with an attention that is, for something that moves like weather, almost urgent.\n\nThe sapling looks back at you. Then, with the deliberateness of something that has thought carefully about the action, it raises one thin branch in a gesture that is almost certainly a greeting.",
-      "sceneSummary": "Aelyn reads the hall with Lifesense — five living signatures, the city's walls holding something that isn't quite life, and a sapling-child that waves hello.",
+      "narration": "You lower yourself to one knee on the moss, bringing your face level with Branch's shoulder-height crown. Up close, the buds are fully splayed — five of them, stiff and wide-open, the posture it takes when something has caught all of its attention at once. You've seen it fix on a thriving oak with that same still hunger, and on a dying one with something closer to grief. This is neither.\n\n\"Branch,\" you say quietly, your voice barely above the sound the bark makes in the morning — that slow, pressured exhale. \"What do you see?\"\n\nA long pause. The kind that would be uncomfortable with anyone else. Then, in the slow creak that is its voice, one word at a time: \"Old.\" Another pause, longer. \"Very. Old. And.\" The buds quiver slightly. \"Watching.\"\n\nAcross the room, the sapling-child still holds its thin branch extended in your direction — a greeting that has been waiting, patient and unhurried, for however long a three-year-old grown-hall person considers reasonable. The tender near the planter has stopped adjusting the soil entirely. She does not look at you directly, but her hands are still, and the quiet way she's not-looking is its own kind of attention.",
+      "sceneSummary": "Branch speaks its first real words in the Heartroot — 'old, very old, and watching' — as the sapling-child waits for acknowledgment.",
       "choices": [
         {
-          "label": "Wave back at the sapling — meet the greeting on its own terms, simply and directly.",
+          "label": "Answer the sapling's greeting — raise your hand to it and let it know you see it.",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "connect",
-            "gentle"
+            "help"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -96,30 +111,28 @@
           "emergenceId": null
         },
         {
-          "label": "Crouch down to Branch's level and ask quietly what it sees — let it speak first.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Use The Speaking Grove — ask the sapling what it is watching, in the language the green understands.",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {},
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
-            "listen",
-            "companion"
+            "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
+          "abilityId": "the_speaking_grove",
+          "energyCost": 4,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Approach the tender tending the planter — introduce yourself as a traveler, keep it simple.",
+          "label": "Stand and address the tender directly — introduce yourself and ask whether there's someone who speaks with newcomers.",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "introduce",
-            "careful"
+            "persuade"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -128,14 +141,13 @@
           "emergenceId": null
         },
         {
-          "label": "Hold still and let the moment settle — watch how the tender, the sapling, and Branch all react to each other before you do anything.",
+          "label": "Stay crouched and ask Branch what it means — what is 'watching'? The hall? The sapling? Something in the walls?",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "observe",
-            "careful"
+            "study"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -144,16 +156,19 @@
           "emergenceId": null
         }
       ],
+      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -3
+        "energy": 0
       },
+      "ledgerEvents": [],
+      "questUpdates": [],
       "scene": {
-        "setting": "Interior of a living-wood hall near the Heartroot's entrance gate — thirty-foot arched ceiling of breathing bark, moss underfoot, oval light-gaps admitting early spring dawn. Outdoors visible through the wide open far end of the hall.",
+        "setting": "Interior of a living-wood hall near the Heartroot's entrance gate — thirty-foot arched ceiling of breathing bark, moss underfoot, oval light-gaps admitting early spring dawn. Aelyn is crouched at Branch's level near the center of the hall.",
         "npcsPresent": [
           {
             "name": "Rootkin tender (unnamed)",
-            "state": "Moving slowly around the large planter, adjusting the sapling within it — paused slightly, aware Aelyn is present but not yet addressing her."
+            "state": "Hands still over the planter soil — has stopped her work and is not-looking at Aelyn with quiet, deliberate attention."
           },
           {
             "name": "Two other Rootkin (unnamed)",
@@ -161,11 +176,11 @@
           },
           {
             "name": "Sapling (child?)",
-            "state": "Has raised one thin branch toward Aelyn in a clear, deliberate greeting."
+            "state": "Branch still raised toward Aelyn — patient, waiting, holding the greeting open."
           },
           {
             "name": "Branch",
-            "state": "Gone very still at Aelyn's knee, buds wide open, staring at the sapling with unusual intensity."
+            "state": "Buds fully splayed, all five open and rigid, fixed on the sapling. Has just spoken: 'Old. Very. Old. And. Watching.'"
           }
         ],
         "objects": [
@@ -176,36 +191,38 @@
           "Oval light-gaps in the bark ceiling admitting dawn"
         ],
         "threads": [
-          "The sapling-child has greeted Aelyn with a raised branch — the gesture hangs unanswered.",
-          "Branch is frozen and wide-budded, watching the sapling with urgent attention — its first homecoming reaction still unresolved.",
+          "The sapling-child's greeting-branch is still raised — unanswered, patient.",
+          "Branch's words — 'old, very old, and watching' — are unexplained; it is still fixed on the sapling.",
+          "The tender has gone still and is quietly observing Aelyn without engaging.",
           "The walls hold something warm and distributed that Lifesense could not fully read — not quite life, not quite not.",
-          "Aelyn is a stranger here with no local reputation and no established contact.",
-          "The tender is aware of Aelyn's presence but has not spoken."
+          "Aelyn is a stranger here with no local reputation and no established contact."
         ]
+      },
+      "npcUpdates": [],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A quiet exchange with Branch — a moment, no more."
       },
       "codexUpdates": [
         {
-          "topic": "heartroot-walls",
-          "label": "The Heartroot — Something in the Wood",
-          "kind": "mystery",
-          "entityId": "heartroot",
-          "fact": "Lifesense read something warm and distributed moving through the hall's grain — slow as sap, not quite alive in any recognizable way, but not absent of vitality either. It diffused before Aelyn could understand it.",
+          "topic": "branch-companion",
+          "label": "Branch",
+          "kind": "person",
+          "entityId": "branch",
+          "fact": "In the Heartroot's entrance hall, Branch fixed all five buds open on the sapling-child and spoke its first deliberate words here: 'Old. Very. Old. And. Watching.' — a warning or a recognition, not yet clear.",
           "links": [
-            "heartroot"
+            "heartroot",
+            "sapling-child-heartroot"
           ]
         }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief quiet moment — Lifesense cast, the hall settling around her."
-      }
+      ]
     },
     "sceneState": {
-      "setting": "Interior of a living-wood hall near the Heartroot's entrance gate — thirty-foot arched ceiling of breathing bark, moss underfoot, oval light-gaps admitting early spring dawn. Outdoors visible through the wide open far end of the hall.",
+      "setting": "Interior of a living-wood hall near the Heartroot's entrance gate — thirty-foot arched ceiling of breathing bark, moss underfoot, oval light-gaps admitting early spring dawn. Aelyn is crouched at Branch's level near the center of the hall.",
       "npcsPresent": [
         {
           "name": "Rootkin tender (unnamed)",
-          "state": "Moving slowly around the large planter, adjusting the sapling within it — paused slightly, aware Aelyn is present but no"
+          "state": "Hands still over the planter soil — has stopped her work and is not-looking at Aelyn with quiet, deliberate attention."
         },
         {
           "name": "Two other Rootkin (unnamed)",
@@ -213,11 +230,11 @@
         },
         {
           "name": "Sapling (child?)",
-          "state": "Has raised one thin branch toward Aelyn in a clear, deliberate greeting."
+          "state": "Branch still raised toward Aelyn — patient, waiting, holding the greeting open."
         },
         {
           "name": "Branch",
-          "state": "Gone very still at Aelyn's knee, buds wide open, staring at the sapling with unusual intensity."
+          "state": "Buds fully splayed, all five open and rigid, fixed on the sapling. Has just spoken: 'Old. Very. Old. And. Watching.'"
         }
       ],
       "objects": [
@@ -228,11 +245,11 @@
         "Oval light-gaps in the bark ceiling admitting dawn"
       ],
       "threads": [
-        "The sapling-child has greeted Aelyn with a raised branch — the gesture hangs unanswered.",
-        "Branch is frozen and wide-budded, watching the sapling with urgent attention — its first homecoming reaction still unresolved.",
+        "The sapling-child's greeting-branch is still raised — unanswered, patient.",
+        "Branch's words — 'old, very old, and watching' — are unexplained; it is still fixed on the sapling.",
+        "The tender has gone still and is quietly observing Aelyn without engaging.",
         "The walls hold something warm and distributed that Lifesense could not fully read — not quite life, not quite not.",
-        "Aelyn is a stranger here with no local reputation and no established contact.",
-        "The tender is aware of Aelyn's presence but has not spoken."
+        "Aelyn is a stranger here with no local reputation and no established contact."
       ]
     }
   },
@@ -304,9 +321,9 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-16T04:22:24.364Z",
-    "lastTickWorldDay": 16,
-    "lastCanonWorldDay": 16
+    "lastSharedReadAt": "2026-07-17T00:40:16.761Z",
+    "lastTickWorldDay": 17,
+    "lastCanonWorldDay": 17
   },
   "domains": {
     "primary": "rootkin",
@@ -369,18 +386,42 @@
         "aliases": [],
         "createdDay": 1,
         "updatedDay": 1
+      },
+      "branch": {
+        "id": "branch",
+        "label": "Branch",
+        "kind": "person",
+        "facts": [
+          "[d1] In the Heartroot's entrance hall, Branch fixed all five buds open on the sapling-child and spoke its first deliberate words here: 'Old. Very. Old. And. Watching.' — a warning or a recognition, not yet"
+        ],
+        "links": [
+          "heartroot",
+          "sapling-child-heartroot"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "branch",
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "cerebral": 1,
-    "cautious": 1
+    "cerebral": 0.975,
+    "cautious": 0.975
   },
   "aptitudes": [],
-  "actionCount": 1,
+  "actionCount": 2,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
+    {
+      "kind": "portrait",
+      "prompt": "Aelyn Kantoro",
+      "url": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20mid-twenties%20with%20light%20blonde%2C%20faintly%20wavy%20hair%20cut%20in%20curtain%20bangs%2C%20the%20rest%20falling%20to%20the%20small%20of%20her%20back%20%E2%80%94%20usually%20worn%20in%20a%20french%20braid%20with%20the%20bangs%20left%20loose.%20Dark%20nature-green%20tank%20to%2C%20full-body%20character%20portrait%2C%20named%20Aelyn%20Kantoro%2C%20of%20the%20rootkin%2C%20warden%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Her%20mother%20dies%2C%20and%20she%20decides%20to%20go%20to%20the%20nanite%20world%2C%20to%20figure%20out%20why%20she%20is%20different%20than%20the%20pure%20nature%20peop%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=73420&nologo=true",
+      "caption": "Aelyn Kantoro — level 1",
+      "worldDay": 17,
+      "at": "2026-07-17T00:40:27.294Z"
+    },
     {
       "kind": "portrait",
       "prompt": "Aelyn Kantoro",
@@ -390,9 +431,9 @@
       "at": "2026-07-16T02:13:02.378Z"
     }
   ],
-  "portrait": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20mid-twenties%20with%20light%20blonde%2C%20faintly%20wavy%20hair%20cut%20in%20curtain%20bangs%2C%20the%20rest%20falling%20to%20the%20small%20of%20her%20back%20%E2%80%94%20usually%20worn%20in%20a%20french%20braid%20with%20the%20bangs%20left%20loose.%20Dark%20nature-green%20tank%20to%2C%20full-body%20character%20portrait%2C%20named%20Aelyn%20Kantoro%2C%20of%20the%20rootkin%2C%20warden%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Her%20mother%20dies%2C%20and%20she%20decides%20to%20go%20to%20the%20nanite%20world%2C%20to%20figure%20out%20why%20she%20is%20different%20than%20the%20pure%20nature%20peop%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=5064&nologo=true",
-  "updatedAt": 1784175920678,
-  "rev": 10,
+  "portrait": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20mid-twenties%20with%20light%20blonde%2C%20faintly%20wavy%20hair%20cut%20in%20curtain%20bangs%2C%20the%20rest%20falling%20to%20the%20small%20of%20her%20back%20%E2%80%94%20usually%20worn%20in%20a%20french%20braid%20with%20the%20bangs%20left%20loose.%20Dark%20nature-green%20tank%20to%2C%20full-body%20character%20portrait%2C%20named%20Aelyn%20Kantoro%2C%20of%20the%20rootkin%2C%20warden%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Her%20mother%20dies%2C%20and%20she%20decides%20to%20go%20to%20the%20nanite%20world%2C%20to%20figure%20out%20why%20she%20is%20different%20than%20the%20pure%20nature%20peop%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=73420&nologo=true",
+  "updatedAt": 1784248996745,
+  "rev": 17,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -400,7 +441,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "the_quickwood": 2
+    "the_quickwood": 3
   },
   "opLossPending": false,
   "establishedFacts": [
@@ -411,7 +452,7 @@
       "subjectId": null
     }
   ],
-  "syncedAt": 1784168024984,
+  "syncedAt": 1784175920678,
   "customAbilities": {},
   "companionBonds": {},
   "practice": {
@@ -429,5 +470,8 @@
     "abyssal"
   ],
   "forkChoices": {},
-  "backfillVersion": 1
+  "backfillVersion": 1,
+  "nativeGrantsVersion": 1,
+  "_pinsInitialized": true,
+  "_pendingArrival": null
 }

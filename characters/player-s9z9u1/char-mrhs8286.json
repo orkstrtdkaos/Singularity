@@ -566,26 +566,21 @@
         "player": "Use The Attended End on the woman — she stopped without being asked and offered something freely; read what is ending for her",
         "summary": "The Attended End reads the traveler's ending — a road completing, not a life. Silas nods his respect and the party prepares to move.",
         "narration": "You let the ability settle quietly — no ceremony, just attention opening the way it does when Marrow wills it. The traveler is standing in afternoon light with her hand still open, pack heavy on one shoulder, coat tied with orange cord. She's not nervous. She's not waiting for anything.\n\nWhat The Attended End finds is small and precise: a road ending. Not her life — her circuit. She has walked this track longer than most people walk any one thing, and she is walking it for the last time. Not from grief or failure. From completion. The thing she carried — the pattern of warnings, the checking of crossings, the habit of stopping when something needed saying — is nearly done being hers. Someone else will carry it next season, or no one will, and she has made her peace with either.\n\nThere is nothing to turn aside. This is not a death and it is not a crisis. It is the ordinary closing of a chapter, and she knows it in her bones without having named it yet.\n\nHuginn makes no sound. That is confirmation enough. You look at the traveler — her open hand, the weight of the pack, the way she is standing like someone who has already said the important thing — and you give her a nod of genuine respect. \"Good road,\" you say, meaning it as specifically as you can."
+      },
+      {
+        "player": "Let her go with only the nod — keep moving south toward Leth and the engineer before the afternoon runs out.",
+        "summary": "The road traveler departs southbound; Silas, Pell, and Huginn press south toward the Edge District and Leth.",
+        "narration": "You hold the nod a beat longer than courtesy requires — enough that she knows it was received, not just returned. Then you shift Memory's lash at your shoulder and step back onto the track.\n\nShe doesn't watch you go. By the time Pell falls into step beside you and Huginn lifts from the fence post at the road's edge, the traveler is already moving again, southbound, the orange cord at her coat swinging with the rhythm of a walk that knows where it's going. You don't look back either. The afternoon is still long enough, barely, to reach the Edge District before the light goes.\n\nThe pine run thins out over the next quarter mile, the canopy opening onto open road, last season's grass flat and straw-colored at the verges. The trade track here is well-worn — two ruts and a center strip of compressed earth, the kind of road that accumulates use without anyone deciding to build it. Pell walks on your left, pack settled, saying nothing yet. Huginn rides your right shoulder, facing forward.\n\n\"Leth first,\" Pell says, not a question. She's been running the sequence since you left Fendt's shop. \"If she has his name and you have the shape of what he'd need to hear, that's a shorter conversation than wandering the district asking after a difficult man who doesn't want to be found.\" She glances at Huginn. \"Unless the bird has a preference.\" Huginn does not dignify this. Pell almost smiles."
       }
     ],
     "lastTurn": {
-      "narration": "You let the ability settle quietly — no ceremony, just attention opening the way it does when Marrow wills it. The traveler is standing in afternoon light with her hand still open, pack heavy on one shoulder, coat tied with orange cord. She's not nervous. She's not waiting for anything.\n\nWhat The Attended End finds is small and precise: a road ending. Not her life — her circuit. She has walked this track longer than most people walk any one thing, and she is walking it for the last time. Not from grief or failure. From completion. The thing she carried — the pattern of warnings, the checking of crossings, the habit of stopping when something needed saying — is nearly done being hers. Someone else will carry it next season, or no one will, and she has made her peace with either.\n\nThere is nothing to turn aside. This is not a death and it is not a crisis. It is the ordinary closing of a chapter, and she knows it in her bones without having named it yet.\n\nHuginn makes no sound. That is confirmation enough. You look at the traveler — her open hand, the weight of the pack, the way she is standing like someone who has already said the important thing — and you give her a nod of genuine respect. \"Good road,\" you say, meaning it as specifically as you can.",
-      "sceneSummary": "The Attended End reads the traveler's ending — a road completing, not a life. Silas nods his respect and the party prepares to move.",
+      "narration": "You hold the nod a beat longer than courtesy requires — enough that she knows it was received, not just returned. Then you shift Memory's lash at your shoulder and step back onto the track.\n\nShe doesn't watch you go. By the time Pell falls into step beside you and Huginn lifts from the fence post at the road's edge, the traveler is already moving again, southbound, the orange cord at her coat swinging with the rhythm of a walk that knows where it's going. You don't look back either. The afternoon is still long enough, barely, to reach the Edge District before the light goes.\n\nThe pine run thins out over the next quarter mile, the canopy opening onto open road, last season's grass flat and straw-colored at the verges. The trade track here is well-worn — two ruts and a center strip of compressed earth, the kind of road that accumulates use without anyone deciding to build it. Pell walks on your left, pack settled, saying nothing yet. Huginn rides your right shoulder, facing forward.\n\n\"Leth first,\" Pell says, not a question. She's been running the sequence since you left Fendt's shop. \"If she has his name and you have the shape of what he'd need to hear, that's a shorter conversation than wandering the district asking after a difficult man who doesn't want to be found.\" She glances at Huginn. \"Unless the bird has a preference.\" Huginn does not dignify this. Pell almost smiles.",
+      "sceneSummary": "The road traveler departs southbound; Silas, Pell, and Huginn press south toward the Edge District and Leth.",
       "choices": [
         {
-          "label": "Ask her one thing — has she seen anyone else on this track in the last few days, anyone moving fast or moving wrong?",
+          "label": "Head straight to Leth — find the archivist and get the engineer's name before she closes up for the day",
           "attribute": "social",
           "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Let her go with only the nod — keep moving south toward Leth and the engineer before the afternoon runs out.",
-          "attribute": "physical",
-          "subAttribute": "agility",
           "difficulty": 0,
           "intentTags": [
             "travel"
@@ -593,103 +588,88 @@
           "trivial": true
         },
         {
-          "label": "Tell her plainly what you read — not the mechanism, just the fact: she's finishing something, and she already knows it. See if she wants to name it.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 15,
-          "intentTags": [
-            "comfort"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Check the ford warning more carefully — use Palework on the seepage itself if you can reach it from here, or press her for the exact extent of what she saw.",
+          "label": "Ask Huginn to orient — the bird watched a specific building last time; see if that instinct still holds now that you're on the road back in",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "scout"
           ],
-          "abilityId": "palework",
+          "trivial": true
+        },
+        {
+          "label": "Talk through the approach with Pell while you walk — she's been running the sequence; hear how she'd frame the ask to Leth, and what she'd leave out",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 0,
+          "intentTags": [
+            "plan"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Watch the road ahead — the gray seepage at the lower ford is less than half a mile south; check it directly before crossing, not around it",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
           "trivial": true
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -2
-      },
       "scene": {
-        "setting": "The old trade track south from the Edge District, half a mile out from Fendt's shop — late afternoon, early spring, pine run opening onto open road. Low sun cutting through the trees at a long angle.",
+        "setting": "The old trade track south toward the Edge District — pine run thinning to open road, afternoon light long and low at the travelers' backs, the ford crossing half a mile ahead.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Standing at Silas's shoulder, pack settled, watching the exchange with quiet attention."
+            "state": "Walking on Silas's left, pack settled, running the sequence — Leth first, engineer second."
           },
           {
             "name": "Huginn",
-            "state": "Still on Silas's shoulder, making no sound — that silence its own verdict."
-          },
-          {
-            "name": "Road Traveler (unnamed)",
-            "state": "Standing aside on the track, hand still open, receiving the nod without expression — neither surprised nor untouched."
+            "state": "On Silas's right shoulder, facing forward, declining to comment on Pell's question."
           }
         ],
         "objects": [
-          "Traveler's Pack — holding brass wire coil, chalk dust tin, and filter cloth",
           "Memory (spear) — road-lashed at Silas's back",
-          "Fendt's Testimony — folded page in Silas's coat"
+          "Fendt's Testimony — folded page in Silas's coat",
+          "Brass Wire Coil (fine), Chalk Dust Tin, Pre-Transition Filter Cloth — in pack from Fendt's shop"
         ],
         "threads": [
-          "The road traveler is finishing her last circuit — she has not named it yet; she may or may not want to",
-          "The lower ford's east-side stones are seeping gray — extent and spread unknown",
-          "Fendt is walking to Millbrook behind them — will reach Mara Wells within a day or two",
-          "Leth and the engineer still need to be found"
+          "The lower ford's east-side stones are seeping gray — half a mile ahead on this road",
+          "Leth's location in the Edge District is known by description but not by address",
+          "The engineer's name is still unconfirmed — Sorel described reluctance, not refusal",
+          "Fendt is walking to Millbrook behind them — will reach Mara Wells within a day or two"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "road-traveler",
-          "name": "Road Traveler",
-          "note": "The Attended End read her plainly — a road ending, not a life. Her circuit is completing from wholeness, not failure. She received Silas's nod without surprise.",
-          "learned": [
-            "Her last circuit on this track — completing from wholeness, not crisis. She knows it in her bones."
-          ],
-          "statusNote": "On the trade track, southbound, walking her last circuit — at peace with the completion.",
-          "status": "active"
-        }
-      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange on the road — the reading, the nod, the pause."
+        "why": "brief exchange with the road traveler and the first quarter mile south on the track"
       }
     },
     "sceneState": {
-      "setting": "The old trade track south from the Edge District, half a mile out from Fendt's shop — late afternoon, early spring, pine run opening onto open road. Low sun cutting through the trees at a long angle.",
+      "setting": "The old trade track south toward the Edge District — pine run thinning to open road, afternoon light long and low at the travelers' backs, the ford crossing half a mile ahead.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Standing at Silas's shoulder, pack settled, watching the exchange with quiet attention."
+          "state": "Walking on Silas's left, pack settled, running the sequence — Leth first, engineer second."
         },
         {
           "name": "Huginn",
-          "state": "Still on Silas's shoulder, making no sound — that silence its own verdict."
-        },
-        {
-          "name": "Road Traveler (unnamed)",
-          "state": "Standing aside on the track, hand still open, receiving the nod without expression — neither surprised nor untouched."
+          "state": "On Silas's right shoulder, facing forward, declining to comment on Pell's question."
         }
       ],
       "objects": [
-        "Traveler's Pack — holding brass wire coil, chalk dust tin, and filter cloth",
         "Memory (spear) — road-lashed at Silas's back",
-        "Fendt's Testimony — folded page in Silas's coat"
+        "Fendt's Testimony — folded page in Silas's coat",
+        "Brass Wire Coil (fine), Chalk Dust Tin, Pre-Transition Filter Cloth — in pack fr"
       ],
       "threads": [
-        "The road traveler is finishing her last circuit — she has not named it yet; she may or may not want to",
-        "The lower ford's east-side stones are seeping gray — extent and spread unknown",
-        "Fendt is walking to Millbrook behind them — will reach Mara Wells within a day or two",
-        "Leth and the engineer still need to be found"
+        "The lower ford's east-side stones are seeping gray — half a mile ahead on this road",
+        "Leth's location in the Edge District is known by description but not by address",
+        "The engineer's name is still unconfirmed — Sorel described reluctance, not refusal",
+        "Fendt is walking to Millbrook behind them — will reach Mara Wells within a day or two"
       ]
     }
   },
@@ -1584,7 +1564,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-17T02:39:05.349Z",
+    "lastSharedReadAt": "2026-07-17T03:02:22.571Z",
     "lastTickWorldDay": 17,
     "lastCanonWorldDay": 17
   },
@@ -2480,17 +2460,17 @@
     }
   },
   "tendencies": {
-    "strategic": 32.157570551940715,
-    "cerebral": 27.856979548323384,
-    "social": 27.979970265229,
-    "generous": 6.112715716393074,
-    "cautious": 22.5323092106653,
-    "physical": 1.3282207289940828,
-    "risky": 3.7400023993035276,
-    "ruthless": 1.6445765826887269,
-    "carousing": 1.1548254055899718,
-    "amorous": 3.1666969804760106,
-    "patient": 0.9856341797740961
+    "strategic": 31.353631288142196,
+    "cerebral": 27.160555059615298,
+    "social": 27.280471008598273,
+    "generous": 5.959897823483248,
+    "cautious": 21.969001480398667,
+    "physical": 1.2950152107692308,
+    "risky": 3.6465023393209393,
+    "ruthless": 1.6034621681215087,
+    "carousing": 1.1259547704502224,
+    "amorous": 3.0875295559641103,
+    "patient": 0.9609933252797437
   },
   "aptitudes": [
     "strategist",
@@ -2502,7 +2482,7 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 354,
+  "actionCount": 355,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -2644,8 +2624,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784257246613,
-  "rev": 505,
+  "updatedAt": 1784257385064,
+  "rev": 508,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3209,7 +3189,7 @@
   "syncedAt": 1784184597860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 169
+    "valley": 170
   },
   "foreclosed": [
     "rootkin",
@@ -3233,5 +3213,15 @@
     "text": "You have become the valley's hunter-priest, and the valley has decided to keep you. The path that brought you here closed at your back like a held breath, and instead of running you built a smokehouse arrangement with Aldric, carried a dressed bull and sow down from the north wood, and learned to belong through useful work before you learned to belong through anything warmer. The warmth came at Pell Marsh's forge — a full night bent over Memory's broken body, the death-runes worked back into the metal, old wine going sour in the cups while the two of you found the word that made the spear real again; and at dawn, with ash on your hands and the name still hanging between you, you kissed her and meant it, devoted in a way the rune-work only made legible, not possible. You have raised the dead — a cleaned rabbit in the upper meadow, no ritual, just your hands and something the valley's old grain recognised in you — and you have stood the line on the scrub oak ridge while the bull boar came through the brush and Pell's shot misfired, holding until Corvin could land the strike cleanly. Memory has tasted blood now, Huginn witnessed the binding at the stone ring, and you are not the man who took the short way; you are the man the short way made.",
     "at": "2026-07-16T20:47:26.890Z"
   },
-  "_pendingArrival": null
+  "_pendingArrival": null,
+  "sessions": [
+    {
+      "id": "sess-1",
+      "startedAt": "2026-07-17T03:03:05.063Z",
+      "lastAt": "2026-07-17T03:03:05.063Z",
+      "startDay": 17,
+      "endDay": 17,
+      "beats": 1
+    }
+  ]
 }

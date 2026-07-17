@@ -1,4 +1,9 @@
-# PIPELINE ALERT — Singularity## 🧹 SNG-135 — Tighten the Company section (Erik screenshot; CCode-buildable NOW)
+# PIPELINE ALERT — Singularity## 🎨 SNG-136 — Portraits reflect lived growth (Erik gallery screenshot; CCode-buildable)
+`po/SPEC_SNG-136_portraits_reflect_growth.md`. **Two confirmed gaps, both additions to existing plumbing:** (1) `characterPromptSeed` does NOT read chronicle/deeds/level (only creation-static form+gear) — so level-up regens show who the character WAS, not who they've become; fold in `majorDeeds`+level+arc stage (bounded), ties to SNG-134 lived-story. (2) **NO NPC-portrait-on-milestone exists at all** — Pell has 0 renders because nothing is built to fire; add `npcPromptSeed` + trigger on high `bondStage` (committed/devoted/partner) → `addGalleryImage`, a one-time retro backfill for NPCs already past a high milestone (Pell), and no-empty-tiles (the blank Vash tile = failed gen should retry/drop). Reuses gallery + bond machinery; high-milestones-only, deduped, rating-lensed, minor-safe.
+
+---
+
+## 🧹 SNG-135 — Tighten the Company section (Erik screenshot; CCode-buildable NOW)
 `po/SPEC_SNG-135_company_section_tighten.md`. Company (Companions/Allies/recruitable) reads heavy — each member stacks name + badge + a FULL-WIDTH action button over ~3 rows (L5562-5567). Fix: ONE tight flex row per member (name · inline role/bond badge · compact action), demote full-width buttons to small inline controls, move companion description to hover/tap. **Layout only — SNG-126 roster/roles/recruit gating/part-ways all UNCHANGED.** Composes with SNG-120 collapse + SNG-134 hover.
 
 ---

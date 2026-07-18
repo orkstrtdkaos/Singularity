@@ -492,12 +492,25 @@
           "name": "The Last Gift",
           "grants": "Give the dying a clear, painless final interval — words said, peace made, the end met whole.",
           "cannot": "Does not postpone death; the gift is the hour, not more hours.",
-          "harmRung": "lethal",
+          "harmRung": "none",
+          "functions": [
+            "heal",
+            "restore"
+          ],
+          "gains": "broaden"
+        },
+        {
+          "rank": 2,
+          "name": "The Gathered Hour",
+          "grants": "Give the gift to several at once — a room, a field after a fight — so none of them ends alone or unheard. Those attending share the interval: what is said inside it reaches them clearly and is remembered exactly.",
+          "cannot": "It still does not postpone a single death; the gift is the hour, never more hours. Given to many, you carry all of their endings at once. And what is heard in that hour cannot be unheard by anyone who was present.",
           "functions": [
             "heal",
             "restore",
             "reveal"
-          ]
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "challengeTypes": [
@@ -505,7 +518,7 @@
         "INVESTIGATE"
       ],
       "tradition": "rootkin",
-      "harmRung": "lethal",
+      "harmRung": "none",
       "nativeOrCombination": "native"
     },
     {

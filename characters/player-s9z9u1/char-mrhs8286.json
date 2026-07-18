@@ -86,7 +86,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.34644570584565554,
+    "spectrumId": -0.32912342055337274,
     "violence_peace": 0.1030845625,
     "chaos_order": 0.24682516555723183,
     "mechanical_spiritual": 0.2400392471479881,
@@ -390,7 +390,10 @@
         "lattice.tier7",
         "unspooling.tumbledown",
         "threnodist.wellspring",
-        "valley.radiant_plateau_edge"
+        "valley.radiant_plateau_edge",
+        "ashwarden.cairnhold",
+        "ashwarden.long_grey",
+        "ashwarden.quiet_ground"
       ],
       "day": 1,
       "worldDay": 12
@@ -508,7 +511,10 @@
         "lattice.tier7",
         "unspooling.tumbledown",
         "threnodist.wellspring",
-        "valley.radiant_plateau_edge"
+        "valley.radiant_plateau_edge",
+        "ashwarden.cairnhold",
+        "ashwarden.long_grey",
+        "ashwarden.quiet_ground"
       ],
       "_bonusApplied": 0.25,
       "day": 1,
@@ -643,7 +649,10 @@
         "lattice.tier7",
         "unspooling.tumbledown",
         "threnodist.wellspring",
-        "valley.radiant_plateau_edge"
+        "valley.radiant_plateau_edge",
+        "ashwarden.cairnhold",
+        "ashwarden.long_grey",
+        "ashwarden.quiet_ground"
       ],
       "_bonusApplied": 0.25,
       "day": 1,
@@ -692,7 +701,97 @@
         "valley-crisis"
       ],
       "weight": 2,
-      "spread": [],
+      "spread": [
+        "mason.bedrock",
+        "ashwarden.cairnhold",
+        "seraphic.choirheight",
+        "figurist.cloudform",
+        "domain.deepwood",
+        "blazeborn.glasshome",
+        "valley.greywater_stilts",
+        "rootkin.grovehome",
+        "valley.harmonic_heights",
+        "valley.kestrels_roost",
+        "valley.old_switchback",
+        "enginewright.pressureholt",
+        "valley.radiant_plateau",
+        "unspooling.spindrift",
+        "valley.sunken_choir",
+        "abyssal.halls",
+        "syllogist.axiom",
+        "center.gate",
+        "abyssal.gate",
+        "blazeborn.blaze",
+        "domain.blocklands",
+        "syllogist.bloodless",
+        "wright.ceaseless",
+        "churnfolk.edge",
+        "unmaker.clearing",
+        "somatic.cogitarium",
+        "center.crossing",
+        "figurist.works",
+        "verist.flensing",
+        "somatic.temple",
+        "wright.forge",
+        "hourkeeper.archive",
+        "enginewright.verge",
+        "unspooling.gralloch",
+        "lattice.grand",
+        "center.coliseum",
+        "enginewright.engine",
+        "rootkin.greenward",
+        "threnodist.griefhouse",
+        "wright.cathedral",
+        "veilwright.hall",
+        "umbral.harborward",
+        "rootkin.heartroot",
+        "ashwarden.hollowing",
+        "center.markets",
+        "veilwright.court",
+        "numinous.hermitage",
+        "umbral.market",
+        "veilwright.lastmask",
+        "mason.leaden",
+        "blazeborn.lensward",
+        "ashwarden.long_grey",
+        "horizon.longspan",
+        "riven.marchward",
+        "abyssal.maw",
+        "seraphic.mercyhouse",
+        "somatic.middleway",
+        "numinous.numen",
+        "syllogist.proofhalls",
+        "rootkin.eaves",
+        "ashwarden.quiet_ground",
+        "center.quiethouse",
+        "riven.redline",
+        "unmaker.scour",
+        "unmaker.scouring",
+        "enginewright.serviceways",
+        "hourkeeper.slowhour",
+        "rootkin.orchard",
+        "umbral.stair",
+        "riven.stillhold",
+        "hourkeeper.stopped",
+        "numinous.thinning",
+        "verist.toldground",
+        "verist.stone",
+        "umbral.underlight",
+        "seraphic.unfallen",
+        "horizon.unlanded",
+        "umbral.unlit",
+        "lattice.unplanned",
+        "figurist.untethered",
+        "horizon.wayhouse",
+        "mason.weighingyard",
+        "threnodist.deep",
+        "unspooling.wend",
+        "valley.thornwake_glade",
+        "lattice.tier7",
+        "unspooling.tumbledown",
+        "threnodist.wellspring",
+        "valley.radiant_plateau_edge"
+      ],
       "_bonusApplied": 0.4,
       "day": 3,
       "worldDay": 17
@@ -708,7 +807,97 @@
         "justice"
       ],
       "weight": 2,
-      "spread": [],
+      "spread": [
+        "mason.bedrock",
+        "ashwarden.cairnhold",
+        "seraphic.choirheight",
+        "figurist.cloudform",
+        "domain.deepwood",
+        "blazeborn.glasshome",
+        "valley.greywater_stilts",
+        "rootkin.grovehome",
+        "valley.harmonic_heights",
+        "valley.kestrels_roost",
+        "valley.old_switchback",
+        "enginewright.pressureholt",
+        "valley.radiant_plateau",
+        "unspooling.spindrift",
+        "valley.sunken_choir",
+        "abyssal.halls",
+        "syllogist.axiom",
+        "center.gate",
+        "abyssal.gate",
+        "blazeborn.blaze",
+        "domain.blocklands",
+        "syllogist.bloodless",
+        "wright.ceaseless",
+        "churnfolk.edge",
+        "unmaker.clearing",
+        "somatic.cogitarium",
+        "center.crossing",
+        "figurist.works",
+        "verist.flensing",
+        "somatic.temple",
+        "wright.forge",
+        "hourkeeper.archive",
+        "enginewright.verge",
+        "unspooling.gralloch",
+        "lattice.grand",
+        "center.coliseum",
+        "enginewright.engine",
+        "rootkin.greenward",
+        "threnodist.griefhouse",
+        "wright.cathedral",
+        "veilwright.hall",
+        "umbral.harborward",
+        "rootkin.heartroot",
+        "ashwarden.hollowing",
+        "center.markets",
+        "veilwright.court",
+        "numinous.hermitage",
+        "umbral.market",
+        "veilwright.lastmask",
+        "mason.leaden",
+        "blazeborn.lensward",
+        "ashwarden.long_grey",
+        "horizon.longspan",
+        "riven.marchward",
+        "abyssal.maw",
+        "seraphic.mercyhouse",
+        "somatic.middleway",
+        "numinous.numen",
+        "syllogist.proofhalls",
+        "rootkin.eaves",
+        "ashwarden.quiet_ground",
+        "center.quiethouse",
+        "riven.redline",
+        "unmaker.scour",
+        "unmaker.scouring",
+        "enginewright.serviceways",
+        "hourkeeper.slowhour",
+        "rootkin.orchard",
+        "umbral.stair",
+        "riven.stillhold",
+        "hourkeeper.stopped",
+        "numinous.thinning",
+        "verist.toldground",
+        "verist.stone",
+        "umbral.underlight",
+        "seraphic.unfallen",
+        "horizon.unlanded",
+        "umbral.unlit",
+        "lattice.unplanned",
+        "figurist.untethered",
+        "horizon.wayhouse",
+        "mason.weighingyard",
+        "threnodist.deep",
+        "unspooling.wend",
+        "valley.thornwake_glade",
+        "lattice.tier7",
+        "unspooling.tumbledown",
+        "threnodist.wellspring",
+        "valley.radiant_plateau_edge"
+      ],
       "_bonusApplied": 0.15,
       "day": 3,
       "worldDay": 17
@@ -874,46 +1063,41 @@
         "player": "Veth Ondra - I would walk this path with you, if you will have me - my Raven name is 'Troubler'.  No one in the world knows that, and I offer it to you as a bond.",
         "summary": "Veth Ondra names herself fully, offers her Raven name — Troubler — as a bond, and asks to walk the path with Silas. Huginn witnesses in silence.",
         "narration": "Veth Ondra is quiet for a long moment after your introduction. Her hands stay flat on the table edge. She looks at Memory, then past you to Huginn on the arch-stone, then back.\n\nThen she speaks. \"Veth Ondra,\" she says. \"South-facing warden post, Ashwarden March, eleven years. The post was dissolved and the holding reassigned. I did not go back to the center.\" She pauses, and something in her posture shifts — not relaxing, but opening. The way a door moves when someone has decided to stop holding it closed. \"I would walk this path with you,\" she says, \"if you will have me.\"\n\nShe does not stop there. She lifts her chin slightly, and her voice drops to something level and deliberate — the register of a person saying a true thing that costs them something. \"My Raven name is Troubler,\" she says. \"No one in the world knows that. I offer it to you as a bond.\"\n\nHuginn turns his head on the arch-stone. One full, slow turn — not at Veth, but at you. His eye is steady and extremely calm, and he says nothing. His silence sits in the air with a weight you have learned to read. It is not warning. It is witness.\n\nThe morning light comes in level over the market stalls and lies across the dark cloth between you. The bone-handled tools are still there in their teaching sequence, still waiting."
+      },
+      {
+        "player": " Silas has just spoken his Raven name aloud and made the offer. Veth's answer is what comes next,",
+        "summary": "Veth Ondra names her Raven name — Stillwater — accepts Silas's offer, and extends her hand in the Ashwarden way. She is in.",
+        "narration": "Veth Ondra does not answer immediately. She holds the name — Troubler — the way a person holds a coal, carefully, feeling its heat. Her hands stay flat on the table edge. Her eyes go to Huginn on the arch-stone, and this time the bird looks back at her. One long, unhurried look. Then it turns away.\n\nShe exhales through her nose. A small sound, but it carries something. \"Troubler,\" she says, and she says it the way a person says a name they intend to remember — not repeating it back, but placing it somewhere safe. She looks at you directly. \"That is a warden's name. Earned, not given at the threshold.\" She straightens slightly. \"My Raven name is Stillwater. Eleven years on the south-facing post and not one of my wards died clean — every one of them I had to work for. The other wardens found it funny. Then they found it useful.\" A pause. \"Then the post was dissolved and no one found it anything anymore.\"\n\nShe comes around the corner of the table. Not quickly. The movement is deliberate — the same quality as the kit's arrangement on the dark cloth, each piece in the right place. She stops an arm's length away and extends her right hand, open-palmed and level, the Ashwarden way. \"Silas Fell Weir,\" she says. \"I will walk this path with you. I ask only that you tell me where it goes — not because I need to approve, but because I have spent eleven years standing at the edge of things without anyone telling me what was on the other side, and I am done with that.\" Her eyes are steady. She is not asking for reassurance. She is asking for information."
       }
     ],
     "lastTurn": {
-      "narration": "Veth Ondra is quiet for a long moment after your introduction. Her hands stay flat on the table edge. She looks at Memory, then past you to Huginn on the arch-stone, then back.\n\nThen she speaks. \"Veth Ondra,\" she says. \"South-facing warden post, Ashwarden March, eleven years. The post was dissolved and the holding reassigned. I did not go back to the center.\" She pauses, and something in her posture shifts — not relaxing, but opening. The way a door moves when someone has decided to stop holding it closed. \"I would walk this path with you,\" she says, \"if you will have me.\"\n\nShe does not stop there. She lifts her chin slightly, and her voice drops to something level and deliberate — the register of a person saying a true thing that costs them something. \"My Raven name is Troubler,\" she says. \"No one in the world knows that. I offer it to you as a bond.\"\n\nHuginn turns his head on the arch-stone. One full, slow turn — not at Veth, but at you. His eye is steady and extremely calm, and he says nothing. His silence sits in the air with a weight you have learned to read. It is not warning. It is witness.\n\nThe morning light comes in level over the market stalls and lies across the dark cloth between you. The bone-handled tools are still there in their teaching sequence, still waiting.",
-      "sceneSummary": "Veth Ondra names herself fully, offers her Raven name — Troubler — as a bond, and asks to walk the path with Silas. Huginn witnesses in silence.",
+      "narration": "Veth Ondra does not answer immediately. She holds the name — Troubler — the way a person holds a coal, carefully, feeling its heat. Her hands stay flat on the table edge. Her eyes go to Huginn on the arch-stone, and this time the bird looks back at her. One long, unhurried look. Then it turns away.\n\nShe exhales through her nose. A small sound, but it carries something. \"Troubler,\" she says, and she says it the way a person says a name they intend to remember — not repeating it back, but placing it somewhere safe. She looks at you directly. \"That is a warden's name. Earned, not given at the threshold.\" She straightens slightly. \"My Raven name is Stillwater. Eleven years on the south-facing post and not one of my wards died clean — every one of them I had to work for. The other wardens found it funny. Then they found it useful.\" A pause. \"Then the post was dissolved and no one found it anything anymore.\"\n\nShe comes around the corner of the table. Not quickly. The movement is deliberate — the same quality as the kit's arrangement on the dark cloth, each piece in the right place. She stops an arm's length away and extends her right hand, open-palmed and level, the Ashwarden way. \"Silas Fell Weir,\" she says. \"I will walk this path with you. I ask only that you tell me where it goes — not because I need to approve, but because I have spent eleven years standing at the edge of things without anyone telling me what was on the other side, and I am done with that.\" Her eyes are steady. She is not asking for reassurance. She is asking for information.",
+      "sceneSummary": "Veth Ondra names her Raven name — Stillwater — accepts Silas's offer, and extends her hand in the Ashwarden way. She is in.",
       "choices": [
         {
-          "label": "Receive her Raven name with your own — give her the name Troubler's worth and answer the bond with something true of yours",
+          "label": "Take her hand and name the road plainly — south lane, home, then the Disputed Zone and the water's source",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "romantic",
-            "devote"
+            "honest",
+            "lead"
           ],
           "trivial": true
         },
         {
-          "label": "Accept her company plainly — ask what she needs from the market row before the party moves",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "plan",
-            "help"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask what drove her from the March's center — you want to know the shape of the thing that ended her post before she walks with you into harder country",
+          "label": "Take her hand and ask first what she knows of the Ashwarden March's current state — before you walk her into what's ahead",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "study",
+            "careful"
           ],
           "trivial": true
         },
         {
-          "label": "Bring Pell and Siol over from the market row — introduce Veth to the full party before the road commits anyone",
+          "label": "Take her hand, then call Pell and Siol in from the market row — she should meet who she's walking with before the road begins",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
@@ -922,18 +1106,29 @@
             "help"
           ],
           "trivial": true
+        },
+        {
+          "label": "Take her hand — then ask her directly what dissolved the south-facing post, and who made that decision",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "honest"
+          ],
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "The dark-cloth stall in the Hub market row — Silas at the near table edge, Memory upright on the dirt between them, Veth Ondra across with both hands resting on the table edge. Morning light over the stalls.",
+        "setting": "The dark-cloth stall in the Hub market row — Veth Ondra has come around the table corner and stands an arm's length from Silas, right hand extended open-palmed in the Ashwarden way. Morning light over the stalls.",
         "npcsPresent": [
           {
             "name": "Veth Ondra",
-            "state": "Hands flat on the table edge — the offer made, the Raven name given, waiting on Silas's answer."
+            "state": "Standing an arm's length away, right hand extended open-palmed, eyes steady — waiting for the handclasp."
           },
           {
             "name": "Huginn",
-            "state": "Turned his head fully toward Silas on the arch-stone — eye steady, silent, witnessing."
+            "state": "On the arch-stone — turned away after the long look at Veth, eye on the plaza."
           },
           {
             "name": "Siol",
@@ -945,14 +1140,14 @@
           }
         ],
         "objects": [
-          "Memory — upright in the dirt between Silas and Veth",
+          "Memory — upright in the dirt between where Silas stands and where the table is",
           "Dark cloth covering the table",
           "Bone-handled tools in teaching sequence — all pieces still present",
           "Seven waygate arches visible to the north"
         ],
         "threads": [
-          "Veth's offer is open — she has given her Raven name and asked to walk the path; Silas has not answered",
-          "What ended her post, and what she knows the March still has to teach",
+          "Veth's hand extended — waiting on the handclasp and Silas's answer about where the road goes",
+          "Her Raven name offered: Stillwater — eleven years of difficult wards, post dissolved, done with standing at the edge without knowing what's on the other side",
           "Pell and Siol in the market row — not yet introduced to Veth",
           "The Ent circle: still to visit",
           "The evening suggestion between Silas and Pell — filed, not resolved"
@@ -962,52 +1157,55 @@
         {
           "op": "update",
           "npcId": "veth-ondra",
-          "name": "Veth Ondra",
-          "role": "Former Ashwarden warden, now teaching at the dark-cloth stall — has offered to join the party",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Named her Raven name — Troubler — as a bond. Asked to walk the path with Silas. The offer is open.",
+          "name": "Veth Ondda",
+          "note": "Named her Raven name — Stillwater — and extended her hand in the Ashwarden way. She is in. She asks only to be told where the road goes — not to approve, but because she is done standing at edges without knowing what is on the other side.",
           "learned": [
-            "Her Raven name is Troubler — no one else in the world holds this",
-            "She offered it as a bond, not a greeting — a deliberate act with weight behind it",
-            "She is prepared to leave the stall and the Hub and travel"
-          ],
-          "skillsObserved": [
-            "naming a secret thing plainly and without ceremony as a commitment"
+            "Her Raven name is Stillwater — no one in the world holds this from her except Silas now",
+            "Not one of her wards on the south-facing post died clean — every one she had to work for; the other wardens found it useful before the post was dissolved",
+            "She is done standing at the edge of things without knowing what is on the other side — plain condition of walking with the party"
           ],
           "relationshipDelta": 2,
           "status": "active",
-          "statusNote": "At the dark-cloth stall in the Hub market row — her offer open, waiting on Silas's answer"
+          "statusNote": "At the dark-cloth stall — hand extended, Raven name given, asking only to know where the road goes before she steps into it.",
+          "bondType": "sworn"
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Veth Ondra's Raven name is Stillwater — given to Silas Weir at the dark-cloth stall as a bond in exchange for his name, Troubler. She has extended her hand in the Ashwarden way and asked to walk the road. Her one condition: be told where it goes.",
+          "subjectId": "veth-ondra"
         }
       ],
       "codexUpdates": [
         {
           "topic": "veth-ondra",
-          "label": "Veth Ondra",
+          "label": "Veth Ondra — Stillwater",
           "kind": "person",
           "entityId": "veth-ondra",
-          "fact": "Her Raven name is Troubler — given to Silas as a bond, known to no one else. She has asked to walk the path with him.",
+          "fact": "Her Raven name is Stillwater. Eleven years on the south-facing warden post; not one ward died clean — every one she worked for. Post dissolved and reassigned; she did not return to the March's center. She has extended her hand in the Ashwarden way and asked to join the road, with one condition: be told where it leads.",
           "links": [
+            "the-water-crisis",
             "the-edge-district-ledger",
-            "the-water-crisis"
+            "waygate"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A few minutes of exchange at the stall — the offer given, the room held"
+        "why": "A short exchange at the stall — the naming, the answer, the extended hand."
       }
     },
     "sceneState": {
-      "setting": "The dark-cloth stall in the Hub market row — Silas at the near table edge, Memory upright on the dirt between them, Veth Ondra across with both hands resting on the table edge. Morning light over the stalls.",
+      "setting": "The dark-cloth stall in the Hub market row — Veth Ondra has come around the table corner and stands an arm's length from Silas, right hand extended open-palmed in the Ashwarden way. Morning light over the stalls.",
       "npcsPresent": [
         {
           "name": "Veth Ondra",
-          "state": "Hands flat on the table edge — the offer made, the Raven name given, waiting on Silas's answer."
+          "state": "Standing an arm's length away, right hand extended open-palmed, eyes steady — waiting for the handclasp."
         },
         {
           "name": "Huginn",
-          "state": "Turned his head fully toward Silas on the arch-stone — eye steady, silent, witnessing."
+          "state": "On the arch-stone — turned away after the long look at Veth, eye on the plaza."
         },
         {
           "name": "Siol",
@@ -1019,14 +1217,14 @@
         }
       ],
       "objects": [
-        "Memory — upright in the dirt between Silas and Veth",
+        "Memory — upright in the dirt between where Silas stands and where the table is",
         "Dark cloth covering the table",
         "Bone-handled tools in teaching sequence — all pieces still present",
         "Seven waygate arches visible to the north"
       ],
       "threads": [
-        "Veth's offer is open — she has given her Raven name and asked to walk the path; Silas has not answered",
-        "What ended her post, and what she knows the March still has to teach",
+        "Veth's hand extended — waiting on the handclasp and Silas's answer about where the road goes",
+        "Her Raven name offered: Stillwater — eleven years of difficult wards, post dissolved, done with standing at the edge without knowing what's on the other side",
         "Pell and Siol in the market row — not yet introduced to Veth",
         "The Ent circle: still to visit",
         "The evening suggestion between Silas and Pell — filed, not resolved"
@@ -2152,18 +2350,22 @@
         "locationId": "gen-waygate",
         "day": 6
       },
-      "relationship": 4,
+      "relationship": 6,
       "history": [
         "[d6] Named herself plainly and in full after Silas named himself. Now wants to know how he walked this far into the craft without a functioning warden post behind him.",
-        "[d6] Named her Raven name — Troubler — as a bond. Asked to walk the path with Silas. The offer is open."
+        "[d6] Named her Raven name — Troubler — as a bond. Asked to walk the path with Silas. The offer is open.",
+        "[d6] Named her Raven name — Stillwater — and extended her hand in the Ashwarden way. She is in. She asks only to be told where the road goes — not to approve, but because she is done standing at edges without knowing what is on the other side.",
+        "[d6] Your bond becomes sworn."
       ],
       "knownFacts": [
-        "Held a warden post on the south-facing edge of the Ashwarden March for eleven years",
         "Her post was dissolved and the holding reassigned — she did not return to the center",
         "Came to the Hub instead and has been teaching at the stall since",
         "Her Raven name is Troubler — no one else in the world holds this",
         "She offered it as a bond, not a greeting — a deliberate act with weight behind it",
-        "She is prepared to leave the stall and the Hub and travel"
+        "She is prepared to leave the stall and the Hub and travel",
+        "Her Raven name is Stillwater — no one in the world holds this from her except Silas now",
+        "Not one of her wards on the south-facing post died clean — every one she had to work for; the other wardens found it useful before the post was dissolved",
+        "She is done standing at the edge of things without knowing what is on the other side — plain condition of walking with the party"
       ],
       "skillsObserved": [
         "reading a traveler's craft from a single object without prom",
@@ -2173,11 +2375,14 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the dark-cloth stall in the Hub market row — her offer open, waiting on Silas's answer",
+      "statusNote": "At the dark-cloth stall — hand extended, Raven name given, asking only to know where the road goes before she steps into it.",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 6
-      }
+      },
+      "bondType": "sworn",
+      "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Veth%20Ondra%2C%20woman%2C%20Former%20Ashwarden%20warden%2C%20now%20teaching%20at%20the%20dark-cloth%20stall%20%E2%80%94%20has%20offered%20to%20join%20the%20party%2C%20sworn%20to%20Silas%20Weir%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=66052&nologo=true",
+      "_portraitTier": "sworn"
     }
   },
   "placeMemory": {
@@ -2551,7 +2756,7 @@
   },
   "worldState": {
     "schemaVersion": 1,
-    "lastTickDay": 5,
+    "lastTickDay": 6,
     "eventStages": {
       "water_crisis": {
         "stage": 1,
@@ -2615,10 +2820,35 @@
         "day": 4,
         "worldDay": 18,
         "text": "Vash: While dressing her wheel's edge before first light, Vash reconstructed the overheard phrase word by word and realized the term she couldn't place was a pre-Transition calibration interval — specific enough that whoever said it had read the same foundational documents the array's optical layer was built from."
+      },
+      {
+        "day": 6,
+        "worldDay": 18,
+        "text": "Word has spread beyond millbrook: Raised a cleaned rabbit from the dead in the upper meadow — no ritual, no preparation, hands and will and the valley's old grain answering"
+      },
+      {
+        "day": 6,
+        "worldDay": 18,
+        "text": "Word has spread beyond millbrook: Silas Weir bound death-runes into the assembled spear at an open-sky fire, with Pell Marsh's maker's mark seated into the blade and Huginn witness at the stone ring."
+      },
+      {
+        "day": 6,
+        "worldDay": 18,
+        "text": "Word has spread beyond millbrook: Delivered a dressed bull and sow to Aldric's smokehouse — a significant haul by village standards, carried down from the north wood by three hunters."
+      },
+      {
+        "day": 6,
+        "worldDay": 18,
+        "text": "Word has spread beyond millbrook: Persuaded Fendt to commit his testimony to paper and walk to Millbrook — moved the falsified ledger thread from evidence-held to evidence-carried."
+      },
+      {
+        "day": 6,
+        "worldDay": 18,
+        "text": "Word has spread beyond millbrook: Persuaded Calvar — pre-Transition filtration engineer and author of the seventh-band specification — to leave the Edge District and travel to Millbrook to attest against Overseer Grael"
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-18T20:27:05.607Z",
+    "lastSharedReadAt": "2026-07-18T23:34:44.489Z",
     "lastTickWorldDay": 18,
     "lastCanonWorldDay": 18
   },
@@ -4009,6 +4239,14 @@
   "reconcileVersion": 6,
   "gallery": [
     {
+      "kind": "portrait",
+      "prompt": "a person, character portrait, named Veth Ondra, woman, Former Ashwarden warden, now teaching at the dark-cloth stall — has offered to join the party, sworn to Silas Weir",
+      "url": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Veth%20Ondra%2C%20woman%2C%20Former%20Ashwarden%20warden%2C%20now%20teaching%20at%20the%20dark-cloth%20stall%20%E2%80%94%20has%20offered%20to%20join%20the%20party%2C%20sworn%20to%20Silas%20Weir%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=66052&nologo=true",
+      "caption": "Veth Ondra — sworn · ally",
+      "worldDay": 18,
+      "at": "2026-07-18T23:59:23.709Z"
+    },
+    {
       "kind": "npc",
       "prompt": "Tane Solr",
       "url": "https://image.pollinations.ai/prompt/Lean%20in%20the%20way%20the%20valley's%20early-spring%20wind%20is%20lean%20%E2%80%94%20nothing%20wasted%2C%20everything%20purposeful.%20Grey%20coat%2C%20collarless%2C%20worn%20to%20the%20colour%20of%20old%20flint%20at%20the%20cuffs.%20Two%20seconds%20coiled%20at%20his%20left%20hip%2C%2C%20character%20portrait%2C%20named%20Tane%20Solr%2C%20Threshold-walker%20and%20named%20bout%20opponent%20%E2%80%94%20a%20man%20who%20has%20crossed%20the%20center-line%20enough%20times%20to%20sto%2C%20Unhurried%20in%20a%20way%20that%20is%20not%20laziness%20but%20arithmetic%20%E2%80%94%20he%20has%20already%20run%20the%20numbers%20on%20you%20and%20d%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13653&nologo=true",
@@ -4274,8 +4512,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784416458607,
-  "rev": 816,
+  "updatedAt": 1784419163710,
+  "rev": 819,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4887,7 +5125,9 @@
           "repaired": false,
           "stubbed": true,
           "romanceEligible": true,
-          "lastAttentionDay": 6
+          "lastAttentionDay": 6,
+          "promotedWorldDay": 18,
+          "canonTier": "variant"
         },
         "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Siol%20%E2%80%94%20Elven%20traveler%20at%20the%20Hub%20plaza%2C%20tall%2C%20pale%20coat%2C%20bir%2C%20someone%20of%20Waygate%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=4185&nologo=true"
       },
@@ -5102,7 +5342,9 @@
           "repaired": false,
           "stubbed": false,
           "romanceEligible": true,
-          "lastAttentionDay": 6
+          "lastAttentionDay": 6,
+          "promotedWorldDay": 18,
+          "canonTier": "canonical"
         },
         "image": "https://image.pollinations.ai/prompt/Lean%20in%20the%20way%20the%20valley's%20early-spring%20wind%20is%20lean%20%E2%80%94%20nothing%20wasted%2C%20everything%20purposeful.%20Grey%20coat%2C%20collarless%2C%20worn%20to%20the%20colour%20of%20old%20flint%20at%20the%20cuffs.%20Two%20seconds%20coiled%20at%20his%20left%20hip%2C%2C%20character%20portrait%2C%20named%20Tane%20Solr%2C%20Threshold-walker%20and%20named%20bout%20opponent%20%E2%80%94%20a%20man%20who%20has%20crossed%20the%20center-line%20enough%20times%20to%20sto%2C%20Unhurried%20in%20a%20way%20that%20is%20not%20laziness%20but%20arithmetic%20%E2%80%94%20he%20has%20already%20run%20the%20numbers%20on%20you%20and%20d%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13653&nologo=true"
       }
@@ -5251,12 +5493,6 @@
   },
   "opLossPending": false,
   "establishedFacts": [
-    {
-      "id": "calvar",
-      "text": "Calvar opened his door on the first knock — said 'I wondered what shape it would come in' and stepped back from the threshold. He was expecting someone to come, and he is present and willing to hear t",
-      "day": 3,
-      "subjectId": "calvar"
-    },
     {
       "id": "calvar",
       "text": "Calvar was directly taught the seventh-band specification method by Pell's father — he knew him as a mentor, and believed him dead. The connection between the specification's authorship and Calvar's o",
@@ -5490,6 +5726,12 @@
       "text": "The Hub Council water committee has Calvar's name and Mara Wells as relay contact — formal inquiry to follow; committee meets in three days.",
       "day": 6,
       "subjectId": "calvar"
+    },
+    {
+      "id": "veth-ondra",
+      "text": "Veth Ondra's Raven name is Stillwater — given to Silas Weir at the dark-cloth stall as a bond in exchange for his name, Troubler. She has extended her hand in the Ashwarden way and asked to walk the road. Her one condition: be told where it goes.",
+      "day": 6,
+      "subjectId": "veth-ondra"
     }
   ],
   "practice": {
@@ -5650,7 +5892,7 @@
   "syncedAt": 1784392733860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 382
+    "valley": 383
   },
   "foreclosed": [
     "rootkin",
@@ -5707,10 +5949,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T23:14:18.606Z",
+      "lastAt": "2026-07-18T23:59:23.708Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 107,
+      "beats": 108,
       "_recapError": null,
       "recap": "Day eighteen, and Silas Weir moved like a man who'd finally stopped fighting the shape of what he was. On the road he disarmed three opportunists without breaking bones, read the grief sitting behind the broad man's eyes, named it plainly, pressed provisions into their hands, and sent them toward something worth doing — mercy given as instruction, not sentiment. Then he brought the hard people together: Dara, Aldric, Fendt, Mara, Calvar, all of them in the heat of Pell's forge with no exits easy and no pretense left, and in that single evening he turned a valley's quiet panic into four working threads — engineering, logistics, supply, accounts — each with a named lead and a direction to face. The crisis didn't end, but it stopped being formless, and that was his doing."
     }

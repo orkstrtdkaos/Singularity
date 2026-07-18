@@ -887,7 +887,8 @@
         "demonic_angelic": -0.9
       },
       "functions": [
-        "command"
+        "hinder",
+        "reveal"
       ],
       "narrationHints": "The floor of the world opens under one person's certainty and they feel, for one endless moment, exactly how far down it goes — and how alone they are at the top of that fall.",
       "description": "The deepest Abyssal working — you show someone the full depth beneath their footing, the vertigo of a self with no floor. Most who receive it never stand quite the same way again. The Abyssals do it anyway.",
@@ -896,8 +897,14 @@
         {
           "rank": 1,
           "name": "The Drowning Deep",
-          "grants": "Show one person the abyss beneath their certainty — a lasting vertigo that reshapes who they are.",
-          "cannot": "It costs nearly all you have, it fails against genuine peace, and it CANNOT BE TAKEN BACK — you have shown them the deep and they have seen it."
+          "grants": "Show one person the full depth beneath their footing. What they were most certain of stops bearing weight — they hesitate where they never hesitated, and the vertigo weakens every act that rested on that certainty until they either rebuild it or find another floor to stand on.",
+          "cannot": "It costs nearly all you have. It fails entirely against someone at genuine peace with their own depths — they look down and are simply not afraid. And it CANNOT BE TAKEN BACK: you have shown them the deep and they have seen it, and the Abyssals are honest that this is the cruelest thing they do.",
+          "functions": [
+            "reveal",
+            "hinder"
+          ],
+          "harmRung": "incapacitating",
+          "gains": "broaden"
         }
       ],
       "gated": "learned",
@@ -974,7 +981,7 @@
       },
       "functions": [
         "empower",
-        "ward"
+        "sustain"
       ],
       "narrationHints": "For a moment you are lit from a source that was old before the Transition — the substrate itself answering, the way it answered when your kind first refused to give it up. It is the most yourself you will ever feel, and the most not-yours.",
       "description": "The Seraphic capstone that IS a precursor act — the radiance drawn straight from the fabricated substrate your people never surrendered. This is why the Seraphs are what they are: the light is the nanites, kept flowing, and keeping them flowing is a precursor working few living things can survive channeling.",
@@ -984,7 +991,13 @@
           "rank": 1,
           "name": "The Kept Flame",
           "grants": "Channel the fabricated substrate directly as sustained radiant power — a precursor-tier working innate to your kind.",
-          "cannot": "It carries an ongoing upkeep the whole time it burns, it can unmake one who is not substrate-born, and it marks you to anything that reads the substrate — you are a lit thing in a dark room, and not everything in the dark is friendly."
+          "cannot": "It carries an ongoing upkeep the whole time it burns, it can unmake one who is not substrate-born, and it marks you to anything that reads the substrate — you are a lit thing in a dark room, and not everything in the dark is friendly.",
+          "functions": [
+            "empower",
+            "sustain"
+          ],
+          "harmRung": "none",
+          "gains": "broaden"
         }
       ],
       "gated": "learned",
@@ -1009,8 +1022,8 @@
         "mechanical_spiritual": 0.4
       },
       "functions": [
-        "command",
-        "bind"
+        "open",
+        "sustain"
       ],
       "narrationHints": "You open the hollow in yourself — the one your people never filled, never closed, never gave up — and for a moment it is not an absence but a MOUTH, and the substrate pours through it, and you are the deepest thing in any room.",
       "description": "The Abyssal capstone that IS a precursor act — the deep hollow the Abyssals kept, where their ancestors declined to give the nanites up, opened as a channel to the substrate itself. Where the Seraphs keep the light, the Abyssals kept the depth; both drink from the same well, and neither can stop.",
@@ -1020,7 +1033,13 @@
           "rank": 1,
           "name": "The Hollow That Holds",
           "grants": "Channel the fabricated substrate through the kept Abyssal hollow — a precursor-tier working innate to your kind.",
-          "cannot": "It carries an ongoing upkeep while open, it can swallow one who is not abyssal-born, and it marks you to anything that reads the substrate — the deep calls to the deep, and not all of it is on your side."
+          "cannot": "It carries an ongoing upkeep while open, it can swallow one who is not abyssal-born, and it marks you to anything that reads the substrate — the deep calls to the deep, and not all of it is on your side.",
+          "functions": [
+            "open",
+            "sustain"
+          ],
+          "harmRung": "none",
+          "gains": "broaden"
         }
       ],
       "gated": "learned",

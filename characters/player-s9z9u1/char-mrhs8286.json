@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 15,
-  "xp": 1480,
+  "xp": 1485,
   "attributes": {
     "physical": 4,
     "mental": 5,
@@ -101,7 +101,7 @@
   "maxHealth": 100,
   "health": 100,
   "maxEnergy": 170,
-  "energy": 108,
+  "energy": 103,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -859,66 +859,70 @@
         "player": "Show her Memory — the spear with Huginn's thread — and let her read what death-craft is already in your hand",
         "summary": "Silas shows the seller Memory — she reads Huginn's thread in the fuller, names the Ashwarden grain plainly, and asks whether he came to learn or to confirm what he already built.",
         "narration": "You unsling Memory from your back in a single easy motion and set the butt of the shaft on the packed dirt, letting the spear rest upright between you. You do not say anything yet. You let the tool speak first.\n\nThe seller's eyes move to the spear the way a craftsman's eyes move to a joint — not at the surface, at the structure. She reads the ash shaft, the mid-weight iron tip, the road-lashing at the socket throat. Then she reads the threads. You watch the moment she finds Huginn's strand in the fuller — the one that carries his ending-sense, the Ashwarden grain — because her hands come off the table. Not alarm. Recognition. The kind a teacher has when a student arrives carrying something they built themselves, and the build is honest.\n\nShe says, \"That's not decoration.\" Her voice is even, without ornament. \"Someone who understands what Marrow is put that in the iron. Not just a thread of the craft — the real thing. The bird's knowing, seated into the fuller and bound to stay.\" She looks up from the spear to your face, and then past your shoulder to where Huginn sits on the arch-stone. He does not move. She reads that too. \"So you are the Ashwarden, and the bird is — \" she stops. Recalibrates. \"Or the bird is its own thing, and you are the maker who knew to listen to it.\"\n\nShe pulls two of the bone-handled tools aside, revealing a gap in the sequence you had not consciously noted before. \"The absent pieces,\" she says, and now there is something deliberate in how she holds your gaze. \"You already read the gap. Good. The question I have not asked yet is whether you came here to learn what fits in it, or whether you came here to fill it with what you have already made.\""
+      },
+      {
+        "player": "Answer honestly: both. You came to see what fits and to show what you've made — let her judge which of those this conversation becomes.",
+        "summary": "Silas answers the seller honestly — both learner and builder — and she names him as someone the Ashwarden March has more to offer than he has yet been shown.",
+        "narration": "You meet her question without flinching. Both, you tell her. You came to see what fits, and to show what you have already made. Let her judge which of those this conversation becomes.\n\nShe is quiet for a moment. Her hands come back to the table edge — not defensive, just resting there. She looks at Memory, then at you, and then at Huginn on the arch-stone. The bird does not acknowledge her. She accepts this as information.\n\nThen she nods. Once. The kind of nod a teacher gives when a student has finally said the correct thing after a long and patient wait.\n\n\"That,\" she says, \"is the only honest answer to that question.\" She reaches beneath the dark cloth and sets two more bone-handled tools on the table — the absent pieces of the sequence. They fit the gap exactly. \"Most people who find this stall tell me they came to learn. A few tell me they came to show me something. You are the first in some time who understood that those are the same errand.\" She tilts her head toward Memory. \"The Ashwarden grain in your fuller is seated well. But it is seated in a wright's spear, in a wright's hand. That is a door, not a dwelling. There is more of the March in you than you have been taught to find.\""
       }
     ],
     "lastTurn": {
-      "narration": "You unsling Memory from your back in a single easy motion and set the butt of the shaft on the packed dirt, letting the spear rest upright between you. You do not say anything yet. You let the tool speak first.\n\nThe seller's eyes move to the spear the way a craftsman's eyes move to a joint — not at the surface, at the structure. She reads the ash shaft, the mid-weight iron tip, the road-lashing at the socket throat. Then she reads the threads. You watch the moment she finds Huginn's strand in the fuller — the one that carries his ending-sense, the Ashwarden grain — because her hands come off the table. Not alarm. Recognition. The kind a teacher has when a student arrives carrying something they built themselves, and the build is honest.\n\nShe says, \"That's not decoration.\" Her voice is even, without ornament. \"Someone who understands what Marrow is put that in the iron. Not just a thread of the craft — the real thing. The bird's knowing, seated into the fuller and bound to stay.\" She looks up from the spear to your face, and then past your shoulder to where Huginn sits on the arch-stone. He does not move. She reads that too. \"So you are the Ashwarden, and the bird is — \" she stops. Recalibrates. \"Or the bird is its own thing, and you are the maker who knew to listen to it.\"\n\nShe pulls two of the bone-handled tools aside, revealing a gap in the sequence you had not consciously noted before. \"The absent pieces,\" she says, and now there is something deliberate in how she holds your gaze. \"You already read the gap. Good. The question I have not asked yet is whether you came here to learn what fits in it, or whether you came here to fill it with what you have already made.\"",
-      "sceneSummary": "Silas shows the seller Memory — she reads Huginn's thread in the fuller, names the Ashwarden grain plainly, and asks whether he came to learn or to confirm what he already built.",
+      "narration": "You meet her question without flinching. Both, you tell her. You came to see what fits, and to show what you have already made. Let her judge which of those this conversation becomes.\n\nShe is quiet for a moment. Her hands come back to the table edge — not defensive, just resting there. She looks at Memory, then at you, and then at Huginn on the arch-stone. The bird does not acknowledge her. She accepts this as information.\n\nThen she nods. Once. The kind of nod a teacher gives when a student has finally said the correct thing after a long and patient wait.\n\n\"That,\" she says, \"is the only honest answer to that question.\" She reaches beneath the dark cloth and sets two more bone-handled tools on the table — the absent pieces of the sequence. They fit the gap exactly. \"Most people who find this stall tell me they came to learn. A few tell me they came to show me something. You are the first in some time who understood that those are the same errand.\" She tilts her head toward Memory. \"The Ashwarden grain in your fuller is seated well. But it is seated in a wright's spear, in a wright's hand. That is a door, not a dwelling. There is more of the March in you than you have been taught to find.\"",
+      "sceneSummary": "Silas answers the seller honestly — both learner and builder — and she names him as someone the Ashwarden March has more to offer than he has yet been shown.",
       "choices": [
         {
-          "label": "Tell her plainly: you came to learn. Name what you lack — the absent pieces in your own death-craft — and ask what fits there.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "intentTags": [
-            "negotiate",
-            "help"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Answer honestly: both. You came to see what fits and to show what you've made — let her judge which of those this conversation becomes.",
+          "label": "Ask her name and what she teaches — and whether she would take you as a student",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
             "negotiate"
           ],
-          "trivial": false
+          "trivial": true
         },
         {
-          "label": "Ask her to read the spear directly — hand it across the table and let her sense the full design, Huginn's thread and all, before you say anything more.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Turn her question back on her — ask what she reads in someone who already has a raven's ending-sense in their spear and still came looking at a death-attuned stall in a market.",
+          "label": "Ask what she means by 'a door, not a dwelling' — press her to say plainly what the March could teach that you have not found",
           "attribute": "mental",
           "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Show her what the absent pieces of the kit tell you — read their design aloud, the way she tested you with the gap",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "difficulty": 15,
           "intentTags": [
-            "study",
-            "plan"
+            "study"
           ],
+          "abilityId": "order_sense",
+          "energyCost": 2,
           "trivial": false
+        },
+        {
+          "label": "Ask Huginn plainly — in front of her — what he reads in this woman. Let the bird speak for you.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "The dark-cloth stall in the Hub market row — Silas standing at the near table edge with Memory planted upright on the dirt between them, the seller across with hands lifted from the table, bone-handled tools partly rearranged to show the gap in the sequence. Morning light over the stalls.",
+        "setting": "The dark-cloth stall in the Hub market row — Silas standing at the near table edge, Memory upright on the dirt between them, the seller across with both hands resting on the table edge. The two absent pieces of the teaching kit now laid out in the gap. Morning light over the stalls.",
         "npcsPresent": [
           {
             "name": "Unnamed seller",
-            "state": "Hands lifted from the table — reading Silas's face after naming the gap in her own kit and asking whether he came to learn or to confirm."
+            "state": "Both hands on the table edge, looking at Silas steadily — the nod given, the two missing pieces placed, waiting for what comes next."
           },
           {
             "name": "Huginn",
-            "state": "On the arch-stone to the north — motionless, holding the seller's brief look without acknowledgment."
+            "state": "On the arch-stone to the north — did not acknowledge the seller's look; the bird's silence its own comment."
           },
           {
             "name": "Siol",
@@ -930,14 +934,14 @@
           }
         ],
         "objects": [
-          "Memory — upright in Silas's grip, butt on the dirt between them",
+          "Memory — upright in Silas's grip, butt on the dirt",
           "dark cloth covering the table",
-          "bone-handled tools in deliberate teaching sequence — gap now visible where two were moved aside",
+          "bone-handled tools in teaching sequence — gap now filled, all pieces present",
           "seven waygate arches visible to the north"
         ],
         "threads": [
-          "The seller's question: did he come to learn, or to fill the gap with what he already made?",
-          "The absent pieces of the teaching kit — not on the table, not yet explained",
+          "The seller's assessment: a door, not a dwelling — what the March holds that Silas has not yet been taught",
+          "Whether she will offer to teach, and what that would cost",
           "Pell's unspoken answer to the evening suggestion — filed, not resolved",
           "The Ent circle: still to visit"
         ]
@@ -945,26 +949,53 @@
       "generateRequest": [
         {
           "type": "npc",
-          "hint": "the seller at the dark-cloth stall — death-attuned, a teacher with bone-handled tools laid out as a teaching sequence, beginning something significant; connected to the Ashwarden March or adjacent death-craft tradition",
-          "why": "She has engaged Silas in meaningful dialogue and will recur as a possible teacher or contact — needs a stable identity"
+          "hint": "A death-attuned seller at the dark-cloth stall in the Hub market row — bone-handled teaching tools, still presence, likely connected to the Ashwarden March or its outer edges; woman, middle years, a teacher's patience",
+          "why": "She has now spoken and named Silas as someone the March has more to offer — she needs a stable identity to persist as a possible teacher or contact"
         }
       ],
-      "npcUpdates": [],
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "siol",
+          "name": "Siol",
+          "note": "Accompanying Pell in the market row — not present at the stall exchange.",
+          "statusNote": "In the Hub market row with Pell, still choosing."
+        },
+        {
+          "op": "update",
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "note": "Shopping with Siol — the evening suggestion still unresolved.",
+          "statusNote": "In the Hub market row with Siol, choosing travel clothes and the private something."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "ashwarden-march-access",
+          "label": "The Ashwarden March — What Silas Has Not Been Taught",
+          "kind": "mystery",
+          "fact": "The dark-cloth seller at the Hub market named Silas's Ashwarden grain as a door, not a dwelling — there is more of the March in him than he has been taught to find. She recognized the Ashwarden thread in Memory's fuller immediately and called it well-seated but incomplete.",
+          "links": [
+            "the-edge-district-ledger",
+            "the-water-crisis"
+          ]
+        }
+      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a short exchange at the stall"
+        "why": "A short exchange at the stall — a few minutes of conversation."
       }
     },
     "sceneState": {
-      "setting": "The dark-cloth stall in the Hub market row — Silas standing at the near table edge with Memory planted upright on the dirt between them, the seller across with hands lifted from the table, bone-handled tools partly rearranged to show the gap in the sequence. Morning light over the stalls.",
+      "setting": "The dark-cloth stall in the Hub market row — Silas standing at the near table edge, Memory upright on the dirt between them, the seller across with both hands resting on the table edge. The two absent pieces of the teaching kit now laid out in the gap. Morning light over the stalls.",
       "npcsPresent": [
         {
           "name": "Unnamed seller",
-          "state": "Hands lifted from the table — reading Silas's face after naming the gap in her own kit and asking whether he came to lea"
+          "state": "Both hands on the table edge, looking at Silas steadily — the nod given, the two missing pieces placed, waiting for what"
         },
         {
           "name": "Huginn",
-          "state": "On the arch-stone to the north — motionless, holding the seller's brief look without acknowledgment."
+          "state": "On the arch-stone to the north — did not acknowledge the seller's look; the bird's silence its own comment."
         },
         {
           "name": "Siol",
@@ -976,14 +1007,14 @@
         }
       ],
       "objects": [
-        "Memory — upright in Silas's grip, butt on the dirt between them",
+        "Memory — upright in Silas's grip, butt on the dirt",
         "dark cloth covering the table",
-        "bone-handled tools in deliberate teaching sequence — gap now visible where two w",
+        "bone-handled tools in teaching sequence — gap now filled, all pieces present",
         "seven waygate arches visible to the north"
       ],
       "threads": [
-        "The seller's question: did he come to learn, or to fill the gap with what he already made?",
-        "The absent pieces of the teaching kit — not on the table, not yet explained",
+        "The seller's assessment: a door, not a dwelling — what the March holds that Silas has not yet been taught",
+        "Whether she will offer to teach, and what that would cost",
         "Pell's unspoken answer to the evening suggestion — filed, not resolved",
         "The Ent circle: still to visit"
       ]
@@ -1416,7 +1447,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d6] Walking the Coliseum floor before watching anyone else on it — reading the space on her own terms first.",
         "[d6] Vouched for Silas plainly to Tane — 'He does that' — and extended her flask without ceremony.",
         "[d6] Accepted the second bout without argument — handed off the flask, crossed the sand, declared iron to Tane Solr. Running this on her own terms.",
         "[d6] Running her own bout against Tane Solr — ironsense open, patient and methodical. Silas stepped back and let her work.",
@@ -1425,7 +1455,8 @@
         "[d6] Received Tane's naming without ceremony — flask in hand, already thinking toward the road.",
         "[d6] Fell in beside Silas without a word — flask clipped, eyes already reading the plaza",
         "[d6] Waited at the colonnade steps during the Council meeting; now at the market row, watching Silas hold up the blue-green cloth.",
-        "[d6] Received Silas's whispered suggestion with a held look and a corner-of-mouth reply — filed it and turned back to the stalls. Now shopping with Siol."
+        "[d6] Received Silas's whispered suggestion with a held look and a corner-of-mouth reply — filed it and turned back to the stalls. Now shopping with Siol.",
+        "[d6] Shopping with Siol — the evening suggestion still unresolved."
       ],
       "knownFacts": [
         "The shadowstep can be read by someone attentive to the shadow's shift before the body moves",
@@ -1446,7 +1477,7 @@
         "controlled finish strike — flat hilt to the leading arm, no "
       ],
       "status": "active",
-      "statusNote": "In the Hub market row — shopping with Siol for travel clothes and something else she has not named aloud.",
+      "statusNote": "In the Hub market row with Siol, choosing travel clothes and the private something.",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 6
@@ -1973,7 +2004,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d6] Approved Pell's choice as the sensible order — dry, genuine.",
         "[d6] Named Orvil as the world confirming itself — dry, without ceremony. Standing just inside the gate.",
         "[d6] Watching the second bout from inside the gate — quiet, experienced attention. Something slightly different from what she usually sees.",
         "[d6] Read the bout plainly when Silas asked — named what Pell is doing to Tane in one sentence, without embellishment.",
@@ -1982,7 +2012,8 @@
         "[d6] Answered plainly about Taur and the bench-seam light — gave the sequence without overselling the cause",
         "[d6] Led Silas and Pell north to the waygate plaza without ceremony — stopped at center and waited for Silas to see what she sees",
         "[d6] Accompanied Silas and Pell to the Council colonnade and the market row — present throughout, no intervention.",
-        "[d6] Accepted the shopping task without ceremony — took Silas's trust in her eye as practical information and moved."
+        "[d6] Accepted the shopping task without ceremony — took Silas's trust in her eye as practical information and moved.",
+        "[d6] Accompanying Pell in the market row — not present at the stall exchange."
       ],
       "knownFacts": [
         "Has seen the bench-seam light three times, always in the upper seam, slow and lateral",
@@ -2004,7 +2035,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "In the Hub market row — leading Pell through the stalls, choosing something suitable for a first meeting at Silas's home.",
+      "statusNote": "In the Hub market row with Pell, still choosing.",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 6
@@ -3902,21 +3933,21 @@
     }
   },
   "tendencies": {
-    "strategic": 14.05680093371386,
-    "cerebral": 13.596498916920577,
-    "social": 20.15356146296696,
-    "generous": 2.8255273134773993,
-    "cautious": 5.795969266907918,
-    "physical": 1.2880754518954745,
-    "risky": 1.3508022881652089,
-    "ruthless": 0.4306885476001148,
-    "carousing": 0.006598693129494071,
-    "amorous": 5.151797244706734,
-    "patient": 1.066677962989974,
-    "stealth": 0.16693598137365154,
-    "devotion": 0.37304275193089115,
-    "craft": 1.3186797195739246,
-    "leadership": 0.8497226719319257
+    "strategic": 13.705380910371014,
+    "cerebral": 13.256586443997563,
+    "social": 20.649722426392785,
+    "generous": 2.754889130640464,
+    "cautious": 5.65107003523522,
+    "physical": 1.2558735655980875,
+    "risky": 1.3170322309610787,
+    "ruthless": 0.41992133391011194,
+    "carousing": 0.006433725801256719,
+    "amorous": 5.023002313589066,
+    "patient": 1.0400110139152248,
+    "stealth": 0.16276258183931025,
+    "devotion": 0.36371668313261885,
+    "craft": 1.2857127265845765,
+    "leadership": 0.8284796051336276
   },
   "aptitudes": [
     "strategist",
@@ -3924,7 +3955,7 @@
     "scholar",
     "orator"
   ],
-  "actionCount": 558,
+  "actionCount": 559,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -4194,8 +4225,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784415575000,
-  "rev": 813,
+  "updatedAt": 1784415726337,
+  "rev": 814,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5570,7 +5601,7 @@
   "syncedAt": 1784392733860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 379
+    "valley": 380
   },
   "foreclosed": [
     "rootkin",
@@ -5627,10 +5658,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T22:59:34.999Z",
+      "lastAt": "2026-07-18T23:02:06.335Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 104,
+      "beats": 105,
       "_recapError": null,
       "recap": "Day eighteen, and Silas Weir moved like a man who'd finally stopped fighting the shape of what he was. On the road he disarmed three opportunists without breaking bones, read the grief sitting behind the broad man's eyes, named it plainly, pressed provisions into their hands, and sent them toward something worth doing — mercy given as instruction, not sentiment. Then he brought the hard people together: Dara, Aldric, Fendt, Mara, Calvar, all of them in the heat of Pell's forge with no exits easy and no pretense left, and in that single evening he turned a valley's quiet panic into four working threads — engineering, logistics, supply, accounts — each with a named lead and a direction to face. The crisis didn't end, but it stopped being formless, and that was his doing."
     }

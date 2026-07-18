@@ -918,167 +918,146 @@
         "player": "Stay at the near arc and watch — let Pell run her own bout without commentary",
         "summary": "Silas steps back and watches Pell run her own bout against Tane Solr — ironsense against experience, patient and clean.",
         "narration": "You step back to the near arc and let the bout be hers.\n\nPell and Tane are well-matched in the way that matters for a morning exchange — she is compact where he is lean, and she has declared iron, which means she is reading through every piece of metal on the sand. His buckle. The brace-pin at his wrist wrap. The eyelets down his coat front. You have watched her use ironsense in a bout before, and you know she is not looking at him the way he is looking at her. She is reading him from the inside out.\n\nThe first exchange takes about four breaths. Tane opens with a lateral step — not the bad ankle, the good one — and Pell has already shifted her weight before he commits. She does not overreach. She gives him a half-second of wrong information with her left shoulder, he adjusts, and she closes the angle he thought he had opened. He catches himself cleanly, resets, and she lets him. The bout settles into something more like a conversation than a fight — two people testing what the other knows and in what order. Tane is good. He has been doing this a long time. But Pell is reading the room from a level he does not have access to, and she is patient about it.\n\nYou hold the flask and watch. Huginn shifts on your shoulder and says nothing, which from Huginn is a kind of approval. Siol stands near the gate, still, watching with the quiet attention of someone who has seen many bouts and is now seeing something slightly different. You do not know who Orvil is rooting for — probably no one — but his baton is perfectly level and his eyes do not leave the sand."
+      },
+      {
+        "player": "Catch Siol's eye from the near arc — ask quietly what she makes of the bout",
+        "summary": "Silas catches Siol's eye at the near arc — she reads the bout plainly: Pell is reading a man used to being the reader, and he is only beginning to understand it.",
+        "narration": "You find Siol where you left her — just inside the gate, weight settled, arms loose at her sides. She is watching the sand the way she watches most things: with the stillness of someone who has already decided what she thinks and is waiting to see if she is right.\n\nYou catch her eye. She does not look away from the bout, but her chin tilts a fraction toward you — enough. You keep your voice low, under the sound of feet on sand.\n\n'What do you make of it?' you ask.\n\nSiol is quiet for two exchanges. Pell moves left and Tane reads her a half-step late — his ironsense has nothing to grip, and his footwork is doing all his work for him. Then Siol says, 'She is reading a man who is used to being the one doing the reading.' A pause. 'He does not like it yet. He will.'\n\nOn the sand, Tane resets his footing after the third exchange. He is not frustrated — not exactly — but he has the look of someone revising an estimate. Pell waits for him to move first. She has been waiting for him to move first every time."
       }
     ],
     "lastTurn": {
-      "narration": "You step back to the near arc and let the bout be hers.\n\nPell and Tane are well-matched in the way that matters for a morning exchange — she is compact where he is lean, and she has declared iron, which means she is reading through every piece of metal on the sand. His buckle. The brace-pin at his wrist wrap. The eyelets down his coat front. You have watched her use ironsense in a bout before, and you know she is not looking at him the way he is looking at her. She is reading him from the inside out.\n\nThe first exchange takes about four breaths. Tane opens with a lateral step — not the bad ankle, the good one — and Pell has already shifted her weight before he commits. She does not overreach. She gives him a half-second of wrong information with her left shoulder, he adjusts, and she closes the angle he thought he had opened. He catches himself cleanly, resets, and she lets him. The bout settles into something more like a conversation than a fight — two people testing what the other knows and in what order. Tane is good. He has been doing this a long time. But Pell is reading the room from a level he does not have access to, and she is patient about it.\n\nYou hold the flask and watch. Huginn shifts on your shoulder and says nothing, which from Huginn is a kind of approval. Siol stands near the gate, still, watching with the quiet attention of someone who has seen many bouts and is now seeing something slightly different. You do not know who Orvil is rooting for — probably no one — but his baton is perfectly level and his eyes do not leave the sand.",
-      "sceneSummary": "Silas steps back and watches Pell run her own bout against Tane Solr — ironsense against experience, patient and clean.",
+      "narration": "You find Siol where you left her — just inside the gate, weight settled, arms loose at her sides. She is watching the sand the way she watches most things: with the stillness of someone who has already decided what she thinks and is waiting to see if she is right.\n\nYou catch her eye. She does not look away from the bout, but her chin tilts a fraction toward you — enough. You keep your voice low, under the sound of feet on sand.\n\n'What do you make of it?' you ask.\n\nSiol is quiet for two exchanges. Pell moves left and Tane reads her a half-step late — his ironsense has nothing to grip, and his footwork is doing all his work for him. Then Siol says, 'She is reading a man who is used to being the one doing the reading.' A pause. 'He does not like it yet. He will.'\n\nOn the sand, Tane resets his footing after the third exchange. He is not frustrated — not exactly — but he has the look of someone revising an estimate. Pell waits for him to move first. She has been waiting for him to move first every time.",
+      "sceneSummary": "Silas catches Siol's eye at the near arc — she reads the bout plainly: Pell is reading a man used to being the reader, and he is only beginning to understand it.",
       "choices": [
         {
-          "label": "Watch for the moment the bout resolves — read the outcome through Huginn and your own eyes",
+          "label": "Keep watching — let the bout finish on its own terms",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
-          "trivial": true,
           "intentTags": [
-            "study"
-          ]
+            "careful"
+          ],
+          "trivial": true
         },
         {
-          "label": "Catch Siol's eye from the near arc — ask quietly what she makes of the bout",
+          "label": "Ask Siol what she knows about the Council petition board — how early the queue fills",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
-          "trivial": true,
           "intentTags": [
-            "study"
-          ]
+            "plan"
+          ],
+          "trivial": true
         },
         {
-          "label": "Let the bout finish, then thank Tane for both exchanges and make your way out — the road is waiting",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "trivial": true,
-          "intentTags": [
-            "travel"
-          ]
-        },
-        {
-          "label": "Open Order-Sense briefly on the Coliseum itself while the bout runs — the light in the bench seam is still unresolved",
+          "label": "Ask Siol quietly if she has seen the Coliseum's bench-seam light before — that slow lateral brightness",
           "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 15,
-          "trivial": false,
+          "subAttribute": "insight",
+          "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "abilityId": "order_sense",
-          "energyCost": 2
+          "trivial": true
+        },
+        {
+          "label": "Step closer to the sand's edge — watch Pell's ironsense work up close, read what Tane is beginning to understand",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "Inside the Hub Coliseum at early morning — packed sand, stone gallery above with watchers in their places, low-angle light through the open top. The second bout is running: Pell on the sand against Tane Solr, Orvil at the center-line, baton level.",
+        "setting": "Inside the Hub Coliseum at early morning — packed sand, stone gallery above with watchers in their places, low-angle light through the open top. The second bout is running: Pell on the sand against Tane Solr, third exchange just completed, Orvil at the center-line, baton level.",
         "npcsPresent": [
           {
             "name": "Pell Marsh",
-            "state": "On the sand — trading exchanges with Tane Solr, ironsense open, patient and controlled."
+            "state": "On the sand — waiting for Tane to move first, ironsense open, patient."
           },
           {
             "name": "Tane Solr",
-            "state": "Facing Pell — testing her with lateral movement, reading her responses, engaged."
+            "state": "Resetting his footing after the third exchange — revising his read of her."
           },
           {
             "name": "Orvil",
-            "state": "At the center-line — baton level, watching both fighters without preference."
+            "state": "At the center-line — baton level, watching both fighters."
           },
           {
             "name": "Siol",
-            "state": "Just inside the gate — still, watching the bout with quiet, experienced attention."
+            "state": "Just inside the gate — has just given her read of the bout to Silas, attention back on the sand."
           },
           {
             "name": "Huginn",
-            "state": "On Silas's shoulder — settled, watching the bout, saying nothing."
+            "state": "On Silas's shoulder — watching the sand, saying nothing."
           }
         ],
         "objects": [
-          "Packed sand floor — marks from the first exchange and the new bout forming",
+          "Packed sand floor — marks from two bouts now",
           "Memory — peace-bound at Silas's back",
-          "Pell's flask — now in Silas's hand",
+          "Pell's flask — in Silas's hand",
           "Orvil's baton, level",
           "Tane's seconds at the far arc, watching",
           "Upper bench stone seam — the light is gone; the water sits still"
         ],
         "threads": [
-          "Second bout underway: Pell vs. Tane, open terms, iron declared",
-          "The light in the bench seam — seen, unnamed, gone; Huginn noted it",
+          "Second bout underway: Pell vs. Tane, third exchange complete, outcome unresolved",
+          "The light in the bench seam — seen, unnamed, gone; Huginn observed it",
           "The road south is waiting — the Coliseum is a pause, not the destination"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "pell-ran-marsh",
-          "name": "Pell Ran Marsh",
-          "note": "Running her own bout against Tane Solr — ironsense open, patient and methodical. Silas stepped back and let her work.",
-          "skillsObserved": [
-            "trading exchanges under ironsense without overreaching",
-            "giving false information with body position to open an angle"
-          ],
-          "statusNote": "On the Coliseum sand — second bout running against Tane Solr, iron declared, working her own terms."
-        },
-        {
-          "op": "update",
-          "npcId": "tane-solr",
-          "name": "Tane Solr",
-          "note": "Engaged in the second bout against Pell — reading her responses, using lateral movement, genuinely tested.",
-          "statusNote": "On the sand — second bout running against Pell Marsh, finding she is reading him from a level he cannot match."
-        },
-        {
-          "op": "update",
-          "npcId": "orvil",
-          "name": "Orvil",
-          "note": "Baton level at the center-line — watching both fighters, no preference, doing his job.",
-          "statusNote": "At the center-line — second bout in progress, baton level."
-        },
-        {
-          "op": "update",
           "npcId": "siol",
           "name": "Siol",
-          "note": "Watching the second bout from inside the gate — quiet, experienced attention. Something slightly different from what she usually sees.",
-          "statusNote": "Just inside the Coliseum gate — watching Pell's bout with Tane Solr."
+          "note": "Read the bout plainly when Silas asked — named what Pell is doing to Tane in one sentence, without embellishment.",
+          "learned": [
+            "Pell is reading Tane from the inside out via ironsense; he is used to being the one doing the reading and is only beginning to register it"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Just inside the Coliseum gate — watching the second bout, has given her read to Silas."
         }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A morning bout exchange — a few minutes of watching, not a significant stretch."
-      }
+      ]
     },
     "sceneState": {
-      "setting": "Inside the Hub Coliseum at early morning — packed sand, stone gallery above with watchers in their places, low-angle light through the open top. The second bout is running: Pell on the sand against Tane Solr, Orvil at the center-line, baton level.",
+      "setting": "Inside the Hub Coliseum at early morning — packed sand, stone gallery above with watchers in their places, low-angle light through the open top. The second bout is running: Pell on the sand against Tane Solr, third exchange just completed, Orvil at the center-line, baton level.",
       "npcsPresent": [
         {
           "name": "Pell Marsh",
-          "state": "On the sand — trading exchanges with Tane Solr, ironsense open, patient and controlled."
+          "state": "On the sand — waiting for Tane to move first, ironsense open, patient."
         },
         {
           "name": "Tane Solr",
-          "state": "Facing Pell — testing her with lateral movement, reading her responses, engaged."
+          "state": "Resetting his footing after the third exchange — revising his read of her."
         },
         {
           "name": "Orvil",
-          "state": "At the center-line — baton level, watching both fighters without preference."
+          "state": "At the center-line — baton level, watching both fighters."
         },
         {
           "name": "Siol",
-          "state": "Just inside the gate — still, watching the bout with quiet, experienced attention."
+          "state": "Just inside the gate — has just given her read of the bout to Silas, attention back on the sand."
         },
         {
           "name": "Huginn",
-          "state": "On Silas's shoulder — settled, watching the bout, saying nothing."
+          "state": "On Silas's shoulder — watching the sand, saying nothing."
         }
       ],
       "objects": [
-        "Packed sand floor — marks from the first exchange and the new bout forming",
+        "Packed sand floor — marks from two bouts now",
         "Memory — peace-bound at Silas's back",
-        "Pell's flask — now in Silas's hand",
+        "Pell's flask — in Silas's hand",
         "Orvil's baton, level",
         "Tane's seconds at the far arc, watching",
         "Upper bench stone seam — the light is gone; the water sits still"
       ],
       "threads": [
-        "Second bout underway: Pell vs. Tane, open terms, iron declared",
-        "The light in the bench seam — seen, unnamed, gone; Huginn noted it",
+        "Second bout underway: Pell vs. Tane, third exchange complete, outcome unresolved",
+        "The light in the bench seam — seen, unnamed, gone; Huginn observed it",
         "The road south is waiting — the Coliseum is a pause, not the destination"
       ]
     }
@@ -1086,7 +1065,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 6,
-    "hour": 9,
+    "hour": 10,
     "realAnchor": null
   },
   "companions": [
@@ -2067,7 +2046,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d6] Received Silas's introduction, acknowledged Pell by name and maker's mark, addressed Huginn directly as 'Marrow' — named the Steadwood passage as clear and warned that the March will know of Huginn before Silas arrives",
         "[d6] Received Silas's open invitation about Marrow with a quiet 'the road tends to allow what it intends' — not closing, not committing. Now receiving Pell's direct question about the sixth gate.",
         "[d6] Answered Pell's gate question directly — no toll, no keeper, but the March reads arrivals and Huginn's presence will be felt before Silas steps through",
         "[d6] Named her road as south but turning before the Steadwood thins — offered a day or so of shared travel if the pace is easy. Dry comment about Huginn not objecting.",
@@ -2076,17 +2054,18 @@
         "[d6] Described the Coliseum duels plainly — honest bouts, crafts declared at the gate, a referee named Orvil, yield as the end. Noted Huginn's gallery visibility as a factor. Dry, practical, complete.",
         "[d6] Approved Pell's choice as the sensible order — dry, genuine.",
         "[d6] Named Orvil as the world confirming itself — dry, without ceremony. Standing just inside the gate.",
-        "[d6] Watching the second bout from inside the gate — quiet, experienced attention. Something slightly different from what she usually sees."
+        "[d6] Watching the second bout from inside the gate — quiet, experienced attention. Something slightly different from what she usually sees.",
+        "[d6] Read the bout plainly when Silas asked — named what Pell is doing to Tane in one sentence, without embellishment."
       ],
       "knownFacts": [
-        "Her road runs south from the Hub but turns before the Steadwood thins — not as far as the March mouth",
         "She does not keep a strict morning schedule — flexible about shared travel",
         "She noticed Huginn's sound and named it directly, without ceremony",
         "Prefers the Coliseum before the Council petition board — the queue fills early and physical activity makes the wait bearable; practical city knowledge, not opinion",
         "The Ent's name is Taur — chose this ground before the city existed and has not explained why; approachable, patient, speaks to some and not others — his choice, not the visitor's",
         "Coliseum duels require craft declaration at the gate — as a courtesy to the opponent, not a condition of entry",
         "The referee is named Orvil — compact man, morning rotation, does not look the other way",
-        "Spears are allowed; most weapons are, declared at the gate"
+        "Spears are allowed; most weapons are, declared at the gate",
+        "Pell is reading Tane from the inside out via ironsense; he is used to being the one doing the reading and is only beginning to register it"
       ],
       "skillsObserved": [
         "reading a traveler's affiliation from companion presence alo",
@@ -2097,7 +2076,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Just inside the Coliseum gate — watching Pell's bout with Tane Solr.",
+      "statusNote": "Just inside the Coliseum gate — watching the second bout, has given her read to Silas.",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 6
@@ -3968,30 +3947,29 @@
     }
   },
   "tendencies": {
-    "strategic": 14.778970045756243,
-    "cerebral": 7.518140441833091,
-    "social": 17.78562283245499,
-    "generous": 2.9209171483728795,
-    "cautious": 8.261548450945366,
-    "physical": 1.836016939403981,
-    "risky": 1.9254274889001126,
-    "ruthless": 0.6139015131741498,
-    "carousing": 0.009405747424074754,
-    "amorous": 6.087438728743743,
-    "patient": 1.5204379573079922,
-    "stealth": 0.2379497949029491,
-    "devotion": 0.531733456032491,
-    "craft": 1.8796401245155372,
-    "leadership": 1.2111908639877007
+    "strategic": 14.409495794612337,
+    "cerebral": 8.330186930787264,
+    "social": 17.340982261643614,
+    "generous": 2.8478942196635573,
+    "cautious": 8.055009739671732,
+    "physical": 1.7901165159188814,
+    "risky": 1.8772918016776097,
+    "ruthless": 0.598553975344796,
+    "carousing": 0.009170603738472885,
+    "amorous": 5.93525276052515,
+    "patient": 1.4824270083752924,
+    "stealth": 0.23200105003037536,
+    "devotion": 0.5184401196316787,
+    "craft": 1.8326491214026488,
+    "leadership": 1.1809110923880082
   },
   "aptitudes": [
     "strategist",
     "silver_tongue",
     "tactician",
-    "orator",
-    "charmer"
+    "orator"
   ],
-  "actionCount": 544,
+  "actionCount": 545,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -4261,8 +4239,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784413183326,
-  "rev": 797,
+  "updatedAt": 1784413286862,
+  "rev": 798,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5621,7 +5599,7 @@
   "syncedAt": 1784392733860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 364
+    "valley": 365
   },
   "foreclosed": [
     "rootkin",
@@ -5678,10 +5656,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T22:19:43.325Z",
+      "lastAt": "2026-07-18T22:21:26.862Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 89,
+      "beats": 90,
       "_recapError": null,
       "recap": "Day eighteen, and Silas Weir moved like a man who'd finally stopped fighting the shape of what he was. On the road he disarmed three opportunists without breaking bones, read the grief sitting behind the broad man's eyes, named it plainly, pressed provisions into their hands, and sent them toward something worth doing — mercy given as instruction, not sentiment. Then he brought the hard people together: Dara, Aldric, Fendt, Mara, Calvar, all of them in the heat of Pell's forge with no exits easy and no pretense left, and in that single evening he turned a valley's quiet panic into four working threads — engineering, logistics, supply, accounts — each with a named lead and a direction to face. The crisis didn't end, but it stopped being formless, and that was his doing."
     }

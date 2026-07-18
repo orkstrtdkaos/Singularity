@@ -411,7 +411,25 @@
           "rank": 1,
           "name": "The Harbored Flame",
           "grants": "Make a hidden sanctuary of healing light — unfindable, and restoring within.",
-          "cannot": "The two poles fight; costly; own-light searchers can crack it."
+          "cannot": "The two poles fight; costly; own-light searchers can crack it.",
+          "functions": [
+            "conceal",
+            "heal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
+        },
+        {
+          "rank": 2,
+          "name": "The Carried Harbor",
+          "grants": "The harbor moves with those it holds — a company travels inside it, hidden and mending as they go. It holds through a night rather than an hour, and what mends inside it mends fully rather than merely stabilising.",
+          "cannot": "The two poles still fight, and the cost rises with every person carried. A moving harbor is thinner than a still one and an own-light searcher cracks it faster. And you cannot fight from inside it without breaking it for everyone.",
+          "functions": [
+            "conceal",
+            "heal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "powerSystem": "reach_dark_light",
@@ -1078,7 +1096,25 @@
           "rank": 1,
           "name": "The Revealing Burn",
           "grants": "Burn away all falsehood and concealment in a place, exposing what is truly there.",
-          "cannot": "It cannot un-reveal what it shows, it does not discriminate whose secret burns free, and a fire lit to expose another can just as easily light you."
+          "cannot": "It cannot un-reveal what it shows, it does not discriminate whose secret burns free, and a fire lit to expose another can just as easily light you.",
+          "functions": [
+            "reveal",
+            "strike"
+          ],
+          "gains": "broaden",
+          "harmRung": "damaging"
+        },
+        {
+          "rank": 2,
+          "name": "The Wider Burning",
+          "grants": "The burn takes a district rather than a room, and it reaches what is false in a PERSON — an assumed shape, a worn name, a glamour kept so long it has become habit. What stands afterward is the true thing, whether or not anyone present wanted it.",
+          "cannot": "It still does not choose whose falsehood burns, and at this scale that reliably includes allies and yourself. A person burned true cannot be disguised again by any craft for a long while. The Blazeborn are not forgiven for this one, and they do not ask to be.",
+          "functions": [
+            "reveal",
+            "strike"
+          ],
+          "gains": "deepen",
+          "harmRung": "damaging"
         }
       ],
       "gated": "learned",

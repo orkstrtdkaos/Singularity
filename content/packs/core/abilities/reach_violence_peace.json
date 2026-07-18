@@ -95,25 +95,48 @@
           "rank": 1,
           "name": "The Held Room",
           "grants": "Halt a rising conflict before it breaks; read what each side truly needs; make yourself the still point a room organizes around.",
-          "cannot": "Can't stop violence already loosed; the truly bent-on-blood pass through it."
+          "cannot": "Can't stop violence already loosed; the truly bent-on-blood pass through it.",
+          "functions": [
+            "reveal",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Binding Truce",
           "grants": "Broker truces that HOLD — agreements weighted by your standing; bind two enemies to a peace neither wanted but both can live in; feel a truce start to fray before it snaps.",
-          "cannot": "A truce is only as true as its terms; brokering a peace over an injustice buys time, not resolution — and Stillcraft knows the difference."
+          "cannot": "A truce is only as true as its terms; brokering a peace over an injustice buys time, not resolution — and Stillcraft knows the difference.",
+          "functions": [
+            "reveal",
+            "bind",
+            "sustain",
+            "shield"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Long Peace",
           "grants": "Hold a peace at the scale of peoples — end a generational feud, stand a war down, keep a Held Breath from letting out. The Stillhold's power in miniature; the counter-road to the Ender.",
-          "cannot": "The wielder drifts peace-hot — and peace at all costs becomes the Stillhold's prison, a stillness that forecloses on justice to keep the quiet. A peace that suppresses is its own violence, delayed."
+          "cannot": "The wielder drifts peace-hot — and peace at all costs becomes the Stillhold's prison, a stillness that forecloses on justice to keep the quiet. A peace that suppresses is its own violence, delayed.",
+          "functions": [
+            "reveal",
+            "bind",
+            "sustain",
+            "shield"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "functions": [
         "bind",
-        "resist",
-        "shield"
+        "reveal",
+        "shield",
+        "sustain"
       ],
       "challengeTypes": [
         "SOCIAL",
@@ -145,19 +168,37 @@
           "rank": 1,
           "name": "Read the Fight",
           "grants": "See a fight's shape and a foe's tell a beat early; know when violence is about to erupt.",
-          "cannot": "Reads, not wins; the truly wild are harder to call."
+          "cannot": "Reads, not wins; the truly wild are harder to call.",
+          "functions": [
+            "reveal",
+            "foresee"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Whole Field",
           "grants": "Read every fighter at once — who is committed, who is looking for the door, where the line will fail first.",
-          "cannot": "Reading the fight is not surviving it. The field tells you where it breaks, not how to be elsewhere."
+          "cannot": "Reading the fight is not surviving it. The field tells you where it breaks, not how to be elsewhere.",
+          "functions": [
+            "reveal",
+            "foresee"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Three Moves Ahead",
           "grants": "See the fight's shape before it takes it — where this ends, and the two or three ways it could end otherwise.",
-          "cannot": "Seeing the end does not mean you can choose it. The Marchers say the field always keeps one move back."
+          "cannot": "Seeing the end does not mean you can choose it. The Marchers say the field always keeps one move back.",
+          "functions": [
+            "reveal",
+            "foresee"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "powerSystem": "reach_violence_peace",
@@ -181,8 +222,8 @@
         "violence_peace": 0.3
       },
       "functions": [
-        "reveal",
-        "foresee"
+        "foresee",
+        "reveal"
       ],
       "narrationHints": "Every unspoken tension in a room, felt at once.",
       "description": "Sense a room's tensions, alliances, and the true temperature under the words.",
@@ -192,19 +233,35 @@
           "rank": 1,
           "name": "Read the Room",
           "grants": "Read the social tensions and true feeling in a gathering; find who's about to break the peace.",
-          "cannot": "Reads, not calms; the disciplined mask well."
+          "cannot": "Reads, not calms; the disciplined mask well.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Room's True Weather",
           "grants": "Read what a room is actually doing under what it is saying — the alliance forming, the grudge about to speak.",
-          "cannot": "It reads the room, not the world. What is decided elsewhere arrives regardless of how well you read this table."
+          "cannot": "It reads the room, not the world. What is decided elsewhere arrives regardless of how well you read this table.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Thing Nobody Said",
           "grants": "Name the thing everyone in the room is carefully not saying — and know what will happen if it is said.",
-          "cannot": "Knowing it and saying it are different acts, and the second one is rarely free."
+          "cannot": "Knowing it and saying it are different acts, and the second one is rarely free.",
+          "functions": [
+            "reveal",
+            "foresee"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "powerSystem": "reach_violence_peace",
@@ -228,8 +285,8 @@
         "body_mind": -0.1
       },
       "functions": [
-        "hinder",
-        "break"
+        "break",
+        "hinder"
       ],
       "narrationHints": "The blade leaves the hand before the hand knows it.",
       "description": "End a threat without ending a life — disarm, disable, drop a foe clean. The Edge's mercy.",
@@ -239,19 +296,36 @@
           "rank": 1,
           "name": "Disarming Strike",
           "grants": "Disarm or disable a single foe without killing them.",
-          "cannot": "One foe; the desperate keep coming."
+          "cannot": "One foe; the desperate keep coming.",
+          "functions": [
+            "hinder"
+          ],
+          "gains": "broaden",
+          "harmRung": "incapacitating"
         },
         {
           "rank": 2,
           "name": "The Emptied Hand",
           "grants": "Take the weapon rather than the life — cleanly, from a committed strike, without opening yourself.",
-          "cannot": "An emptied hand is not an ended fight. Some fighters are worse without the weapon."
+          "cannot": "An emptied hand is not an ended fight. Some fighters are worse without the weapon.",
+          "functions": [
+            "hinder",
+            "break"
+          ],
+          "gains": "broaden",
+          "harmRung": "incapacitating"
         },
         {
           "rank": 3,
           "name": "The Ended Fight",
           "grants": "End a fight by taking everything it needed to continue — the weapon, the footing, the will, in one motion.",
-          "cannot": "It ends the fight, not the enmity. What you disarm today comes back better armed."
+          "cannot": "It ends the fight, not the enmity. What you disarm today comes back better armed.",
+          "functions": [
+            "hinder",
+            "break"
+          ],
+          "gains": "deepen",
+          "harmRung": "incapacitating"
         }
       ],
       "powerSystem": "reach_violence_peace",
@@ -275,6 +349,7 @@
       },
       "functions": [
         "bind",
+        "command",
         "heal"
       ],
       "narrationHints": "A voice pitched just so, and the raised fist lowers.",
@@ -285,19 +360,37 @@
           "rank": 1,
           "name": "The Calming Word",
           "grants": "De-escalate one person or a small tense moment before it turns violent.",
-          "cannot": "Small scale; the set-on-blood pass through it."
+          "cannot": "Small scale; the set-on-blood pass through it.",
+          "functions": [
+            "heal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Cooling Word",
           "grants": "Cool a room off a violence it had already decided on — the raised hand comes down, unsure why.",
-          "cannot": "It cools the heat, not the cause. What made them raise the hand is still sitting there."
+          "cannot": "It cools the heat, not the cause. What made them raise the hand is still sitting there.",
+          "functions": [
+            "heal",
+            "command"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Word That Lands",
           "grants": "Say the one thing that makes the violence impossible — the true word, aimed exactly, that they cannot go past.",
-          "cannot": "You must actually find the true thing. The Stillhold's failure is a beautiful word that is not true, and everyone hears it."
+          "cannot": "You must actually find the true thing. The Stillhold's failure is a beautiful word that is not true, and everyone hears it.",
+          "functions": [
+            "heal",
+            "command",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "powerSystem": "reach_violence_peace",
@@ -321,8 +414,8 @@
         "body_mind": -0.2
       },
       "functions": [
-        "shield",
         "resist",
+        "shield",
         "ward"
       ],
       "narrationHints": "You do not move, and so the line holds.",
@@ -333,19 +426,38 @@
           "rank": 1,
           "name": "The Stand",
           "grants": "Stand firm protecting a spot or person; absorb an assault and keep the line.",
-          "cannot": "Holds, doesn't advance; overwhelming force still breaks through."
+          "cannot": "Holds, doesn't advance; overwhelming force still breaks through.",
+          "functions": [
+            "shield",
+            "resist"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Held Line",
           "grants": "Hold a doorway, a bridge, a breach — and hold it against numbers, for longer than a body should.",
-          "cannot": "Holding is not winning. The line you hold is still a line you are standing on when it fails."
+          "cannot": "Holding is not winning. The line you hold is still a line you are standing on when it fails.",
+          "functions": [
+            "shield",
+            "resist"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Line That Holds",
           "grants": "The line does not break while you are on it. Others rally to it; it becomes the fact the fight bends around.",
-          "cannot": "It bends around you — including everything aimed at you. Ask Kesh Ardent what the Edge That Holds has paid."
+          "cannot": "It bends around you — including everything aimed at you. Ask Kesh Ardent what the Edge That Holds has paid.",
+          "functions": [
+            "shield",
+            "resist",
+            "ward"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "powerSystem": "reach_violence_peace",
@@ -370,7 +482,8 @@
       },
       "functions": [
         "bind",
-        "restore"
+        "restore",
+        "sustain"
       ],
       "narrationHints": "Two enemies, one held agreement, weighted by your word.",
       "description": "Broker a real truce between hostile parties, weighted by your standing — mid-tier Stillcraft.",
@@ -380,19 +493,37 @@
           "rank": 1,
           "name": "Broker Truce",
           "grants": "Get two hostile parties to a truce that holds while its terms hold.",
-          "cannot": "Only as true as its terms; injustice buried buys time, not peace."
+          "cannot": "Only as true as its terms; injustice buried buys time, not peace.",
+          "functions": [
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Kept Truce",
           "grants": "Broker a truce that HOLDS — bound to something both sides actually value, not merely agreed to.",
-          "cannot": "A truce holds until one side's need outgrows what it was bound to. Then it holds nothing."
+          "cannot": "A truce holds until one side's need outgrows what it was bound to. Then it holds nothing.",
+          "functions": [
+            "bind",
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Binding Peace",
           "grants": "Bind a peace so well made that breaking it costs more than the war would — and both sides can see it.",
-          "cannot": "You must find the thing they both value. Where no such thing exists, the Stillcraft has nothing to offer, and says so."
+          "cannot": "You must find the thing they both value. Where no such thing exists, the Stillcraft has nothing to offer, and says so.",
+          "functions": [
+            "bind",
+            "sustain",
+            "restore"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "powerSystem": "reach_violence_peace",
@@ -522,24 +653,45 @@
           "rank": 1,
           "name": "Bind and Stand",
           "grants": "Close a wound fast enough to stay in the fight; shore up a companion who is starting to falter; read a body's capacity correctly and tell it the truth.",
-          "cannot": "Haste costs. A wound bound in a fight is bound wrong — it holds, but not well. Real healing comes later."
+          "cannot": "Haste costs. A wound bound in a fight is bound wrong — it holds, but not well. Real healing comes later.",
+          "functions": [
+            "heal",
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Counted Cost",
           "grants": "Keep two people functional through a sustained engagement; read a companion's condition in a glance and act correctly; turn a fight by putting someone back in it who should be down.",
-          "cannot": "You cannot heal what was never whole. The Soldier's Hand works on wounds, not on illness, curse, or damage from inside."
+          "cannot": "You cannot heal what was never whole. The Soldier's Hand works on wounds, not on illness, curse, or damage from inside.",
+          "functions": [
+            "heal",
+            "reveal",
+            "empower"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "No One Falls While I Stand",
           "grants": "Keep a group fighting past what they should survive; bring a companion back from the edge of a fight and put them where they need to be. In a crisis — right now, this moment — push your own body past what it should be able to do: one more swing, one more decision, one more act before you fall.",
-          "cannot": "This is acute performance in a crisis, not chronic endurance. The Long Road handles the march; Soldier's Hand handles the moment. Pushing this hard in the moment always costs something when it's over."
+          "cannot": "This is acute performance in a crisis, not chronic endurance. The Long Road handles the march; Soldier's Hand handles the moment. Pushing this hard in the moment always costs something when it's over.",
+          "functions": [
+            "heal",
+            "reveal",
+            "empower"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "functions": [
+        "empower",
         "heal",
-        "empower"
+        "reveal"
       ],
       "challengeTypes": [
         "FIGHT",
@@ -573,23 +725,45 @@
           "rank": 1,
           "name": "Armed",
           "grants": "Improvise a usable weapon or basic shield from whatever is at hand; recognize the tools in any room; make a hostile space into a site of advantage.",
-          "cannot": "One tool at a time. What you make is crude and temporary — it holds for the fight it was made for."
+          "cannot": "One tool at a time. What you make is crude and temporary — it holds for the fight it was made for.",
+          "functions": [
+            "make",
+            "strike"
+          ],
+          "gains": "broaden",
+          "harmRung": "damaging"
         },
         {
           "rank": 2,
           "name": "Ready in Any Room",
           "grants": "Improvise multiple tools at once; make something that will last the whole engagement, not just the opening blow; see what someone else needs and have it ready for them.",
-          "cannot": "Your tools still bear the mark of improvisation. Anyone who sees them knows what they are and what they're not."
+          "cannot": "Your tools still bear the mark of improvisation. Anyone who sees them knows what they are and what they're not.",
+          "functions": [
+            "make",
+            "strike",
+            "shield"
+          ],
+          "gains": "broaden",
+          "harmRung": "damaging"
         },
         {
           "rank": 3,
           "name": "The Marcher's Forge",
           "grants": "Turn a whole environment into an armory; improvise something with lasting utility — a barricade that holds, a sealed door, a weapon that outlives the fight it was made for. Arm a group from nothing.",
-          "cannot": "The marcher makes weapons, not wonders. What comes from this is always recognizable as having been something else first."
+          "cannot": "The marcher makes weapons, not wonders. What comes from this is always recognizable as having been something else first.",
+          "functions": [
+            "make",
+            "strike",
+            "shield"
+          ],
+          "gains": "deepen",
+          "harmRung": "damaging"
         }
       ],
       "functions": [
-        "make"
+        "make",
+        "shield",
+        "strike"
       ],
       "challengeTypes": [
         "FIGHT",
@@ -624,24 +798,41 @@
           "rank": 1,
           "name": "Stand Down",
           "grants": "Stop a situation from becoming a fight — reactive, in the moment. Someone is about to start something; your presence, your posture, one word is enough. The room reads you correctly and decides not to.",
-          "cannot": "Works in the moment violence is still a choice. Past that point — once it has started — this is The Advance's territory, not The Weight's."
+          "cannot": "Works in the moment violence is still a choice. Past that point — once it has started — this is The Advance's territory, not The Weight's.",
+          "functions": [
+            "command"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Agreement",
           "grants": "Proactive extraction in a deliberate context — interrogation, negotiation, a formal demand. You are making someone do something they don't want to do, and they comply because the alternative is demonstrated. Not a spontaneous deterrence; a sustained, intentional pressure.",
-          "cannot": "Compliance is not consent. The agreement holds as long as the marcher's presence does. The moment they find a way around you, they take it."
+          "cannot": "Compliance is not consent. The agreement holds as long as the marcher's presence does. The moment they find a way around you, they take it.",
+          "functions": [
+            "command",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "This Ends Here",
           "grants": "Stop violence at scale — a riot, a mob, a war about to tip. Not peace-craft; you are simply the more credible force in the room, and the room knows it. Even those who hate you stop, because the arithmetic is clear.",
-          "cannot": "Stopping things with weight alone teaches the world that weight is what matters. Someone with more weight will come. The wielder drifts violence-hot."
+          "cannot": "Stopping things with weight alone teaches the world that weight is what matters. Someone with more weight will come. The wielder drifts violence-hot.",
+          "functions": [
+            "command",
+            "bind"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "functions": [
-        "command",
-        "bind"
+        "bind",
+        "command"
       ],
       "challengeTypes": [
         "SOCIAL",
@@ -676,19 +867,34 @@
           "rank": 1,
           "name": "Ground Control",
           "grants": "Position YOURSELF with intent: close distance under fire, move through contested space without giving an opening, arrive exactly where you need to be. This is about your own movement — where you are and are not.",
-          "cannot": "Your positioning only. Companions move on their own; opponents move where they choose. You place yourself; you don't yet place others."
+          "cannot": "Your positioning only. Companions move on their own; opponents move where they choose. You place yourself; you don't yet place others.",
+          "functions": [
+            "move"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Pressure",
           "grants": "Shape where OTHERS go: force opponents into positions they didn't choose, move a companion through a fight without losing them, close off a retreat before it opens. You are controlling the geometry, not just occupying it.",
-          "cannot": "Two people's movement at once divides attention. You can manage yourself and a companion or yourself and opponent pressure — not both."
+          "cannot": "Two people's movement at once divides attention. You can manage yourself and a companion or yourself and opponent pressure — not both.",
+          "functions": [
+            "move"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Geometry",
           "grants": "Control a full field — move so that opponents find themselves in positions they did not choose, while you stand where you need to be; move a small group through an ambush without taking the loss.",
-          "cannot": "The wielder drifts violence-hot. The Advance assumes a fight is always coming — and eventually it is right."
+          "cannot": "The wielder drifts violence-hot. The Advance assumes a fight is always coming — and eventually it is right.",
+          "functions": [
+            "move"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "functions": [
@@ -727,22 +933,40 @@
           "rank": 1,
           "name": "Hard Ground",
           "grants": "Sustain yourself through extended hardship — days, not moments: poor rations, bad weather, wounds walked on, short sleep, the cold miles of a campaign. The Long Road is chronic endurance, not crisis performance. The marcher keeps moving when others stop.",
-          "cannot": "This is not for moments of acute crisis — when you need to push through the last ten seconds of a fight, that is Soldier's Hand. Long Road is about days. The body is still spending something real."
+          "cannot": "This is not for moments of acute crisis — when you need to push through the last ten seconds of a fight, that is Soldier's Hand. Long Road is about days. The body is still spending something real.",
+          "functions": [
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Keep Pace",
           "grants": "Sustain a companion through difficult conditions; set a march-pace a group can follow and maintain; recognize when something has gone past endurance into damage and stop it before it kills.",
-          "cannot": "You cannot sustain everyone indefinitely. The march-pace is yours; companions who cannot match it are a real constraint."
+          "cannot": "You cannot sustain everyone indefinitely. The march-pace is yours; companions who cannot match it are a real constraint.",
+          "functions": [
+            "sustain",
+            "empower"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Long Campaign",
           "grants": "Sustain a full group through extended hardship; plan resource management across days; outlast an opponent not by being stronger but by still being there when they are not.",
-          "cannot": "Outlasting requires that something is over eventually. The Long Campaign is not a life — it is a duration. Even the marcher has a limit; this only extends it."
+          "cannot": "Outlasting requires that something is over eventually. The Long Campaign is not a life — it is a duration. Even the marcher has a limit; this only extends it.",
+          "functions": [
+            "sustain",
+            "empower"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "functions": [
+        "empower",
         "sustain"
       ],
       "challengeTypes": [
@@ -777,19 +1001,35 @@
           "rank": 1,
           "name": "The Reckoning",
           "grants": "Show one person exactly what this violence will cost — the relationship, the person they become, the future they close. Reveal what is true and let it hinder them. Some people cannot go past it.",
-          "cannot": "One person. Those who have made peace with the cost are unmoved."
+          "cannot": "One person. Those who have made peace with the cost are unmoved.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Room That Sees",
           "grants": "Extend to a whole situation — a crowd, a formation, everyone about to participate in something terrible. The truth lands in multiple people at once. The room sees what it was about to do.",
-          "cannot": "A frightened crowd acts on the seeing. You do not control how they process it."
+          "cannot": "A frightened crowd acts on the seeing. You do not control how they process it.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Unseen Thing",
           "grants": "Make the reckoning complete and lasting. The person carries it — not a feeling, a settled knowledge they can't unthink. The violence becomes practically impossible for them because they cannot make it smaller than it is.",
-          "cannot": "You have shown them something true. What they do with it is theirs. Some people accept the cost and proceed — and then it is only their choice, clearly made."
+          "cannot": "What you show has to be TRUE — a reckoning assembled from exaggeration collapses and takes your standing with it. And it does not come off: you have put something in a person that they will carry, and the Stillhold is clear that doing this to someone is an act of force, performed by people who have chosen not to use any other kind.",
+          "functions": [
+            "reveal",
+            "hinder"
+          ],
+          "gains": "broaden",
+          "harmRung": "incapacitating"
         }
       ],
       "functions": [
@@ -802,7 +1042,7 @@
         "INVESTIGATE"
       ],
       "tradition": "stillhold",
-      "harmRung": "none",
+      "harmRung": "incapacitating",
       "nativeOrCombination": "native"
     },
     {
@@ -829,23 +1069,43 @@
           "rank": 1,
           "name": "The Marked Place",
           "grants": "Designate a space as peace-ground while you are present: violence becomes harder here, not impossible. A neutral meeting room, a truce-fire camp, a single room carved out of a war.",
-          "cannot": "The ward requires your presence and attention. It lapses when you leave."
+          "cannot": "The ward requires your presence and attention. It lapses when you leave.",
+          "functions": [
+            "make",
+            "ward"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Held Ground",
           "grants": "Inscribe the peace so it holds without you. Ward a space against the drift toward violence — it persists after you leave, anchored to the place itself. Make a treaty object that carries the ward with it.",
-          "cannot": "It holds as long as no one actively breaks it. A determined party can, it simply costs them noticeably."
+          "cannot": "It holds as long as no one actively breaks it. A determined party can, it simply costs them noticeably.",
+          "functions": [
+            "make",
+            "ward"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Lasting Ground",
           "grants": "Create a sanctuary that time-holds: peace woven into a place so deeply that it resists even sustained pressure. A neutral ground that survives wars around it. Others recognise it and come to it.",
-          "cannot": "Making the ground does not make the peace. People have to want to keep coming. When they stop, it goes."
+          "cannot": "Making the ground does not make the peace. People have to want to keep coming. When they stop, it goes.",
+          "functions": [
+            "make",
+            "ward",
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "functions": [
         "make",
+        "sustain",
         "ward"
       ],
       "challengeTypes": [
@@ -881,25 +1141,44 @@
           "rank": 1,
           "name": "Step Between",
           "grants": "Place yourself between two parties at the moment before harm. Your presence and position shield the threatened; the attacker must now choose to go through a non-combatant making a deliberate stand.",
-          "cannot": "You are not armored. Some people go through anyway."
+          "cannot": "You are not armored. Some people go through anyway.",
+          "functions": [
+            "move",
+            "shield"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Living Line",
           "grants": "Draw a line with your body between two sides — not just one person but a confrontation. Bring a companion into the interposition. The two of you become the cost the violence has to accept.",
-          "cannot": "Two people are not a wall. This is still presence and choice, not force."
+          "cannot": "Two people are not a wall. This is still presence and choice, not force.",
+          "functions": [
+            "move",
+            "shield"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Already There",
           "grants": "Read where the harm is going and be there before it arrives. You sense the moment forming and place yourself at the right position before anyone else has moved. The fight that never started because you were already in the way.",
-          "cannot": "Being in the way is not the same as stopping something. The Stillhold who steps between takes the consequences of being between."
+          "cannot": "Being in the way is not the same as stopping something. The Stillhold who steps between takes the consequences of being between.",
+          "functions": [
+            "move",
+            "shield",
+            "foresee"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "functions": [
+        "foresee",
         "move",
-        "shield",
-        "reveal"
+        "shield"
       ],
       "challengeTypes": [
         "SOCIAL",
@@ -934,24 +1213,42 @@
           "rank": 1,
           "name": "The Clear Camp",
           "grants": "Establish temporary sanctuary: a camp, a room, a space that is genuinely safe and comfortable enough for rest and basic recovery. People can eat, sleep, heal naturally. It lasts while the conditions hold.",
-          "cannot": "Temporary, and only as safe as you can make the surrounding situation."
+          "cannot": "Temporary, and only as safe as you can make the surrounding situation.",
+          "functions": [
+            "sustain",
+            "heal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Known House",
           "grants": "Create lasting sanctuary: a place that holds its quality without constant tending. A larger group can shelter here. Rest here heals because it is genuinely restful — the body trusts the space.",
-          "cannot": "The sanctuary's quality depends on it remaining genuinely safe. If the peace breaks, the healing stops."
+          "cannot": "The sanctuary's quality depends on it remaining genuinely safe. If the peace breaks, the healing stops.",
+          "functions": [
+            "sustain",
+            "heal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Open Table",
           "grants": "The ground itself sustains: a sanctuary so established that people know to seek it, that survivors find their way to it, that healing comes faster here because this place has a history of safety. A small institution of care.",
-          "cannot": "Institutions require tending. What the Stillhold builds, others must maintain — or it becomes a ruin with a good reputation."
+          "cannot": "Institutions require tending. What the Stillhold builds, others must maintain — or it becomes a ruin with a good reputation.",
+          "functions": [
+            "sustain",
+            "heal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "functions": [
-        "sustain",
-        "heal"
+        "heal",
+        "sustain"
       ],
       "challengeTypes": [
         "SURVIVE",

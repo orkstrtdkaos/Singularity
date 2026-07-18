@@ -932,6 +932,7 @@
       },
       "functions": [
         "move",
+        "reveal",
         "travel"
       ],
       "narrationHints": "Made briefly of your own held light, you rise — and for a while the ground is a suggestion.",
@@ -941,11 +942,12 @@
         {
           "rank": 1,
           "name": "Light-Borne",
-          "grants": "Fly under full control for a sustained interval — hover, climb, cross the open air.",
+          "grants": "Fly under full control for a sustained interval — hover, climb, cross the open air. And you are a light aloft: from height you show the ground to everyone under it, which reveals a camp, a route, or a hidden company as surely as any lantern — including yours.",
           "cannot": "You shine — seen for miles, no concealment; the interval ends and you must be down or near it; costly.",
           "functions": [
             "move",
-            "travel"
+            "travel",
+            "reveal"
           ],
           "harmRung": "none",
           "gains": "broaden"

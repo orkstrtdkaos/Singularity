@@ -2373,7 +2373,10 @@ await (async () => {
   // wiring: the ceiling line composes bluntness within it (floors + cap untouched); register passes plainness
   const appSrc = readFileSync(join(root, "app.js"), "utf8");
   check("SNG-144: ratingLineForGM composes the bluntness dial after the rating register, before the ABSOLUTE FLOORS", /\$\{ratingRegister\(preset\)\}\$\{bluntnessDirective\(preset, profile\?\.bluntness\)\} ABSOLUTE FLOORS/.test(appSrc));
-  check("SNG-144: the register block passes the player's plainness dial", /narrativeRegister\(location, profile\?\.plainness\)\.cue/.test(appSrc));
+  // §23: the registerDetail row moved into the GM Context Registry — the contract (plainness dial reaches
+  // narrativeRegister) is unchanged; it now lives in the declared table instead of a hand-listed ctx literal.
+  const regSrc144 = readFileSync(join(root, "engine", "gm_registry.js"), "utf8");
+  check("SNG-144: the register row passes the player's plainness dial", /narrativeRegister\(env\.location, env\.profile\?\.plainness\)\.cue/.test(regSrc144));
   check("SNG-144: Settings expose both per-profile dials + save them", /id="set-plainness"/.test(appSrc) && /id="set-bluntness"/.test(appSrc) && /profile\.plainness = document/.test(appSrc) && /profile\.bluntness = document/.test(appSrc));
 })();
 
@@ -4029,6 +4032,41 @@ await (async () => {
     npcPortraitTier({ relationship: 3 }) === null && npcPortraitTier({ bondStage: "courting" }) === null);
   check("SNG-136: an already-portrayed tier is not re-fired (dedup by tier) — the caller checks _portraitTier",
     npcPortraitTier(pell) === "partner"); // the app skips when n._portraitTier === this tier
+}
+
+// --- BATCH-11 §23: the GM Context Registry assembles a REAL context end-to-end ---
+{
+  const { assembleGMContext, registryKeys, GM_CONTEXT } = await import('../engine/gm_registry.js');
+  const ch = { id: "c1", name: "Probe", playerKey: "p", currentLocationId: "millbrook", level: 2,
+    attributes: { physical: 3, mental: 3, social: 3 }, energy: 10, maxEnergy: 10, health: 10, maxHealth: 10,
+    abilities: [], quests: [], inventory: [], npcRegistry: {}, clock: newClock() };
+  const env = {
+    character: ch, location: { id: "millbrook", name: "Millbrook", regionId: "the_given_land", spectrum: {} },
+    CONTENT: { region: { name: "The Valley" }, rules: {}, lore: [], events: [], npcs: {}, companions: [], items: {}, emergence: {}, branchForks: {}, locations: {} },
+    sceneTurns: [{ narration: "a", choices: [] }, { narration: "b", choices: [] }],
+    sceneState: { npcsPresent: [{ name: "Pell" }] }, sharedScene: null, profile: { plainness: "balanced" },
+    time: readClock(ch.clock),
+    resolution: null, playerInput: "(probe)", exactWords: null, itemAdvance: [], travelDirective: null,
+    ephemera: { encounterWeaveDetail: null, worldPressureDetail: null, substrateDetail: null, romanceGuidanceDetail: null },
+    app: { fullCatalog: () => ({}), FN_INDEX: () => ({ families: [], verbToFamily: {}, byFamily: {} }),
+      activeEnc: () => null, listAvailableEncounters: () => null, masteryReadyForGM: () => null,
+      ratingLineForGM: () => "rating", maybeLegendDetail: () => null, sharedCanonForGM: () => null }
+  };
+  const ctx = assembleGMContext("turn", env);
+  check("§23: turn view assembles every registered key (43) with no builder throwing",
+    Object.keys(ctx).length === registryKeys("turn").length && Object.keys(ctx).length === 43);
+  check("§23: the assembled ctx feeds gm.js tierParts/buildTurnContext (a real prompt renders)",
+    typeof buildTurnContext(ctx) === "string" && buildTurnContext(ctx).length > 100);
+  check("§23: ask view excludes turn ephemera (no one-shot can double-fire through an ask)",
+    !registryKeys("ask").includes("encounterWeaveDetail") && !registryKeys("ask").includes("resolution"));
+  check("§23: quest view honors focusQuest + window override",
+    assembleGMContext("quest", { ...env, focusQuest: { title: "The Thread" }, recentTurnsWindow: 4, sceneState: null }).recentTurns.length <= 4);
+  check("§23: every row declares reachedBy + spec (Law 16 — the path is stated, not implied)",
+    GM_CONTEXT.every(r => r.reachedBy && r.spec));
+  check("§23: sceneNpcNames flow from env.sceneState (quest view's null → empty)", (() => {
+    const q = assembleGMContext("quest", { ...env, sceneState: null });
+    return typeof q.npcRegistryDetail !== "undefined"; // builder ran without throwing on null sceneState
+  })());
 }
 
 // --- BATCH-11 146f: the personal arc is STARTABLE (the listing/start asymmetry) ---

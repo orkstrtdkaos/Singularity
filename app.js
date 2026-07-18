@@ -27,6 +27,7 @@ import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offe
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
 import { toolkitForGM } from "./engine/toolkit.js";
 import { fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc } from "./engine/personalArc.js";
+import { assembleGMContext } from "./engine/gm_registry.js"; // BATCH-11 §23: the GM context is a DECLARED registry, iterated — never hand-listed
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./engine/entityDetail.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
@@ -2548,6 +2549,21 @@ function masteryReadyForGM() {
   return names.length ? names.join("; ") : null;
 }
 
+/** BATCH-11 §23: the env bag every registry row builds from. One place, so
+ *  "what can a GM-context builder see" is as enumerable as the registry itself.
+ *  FN_INDEX is exposed as a getter — it is a mutable `let` rebuilt at load. */
+function gmEnv(extra = {}) {
+  return {
+    character, location: hereNow(), CONTENT, sceneTurns, sceneState, sharedScene, profile,
+    time: readClock(character.clock),
+    app: {
+      fullCatalog, FN_INDEX: () => FN_INDEX, activeEnc, listAvailableEncounters,
+      masteryReadyForGM, ratingLineForGM, maybeLegendDetail, sharedCanonForGM
+    },
+    ...extra
+  };
+}
+
 async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   busy = true;
   // SNG-075: an encounter the narrative-time roll turned up last beat is WOVEN into this turn.
@@ -2563,66 +2579,24 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   // the beat well at the player's rating. Rides the intent tags parseIntent already emits — no extra call.
   const romanceGuidanceDetail = ((resolution?.action?.intentTags || []).some(t => /^(romantic|flirt)$/i.test(String(t))) && CONTENT.romanceGuidance?.text) ? CONTENT.romanceGuidance.text : null;
   if (romanceGuidanceDetail) autoVerifyLeg("romance-flirt", "a flirtatious action was tagged romantic and the romance guidance loaded in play — the one live-model surface"); // ROMANCE leg auto-detect (dev-only)
-  const masteryDetail = masteryReadyForGM(); // ability-arch v2: owned rank-2 crafts ripe for a defining moment
-  const anomalyDetail = anomaliesForGM(detectAnomalies(character, { rules: CONTENT.rules })); // SNG-137: surface likely errors so the GM can repair them
-  const toolkitDetail = toolkitForGM(character, { // SNG-142: what the player COULD reach for — the GM offers ONE, lightly (rule 16B)
-    catalog: fullCatalog(), fnIndex: FN_INDEX, rules: CONTENT.rules,
-    coverageMissing: functionCoverage(character, fullCatalog(), FN_INDEX).missing,
-    companions: activeCompanions(character, CONTENT.companions),
-    party: sharedScene ? sharedScene.party.filter(m => m.characterId !== character.id) : []
-  });
+  // (masteryDetail / anomalyDetail / toolkitDetail now build inside the §23 registry rows.)
   // SNG-122: if the player's action this turn is a travel intent, force the GM to emit moveTo to the named
   // destination (+ enumerate reachable known places so its target resolves). Fixes the CAUSE — the deferred
   // SNG-117 no-moveTo boundary that blocked normal in-fiction travel.
   const travelIntent = travelIntentOf(resolution?.action);
   const travelDirective = travelIntent ? buildTravelDirective(travelIntent) : null;
-  const location = hereNow();
+  // BATCH-11 §23: the context is assembled by ITERATING the registry — the hand-listed
+  // ~40-key literal that used to live here is now engine/gm_registry.js, one row per
+  // contributor, enumerable. Site-A one-shot ephemera were consumed above and ride in
+  // env.ephemera so a registry row can never double-fire them.
+  const env = gmEnv({
+    resolution, playerInput, exactWords, itemAdvance, travelDirective,
+    ephemera: { encounterWeaveDetail, worldPressureDetail, substrateDetail, romanceGuidanceDetail }
+  });
   // SNG-100b: accrue region presence — a light per-turn accumulator of time spent among a people, so the
   // standing bar can ask "have you genuinely stood here" (region-standing gate for promotion/acquisition).
-  if (location?.regionId) { character.regionsKnown = character.regionsKnown || {}; character.regionsKnown[location.regionId] = (character.regionsKnown[location.regionId] || 0) + 1; }
-  const region = { ...CONTENT.region, activeEvents: eventsForGM(buildRegionView(CONTENT, character), CONTENT.events) };
-  const time = readClock(character.clock);
-  const result = await gmTurn({
-    character, location, region,
-    lore: loreForLocation(location, CONTENT.lore),
-    rules: CONTENT.rules,
-    resolution, playerInput, exactWords,
-    recentTurns: sceneTurns.slice(-6),
-    timeLabel: time.label,
-    inventoryDetail: inventoryForGM(character),
-    companionsDetail: companionsForGM(activeCompanions(character, CONTENT.companions), character, CONTENT.rules),
-    questsDetail: questsForGM(character),
-    structuredQuestsDetail: structuredQuestsForGM(character, { npcs: CONTENT.npcs }),
-    sceneState,
-    npcRegistryDetail: npcRegistryForGM(character, { locationId: character.currentLocationId, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) }),
-    placeMemoryDetail: placeMemoryForGM(character, character.currentLocationId),
-    newsDetail: newsForGM(character),
-    abilityLawDetail: abilitiesForGM(character, fullCatalog(), CONTENT.branchForks, CONTENT.rules),
-    codexDetail: codexForGM(character, { locationId: character.currentLocationId, questTitles: (character.quests || []).filter(q => q.status === "active").map(q => q.title) }),
-    factsDetail: factsForGM(character),
-    evolvedItemsDetail: evolvedItemsForGM(character, CONTENT.items),
-    itemAdvance: (itemAdvance || []).map(a => `${a.itemName} has woken to Stage ${a.stage} "${a.stageName}": ${a.narrationHints}${a.grant ? ` (${a.grant})` : ""}`).join("; ") || null,
-    opLossNote: character.opLossPending ? "The previous turn's structured updates failed to apply. Restate NOW, as ops, any quest/npc/place/codex/FACT updates that occurred last beat — INCLUDING any name reveal (revealName) or established fact the fiction set. The narration advanced; the state did not." : null,
-    emergenceDetail: emergenceNoticeForGM(character, CONTENT.emergence, CONTENT.rules),
-    perilNote: (character.precursorAxes || []).length ? `Precursor use has pushed the character's own vector past ±${CONTENT.rules.precursor?.bandNotice ?? 0.4} on: ${character.precursorAxes.join(", ")}. They are being changed by what they wield — let it show.` : null,
-    encounterDetail: resolution?.encounterReceipt || (activeEnc() ? encounterReceiptForGM(activeEnc().state, activeEnc().def, null, null) : null),
-    encounterWeaveDetail, // SNG-075: a narrative-time encounter to weave into THIS turn's fiction
-    worldPressureDetail,  // SNG-080: after quiet turns, a directive to make the world ACT
-    substrateDetail,      // SNG-090: the lattice density is thin/crowding the craft here
-    romanceGuidanceDetail, // romance: pulled craft guidance on a flirtatious/romantic beat
-    masteryDetail,        // ability-arch v2: rank-2 crafts ripe for a GM-marked defining moment
-    anomalyDetail,        // SNG-137: POSSIBLE ERROR — a consistency check the GM may repair this turn
-    toolkitDetail,        // SNG-142: TOOLKIT — what the player could reach for; the GM offers one, lightly
-    availableEncounters: activeEnc() ? null : listAvailableEncounters(),
-    partyDetail: partyBlockForGM(sharedScene, character.id),
-    ratingDetail: ratingLineForGM(), // SNG-BATCH-9 §3 consumer (a): narrate to this player's ceiling
-    registerDetail: narrativeRegister(location, profile?.plainness).cue, // SNG-048 + SNG-144: the place's voice, dialed by the player's plainness
-    legendDetail: maybeLegendDetail(), // SNG-042: a great figure surfaces on a qualifying beat (governed, rare, rating-aware)
-    livingWorldDetail: livingWorldForGM(character, { locationId: character.currentLocationId, day: time.day }), // §2: proactively surface only LIVE (non-dormant) grown content
-    sharedCanonDetail: sharedCanonForGM(), // Phase 3: OTHER players' promoted canon, rating-lensed for this viewer
-    worldDateLabel: worldDate().label, // SNG-041: the shared absolute calendar (references-not-invents)
-    travelDirective // SNG-122: a travel-intent turn MUST emit moveTo (with reachable-place enumeration)
-  });
+  if (env.location?.regionId) { character.regionsKnown = character.regionsKnown || {}; character.regionsKnown[env.location.regionId] = (character.regionsKnown[env.location.regionId] || 0) + 1; }
+  const result = await gmTurn(assembleGMContext("turn", env));
   busy = false;
   if (!result.ok) { renderPlay(null, { error: result.error }); return null; }
   // SNG-009: track op loss so the next turn's GM restates missed updates
@@ -3455,25 +3429,8 @@ async function onAsk(text) {
   busy = true;
   const lastTurn = character.activeScene?.lastTurn || null;
   renderPlay(lastTurn, { playerBeat: { label: "[to the GM] " + text }, thinking: "The GM leans back…" });
-  const location = hereNow();
-  const time = readClock(character.clock);
-  const result = await gmAsk({
-    character, location, rules: CONTENT.rules,
-    lore: loreForLocation(location, CONTENT.lore),
-    region: { ...CONTENT.region, activeEvents: eventsForGM(buildRegionView(CONTENT, character), CONTENT.events) },
-    recentTurns: sceneTurns.slice(-6),
-    timeLabel: time.label,
-    inventoryDetail: inventoryForGM(character),
-    companionsDetail: companionsForGM(activeCompanions(character, CONTENT.companions), character, CONTENT.rules),
-    questsDetail: questsForGM(character),
-    structuredQuestsDetail: structuredQuestsForGM(character, { npcs: CONTENT.npcs }),
-    sceneState,
-    npcRegistryDetail: npcRegistryForGM(character, { locationId: character.currentLocationId, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) }),
-    placeMemoryDetail: placeMemoryForGM(character, character.currentLocationId),
-    newsDetail: newsForGM(character),
-    abilityLawDetail: abilitiesForGM(character, fullCatalog(), CONTENT.branchForks, CONTENT.rules),
-    codexDetail: codexForGM(character, { locationId: character.currentLocationId, questTitles: (character.quests || []).filter(q => q.status === "active").map(q => q.title) })
-  }, text);
+  // BATCH-11 §23: assembled from the registry's "ask" view (same rows, no turn ephemera).
+  const result = await gmAsk(assembleGMContext("ask", gmEnv()), text);
   busy = false;
   renderPlay(lastTurn, { playerBeat: { label: "[to the GM] " + text }, gmAside: result.ok ? result.text : "The GM stumbled: " + result.error });
 }
@@ -4610,18 +4567,10 @@ function renderQuestDetail(questId, guidance = null, loading = false) {
   const gBtn = document.getElementById("quest-guidance");
   if (gBtn) gBtn.onclick = async () => {
     renderQuestDetail(questId, null, true);
-    const location = hereNow();
-    const time = readClock(character.clock);
-    const result = await gmAsk({
-      character, location, rules: CONTENT.rules,
-      lore: loreForLocation(location, CONTENT.lore),
-      region: { ...CONTENT.region, activeEvents: eventsForGM(buildRegionView(CONTENT, character), CONTENT.events) },
-      recentTurns: sceneTurns.slice(-4), timeLabel: time.label,
-      questsDetail: questsForGM(character),
-      structuredQuestsDetail: structuredQuestsForGM(character, { npcs: CONTENT.npcs }),
-      npcRegistryDetail: npcRegistryForGM(character, { locationId: character.currentLocationId, sceneNpcNames: [] }),
-      codexDetail: codexForGM(character, { locationId: character.currentLocationId, questTitles: [q.title] })
-    }, `Give me practical guidance on my quest "${q.title}": what are 2-3 sensible next steps from where I am, who might help or know more, and roughly how difficult does this look? Spoiler-safe only.`);
+    // BATCH-11 §23: the "quest" view — focused window (4 turns), no scene context
+    // (sceneNpcNames come out empty), codex keyed to THIS quest via focusQuest.
+    const result = await gmAsk(assembleGMContext("quest", gmEnv({ focusQuest: q, recentTurnsWindow: 4, sceneState: null })),
+      `Give me practical guidance on my quest "${q.title}": what are 2-3 sensible next steps from where I am, who might help or know more, and roughly how difficult does this look? Spoiler-safe only.`);
     renderQuestDetail(questId, result.ok ? result.text : "The GM stumbled: " + result.error, false);
   };
 }
@@ -5284,22 +5233,13 @@ function renderGambitBuilder(status = "") {
     const texts = g.steps.map(s => s.text.trim()).filter(Boolean);
     if (!g.goal.trim() || !texts.length) { renderGambitBuilder("Give the plan a goal and a step first, then ask the GM."); return; }
     renderGambitBuilder("The GM studies your plan…");
-    const location = hereNow();
-    const time = readClock(character.clock);
     // SNG-043 Part B: GM-collaborative building — one concrete suggestion or warning on the DRAFT
     const q = `[Gambit builder] Look at this DRAFT plan I'm assembling and give me ONE concrete, specific suggestion or warning about its sequencing or risk — a single sentence of advice (not a narration of any outcome; nothing is attempted yet). Goal: "${g.goal}". Steps so far: ${texts.map((t, i) => `${i + 1}) ${t}`).join("; ")}.`;
     // SNG-093 (Design Law 5): the GM call is wrapped in try/catch with a TIMEOUT, and `finally`
     // ALWAYS re-renders — an AI throw/hang can never leave the UI stuck on "The GM studies your plan…".
     try {
-      const result = await withTimeout(gmAsk({
-        character, location, rules: CONTENT.rules,
-        lore: loreForLocation(location, CONTENT.lore),
-        region: { ...CONTENT.region, activeEvents: eventsForGM(buildRegionView(CONTENT, character), CONTENT.events) },
-        recentTurns: sceneTurns.slice(-6), timeLabel: time.label,
-        inventoryDetail: inventoryForGM(character), sceneState,
-        npcRegistryDetail: npcRegistryForGM(character, { locationId: character.currentLocationId, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) }),
-        abilityLawDetail: abilitiesForGM(character, fullCatalog(), CONTENT.branchForks, CONTENT.rules)
-      }, q), 30000, "the GM");
+      // BATCH-11 §23: the "gambit" view — plan-relevant rows only (abilities, inventory, scene).
+      const result = await withTimeout(gmAsk(assembleGMContext("gambit", gmEnv()), q), 30000, "the GM");
       // SNG-088A (SNG-076 miss): the GM's plan-advice is PROSE — clamp on a word boundary with a real
       // ellipsis (not a mid-word cut at 400), raise the bound, and keep the full text for an expander.
       if (result.ok) { g.gmAdviceFull = String(result.text).trim(); g.gmAdvice = smartClamp(g.gmAdviceFull, 600); g.gmAdviceExpanded = false; }

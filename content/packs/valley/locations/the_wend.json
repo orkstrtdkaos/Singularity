@@ -37,7 +37,7 @@
     "the_axis_gate",
     "the_churn_edge"
   ],
-  "descriptionSeed": "The gentlest node of the Unspooling — a wandering road-people whose whole culture is graceful motion, reached where the chaos thins back toward habitable. What rides with the chaos here is warmth: the Wend-folk feel their way through life, mourn openly, celebrate easily, and take in strays of every kind. The natural first foothold for a traveler out of the Valley into the Churn — chaos with a human face, and the road home still findable.",
+  "descriptionSeed": "The gentlest node of the Unspooling — a wandering road-people whose whole culture is graceful motion, reached where the chaos thins back toward habitable. What rides with the chaos here is warmth: the Wend-folk feel their way through life, mourn openly, celebrate easily, and take in strays of every kind. The natural first foothold for a traveler out of the Valley into the Churn — chaos with a human face, and the road home still findable. The Wend's waygate moves. Not far, and not often, but it is not always in the same place twice — the churnfolk regard maintaining it as a conversation rather than a repair.",
   "loreRefs": [
     "the_twelve_reaches",
     "the_coordinate_world"
@@ -57,5 +57,7 @@
     "chaos": 0.4,
     "logical": 0.4,
     "life": 0.3
-  }
+  },
+  "waygate": true,
+  "waygateTier": 3
 }

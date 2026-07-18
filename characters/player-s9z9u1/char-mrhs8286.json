@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 13,
-  "xp": 1269,
+  "xp": 1274,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -78,8 +78,8 @@
     "violence_peace": 0.1030845625,
     "chaos_order": 0.22692151233983043,
     "mechanical_spiritual": 0.23279962203849028,
-    "concrete_abstract": -0.03561964806827624,
-    "death_life": -0.21815558471650157,
+    "concrete_abstract": -0.023838665664862424,
+    "death_life": -0.22224780548067646,
     "emotional_logical": 0.03083749999999999,
     "falsehood_truth": 0.3103472657976262,
     "demonic_angelic": 0.013499999999999998,
@@ -89,7 +89,7 @@
   "maxHealth": 90,
   "health": 89,
   "maxEnergy": 160,
-  "energy": 111,
+  "energy": 107,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1543,19 +1543,39 @@
         "player": "Give her some leads... Huginn said Quiet was ending in me - perhaps that is related.",
         "summary": "Silas names Quiet's ending to Pell — she receives it without alarm and gives him the investigator's frame: three new things, start there.",
         "narration": "The name lands between you in the warmth of the forge — Quiet — and Pell's thumbs don't move from your jaw, but her eyes do. A small shift, reading you for the shape of what you're about to say.\n\nYou tell her what Huginn named. Not a diagnosis, not a warning — an observation the bird made, in the particular way it makes observations, which is to say flatly and without comfort. Quiet is ending in you. You say it aloud to her because she has the grain of Weir in her now, through Memory's thread, and she deserves to know what the bird is watching for. Then you give her what you have: the middle name is a place to start, not a destination. Names carry their own endings. The Ashwarden tradition is older than the Great Transition, and the grain of it in you is — you pause, finding the word — unsettled lately. The resurrection in the upper meadow. The binding work. Something in you has been moving that was still before, and Huginn sees movement the way carrion birds see heat.\n\nPell listens. She doesn't interrupt, doesn't frown, doesn't file it. Her hands stay at your jaw and she takes all of it in the register she reserves for iron she's decided to understand before she touches it. When you've finished she is quiet for three full breaths — and then she says, so we look at what changed, the way she'd say it about a piece of metalwork showing stress: not alarmed, not dismissive, just operational. The resurrection. The spear-binding. The exchange of grain through Memory's thread. Those are the three new things, she says. Start there.\n\nFrom the crossbeam, Huginn shifts its weight and says nothing. The timing is, as usual, a comment."
+      },
+      {
+        "player": "Turn Order-Sense or Deathsense inward — read yourself for what Quiet's ending means and what is moving in you",
+        "summary": "Silas turns Order-Sense inward and reads the three change-points — resurrection, spear-binding, soul-mark exchange — that have loosened the structural foundation of Quiet.",
+        "narration": "The fire makes its low, even sound behind you. Pell's hands are still at your jaw — she hasn't moved, hasn't asked, is simply present in the way she learned to be: offering the space without filling it.\n\nYou close your eyes and turn Order-Sense inward.\n\nIt is strange work, reading yourself. The craft is built for things outside you — a failing sleeve, a buried channel, the design beneath visible structure — and when you point it inward it resists the way a mirror resists being looked *through*. But you hold it, and after a moment the forge noise drops back and you can see. Not all of it. Not the answer. But the shape: there is a thread in you that runs from the deep Ashwarden grain — that old, quiet work of attending endings without hastening them — and at the far end of it, something has changed its tension. Not broken. Not rotting. *Loosened*, the way a joint in good timber loosens when the wood begins to release what it held during curing. The structure is still sound. But the grain has moved. And the thing that moved it was not slow.\n\nThree points of change, each with its own signature. The resurrection in the upper meadow — you reached past the ordinary boundary and brought something back, and the Ashwarden in you registered the violation of the ordinary sequence as an *instruction*, the way a stone arch registers the weight of what passes over it. The spear-binding — Huginn's thread pressed into iron with Pell's maker's mark seated alongside it, an act of permanent attachment where the tradition expects a practitioner to move clean and leave little behind. And the soul-mark exchange — Pell's ironsense grain in you and yours in her, the thresholds of two separate people now *opened in each other*, a thing the tradition has no name for because it was never built to contemplate a person who wouldn't remain a single point. The Quiet that attended you was predicated on a certain aloneness. Not loneliness. The structural solitude of someone who stands at the boundary and does not bring anyone with them to that edge.\n\nYou brought someone with you.\n\nYou open your eyes. Pell is watching you, thumbs still, the whole of her attention on your face.\n\n\"It's not a sickness,\" you say. Your voice comes out level. \"Quiet was built for a single point. I am no longer a single point.\""
       }
     ],
     "lastTurn": {
-      "narration": "The name lands between you in the warmth of the forge — Quiet — and Pell's thumbs don't move from your jaw, but her eyes do. A small shift, reading you for the shape of what you're about to say.\n\nYou tell her what Huginn named. Not a diagnosis, not a warning — an observation the bird made, in the particular way it makes observations, which is to say flatly and without comfort. Quiet is ending in you. You say it aloud to her because she has the grain of Weir in her now, through Memory's thread, and she deserves to know what the bird is watching for. Then you give her what you have: the middle name is a place to start, not a destination. Names carry their own endings. The Ashwarden tradition is older than the Great Transition, and the grain of it in you is — you pause, finding the word — unsettled lately. The resurrection in the upper meadow. The binding work. Something in you has been moving that was still before, and Huginn sees movement the way carrion birds see heat.\n\nPell listens. She doesn't interrupt, doesn't frown, doesn't file it. Her hands stay at your jaw and she takes all of it in the register she reserves for iron she's decided to understand before she touches it. When you've finished she is quiet for three full breaths — and then she says, so we look at what changed, the way she'd say it about a piece of metalwork showing stress: not alarmed, not dismissive, just operational. The resurrection. The spear-binding. The exchange of grain through Memory's thread. Those are the three new things, she says. Start there.\n\nFrom the crossbeam, Huginn shifts its weight and says nothing. The timing is, as usual, a comment.",
-      "sceneSummary": "Silas names Quiet's ending to Pell — she receives it without alarm and gives him the investigator's frame: three new things, start there.",
+      "narration": "The fire makes its low, even sound behind you. Pell's hands are still at your jaw — she hasn't moved, hasn't asked, is simply present in the way she learned to be: offering the space without filling it.\n\nYou close your eyes and turn Order-Sense inward.\n\nIt is strange work, reading yourself. The craft is built for things outside you — a failing sleeve, a buried channel, the design beneath visible structure — and when you point it inward it resists the way a mirror resists being looked *through*. But you hold it, and after a moment the forge noise drops back and you can see. Not all of it. Not the answer. But the shape: there is a thread in you that runs from the deep Ashwarden grain — that old, quiet work of attending endings without hastening them — and at the far end of it, something has changed its tension. Not broken. Not rotting. *Loosened*, the way a joint in good timber loosens when the wood begins to release what it held during curing. The structure is still sound. But the grain has moved. And the thing that moved it was not slow.\n\nThree points of change, each with its own signature. The resurrection in the upper meadow — you reached past the ordinary boundary and brought something back, and the Ashwarden in you registered the violation of the ordinary sequence as an *instruction*, the way a stone arch registers the weight of what passes over it. The spear-binding — Huginn's thread pressed into iron with Pell's maker's mark seated alongside it, an act of permanent attachment where the tradition expects a practitioner to move clean and leave little behind. And the soul-mark exchange — Pell's ironsense grain in you and yours in her, the thresholds of two separate people now *opened in each other*, a thing the tradition has no name for because it was never built to contemplate a person who wouldn't remain a single point. The Quiet that attended you was predicated on a certain aloneness. Not loneliness. The structural solitude of someone who stands at the boundary and does not bring anyone with them to that edge.\n\nYou brought someone with you.\n\nYou open your eyes. Pell is watching you, thumbs still, the whole of her attention on your face.\n\n\"It's not a sickness,\" you say. Your voice comes out level. \"Quiet was built for a single point. I am no longer a single point.\"",
+      "sceneSummary": "Silas turns Order-Sense inward and reads the three change-points — resurrection, spear-binding, soul-mark exchange — that have loosened the structural foundation of Quiet.",
       "choices": [
         {
-          "label": "Turn Order-Sense or Deathsense inward — read yourself for what Quiet's ending means and what is moving in you",
+          "label": "Tell Pell the full shape — all three change-points, what Quiet was built on, what her presence in you has altered",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "comfort",
+            "romantic"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Turn Deathsense on the trajectory — where the loosening leads, and whether Quiet's ending is a loss or a becoming",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "death_life": -0.3,
-            "concrete_abstract": 0.2
+            "death_life": -0.3
           },
           "difficulty": 15,
           "intentTags": [
@@ -1568,9 +1588,9 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Huginn directly — it named the thing, it will say what it sees",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Ask Huginn directly — it named this before you read it; it may have seen further",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
@@ -1583,27 +1603,14 @@
           "emergenceId": null
         },
         {
-          "label": "Let it rest — use the hour before the meeting to prepare what to say to Dara, Calvar, and the others tonight",
+          "label": "Set it aside — the evening's work needs your full attention; this question keeps until after",
           "attribute": "mental",
           "subAttribute": "reason",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "plan"
+            "sustain"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Say or do something else",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [],
           "abilityId": null,
           "energyCost": null,
           "trivial": true,
@@ -1611,16 +1618,20 @@
           "emergenceId": null
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -2
+      },
       "scene": {
-        "setting": "Pell's forge interior, Millbrook — banked coals steady, ash-smell and iron warmth. Pell's hands still at Silas's jaw, both present in the aftermath of the declaration and the new question.",
+        "setting": "Pell's forge interior, Millbrook — banked coals steady, ash-smell and iron warmth, late afternoon light coming in thin through the door gap. Pell's hands still at Silas's jaw, both present in the aftermath of the inward read.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Hands at Silas's jaw, eyes open — the operational frame given, now watching him to see what he does with it."
+            "state": "Thumbs still at Silas's jaw, watching his face — she heard 'it's not a sickness' and is waiting for the rest."
           },
           {
             "name": "Huginn",
-            "state": "On the crossbeam — shifted weight, timing its silence as a comment."
+            "state": "On the crossbeam — shifted slightly at the moment Silas opened his eyes, timing its stillness now as a comment."
           }
         ],
         "objects": [
@@ -1633,8 +1644,8 @@
           "Forge fire — lit and steady at banked coals"
         ],
         "threads": [
-          "Quiet's ending in Silas — named to Pell; three possible sources identified (resurrection, spear-binding, soul-mark exchange); not yet investigated",
-          "Silas's middle name — still unguessed; question open",
+          "Quiet's ending — structural read complete: three change-points named; trajectory not yet read",
+          "Silas's middle name — question still open, Pell hasn't guessed yet",
           "Evening gathering — Dara, Aldric, Fendt, Mara, Calvar called; none yet arrived",
           "Calvar's unspoken read of the drainage cut not yet named aloud to the group",
           "Document roll on Mara's counter — destination undecided"
@@ -1645,67 +1656,56 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Received the theory of Quiet's ending without alarm — named the three new things (resurrection, spear-binding, soul-mark exchange) as the investigative frame. Operational, not frightened.",
+          "note": "Received 'it's not a sickness' and the one-line read — Quiet was built for a single point, Silas is no longer one. Waiting for the full shape.",
           "learned": [
-            "Huginn named Quiet as ending in Silas",
-            "The three changes — resurrection, spear-binding, soul-mark exchange — are the candidates for what disturbed it"
+            "Quiet's loosening is structural, not pathological — three change-points: resurrection, spear-binding, soul-mark exchange"
           ],
-          "statusNote": "At the forge — hands at Silas's jaw, present and unguarded, now watching to see what he does with the frame she gave him."
+          "statusNote": "At the forge — hands at Silas's jaw, watching him, waiting for the rest of the read.",
+          "relationshipDelta": 0
         },
         {
           "op": "update",
           "npcId": "huginn",
           "name": "Huginn",
-          "note": "Shifted weight on the crossbeam at the precise moment Pell finished — the timing is a comment, as always.",
-          "statusNote": "On the forge crossbeam — attending, silent, timing its silence."
+          "note": "Shifted on the crossbeam the moment Silas opened his eyes — timing its stillness as a comment on the conclusion.",
+          "statusNote": "On the forge crossbeam — present, watching, timed.",
+          "relationshipDelta": 0
         }
       ],
       "codexUpdates": [
         {
-          "topic": "quiet-ending-in-silas",
-          "label": "Quiet's Ending",
+          "topic": "quiet-ending",
+          "label": "Quiet — Structural Read",
           "kind": "mystery",
-          "fact": "Huginn named Quiet as ending in Silas. Pell's operational read: three new things since it began — the resurrection in the upper meadow, the spear-binding, the soul-mark exchange. One of these (or their combination) disturbed something that was still before.",
+          "fact": "Order-Sense turned inward: Quiet was predicated on structural solitude — the single-point standing at the boundary. Three change-points loosened it: the resurrection (violation of ordinary sequence registered as instruction), the spear-binding (permanent attachment where the tradition expects clean departure), and the soul-mark exchange (thresholds of two people opened in each other). The structure is still sound; the grain has moved.",
           "links": [
-            "the-attended-end",
-            "deathsense",
             "pell",
             "huginn",
-            "millbrook"
+            "deathsense",
+            "the-attended-end",
+            "millbrook",
+            "find-the-engineer"
           ]
         }
       ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "a few minutes of close conversation at the forge"
-      },
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "factUpdates": [
         {
           "op": "add",
-          "text": "Pell named the investigative frame for Quiet's ending: the three new things are the resurrection in the upper meadow, the spear-binding, and the soul-mark exchange. The theory is live and unresolved.",
-          "subjectId": "pell"
+          "text": "Order-Sense inward read confirmed: Quiet's loosening has three structural causes — the resurrection in the upper meadow, the spear-binding with Huginn's thread and Pell's mark, and the soul-mark exchange. The Ashwarden grain is still sound; what has changed is its predicate: it was built for a single point, and Silas is no longer one.",
+          "subjectId": "quiet-ending"
         }
-      ],
-      "placeUpdates": [],
-      "sceneEnded": false
+      ]
     },
     "sceneState": {
-      "setting": "Pell's forge interior, Millbrook — banked coals steady, ash-smell and iron warmth. Pell's hands still at Silas's jaw, both present in the aftermath of the declaration and the new question.",
+      "setting": "Pell's forge interior, Millbrook — banked coals steady, ash-smell and iron warmth, late afternoon light coming in thin through the door gap. Pell's hands still at Silas's jaw, both present in the aftermath of the inward read.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Hands at Silas's jaw, eyes open — the operational frame given, now watching him to see what he does with it."
+          "state": "Thumbs still at Silas's jaw, watching his face — she heard 'it's not a sickness' and is waiting for the rest."
         },
         {
           "name": "Huginn",
-          "state": "On the crossbeam — shifted weight, timing its silence as a comment."
+          "state": "On the crossbeam — shifted slightly at the moment Silas opened his eyes, timing its stillness now as a comment."
         }
       ],
       "objects": [
@@ -1718,8 +1718,8 @@
         "Forge fire — lit and steady at banked coals"
       ],
       "threads": [
-        "Quiet's ending in Silas — named to Pell; three possible sources identified (resurrection, spear-binding, soul-mark exchange); not yet investigated",
-        "Silas's middle name — still unguessed; question open",
+        "Quiet's ending — structural read complete: three change-points named; trajectory not yet read",
+        "Silas's middle name — question still open, Pell hasn't guessed yet",
         "Evening gathering — Dara, Aldric, Fendt, Mara, Calvar called; none yet arrived",
         "Calvar's unspoken read of the drainage cut not yet named aloud to the group",
         "Document roll on Mara's counter — destination undecided"
@@ -1729,7 +1729,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 5,
-    "hour": 17,
+    "hour": 18,
     "realAnchor": null
   },
   "companions": [
@@ -2152,7 +2152,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d5] Stepped back cleanly after the broad man stood down — field read, no words. Now facing south and ready to move.",
         "[d5] Watched Bren and Curis go, then said 'Ready' facing south — no question in it.",
         "[d5] Returned to Millbrook — took in the return quietly, shoulder easy against Silas's on the narrow road.",
         "[d5] Watching Mara's read of Calvar with quiet attention — pack still on, not yet home.",
@@ -2161,17 +2160,18 @@
         "[d5] Received 'I love you, Pelly' — crossed the floor, took his face in both hands, forehead to his. Said his name in the register that goes all the way in. Nothing managed. Nothing hel",
         "[d5] Your bond deepens — partner.",
         "[d5] Received the middle-name question in the quiet after the declaration — not guessing yet, asking what kind of name to listen for before she commits.",
-        "[d5] Received the theory of Quiet's ending without alarm — named the three new things (resurrection, spear-binding, soul-mark exchange) as the investigative frame. Operational, not frig"
+        "[d5] Received the theory of Quiet's ending without alarm — named the three new things (resurrection, spear-binding, soul-mark exchange) as the investigative frame. Operational, not frig",
+        "[d5] Received 'it's not a sickness' and the one-line read — Quiet was built for a single point, Silas is no longer one. Waiting for the full shape."
       ],
       "knownFacts": [
-        "Matches a companion's pace under pressure without instruction",
         "The seventh-band specification authorship chain runs from Calvar back to her father — the original filing at the council archive may name him directly",
         "Pell's read: Aldric will respect Calvar's ruling-pen callus — work that shows is the right currency in Millbrook",
         "Takes a decisive opening without hesitation when she sees it — no words needed between her and Silas in a fight",
         "Silas wants her to see his homeland — named it as a real intention, not a polite gesture",
         "The search for her father's remaining work is an open offer, to be taken up after the immediate crisis",
         "Huginn named Quiet as ending in Silas",
-        "The three changes — resurrection, spear-binding, soul-mark exchange — are the candidates for what disturbed it"
+        "The three changes — resurrection, spear-binding, soul-mark exchange — are the candidates for what disturbed it",
+        "Quiet's loosening is structural, not pathological — three change-points: resurrection, spear-binding, soul-mark exchange"
       ],
       "skillsObserved": [
         "tactical repositioning from a read — covering a principal wi",
@@ -2182,7 +2182,7 @@
         "reading an opponent's capitulation and stepping back to conf"
       ],
       "status": "active",
-      "statusNote": "At the forge — hands at Silas's jaw, present and unguarded, now watching to see what he does with the frame she gave him.",
+      "statusNote": "At the forge — hands at Silas's jaw, watching him, waiting for the rest of the read.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
@@ -4334,24 +4334,41 @@
         "aliases": [],
         "createdDay": 5,
         "updatedDay": 5
+      },
+      "quiet-ending": {
+        "id": "quiet-ending",
+        "label": "Quiet — Structural Read",
+        "kind": "mystery",
+        "facts": [
+          "[d5] Order-Sense turned inward: Quiet was predicated on structural solitude — the single-point standing at the boundary. Three change-points loosened it: the resurrection (violation of ordinary sequence re"
+        ],
+        "links": [
+          "pell",
+          "huginn",
+          "deathsense",
+          "the-attended-end"
+        ],
+        "aliases": [],
+        "createdDay": 5,
+        "updatedDay": 5
       }
     }
   },
   "tendencies": {
-    "strategic": 17.017274332438912,
-    "cerebral": 11.53711339779081,
-    "social": 11.499280381540467,
-    "generous": 4.374162696604154,
-    "cautious": 10.430609269922032,
-    "physical": 2.1427111700456827,
-    "risky": 0.47366978464826925,
-    "ruthless": 3.10315378796654,
-    "carousing": 0.04754423978654423,
-    "amorous": 8.364097690697601,
-    "patient": 2.6005017422151337,
-    "stealth": 1.2027903361585017,
-    "devotion": 0.6560577994505734,
-    "craft": 0.6176271768126127
+    "strategic": 16.59184247412794,
+    "cerebral": 12.24868556284604,
+    "social": 11.211798372001956,
+    "generous": 4.26480862918905,
+    "cautious": 10.16984403817398,
+    "physical": 2.0891433907945407,
+    "risky": 0.4618280400320625,
+    "ruthless": 3.0255749432673764,
+    "carousing": 0.046355633791880624,
+    "amorous": 8.154995248430161,
+    "patient": 2.5354891986597554,
+    "stealth": 1.172720577754539,
+    "devotion": 0.639656354464309,
+    "craft": 0.6021864973922973
   },
   "aptitudes": [
     "strategist",
@@ -4360,7 +4377,7 @@
     "tactician",
     "stalwart"
   ],
-  "actionCount": 480,
+  "actionCount": 481,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -4606,8 +4623,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784390093053,
-  "rev": 695,
+  "updatedAt": 1784390247407,
+  "rev": 696,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5279,12 +5296,6 @@
   "establishedFacts": [
     {
       "id": "pell",
-      "text": "Pell confirmed she can feel Memory's collar rune when she is not looking at it — the thread is live and present to her, not theoretical.",
-      "day": 2,
-      "subjectId": "pell"
-    },
-    {
-      "id": "pell",
       "text": "Pell named her habit plainly at the forge door on World-day 15: she hasn't asked for any of it — that's the habit. The want is present and managed without requests.",
       "day": 2,
       "subjectId": "pell"
@@ -5516,6 +5527,12 @@
       "text": "Pell named the investigative frame for Quiet's ending: the three new things are the resurrection in the upper meadow, the spear-binding, and the soul-mark exchange. The theory is live and unresolved.",
       "day": 5,
       "subjectId": "pell"
+    },
+    {
+      "id": "quiet-ending",
+      "text": "Order-Sense inward read confirmed: Quiet's loosening has three structural causes — the resurrection in the upper meadow, the spear-binding with Huginn's thread and Pell's mark, and the soul-mark excha",
+      "day": 5,
+      "subjectId": "quiet-ending"
     }
   ],
   "practice": {
@@ -5525,7 +5542,7 @@
       "lightsense": 2,
       "order_sense": 50,
       "palework": 23,
-      "deathsense": 20,
+      "deathsense": 21,
       "shadowstep": 14,
       "the-attended-end": 27,
       "wildcraft": 4,
@@ -5638,7 +5655,7 @@
   "syncedAt": 1784382065804,
   "teachers": {},
   "regionsKnown": {
-    "valley": 297
+    "valley": 298
   },
   "foreclosed": [
     "rootkin",
@@ -5693,10 +5710,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T15:54:53.048Z",
+      "lastAt": "2026-07-18T15:57:27.398Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 22
+      "beats": 23
     }
   ],
   "company": [

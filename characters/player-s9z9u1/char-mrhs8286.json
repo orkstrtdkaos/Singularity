@@ -1568,65 +1568,70 @@
         "player": "Accept it — say 'Fell' back to her once, your own voice in it, and let that be the sealing",
         "summary": "Silas says 'Fell' back to Pell in his own voice — the name seals between them, spoken once in full.",
         "narration": "You say it once. 'Fell.' Your own voice in it — not testing, not asking. Saying.\n\nThe word lands differently in your mouth than hers, the way the same iron sounds different coming off two hammers. She hears that. Her thumb lifts from the hollow of your throat, just slightly, and her hand opens flat against your neck — the whole palm now, warm from the forge and from you, and she holds it there the way she'd hold something that had just told her what it was.\n\nNeither of you says anything for a moment. Huginn shifts on the crossbeam — one deliberate weight-adjustment, wings staying folded. Not a comment. Just attending, the way it always attends the moment a thing becomes what it is going to be.\n\nPell breathes out slow. The hand at your neck doesn't move. Her eyes are on yours and there is nothing managed in them — no ledger, no close. She looks like someone who has just heard their own name said back to them in a language they thought only they spoke.\n\n'Alright,' she says, finally, in the register that goes all the way through. 'Silas Fell Weir.' She says it once, like a rune pressed into cooling iron — to set it, not to wear it. Then her hand slides to the back of your neck and she brings your forehead down to hers, quiet, the fire holding its low warmth behind you both while the dark finishes filling the door."
+      },
+      {
+        "player": "Hold this — stay close, say nothing, let the gathering come when it comes",
+        "summary": "Silas and Pell hold the quiet at the forge — the name sealed, the coals ticking — until footsteps on the lane signal the gathering's arrival.",
+        "narration": "You stay. Her hand flat at your neck, your forehead finding hers — the naming done, the forge holding its low warmth, the dark fully in at the door gap now. Huginn sits the crossbeam and does not move. The coals tick.\n\nThere is nothing to do with a moment like this except be in it. The three change-points are named and filed; the meeting will come when it comes. For now the forge is just a forge — warm stone and raked ash and the smell of iron cooling — and Pell is here with her palm flat at your neck and the name between you like something pressed into cooling metal, permanent now in the way that only a few things become permanent.\n\nThe lane outside stays quiet for a little while longer. A dog somewhere across the village. The last ember-light off the stone. Then the first sound of boots on the lane — unhurried, deliberate, someone who knows where they're going — and Huginn's head turns a degree toward the door without comment.\n\nThey're coming."
       }
     ],
     "lastTurn": {
-      "narration": "You say it once. 'Fell.' Your own voice in it — not testing, not asking. Saying.\n\nThe word lands differently in your mouth than hers, the way the same iron sounds different coming off two hammers. She hears that. Her thumb lifts from the hollow of your throat, just slightly, and her hand opens flat against your neck — the whole palm now, warm from the forge and from you, and she holds it there the way she'd hold something that had just told her what it was.\n\nNeither of you says anything for a moment. Huginn shifts on the crossbeam — one deliberate weight-adjustment, wings staying folded. Not a comment. Just attending, the way it always attends the moment a thing becomes what it is going to be.\n\nPell breathes out slow. The hand at your neck doesn't move. Her eyes are on yours and there is nothing managed in them — no ledger, no close. She looks like someone who has just heard their own name said back to them in a language they thought only they spoke.\n\n'Alright,' she says, finally, in the register that goes all the way through. 'Silas Fell Weir.' She says it once, like a rune pressed into cooling iron — to set it, not to wear it. Then her hand slides to the back of your neck and she brings your forehead down to hers, quiet, the fire holding its low warmth behind you both while the dark finishes filling the door.",
-      "sceneSummary": "Silas says 'Fell' back to Pell in his own voice — the name seals between them, spoken once in full.",
+      "narration": "You stay. Her hand flat at your neck, your forehead finding hers — the naming done, the forge holding its low warmth, the dark fully in at the door gap now. Huginn sits the crossbeam and does not move. The coals tick.\n\nThere is nothing to do with a moment like this except be in it. The three change-points are named and filed; the meeting will come when it comes. For now the forge is just a forge — warm stone and raked ash and the smell of iron cooling — and Pell is here with her palm flat at your neck and the name between you like something pressed into cooling metal, permanent now in the way that only a few things become permanent.\n\nThe lane outside stays quiet for a little while longer. A dog somewhere across the village. The last ember-light off the stone. Then the first sound of boots on the lane — unhurried, deliberate, someone who knows where they're going — and Huginn's head turns a degree toward the door without comment.\n\nThey're coming.",
+      "sceneSummary": "Silas and Pell hold the quiet at the forge — the name sealed, the coals ticking — until footsteps on the lane signal the gathering's arrival.",
       "choices": [
         {
-          "label": "Hold this — stay close, say nothing, let the gathering come when it comes",
+          "label": "Step back from Pell and take a position by the forge — ready to open the meeting when the first person through the door",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "lead"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Stay close a moment longer — let Pell be the one to greet them at the door while you collect yourself",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "careful"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask Pell quietly, before they arrive — whether the trajectory past the loosening is something she's willing to name tonight, in front of the others",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "sustain"
+            "plan"
           ],
           "trivial": true
         },
         {
-          "label": "Ask Pell what she thinks the trajectory is — past the loosening, what does she see coming?",
+          "label": "Watch the door with Order-Sense primed — read who arrives first and what they're carrying into the room (mood, urgency, what they mean to say)",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Check Memory — run a hand along the spear's shaft and let Order-Sense read what the binding holds now, after everything that's been named",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
           "intentTags": [
             "study"
           ],
           "abilityId": "order_sense",
           "energyCost": 2,
           "trivial": false
-        },
-        {
-          "label": "Step outside — get a breath of evening air and watch the lane for Dara and the others arriving",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "travel"
-          ],
-          "trivial": true
         }
       ],
       "scene": {
-        "setting": "Pell's forge interior, Millbrook — banked coals holding low iron warmth, full dark now at the door gap, evening fully in.",
+        "setting": "Pell's forge interior, Millbrook — banked coals holding low iron warmth, full dark at the door gap, evening fully in. Footsteps audible on the lane outside — the gathering beginning to arrive.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Forehead against Silas's, hand at the back of his neck — still, settled, entirely present."
+            "state": "Palm flat at Silas's neck, forehead close — holding the moment, turning toward the sound of the lane."
           },
           {
             "name": "Huginn",
-            "state": "On the crossbeam — weight adjusted after the naming, wings folded, attending."
+            "state": "On the crossbeam — head turned one degree toward the door, wings still folded, attending."
           }
         ],
         "objects": [
@@ -1639,67 +1644,27 @@
           "Forge fire — lit and steady at banked coals"
         ],
         "threads": [
-          "Middle name — Fell — sealed between them, spoken once in full",
           "Quiet's trajectory past the loosening not yet spoken aloud",
-          "Evening gathering — Dara, Aldric, Fendt, Mara, Calvar called; none yet arrived",
+          "Evening gathering — Dara, Aldric, Fendt, Mara, Calvar — footsteps on the lane, first arrival imminent",
           "Calvar's unspoken read of the drainage cut not yet named to the group",
           "Document roll on Mara's counter — destination undecided"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "note": "Heard 'Fell' said back in Silas's own voice — received it as the sealing. Said the full name once to fix it, brought her forehead to his. The name is now a settled fact between them.",
-          "learned": [
-            "Silas Fell Weir — the middle name is now sealed, spoken once in full by both of them"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At the forge with Silas — forehead to his, hand at his neck, entirely present; waiting for the gathering to arrive.",
-          "bondType": "partner",
-          "bondStage": "partner"
-        }
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "Silas said 'Fell' back to Pell in his own voice at the forge on World-day 18 evening — the middle name sealed between them, spoken once in full by both, pressed like a rune into cooling iron. Silas Fell Weir is now his name as she holds it.",
-          "subjectId": "pell"
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "quiet-structural-read",
-          "label": "Quiet — Structural Read",
-          "kind": "mystery",
-          "entityId": null,
-          "fact": "Silas said 'Fell' back to Pell in his own voice — the middle name is sealed. The three change-points are named and held; the trajectory past the loosening remains unspoken.",
-          "links": [
-            "pell",
-            "huginn",
-            "deathsense",
-            "the-attended-end",
-            "millbrook"
-          ]
-        }
-      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short quiet beat — the name spoken, the moment held, the dark coming in at the door."
+        "why": "A brief held moment at the forge before the gathering's arrival"
       }
     },
     "sceneState": {
-      "setting": "Pell's forge interior, Millbrook — banked coals holding low iron warmth, full dark now at the door gap, evening fully in.",
+      "setting": "Pell's forge interior, Millbrook — banked coals holding low iron warmth, full dark at the door gap, evening fully in. Footsteps audible on the lane outside — the gathering beginning to arrive.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Forehead against Silas's, hand at the back of his neck — still, settled, entirely present."
+          "state": "Palm flat at Silas's neck, forehead close — holding the moment, turning toward the sound of the lane."
         },
         {
           "name": "Huginn",
-          "state": "On the crossbeam — weight adjusted after the naming, wings folded, attending."
+          "state": "On the crossbeam — head turned one degree toward the door, wings still folded, attending."
         }
       ],
       "objects": [
@@ -1712,9 +1677,8 @@
         "Forge fire — lit and steady at banked coals"
       ],
       "threads": [
-        "Middle name — Fell — sealed between them, spoken once in full",
         "Quiet's trajectory past the loosening not yet spoken aloud",
-        "Evening gathering — Dara, Aldric, Fendt, Mara, Calvar called; none yet arrived",
+        "Evening gathering — Dara, Aldric, Fendt, Mara, Calvar — footsteps on the lane, first arrival imminent",
         "Calvar's unspoken read of the drainage cut not yet named to the group",
         "Document roll on Mara's counter — destination undecided"
       ]
@@ -4372,20 +4336,20 @@
     }
   },
   "tendencies": {
-    "strategic": 15.378304745668675,
-    "cerebral": 11.352809045351004,
-    "social": 12.29301043169975,
-    "generous": 3.9528778605447696,
-    "cautious": 9.426015289069413,
-    "physical": 1.9363421374772085,
-    "risky": 0.4280496485415924,
-    "ruthless": 2.804282500932461,
-    "carousing": 0.04296515376407135,
-    "amorous": 10.508533799087948,
-    "patient": 2.3500419339890315,
-    "stealth": 1.086947061747211,
-    "devotion": 0.5928714889135679,
-    "craft": 0.5581422006064638
+    "strategic": 14.993847127026958,
+    "cerebral": 11.068988819217228,
+    "social": 11.985685170907256,
+    "generous": 3.85405591403115,
+    "cautious": 9.190364906842678,
+    "physical": 1.8879335840402782,
+    "risky": 0.41734840732805256,
+    "ruthless": 2.7341754384091495,
+    "carousing": 0.041891024919969565,
+    "amorous": 10.24582045411075,
+    "patient": 3.2912908856393055,
+    "stealth": 1.0597733852035307,
+    "devotion": 0.5780497016907287,
+    "craft": 0.5441886455913022
   },
   "aptitudes": [
     "strategist",
@@ -4395,7 +4359,7 @@
     "stalwart",
     "charmer"
   ],
-  "actionCount": 484,
+  "actionCount": 485,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -4641,8 +4605,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784390976879,
-  "rev": 700,
+  "updatedAt": 1784391071091,
+  "rev": 701,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5673,7 +5637,7 @@
   "syncedAt": 1784382065804,
   "teachers": {},
   "regionsKnown": {
-    "valley": 302
+    "valley": 303
   },
   "foreclosed": [
     "rootkin",
@@ -5728,10 +5692,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T16:09:36.867Z",
+      "lastAt": "2026-07-18T16:11:11.079Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 27
+      "beats": 28
     }
   ],
   "company": [

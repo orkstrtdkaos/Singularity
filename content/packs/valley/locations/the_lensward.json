@@ -34,7 +34,7 @@
     "glasshome",
     "the_axis_gate"
   ],
-  "descriptionSeed": "Where the Blazeborn work light instead of merely living in it — lenses, mirrors, the great focusing arrays, and the beam-craft that makes them feared. The Lensward is the border where the Radiant Wastes meet the rest of the world, and it is the only place Blazeborn learn tact, because it is the only place they meet people who can leave.",
+  "descriptionSeed": "Where the Blazeborn work light instead of merely living in it — lenses, mirrors, the great focusing arrays, and the beam-craft that makes them feared. The Lensward is the border where the Radiant Wastes meet the rest of the world, and it is the only place Blazeborn learn tact, because it is the only place they meet people who can leave. The Lensward's waygate is shuttered against the light and opened by hand. Arriving unprepared into the Wastes has killed people, so the blazeborn make you knock.",
   "loreRefs": [
     "the_twelve_reaches",
     "traditions",
@@ -54,5 +54,7 @@
     "light": 0.5,
     "mechanical": 0.2,
     "concrete": 0.2
-  }
+  },
+  "waygate": true,
+  "waygateTier": 3
 }

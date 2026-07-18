@@ -35,7 +35,7 @@
     "the_grand_lattice",
     "the_axis_gate"
   ],
-  "descriptionSeed": "One level of one arcology, and it is a perfect machine for living. Nothing is unplanned. Your work, your meal, your route, your hour of rest, your suitable partner — all optimized, all correct, all genuinely BETTER than what you would have chosen. The Lattice-folk are not oppressed; they are well-served, and they will tell you so, and they will be telling the truth, and the truth is somehow the most disturbing part.",
+  "descriptionSeed": "One level of one arcology, and it is a perfect machine for living. Nothing is unplanned. Your work, your meal, your route, your hour of rest, your suitable partner — all optimized, all correct, all genuinely BETTER than what you would have chosen. The Lattice-folk are not oppressed; they are well-served, and they will tell you so, and they will be telling the truth, and the truth is somehow the most disturbing part. Tier Seven's waygate is scheduled: arrivals land in assigned slots, and the Lattice regards an unscheduled gating as a minor structural offence rather than a rudeness.",
   "loreRefs": [
     "the_twelve_reaches",
     "traditions",
@@ -56,5 +56,7 @@
     "mechanical": 0.3,
     "concrete": 0.2
   },
-  "startingLocation": true
+  "startingLocation": true,
+  "waygate": true,
+  "waygateTier": 2
 }

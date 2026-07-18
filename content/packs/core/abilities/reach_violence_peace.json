@@ -415,8 +415,8 @@
         "violence_peace": 0
       },
       "functions": [
-        "resist",
         "bind",
+        "resist",
         "shield"
       ],
       "narrationHints": "Violence and peace both at a knife's edge, held by will alone.",
@@ -427,7 +427,27 @@
           "rank": 1,
           "name": "The Held Breath",
           "grants": "Hold a razor's-edge standoff open — maximum threat, maximum restraint — by sheer presence.",
-          "cannot": "Holds, doesn't end; exhausting; one slip and it looses."
+          "cannot": "Holds, doesn't end; exhausting; one slip and it looses.",
+          "functions": [
+            "resist",
+            "bind",
+            "shield"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
+        },
+        {
+          "rank": 2,
+          "name": "The Long Breath",
+          "grants": "Hold the edge across many rather than a few, and long enough for something to actually change inside it — words exchanged, a party withdrawn, terms found. You can shape the standoff while holding it now, rather than only maintaining it.",
+          "cannot": "It still holds rather than ends; nothing is resolved by the holding itself. Holding many is exhausting past ordinary limits. And one slip still looses everything at once — a larger held breath breaks larger.",
+          "functions": [
+            "resist",
+            "bind",
+            "shield"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "powerSystem": "reach_violence_peace",

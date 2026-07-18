@@ -4036,6 +4036,89 @@ await (async () => {
     npcPortraitTier(pell) === "partner"); // the app skips when n._portraitTier === this tier
 }
 
+// --- SNG-153: the codex consolidates itself (gates, adjudicator, reversible merges) ---
+{
+  const cx = await import('../engine/codex.js');
+  const mk = (over = {}) => ({ id: over.id, label: over.label, kind: over.kind || "person", facts: over.facts || [], links: over.links || [], aliases: over.aliases || [], ...over });
+  const ch = () => { const c = { codex: { schemaVersion: 1, topics: {} } }; return c; };
+
+  // GATE 1 — the free refusals, exactly the pairs from Erik's screenshot
+  const c1 = ch();
+  c1.codex.topics = {
+    pell: mk({ id: "pell", label: "Pell", entityId: "pell", facts: ["[d1] a marsh-warden"] }),
+    calvar: mk({ id: "calvar", label: "Calvar — the Engineer", entityId: "calvar", facts: ["[d3] an engineer"] }),
+    rite: mk({ id: "rite", label: "The Ashwarden Rite", kind: "lore" })
+  };
+  const T = c1.codex.topics;
+  check("153: two DIFFERENT anchored entities are refused for free — no model call (Pell ↔ Calvar)",
+    /different anchored entities/.test(cx.structuralNo(c1.codex, T.pell, T.calvar) || ""));
+  check("153: lore is no longer a universal wildcard — it cannot be absorbed into a person",
+    cx.compatibleKinds(T.rite, T.pell) === false && !!cx.structuralNo(c1.codex, T.rite, T.pell));
+  cx.markNotSame(c1, "pell", "rite");
+  check("153: a not-same verdict is honoured forever", /already said/.test(cx.structuralNo(c1.codex, T.pell, T.rite) || ""));
+
+  // the SCORER — a shared link is relationship, not identity
+  const c2 = ch();
+  c2.codex.topics = {
+    a: mk({ id: "a", label: "Aldric", links: ["millbrook", "the-ledger"] }),
+    b: mk({ id: "b", label: "Corvin", links: ["millbrook", "the-ledger", "a"] })
+  };
+  check("153: two linked people with NO name overlap are no longer suggested as duplicates",
+    cx.suggestMerges(c2, { max: 10 }).length === 0);
+  const c3 = ch();
+  c3.codex.topics = { a: mk({ id: "a", label: "Bren Thalle" }), b: mk({ id: "b", label: "Bren Thalle the Ledgerman" }) };
+  check("153: a genuine name overlap is still surfaced", cx.suggestMerges(c3, { max: 10 }).length === 1);
+
+  // GATE 3 — verdicts applied, and the model never overrides structure
+  const c4 = ch();
+  c4.codex.topics = {
+    p1: mk({ id: "p1", label: "The Person With a List", facts: ["[d2] carried a list"] }),
+    p2: mk({ id: "p2", label: "The Actor With a List", facts: ["[d5] read from a list"] }),
+    x1: mk({ id: "x1", label: "Pell", entityId: "pell" }),
+    x2: mk({ id: "x2", label: "Calvar", entityId: "calvar" })
+  };
+  const pairs = [{ aId: "p1", bId: "p2" }, { aId: "x1", bId: "x2" }];
+  const res = cx.applyMergeVerdicts(c4, pairs, [{ n: 1, verdict: "same" }, { n: 2, verdict: "same" }]);
+  check("153: a 'same' verdict merges automatically", res.merged.length === 1 && Object.keys(c4.codex.topics).length === 3);
+  check("153: a model 'same' CANNOT override gate 1 (Pell and Calvar survive as two)",
+    res.rejected === 1 && !!c4.codex.topics.x1 && !!c4.codex.topics.x2);
+  const c5 = ch();
+  c5.codex.topics = { a: mk({ id: "a", label: "Ash" }), b: mk({ id: "b", label: "Ashe" }) };
+  const r5 = cx.applyMergeVerdicts(c5, [{ aId: "a", bId: "b" }], [{ n: 1, verdict: "different" }]);
+  check("153: a 'different' verdict is recorded so it is never asked again",
+    r5.rejected === 1 && !!cx.structuralNo(c5.codex, c5.codex.topics.a, c5.codex.topics.b));
+  const r6 = cx.applyMergeVerdicts(ch(), [], []);
+  check("153: 'unsure' is the only thing that reaches the player", Array.isArray(r6.unsure));
+
+  // REVERSIBILITY — Erik's condition. Exact restore, bounded log.
+  const c7 = ch();
+  c7.codex.topics = {
+    keep: mk({ id: "keep", label: "Bren Thalle", entityId: "bren", facts: ["[d1] a ledgerman"], links: ["millbrook"], aliases: [] }),
+    gone: mk({ id: "gone", label: "Broad Opportunist", facts: ["[d2] shook you down"], links: ["the-road"], aliases: ["the broad one"] }),
+    other: mk({ id: "other", label: "Curis", links: ["gone"] })
+  };
+  // compare CONTENT, not key insertion order — a restored topic is re-added at the end of the map
+  const normTopics = t => JSON.stringify(Object.keys(t).sort().map(k => [k, t[k]]));
+  const snapshot = normTopics(c7.codex.topics);
+  cx.mergeInto(c7, "gone", "keep");
+  check("153: the merge lands (source absorbed, links rewritten)",
+    !c7.codex.topics.gone && c7.codex.topics.keep.facts.length === 2 && c7.codex.topics.other.links.includes("keep"));
+  const undo = cx.undoLastMerge(c7);
+  check("153: undo restores the absorbed topic verbatim AND rewinds the target — content-exact",
+    undo?.restored === "Broad Opportunist" && normTopics(c7.codex.topics) === snapshot);
+  check("153: the undo log is bounded (it can never become the next storage leak)", (() => {
+    const c = ch();
+    c.codex.topics = { t: mk({ id: "t", label: "T" }) };
+    for (let i = 0; i < 15; i++) { c.codex.topics["s" + i] = mk({ id: "s" + i, label: "S" + i }); cx.mergeInto(c, "s" + i, "t"); }
+    return (c.codex.mergeUndo || []).length <= 10;
+  })());
+  check("153: the player gets a receipt, not a queue", /gathered itself/.test(cx.mergeDigest([{ into: "Pell", absorbed: "the warden" }]) || ""));
+  check("153: the adjudication prompt judges IDENTITY, not association", (() => {
+    const p = cx.buildMergeAdjudicationPrompt(c1, [{ aId: "pell", bId: "calvar" }]);
+    return /IDENTITY, not association/.test(p) && /that they are linked is not evidence they are one/.test(p);
+  })());
+}
+
 // --- SNG-154 stage 2-4: containment — parentId, validation on write, and repair ---
 {
   const { applyPlaceUpdates, findSubPlaceParent } = await import('../engine/places.js');

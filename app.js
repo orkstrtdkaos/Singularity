@@ -11,7 +11,7 @@ import { newProfile, updateProfile, aptitudeMods, profileInsight, grantAptitudes
 import { gmTurn, parseIntent, gmAsk, generateBio, suggestBuild, extractGambit, sanitizeScene, narrativeRegister, ratingRegister, bluntnessDirective } from "./engine/gm.js";
 import { applyQuestUpdates, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, slugify } from "./engine/quests.js";
 import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM } from "./engine/corrections.js";
-import { getApiKey, setApiKey, callClaude, callClaudeJSON } from "./engine/claude.js";
+import { getApiKey, setApiKey, callClaude, callClaudeJSON, parseLooseJSON } from "./engine/claude.js";
 import { generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight, NOMINATE_AT } from "./engine/generate.js";
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, ghList, fetchRepoJSON, raceTimeout } from "./engine/sync.js";
 import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates } from "./engine/inventory.js";
@@ -36,7 +36,7 @@ import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent
 import { initWorldState, runWorldTick, syncSharedWorld, advanceGeneratedOffscreen, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
 import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, retroNativeGrants, applyNativeGrants, nativeGrantIdsFor, seedInnateSubstrate, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility, autoAdvancePracticedRanks, markDefiningMoment, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy } from "./engine/progression.js";
-import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, mergeInto, mergeCodexTopics, suggestMerges, markNotSame } from "./engine/codex.js";
+import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, mergeInto, mergeCodexTopics, suggestMerges, markNotSame, buildMergeAdjudicationPrompt, applyMergeVerdicts, mergeDigest, undoLastMerge } from "./engine/codex.js";
 import { reconcile, topReconcileVersion } from "./engine/reconcile.js";
 import { ensurePractice, recordUse, declareAspiration, dropAspiration, recordAspirationProgress, aspirationRipe, practiceRankReady, ripeCombos, ripeBranches, emergenceNoticeForGM, acceptCombo, acceptBranch, validEmergenceId } from "./engine/practice.js";
 import { needsBackfill, runBackfill, summaryLines } from "./engine/backfill.js";
@@ -55,7 +55,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // SNG-155: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.116";
+const APP_VERSION = "1.8.117";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -5189,10 +5189,43 @@ async function renderLibrary(catIdx = 0, entryId = null) {
 
 // ---------- codex: the character's knowledge graph ----------
 
+// SNG-153: the codex consolidates ITSELF. Erik: "It's too much to have every potential merge done
+// by the user… the game should auto merge — it's really smart AI, just do it." Gate 1 (structural)
+// already refused the free cases; this judges the rest in ONE batched call, merges the certain
+// ones with a receipt, permanently records the rejects, and leaves only genuine coin-flips.
+// Runs on codex OPEN, never in the play loop, never blocking, at most once per session per shape.
+let _adjudicatedKey = null, _adjudicating = false;
+async function maybeAdjudicateMerges(query = "") {
+  if (_adjudicating || !getApiKey()) return;
+  const pairs = suggestMerges(character, { max: 24 });
+  if (!pairs.length) return;
+  const key = pairs.map(p => `${p.aId}::${p.bId}`).sort().join("|");
+  if (key === _adjudicatedKey) return;                 // same shape already judged this session
+  _adjudicatedKey = key; _adjudicating = true;
+  try {
+    const raw = await callClaude([{ role: "user", content: buildMergeAdjudicationPrompt(character, pairs) }],
+      { task: "codex-adjudicate", maxTokens: 900 });
+    const verdicts = parseLooseJSON(raw);
+    const list = Array.isArray(verdicts) ? verdicts : (verdicts?.verdicts || []);
+    if (!list.length) return;
+    const r = applyMergeVerdicts(character, pairs, list);
+    if (r.merged.length || r.rejected) {
+      saveCharacter(character);
+      const digest = mergeDigest(r.merged);
+      if (digest) character._codexDigest = `${digest}${r.rejected ? ` ${r.rejected} looked alike but aren't the same thing — I won't ask again.` : ""}`;
+      else if (r.rejected) character._codexDigest = `${r.rejected} codex entries looked alike but aren't the same thing — I won't ask again.`;
+      renderCodexScreen(query);
+    }
+  } catch (err) {
+    console.warn("[codex] adjudication skipped (the player queue still works):", err?.message);
+  } finally { _adjudicating = false; }
+}
+
 function renderCodexScreen(query = "", openTopicId = null, mergeMode = false) {
   const results = searchCodex(character, query);
   const open = openTopicId ? character.codex?.topics?.[openTopicId] : null;
   const suggestions = !open ? suggestMerges(character) : [];
+  if (!open) maybeAdjudicateMerges(query); // SNG-153: tidy the codex itself, off the play loop
   chrome(`<div class="screen" style="max-width:720px">
     <h2>Codex — what ${esc(character.name)} knows</h2>
     <div class="field"><input id="codex-search" value="${esc(query)}" placeholder="Search topics, facts, factions, mysteries…"></div>
@@ -5242,6 +5275,9 @@ function renderCodexScreen(query = "", openTopicId = null, mergeMode = false) {
         return `<div class="codex-nominations"><div class="codex-group-title">★ Notable — grown into your world's canon</div>
           ${noms.slice(0, 6).map(n => `<button class="opt codex-nom" data-topic="${esc(n.id)}" title="weight ${n.weight}${n.rating ? ` · ${n.rating}` : ""} — a candidate to become shared-world canon">★ ${esc(n.name)} <span class="cost">${esc(n.type)}</span></button>`).join("")}</div>`;
       })()}
+      ${/* SNG-153: a RECEIPT of what the codex did on its own — with a one-tap undo, because
+            auto-merge is only safe while it stays reversible (Erik's condition). */""}
+      ${character._codexDigest ? `<div class="codex-digest insight" style="margin-bottom:8px">${esc(character._codexDigest)}${(character.codex?.mergeUndo || []).length ? ` <button class="opt codex-sug-btn dim" id="codex-undo">Undo the last merge</button>` : ""}</div>` : ""}
       ${suggestions.length ? `<div class="codex-suggestions"><div class="codex-group-title">These look like the same thing — your call</div>
         ${suggestions.map((s, i) => `<div class="codex-sug-row"><span class="codex-sug-pair">«${esc(s.a)}» ↔ «${esc(s.b)}»</span>
           <button class="opt codex-sug-btn" data-sugmerge="${i}">Merge</button>
@@ -5300,6 +5336,14 @@ function renderCodexScreen(query = "", openTopicId = null, mergeMode = false) {
     mergeCodexTopics(character); // the new alias may cascade more duplicates together
     saveCharacter(character);
     renderCodexScreen(query, target.id);
+  };
+  const undoBtn = document.getElementById("codex-undo");
+  if (undoBtn) undoBtn.onclick = () => {
+    const r = undoLastMerge(character);
+    if (!r) return;
+    character._codexDigest = `Put back — "${r.restored}" is its own entry again.`;
+    saveCharacter(character);
+    renderCodexScreen(query);
   };
   for (const b of app.querySelectorAll("[data-sugmerge]")) b.onclick = () => {
     const s = suggestions[parseInt(b.dataset.sugmerge)];

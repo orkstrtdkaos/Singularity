@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "id": "the_quiet_ground",
+  "name": "The Quiet Ground",
+  "regionId": "the_palelands",
+  "communityId": "ashwarden.quiet_ground",
+  "axisVector": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    -0.8,
+    0.0,
+    0.0,
+    -0.5,
+    0.6,
+    0.0,
+    0.0,
+    0.7
+  ],
+  "spectrum": {
+    "death_life": -0.8,
+    "violence_peace": 0.7,
+    "emotional_logical": -0.5,
+    "falsehood_truth": 0.6
+  },
+  "tags": [
+    "ashwarden",
+    "death",
+    "sacred",
+    "refuge",
+    "heal",
+    "tended"
+  ],
+  "connections": [
+    "cairnhold"
+  ],
+  "descriptionSeed": "Where the dying are brought, or come. Low buildings, wide windows, still grey water, and more room than anyone needs — the Ashwardens learned early that people at the end want space and quiet and something to look at. Nobody here is hurried toward an ending and nobody is held back from one; the Quiet Ground's entire discipline is that both of those are violence. Palework is practised openly here and so is Vivimancy, and the Rootkin who come to work alongside the Ashwardens are welcomed without irony. It is the only place in the world where the two poles of the death_life axis share a roof and a rota, and neither tradition has ever quite explained why that works.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions",
+    "world_framing"
+  ],
+  "encounterFlavor": "Attendants who ask what you need before they ask who you are; a Rootkin and an Ashwarden arguing companionably over one patient; someone sitting with a person who has been unconscious for days, still talking to them.",
+  "dangerLevel": 1,
+  "questSeeds": [
+    "A patient is refusing the Last Gift and their family is asking the Ashwardens to give it anyway",
+    "Someone has been brought here who is not dying, and nobody can work out who brought them or why",
+    "A Vivimancer and an Ashwarden disagree about a single patient, and both are right"
+  ],
+  "map": {
+    "x": 680,
+    "y": 330
+  },
+  "poleIntensity": {
+    "death": 0.8,
+    "peace": 0.7,
+    "truth": 0.6
+  }
+}

@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 12,
-  "xp": 1182,
+  "xp": 1190,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -89,7 +89,7 @@
   "maxHealth": 85,
   "health": 85,
   "maxEnergy": 155,
-  "energy": 108,
+  "energy": 104,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -718,9 +718,9 @@
   ],
   "relationships": {},
   "chronicle": [],
-  "currentLocationId": "the-low-lamp-inn",
+  "currentLocationId": "old_switchback",
   "activeScene": {
-    "locationId": "the-low-lamp-inn",
+    "locationId": "old_switchback",
     "turns": [
       {
         "player": null,
@@ -1316,107 +1316,131 @@
         "player": "GAMBIT — Stop Dave Cutter from acting or even knowing who or what is happening",
         "summary": "The Ended Threat, Wildcraft, and The Shadow Work neutralize the relay figure — Calvar and the document reach the cut-lane, unobserved.",
         "narration": "The relay figure's hand is three inches from his coat when The Ended Threat closes around what he's reaching for — not the man, but the action. You read the plan forming in him: the hand finds a whistle, the whistle finds his lips, and in four seconds Calvar's cut-lane exit becomes a cordoned street. You don't touch the man. You end the sequence at its hinge. The whistle doesn't leave the pocket. His fingers close on the cloth instead, and the impulse that drove them there dissipates like a breath in cold air — he felt something, processed it as nothing, and his hand drops.\n\nIt works, but not cleanly. He half-turns — not toward you, toward the wall, the way a man does when he thinks he heard his name at distance. Three seconds while he listens to a street that isn't saying anything. Long enough. Your left foot is already off the cobbles, closing the gap. The lane has shadow at the base of the far wall where the eaves cut the afternoon light — not much, but enough for what you do next. Your fingers find the loose gravel in the lane's gutter by feel, and Wildcraft reads the moment like a seam in cloth: you flick the handful without looking, and three pieces strike the opposite wall in a tight cluster, six feet south of the figure and four feet up, a sound that carries purpose — the sound of someone moving away.\n\nHis head goes south. That's the condition. You step inside his attention like stepping through a door. The Ended Threat holds the whistle in the pocket; Wildcraft put his eyes down the wrong lane; and now The Shadow Work thickens the air behind him into something that reads, from the cooperage's street face, as a figure moving south in unremarkable hurry. If the watcher at the chandler's awning happens to be looking at this end of the cut-lane, he sees someone going away. Nothing to note.\n\nYou wave Pell through the gate. She comes without hesitation — two steps, pack steady, Memory's collar rune warm against your awareness as she passes. Calvar follows, rolling-document tucked hard under his arm, chin down, moving with the practiced unhurry of a man who has been leaving places carefully for thirty years. He passes within arm's reach of the relay figure, who is still listening to a wall. Huginn banks once overhead and sets down on a gutter-run thirty feet ahead, marking the lane's north end: clear.\n\n*✦ A defining moment — **The Attended End** is mastered now (rank 3).*"
+      },
+      {
+        "player": "Pause at the lane's end — use Order-Sense to read the street pattern ahead before committing a direction. You want the full design before you walk into it.",
+        "summary": "Order-Sense reads the warden loop and the net's seam — the party exits the cut-lane clean, moving toward the Low Lamp Inn.",
+        "narration": "You pause at the lane's south end where it meets the cross-street, Memory's butt-heel grounded on the stone, and let Order-Sense open quietly — not a push, just a listening. The lattice is thin here, halved by distance from the Heights, and you feel that thinness as a kind of friction, the design coming through gauze rather than glass. But it comes.\n\nThe street ahead is part of something larger: the Edge District's lower tier running its usual afternoon logic — traders cycling toward the light-guide markets before the evening shift, a warden pair on a fixed loop that will bring them past this junction in roughly four minutes, and the cooperage's own watch-net reaching two blocks in every cardinal direction. You read the watcher on the street-face still fixed on a casement that holds nothing. You read the relay figure behind you recovering his composure and deciding, after a long moment of internal accounting, that what he almost did wasn't worth reporting as having almost happened. The net has a seam: the warden pair's loop turns west at the second lamp-post, and their backs will be to the Low Lamp's lane-mouth for a window of perhaps ninety seconds. That is the door.\n\nCalvar is at your shoulder, document tucked under his arm, breathing with the deliberate evenness of a man who has been careful for a very long time. Pell reads your stillness and reads it correctly — she steps to the right, putting her body between Calvar and the open cross-street, pack angled so it reads as a load-bearer's pause rather than a watch. Huginn drops from the gutter-run and lands on a nearby eave without sound, one eye on the warden pair's backs.\n\nNinety seconds. The wardens turn west. You move."
       }
     ],
     "lastTurn": {
-      "narration": "The relay figure's hand is three inches from his coat when The Ended Threat closes around what he's reaching for — not the man, but the action. You read the plan forming in him: the hand finds a whistle, the whistle finds his lips, and in four seconds Calvar's cut-lane exit becomes a cordoned street. You don't touch the man. You end the sequence at its hinge. The whistle doesn't leave the pocket. His fingers close on the cloth instead, and the impulse that drove them there dissipates like a breath in cold air — he felt something, processed it as nothing, and his hand drops.\n\nIt works, but not cleanly. He half-turns — not toward you, toward the wall, the way a man does when he thinks he heard his name at distance. Three seconds while he listens to a street that isn't saying anything. Long enough. Your left foot is already off the cobbles, closing the gap. The lane has shadow at the base of the far wall where the eaves cut the afternoon light — not much, but enough for what you do next. Your fingers find the loose gravel in the lane's gutter by feel, and Wildcraft reads the moment like a seam in cloth: you flick the handful without looking, and three pieces strike the opposite wall in a tight cluster, six feet south of the figure and four feet up, a sound that carries purpose — the sound of someone moving away.\n\nHis head goes south. That's the condition. You step inside his attention like stepping through a door. The Ended Threat holds the whistle in the pocket; Wildcraft put his eyes down the wrong lane; and now The Shadow Work thickens the air behind him into something that reads, from the cooperage's street face, as a figure moving south in unremarkable hurry. If the watcher at the chandler's awning happens to be looking at this end of the cut-lane, he sees someone going away. Nothing to note.\n\nYou wave Pell through the gate. She comes without hesitation — two steps, pack steady, Memory's collar rune warm against your awareness as she passes. Calvar follows, rolling-document tucked hard under his arm, chin down, moving with the practiced unhurry of a man who has been leaving places carefully for thirty years. He passes within arm's reach of the relay figure, who is still listening to a wall. Huginn banks once overhead and sets down on a gutter-run thirty feet ahead, marking the lane's north end: clear.\n\n*✦ A defining moment — **The Attended End** is mastered now (rank 3).*",
-      "sceneSummary": "The Ended Threat, Wildcraft, and The Shadow Work neutralize the relay figure — Calvar and the document reach the cut-lane, unobserved.",
+      "narration": "You pause at the lane's south end where it meets the cross-street, Memory's butt-heel grounded on the stone, and let Order-Sense open quietly — not a push, just a listening. The lattice is thin here, halved by distance from the Heights, and you feel that thinness as a kind of friction, the design coming through gauze rather than glass. But it comes.\n\nThe street ahead is part of something larger: the Edge District's lower tier running its usual afternoon logic — traders cycling toward the light-guide markets before the evening shift, a warden pair on a fixed loop that will bring them past this junction in roughly four minutes, and the cooperage's own watch-net reaching two blocks in every cardinal direction. You read the watcher on the street-face still fixed on a casement that holds nothing. You read the relay figure behind you recovering his composure and deciding, after a long moment of internal accounting, that what he almost did wasn't worth reporting as having almost happened. The net has a seam: the warden pair's loop turns west at the second lamp-post, and their backs will be to the Low Lamp's lane-mouth for a window of perhaps ninety seconds. That is the door.\n\nCalvar is at your shoulder, document tucked under his arm, breathing with the deliberate evenness of a man who has been careful for a very long time. Pell reads your stillness and reads it correctly — she steps to the right, putting her body between Calvar and the open cross-street, pack angled so it reads as a load-bearer's pause rather than a watch. Huginn drops from the gutter-run and lands on a nearby eave without sound, one eye on the warden pair's backs.\n\nNinety seconds. The wardens turn west. You move.",
+      "sceneSummary": "Order-Sense reads the warden loop and the net's seam — the party exits the cut-lane clean, moving toward the Low Lamp Inn.",
       "choices": [
         {
-          "label": "Move immediately — keep Calvar between you and the street faces, head straight for the Low Lamp Inn while the shadow construct holds.",
+          "label": "Move directly to the Low Lamp Inn — use the seam Order-Sense just named, walking like people with nowhere interesting to be.",
           "attribute": "practical",
           "subAttribute": "wits",
-          "difficulty": 15,
+          "axes": {
+            "chaos_order": 0.4,
+            "falsehood_truth": -0.2
+          },
+          "difficulty": 0,
           "intentTags": [
             "careful",
             "travel"
           ],
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Pause at the lane's end — use Order-Sense to read the street pattern ahead before committing a direction. You want the full design before you walk into it.",
-          "attribute": "mental",
+          "label": "Get Calvar inside the Low Lamp first — split briefly, let Pell walk him through the door while you hold the lane-mouth and watch the warden pair's return.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "chaos_order": 0.3,
+            "violence_peace": 0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "careful",
+            "guard"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Once inside the Low Lamp — ask Maret quietly whether anyone has been asking after the room you've taken, or after Calvar by description.",
+          "attribute": "social",
           "subAttribute": "insight",
-          "abilityId": "order_sense",
-          "energyCost": 2,
+          "axes": {
+            "falsehood_truth": 0.3,
+            "chaos_order": 0.2
+          },
           "difficulty": 0,
           "intentTags": [
             "scout",
             "careful"
           ],
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Ask Huginn aloud — it has marked the lane's north end. You want to know if anything up there is ending.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Split briefly — send Calvar and Pell to the Low Lamp now while you hold the cut-lane a moment longer, watching whether the relay figure recovers and reaches for his coat again.",
+          "label": "Once settled at the Low Lamp — lay the rolled document and Fendt's testimony on the table together and read the full design of what you now hold.",
           "attribute": "mental",
           "subAttribute": "reason",
+          "axes": {
+            "falsehood_truth": 0.4,
+            "chaos_order": 0.3
+          },
           "difficulty": 15,
           "intentTags": [
-            "guard",
-            "risky"
+            "study",
+            "plan"
           ],
-          "trivial": false
-        }
-      ],
-      "deeds": [
-        {
-          "description": "Neutralized a relay figure in the cut-lane without violence or alarm — The Ended Threat, Wildcraft, and The Shadow Work braided into a clean exit for Calvar and the document.",
-          "tags": [
-            "precise",
-            "uncanny",
-            "guardian"
-          ],
-          "weight": 2,
-          "communityId": "valley.edge-district"
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "characterDeltas": {
-        "energy": -5
+        "health": 0,
+        "energy": -2,
+        "xp": 0
       },
       "scene": {
-        "setting": "Cut-lane south of the cooperage, Edge District — narrow stone lane, eave-shadow along the far wall, afternoon light slanting from the west. The unlatched gate is ten feet behind; Huginn sits on the gutter-run thirty feet north, marking the lane's far end.",
+        "setting": "South end of the cut-lane where it meets the Edge District cross-street — afternoon light, warden pair just turned west at the second lamp-post, their backs now to the lane-mouth. The Low Lamp Inn is two blocks south.",
         "npcsPresent": [
           {
             "name": "Calvar",
-            "state": "Moving north in the cut-lane, document under arm, chin down — three steps past the relay figure and still going, composed."
+            "state": "At Silas's shoulder, document under arm, breathing deliberately — ready to move on signal."
           },
           {
             "name": "Pell",
-            "state": "Just through the gate, half a step behind Calvar, pack steady, watching the relay figure's back without turning her head fully."
+            "state": "Stepped right, body between Calvar and the open street, pack angled to read as a load-bearer's pause."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the north gutter-run, thirty feet up the lane — marking it clear, watching."
+            "state": "On a nearby eave, one eye on the warden pair's backs — silent."
           },
           {
             "name": "Unknown relay figure",
-            "state": "Still facing south, listening to a wall — three seconds of misdirection holding. Hand empty. No whistle."
+            "state": "Behind them in the cut-lane — recovered composure, decided nothing happened, not reporting it."
           },
           {
             "name": "Unknown watcher",
-            "state": "Fixed on the cooperage street-face, watching the Shadow Work screen on the casement — still held."
+            "state": "Still fixed on the cooperage street-face casement — the Shadow Work screen holding."
           }
         ],
         "objects": [
           "Rolled document — under Calvar's arm",
           "Memory (spear) — across Silas's back",
-          "Shadow Work screen — holding against Calvar's casement, street face",
-          "Shadow construct — briefly present in the cut-lane, reading as a southbound figure"
+          "Shadow Work screen — still holding against the cooperage casement, street face"
         ],
         "threads": [
-          "The Shadow Work screen on the casement is still holding — it will not last indefinitely",
-          "The relay figure has not recovered — the Ended Threat held the whistle, but he is still present in the lane",
-          "Huginn has marked the north end of the lane — clear for now",
+          "The Shadow Work screen will not hold indefinitely — the casement deception has a limited life",
+          "The warden pair's loop brings them back past this junction — ninety-second window to move",
           "The document must reach the Low Lamp Inn intact",
           "The conduit pulse at the third hour — still unread"
         ]
@@ -1427,99 +1451,95 @@
           "npcId": "calvar",
           "name": "Calvar",
           "role": "Pre-Transition filtration engineer, Edge District",
-          "note": "Passed within arm's reach of the relay figure and held his pace — thirty years of careful departure in his gait. Document intact.",
+          "note": "Held steady at the lane-mouth — deliberate breathing, document secure, waiting on Silas's signal to move into the seam.",
           "learned": [
-            "Moves through a watched space with practiced composure — not stillness, controlled motion"
+            "Moves through a watched space with practiced composure — not stillness, controlled motion."
           ],
-          "statusNote": "Moving north in the cut-lane, document under arm — the exit is active, three steps past the relay figure.",
-          "relationshipDelta": 1
+          "skillsObserved": [
+            "holding composure at a chokepoint under time pressure"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the cut-lane south exit — ready to move through the warden-loop seam toward the Low Lamp Inn."
         },
         {
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
           "role": "Village blacksmith, Millbrook — traveling companion",
-          "note": "Through the gate without hesitation, two steps, pack steady — read Calvar's pace and matched it without being told.",
-          "statusNote": "In the cut-lane north of the gate, moving with Calvar — pack steady, situation read.",
-          "learned": [
-            "Matches a companion's pace under pressure without instruction"
-          ]
-        }
-      ],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "find-the-engineer",
-          "note": "Calvar is through the cut-lane gate with the rolled document — the relay figure neutralized without alarm. The Low Lamp Inn is the next destination."
+          "note": "Read Silas's stillness and repositioned without instruction — body covering Calvar's exposure to the street.",
+          "learned": [],
+          "skillsObserved": [
+            "tactical repositioning from a read — covering a principal without being asked"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the cut-lane south exit — covering Calvar's street exposure, pack steady, ready to move."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "the-ended-threat-wildcraft-braid",
-          "label": "Ended Threat + Wildcraft: Braided Sequence-Break",
-          "kind": "lore",
-          "fact": "The Ended Threat collapsed the relay figure's forming action at its hinge — the whistle never left the pocket. Wildcraft then placed his attention south with thrown gravel. Used in sequence, the two crafts can redirect a watcher without contact, sound, or visible cause.",
+          "topic": "overseer-grael",
+          "label": "Grael's Watch-Net",
+          "kind": "faction",
+          "fact": "The watch-net has a readable seam: the warden pair on the lower tier runs a fixed loop that turns west at the second lamp-post, giving a ninety-second window of blind coverage at the lane-mouth. Order-Sense read this from the full district pattern.",
           "links": [
             "find-the-engineer",
             "radiant-plateau-edge",
-            "overseer-grael"
+            "the-edge-district-ledger",
+            "calvar"
           ]
         }
       ],
+      "moveTo": {
+        "location": "old_switchback",
+        "why": "Moving through the warden-loop seam — the party walks the two blocks to the Low Lamp Inn, then continues toward the Old Switchback with Calvar and the document."
+      },
+      "timeOps": {
+        "hoursPassed": 1,
+        "why": "The move from the cut-lane through the seam and south to the Low Lamp, then onward to the Old Switchback — a short urban transit in the afternoon."
+      },
       "placeUpdates": [
         {
-          "note": "The relay figure in the cut-lane was neutralized by The Ended Threat + Wildcraft on World-day 18 afternoon — whistle held, attention misdirected south, no alarm raised. The Shadow Work screen on the cooperage casement was still holding at exit.",
-          "subPlace": {
-            "name": "Cut-lane south exit — cooperage",
-            "note": "The lane where Calvar made his exit — relay figure neutralized without violence, Huginn marking the north end clear.",
-            "visited": true
+          "note": "The relay figure in the cut-lane recovered composure and decided not to report the incident — Grael's net has a gap in its own accountability.",
+          "flag": {
+            "relay_figure_did_not_report": true
           }
         }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A short tense sequence — the gambit's final step and the cut-lane crossing took only minutes."
-      },
-      "markDefiningMoment": {
-        "abilityId": "the-attended-end"
-      },
-      "imagePrompt": "A narrow stone cut-lane in the Edge District, afternoon light slanting low — a relay figure faces a wall, hand at his side, listening to nothing. Three figures move north behind him in practiced quiet: a broad-chested older man with a rolled document under his arm, a woman with a traveler's pack, and a lean figure at the rear, one hand still half-raised from a scatter of gravel. On the gutter-run ahead, a big grey-black corvid waits without moving.",
-      "momentArt": "https://image.pollinations.ai/prompt/A%20narrow%20stone%20cut-lane%20in%20the%20Edge%20District%2C%20afternoon%20light%20slanting%20low%20%E2%80%94%20a%20relay%20figure%20faces%20a%20wall%2C%20hand%20at%20his%20side%2C%20listening%20to%20nothing.%20Three%20figures%20move%20north%20behind%20him%20in%20practiced%20quiet%3A%20a%20broad-chested%20older%20man%20with%20a%20rolled%20document%20under%20his%20arm%2C%20a%20woman%20with%20a%20traveler's%20pack%2C%20an%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=38917&nologo=true"
+      ]
     },
     "sceneState": {
-      "setting": "Cut-lane south of the cooperage, Edge District — narrow stone lane, eave-shadow along the far wall, afternoon light slanting from the west. The unlatched gate is ten feet behind; Huginn sits on the gutter-run thirty feet north, marking the lane's far end.",
+      "setting": "South end of the cut-lane where it meets the Edge District cross-street — afternoon light, warden pair just turned west at the second lamp-post, their backs now to the lane-mouth. The Low Lamp Inn is two blocks south.",
       "npcsPresent": [
         {
           "name": "Calvar",
-          "state": "Moving north in the cut-lane, document under arm, chin down — three steps past the relay figure and still going, compose"
+          "state": "At Silas's shoulder, document under arm, breathing deliberately — ready to move on signal."
         },
         {
           "name": "Pell",
-          "state": "Just through the gate, half a step behind Calvar, pack steady, watching the relay figure's back without turning her head"
+          "state": "Stepped right, body between Calvar and the open street, pack angled to read as a load-bearer's pause."
         },
         {
           "name": "Huginn",
-          "state": "Perched on the north gutter-run, thirty feet up the lane — marking it clear, watching."
+          "state": "On a nearby eave, one eye on the warden pair's backs — silent."
         },
         {
           "name": "Unknown relay figure",
-          "state": "Still facing south, listening to a wall — three seconds of misdirection holding. Hand empty. No whistle."
+          "state": "Behind them in the cut-lane — recovered composure, decided nothing happened, not reporting it."
         },
         {
           "name": "Unknown watcher",
-          "state": "Fixed on the cooperage street-face, watching the Shadow Work screen on the casement — still held."
+          "state": "Still fixed on the cooperage street-face casement — the Shadow Work screen holding."
         }
       ],
       "objects": [
         "Rolled document — under Calvar's arm",
         "Memory (spear) — across Silas's back",
-        "Shadow Work screen — holding against Calvar's casement, street face",
-        "Shadow construct — briefly present in the cut-lane, reading as a southbound figu"
+        "Shadow Work screen — still holding against the cooperage casement, street face"
       ],
       "threads": [
-        "The Shadow Work screen on the casement is still holding — it will not last indefinitely",
-        "The relay figure has not recovered — the Ended Threat held the whistle, but he is still present in the lane",
-        "Huginn has marked the north end of the lane — clear for now",
+        "The Shadow Work screen will not hold indefinitely — the casement deception has a limited life",
+        "The warden pair's loop brings them back past this junction — ninety-second window to move",
         "The document must reach the Low Lamp Inn intact",
         "The conduit pulse at the third hour — still unread"
       ]
@@ -1528,7 +1548,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 4,
-    "hour": 14,
+    "hour": 15,
     "realAnchor": null
   },
   "companions": [
@@ -1947,7 +1967,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d4] Said 'yes, we're ready' to Huginn on behalf of both of them — unguarded, warm, not performing it",
         "[d4] The consummation — in the bath trough, unhurried, entirely herself. No management, no ledger-close. Her hands on his forearms throughout. Settled against his shoulder afterward wit",
         "[d4] Answered Silas's plain question plainly — she thought there'd be a different register on the other side, but it's the same, just more room. Said it precisely, not defensively.",
         "[d4] Confirmed the Weir mark accepted — 'it's in me the way ironsense is, I don't look for it, it's just there when I reach.' Confirmed happy — quieter than expected, but real. Asked th",
@@ -1956,7 +1975,8 @@
         "[d4] Read the lane independently — has already angled away from the watcher without being asked. Ready and tracking.",
         "[d4] Named the rear service passage without prompting — practical structural knowledge, immediately useful.",
         "[d4] Read the relay at the same moment Silas did — holding at the gate, ready to move on signal.",
-        "[d4] Through the gate without hesitation, two steps, pack steady — read Calvar's pace and matched it without being told."
+        "[d4] Through the gate without hesitation, two steps, pack steady — read Calvar's pace and matched it without being told.",
+        "[d4] Read Silas's stillness and repositioned without instruction — body covering Calvar's exposure to the street."
       ],
       "knownFacts": [
         "Receives intimacy the way she receives all work she intends to do well — present, deliberate, paying the same quality of attention she was given",
@@ -1969,15 +1989,15 @@
         "Matches a companion's pace under pressure without instruction"
       ],
       "skillsObserved": [
-        "reading a subject's frame and shifting the dynamic deliberat",
         "holding material knowledge in reserve until it becomes load-",
         "holding confirmed knowledge without performance — named the ",
         "holding partial knowledge without performance — named the ha",
         "ironsense transmitted deliberately through a rune-threshold",
-        "immediate structural mapping of an unfamiliar building under"
+        "immediate structural mapping of an unfamiliar building under",
+        "tactical repositioning from a read — covering a principal wi"
       ],
       "status": "active",
-      "statusNote": "In the cut-lane north of the gate, moving with Calvar — pack steady, situation read.",
+      "statusNote": "At the cut-lane south exit — covering Calvar's street exposure, pack steady, ready to move.",
       "lastSeen": {
         "locationId": "the-low-lamp-inn",
         "day": 4
@@ -2303,7 +2323,6 @@
       },
       "relationship": 9,
       "history": [
-        "[d3] Held the room through the entire memory-witnessing — did not crowd it, did not watch it too closely. Waiting now to be asked about the road.",
         "[d3] Named the Plateau lattice's indifference to outsiders plainly and without apology — redirected to practical needs. Ready to answer Pell's question about the morning.",
         "[d3] Named the annex odds without softening them — filing date, binding description, cover notation are his retrieval tools; hierarchy standing is gone. Lower Plateau district is the on",
         "[d3] Received his tasking plainly — bring his experience and Radiant standing to the road, teach what he knows when it's needed. Accepted it without performance. Committed to first ligh",
@@ -2312,28 +2331,29 @@
         "[d4] Opened into the room already packed and wall-seated — had been tracking the watcher's casement angles from inside. Released a held breath when Silas and Pell entered. First words: ",
         "[d4] Named the cut-lane delivery exit from the cooperage's rear service passage — confirmed the watcher has not shifted position in two hours of his own counting. Steady and contributin",
         "[d4] Held in the barrel-yard with the document — waiting on Silas's signal, composed under pressure.",
-        "[d4] Passed within arm's reach of the relay figure and held his pace — thirty years of careful departure in his gait. Document intact."
+        "[d4] Passed within arm's reach of the relay figure and held his pace — thirty years of careful departure in his gait. Document intact.",
+        "[d4] Held steady at the lane-mouth — deliberate breathing, document secure, waiting on Silas's signal to move into the seam."
       ],
       "knownFacts": [
-        "Administrative restructuring fourteen years ago makes the annex's current organization uncertain",
         "Calvar's standing inside the Radiant hierarchy is gone — his approach would be as a citing traveler, not a credentialed author",
         "Has been assigned the role of practical mentor on the road — Pell learns her father's craft from him directly",
         "Silas has named the Ashwarden work with Huginn as a third track alongside the retrieval task",
         "Had been tracking the watcher independently from inside — counted two position shifts and casement angles",
         "The traveling case was already buckled before Silas arrived — he had decided to move",
         "The cooperage has a rear delivery exit opening onto the cut-lane, south side — outside the watcher's fixed eye-line",
-        "Moves through a watched space with practiced composure — not stillness, controlled motion"
+        "Moves through a watched space with practiced composure — not stillness, controlled motion",
+        "Moves through a watched space with practiced composure — not stillness, controlled motion."
       ],
       "skillsObserved": [
-        "receiving unexpected visitors without flinching",
         "precise self-positioning under uncertainty — named what he n",
         "measured disclosure — named the three copies without being a",
         "precise self-accounting of delay and its cause",
         "identifying the structural flaw in Grael's appeal-capture me",
-        "sustained positional surveillance from a static interior pos"
+        "sustained positional surveillance from a static interior pos",
+        "holding composure at a chokepoint under time pressure"
       ],
       "status": "active",
-      "statusNote": "Moving north in the cut-lane, document under arm — the exit is active, three steps past the relay figure.",
+      "statusNote": "At the cut-lane south exit — ready to move through the warden-loop seam toward the Low Lamp Inn.",
       "lastSeen": {
         "locationId": "the-low-lamp-inn",
         "day": 4
@@ -2561,9 +2581,12 @@
         "[d4] Maret Doss is the innkeeper — keeps the ledger, does not ask after guests' business, knows the local roads in detail. The road to Millbrook runs wetter than it looks for the first quarter-mile after a",
         "[d4] A watcher was stationed under the tallow-chandler's awning opposite the cooperage on World-day 18 afternoon — Calvar's departure lamp absent from window, casement latched.",
         "[d4] The Shadow Work screen was shaped against Calvar's second-floor casement on World-day 18 afternoon — the watcher on the street face has been holding on a covered window since the party's exit.",
-        "[d4] The relay figure in the cut-lane was neutralized by The Ended Threat + Wildcraft on World-day 18 afternoon — whistle held, attention misdirected south, no alarm raised. The Shadow Work screen on the c"
+        "[d4] The relay figure in the cut-lane was neutralized by The Ended Threat + Wildcraft on World-day 18 afternoon — whistle held, attention misdirected south, no alarm raised. The Shadow Work screen on the c",
+        "[d4] The relay figure in the cut-lane recovered composure and decided not to report the incident — Grael's net has a gap in its own accountability."
       ],
-      "flags": {},
+      "flags": {
+        "relay_figure_did_not_report": true
+      },
       "lastVisit": 3,
       "vectorsKnown": [
         "violence_peace",
@@ -2616,6 +2639,16 @@
           "note": "The lane where Calvar made his exit — relay figure neutralized without violence, Huginn marking the north end clear."
         }
       }
+    },
+    "old_switchback": {
+      "visits": 1,
+      "notes": [],
+      "flags": {},
+      "lastVisit": 4,
+      "vectorsKnown": [
+        "chaos_order",
+        "concrete_abstract"
+      ]
     }
   },
   "worldState": {
@@ -3538,7 +3571,8 @@
           "[d3] Fendt's supervisor in the filtration array hierarchy. Named as the person who received Fendt's preliminary concern notice — three days later the formal ledger was rewritten under Fendt's initials. Whe",
           "[d3] Grael received Fendt's preliminary concern notice naming the seventh band by band designation — meaning his subsequent suppression of those exact readings was surgical and deliberate, not approximate ",
           "[d3] Grael's method requires no second move — the machinery grinds to conclusion on its own once the channel for appeal is closed. The Attended End confirms the design works.",
-          "[d3] Grael's runner is named Rennic (initials R.V.) — appears in the optics array intake collection log at every first-and-third-morning slot for six unbroken weeks, including the week Calvar's calibration"
+          "[d3] Grael's runner is named Rennic (initials R.V.) — appears in the optics array intake collection log at every first-and-third-morning slot for six unbroken weeks, including the week Calvar's calibration",
+          "[d4] The watch-net has a readable seam: the warden pair on the lower tier runs a fixed loop that turns west at the second lamp-post, giving a ninety-second window of blind coverage at the lane-mouth. Order"
         ],
         "links": [
           "radiant-plateau-edge",
@@ -3550,10 +3584,12 @@
           "calvar",
           "leth-archive-complaint"
         ],
-        "aliases": [],
+        "aliases": [
+          "Grael's Watch-Net"
+        ],
         "createdDay": 3,
         "entityId": "overseer-grael",
-        "updatedDay": 3
+        "updatedDay": 4
       },
       "leth-archive-complaint": {
         "id": "leth-archive-complaint",
@@ -3873,20 +3909,20 @@
     }
   },
   "tendencies": {
-    "strategic": 18.482490612170892,
-    "cerebral": 12.732688747900047,
-    "social": 13.31129674109037,
-    "generous": 2.437903548687268,
-    "cautious": 11.957670919860869,
-    "physical": 0.1431121266127118,
-    "risky": 1.2396534273487538,
-    "ruthless": 2.177198598838536,
-    "carousing": 0.12442925791824815,
-    "amorous": 14.298595489427003,
-    "patient": 1.762693776859507,
-    "stealth": 1.9539543749293156,
-    "devotion": 1.7169858116064993,
-    "craft": 0.3918959549693073
+    "strategic": 19.02042834686662,
+    "cerebral": 12.414371529202546,
+    "social": 12.978514322563111,
+    "generous": 2.3769559599700862,
+    "cautious": 12.658729146864347,
+    "physical": 0.139534323447394,
+    "risky": 1.208662091665035,
+    "ruthless": 2.1227686338675724,
+    "carousing": 0.12131852647029194,
+    "amorous": 13.941130602191327,
+    "patient": 1.7186264324380194,
+    "stealth": 1.9051055155560825,
+    "devotion": 1.6740611663163367,
+    "craft": 0.3820985560950746
   },
   "aptitudes": [
     "strategist",
@@ -3898,7 +3934,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 442,
+  "actionCount": 443,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -4128,8 +4164,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784343842556,
-  "rev": 640,
+  "updatedAt": 1784344270570,
+  "rev": 641,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4399,10 +4435,6 @@
           },
           "attentionHistory": [
             {
-              "kind": "interact",
-              "day": 3
-            },
-            {
               "kind": "fact",
               "day": 3
             },
@@ -4488,6 +4520,10 @@
             },
             {
               "kind": "fact",
+              "day": 4
+            },
+            {
+              "kind": "interact",
               "day": 4
             },
             {
@@ -5045,7 +5081,7 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 48,
+      "order_sense": 49,
       "palework": 22,
       "deathsense": 19,
       "shadowstep": 12,
@@ -5157,7 +5193,7 @@
   "syncedAt": 1784339418317,
   "teachers": {},
   "regionsKnown": {
-    "valley": 259
+    "valley": 260
   },
   "foreclosed": [
     "rootkin",
@@ -5167,7 +5203,8 @@
   "knownPlaces": [
     "radiant_plateau_edge",
     "millbrook",
-    "the-low-lamp-inn"
+    "the-low-lamp-inn",
+    "old_switchback"
   ],
   "opLossLog": [
     {
@@ -5203,10 +5240,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-17T17:39:40.705Z",
-      "lastAt": "2026-07-18T03:04:02.548Z",
+      "lastAt": "2026-07-18T03:11:10.568Z",
       "startDay": 17,
       "endDay": 18,
-      "beats": 67
+      "beats": 68
     }
   ],
   "company": [

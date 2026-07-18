@@ -239,15 +239,6 @@
     },
     {
       "id": null,
-      "name": "River Purification Tabs (vial)",
-      "kind": "consumable",
-      "qty": 1,
-      "description": "A stoppered dark-glass vial, wax-sealed — pre-Transition provenance. Drop one tab in a waterskin to purify questionable water. A dozen left in the world, maybe. From Mara's own stock.",
-      "consumable": true,
-      "pinned": true
-    },
-    {
-      "id": null,
       "name": "Fendt's Testimony (folded page)",
       "kind": "quest",
       "qty": 1,
@@ -1407,170 +1398,148 @@
         "player": "Take a closer look at the east-bank seepage before crossing — use Palework to read what the contamination has already done to the stone and whether the spread is accelerating",
         "summary": "Palework reads the east-bank seepage — weeks of accumulation, contamination bonding to mineral grain, spreading rate accelerating. West channel clear for crossing.",
         "narration": "You step off the track and crouch at the ford's edge, just where the gravel gives way to wet stone. The east bank is maybe fifteen feet away across the shallower channel — close enough to read without touching. You set the butt of Memory in the mud and open Palework low and quiet, the way you'd press a thumb to old wood to feel for softness rather than strike it.\n\nThe stone speaks in its own register. The seepage has been working here for weeks, not days — there's a gray-green tide-line above the current watermark where the contamination dried and redeposited, then was wetted again by snowmelt, then dried again. Three cycles at minimum. The stone itself is not failing: it's pre-Transition cut granite, the kind that doesn't rot fast. What it's doing is accumulating. Whatever the contamination carries, it bonds to the mineral surface and stays — doesn't wash off with high water, doesn't break down in frost. The dead zone in the rock's surface chemistry is shallow still, barely a finger's depth, but it's spreading laterally along the grain rather than penetrating. Like mold tracking a crack in bread.\n\nThe acceleration question is harder. You hold the read a moment longer, following the tide-line's edge. The outermost mark is the freshest — it's maybe four days old, laid down while you were still at the Edge District. The gap between the second and third marks is shorter than between the first and second. It's spreading faster. Not alarmingly, not yet, but the intervals are compressing. If someone had filled a waterskin from the east bank a month ago, they'd have had gray water. If they do it now, it's worse. In another month, it will be worse still.\n\nYou stand and look at the west channel. Shallower, narrower, the bedrock still pale and clean-looking. 'East bank is out,' you say. 'Not just today — it's been building for weeks and it's moving faster than it was. West side should cross clean. Don't fill from anywhere downstream of where the channels rejoin.'"
+      },
+      {
+        "player": "Use one of the River Purification Tabs to treat a waterskin from the west channel before crossing — the ford is the last clean-ish water for a while",
+        "summary": "Silas treats a waterskin with a purification tab from the west channel and leads the party across the ford.",
+        "narration": "You straighten from the crouch, brush grit from your knee, and reach into the Traveler's Pack for the dark-glass vial. The wax seal breaks clean under your thumbnail — a faint mineral smell, almost metallic, gone in a second. You pull the stopper on the nearest waterskin and tap one tab out onto your palm: a small pale disk, unremarkable, something Mara gave you with the quiet gravity of a person who knows exactly how rare the thing she's handing over is.\n\nThe west channel runs clear over the bedrock shelf, six inches deep and cold enough to ache. You fill the waterskin there, watching the current carry nothing you can see — the Palework read confirmed it, and you trust the read. The tab goes in, stopper back, a thirty-second wait while you hold it upright. The water doesn't change color or smell. That's how you know it worked.\n\nPell has moved to the ford's near edge, one boot on the first dry stone, testing the shelf's give. Calvar watches the east bank from the track — not anxious, just precise, cataloging the tide-lines the way a man does when he already knows what caused them and is checking whether the rate matches his expectation. Huginn shifts on his low stone, settling his wings, unbothered.\n\n'West channel's sound,' you say, straightening with the waterskin back at your belt. 'Cross here, step right, stay off the east stones.' You take the lead across, Memory's butt lifted clear of the water, boots finding the bedrock shelf solid and even beneath the silt. The far bank rises in dry gravel and then the trade track resumes, curving south toward the valley floor — Millbrook maybe two hours ahead, the morning light strengthening behind you."
       }
     ],
     "lastTurn": {
-      "narration": "You step off the track and crouch at the ford's edge, just where the gravel gives way to wet stone. The east bank is maybe fifteen feet away across the shallower channel — close enough to read without touching. You set the butt of Memory in the mud and open Palework low and quiet, the way you'd press a thumb to old wood to feel for softness rather than strike it.\n\nThe stone speaks in its own register. The seepage has been working here for weeks, not days — there's a gray-green tide-line above the current watermark where the contamination dried and redeposited, then was wetted again by snowmelt, then dried again. Three cycles at minimum. The stone itself is not failing: it's pre-Transition cut granite, the kind that doesn't rot fast. What it's doing is accumulating. Whatever the contamination carries, it bonds to the mineral surface and stays — doesn't wash off with high water, doesn't break down in frost. The dead zone in the rock's surface chemistry is shallow still, barely a finger's depth, but it's spreading laterally along the grain rather than penetrating. Like mold tracking a crack in bread.\n\nThe acceleration question is harder. You hold the read a moment longer, following the tide-line's edge. The outermost mark is the freshest — it's maybe four days old, laid down while you were still at the Edge District. The gap between the second and third marks is shorter than between the first and second. It's spreading faster. Not alarmingly, not yet, but the intervals are compressing. If someone had filled a waterskin from the east bank a month ago, they'd have had gray water. If they do it now, it's worse. In another month, it will be worse still.\n\nYou stand and look at the west channel. Shallower, narrower, the bedrock still pale and clean-looking. 'East bank is out,' you say. 'Not just today — it's been building for weeks and it's moving faster than it was. West side should cross clean. Don't fill from anywhere downstream of where the channels rejoin.'",
-      "sceneSummary": "Palework reads the east-bank seepage — weeks of accumulation, contamination bonding to mineral grain, spreading rate accelerating. West channel clear for crossing.",
+      "narration": "You straighten from the crouch, brush grit from your knee, and reach into the Traveler's Pack for the dark-glass vial. The wax seal breaks clean under your thumbnail — a faint mineral smell, almost metallic, gone in a second. You pull the stopper on the nearest waterskin and tap one tab out onto your palm: a small pale disk, unremarkable, something Mara gave you with the quiet gravity of a person who knows exactly how rare the thing she's handing over is.\n\nThe west channel runs clear over the bedrock shelf, six inches deep and cold enough to ache. You fill the waterskin there, watching the current carry nothing you can see — the Palework read confirmed it, and you trust the read. The tab goes in, stopper back, a thirty-second wait while you hold it upright. The water doesn't change color or smell. That's how you know it worked.\n\nPell has moved to the ford's near edge, one boot on the first dry stone, testing the shelf's give. Calvar watches the east bank from the track — not anxious, just precise, cataloging the tide-lines the way a man does when he already knows what caused them and is checking whether the rate matches his expectation. Huginn shifts on his low stone, settling his wings, unbothered.\n\n'West channel's sound,' you say, straightening with the waterskin back at your belt. 'Cross here, step right, stay off the east stones.' You take the lead across, Memory's butt lifted clear of the water, boots finding the bedrock shelf solid and even beneath the silt. The far bank rises in dry gravel and then the trade track resumes, curving south toward the valley floor — Millbrook maybe two hours ahead, the morning light strengthening behind you.",
+      "sceneSummary": "Silas treats a waterskin with a purification tab from the west channel and leads the party across the ford.",
       "choices": [
         {
-          "label": "Cross on the west channel now — steady pace, get to the south bank and move",
+          "label": "Push the pace south — Dara's week-five deadline is pressing and Millbrook is two hours out",
           "attribute": "physical",
           "subAttribute": "agility",
           "difficulty": 0,
           "intentTags": [
-            "travel",
-            "careful"
+            "travel"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Use one of the River Purification Tabs to treat a waterskin from the west channel before crossing — the ford is the last clean-ish water for a while",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Walk and let Calvar set the tempo — watch him as the valley comes into view and read whether he's ready for what he's about to walk into",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "sustain",
-            "careful"
+            "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Note the tide-line pattern and the compression of intervals in the margin of the Valve Failure Timeline — this is evidence of rate",
+          "label": "Use the two hours on the road to think through how to present Calvar to Dara Holt — she named 'someone who can get their hands dirty'; make sure the introduction lands right",
           "attribute": "mental",
           "subAttribute": "reason",
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "careful"
+            "plan"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Tell Calvar what Palework just showed — the accumulation pattern, the grain-bonding, the accelerating intervals — and ask if it matches anything he knows about the pre-Transition system's behavior",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Hand the sealed document roll a thought — decide whether to present the Grael chain to Dara and Mara when you arrive, or hold it until the water work is underway",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "negotiate"
+            "plan"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
+          "trivial": true
         }
       ],
       "characterDeltas": {
-        "health": 0,
-        "energy": -3
+        "inventoryRemove": [
+          "River Purification Tabs (vial)"
+        ]
       },
       "scene": {
-        "setting": "The trade track at the ford crossing, a quarter-mile south of the Edge District — open ground, pale morning light, bedrock shelf visible through the shallows. Silas crouched at the ford's edge, recently stood. East-bank stones show gray-green tide-lines. West channel pale and clean.",
+        "setting": "The trade track south of the ford crossing — party now on the far bank, west channel behind them, bedrock shelf sound underfoot during the crossing. Open ground, morning light strengthening, the valley floor and Millbrook roughly two hours south.",
         "npcsPresent": [
           {
-            "name": "Calvar",
-            "state": "Standing on the track behind Silas, watching the read without interrupting — document roll secure inside his coat, weight forward on his heels."
+            "name": "Pell",
+            "state": "On Silas's right, pack settled, crossing done — eyes ahead toward the valley floor."
           },
           {
-            "name": "Pell",
-            "state": "On Silas's right, eyes on the east bank, pack settled — waiting for the assessment."
+            "name": "Calvar",
+            "state": "On Silas's left, document roll secure inside his coat — cataloging the east-bank tide-lines as he steps past them."
           },
           {
             "name": "Huginn",
-            "state": "Perched on a low stone at the west channel edge — watching the water, not the party."
+            "state": "Airborne from the low stone, quartering ahead of the party down the trade track."
           }
         ],
         "objects": [
-          "Memory (spear) — butt in the mud, in Silas's grip",
-          "Traveler's Pack — on Silas's back",
+          "Memory (spear) — in Silas's grip, butt lifted clear of the water during crossing",
+          "Traveler's Pack — on Silas's back, purification vial now empty and discarded",
           "Sealed document roll — inside Calvar's coat",
           "Pell's pack — on her back",
           "River Whetstone — at Pell's belt",
-          "Ford crossing — bedrock shelf sound under west channel, east-bank stones showing three-cycle tide-line of contamination accumulation",
-          "Valve Failure Timeline — in Silas's pack, could be annotated"
+          "Valve Failure Timeline — in Silas's pack",
+          "East-bank stones — behind the party, gray-green tide-lines still visible"
         ],
         "threads": [
-          "Ford crossing — east-bank seepage confirmed as weeks-old, accelerating; west channel clear",
-          "Calvar may know something about the contamination's accumulation behavior — grain-bonding pattern could match pre-Transition system specs",
-          "Waterskin refill opportunity — west channel passable with a purification tab",
-          "Grael and Rendic Vael — documented, not yet presented to authority",
-          "Dara's week-five deadline pressing",
-          "Pell said 'that is enough, for now' — what Calvar holds about her father still open"
+          "Millbrook two hours south — Dara's week-five deadline pressing",
+          "Grael chain document roll — decision pending on when and to whom to present it",
+          "Calvar's first impression of Millbrook and its people — how to frame the introduction",
+          "River contamination spreading laterally along grain — rate accelerating"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "calvar",
-          "name": "Calvar",
-          "note": "Watching Silas's Palework read at the ford without interruption — absorbing the assessment.",
-          "statusNote": "On the road south with Silas and Pell — observing the ford read, document roll secure inside his coat."
-        },
-        {
-          "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "note": "Waiting on the ford assessment — eyes on the east bank, no words needed.",
-          "statusNote": "On the road south with Silas and Calvar — at the ford, waiting for the crossing call."
-        }
-      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "Brief pause at the ford to treat the waterskin and complete the crossing"
+      },
       "codexUpdates": [
         {
           "topic": "the-water-crisis",
           "label": "The Water Crisis",
           "kind": "mystery",
-          "fact": "Palework at the east-bank ford stones: contamination has been accumulating for weeks, bonding to mineral grain rather than washing free. Three tide-line cycles visible. Spread is lateral along grain, not deep penetration — but the intervals between cycles are compressing. Rate is accelerating.",
+          "fact": "The west channel at the lower ford remains clear as of World-day 18 morning — safe for crossing with a purification tab. The east-bank contamination is confined to that side for now, but the spread rate is accelerating along mineral grain.",
           "links": [
             "millbrook",
-            "find-the-engineer",
             "palework",
             "dara-holt",
-            "calvar"
+            "find-the-engineer"
           ]
         }
       ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "Brief stop at the ford for Palework assessment — a few minutes crouching at the bank"
+      "moveTo": {
+        "location": "millbrook-ford-south-track",
+        "why": "Party crossed the ford and stepped onto the trade track south — Millbrook two hours ahead"
       }
     },
     "sceneState": {
-      "setting": "The trade track at the ford crossing, a quarter-mile south of the Edge District — open ground, pale morning light, bedrock shelf visible through the shallows. Silas crouched at the ford's edge, recently stood. East-bank stones show gray-green tide-lines. West channel pale and clean.",
+      "setting": "The trade track south of the ford crossing — party now on the far bank, west channel behind them, bedrock shelf sound underfoot during the crossing. Open ground, morning light strengthening, the valley floor and Millbrook roughly two hours south.",
       "npcsPresent": [
         {
-          "name": "Calvar",
-          "state": "Standing on the track behind Silas, watching the read without interrupting — document roll secure inside his coat, weigh"
+          "name": "Pell",
+          "state": "On Silas's right, pack settled, crossing done — eyes ahead toward the valley floor."
         },
         {
-          "name": "Pell",
-          "state": "On Silas's right, eyes on the east bank, pack settled — waiting for the assessment."
+          "name": "Calvar",
+          "state": "On Silas's left, document roll secure inside his coat — cataloging the east-bank tide-lines as he steps past them."
         },
         {
           "name": "Huginn",
-          "state": "Perched on a low stone at the west channel edge — watching the water, not the party."
+          "state": "Airborne from the low stone, quartering ahead of the party down the trade track."
         }
       ],
       "objects": [
-        "Memory (spear) — butt in the mud, in Silas's grip",
-        "Traveler's Pack — on Silas's back",
+        "Memory (spear) — in Silas's grip, butt lifted clear of the water during crossing",
+        "Traveler's Pack — on Silas's back, purification vial now empty and discarded",
         "Sealed document roll — inside Calvar's coat",
         "Pell's pack — on her back",
         "River Whetstone — at Pell's belt",
-        "Ford crossing — bedrock shelf sound under west channel, east-bank stones showing",
-        "Valve Failure Timeline — in Silas's pack, could be annotated"
+        "Valve Failure Timeline — in Silas's pack",
+        "East-bank stones — behind the party, gray-green tide-lines still visible"
       ],
       "threads": [
-        "Ford crossing — east-bank seepage confirmed as weeks-old, accelerating; west channel clear",
-        "Calvar may know something about the contamination's accumulation behavior — grain-bonding pattern could match pre-Transition system specs",
-        "Waterskin refill opportunity — west channel passable with a purification tab",
-        "Grael and Rendic Vael — documented, not yet presented to authority",
-        "Dara's week-five deadline pressing"
+        "Millbrook two hours south — Dara's week-five deadline pressing",
+        "Grael chain document roll — decision pending on when and to whom to present it",
+        "Calvar's first impression of Millbrook and its people — how to frame the introduction",
+        "River contamination spreading laterally along grain — rate accelerating"
       ]
     }
   },
@@ -3174,7 +3143,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d2] Pell confirms the wash-room site and east-channel valve failures share identical construction — same depth, same dressed stone, same finished margins. The structure was built to act on the water. The ",
           "[d2] Order-Sense (World-day 15 dawn): coursed stone ceiling runs northeast from the east furlong valve housing for ~40 feet under the soil — the valve housing is the working end of a longer intact structur",
           "[d2] The northeast line from the east furlong valve housing runs directly toward Pell's pre-Transition wash-room site — approximately 1.5 miles, deeper and higher in the hillside. The valve housing is the ",
           "[d2] East furlong valve failure matches Fen's intake exactly — identical counterclockwise torque, same failure mode, same stain pattern. Pell's read: not two independent failures, but one mechanism doing t",
@@ -3197,7 +3165,8 @@
           "[d2] Palework on the dying spruce stand north of the pass confirms the fungal die-off is natural and isolated — the buried structure's contamination has not begun seeping into the broader root-zone above t",
           "[d3] A passing traveler on the Edge District trade track reports gray seepage from the east-side stones at the lower ford crossing — the contamination is spreading into surface water beyond the main river ",
           "[d5] Order-Sense confirms the east-bank ford seepage is upstream contamination behaving exactly as the pre-Transition drainage design predicted — the system is reporting a saturated substrate, not a random",
-          "[d5] Palework at the east-bank ford stones: contamination has been accumulating for weeks, bonding to mineral grain rather than washing free. Three tide-line cycles visible. Spread is lateral along grain, "
+          "[d5] Palework at the east-bank ford stones: contamination has been accumulating for weeks, bonding to mineral grain rather than washing free. Three tide-line cycles visible. Spread is lateral along grain, ",
+          "[d5] The west channel at the lower ford remains clear as of World-day 18 morning — safe for crossing with a purification tab. The east-bank contamination is confined to that side for now, but the spread ra"
         ],
         "links": [
           "pell",
@@ -4026,20 +3995,20 @@
     }
   },
   "tendencies": {
-    "strategic": 20.458972556011602,
-    "cerebral": 13.686772487009241,
-    "social": 11.589671715275717,
-    "generous": 1.5456088724326011,
-    "cautious": 12.54933731548008,
-    "physical": 0.09073179813221556,
-    "risky": 0.785929097598398,
-    "ruthless": 1.3803242844552512,
-    "carousing": 0.07888702780395326,
-    "amorous": 9.065180640014777,
-    "patient": 1.9341837676986595,
-    "stealth": 1.9957108393542096,
-    "devotion": 1.0885535261183223,
-    "craft": 1.0247881234076017
+    "strategic": 19.947498242111312,
+    "cerebral": 13.34460317483401,
+    "social": 11.299929922393824,
+    "generous": 1.506968650621786,
+    "cautious": 13.235603882593079,
+    "physical": 0.08846350317891016,
+    "risky": 0.766280870158438,
+    "ruthless": 1.34581617734387,
+    "carousing": 0.07691485210885443,
+    "amorous": 8.838551124014407,
+    "patient": 2.8858291735061927,
+    "stealth": 1.9458180683703543,
+    "devotion": 1.0613396879653643,
+    "craft": 0.9991684203224117
   },
   "aptitudes": [
     "strategist",
@@ -4049,7 +4018,7 @@
     "stalwart",
     "charmer"
   ],
-  "actionCount": 460,
+  "actionCount": 461,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -4279,8 +4248,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784376782781,
-  "rev": 672,
+  "updatedAt": 1784378434574,
+  "rev": 673,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5309,7 +5278,7 @@
   "syncedAt": 1784348465253,
   "teachers": {},
   "regionsKnown": {
-    "valley": 277
+    "valley": 278
   },
   "foreclosed": [
     "rootkin",
@@ -5364,10 +5333,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T12:13:02.780Z",
+      "lastAt": "2026-07-18T12:40:34.572Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 2
+      "beats": 3
     }
   ],
   "company": [

@@ -334,3 +334,71 @@ Hand-review of the 6 flagged in `reach_death_life.json` found **1 true positive*
 `npm test` and `content_ci.mjs` green locally **before** the push, per the standing authoring discipline. Verified at origin by content hash.
 
 **Remaining:** the corrected detector, then the rest of the corpus. Scaling waits on the detector — authoring against an inflated list would rewrite abilities that are already correct.
+
+---
+
+## §11 · AMENDMENT A2 — ROUND 2 DISPOSITIONS
+
+CCode ROUND 2 at `999bb7c`, results `po/results/20260718_BATCH-11_round2_substrate.md`. Every finding accepted or resolved below. **Three of this spec's premises were false at HEAD.** PO verified each against origin before disposition rather than accepting on report (§21) — two counts were re-measured and one produced a finding neither side had.
+
+### ACCEPTED — Q7 is invalid: `stateOps` is built
+
+13 `case` handlers in `corrections.js`, `applyStateOps` called at `app.js:2889` under SNG-070, smoke-tested, extended twice. Neither branch of "retire or build?" applies. **Q7 withdrawn.**
+
+**The provenance is the lesson.** The false claim came from **SYSTEM_SPEC §22's debt list**, where it sat six days after SNG-070 superseded it, and the PO propagated it into a new spec without checking. *A spec written to cure documentation drift was itself corrupted by documentation drift, from the very document it proposed to patch.*
+
+**→ §23.3 AMENDED.** Spec-freshness checking cannot stop at header counts. **Every §22 debt entry needs a staleness check** — a resolved item left standing is not inert, it actively poisons downstream specs. Proposed: each debt entry carries the commit or version that would retire it, and the audit flags entries whose condition no longer holds.
+
+### ACCEPTED — `arcSeed` cannot supply grid categories; design re-grounded
+
+`arcSeed` returns free-text bio prose (`motivation`, `story`, paragraphs), not labels. And routing SNG-149 through it would not make `personalArc` load-bearing — it re-reads `character.domains` through a wrapper. **Both PO claims wrong.**
+
+`FUNCTION_FAMILIES` (`functions.js:98`) is 8 closed enum values — two 4-slot axes exactly, no invention.
+
+**But a closed 8 alone drops the PM's ruling** that axes come from the competitors' own backgrounds. **Resolution — the enum is the vocabulary; the SELECTION is personal:**
+
+- The 8 families are the closed grid vocabulary. CCode is right that nothing needs inventing.
+- **Each competitor contributes the 4 families they actually embody**, computed from their owned abilities via `familiesOfAbility` / `FN_INDEX` (live at `app.js:3671`) — real character history, not free text.
+- Competitor A's four become the rows, B's four the columns. Blind pick as specced.
+
+This keeps the PM's intent (every contest personal to both parties, no drillable board), uses a closed enum with a live consumer, and needs no new derivation layer. **`personalArc` is not in this path at all** — that dependency is withdrawn.
+
+### ACCEPTED — `legends.js` is not orphaned, and the sweep has a false-positive class
+
+Reaches the play-loop GM at `app.js:2620`. `LEGEND_BEATS` is a module-internal validation constant, correctly not exported-for-use.
+
+**→ §23.3 AMENDED.** The orphan-export sweep conflates two different things and must separate them: **(a) export hygiene** — used internally, exported unnecessarily; a lint, never a gate — and **(b) genuinely dead code**. The PO's own sweep already produced this false positive on `harmRungGloss` (used at `progression.js:610`) and did not generalize the lesson. **An advisory check that cries wolf gets ignored, which is the failure mode a gate exists to prevent.**
+
+### ACCEPTED AND ESCALATED — §146d WARN → **FAIL**, with a line
+
+`personalArc` is not merely unreachable-unverified; it is **broken in play**. `app.js:4702` and `:5765` splice the generated arc into the offer list; the start handler at **`app.js:4718`** looks the definition up in `CONTENT.quests` alone, where it never was. **The arc is offered and cannot be started — "Take it on" fails.** PO confirmed by direct read. Fix is one expression at a known line.
+
+### ACCEPTED — Q1 feasible, mechanism amended
+
+The expected blocker does not exist: prompt ordering is already centralized at `gm.js:180-257`, so the registry need only produce a bag of keys. **Corrections:** **four** call sites, not three — site C at **`app.js:4615`** was unlisted — and **~24** builders, not "12+". The registry needs **`build(env)` closures plus per-site overrides**, not a flat `{key, fn, argNames}` table.
+
+**→ §23.2 AMENDED** to the closure form. The load-bearing unknown is retired: **§23 is buildable.**
+
+### CONCEDED — sequencing: **146a goes first**
+
+CCode contests the PO's order and is right. The PO put architecture first because it was the more interesting problem. But:
+
+- **146a is losing player data now.** The SHA is read *after* the content is computed, so the window is a full network round-trip, not a race — the loss is routine, not rare.
+- **The fix is small** and routes through a primitive that already exists (`pushMergedFile`).
+- **Nothing depends on §1 first.** There is no cost to reordering.
+- The PO's own laws settle it: **Lower Layer Wins**, and *close on the symptom, not the ship.* A bug bleeding at runtime outranks a structure that prevents future bleeding.
+
+**REVISED SEQUENCE:** **146a** → §1 (Law 16 + §23) → 146d (`app.js:4718`) → 146b/c → 147 → 148 → 146e → 149 → 150.
+
+### PO CORRECTIONS TO §0
+
+- **Challenge values: 44, not 45.** Accepted.
+- **Spec drift is worse than reported** — abilities off by more than 2× (137 certified vs 285 actual).
+- **Regions — both counts are right, and the gap is a finding.** `regions.json` declares **25**; **24** have locations. PO re-measured rather than accepting the correction. The difference is **`the_palelands`** — declared, populated with **zero locations**. That is *"The Palelands / The Hollow March,"* the death-pole Reach: home of the Ashwardens and of Palework, the tradition rewritten this session. **A declared region no player can stand in** — a §23-shaped failure one layer over from the one this spec addresses. Filed as **SNG-151**, unscoped.
+- **`the_center` is the region named "The Crossing,"** and it holds 5 locations including `the_great_coliseum`. The waygate hub of §5 is better-founded than claimed.
+
+### STANDING
+
+**Three of six premises CCode checked were false**, all from documentation the PO trusted without verifying at HEAD. Round 2 did exactly what §21 says it is for — *"it is the step that catches the PO."* Recorded rather than smoothed.
+
+*— Aevi (PO), dispositions complete. CCode: cleared to build, starting at 146a.*

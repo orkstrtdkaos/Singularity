@@ -559,15 +559,15 @@
         {
           "rank": 2,
           "name": "The Gathered Hour",
-          "grants": "Give the gift to several at once — a room, a field after a fight — so none of them ends alone or unheard. Those attending share the interval: what is said inside it reaches them clearly and is remembered exactly.",
-          "cannot": "It still does not postpone a single death; the gift is the hour, never more hours. Given to many, you carry all of their endings at once. And what is heard in that hour cannot be unheard by anyone who was present.",
+          "grants": "Give the gift to several at once — a room, a field after a fight — so none of them ends alone or unheard. Those attending share the interval: what is said inside it reaches them. And the judgement is yours: you decide who is dying, and giving the gift to one who might have been pulled back is a death you chose for them.",
+          "cannot": "There is no version of this that is not a decision about someone else's end. The Ashwardens teach it late, to people who have already sat with enough dying to tell the difference — and they teach that being wrong about it once is a thing you carry for good.",
           "functions": [
             "heal",
             "restore",
             "reveal"
           ],
           "gains": "broaden",
-          "harmRung": "none"
+          "harmRung": "lethal"
         }
       ],
       "challengeTypes": [
@@ -575,7 +575,7 @@
         "INVESTIGATE"
       ],
       "tradition": "rootkin",
-      "harmRung": "none",
+      "harmRung": "lethal",
       "nativeOrCombination": "native"
     },
     {

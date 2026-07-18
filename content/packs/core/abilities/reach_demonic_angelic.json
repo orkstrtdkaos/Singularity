@@ -835,8 +835,8 @@
         "demonic_angelic": -0.6
       },
       "functions": [
-        "command",
-        "bind"
+        "bind",
+        "command"
       ],
       "narrationHints": "You do not raise your voice. You offer the terms, and the terms are already inside them, and they find themselves agreeing to a thing they will spend years explaining to themselves.",
       "description": "The Abyssal art of the binding pact — a covenant offered so precisely to the hollow in someone that refusing it feels like refusing themselves. Not domination. Invitation, with a hook already set.",
@@ -846,7 +846,25 @@
           "rank": 1,
           "name": "The Deep Covenant",
           "grants": "Bind a willing-if-they-knew-it party to a lasting pact that shapes their choices toward your end.",
-          "cannot": "It cannot compel the truly unwilling, it frays when spoken plainly by a witness, and every covenant you set is a thread that runs both ways — they are bound to you, and you to the keeping of it."
+          "cannot": "It cannot compel the truly unwilling, it frays when spoken plainly by a witness, and every covenant you set is a thread that runs both ways — they are bound to you, and you to the keeping of it.",
+          "functions": [
+            "command",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "incapacitating"
+        },
+        {
+          "rank": 2,
+          "name": "The Covenant That Spreads",
+          "grants": "Set a covenant on a household, a company, or an office rather than a person — those who take the role take the pact with it, without ever being offered it. And a covenant you already hold can be tightened: the hook set deeper, the choices narrowed further.",
+          "cannot": "It still catches only what already wanted the bargain; a body with nothing owed offers nothing to hook. A covenant on an office becomes known to that office in time, and they will go looking for the witness who can name it aloud. And tightening a hook is felt — they may not know what, but they know.",
+          "functions": [
+            "command",
+            "bind"
+          ],
+          "gains": "deepen",
+          "harmRung": "incapacitating"
         }
       ],
       "gated": "learned",
@@ -902,8 +920,8 @@
         "demonic_angelic": 0.6
       },
       "functions": [
-        "ward",
-        "empower"
+        "empower",
+        "ward"
       ],
       "narrationHints": "The light does not flare. It simply does not stop — a steadiness that outlasts the thing trying to break it, until the breaking tires first.",
       "description": "The Seraphic art of the light that does not gutter — a radiance sustained past all reason to sustain it, warding a place or a person through what should overwhelm them.",
@@ -913,7 +931,25 @@
           "rank": 1,
           "name": "The Unfaltering Light",
           "grants": "Sustain an unbreakable ward of radiance over a person or place, outlasting the assault against it.",
-          "cannot": "It cannot attack, only endure; it drains you the whole while it holds; and if you fall, the light falls with you."
+          "cannot": "It cannot attack, only endure; it drains you the whole while it holds; and if you fall, the light falls with you.",
+          "functions": [
+            "ward",
+            "empower"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
+        },
+        {
+          "rank": 2,
+          "name": "The Light That Carries",
+          "grants": "The ward extends from a person to a company, and from a stand to a march — it moves with those it covers. Those inside are not merely shielded but sustained: they do not tire as they should, and wounds taken within it do not worsen while the light holds.",
+          "cannot": "It still cannot strike, at any mastery. It still burns you before it burns anything else. Extending it to a company means feeling each of them, continuously. And if you fall now, considerably more falls with you than before.",
+          "functions": [
+            "ward",
+            "empower"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "gated": "learned",

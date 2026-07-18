@@ -28,19 +28,37 @@
           "rank": 1,
           "name": "The Fault Line",
           "grants": "See exactly where a thing wants to break — a wall, a plan, an alliance, an argument.",
-          "cannot": "Seeing the fault is not being right that it should be broken."
+          "cannot": "Seeing the fault is not being right that it should be broken.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Clean Break",
           "grants": "Break precisely at the fault — the thing comes apart where you chose and nowhere else.",
-          "cannot": "Precise is not reversible. A clean break is still a break."
+          "cannot": "Precise is not reversible. A clean break is still a break.",
+          "functions": [
+            "reveal",
+            "break"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Good Ending",
           "grants": "End a thing WELL — a building, an institution, a life's work, a war — so that what it was is honored and what comes after is not poisoned by how it went.",
-          "cannot": "You must be right that it should end. The Unmakers' cult, the Scouring, is what this becomes when that judgment stops being made."
+          "cannot": "You must be right that it should end. The Unmakers' cult, the Scouring, is what this becomes when that judgment stops being made.",
+          "functions": [
+            "reveal",
+            "break",
+            "open"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "gated": "learned",
@@ -75,19 +93,37 @@
           "rank": 1,
           "name": "Fault-Sense",
           "grants": "See where a structure, plan, or relationship is under stress and where it will give.",
-          "cannot": "Seeing the fault does not tell you whether to press it."
+          "cannot": "Seeing the fault does not tell you whether to press it.",
+          "functions": [
+            "reveal",
+            "foresee"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Rotten Beam",
           "grants": "Find the ONE piece whose failure brings the rest — the keystone of the collapse.",
-          "cannot": "Finding it makes you responsible for knowing it. You cannot un-know where the keystone is."
+          "cannot": "Finding it makes you responsible for knowing it. You cannot un-know where the keystone is.",
+          "functions": [
+            "reveal",
+            "foresee"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Whole Failing",
           "grants": "Read the entire arc of a thing's decline — how it will end, in what order, and how long it has.",
-          "cannot": "You will be right, and nobody will want to hear it, and it will end exactly as you said."
+          "cannot": "You will be right, and nobody will want to hear it, and it will end exactly as you said.",
+          "functions": [
+            "reveal",
+            "foresee"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "gated": "learned",
@@ -113,7 +149,8 @@
       "functions": [
         "make",
         "mend",
-        "shield"
+        "shield",
+        "sustain"
       ],
       "narrationHints": "It was not there this morning. It is there now, and it is not finished, and it is beautiful.",
       "description": "The creation-pole mastery: making, at speed and at scale. The Wrights raise things faster than anyone should be able to and never quite complete them.",
@@ -123,19 +160,40 @@
           "rank": 1,
           "name": "The Raised Thing",
           "grants": "Make something real, quickly — a bridge, a shelter, a tool, a wall — out of what is to hand.",
-          "cannot": "Quick is not sound. Raised things want tending, and the Wrights are already elsewhere."
+          "cannot": "Quick is not sound. Raised things want tending, and the Wrights are already elsewhere.",
+          "functions": [
+            "make",
+            "shield"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Made Better",
           "grants": "Make a thing better than it was — improve in the making, so what you raise exceeds what stood.",
-          "cannot": "Better by whose measure? The Wrights improve what nobody asked to have improved, constantly."
+          "cannot": "Better by whose measure? The Wrights improve what nobody asked to have improved, constantly.",
+          "functions": [
+            "make",
+            "shield",
+            "mend"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Unfinished",
           "grants": "Deliberately leave a made thing incomplete — and it KEEPS MAKING ITSELF, growing on, adapting, never done.",
-          "cannot": "It never stops. The Forge-Eternal is what a whole city of this becomes, and the Wrights are genuinely unsure whether it is a triumph."
+          "cannot": "It never stops. The Forge-Eternal is what a whole city of this becomes, and the Wrights are genuinely unsure whether it is a triumph.",
+          "functions": [
+            "make",
+            "shield",
+            "mend",
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "gated": "learned",
@@ -159,8 +217,9 @@
         "destruction_creation": 0.3
       },
       "functions": [
-        "reveal",
-        "make"
+        "foresee",
+        "make",
+        "reveal"
       ],
       "narrationHints": "She looks at the pile of junk and sees the thing it is about to be.",
       "description": "See what a thing could become — the first gift of the Making.",
@@ -170,19 +229,37 @@
           "rank": 1,
           "name": "Maker's-Eye",
           "grants": "See what could be made from what is here — materials, ruins, a half-broken thing.",
-          "cannot": "Seeing what could be made is not knowing whether it should be."
+          "cannot": "Seeing what could be made is not knowing whether it should be.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Better Shape",
           "grants": "See the better form a thing is capable of, and the shortest road to it.",
-          "cannot": "There is always a better shape. Wrights at this rank cannot leave anything alone."
+          "cannot": "There is always a better shape. Wrights at this rank cannot leave anything alone.",
+          "functions": [
+            "reveal",
+            "make"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Thing It Wants to Be",
           "grants": "See what a thing, a place, or a person is REACHING toward — the shape it would take if nothing stopped it.",
-          "cannot": "Seeing what someone could be is the most seductive and most dangerous sight in this Reach. It is not your business to build them."
+          "cannot": "Seeing what someone could be is the most seductive and most dangerous sight in this Reach. It is not your business to build them.",
+          "functions": [
+            "reveal",
+            "make",
+            "foresee"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "gated": "learned",
@@ -218,19 +295,36 @@
           "rank": 1,
           "name": "The Raised Thing",
           "grants": "Make something real and functional, quickly — a bridge, a shelter, a tool, a wall — from what is here. It will hold long enough to matter.",
-          "cannot": "Quick is not sound. Raised things want tending, and the Wright in you is already somewhere else."
+          "cannot": "Quick is not sound. Raised things want tending, and the Wright in you is already somewhere else.",
+          "functions": [
+            "make"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Sound Work",
           "grants": "What you make holds under pressure — weather, weight, time, a fight. Others would not have to repair it.",
-          "cannot": "Sound is not finished. The restlessness is not a flaw the Wrights want trained out of you."
+          "cannot": "Sound is not finished. The restlessness is not a flaw the Wrights want trained out of you.",
+          "functions": [
+            "make",
+            "mend"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Thing That Outlasts",
           "grants": "Make something that will be here long after you. It will be found and used by people who do not know your name, and that will be enough.",
-          "cannot": "You will not see what becomes of it. The Wrights have made peace with this."
+          "cannot": "You will not see what becomes of it. The Wrights have made peace with this.",
+          "functions": [
+            "make",
+            "mend"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "gated": "accord",
@@ -277,19 +371,37 @@
           "rank": 1,
           "name": "Improvised",
           "grants": "Quickly make a functional weapon from available materials — one that will not break, will land, and will hurt.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "make",
+            "strike"
+          ],
+          "gains": "broaden",
+          "harmRung": "damaging"
         },
         {
           "rank": 2,
           "name": "Made to Harm",
           "grants": "Build a weapon fast enough to matter in a fight and good enough to be dangerous — not a masterwork, but the right thing for what you're facing right now.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "make",
+            "strike"
+          ],
+          "gains": "deepen",
+          "harmRung": "damaging"
         },
         {
           "rank": 3,
           "name": "The Right Tool",
           "grants": "Look at the materials at hand and see the weapon they are already; build it in moments, and it is exactly what this situation required.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "make",
+            "strike"
+          ],
+          "gains": "deepen",
+          "harmRung": "damaging"
         }
       ],
       "nativeOrCombination": "native"
@@ -328,19 +440,36 @@
           "rank": 1,
           "name": "Demonstrated Craft",
           "grants": "Show what you have made — or make something now — and let its quality stand as argument; the person who would have dismissed you reconsiders.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Reputation",
           "grants": "Your work is known enough that naming yourself — or showing it — commands genuine respect and opens doors that stay closed to those who only claim.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "command"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Undeniable",
           "grants": "The thing you have built is the argument and the evidence. Anyone who has seen it cannot pretend otherwise — and they have all seen it.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "command"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -368,8 +497,8 @@
       "harmRung": "none",
       "functions": [
         "make",
-        "travel",
-        "open"
+        "open",
+        "travel"
       ],
       "challengeTypes": [
         "exploration",
@@ -381,19 +510,38 @@
           "rank": 1,
           "name": "The Crossing",
           "grants": "Build a passage across an obstacle — a bridge, a stair, a ramp — quickly enough that the party can use it before circumstances change.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "make",
+            "open"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Made Passage",
           "grants": "Open a way through or across any natural or built obstacle by constructing what's needed — not by force, by craft.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "make",
+            "open"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Road That Wasn't",
           "grants": "Build a path where there was truly none — spanning what shouldn't be spanned, opening what was sealed — and have it hold the weight it needs to hold.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "make",
+            "open",
+            "travel"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -419,8 +567,8 @@
       "tradition": "wright",
       "harmRung": "none",
       "functions": [
-        "sustain",
-        "empower"
+        "empower",
+        "sustain"
       ],
       "challengeTypes": [
         "endurance",
@@ -432,19 +580,36 @@
           "rank": 1,
           "name": "Hands Moving",
           "grants": "As long as you are making something, fear, grief, exhaustion, and cold have less purchase — the work is the anchor that keeps you functional.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Built Through It",
           "grants": "Sustain yourself and your party through hardship by making useful things — shelter, tools, warmth, structure — that make the hardship survivable.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain",
+            "empower"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Left in Motion",
           "grants": "Start something building and leave it — the structure grows, the mechanism runs, the work continues. What you set in motion sustains beyond your direct attention.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain",
+            "empower"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -470,8 +635,10 @@
       "tradition": "unmaker",
       "harmRung": "none",
       "functions": [
+        "break",
+        "mend",
         "restore",
-        "mend"
+        "reveal"
       ],
       "challengeTypes": [
         "medical",
@@ -483,19 +650,41 @@
           "rank": 1,
           "name": "Precise Removal",
           "grants": "Identify and remove exactly what is interfering with a person or system's recovery — the splinter, the bad element, the thing that was keeping it from healing on its own.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "break"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "What Shouldn't Be There",
           "grants": "Restore function by ending the specific thing that was consuming it — corruption, disease, obstruction — with precision that doesn't damage what should remain.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "break",
+            "mend",
+            "restore"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Clean",
           "grants": "Remove everything that should not be there, completely and correctly, so that what remains can be what it was meant to be without interference.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "break",
+            "mend",
+            "restore"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -522,8 +711,10 @@
       "tradition": "unmaker",
       "harmRung": "incapacitating",
       "functions": [
-        "shield",
-        "break"
+        "break",
+        "foresee",
+        "hinder",
+        "shield"
       ],
       "challengeTypes": [
         "combat",
@@ -535,19 +726,41 @@
           "rank": 1,
           "name": "Early Intervention",
           "grants": "See a threat forming and end it at the source — the plan that collapses before it executes, the attack that never completes because you dismantled its condition.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "foresee",
+            "break"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Stopped Thing",
-          "grants": "Protect someone by finding and breaking the specific thing that would harm them — not deflecting the blow but ending the arm that swings it.",
-          "cannot": null
+          "grants": "Protect someone by finding and breaking the specific thing that would harm them — not deflecting the blow but ending the arm that swings it. The threat is not turned aside; it is disabled at the point it was coming from, and whoever was carrying it is weakened out of the fight rather than merely stopped.",
+          "cannot": null,
+          "functions": [
+            "foresee",
+            "break",
+            "shield",
+            "hinder"
+          ],
+          "gains": "broaden",
+          "harmRung": "incapacitating"
         },
         {
           "rank": 3,
           "name": "Before It Arrives",
           "grants": "Identify a danger in its earliest form and end it completely, so it never becomes the threat it was becoming.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "foresee",
+            "break",
+            "shield",
+            "hinder"
+          ],
+          "gains": "deepen",
+          "harmRung": "incapacitating"
         }
       ],
       "nativeOrCombination": "native"
@@ -573,8 +786,8 @@
       "tradition": "unmaker",
       "harmRung": "none",
       "functions": [
-        "transform",
-        "break"
+        "break",
+        "transform"
       ],
       "challengeTypes": [
         "craft",
@@ -586,19 +799,36 @@
           "rank": 1,
           "name": "Back to Parts",
           "grants": "Disassemble a made thing into its components without destroying the components — what was one thing becomes usable pieces of something else.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "break"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Unformed",
           "grants": "Break a thing down to the point where it has no remaining identity as what it was — it is now material, and material can become anything.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "break",
+            "transform"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Open Form",
           "grants": "Return something complex — a structure, a plan, a fixed belief — to the state before it became that specific thing, clearing the way for something new to take form.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "break",
+            "transform"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -624,8 +854,8 @@
       "tradition": "unmaker",
       "harmRung": "none",
       "functions": [
-        "command",
-        "bind"
+        "bind",
+        "command"
       ],
       "challengeTypes": [
         "social",
@@ -637,19 +867,36 @@
           "rank": 1,
           "name": "The Known Capacity",
           "grants": "Your reputation for ending things precisely and completely gives weight to what you say — a warning from you lands differently than from someone without your history.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "command"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Demonstrated Threat",
           "grants": "Show what you can dismantle — or name it plainly — and command the terms of an agreement; they know what refusal means.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "command",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Final Authority",
           "grants": "You are the person who decides what ends. In a situation where endings are at stake, your word is the one that stands — not because you outranked anyone, but because everyone knows you can do what you say.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "command",
+            "bind"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -675,8 +922,9 @@
       "tradition": "unmaker",
       "harmRung": "none",
       "functions": [
-        "sustain",
-        "break"
+        "break",
+        "reveal",
+        "sustain"
       ],
       "challengeTypes": [
         "endurance",
@@ -688,19 +936,39 @@
           "rank": 1,
           "name": "The Cut",
           "grants": "Identify precisely what is consuming your capacity — exhaustion, fear, a specific obligation — and end it cleanly so you can continue.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "break"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "What You Don't Need",
           "grants": "Sustain yourself by releasing everything non-essential across a hard stretch — not forcing through with more, but needing less through precise subtraction.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "break",
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Lighter Load",
           "grants": "End what is consuming your group — despair, a failed plan, an unsustainable commitment — correctly enough that what remains can actually go on.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "break",
+            "sustain"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"

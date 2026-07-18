@@ -26,25 +26,47 @@
           "rank": 1,
           "name": "Trail Sense",
           "grants": "Follow a clear trail up to a day old; judge party size and burden; find water and shelter in known country.",
-          "cannot": "Trails older than a day; deliberate anti-tracking beats you without a check."
+          "cannot": "Trails older than a day; deliberate anti-tracking beats you without a check.",
+          "functions": [
+            "reveal",
+            "track"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Cold Trail",
           "grants": "Follow trails days old; read a campsite's story (numbers, mood, hurry); shortcut known routes — travel time -1h on familiar ground.",
-          "cannot": "No effect in true wilderness whiteout; can't track flyers or swimmers."
+          "cannot": "No effect in true wilderness whiteout; can't track flyers or swimmers.",
+          "functions": [
+            "reveal",
+            "track",
+            "travel"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Country Speaks",
           "grants": "One look at open country reveals routes, hazards, and anything recently unusual; anticipate where quarry is HEADED, not just where it went.",
-          "cannot": "Prediction fails against quarry that knows you're tracking; not mind-reading — a feint can still fool you."
+          "cannot": "Prediction fails against quarry that knows you're tracking; not mind-reading — a feint can still fool you.",
+          "functions": [
+            "reveal",
+            "track",
+            "travel",
+            "foresee"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "functions": [
+        "foresee",
+        "reveal",
         "track",
-        "travel",
-        "reveal"
+        "travel"
       ],
       "challengeTypes": [
         "EXPLORE",
@@ -77,32 +99,54 @@
           "rank": 1,
           "name": "Hedge Remedy",
           "grants": "Forage safe food and common medicinals; brew a poultice or tea that restores small health over a rest; identify common poisons.",
-          "cannot": "Can't treat serious wounds or strong toxins; needs local plants and an hour."
+          "cannot": "Can't treat serious wounds or strong toxins; needs local plants and an hour.",
+          "functions": [
+            "reveal",
+            "heal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Deep Pharmacopeia",
           "grants": "Counter most natural poisons and sickness; remedies now also restore energy; read a person's ailment from face, breath, and gait.",
-          "cannot": "Precursor-touched afflictions resist; can't stockpile — preparations spoil in days."
+          "cannot": "Precursor-touched afflictions resist; can't stockpile — preparations spoil in days.",
+          "functions": [
+            "reveal",
+            "heal",
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Old Recipes",
-          "grants": "Brews that verge on legend: a night's sleep in an hour, clarity through exhaustion, one dose that stabilizes the dying. Recognize Precursor-altered flora on sight.",
-          "cannot": "The strongest brews exact a cost the GM names; never resurrection; one legendary dose per day of gathering."
+          "grants": "Brews that verge on legend: a night's sleep in an hour, clarity through exhaustion, one dose that stabilizes the dying. Recognize Precursor-altered growth. And the hand that knows all of this knows it BOTH WAYS — a draught that dulls, slows, sickens, or drops a person where they stand, prepared as carefully as any remedy.",
+          "cannot": "It has to be taken, which means it has to be given — this is patient, deliberate work and never a thing done in a fight. Valley folk hang people for it. And every herbalist good enough to do it is the first person suspected when someone falls ill, which is why most of them never learn this rank at all.",
+          "functions": [
+            "reveal",
+            "heal",
+            "sustain",
+            "hinder"
+          ],
+          "gains": "broaden",
+          "harmRung": "incapacitating"
         }
       ],
       "functions": [
         "heal",
-        "sustain",
-        "mend"
+        "hinder",
+        "reveal",
+        "sustain"
       ],
       "challengeTypes": [
         "SURVIVE"
       ],
       "tradition": "valley_craft",
       "nativeOrCombination": "native",
-      "harmRung": "none"
+      "harmRung": "incapacitating"
     },
     {
       "id": "mediators_tongue",
@@ -127,23 +171,45 @@
           "rank": 1,
           "name": "Cool the Room",
           "grants": "Halt a brewing fight long enough for words; read what each party actually wants beneath what they're saying.",
-          "cannot": "Doesn't work mid-violence; can't make anyone accept — only opens the door."
+          "cannot": "Doesn't work mid-violence; can't make anyone accept — only opens the door.",
+          "functions": [
+            "reveal",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Fair Measure",
           "grants": "Broker deals that hold — agreements you mediate gain weight in the community ledger; call out a lie in negotiation and be believed.",
-          "cannot": "Can't broker what one side truly can't give; your reputation is collateral on every deal."
+          "cannot": "Can't broker what one side truly can't give; your reputation is collateral on every deal.",
+          "functions": [
+            "reveal",
+            "bind",
+            "command"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Binding Word",
           "grants": "Arbitrate feuds of long standing; your settlements carry near-law in communities that know you; once per season, one hostile audience becomes neutral.",
-          "cannot": "Fails against zealotry; a settlement you break yourself burns this ability's trust to rank 1 until amends."
+          "cannot": "Fails against zealotry; a settlement you break yourself burns this ability's trust to rank 1 until amends.",
+          "functions": [
+            "reveal",
+            "bind",
+            "command"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "functions": [
-        "bind"
+        "bind",
+        "command",
+        "reveal"
       ],
       "challengeTypes": [
         "SOCIAL"
@@ -175,24 +241,47 @@
           "rank": 1,
           "name": "Field Fix",
           "grants": "Repair common tools, gear, and mechanisms with scrounged parts; improvise a simple tool on the spot; judge what broke something.",
-          "cannot": "Fixes are temporary under hard use; no locks, no Precursor work."
+          "cannot": "Fixes are temporary under hard use; no locks, no Precursor work.",
+          "functions": [
+            "mend",
+            "make"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Coaxing Function",
           "grants": "Open common locks and mechanisms; repairs now hold permanently; build compound devices (pulley rigs, traps, stills) from salvage.",
-          "cannot": "Precursor mechanisms still resist; complex builds take a day and materials."
+          "cannot": "Precursor mechanisms still resist; complex builds take a day and materials.",
+          "functions": [
+            "mend",
+            "make",
+            "open"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Speaker to Machines",
           "grants": "Diagnose ANY mechanism by touch and sound, Precursor included; once per day, coax one dead device to run one more time; your builds count as quality goods.",
-          "cannot": "Coaxed devices die again after; understanding Precursor function is not understanding purpose."
+          "cannot": "Coaxed devices die again after; understanding Precursor function is not understanding purpose.",
+          "functions": [
+            "mend",
+            "make",
+            "open",
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "functions": [
+        "make",
         "mend",
-        "make"
+        "open",
+        "reveal"
       ],
       "challengeTypes": [
         "PUZZLE",
@@ -225,24 +314,49 @@
           "rank": 1,
           "name": "Gentle Presence",
           "grants": "Calm domestic animals; read a beast's mood and recent past; wild animals don't flee your approach.",
-          "cannot": "No commands — only trust; predators stay dangerous."
+          "cannot": "No commands — only trust; predators stay dangerous.",
+          "functions": [
+            "reveal",
+            "command"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Working Trust",
           "grants": "Ask simple tasks of animals that know you (carry, guard, find); a companion beast may take you on; sense what nearby animals sense.",
-          "cannot": "Companion is a partner, not a tool — mistreat it and it's gone; borrowed senses are impressions, not sight."
+          "cannot": "Companion is a partner, not a tool — mistreat it and it's gone; borrowed senses are impressions, not sight.",
+          "functions": [
+            "reveal",
+            "command",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Old Accord",
-          "grants": "Parley meaningfully with any natural creature; call for aid in wild country and something answers; Precursor-touched beasts recognize you as neutral.",
-          "cannot": "What answers a call chooses its own price; the Accord breaks if you kill needlessly."
+          "grants": "Parley meaningfully with any natural creature; Precursor-touched beasts recognize you as neutral. And in wild country you may call for aid and something answers — it will place itself between you and what threatens you, and what a large animal does to a person is not gentle and is not yours to moderate once it begins.",
+          "cannot": "You ASK — always. Nothing here is compelled, and a creature that answers is risking its own life for you, may be hurt or killed doing it, and remembers. Ask too often, or for the wrong thing, and the wild country stops answering.",
+          "functions": [
+            "reveal",
+            "command",
+            "bind",
+            "summon",
+            "strike"
+          ],
+          "gains": "broaden",
+          "harmRung": "damaging"
         }
       ],
       "functions": [
+        "bind",
         "command",
-        "bind"
+        "reveal",
+        "strike",
+        "summon"
       ],
       "challengeTypes": [
         "SOCIAL",
@@ -251,7 +365,7 @@
       ],
       "tradition": "valley_craft",
       "nativeOrCombination": "native",
-      "harmRung": "none"
+      "harmRung": "damaging"
     },
     {
       "id": "stonewise",
@@ -276,24 +390,46 @@
           "rank": 1,
           "name": "Sound Footing",
           "grants": "Judge whether floor, bridge, ledge, or wall will hold; find the safe climbing line; spot recent structural disturbance.",
-          "cannot": "Deliberately disguised work needs a check; no read through cladding."
+          "cannot": "Deliberately disguised work needs a check; no read through cladding.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Mason's Eye",
           "grants": "Date construction and read its story (repairs, sieges, haste); find the weak point that brings a structure down — or the brace that saves it; detect voids by resonance tap.",
-          "cannot": "Void detection gives presence, not layout; Precursor materials read as 'wrong' without detail."
+          "cannot": "Void detection gives presence, not layout; Precursor materials read as 'wrong' without detail.",
+          "functions": [
+            "reveal",
+            "mend",
+            "break"
+          ],
+          "gains": "broaden",
+          "harmRung": "damaging"
         },
         {
           "rank": 3,
           "name": "Bones of the World",
           "grants": "Read geology like architecture: predict collapse, slide, or sinkhole; navigate caves by stone-sense; Precursor construction yields its structural logic (not its purpose).",
-          "cannot": "Prediction is hours-scale, not weeks; living rock keeps some secrets — margin of error the GM holds."
+          "cannot": "Prediction is hours-scale, not weeks; living rock keeps some secrets — margin of error the GM holds.",
+          "functions": [
+            "reveal",
+            "mend",
+            "break",
+            "foresee"
+          ],
+          "gains": "broaden",
+          "harmRung": "damaging"
         }
       ],
       "functions": [
-        "reveal",
-        "mend"
+        "break",
+        "foresee",
+        "mend",
+        "reveal"
       ],
       "challengeTypes": [
         "EXPLORE",
@@ -301,7 +437,7 @@
       ],
       "tradition": "valley_craft",
       "nativeOrCombination": "native",
-      "harmRung": "none"
+      "harmRung": "damaging"
     },
     {
       "id": "rivercraft",
@@ -326,25 +462,47 @@
           "rank": 1,
           "name": "River Legs",
           "grants": "Handle small craft in rough water; find the safe ford; read tomorrow's weather from sky and water; swim strongly burdened.",
-          "cannot": "Rapids beyond class of your craft still say no; weather-sense is a day out, not a week."
+          "cannot": "Rapids beyond class of your craft still say no; weather-sense is a day out, not a week.",
+          "functions": [
+            "move",
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Current's Confidant",
           "grants": "Run water others portage; read what the river carries and where from (debris, silt, bodies of news); night navigation by sound of water alone.",
-          "cannot": "The gray water reads as silence — a gap, not a message; can't read still water's depths."
+          "cannot": "The gray water reads as silence — a gap, not a message; can't read still water's depths.",
+          "functions": [
+            "move",
+            "reveal",
+            "travel"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Watershed Mind",
           "grants": "Hold the whole watershed in your head: predict flood and drought weeks out, trace ANY sample to its source reach, know where something dumped upstream comes ashore.",
-          "cannot": "Tracing needs a sample in hand; the watershed's Precursor plumbing appears in the model only as anomalies."
+          "cannot": "Tracing needs a sample in hand; the watershed's Precursor plumbing appears in the model only as anomalies.",
+          "functions": [
+            "move",
+            "reveal",
+            "travel",
+            "foresee"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "functions": [
-        "travel",
-        "sustain",
-        "move"
+        "foresee",
+        "move",
+        "reveal",
+        "travel"
       ],
       "challengeTypes": [
         "EXPLORE",
@@ -378,19 +536,37 @@
           "rank": 1,
           "name": "Soft Ground",
           "grants": "Move silently over natural terrain; use shadow and cover to pass casual watch; shadow a person through a town unnoticed.",
-          "cannot": "Alert sentries and open ground beat you without a check; armor noise is armor noise."
+          "cannot": "Alert sentries and open ground beat you without a check; armor noise is armor noise.",
+          "functions": [
+            "conceal",
+            "move"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Unremarked",
           "grants": "Pass alert watchers with cover; read a guard pattern in minutes and thread it; leave a pursuit behind in any broken country.",
-          "cannot": "Animals still smell you; can't vanish from someone already watching you."
+          "cannot": "Animals still smell you; can't vanish from someone already watching you.",
+          "functions": [
+            "conceal",
+            "move"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Unseen Errand",
           "grants": "Enter and leave watched places as if the watch blinked; move a small party quietly using your reads; once per day, break line-of-sight and be simply gone.",
-          "cannot": "'Gone' means escaped, not teleported — the GM places you plausibly; Precursor sensors don't blink."
+          "cannot": "'Gone' means escaped, not teleported — the GM places you plausibly; Precursor sensors don't blink.",
+          "functions": [
+            "conceal",
+            "move"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "functions": [
@@ -428,25 +604,43 @@
           "rank": 1,
           "name": "Long Memory",
           "grants": "Recall any story you've heard verbatim; know the common lore of any valley place or family; earn welcome in a strange hall by performing.",
-          "cannot": "Recall is of what you've HEARD — gaps are gaps; welcome isn't trust."
+          "cannot": "Recall is of what you've HEARD — gaps are gaps; welcome isn't trust.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Threads Between",
           "grants": "Cross-reference stories to surface what they jointly imply (codex synergy: +insight when a known topic is in play); notice when a live account contradicts the record; a told story can steady a shaken group.",
-          "cannot": "Implication isn't proof; steadying works once per group per trouble."
+          "cannot": "Implication isn't proof; steadying works once per group per trouble.",
+          "functions": [
+            "reveal",
+            "track"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Keeper of the Deep Stock",
           "grants": "Access the old stratum — pre-crisis stories most keepers lost; recognize when events are RHYMING with an old story and read the pattern forward; your tellings enter the community record with weight.",
-          "cannot": "The old stratum is fragmentary and the GM holds its gaps; pattern-rhyme is probabilistic, never prophecy."
+          "cannot": "The old stratum is fragmentary and the GM holds its gaps; pattern-rhyme is probabilistic, never prophecy.",
+          "functions": [
+            "reveal",
+            "track",
+            "foresee"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "functions": [
+        "foresee",
         "reveal",
-        "track",
-        "bind"
+        "track"
       ],
       "challengeTypes": [
         "INVESTIGATE",
@@ -479,25 +673,45 @@
           "rank": 1,
           "name": "Good Camp",
           "grants": "Camps you make restore +2 extra health and energy to everyone overnight; cook a real meal from thin supplies; a night's watch order that actually works.",
-          "cannot": "Needs an evening and minimal materials; no benefit in a hostile active scene."
+          "cannot": "Needs an evening and minimal materials; no benefit in a hostile active scene.",
+          "functions": [
+            "sustain",
+            "heal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Table Peace",
           "grants": "Meals you host suspend quarrels at the fire — hostile parties will eat together; overnight recovery also clears one minor condition; travelers remember your camps and owe small warmth.",
-          "cannot": "Peace lasts as long as the meal plus the night; deep feuds are suspended, not settled."
+          "cannot": "Peace lasts as long as the meal plus the night; deep feuds are suspended, not settled.",
+          "functions": [
+            "sustain",
+            "heal",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Standing Hearth",
           "grants": "A camp you keep three nights becomes a named place (enters place memory); companions and party bond faster at your fire (bond-relevant deeds count +1 weight); once per journey, a full night at your hearth restores as a rest at home.",
-          "cannot": "Named places persist but so does their reputation — what happens there is remembered; the once-per-journey rest can't raise the incapacitated."
+          "cannot": "Named places persist but so does their reputation — what happens there is remembered; the once-per-journey rest can't raise the incapacitated.",
+          "functions": [
+            "sustain",
+            "heal",
+            "bind"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "functions": [
-        "sustain",
         "bind",
-        "heal"
+        "heal",
+        "sustain"
       ],
       "challengeTypes": [
         "SURVIVE"
@@ -529,19 +743,34 @@
           "rank": 1,
           "name": "True Worth",
           "grants": "Price goods accurately at a glance; spot forgery, shoddy work, and hidden damage; notice the one detail out of place in a scene.",
-          "cannot": "Exotic and Precursor items read as 'beyond scale'; the detail is noticed, not explained."
+          "cannot": "Exotic and Precursor items read as 'beyond scale'; the detail is noticed, not explained.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Provenance",
           "grants": "Read an object's history from wear (who used it, how, how long); estimate any collection's worth in minutes; spot a concealed item on a person by how they carry.",
-          "cannot": "History is inference — deliberate aging can fool a first read; carrying-reads need line of sight."
+          "cannot": "History is inference — deliberate aging can fool a first read; carrying-reads need line of sight.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Nothing Hidden",
           "grants": "One sweep of a room yields its full inventory including the concealed (GM names what's findable); appraise the priceless by structural logic; your valuation is accepted as expert in any market.",
-          "cannot": "The sweep is once per location per visit; some Precursor concealment is beyond craft."
+          "cannot": "The sweep is once per location per visit; some Precursor concealment is beyond craft.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "functions": [
@@ -579,25 +808,45 @@
           "rank": 1,
           "name": "The Straight Feeling",
           "grants": "Sense Precursor material and workings nearby (direction and rough distance); recognize safe salvage from live remnant; follow a buried alignment across country.",
-          "cannot": "Sense, not sight — no detail; depth beyond a few meters muddies the read."
+          "cannot": "Sense, not sight — no detail; depth beyond a few meters muddies the read.",
+          "functions": [
+            "reveal",
+            "track"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Reading the Bones",
           "grants": "Map a site's Precursor layout by walking it; judge whether a remnant is dormant, cycling, or waking; salvage from the edge of live systems without triggering them.",
-          "cannot": "Judgment is craft, not certainty — 'waking' can lie; nothing here opens what's sealed."
+          "cannot": "Judgment is craft, not certainty — 'waking' can lie; nothing here opens what's sealed.",
+          "functions": [
+            "reveal",
+            "track",
+            "travel"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Where They Walked",
           "grants": "The deep net reveals itself: perceive the valley's whole Precursor lattice from any node; sense when the lattice CHANGES state anywhere on it; approach places that repel others.",
-          "cannot": "The lattice's purpose stays dark — pattern without meaning; state-changes arrive as feeling, not fact; some doors notice being noticed."
+          "cannot": "The lattice's purpose stays dark — pattern without meaning; state-changes arrive as feeling, not fact; some doors notice being noticed.",
+          "functions": [
+            "reveal",
+            "track",
+            "travel"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "functions": [
+        "reveal",
         "track",
-        "travel",
-        "reveal"
+        "travel"
       ],
       "challengeTypes": [
         "EXPLORE",
@@ -629,19 +878,36 @@
           "rank": 1,
           "name": "Blend In",
           "grants": "Move through populated places without drawing notice or memory.",
-          "cannot": "A searcher who knows your face and is looking defeats it."
+          "cannot": "A searcher who knows your face and is looking defeats it.",
+          "functions": [
+            "conceal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "One of Them",
           "grants": "Not merely unnoticed — READ as belonging. The guard nods you through; the crowd makes room.",
-          "cannot": "Belonging is a performance you must keep performing. One wrong word and you were always a stranger."
+          "cannot": "Belonging is a performance you must keep performing. One wrong word and you were always a stranger.",
+          "functions": [
+            "conceal",
+            "deceive"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Nobody At All",
           "grants": "You are the person nobody afterward can quite describe — present, unremarkable, entirely forgettable.",
-          "cannot": "Being forgettable means being forgotten. Valleyfolk who lean on this find it hard to be known when they want to be."
+          "cannot": "Being forgettable means being forgotten. Valleyfolk who lean on this find it hard to be known when they want to be.",
+          "functions": [
+            "conceal",
+            "deceive"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "powerSystem": "valley_craft",
@@ -664,8 +930,8 @@
         "chaos_order": 0.2
       },
       "functions": [
-        "ward",
-        "bind"
+        "bind",
+        "ward"
       ],
       "narrationHints": "A marked stone set, and what it forbids stays out.",
       "description": "Set a simple lasting ward at a threshold — keeps small beasts, weather, or casual trespass out of a camp or home.",
@@ -677,19 +943,36 @@
           "rank": 1,
           "name": "Boundary-Stone",
           "grants": "Ward a camp or dwelling against animals, weather, and casual intrusion.",
-          "cannot": "A determined person walks through it; it deters, not stops."
+          "cannot": "A determined person walks through it; it deters, not stops.",
+          "functions": [
+            "ward"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Kept Boundary",
           "grants": "Set a boundary that holds — a threshold, a claim, a line that things notice and respect.",
-          "cannot": "A boundary is a claim, and claims are contested. It holds against what respects it."
+          "cannot": "A boundary is a claim, and claims are contested. It holds against what respects it.",
+          "functions": [
+            "ward",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Old Boundary",
           "grants": "Set a boundary that has the weight of the old ones — it feels ANCIENT, and even things that do not respect you respect that.",
-          "cannot": "The old boundaries were set by people who paid for them. Yours borrows that credit; the Valley remembers who actually paid."
+          "cannot": "The old boundaries were set by people who paid for them. Yours borrows that credit; the Valley remembers who actually paid.",
+          "functions": [
+            "ward",
+            "bind"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "challengeTypes": [

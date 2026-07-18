@@ -1,1073 +1,1191 @@
 {
- "schemaVersion": 1,
- "powerSystem": "reach_death_life",
- "note": "The crafts of the Quickwood/Palelands Reach (death_life axis). Vivimancy is the life-pole tradition, Palework the death-pole. Learned by traveling the Reach or training under Rootkin/Ashwardens — NOT available at Valley creation; gated like precursor (learned). Higher tiers pull the wielder's own pole-intensity toward their pole (a Vivimancer drifts life-hot, a Paleworker death-hot) — the geography writes itself onto the practitioner. axes use signed values for engine compat. Authored by Aevi (PO), SNG-016 skill build-out. | SNG-089 (Aevi 2026-07-12, Erik-directed): Ashwarden kit built out on D&D-proven necromancy — enfeeble (The Grey Hand), life-drain (Draw Down), fear (The Dread), speak-with-dead (Ask the Dead), and the LETHAL capstone THE CUT THREAD (the Fates' shears). And the notFor LAW applied: **a limit may constrain HOW an ability serves a need; it may NEVER forbid the need itself.** Palework's old clause ('does not force the living to die') contradicted its own FIGHT tag and made a necromancer unable to kill a boar. Now it constrains the METHOD: slow, visible, working through what is already in the thing.",
- "gated": "learned",
- "abilities": [
-  {
-   "id": "quickening",
-   "name": "Quickening",
-   "levelReq": 2,
-   "energyCost": 6,
-   "powerSystem": "reach_death_life",
-   "attribute": "practical",
-   "axes": {
-    "death_life": 0.5,
-    "destruction_creation": 0.3
-   },
-   "effectTags": [
-    "heal",
-    "grow",
-    "life"
-   ],
-   "narrationHints": "Life poured where life was thin — a wound closing, a seed bursting, a dying thing pulled back toward the quick.",
-   "description": "Accelerate life: heal, grow, revive the nearly-gone. The Rootkin's first craft.",
-   "notFor": "Raising the truly dead (only the nearly-gone); creating life from nothing; halting decay that has finished.",
-   "tree": [
+  "schemaVersion": 1,
+  "powerSystem": "reach_death_life",
+  "note": "The crafts of the Quickwood/Palelands Reach (death_life axis). Vivimancy is the life-pole tradition, Palework the death-pole. Learned by traveling the Reach or training under Rootkin/Ashwardens — NOT available at Valley creation; gated like precursor (learned). Higher tiers pull the wielder's own pole-intensity toward their pole (a Vivimancer drifts life-hot, a Paleworker death-hot) — the geography writes itself onto the practitioner. axes use signed values for engine compat. Authored by Aevi (PO), SNG-016 skill build-out. | SNG-089 (Aevi 2026-07-12, Erik-directed): Ashwarden kit built out on D&D-proven necromancy — enfeeble (The Grey Hand), life-drain (Draw Down), fear (The Dread), speak-with-dead (Ask the Dead), and the LETHAL capstone THE CUT THREAD (the Fates' shears). And the notFor LAW applied: **a limit may constrain HOW an ability serves a need; it may NEVER forbid the need itself.** Palework's old clause ('does not force the living to die') contradicted its own FIGHT tag and made a necromancer unable to kill a boar. Now it constrains the METHOD: slow, visible, working through what is already in the thing.",
+  "gated": "learned",
+  "abilities": [
     {
-     "rank": 1,
-     "name": "Green Touch",
-     "grants": "Close wounds and speed healing on the living; coax rapid growth in plants; steady a failing pulse.",
-     "cannot": "Nothing past death's threshold; overuse tires the wielder faster than it heals."
+      "id": "quickening",
+      "name": "Quickening",
+      "levelReq": 2,
+      "energyCost": 6,
+      "powerSystem": "reach_death_life",
+      "attribute": "practical",
+      "axes": {
+        "death_life": 0.5,
+        "destruction_creation": 0.3
+      },
+      "effectTags": [
+        "heal",
+        "grow",
+        "life"
+      ],
+      "narrationHints": "Life poured where life was thin — a wound closing, a seed bursting, a dying thing pulled back toward the quick.",
+      "description": "Accelerate life: heal, grow, revive the nearly-gone. The Rootkin's first craft.",
+      "notFor": "Raising the truly dead (only the nearly-gone); creating life from nothing; halting decay that has finished.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Green Touch",
+          "grants": "Close wounds and speed healing on the living; coax rapid growth in plants; steady a failing pulse.",
+          "cannot": "Nothing past death's threshold; overuse tires the wielder faster than it heals."
+        },
+        {
+          "rank": 2,
+          "name": "The Quick Return",
+          "grants": "Pull the nearly-dead back if reached in time; regrow what was lost (within reason); make barren ground bloom.",
+          "cannot": "A return has a cost the GM names; the regrown is not always the same as the lost."
+        },
+        {
+          "rank": 3,
+          "name": "Unstoppable Spring",
+          "grants": "Life at flood — mass healing, land quickened for a season, a body remade toward health. The Heartroot's power in miniature.",
+          "cannot": "It does not know when to stop — quickening can grow a thing past its right shape; the wielder drifts life-hot, and life that will not stop is its own horror (see the Quiet in the Quickwood)."
+        }
+      ],
+      "functions": [
+        "heal",
+        "sustain",
+        "make"
+      ],
+      "challengeTypes": [
+        "SURVIVE",
+        "FIGHT"
+      ],
+      "challengeProfile": {
+        "SURVIVE": 3
+      },
+      "tradition": "rootkin",
+      "harmRung": "none",
+      "nativeOrCombination": "native"
     },
     {
-     "rank": 2,
-     "name": "The Quick Return",
-     "grants": "Pull the nearly-dead back if reached in time; regrow what was lost (within reason); make barren ground bloom.",
-     "cannot": "A return has a cost the GM names; the regrown is not always the same as the lost."
+      "id": "palework",
+      "name": "Palework",
+      "levelReq": 2,
+      "energyCost": 6,
+      "powerSystem": "reach_death_life",
+      "attribute": "mental",
+      "axes": {
+        "death_life": -0.5,
+        "chaos_order": 0.2
+      },
+      "effectTags": [
+        "end",
+        "decay",
+        "still"
+      ],
+      "narrationHints": "The mercy and the weight of endings — a thing allowed to stop, a rot read like a map, a stillness that is not cruelty.",
+      "description": "The craft of endings: ease death, read decay, still what should be still. The Ashwardens' art — not killing, but tending the end.",
+      "notFor": "It EASES an end and it can BRING one — but it works through what is already in a thing, so it is slow, it is visible, and the dying know what is happening to them. Its offense is taught at rank 2 (hasten a decline already present) and rank 3 (the full ending). It cannot smite a healthy thing dead where it stands (that is The Cut Thread), it cannot animate what it has ended, and it will not stop a death that must happen.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Easing",
+          "grants": "Ease a dying thing's passing; read how and how long ago something died; grant true rest to what cannot find it.",
+          "cannot": "Cannot kill the healthy; cannot bring back; the easing is a mercy, refused if unwilling.",
+          "functions": [
+            "foresee"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
+        },
+        {
+          "rank": 2,
+          "name": "Reading the Rot",
+          "grants": "Read the physical evidence of death — what killed a ruin, what a plague did and will do next, what ended a thing and when. Halt a spreading rot by giving its front a clean end. AND TURN IT OUTWARD: against a living opponent, find the decline ALREADY in them — an infected wound, a sickness, exhaustion, an old injury — and hasten it. Their own ending is the weapon; you only bring it forward. It takes a few breaths, it is plainly visible, and they feel it starting.",
+          "cannot": "Reading is not undoing; some rots refuse a clean end. Turned outward it needs something already failing in them — a hale opponent offers nothing to hasten. And they KNOW, from the first moment.",
+          "functions": [
+            "foresee",
+            "hinder"
+          ],
+          "gains": "broaden",
+          "harmRung": "damaging"
+        },
+        {
+          "rank": 3,
+          "name": "The Long Stillness",
+          "grants": "Grant endings at scale — a battlefield eased, a plague stopped by stilling its front, a thing that should have died a century ago finally allowed to. AND THE FULL STRIKE: against a living opponent, take the ending every living thing carries and pull it forward whole. This kills. It is slow enough to be interrupted, bright enough to be witnessed, and the dying understand exactly what is being done and by whom. Ashwardens call it the mercy turned around, and they do not call it that kindly.",
+          "cannot": "The wielder drifts death-hot; never raises, never forces a death that must not happen. It cannot smite a healthy thing dead where it stands from nothing — it works THROUGH what is in them, so it is slow and it is seen. For the instant, unseen ending, that is The Cut Thread, and it costs accordingly.",
+          "functions": [
+            "foresee",
+            "hinder",
+            "strike"
+          ],
+          "gains": "broaden",
+          "harmRung": "lethal"
+        }
+      ],
+      "functions": [
+        "foresee",
+        "hinder",
+        "strike"
+      ],
+      "challengeTypes": [
+        "INVESTIGATE",
+        "FIGHT",
+        "PUZZLE",
+        "SOCIAL"
+      ],
+      "challengeProfile": {
+        "SURVIVE": 3,
+        "FIGHT": 2,
+        "PUZZLE": 2,
+        "INVESTIGATE": 2,
+        "CHASE": 1,
+        "SOCIAL": 1
+      },
+      "tradition": "ashwarden",
+      "harmRung": "lethal",
+      "nativeOrCombination": "native"
     },
     {
-     "rank": 3,
-     "name": "Unstoppable Spring",
-     "grants": "Life at flood — mass healing, land quickened for a season, a body remade toward health. The Heartroot's power in miniature.",
-     "cannot": "It does not know when to stop — quickening can grow a thing past its right shape; the wielder drifts life-hot, and life that will not stop is its own horror (see the Quiet in the Quickwood)."
+      "id": "deathsense",
+      "name": "Deathsense",
+      "levelReq": 1,
+      "energyCost": 3,
+      "powerSystem": "reach_death_life",
+      "attribute": "mental",
+      "axes": {
+        "death_life": -0.3
+      },
+      "functions": [
+        "foresee",
+        "reveal"
+      ],
+      "narrationHints": "A quiet knowing of what has died, is dying, or is near its end nearby.",
+      "description": "Sense death and dying around you — the living whose thread is fraying, the near-gone, the actively failing. Deathsense reads what is HAPPENING NOW. For what has already finished, Palework reads the evidence.",
+      "notFor": "It reads endings; it does not cause them. And it cannot see the future of a death — only the shape of the one already underway.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Deathsense",
+          "grants": "Feel where a living thing is dying or near death. Judge how far along they are. Sense the failing in a person or creature before it shows on the outside.",
+          "cannot": "Reads the living and the dying, not the already-dead. A corpse has nothing left to sense.",
+          "functions": [
+            "foresee"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
+        },
+        {
+          "rank": 2,
+          "name": "The Long Count",
+          "grants": "Sense not only that something living is dying but HOW — the cause, the shape, roughly how long. A body tells its ending to the Ashwarden before it tells anyone else.",
+          "cannot": "Knowing the hour does not give you the power to move it, and it will not let you unknow it.",
+          "functions": [
+            "foresee"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
+        },
+        {
+          "rank": 3,
+          "name": "The Hour Known",
+          "grants": "The dying stands plain: its cause, its trajectory, and what would turn it aside — if anything would. The Ashwarden reads a living thing's end as clearly as its beginning.",
+          "cannot": "Some endings have no turning-aside. Deathsense does not make endings negotiable; it makes them visible.",
+          "functions": [
+            "foresee",
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
+        }
+      ],
+      "challengeTypes": [
+        "INVESTIGATE",
+        "PUZZLE"
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 2,
+        "FIGHT": 1,
+        "PUZZLE": 1
+      },
+      "tradition": "ashwarden",
+      "harmRung": "none",
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "lifesense",
+      "name": "Lifesense",
+      "levelReq": 1,
+      "energyCost": 3,
+      "powerSystem": "reach_death_life",
+      "attribute": "mental",
+      "axes": {
+        "death_life": 0.3
+      },
+      "functions": [
+        "reveal",
+        "track"
+      ],
+      "narrationHints": "The warmth of the living felt like heat through a wall — who is near, how strong their spark.",
+      "description": "Sense living things nearby — number, vigor, hidden presence.",
+      "notFor": "Reading thoughts; distinguishing individuals by identity.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Lifesense",
+          "grants": "Feel living things through walls and dark; judge their vigor; notice one hiding.",
+          "cannot": "Vigor, not identity; the barely-alive read faint.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
+        },
+        {
+          "rank": 2,
+          "name": "The Green Read",
+          "grants": "Read the whole living field of a place — what is thriving, what is failing, what is merely holding on.",
+          "cannot": "It reports vitality, not virtue. A thriving thing may be thriving on something you love.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
+        },
+        {
+          "rank": 3,
+          "name": "The Whole Living Field",
+          "grants": "Feel every living thing for a great distance as one continuous fabric, and feel where it is torn.",
+          "cannot": "You cannot stop feeling it. Rootkin at this depth grieve forests the way others grieve people.",
+          "functions": [
+            "reveal",
+            "track"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
+        }
+      ],
+      "challengeTypes": [
+        "INVESTIGATE",
+        "STEALTH"
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 2,
+        "PUZZLE": 1
+      },
+      "tradition": "rootkin",
+      "harmRung": "none",
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "staunch",
+      "name": "Staunch",
+      "levelReq": 1,
+      "energyCost": 4,
+      "powerSystem": "reach_death_life",
+      "attribute": "practical",
+      "axes": {
+        "death_life": 0.3
+      },
+      "functions": [
+        "heal",
+        "sustain"
+      ],
+      "narrationHints": "A hand pressed and a word, and the bleeding slows to a stop.",
+      "description": "Field-stop bleeding and stabilize the badly hurt — the first, portable mercy of Vivimancy.",
+      "notFor": "Closing deep wounds fully (that's Quickening); reviving the gone.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Staunch",
+          "grants": "Stop bleeding, stabilize a crashing body, buy time for real healing.",
+          "cannot": "Buys time; does not mend; the already-dead are past it."
+        },
+        {
+          "rank": 2,
+          "name": "The Held Wound",
+          "grants": "Hold a mortal wound closed by will — buy hours where there were minutes.",
+          "cannot": "Held is not healed. When you let go, the wound resumes exactly where it was."
+        },
+        {
+          "rank": 3,
+          "name": "The Refused Bleed",
+          "grants": "Refuse a death outright at the moment of bleeding — the body stops losing what it cannot spare.",
+          "cannot": "Refusal costs you what it saves them; the Rootkin pay it gladly and it still costs."
+        }
+      ],
+      "challengeTypes": [
+        "SURVIVE",
+        "FIGHT"
+      ],
+      "challengeProfile": {
+        "SURVIVE": 3
+      },
+      "tradition": "rootkin",
+      "harmRung": "none",
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "wither",
+      "name": "Wither",
+      "levelReq": 2,
+      "energyCost": 5,
+      "powerSystem": "reach_death_life",
+      "attribute": "practical",
+      "axes": {
+        "death_life": -0.4
+      },
+      "functions": [
+        "break",
+        "hinder",
+        "strike"
+      ],
+      "narrationHints": "Touch, and the quick goes out of a thing — a vine, a lock's wooden pin, a reaching hand.",
+      "description": "Hasten decay in a thing — rot wood, wilt growth, age a structure past its holding. Palework's edge turned on the material world. The Grey Hand handles people; Wither handles everything else.",
+      "notFor": "Weakening living people — that is The Grey Hand. Wither ages and rots THINGS: structures, barricades, terrain, growth. It does not wound; it hastens what was already in a thing.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Wither",
+          "grants": "Rot or wilt a plant, a wooden object, a rope, a door — anything living or once-living. Age a material thing faster than it should go.",
+          "cannot": "Only things, not people. Cannot undo.",
+          "functions": [
+            "hinder"
+          ],
+          "gains": "broaden",
+          "harmRung": "damaging"
+        },
+        {
+          "rank": 2,
+          "name": "The Grey Touch",
+          "grants": "Age a structure — a wall, a bridge, a barricade — decades in moments. Halt a spreading blight by giving the growth-front a clean, sudden end.",
+          "cannot": "Withering is not breaking. The thing fails as things fail — structurally, from within. It takes a moment, not an instant.",
+          "functions": [
+            "hinder",
+            "break"
+          ],
+          "gains": "broaden",
+          "harmRung": "damaging"
+        },
+        {
+          "rank": 3,
+          "name": "The Withering",
+          "grants": "Wither at range and at scale — a field of crops, a fortification, a siege engine, a line of wooden shields. The terrain itself becomes unreliable.",
+          "cannot": "The Ashwardens permit this only against what should end. Used as a weapon it marks the wielder, and the marking is visible to everyone who has ever seen Palework.",
+          "functions": [
+            "hinder",
+            "break",
+            "strike"
+          ],
+          "gains": "broaden",
+          "harmRung": "damaging"
+        }
+      ],
+      "challengeTypes": [
+        "FIGHT",
+        "PUZZLE",
+        "CHASE"
+      ],
+      "challengeProfile": {
+        "FIGHT": 2,
+        "DUEL": 2,
+        "PUZZLE": 2,
+        "CHASE": 1
+      },
+      "tradition": "ashwarden",
+      "harmRung": "damaging",
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "graftlife",
+      "name": "Graftlife",
+      "levelReq": 3,
+      "energyCost": 6,
+      "powerSystem": "reach_death_life",
+      "attribute": "practical",
+      "axes": {
+        "death_life": 0.4,
+        "destruction_creation": 0.2
+      },
+      "functions": [
+        "heal",
+        "transform"
+      ],
+      "narrationHints": "What was lost is coaxed to grow back — not the same, but living.",
+      "description": "Regrow lost tissue, mend a maiming, coax a broken living thing back toward whole. Mid-tier Vivimancy.",
+      "notFor": "Perfect restoration (the regrown differs); regrowing the dead.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Graftlife",
+          "grants": "Regrow a lost finger, mend a crippling wound over time, restore a blighted field to growth.",
+          "cannot": "The regrown is never quite the lost; costs the wielder deeply."
+        },
+        {
+          "rank": 2,
+          "name": "The Grafted Limb",
+          "grants": "Graft living tissue that was not there — replace what was lost with what still grows.",
+          "cannot": "The graft is not the original, and it knows it. The body argues with it for a long time."
+        },
+        {
+          "rank": 3,
+          "name": "Rootwork",
+          "grants": "Graft life into what was not alive, or was no longer — bone to wood, a heart to a stopped chest.",
+          "cannot": "This is the near edge of the Rootkin's own taboo. What comes back is alive; whether it is the same is another question."
+        }
+      ],
+      "challengeTypes": [
+        "SURVIVE"
+      ],
+      "challengeProfile": {
+        "SURVIVE": 3,
+        "PUZZLE": 1,
+        "EXPLORE": 1
+      },
+      "tradition": "rootkin",
+      "harmRung": "damaging",
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "death_ward",
+      "name": "Death-Ward",
+      "levelReq": 3,
+      "energyCost": 6,
+      "powerSystem": "reach_death_life",
+      "attribute": "mental",
+      "axes": {
+        "death_life": -0.3,
+        "chaos_order": 0.2
+      },
+      "functions": [
+        "resist",
+        "ward"
+      ],
+      "narrationHints": "A sign laid down that the dying may not be disturbed — and the restless dead may not pass.",
+      "description": "Ward against deaths that should not happen: curse-deaths, unnatural endings, the restless-dead reaching the living. Death-Ward is not about physical hardship — for that, use The Kept Breath. This is protection against death as a working, a curse, or a supernatural force.",
+      "notFor": "Natural deaths — starvation, wounds, cold, exposure (use The Kept Breath). Death-Ward stands against unnatural endings: a death-curse, a necromantic working, a wraith's touch, a plague that is not merely a plague. It cannot hold indefinitely; it can only refuse a specific unnatural threshold.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Death-Ward",
+          "grants": "Ward a space so a death goes undisturbed, or so what should stay dead cannot rise or reach in.",
+          "cannot": "Wards the threshold, not the outcome; a strong enough wrongness strains it.",
+          "functions": [
+            "ward"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
+        },
+        {
+          "rank": 2,
+          "name": "The Turned Hour",
+          "grants": "Turn aside an unnatural death — a curse taking hold, a wraith's grip, a working that was about to close. Not heal the wound, not hold the dying: refuse this specific end, and push it back.",
+          "cannot": "Unnatural only. A person dying of their wounds in the cold needs The Kept Breath, not this. And 'later' is still owed.",
+          "functions": [
+            "ward",
+            "resist"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
+        },
+        {
+          "rank": 3,
+          "name": "Not Today",
+          "grants": "Stand between a person and a supernatural ending and refuse it wholly, for as long as you can hold — the death-curse does not find them, the wraith cannot reach them, the working slides away. You are the fact that this does not happen today.",
+          "cannot": "You are holding it with your own weight. And it is still there when you are not.",
+          "functions": [
+            "ward",
+            "resist"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
+        }
+      ],
+      "challengeTypes": [
+        "SURVIVE",
+        "FIGHT",
+        "STEALTH"
+      ],
+      "challengeProfile": {
+        "SURVIVE": 3,
+        "FIGHT": 2,
+        "DUEL": 2,
+        "EXPLORE": 1,
+        "STEALTH": 1
+      },
+      "tradition": "ashwarden",
+      "harmRung": "none",
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "the_last_gift",
+      "name": "The Last Gift",
+      "levelReq": 4,
+      "energyCost": 9,
+      "powerSystem": "reach_death_life",
+      "attribute": "social",
+      "axes": {
+        "death_life": 0.0,
+        "emotional_logical": -0.2
+      },
+      "functions": [
+        "heal",
+        "restore",
+        "reveal"
+      ],
+      "narrationHints": "At the very edge, the dying are given one clear hour — lucid, painless, theirs.",
+      "description": "Grant a dying being a final lucid, painless interval to say and do what remains — the co-firing craft, life and death held together in mercy.",
+      "notFor": "Extending life (it eases the end, not delays it); forcing lucidity on the unwilling.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Last Gift",
+          "grants": "Give the dying a clear, painless final interval — words said, peace made, the end met whole.",
+          "cannot": "Does not postpone death; the gift is the hour, not more hours."
+        }
+      ],
+      "challengeTypes": [
+        "SOCIAL",
+        "INVESTIGATE"
+      ],
+      "challengeProfile": {
+        "SURVIVE": 3,
+        "INVESTIGATE": 2,
+        "SOCIAL": 2,
+        "FIGHT": 1,
+        "PUZZLE": 1
+      },
+      "tradition": "rootkin",
+      "harmRung": "lethal",
+      "nativeOrCombination": "native"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "the_grey_hand",
+      "name": "The Grey Hand",
+      "levelReq": 2,
+      "energyCost": 5,
+      "powerSystem": "reach_death_life",
+      "tradition": "ashwarden",
+      "attribute": "mental",
+      "axes": {
+        "death_life": -0.4,
+        "body_mind": -0.2
+      },
+      "functions": [
+        "hinder",
+        "strike"
+      ],
+      "narrationHints": "The strength goes out of him like water out of a cracked jar, and he can feel it going.",
+      "description": "Enfeeblement. You take the vigour out of a living thing by touch or by near-hand — not its life, its STRENGTH. It is still standing. It simply cannot do what it could a moment ago.",
+      "notFor": "It drains, it does not slay — a weakened thing is still a thing, and a weakened boar is still a boar with tusks. It is VISIBLE: they know what you are doing to them, and so does everyone watching.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Grey Hand",
+          "grants": "Weaken a living thing by touch. Its strength fails; its will to use that strength fails with it.",
+          "cannot": "Touch. You must reach them, and reaching a strong thing is the whole problem.",
+          "functions": [
+            "hinder"
+          ],
+          "gains": "broaden",
+          "harmRung": "damaging"
+        },
+        {
+          "rank": 2,
+          "name": "The Long Grey",
+          "grants": "Weaken at a distance, and hold it there — they do not recover while you are attending to them.",
+          "cannot": "Attending costs you continuously. Let go and it comes back, and it comes back angry.",
+          "functions": [
+            "hinder"
+          ],
+          "gains": "deepen",
+          "harmRung": "damaging"
+        },
+        {
+          "rank": 3,
+          "name": "The Withered Hour",
+          "grants": "Weaken a group, or weaken one thing so thoroughly it cannot stand.",
+          "cannot": "What you have weakened this far is nearly dead, and the Ashwardens will ask whether you meant to go that far.",
+          "functions": [
+            "hinder",
+            "strike"
+          ],
+          "gains": "broaden",
+          "harmRung": "incapacitating"
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "FIGHT",
+        "SOCIAL"
+      ],
+      "challengeProfile": {
+        "FIGHT": 3,
+        "SOCIAL": 2
+      },
+      "harmRung": "incapacitating",
+      "nativeOrCombination": "native"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "draw_down",
+      "name": "Draw Down",
+      "levelReq": 3,
+      "energyCost": 6,
+      "powerSystem": "reach_death_life",
+      "tradition": "ashwarden",
+      "attribute": "mental",
+      "axes": {
+        "death_life": -0.5,
+        "body_mind": -0.1
+      },
+      "functions": [
+        "hinder",
+        "strike",
+        "heal"
+      ],
+      "narrationHints": "What leaves him arrives in you, and it is warm, and that is the worst part.",
+      "description": "You take the life out of a thing and put it into yourself. The classic bargain of the death-craft: the necromancer sustains himself by ending. It works. It is also exactly what people are afraid of when they are afraid of you.",
+      "notFor": "It moves life, it does not create it — you cannot draw from nothing, and you cannot draw from the already-dead. And it will not top you up past what you were; it heals a wound, it does not make you more than a man.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Draw Down",
+          "grants": "Take vitality from a living thing you are touching and take it into yourself. Their wound is your mending.",
+          "cannot": "Touch, and only from the living. The dead have nothing left to give and will be insulted by the asking."
+        },
+        {
+          "rank": 2,
+          "name": "The Long Draught",
+          "grants": "Draw at reach, and from more than one — a battlefield is, to a Draw-Down, a table set.",
+          "cannot": "Every person watching you do this will remember it. Some of them will decide something about you."
+        },
+        {
+          "rank": 3,
+          "name": "The Emptied Vessel",
+          "grants": "Draw a thing entirely down. What is left is not dead, exactly. It is finished.",
+          "cannot": "This is the act the Rootkin cite when they say the Ashwardens have lost their way, and it is very hard to argue with them about it."
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "FIGHT"
+      ],
+      "challengeProfile": {
+        "FIGHT": 3
+      },
+      "harmRung": "damaging",
+      "nativeOrCombination": "native"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "the_dread",
+      "name": "The Dread",
+      "levelReq": 2,
+      "energyCost": 4,
+      "powerSystem": "reach_death_life",
+      "tradition": "ashwarden",
+      "attribute": "social",
+      "axes": {
+        "death_life": -0.3,
+        "emotional_logical": -0.3
+      },
+      "functions": [
+        "bind",
+        "foresee",
+        "hinder"
+      ],
+      "narrationHints": "He feels his own ending arrive early — not as a thought, as a temperature.",
+      "description": "You let a living thing feel, for a moment, the ending it is walking toward. It is not an illusion and it is not a lie. It is simply EARLY. Most things run. Some things freeze. A few things come straight at you, and those are the ones to watch.",
+      "notFor": "It shows them their end; it does not CAUSE it. And a thing that has already made peace with dying — an Ashwarden, an old soldier, a Rootkin who has planted their tree — feels nothing at all, and will look at you with something close to pity.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Dread",
+          "grants": "One living thing feels its own ending approach. It will act on that, and you do not get to choose how.",
+          "cannot": "The unafraid are unmoved, and there are more of them than you think.",
+          "functions": [
+            "hinder"
+          ],
+          "gains": "broaden",
+          "harmRung": "incapacitating"
+        },
+        {
+          "rank": 2,
+          "name": "The Cold Room",
+          "grants": "A room, a line, a crowd feels it at once. Formations come apart; conversations stop.",
+          "cannot": "A frightened crowd is a stampede, and a stampede does not check who is in its way. Including you.",
+          "functions": [
+            "hinder",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "incapacitating"
+        },
+        {
+          "rank": 3,
+          "name": "The Certain Hour",
+          "grants": "They do not merely feel it — they KNOW it, with the Ashwarden's own clarity, and they cannot un-know it.",
+          "cannot": "Some of them will thank you. Some of them will never be right again. You will not be able to tell in advance which.",
+          "functions": [
+            "hinder",
+            "bind",
+            "foresee"
+          ],
+          "gains": "broaden",
+          "harmRung": "incapacitating"
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "FIGHT",
+        "SOCIAL"
+      ],
+      "challengeProfile": {
+        "FIGHT": 3,
+        "SOCIAL": 3
+      },
+      "harmRung": "incapacitating",
+      "nativeOrCombination": "native"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "ask_the_dead",
+      "name": "Ask the Dead",
+      "levelReq": 3,
+      "energyCost": 5,
+      "powerSystem": "reach_death_life",
+      "tradition": "ashwarden",
+      "attribute": "mental",
+      "axes": {
+        "death_life": -0.4,
+        "falsehood_truth": 0.3
+      },
+      "functions": [
+        "reveal",
+        "summon"
+      ],
+      "narrationHints": "It answers. It is not glad to. It tells you the small thing it knew and nothing more.",
+      "description": "The recently dead will answer you — poorly, briefly, and only about what they actually knew in life. They are not oracles. They are a person, tired, being asked one more question.",
+      "notFor": "They knew what they knew. A murdered man may not know who killed him. And they will not stay: each question costs them something, and the Ashwardens hold that asking a fourth is a cruelty.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Ask the Dead",
+          "grants": "The recently dead answer one question, truthfully, and badly.",
+          "cannot": "Recently. A week is far. A season is gone."
+        },
+        {
+          "rank": 2,
+          "name": "The Long Question",
+          "grants": "Ask further back, and ask more — three questions, and the answers are clearer.",
+          "cannot": "Each question takes something from what is left of them. You will feel it go."
+        },
+        {
+          "rank": 3,
+          "name": "The Full Account",
+          "grants": "The dead tell you what they knew, entire, and what they wanted, and what they were afraid of.",
+          "cannot": "You will hear things about them that were not yours to know, and you cannot give them back."
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "INVESTIGATE",
+        "SOCIAL"
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 3,
+        "SOCIAL": 2
+      },
+      "harmRung": "none",
+      "nativeOrCombination": "native"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "the_cut_thread",
+      "name": "The Cut Thread",
+      "levelReq": 5,
+      "energyCost": 14,
+      "powerSystem": "reach_death_life",
+      "tradition": "ashwarden",
+      "attribute": "mental",
+      "axes": {
+        "death_life": -0.9,
+        "violence_peace": -0.3
+      },
+      "functions": [
+        "strike"
+      ],
+      "narrationHints": "There is no wound. There is no sound. The thread was there and then it was cut, and everyone in the room understands exactly what they have just watched.",
+      "description": "The Fates' shears. One life, one cut, done — not a wound, a CESSATION. This is the deepest thing the Ashwardens hold and they teach it to almost nobody, because the argument against it has never been answered and they keep doing it anyway.",
+      "notFor": "One thing, once, and it costs you enormously. It cannot be aimed at what has no thread — a machine, a figure, a Precursor working. And it cannot be taken back. There is no version of this you get to regret quietly: it is done, it is witnessed, and it is yours.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Cut Thread",
+          "grants": "End one living thing. No wound, no struggle, no argument. It simply stops.",
+          "cannot": "It costs almost everything you have, it is unmistakable to anyone watching, and it CANNOT BE UNDONE — not by you, not by the Rootkin, not by a braid. This is the one door with no handle on the other side."
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "FIGHT"
+      ],
+      "challengeProfile": {
+        "FIGHT": 5
+      },
+      "harmRung": "lethal",
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "the_grey_road",
+      "name": "The Grey Road",
+      "levelReq": 2,
+      "energyCost": 5,
+      "powerSystem": "reach_death_life",
+      "attribute": "mental",
+      "axes": {
+        "death_life": -0.3,
+        "chaos_order": -0.1
+      },
+      "effectTags": [
+        "passage",
+        "move",
+        "open"
+      ],
+      "narrationHints": "Not faster. Through different. The places between that are only open from the death-side — plague grounds, aftermath fields, grief-thick dark. The ashwarden moves through while the living wait for the space to be safe.",
+      "description": "Move through places lethal or forbidden to others. The ashwarden walks where others cannot stay: not by force, but by fitting the space that the dead have already shaped.",
+      "notFor": "Speed — this is about access, not pace; the Grey Road does not outrun anything. The living cannot be pulled through freely.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Through Here",
+          "grants": "Move through places lethal or restricted to others — a plague ward, a collapsed site, a grief-sealed room, a battlefield's aftermath — without the danger touching you. Stand where others cannot stay.",
+          "cannot": "You go alone. The Road does not widen for company without further craft."
+        },
+        {
+          "rank": 2,
+          "name": "The Passage",
+          "grants": "Bring one person through with you. Open sealed doors, tombs, and quarantine gates that the dead have passed before — not by breaking, by fitting. Sense the safe path through a lethal space before you commit.",
+          "cannot": "One only. A ward that has never held a death cannot be opened this way — only thresholds that have been crossed before."
+        },
+        {
+          "rank": 3,
+          "name": "The Long Walk",
+          "grants": "Move through any space where death has been substantial and recent — major battlefields, plague grounds, sealed necropolises, active collapse sites — as if they were open road. Bring a small group. Move through quarantine cordons and siege-lines that are held by mortal hands, not wards.",
+          "cannot": "Substantial and recent. A meadow where someone died a hundred years ago is not a Grey Road. A magically-sealed door with no death behind it is not a Grey Road. The Advance moves in fights; the Grey Road moves through places of death. The two do not substitute for each other."
+        }
+      ],
+      "functions": [
+        "move",
+        "open"
+      ],
+      "challengeTypes": [
+        "EXPLORE",
+        "SURVIVE",
+        "STEALTH"
+      ],
+      "challengeProfile": {
+        "EXPLORE": 3,
+        "SURVIVE": 3,
+        "STEALTH": 2,
+        "CHASE": 1
+      },
+      "tradition": "ashwarden",
+      "harmRung": "none",
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "the_kept_breath",
+      "name": "The Kept Breath",
+      "levelReq": 2,
+      "energyCost": 4,
+      "powerSystem": "reach_death_life",
+      "attribute": "mental",
+      "axes": {
+        "death_life": -0.3,
+        "body_mind": -0.2
+      },
+      "effectTags": [
+        "sustain",
+        "endure",
+        "threshold"
+      ],
+      "narrationHints": "Enough. Not well — enough. The ashwarden knows the exact line between alive and not. They hold someone there. The body does what it must; not a thing more.",
+      "description": "Sustain a body through physical hardship: starvation, cold, blood loss, wounds, exhaustion. The ashwarden knows the exact threshold a body needs to keep going — and holds someone there. Not healing, not protection from curses. The body's minimum, maintained by craft.",
+      "notFor": "Metaphysical or unnatural death threats — curses, wraith-touch, necromantic workings (use Death-Ward). The Kept Breath handles the body's physical ledger: rations, warmth, blood, sleep. It holds the threshold; it does not move it.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Minimum",
+          "grants": "Sustain yourself on less than should be enough: half rations, cold, blood loss, a wound that should have slowed you. The body does what it must. The ashwarden knows the exact line and walks it.",
+          "cannot": "This holds the threshold — it does not move it. You remain in the condition you were in, only continuing."
+        },
+        {
+          "rank": 2,
+          "name": "Held Other",
+          "grants": "Hold another person at minimum: keep a companion alive through conditions that would otherwise kill them, or extend a dying person's window long enough for something to matter. Cannot heal them — only hold the line.",
+          "cannot": "One person at a time. The craft requires full attention while the other is held."
+        },
+        {
+          "rank": 3,
+          "name": "Patience of the Palelands",
+          "grants": "Sustain a small group through conditions nothing else could survive. Bring someone back from the absolute threshold and hold them there for days. Become the reason a thing is still alive — not by healing but by holding.",
+          "cannot": "The Kept Breath is not a cure and never becomes one. Everyone held at minimum is still at minimum — functional, not well."
+        }
+      ],
+      "functions": [
+        "sustain"
+      ],
+      "challengeTypes": [
+        "SURVIVE",
+        "EXPLORE"
+      ],
+      "challengeProfile": {
+        "SURVIVE": 4,
+        "EXPLORE": 2,
+        "INVESTIGATE": 1
+      },
+      "tradition": "ashwarden",
+      "harmRung": "none",
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "the_green_claim",
+      "name": "The Green Claim",
+      "levelReq": 2,
+      "energyCost": 5,
+      "powerSystem": "reach_death_life",
+      "attribute": "practical",
+      "axes": {
+        "death_life": 0.4,
+        "destruction_creation": 0.3,
+        "chaos_order": -0.1
+      },
+      "effectTags": [
+        "strike",
+        "summon",
+        "reveal",
+        "growth"
+      ],
+      "narrationHints": "The forest reclaims. Vines that grip, roots that erupt, the slow enormous weight of living things that have decided something does not belong here. The Rootkin do not make weapons — they call what already wants to move.",
+      "description": "Call living growth into action: impede, constrict, strike. The living world mobilises against what the Rootkin names as threat — and it also tells them what it has sensed.",
+      "notFor": "Precision — what you summon has a will of its own, slower and less specific than yours. The growth that answers does not check your intent carefully.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Answer",
+          "grants": "Call living growth to act: vines that grip, roots that erupt underfoot, branches that bar passage. Strike one threat with the weight of what grows here. The living things that answer also tell you where the intruder has been.",
+          "cannot": "The growth is approximate. It holds and hinders as much as it harms. A determined foe pushes through, slower."
+        },
+        {
+          "rank": 2,
+          "name": "The Living Response",
+          "grants": "The call goes wider: thorns across a passage, roots that trip a line, surging growth across a broader area. What you summon shows you its awareness — the animal that answers has seen what you need to know.",
+          "cannot": "Wide response is slow response. The Rootkin's force is not fast enough for a fight already at blade's edge."
+        },
+        {
+          "rank": 3,
+          "name": "The Reclamation",
+          "grants": "The living world treats something as having been named as threat at scale — the terrain itself becomes hostile to what you've claimed. A region reclaims. What tried to pass does not.",
+          "cannot": "The Rootkin cannot hold this. The reclamation is the living world's act, and it continues until it decides it is done. Call it only when you mean it."
+        }
+      ],
+      "functions": [
+        "strike",
+        "summon",
+        "reveal"
+      ],
+      "challengeTypes": [
+        "FIGHT",
+        "EXPLORE",
+        "SURVIVE"
+      ],
+      "challengeProfile": {
+        "FIGHT": 3,
+        "EXPLORE": 2,
+        "SURVIVE": 2,
+        "INVESTIGATE": 1
+      },
+      "tradition": "rootkin",
+      "harmRung": "incapacitating",
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "bark_and_briar",
+      "name": "Bark and Briar",
+      "levelReq": 2,
+      "energyCost": 5,
+      "powerSystem": "reach_death_life",
+      "attribute": "practical",
+      "axes": {
+        "death_life": 0.3,
+        "destruction_creation": 0.2
+      },
+      "effectTags": [
+        "shield",
+        "ward",
+        "resist",
+        "growth"
+      ],
+      "narrationHints": "Bark thickens on the skin. Thorns lean outward. The grove's patience made into armour — slow, enormous, and already there.",
+      "description": "Life as protection: the body hardens with bark-skin, thorns erupt to ward a space, and the deep life-force of the Rootkin crowds out conditions that would take hold in a weaker thing.",
+      "notFor": "Speed — the Rootkin's defence is the forest's pace, not the fighter's reflex.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Bark-Skin",
+          "grants": "Harden your own body: bark-skin that deflects a blow, thorns that make you costly to grapple. Immediate protection for yourself in the moment of contact.",
+          "cannot": "Protects you only, and only for the encounter's length. Slow to invoke — this is before the blow, not after."
+        },
+        {
+          "rank": 2,
+          "name": "Thorn-Ward",
+          "grants": "Ward a space with living growth: a thorn-wall, a living barricade, a grove-perimeter that turns intruders aside. The ward persists after you've moved on. Others can shelter inside it.",
+          "cannot": "A living ward can be broken. Fire is its particular enemy."
+        },
+        {
+          "rank": 3,
+          "name": "The Grove's Resilience",
+          "grants": "Resist effects that would take hold in a lesser life: disease, poison, cold, a working aimed at you — because the life-force present in you is so strong it crowds them out. Extend this to those sheltered within your ward.",
+          "cannot": "Resilience is not immunity. Very strong effects still land; the Rootkin just takes longer to fall."
+        }
+      ],
+      "functions": [
+        "shield",
+        "ward",
+        "resist"
+      ],
+      "challengeTypes": [
+        "FIGHT",
+        "SURVIVE",
+        "EXPLORE"
+      ],
+      "challengeProfile": {
+        "FIGHT": 3,
+        "SURVIVE": 4,
+        "EXPLORE": 2
+      },
+      "tradition": "rootkin",
+      "harmRung": "none",
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "the_speaking_grove",
+      "name": "The Speaking Grove",
+      "levelReq": 2,
+      "energyCost": 4,
+      "powerSystem": "reach_death_life",
+      "attribute": "mental",
+      "axes": {
+        "death_life": 0.3,
+        "falsehood_truth": 0.2,
+        "chaos_order": 0.1
+      },
+      "effectTags": [
+        "command",
+        "reveal",
+        "track",
+        "living-world"
+      ],
+      "narrationHints": "The old wood has been listening since before anyone thought to ask it anything. The Rootkin asks. The grove answers, in the slow patient way of things that measure time in seasons.",
+      "description": "Speak to living things — plants, animals, the slow intelligence of old wood — and be heard. The conversation goes both ways: what the living world knows, you know.",
+      "notFor": "Speed — the grove does not answer quickly, and what it says takes a moment to understand. And it will not lie for you; what it tells you is what it has actually sensed.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "A Word to the Green",
+          "grants": "Speak to living things and be heard: a basic request to plants or animals is understood and followed, in their way. Ask and receive — the living world tells you what it has sensed nearby.",
+          "cannot": "Living things understand requests, not plans. Ask them to hold still, to move aside, to come — not to execute a strategy."
+        },
+        {
+          "rank": 2,
+          "name": "The Asking",
+          "grants": "Ask more complex things; command more deliberately. The forest tracks what has moved through it — query that track. An animal guide, a tree that opens its memory of who has passed, a flock that scouts ahead.",
+          "cannot": "What the living world knows is sensory, not analytical. It can tell you a person was here; it cannot tell you what they were planning."
+        },
+        {
+          "rank": 3,
+          "name": "The Grove Speaks",
+          "grants": "Speak to the living world at regional scale. The whole grove turns its attention toward you. What it knows of every thing that has moved through it is yours. What you ask of it — at the pace of trees — is done.",
+          "cannot": "At the pace of trees. Urgency is a concept the grove does not share."
+        }
+      ],
+      "functions": [
+        "command",
+        "reveal",
+        "track"
+      ],
+      "challengeTypes": [
+        "INVESTIGATE",
+        "EXPLORE",
+        "SOCIAL"
+      ],
+      "challengeProfile": {
+        "INVESTIGATE": 4,
+        "EXPLORE": 3,
+        "SOCIAL": 2,
+        "SURVIVE": 1
+      },
+      "tradition": "rootkin",
+      "harmRung": "none",
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "the_root_road",
+      "name": "The Root Road",
+      "levelReq": 2,
+      "energyCost": 5,
+      "powerSystem": "reach_death_life",
+      "attribute": "practical",
+      "axes": {
+        "death_life": 0.3,
+        "concrete_abstract": -0.1
+      },
+      "effectTags": [
+        "travel",
+        "open",
+        "reveal",
+        "grove-paths"
+      ],
+      "narrationHints": "The paths between the roots. The ways the living world opens for those who belong to it. Faster, not because the distance is shorter, but because the terrain itself is willing.",
+      "description": "Move through living terrain by moving with it — the paths between the roots, the passages the forest opens for those it recognises. The living world reveals what it knows of where you're going.",
+      "notFor": "Urgency — the Root Road is faster than it looks, not faster than a horse on open ground. It opens ways, it does not teleport.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Between the Roots",
+          "grants": "Move through living terrain faster than it should allow. The paths exist; you know how to find them. The road also shows you: what grows along it, who has used it, what condition the terrain ahead is in.",
+          "cannot": "You must be in terrain with living things. Stone cities, blasted ground — the Road doesn't run there."
+        },
+        {
+          "rank": 2,
+          "name": "The Opened Way",
+          "grants": "Open passages that weren't visible: a thicket parts, a root-arch forms, a way through terrain that looked impassable appears. Bring one other with you. The living world makes a road.",
+          "cannot": "The opened way closes again. It isn't a road until you make it one by using it repeatedly."
+        },
+        {
+          "rank": 3,
+          "name": "The Root Network",
+          "grants": "Travel the root-network itself: move through the living web and emerge where it reaches, which is almost anywhere soil has held life. Bring a small group. The network tells you what it knows of the destination before you arrive.",
+          "cannot": "Emergence takes time and you cannot choose exactly where — you emerge where the network is willing, within the range you name. And dead ground, sealed vaults, stone-over-stone — the roots have not gone there."
+        }
+      ],
+      "functions": [
+        "travel",
+        "open",
+        "reveal"
+      ],
+      "challengeTypes": [
+        "EXPLORE",
+        "SURVIVE",
+        "STEALTH"
+      ],
+      "challengeProfile": {
+        "EXPLORE": 4,
+        "SURVIVE": 3,
+        "STEALTH": 2,
+        "CHASE": 2
+      },
+      "tradition": "rootkin",
+      "harmRung": "none",
+      "nativeOrCombination": "native"
     }
-   ],
-   "functions": [
-    "heal",
-    "sustain",
-    "make"
-   ],
-   "challengeTypes": [
-    "SURVIVE",
-    "FIGHT"
-   ],
-   "challengeProfile": {
-    "SURVIVE": 3
-   },
-   "tradition": "rootkin",
-   "harmRung": "none",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "palework",
-   "name": "Palework",
-   "levelReq": 2,
-   "energyCost": 6,
-   "powerSystem": "reach_death_life",
-   "attribute": "mental",
-   "axes": {
-    "death_life": -0.5,
-    "chaos_order": 0.2
-   },
-   "effectTags": [
-    "end",
-    "decay",
-    "still"
-   ],
-   "narrationHints": "The mercy and the weight of endings — a thing allowed to stop, a rot read like a map, a stillness that is not cruelty.",
-   "description": "The craft of endings: ease death, read decay, still what should be still. The Ashwardens' art — not killing, but tending the end.",
-   "notFor": "It EASES an end and it can BRING one — but it works through what is already in a thing, so it is slow, it is visible, and the dying know what is happening to them. It cannot smite a healthy thing dead where it stands (that is The Cut Thread, and it costs accordingly), it cannot animate what it has ended, and it will not stop a death that must happen.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "The Easing",
-     "grants": "Ease a dying thing's passing; read how and how long ago something died; grant true rest to what cannot find it.",
-     "cannot": "Cannot kill the healthy; cannot bring back; the easing is a mercy, refused if unwilling."
-    },
-    {
-     "rank": 2,
-     "name": "Reading the Rot",
-     "grants": "Read the physical evidence of death — what killed a ruin, what a plague did and will do next, what ended a thing and when. Halt a spreading rot by giving its front a clean end. This is forensics, not sensing: you read what is already finished.",
-     "cannot": "Reading is not undoing; some rots refuse a clean end. And this reads the already-dead — for the dying, use Deathsense."
-    },
-    {
-     "rank": 3,
-     "name": "The Long Stillness",
-     "grants": "Grant endings at scale — a battlefield eased, a plague stopped by stilling its front, a thing that should have died a century ago finally allowed to. The mercy the life-Reach cannot give itself.",
-     "cannot": "The wielder drifts death-hot; the Stillness is powerful enough to be mistaken for a weapon, and the mistake is fatal to trust; never raises, never forces."
-    }
-   ],
-   "functions": [
-    "strike",
-    "hinder",
-    "foresee"
-   ],
-   "challengeTypes": [
-    "INVESTIGATE",
-    "FIGHT",
-    "PUZZLE",
-    "SOCIAL"
-   ],
-   "challengeProfile": {
-    "SURVIVE": 3,
-    "FIGHT": 2,
-    "PUZZLE": 2,
-    "INVESTIGATE": 2,
-    "CHASE": 1,
-    "SOCIAL": 1
-   },
-   "tradition": "ashwarden",
-   "harmRung": "none",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "deathsense",
-   "name": "Deathsense",
-   "levelReq": 1,
-   "energyCost": 3,
-   "powerSystem": "reach_death_life",
-   "attribute": "mental",
-   "axes": {
-    "death_life": -0.3
-   },
-   "functions": [
-    "foresee",
-    "reveal"
-   ],
-   "narrationHints": "A quiet knowing of what has died, is dying, or is near its end nearby.",
-   "description": "Sense death and dying around you — the living whose thread is fraying, the near-gone, the actively failing. Deathsense reads what is HAPPENING NOW. For what has already finished, Palework reads the evidence.",
-   "notFor": "It reads endings; it does not cause them. And it cannot see the future of a death — only the shape of the one already underway.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Deathsense",
-     "grants": "Feel where a living thing is dying or near death. Judge how far along they are. Sense the failing in a person or creature before it shows on the outside.",
-     "cannot": "Reads the living and the dying, not the already-dead. A corpse has nothing left to sense."
-    },
-    {
-     "rank": 2,
-     "name": "The Long Count",
-     "grants": "Sense not only that something living is dying but HOW — the cause, the shape, roughly how long. A body tells its ending to the Ashwarden before it tells anyone else.",
-     "cannot": "Knowing the hour does not give you the power to move it, and it will not let you unknow it."
-    },
-    {
-     "rank": 3,
-     "name": "The Hour Known",
-     "grants": "The dying stands plain: its cause, its trajectory, and what would turn it aside — if anything would. The Ashwarden reads a living thing's end as clearly as its beginning.",
-     "cannot": "Some endings have no turning-aside. Deathsense does not make endings negotiable; it makes them visible."
-    }
-   ],
-   "challengeTypes": [
-    "INVESTIGATE",
-    "PUZZLE"
-   ],
-   "challengeProfile": {
-    "INVESTIGATE": 2,
-    "FIGHT": 1,
-    "PUZZLE": 1
-   },
-   "tradition": "ashwarden",
-   "harmRung": "none",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "lifesense",
-   "name": "Lifesense",
-   "levelReq": 1,
-   "energyCost": 3,
-   "powerSystem": "reach_death_life",
-   "attribute": "mental",
-   "axes": {
-    "death_life": 0.3
-   },
-   "functions": [
-    "reveal",
-    "track"
-   ],
-   "narrationHints": "The warmth of the living felt like heat through a wall — who is near, how strong their spark.",
-   "description": "Sense living things nearby — number, vigor, hidden presence.",
-   "notFor": "Reading thoughts; distinguishing individuals by identity.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Lifesense",
-     "grants": "Feel living things through walls and dark; judge their vigor; notice one hiding.",
-     "cannot": "Vigor, not identity; the barely-alive read faint."
-    },
-    {
-     "rank": 2,
-     "name": "The Green Read",
-     "grants": "Read the whole living field of a place — what is thriving, what is failing, what is merely holding on.",
-     "cannot": "It reports vitality, not virtue. A thriving thing may be thriving on something you love."
-    },
-    {
-     "rank": 3,
-     "name": "The Whole Living Field",
-     "grants": "Feel every living thing for a great distance as one continuous fabric, and feel where it is torn.",
-     "cannot": "You cannot stop feeling it. Rootkin at this depth grieve forests the way others grieve people."
-    }
-   ],
-   "challengeTypes": [
-    "INVESTIGATE",
-    "FIGHT",
-    "STEALTH"
-   ],
-   "challengeProfile": {
-    "INVESTIGATE": 2,
-    "FIGHT": 1,
-    "PUZZLE": 1
-   },
-   "tradition": "rootkin",
-   "harmRung": "none",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "staunch",
-   "name": "Staunch",
-   "levelReq": 1,
-   "energyCost": 4,
-   "powerSystem": "reach_death_life",
-   "attribute": "practical",
-   "axes": {
-    "death_life": 0.3
-   },
-   "functions": [
-    "heal",
-    "sustain"
-   ],
-   "narrationHints": "A hand pressed and a word, and the bleeding slows to a stop.",
-   "description": "Field-stop bleeding and stabilize the badly hurt — the first, portable mercy of Vivimancy.",
-   "notFor": "Closing deep wounds fully (that's Quickening); reviving the gone.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Staunch",
-     "grants": "Stop bleeding, stabilize a crashing body, buy time for real healing.",
-     "cannot": "Buys time; does not mend; the already-dead are past it."
-    },
-    {
-     "rank": 2,
-     "name": "The Held Wound",
-     "grants": "Hold a mortal wound closed by will — buy hours where there were minutes.",
-     "cannot": "Held is not healed. When you let go, the wound resumes exactly where it was."
-    },
-    {
-     "rank": 3,
-     "name": "The Refused Bleed",
-     "grants": "Refuse a death outright at the moment of bleeding — the body stops losing what it cannot spare.",
-     "cannot": "Refusal costs you what it saves them; the Rootkin pay it gladly and it still costs."
-    }
-   ],
-   "challengeTypes": [
-    "SURVIVE",
-    "FIGHT"
-   ],
-   "challengeProfile": {
-    "SURVIVE": 3
-   },
-   "tradition": "rootkin",
-   "harmRung": "none",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "wither",
-   "name": "Wither",
-   "levelReq": 2,
-   "energyCost": 5,
-   "powerSystem": "reach_death_life",
-   "attribute": "practical",
-   "axes": {
-    "death_life": -0.4
-   },
-   "functions": [
-    "hinder",
-    "break",
-    "strike"
-   ],
-   "narrationHints": "Touch, and the quick goes out of a thing — a vine, a lock's wooden pin, a reaching hand.",
-   "description": "Hasten decay in a thing — rot wood, wilt growth, age a structure past its holding. Palework's edge turned on the material world. The Grey Hand handles people; Wither handles everything else.",
-   "notFor": "Weakening living people — that is The Grey Hand. Wither ages and rots THINGS: structures, barricades, terrain, growth. It does not wound; it hastens what was already in a thing.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Wither",
-     "grants": "Rot or wilt a plant, a wooden object, a rope, a door — anything living or once-living. Age a material thing faster than it should go.",
-     "cannot": "Only things, not people. Cannot undo."
-    },
-    {
-     "rank": 2,
-     "name": "The Grey Touch",
-     "grants": "Age a structure — a wall, a bridge, a barricade — decades in moments. Halt a spreading blight by giving the growth-front a clean, sudden end.",
-     "cannot": "Withering is not breaking. The thing fails as things fail — structurally, from within. It takes a moment, not an instant."
-    },
-    {
-     "rank": 3,
-     "name": "The Withering",
-     "grants": "Wither at range and at scale — a field of crops, a fortification, a siege engine, a line of wooden shields. The terrain itself becomes unreliable.",
-     "cannot": "The Ashwardens permit this only against what should end. Used as a weapon it marks the wielder, and the marking is visible to everyone who has ever seen Palework."
-    }
-   ],
-   "challengeTypes": [
-    "FIGHT",
-    "PUZZLE",
-    "CHASE"
-   ],
-   "challengeProfile": {
-    "FIGHT": 2,
-    "DUEL": 2,
-    "PUZZLE": 2,
-    "CHASE": 1
-   },
-   "tradition": "ashwarden",
-   "harmRung": "damaging",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "graftlife",
-   "name": "Graftlife",
-   "levelReq": 3,
-   "energyCost": 6,
-   "powerSystem": "reach_death_life",
-   "attribute": "practical",
-   "axes": {
-    "death_life": 0.4,
-    "destruction_creation": 0.2
-   },
-   "functions": [
-    "heal",
-    "transform"
-   ],
-   "narrationHints": "What was lost is coaxed to grow back — not the same, but living.",
-   "description": "Regrow lost tissue, mend a maiming, coax a broken living thing back toward whole. Mid-tier Vivimancy.",
-   "notFor": "Perfect restoration (the regrown differs); regrowing the dead.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Graftlife",
-     "grants": "Regrow a lost finger, mend a crippling wound over time, restore a blighted field to growth.",
-     "cannot": "The regrown is never quite the lost; costs the wielder deeply."
-    },
-    {
-     "rank": 2,
-     "name": "The Grafted Limb",
-     "grants": "Graft living tissue that was not there — replace what was lost with what still grows.",
-     "cannot": "The graft is not the original, and it knows it. The body argues with it for a long time."
-    },
-    {
-     "rank": 3,
-     "name": "Rootwork",
-     "grants": "Graft life into what was not alive, or was no longer — bone to wood, a heart to a stopped chest.",
-     "cannot": "This is the near edge of the Rootkin's own taboo. What comes back is alive; whether it is the same is another question."
-    }
-   ],
-   "challengeTypes": [
-    "SURVIVE"
-   ],
-   "challengeProfile": {
-    "SURVIVE": 3,
-    "PUZZLE": 1,
-    "EXPLORE": 1
-   },
-   "tradition": "rootkin",
-   "harmRung": "damaging",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "death_ward",
-   "name": "Death-Ward",
-   "levelReq": 3,
-   "energyCost": 6,
-   "powerSystem": "reach_death_life",
-   "attribute": "mental",
-   "axes": {
-    "death_life": -0.3,
-    "chaos_order": 0.2
-   },
-   "functions": [
-    "ward",
-    "resist"
-   ],
-   "narrationHints": "A sign laid down that the dying may not be disturbed — and the restless dead may not pass.",
-   "description": "Ward against deaths that should not happen: curse-deaths, unnatural endings, the restless-dead reaching the living. Death-Ward is not about physical hardship — for that, use The Kept Breath. This is protection against death as a working, a curse, or a supernatural force.",
-   "notFor": "Natural deaths — starvation, wounds, cold, exposure (use The Kept Breath). Death-Ward stands against unnatural endings: a death-curse, a necromantic working, a wraith's touch, a plague that is not merely a plague. It cannot hold indefinitely; it can only refuse a specific unnatural threshold.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Death-Ward",
-     "grants": "Ward a space so a death goes undisturbed, or so what should stay dead cannot rise or reach in.",
-     "cannot": "Wards the threshold, not the outcome; a strong enough wrongness strains it."
-    },
-    {
-     "rank": 2,
-     "name": "The Turned Hour",
-     "grants": "Turn aside an unnatural death — a curse taking hold, a wraith's grip, a working that was about to close. Not heal the wound, not hold the dying: refuse this specific end, and push it back.",
-     "cannot": "Unnatural only. A person dying of their wounds in the cold needs The Kept Breath, not this. And 'later' is still owed."
-    },
-    {
-     "rank": 3,
-     "name": "Not Today",
-     "grants": "Stand between a person and a supernatural ending and refuse it wholly, for as long as you can hold — the death-curse does not find them, the wraith cannot reach them, the working slides away. You are the fact that this does not happen today.",
-     "cannot": "You are holding it with your own weight. And it is still there when you are not."
-    }
-   ],
-   "challengeTypes": [
-    "SURVIVE",
-    "FIGHT",
-    "STEALTH"
-   ],
-   "challengeProfile": {
-    "SURVIVE": 3,
-    "FIGHT": 2,
-    "DUEL": 2,
-    "EXPLORE": 1,
-    "STEALTH": 1
-   },
-   "tradition": "ashwarden",
-   "harmRung": "none",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "the_last_gift",
-   "name": "The Last Gift",
-   "levelReq": 4,
-   "energyCost": 9,
-   "powerSystem": "reach_death_life",
-   "attribute": "social",
-   "axes": {
-    "death_life": 0.0,
-    "emotional_logical": -0.2
-   },
-   "functions": [
-    "heal",
-    "restore",
-    "reveal"
-   ],
-   "narrationHints": "At the very edge, the dying are given one clear hour — lucid, painless, theirs.",
-   "description": "Grant a dying being a final lucid, painless interval to say and do what remains — the co-firing craft, life and death held together in mercy.",
-   "notFor": "Extending life (it eases the end, not delays it); forcing lucidity on the unwilling.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "The Last Gift",
-     "grants": "Give the dying a clear, painless final interval — words said, peace made, the end met whole.",
-     "cannot": "Does not postpone death; the gift is the hour, not more hours."
-    }
-   ],
-   "challengeTypes": [
-    "SOCIAL",
-    "INVESTIGATE"
-   ],
-   "challengeProfile": {
-    "SURVIVE": 3,
-    "INVESTIGATE": 2,
-    "SOCIAL": 2,
-    "FIGHT": 1,
-    "PUZZLE": 1
-   },
-   "tradition": "rootkin",
-   "harmRung": "lethal",
-   "nativeOrCombination": "native"
-  },
-  {
-   "schemaVersion": 1,
-   "id": "the_grey_hand",
-   "name": "The Grey Hand",
-   "levelReq": 2,
-   "energyCost": 5,
-   "powerSystem": "reach_death_life",
-   "tradition": "ashwarden",
-   "attribute": "mental",
-   "axes": {
-    "death_life": -0.4,
-    "body_mind": -0.2
-   },
-   "functions": [
-    "hinder",
-    "strike"
-   ],
-   "narrationHints": "The strength goes out of him like water out of a cracked jar, and he can feel it going.",
-   "description": "Enfeeblement. You take the vigour out of a living thing by touch or by near-hand — not its life, its STRENGTH. It is still standing. It simply cannot do what it could a moment ago.",
-   "notFor": "It drains, it does not slay — a weakened thing is still a thing, and a weakened boar is still a boar with tusks. It is VISIBLE: they know what you are doing to them, and so does everyone watching.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "The Grey Hand",
-     "grants": "Weaken a living thing by touch. Its strength fails; its will to use that strength fails with it.",
-     "cannot": "Touch. You must reach them, and reaching a strong thing is the whole problem."
-    },
-    {
-     "rank": 2,
-     "name": "The Long Grey",
-     "grants": "Weaken at a distance, and hold it there — they do not recover while you are attending to them.",
-     "cannot": "Attending costs you continuously. Let go and it comes back, and it comes back angry."
-    },
-    {
-     "rank": 3,
-     "name": "The Withered Hour",
-     "grants": "Weaken a group, or weaken one thing so thoroughly it cannot stand.",
-     "cannot": "What you have weakened this far is nearly dead, and the Ashwardens will ask whether you meant to go that far."
-    }
-   ],
-   "gated": "learned",
-   "challengeTypes": [
-    "FIGHT",
-    "SOCIAL"
-   ],
-   "challengeProfile": {
-    "FIGHT": 3,
-    "SOCIAL": 2
-   },
-   "harmRung": "damaging",
-   "nativeOrCombination": "native"
-  },
-  {
-   "schemaVersion": 1,
-   "id": "draw_down",
-   "name": "Draw Down",
-   "levelReq": 3,
-   "energyCost": 6,
-   "powerSystem": "reach_death_life",
-   "tradition": "ashwarden",
-   "attribute": "mental",
-   "axes": {
-    "death_life": -0.5,
-    "body_mind": -0.1
-   },
-   "functions": [
-    "hinder",
-    "strike",
-    "heal"
-   ],
-   "narrationHints": "What leaves him arrives in you, and it is warm, and that is the worst part.",
-   "description": "You take the life out of a thing and put it into yourself. The classic bargain of the death-craft: the necromancer sustains himself by ending. It works. It is also exactly what people are afraid of when they are afraid of you.",
-   "notFor": "It moves life, it does not create it — you cannot draw from nothing, and you cannot draw from the already-dead. And it will not top you up past what you were; it heals a wound, it does not make you more than a man.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Draw Down",
-     "grants": "Take vitality from a living thing you are touching and take it into yourself. Their wound is your mending.",
-     "cannot": "Touch, and only from the living. The dead have nothing left to give and will be insulted by the asking."
-    },
-    {
-     "rank": 2,
-     "name": "The Long Draught",
-     "grants": "Draw at reach, and from more than one — a battlefield is, to a Draw-Down, a table set.",
-     "cannot": "Every person watching you do this will remember it. Some of them will decide something about you."
-    },
-    {
-     "rank": 3,
-     "name": "The Emptied Vessel",
-     "grants": "Draw a thing entirely down. What is left is not dead, exactly. It is finished.",
-     "cannot": "This is the act the Rootkin cite when they say the Ashwardens have lost their way, and it is very hard to argue with them about it."
-    }
-   ],
-   "gated": "learned",
-   "challengeTypes": [
-    "FIGHT"
-   ],
-   "challengeProfile": {
-    "FIGHT": 3
-   },
-   "harmRung": "damaging",
-   "nativeOrCombination": "native"
-  },
-  {
-   "schemaVersion": 1,
-   "id": "the_dread",
-   "name": "The Dread",
-   "levelReq": 2,
-   "energyCost": 4,
-   "powerSystem": "reach_death_life",
-   "tradition": "ashwarden",
-   "attribute": "social",
-   "axes": {
-    "death_life": -0.3,
-    "emotional_logical": -0.3
-   },
-   "functions": [
-    "hinder",
-    "bind",
-    "foresee"
-   ],
-   "narrationHints": "He feels his own ending arrive early — not as a thought, as a temperature.",
-   "description": "You let a living thing feel, for a moment, the ending it is walking toward. It is not an illusion and it is not a lie. It is simply EARLY. Most things run. Some things freeze. A few things come straight at you, and those are the ones to watch.",
-   "notFor": "It shows them their end; it does not CAUSE it. And a thing that has already made peace with dying — an Ashwarden, an old soldier, a Rootkin who has planted their tree — feels nothing at all, and will look at you with something close to pity.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "The Dread",
-     "grants": "One living thing feels its own ending approach. It will act on that, and you do not get to choose how.",
-     "cannot": "The unafraid are unmoved, and there are more of them than you think."
-    },
-    {
-     "rank": 2,
-     "name": "The Cold Room",
-     "grants": "A room, a line, a crowd feels it at once. Formations come apart; conversations stop.",
-     "cannot": "A frightened crowd is a stampede, and a stampede does not check who is in its way. Including you."
-    },
-    {
-     "rank": 3,
-     "name": "The Certain Hour",
-     "grants": "They do not merely feel it — they KNOW it, with the Ashwarden's own clarity, and they cannot un-know it.",
-     "cannot": "Some of them will thank you. Some of them will never be right again. You will not be able to tell in advance which."
-    }
-   ],
-   "gated": "learned",
-   "challengeTypes": [
-    "FIGHT",
-    "SOCIAL"
-   ],
-   "challengeProfile": {
-    "FIGHT": 3,
-    "SOCIAL": 3
-   },
-   "harmRung": "incapacitating",
-   "nativeOrCombination": "native"
-  },
-  {
-   "schemaVersion": 1,
-   "id": "ask_the_dead",
-   "name": "Ask the Dead",
-   "levelReq": 3,
-   "energyCost": 5,
-   "powerSystem": "reach_death_life",
-   "tradition": "ashwarden",
-   "attribute": "mental",
-   "axes": {
-    "death_life": -0.4,
-    "falsehood_truth": 0.3
-   },
-   "functions": [
-    "reveal",
-    "summon"
-   ],
-   "narrationHints": "It answers. It is not glad to. It tells you the small thing it knew and nothing more.",
-   "description": "The recently dead will answer you — poorly, briefly, and only about what they actually knew in life. They are not oracles. They are a person, tired, being asked one more question.",
-   "notFor": "They knew what they knew. A murdered man may not know who killed him. And they will not stay: each question costs them something, and the Ashwardens hold that asking a fourth is a cruelty.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Ask the Dead",
-     "grants": "The recently dead answer one question, truthfully, and badly.",
-     "cannot": "Recently. A week is far. A season is gone."
-    },
-    {
-     "rank": 2,
-     "name": "The Long Question",
-     "grants": "Ask further back, and ask more — three questions, and the answers are clearer.",
-     "cannot": "Each question takes something from what is left of them. You will feel it go."
-    },
-    {
-     "rank": 3,
-     "name": "The Full Account",
-     "grants": "The dead tell you what they knew, entire, and what they wanted, and what they were afraid of.",
-     "cannot": "You will hear things about them that were not yours to know, and you cannot give them back."
-    }
-   ],
-   "gated": "learned",
-   "challengeTypes": [
-    "INVESTIGATE",
-    "SOCIAL"
-   ],
-   "challengeProfile": {
-    "INVESTIGATE": 3,
-    "SOCIAL": 2
-   },
-   "harmRung": "none",
-   "nativeOrCombination": "native"
-  },
-  {
-   "schemaVersion": 1,
-   "id": "the_cut_thread",
-   "name": "The Cut Thread",
-   "levelReq": 5,
-   "energyCost": 14,
-   "powerSystem": "reach_death_life",
-   "tradition": "ashwarden",
-   "attribute": "mental",
-   "axes": {
-    "death_life": -0.9,
-    "violence_peace": -0.3
-   },
-   "functions": [
-    "strike"
-   ],
-   "narrationHints": "There is no wound. There is no sound. The thread was there and then it was cut, and everyone in the room understands exactly what they have just watched.",
-   "description": "The Fates' shears. One life, one cut, done — not a wound, a CESSATION. This is the deepest thing the Ashwardens hold and they teach it to almost nobody, because the argument against it has never been answered and they keep doing it anyway.",
-   "notFor": "One thing, once, and it costs you enormously. It cannot be aimed at what has no thread — a machine, a figure, a Precursor working. And it cannot be taken back. There is no version of this you get to regret quietly: it is done, it is witnessed, and it is yours.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "The Cut Thread",
-     "grants": "End one living thing. No wound, no struggle, no argument. It simply stops.",
-     "cannot": "It costs almost everything you have, it is unmistakable to anyone watching, and it CANNOT BE UNDONE — not by you, not by the Rootkin, not by a braid. This is the one door with no handle on the other side."
-    }
-   ],
-   "gated": "learned",
-   "challengeTypes": [
-    "FIGHT"
-   ],
-   "challengeProfile": {
-    "FIGHT": 5
-   },
-   "harmRung": "lethal",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "the_grey_road",
-   "name": "The Grey Road",
-   "levelReq": 2,
-   "energyCost": 5,
-   "powerSystem": "reach_death_life",
-   "attribute": "mental",
-   "axes": {
-    "death_life": -0.3,
-    "chaos_order": -0.1
-   },
-   "effectTags": [
-    "passage",
-    "move",
-    "open"
-   ],
-   "narrationHints": "Not faster. Through different. The places between that are only open from the death-side — plague grounds, aftermath fields, grief-thick dark. The ashwarden moves through while the living wait for the space to be safe.",
-   "description": "Move through places lethal or forbidden to others. The ashwarden walks where others cannot stay: not by force, but by fitting the space that the dead have already shaped.",
-   "notFor": "Speed — this is about access, not pace; the Grey Road does not outrun anything. The living cannot be pulled through freely.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Through Here",
-     "grants": "Move through places lethal or restricted to others — a plague ward, a collapsed site, a grief-sealed room, a battlefield's aftermath — without the danger touching you. Stand where others cannot stay.",
-     "cannot": "You go alone. The Road does not widen for company without further craft."
-    },
-    {
-     "rank": 2,
-     "name": "The Passage",
-     "grants": "Bring one person through with you. Open sealed doors, tombs, and quarantine gates that the dead have passed before — not by breaking, by fitting. Sense the safe path through a lethal space before you commit.",
-     "cannot": "One only. A ward that has never held a death cannot be opened this way — only thresholds that have been crossed before."
-    },
-    {
-     "rank": 3,
-     "name": "The Long Walk",
-     "grants": "Move through any space where death has been substantial and recent — major battlefields, plague grounds, sealed necropolises, active collapse sites — as if they were open road. Bring a small group. Move through quarantine cordons and siege-lines that are held by mortal hands, not wards.",
-     "cannot": "Substantial and recent. A meadow where someone died a hundred years ago is not a Grey Road. A magically-sealed door with no death behind it is not a Grey Road. The Advance moves in fights; the Grey Road moves through places of death. The two do not substitute for each other."
-    }
-   ],
-   "functions": [
-    "move",
-    "open"
-   ],
-   "challengeTypes": [
-    "EXPLORE",
-    "SURVIVE",
-    "STEALTH"
-   ],
-   "challengeProfile": {
-    "EXPLORE": 3,
-    "SURVIVE": 3,
-    "STEALTH": 2,
-    "CHASE": 1
-   },
-   "tradition": "ashwarden",
-   "harmRung": "none",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "the_kept_breath",
-   "name": "The Kept Breath",
-   "levelReq": 2,
-   "energyCost": 4,
-   "powerSystem": "reach_death_life",
-   "attribute": "mental",
-   "axes": {
-    "death_life": -0.3,
-    "body_mind": -0.2
-   },
-   "effectTags": [
-    "sustain",
-    "endure",
-    "threshold"
-   ],
-   "narrationHints": "Enough. Not well — enough. The ashwarden knows the exact line between alive and not. They hold someone there. The body does what it must; not a thing more.",
-   "description": "Sustain a body through physical hardship: starvation, cold, blood loss, wounds, exhaustion. The ashwarden knows the exact threshold a body needs to keep going — and holds someone there. Not healing, not protection from curses. The body's minimum, maintained by craft.",
-   "notFor": "Metaphysical or unnatural death threats — curses, wraith-touch, necromantic workings (use Death-Ward). The Kept Breath handles the body's physical ledger: rations, warmth, blood, sleep. It holds the threshold; it does not move it.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Minimum",
-     "grants": "Sustain yourself on less than should be enough: half rations, cold, blood loss, a wound that should have slowed you. The body does what it must. The ashwarden knows the exact line and walks it.",
-     "cannot": "This holds the threshold — it does not move it. You remain in the condition you were in, only continuing."
-    },
-    {
-     "rank": 2,
-     "name": "Held Other",
-     "grants": "Hold another person at minimum: keep a companion alive through conditions that would otherwise kill them, or extend a dying person's window long enough for something to matter. Cannot heal them — only hold the line.",
-     "cannot": "One person at a time. The craft requires full attention while the other is held."
-    },
-    {
-     "rank": 3,
-     "name": "Patience of the Palelands",
-     "grants": "Sustain a small group through conditions nothing else could survive. Bring someone back from the absolute threshold and hold them there for days. Become the reason a thing is still alive — not by healing but by holding.",
-     "cannot": "The Kept Breath is not a cure and never becomes one. Everyone held at minimum is still at minimum — functional, not well."
-    }
-   ],
-   "functions": [
-    "sustain"
-   ],
-   "challengeTypes": [
-    "SURVIVE",
-    "EXPLORE"
-   ],
-   "challengeProfile": {
-    "SURVIVE": 4,
-    "EXPLORE": 2,
-    "INVESTIGATE": 1
-   },
-   "tradition": "ashwarden",
-   "harmRung": "none",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "the_green_claim",
-   "name": "The Green Claim",
-   "levelReq": 2,
-   "energyCost": 5,
-   "powerSystem": "reach_death_life",
-   "attribute": "practical",
-   "axes": {
-    "death_life": 0.4,
-    "destruction_creation": 0.3,
-    "chaos_order": -0.1
-   },
-   "effectTags": [
-    "strike",
-    "summon",
-    "reveal",
-    "growth"
-   ],
-   "narrationHints": "The forest reclaims. Vines that grip, roots that erupt, the slow enormous weight of living things that have decided something does not belong here. The Rootkin do not make weapons — they call what already wants to move.",
-   "description": "Call living growth into action: impede, constrict, strike. The living world mobilises against what the Rootkin names as threat — and it also tells them what it has sensed.",
-   "notFor": "Precision — what you summon has a will of its own, slower and less specific than yours. The growth that answers does not check your intent carefully.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "The Answer",
-     "grants": "Call living growth to act: vines that grip, roots that erupt underfoot, branches that bar passage. Strike one threat with the weight of what grows here. The living things that answer also tell you where the intruder has been.",
-     "cannot": "The growth is approximate. It holds and hinders as much as it harms. A determined foe pushes through, slower."
-    },
-    {
-     "rank": 2,
-     "name": "The Living Response",
-     "grants": "The call goes wider: thorns across a passage, roots that trip a line, surging growth across a broader area. What you summon shows you its awareness — the animal that answers has seen what you need to know.",
-     "cannot": "Wide response is slow response. The Rootkin's force is not fast enough for a fight already at blade's edge."
-    },
-    {
-     "rank": 3,
-     "name": "The Reclamation",
-     "grants": "The living world treats something as having been named as threat at scale — the terrain itself becomes hostile to what you've claimed. A region reclaims. What tried to pass does not.",
-     "cannot": "The Rootkin cannot hold this. The reclamation is the living world's act, and it continues until it decides it is done. Call it only when you mean it."
-    }
-   ],
-   "functions": [
-    "strike",
-    "summon",
-    "reveal"
-   ],
-   "challengeTypes": [
-    "FIGHT",
-    "EXPLORE",
-    "SURVIVE"
-   ],
-   "challengeProfile": {
-    "FIGHT": 3,
-    "EXPLORE": 2,
-    "SURVIVE": 2,
-    "INVESTIGATE": 1
-   },
-   "tradition": "rootkin",
-   "harmRung": "incapacitating",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "bark_and_briar",
-   "name": "Bark and Briar",
-   "levelReq": 2,
-   "energyCost": 5,
-   "powerSystem": "reach_death_life",
-   "attribute": "practical",
-   "axes": {
-    "death_life": 0.3,
-    "destruction_creation": 0.2
-   },
-   "effectTags": [
-    "shield",
-    "ward",
-    "resist",
-    "growth"
-   ],
-   "narrationHints": "Bark thickens on the skin. Thorns lean outward. The grove's patience made into armour — slow, enormous, and already there.",
-   "description": "Life as protection: the body hardens with bark-skin, thorns erupt to ward a space, and the deep life-force of the Rootkin crowds out conditions that would take hold in a weaker thing.",
-   "notFor": "Speed — the Rootkin's defence is the forest's pace, not the fighter's reflex.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Bark-Skin",
-     "grants": "Harden your own body: bark-skin that deflects a blow, thorns that make you costly to grapple. Immediate protection for yourself in the moment of contact.",
-     "cannot": "Protects you only, and only for the encounter's length. Slow to invoke — this is before the blow, not after."
-    },
-    {
-     "rank": 2,
-     "name": "Thorn-Ward",
-     "grants": "Ward a space with living growth: a thorn-wall, a living barricade, a grove-perimeter that turns intruders aside. The ward persists after you've moved on. Others can shelter inside it.",
-     "cannot": "A living ward can be broken. Fire is its particular enemy."
-    },
-    {
-     "rank": 3,
-     "name": "The Grove's Resilience",
-     "grants": "Resist effects that would take hold in a lesser life: disease, poison, cold, a working aimed at you — because the life-force present in you is so strong it crowds them out. Extend this to those sheltered within your ward.",
-     "cannot": "Resilience is not immunity. Very strong effects still land; the Rootkin just takes longer to fall."
-    }
-   ],
-   "functions": [
-    "shield",
-    "ward",
-    "resist"
-   ],
-   "challengeTypes": [
-    "FIGHT",
-    "SURVIVE",
-    "EXPLORE"
-   ],
-   "challengeProfile": {
-    "FIGHT": 3,
-    "SURVIVE": 4,
-    "EXPLORE": 2
-   },
-   "tradition": "rootkin",
-   "harmRung": "none",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "the_speaking_grove",
-   "name": "The Speaking Grove",
-   "levelReq": 2,
-   "energyCost": 4,
-   "powerSystem": "reach_death_life",
-   "attribute": "mental",
-   "axes": {
-    "death_life": 0.3,
-    "falsehood_truth": 0.2,
-    "chaos_order": 0.1
-   },
-   "effectTags": [
-    "command",
-    "reveal",
-    "track",
-    "living-world"
-   ],
-   "narrationHints": "The old wood has been listening since before anyone thought to ask it anything. The Rootkin asks. The grove answers, in the slow patient way of things that measure time in seasons.",
-   "description": "Speak to living things — plants, animals, the slow intelligence of old wood — and be heard. The conversation goes both ways: what the living world knows, you know.",
-   "notFor": "Speed — the grove does not answer quickly, and what it says takes a moment to understand. And it will not lie for you; what it tells you is what it has actually sensed.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "A Word to the Green",
-     "grants": "Speak to living things and be heard: a basic request to plants or animals is understood and followed, in their way. Ask and receive — the living world tells you what it has sensed nearby.",
-     "cannot": "Living things understand requests, not plans. Ask them to hold still, to move aside, to come — not to execute a strategy."
-    },
-    {
-     "rank": 2,
-     "name": "The Asking",
-     "grants": "Ask more complex things; command more deliberately. The forest tracks what has moved through it — query that track. An animal guide, a tree that opens its memory of who has passed, a flock that scouts ahead.",
-     "cannot": "What the living world knows is sensory, not analytical. It can tell you a person was here; it cannot tell you what they were planning."
-    },
-    {
-     "rank": 3,
-     "name": "The Grove Speaks",
-     "grants": "Speak to the living world at regional scale. The whole grove turns its attention toward you. What it knows of every thing that has moved through it is yours. What you ask of it — at the pace of trees — is done.",
-     "cannot": "At the pace of trees. Urgency is a concept the grove does not share."
-    }
-   ],
-   "functions": [
-    "command",
-    "reveal",
-    "track"
-   ],
-   "challengeTypes": [
-    "INVESTIGATE",
-    "EXPLORE",
-    "SOCIAL"
-   ],
-   "challengeProfile": {
-    "INVESTIGATE": 4,
-    "EXPLORE": 3,
-    "SOCIAL": 2,
-    "SURVIVE": 1
-   },
-   "tradition": "rootkin",
-   "harmRung": "none",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "the_root_road",
-   "name": "The Root Road",
-   "levelReq": 2,
-   "energyCost": 5,
-   "powerSystem": "reach_death_life",
-   "attribute": "practical",
-   "axes": {
-    "death_life": 0.3,
-    "concrete_abstract": -0.1
-   },
-   "effectTags": [
-    "travel",
-    "open",
-    "reveal",
-    "grove-paths"
-   ],
-   "narrationHints": "The paths between the roots. The ways the living world opens for those who belong to it. Faster, not because the distance is shorter, but because the terrain itself is willing.",
-   "description": "Move through living terrain by moving with it — the paths between the roots, the passages the forest opens for those it recognises. The living world reveals what it knows of where you're going.",
-   "notFor": "Urgency — the Root Road is faster than it looks, not faster than a horse on open ground. It opens ways, it does not teleport.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Between the Roots",
-     "grants": "Move through living terrain faster than it should allow. The paths exist; you know how to find them. The road also shows you: what grows along it, who has used it, what condition the terrain ahead is in.",
-     "cannot": "You must be in terrain with living things. Stone cities, blasted ground — the Road doesn't run there."
-    },
-    {
-     "rank": 2,
-     "name": "The Opened Way",
-     "grants": "Open passages that weren't visible: a thicket parts, a root-arch forms, a way through terrain that looked impassable appears. Bring one other with you. The living world makes a road.",
-     "cannot": "The opened way closes again. It isn't a road until you make it one by using it repeatedly."
-    },
-    {
-     "rank": 3,
-     "name": "The Root Network",
-     "grants": "Travel the root-network itself: move through the living web and emerge where it reaches, which is almost anywhere soil has held life. Bring a small group. The network tells you what it knows of the destination before you arrive.",
-     "cannot": "Emergence takes time and you cannot choose exactly where — you emerge where the network is willing, within the range you name. And dead ground, sealed vaults, stone-over-stone — the roots have not gone there."
-    }
-   ],
-   "functions": [
-    "travel",
-    "open",
-    "reveal"
-   ],
-   "challengeTypes": [
-    "EXPLORE",
-    "SURVIVE",
-    "STEALTH"
-   ],
-   "challengeProfile": {
-    "EXPLORE": 4,
-    "SURVIVE": 3,
-    "STEALTH": 2,
-    "CHASE": 2
-   },
-   "tradition": "rootkin",
-   "harmRung": "none",
-   "nativeOrCombination": "native"
-  }
- ],
- "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
+  ],
+  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)",
+  "rankModel": "SNG-147c: functions and harmRung accrue PER RANK and are additive — each rank either BROADENS (gains a new function verb) or DEEPENS (materially extends one it has), and says which in `gains`. Every rank is meaningful. The ability-level `functions` is the union; the ability-level `harmRung` is the ceiling. The intent gate (SNG-145) reads the rank the character HAS, not the ability's maximum."
 }

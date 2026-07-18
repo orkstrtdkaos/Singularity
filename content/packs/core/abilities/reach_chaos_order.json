@@ -28,25 +28,47 @@
           "rank": 1,
           "name": "The Lucky Break",
           "grants": "Turn a chaotic moment to advantage; improvise a working solution from whatever's to hand; make one plan (yours or theirs) come apart usefully.",
-          "cannot": "You don't choose HOW it breaks, only that it does; luck spent runs thin."
+          "cannot": "You don't choose HOW it breaks, only that it does; luck spent runs thin.",
+          "functions": [
+            "make",
+            "break"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Riding the Churn",
           "grants": "Thrive where others founder in disorder; read the grain of a chaotic situation and ride it; deny an enemy the predictability they rely on.",
-          "cannot": "Cannot impose an outcome, only surf toward a good one; the ordered and prepared can still beat you."
+          "cannot": "Cannot impose an outcome, only surf toward a good one; the ordered and prepared can still beat you.",
+          "functions": [
+            "make",
+            "break",
+            "hinder"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Unspooling",
           "grants": "Unmake order at scale — a fortress's discipline, a system's certainty, a plan a season in the making, come apart; and out of the loosed chaos, seize the one opening that wouldn't have existed in order.",
-          "cannot": "What you unspool you cannot re-order; the wielder drifts chaos-hot; the Grand Lattice marks you as an enemy."
+          "cannot": "What you unspool you cannot re-order; the wielder drifts chaos-hot; the Grand Lattice marks you as an enemy.",
+          "functions": [
+            "make",
+            "break",
+            "hinder",
+            "transform"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "functions": [
-        "transform",
         "break",
-        "make"
+        "hinder",
+        "make",
+        "transform"
       ],
       "challengeTypes": [
         "CHASE",
@@ -81,24 +103,49 @@
           "rank": 1,
           "name": "The Sure Plan",
           "grants": "Build a plan that holds under pressure; predict a system's next move; impose enough order on chaos to act cleanly in it.",
-          "cannot": "Prediction fails on the truly chaotic; a plan is not a guarantee, only good odds."
+          "cannot": "Prediction fails on the truly chaotic; a plan is not a guarantee, only good odds.",
+          "functions": [
+            "make",
+            "foresee"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Binding Frame",
           "grants": "Bind a possibility down — make a thing reliably true, a route reliably safe, an agreement reliably kept; read a system deeply enough to break OR fortify it at the load-bearing point.",
-          "cannot": "Binding is brittle against Wildcraft; over-bound systems can't adapt and shatter when they must."
+          "cannot": "Binding is brittle against Wildcraft; over-bound systems can't adapt and shatter when they must.",
+          "functions": [
+            "make",
+            "foresee",
+            "bind",
+            "break"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Grand Order",
           "grants": "Impose structure at scale — a lawless place made orderly, a chaotic force predicted and countered, a possibility foreclosed by sheer structure. The Lattice's power in miniature.",
-          "cannot": "The wielder drifts order-hot — and order at full strength IS the foreclosure the framework names as the enemy; the Churn and the free places will not forgive it; perfect order is a cage even when it's yours."
+          "cannot": "The wielder drifts order-hot — and order at full strength IS the foreclosure the framework names as the enemy; the Churn and the free places will not forgive it; perfect order is a cage even when it's yours.",
+          "functions": [
+            "make",
+            "foresee",
+            "bind",
+            "break",
+            "command"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "functions": [
         "bind",
+        "break",
         "command",
+        "foresee",
         "make"
       ],
       "challengeTypes": [
@@ -131,19 +178,37 @@
           "rank": 1,
           "name": "Chaos-Sense",
           "grants": "Feel where and roughly when something will break down; find the loose thread.",
-          "cannot": "Feel, not detail; the truly stable reads quiet."
+          "cannot": "Feel, not detail; the truly stable reads quiet.",
+          "functions": [
+            "reveal",
+            "foresee"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Coming Turbulence",
           "grants": "Feel where a situation is about to come apart, and roughly how.",
-          "cannot": "You feel the break coming; you do not get to choose where you are standing when it does."
+          "cannot": "You feel the break coming; you do not get to choose where you are standing when it does.",
+          "functions": [
+            "reveal",
+            "foresee"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Break Before It Breaks",
           "grants": "The failure announces itself to you before it happens — the bridge, the alliance, the plan.",
-          "cannot": "Knowing is not preventing, and the Churnfolk have made peace with that in a way others find infuriating."
+          "cannot": "Knowing is not preventing, and the Churnfolk have made peace with that in a way others find infuriating.",
+          "functions": [
+            "reveal",
+            "foresee"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "powerSystem": "reach_chaos_order",
@@ -176,19 +241,34 @@
           "rank": 1,
           "name": "Order-Sense",
           "grants": "See a system's structure, rules, and load-bearing points at a glance.",
-          "cannot": "Reads structure, not intent; pure chaos returns noise."
+          "cannot": "Reads structure, not intent; pure chaos returns noise.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Pattern Beneath",
           "grants": "Read the structure under a mess — the schedule behind a crowd, the rule behind a ritual.",
-          "cannot": "Some messes have no pattern. Reading one into them is how the Lattice makes its worst mistakes."
+          "cannot": "Some messes have no pattern. Reading one into them is how the Lattice makes its worst mistakes.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Whole Design",
           "grants": "See the entire design a thing is part of — including the parts of it that are not present.",
-          "cannot": "Seeing the design does not give you standing to change it."
+          "cannot": "Seeing the design does not give you standing to change it.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "powerSystem": "reach_chaos_order",
@@ -211,8 +291,8 @@
         "chaos_order": -0.4
       },
       "functions": [
-        "hinder",
         "break",
+        "hinder",
         "move"
       ],
       "narrationHints": "One shove and the neat thing is a mess and you're through the gap.",
@@ -223,19 +303,39 @@
           "rank": 1,
           "name": "Scatter",
           "grants": "Disrupt a formation, jam a device, break a pattern to make an opening.",
-          "cannot": "You don't pick how it scatters; brief."
+          "cannot": "You don't pick how it scatters; brief.",
+          "functions": [
+            "hinder",
+            "break"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Scattering",
           "grants": "Scatter a formation, a plan, a crowd — the thing that was one thing becomes many and cannot re-form quickly.",
-          "cannot": "What you scatter you no longer control. Scattering a mob makes many small problems."
+          "cannot": "What you scatter you no longer control. Scattering a mob makes many small problems.",
+          "functions": [
+            "hinder",
+            "break",
+            "move"
+          ],
+          "gains": "broaden",
+          "harmRung": "incapacitating"
         },
         {
           "rank": 3,
           "name": "Nothing Holds",
           "grants": "Unmake the coherence of a thing entirely — an army, a contract, a certainty — and it does not come back together.",
-          "cannot": "The Churnfolk warn: you will not be able to put it back. Nobody will."
+          "cannot": "The Churnfolk warn: you will not be able to put it back. Nobody will.",
+          "functions": [
+            "hinder",
+            "break",
+            "move"
+          ],
+          "gains": "deepen",
+          "harmRung": "incapacitating"
         }
       ],
       "powerSystem": "reach_chaos_order",
@@ -259,8 +359,9 @@
         "chaos_order": 0.4
       },
       "functions": [
+        "bind",
         "command",
-        "bind"
+        "restore"
       ],
       "narrationHints": "A word, and the chaos falls into rank.",
       "description": "Impose quick order on a small chaotic scene — rally a panic, sort a mess, steady a wobble.",
@@ -270,19 +371,37 @@
           "rank": 1,
           "name": "Set in Order",
           "grants": "Calm a panicking group, quickly organize a chaotic space, steady a failing structure briefly.",
-          "cannot": "Small scale; slips without maintenance."
+          "cannot": "Small scale; slips without maintenance.",
+          "functions": [
+            "command"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Righted Thing",
           "grants": "Set a thing into its proper order and it STAYS — a room, a ledger, a broken argument.",
-          "cannot": "Order imposed is not order accepted. What you right, someone may resent being righted."
+          "cannot": "Order imposed is not order accepted. What you right, someone may resent being righted.",
+          "functions": [
+            "command",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "As It Should Be",
           "grants": "Name a thing's true order and it takes it — the crooked wall stands straight, the failing plan coheres.",
-          "cannot": "The Lattice's great sin is believing it always knows what a thing SHOULD be."
+          "cannot": "The Lattice's great sin is believing it always knows what a thing SHOULD be.",
+          "functions": [
+            "command",
+            "bind",
+            "restore"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "powerSystem": "reach_chaos_order",
@@ -307,8 +426,8 @@
         "space_time": 0.1
       },
       "functions": [
-        "foresee",
-        "empower"
+        "empower",
+        "foresee"
       ],
       "narrationHints": "The dice of the moment lean your way, just once, just enough.",
       "description": "Nudge chance in a chaotic moment — the lucky slip, the fumbled guard, the door that happens to be open.",
@@ -318,19 +437,36 @@
           "rank": 1,
           "name": "Tilt",
           "grants": "Tilt an uncertain moment toward a good break for you.",
-          "cannot": "Only where chance is live; spends fast."
+          "cannot": "Only where chance is live; spends fast.",
+          "functions": [
+            "foresee"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Long Tilt",
           "grants": "Tilt the odds of a whole sequence, not one roll — the run of luck bends your way.",
-          "cannot": "Tilted odds are still odds. The Churn keeps its right to the improbable."
+          "cannot": "Tilted odds are still odds. The Churn keeps its right to the improbable.",
+          "functions": [
+            "foresee",
+            "empower"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Loaded World",
           "grants": "Around you, the unlikely simply happens — the gap opens, the guard turns, the coin lands.",
-          "cannot": "The world balances its books. Whatever you tilt toward you, something tilts away, and you will not see it coming."
+          "cannot": "The world balances its books. Whatever you tilt toward you, something tilts away, and you will not see it coming.",
+          "functions": [
+            "foresee",
+            "empower"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "powerSystem": "reach_chaos_order",
@@ -356,6 +492,7 @@
       },
       "functions": [
         "bind",
+        "resist",
         "shield"
       ],
       "narrationHints": "You become the one thing the chaos organizes around.",
@@ -366,19 +503,37 @@
           "rank": 1,
           "name": "The Fixed Point",
           "grants": "Be the still, reliable point in a chaotic scene; let others rally to you.",
-          "cannot": "You must hold still; strong chaos still batters."
+          "cannot": "You must hold still; strong chaos still batters.",
+          "functions": [
+            "resist"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Anchor",
           "grants": "Be the thing that does not move — a person, a promise, a position — while everything around you does.",
-          "cannot": "Being unmoved is not being unharmed. The Churn breaks around you, and around includes on."
+          "cannot": "Being unmoved is not being unharmed. The Churn breaks around you, and around includes on.",
+          "functions": [
+            "resist",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Point That Does Not Move",
           "grants": "You become the fixed point others navigate by; chaos itself organizes around your refusal to shift.",
-          "cannot": "A fixed point cannot also be a traveler. What you anchor, you are anchored to."
+          "cannot": "A fixed point cannot also be a traveler. What you anchor, you are anchored to.",
+          "functions": [
+            "resist",
+            "bind",
+            "shield"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "powerSystem": "reach_chaos_order",
@@ -504,9 +659,10 @@
       "tradition": "lattice",
       "harmRung": "none",
       "functions": [
-        "restore",
+        "heal",
         "mend",
-        "heal"
+        "restore",
+        "reveal"
       ],
       "challengeTypes": [
         "repair",
@@ -518,19 +674,41 @@
           "rank": 1,
           "name": "Correct Assessment",
           "grants": "Diagnose exactly what's wrong with a broken body, object, or system and apply the precise intervention — no guessing, no waste.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "mend"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Structural Repair",
           "grants": "Restore not just function but the underlying conditions for continued function — the body that heals cleanly, the mechanism that runs without further adjustment.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "mend",
+            "heal",
+            "restore"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Full Restoration",
           "grants": "Return a thing fully to its intended state — a person to health, a plan to viability, a structure to integrity — through methodical, exhaustive work.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "mend",
+            "heal",
+            "restore"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -557,9 +735,10 @@
       "tradition": "lattice",
       "harmRung": "none",
       "functions": [
-        "travel",
         "move",
-        "open"
+        "open",
+        "reveal",
+        "travel"
       ],
       "challengeTypes": [
         "infiltration",
@@ -571,19 +750,41 @@
           "rank": 1,
           "name": "Protocol Path",
           "grants": "Find the lawful, structured way through a guarded or ordered space — the correct credentials, the right corridor, the official route that no one thinks to deny.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "open"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Seam-Walker",
           "grants": "Navigate any sufficiently structured system — a city's hierarchy, a fortress's regulations, a court's protocols — using its own rules to go where you need to go.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "open",
+            "travel",
+            "move"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Inside Line",
           "grants": "Move through a system as if you designed it — through the parts only insiders know, at the speed the structure permits at its best, without a door that won't open for you.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "open",
+            "travel",
+            "move"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -609,8 +810,8 @@
       "tradition": "lattice",
       "harmRung": "none",
       "functions": [
-        "sustain",
-        "bind"
+        "bind",
+        "sustain"
       ],
       "challengeTypes": [
         "logistics",
@@ -622,19 +823,36 @@
           "rank": 1,
           "name": "Kept Running",
           "grants": "Keep an ordered structure — a camp's discipline, a route's safety, an agreement's terms — functioning under the pressure that would normally cause it to drift or collapse.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Against Entropy",
           "grants": "Maintain order in a decaying situation across days — a failing supply line, a fragmenting group, a plan that keeps getting attacked — through constant, precise intervention.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Standing Order",
           "grants": "A structure you maintain simply does not collapse while you attend to it — the siege holds, the treaty stands, the organization functions — for as long as the task requires.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain",
+            "bind"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -660,9 +878,9 @@
       "tradition": "churnfolk",
       "harmRung": "none",
       "functions": [
-        "shield",
+        "move",
         "resist",
-        "move"
+        "shield"
       ],
       "challengeTypes": [
         "combat",
@@ -674,19 +892,38 @@
           "rank": 1,
           "name": "Unpredictable",
           "grants": "Move so erratically that aimed attacks lose you — not blocking, not armoring, just not being where they land.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "move",
+            "resist"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Moving Gap",
           "grants": "Make yourself so hard to anticipate that organized attempts to harm you dissolve — they are always aiming at where you were a moment ago.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "move",
+            "resist"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Chaos Armor",
           "grants": "The disorder around you actively deflects organized harm — not just you moving unpredictably, but the situation itself refusing to cooperate with anyone trying to fix you in place.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "move",
+            "resist",
+            "shield"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -726,19 +963,39 @@
           "rank": 1,
           "name": "The False Signal",
           "grants": "Create a distraction or misdirection convincing enough to buy one clean move — for you, or for a friend.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "deceive",
+            "move"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Wrong Trail",
           "grants": "Plant a false trail so credible that pursuit follows it seriously, or misdirect a group's full attention at exactly the moment it matters.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "deceive",
+            "move",
+            "hinder"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Wrong Threat",
           "grants": "Introduce a misdirection so fundamental — the wrong door, the wrong figure, the wrong danger — that the opposition organizes around something that isn't there and can't recover before it's over.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "deceive",
+            "move",
+            "hinder"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -764,8 +1021,8 @@
       "tradition": "churnfolk",
       "harmRung": "none",
       "functions": [
-        "sustain",
-        "restore"
+        "restore",
+        "sustain"
       ],
       "challengeTypes": [
         "survival",
@@ -777,19 +1034,35 @@
           "rank": 1,
           "name": "Flexible Need",
           "grants": "Sustain yourself in chaotic, resource-scarce conditions — find food, shelter, tools, and rest in circumstances where others have run dry.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Group Scrounging",
           "grants": "Sustain a group in chaotic conditions through constant creative improvisation — never enough of anything, always just enough.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Chaos Supply",
           "grants": "The disorder that strips others bare is your supply line. In total disorder, you and yours have what you need — because you have learned to need what the chaos has.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain",
+            "restore"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"

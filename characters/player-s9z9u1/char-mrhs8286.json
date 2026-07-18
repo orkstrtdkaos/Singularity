@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 13,
-  "xp": 1284,
+  "xp": 1292,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -74,7 +74,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.44724758677937304,
+    "spectrumId": -0.47488520744040436,
     "violence_peace": 0.1030845625,
     "chaos_order": 0.22692151233983043,
     "mechanical_spiritual": 0.23279962203849028,
@@ -89,7 +89,7 @@
   "maxHealth": 90,
   "health": 89,
   "maxEnergy": 160,
-  "energy": 97,
+  "energy": 92,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -746,6 +746,21 @@
       "tags": [
         "community",
         "lead"
+      ],
+      "weight": 2,
+      "spread": [],
+      "day": 5,
+      "worldDay": 18
+    },
+    {
+      "at": "2026-07-18T16:29:39.972Z",
+      "locationId": "millbrook",
+      "communityId": "valley.millbrook",
+      "description": "Organized the valley's water-crisis response into four parallel working threads — engineering, logistics, supply, and accounts — with named leads for each, in front of every stakeholder",
+      "tags": [
+        "community",
+        "leadership",
+        "crisis-response"
       ],
       "weight": 2,
       "spread": [],
@@ -1588,86 +1603,121 @@
         "player": "Open with a welcome to the *Fell Pell* (new name of the blacksmith shop).  Verify why we are all here, then systematically go through the entire story with each person speaking their part.",
         "summary": "Silas opens the gathering at the newly named Fell Pell — every thread laid out, every witness speaking their part, the complete chain now held in one room.",
         "narration": "The first thing you do is name the place.\n\n\"You're welcome to the Fell Pell,\" you say — the name landing quiet in the room, no ceremony, just the words finding the air. Pell, at the cooler bench, doesn't look up from her hands, but the corner of her mouth moves. Huginn on the crossbeam makes no sound. The others file the name away in their different ways: Mara's eyes tick to the forge sign-space above the door as if she's already composing the chalk-lettering; Aldric nods once, the nod of a man who approves of a thing and considers that approval his full contribution; Dara doesn't react at all, which means she's already past naming and into sequencing.\n\nYou let the room settle — coals ticking, the door ajar, the night outside doing what early-spring nights do — and then you lay out the shape of it. Not a speech. A map. Why you're all here: the water is wrong and has been wrong for weeks. The fault chain runs from a pre-Transition valve system in the upper ground through a buried accountability failure at the Edge District to a man named Grael who has been suppressing the evidence with a practiced method he's used at least three times before. The document roll on Mara's person carries the chain in writing: Fendt's testimony, Calvar's authorship, the complete ledger of who marked what and when and whose initials closed the record. One thread at a time, each person who holds a piece speaks their part. Fendt produces the exact dates — the nine-day gap, the seven-band designations, the preliminary concern notice Grael received and filed nowhere. Calvar follows: sleeve-iron, intake geometry, what the drainage cut on the road approach this morning already told him before he said a word to anyone. He speaks in the flat, loaded cadence of a man describing a system he built and then watched fail in a very specific way that tells him it wasn't accident. Dara holds the east-channel frame — timelines, junction points, what she can hold alone and how long, and what she cannot hold at all. Mara has the numbers: four sleeve blanks, four failure dates, a stock ledger that tells a story Grael never thought anyone would read backwards. Aldric names the sealed channel — the same CCW scour, thirty to forty years in the stone, a deliberate lid on something someone knew was running.\n\nBy the time the last piece is placed, the forge has gotten quieter rather than louder. The story has been in fragments for days. In the same room, in the same hour, it has become one thing. The fire holds its low steady heat. Memory rests at the room's edge, one foot clear of the door-path. Huginn has not moved.\n\nThe question the room is sitting with now — unspoken, but present the way the coals are present — is what the truth is *for*. The document roll exists. The chain is complete. The decision about whose hands it reaches, and how fast, and by what path, has not been made yet. That is what tonight is actually here to answer."
+      },
+      {
+        "player": "Hear everyone's ideas for next steps as they can be broken into parallel tasks. Calvary leads the repai crews, Dara lead the logistics for said crews and assists Calvar, Mara runs the logistics of resource inflow and communications along aith Alric.  Pell and I will n3ed to travel to tie up loose end, secure additional resouces.",
+        "summary": "Silas delegates the repair and accountability work into four parallel threads — Calvar leads engineering, Dara logistics, Mara communications and resupply, Aldric the accounts — while Mara names the document roll's destination. Pell and Silas will travel.",
+        "narration": "You let the full chain breathe for a moment after the last thread is spoken — Fendt's dates, Calvar's sleeves, Dara's junctions, Aldric's accounts, Mara's ledger — and then you open the board.\n\n\"Here's how I see it breaking,\" you say. \"Calvar leads the repair crews on the ground — he knows what the sleeves need and what order the work has to happen in. Dara, you're his logistics: sequencing the crews, staging materials, holding the east-channel network until the fixes catch up with you. That's the engineering thread, and it runs without us.\" Calvar's hand settles flat on his knee — the posture of a man who has just been handed a clear scope and is already sorting the first morning's work in his head. Dara's chin dips once, a single operational acknowledgment, hands moving to her coat pocket for the folded notes she came in with. \"Mara, you run resupply and communications — what the crews need comes through you, and what the valley needs to know travels through you. Aldric, you're her anchor on the account side: catch numbers, stock levels, what the downstream settlements are seeing. You already know the shape of the decline; now you're the one watching for the turn.\"\n\nAldric sets both palms on his knees and pushes himself slightly upright — the body-language of a man accepting a posted assignment. Mara pulls the document roll from inside her coat and sets it on the forge block between them all, unhurried, like placing a deed on a table. \"The roll travels to the district records office,\" she says, not asking. \"I know who carries it. I'll arrange it before the week is out.\" Nobody argues. The roll has a destination now; the question that was hanging since you sealed the brass wire has been answered by the woman who keeps the valley's accounts and has never once lost a consignment.\n\n\"Pell and I will travel,\" you say. \"Loose ends to tie, resources the repair work will need that aren't in the valley yet, and one or two conversations that can only happen in person.\" You don't elaborate — the room doesn't need it, and Fendt, at Calvar's shoulder, drops his gaze to his hands in the quiet way of someone who understands that his name is in that sentence without being spoken. Pell straightens off the cooler bench, already thinking forward, her eyes moving to Mara's roll and then to the door as if she's routing the first day's march. Huginn shifts on the crossbeam — one foot, then still again — the only sound in the room for a full breath. The engineering clock is set. The accountability chain has hands on it. What was one tangled problem is now four clean lines of work, each with someone at its head who knows how to hold it."
       }
     ],
     "lastTurn": {
-      "narration": "The first thing you do is name the place.\n\n\"You're welcome to the Fell Pell,\" you say — the name landing quiet in the room, no ceremony, just the words finding the air. Pell, at the cooler bench, doesn't look up from her hands, but the corner of her mouth moves. Huginn on the crossbeam makes no sound. The others file the name away in their different ways: Mara's eyes tick to the forge sign-space above the door as if she's already composing the chalk-lettering; Aldric nods once, the nod of a man who approves of a thing and considers that approval his full contribution; Dara doesn't react at all, which means she's already past naming and into sequencing.\n\nYou let the room settle — coals ticking, the door ajar, the night outside doing what early-spring nights do — and then you lay out the shape of it. Not a speech. A map. Why you're all here: the water is wrong and has been wrong for weeks. The fault chain runs from a pre-Transition valve system in the upper ground through a buried accountability failure at the Edge District to a man named Grael who has been suppressing the evidence with a practiced method he's used at least three times before. The document roll on Mara's person carries the chain in writing: Fendt's testimony, Calvar's authorship, the complete ledger of who marked what and when and whose initials closed the record. One thread at a time, each person who holds a piece speaks their part. Fendt produces the exact dates — the nine-day gap, the seven-band designations, the preliminary concern notice Grael received and filed nowhere. Calvar follows: sleeve-iron, intake geometry, what the drainage cut on the road approach this morning already told him before he said a word to anyone. He speaks in the flat, loaded cadence of a man describing a system he built and then watched fail in a very specific way that tells him it wasn't accident. Dara holds the east-channel frame — timelines, junction points, what she can hold alone and how long, and what she cannot hold at all. Mara has the numbers: four sleeve blanks, four failure dates, a stock ledger that tells a story Grael never thought anyone would read backwards. Aldric names the sealed channel — the same CCW scour, thirty to forty years in the stone, a deliberate lid on something someone knew was running.\n\nBy the time the last piece is placed, the forge has gotten quieter rather than louder. The story has been in fragments for days. In the same room, in the same hour, it has become one thing. The fire holds its low steady heat. Memory rests at the room's edge, one foot clear of the door-path. Huginn has not moved.\n\nThe question the room is sitting with now — unspoken, but present the way the coals are present — is what the truth is *for*. The document roll exists. The chain is complete. The decision about whose hands it reaches, and how fast, and by what path, has not been made yet. That is what tonight is actually here to answer.",
-      "sceneSummary": "Silas opens the gathering at the newly named Fell Pell — every thread laid out, every witness speaking their part, the complete chain now held in one room.",
+      "narration": "You let the full chain breathe for a moment after the last thread is spoken — Fendt's dates, Calvar's sleeves, Dara's junctions, Aldric's accounts, Mara's ledger — and then you open the board.\n\n\"Here's how I see it breaking,\" you say. \"Calvar leads the repair crews on the ground — he knows what the sleeves need and what order the work has to happen in. Dara, you're his logistics: sequencing the crews, staging materials, holding the east-channel network until the fixes catch up with you. That's the engineering thread, and it runs without us.\" Calvar's hand settles flat on his knee — the posture of a man who has just been handed a clear scope and is already sorting the first morning's work in his head. Dara's chin dips once, a single operational acknowledgment, hands moving to her coat pocket for the folded notes she came in with. \"Mara, you run resupply and communications — what the crews need comes through you, and what the valley needs to know travels through you. Aldric, you're her anchor on the account side: catch numbers, stock levels, what the downstream settlements are seeing. You already know the shape of the decline; now you're the one watching for the turn.\"\n\nAldric sets both palms on his knees and pushes himself slightly upright — the body-language of a man accepting a posted assignment. Mara pulls the document roll from inside her coat and sets it on the forge block between them all, unhurried, like placing a deed on a table. \"The roll travels to the district records office,\" she says, not asking. \"I know who carries it. I'll arrange it before the week is out.\" Nobody argues. The roll has a destination now; the question that was hanging since you sealed the brass wire has been answered by the woman who keeps the valley's accounts and has never once lost a consignment.\n\n\"Pell and I will travel,\" you say. \"Loose ends to tie, resources the repair work will need that aren't in the valley yet, and one or two conversations that can only happen in person.\" You don't elaborate — the room doesn't need it, and Fendt, at Calvar's shoulder, drops his gaze to his hands in the quiet way of someone who understands that his name is in that sentence without being spoken. Pell straightens off the cooler bench, already thinking forward, her eyes moving to Mara's roll and then to the door as if she's routing the first day's march. Huginn shifts on the crossbeam — one foot, then still again — the only sound in the room for a full breath. The engineering clock is set. The accountability chain has hands on it. What was one tangled problem is now four clean lines of work, each with someone at its head who knows how to hold it.",
+      "sceneSummary": "Silas delegates the repair and accountability work into four parallel threads — Calvar leads engineering, Dara logistics, Mara communications and resupply, Aldric the accounts — while Mara names the document roll's destination. Pell and Silas will travel.",
       "choices": [
         {
-          "label": "The document roll goes to the valley floor's civic record first — name it publicly before Grael can contain it.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 15,
-          "intentTags": [
-            "lead",
-            "negotiate"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Build Fendt's case formally before moving the paper — get him standing in Millbrook while it travels.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "plan",
-            "sustain"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask Calvar what the water needs first — the engineering problem sets the clock, not the political one.",
+          "label": "Ask Calvar what his first morning on the east channel looks like — get the engineering clock from his own mouth before you leave",
           "attribute": "mental",
           "subAttribute": "reason",
           "difficulty": 0,
           "intentTags": [
+            "plan",
             "study"
           ],
           "trivial": true
         },
         {
-          "label": "Ask Fendt what he wants — it's his name on the board.",
+          "label": "Ask Mara who carries the document roll — learn whose hands she's already chosen before you go",
+          "attribute": "social",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "negotiate"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Speak to Fendt directly — his standing in Millbrook isn't formally established yet, and you're leaving before that's settled",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "comfort",
+            "help",
+            "negotiate"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Name the loose ends to Pell quietly — the two of you need to agree on the shape of the road before the gathering breaks",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
             "negotiate"
           ],
           "trivial": true
         }
       ],
+      "deeds": [
+        {
+          "description": "Organized the valley's water-crisis response into four parallel working threads — engineering, logistics, supply, and accounts — with named leads for each, in front of every stakeholder",
+          "tags": [
+            "community",
+            "leadership",
+            "crisis-response"
+          ],
+          "weight": 2,
+          "communityId": "valley.millbrook"
+        }
+      ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "xp": 0
+      },
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "find-the-engineer",
+          "note": "Calvar assigned to lead repair crews with Dara as logistics lead — the engineering thread is formally delegated and running. Quest functionally resolved on the valley side; the travel thread (Pell and Silas) opens next."
+        },
+        {
+          "op": "progress",
+          "questId": "the-edge-district-ledger",
+          "note": "Mara named the document roll's destination without being asked — the carrier and route are hers to arrange before the week's end. The accountability chain now has a clear path to the district records office."
+        }
+      ],
       "scene": {
-        "setting": "Pell's forge interior — now the Fell Pell — banked coals steady and warm, full dark outside, door left ajar. All five gathering members settled into their places, the full chain just laid out aloud for the first time.",
+        "setting": "Pell's forge interior — now the Fell Pell — banked coals steady and warm, full dark outside, door left ajar. The gathering has just received its delegated shape; every person in the room has a thread in their hands.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "At the cooler bench, hands in her lap, listening — the name-acknowledgment still in the corner of her mouth."
+            "state": "Off the cooler bench, eyes moving to the door — already routing the first day's march in her head."
           },
           {
             "name": "Huginn",
-            "state": "On the crossbeam — has not moved since the gathering filed in."
+            "state": "Shifted one foot on the crossbeam and stilled again — watching."
           },
           {
             "name": "Dara Holt",
-            "state": "Coat buttoned, hands free — already past naming and into sequencing, waiting for the clock to be set."
+            "state": "Folded notes out of her coat pocket, already sorting tomorrow's first task in sequence."
           },
           {
             "name": "Aldric",
-            "state": "On the forge block, apron still on — gave the naming one nod and is now watching the room settle."
+            "state": "Palms on his knees, upright — posted assignment accepted, no words spent."
           },
           {
             "name": "Mara Wells",
-            "state": "Document roll on her person, ledger-eyes quiet — filed the shop name and is holding the question of whose hands the roll reaches."
+            "state": "Document roll placed on the forge block between them all — she has named its destination and is waiting for the next question."
           },
           {
             "name": "Calvar",
-            "state": "One hand clear of his coat, reading the room — the drainage-cut read still unspoken to the group, waiting for the right moment."
+            "state": "Hand flat on his knee, reading the scope — first morning's work already sorting in his head."
           },
           {
             "name": "Fendt",
-            "state": "At Calvar's shoulder — dates delivered, testimony placed, now sitting with the weight of the chain being complete."
+            "state": "At Calvar's shoulder, gaze dropped to his hands — understanding his name is in the travel thread without being spoken."
           }
         ],
         "objects": [
@@ -1677,84 +1727,103 @@
           "Trade-Knives (pair) — in inventory",
           "Forge fire — lit and steady at banked coals",
           "Forge block and stools — occupied",
-          "Cooler bench — Pell seated",
-          "Document roll — on Mara's person"
+          "Cooler bench — now vacated by Pell",
+          "Document roll — placed on the forge block by Mara, destination named"
         ],
         "threads": [
-          "What the truth is for — the document roll's destination undecided",
-          "Calvar's unspoken read of the drainage cut not yet shared with the full group",
-          "Fendt's standing in Millbrook not yet formally established",
-          "The engineering clock — how long before valve failure makes the political question moot"
+          "Mara has named the document roll's carrier and route — but not aloud to the full group; the specific name is hers",
+          "Fendt's standing in Millbrook not yet formally established — he's present but unclaimed",
+          "Calvar's unspoken read of the drainage cut still not shared with the full group",
+          "The shape of the road ahead — what exactly the 'loose ends' are that Pell and Silas must travel for"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "aldric",
-          "name": "Aldric",
-          "note": "Received the shop's new name with a single nod — approval filed, no words spent. Spoke his piece on the sealed channel: same CCW scour, same deliberate lid.",
-          "statusNote": "At the Fell Pell forge for the evening gathering — his part of the chain spoken."
-        },
-        {
-          "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "note": "Received the name 'Fell Pell' with the corner of her mouth — the shop now carries both their names. Listening from the cooler bench.",
-          "statusNote": "At the forge — the naming acknowledged, the gathering in session."
-        },
-        {
-          "op": "update",
-          "npcId": "mara-wells",
-          "name": "Mara Wells",
-          "note": "Filed the shop name, catalogued the room, holding the document roll — the question of whose hands it reaches is hers to help answer.",
-          "statusNote": "At the Fell Pell for the evening gathering — document roll on her person."
+          "npcId": "calvar",
+          "name": "Calvar",
+          "note": "Assigned lead of the east-channel repair crews — accepted with a hand flat on his knee and no ceremony. First morning's scope already sorting.",
+          "learned": [
+            "Formally tasked as repair crew lead on the east-channel valve work — Dara Holt is his logistics anchor"
+          ],
+          "skillsObserved": [
+            "accepting a clear scope and moving immediately to planning"
+          ],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "In the Fell Pell — assigned repair lead, already thinking forward to first-morning work on the east channel."
         },
         {
           "op": "update",
           "npcId": "dara-holt",
           "name": "Dara Holt",
-          "note": "Spoke the east-channel frame — timelines, junctions, what she can hold and what she cannot. Waiting for the clock to be formally set.",
-          "statusNote": "At the Fell Pell for the evening gathering — operational, waiting for sequencing."
+          "note": "Assigned logistics anchor to Calvar's repair crews — accepted with a single operational dip of the chin, notes already out.",
+          "learned": [
+            "Formally tasked as logistics lead for the repair crews under Calvar — holds the east-channel network until the fixes arrive"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "In the Fell Pell — logistics lead for repair crews, notes out, sequencing tomorrow's first task."
         },
         {
           "op": "update",
-          "npcId": "calvar",
-          "name": "Calvar",
-          "note": "Spoke sleeve-iron, intake geometry, the drainage-cut read — the complete engineering picture placed. His unspoken read of the road approach not yet shared with the full group.",
-          "statusNote": "At the Fell Pell for the evening gathering — his part of the chain spoken, drainage-cut observation still held."
+          "npcId": "aldric",
+          "name": "Aldric",
+          "note": "Assigned account anchor for Mara's supply-and-communications thread — accepted with palms on knees and an upright shift.",
+          "learned": [
+            "Formally tasked as Mara Wells's downstream account anchor — catch numbers, stock levels, settlement reports"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "In the Fell Pell — account anchor for Mara's thread, posted and ready."
+        },
+        {
+          "op": "update",
+          "npcId": "mara-wells",
+          "name": "Mara Wells",
+          "note": "Placed the document roll on the forge block and named its destination without being asked — she knows the carrier already.",
+          "learned": [
+            "Formally tasked with resupply, communications, and document-roll delivery — named the carrier and route before the question was asked"
+          ],
+          "skillsObserved": [
+            "naming a destination and a carrier without prompting — operational decision made quietly"
+          ],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "In the Fell Pell — document roll placed on the forge block, its carrier named privately. Running resupply and communications."
+        },
+        {
+          "op": "update",
+          "npcId": "pell",
+          "name": "Pell",
+          "note": "Off the cooler bench the moment the road was named — already routing the first day's march.",
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "In the Fell Pell — travel thread confirmed, thinking forward to the road."
         },
         {
           "op": "update",
           "npcId": "fendt",
           "name": "Fendt",
-          "note": "Delivered the exact dates — nine-day gap, seven-band designations, Grael named. The chain is complete and the weight of it being finished is settling on him.",
-          "statusNote": "At the Fell Pell for the evening gathering — testimony delivered, waiting on what the truth is for."
+          "note": "Understood his name is in the travel thread without being spoken — gaze dropped, recalibrating.",
+          "learned": [
+            "Silas and Pell's travel thread includes his situation — not named aloud, but understood by all present"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "In the Fell Pell — situation implicitly acknowledged in the travel thread; his Millbrook standing not yet formally established."
         }
       ],
-      "placeUpdates": [
+      "factUpdates": [
         {
-          "note": "The forge has been renamed the Fell Pell on World-day 18 evening — named aloud by Silas Weir at the opening of the gathering, received by Pell and the assembled group.",
-          "flag": {
-            "shop_name": "Fell Pell",
-            "renamed_day": "18"
-          },
-          "subPlace": {
-            "name": "Fell Pell (formerly Pell's Forge)",
-            "note": "Renamed at the opening of the evening gathering — both names now carried in the ironwork of the place.",
-            "visited": true
-          }
-        }
-      ],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "the-edge-district-ledger",
-          "note": "The full chain laid out at the Fell Pell — every witness speaking their part, the document roll complete and present. The gathering now sits with the central question: what is the truth for?"
+          "op": "add",
+          "text": "The valley's water-crisis response is formally delegated: Calvar leads repair crews, Dara runs crew logistics, Mara runs resupply and communications, Aldric anchors the accounts. Pell and Silas travel for loose ends and additional resources. Established at the Fell Pell gathering, World-day 18 evening.",
+          "subjectId": "millbrook"
         },
         {
-          "op": "progress",
-          "questId": "find-the-engineer",
-          "note": "Calvar present and his testimony delivered to the full group — the engineering picture is now in the room alongside the accountability chain. Quest effectively resolved pending the group's decision on next steps."
+          "op": "add",
+          "text": "Mara Wells has named the document roll's carrier and route to the district records office — delivery arranged before week's end. The accountability chain now has a clear path forward.",
+          "subjectId": "mara-wells"
         }
       ],
       "codexUpdates": [
@@ -1762,77 +1831,76 @@
           "topic": "the-edge-district-ledger",
           "label": "The Edge District Ledger",
           "kind": "event",
-          "fact": "The complete chain laid out at the Fell Pell on World-day 18 evening — every witness present, every thread spoken. The document roll is intact. The question now is what the truth is for.",
+          "fact": "Mara Wells named the document roll's destination and carrier at the Fell Pell gathering on World-day 18 evening — delivery to the district records office arranged before week's end. The accountability chain has a clear path.",
           "links": [
-            "find-the-engineer",
+            "mara-wells",
             "millbrook",
+            "find-the-engineer",
             "calvar",
             "fendt",
-            "dara-holt",
-            "mara-wells",
-            "aldric",
             "the-water-crisis"
           ]
         },
         {
-          "topic": "fell-pell",
-          "label": "The Fell Pell",
-          "kind": "place",
-          "entityId": "millbrook",
-          "fact": "Pell's forge renamed the Fell Pell on World-day 18 evening — named aloud by Silas Weir at the opening of the gathering, received without ceremony by Pell and the assembled group.",
+          "topic": "find-the-engineer",
+          "label": "Find the Engineer",
+          "kind": "event",
+          "fact": "Valley response formally delegated at the Fell Pell on World-day 18 evening: Calvar leads east-channel repair crews, Dara Holt runs logistics, Mara runs resupply and communications, Aldric anchors downstream accounts. Engineering thread running without Silas and Pell.",
           "links": [
-            "pell",
+            "calvar",
+            "dara-holt",
+            "mara-wells",
+            "aldric",
             "millbrook",
-            "find-the-engineer"
+            "the-water-crisis"
           ]
         }
       ],
-      "factUpdates": [
+      "placeUpdates": [
         {
-          "op": "add",
-          "text": "Pell's forge renamed the Fell Pell on World-day 18 evening — named aloud by Silas Weir at the gathering's opening, received by Pell and the assembled group without ceremony.",
-          "subjectId": "pell"
-        },
-        {
-          "op": "add",
-          "text": "The complete accountability chain laid out in full at the Fell Pell on World-day 18 evening — every witness present, every thread spoken, document roll intact. The question of what the truth is for remains to be decided."
+          "note": "The Fell Pell gathering on World-day 18 evening produced a formally delegated crisis-response structure — Calvar (repair lead), Dara (logistics), Mara (supply/comms/document delivery), Aldric (accounts). Pell and Silas departing to travel. Document roll placed on the forge block; its carrier named by Mara.",
+          "subPlace": {
+            "name": "Pell's Forge — Interior",
+            "note": "The Fell Pell gathering produced a full delegation of the water-crisis response on World-day 18 evening. Document roll destination named; engineering and accountability threads formally handed off.",
+            "visited": true
+          }
         }
       ],
       "timeOps": {
         "hoursPassed": 0.5,
-        "why": "The gathering convened and the full chain laid out — perhaps half an hour of deliberate accounting."
+        "why": "The gathering's delegation round — a focused half-hour of coordination, every person receiving their thread."
       }
     },
     "sceneState": {
-      "setting": "Pell's forge interior — now the Fell Pell — banked coals steady and warm, full dark outside, door left ajar. All five gathering members settled into their places, the full chain just laid out aloud for the first time.",
+      "setting": "Pell's forge interior — now the Fell Pell — banked coals steady and warm, full dark outside, door left ajar. The gathering has just received its delegated shape; every person in the room has a thread in their hands.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "At the cooler bench, hands in her lap, listening — the name-acknowledgment still in the corner of her mouth."
+          "state": "Off the cooler bench, eyes moving to the door — already routing the first day's march in her head."
         },
         {
           "name": "Huginn",
-          "state": "On the crossbeam — has not moved since the gathering filed in."
+          "state": "Shifted one foot on the crossbeam and stilled again — watching."
         },
         {
           "name": "Dara Holt",
-          "state": "Coat buttoned, hands free — already past naming and into sequencing, waiting for the clock to be set."
+          "state": "Folded notes out of her coat pocket, already sorting tomorrow's first task in sequence."
         },
         {
           "name": "Aldric",
-          "state": "On the forge block, apron still on — gave the naming one nod and is now watching the room settle."
+          "state": "Palms on his knees, upright — posted assignment accepted, no words spent."
         },
         {
           "name": "Mara Wells",
-          "state": "Document roll on her person, ledger-eyes quiet — filed the shop name and is holding the question of whose hands the roll"
+          "state": "Document roll placed on the forge block between them all — she has named its destination and is waiting for the next que"
         },
         {
           "name": "Calvar",
-          "state": "One hand clear of his coat, reading the room — the drainage-cut read still unspoken to the group, waiting for the right "
+          "state": "Hand flat on his knee, reading the scope — first morning's work already sorting in his head."
         },
         {
           "name": "Fendt",
-          "state": "At Calvar's shoulder — dates delivered, testimony placed, now sitting with the weight of the chain being complete."
+          "state": "At Calvar's shoulder, gaze dropped to his hands — understanding his name is in the travel thread without being spoken."
         }
       ],
       "objects": [
@@ -1842,14 +1910,14 @@
         "Trade-Knives (pair) — in inventory",
         "Forge fire — lit and steady at banked coals",
         "Forge block and stools — occupied",
-        "Cooler bench — Pell seated",
-        "Document roll — on Mara's person"
+        "Cooler bench — now vacated by Pell",
+        "Document roll — placed on the forge block by Mara, destination named"
       ],
       "threads": [
-        "What the truth is for — the document roll's destination undecided",
-        "Calvar's unspoken read of the drainage cut not yet shared with the full group",
-        "Fendt's standing in Millbrook not yet formally established",
-        "The engineering clock — how long before valve failure makes the political question moot"
+        "Mara has named the document roll's carrier and route — but not aloud to the full group; the specific name is hers",
+        "Fendt's standing in Millbrook not yet formally established — he's present but unclaimed",
+        "Calvar's unspoken read of the drainage cut still not shared with the full group",
+        "The shape of the road ahead — what exactly the 'loose ends' are that Pell and Silas must travel for"
       ]
     }
   },
@@ -1899,14 +1967,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Calvar confirms a rear service passage through the cooperage to the cut-lane — the watcher's eye-line doesn't cover it. The escape route exists; sequencing it is the next step.",
         "Calvar and the rolled document are through to the cut-lane — the watcher is fixed on a dead casement. One relay figure blocks the final gate. The window is real but not yet closed.",
         "Calvar is through the cut-lane gate with the rolled document — the relay figure neutralized without alarm. The Low Lamp Inn is the next destination.",
         "Calvar is safe at the Low Lamp Inn with the document — the extraction is complete. Remaining work before Millbrook: establish Grael's chain of authority and confirm the intake log as evidence.",
         "Calvar briefed on Millbrook — the valley layout, the key people, the stakes. He absorbed it without ceremony and asked one practical question about the intake sleeves. The road south is underway.",
         "Party cleared the limestone bend without casualties — Calvar and the document roll are intact. Road south to Millbrook is open.",
         "Calvar is in Millbrook, document roll delivered to Mara's counter. Evening gathering called at the forge — Dara, Aldric, Fendt, Calvar, and Mara. The chain is now local and moving.",
-        "Calvar present and his testimony delivered to the full group — the engineering picture is now in the room alongside the accountability chain. Quest effectively resolved pending the group's decision on next steps."
+        "Calvar present and his testimony delivered to the full group — the engineering picture is now in the room alongside the accountability chain. Quest effectively resolved pending the group's decision on next steps.",
+        "Calvar assigned to lead repair crews with Dara as logistics lead — the engineering thread is formally delegated and running. Quest functionally resolved on the valley side; the travel thread (Pell and Silas) opens next."
       ],
       "aliases": [],
       "startedAt": "2026-07-16T19:11:11.950Z"
@@ -2155,14 +2223,14 @@
         "s3"
       ],
       "progress": [
-        "Calvar named the annex retrieval honestly: the filing should be there, but access requires entering the lower Plateau district — inside the hierarchy's house. Grael's watch-net may extend there.",
         "Calvar names Grael as the sole marking authority — acting alone through a keeper's silence. The chain is complete: Grael → keeper (no log filed) → board mark the next morning. Remaining: keeper's name for the intake log; Grael's deeper motive; departure to Millbrook.",
         "Rendic Vael identified as Grael's runner from the optics array intake log — the keeper's silence now has a name. The full chain is confirmed: Grael → Rendic Vael (no log filed) → board mark the next morning. Remaining: departure to Millbrook with Calvar and the document.",
         "Codex: Grael is entered as an entity, linked to Fendt. He becomes aware that someone is looking.",
         "Codex: the pattern is named. Grael moves from 'an official' to 'a regional power'. He begins to act against you.",
         "The chain is fully documented — Grael's authority, Vael's role, the keeper's silence, and the pattern of prior marks written in Silas's hand alongside Fendt's testimony. The document roll is sealed. Remaining: present it to the appropriate authority, and decide what the truth is for.",
         "Document roll on Mara's counter, gathering called for tonight. The moment of decision — what the truth is for — arrives at the forge this evening.",
-        "The full chain laid out at the Fell Pell — every witness speaking their part, the document roll complete and present. The gathering now sits with the central question: what is the truth for?"
+        "The full chain laid out at the Fell Pell — every witness speaking their part, the document roll complete and present. The gathering now sits with the central question: what is the truth for?",
+        "Mara named the document roll's destination without being asked — the carrier and route are hers to arrange before the week's end. The accountability chain now has a clear path to the district records office."
       ],
       "aliases": [],
       "startedAt": "2026-07-16T21:27:42.515Z",
@@ -2230,7 +2298,6 @@
       },
       "relationship": 6,
       "history": [
-        "[d2] Set the knife down when Silas named Mara — done circling, watching the two threads converge.",
         "[d2] Knife back in hand at the perch row — reading the room without inserting himself, giving the conversation to its rightful owners.",
         "[d2] Set the knife down flat and named the core problem plainly: someone has to give the engineer a reason bigger than his comfortable arrangements. Summarizing, not inserting.",
         "[d2] His tell confirmed — he already knew what Sorel was about to say. Has been holding this piece since before Silas arrived.",
@@ -2239,17 +2306,18 @@
         "[d2] Received farewell and clear tasking — watch the downstream catch numbers, report changes to Dara. Nod given, no hand. Said 'come back with someone who knows what they're looking at",
         "[d5] Called to the forge tonight with the specific note that Calvar is here and has already seen the iron sleeves.",
         "[d5] Arrived at the forge — apron still on, fillet knife gone, settled onto the forge block.",
-        "[d5] Received the shop's new name with a single nod — approval filed, no words spent. Spoke his piece on the sealed channel: same CCW scour, same deliberate lid."
+        "[d5] Received the shop's new name with a single nod — approval filed, no words spent. Spoke his piece on the sealed channel: same CCW scour, same deliberate lid.",
+        "[d5] Assigned account anchor for Mara's supply-and-communications thread — accepted with palms on knees and an upright shift."
       ],
       "knownFacts": [
-        "Dara Holt knows and is staging mitigation; Mara holds a second copy of the timeline",
         "Silas and Pell are leaving the valley to find a pre-Transition structural expert",
         "Keeps cured bladder waterskins in back storage as Mara indicated — practical trail goods, available on request",
         "In conversation with Sorel this morning — news withheld on both ends",
         "The sealed original east-channel bed — pre-dating Aldric's father's time here — has the same CCW scour on interior stone housing lips as the active valve failur",
         "Recognized the engineer's work (or method) in the sealed channel before Silas described the torque signature",
         "The sealed channel stone stain is 30-40 years old minimum — colored all the way through",
-        "The channel seal was a deliberate lid, part of the original design — not a repair"
+        "The channel seal was a deliberate lid, part of the original design — not a repair",
+        "Formally tasked as Mara Wells's downstream account anchor — catch numbers, stock levels, settlement reports"
       ],
       "skillsObserved": [
         "reading animal behavior changes against the water situation",
@@ -2260,7 +2328,7 @@
         "reading structural intent from material evidence"
       ],
       "status": "active",
-      "statusNote": "At the Fell Pell forge for the evening gathering — his part of the chain spoken.",
+      "statusNote": "In the Fell Pell — account anchor for Mara's thread, posted and ready.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
@@ -2279,7 +2347,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d5] Your bond deepens — partner.",
         "[d5] Received the middle-name question in the quiet after the declaration — not guessing yet, asking what kind of name to listen for before she commits.",
         "[d5] Received the theory of Quiet's ending without alarm — named the three new things (resurrection, spear-binding, soul-mark exchange) as the investigative frame. Operational, not frig",
         "[d5] Received 'it's not a sickness' and the one-line read — Quiet was built for a single point, Silas is no longer one. Waiting for the full shape.",
@@ -2288,7 +2355,8 @@
         "[d5] Tested 'Fell' aloud — full name, Silas Fell Weir — and named it kept, not worn. Hand flat at his neck now, past the reading, simply present.",
         "[d5] Heard 'Fell' said back in Silas's own voice — received it as the sealing. Said the full name once to fix it, brought her forehead to his. The name is now a settled fact between the",
         "[d5] Received the sealing kiss — steady, present, answered it in kind. Named it 'right' and went straight to work. Cleared the forge for the gathering without ceremony.",
-        "[d5] Received the name 'Fell Pell' with the corner of her mouth — the shop now carries both their names. Listening from the cooler bench."
+        "[d5] Received the name 'Fell Pell' with the corner of her mouth — the shop now carries both their names. Listening from the cooler bench.",
+        "[d5] Off the cooler bench the moment the road was named — already routing the first day's march."
       ],
       "knownFacts": [
         "Huginn named Quiet as ending in Silas",
@@ -2309,7 +2377,7 @@
         "reading a person's deep grain through a shared rune-thread —"
       ],
       "status": "active",
-      "statusNote": "At the forge — the naming acknowledged, the gathering in session.",
+      "statusNote": "In the Fell Pell — travel thread confirmed, thinking forward to the road.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
@@ -2330,9 +2398,8 @@
         "locationId": "millbrook",
         "day": 1
       },
-      "relationship": 7,
+      "relationship": 8,
       "history": [
-        "[d2] Named two old pass circuit contacts with Edge District knowledge — Sorel (spice-broker, wintered there two years) and Leth (archivist type, likely still resident). Took the Valve F",
         "[d2] Equipped Silas with three expedition essentials without prompting the list — tallow, oilcloth, pine-tar salve. Priced at eight cord-weight or Aldric offset. Suggested Aldric for a ",
         "[d2] Settled the Aldric offset without ceremony — handed Silas a torn note strip with her initials and the adjusted figure. Advised briefing Aldric directly on the east furlong situatio",
         "[d2] Sent a child runner to catch Silas before the north gate with a cloth-wrapped message — urgent enough to act on after their dawn parting.",
@@ -2341,28 +2408,29 @@
         "[d5] Confirmed iron sleeves without hesitation and watched Calvar's face when she said it — reading his reaction as diagnostic data. Received the document roll's placement on her counte",
         "[d5] Left with Calvar to settle him — called to the forge tonight after she's done.",
         "[d5] Arrived with a folded page in her breast pocket — ledger-eyes reading the room. Document roll on her person.",
-        "[d5] Filed the shop name, catalogued the room, holding the document roll — the question of whose hands it reaches is hers to help answer."
+        "[d5] Filed the shop name, catalogued the room, holding the document roll — the question of whose hands it reaches is hers to help answer.",
+        "[d5] Placed the document roll on the forge block and named its destination without being asked — she knows the carrier already."
       ],
       "knownFacts": [
-        "Aldric sometimes has cured winter-butchering bladder that works as a waterskin",
         "Aldric has been watching the catch numbers and not saying anything out loud — he'll want to connect the pieces when told about the east furlong",
         "Holds pre-Transition purification tabs — possibly one of the last stocks in the valley",
         "Acts proactively on expedition logistics even after a party has departed",
         "Silas returned with someone who matches the 'knows what they're looking at' criterion — she recognized it immediately",
         "Calvar asks about intake sleeve material as a first diagnostic — iron matters to his read",
         "Calvar defers authority explicitly — he is a witness, not a claimant",
-        "The document roll is now on her counter; the question of its destination is hers to answer"
+        "The document roll is now on her counter; the question of its destination is hers to answer",
+        "Formally tasked with resupply, communications, and document-roll delivery — named the carrier and route before the question was asked"
       ],
       "skillsObserved": [
-        "filing civic information without naming a price",
         "rapid trail-kit assembly from known inventory",
         "proactive trail advice without being asked",
         "proactive expedition resupply from personal stock without pr",
         "reading a technical expert's reaction as diagnostic data",
-        "holding a significant object's authority question without ru"
+        "holding a significant object's authority question without ru",
+        "naming a destination and a carrier without prompting — opera"
       ],
       "status": "active",
-      "statusNote": "At the Fell Pell for the evening gathering — document roll on her person.",
+      "statusNote": "In the Fell Pell — document roll placed on the forge block, its carrier named privately. Running resupply and communications.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
@@ -2432,7 +2500,6 @@
       },
       "relationship": 5,
       "history": [
-        "[d2] Order-Sense reveals Dara's pipe-section stack is a pre-staged repair schedule — she has been counting runs and sizing sections for specific valve seats in silence. She asked how lo",
         "[d2] Received the six-week window and surge scope plainly — folded the timeline note into her apron and confirmed the figure to herself as a working number. Her gaze returned to the pip",
         "[d2] Accepted the division of labor — she leads mitigation from this end while Silas and Pell seek a pre-Transition expert. Asked directly who they're going to find. Set a fifth-week de",
         "[d2] Filed 'beyond the valley' as acceptable — set a hard pre-week-five deadline and instructed Silas to brief Mara and Aldric before the village is fully up.",
@@ -2441,17 +2508,18 @@
         "[d2] Received a proper farewell — tipped her mug, named her one requirement (someone who can get their hands dirty), and closed her door. Already moving to first task.",
         "[d5] Called to the forge tonight with the note that the expert arrived this morning and read the drainage cut before speaking.",
         "[d5] Arrived at the forge — first through the door, coat buttoned, hands free. Operational mode from the first step inside.",
-        "[d5] Spoke the east-channel frame — timelines, junctions, what she can hold and what she cannot. Waiting for the clock to be formally set."
+        "[d5] Spoke the east-channel frame — timelines, junctions, what she can hold and what she cannot. Waiting for the clock to be formally set.",
+        "[d5] Assigned logistics anchor to Calvar's repair crews — accepted with a single operational dip of the chin, notes already out."
       ],
       "knownFacts": [
-        "Silas and Pell will seek a pre-Transition expert and bring them to Millbrook",
         "She is to brief Mara and Aldric or receive them once Silas does",
         "The east-bend junctions are her first mitigation target",
         "The pre-Transition expert search may require leaving the valley entirely",
         "She needs the expert back before week five to have anything to work with",
         "Mara will have already counted the sleeve blanks — tell her what it means",
         "Aldric already suspects the water — confirm it and he'll connect it to his accounts",
-        "Silas and Pell depart after briefing Mara and Aldric; Dara holds the east-channel network alone until the expert arrives"
+        "Silas and Pell depart after briefing Mara and Aldric; Dara holds the east-channel network alone until the expert arrives",
+        "Formally tasked as logistics lead for the repair crews under Calvar — holds the east-channel network until the fixes arrive"
       ],
       "skillsObserved": [
         "rapid operational response — immediately asking timeline rat",
@@ -2462,7 +2530,7 @@
         "tactical advice under time pressure — sequencing the morning"
       ],
       "status": "active",
-      "statusNote": "At the Fell Pell for the evening gathering — operational, waiting for sequencing.",
+      "statusNote": "In the Fell Pell — logistics lead for repair crews, notes out, sequencing tomorrow's first task.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
@@ -2651,7 +2719,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d5] Right hand found the document roll inside his coat the moment the figures appeared — document is his priority, clear without words.",
         "[d5] Backed to the outcrop the moment the fight split — right hand on the document roll, still and watching. Exactly where he should be.",
         "[d5] Held his position at the outcrop throughout — right hand on the document, watching, saying nothing. Correct.",
         "[d5] Watched the hatchet change hands without expression — right hand finally left his coat. The document is safe.",
@@ -2660,28 +2727,29 @@
         "[d5] Entering Mara's store — she came around the counter for him, hand extended. First real introduction in Millbrook.",
         "[d5] Set the document roll on Mara's counter unprompted — named himself witness, not authority, and deferred to her judgment on whose hands it belongs in. Asked about intake sleeve mate",
         "[d5] Arrived last — one hand fully clear of his coat, reading the forge as a system. Quiet. Measuring.",
-        "[d5] Spoke sleeve-iron, intake geometry, the drainage-cut read — the complete engineering picture placed. His unspoken read of the road approach not yet shared with the full group."
+        "[d5] Spoke sleeve-iron, intake geometry, the drainage-cut read — the complete engineering picture placed. His unspoken read of the road approach not yet shared with the full group.",
+        "[d5] Assigned lead of the east-channel repair crews — accepted with a hand flat on his knee and no ceremony. First morning's scope already sorting."
       ],
       "knownFacts": [
-        "The valley knows the water is wrong and has been pretending otherwise",
         "Pell's father was exacting in his teaching — Calvar holds this as the whole of the man he knew",
         "Millbrook's visual layout — water wheels, lane structure, smokehouse, well positions — observed on arrival",
         "Noticed something at a road drainage cut on approach; did not name it aloud",
         "Mara Wells is the right first contact — she already knows something is wrong and is ready to hear it confirmed",
         "Millbrook's intake sleeves are iron — filed as a load-bearing engineering fact",
         "Mara Wells is a competent operational contact — her ledger-keeping confirmed it",
-        "The document roll's authority question is deferred to Mara's local knowledge"
+        "The document roll's authority question is deferred to Mara's local knowledge",
+        "Formally tasked as repair crew lead on the east-channel valve work — Dara Holt is his logistics anchor"
       ],
       "skillsObserved": [
-        "precise procedural exposition under calm — named the gap, th",
         "naming the complete accountability chain without editorializ",
         "precise disclosure of held knowledge when given the right ha",
         "filing operational intelligence in sequence without editoria",
         "self-positioning of authority — named himself witness, not a",
-        "precise diagnostic questioning under a first meeting"
+        "precise diagnostic questioning under a first meeting",
+        "accepting a clear scope and moving immediately to planning"
       ],
       "status": "active",
-      "statusNote": "At the Fell Pell for the evening gathering — his part of the chain spoken, drainage-cut observation still held.",
+      "statusNote": "In the Fell Pell — assigned repair lead, already thinking forward to first-morning work on the east channel.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
@@ -2866,7 +2934,6 @@
     "millbrook": {
       "visits": 3,
       "notes": [
-        "[d2] The Attended End read on World-day 16: intake sleeve has 3–4 weeks before running open. The structure behind it is not ending — it has more work to do.",
         "[d2] Valve Failure Timeline note annotated with 'S-gate confirmed' at Fen's intake — the three-gate sequence is now fully mapped in writing.",
         "[d2] Silas and Pell crossed the pass on World-day 16 mid-morning — the valley is now behind them. The far side descends into pine run, damp from snowmelt.",
         "[d2] The overhang camp on the far side of the pass holds this night — Pell unguarded, the last of the coals burning low, Huginn attending from the stone lip.",
@@ -2877,7 +2944,8 @@
         "[d5] Calvar — pre-Transition filtration engineer — arrived in Millbrook on World-day 18 morning with the sealed document roll. First contact point and his read of the east channel are the immediate next st",
         "[d5] Calvar brought to Mara Wells's store on World-day 18 mid-morning — first contact with Millbrook's supply network made.",
         "[d5] Forge relit on World-day 18 afternoon — Pell set the fire and arranged seating for an evening meeting. The forge is warm again after standing cold since departure.",
-        "[d5] The forge has been renamed the Fell Pell on World-day 18 evening — named aloud by Silas Weir at the opening of the gathering, received by Pell and the assembled group."
+        "[d5] The forge has been renamed the Fell Pell on World-day 18 evening — named aloud by Silas Weir at the opening of the gathering, received by Pell and the assembled group.",
+        "[d5] The Fell Pell gathering on World-day 18 evening produced a formally delegated crisis-response structure — Calvar (repair lead), Dara (logistics), Mara (supply/comms/document delivery), Aldric (account"
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -2944,7 +3012,7 @@
           "name": "Pell's Forge — Interior",
           "day": 1,
           "visited": true,
-          "note": "Shared rune-touch on Memory at the forge morning's close — the spear's binding deepened by two hands. The ring of the co"
+          "note": "The Fell Pell gathering produced a full delegation of the water-crisis response on World-day 18 evening. Document roll d"
         },
         "north-gate": {
           "name": "North Gate",
@@ -4115,7 +4183,8 @@
           "[d4] Grael's runner is Rendic Vael — confirmed in the optics array intake collection log, first-and-third-morning schedule, initials R.V. across four entries in two weeks. He is the keeper whose silence cl",
           "[d4] The accountability chain is now sealed in a document roll: Grael's marking authority, Rendic Vael as the keeper whose silence closed the record, the seven-band inquiry as the triggering question, and ",
           "[d5] The document roll is sealed and on the road — two hands, Calvar's wax, brass wire. The chain travels south inside his coat.",
-          "[d5] The complete chain laid out at the Fell Pell on World-day 18 evening — every witness present, every thread spoken. The document roll is intact. The question now is what the truth is for."
+          "[d5] The complete chain laid out at the Fell Pell on World-day 18 evening — every witness present, every thread spoken. The document roll is intact. The question now is what the truth is for.",
+          "[d5] Mara Wells named the document roll's destination and carrier at the Fell Pell gathering on World-day 18 evening — delivery to the district records office arranged before week's end. The accountability"
         ],
         "links": [
           "overseer-grael",
@@ -4210,7 +4279,8 @@
           "[d4] Pell deduced that the seventh-band specification authorship runs backward from Calvar to his teacher — the original council archive filing may name Pell's father as author. This would reveal the shape",
           "[d5] Calvar briefed on Millbrook's layout, key people, and the water crisis stakes on the first hour of the road south. He asked one precise question — intake sleeve material — and filed the rest without c",
           "[d5] Calvar arrived in Millbrook mid-morning on World-day 18 — he read the drainage cut on the road approach and said nothing. The document roll is intact. The chain is in the valley.",
-          "[d5] Evening gathering called at Pell's forge — Dara, Aldric, Fendt, Mara, and Calvar all summoned. The chain is complete and in the valley; the meeting tonight ends one thread and will open others."
+          "[d5] Evening gathering called at Pell's forge — Dara, Aldric, Fendt, Mara, and Calvar all summoned. The chain is complete and in the valley; the meeting tonight ends one thread and will open others.",
+          "[d5] Valley response formally delegated at the Fell Pell on World-day 18 evening: Calvar leads east-channel repair crews, Dara Holt runs logistics, Mara runs resupply and communications, Aldric anchors dow"
         ],
         "links": [
           "overseer-grael",
@@ -4507,21 +4577,21 @@
     }
   },
   "tendencies": {
-    "strategic": 15.84781277700175,
-    "cerebral": 10.259396058861666,
-    "social": 12.109044666453867,
-    "generous": 3.572167855693965,
-    "cautious": 8.518175873578137,
-    "physical": 1.7498489417450822,
-    "risky": 0.3868232839733242,
-    "ruthless": 2.5341961379842552,
-    "carousing": 0.03882708917543241,
-    "amorous": 10.447059742459306,
-    "patient": 3.050563813206843,
-    "stealth": 0.9822608974513787,
-    "devotion": 0.5357707852280051,
-    "craft": 0.5043863479348508,
-    "leadership": 0.975
+    "strategic": 17.451617457576706,
+    "cerebral": 10.002911157390125,
+    "social": 11.80631854979252,
+    "generous": 3.4828636593016156,
+    "cautious": 8.305221476738684,
+    "physical": 1.7061027182014552,
+    "risky": 0.3771527018739911,
+    "ruthless": 2.4708412345346487,
+    "carousing": 0.037856411946046595,
+    "amorous": 10.185883248897824,
+    "patient": 2.974299717876672,
+    "stealth": 0.9577043750150942,
+    "devotion": 0.522376515597305,
+    "craft": 0.49177668923647955,
+    "leadership": 0.9506249999999999
   },
   "aptitudes": [
     "strategist",
@@ -4531,7 +4601,7 @@
     "stalwart",
     "charmer"
   ],
-  "actionCount": 488,
+  "actionCount": 489,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -4777,8 +4847,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784391745291,
-  "rev": 704,
+  "updatedAt": 1784392179979,
+  "rev": 705,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5069,10 +5139,6 @@
             },
             {
               "kind": "interact",
-              "day": 4
-            },
-            {
-              "kind": "interact",
               "day": 5
             },
             {
@@ -5133,6 +5199,10 @@
             },
             {
               "kind": "fact",
+              "day": 5
+            },
+            {
+              "kind": "interact",
               "day": 5
             },
             {
@@ -5450,18 +5520,6 @@
   "establishedFacts": [
     {
       "id": "pell",
-      "text": "Pell said yes — plainly, without qualification — when Silas asked directly whether she wants what this is starting to feel like. The relationship has moved past mutual acknowledgment into something na",
-      "day": 2,
-      "subjectId": "pell"
-    },
-    {
-      "id": "pell",
-      "text": "Pell named her habit in full at the overhang camp on World-day 16 evening: managing it badly means filing what she wants so it doesn't show — a ledger she closes, except it always changes while she is",
-      "day": 2,
-      "subjectId": "pell"
-    },
-    {
-      "id": "pell",
       "text": "Pell answered 'yes' without qualification when asked directly if she likes this — the first fully unguarded answer she has given, no ledger-close, no management. The armor came down.",
       "day": 2,
       "subjectId": "pell"
@@ -5687,6 +5745,18 @@
       "text": "The complete accountability chain laid out in full at the Fell Pell on World-day 18 evening — every witness present, every thread spoken, document roll intact. The question of what the truth is for re",
       "day": 5,
       "subjectId": null
+    },
+    {
+      "id": "millbrook",
+      "text": "The valley's water-crisis response is formally delegated: Calvar leads repair crews, Dara runs crew logistics, Mara runs resupply and communications, Aldric anchors the accounts. Pell and Silas travel",
+      "day": 5,
+      "subjectId": "millbrook"
+    },
+    {
+      "id": "mara-wells",
+      "text": "Mara Wells has named the document roll's carrier and route to the district records office — delivery arranged before week's end. The accountability chain now has a clear path forward.",
+      "day": 5,
+      "subjectId": "mara-wells"
     }
   ],
   "practice": {
@@ -5809,7 +5879,7 @@
   "syncedAt": 1784382065804,
   "teachers": {},
   "regionsKnown": {
-    "valley": 306
+    "valley": 307
   },
   "foreclosed": [
     "rootkin",
@@ -5864,10 +5934,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T16:22:25.285Z",
+      "lastAt": "2026-07-18T16:29:39.971Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 31
+      "beats": 32
     }
   ],
   "company": [

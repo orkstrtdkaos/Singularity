@@ -93,7 +93,7 @@
   "maxHealth": 95,
   "health": 95,
   "maxEnergy": 165,
-  "energy": 125,
+  "energy": 165,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -150,7 +150,7 @@
       "id": null,
       "name": "Preserved Trail Parcel",
       "kind": "consumable",
-      "qty": 4,
+      "qty": 5,
       "description": "Aldric's smokehouse goods — dried river perch and salted pork, cloth-wrapped and knotted. Holds a week on the road. Two parcels.",
       "effects": {
         "energy": 10
@@ -768,14 +768,15 @@
   "relationships": {},
   "chronicle": [
     "The Fell Pell gathering sealed and delegated — Calvar to repair lead, Dara to logistics, Mara to supply and comms, Aldric to accounts, Fendt named to the fellowship, document roll complete and bound for Pip Cotter. Silas and Pell step out into the cold night, the road beginning tomorrow, the forge warm behind them.",
-    "The Fell Pell gathering: Pell's brigandine finished with full protective rune-work collar to hem, one radiant mark at the chest from the vial's last scraping, and a partial Shielding Word seated in its outer ring with the promise of completion. Pell's short sword rune-bound with four threads including Huginn's ending-sense and her own ironsense. The forge named the Fell Pell; the fellowship formally opened. Calvar took the repair lead, Dara the logistics, Mara supply and comms, Aldric the accounts; Fendt named to the fellowship and vouched for by Aldric. The document roll sealed with every witness line present, Pip Cotter named as carrier. Silas and Pell settled the road: south lane in the morning, home first, then the Disputed Zone. The coals cooled. The night was quiet."
+    "The Fell Pell gathering: Pell's brigandine finished with full protective rune-work collar to hem, one radiant mark at the chest from the vial's last scraping, and a partial Shielding Word seated in its outer ring with the promise of completion. Pell's short sword rune-bound with four threads including Huginn's ending-sense and her own ironsense. The forge named the Fell Pell; the fellowship formally opened. Calvar took the repair lead, Dara the logistics, Mara supply and comms, Aldric the accounts; Fendt named to the fellowship and vouched for by Aldric. The document roll sealed with every witness line present, Pip Cotter named as carrier. Silas and Pell settled the road: south lane in the morning, home first, then the Disputed Zone. The coals cooled. The night was quiet.",
+    "Silas and Pell sleep, share a last morning meal at the forge, establish a relay protocol with Mara Wells, say their farewells, and step south out of Millbrook at a measured morning hour."
   ],
   "currentLocationId": "millbrook",
   "activeScene": null,
   "clock": {
     "schemaVersion": 1,
-    "day": 5,
-    "hour": 19,
+    "day": 6,
+    "hour": 4,
     "realAnchor": null
   },
   "companions": [
@@ -1150,7 +1151,6 @@
       },
       "relationship": 6,
       "history": [
-        "[d2] Set the knife down flat and named the core problem plainly: someone has to give the engineer a reason bigger than his comfortable arrangements. Summarizing, not inserting.",
         "[d2] His tell confirmed — he already knew what Sorel was about to say. Has been holding this piece since before Silas arrived.",
         "[d2] Named the thing he was holding: recognized the engineer's CCW stain pattern in the sealed original east-channel bed, seen three days ago when Sorel first arrived. Knew the pattern ",
         "[d2] Named the channel seal as a deliberate lid — whatever was running when it was sealed was known to the person who sealed it. The design intent is now explicit: containment, not repa",
@@ -1159,7 +1159,8 @@
         "[d5] Arrived at the forge — apron still on, fillet knife gone, settled onto the forge block.",
         "[d5] Received the shop's new name with a single nod — approval filed, no words spent. Spoke his piece on the sealed channel: same CCW scour, same deliberate lid.",
         "[d5] Assigned account anchor for Mara's supply-and-communications thread — accepted with palms on knees and an upright shift.",
-        "[d5] Extended a hand to Fendt unprompted — named him as someone who arrived with Silas's name and offered to vouch for him to Mara's thread if needed. Brief, flat, no ceremony."
+        "[d5] Extended a hand to Fendt unprompted — named him as someone who arrived with Silas's name and offered to vouch for him to Mara's thread if needed. Brief, flat, no ceremony.",
+        "[d5] Appeared at the smokehouse door long enough to raise his chin at Silas — a wordless send-off from a man who trusts the structure now in place."
       ],
       "knownFacts": [
         "Keeps cured bladder waterskins in back storage as Mara indicated — practical trail goods, available on request",
@@ -1180,7 +1181,7 @@
         "reading structural intent from material evidence"
       ],
       "status": "active",
-      "statusNote": "In the Fell Pell — extended hand to Fendt, posted and ready to close the gathering.",
+      "statusNote": "At the smokehouse — the accounts are his, the work continues.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
@@ -1199,7 +1200,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d5] Held her ironsense open through the full rune-binding — it cost her, and she did not flinch. The final mark used her own shape rather than Silas's geometry; the sword is more hers than she expected.",
         "[d5] Received the name The Warden's Charge — tested it against the iron, nodded once in the register she gives iron that has answered correctly. Holds the blade upright toward the rafters.",
         "[d5] Received the idea of searching the Maelstorm for her father — held it without flinching, named the road's order herself: home first, then the Zone, then the Maelstorm. Committed to together.",
         "[d5] Approved radiant embellishment on the brigandine's plate with conditions — practical first, pretty after. Holds the armor in her lap and waits.",
@@ -1208,7 +1208,8 @@
         "[d5] Chose where the radiant mark goes — the highest point of the chest plate, where light catches first. Named the finished work 'That'll do.'",
         "[d5] Watched the partial ward settle without complaint — named it more than the plate had before. Practical about limits.",
         "[d5] Received the partial-ward promise without reproach — named the radiant mark as the place the completion will find itself. The evening closed on that.",
-        "[d5] Scene closed together in the forge's cooling warmth — Morning, then. Named the day ahead and let the night finish."
+        "[d5] Scene closed together in the forge's cooling warmth — Morning, then. Named the day ahead and let the night finish.",
+        "[d5] Was up before Silas, laid out the morning meal without ceremony, walked out the south gate beside him with the brigandine on her shoulders. The road has begun."
       ],
       "knownFacts": [
         "The sword's order-sense capacitor closed on her shape, not Silas's — the iron chose her idiom for the reading capacity",
@@ -1229,7 +1230,7 @@
         "reading a rune-thread's presence through ironsense across mu"
       ],
       "status": "active",
-      "statusNote": "In the Fell Pell forge — armor done, rested, road beginning at first light.",
+      "statusNote": "On the south lane out of Millbrook — road-ready, brigandine on, traveling south with Silas.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
@@ -1256,7 +1257,6 @@
       },
       "relationship": 8,
       "history": [
-        "[d2] Sent a child runner to catch Silas before the north gate with a cloth-wrapped message — urgent enough to act on after their dawn parting.",
         "[d2] Sent a follow-up package via Pip — Aldric waterskin reminder and a vial of pre-Transition purification tabs from her own stock.",
         "[d5] Greeted Calvar directly on sight — used Dara's phrase back unprompted, extended her hand to him first. Already operational.",
         "[d5] Confirmed iron sleeves without hesitation and watched Calvar's face when she said it — reading his reaction as diagnostic data. Received the document roll's placement on her counte",
@@ -1265,17 +1265,18 @@
         "[d5] Filed the shop name, catalogued the room, holding the document roll — the question of whose hands it reaches is hers to help answer.",
         "[d5] Placed the document roll on the forge block and named its destination without being asked — she knows the carrier already.",
         "[d5] Named Pip Cotter as the document roll's carrier to the district records office — two days from now. Fingers on the roll, waiting for final witness lines tonight.",
-        "[d5] Fingers on the document roll — waiting for the word to seal it. All lines now present."
+        "[d5] Fingers on the document roll — waiting for the word to seal it. All lines now present.",
+        "[d5] Established the relay-contact protocol — Pip Cotter to the split-rock relay point, chalk-scratch for passage, Huginn as a distance option. Wrote the relay point into her ledger's margin. Confirmed the document roll goes out in two days."
       ],
       "knownFacts": [
-        "Holds pre-Transition purification tabs — possibly one of the last stocks in the valley",
         "Acts proactively on expedition logistics even after a party has departed",
         "Silas returned with someone who matches the 'knows what they're looking at' criterion — she recognized it immediately",
         "Calvar asks about intake sleeve material as a first diagnostic — iron matters to his read",
         "Calvar defers authority explicitly — he is a witness, not a claimant",
         "The document roll is now on her counter; the question of its destination is hers to answer",
         "Formally tasked with resupply, communications, and document-roll delivery — named the carrier and route before the question was asked",
-        "Pip Cotter is her chosen carrier for the document roll — fast, quiet, reliable"
+        "Pip Cotter is her chosen carrier for the document roll — fast, quiet, reliable",
+        "Split-rock relay point north of the pass-trail is the agreed contact point for urgent messages"
       ],
       "skillsObserved": [
         "rapid trail-kit assembly from known inventory",
@@ -1286,7 +1287,7 @@
         "naming a destination and a carrier without prompting — opera"
       ],
       "status": "active",
-      "statusNote": "In the Fell Pell — document roll ready to seal, Pip Cotter named as carrier.",
+      "statusNote": "In her store — ledger updated, document roll departure confirmed in two days, relay protocol noted.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
@@ -1451,7 +1452,6 @@
       },
       "relationship": 8,
       "history": [
-        "[d3] Named the erasure plainly: the removed calibration files proved the seventh-band blind spot was a design specification built in at the foundation layer — their removal erased the a",
         "[d3] Named the authorship chain: a council department glyph on the supervisor's mark, a personal margin notation with a distinctive hand forming threes — the calibration files would hav",
         "[d3] Heard Pell name her father as a filtration engineer who left the Plateau after the Transition — someone who would know the distinctive hand. Went still in a new way. Asked if she w",
         "[d3] Reproduced the margin notation from a seven-year-old notebook entry — confirmed Pell's identification without prompting. Named the departure and the calibration files as connected ",
@@ -1460,7 +1460,8 @@
         "[d3] Heard Pell name her priority — Fendt first, then what the thread opens. Recalibrating. The paper is still in his coat.",
         "[d3] Accepted the starfruit, wrote three minutes of testimony without pausing, tore the page out carefully and handed it over. Keeping a second copy in the case lining. Now on the road ",
         "[d5] Received Aldric's informal vouch — something loosened around his jaw. First sign of ease since arriving in Millbrook.",
-        "[d5] Named to the fellowship by Silas — his testimony placed alongside all others. The long breath out. Something settled."
+        "[d5] Named to the fellowship by Silas — his testimony placed alongside all others. The long breath out. Something settled.",
+        "[d5] Standing near the well — gave a short, deliberate nod at departure. A man who has decided something and is at peace with it."
       ],
       "knownFacts": [
         "His ending has been read and named by Silas — six weeks, exile if the paper doesn't move to formal lodgment before the review closes",
@@ -1481,7 +1482,7 @@
         "disciplined disclosure under pressure — three minutes of tes"
       ],
       "status": "active",
-      "statusNote": "In the Fell Pell — named to the fellowship; first foundation of standing in Millbrook taking shape. Six-week window still running.",
+      "statusNote": "In Millbrook — near the well, the fellowship's newest member, his standing beginning to take shape.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
@@ -1750,7 +1751,6 @@
     "millbrook": {
       "visits": 3,
       "notes": [
-        "[d4] The document roll — Fendt's testimony and Silas's chain-record, sealed with Calvar's wax and brass wire — was completed at the corner booth of the Low Lamp Inn on World-day 18 evening. Two hands on th",
         "[d5] Two road opportunists disarmed and sent to Mara Wells with Silas Weir's name — the limestone bend saw mercy shown and weapons taken on World-day 18 morning.",
         "[d5] Calvar — pre-Transition filtration engineer — arrived in Millbrook on World-day 18 morning with the sealed document roll. First contact point and his read of the east channel are the immediate next st",
         "[d5] Calvar brought to Mara Wells's store on World-day 18 mid-morning — first contact with Millbrook's supply network made.",
@@ -1761,7 +1761,8 @@
         "[d5] The brigandine and short sword — Pell's father's gear — pulled from the chest under the second bench on World-day 18 evening. Both sound and ready. The chest is open.",
         "[d5] Pell's short sword rune-bound at the forge on World-day 18 evening — four threads seated rough but holding. The lamp-black vial is spent down and the tooling leather is marked from the work.",
         "[d5] Brigandine rune-work completed to the full protective layer on World-day 18 evening — every plate row threaded inside, lamp-black spent. Radiant embellishment not yet begun.",
-        "[d5] The brigandine's radiant embellishment completed — one mark, chest center, pressed with the vial's last scraping. The rune-craft kit is now entirely spent. The armor is fully finished."
+        "[d5] The brigandine's radiant embellishment completed — one mark, chest center, pressed with the vial's last scraping. The rune-craft kit is now entirely spent. The armor is fully finished.",
+        "[d5] Silas and Pell departed Millbrook by the south lane on World-day 19 mid-morning — the forge cold, the fellowship in place, the document roll two days from departure."
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -3446,21 +3447,21 @@
     }
   },
   "tendencies": {
-    "strategic": 19.30775159902796,
-    "cerebral": 6.79189337857428,
-    "social": 15.079164690316826,
-    "generous": 2.437243231974654,
-    "cautious": 6.868573046820809,
-    "physical": 0.883334480166685,
-    "risky": 0.19527076670068605,
-    "ruthless": 1.2792777563726718,
-    "carousing": 0.019600152798882296,
-    "amorous": 10.415399147786983,
-    "patient": 3.168362378961993,
-    "stealth": 0.49585132667107457,
-    "devotion": 1.1080519725459042,
-    "craft": 3.916885281558446,
-    "leadership": 0.49218598109595263
+    "strategic": 19.82505780905226,
+    "cerebral": 6.622096044109923,
+    "social": 14.702185573058905,
+    "generous": 2.376312151175288,
+    "cautious": 6.6968587206502885,
+    "physical": 0.8612511181625179,
+    "risky": 0.1903889975331689,
+    "ruthless": 1.247295812463355,
+    "carousing": 0.019110148978910238,
+    "amorous": 10.155014169092308,
+    "patient": 3.0891533194879433,
+    "stealth": 0.4834550435042977,
+    "devotion": 1.0803506732322565,
+    "craft": 3.818963149519485,
+    "leadership": 0.4798813315685538
   },
   "aptitudes": [
     "strategist",
@@ -3470,7 +3471,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 515,
+  "actionCount": 516,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -3716,8 +3717,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784406832149,
-  "rev": 760,
+  "updatedAt": 1784406991579,
+  "rev": 761,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4393,12 +4394,6 @@
   "establishedFacts": [
     {
       "id": "leth",
-      "text": "Someone entered Leth's archive room during one of the two nights after Calvar left his diagram — they added four characters in deliberate, fast-pressed ink to the lower-right corner without Leth's kno",
-      "day": 3,
-      "subjectId": "leth"
-    },
-    {
-      "id": "leth",
       "text": "The intruder entered Leth's archive room through a shared rear corridor connecting three rooms in the same row — an east-wall door, flush with shelving, with disturbed dust confirming recent use. Acce",
       "day": 3,
       "subjectId": "leth"
@@ -4630,6 +4625,12 @@
       "text": "The brigandine's full protective thread is seated — every plate row from collar to hem, inside edge. The lamp-black is spent. The work is complete to the practical layer.",
       "day": 5,
       "subjectId": "pell-ran-marsh"
+    },
+    {
+      "id": "mara-wells",
+      "text": "A relay-contact protocol is established with Mara Wells — Pip Cotter carries urgent messages to the split-rock relay point on the pass-trail, marked with chalk for passage. Huginn can serve as a distance option when needed. Mara has this in her ledger.",
+      "day": 5,
+      "subjectId": "mara-wells"
     }
   ],
   "practice": {
@@ -4790,7 +4791,7 @@
   "syncedAt": 1784392733860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 335
+    "valley": 336
   },
   "foreclosed": [
     "rootkin",
@@ -4845,10 +4846,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T20:33:52.148Z",
+      "lastAt": "2026-07-18T20:36:31.577Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 60,
+      "beats": 61,
       "_recapError": null,
       "recap": "Day eighteen, and Silas Weir moved like a man who'd finally stopped fighting the shape of what he was. On the road he disarmed three opportunists without breaking bones, read the grief sitting behind the broad man's eyes, named it plainly, pressed provisions into their hands, and sent them toward something worth doing — mercy given as instruction, not sentiment. Then he brought the hard people together: Dara, Aldric, Fendt, Mara, Calvar, all of them in the heat of Pell's forge with no exits easy and no pretense left, and in that single evening he turned a valley's quiet panic into four working threads — engineering, logistics, supply, accounts — each with a named lead and a direction to face. The crisis didn't end, but it stopped being formless, and that was his doing."
     }

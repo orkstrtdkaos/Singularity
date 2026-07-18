@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 13,
-  "xp": 1259,
+  "xp": 1264,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -81,15 +81,15 @@
     "concrete_abstract": -0.03561964806827624,
     "death_life": -0.21815558471650157,
     "emotional_logical": 0.03083749999999999,
-    "falsehood_truth": 0.27404975347118554,
-    "demonic_angelic": 0.03,
+    "falsehood_truth": 0.3103472657976262,
+    "demonic_angelic": 0.013499999999999998,
     "value": 0.09132499999999999
   },
   "attunement": 13,
   "maxHealth": 90,
   "health": 89,
   "maxEnergy": 160,
-  "energy": 121,
+  "energy": 116,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1482,33 +1482,38 @@
         "player": "Tell about the sister, take their weapons and go through their belongings to find things they may have stolen - let them keep some provisions but tell them to get back to an honest life.  Have the see Mara Wells in Millbrook if they need honest work. We'll need able bodied men to save the valley.",
         "summary": "Silas named the broad man's grief, confiscated both weapons, and sent them to Mara Wells in Millbrook with the offer of honest work.",
         "narration": "You let the silence sit for another breath, then step toward the lean man — not fast, not threatening, just closing the distance until he has nowhere to look but at you. \"The broad man's sister,\" you say quietly. \"Come summer. You already know it.\" You watch the lean man's face go still as the broad man's breath catches behind you. Neither of them asked how you know. They've heard of Ashwardens.\n\nYou don't wait for a response. You hold out your hand to the lean man — palm up, not a fist. He looks at it for a moment, then sets the broken handle of whatever he'd been carrying into it. The broad man turns the hatchet in his hand twice and then, with the flat deliberateness of someone making a decision they can't take back, offers it grip-first. You take it. Pell steps around the broad man and goes through both packs without ceremony — flour parcel, a length of cord, two small trade-knives, a tin they nicked from somebody's unattended camp. You set the food back. The rest you keep. The broad man watches his hatchet in your hand and says nothing.\n\n\"Mara Wells. Millbrook, west side of the well.\" You let him hear the name clearly. \"She runs the supply store. Tell her Silas Weir sent you — that you need honest work. She'll have something, or she'll know who does.\" You look from one to the other. \"The valley is going to need every able pair of hands before this season is finished. That's not a threat. That's a fact.\" The lean man's jaw tightens. The broad man just nods — the short, private nod of a man recalibrating toward something he hadn't expected to be offered.\n\nYou step back. Pell is already angled toward the road south, pack settled, watching the tree line out of habit. Huginn drops from the branch in one unhurried arc and lands on Memory's socket, rides it for a moment, then lifts again to a branch further down the track — the direction you're going. The two men stand in the mud at the limestone bend, one lighter a hatchet and a road-crook, both watching you leave. Neither follows."
+      },
+      {
+        "player": "Lastly, your names and orgins - no use lying to me... gesture at Huginn... we can tell.",
+        "summary": "Bren Thalle and Curis of the lower Wick named themselves — a dry-seasons mining settlement pushed to the road. Huginn closed the negotiation without a word.",
+        "narration": "You turn back to the two men before they can take another step south. Not a threat — just a fact. \"Lastly,\" you say, voice level, \"your names and where you're from. No use lying to me.\" You let the pause land, then lift your chin toward Huginn on the branch above the track. The bird hasn't moved. It's looking at the broad man with the particular quality of attention it reserves for things it already knows the end of. You don't explain what that means. You don't have to.\n\nThe broad man cracks first. \"Bren,\" he says, rubbing the back of his neck with his empty hand. \"Bren Thalle. Out of the lower Wick — south-slope settlement, three miles past the ford. Miner's settlement, mostly. Dry two seasons running.\" He says the last part like it explains everything, and it mostly does.\n\nThe lean man watches Huginn for another moment, then looks back at you. He's younger than you thought — maybe twenty-two, hollows under his eyes from poor eating. \"Curis,\" he says. \"Same settlement. Grew up there.\" He pauses, then adds — unprompted, which is the interesting part — \"We haven't done this before. Today's the first.\" You don't say whether you believe him. Huginn shifts its weight on the branch, and that is the thing that finally settles it. Curis nods once, like you've reached an agreement.\n\nPell hasn't looked back at them. She's watching the road south, pack settled, giving the whole exchange the appropriate weight of her absence. She trusts you to finish it. Huginn drops from the branch with one slow wingbeat and glides ahead twenty yards down the track, landing again in the direction of Millbrook. Not theatrical. Just where it needs to be next."
       }
     ],
     "lastTurn": {
-      "narration": "You let the silence sit for another breath, then step toward the lean man — not fast, not threatening, just closing the distance until he has nowhere to look but at you. \"The broad man's sister,\" you say quietly. \"Come summer. You already know it.\" You watch the lean man's face go still as the broad man's breath catches behind you. Neither of them asked how you know. They've heard of Ashwardens.\n\nYou don't wait for a response. You hold out your hand to the lean man — palm up, not a fist. He looks at it for a moment, then sets the broken handle of whatever he'd been carrying into it. The broad man turns the hatchet in his hand twice and then, with the flat deliberateness of someone making a decision they can't take back, offers it grip-first. You take it. Pell steps around the broad man and goes through both packs without ceremony — flour parcel, a length of cord, two small trade-knives, a tin they nicked from somebody's unattended camp. You set the food back. The rest you keep. The broad man watches his hatchet in your hand and says nothing.\n\n\"Mara Wells. Millbrook, west side of the well.\" You let him hear the name clearly. \"She runs the supply store. Tell her Silas Weir sent you — that you need honest work. She'll have something, or she'll know who does.\" You look from one to the other. \"The valley is going to need every able pair of hands before this season is finished. That's not a threat. That's a fact.\" The lean man's jaw tightens. The broad man just nods — the short, private nod of a man recalibrating toward something he hadn't expected to be offered.\n\nYou step back. Pell is already angled toward the road south, pack settled, watching the tree line out of habit. Huginn drops from the branch in one unhurried arc and lands on Memory's socket, rides it for a moment, then lifts again to a branch further down the track — the direction you're going. The two men stand in the mud at the limestone bend, one lighter a hatchet and a road-crook, both watching you leave. Neither follows.",
-      "sceneSummary": "Silas named the broad man's grief, confiscated both weapons, and sent them to Mara Wells in Millbrook with the offer of honest work.",
+      "narration": "You turn back to the two men before they can take another step south. Not a threat — just a fact. \"Lastly,\" you say, voice level, \"your names and where you're from. No use lying to me.\" You let the pause land, then lift your chin toward Huginn on the branch above the track. The bird hasn't moved. It's looking at the broad man with the particular quality of attention it reserves for things it already knows the end of. You don't explain what that means. You don't have to.\n\nThe broad man cracks first. \"Bren,\" he says, rubbing the back of his neck with his empty hand. \"Bren Thalle. Out of the lower Wick — south-slope settlement, three miles past the ford. Miner's settlement, mostly. Dry two seasons running.\" He says the last part like it explains everything, and it mostly does.\n\nThe lean man watches Huginn for another moment, then looks back at you. He's younger than you thought — maybe twenty-two, hollows under his eyes from poor eating. \"Curis,\" he says. \"Same settlement. Grew up there.\" He pauses, then adds — unprompted, which is the interesting part — \"We haven't done this before. Today's the first.\" You don't say whether you believe him. Huginn shifts its weight on the branch, and that is the thing that finally settles it. Curis nods once, like you've reached an agreement.\n\nPell hasn't looked back at them. She's watching the road south, pack settled, giving the whole exchange the appropriate weight of her absence. She trusts you to finish it. Huginn drops from the branch with one slow wingbeat and glides ahead twenty yards down the track, landing again in the direction of Millbrook. Not theatrical. Just where it needs to be next.",
+      "sceneSummary": "Bren Thalle and Curis of the lower Wick named themselves — a dry-seasons mining settlement pushed to the road. Huginn closed the negotiation without a word.",
       "choices": [
         {
-          "label": "Move out — take the road south toward Millbrook, Calvar between you and Pell",
+          "label": "Move south — the party has what it came for. Leave Bren and Curis to find their own way to Mara Wells.",
           "attribute": "physical",
           "subAttribute": "agility",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "travel",
-            "careful"
+            "travel"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Read the road as you walk — Order-Sense on the landscape ahead, looking for the shortcut the land is trying to show you",
+          "label": "Before leaving, use Order-Sense on the road south — read the shape of what's waiting between here and Millbrook.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "concrete_abstract": -0.3
-          },
-          "difficulty": 15,
+          "axes": {},
+          "difficulty": 0,
           "intentTags": [
             "scout",
             "study"
@@ -1520,114 +1525,59 @@
           "emergenceId": null
         },
         {
-          "label": "Walk with Calvar — ask him what he makes of the country here, ease him into the road",
+          "label": "Tell Bren plainly — a mining settlement running dry two seasons has a stake in what's wrong with the valley water. Ask what they've seen at the ford and upstream.",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "calm",
-            "help"
+            "negotiate",
+            "study"
           ],
-          "trivial": true,
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Ask Pell what she's thinking — the fight is over, the road is open; this is the first quiet beat you've had",
+          "label": "Hand the confiscated hatchet back to Bren — a man heading to Millbrook for honest work should arrive with a tool, not empty-handed.",
           "attribute": "social",
           "subAttribute": "presence",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "comfort",
-            "romantic"
+            "help"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true,
           "encounterId": null,
           "emergenceId": null
         }
       ],
-      "deeds": [
-        {
-          "description": "Showed mercy to road opportunists after disarming them — named the broad man's grief, gave them provisions, and sent them to honest work rather than leaving them in the mud",
-          "tags": [
-            "mercy",
-            "community",
-            "uncanny"
-          ],
-          "weight": 2,
-          "communityId": "valley.millbrook"
-        }
-      ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [
-          {
-            "name": "Confiscated Hatchet",
-            "kind": "weapon",
-            "description": "A long-handled hatchet taken from the broad man at the limestone bend — plain iron head, worn grip, functional. Could be traded, given, or put to use.",
-            "consumable": false
-          },
-          {
-            "name": "Pilfered Camp Tin",
-            "kind": "misc",
-            "description": "A small tin from the opportunists' pack — likely taken from someone's unattended camp. Contents unknown.",
-            "consumable": false
-          },
-          {
-            "name": "Trade-Knives (pair)",
-            "kind": "weapon",
-            "description": "Two small belt-trade knives confiscated from the road opportunists — plain, serviceable, nothing special.",
-            "consumable": false
-          }
-        ],
-        "xp": 3
-      },
-      "ledgerEvents": [
-        {
-          "what": "Two road opportunists at the limestone bend were disarmed and sent to Mara Wells in Millbrook for honest work — Silas Weir's name given as introduction",
-          "tags": [
-            "mercy",
-            "community",
-            "millbrook"
-          ],
-          "visibility": "witnessed",
-          "spectrumDeltas": {
-            "violence_peace": 0.03,
-            "falsehood_truth": 0.02
-          },
-          "impactsLocal": true
-        }
-      ],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "find-the-engineer",
-          "note": "Party cleared the limestone bend without casualties — Calvar and the document roll are intact. Road south to Millbrook is open."
-        }
-      ],
       "scene": {
-        "setting": "The trade track at the limestone bend — hawthorn left, limestone outcrop right, morning light full from the east. The broken crook lies in two pieces in the mud. Both opportunists are on their feet, standing in place, watching the party prepare to move.",
+        "setting": "The trade track at the limestone bend — hawthorn left, limestone outcrop right, morning light full from the east. The broken crook lies in two pieces in the mud. Both men are on their feet and named.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Angled toward the road south, pack settled, watching the tree line — ready to move."
+            "state": "Facing south, pack settled, ready to move — giving the exchange her deliberate absence."
           },
           {
             "name": "Calvar",
-            "state": "At the outcrop, right hand relaxing from inside his coat — watching the broad man's face as the hatchet changed hands."
+            "state": "At the outcrop, right hand finally relaxed from inside his coat, watching the two men with quiet assessment."
           },
           {
             "name": "Huginn",
-            "state": "On a branch further down the track, in the direction of Millbrook — waiting."
+            "state": "Twenty yards south down the track, perched and waiting — already pointed toward Millbrook."
           },
           {
-            "name": "Broad Opportunist",
-            "state": "Standing in the mud, lighter a hatchet, watching you go. Mara Wells's name is in him now."
+            "name": "Bren Thalle",
+            "state": "Standing in the mud, lighter a hatchet, name given — rubbing the back of his neck."
           },
           {
-            "name": "Lean Opportunist",
-            "state": "Two steps back from where he stood — provisions at his feet, the rest gone. Not following."
+            "name": "Curis",
+            "state": "Two steps back from where he stood, provisions at his feet, name given — watching Huginn's new position down the road."
           }
         ],
         "objects": [
@@ -1638,82 +1588,105 @@
           "River Whetstone — at Pell's belt",
           "Confiscated Hatchet — in Silas's hand",
           "Split crook — in two pieces in the mud, iron shoe separate",
-          "Remaining provisions — left at the lean man's feet"
+          "Remaining provisions — left at Curis's feet"
         ],
         "threads": [
+          "Bren and Curis are named — lower Wick settlement, dry two seasons; whether their situation connects to the water crisis is unasked",
           "The road south to Millbrook is open — the party has not yet moved",
-          "The broad man has Mara Wells's name; whether he uses it is unresolved",
-          "The land may be offering a shortcut — something the ground here wants to show a reader"
+          "The broad man has Mara Wells's name and now his own grief named aloud; whether he uses either is unresolved"
         ]
       },
       "npcUpdates": [
         {
-          "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "note": "Stepped back cleanly after the broad man stood down — field read, no words. Now facing south and ready to move.",
-          "statusNote": "At the limestone bend — fight concluded, road south open, waiting on Silas's lead.",
-          "relationshipDelta": 0
+          "op": "meet",
+          "npcId": "bren-thalle",
+          "name": "Bren Thalle",
+          "role": "Road opportunist, lower Wick settlement",
+          "gender": "man",
+          "pronouns": "he/him",
+          "description": "A broad man, thirties, worn hands from mining work — grief-carrying and cornered into bad choices by two dry seasons.",
+          "note": "Named himself under Huginn's gaze — Bren Thalle, lower Wick settlement, south-slope, three miles past the ford. Dry two seasons. Named the settlement's situation plainly as explanation.",
+          "learned": [
+            "From lower Wick settlement, south-slope, three miles past the ford",
+            "Miner's settlement, two dry seasons running",
+            "This was his first time on the road like this — self-reported, unprompted"
+          ],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the limestone bend — disarmed, named, directed to Mara Wells in Millbrook."
         },
         {
-          "op": "update",
-          "npcId": "calvar",
-          "name": "Calvar",
-          "note": "Watched the hatchet change hands without expression — right hand finally left his coat. The document is safe.",
-          "statusNote": "At the limestone bend — document roll intact, watching the party prepare to move south.",
-          "relationshipDelta": 1
+          "op": "meet",
+          "npcId": "curis",
+          "name": "Curis",
+          "role": "Road opportunist, lower Wick settlement",
+          "gender": "man",
+          "pronouns": "he/him",
+          "description": "A lean young man of about twenty-two — hollow-eyed from poor eating, grew up in the lower Wick settlement. First time on the road this way, and he volunteered that fact.",
+          "note": "Named himself under Huginn's gaze — Curis, same settlement as Bren. Added unprompted that this was the first time. Huginn's shift on the branch was what finally settled him.",
+          "learned": [
+            "From the lower Wick settlement, grew up there",
+            "Claimed this was his first time doing this — offered without being asked"
+          ],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the limestone bend — disarmed, named, directed to Mara Wells in Millbrook."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "the-attended-end",
-          "label": "The Attended End",
-          "kind": "lore",
-          "fact": "Named a man's coming grief — a sister, come summer — aloud in front of him, and he knew without asking how the Ashwarden knew. The reading, shown on the face, is its own argument.",
+          "topic": "lower-wick-settlement",
+          "label": "Lower Wick Settlement",
+          "kind": "place",
+          "fact": "A miner's settlement on the south slope, three miles past the lower ford. Two dry seasons running — the dryness pushed at least two men onto the road. Settlement may have direct knowledge of upstream water conditions.",
           "links": [
-            "find-the-engineer",
-            "millbrook"
+            "the-water-crisis",
+            "millbrook",
+            "bren-thalle",
+            "curis"
           ]
-        }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A short confrontation and its resolution — ten minutes at the limestone bend"
-      },
-      "placeUpdates": [
-        {
-          "note": "Two road opportunists disarmed and sent to Mara Wells with Silas Weir's name — the limestone bend saw mercy shown and weapons taken on World-day 18 morning."
         }
       ],
       "factUpdates": [
         {
           "op": "add",
-          "text": "Two road opportunists at the limestone bend were disarmed and directed to Mara Wells in Millbrook — Silas Weir's name given as introduction for honest work. The broad man's grief (a sister, come summer) was named aloud."
+          "text": "Bren Thalle and Curis of the lower Wick settlement named themselves at the limestone bend — miners from a south-slope settlement two dry seasons running, three miles past the ford. Directed to Mara Wells with Silas Weir's name.",
+          "subjectId": "bren-thalle"
         }
-      ]
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A brief exchange at the bend — names given, nothing more."
+      },
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      }
     },
     "sceneState": {
-      "setting": "The trade track at the limestone bend — hawthorn left, limestone outcrop right, morning light full from the east. The broken crook lies in two pieces in the mud. Both opportunists are on their feet, standing in place, watching the party prepare to move.",
+      "setting": "The trade track at the limestone bend — hawthorn left, limestone outcrop right, morning light full from the east. The broken crook lies in two pieces in the mud. Both men are on their feet and named.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Angled toward the road south, pack settled, watching the tree line — ready to move."
+          "state": "Facing south, pack settled, ready to move — giving the exchange her deliberate absence."
         },
         {
           "name": "Calvar",
-          "state": "At the outcrop, right hand relaxing from inside his coat — watching the broad man's face as the hatchet changed hands."
+          "state": "At the outcrop, right hand finally relaxed from inside his coat, watching the two men with quiet assessment."
         },
         {
           "name": "Huginn",
-          "state": "On a branch further down the track, in the direction of Millbrook — waiting."
+          "state": "Twenty yards south down the track, perched and waiting — already pointed toward Millbrook."
         },
         {
-          "name": "Broad Opportunist",
-          "state": "Standing in the mud, lighter a hatchet, watching you go. Mara Wells's name is in him now."
+          "name": "Bren Thalle",
+          "state": "Standing in the mud, lighter a hatchet, name given — rubbing the back of his neck."
         },
         {
-          "name": "Lean Opportunist",
-          "state": "Two steps back from where he stood — provisions at his feet, the rest gone. Not following."
+          "name": "Curis",
+          "state": "Two steps back from where he stood, provisions at his feet, name given — watching Huginn's new position down the road."
         }
       ],
       "objects": [
@@ -1724,12 +1697,12 @@
         "River Whetstone — at Pell's belt",
         "Confiscated Hatchet — in Silas's hand",
         "Split crook — in two pieces in the mud, iron shoe separate",
-        "Remaining provisions — left at the lean man's feet"
+        "Remaining provisions — left at Curis's feet"
       ],
       "threads": [
+        "Bren and Curis are named — lower Wick settlement, dry two seasons; whether their situation connects to the water crisis is unasked",
         "The road south to Millbrook is open — the party has not yet moved",
-        "The broad man has Mara Wells's name; whether he uses it is unresolved",
-        "The land may be offering a shortcut — something the ground here wants to show a reader"
+        "The broad man has Mara Wells's name and now his own grief named aloud; whether he uses either is unresolved"
       ]
     }
   },
@@ -2675,6 +2648,61 @@
       "gender": "man",
       "pronouns": "he/him",
       "statusNote": "On the trade track, crook raised — holding, watching the broad man for a lead.",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 5
+      }
+    },
+    "bren-thalle": {
+      "id": "bren-thalle",
+      "name": "Bren Thalle",
+      "role": "Road opportunist, lower Wick settlement",
+      "description": "A broad man, thirties, worn hands from mining work — grief-carrying and cornered into bad choices by two dry seasons.",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 5
+      },
+      "relationship": 0,
+      "history": [
+        "[d5] Named himself under Huginn's gaze — Bren Thalle, lower Wick settlement, south-slope, three miles past the ford. Dry two seasons. Named the settlement's situation plainly as explana"
+      ],
+      "knownFacts": [
+        "From lower Wick settlement, south-slope, three miles past the ford",
+        "Miner's settlement, two dry seasons running",
+        "This was his first time on the road like this — self-reported, unprompted"
+      ],
+      "skillsObserved": [],
+      "status": "active",
+      "gender": "man",
+      "pronouns": "he/him",
+      "statusNote": "At the limestone bend — disarmed, named, directed to Mara Wells in Millbrook.",
+      "lastSeen": {
+        "locationId": "millbrook",
+        "day": 5
+      }
+    },
+    "curis": {
+      "id": "curis",
+      "name": "Curis",
+      "role": "Road opportunist, lower Wick settlement",
+      "description": "A lean young man of about twenty-two — hollow-eyed from poor eating, grew up in the lower Wick settlement. First time on the road this way, and he volunteered that fact.",
+      "firstMet": {
+        "locationId": "millbrook",
+        "day": 5
+      },
+      "relationship": 0,
+      "history": [
+        "[d5] Named himself under Huginn's gaze — Curis, same settlement as Bren. Added unprompted that this was the first time. Huginn's shift on the branch was what finally settled him."
+      ],
+      "knownFacts": [
+        "From the lower Wick settlement, grew up there",
+        "Claimed this was his first time doing this — offered without being asked"
+      ],
+      "skillsObserved": [],
+      "status": "active",
+      "gender": "man",
+      "pronouns": "he/him",
+      "statusNote": "At the limestone bend — disarmed, named, directed to Mara Wells in Millbrook.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
@@ -4241,24 +4269,41 @@
         "aliases": [],
         "createdDay": 5,
         "updatedDay": 5
+      },
+      "lower-wick-settlement": {
+        "id": "lower-wick-settlement",
+        "label": "Lower Wick Settlement",
+        "kind": "place",
+        "facts": [
+          "[d5] A miner's settlement on the south slope, three miles past the lower ford. Two dry seasons running — the dryness pushed at least two men onto the road. Settlement may have direct knowledge of upstream "
+        ],
+        "links": [
+          "the-water-crisis",
+          "millbrook",
+          "bren-thalle",
+          "curis"
+        ],
+        "aliases": [],
+        "createdDay": 5,
+        "updatedDay": 5
       }
     }
   },
   "tendencies": {
-    "strategic": 18.959472704829132,
-    "cerebral": 12.75696255291073,
-    "social": 10.228108152380079,
-    "generous": 2.1812936665927665,
-    "cautious": 12.616255564528876,
-    "physical": 2.830823947788714,
-    "risky": 0.6257846547267759,
-    "ruthless": 3.074063208625722,
-    "carousing": 0.06281265270311208,
-    "amorous": 7.2180187171874755,
-    "patient": 2.3567175996050063,
-    "stealth": 1.589055835133268,
-    "devotion": 0.866744970475257,
-    "craft": 0.8159726926186706
+    "strategic": 18.4854858872084,
+    "cerebral": 12.438038489087962,
+    "social": 9.972405448570576,
+    "generous": 2.1267613249279473,
+    "cautious": 12.300849175415653,
+    "physical": 2.760053349093996,
+    "risky": 0.6101400383586065,
+    "ruthless": 3.9972116284100787,
+    "carousing": 0.06124233638553427,
+    "amorous": 7.037568249257788,
+    "patient": 2.297799659614881,
+    "stealth": 1.5493294392549362,
+    "devotion": 0.8450763462133756,
+    "craft": 0.7955733753032038
   },
   "aptitudes": [
     "strategist",
@@ -4268,7 +4313,7 @@
     "stalwart",
     "charmer"
   ],
-  "actionCount": 469,
+  "actionCount": 470,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -4498,8 +4543,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784381371021,
-  "rev": 681,
+  "updatedAt": 1784381603538,
+  "rev": 682,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5170,12 +5215,6 @@
   "opLossPending": false,
   "establishedFacts": [
     {
-      "id": "dara-holt",
-      "text": "Dara Holt has been given the six-week vault-failure window, the surge scope, and the surface footprint location — she has folded the timeline note into her apron and confirmed the figure as a working ",
-      "day": 2,
-      "subjectId": "dara-holt"
-    },
-    {
       "id": "aldric",
       "text": "Aldric has been briefed on the vault-failure timeline and east-channel surge scope — he now understands the fish-count decline and water contamination as one connected problem, and has committed to wa",
       "day": 2,
@@ -5408,6 +5447,12 @@
       "text": "Two road opportunists at the limestone bend were disarmed and directed to Mara Wells in Millbrook — Silas Weir's name given as introduction for honest work. The broad man's grief (a sister, come summe",
       "day": 5,
       "subjectId": null
+    },
+    {
+      "id": "bren-thalle",
+      "text": "Bren Thalle and Curis of the lower Wick settlement named themselves at the limestone bend — miners from a south-slope settlement two dry seasons running, three miles past the ford. Directed to Mara We",
+      "day": 5,
+      "subjectId": "bren-thalle"
     }
   ],
   "practice": {
@@ -5530,7 +5575,7 @@
   "syncedAt": 1784348465253,
   "teachers": {},
   "regionsKnown": {
-    "valley": 286
+    "valley": 287
   },
   "foreclosed": [
     "rootkin",
@@ -5585,10 +5630,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T13:29:31.018Z",
+      "lastAt": "2026-07-18T13:33:23.534Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 11
+      "beats": 12
     }
   ],
   "company": [

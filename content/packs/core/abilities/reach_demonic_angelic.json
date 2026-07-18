@@ -17,8 +17,8 @@
         "emotional_logical": -0.2
       },
       "functions": [
-        "command",
         "bind",
+        "command",
         "reveal"
       ],
       "narrationHints": "Something in the room admits what it wants, and the admitting has teeth.",
@@ -29,19 +29,37 @@
           "rank": 1,
           "name": "The Named Want",
           "grants": "Name what a person actually wants — not what they claim, not what they should — and speak it aloud so they hear it.",
-          "cannot": "Naming a want is not granting it. Some people will hate you forever for the naming."
+          "cannot": "Naming a want is not granting it. Some people will hate you forever for the naming.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Bargain",
           "grants": "Strike a binding bargain: both sides get what they truly want, and both sides pay what it truly costs.",
-          "cannot": "The Bargain is exactly fair, which is the horror of it. It will not protect someone from the price of their own wanting."
+          "cannot": "The Bargain is exactly fair, which is the horror of it. It will not protect someone from the price of their own wanting.",
+          "functions": [
+            "reveal",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Deep Descent",
           "grants": "Descend into a person, a place, or an institution and surface with its true engine — the appetite it is actually running on, however it dresses.",
-          "cannot": "What you surface with, you now carry. The Choir's deepest are unable to see anyone as anything but their hunger, and are usually right, and are unbearable."
+          "cannot": "What you surface with, you now carry. The Choir's deepest are unable to see anyone as anything but their hunger, and are usually right, and are unbearable.",
+          "functions": [
+            "reveal",
+            "bind",
+            "command"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "gated": "learned",
@@ -75,19 +93,34 @@
           "rank": 1,
           "name": "Appetite-Sense",
           "grants": "Feel what a person actually wants, beneath what they are asking for.",
-          "cannot": "It reads want, not intent. What they will DO about the want is a different craft."
+          "cannot": "It reads want, not intent. What they will DO about the want is a different craft.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Hollow Read",
           "grants": "Feel the want a person is refusing to admit to themselves — the one doing the most work.",
-          "cannot": "Knowing the want they deny is a weapon, and it is very hard not to use it."
+          "cannot": "Knowing the want they deny is a weapon, and it is very hard not to use it.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Whole Hunger",
           "grants": "Read the appetite of a crowd, a faction, a city — what the whole thing is actually reaching for.",
-          "cannot": "A crowd's hunger is not the sum of its people's. It is stupider and much stronger."
+          "cannot": "A crowd's hunger is not the sum of its people's. It is stupider and much stronger.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "gated": "learned",
@@ -111,8 +144,8 @@
         "falsehood_truth": 0.2
       },
       "functions": [
-        "command",
         "bind",
+        "foresee",
         "reveal"
       ],
       "narrationHints": "The price is named plainly, and it is worse for being fair.",
@@ -123,19 +156,37 @@
           "rank": 1,
           "name": "The Offered Price",
           "grants": "Name what a thing will truly cost the person who wants it. They may still take it.",
-          "cannot": "Naming the price does not stop them. It only means they cannot say they were not told."
+          "cannot": "Naming the price does not stop them. It only means they cannot say they were not told.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Held Price",
           "grants": "The price, once named and accepted, BINDS — it will be paid, in the coin named, whatever they do afterward.",
-          "cannot": "You are now the one who holds it. Collecting is not optional, even when you have come to love them."
+          "cannot": "You are now the one who holds it. Collecting is not optional, even when you have come to love them.",
+          "functions": [
+            "reveal",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The True Cost",
           "grants": "Name what a course of action will ultimately cost — not the ledger price, the real one, years out.",
-          "cannot": "People do not believe true costs. The Choir's oldest grief is being right and ignored."
+          "cannot": "People do not believe true costs. The Choir's oldest grief is being right and ignored.",
+          "functions": [
+            "reveal",
+            "bind",
+            "foresee"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "gated": "learned",
@@ -160,9 +211,9 @@
         "dark_light": 0.2
       },
       "functions": [
-        "restore",
-        "ward",
+        "bind",
         "command",
+        "restore",
         "reveal"
       ],
       "narrationHints": "The light here does not warm. It measures.",
@@ -173,19 +224,38 @@
           "rank": 1,
           "name": "The Measuring Eye",
           "grants": "See a person's moral weight — what they have done, what it cost others, what they carry.",
-          "cannot": "It measures the deed, not the person. The Orders forget this distinction constantly and catastrophically."
+          "cannot": "It measures the deed, not the person. The Orders forget this distinction constantly and catastrophically.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Mercy",
           "grants": "Grant a real absolution — lift a weight a person has carried, genuinely, and they will feel it leave.",
-          "cannot": "Mercy given is mercy TAKEN ON. The weight does not vanish; it moves to you."
+          "cannot": "Mercy given is mercy TAKEN ON. The weight does not vanish; it moves to you.",
+          "functions": [
+            "reveal",
+            "restore"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Judgment",
           "grants": "Pronounce a judgment that BINDS — it is true, everyone present knows it is true, and it does not come undone.",
-          "cannot": "If you are wrong, the judgment binds anyway. The Seraphic Orders' history is a long argument about that sentence."
+          "cannot": "If you are wrong, the judgment binds anyway. The Seraphic Orders' history is a long argument about that sentence.",
+          "functions": [
+            "reveal",
+            "restore",
+            "bind",
+            "command"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "gated": "learned",
@@ -219,19 +289,34 @@
           "rank": 1,
           "name": "The Weighing Look",
           "grants": "See roughly what a person carries — the harm done, the harm borne.",
-          "cannot": "It sees weight, not story. A heavy person may be heavy for good reasons."
+          "cannot": "It sees weight, not story. A heavy person may be heavy for good reasons.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Clear Ledger",
           "grants": "See the specifics: what was done, to whom, and whether it was ever answered for.",
-          "cannot": "Seeing the ledger tempts you to collect on it. That is the Orders' besetting sin."
+          "cannot": "Seeing the ledger tempts you to collect on it. That is the Orders' besetting sin.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Unblinking Measure",
           "grants": "Weigh anyone, at any distance, without their consent or knowledge.",
-          "cannot": "Nobody survives being weighed forever. Including you, and the Orders do it to their own."
+          "cannot": "Nobody survives being weighed forever. Including you, and the Orders do it to their own.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "gated": "learned",
@@ -255,9 +340,9 @@
         "violence_peace": 0.2
       },
       "functions": [
+        "resist",
         "shield",
-        "ward",
-        "resist"
+        "ward"
       ],
       "narrationHints": "A word is spoken and the blow simply does not arrive.",
       "description": "Interpose a spoken certainty between harm and a person — the Seraphic ward, which is why the Orders are loved despite everything.",
@@ -267,19 +352,39 @@
           "rank": 1,
           "name": "The Shielding Word",
           "grants": "Ward one person from one harm with a spoken certainty.",
-          "cannot": "You must actually believe it. A hollow word wards nothing, and everyone can hear the hollow."
+          "cannot": "You must actually believe it. A hollow word wards nothing, and everyone can hear the hollow.",
+          "functions": [
+            "ward",
+            "shield"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Standing Ward",
           "grants": "The ward holds over a place and a people, for as long as you keep speaking for them.",
-          "cannot": "You must keep speaking. And you must keep meaning it, which is harder."
+          "cannot": "You must keep speaking. And you must keep meaning it, which is harder.",
+          "functions": [
+            "ward",
+            "shield",
+            "resist"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Unbroken Word",
           "grants": "A ward that holds after you have gone — a word spoken so wholly it keeps standing on its own.",
-          "cannot": "It stands on what you meant when you said it. If you change, it does not. Sister Alder's ward is of this kind, and she has thought about that a great deal."
+          "cannot": "It stands on what you meant when you said it. If you change, it does not. Sister Alder's ward is of this kind, and she has thought about that a great deal.",
+          "functions": [
+            "ward",
+            "shield",
+            "resist"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "gated": "learned",
@@ -306,14 +411,14 @@
         "wound",
         "appetite"
       ],
-      "harmRung": "damaging",
+      "harmRung": "incapacitating",
       "narrationHints": "She didn't hit the person. She hit what the person was protecting.",
       "description": "Strike at a person's hunger — not the body, but what they've been keeping safe by not admitting it.",
       "notFor": [],
       "tradition": "abyssal",
       "functions": [
-        "strike",
-        "hinder"
+        "hinder",
+        "strike"
       ],
       "challengeTypes": [
         "combat",
@@ -325,19 +430,36 @@
           "rank": 1,
           "name": "The Unguarded Want",
           "grants": "Strike at what a person most doesn't want to lose — they are fortified against the ordinary attack but have no guard on what they want.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "strike"
+          ],
+          "gains": "broaden",
+          "harmRung": "damaging"
         },
         {
           "rank": 2,
           "name": "Named and Struck",
           "grants": "Name the appetite and hit it — not the body, what the body has been protecting. The wound is real and lands where they cannot wall it out.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "strike",
+            "hinder"
+          ],
+          "gains": "broaden",
+          "harmRung": "damaging"
         },
         {
           "rank": 3,
           "name": "The Thing They Would Not Name",
           "grants": "Hit what they kept unnamed. They will know what was struck. They will not be the same on the other side of it.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "strike",
+            "hinder"
+          ],
+          "gains": "deepen",
+          "harmRung": "incapacitating"
         }
       ],
       "nativeOrCombination": "native"
@@ -363,8 +485,9 @@
       "notFor": [],
       "tradition": "abyssal",
       "functions": [
+        "break",
         "heal",
-        "break"
+        "restore"
       ],
       "challengeTypes": [
         "medical",
@@ -376,19 +499,37 @@
           "rank": 1,
           "name": "Give It Down",
           "grants": "Offer a wound, pain, or carried weight to the deep — the abyss will take it. The wound goes with it.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "heal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Consumed Entirely",
           "grants": "Not healed in the ordinary sense — gone; the abyss ate it and what remains is the person without what they were carrying.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "heal",
+            "break"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Transfer",
           "grants": "Take a wound from another into yourself and offer it down. You carry it briefly; then you don't; then neither does anyone.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "heal",
+            "break",
+            "restore"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -414,8 +555,9 @@
       "notFor": [],
       "tradition": "abyssal",
       "functions": [
+        "hinder",
         "shield",
-        "hinder"
+        "ward"
       ],
       "challengeTypes": [
         "combat",
@@ -427,19 +569,37 @@
           "rank": 1,
           "name": "Let It Show",
           "grants": "Let what you carry show — the depth of where you've been. Things that prey on the vulnerable find another target.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "ward"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Real Weight",
-          "grants": "The dread around you is a genuine deterrent — not fear you project, weight you carry that others feel before they decide to act.",
-          "cannot": null
+          "grants": "The dread around you is a genuine deterrent — not fear you project but weight others feel before they decide. Those who press anyway do it weakened: the nerve goes out of the approach, the first move comes slower and worse than they meant it to.",
+          "cannot": null,
+          "functions": [
+            "ward",
+            "hinder"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "It Precedes You",
           "grants": "The mantle arrives before you do. Those who would act against you are navigating something they don't want to examine, and most choose not to.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "ward",
+            "hinder",
+            "shield"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -465,6 +625,8 @@
       "notFor": [],
       "tradition": "abyssal",
       "functions": [
+        "command",
+        "reveal",
         "summon",
         "transform"
       ],
@@ -478,19 +640,40 @@
           "rank": 1,
           "name": "The Surfaced Want",
           "grants": "Summon the underside of a thing — the fear beneath the anger, the hunger beneath the pride — and give it momentary form in the room.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "summon",
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Called and Held",
           "grants": "Call a form from the deep that serves a purpose — an appetite made briefly real, a fear given body — and it holds until it is dismissed.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "summon",
+            "reveal",
+            "transform"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "What You Called Is Yours",
           "grants": "What you call up holds, acts in the world, and is yours to direct until you release it. It is not docile. It is yours.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "summon",
+            "reveal",
+            "transform",
+            "command"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -517,8 +700,9 @@
       "notFor": [],
       "tradition": "abyssal",
       "functions": [
-        "travel",
-        "open"
+        "open",
+        "reveal",
+        "travel"
       ],
       "challengeTypes": [
         "exploration",
@@ -530,19 +714,39 @@
           "rank": 1,
           "name": "The Way Down",
           "grants": "Find the passage to the below — the underground route, the hidden bottom of a space, the layer the map doesn't show.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "open"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Deep Road",
           "grants": "Travel through the below — beneath sight, beneath light, along the layer others don't know how to reach.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "open",
+            "travel"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Guide the Descent",
           "grants": "Take others down the descent path and bring them back up. The route is yours to walk now and to share.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "open",
+            "travel"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -568,8 +772,8 @@
       "notFor": [],
       "tradition": "abyssal",
       "functions": [
-        "sustain",
-        "empower"
+        "empower",
+        "sustain"
       ],
       "challengeTypes": [
         "endurance",
@@ -581,19 +785,36 @@
           "rank": 1,
           "name": "The Deep Holds",
           "grants": "When you begin to run out, the communion sustains — something from below keeps going what above has exhausted.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Sustaining the Group",
           "grants": "Draw from the depth to carry your party through the hardest part — the energy isn't yours, but it is available to those who have been where you have been.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain",
+            "empower"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Unexhausted Deep",
           "grants": "The communion sustains indefinitely in conditions of deprivation — as long as the connection holds, you and yours hold.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain",
+            "empower"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -689,6 +910,7 @@
       "notFor": [],
       "tradition": "seraphic",
       "functions": [
+        "command",
         "make",
         "summon"
       ],
@@ -702,19 +924,37 @@
           "rank": 1,
           "name": "The Ordered Thing",
           "grants": "Make something that embodies proper order — a structure, a space, an object whose form holds the hierarchy clearly.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "make"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Organizing Made",
           "grants": "Raise a form that organizes what surrounds it — the made thing sets the tone for the space it occupies.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "make",
+            "command"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "What Should Exist",
           "grants": "Summon the form a thing should have and instantiate it — the building that should stand, the arrangement that should be — made real by the authority to say what is proper.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "make",
+            "command",
+            "summon"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -741,8 +981,9 @@
       "notFor": [],
       "tradition": "seraphic",
       "functions": [
-        "travel",
-        "open"
+        "move",
+        "open",
+        "travel"
       ],
       "challengeTypes": [
         "exploration",
@@ -754,19 +995,39 @@
           "rank": 1,
           "name": "Past the Limit",
           "grants": "Ascend past what should be a physical barrier — scale what isn't scalable, reach the height that closes off the ordinary approach.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "move",
+            "open"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Opened Way",
           "grants": "Show the ascent path and others can follow — the route up that wasn't there before is there now for those you lead.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "move",
+            "open",
+            "travel"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Choir-Height",
           "grants": "Travel the ascent as a road — any height, any approach — and carry your party with you to wherever the way up leads.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "move",
+            "open",
+            "travel"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -792,8 +1053,8 @@
       "notFor": [],
       "tradition": "seraphic",
       "functions": [
-        "sustain",
-        "empower"
+        "empower",
+        "sustain"
       ],
       "challengeTypes": [
         "endurance",
@@ -805,19 +1066,36 @@
           "rank": 1,
           "name": "The Order Holds",
           "grants": "Draw from the hierarchy to go on — the seraphic who holds their place in the order does not run out alone.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "What the Order Provides",
           "grants": "Sustain your party through the hierarchy's resources — not comfort but genuine sustaining authority; what the order gives, you carry some of.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain",
+            "empower"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Part of What the Order Can Do",
           "grants": "In the hardest conditions, the seraphic who remains part of the order remains part of what the order can do — which is more than any single body can.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain",
+            "empower"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"

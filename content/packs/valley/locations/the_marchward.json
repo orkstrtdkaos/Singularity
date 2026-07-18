@@ -28,7 +28,7 @@
     "the_gralloch",
     "the_axis_gate"
   ],
-  "descriptionSeed": "The habitable border-town between the Redline and the Stillhold — where the violence-pole and the peace-pole both run moderate and TRUTH runs high, because a place that touches both extremes learns to speak plainly or die. The natural base for exploring the Reach: warriors and peace-keepers drink at the same tables here and mean it, uneasily. A both-poles-moderate node — the March itself, made a town.",
+  "descriptionSeed": "The habitable border-town between the Redline and the Stillhold — where the violence-pole and the peace-pole both run moderate and TRUTH runs high, because a place that touches both extremes learns to speak plainly or die. The natural base for exploring the Reach: warriors and peace-keepers drink at the same tables here and mean it, uneasily. A both-poles-moderate node — the March itself, made a town. A waygate sits inside the ward's neutral ground, under truce-law: what comes through arrives unarmed by agreement, and the Marchward has hanged people for testing that.",
   "loreRefs": [
     "the_twelve_reaches",
     "reach_violence_peace"
@@ -43,5 +43,7 @@
   "map": {
     "x": 900,
     "y": 420
-  }
+  },
+  "waygate": true,
+  "waygateTier": 2
 }

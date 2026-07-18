@@ -86,7 +86,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.36467969036384795,
+    "spectrumId": -0.34644570584565554,
     "violence_peace": 0.1030845625,
     "chaos_order": 0.24682516555723183,
     "mechanical_spiritual": 0.2400392471479881,
@@ -869,24 +869,41 @@
         "player": "Introduce your full name and your history - tell her you would be honored to know the same of her.",
         "summary": "Silas names himself fully — Silas Fell Weir, Ashwarden-trained — and the seller names herself in return: Veth Ondra, former warden of the March's south-facing edge, now teaching at the stall.",
         "narration": "You set your right hand briefly on Memory's shaft — not a gesture of protection, just a placement, the way a person puts a hand on something that belongs to them before they speak about themselves.\n\n\"Silas Fell Weir,\" you tell her. \"Ashwarden-trained, Wright by origin. I was schooled in the March's craft by a warden I've not seen in some years, and most of what I know I've built since then — from practice, from necessity, and from two people I trust.\" You nod toward Huginn on the arch-stone. \"The bird preceded me in most of it.\" Then you hold her gaze. \"I would be honored to know your name and your history, if you're willing to offer them.\"\n\nShe considers you for a moment. Not the considering of someone deciding whether to trust — more the considering of someone who has already decided and is choosing where to begin.\n\n\"Veth,\" she says. \"Veth Ondra. I held a warden post on the south-facing edge of the Ashwarden March for eleven years, until the post was dissolved and the holding reassigned. I did not go back to the center. I came here instead.\" She touches the edge of the teaching kit with one finger. \"I carry what the March taught me, and I teach it where I find someone worth teaching. The stall is cover. The tools are the door.\" She looks at Memory again. \"You have walked farther into this craft than most who find the stall. I would like to know how.\""
+      },
+      {
+        "player": "Veth Ondra - I would walk this path with you, if you will have me - my Raven name is 'Troubler'.  No one in the world knows that, and I offer it to you as a bond.",
+        "summary": "Veth Ondra names herself fully, offers her Raven name — Troubler — as a bond, and asks to walk the path with Silas. Huginn witnesses in silence.",
+        "narration": "Veth Ondra is quiet for a long moment after your introduction. Her hands stay flat on the table edge. She looks at Memory, then past you to Huginn on the arch-stone, then back.\n\nThen she speaks. \"Veth Ondra,\" she says. \"South-facing warden post, Ashwarden March, eleven years. The post was dissolved and the holding reassigned. I did not go back to the center.\" She pauses, and something in her posture shifts — not relaxing, but opening. The way a door moves when someone has decided to stop holding it closed. \"I would walk this path with you,\" she says, \"if you will have me.\"\n\nShe does not stop there. She lifts her chin slightly, and her voice drops to something level and deliberate — the register of a person saying a true thing that costs them something. \"My Raven name is Troubler,\" she says. \"No one in the world knows that. I offer it to you as a bond.\"\n\nHuginn turns his head on the arch-stone. One full, slow turn — not at Veth, but at you. His eye is steady and extremely calm, and he says nothing. His silence sits in the air with a weight you have learned to read. It is not warning. It is witness.\n\nThe morning light comes in level over the market stalls and lies across the dark cloth between you. The bone-handled tools are still there in their teaching sequence, still waiting."
       }
     ],
     "lastTurn": {
-      "narration": "You set your right hand briefly on Memory's shaft — not a gesture of protection, just a placement, the way a person puts a hand on something that belongs to them before they speak about themselves.\n\n\"Silas Fell Weir,\" you tell her. \"Ashwarden-trained, Wright by origin. I was schooled in the March's craft by a warden I've not seen in some years, and most of what I know I've built since then — from practice, from necessity, and from two people I trust.\" You nod toward Huginn on the arch-stone. \"The bird preceded me in most of it.\" Then you hold her gaze. \"I would be honored to know your name and your history, if you're willing to offer them.\"\n\nShe considers you for a moment. Not the considering of someone deciding whether to trust — more the considering of someone who has already decided and is choosing where to begin.\n\n\"Veth,\" she says. \"Veth Ondra. I held a warden post on the south-facing edge of the Ashwarden March for eleven years, until the post was dissolved and the holding reassigned. I did not go back to the center. I came here instead.\" She touches the edge of the teaching kit with one finger. \"I carry what the March taught me, and I teach it where I find someone worth teaching. The stall is cover. The tools are the door.\" She looks at Memory again. \"You have walked farther into this craft than most who find the stall. I would like to know how.\"",
-      "sceneSummary": "Silas names himself fully — Silas Fell Weir, Ashwarden-trained — and the seller names herself in return: Veth Ondra, former warden of the March's south-facing edge, now teaching at the stall.",
+      "narration": "Veth Ondra is quiet for a long moment after your introduction. Her hands stay flat on the table edge. She looks at Memory, then past you to Huginn on the arch-stone, then back.\n\nThen she speaks. \"Veth Ondra,\" she says. \"South-facing warden post, Ashwarden March, eleven years. The post was dissolved and the holding reassigned. I did not go back to the center.\" She pauses, and something in her posture shifts — not relaxing, but opening. The way a door moves when someone has decided to stop holding it closed. \"I would walk this path with you,\" she says, \"if you will have me.\"\n\nShe does not stop there. She lifts her chin slightly, and her voice drops to something level and deliberate — the register of a person saying a true thing that costs them something. \"My Raven name is Troubler,\" she says. \"No one in the world knows that. I offer it to you as a bond.\"\n\nHuginn turns his head on the arch-stone. One full, slow turn — not at Veth, but at you. His eye is steady and extremely calm, and he says nothing. His silence sits in the air with a weight you have learned to read. It is not warning. It is witness.\n\nThe morning light comes in level over the market stalls and lies across the dark cloth between you. The bone-handled tools are still there in their teaching sequence, still waiting.",
+      "sceneSummary": "Veth Ondra names herself fully, offers her Raven name — Troubler — as a bond, and asks to walk the path with Silas. Huginn witnesses in silence.",
       "choices": [
         {
-          "label": "Tell her exactly how — the meadow resurrection, the spear-binding, the soul-mark exchange — the three things that changed the grain of what you carry",
+          "label": "Receive her Raven name with your own — give her the name Troubler's worth and answer the bond with something true of yours",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
+            "romantic",
+            "devote"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Accept her company plainly — ask what she needs from the market row before the party moves",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
             "help"
           ],
           "trivial": true
         },
         {
-          "label": "Ask what she looks for in a student — what the March demands of someone who would go deeper into this craft",
+          "label": "Ask what drove her from the March's center — you want to know the shape of the thing that ended her post before she walks with you into harder country",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
@@ -896,22 +913,13 @@
           "trivial": true
         },
         {
-          "label": "Ask why she left the March's center — what it means that a warden's post was dissolved and she chose this over return",
+          "label": "Bring Pell and Siol over from the market row — introduce Veth to the full party before the road commits anyone",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask plainly what she can teach that you have not yet reached — name the gap between what you built and what the March holds beyond it",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "intentTags": [
-            "negotiate"
+            "lead",
+            "help"
           ],
           "trivial": true
         }
@@ -921,11 +929,11 @@
         "npcsPresent": [
           {
             "name": "Veth Ondra",
-            "state": "Both hands on the table edge, looking at Silas directly — she has named herself and now wants to know how he walked this far into the craft."
+            "state": "Hands flat on the table edge — the offer made, the Raven name given, waiting on Silas's answer."
           },
           {
             "name": "Huginn",
-            "state": "On the arch-stone to the north — did not acknowledge Veth's look; the bird's silence its own comment."
+            "state": "Turned his head fully toward Silas on the arch-stone — eye steady, silent, witnessing."
           },
           {
             "name": "Siol",
@@ -937,66 +945,57 @@
           }
         ],
         "objects": [
-          "Memory — upright in Silas's grip, butt on the dirt",
-          "dark cloth covering the table",
-          "bone-handled tools in teaching sequence — all pieces present",
-          "seven waygate arches visible to the north"
+          "Memory — upright in the dirt between Silas and Veth",
+          "Dark cloth covering the table",
+          "Bone-handled tools in teaching sequence — all pieces still present",
+          "Seven waygate arches visible to the north"
         ],
         "threads": [
-          "Veth wants to know how Silas walked this far into the craft — her question is open and waiting",
-          "Whether she will offer to teach, and what that would cost",
-          "Pell's unspoken answer to the evening suggestion — filed, not resolved",
-          "The Ent circle: still to visit"
+          "Veth's offer is open — she has given her Raven name and asked to walk the path; Silas has not answered",
+          "What ended her post, and what she knows the March still has to teach",
+          "Pell and Siol in the market row — not yet introduced to Veth",
+          "The Ent circle: still to visit",
+          "The evening suggestion between Silas and Pell — filed, not resolved"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
+          "op": "update",
           "npcId": "veth-ondra",
           "name": "Veth Ondra",
-          "role": "Former Ashwarden warden, now teaching at the dark-cloth stall in the Hub market row",
+          "role": "Former Ashwarden warden, now teaching at the dark-cloth stall — has offered to join the party",
           "gender": "woman",
           "pronouns": "she/her",
-          "description": "A still, direct woman — held a south-facing warden post on the Ashwarden March for eleven years before the post was dissolved. Chose the Hub over the March's center. The stall is cover; the teaching kit is the door.",
-          "note": "Named herself plainly and in full after Silas named himself. Now wants to know how he walked this far into the craft without a functioning warden post behind him.",
+          "note": "Named her Raven name — Troubler — as a bond. Asked to walk the path with Silas. The offer is open.",
           "learned": [
-            "Held a warden post on the south-facing edge of the Ashwarden March for eleven years",
-            "Her post was dissolved and the holding reassigned — she did not return to the center",
-            "Came to the Hub instead and has been teaching at the stall since",
-            "The stall and the tools are a door, not a livelihood"
+            "Her Raven name is Troubler — no one else in the world holds this",
+            "She offered it as a bond, not a greeting — a deliberate act with weight behind it",
+            "She is prepared to leave the stall and the Hub and travel"
           ],
           "skillsObserved": [
-            "reading a traveler's craft from a single object without prompting",
-            "precise self-introduction — history offered in plain sequence without embellishment"
+            "naming a secret thing plainly and without ceremony as a commitment"
           ],
           "relationshipDelta": 2,
           "status": "active",
-          "statusNote": "At the dark-cloth stall in the Hub market row — named herself to Silas and is now asking how he came this far."
+          "statusNote": "At the dark-cloth stall in the Hub market row — her offer open, waiting on Silas's answer"
         }
       ],
       "codexUpdates": [
         {
           "topic": "veth-ondra",
-          "label": "Veth Ondra — Former Ashwarden Warden",
+          "label": "Veth Ondra",
           "kind": "person",
           "entityId": "veth-ondra",
-          "fact": "Full name: Veth Ondra. Held a south-facing warden post on the Ashwarden March for eleven years. Her post was dissolved and the holding reassigned; she came to the Hub rather than returning to the March's center. Now teaches at the dark-cloth stall — the stall is cover, the teaching kit is the door.",
+          "fact": "Her Raven name is Troubler — given to Silas as a bond, known to no one else. She has asked to walk the path with him.",
           "links": [
             "the-edge-district-ledger",
-            "radiant-plateau-edge"
+            "the-water-crisis"
           ]
-        }
-      ],
-      "generateRequest": [
-        {
-          "type": "npc",
-          "hint": "Veth Ondra — former Ashwarden warden, south-facing post, eleven years, dissolved and reassigned; now at the Hub teaching at the dark-cloth stall with bone-handled tools as her kit; woman, direct, patient, death-craft practitioner",
-          "why": "She has named herself and is now a named, recurring contact — she needs a stable generated identity so she persists correctly across scenes"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange of names and histories at the stall"
+        "why": "A few minutes of exchange at the stall — the offer given, the room held"
       }
     },
     "sceneState": {
@@ -1004,11 +1003,11 @@
       "npcsPresent": [
         {
           "name": "Veth Ondra",
-          "state": "Both hands on the table edge, looking at Silas directly — she has named herself and now wants to know how he walked this"
+          "state": "Hands flat on the table edge — the offer made, the Raven name given, waiting on Silas's answer."
         },
         {
           "name": "Huginn",
-          "state": "On the arch-stone to the north — did not acknowledge Veth's look; the bird's silence its own comment."
+          "state": "Turned his head fully toward Silas on the arch-stone — eye steady, silent, witnessing."
         },
         {
           "name": "Siol",
@@ -1020,16 +1019,17 @@
         }
       ],
       "objects": [
-        "Memory — upright in Silas's grip, butt on the dirt",
-        "dark cloth covering the table",
-        "bone-handled tools in teaching sequence — all pieces present",
-        "seven waygate arches visible to the north"
+        "Memory — upright in the dirt between Silas and Veth",
+        "Dark cloth covering the table",
+        "Bone-handled tools in teaching sequence — all pieces still present",
+        "Seven waygate arches visible to the north"
       ],
       "threads": [
-        "Veth wants to know how Silas walked this far into the craft — her question is open and waiting",
-        "Whether she will offer to teach, and what that would cost",
-        "Pell's unspoken answer to the evening suggestion — filed, not resolved",
-        "The Ent circle: still to visit"
+        "Veth's offer is open — she has given her Raven name and asked to walk the path; Silas has not answered",
+        "What ended her post, and what she knows the March still has to teach",
+        "Pell and Siol in the market row — not yet introduced to Veth",
+        "The Ent circle: still to visit",
+        "The evening suggestion between Silas and Pell — filed, not resolved"
       ]
     }
   },
@@ -2146,29 +2146,34 @@
     "veth-ondra": {
       "id": "veth-ondra",
       "name": "Veth Ondra",
-      "role": "Former Ashwarden warden, now teaching at the dark-cloth stall in the Hub market row",
+      "role": "Former Ashwarden warden, now teaching at the dark-cloth stall — has offered to join the party",
       "description": "A still, direct woman — held a south-facing warden post on the Ashwarden March for eleven years before the post was dissolved. Chose the Hub over the March's center. The stall is cover; the teaching kit is the door.",
       "firstMet": {
         "locationId": "gen-waygate",
         "day": 6
       },
-      "relationship": 2,
+      "relationship": 4,
       "history": [
-        "[d6] Named herself plainly and in full after Silas named himself. Now wants to know how he walked this far into the craft without a functioning warden post behind him."
+        "[d6] Named herself plainly and in full after Silas named himself. Now wants to know how he walked this far into the craft without a functioning warden post behind him.",
+        "[d6] Named her Raven name — Troubler — as a bond. Asked to walk the path with Silas. The offer is open."
       ],
       "knownFacts": [
         "Held a warden post on the south-facing edge of the Ashwarden March for eleven years",
         "Her post was dissolved and the holding reassigned — she did not return to the center",
-        "Came to the Hub instead and has been teaching at the stall since"
+        "Came to the Hub instead and has been teaching at the stall since",
+        "Her Raven name is Troubler — no one else in the world holds this",
+        "She offered it as a bond, not a greeting — a deliberate act with weight behind it",
+        "She is prepared to leave the stall and the Hub and travel"
       ],
       "skillsObserved": [
         "reading a traveler's craft from a single object without prom",
-        "precise self-introduction — history offered in plain sequenc"
+        "precise self-introduction — history offered in plain sequenc",
+        "naming a secret thing plainly and without ceremony as a comm"
       ],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the dark-cloth stall in the Hub market row — named herself to Silas and is now asking how he came this far.",
+      "statusNote": "At the dark-cloth stall in the Hub market row — her offer open, waiting on Silas's answer",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 6
@@ -3977,21 +3982,21 @@
     }
   },
   "tendencies": {
-    "strategic": 13.362746387611738,
-    "cerebral": 12.925171782897623,
-    "social": 21.133479365732963,
-    "generous": 2.6860169023744525,
-    "cautious": 5.509793284354339,
-    "physical": 1.2244767264581353,
-    "risky": 1.2841064251870518,
-    "ruthless": 0.40942330056235915,
-    "carousing": 0.006272882656225301,
-    "amorous": 4.8974272557493395,
-    "patient": 1.014010738567344,
-    "stealth": 0.15869351729332748,
-    "devotion": 0.35462376605430335,
-    "craft": 1.253569908419962,
-    "leadership": 0.8077676150052869
+    "strategic": 13.028677727921444,
+    "cerebral": 12.602042488325182,
+    "social": 23.605142381589637,
+    "generous": 2.618866479815091,
+    "cautious": 5.3720484522454806,
+    "physical": 1.1938648082966818,
+    "risky": 1.2520037645573754,
+    "ruthless": 0.39918771804830017,
+    "carousing": 0.006116060589819668,
+    "amorous": 4.774991574355606,
+    "patient": 0.9886604701031604,
+    "stealth": 0.15472617936099428,
+    "devotion": 0.3457581719029458,
+    "craft": 1.222230660709463,
+    "leadership": 0.7875734246301548
   },
   "aptitudes": [
     "strategist",
@@ -3999,7 +4004,7 @@
     "scholar",
     "orator"
   ],
-  "actionCount": 560,
+  "actionCount": 561,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -4269,8 +4274,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784416021160,
-  "rev": 815,
+  "updatedAt": 1784416458607,
+  "rev": 816,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5645,7 +5650,7 @@
   "syncedAt": 1784392733860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 381
+    "valley": 382
   },
   "foreclosed": [
     "rootkin",
@@ -5702,10 +5707,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T23:07:01.158Z",
+      "lastAt": "2026-07-18T23:14:18.606Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 106,
+      "beats": 107,
       "_recapError": null,
       "recap": "Day eighteen, and Silas Weir moved like a man who'd finally stopped fighting the shape of what he was. On the road he disarmed three opportunists without breaking bones, read the grief sitting behind the broad man's eyes, named it plainly, pressed provisions into their hands, and sent them toward something worth doing — mercy given as instruction, not sentiment. Then he brought the hard people together: Dara, Aldric, Fendt, Mara, Calvar, all of them in the heat of Pell's forge with no exits easy and no pretense left, and in that single evening he turned a valley's quiet panic into four working threads — engineering, logistics, supply, accounts — each with a named lead and a direction to face. The crisis didn't end, but it stopped being formless, and that was his doing."
     }

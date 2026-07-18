@@ -399,7 +399,7 @@
         "mechanical_spiritual": 0
       },
       "functions": [
-        "mend",
+        "command",
         "reveal"
       ],
       "narrationHints": "The machine runs on why, not just how.",
@@ -410,7 +410,25 @@
           "rank": 1,
           "name": "The Meaning-Engine",
           "grants": "Run a deep Precursor work by both its mechanism AND its meaning — the way to treat with What Sleeps Under.",
-          "cannot": "Needs dense substrate; what answers may not be tame."
+          "cannot": "Needs dense substrate; what answers may not be tame.",
+          "functions": [
+            "command",
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
+        },
+        {
+          "rank": 2,
+          "name": "The Deeper Register",
+          "grants": "Hold the register open rather than striking it once — a deep Precursor work answers repeatedly, and answers questions as well as commands. What Sleeps Under begins to address you specifically rather than generically.",
+          "cannot": "Being addressed specifically is not the same as being welcome. It still needs dense substrate, and the density is not yours to arrange. And a work that has learned your particular meaning can be reached through you by anything else that learns it.",
+          "functions": [
+            "command",
+            "reveal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "powerSystem": "reach_mechanical_spiritual",
@@ -830,7 +848,25 @@
           "rank": 1,
           "name": "The Self-Mending Work",
           "grants": "Build a mechanism or structure that repairs itself, enduring long past its making.",
-          "cannot": "It cannot mend the living, only the made; it costs the future's repairs at the moment of making; and a thing built to outlast you will — with all the grief that carries."
+          "cannot": "It cannot mend the living, only the made; it costs the future's repairs at the moment of making; and a thing built to outlast you will — with all the grief that carries.",
+          "functions": [
+            "make",
+            "mend"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
+        },
+        {
+          "rank": 2,
+          "name": "The Work That Learns",
+          "grants": "The folded-in mending no longer merely restores — it improves. A work at this grade repairs itself toward what its use has shown it should have been: a bridge widens where feet actually cross, a mechanism strengthens where it actually strains.",
+          "cannot": "A work that improves itself drifts from its maker's intent, and the Enginewrights argue whether that is mastery or abandonment. It still cannot mend the living. And it now costs more than the whole future's repairs — you are paying for a century of judgement you will not be there to make.",
+          "functions": [
+            "make",
+            "mend"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "gated": "learned",

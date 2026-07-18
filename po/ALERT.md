@@ -1,4 +1,17 @@
-# PIPELINE ALERT — Singularity## 🍄 SNG-140 — The Wild Half: the tangled substrate (Erik's fae/fantasy idea; small content + wiring)
+# PIPELINE ALERT — Singularity## 🟢 SNG-140 — The Wild Half tangled substrate AUTHORED + VALIDATED (content done; wiring owed CCode)
+Authored the third keeper-kind. **content_ci + full npm suite GREEN locally BEFORE ship — and the suite caught a real error pre-ship that I fixed before any byte left (the discipline working as intended).**
+- **Authored `wild_current.json`** (new powerSystem): `the_churns_gift` (churnfolk T3 — the fae gift that's never what you asked), `the_wild_flowering` (churnfolk T4 — tangled growth-and-ruin), `the_honest_bargain` (abyssal T4 — the fair-but-wild demonic pact). Each carries `wildVariance:true` (documentary until CCode wires the variance resolver) + the wildness in the fiction (always read).
+- **`wildCurrent` on origins:** churnfolk=[the_churns_gift], abyssal=[the_honest_bargain]. **Abyssal now carries BOTH `innatePrecursor` AND `wildCurrent`** — keeps the fabricated deep AND runs wild (canon: it's in two clusters). All ids verified against real abilities.
+- **`the_wild_half` cluster** gains its substrate identity (the tangled current). Completes the cosmology: fabricated-KEPT (seraphic) + living-KEPT (rootkin) + BOTH-WILD (the Wild Half) — a third RELATIONSHIP to the deep, not a fourth pole.
+- **Pre-ship catch:** the full suite flagged an orphan function verb — I'd used `shape` (a family NAME) as a verb; the SHAPE family's verbs are make/transform/summon. Fixed to `transform` locally, re-ran green, THEN shipped. This is the exact class of error (plausible word vs actual vocabulary) that red-gated SNG-130 — caught this time BEFORE origin because I ran the validator first.
+
+**Rulings I chose (Erik said "author it" — flagged for correction):** (1) wildness = potent-with-variance + upside (not a caster-punishing double-edge); rare backfire can be a crit-fail behavior when CCode wires the resolver. (2) wild peoples = churnfolk + abyssal; unmaker left ADJACENT ("clears what the wild finished"), not wild-current itself. Correct either if wrong.
+
+**CCode wiring owed** (mirrors SNG-131): a `wildCurrentAccess` gate for `powerSystem:"wild_current"` seeded from `originRecord.wildCurrent` in finish() (validate each id is wild_current); the `wildVariance` resolver (a wild ability's outcome carries an uncontrolled element); version-gated retro. Status: **content complete_pending_review; wiring owed.**
+
+---
+
+## 🍄 SNG-140 — The Wild Half: the tangled substrate (Erik's fae/fantasy idea; small content + wiring)
 `po/SPEC_SNG-140_wild_half_tangled_substrate.md`. "The fae, the fantasy realms — a strange combination of WILD nanites and living current." **The home already exists:** `the_wild_half` cluster (churnfolk FAE, abyssal demonic, unmaker — "nobody is driving; it ACCRETES") is authored canon but LACKS a substrate identity. Completes the cosmology as a THIRD keeper-kind: fabricated-KEPT (seraphic, SNG-131) + living-KEPT (rootkin, SNG-131) + **BOTH-WILD (the Wild Half)** — both substrates tangled, kept by no one, potent but "lethally unreliable." New `wild_current` powerSystem + `wildCurrent` origin field + a wildness/variance mechanic (the "nobody is driving" made mechanical). Mirrors SNG-131's wiring shape. Abyssal carries BOTH innatePrecursor AND wildCurrent (canon — it's in two clusters). Ring NOT moved. Aevi content: wild_current.json + fields (content_ci LOCALLY first — the discipline). 2 rulings owed Erik.
 
 ---

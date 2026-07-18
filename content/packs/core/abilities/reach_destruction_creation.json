@@ -728,7 +728,23 @@
           "rank": 1,
           "name": "The Undoing Word",
           "grants": "Unmake an assembled thing back to its unbound parts, reversing its making.",
-          "cannot": "It cannot touch the living or the singular, it costs dearly, and un-done is still gone — cleanness is not the same as no loss."
+          "cannot": "It cannot touch the living or the singular, it costs dearly, and un-done is still gone — cleanness is not the same as no loss.",
+          "functions": [
+            "break"
+          ],
+          "gains": "broaden",
+          "harmRung": "damaging"
+        },
+        {
+          "rank": 2,
+          "name": "The Longer Unmaking",
+          "grants": "The word reaches what is BOUND as well as what is built — a working, a ward, a seal, a pact held by craft rather than by will. And the scale rises: not a thing but an assembly, a mechanism, a gate, the whole of something that was put together.",
+          "cannot": "Still never the living, never the truly singular. Unmaking a binding releases whatever that binding held, and the GM decides what that was. And the cost climbs with the scale — Unmakers who reach too far come apart along the seams they opened.",
+          "functions": [
+            "break"
+          ],
+          "gains": "deepen",
+          "harmRung": "damaging"
         }
       ],
       "gated": "learned",
@@ -858,7 +874,25 @@
           "rank": 1,
           "name": "The Reforging",
           "grants": "Reforge a broken thing so its break becomes its strength.",
-          "cannot": "It works on the made, not the living; it needs a true break to work with; and the reforged thing is changed — stronger, but no longer the thing it was before it broke."
+          "cannot": "It works on the made, not the living; it needs a true break to work with; and the reforged thing is changed — stronger, but no longer the thing it was before it broke.",
+          "functions": [
+            "make",
+            "mend"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
+        },
+        {
+          "rank": 2,
+          "name": "The Deep Reforging",
+          "grants": "Work breaks that should be past working — a thing shattered rather than cracked, a thing broken many times over, a thing broken so long ago its maker is forgotten. The reforged piece carries every break as a line of strength, and a Wright who reads it can recite the whole history from the metal.",
+          "cannot": "Still the made, never the living. The more breaks worked in, the further the thing travels from what it was — at some point it is a new thing wearing an old name, and the Wrights argue about where that point falls. And a reforging this deep takes days, not hours.",
+          "functions": [
+            "make",
+            "mend"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "gated": "learned",

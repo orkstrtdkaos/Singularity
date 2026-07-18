@@ -832,7 +832,23 @@
           "rank": 1,
           "name": "The Far Step",
           "grants": "Cross a great visible or known distance in a single step.",
-          "cannot": "It carries only you and what you bear, it needs a seen or known destination, and it strands you as easily as it delivers you — far is far, whichever way you stepped."
+          "cannot": "It carries only you and what you bear, it needs a seen or known destination, and it strands you as easily as it delivers you — far is far, whichever way you stepped.",
+          "functions": [
+            "travel"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
+        },
+        {
+          "rank": 2,
+          "name": "The Carried Step",
+          "grants": "Carry others with you — a party crosses in the same stride. And the requirement softens: a place described truly enough by someone who has stood there can be stepped to, though the arrival is rougher than a place you have met yourself.",
+          "cannot": "A described place is a described place; the Horizon peoples lose walkers this way, and the GM decides what a rough arrival costs. Carrying others multiplies the stranding risk. And it still strands as readily as it delivers.",
+          "functions": [
+            "travel"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "gated": "learned",
@@ -900,7 +916,25 @@
           "rank": 1,
           "name": "The Held Hour",
           "grants": "Hold a single hour open past its passing, keeping time for what must be finished.",
-          "cannot": "It cannot rewind, only delay the passing; the same hour cannot be re-held; and the one holding time does not get to rest in it."
+          "cannot": "It cannot rewind, only delay the passing; the same hour cannot be re-held; and the one holding time does not get to rest in it.",
+          "functions": [
+            "bind",
+            "foresee"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
+        },
+        {
+          "rank": 2,
+          "name": "The Kept Hours",
+          "grants": "Hold more than a single hour — a night's work finished inside a kept evening, a siege's preparation inside one afternoon. And those working within it now benefit fully: what they finish in kept time is genuinely finished.",
+          "cannot": "The holder still does not rest, and holding several hours ages the holder for real. The same ground cannot be re-held. And an hour kept too long is noticed — the Hourkeepers hold that time collects its debts, and the GM decides when.",
+          "functions": [
+            "bind",
+            "foresee"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "gated": "learned",

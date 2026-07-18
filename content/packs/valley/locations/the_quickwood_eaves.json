@@ -37,7 +37,7 @@
     "ent_deepwood",
     "grovehome"
   ],
-  "descriptionSeed": "Where the grown city thins into ordinary forest and ordinary forest thins into the Deepwood. The Eaves are the Rootkin's front door and they have deliberately not marked it — you know you have arrived when the trees start being interested in you.",
+  "descriptionSeed": "Where the grown city thins into ordinary forest and ordinary forest thins into the Deepwood. The Eaves are the Rootkin's front door and they have deliberately not marked it — you know you have arrived when the trees start being interested in you. A waygate stands among the eaves-trees, grown around rather than cut for. Arriving here you step out of the gate into living wood that has closed politely over the frame.",
   "loreRefs": [
     "the_twelve_reaches",
     "traditions"
@@ -56,5 +56,7 @@
     "life": 0.4,
     "chaos": 0.2,
     "concrete": 0.1
-  }
+  },
+  "waygate": true,
+  "waygateTier": 2
 }

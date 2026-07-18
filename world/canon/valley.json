@@ -197,6 +197,72 @@
         "promotedWorldDay": 17,
         "birthWeight": 10
       }
+    },
+    "tane-solr": {
+      "schemaVersion": 1,
+      "id": "tane-solr",
+      "name": "Tane Solr",
+      "role": "Threshold-walker and named bout opponent — a man who has crossed the center-line enough times to stop counting and started watching the sand instead",
+      "homeLocation": "waygate_valley",
+      "communityId": "coliseum.farcarc",
+      "personality": {
+        "warmth": 0.4,
+        "trust": 0.35,
+        "candor": 0.65,
+        "patience": 0.85
+      },
+      "spectrum": {
+        "body_mind": -0.2,
+        "emotional_logical": -0.3,
+        "rest_motion": -0.6,
+        "falsehood_truth": 0.5
+      },
+      "functions": [
+        "reveal",
+        "strike",
+        "bind"
+      ],
+      "voiceHints": "Unhurried in a way that is not laziness but arithmetic — he has already run the numbers on you and does not need to rush. Speaks in short declaratives with long pauses between them, as if he is giving the words time to land before he adds more weight. Calls the sand 'the floor' the way carpenters call wood 'the material.' Does not brag. Does not diminish. Names things exactly. When he says your name he means it.",
+      "appearance": "Lean in the way the valley's early-spring wind is lean — nothing wasted, everything purposeful. Grey coat, collarless, worn to the colour of old flint at the cuffs. Two seconds coiled at his left hip, their grip-wraps re-done so many times the cord beneath has fused into something that is no longer rope and not yet bone. Dawn finds him standing at the far arc before the torches are lit, not warming up, just watching the center-line as if it owes him a conversation.",
+      "knowledge": [
+        "The Waygate Coliseum's far arc — every degree of angle the pre-dawn light hits the sand, and what it does to a fighter's depth perception",
+        "How the valley's threshold law reads a bout: where the line is, what crossing it costs, and the three ways experienced fighters use the cost as a weapon",
+        "The particular grammar of two seconds — reach, wrap, redirect, the half-breath of slack that telegraphs everything if you know to listen for it",
+        "Silas's name, and therefore something about Silas — enough to have agreed to the bout, not enough to have made up his mind"
+      ],
+      "wants": "A bout that is true — not won or lost but honest, where both fighters come to the center-line having brought everything they actually are and no more.",
+      "fears": "That he has crossed so many thresholds he no longer feels them, and that the day he stops feeling the line underfoot is the day he becomes dangerous for the wrong reasons.",
+      "history": "Tane came up through the valley circuit in a leaner season, when the Coliseum ran bouts by firelight because they could not afford dawn slots. He lost his first twelve named matches and won the thirteenth by not moving when every instinct in the crowd — and his opponent — was certain he would. He has been studying stillness as a weapon ever since. The grey coat was his instructor's; she died between seasons, not on the sand, and he has not replaced it. He is not sentimental about this. He is precise about it.",
+      "reactsToReputation": {
+        "experienced": "a single nod — peer-recognition, no ceremony",
+        "reckless": "watches more carefully, says less, waits for the recklessness to teach the lesson he will not deliver in words",
+        "seeking": "will speak plainly, once, about what the center-line actually is — then stops, because the rest has to be walked",
+        "named_opponent": "meets their eyes at the far arc before dawn and lets the sand do the introduction"
+      },
+      "image": "https://image.pollinations.ai/prompt/Lean%20in%20the%20way%20the%20valley's%20early-spring%20wind%20is%20lean%20%E2%80%94%20nothing%20wasted%2C%20everything%20purposeful.%20Grey%20coat%2C%20collarless%2C%20worn%20to%20the%20colour%20of%20old%20flint%20at%20the%20cuffs.%20Two%20seconds%20coiled%20at%20his%20left%20hip%2C%2C%20character%20portrait%2C%20named%20Tane%20Solr%2C%20Threshold-walker%20and%20named%20bout%20opponent%20%E2%80%94%20a%20man%20who%20has%20crossed%20the%20center-line%20enough%20times%20to%20sto%2C%20Unhurried%20in%20a%20way%20that%20is%20not%20laziness%20but%20arithmetic%20%E2%80%94%20he%20has%20already%20run%20the%20numbers%20on%20you%20and%20d%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13653&nologo=true",
+      "_canon": {
+        "entityId": "tane-solr",
+        "type": "npc",
+        "weight": 35,
+        "rating": "R+",
+        "tier": "canonical",
+        "provenance": {
+          "playerKey": "player-s9z9u1",
+          "characterId": "char-mrhs8286",
+          "locationId": "gen-waygate",
+          "day": 6,
+          "worldDay": null,
+          "hint": "Tane Solr — a lean threshold-walker in a grey coat, unhurried, experienced on the sand, waiting with two seconds at the ",
+          "why": "He is now Silas's named bout opponent at the center-line and will need a stable identity, personality, and history for t"
+        },
+        "contributedBy": {
+          "playerKey": "player-s9z9u1",
+          "characterId": "char-mrhs8286"
+        },
+        "promotedWorldDay": 18,
+        "birthWeight": 23,
+        "overtook": "tane-solr"
+      }
     }
   },
   "variants": [
@@ -278,6 +344,45 @@
         "promotedWorldDay": 18,
         "birthWeight": 11,
         "rivalId": "the-low-lamp-inn"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "siol-elven-traveler-at-the-hub-plaza-tal",
+      "name": "Siol — Elven traveler at the Hub plaza, tall, pale coat, bir",
+      "role": "someone of Waygate",
+      "spectrum": {},
+      "fears": "being undone by the very grain of this place",
+      "wants": "to go on as they are, in a world that won't quite let them",
+      "knowledge": [],
+      "voiceHints": "",
+      "personality": {},
+      "communityId": null,
+      "homeLocation": "gen-waygate",
+      "reactsToReputation": {},
+      "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Siol%20%E2%80%94%20Elven%20traveler%20at%20the%20Hub%20plaza%2C%20tall%2C%20pale%20coat%2C%20bir%2C%20someone%20of%20Waygate%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=4185&nologo=true",
+      "_canon": {
+        "entityId": "siol-elven-traveler-at-the-hub-plaza-tal",
+        "type": "npc",
+        "weight": 27,
+        "rating": "R+",
+        "tier": "variant",
+        "provenance": {
+          "playerKey": "player-s9z9u1",
+          "characterId": "char-mrhs8286",
+          "locationId": "gen-waygate",
+          "day": 6,
+          "worldDay": null,
+          "hint": "Siol — Elven traveler at the Hub plaza, tall, pale coat, birch-quiet stillness, named Huginn as Marrow without being tol",
+          "why": "First genuine named encounter in the Hub — needs a stable identity so she can recur and the Steadwood passage can be a t"
+        },
+        "contributedBy": {
+          "playerKey": "player-s9z9u1",
+          "characterId": "char-mrhs8286"
+        },
+        "promotedWorldDay": 18,
+        "birthWeight": 23,
+        "rivalId": "siol-elven-traveler-at-the-hub-plaza-tal"
       }
     }
   ]

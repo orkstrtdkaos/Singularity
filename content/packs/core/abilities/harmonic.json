@@ -670,6 +670,7 @@
       },
       "functions": [
         "empower",
+        "foresee",
         "reveal"
       ],
       "narrationHints": "For a moment you hear it — the whole resonance of a place across time, every note it has ever sounded still ringing faintly — and you sing WITH it, and the place remembers what it was and could be.",
@@ -680,7 +681,14 @@
           "rank": 1,
           "name": "The Worldsong",
           "grants": "Hear and join a place's resonance across all its time, moving it toward its truest note.",
-          "cannot": "It costs nearly all you have, it can only draw out what is already latent, and to hear a place's whole song is to carry, after, the weight of every note it ever sounded — including the grievous ones."
+          "cannot": "It costs nearly all you have, it can only draw out what is already latent, and to hear a place's whole song is to carry, after, the weight of every note it ever sounded — including the grievous ones.",
+          "functions": [
+            "reveal",
+            "foresee",
+            "empower"
+          ],
+          "harmRung": "none",
+          "gains": "broaden"
         }
       ],
       "gated": "learned",

@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "the_long_grey",
+  "name": "The Long Grey",
+  "regionId": "the_palelands",
+  "communityId": "ashwarden.long_grey",
+  "axisVector": [
+    0.0,
+    0.0,
+    0.0,
+    -0.4,
+    -0.95,
+    0.0,
+    0.0,
+    0.3,
+    0.0,
+    0.0,
+    0.0,
+    -0.2
+  ],
+  "spectrum": {
+    "death_life": -0.95,
+    "violence_peace": -0.2,
+    "emotional_logical": 0.3,
+    "dark_light": -0.4
+  },
+  "tags": [
+    "ashwarden",
+    "death",
+    "locus",
+    "cult",
+    "dangerous"
+  ],
+  "connections": [
+    "cairnhold"
+  ],
+  "descriptionSeed": "Out past the last cairn the tending stops. The Long Grey is ash-field without end and without anyone attending it, and the Ashwardens do not go there for the reason everyone assumes — not fear, but because the ones who go tend to keep going. It is where Palework stops being a craft and becomes a preference. The practitioners out there are not cruel and are not mad; they have simply concluded that endings are better than beginnings and are being consistent about it, which is worse. Cairnhold does not disown them and will not collect them, and the Ashwardens are honest that this is the failure they have never solved: the Long Grey is what their own tradition looks like when nothing pulls against it.",
+  "loreRefs": [
+    "the_twelve_reaches",
+    "traditions",
+    "world_framing"
+  ],
+  "encounterFlavor": "Practitioners of enormous skill and no urgency at all; ground where nothing has grown for a very long time and the reason is not the soil; someone who left Cairnhold years ago and will speak to you perfectly pleasantly and will not come back.",
+  "dangerLevel": 5,
+  "questSeeds": [
+    "A Cairnhold Ashwarden's teacher walked out to the Long Grey and someone must decide whether to follow",
+    "Something in the Long Grey has begun tending — cairns are being raised out there, and nobody knows by whom",
+    "A Draw-Down adept is working the edge of the Long Grey and the Quiet Ground has stopped receiving patients from that road"
+  ],
+  "map": {
+    "x": 730,
+    "y": 410
+  },
+  "poleIntensity": {
+    "death": 0.95,
+    "dark": 0.4,
+    "logical": 0.3
+  }
+}

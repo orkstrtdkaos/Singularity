@@ -178,7 +178,7 @@ export function ratingRegister(preset = "PG-13") {
  *  before a breakpoint. Ephemeral per-turn inputs (time, resolution, player words) live
  *  in `player`, which goes AFTER the last breakpoint, uncached. See callClaude systemBlocks. */
 export function tierParts(ctx) {
-  const { character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail, structuredQuestsDetail, sceneState, npcRegistryDetail, placeMemoryDetail, newsDetail, abilityLawDetail, codexDetail, encounterDetail, encounterWeaveDetail, worldPressureDetail, substrateDetail, romanceGuidanceDetail, masteryDetail, availableEncounters, partyDetail, opLossNote, emergenceDetail, perilNote, exactWords, factsDetail, evolvedItemsDetail, itemAdvance, ratingDetail, registerDetail, livingWorldDetail, sharedCanonDetail, legendDetail, worldDateLabel, travelDirective, anomalyDetail, toolkitDetail, waygateDetail, scenePacingDetail } = ctx;
+  const { character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail, structuredQuestsDetail, sceneState, npcRegistryDetail, placeMemoryDetail, newsDetail, abilityLawDetail, codexDetail, encounterDetail, encounterWeaveDetail, worldPressureDetail, substrateDetail, romanceGuidanceDetail, masteryDetail, availableEncounters, partyDetail, opLossNote, emergenceDetail, perilNote, exactWords, factsDetail, evolvedItemsDetail, itemAdvance, ratingDetail, registerDetail, livingWorldDetail, sharedCanonDetail, legendDetail, worldDateLabel, travelDirective, anomalyDetail, toolkitDetail, waygateDetail, scenePacingDetail, readAloudDetail } = ctx;
   const system = [], world = [], scene = [], state = [], player = [];
 
   // ---- TIER 1: rules/constitution (constant; GM_SYSTEM is prepended in gmTurn) ----
@@ -215,6 +215,7 @@ export function tierParts(ctx) {
   if (sceneState) {
     scene.push(`## CURRENT SCENE STATE (AUTHORITATIVE — do not contradict; see rule 13)\nSetting: ${sceneState.setting}\nPresent: ${(sceneState.npcsPresent || []).map(n => `${n.name} (${n.state})`).join("; ") || "no one else"}\nObjects: ${(sceneState.objects || []).join(", ") || "nothing notable"}\nOpen threads: ${(sceneState.threads || []).join("; ") || "none"}`);
   }
+  if (readAloudDetail) scene.push(`## READ ALOUD (SNG-155 — a prose constraint)\n${readAloudDetail}`);
   if (scenePacingDetail) scene.push(`## SCENE PACING (SNG-158)\n${scenePacingDetail}`);
   if (partyDetail) scene.push(`## PARTY — other PLAYERS' characters in this shared scene (present and active; narrate them in, never decide for them)\n${partyDetail}`);
   if (companionsDetail) scene.push(`## COMPANIONS (traveling with the character — present in this scene)\n${companionsDetail}`);

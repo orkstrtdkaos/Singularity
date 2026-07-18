@@ -28,6 +28,7 @@ import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkill
 import { toolkitForGM } from "./engine/toolkit.js";
 import { fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc } from "./engine/personalArc.js";
 import { assembleGMContext } from "./engine/gm_registry.js"; // BATCH-11 §23: the GM context is a DECLARED registry, iterated — never hand-listed
+import { rankVoices, pickVoice, speakableText, chunkForSpeech } from "./engine/narration_voice.js"; // SNG-155: read aloud at the table
 import { harmGateFor, departureGateFor, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop)
 import { resolveWaygateTransit } from "./engine/waygate.js"; // SNG-148: waygates — map control routes named/hub; GM offer via the registry row
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./engine/entityDetail.js";
@@ -52,10 +53,10 @@ import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challe
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-// SNG-155: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
+// SNG-162: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.117";
+const APP_VERSION = "1.8.118";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -686,7 +687,7 @@ function buildFeedbackContext() {
   if (lastTurn) ctx.lastGmTurn = smartClamp(lastTurn.summary || lastTurn.narration || "", 400);
   if (lastPlayerAction) ctx.lastAction = String(lastPlayerAction).slice(0, 160);
   if (_capturedErrors.length) ctx.errors = _capturedErrors.slice(-5);
-  if (character?._turnApplyError) ctx.turnApplyError = character._turnApplyError; // SNG-155: a swallowed-render event travels with the report
+  if (character?._turnApplyError) ctx.turnApplyError = character._turnApplyError; // SNG-162: a swallowed-render event travels with the report
   return ctx;
 }
 function _feedbackScreenLabel() {
@@ -895,6 +896,18 @@ function renderSettings(note = "") {
         ${[["restrained", "Restrained — spare; the camera may drift"], ["balanced", "Balanced — commit as the scene calls"], ["blunt", "Blunt — commit fully, to your rating's edge"]].map(([v, label]) => `<option value="${v}" ${(profile.bluntness || "balanced") === v ? "selected" : ""}>${esc(label)}</option>`).join("")}
       </select>
       <div class="hint">How unflinchingly the narration commits to what a scene IS — visceral violence, natural profanity, direct embodied description — <strong>always within your content rating</strong> (it never raises the ceiling; minor-safety is absolute). <em>Blunt</em> uses the full room your rating gives.</div></div>
+    ${/* SNG-155: read-aloud, per-profile (family play — each daughter her own voice). The picker is
+          ranked BEST-FIRST: the platform default is usually the worst voice installed, which is why
+          it sounds machine-made. Hidden when the device has no speech voices at all (tier 0). */""}
+    ${ttsAvailable() ? `<div class="field"><label>Read aloud — voice</label>
+      <select id="set-ttsvoice">
+        <option value="">Best available (recommended)</option>
+        ${rankVoices(ttsVoices(), { lang: "en" }).slice(0, 24).map(v => `<option value="${esc(v.name)}" ${profile.ttsVoice === v.name ? "selected" : ""}>${esc(v.name)}${v.lang ? ` — ${esc(v.lang)}` : ""}</option>`).join("")}
+      </select>
+      <div class="hint">Listed best-first. Your device's <em>default</em> voice is usually the oldest one installed — names carrying <em>Natural</em>, <em>Neural</em>, <em>Premium</em>, <em>Enhanced</em> or <em>Google</em> sound markedly more human. Free, offline, no key.
+        <label style="display:block;margin-top:6px"><input type="checkbox" id="set-readaloud" ${profile.readAloud ? "checked" : ""}> Tell the GM it's being read aloud at a table</label>
+        <span class="hint">Shapes the PROSE for the ear — one idea per sentence, dialogue attributed, mechanics kept out of the narration. It never changes what happens, and never softens content: your rating and the floors are untouched.</span>
+        <button class="opt" id="tts-test" style="margin-top:6px">▶ Hear this voice</button></div></div>` : ""}
     <div class="field"><label>Time passage</label>
       <select id="set-time-mode">
         <option value="story" ${ts.mode === "story" ? "selected" : ""}>Story time — the clock moves with play</option>
@@ -923,9 +936,25 @@ function renderSettings(note = "") {
     <button class="btn" id="set-save">Save</button>
     <div class="footer-note">Save data is in this browser. Use Export on the Characters screen to move it.</div>
   </div>`);
+  // SNG-155: hear the picked voice before committing to it — the whole point of §1 is that this is
+  // an AUDIBLE difference, so it has to be auditionable without leaving Settings.
+  const ttsTest = document.getElementById("tts-test");
+  if (ttsTest) ttsTest.onclick = () => {
+    if (!ttsAvailable()) return;
+    stopSpeaking();
+    const name = document.getElementById("set-ttsvoice")?.value || null;
+    const v = pickVoice(ttsVoices(), { preferredName: name, lang: "en" });
+    const u = new SpeechSynthesisUtterance("The lamplight steadies, and the room comes back into focus. Pell looks up from the forge and says your name.");
+    if (v) { u.voice = v; u.lang = v.lang || "en"; }
+    u.rate = Number(profile?.ttsRate) || 0.98;
+    try { window.speechSynthesis.speak(u); } catch { /* tier 0 */ }
+  };
   document.getElementById("set-save").onclick = () => {
     profile.displayName = document.getElementById("set-player").value.trim();
     profile.pacing = document.getElementById("set-pacing").value; // SNG-127: world-liveliness preference
+    // SNG-155: per-profile voice + the read-aloud prose signal
+    const tv = document.getElementById("set-ttsvoice"); if (tv) profile.ttsVoice = tv.value || null;
+    const ra = document.getElementById("set-readaloud"); if (ra) profile.readAloud = !!ra.checked;
     profile.plainness = document.getElementById("set-plainness").value; // SNG-144: narration plainness dial
     profile.bluntness = document.getElementById("set-bluntness").value; // SNG-144: narration bluntness dial (rating-capped)
     profile.contentGenerator = document.getElementById("set-contentgen").checked; // SNG-134 P4: canon-author toggle (SNG-132 engine reads it)
@@ -2637,7 +2666,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   // action label. Without this the GM's "history" is a monologue of its own prose and the player's
   // half of the scene has no permanence (the deepest continuity bug in the project).
   const playerWords = exactWords || resolution?.action?.label || (typeof playerInput === "string" && !/^\(/.test(playerInput) ? playerInput : null);
-  // SNG-155 (Design Law 5): the model already answered — the player has WAITED for this beat and
+  // SNG-162 (Design Law 5): the model already answered — the player has WAITED for this beat and
   // paid for it. Bookkeeping must never be able to swallow it. Before this guard, ANY throw inside
   // applyTurn propagated out of runGM, the caller's `renderPlay(result.turn, …)` never ran, and the
   // narration vanished — while `character.activeScene.lastTurn` had ALREADY been persisted mid-way
@@ -2695,7 +2724,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
 }
 
 function applyTurn(turn, resolution, playerWords = null) {
-  // SNG-155: NEVER let a stranded currentLocationId throw. A place promoted from a sub-place, or a
+  // SNG-162: NEVER let a stranded currentLocationId throw. A place promoted from a sub-place, or a
   // generated location whose record didn't survive a reload, leaves `CONTENT.locations[id]`
   // undefined — and this function reads `location.communityId` (deeds) and `location.id` (ledger).
   // The ledger read sits AFTER the save, so a throw there persisted the turn and lost the render.
@@ -3511,6 +3540,45 @@ async function endSceneNow() {
   character.activeScene = null;
   saveCharacter(character);
   renderPlay(result?.turn || null, { aside: `Scene closed — ${beats} beats written into your chronicle.` });
+}
+
+// ---------- SNG-155: read the narration aloud (Web Speech, tier 1) ----------
+// Tier 0 is always available: no speechSynthesis, no voices, no key → silence, no error (Law 5).
+// Speech starts on the FIRST sentence chunk while the rest queues, so it begins ~instantly.
+let _speaking = false;
+function ttsAvailable() { return typeof window !== "undefined" && !!window.speechSynthesis; }
+function ttsVoices() { try { return window.speechSynthesis.getVoices() || []; } catch { return []; } }
+function stopSpeaking() {
+  if (!ttsAvailable()) return;
+  try { window.speechSynthesis.cancel(); } catch { /* best-effort */ }
+  _speaking = false;
+}
+/** Speak a turn's SPEAKABLE PROJECTION — narration only; choices, costs and receipts are never
+ *  spoken (spec §3b). A new turn cancels the old utterance cleanly. */
+function speakTurn(turn) {
+  if (!ttsAvailable()) return false;
+  const text = speakableText(turn);
+  if (!text) return false;
+  stopSpeaking();
+  const voice = pickVoice(ttsVoices(), { preferredName: profile?.ttsVoice || null, lang: "en" });
+  const chunks = chunkForSpeech(text);
+  _speaking = true;
+  for (const c of chunks) {
+    const u = new SpeechSynthesisUtterance(c);
+    if (voice) { u.voice = voice; u.lang = voice.lang || "en"; }
+    u.rate = Number(profile?.ttsRate) || 0.98;
+    u.pitch = Number(profile?.ttsPitch) || 1;
+    u.onend = () => { if (c === chunks[chunks.length - 1]) _speaking = false; };
+    u.onerror = () => { _speaking = false; };
+    try { window.speechSynthesis.speak(u); } catch { _speaking = false; }
+  }
+  return true;
+}
+function toggleSpeakTurn() {
+  const turn = character?.activeScene?.lastTurn || null;
+  if (_speaking) { stopSpeaking(); renderPlay(turn, {}); return; }
+  if (!speakTurn(turn)) { renderPlay(turn, { aside: ttsAvailable() ? "Nothing to read aloud yet." : "This browser has no speech voices available." }); return; }
+  renderPlay(turn, {});
 }
 
 async function arriveAtPending() {
@@ -5863,7 +5931,7 @@ function renderPlay(turn, opts = {}) {
   }
   // SNG-070: surface a just-applied GM correction as an aside, whichever path rendered this turn.
   if (character?._correctionAside) { opts = { ...opts, aside: [opts.aside, character._correctionAside].filter(Boolean).join("\n\n") }; delete character._correctionAside; }
-  // SNG-155: the beat survived but some of its bookkeeping didn't — say so plainly rather than
+  // SNG-162: the beat survived but some of its bookkeeping didn't — say so plainly rather than
   // letting the player discover a quest/NPC update silently missing. The GM restates next turn.
   if (turn?._applyFailed) { opts = { ...opts, aside: [opts.aside, "*(The scene stands, but part of this turn's bookkeeping didn't land — the GM will restate it next beat.)*"].filter(Boolean).join("\n\n") }; }
   const location = hereNow();
@@ -6009,6 +6077,9 @@ function renderPlay(turn, opts = {}) {
       ${/* SNG-158: the player can always close a scene themselves — the GM should do it, but a
             scene that won't end is the player's to end. Writes the chronicle entry either way. */""}
       <button class="opt" id="do-endscene" style="margin-top:8px; display:block; width:100%" title="Draw this scene to a close and write it into your chronicle. A new scene opens on your next action.">⏹ End this scene${sceneTurns.length ? ` (${sceneTurns.length} beats)` : ""}</button>
+      ${/* SNG-155: read the narration aloud at the table. Narration only — choices, costs and
+            receipts are never spoken. Hidden entirely when the device has no voices (tier 0). */""}
+      ${ttsAvailable() ? `<button class="opt" id="do-speak" style="margin-top:8px; display:block; width:100%" title="Read this beat aloud. Narration only — choices and costs are not spoken.">${_speaking ? "⏸ Stop reading" : "▶ Read this aloud"}</button>` : ""}
     </div></details>
     <details class="sidebar-sec" data-sec="codex"${sectionOpen("codex", false) ? " open" : ""}><summary><span class="sec-title">Codex &amp; Library</span></summary><div class="sec-body">
       <button class="opt" id="open-codex" style="display:block; width:100%">${Object.keys(character.codex?.topics || {}).length} topic${Object.keys(character.codex?.topics || {}).length === 1 ? "" : "s"} discovered — open Codex</button>
@@ -6308,6 +6379,7 @@ function renderPlay(turn, opts = {}) {
   const moreBtn = document.getElementById("open-inventory-more"); if (moreBtn) moreBtn.onclick = () => renderInventoryScreen(); // SNG-121
   // (SNG-114: item name/drop now bound via bindItemCardHandlers above — the duplicated data-nameit/data-drop wiring is gone.)
   const endSceneBtn = document.getElementById("do-endscene"); if (endSceneBtn) endSceneBtn.onclick = () => endSceneNow(); // SNG-158
+  const speakBtn = document.getElementById("do-speak"); if (speakBtn) speakBtn.onclick = () => toggleSpeakTurn(); // SNG-155
   const restBtn = document.getElementById("do-rest"); if (restBtn) restBtn.onclick = () => rest("sleep");
   const breatherBtn = document.getElementById("do-breather"); if (breatherBtn) breatherBtn.onclick = () => rest("breather");
   const mapBtn = document.getElementById("open-map"); if (mapBtn) mapBtn.onclick = () => renderMap();

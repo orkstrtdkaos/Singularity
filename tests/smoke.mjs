@@ -4036,6 +4036,67 @@ await (async () => {
     npcPortraitTier(pell) === "partner"); // the app skips when n._portraitTier === this tier
 }
 
+// --- SNG-155: the narration reads aloud (free half: quality-ranked picker + speakable projection) ---
+{
+  const nv = await import('../engine/narration_voice.js');
+  // §1 — the platform DEFAULT is usually the worst voice installed; ranking must beat it.
+  const voices = [
+    { name: "Albert", lang: "en-US", default: true },                       // legacy formant, and the default
+    { name: "Microsoft Aria Online (Natural) - English (United States)", lang: "en-US", localService: false },
+    { name: "Google UK English Female", lang: "en-GB" },
+    { name: "Samantha (Enhanced)", lang: "en-US" },
+    { name: "Anna", lang: "de-DE" }
+  ];
+  const ranked = nv.rankVoices(voices, { lang: "en-US" });
+  check("155: a Natural/neural voice outranks the platform default (the machine-sounding one)",
+    /Natural/.test(ranked[0].name));
+  check("155: the legacy formant default sinks below every quality voice", ranked.indexOf(voices[0]) > 2);
+  check("155: quality outranks LANGUAGE match — the Heimrún ordering, inverted", (() => {
+    const r = nv.rankVoices([{ name: "Fred", lang: "en-US" }, { name: "Google UK English Male", lang: "en-GB" }], { lang: "en-US" });
+    return r[0].name === "Google UK English Male";
+  })());
+  check("155: a wrong-language voice never wins on quality alone",
+    nv.rankVoices([{ name: "Plain", lang: "en-US" }, { name: "Premium Natural", lang: "ja-JP" }], { lang: "en-US" })[0].name === "Plain");
+  check("155: an explicit player pick always wins", nv.pickVoice(voices, { preferredName: "Albert", lang: "en-US" }).name === "Albert");
+  check("155: no voices at all → null, and nothing throws (tier 0)", nv.pickVoice([], {}) === null && nv.rankVoices(null).length === 0);
+
+  // §3b — the SPEAKABLE PROJECTION: narration only, never the interface
+  const turn = {
+    narration: "The lamp *gutters*. ✦ Pell looks up (12 energy) and says your name.",
+    choices: [{ label: "Answer her" }, { label: "Say nothing" }],
+    sceneSummary: "A quiet moment at the forge."
+  };
+  const spoken = nv.speakableText(turn);
+  check("155: choices are NEVER spoken", !/Answer her|Say nothing/.test(spoken));
+  check("155: markdown emphasis and engine glyphs are stripped for the ear", !/[*✦]/.test(spoken) && /gutters/.test(spoken));
+  check("155: numeric receipts are not read aloud", !/12 energy/.test(spoken) && /says your name/.test(spoken));
+  check("155: an empty turn yields nothing to speak, safely", nv.speakableText(null) === "" && nv.speakableText({}) === "");
+
+  // §2 — chunking so speech starts on sentence one while the rest queues
+  const short = nv.chunkForSpeech("First sentence here. Second one follows! And a third? Yes.");
+  check("155: a short beat stays ONE utterance (no needless gaps between sentences)", short.length === 1);
+  const long = nv.chunkForSpeech("The lamp gutters low. ".repeat(30));
+  check("155: a long beat splits on SENTENCE boundaries so speech starts on chunk one",
+    long.length >= 2 && long.every(c => c.trim().endsWith(".")));
+  check("155: chunks never sever a word", long.every(c => !/\w-$/.test(c.trim())));
+  check("155: nothing is lost in chunking", long.join(" ").replace(/\s+/g, " ").trim() === "The lamp gutters low. ".repeat(30).replace(/\s+/g, " ").trim());
+
+  // §3a — read-aloud is a PROSE CONSTRAINT carried in the GM context, not an audio setting
+  const { assembleGMContext } = await import('../engine/gm_registry.js');
+  const env = (readAloud) => ({ character: { currentLocationId: "x", clock: newClock(), attributes: { physical: 3, mental: 3, social: 3 }, energy: 5, maxEnergy: 10, health: 5, maxHealth: 10, name: "P" },
+    location: { id: "x", name: "X", spectrum: {} },
+    CONTENT: { region: {}, rules: {}, lore: [], events: [], npcs: {}, companions: [], items: {}, emergence: {}, branchForks: {}, locations: {} },
+    sceneTurns: [], sceneState: null, sharedScene: null, profile: { readAloud },
+    time: readClock(newClock()), resolution: null, playerInput: null, exactWords: null, itemAdvance: [], travelDirective: null, ephemera: {},
+    app: { fullCatalog: () => ({}), FN_INDEX: () => ({ families: [], verbToFamily: {}, byFamily: {} }), activeEnc: () => null,
+      listAvailableEncounters: () => null, masteryReadyForGM: () => null, ratingLineForGM: () => "R", maybeLegendDetail: () => null, sharedCanonForGM: () => null } });
+  check("155: a silent session carries NO read-aloud directive (it costs nothing when off)",
+    assembleGMContext("turn", env(false)).readAloudDetail === null);
+  const dir = assembleGMContext("turn", env(true)).readAloudDetail || "";
+  check("155: read-aloud tells the model to write for the EAR", /READ ALOUD/.test(dir) && /one idea per sentence/i.test(dir) && /attribute dialogue/i.test(dir));
+  check("155: and it explicitly does NOT soften content (rating + floors untouched)", /never softens content/i.test(dir) && /floors are unaffected/i.test(dir));
+}
+
 // --- SNG-153: the codex consolidates itself (gates, adjudicator, reversible merges) ---
 {
   const cx = await import('../engine/codex.js');
@@ -4352,27 +4413,27 @@ await (async () => {
   check("152: exact-length input is not clamped", smartClamp("x".repeat(50), 50) === "x".repeat(50));
 }
 
-// --- SNG-155: a bookkeeping throw can never swallow a turn the player already waited for (Law 5) ---
+// --- SNG-162: a bookkeeping throw can never swallow a turn the player already waited for (Law 5) ---
 {
   const appSrc155 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
   // The structural guarantee: applyTurn is CALLED inside a try, and the catch preserves the beat.
   const guarded = /try \{\s*applyTurn\(result\.turn, resolution, playerWords\);\s*\} catch \(err\) \{/.test(appSrc155);
-  check("155: applyTurn is wrapped so a throw cannot discard the rendered narration", guarded);
-  check("155: the catch persists activeScene.lastTurn so continuity survives a partial apply",
+  check("162: applyTurn is wrapped so a throw cannot discard the rendered narration", guarded);
+  check("162: the catch persists activeScene.lastTurn so continuity survives a partial apply",
     /_applyFailed = true/.test(appSrc155) && /catch \(err\)[\s\S]{0,700}?character\.activeScene = \{ locationId: character\.currentLocationId, turns: sceneTurns, lastTurn: result\.turn/.test(appSrc155));
-  check("155: a partial apply sets opLossPending so the GM restates the lost ops next turn (SNG-009 contract)",
+  check("162: a partial apply sets opLossPending so the GM restates the lost ops next turn (SNG-009 contract)",
     /catch \(err\)[\s\S]{0,600}?character\.opLossPending = true/.test(appSrc155));
-  check("155: the player is TOLD the bookkeeping lagged — never a silent partial", /part of this turn's bookkeeping didn't land/.test(appSrc155));
-  check("155: the failure travels with the feedback report", /ctx\.turnApplyError = character\._turnApplyError/.test(appSrc155));
+  check("162: the player is TOLD the bookkeeping lagged — never a silent partial", /part of this turn's bookkeeping didn't land/.test(appSrc155));
+  check("162: the failure travels with the feedback report", /ctx\.turnApplyError = character\._turnApplyError/.test(appSrc155));
   // The specific trigger found in Erik's save class: a currentLocationId that resolves to nothing.
-  check("155: a stranded currentLocationId falls back instead of throwing on location.id / .communityId",
+  check("162: a stranded currentLocationId falls back instead of throwing on location.id / .communityId",
     /const location = CONTENT\.locations\[character\.currentLocationId\]\s*\|\|\s*\{ id: character\.currentLocationId \|\| "unknown"/.test(appSrc155) &&
     /_stranded: true/.test(appSrc155));
   // ...and the ledger block that reads location.id sits after the save — that ordering is WHY it lost the render.
   const applyBody = appSrc155.slice(appSrc155.indexOf("function applyTurn("));
   const savePos = applyBody.indexOf("character.activeScene = turn.sceneEnded ? null :");
   const ledgerPos = applyBody.indexOf("where: location.id");
-  check("155: regression witness — the ledger's location read still follows the save (guard is what protects it)",
+  check("162: regression witness — the ledger's location read still follows the save (guard is what protects it)",
     savePos > 0 && ledgerPos > savePos);
 }
 

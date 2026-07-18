@@ -101,7 +101,7 @@ check(`SYSTEM_SPEC header certifies the real ability count (${abilityCount})`,
   specAbilities && Number(specAbilities[1]) === abilityCount,
   `header says ${specAbilities?.[1] ?? "?"}, HEAD has ${abilityCount}`);
 
-// ---------- 3b. version coherence (SNG-155) ----------
+// ---------- 3b. version coherence (SNG-162) ----------
 // APP_VERSION stamps every feedback report; index.html's ?v= busts the cache. When they drift, bug
 // reports are filed against a version that was never running — which is how a stale 1.8.104 label
 // survived five ships. Cheap to check, expensive to debug without.

@@ -53,6 +53,7 @@ import { livingWorldForGM } from "./generate.js";
 import { worldDate } from "./worldtime.js";
 import { encounterReceiptForGM } from "./encounters.js";
 import { waygateBlockForGM } from "./waygate.js";
+import { readAloudDirective } from "./narration_voice.js";
 
 const ALL = ["turn", "ask", "quest", "gambit"];
 
@@ -210,6 +211,12 @@ export const GM_CONTEXT = [
   // SNG-158: scenes were never closing (a real save ran 169 beats in ONE scene), so the chronicle
   // stayed thin and the save bloated. The contract now tells the GM when to close; this tells it
   // that THIS scene has run long. Silent until it matters — pressure, not nagging (the SNG-080 shape).
+  // SNG-155 §3a: read-aloud is a PROSE CONSTRAINT, not only an output channel — so it belongs in
+  // the context the model writes from, not in the audio layer. Rides SNG-144's per-profile dials
+  // rather than inventing a second style system. Null (and free) in a silent session.
+  { key: "readAloudDetail", builder: "narration_voice.readAloudDirective (SNG-155)", carries: ["spoken at a table", "write for the ear"],
+    reachedBy: "Settings → read aloud + the ▶ speak control", spec: "§16b", views: ["turn"],
+    build: (env) => readAloudDirective(env.profile?.readAloud) },
   { key: "scenePacingDetail", builder: "gm_registry (scene length pressure)", carries: ["scene has run long", "find its close"],
     reachedBy: "always (paced)", spec: "§11", views: ["turn"],
     build: (env) => {

@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 15,
-  "xp": 1432,
+  "xp": 1437,
   "attributes": {
     "physical": 4,
     "mental": 5,
@@ -101,7 +101,7 @@
   "maxHealth": 100,
   "health": 100,
   "maxEnergy": 170,
-  "energy": 139,
+  "energy": 134,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -933,173 +933,233 @@
         "player": "Resume focus on learning about what Tane' skills are and how Pells fights.",
         "summary": "Silas watches Pell's second bout with full attention — reading Tane's patterns and Pell's method clearly. The bout is not finished but its shape is plain.",
         "narration": "The second exchange begins and you give it your full attention.\n\nTane opens the same way he opened against you — lateral, unhurried, the good ankle doing the work. But Pell has had the length of a bout to read him, and she is no longer guessing. Her weight is already moving when his foot commits. She does not match his direction. She intercepts it. Her left hand comes up empty, a half-offer, and Tane's eyes go to it for one breath — long enough. She has read that his buckle sits left-of-center on his belt, and she knows exactly where his attention diverts when iron moves near his chest. She does not press the open. She steps back and resets, clean.\n\nTane is good. You can see what Siol meant — he has spent years being the one who reads, and he is beginning to understand that something has changed. His footwork is precise, economical, built on years of lateral drilling. He favors a half-rotation entry when he means to close. He telegraphs nothing with his hands. What he telegraphs is weight — there is always a settling on the back foot before he moves forward, a beat too small for most opponents to catch. Pell catches it. You watch her catch it twice in a row and say nothing about it, waiting.\n\nHuginn shifts on your shoulder. Siol watches from your left without comment, and the gallery above is quiet in the way of people who know they are seeing something worth seeing. The third exchange is brief — Tane commits to the half-rotation, Pell has already read the back-foot settle, and she does not go where he aimed. Orvil's baton stays level. The bout is not finished, but the shape of it is clear: Pell is running ahead of him by one breath, and that breath is everything."
+      },
+      {
+        "player": "Call out to Pell - enough toying with him... put him down kindly!",
+        "summary": "Pell ends the second bout cleanly on Silas's word — a flat strike to Tane's leading arm, no edge, no cruelty; Orvil calls it without ceremony.",
+        "narration": "You call from the near arc — not loud, but clear enough to carry across the sand. 'Pell. Enough. Put him down kindly.'\n\nShe hears you. There is no hesitation in her face, no argument. She was waiting for permission she did not quite need but accepted anyway. She lets Tane reset one more time, lets him settle into his lateral stance and find his reference points — and then she moves.\n\nShe does not use the buckle this time. She uses his certainty. Her weight drops a half-beat early, and every point of iron she has been feeding him says left. His foot commits. She is already right. The hilt of her short sword comes across the inside of his leading arm — flat, controlled, no edge — and his elbow folds. His weight goes forward and she is already out of it, already standing still behind him. She does not follow through. She steps back and holds both hands open at her sides, and says his name — 'Tane' — in the register you have heard her use for a finished thing.\n\nTane stands still for a moment with his arm against his chest. Then he laughs, quiet and genuine, and turns to find Orvil. The referee's baton comes down without ceremony. Bout finished. Orvil does not name a winner aloud — he does not need to."
       }
     ],
     "lastTurn": {
-      "narration": "The second exchange begins and you give it your full attention.\n\nTane opens the same way he opened against you — lateral, unhurried, the good ankle doing the work. But Pell has had the length of a bout to read him, and she is no longer guessing. Her weight is already moving when his foot commits. She does not match his direction. She intercepts it. Her left hand comes up empty, a half-offer, and Tane's eyes go to it for one breath — long enough. She has read that his buckle sits left-of-center on his belt, and she knows exactly where his attention diverts when iron moves near his chest. She does not press the open. She steps back and resets, clean.\n\nTane is good. You can see what Siol meant — he has spent years being the one who reads, and he is beginning to understand that something has changed. His footwork is precise, economical, built on years of lateral drilling. He favors a half-rotation entry when he means to close. He telegraphs nothing with his hands. What he telegraphs is weight — there is always a settling on the back foot before he moves forward, a beat too small for most opponents to catch. Pell catches it. You watch her catch it twice in a row and say nothing about it, waiting.\n\nHuginn shifts on your shoulder. Siol watches from your left without comment, and the gallery above is quiet in the way of people who know they are seeing something worth seeing. The third exchange is brief — Tane commits to the half-rotation, Pell has already read the back-foot settle, and she does not go where he aimed. Orvil's baton stays level. The bout is not finished, but the shape of it is clear: Pell is running ahead of him by one breath, and that breath is everything.",
-      "sceneSummary": "Silas watches Pell's second bout with full attention — reading Tane's patterns and Pell's method clearly. The bout is not finished but its shape is plain.",
+      "narration": "You call from the near arc — not loud, but clear enough to carry across the sand. 'Pell. Enough. Put him down kindly.'\n\nShe hears you. There is no hesitation in her face, no argument. She was waiting for permission she did not quite need but accepted anyway. She lets Tane reset one more time, lets him settle into his lateral stance and find his reference points — and then she moves.\n\nShe does not use the buckle this time. She uses his certainty. Her weight drops a half-beat early, and every point of iron she has been feeding him says left. His foot commits. She is already right. The hilt of her short sword comes across the inside of his leading arm — flat, controlled, no edge — and his elbow folds. His weight goes forward and she is already out of it, already standing still behind him. She does not follow through. She steps back and holds both hands open at her sides, and says his name — 'Tane' — in the register you have heard her use for a finished thing.\n\nTane stands still for a moment with his arm against his chest. Then he laughs, quiet and genuine, and turns to find Orvil. The referee's baton comes down without ceremony. Bout finished. Orvil does not name a winner aloud — he does not need to.",
+      "sceneSummary": "Pell ends the second bout cleanly on Silas's word — a flat strike to Tane's leading arm, no edge, no cruelty; Orvil calls it without ceremony.",
       "choices": [
         {
-          "label": "Wait quietly for the bout to conclude — let Orvil call it",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "careful"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Watch Tane's footwork and see if he finds a counter before it ends",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "scout"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Say something brief to Siol about what you are watching Pell do — the one-breath lead",
+          "label": "Cross to Pell and Tane — a word to him, face to face, before the sand clears",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "plan"
+            "negotiate"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Step away from the arc while the bout finishes — find where the bench-seam is from ground level and look at it directly",
+          "label": "Stay at the arc and let Pell handle the close — watch how Tane takes it",
           "attribute": "mental",
-          "subAttribute": "reason",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "scout"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Signal to Pell it is time to go — the road south is waiting and the sand has given what it had",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "travel"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Catch Siol once more before leaving — the bench-seam light, Taur, and whether she would say more if you asked plainly",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
           "difficulty": 15,
           "intentTags": [
-            "scout",
+            "negotiate",
             "study"
           ],
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "scene": {
-        "setting": "Inside the Hub Coliseum at early morning — packed sand, stone gallery above with scattered watchers, low-angle light through the open top. Second bout mid-progress: Pell on the sand against Tane Solr, third exchange just completed.",
+        "setting": "Inside the Hub Coliseum at early morning — packed sand, stone gallery above with scattered watchers, low-angle light through the open top. Second bout just finished: Pell standing with hands open, Tane's arm against his chest, Orvil's baton down.",
         "npcsPresent": [
           {
             "name": "Pell Marsh",
-            "state": "On the sand — one breath ahead of Tane, waiting for his next entry."
+            "state": "On the sand — hands open, bout finished, waiting."
           },
           {
             "name": "Tane Solr",
-            "state": "On the sand — resetting, beginning to understand he is being read."
+            "state": "On the sand — arm against his chest, laughing quietly, turning to Orvil."
           },
           {
             "name": "Orvil",
-            "state": "At the center-line — baton level, watching both fighters."
+            "state": "At the center-line — baton down, bout called, no comment."
           },
           {
             "name": "Siol",
-            "state": "Just inside the gate — watching the bout with experienced attention, arms loose."
+            "state": "Just inside the gate — watching the close, arms still loose."
           },
           {
             "name": "Huginn",
-            "state": "On Silas's shoulder — still, watching the sand."
+            "state": "On Silas's shoulder — watching the sand, unhurried."
           }
         ],
         "objects": [
-          "Packed sand floor — marks from two bouts and the current third exchange",
+          "Packed sand floor — marks from two bouts and the completed third exchange",
           "Memory — peace-bound at Silas's back",
           "Pell's flask — in Silas's hand",
-          "Orvil's baton, level",
+          "Orvil's baton, down",
           "Tane's seconds at the far arc, watching",
           "Upper bench stone seam — still, water quiet"
         ],
         "threads": [
-          "Second bout underway: Pell vs. Tane, outcome unresolved — Pell is one breath ahead",
-          "The bench-seam light — seen three times by Siol, predating the water discoloration, connected loosely to Taur",
-          "The road south is waiting — the Coliseum is a pause, not the destination"
+          "The bout is finished — what passes between Silas, Pell, and Tane in the close is open",
+          "The bench-seam light — Siol's partial account still unresolved: Taur named but the connection not drawn",
+          "The road south is waiting — the Coliseum has given what it had"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "tane-solr",
-          "name": "Tane Solr",
-          "note": "Silas read his patterns clearly from the arc — back-foot settle before a forward entry, half-rotation close, precise lateral footwork, telegraphs nothing with his hands but everything with his weight.",
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "role": "Village blacksmith, Millbrook — traveling companion",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "Ended the second bout cleanly on Silas's word — flat strike, no edge, hands open after. Received the call and acted without argument.",
           "learned": [
-            "Favors a half-rotation entry when closing — the back foot settles a beat before he moves forward",
-            "Lateral footwork is his primary tool — built on years of drilling, economical and precise",
-            "His attention diverts briefly to iron moving near his chest — the belt buckle sitting left-of-center is a read-point Pell is using",
-            "He is beginning to understand Pell is one breath ahead of him and does not yet have a counter"
+            "Responded to Silas's direction mid-bout without hesitation — the call was enough"
           ],
           "skillsObserved": [
-            "precise lateral footwork under pressure",
-            "concealing hand intention entirely — the tell is in the weight, not the hands"
+            "controlled finish strike — flat hilt to the leading arm, no cruelty, clean yield produced"
           ],
-          "statusNote": "On the sand — in the third exchange against Pell Marsh, being read from a level he has not fully adjusted to."
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "On the sand — bout finished, hands open, waiting."
         },
         {
           "op": "update",
-          "npcId": "pell-ran-marsh",
-          "name": "Pell Ran Marsh",
-          "note": "Silas read her method clearly this exchange — she is running one breath ahead via ironsense, using the buckle and brace-pin as read-points, catching the back-foot settle twice and declining to press either time.",
+          "npcId": "tane-solr",
+          "name": "Tane Solr",
+          "role": "Bout opponent, threshold-walker",
+          "gender": "man",
+          "pronouns": "he/him",
+          "note": "Took the finish cleanly — arm against chest, quiet laugh, turned to Orvil himself. No grievance.",
           "learned": [
-            "Uses multiple iron reference points simultaneously — buckle, brace-pin, coat eyelets — to build a continuous read of Tane's weight and attention",
-            "Caught the back-foot settle twice and declined to press both times — waiting for the cleaner entry",
-            "Half-offered iron near his chest deliberately to pull his eyes left — a manufactured diversion, not a real move"
+            "Received a controlled yield-strike without ceremony and named it with a laugh — no ego bruised"
           ],
           "skillsObserved": [
-            "manufacturing a false iron-read to pull opponent attention",
-            "declining a pressable opening to wait for the cleaner one"
+            "accepting a clean bout-finish without complaint"
           ],
-          "statusNote": "On the sand — one breath ahead of Tane Solr, running her bout on her own method."
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "On the sand — arm against chest, bout called, at ease."
+        },
+        {
+          "op": "update",
+          "npcId": "orvil",
+          "name": "Orvil",
+          "role": "Coliseum referee, morning rotation",
+          "gender": "man",
+          "pronouns": "he/him",
+          "note": "Called the bout finished without naming a winner — the sand made it plain enough.",
+          "learned": [],
+          "skillsObserved": [
+            "clean call — no editorializing on a controlled finish"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the center-line — baton down, job done."
         }
       ],
+      "deeds": [],
       "characterDeltas": {
         "health": 0,
         "energy": 0
       },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "factUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "Second bout concluded — Pell Marsh over Tane Solr, controlled finish, Orvil's call. Sand carries marks from both bouts.",
+          "subPlace": {
+            "name": "The Hub Coliseum (interior)",
+            "parent": "Hub Waygate Plaza",
+            "note": "Second bout finished — controlled yield-strike, no edge, Orvil's baton down.",
+            "visited": true
+          }
+        }
+      ],
+      "codexUpdates": [],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short continued watch of the bout — two or three exchanges"
-      }
+        "why": "A quick exchange at the close of the bout — a few minutes on the sand."
+      },
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Inside the Hub Coliseum at early morning — packed sand, stone gallery above with scattered watchers, low-angle light through the open top. Second bout mid-progress: Pell on the sand against Tane Solr, third exchange just completed.",
+      "setting": "Inside the Hub Coliseum at early morning — packed sand, stone gallery above with scattered watchers, low-angle light through the open top. Second bout just finished: Pell standing with hands open, Tane's arm against his chest, Orvil's baton down.",
       "npcsPresent": [
         {
           "name": "Pell Marsh",
-          "state": "On the sand — one breath ahead of Tane, waiting for his next entry."
+          "state": "On the sand — hands open, bout finished, waiting."
         },
         {
           "name": "Tane Solr",
-          "state": "On the sand — resetting, beginning to understand he is being read."
+          "state": "On the sand — arm against his chest, laughing quietly, turning to Orvil."
         },
         {
           "name": "Orvil",
-          "state": "At the center-line — baton level, watching both fighters."
+          "state": "At the center-line — baton down, bout called, no comment."
         },
         {
           "name": "Siol",
-          "state": "Just inside the gate — watching the bout with experienced attention, arms loose."
+          "state": "Just inside the gate — watching the close, arms still loose."
         },
         {
           "name": "Huginn",
-          "state": "On Silas's shoulder — still, watching the sand."
+          "state": "On Silas's shoulder — watching the sand, unhurried."
         }
       ],
       "objects": [
-        "Packed sand floor — marks from two bouts and the current third exchange",
+        "Packed sand floor — marks from two bouts and the completed third exchange",
         "Memory — peace-bound at Silas's back",
         "Pell's flask — in Silas's hand",
-        "Orvil's baton, level",
+        "Orvil's baton, down",
         "Tane's seconds at the far arc, watching",
         "Upper bench stone seam — still, water quiet"
       ],
       "threads": [
-        "Second bout underway: Pell vs. Tane, outcome unresolved — Pell is one breath ahead",
-        "The bench-seam light — seen three times by Siol, predating the water discoloration, connected loosely to Taur",
-        "The road south is waiting — the Coliseum is a pause, not the destination"
+        "The bout is finished — what passes between Silas, Pell, and Tane in the close is open",
+        "The bench-seam light — Siol's partial account still unresolved: Taur named but the connection not drawn",
+        "The road south is waiting — the Coliseum has given what it had"
       ]
     }
   },
@@ -1530,7 +1590,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d6] Noticed the Ent first — stopped mid-scan and named it quietly. Waiting for Silas to call the first move.",
         "[d6] Introduced formally as Silas's soul wife — received Siol's acknowledgment with quiet weight",
         "[d6] After watching Siol and weighing her, asked the practical question directly: is there a toll, a keeper, or anything waiting on the other side of the sixth gate?",
         "[d6] Received Siol's answer with a single structural nod — question settled, attention returned to Silas",
@@ -1539,28 +1598,29 @@
         "[d6] Vouched for Silas plainly to Tane — 'He does that' — and extended her flask without ceremony.",
         "[d6] Accepted the second bout without argument — handed off the flask, crossed the sand, declared iron to Tane Solr. Running this on her own terms.",
         "[d6] Running her own bout against Tane Solr — ironsense open, patient and methodical. Silas stepped back and let her work.",
-        "[d6] Silas read her method clearly this exchange — she is running one breath ahead via ironsense, using the buckle and brace-pin as read-points, catching the back-foot settle twice and declining to press either time."
+        "[d6] Silas read her method clearly this exchange — she is running one breath ahead via ironsense, using the buckle and brace-pin as read-points, catching the back-foot settle twice and declining to press either time.",
+        "[d6] Ended the second bout cleanly on Silas's word — flat strike, no edge, hands open after. Received the call and acted without argument."
       ],
       "knownFacts": [
-        "The Shielding Word is partially seated in the brigandine's radiant mark — the outer ring holds; completion requires a proper substrate",
         "Silas's footwork is genuinely good under pressure",
         "The shadowstep can be read by someone attentive to the shadow's shift before the body moves",
         "A clean shadowstep arrival with no pre-pull is readable only after the fact — the body registers contact before the shadow shows movement",
         "Not all opponents carry iron — an opponent who knows about the ironsense can exploit it by leaving iron at home; bone, rope, empty hands are outside the read",
         "Uses multiple iron reference points simultaneously — buckle, brace-pin, coat eyelets — to build a continuous read of Tane's weight and attention",
         "Caught the back-foot settle twice and declined to press both times — waiting for the cleaner entry",
-        "Half-offered iron near his chest deliberately to pull his eyes left — a manufactured diversion, not a real move"
+        "Half-offered iron near his chest deliberately to pull his eyes left — a manufactured diversion, not a real move",
+        "Responded to Silas's direction mid-bout without hesitation — the call was enough"
       ],
       "skillsObserved": [
-        "clean reset between passes without ceremony",
         "receiving a genuine technique acknowledgment without ceremon",
         "trading exchanges under ironsense without overreaching",
         "giving false information with body position to open an angle",
         "manufacturing a false iron-read to pull opponent attention",
-        "declining a pressable opening to wait for the cleaner one"
+        "declining a pressable opening to wait for the cleaner one",
+        "controlled finish strike — flat hilt to the leading arm, no "
       ],
       "status": "active",
-      "statusNote": "On the sand — one breath ahead of Tane Solr, running her bout on her own method.",
+      "statusNote": "On the sand — bout finished, hands open, waiting.",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 6
@@ -2140,7 +2200,8 @@
         "[d6] Stepped back after declarations — bout is properly formed, he is ready to call the start.",
         "[d6] Called the yield cleanly — did not editorialize. Baton down.",
         "[d6] Waiting at the center-line — new fighters, new declaration, same rotation.",
-        "[d6] Baton level at the center-line — watching both fighters, no preference, doing his job."
+        "[d6] Baton level at the center-line — watching both fighters, no preference, doing his job.",
+        "[d6] Called the bout finished without naming a winner — the sand made it plain enough."
       ],
       "knownFacts": [
         "Requires craft declaration at entry",
@@ -2151,12 +2212,13 @@
       ],
       "skillsObserved": [
         "reading a party's composition and equipment in one sweep",
-        "reading a situation and offering a clear path without editor"
+        "reading a situation and offering a clear path without editor",
+        "clean call — no editorializing on a controlled finish"
       ],
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "At the center-line — second bout in progress, baton level.",
+      "statusNote": "At the center-line — baton down, job done.",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 6
@@ -2171,7 +2233,7 @@
         "locationId": "gen-waygate",
         "day": 6
       },
-      "relationship": 3,
+      "relationship": 4,
       "history": [
         "[d6] Accepted the bout through Orvil without ceremony — crossed to the center-line and is waiting for declarations.",
         "[d6] Deathsense read complete — old left ankle injury, healed imperfectly, compensated automatically. Not a fatal weakness but a real one on lateral footwork.",
@@ -2181,27 +2243,29 @@
         "[d6] Accepted a second bout on different terms — no deathsense — wants to see what Silas carries without the read. Seconds are preparing him.",
         "[d6] Surprised by the substitution, but shifted into pleased attention when Pell declared iron — agreed to open terms, signaling Orvil.",
         "[d6] Engaged in the second bout against Pell — reading her responses, using lateral movement, genuinely tested.",
-        "[d6] Silas read his patterns clearly from the arc — back-foot settle before a forward entry, half-rotation close, precise lateral footwork, telegraphs nothing with his hands but everything with his weight."
+        "[d6] Silas read his patterns clearly from the arc — back-foot settle before a forward entry, half-rotation close, precise lateral footwork, telegraphs nothing with his hands but everything with his weight.",
+        "[d6] Took the finish cleanly — arm against chest, quiet laugh, turned to Orvil himself. No grievance."
       ],
       "knownFacts": [
-        "Silas named his weakness without pressing it — yielded on his own terms",
         "The bout ended in one exchange; the deathsense read was the whole contest",
         "Silas named his ankle weakness from deathsense in the opening breath — not footwork, not testing; a read of what was already declining",
         "Second bout agreed: no deathsense, open terms — wants to read Silas without the read running",
         "Pell Marsh is Silas's partner and carries ironsense — Silas offered her as the second-bout fighter on open terms",
         "Favors a half-rotation entry when closing — the back foot settles a beat before he moves forward",
         "Lateral footwork is his primary tool — built on years of drilling, economical and precise",
-        "His attention diverts briefly to iron moving near his chest — the belt buckle sitting left-of-center is a read-point Pell is using"
+        "His attention diverts briefly to iron moving near his chest — the belt buckle sitting left-of-center is a read-point Pell is using",
+        "Received a controlled yield-strike without ceremony and named it with a laugh — no ego bruised"
       ],
       "skillsObserved": [
         "accepting a clean yield without ceremony or excuse",
         "precise lateral footwork under pressure",
-        "concealing hand intention entirely — the tell is in the weig"
+        "concealing hand intention entirely — the tell is in the weig",
+        "accepting a clean bout-finish without complaint"
       ],
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "On the sand — in the third exchange against Pell Marsh, being read from a level he has not fully adjusted to.",
+      "statusNote": "On the sand — arm against chest, bout called, at ease.",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 6
@@ -2491,7 +2555,8 @@
         "[d6] The Hub's major landmarks identified from the plaza at dawn: Council of Mavens colonnade (north), Coliseum (northwest behind market row), Ent circle (east), Elven camp (west paving). The city is active before full light.",
         "[d6] The sixth waygate from the south lane — lower lintel, darker stone — is the connection to the Ashwarden March. Confirmed by Siol of the Elves.",
         "[d6] The party entered and declared crafts at the gate — Orvil on morning rotation, sand showing early-bout marks, gallery occupied at dawn.",
-        "[d6] A line of unaccountable brightness moved through pooled water in the upper bench seam of the Coliseum — slow, lateral, gone in three seconds. Not lamplight, not sun. Huginn observed it. First Precursor sign noted inside the city."
+        "[d6] A line of unaccountable brightness moved through pooled water in the upper bench seam of the Coliseum — slow, lateral, gone in three seconds. Not lamplight, not sun. Huginn observed it. First Precursor sign noted inside the city.",
+        "[d6] Second bout concluded — Pell Marsh over Tane Solr, controlled finish, Orvil's call. Sand carries marks from both bouts."
       ],
       "flags": {},
       "vectorsKnown": [],
@@ -2543,7 +2608,7 @@
           "parentId": "gen-waygate",
           "day": 6,
           "visited": true,
-          "note": "Second bout forming — Pell Marsh vs. Tane Solr, open terms, iron declared. A brief Precursor light-sign observed in the upper bench seam."
+          "note": "Second bout finished — controlled yield-strike, no edge, Orvil's baton down."
         }
       }
     },
@@ -3991,21 +4056,21 @@
     }
   },
   "tendencies": {
-    "strategic": 13.698026939753353,
-    "cerebral": 11.893883951079642,
-    "social": 16.48477126247496,
-    "generous": 2.7072794425676694,
-    "cautious": 7.65729363377544,
-    "physical": 1.7017295129453867,
-    "risky": 1.7846005189697778,
-    "ruthless": 0.5690003728121467,
-    "carousing": 0.008717805178885785,
-    "amorous": 5.64219965547422,
-    "patient": 1.4092321748367624,
-    "stealth": 0.22054599818512555,
-    "devotion": 0.49284213872486454,
-    "craft": 1.742162071033393,
-    "leadership": 1.1226036072013503
+    "strategic": 13.355576266259519,
+    "cerebral": 11.59653685230265,
+    "social": 18.072651980913086,
+    "generous": 3.6395974565034774,
+    "cautious": 7.465861292931054,
+    "physical": 1.6591862751217519,
+    "risky": 1.7399855059955334,
+    "ruthless": 0.554775363491843,
+    "carousing": 0.00849986004941364,
+    "amorous": 5.501144664087365,
+    "patient": 1.3740013704658434,
+    "stealth": 0.2150323482304974,
+    "devotion": 0.4805210852567429,
+    "craft": 1.698608019257558,
+    "leadership": 1.0945385170213164
   },
   "aptitudes": [
     "strategist",
@@ -4013,7 +4078,7 @@
     "scholar",
     "orator"
   ],
-  "actionCount": 547,
+  "actionCount": 548,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -4283,8 +4348,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784413525626,
-  "rev": 800,
+  "updatedAt": 1784413749474,
+  "rev": 801,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5041,7 +5106,7 @@
           "entityId": "tane-solr",
           "type": "npc",
           "birthWeight": 23,
-          "engagementScore": 18,
+          "engagementScore": 20,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -5072,6 +5137,10 @@
             },
             {
               "kind": "fact",
+              "day": 6
+            },
+            {
+              "kind": "interact",
               "day": 6
             },
             {
@@ -5647,7 +5716,7 @@
   "syncedAt": 1784392733860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 367
+    "valley": 368
   },
   "foreclosed": [
     "rootkin",
@@ -5704,10 +5773,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T22:25:25.625Z",
+      "lastAt": "2026-07-18T22:29:09.473Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 92,
+      "beats": 93,
       "_recapError": null,
       "recap": "Day eighteen, and Silas Weir moved like a man who'd finally stopped fighting the shape of what he was. On the road he disarmed three opportunists without breaking bones, read the grief sitting behind the broad man's eyes, named it plainly, pressed provisions into their hands, and sent them toward something worth doing — mercy given as instruction, not sentiment. Then he brought the hard people together: Dara, Aldric, Fendt, Mara, Calvar, all of them in the heat of Pell's forge with no exits easy and no pretense left, and in that single evening he turned a valley's quiet panic into four working threads — engineering, logistics, supply, accounts — each with a named lead and a direction to face. The crisis didn't end, but it stopped being formless, and that was his doing."
     }

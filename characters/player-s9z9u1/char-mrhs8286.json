@@ -848,87 +848,89 @@
         "player": "Ask Siol what the Coliseum duels are like — what to expect before you step into one",
         "summary": "Siol describes the Coliseum duels as honest bouts with declared crafts, a referee named Orvil, and yield as the end — the party reaches the outer wall.",
         "narration": "The Coliseum outer wall is close now — close enough to read the soot-marks on the stone above the nearest gate, and to hear, faintly, the sound of feet on packed sand inside. The gates stand open. A few figures move in and out at a measured pace, none of them in any hurry.\n\nYou ask Siol what the duels here are like. What to expect before you step into one.\n\nShe considers the question for a few steps before she answers. 'They are honest,' she says. 'That is the first thing. No hidden weapons, no interference from the gallery. The Coliseum keeps a referee — a compact man named Orvil, if he is still on the morning rotation — and Orvil does not look the other way.' She glances at Memory riding at your back. 'Spears are allowed. Most things are, as long as you declare them at the gate.' She pauses. 'They will ask you to name your craft before you enter the circle. Not as a condition — as a courtesy, so the person across from you knows the shape of what they are agreeing to.'\n\nPell says nothing, but her eyes move to the open gate with the attention she gives to things she is quietly deciding about.\n\nSiol adds one more thing as you reach the wall's shadow. 'They do not fight to death here,' she says. 'Yield is the end. If someone is not going to yield, Orvil calls it.' She looks at Huginn. 'Your bird will be visible from the gallery. That may affect who chooses to step in across from you.'"
+      },
+      {
+        "player": "Let Pell say whether she wants to watch or walk the circle herself first — this is her first time here",
+        "summary": "Pell decides to walk the Coliseum floor before watching — the party prepares to step through the gate.",
+        "narration": "You look to Pell and let the question sit easy between you — whether she wants to watch from the gallery first, or step down onto the sand herself.\n\nShe is quiet for a moment. Her eyes are on the open gate, reading it the way she reads a new piece of iron: not with excitement, but with the attention that comes before a decision. Then she says, 'I'll walk it.' She says it the way she says most things — without ceremony, as if she is simply reporting what she has already concluded. 'I want to see the floor before I see anyone else on it.'\n\nSiol makes a small sound — not quite approval, but something adjacent. 'That is the sensible order,' she says, and she means it.\n\nHuginn shifts on your shoulder and looks through the open gate. He is not commenting. He simply looks, with the calm patience of something that has attended more arrivals than it can count, and waits to see what this one becomes."
       }
     ],
     "lastTurn": {
-      "narration": "The Coliseum outer wall is close now — close enough to read the soot-marks on the stone above the nearest gate, and to hear, faintly, the sound of feet on packed sand inside. The gates stand open. A few figures move in and out at a measured pace, none of them in any hurry.\n\nYou ask Siol what the duels here are like. What to expect before you step into one.\n\nShe considers the question for a few steps before she answers. 'They are honest,' she says. 'That is the first thing. No hidden weapons, no interference from the gallery. The Coliseum keeps a referee — a compact man named Orvil, if he is still on the morning rotation — and Orvil does not look the other way.' She glances at Memory riding at your back. 'Spears are allowed. Most things are, as long as you declare them at the gate.' She pauses. 'They will ask you to name your craft before you enter the circle. Not as a condition — as a courtesy, so the person across from you knows the shape of what they are agreeing to.'\n\nPell says nothing, but her eyes move to the open gate with the attention she gives to things she is quietly deciding about.\n\nSiol adds one more thing as you reach the wall's shadow. 'They do not fight to death here,' she says. 'Yield is the end. If someone is not going to yield, Orvil calls it.' She looks at Huginn. 'Your bird will be visible from the gallery. That may affect who chooses to step in across from you.'",
-      "sceneSummary": "Siol describes the Coliseum duels as honest bouts with declared crafts, a referee named Orvil, and yield as the end — the party reaches the outer wall.",
+      "narration": "You look to Pell and let the question sit easy between you — whether she wants to watch from the gallery first, or step down onto the sand herself.\n\nShe is quiet for a moment. Her eyes are on the open gate, reading it the way she reads a new piece of iron: not with excitement, but with the attention that comes before a decision. Then she says, 'I'll walk it.' She says it the way she says most things — without ceremony, as if she is simply reporting what she has already concluded. 'I want to see the floor before I see anyone else on it.'\n\nSiol makes a small sound — not quite approval, but something adjacent. 'That is the sensible order,' she says, and she means it.\n\nHuginn shifts on your shoulder and looks through the open gate. He is not commenting. He simply looks, with the calm patience of something that has attended more arrivals than it can count, and waits to see what this one becomes.",
+      "sceneSummary": "Pell decides to walk the Coliseum floor before watching — the party prepares to step through the gate.",
       "choices": [
         {
-          "label": "Step through the gate and register for a duel — declare Memory and your crafts at the gate as Siol described",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
+          "label": "Step through the gate with Pell — walk the floor together, read the space, and declare crafts at the gate if Orvil asks",
+          "attribute": "social",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "travel"
+            "scout",
+            "careful"
           ],
+          "trivial": true,
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "axes": {}
         },
         {
-          "label": "Ask Siol if she knows who tends to fight here in the mornings — what kind of opponent might step in across from a spear-carrier with a crow on his shoulder",
+          "label": "Step through the gate and look for Orvil the referee — introduce yourself and ask what challengers are on the floor this morning",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "negotiate"
+          ],
+          "trivial": false,
+          "abilityId": null,
+          "energyCost": null,
+          "axes": {}
+        },
+        {
+          "label": "Use Order-Sense as you step inside — read the Coliseum's design: what the space was built to do, and how the craft-declaration rule fits into it",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {},
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "trivial": false,
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "axes": {
+            "chaos_order": 0.4
+          }
+        },
+        {
+          "label": "Ask Siol, before you go in, whether she herself has ever fought here — and what she learned from it",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
             "scout"
           ],
+          "trivial": true,
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Let Pell say whether she wants to watch or walk the circle herself first — this is her first time here",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "help"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Tell Siol you will take her word for it and step inside — but ask if Taur can wait, or whether the Ent's circle is better visited before the city wakes fully",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "plan"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "axes": {}
         }
       ],
       "scene": {
-        "setting": "The Coliseum outer wall, early dawn — the party stands at the edge of the wall's shadow, the open gate a few steps ahead; soot-marks on the stone above, the sound of feet on packed sand audible from inside.",
+        "setting": "The Coliseum outer wall at early dawn — the party stands a step from the open gate, soot-marks on the stone above, the sound of feet on packed sand audible from inside.",
         "npcsPresent": [
           {
             "name": "Siol",
-            "state": "Standing at the wall's shadow, having just finished her account of the Coliseum — watching Huginn with dry attention"
+            "state": "Standing at Pell's shoulder, dry approval settled on her face — watching the gate with the ease of someone who has been through it before"
           },
           {
             "name": "Pell Marsh",
-            "state": "Eyes on the open gate, quietly deciding something"
+            "state": "Decision made — facing the gate, ready to step through and read the floor for herself"
           },
           {
             "name": "Huginn",
-            "state": "On Silas's left shoulder, visible and unhurried"
+            "state": "On Silas's left shoulder, looking through the open gate with unhurried attention"
           }
         ],
         "objects": [
@@ -940,65 +942,48 @@
           "Council of Mavens colonnade to the north — petition board visible"
         ],
         "threads": [
-          "Whether to duel, watch, or move on to the Ent's circle or the petition board",
-          "Pell's unspoken read of the gate — she is deciding something",
-          "Huginn's visibility from the gallery — Siol named it; its effect on challengers is unknown",
+          "Pell has decided to walk the floor — the party is about to step through the gate",
           "Orvil the referee — named but not yet met",
-          "Taur the Ent — approachable but on his own terms; Huginn's earlier eastward attention unresolved"
+          "Huginn's visibility from the gallery — its effect on challengers unknown",
+          "Taur the Ent — approachable but on his own terms; Huginn's earlier eastward attention unresolved",
+          "Whether Silas will duel this morning, and against whom"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "note": "Named her preference plainly — walk the floor before watching it. No ceremony.",
+          "statusNote": "Beside Silas at the Coliseum gate — decision made, ready to step through and read the sand."
+        },
+        {
+          "op": "update",
           "npcId": "siol",
           "name": "Siol",
-          "note": "Described the Coliseum duels plainly — honest bouts, crafts declared at the gate, a referee named Orvil, yield as the end. Noted Huginn's gallery visibility as a factor. Dry, practical, complete.",
-          "learned": [
-            "Coliseum duels require craft declaration at the gate — as a courtesy to the opponent, not a condition of entry",
-            "The referee is named Orvil — compact man, morning rotation, does not look the other way",
-            "Spears are allowed; most weapons are, declared at the gate",
-            "Yield ends the bout; Orvil calls it if someone will not",
-            "Huginn's presence in the gallery will affect who chooses to step across from Silas"
-          ],
-          "skillsObserved": [
-            "precise practical briefing on an institution's rules without editorializing"
-          ],
-          "statusNote": "Walking with the party at the Coliseum outer wall — tour continuing",
-          "pronouns": "she/her",
-          "gender": "woman"
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "hub-coliseum",
-          "label": "The Hub Coliseum",
-          "kind": "place",
-          "fact": "Duels are honest bouts — crafts declared at the gate as courtesy, not condition. Referee named Orvil on the morning rotation. Spears allowed. Yield ends the fight; Orvil calls it if someone refuses. Huginn's presence in the gallery will be noticed by potential challengers.",
-          "links": [
-            "siol",
-            "waygate"
-          ]
+          "note": "Approved Pell's choice as the sensible order — dry, genuine.",
+          "statusNote": "At the Coliseum gate with the party — tour continuing."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "walking from the plaza to the Coliseum wall and a short exchange on the road"
+        "why": "A brief exchange at the gate — a few minutes at most."
       }
     },
     "sceneState": {
-      "setting": "The Coliseum outer wall, early dawn — the party stands at the edge of the wall's shadow, the open gate a few steps ahead; soot-marks on the stone above, the sound of feet on packed sand audible from inside.",
+      "setting": "The Coliseum outer wall at early dawn — the party stands a step from the open gate, soot-marks on the stone above, the sound of feet on packed sand audible from inside.",
       "npcsPresent": [
         {
           "name": "Siol",
-          "state": "Standing at the wall's shadow, having just finished her account of the Coliseum — watching Huginn with dry attention"
+          "state": "Standing at Pell's shoulder, dry approval settled on her face — watching the gate with the ease of someone who has been "
         },
         {
           "name": "Pell Marsh",
-          "state": "Eyes on the open gate, quietly deciding something"
+          "state": "Decision made — facing the gate, ready to step through and read the floor for herself"
         },
         {
           "name": "Huginn",
-          "state": "On Silas's left shoulder, visible and unhurried"
+          "state": "On Silas's left shoulder, looking through the open gate with unhurried attention"
         }
       ],
       "objects": [
@@ -1010,11 +995,11 @@
         "Council of Mavens colonnade to the north — petition board visible"
       ],
       "threads": [
-        "Whether to duel, watch, or move on to the Ent's circle or the petition board",
-        "Pell's unspoken read of the gate — she is deciding something",
-        "Huginn's visibility from the gallery — Siol named it; its effect on challengers is unknown",
+        "Pell has decided to walk the floor — the party is about to step through the gate",
         "Orvil the referee — named but not yet met",
-        "Taur the Ent — approachable but on his own terms; Huginn's earlier eastward attention unresolved"
+        "Huginn's visibility from the gallery — its effect on challengers unknown",
+        "Taur the Ent — approachable but on his own terms; Huginn's earlier eastward attention unresolved",
+        "Whether Silas will duel this morning, and against whom"
       ]
     }
   },
@@ -1445,7 +1430,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d6] Took a real strike on the wrist from the clean shadow-arrival combined with order-sense touch. Named it 'the one' — practitioner's acknowledgment. Examining the feel of it from the ironsense side.",
         "[d6] Received the kiss without resistance and a sound close to a laugh. Received the ironsense warning as a good tool — no ceremony, no argument. Said she'll think on it in the register that means she already is.",
         "[d6] Took Silas's hand and walked through the waygate without a word — settled and present.",
         "[d6] Walked through the waygate without ceremony, hand brushing the left upright, and turned back to wait for Silas — already looking south.",
@@ -1454,7 +1438,8 @@
         "[d6] Noticed the Ent first — stopped mid-scan and named it quietly. Waiting for Silas to call the first move.",
         "[d6] Introduced formally as Silas's soul wife — received Siol's acknowledgment with quiet weight",
         "[d6] After watching Siol and weighing her, asked the practical question directly: is there a toll, a keeper, or anything waiting on the other side of the sixth gate?",
-        "[d6] Received Siol's answer with a single structural nod — question settled, attention returned to Silas"
+        "[d6] Received Siol's answer with a single structural nod — question settled, attention returned to Silas",
+        "[d6] Named her preference plainly — walk the floor before watching it. No ceremony."
       ],
       "knownFacts": [
         "The first death-warding thread is seated into the brigandine's shoulder collar — quiet, economical, holding.",
@@ -1475,7 +1460,7 @@
         "receiving a genuine technique acknowledgment without ceremon"
       ],
       "status": "active",
-      "statusNote": "Beside Silas at the Elven camp — practical question resolved, ready to move",
+      "statusNote": "Beside Silas at the Coliseum gate — decision made, ready to step through and read the sand.",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 6
@@ -2009,7 +1994,8 @@
         "[d6] Named her road as south but turning before the Steadwood thins — offered a day or so of shared travel if the pace is easy. Dry comment about Huginn not objecting.",
         "[d6] Accepted Silas's invitation to tour the Hub before the road south — stepped clear of her camp without ceremony, named the Coliseum before the petition queue as the practical morning order, and began leading the party north.",
         "[d6] Named the Ent as Taur — ancient, present before the city, approachable but speaks on his own terms; noted the circle is worth a few minutes if there is time",
-        "[d6] Described the Coliseum duels plainly — honest bouts, crafts declared at the gate, a referee named Orvil, yield as the end. Noted Huginn's gallery visibility as a factor. Dry, practical, complete."
+        "[d6] Described the Coliseum duels plainly — honest bouts, crafts declared at the gate, a referee named Orvil, yield as the end. Noted Huginn's gallery visibility as a factor. Dry, practical, complete.",
+        "[d6] Approved Pell's choice as the sensible order — dry, genuine."
       ],
       "knownFacts": [
         "Her road runs south from the Hub but turns before the Steadwood thins — not as far as the March mouth",
@@ -2030,7 +2016,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Walking with the party at the Coliseum outer wall — tour continuing",
+      "statusNote": "At the Coliseum gate with the party — tour continuing.",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 6
@@ -3810,21 +3796,21 @@
     }
   },
   "tendencies": {
-    "strategic": 16.082305973141022,
-    "cerebral": 8.797574376694548,
-    "social": 16.475006821082808,
-    "generous": 1.5451902375894873,
-    "cautious": 7.22044994944603,
-    "physical": 1.2615857747629504,
-    "risky": 0.12379990574352828,
-    "ruthless": 0.8110505649905491,
-    "carousing": 0.012426320181247364,
-    "amorous": 8.04236594036931,
-    "patient": 2.0087131858199325,
-    "stealth": 0.31436527106372447,
-    "devotion": 0.7024949616261817,
-    "craft": 2.483269958213593,
-    "leadership": 0.3120414750117885
+    "strategic": 15.680248323812496,
+    "cerebral": 8.577635017277185,
+    "social": 16.063131650555736,
+    "generous": 2.5065604816497498,
+    "cautious": 7.039938700709879,
+    "physical": 1.2300461303938766,
+    "risky": 0.12070490809994007,
+    "ruthless": 0.7907743008657853,
+    "carousing": 0.01211566217671618,
+    "amorous": 7.8413067918600765,
+    "patient": 1.9584953561744343,
+    "stealth": 0.30650613928713133,
+    "devotion": 0.6849325875855272,
+    "craft": 2.421188209258253,
+    "leadership": 0.3042404381364938
   },
   "aptitudes": [
     "strategist",
@@ -3832,7 +3818,7 @@
     "tactician",
     "charmer"
   ],
-  "actionCount": 533,
+  "actionCount": 534,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -4086,8 +4072,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784411490158,
-  "rev": 784,
+  "updatedAt": 1784411627844,
+  "rev": 785,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5247,7 +5233,7 @@
   "syncedAt": 1784392733860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 353
+    "valley": 354
   },
   "foreclosed": [
     "rootkin",
@@ -5304,10 +5290,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T21:51:30.156Z",
+      "lastAt": "2026-07-18T21:53:47.844Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 78,
+      "beats": 79,
       "_recapError": null,
       "recap": "Day eighteen, and Silas Weir moved like a man who'd finally stopped fighting the shape of what he was. On the road he disarmed three opportunists without breaking bones, read the grief sitting behind the broad man's eyes, named it plainly, pressed provisions into their hands, and sent them toward something worth doing — mercy given as instruction, not sentiment. Then he brought the hard people together: Dara, Aldric, Fendt, Mara, Calvar, all of them in the heat of Pell's forge with no exits easy and no pretense left, and in that single evening he turned a valley's quiet panic into four working threads — engineering, logistics, supply, accounts — each with a named lead and a direction to face. The crisis didn't end, but it stopped being formless, and that was his doing."
     }

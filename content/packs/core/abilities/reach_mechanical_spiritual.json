@@ -486,12 +486,13 @@
         "make",
         "open",
         "reveal",
+        "strike",
         "summon",
         "sustain"
       ],
       "narrationHints": "Where meaning is thick, a threshold opens that was never a door.",
       "description": "Where significance runs dense, briefly make a symbol real — a threshold held by meaning. Mid-tier Numenwork.",
-      "notFor": "Where meaning is thin; forcing the world.",
+      "notFor": "Manufacturing significance where there is none — the craft concentrates meaning, it rarely invents it. Choosing WHAT is on the other side. Closing one in a hurry.",
       "tree": [
         {
           "rank": 1,
@@ -508,8 +509,8 @@
         {
           "rank": 2,
           "name": "The Held Thin Place",
-          "grants": "Hold a thin place open — long enough for others to see, to speak, to pass a thing through.",
-          "cannot": "Held open is held open from BOTH sides. Whatever is on the other side also has a door now.",
+          "grants": "Hold a thin place open — long enough for others to see, to speak, to pass a thing through. What passes goes both ways: where something has been pressing back, holding the way open is an invitation it will take, and it arrives on its own terms rather than yours.",
+          "cannot": "You hold the opening, never what comes through it. A thing that answers a held threshold is not summoned and not bound — it is merely no longer prevented.",
           "functions": [
             "reveal",
             "summon",
@@ -517,22 +518,23 @@
             "sustain"
           ],
           "gains": "broaden",
-          "harmRung": "none"
+          "harmRung": "damaging"
         },
         {
           "rank": 3,
           "name": "The Open Door",
-          "grants": "Open a thin place where there was none, in a room that had no reason to be sacred.",
-          "cannot": "The Numinous forbid this to most of their own. What you invite has its own opinions.",
+          "grants": "Open a thin place where there was none, in a room that had no reason to be sacred. And a door opened is a door BOTH ways: what waits on the other side can be let through onto something you point it at, and what it does to a living body is not a working you are performing — it is a thing with its own appetite, arriving, and doing what it does.",
+          "cannot": "You cannot choose what answers, you cannot call it off, and it does not leave when you are finished — it is here now, in a place that had no reason to be thin, and it knows exactly who opened the way. The Numinous Reach does not forbid this. It simply keeps a list of everyone who has done it.",
           "functions": [
             "reveal",
             "summon",
             "open",
             "sustain",
-            "make"
+            "make",
+            "strike"
           ],
           "gains": "broaden",
-          "harmRung": "none"
+          "harmRung": "lethal"
         }
       ],
       "powerSystem": "reach_mechanical_spiritual",
@@ -544,7 +546,7 @@
       ],
       "tradition": "numinous",
       "nativeOrCombination": "native",
-      "harmRung": "none"
+      "harmRung": "lethal"
     },
     {
       "id": "meaning_engine",

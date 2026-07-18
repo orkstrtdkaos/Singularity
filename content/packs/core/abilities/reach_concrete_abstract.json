@@ -728,7 +728,25 @@
           "rank": 1,
           "name": "The Binding Figure",
           "grants": "Draw a binding figure that compels a concrete thing to match its abstract pattern for a time.",
-          "cannot": "It fails if the figure is untrue, it holds only for a while before reality resumes, and a figure that binds the world binds you to its upkeep while it lasts."
+          "cannot": "It fails if the figure is untrue, it holds only for a while before reality resumes, and a figure that binds the world binds you to its upkeep while it lasts.",
+          "functions": [
+            "bind",
+            "make"
+          ],
+          "gains": "broaden",
+          "harmRung": "incapacitating"
+        },
+        {
+          "rank": 2,
+          "name": "The Standing Figure",
+          "grants": "The figure holds past its moment — a working, a room, a thing's shape held to the pattern for as long as the figure stands undefaced. And you may bind a rule rather than a thing: not this stone matching the sign, but everything in this place doing so.",
+          "cannot": "The figure must remain physically intact and true — deface it and everything resumes at once, all of it, immediately. A rule bound over a place binds you inside it too. And reality resumes harder for having been held longer; the Figurists call the rebound the figure's answer.",
+          "functions": [
+            "bind",
+            "make"
+          ],
+          "gains": "deepen",
+          "harmRung": "incapacitating"
         }
       ],
       "gated": "learned",
@@ -797,7 +815,25 @@
           "rank": 1,
           "name": "The Keystone Blow",
           "grants": "Find and strike a structure's single load-bearing point, bringing the whole down with one blow.",
-          "cannot": "It works only on made structures with a true keystone, it fails on distributed loads, and a thing brought down cannot be un-broken — you understood it in order to end it."
+          "cannot": "It works only on made structures with a true keystone, it fails on distributed loads, and a thing brought down cannot be un-broken — you understood it in order to end it.",
+          "functions": [
+            "break",
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "damaging"
+        },
+        {
+          "rank": 2,
+          "name": "The Made Keystone",
+          "grants": "Where there is no true keystone, make one — a sequence of lesser strikes that manufactures the single load-bearing point, then takes it. Distributed loads no longer refuse you, and the scale rises from a structure to a span: a bridge, a gatehouse, a curtain wall.",
+          "cannot": "Manufacturing a keystone takes time and cover the moment rarely gives. Still the made, never the living or the grown. And a span brought down takes everything under it — the Masons hold you answerable for what was standing there, and they keep records.",
+          "functions": [
+            "break",
+            "reveal"
+          ],
+          "gains": "deepen",
+          "harmRung": "damaging"
         }
       ],
       "gated": "learned",

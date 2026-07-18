@@ -11,9 +11,18 @@
       "joinedAt": "2026-07-18T13:41:47.403Z"
     }
   ],
-  "beats": [],
+  "beats": [
+    {
+      "by": "verify-b",
+      "name": "Verify B",
+      "label": "beat from client B",
+      "degree": null,
+      "summary": "B acted",
+      "at": "2026-07-18T13:41:48.468Z"
+    }
+  ],
   "turn": "verify-a",
   "encounters": {},
-  "updatedAt": "2026-07-18T13-41-47-402Z",
+  "updatedAt": "2026-07-18T13:41:48.468Z",
   "closedAt": null
 }

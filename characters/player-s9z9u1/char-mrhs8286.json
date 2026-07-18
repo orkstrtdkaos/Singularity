@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 12,
-  "xp": 1190,
+  "xp": 1198,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -89,7 +89,7 @@
   "maxHealth": 85,
   "health": 85,
   "maxEnergy": 155,
-  "energy": 104,
+  "energy": 99,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1336,16 +1336,32 @@
         "player": "Ask Pell what she's thinking — she went quiet when Calvar named the procedure, and she reads situations.",
         "summary": "Pell names the authorship chain running backward — the specification's origin points to Pell's father, and the council archive may still hold the original filing.",
         "narration": "Pell is still looking at Calvar when you turn to her — not at the document, not at the door. At him. The way she looks at a piece of ironwork she hasn't decided about yet: reading the grain, not the finish.\n\n\"Your father built the monitoring specification,\" she says. Not a question. Not to Calvar, exactly — to the air between you. \"He knew what would go wrong because he knew how the system was supposed to work. That's why the notation matched. He didn't copy your method. You copied his, and you didn't know it because he was already gone when you were learning it.\" She lets that sit for a second, then refocuses. \"Which means the specification's authorship runs backward — from you to him — and anyone who pulls the original filing at the council archive is going to find his name under yours. Or instead of yours.\"\n\nShe finally looks at you. \"The intake log matters. Grael's procedural gap matters. But if the council archive still has the original specification filing — with the authorship intact — that's not just evidence. That's the structure Grael was trying to paper over. It names the shape of what he did and why it had to be Calvar he came for.\" A short pause. \"Calvar needs to know whose name is on that filing before we walk back into Millbrook with him. So do we.\"\n\nCalvar has gone very still across the table. His hands are flat on the rolled document and he is looking at Pell with the expression of a man who just heard something he had correctly suspected for thirty years spoken aloud by someone who had no reason to know it."
+      },
+      {
+        "player": "[Pell's Father is the one who taught Calvar...]  Wrap up the discussing with decisive action to get the last piece of information on who marked Fendt and why.",
+        "summary": "Calvar names Grael as the marking authority — acting alone, using a keeper's silence to close a question Fendt shouldn't have asked.",
+        "narration": "You lean forward slightly, hands flat on the table's edge, and address Calvar directly — not the document, not the lamp, not the procedural gap. Him.\n\n\"You taught Calvar the method,\" you say. \"Your hand is in the specification. And you were still here when Fendt's name went up on that board.\" A pause — you give it space to land. \"Tell me plainly: do you know who gave the order to mark him?\"\n\nCalvar goes still in a different way than he has been still before. The earlier stillness was processing; this is something older, something he has been carrying a long time and has finally found the right set of hands for. He looks at Pell for a moment — the daughter of the man who taught him, sitting across a booth in a road inn with her back to a wall she chose — and then he looks at you.\n\n\"I don't know who gave the order,\" he says, and you believe him. \"But I know why the order was possible.\" He smooths one corner of the rolled document with his thumb. \"Grael has been building toward something for two years — quiet, procedurally clean, always inside his authority. The marking-board mechanism is the last piece. He used it on Fendt because Fendt noticed the seven-band readings and asked the wrong person about it.\" He stops. \"The wrong person was Grael's keeper. The keeper filed nothing, and Grael put the name up the next morning.\" He exhales, slow. \"That is the whole chain. Grael didn't receive an order. He is the order. He marked Fendt himself to close the question before anyone with Calvar's training could read the specifications and trace what was being hidden.\"\n\nHuginn shifts on the coat-rack — one deliberate weight-transfer, talons resettling. The sound is small and precise, the way his comments usually are. Pell's jaw has tightened by one degree. You have the complete picture now: Grael, the keeper's silence, Fendt's question that shouldn't have been asked to that particular ear. The intake log at the array-office will show the keeper's name. Calvar's testimony puts the method in the room. Fendt's written page puts the dates to the falsified readings. The chain is closed."
       }
     ],
     "lastTurn": {
-      "narration": "Pell is still looking at Calvar when you turn to her — not at the document, not at the door. At him. The way she looks at a piece of ironwork she hasn't decided about yet: reading the grain, not the finish.\n\n\"Your father built the monitoring specification,\" she says. Not a question. Not to Calvar, exactly — to the air between you. \"He knew what would go wrong because he knew how the system was supposed to work. That's why the notation matched. He didn't copy your method. You copied his, and you didn't know it because he was already gone when you were learning it.\" She lets that sit for a second, then refocuses. \"Which means the specification's authorship runs backward — from you to him — and anyone who pulls the original filing at the council archive is going to find his name under yours. Or instead of yours.\"\n\nShe finally looks at you. \"The intake log matters. Grael's procedural gap matters. But if the council archive still has the original specification filing — with the authorship intact — that's not just evidence. That's the structure Grael was trying to paper over. It names the shape of what he did and why it had to be Calvar he came for.\" A short pause. \"Calvar needs to know whose name is on that filing before we walk back into Millbrook with him. So do we.\"\n\nCalvar has gone very still across the table. His hands are flat on the rolled document and he is looking at Pell with the expression of a man who just heard something he had correctly suspected for thirty years spoken aloud by someone who had no reason to know it.",
-      "sceneSummary": "Pell names the authorship chain running backward — the specification's origin points to Pell's father, and the council archive may still hold the original filing.",
+      "narration": "You lean forward slightly, hands flat on the table's edge, and address Calvar directly — not the document, not the lamp, not the procedural gap. Him.\n\n\"You taught Calvar the method,\" you say. \"Your hand is in the specification. And you were still here when Fendt's name went up on that board.\" A pause — you give it space to land. \"Tell me plainly: do you know who gave the order to mark him?\"\n\nCalvar goes still in a different way than he has been still before. The earlier stillness was processing; this is something older, something he has been carrying a long time and has finally found the right set of hands for. He looks at Pell for a moment — the daughter of the man who taught him, sitting across a booth in a road inn with her back to a wall she chose — and then he looks at you.\n\n\"I don't know who gave the order,\" he says, and you believe him. \"But I know why the order was possible.\" He smooths one corner of the rolled document with his thumb. \"Grael has been building toward something for two years — quiet, procedurally clean, always inside his authority. The marking-board mechanism is the last piece. He used it on Fendt because Fendt noticed the seven-band readings and asked the wrong person about it.\" He stops. \"The wrong person was Grael's keeper. The keeper filed nothing, and Grael put the name up the next morning.\" He exhales, slow. \"That is the whole chain. Grael didn't receive an order. He is the order. He marked Fendt himself to close the question before anyone with Calvar's training could read the specifications and trace what was being hidden.\"\n\nHuginn shifts on the coat-rack — one deliberate weight-transfer, talons resettling. The sound is small and precise, the way his comments usually are. Pell's jaw has tightened by one degree. You have the complete picture now: Grael, the keeper's silence, Fendt's question that shouldn't have been asked to that particular ear. The intake log at the array-office will show the keeper's name. Calvar's testimony puts the method in the room. Fendt's written page puts the dates to the falsified readings. The chain is closed.",
+      "sceneSummary": "Calvar names Grael as the marking authority — acting alone, using a keeper's silence to close a question Fendt shouldn't have asked.",
       "choices": [
         {
-          "label": "Ask Calvar directly: whose name is on the original specification filing at the council archive — his, or the man who taught him?",
+          "label": "The chain is complete — gather everyone and move. Brief departure, settle accounts with Maret Doss, and start the road to Millbrook.",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "lead",
+            "travel"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "The keeper's name is the missing link — ask Calvar to name the keeper who filed nothing. That name goes into the testimony chain.",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
             "study"
@@ -1353,53 +1369,44 @@
           "trivial": true
         },
         {
-          "label": "Ask Calvar whether the council archive is accessible from outside the Radiant hierarchy — or whether reaching the original filing is another guarded door",
+          "label": "Before you move, commit the full chain to paper in your own hand — Grael, the keeper, the board mechanism, Calvar's testimony. A second written record before the road.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "difficulty": 0,
+          "intentTags": [
+            "craft"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask Calvar directly: is Grael protecting the contamination cover, or is he someone else's instrument? The chain is closed, but the motive isn't.",
           "attribute": "mental",
           "subAttribute": "reason",
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
             "study",
             "plan"
           ],
-          "trivial": true
-        },
-        {
-          "label": "Tell Calvar what you know about the man who taught him — Pell's father, the filtration engineer who left the Plateau the season after the Transition — and watch what it does to him",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "negotiate"
-          ],
           "trivial": false
-        },
-        {
-          "label": "Let Calvar sit with what Pell said for a moment — then ask if he's ready to talk about the road to Millbrook and what he'll need to arrive safely",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "plan",
-            "negotiate"
-          ],
-          "trivial": true
         }
       ],
+      "characterDeltas": {
+        "xp": 3
+      },
       "scene": {
         "setting": "The Low Lamp Inn, back corner booth — oil-lamp light, fire burning low in the hearth, door in sight-line. Late afternoon, early-spring dusk settling outside.",
         "npcsPresent": [
           {
             "name": "Calvar",
-            "state": "Very still, hands flat on the rolled document — looking at Pell with the expression of a man who just heard something he'd suspected for thirty years spoken aloud."
+            "state": "Hands flat on the document, relieved — the weight of the full chain finally given to the right hands."
           },
           {
             "name": "Pell",
-            "state": "Eyes on Silas now — the analysis complete, the conclusion delivered, waiting to see what he does with it."
+            "state": "Jaw tightened by one degree, eyes on Calvar — filing what he just said."
           },
           {
             "name": "Huginn",
-            "state": "Settled on the coat-rack near the booth, watching the door with unhurried patience."
+            "state": "Settled on the coat-rack, having made his single comment with a weight-shift; watching the door."
           },
           {
             "name": "Maret Doss",
@@ -1414,58 +1421,80 @@
           "Hearth fire — three feet from the booth"
         ],
         "threads": [
-          "Calvar's reaction to Pell's naming of the authorship chain — unresolved, he has gone very still",
-          "Whose name appears on the original specification filing at the council archive",
-          "Whether the council archive is accessible from outside the Radiant hierarchy",
-          "District keeper — identity and willingness to testify not yet established",
-          "Intake log at the array-office foyer — accessibility and watch-net coverage unknown",
-          "The plan to return to Millbrook with Calvar — timing and route unresolved"
+          "Keeper's name — unnamed, but reachable via Calvar's testimony or the intake log",
+          "Grael's motive — is he acting for himself or for someone else?",
+          "Road to Millbrook — Calvar now part of the traveling party; departure timing unresolved",
+          "Council archive filing — Pell's father's name on the original specification; still unverified but Calvar's disclosure has confirmed the shape"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "note": "Named the authorship chain running backward — the specification's origin points to her father, and the council archive may hold the original filing with his name intact. Delivered it to the air between everyone, then to Silas.",
+          "npcId": "calvar",
+          "name": "Calvar",
+          "note": "Named Grael as the marking authority — acting alone, using a keeper's filed silence to remove Fendt's question from the record. The chain is now complete.",
           "learned": [
-            "The seventh-band specification authorship chain runs from Calvar back to her father — the original filing at the council archive may name him directly"
+            "Grael marked Fendt himself — no external order; he is the order",
+            "Fendt asked about the seven-band readings to the wrong person: Grael's keeper",
+            "The keeper filed nothing; Grael put Fendt's name up the next morning",
+            "Grael has been building toward this mechanism for two years — always inside procedural authority"
           ],
           "skillsObserved": [
-            "structural reasoning from partial material evidence",
-            "naming the load-bearing implication without editorializing"
+            "naming the complete accountability chain without editorializing",
+            "precise disclosure of held knowledge when given the right hands"
           ],
-          "statusNote": "At the Low Lamp Inn booth — the analysis delivered, watching Silas for his next move."
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "At the Low Lamp Inn booth — the full chain delivered, ready to travel to Millbrook with Silas and Pell."
         },
         {
           "op": "update",
-          "npcId": "calvar",
-          "name": "Calvar",
-          "note": "Went very still when Pell named the authorship chain — the reaction of a man who has correctly suspected something for thirty years and just heard it confirmed by someone who had no reason to know it.",
-          "learned": [
-            "Pell has deduced that the specification authorship runs from Calvar back to the man who taught him — and that the council archive may hold the original filing"
-          ],
-          "statusNote": "At the Low Lamp Inn booth — still, hands on the document, processing what Pell just named."
+          "npcId": "pell",
+          "name": "Pell",
+          "note": "Received Calvar's disclosure with one degree of jaw-tension — filing the full picture. The authorship chain from her father through Calvar to the specification is now confirmed in her presence.",
+          "status": "active",
+          "statusNote": "At the Low Lamp Inn booth — processing the completed chain, watching Silas for his next move."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "find-the-engineer",
-          "label": "Find the Engineer",
-          "kind": "event",
-          "fact": "Pell deduced that the seventh-band specification authorship runs backward from Calvar to his teacher — the original council archive filing may name Pell's father as author. This would reveal the shape of what Grael was covering and why Calvar specifically had to be the target.",
+          "topic": "overseer-grael",
+          "label": "Overseer Grael",
+          "kind": "person",
+          "fact": "Grael marked Fendt himself — no external order. Fendt asked about the seven-band readings to the wrong person (Grael's keeper); the keeper filed nothing, and Grael put the name on the board the next morning. He has been building toward this procedural mechanism for two years, always inside his authority. The chain: Grael → keeper's silence → board mark → no record → no appeal.",
           "links": [
-            "calvar",
-            "pell",
-            "overseer-grael",
             "the-edge-district-ledger",
-            "millbrook"
+            "fendt-and-the-falsified-ledger",
+            "calvar",
+            "fendt",
+            "the-water-crisis"
+          ]
+        },
+        {
+          "topic": "the-edge-district-ledger",
+          "label": "The Edge District Ledger",
+          "kind": "event",
+          "fact": "The complete accountability chain is now closed: Grael marked Fendt himself to close a question Fendt asked his keeper about the seven-band readings. The keeper filed nothing. Grael's motive — protecting the contamination cover, or acting for someone else — remains the single open question.",
+          "links": [
+            "overseer-grael",
+            "fendt",
+            "fendt-and-the-falsified-ledger",
+            "calvar",
+            "the-water-crisis",
+            "find-the-engineer"
           ]
         }
       ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-edge-district-ledger",
+          "note": "Calvar names Grael as the sole marking authority — acting alone through a keeper's silence. The chain is complete: Grael → keeper (no log filed) → board mark the next morning. Remaining: keeper's name for the intake log; Grael's deeper motive; departure to Millbrook."
+        }
+      ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A short exchange at the booth — a few minutes of conversation"
+        "hoursPassed": 0.5,
+        "why": "A focused disclosure at the booth — the conversation ran its full course, no digressions."
       }
     },
     "sceneState": {
@@ -1473,15 +1502,15 @@
       "npcsPresent": [
         {
           "name": "Calvar",
-          "state": "Very still, hands flat on the rolled document — looking at Pell with the expression of a man who just heard something he"
+          "state": "Hands flat on the document, relieved — the weight of the full chain finally given to the right hands."
         },
         {
           "name": "Pell",
-          "state": "Eyes on Silas now — the analysis complete, the conclusion delivered, waiting to see what he does with it."
+          "state": "Jaw tightened by one degree, eyes on Calvar — filing what he just said."
         },
         {
           "name": "Huginn",
-          "state": "Settled on the coat-rack near the booth, watching the door with unhurried patience."
+          "state": "Settled on the coat-rack, having made his single comment with a weight-shift; watching the door."
         },
         {
           "name": "Maret Doss",
@@ -1496,11 +1525,10 @@
         "Hearth fire — three feet from the booth"
       ],
       "threads": [
-        "Calvar's reaction to Pell's naming of the authorship chain — unresolved, he has gone very still",
-        "Whose name appears on the original specification filing at the council archive",
-        "Whether the council archive is accessible from outside the Radiant hierarchy",
-        "District keeper — identity and willingness to testify not yet established",
-        "Intake log at the array-office foyer — accessibility and watch-net coverage unknown"
+        "Keeper's name — unnamed, but reachable via Calvar's testimony or the intake log",
+        "Grael's motive — is he acting for himself or for someone else?",
+        "Road to Millbrook — Calvar now part of the traveling party; departure timing unresolved",
+        "Council archive filing — Pell's father's name on the original specification; still unverified but Calvar's disclosure has confirmed the shape"
       ]
     }
   },
@@ -1804,14 +1832,14 @@
         "s1"
       ],
       "progress": [
-        "Fendt has named the authorship chain: a council department glyph and a personal margin notation with a distinctive hand. The calibration files that would have completed the chain are gone. The design is pre-Transition, fifteen years before Fendt's tenure, and built to be used. The margin glyph is the surviving breadcrumb.",
         "Pell has named her father as a filtration engineer who left the Plateau after the Transition — and offered to identify the margin notation if Fendt can reproduce the glyph. The authorship chain may resolve in this room.",
         "Pell identified the margin notation as her father's hand — the authorship chain closes in the upper room. Fendt's departure and the calibration files are named as the same event. What remains: where the paper goes, and what Fendt expects to happen to him.",
         "Fendt's cooperation secured — written testimony in hand, Fendt walking to Mara Wells in Millbrook. The paper exists and the authorship chain is closed. What remains: finding a receiving authority outside the Radiant hierarchy to lodge it formally before the six-week window expires.",
         "The calibration files Grael's runner removed from Leth's archive are not the only record — Calvar's personal correspondence holds the same data in Pell's father's own hand. A formal lodgment path may not require recovering the originals.",
         "Calvar named the six-week window without objection. The annex copy is now the key variable in whether the formal lodgment can be closed before the review window shuts.",
         "A pre-Transition author willing to attest in person changes Grael's appeal-capture method from functional to defeatable — Calvar named this himself. The annex copy and the formal lodgment remain the open variables.",
-        "Calvar named the annex retrieval honestly: the filing should be there, but access requires entering the lower Plateau district — inside the hierarchy's house. Grael's watch-net may extend there."
+        "Calvar named the annex retrieval honestly: the filing should be there, but access requires entering the lower Plateau district — inside the hierarchy's house. Grael's watch-net may extend there.",
+        "Calvar names Grael as the sole marking authority — acting alone through a keeper's silence. The chain is complete: Grael → keeper (no log filed) → board mark the next morning. Remaining: keeper's name for the intake log; Grael's deeper motive; departure to Millbrook."
       ],
       "aliases": [],
       "startedAt": "2026-07-16T21:27:42.515Z",
@@ -1928,7 +1956,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d4] Confirmed the Weir mark accepted — 'it's in me the way ironsense is, I don't look for it, it's just there when I reach.' Confirmed happy — quieter than expected, but real. Asked th",
         "[d4] Received the wordless answer — arms tightening, her settling closer — without comment or management. Exhaled all the way out and released the last held shape. Thumb moved once acro",
         "[d4] Rose from the bath and dressed without hesitation when the road was named — settled, present, ready. Pocketed the whetstone without ceremony.",
         "[d4] Read the lane independently — has already angled away from the watcher without being asked. Ready and tracking.",
@@ -1937,7 +1964,8 @@
         "[d4] Through the gate without hesitation, two steps, pack steady — read Calvar's pace and matched it without being told.",
         "[d4] Read Silas's stillness and repositioned without instruction — body covering Calvar's exposure to the street.",
         "[d4] Took the booth's edge position with a clear sight-line to the door — still reading the room, pack at the wall.",
-        "[d4] Named the authorship chain running backward — the specification's origin points to her father, and the council archive may hold the original filing with his name intact. Delivered "
+        "[d4] Named the authorship chain running backward — the specification's origin points to her father, and the council archive may hold the original filing with his name intact. Delivered ",
+        "[d4] Received Calvar's disclosure with one degree of jaw-tension — filing the full picture. The authorship chain from her father through Calvar to the specification is now confirmed in "
       ],
       "knownFacts": [
         "Her voice is low and specific when it surfaces in this register — naming things without filing them afterward",
@@ -1958,7 +1986,7 @@
         "naming the load-bearing implication without editorializing"
       ],
       "status": "active",
-      "statusNote": "At the Low Lamp Inn booth — the analysis delivered, watching Silas for his next move.",
+      "statusNote": "At the Low Lamp Inn booth — processing the completed chain, watching Silas for his next move.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 4
@@ -2296,9 +2324,8 @@
         "locationId": "radiant_plateau_edge",
         "day": 3
       },
-      "relationship": 9,
+      "relationship": 10,
       "history": [
-        "[d4] Lamp not in window; casement latched rather than open. Status unknown — may still be in the room, may have been moved.",
         "[d4] Lamp absent from window, casement latched — The Ended Threat reads the watcher as waiting on Calvar's movement, not yet dispatched. His situation remains unknown but the threat is ",
         "[d4] Opened into the room already packed and wall-seated — had been tracking the watcher's casement angles from inside. Released a held breath when Silas and Pell entered. First words: ",
         "[d4] Named the cut-lane delivery exit from the cooperage's rear service passage — confirmed the watcher has not shifted position in two hours of his own counting. Steady and contributin",
@@ -2307,28 +2334,29 @@
         "[d4] Held steady at the lane-mouth — deliberate breathing, document secure, waiting on Silas's signal to move into the seam.",
         "[d4] Arrived at the Low Lamp Inn with the document intact — set it on the table and let out the breath he'd been holding since the cooperage. Now composed, present, ready to talk.",
         "[d4] Named Grael's authority structure in full — the board mechanism, the procedural gap (no keeper log entry), and the chain needed to challenge: keeper testimony + intake log + Fendt'",
-        "[d4] Went very still when Pell named the authorship chain — the reaction of a man who has correctly suspected something for thirty years and just heard it confirmed by someone who had n"
+        "[d4] Went very still when Pell named the authorship chain — the reaction of a man who has correctly suspected something for thirty years and just heard it confirmed by someone who had n",
+        "[d4] Named Grael as the marking authority — acting alone, using a keeper's filed silence to remove Fendt's question from the record. The chain is now complete."
       ],
       "knownFacts": [
-        "The traveling case was already buckled before Silas arrived — he had decided to move",
-        "The cooperage has a rear delivery exit opening onto the cut-lane, south side — outside the watcher's fixed eye-line",
-        "Moves through a watched space with practiced composure — not stillness, controlled motion",
         "Moves through a watched space with practiced composure — not stillness, controlled motion.",
         "Grael holds a third-tier district overseer appointment, renewable on a five-year cycle — his marking authority is real but procedurally bounded",
         "A mark without a same-day keeper log entry is procedurally unsupported and challengeable",
         "The formal chain for challenge requires: keeper testimony (no log filed), a witness to the mark going up, and grounds — Fendt's testimony provides the grounds",
-        "Pell has deduced that the specification authorship runs from Calvar back to the man who taught him — and that the council archive may hold the original filing"
+        "Pell has deduced that the specification authorship runs from Calvar back to the man who taught him — and that the council archive may hold the original filing",
+        "Grael marked Fendt himself — no external order; he is the order",
+        "Fendt asked about the seven-band readings to the wrong person: Grael's keeper",
+        "The keeper filed nothing; Grael put Fendt's name up the next morning"
       ],
       "skillsObserved": [
-        "measured disclosure — named the three copies without being a",
-        "precise self-accounting of delay and its cause",
         "identifying the structural flaw in Grael's appeal-capture me",
         "sustained positional surveillance from a static interior pos",
         "holding composure at a chokepoint under time pressure",
-        "precise procedural exposition under calm — named the gap, th"
+        "precise procedural exposition under calm — named the gap, th",
+        "naming the complete accountability chain without editorializ",
+        "precise disclosure of held knowledge when given the right ha"
       ],
       "status": "active",
-      "statusNote": "At the Low Lamp Inn booth — still, hands on the document, processing what Pell just named.",
+      "statusNote": "At the Low Lamp Inn booth — the full chain delivered, ready to travel to Millbrook with Silas and Pell.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 4
@@ -3563,7 +3591,8 @@
           "[d3] Grael's method requires no second move — the machinery grinds to conclusion on its own once the channel for appeal is closed. The Attended End confirms the design works.",
           "[d3] Grael's runner is named Rennic (initials R.V.) — appears in the optics array intake collection log at every first-and-third-morning slot for six unbroken weeks, including the week Calvar's calibration",
           "[d4] The watch-net has a readable seam: the warden pair on the lower tier runs a fixed loop that turns west at the second lamp-post, giving a ninety-second window of blind coverage at the lane-mouth. Order",
-          "[d4] Grael holds a third-tier Radiant council overseer appointment, renewable on a five-year cycle. His authority to mark the accountability board is real but procedurally bounded: the mark must be logged "
+          "[d4] Grael holds a third-tier Radiant council overseer appointment, renewable on a five-year cycle. His authority to mark the accountability board is real but procedurally bounded: the mark must be logged ",
+          "[d4] Grael marked Fendt himself — no external order. Fendt asked about the seven-band readings to the wrong person (Grael's keeper); the keeper filed nothing, and Grael put the name on the board the next m"
         ],
         "links": [
           "find-the-engineer",
@@ -3616,7 +3645,8 @@
         "facts": [
           "[d3] Authorship chain closed: Pell's father built the seventh-band blind-spot monitoring into the filtration specification at foundation. Fendt's copied notation — a three with the loop closing before the ",
           "[d3] Written testimony secured from Fendt — names Grael, the seven falsified entries, and the nine-day gap. One copy with Silas; one in Fendt's case lining. Fendt on the road to Mara Wells. The remaining g",
-          "[d3] The formal lodgment path is now mapped: Fendt's testimony, Leth's breach complaint, Vash's eyewitness account, and Rennic in the intake log form the chain. A second copy of the calibration files — fro"
+          "[d3] The formal lodgment path is now mapped: Fendt's testimony, Leth's breach complaint, Vash's eyewitness account, and Rennic in the intake log form the chain. A second copy of the calibration files — fro",
+          "[d4] The complete accountability chain is now closed: Grael marked Fendt himself to close a question Fendt asked his keeper about the seven-band readings. The keeper filed nothing. Grael's motive — protect"
         ],
         "links": [
           "fendt",
@@ -3630,7 +3660,7 @@
         ],
         "aliases": [],
         "createdDay": 3,
-        "updatedDay": 3
+        "updatedDay": 4
       },
       "edge-district-document-roll": {
         "id": "edge-district-document-roll",
@@ -3906,20 +3936,20 @@
     }
   },
   "tendencies": {
-    "strategic": 19.530512329809074,
-    "cerebral": 13.481376636574465,
-    "social": 13.00425767343939,
-    "generous": 2.203103915460399,
-    "cautious": 11.732861785356972,
-    "physical": 0.12932869582149945,
-    "risky": 1.1202597908668468,
-    "ruthless": 1.9675080092561021,
-    "carousing": 0.11244521362017573,
-    "amorous": 12.921467596740426,
-    "patient": 1.5929250210279822,
-    "stealth": 1.7657649074573634,
-    "devotion": 1.5516192863237308,
-    "craft": 0.35415162889068325
+    "strategic": 19.042249521563846,
+    "cerebral": 14.144342220660103,
+    "social": 13.679151231603406,
+    "generous": 2.148026317573889,
+    "cautious": 11.439540240723048,
+    "physical": 0.12609547842596194,
+    "risky": 1.0922532960951756,
+    "ruthless": 1.9183203090246996,
+    "carousing": 0.10963408327967133,
+    "amorous": 12.598430906821914,
+    "patient": 1.5531018955022826,
+    "stealth": 1.7216207847709293,
+    "devotion": 1.5128288041656375,
+    "craft": 0.34529783816841614
   },
   "aptitudes": [
     "strategist",
@@ -3931,7 +3961,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 446,
+  "actionCount": 447,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -4177,8 +4207,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784345840612,
-  "rev": 647,
+  "updatedAt": 1784346032496,
+  "rev": 648,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4472,10 +4502,6 @@
               "day": 3
             },
             {
-              "kind": "interact",
-              "day": 3
-            },
-            {
               "kind": "fact",
               "day": 3
             },
@@ -4521,6 +4547,10 @@
             },
             {
               "kind": "fact",
+              "day": 4
+            },
+            {
+              "kind": "interact",
               "day": 4
             },
             {
@@ -5206,7 +5236,7 @@
   "syncedAt": 1784339418317,
   "teachers": {},
   "regionsKnown": {
-    "valley": 263
+    "valley": 264
   },
   "foreclosed": [
     "rootkin",
@@ -5253,10 +5283,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-17T17:39:40.705Z",
-      "lastAt": "2026-07-18T03:37:20.610Z",
+      "lastAt": "2026-07-18T03:40:32.495Z",
       "startDay": 17,
       "endDay": 18,
-      "beats": 71
+      "beats": 72
     }
   ],
   "company": [

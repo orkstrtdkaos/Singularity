@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 13,
-  "xp": 1248,
+  "xp": 1251,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -89,7 +89,7 @@
   "maxHealth": 90,
   "health": 89,
   "maxEnergy": 160,
-  "energy": 132,
+  "energy": 126,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1428,83 +1428,107 @@
         "player": "When you deflected the blow and stepped in, you used the opportunity to unleash Draw Down into the man.",
         "summary": "Silas channeled Draw Down through close contact, pulling vitality from the lean man and reclaiming his own wounds — the lean man's will to fight drains out of him.",
         "narration": "You're already inside his reach when the crook swings wide — your right hand still on the shaft, redirecting — and you don't step back. You step through.\n\nYour left hand finds his collar, the back of his neck, the seam of skin above his coat. Draw Down opens the moment contact is made: not a pull, not a grab, just a door you hold open and let run. Vitality moves the way water moves toward low ground — out of him and into you. His legs don't buckle, but his next push never comes. You feel the sting on your forearm go quiet, the shoulder-clip's dull ache smoothing out, your body reclaiming what the last two minutes took from it. It is not painful for him — not exactly — but he knows what is happening. They always know. His eyes go wide and then flat, something like outrage, then something like fear, and then the crook lowers because his arm has decided it weighs too much to hold.\n\nHe takes a step back. Then another. The lean man's version of himself — the one he's been trying to keep alive past its natural term — is very close to ending right now, and he can feel it. He's not getting his second wind. There is no second wind.\n\nBehind you, Pell's grunt of effort changes register: the broad man is still pushing, but you can hear the moment he looks over and sees his partner with lowered crook and hollow eyes. The math changes for everyone at once."
+      },
+      {
+        "player": "Use wither to destroy the lean mans weapon - while the broad man watches.  That will give a window for Pell to act decisively.",
+        "summary": "Silas withers the lean man's crook; Pell takes the window and drives the broad man into the hawthorn.",
+        "narration": "You press your free hand against the shaft of the crook — not gripping, just contact, the heel of your palm against old ash wood. Wither opens low and steady: you give the wood what it was already becoming, accelerate the grain's slow argument with time. It works. The shaft goes dull under your hand, the wood losing its ring, fibers giving up their tension in a way you can feel through your palm like a breath releasing. A long split opens along the grain from the iron shoe up toward the grip — not clean, not instant, but real. The crook won't survive another hard swing.\n\nIt's enough. The lean man feels it happen. His hand opens slightly, then closes again on a weapon that no longer trusts itself, and he makes the only choice a man with an empty will and a rotting stick can make: he takes another step back.\n\nThe broad man has been watching. He saw your hand on the shaft. He saw what happened to the wood. He doesn't know the name of what you did but he knows the category — and it lands on him like cold water. His head comes fully around now, away from Pell, toward you, and that is the window.\n\nPell doesn't need to be told. She reads the shift in his weight the moment his attention breaks — a smith reads iron through her feet and she has been reading this man for two minutes. Her right elbow drives into the gap his turned shoulder left open, her pack weight following, and she puts him into the hawthorn hard enough that the branches take his back and he loses his footing entirely. The hatchet stays in his hand but his hand is on the ground."
       }
     ],
     "lastTurn": {
-      "narration": "You're already inside his reach when the crook swings wide — your right hand still on the shaft, redirecting — and you don't step back. You step through.\n\nYour left hand finds his collar, the back of his neck, the seam of skin above his coat. Draw Down opens the moment contact is made: not a pull, not a grab, just a door you hold open and let run. Vitality moves the way water moves toward low ground — out of him and into you. His legs don't buckle, but his next push never comes. You feel the sting on your forearm go quiet, the shoulder-clip's dull ache smoothing out, your body reclaiming what the last two minutes took from it. It is not painful for him — not exactly — but he knows what is happening. They always know. His eyes go wide and then flat, something like outrage, then something like fear, and then the crook lowers because his arm has decided it weighs too much to hold.\n\nHe takes a step back. Then another. The lean man's version of himself — the one he's been trying to keep alive past its natural term — is very close to ending right now, and he can feel it. He's not getting his second wind. There is no second wind.\n\nBehind you, Pell's grunt of effort changes register: the broad man is still pushing, but you can hear the moment he looks over and sees his partner with lowered crook and hollow eyes. The math changes for everyone at once.",
-      "sceneSummary": "Silas channeled Draw Down through close contact, pulling vitality from the lean man and reclaiming his own wounds — the lean man's will to fight drains out of him.",
+      "narration": "You press your free hand against the shaft of the crook — not gripping, just contact, the heel of your palm against old ash wood. Wither opens low and steady: you give the wood what it was already becoming, accelerate the grain's slow argument with time. It works. The shaft goes dull under your hand, the wood losing its ring, fibers giving up their tension in a way you can feel through your palm like a breath releasing. A long split opens along the grain from the iron shoe up toward the grip — not clean, not instant, but real. The crook won't survive another hard swing.\n\nIt's enough. The lean man feels it happen. His hand opens slightly, then closes again on a weapon that no longer trusts itself, and he makes the only choice a man with an empty will and a rotting stick can make: he takes another step back.\n\nThe broad man has been watching. He saw your hand on the shaft. He saw what happened to the wood. He doesn't know the name of what you did but he knows the category — and it lands on him like cold water. His head comes fully around now, away from Pell, toward you, and that is the window.\n\nPell doesn't need to be told. She reads the shift in his weight the moment his attention breaks — a smith reads iron through her feet and she has been reading this man for two minutes. Her right elbow drives into the gap his turned shoulder left open, her pack weight following, and she puts him into the hawthorn hard enough that the branches take his back and he loses his footing entirely. The hatchet stays in his hand but his hand is on the ground.",
+      "sceneSummary": "Silas withers the lean man's crook; Pell takes the window and drives the broad man into the hawthorn.",
       "choices": [
         {
-          "label": "Give both men the chance to walk away — name what you saw in them plainly, and let them choose it",
+          "label": "Speak to both men now — plainly, no theater. Tell them what just happened to the crook will happen to the next thing they reach for, and name what it costs them to continue.",
           "attribute": "social",
           "subAttribute": "presence",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "persuade",
-            "calm"
+            "intimidate",
+            "negotiate"
           ],
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Press the lean man while he's hollow — step forward, Memory leveled, and close this now",
+          "label": "Step on the crook — put your boot through what's left of it while the lean man watches — and let the silence do the work.",
           "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 15,
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": 0,
           "intentTags": [
-            "attack",
-            "threaten"
+            "intimidate"
           ],
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Call to Pell — the broad man needs to see his partner clearly; angle him so he does",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 15,
-          "intentTags": [
-            "lead",
-            "command"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Hold your ground and let Huginn do the rest — neither man will like what the bird is reading right now",
+          "label": "Check Pell — make sure she has the broad man down before turning your back on the lean one.",
           "attribute": "mental",
-          "subAttribute": "insight",
+          "subAttribute": "wits",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "guard",
-            "defend"
+            "careful"
           ],
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Let Huginn drop from the branch to the ground between you and the lean man — the bird's presence at this range, after what he just saw, may be enough to end it without another word.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": 15,
+          "intentTags": [
+            "intimidate",
+            "gamble"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "characterDeltas": {
-        "health": 5,
+        "health": 0,
         "energy": -3
       },
       "scene": {
-        "setting": "The trade track at a left-hand limestone bend — hawthorn screening the left, outcrop on the right, track narrowed to a choke-point. Morning light full from the east. The lean man has stepped back two paces, crook lowered, arm too heavy, staring at Silas with wide-then-flat eyes. Pell and the broad man are still locked, but the broad man has looked over his shoulder.",
+        "setting": "The trade track at the limestone bend — hawthorn screening left, outcrop right. Morning light full from the east. The broad man is down in the hawthorn, hatchet still in hand but no footing. The lean man stands two more steps back than before, a split crook in a failing grip.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Still in the broad man's space, grinding — but the broad man's rhythm has broken as he glanced back at his partner."
+            "state": "Standing over the broad man, elbow still forward — she put him into the hawthorn and she knows it. Watching for his next move."
           },
           {
             "name": "Calvar",
-            "state": "Back to the limestone outcrop, right hand on the document roll inside his coat — still, watching."
+            "state": "Back to the limestone outcrop, right hand inside his coat on the document roll — watching everything, saying nothing."
           },
           {
             "name": "Huginn",
-            "state": "Perched above — utterly still, watching the lean man with the patience of something that already knows how this ends."
+            "state": "Still on the branch above, utterly motionless. Both men can see it watching."
           },
           {
             "name": "Broad Opportunist",
-            "state": "Still pushing against Pell, but distracted — his partner's hollow posture has reached him."
+            "state": "Down in the hawthorn — footing gone, back taking the branches, hatchet still in hand but no leverage."
           },
           {
             "name": "Lean Opportunist",
-            "state": "Two steps back, crook arm hanging, the fight gone out of him — staring at Silas with something between outrage and fear."
+            "state": "Three steps back now, crook split along the grain and failing in his grip — the fight is gone but he hasn't dropped it yet."
           }
         ],
         "objects": [
@@ -1514,14 +1538,14 @@
           "Pell's pack — on her back",
           "River Whetstone — at Pell's belt",
           "Valve Failure Timeline — in Silas's pack",
-          "Long-handled hatchet — in the broad man's hand, grip loosening",
-          "Iron-shod shepherd's crook — lowered in the lean man's failing grip"
+          "Long-handled hatchet — in the broad man's hand, no leverage",
+          "Iron-shod shepherd's crook — split along the grain, failing in the lean man's grip"
         ],
         "threads": [
-          "The lean man's will is gone but he hasn't dropped the crook yet — the moment is open",
-          "The broad man has seen his partner and his rhythm has broken — Pell may have a window",
-          "Calvar is stable and the document roll is safe",
-          "Huginn has not moved — both men can see what it is waiting for"
+          "The lean man is not done — the crook is broken but he hasn't dropped it",
+          "The broad man is down but not out — Pell is standing over him",
+          "Calvar and the document roll are safe at the outcrop",
+          "Huginn has not moved — still watching from the branch"
         ]
       },
       "npcUpdates": [
@@ -1529,33 +1553,49 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Still engaged with the broad man — held him through his second wind; now the dynamic is shifting as his partner's collapse registers on him.",
-          "statusNote": "Locked with the broad man at the limestone bend — he's distracted now; she has a window forming."
+          "role": "Village blacksmith, Millbrook — traveling companion",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "Read the broad man's broken attention the instant Silas took the window and drove him into the hawthorn without instruction — pure field read, no words.",
+          "learned": [
+            "Takes a decisive opening without hesitation when she sees it — no words needed between her and Silas in a fight"
+          ],
+          "skillsObserved": [
+            "reading a distraction as a tactical opening under live pressure",
+            "driving a larger man off his footing using pack weight and position"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Standing over the downed broad man at the limestone bend — engaged, footing solid, watching for his next move."
         }
-      ]
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A brief exchange of violence — under a minute of real fighting but the tension makes it feel longer."
+      }
     },
     "sceneState": {
-      "setting": "The trade track at a left-hand limestone bend — hawthorn screening the left, outcrop on the right, track narrowed to a choke-point. Morning light full from the east. The lean man has stepped back two paces, crook lowered, arm too heavy, staring at Silas with wide-then-flat eyes. Pell and the broad man are still locked, but the broad man has looked over his shoulder.",
+      "setting": "The trade track at the limestone bend — hawthorn screening left, outcrop right. Morning light full from the east. The broad man is down in the hawthorn, hatchet still in hand but no footing. The lean man stands two more steps back than before, a split crook in a failing grip.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Still in the broad man's space, grinding — but the broad man's rhythm has broken as he glanced back at his partner."
+          "state": "Standing over the broad man, elbow still forward — she put him into the hawthorn and she knows it. Watching for his next"
         },
         {
           "name": "Calvar",
-          "state": "Back to the limestone outcrop, right hand on the document roll inside his coat — still, watching."
+          "state": "Back to the limestone outcrop, right hand inside his coat on the document roll — watching everything, saying nothing."
         },
         {
           "name": "Huginn",
-          "state": "Perched above — utterly still, watching the lean man with the patience of something that already knows how this ends."
+          "state": "Still on the branch above, utterly motionless. Both men can see it watching."
         },
         {
           "name": "Broad Opportunist",
-          "state": "Still pushing against Pell, but distracted — his partner's hollow posture has reached him."
+          "state": "Down in the hawthorn — footing gone, back taking the branches, hatchet still in hand but no leverage."
         },
         {
           "name": "Lean Opportunist",
-          "state": "Two steps back, crook arm hanging, the fight gone out of him — staring at Silas with something between outrage and fear."
+          "state": "Three steps back now, crook split along the grain and failing in his grip — the fight is gone but he hasn't dropped it y"
         }
       ],
       "objects": [
@@ -1565,14 +1605,14 @@
         "Pell's pack — on her back",
         "River Whetstone — at Pell's belt",
         "Valve Failure Timeline — in Silas's pack",
-        "Long-handled hatchet — in the broad man's hand, grip loosening",
-        "Iron-shod shepherd's crook — lowered in the lean man's failing grip"
+        "Long-handled hatchet — in the broad man's hand, no leverage",
+        "Iron-shod shepherd's crook — split along the grain, failing in the lean man's gr"
       ],
       "threads": [
-        "The lean man's will is gone but he hasn't dropped the crook yet — the moment is open",
-        "The broad man has seen his partner and his rhythm has broken — Pell may have a window",
-        "Calvar is stable and the document roll is safe",
-        "Huginn has not moved — both men can see what it is waiting for"
+        "The lean man is not done — the crook is broken but he hasn't dropped it",
+        "The broad man is down but not out — Pell is standing over him",
+        "Calvar and the document roll are safe at the outcrop",
+        "Huginn has not moved — still watching from the branch"
       ]
     }
   },
@@ -2002,7 +2042,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d4] Settled for the night without ceremony — boots upright, asleep before Silas, habit entirely absent.",
         "[d5] Woke without ceremony, boots on, pack settled — the habit entirely absent and the steadiness entirely present.",
         "[d5] Read Silas's failed craft-moment without asking — picked up her pack and waited. No words needed.",
         "[d5] Pulled the Inn door shut behind her, moved to Silas's right without being asked — her traveling mode, economical and present.",
@@ -2011,28 +2050,29 @@
         "[d5] Waiting on the ford assessment — eyes on the east bank, no words needed.",
         "[d5] Immediately read the terrain at the hawthorn bend — named cover and choke-point without prompting. Now on Silas's right, reading the lean man's reach.",
         "[d5] Engaged the broad man at Silas's direction — forced his hatchet arm wide, crowded his reach. He found his second wind and is pushing back; she has him occupied, not beaten.",
-        "[d5] Still engaged with the broad man — held him through his second wind; now the dynamic is shifting as his partner's collapse registers on him."
+        "[d5] Still engaged with the broad man — held him through his second wind; now the dynamic is shifting as his partner's collapse registers on him.",
+        "[d5] Read the broad man's broken attention the instant Silas took the window and drove him into the hawthorn without instruction — pure field read, no words."
       ],
       "knownFacts": [
-        "Settled afterward without the habit returning — the want named, answered, and still there",
         "Thought there'd be a new register after the consummation; found instead the same one with more space in it — named it as 'more room'",
         "The Weir mark sits in her like ironsense — present without search, not theoretical",
         "She names happiness as quieter than she expected and real — not performed",
         "Receives wordless confirmation the same way she receives all of this — present, without performance; the grain of Weir is in her and it is not theoretical",
         "Matches a companion's pace under pressure without instruction",
         "The seventh-band specification authorship chain runs from Calvar back to her father — the original filing at the council archive may name him directly",
-        "Pell's read: Aldric will respect Calvar's ruling-pen callus — work that shows is the right currency in Millbrook"
+        "Pell's read: Aldric will respect Calvar's ruling-pen callus — work that shows is the right currency in Millbrook",
+        "Takes a decisive opening without hesitation when she sees it — no words needed between her and Silas in a fight"
       ],
       "skillsObserved": [
-        "holding partial knowledge without performance — named the ha",
-        "ironsense transmitted deliberately through a rune-threshold",
         "immediate structural mapping of an unfamiliar building under",
         "tactical repositioning from a read — covering a principal wi",
         "structural reasoning from partial material evidence",
-        "naming the load-bearing implication without editorializing"
+        "naming the load-bearing implication without editorializing",
+        "reading a distraction as a tactical opening under live press",
+        "driving a larger man off his footing using pack weight and p"
       ],
       "status": "active",
-      "statusNote": "Locked with the broad man at the limestone bend — he's distracted now; she has a window forming.",
+      "statusNote": "Standing over the downed broad man at the limestone bend — engaged, footing solid, watching for his next move.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
@@ -4087,20 +4127,20 @@
     }
   },
   "tendencies": {
-    "strategic": 19.429967685042982,
-    "cerebral": 12.684731761936087,
-    "social": 9.956319589883934,
-    "generous": 1.327783588090444,
-    "cautious": 13.611833579963385,
-    "physical": 2.0285698116704207,
-    "risky": 0.6751667746002741,
-    "ruthless": 1.1857928379110605,
-    "carousing": 0.06776934494848486,
-    "amorous": 7.787609330905755,
-    "patient": 2.5426916565471505,
-    "stealth": 1.7144519201019768,
-    "devotion": 0.9351418282576653,
-    "craft": 0.8803629920867667
+    "strategic": 19.944218492916907,
+    "cerebral": 12.367613467887685,
+    "social": 9.707411600136835,
+    "generous": 2.294588998388183,
+    "cautious": 13.2715377404643,
+    "physical": 2.9778555663786603,
+    "risky": 0.6582876052352672,
+    "ruthless": 1.156148016963284,
+    "carousing": 0.06607511132477273,
+    "amorous": 7.592919097633111,
+    "patient": 2.4791243651334716,
+    "stealth": 1.6715906220994272,
+    "devotion": 0.9117632825512237,
+    "craft": 0.8583539172845975
   },
   "aptitudes": [
     "strategist",
@@ -4110,7 +4150,7 @@
     "stalwart",
     "charmer"
   ],
-  "actionCount": 466,
+  "actionCount": 467,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -4340,8 +4380,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784380380692,
-  "rev": 678,
+  "updatedAt": 1784380549233,
+  "rev": 679,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5266,7 +5306,8 @@
       "the_raised_thing": 4,
       "the_ended_threat": 3,
       "the_shadow_work": 2,
-      "draw_down": 1
+      "draw_down": 1,
+      "wither": 1
     },
     "coActivations": {
       "lightsense+numen_sense": 1,
@@ -5371,7 +5412,7 @@
   "syncedAt": 1784348465253,
   "teachers": {},
   "regionsKnown": {
-    "valley": 283
+    "valley": 284
   },
   "foreclosed": [
     "rootkin",
@@ -5426,10 +5467,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T13:13:00.691Z",
+      "lastAt": "2026-07-18T13:15:49.232Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 8
+      "beats": 9
     }
   ],
   "company": [

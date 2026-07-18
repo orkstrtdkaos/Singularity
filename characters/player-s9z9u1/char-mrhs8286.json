@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 15,
-  "xp": 1404,
+  "xp": 1409,
   "attributes": {
     "physical": 4,
     "mental": 5,
@@ -85,7 +85,7 @@
     "concrete_abstract": -0.0326467323816193,
     "death_life": -0.22224780548067646,
     "emotional_logical": 0.019295624999999986,
-    "falsehood_truth": 0.3198299025077449,
+    "falsehood_truth": 0.31383840738235763,
     "demonic_angelic": 0.013499999999999998,
     "value": 0.10175874999999998
   },
@@ -93,7 +93,7 @@
   "maxHealth": 100,
   "health": 100,
   "maxEnergy": 170,
-  "energy": 166,
+  "energy": 161,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -800,224 +800,213 @@
         "player": "As far as I understand it... these Waygates connect the various corners of the world - some cult maintains them... but we'll need to find which one will take us to the lands of the Ashwardens.  No rush though - we have a whole city in front of us - a coliseum to test our mettle in, questions we could run for the Council of Maven's - or even ask them to assist the Valley.  They basically have everything here - point out the various entities you can see from here, including the Ent and the Elves. ",
         "summary": "Silas surveys the Hub from the waygate plaza at dawn — the Council of Mavens, the Coliseum, an ancient Ent, and a small Elven camp all visible from the crescent stones.",
         "narration": "From the plaza crescent, with the waygate stones at your back and the dawn light coming in flat and pale from the east, the Hub opens up to the north in tiers. It is not one thing. It is many things arranged so they do not have to speak to each other if they do not want to.\n\nThe nearest landmark is a broad stone colonnade, its pillars carved in a style older than any road leading to it — you will learn it is the Hall of the Council of Mavens, the body that arbitrates disputes between the peoples who pass through or settle here. Their seal is a set of balanced scales over an open eye, carved into the lintel facing the plaza. A clerk's board outside the main door shows petitions currently in queue. People are already moving in and out, early as it is, which tells you the Council's hours are not polite ones. Further along the northern tier, half-hidden behind a broad market row of covered stalls, the Coliseum rises — not a ruin and not a relic, but a working structure, its outer wall showing the fresh soot-marks of recent use. You can hear it faintly: a rhythmic impact, stone on stone or iron on shield, someone already at practice before the city has properly woken. The gates are open.\n\nTo the east, past a watercarrier's junction, stands a structure that makes Pell stop looking where she was looking. Said Pell quietly, 'That is an Ent.' And it is — a living tree, ancient and deliberate, rooted in a wide circle of cleared ground ringed by low stone. It is not a tree that wound up here. It is standing here on purpose, and the bark of its lower trunk shows the pale scars of old carvings, healed over, that mark it as someone who has been in conversation with the world for a long time. Two smaller figures rest in its lower branches. At this distance you cannot tell if they are sleeping or listening. On the plaza's west side, closer to you, a group of four people in long pale traveling coats have settled on the paving and laid out a camp with a quiet efficiency that suggests they have done it a hundred times. Their ears are long. Their gear is immaculate. They have not looked at you yet, but you have the clear sense they knew you were there before you stepped through. The Elves of the Hub are not numerous, but they are present, and they are paying attention. Huginn shifts on the crossbar above your head and cracks one eye toward them, then says nothing. The silence after is pointed."
+      },
+      {
+        "player": "Cross to the Elven camp — introduce yourself and ask about the waygate network, specifically whether one connects to Ashwarden lands",
+        "summary": "Siol of the Elves names the sixth waygate as the path to the Ashwarden March and tells Silas that Marrow's presence marks him before any introduction.",
+        "narration": "You cross the plaza at a measured walk, Memory road-lashed at your back and Huginn riding your left shoulder like a gray-black pennant. The Elven camp is small — four travelers in long pale coats, their gear stacked in clean columns on the west paving, a low oil lamp still burning against the dawn cold. They are not surprised to see you coming. One of them, the tallest, rises before you are halfway across. She does not rush, but she is standing by the time you arrive.\n\nShe is a woman of perhaps forty human years — though that means little with the Elves — with the kind of stillness that is not indifference but attention held very quiet. Her coat is the color of winter birch, her hair pulled back and braided with a single dark cord. She looks at Huginn first, then at you, and her expression settles into something that is close to recognition, though you have never met.\n\n\"Ashwarden,\" she says, in common speech with an accent that rounds the consonants softly. \"Or close enough to it that Marrow rides with you.\" She uses the companion name without being told it. \"I am Siol. We came through the eastern gate two days ago, from the Steadwood passage.\" She gestures toward one of the seven arches. \"The gate you want is the sixth, counting from the south lane — the one with the lower lintel and the darker stone. The Ashwarden March lies at its far end.\" She pauses, reading you with those quiet eyes. \"Though the March does not always receive travelers the way a city does. Someone there will know you are coming before you arrive.\"\n\nShe offers this without editorializing — neither a warning nor a welcome. Plain information, plainly given. Pell has moved up quietly beside you. Huginn says nothing, but shifts its weight once on your shoulder, which is agreement enough."
       }
     ],
     "lastTurn": {
-      "narration": "From the plaza crescent, with the waygate stones at your back and the dawn light coming in flat and pale from the east, the Hub opens up to the north in tiers. It is not one thing. It is many things arranged so they do not have to speak to each other if they do not want to.\n\nThe nearest landmark is a broad stone colonnade, its pillars carved in a style older than any road leading to it — you will learn it is the Hall of the Council of Mavens, the body that arbitrates disputes between the peoples who pass through or settle here. Their seal is a set of balanced scales over an open eye, carved into the lintel facing the plaza. A clerk's board outside the main door shows petitions currently in queue. People are already moving in and out, early as it is, which tells you the Council's hours are not polite ones. Further along the northern tier, half-hidden behind a broad market row of covered stalls, the Coliseum rises — not a ruin and not a relic, but a working structure, its outer wall showing the fresh soot-marks of recent use. You can hear it faintly: a rhythmic impact, stone on stone or iron on shield, someone already at practice before the city has properly woken. The gates are open.\n\nTo the east, past a watercarrier's junction, stands a structure that makes Pell stop looking where she was looking. Said Pell quietly, 'That is an Ent.' And it is — a living tree, ancient and deliberate, rooted in a wide circle of cleared ground ringed by low stone. It is not a tree that wound up here. It is standing here on purpose, and the bark of its lower trunk shows the pale scars of old carvings, healed over, that mark it as someone who has been in conversation with the world for a long time. Two smaller figures rest in its lower branches. At this distance you cannot tell if they are sleeping or listening. On the plaza's west side, closer to you, a group of four people in long pale traveling coats have settled on the paving and laid out a camp with a quiet efficiency that suggests they have done it a hundred times. Their ears are long. Their gear is immaculate. They have not looked at you yet, but you have the clear sense they knew you were there before you stepped through. The Elves of the Hub are not numerous, but they are present, and they are paying attention. Huginn shifts on the crossbar above your head and cracks one eye toward them, then says nothing. The silence after is pointed.",
-      "sceneSummary": "Silas surveys the Hub from the waygate plaza at dawn — the Council of Mavens, the Coliseum, an ancient Ent, and a small Elven camp all visible from the crescent stones.",
+      "narration": "You cross the plaza at a measured walk, Memory road-lashed at your back and Huginn riding your left shoulder like a gray-black pennant. The Elven camp is small — four travelers in long pale coats, their gear stacked in clean columns on the west paving, a low oil lamp still burning against the dawn cold. They are not surprised to see you coming. One of them, the tallest, rises before you are halfway across. She does not rush, but she is standing by the time you arrive.\n\nShe is a woman of perhaps forty human years — though that means little with the Elves — with the kind of stillness that is not indifference but attention held very quiet. Her coat is the color of winter birch, her hair pulled back and braided with a single dark cord. She looks at Huginn first, then at you, and her expression settles into something that is close to recognition, though you have never met.\n\n\"Ashwarden,\" she says, in common speech with an accent that rounds the consonants softly. \"Or close enough to it that Marrow rides with you.\" She uses the companion name without being told it. \"I am Siol. We came through the eastern gate two days ago, from the Steadwood passage.\" She gestures toward one of the seven arches. \"The gate you want is the sixth, counting from the south lane — the one with the lower lintel and the darker stone. The Ashwarden March lies at its far end.\" She pauses, reading you with those quiet eyes. \"Though the March does not always receive travelers the way a city does. Someone there will know you are coming before you arrive.\"\n\nShe offers this without editorializing — neither a warning nor a welcome. Plain information, plainly given. Pell has moved up quietly beside you. Huginn says nothing, but shifts its weight once on your shoulder, which is agreement enough.",
+      "sceneSummary": "Siol of the Elves names the sixth waygate as the path to the Ashwarden March and tells Silas that Marrow's presence marks him before any introduction.",
       "choices": [
         {
-          "label": "Approach the Council of Mavens — read the petition board and consider whether the Valley's water crisis warrants a formal submission",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "falsehood_truth": 0.3,
-            "chaos_order": 0.2
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "scout",
-            "plan"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Go to the Coliseum — find out what the fighting grounds are and what standing a match might earn here",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {
-            "violence_peace": 0.1
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "scout"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Cross to the Elven camp — introduce yourself and ask about the waygate network, specifically whether one connects to Ashwarden lands",
+          "label": "Thank Siol and ask what she knows of the Ashwarden March — who receives travelers, what the March expects",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.2
-          },
-          "difficulty": 15,
+          "axes": {},
+          "difficulty": 0,
           "intentTags": [
-            "negotiate",
+            "negotiate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Siol what the Steadwood passage is and what brought her to the Hub — build a connection before you move on",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "negotiate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Thank her and go directly to the sixth gate — step through to the Ashwarden March",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
             "travel"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Walk to the Ent's circle — approach slowly and respectfully, and wait to see if it acknowledges you",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Before leaving, ask Siol if she or her companions have noticed anything unusual about the Hub's waygate network — the calibration geometry you read with Order-Sense",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "axes": {
-            "mechanical_spiritual": 0.2,
-            "chaos_order": 0.1
+            "chaos_order": 0.3,
+            "mechanical_spiritual": 0.2
           },
           "difficulty": 0,
           "intentTags": [
-            "careful"
+            "study"
           ],
-          "abilityId": null,
+          "abilityId": "order_sense",
           "energyCost": null,
-          "trivial": true
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "scene": {
-        "setting": "The Hub Waygate Plaza — the open crescent of seven arches at the city's southern entry, stone-paved, dawn light coming in low and pale from the east. The city spreads north in tiers: the Council of Mavens colonnade visible on the near northern tier, the Coliseum rising further behind a market row to the northwest, an ancient Ent rooted in a cleared circle to the east, and a small Elven camp settled on the plaza's west paving.",
+        "setting": "The Hub Waygate Plaza, west paving — Silas stands at the edge of the small Elven camp, dawn light pale and flat from the east, the six other waygate arches visible behind him across the crescent stones.",
         "npcsPresent": [
           {
+            "name": "Siol",
+            "state": "Standing at the camp's edge, facing Silas — coat the color of winter birch, expression settled and attentive, the information given and waiting to see what he does with it"
+          },
+          {
             "name": "Pell Marsh",
-            "state": "Standing at the plaza's edge, pack settled, looking northeast at the Ent — quietly oriented, waiting for Silas to decide the first step"
+            "state": "Moved up quietly beside Silas — pack on, listening, taking her own measure of Siol"
           },
           {
             "name": "Huginn",
-            "state": "Perched on the waygate crossbar, one eye on the Elven camp, pointed silence held"
+            "state": "Sitting on Silas's left shoulder, weight shifted once — not restless, just registering"
           }
         ],
         "objects": [
-          "Seven waygate arches arranged at deliberate angles across the plaza crescent",
-          "Packed stone paving, wheel-rutted at the south lane entry",
+          "Seven waygate arches — the sixth from the south lane identified: lower lintel, darker stone",
+          "The Elven camp — four travelers, gear stacked in clean columns, low oil lamp still burning",
           "Memory — the assembled spear, road-lashed at Silas's back",
-          "Council of Mavens colonnade — petition board visible at the main door, scales-and-eye seal on the lintel",
-          "Coliseum outer wall to the northwest — fresh soot-marks, gates open, practice sounds audible",
-          "Ent rooted in a cleared stone ring to the east — healed bark-carvings on the lower trunk, two figures in the branches",
-          "Small Elven camp on the west paving — four travelers in long pale coats, gear immaculate, already settled"
+          "Council of Mavens colonnade visible on the near northern tier",
+          "Coliseum outer wall to the northwest — fresh soot-marks, gates open"
         ],
         "threads": [
-          "The Hub's full design purpose — a measuring or calibration function — remains only partially read; the lattice here is too thin for the whole picture",
-          "Which waygate connects to the Ashwarden lands is unknown — someone here will know",
-          "The Council of Mavens petition board is open — the Valley's water crisis may warrant formal submission",
-          "The Elven camp has already noticed the party without appearing to look"
+          "The sixth waygate connects to the Ashwarden March — Siol's information, given plainly",
+          "Siol recognized Huginn by name (Marrow) without being told it — how she knows this is unasked",
+          "The March does not receive travelers the way a city does — someone there will know before Silas arrives",
+          "The Hub's full design purpose — calibration function — remains only partially read"
         ]
       },
       "npcUpdates": [
         {
-          "op": "update",
-          "npcId": "pell-ran-marsh",
-          "name": "Pell Ran Marsh",
-          "role": "Village blacksmith, Millbrook — traveling companion",
+          "op": "meet",
+          "npcId": "siol",
+          "name": "Siol",
+          "role": "Elven traveler, Hub plaza — came through the eastern Steadwood passage gate two days ago",
           "gender": "woman",
           "pronouns": "she/her",
-          "note": "Noticed the Ent first — stopped mid-scan and named it quietly. Waiting for Silas to call the first move.",
-          "statusNote": "At the Hub plaza beside the waygate — pack on, oriented northeast toward the Ent, waiting for Silas's direction"
+          "description": "A tall Elven woman of perhaps forty apparent years, long pale coat, hair braided with a dark cord — the stillness of attention held very quiet, not indifference.",
+          "note": "Named the sixth waygate as the path to the Ashwarden March; called Huginn 'Marrow' without being told",
+          "learned": [
+            "The sixth waygate (lower lintel, darker stone) leads to the Ashwarden March",
+            "Came through the eastern gate from the Steadwood passage two days ago",
+            "Called Huginn 'Marrow' by name — knows the companion without introduction"
+          ],
+          "skillsObserved": [
+            "reading a traveler's affiliation from companion presence alone",
+            "plain directional knowledge of the waygate network"
+          ],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "At the Elven camp on the Hub's west paving — gave Silas the waygate information and is waiting to see what he does next"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "the-hub-city",
-          "label": "The Hub",
+          "topic": "ashwarden-march",
+          "label": "The Ashwarden March",
           "kind": "place",
-          "fact": "The Hub is a deliberate gathering-place, not a grown city — its institutions include the Council of Mavens (arbitration, scales-and-eye seal, petition board open at dawn), the Coliseum (working, regularly used, gates open at first light), an ancient Ent rooted in a cleared eastern circle, and at least one resident Elven traveling group settled in the plaza. Multiple peoples coexist here without necessarily speaking to each other.",
+          "fact": "The sixth waygate from the south lane — lower lintel, darker stone — leads to the Ashwarden March. An Elven traveler named Siol confirmed this from direct knowledge. The March does not receive travelers the way a city does; someone there will know of Silas's arrival before he steps through.",
           "links": [
-            "the-edge-district-ledger",
+            "siol",
             "the-water-crisis"
           ]
         },
         {
-          "topic": "council-of-mavens",
-          "label": "Council of Mavens",
-          "kind": "faction",
-          "fact": "The Council of Mavens arbitrates disputes between peoples passing through or settled in the Hub. Their seal is balanced scales over an open eye. Petitions are queued on a clerk's board outside the main colonnade. The Council keeps early hours — the building is already active at dawn.",
-          "links": [
-            "the-hub-city",
-            "the-water-crisis"
-          ]
-        },
-        {
-          "topic": "hub-coliseum",
-          "label": "The Hub Coliseum",
-          "kind": "place",
-          "fact": "A working fighting ground in the Hub's northwestern tier — fresh soot on the outer wall, gates open before dawn, practice sounds audible at first light. Not a ruin: a live institution.",
-          "links": [
-            "the-hub-city"
-          ]
-        },
-        {
-          "topic": "hub-ent",
-          "label": "The Ent of the Hub",
+          "topic": "siol",
+          "label": "Siol",
           "kind": "person",
-          "fact": "An ancient Ent stands rooted in a cleared stone-ringed circle east of the plaza. The bark shows old healed carvings — marks of long conversation with the world. Two smaller figures rest in the lower branches. The Ent is present here on purpose.",
+          "entityId": "siol",
+          "fact": "An Elven traveler at the Hub plaza, arrived from the Steadwood passage two days ago. Named Huginn as 'Marrow' without introduction — has knowledge of Ashwarden companions or lore. Provided the sixth waygate location for the Ashwarden March without being pressed.",
           "links": [
-            "the-hub-city"
+            "ashwarden-march",
+            "the-water-crisis"
           ]
-        },
+        }
+      ],
+      "generateRequest": [
         {
-          "topic": "hub-elves",
-          "label": "Elves of the Hub",
-          "kind": "faction",
-          "fact": "A small group of Elven travelers — four, in long pale coats, immaculate gear — have made camp on the plaza's west paving. They knew the party was there before they looked. Their presence is deliberate and their attention is quiet.",
-          "links": [
-            "the-hub-city"
-          ]
+          "type": "npc",
+          "hint": "Siol — Elven traveler at the Hub plaza, tall, pale coat, birch-quiet stillness, named Huginn as Marrow without being told; came through the Steadwood passage gate; has waygate network knowledge",
+          "why": "First genuine named encounter in the Hub — needs a stable identity so she can recur and the Steadwood passage can be a thread"
         }
       ],
       "placeUpdates": [
         {
-          "note": "The Hub's major landmarks identified from the plaza at dawn: Council of Mavens colonnade (north), Coliseum (northwest behind market row), Ent circle (east), Elven camp (west paving). The city is active before full light.",
+          "note": "The sixth waygate from the south lane — lower lintel, darker stone — is the connection to the Ashwarden March. Confirmed by Siol of the Elves.",
           "subPlace": {
-            "name": "Council of Mavens Hall",
+            "name": "The Sixth Gate — Ashwarden Passage",
             "parent": "Hub Waygate Plaza",
-            "note": "A broad stone colonnade on the Hub's near northern tier — petition board outside, scales-and-eye seal on the lintel. Open at dawn.",
-            "visited": false
-          }
-        },
-        {
-          "subPlace": {
-            "name": "The Hub Coliseum",
-            "parent": "Hub Waygate Plaza",
-            "note": "Working fighting ground northwest of the plaza, past the market row — fresh soot-marks on the outer wall, gates open before first light.",
-            "visited": false
-          }
-        },
-        {
-          "subPlace": {
-            "name": "The Ent's Circle",
-            "parent": "Hub Waygate Plaza",
-            "note": "A cleared ground ringed by low stone to the east of the plaza — an ancient Ent rooted here on purpose, healed bark-carvings on the lower trunk, two figures in the branches.",
+            "note": "Lower lintel and darker stone than the other arches — the gate that leads to the Ashwarden March, identified by Siol.",
             "visited": false
           }
         }
       ],
+      "moveTo": {
+        "location": "gen-waygate",
+        "why": "Silas crossed the plaza to the Elven camp on the west paving — still within the waygate plaza, meeting Siol"
+      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief survey of the plaza and the city's near landmarks from the crescent — a few minutes at most"
+        "why": "A brief crossing and introduction at the camp — a quarter hour at most"
       }
     },
     "sceneState": {
-      "setting": "The Hub Waygate Plaza — the open crescent of seven arches at the city's southern entry, stone-paved, dawn light coming in low and pale from the east. The city spreads north in tiers: the Council of Mavens colonnade visible on the near northern tier, the Coliseum rising further behind a market row to the northwest, an ancient Ent rooted in a cleared circle to the east, and a small Elven camp…",
+      "setting": "The Hub Waygate Plaza, west paving — Silas stands at the edge of the small Elven camp, dawn light pale and flat from the east, the six other waygate arches visible behind him across the crescent stones.",
       "npcsPresent": [
         {
+          "name": "Siol",
+          "state": "Standing at the camp's edge, facing Silas — coat the color of winter birch, expression settled and attentive, the inform"
+        },
+        {
           "name": "Pell Marsh",
-          "state": "Standing at the plaza's edge, pack settled, looking northeast at the Ent — quietly oriented, waiting for Silas to decide"
+          "state": "Moved up quietly beside Silas — pack on, listening, taking her own measure of Siol"
         },
         {
           "name": "Huginn",
-          "state": "Perched on the waygate crossbar, one eye on the Elven camp, pointed silence held"
+          "state": "Sitting on Silas's left shoulder, weight shifted once — not restless, just registering"
         }
       ],
       "objects": [
-        "Seven waygate arches arranged at deliberate angles across the plaza crescent",
-        "Packed stone paving, wheel-rutted at the south lane entry",
+        "Seven waygate arches — the sixth from the south lane identified: lower lintel, d",
+        "The Elven camp — four travelers, gear stacked in clean columns, low oil lamp sti",
         "Memory — the assembled spear, road-lashed at Silas's back",
-        "Council of Mavens colonnade — petition board visible at the main door, scales-an",
-        "Coliseum outer wall to the northwest — fresh soot-marks, gates open, practice so",
-        "Ent rooted in a cleared stone ring to the east — healed bark-carvings on the low",
-        "Small Elven camp on the west paving — four travelers in long pale coats, gear im"
+        "Council of Mavens colonnade visible on the near northern tier",
+        "Coliseum outer wall to the northwest — fresh soot-marks, gates open"
       ],
       "threads": [
-        "The Hub's full design purpose — a measuring or calibration function — remains only partially read; the lattice here is too thin for the whole picture",
-        "Which waygate connects to the Ashwarden lands is unknown — someone here will know",
-        "The Council of Mavens petition board is open — the Valley's water crisis may warrant formal submission",
-        "The Elven camp has already noticed the party without appearing to look"
+        "The sixth waygate connects to the Ashwarden March — Siol's information, given plainly",
+        "Siol recognized Huginn by name (Marrow) without being told it — how she knows this is unasked",
+        "The March does not receive travelers the way a city does — someone there will know before Silas arrives",
+        "The Hub's full design purpose — calibration function — remains only partially read"
       ]
     }
   },
@@ -1993,6 +1982,37 @@
       "aliases": [
         "Lean Opportunist"
       ]
+    },
+    "siol": {
+      "id": "siol",
+      "name": "Siol",
+      "role": "Elven traveler, Hub plaza — came through the eastern Steadwood passage gate two days ago",
+      "description": "A tall Elven woman of perhaps forty apparent years, long pale coat, hair braided with a dark cord — the stillness of attention held very quiet, not indifference.",
+      "firstMet": {
+        "locationId": "gen-waygate",
+        "day": 6
+      },
+      "relationship": 1,
+      "history": [
+        "[d6] Named the sixth waygate as the path to the Ashwarden March; called Huginn 'Marrow' without being told"
+      ],
+      "knownFacts": [
+        "The sixth waygate (lower lintel, darker stone) leads to the Ashwarden March",
+        "Came through the eastern gate from the Steadwood passage two days ago",
+        "Called Huginn 'Marrow' by name — knows the companion without introduction"
+      ],
+      "skillsObserved": [
+        "reading a traveler's affiliation from companion presence alo",
+        "plain directional knowledge of the waygate network"
+      ],
+      "status": "active",
+      "gender": "woman",
+      "pronouns": "she/her",
+      "statusNote": "At the Elven camp on the Hub's west paving — gave Silas the waygate information and is waiting to see what he does next",
+      "lastSeen": {
+        "locationId": "gen-waygate",
+        "day": 6
+      }
     }
   },
   "placeMemory": {
@@ -2275,7 +2295,8 @@
       "notes": [
         "[d6] The waygate opens onto the south lane — a shallow valley running south, tree line low, packed-dirt road with recent wheel ruts. First stop on the road from Millbrook toward the Disputed Zone.",
         "[d6] Order-Sense partial read on dawn of World-day 18: the seven gates are calibration marks for a measuring function centered on the plaza. Design predates the roads. Full purpose unresolved — lattice too thin.",
-        "[d6] The Hub's major landmarks identified from the plaza at dawn: Council of Mavens colonnade (north), Coliseum (northwest behind market row), Ent circle (east), Elven camp (west paving). The city is active before full light."
+        "[d6] The Hub's major landmarks identified from the plaza at dawn: Council of Mavens colonnade (north), Coliseum (northwest behind market row), Ent circle (east), Elven camp (west paving). The city is active before full light.",
+        "[d6] The sixth waygate from the south lane — lower lintel, darker stone — is the connection to the Ashwarden March. Confirmed by Siol of the Elves."
       ],
       "flags": {},
       "vectorsKnown": [],
@@ -2314,6 +2335,13 @@
           "day": 6,
           "visited": false,
           "note": "A cleared ground ringed by low stone to the east of the plaza — an ancient Ent rooted here on purpose, healed bark-carvings on the lower trunk, two figures in the branches."
+        },
+        "the-sixth-gate-ashwarden-passage": {
+          "name": "The Sixth Gate — Ashwarden Passage",
+          "parentId": "gen-waygate",
+          "day": 6,
+          "visited": false,
+          "note": "Lower lintel and darker stone than the other arches — the gate that leads to the Ashwarden March, identified by Siol."
         }
       }
     },
@@ -2416,12 +2444,12 @@
     "agility": 4,
     "reason": 5,
     "insight": 5,
-    "presence": 6,
+    "presence": 7,
     "rapport": 5,
     "craft": 6,
     "wits": 5
   },
-  "pendingSubPoints": 1,
+  "pendingSubPoints": 0,
   "skillPoints": 2,
   "discoveries": [],
   "codex": {
@@ -3760,21 +3788,21 @@
     }
   },
   "tendencies": {
-    "strategic": 18.528926165696618,
-    "cerebral": 7.24774801148592,
-    "social": 12.587497900224816,
-    "generous": 1.8921041142138015,
-    "cautious": 8.841528197288046,
-    "physical": 1.5448270231026116,
-    "risky": 0.1515944802770895,
-    "ruthless": 0.9931412155748706,
-    "carousing": 0.015216179191084537,
-    "amorous": 9.84797425818868,
-    "patient": 2.4596935643953652,
-    "stealth": 0.3849440724357169,
-    "devotion": 0.8602135677357895,
-    "craft": 3.0407940655704295,
-    "leadership": 0.3820985560950746
+    "strategic": 18.065703011554202,
+    "cerebral": 7.0665543111987725,
+    "social": 13.272810452719195,
+    "generous": 1.8448015113584564,
+    "cautious": 8.620489992355845,
+    "physical": 1.5062063475250462,
+    "risky": 0.14780461827016225,
+    "ruthless": 0.9683126851854987,
+    "carousing": 0.014835774711307424,
+    "amorous": 9.601774901733963,
+    "patient": 2.398201225285481,
+    "stealth": 0.37532047062482393,
+    "devotion": 0.8387082285423948,
+    "craft": 2.9647742139311686,
+    "leadership": 0.37254609219269774
   },
   "aptitudes": [
     "strategist",
@@ -3782,7 +3810,7 @@
     "tactician",
     "charmer"
   ],
-  "actionCount": 525,
+  "actionCount": 526,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -4028,8 +4056,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784409485210,
-  "rev": 770,
+  "updatedAt": 1784409695040,
+  "rev": 772,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5141,7 +5169,7 @@
   "syncedAt": 1784392733860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 345
+    "valley": 346
   },
   "foreclosed": [
     "rootkin",
@@ -5198,10 +5226,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T21:18:05.206Z",
+      "lastAt": "2026-07-18T21:21:35.037Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 70,
+      "beats": 71,
       "_recapError": null,
       "recap": "Day eighteen, and Silas Weir moved like a man who'd finally stopped fighting the shape of what he was. On the road he disarmed three opportunists without breaking bones, read the grief sitting behind the broad man's eyes, named it plainly, pressed provisions into their hands, and sent them toward something worth doing — mercy given as instruction, not sentiment. Then he brought the hard people together: Dara, Aldric, Fendt, Mara, Calvar, all of them in the heat of Pell's forge with no exits easy and no pretense left, and in that single evening he turned a valley's quiet panic into four working threads — engineering, logistics, supply, accounts — each with a named lead and a direction to face. The crisis didn't end, but it stopped being formless, and that was his doing."
     }

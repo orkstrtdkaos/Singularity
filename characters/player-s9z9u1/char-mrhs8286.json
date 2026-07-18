@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 12,
-  "xp": 1127,
+  "xp": 1132,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -76,12 +76,12 @@
   "alignment": {
     "spectrumId": -0.48173808730948614,
     "violence_peace": 0.09798375000000001,
-    "chaos_order": 0.2085002906812526,
+    "chaos_order": 0.22307527614718994,
     "mechanical_spiritual": 0.23279962203849028,
     "concrete_abstract": -0.03561964806827624,
     "death_life": -0.20959067558615135,
     "emotional_logical": 0.03083749999999999,
-    "falsehood_truth": 0.2726839510223006,
+    "falsehood_truth": 0.27404975347118554,
     "demonic_angelic": 0.03,
     "value": 0.0435
   },
@@ -89,7 +89,7 @@
   "maxHealth": 85,
   "health": 85,
   "maxEnergy": 155,
-  "energy": 145,
+  "energy": 142,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1266,116 +1266,87 @@
         "player": "Head to the cooperage lane at a deliberate pace, scanning the district on the way — Calvar being late warrants watching who else is moving in the quarter this afternoon.",
         "summary": "Arrived at the cooperage lane — Calvar's lamp not in the window, a watcher stationed under the chandler's awning opposite, the district moving around a quiet pressure.",
         "narration": "The Edge District in afternoon rain is a place of deliberate movement — the light-guide streets run dimmer when the sky closes in, the conduit glow bleeding up through wet stone with nowhere to go, turning puddles into pale mirrors. You keep Memory across your back and your attention wide. Pell's boots find the same rhythm as yours; Huginn rides your left shoulder, head tucked just enough to keep the rain off.\n\nThe cooperage lane runs east off the third turning, rising slightly against the district's grade. It is the kind of street that has always just finished something — barrels on the wet cobbles, the iron tang of fresh-hooped wood in the air, a cat working the gaps under the loading dock without looking up at you. You watch what's moving. A figure in a grey working cloak crossing the far end of the lane at pace — not threading, not browsing, going somewhere specific. A second figure standing near the tallow-chandler's awning across from the cooperage, not looking at the cooperage, which is a way of looking at the cooperage. They have been there a few minutes at least; their boots are drier than their shoulders. Not a neighbor catching rain under a close awning. Someone with a reason to be still.\n\nCalvar's window is on the second floor, facing the lane. The lamp is not in the window. The room behind the glass shows nothing — no movement, no light — but the casement is latched rather than open, which is not how you left it last evening. The cooperage itself has its ground-floor door propped with a wood block, the cooper's trade going on as it always does: mallet-ring, timber-flex, the smell of green oak. The watcher under the tallow-chandler's awning turns his head by a few degrees. He hasn't decided whether you are what he was told to watch for.\n\nPell comes level with you, shoulders close. She's already read the figure under the awning — you can tell by the angle of her chin, the slight cant of her pack away from that side, the small unhurried readiness that has nothing to do with alarm. Huginn says nothing. Its silence this particular moment is a comment."
+      },
+      {
+        "player": "Use the Ended Threat — read whether what's forming around Calvar's window can be ended at its source before it executes.",
+        "summary": "The Ended Threat reads the watcher as upstream of action — the window is real, and narrow.",
+        "narration": "The craft comes quiet and quick — one breath held, one breath released, the edges of the Ended Threat moving outward from your stillpoint in a radius that doesn't announce itself. The watcher under the chandler's awning has a shape: someone waiting for a window, not an outcome. Their attention is on Calvar's casement, and it is patient attention, the kind that expects something will simply happen rather than the kind that is about to make it happen. There is no gathering, no trigger, no signal awaited that is about to be sent.\n\nWhatever they're doing — watching, confirming absence, reporting to someone — it has not yet become an action. The threat is real but it is upstream of its own edge.\n\nWhich means there's a small window. Small, and closing at the rate that all windows do.\n\nPell has already angled slightly away from the watcher's sightline without being told — she read the geometry before you reached for the craft, and her pack sits between her body and the chandler's awning. Huginn's silence on your shoulder is the particular kind that means *I have also noticed this and I am waiting to see what you do.*\n\nThe cooperage ground-floor door is still propped. Whoever left it that way either forgot it — or didn't."
       }
     ],
     "lastTurn": {
-      "narration": "The Edge District in afternoon rain is a place of deliberate movement — the light-guide streets run dimmer when the sky closes in, the conduit glow bleeding up through wet stone with nowhere to go, turning puddles into pale mirrors. You keep Memory across your back and your attention wide. Pell's boots find the same rhythm as yours; Huginn rides your left shoulder, head tucked just enough to keep the rain off.\n\nThe cooperage lane runs east off the third turning, rising slightly against the district's grade. It is the kind of street that has always just finished something — barrels on the wet cobbles, the iron tang of fresh-hooped wood in the air, a cat working the gaps under the loading dock without looking up at you. You watch what's moving. A figure in a grey working cloak crossing the far end of the lane at pace — not threading, not browsing, going somewhere specific. A second figure standing near the tallow-chandler's awning across from the cooperage, not looking at the cooperage, which is a way of looking at the cooperage. They have been there a few minutes at least; their boots are drier than their shoulders. Not a neighbor catching rain under a close awning. Someone with a reason to be still.\n\nCalvar's window is on the second floor, facing the lane. The lamp is not in the window. The room behind the glass shows nothing — no movement, no light — but the casement is latched rather than open, which is not how you left it last evening. The cooperage itself has its ground-floor door propped with a wood block, the cooper's trade going on as it always does: mallet-ring, timber-flex, the smell of green oak. The watcher under the tallow-chandler's awning turns his head by a few degrees. He hasn't decided whether you are what he was told to watch for.\n\nPell comes level with you, shoulders close. She's already read the figure under the awning — you can tell by the angle of her chin, the slight cant of her pack away from that side, the small unhurried readiness that has nothing to do with alarm. Huginn says nothing. Its silence this particular moment is a comment.",
-      "sceneSummary": "Arrived at the cooperage lane — Calvar's lamp not in the window, a watcher stationed under the chandler's awning opposite, the district moving around a quiet pressure.",
+      "narration": "The craft comes quiet and quick — one breath held, one breath released, the edges of the Ended Threat moving outward from your stillpoint in a radius that doesn't announce itself. The watcher under the chandler's awning has a shape: someone waiting for a window, not an outcome. Their attention is on Calvar's casement, and it is patient attention, the kind that expects something will simply happen rather than the kind that is about to make it happen. There is no gathering, no trigger, no signal awaited that is about to be sent.\n\nWhatever they're doing — watching, confirming absence, reporting to someone — it has not yet become an action. The threat is real but it is upstream of its own edge.\n\nWhich means there's a small window. Small, and closing at the rate that all windows do.\n\nPell has already angled slightly away from the watcher's sightline without being told — she read the geometry before you reached for the craft, and her pack sits between her body and the chandler's awning. Huginn's silence on your shoulder is the particular kind that means *I have also noticed this and I am waiting to see what you do.*\n\nThe cooperage ground-floor door is still propped. Whoever left it that way either forgot it — or didn't.",
+      "sceneSummary": "The Ended Threat reads the watcher as upstream of action — the window is real, and narrow.",
       "choices": [
         {
-          "label": "Read the watcher's situation and the lane's design — find out if this is a loose watch or a tight one, how many, and whether Calvar is still upstairs.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "chaos_order": 0.3,
-            "falsehood_truth": 0.4
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use the Ended Threat — read whether what's forming around Calvar's window can be ended at its source before it executes.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "chaos_order": 0.5,
-            "falsehood_truth": 0.3
-          },
-          "difficulty": 15,
+          "label": "Step through the cooperage ground floor — the propped door is an invitation or a carelessness; either way it's a route toward Calvar's stair without crossing the watcher's sightline.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
           "intentTags": [
             "careful",
-            "plan"
+            "sneak"
           ],
-          "abilityId": "the_ended_threat",
-          "energyCost": 1,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
         },
         {
-          "label": "Go straight in through the cooperage — use the ground-floor trade entrance, get upstairs to Calvar's room without crossing the watcher's sightline.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {
-            "chaos_order": 0.1,
-            "falsehood_truth": 0.2
-          },
+          "label": "Shadowstep — the lane has shadow at its edges; arrive at Calvar's stair-door without giving the watcher a clear moment to clock your entry.",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": 15,
           "intentTags": [
             "sneak",
             "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "abilityId": "shadowstep",
+          "energyCost": 4,
+          "trivial": false
         },
         {
-          "label": "Walk directly to the watcher and open a conversation — a traveler asking directions, or not bothering with the pretext at all.",
+          "label": "Walk in plainly — let the watcher see you; give them nothing that reads as avoidance, and let your presence be its own statement about who was expected here.",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {
-            "falsehood_truth": -0.2,
-            "chaos_order": 0.2
-          },
           "difficulty": 15,
           "intentTags": [
-            "persuade",
-            "gamble"
+            "deceive",
+            "feint"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        }
-      ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [
+          "trivial": false
+        },
         {
-          "op": "progress",
-          "questId": "find-the-engineer",
-          "note": "Arrived at the cooperage lane — Calvar's lamp not in the window, a watcher positioned under the chandler's awning. The departure is delayed or compromised."
+          "label": "Read the lane before going in — the threat is upstream of its edge, but upstream doesn't mean nothing has already moved.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 15,
+          "intentTags": [
+            "scout",
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
         }
       ],
+      "characterDeltas": {
+        "energy": -1
+      },
       "scene": {
         "setting": "The cooperage lane, Edge District — wet cobbles, afternoon rain, conduit glow caught in puddles. Calvar's second-floor window is lamp-dark, casement latched. A figure watches from under the tallow-chandler's awning across the lane; the cooperage ground-floor door is propped open.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Level with Silas, pack angled away from the watcher — reading the lane without comment, unhurried and ready."
+            "state": "Pack angled to block the watcher's sightline — already repositioned, reading the lane, unhurried and ready."
           },
           {
             "name": "Huginn",
-            "state": "On Silas's left shoulder, head tucked, silent — its silence timed."
+            "state": "On Silas's left shoulder, silent — the timed kind of silence that means it has noticed and is waiting."
           },
           {
             "name": "Unknown watcher",
-            "state": "Standing under the tallow-chandler's awning, boots drier than shoulders, not looking at the cooperage directly — has not yet decided whether Silas is what he was told to watch for."
+            "state": "Under the tallow-chandler's awning, eyes on Calvar's casement — patient, waiting for a window, not yet acting."
           }
         ],
         "objects": [
@@ -1386,8 +1357,8 @@
         ],
         "threads": [
           "Calvar's lamp not in the window — departure signal not given; status unknown",
-          "Watcher under the chandler's awning — loose watch or something tighter?",
-          "Second figure in grey cloak crossed the far end of the lane at pace — unknown relation",
+          "Watcher under the chandler's awning — patient watch, no trigger imminent but window closing",
+          "Cooperage ground-floor door propped open — invitation or carelessness, unknown",
           "The conduit pulse at the third hour — still unread"
         ]
       },
@@ -1396,68 +1367,43 @@
           "op": "update",
           "npcId": "calvar",
           "name": "Calvar",
-          "note": "Lamp not in window; casement latched rather than open. Status unknown — may still be in the room, may have been moved.",
-          "statusNote": "In his room above the cooperage — lamp absent from window; a watcher stationed opposite. Situation uncertain."
-        },
-        {
-          "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "note": "Read the lane independently — has already angled away from the watcher without being asked. Ready and tracking.",
-          "statusNote": "At Silas's side on the cooperage lane — packed, alert, reading the watcher."
+          "note": "Lamp absent from window, casement latched — The Ended Threat reads the watcher as waiting on Calvar's movement, not yet dispatched. His situation remains unknown but the threat is upstream, not executing.",
+          "statusNote": "In his room above the cooperage — lamp absent from window, watcher stationed opposite; no action yet dispatched against him."
         }
       ],
-      "generateRequest": [
-        {
-          "type": "npc",
-          "hint": "a watcher stationed under a chandler's awning on the cooperage lane — dry boots, wet shoulders, deliberately not looking at what he's watching; connected to Grael's net or hired independent",
-          "why": "A named figure is stationed on the lane watching Calvar's building; he'll need a stable identity if the players approach or confront him"
-        }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A short walk through the district from the Low Lamp Inn to the cooperage lane in the rain"
-      },
       "codexUpdates": [
         {
           "topic": "calvar",
           "label": "Calvar — the Engineer",
           "kind": "person",
           "entityId": "calvar",
-          "fact": "Calvar's departure lamp is absent from the window on World-day 18 afternoon; a watcher with dry boots is stationed under the tallow-chandler's awning opposite the cooperage. The agreed signal has not been given and the building is under observation.",
+          "fact": "The Ended Threat reads the watcher outside his cooperage window as patient and reporting — no trigger imminent, no action yet dispatched. The threat is real but upstream of its own edge. A window exists.",
           "links": [
             "find-the-engineer",
-            "overseer-grael",
-            "radiant-plateau-edge",
-            "the-edge-district-ledger"
+            "the-edge-district-ledger",
+            "overseer-grael"
           ]
         }
       ],
-      "placeUpdates": [
-        {
-          "note": "A watcher was stationed under the tallow-chandler's awning opposite the cooperage on World-day 18 afternoon — Calvar's departure lamp absent from window, casement latched.",
-          "subPlace": {
-            "name": "Cooperage Lane — East District",
-            "note": "Rising lane east of the third turning — barrels on cobbles, cooperage ground floor open, Calvar's second-floor window above; observed by a watcher on World-day 18 afternoon.",
-            "visited": true
-          }
-        }
-      ]
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A brief still moment on the lane — one breath in, one breath out, the craft's read complete."
+      }
     },
     "sceneState": {
       "setting": "The cooperage lane, Edge District — wet cobbles, afternoon rain, conduit glow caught in puddles. Calvar's second-floor window is lamp-dark, casement latched. A figure watches from under the tallow-chandler's awning across the lane; the cooperage ground-floor door is propped open.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Level with Silas, pack angled away from the watcher — reading the lane without comment, unhurried and ready."
+          "state": "Pack angled to block the watcher's sightline — already repositioned, reading the lane, unhurried and ready."
         },
         {
           "name": "Huginn",
-          "state": "On Silas's left shoulder, head tucked, silent — its silence timed."
+          "state": "On Silas's left shoulder, silent — the timed kind of silence that means it has noticed and is waiting."
         },
         {
           "name": "Unknown watcher",
-          "state": "Standing under the tallow-chandler's awning, boots drier than shoulders, not looking at the cooperage directly — has not"
+          "state": "Under the tallow-chandler's awning, eyes on Calvar's casement — patient, waiting for a window, not yet acting."
         }
       ],
       "objects": [
@@ -1468,8 +1414,8 @@
       ],
       "threads": [
         "Calvar's lamp not in the window — departure signal not given; status unknown",
-        "Watcher under the chandler's awning — loose watch or something tighter?",
-        "Second figure in grey cloak crossed the far end of the lane at pace — unknown relation",
+        "Watcher under the chandler's awning — patient watch, no trigger imminent but window closing",
+        "Cooperage ground-floor door propped open — invitation or carelessness, unknown",
         "The conduit pulse at the third hour — still unread"
       ]
     }
@@ -2252,7 +2198,6 @@
       },
       "relationship": 8,
       "history": [
-        "[d3] Said yes — named Grael's method as the thing he understands, named his own failure to move three years ago, and asked for the road. He is now committed to traveling with Silas and ",
         "[d3] The Attended End read his yes as a clean ending — a three-year private refusal closed, not a sacrifice. The bundle moving is his release from the waiting room. He does not need to ",
         "[d3] Shifted weight, exhaled, went still — holding the room, giving it what it needs.",
         "[d3] Gave Pell a single low affirmative when she asked about the specification method — understood what she needed the question to do and gave her only the answer, without the weight of",
@@ -2261,7 +2206,8 @@
         "[d3] Named the Plateau lattice's indifference to outsiders plainly and without apology — redirected to practical needs. Ready to answer Pell's question about the morning.",
         "[d3] Named the annex odds without softening them — filing date, binding description, cover notation are his retrieval tools; hierarchy standing is gone. Lower Plateau district is the on",
         "[d3] Received his tasking plainly — bring his experience and Radiant standing to the road, teach what he knows when it's needed. Accepted it without performance. Committed to first ligh",
-        "[d4] Lamp not in window; casement latched rather than open. Status unknown — may still be in the room, may have been moved."
+        "[d4] Lamp not in window; casement latched rather than open. Status unknown — may still be in the room, may have been moved.",
+        "[d4] Lamp absent from window, casement latched — The Ended Threat reads the watcher as waiting on Calvar's movement, not yet dispatched. His situation remains unknown but the threat is "
       ],
       "knownFacts": [
         "Has the instinct to hold a room still when it needs holding",
@@ -2281,7 +2227,7 @@
         "identifying the structural flaw in Grael's appeal-capture me"
       ],
       "status": "active",
-      "statusNote": "In his room above the cooperage — lamp absent from window; a watcher stationed opposite. Situation uncertain.",
+      "statusNote": "In his room above the cooperage — lamp absent from window, watcher stationed opposite; no action yet dispatched against him.",
       "lastSeen": {
         "locationId": "the-low-lamp-inn",
         "day": 4
@@ -2615,7 +2561,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-18T00:41:45.456Z",
+    "lastSharedReadAt": "2026-07-18T02:06:21.148Z",
     "lastTickWorldDay": 18,
     "lastCanonWorldDay": 18
   },
@@ -3576,7 +3522,8 @@
           "[d3] Agreed to travel with Silas and Pell to Millbrook — will vouch as the pre-Transition calibration author and attest to the seventh-band specification outside the Radiant hierarchy. Named his own three-",
           "[d3] Filed the third copy of the seventh-band calibration files as personal correspondence bound with Pell's father's letters — deliberately obscured to survive Rennic's collection. Located in the Filtrati",
           "[d4] [while away] Reviewing last night's seventh-band log, Calvar found a seventeen-minute gap in the low-frequency baseline that his specification explicitly flags as instrument drift — but the gap's edge",
-          "[d4] Calvar's departure lamp is absent from the window on World-day 18 afternoon; a watcher with dry boots is stationed under the tallow-chandler's awning opposite the cooperage. The agreed signal has not "
+          "[d4] Calvar's departure lamp is absent from the window on World-day 18 afternoon; a watcher with dry boots is stationed under the tallow-chandler's awning opposite the cooperage. The agreed signal has not ",
+          "[d4] The Ended Threat reads the watcher outside his cooperage window as patient and reporting — no trigger imminent, no action yet dispatched. The threat is real but upstream of its own edge. A window exis"
         ],
         "links": [
           "the-water-crisis",
@@ -3768,32 +3715,31 @@
     }
   },
   "tendencies": {
-    "strategic": 8.174834088932982,
-    "cerebral": 14.12263560078161,
-    "social": 15.892347588484068,
-    "generous": 1.7167120107774665,
-    "cautious": 6.550130997527383,
-    "physical": 0.17086146485154943,
-    "risky": 1.4800213337493522,
-    "ruthless": 0.21155727948287642,
-    "carousing": 0.14855600137811606,
-    "amorous": 17.071082852780773,
-    "patient": 2.1044788301830315,
-    "stealth": 0.17430846692229066,
-    "devotion": 2.049908123399761,
-    "craft": 0.4678842982793399
+    "strategic": 8.970463236709659,
+    "cerebral": 13.76956971076207,
+    "social": 15.495038898771966,
+    "generous": 1.67379421050803,
+    "cautious": 7.386377722589198,
+    "physical": 0.1665899282302607,
+    "risky": 1.4430208004056184,
+    "ruthless": 0.2062683474958045,
+    "carousing": 0.14484210134366315,
+    "amorous": 16.644305781461252,
+    "patient": 2.0518668594284555,
+    "stealth": 0.1699507552492334,
+    "devotion": 1.9986604203147669,
+    "craft": 0.4561871908223564
   },
   "aptitudes": [
     "strategist",
     "silver_tongue",
     "scholar",
     "orator",
-    "sage",
     "charmer",
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 435,
+  "actionCount": 436,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3999,8 +3945,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784339418317,
-  "rev": 622,
+  "updatedAt": 1784340769396,
+  "rev": 626,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4256,7 +4202,7 @@
           "entityId": "calvar",
           "type": "npc",
           "birthWeight": 10,
-          "engagementScore": 57,
+          "engagementScore": 60,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -4286,14 +4232,6 @@
               "day": 3
             },
             {
-              "kind": "fact",
-              "day": 3
-            },
-            {
-              "kind": "interact",
-              "day": 3
-            },
-            {
               "kind": "interact",
               "day": 3
             },
@@ -4356,6 +4294,14 @@
             {
               "kind": "interact",
               "day": 3
+            },
+            {
+              "kind": "interact",
+              "day": 4
+            },
+            {
+              "kind": "fact",
+              "day": 4
             },
             {
               "kind": "interact",
@@ -4838,7 +4784,8 @@
       "shadowstep": 9,
       "the-attended-end": 24,
       "wildcraft": 3,
-      "the_raised_thing": 4
+      "the_raised_thing": 4,
+      "the_ended_threat": 1
     },
     "coActivations": {
       "lightsense+numen_sense": 1,
@@ -4938,10 +4885,10 @@
       "at": "2026-07-13T12:11:17.802Z"
     }
   ],
-  "syncedAt": 1784333205392,
+  "syncedAt": 1784339418317,
   "teachers": {},
   "regionsKnown": {
-    "valley": 252
+    "valley": 253
   },
   "foreclosed": [
     "rootkin",
@@ -4987,10 +4934,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-17T17:39:40.705Z",
-      "lastAt": "2026-07-18T01:50:18.307Z",
+      "lastAt": "2026-07-18T02:12:49.394Z",
       "startDay": 17,
       "endDay": 18,
-      "beats": 60
+      "beats": 61
     }
   ],
   "company": [

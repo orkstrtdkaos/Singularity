@@ -820,107 +820,85 @@
         "player": "Listen to what Siol knows about the sixth gate's other side",
         "summary": "Siol answers Pell's question: no toll, no keeper — but the March reads who comes through, and Huginn's presence will be felt before Silas steps out of the arch.",
         "narration": "Siol turns her attention fully to Pell, and the small shift in her posture says she expected the question. 'There is no toll,' she says. 'And no keeper at the threshold — not in the way you mean.' She pauses a moment, choosing her next words with the care of someone who has learned that precision matters more than speed. 'The March does not keep a welcome gate because it does not need one. The land itself reads who comes through, and Marrow —' she glances at Huginn, brief and direct — 'Marrow is known there the way a name is known. Before you step out of the arch on the far side, they will already have felt something arrive.'\n\nHuginn says nothing. He turns his head away from Siol and looks south, toward the sixth gate, and the tilt of his neck is the comment.\n\nSiol continues, still addressing Pell as much as Silas. 'The Steadwood passage road from here runs three days to the March mouth, if weather holds. The road is clear — I came through it two days past without incident.' She looks at the spear lashed at Silas's back, then back to his face. 'You will not be stopped. But you will be seen arriving, and whoever greets you will already know something of what you carry.' She says that without alarm, simply as a fact the road requires you to hold.\n\nPell takes that in without changing her expression. Then she nods once — the same nod she gives a structural answer that checks out. She looks at Silas and says nothing, but the question she carried is settled."
+      },
+      {
+        "player": "Ask if Siol herself is bound somewhere, and whether her road and yours run the same direction for any part of it",
+        "summary": "Silas asks Siol if their roads overlap — she answers yes, for a day or so heading south, if the pace is easy.",
+        "narration": "You ask Siol plainly whether she is herself bound somewhere, and whether any stretch of your roads runs the same direction.\n\nShe considers the question without hurry. 'South,' she says at last, 'but not as far as the March mouth. My road turns before the Steadwood thins.' She tilts her head slightly, the gesture of someone mapping two lines against each other in their thoughts. 'For a day or so, perhaps, if the pace is easy. I do not keep a strict morning schedule.'\n\nHuginn shifts on your shoulder and makes a sound — not quite approval, not quite skepticism, but something that Siol notices. She glances at him. 'Marrow does not object,' she says, dry and quiet, and then she looks back at you to see whether you do.\n\nPell says nothing. She is watching you, the same way she watches a joint being brought together — to see whether the fit is clean."
       }
     ],
     "lastTurn": {
-      "narration": "Siol turns her attention fully to Pell, and the small shift in her posture says she expected the question. 'There is no toll,' she says. 'And no keeper at the threshold — not in the way you mean.' She pauses a moment, choosing her next words with the care of someone who has learned that precision matters more than speed. 'The March does not keep a welcome gate because it does not need one. The land itself reads who comes through, and Marrow —' she glances at Huginn, brief and direct — 'Marrow is known there the way a name is known. Before you step out of the arch on the far side, they will already have felt something arrive.'\n\nHuginn says nothing. He turns his head away from Siol and looks south, toward the sixth gate, and the tilt of his neck is the comment.\n\nSiol continues, still addressing Pell as much as Silas. 'The Steadwood passage road from here runs three days to the March mouth, if weather holds. The road is clear — I came through it two days past without incident.' She looks at the spear lashed at Silas's back, then back to his face. 'You will not be stopped. But you will be seen arriving, and whoever greets you will already know something of what you carry.' She says that without alarm, simply as a fact the road requires you to hold.\n\nPell takes that in without changing her expression. Then she nods once — the same nod she gives a structural answer that checks out. She looks at Silas and says nothing, but the question she carried is settled.",
-      "sceneSummary": "Siol answers Pell's question: no toll, no keeper — but the March reads who comes through, and Huginn's presence will be felt before Silas steps out of the arch.",
+      "narration": "You ask Siol plainly whether she is herself bound somewhere, and whether any stretch of your roads runs the same direction.\n\nShe considers the question without hurry. 'South,' she says at last, 'but not as far as the March mouth. My road turns before the Steadwood thins.' She tilts her head slightly, the gesture of someone mapping two lines against each other in their thoughts. 'For a day or so, perhaps, if the pace is easy. I do not keep a strict morning schedule.'\n\nHuginn shifts on your shoulder and makes a sound — not quite approval, not quite skepticism, but something that Siol notices. She glances at him. 'Marrow does not object,' she says, dry and quiet, and then she looks back at you to see whether you do.\n\nPell says nothing. She is watching you, the same way she watches a joint being brought together — to see whether the fit is clean.",
+      "sceneSummary": "Silas asks Siol if their roads overlap — she answers yes, for a day or so heading south, if the pace is easy.",
       "choices": [
         {
-          "label": "Ask Siol if she knows what the March's greeting typically looks like — what form 'being seen arriving' tends to take",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Siol how she knows Huginn — the door you left open, now followed through",
+          "label": "Invite her to travel with you as far as her road goes — the company is welcome",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Thank Siol and step away from the camp — the sixth gate is identified, and the Coliseum or the Council of Mavens waits",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "travel"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask if Siol herself is bound somewhere, and whether her road and yours run the same direction for any part of it",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "negotiate"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
+        },
+        {
+          "label": "Thank her and step away — you have the gate's name and the road's shape; that is enough",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "travel"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask what she knows of the Steadwood itself — what the road through it is like before the March",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Step to the sixth gate now — you have what you came for, and the March is waiting",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 0,
+          "intentTags": [
+            "travel"
+          ],
+          "trivial": true
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "Hub Waygate Plaza, west paving — the small Elven camp at dawn, pale light flat from the east, the six other waygate arches visible across the crescent stones behind; the sixth gate's darker lintel is the one now with a name.",
+        "setting": "Hub Waygate Plaza, west paving — the small Elven camp at dawn, pale flat light from the east, the six other waygate arches visible across the crescent stones; the sixth gate's darker lintel is the one now with a name.",
         "npcsPresent": [
           {
             "name": "Siol",
-            "state": "Standing at the camp's edge, finished speaking — watching Silas and Pell absorb what she said, unhurried"
+            "state": "Standing at the camp's edge, watching Silas for his answer — unhurried, door open"
           },
           {
             "name": "Pell Marsh",
-            "state": "Beside Silas, pack on her shoulders, question settled — looking at Silas now rather than Siol"
+            "state": "Beside Silas, pack on her shoulders, watching him the way she watches a joint being brought together"
           },
           {
             "name": "Huginn",
-            "state": "On Silas's left shoulder, head turned south toward the sixth gate, neck tilted in that way that is always a comment"
+            "state": "On Silas's left shoulder, already watching Siol's reaction to him — that sound made and now waiting"
           }
         ],
         "objects": [
-          "Seven waygate arches — the sixth identified: lower lintel, darker stone, to the south",
-          "The Elven camp — four travelers, gear stacked in clean columns, low oil lamp still burning",
+          "Seven waygate arches — the sixth identified: lower lintel, darker stone",
+          "The Elven camp — four travelers, gear stacked in clean columns, low oil lamp still lit",
           "Memory — the assembled spear, road-lashed at Silas's back",
           "Council of Mavens colonnade visible on the near northern tier",
           "Coliseum outer wall to the northwest — fresh soot-marks, gates open"
         ],
         "threads": [
-          "Siol's acquaintance with Huginn — door left open, not yet followed through",
+          "Siol's offer to travel south for a day or so — awaiting Silas's answer",
+          "Siol's acquaintance with Huginn — door still open, not yet followed through",
           "What form the March's greeting takes — named but unasked",
-          "Siol's own road and destination — unknown",
           "The Hub's full design purpose — calibration function — remains only partially read"
         ]
       },
@@ -929,75 +907,47 @@
           "op": "update",
           "npcId": "siol",
           "name": "Siol",
-          "role": "Elven traveler, Hub plaza",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Answered Pell's gate question directly — no toll, no keeper, but the March reads arrivals and Huginn's presence will be felt before Silas steps through",
+          "note": "Named her road as south but turning before the Steadwood thins — offered a day or so of shared travel if the pace is easy. Dry comment about Huginn not objecting.",
           "learned": [
-            "The March has no toll or threshold keeper — entry is open but arrival is always known",
-            "Huginn's presence will be felt by the March before Silas steps out of the arch on the far side",
-            "The Steadwood passage road is three days from the Hub to the March mouth if weather holds — she confirmed it as clear two days past"
+            "Her road runs south from the Hub but turns before the Steadwood thins — not as far as the March mouth",
+            "She does not keep a strict morning schedule — flexible about shared travel",
+            "She noticed Huginn's sound and named it directly, without ceremony"
           ],
-          "statusNote": "At the Elven camp on the Hub's west paving — Pell's question answered, door still open on Marrow conversation and her own road",
-          "relationshipDelta": 0
-        },
-        {
-          "op": "update",
-          "npcId": "pell-ran-marsh",
-          "name": "Pell Ran Marsh",
-          "role": "Village blacksmith, Millbrook — traveling companion",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Received Siol's answer with a single structural nod — question settled, attention returned to Silas",
-          "statusNote": "Beside Silas at the Elven camp — practical question resolved, ready to move",
-          "relationshipDelta": 0
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "ashwarden-march-approach",
-          "label": "Ashwarden March — Arrival",
-          "kind": "lore",
-          "fact": "The March has no toll or keeper at the threshold. The land itself reads who comes through. Huginn's presence will be felt before Silas steps out of the sixth gate's arch — arrival is already known when Marrow travels with you. Three days on the Steadwood passage road from the Hub to the March mouth.",
-          "links": [
-            "siol",
-            "the-edge-district-ledger",
-            "the-water-crisis"
-          ]
+          "statusNote": "At the Elven camp on the Hub's west paving — has offered to walk south with Silas's party for a day or so; awaiting his answer"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief exchange at the Elven camp — a few minutes of quiet conversation"
+        "why": "A short exchange at the camp's edge — a few minutes of easy conversation"
       }
     },
     "sceneState": {
-      "setting": "Hub Waygate Plaza, west paving — the small Elven camp at dawn, pale light flat from the east, the six other waygate arches visible across the crescent stones behind; the sixth gate's darker lintel is the one now with a name.",
+      "setting": "Hub Waygate Plaza, west paving — the small Elven camp at dawn, pale flat light from the east, the six other waygate arches visible across the crescent stones; the sixth gate's darker lintel is the one now with a name.",
       "npcsPresent": [
         {
           "name": "Siol",
-          "state": "Standing at the camp's edge, finished speaking — watching Silas and Pell absorb what she said, unhurried"
+          "state": "Standing at the camp's edge, watching Silas for his answer — unhurried, door open"
         },
         {
           "name": "Pell Marsh",
-          "state": "Beside Silas, pack on her shoulders, question settled — looking at Silas now rather than Siol"
+          "state": "Beside Silas, pack on her shoulders, watching him the way she watches a joint being brought together"
         },
         {
           "name": "Huginn",
-          "state": "On Silas's left shoulder, head turned south toward the sixth gate, neck tilted in that way that is always a comment"
+          "state": "On Silas's left shoulder, already watching Siol's reaction to him — that sound made and now waiting"
         }
       ],
       "objects": [
-        "Seven waygate arches — the sixth identified: lower lintel, darker stone, to the ",
+        "Seven waygate arches — the sixth identified: lower lintel, darker stone",
         "The Elven camp — four travelers, gear stacked in clean columns, low oil lamp sti",
         "Memory — the assembled spear, road-lashed at Silas's back",
         "Council of Mavens colonnade visible on the near northern tier",
         "Coliseum outer wall to the northwest — fresh soot-marks, gates open"
       ],
       "threads": [
-        "Siol's acquaintance with Huginn — door left open, not yet followed through",
+        "Siol's offer to travel south for a day or so — awaiting Silas's answer",
+        "Siol's acquaintance with Huginn — door still open, not yet followed through",
         "What form the March's greeting takes — named but unasked",
-        "Siol's own road and destination — unknown",
         "The Hub's full design purpose — calibration function — remains only partially read"
       ]
     }
@@ -1989,17 +1939,18 @@
         "[d6] Named the sixth waygate as the path to the Ashwarden March; called Huginn 'Marrow' without being told",
         "[d6] Received Silas's introduction, acknowledged Pell by name and maker's mark, addressed Huginn directly as 'Marrow' — named the Steadwood passage as clear and warned that the March will know of Huginn before Silas arrives",
         "[d6] Received Silas's open invitation about Marrow with a quiet 'the road tends to allow what it intends' — not closing, not committing. Now receiving Pell's direct question about the sixth gate.",
-        "[d6] Answered Pell's gate question directly — no toll, no keeper, but the March reads arrivals and Huginn's presence will be felt before Silas steps through"
+        "[d6] Answered Pell's gate question directly — no toll, no keeper, but the March reads arrivals and Huginn's presence will be felt before Silas steps through",
+        "[d6] Named her road as south but turning before the Steadwood thins — offered a day or so of shared travel if the pace is easy. Dry comment about Huginn not objecting."
       ],
       "knownFacts": [
-        "Came through the eastern gate from the Steadwood passage two days ago",
-        "Called Huginn 'Marrow' by name — knows the companion without introduction",
-        "Silas's soul wife is Pell Marsh — the smith whose maker's mark is on the assembled spear",
         "The Steadwood passage road is three days from the Hub to the March mouth if weather holds",
         "The March does not keep a welcome gate — arrival is already known when Huginn travels with you",
         "The March has no toll or threshold keeper — entry is open but arrival is always known",
         "Huginn's presence will be felt by the March before Silas steps out of the arch on the far side",
-        "The Steadwood passage road is three days from the Hub to the March mouth if weather holds — she confirmed it as clear two days past"
+        "The Steadwood passage road is three days from the Hub to the March mouth if weather holds — she confirmed it as clear two days past",
+        "Her road runs south from the Hub but turns before the Steadwood thins — not as far as the March mouth",
+        "She does not keep a strict morning schedule — flexible about shared travel",
+        "She noticed Huginn's sound and named it directly, without ceremony"
       ],
       "skillsObserved": [
         "reading a traveler's affiliation from companion presence alo",
@@ -2008,7 +1959,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the Elven camp on the Hub's west paving — Pell's question answered, door still open on Marrow conversation and her own road",
+      "statusNote": "At the Elven camp on the Hub's west paving — has offered to walk south with Silas's party for a day or so; awaiting his answer",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 6
@@ -3788,21 +3739,21 @@
     }
   },
   "tendencies": {
-    "strategic": 16.744366202224747,
-    "cerebral": 7.54970211228125,
-    "social": 16.153278800700775,
-    "generous": 1.7098715758167542,
-    "cautious": 7.989981966508694,
-    "physical": 1.396041473888097,
-    "risky": 0.13699409611199614,
-    "ruthless": 0.897489690195603,
-    "carousing": 0.013750676876563204,
-    "amorous": 8.899495084311827,
-    "patient": 2.222795288792335,
-    "stealth": 0.3478692968280301,
-    "devotion": 0.7773645845141611,
-    "craft": 2.747928774940359,
-    "leadership": 0.34529783816841614
+    "strategic": 16.325757047169127,
+    "cerebral": 7.360959559474218,
+    "social": 16.749446830683254,
+    "generous": 1.6671247864213352,
+    "cautious": 7.790232417345976,
+    "physical": 1.3611404370408946,
+    "risky": 0.13356924370919623,
+    "ruthless": 0.8750524479407129,
+    "carousing": 0.013406909954649123,
+    "amorous": 8.67700770720403,
+    "patient": 2.1672254065725265,
+    "stealth": 0.33917256440732935,
+    "devotion": 0.7579304699013071,
+    "craft": 2.67923055556685,
+    "leadership": 0.3366653922142057
   },
   "aptitudes": [
     "strategist",
@@ -3810,7 +3761,7 @@
     "tactician",
     "charmer"
   ],
-  "actionCount": 529,
+  "actionCount": 530,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -4064,8 +4015,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784410405055,
-  "rev": 776,
+  "updatedAt": 1784410553103,
+  "rev": 777,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5215,7 +5166,7 @@
   "syncedAt": 1784392733860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 349
+    "valley": 350
   },
   "foreclosed": [
     "rootkin",
@@ -5272,10 +5223,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T21:33:25.054Z",
+      "lastAt": "2026-07-18T21:35:53.103Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 74,
+      "beats": 75,
       "_recapError": null,
       "recap": "Day eighteen, and Silas Weir moved like a man who'd finally stopped fighting the shape of what he was. On the road he disarmed three opportunists without breaking bones, read the grief sitting behind the broad man's eyes, named it plainly, pressed provisions into their hands, and sent them toward something worth doing — mercy given as instruction, not sentiment. Then he brought the hard people together: Dara, Aldric, Fendt, Mara, Calvar, all of them in the heat of Pell's forge with no exits easy and no pretense left, and in that single evening he turned a valley's quiet panic into four working threads — engineering, logistics, supply, accounts — each with a named lead and a direction to face. The crisis didn't end, but it stopped being formless, and that was his doing."
     }

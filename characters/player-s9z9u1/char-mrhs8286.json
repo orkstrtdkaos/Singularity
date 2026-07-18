@@ -819,33 +819,23 @@
         "player": "Before the tour — ask Siol plainly what she knows about Taur, and whether the bench-seam light connects to the water",
         "summary": "Silas asks Siol directly about Taur and the bench-seam light — she answers with exactly what she knows and does not oversell the connection.",
         "narration": "You step aside from the Coliseum gate with Siol while Pell leans on the outer wall, watching the last of the morning crowd thin past. Huginn settles onto a post above and is very still.\n\nYou ask Siol plainly: what does she know about Taur, and whether what moved through that bench seam has anything to do with the river turning gray.\n\nSiol is quiet for a moment. Not evasive — measuring. Then she answers.\n\n\"Taur I know as a voice and a direction,\" she says. \"He does not live in the Hub. He passes through, and he leaves word, and people respond to the word. I spoke with someone who had spoken with him. I do not know his face.\" She pauses. \"He has been interested in the waygate calibration question for longer than the water has been gray — that much reached me.\"\n\nShe turns to look back at the Coliseum entrance. Her next words come out level and unhurried.\n\n\"The light in the bench seam — I have seen it three times now, as I told you. I do not know what it is. What I know is that it does not follow the photonic circuit, and it does not follow the sun, and the first time I saw it was the morning after someone asked me what I knew about the plaza arches. Whether those things connect — I cannot say. I am telling you the sequence, not the cause.\"\n\nHuginn makes a short, dry sound from the post. It is not a word. It sounds like agreement."
+      },
+      {
+        "player": "Accept what she's given — take the tour, starting with the plaza",
+        "summary": "Siol leads Silas and Pell from the Coliseum gate north to the waygate plaza — the seven arches in morning light, a measuring instrument the city grew around.",
+        "narration": "You nod at what Siol has given you — the shape of Taur, the light's three occurrences, the sequence without a cause — and you let it settle rather than press. Some things want time before they resolve. \"The tour, then,\" you say. \"Plaza first.\"\n\nSiol turns without ceremony and leads you north along the Coliseum's outer wall. Pell falls in beside you, flask clipped back to her belt, eyes already moving over the street. Huginn lifts from the post and crosses ahead, landing thirty feet up on a ledge above the market row, watching the path before you reach it.\n\nThe morning is well underway now. Stalls along the market row are doing real business — cord-weavers, a seed merchant with flat trays of sorted grain, a woman re-edging a set of hand tools over a small stone. The smell is cook-fire and damp wool. The Hub does not make ceremony of its mornings. It just works.\n\nThe waygate plaza opens at the row's north end — the seven arches standing in their low crescent, the paving between them worn to a smooth depression where years of arrivals and departures have pressed the stone. In the full morning light, with the market at your back and the Council colonnade visible across the far tier, you can read what Order-Sense caught at dawn without craft: the arches are not decoration. Each one is slightly differently angled, slightly differently spaced. Someone made a measuring instrument, and the Hub grew up around it. Siol stops at the plaza's center and waits for you to see it."
       }
     ],
     "lastTurn": {
-      "narration": "You step aside from the Coliseum gate with Siol while Pell leans on the outer wall, watching the last of the morning crowd thin past. Huginn settles onto a post above and is very still.\n\nYou ask Siol plainly: what does she know about Taur, and whether what moved through that bench seam has anything to do with the river turning gray.\n\nSiol is quiet for a moment. Not evasive — measuring. Then she answers.\n\n\"Taur I know as a voice and a direction,\" she says. \"He does not live in the Hub. He passes through, and he leaves word, and people respond to the word. I spoke with someone who had spoken with him. I do not know his face.\" She pauses. \"He has been interested in the waygate calibration question for longer than the water has been gray — that much reached me.\"\n\nShe turns to look back at the Coliseum entrance. Her next words come out level and unhurried.\n\n\"The light in the bench seam — I have seen it three times now, as I told you. I do not know what it is. What I know is that it does not follow the photonic circuit, and it does not follow the sun, and the first time I saw it was the morning after someone asked me what I knew about the plaza arches. Whether those things connect — I cannot say. I am telling you the sequence, not the cause.\"\n\nHuginn makes a short, dry sound from the post. It is not a word. It sounds like agreement.",
-      "sceneSummary": "Silas asks Siol directly about Taur and the bench-seam light — she answers with exactly what she knows and does not oversell the connection.",
+      "narration": "You nod at what Siol has given you — the shape of Taur, the light's three occurrences, the sequence without a cause — and you let it settle rather than press. Some things want time before they resolve. \"The tour, then,\" you say. \"Plaza first.\"\n\nSiol turns without ceremony and leads you north along the Coliseum's outer wall. Pell falls in beside you, flask clipped back to her belt, eyes already moving over the street. Huginn lifts from the post and crosses ahead, landing thirty feet up on a ledge above the market row, watching the path before you reach it.\n\nThe morning is well underway now. Stalls along the market row are doing real business — cord-weavers, a seed merchant with flat trays of sorted grain, a woman re-edging a set of hand tools over a small stone. The smell is cook-fire and damp wool. The Hub does not make ceremony of its mornings. It just works.\n\nThe waygate plaza opens at the row's north end — the seven arches standing in their low crescent, the paving between them worn to a smooth depression where years of arrivals and departures have pressed the stone. In the full morning light, with the market at your back and the Council colonnade visible across the far tier, you can read what Order-Sense caught at dawn without craft: the arches are not decoration. Each one is slightly differently angled, slightly differently spaced. Someone made a measuring instrument, and the Hub grew up around it. Siol stops at the plaza's center and waits for you to see it.",
+      "sceneSummary": "Siol leads Silas and Pell from the Coliseum gate north to the waygate plaza — the seven arches in morning light, a measuring instrument the city grew around.",
       "choices": [
         {
-          "label": "Ask Siol who it was that first brought up the plaza arches to her — trace the question back to its source",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 15,
-          "intentTags": [
-            "persuade",
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Order-Sense on the Coliseum exterior — look at the full design the bench seam belongs to",
+          "label": "Use Order-Sense on the plaza — read the full design of the seven arches while standing at the center",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
+            "concrete_abstract": 0.3,
             "chaos_order": 0.4
           },
           "difficulty": 15,
@@ -859,13 +849,15 @@
           "emergenceId": null
         },
         {
-          "label": "Accept what she's given — take the tour, starting with the plaza",
+          "label": "Ask Siol what she actually sees when she stands here — what the plaza tells her that it doesn't tell a passing traveler",
           "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.3
+          },
           "difficulty": 0,
           "intentTags": [
-            "travel"
+            "study"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -874,15 +866,32 @@
           "emergenceId": null
         },
         {
-          "label": "Tell Siol what Order-Sense found at dawn — that the seven gates are calibration marks for a measuring function — and see how she receives it",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Walk the arc — pace the full crescent of seven arches, measuring the spacing with your feet, looking for the pattern in the angles",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "axes": {
-            "falsehood_truth": 0.3
+            "concrete_abstract": -0.2,
+            "chaos_order": 0.3
           },
           "difficulty": 0,
           "intentTags": [
-            "persuade"
+            "study",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Let Pell look — she reads structure the way she reads iron; ask what she makes of the spacing",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -891,38 +900,32 @@
           "emergenceId": null
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "Outside the Hub Coliseum gate — morning light, the crowd thinning, Pell leaning on the outer wall nearby. Huginn is perched on a post above the gate.",
+        "setting": "Hub waygate plaza — morning light, the seven arches in their low crescent, the market row at the south edge, the Council colonnade visible on the far northern tier. The paving at the center is worn smooth.",
         "npcsPresent": [
           {
             "name": "Siol",
-            "state": "standing beside Silas, having just finished her measured answer — watching the Coliseum entrance"
+            "state": "standing at the plaza's center, waiting — watching Silas take in the arches"
           },
           {
             "name": "Pell",
-            "state": "leaning on the outer wall, watching the last of the crowd go"
+            "state": "beside Silas, flask clipped, eyes moving over the arches and the paving"
           },
           {
             "name": "Huginn",
-            "state": "perched on a post above the gate, very still"
+            "state": "on a ledge above the market row, watching the path ahead"
           }
         ],
         "objects": [
-          "gate post",
-          "Coliseum outer wall",
-          "thinning morning crowd"
+          "seven waygate arches in a low crescent",
+          "worn central paving stone",
+          "market row stalls at the south edge",
+          "Council colonnade to the north"
         ],
         "threads": [
-          "Siol's account: someone asked her about the plaza arches — she has not named who",
+          "Siol's account: the bench-seam light appeared the morning after someone asked her about the plaza arches — she has not named who asked",
           "Taur: a voice and a direction, not a face — interested in waygate calibration before the water turned gray",
-          "The bench seam light sequence: first appeared the morning after someone asked Siol about the arches"
+          "The seven arches: a measuring instrument the city grew around — full purpose still unresolved"
         ]
       },
       "npcUpdates": [
@@ -933,75 +936,82 @@
           "role": "Elven traveler, Hub plaza",
           "gender": "woman",
           "pronouns": "she/her",
-          "note": "Answered plainly about Taur and the bench-seam light — gave the sequence without overselling the cause",
-          "learned": [
-            "Taur is a voice and a direction — she knows him only through intermediary; does not know his face",
-            "Taur has been interested in the waygate calibration question longer than the water has been gray",
-            "The bench-seam light first appeared the morning after someone asked Siol what she knew about the plaza arches — she names the sequence, not the cause"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Outside the Coliseum gate — tour not yet begun, waiting on Silas's next move"
-        }
-      ],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "codexUpdates": [
-        {
-          "topic": "taur",
-          "label": "Taur",
-          "kind": "person",
-          "fact": "Siol knows Taur only as a voice and a direction — she spoke with someone who spoke with him, not with him directly. He does not live in the Hub; he passes through and leaves word. He has been interested in the waygate calibration question for longer than the water has been gray.",
-          "links": [
-            "the-water-crisis",
-            "waygate",
-            "precursor-signs-in-the-valley"
-          ]
+          "note": "Led Silas and Pell north to the waygate plaza without ceremony — stopped at center and waited for Silas to see what she sees",
+          "statusNote": "At the Hub waygate plaza — tour begun, standing at center, waiting on Silas's next move"
         },
         {
-          "topic": "bench-seam-light",
-          "label": "The Bench-Seam Light",
-          "kind": "mystery",
-          "fact": "Siol has seen the light three times. The first occurrence was the morning after someone asked her what she knew about the plaza arches. It does not follow the photonic circuit or the sun. She names the sequence — not the cause — and cannot say whether it connects to Taur or the water crisis.",
+          "op": "update",
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "role": "Village blacksmith, Millbrook — traveling companion",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "Fell in beside Silas without a word — flask clipped, eyes already reading the plaza",
+          "statusNote": "At the Hub waygate plaza — beside Silas, watching the arches"
+        }
+      ],
+      "moveTo": {
+        "location": "Hub Waygate Plaza",
+        "why": "Siol led the party north from the Coliseum gate along the market row to the plaza"
+      },
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A short walk north from the Coliseum gate to the waygate plaza"
+      },
+      "placeUpdates": [
+        {
+          "note": "In full morning light, the seven arches read plainly as a measuring instrument — each slightly differently angled, differently spaced. The Hub grew up around something that was already here.",
+          "subPlace": {
+            "name": "Hub Waygate Plaza",
+            "parent": "Waygate",
+            "note": "Seven-arch crescent, worn central paving, market row at south edge — the measuring instrument the city grew around. Visited in morning light with Siol as guide.",
+            "visited": true
+          }
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "hub-waygate-plaza",
+          "label": "Hub Waygate Plaza",
+          "kind": "place",
+          "entityId": "hub-waygate-plaza",
+          "fact": "In morning light with a guide's eye, the seven arches read as a deliberate measuring instrument — each arch slightly differently angled and spaced. The Hub grew up around a design that predated it. Siol brought Silas to the center and waited for him to see it.",
           "links": [
-            "taur",
+            "order-sense",
             "the-water-crisis",
-            "waygate",
-            "order-sense"
+            "precursor-signs-in-the-valley",
+            "siol"
           ]
         }
       ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief exchange outside the Coliseum gate"
-      },
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Outside the Hub Coliseum gate — morning light, the crowd thinning, Pell leaning on the outer wall nearby. Huginn is perched on a post above the gate.",
+      "setting": "Hub waygate plaza — morning light, the seven arches in their low crescent, the market row at the south edge, the Council colonnade visible on the far northern tier. The paving at the center is worn smooth.",
       "npcsPresent": [
         {
           "name": "Siol",
-          "state": "standing beside Silas, having just finished her measured answer — watching the Coliseum entrance"
+          "state": "standing at the plaza's center, waiting — watching Silas take in the arches"
         },
         {
           "name": "Pell",
-          "state": "leaning on the outer wall, watching the last of the crowd go"
+          "state": "beside Silas, flask clipped, eyes moving over the arches and the paving"
         },
         {
           "name": "Huginn",
-          "state": "perched on a post above the gate, very still"
+          "state": "on a ledge above the market row, watching the path ahead"
         }
       ],
       "objects": [
-        "gate post",
-        "Coliseum outer wall",
-        "thinning morning crowd"
+        "seven waygate arches in a low crescent",
+        "worn central paving stone",
+        "market row stalls at the south edge",
+        "Council colonnade to the north"
       ],
       "threads": [
-        "Siol's account: someone asked her about the plaza arches — she has not named who",
+        "Siol's account: the bench-seam light appeared the morning after someone asked her about the plaza arches — she has not named who asked",
         "Taur: a voice and a direction, not a face — interested in waygate calibration before the water turned gray",
-        "The bench seam light sequence: first appeared the morning after someone asked Siol about the arches"
+        "The seven arches: a measuring instrument the city grew around — full purpose still unresolved"
       ]
     }
   },
@@ -1432,7 +1442,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d6] After watching Siol and weighing her, asked the practical question directly: is there a toll, a keeper, or anything waiting on the other side of the sixth gate?",
         "[d6] Received Siol's answer with a single structural nod — question settled, attention returned to Silas",
         "[d6] Named her preference plainly — walk the floor before watching it. No ceremony.",
         "[d6] Walking the Coliseum floor before watching anyone else on it — reading the space on her own terms first.",
@@ -1441,7 +1450,8 @@
         "[d6] Running her own bout against Tane Solr — ironsense open, patient and methodical. Silas stepped back and let her work.",
         "[d6] Silas read her method clearly this exchange — she is running one breath ahead via ironsense, using the buckle and brace-pin as read-points, catching the back-foot settle twice and declining to press either time.",
         "[d6] Ended the second bout cleanly on Silas's word — flat strike, no edge, hands open after. Received the call and acted without argument.",
-        "[d6] Received Tane's naming without ceremony — flask in hand, already thinking toward the road."
+        "[d6] Received Tane's naming without ceremony — flask in hand, already thinking toward the road.",
+        "[d6] Fell in beside Silas without a word — flask clipped, eyes already reading the plaza"
       ],
       "knownFacts": [
         "Silas's footwork is genuinely good under pressure",
@@ -1462,7 +1472,7 @@
         "controlled finish strike — flat hilt to the leading arm, no "
       ],
       "status": "active",
-      "statusNote": "On the sand at the close — bout done, flask in hand, ready to move.",
+      "statusNote": "At the Hub waygate plaza — beside Silas, watching the arches",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 6
@@ -1989,7 +1999,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d6] Accepted Silas's invitation to tour the Hub before the road south — stepped clear of her camp without ceremony, named the Coliseum before the petition queue as the practical morning order, and began leading the party north.",
         "[d6] Named the Ent as Taur — ancient, present before the city, approachable but speaks on his own terms; noted the circle is worth a few minutes if there is time",
         "[d6] Described the Coliseum duels plainly — honest bouts, crafts declared at the gate, a referee named Orvil, yield as the end. Noted Huginn's gallery visibility as a factor. Dry, practical, complete.",
         "[d6] Approved Pell's choice as the sensible order — dry, genuine.",
@@ -1998,7 +2007,8 @@
         "[d6] Read the bout plainly when Silas asked — named what Pell is doing to Tane in one sentence, without embellishment.",
         "[d6] Confirmed she has seen the bench-seam light three times — always slow, always the upper seam, never lamp-circuit or sun. First occurrence predated the water discoloration. She had come from speaking with Taur that day. Named the facts without drawing the connection.",
         "[d6] Named her read of the bouts plainly: Pell reads iron the way a river reads a bank — finds where it is going, does not push. Silas read the man; Pell read the craft in him. Filed both without comparison. Offered a tour: plaza first, Ent circle last.",
-        "[d6] Answered plainly about Taur and the bench-seam light — gave the sequence without overselling the cause"
+        "[d6] Answered plainly about Taur and the bench-seam light — gave the sequence without overselling the cause",
+        "[d6] Led Silas and Pell north to the waygate plaza without ceremony — stopped at center and waited for Silas to see what she sees"
       ],
       "knownFacts": [
         "Has seen the bench-seam light three times, always in the upper seam, slow and lateral",
@@ -2020,7 +2030,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Outside the Coliseum gate — tour not yet begun, waiting on Silas's next move",
+      "statusNote": "At the Hub waygate plaza — tour begun, standing at center, waiting on Silas's next move",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 6
@@ -2400,7 +2410,8 @@
         "[d6] The sixth waygate from the south lane — lower lintel, darker stone — is the connection to the Ashwarden March. Confirmed by Siol of the Elves.",
         "[d6] The party entered and declared crafts at the gate — Orvil on morning rotation, sand showing early-bout marks, gallery occupied at dawn.",
         "[d6] A line of unaccountable brightness moved through pooled water in the upper bench seam of the Coliseum — slow, lateral, gone in three seconds. Not lamplight, not sun. Huginn observed it. First Precursor sign noted inside the city.",
-        "[d6] Second bout concluded — Pell Marsh over Tane Solr, controlled finish, Orvil's call. Sand carries marks from both bouts."
+        "[d6] Second bout concluded — Pell Marsh over Tane Solr, controlled finish, Orvil's call. Sand carries marks from both bouts.",
+        "[d6] In full morning light, the seven arches read plainly as a measuring instrument — each slightly differently angled, differently spaced. The Hub grew up around something that was already here."
       ],
       "flags": {},
       "vectorsKnown": [],
@@ -2417,7 +2428,7 @@
           "parentId": "gen-waygate",
           "day": 6,
           "visited": true,
-          "note": "The open crescent of seven arches where travelers arrive — the city begins at its northern edge"
+          "note": "Seven-arch crescent, worn central paving, market row at south edge — the measuring instrument the city grew around. Visited in morning light with Siol as guide."
         },
         "council-of-mavens-hall": {
           "name": "Council of Mavens Hall",
@@ -3900,21 +3911,21 @@
     }
   },
   "tendencies": {
-    "strategic": 12.378741070910129,
-    "cerebral": 11.7483588990897,
-    "social": 20.65143191962161,
-    "generous": 3.3733950237864025,
-    "cautious": 6.919803531802768,
-    "physical": 1.5378323539679248,
-    "risky": 1.6127218785960786,
-    "ruthless": 0.5141987466714473,
-    "carousing": 0.007878174972986995,
-    "amorous": 5.0987875051406,
-    "patient": 1.273506051479115,
-    "stealth": 0.19930474788570118,
-    "devotion": 0.4453754727553864,
-    "craft": 1.5743707670990483,
-    "leadership": 1.0144832857998038
+    "strategic": 12.069272544137375,
+    "cerebral": 11.454649926612458,
+    "social": 20.13514612163107,
+    "generous": 3.2890601481917425,
+    "cautious": 6.746808443507699,
+    "physical": 1.4993865451187267,
+    "risky": 1.5724038316311766,
+    "ruthless": 0.5013437780046611,
+    "carousing": 0.007681220598662319,
+    "amorous": 4.971317817512085,
+    "patient": 1.2416684001921372,
+    "stealth": 0.19432212918855865,
+    "devotion": 0.43424108593650174,
+    "craft": 1.535011497921572,
+    "leadership": 0.9891212036548087
   },
   "aptitudes": [
     "strategist",
@@ -3922,7 +3933,7 @@
     "scholar",
     "orator"
   ],
-  "actionCount": 551,
+  "actionCount": 552,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -4192,8 +4203,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784414256621,
-  "rev": 804,
+  "updatedAt": 1784414435578,
+  "rev": 806,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5568,7 +5579,7 @@
   "syncedAt": 1784392733860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 371
+    "valley": 372
   },
   "foreclosed": [
     "rootkin",
@@ -5625,10 +5636,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T22:37:36.619Z",
+      "lastAt": "2026-07-18T22:40:35.576Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 96,
+      "beats": 97,
       "_recapError": null,
       "recap": "Day eighteen, and Silas Weir moved like a man who'd finally stopped fighting the shape of what he was. On the road he disarmed three opportunists without breaking bones, read the grief sitting behind the broad man's eyes, named it plainly, pressed provisions into their hands, and sent them toward something worth doing — mercy given as instruction, not sentiment. Then he brought the hard people together: Dara, Aldric, Fendt, Mara, Calvar, all of them in the heat of Pell's forge with no exits easy and no pretense left, and in that single evening he turned a valley's quiet panic into four working threads — engineering, logistics, supply, accounts — each with a named lead and a direction to face. The crisis didn't end, but it stopped being formless, and that was his doing."
     }
@@ -5651,6 +5662,15 @@
       "teaches": null,
       "liaisonFor": null,
       "joinedDay": 17
+    },
+    {
+      "npcId": "siol",
+      "roles": [
+        "ally"
+      ],
+      "teaches": null,
+      "liaisonFor": null,
+      "joinedDay": 18
     }
   ],
   "livingCurrentAccess": [],

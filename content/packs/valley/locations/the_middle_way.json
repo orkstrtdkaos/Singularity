@@ -26,7 +26,7 @@
     "the_cogitarium",
     "the_axis_gate"
   ],
-  "descriptionSeed": "The rare habitable heart of the Reach — a school-town where body and mind are held in DELIBERATE balance, the doubly-charged node made a home. Here alone the athlete-scholar is the ideal: perfected body AND ordered mind, each keeping the other honest. Both the Temple and the Cogitarium consider it a compromise; it considers them both cautionary tales. The natural base for the Reach, and the living argument against both poles' foreclosure.",
+  "descriptionSeed": "The rare habitable heart of the Reach — a school-town where body and mind are held in DELIBERATE balance, the doubly-charged node made a home. Here alone the athlete-scholar is the ideal: perfected body AND ordered mind, each keeping the other honest. Both the Temple and the Cogitarium consider it a compromise; it considers them both cautionary tales. The natural base for the Reach, and the living argument against both poles' foreclosure. The school keeps a waygate at its gate rather than its heart — arrivals are met, fed, and asked what they came for before they are let further in.",
   "loreRefs": [
     "the_twelve_reaches",
     "reach_body_mind",
@@ -42,5 +42,7 @@
   "map": {
     "x": 160,
     "y": 520
-  }
+  },
+  "waygate": true,
+  "waygateTier": 2
 }

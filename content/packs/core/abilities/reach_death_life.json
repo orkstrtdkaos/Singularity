@@ -347,7 +347,8 @@
       },
       "functions": [
         "break",
-        "hinder"
+        "hinder",
+        "strike"
       ],
       "narrationHints": "Touch, and the quick goes out of a thing — a vine, a lock's wooden pin, a reaching hand.",
       "description": "Hasten decay in a thing — rot wood, wilt growth, age a structure past its holding. Palework's edge turned on the material world. The Grey Hand handles people; Wither handles everything else.",
@@ -356,10 +357,11 @@
         {
           "rank": 1,
           "name": "Wither",
-          "grants": "Rot or wilt a plant, a wooden object, a rope, a door — anything living or once-living. Age a material thing faster than it should go.",
+          "grants": "Rot or wilt a plant, a wooden object, a rope, a door — anything living or once-living. Age a material thing faster than it should go. Turned on a living body it works the same way and slower: flesh does not rot in a moment, but it weakens, and held long enough it is a real and directly-inflicted harm.",
           "cannot": "Only things, not people. Cannot undo.",
           "functions": [
-            "hinder"
+            "hinder",
+            "strike"
           ],
           "gains": "broaden",
           "harmRung": "damaging"
@@ -371,7 +373,8 @@
           "cannot": "Withering is not breaking. The thing fails as things fail — structurally, from within. It takes a moment, not an instant.",
           "functions": [
             "hinder",
-            "break"
+            "break",
+            "strike"
           ],
           "gains": "broaden",
           "harmRung": "damaging"
@@ -380,13 +383,14 @@
           "rank": 3,
           "name": "The Withering",
           "grants": "Wither at range and at scale — a field of crops, a fortification, a siege engine, a line of wooden shields. The terrain itself becomes unreliable.",
-          "cannot": "The Ashwardens permit this only against what should end. Used as a weapon it marks the wielder, and the marking is visible to everyone who has ever seen Palework.",
+          "cannot": "Living flesh resists it far better than wood or cloth — this is never a fast way to hurt someone, and anyone who can simply leave will. At scale it takes fields and fortifications, and the Ashwardens note that starving a valley is the commonest use it has ever been put to.",
           "functions": [
             "hinder",
-            "break"
+            "break",
+            "strike"
           ],
           "gains": "deepen",
-          "harmRung": "damaging"
+          "harmRung": "incapacitating"
         }
       ],
       "challengeTypes": [
@@ -395,7 +399,7 @@
         "CHASE"
       ],
       "tradition": "ashwarden",
-      "harmRung": "damaging",
+      "harmRung": "incapacitating",
       "nativeOrCombination": "native"
     },
     {
@@ -733,7 +737,7 @@
         {
           "rank": 1,
           "name": "The Dread",
-          "grants": "One living thing feels its own ending approach. It will act on that, and you do not get to choose how.",
+          "grants": "One living thing feels its own ending approach. It will act on that, and you do not get to choose how — but it is badly weakened while it lasts: the hands go unsteady, the judgement narrows, and nothing they attempt comes out at the strength they meant.",
           "cannot": "The unafraid are unmoved, and there are more of them than you think.",
           "functions": [
             "hinder"

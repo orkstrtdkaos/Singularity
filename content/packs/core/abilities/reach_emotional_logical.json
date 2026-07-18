@@ -778,8 +778,7 @@
         "emotional_logical": 0.9
       },
       "functions": [
-        "reveal",
-        "bind"
+        "reveal"
       ],
       "narrationHints": "You assemble it whole — the complete proof, every step airtight, of a thing that is simply TRUE — and lay it before the world, and the world has no honest answer but to accept it.",
       "description": "The Syllogist capstone — a complete, irrefutable proof of a true thing, assembled and offered so soundly that no honest mind can deny it. The deepest gift of the logical kind, and the loneliest: to be right past all argument is to be right, often, alone.",
@@ -789,7 +788,12 @@
           "rank": 1,
           "name": "The Proof",
           "grants": "Assemble and offer a complete, irrefutable proof of a true thing.",
-          "cannot": "It proves only the true, it costs nearly all you have, and to be irrefutably right is a lonely country — the proof convinces, but conviction is not love."
+          "cannot": "It proves only the true, it costs nearly all you have, and to be irrefutably right is a lonely country — the proof convinces, but conviction is not love.",
+          "functions": [
+            "reveal"
+          ],
+          "harmRung": "none",
+          "gains": "broaden"
         }
       ],
       "gated": "learned",
@@ -931,7 +935,8 @@
         "death_life": 0.3
       },
       "functions": [
-        "empower"
+        "empower",
+        "restore"
       ],
       "narrationHints": "You sing the whole of it — every grief you have ever held, gathered into one lament so complete that those who hear it are, at the end, somehow lighter, having grieved fully at last the thing they never finished grieving.",
       "description": "The Threnodist capstone — the complete lament, all grief given full voice at once, that lets those who hear it finally finish a mourning they could not finish alone. The greatest and costliest gift of the singers: to be grieved completely is to be freed.",
@@ -941,7 +946,13 @@
           "rank": 1,
           "name": "The Last Lament",
           "grants": "Sing a complete lament that lets all who hear finish a grief they could not finish alone.",
-          "cannot": "It costs nearly all you have, it makes the singer feel every grief entire, and it does not undo loss — it only, mercifully, completes the mourning of it."
+          "cannot": "It costs nearly all you have, it makes the singer feel every grief entire, and it does not undo loss — it only, mercifully, completes the mourning of it.",
+          "functions": [
+            "empower",
+            "restore"
+          ],
+          "harmRung": "none",
+          "gains": "broaden"
         }
       ],
       "gated": "learned",

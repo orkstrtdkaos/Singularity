@@ -472,8 +472,8 @@
         "body_mind": -0.2
       },
       "functions": [
-        "strike",
-        "reveal"
+        "reveal",
+        "strike"
       ],
       "narrationHints": "One form, perfectly read and perfectly answered — the duel ends in a single exchange no one saw complete.",
       "description": "The duel capstone: read a single opponent so completely and strike so precisely that a formal fight ends in one decisive exchange. The Marcher's highest art — the fight already over when it begins.",
@@ -483,7 +483,13 @@
           "rank": 1,
           "name": "The Last Form",
           "grants": "End a formal duel in a single, undeniable exchange — you have read them fully and answer perfectly.",
-          "cannot": "Only against one committed opponent; a foe who refuses the form, or a chaos-fighter with no form to read, defeats it."
+          "cannot": "Only against one committed opponent; a foe who refuses the form, or a chaos-fighter with no form to read, defeats it.",
+          "functions": [
+            "strike",
+            "reveal"
+          ],
+          "harmRung": "damaging",
+          "gains": "broaden"
         }
       ],
       "powerSystem": "reach_violence_peace",

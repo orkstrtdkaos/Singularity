@@ -74,7 +74,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.42858389971496486,
+    "spectrumId": -0.4071547047292166,
     "violence_peace": 0.1030845625,
     "chaos_order": 0.22692151233983043,
     "mechanical_spiritual": 0.23279962203849028,
@@ -790,168 +790,152 @@
         "player": "Home first. She said yes to meeting your mother — take her at her word. The Disputed Zone isn't going anywhere in a week.",
         "summary": "Silas and Pell settle it on the south lane — home first, his mother, then the Disputed Zone. The road has a first step.",
         "narration": "You say it simply: home first. She said yes, and you're taking her at her word.\n\nPell is quiet for a moment — not reconsidering, just landing it. The frost-edged lane, the stars over the ridge, Huginn watching the northern dark with complete patience. Then she nods once, and something in her shoulders eases in a way you haven't seen since the forge, the kind of ease that belongs to a decision already made and finally said out loud. \"Alright,\" she says. \"Your mother first. The Zone doesn't move.\" She glances north past the roof-line, where the upper meadow dissolves into dark, and then back to you. \"How far?\"\n\nHuginn drops off the fence-post in one unhurried motion and lands on the peak of the low wall at the lane's end — closer to the road than the forge. It does not look back at either of you. It is already oriented."
+      },
+      {
+        "player": "I'm not quite sure - I didnt' exactly arrive in this valley as part of a plan... But I think we can take a waygate from a nearby settlement to the center... from there we can find out what gate to take to my homeland.  By the way - you sure your last name is Marsh, and not March?  You are quite the warrior woman - seems like maybe you have some Marcher heritage.. .is that your mother's side?",
+        "summary": "On the south lane under cold stars, Silas and Pell work out the waygate route toward his homeland, and the question of Marsh versus March opens a thread Pell has not followed before.",
+        "narration": "You tell her the honest truth about the route: you didn't exactly plan your way into the valley, and the way home is a matter of working it out from a waygate hub rather than walking a straight line. The nearest settlement with a gate should get you to a central junction, and from there someone will know which gate runs toward your homeland — or at least toward the country it borders. Pell listens with her head tilted slightly, the way she does when she's filing information rather than responding to it.\n\n\"We'll find it,\" she says, which is not reassurance so much as a statement of operational fact. She's crossed passes on partial information before. This is the same problem with a softer road surface.\n\nThen you ask about the name. Marsh, or March?\n\nShe goes quiet for a beat — not offended, not surprised, but genuinely pausing, the way she does before she says something she's only half thought through before. \"Marsh,\" she says. \"My mother's side. She was from the low valley, east of the fork.\" She turns to look at you, and something shifts slightly behind her eyes — a recognition of the question under the question. \"Though my father's side is harder to trace. He never talked about where he came from. Only what he'd learned.\" A pause. \"March.\" She says it flat, like she's hearing the shape of it for the first time. \"I've never... I don't know. I only ever heard Marsh.\" She looks north again, toward the upper meadow and the dark beyond it. \"My mother's name was Ran. She called the family name plain enough. Marsh.\"\n\nHuginn, from the wall at the lane's end, produces one deliberate sound — not quite a word, not quite a croak. Pell glances at the bird. \"Don't,\" she says, without heat. Huginn says nothing else and resumes watching the road."
       }
     ],
     "lastTurn": {
-      "narration": "You say it simply: home first. She said yes, and you're taking her at her word.\n\nPell is quiet for a moment — not reconsidering, just landing it. The frost-edged lane, the stars over the ridge, Huginn watching the northern dark with complete patience. Then she nods once, and something in her shoulders eases in a way you haven't seen since the forge, the kind of ease that belongs to a decision already made and finally said out loud. \"Alright,\" she says. \"Your mother first. The Zone doesn't move.\" She glances north past the roof-line, where the upper meadow dissolves into dark, and then back to you. \"How far?\"\n\nHuginn drops off the fence-post in one unhurried motion and lands on the peak of the low wall at the lane's end — closer to the road than the forge. It does not look back at either of you. It is already oriented.",
-      "sceneSummary": "Silas and Pell settle it on the south lane — home first, his mother, then the Disputed Zone. The road has a first step.",
+      "narration": "You tell her the honest truth about the route: you didn't exactly plan your way into the valley, and the way home is a matter of working it out from a waygate hub rather than walking a straight line. The nearest settlement with a gate should get you to a central junction, and from there someone will know which gate runs toward your homeland — or at least toward the country it borders. Pell listens with her head tilted slightly, the way she does when she's filing information rather than responding to it.\n\n\"We'll find it,\" she says, which is not reassurance so much as a statement of operational fact. She's crossed passes on partial information before. This is the same problem with a softer road surface.\n\nThen you ask about the name. Marsh, or March?\n\nShe goes quiet for a beat — not offended, not surprised, but genuinely pausing, the way she does before she says something she's only half thought through before. \"Marsh,\" she says. \"My mother's side. She was from the low valley, east of the fork.\" She turns to look at you, and something shifts slightly behind her eyes — a recognition of the question under the question. \"Though my father's side is harder to trace. He never talked about where he came from. Only what he'd learned.\" A pause. \"March.\" She says it flat, like she's hearing the shape of it for the first time. \"I've never... I don't know. I only ever heard Marsh.\" She looks north again, toward the upper meadow and the dark beyond it. \"My mother's name was Ran. She called the family name plain enough. Marsh.\"\n\nHuginn, from the wall at the lane's end, produces one deliberate sound — not quite a word, not quite a croak. Pell glances at the bird. \"Don't,\" she says, without heat. Huginn says nothing else and resumes watching the road.",
+      "sceneSummary": "On the south lane under cold stars, Silas and Pell work out the waygate route toward his homeland, and the question of Marsh versus March opens a thread Pell has not followed before.",
       "choices": [
         {
-          "label": "Name the town and how far — give Pell the shape of the journey so she knows what she's agreed to",
+          "label": "Ask about her mother — Ran Marsh, where she came from, what Pell knows of that side",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "comfort"
+            "comfort",
+            "romantic"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Ask what she wants to know about your mother before they meet — give her something to hold on to",
+          "label": "Ask about her father — what he'd learned, where he came from, the gap in the line",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Let it rest — she'll come to it. Ask instead what she wants to know about your own people before you arrive",
           "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
             "romantic",
-            "comfort"
+            "plan"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Turn in for the night — the road starts at first light, and you both need sleep",
+          "label": "Head inside and get a night's rest — the road starts at first light and questions keep better after sleep",
           "attribute": "practical",
           "subAttribute": "wits",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "sustain",
-            "travel"
+            "travel",
+            "sustain"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Walk the lane one more time before going in — the village at night, before the road takes you from it for a while",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "South lane outside the Fell Pell, Millbrook — cold spring night, frost on the lane-stone, stars clear above the ridge, forge-warmth entirely gone. Huginn has moved to the low wall at the lane's end, facing north toward the road.",
+        "setting": "South lane outside the Fell Pell, Millbrook — cold spring night, frost on the lane-stone, stars clear above the ridge, forge-warmth entirely gone. Huginn sits on the low wall at the lane's end, facing north toward the road.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Standing beside Silas, shoulders eased, looking north past the roof-line — the decision settled in her."
+            "state": "Standing beside Silas, looking north past the roof-line — the word March still sitting in her like a stone dropped in still water."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the low wall at the lane's end, facing north. Already oriented toward the road."
+            "state": "Perched on the low wall at the lane's end, watching the north road. Said its one sound and returned to patience."
           }
         ],
         "objects": [
-          "fence-post (now vacated)",
           "frost-edged lane-stone",
           "low wall at the lane's end",
           "stars over the ridge",
           "dark of the upper meadow past the roof-line"
         ],
         "threads": [
-          "Pell has said yes to meeting Silas's mother — the destination is named, the distance is not yet",
-          "The Disputed Zone remains the deeper work, deferred but not forgotten",
-          "Huginn is already facing the road"
+          "Pell has never traced her father's line — March vs. Marsh is now a live question she hasn't answered",
+          "Her mother was named Ran — the same name that appeared in Silas's middle-name reading",
+          "The waygate route is unsettled but agreed-upon in principle",
+          "Huginn reacted to the name March and declined to explain"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "pell",
-          "name": "Pell",
-          "note": "Received 'home first' without reconsideration — her shoulders eased on the exhale. Asked how far. The decision is settled.",
+          "name": "Pell Ran Marsh",
+          "note": "Heard 'March' for the first time as a live question — paused on it genuinely. Named her mother as Ran Marsh, from the low valley east of the fork. Father's line untraced — he never talked about where he came from. The question is open.",
           "learned": [
-            "Silas is taking her to his home town to meet his mother — she's agreed and means it"
+            "Her mother's name was Ran Marsh, from the low valley east of the fork",
+            "Her father's line is untraced — he spoke only of what he'd learned, not where he came from",
+            "The name March landed on her as something she's never heard applied to herself, but not something she could immediately refuse"
           ],
-          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "On the south lane in the cold, decision settled — road begins tomorrow toward Silas's home town."
-        },
-        {
-          "op": "update",
-          "npcId": "huginn",
-          "name": "Huginn",
-          "note": "Dropped to the low wall at the lane's end and oriented north — already reading the road.",
-          "status": "active",
-          "statusNote": "On the low wall at the lane's end, facing north toward the road."
+          "statusNote": "On the south lane — the road begins tomorrow toward Silas's hometown; the question of her father's line now quietly open."
         }
       ],
-      "factUpdates": [
+      "codexUpdates": [
         {
-          "op": "add",
-          "text": "Silas and Pell settled the road's first leg on the south lane on World-day 18 evening — home first, his mother, then the Disputed Zone. Pell agreed without qualification.",
-          "subjectId": "pell"
+          "topic": "pell",
+          "label": "Pell Ran Marsh",
+          "kind": "person",
+          "entityId": "pell",
+          "fact": "Pell's mother was named Ran Marsh, from the low valley east of the fork. Her father's line is untraced — he never spoke of where he came from, only what he had learned. The name 'March' landed on her as a genuine unknown: neither refused nor claimed.",
+          "links": [
+            "millbrook",
+            "the-water-crisis"
+          ]
+        },
+        {
+          "topic": "march-marsh-question",
+          "label": "March or Marsh — Pell's Father's Line",
+          "kind": "mystery",
+          "fact": "Pell knows only her mother's side: Ran Marsh, low valley east of the fork. Her father's heritage is a blank — he taught craft and named nothing of his origin. The question of whether the family name is Marsh or March, and what Marcher heritage might mean, is now open. Huginn reacted to the word March and said nothing further.",
+          "links": [
+            "pell",
+            "millbrook"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short exchange on the south lane — a minute or two of decision."
-      },
-      "codexUpdates": [],
-      "placeUpdates": [],
-      "encounterOps": [],
-      "sceneEnded": false
+        "why": "A short exchange on the south lane — a few minutes of talk before the night fully closes in."
+      }
     },
     "sceneState": {
-      "setting": "South lane outside the Fell Pell, Millbrook — cold spring night, frost on the lane-stone, stars clear above the ridge, forge-warmth entirely gone. Huginn has moved to the low wall at the lane's end, facing north toward the road.",
+      "setting": "South lane outside the Fell Pell, Millbrook — cold spring night, frost on the lane-stone, stars clear above the ridge, forge-warmth entirely gone. Huginn sits on the low wall at the lane's end, facing north toward the road.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Standing beside Silas, shoulders eased, looking north past the roof-line — the decision settled in her."
+          "state": "Standing beside Silas, looking north past the roof-line — the word March still sitting in her like a stone dropped in st"
         },
         {
           "name": "Huginn",
-          "state": "Perched on the low wall at the lane's end, facing north. Already oriented toward the road."
+          "state": "Perched on the low wall at the lane's end, watching the north road. Said its one sound and returned to patience."
         }
       ],
       "objects": [
-        "fence-post (now vacated)",
         "frost-edged lane-stone",
         "low wall at the lane's end",
         "stars over the ridge",
         "dark of the upper meadow past the roof-line"
       ],
       "threads": [
-        "Pell has said yes to meeting Silas's mother — the destination is named, the distance is not yet",
-        "The Disputed Zone remains the deeper work, deferred but not forgotten",
-        "Huginn is already facing the road"
+        "Pell has never traced her father's line — March vs. Marsh is now a live question she hasn't answered",
+        "Her mother was named Ran — the same name that appeared in Silas's middle-name reading",
+        "The waygate route is unsettled but agreed-upon in principle",
+        "Huginn reacted to the name March and declined to explain"
       ]
     }
   },
@@ -1373,7 +1357,7 @@
     },
     "pell": {
       "id": "pell",
-      "name": "Pell",
+      "name": "Pell Ran Marsh",
       "role": "Village blacksmith, Millbrook — traveling companion",
       "description": "A working blacksmith running a tidy, unsentimental shop — file in hand, back to the door until the work is done. Practical organizer; reacts to competence over charm.",
       "firstMet": {
@@ -1382,8 +1366,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d5] Tested 'Fell' aloud — full name, Silas Fell Weir — and named it kept, not worn. Hand flat at his neck now, past the reading, simply present.",
-        "[d5] Heard 'Fell' said back in Silas's own voice — received it as the sealing. Said the full name once to fix it, brought her forehead to his. The name is now a settled fact between the",
         "[d5] Received the sealing kiss — steady, present, answered it in kind. Named it 'right' and went straight to work. Cleared the forge for the gathering without ceremony.",
         "[d5] Received the name 'Fell Pell' with the corner of her mouth — the shop now carries both their names. Listening from the cooler bench.",
         "[d5] Off the cooler bench the moment the road was named — already routing the first day's march.",
@@ -1391,17 +1373,19 @@
         "[d5] Stepped outside with Silas after the gathering sealed — holding his hand in both of hers, looking north, saying 'tomorrow' with the tone of someone who has already decided.",
         "[d5] Named the upstream Disputed Zone as the real work — document is moving, Calvar is placed, Fendt is named; those aren't the thing anymore. The thing is upstream.",
         "[d5] Took all three options seriously — named the Rootkin as the thing under the thing for watershed knowledge, accepted the Cogitants as worth the road if the pattern needs reading first, and agreed to meet Silas's mother without hedge or elaboration. Said 'a honeymoon and the end of the world' flat…",
-        "[d5] Received 'home first' without reconsideration — her shoulders eased on the exhale. Asked how far. The decision is settled."
+        "[d5] Received 'home first' without reconsideration — her shoulders eased on the exhale. Asked how far. The decision is settled.",
+        "[d5] You know this person's name now: Pell Ran Marsh (was \"Pell\")",
+        "[d5] Heard 'March' for the first time as a live question — paused on it genuinely. Named her mother as Ran Marsh, from the low valley east of the fork. Father's line untraced — he never talked about where he came from. The question is open."
       ],
       "knownFacts": [
-        "Quiet's loosening is structural — three change-points: resurrection, spear-binding, soul-mark exchange; 'not a sickness, not a loss'",
-        "Silas's middle name is Fell — read from the Wright-Ashwarden grain, the shape of someone who crossed something high and open and didn't look back",
-        "Silas's middle name is Fell — she pressed it into the cooling iron of the moment and it took; she'll keep it like a word found in something old",
         "Silas Fell Weir — the middle name is now sealed, spoken once in full by both of them",
         "The document roll moving is not the same as the water crisis solved — her read is that upstream is the real next step",
         "Silas has a mother — and a home town he's named as a destination",
         "Pell accepted the meeting without qualification — she intends it",
-        "Silas is taking her to his home town to meet his mother — she's agreed and means it"
+        "Silas is taking her to his home town to meet his mother — she's agreed and means it",
+        "Her mother's name was Ran Marsh, from the low valley east of the fork",
+        "Her father's line is untraced — he spoke only of what he'd learned, not where he came from",
+        "The name March landed on her as something she's never heard applied to herself, but not something she could immediately refuse"
       ],
       "skillsObserved": [
         "structural reasoning from partial material evidence",
@@ -1412,7 +1396,7 @@
         "reading a person's deep grain through a shared rune-thread —"
       ],
       "status": "active",
-      "statusNote": "On the south lane in the cold, decision settled — road begins tomorrow toward Silas's home town.",
+      "statusNote": "On the south lane — the road begins tomorrow toward Silas's hometown; the question of her father's line now quietly open.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
@@ -1422,7 +1406,11 @@
       "gender": "woman",
       "pronouns": "she/her",
       "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Pell%2C%20woman%2C%20Village%20blacksmith%2C%20Millbrook%20%E2%80%94%20traveling%20companion%2C%20partner%20romantic%20to%20Silas%20Weir%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=49264&nologo=true",
-      "_portraitTier": "partner"
+      "_portraitTier": "partner",
+      "aliases": [
+        "Pell"
+      ],
+      "nameRevealed": true
     },
     "mara-wells": {
       "id": "mara-wells",
@@ -1616,8 +1604,8 @@
         "locationId": "millbrook",
         "day": 2
       },
-      "gender": "man",
-      "pronouns": "he/him"
+      "gender": "Woman",
+      "pronouns": "she/her"
     },
     "fendt": {
       "id": "fendt",
@@ -1853,60 +1841,6 @@
         "day": 5
       }
     },
-    "broad-opportunist": {
-      "id": "broad-opportunist",
-      "name": "Broad Opportunist",
-      "role": "Road opportunist, trade track south of the ford",
-      "description": "Broad-shouldered, tired under the aggression — carrying a bruised rib and a plan that has already run past its moment.",
-      "firstMet": {
-        "locationId": "millbrook",
-        "day": 5
-      },
-      "relationship": 0,
-      "history": [
-        "[d5] The Attended End read him: no death in frame, a sister to bury come summer, the plan already stalling. Silas's words have reached him."
-      ],
-      "knownFacts": [
-        "Has a bruised rib he's been ignoring",
-        "Will bury a sister come summer — not yet, but soon",
-        "His plan on this track has already run past its best moment and he knows it"
-      ],
-      "skillsObserved": [],
-      "status": "active",
-      "gender": "man",
-      "pronouns": "he/him",
-      "statusNote": "On the trade track, aggression stalled by Silas's read — waiting.",
-      "lastSeen": {
-        "locationId": "millbrook",
-        "day": 5
-      }
-    },
-    "lean-opportunist": {
-      "id": "lean-opportunist",
-      "name": "Lean Opportunist",
-      "role": "Road opportunist, trade track south of the ford",
-      "description": "Wiry, cautious, crook reversed — something ending in him that isn't his life; a version of himself he's been trying to keep alive past its term.",
-      "firstMet": {
-        "locationId": "millbrook",
-        "day": 5
-      },
-      "relationship": 0,
-      "history": [
-        "[d5] The Attended End read him: something ending that isn't his life. Holding at reach distance, waiting for a cue from the broad man."
-      ],
-      "knownFacts": [
-        "Something is ending in him — not his life, but a version of himself he's been trying to keep alive past its natural term"
-      ],
-      "skillsObserved": [],
-      "status": "active",
-      "gender": "man",
-      "pronouns": "he/him",
-      "statusNote": "On the trade track, crook raised — holding, watching the broad man for a lead.",
-      "lastSeen": {
-        "locationId": "millbrook",
-        "day": 5
-      }
-    },
     "bren-thalle": {
       "id": "bren-thalle",
       "name": "Bren Thalle",
@@ -1919,14 +1853,18 @@
       "relationship": 1,
       "history": [
         "[d5] Named himself under Huginn's gaze — Bren Thalle, lower Wick settlement, south-slope, three miles past the ford. Dry two seasons. Named the settlement's situation plainly as explana",
-        "[d5] Received the hatchet back — handle first, no catch. Tucked it at his belt and started north toward the ford without being asked twice."
+        "[d5] Received the hatchet back — handle first, no catch. Tucked it at his belt and started north toward the ford without being asked twice.",
+        "[d5] The Attended End read him: no death in frame, a sister to bury come summer, the plan already stalling. Silas's words have reached him."
       ],
       "knownFacts": [
         "From lower Wick settlement, south-slope, three miles past the ford",
         "Miner's settlement, two dry seasons running",
         "This was his first time on the road like this — self-reported, unprompted",
         "Silas returned the hatchet as a tool, not a threat — intent named plainly",
-        "Directed to Mara Wells in Millbrook for honest work"
+        "Directed to Mara Wells in Millbrook for honest work",
+        "Has a bruised rib he's been ignoring",
+        "Will bury a sister come summer — not yet, but soon",
+        "His plan on this track has already run past its best moment and he knows it"
       ],
       "skillsObserved": [],
       "status": "active",
@@ -1936,7 +1874,10 @@
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
-      }
+      },
+      "aliases": [
+        "Broad Opportunist"
+      ]
     },
     "curis": {
       "id": "curis",
@@ -1950,11 +1891,13 @@
       "relationship": 0,
       "history": [
         "[d5] Named himself under Huginn's gaze — Curis, same settlement as Bren. Added unprompted that this was the first time. Huginn's shift on the branch was what finally settled him.",
-        "[d5] Gathered his provisions and followed Bren north without a word."
+        "[d5] Gathered his provisions and followed Bren north without a word.",
+        "[d5] The Attended End read him: something ending that isn't his life. Holding at reach distance, waiting for a cue from the broad man."
       ],
       "knownFacts": [
         "From the lower Wick settlement, grew up there",
-        "Claimed this was his first time doing this — offered without being asked"
+        "Claimed this was his first time doing this — offered without being asked",
+        "Something is ending in him — not his life, but a version of himself he's been trying to keep alive past its natural term"
       ],
       "skillsObserved": [],
       "status": "active",
@@ -1964,7 +1907,10 @@
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
-      }
+      },
+      "aliases": [
+        "Lean Opportunist"
+      ]
     }
   },
   "placeMemory": {
@@ -2306,7 +2252,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-18T17:23:53.409Z",
+    "lastSharedReadAt": "2026-07-18T17:51:13.572Z",
     "lastTickWorldDay": 18,
     "lastCanonWorldDay": 18
   },
@@ -2525,7 +2471,6 @@
         "label": "Pell",
         "kind": "person",
         "facts": [
-          "[d2] Improvises under field conditions — has run pressurized pre-Transition systems with components missing and cobbled the rest. Does not need the original instrument; needs to understand why it was there",
           "[d2] A man known to Leth, based in the Edge District — has run pressurized pre-Transition systems and improvises at a high level. Does not leave the Edge District easily. Moving him is the primary obstacle",
           "[d3] Pell's father was a filtration engineer at the Radiant council archive before the Transition — he had a distinctive hand forming threes (loop closing before the downstroke, leaning left, an old survey",
           "[d3] Pell's father authored the seventh-band monitoring specification in the original Radiant filtration array — his margin notation confirmed from Fendt's seven-year-old notebook copy. The calibration fil",
@@ -2548,27 +2493,28 @@
           "[d4] The consummation — World-day 17 midday, the bath trough, the habit entirely gone. She pays attention in return the way ironsense reads worked metal: finding the grain, the flaw-lines, the places where",
           "[d4] Confirmed the Weir mark accepted — 'in me the way ironsense is, I don't look for it, it's just there when I reach.' Named happiness as quieter than she expected but real. Asked the same question back.",
           "[d4] Calvar cannot confirm Pell's father was marked by Grael — the board was clean when he left. But Calvar checked because he already suspected. A man who filed the seventh-band specification and understo",
-          "[d5] Pell named Silas's middle name — Fell — from the grain of the spear-binding: 'the shape of someone who crossed something high and open and didn't look back.' Ran is her own middle name; Silas Fell Wei"
+          "[d5] Pell named Silas's middle name — Fell — from the grain of the spear-binding: 'the shape of someone who crossed something high and open and didn't look back.' Ran is her own middle name; Silas Fell Wei",
+          "[d5] Pell's mother was named Ran Marsh, from the low valley east of the fork. Her father's line is untraced — he never spoke of where he came from, only what he had learned. The name 'March' landed on her as a genuine unknown: neither refused nor claimed."
         ],
         "links": [
-          "radiant-plateau-edge",
-          "huginn",
           "the-attended-end",
           "the-edge-district-ledger",
           "the-low-lamp-inn",
           "overseer-grael",
           "calvar",
-          "deathsense"
+          "deathsense",
+          "millbrook",
+          "the-water-crisis"
         ],
         "aliases": [
-          "The Death-Bound Spear",
           "Deathbound Runic Spear",
           "The Unnamed Engineer",
           "The Unnamed Engineer (Edge District)",
           "Memory — the Spear's Held Thread",
           "Memory's Thread — Threshold vs. Conduit",
           "Pell's Father — Departure Shape",
-          "Quiet — Structural Read"
+          "Quiet — Structural Read",
+          "Pell Ran Marsh"
         ],
         "createdDay": 1,
         "entityId": "pell",
@@ -3632,25 +3578,40 @@
         "aliases": [],
         "createdDay": 5,
         "updatedDay": 5
+      },
+      "march-marsh-question": {
+        "id": "march-marsh-question",
+        "label": "March or Marsh — Pell's Father's Line",
+        "kind": "mystery",
+        "facts": [
+          "[d5] Pell knows only her mother's side: Ran Marsh, low valley east of the fork. Her father's heritage is a blank — he taught craft and named nothing of his origin. The question of whether the family name is Marsh or March, and what Marcher heritage might mean, is now open. Huginn reacted to the word…"
+        ],
+        "links": [
+          "pell",
+          "millbrook"
+        ],
+        "aliases": [],
+        "createdDay": 5,
+        "updatedDay": 5
       }
     }
   },
   "tendencies": {
-    "strategic": 17.23085787465112,
-    "cerebral": 8.81352194183288,
-    "social": 14.206809319276088,
-    "generous": 3.068736170768527,
-    "cautious": 7.317694875550242,
-    "physical": 1.5032397574360254,
-    "risky": 0.3323076213600258,
-    "ruthless": 2.17704757072324,
-    "carousing": 0.03335512153170004,
-    "amorous": 10.90159723866527,
-    "patient": 2.6206426721811393,
-    "stealth": 0.8438292003372312,
-    "devotion": 0.46026369820486174,
-    "craft": 0.4333023229807938,
-    "leadership": 0.8375915934997556
+    "strategic": 17.800086427784844,
+    "cerebral": 8.593183893287058,
+    "social": 14.851639086294185,
+    "generous": 2.9920177664993135,
+    "cautious": 7.134752503661486,
+    "physical": 1.4656587635001248,
+    "risky": 0.32399993082602513,
+    "ruthless": 2.122621381455159,
+    "carousing": 0.032521243493407535,
+    "amorous": 10.629057307698638,
+    "patient": 2.5551266053766106,
+    "stealth": 0.8227334703288004,
+    "devotion": 0.4487571057497402,
+    "craft": 0.42246976490627397,
+    "leadership": 0.8166518036622618
   },
   "aptitudes": [
     "strategist",
@@ -3660,7 +3621,7 @@
     "stalwart",
     "charmer"
   ],
-  "actionCount": 494,
+  "actionCount": 495,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3687,14 +3648,6 @@
       "caption": "Mara Wells — devoted",
       "worldDay": 18,
       "at": "2026-07-18T15:30:08.163Z"
-    },
-    {
-      "kind": "portrait",
-      "prompt": "a person, character portrait, named Calvar, man, Pre-Transition filtration engineer, Edge District",
-      "url": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Calvar%2C%20man%2C%20Pre-Transition%20filtration%20engineer%2C%20Edge%20District%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=84827&nologo=true",
-      "caption": "Calvar — devoted",
-      "worldDay": 18,
-      "at": "2026-07-18T03:23:51.764Z"
     },
     {
       "kind": "portrait",
@@ -3914,8 +3867,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784396613098,
-  "rev": 718,
+  "updatedAt": 1784398233334,
+  "rev": 729,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4546,8 +4499,8 @@
           "entityId": "the-low-lamp-inn",
           "type": "location",
           "birthWeight": 11,
-          "engagementScore": 4,
-          "tier": "established",
+          "engagementScore": 8,
+          "tier": "nominated",
           "rating": "R+",
           "provenance": {
             "playerKey": "player-s9z9u1",
@@ -4570,13 +4523,17 @@
             {
               "kind": "fact",
               "day": 4
+            },
+            {
+              "kind": "keep",
+              "day": 5
             }
           ],
           "createdDay": 3,
           "repaired": false,
           "stubbed": false,
           "romanceEligible": true,
-          "lastAttentionDay": 4
+          "lastAttentionDay": 5
         },
         "image": "https://image.pollinations.ai/prompt/The%20Low%20Lamp%20Inn%3A%20Tucked%20into%20the%20lower%20tier%20of%20the%20Edge%20District%20where%20the%20light-guide%20streets%20run%20closest%20to%20the%20valley%20floor%2C%20the%20Low%20Lamp%20sits%20over%20a%20junction%20conduit%20%E2%80%94%20the%20glow%20rises%20through%20pale%20stone%20floors%20and%20fills%20the%20common%20room%20from%20below%2C%20warm%20and%20directionless%20as%20afternoon%20through%20cloud.%20The%20building%20is%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=64375&nologo=true"
       }
@@ -4941,12 +4898,43 @@
       "why": "Tweaks",
       "worldDay": 13,
       "at": "2026-07-13T12:11:17.802Z"
+    },
+    {
+      "kind": "gender",
+      "id": "sorel",
+      "from": {
+        "gender": "man",
+        "pronouns": "he/him"
+      },
+      "to": {
+        "gender": "Woman",
+        "pronouns": "she/her"
+      },
+      "why": "repaired via the Repair panel",
+      "worldDay": 18,
+      "at": "2026-07-18T17:46:59.134Z"
+    },
+    {
+      "kind": "merge",
+      "id": "broad-opportunist",
+      "into": "bren-thalle",
+      "why": "player: same person (Broad Opportunist → Bren Thalle)",
+      "worldDay": 18,
+      "at": "2026-07-18T18:07:01.757Z"
+    },
+    {
+      "kind": "merge",
+      "id": "lean-opportunist",
+      "into": "curis",
+      "why": "player: same person (Lean Opportunist → Curis)",
+      "worldDay": 18,
+      "at": "2026-07-18T18:07:10.210Z"
     }
   ],
   "syncedAt": 1784392733860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 313
+    "valley": 314
   },
   "foreclosed": [
     "rootkin",
@@ -5001,10 +4989,12 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T17:43:33.097Z",
+      "lastAt": "2026-07-18T18:10:33.330Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 38
+      "beats": 39,
+      "_recapError": null,
+      "recap": "Day eighteen, and Silas Weir moved like a man who'd finally stopped fighting the shape of what he was. On the road he disarmed three opportunists without breaking bones, read the grief sitting behind the broad man's eyes, named it plainly, pressed provisions into their hands, and sent them toward something worth doing — mercy given as instruction, not sentiment. Then he brought the hard people together: Dara, Aldric, Fendt, Mara, Calvar, all of them in the heat of Pell's forge with no exits easy and no pretense left, and in that single evening he turned a valley's quiet panic into four working threads — engineering, logistics, supply, accounts — each with a named lead and a direction to face. The crisis didn't end, but it stopped being formless, and that was his doing."
     }
   ],
   "company": [

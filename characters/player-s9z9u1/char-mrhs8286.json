@@ -863,14 +863,19 @@
         "player": "Introduce yourself to Orvil and ask about entering a bout — who is here, what the shape of a match looks like this morning",
         "summary": "Orvil gives Silas the shape of a morning bout and names a potential opponent — a threshold-walker in a grey coat, waiting at the far arc.",
         "narration": "Orvil sees you coming before you reach him. His eyes drop to Memory at your back, peace-bound as he required, then lift to your face — and then to Huginn, one last time, in the way of a man who has already filed the bird and moved on.\n\nYou give him your name. Silas Weir. Ashwarden craft, one spear, one companion that does not fight.\n\nOrvil nods once. 'Weir,' he says, the way a man repeats a name to fix it. 'Morning bouts are short — three exchanges, yield or the sand says it for you. You declare your crafts to your opponent before the bout, same as you declared to me at the gate. No ambush, no surprise.' He glances at the ring, where Pell is still walking the near arc slowly, reading the floor. 'The gallery watches but does not interfere. I call it if a yield is missed.'\n\nHe tilts his chin toward a cluster of three figures near the far arc — two young men and a woman, all standing loose, all watching Pell with the patient attention of people who have been waiting for the floor to clear. 'Those three came in together,' Orvil says. 'The one in the grey coat has been asking after a bout since before the first light. He declared threshold-walking — something close to yours, by the sound of it. The other two are his seconds.' He looks back at you. 'You want me to put it to him, I will. Or you wait for your woman to finish her read and decide.'"
+      },
+      {
+        "player": "Ask Orvil to put it to the grey-coat — you're ready",
+        "summary": "Silas calls for the bout — Orvil crosses the sand, the grey-coat accepts, and the two opponents stand at the center-line for the craft declaration.",
+        "narration": "You nod to Orvil and tell him plainly: put it to the grey-coat. You are ready.\n\nOrvil does not waste words on it. He tucks his baton under his arm, crosses the sand in the easy walk of a man who has done this ten thousand times, and stops at the far arc. You cannot hear what he says from here, but the grey-coat turns, looks across the ring at you, and then says something short to one of the two seconds beside him. The seconds step back. The grey-coat hands over a water flask without looking at it — already done with that, eyes on the ring.\n\nPell has stopped walking. She is standing at the near arc, one thumb still at her belt, and she watches the grey-coat cross to the center-line without hurry. She reads him the way she reads everything — from the outside in, without rushing the conclusion.\n\nOrvil comes back and plants himself between you, two paces left of the center-line. 'Bout between Silas Weir, Ashwarden craft, and' — he glances at the grey-coat — 'Tane Solr, threshold-walking.' He says it the way he says everything. Like a man reading from a page that is already written. Then he says, 'Declare your crafts to each other. Then we begin.'"
       }
     ],
     "lastTurn": {
-      "narration": "Orvil sees you coming before you reach him. His eyes drop to Memory at your back, peace-bound as he required, then lift to your face — and then to Huginn, one last time, in the way of a man who has already filed the bird and moved on.\n\nYou give him your name. Silas Weir. Ashwarden craft, one spear, one companion that does not fight.\n\nOrvil nods once. 'Weir,' he says, the way a man repeats a name to fix it. 'Morning bouts are short — three exchanges, yield or the sand says it for you. You declare your crafts to your opponent before the bout, same as you declared to me at the gate. No ambush, no surprise.' He glances at the ring, where Pell is still walking the near arc slowly, reading the floor. 'The gallery watches but does not interfere. I call it if a yield is missed.'\n\nHe tilts his chin toward a cluster of three figures near the far arc — two young men and a woman, all standing loose, all watching Pell with the patient attention of people who have been waiting for the floor to clear. 'Those three came in together,' Orvil says. 'The one in the grey coat has been asking after a bout since before the first light. He declared threshold-walking — something close to yours, by the sound of it. The other two are his seconds.' He looks back at you. 'You want me to put it to him, I will. Or you wait for your woman to finish her read and decide.'",
-      "sceneSummary": "Orvil gives Silas the shape of a morning bout and names a potential opponent — a threshold-walker in a grey coat, waiting at the far arc.",
+      "narration": "You nod to Orvil and tell him plainly: put it to the grey-coat. You are ready.\n\nOrvil does not waste words on it. He tucks his baton under his arm, crosses the sand in the easy walk of a man who has done this ten thousand times, and stops at the far arc. You cannot hear what he says from here, but the grey-coat turns, looks across the ring at you, and then says something short to one of the two seconds beside him. The seconds step back. The grey-coat hands over a water flask without looking at it — already done with that, eyes on the ring.\n\nPell has stopped walking. She is standing at the near arc, one thumb still at her belt, and she watches the grey-coat cross to the center-line without hurry. She reads him the way she reads everything — from the outside in, without rushing the conclusion.\n\nOrvil comes back and plants himself between you, two paces left of the center-line. 'Bout between Silas Weir, Ashwarden craft, and' — he glances at the grey-coat — 'Tane Solr, threshold-walking.' He says it the way he says everything. Like a man reading from a page that is already written. Then he says, 'Declare your crafts to each other. Then we begin.'",
+      "sceneSummary": "Silas calls for the bout — Orvil crosses the sand, the grey-coat accepts, and the two opponents stand at the center-line for the craft declaration.",
       "choices": [
         {
-          "label": "Ask Orvil to put it to the grey-coat — you're ready",
+          "label": "Declare your crafts honestly — Ashwarden: deathsense, palework, order-sense",
           "attribute": "social",
           "subAttribute": "presence",
           "axes": {},
@@ -883,35 +888,23 @@
           "trivial": true
         },
         {
-          "label": "Wait for Pell to finish her read — let her see the floor before you commit to anything",
+          "label": "Declare selectively — name the reading crafts but not palework's offensive reach",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 15,
+          "intentTags": [
+            "deceive",
+            "feint"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
+        },
+        {
+          "label": "Ask Tane what he brings first — let him declare before you",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Walk the far arc yourself and get a closer look at the grey-coat before deciding",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "scout"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Ask Orvil what he knows of the grey-coat's craft — what threshold-walking looks like in the ring",
-          "attribute": "mental",
-          "subAttribute": "reason",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
@@ -920,37 +913,44 @@
           "abilityId": null,
           "energyCost": null,
           "trivial": true
+        },
+        {
+          "label": "Declare honestly, then look at him with deathsense before the first exchange — read what is already declining in him",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "scout"
+          ],
+          "abilityId": "deathsense",
+          "energyCost": 2,
+          "trivial": false
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "Inside the Hub Coliseum at early dawn — packed sand underfoot with the marks of the morning's early bouts, stone gallery above with a dozen watchers, low-angle light through the open top.",
+        "setting": "Inside the Hub Coliseum at early dawn — packed sand underfoot, stone gallery above with a dozen watchers, low-angle light through the open top. Silas and Tane Solr stand near the center-line with Orvil between them.",
         "npcsPresent": [
           {
             "name": "Orvil",
-            "state": "Standing at the gate, baton tucked, giving Silas the shape of a morning bout — chin tilted toward the far arc"
+            "state": "Standing at the center-line between the two fighters, baton under his arm, waiting for the craft declarations."
+          },
+          {
+            "name": "Tane Solr",
+            "state": "Standing at ease at the center-line, eyes on Silas — waiting, unhurried, two seconds stepped back at the far arc."
           },
           {
             "name": "Pell Marsh",
-            "state": "Walking the near arc slowly, reading the floor — one hand loose, one thumb at her belt, not yet done"
+            "state": "Stopped at the near arc, thumb at her belt, reading Tane from the outside in."
           },
           {
             "name": "Siol",
-            "state": "Just inside the gate, watching the ring — quiet, easy familiarity"
+            "state": "Just inside the gate, watching the ring — quiet, easy."
           },
           {
             "name": "Huginn",
-            "state": "On Silas's shoulder, eye tracking the gallery and now the far arc figures"
-          },
-          {
-            "name": "The grey-coat",
-            "state": "Standing loose at the far arc with two seconds — watching Pell, waiting for the floor"
+            "state": "On Silas's shoulder, eye tracking Tane Solr at the center-line."
           }
         ],
         "objects": [
@@ -958,84 +958,72 @@
           "Stone gallery benches — a dozen or so watchers already seated",
           "Memory — peace-bound at Silas's back",
           "Orvil's short baton, tucked under his arm",
-          "Three figures at the far arc — grey-coat and two seconds"
+          "Tane's two seconds — stepped back to the far arc, water flask in hand"
         ],
         "threads": [
-          "Pell is still walking the floor — her read of the space still forming",
-          "The grey-coat at the far arc has declared threshold-walking and is waiting for a bout",
-          "Whether Silas will enter a bout, and whether to approach before or after Pell finishes",
-          "Huginn visible from the gallery — its effect on watchers noted"
+          "Craft declarations must be exchanged before the bout begins",
+          "Pell is reading Tane from the near arc — her read not yet spoken",
+          "Huginn is watching Tane — its stillness is a kind of attention"
         ]
       },
       "npcUpdates": [
         {
+          "op": "meet",
+          "npcId": "tane-solr",
+          "name": "Tane Solr",
+          "role": "Bout opponent, threshold-walker — was waiting at the far arc with two seconds before Silas arrived",
+          "gender": "man",
+          "pronouns": "he/him",
+          "description": "A lean man in a grey coat, unhurried in his movements — handed off his water flask without looking at it, eyes already on the ring. The quality of someone who has been here before and is comfortable waiting.",
+          "note": "Accepted the bout through Orvil without ceremony — crossed to the center-line and is waiting for declarations.",
+          "learned": [
+            "Threshold-walking declared as his craft at the gate",
+            "Two seconds present, stepped back for the bout"
+          ],
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the Coliseum center-line, waiting for craft declarations before the morning bout."
+        },
+        {
           "op": "update",
           "npcId": "orvil",
           "name": "Orvil",
-          "role": "Coliseum referee, morning rotation",
-          "gender": "man",
-          "pronouns": "he/him",
-          "note": "Gave Silas the shape of a morning bout — three exchanges, yield or the sand calls it, crafts declared to opponent. Named the grey-coat at the far arc as a potential match.",
-          "learned": [
-            "Morning bouts run three exchanges — yield or the sand calls it",
-            "A threshold-walker in a grey coat has been waiting for a bout since before first light, with two seconds"
-          ],
-          "skillsObserved": [
-            "reading a situation and offering a clear path without editorializing"
-          ],
-          "relationshipDelta": 0,
+          "note": "Crossed the sand and brought Tane Solr's acceptance back without fuss — now standing at the center-line between the two fighters, waiting for declarations.",
           "status": "active",
-          "statusNote": "At the Coliseum gate, morning rotation — baton tucked, watching the floor."
+          "statusNote": "At the Coliseum center-line, running the bout — waiting for craft declarations."
         }
       ],
       "generateRequest": [
         {
           "type": "npc",
-          "hint": "a threshold-walker in a grey coat — young, patient, waiting for a bout at the Coliseum far arc, with two companions as seconds; craft in the neighbourhood of passage or liminal movement",
-          "why": "Orvil named them as Silas's potential opponent this morning — they need a stable identity and craft before the bout can be offered"
+          "hint": "Tane Solr — a lean threshold-walker in a grey coat, unhurried, experienced on the sand, waiting with two seconds at the Coliseum far arc before dawn",
+          "why": "He is now Silas's named bout opponent at the center-line and will need a stable identity, personality, and history for the exchange to have weight."
         }
-      ],
-      "factUpdates": [],
-      "placeUpdates": [],
-      "codexUpdates": [
-        {
-          "topic": "hub-coliseum",
-          "label": "The Hub Coliseum",
-          "kind": "place",
-          "fact": "Morning bouts run three exchanges — yield or the sand calls it. Crafts declared to the opponent before the bout begins, no ambush. Orvil calls a missed yield. A threshold-walker in a grey coat was waiting for a bout at the far arc on World-day 18 dawn.",
-          "links": [
-            "orvil",
-            "the-edge-district-ledger"
-          ]
-        }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A quick exchange with Orvil at the gate"
-      }
+      ]
     },
     "sceneState": {
-      "setting": "Inside the Hub Coliseum at early dawn — packed sand underfoot with the marks of the morning's early bouts, stone gallery above with a dozen watchers, low-angle light through the open top.",
+      "setting": "Inside the Hub Coliseum at early dawn — packed sand underfoot, stone gallery above with a dozen watchers, low-angle light through the open top. Silas and Tane Solr stand near the center-line with Orvil between them.",
       "npcsPresent": [
         {
           "name": "Orvil",
-          "state": "Standing at the gate, baton tucked, giving Silas the shape of a morning bout — chin tilted toward the far arc"
+          "state": "Standing at the center-line between the two fighters, baton under his arm, waiting for the craft declarations."
+        },
+        {
+          "name": "Tane Solr",
+          "state": "Standing at ease at the center-line, eyes on Silas — waiting, unhurried, two seconds stepped back at the far arc."
         },
         {
           "name": "Pell Marsh",
-          "state": "Walking the near arc slowly, reading the floor — one hand loose, one thumb at her belt, not yet done"
+          "state": "Stopped at the near arc, thumb at her belt, reading Tane from the outside in."
         },
         {
           "name": "Siol",
-          "state": "Just inside the gate, watching the ring — quiet, easy familiarity"
+          "state": "Just inside the gate, watching the ring — quiet, easy."
         },
         {
           "name": "Huginn",
-          "state": "On Silas's shoulder, eye tracking the gallery and now the far arc figures"
-        },
-        {
-          "name": "The grey-coat",
-          "state": "Standing loose at the far arc with two seconds — watching Pell, waiting for the floor"
+          "state": "On Silas's shoulder, eye tracking Tane Solr at the center-line."
         }
       ],
       "objects": [
@@ -1043,20 +1031,19 @@
         "Stone gallery benches — a dozen or so watchers already seated",
         "Memory — peace-bound at Silas's back",
         "Orvil's short baton, tucked under his arm",
-        "Three figures at the far arc — grey-coat and two seconds"
+        "Tane's two seconds — stepped back to the far arc, water flask in hand"
       ],
       "threads": [
-        "Pell is still walking the floor — her read of the space still forming",
-        "The grey-coat at the far arc has declared threshold-walking and is waiting for a bout",
-        "Whether Silas will enter a bout, and whether to approach before or after Pell finishes",
-        "Huginn visible from the gallery — its effect on watchers noted"
+        "Craft declarations must be exchanged before the bout begins",
+        "Pell is reading Tane from the near arc — her read not yet spoken",
+        "Huginn is watching Tane — its stillness is a kind of attention"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 6,
-    "hour": 7,
+    "hour": 8,
     "realAnchor": null
   },
   "companions": [
@@ -2085,7 +2072,8 @@
       "relationship": 0,
       "history": [
         "[d6] Logged the party's crafts at the gate without ceremony — noted Memory and required it peace-bound. Not unfriendly; just running the floor.",
-        "[d6] Gave Silas the shape of a morning bout — three exchanges, yield or the sand calls it, crafts declared to opponent. Named the grey-coat at the far arc as a potential match."
+        "[d6] Gave Silas the shape of a morning bout — three exchanges, yield or the sand calls it, crafts declared to opponent. Named the grey-coat at the far arc as a potential match.",
+        "[d6] Crossed the sand and brought Tane Solr's acceptance back without fuss — now standing at the center-line between the two fighters, waiting for declarations."
       ],
       "knownFacts": [
         "Requires craft declaration at entry",
@@ -2101,7 +2089,34 @@
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "At the Coliseum gate, morning rotation — baton tucked, watching the floor.",
+      "statusNote": "At the Coliseum center-line, running the bout — waiting for craft declarations.",
+      "lastSeen": {
+        "locationId": "gen-waygate",
+        "day": 6
+      }
+    },
+    "tane-solr": {
+      "id": "tane-solr",
+      "name": "Tane Solr",
+      "role": "Bout opponent, threshold-walker — was waiting at the far arc with two seconds before Silas arrived",
+      "description": "A lean man in a grey coat, unhurried in his movements — handed off his water flask without looking at it, eyes already on the ring. The quality of someone who has been here before and is comfortable waiting.",
+      "firstMet": {
+        "locationId": "gen-waygate",
+        "day": 6
+      },
+      "relationship": 0,
+      "history": [
+        "[d6] Accepted the bout through Orvil without ceremony — crossed to the center-line and is waiting for declarations."
+      ],
+      "knownFacts": [
+        "Threshold-walking declared as his craft at the gate",
+        "Two seconds present, stepped back for the bout"
+      ],
+      "skillsObserved": [],
+      "status": "active",
+      "gender": "man",
+      "pronouns": "he/him",
+      "statusNote": "At the Coliseum center-line, waiting for craft declarations before the morning bout.",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 6
@@ -3889,21 +3904,21 @@
     }
   },
   "tendencies": {
-    "strategic": 15.881036062824252,
-    "cerebral": 8.154114288299123,
-    "social": 16.270014525309545,
-    "generous": 2.382799057868293,
-    "cautious": 7.667341727362328,
-    "physical": 1.1693126027056788,
-    "risky": 0.11474510326250553,
-    "ruthless": 0.7517298197605371,
-    "carousing": 0.011517451356740817,
-    "amorous": 7.454142269011984,
-    "patient": 1.8617946479633214,
-    "stealth": 0.29137239865982917,
-    "devotion": 0.6511140410734917,
-    "craft": 2.3016420414261267,
-    "leadership": 0.2892185665035044
+    "strategic": 15.484010161253646,
+    "cerebral": 7.950261431091644,
+    "social": 16.863264162176804,
+    "generous": 2.323229081421586,
+    "cautious": 7.47565818417827,
+    "physical": 1.1400797876380369,
+    "risky": 0.11187647568094289,
+    "ruthless": 0.7329365742665237,
+    "carousing": 0.011229515072822296,
+    "amorous": 7.267788712286684,
+    "patient": 1.8152497817642383,
+    "stealth": 0.2840880886933334,
+    "devotion": 0.6348361900466544,
+    "craft": 2.2441009903904736,
+    "leadership": 0.2819881023409168
   },
   "aptitudes": [
     "strategist",
@@ -3911,10 +3926,18 @@
     "tactician",
     "charmer"
   ],
-  "actionCount": 536,
+  "actionCount": 537,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
+    {
+      "kind": "npc",
+      "prompt": "Maren Voss",
+      "url": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Maren%20Voss%2C%20Liminal%20fighter%20who%20crosses%20thresholds%20to%20win%20%E2%80%94%20patient%20at%20every%20gate%2C%20lethal%20the%20moment%20one%20opens%2C%20Speaks%20the%20way%20someone%20waits%20%E2%80%94%20fully%2C%20without%20fidgeting.%20Grey%20coat%2C%20collar%20up%20against%20the%20early-spri%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=5247&nologo=true",
+      "caption": "Maren Voss",
+      "worldDay": 18,
+      "at": "2026-07-18T21:58:01.712Z"
+    },
     {
       "kind": "npc",
       "prompt": "Siol — Elven traveler at the Hub plaza, tall, pale coat, bir",
@@ -4165,8 +4188,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784411856326,
-  "rev": 787,
+  "updatedAt": 1784412124171,
+  "rev": 789,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4781,6 +4804,102 @@
           "lastAttentionDay": 6
         },
         "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Siol%20%E2%80%94%20Elven%20traveler%20at%20the%20Hub%20plaza%2C%20tall%2C%20pale%20coat%2C%20bir%2C%20someone%20of%20Waygate%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=4185&nologo=true"
+      },
+      "maren-voss": {
+        "schemaVersion": 1,
+        "id": "maren-voss",
+        "name": "Maren Voss",
+        "role": "Liminal fighter who crosses thresholds to win — patient at every gate, lethal the moment one opens",
+        "homeLocation": "waygate_valley",
+        "communityId": "waygate.transient",
+        "personality": {
+          "warmth": 0.4,
+          "trust": 0.3,
+          "candor": 0.5,
+          "patience": 0.9
+        },
+        "spectrum": {
+          "stillness_motion": 0.6,
+          "concrete_abstract": 0.4,
+          "falsehood_truth": 0.1,
+          "space_time": 0.7
+        },
+        "voiceHints": "Speaks the way someone waits — fully, without fidgeting. Grey coat, collar up against the early-spring cold she doesn't seem to feel. Answers questions a beat after you expect, not because she's slow but because she's already past your question and choosing which part of the answer is worth giving. Never names her companions first; lets them step through on their own terms.",
+        "knowledge": [
+          "The Waygate's threshold-logic — which passages open early, which resist, and what the valley asks before it lets you through",
+          "How to read a bout before it starts: the other fighter's weight on their threshold moment, when they commit, the half-step that gives everything away",
+          "That the Coliseum far arc rewards those who make their opponent cross into unfavourable ground — and she has walked every arc of it in her mind"
+        ],
+        "companions": [
+          {
+            "id": "second_aldric",
+            "name": "Aldric",
+            "role": "First second — manages her between bouts, reads the crowd for information she won't bother with",
+            "note": "Older, steady, doesn't smile much; has been at this long enough that his calm is the real kind"
+          },
+          {
+            "id": "second_pell",
+            "name": "Pell",
+            "role": "Second second — young enough to be nervous, sharp enough to be useful; scouts ground and brings her water without being asked",
+            "note": "Talks when Aldric doesn't, which means the two of them together cover everything"
+          }
+        ],
+        "abilities": [
+          {
+            "name": "Threshold Step",
+            "functions": [
+              "move",
+              "reveal"
+            ],
+            "description": "Maren reads the liminal beat of any exchange — the half-moment a gate swings — and steps through it before her opponent has committed. She does not dodge; she is simply no longer where the blow was aimed, and she is already at the next threshold."
+          },
+          {
+            "name": "Gate Hold",
+            "functions": [
+              "bind",
+              "ward"
+            ],
+            "description": "She can stall a passage — freeze the moment of transition for herself or a companion — holding a threshold open or shut long enough to change the shape of a fight. Used defensively, it is a ward; used offensively, it pins an opponent mid-step."
+          },
+          {
+            "name": "Far Arc Patience",
+            "functions": [
+              "conceal",
+              "strike"
+            ],
+            "description": "In the Coliseum's far arc, where sight lines are long and the crowd loses track, Maren goes still enough to become part of the threshold itself — then crosses the distance in a single passage-movement that reads as arrival, not approach."
+          }
+        ],
+        "wants": "One clean bout at the far arc, properly offered. She has been at the Waygate since the first thaw, waiting for her name to come up through the right mouth. She does not want shortcuts; she wants the gate to open the right way.",
+        "fears": "That she will be read as ordinary before the bout begins — that whoever faces her will arrive with a fixed idea of what a grey-coat threshold-walker does, and she will have to spend the whole fight correcting it instead of fighting.",
+        "reactsToReputation": {
+          "patient": "a small, real nod — she recognises her own quality in someone else",
+          "reckless": "watches them the way you watch an open gate in a high wind: not afraid, not dismissive, just careful",
+          "Silas": "she has heard the name from Orvil this morning; she has not said anything about it yet, but Aldric noticed she stood up straighter"
+        },
+        "_gen": {
+          "entityId": "maren-voss",
+          "type": "npc",
+          "birthWeight": 23,
+          "engagementScore": 0,
+          "tier": "fresh",
+          "rating": "R+",
+          "provenance": {
+            "playerKey": "player-s9z9u1",
+            "characterId": "char-mrhs8286",
+            "locationId": "gen-waygate",
+            "day": 6,
+            "worldDay": null,
+            "hint": "a threshold-walker in a grey coat — young, patient, waiting for a bout at the Coliseum far arc, with two companions as s",
+            "why": "Orvil named them as Silas's potential opponent this morning — they need a stable identity and craft before the bout can "
+          },
+          "attentionHistory": [],
+          "createdDay": 6,
+          "repaired": false,
+          "stubbed": false,
+          "romanceEligible": true
+        },
+        "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Maren%20Voss%2C%20Liminal%20fighter%20who%20crosses%20thresholds%20to%20win%20%E2%80%94%20patient%20at%20every%20gate%2C%20lethal%20the%20moment%20one%20opens%2C%20Speaks%20the%20way%20someone%20waits%20%E2%80%94%20fully%2C%20without%20fidgeting.%20Grey%20coat%2C%20collar%20up%20against%20the%20early-spri%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=5247&nologo=true"
       }
     },
     "location": {
@@ -5326,7 +5445,7 @@
   "syncedAt": 1784392733860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 356
+    "valley": 357
   },
   "foreclosed": [
     "rootkin",
@@ -5383,10 +5502,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T21:57:36.324Z",
+      "lastAt": "2026-07-18T22:02:04.170Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 81,
+      "beats": 82,
       "_recapError": null,
       "recap": "Day eighteen, and Silas Weir moved like a man who'd finally stopped fighting the shape of what he was. On the road he disarmed three opportunists without breaking bones, read the grief sitting behind the broad man's eyes, named it plainly, pressed provisions into their hands, and sent them toward something worth doing — mercy given as instruction, not sentiment. Then he brought the hard people together: Dara, Aldric, Fendt, Mara, Calvar, all of them in the heat of Pell's forge with no exits easy and no pretense left, and in that single evening he turned a valley's quiet panic into four working threads — engineering, logistics, supply, accounts — each with a named lead and a direction to face. The crisis didn't end, but it stopped being formless, and that was his doing."
     }

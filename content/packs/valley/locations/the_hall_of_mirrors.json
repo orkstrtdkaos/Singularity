@@ -36,7 +36,7 @@
     "the_last_mask",
     "the_axis_gate"
   ],
-  "descriptionSeed": "A city where every truth is understood to be a made thing, so the Veilwrights simply make better ones. Nothing is quite where it appears; hospitality is lavish and cannot be trusted; and everyone is scrupulously honest about the fact that they are lying, which they consider a higher form of candor than the Verists' brutality. They are charming. They mean it. Both of those are also true.",
+  "descriptionSeed": "A city where every truth is understood to be a made thing, so the Veilwrights simply make better ones. Nothing is quite where it appears; hospitality is lavish and cannot be trusted; and everyone is scrupulously honest about the fact that they are lying, which they consider a higher form of candor than the Verists' brutality. They are charming. They mean it. Both of those are also true. There is a waygate in the Hall of Mirrors, and there are several things that look like one. The Veilwrights find this funny and will tell you which is which for a fair price.",
   "loreRefs": [
     "the_twelve_reaches",
     "traditions"
@@ -56,5 +56,7 @@
     "abstract": 0.3,
     "dark": 0.2
   },
-  "startingLocation": true
+  "startingLocation": true,
+  "waygate": true,
+  "waygateTier": 3
 }

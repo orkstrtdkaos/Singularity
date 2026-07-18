@@ -795,7 +795,36 @@
           "rank": 1,
           "name": "The True Making",
           "grants": "Make a thing truly and completely, sound to its core and enduring.",
-          "cannot": "It makes the made, not the living; it cannot be hurried without ceasing to be true; and a thing made right outlasts its maker, with all that carries."
+          "cannot": "It makes the made, not the living; it cannot be hurried without ceasing to be true; and a thing made right outlasts its maker, with all that carries.",
+          "functions": [
+            "make"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
+        },
+        {
+          "rank": 2,
+          "name": "The Sound Repair",
+          "grants": "Bring a made thing back to true rather than merely patching it — find where the making was cut short or has failed, and remake that part as it should have been. A true repair is not a seam; the thing is sound again to its core.",
+          "cannot": "It repairs the made, never the living; it needs enough of the original left to read the maker's intent; and a true repair takes the same care the true making did — you cannot hurry it either.",
+          "functions": [
+            "make",
+            "mend"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
+        },
+        {
+          "rank": 3,
+          "name": "The Work That Outlasts",
+          "grants": "Make at scale and for time — a hall, a bridge, a road built so completely that generations use it without knowing your name. Your makings resist decay, ill-use, and weather beyond what their materials should allow, and another Wright can read the trueness in your work and learn from it.",
+          "cannot": "Scale multiplies the time and care, never reduces it; a thing made right outlasts its maker, with all that carries; and the Wrights hold that what endures is judged by what it was FOR — the GM prices a great making by what it serves.",
+          "functions": [
+            "make",
+            "mend"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "gated": "learned",

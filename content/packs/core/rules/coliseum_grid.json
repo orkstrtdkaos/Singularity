@@ -5,10 +5,11 @@
   "note": "SNG-149 — the Great Coliseum's blind grid. Neither competitor picks their own ground: each brings FOUR function families drawn from what they actually practise, and then EACH CHOOSES FROM THE OTHER'S FOUR. You name which of your opponent's strengths you will take them on at; they name which of yours they will take you at; both picks are blind and simultaneous, and the intersection is the contest. Grounded on FUNCTION_FAMILIES (engine/functions.js) per amendment A2 — 8 closed enums, so the space is 36 cells and finite. Aevi (PO) 2026-07-18, Law 15.",
   "whyBlind": "Under a blind grid a champion must be COMPLETE — you cannot take a title on your strongest cell because you will be pulled into your weakest. That is what makes the Coliseum a way of life rather than a fight club: every people has a standing reason to develop all eight families in their own idiom, continuously. Skill challenges and combat are the same structure at different cells, which is why participation is universal rather than martial.",
   "competitorAxis": {
-    "rule": "A competitor's four families are the four they have the most ability-RANKS in, counted via familiesOfAbility() over their learned abilities.",
-    "ties": "Broken by total ranks, then by the family's order in FUNCTION_FAMILIES. Deterministic on purpose — a competitor can compute their own axis and so can their opponent.",
-    "fewerThanFour": "A narrow competitor fills remaining slots from their tradition's functionCoverage (tradition_profiles.json). A tradition cannot supply a family it does not teach, so a genuinely narrow fighter enters with a short axis and the grid is 4xN — a visible, fair disadvantage the crowd can read.",
-    "visibility": "Each competitor's four are PUBLIC before the pick — they must be, since you are choosing from your opponent's set. What is blind is only which one each of you took."
+    "slots": "Four, always. Nobody enters with a short axis — a narrow competitor gets the same four columns as anyone else.",
+    "draw": "THREE slots are drawn from the families you actually practise, WEIGHTED by ability-ranks in each (familiesOfAbility() over your learned abilities). Weighted, not sorted: your deepest family is likeliest but not guaranteed, and a family you have touched once can come up. The FOURTH slot is drawn at random from all eight, including families you have never trained.",
+    "narrowness": "A competitor who practises fewer than three families exhausts their pool, and every remaining slot is drawn at random from the eight. THIS IS THE POINT. A specialist does not become harder to target — they go onto the board carrying two or three cells they have no business standing in, and everyone can see which. Narrowness is a liability on the grid, never a shelter.",
+    "whyRandom": "A deterministic top-four is drillable: a champion would learn their own board, look up yours, and prepare four matchups for life. Drawing the axis fresh each match means nobody knows their own ground until the morning of, which is the same pressure the blind pick applies one layer up — and it is why the Coliseum produces complete practitioners rather than specialists with a good record.",
+    "visibility": "Both axes are drawn and REVEALED together, in front of the crowd, before either competitor picks. The draw is the first act of the contest and it is watched closely: a wildcard landing on a family someone plainly cannot do is a roar, and both competitors now know it."
   },
   "secondGrid": "The cell names a contest KIND. A second 4x4 inside the cell narrows to the specific challenge the same way — blind, simultaneous, drawn from the two competitors' backgrounds rather than their functions. The first grid asks what KIND of person you are; the second asks who you specifically have been.",
   "cells": [
@@ -374,9 +375,14 @@
     }
   ],
   "thePick": {
-    "rule": "A picks one family from B's four. B picks one family from A's four. Blind, simultaneous, revealed together. The cell is the intersection.",
-    "whyNotYourOwn": "Picking from your own axis lets a champion steer toward their best cell, which is the thing the blind grid exists to prevent. Picking from your OPPONENT'S axis inverts it: your choice is an argument about where they are weakest, made out of their own declared strengths, and theirs is the same argument about you. Neither competitor ever selects the ground they stand on.",
-    "whatItMeans": "The pick is a public read of your opponent. Choose their HARM and you are saying you can take them at the thing they are known for. Choose their SUSTAIN and you are saying they are brittle. The crowd reads the picks before the contest resolves, and in the Coliseum the pick is discussed as much as the outcome.",
-    "shortAxis": "Against a competitor with fewer than four families you have fewer choices, not more — a narrow opponent is harder to select against, which is the one advantage narrowness carries."
+    "rule": "A picks one family from B's four. B picks one from A's four. Blind, simultaneous, revealed together. The intersection is the contest.",
+    "whyNotYourOwn": "Picking from your own axis would let a champion steer toward their best cell, which is what the blind grid exists to prevent. Picking from your OPPONENT'S inverts it: your choice is an argument about where they are weakest, made out of their own drawn four, and theirs is the same argument about you. Neither competitor ever selects the ground they stand on.",
+    "whatItMeans": "The pick is a public read of your opponent. Take their deepest family and you are claiming you can beat them at the thing they are known for. Take their wildcard and you are saying the draw already beat them and you are merely collecting. Both are respectable; the second is considered less so, and is more often correct.",
+    "sequence": [
+      "Both axes drawn from ranks + wildcard, revealed together",
+      "Blind simultaneous pick from the OTHER'S four",
+      "Picks revealed — the intersection names the cell",
+      "Second grid inside the cell narrows to the specific challenge, drawn from backgrounds"
+    ]
   }
 }

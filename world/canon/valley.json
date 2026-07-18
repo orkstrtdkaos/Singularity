@@ -199,5 +199,86 @@
       }
     }
   },
-  "variants": []
+  "variants": [
+    {
+      "schemaVersion": 1,
+      "id": "the-low-lamp-inn",
+      "name": "The Low Lamp Inn",
+      "regionId": "valley",
+      "communityId": "valley.radiant_plateau_edge",
+      "spectrum": {
+        "chaos_order": 0.2,
+        "violence_peace": 0.7,
+        "dark_light": 0.8,
+        "mechanical_spiritual": 0.4,
+        "falsehood_truth": 0.3,
+        "concrete_abstract": 0.5
+      },
+      "tags": [
+        "inn",
+        "lodging",
+        "edge-district",
+        "no-questions",
+        "light-guide",
+        "returnable",
+        "warm",
+        "early-spring"
+      ],
+      "connections": [
+        "radiant_plateau_edge",
+        "disputed_zone_fringe"
+      ],
+      "descriptionSeed": "Tucked into the lower tier of the Edge District where the light-guide streets run closest to the valley floor, the Low Lamp sits over a junction conduit — the glow rises through pale stone floors and fills the common room from below, warm and directionless as afternoon through cloud. The building is two storeys of dressed sandstone with deep-set windows fitted with diffusion panels so the light inside is never harsh. The beds are thick-mattressed, the bath-room fed by a cistern the owner keeps properly heated, and the linens smell of cedar oil. Maret Doss, who runs it, is a compact woman of sixty-odd years whose conversational range does not include your name, your business, where you've come from, or where you're going. She does ask whether you'd prefer the bath before or after supper, because the water pressure is better before the evening crowd. She has been here since before the last treaty renegotiation and expects to be here after the next. The common room is quiet enough to think in, which is unusual for the Edge District and not accidental.",
+      "loreRefs": [
+        "valley_primer",
+        "power_systems",
+        "radiant_plateau_culture"
+      ],
+      "npcsPresent": [
+        "maret_doss"
+      ],
+      "encounterFlavor": "A common room lit gold-from-below where two or three guests eat separately and don't introduce themselves; early-spring rain ticking against diffusion panels; the smell of cedar, hot water, and whatever Maret is cooking that isn't your concern unless you'd like a bowl. Occasionally a figure comes in from the cold, exchanges a look with Maret, goes upstairs, and is not there in the morning.",
+      "dangerLevel": 0,
+      "questSeeds": [
+        "A guest in the corner room has been here eleven nights and hasn't come down today — Maret won't say how she knows something is wrong, only that she'd like it handled quietly and without the District wardens",
+        "The light-guide conduit under the inn has been cycling strangely at the third hour of the night, waking guests with a pulse of light brighter than it should be — someone with knowledge of Radiant infrastructure could trace it, if they were careful about who found out they were looking",
+        "A sealed letter was left with Maret for a guest who checked in under a name that matches someone Silas or Pell have reason to recognize — Maret will not confirm or deny the guest exists, but she hasn't burned the letter",
+        "Maret's cedar oil supplier hasn't come up from the valley floor in three weeks; she mentions this once, flatly, and doesn't mention it again — but the route he travels crosses ground that has been quietly problematic"
+      ],
+      "poleIntensity": {
+        "peace": 0.7,
+        "light": 0.8,
+        "order": 0.2,
+        "spiritual": 0.4,
+        "abstract": 0.5
+      },
+      "reconcileVersion": 2,
+      "image": "https://image.pollinations.ai/prompt/The%20Low%20Lamp%20Inn%3A%20Tucked%20into%20the%20lower%20tier%20of%20the%20Edge%20District%20where%20the%20light-guide%20streets%20run%20closest%20to%20the%20valley%20floor%2C%20the%20Low%20Lamp%20sits%20over%20a%20junction%20conduit%20%E2%80%94%20the%20glow%20rises%20through%20pale%20stone%20floors%20and%20fills%20the%20common%20room%20from%20below%2C%20warm%20and%20directionless%20as%20afternoon%20through%20cloud.%20The%20building%20is%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=64375&nologo=true",
+      "parentId": "radiant_plateau_edge",
+      "_promotedFromSubPlace": true,
+      "_canon": {
+        "entityId": "the-low-lamp-inn",
+        "type": "location",
+        "weight": 15,
+        "rating": "R+",
+        "tier": "variant",
+        "provenance": {
+          "playerKey": "player-s9z9u1",
+          "characterId": "char-mrhs8286",
+          "locationId": "radiant_plateau_edge",
+          "day": 3,
+          "worldDay": null,
+          "hint": "a modest but genuinely comfortable inn in the Edge District of the Radiant Plateau — warm, lit from below by the light-g",
+          "why": "Silas and Pell need a named, returnable inn in the Edge District to spend the night — it will be a place they may return"
+        },
+        "contributedBy": {
+          "playerKey": "player-s9z9u1",
+          "characterId": "char-mrhs8286"
+        },
+        "promotedWorldDay": 18,
+        "birthWeight": 11,
+        "rivalId": "the-low-lamp-inn"
+      }
+    }
+  ]
 }

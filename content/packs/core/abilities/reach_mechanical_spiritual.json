@@ -29,25 +29,48 @@
           "rank": 1,
           "name": "The Wright's Eye",
           "grants": "Understand any mechanism's design and purpose on study; build reliable machines and devices; run Precursor systems that Latticespeak could only ask.",
-          "cannot": "Understanding function is not understanding WHY it was made; live-hostile systems still resist."
+          "cannot": "Understanding function is not understanding WHY it was made; live-hostile systems still resist.",
+          "functions": [
+            "reveal",
+            "make"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "System-Speaker",
           "grants": "Command a machine-system to reconfigure toward your intent; chain devices into working wholes; repair or repurpose Precursor works at the component level.",
-          "cannot": "The system does what its mechanism allows, not what you wish; the numinous layer stays opaque — you move the body, not the meaning."
+          "cannot": "The system does what its mechanism allows, not what you wish; the numinous layer stays opaque — you move the body, not the meaning.",
+          "functions": [
+            "reveal",
+            "make",
+            "command",
+            "mend"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Master of the Works",
           "grants": "Command machine-country — a whole Precursor installation bent toward a purpose; wake or still a mechanical site at scale; build engines that outlive you. The Great Engine's power in miniature.",
-          "cannot": "The wielder drifts hard-mechanical; a person who becomes all-Engine forgets why anything is FOR — the framework's foreclosure by another road; and the Great Engine notices a rival wright."
+          "cannot": "The wielder drifts hard-mechanical; a person who becomes all-Engine forgets why anything is FOR — the framework's foreclosure by another road; and the Great Engine notices a rival wright.",
+          "functions": [
+            "reveal",
+            "make",
+            "command",
+            "mend"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "functions": [
-        "mend",
+        "command",
         "make",
-        "command"
+        "mend",
+        "reveal"
       ],
       "challengeTypes": [
         "PUZZLE"
@@ -81,25 +104,50 @@
           "rank": 1,
           "name": "True Attention",
           "grants": "Attend so fully that the truth of a person, place, or moment surfaces; steady a soul in crisis by presence alone; perceive the meaning-layer of a Precursor site the Engine can't reach.",
-          "cannot": "Attention reveals and steadies; it does not command or coerce; the unwilling can close to it."
+          "cannot": "Attention reveals and steadies; it does not command or coerce; the unwilling can close to it.",
+          "functions": [
+            "reveal",
+            "heal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Negotiable World",
           "grants": "Where meaning is dense, the material softens — a symbol made briefly real, a threshold held open by significance, a wound that was always metaphor healed as one. Read the numinous truth of the deep works.",
-          "cannot": "Only where meaning already runs dense; it bends the world, never breaks it; the price is proportional to the bending."
+          "cannot": "Only where meaning already runs dense; it bends the world, never breaks it; the price is proportional to the bending.",
+          "functions": [
+            "reveal",
+            "heal",
+            "summon",
+            "restore"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Standing Presence",
           "grants": "Attention as a force that holds — keep a foreclosing thing open by significance alone, hold a truth in a place until it can't be unsaid, meet the numinous heart of What Sleeps Under as an equal rather than a trespasser. The Numen's power in miniature; the framework's 'hold the aperture' made a discipline.",
-          "cannot": "The wielder drifts hard-spiritual, toward leaving the material behind entirely; presence holds, it does not decide; what you hold open, others must walk through."
+          "cannot": "The wielder drifts hard-spiritual, toward leaving the material behind entirely; presence holds, it does not decide; what you hold open, others must walk through.",
+          "functions": [
+            "reveal",
+            "heal",
+            "summon",
+            "restore",
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "functions": [
-        "summon",
+        "heal",
+        "restore",
         "reveal",
-        "restore"
+        "summon",
+        "sustain"
       ],
       "challengeTypes": [
         "INVESTIGATE",
@@ -120,7 +168,8 @@
         "mechanical_spiritual": -0.3
       },
       "functions": [
-        "reveal"
+        "reveal",
+        "track"
       ],
       "narrationHints": "The workings of a thing felt like a diagram behind the eyes.",
       "description": "Perceive how a mechanism or system functions on sight.",
@@ -130,19 +179,35 @@
           "rank": 1,
           "name": "Mechanism-Sense",
           "grants": "Understand a device or machine-system's function and flaws at a glance.",
-          "cannot": "Function, not purpose; the numinous stays dark."
+          "cannot": "Function, not purpose; the numinous stays dark.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Whole Mechanism",
           "grants": "Read a machine entire — what it does, what it was FOR, where it will fail, and what someone changed.",
-          "cannot": "It reads mechanism. What a machine MEANS is the Numinous's country, not yours."
+          "cannot": "It reads mechanism. What a machine MEANS is the Numinous's country, not yours.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Engine's Confession",
           "grants": "A mechanism tells you its whole history — every hand that touched it, every misuse, every repair made in a hurry.",
-          "cannot": "The Precursor works do not confess. They only answer, and only sometimes."
+          "cannot": "The Precursor works do not confess. They only answer, and only sometimes.",
+          "functions": [
+            "reveal",
+            "track"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "powerSystem": "reach_mechanical_spiritual",
@@ -175,19 +240,34 @@
           "rank": 1,
           "name": "Numen-Sense",
           "grants": "Feel the significance-density of a place or moment; know where the world is 'thin.'",
-          "cannot": "Feel, not command; barren places read empty."
+          "cannot": "Feel, not command; barren places read empty.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Thinning",
           "grants": "Feel where the veil is thin — where meaning presses close enough to touch, and where something is pressing back.",
-          "cannot": "Feeling the thin place is not surviving it. Not everything on the other side is glad to be noticed."
+          "cannot": "Feeling the thin place is not surviving it. Not everything on the other side is glad to be noticed.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Numen Plain",
           "grants": "The numinous is simply visible to you — the sacred, the haunted, the charged, all plain as furniture.",
-          "cannot": "Once seen, never unseen. The Numinous who reach this depth find the ordinary world thin and hard to care about."
+          "cannot": "Once seen, never unseen. The Numinous who reach this depth find the ordinary world thin and hard to care about.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "powerSystem": "reach_mechanical_spiritual",
@@ -210,8 +290,9 @@
         "mechanical_spiritual": -0.3
       },
       "functions": [
-        "mend",
-        "make"
+        "empower",
+        "make",
+        "mend"
       ],
       "narrationHints": "Parts find their places and the dead thing hums again.",
       "description": "Repair a broken mechanism or device with a craftsman's sure touch.",
@@ -221,19 +302,36 @@
           "rank": 1,
           "name": "Mend",
           "grants": "Fix a broken tool, machine, or simple device reliably.",
-          "cannot": "Ordinary mechanism only; the deep works resist."
+          "cannot": "Ordinary mechanism only; the deep works resist.",
+          "functions": [
+            "mend"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The True Mend",
           "grants": "Mend a thing so it works as it was meant to — not patched, but restored to its intent.",
-          "cannot": "You must know what it was FOR. A mend against the true intent will not hold."
+          "cannot": "You must know what it was FOR. A mend against the true intent will not hold.",
+          "functions": [
+            "mend"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Better Than New",
           "grants": "The mended thing is better than it was — you understood it well enough to improve it in the mending.",
-          "cannot": "The Enginewrights' pride and their sin: not everything you can improve should be."
+          "cannot": "The Enginewrights' pride and their sin: not everything you can improve should be.",
+          "functions": [
+            "mend",
+            "make",
+            "empower"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "powerSystem": "reach_mechanical_spiritual",
@@ -268,19 +366,37 @@
           "rank": 1,
           "name": "Steady the Soul",
           "grants": "Calm and steady a person in spiritual/emotional crisis through pure presence.",
-          "cannot": "Opens the door, never shoves; the closed resist."
+          "cannot": "Opens the door, never shoves; the closed resist.",
+          "functions": [
+            "heal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Steadied Hand",
           "grants": "Steady another person through terror, grief, or the shakes — they can act when they could not.",
-          "cannot": "Steadying is a loan against their own strength. It comes due when you let go."
+          "cannot": "Steadying is a loan against their own strength. It comes due when you let go.",
+          "functions": [
+            "heal",
+            "empower"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Unshaken",
           "grants": "Nothing shakes you, and nearness to you steadies others without effort — panic does not propagate through you.",
-          "cannot": "Unshakable is not unhurt. It means the hurt does not show, and does not get put down."
+          "cannot": "Unshakable is not unhurt. It means the hurt does not show, and does not get put down.",
+          "functions": [
+            "heal",
+            "empower",
+            "resist"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "powerSystem": "reach_mechanical_spiritual",
@@ -315,19 +431,35 @@
           "rank": 1,
           "name": "Command the Small Engine",
           "grants": "Make a device or system do something within its mechanism it wasn't set to.",
-          "cannot": "Only what the mechanism allows; meaning stays opaque."
+          "cannot": "Only what the mechanism allows; meaning stays opaque.",
+          "functions": [
+            "command"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Larger Engine",
           "grants": "Command engines beyond the small — a mill, a lock-system, a Precursor door that still half-listens.",
-          "cannot": "Commanding a thing is not understanding it. Engines obey the words, not the wish."
+          "cannot": "Commanding a thing is not understanding it. Engines obey the words, not the wish.",
+          "functions": [
+            "command"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Engine Obeys",
           "grants": "Mechanism answers you as if you were its maker — it does what you mean, not merely what you say.",
-          "cannot": "Halvex Coil began exactly here, and did not stop. The Enginewrights teach this rank with a warning attached."
+          "cannot": "Halvex Coil began exactly here, and did not stop. The Enginewrights teach this rank with a warning attached.",
+          "functions": [
+            "command",
+            "mend"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "powerSystem": "reach_mechanical_spiritual",
@@ -351,9 +483,11 @@
         "concrete_abstract": 0.3
       },
       "functions": [
-        "summon",
+        "make",
+        "open",
         "reveal",
-        "ward"
+        "summon",
+        "sustain"
       ],
       "narrationHints": "Where meaning is thick, a threshold opens that was never a door.",
       "description": "Where significance runs dense, briefly make a symbol real — a threshold held by meaning. Mid-tier Numenwork.",
@@ -363,19 +497,42 @@
           "rank": 1,
           "name": "Open the Thin Place",
           "grants": "In a meaning-dense place, make a symbol briefly literal — a held threshold, a metaphor made real.",
-          "cannot": "Only where meaning is dense; costs proportional."
+          "cannot": "Only where meaning is dense; costs proportional.",
+          "functions": [
+            "reveal",
+            "summon"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Held Thin Place",
           "grants": "Hold a thin place open — long enough for others to see, to speak, to pass a thing through.",
-          "cannot": "Held open is held open from BOTH sides. Whatever is on the other side also has a door now."
+          "cannot": "Held open is held open from BOTH sides. Whatever is on the other side also has a door now.",
+          "functions": [
+            "reveal",
+            "summon",
+            "open",
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Open Door",
           "grants": "Open a thin place where there was none, in a room that had no reason to be sacred.",
-          "cannot": "The Numinous forbid this to most of their own. What you invite has its own opinions."
+          "cannot": "The Numinous forbid this to most of their own. What you invite has its own opinions.",
+          "functions": [
+            "reveal",
+            "summon",
+            "open",
+            "sustain",
+            "make"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "powerSystem": "reach_mechanical_spiritual",
@@ -452,8 +609,8 @@
         "space_time": 0.4
       },
       "functions": [
-        "travel",
-        "move"
+        "move",
+        "travel"
       ],
       "narrationHints": "The space between here and there folds for a step, and you are across it.",
       "description": "A short-range teleport — fold the space between you and a spot you can SEE, and step through. Blink across a gap, past a door, out of a grip. Needs substrate to fold against.",
@@ -463,19 +620,36 @@
           "rank": 1,
           "name": "Shortfold",
           "grants": "Instantly cross to a visible point within ~30 paces — through, past, or over what's between.",
-          "cannot": "Line-of-sight only; substrate-thin places (the origin-flats) refuse it; costs sharply, a botch drops you mid-fold (hurt)."
+          "cannot": "Line-of-sight only; substrate-thin places (the origin-flats) refuse it; costs sharply, a botch drops you mid-fold (hurt).",
+          "functions": [
+            "move"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Longer Fold",
           "grants": "Fold a longer distance — a valley rather than a courtyard — and bring others through with you.",
-          "cannot": "Both ends must be places you truly know. A fold to a half-remembered place ends half-way."
+          "cannot": "Both ends must be places you truly know. A fold to a half-remembered place ends half-way.",
+          "functions": [
+            "move",
+            "travel"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Folded Road",
           "grants": "Fold distance as a road you can walk repeatedly — a route through the short way that stays open.",
-          "cannot": "The folded road is a hole in the world, and the world notices holes."
+          "cannot": "The folded road is a hole in the world, and the world notices holes.",
+          "functions": [
+            "move",
+            "travel"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "powerSystem": "reach_mechanical_spiritual",
@@ -537,14 +711,16 @@
         "exploit",
         "mechanism"
       ],
-      "harmRung": "damaging",
+      "harmRung": "incapacitating",
       "narrationHints": "He didn't hit the person. He hit the load-bearing piece.",
       "description": "Strike at the known structural weak point — the joint, the fault, the critical piece — for maximum effect from minimum force.",
       "notFor": [],
       "tradition": "enginewright",
       "functions": [
-        "strike",
-        "break"
+        "break",
+        "hinder",
+        "reveal",
+        "strike"
       ],
       "challengeTypes": [
         "combat",
@@ -556,19 +732,42 @@
           "rank": 1,
           "name": "Fault Point",
           "grants": "Strike a person or device at its structural weak point — the joint under load, the nerve cluster, the part compensating for an earlier damage — for targeted, efficient harm.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "strike",
+            "break"
+          ],
+          "gains": "broaden",
+          "harmRung": "damaging"
         },
         {
           "rank": 2,
           "name": "Controlled Failure",
           "grants": "Hit a mechanism's fault so precisely it fails in the way you need — not just broken, stopped; not just damaged, disabled at the point that matters.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "strike",
+            "break",
+            "hinder"
+          ],
+          "gains": "broaden",
+          "harmRung": "incapacitating"
         },
         {
           "rank": 3,
           "name": "One Strike",
           "grants": "End what would otherwise require sustained effort through one well-placed action — because you knew where it would break before you moved.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "strike",
+            "break",
+            "hinder"
+          ],
+          "gains": "deepen",
+          "harmRung": "incapacitating"
         }
       ],
       "nativeOrCombination": "native"
@@ -595,8 +794,9 @@
       "notFor": [],
       "tradition": "enginewright",
       "functions": [
+        "resist",
         "shield",
-        "resist"
+        "ward"
       ],
       "challengeTypes": [
         "combat",
@@ -608,19 +808,37 @@
           "rank": 1,
           "name": "Redirected Force",
           "grants": "Protect through engineered positioning — the blow lands on something that can take it, redirected away from what can't.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "shield"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Set Defense",
           "grants": "Build a mechanical defense that holds without constant attention — barriers and redirects that work while you work on something else.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "shield",
+            "ward"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Active System",
           "grants": "A defense that adapts — interlocking protections that cover the group and respond to the threat's form, not just its direction.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "shield",
+            "ward",
+            "resist"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -646,8 +864,8 @@
       "notFor": [],
       "tradition": "enginewright",
       "functions": [
-        "sustain",
-        "resist"
+        "resist",
+        "sustain"
       ],
       "challengeTypes": [
         "endurance",
@@ -659,19 +877,36 @@
           "rank": 1,
           "name": "Calibrated Effort",
           "grants": "Push past fatigue by treating the body as a mechanism — the right rhythm, the right intake, the precisely understood limit that can be approached safely.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Maintained Function",
           "grants": "Keep working through damage and deprivation by knowing exactly what the mechanism needs — no panic, no waste, no unnecessary expenditure.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain",
+            "resist"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Indefinite Run",
           "grants": "The body does what it must for as long as it must — calibrated to exact need, running past what others would call the wall.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain",
+            "resist"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -697,8 +932,8 @@
       "notFor": [],
       "tradition": "numinous",
       "functions": [
-        "hinder",
-        "break"
+        "break",
+        "hinder"
       ],
       "challengeTypes": [
         "magical",
@@ -710,19 +945,36 @@
           "rank": 1,
           "name": "Weight Withdrawn",
           "grants": "Drain numinous significance from a working, a symbol, or a belief — it still exists but loses whatever meaning made it matter.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "hinder"
+          ],
+          "gains": "broaden",
+          "harmRung": "incapacitating"
         },
         {
           "rank": 2,
           "name": "Broken Meaning",
           "grants": "Break a thing's significance so completely that those who relied on it lose orientation — the sacred desecrated in ways they feel immediately.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "hinder",
+            "break"
+          ],
+          "gains": "broaden",
+          "harmRung": "incapacitating"
         },
         {
           "rank": 3,
           "name": "The Voided Place",
           "grants": "Withdraw numinous presence from an entire place or working — what meaning was sustaining simply stops, and what it held together comes apart.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "hinder",
+            "break"
+          ],
+          "gains": "deepen",
+          "harmRung": "incapacitating"
         }
       ],
       "nativeOrCombination": "native"
@@ -748,8 +1000,8 @@
       "notFor": [],
       "tradition": "numinous",
       "functions": [
-        "command",
-        "bind"
+        "bind",
+        "command"
       ],
       "challengeTypes": [
         "social",
@@ -761,19 +1013,36 @@
           "rank": 1,
           "name": "Settled Presence",
           "grants": "Your presence carries the weight of genuine practice — people feel it, and it settles them, orients them toward what they already know is right.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "command"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Deep Pull",
           "grants": "Bind a person or group to a truth they have been avoiding — not manipulation, the simple pull of someone who has been further in.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "command",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Organizing Presence",
           "grants": "Your presence is simply the authority in the room — not commanded, not explained, present; people naturally arrange themselves relative to where you stand.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "command",
+            "bind"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -799,8 +1068,8 @@
       "notFor": [],
       "tradition": "numinous",
       "functions": [
-        "sustain",
-        "resist"
+        "resist",
+        "sustain"
       ],
       "challengeTypes": [
         "endurance",
@@ -812,19 +1081,36 @@
           "rank": 1,
           "name": "The Form Holds",
           "grants": "Maintain function through hardship by continuing the practice — when everything else is stripped, the discipline remains and it is enough to stand on.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Endurance of Attendance",
           "grants": "The form holds you in conditions that break people who have nothing to return to — not will, the practice; not trying harder, attending more fully.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain",
+            "resist"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "As Long as the Practice Continues",
           "grants": "You do not run out as long as you can still attend. The body may fail; the practice holds what the body was holding.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain",
+            "resist"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"

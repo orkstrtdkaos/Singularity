@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "day": "2026-07-18",
+  "entries": [
+    {
+      "id": "fb-mrqi93du",
+      "at": "2026-07-18T15:11:51.138Z",
+      "type": "bug",
+      "text": "The initial GM response is hanging.  it does show up if I click an inventory item, or go to another screen then back.",
+      "player": "Erik",
+      "context": {
+        "appVersion": "1.8.104",
+        "at": "2026-07-18T15:11:51.138Z",
+        "screen": "⚑ Feedback",
+        "worldDay": 18,
+        "character": {
+          "id": "char-mrhs8286",
+          "name": "Silas Weir",
+          "level": 13,
+          "origin": "wright",
+          "nativeTradition": "wright",
+          "domains": {
+            "primary": "ashwarden",
+            "secondary": "cogitant",
+            "tertiary": "figurist"
+          },
+          "background": "lineage_taught"
+        },
+        "location": {
+          "id": "millbrook",
+          "name": "Millbrook",
+          "regionId": "valley"
+        },
+        "activeQuests": [
+          "Find the Engineer",
+          "The Edge District Ledger"
+        ],
+        "journeyDay": 5,
+        "scene": "Trade track south of the limestone bend — open scrub, pale winter grass, Echo River audible to the left, Millbrook's smoke a few hours south. Morning light full from the east. Silas standing at the li",
+        "lastGmTurn": "Silas leaves a note in the cache hollow — Mara Wells, Millbrook, Answers — and consults Pell and Calvar on what to do with the rest.",
+        "lastAction": "Swap map for note; consult companions on remaining items",
+        "errors": [
+          "unhandled: Failed to execute 'setItem' on 'Storage': Setting the value of 'singularity.character.char-mrhs8286' exceeded the quota.",
+          "unhandled: Failed to execute 'setItem' on 'Storage': Setting the value of 'singularity.character.char-mrhs8286' exceeded the quota.",
+          "unhandled: Failed to execute 'setItem' on 'Storage': Setting the value of 'singularity.character.char-mrhs8286' exceeded the quota.",
+          "unhandled: Failed to execute 'setItem' on 'Storage': Setting the value of 'singularity.character.char-mrhs8286' exceeded the quota.",
+          "unhandled: Failed to execute 'setItem' on 'Storage': Setting the value of 'singularity.character.char-mrhs8286' exceeded the quota."
+        ]
+      }
+    }
+  ]
+}

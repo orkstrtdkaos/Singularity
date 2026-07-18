@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 15,
-  "xp": 1401,
+  "xp": 1404,
   "attributes": {
     "physical": 4,
     "mental": 5,
@@ -78,9 +78,9 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.309026480582692,
+    "spectrumId": -0.34357515655355736,
     "violence_peace": 0.1030845625,
-    "chaos_order": 0.243796664886697,
+    "chaos_order": 0.25160683164236214,
     "mechanical_spiritual": 0.2400392471479881,
     "concrete_abstract": -0.0326467323816193,
     "death_life": -0.22224780548067646,
@@ -93,7 +93,7 @@
   "maxHealth": 100,
   "health": 100,
   "maxEnergy": 170,
-  "energy": 170,
+  "energy": 166,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -788,7 +788,155 @@
     "Silas, Pell, and Huginn step through the waygate together at dawn — the road south beginning in earnest."
   ],
   "currentLocationId": "gen-waygate",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "gen-waygate",
+    "turns": [
+      {
+        "player": "Take a moment in the plaza — use Order-Sense to read the Hub's design and what it is part of before walking into an unfamiliar city",
+        "summary": "Silas reads the Hub's design at the waygate — a deliberate geometry, seven calibration gates, a measuring function at its center. The lattice is too thin for the full picture.",
+        "narration": "You set your hand against the left upright of the waygate arch and let Order-Sense open. The lattice here is thin — you can feel it immediately, the craft running lean, like a lamp with too little oil. What comes back is partial and costs you.\n\nThe Hub is not a city that grew. It was placed — a deliberate geometry, seven gates arranged at angles that serve something older than the roads connecting them. The arch your hand is on is one of seven, and all seven are load-bearing in a way that has nothing to do with stone. They are reference points. Calibration marks. Whatever the Hub was designed to do at its center, these gates are how it oriented itself to do it.\n\nThe design's full purpose stays just out of reach. The lattice is too thin here, and you are running on its edge. You get the shape of something — a measuring function, a hub in the literal sense, something that once took readings from multiple directions at once — but not the what or the why. It is like reading the frame of a tool without the tool itself.\n\nPell has already stepped through and is standing at the plaza's edge, pack settled, watching you with the patient attention of someone who knows when a read is finishing. Huginn lands on the waygate's crossbar above your hand, looks south into the city, and says nothing. Which is, in its way, a comment."
+      }
+    ],
+    "lastTurn": {
+      "narration": "You set your hand against the left upright of the waygate arch and let Order-Sense open. The lattice here is thin — you can feel it immediately, the craft running lean, like a lamp with too little oil. What comes back is partial and costs you.\n\nThe Hub is not a city that grew. It was placed — a deliberate geometry, seven gates arranged at angles that serve something older than the roads connecting them. The arch your hand is on is one of seven, and all seven are load-bearing in a way that has nothing to do with stone. They are reference points. Calibration marks. Whatever the Hub was designed to do at its center, these gates are how it oriented itself to do it.\n\nThe design's full purpose stays just out of reach. The lattice is too thin here, and you are running on its edge. You get the shape of something — a measuring function, a hub in the literal sense, something that once took readings from multiple directions at once — but not the what or the why. It is like reading the frame of a tool without the tool itself.\n\nPell has already stepped through and is standing at the plaza's edge, pack settled, watching you with the patient attention of someone who knows when a read is finishing. Huginn lands on the waygate's crossbar above your hand, looks south into the city, and says nothing. Which is, in its way, a comment.",
+      "sceneSummary": "Silas reads the Hub's design at the waygate — a deliberate geometry, seven calibration gates, a measuring function at its center. The lattice is too thin for the full picture.",
+      "choices": [
+        {
+          "label": "Walk to the plaza's center — the geometry suggests that is where any reading would have been taken from",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask someone at the plaza — a trader, a warden, anyone local — what they call this place and what it is used for",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Take the south lane and move — you have enough of the Hub's shape; the road to home is what matters this morning",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 0,
+          "intentTags": [
+            "travel"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Let Huginn off the waygate and watch where it settles — a carrion bird that reads endings knows which direction the road runs toward them",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        }
+      ],
+      "characterDeltas": {
+        "energy": -2
+      },
+      "scene": {
+        "setting": "The Hub Waygate Plaza — an open crescent of seven arches at the city's southern entry, stone-paved, early-spring dawn light coming in low and pale from the east. The waygate Silas and Pell stepped through stands immediately behind; the city begins at the plaza's northern edge.",
+        "npcsPresent": [
+          {
+            "name": "Pell Marsh",
+            "state": "Standing at the plaza's edge, pack settled, watching Silas finish the read — patient, already oriented south"
+          },
+          {
+            "name": "Huginn",
+            "state": "Perched on the waygate's crossbar above Silas's hand, looking south into the city"
+          }
+        ],
+        "objects": [
+          "Seven waygate arches arranged at deliberate angles across the plaza crescent",
+          "Packed stone paving, wheel-rutted at the south lane entry",
+          "Memory — the assembled spear, road-lashed at Silas's back"
+        ],
+        "threads": [
+          "The Hub's full design purpose — a measuring or calibration function — remains only partially read; the lattice here is too thin for the whole picture",
+          "The road south begins here; home is the first stop before the Disputed Zone"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "note": "Stepped through the waygate first, settled at the plaza edge, watching Silas finish the Order-Sense read — present and ready to move",
+          "status": "active",
+          "statusNote": "At the Hub plaza beside the waygate — pack on, waiting for Silas's direction"
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "hub-waygate-plaza",
+          "label": "Hub Waygate Plaza",
+          "kind": "place",
+          "fact": "The Hub's seven waygate arches are not merely roads — they are calibration marks arranged at deliberate angles, reference points for something at the plaza's center. The Hub was designed to take readings from multiple directions at once. The full purpose remains unclear; the lattice here is too thin for a complete Order-Sense read.",
+          "links": [
+            "the-water-crisis",
+            "precursor-signs-in-the-valley",
+            "order-sense"
+          ]
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "Order-Sense partial read on dawn of World-day 18: the seven gates are calibration marks for a measuring function centered on the plaza. Design predates the roads. Full purpose unresolved — lattice too thin.",
+          "subPlace": {
+            "name": "Hub Waygate Plaza",
+            "parent": "Waygate",
+            "note": "The open crescent of seven arches where travelers arrive — the city begins at its northern edge",
+            "visited": true
+          }
+        }
+      ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-edge-district-ledger",
+          "note": "Silas and Pell have stepped through the waygate — the document roll is in Mara's hands, Pip Cotter named as carrier. The road south has begun."
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A brief pause at the waygate plaza for an Order-Sense read before moving on"
+      }
+    },
+    "sceneState": {
+      "setting": "The Hub Waygate Plaza — an open crescent of seven arches at the city's southern entry, stone-paved, early-spring dawn light coming in low and pale from the east. The waygate Silas and Pell stepped through stands immediately behind; the city begins at the plaza's northern edge.",
+      "npcsPresent": [
+        {
+          "name": "Pell Marsh",
+          "state": "Standing at the plaza's edge, pack settled, watching Silas finish the read — patient, already oriented south"
+        },
+        {
+          "name": "Huginn",
+          "state": "Perched on the waygate's crossbar above Silas's hand, looking south into the city"
+        }
+      ],
+      "objects": [
+        "Seven waygate arches arranged at deliberate angles across the plaza crescent",
+        "Packed stone paving, wheel-rutted at the south lane entry",
+        "Memory — the assembled spear, road-lashed at Silas's back"
+      ],
+      "threads": [
+        "The Hub's full design purpose — a measuring or calibration function — remains only partially read; the lattice here is too thin for the whole picture",
+        "The road south begins here; home is the first stop before the Disputed Zone"
+      ]
+    }
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 6,
@@ -1092,14 +1240,14 @@
         "s3"
       ],
       "progress": [
-        "Codex: the pattern is named. Grael moves from 'an official' to 'a regional power'. He begins to act against you.",
         "The chain is fully documented — Grael's authority, Vael's role, the keeper's silence, and the pattern of prior marks written in Silas's hand alongside Fendt's testimony. The document roll is sealed. Remaining: present it to the appropriate authority, and decide what the truth is for.",
         "Document roll on Mara's counter, gathering called for tonight. The moment of decision — what the truth is for — arrives at the forge this evening.",
         "The full chain laid out at the Fell Pell — every witness speaking their part, the document roll complete and present. The gathering now sits with the central question: what is the truth for?",
         "Mara named the document roll's destination without being asked — the carrier and route are hers to arrange before the week's end. The accountability chain now has a clear path to the district records office.",
         "Mara named Pip Cotter as carrier — document roll departs in two days for the district records office. Final witness lines open tonight. The accountability chain is nearly sealed.",
         "Silas's own witness statement added to the roll. Fendt named to the fellowship. The gathering sealed with 'Thus begins the fellowship of the Fell.' Document roll now complete — all lines present, ready for Mara to seal and Pip Cotter to carry.",
-        "Document roll sealed and complete, Pip Cotter named as carrier, all witness lines present. Silas and Pell have stepped away from Millbrook — the roll is in Mara's hands."
+        "Document roll sealed and complete, Pip Cotter named as carrier, all witness lines present. Silas and Pell have stepped away from Millbrook — the roll is in Mara's hands.",
+        "Silas and Pell have stepped through the waygate — the document roll is in Mara's hands, Pip Cotter named as carrier. The road south has begun."
       ],
       "aliases": [],
       "startedAt": "2026-07-16T21:27:42.515Z",
@@ -1216,16 +1364,16 @@
       },
       "relationship": 10,
       "history": [
-        "[d5] Chose where the radiant mark goes — the highest point of the chest plate, where light catches first. Named the finished work 'That'll do.'",
-        "[d5] Watched the partial ward settle without complaint — named it more than the plate had before. Practical about limits.",
-        "[d5] Received the partial-ward promise without reproach — named the radiant mark as the place the completion will find itself. The evening closed on that.",
         "[d5] Scene closed together in the forge's cooling warmth — Morning, then. Named the day ahead and let the night finish.",
         "[d5] Was up before Silas, laid out the morning meal without ceremony, walked out the south gate beside him with the brigandine on her shoulders. The road has begun.",
         "[d6] Walked the south lane in measured silence, arrived at the waygate, drew the rune-bound sword and challenged Silas to show her his close-range work.",
         "[d6] Sparred Silas at the waygate at dawn — read the belt knife through ironsense and held the line; gave him one note at the end: the shadowstep telegraphs, the shadow pulls before the step.",
         "[d6] Took a real strike on the wrist from the clean shadow-arrival combined with order-sense touch. Named it 'the one' — practitioner's acknowledgment. Examining the feel of it from the ironsense side.",
         "[d6] Received the kiss without resistance and a sound close to a laugh. Received the ironsense warning as a good tool — no ceremony, no argument. Said she'll think on it in the register that means she already is.",
-        "[d6] Took Silas's hand and walked through the waygate without a word — settled and present."
+        "[d6] Took Silas's hand and walked through the waygate without a word — settled and present.",
+        "[d6] Walked through the waygate without ceremony, hand brushing the left upright, and turned back to wait for Silas — already looking south.",
+        "[d6] Stepped through the waygate first, settled at the plaza edge, asked where they start — present and ready",
+        "[d6] Stepped through the waygate first, settled at the plaza edge, watching Silas finish the Order-Sense read — present and ready to move"
       ],
       "knownFacts": [
         "The first death-warding thread is seated into the brigandine's shoulder collar — quiet, economical, holding.",
@@ -1246,7 +1394,7 @@
         "receiving a genuine technique acknowledgment without ceremon"
       ],
       "status": "active",
-      "statusNote": "On the south lane beyond the waygate — walking with Silas, the road properly begun.",
+      "statusNote": "At the Hub plaza beside the waygate — pack on, waiting for Silas's direction",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 6
@@ -2040,9 +2188,38 @@
     },
     "gen-waygate": {
       "visits": 1,
-      "notes": [],
+      "notes": [
+        "[d6] The waygate opens onto the south lane — a shallow valley running south, tree line low, packed-dirt road with recent wheel ruts. First stop on the road from Millbrook toward the Disputed Zone.",
+        "[d6] Order-Sense partial read on dawn of World-day 18: the seven gates are calibration marks for a measuring function centered on the plaza. Design predates the roads. Full purpose unresolved — lattice too thin."
+      ],
       "flags": {},
-      "vectorsKnown": []
+      "vectorsKnown": [],
+      "subPlaces": {
+        "south-lane-beyond-the-waygate": {
+          "name": "South Lane beyond the Waygate",
+          "parentId": "gen-waygate",
+          "day": 6,
+          "visited": true,
+          "note": "Packed dirt road with wheel ruts, a shallow valley opening south, the waygate stones visible behind."
+        },
+        "hub-waygate-plaza": {
+          "name": "Hub Waygate Plaza",
+          "parentId": "gen-waygate",
+          "day": 6,
+          "visited": true,
+          "note": "The open crescent of seven arches where travelers arrive — the city begins at its northern edge"
+        }
+      }
+    },
+    "gen-center": {
+      "visits": 1,
+      "notes": [
+        "[d6] First arrival at the Hub plaza — seven arches, crescent arrangement, open to the metropolis. The Coliseum visible to the north."
+      ],
+      "flags": {},
+      "_containmentNotes": [
+        "\"Hub Waygate Plaza\" was placed in gen-waygate (the fiction named it), not gen-center"
+      ]
     }
   },
   "worldState": {
@@ -3477,21 +3654,21 @@
     }
   },
   "tendencies": {
-    "strategic": 18.37146094678159,
-    "cerebral": 5.834700305477406,
-    "social": 13.929032391392536,
-    "generous": 2.0937584024780977,
-    "cautious": 8.704917127801142,
-    "physical": 1.7094696511139404,
-    "risky": 0.16775092578948378,
-    "ruthless": 1.0989869687066447,
-    "carousing": 0.016837869964773867,
-    "amorous": 10.897539250390663,
-    "patient": 2.7218396859276446,
-    "stealth": 0.4259701567645059,
-    "devotion": 0.9518923255028424,
-    "craft": 3.3648719841397727,
-    "leadership": 0.42282137456861496
+    "strategic": 17.97838581097089,
+    "cerebral": 6.4079466784470975,
+    "social": 12.910254256640838,
+    "generous": 1.9406196043218478,
+    "cautious": 9.06823404850056,
+    "physical": 1.584437972412935,
+    "risky": 0.1554815182329123,
+    "ruthless": 1.0186063749485852,
+    "carousing": 0.015606337631881576,
+    "amorous": 10.100486418655057,
+    "patient": 2.5227626301490926,
+    "stealth": 0.39481443326740195,
+    "devotion": 0.882270325882861,
+    "craft": 3.1187631441747996,
+    "leadership": 0.3918959549693073
   },
   "aptitudes": [
     "strategist",
@@ -3499,7 +3676,7 @@
     "tactician",
     "charmer"
   ],
-  "actionCount": 521,
+  "actionCount": 524,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -3745,8 +3922,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784408622782,
-  "rev": 766,
+  "updatedAt": 1784409199271,
+  "rev": 769,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4426,13 +4603,32 @@
           "transitional"
         ],
         "connections": [
-          "millbrook"
+          "millbrook",
+          "gen-center"
         ],
         "_gen": true,
         "_mintedAs": "transit",
         "map": {
           "x": 409.5058087856015,
           "y": 397.4185998280231
+        }
+      },
+      "gen-center": {
+        "id": "gen-center",
+        "name": "Center",
+        "regionId": "valley",
+        "descriptionSeed": "A place the road led to — Center. The fiction brought you here before the map knew its name.",
+        "tags": [
+          "transitional"
+        ],
+        "connections": [
+          "gen-waygate"
+        ],
+        "_gen": true,
+        "_mintedAs": "transit",
+        "map": {
+          "x": 483.2482839825773,
+          "y": 379.03253576244833
         }
       }
     },
@@ -4686,7 +4882,7 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 52,
+      "order_sense": 53,
       "palework": 26,
       "deathsense": 21,
       "shadowstep": 16,
@@ -4839,7 +5035,7 @@
   "syncedAt": 1784392733860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 341
+    "valley": 344
   },
   "foreclosed": [
     "rootkin",
@@ -4851,7 +5047,8 @@
     "millbrook",
     "the-low-lamp-inn",
     "old_switchback",
-    "gen-waygate"
+    "gen-waygate",
+    "gen-center"
   ],
   "opLossLog": [
     {
@@ -4895,10 +5092,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T21:03:42.781Z",
+      "lastAt": "2026-07-18T21:13:19.268Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 66,
+      "beats": 69,
       "_recapError": null,
       "recap": "Day eighteen, and Silas Weir moved like a man who'd finally stopped fighting the shape of what he was. On the road he disarmed three opportunists without breaking bones, read the grief sitting behind the broad man's eyes, named it plainly, pressed provisions into their hands, and sent them toward something worth doing — mercy given as instruction, not sentiment. Then he brought the hard people together: Dara, Aldric, Fendt, Mara, Calvar, all of them in the heat of Pell's forge with no exits easy and no pretense left, and in that single evening he turned a valley's quiet panic into four working threads — engineering, logistics, supply, accounts — each with a named lead and a direction to face. The crisis didn't end, but it stopped being formless, and that was his doing."
     }
@@ -4951,7 +5148,7 @@
   },
   "_intentAsked": null,
   "_turnApplyError": {
-    "at": "2026-07-18T20:40:31.982Z",
+    "at": "2026-07-18T21:11:25.563Z",
     "message": "Cannot create property 'engagementScore' on boolean 'true'",
     "stack": "TypeError: Cannot create property 'engagementScore' on boolean 'true' <-     at recordAttention (https://orkstrtdkaos.github.io/Singularity/engine/generate.js:340:21) <-     at noteGeneratedAttention (https://orkstrtdkaos.github.io/Singularity/app.js?v=1.8.119:1511:16) <-     at applyTurn (https://orkstrtdkaos.github.io/Singularity/app.js?v=1.8.119:2941:7)"
   }

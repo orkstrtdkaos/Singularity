@@ -1,67 +1,69 @@
 {
- "schemaVersion": 1,
- "powerSystem": "living_current",
- "note": "SNG-131: the living substrate — 'the quick', the green current. The nature-keepers' parallel to the fabricated precursor substrate. A distinct deep-power family (NOT antipodal to precursor on the ring — rootkin sits on the death↔life diameter, seraphic/abyssal on angelic↔demonic; they are different axes, two deep families, not two poles of one). These route through their own living_current gate, mirroring precursor.",
- "abilities": [
-  {
-   "schemaVersion": 1,
-   "id": "quicken_the_ground",
-   "name": "Quicken the Ground",
-   "levelReq": 3,
-   "energyCost": 7,
-   "powerSystem": "living_current",
-   "tradition": "rootkin",
-   "attribute": "physical",
-   "axes": {
-    "death_life": 0.6
-   },
-   "functions": [
-    "open",
-    "reveal"
-   ],
-   "narrationHints": "You press your hand to the earth and it ANSWERS — the living current beneath everything stirring up to meet you, green and enormous and older than the nanites.",
-   "description": "The first touch of the living substrate — waking the green current in the ground, the deep life-layer the Rootkin never gave up as their kin gave up the nanites. Where the substrate-keepers channel the fabricated deep, the Rootkin channel the living one.",
-   "notFor": "It wakes the living, not the made — dead stone and machinery do not answer. And the current answers a true rootkin touch; forced or faithless, the ground stays asleep.",
-   "tree": [
+  "schemaVersion": 1,
+  "powerSystem": "living_current",
+  "note": "SNG-131: the living substrate — 'the quick', the green current. The nature-keepers' parallel to the fabricated precursor substrate. A distinct deep-power family (NOT antipodal to precursor on the ring — rootkin sits on the death↔life diameter, seraphic/abyssal on angelic↔demonic; they are different axes, two deep families, not two poles of one). These route through their own living_current gate, mirroring precursor.",
+  "abilities": [
     {
-     "rank": 1,
-     "name": "Quicken the Ground",
-     "grants": "Wake the living current in the ground, drawing on the deep life-substrate.",
-     "cannot": "It touches only the living substrate, it answers only a true channel, and what you wake, you must tend — roused life does not simply lie back down."
-    }
-   ],
-   "gated": "learned",
-   "nativeOrCombination": "native"
-  },
-  {
-   "schemaVersion": 1,
-   "id": "the_green_road",
-   "name": "The Green Road",
-   "levelReq": 4,
-   "energyCost": 11,
-   "powerSystem": "living_current",
-   "tradition": "rootkin",
-   "attribute": "physical",
-   "axes": {
-    "death_life": 0.8
-   },
-   "functions": [
-    "open",
-    "travel"
-   ],
-   "narrationHints": "You step into the living current and it CARRIES you — root to root, grove to grove, along the green road that runs under the whole world where the life-substrate never thinned.",
-   "description": "The deeper living-current working — moving through the connected life-substrate itself, the green road that links every rooted place. The Rootkin's equivalent of the precursor apertures, but living: not a door cut in the substrate, a vine followed through it.",
-   "notFor": "It travels the living, not the void — it reaches only where life-substrate runs unbroken; a dead zone, a machine-city, a burned waste has no green road through it. And you arrive rooted, not free; the road holds you as it carries you.",
-   "tree": [
+      "schemaVersion": 1,
+      "id": "quicken_the_ground",
+      "name": "Quicken the Ground",
+      "levelReq": 3,
+      "energyCost": 7,
+      "powerSystem": "living_current",
+      "tradition": "rootkin",
+      "attribute": "physical",
+      "axes": {
+        "death_life": 0.6
+      },
+      "functions": [
+        "open",
+        "reveal"
+      ],
+      "narrationHints": "You press your hand to the earth and it ANSWERS — the living current beneath everything stirring up to meet you, green and enormous and older than the nanites.",
+      "description": "The first touch of the living substrate — waking the green current in the ground, the deep life-layer the Rootkin never gave up as their kin gave up the nanites. Where the substrate-keepers channel the fabricated deep, the Rootkin channel the living one.",
+      "notFor": "It wakes the living, not the made — dead stone and machinery do not answer. And the current answers a true rootkin touch; forced or faithless, the ground stays asleep.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Quicken the Ground",
+          "grants": "Wake the living current in the ground, drawing on the deep life-substrate.",
+          "cannot": "It touches only the living substrate, it answers only a true channel, and what you wake, you must tend — roused life does not simply lie back down."
+        }
+      ],
+      "gated": "learned",
+      "nativeOrCombination": "native",
+      "harmRung": "none"
+    },
     {
-     "rank": 1,
-     "name": "The Green Road",
-     "grants": "Travel the connected living substrate — the green road between rooted places.",
-     "cannot": "It reaches only where life runs unbroken, it cannot cross the dead or the made, and the current that carries you also claims you for the length of the road."
+      "schemaVersion": 1,
+      "id": "the_green_road",
+      "name": "The Green Road",
+      "levelReq": 4,
+      "energyCost": 11,
+      "powerSystem": "living_current",
+      "tradition": "rootkin",
+      "attribute": "physical",
+      "axes": {
+        "death_life": 0.8
+      },
+      "functions": [
+        "open",
+        "travel"
+      ],
+      "narrationHints": "You step into the living current and it CARRIES you — root to root, grove to grove, along the green road that runs under the whole world where the life-substrate never thinned.",
+      "description": "The deeper living-current working — moving through the connected life-substrate itself, the green road that links every rooted place. The Rootkin's equivalent of the precursor apertures, but living: not a door cut in the substrate, a vine followed through it.",
+      "notFor": "It travels the living, not the void — it reaches only where life-substrate runs unbroken; a dead zone, a machine-city, a burned waste has no green road through it. And you arrive rooted, not free; the road holds you as it carries you.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Green Road",
+          "grants": "Travel the connected living substrate — the green road between rooted places.",
+          "cannot": "It reaches only where life runs unbroken, it cannot cross the dead or the made, and the current that carries you also claims you for the length of the road."
+        }
+      ],
+      "gated": "learned",
+      "nativeOrCombination": "native",
+      "harmRung": "none"
     }
-   ],
-   "gated": "learned",
-   "nativeOrCombination": "native"
-  }
- ]
+  ]
 }

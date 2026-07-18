@@ -29,19 +29,19 @@ export const SUBSTRATE_TUNING = {
 };
 
 /** A tradition's band {center, width}, or null for the untuned (folk/learned) — substrate-neutral. */
-export function bandFor(tradition, data) {
+export function bandFor(tradition, data) { // registry:internal
   const b = data?.substrateBand?.[tradition];
   return b && b.center != null ? { center: b.center, width: b.width ?? 0.18 } : null;
 }
 
 /** A place's effective density for a wielder carrying `carried` charge, clamped to [0,1]. */
-export function effectiveDensity(density, carried = 0) {
+export function effectiveDensity(density, carried = 0) { // registry:internal
   return Math.max(0, Math.min(1, (Number(density) || 0) + (Number(carried) || 0)));
 }
 
 /** The output factor [0,1] for a craft of `band` at effective density `eff`. Two-sided: full inside
  *  the band, steep starvation below, mild floored interference above. */
-export function bandFactor(band, eff, t = SUBSTRATE_TUNING) {
+export function bandFactor(band, eff, t = SUBSTRATE_TUNING) { // registry:internal
   if (!band) return 1; // untuned tradition — substrate-neutral
   const lo = band.center - band.width, hi = band.center + band.width;
   if (eff >= lo && eff <= hi) return 1;

@@ -6,7 +6,7 @@
 // world, one clock. Until then it's a per-player setting applied to their campaign.
 
 export const TIME_MODES = ["story", "real"];
-export const DEFAULT_RATIO = 3; // real mode default: 1 real hour = 1 game day
+export const DEFAULT_RATIO = 3; // real mode default: 1 real hour = 1 game day // registry:internal
 
 const SEASONS = ["early-spring", "late-spring", "early-summer", "late-summer", "harvest", "early-winter", "deep-winter", "thaw"];
 const DAYS_PER_SEASON = 45;

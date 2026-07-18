@@ -199,7 +199,7 @@ export function birthWeightOf(context = {}) {
 
 /** Attach the `_gen` sidecar: entityId, birth-weight, engagement/tier, rating-tag, provenance,
  *  attention history. Clean provenance from day one so Phase-3 promotion is zero-rework. */
-export function stampGenerated(entity, type, entityId, context = {}) {
+export function stampGenerated(entity, type, entityId, context = {}) { // registry:internal
   entity.id = entityId;
   entity._gen = {
     entityId, type,
@@ -230,7 +230,7 @@ export function stampGenerated(entity, type, entityId, context = {}) {
 
 /** Write a generated record into the per-save store + drop a codex topic pointing at the
  *  same entityId (so the knowledge-graph surfacing finds it). Returns the stored record. */
-export function persistGenerated(character, type, record, deps = {}) {
+export function persistGenerated(character, type, record, deps = {}) { // registry:internal
   ensureGenerated(character);
   character.generated[type][record.id] = record;
   // lightweight codex node so codexForGM surfaces it (person/place/lore by type)
@@ -453,7 +453,7 @@ export function buildGeneratePrompt(type, context = {}, { schema = {}, examples 
 }
 
 /** A short natural-language read of a place's disposition, for the generation prompt. */
-export function describeDisposition(loc = {}) {
+export function describeDisposition(loc = {}) { // registry:internal
   const pi = loc.poleIntensity || {};
   const poles = Object.entries(pi).filter(([, v]) => Math.abs(v) > 0.15).sort((a, b) => Math.abs(b[1]) - Math.abs(a[1])).slice(0, 4);
   if (poles.length) return poles.map(([p, v]) => `${p} (${v > 0 ? "strong" : "leaning"})`).join(", ");

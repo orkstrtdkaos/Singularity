@@ -13,7 +13,7 @@ export function tierOf(levelReq) {
   return ROMAN[Math.max(1, Math.min(5, levelReq || 1))];
 }
 
-export const CLASS_COLOR = {
+export const CLASS_COLOR = { // registry:internal
   harmonic: "#5aa8a0", radiant: "#d4a24a", valley_craft: "#7ba05b",
   precursor: "#a678c8", learned: "#8b8778", discovery: "#c99"
 };

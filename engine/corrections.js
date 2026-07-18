@@ -21,7 +21,7 @@ const clampN = (v, lo, hi) => Math.max(lo, Math.min(hi, Math.round(Number(v))));
 // fields a correction may NEVER touch — these ADVANCE, they don't repair.
 const FORBIDDEN_FIELDS = new Set(["xp", "level", "skillPoints", "attunement", "health", "energy", "abilities", "inventory", "subAttributes", "attributes", "pendingSubPoints"]);
 
-export function ensureCorrections(character) { if (!character.corrections) character.corrections = []; return character.corrections; }
+export function ensureCorrections(character) { if (!character.corrections) character.corrections = []; return character.corrections; } // registry:internal
 
 function log(character, entry, ctx) {
   ensureCorrections(character);

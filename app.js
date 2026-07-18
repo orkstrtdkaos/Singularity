@@ -55,7 +55,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // SNG-155: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.109";
+const APP_VERSION = "1.8.110";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3099,7 +3099,10 @@ async function onChoice(choice) {
   // The resume is the CHOICE itself (plain JSON): the answer annotates it and re-enters onChoice.
   if (!choice.intentRung && !choice.departureConfirmed) {
     const askedKey = activeEnc() ? `enc:${activeEnc().defId}` : `scene:${character.currentLocationId}`;
-    const harmGate = harmGateFor(abilityIds, fullCatalog(), askedKey, character._intentAsked);
+    // SNG-156: the rung is per-RANK (147c moved it into ab.tree[]) — gate on what this character
+    // can actually do at the rank they hold, not on the ability's lifetime ceiling.
+    const ownedLevels = Object.fromEntries((character.abilities || []).map(a => [a.abilityId, a.level]));
+    const harmGate = harmGateFor(abilityIds, fullCatalog(), askedKey, character._intentAsked, ownedLevels);
     const depGate = harmGate ? null : departureGateFor(travelIntentOf(action), character, CONTENT.locations);
     const gate = harmGate || depGate;
     if (gate) {

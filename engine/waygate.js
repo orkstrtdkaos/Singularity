@@ -18,7 +18,7 @@
 // free: the gate rides the same travel dispatch).
 
 export function isWaygate(loc) { return !!loc?.waygate; }
-export function waygateTierOf(loc) { return Math.max(1, Number(loc?.waygateTier) || 1); }
+export function waygateTierOf(loc) { return Math.max(1, Number(loc?.waygateTier) || 1); } // registry:internal
 
 /** The hub gate — the location flagged waygateHub, falling back to the_crossing
  *  if it carries the waygate flag. Null when no hub is authored (network dark). */
@@ -28,7 +28,7 @@ export function hubWaygate(locations) {
 }
 
 /** All authored gates. */
-export function allWaygates(locations) {
+export function allWaygates(locations) { // registry:internal
   return Object.values(locations || {}).filter(isWaygate);
 }
 

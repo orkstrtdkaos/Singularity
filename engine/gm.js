@@ -265,7 +265,7 @@ export function tierParts(ctx) {
 
 /** Cache-tier blocks for the runtime prompt: four stable→volatile prefix tiers, then the
  *  uncached player turn. Tier 1's constant rules are folded onto GM_SYSTEM by the caller. */
-export function buildTiers(ctx) {
+export function buildTiers(ctx) { // registry:internal
   const t = tierParts(ctx);
   return {
     rules: t.system.join("\n\n"),

@@ -11,7 +11,7 @@ import { tierOf } from "./skilltree.js";
 
 export const INTENSITIES = ["conserve", "standard", "surge"];
 
-export function intensityStep(rules = {}, key = "standard") {
+export function intensityStep(rules = {}, key = "standard") { // registry:internal
   return (rules.steps && rules.steps[key]) || (rules.steps && rules.steps.standard) || { energyMult: 1, effectMod: 0, backlashChance: 0 };
 }
 
@@ -42,7 +42,7 @@ export function autoIntensity(standardChance, rules = {}) {
 
 /** Numeric tier 1..5 from an ability's levelReq (surgeBacklashByTier is keyed 1..5,
  *  while tierOf() returns Roman for display). */
-export function tierNum(levelReq) {
+export function tierNum(levelReq) { // registry:internal
   return Math.max(1, Math.min(5, levelReq || 1));
 }
 

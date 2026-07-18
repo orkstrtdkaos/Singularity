@@ -178,7 +178,7 @@ export function resolveSaveConflict(local, remote) {
 /** PUSH GUARD: never let a stale local overwrite a fresher remote. Re-reads remote and
  *  refuses the write if remote is newer than what we're about to push. Returns
  *  { ok, reason, remote? }. */
-export async function pushCharacterGuarded(character) {
+export async function pushCharacterGuarded(character) { // registry:internal
   if (!syncEnabled()) return { ok: false, reason: "sync-off" };
   const path = charPath(character.playerKey, character.id);
   const remote = await fetchRepoJSON(path);

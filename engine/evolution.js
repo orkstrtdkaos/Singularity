@@ -9,7 +9,7 @@
 
 import { ensurePractice } from "./practice.js";
 
-export function coUseKey(itemId, companionId) { return `${itemId}+${companionId}`; }
+export function coUseKey(itemId, companionId) { return `${itemId}+${companionId}`; } // registry:internal
 
 /** Count a shared cast (item × companion co-activation) in the practice ledger. */
 export function recordCoUse(character, itemId, companionId, n = 1) {
@@ -28,7 +28,7 @@ function bondValue(character, companionId) {
   return character.companionBonds?.[companionId] ?? 0;
 }
 
-export function evolutionOf(itemId, catalog = {}) {
+export function evolutionOf(itemId, catalog = {}) { // registry:internal
   return catalog[itemId]?.evolution || null;
 }
 

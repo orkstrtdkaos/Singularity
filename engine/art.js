@@ -147,7 +147,7 @@ const IMG_SIZES = {
  *  renders non-human, instead of the literal "character portrait" prefix biasing the model to a
  *  plain human. Explicit form/lineage/appearance wins; otherwise a neutral human default (human is
  *  a stated value, never the unspoken assumption). */
-export function formOf(subject = {}) {
+export function formOf(subject = {}) { // registry:internal
   const explicit = subject.form || subject.lineage || subject.appearance;
   if (explicit) return String(explicit).slice(0, 220);
   return "a person";

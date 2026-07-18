@@ -25,12 +25,12 @@ import { namesMatch } from "./namematch.js";
 import { effectiveWeight, GEN_TYPES, generatedRecords } from "./generate.js";
 import { RATING_LEVEL, ratingLevel, isMinorProfile } from "./playerprofile.js";
 
-export const CANON_SCHEMA_VERSION = 1;
+export const CANON_SCHEMA_VERSION = 1; // registry:internal
 
 // The gate: only entities the engagement governor raised to NOMINATED promote (Phase-2
 // `nominationsFor` surfaces exactly these). A weight floor can raise the bar further.
-export const PROMOTE_TIER = "nominated";
-export const PROMOTE_WEIGHT_FLOOR = 0;
+export const PROMOTE_TIER = "nominated"; // registry:internal
+export const PROMOTE_WEIGHT_FLOOR = 0; // registry:internal
 
 // Authored core canon is the designed spine — it sits at a weight a generated entity effectively
 // never out-rolls, so a promotion that collides with authored content becomes a variant, not an
@@ -119,7 +119,7 @@ export function contributionsBy(store) {
 
 /** Realness weight of any record — a canon record (`_canon.weight`), an authored-content record
  *  (the high spine floor), or a fresh generated record (`effectiveWeight`). */
-export function weightOf(record, { authored = false } = {}) {
+export function weightOf(record, { authored = false } = {}) { // registry:internal
   if (authored) return AUTHORED_CANON_WEIGHT;
   if (record?._canon) return record._canon.weight ?? 1;
   return effectiveWeight(record);

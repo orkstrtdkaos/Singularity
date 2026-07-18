@@ -23,16 +23,28 @@
 // impactsLocal. All gates fail OPEN on missing data (a null regionId is "no
 // gate", never "a boundary").
 
-export const INTENT_KINDS = ["harm", "departure", "irreversible"];
+export const INTENT_KINDS = ["harm", "departure", "irreversible"]; // registry:internal
 
 /** PURE. Should a harm gate fire for this declared action? Fires when any used
  *  ability's harmRung is `lethal`, the player hasn't already answered (rung
  *  carried on the choice), and this encounter/scene hasn't asked yet.
  *  `askedKey` scopes the dedupe: never twice in one encounter (spec §2). */
-export function harmGateFor(abilityIds, catalog, askedKey, asked = {}) {
+/** PURE. The harm rung an ability actually carries AT THE RANK THE CHARACTER HOLDS.
+ *  SNG-147c moved the canonical rung per-rank into `ab.tree[]` ({rank, grants, harmRung, …});
+ *  the top-level `harmRung` is the ability's ceiling. Gating on the ceiling would fire on a
+ *  rank-1 use of a craft that only turns lethal at rank 3 — a false gate, and this gate is only
+ *  honest if it is rare. Falls back to the top-level rung when no per-rank entry exists. */
+export function rungAtRank(ab, level = 1) {
+  if (!ab) return null;
+  const entry = (ab.tree || []).find(t => Number(t.rank) === Number(level));
+  return entry?.harmRung ?? ab.harmRung ?? null;
+}
+
+export function harmGateFor(abilityIds, catalog, askedKey, asked = {}, ownedLevels = {}) {
   if (!abilityIds?.length) return null;
   if (askedKey && asked?.[askedKey]) return null;
-  const lethal = abilityIds.map(id => catalog?.[id]).find(ab => ab?.harmRung === "lethal");
+  const lethal = abilityIds.map(id => catalog?.[id])
+    .find(ab => ab && rungAtRank(ab, ownedLevels?.[ab.id] ?? 1) === "lethal");
   if (!lethal) return null;
   return {
     kind: "harm",

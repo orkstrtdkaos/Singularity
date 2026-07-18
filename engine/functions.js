@@ -26,7 +26,7 @@ export function buildFunctionIndex(vocab = {}) {
 }
 
 /** The family of a single verb (or null). */
-export function familyOfVerb(verb, index) { return index?.verbToFamily?.[String(verb)] || null; }
+export function familyOfVerb(verb, index) { return index?.verbToFamily?.[String(verb)] || null; } // registry:internal
 
 /** The set of families an ability engages, from its `functions` verb array. Returns string[] (deduped). */
 export function familiesOfAbility(ability, index) {

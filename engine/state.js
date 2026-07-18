@@ -302,7 +302,7 @@ export function dedupePlayers() {
 }
 
 /** Full profile objects on this device (not just {playerKey,displayName}). */
-export function listPlayerProfiles() {
+export function listPlayerProfiles() { // registry:internal
   const out = [];
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);

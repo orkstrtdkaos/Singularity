@@ -55,7 +55,7 @@ export function typeAffinity(location, action, table = {}) {
 /** A location's amplitude multiplies its vector cap so charged places swing wider
  *  (Aevi-authored: precursor 2.0, ruin/shrine 1.5, …). Per-location id override wins,
  *  else the strongest matching tag amplitude, else 1.0. Cap clamped 8..24. */
-export function effectiveVectorCap(location, table = {}) {
+export function effectiveVectorCap(location, table = {}) { // registry:internal
   const va = table.vectorAlignment || {};
   const baseline = va.baselineCap ?? va.params?.cap ?? DEFAULT_VECTOR.cap;
   const amp = va.amplitude;

@@ -4,7 +4,7 @@
 // place (a farming village gets a frightened neighbour, not a bandit ambush). Pure + headless-testable;
 // the GM narrates the pressure the engine decides to apply (Law 1).
 
-export const QUIET_THRESHOLD = 3;
+export const QUIET_THRESHOLD = 3; // registry:internal
 
 /** A turn is "eventful" (it resets the quiet counter) when the world already acted this beat: an
  *  encounter is live or was just woven, a quest changed, a scene ended, or pressure was applied. */

@@ -11,7 +11,7 @@ const CAPS = { notes: 12, flags: 10 };
  *  from a truncated one (two long names sharing a 40-char prefix used to collapse
  *  into one record). A very long slug is bounded, but distinctness is preserved by
  *  a deterministic hash suffix of the full name — same name, same slug, forever. */
-export function subPlaceSlug(fullName) {
+export function subPlaceSlug(fullName) { // registry:internal
   let slug = String(fullName).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
   if (slug.length > 60) {
     let h = 0;

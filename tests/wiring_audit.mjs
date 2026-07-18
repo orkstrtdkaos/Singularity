@@ -123,7 +123,15 @@ const nonCanonTypes = abilityRecords.filter(a => (a.challengeTypes || []).some(t
 // strike/break/hinder function or FIGHT/DUEL/DEFEND type, with no offensive verb in any grants)
 const claimsCombat = (a) => (a.functions || []).some(f => ["strike", "break", "hinder"].includes(String(f))) ||
   (a.challengeTypes || []).some(t => ["FIGHT", "DUEL", "DEFEND"].includes(String(t)));
-const teachesCombat = (a) => (a.ranks || []).some(r => /\b(strike|striking|attack|wound|fell|down(s|ing)?|disable|disarm|end(s|ing)? (a|the|an)\b|bring .{0,20}down|stop(s|ping)? (a|the|an)\b|break(s|ing)?|shatter|force|drive (back|off)|repel|bind|pin|stagger|fight|combat|offen[cs]|harm)\b/i.test(String(r.grants || "")));
+// ⚠️ CORRECTED (SNG-156). This read `a.ranks[]` — a field NO ability carries. `teachesCombat` was
+// therefore ALWAYS false, so this metric was silently measuring "claims combat" and nothing else:
+// it could never fall by authoring better grant text, which is exactly what the 147c content lane
+// was doing. Rank data lives in `a.tree[]` ({rank, name, grants, cannot, harmRung, functions,
+// gains}) — the shape `progression.js:602` actually reads. Law 11 applied to my own gate.
+const OFFENSIVE = /\b(strike|striking|attack|wound|fell|kill|slay|disable|disarm|bring .{0,20}down|break(s|ing)?|shatter|force|drive (back|off)|repel|bind|pin|stagger|fight|combat|offen[cs]|harm|blow|cut|sever)\b/i;
+const teachesCombat = (a) => (a.tree || []).some(r =>
+  OFFENSIVE.test(String(r.grants || "")) ||
+  (r.functions || []).some(f => ["strike", "break", "hinder"].includes(String(f))));
 const combatUntaught = abilityRecords.filter(a => claimsCombat(a) && !teachesCombat(a));
 
 const measured = {
@@ -134,15 +142,7 @@ const measured = {
 };
 
 const baselinePath = join(root, "tests", "wiring_baseline.json");
-if (process.env.UPDATE_WIRING_BASELINE === "1" || !existsSync(baselinePath)) {
-  writeFileSync(baselinePath, JSON.stringify({
-    note: "SNG-147d ratchet — known-offender counts may only DECREASE. Re-baseline deliberately with UPDATE_WIRING_BASELINE=1 after a content improvement; never hand-edit upward.",
-    updatedAt: new Date().toISOString().slice(0, 10),
-    ...measured
-  }, null, 2) + "\n");
-  console.log(`ok    ratchet baseline ${existsSync(baselinePath) ? "written" : "created"}: ${JSON.stringify(measured)}`);
-}
-const baseline = JSON.parse(readFileSync(baselinePath, "utf8"));
+const baseline = existsSync(baselinePath) ? JSON.parse(readFileSync(baselinePath, "utf8")) : {};
 for (const [k, v] of Object.entries(measured)) {
   check(`ratchet: ${k} = ${v} (baseline ${baseline[k]}) — may only go DOWN`, v <= baseline[k],
     k === "abilitiesCombatClaimedNotTaught" ? `regressed — a new ability claims combat its grants never teach (147c rule: if it can fight, a rank grants says HOW)` : `regressed past baseline`);
@@ -159,23 +159,64 @@ const profileGhosts = abilityRecords.filter(a => "challengeProfile" in a);
 check("147a: challengeProfile stays retired (zero records carry it)", profileGhosts.length === 0,
   profileGhosts.slice(0, 5).map(a => a.id).join(", "));
 
-// ---------- advisory: orphan-export sweep ----------
+// ---------- advisory: orphan-export sweep (SNG-156) ----------
+// PO amendment A2 was right and the first cut of this was wrong twice over:
+//   (1) the reference corpus omitted tests/ and scripts/ — a test IS a consumer, so every export
+//       whose only caller was a smoke test read as an orphan (all six waygate.js exports had ten
+//       tests each; GM_CONTEXT was flagged by the very audit that iterates it).
+//   (2) it dumped the whole list on every run. 113 lines of standing noise is an advisory nobody
+//       reads — the same "a hint that fires every turn is a hint nobody reads" failure this batch
+//       cited elsewhere. It now RATCHETS: the known set is baselined and silent; only what CHANGED
+//       is named.
 const engineFiles = readdirSync(join(root, "engine")).filter(f => f.endsWith(".js"));
 const allSrc = engineFiles.map(f => ({ f, src: read(`engine/${f}`) }));
-const appAndTests = appSrc + allSrc.map(x => x.src).join("\n") + read("index.html");
+const readDirSrc = (dir, exts) => {
+  try {
+    return readdirSync(join(root, dir)).filter(f => exts.some(e => f.endsWith(e)))
+      .map(f => read(`${dir}/${f}`)).join("\n");
+  } catch { return ""; }
+};
+// The full consumer corpus: runtime, markup, the test suite, and the standing helper scripts.
+const consumerCorpus = [
+  appSrc, allSrc.map(x => x.src).join("\n"), read("index.html"),
+  readDirSrc("tests", [".mjs", ".js"]), readDirSrc("scripts", [".mjs", ".js"])
+].join("\n");
+
 const orphans = [];
 for (const { f, src } of allSrc) {
   for (const m of src.matchAll(/^export (?:async )?(?:function|const|let) (\w+)/gm)) {
     const name = m[1];
     const line = src.slice(src.lastIndexOf("\n", m.index) + 1, src.indexOf("\n", m.index));
-    if (/registry:internal/.test(line)) continue;
-    // referenced anywhere outside its own defining line?
-    const refs = [...appAndTests.matchAll(new RegExp(`\\b${name}\\b`, "g"))].length;
+    if (/registry:internal/.test(line)) continue; // declared module-internal on purpose
+    const refs = [...consumerCorpus.matchAll(new RegExp(`\\b${name}\\b`, "g"))].length;
     const selfRefs = [...src.matchAll(new RegExp(`\\b${name}\\b`, "g"))].length;
     if (refs <= selfRefs) orphans.push(`${f}:${name}`);
   }
 }
-if (orphans.length) console.log(`note  ${orphans.length} export(s) with no external reference (advisory — mark intentional ones with // registry:internal):\n      ${orphans.join(", ")}`);
+orphans.sort();
+const knownOrphans = baseline.orphanExports || [];
+const newOrphans = orphans.filter(o => !knownOrphans.includes(o));
+const goneOrphans = knownOrphans.filter(o => !orphans.includes(o));
+if (newOrphans.length) {
+  console.log(`note  ${newOrphans.length} NEW export(s) with no consumer — wire it, test it, or mark it // registry:internal:\n      ${newOrphans.join(", ")}`);
+}
+if (goneOrphans.length) {
+  console.log(`ok    ${goneOrphans.length} previously-orphaned export(s) now have a consumer (re-baseline with UPDATE_WIRING_BASELINE=1): ${goneOrphans.slice(0, 6).join(", ")}${goneOrphans.length > 6 ? " …" : ""}`);
+}
+if (!newOrphans.length && !goneOrphans.length) {
+  console.log(`ok    orphan-export sweep: ${orphans.length} known un-consumed export(s), no change (advisory)`);
+}
+
+// Baseline write happens LAST so it can capture the orphan set alongside the ratchet counts.
+if (process.env.UPDATE_WIRING_BASELINE === "1" || !existsSync(baselinePath)) {
+  writeFileSync(baselinePath, JSON.stringify({
+    note: "SNG-147d ratchet — known-offender counts may only DECREASE. orphanExports is the KNOWN un-consumed set (SNG-156): it is silent when unchanged, and only NEW entries are named. Re-baseline deliberately with UPDATE_WIRING_BASELINE=1; never hand-edit a count upward.",
+    updatedAt: new Date().toISOString().slice(0, 10),
+    ...measured,
+    orphanExports: orphans
+  }, null, 2) + "\n");
+  console.log(`ok    ratchet baseline written: ${JSON.stringify(measured)} + ${orphans.length} known orphan export(s)`);
+}
 
 console.log(failures === 0 ? "\nWiring audit: all checks passed." : `\nWiring audit: ${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

@@ -9,7 +9,7 @@ import { applyLevelUps, discoveryKey } from "./progression.js";
 import { ensureBonds } from "./companions.js";
 import { ensurePractice } from "./practice.js";
 
-export const BACKFILL_VERSION = 1;
+export const BACKFILL_VERSION = 1; // registry:internal
 
 export function needsBackfill(character) {
   return (character?.backfillVersion || 0) < BACKFILL_VERSION;

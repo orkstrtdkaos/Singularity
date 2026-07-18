@@ -161,7 +161,7 @@ export function isRealQuest(def) {
 /** Normalize an authored quest into a not-yet-started character-quest record. Outcomes carry both
  *  `narration` (authored prose, the chronicle voice) and `effects[]` (machine-readable deltas the
  *  engine applies). Legacy outcomes with only `consequences[]` are still honored (prose fallback). */
-export function structuredQuestRecord(def) {
+export function structuredQuestRecord(def) { // registry:internal
   return {
     id: slugify(def.id), title: def.name || def.id, structured: true, status: "available",
     premise: def.premise || "", stakes: def.stakes || "", axis: def.axis || null,

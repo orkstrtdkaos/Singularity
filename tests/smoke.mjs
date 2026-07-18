@@ -4109,8 +4109,20 @@ await (async () => {
 
 // --- SNG-145: intent confirmation for costly acts (Law 9 in the play loop) ---
 {
-  const { harmGateFor, departureGateFor, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } = await import('../engine/intent.js');
+  const { harmGateFor, departureGateFor, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents, rungAtRank } = await import('../engine/intent.js');
   const catalog = { blade: { name: "The Single Stroke", harmRung: "lethal" }, mend: { name: "Mend", harmRung: "none" }, bruise: { name: "Bruise", harmRung: "damaging" } };
+  // SNG-156: SNG-147c moved the canonical rung PER-RANK into ab.tree[]; the top-level value is the
+  // ceiling. Gating on the ceiling fires on a rank-1 use of a craft that only kills at rank 3.
+  const grows = { id: "grows", name: "The Long Study", harmRung: "lethal",
+    tree: [{ rank: 1, harmRung: "none" }, { rank: 2, harmRung: "incapacitating" }, { rank: 3, harmRung: "lethal" }] };
+  check("156: rungAtRank reads the per-rank rung, falling back to the top-level ceiling",
+    rungAtRank(grows, 1) === "none" && rungAtRank(grows, 3) === "lethal" && rungAtRank(catalog.blade, 1) === "lethal" && rungAtRank(null, 1) === null);
+  check("156: a craft that only turns lethal at rank 3 does NOT gate at rank 1 (no false gate)",
+    harmGateFor(["grows"], { grows }, "enc:x", {}, { grows: 1 }) === null);
+  check("156: the same craft DOES gate once the character holds rank 3",
+    harmGateFor(["grows"], { grows }, "enc:x", {}, { grows: 3 })?.kind === "harm");
+  check("156: with no owned-level map it assumes rank 1 (conservative — never over-gates)",
+    harmGateFor(["grows"], { grows }, "enc:x", {}) === null);
   const g = harmGateFor(["blade"], catalog, "enc:duel", {});
   check("145: a lethal-rung ability declared → harm gate fires with incapacitate as the DEFAULT",
     g?.kind === "harm" && g.default === "incapacitate" && g.options.length === 2);

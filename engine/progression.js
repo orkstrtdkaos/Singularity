@@ -302,7 +302,7 @@ export function effectiveLevelReq(ab, character, rules) {
  *  Reads the great-circle geometry via domainAccess (traditions.json). Only applies once a
  *  character has crystallized/picked domains; legacy (no domains) stays open. Braid combinations
  *  and artifact grants never route through learnAbility, so those crossings are unaffected. */
-export function domainGateFor(ab, character, traditionIndex) {
+export function domainGateFor(ab, character, traditionIndex) { // registry:internal
   // SNG-089: an Accord craft is FREELY ACCESSED — ungated by origin/domain/ring-distance. It still
   // costs a point (base 1); the tuition is the journey to the waygate, not a domain gate.
   if (ab?.accord) return { allowed: true, penalty: 1, band: "accord" };
@@ -402,7 +402,7 @@ export function acquireDomain(character, traditionId, rules, opts = {}) {
 }
 
 /** SNG-101: the additive per-character access state domainAccess consults (all absent-tolerant). */
-export function domainOpts(character) {
+export function domainOpts(character) { // registry:internal
   return { foreclosed: character?.foreclosed, domainCeilings: character?.domainCeilings, domainsAcquired: character?.domainsAcquired };
 }
 
@@ -583,7 +583,7 @@ export function applyBacklash(character, rules) {
 /** SNG-089: how a craft harms, in words the GM can narrate to. "Can fight" ≠ "can harm" — an
  *  incapacitating craft STOPS a threat without wounding it; a `none` craft (Stillhold peace-working)
  *  wounds nothing at all. Feeding this stops the GM inventing a wound a craft cannot cause. */
-export function harmRungGloss(rung) {
+export function harmRungGloss(rung) { // registry:internal
   switch (rung) {
     case "lethal": return "this craft CAN end a life — in its own idiom (never a generic wound); narrate a real death when the fiction earns it";
     case "damaging": return "this craft WOUNDS but does not slay — a weakened thing is still a thing; it hurts, it does not kill";

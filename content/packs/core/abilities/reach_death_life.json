@@ -347,34 +347,31 @@
       },
       "functions": [
         "break",
-        "hinder",
-        "strike"
+        "hinder"
       ],
       "narrationHints": "Touch, and the quick goes out of a thing — a vine, a lock's wooden pin, a reaching hand.",
-      "description": "Hasten decay in a thing — rot wood, wilt growth, age a structure past its holding. Palework's edge turned on the material world. The Grey Hand handles people; Wither handles everything else.",
-      "notFor": "Weakening living people — that is The Grey Hand. Wither ages and rots THINGS: structures, barricades, terrain, growth. It does not wound; it hastens what was already in a thing.",
+      "description": "Hasten decay in a thing — rot wood, wilt growth, age a structure past its holding. Palework's edge turned on the MATERIAL world. The Grey Hand handles people; Wither handles everything else, and the two are never the same working.",
+      "notFor": "Living people, entirely — weakening a person is The Grey Hand's whole job and none of Wither's. This ages and rots THINGS: structures, barricades, terrain, growth, and the once-living material a thing was made from. It does not wound, because there is nothing here that touches a body.",
       "tree": [
         {
           "rank": 1,
           "name": "Wither",
-          "grants": "Rot or wilt a plant, a wooden object, a rope, a door — anything living or once-living. Age a material thing faster than it should go. Turned on a living body it works the same way and slower: flesh does not rot in a moment, but it weakens, and held long enough it is a real and directly-inflicted harm.",
-          "cannot": "Only things, not people. Cannot undo.",
+          "grants": "Rot or wilt what grows or once grew — a plant, a rope, a wooden object, a door. Age a material thing faster than it should go: it weakens where it stands, and gives out under the next weight it is asked to take.",
+          "cannot": "It hastens what was ALREADY going in a thing — sound new stone and fresh iron have nothing to hasten and shrug it off. And it stops entirely at a living body: a person is not a material you may age.",
           "functions": [
-            "hinder",
-            "strike"
+            "hinder"
           ],
           "gains": "broaden",
-          "harmRung": "damaging"
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Grey Touch",
-          "grants": "Age a structure — a wall, a bridge, a barricade — decades in moments. Halt a spreading blight by giving the growth-front a clean, sudden end.",
+          "grants": "Age a structure — a wall, a bridge, a barricade — decades in moments, until it can no longer carry what it was built to carry; a gate you have aged breaks under one shoulder. Halt a spreading blight by giving the growth-front a clean, sudden end.",
           "cannot": "Withering is not breaking. The thing fails as things fail — structurally, from within. It takes a moment, not an instant.",
           "functions": [
             "hinder",
-            "break",
-            "strike"
+            "break"
           ],
           "gains": "broaden",
           "harmRung": "damaging"
@@ -382,15 +379,14 @@
         {
           "rank": 3,
           "name": "The Withering",
-          "grants": "Wither at range and at scale — a field of crops, a fortification, a siege engine, a line of wooden shields. The terrain itself becomes unreliable.",
-          "cannot": "Living flesh resists it far better than wood or cloth — this is never a fast way to hurt someone, and anyone who can simply leave will. At scale it takes fields and fortifications, and the Ashwardens note that starving a valley is the commonest use it has ever been put to.",
+          "grants": "Wither at range and at scale — a field of crops, a fortification, a siege engine, a line of wooden shields, all weakened past use and broken by their own weight. The terrain itself becomes unreliable underfoot.",
+          "cannot": "Living flesh is outside it at every rank. At scale it takes fields, fortifications, and siege works — and the Ashwardens note that starving a valley is the commonest use it has ever been put to, which is a harm done to people without the craft ever touching one.",
           "functions": [
             "hinder",
-            "break",
-            "strike"
+            "break"
           ],
           "gains": "deepen",
-          "harmRung": "incapacitating"
+          "harmRung": "damaging"
         }
       ],
       "challengeTypes": [
@@ -399,7 +395,7 @@
         "CHASE"
       ],
       "tradition": "ashwarden",
-      "harmRung": "incapacitating",
+      "harmRung": "damaging",
       "nativeOrCombination": "native"
     },
     {
@@ -599,8 +595,8 @@
         "hinder"
       ],
       "narrationHints": "The strength goes out of him like water out of a cracked jar, and he can feel it going.",
-      "description": "Enfeeblement. You take the vigour out of a living thing by touch or by near-hand — not its life, its STRENGTH. It is still standing. It simply cannot do what it could a moment ago.",
-      "notFor": "It drains, it does not slay — a weakened thing is still a thing, and a weakened boar is still a boar with tusks. It is VISIBLE: they know what you are doing to them, and so does everyone watching.",
+      "description": "Enfeeblement. You take the vigour out of a LIVING thing by touch or near-hand — not its life, its STRENGTH. It is still standing. It simply cannot do what it could a moment ago. Wither is the same edge turned on things; the Grey Hand is the one that is only ever for people and beasts.",
+      "notFor": "Objects, structures, or terrain — that is Wither, and the two do not substitute for each other. It drains, it does not slay: a weakened thing is still a thing, and a weakened boar is still a boar with tusks. And it is VISIBLE — they know what you are doing to them, and so does everyone watching.",
       "tree": [
         {
           "rank": 1,
@@ -628,7 +624,7 @@
           "rank": 3,
           "name": "The Withered Hour",
           "grants": "Weaken a group, or weaken one thing so thoroughly it cannot stand.",
-          "cannot": "What you have weakened this far is nearly dead, and the Ashwardens will ask whether you meant to go that far.",
+          "cannot": "It never kills and never wounds — a Grey Hand that has done its worst leaves someone unable to stand, not dying, and they recover once you stop. Nothing it does is deniable: the Ashwardens hold that this is the honest one, because the victim and every witness can see exactly who is doing it and that it is being chosen.",
           "functions": [
             "hinder"
           ],

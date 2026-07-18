@@ -78,7 +78,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.3575765787895855,
+    "spectrumId": -0.3396977498501062,
     "violence_peace": 0.1030845625,
     "chaos_order": 0.25160683164236214,
     "mechanical_spiritual": 0.2400392471479881,
@@ -825,81 +825,110 @@
         "player": "Ask if Siol herself is bound somewhere, and whether her road and yours run the same direction for any part of it",
         "summary": "Silas asks Siol if their roads overlap — she answers yes, for a day or so heading south, if the pace is easy.",
         "narration": "You ask Siol plainly whether she is herself bound somewhere, and whether any stretch of your roads runs the same direction.\n\nShe considers the question without hurry. 'South,' she says at last, 'but not as far as the March mouth. My road turns before the Steadwood thins.' She tilts her head slightly, the gesture of someone mapping two lines against each other in their thoughts. 'For a day or so, perhaps, if the pace is easy. I do not keep a strict morning schedule.'\n\nHuginn shifts on your shoulder and makes a sound — not quite approval, not quite skepticism, but something that Siol notices. She glances at him. 'Marrow does not object,' she says, dry and quiet, and then she looks back at you to see whether you do.\n\nPell says nothing. She is watching you, the same way she watches a joint being brought together — to see whether the fit is clean."
+      },
+      {
+        "player": "Invite her to travel with you as far as her roads goes - but also offer to allow her to give you a quick tour of what the city has to offer.  It's Pell's first time here and you are not well acquainted yourself.  You might like to try a duel and to petitiion the Council of Mavens.  ",
+        "summary": "Silas invites Siol to tour the Hub before the road south — she accepts without ceremony and leads the party toward the Coliseum first.",
+        "narration": "You tell Siol yes — her company south as far as her road runs, and you mean it plainly. Then you add the second part: neither you nor Pell know this city well, and this is Pell's first time through a waygate. If she has no strict schedule and the morning is still young, you would welcome a short tour of what the Hub has to offer before the road takes you. You name the Coliseum and the Council of Mavens as things you have reason to visit.\n\nSiol looks at Pell first, which is an interesting choice. Pell meets the look with a short nod — not warming up to her yet, but fair. Then Siol looks back at you. 'A tour is a reasonable use of a morning,' she says. She folds the edge of her coat back from her belt and turns to say something brief to the nearest of her camp-mates — a low exchange, a hand lifted in acknowledgment, and she steps clear of the camp without further ceremony.\n\nHuginn makes a sound from your shoulder. It is the sound he makes when he has assessed a situation and found it, on balance, acceptable. Siol catches it. The corner of her mouth moves, just slightly. 'The Coliseum keeps its outer gates open before the market sets,' she says, starting toward the plaza's northern edge. 'The Council of Mavens takes petitions before midday. I would suggest the Coliseum first — the queue outside the petition board fills early, and the wait is more bearable if you have done something physical beforehand.' She says this as though it is simply a fact about the city's rhythms, and perhaps it is.\n\nPell falls into step beside you. The Hub is alive around you even at this hour — figures crossing the crescent stones with the purposeful ease of people who know exactly where they are going. The Ent's circle to the east is just visible between two market stalls that are unfolding their awnings. The Council's colonnade is ahead, its petition board a pale rectangle on the near pillar even from here."
       }
     ],
     "lastTurn": {
-      "narration": "You ask Siol plainly whether she is herself bound somewhere, and whether any stretch of your roads runs the same direction.\n\nShe considers the question without hurry. 'South,' she says at last, 'but not as far as the March mouth. My road turns before the Steadwood thins.' She tilts her head slightly, the gesture of someone mapping two lines against each other in their thoughts. 'For a day or so, perhaps, if the pace is easy. I do not keep a strict morning schedule.'\n\nHuginn shifts on your shoulder and makes a sound — not quite approval, not quite skepticism, but something that Siol notices. She glances at him. 'Marrow does not object,' she says, dry and quiet, and then she looks back at you to see whether you do.\n\nPell says nothing. She is watching you, the same way she watches a joint being brought together — to see whether the fit is clean.",
-      "sceneSummary": "Silas asks Siol if their roads overlap — she answers yes, for a day or so heading south, if the pace is easy.",
+      "narration": "You tell Siol yes — her company south as far as her road runs, and you mean it plainly. Then you add the second part: neither you nor Pell know this city well, and this is Pell's first time through a waygate. If she has no strict schedule and the morning is still young, you would welcome a short tour of what the Hub has to offer before the road takes you. You name the Coliseum and the Council of Mavens as things you have reason to visit.\n\nSiol looks at Pell first, which is an interesting choice. Pell meets the look with a short nod — not warming up to her yet, but fair. Then Siol looks back at you. 'A tour is a reasonable use of a morning,' she says. She folds the edge of her coat back from her belt and turns to say something brief to the nearest of her camp-mates — a low exchange, a hand lifted in acknowledgment, and she steps clear of the camp without further ceremony.\n\nHuginn makes a sound from your shoulder. It is the sound he makes when he has assessed a situation and found it, on balance, acceptable. Siol catches it. The corner of her mouth moves, just slightly. 'The Coliseum keeps its outer gates open before the market sets,' she says, starting toward the plaza's northern edge. 'The Council of Mavens takes petitions before midday. I would suggest the Coliseum first — the queue outside the petition board fills early, and the wait is more bearable if you have done something physical beforehand.' She says this as though it is simply a fact about the city's rhythms, and perhaps it is.\n\nPell falls into step beside you. The Hub is alive around you even at this hour — figures crossing the crescent stones with the purposeful ease of people who know exactly where they are going. The Ent's circle to the east is just visible between two market stalls that are unfolding their awnings. The Council's colonnade is ahead, its petition board a pale rectangle on the near pillar even from here.",
+      "sceneSummary": "Silas invites Siol to tour the Hub before the road south — she accepts without ceremony and leads the party toward the Coliseum first.",
       "choices": [
         {
-          "label": "Invite her to travel with you as far as her road goes — the company is welcome",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "intentTags": [
-            "negotiate"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Thank her and step away — you have the gate's name and the road's shape; that is enough",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Follow Siol toward the Coliseum — take in the outer wall and decide whether to enter and find an opponent",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "travel"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Ask what she knows of the Steadwood itself — what the road through it is like before the March",
+          "label": "Head to the Council of Mavens petition board first — read what is posted and decide whether to file something on the valley's behalf",
           "attribute": "mental",
-          "subAttribute": "insight",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "scout"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Siol about the Ent's circle as you walk — what is it, and is it the kind of thing a traveler can approach",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Step to the sixth gate now — you have what you came for, and the March is waiting",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 0,
+          "label": "Let Siol lead and watch the city as you walk — use Order-Sense lightly to read how the Hub is arranged, what its design is actually for",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "chaos_order": 0.3
+          },
+          "difficulty": 15,
           "intentTags": [
-            "travel"
+            "study"
           ],
-          "trivial": true
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "scene": {
-        "setting": "Hub Waygate Plaza, west paving — the small Elven camp at dawn, pale flat light from the east, the six other waygate arches visible across the crescent stones; the sixth gate's darker lintel is the one now with a name.",
+        "setting": "Hub Waygate Plaza and its northern edge, early dawn — the party has stepped away from the Elven camp and begun moving across the crescent stones toward the city proper; the Council colonnade is ahead to the north, the Coliseum outer wall visible to the northwest, the Ent's circle east between market stalls opening their awnings.",
         "npcsPresent": [
           {
             "name": "Siol",
-            "state": "Standing at the camp's edge, watching Silas for his answer — unhurried, door open"
+            "state": "Walking ahead of the party, coat settled, navigating the crescent stones with the ease of someone who has crossed them before — leading without ceremony"
           },
           {
             "name": "Pell Marsh",
-            "state": "Beside Silas, pack on her shoulders, watching him the way she watches a joint being brought together"
+            "state": "Beside Silas, pack on her shoulders, eyes moving across the city with the alert readiness of a first visit — taking the measure of it"
           },
           {
             "name": "Huginn",
-            "state": "On Silas's left shoulder, already watching Siol's reaction to him — that sound made and now waiting"
+            "state": "On Silas's left shoulder, head turning slowly as the city comes into fuller view"
           }
         ],
         "objects": [
           "Seven waygate arches — the sixth identified: lower lintel, darker stone",
-          "The Elven camp — four travelers, gear stacked in clean columns, low oil lamp still lit",
+          "Council of Mavens colonnade ahead to the north — petition board visible as a pale rectangle on the near pillar",
+          "Coliseum outer wall to the northwest — fresh soot-marks, outer gates open",
+          "Ent's circle to the east — partly visible between market stalls just opening",
           "Memory — the assembled spear, road-lashed at Silas's back",
-          "Council of Mavens colonnade visible on the near northern tier",
-          "Coliseum outer wall to the northwest — fresh soot-marks, gates open"
+          "Elven camp behind — four travelers, Siol's camp-mate raising a hand in acknowledgment"
         ],
         "threads": [
-          "Siol's offer to travel south for a day or so — awaiting Silas's answer",
-          "Siol's acquaintance with Huginn — door still open, not yet followed through",
-          "What form the March's greeting takes — named but unasked",
-          "The Hub's full design purpose — calibration function — remains only partially read"
+          "Siol's acquaintance with Huginn — door open, not yet followed through",
+          "What the Hub's full design purpose is — calibration function partially read",
+          "The Coliseum — duel opportunity pending",
+          "The Council of Mavens petition board — valley's water crisis unaddressed at that level",
+          "The Ent's circle — unvisited, nature unknown"
         ]
       },
       "npcUpdates": [
@@ -907,48 +936,53 @@
           "op": "update",
           "npcId": "siol",
           "name": "Siol",
-          "note": "Named her road as south but turning before the Steadwood thins — offered a day or so of shared travel if the pace is easy. Dry comment about Huginn not objecting.",
+          "note": "Accepted Silas's invitation to tour the Hub before the road south — stepped clear of her camp without ceremony, named the Coliseum before the petition queue as the practical morning order, and began leading the party north.",
           "learned": [
-            "Her road runs south from the Hub but turns before the Steadwood thins — not as far as the March mouth",
-            "She does not keep a strict morning schedule — flexible about shared travel",
-            "She noticed Huginn's sound and named it directly, without ceremony"
+            "Prefers the Coliseum before the Council petition board — the queue fills early and physical activity makes the wait bearable; practical city knowledge, not opinion"
           ],
-          "statusNote": "At the Elven camp on the Hub's west paving — has offered to walk south with Silas's party for a day or so; awaiting his answer"
+          "skillsObserved": [
+            "reading two strangers' practical needs and sequencing a morning around them without being asked"
+          ],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "Walking with Silas's party across the Hub plaza — leading a short city tour before the road south begins"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short exchange at the camp's edge — a few minutes of easy conversation"
+        "why": "A brief exchange and the first steps across the plaza — less than half an hour"
       }
     },
     "sceneState": {
-      "setting": "Hub Waygate Plaza, west paving — the small Elven camp at dawn, pale flat light from the east, the six other waygate arches visible across the crescent stones; the sixth gate's darker lintel is the one now with a name.",
+      "setting": "Hub Waygate Plaza and its northern edge, early dawn — the party has stepped away from the Elven camp and begun moving across the crescent stones toward the city proper; the Council colonnade is ahead to the north, the Coliseum outer wall visible to the northwest, the Ent's circle east between market stalls opening their awnings.",
       "npcsPresent": [
         {
           "name": "Siol",
-          "state": "Standing at the camp's edge, watching Silas for his answer — unhurried, door open"
+          "state": "Walking ahead of the party, coat settled, navigating the crescent stones with the ease of someone who has crossed them b"
         },
         {
           "name": "Pell Marsh",
-          "state": "Beside Silas, pack on her shoulders, watching him the way she watches a joint being brought together"
+          "state": "Beside Silas, pack on her shoulders, eyes moving across the city with the alert readiness of a first visit — taking the "
         },
         {
           "name": "Huginn",
-          "state": "On Silas's left shoulder, already watching Siol's reaction to him — that sound made and now waiting"
+          "state": "On Silas's left shoulder, head turning slowly as the city comes into fuller view"
         }
       ],
       "objects": [
         "Seven waygate arches — the sixth identified: lower lintel, darker stone",
-        "The Elven camp — four travelers, gear stacked in clean columns, low oil lamp sti",
+        "Council of Mavens colonnade ahead to the north — petition board visible as a pal",
+        "Coliseum outer wall to the northwest — fresh soot-marks, outer gates open",
+        "Ent's circle to the east — partly visible between market stalls just opening",
         "Memory — the assembled spear, road-lashed at Silas's back",
-        "Council of Mavens colonnade visible on the near northern tier",
-        "Coliseum outer wall to the northwest — fresh soot-marks, gates open"
+        "Elven camp behind — four travelers, Siol's camp-mate raising a hand in acknowled"
       ],
       "threads": [
-        "Siol's offer to travel south for a day or so — awaiting Silas's answer",
-        "Siol's acquaintance with Huginn — door still open, not yet followed through",
-        "What form the March's greeting takes — named but unasked",
-        "The Hub's full design purpose — calibration function — remains only partially read"
+        "Siol's acquaintance with Huginn — door open, not yet followed through",
+        "What the Hub's full design purpose is — calibration function partially read",
+        "The Coliseum — duel opportunity pending",
+        "The Council of Mavens petition board — valley's water crisis unaddressed at that level",
+        "The Ent's circle — unvisited, nature unknown"
       ]
     }
   },
@@ -1934,32 +1968,34 @@
         "locationId": "gen-waygate",
         "day": 6
       },
-      "relationship": 2,
+      "relationship": 3,
       "history": [
         "[d6] Named the sixth waygate as the path to the Ashwarden March; called Huginn 'Marrow' without being told",
         "[d6] Received Silas's introduction, acknowledged Pell by name and maker's mark, addressed Huginn directly as 'Marrow' — named the Steadwood passage as clear and warned that the March will know of Huginn before Silas arrives",
         "[d6] Received Silas's open invitation about Marrow with a quiet 'the road tends to allow what it intends' — not closing, not committing. Now receiving Pell's direct question about the sixth gate.",
         "[d6] Answered Pell's gate question directly — no toll, no keeper, but the March reads arrivals and Huginn's presence will be felt before Silas steps through",
-        "[d6] Named her road as south but turning before the Steadwood thins — offered a day or so of shared travel if the pace is easy. Dry comment about Huginn not objecting."
+        "[d6] Named her road as south but turning before the Steadwood thins — offered a day or so of shared travel if the pace is easy. Dry comment about Huginn not objecting.",
+        "[d6] Accepted Silas's invitation to tour the Hub before the road south — stepped clear of her camp without ceremony, named the Coliseum before the petition queue as the practical morning order, and began leading the party north."
       ],
       "knownFacts": [
-        "The Steadwood passage road is three days from the Hub to the March mouth if weather holds",
         "The March does not keep a welcome gate — arrival is already known when Huginn travels with you",
         "The March has no toll or threshold keeper — entry is open but arrival is always known",
         "Huginn's presence will be felt by the March before Silas steps out of the arch on the far side",
         "The Steadwood passage road is three days from the Hub to the March mouth if weather holds — she confirmed it as clear two days past",
         "Her road runs south from the Hub but turns before the Steadwood thins — not as far as the March mouth",
         "She does not keep a strict morning schedule — flexible about shared travel",
-        "She noticed Huginn's sound and named it directly, without ceremony"
+        "She noticed Huginn's sound and named it directly, without ceremony",
+        "Prefers the Coliseum before the Council petition board — the queue fills early and physical activity makes the wait bearable; practical city knowledge, not opinion"
       ],
       "skillsObserved": [
         "reading a traveler's affiliation from companion presence alo",
-        "plain directional knowledge of the waygate network"
+        "plain directional knowledge of the waygate network",
+        "reading two strangers' practical needs and sequencing a morn"
       ],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the Elven camp on the Hub's west paving — has offered to walk south with Silas's party for a day or so; awaiting his answer",
+      "statusNote": "Walking with Silas's party across the Hub plaza — leading a short city tour before the road south begins",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 6
@@ -3739,21 +3775,21 @@
     }
   },
   "tendencies": {
-    "strategic": 16.325757047169127,
-    "cerebral": 7.360959559474218,
-    "social": 16.749446830683254,
-    "generous": 1.6671247864213352,
-    "cautious": 7.790232417345976,
-    "physical": 1.3611404370408946,
-    "risky": 0.13356924370919623,
-    "ruthless": 0.8750524479407129,
-    "carousing": 0.013406909954649123,
-    "amorous": 8.67700770720403,
-    "patient": 2.1672254065725265,
-    "stealth": 0.33917256440732935,
-    "devotion": 0.7579304699013071,
-    "craft": 2.67923055556685,
-    "leadership": 0.3366653922142057
+    "strategic": 16.9176131209899,
+    "cerebral": 7.1769355704873625,
+    "social": 17.33071065991617,
+    "generous": 1.6254466667608019,
+    "cautious": 7.595476606912326,
+    "physical": 1.3271119261148723,
+    "risky": 0.13023001261646633,
+    "ruthless": 0.8531761367421951,
+    "carousing": 0.013071737205782896,
+    "amorous": 8.46008251452393,
+    "patient": 2.1130447714082132,
+    "stealth": 0.3306932502971461,
+    "devotion": 0.7389822081537744,
+    "craft": 2.6122497916776783,
+    "leadership": 0.32824875740885057
   },
   "aptitudes": [
     "strategist",
@@ -3761,7 +3797,7 @@
     "tactician",
     "charmer"
   ],
-  "actionCount": 530,
+  "actionCount": 531,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -4015,8 +4051,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784410553103,
-  "rev": 777,
+  "updatedAt": 1784410708525,
+  "rev": 778,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5166,7 +5202,7 @@
   "syncedAt": 1784392733860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 350
+    "valley": 351
   },
   "foreclosed": [
     "rootkin",
@@ -5223,10 +5259,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T21:35:53.103Z",
+      "lastAt": "2026-07-18T21:38:28.525Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 75,
+      "beats": 76,
       "_recapError": null,
       "recap": "Day eighteen, and Silas Weir moved like a man who'd finally stopped fighting the shape of what he was. On the road he disarmed three opportunists without breaking bones, read the grief sitting behind the broad man's eyes, named it plainly, pressed provisions into their hands, and sent them toward something worth doing — mercy given as instruction, not sentiment. Then he brought the hard people together: Dara, Aldric, Fendt, Mara, Calvar, all of them in the heat of Pell's forge with no exits easy and no pretense left, and in that single evening he turned a valley's quiet panic into four working threads — engineering, logistics, supply, accounts — each with a named lead and a direction to face. The crisis didn't end, but it stopped being formless, and that was his doing."
     }

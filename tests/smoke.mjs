@@ -4034,6 +4034,42 @@ await (async () => {
     npcPortraitTier(pell) === "partner"); // the app skips when n._portraitTier === this tier
 }
 
+// --- SNG-145: intent confirmation for costly acts (Law 9 in the play loop) ---
+{
+  const { harmGateFor, departureGateFor, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } = await import('../engine/intent.js');
+  const catalog = { blade: { name: "The Single Stroke", harmRung: "lethal" }, mend: { name: "Mend", harmRung: "none" }, bruise: { name: "Bruise", harmRung: "damaging" } };
+  const g = harmGateFor(["blade"], catalog, "enc:duel", {});
+  check("145: a lethal-rung ability declared → harm gate fires with incapacitate as the DEFAULT",
+    g?.kind === "harm" && g.default === "incapacitate" && g.options.length === 2);
+  check("145: damaging does NOT gate (the gate must be rare)", harmGateFor(["bruise"], catalog, "enc:duel", {}) === null);
+  check("145: never twice for the same encounter (dedupe by askedKey)", harmGateFor(["blade"], catalog, "enc:duel", { "enc:duel": true }) === null);
+  const locs = { home: { regionId: "the_given_land" }, far: { regionId: "the_crossing" }, near: { regionId: "the_given_land" }, nowhere: {} };
+  const ch = { currentLocationId: "home" };
+  check("145: a cross-REGION travel intent gates, with STAY as the default",
+    departureGateFor({ destId: "far", name: "The Crossing" }, ch, locs)?.default === "stay");
+  check("145: intra-region travel never gates (always-emit moveTo untouched)", departureGateFor({ destId: "near", name: "Nearby" }, ch, locs) === null);
+  check("145: a null regionId fails OPEN — no gate, never a boundary", departureGateFor({ destId: "nowhere", name: "?" }, ch, locs) === null);
+  check("145: unresolvable destination fails open", departureGateFor({ destId: null, name: "The Pass" }, ch, locs) === null);
+  const off = sanitizeOfferIntent({ kind: "harm", act: "your hand is at his throat", options: [{ id: "spare", label: "Spare him" }, { id: "kill", label: "End it" }], default: "spare" });
+  check("145: GM offerIntent sanitizes (kind whitelisted, options 2-4, default must be an option)",
+    off?.kind === "harm" && off.default === "spare" && sanitizeOfferIntent({ kind: "wish", options: [] }) === null);
+  check("145: a bad default falls back to the LAST option (authored gentler-last convention), never crashes",
+    sanitizeOfferIntent({ kind: "departure", options: [{ id: "go", label: "Go" }, { id: "stay", label: "Stay" }], default: "bogus" }).default === "stay");
+  check("145: the subdue note binds narration to survival", /SURVIVES/.test(intentNoteFor(g, "incapacitate")) && /kill/i.test(intentNoteFor(g, "lethal")));
+  const split = splitLedgerEvents([{ what: "a", impactsLocal: true }, { what: "b" }]);
+  check("145: impactsLocal ledger events HOLD in escrow; ordinary events pass", split.hold.length === 1 && split.pass.length === 1 && split.hold[0].what === "a");
+  // wiring: the gates fire pre-dice in onChoice; the op is contracted + whitelisted; the card renders
+  const appSrc145 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+  const gmSrc145 = readFileSync(new URL('../engine/gm.js', import.meta.url), 'utf8');
+  check("145: onChoice gates BEFORE the dice (harmGateFor called ahead of resolveAction)",
+    appSrc145.indexOf("harmGateFor(abilityIds") < appSrc145.indexOf("const resolution = resolveAction("));
+  check("145: escrow is persisted on character (_pendingIntent) — reload-safe", /_pendingIntent = \{ \.\.\.gate, resume: \{ choice \} \}/.test(appSrc145));
+  check("145: offerIntent contracted with the gambit discipline (ask, don't resolve) + whitelisted for salvage",
+    /"offerIntent": \{"kind": "harm\|departure\|irreversible"/.test(gmSrc145) && /DO NOT also emit the act's own characterDeltas/.test(gmSrc145) && /"offerAcquisition", "offerIntent"/.test(gmSrc145));
+  check("145: the confirmed intent reaches the GM through the resolution block", /if \(resolution\.intentNote\) block/.test(gmSrc145));
+  check("145: moveTo contract text is untouched (always-emit preserved verbatim)", /narrating the journey without moveTo strands the player/.test(gmSrc145));
+}
+
 // --- BATCH-11 §23: the GM Context Registry assembles a REAL context end-to-end ---
 {
   const { assembleGMContext, registryKeys, GM_CONTEXT } = await import('../engine/gm_registry.js');

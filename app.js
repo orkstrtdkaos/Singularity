@@ -28,6 +28,7 @@ import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkill
 import { toolkitForGM } from "./engine/toolkit.js";
 import { fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc } from "./engine/personalArc.js";
 import { assembleGMContext } from "./engine/gm_registry.js"; // BATCH-11 §23: the GM context is a DECLARED registry, iterated — never hand-listed
+import { harmGateFor, departureGateFor, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop)
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./engine/entityDetail.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
@@ -2799,6 +2800,15 @@ function applyTurn(turn, resolution, playerWords = null) {
       turn.narration += `\n\n*✦ The ${traditionLabel(tid)} would take you as one of their own. You may join them on your Character screen — entering as a novice (Tier I), and closing the far pole of their axis to you.*`;
     }
   }
+  // SNG-145: the GM raises an intent gate for fiction-recognized costly acts the engine's
+  // declared-ability gates can't see (a freetext strangling, a named point of no return).
+  // Same escrow as the engine gates; the answer returns as a synthetic beat. The contract
+  // (gm.js) forbids emitting the act's own effects alongside offerIntent — anything the GM
+  // also emitted this turn commits normally, which is why the rule exists.
+  if (turn.offerIntent && !character._pendingIntent) {
+    const gate = sanitizeOfferIntent(turn.offerIntent);
+    if (gate) character._pendingIntent = { ...gate, resume: null };
+  }
   // GM-granted new ability: earned in fiction, clamped by engine
   if (turn.newAbility) {
     const def = sanitizeNewAbility(turn.newAbility);
@@ -2893,7 +2903,7 @@ function applyTurn(turn, resolution, playerWords = null) {
   // chronicle + scene persistence
   if (turn.sceneSummary) {
     sceneTurns.push({ player: playerWords || null, summary: turn.sceneSummary, narration: turn.narration || "" }); // SNG-081: keep the player's half
-    if (turn.sceneEnded) { character.chronicle.push(turn.sceneSummary); sceneTurns = []; sceneState = null; }
+    if (turn.sceneEnded) { character.chronicle.push(turn.sceneSummary); sceneTurns = []; sceneState = null; character._intentAsked = null; } // SNG-145: a new scene may ask again
   }
   character.activeScene = turn.sceneEnded ? null : { locationId: character.currentLocationId, turns: sceneTurns, lastTurn: turn, sceneState };
   saveCharacter(character); saveProfile(profile);
@@ -2906,7 +2916,12 @@ function applyTurn(turn, resolution, playerWords = null) {
       spectrumDeltas: e.spectrumDeltas || {}, visibility: e.visibility || "witnessed",
       impactsLocal: !!e.impactsLocal // SNG-041: crosses the far-world/local boundary to whoever it affects
     }));
-    if (events.length) appendLedger(events, character.id).catch(err => console.warn("[ledger]", err.message));
+    // SNG-145 trigger 3 (irreversible): an impactsLocal event reaches ANOTHER player's area — it
+    // waits in escrow for this player's confirm. Narration stands; only propagation is gated.
+    // Lenient by construction: unanswered means it never propagates (nothing is imposed by inaction).
+    const { pass, hold } = splitLedgerEvents(events);
+    if (hold.length) { character._pendingLedger = [...(character._pendingLedger || []), ...hold].slice(-4); saveCharacter(character); }
+    if (pass.length) appendLedger(pass, character.id).catch(err => console.warn("[ledger]", err.message));
     backupSaves(character, profile);
   }
 }
@@ -2945,6 +2960,8 @@ function substratePenaltyFor(choice, location) {
 
 async function onChoice(choice) {
   if (busy) return;
+  // SNG-145: while an intent gate stands, the gate IS the choice — answer it first.
+  if (character._pendingIntent) { renderPlay(character.activeScene?.lastTurn || null, { aside: "Answer the moment of intent first — it's waiting on you." }); return; }
   lastPlayerAction = choice?.label || choice?.exactWords || null; // SNG-066: for feedback forensics
   let itemsAdvanced = [];
   const location = hereNow();
@@ -3046,6 +3063,22 @@ async function onChoice(choice) {
   const abilityIds = [choice.abilityId, ...(choice.comboAbilities || [])].filter(Boolean);
   const disc = action.novel ? knownDiscovery(character, abilityIds, action.noveltyHint) : null;
   if (disc) { action.novel = false; action.discoveryBonus = CONTENT.rules.novel?.discoveryBonus ?? 10; }
+  // SNG-145: INTENT GATES fire HERE — before the dice roll, before energy is spent, before the GM
+  // is called — so a decline commits nothing and the moveTo always-emit contract is never touched.
+  // The resume is the CHOICE itself (plain JSON): the answer annotates it and re-enters onChoice.
+  if (!choice.intentRung && !choice.departureConfirmed) {
+    const askedKey = activeEnc() ? `enc:${activeEnc().defId}` : `scene:${character.currentLocationId}`;
+    const harmGate = harmGateFor(abilityIds, fullCatalog(), askedKey, character._intentAsked);
+    const depGate = harmGate ? null : departureGateFor(travelIntentOf(action), character, CONTENT.locations);
+    const gate = harmGate || depGate;
+    if (gate) {
+      character._pendingIntent = { ...gate, resume: { choice } };
+      saveCharacter(character); // reload-safe: the card reappears; nothing has committed
+      renderPlay(character.activeScene?.lastTurn || null, {});
+      return;
+    }
+  }
+  if (choice.intentRung) action.intentRung = choice.intentRung; // the harm answer, carried back through the resume (dedupe marked in answerIntent)
   const encD = activeEnc();
   if (encD) {
     const encDiff = encounterDifficulty(encD.state, encD.def, CONTENT.rules, { flee: choice.encounterAction === "flee" });
@@ -3070,6 +3103,7 @@ async function onChoice(choice) {
       : `The lattice is DENSE and CROWDS the character's craft here — it runs at ~${substrate.percent}% (too much signal is noise). Let it read as interference, not weakness.`;
   }
   if (disc) resolution.usedDiscovery = disc.name;
+  if (choice.intentNote) resolution.intentNote = choice.intentNote; // SNG-145: the confirmed intent rides to the GM as a directive
   // novel use: breakthrough or backlash — the engine decides, the GM narrates
   if (action.novel) {
     if (resolution.degree === "crit_success") {
@@ -3144,6 +3178,7 @@ async function onChoice(choice) {
 
 async function onFreeform(text) {
   if (busy || !text.trim()) return;
+  if (character._pendingIntent) { renderPlay(character.activeScene?.lastTurn || null, { aside: "Answer the moment of intent first — it's waiting on you." }); return; } // SNG-145
   lastPlayerText = text;
   renderPlay(null, { thinking: "Reading your intent…", playerBeat: { label: text } });
   const location = CONTENT.locations[character.currentLocationId];
@@ -3350,6 +3385,50 @@ function buildTravelDirective(ti) {
 
 /** SNG-122: the one-tap safety net — the travel beat didn't move the player, so arrive now via the SAME
  *  path the map uses (resolve-or-mint the destination, then travelTo). Never leaves them stranded. */
+/** SNG-145: the player answers an intent gate. Engine-raised gates (harm/departure)
+ *  resume the ESCROWED CHOICE — annotated and re-entered through onChoice, so the
+ *  normal dice/energy/GM path runs exactly once, now with intent attached. A
+ *  GM-raised gate (offerIntent) has no held act; the answer returns as a synthetic
+ *  beat. Declining a departure simply… stays: nothing was committed to undo. */
+async function answerIntent(optionId) {
+  const g = character._pendingIntent;
+  if (!g || busy) return;
+  character._pendingIntent = null;
+  const label = (g.options || []).find(o => o.id === optionId)?.label || optionId;
+  if (g.resume?.choice) {
+    // mark the ask so this encounter/scene never gates twice (spec §2: rare or it's noise)
+    if (g.askedKey) character._intentAsked = { ...(character._intentAsked || {}), [g.askedKey]: true };
+    if (g.kind === "departure" && optionId !== "go") {
+      saveCharacter(character);
+      renderPlay(character.activeScene?.lastTurn || null, { aside: "You hold at the boundary — the road will keep." });
+      return;
+    }
+    const choice = { ...g.resume.choice };
+    if (g.kind === "harm") { choice.intentRung = optionId; choice.intentNote = intentNoteFor(g, optionId); }
+    if (g.kind === "departure") choice.departureConfirmed = true;
+    saveCharacter(character);
+    await onChoice(choice);
+    return;
+  }
+  // GM-raised gate: no escrowed act — the confirmed intent returns as a synthetic beat.
+  saveCharacter(character);
+  renderPlay(null, { thinking: "…", playerBeat: { label } });
+  const result = await runGM({ resolution: null, playerInput: `(${intentNoteFor(g, optionId)} Continue the scene from the player's confirmed choice.)` });
+  if (result) renderPlay(result.turn, { playerBeat: { label }, degraded: result.degraded });
+}
+
+/** SNG-145 trigger 3: confirm or hold a world-scale consequence. Held = dropped —
+ *  by inaction nothing is ever imposed on another player's world. */
+async function answerLedger(send) {
+  const held = character._pendingLedger || [];
+  if (!held.length) return;
+  const ev = held[0];
+  character._pendingLedger = held.slice(1);
+  saveCharacter(character);
+  if (send) appendLedger([ev], character.id).catch(err => console.warn("[ledger]", err.message));
+  renderPlay(character.activeScene?.lastTurn || null, { aside: send ? "Word of it travels — the world will hear." : "It stays local — a story this valley keeps." });
+}
+
 async function arriveAtPending() {
   const p = character._pendingArrival; if (!p || busy) return;
   character._pendingArrival = null;
@@ -5798,6 +5877,27 @@ function renderPlay(turn, opts = {}) {
   if (opts.gmAside) main += `<div class="gm-aside">${opts.gmAside.split(/\n\n+/).map(p => `<p>${esc(p)}</p>`).join("")}</div>`;
   // SNG-122: the safety net — a travel intent that didn't move the player gets a one-tap "arrive" so
   // narrative travel and map travel converge on one path and the player is never stranded.
+  // SNG-145: a pending INTENT GATE renders as an inline choice card — the act is in escrow and
+  // nothing commits until answered. Reload-safe (persisted on character); other inputs decline
+  // politely while it stands. The default (gentle) option is marked.
+  if (character?._pendingIntent) {
+    const g = character._pendingIntent;
+    main += `<div class="intent-card" style="border:1px solid var(--accent,#c9a227);border-radius:8px;padding:12px;margin:8px 0">
+      <div style="font-weight:600;margin-bottom:4px">⚖ A moment of intent</div>
+      <div>${esc(g.act)}</div>${g.cost ? `<div class="hint" style="margin-top:4px">${esc(g.cost)}</div>` : ""}
+      <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">${g.options.map(o =>
+        `<button class="btn${o.id === g.default ? " secondary" : ""}" data-intentopt="${esc(o.id)}">${esc(o.label)}${o.id === g.default ? " ·" : ""}</button>`).join("")}
+      </div></div>`;
+  }
+  // SNG-145 trigger 3: a world-scale consequence that would reach ANOTHER player waits for confirm.
+  if (character?._pendingLedger?.length) {
+    const ev = character._pendingLedger[0];
+    main += `<div class="intent-card" style="border:1px dashed var(--accent,#c9a227);border-radius:8px;padding:10px;margin:8px 0">
+      <div style="font-weight:600">🌍 This would reach beyond you</div>
+      <div class="hint">${esc(ev.what)} — this consequence would surface in another player's world.</div>
+      <div style="margin-top:6px;display:flex;gap:8px"><button class="btn" id="ledger-send">Let it travel</button>
+      <button class="btn secondary" id="ledger-hold">Keep it local ·</button></div></div>`;
+  }
   if (character?._pendingArrival) {
     const p = character._pendingArrival;
     main += `<div class="arrive-banner">You're on your way to <strong>${esc(p.name)}</strong>. <button class="btn arrive-btn" id="do-arrive">→ Arrive at ${esc(p.name)}</button></div>`;
@@ -6000,6 +6100,9 @@ function renderPlay(turn, opts = {}) {
   const breatherBtn = document.getElementById("do-breather"); if (breatherBtn) breatherBtn.onclick = () => rest("breather");
   const mapBtn = document.getElementById("open-map"); if (mapBtn) mapBtn.onclick = () => renderMap();
   const arriveBtn = document.getElementById("do-arrive"); if (arriveBtn) arriveBtn.onclick = () => arriveAtPending(); // SNG-122
+  for (const b of app.querySelectorAll("[data-intentopt]")) b.onclick = () => answerIntent(b.dataset.intentopt); // SNG-145
+  const lSend = document.getElementById("ledger-send"); if (lSend) lSend.onclick = () => answerLedger(true);
+  const lHold = document.getElementById("ledger-hold"); if (lHold) lHold.onclick = () => answerLedger(false);
   for (const b of app.querySelectorAll("[data-quest]")) b.onclick = () => renderQuestDetail(b.dataset.quest);
   const qlBtn = document.getElementById("open-questlog"); if (qlBtn) qlBtn.onclick = () => renderQuestLog();
   const codexBtn = document.getElementById("open-codex"); if (codexBtn) codexBtn.onclick = () => renderCodexScreen();

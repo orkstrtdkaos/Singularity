@@ -36,7 +36,7 @@
     "the_leaden_deep",
     "the_axis_gate"
   ],
-  "descriptionSeed": "Stone, weight, ledgers, and a deep suspicion of anything that cannot be weighed. The Masons build things that outlast the arguments about them, and they are the most reliable people in the world and the hardest to have a conversation with, because roughly half of what you want to say to them is, to them, not real.",
+  "descriptionSeed": "Stone, weight, ledgers, and a deep suspicion of anything that cannot be weighed. The Masons build things that outlast the arguments about them, and they are the most reliable people in the world and the hardest to have a conversation with, because roughly half of what you want to say to them is, to them, not real. Bedrock's waygate is set in dressed stone with its tolerances carved beside it, because the masons refuse to use a thing whose limits are not written down.",
   "loreRefs": [
     "the_twelve_reaches",
     "traditions"
@@ -56,5 +56,7 @@
     "body": 0.3,
     "order": 0.2
   },
-  "startingLocation": true
+  "startingLocation": true,
+  "waygate": true,
+  "waygateTier": 2
 }

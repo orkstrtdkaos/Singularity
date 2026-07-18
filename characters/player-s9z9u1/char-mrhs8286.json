@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 14,
-  "xp": 1356,
+  "xp": 1361,
   "attributes": {
     "physical": 4,
     "mental": 5,
@@ -76,8 +76,8 @@
   "alignment": {
     "spectrumId": -0.30503161461751516,
     "violence_peace": 0.1030845625,
-    "chaos_order": 0.23557543672283893,
-    "mechanical_spiritual": 0.2391016588897375,
+    "chaos_order": 0.243796664886697,
+    "mechanical_spiritual": 0.24214657594525063,
     "concrete_abstract": -0.023838665664862424,
     "death_life": -0.22224780548067646,
     "emotional_logical": 0.019295624999999986,
@@ -89,7 +89,7 @@
   "maxHealth": 95,
   "health": 95,
   "maxEnergy": 165,
-  "energy": 137,
+  "energy": 133,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -157,14 +157,6 @@
         "Preserved Trail Parcel x2"
       ],
       "pinned": false
-    },
-    {
-      "id": null,
-      "name": "Rune-Craft Kit",
-      "kind": "tool",
-      "qty": 1,
-      "description": "A stub of hard cooper's wax, a half-spent vial of lamp-black in pine pitch, and a strip of tooling-grade oiled leather — for pressing, staining, and binding marks into worked surfaces.",
-      "consumable": false
     },
     {
       "id": null,
@@ -875,43 +867,43 @@
         "player": "Begin the practical rune-work on the brigandine first — a protective thread before any decoration",
         "summary": "The first protective thread seated into the brigandine's shoulder collar — conserved, clean, and holding. Pell reads it and names it good.",
         "narration": "You set the brigandine across your knees and take the rune-craft kit in hand. What is left of the lamp-black is enough — just. You find the seam where the leather backing meets the first row of plate along the left shoulder, and you begin there. Not decoration. Foundation.\n\nThe mark you press is small and tight, the tooling-leather stylus moving in a single continuous line along the inside edge of the riveted collar — a death-warding thread, the kind that does not announce itself. It does not shimmer. It does not catch the light. It settles into the stitching like it was always part of the pattern, and the iron above it cools half a degree, and that is the whole event. Conserved. Economical. The craft at its quietest and most certain.\n\nPell watches from across the bench. She does not say anything while you work. When the first thread is complete she leans forward, sets one finger at the collar's edge, and reads the mark the way she reads iron — from the inside out. She is still for three full breaths. Then she sits back and says, said Pell quietly, \"That will hold.\"\n\nHuginn shifts on the back bench — one foot, then the other — and makes no sound at all. Which, from Huginn, is the same thing as a nod."
+      },
+      {
+        "player": "Run the full protective thread along every plate row — collar to hem, inside edge — before touching the decoration",
+        "summary": "The full protective thread run — collar to hem, every plate row — before any decoration. The brigandine is done to the inside. The lamp-black is spent.",
+        "narration": "You work from the collar down.\n\nThe shoulder thread is already seated and Pell has named it good, so you move without ceremony to the second row — the paired plates across the upper chest. The lamp-black is nearly gone but you thin what remains with the wax stub and press it into the inside seam with the flat of the stylus, one continuous line, no flourish. The mark finds the iron quickly. It does not resist.\n\nRow by row down the front face. Across the flanks where the leather lacing holds the plate-sections together. Around the hem where the last row of plates overlaps the backing. Each thread is small and tight, pressed into the seam where leather meets iron so the outside shows nothing — no shimmer, no inscription, nothing a stranger's eye would catch. The brigandine looks exactly as it did when you lifted it from the chest. It is heavier by a quality that has no weight.\n\nPell watches without speaking. When you turn the garment and begin the inside of the back panel, she shifts on the bench and holds the far edge steady without being asked. The forge coals settle once, orange going to ember-red. Huginn moves one foot on the back of the second bench and is still again. By the time you press the last thread into the hem-seam and lift the stylus clear, the lamp-black vial is spent to the last dark smear. You set it down. The brigandine lies across your knees, every row done, and the work is plain and unannounced and exactly what it needs to be.\n\n\"That is the whole of it,\" you say to Pell — meaning the practical work, meaning the inside of every plate, meaning done before pretty.\n\nShe takes one corner of the garment and runs her thumb along the inside of the shoulder collar, then the chest row, feeling for the thread's presence the way she'd check a weld. Her ironsense is already in the sword's iron; it reaches into the plate just the same. She goes through three rows before she nods.\n\n\"All of them,\" she says. It is not a question."
       }
     ],
     "lastTurn": {
-      "narration": "You set the brigandine across your knees and take the rune-craft kit in hand. What is left of the lamp-black is enough — just. You find the seam where the leather backing meets the first row of plate along the left shoulder, and you begin there. Not decoration. Foundation.\n\nThe mark you press is small and tight, the tooling-leather stylus moving in a single continuous line along the inside edge of the riveted collar — a death-warding thread, the kind that does not announce itself. It does not shimmer. It does not catch the light. It settles into the stitching like it was always part of the pattern, and the iron above it cools half a degree, and that is the whole event. Conserved. Economical. The craft at its quietest and most certain.\n\nPell watches from across the bench. She does not say anything while you work. When the first thread is complete she leans forward, sets one finger at the collar's edge, and reads the mark the way she reads iron — from the inside out. She is still for three full breaths. Then she sits back and says, said Pell quietly, \"That will hold.\"\n\nHuginn shifts on the back bench — one foot, then the other — and makes no sound at all. Which, from Huginn, is the same thing as a nod.",
-      "sceneSummary": "The first protective thread seated into the brigandine's shoulder collar — conserved, clean, and holding. Pell reads it and names it good.",
+      "narration": "You work from the collar down.\n\nThe shoulder thread is already seated and Pell has named it good, so you move without ceremony to the second row — the paired plates across the upper chest. The lamp-black is nearly gone but you thin what remains with the wax stub and press it into the inside seam with the flat of the stylus, one continuous line, no flourish. The mark finds the iron quickly. It does not resist.\n\nRow by row down the front face. Across the flanks where the leather lacing holds the plate-sections together. Around the hem where the last row of plates overlaps the backing. Each thread is small and tight, pressed into the seam where leather meets iron so the outside shows nothing — no shimmer, no inscription, nothing a stranger's eye would catch. The brigandine looks exactly as it did when you lifted it from the chest. It is heavier by a quality that has no weight.\n\nPell watches without speaking. When you turn the garment and begin the inside of the back panel, she shifts on the bench and holds the far edge steady without being asked. The forge coals settle once, orange going to ember-red. Huginn moves one foot on the back of the second bench and is still again. By the time you press the last thread into the hem-seam and lift the stylus clear, the lamp-black vial is spent to the last dark smear. You set it down. The brigandine lies across your knees, every row done, and the work is plain and unannounced and exactly what it needs to be.\n\n\"That is the whole of it,\" you say to Pell — meaning the practical work, meaning the inside of every plate, meaning done before pretty.\n\nShe takes one corner of the garment and runs her thumb along the inside of the shoulder collar, then the chest row, feeling for the thread's presence the way she'd check a weld. Her ironsense is already in the sword's iron; it reaches into the plate just the same. She goes through three rows before she nods.\n\n\"All of them,\" she says. It is not a question.",
+      "sceneSummary": "The full protective thread run — collar to hem, every plate row — before any decoration. The brigandine is done to the inside. The lamp-black is spent.",
       "choices": [
         {
-          "label": "Run the full protective thread along every plate row — collar to hem, inside edge — before touching the decoration",
+          "label": "The lamp-black is gone — but the vial itself might yield one mark more if you scrape it clean. Offer Pell the radiant embellishment now, in firelight, with whatever remains.",
           "attribute": "practical",
           "subAttribute": "craft",
           "axes": {
-            "chaos_order": 0.4,
-            "mechanical_spiritual": 0.3
+            "mechanical_spiritual": 0.2,
+            "concrete_abstract": -0.2
           },
           "difficulty": 15,
           "intentTags": [
-            "craft",
-            "careful",
-            "sustain"
+            "craft"
           ],
-          "abilityId": "palework",
+          "abilityId": null,
           "energyCost": null,
           "trivial": false,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Ask Pell what she wants the brigandine to do that it can't do now — then build the rune-work around her answer",
+          "label": "The protective work is complete. Name it done aloud — both of you — and let the brigandine rest. Tomorrow is early and the road is long.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.3
-          },
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "plan",
-            "help"
+            "sustain"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -920,36 +912,32 @@
           "emergenceId": null
         },
         {
-          "label": "Use Order-Sense on the brigandine itself — read the full design it is already part of before adding to it",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Ask Pell what she actually wants to carry into the Maelstorm — what she hopes to find there, in her own words. You have not asked yet.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "axes": {
-            "concrete_abstract": -0.2,
-            "mechanical_spiritual": 0.2
+            "emotional_logical": 0.2
           },
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "careful"
+            "comfort"
           ],
-          "abilityId": "order_sense",
+          "abilityId": null,
           "energyCost": null,
           "trivial": true,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Ask Huginn what it sees in the armor — it has attended more endings than either of you",
+          "label": "Ask Huginn what it reads in the Maelstorm — what is ending there, and whether her father is part of it. You have not asked yet.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "death_life": -0.2,
-            "mechanical_spiritual": 0.3
+            "death_life": -0.2
           },
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "help"
+            "study"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -958,33 +946,38 @@
           "emergenceId": null
         }
       ],
+      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -2
+        "energy": -2,
+        "inventoryRemove": [
+          "Rune-Craft Kit"
+        ]
       },
+      "ledgerEvents": [],
+      "questUpdates": [],
       "scene": {
-        "setting": "Interior of the Fell Pell — Pell's forge, Millbrook. Forge coals low and orange. The rune-craft kit is open on the bench, lamp-black vial nearly spent, first mark pressed into the brigandine's shoulder collar. The Warden's Charge rests against the bench-side.",
+        "setting": "Interior of the Fell Pell — Pell's forge, Millbrook. Forge coals down to ember-red. The rune-craft kit is spent — lamp-black vial empty, wax stub used down, stylus set aside. The brigandine lies across Silas's knees, every plate row now threaded inside. The Warden's Charge leans against the bench-side.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Seated across the bench — she has read the first protective mark and named it good. Waiting for what comes next."
+            "state": "Seated across the bench — has run her thumb along three plate rows and nodded. The brigandine's full protective thread confirmed. Waiting."
           },
           {
             "name": "Huginn",
-            "state": "On the back of the second bench, one foot settled, then the other — silent in the way that is a nod."
+            "state": "On the back of the second bench, one foot shifted and settled — still."
           }
         ],
         "objects": [
           "The Warden's Charge — short sword, rune-bound, leaning against the bench-side",
-          "Brigandine — first protective thread now pressed into the shoulder collar's inside edge",
-          "Rune-craft kit — open, lamp-black vial nearly spent, wax stub used, tooling leather marked from work",
+          "Brigandine — full protective thread now pressed along every plate row, collar to hem, inside edge — unannounced from the outside",
+          "Rune-craft kit — spent: vial empty, wax stub exhausted, stylus set down",
           "Open chest under the second bench — oilcloth wrapping folded aside",
-          "Banked forge coals — low orange light",
+          "Banked forge coals — ember-red, low",
           "Sealed document roll — on the counter, Mara's to deliver"
         ],
         "threads": [
-          "Full protective rune-work on the brigandine not yet complete — only the first shoulder thread is seated",
-          "Radiant embellishment agreed in principle — plate-only, not leather; not yet begun",
+          "Radiant embellishment agreed in principle — plate-only, not leather — not yet begun; lamp-black is now spent",
           "The road's order agreed — home first, then the Zone, then the Maelstorm — not yet sealed as a formal departure",
           "What Pell hopes to find in the Maelstorm is unspoken",
           "Huginn's read on the Maelstorm has not been asked"
@@ -998,59 +991,88 @@
           "role": "Village blacksmith, Millbrook — traveling companion",
           "gender": "woman",
           "pronouns": "she/her",
-          "note": "Read the first protective mark on the brigandine's shoulder collar and named it good — three breaths, then 'That will hold.'",
+          "note": "Held the far edge of the brigandine steady while Silas worked the back panel — unprompted. Ran her thumb along three plate rows and confirmed the full thread. Named it 'all of them' without question.",
           "learned": [
-            "The first death-warding thread is seated into the brigandine's shoulder collar — quiet, economical, holding."
+            "The full protective thread is seated in every plate row of the brigandine — collar to hem, inside edge, unannounced from outside"
           ],
           "skillsObserved": [
-            "reading a rune-mark from the inside of a finished piece without being told where to look"
+            "reading a rune-thread's presence through ironsense across multiple plate rows in sequence"
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "In the Fell Pell — seated across the bench from Silas, the brigandine's first protective mark confirmed, waiting for the next thread."
+          "statusNote": "In the Fell Pell — brigandine confirmed, waiting for the next thread or the night's close."
+        },
+        {
+          "op": "update",
+          "npcId": "huginn",
+          "name": "Huginn",
+          "role": "Companion — Ashwarden carrion bird",
+          "gender": "a free phrase",
+          "pronouns": "they/them",
+          "note": "Shifted one foot and resettled during the work — a small acknowledgment. Still now.",
+          "status": "active",
+          "statusNote": "On the back bench in the Fell Pell — attending."
         }
       ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A short focused stretch of rune-work — one mark pressed, read, confirmed."
-      },
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "The brigandine's full protective thread is seated — every plate row from collar to hem, inside edge. The lamp-black is spent. The work is complete to the practical layer.",
+          "subjectId": "pell-ran-marsh"
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "Brigandine rune-work completed to the full protective layer on World-day 18 evening — every plate row threaded inside, lamp-black spent. Radiant embellishment not yet begun.",
+          "subPlace": {
+            "name": "Pell's Forge — Interior",
+            "parent": "Millbrook",
+            "note": "Brigandine fully protective-threaded; rune-craft kit spent; ember-red coals; The Warden's Charge against the bench-side.",
+            "visited": true
+          }
+        }
+      ],
       "codexUpdates": [
         {
           "topic": "millbrook",
           "label": "Millbrook",
           "kind": "place",
           "entityId": "millbrook",
-          "fact": "The brigandine's first protective thread seated into the shoulder collar on World-day 18 evening — death-warding, conserved, confirmed good by Pell's ironsense.",
+          "fact": "The brigandine's full protective thread completed at the Fell Pell on World-day 18 evening — every plate row from collar to hem, inside edge, before any decoration. Lamp-black spent.",
           "links": [
             "pell-ran-marsh",
             "the-fell-pell"
           ]
         }
-      ]
+      ],
+      "timeOps": {
+        "hoursPassed": 0.5,
+        "why": "A careful run of protective thread across every plate row of the brigandine — methodical work, not rushed."
+      },
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Interior of the Fell Pell — Pell's forge, Millbrook. Forge coals low and orange. The rune-craft kit is open on the bench, lamp-black vial nearly spent, first mark pressed into the brigandine's shoulder collar. The Warden's Charge rests against the bench-side.",
+      "setting": "Interior of the Fell Pell — Pell's forge, Millbrook. Forge coals down to ember-red. The rune-craft kit is spent — lamp-black vial empty, wax stub used down, stylus set aside. The brigandine lies across Silas's knees, every plate row now threaded inside. The Warden's Charge leans against the bench-side.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Seated across the bench — she has read the first protective mark and named it good. Waiting for what comes next."
+          "state": "Seated across the bench — has run her thumb along three plate rows and nodded. The brigandine's full protective thread c"
         },
         {
           "name": "Huginn",
-          "state": "On the back of the second bench, one foot settled, then the other — silent in the way that is a nod."
+          "state": "On the back of the second bench, one foot shifted and settled — still."
         }
       ],
       "objects": [
         "The Warden's Charge — short sword, rune-bound, leaning against the bench-side",
-        "Brigandine — first protective thread now pressed into the shoulder collar's insi",
-        "Rune-craft kit — open, lamp-black vial nearly spent, wax stub used, tooling leat",
+        "Brigandine — full protective thread now pressed along every plate row, collar to",
+        "Rune-craft kit — spent: vial empty, wax stub exhausted, stylus set down",
         "Open chest under the second bench — oilcloth wrapping folded aside",
-        "Banked forge coals — low orange light",
+        "Banked forge coals — ember-red, low",
         "Sealed document roll — on the counter, Mara's to deliver"
       ],
       "threads": [
-        "Full protective rune-work on the brigandine not yet complete — only the first shoulder thread is seated",
-        "Radiant embellishment agreed in principle — plate-only, not leather; not yet begun",
+        "Radiant embellishment agreed in principle — plate-only, not leather — not yet begun; lamp-black is now spent",
         "The road's order agreed — home first, then the Zone, then the Maelstorm — not yet sealed as a formal departure",
         "What Pell hopes to find in the Maelstorm is unspoken",
         "Huginn's read on the Maelstorm has not been asked"
@@ -1484,7 +1506,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d5] Named a brigandine her father made — split front, riveted plate — and a short sword she kept but never sold. Promised to pull both before sleep. Received the armor-and-real-sparring plan without pushback.",
         "[d5] Pulled the brigandine and sword without ceremony — armor fits, blade is sound. Confirmed readiness for the morning drill with a single pass in the forge-space.",
         "[d5] Received Silas's accounting of the fit and the view — answered dryly and with warmth. Said yes to the rune-kit without the old bracket of hesitation. Holds the brigandine out toward the forge-light, waiting.",
         "[d5] Received Silas's protective bond plan without deflection — her ironsense moved ahead of the conversation and named the sword as anchor before he finished explaining. Holds the blade flat across both palms, waiting.",
@@ -1493,28 +1514,29 @@
         "[d5] Received the name The Warden's Charge — tested it against the iron, nodded once in the register she gives iron that has answered correctly. Holds the blade upright toward the rafters.",
         "[d5] Received the idea of searching the Maelstorm for her father — held it without flinching, named the road's order herself: home first, then the Zone, then the Maelstorm. Committed to together.",
         "[d5] Approved radiant embellishment on the brigandine's plate with conditions — practical first, pretty after. Holds the armor in her lap and waits.",
-        "[d5] Read the first protective mark on the brigandine's shoulder collar and named it good — three breaths, then 'That will hold.'"
+        "[d5] Read the first protective mark on the brigandine's shoulder collar and named it good — three breaths, then 'That will hold.'",
+        "[d5] Held the far edge of the brigandine steady while Silas worked the back panel — unprompted. Ran her thumb along three plate rows and confirmed the full thread. Named it 'all of them' without question."
       ],
       "knownFacts": [
-        "Said yes without hesitation when Silas asked to rune-work the brigandine — the small held distance is gone",
         "The short sword carries her ironsense in its grain — a lifetime of work, the body-memory of two hundred heats. Threading Ashwarden craft through the iron means threading through her.",
         "Patient iron holds a mark longer than tested iron — the sword's quality as an anchor is its years of careful, unused attention",
         "The sword's order-sense capacitor closed on her shape, not Silas's — the iron chose her idiom for the reading capacity",
         "The sword is named The Warden's Charge — her father kept it, now it keeps her",
         "She has been holding the Maelstorm possibility at arm's length since Calvar named the specification and her father's planning became plain — and she is now willing to put it down and go.",
         "She reads her father's silence not as absence but as method — pointing the way without saying so.",
-        "The first death-warding thread is seated into the brigandine's shoulder collar — quiet, economical, holding."
+        "The first death-warding thread is seated into the brigandine's shoulder collar — quiet, economical, holding.",
+        "The full protective thread is seated in every plate row of the brigandine — collar to hem, inside edge, unannounced from outside"
       ],
       "skillsObserved": [
-        "immediate operational uptake of a readiness problem — named ",
         "confirming a blade's balance in one slow pass, no performanc",
         "reading a rune-bond's structural logic from the grain before",
         "reading iron's grain and naming its character as diagnostic ",
         "holding ironsense open under active craft pressure for an ex",
-        "reading a rune-mark from the inside of a finished piece with"
+        "reading a rune-mark from the inside of a finished piece with",
+        "reading a rune-thread's presence through ironsense across mu"
       ],
       "status": "active",
-      "statusNote": "In the Fell Pell — seated across the bench from Silas, the brigandine's first protective mark confirmed, waiting for the next thread.",
+      "statusNote": "In the Fell Pell — brigandine confirmed, waiting for the next thread or the night's close.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
@@ -2035,7 +2057,6 @@
     "millbrook": {
       "visits": 3,
       "notes": [
-        "[d3] The lower ford crossing, half a mile south of the Edge District on the trade track, is showing gray seepage from east-side stones as of World-day 17 — a passing traveler warned against filling watersk",
         "[d4] Rendic Vael's name extracted from the optics array intake log on World-day 18 evening — the log was unaltered, the visit unrecorded.",
         "[d4] The document roll — Fendt's testimony and Silas's chain-record, sealed with Calvar's wax and brass wire — was completed at the corner booth of the Low Lamp Inn on World-day 18 evening. Two hands on th",
         "[d5] Two road opportunists disarmed and sent to Mara Wells with Silas Weir's name — the limestone bend saw mercy shown and weapons taken on World-day 18 morning.",
@@ -2046,7 +2067,8 @@
         "[d5] The Fell Pell gathering on World-day 18 evening produced a formally delegated crisis-response structure — Calvar (repair lead), Dara (logistics), Mara (supply/comms/document delivery), Aldric (account",
         "[d5] The fellowship of the Fell was sealed at the Fell Pell on World-day 18 evening with a partial deathwork closing — 'Thus begins the fellowship of the Fell.' The gathering is complete. Seven members nam",
         "[d5] The brigandine and short sword — Pell's father's gear — pulled from the chest under the second bench on World-day 18 evening. Both sound and ready. The chest is open.",
-        "[d5] Pell's short sword rune-bound at the forge on World-day 18 evening — four threads seated rough but holding. The lamp-black vial is spent down and the tooling leather is marked from the work."
+        "[d5] Pell's short sword rune-bound at the forge on World-day 18 evening — four threads seated rough but holding. The lamp-black vial is spent down and the tooling leather is marked from the work.",
+        "[d5] Brigandine rune-work completed to the full protective layer on World-day 18 evening — every plate row threaded inside, lamp-black spent. Radiant embellishment not yet begun."
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -2108,7 +2130,7 @@
           "parentId": "millbrook",
           "day": 1,
           "visited": true,
-          "note": "Brigandine and short sword pulled from the chest under the second bench — gear is out and ready for the morning drill."
+          "note": "Brigandine fully protective-threaded; rune-craft kit spent; ember-red coals; The Warden's Charge against the bench-side."
         },
         "north-gate": {
           "name": "North Gate",
@@ -2423,7 +2445,6 @@
         "label": "Millbrook",
         "kind": "event",
         "facts": [
-          "[d1] The death-binding's thread to Huginn tightened to present and mutual on World-day 13 night — a critical deepening at the forge south pit before the hunt. The spear now knows what it is adjacent to.",
           "[d1] Deathsense through the bound spear reads north with a genuine pull — more than one presence, not imminent, but present. The forge yard's saturation (iron, decades of cured meat) blurs any finer resolu",
           "[d1] Order-Sense on Huginn's vigil (World-day 13 deep night): whatever is north cycles at a steady interval — patterned, not urgent, not approaching. Vigil without alarm.",
           "[d1] Order-Sense at the forge lintel (World-day 14 pre-dawn): north now reads as two or three distinct presences — each with its own cadence, loosely synchronized, alive, holding ground. Not approaching. T",
@@ -2446,7 +2467,8 @@
           "[d2] Palework on the cradle-recess confirms: the contact stain is a stationed working piece — tall, load-bearing, regularly attended, removed cleanly with no fracture or drag-scarring. Age bracket 40–200 y",
           "[d5] Pell's forge renamed the Fell Pell on World-day 18 evening — named aloud by Silas Weir at the opening of the gathering, received without ceremony by Pell and the assembled group.",
           "[d5] The short sword is the proposed anchor for a protective rune-bond between Silas and Pell — her ironsense is already in the iron's grain, so threading Ashwarden craft and Huginn's attendance through the blade's fuller creates a shared line: she feels danger forming, he feels when she is pressed…",
-          "[d5] The brigandine's first protective thread seated into the shoulder collar on World-day 18 evening — death-warding, conserved, confirmed good by Pell's ironsense."
+          "[d5] The brigandine's first protective thread seated into the shoulder collar on World-day 18 evening — death-warding, conserved, confirmed good by Pell's ironsense.",
+          "[d5] The brigandine's full protective thread completed at the Fell Pell on World-day 18 evening — every plate row from collar to hem, inside edge, before any decoration. Lamp-black spent."
         ],
         "links": [
           "precursor-signs-in-the-valley",
@@ -3731,21 +3753,21 @@
     }
   },
   "tendencies": {
-    "strategic": 20.286596499980583,
-    "cerebral": 7.515751233400877,
-    "social": 15.579676165163095,
-    "generous": 2.6969966702652526,
-    "cautious": 6.574962145073625,
-    "physical": 0.9774773894068246,
-    "risky": 0.21608208843612453,
-    "ruthless": 1.4156190092222107,
-    "carousing": 0.021689073188008116,
-    "amorous": 11.525438434926448,
-    "patient": 2.4803950868609586,
-    "stealth": 0.5486975446004246,
-    "devotion": 1.226144539548454,
-    "craft": 2.2567536067656886,
-    "leadership": 0.5446415584428731
+    "strategic": 19.779431587481067,
+    "cerebral": 7.327857452565855,
+    "social": 15.190184261034018,
+    "generous": 2.629571753508621,
+    "cautious": 7.410588091446784,
+    "physical": 0.953040454671654,
+    "risky": 0.2106800362252214,
+    "ruthless": 1.3802285339916553,
+    "carousing": 0.02114684635830791,
+    "amorous": 11.237302474053287,
+    "patient": 3.4183852096894345,
+    "stealth": 0.534980105985414,
+    "devotion": 1.1954909260597426,
+    "craft": 3.2003347665965465,
+    "leadership": 0.5310255194818012
   },
   "aptitudes": [
     "strategist",
@@ -3755,7 +3777,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 511,
+  "actionCount": 512,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -4001,8 +4023,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784404686945,
-  "rev": 749,
+  "updatedAt": 1784404787808,
+  "rev": 750,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4677,12 +4699,6 @@
   "opLossPending": false,
   "establishedFacts": [
     {
-      "id": "calvar",
-      "text": "The engineer's name is Calvar. He lives above the cooperage on the east lane of the Edge District. He authored the seventh-band monitoring specification. He came to Leth three days ago and left a diag",
-      "day": 3,
-      "subjectId": "calvar"
-    },
-    {
       "id": "leth",
       "text": "Someone entered Leth's archive room during one of the two nights after Calvar left his diagram — they added four characters in deliberate, fast-pressed ink to the lower-right corner without Leth's kno",
       "day": 3,
@@ -4915,6 +4931,12 @@
       "text": "Pell's short sword is rune-bound: four threads seated — her ironsense as anchor, Huginn's Ashwarden ending-sense through the fuller, a shadow-harm focus at the quillon, and a rough order-sense capacitor that closed on Pell's own reading idiom rather than Silas's geometry. Completed rough but…",
       "day": 5,
       "subjectId": "pell-ran-marsh"
+    },
+    {
+      "id": "pell-ran-marsh",
+      "text": "The brigandine's full protective thread is seated — every plate row from collar to hem, inside edge. The lamp-black is spent. The work is complete to the practical layer.",
+      "day": 5,
+      "subjectId": "pell-ran-marsh"
     }
   ],
   "practice": {
@@ -4923,7 +4945,7 @@
       "numen_sense": 3,
       "lightsense": 2,
       "order_sense": 51,
-      "palework": 25,
+      "palework": 26,
       "deathsense": 21,
       "shadowstep": 15,
       "the-attended-end": 28,
@@ -5074,7 +5096,7 @@
   "syncedAt": 1784392733860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 330
+    "valley": 331
   },
   "foreclosed": [
     "rootkin",
@@ -5129,10 +5151,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T19:58:06.945Z",
+      "lastAt": "2026-07-18T19:59:47.807Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 55,
+      "beats": 56,
       "_recapError": null,
       "recap": "Day eighteen, and Silas Weir moved like a man who'd finally stopped fighting the shape of what he was. On the road he disarmed three opportunists without breaking bones, read the grief sitting behind the broad man's eyes, named it plainly, pressed provisions into their hands, and sent them toward something worth doing — mercy given as instruction, not sentiment. Then he brought the hard people together: Dara, Aldric, Fendt, Mara, Calvar, all of them in the heat of Pell's forge with no exits easy and no pretense left, and in that single evening he turned a valley's quiet panic into four working threads — engineering, logistics, supply, accounts — each with a named lead and a direction to face. The crisis didn't end, but it stopped being formless, and that was his doing."
     }

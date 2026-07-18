@@ -181,6 +181,7 @@
       "lore/the_living_world.json",
       "lore/the_pole_intensity_model.json",
       "lore/the_twelve_reaches.json",
+      "lore/tradition_profiles.json",
       "lore/universal_roles.json",
       "lore/valley_primer.md",
       "lore/will_modality.json",
@@ -205,5 +206,5 @@
       "quests/the_name_that_travels.json"
     ]
   },
-  "note": "SNG-064 FIX (Aevi 2026-07-11): this manifest is a WHITELIST \u2014 engine/state.js iterates provides.* and loads ONLY what is listed. It listed 6 of 89 locations, 5 of 31 NPCs, 3 of 26 lore files. The live game was running on SIX LOCATIONS. Now lists everything. ANY new content file MUST be added here or it silently does not exist."
+  "note": "SNG-064 FIX (Aevi 2026-07-11): this manifest is a WHITELIST — engine/state.js iterates provides.* and loads ONLY what is listed. It listed 6 of 89 locations, 5 of 31 NPCs, 3 of 26 lore files. The live game was running on SIX LOCATIONS. Now lists everything. ANY new content file MUST be added here or it silently does not exist."
 }

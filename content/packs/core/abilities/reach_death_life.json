@@ -491,7 +491,13 @@
           "rank": 1,
           "name": "The Last Gift",
           "grants": "Give the dying a clear, painless final interval — words said, peace made, the end met whole.",
-          "cannot": "Does not postpone death; the gift is the hour, not more hours."
+          "cannot": "Does not postpone death; the gift is the hour, not more hours.",
+          "harmRung": "lethal",
+          "functions": [
+            "heal",
+            "restore",
+            "reveal"
+          ]
         }
       ],
       "challengeTypes": [
@@ -749,7 +755,11 @@
           "rank": 1,
           "name": "The Cut Thread",
           "grants": "End one living thing. No wound, no struggle, no argument. It simply stops.",
-          "cannot": "It costs almost everything you have, it is unmistakable to anyone watching, and it CANNOT BE UNDONE — not by you, not by the Rootkin, not by a braid. This is the one door with no handle on the other side."
+          "cannot": "It costs almost everything you have, it is unmistakable to anyone watching, and it CANNOT BE UNDONE — not by you, not by the Rootkin, not by a braid. This is the one door with no handle on the other side.",
+          "harmRung": "lethal",
+          "functions": [
+            "strike"
+          ]
         }
       ],
       "gated": "learned",

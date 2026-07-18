@@ -559,6 +559,7 @@
       },
       "functions": [
         "command",
+        "mend",
         "reveal"
       ],
       "narrationHints": "The machine runs on why, not just how.",
@@ -572,6 +573,7 @@
           "cannot": "Needs dense substrate; what answers may not be tame.",
           "functions": [
             "command",
+            "mend",
             "reveal"
           ],
           "gains": "broaden",
@@ -580,10 +582,11 @@
         {
           "rank": 2,
           "name": "The Deeper Register",
-          "grants": "Hold the register open rather than striking it once — a deep Precursor work answers repeatedly, and answers questions as well as commands. What Sleeps Under begins to address you specifically rather than generically.",
+          "grants": "Hold the register open rather than striking it once — a deep Precursor work answers repeatedly, and answers questions as well as commands. What Sleeps Under begins to address you specifically rather than generically. A work treated with rather than struck will also let you set it right — faults named by the mechanism itself and repaired by its consent rather than by force.",
           "cannot": "Being addressed specifically is not the same as being welcome. It still needs dense substrate, and the density is not yours to arrange. And a work that has learned your particular meaning can be reached through you by anything else that learns it.",
           "functions": [
             "command",
+            "mend",
             "reveal"
           ],
           "gains": "deepen",
@@ -672,6 +675,7 @@
       },
       "functions": [
         "open",
+        "summon",
         "travel"
       ],
       "narrationHints": "A door opens onto a place you have stood before, a hundred miles closed to a single step.",
@@ -681,11 +685,12 @@
         {
           "rank": 1,
           "name": "Waygate",
-          "grants": "Open a gate to a well-known distant place and step (or lead a few) through, crossing any distance at once.",
+          "grants": "Open a gate to a well-known distant place and step (or lead a few) through, crossing any distance at once. What the gate carries it carries BOTH ways — you may call a companion, a beast, or a needed thing through to you rather than going yourself.",
           "cannot": "Only to places held clearly in memory; enormous cost + cooldown; a botch opens the wrong gate, or a dangerous one.",
           "functions": [
             "travel",
-            "open"
+            "open",
+            "summon"
           ],
           "harmRung": "none",
           "gains": "broaden"

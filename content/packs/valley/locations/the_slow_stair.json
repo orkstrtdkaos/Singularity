@@ -35,7 +35,7 @@
     "the_lampless_market",
     "the_axis_gate"
   ],
-  "descriptionSeed": "The long way up and out — days of ascending stair, and the dark thinning by degrees, and the first grey suggestion of a world that uses eyes. Umbrals coming up go blind for a week at the top and consider it a reasonable toll. Surface folk coming down go blind immediately and consider it a catastrophe. Halfway there is a landing where both kinds of people sit and wait to adjust, and it is the most honest room in the world.",
+  "descriptionSeed": "The long way up and out — days of ascending stair, and the dark thinning by degrees, and the first grey suggestion of a world that uses eyes. Umbrals coming up go blind for a week at the top and consider it a reasonable toll. Surface folk coming down go blind immediately and consider it a catastrophe. Halfway there is a landing where both kinds of people sit and wait to adjust, and it is the most honest room in the world. The Slow Stair's waygate sits at the true threshold, where the last of the light gives out. It is the network's most-used gate that nobody outside the Depths can find without being shown.",
   "loreRefs": [
     "the_twelve_reaches",
     "traditions",
@@ -55,5 +55,7 @@
     "dark": 0.3,
     "space": 0.2,
     "body": 0.2
-  }
+  },
+  "waygate": true,
+  "waygateTier": 3
 }

@@ -17,9 +17,11 @@
         "body_mind": -0.2
       },
       "functions": [
+        "bind",
+        "break",
         "make",
-        "shield",
-        "break"
+        "reveal",
+        "shield"
       ],
       "narrationHints": "He puts his hand on the stone and the stone tells him the truth, because stone does not do anything else.",
       "description": "The concrete-pole mastery: the real is what you can touch, weigh, and set. The world's finest building and its most stubborn skepticism, in one craft.",
@@ -29,19 +31,40 @@
           "rank": 1,
           "name": "The Weighed Thing",
           "grants": "Know a thing's true weight, material, soundness and worth by touch — no lie of appearance survives your hand.",
-          "cannot": "It tells you what a thing IS, never what it means or what it is for."
+          "cannot": "It tells you what a thing IS, never what it means or what it is for.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Set Stone",
           "grants": "Set a thing so it STAYS — a wall, a joint, a boundary, a claim. What you set does not shift, sag, or come apart.",
-          "cannot": "What is set is hard to un-set, including by you, including when you were wrong to set it."
+          "cannot": "What is set is hard to un-set, including by you, including when you were wrong to set it.",
+          "functions": [
+            "reveal",
+            "make",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Denial",
           "grants": "Deny an abstraction purchase on the real: illusion, glamour, symbol-working and figure all simply fail in your presence. The thing is what it is.",
-          "cannot": "It denies the abstract INDISCRIMINATELY — including meanings you needed, including a Figurist ally's working, including hope."
+          "cannot": "It denies the abstract INDISCRIMINATELY — including meanings you needed, including a Figurist ally's working, including hope.",
+          "functions": [
+            "reveal",
+            "make",
+            "bind",
+            "shield",
+            "break"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "gated": "learned",
@@ -76,19 +99,36 @@
           "rank": 1,
           "name": "Stone-Read",
           "grants": "Know what a material truly is, and whether it is sound.",
-          "cannot": "Materials, not makers. It says the beam will fail; not who cut it badly."
+          "cannot": "Materials, not makers. It says the beam will fail; not who cut it badly.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Long Grain",
           "grants": "Read a thing's history in its material — the stresses it took, the repairs, the day it nearly broke.",
-          "cannot": "History, not future. It reports what happened, not what happens next."
+          "cannot": "History, not future. It reports what happened, not what happens next.",
+          "functions": [
+            "reveal",
+            "track"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Given Word",
           "grants": "The material of a whole structure is legible at once — every fault, every honest joint, every lie the builder told.",
-          "cannot": "Buildings you love turn out to be full of lies. The Masons say this is why they are hard to live with."
+          "cannot": "Buildings you love turn out to be full of lies. The Masons say this is why they are hard to live with.",
+          "functions": [
+            "reveal",
+            "track"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "gated": "learned",
@@ -113,7 +153,8 @@
       },
       "functions": [
         "break",
-        "reveal"
+        "reveal",
+        "ward"
       ],
       "narrationHints": "He says the flat thing and the beautiful argument in the room dies of it.",
       "description": "Reduce a soaring abstraction to the plain touchable fact under it — and everyone present sees the fact.",
@@ -123,19 +164,38 @@
           "rank": 1,
           "name": "The Plain Fact",
           "grants": "Cut through a rhetorical or symbolic working to the concrete fact beneath, out loud, and make it land.",
-          "cannot": "Some abstractions are TRUE. Reducing them does not unmake them; it only makes you look small when it fails."
+          "cannot": "Some abstractions are TRUE. Reducing them does not unmake them; it only makes you look small when it fails.",
+          "functions": [
+            "reveal",
+            "break"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Bedrock",
           "grants": "Reduce an argument, a glamour, or a doctrine to its physical basis — and if it has none, that becomes visible to all.",
-          "cannot": "A doctrine with no physical basis is not thereby false. The Masons lose this argument to the Figurists roughly every generation."
+          "cannot": "A doctrine with no physical basis is not thereby false. The Masons lose this argument to the Figurists roughly every generation.",
+          "functions": [
+            "reveal",
+            "break"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Only Real",
           "grants": "In your presence the touchable simply IS the real, and abstraction cannot get purchase — no symbol acts, no figure walks.",
-          "cannot": "You have made a world where nothing means anything. Some people find that a relief, and the ones who do worry the Masons most."
+          "cannot": "You have made a world where nothing means anything. Some people find that a relief, and the ones who do worry the Masons most.",
+          "functions": [
+            "reveal",
+            "break",
+            "ward"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "gated": "learned",
@@ -160,9 +220,10 @@
         "mechanical_spiritual": 0.2
       },
       "functions": [
-        "make",
         "bind",
-        "deceive"
+        "deceive",
+        "make",
+        "reveal"
       ],
       "narrationHints": "She draws a shape that is not a picture of anything, and the room rearranges itself to agree with it.",
       "description": "The abstract-pole mastery: pattern, symbol and idea as the FINER layer of the real. To a Figurist, matter is the coarse residue of form.",
@@ -172,19 +233,39 @@
           "rank": 1,
           "name": "The Pattern Eye",
           "grants": "See the pattern, symbol, or structure a thing is an instance OF — the form behind the fact.",
-          "cannot": "Seeing a form does not give you power over its instance. Not yet."
+          "cannot": "Seeing a form does not give you power over its instance. Not yet.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Figure",
           "grants": "Make a symbol that ACTS — a mark, a shape, a figure that does in the world what it means.",
-          "cannot": "A figure does what it MEANS, not what you wanted it to mean. Be precise, or be surprised."
+          "cannot": "A figure does what it MEANS, not what you wanted it to mean. Be precise, or be surprised.",
+          "functions": [
+            "reveal",
+            "make",
+            "deceive"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Argument Made Real",
           "grants": "Build an idea into the world so completely that it becomes a fact others must move around — a rule, a boundary, a truth-in-effect.",
-          "cannot": "The Masons can deny it. Reality can, eventually, decline. And a made truth that was never true rots from the inside."
+          "cannot": "The Masons can deny it. Reality can, eventually, decline. And a made truth that was never true rots from the inside.",
+          "functions": [
+            "reveal",
+            "make",
+            "deceive",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "gated": "learned",
@@ -208,6 +289,7 @@
         "concrete_abstract": 0.3
       },
       "functions": [
+        "foresee",
         "reveal"
       ],
       "narrationHints": "The repetition surfaces — this has a shape, and the shape has a name.",
@@ -218,19 +300,35 @@
           "rank": 1,
           "name": "Pattern-Sense",
           "grants": "See that a set of particulars is an instance of a pattern, and roughly what pattern.",
-          "cannot": "Seeing the pattern is not seeing whether it is a true one. Figurists find patterns in noise, constantly."
+          "cannot": "Seeing the pattern is not seeing whether it is a true one. Figurists find patterns in noise, constantly.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Named Form",
           "grants": "Name the form exactly — and once named, its other instances become visible to you everywhere.",
-          "cannot": "Once you can see it everywhere, you will see it where it is not."
+          "cannot": "Once you can see it everywhere, you will see it where it is not.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Formal Reach",
           "grants": "Read the form of an event, a life, or a history — the shape it is completing.",
-          "cannot": "Knowing the shape a life is completing does not permit you to change it, and it is a terrible thing to carry."
+          "cannot": "Knowing the shape a life is completing does not permit you to change it, and it is a terrible thing to carry.",
+          "functions": [
+            "reveal",
+            "foresee"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "gated": "learned",
@@ -254,9 +352,10 @@
         "chaos_order": 0.1
       },
       "functions": [
-        "summon",
         "bind",
-        "strike"
+        "strike",
+        "summon",
+        "ward"
       ],
       "narrationHints": "The mark she drew stands up off the wall and goes to do the thing it means.",
       "description": "Send a made figure to act at a distance — a symbol given errand and enough form to run it.",
@@ -266,19 +365,40 @@
           "rank": 1,
           "name": "The Walking Figure",
           "grants": "Send a figure to carry a meaning somewhere — a warning, a ward, a binding — and it arrives and acts.",
-          "cannot": "It acts once and it is spent. And it acts on what it MEANS."
+          "cannot": "It acts once and it is spent. And it acts on what it MEANS.",
+          "functions": [
+            "summon",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Standing Figure",
           "grants": "The figure persists — it keeps meaning, keeps acting, keeps the ward or the rule in force after you have gone.",
-          "cannot": "A standing figure is a rule nobody is supervising. It will apply itself to cases you never imagined."
+          "cannot": "A standing figure is a rule nobody is supervising. It will apply itself to cases you never imagined.",
+          "functions": [
+            "summon",
+            "bind",
+            "ward"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Figure That Learns",
-          "grants": "The figure adapts its meaning to circumstance — it keeps doing what you MEANT even where you did not foresee.",
-          "cannot": "Now it is deciding what you meant. The Figurists' oldest disasters all begin with a figure that was quite sure it understood."
+          "grants": "The figure adapts its meaning to circumstance — it keeps doing what you MEANT even where you did not foresee. And a figure can be sent meaning harm: not a blow but a verdict walking, which arrives, finds the one it was addressed to, and enacts what was written into it.",
+          "cannot": "A figure sent to harm is a figure that will do the SECOND thing you meant, not the first — the Figurists lose more of their own to this than to any enemy. It arrives at the pace of a walking thing and can be outrun, argued with, or unmade by a Mason's denial. And what it does, you wrote.",
+          "functions": [
+            "summon",
+            "bind",
+            "ward",
+            "strike"
+          ],
+          "gains": "broaden",
+          "harmRung": "damaging"
         }
       ],
       "gated": "learned",
@@ -313,7 +433,8 @@
       "harmRung": "none",
       "functions": [
         "mend",
-        "restore"
+        "restore",
+        "reveal"
       ],
       "challengeTypes": [
         "repair",
@@ -325,19 +446,39 @@
           "rank": 1,
           "name": "Correct Fix",
           "grants": "Repair what is broken by understanding what it truly is — the right material intervention, no more and no less, that makes the thing sound again.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "mend"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Sound Again",
           "grants": "Restore not just function but structural integrity — the wall that will not sag, the wound that will not fester, the joint that will hold under load.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "mend",
+            "restore"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "As It Was",
           "grants": "Return a thing fully to its proper material state — the building, the body, the system — so that it is indistinguishable from one that was never broken.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "mend",
+            "restore"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -377,19 +518,36 @@
           "rank": 1,
           "name": "Plain Statement",
           "grants": "Say the plain thing and have it land with authority — not eloquence, just solidity. The practical fact that settles an argument by being undeniable.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "command"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Word That Holds",
           "grants": "Make an agreement or declaration that sticks — not because you charmed anyone, but because the weight of your standing and your history of keeping your word makes it so.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "command",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Set",
           "grants": "Name the practical truth of a situation so plainly and with such authority that people organize around it as if it were the wall they're building against.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "command",
+            "bind"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -415,8 +573,10 @@
       "tradition": "mason",
       "harmRung": "none",
       "functions": [
+        "make",
         "move",
-        "open"
+        "open",
+        "reveal"
       ],
       "challengeTypes": [
         "navigation",
@@ -428,19 +588,40 @@
           "rank": 1,
           "name": "The Seam",
           "grants": "Find the gap, the loose stone, the door that's always in the structure — the mason knows how things are built and knows where they open.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "open"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Material Passage",
           "grants": "Move through a built environment at the speed its construction allows — the route that doesn't backtrack, the way that's already there in the material.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "open",
+            "move"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Way In",
           "grants": "In any built structure, find or make the passage. Not by brute force — by knowing exactly where the material wants to open.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "open",
+            "move",
+            "make"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -466,8 +647,8 @@
       "tradition": "mason",
       "harmRung": "none",
       "functions": [
-        "sustain",
-        "resist"
+        "resist",
+        "sustain"
       ],
       "challengeTypes": [
         "endurance",
@@ -479,19 +660,36 @@
           "rank": 1,
           "name": "Just Keep Going",
           "grants": "Work past fatigue, cold, hunger, or pain by not stopping — the mason's endurance is the next correct action taken, not inspiration.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Steady Pace",
           "grants": "Sustain useful work across a long haul without the degradation that hits others — the quality doesn't fall, the pace doesn't drop, the hand stays true.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain",
+            "resist"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Until It's Done",
           "grants": "Continue until the work is finished, regardless of what the body says. The task completes. This is simply what you do.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain",
+            "resist"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -517,8 +715,9 @@
       "tradition": "figurist",
       "harmRung": "none",
       "functions": [
+        "heal",
         "restore",
-        "mend"
+        "reveal"
       ],
       "challengeTypes": [
         "medical",
@@ -530,19 +729,37 @@
           "rank": 1,
           "name": "The Correct Pattern",
           "grants": "Identify the form a broken thing is a disruption of, and name the intervention that restores the pattern — not approximate, but correct.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Form Before Function",
           "grants": "Restore the underlying structure — the form a person, plan, or object is supposed to have — and function follows without separate work.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "restore"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Full Re-Instantiation",
           "grants": "Return a thing entirely to its proper form — the body that heals from the inside out, the relationship that finds its right shape, the plan that coheres again — by working at the level of pattern rather than symptom.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "restore",
+            "heal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -569,8 +786,9 @@
       "tradition": "figurist",
       "harmRung": "none",
       "functions": [
-        "ward",
-        "shield"
+        "bind",
+        "shield",
+        "ward"
       ],
       "challengeTypes": [
         "defense",
@@ -582,19 +800,37 @@
           "rank": 1,
           "name": "The Mark Against",
           "grants": "Draw or declare a figure that keeps a specific category of thing — an intent, a person, a working — from entering or acting in a space.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "ward"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Persistent Ward",
           "grants": "Set a warding figure that holds without your continued attention — it knows what it's keeping back and it keeps it back until the mark is broken.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "ward",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Absolute Exclusion",
           "grants": "Name what does not belong here with such formal clarity that it cannot be here — the working fails, the intent dissolves, the thing that should not be cannot maintain form in the space you've marked.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "ward",
+            "bind",
+            "shield"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -621,8 +857,9 @@
       "tradition": "figurist",
       "harmRung": "none",
       "functions": [
-        "travel",
-        "reveal"
+        "move",
+        "reveal",
+        "travel"
       ],
       "challengeTypes": [
         "navigation",
@@ -634,19 +871,39 @@
           "rank": 1,
           "name": "The Shape of a Place",
           "grants": "Read a landscape or structure as a pattern — see where it opens, where it funnels, where it repeats — and move along its lines rather than across them.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "move"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Pattern Navigation",
           "grants": "Navigate any environment you can read the form of without needing roads, signs, or memory — the pattern tells you where you are and where leads where.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "move",
+            "travel"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "This Place Is an Instance",
           "grants": "Recognize that a place is an instance of a form you know — and everything about it becomes legible: every exit, every blind spot, every place the pattern says something must be.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "move",
+            "travel"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -673,8 +930,8 @@
       "tradition": "figurist",
       "harmRung": "none",
       "functions": [
-        "sustain",
-        "bind"
+        "bind",
+        "sustain"
       ],
       "challengeTypes": [
         "endurance",
@@ -686,19 +943,35 @@
           "rank": 1,
           "name": "Form Maintenance",
           "grants": "Hold a pattern clearly in mind and the thing it represents persists longer than it otherwise would — an agreement, a working, a person's coherence under pressure.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Sustained Pattern",
           "grants": "Keep the form of something alive across time and distance — a relationship, a plan, a person's sense of themselves — by maintaining its correct representation.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "As Long as the Form Holds",
           "grants": "While you hold the form of something perfectly in your mind, it does not cease — the pattern is the sustaining principle, and you are the one sustaining it.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"

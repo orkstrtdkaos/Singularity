@@ -36,7 +36,7 @@
     "the_unfallen",
     "the_axis_gate"
   ],
-  "descriptionSeed": "Tiered spires, choral certainty that is genuinely hard to bear, and a mercy that is entirely real and administered from above. The Seraphic Orders will forgive you, and it will not be a formality, and it will change you — and they will also judge you, and that will not be a formality either, and there is no appeal.",
+  "descriptionSeed": "Tiered spires, choral certainty that is genuinely hard to bear, and a mercy that is entirely real and administered from above. The Seraphic Orders will forgive you, and it will not be a formality, and it will change you — and they will also judge you, and that will not be a formality either, and there is no appeal. A waygate opens on Choir-Height's lowest tier, never its upper ones. The Orders are clear that arrival grants you the city's floor and nothing above it.",
   "loreRefs": [
     "the_twelve_reaches",
     "traditions"
@@ -56,5 +56,7 @@
     "order": 0.4,
     "light": 0.3
   },
-  "startingLocation": true
+  "startingLocation": true,
+  "waygate": true,
+  "waygateTier": 3
 }

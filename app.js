@@ -11,8 +11,8 @@ import { newProfile, updateProfile, aptitudeMods, profileInsight, grantAptitudes
 import { gmTurn, parseIntent, gmAsk, generateBio, suggestBuild, extractGambit, sanitizeScene, narrativeRegister, ratingRegister, bluntnessDirective } from "./engine/gm.js";
 import { applyQuestUpdates, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, slugify } from "./engine/quests.js";
 import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM } from "./engine/corrections.js";
-import { getApiKey, setApiKey, callClaude, callClaudeJSON } from "./engine/claude.js";
-import { generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight } from "./engine/generate.js";
+import { getApiKey, setApiKey, callClaude, callClaudeJSON, parseLooseJSON } from "./engine/claude.js";
+import { generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight, NOMINATE_AT } from "./engine/generate.js";
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, ghList, fetchRepoJSON, raceTimeout } from "./engine/sync.js";
 import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates } from "./engine/inventory.js";
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
@@ -32,11 +32,11 @@ import { harmGateFor, departureGateFor, sanitizeOfferIntent, intentNoteFor, spli
 import { resolveWaygateTransit } from "./engine/waygate.js"; // SNG-148: waygates — map control routes named/hub; GM offer via the registry row
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./engine/entityDetail.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender } from "./engine/npcs.js";
-import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
+import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent } from "./engine/places.js";
 import { initWorldState, runWorldTick, syncSharedWorld, advanceGeneratedOffscreen, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
 import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, retroNativeGrants, applyNativeGrants, nativeGrantIdsFor, seedInnateSubstrate, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility, autoAdvancePracticedRanks, markDefiningMoment, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy } from "./engine/progression.js";
-import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, mergeInto, mergeCodexTopics, suggestMerges, markNotSame } from "./engine/codex.js";
+import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, mergeInto, mergeCodexTopics, suggestMerges, markNotSame, buildMergeAdjudicationPrompt, applyMergeVerdicts, mergeDigest, undoLastMerge } from "./engine/codex.js";
 import { reconcile, topReconcileVersion } from "./engine/reconcile.js";
 import { ensurePractice, recordUse, declareAspiration, dropAspiration, recordAspirationProgress, aspirationRipe, practiceRankReady, ripeCombos, ripeBranches, emergenceNoticeForGM, acceptCombo, acceptBranch, validEmergenceId } from "./engine/practice.js";
 import { needsBackfill, runBackfill, summaryLines } from "./engine/backfill.js";
@@ -55,7 +55,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // SNG-155: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.109";
+const APP_VERSION = "1.8.117";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -163,6 +163,12 @@ let wheelFnFilter = new Set(); // SNG-124 Phase B: active function-family filter
 let character = null;    // active character
 let profile = null;      // the player's profile (the human)
 let sceneTurns = [];     // recent beats: {summary, narration} for scene continuity
+// SNG-157: the stored scene history is BOUNDED. It was unbounded, and a long-running scene that
+// never ended grew to 169 turns (~341KB) on a real save — 59% of a 600KB character — which is what
+// exhausted the localStorage quota and hung character load. Every consumer reads at most
+// `.slice(-6)` (the GM prompt, the gambit extractor), so 40 is generous headroom, not a trim of
+// anything anyone reads. The chronicle keeps each scene's summary independently on scene end.
+const SCENE_TURN_CAP = 40;
 let sceneState = null;   // authoritative scene anchor: setting, npcsPresent, objects, threads
 let busy = false;
 let _discoverAutoRan = false; // SNG-087: auto-run cross-device discovery at most once per session
@@ -1120,6 +1126,15 @@ function migrate(c) {
   // on "writing your story…" forever. Clear them on load so a stale busy self-heals.
   delete c._chronicleBusy; delete c._chronicleError;
   (c.sessions || []).forEach(s => { if (s) delete s._recapBusy; });
+  // SNG-157: heal a save already bloated by the unbounded scene history — Erik's carried 169 turns
+  // (~341KB, 59% of the file), which is what blew the storage quota. Trimming on load means an
+  // affected save fixes itself on next open instead of needing a wipe. Nothing readable is lost:
+  // consumers read at most the last 6, and each ended scene's summary lives in the chronicle.
+  if (c.activeScene?.turns?.length > SCENE_TURN_CAP) {
+    const before = c.activeScene.turns.length;
+    c.activeScene.turns = c.activeScene.turns.slice(-SCENE_TURN_CAP);
+    console.warn(`[migrate] trimmed scene history ${before} → ${SCENE_TURN_CAP} turns (SNG-157 storage bound)`);
+  }
   normalizeInventory(c, CONTENT.items);
   if (!c.clock) c.clock = newClock();
   if (!c.companions) c.companions = [];
@@ -1533,9 +1548,19 @@ async function handleGenerateRequests(turn) {
       }
       // SNG-046: a generated location gets stable map coords on mint (near its parent) so it
       // appears on the map immediately and never jumps between renders.
-      if (type === "location" && (!rec.map || !Number.isFinite(rec.map.x))) {
-        const existing = {}; for (const l of Object.values(CONTENT.locations)) if (l.map) existing[l.id] = l.map;
-        rec.map = coordForGenerated(rec.id, hereNow().map, existing);
+      if (type === "location") {
+        // SNG-154: THIS is the promotion path that lost the Inn (a generateRequest, not
+        // mintTransitLocation). If the generated place was already a sub-place of somewhere, keep
+        // that containment — and anchor its coords to the PARENT rather than to wherever the
+        // character happens to be standing.
+        const promotedFrom = findSubPlaceParent(character, rec.name) || findSubPlaceParent(character, rec.id);
+        if (promotedFrom && !rec.parentId) { rec.parentId = promotedFrom.parentId; rec._promotedFromSubPlace = true; }
+        if (!rec.parentId && hereNow()?.id) rec.parentId = hereNow().id; // born inside where we stand
+        if (!rec.map || !Number.isFinite(rec.map.x)) {
+          const existing = {}; for (const l of Object.values(CONTENT.locations)) if (l.map) existing[l.id] = l.map;
+          const anchor = (rec.parentId && CONTENT.locations[rec.parentId]?.map) || hereNow().map;
+          rec.map = coordForGenerated(rec.id, anchor, existing);
+        }
       }
       if (type === "location") CONTENT.locations[rec.id] = rec;
       else if (type === "npc") CONTENT.npcs[rec.id] = rec;
@@ -2737,7 +2762,9 @@ function applyTurn(turn, resolution, playerWords = null) {
   applyNpcUpdates(character, (turn.relationshipDeltas || []).map(r => ({
     op: "update", npcId: r.npcId, relationshipDelta: clampInt(r.delta || 0, -2, 2), note: r.note
   })), memCtx);
-  applyPlaceUpdates(character, location.id, turn.placeUpdates || [], memCtx);
+  // SNG-154: pass the resolver + catalog so a GM-named parent can be validated against real places
+  // (containment on write, instead of inferring it from wherever we last thought we were standing).
+  applyPlaceUpdates(character, location.id, turn.placeUpdates || [], { ...memCtx, resolveLocationId, locations: CONTENT.locations });
   applyCodexUpdates(character, turn.codexUpdates || [], memCtx);
   applyFactUpdates(character, turn.factUpdates || [], memCtx);
   ensureBondPortraits(character); // SNG-136: a bond that crossed a high milestone this turn earns a portrait
@@ -2934,6 +2961,7 @@ function applyTurn(turn, resolution, playerWords = null) {
   // chronicle + scene persistence
   if (turn.sceneSummary) {
     sceneTurns.push({ player: playerWords || null, summary: turn.sceneSummary, narration: turn.narration || "" }); // SNG-081: keep the player's half
+    if (sceneTurns.length > SCENE_TURN_CAP) sceneTurns = sceneTurns.slice(-SCENE_TURN_CAP); // SNG-157: bounded storage
     if (turn.sceneEnded) { character.chronicle.push(turn.sceneSummary); sceneTurns = []; sceneState = null; character._intentAsked = null; } // SNG-145: a new scene may ask again
   }
   character.activeScene = turn.sceneEnded ? null : { locationId: character.currentLocationId, turns: sceneTurns, lastTurn: turn, sceneState };
@@ -3099,7 +3127,10 @@ async function onChoice(choice) {
   // The resume is the CHOICE itself (plain JSON): the answer annotates it and re-enters onChoice.
   if (!choice.intentRung && !choice.departureConfirmed) {
     const askedKey = activeEnc() ? `enc:${activeEnc().defId}` : `scene:${character.currentLocationId}`;
-    const harmGate = harmGateFor(abilityIds, fullCatalog(), askedKey, character._intentAsked);
+    // SNG-156: the rung is per-RANK (147c moved it into ab.tree[]) — gate on what this character
+    // can actually do at the rank they hold, not on the ability's lifetime ceiling.
+    const ownedLevels = Object.fromEntries((character.abilities || []).map(a => [a.abilityId, a.level]));
+    const harmGate = harmGateFor(abilityIds, fullCatalog(), askedKey, character._intentAsked, ownedLevels);
     const depGate = harmGate ? null : departureGateFor(travelIntentOf(action), character, CONTENT.locations);
     const gate = harmGate || depGate;
     if (gate) {
@@ -3460,6 +3491,28 @@ async function answerLedger(send) {
   renderPlay(character.activeScene?.lastTurn || null, { aside: send ? "Word of it travels — the world will hear." : "It stays local — a story this valley keeps." });
 }
 
+/** SNG-158: close the current scene on the player's say-so. The GM writes the closing beat and
+ *  the summing-up (so the chronicle entry is real prose, not a stub); the engine then does exactly
+ *  what a GM-emitted sceneEnded does. If the GM can't answer, the scene still closes — a scene the
+ *  player asked to end must end, or we are back to the 169-beat scene this exists to prevent. */
+async function endSceneNow() {
+  if (busy || !character) return;
+  if (!sceneTurns.length) { renderPlay(character.activeScene?.lastTurn || null, { aside: "There's no scene open yet — take an action first." }); return; }
+  const beats = sceneTurns.length;
+  renderPlay(null, { thinking: "Drawing the scene to a close…" });
+  const result = await runGM({ resolution: null, playerInput:
+    `(The player is CLOSING this scene. Write one short closing beat that lets the current moment finish naturally — nobody teleports, nothing unresolved is forced shut — then set "sceneEnded": true and write "sceneSummary" as a summing-up of the WHOLE scene (${beats} beats), because that summary becomes the chronicle entry. Offer no choices.)` });
+  if (result?.turn?.sceneEnded) { renderPlay(result.turn, { aside: `Scene closed — ${beats} beats written into your chronicle.` }); return; }
+  // The GM didn't set the flag (or the call failed) — close it engine-side anyway.
+  const summary = result?.turn?.sceneSummary || sceneTurns[sceneTurns.length - 1]?.summary || `A scene at ${hereNow()?.name || "this place"}, ${beats} beats long.`;
+  character.chronicle = character.chronicle || [];
+  character.chronicle.push(summary);
+  sceneTurns = []; sceneState = null; character._intentAsked = null;
+  character.activeScene = null;
+  saveCharacter(character);
+  renderPlay(result?.turn || null, { aside: `Scene closed — ${beats} beats written into your chronicle.` });
+}
+
 async function arriveAtPending() {
   const p = character._pendingArrival; if (!p || busy) return;
   character._pendingArrival = null;
@@ -3478,8 +3531,13 @@ function mintTransitLocation(moveRef) {
   const here = CONTENT.locations[character.currentLocationId];
   const existing = {}; for (const l of Object.values(CONTENT.locations)) if (l.map) existing[l.id] = l.map;
   const name = String(moveRef).replace(/[-_]+/g, " ").replace(/\b\w/g, c => c.toUpperCase()).slice(0, 60);
+  // SNG-154: if this name was already a sub-place somewhere, promotion PRESERVES that containment —
+  // the new location remembers what it is inside of, and the map anchors it there instead of
+  // hash-gridding it across the world (the Low Lamp Inn bug).
+  const promotedFrom = findSubPlaceParent(character, moveRef);
   const rec = {
     id, name, regionId: here?.regionId || here?.region || null,
+    ...(promotedFrom ? { parentId: promotedFrom.parentId, _promotedFromSubPlace: true } : {}),
     descriptionSeed: `A place the road led to — ${name}. The fiction brought you here before the map knew its name.`,
     tags: ["transitional"], connections: here ? [here.id] : [], _gen: true, _mintedAs: "transit",
     map: coordForGenerated(id, here?.map, existing)
@@ -4901,7 +4959,18 @@ function renderChronicle() {
         <div class="auth-stat"><span class="auth-num accent">${auth.worldEffect}</span><span class="auth-label">world-effect — your fingerprint on the shared world</span></div>
       </div>
       <div class="hint" style="margin-top:6px">Of the world you've touched, <strong>${auth.authoredCount}</strong> ${auth.authoredCount === 1 ? "place/person was" : "were"} written before you — and you <strong>called ${auth.novelCount} new ${auth.novelCount === 1 ? "one" : "ones"} into being</strong>.${auth.novelCount ? ` Of those, ${auth.persisted.shared} ${auth.persisted.shared === 1 ? "is" : "are"} now canon the whole valley reads${auth.persisted.rumor ? `, ${auth.persisted.rumor} live${auth.persisted.rumor === 1 ? "s" : ""} on as rumor others may yet confirm` : ""}; ${auth.persisted.personal} real to you, not yet shared.` : ""}</div>
-      ${auth.topAttention.length ? `<div style="margin-top:8px"><div class="sys-label">What you're making real right now</div>${auth.topAttention.map(t => `<div class="known-npc"><span class="npc-name">${esc(t.name)}</span> <span class="cost">${esc(t.type || "")} · ${esc(t.tier)}</span> <span class="rep-band ${t.tier === "nominated" ? "trusted" : ""}" title="realness weight — the closer to promotion, the more real">weight ${t.weight}</span></div>`).join("")}</div>` : ""}
+      ${/* SNG-160: show the number that ACTUALLY gates promotion. This badge used to read
+            "weight N" (birthWeight + score/2) — so the Low Lamp Inn showed "weight 13" while
+            sitting at 4 of the 8 engagement it needs, and a higher weight looked like it was
+            closer to canon when it wasn't. Now: progress to the threshold, and what moves it. */""}
+      ${auth.topAttention.length ? `<div style="margin-top:8px"><div class="sys-label">What you're making real right now</div>${auth.topAttention.map(t => {
+        const ready = t.score >= NOMINATE_AT;
+        const need = Math.max(0, NOMINATE_AT - t.score);
+        // SNG-161: the ⭐ lives HERE too, not only buried on the codex topic page. This row is
+        // where the player learns something "needs 4" — showing a shortfall with no way to act on
+        // it is the readout half-built. ⭐ Keep is +4, so one tap is usually the whole gap.
+        return `<div class="known-npc"><span class="npc-name">${esc(t.name)}</span> <span class="cost">${esc(t.type || "")} · ${esc(t.tier)}</span> <span class="rep-band ${ready ? "trusted" : ""}" title="Shared-world canon needs ${NOMINATE_AT} engagement. Revisit +2 · interact +2 · tie to a quest +2 · ⭐ Keep +4. (realness weight ${t.weight})">${ready ? "ready for canon" : `${t.score}/${NOMINATE_AT} to canon · needs ${need}`}</span>${t.id && !ready ? ` <button class="npc-ctl" data-keepfrom="${esc(t.id)}" title="⭐ Keep — mark this as one that matters to you (+4 toward canon)">⭐</button>` : ""}</div>`;
+      }).join("")}</div>` : ""}
       <label class="rating-check" style="margin-top:10px"><input type="checkbox" id="chr-share" ${profile?.sharedChronicle ? "checked" : ""}> Share my chronicle with the family (they can see these authorship stats)</label>
     </section>
     <section><h3>Sessions${sessions.length ? ` (${sessions.length})` : ""}</h3>
@@ -4932,6 +5001,18 @@ function renderChronicle() {
   const share = document.getElementById("chr-share"); if (share) share.onchange = (e) => { if (profile) { profile.sharedChronicle = e.target.checked; saveProfile(profile); } };
   const endBtn = document.getElementById("chr-endsession"); if (endBtn) endBtn.onclick = () => { endSession(character); saveCharacter(character); renderChronicle(); };
   for (const b of app.querySelectorAll(".session-recap")) b.onclick = () => ensureSessionRecap(b.dataset.sess);
+  // SNG-161: ⭐ Keep straight from the progress row (+4 — usually the whole remaining gap).
+  for (const b of app.querySelectorAll("[data-keepfrom]")) b.onclick = () => {
+    const rec = findGenerated(character, b.dataset.keepfrom);
+    if (!rec) return;
+    recordAttention(rec, "keep", readClock(character.clock).day);
+    saveCharacter(character);
+    const s = rec._gen?.engagementScore || 0;
+    renderChronicle();
+    // say what it bought — the tier language is otherwise invisible from this screen
+    const note = s >= NOMINATE_AT ? `${rec.name} is ready for shared canon — it promotes on your next sync.` : `${rec.name} — ${s}/${NOMINATE_AT} toward canon.`;
+    const host = document.querySelector(".screen"); if (host) { const d = document.createElement("div"); d.className = "insight"; d.style.marginTop = "6px"; d.textContent = note; host.prepend(d); }
+  };
   document.getElementById("chr-back").onclick = () => renderCharacterScreen();
   if (!cache?.text && !character._chronicleBusy && getApiKey()) ensureChronicleParagraph(false); // write once on first open
 }
@@ -5109,10 +5190,43 @@ async function renderLibrary(catIdx = 0, entryId = null) {
 
 // ---------- codex: the character's knowledge graph ----------
 
+// SNG-153: the codex consolidates ITSELF. Erik: "It's too much to have every potential merge done
+// by the user… the game should auto merge — it's really smart AI, just do it." Gate 1 (structural)
+// already refused the free cases; this judges the rest in ONE batched call, merges the certain
+// ones with a receipt, permanently records the rejects, and leaves only genuine coin-flips.
+// Runs on codex OPEN, never in the play loop, never blocking, at most once per session per shape.
+let _adjudicatedKey = null, _adjudicating = false;
+async function maybeAdjudicateMerges(query = "") {
+  if (_adjudicating || !getApiKey()) return;
+  const pairs = suggestMerges(character, { max: 24 });
+  if (!pairs.length) return;
+  const key = pairs.map(p => `${p.aId}::${p.bId}`).sort().join("|");
+  if (key === _adjudicatedKey) return;                 // same shape already judged this session
+  _adjudicatedKey = key; _adjudicating = true;
+  try {
+    const raw = await callClaude([{ role: "user", content: buildMergeAdjudicationPrompt(character, pairs) }],
+      { task: "codex-adjudicate", maxTokens: 900 });
+    const verdicts = parseLooseJSON(raw);
+    const list = Array.isArray(verdicts) ? verdicts : (verdicts?.verdicts || []);
+    if (!list.length) return;
+    const r = applyMergeVerdicts(character, pairs, list);
+    if (r.merged.length || r.rejected) {
+      saveCharacter(character);
+      const digest = mergeDigest(r.merged);
+      if (digest) character._codexDigest = `${digest}${r.rejected ? ` ${r.rejected} looked alike but aren't the same thing — I won't ask again.` : ""}`;
+      else if (r.rejected) character._codexDigest = `${r.rejected} codex entries looked alike but aren't the same thing — I won't ask again.`;
+      renderCodexScreen(query);
+    }
+  } catch (err) {
+    console.warn("[codex] adjudication skipped (the player queue still works):", err?.message);
+  } finally { _adjudicating = false; }
+}
+
 function renderCodexScreen(query = "", openTopicId = null, mergeMode = false) {
   const results = searchCodex(character, query);
   const open = openTopicId ? character.codex?.topics?.[openTopicId] : null;
   const suggestions = !open ? suggestMerges(character) : [];
+  if (!open) maybeAdjudicateMerges(query); // SNG-153: tidy the codex itself, off the play loop
   chrome(`<div class="screen" style="max-width:720px">
     <h2>Codex — what ${esc(character.name)} knows</h2>
     <div class="field"><input id="codex-search" value="${esc(query)}" placeholder="Search topics, facts, factions, mysteries…"></div>
@@ -5162,6 +5276,9 @@ function renderCodexScreen(query = "", openTopicId = null, mergeMode = false) {
         return `<div class="codex-nominations"><div class="codex-group-title">★ Notable — grown into your world's canon</div>
           ${noms.slice(0, 6).map(n => `<button class="opt codex-nom" data-topic="${esc(n.id)}" title="weight ${n.weight}${n.rating ? ` · ${n.rating}` : ""} — a candidate to become shared-world canon">★ ${esc(n.name)} <span class="cost">${esc(n.type)}</span></button>`).join("")}</div>`;
       })()}
+      ${/* SNG-153: a RECEIPT of what the codex did on its own — with a one-tap undo, because
+            auto-merge is only safe while it stays reversible (Erik's condition). */""}
+      ${character._codexDigest ? `<div class="codex-digest insight" style="margin-bottom:8px">${esc(character._codexDigest)}${(character.codex?.mergeUndo || []).length ? ` <button class="opt codex-sug-btn dim" id="codex-undo">Undo the last merge</button>` : ""}</div>` : ""}
       ${suggestions.length ? `<div class="codex-suggestions"><div class="codex-group-title">These look like the same thing — your call</div>
         ${suggestions.map((s, i) => `<div class="codex-sug-row"><span class="codex-sug-pair">«${esc(s.a)}» ↔ «${esc(s.b)}»</span>
           <button class="opt codex-sug-btn" data-sugmerge="${i}">Merge</button>
@@ -5220,6 +5337,14 @@ function renderCodexScreen(query = "", openTopicId = null, mergeMode = false) {
     mergeCodexTopics(character); // the new alias may cascade more duplicates together
     saveCharacter(character);
     renderCodexScreen(query, target.id);
+  };
+  const undoBtn = document.getElementById("codex-undo");
+  if (undoBtn) undoBtn.onclick = () => {
+    const r = undoLastMerge(character);
+    if (!r) return;
+    character._codexDigest = `Put back — "${r.restored}" is its own entry again.`;
+    saveCharacter(character);
+    renderCodexScreen(query);
   };
   for (const b of app.querySelectorAll("[data-sugmerge]")) b.onclick = () => {
     const s = suggestions[parseInt(b.dataset.sugmerge)];
@@ -5864,7 +5989,16 @@ function renderPlay(turn, opts = {}) {
       const hereP = knownPeopleAt(character, character.currentLocationId, { locations: CONTENT.locations, npcs: CONTENT.npcs });
       const partners = partnerAdjacentNpcs(character, CONTENT.rules);
       if (!rep && !hereP.length && !partners.length) return "";
-      const body = `${partners.length ? `<div class="partner-adjacent" style="margin-bottom:6px">${partners.map(p => `<div class="known-npc partner"><span class="npc-name entity-hover" ${p.id ? `data-entity="npc:${esc(p.id)}"` : ""}>❤ ${esc(p.name)}</span> <span class="rep-band trusted" title="A committed partner — with you in all but the mechanics">${esc(p.label)} · with you</span></div>`).join("")}</div>` : ""}${rep ? `<div style="margin-bottom:4px"><span class="rep-band ${rep.band}">${rep.band} (${rep.score})</span></div>` : ""}${hereP.length ? hereP.map(p => `<div class="known-npc"><span class="npc-name entity-hover" ${p.id ? `data-entity="npc:${esc(p.id)}"` : ""}>${esc(p.name)}</span> <span class="rep-band ${p.bondType === "romantic" ? "trusted" : ""}">${esc(p.label)}</span></div>`).join("") : `<span class="insight">no one you know is here right now</span>`}`;
+      // SNG-160: a partner is shown ONCE. The banner and the who's-here list were both rendering
+      // them, so Pell appeared twice — the same person, listed as two people.
+      const partnerIds = new Set(partners.map(p => p.id).filter(Boolean));
+      const hereRest = hereP.filter(p => !partnerIds.has(p.id));
+      // Per-person controls: the GM is supposed to emit revealName/nameExtend when the fiction
+      // learns a name, and it intermittently doesn't — leaving "Broad Opportunist" beside the same
+      // person's real name. Only the player knows they are the same, so give the player the verbs.
+      const peopleCtl = (p) => p.id ? ` <button class="npc-ctl" data-setname="${esc(p.id)}" title="Set or extend this person's name (e.g. Pell → Pell Ran Marsh)">✎</button><button class="npc-ctl" data-mergenpc="${esc(p.id)}" title="This is the same person as someone else you know — merge them">⇊</button>` : "";
+      const row = (p, extra = "") => `<div class="known-npc"><span class="npc-name entity-hover" ${p.id ? `data-entity="npc:${esc(p.id)}"` : ""}>${esc(p.name)}</span> <span class="rep-band ${p.bondType === "romantic" ? "trusted" : ""}">${esc(p.label)}${extra}</span>${peopleCtl(p)}</div>`;
+      const body = `${partners.length ? `<div class="partner-adjacent" style="margin-bottom:6px">${partners.map(p => `<div class="known-npc partner"><span class="npc-name entity-hover" ${p.id ? `data-entity="npc:${esc(p.id)}"` : ""}>❤ ${esc(p.name)}</span> <span class="rep-band trusted" title="A committed partner — with you in all but the mechanics">${esc(p.label)} · with you</span>${peopleCtl(p)}</div>`).join("")}</div>` : ""}${rep ? `<div style="margin-bottom:4px"><span class="rep-band ${rep.band}">${rep.band} (${rep.score})</span></div>` : ""}${hereRest.length ? hereRest.map(p => row(p)).join("") : (partners.length ? "" : `<span class="insight">no one you know is here right now</span>`)}`;
       return `<details class="sidebar-sec" data-sec="whoshere"${sectionOpen("whoshere", true) ? " open" : ""}><summary><span class="sec-title">${esc(location.name)} — who's here</span>${rep ? ` <span class="sec-sum">· ${rep.band}</span>` : ""}</summary><div class="sec-body">${body}</div></details>`;
     })()}
     <details class="sidebar-sec" data-sec="playstyle"${sectionOpen("playstyle", false) ? " open" : ""}><summary><span class="sec-title">Play-style</span></summary><div class="sec-body">${aptitudeChips()}</div></details>
@@ -5872,6 +6006,9 @@ function renderPlay(turn, opts = {}) {
       <button class="opt map-open" id="open-map" style="margin:2px 0 6px; display:block; width:100%">🗺 Open Map — travel & places</button>
       <button class="opt" id="do-breather" style="margin-top:8px; display:block; width:100%">Breather (+${recoveryEnergy("breather", character, rules)} energy, 1h)</button>
       <button class="opt" id="do-rest" style="margin-top:4px; display:block; width:100%">Sleep (+${recoveryEnergy("sleep", character, rules)} energy, ${rules.recovery?.sleep?.hours ?? 8}h)</button>
+      ${/* SNG-158: the player can always close a scene themselves — the GM should do it, but a
+            scene that won't end is the player's to end. Writes the chronicle entry either way. */""}
+      <button class="opt" id="do-endscene" style="margin-top:8px; display:block; width:100%" title="Draw this scene to a close and write it into your chronicle. A new scene opens on your next action.">⏹ End this scene${sceneTurns.length ? ` (${sceneTurns.length} beats)` : ""}</button>
     </div></details>
     <details class="sidebar-sec" data-sec="codex"${sectionOpen("codex", false) ? " open" : ""}><summary><span class="sec-title">Codex &amp; Library</span></summary><div class="sec-body">
       <button class="opt" id="open-codex" style="display:block; width:100%">${Object.keys(character.codex?.topics || {}).length} topic${Object.keys(character.codex?.topics || {}).length === 1 ? "" : "s"} discovered — open Codex</button>
@@ -6125,8 +6262,37 @@ function renderPlay(turn, opts = {}) {
   bindItemCardHandlers(() => renderPlay(character.activeScene?.lastTurn || null, {}));
   for (const b of app.querySelectorAll("[data-setname]")) b.onclick = (e) => {
     e.stopPropagation();
-    const nn = prompt("What is their name?");
+    // SNG-160: pre-fill with the current name so this also EXTENDS a partial one
+    // ("Pell" → "Pell Ran Marsh"), not just names an unknown. The old empty prompt read as
+    // "name this stranger" and gave no hint it could correct someone already named.
+    const cur = character.npcRegistry?.[b.dataset.setname]?.name || "";
+    const nn = prompt(`Their full name?\n\n(You can extend it — "Pell" → "Pell Ran Marsh". The old name is kept as an alias so the GM still recognises it.)`, cur);
     if (nn && setNpcName(character, b.dataset.setname, nn, readClock(character.clock).day)) { saveCharacter(character); renderPlay(character.activeScene?.lastTurn || null, {}); }
+  };
+  // SNG-160: "this is the same person as…" — the merge only the PLAYER can make. Auto-merge matches
+  // on NAME, so it can never know "Broad Opportunist" and "Bren Thalle" are one man; nothing in the
+  // text says so. Reuses the audited mergeEntity op (history/facts/skills unioned, best standing
+  // kept, the absorbed name retained as an alias, logged + reversible in the Repair panel).
+  for (const b of app.querySelectorAll("[data-mergenpc]")) b.onclick = (e) => {
+    e.stopPropagation();
+    const fromId = b.dataset.mergenpc;
+    const reg = character.npcRegistry || {};
+    const from = reg[fromId];
+    if (!from) return;
+    const others = Object.entries(reg).filter(([id]) => id !== fromId);
+    if (!others.length) { alert("There's no one else you know to merge them with yet."); return; }
+    const listed = others.map(([id, n], i) => `${i + 1}. ${n.name}`).join("\n");
+    const pick = prompt(`"${from.name}" is really the same person as which of these?\n\n${listed}\n\nType the number. Their records combine; the kept name is the one you choose.`);
+    const idx = Number(pick) - 1;
+    if (!Number.isInteger(idx) || idx < 0 || idx >= others.length) return;
+    const intoId = others[idx][0];
+    const r = applyStateOps(character, [{ op: "mergeEntity", fromId, intoId, why: `player: same person (${from.name} → ${others[idx][1].name})` }], {
+      backgrounds: CONTENT.backgrounds || [], traditionIndex: CONTENT.traditionIndex, locations: CONTENT.locations,
+      resolveLocationId, worldDay: absoluteWorldDay(), nowISO: new Date().toISOString()
+    });
+    saveCharacter(character);
+    const ok = r.applied.length > 0;
+    renderPlay(character.activeScene?.lastTurn || null, { aside: ok ? `Merged — ${from.name} and ${others[idx][1].name} are one person now.` : (r.refused?.[0]?.reason || "Couldn't merge those two.") });
   };
   for (const d of app.querySelectorAll("[data-npcgroup]")) d.ontoggle = () => {
     const k = d.dataset.npcgroup;
@@ -6141,6 +6307,7 @@ function renderPlay(turn, opts = {}) {
   };
   const moreBtn = document.getElementById("open-inventory-more"); if (moreBtn) moreBtn.onclick = () => renderInventoryScreen(); // SNG-121
   // (SNG-114: item name/drop now bound via bindItemCardHandlers above — the duplicated data-nameit/data-drop wiring is gone.)
+  const endSceneBtn = document.getElementById("do-endscene"); if (endSceneBtn) endSceneBtn.onclick = () => endSceneNow(); // SNG-158
   const restBtn = document.getElementById("do-rest"); if (restBtn) restBtn.onclick = () => rest("sleep");
   const breatherBtn = document.getElementById("do-breather"); if (breatherBtn) breatherBtn.onclick = () => rest("breather");
   const mapBtn = document.getElementById("open-map"); if (mapBtn) mapBtn.onclick = () => renderMap();

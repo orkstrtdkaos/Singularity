@@ -80,7 +80,7 @@
     "mechanical_spiritual": 0.23279962203849028,
     "concrete_abstract": -0.023838665664862424,
     "death_life": -0.22224780548067646,
-    "emotional_logical": 0.03083749999999999,
+    "emotional_logical": 0.019295624999999986,
     "falsehood_truth": 0.3103472657976262,
     "demonic_angelic": 0.013499999999999998,
     "value": 0.09132499999999999
@@ -785,122 +785,80 @@
         "player": "Ok - but is she sure she doesn't want to travel anywhere, see the Cogitants for example, maybe they have knowledge that would help... or the Rootkin.  Or my home town?  She could meet my mother.  We could probably use a honeymoon as we're saving the valley. right?",
         "summary": "On the south lane after the gathering, Silas floats the Cogitants, the Rootkin, and home — Pell takes all three seriously, names the Rootkin as the thing under the thing, and accepts meeting his mother without ceremony.",
         "narration": "Pell takes a breath of the cold air and turns to look at you — really look, the way she does when she's deciding whether you're serious before she commits an answer. Huginn shifts on the fence-post and produces a sound that is approximately a short word in a language no one is using, then stares back at the northern dark.\n\n\"The Cogitants,\" she says, and you can hear her actually thinking it through rather than batting it away. \"They might. If they'll talk to us, and if what they know is the right kind of knowing — they read pattern differently than we do, and the zone's pattern is... it's not ordinary.\" A pause, boot heel scraping frost off the lane-stone. \"Worth the road if the contamination source needs understanding before it needs fixing. Calvar can work the valve line without us.\"\n\nThe Rootkin she meets with a small, complicated quiet — the kind that means she's holding two things at once and hasn't sorted which one is louder. \"The Rootkin would know the watershed,\" she says finally. \"What it was, what it should be. If the nanite site is working from its last instruction — they might know what that instruction was, or who gave it.\" Her hands come out of her pockets. \"That one I'd follow. That one feels like the thing under the thing.\"\n\nYour mother stops her entirely. Not refusal — the opposite. She looks at you sideways, and something in her face shifts out of the road-bearing mode she's been running in since the Fell Pell. \"Your town,\" she says, and the word has a different weight coming out than it had going in. \"I'd meet her.\" No elaboration, no hedge, no tactical framing. Then, after a beat, quieter: \"A honeymoon and the end of the world. That's us, is it.\" She says it flat, which means she means it, which means she's pleased. Huginn knocks one talon against the fence-post once, which is either agreement or mockery, and Pell ignores it with dignity."
+      },
+      {
+        "player": "Home first. She said yes to meeting your mother — take her at her word. The Disputed Zone isn't going anywhere in a week.",
+        "summary": "Silas and Pell settle it on the south lane — home first, his mother, then the Disputed Zone. The road has a first step.",
+        "narration": "You say it simply: home first. She said yes, and you're taking her at her word.\n\nPell is quiet for a moment — not reconsidering, just landing it. The frost-edged lane, the stars over the ridge, Huginn watching the northern dark with complete patience. Then she nods once, and something in her shoulders eases in a way you haven't seen since the forge, the kind of ease that belongs to a decision already made and finally said out loud. \"Alright,\" she says. \"Your mother first. The Zone doesn't move.\" She glances north past the roof-line, where the upper meadow dissolves into dark, and then back to you. \"How far?\"\n\nHuginn drops off the fence-post in one unhurried motion and lands on the peak of the low wall at the lane's end — closer to the road than the forge. It does not look back at either of you. It is already oriented."
       }
     ],
     "lastTurn": {
-      "narration": "Pell takes a breath of the cold air and turns to look at you — really look, the way she does when she's deciding whether you're serious before she commits an answer. Huginn shifts on the fence-post and produces a sound that is approximately a short word in a language no one is using, then stares back at the northern dark.\n\n\"The Cogitants,\" she says, and you can hear her actually thinking it through rather than batting it away. \"They might. If they'll talk to us, and if what they know is the right kind of knowing — they read pattern differently than we do, and the zone's pattern is... it's not ordinary.\" A pause, boot heel scraping frost off the lane-stone. \"Worth the road if the contamination source needs understanding before it needs fixing. Calvar can work the valve line without us.\"\n\nThe Rootkin she meets with a small, complicated quiet — the kind that means she's holding two things at once and hasn't sorted which one is louder. \"The Rootkin would know the watershed,\" she says finally. \"What it was, what it should be. If the nanite site is working from its last instruction — they might know what that instruction was, or who gave it.\" Her hands come out of her pockets. \"That one I'd follow. That one feels like the thing under the thing.\"\n\nYour mother stops her entirely. Not refusal — the opposite. She looks at you sideways, and something in her face shifts out of the road-bearing mode she's been running in since the Fell Pell. \"Your town,\" she says, and the word has a different weight coming out than it had going in. \"I'd meet her.\" No elaboration, no hedge, no tactical framing. Then, after a beat, quieter: \"A honeymoon and the end of the world. That's us, is it.\" She says it flat, which means she means it, which means she's pleased. Huginn knocks one talon against the fence-post once, which is either agreement or mockery, and Pell ignores it with dignity.",
-      "sceneSummary": "On the south lane after the gathering, Silas floats the Cogitants, the Rootkin, and home — Pell takes all three seriously, names the Rootkin as the thing under the thing, and accepts meeting his mother without ceremony.",
+      "narration": "You say it simply: home first. She said yes, and you're taking her at her word.\n\nPell is quiet for a moment — not reconsidering, just landing it. The frost-edged lane, the stars over the ridge, Huginn watching the northern dark with complete patience. Then she nods once, and something in her shoulders eases in a way you haven't seen since the forge, the kind of ease that belongs to a decision already made and finally said out loud. \"Alright,\" she says. \"Your mother first. The Zone doesn't move.\" She glances north past the roof-line, where the upper meadow dissolves into dark, and then back to you. \"How far?\"\n\nHuginn drops off the fence-post in one unhurried motion and lands on the peak of the low wall at the lane's end — closer to the road than the forge. It does not look back at either of you. It is already oriented.",
+      "sceneSummary": "Silas and Pell settle it on the south lane — home first, his mother, then the Disputed Zone. The road has a first step.",
       "choices": [
         {
-          "label": "Set the Rootkin first — Pell's read is right, the watershed knowledge is the key. Plan the road north toward their territory.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {
-            "chaos_order": 0.2,
-            "mechanical_spiritual": -0.2
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "plan",
-            "travel"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "The Cogitants first — if the source is a pre-Transition nanite site running on an old instruction, pattern-readers may be the ones who can name what the instruction IS. That shapes everything.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {
-            "mechanical_spiritual": 0.2,
-            "concrete_abstract": 0.2
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "plan",
-            "travel"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Home first. She said yes to meeting your mother — take her at her word. The Disputed Zone isn't going anywhere in a week.",
+          "label": "Name the town and how far — give Pell the shape of the journey so she knows what she's agreed to",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {
-            "emotional_logical": -0.2
-          },
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "travel",
-            "romantic"
+            "comfort"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Ask what she actually wants — not the tactical answer, the real one. The Rootkin, your town, or something she hasn't said yet.",
+          "label": "Ask what she wants to know about your mother before they meet — give her something to hold on to",
           "attribute": "social",
-          "subAttribute": "insight",
-          "axes": {
-            "emotional_logical": -0.1
-          },
+          "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "calm",
-            "romantic"
+            "romantic",
+            "comfort"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
-        }
-      ],
-      "scene": {
-        "setting": "South lane outside the Fell Pell, Millbrook — cold spring night, frost on the lane-stone, stars clear above the ridge, forge-warmth entirely gone now.",
-        "npcsPresent": [
-          {
-            "name": "Pell",
-            "state": "Hands out of pockets, face open — the road-mode has stepped back for a moment. Looking at Silas."
-          },
-          {
-            "name": "Huginn",
-            "state": "On the fence-post, one talon knock given, watching the northern dark with complete patience."
-          }
-        ],
-        "objects": [
-          "fence-post",
-          "frost-edged lane-stone",
-          "the dark of the upper meadow visible past the roof-line",
-          "stars over the ridge"
-        ],
-        "threads": [
-          "Pell has named the Rootkin as 'the thing under the thing' — a genuine read, not deflection",
-          "She accepted meeting Silas's mother without qualification — that door is open",
-          "The Cogitants float as the pattern-knowledge route — not dismissed, not committed",
-          "The road begins tomorrow — a first destination needs naming"
-        ]
-      },
-      "npcUpdates": [
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
         {
-          "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "note": "Took all three options seriously — named the Rootkin as the thing under the thing for watershed knowledge, accepted the Cogitants as worth the road if the pattern needs reading first, and agreed to meet Silas's mother without hedge or elaboration. Said 'a honeymoon and the end of the world' flat, which means she meant it.",
-          "learned": [
-            "Silas has a mother — and a home town he's named as a destination",
-            "Pell accepted the meeting without qualification — she intends it"
+          "label": "Turn in for the night — the road starts at first light, and you both need sleep",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "sustain",
+            "travel"
           ],
-          "statusNote": "Standing on the south lane in the cold, hands out of pockets, the road-mode stepped back — present and open in a way she usually holds for forge-work or sleep.",
-          "relationshipDelta": 0
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Walk the lane one more time before going in — the village at night, before the road takes you from it for a while",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A few minutes of quiet conversation on the south lane after the gathering"
-      },
       "deeds": [],
       "characterDeltas": {
         "health": 0,
@@ -908,33 +866,92 @@
       },
       "ledgerEvents": [],
       "questUpdates": [],
-      "factUpdates": [],
+      "scene": {
+        "setting": "South lane outside the Fell Pell, Millbrook — cold spring night, frost on the lane-stone, stars clear above the ridge, forge-warmth entirely gone. Huginn has moved to the low wall at the lane's end, facing north toward the road.",
+        "npcsPresent": [
+          {
+            "name": "Pell",
+            "state": "Standing beside Silas, shoulders eased, looking north past the roof-line — the decision settled in her."
+          },
+          {
+            "name": "Huginn",
+            "state": "Perched on the low wall at the lane's end, facing north. Already oriented toward the road."
+          }
+        ],
+        "objects": [
+          "fence-post (now vacated)",
+          "frost-edged lane-stone",
+          "low wall at the lane's end",
+          "stars over the ridge",
+          "dark of the upper meadow past the roof-line"
+        ],
+        "threads": [
+          "Pell has said yes to meeting Silas's mother — the destination is named, the distance is not yet",
+          "The Disputed Zone remains the deeper work, deferred but not forgotten",
+          "Huginn is already facing the road"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "pell",
+          "name": "Pell",
+          "note": "Received 'home first' without reconsideration — her shoulders eased on the exhale. Asked how far. The decision is settled.",
+          "learned": [
+            "Silas is taking her to his home town to meet his mother — she's agreed and means it"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "On the south lane in the cold, decision settled — road begins tomorrow toward Silas's home town."
+        },
+        {
+          "op": "update",
+          "npcId": "huginn",
+          "name": "Huginn",
+          "note": "Dropped to the low wall at the lane's end and oriented north — already reading the road.",
+          "status": "active",
+          "statusNote": "On the low wall at the lane's end, facing north toward the road."
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Silas and Pell settled the road's first leg on the south lane on World-day 18 evening — home first, his mother, then the Disputed Zone. Pell agreed without qualification.",
+          "subjectId": "pell"
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A short exchange on the south lane — a minute or two of decision."
+      },
+      "codexUpdates": [],
       "placeUpdates": [],
-      "codexUpdates": []
+      "encounterOps": [],
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "South lane outside the Fell Pell, Millbrook — cold spring night, frost on the lane-stone, stars clear above the ridge, forge-warmth entirely gone now.",
+      "setting": "South lane outside the Fell Pell, Millbrook — cold spring night, frost on the lane-stone, stars clear above the ridge, forge-warmth entirely gone. Huginn has moved to the low wall at the lane's end, facing north toward the road.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Hands out of pockets, face open — the road-mode has stepped back for a moment. Looking at Silas."
+          "state": "Standing beside Silas, shoulders eased, looking north past the roof-line — the decision settled in her."
         },
         {
           "name": "Huginn",
-          "state": "On the fence-post, one talon knock given, watching the northern dark with complete patience."
+          "state": "Perched on the low wall at the lane's end, facing north. Already oriented toward the road."
         }
       ],
       "objects": [
-        "fence-post",
+        "fence-post (now vacated)",
         "frost-edged lane-stone",
-        "the dark of the upper meadow visible past the roof-line",
-        "stars over the ridge"
+        "low wall at the lane's end",
+        "stars over the ridge",
+        "dark of the upper meadow past the roof-line"
       ],
       "threads": [
-        "Pell has named the Rootkin as 'the thing under the thing' — a genuine read, not deflection",
-        "She accepted meeting Silas's mother without qualification — that door is open",
-        "The Cogitants float as the pattern-knowledge route — not dismissed, not committed",
-        "The road begins tomorrow — a first destination needs naming"
+        "Pell has said yes to meeting Silas's mother — the destination is named, the distance is not yet",
+        "The Disputed Zone remains the deeper work, deferred but not forgotten",
+        "Huginn is already facing the road"
       ]
     }
   },
@@ -1365,7 +1382,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d5] Named Silas's middle name — Fell — by reading the grain of the spear-binding and the soul-mark exchange. Waiting for confirmation.",
         "[d5] Tested 'Fell' aloud — full name, Silas Fell Weir — and named it kept, not worn. Hand flat at his neck now, past the reading, simply present.",
         "[d5] Heard 'Fell' said back in Silas's own voice — received it as the sealing. Said the full name once to fix it, brought her forehead to his. The name is now a settled fact between the",
         "[d5] Received the sealing kiss — steady, present, answered it in kind. Named it 'right' and went straight to work. Cleared the forge for the gathering without ceremony.",
@@ -1374,17 +1390,18 @@
         "[d5] Felt the partial deathwork charge settle into the room — hands went still, let it land.",
         "[d5] Stepped outside with Silas after the gathering sealed — holding his hand in both of hers, looking north, saying 'tomorrow' with the tone of someone who has already decided.",
         "[d5] Named the upstream Disputed Zone as the real work — document is moving, Calvar is placed, Fendt is named; those aren't the thing anymore. The thing is upstream.",
-        "[d5] Took all three options seriously — named the Rootkin as the thing under the thing for watershed knowledge, accepted the Cogitants as worth the road if the pattern needs reading first, and agreed to meet Silas's mother without hedge or elaboration. Said 'a honeymoon and the end of the world' flat…"
+        "[d5] Took all three options seriously — named the Rootkin as the thing under the thing for watershed knowledge, accepted the Cogitants as worth the road if the pattern needs reading first, and agreed to meet Silas's mother without hedge or elaboration. Said 'a honeymoon and the end of the world' flat…",
+        "[d5] Received 'home first' without reconsideration — her shoulders eased on the exhale. Asked how far. The decision is settled."
       ],
       "knownFacts": [
-        "Silas Ran Weir — the middle name is Ran; she read it in the spear and confirmed it before naming it aloud",
         "Quiet's loosening is structural — three change-points: resurrection, spear-binding, soul-mark exchange; 'not a sickness, not a loss'",
         "Silas's middle name is Fell — read from the Wright-Ashwarden grain, the shape of someone who crossed something high and open and didn't look back",
         "Silas's middle name is Fell — she pressed it into the cooling iron of the moment and it took; she'll keep it like a word found in something old",
         "Silas Fell Weir — the middle name is now sealed, spoken once in full by both of them",
         "The document roll moving is not the same as the water crisis solved — her read is that upstream is the real next step",
         "Silas has a mother — and a home town he's named as a destination",
-        "Pell accepted the meeting without qualification — she intends it"
+        "Pell accepted the meeting without qualification — she intends it",
+        "Silas is taking her to his home town to meet his mother — she's agreed and means it"
       ],
       "skillsObserved": [
         "structural reasoning from partial material evidence",
@@ -1395,7 +1412,7 @@
         "reading a person's deep grain through a shared rune-thread —"
       ],
       "status": "active",
-      "statusNote": "Standing on the south lane in the cold, hands out of pockets, the road-mode stepped back — present and open in a way she usually holds for forge-work or sleep.",
+      "statusNote": "On the south lane in the cold, decision settled — road begins tomorrow toward Silas's home town.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
@@ -3619,21 +3636,21 @@
     }
   },
   "tendencies": {
-    "strategic": 17.67267474323192,
-    "cerebral": 9.03950968393116,
-    "social": 14.571086481308809,
-    "generous": 3.1474217136087455,
-    "cautious": 7.505328077487428,
-    "physical": 1.5417843666010518,
-    "risky": 0.34082832960002646,
-    "ruthless": 2.2328693033058875,
-    "carousing": 0.03421038105815389,
-    "amorous": 10.155484347348995,
-    "patient": 2.687838638134502,
-    "stealth": 0.8654658464997244,
-    "devotion": 0.4720653314921659,
-    "craft": 0.4444126389546603,
-    "leadership": 0.8590683010253904
+    "strategic": 17.23085787465112,
+    "cerebral": 8.81352194183288,
+    "social": 14.206809319276088,
+    "generous": 3.068736170768527,
+    "cautious": 7.317694875550242,
+    "physical": 1.5032397574360254,
+    "risky": 0.3323076213600258,
+    "ruthless": 2.17704757072324,
+    "carousing": 0.03335512153170004,
+    "amorous": 10.90159723866527,
+    "patient": 2.6206426721811393,
+    "stealth": 0.8438292003372312,
+    "devotion": 0.46026369820486174,
+    "craft": 0.4333023229807938,
+    "leadership": 0.8375915934997556
   },
   "aptitudes": [
     "strategist",
@@ -3643,7 +3660,7 @@
     "stalwart",
     "charmer"
   ],
-  "actionCount": 493,
+  "actionCount": 494,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3897,8 +3914,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784396285319,
-  "rev": 717,
+  "updatedAt": 1784396613098,
+  "rev": 718,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4569,12 +4586,6 @@
   "opLossPending": false,
   "establishedFacts": [
     {
-      "id": "fendt",
-      "text": "Fendt agreed to walk to Millbrook and present himself to Mara Wells — the dried starfruit is his token of introduction. He carries a duplicate of his written testimony in the lining of his traveling c",
-      "day": 3,
-      "subjectId": "fendt"
-    },
-    {
       "id": "f42",
       "text": "Silas now holds Fendt's written testimony: dates, seventh-band designations, the nine-day gap in falsified entries, Grael named as the receiving authority, and the preliminary concern notice receipt d",
       "day": 3,
@@ -4807,6 +4818,12 @@
       "text": "The Fell Pell gathering was sealed with a partial deathwork closing — 'Thus begins the fellowship of the Fell.' The craft resisted a clean beginning-mark but a genuine charge settled into the room. Th",
       "day": 5,
       "subjectId": "millbrook"
+    },
+    {
+      "id": "pell",
+      "text": "Silas and Pell settled the road's first leg on the south lane on World-day 18 evening — home first, his mother, then the Disputed Zone. Pell agreed without qualification.",
+      "day": 5,
+      "subjectId": "pell"
     }
   ],
   "practice": {
@@ -4929,7 +4946,7 @@
   "syncedAt": 1784392733860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 312
+    "valley": 313
   },
   "foreclosed": [
     "rootkin",
@@ -4984,10 +5001,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T17:38:05.317Z",
+      "lastAt": "2026-07-18T17:43:33.097Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 37
+      "beats": 38
     }
   ],
   "company": [

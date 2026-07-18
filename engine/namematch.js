@@ -8,9 +8,14 @@
 export function smartClamp(text, max = 600) {
   const s = String(text ?? "");
   if (s.length <= max) return s;
-  const cut = s.slice(0, max);
+  // SNG-152: `max` is a HARD ceiling on the RETURNED string — the ellipsis is reserved for, not
+  // appended past it. (It previously returned up to max+1, so every caller that believed "clamp to
+  // N" — a storage cap, a prompt budget, a layout width — was quietly off by one. With ~20 call
+  // sites routing through here, the bound has to mean what it says.)
+  const room = Math.max(1, max - 1);
+  const cut = s.slice(0, room);
   const lastSpace = cut.lastIndexOf(" ");
-  const body = lastSpace > max * 0.6 ? cut.slice(0, lastSpace) : cut;
+  const body = lastSpace > room * 0.6 ? cut.slice(0, lastSpace) : cut;
   return body.replace(/[\s,;:.!?—-]+$/, "") + "…";
 }
 

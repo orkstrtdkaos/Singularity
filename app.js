@@ -52,7 +52,10 @@ import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challe
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.104";
+// SNG-155: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
+// drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
+// every feedback report — so bug reports were filed against a version that hadn't been running.
+const APP_VERSION = "1.8.109";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -677,6 +680,7 @@ function buildFeedbackContext() {
   if (lastTurn) ctx.lastGmTurn = smartClamp(lastTurn.summary || lastTurn.narration || "", 400);
   if (lastPlayerAction) ctx.lastAction = String(lastPlayerAction).slice(0, 160);
   if (_capturedErrors.length) ctx.errors = _capturedErrors.slice(-5);
+  if (character?._turnApplyError) ctx.turnApplyError = character._turnApplyError; // SNG-155: a swallowed-render event travels with the report
   return ctx;
 }
 function _feedbackScreenLabel() {
@@ -2608,7 +2612,26 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   // action label. Without this the GM's "history" is a monologue of its own prose and the player's
   // half of the scene has no permanence (the deepest continuity bug in the project).
   const playerWords = exactWords || resolution?.action?.label || (typeof playerInput === "string" && !/^\(/.test(playerInput) ? playerInput : null);
-  applyTurn(result.turn, resolution, playerWords);
+  // SNG-155 (Design Law 5): the model already answered — the player has WAITED for this beat and
+  // paid for it. Bookkeeping must never be able to swallow it. Before this guard, ANY throw inside
+  // applyTurn propagated out of runGM, the caller's `renderPlay(result.turn, …)` never ran, and the
+  // narration vanished — while `character.activeScene.lastTurn` had ALREADY been persisted mid-way
+  // through applyTurn, which is why navigating away and back made the "lost" turn appear.
+  // The narration renders either way; a partial state-application is surfaced, never silent.
+  try {
+    applyTurn(result.turn, resolution, playerWords);
+  } catch (err) {
+    console.error("[applyTurn] state application failed — narration preserved:", err);
+    character._turnApplyError = { at: new Date().toISOString(), message: String(err?.message || err).slice(0, 200), stack: String(err?.stack || "").split("\n").slice(0, 4).join(" <- ").slice(0, 500) };
+    result.turn._applyFailed = true;
+    // Persist the beat so continuity holds even though some ops didn't land, and tell the GM next
+    // turn that state lagged the fiction — the same self-heal contract SNG-009 uses for lost ops.
+    try {
+      character.opLossPending = true;
+      character.activeScene = { locationId: character.currentLocationId, turns: sceneTurns, lastTurn: result.turn, sceneState };
+      saveCharacter(character);
+    } catch (err2) { console.error("[applyTurn] recovery save also failed:", err2); }
+  }
   // ability-arch v2: rank 2 is earned through use, not bought — surface any craft that just became
   // fluent this turn (deduped). Rank 3 is never here; it comes as a GM-marked defining moment.
   if (pendingRankAdvances.length) {
@@ -2647,7 +2670,14 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
 }
 
 function applyTurn(turn, resolution, playerWords = null) {
-  const location = CONTENT.locations[character.currentLocationId];
+  // SNG-155: NEVER let a stranded currentLocationId throw. A place promoted from a sub-place, or a
+  // generated location whose record didn't survive a reload, leaves `CONTENT.locations[id]`
+  // undefined — and this function reads `location.communityId` (deeds) and `location.id` (ledger).
+  // The ledger read sits AFTER the save, so a throw there persisted the turn and lost the render.
+  // Fall back to a minimal stand-in and flag it; the SNG-154 hierarchy work fixes the root cause.
+  const location = CONTENT.locations[character.currentLocationId]
+    || { id: character.currentLocationId || "unknown", name: "an unmapped place", communityId: null, regionId: null, _stranded: true };
+  if (location._stranded) console.warn("[applyTurn] currentLocationId resolves to no loaded location:", character.currentLocationId);
   const dayNow = readClock(character.clock).day;
   const mods = aptitudeMods(character, CONTENT.rules.playerAptitudes);
   // SNG-128: advance the session marker each played beat (a new session after a real-time gap). Cheap;
@@ -5707,6 +5737,9 @@ function renderPlay(turn, opts = {}) {
   }
   // SNG-070: surface a just-applied GM correction as an aside, whichever path rendered this turn.
   if (character?._correctionAside) { opts = { ...opts, aside: [opts.aside, character._correctionAside].filter(Boolean).join("\n\n") }; delete character._correctionAside; }
+  // SNG-155: the beat survived but some of its bookkeeping didn't — say so plainly rather than
+  // letting the player discover a quest/NPC update silently missing. The GM restates next turn.
+  if (turn?._applyFailed) { opts = { ...opts, aside: [opts.aside, "*(The scene stands, but part of this turn's bookkeeping didn't land — the GM will restate it next beat.)*"].filter(Boolean).join("\n\n") }; }
   const location = hereNow();
   const rules = CONTENT.rules;
   const mods = aptitudeMods(character, rules.playerAptitudes);

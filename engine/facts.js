@@ -4,6 +4,8 @@
 // the GM every turn as authoritative, persistent truth it must never contradict.
 // Engine-owned: the GM emits typed factUpdates ops; the engine clamps and stores.
 
+import { smartClamp } from "./namematch.js"; // SNG-152
+
 const CAP = 40;
 
 export function ensureFacts(character) {
@@ -26,7 +28,7 @@ export function applyFactUpdates(character, updates = [], ctx = {}) {
       continue;
     }
     // default: add
-    const text = String(u.text || "").trim().slice(0, 200);
+    const text = smartClamp(String(u.text || "").trim(), 300); // SNG-152: authoritative truth fed every turn — never severed mid-word
     if (!text) continue;
     const norm = text.toLowerCase();
     if (character.establishedFacts.some(f => f.text.toLowerCase() === norm)) continue;

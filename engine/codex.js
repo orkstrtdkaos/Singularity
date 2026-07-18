@@ -6,7 +6,7 @@
 // back the topics RELEVANT to where the character is and what they're pursuing.
 
 import { slugify } from "./quests.js";
-import { normName, namesMatch } from "./namematch.js";
+import { normName, namesMatch, smartClamp } from "./namematch.js"; // SNG-152
 export { namesMatch }; // back-compat: callers/tests import namesMatch from codex.js
 
 const KINDS = ["mystery", "faction", "lore", "event", "person", "place"];
@@ -100,7 +100,7 @@ export function applyCodexUpdates(character, updates = [], ctx = {}) {
       recordAlias(t, raw);
     }
     if (u.fact) {
-      const fact = `[d${ctx.day ?? "?"}] ${String(u.fact).slice(0, 200)}`;
+      const fact = `[d${ctx.day ?? "?"}] ${smartClamp(String(u.fact), 300)}`; // SNG-152: the reported mid-word cut ("…specification and understo")
       const isDup = t.facts.some(f => f.slice(f.indexOf("]") + 2) === fact.slice(fact.indexOf("]") + 2));
       const cap = t.entityId ? CAPS.factsPerPrimary : CAPS.factsPerTopic;
       if (!isDup) t.facts = [...t.facts, fact].slice(-cap);

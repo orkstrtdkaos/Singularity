@@ -6,6 +6,7 @@
 // Incapacitation, never engine-imposed death.
 
 import { battleRound, opponentPolicy } from "./skill_battle.js";
+import { smartClamp } from "./namematch.js"; // SNG-152
 
 // ---------- lifecycle ----------
 
@@ -214,7 +215,7 @@ export function sanitizeEncounterOps(ops, def, state) {
   const out = [];
   for (const o of (Array.isArray(ops) ? ops : []).slice(0, 2)) {
     if (o?.op === "complication" && o.text && !state?.complicationUsed) {
-      out.push({ op: "complication", text: String(o.text).slice(0, 120) });
+      out.push({ op: "complication", text: smartClamp(String(o.text), 160) }); // SNG-152
       continue;
     }
     if (o?.op === "tactic" && o.tag && def?.opponent) {
@@ -240,7 +241,7 @@ export function sanitizeNewEncounter(raw) {
   if (!raw || raw.type !== "duel" || !raw.name || !raw.opponent?.name) return null;
   const o = raw.opponent;
   return { schemaVersion: 1, id: "gm-" + String(raw.id || raw.name).toLowerCase().replace(/[^a-z0-9]+/g, "-").slice(0, 30),
-    type: "duel", name: String(raw.name).slice(0, 60), setup: String(raw.setup || "").slice(0, 300),
+    type: "duel", name: String(raw.name).slice(0, 60), setup: smartClamp(String(raw.setup || ""), 400), // SNG-152: GM-invented setup is MODEL prose (pack-authored setups never pass here)
     lethal: !!raw.lethal,
     opponent: { name: String(o.name).slice(0, 60), health: Math.max(2, Math.min(8, o.health | 0 || 4)),
       threat: Math.max(10, Math.min(70, o.threat | 0 || 35)), yieldAt: Math.max(0, Math.min(3, o.yieldAt | 0)),

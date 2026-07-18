@@ -8,7 +8,7 @@
 // GM phrasing variants ("a waterskin" / "the waterskin") collapse onto one stack instead
 // of forking. Catalog re-link happens on any resolvable name, not just at normalize.
 
-import { namesMatch, resolveByName } from "./namematch.js";
+import { namesMatch, resolveByName, smartClamp } from "./namematch.js"; // SNG-152
 
 /** Find the existing stack an incoming item belongs to (id → name/custom/alias → fuzzy). */
 export function resolveInventoryItem(character, incoming, catalog = {}) {
@@ -71,7 +71,7 @@ export function addItem(character, incoming, catalog = {}) {
       name: String(incoming.name || "curious object").slice(0, 60),
       kind: ["weapon", "tool", "consumable", "quest", "misc"].includes(incoming.kind) ? incoming.kind : "misc",
       qty: Math.max(1, Math.min(10, incoming.qty | 0 || 1)),
-      description: incoming.description ? String(incoming.description).slice(0, 300) : undefined,
+      description: incoming.description ? smartClamp(String(incoming.description), 400) : undefined, // SNG-152
       effects: clampEffects(incoming.effects),
       bonusTags: Array.isArray(incoming.bonusTags) ? incoming.bonusTags.slice(0, 4).map(String) : undefined,
       consumable: !!incoming.consumable,
@@ -201,9 +201,9 @@ export function applyItemUpdates(character, ops = []) {
     const it = findItem(character, op?.name || op?.customName || "");
     if (!it) continue; // an unowned item is never created through an update — only add creates
     const changed = [];
-    if (op.description != null) { it.description = String(op.description).slice(0, 300); changed.push("description"); }
+    if (op.description != null) { it.description = smartClamp(String(op.description), 400); changed.push("description"); } // SNG-152
     if (op.customName != null && String(op.customName).trim()) { it.customName = String(op.customName).slice(0, 60); changed.push("name"); }
-    if (op.provenance != null) { it.provenance = String(op.provenance).slice(0, 120); changed.push("provenance"); }
+    if (op.provenance != null) { it.provenance = smartClamp(String(op.provenance), 160); changed.push("provenance"); } // SNG-152
     if (Array.isArray(op.bonusTags)) { it.bonusTags = op.bonusTags.map(t => String(t).slice(0, 24)).slice(0, 4); changed.push("tags"); }
     if (op.addUse && op.addUse.label) { it.uses = [...(it.uses || []), { label: String(op.addUse.label).slice(0, 40), prompt: String(op.addUse.prompt || op.addUse.label).slice(0, 160) }].slice(-5); changed.push("use"); }
     if (op.effects) { const fx = clampEffects(op.effects); if (fx) { it.effects = fx; changed.push("effects"); } } // still clamped — evolution, not inflation

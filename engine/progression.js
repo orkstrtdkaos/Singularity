@@ -12,6 +12,7 @@ import { meetsLearnGate, meetsRank3Gate, atCapacity, skillPointCost, rankExpress
 import { domainAccess, traditionOf, isFolkTradition, antipodeOf } from "./traditions.js";
 import { standingWithPeople } from "./reputation.js";
 import { trainerFor } from "./company.js";
+import { smartClamp } from "./namematch.js"; // SNG-152
 
 // Practiced enough for `targetRank`? Inlined (not imported from practice.js) to avoid a circular
 // import — practice.js already imports discoveryKey from here. Mirrors practice.js practiceRankReady.
@@ -510,12 +511,12 @@ export function sanitizeNewAbility(raw) {
   return {
     id,
     name: String(raw.name).slice(0, 60),
-    description: String(raw.description).slice(0, 300),
+    description: smartClamp(String(raw.description), 400), // SNG-152
     energyCost: Math.max(4, Math.min(15, Number(raw.energyCost) || 8)),
     attribute: ["physical", "mental", "social", "practical"].includes(raw.attribute) ? raw.attribute : "practical",
     axes,
-    notFor: raw.notFor ? String(raw.notFor).slice(0, 200) : "Anything beyond its described envelope.",
-    narrationHints: String(raw.description).slice(0, 200),
+    notFor: raw.notFor ? smartClamp(String(raw.notFor), 240) : "Anything beyond its described envelope.", // SNG-152
+    narrationHints: smartClamp(String(raw.description), 200), // SNG-152
     levelReq: 1,
     powerSystem: "learned",
     taughtBy: raw.taughtBy ? String(raw.taughtBy).slice(0, 60) : null,
@@ -560,7 +561,7 @@ export function recordDiscovery(character, { name, description, abilityIds, nove
     key,
     id: slugify(name),
     name: String(name).slice(0, 60),
-    description: String(description || "").slice(0, 240),
+    description: smartClamp(String(description || ""), 300), // SNG-152
     abilities: abilityIds,
     discoveredDay: day ?? null
   };

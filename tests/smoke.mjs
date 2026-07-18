@@ -3518,7 +3518,9 @@ await (async () => {
   const out = renderSceneHistory(turns);
   check("SNG-081: the player's OWN words appear in history (the GM can finally see what you said)", out.includes(`YOU: "${flirt}"`) && out.includes(`YOU: "I promise I'll come back for the ledger"`));
   check("SNG-081: the player's words are kept VERBATIM, never truncated", out.includes(flirt) && !out.includes(flirt.slice(0, 8) + "…"));
-  check("SNG-081: only the GM's prose is clamped (700), not the player's", out.includes("n".repeat(700)) && !out.includes("n".repeat(701)));
+  // SNG-152: the 700 budget is unchanged; smartClamp now RESERVES the ellipsis inside it (699 + "…"),
+  // so the assertion tracks the bound rather than an exact-700 run.
+  check("SNG-081: only the GM's prose is clamped (~700), not the player's", /n{690,700}…/.test(out) && !out.includes("n".repeat(701)));
   check("SNG-081: each beat reads as a dialogue (YOU then GM)", /YOU: ".*"\nGM: /.test(out));
   const sys = renderSceneHistory([{ summary: "A system beat with no player line." }]);
   check("SNG-081: a system/party beat with no player words has no YOU line", !sys.includes("YOU:") && sys.includes("GM: A system beat"));
@@ -4032,6 +4034,48 @@ await (async () => {
     npcPortraitTier({ relationship: 3 }) === null && npcPortraitTier({ bondStage: "courting" }) === null);
   check("SNG-136: an already-portrayed tier is not re-fired (dedup by tier) — the caller checks _portraitTier",
     npcPortraitTier(pell) === "partner"); // the app skips when n._portraitTier === this tier
+}
+
+// --- SNG-152: smartClamp's bound is a HARD ceiling (the ellipsis is reserved, not appended past it) ---
+{
+  const { smartClamp } = await import('../engine/namematch.js');
+  const long = "alpha bravo charlie delta echo foxtrot golf hotel india juliet ".repeat(20);
+  for (const n of [40, 120, 400, 600]) {
+    check(`152: smartClamp(_, ${n}) never EXCEEDS its bound`, smartClamp(long, n).length <= n);
+  }
+  check("152: it still cuts on a word boundary with a real ellipsis (never mid-word)", (() => {
+    const out = smartClamp(long, 120);
+    const body = out.slice(0, -1);
+    // the kept text is a genuine prefix of the source, and the source continues with a break —
+    // i.e. no word was severed through the middle (the exact defect SNG-152 exists to end).
+    return out.endsWith("…") && long.startsWith(body) && /[\s.,;:!?]/.test(long[body.length] ?? " ");
+  })());
+  check("152: a short string is returned untouched (no gratuitous ellipsis)", smartClamp("a short note.", 600) === "a short note.");
+  check("152: exact-length input is not clamped", smartClamp("x".repeat(50), 50) === "x".repeat(50));
+}
+
+// --- SNG-155: a bookkeeping throw can never swallow a turn the player already waited for (Law 5) ---
+{
+  const appSrc155 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+  // The structural guarantee: applyTurn is CALLED inside a try, and the catch preserves the beat.
+  const guarded = /try \{\s*applyTurn\(result\.turn, resolution, playerWords\);\s*\} catch \(err\) \{/.test(appSrc155);
+  check("155: applyTurn is wrapped so a throw cannot discard the rendered narration", guarded);
+  check("155: the catch persists activeScene.lastTurn so continuity survives a partial apply",
+    /_applyFailed = true/.test(appSrc155) && /catch \(err\)[\s\S]{0,700}?character\.activeScene = \{ locationId: character\.currentLocationId, turns: sceneTurns, lastTurn: result\.turn/.test(appSrc155));
+  check("155: a partial apply sets opLossPending so the GM restates the lost ops next turn (SNG-009 contract)",
+    /catch \(err\)[\s\S]{0,600}?character\.opLossPending = true/.test(appSrc155));
+  check("155: the player is TOLD the bookkeeping lagged — never a silent partial", /part of this turn's bookkeeping didn't land/.test(appSrc155));
+  check("155: the failure travels with the feedback report", /ctx\.turnApplyError = character\._turnApplyError/.test(appSrc155));
+  // The specific trigger found in Erik's save class: a currentLocationId that resolves to nothing.
+  check("155: a stranded currentLocationId falls back instead of throwing on location.id / .communityId",
+    /const location = CONTENT\.locations\[character\.currentLocationId\]\s*\|\|\s*\{ id: character\.currentLocationId \|\| "unknown"/.test(appSrc155) &&
+    /_stranded: true/.test(appSrc155));
+  // ...and the ledger block that reads location.id sits after the save — that ordering is WHY it lost the render.
+  const applyBody = appSrc155.slice(appSrc155.indexOf("function applyTurn("));
+  const savePos = applyBody.indexOf("character.activeScene = turn.sceneEnded ? null :");
+  const ledgerPos = applyBody.indexOf("where: location.id");
+  check("155: regression witness — the ledger's location read still follows the save (guard is what protects it)",
+    savePos > 0 && ledgerPos > savePos);
 }
 
 // --- SNG-148: waygates — discovery AND skill compose; either alone routes to the hub ---

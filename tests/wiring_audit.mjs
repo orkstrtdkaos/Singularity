@@ -101,6 +101,17 @@ check(`SYSTEM_SPEC header certifies the real ability count (${abilityCount})`,
   specAbilities && Number(specAbilities[1]) === abilityCount,
   `header says ${specAbilities?.[1] ?? "?"}, HEAD has ${abilityCount}`);
 
+// ---------- 3b. version coherence (SNG-155) ----------
+// APP_VERSION stamps every feedback report; index.html's ?v= busts the cache. When they drift, bug
+// reports are filed against a version that was never running — which is how a stale 1.8.104 label
+// survived five ships. Cheap to check, expensive to debug without.
+const indexSrc = read("index.html");
+const stamps = [...indexSrc.matchAll(/\?v=([0-9.]+)/g)].map(m => m[1]);
+const appVersion = appSrc.match(/const APP_VERSION = "([^"]+)"/)?.[1];
+check("APP_VERSION matches index.html's cache stamp (feedback reports name the running version)",
+  !!appVersion && stamps.length > 0 && stamps.every(s => s === appVersion),
+  `APP_VERSION=${appVersion}, index.html stamps=${[...new Set(stamps)].join("/")}`);
+
 // ---------- 4. skill-integrity ratchet (SNG-147d) ----------
 const CANON_TYPES = new Set(["FIGHT", "INVESTIGATE", "SOCIAL", "EXPLORE", "SURVIVE", "PUZZLE", "STEALTH", "CHASE", "DUEL", "CREATE", "DEFEND", "TRAVEL"]);
 const HARM_RUNGS = new Set(["none", "damaging", "incapacitating", "lethal"]);

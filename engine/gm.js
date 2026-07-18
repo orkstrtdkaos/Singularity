@@ -5,6 +5,7 @@
 import { callClaude, callClaudeJSON, parseLooseJSON } from "./claude.js";
 import { reputationSummary } from "./reputation.js";
 import { recoveryEnergy } from "./progression.js";
+import { smartClamp } from "./namematch.js"; // SNG-152
 
 const GM_SYSTEM = `You are the Game Master for SINGULARITY, a narrative RPG set in the Valley of Echoes — a post-de-technologizing world of nanite-mediated power systems, fifteen years after humanity chose to step back from its own technology.
 
@@ -284,7 +285,7 @@ export function renderSceneHistory(recentTurns = []) {
     if (typeof t === "string") return t; // legacy shape
     const you = t.player ? `YOU: "${t.player}"\n` : "";
     const full = i >= recentTurns.length - 3 && t.narration;
-    return `${you}GM: ${full ? `${t.summary}\nFULL TEXT: ${t.narration.slice(0, 700)}` : t.summary || ""}`;
+    return `${you}GM: ${full ? `${t.summary}\nFULL TEXT: ${smartClamp(t.narration, 700)}` : t.summary || ""}`; // SNG-152: same 700 budget, word boundary
   }).join("\n---\n");
 }
 
@@ -429,7 +430,7 @@ export async function gmTurn(ctx) {
 export function sanitizeScene(scene) {
   if (!scene || typeof scene !== "object" || !scene.setting) return null;
   return {
-    setting: String(scene.setting).slice(0, 400),
+    setting: smartClamp(String(scene.setting), 400), // SNG-152
     npcsPresent: (Array.isArray(scene.npcsPresent) ? scene.npcsPresent : []).slice(0, 8).map(n =>
       typeof n === "string" ? { name: n.slice(0, 60), state: "" } : { name: String(n.name || "someone").slice(0, 60), state: String(n.state || "").slice(0, 120) }),
     objects: (Array.isArray(scene.objects) ? scene.objects : []).slice(0, 10).map(o => String(o).slice(0, 80)),
@@ -440,7 +441,7 @@ export function sanitizeScene(scene) {
 function fallbackTurn(narration) {
   return {
     narration,
-    sceneSummary: narration.slice(0, 100),
+    sceneSummary: smartClamp(narration, 120), // SNG-152
     scene: null, // engine keeps the previous scene state — permanence over novelty
     choices: [
       { label: "Look around carefully", attribute: "mental", axes: {}, difficulty: 0, intentTags: ["investigate", "careful"] },

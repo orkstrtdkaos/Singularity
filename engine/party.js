@@ -13,6 +13,7 @@
 // silently lost with no conflict ever raised.)
 
 import { syncEnabled, fetchRepoJSON, pushMergedFile, ghList } from "./sync.js";
+import { smartClamp } from "./namematch.js"; // SNG-152: these strings cross into OTHER players' GM prompts — never sever mid-word
 
 const CAPS = { beats: 40, party: 6 };
 
@@ -90,9 +91,9 @@ export function mergeBeat(scene, beat) {
   if (scene.beats.some(b => b.by === beat.by && b.at === beat.at)) return scene;
   const beats = [...scene.beats, {
     by: beat.by, name: String(beat.name || "").slice(0, 40),
-    label: String(beat.label || "").slice(0, 120),
+    label: smartClamp(String(beat.label || ""), 120), // SNG-152
     degree: beat.degree || null,
-    summary: String(beat.summary || "").slice(0, 200),
+    summary: smartClamp(String(beat.summary || ""), 200), // SNG-152
     at: beat.at
   }].slice(-CAPS.beats);
   return { ...scene, beats, turn: nextTurn(scene, beat.by), updatedAt: beat.at };
@@ -101,7 +102,7 @@ export function mergeBeat(scene, beat) {
 /** Serialize a member's active encounter so others WITNESS it (phase 1: no joint participation). */
 export function setEncounterState(scene, characterId, receipt) {
   const encounters = { ...(scene.encounters || {}) };
-  if (receipt) encounters[characterId] = String(receipt).slice(0, 600);
+  if (receipt) encounters[characterId] = smartClamp(String(receipt), 600); // SNG-152
   else delete encounters[characterId];
   return { ...scene, encounters };
 }

@@ -6,6 +6,7 @@
 // (Offscreen NPC evolution — them growing while you're away — is world-tick work, v0.4.)
 
 import { slugify } from "./quests.js";
+import { smartClamp } from "./namematch.js"; // SNG-152: model prose clamps on a word boundary, never mid-word
 import { isMinorSubject } from "./art.js";
 
 const CAPS = { registry: 40, history: 10, knownFacts: 8, skills: 6 };
@@ -56,7 +57,7 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
         id,
         name: prettifyNpcName(String(u.name || id)).slice(0, 60),
         role: String(u.role || "").slice(0, 100),
-        description: String(u.description || "").slice(0, 240),
+        description: smartClamp(String(u.description || ""), 600), // SNG-152: model prose — word boundary, generous
         firstMet: { locationId: ctx.locationId || null, day: ctx.day ?? null },
         relationship: 0,
         history: [],
@@ -70,7 +71,7 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
     // updates are additive/evolving — never silently rewrite identity
     if (u.name && !n.name) n.name = String(u.name).slice(0, 60);
     if (u.role) n.role = String(u.role).slice(0, 100);
-    if (u.description && !n.description) n.description = String(u.description).slice(0, 240);
+    if (u.description && !n.description) n.description = smartClamp(String(u.description), 600); // SNG-152
     if (u.gender && !n.gender) n.gender = String(u.gender).slice(0, 40);       // SNG-143: fill it the first time the GM records it
     if (u.pronouns && !n.pronouns) n.pronouns = String(u.pronouns).slice(0, 40);
     if (u.revealName) {
@@ -106,11 +107,11 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
         n.nameRevealed = true;
       }
     }
-    if (u.note) n.history = [...n.history, `[d${ctx.day ?? "?"}] ${String(u.note).slice(0, 180)}`].slice(-CAPS.history);
+    if (u.note) n.history = [...n.history, `[d${ctx.day ?? "?"}] ${smartClamp(String(u.note), 300)}`].slice(-CAPS.history); // SNG-152: high-cardinality (many NPCs x notes, all in the prompt) — 300, not 600
     if (u.learned) {
       const facts = Array.isArray(u.learned) ? u.learned : [u.learned];
       for (const f of facts.slice(0, 3)) {
-        const fact = String(f).slice(0, 160);
+        const fact = smartClamp(String(f), 200); // SNG-152
         if (!n.knownFacts.includes(fact)) n.knownFacts = [...n.knownFacts, fact].slice(-CAPS.knownFacts);
       }
     }
@@ -127,7 +128,7 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
     // SNG-108: bond KIND + romantic STAGE — applied AFTER the score so the stage floor sees the fresh value.
     if (u.bondType || u.bondStage) advanceBond(n, { bondType: u.bondType, bondStage: u.bondStage }, ctx.rules, ctx.day);
     if (u.status && ["active", "injured", "missing", "dead", "departed"].includes(u.status)) n.status = u.status;
-    if (u.statusNote) n.statusNote = String(u.statusNote).slice(0, 160);
+    if (u.statusNote) n.statusNote = smartClamp(String(u.statusNote), 240); // SNG-152
     n.lastSeen = { locationId: ctx.locationId || null, day: ctx.day ?? null };
   }
   return character.npcRegistry;
@@ -256,15 +257,28 @@ export function npcRegistryForGM(character, { locationId = null, sceneNpcNames =
     .slice(0, Math.max(0, 12 - relevant.length));
   const pick = [...relevant, ...rest].slice(0, 12);
   if (!pick.length) return null;
-  return pick.map(n =>
-    `- ${n.name}${n.role ? ` (${n.role})` : ""}${n.gender || n.pronouns ? ` [${[n.gender, n.pronouns].filter(Boolean).join(", ")} — use these pronouns]` : ""} — ${relationshipBand(n.relationship)} (${n.relationship}), status: ${n.status}.` +
-    (n.bondType && n.bondType !== "platonic" ? ` BOND: ${relationshipLabel(n)} — established fact; honor the KIND of this relationship.` : "") +
-    (n.description ? ` ${n.description}` : "") +
-    (n.statusNote ? ` CURRENT SITUATION: ${n.statusNote}.` : "") +
-    (n.skillsObserved.length ? ` Skills seen: ${n.skillsObserved.join(", ")}.` : "") +
-    (n.knownFacts.length ? ` What they know/have experienced: ${n.knownFacts.join("; ")}.` : "") +
-    (n.history.length ? ` History with ${character.name}: ${n.history.slice(-4).join(" | ")}` : "")
-  ).join("\n");
+  // SNG-152 + SNG-155 (prompt budget): STORAGE is generous — the full description/notes are kept on
+  // the save and stay reachable in the UI. The PROMPT is a bounded PROJECTION of that: this is the
+  // largest single block in the GM context (measured ~20.7k chars on a real 18-NPC save), and it is
+  // re-sent every turn, so the read boundary is where the bound belongs — not the write boundary,
+  // which is what was silently severing text mid-word in the first place.
+  const focus = new Set((sceneNpcNames || []).map(s => String(s).toLowerCase()));
+  const inScene = n => focus.has(String(n.name).toLowerCase());
+  return pick.map(n => {
+    // People actually present in the scene get the full budget; the rest are context, not cast.
+    const wide = inScene(n);
+    const desc = n.description ? smartClamp(n.description, wide ? 400 : 220) : "";
+    const note = n.statusNote ? smartClamp(n.statusNote, wide ? 240 : 140) : "";
+    const hist = n.history.slice(wide ? -4 : -2).map(h => smartClamp(h, wide ? 240 : 160));
+    const facts = n.knownFacts.slice(wide ? -6 : -3).map(f => smartClamp(f, 160));
+    return `- ${n.name}${n.role ? ` (${n.role})` : ""}${n.gender || n.pronouns ? ` [${[n.gender, n.pronouns].filter(Boolean).join(", ")} — use these pronouns]` : ""} — ${relationshipBand(n.relationship)} (${n.relationship}), status: ${n.status}.` +
+      (n.bondType && n.bondType !== "platonic" ? ` BOND: ${relationshipLabel(n)} — established fact; honor the KIND of this relationship.` : "") +
+      (desc ? ` ${desc}` : "") +
+      (note ? ` CURRENT SITUATION: ${note}.` : "") +
+      (n.skillsObserved.length ? ` Skills seen: ${n.skillsObserved.join(", ")}.` : "") +
+      (facts.length ? ` What they know/have experienced: ${facts.join("; ")}.` : "") +
+      (hist.length ? ` History with ${character.name}: ${hist.join(" | ")}` : "");
+  }).join("\n");
 }
 
 /** Cleanup migration: merge duplicate registry entries (same person under
@@ -340,7 +354,7 @@ export function migrateRelationships(character, npcCatalog = {}) {
       description: "",
       firstMet: { locationId: cat?.homeLocation || null, day: null },
       relationship: Math.max(-10, Math.min(10, rel.score || 0)),
-      history: (rel.notes || []).map(x => String(x).slice(0, 180)).slice(-CAPS.history),
+      history: (rel.notes || []).map(x => smartClamp(String(x), 300)).slice(-CAPS.history), // SNG-152
       knownFacts: [],
       skillsObserved: [],
       status: "active"

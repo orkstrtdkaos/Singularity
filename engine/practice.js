@@ -5,6 +5,7 @@
 // recipe/branch templates — the engine mints, the model only offers words.
 
 import { discoveryKey, knownDiscovery, recordDiscovery } from "./progression.js";
+import { smartClamp } from "./namematch.js"; // SNG-152
 
 export function ensurePractice(character) {
   if (!character.practice) character.practice = { schemaVersion: 1, uses: {}, coActivations: {}, aspirations: [] };
@@ -142,8 +143,8 @@ export function ripeAxisTouchCombinations(character, catalog, rules) {
 
 /** One-line RIPE notice for the GM — it may OFFER these in-fiction and nothing else. */
 export function emergenceNoticeForGM(character, recipesFile, rules) {
-  const combos = ripeCombos(character, recipesFile, rules).map(r => `- RIPE combo "${r.id}": ${r.name} (${r.components.join(" + ")}) — ${r.discoveredBlurb || r.description.slice(0, 100)}`);
-  const branches = ripeBranches(character, recipesFile).map(t => `- RIPE branch "${t.id}": ${t.name} (grows ${t.growsAbility}) — ${t.grants.slice(0, 100)}`);
+  const combos = ripeCombos(character, recipesFile, rules).map(r => `- RIPE combo "${r.id}": ${r.name} (${r.components.join(" + ")}) — ${r.discoveredBlurb || smartClamp(r.description, 160)}`) // SNG-152: authored text digests on a word boundary;
+  const branches = ripeBranches(character, recipesFile).map(t => `- RIPE branch "${t.id}": ${t.name} (grows ${t.growsAbility}) — ${smartClamp(t.grants, 160)}`) // SNG-152;
   const lines = [...combos, ...branches];
   return lines.length ? lines.join("\n") : null;
 }

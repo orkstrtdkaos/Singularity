@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 15,
-  "xp": 1447,
+  "xp": 1460,
   "attributes": {
     "physical": 4,
     "mental": 5,
@@ -101,7 +101,7 @@
   "maxHealth": 100,
   "health": 100,
   "maxEnergy": 170,
-  "energy": 124,
+  "energy": 122,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -834,80 +834,118 @@
         "player": "As Siol is likely more experienced in these sorts of decisions, request that she and Pell shop for the outfits (and whisper to Pell that perhaps she could get something for just the two of you for evening escapes, with a wink).  You'll meet them at the Ent after you look into a few things.",
         "summary": "Silas delegates the shopping to Siol and Pell — Pell gets the suggestion with a look that lands — and heads out alone across the plaza.",
         "narration": "You wait for a gap in the market noise, then lean toward Siol and say it plainly: you would trust her eye for this more than your own. Something for Pell to wear when you arrive at your home — nothing that needs explaining, just something that fits a first meeting. Siol takes that in without making much of it, and says she can do that.\n\nThen you turn to Pell and drop your voice. You tell her Siol will help find something for your mother's table. Then, quieter, you say that perhaps she could also find something for the evenings — just the two of you — and you let the suggestion sit there with a look that does the rest of the work. Pell holds your eyes for a beat. The corner of her mouth moves. She says nothing, which is its own kind of answer, and then she turns back to the dyer's table with the blue-green cloth and sets it down with a finality that says she has already started thinking about something else to look for.\n\nYou tell them you will meet at the Ent circle when you're done. Siol nods once and shifts her attention to Pell, already reading the stalls ahead. Huginn drops from the ledge above, crosses the open air in three beats of wing, and lands on your shoulder. It says nothing. Its weight is settled and familiar, and the two of you head back across the plaza paving toward whatever is waiting."
+      },
+      {
+        "player": "Have Huginn search the market for Death attuned people or things - you need to find a teacher or artifact that can improve your standing with the Ashe March.",
+        "summary": "Huginn scouts the market and locates a still, dark-stalled seller with bone-handled tools — a possible death-attuned contact.",
+        "narration": "You stand alone in the plaza for a moment after Pell and Siol disappear into the stalls. Then you lift your eyes to Huginn and say it plainly, low enough that the passing merchants do not catch it. You tell him what you are looking for. Death-touched people. Old things that carry that particular weight. Someone who might know the March.\n\nHuginn tilts his head once. Then he lifts off your shoulder without drama and crosses south into the market row, dropping below the roofline of the dyer's stall and out of your direct sight.\n\nYou wait at the plaza edge. You do not press the thread — you let Huginn work it on his terms. After a few minutes, he returns. He lands on the nearest arch-stone and issues one short, deliberate croak. Then he looks southeast, down the market row, past the cord-weavers, to a stall set slightly back from the main lane. A narrow table with dark cloth over it. Bone-handled tools laid out in a row. The seller is an older woman, sitting very still, with the look of someone who has been in one place long enough that the place has shaped itself around her.\n\nHuginn looks at you. He does not croak again. The point has been made."
       }
     ],
     "lastTurn": {
-      "narration": "You wait for a gap in the market noise, then lean toward Siol and say it plainly: you would trust her eye for this more than your own. Something for Pell to wear when you arrive at your home — nothing that needs explaining, just something that fits a first meeting. Siol takes that in without making much of it, and says she can do that.\n\nThen you turn to Pell and drop your voice. You tell her Siol will help find something for your mother's table. Then, quieter, you say that perhaps she could also find something for the evenings — just the two of you — and you let the suggestion sit there with a look that does the rest of the work. Pell holds your eyes for a beat. The corner of her mouth moves. She says nothing, which is its own kind of answer, and then she turns back to the dyer's table with the blue-green cloth and sets it down with a finality that says she has already started thinking about something else to look for.\n\nYou tell them you will meet at the Ent circle when you're done. Siol nods once and shifts her attention to Pell, already reading the stalls ahead. Huginn drops from the ledge above, crosses the open air in three beats of wing, and lands on your shoulder. It says nothing. Its weight is settled and familiar, and the two of you head back across the plaza paving toward whatever is waiting.",
-      "sceneSummary": "Silas delegates the shopping to Siol and Pell — Pell gets the suggestion with a look that lands — and heads out alone across the plaza.",
+      "narration": "You stand alone in the plaza for a moment after Pell and Siol disappear into the stalls. Then you lift your eyes to Huginn and say it plainly, low enough that the passing merchants do not catch it. You tell him what you are looking for. Death-touched people. Old things that carry that particular weight. Someone who might know the March.\n\nHuginn tilts his head once. Then he lifts off your shoulder without drama and crosses south into the market row, dropping below the roofline of the dyer's stall and out of your direct sight.\n\nYou wait at the plaza edge. You do not press the thread — you let Huginn work it on his terms. After a few minutes, he returns. He lands on the nearest arch-stone and issues one short, deliberate croak. Then he looks southeast, down the market row, past the cord-weavers, to a stall set slightly back from the main lane. A narrow table with dark cloth over it. Bone-handled tools laid out in a row. The seller is an older woman, sitting very still, with the look of someone who has been in one place long enough that the place has shaped itself around her.\n\nHuginn looks at you. He does not croak again. The point has been made.",
+      "sceneSummary": "Huginn scouts the market and locates a still, dark-stalled seller with bone-handled tools — a possible death-attuned contact.",
       "choices": [
         {
-          "label": "Go to the Ent circle — see what it knows before the others arrive",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Approach her stall directly — introduce yourself as an Ashwarden and see how she reads you",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.4
+          },
           "difficulty": 0,
           "intentTags": [
-            "scout",
-            "study"
+            "persuade"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Use Order-Sense at the center of the plaza — read the full design of the seven arches while no one is watching",
+          "label": "Approach quietly and look at what she's selling before you say anything — let the goods tell you what she is",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 15,
+          "axes": {
+            "death_life": -0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Order-Sense on the stall from here — read what design the bone-handled tools are part of before you walk over",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "chaos_order": 0.3,
+            "death_life": -0.2
+          },
+          "difficulty": 0,
           "intentTags": [
             "study"
           ],
           "abilityId": "order_sense",
           "energyCost": 2,
-          "trivial": false
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Find the sixth gate — the one Siol named as the passage to the Ashwarden March — and look at it closely",
+          "label": "Thank Huginn and wait — let him watch her for a few more minutes and see if she responds to him at all",
           "attribute": "mental",
-          "subAttribute": "insight",
+          "subAttribute": "wits",
+          "axes": {
+            "death_life": -0.1
+          },
           "difficulty": 0,
           "intentTags": [
             "scout",
-            "study"
+            "careful"
           ],
-          "trivial": true
-        },
-        {
-          "label": "Head to the market row stalls on your own — look for something useful for the road south",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "scout"
-          ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "scene": {
-        "setting": "Hub waygate plaza — open paving under full morning light, the seven arches to the north, market row behind. Silas alone now, Huginn on his shoulder. Siol and Pell have moved south into the market stalls.",
+        "setting": "Hub waygate plaza edge, open morning paving — Huginn perched on the nearest arch-stone, facing southeast toward a narrow stall set back in the market row, dark cloth over the table, bone-handled tools laid out in a row.",
         "npcsPresent": [
           {
             "name": "Huginn",
-            "state": "perched on Silas's shoulder, settled and quiet"
+            "state": "perched on the arch-stone, looking southeast at the stall, job done"
           },
           {
             "name": "Siol",
-            "state": "moving south into the market stalls with Pell, already reading the sellers ahead"
+            "state": "deeper in the market stalls with Pell, choosing clothes"
           },
           {
             "name": "Pell",
-            "state": "walking with Siol into the market row, thinking"
+            "state": "walking the stalls with Siol, thinking about the evening suggestion"
+          },
+          {
+            "name": "Unknown seller",
+            "state": "sitting still behind a narrow dark-cloth table southeast in the market row, bone-handled tools arranged in front of her"
           }
         ],
         "objects": [
           "seven waygate arches to the north",
           "market row stalls to the south — cord-weavers, seed merchant, dyer's table",
-          "Council colonnade on the far northern tier",
-          "open plaza paving between"
+          "narrow dark-cloth stall set back from the main lane, southeast",
+          "bone-handled tools laid out in a row on the dark cloth",
+          "Memory (the assembled spear, road-lashed at your back)"
         ],
         "threads": [
+          "The still seller with bone-handled tools — Huginn's read, not yet confirmed",
           "Pell's unspoken answer to the evening suggestion — filed, not resolved",
           "The Ent circle: still to visit",
           "The sixth gate — Ashwarden passage — close by and unexamined up close",
@@ -917,50 +955,64 @@
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "pell-ran-marsh",
-          "name": "Pell Ran Marsh",
-          "note": "Received Silas's whispered suggestion with a held look and a corner-of-mouth reply — filed it and turned back to the stalls. Now shopping with Siol.",
-          "statusNote": "In the Hub market row — shopping with Siol for travel clothes and something else she has not named aloud.",
+          "npcId": "huginn",
+          "name": "Huginn",
+          "role": "Companion — Ashwarden carrion bird",
+          "gender": "nonbinary",
+          "pronouns": "they/them",
+          "note": "Scouted the market for death-attuned presence — returned with a single croak and a directional look southeast to the bone-handled stall. Point made without ceremony.",
           "learned": [
-            "Silas wants something private for the evenings — she is thinking about what that means"
-          ]
-        },
+            "A still seller with bone-handled tools is set back in the market row — Huginn read something there worth naming"
+          ],
+          "skillsObserved": [
+            "directional scouting through a familiar's perception — economical and precise"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Perched on the arch-stone at the plaza edge, watching southeast toward the stall."
+        }
+      ],
+      "generateRequest": [
         {
-          "op": "update",
-          "npcId": "siol",
-          "name": "Siol",
-          "note": "Accepted the shopping task without ceremony — took Silas's trust in her eye as practical information and moved.",
-          "statusNote": "In the Hub market row — leading Pell through the stalls, choosing something suitable for a first meeting at Silas's home."
+          "type": "npc",
+          "hint": "An older woman selling bone-handled tools from a narrow dark-cloth stall set back in the Hub market row — still, unhurried, death-attuned in some way Huginn can read. Possibly connected to the Ashwarden March or adjacent craft.",
+          "why": "Huginn's successful scout identified her stall as death-touched; she needs a stable, recurring identity for what may become a teacher or contact relationship."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a short exchange and a parting — the group separates at the market row"
+        "why": "A short wait while Huginn scouted the market and returned — a few minutes at most."
       }
     },
     "sceneState": {
-      "setting": "Hub waygate plaza — open paving under full morning light, the seven arches to the north, market row behind. Silas alone now, Huginn on his shoulder. Siol and Pell have moved south into the market stalls.",
+      "setting": "Hub waygate plaza edge, open morning paving — Huginn perched on the nearest arch-stone, facing southeast toward a narrow stall set back in the market row, dark cloth over the table, bone-handled tools laid out in a row.",
       "npcsPresent": [
         {
           "name": "Huginn",
-          "state": "perched on Silas's shoulder, settled and quiet"
+          "state": "perched on the arch-stone, looking southeast at the stall, job done"
         },
         {
           "name": "Siol",
-          "state": "moving south into the market stalls with Pell, already reading the sellers ahead"
+          "state": "deeper in the market stalls with Pell, choosing clothes"
         },
         {
           "name": "Pell",
-          "state": "walking with Siol into the market row, thinking"
+          "state": "walking the stalls with Siol, thinking about the evening suggestion"
+        },
+        {
+          "name": "Unknown seller",
+          "state": "sitting still behind a narrow dark-cloth table southeast in the market row, bone-handled tools arranged in front of her"
         }
       ],
       "objects": [
         "seven waygate arches to the north",
         "market row stalls to the south — cord-weavers, seed merchant, dyer's table",
-        "Council colonnade on the far northern tier",
-        "open plaza paving between"
+        "narrow dark-cloth stall set back from the main lane, southeast",
+        "bone-handled tools laid out in a row on the dark cloth",
+        "Memory (the assembled spear, road-lashed at your back)"
       ],
       "threads": [
+        "The still seller with bone-handled tools — Huginn's read, not yet confirmed",
         "Pell's unspoken answer to the evening suggestion — filed, not resolved",
         "The Ent circle: still to visit",
         "The sixth gate — Ashwarden passage — close by and unexamined up close",
@@ -3873,21 +3925,21 @@
     }
   },
   "tendencies": {
-    "strategic": 12.76754073053394,
-    "cerebral": 11.168283678447146,
-    "social": 20.631767468590294,
-    "generous": 3.2068336444869487,
-    "cautious": 6.578138232420006,
-    "physical": 1.4619018814907585,
-    "risky": 1.533093735840397,
-    "ruthless": 0.4888101835545446,
-    "carousing": 0.007489190083695761,
-    "amorous": 5.847034872074283,
-    "patient": 1.2106266901873337,
-    "stealth": 0.18946407595884468,
-    "devotion": 0.4233850587880892,
-    "craft": 1.4966362104735327,
-    "leadership": 0.9643931735634385
+    "strategic": 14.44835221227059,
+    "cerebral": 11.889076586485967,
+    "social": 20.115973281875537,
+    "generous": 3.1266628033747748,
+    "cautious": 6.4136847766095055,
+    "physical": 1.4253543344534896,
+    "risky": 1.494766392444387,
+    "ruthless": 0.476589928965681,
+    "carousing": 0.007301960331603367,
+    "amorous": 5.700859000272426,
+    "patient": 1.1803610229326504,
+    "stealth": 0.18472747405987355,
+    "devotion": 0.4128004323183869,
+    "craft": 1.4592203052116943,
+    "leadership": 0.9402833442243524
   },
   "aptitudes": [
     "strategist",
@@ -3895,7 +3947,7 @@
     "scholar",
     "orator"
   ],
-  "actionCount": 553,
+  "actionCount": 554,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -4165,8 +4217,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784414842917,
-  "rev": 808,
+  "updatedAt": 1784415052659,
+  "rev": 809,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5390,7 +5442,7 @@
       "lightsense": 2,
       "order_sense": 53,
       "palework": 26,
-      "deathsense": 22,
+      "deathsense": 23,
       "shadowstep": 17,
       "the-attended-end": 28,
       "wildcraft": 4,
@@ -5541,7 +5593,7 @@
   "syncedAt": 1784392733860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 374
+    "valley": 375
   },
   "foreclosed": [
     "rootkin",
@@ -5598,10 +5650,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T22:47:22.916Z",
+      "lastAt": "2026-07-18T22:50:52.659Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 99,
+      "beats": 100,
       "_recapError": null,
       "recap": "Day eighteen, and Silas Weir moved like a man who'd finally stopped fighting the shape of what he was. On the road he disarmed three opportunists without breaking bones, read the grief sitting behind the broad man's eyes, named it plainly, pressed provisions into their hands, and sent them toward something worth doing — mercy given as instruction, not sentiment. Then he brought the hard people together: Dara, Aldric, Fendt, Mara, Calvar, all of them in the heat of Pell's forge with no exits easy and no pretense left, and in that single evening he turned a valley's quiet panic into four working threads — engineering, logistics, supply, accounts — each with a named lead and a direction to face. The crisis didn't end, but it stopped being formless, and that was his doing."
     }

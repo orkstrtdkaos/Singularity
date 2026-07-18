@@ -16,8 +16,7 @@
         "death_life": 0.6
       },
       "functions": [
-        "open",
-        "reveal"
+        "open"
       ],
       "narrationHints": "You press your hand to the earth and it ANSWERS — the living current beneath everything stirring up to meet you, green and enormous and older than the nanites.",
       "description": "The first touch of the living substrate — waking the green current in the ground, the deep life-layer the Rootkin never gave up as their kin gave up the nanites. Where the substrate-keepers channel the fabricated deep, the Rootkin channel the living one.",
@@ -27,7 +26,11 @@
           "rank": 1,
           "name": "Quicken the Ground",
           "grants": "Wake the living current in the ground, drawing on the deep life-substrate.",
-          "cannot": "It touches only the living substrate, it answers only a true channel, and what you wake, you must tend — roused life does not simply lie back down."
+          "cannot": "It touches only the living substrate, it answers only a true channel, and what you wake, you must tend — roused life does not simply lie back down.",
+          "functions": [
+            "open"
+          ],
+          "harmRung": "none"
         }
       ],
       "gated": "learned",
@@ -58,7 +61,12 @@
           "rank": 1,
           "name": "The Green Road",
           "grants": "Travel the connected living substrate — the green road between rooted places.",
-          "cannot": "It reaches only where life runs unbroken, it cannot cross the dead or the made, and the current that carries you also claims you for the length of the road."
+          "cannot": "It reaches only where life runs unbroken, it cannot cross the dead or the made, and the current that carries you also claims you for the length of the road.",
+          "functions": [
+            "open",
+            "travel"
+          ],
+          "harmRung": "none"
         }
       ],
       "gated": "learned",

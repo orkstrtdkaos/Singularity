@@ -35,7 +35,7 @@
     "the_bloodless_hold",
     "the_axis_gate"
   ],
-  "descriptionSeed": "A city built like an argument, from premises, in order. Everything is derivable. The Syllogists are courteous, precise, and genuinely humble in the specific sense that they will abandon any position the moment it is shown false — which is a virtue nobody expects and which makes them extremely hard to hate and extremely tiring to love.",
+  "descriptionSeed": "A city built like an argument, from premises, in order. Everything is derivable. The Syllogists are courteous, precise, and genuinely humble in the specific sense that they will abandon any position the moment it is shown false — which is a virtue nobody expects and which makes them extremely hard to hate and extremely tiring to love. The Axiom's waygate carries a proof of its own soundness engraved beside it. The proof is correct. The Syllogists still send someone to check the gate physically every morning.",
   "loreRefs": [
     "the_twelve_reaches",
     "traditions"
@@ -55,5 +55,7 @@
     "order": 0.4,
     "abstract": 0.2
   },
-  "startingLocation": true
+  "startingLocation": true,
+  "waygate": true,
+  "waygateTier": 2
 }

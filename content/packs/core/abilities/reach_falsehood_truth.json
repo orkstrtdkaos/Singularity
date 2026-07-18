@@ -16,8 +16,11 @@
         "dark_light": -0.1
       },
       "functions": [
+        "break",
+        "conceal",
         "deceive",
-        "conceal"
+        "reveal",
+        "sustain"
       ],
       "narrationHints": "The made-untrue — an illusion that holds, a false face that fits, a story so well-built it stands on its own; the craft that knows exactly how a truth is faked, and so can catch it too.",
       "description": "The falsehood-pole mastery: illusion, disguise, the constructed untruth — and, by knowing how lies are built, the sharpest detector of them. The Veilwrights' art.",
@@ -27,19 +30,44 @@
           "rank": 1,
           "name": "The Fitting Mask",
           "grants": "Craft a convincing illusion or disguise; tell a lie built well enough to hold; SPOT a constructed untruth, because you know the joinery.",
-          "cannot": "Illusion is not substance — tested hard, it fails; a Verity read can pierce it; the truly perceptive feel the seam."
+          "cannot": "Illusion is not substance — tested hard, it fails; a Verity read can pierce it; the truly perceptive feel the seam.",
+          "functions": [
+            "deceive",
+            "conceal",
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Standing Lie",
           "grants": "Build an untruth that holds under scrutiny — a false history, a cover that survives questioning, an illusion that persists unwatched; unbuild another's lie by finding its load-bearing falsehood.",
-          "cannot": "A lie built on discoverable fact cracks when the fact surfaces; the Cathedral (true pieces) is a different, harder thing; every lie you hold is weight."
+          "cannot": "A lie built on discoverable fact cracks when the fact surfaces; the Cathedral (true pieces) is a different, harder thing; every lie you hold is weight.",
+          "functions": [
+            "deceive",
+            "conceal",
+            "reveal",
+            "break",
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Woven Untruth",
           "grants": "Falsehood at scale — a deception a whole people believes, an illusion over a place, a constructed truth that reshapes what everyone knows; and the mastery to unpick any of these in another's work. The Veilwrights' power in miniature; the craft that built the Cathedral of Convincing.",
-          "cannot": "The wielder drifts falsehood-hot — until they can no longer find their own true ground; a person who can make anything believed eventually believes nothing, the foreclosure of the world going unreal."
+          "cannot": "The wielder drifts falsehood-hot — until they can no longer find their own true ground; a person who can make anything believed eventually believes nothing, the foreclosure of the world going unreal.",
+          "functions": [
+            "deceive",
+            "conceal",
+            "reveal",
+            "break",
+            "sustain"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "challengeTypes": [
@@ -63,8 +91,10 @@
         "dark_light": 0.2
       },
       "functions": [
-        "reveal",
-        "restore"
+        "bind",
+        "break",
+        "restore",
+        "reveal"
       ],
       "narrationHints": "The unmasking — a lie shown its own shape, a true word that cannot be false, a clarity that strips pretense whether or not the world is ready.",
       "description": "The truth-pole mastery: piercing deception, speaking the word that cannot be false, seeing and showing what IS. The Truthwardens' art — and Aevi-the-Watcher's own road.",
@@ -74,19 +104,38 @@
           "rank": 1,
           "name": "The Piercing Eye",
           "grants": "See through illusion, disguise, and the ordinary lie; know when a spoken thing is false; speak a plain truth others can't easily deny.",
-          "cannot": "Sees the lie, not always the truth behind it; the Cathedral's true-pieces-false-whole survives raw piercing; a truth spoken is not a truth accepted."
+          "cannot": "Sees the lie, not always the truth behind it; the Cathedral's true-pieces-false-whole survives raw piercing; a truth spoken is not a truth accepted.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Unmasking",
           "grants": "Strip a deception bare before others — a false face shown true, a standing lie collapsed, a liar's own words turned to expose them; hold a truth so plainly it becomes hard to bury again.",
-          "cannot": "Some unmaskings do more harm than the lie did, and Verity can't tell which; the Cathedral needs the shape-seeing of the True Word braid; the powerful can suppress a proven truth by force."
+          "cannot": "Some unmaskings do more harm than the lie did, and Verity can't tell which; the Cathedral needs the shape-seeing of the True Word braid; the powerful can suppress a proven truth by force.",
+          "functions": [
+            "reveal",
+            "break"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Word That Holds",
           "grants": "Truth at scale — a deception undone before a people, a buried thing dragged into day, a word spoken so truly it cannot be unsaid or unbelieved. The Truthwardens' power in miniature; the pole Aevi-the-Watcher lives nearest.",
-          "cannot": "The wielder drifts truth-hot — toward revealing everything, always, sparing nothing; total truth burns every shelter, the foreclosure of a world with no privacy, no mercy, no shadow left to heal in (the Blaze's cousin on another axis)."
+          "cannot": "The wielder drifts truth-hot — toward revealing everything, always, sparing nothing; total truth burns every shelter, the foreclosure of a world with no privacy, no mercy, no shadow left to heal in (the Blaze's cousin on another axis).",
+          "functions": [
+            "reveal",
+            "break",
+            "bind",
+            "restore"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "challengeTypes": [
@@ -170,19 +219,39 @@
           "rank": 1,
           "name": "The Wrong Read",
           "grants": "Give a person a false read of the situation — convincing enough that they act on it in a way that leaves them exposed or costs them something real.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "deceive",
+            "hinder"
+          ],
+          "gains": "broaden",
+          "harmRung": "incapacitating"
         },
         {
           "rank": 2,
           "name": "The Real Consequence",
-          "grants": "The false reality is convincing enough that the harm is the belief — they act on what you've shown them and the consequences are real.",
-          "cannot": null
+          "grants": "Hold the false reality long enough that they OPERATE inside it — not one wrong step but a sequence of correct decisions made against a picture you supplied. They commit resources, spend goodwill, and close doors that were open, and every loss is genuinely theirs because every choice genuinely was.",
+          "cannot": "It needs a frame they would plausibly accept; a picture that contradicts what they can plainly check collapses and takes your credibility with it. And the longer it is held, the more of it must be maintained — a Verist who tugs one loose thread gets the whole of it.",
+          "functions": [
+            "deceive",
+            "hinder",
+            "strike"
+          ],
+          "gains": "broaden",
+          "harmRung": "incapacitating"
         },
         {
           "rank": 3,
           "name": "The Indistinguishable",
           "grants": "The false reality holds until the cost lands. They acted correctly, by their lights. You were just showing them the wrong lights.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "deceive",
+            "hinder",
+            "strike"
+          ],
+          "gains": "deepen",
+          "harmRung": "incapacitating"
         }
       ],
       "nativeOrCombination": "native"
@@ -208,8 +277,8 @@
       "notFor": [],
       "tradition": "veilwright",
       "functions": [
-        "restore",
-        "heal"
+        "heal",
+        "restore"
       ],
       "challengeTypes": [
         "medical",
@@ -221,19 +290,36 @@
           "rank": 1,
           "name": "The Liveable Frame",
           "grants": "Give a person a version of what happened that they can carry — not a harmful lie, a true face of the event that allows the wound to close.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "heal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Healing Retelling",
           "grants": "Restore someone by showing them their experience from an angle that is also true, but functions — the trauma has a different shape; a different shape heals differently.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "heal",
+            "restore"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Better True Story",
           "grants": "The better story is also a true story. You have not lied; you have shown them a different true face of the real, and it heals what the first face was keeping open.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "heal",
+            "restore"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -259,9 +345,9 @@
       "notFor": [],
       "tradition": "veilwright",
       "functions": [
-        "shield",
         "conceal",
-        "deceive"
+        "deceive",
+        "shield"
       ],
       "challengeTypes": [
         "combat",
@@ -273,19 +359,38 @@
           "rank": 1,
           "name": "The False Position",
           "grants": "Make yourself or another appear to be elsewhere — the attack lands on the appearance, and the person is somewhere else.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "deceive",
+            "conceal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Occupied Pursuit",
           "grants": "Build a false target convincing enough to occupy sustained pursuit — they spend their effort on what you've shown them is there.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "deceive",
+            "conceal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Protected Real",
           "grants": "Wrap a place, a group, or a real thing in a false version that draws all action away from the actual — the target they have is not the target that matters.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "deceive",
+            "conceal",
+            "shield"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -311,8 +416,8 @@
       "notFor": [],
       "tradition": "veilwright",
       "functions": [
-        "reveal",
-        "foresee"
+        "foresee",
+        "reveal"
       ],
       "challengeTypes": [
         "investigation",
@@ -324,19 +429,35 @@
           "rank": 1,
           "name": "The Construction",
           "grants": "Read any falsehood or illusion's construction — see how it was made, what it is made of, where it will fail.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "All the Seams",
           "grants": "See all the falsecrafts in a situation simultaneously — who is building what version of events, what holds, what is already cracking under its own weight.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Unfinished Lie",
           "grants": "Read what is being constructed before it completes — see the lie before it is fully told, the illusion before it has fully taken shape.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "foresee"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -362,9 +483,9 @@
       "notFor": [],
       "tradition": "veilwright",
       "functions": [
+        "deceive",
         "make",
-        "transform",
-        "deceive"
+        "transform"
       ],
       "challengeTypes": [
         "magical",
@@ -376,19 +497,39 @@
           "rank": 1,
           "name": "The Working False",
           "grants": "Craft a false reality convincing enough to function — the room looks different, the person is a stranger, the event did not happen, and it holds.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "deceive",
+            "make"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Transformed History",
           "grants": "Make an untruth that transforms the present — a false history so complete it changes what people do and choose now.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "deceive",
+            "make",
+            "transform"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Built World",
           "grants": "Construct a version of events, a place, a reality that operates at full fidelity for as long as it needs to, whether or not you're present to maintain it.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "deceive",
+            "make",
+            "transform"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -414,9 +555,9 @@
       "notFor": [],
       "tradition": "veilwright",
       "functions": [
+        "deceive",
         "open",
-        "travel",
-        "deceive"
+        "travel"
       ],
       "challengeTypes": [
         "stealth",
@@ -428,19 +569,38 @@
           "rank": 1,
           "name": "The Made Opening",
           "grants": "Make a passage appear where there isn't one — and use it, briefly, before the appearance closes.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "deceive",
+            "open"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The False Wall",
           "grants": "Open a door through the false version of a space — the wall that appears solid has an opening in the version laid over it.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "deceive",
+            "open"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Through the Veil",
           "grants": "Travel through the gap between what appears and what is — a route through the veil itself, from one false face of reality to another.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "deceive",
+            "open",
+            "travel"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -466,8 +626,8 @@
       "notFor": [],
       "tradition": "veilwright",
       "functions": [
-        "sustain",
-        "bind"
+        "bind",
+        "sustain"
       ],
       "challengeTypes": [
         "stealth",
@@ -479,19 +639,35 @@
           "rank": 1,
           "name": "The Running Falsehood",
           "grants": "Sustain a working illusion or false narrative without active maintenance — set it and it continues.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Long Veil",
           "grants": "Hold a falsecraft across a long operation — days, weeks — without it decaying or requiring repair.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Permanent Feature",
           "grants": "The veil sustains until broken — set and gone; it is a feature of the place now, not a maintained working.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -530,19 +706,36 @@
           "rank": 1,
           "name": "The Lie Doesn't Stick",
           "grants": "Resist illusion, deception, and false reading by seeing what is actually true — the lie has no purchase on someone who already knows.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "resist"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Protected Circle",
           "grants": "Protect yourself and others from manipulations that depend on misdirection — in the presence of accurate truth-telling, the deception has nowhere to anchor.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "resist",
+            "shield"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Real as Defense",
           "grants": "No working that depends on false belief can function around someone who sees what is so — you and those near you are simply out of reach of what requires the lie to work.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "resist",
+            "shield"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -568,8 +761,8 @@
       "notFor": [],
       "tradition": "verist",
       "functions": [
-        "make",
-        "bind"
+        "bind",
+        "make"
       ],
       "challengeTypes": [
         "social",
@@ -581,19 +774,36 @@
           "rank": 1,
           "name": "Named Completely",
           "grants": "Establish something as true by naming it completely and correctly — the denial becomes harder than the acknowledgment.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "make"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Bound Record",
           "grants": "Make a fact so established it binds — what everyone has heard truly said cannot be quietly taken back or reframed.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "make",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Part of What Is So",
           "grants": "Set something in the record of the real so completely it becomes part of what is so — a truth that persists past the telling, shaping what others must acknowledge.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "make",
+            "bind"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -619,8 +829,8 @@
       "notFor": [],
       "tradition": "verist",
       "functions": [
-        "command",
-        "break"
+        "break",
+        "command"
       ],
       "challengeTypes": [
         "social",
@@ -632,19 +842,36 @@
           "rank": 1,
           "name": "The Reliable Word",
           "grants": "Speak a true thing with the full weight of someone who says only true things — the word lands differently; people who know your record cannot easily dismiss it.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "command"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Plain Account",
           "grants": "Speak truth plainly into a situation of equivocation — the accurate account breaks what comfortable vagueness was protecting.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "command",
+            "break"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Record Commands",
           "grants": "In a room where you have always been right, your word on a new matter is the word — the weight of a perfect record on past facts carries into the present one.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "command",
+            "break"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -670,8 +897,9 @@
       "notFor": [],
       "tradition": "verist",
       "functions": [
-        "travel",
-        "reveal"
+        "move",
+        "reveal",
+        "travel"
       ],
       "challengeTypes": [
         "navigation",
@@ -683,19 +911,38 @@
           "rank": 1,
           "name": "The Real Route",
           "grants": "Navigate any space by seeing it truly — the route that actually exists, not the route that appears to or that others say is there.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "move"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Past the False Path",
           "grants": "Move through deception and misdirection by knowing what is real — where others follow the false path, you follow the one that's actually there.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "move"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Actual Way",
           "grants": "Navigate to the truth of any place — the real exit, the actual center, the genuine threat — by seeing past every falsification of the terrain.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "move",
+            "travel"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -721,8 +968,8 @@
       "notFor": [],
       "tradition": "verist",
       "functions": [
-        "sustain",
-        "resist"
+        "resist",
+        "sustain"
       ],
       "challengeTypes": [
         "endurance",
@@ -734,19 +981,36 @@
           "rank": 1,
           "name": "The Anchored Self",
           "grants": "Hold function in conditions of deception, disorientation, or false-reality working by anchoring to what is actually so.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "resist"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "What Is True Holds",
           "grants": "Sustain across the hardest stretch by clinging to what you know is true — the accurate account of what is real is what keeps you.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "resist",
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Real Is Enough",
           "grants": "In any conditions that depend on disorientation or false belief, you remain functional — accurately calibrated to what is so, unmoved by the version others are being shown.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "resist",
+            "sustain"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"

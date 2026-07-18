@@ -777,7 +777,12 @@
           "rank": 1,
           "name": "The Last Unmaking",
           "grants": "Unmake a thing meant to be permanent — a fixed working, an ancient bond.",
-          "cannot": "It costs nearly all you have, the world resists the unmaking of the fixed, and some things were sealed for reasons you learn only after you have broken the seal."
+          "cannot": "It costs nearly all you have, the world resists the unmaking of the fixed, and some things were sealed for reasons you learn only after you have broken the seal.",
+          "functions": [
+            "break"
+          ],
+          "harmRung": "damaging",
+          "gains": "broaden"
         }
       ],
       "gated": "learned",
@@ -915,6 +920,7 @@
         "destruction_creation": 0.9
       },
       "functions": [
+        "empower",
         "make"
       ],
       "narrationHints": "You make the one thing — the work that holds everything you have ever learned about making, so complete and so right that it will teach the next maker who studies it long after you are gone.",
@@ -925,7 +931,13 @@
           "rank": 1,
           "name": "The Masterwork",
           "grants": "Make a single masterwork that gathers a lifetime's craft into one enduring, teaching thing.",
-          "cannot": "It demands real time and nearly all you have, it stands as a permanent fact and teacher, and you may never make its equal again — a masterwork is, often, the making you are measured by ever after."
+          "cannot": "It demands real time and nearly all you have, it stands as a permanent fact and teacher, and you may never make its equal again — a masterwork is, often, the making you are measured by ever after.",
+          "functions": [
+            "make",
+            "empower"
+          ],
+          "harmRung": "none",
+          "gains": "broaden"
         }
       ],
       "gated": "learned",

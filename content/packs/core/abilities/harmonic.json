@@ -223,7 +223,7 @@
       ],
       "narrationHints": "Layered vocal overtones that soothe fear, ease tension, and lend weight to spoken words. Subtle — listeners feel it more than hear it.",
       "description": "Weave calming overtones into your speech, easing fear and hostility in those who hear you.",
-      "notFor": "Domination or command (it soothes and carries, never compels); deception (a lie sung in harmony still reads as a lie); working on the deaf or on machinery.",
+      "notFor": "Domination (it moves a room, it does not own one — a compelled act is outside it); deception (a lie sung in harmony still reads as a lie); working on those who cannot hear you.",
       "tree": [
         {
           "rank": 1,
@@ -250,17 +250,19 @@
         {
           "rank": 3,
           "name": "Concord",
-          "grants": "Bring a room to genuine willingness to listen — feuding parties will hear one full argument out; quiet a mob's edge; sung over the wounded, grants deep restorative sleep.",
+          "grants": "Bring a room to genuine willingness to listen — feuding parties will hear one full argument out; quiet a mob's edge and turn it; sung over the wounded, grants deep restorative sleep. A crowd will DO what the chord asks of them — disperse, sit, make way, stand down — so long as it is not against what they are.",
           "cannot": "Cannot make anyone agree; one use per gathering — people feel it the second time and harden.",
           "functions": [
             "empower",
-            "heal"
+            "heal",
+            "command"
           ],
           "gains": "broaden",
           "harmRung": "none"
         }
       ],
       "functions": [
+        "command",
         "empower",
         "heal"
       ],
@@ -306,11 +308,12 @@
         {
           "rank": 2,
           "name": "Long Quiet",
-          "grants": "Room-sized, held near an hour; carry it at a slow walk; your own steps and works are near-silent inside.",
+          "grants": "Room-sized, held near an hour; carry it at a slow walk; your own steps and works are near-silent inside. What arrives as sound arrives blunted — a Harmonic's push, a thunderclap, a shout meant to break a line.",
           "cannot": "Cannot cover a second person's noise unless they stay within arm's reach; echo-senses feel the DEADNESS as clearly as noise.",
           "functions": [
             "conceal",
-            "ward"
+            "ward",
+            "resist"
           ],
           "gains": "deepen",
           "harmRung": "none"
@@ -323,6 +326,7 @@
           "functions": [
             "conceal",
             "ward",
+            "resist",
             "bind"
           ],
           "gains": "broaden",
@@ -332,6 +336,7 @@
       "functions": [
         "bind",
         "conceal",
+        "resist",
         "ward"
       ],
       "challengeTypes": [
@@ -423,7 +428,7 @@
       ],
       "narrationHints": "Humming a material's own frequency until cracks re-seat and joints remember their fit.",
       "description": "Coax cracked or loosened things back toward wholeness by singing their grain.",
-      "notFor": "Living tissue; anything shattered to fragments smaller than a thumb; undoing deliberate disassembly (a lock stays a lock).",
+      "notFor": "Anything shattered to fragments smaller than a thumb; undoing deliberate disassembly (a lock stays a lock). Living work is the slowest and costliest thing the chord does, and it mends the body's structure — bone, tendon, a clean wound's edges — never its illnesses.",
       "tree": [
         {
           "rank": 1,
@@ -451,12 +456,13 @@
         {
           "rank": 3,
           "name": "Songwright",
-          "grants": "Rebuild from parts: a shattered mechanism whose pieces are gathered sings itself back together under your sustained chord; mend Radiant crystal (carefully).",
+          "grants": "Rebuild from parts: a shattered mechanism whose pieces are gathered sings itself back together under your sustained chord; mend Radiant crystal (carefully). AND LIVING GRAIN: bone knits, tendon re-seats, a clean wound closes true — slowly, at real cost, and the body must be whole enough to have a grain left to sing.",
           "cannot": "Every missing sliver stays missing; Precursor material refuses the song outright — it has its own, and yours is not invited.",
           "functions": [
             "mend",
             "empower",
-            "restore"
+            "restore",
+            "heal"
           ],
           "gains": "broaden",
           "harmRung": "none"
@@ -464,6 +470,7 @@
       ],
       "functions": [
         "empower",
+        "heal",
         "mend",
         "restore"
       ],
@@ -579,7 +586,8 @@
           "cannot": "Sustained crushing force wins eventually (minutes, not hours); the ground itself must be sound.",
           "functions": [
             "resist",
-            "shield"
+            "shield",
+            "bind"
           ],
           "gains": "broaden",
           "harmRung": "none"
@@ -587,19 +595,23 @@
         {
           "rank": 3,
           "name": "Mountain's Patience",
-          "grants": "Anchor against a rockslide's edge, a stampede, a Radiant lance's push; while anchored, your voice carries the stillness of something older than the argument.",
+          "grants": "Anchor against a rockslide's edge, a stampede, a Radiant lance's push; hold others fast to you against what would sweep them away; while anchored, your voice carries the stillness of something older than the argument.",
           "cannot": "You are a fixed target for anything ranged; unanchoring after a long hold costs a full breather.",
           "functions": [
             "resist",
-            "shield"
+            "shield",
+            "bind",
+            "ward"
           ],
           "gains": "deepen",
           "harmRung": "none"
         }
       ],
       "functions": [
+        "bind",
         "resist",
-        "shield"
+        "shield",
+        "ward"
       ],
       "challengeTypes": [
         "SURVIVE",
@@ -693,7 +705,7 @@
       ],
       "narrationHints": "Listening for the flaw-note — the one place where a structure's song goes thin.",
       "description": "Find the single point where a thing will break: strike there, or warn of it.",
-      "notFor": "Living creatures' bodies; finding MORAL or social weaknesses; anything whose structure you cannot spend a quiet minute reading.",
+      "notFor": "Finding MORAL or social weaknesses; anything whose structure you cannot spend a quiet minute reading. Against a living body it needs a real flaw to find — a healthy, unmarked, unarmoured opponent offers the song nothing.",
       "tree": [
         {
           "rank": 1,
@@ -721,12 +733,13 @@
         {
           "rank": 3,
           "name": "The Thin Song",
-          "grants": "Read a mechanism mid-motion; call the shatterpoint of a Harmonic shield or Radiant lattice in a single held breath; your warning shouted in time counts as an ally's reroll.",
-          "cannot": "Reading Precursor work at this depth is a two-way door — log what you learn AND accept being learned.",
+          "grants": "Read a mechanism mid-motion; call the shatterpoint of a Harmonic shield or Radiant lattice in a single held breath; your warning shouted in time counts as an ally's reroll. AND A BODY IS A STRUCTURE TOO: the old break that never set right, the joint worn past its tolerance, the seam where armour was repaired — name it and strike there, and the blow lands where they were already going to fail.",
+          "cannot": "A living structure must HAVE a flaw for the song to find; the young, sound, and unarmoured give it nothing to work with. Reading a body takes the same quiet minute, which a fight rarely offers. And a struck shatterpoint is a real injury at a real place — the Harmonics who do this to people are not confused about what they are doing.",
           "functions": [
             "reveal",
             "foresee",
-            "break"
+            "break",
+            "strike"
           ],
           "gains": "broaden",
           "harmRung": "damaging"
@@ -735,7 +748,8 @@
       "functions": [
         "break",
         "foresee",
-        "reveal"
+        "reveal",
+        "strike"
       ],
       "challengeTypes": [
         "FIGHT",
@@ -789,17 +803,19 @@
         {
           "rank": 3,
           "name": "The Long Echo",
-          "grants": "In deep stone — a cellar, the Archive, a cave — reach back weeks; recover a conversation's spine; hear what a Precursor mechanism last said, if it spoke.",
+          "grants": "In deep stone — a cellar, the Archive, a cave — reach back weeks; recover a conversation's spine; hear what a Precursor mechanism last said, if it spoke. And follow it: a recovered footfall can be traced the way it went, room to room, for as long as the stone kept it.",
           "cannot": "Costs a night's sleep of focus; what the deep stacks answer, you cannot unhear — some echoes look back.",
           "functions": [
-            "reveal"
+            "reveal",
+            "track"
           ],
           "gains": "deepen",
           "harmRung": "none"
         }
       ],
       "functions": [
-        "reveal"
+        "reveal",
+        "track"
       ],
       "challengeTypes": [
         "INVESTIGATE"

@@ -633,19 +633,36 @@
           "rank": 1,
           "name": "The Warranted Blow",
           "grants": "Strike with the weight of judgment — the blow lands harder because it is warranted; the target knows it.",
-          "cannot": null
+          "cannot": null,
+          "harmRung": "damaging",
+          "functions": [
+            "strike"
+          ],
+          "gains": "broaden"
         },
         {
           "rank": 2,
           "name": "Named in the Strike",
           "grants": "A judged blow harms and reveals — what they have done is named in the moment of impact; all present understand the context.",
-          "cannot": null
+          "cannot": null,
+          "harmRung": "damaging",
+          "functions": [
+            "strike",
+            "reveal"
+          ],
+          "gains": "broaden"
         },
         {
           "rank": 3,
           "name": "Hierarchy's Strike",
           "grants": "Strike with the full authority of the order — the blow is both physical and pronouncement; what was done is named, weighed, and answered.",
-          "cannot": null
+          "cannot": null,
+          "harmRung": "lethal",
+          "functions": [
+            "strike",
+            "reveal"
+          ],
+          "gains": "deepen"
         }
       ],
       "nativeOrCombination": "native"

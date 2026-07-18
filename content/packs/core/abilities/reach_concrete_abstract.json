@@ -781,7 +781,13 @@
           "rank": 1,
           "name": "The True Name",
           "grants": "Find and speak a thing's true name, gaining a hold on its very being.",
-          "cannot": "A false name fails and forewarns, the finding costs nearly all you have, and to name truly is to be truly named — you cannot hold a thing's name without offering your own."
+          "cannot": "A false name fails and forewarns, the finding costs nearly all you have, and to name truly is to be truly named — you cannot hold a thing's name without offering your own.",
+          "functions": [
+            "reveal",
+            "bind"
+          ],
+          "harmRung": "incapacitating",
+          "gains": "broaden"
         }
       ],
       "gated": "learned",
@@ -867,7 +873,12 @@
           "rank": 1,
           "name": "The Unmaking of Walls",
           "grants": "Unmake a whole built structure back to its raw, un-built material.",
-          "cannot": "It touches only the made, it costs nearly all you have, and it CANNOT be undone — the ones who understand building are the ones who feel the unmaking most."
+          "cannot": "It touches only the made, it costs nearly all you have, and it CANNOT be undone — the ones who understand building are the ones who feel the unmaking most.",
+          "functions": [
+            "break"
+          ],
+          "harmRung": "damaging",
+          "gains": "broaden"
         }
       ],
       "gated": "learned",

@@ -346,7 +346,16 @@ export function saveCharacter(c, { stamp = true } = {}) {
   // load-latest can tell which copy is fresher. Adopting a remote copy passes
   // stamp:false to preserve the remote's own timestamps.
   if (stamp) { c.updatedAt = Date.now(); c.rev = (c.rev || 0) + 1; }
-  localStorage.setItem(LS.character(c.id), JSON.stringify(c));
+  const payload = JSON.stringify(c);
+  try {
+    localStorage.setItem(LS.character(c.id), payload);
+  } catch (err) {
+    // SNG-157: the character save is the one write that MUST land. If storage is full, the
+    // expendable tenants are the recovery snapshots — evict them all and retry before failing.
+    console.warn("[save] character write failed, evicting recovery snapshots and retrying:", err?.name || err);
+    for (const k of recoveryKeys()) { try { localStorage.removeItem(k); } catch { /* best-effort */ } }
+    localStorage.setItem(LS.character(c.id), payload); // still throws if genuinely out of room — the caller must see that
+  }
   const idx = listCharacters().filter(e => e.id !== c.id);
   idx.push({ id: c.id, name: c.name, level: c.level, origin: c.origin });
   localStorage.setItem(LS.characterIndex, JSON.stringify(idx));
@@ -370,12 +379,63 @@ export function adoptRemoteCharacter(remote) {
   return remote;
 }
 
+const RECOVERY_KEEP = 3; // newest N recovery snapshots per character; older ones are evicted
+
+/** Every recovery key on this device, oldest first. Keys embed `updatedAt`, but they are sorted
+ *  NUMERICALLY on that stamp rather than lexically — a lexical sort ranks "10" before "2" and
+ *  would evict the newest snapshot instead of the oldest the moment stamp widths differ. */
+export function recoveryKeys(characterId = null) {
+  const out = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    const k = localStorage.key(i);
+    if (!k || !k.startsWith("singularity.recovery.")) continue;
+    if (characterId && !k.startsWith(`singularity.recovery.${characterId}.`)) continue;
+    out.push(k);
+  }
+  const stampOf = (k) => {
+    const m = k.match(/^singularity\.recovery\.(.+?)\.(\d+)(?:\..*)?$/);
+    return m ? Number(m[2]) : 0;
+  };
+  return out.sort((a, b) => stampOf(a) - stampOf(b) || a.localeCompare(b));
+}
+
+/** Drop all but the newest `keep` snapshots for a character. Returns the keys removed. */
+export function pruneRecovery(characterId, keep = RECOVERY_KEEP) {
+  const keys = recoveryKeys(characterId);
+  const drop = keys.slice(0, Math.max(0, keys.length - keep));
+  for (const k of drop) { try { localStorage.removeItem(k); } catch { /* eviction is best-effort */ } }
+  return drop;
+}
+
 /** Preserve a losing copy under a recovery key so a both-advanced conflict never
- *  destroys work. Returns the recovery key. */
+ *  destroys work. Returns the recovery key, or null if it could not be written.
+ *
+ *  SNG-157: this is a SAFETY NET, and a safety net must never be the thing that breaks the
+ *  app. It previously wrote a full character copy under a NEW key every time (keyed by
+ *  `updatedAt`) and never pruned — so snapshots accumulated until localStorage's ~5MB quota
+ *  was gone, and the raw `setItem` threw QuotaExceededError straight through the character
+ *  load path and HUNG it. Now: prune first, write inside a guard, and on a quota failure
+ *  evict harder and retry once before giving up quietly. Losing a snapshot is survivable;
+ *  losing the ability to load your character is not. */
 export function preserveRecovery(c, tag = "") {
   const key = `singularity.recovery.${c.id}.${c.updatedAt || 0}${tag ? "." + tag : ""}`;
-  localStorage.setItem(key, JSON.stringify(c));
-  return key;
+  const payload = JSON.stringify(c);
+  pruneRecovery(c.id, RECOVERY_KEEP - 1); // make room for the one we're about to write
+  try {
+    localStorage.setItem(key, payload);
+    return key;
+  } catch (err) {
+    console.warn("[recovery] snapshot write failed, evicting older copies and retrying:", err?.name || err);
+    pruneRecovery(c.id, 0);                                  // this character's older copies
+    for (const k of recoveryKeys()) { try { localStorage.removeItem(k); } catch { /* best-effort */ } } // then every character's
+    try {
+      localStorage.setItem(key, payload);
+      return key;
+    } catch (err2) {
+      console.warn("[recovery] snapshot skipped — storage full. Play continues; the remote copy is authoritative.", err2?.name || err2);
+      return null;
+    }
+  }
 }
 
 export function loadCharacter(id) {

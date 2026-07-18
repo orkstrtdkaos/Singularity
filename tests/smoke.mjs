@@ -4036,6 +4036,56 @@ await (async () => {
     npcPortraitTier(pell) === "partner"); // the app skips when n._portraitTier === this tier
 }
 
+// --- SNG-157: storage quota — a safety net must never brick the app it protects ---
+{
+  // A faithful localStorage stand-in with a hard byte budget, so the quota path is EXERCISED,
+  // not asserted about. This is the failure Erik hit: QuotaExceededError out of preserveRecovery,
+  // thrown straight through the character-load path.
+  const makeLS = (budget) => {
+    const m = new Map();
+    const used = () => [...m.entries()].reduce((n, [k, v]) => n + k.length + v.length, 0);
+    return {
+      get length() { return m.size; },
+      key(i) { return [...m.keys()][i] ?? null; },
+      getItem(k) { return m.has(k) ? m.get(k) : null; },
+      removeItem(k) { m.delete(k); },
+      setItem(k, v) {
+        const prev = m.get(k) ?? "";
+        if (used() - (k.length + prev.length) + k.length + String(v).length > budget) {
+          const e = new Error("exceeded the quota"); e.name = "QuotaExceededError"; throw e;
+        }
+        m.set(k, String(v));
+      },
+      _used: used
+    };
+  };
+  const prevLS = globalThis.localStorage;
+  const big = { id: "char-x", updatedAt: 1, blob: "x".repeat(20000) };
+  globalThis.localStorage = makeLS(120000);
+  const st = await import('../engine/state.js?sng157');
+
+  // many snapshots over time must NOT grow without bound
+  for (let i = 1; i <= 12; i++) st.preserveRecovery({ ...big, updatedAt: i });
+  const keys = st.recoveryKeys("char-x");
+  check("157: recovery snapshots are pruned to the newest few, never accumulated", keys.length <= 3 && keys.length > 0);
+  check("157: the newest snapshot is the one kept", keys[keys.length - 1].endsWith(".12"));
+
+  // a genuinely full store must NOT throw out of the safety net
+  globalThis.localStorage = makeLS(500); // far too small for any snapshot
+  const st2 = await import('../engine/state.js?sng157b');
+  let threw = false, ret;
+  try { ret = st2.preserveRecovery(big); } catch { threw = true; }
+  check("157: preserveRecovery NEVER throws when storage is full (it returns null instead)", !threw && ret === null);
+
+  // the character save evicts recovery snapshots to make room for itself (budget fits ONE of them)
+  globalThis.localStorage = makeLS(30000);
+  const st3 = await import('../engine/state.js?sng157c');
+  st3.preserveRecovery({ id: "char-y", updatedAt: 1, blob: "y".repeat(20000) });
+  const savedOk = (() => { try { st3.saveCharacter({ id: "char-y", name: "Y", blob: "z".repeat(20000) }); return true; } catch { return false; } })();
+  check("157: a character save evicts recovery snapshots rather than failing", savedOk && st3.recoveryKeys("char-y").length === 0);
+  globalThis.localStorage = prevLS;
+}
+
 // --- SNG-152: smartClamp's bound is a HARD ceiling (the ellipsis is reserved, not appended past it) ---
 {
   const { smartClamp } = await import('../engine/namematch.js');

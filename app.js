@@ -55,7 +55,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // SNG-155: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.110";
+const APP_VERSION = "1.8.111";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -163,6 +163,12 @@ let wheelFnFilter = new Set(); // SNG-124 Phase B: active function-family filter
 let character = null;    // active character
 let profile = null;      // the player's profile (the human)
 let sceneTurns = [];     // recent beats: {summary, narration} for scene continuity
+// SNG-157: the stored scene history is BOUNDED. It was unbounded, and a long-running scene that
+// never ended grew to 169 turns (~341KB) on a real save — 59% of a 600KB character — which is what
+// exhausted the localStorage quota and hung character load. Every consumer reads at most
+// `.slice(-6)` (the GM prompt, the gambit extractor), so 40 is generous headroom, not a trim of
+// anything anyone reads. The chronicle keeps each scene's summary independently on scene end.
+const SCENE_TURN_CAP = 40;
 let sceneState = null;   // authoritative scene anchor: setting, npcsPresent, objects, threads
 let busy = false;
 let _discoverAutoRan = false; // SNG-087: auto-run cross-device discovery at most once per session
@@ -1120,6 +1126,15 @@ function migrate(c) {
   // on "writing your story…" forever. Clear them on load so a stale busy self-heals.
   delete c._chronicleBusy; delete c._chronicleError;
   (c.sessions || []).forEach(s => { if (s) delete s._recapBusy; });
+  // SNG-157: heal a save already bloated by the unbounded scene history — Erik's carried 169 turns
+  // (~341KB, 59% of the file), which is what blew the storage quota. Trimming on load means an
+  // affected save fixes itself on next open instead of needing a wipe. Nothing readable is lost:
+  // consumers read at most the last 6, and each ended scene's summary lives in the chronicle.
+  if (c.activeScene?.turns?.length > SCENE_TURN_CAP) {
+    const before = c.activeScene.turns.length;
+    c.activeScene.turns = c.activeScene.turns.slice(-SCENE_TURN_CAP);
+    console.warn(`[migrate] trimmed scene history ${before} → ${SCENE_TURN_CAP} turns (SNG-157 storage bound)`);
+  }
   normalizeInventory(c, CONTENT.items);
   if (!c.clock) c.clock = newClock();
   if (!c.companions) c.companions = [];
@@ -2934,6 +2949,7 @@ function applyTurn(turn, resolution, playerWords = null) {
   // chronicle + scene persistence
   if (turn.sceneSummary) {
     sceneTurns.push({ player: playerWords || null, summary: turn.sceneSummary, narration: turn.narration || "" }); // SNG-081: keep the player's half
+    if (sceneTurns.length > SCENE_TURN_CAP) sceneTurns = sceneTurns.slice(-SCENE_TURN_CAP); // SNG-157: bounded storage
     if (turn.sceneEnded) { character.chronicle.push(turn.sceneSummary); sceneTurns = []; sceneState = null; character._intentAsked = null; } // SNG-145: a new scene may ask again
   }
   character.activeScene = turn.sceneEnded ? null : { locationId: character.currentLocationId, turns: sceneTurns, lastTurn: turn, sceneState };

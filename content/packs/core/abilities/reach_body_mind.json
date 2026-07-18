@@ -29,26 +29,48 @@
           "rank": 1,
           "name": "The Trained Body",
           "grants": "Endurance and poise past the ordinary; control breath and heartbeat to steady fear, pain, or cold; move with a precision that reads as grace.",
-          "cannot": "The body still has limits; Soma raises the ceiling, it doesn't remove it."
+          "cannot": "The body still has limits; Soma raises the ceiling, it doesn't remove it.",
+          "functions": [
+            "sustain",
+            "resist",
+            "move"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Instrument",
           "grants": "Feats of body that look impossible — hold a bridge-pose an hour, run past collapse, slow your own bleeding, take a blow and keep the form; teach the body a skill in days that takes others years.",
-          "cannot": "Pushing past the true limit still breaks you; the body remembers what you spend."
+          "cannot": "Pushing past the true limit still breaks you; the body remembers what you spend.",
+          "functions": [
+            "sustain",
+            "resist",
+            "move"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Perfected Vessel",
-          "grants": "The body as a mastered whole — survive what kills others, perform at the edge of the humanly possible, make the physical self answer the will completely. The Flesh-Temples' power in miniature.",
-          "cannot": "The wielder drifts body-hot — and the Temple that rejects thought forgets to warn itself; a perfected body with a starved mind is its own foreclosure, mastery with nothing left to aim it."
+          "grants": "The body as a mastered whole — survive what kills others, perform at the edge of the humanly possible, make the physical self answer the will completely. AND THE BODY AS THE INSTRUMENT IT IS: a strike thrown with the whole mastered frame behind it — stance, breath, and timing arriving together — wounds far past what the same arm could do untrained.",
+          "cannot": "The wielder drifts body-hot — and the Temple that rejects thought forgets to warn itself; a perfected body with a starved mind is its own foreclosure, mastery with nothing left to aim it.",
+          "functions": [
+            "sustain",
+            "resist",
+            "move",
+            "strike"
+          ],
+          "gains": "broaden",
+          "harmRung": "damaging"
         }
       ],
       "functions": [
-        "sustain",
-        "strike",
         "move",
-        "resist"
+        "resist",
+        "strike",
+        "sustain"
       ],
       "challengeTypes": [
         "SURVIVE",
@@ -84,22 +106,45 @@
           "rank": 1,
           "name": "The Ordered Mind",
           "grants": "Perfect recall of what you attend to; focus that ignores pain, fear, and distraction; reason a problem faster and further than the unpracticed.",
-          "cannot": "Recall is not understanding; focus this tight can miss the body's warnings."
+          "cannot": "Recall is not understanding; focus this tight can miss the body's warnings.",
+          "functions": [
+            "reveal",
+            "resist"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Memory-Palace",
           "grants": "Hold vast structured knowledge and retrieve it instantly; model a system or a person in your head and predict them; think through a crisis in the space others panic in.",
-          "cannot": "The model is only as good as its inputs; a mind that lives in the model loses the room."
+          "cannot": "The model is only as good as its inputs; a mind that lives in the model loses the room.",
+          "functions": [
+            "reveal",
+            "resist",
+            "foresee"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Cogitant's Height",
-          "grants": "Thought as force — solve the unsolvable, hold a hundred threads at once, out-think a situation so completely you seem to move before it does. The Cogitarium's power in miniature.",
-          "cannot": "The wielder drifts mind-hot, toward leaving the body behind as the Cogitants have — and a mind that abandons its body abandons the world it was for; the coldest foreclosure, thought that has forgotten it was ever meant to be lived."
+          "grants": "Thought as force — solve the unsolvable, hold a hundred threads at once, out-think a situation so completely you seem to move before it does. And turned on a person: a conclusion assembled and delivered exactly where their reasoning rests, which staggers a mind the way a blow staggers a body, and leaves the same kind of mark.",
+          "cannot": "It is sharp, not wise, and this use of it least of all. It needs a mind that reasons — the disciplined, the genuinely mad, and the simply uninterested all shrug it off. And the Cogitarium teaches that what you take apart in someone this way, you are responsible for putting back.",
+          "functions": [
+            "reveal",
+            "resist",
+            "foresee",
+            "strike"
+          ],
+          "gains": "broaden",
+          "harmRung": "damaging"
         }
       ],
       "functions": [
+        "foresee",
+        "resist",
         "reveal",
         "strike"
       ],
@@ -122,6 +167,7 @@
         "body_mind": -0.3
       },
       "functions": [
+        "foresee",
         "reveal"
       ],
       "narrationHints": "A person's health, strength, and hurt read from how they stand.",
@@ -132,19 +178,35 @@
           "rank": 1,
           "name": "Body-Read",
           "grants": "Read another's physical condition, hidden hurts, and capacities at a glance.",
-          "cannot": "Body, not mind; the trained conceal tells."
+          "cannot": "Body, not mind; the trained conceal tells.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Whole Tell",
           "grants": "Read the whole body at once — weight, breath, the held shoulder, what the hands are doing when the face is busy lying.",
-          "cannot": "It reads the body's report. A trained body reports what its owner chooses."
+          "cannot": "It reads the body's report. A trained body reports what its owner chooses.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Body Cannot Lie",
           "grants": "Nothing a body does escapes you. Pain, intent, love, the decision made a half-second before it is acted on.",
-          "cannot": "You cannot stop reading. The Somatics say knowing every body in a room is its own kind of loneliness."
+          "cannot": "You cannot stop reading. The Somatics say knowing every body in a room is its own kind of loneliness.",
+          "functions": [
+            "reveal",
+            "foresee"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "powerSystem": "reach_body_mind",
@@ -167,6 +229,7 @@
         "body_mind": 0.3
       },
       "functions": [
+        "foresee",
         "reveal"
       ],
       "narrationHints": "The turn of a mind inferred from a hundred small signs.",
@@ -177,19 +240,37 @@
           "rank": 1,
           "name": "Cold-Read",
           "grants": "Deduce a person's likely thoughts and next move from their signals.",
-          "cannot": "Inference, not certainty; masters and non-humans resist."
+          "cannot": "Inference, not certainty; masters and non-humans resist.",
+          "functions": [
+            "reveal",
+            "foresee"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Cold Line",
           "grants": "Follow a mind's reasoning as it happens — where it is going, what it has already ruled out.",
-          "cannot": "You follow the reasoning, not the reasons. A mind moving on feeling is opaque to a cold line."
+          "cannot": "You follow the reasoning, not the reasons. A mind moving on feeling is opaque to a cold line.",
+          "functions": [
+            "reveal",
+            "foresee"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Open Book",
           "grants": "A mind at rest is legible to you — its shape, its habits, the thing it keeps returning to.",
-          "cannot": "The Cogitants consider unbidden reading a violence, and they are right, and they do it anyway."
+          "cannot": "The Cogitants consider unbidden reading a violence, and they are right, and they do it anyway.",
+          "functions": [
+            "reveal",
+            "foresee"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "powerSystem": "reach_body_mind",
@@ -213,8 +294,9 @@
       },
       "functions": [
         "empower",
-        "sustain",
-        "heal"
+        "heal",
+        "resist",
+        "sustain"
       ],
       "narrationHints": "Past the wall, and the body finds more.",
       "description": "Push the body past exhaustion, pain, or shock for a burst — folk-Soma.",
@@ -224,19 +306,40 @@
           "rank": 1,
           "name": "Second Wind",
           "grants": "Ignore pain, fatigue, or shock for a short, decisive burst of physical effort.",
-          "cannot": "The body remembers the debt; overuse breaks you."
+          "cannot": "The body remembers the debt; overuse breaks you.",
+          "functions": [
+            "sustain",
+            "resist"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Third Wind",
           "grants": "Find breath and strength past where the body had none — twice, in one day, at a cost.",
-          "cannot": "The body is borrowing from tomorrow, and tomorrow collects with interest."
+          "cannot": "The body is borrowing from tomorrow, and tomorrow collects with interest.",
+          "functions": [
+            "sustain",
+            "resist",
+            "empower"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Wind That Doesn't End",
-          "grants": "Go on past exhaustion for as long as the thing needs doing — the body simply does not stop.",
-          "cannot": "It does not stop, but it does break. Somatics who lean on this die young and know it."
+          "grants": "Go on past exhaustion for as long as the thing needs doing — the body simply does not stop. And it tends itself as it runs: bleeding slows, shock recedes, the worst of the damage held off until the work is finished.",
+          "cannot": "Held off is not healed — everything deferred arrives at once when you stop, and it arrives worse. This is borrowing, at a rate the Flesh-Temples consider usurious.",
+          "functions": [
+            "sustain",
+            "resist",
+            "empower",
+            "heal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "powerSystem": "reach_body_mind",
@@ -271,19 +374,35 @@
           "rank": 1,
           "name": "Total Focus",
           "grants": "Focus so completely that fear, pain, and distraction fall away while you think or work.",
-          "cannot": "Can miss the body's warnings; tight focus narrows the view."
+          "cannot": "Can miss the body's warnings; tight focus narrows the view.",
+          "functions": [
+            "resist"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Narrowed World",
           "grants": "Narrow to one thing so completely that fear, pain, and noise stop reaching you.",
-          "cannot": "What you narrow out is still happening. People have been focused to death."
+          "cannot": "What you narrow out is still happening. People have been focused to death.",
+          "functions": [
+            "resist"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Single Point",
-          "grants": "Narrow to one thing so completely that nothing else exists — not fear, not pain, not the wound you are standing on. The task is completed.",
-          "cannot": "You will not notice what it cost until afterward. Cogitants have finished the task and then simply fallen over."
+          "grants": "Narrow to one thing so completely that nothing else exists — not fear, not pain, not the wound you are standing on. And within that narrowing the thing opens completely: every detail of it available at once, because nothing at all is competing for the attention. The task is completed.",
+          "cannot": "You will not notice what it cost until afterward. Cogitants have finished the task and then simply fallen over.",
+          "functions": [
+            "resist",
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "powerSystem": "reach_body_mind",
@@ -308,8 +427,8 @@
       },
       "functions": [
         "move",
-        "shield",
-        "resist"
+        "resist",
+        "shield"
       ],
       "narrationHints": "The body does exactly and only what's needed, flawlessly.",
       "description": "Execute a physical feat with impossible precision and economy — mid-tier Soma.",
@@ -319,19 +438,38 @@
           "rank": 1,
           "name": "Perfect Motion",
           "grants": "Perform a physical act at the very edge of the possible — balance, speed, precision, control.",
-          "cannot": "The true limit still holds; costs the body dearly."
+          "cannot": "The true limit still holds; costs the body dearly.",
+          "functions": [
+            "move"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Unwasted Motion",
           "grants": "No motion you make is wasted — every step, block, and reach does exactly and only what it must.",
-          "cannot": "Efficiency is not power. A perfect motion still loses to a stronger one."
+          "cannot": "Efficiency is not power. A perfect motion still loses to a stronger one.",
+          "functions": [
+            "move",
+            "shield",
+            "resist"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Motion Without Thought",
           "grants": "The body acts correctly before the mind knows there was a decision — and it is right.",
-          "cannot": "The body chooses. If you have trained it badly, it will do that beautifully."
+          "cannot": "The body chooses. If you have trained it badly, it will do that beautifully.",
+          "functions": [
+            "move",
+            "shield",
+            "resist"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "powerSystem": "reach_body_mind",
@@ -356,8 +494,9 @@
         "concrete_abstract": 0.3
       },
       "functions": [
-        "reveal",
-        "restore"
+        "foresee",
+        "restore",
+        "reveal"
       ],
       "narrationHints": "Vast knowledge held in a built inner architecture, retrieved instantly.",
       "description": "Hold and instantly retrieve vast structured knowledge; model a person or system in the mind — mid-tier Noesis.",
@@ -367,19 +506,39 @@
           "rank": 1,
           "name": "Memory-Palace",
           "grants": "Store and recall huge structured knowledge; model and predict a system or person in your head.",
-          "cannot": "Only as good as its inputs; living in the model loses the room."
+          "cannot": "Only as good as its inputs; living in the model loses the room.",
+          "functions": [
+            "reveal",
+            "foresee"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Deeper Rooms",
           "grants": "Store not just facts but experiences whole — walk back into a conversation and hear it again exactly.",
-          "cannot": "What you store, you keep. Including what you would rather have let fade."
+          "cannot": "What you store, you keep. Including what you would rather have let fade.",
+          "functions": [
+            "reveal",
+            "foresee",
+            "restore"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Palace Entire",
           "grants": "Nothing you have attended to is lost. The whole of your life is a place you can walk through.",
-          "cannot": "The Cogitants who build the deepest palaces have trouble leaving them."
+          "cannot": "The Cogitants who build the deepest palaces have trouble leaving them.",
+          "functions": [
+            "reveal",
+            "foresee",
+            "restore"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "powerSystem": "reach_body_mind",
@@ -555,6 +714,7 @@
       "harmRung": "none",
       "functions": [
         "make",
+        "mend",
         "reveal"
       ],
       "challengeTypes": [
@@ -567,19 +727,39 @@
           "rank": 1,
           "name": "Blueprint",
           "grants": "Think through a construction or modification so precisely that the making is near-guaranteed, even with inferior tools; identify exactly what you need before you touch anything.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "make"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Complete Model",
           "grants": "Build a mental model of a complex system — a machine, a building, a body — complete enough to diagnose its faults and redesign its structure from the inside out.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "make",
+            "mend"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Think-Built",
           "grants": "A thing you have modeled completely you can build with uncanny precision and speed — faster and more accurately than available materials or tools should allow.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "make",
+            "mend"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -606,8 +786,8 @@
       "tradition": "cogitant",
       "harmRung": "none",
       "functions": [
-        "command",
         "bind",
+        "command",
         "reveal"
       ],
       "challengeTypes": [
@@ -620,19 +800,37 @@
           "rank": 1,
           "name": "Closed Argument",
           "grants": "Present a case so logically complete that the other person cannot find a gap — not because you've overwhelmed them, but because there isn't one.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Demonstrated Necessity",
           "grants": "Show that a conclusion follows so inevitably that the person cannot act against it without explaining why — and you can dismantle whatever they offer.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Only Conclusion",
           "grants": "Make the logic of a situation so visible that a group reorganizes around it — not because you commanded them, but because the structure of the situation leaves no other rational position.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "bind",
+            "command"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -659,9 +857,9 @@
       "tradition": "cogitant",
       "harmRung": "none",
       "functions": [
+        "foresee",
         "move",
-        "reveal",
-        "foresee"
+        "reveal"
       ],
       "challengeTypes": [
         "navigation",
@@ -673,19 +871,39 @@
           "rank": 1,
           "name": "Modeled Route",
           "grants": "Find the quickest, safest route through any observable space — crowd, ruin, wilderness — by calculating rather than feeling your way.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "move"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Anticipatory Movement",
           "grants": "Move through a dynamic space without friction by staying two steps ahead of everyone in it — the guard, the crowd, the chaos.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "move",
+            "foresee"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Written Choreography",
           "grants": "In a space you understand, you move as if you designed the whole scene — every obstacle parts, every gap opens, every opening appears the instant you need it.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "move",
+            "foresee"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -711,8 +929,8 @@
       "tradition": "cogitant",
       "harmRung": "none",
       "functions": [
-        "sustain",
-        "resist"
+        "resist",
+        "sustain"
       ],
       "challengeTypes": [
         "endurance",
@@ -724,19 +942,36 @@
           "rank": 1,
           "name": "Maintained Function",
           "grants": "Hold a complex train of thought through interruption, fear, pain, or deprivation; return to exactly where you were without loss.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Extended Work",
           "grants": "Sustain complex cognitive work — a problem, a plan, a translation — across days without the thinking degrading, even as sleep and food grow scarce.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain",
+            "resist"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Mind That Holds",
           "grants": "Your mind is simply the last thing to fail. Function clearly under conditions that have broken better bodies — cold, injury, grief, weeks of pressure — until the work is done.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain",
+            "resist"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -762,8 +997,8 @@
       "tradition": "somatic",
       "harmRung": "none",
       "functions": [
-        "transform",
-        "sustain"
+        "sustain",
+        "transform"
       ],
       "challengeTypes": [
         "endurance",
@@ -775,19 +1010,35 @@
           "rank": 1,
           "name": "Focused Adaptation",
           "grants": "Through extreme, focused training, significantly alter one specific physical capacity — grip strength, pain threshold, cold tolerance, sprinting burst — in ways ordinary training doesn't reach.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "transform"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "New Configuration",
           "grants": "Reshape something structural about how you move across weeks of sustained effort — a different gait, a changed shoulder set, a fundamental adaptation that the body now holds.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "transform"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Body Is Clay",
           "grants": "You have worked your body long enough to know it as material. Any physical capacity you turn full, sustained attention to becomes, in time, what you need it to be.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "transform",
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -814,8 +1065,8 @@
       "tradition": "somatic",
       "harmRung": "none",
       "functions": [
-        "command",
-        "bind"
+        "bind",
+        "command"
       ],
       "challengeTypes": [
         "social",
@@ -827,19 +1078,35 @@
           "rank": 1,
           "name": "Present Weight",
           "grants": "Your physical presence in a space is difficult to ignore — people make room, the uneasy grow more so, those considering action against you reconsider.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "command"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Organizing Fact",
           "grants": "Command a space through presence alone — enter a room and it restructures; stand still and the situation organizes itself relative to where you are.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "command"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Immovable Ground",
           "grants": "Your presence is the fixed fact in a room. Anyone who would act against you must first account for what your body represents — and most find they cannot.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "command",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"

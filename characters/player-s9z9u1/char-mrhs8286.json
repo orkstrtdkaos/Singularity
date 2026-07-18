@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 12,
-  "xp": 1117,
+  "xp": 1122,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -85,7 +85,7 @@
   "maxHealth": 85,
   "health": 85,
   "maxEnergy": 155,
-  "energy": 155,
+  "energy": 150,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -981,203 +981,146 @@
         "player": "Did you accept my Weir mark?  Are you happy?",
         "summary": "Maret confirms payment is settled and offers road-wisdom about the rain.",
         "narration": "You find Maret Doss at the foot of the stairs — she is carrying a folded stack of linens with the economical precision of someone who has done this ten thousand times and made peace with every one of them. She doesn't stop walking when she answers you.\n\n\"The Weir mark's in the ledger.\" She doesn't look up. \"Settled at check-in. You know it is.\"\n\nShe sets the linens on the hall bench and smooths the top fold once with the back of her hand. Then she does look at you — briefly, the flat professional attention of a woman who reads guests the way a river-reader reads weather: fast, accurate, and without opinion about what she finds.\n\n\"Happy's not my trade,\" she says. \"Satisfied — yes. The trough will want draining before the third hour. The rain's going to sit on the roof until supper and then clear. The road to Millbrook runs wetter than it looks for the first quarter-mile after a squall, so if you're leaving today, wait for the mud to settle or plan on slower going than you'd like.\"\n\nShe picks the linens back up. The conversation, from her perspective, has concluded — thoroughly and without unkindness."
+      },
+      {
+        "player": "[GM completely misunderstood the last beat.  I was asking Pell if she accepted my soul mark into her and if that made her happy.]",
+        "summary": "Pell confirms — plainly, without management — that she has accepted the Weir mark and is happy. Quieter than she expected, but real.",
+        "narration": "You are still in the cooled bath, her hands on your forearms, the junction-conduit warmth the only heat left in the room. The rain is ticking against the diffusion panels — steady now, settled into itself. You ask it the right way, the direct way, the way the last few hours have earned: *Did you accept my Weir mark? Are you happy?*\n\nPell is quiet for a moment. Not managing it — there is nothing left to manage, and you can both feel that absence like a room that has been cleaned out and found to be larger than the furniture suggested. She looks at your forearms where her hands are resting, then up at you.\n\n\"Yes,\" she says. The first one plainly — the soul-wife name, the grain exchanged through Memory's rune, the consummation: all of it accepted, all of it inside her now, not separate from her. She doesn't qualify it or file it after. \"Yes to the mark. It's in me the way ironsense is — I don't look for it. It's just there when I reach.\"\n\nThen the second question, and she is slower with it — not because she's uncertain, but because she's being precise. Her hands shift on your forearms, a small deliberate press. \"Happy,\" she says, like she is checking the word against something real and finding it fits well enough. \"Yes. I think that's the word. It doesn't feel like I thought it would — it's quieter than I expected. But it's there.\" Her eyes hold yours. No ledger-close. \"You?\""
       }
     ],
     "lastTurn": {
-      "narration": "You find Maret Doss at the foot of the stairs — she is carrying a folded stack of linens with the economical precision of someone who has done this ten thousand times and made peace with every one of them. She doesn't stop walking when she answers you.\n\n\"The Weir mark's in the ledger.\" She doesn't look up. \"Settled at check-in. You know it is.\"\n\nShe sets the linens on the hall bench and smooths the top fold once with the back of her hand. Then she does look at you — briefly, the flat professional attention of a woman who reads guests the way a river-reader reads weather: fast, accurate, and without opinion about what she finds.\n\n\"Happy's not my trade,\" she says. \"Satisfied — yes. The trough will want draining before the third hour. The rain's going to sit on the roof until supper and then clear. The road to Millbrook runs wetter than it looks for the first quarter-mile after a squall, so if you're leaving today, wait for the mud to settle or plan on slower going than you'd like.\"\n\nShe picks the linens back up. The conversation, from her perspective, has concluded — thoroughly and without unkindness.",
-      "sceneSummary": "Maret confirms payment is settled and offers road-wisdom about the rain.",
+      "narration": "You are still in the cooled bath, her hands on your forearms, the junction-conduit warmth the only heat left in the room. The rain is ticking against the diffusion panels — steady now, settled into itself. You ask it the right way, the direct way, the way the last few hours have earned: *Did you accept my Weir mark? Are you happy?*\n\nPell is quiet for a moment. Not managing it — there is nothing left to manage, and you can both feel that absence like a room that has been cleaned out and found to be larger than the furniture suggested. She looks at your forearms where her hands are resting, then up at you.\n\n\"Yes,\" she says. The first one plainly — the soul-wife name, the grain exchanged through Memory's rune, the consummation: all of it accepted, all of it inside her now, not separate from her. She doesn't qualify it or file it after. \"Yes to the mark. It's in me the way ironsense is — I don't look for it. It's just there when I reach.\"\n\nThen the second question, and she is slower with it — not because she's uncertain, but because she's being precise. Her hands shift on your forearms, a small deliberate press. \"Happy,\" she says, like she is checking the word against something real and finding it fits well enough. \"Yes. I think that's the word. It doesn't feel like I thought it would — it's quieter than I expected. But it's there.\" Her eyes hold yours. No ledger-close. \"You?\"",
+      "sceneSummary": "Pell confirms — plainly, without management — that she has accepted the Weir mark and is happy. Quieter than she expected, but real.",
       "choices": [
         {
-          "label": "Ask Maret about the conduit pulse at the third hour of the night — obliquely, as an infrastructure question, not naming what you saw",
+          "label": "Answer her in kind — yes, and name exactly what this quiet feels like to you.",
           "attribute": "social",
-          "subAttribute": "insight",
-          "axes": {
-            "falsehood_truth": 0.4
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Accept her road advice and go back upstairs to dress and pack — wait out the rain, leave when the mud settles",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "travel",
-            "careful"
+            "romantic"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Thank her and leave now anyway — the rain is a squall, the road is manageable, and Calvar's lamp has been dark since morning",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
+          "label": "Say nothing — let your hands answer. Pull her closer against your shoulder and stay in the cooled water a little longer.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Name what comes next — the road, Calvar's lamp signal, the departure. Begin moving toward it without losing this.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "plan"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Get out of the bath, dry off, and start preparing the gear — the afternoon is burning and Calvar waits.",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "difficulty": 0,
           "intentTags": [
             "travel"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Maret, straight-faced, about the guest in the corner room who hasn't come down today — the one she hasn't mentioned",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "falsehood_truth": 0.3
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "negotiate"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         }
       ],
-      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
+        "energy": 0
       },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "The Low Lamp Inn hallway at the foot of the stairs — pale sandstone, junction-conduit warmth rising through the floor, rain audible against the diffusion panels outside. Afternoon light flat and gray through the deep-set windows.",
+        "setting": "The bath trough room at the Low Lamp Inn — the water has cooled, steam long gone, junction-conduit warmth coming up through the stone floor. Rain ticking steadily against the diffusion panels outside. Afternoon light flat and gray at the partition window.",
         "npcsPresent": [
           {
-            "name": "Maret Doss",
-            "state": "Carrying a folded stack of linens, now picking them back up — conversation concluded from her side."
+            "name": "Pell",
+            "state": "Settled against Silas's shoulder in the cooled bath, hands on his forearms — eyes on his face, waiting for his answer. No management in her anywhere."
           },
           {
             "name": "Huginn",
-            "state": "On his rafter upstairs. Silent."
-          },
-          {
-            "name": "Pell",
-            "state": "Upstairs in the bath trough room, cooled water, no management in her anywhere."
+            "state": "On a rafter above. Silent. Watching with the particular patience of something that has nowhere else to be."
           }
         ],
         "objects": [
-          "Folded linens — on the hall bench, smoothed once",
-          "Hall bench — against the wall at the stair foot",
+          "Bath trough — cooled water, both of them still in it",
+          "Memory (spear) — leaned in the corner of the room",
           "Junction-conduit warmth — through the pale stone floor",
-          "Memory (spear) — leaned in the corner of the bath trough room upstairs",
-          "Bath trough — cooled, upstairs",
-          "Boots — at Silas's bed's foot, upstairs"
+          "Partition window — flat gray afternoon light, rain audible against diffusion panels"
         ],
         "threads": [
+          "Pell has answered both questions — plainly, without management; she is waiting for Silas's answer",
+          "Calvar's lamp signal — the group is overdue to move; first light was the agreed departure",
           "The conduit pulse at the third hour — not resolved",
-          "The guest in the corner room who hasn't come down — Maret hasn't mentioned it",
-          "Calvar's lamp signal passed — the group is overdue to move",
-          "The rain — sitting on the roof until supper, per Maret; the road runs wetter than it looks for the first quarter-mile"
+          "The road runs wetter than it looks for the first quarter-mile after rain — and it is raining"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
-          "npcId": "maret-doss",
-          "name": "Maret Doss",
-          "role": "Innkeeper, Low Lamp Inn — Edge District",
-          "description": "A compact woman of sixty-odd years; does not ask your name, your business, or where you're going; reads guests fast and accurately; keeps the ledger and the road-wisdom both, and offers them with equal economy.",
-          "note": "Confirmed the Weir mark is settled in the ledger. Offered unprompted road advice: the road to Millbrook runs wetter than it looks for the first quarter-mile after a squall.",
+          "op": "update",
+          "npcId": "pell",
+          "name": "Pell",
+          "note": "Confirmed the Weir mark accepted — 'it's in me the way ironsense is, I don't look for it, it's just there when I reach.' Confirmed happy — quieter than expected, but real. Asked the same question back.",
           "learned": [
-            "Does not deal in happy — satisfied is her metric, and she named it plainly",
-            "Knows the road to Millbrook's mud behavior after rain — practical and specific",
-            "The trough wants draining before the third hour"
+            "The Weir mark sits in her like ironsense — present without search, not theoretical",
+            "She names happiness as quieter than she expected and real — not performed"
           ],
-          "skillsObserved": [
-            "accurate ledger-keeping without ceremony",
-            "reading a guest's situation and offering exactly relevant practical advice"
-          ],
-          "relationshipDelta": 1,
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the Low Lamp Inn — running the hall, linens in hand, conversation finished."
+          "statusNote": "In the cooled bath trough with Silas — the mark accepted, the question answered plainly, waiting for his.",
+          "bondType": "romantic",
+          "bondStage": "committed"
         }
       ],
-      "factUpdates": [],
-      "placeUpdates": [
-        {
-          "note": "Maret Doss is the innkeeper — keeps the ledger, does not ask after guests' business, knows the local roads in detail. The road to Millbrook runs wetter than it looks for the first quarter-mile after a squall.",
-          "subPlace": {
-            "name": "Low Lamp Inn hallway",
-            "note": "Foot of the stairs — pale sandstone, hall bench, junction-conduit warmth, where Maret moves between floors.",
-            "visited": true
-          }
-        }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief exchange at the foot of the stairs."
-      },
       "codexUpdates": [
         {
-          "topic": "maret-doss",
-          "label": "Maret Doss",
+          "topic": "pell",
+          "label": "Pell",
           "kind": "person",
-          "entityId": "maret-doss",
-          "fact": "Innkeeper of the Low Lamp Inn — keeps the ledger without ceremony, reads guests fast, offers practical road-knowledge without being asked. Confirmed Silas's Weir mark settled at check-in. Knows the Millbrook road runs wetter than it looks for the first quarter-mile after rain.",
+          "entityId": "pell",
+          "fact": "Confirmed the Weir mark accepted — 'in me the way ironsense is, I don't look for it, it's just there when I reach.' Named happiness as quieter than she expected but real. Asked the same question back.",
           "links": [
-            "radiant-plateau-edge",
+            "the-low-lamp-inn",
             "find-the-engineer",
-            "the-low-lamp-inn"
+            "huginn"
           ]
         }
       ],
-      "sceneEnded": false
+      "timeOps": {
+        "hoursPassed": 0,
+        "why": "A still moment in the cooled bath — no time has passed."
+      }
     },
     "sceneState": {
-      "setting": "The Low Lamp Inn hallway at the foot of the stairs — pale sandstone, junction-conduit warmth rising through the floor, rain audible against the diffusion panels outside. Afternoon light flat and gray through the deep-set windows.",
+      "setting": "The bath trough room at the Low Lamp Inn — the water has cooled, steam long gone, junction-conduit warmth coming up through the stone floor. Rain ticking steadily against the diffusion panels outside. Afternoon light flat and gray at the partition window.",
       "npcsPresent": [
         {
-          "name": "Maret Doss",
-          "state": "Carrying a folded stack of linens, now picking them back up — conversation concluded from her side."
+          "name": "Pell",
+          "state": "Settled against Silas's shoulder in the cooled bath, hands on his forearms — eyes on his face, waiting for his answer. N"
         },
         {
           "name": "Huginn",
-          "state": "On his rafter upstairs. Silent."
-        },
-        {
-          "name": "Pell",
-          "state": "Upstairs in the bath trough room, cooled water, no management in her anywhere."
+          "state": "On a rafter above. Silent. Watching with the particular patience of something that has nowhere else to be."
         }
       ],
       "objects": [
-        "Folded linens — on the hall bench, smoothed once",
-        "Hall bench — against the wall at the stair foot",
+        "Bath trough — cooled water, both of them still in it",
+        "Memory (spear) — leaned in the corner of the room",
         "Junction-conduit warmth — through the pale stone floor",
-        "Memory (spear) — leaned in the corner of the bath trough room upstairs",
-        "Bath trough — cooled, upstairs",
-        "Boots — at Silas's bed's foot, upstairs"
+        "Partition window — flat gray afternoon light, rain audible against diffusion pan"
       ],
       "threads": [
+        "Pell has answered both questions — plainly, without management; she is waiting for Silas's answer",
+        "Calvar's lamp signal — the group is overdue to move; first light was the agreed departure",
         "The conduit pulse at the third hour — not resolved",
-        "The guest in the corner room who hasn't come down — Maret hasn't mentioned it",
-        "Calvar's lamp signal passed — the group is overdue to move",
-        "The rain — sitting on the roof until supper, per Maret; the road runs wetter than it looks for the first quarter-mile"
+        "The road runs wetter than it looks for the first quarter-mile after rain — and it is raining"
       ]
     }
   },
@@ -1603,7 +1546,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d4] Responded to Silas's touch at the shallow end of waking — drew his hand to her collarbone, pressed back into him. The habit is entirely down. She is letting the morning be what it ",
         "[d4] Said 'good morning' plainly at first light — no management, no ledger, the habit entirely absent. Pulled Silas's hand in rather than holding it still. The whole of her is present.",
         "[d4] Named what she wants at first light — the bath, together, and whatever comes after — in the plain register that has nothing left to manage.",
         "[d4] Received 'you are what comes after' without management — went still in the way of a thing correctly named, then crossed to the bath without reconsidering anything. Now settled agai",
@@ -1612,17 +1554,18 @@
         "[d4] Received 'I haven't finished paying attention yet' with an unguarded laugh — gave her weight to Silas more completely than before. Entirely present, no habit remaining.",
         "[d4] Said 'yes, we're ready' to Huginn on behalf of both of them — unguarded, warm, not performing it",
         "[d4] The consummation — in the bath trough, unhurried, entirely herself. No management, no ledger-close. Her hands on his forearms throughout. Settled against his shoulder afterward wit",
-        "[d4] Answered Silas's plain question plainly — she thought there'd be a different register on the other side, but it's the same, just more room. Said it precisely, not defensively."
+        "[d4] Answered Silas's plain question plainly — she thought there'd be a different register on the other side, but it's the same, just more room. Said it precisely, not defensively.",
+        "[d4] Confirmed the Weir mark accepted — 'it's in me the way ironsense is, I don't look for it, it's just there when I reach.' Confirmed happy — quieter than expected, but real. Asked th"
       ],
       "knownFacts": [
-        "Her shoulders are a blacksmith's shoulders — broad, built, utterly unselfconscious about it",
-        "Silas has been reading her body the way he reads worked ground — methodically, without hurry, since before the forge",
         "She lets go at the hip — the ledger closes there; he named it and she felt him name it",
         "Her laugh is real and low when it is not managed — it moves through her whole back.",
         "Receives intimacy the way she receives all work she intends to do well — present, deliberate, paying the same quality of attention she was given",
         "Her voice is low and specific when it surfaces in this register — naming things without filing them afterward",
         "Settled afterward without the habit returning — the want named, answered, and still there",
-        "Thought there'd be a new register after the consummation; found instead the same one with more space in it — named it as 'more room'"
+        "Thought there'd be a new register after the consummation; found instead the same one with more space in it — named it as 'more room'",
+        "The Weir mark sits in her like ironsense — present without search, not theoretical",
+        "She names happiness as quieter than she expected and real — not performed"
       ],
       "skillsObserved": [
         "precise technical questioning under field conditions",
@@ -1633,7 +1576,7 @@
         "ironsense transmitted deliberately through a rune-threshold"
       ],
       "status": "active",
-      "statusNote": "In the cold bath trough with Silas — settled, the habit entirely gone, answering plainly and without management.",
+      "statusNote": "In the cooled bath trough with Silas — the mark accepted, the question answered plainly, waiting for his.",
       "lastSeen": {
         "locationId": "the-low-lamp-inn",
         "day": 4
@@ -2504,7 +2447,6 @@
         "label": "Pell",
         "kind": "person",
         "facts": [
-          "[d2] Witnessed Silas shadowstep for the first time at the overhang camp — does not have the name for it, but named it plainly as not wrestling. Did not flinch; recalibrated.",
           "[d2] Said yes — plainly, without qualifier — when asked directly at the overhang camp. The habit of managing it failed, once, completely.",
           "[d2] Fully unguarded at the overhang camp on World-day 16 evening — said Silas's name plainly, stopped managing, the habit broke entirely through to the end. No ledger-close; no armor.",
           "[d2] Improvises under field conditions — has run pressurized pre-Transition systems with components missing and cobbled the rest. Does not need the original instrument; needs to understand why it was there",
@@ -2527,7 +2469,8 @@
           "[d3] Named soul wife aloud on World-day 17 evening — she received it without management, said alright in the register that goes all the way in, and took his wrist. The habit is down in every sense. The bon",
           "[d3] Memory's rune can carry plain presence across the threshold — not grain, not craft-mark, just the fact of being here. Pell received it; her hand went still in a way that had nothing left to wait for.",
           "[d4] Named plainly as 'what comes after' on World-day 17 morning — she received it without management, said alright, and crossed to the bath without reconsidering. The habit is entirely gone.",
-          "[d4] The consummation — World-day 17 midday, the bath trough, the habit entirely gone. She pays attention in return the way ironsense reads worked metal: finding the grain, the flaw-lines, the places where"
+          "[d4] The consummation — World-day 17 midday, the bath trough, the habit entirely gone. She pays attention in return the way ironsense reads worked metal: finding the grain, the flaw-lines, the places where",
+          "[d4] Confirmed the Weir mark accepted — 'in me the way ironsense is, I don't look for it, it's just there when I reach.' Named happiness as quieter than she expected but real. Asked the same question back."
         ],
         "links": [
           "calvar",
@@ -3651,8 +3594,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=11860&nologo=true",
-  "updatedAt": 1784332799181,
-  "rev": 613,
+  "updatedAt": 1784332920252,
+  "rev": 614,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4581,7 +4524,7 @@
   "syncedAt": 1784292613822,
   "teachers": {},
   "regionsKnown": {
-    "valley": 248
+    "valley": 249
   },
   "foreclosed": [
     "rootkin",
@@ -4630,10 +4573,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-17T17:39:40.705Z",
-      "lastAt": "2026-07-17T23:59:59.180Z",
+      "lastAt": "2026-07-18T00:02:00.251Z",
       "startDay": 17,
-      "endDay": 17,
-      "beats": 56
+      "endDay": 18,
+      "beats": 57
     }
   ],
   "company": [

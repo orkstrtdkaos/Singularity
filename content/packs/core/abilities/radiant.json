@@ -656,7 +656,7 @@
       },
       "functions": [
         "move",
-        "reveal"
+        "travel"
       ],
       "narrationHints": "Made briefly of your own held light, you rise — and for a while the ground is a suggestion.",
       "description": "True flight, radiant: become light-buoyant and fly under control for a sustained interval — hover, rise, cross open sky. Blazingly visible (you ARE a light), so no stealth, but the sky is yours.",
@@ -666,7 +666,13 @@
           "rank": 1,
           "name": "Light-Borne",
           "grants": "Fly under full control for a sustained interval — hover, climb, cross the open air.",
-          "cannot": "You shine — seen for miles, no concealment; the interval ends and you must be down or near it; costly."
+          "cannot": "You shine — seen for miles, no concealment; the interval ends and you must be down or near it; costly.",
+          "functions": [
+            "move",
+            "travel"
+          ],
+          "harmRung": "none",
+          "gains": "broaden"
         }
       ],
       "powerSystem": "radiant",

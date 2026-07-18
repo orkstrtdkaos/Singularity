@@ -109,9 +109,8 @@
         "dark_light": 0.2
       },
       "functions": [
-        "reveal",
-        "restore",
-        "break"
+        "break",
+        "reveal"
       ],
       "narrationHints": "Everything hidden in a place or person surfaces at once — every lie, every secret, the whole shape of the truth.",
       "description": "The investigate capstone: lay bare the ENTIRE truth of a person, place, or mystery in one act — every deception, every hidden thing, the full pattern. Even the Cathedral of Convincing's true-pieces-false-whole yields to it.",
@@ -121,7 +120,13 @@
           "rank": 1,
           "name": "The Whole Truth",
           "grants": "Reveal the complete hidden truth of a subject at once — the only thing that cracks a lie built from true pieces.",
-          "cannot": "Overwhelming — you learn things you can't unlearn; the powerful will kill to keep some truths buried; reveals, cannot compel."
+          "cannot": "Overwhelming — you learn things you can't unlearn; the powerful will kill to keep some truths buried; reveals, cannot compel.",
+          "functions": [
+            "reveal",
+            "break"
+          ],
+          "harmRung": "none",
+          "gains": "broaden"
         }
       ],
       "powerSystem": "reach_falsehood_truth",
@@ -822,7 +827,12 @@
           "rank": 1,
           "name": "The Necessary Fiction",
           "grants": "Craft a fiction so complete it functions as true for as long as it goes unexamined.",
-          "cannot": "It fails against determined truth, it costs nearly all you have, and its deepest danger is to its maker — tell a lie well enough and you may forget it was one."
+          "cannot": "It fails against determined truth, it costs nearly all you have, and its deepest danger is to its maker — tell a lie well enough and you may forget it was one.",
+          "functions": [
+            "deceive"
+          ],
+          "harmRung": "none",
+          "gains": "broaden"
         }
       ],
       "gated": "learned",

@@ -1,0 +1,376 @@
+{
+  "schemaVersion": 1,
+  "id": "coliseum_grid",
+  "kind": "contest_design",
+  "note": "SNG-149 — the Great Coliseum's blind grid. Neither competitor picks the contest: each brings FOUR function families drawn from what they actually practise, A's four become the rows and B's four the columns, both pick blind and simultaneously, and the intersection is the contest. The cell belongs to neither of them. Grounded on FUNCTION_FAMILIES (engine/functions.js) per spec amendment A2 — 8 closed enums, so the complete space is 36 cells and is finite. Authored by Aevi (PO) 2026-07-18 per Law 15: design canon lives in content.",
+  "whyBlind": "Under a blind grid a champion must be COMPLETE — you cannot take a title on your strongest cell because you will be pulled into your weakest. That is what makes the Coliseum a way of life rather than a fight club: every people has a standing reason to develop all eight families in their own idiom, continuously. Skill challenges and combat are the same structure at different cells, which is why participation is universal rather than martial.",
+  "competitorAxis": {
+    "rule": "A competitor's four families are the four they have the most ability-RANKS in, counted via familiesOfAbility() over their learned abilities.",
+    "ties": "Broken by total ranks, then by the family's order in FUNCTION_FAMILIES. Deterministic on purpose — a competitor can compute their own axis and so can their opponent.",
+    "fewerThanFour": "A narrow competitor fills remaining slots from their tradition's functionCoverage (tradition_profiles.json). A tradition cannot supply a family it does not teach, so a genuinely narrow fighter enters with a short axis and the grid is 4xN — a visible, fair disadvantage the crowd can read.",
+    "visibility": "Each competitor's axis is PUBLIC before the pick; only the pick itself is blind. You know what your opponent can be pulled into. You do not know which one they chose."
+  },
+  "secondGrid": "The cell names a contest KIND. A second 4x4 inside the cell narrows to the specific challenge the same way — blind, simultaneous, drawn from the two competitors' backgrounds rather than their functions. The first grid asks what KIND of person you are; the second asks who you specifically have been.",
+  "cells": [
+    {
+      "id": "harm_restore",
+      "families": [
+        "HARM",
+        "RESTORE"
+      ],
+      "name": "The Standing Wound",
+      "contest": "One competitor inflicts a real but bounded harm on a shared subject — a beast, a construct, a volunteer of the Mercy-House — and the other must undo it faster than it is dealt.",
+      "judged": "Judged on the subject's condition at the bell. A perfect restorer beats a reckless harmer; a surgical harmer beats a slow one."
+    },
+    {
+      "id": "harm_protect",
+      "families": [
+        "HARM",
+        "PROTECT"
+      ],
+      "name": "The Held Line",
+      "contest": "A thing that must not be reached, and a competitor who must reach it. Ten passes, then the roles swap.",
+      "judged": "Judged on passes survived, not damage dealt — the shield-side wins by lasting, and a defender who never counters still wins."
+    },
+    {
+      "id": "harm_know",
+      "families": [
+        "HARM",
+        "KNOW"
+      ],
+      "name": "The Named Blow",
+      "contest": "The knower studies the harmer's first three exchanges, then must call each subsequent strike before it lands.",
+      "judged": "Judged on calls made correct against strikes landed. The harmer wins by being unreadable, which usually means being worse."
+    },
+    {
+      "id": "harm_shape",
+      "families": [
+        "HARM",
+        "SHAPE"
+      ],
+      "name": "The Made Wall",
+      "contest": "The shaper builds under time; the harmer takes it apart. Both work simultaneously on the same structure.",
+      "judged": "Judged on what stands at the bell. A masterwork raised too slowly loses to a hut raised in time."
+    },
+    {
+      "id": "harm_influence",
+      "families": [
+        "HARM",
+        "INFLUENCE"
+      ],
+      "name": "The Refused Fight",
+      "contest": "The influencer must talk the harmer out of the contest, on the sand, in front of the crowd. The harmer may not simply refuse to listen — the forms require an answer.",
+      "judged": "Judged by the crowd's read on whether the refusal was earned or merely permitted."
+    },
+    {
+      "id": "harm_move",
+      "families": [
+        "HARM",
+        "MOVE"
+      ],
+      "name": "The Long Yard",
+      "contest": "A hundred paces of open sand. The mover crosses; the harmer prevents it. No barriers, no cover.",
+      "judged": "Judged on distance made. This is the cell that most looks like a fight and least is one."
+    },
+    {
+      "id": "harm_sustain",
+      "families": [
+        "HARM",
+        "SUSTAIN"
+      ],
+      "name": "The Attrition",
+      "contest": "Neither may end the other. Both must simply continue, under real strain, until one stops.",
+      "judged": "Judged on who is still working. The most brutal cell on the board and the one with the fewest injuries."
+    },
+    {
+      "id": "restore_protect",
+      "families": [
+        "RESTORE",
+        "PROTECT"
+      ],
+      "name": "The Kept Ward",
+      "contest": "A subject under continuous degrading pressure. One prevents the harm arriving; the other undoes what gets through.",
+      "judged": "Judged on the subject, jointly — the only cell where competitors can BOTH lose to the pressure, and they often do."
+    },
+    {
+      "id": "restore_know",
+      "families": [
+        "RESTORE",
+        "KNOW"
+      ],
+      "name": "The Hidden Ailment",
+      "contest": "A subject carrying a condition neither competitor was told. The knower must name it; the restorer must cure it without naming it.",
+      "judged": "Judged on which arrives first. Diagnosis and treatment are genuinely different skills and this cell is where peoples learn that."
+    },
+    {
+      "id": "restore_shape",
+      "families": [
+        "RESTORE",
+        "SHAPE"
+      ],
+      "name": "The Second Making",
+      "contest": "A ruined object. One restores it to what it was; the other remakes it into something better suited to now.",
+      "judged": "Judged by the crowd on which answer the object deserved. The most-argued cell in the Coliseum's history."
+    },
+    {
+      "id": "restore_influence",
+      "families": [
+        "RESTORE",
+        "INFLUENCE"
+      ],
+      "name": "The Unwilling Patient",
+      "contest": "A subject who does not want to be helped and says so. The restorer must mend; the influencer must obtain consent, or refuse to.",
+      "judged": "Judged on outcome AND on consent — a cure taken by force scores nothing."
+    },
+    {
+      "id": "restore_move",
+      "families": [
+        "RESTORE",
+        "MOVE"
+      ],
+      "name": "The Carried",
+      "contest": "A wounded subject and a distance. One tends, one carries, and the clock does not stop for either.",
+      "judged": "Judged on the subject's condition at the far end. Run too fast and you arrive with a corpse."
+    },
+    {
+      "id": "restore_sustain",
+      "families": [
+        "RESTORE",
+        "SUSTAIN"
+      ],
+      "name": "The Long Watch",
+      "contest": "A subject who will not improve for hours. One keeps them alive; the other keeps them comfortable. Both must remain competent past exhaustion.",
+      "judged": "Judged at dawn. The Coliseum schedules this cell overnight and the crowd genuinely stays."
+    },
+    {
+      "id": "protect_know",
+      "families": [
+        "PROTECT",
+        "KNOW"
+      ],
+      "name": "The Blind Ward",
+      "contest": "A threat arrives from one of many directions, known only to the knower, who may not speak — only act. The warder guards on that reading alone.",
+      "judged": "Judged on the ward holding. The cell that most rewards two strangers learning to trust inside ten minutes."
+    },
+    {
+      "id": "protect_shape",
+      "families": [
+        "PROTECT",
+        "SHAPE"
+      ],
+      "name": "The Raised Ground",
+      "contest": "One builds a defensible position; the other must hold a bare one against the same assault.",
+      "judged": "Judged on both holding. The shaper is proving that preparation IS protection, which the Stillhold disputes annually."
+    },
+    {
+      "id": "protect_influence",
+      "families": [
+        "PROTECT",
+        "INFLUENCE"
+      ],
+      "name": "The Sanctuary Claim",
+      "contest": "A pursued subject reaches the sand. One shelters them by standing; the other by argument. The pursuers are Coliseum staff and they are not gentle.",
+      "judged": "Judged on the subject leaving free."
+    },
+    {
+      "id": "protect_move",
+      "families": [
+        "PROTECT",
+        "MOVE"
+      ],
+      "name": "The Moving Ward",
+      "contest": "A subject who must cross open ground under fire. One shields; the other routes. Neither may do the other's job.",
+      "judged": "Judged on arrival intact."
+    },
+    {
+      "id": "protect_sustain",
+      "families": [
+        "PROTECT",
+        "SUSTAIN"
+      ],
+      "name": "The Siege Hour",
+      "contest": "A position under pressure that does not relent and cannot be won — only outlasted.",
+      "judged": "Judged on the position held. Marchers and Stillhold both claim this cell and their records are near-identical."
+    },
+    {
+      "id": "know_shape",
+      "families": [
+        "KNOW",
+        "SHAPE"
+      ],
+      "name": "The Read Making",
+      "contest": "The shaper builds behind a screen. The knower must describe what is being made, in detail, while it is being made.",
+      "judged": "Judged on the description against the object. The shaper may not build something pointless — the forms require a real thing."
+    },
+    {
+      "id": "know_influence",
+      "families": [
+        "KNOW",
+        "INFLUENCE"
+      ],
+      "name": "The Honest Room",
+      "contest": "A crowd of Coliseum staff, one of whom is lying about something material. The knower must find them; the influencer must get the crowd to give them up.",
+      "judged": "Judged on who arrives first, and the loser must say plainly how the winner did it."
+    },
+    {
+      "id": "know_move",
+      "families": [
+        "KNOW",
+        "MOVE"
+      ],
+      "name": "The Unmapped Run",
+      "contest": "A course neither has seen. The mover runs it; the knower reads it from the gallery and may call one instruction per leg.",
+      "judged": "Judged on the run. A perfect reader and a slow runner still lose."
+    },
+    {
+      "id": "know_sustain",
+      "families": [
+        "KNOW",
+        "SUSTAIN"
+      ],
+      "name": "The Long Attention",
+      "contest": "A subject that changes almost imperceptibly over hours. Both must report every change. Missing one ends your account of it.",
+      "judged": "Judged on the account. Hourkeepers dominate this cell and everyone finds it dull except them."
+    },
+    {
+      "id": "shape_influence",
+      "families": [
+        "SHAPE",
+        "INFLUENCE"
+      ],
+      "name": "The Commissioned Work",
+      "contest": "A patron from the crowd, chosen at random, wants something. One makes it; the other must find out what they actually want.",
+      "judged": "Judged by the patron, whose verdict is final and frequently unreasonable."
+    },
+    {
+      "id": "shape_move",
+      "families": [
+        "SHAPE",
+        "MOVE"
+      ],
+      "name": "The Crossing Made",
+      "contest": "A gap that cannot be crossed. One builds the way over; the other finds the way around. Both are timed.",
+      "judged": "Judged on arrival. The oldest cell on the board and the one the Horizon Reach was founded arguing about."
+    },
+    {
+      "id": "shape_sustain",
+      "families": [
+        "SHAPE",
+        "SUSTAIN"
+      ],
+      "name": "The Work That Lasts",
+      "contest": "Two makers, one long shift. Not who builds better — who is still building well at the end of it.",
+      "judged": "Judged on the last hour's work alone, which the competitors are told beforehand and still cannot prepare for."
+    },
+    {
+      "id": "influence_move",
+      "families": [
+        "INFLUENCE",
+        "MOVE"
+      ],
+      "name": "The Delegation",
+      "contest": "A message that must reach a person across the city, through Coliseum staff instructed to obstruct. One goes; one sends.",
+      "judged": "Judged on the message arriving intact and understood."
+    },
+    {
+      "id": "influence_sustain",
+      "families": [
+        "INFLUENCE",
+        "SUSTAIN"
+      ],
+      "name": "The Held Room",
+      "contest": "A negotiation with no natural end, deliberately run past the point of usefulness. Both must remain courteous, coherent, and honest.",
+      "judged": "Judged on who is still arguing in good faith when the other stops."
+    },
+    {
+      "id": "move_sustain",
+      "families": [
+        "MOVE",
+        "SUSTAIN"
+      ],
+      "name": "The Road",
+      "contest": "A distance too long to sprint and too short to camp. One paces; one pushes.",
+      "judged": "Judged on arrival AND on condition. The Coliseum's plainest cell and its most quoted lesson."
+    },
+    {
+      "id": "harm_harm",
+      "families": [
+        "HARM",
+        "HARM"
+      ],
+      "name": "The Mirror Edge",
+      "contest": "Both harm the same bounded subject under identical constraint.",
+      "judged": "Judged on precision, not force — the Coliseum has never awarded this cell to the heavier hand."
+    },
+    {
+      "id": "restore_restore",
+      "families": [
+        "RESTORE",
+        "RESTORE"
+      ],
+      "name": "The Two Physicians",
+      "contest": "Identical subjects, identical conditions, side by side.",
+      "judged": "Judged on the subjects. The cleanest comparison on the board and the least dramatic."
+    },
+    {
+      "id": "protect_protect",
+      "families": [
+        "PROTECT",
+        "PROTECT"
+      ],
+      "name": "The Twin Walls",
+      "contest": "Identical positions under identical assault.",
+      "judged": "Judged on what is left standing."
+    },
+    {
+      "id": "know_know",
+      "families": [
+        "KNOW",
+        "KNOW"
+      ],
+      "name": "The Same Question",
+      "contest": "One subject, one hidden truth, two readers who may not confer.",
+      "judged": "Judged on the account given, in sealed writing, opened together."
+    },
+    {
+      "id": "shape_shape",
+      "families": [
+        "SHAPE",
+        "SHAPE"
+      ],
+      "name": "The Matched Commission",
+      "contest": "Same materials, same brief, same hours.",
+      "judged": "Judged by three masters of unrelated traditions, which is why it is never unanimous."
+    },
+    {
+      "id": "influence_influence",
+      "families": [
+        "INFLUENCE",
+        "INFLUENCE"
+      ],
+      "name": "The Divided Room",
+      "contest": "One crowd, split in half, one competitor to each. Same ask.",
+      "judged": "Judged on the halves. The crowd knows it is the subject and enjoys this enormously."
+    },
+    {
+      "id": "move_move",
+      "families": [
+        "MOVE",
+        "MOVE"
+      ],
+      "name": "The Straight Line",
+      "contest": "The oldest contest in the world.",
+      "judged": "Judged on arrival. The Coliseum keeps this cell because someone must."
+    },
+    {
+      "id": "sustain_sustain",
+      "families": [
+        "SUSTAIN",
+        "SUSTAIN"
+      ],
+      "name": "The Sitting",
+      "contest": "Neither competitor does anything. Both simply continue, under load, indefinitely.",
+      "judged": "Judged on who rises first. There is no spectacle in it and the stands are always full."
+    }
+  ]
+}

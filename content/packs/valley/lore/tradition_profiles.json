@@ -832,6 +832,70 @@
         "transform",
         "travel"
       ]
+    },
+    {
+      "id": "marcher",
+      "name": "The Marcher",
+      "axis": "violence ↔ peace",
+      "pole": "violence",
+      "home": "The Riven Marches and the Redline",
+      "oneLine": "Force done correctly, under forms, with the whole cost visible. Not brutality — competence about the worst thing.",
+      "theCraft": "The violence-pole tradition holds that force will be used whether or not anyone is skilled about it, and that skill is what separates a fight that ends from a fight that spreads. Marchers read a fight before it takes shape, control ground, disarm rather than kill where the forms allow, and keep people alive inside it.",
+      "atCreation": "See a fight's shape and a foe's tell a beat early. Disarm or disable a single opponent without killing them. Improvise a usable weapon from whatever is at hand.",
+      "withMastery": "A whole field controlled, opponents standing where they did not choose to stand. A group kept fighting past what they should survive. And Last Form — a formal duel ended in one undeniable exchange, because you read them completely and answered perfectly.",
+      "theTrade": "The forms are real constraints: Last Form fails against a foe who refuses the duel or has no form to read, and killing where the forms forbid costs a Marcher their standing. Competence at violence does not make you right about when to use it.",
+      "whoPractices": "The Riven Marches, the Redline's dueling culture, and soldiers who lived long enough to get good.",
+      "acrossTheAxis": "Stillcraft ends fights by making them unnecessary; the Marcher ends them by being better at them. Both are trying to make the violence stop.",
+      "functionCoverage": [
+        "bind",
+        "break",
+        "command",
+        "empower",
+        "foresee",
+        "heal",
+        "hinder",
+        "make",
+        "move",
+        "resist",
+        "restore",
+        "reveal",
+        "shield",
+        "strike",
+        "sustain",
+        "ward"
+      ]
+    },
+    {
+      "id": "stillhold",
+      "name": "Stillcraft",
+      "axis": "violence ↔ peace",
+      "pole": "peace",
+      "home": "The Stillhold",
+      "oneLine": "Peace as an active craft, not an absence. Truces that hold, ground that stays neutral, and a hard edge of its own.",
+      "theCraft": "The peace-pole tradition halts conflicts before they break, reads what each side actually needs underneath what they demand, and binds truces to something both sides genuinely value so the peace outlasts the mood that made it.",
+      "atCreation": "De-escalate a tense moment before it turns. Read the true feeling in a gathering and find who is about to break the peace. Stand between two parties at the moment before harm.",
+      "withMastery": "Peace at the scale of peoples — a generational feud ended, a war stood down. Sanctuary woven into a place deeply enough to survive sustained pressure. And a peace bound so well that breaking it costs more than the war would, with both sides able to see that.",
+      "theTrade": "Stillcraft is slow and it needs both sides to have something they actually want. And it is not gentle: The Price Shown puts a reckoning in a person that they carry afterward and cannot unthink — an act of force performed by people who have chosen not to use any other kind.",
+      "whoPractices": "The Stillhold, its brokers, and the ones who walk into rooms nobody else will enter.",
+      "acrossTheAxis": "Both poles are honest that violence is coming. They disagree about whether the answer is to be excellent at it or to make it unnecessary — and the Marches and the Stillhold need each other more than either admits.",
+      "functionCoverage": [
+        "bind",
+        "break",
+        "command",
+        "empower",
+        "foresee",
+        "heal",
+        "hinder",
+        "make",
+        "move",
+        "resist",
+        "restore",
+        "reveal",
+        "shield",
+        "strike",
+        "sustain",
+        "ward"
+      ]
     }
   ]
 }

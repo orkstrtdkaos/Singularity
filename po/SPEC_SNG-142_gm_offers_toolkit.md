@@ -26,6 +26,33 @@ A compact block the engine builds each turn (like the RIPE FOR MASTERY + POSSIBL
 - **Aspiration-aware pacing.** When the fiction can naturally present a chance to practice a declared aspiration, favor it — the world quietly offering the player the growth they said they wanted. (Not forcing; presenting.)
 - **Combination discovery, invited.** The GM may HINT that two of the player's crafts might reach further together ("deathsense catches the end; order_sense catches the pattern — together, perhaps, something you haven't tried") — turning the well-built combo RESOLVER into an occasional combo INVITATION.
 
+## PART 1B — The toolkit is the WHOLE situation: items, companions, party (Erik amendment)
+> **Erik: "This includes item, companion and party member inclusion in all of the above."** The toolkit a good GM offers isn't just the character's skills — it's everything they can reach for: what they CARRY, who travels WITH them, and what the PARTY brings.
+
+> **Verified at HEAD — same reactive/proactive gap, one layer wider:** items (INVENTORY block, gm.js L191), companions (L190), and party members (L189) ARE in the GM context — but framed as SCENE-DRESSING, not TOOLKIT. The rules say "reference items by exact name," "voice companions true to persona," "narrate party members" — the GM knows they're PRESENT; it's never prompted to OFFER them as options, and companion/party detail carries persona, not offerable CAPABILITY. So the GM won't nudge "Huginn could scout that ledge," "Pell's smithing could mend it," or "your and Kaede's blades together might—".
+
+**Every part of SNG-142 extends to include these:**
+- **The TOOLKIT block gains:**
+  - **Items as options** — not just "you carry Memory" but "Memory (the deathbound spear) could serve HERE" when a beat fits a carried item; especially a growing/legendary item (SNG-137 itemUpdates) or a consumable the player forgot they have.
+  - **Companion capabilities** — what each companion CAN DO, not just who they are: Huginn (a carrion bird that attends endings) can scout, watch, reach where you can't. Surface the capability so the GM can offer it.
+  - **Party-member capabilities** — in a shared family scene, what the OTHER players' characters bring: Aelyn's rootkin life-craft, Saehara's blade-mind. So the GM can invite cooperative play ("this is beyond you alone — but not beyond you and Aelyn").
+- **Combinations extend across ALL of them** — the novel/combo invitation (Part 1) isn't just ability+ability. It's:
+  - **ability + item** ("your deathsense, channeled through Memory, might reach further")
+  - **ability + companion** ("send Huginn ahead and your order_sense reads what he sees")
+  - **ability + party member** ("Saehara's stillness and your deathsense, together, could hold that threshold") — the cooperative combo, the heart of family play.
+- **Aspiration practice can involve them** — an aspiration advanced WITH a companion or party member (a bond deepened, a craft taught) counts; the GM can steer a beat toward that shared growth.
+- **Attribute actions include the situation** — "your Strength, or Pell's, could force it" — a plain attribute action isn't only the character's own.
+
+## PART 1B — surfaces (added)
+| Module | Change |
+|---|---|
+| `companionsDetail` / `partyDetail` build | Include each companion's/party-member's OFFERABLE CAPABILITY (what they can do), not only persona — so the toolkit block and rule 16B can offer them. |
+| `inventoryDetail` → toolkit | Flag items that FIT the current beat (a carried tool/consumable/legendary item the moment calls for) into the toolkit block, not just the flat inventory list. |
+| Rule 16B (extended) | The single offered option MAY be an item, a companion action, a party-member's capability, or a cross-actor combination — same "offer ONE, lightly, never a menu, never on clear intent" discipline. |
+| `tests/*` (added) | The toolkit block surfaces a fitting carried item + a companion capability + (in a shared scene) a party-member capability; the GM can offer an ability+item / ability+companion / ability+party-member combination; a cooperative combo appears in a shared family scene; still ≤1 offer/beat, never a menu. |
+
+**Guards (extended):** cooperative offers respect each actor's agency (never volunteer another PLAYER's character into an action they didn't choose — the GM OFFERS the possibility to the party, it doesn't commit another player); companion actions respect the companion's persona/boundaries (rule 9, unchanged); a party-member combo is an INVITATION to cooperate, resolved only if that player agrees. The minor-safety + bond rules on companions/party are unchanged (SNG-108).
+
 ## ENGINE / UI SURFACES
 | Module | Change |
 |---|---|

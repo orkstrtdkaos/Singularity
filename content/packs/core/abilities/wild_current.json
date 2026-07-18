@@ -16,8 +16,8 @@
         "chaos_order": -0.6
       },
       "functions": [
-        "transform",
-        "make"
+        "make",
+        "transform"
       ],
       "narrationHints": "You offer the working and it BLOOMS — generous, dazzling, exactly what was needed and never once what you asked for, the tangled current improvising on your intent like a musician who heard the tune only once.",
       "description": "The first wild-current working of the fae — a gift shaped from the tangled substrate, potent and giving, but it comes out its OWN way. The Wild Half does not obey; it accretes, it improvises, it gives you something better or stranger than you aimed for. Nobody is driving, and that is the gift and the danger both.",
@@ -27,7 +27,12 @@
           "rank": 1,
           "name": "The Churn's Gift",
           "grants": "Shape a potent working from the wild substrate — generous and strong, but never exactly as aimed.",
-          "cannot": "You cannot control its precise form, it gives its own way rather than yours, and the wild current owes you nothing — it may give more than you asked, or sideways to it."
+          "cannot": "You cannot control its precise form, it gives its own way rather than yours, and the wild current owes you nothing — it may give more than you asked, or sideways to it.",
+          "functions": [
+            "transform",
+            "make"
+          ],
+          "harmRung": "none"
         }
       ],
       "gated": "learned",
@@ -49,8 +54,8 @@
         "death_life": 0.2
       },
       "functions": [
-        "transform",
-        "open"
+        "open",
+        "transform"
       ],
       "narrationHints": "Life and ruin at once — growth erupting where you touched, blooming and rotting and blooming again, the fabricated and the living currents tangled past any telling which is which, and none of it where you left it a moment ago.",
       "description": "The deeper wild working — the tangled substrate let loose as growth-and-decay together, life and unmaking in one uncontrolled flowering. The fae art of nothing-twice: a burst of wild creation that is also wild dissolution, potent and beautiful and impossible to hold in one shape.",
@@ -60,7 +65,12 @@
           "rank": 1,
           "name": "The Wild Flowering",
           "grants": "Unleash a wild flowering of tangled growth-and-ruin — potent, beautiful, and beyond precise control.",
-          "cannot": "It cannot be aimed at pure creation or pure destruction, what it makes will not hold its shape, and the wild current, once opened, flowers where IT wills, not only where you meant."
+          "cannot": "It cannot be aimed at pure creation or pure destruction, what it makes will not hold its shape, and the wild current, once opened, flowers where IT wills, not only where you meant.",
+          "functions": [
+            "transform",
+            "open"
+          ],
+          "harmRung": "incapacitating"
         }
       ],
       "gated": "learned",
@@ -93,7 +103,12 @@
           "rank": 1,
           "name": "The Honest Bargain",
           "grants": "Seal a fair but wild bargain that keeps itself — the terms exact, the fulfilling uncontrollable.",
-          "cannot": "It needs a genuine bargain to bind, it is fair to the letter (which is the horror), and once sealed it fulfills its terms its OWN way — you cannot take it back, and you cannot fully steer how it comes due."
+          "cannot": "It needs a genuine bargain to bind, it is fair to the letter (which is the horror), and once sealed it fulfills its terms its OWN way — you cannot take it back, and you cannot fully steer how it comes due.",
+          "functions": [
+            "bind",
+            "command"
+          ],
+          "harmRung": "incapacitating"
         }
       ],
       "gated": "learned",

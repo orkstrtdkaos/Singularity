@@ -207,6 +207,18 @@ export const GM_CONTEXT = [
   { key: "waygateDetail", builder: "waygate.waygateBlockForGM (SNG-148)", carries: ["gate here", "aimable gates", "hub routing"],
     reachedBy: "map ◈ Waygate control + GM offer", spec: "§9", views: ["turn"],
     build: (env) => waygateBlockForGM(env.character, env.CONTENT.locations) },
+  // SNG-158: scenes were never closing (a real save ran 169 beats in ONE scene), so the chronicle
+  // stayed thin and the save bloated. The contract now tells the GM when to close; this tells it
+  // that THIS scene has run long. Silent until it matters — pressure, not nagging (the SNG-080 shape).
+  { key: "scenePacingDetail", builder: "gm_registry (scene length pressure)", carries: ["scene has run long", "find its close"],
+    reachedBy: "always (paced)", spec: "§11", views: ["turn"],
+    build: (env) => {
+      const n = env.sceneTurns?.length || 0;
+      if (n < 18) return null;
+      return n >= 30
+        ? `THIS SCENE HAS RUN ${n} BEATS — far past a natural length. Bring it to an honest close THIS BEAT unless the character is mid-action: let the moment finish, and emit "sceneEnded": true with a sceneSummary covering the whole scene. A new scene opens on the next beat.`
+        : `This scene has run ${n} beats. Start looking for its natural close — when the current exchange resolves, end it ("sceneEnded": true) with a summing-up. Do not force it mid-action.`;
+    } },
 ];
 
 /** Assemble the GM context for a view by ITERATING the registry (Law 16 / §23.2).

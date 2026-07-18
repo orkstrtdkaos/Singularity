@@ -4036,6 +4036,28 @@ await (async () => {
     npcPortraitTier(pell) === "partner"); // the app skips when n._portraitTier === this tier
 }
 
+// --- SNG-158: scenes actually close (contract + engine pressure + a manual control) ---
+{
+  const { assembleGMContext } = await import('../engine/gm_registry.js');
+  const gmSrc158 = readFileSync(new URL('../engine/gm.js', import.meta.url), 'utf8');
+  const appSrc158 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+  const mk = (n) => ({ character: { currentLocationId: "x", clock: newClock() }, location: { id: "x", name: "X" },
+    CONTENT: { region: {}, rules: {}, lore: [], events: [], npcs: {}, companions: [], items: {}, emergence: {}, branchForks: {}, locations: {} },
+    sceneTurns: Array(n).fill({ summary: "s", narration: "n" }), sceneState: null, sharedScene: null, profile: {},
+    time: readClock(newClock()), resolution: null, playerInput: null, exactWords: null, itemAdvance: [], travelDirective: null, ephemera: {},
+    app: { fullCatalog: () => ({}), FN_INDEX: () => ({ families: [], verbToFamily: {}, byFamily: {} }), activeEnc: () => null,
+      listAvailableEncounters: () => null, masteryReadyForGM: () => null, ratingLineForGM: () => "R", maybeLegendDetail: () => null, sharedCanonForGM: () => null } });
+  check("158: a young scene gets NO pacing pressure (silent until it matters)", assembleGMContext("turn", mk(5)).scenePacingDetail === null);
+  check("158: a long scene is told to look for its close", /looking for its natural close/.test(assembleGMContext("turn", mk(20)).scenePacingDetail || ""));
+  check("158: a runaway scene is told to close it THIS beat", /THIS BEAT/.test(assembleGMContext("turn", mk(40)).scenePacingDetail || ""));
+  check("158: the pacing note reaches the prompt via the scene tier", /if \(scenePacingDetail\) scene\.push\(/.test(gmSrc158));
+  check("158: the contract tells the GM WHEN to end a scene (it previously had the field and no instruction)",
+    /"sceneEnded": SCENES ARE SUPPOSED TO END/.test(gmSrc158) && /DO NOT hold one scene open across a whole session/.test(gmSrc158));
+  check("158: a manual End-this-scene control exists and is wired", /id="do-endscene"/.test(appSrc158) && /endSceneBtn.*endSceneNow\(\)/.test(appSrc158));
+  check("158: the manual close writes the chronicle even if the GM never sets the flag",
+    /character\.chronicle\.push\(summary\)[\s\S]{0,200}character\.activeScene = null/.test(appSrc158));
+}
+
 // --- SNG-157: storage quota — a safety net must never brick the app it protects ---
 {
   // A faithful localStorage stand-in with a hard byte budget, so the quota path is EXERCISED,

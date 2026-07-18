@@ -55,7 +55,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // SNG-155: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.111";
+const APP_VERSION = "1.8.112";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3479,6 +3479,28 @@ async function answerLedger(send) {
   renderPlay(character.activeScene?.lastTurn || null, { aside: send ? "Word of it travels — the world will hear." : "It stays local — a story this valley keeps." });
 }
 
+/** SNG-158: close the current scene on the player's say-so. The GM writes the closing beat and
+ *  the summing-up (so the chronicle entry is real prose, not a stub); the engine then does exactly
+ *  what a GM-emitted sceneEnded does. If the GM can't answer, the scene still closes — a scene the
+ *  player asked to end must end, or we are back to the 169-beat scene this exists to prevent. */
+async function endSceneNow() {
+  if (busy || !character) return;
+  if (!sceneTurns.length) { renderPlay(character.activeScene?.lastTurn || null, { aside: "There's no scene open yet — take an action first." }); return; }
+  const beats = sceneTurns.length;
+  renderPlay(null, { thinking: "Drawing the scene to a close…" });
+  const result = await runGM({ resolution: null, playerInput:
+    `(The player is CLOSING this scene. Write one short closing beat that lets the current moment finish naturally — nobody teleports, nothing unresolved is forced shut — then set "sceneEnded": true and write "sceneSummary" as a summing-up of the WHOLE scene (${beats} beats), because that summary becomes the chronicle entry. Offer no choices.)` });
+  if (result?.turn?.sceneEnded) { renderPlay(result.turn, { aside: `Scene closed — ${beats} beats written into your chronicle.` }); return; }
+  // The GM didn't set the flag (or the call failed) — close it engine-side anyway.
+  const summary = result?.turn?.sceneSummary || sceneTurns[sceneTurns.length - 1]?.summary || `A scene at ${hereNow()?.name || "this place"}, ${beats} beats long.`;
+  character.chronicle = character.chronicle || [];
+  character.chronicle.push(summary);
+  sceneTurns = []; sceneState = null; character._intentAsked = null;
+  character.activeScene = null;
+  saveCharacter(character);
+  renderPlay(result?.turn || null, { aside: `Scene closed — ${beats} beats written into your chronicle.` });
+}
+
 async function arriveAtPending() {
   const p = character._pendingArrival; if (!p || busy) return;
   character._pendingArrival = null;
@@ -5890,6 +5912,9 @@ function renderPlay(turn, opts = {}) {
       <button class="opt map-open" id="open-map" style="margin:2px 0 6px; display:block; width:100%">🗺 Open Map — travel & places</button>
       <button class="opt" id="do-breather" style="margin-top:8px; display:block; width:100%">Breather (+${recoveryEnergy("breather", character, rules)} energy, 1h)</button>
       <button class="opt" id="do-rest" style="margin-top:4px; display:block; width:100%">Sleep (+${recoveryEnergy("sleep", character, rules)} energy, ${rules.recovery?.sleep?.hours ?? 8}h)</button>
+      ${/* SNG-158: the player can always close a scene themselves — the GM should do it, but a
+            scene that won't end is the player's to end. Writes the chronicle entry either way. */""}
+      <button class="opt" id="do-endscene" style="margin-top:8px; display:block; width:100%" title="Draw this scene to a close and write it into your chronicle. A new scene opens on your next action.">⏹ End this scene${sceneTurns.length ? ` (${sceneTurns.length} beats)` : ""}</button>
     </div></details>
     <details class="sidebar-sec" data-sec="codex"${sectionOpen("codex", false) ? " open" : ""}><summary><span class="sec-title">Codex &amp; Library</span></summary><div class="sec-body">
       <button class="opt" id="open-codex" style="display:block; width:100%">${Object.keys(character.codex?.topics || {}).length} topic${Object.keys(character.codex?.topics || {}).length === 1 ? "" : "s"} discovered — open Codex</button>
@@ -6159,6 +6184,7 @@ function renderPlay(turn, opts = {}) {
   };
   const moreBtn = document.getElementById("open-inventory-more"); if (moreBtn) moreBtn.onclick = () => renderInventoryScreen(); // SNG-121
   // (SNG-114: item name/drop now bound via bindItemCardHandlers above — the duplicated data-nameit/data-drop wiring is gone.)
+  const endSceneBtn = document.getElementById("do-endscene"); if (endSceneBtn) endSceneBtn.onclick = () => endSceneNow(); // SNG-158
   const restBtn = document.getElementById("do-rest"); if (restBtn) restBtn.onclick = () => rest("sleep");
   const breatherBtn = document.getElementById("do-breather"); if (breatherBtn) breatherBtn.onclick = () => rest("breather");
   const mapBtn = document.getElementById("open-map"); if (mapBtn) mapBtn.onclick = () => renderMap();

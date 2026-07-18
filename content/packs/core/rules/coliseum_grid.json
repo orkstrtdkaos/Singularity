@@ -2,13 +2,13 @@
   "schemaVersion": 1,
   "id": "coliseum_grid",
   "kind": "contest_design",
-  "note": "SNG-149 — the Great Coliseum's blind grid. Neither competitor picks the contest: each brings FOUR function families drawn from what they actually practise, A's four become the rows and B's four the columns, both pick blind and simultaneously, and the intersection is the contest. The cell belongs to neither of them. Grounded on FUNCTION_FAMILIES (engine/functions.js) per spec amendment A2 — 8 closed enums, so the complete space is 36 cells and is finite. Authored by Aevi (PO) 2026-07-18 per Law 15: design canon lives in content.",
+  "note": "SNG-149 — the Great Coliseum's blind grid. Neither competitor picks their own ground: each brings FOUR function families drawn from what they actually practise, and then EACH CHOOSES FROM THE OTHER'S FOUR. You name which of your opponent's strengths you will take them on at; they name which of yours they will take you at; both picks are blind and simultaneous, and the intersection is the contest. Grounded on FUNCTION_FAMILIES (engine/functions.js) per amendment A2 — 8 closed enums, so the space is 36 cells and finite. Aevi (PO) 2026-07-18, Law 15.",
   "whyBlind": "Under a blind grid a champion must be COMPLETE — you cannot take a title on your strongest cell because you will be pulled into your weakest. That is what makes the Coliseum a way of life rather than a fight club: every people has a standing reason to develop all eight families in their own idiom, continuously. Skill challenges and combat are the same structure at different cells, which is why participation is universal rather than martial.",
   "competitorAxis": {
     "rule": "A competitor's four families are the four they have the most ability-RANKS in, counted via familiesOfAbility() over their learned abilities.",
     "ties": "Broken by total ranks, then by the family's order in FUNCTION_FAMILIES. Deterministic on purpose — a competitor can compute their own axis and so can their opponent.",
     "fewerThanFour": "A narrow competitor fills remaining slots from their tradition's functionCoverage (tradition_profiles.json). A tradition cannot supply a family it does not teach, so a genuinely narrow fighter enters with a short axis and the grid is 4xN — a visible, fair disadvantage the crowd can read.",
-    "visibility": "Each competitor's axis is PUBLIC before the pick; only the pick itself is blind. You know what your opponent can be pulled into. You do not know which one they chose."
+    "visibility": "Each competitor's four are PUBLIC before the pick — they must be, since you are choosing from your opponent's set. What is blind is only which one each of you took."
   },
   "secondGrid": "The cell names a contest KIND. A second 4x4 inside the cell narrows to the specific challenge the same way — blind, simultaneous, drawn from the two competitors' backgrounds rather than their functions. The first grid asks what KIND of person you are; the second asks who you specifically have been.",
   "cells": [
@@ -372,5 +372,11 @@
       "contest": "Neither competitor does anything. Both simply continue, under load, indefinitely.",
       "judged": "Judged on who rises first. There is no spectacle in it and the stands are always full."
     }
-  ]
+  ],
+  "thePick": {
+    "rule": "A picks one family from B's four. B picks one family from A's four. Blind, simultaneous, revealed together. The cell is the intersection.",
+    "whyNotYourOwn": "Picking from your own axis lets a champion steer toward their best cell, which is the thing the blind grid exists to prevent. Picking from your OPPONENT'S axis inverts it: your choice is an argument about where they are weakest, made out of their own declared strengths, and theirs is the same argument about you. Neither competitor ever selects the ground they stand on.",
+    "whatItMeans": "The pick is a public read of your opponent. Choose their HARM and you are saying you can take them at the thing they are known for. Choose their SUSTAIN and you are saying they are brittle. The crowd reads the picks before the contest resolves, and in the Coliseum the pick is discussed as much as the outcome.",
+    "shortAxis": "Against a competitor with fewer than four families you have fewer choices, not more — a narrow opponent is harder to select against, which is the one advantage narrowness carries."
+  }
 }

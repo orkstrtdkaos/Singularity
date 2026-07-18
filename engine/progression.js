@@ -136,6 +136,28 @@ export function retroNativeGrants(character, rules) {
   return granted;
 }
 
+/** SNG-131: seed a substrate-keeper origin's INNATE access base. A `origin.innatePrecursor[]` seeds the
+ *  fabricated-substrate keepers (seraphic/abyssal) into `precursorAccess`; `origin.innateLivingCurrent[]`
+ *  seeds the living-substrate keeper (rootkin) into `livingCurrentAccess`; `origin.braidAffinity.discount`
+ *  stamps the center's braid discount. NOT a grant — it opens ACCESS (the ability still costs a level + a
+ *  point to learn, then grows normally); the innate floor + earned growth Erik ruled. Each seeded id is
+ *  VALIDATED against the catalog's powerSystem so a mis-authored id can never create a false access.
+ *  Idempotent (adds only what's missing) and Law-14-safe. Returns the newly-seeded ability ids. */
+export function seedInnateSubstrate(character, originRecord = {}, catalog = {}) {
+  character.precursorAccess = character.precursorAccess || [];
+  character.livingCurrentAccess = character.livingCurrentAccess || [];
+  const seeded = [];
+  const seed = (ids, list, sys) => {
+    for (const id of ids || []) {
+      if (catalog[id]?.powerSystem === sys && !list.includes(id)) { list.push(id); seeded.push(id); }
+    }
+  };
+  seed(originRecord.innatePrecursor, character.precursorAccess, "precursor");
+  seed(originRecord.innateLivingCurrent, character.livingCurrentAccess, "living_current");
+  character.braidDiscount = originRecord.braidAffinity?.discount || 0; // derived; harmless to restamp
+  return seeded;
+}
+
 /** Practiced power costs less: -1 energy per two character levels and -1 per
  *  ability rank above 1, floored at half the base cost (data-driven). */
 export function effectiveEnergyCost(abilityDef, character, rules) {
@@ -250,7 +272,16 @@ export function effectiveLevelReq(ab, character, rules) {
     // SNG-011: the Precursor tier is never offered at creation or ordinary
     // level-up — access is unlocked per-ability in fiction (remnant, quest,
     // Old Roads mastery, a teacher). See character.precursorAccess.
+    // SNG-131: a substrate-keeper origin (seraphic/abyssal) is SEEDED an innate precursor base at
+    // creation, so its `address_sense`/`latticespeak` sit in precursorAccess by right of being what
+    // they are — then grow like any skill (level + point). Everyone else still earns it in fiction.
     return (character.precursorAccess || []).includes(ab.id) ? base : null;
+  }
+  if (sys === "living_current") {
+    // SNG-131: the LIVING-substrate parallel — the green current, innate to the life-keepers (rootkin),
+    // seeded into livingCurrentAccess at creation. Locked for everyone else exactly like precursor is;
+    // access is per-ability (the innate base), then grown by the normal level/point path.
+    return (character.livingCurrentAccess || []).includes(ab.id) ? base : null;
   }
   if (origin === "valley") return base;
   if (sys === origin) return base;
@@ -412,8 +443,12 @@ export function learnAbility(character, abilityId, catalog, rules, opts = {}) {
   // could not learn their OWN people's craft at level-up. Here the domain gate decides access and the
   // ability's own levelReq is the level bar. Precursor keeps its per-ability fiction gate; accord open.
   const idx = opts.traditionIndex;
+  // SNG-131: precursor AND living_current are per-ability innate-access systems (seeded by origin, then
+  // grown) — both route to effectiveLevelReq's access gate, NOT the domain gate (else any rootkin-domain
+  // character could learn the living current, defeating "innate to the people").
+  const innateAccess = ab.powerSystem === "precursor" || ab.powerSystem === "living_current";
   const req = ab.accord ? (ab.levelReq || 1)
-    : ab.powerSystem === "precursor" ? effectiveLevelReq(ab, character, rules)
+    : innateAccess ? effectiveLevelReq(ab, character, rules)
     : (character?.domains?.primary && idx) ? (domainGateFor(ab, character, idx).allowed ? (ab.levelReq || 1) : null)
     : effectiveLevelReq(ab, character, rules);
   if (req === null) return { ok: false, why: character?.domains?.primary ? "outside your domains" : "wrong tradition" };
@@ -441,9 +476,11 @@ export function learnAbility(character, abilityId, catalog, rules, opts = {}) {
   }
   // Affordability last. When domains are set, the ring-distance penalty is the cost multiplier
   // (supersedes the legacy home-class 2x); otherwise fall back to the legacy cross-class cost.
+  // SNG-131: the center's braidAffinity — a cross-pole BRAID (a reach_* diameter-line) costs `braidDiscount`
+  // less for valleyfolk (the one people who can braid the poles), floored at 1 (never free).
+  const braidCut = (character.braidDiscount && String(ab.powerSystem || "").startsWith("reach_")) ? character.braidDiscount : 0;
   const cost = opts.free ? 0
-    : (opts.traditionIndex && character?.domains?.primary) ? (verdict.penalty || 1)
-    : skillPointCost(ab, character, opts.skillCapacity);
+    : Math.max(1, ((opts.traditionIndex && character?.domains?.primary) ? (verdict.penalty || 1) : skillPointCost(ab, character, opts.skillCapacity)) - braidCut);
   if (!opts.free && (character.skillPoints || 0) < cost) return { ok: false, why: cost > 1 ? `costs ${cost} points (${verdict.band === "far" ? "distant domain" : "cross-class"})` : "no points" };
   character.abilities.push({ abilityId, level: 1 });
   if (!opts.free) character.skillPoints -= cost;

@@ -31,7 +31,7 @@ import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicate
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
 import { initWorldState, runWorldTick, syncSharedWorld, advanceGeneratedOffscreen, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
-import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, retroNativeGrants, applyNativeGrants, nativeGrantIdsFor, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility, autoAdvancePracticedRanks, markDefiningMoment, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy } from "./engine/progression.js";
+import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, retroNativeGrants, applyNativeGrants, nativeGrantIdsFor, seedInnateSubstrate, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility, autoAdvancePracticedRanks, markDefiningMoment, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy } from "./engine/progression.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, mergeInto, mergeCodexTopics, suggestMerges, markNotSame } from "./engine/codex.js";
 import { reconcile, topReconcileVersion } from "./engine/reconcile.js";
 import { ensurePractice, recordUse, declareAspiration, dropAspiration, recordAspirationProgress, aspirationRipe, practiceRankReady, ripeCombos, ripeBranches, emergenceNoticeForGM, acceptCombo, acceptBranch, validEmergenceId } from "./engine/practice.js";
@@ -48,7 +48,7 @@ import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challe
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.98";
+const APP_VERSION = "1.8.99";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1139,6 +1139,10 @@ function migrate(c) {
   retroLevelGrants(c, CONTENT.rules); // levels earned before banked growth existed pay out once
   { const ng = retroNativeGrants(c, CONTENT.rules); // SNG-101b: backfill by-right native basics once (Law-14-safe, survives the sync clobber)
     if (ng.length) c._reconcileNotes = [...(c._reconcileNotes || []), `By right of your people, basics you always had are yours: ${ng.join(", ")}.`]; }
+  // SNG-131: seed the substrate-keepers' innate ACCESS (precursor for seraphic/abyssal, living-current for
+  // rootkin) + the center's braid discount — idempotent on load, so existing keeper saves get it too.
+  { const seeded = seedInnateSubstrate(c, originRecord(c.origin), fullCatalog());
+    if (seeded.length) c._reconcileNotes = [...(c._reconcileNotes || []), `The substrate answers you by right of your people — ${seeded.map(id => fullCatalog()[id]?.name || id).join(", ")} is yours to learn as you grow.`]; }
   // one-time retroactive credit for pre-XP/bonds/practice characters (idempotent)
   if (needsBackfill(c)) {
     c._backfillSummary = runBackfill(c, {
@@ -2085,6 +2089,7 @@ function renderCreate() {
     ensureCharacterStyle(character); // SNG-BATCH-7: this character earns its OWN play-style
     character.grantsVersion = 1; // born after banked growth — no retro grant owed
     applyNativeGrants(character, CONTENT.rules); // SNG-101b: granted their primary tradition's basics by right of being what they are
+    seedInnateSubstrate(character, originRecord(character.origin), fullCatalog()); // SNG-131: a substrate-keeper is born with innate precursor/living-current ACCESS + the center's braid discount
     { const g = backgroundById(character.background)?.grantsAptitudes; if (g?.length) grantAptitudes(character, g, CONTENT.rules.playerAptitudes, CONTENT.rules); } // SNG-113: lineage aptitude(s)
     character.nativeGrantsVersion = 1; // born with the starter kit — no retro native-grant owed
     character.reconcileVersion = topReconcileVersion("character"); // born current — no migration owed (no aggregate seed)

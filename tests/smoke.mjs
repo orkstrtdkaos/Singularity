@@ -17,7 +17,7 @@ import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicate
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
 import { initWorldState, runWorldTick, advanceGeneratedOffscreen, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "../engine/worldtick.js";
 import { assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "../engine/gambit.js";
-import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, autoAdvancePracticedRanks, markDefiningMoment, meetsStandingBar, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy, nativeGrantIdsFor, applyNativeGrants, retroNativeGrants } from "../engine/progression.js";
+import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, autoAdvancePracticedRanks, markDefiningMoment, meetsStandingBar, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy, nativeGrantIdsFor, applyNativeGrants, retroNativeGrants, seedInnateSubstrate } from "../engine/progression.js";
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, liaisonMultiplierFor, roleBadges, COMPANY_ROLES } from "../engine/company.js";
 import { standingWithPeople } from "../engine/reputation.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, resolveTopic, namesMatch, mergeCodexTopics, mergeInto, suggestMerges, markNotSame } from "../engine/codex.js";
@@ -3237,6 +3237,64 @@ await (async () => {
   check("SNG-139: an auto level-up regen respects a pinned portrait (pin beats auto)", /if \(c\.portraitPinned\) return null;/.test(appSrc));
   check("SNG-139: the roster has a confirm-gated delete control wired to deleteCharacter", /data-del=/.test(appSrc) && /deleteCharacter\(id\)/.test(appSrc));
   check("SNG-139: the session-log render shows the rumor line alongside the canon banner", /canonRumored/.test(appSrc));
+})();
+
+// --- SNG-131: innate-substrate wiring — seed precursor/living-current access + braid discount; the gates ---
+(() => {
+  const catalog = {
+    address_sense: { id: "address_sense", powerSystem: "precursor", levelReq: 2 },
+    latticespeak: { id: "latticespeak", powerSystem: "precursor", levelReq: 3 },
+    quicken_the_ground: { id: "quicken_the_ground", powerSystem: "living_current", tradition: "rootkin", levelReq: 3 },
+    a_reach_braid: { id: "a_reach_braid", powerSystem: "reach_dark_light", levelReq: 4 },
+    not_precursor: { id: "not_precursor", powerSystem: "reach_demonic_angelic", levelReq: 5 }
+  };
+
+  // seedInnateSubstrate — opens ACCESS (not a grant); validates powerSystem; stamps the braid discount
+  const ser = { origin: "seraphic" };
+  const seeded = seedInnateSubstrate(ser, { innatePrecursor: ["address_sense"] }, catalog);
+  check("SNG-131: a seraphic origin is seeded innate PRECURSOR access (not granted the ability)", ser.precursorAccess.includes("address_sense") && !(ser.abilities || []).length && seeded.includes("address_sense"));
+  const rootPeople = { origin: "rootkin" };
+  seedInnateSubstrate(rootPeople, { innateLivingCurrent: ["quicken_the_ground"] }, catalog);
+  check("SNG-131: a rootkin origin is seeded innate LIVING-CURRENT access", rootPeople.livingCurrentAccess.includes("quicken_the_ground"));
+  check("SNG-131: valleyfolk get the braid discount stamped from braidAffinity", (() => { const v = { origin: "valley" }; seedInnateSubstrate(v, { braidAffinity: { discount: 2 } }, catalog); return v.braidDiscount === 2; })());
+  check("SNG-131: a MIS-authored innate id (wrong powerSystem) is REFUSED — never a false access", (() => { const x = {}; seedInnateSubstrate(x, { innatePrecursor: ["not_precursor"] }, catalog); return !x.precursorAccess.includes("not_precursor"); })());
+  check("SNG-131: seeding is idempotent — a second call adds nothing", (() => { const before = ser.precursorAccess.length; return seedInnateSubstrate(ser, { innatePrecursor: ["address_sense"] }, catalog).length === 0 && ser.precursorAccess.length === before; })());
+
+  // the gate: living_current is LOCKED without access, learnable (returns base) with it — exactly like precursor
+  check("SNG-131: living_current is LOCKED for a character without the innate access", effectiveLevelReq(catalog.quicken_the_ground, { livingCurrentAccess: [] }, {}) === null);
+  check("SNG-131: living_current returns its levelReq once the innate access is seeded", effectiveLevelReq(catalog.quicken_the_ground, { livingCurrentAccess: ["quicken_the_ground"] }, {}) === 3);
+
+  // learnAbility: a seeded rootkin at level can learn it; an unseeded character cannot (innate to the people)
+  const rootDom = { origin: "rootkin", nativeTradition: "rootkin", domains: { primary: "rootkin" }, level: 3, skillPoints: 3, abilities: [], livingCurrentAccess: ["quicken_the_ground"] };
+  const rLearn = learnAbility(rootDom, "quicken_the_ground", catalog, {}, {});
+  check("SNG-131: a SEEDED rootkin at level 3 can learn the living current (innate base, earned by level+point)", rLearn.ok && rootDom.abilities.some(a => a.abilityId === "quicken_the_ground"));
+  const rootNoSeed = { origin: "rootkin", nativeTradition: "rootkin", domains: { primary: "rootkin" }, level: 3, skillPoints: 3, abilities: [], livingCurrentAccess: [] };
+  check("SNG-131: a rootkin WITHOUT the seed cannot learn the living current (access, not domain, gates it)", learnAbility(rootNoSeed, "quicken_the_ground", catalog, {}, {}).ok === false);
+
+  // the braid discount only bites on the DOMAINED penalty path (a diameter braid's ring-distance cost > 1);
+  // the raw-source assertion confirms the cut is applied there, and the browser check exercises it on real
+  // geometry. Here: confirm braidCut never makes a braid FREE and never touches a non-braid.
+  const appSrc131 = readFileSync(join(root, "engine/progression.js"), "utf8");
+  check("SNG-131: the braid cut is floored at 1 (a braid is never free) and only touches reach_* powerSystems", /braidCut = \(character\.braidDiscount && String\(ab\.powerSystem \|\| ""\)\.startsWith\("reach_"\)\)/.test(appSrc131) && /Math\.max\(1, \(\(opts\.traditionIndex[\s\S]{0,120}\) - braidCut\)/.test(appSrc131));
+  check("SNG-131: precursor + living_current both route to the innate-access gate (not the domain gate)", /const innateAccess = ab\.powerSystem === "precursor" \|\| ab\.powerSystem === "living_current"/.test(appSrc131));
+
+  // end-to-end on the REAL authored content (origins.json + precursor.json + living_current.json)
+  const rj131 = (rel) => JSON.parse(readFileSync(join(root, rel), "utf8"));
+  const origins = rj131("content/packs/core/rules/origins.json").origins;
+  const precursorAbs = rj131("content/packs/core/abilities/precursor.json").abilities;
+  const livingAbs = rj131("content/packs/core/abilities/living_current.json").abilities;
+  const realCat = {};
+  for (const a of [...precursorAbs, ...livingAbs]) realCat[a.id] = a;
+  const oget = id => origins.find(o => o.id === id);
+  check("SNG-131 e2e: seraphic.innatePrecursor + abyssal.innatePrecursor are REAL precursor ids", oget("seraphic").innatePrecursor.every(id => realCat[id]?.powerSystem === "precursor") && oget("abyssal").innatePrecursor.every(id => realCat[id]?.powerSystem === "precursor"));
+  check("SNG-131 e2e: rootkin.innateLivingCurrent is a REAL living_current id", oget("rootkin").innateLivingCurrent.every(id => realCat[id]?.powerSystem === "living_current"));
+  check("SNG-131 e2e: seeding a real seraphic opens its authored precursor base, gate returns its levelReq", (() => {
+    const c = { origin: "seraphic" };
+    seedInnateSubstrate(c, oget("seraphic"), realCat);
+    const id = oget("seraphic").innatePrecursor[0];
+    return c.precursorAccess.includes(id) && effectiveLevelReq(realCat[id], c, {}) === (realCat[id].levelReq || 1);
+  })());
+  check("SNG-131 e2e: valleyfolk carries a real braidAffinity discount", (oget("valleyfolk").braidAffinity?.discount || 0) >= 1);
 })();
 
 // --- SNG-076: authored prose is not truncated mid-word ---

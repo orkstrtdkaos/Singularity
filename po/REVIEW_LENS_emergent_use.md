@@ -50,3 +50,41 @@ lens applied: `the_called_form`, `the_walking_figure`, `the_raised_form`, `wayga
 
 Also: every ability whose rung I set from prose alone before this lens existed — which is all of
 them through Mechanical/Spiritual.
+
+---
+
+## QUALIFICATION — when notFor names a sibling, it is a boundary, not over-constraint
+
+**Added 2026-07-18 after Erik caught `wither` and `the_grey_hand` collapsing into each other.**
+
+Both lenses push the same direction: widen the prose, cover the emergent use, do not be timid.
+Applied without limit they will dissolve exactly the distinctions the corpus was built on.
+
+The case: `wither` and `the_grey_hand` are the Palework pair. Wither ages and rots THINGS; the Grey
+Hand takes vigour out of PEOPLE. Wither's r1 says "anything living or once-living", which I read as
+including a person — so I added `strike` and wrote it a living-body harm.
+
+I was wrong, and the file said so twice before I touched it:
+
+> description: "The Grey Hand handles people; Wither handles everything else."
+> notFor: "Weakening living people — that is The Grey Hand."
+
+A `notFor` that **names another ability** is not overly-constrained text awaiting a loosening. It is
+a deliberate division of labour, and honouring it is what keeps two abilities from becoming one.
+
+### The discriminator
+
+- `notFor` describes a **limit in the world** ("cannot work in darkness", "not against the unarmoured")
+  → over-constraint is possible; the emergent-use lens applies; widen if a tag points past it.
+- `notFor` **names a sibling ability or assigns the case elsewhere** ("that is The Grey Hand",
+  "that's Latticework's job", "that is Noesis")
+  → distinctness boundary. Do NOT widen across it. If the tag genuinely wants that ground, the right
+  move is to ask which of the two abilities should own it — not to give it to both.
+
+### Fix applied
+
+`wither` reverted to `[break, hinder]`, rungs `none → damaging → damaging`, and both abilities now
+state the boundary from their own side so the next reader cannot miss it. Wither's cost line keeps
+the honest edge without crossing: starving a valley "is a harm done to people without the craft ever
+touching one."
+

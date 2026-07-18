@@ -28,25 +28,48 @@
           "rank": 1,
           "name": "Green Touch",
           "grants": "Close wounds and speed healing on the living; coax rapid growth in plants; steady a failing pulse.",
-          "cannot": "Nothing past death's threshold; overuse tires the wielder faster than it heals."
+          "cannot": "Nothing past death's threshold; overuse tires the wielder faster than it heals.",
+          "functions": [
+            "heal",
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Quick Return",
           "grants": "Pull the nearly-dead back if reached in time; regrow what was lost (within reason); make barren ground bloom.",
-          "cannot": "A return has a cost the GM names; the regrown is not always the same as the lost."
+          "cannot": "A return has a cost the GM names; the regrown is not always the same as the lost.",
+          "functions": [
+            "heal",
+            "sustain",
+            "restore",
+            "make"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Unstoppable Spring",
           "grants": "Life at flood — mass healing, land quickened for a season, a body remade toward health. The Heartroot's power in miniature.",
-          "cannot": "It does not know when to stop — quickening can grow a thing past its right shape; the wielder drifts life-hot, and life that will not stop is its own horror (see the Quiet in the Quickwood)."
+          "cannot": "It does not know when to stop — quickening can grow a thing past its right shape; the wielder drifts life-hot, and life that will not stop is its own horror (see the Quiet in the Quickwood).",
+          "functions": [
+            "heal",
+            "sustain",
+            "restore",
+            "make"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "functions": [
         "heal",
-        "sustain",
-        "make"
+        "make",
+        "restore",
+        "sustain"
       ],
       "challengeTypes": [
         "SURVIVE",
@@ -272,19 +295,36 @@
           "rank": 1,
           "name": "Staunch",
           "grants": "Stop bleeding, stabilize a crashing body, buy time for real healing.",
-          "cannot": "Buys time; does not mend; the already-dead are past it."
+          "cannot": "Buys time; does not mend; the already-dead are past it.",
+          "functions": [
+            "heal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Held Wound",
           "grants": "Hold a mortal wound closed by will — buy hours where there were minutes.",
-          "cannot": "Held is not healed. When you let go, the wound resumes exactly where it was."
+          "cannot": "Held is not healed. When you let go, the wound resumes exactly where it was.",
+          "functions": [
+            "heal",
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Refused Bleed",
           "grants": "Refuse a death outright at the moment of bleeding — the body stops losing what it cannot spare.",
-          "cannot": "Refusal costs you what it saves them; the Rootkin pay it gladly and it still costs."
+          "cannot": "Refusal costs you what it saves them; the Rootkin pay it gladly and it still costs.",
+          "functions": [
+            "heal",
+            "sustain"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "challengeTypes": [
@@ -381,19 +421,36 @@
           "rank": 1,
           "name": "Graftlife",
           "grants": "Regrow a lost finger, mend a crippling wound over time, restore a blighted field to growth.",
-          "cannot": "The regrown is never quite the lost; costs the wielder deeply."
+          "cannot": "The regrown is never quite the lost; costs the wielder deeply.",
+          "functions": [
+            "heal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Grafted Limb",
           "grants": "Graft living tissue that was not there — replace what was lost with what still grows.",
-          "cannot": "The graft is not the original, and it knows it. The body argues with it for a long time."
+          "cannot": "The graft is not the original, and it knows it. The body argues with it for a long time.",
+          "functions": [
+            "heal",
+            "transform"
+          ],
+          "gains": "broaden",
+          "harmRung": "damaging"
         },
         {
           "rank": 3,
           "name": "Rootwork",
           "grants": "Graft life into what was not alive, or was no longer — bone to wood, a heart to a stopped chest.",
-          "cannot": "This is the near edge of the Rootkin's own taboo. What comes back is alive; whether it is the same is another question."
+          "cannot": "This is the near edge of the Rootkin's own taboo. What comes back is alive; whether it is the same is another question.",
+          "functions": [
+            "heal",
+            "transform"
+          ],
+          "gains": "deepen",
+          "harmRung": "damaging"
         }
       ],
       "challengeTypes": [
@@ -597,9 +654,9 @@
         "body_mind": -0.1
       },
       "functions": [
+        "heal",
         "hinder",
-        "strike",
-        "heal"
+        "strike"
       ],
       "narrationHints": "What leaves him arrives in you, and it is warm, and that is the worst part.",
       "description": "You take the life out of a thing and put it into yourself. The classic bargain of the death-craft: the necromancer sustains himself by ending. It works. It is also exactly what people are afraid of when they are afraid of you.",
@@ -609,26 +666,47 @@
           "rank": 1,
           "name": "Draw Down",
           "grants": "Take vitality from a living thing you are touching and take it into yourself. Their wound is your mending.",
-          "cannot": "Touch, and only from the living. The dead have nothing left to give and will be insulted by the asking."
+          "cannot": "Touch, and only from the living. The dead have nothing left to give and will be insulted by the asking.",
+          "functions": [
+            "strike",
+            "hinder",
+            "heal"
+          ],
+          "gains": "broaden",
+          "harmRung": "damaging"
         },
         {
           "rank": 2,
           "name": "The Long Draught",
           "grants": "Draw at reach, and from more than one — a battlefield is, to a Draw-Down, a table set.",
-          "cannot": "Every person watching you do this will remember it. Some of them will decide something about you."
+          "cannot": "Every person watching you do this will remember it. Some of them will decide something about you.",
+          "functions": [
+            "strike",
+            "hinder",
+            "heal"
+          ],
+          "gains": "deepen",
+          "harmRung": "incapacitating"
         },
         {
           "rank": 3,
           "name": "The Emptied Vessel",
           "grants": "Draw a thing entirely down. What is left is not dead, exactly. It is finished.",
-          "cannot": "This is the act the Rootkin cite when they say the Ashwardens have lost their way, and it is very hard to argue with them about it."
+          "cannot": "There is no partial version of this rank — a thing drawn entirely down does not recover, and what is left is not a corpse anyone can grieve properly. It requires the drawer to keep going past every point where stopping was possible. The Ashwardens do not forbid Draw-Down; they forbid teaching rank three to anyone who asked for it.",
+          "functions": [
+            "strike",
+            "hinder",
+            "heal"
+          ],
+          "gains": "deepen",
+          "harmRung": "lethal"
         }
       ],
       "gated": "learned",
       "challengeTypes": [
         "FIGHT"
       ],
-      "harmRung": "damaging",
+      "harmRung": "lethal",
       "nativeOrCombination": "native"
     },
     {
@@ -721,19 +799,37 @@
           "rank": 1,
           "name": "Ask the Dead",
           "grants": "The recently dead answer one question, truthfully, and badly.",
-          "cannot": "Recently. A week is far. A season is gone."
+          "cannot": "Recently. A week is far. A season is gone.",
+          "functions": [
+            "reveal",
+            "summon"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Long Question",
           "grants": "Ask further back, and ask more — three questions, and the answers are clearer.",
-          "cannot": "Each question takes something from what is left of them. You will feel it go."
+          "cannot": "Each question takes something from what is left of them. You will feel it go.",
+          "functions": [
+            "reveal",
+            "summon"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Full Account",
           "grants": "The dead tell you what they knew, entire, and what they wanted, and what they were afraid of.",
-          "cannot": "You will hear things about them that were not yours to know, and you cannot give them back."
+          "cannot": "You will hear things about them that were not yours to know, and you cannot give them back.",
+          "functions": [
+            "reveal",
+            "summon"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "gated": "learned",
@@ -806,24 +902,45 @@
           "rank": 1,
           "name": "Through Here",
           "grants": "Move through places lethal or restricted to others — a plague ward, a collapsed site, a grief-sealed room, a battlefield's aftermath — without the danger touching you. Stand where others cannot stay.",
-          "cannot": "You go alone. The Road does not widen for company without further craft."
+          "cannot": "You go alone. The Road does not widen for company without further craft.",
+          "functions": [
+            "move",
+            "resist"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Passage",
           "grants": "Bring one person through with you. Open sealed doors, tombs, and quarantine gates that the dead have passed before — not by breaking, by fitting. Sense the safe path through a lethal space before you commit.",
-          "cannot": "One only. A ward that has never held a death cannot be opened this way — only thresholds that have been crossed before."
+          "cannot": "One only. A ward that has never held a death cannot be opened this way — only thresholds that have been crossed before.",
+          "functions": [
+            "move",
+            "resist",
+            "open"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Long Walk",
           "grants": "Move through any space where death has been substantial and recent — major battlefields, plague grounds, sealed necropolises, active collapse sites — as if they were open road. Bring a small group. Move through quarantine cordons and siege-lines that are held by mortal hands, not wards.",
-          "cannot": "Substantial and recent. A meadow where someone died a hundred years ago is not a Grey Road. A magically-sealed door with no death behind it is not a Grey Road. The Advance moves in fights; the Grey Road moves through places of death. The two do not substitute for each other."
+          "cannot": "Substantial and recent. A meadow where someone died a hundred years ago is not a Grey Road. A magically-sealed door with no death behind it is not a Grey Road. The Advance moves in fights; the Grey Road moves through places of death. The two do not substitute for each other.",
+          "functions": [
+            "move",
+            "resist",
+            "open"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "functions": [
         "move",
-        "open"
+        "open",
+        "resist"
       ],
       "challengeTypes": [
         "EXPLORE",
@@ -858,22 +975,40 @@
           "rank": 1,
           "name": "Minimum",
           "grants": "Sustain yourself on less than should be enough: half rations, cold, blood loss, a wound that should have slowed you. The body does what it must. The ashwarden knows the exact line and walks it.",
-          "cannot": "This holds the threshold — it does not move it. You remain in the condition you were in, only continuing."
+          "cannot": "This holds the threshold — it does not move it. You remain in the condition you were in, only continuing.",
+          "functions": [
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Held Other",
           "grants": "Hold another person at minimum: keep a companion alive through conditions that would otherwise kill them, or extend a dying person's window long enough for something to matter. Cannot heal them — only hold the line.",
-          "cannot": "One person at a time. The craft requires full attention while the other is held."
+          "cannot": "One person at a time. The craft requires full attention while the other is held.",
+          "functions": [
+            "sustain",
+            "heal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Patience of the Palelands",
           "grants": "Sustain a small group through conditions nothing else could survive. Bring someone back from the absolute threshold and hold them there for days. Become the reason a thing is still alive — not by healing but by holding.",
-          "cannot": "The Kept Breath is not a cure and never becomes one. Everyone held at minimum is still at minimum — functional, not well."
+          "cannot": "The Kept Breath is not a cure and never becomes one. Everyone held at minimum is still at minimum — functional, not well.",
+          "functions": [
+            "sustain",
+            "heal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "functions": [
+        "heal",
         "sustain"
       ],
       "challengeTypes": [
@@ -910,25 +1045,46 @@
           "rank": 1,
           "name": "The Answer",
           "grants": "Call living growth to act: vines that grip, roots that erupt underfoot, branches that bar passage. Strike one threat with the weight of what grows here. The living things that answer also tell you where the intruder has been.",
-          "cannot": "The growth is approximate. It holds and hinders as much as it harms. A determined foe pushes through, slower."
+          "cannot": "The growth is approximate. It holds and hinders as much as it harms. A determined foe pushes through, slower.",
+          "functions": [
+            "summon",
+            "strike",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "damaging"
         },
         {
           "rank": 2,
           "name": "The Living Response",
           "grants": "The call goes wider: thorns across a passage, roots that trip a line, surging growth across a broader area. What you summon shows you its awareness — the animal that answers has seen what you need to know.",
-          "cannot": "Wide response is slow response. The Rootkin's force is not fast enough for a fight already at blade's edge."
+          "cannot": "Wide response is slow response. The Rootkin's force is not fast enough for a fight already at blade's edge.",
+          "functions": [
+            "summon",
+            "strike",
+            "bind"
+          ],
+          "gains": "deepen",
+          "harmRung": "incapacitating"
         },
         {
           "rank": 3,
           "name": "The Reclamation",
           "grants": "The living world treats something as having been named as threat at scale — the terrain itself becomes hostile to what you've claimed. A region reclaims. What tried to pass does not.",
-          "cannot": "The Rootkin cannot hold this. The reclamation is the living world's act, and it continues until it decides it is done. Call it only when you mean it."
+          "cannot": "A claim at this scale cannot be called off quickly — the region does not forget on your say-so, and it does not distinguish finely between the one you named and whoever is travelling with them. What you have made is not an attack but a condition, and conditions outlast the reason for them.",
+          "functions": [
+            "summon",
+            "strike",
+            "bind"
+          ],
+          "gains": "deepen",
+          "harmRung": "lethal"
         }
       ],
       "functions": [
+        "bind",
         "strike",
-        "summon",
-        "reveal"
+        "summon"
       ],
       "challengeTypes": [
         "FIGHT",
@@ -936,7 +1092,7 @@
         "SURVIVE"
       ],
       "tradition": "rootkin",
-      "harmRung": "incapacitating",
+      "harmRung": "lethal",
       "nativeOrCombination": "native"
     },
     {
@@ -964,25 +1120,43 @@
           "rank": 1,
           "name": "Bark-Skin",
           "grants": "Harden your own body: bark-skin that deflects a blow, thorns that make you costly to grapple. Immediate protection for yourself in the moment of contact.",
-          "cannot": "Protects you only, and only for the encounter's length. Slow to invoke — this is before the blow, not after."
+          "cannot": "Protects you only, and only for the encounter's length. Slow to invoke — this is before the blow, not after.",
+          "functions": [
+            "shield"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Thorn-Ward",
           "grants": "Ward a space with living growth: a thorn-wall, a living barricade, a grove-perimeter that turns intruders aside. The ward persists after you've moved on. Others can shelter inside it.",
-          "cannot": "A living ward can be broken. Fire is its particular enemy."
+          "cannot": "A living ward can be broken. Fire is its particular enemy.",
+          "functions": [
+            "shield",
+            "ward"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Grove's Resilience",
           "grants": "Resist effects that would take hold in a lesser life: disease, poison, cold, a working aimed at you — because the life-force present in you is so strong it crowds them out. Extend this to those sheltered within your ward.",
-          "cannot": "Resilience is not immunity. Very strong effects still land; the Rootkin just takes longer to fall."
+          "cannot": "Resilience is not immunity. Very strong effects still land; the Rootkin just takes longer to fall.",
+          "functions": [
+            "shield",
+            "ward",
+            "resist"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "functions": [
+        "resist",
         "shield",
-        "ward",
-        "resist"
+        "ward"
       ],
       "challengeTypes": [
         "FIGHT",
@@ -1019,19 +1193,39 @@
           "rank": 1,
           "name": "A Word to the Green",
           "grants": "Speak to living things and be heard: a basic request to plants or animals is understood and followed, in their way. Ask and receive — the living world tells you what it has sensed nearby.",
-          "cannot": "Living things understand requests, not plans. Ask them to hold still, to move aside, to come — not to execute a strategy."
+          "cannot": "Living things understand requests, not plans. Ask them to hold still, to move aside, to come — not to execute a strategy.",
+          "functions": [
+            "command",
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Asking",
           "grants": "Ask more complex things; command more deliberately. The forest tracks what has moved through it — query that track. An animal guide, a tree that opens its memory of who has passed, a flock that scouts ahead.",
-          "cannot": "What the living world knows is sensory, not analytical. It can tell you a person was here; it cannot tell you what they were planning."
+          "cannot": "What the living world knows is sensory, not analytical. It can tell you a person was here; it cannot tell you what they were planning.",
+          "functions": [
+            "command",
+            "reveal",
+            "track"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Grove Speaks",
           "grants": "Speak to the living world at regional scale. The whole grove turns its attention toward you. What it knows of every thing that has moved through it is yours. What you ask of it — at the pace of trees — is done.",
-          "cannot": "At the pace of trees. Urgency is a concept the grove does not share."
+          "cannot": "At the pace of trees. Urgency is a concept the grove does not share.",
+          "functions": [
+            "command",
+            "reveal",
+            "track"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "functions": [
@@ -1073,25 +1267,47 @@
           "rank": 1,
           "name": "Between the Roots",
           "grants": "Move through living terrain faster than it should allow. The paths exist; you know how to find them. The road also shows you: what grows along it, who has used it, what condition the terrain ahead is in.",
-          "cannot": "You must be in terrain with living things. Stone cities, blasted ground — the Road doesn't run there."
+          "cannot": "You must be in terrain with living things. Stone cities, blasted ground — the Road doesn't run there.",
+          "functions": [
+            "move",
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Opened Way",
           "grants": "Open passages that weren't visible: a thicket parts, a root-arch forms, a way through terrain that looked impassable appears. Bring one other with you. The living world makes a road.",
-          "cannot": "The opened way closes again. It isn't a road until you make it one by using it repeatedly."
+          "cannot": "The opened way closes again. It isn't a road until you make it one by using it repeatedly.",
+          "functions": [
+            "move",
+            "reveal",
+            "open"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Root Network",
           "grants": "Travel the root-network itself: move through the living web and emerge where it reaches, which is almost anywhere soil has held life. Bring a small group. The network tells you what it knows of the destination before you arrive.",
-          "cannot": "Emergence takes time and you cannot choose exactly where — you emerge where the network is willing, within the range you name. And dead ground, sealed vaults, stone-over-stone — the roots have not gone there."
+          "cannot": "Emergence takes time and you cannot choose exactly where — you emerge where the network is willing, within the range you name. And dead ground, sealed vaults, stone-over-stone — the roots have not gone there.",
+          "functions": [
+            "move",
+            "reveal",
+            "open",
+            "travel"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "functions": [
-        "travel",
+        "move",
         "open",
-        "reveal"
+        "reveal",
+        "travel"
       ],
       "challengeTypes": [
         "EXPLORE",

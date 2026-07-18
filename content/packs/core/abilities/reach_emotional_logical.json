@@ -16,9 +16,10 @@
         "demonic_angelic": 0.1
       },
       "functions": [
-        "empower",
         "command",
-        "heal"
+        "empower",
+        "heal",
+        "reveal"
       ],
       "narrationHints": "Feeling made a force — the true emotion of a room surfaced, a grief shared and eased, a passion kindled or cooled by one who feels it first and hardest.",
       "description": "The emotional-pole mastery: reading, moving, and sharing feeling as a real force. Not manipulation — resonance; the Deepfeelers' art.",
@@ -28,19 +29,41 @@
           "rank": 1,
           "name": "The Open Heart",
           "grants": "Feel the true emotion under a room or a person, past what they show; share a feeling so it eases (a grief halved, a fear steadied); kindle a genuine passion in the willing.",
-          "cannot": "Reads and shares; does not command; the guarded can close to it; feeling their pain means feeling it."
+          "cannot": "Reads and shares; does not command; the guarded can close to it; feeling their pain means feeling it.",
+          "functions": [
+            "reveal",
+            "heal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Shared Fire",
           "grants": "Move a crowd by feeling-with-them; carry a person through an emotion too big to bear alone; make an unspoken feeling undeniable in the open.",
-          "cannot": "You take on what you move — the cost is real; a will set against feeling resists; moving a mob is riding a wave, not steering it."
+          "cannot": "You take on what you move — the cost is real; a will set against feeling resists; moving a mob is riding a wave, not steering it.",
+          "functions": [
+            "reveal",
+            "heal",
+            "empower",
+            "command"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Deep Chord",
           "grants": "Feeling at the scale of peoples — turn a room, a mob, a mourning-crowd by the truth of shared feeling; reach a heart no reason could; hold another's whole emotional weight for a time. The Deepfeelers' power in miniature.",
-          "cannot": "The wielder drifts emotion-hot — feeling everything, all the time, until the self drowns; emotion without reason to shape it becomes storm, and a storm forecloses on thought as surely as ice does on feeling."
+          "cannot": "The wielder drifts emotion-hot — feeling everything, all the time, until the self drowns; emotion without reason to shape it becomes storm, and a storm forecloses on thought as surely as ice does on feeling.",
+          "functions": [
+            "reveal",
+            "heal",
+            "empower",
+            "command"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "challengeTypes": [
@@ -63,9 +86,10 @@
         "concrete_abstract": 0.2
       },
       "functions": [
+        "bind",
+        "break",
         "reveal",
-        "strike",
-        "bind"
+        "strike"
       ],
       "narrationHints": "Reason made a force — an argument that lands like a blow, a contradiction exposed, a conclusion so clean it changes what people must do.",
       "description": "The logical-pole mastery: inference, argument, and proof as real forces that move minds and situations. The Reasoners' art.",
@@ -75,19 +99,39 @@
           "rank": 1,
           "name": "The Clear Argument",
           "grants": "Build an argument that compels the reasonable; expose a contradiction so it can't be unseen; deduce a hidden fact from what's present.",
-          "cannot": "The unreasonable and the emotion-ruled resist; a valid argument from a false premise still lands false."
+          "cannot": "The unreasonable and the emotion-ruled resist; a valid argument from a false premise still lands false.",
+          "functions": [
+            "reveal",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Binding Proof",
           "grants": "Prove a thing so cleanly the proof itself changes what people must do; corner a liar in their own logic; model a situation and derive its necessary outcome.",
-          "cannot": "Proof binds the honest and the logical; the Cathedral of Convincing (true pieces, false whole) survives it; a proof of the unwelcome can be refused by force."
+          "cannot": "Proof binds the honest and the logical; the Cathedral of Convincing (true pieces, false whole) survives it; a proof of the unwelcome can be refused by force.",
+          "functions": [
+            "reveal",
+            "bind"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Necessary Conclusion",
-          "grants": "Reason at the scale of peoples — an argument a whole council cannot answer, a contradiction that topples a doctrine, a conclusion so inescapable it forecloses a bad course before it starts. The Reasoners' power in miniature.",
-          "cannot": "The wielder drifts logic-hot — toward the Cogitarium's cold, reason that has forgotten the feeling it was meant to serve; logic without heart reaches monstrous-but-valid conclusions (Ninefold's road), the foreclosure of the frozen mind."
+          "grants": "Reason at the scale of peoples — an argument a whole council cannot answer, a contradiction that topples a doctrine, a conclusion so inescapable it reorganises what everyone present thought they knew. And turned on one person: a contradiction opened in what they have built themselves on, which does not wound the body and takes the ground out from under them all the same. They will keep standing. They will not keep believing.",
+          "cannot": "It needs something true to work with — Logos cannot prove a falsehood, only forge one that the next sound mind unpicks. It fails against those who will simply refuse a true conclusion. And the Syllogists hold that a person you have taken apart this way is owed the time to rebuild, which is a debt many of them do not pay.",
+          "functions": [
+            "reveal",
+            "bind",
+            "break",
+            "strike"
+          ],
+          "gains": "broaden",
+          "harmRung": "damaging"
         }
       ],
       "challengeTypes": [
@@ -168,8 +212,8 @@
       "notFor": [],
       "tradition": "threnodist",
       "functions": [
-        "hinder",
-        "break"
+        "break",
+        "hinder"
       ],
       "challengeTypes": [
         "social",
@@ -181,19 +225,36 @@
           "rank": 1,
           "name": "The True Feeling",
           "grants": "Direct a genuine, intense feeling at a person — grief, shame, terror — that they cannot close off because it is true and they know it.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "hinder"
+          ],
+          "gains": "broaden",
+          "harmRung": "incapacitating"
         },
         {
           "rank": 2,
           "name": "The Unguarded Place",
           "grants": "Find and open the grief a person has been protecting — the loss they haven't admitted, the feeling they've been keeping functional by not opening.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "hinder",
+            "break"
+          ],
+          "gains": "broaden",
+          "harmRung": "incapacitating"
         },
         {
           "rank": 3,
           "name": "The Shattered Fortification",
           "grants": "Break an emotional fortification entirely — what they've been using to stay functional is now open and requires tending before they can operate again.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "hinder",
+            "break"
+          ],
+          "gains": "deepen",
+          "harmRung": "incapacitating"
         }
       ],
       "nativeOrCombination": "native"
@@ -219,8 +280,8 @@
       "notFor": [],
       "tradition": "threnodist",
       "functions": [
-        "shield",
-        "foresee"
+        "foresee",
+        "shield"
       ],
       "challengeTypes": [
         "combat",
@@ -232,19 +293,36 @@
           "rank": 1,
           "name": "Early Feel",
           "grants": "Feel a threat forming in a room's emotional weather — in a person's shifting feeling-state — in time to move before the action completes.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "foresee"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Feeling Guard",
           "grants": "Protect someone by feeling the danger around them — your emotional sense is the guard watching what eyes don't catch.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "foresee",
+            "shield"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Felt Ward",
           "grants": "What shifts toward violence or harm in a space reaches you first, across the whole space, and you act in the gap it gives.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "foresee",
+            "shield"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -283,19 +361,36 @@
           "rank": 1,
           "name": "The Actual State",
           "grants": "Feel the true emotional state of a person or room — not what is displayed, what is actually present underneath it.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Feeling Trail",
           "grants": "Track a feeling over time — follow grief, find where fear developed, trace the emotional mark a person left in those they touched.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "track"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Emotional History",
           "grants": "Read the feeling-truth of a whole history — what a place carries, what a people have been running from, what a person has felt for years without naming.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "track"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -322,8 +417,8 @@
       "notFor": [],
       "tradition": "threnodist",
       "functions": [
-        "make",
-        "bind"
+        "bind",
+        "make"
       ],
       "challengeTypes": [
         "art",
@@ -335,19 +430,36 @@
           "rank": 1,
           "name": "The Feeling Held",
           "grants": "Make something that holds a feeling correctly — a song, an object, a gesture — so the feeling persists in it and can be shared or returned to.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "make"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Acting Elegy",
           "grants": "Bind a feeling into a made thing so it acts — the song that makes people feel what it carries, the totem that sustains or destabilizes the one who holds it.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "make",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Lasting Work",
           "grants": "Make something that carries feeling at scale — art that moves a city, a ritual that holds a people's grief, something that does what you felt long after you're gone.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "make",
+            "bind"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -373,8 +485,9 @@
       "notFor": [],
       "tradition": "threnodist",
       "functions": [
-        "travel",
-        "reveal"
+        "reveal",
+        "track",
+        "travel"
       ],
       "challengeTypes": [
         "navigation",
@@ -386,19 +499,39 @@
           "rank": 1,
           "name": "The Resonance Trail",
           "grants": "Navigate toward a feeling — find a person, a place, or a source by following the emotional trace they leave across a space.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "track"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Feeling Landmark",
           "grants": "Travel toward a powerful feeling in a region as if it were a beacon — grief, joy, terror — and find what is creating it.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "track",
+            "travel"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Long Trail",
           "grants": "Follow a feeling's trace across any distance — track a person by their emotional signature, find the source of what is moving a whole community.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "track",
+            "travel"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -425,8 +558,8 @@
       "notFor": [],
       "tradition": "threnodist",
       "functions": [
-        "sustain",
-        "empower"
+        "empower",
+        "sustain"
       ],
       "challengeTypes": [
         "endurance",
@@ -438,19 +571,36 @@
           "rank": 1,
           "name": "More in the Depth",
           "grants": "Sustain through the depth of feeling — where others run dry, you find the next wave of grief or joy, and it holds you.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Carried Weight",
           "grants": "Your emotional depth sustains others — not by removing the hardship but by carrying some of it with them so they don't carry it alone.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain",
+            "empower"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Wellspring Holds",
           "grants": "The depth sustains the party through the hardest stretch — not comfort, depth; not peace, feeling so genuine it holds people together until it's over.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain",
+            "empower"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -476,8 +626,10 @@
       "notFor": [],
       "tradition": "syllogist",
       "functions": [
+        "heal",
         "mend",
-        "restore"
+        "restore",
+        "reveal"
       ],
       "challengeTypes": [
         "medical",
@@ -489,19 +641,41 @@
           "rank": 1,
           "name": "Correct Diagnosis",
           "grants": "Diagnose and treat through methodical application of what is known to work — no guesswork, no comfort, the correct intervention.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "heal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "By Protocol",
           "grants": "Restore through proper sequence — the correct actions done in the correct order return the body or system to function without anything left out.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "heal",
+            "mend",
+            "restore"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Root Cause",
           "grants": "Restore completely by identifying the underlying cause and applying the full chain of correct interventions — nothing unaddressed, no relapse from what was left.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "heal",
+            "mend",
+            "restore"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -527,8 +701,9 @@
       "notFor": [],
       "tradition": "syllogist",
       "functions": [
+        "bind",
         "shield",
-        "bind"
+        "ward"
       ],
       "challengeTypes": [
         "social",
@@ -540,19 +715,37 @@
           "rank": 1,
           "name": "Proved Ground",
           "grants": "Establish a position so logically secure that attacks — social, rhetorical, physical — must first answer the proof before they have any purchase.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "shield"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Extended Proof",
           "grants": "Extend the proved position to cover a space or a group — a claim so airtight it functions as a ward against what depends on its denial.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "shield",
+            "ward"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Self-Maintaining Proof",
           "grants": "A proved position holds at scale — at the level of institutions, treaties, or laws — and no force that cannot answer the argument can unmake what it established.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "shield",
+            "ward",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -579,8 +772,9 @@
       "notFor": [],
       "tradition": "syllogist",
       "functions": [
+        "bind",
         "make",
-        "bind"
+        "sustain"
       ],
       "challengeTypes": [
         "intellectual",
@@ -592,19 +786,37 @@
           "rank": 1,
           "name": "The Working Rule",
           "grants": "Design a system — legal, social, procedural — that functions because the logic it runs on is sound.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "make"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Self-Regulating",
           "grants": "Build something that maintains itself through its internal logic — not enforced, not reminded, running because the reasoning it embodies is correct.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "make",
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Lasting Structure",
           "grants": "Construct a system so logically coherent it operates at scale without you — the laws, institutions, or mechanisms that run because the reasoning they embody is right.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "make",
+            "sustain",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -630,9 +842,9 @@
       "notFor": [],
       "tradition": "syllogist",
       "functions": [
+        "foresee",
         "move",
-        "reveal",
-        "foresee"
+        "reveal"
       ],
       "challengeTypes": [
         "navigation",
@@ -644,19 +856,39 @@
           "rank": 1,
           "name": "Reasoned Path",
           "grants": "Navigate any space by reasoning about it — what must be true about the layout, the route, the exits — without needing to see it first.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "move"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Inferred Route",
           "grants": "Derive the correct path through unknown territory by inference — from what you know about the type of space, the likely structure, the probable exits.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "move",
+            "foresee"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Necessary Route",
           "grants": "Navigate to any conclusion that follows necessarily from known premises — the route that must exist, the exit that must be there, the gap the logic requires.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "move",
+            "foresee"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -682,8 +914,8 @@
       "notFor": [],
       "tradition": "syllogist",
       "functions": [
-        "sustain",
-        "resist"
+        "resist",
+        "sustain"
       ],
       "challengeTypes": [
         "endurance",
@@ -695,19 +927,36 @@
           "rank": 1,
           "name": "Axiomatic Ground",
           "grants": "Hold function under pressure through the certainty of what you know — fear, pain, and doubt operate below the level the axioms hold.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "resist"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Correct Sequence",
           "grants": "Sustain across a hard stretch through pure logical discipline — the sequence of correct actions that keeps you going regardless of how you feel about them.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "resist",
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Axiom Holds",
           "grants": "As long as what you know is true remains true, you remain functional around it. The axiom is the ground and the ground does not give.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "resist",
+            "sustain"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"

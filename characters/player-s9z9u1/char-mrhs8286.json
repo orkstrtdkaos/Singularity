@@ -1403,143 +1403,210 @@
         "player": "Use one of the River Purification Tabs to treat a waterskin from the west channel before crossing — the ford is the last clean-ish water for a while",
         "summary": "Silas treats a waterskin with a purification tab from the west channel and leads the party across the ford.",
         "narration": "You straighten from the crouch, brush grit from your knee, and reach into the Traveler's Pack for the dark-glass vial. The wax seal breaks clean under your thumbnail — a faint mineral smell, almost metallic, gone in a second. You pull the stopper on the nearest waterskin and tap one tab out onto your palm: a small pale disk, unremarkable, something Mara gave you with the quiet gravity of a person who knows exactly how rare the thing she's handing over is.\n\nThe west channel runs clear over the bedrock shelf, six inches deep and cold enough to ache. You fill the waterskin there, watching the current carry nothing you can see — the Palework read confirmed it, and you trust the read. The tab goes in, stopper back, a thirty-second wait while you hold it upright. The water doesn't change color or smell. That's how you know it worked.\n\nPell has moved to the ford's near edge, one boot on the first dry stone, testing the shelf's give. Calvar watches the east bank from the track — not anxious, just precise, cataloging the tide-lines the way a man does when he already knows what caused them and is checking whether the rate matches his expectation. Huginn shifts on his low stone, settling his wings, unbothered.\n\n'West channel's sound,' you say, straightening with the waterskin back at your belt. 'Cross here, step right, stay off the east stones.' You take the lead across, Memory's butt lifted clear of the water, boots finding the bedrock shelf solid and even beneath the silt. The far bank rises in dry gravel and then the trade track resumes, curving south toward the valley floor — Millbrook maybe two hours ahead, the morning light strengthening behind you."
+      },
+      {
+        "player": "It's time for some action.  Have Huginn find something interesting for the party to engage with - I'd like to test out fighting skills or get into a skill challenge or duel.",
+        "summary": "Two road opportunists step out from the hawthorn bend and demand the party's packs — Huginn already above them.",
+        "narration": "Huginn has been quartering the trade track ahead for the better part of an hour, and he comes back differently now — not the steady lazy spiral of a bird reading open ground, but a tight, dropping circle over a stand of hawthorn where the track bends left around a limestone outcrop. He calls once, a flat bark, and doesn't move from the spot.\n\nPell is already reading the terrain. \"Cover on the left,\" she says, not loud. \"Track narrows at the bend — someone who knew the road would wait there.\" Calvar says nothing, but his right hand has found the strap of the document roll inside his coat and he's settled his feet.\n\nYou hear them before you see them — not much, just the grind of a boot heel on loose stone that a careful man would not have made. Two figures step out from the hawthorn's shadow onto the track, close enough that the narrow ground boxes the choice. One is broad and low, carrying a woodsman's long-handled hatchet like he's used it for something other than wood before. The other is lean, staying back a half-step, with a hooked shepherd's crook reversed in both hands — long reach, iron-shod tip. Road work, from the look of them: opportunists who ran out of other options before they ran out of road.\n\n\"Leave the packs,\" the broad one says. He sounds tired of his own errand. \"Bird too, if you can manage it.\" Huginn, perched on a hawthorn branch directly above the man's head, regards him with the full weight of his professional attention."
       }
     ],
     "lastTurn": {
-      "narration": "You straighten from the crouch, brush grit from your knee, and reach into the Traveler's Pack for the dark-glass vial. The wax seal breaks clean under your thumbnail — a faint mineral smell, almost metallic, gone in a second. You pull the stopper on the nearest waterskin and tap one tab out onto your palm: a small pale disk, unremarkable, something Mara gave you with the quiet gravity of a person who knows exactly how rare the thing she's handing over is.\n\nThe west channel runs clear over the bedrock shelf, six inches deep and cold enough to ache. You fill the waterskin there, watching the current carry nothing you can see — the Palework read confirmed it, and you trust the read. The tab goes in, stopper back, a thirty-second wait while you hold it upright. The water doesn't change color or smell. That's how you know it worked.\n\nPell has moved to the ford's near edge, one boot on the first dry stone, testing the shelf's give. Calvar watches the east bank from the track — not anxious, just precise, cataloging the tide-lines the way a man does when he already knows what caused them and is checking whether the rate matches his expectation. Huginn shifts on his low stone, settling his wings, unbothered.\n\n'West channel's sound,' you say, straightening with the waterskin back at your belt. 'Cross here, step right, stay off the east stones.' You take the lead across, Memory's butt lifted clear of the water, boots finding the bedrock shelf solid and even beneath the silt. The far bank rises in dry gravel and then the trade track resumes, curving south toward the valley floor — Millbrook maybe two hours ahead, the morning light strengthening behind you.",
-      "sceneSummary": "Silas treats a waterskin with a purification tab from the west channel and leads the party across the ford.",
+      "narration": "Huginn has been quartering the trade track ahead for the better part of an hour, and he comes back differently now — not the steady lazy spiral of a bird reading open ground, but a tight, dropping circle over a stand of hawthorn where the track bends left around a limestone outcrop. He calls once, a flat bark, and doesn't move from the spot.\n\nPell is already reading the terrain. \"Cover on the left,\" she says, not loud. \"Track narrows at the bend — someone who knew the road would wait there.\" Calvar says nothing, but his right hand has found the strap of the document roll inside his coat and he's settled his feet.\n\nYou hear them before you see them — not much, just the grind of a boot heel on loose stone that a careful man would not have made. Two figures step out from the hawthorn's shadow onto the track, close enough that the narrow ground boxes the choice. One is broad and low, carrying a woodsman's long-handled hatchet like he's used it for something other than wood before. The other is lean, staying back a half-step, with a hooked shepherd's crook reversed in both hands — long reach, iron-shod tip. Road work, from the look of them: opportunists who ran out of other options before they ran out of road.\n\n\"Leave the packs,\" the broad one says. He sounds tired of his own errand. \"Bird too, if you can manage it.\" Huginn, perched on a hawthorn branch directly above the man's head, regards him with the full weight of his professional attention.",
+      "sceneSummary": "Two road opportunists step out from the hawthorn bend and demand the party's packs — Huginn already above them.",
       "choices": [
         {
-          "label": "Push the pace south — Dara's week-five deadline is pressing and Millbrook is two hours out",
+          "label": "Accept the duel — step forward and engage the broad one directly, Memory in hand, while Pell holds the lean one's angle",
           "attribute": "physical",
           "subAttribute": "agility",
-          "difficulty": 0,
+          "axes": {
+            "violence_peace": -0.3
+          },
+          "difficulty": 15,
           "intentTags": [
-            "travel"
+            "attack"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": "road-opportunists-duel"
         },
         {
-          "label": "Walk and let Calvar set the tempo — watch him as the valley comes into view and read whether he's ready for what he's about to walk into",
+          "label": "Use The Attended End — let it read both men plainly before a single step, and let whatever it names show on your face",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {
+            "death_life": -0.2
+          },
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "trivial": true
+          "abilityId": "the-attended-end",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null
         },
         {
-          "label": "Use the two hours on the road to think through how to present Calvar to Dara Holt — she named 'someone who can get their hands dirty'; make sure the introduction lands right",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 0,
+          "label": "Name Huginn — tell them plainly what the bird above them is and what it means that it came back here — let the truth of the situation do the work",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.2
+          },
+          "difficulty": 15,
           "intentTags": [
-            "plan"
+            "threaten",
+            "intimidate"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null
         },
         {
-          "label": "Hand the sealed document roll a thought — decide whether to present the Grael chain to Dara and Mara when you arrive, or hold it until the water work is underway",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 0,
+          "label": "Take the encounter formally — step into the duel structure with the broad man as the principal opponent",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {
+            "violence_peace": -0.25
+          },
+          "difficulty": 15,
           "intentTags": [
-            "plan"
+            "attack",
+            "risky"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": "road-opportunists-duel"
         }
       ],
+      "deeds": [],
       "characterDeltas": {
-        "inventoryRemove": [
-          "River Purification Tabs (vial)"
-        ]
+        "health": 0,
+        "energy": 0
       },
+      "ledgerEvents": [],
+      "questUpdates": [],
       "scene": {
-        "setting": "The trade track south of the ford crossing — party now on the far bank, west channel behind them, bedrock shelf sound underfoot during the crossing. Open ground, morning light strengthening, the valley floor and Millbrook roughly two hours south.",
+        "setting": "The trade track at a left-hand limestone bend, two hours south of the ford — hawthorn screening the left side, outcrop on the right, track narrowed to a choke-point. Morning light, open sky above the bend.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "On Silas's right, pack settled, crossing done — eyes ahead toward the valley floor."
+            "state": "One step to Silas's right, pack weight shifted forward — reading the lean man's crook-range."
           },
           {
             "name": "Calvar",
-            "state": "On Silas's left, document roll secure inside his coat — cataloging the east-bank tide-lines as he steps past them."
+            "state": "Half a step back, right hand on the document roll inside his coat — still, feet settled."
           },
           {
             "name": "Huginn",
-            "state": "Airborne from the low stone, quartering ahead of the party down the trade track."
+            "state": "Perched on the hawthorn branch directly above the broad man's head — watching him with professional calm."
+          },
+          {
+            "name": "Broad Opportunist",
+            "state": "On the track, long-handled hatchet loose at his side — tired-sounding, waiting for a response."
+          },
+          {
+            "name": "Lean Opportunist",
+            "state": "Half a step back, shepherd's crook reversed and iron-shod — staying at reach distance."
           }
         ],
         "objects": [
-          "Memory (spear) — in Silas's grip, butt lifted clear of the water during crossing",
-          "Traveler's Pack — on Silas's back, purification vial now empty and discarded",
+          "Memory (spear) — in Silas's grip",
+          "Traveler's Pack — on Silas's back",
           "Sealed document roll — inside Calvar's coat",
           "Pell's pack — on her back",
           "River Whetstone — at Pell's belt",
           "Valve Failure Timeline — in Silas's pack",
-          "East-bank stones — behind the party, gray-green tide-lines still visible"
+          "Long-handled hatchet — in the broad man's hand",
+          "Iron-shod shepherd's crook (reversed) — in the lean man's hands"
         ],
         "threads": [
-          "Millbrook two hours south — Dara's week-five deadline pressing",
-          "Grael chain document roll — decision pending on when and to whom to present it",
-          "Calvar's first impression of Millbrook and its people — how to frame the introduction",
-          "River contamination spreading laterally along grain — rate accelerating"
+          "Two road opportunists blocking the track — demand packs and Huginn; waiting for the party's response",
+          "Calvar is protecting the document roll — his priority is clear",
+          "Huginn is directly above the broad man — the positioning is not accidental",
+          "Millbrook still two hours south — Dara's week-five deadline pressing"
         ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "pell",
+          "name": "Pell",
+          "note": "Immediately read the terrain at the hawthorn bend — named cover and choke-point without prompting. Now on Silas's right, reading the lean man's reach.",
+          "statusNote": "On the trade track at the limestone bend — tactical read given, holding right side."
+        },
+        {
+          "op": "update",
+          "npcId": "calvar",
+          "name": "Calvar",
+          "note": "Right hand found the document roll inside his coat the moment the figures appeared — document is his priority, clear without words.",
+          "statusNote": "On the trade track at the limestone bend — protecting the document roll, feet settled, waiting."
+        }
+      ],
+      "newEncounter": {
+        "type": "duel",
+        "name": "Road Opportunists at the Hawthorn Bend",
+        "setup": "Two tired road-workers turned brigands have boxed the party at a narrow limestone bend — the broad one with a hatchet and the lean one with an iron-shod crook, both close enough that the ground forecloses easy retreat. Huginn is already above them.",
+        "lethal": false,
+        "opponent": {
+          "name": "Broad Man with Hatchet",
+          "health": 4,
+          "threat": 25,
+          "yieldAt": 1,
+          "fleeDifficulty": 15,
+          "tacticTags": [
+            "close-pressure",
+            "exhausted-aggression",
+            "read-your-flinch"
+          ]
+        }
       },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "Brief pause at the ford to treat the waterskin and complete the crossing"
-      },
-      "codexUpdates": [
-        {
-          "topic": "the-water-crisis",
-          "label": "The Water Crisis",
-          "kind": "mystery",
-          "fact": "The west channel at the lower ford remains clear as of World-day 18 morning — safe for crossing with a purification tab. The east-bank contamination is confined to that side for now, but the spread rate is accelerating along mineral grain.",
-          "links": [
-            "millbrook",
-            "palework",
-            "dara-holt",
-            "find-the-engineer"
-          ]
-        }
-      ],
-      "moveTo": {
-        "location": "millbrook-ford-south-track",
-        "why": "Party crossed the ford and stepped onto the trade track south — Millbrook two hours ahead"
+        "why": "A brief quarter-mile of road-walk from the ford to the hawthorn bend."
       }
     },
     "sceneState": {
-      "setting": "The trade track south of the ford crossing — party now on the far bank, west channel behind them, bedrock shelf sound underfoot during the crossing. Open ground, morning light strengthening, the valley floor and Millbrook roughly two hours south.",
+      "setting": "The trade track at a left-hand limestone bend, two hours south of the ford — hawthorn screening the left side, outcrop on the right, track narrowed to a choke-point. Morning light, open sky above the bend.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "On Silas's right, pack settled, crossing done — eyes ahead toward the valley floor."
+          "state": "One step to Silas's right, pack weight shifted forward — reading the lean man's crook-range."
         },
         {
           "name": "Calvar",
-          "state": "On Silas's left, document roll secure inside his coat — cataloging the east-bank tide-lines as he steps past them."
+          "state": "Half a step back, right hand on the document roll inside his coat — still, feet settled."
         },
         {
           "name": "Huginn",
-          "state": "Airborne from the low stone, quartering ahead of the party down the trade track."
+          "state": "Perched on the hawthorn branch directly above the broad man's head — watching him with professional calm."
+        },
+        {
+          "name": "Broad Opportunist",
+          "state": "On the track, long-handled hatchet loose at his side — tired-sounding, waiting for a response."
+        },
+        {
+          "name": "Lean Opportunist",
+          "state": "Half a step back, shepherd's crook reversed and iron-shod — staying at reach distance."
         }
       ],
       "objects": [
-        "Memory (spear) — in Silas's grip, butt lifted clear of the water during crossing",
-        "Traveler's Pack — on Silas's back, purification vial now empty and discarded",
+        "Memory (spear) — in Silas's grip",
+        "Traveler's Pack — on Silas's back",
         "Sealed document roll — inside Calvar's coat",
         "Pell's pack — on her back",
         "River Whetstone — at Pell's belt",
         "Valve Failure Timeline — in Silas's pack",
-        "East-bank stones — behind the party, gray-green tide-lines still visible"
+        "Long-handled hatchet — in the broad man's hand",
+        "Iron-shod shepherd's crook (reversed) — in the lean man's hands"
       ],
       "threads": [
-        "Millbrook two hours south — Dara's week-five deadline pressing",
-        "Grael chain document roll — decision pending on when and to whom to present it",
-        "Calvar's first impression of Millbrook and its people — how to frame the introduction",
-        "River contamination spreading laterally along grain — rate accelerating"
+        "Two road opportunists blocking the track — demand packs and Huginn; waiting for the party's response",
+        "Calvar is protecting the document roll — his priority is clear",
+        "Huginn is directly above the broad man — the positioning is not accidental",
+        "Millbrook still two hours south — Dara's week-five deadline pressing"
       ]
     }
   },
@@ -1969,7 +2036,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d4] Watched the chain close without speaking — her exhale said what needed saying. Present and quiet, the habit entirely absent.",
         "[d4] Did not speak when Calvar named the shape — jaw one degree tighter, eyes on the hearth. Filing it without performance.",
         "[d4] Returned Memory without performance — collar rune under her thumb, passed it back the way she returns a file to its hook. Said 'he'll be ready' of Calvar and left it there. The hab",
         "[d4] Settled for the night without ceremony — boots upright, asleep before Silas, habit entirely absent.",
@@ -1978,7 +2044,8 @@
         "[d5] Pulled the Inn door shut behind her, moved to Silas's right without being asked — her traveling mode, economical and present.",
         "[d5] Keeping pace on Silas's right through the briefing — present, economical, no words interjected.",
         "[d5] Named the shape of her father to Calvar plainly — he knew his hand before his name meant something to her; that is enough, for now. Jaw settled after. No management.",
-        "[d5] Waiting on the ford assessment — eyes on the east bank, no words needed."
+        "[d5] Waiting on the ford assessment — eyes on the east bank, no words needed.",
+        "[d5] Immediately read the terrain at the hawthorn bend — named cover and choke-point without prompting. Now on Silas's right, reading the lean man's reach."
       ],
       "knownFacts": [
         "Settled afterward without the habit returning — the want named, answered, and still there",
@@ -1999,7 +2066,7 @@
         "naming the load-bearing implication without editorializing"
       ],
       "status": "active",
-      "statusNote": "On the road south with Silas and Calvar — at the ford, waiting for the crossing call.",
+      "statusNote": "On the trade track at the limestone bend — tactical read given, holding right side.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
@@ -2339,7 +2406,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d4] Passed his wax seal without being asked — accepted the two-hand document as the right shape for what it needs to do. Ready for sleep and the road to Millbrook.",
         "[d4] Cannot confirm Pell's father was marked — was a junior drafter then and checked the board when the man left; no mark was visible. But named the structural shape: a man who had just",
         "[d4] Took the document roll inside his coat and went to bed without ceremony — named 'sleep, then' and meant it. Ready for the road at first light.",
         "[d4] Sleeping with the document roll inside his coat — ready for the road at first light.",
@@ -2348,7 +2414,8 @@
         "[d5] Stepped out at pre-dawn without prompting, document roll secured, fell in on Silas's left without ceremony — road discipline from the first step.",
         "[d5] Received a full briefing on Millbrook — people, layout, stakes. Asked one practical question (intake sleeve material: iron, pre-Transition). Filed the rest without comment.",
         "[d5] Named Pell's father as exacting — said he would have been pleased by the forge. Filed it without more, which was the right amount.",
-        "[d5] Watching Silas's Palework read at the ford without interruption — absorbing the assessment."
+        "[d5] Watching Silas's Palework read at the ford without interruption — absorbing the assessment.",
+        "[d5] Right hand found the document roll inside his coat the moment the figures appeared — document is his priority, clear without words."
       ],
       "knownFacts": [
         "The document now holds two hands — Calvar's authorship and Silas's chain-record — sealed together. He named the difference plainly.",
@@ -2369,7 +2436,7 @@
         "filing operational intelligence in sequence without editoria"
       ],
       "status": "active",
-      "statusNote": "On the road south with Silas and Pell — observing the ford read, document roll secure inside his coat.",
+      "statusNote": "On the trade track at the limestone bend — protecting the document roll, feet settled, waiting.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
@@ -3995,20 +4062,20 @@
     }
   },
   "tendencies": {
-    "strategic": 19.947498242111312,
-    "cerebral": 13.34460317483401,
-    "social": 11.299929922393824,
-    "generous": 1.506968650621786,
-    "cautious": 13.235603882593079,
-    "physical": 0.08846350317891016,
-    "risky": 0.766280870158438,
-    "ruthless": 1.34581617734387,
-    "carousing": 0.07691485210885443,
-    "amorous": 8.838551124014407,
-    "patient": 2.8858291735061927,
-    "stealth": 1.9458180683703543,
-    "devotion": 1.0613396879653643,
-    "craft": 0.9991684203224117
+    "strategic": 20.44881078605853,
+    "cerebral": 13.010988095463158,
+    "social": 11.017431674333979,
+    "generous": 1.4692944343562413,
+    "cautious": 12.904713785528251,
+    "physical": 0.0862519155994374,
+    "risky": 0.7471238484044771,
+    "ruthless": 1.3121707729102732,
+    "carousing": 0.07499198080613306,
+    "amorous": 8.617587345914046,
+    "patient": 2.8136834441685377,
+    "stealth": 1.8971726166610954,
+    "devotion": 1.0348061957662302,
+    "craft": 0.9741892098143514
   },
   "aptitudes": [
     "strategist",
@@ -4018,7 +4085,7 @@
     "stalwart",
     "charmer"
   ],
-  "actionCount": 461,
+  "actionCount": 462,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -4248,8 +4315,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784378434574,
-  "rev": 673,
+  "updatedAt": 1784379085722,
+  "rev": 674,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4519,10 +4586,6 @@
           },
           "attentionHistory": [
             {
-              "kind": "fact",
-              "day": 4
-            },
-            {
               "kind": "interact",
               "day": 4
             },
@@ -4589,6 +4652,10 @@
             {
               "kind": "interact",
               "day": 4
+            },
+            {
+              "kind": "interact",
+              "day": 5
             },
             {
               "kind": "interact",
@@ -5278,7 +5345,7 @@
   "syncedAt": 1784348465253,
   "teachers": {},
   "regionsKnown": {
-    "valley": 278
+    "valley": 279
   },
   "foreclosed": [
     "rootkin",
@@ -5333,10 +5400,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T12:40:34.572Z",
+      "lastAt": "2026-07-18T12:51:25.721Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 3
+      "beats": 4
     }
   ],
   "company": [
@@ -5362,5 +5429,27 @@
   "livingCurrentAccess": [],
   "braidDiscount": 0,
   "portraitPinned": true,
-  "wildCurrentAccess": []
+  "wildCurrentAccess": [],
+  "customEncounters": {
+    "gm-road-opportunists-at-the-hawth": {
+      "schemaVersion": 1,
+      "id": "gm-road-opportunists-at-the-hawth",
+      "type": "duel",
+      "name": "Road Opportunists at the Hawthorn Bend",
+      "setup": "Two tired road-workers turned brigands have boxed the party at a narrow limestone bend — the broad one with a hatchet and the lean one with an iron-shod crook, both close enough that the ground forecloses easy retreat. Huginn is already above them.",
+      "lethal": false,
+      "opponent": {
+        "name": "Broad Man with Hatchet",
+        "health": 4,
+        "threat": 25,
+        "yieldAt": 1,
+        "fleeDifficulty": 15,
+        "tacticTags": [
+          "close-pressure",
+          "exhausted-aggression",
+          "read-your-flinch"
+        ]
+      }
+    }
+  }
 }

@@ -103,7 +103,7 @@ function poleCharge(location = {}) {
 /** Compute the narrative REGISTER cue for a place: concrete by default, poetic where the
  *  concrete_abstract axis + charge earn it, plus a light axis-flavored tint. Pure. Returns
  *  { band, cue }. */
-export function narrativeRegister(location = {}) {
+export function narrativeRegister(location = {}, plainness = "balanced") {
   const sp = location.spectrum || {};
   const ca = Number(sp.concrete_abstract) || 0;   // - = concrete pole, + = abstract pole
   const charge = poleCharge(location);
@@ -126,8 +126,29 @@ export function narrativeRegister(location = {}) {
   if (ms >= 0.4) tints.push("reverent, lyrical"); else if (ms <= -0.4) tints.push("precise, clinical-strange");
   const dl = Number(sp.death_life) || 0;
   if (dl >= 0.4) tints.push("verdant, quickening"); else if (dl <= -0.4) tints.push("hushed, still");
-  const cue = tints.length ? `${lead} Word-choice tint: ${tints.join("; ")}.` : lead;
+  // SNG-144: the player's PLAINNESS dial. PLAIN overrides the place DOWNWARD — the player's comfort wins
+  // over the region's earned lyricism (Brooklyn's setting holds everywhere). LYRICAL nudges a grounded
+  // place a touch upward. The dial is the player's; the tint stays the place's (minus lyrical when plain).
+  let dialNote = "";
+  if (plainness === "plain") {
+    band = "concrete";
+    lead = "The place might earn more, but the player has DIALED PLAINNESS TO PLAIN — honor it OVER the place: say what is actually there, in first-read words. Minimal metaphor, NO abstract personification, no philosophical framing. Short, clear, grounded — the player's comfort wins.";
+    const li = tints.indexOf("reverent, lyrical"); if (li >= 0) tints.splice(li, 1);
+  } else if (plainness === "lyrical" && band !== "poetic") {
+    dialNote = " The player has DIALED LYRICISM UP — you may reach a touch more for image than the place alone earns, still serving the scene.";
+  }
+  const cue = (tints.length ? `${lead} Word-choice tint: ${tints.join("; ")}.` : lead) + dialNote;
   return { band, cue };
+}
+
+/** SNG-144: the player's BLUNTNESS dial — how fully the narration COMMITS to what the scene IS, ALWAYS
+ *  within the rating ceiling. The dial adjusts HOW the narration uses the room the rating gives; it never
+ *  raises the ceiling, and the minor-protection / prohibited-content floors are absolute and independent
+ *  of it. Returns an appendable directive ("" for balanced). Pure. */
+export function bluntnessDirective(preset = "PG-13", bluntness = "balanced") {
+  if (bluntness === "blunt") return ` BLUNTNESS (player dial: BLUNT) — commit to what the scene IS, using the FULL room the ${preset} ceiling gives and no less: violence visceral and physical (real blood, injury, aftermath, named plainly — not softened); characters curse naturally in dialogue where such people would; physical and sensual description direct and embodied — a body as a body, a charged scene present and unhedged — never dissolved into vague poetry or faded early above the rating floor. Use ALL the room the rating gives; NEVER exceed it — the ${preset} ceiling and the absolute floors still bind.`;
+  if (bluntness === "restrained") return ` BLUNTNESS (player dial: RESTRAINED) — keep it spare: consequence implied more than shown, the camera may drift, stay well inside the ${preset} ceiling. A player who prefers less.`;
+  return "";
 }
 
 /** Rating as a DIRECTION (not just a cap): the affirmative register per ceiling. R+ is the FULL

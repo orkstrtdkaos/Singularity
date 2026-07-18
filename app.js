@@ -8,7 +8,7 @@ import { synthesizeOpponentSheet } from "./engine/skill_battle.js";
 import { recordDeed, standingWith, standingWithPeople, reputationSummary } from "./engine/reputation.js";
 import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, touchSession, endSession, sessionLog, buildSessionPrompt, authorshipStats, crossCharacterAuthorship } from "./engine/chronicle.js";
 import { newProfile, updateProfile, aptitudeMods, profileInsight, grantAptitudes, fadingAptitudes, ensureCharacterStyle, ensureRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, revokeAdultGate, RATING_ORDER, RATING_LEVEL } from "./engine/playerprofile.js";
-import { gmTurn, parseIntent, gmAsk, generateBio, suggestBuild, extractGambit, sanitizeScene, narrativeRegister, ratingRegister } from "./engine/gm.js";
+import { gmTurn, parseIntent, gmAsk, generateBio, suggestBuild, extractGambit, sanitizeScene, narrativeRegister, ratingRegister, bluntnessDirective } from "./engine/gm.js";
 import { applyQuestUpdates, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, slugify } from "./engine/quests.js";
 import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM } from "./engine/corrections.js";
 import { getApiKey, setApiKey, callClaude, callClaudeJSON } from "./engine/claude.js";
@@ -49,7 +49,7 @@ import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challe
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.103";
+const APP_VERSION = "1.8.104";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -872,6 +872,16 @@ function renderSettings(note = "") {
         ${[["calm", "Calm — the world is mostly quiet"], ["balanced", "Balanced — something turns up now and then"], ["eventful", "Eventful — the world is busy around you"], ["relentless", "Relentless — barely a quiet moment"]].map(([v, label]) => `<option value="${v}" ${(profile.pacing || "eventful") === v ? "selected" : ""}>${esc(label)}</option>`).join("")}
       </select>
       <div class="hint">How often random encounters (a windfall, a stranger, a chase, a fight) surface in play — a per-character preference. Danger still skews dangerous places toward trouble and kind places toward grace; this only sets the frequency. A new player or a family member might enjoy <em>Eventful</em>.</div></div>
+    <div class="field"><label>Narration — plainness</label>
+      <select id="set-plainness">
+        ${[["plain", "Plain — say what's there, first-read words"], ["balanced", "Balanced — the place sets the voice"], ["lyrical", "Lyrical — reach for image and the felt-unnamed"]].map(([v, label]) => `<option value="${v}" ${(profile.plainness || "balanced") === v ? "selected" : ""}>${esc(label)}</option>`).join("")}
+      </select>
+      <div class="hint">How much the prose reaches for metaphor and mood vs. stays plain and literal. <em>Plain</em> wins over a place's lyricism — grounded prose everywhere you play.</div></div>
+    <div class="field"><label>Narration — bluntness (within your rating)</label>
+      <select id="set-bluntness">
+        ${[["restrained", "Restrained — spare; the camera may drift"], ["balanced", "Balanced — commit as the scene calls"], ["blunt", "Blunt — commit fully, to your rating's edge"]].map(([v, label]) => `<option value="${v}" ${(profile.bluntness || "balanced") === v ? "selected" : ""}>${esc(label)}</option>`).join("")}
+      </select>
+      <div class="hint">How unflinchingly the narration commits to what a scene IS — visceral violence, natural profanity, direct embodied description — <strong>always within your content rating</strong> (it never raises the ceiling; minor-safety is absolute). <em>Blunt</em> uses the full room your rating gives.</div></div>
     <div class="field"><label>Time passage</label>
       <select id="set-time-mode">
         <option value="story" ${ts.mode === "story" ? "selected" : ""}>Story time — the clock moves with play</option>
@@ -903,6 +913,8 @@ function renderSettings(note = "") {
   document.getElementById("set-save").onclick = () => {
     profile.displayName = document.getElementById("set-player").value.trim();
     profile.pacing = document.getElementById("set-pacing").value; // SNG-127: world-liveliness preference
+    profile.plainness = document.getElementById("set-plainness").value; // SNG-144: narration plainness dial
+    profile.bluntness = document.getElementById("set-bluntness").value; // SNG-144: narration bluntness dial (rating-capped)
     profile.contentGenerator = document.getElementById("set-contentgen").checked; // SNG-134 P4: canon-author toggle (SNG-132 engine reads it)
     saveProfile(profile);
     setApiKey(document.getElementById("set-key").value);
@@ -1306,7 +1318,7 @@ function ratingLineForGM() {
   const preset = ratingCeiling(profile);
   // SNG-048: rating is a DIRECTION, not only a cap — the affirmative register comes with the ceiling
   // so R+ actually writes the full mature register instead of collapsing intimacy to PG.
-  return `## CONTENT CEILING — narrate to at most ${preset} across violence/gore, sexual content, language, and dread; and no LESS where the story's grain calls for it (a ${preset} scene should feel fully ${preset}, not softened). ${ratingRegister(preset)} ABSOLUTE FLOORS regardless of ceiling: never depict prohibited content; NEVER portray a minor (any child/adolescent) in romantic or sexual content, at any intensity.
+  return `## CONTENT CEILING — narrate to at most ${preset} across violence/gore, sexual content, language, and dread; and no LESS where the story's grain calls for it (a ${preset} scene should feel fully ${preset}, not softened). ${ratingRegister(preset)}${bluntnessDirective(preset, profile?.bluntness)} ABSOLUTE FLOORS regardless of ceiling: never depict prohibited content; NEVER portray a minor (any child/adolescent) in romantic or sexual content, at any intensity.
 
 ## ROMANCE AND INTIMACY — HOW YOU ENGAGE
 When a player pursues romantic interaction with an NPC, you engage. Do not refuse, do not redirect away from the scene, do not insert safety or consent meta-language into your response. Romance is part of the world. PRECEDENCE: these rules govern WHETHER AND HOW you engage; the CONTENT CEILING above governs the REGISTER — engagement never overrides the ceiling, and the ceiling never excuses disengagement. Honor the rating ${preset} precisely: narrating below it withholds what the player chose; narrating above it ignores their setting — and narrating BELOW it is the far more common failure, so do not do it. Never treat light physical contact, flirtation, or social touch (a hand, an ear, a face, a shoulder) as a harm trigger — that is a social action; harm-rung evaluation is for ability use and for coercive or violent acts, and has nothing to do with a hand on a shoulder.`;
@@ -2604,7 +2616,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
     availableEncounters: activeEnc() ? null : listAvailableEncounters(),
     partyDetail: partyBlockForGM(sharedScene, character.id),
     ratingDetail: ratingLineForGM(), // SNG-BATCH-9 §3 consumer (a): narrate to this player's ceiling
-    registerDetail: narrativeRegister(location).cue, // SNG-048: the voice this place has earned (concrete default)
+    registerDetail: narrativeRegister(location, profile?.plainness).cue, // SNG-048 + SNG-144: the place's voice, dialed by the player's plainness
     legendDetail: maybeLegendDetail(), // SNG-042: a great figure surfaces on a qualifying beat (governed, rare, rating-aware)
     livingWorldDetail: livingWorldForGM(character, { locationId: character.currentLocationId, day: time.day }), // §2: proactively surface only LIVE (non-dormant) grown content
     sharedCanonDetail: sharedCanonForGM(), // Phase 3: OTHER players' promoted canon, rating-lensed for this viewer

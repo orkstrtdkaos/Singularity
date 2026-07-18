@@ -12,7 +12,7 @@ import { newClock, readClock, advanceClock, getWorldEpoch, absoluteWorldDay, wor
 import { companionBonus, companionsForGM, activeCompanions, partnerAdjacentNpcs } from "../engine/companions.js";
 import { applyQuestUpdates, questsForGM, slugify, resolveQuest, dedupeQuests, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, threadTouched } from "../engine/quests.js";
 import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, touchSession, endSession, sessionLog, buildSessionPrompt, authorshipStats, crossCharacterAuthorship } from "../engine/chronicle.js";
-import { sanitizeScene, buildTurnContext, sanitizeIntent, narrativeRegister, ratingRegister, renderSceneHistory, tierParts } from "../engine/gm.js";
+import { sanitizeScene, buildTurnContext, sanitizeIntent, narrativeRegister, ratingRegister, renderSceneHistory, tierParts, bluntnessDirective } from "../engine/gm.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, findExistingNpc, prettifyNpcName, relationshipBand, advanceBond, relationshipLabel, isPartnerAdjacent, knownPeopleAt, npcPortraitTier, backfillNpcGender } from "../engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
 import { initWorldState, runWorldTick, advanceGeneratedOffscreen, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "../engine/worldtick.js";
@@ -2345,6 +2345,36 @@ await (async () => {
   check("romance v2: R+ still holds the line (no graphic mechanical depiction)",
     /not graphic mechanical depiction/i.test(ratingRegister("R+")));
   check("romance v2: an unknown preset falls back to a safe mid register", /short of the explicit/i.test(ratingRegister("???")));
+})();
+
+// --- SNG-144: narration register DIALS (plainness + bluntness; rating as the cap) ---
+(() => {
+  const abstractCharged = { spectrum: { concrete_abstract: 0.6 }, poleIntensity: { abstract: 0.7 } };
+  const ordinary = { spectrum: { concrete_abstract: -0.2 }, poleIntensity: { concrete: 0.2 } };
+
+  // PLAINNESS: plain OVERRIDES an abstract/charged place downward (Brooklyn's dial wins over the region)
+  const plainInAbstract = narrativeRegister(abstractCharged, "plain");
+  check("SNG-144: PLAIN overrides even an abstract, charged place → concrete + a plain directive (player's comfort wins)", plainInAbstract.band === "concrete" && /DIALED PLAINNESS TO PLAIN/.test(plainInAbstract.cue));
+  check("SNG-144: balanced leaves the place's earned band intact (the region still speaks)", narrativeRegister(abstractCharged, "balanced").band === "poetic");
+  // LYRICAL nudges a grounded place up (a touch more image than the place alone earns)
+  check("SNG-144: LYRICAL nudges a concrete place upward (more image than the place earns)", /DIALED LYRICISM UP/.test(narrativeRegister(ordinary, "lyrical").cue));
+  // plain drops the lyrical tint but keeps a non-lyrical one
+  const plainLyricalPlace = narrativeRegister({ spectrum: { concrete_abstract: 0.6, mechanical_spiritual: 0.6 }, poleIntensity: { abstract: 0.7 } }, "plain");
+  check("SNG-144: PLAIN strips the 'reverent, lyrical' tint (no lyricism smuggled back in)", !/reverent, lyrical/.test(plainLyricalPlace.cue));
+  check("SNG-144: PLAIN keeps a non-lyrical tint (a stark place stays stark)", /stark/i.test(narrativeRegister({ spectrum: { concrete_abstract: -0.3, falsehood_truth: 0.6 } }, "plain").cue));
+
+  // BLUNTNESS: blunt commits, restrained is spare, balanced adds nothing — ALWAYS rating-capped
+  const bluntR = bluntnessDirective("R", "blunt");
+  check("SNG-144: BLUNT at R commits — visceral violence + natural profanity + direct embodied description", /visceral|blood|curse|direct and embodied/i.test(bluntR) && /BLUNT/.test(bluntR));
+  check("SNG-144: the blunt directive is RATING-CAPPED (names the ceiling, never exceeds it)", /within the R ceiling|the R ceiling|NEVER exceed it/.test(bluntR));
+  check("SNG-144: at PG-13 the blunt end is STILL PG-13 (the cap holds — the dial uses room, never adds it)", /PG-13/.test(bluntnessDirective("PG-13", "blunt")) && !/explicit|graphic/i.test(bluntnessDirective("PG-13", "blunt")));
+  check("SNG-144: RESTRAINED yields a spare directive; balanced adds nothing", /spare|drift|prefers less/i.test(bluntnessDirective("R", "restrained")) && bluntnessDirective("R", "balanced") === "");
+
+  // wiring: the ceiling line composes bluntness within it (floors + cap untouched); register passes plainness
+  const appSrc = readFileSync(join(root, "app.js"), "utf8");
+  check("SNG-144: ratingLineForGM composes the bluntness dial after the rating register, before the ABSOLUTE FLOORS", /\$\{ratingRegister\(preset\)\}\$\{bluntnessDirective\(preset, profile\?\.bluntness\)\} ABSOLUTE FLOORS/.test(appSrc));
+  check("SNG-144: the register block passes the player's plainness dial", /narrativeRegister\(location, profile\?\.plainness\)\.cue/.test(appSrc));
+  check("SNG-144: Settings expose both per-profile dials + save them", /id="set-plainness"/.test(appSrc) && /id="set-bluntness"/.test(appSrc) && /profile\.plainness = document/.test(appSrc) && /profile\.bluntness = document/.test(appSrc));
 })();
 
 // --- ability-arch v2: depth is EARNED, not bought ---

@@ -10,7 +10,7 @@
   "level": 14,
   "xp": 1328,
   "attributes": {
-    "physical": 3,
+    "physical": 4,
     "mental": 5,
     "social": 6,
     "practical": 6
@@ -74,7 +74,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.47488520744040436,
+    "spectrumId": -0.4511409470683841,
     "violence_peace": 0.1030845625,
     "chaos_order": 0.22692151233983043,
     "mechanical_spiritual": 0.23279962203849028,
@@ -773,7 +773,162 @@
     "The Fell Pell gathering sealed and delegated — Calvar to repair lead, Dara to logistics, Mara to supply and comms, Aldric to accounts, Fendt named to the fellowship, document roll complete and bound for Pip Cotter. Silas and Pell step out into the cold night, the road beginning tomorrow, the forge warm behind them."
   ],
   "currentLocationId": "millbrook",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "millbrook",
+    "turns": [
+      {
+        "player": "Discuss the options for the road ahead... the different objectives/quests. ask what she wants to go for first",
+        "summary": "Silas and Pell step out into the cold night and talk the road through — document moving, Calvar placed, Fendt named. Pell names the real work: upstream, the Disputed Zone, the source itself.",
+        "narration": "The night air outside the Fell Pell is cold enough to see your breath. The forge-warmth at your back is already fading at three paces, and the village has settled into the particular quiet of a place where people have said enough for one day and gone inside. Pell walks beside you, her shoulder against yours, hands in her coat pockets. Huginn is somewhere above — you can hear the occasional adjustment of weight on the eave, the soft knock of a talon on old wood.\n\nYou lay it out plainly as you walk the short circuit of the south lane: the document roll needs to reach the district records office, but Pip Cotter carries it and that leg is Mara's. Calvar has his repair work and Dara. The fellowship has hands on every thread you tied tonight. What the road actually needs from you — from the two of you — is less certain. You name the shapes of it as you see them: the water crisis is upstream, in the Disputed Zone somewhere, and everything the crisis-response structure is doing buys time rather than solving it. The archive at Archive Hollow is still a live question — every faction wanting a different answer, and nobody with standing to give one. And there is the matter of Grael: the document goes to the records office, but a paper finding its destination is not the same as a man facing a consequence.\n\nPell listens without interrupting, which is how she always listens when she is actually thinking. Then she says, \"The document is moving. Calvar is placed. Fendt is named.\" She pauses at the corner of the lane, looking north — the dark of the upper meadow just visible past the roof-line, the pale smear of stars above the ridge. \"So those aren't the thing anymore. The thing is upstream. Whatever is doing it is still doing it, and everything else is a ledger entry on a problem that isn't solved.\" She looks at you sidelong. \"That's where I'd go. The Disputed Zone. Find the source before the west channel turns gray too.\"\n\nHuginn drops from the eave and lands on the fence-post three feet away without ceremony. It regards the northern dark for a moment, then makes a sound that is not quite agreement and not quite warning — the specific sound it makes when something up there is already ending and it would like you to know."
+      }
+    ],
+    "lastTurn": {
+      "narration": "The night air outside the Fell Pell is cold enough to see your breath. The forge-warmth at your back is already fading at three paces, and the village has settled into the particular quiet of a place where people have said enough for one day and gone inside. Pell walks beside you, her shoulder against yours, hands in her coat pockets. Huginn is somewhere above — you can hear the occasional adjustment of weight on the eave, the soft knock of a talon on old wood.\n\nYou lay it out plainly as you walk the short circuit of the south lane: the document roll needs to reach the district records office, but Pip Cotter carries it and that leg is Mara's. Calvar has his repair work and Dara. The fellowship has hands on every thread you tied tonight. What the road actually needs from you — from the two of you — is less certain. You name the shapes of it as you see them: the water crisis is upstream, in the Disputed Zone somewhere, and everything the crisis-response structure is doing buys time rather than solving it. The archive at Archive Hollow is still a live question — every faction wanting a different answer, and nobody with standing to give one. And there is the matter of Grael: the document goes to the records office, but a paper finding its destination is not the same as a man facing a consequence.\n\nPell listens without interrupting, which is how she always listens when she is actually thinking. Then she says, \"The document is moving. Calvar is placed. Fendt is named.\" She pauses at the corner of the lane, looking north — the dark of the upper meadow just visible past the roof-line, the pale smear of stars above the ridge. \"So those aren't the thing anymore. The thing is upstream. Whatever is doing it is still doing it, and everything else is a ledger entry on a problem that isn't solved.\" She looks at you sidelong. \"That's where I'd go. The Disputed Zone. Find the source before the west channel turns gray too.\"\n\nHuginn drops from the eave and lands on the fence-post three feet away without ceremony. It regards the northern dark for a moment, then makes a sound that is not quite agreement and not quite warning — the specific sound it makes when something up there is already ending and it would like you to know.",
+      "sceneSummary": "Silas and Pell step out into the cold night and talk the road through — document moving, Calvar placed, Fendt named. Pell names the real work: upstream, the Disputed Zone, the source itself.",
+      "choices": [
+        {
+          "label": "Agree — the Zone is the work. Talk through what you know of the upstream geography and plan a first bearing.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Push on Grael first — the document reaching the records office is not the same as the method being stopped. Name that gap to Pell.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Huginn what it sees to the north. It knows endings — if something upstream is running its course, it will have a read.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Sleep on it — head in for the night, let the morning name what it names.",
+          "attribute": "physical",
+          "subAttribute": "strength",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "sustain"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "scene": {
+        "setting": "South lane outside the Fell Pell, Millbrook — cold spring night, stars clear above the ridge, forge-warmth gone at three paces, village settled and quiet.",
+        "npcsPresent": [
+          {
+            "name": "Pell",
+            "state": "Standing at the corner of the lane, hands in her coat pockets, looking north toward the upper meadow dark."
+          },
+          {
+            "name": "Huginn",
+            "state": "Landed on the fence-post three feet away — watching the northern dark, making a sound that is neither agreement nor warning."
+          }
+        ],
+        "objects": [
+          "fence-post",
+          "the dark of the upper meadow visible past the roof-line",
+          "stars over the ridge"
+        ],
+        "threads": [
+          "Pell has named the upstream Disputed Zone as the real work — the conversation is open for a bearing",
+          "Huginn's sound hangs in the air — something to the north is already ending"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "pell",
+          "name": "Pell",
+          "note": "Named the upstream Disputed Zone as the real work — document is moving, Calvar is placed, Fendt is named; those aren't the thing anymore. The thing is upstream.",
+          "statusNote": "Standing with Silas on the south lane outside the Fell Pell — partner, present, road starting tomorrow.",
+          "learned": [
+            "The document roll moving is not the same as the water crisis solved — her read is that upstream is the real next step"
+          ]
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A short walk and a conversation on the south lane"
+      },
+      "codexUpdates": [
+        {
+          "topic": "the-water-crisis",
+          "label": "The Water Crisis",
+          "kind": "mystery",
+          "fact": "Pell's read on World-day 18 evening: the crisis-response structure buys time, but the source is still upstream in the Disputed Zone — the west channel will turn gray too if nothing finds it. The real next work is the Zone.",
+          "links": [
+            "millbrook",
+            "find-the-engineer",
+            "the-edge-district-ledger"
+          ]
+        }
+      ]
+    },
+    "sceneState": {
+      "setting": "South lane outside the Fell Pell, Millbrook — cold spring night, stars clear above the ridge, forge-warmth gone at three paces, village settled and quiet.",
+      "npcsPresent": [
+        {
+          "name": "Pell",
+          "state": "Standing at the corner of the lane, hands in her coat pockets, looking north toward the upper meadow dark."
+        },
+        {
+          "name": "Huginn",
+          "state": "Landed on the fence-post three feet away — watching the northern dark, making a sound that is neither agreement nor warn"
+        }
+      ],
+      "objects": [
+        "fence-post",
+        "the dark of the upper meadow visible past the roof-line",
+        "stars over the ridge"
+      ],
+      "threads": [
+        "Pell has named the upstream Disputed Zone as the real work — the conversation is open for a bearing",
+        "Huginn's sound hangs in the air — something to the north is already ending"
+      ]
+    }
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 5,
@@ -1201,7 +1356,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d5] Received 'it's not a sickness' and the one-line read — Quiet was built for a single point, Silas is no longer one. Waiting for the full shape.",
         "[d5] Received the full shape of Quiet's ending without alarm — named all three change-points as 'something that grew past what it was built for.' Gave Silas his middle name, Ran, with c",
         "[d5] Named Silas's middle name — Fell — by reading the grain of the spear-binding and the soul-mark exchange. Waiting for confirmation.",
         "[d5] Tested 'Fell' aloud — full name, Silas Fell Weir — and named it kept, not worn. Hand flat at his neck now, past the reading, simply present.",
@@ -1210,17 +1364,18 @@
         "[d5] Received the name 'Fell Pell' with the corner of her mouth — the shop now carries both their names. Listening from the cooler bench.",
         "[d5] Off the cooler bench the moment the road was named — already routing the first day's march.",
         "[d5] Felt the partial deathwork charge settle into the room — hands went still, let it land.",
-        "[d5] Stepped outside with Silas after the gathering sealed — holding his hand in both of hers, looking north, saying 'tomorrow' with the tone of someone who has already decided."
+        "[d5] Stepped outside with Silas after the gathering sealed — holding his hand in both of hers, looking north, saying 'tomorrow' with the tone of someone who has already decided.",
+        "[d5] Named the upstream Disputed Zone as the real work — document is moving, Calvar is placed, Fendt is named; those aren't the thing anymore. The thing is upstream."
       ],
       "knownFacts": [
-        "Huginn named Quiet as ending in Silas",
         "The three changes — resurrection, spear-binding, soul-mark exchange — are the candidates for what disturbed it",
         "Quiet's loosening is structural, not pathological — three change-points: resurrection, spear-binding, soul-mark exchange",
         "Silas Ran Weir — the middle name is Ran; she read it in the spear and confirmed it before naming it aloud",
         "Quiet's loosening is structural — three change-points: resurrection, spear-binding, soul-mark exchange; 'not a sickness, not a loss'",
         "Silas's middle name is Fell — read from the Wright-Ashwarden grain, the shape of someone who crossed something high and open and didn't look back",
         "Silas's middle name is Fell — she pressed it into the cooling iron of the moment and it took; she'll keep it like a word found in something old",
-        "Silas Fell Weir — the middle name is now sealed, spoken once in full by both of them"
+        "Silas Fell Weir — the middle name is now sealed, spoken once in full by both of them",
+        "The document roll moving is not the same as the water crisis solved — her read is that upstream is the real next step"
       ],
       "skillsObserved": [
         "structural reasoning from partial material evidence",
@@ -1231,7 +1386,7 @@
         "reading a person's deep grain through a shared rune-thread —"
       ],
       "status": "active",
-      "statusNote": "Standing with Silas outside the Fell Pell on the night before the road begins — partner, present, ready.",
+      "statusNote": "Standing with Silas on the south lane outside the Fell Pell — partner, present, road starting tomorrow.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
@@ -2141,7 +2296,7 @@
   },
   "subAttributes": {
     "strength": 3,
-    "agility": 3,
+    "agility": 4,
     "reason": 5,
     "insight": 5,
     "presence": 6,
@@ -2149,7 +2304,7 @@
     "craft": 6,
     "wits": 5
   },
-  "pendingSubPoints": 1,
+  "pendingSubPoints": 0,
   "skillPoints": 2,
   "discoveries": [],
   "codex": {
@@ -2493,7 +2648,6 @@
         "label": "The Water Crisis",
         "kind": "mystery",
         "facts": [
-          "[d2] Order-Sense (World-day 15 dawn): coursed stone ceiling runs northeast from the east furlong valve housing for ~40 feet under the soil — the valve housing is the working end of a longer intact structur",
           "[d2] The northeast line from the east furlong valve housing runs directly toward Pell's pre-Transition wash-room site — approximately 1.5 miles, deeper and higher in the hillside. The valve housing is the ",
           "[d2] East furlong valve failure matches Fen's intake exactly — identical counterclockwise torque, same failure mode, same stain pattern. Pell's read: not two independent failures, but one mechanism doing t",
           "[d2] Valve Failure Timeline now records three rooms of one structure: Fen's intake and east furlong valve (both CCW torque, inside source) and the wash-room (NE terminus, ~1.5 mi, operator station — saddle",
@@ -2516,17 +2670,18 @@
           "[d3] A passing traveler on the Edge District trade track reports gray seepage from the east-side stones at the lower ford crossing — the contamination is spreading into surface water beyond the main river ",
           "[d5] Order-Sense confirms the east-bank ford seepage is upstream contamination behaving exactly as the pre-Transition drainage design predicted — the system is reporting a saturated substrate, not a random",
           "[d5] Palework at the east-bank ford stones: contamination has been accumulating for weeks, bonding to mineral grain rather than washing free. Three tide-line cycles visible. Spread is lateral along grain, ",
-          "[d5] The west channel at the lower ford remains clear as of World-day 18 morning — safe for crossing with a purification tab. The east-bank contamination is confined to that side for now, but the spread ra"
+          "[d5] The west channel at the lower ford remains clear as of World-day 18 morning — safe for crossing with a purification tab. The east-bank contamination is confined to that side for now, but the spread ra",
+          "[d5] Pell's read on World-day 18 evening: the crisis-response structure buys time, but the source is still upstream in the Disputed Zone — the west channel will turn gray too if nothing finds it. The real next work is the Zone."
         ],
         "links": [
-          "pell",
           "precursor-signs-in-the-valley",
           "sorel",
           "dara-holt",
           "order-sense",
           "millbrook",
           "palework",
-          "find-the-engineer"
+          "find-the-engineer",
+          "the-edge-district-ledger"
         ],
         "aliases": [],
         "createdDay": 2,
@@ -3455,21 +3610,21 @@
     }
   },
   "tendencies": {
-    "strategic": 17.564943845608855,
-    "cerebral": 9.509017418993988,
-    "social": 12.198381571396514,
-    "generous": 3.310897266123598,
-    "cautious": 7.895151166324711,
-    "physical": 1.6218638964902583,
-    "risky": 0.35853078721896275,
-    "ruthless": 2.3488434485795002,
-    "carousing": 0.03598725160621054,
-    "amorous": 10.682955263483493,
-    "patient": 2.8274436693065113,
-    "stealth": 0.9104177214987239,
-    "devotion": 0.49658417513968806,
-    "craft": 0.46749521520542836,
-    "leadership": 0.9036878906249999
+    "strategic": 18.125820249468635,
+    "cerebral": 9.271291983519138,
+    "social": 12.8934220321116,
+    "generous": 3.228124834470508,
+    "cautious": 7.697772387166593,
+    "physical": 1.5813172990780018,
+    "risky": 0.3495675175384887,
+    "ruthless": 2.290122362365013,
+    "carousing": 0.03508757031605527,
+    "amorous": 10.415881381896405,
+    "patient": 2.756757577573848,
+    "stealth": 0.8876572784612557,
+    "devotion": 0.4841695707611958,
+    "craft": 0.45580783482529263,
+    "leadership": 0.8810956933593749
   },
   "aptitudes": [
     "strategist",
@@ -3479,7 +3634,7 @@
     "stalwart",
     "charmer"
   ],
-  "actionCount": 491,
+  "actionCount": 492,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3733,8 +3888,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784395503702,
-  "rev": 714,
+  "updatedAt": 1784395906503,
+  "rev": 716,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4765,7 +4920,7 @@
   "syncedAt": 1784392733860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 310
+    "valley": 311
   },
   "foreclosed": [
     "rootkin",
@@ -4820,10 +4975,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T17:25:03.700Z",
+      "lastAt": "2026-07-18T17:31:46.501Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 35
+      "beats": 36
     }
   ],
   "company": [

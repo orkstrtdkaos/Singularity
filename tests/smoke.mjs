@@ -4071,6 +4071,20 @@ await (async () => {
   check("160: the badge reads progress-to-canon, not realness weight",
     /\$\{t\.score\}\/\$\{NOMINATE_AT\} to canon/.test(appSrc160) && /ready for canon/.test(appSrc160));
   check("160: the badge names what actually moves the number", /⭐ Keep \+4/.test(appSrc160));
+
+  // SNG-161: the ⭐ must be reachable FROM the readout that reports the shortfall
+  const { authorshipStats } = await import('../engine/chronicle.js');
+  const { recordAttention } = await import('../engine/generate.js');
+  const chr = { generated: { location: { "the-low-lamp-inn": { id: "the-low-lamp-inn", name: "The Low Lamp Inn",
+    _gen: { type: "location", tier: "established", engagementScore: 4, birthWeight: 10 } } } } };
+  const stats = authorshipStats(chr, {});
+  check("161: the progress readout carries the record id (so ⭐ can be offered inline)",
+    stats.topAttention[0]?.id === "the-low-lamp-inn" && stats.topAttention[0].score === 4);
+  check("161: a ⭐ button renders on rows that still need engagement, and is bound", /data-keepfrom="\$\{esc\(t\.id\)\}"/.test(appSrc160) && /querySelectorAll\("\[data-keepfrom\]"\)/.test(appSrc160));
+  const rec = chr.generated.location["the-low-lamp-inn"];
+  recordAttention(rec, "keep", 5);
+  check("161: one ⭐ Keep is +4 — it closes the Inn's exact 4-point gap to nomination",
+    (rec._gen.engagementScore || 0) >= NOMINATE_AT && rec._gen.tier === "nominated");
 }
 
 // --- SNG-159: canon promotion is IDEMPOTENT under retry (no self-demotion) ---

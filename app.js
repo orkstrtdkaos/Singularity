@@ -55,7 +55,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // SNG-155: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.114";
+const APP_VERSION = "1.8.115";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4949,7 +4949,10 @@ function renderChronicle() {
       ${auth.topAttention.length ? `<div style="margin-top:8px"><div class="sys-label">What you're making real right now</div>${auth.topAttention.map(t => {
         const ready = t.score >= NOMINATE_AT;
         const need = Math.max(0, NOMINATE_AT - t.score);
-        return `<div class="known-npc"><span class="npc-name">${esc(t.name)}</span> <span class="cost">${esc(t.type || "")} · ${esc(t.tier)}</span> <span class="rep-band ${ready ? "trusted" : ""}" title="Shared-world canon needs ${NOMINATE_AT} engagement. Revisit +2 · interact +2 · tie to a quest +2 · ⭐ Keep +4. (realness weight ${t.weight})">${ready ? "ready for canon" : `${t.score}/${NOMINATE_AT} to canon · needs ${need}`}</span></div>`;
+        // SNG-161: the ⭐ lives HERE too, not only buried on the codex topic page. This row is
+        // where the player learns something "needs 4" — showing a shortfall with no way to act on
+        // it is the readout half-built. ⭐ Keep is +4, so one tap is usually the whole gap.
+        return `<div class="known-npc"><span class="npc-name">${esc(t.name)}</span> <span class="cost">${esc(t.type || "")} · ${esc(t.tier)}</span> <span class="rep-band ${ready ? "trusted" : ""}" title="Shared-world canon needs ${NOMINATE_AT} engagement. Revisit +2 · interact +2 · tie to a quest +2 · ⭐ Keep +4. (realness weight ${t.weight})">${ready ? "ready for canon" : `${t.score}/${NOMINATE_AT} to canon · needs ${need}`}</span>${t.id && !ready ? ` <button class="npc-ctl" data-keepfrom="${esc(t.id)}" title="⭐ Keep — mark this as one that matters to you (+4 toward canon)">⭐</button>` : ""}</div>`;
       }).join("")}</div>` : ""}
       <label class="rating-check" style="margin-top:10px"><input type="checkbox" id="chr-share" ${profile?.sharedChronicle ? "checked" : ""}> Share my chronicle with the family (they can see these authorship stats)</label>
     </section>
@@ -4981,6 +4984,18 @@ function renderChronicle() {
   const share = document.getElementById("chr-share"); if (share) share.onchange = (e) => { if (profile) { profile.sharedChronicle = e.target.checked; saveProfile(profile); } };
   const endBtn = document.getElementById("chr-endsession"); if (endBtn) endBtn.onclick = () => { endSession(character); saveCharacter(character); renderChronicle(); };
   for (const b of app.querySelectorAll(".session-recap")) b.onclick = () => ensureSessionRecap(b.dataset.sess);
+  // SNG-161: ⭐ Keep straight from the progress row (+4 — usually the whole remaining gap).
+  for (const b of app.querySelectorAll("[data-keepfrom]")) b.onclick = () => {
+    const rec = findGenerated(character, b.dataset.keepfrom);
+    if (!rec) return;
+    recordAttention(rec, "keep", readClock(character.clock).day);
+    saveCharacter(character);
+    const s = rec._gen?.engagementScore || 0;
+    renderChronicle();
+    // say what it bought — the tier language is otherwise invisible from this screen
+    const note = s >= NOMINATE_AT ? `${rec.name} is ready for shared canon — it promotes on your next sync.` : `${rec.name} — ${s}/${NOMINATE_AT} toward canon.`;
+    const host = document.querySelector(".screen"); if (host) { const d = document.createElement("div"); d.className = "insight"; d.style.marginTop = "6px"; d.textContent = note; host.prepend(d); }
+  };
   document.getElementById("chr-back").onclick = () => renderCharacterScreen();
   if (!cache?.text && !character._chronicleBusy && getApiKey()) ensureChronicleParagraph(false); // write once on first open
 }

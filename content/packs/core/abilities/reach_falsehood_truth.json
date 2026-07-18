@@ -159,6 +159,7 @@
       },
       "functions": [
         "break",
+        "restore",
         "reveal"
       ],
       "narrationHints": "Everything hidden in a place or person surfaces at once — every lie, every secret, the whole shape of the truth.",
@@ -168,11 +169,12 @@
         {
           "rank": 1,
           "name": "The Whole Truth",
-          "grants": "Reveal the complete hidden truth of a subject at once — the only thing that cracks a lie built from true pieces.",
+          "grants": "Reveal the complete hidden truth of a subject at once — the only thing that cracks a lie built from true pieces. And the record rights itself: someone falsely made into a thing they were not is restored to what they actually are, in front of everyone who believed otherwise.",
           "cannot": "Overwhelming — you learn things you can't unlearn; the powerful will kill to keep some truths buried; reveals, cannot compel.",
           "functions": [
             "reveal",
-            "break"
+            "break",
+            "restore"
           ],
           "harmRung": "none",
           "gains": "broaden"

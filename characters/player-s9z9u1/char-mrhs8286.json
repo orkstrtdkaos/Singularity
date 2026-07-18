@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 15,
-  "xp": 1470,
+  "xp": 1475,
   "attributes": {
     "physical": 4,
     "mental": 5,
@@ -101,7 +101,7 @@
   "maxHealth": 100,
   "health": 100,
   "maxEnergy": 170,
-  "energy": 116,
+  "energy": 113,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -849,14 +849,19 @@
         "player": "Ask Huginn plainly — is this woman ending, or beginning something?",
         "summary": "Huginn reads the seller — beginning, not ending, and not a small one.",
         "narration": "You look up at Huginn on the arch-stone and ask the question quietly. Is she ending, or beginning something?\n\nHuginn does not move right away. He watches the seller behind her dark-cloth table with the same unhurried patience he gives to anything worth reading. Then he turns one eye toward you — the calm one, which is both of them, but you have learned to read the difference — and gives a single low sound. Not a croak. Something more considered.\n\nBeginning, the sound says. Clearly beginning. And it is not a small beginning.\n\nHe turns back to the stall. That is all he has for you on the matter."
+      },
+      {
+        "player": "Walk to the stall — address the seller directly and name what you read in the kit's design",
+        "summary": "Silas approaches the dark-cloth stall and names the design aloud — a teacher's test, its center the seller herself — and she confirms it.",
+        "narration": "You step off the plaza paving and cross the last stretch of market lane to the dark-cloth stall. The seller does not move. She sits with both hands flat on the table edge, and her eyes come to you before your boots have finished their last step — the patience of someone who has been waiting, but not anxiously.\n\nYou stop at the table's near edge and look at the tools laid out between you. Then you look at her, and you push Order-Sense out hard — a surge, not a quiet read, the whole design lit up at once. The kit blazes in your mind's eye: the sequence, the gaps, the absent pieces, the animal the bone came from, and at the center of it all, her. The design has a teacher-shape. She is not selling the tools. She is testing who can see what they are.\n\nSo you name it. You say it plainly. You tell her the tools are part of a teaching sequence, that the gaps in the set are deliberate, and that the center-piece of the kit is not on the table at all — it is her. You say it without performance, because the reading is clean and the truth of it does not need to be dressed.\n\nShe is quiet for two full breaths after you finish. Then the corner of her mouth moves — not a smile, exactly, but the expression of someone whose test has just produced an unexpected result and who is genuinely interested in the fact. She says that most people pick up the nearest handle and ask the price. She says you are the first one this season to name what the sequence is for before touching anything."
       }
     ],
     "lastTurn": {
-      "narration": "You look up at Huginn on the arch-stone and ask the question quietly. Is she ending, or beginning something?\n\nHuginn does not move right away. He watches the seller behind her dark-cloth table with the same unhurried patience he gives to anything worth reading. Then he turns one eye toward you — the calm one, which is both of them, but you have learned to read the difference — and gives a single low sound. Not a croak. Something more considered.\n\nBeginning, the sound says. Clearly beginning. And it is not a small beginning.\n\nHe turns back to the stall. That is all he has for you on the matter.",
-      "sceneSummary": "Huginn reads the seller — beginning, not ending, and not a small one.",
+      "narration": "You step off the plaza paving and cross the last stretch of market lane to the dark-cloth stall. The seller does not move. She sits with both hands flat on the table edge, and her eyes come to you before your boots have finished their last step — the patience of someone who has been waiting, but not anxiously.\n\nYou stop at the table's near edge and look at the tools laid out between you. Then you look at her, and you push Order-Sense out hard — a surge, not a quiet read, the whole design lit up at once. The kit blazes in your mind's eye: the sequence, the gaps, the absent pieces, the animal the bone came from, and at the center of it all, her. The design has a teacher-shape. She is not selling the tools. She is testing who can see what they are.\n\nSo you name it. You say it plainly. You tell her the tools are part of a teaching sequence, that the gaps in the set are deliberate, and that the center-piece of the kit is not on the table at all — it is her. You say it without performance, because the reading is clean and the truth of it does not need to be dressed.\n\nShe is quiet for two full breaths after you finish. Then the corner of her mouth moves — not a smile, exactly, but the expression of someone whose test has just produced an unexpected result and who is genuinely interested in the fact. She says that most people pick up the nearest handle and ask the price. She says you are the first one this season to name what the sequence is for before touching anything.",
+      "sceneSummary": "Silas approaches the dark-cloth stall and names the design aloud — a teacher's test, its center the seller herself — and she confirms it.",
       "choices": [
         {
-          "label": "Walk to the stall — address the seller directly and name what you read in the kit's design",
+          "label": "Ask her plainly: what is the teaching sequence for, and who is it meant to find?",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
@@ -864,140 +869,149 @@
             "study",
             "negotiate"
           ],
+          "trivial": true
+        },
+        {
+          "label": "Show her Memory — the spear with Huginn's thread — and let her read what death-craft is already in your hand",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 15,
+          "intentTags": [
+            "negotiate",
+            "plan"
+          ],
           "trivial": false
         },
         {
-          "label": "Approach quietly — let her read you first before you say anything",
+          "label": "Name the Ashwarden March directly — tell her that is where your road goes and ask if she knows the way in",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "presence",
+          "difficulty": 15,
+          "intentTags": [
+            "negotiate",
+            "lead"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Wait — let her move next; she has been the one waiting all morning",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
             "careful",
             "study"
           ],
           "trivial": true
-        },
-        {
-          "label": "Step closer and use Order-Sense on her directly — read what design she is part of before you speak",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false
-        },
-        {
-          "label": "Wait for Pell and Siol to finish — bring Pell with you before you approach the seller",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "careful"
-          ],
-          "trivial": true
         }
       ],
       "scene": {
-        "setting": "Hub waygate plaza edge, open morning paving — Huginn perched on the nearest arch-stone facing southeast, the dark-cloth stall set back in the market row visible from here, the seller motionless behind her table of bone-handled tools.",
+        "setting": "The dark-cloth stall in the Hub market row — Silas standing at the near table edge, the seller across from him with both hands flat on the cloth, bone-handled tools laid out in sequence between them. Morning light over the stalls. Huginn on the arch-stone to the north.",
         "npcsPresent": [
           {
+            "name": "Unnamed seller",
+            "state": "watching Silas with genuine, measuring interest — the first candidate this season to name what the kit is for"
+          },
+          {
             "name": "Huginn",
-            "state": "perched on the arch-stone, watching the seller again — settled, unhurried, job done"
+            "state": "perched on the arch-stone to the north, watching the stall"
           },
           {
             "name": "Siol",
-            "state": "deeper in the market stalls with Pell, choosing clothes"
+            "state": "deeper in the market row with Pell, choosing clothes"
           },
           {
             "name": "Pell",
-            "state": "walking the stalls with Siol, thinking about the evening suggestion"
-          },
-          {
-            "name": "Unknown seller",
-            "state": "sitting still behind the dark-cloth table, tools arranged in deliberate sequence — waiting"
+            "state": "walking the stalls with Siol, the evening suggestion filed and not yet answered aloud"
           }
         ],
         "objects": [
-          "seven waygate arches to the north",
-          "market row stalls to the south — cord-weavers, seed merchant, dyer's table",
-          "narrow dark-cloth stall set back from the main lane, southeast — bone-handled tools laid out in deliberate sequence on the dark cloth",
-          "Memory (the assembled spear, road-lashed at your back)"
+          "dark cloth covering the table",
+          "bone-handled tools in deliberate teaching sequence — several pieces absent from the set",
+          "Memory (assembled spear, road-lashed at Silas's back)",
+          "seven waygate arches visible to the north"
         ],
         "threads": [
-          "Huginn has confirmed the seller is beginning something — not a small beginning",
-          "The kit has absent pieces — a teaching sequence, not a complete set",
+          "The seller's test has been passed — she is now measuring what comes next",
+          "The absent pieces of the teaching kit — not on the table",
           "Pell's unspoken answer to the evening suggestion — filed, not resolved",
-          "The Ent circle: still to visit",
-          "The sixth gate — Ashwarden passage — close by and unexamined up close"
+          "The Ent circle: still to visit"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "huginn",
-          "name": "Huginn",
-          "note": "Read the seller on Silas's question — confirmed beginning, not ending, and named it as not a small one. Single deliberate sound; turned back to watch afterward.",
+          "npcId": "unnamed-seller",
+          "name": "Unknown seller",
+          "role": "Dark-cloth stall holder, market row — possible Ashwarden or death-craft teacher",
+          "note": "Silas named the teaching sequence and its center-piece aloud — she confirmed it with measured interest. No other candidate this season named the design before touching the tools.",
           "learned": [
-            "The still seller behind the dark-cloth stall is beginning something — not ending — and it is not a small beginning"
+            "Her stall is a test, not a sale — she is waiting for someone who can read what the kit is for",
+            "She has been waiting all season and Silas is the first to pass"
           ],
           "skillsObserved": [
-            "precise ending-versus-beginning read at distance, communicated economically"
+            "holding a testing posture across an entire morning without breaking it"
           ],
-          "statusNote": "Perched on the arch-stone at the plaza edge, watching the seller"
+          "relationshipDelta": 2,
+          "status": "active",
+          "statusNote": "At her dark-cloth stall in the Hub market row — Silas's read confirmed; now in genuine contact."
+        }
+      ],
+      "generateRequest": [
+        {
+          "type": "npc",
+          "hint": "A death-attuned seller at a dark-cloth market stall in the Hub — bone-handled tools in a deliberate teaching sequence, composed and unhurried, has been waiting for someone who can read the design before touching it",
+          "why": "Silas has just passed her test and she is about to introduce herself; she needs a stable identity, name, and background to recur meaningfully"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "dark-cloth-seller",
-          "label": "The Dark-Cloth Seller",
+          "topic": "dark-cloth-stall-seller",
+          "label": "Dark-Cloth Stall — the Teacher",
           "kind": "person",
-          "fact": "Huginn's read: she is beginning something, not ending — and it is not a small beginning. The bone-handled kit is a deliberate teaching sequence with absent pieces. She is waiting for the right person.",
+          "fact": "Silas named the teaching sequence and its center-piece aloud on World-day 18 morning — she confirmed it. Has been waiting all season for someone who can read the design before touching the tools. A testing posture, not a sale.",
           "links": [
             "the-edge-district-ledger",
-            "the-water-crisis"
+            "waygate"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a quiet moment at the plaza edge while Huginn reads the seller"
+        "why": "A short walk across the plaza and a first exchange at the stall"
       }
     },
     "sceneState": {
-      "setting": "Hub waygate plaza edge, open morning paving — Huginn perched on the nearest arch-stone facing southeast, the dark-cloth stall set back in the market row visible from here, the seller motionless behind her table of bone-handled tools.",
+      "setting": "The dark-cloth stall in the Hub market row — Silas standing at the near table edge, the seller across from him with both hands flat on the cloth, bone-handled tools laid out in sequence between them. Morning light over the stalls. Huginn on the arch-stone to the north.",
       "npcsPresent": [
         {
+          "name": "Unnamed seller",
+          "state": "watching Silas with genuine, measuring interest — the first candidate this season to name what the kit is for"
+        },
+        {
           "name": "Huginn",
-          "state": "perched on the arch-stone, watching the seller again — settled, unhurried, job done"
+          "state": "perched on the arch-stone to the north, watching the stall"
         },
         {
           "name": "Siol",
-          "state": "deeper in the market stalls with Pell, choosing clothes"
+          "state": "deeper in the market row with Pell, choosing clothes"
         },
         {
           "name": "Pell",
-          "state": "walking the stalls with Siol, thinking about the evening suggestion"
-        },
-        {
-          "name": "Unknown seller",
-          "state": "sitting still behind the dark-cloth table, tools arranged in deliberate sequence — waiting"
+          "state": "walking the stalls with Siol, the evening suggestion filed and not yet answered aloud"
         }
       ],
       "objects": [
-        "seven waygate arches to the north",
-        "market row stalls to the south — cord-weavers, seed merchant, dyer's table",
-        "narrow dark-cloth stall set back from the main lane, southeast — bone-handled to",
-        "Memory (the assembled spear, road-lashed at your back)"
+        "dark cloth covering the table",
+        "bone-handled tools in deliberate teaching sequence — several pieces absent from ",
+        "Memory (assembled spear, road-lashed at Silas's back)",
+        "seven waygate arches visible to the north"
       ],
       "threads": [
-        "Huginn has confirmed the seller is beginning something — not a small beginning",
-        "The kit has absent pieces — a teaching sequence, not a complete set",
+        "The seller's test has been passed — she is now measuring what comes next",
+        "The absent pieces of the teaching kit — not on the table",
         "Pell's unspoken answer to the evening suggestion — filed, not resolved",
-        "The Ent circle: still to visit",
-        "The sixth gate — Ashwarden passage — close by and unexamined up close"
+        "The Ent circle: still to visit"
       ]
     }
   },
@@ -3914,21 +3928,21 @@
     }
   },
   "tendencies": {
-    "strategic": 13.73496482178973,
-    "cerebral": 13.277053430028221,
-    "social": 19.12274710108293,
-    "generous": 2.972283827458145,
-    "cautious": 6.097009090764411,
-    "physical": 1.3549774641898484,
-    "risky": 1.4209623018174453,
-    "ruthless": 0.4530583012230005,
-    "carousing": 0.00694142604023045,
-    "amorous": 5.419379087133974,
-    "patient": 1.1220806974253508,
-    "stealth": 0.1756065550281673,
-    "devotion": 0.39241841097266655,
-    "craft": 1.3871713026418668,
-    "leadership": 0.893856854103275
+    "strategic": 13.391590701244986,
+    "cerebral": 13.945127094277515,
+    "social": 19.644678423555856,
+    "generous": 2.8979767317716916,
+    "cautious": 5.944583863495301,
+    "physical": 1.3211030275851021,
+    "risky": 1.3854382442720092,
+    "ruthless": 0.44173184369242546,
+    "carousing": 0.0067678903892246884,
+    "amorous": 5.283894609955625,
+    "patient": 1.094028679989717,
+    "stealth": 0.17121639115246312,
+    "devotion": 0.3826079506983499,
+    "craft": 1.3524920200758201,
+    "leadership": 0.8715104327506931
   },
   "aptitudes": [
     "strategist",
@@ -3936,7 +3950,7 @@
     "scholar",
     "orator"
   ],
-  "actionCount": 556,
+  "actionCount": 557,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -4206,8 +4220,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784415375822,
-  "rev": 811,
+  "updatedAt": 1784415470497,
+  "rev": 812,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5435,7 +5449,7 @@
       "shadowstep": 17,
       "the-attended-end": 28,
       "wildcraft": 4,
-      "the_raised_thing": 5,
+      "the_raised_thing": 6,
       "the_ended_threat": 4,
       "the_shadow_work": 2,
       "draw_down": 1,
@@ -5582,7 +5596,7 @@
   "syncedAt": 1784392733860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 377
+    "valley": 378
   },
   "foreclosed": [
     "rootkin",
@@ -5639,10 +5653,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T22:56:15.820Z",
+      "lastAt": "2026-07-18T22:57:50.494Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 102,
+      "beats": 103,
       "_recapError": null,
       "recap": "Day eighteen, and Silas Weir moved like a man who'd finally stopped fighting the shape of what he was. On the road he disarmed three opportunists without breaking bones, read the grief sitting behind the broad man's eyes, named it plainly, pressed provisions into their hands, and sent them toward something worth doing — mercy given as instruction, not sentiment. Then he brought the hard people together: Dara, Aldric, Fendt, Mara, Calvar, all of them in the heat of Pell's forge with no exits easy and no pretense left, and in that single evening he turned a valley's quiet panic into four working threads — engineering, logistics, supply, accounts — each with a named lead and a direction to face. The crisis didn't end, but it stopped being formless, and that was his doing."
     }

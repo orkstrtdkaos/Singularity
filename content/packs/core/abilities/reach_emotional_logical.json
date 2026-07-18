@@ -790,7 +790,36 @@
           "rank": 1,
           "name": "The Shared Grief",
           "grants": "Lead a shared lament that spreads one grief across many, so none carries it alone.",
-          "cannot": "It cannot remove grief, only distribute its weight; the singer bears the gathering of it; and a grief shared is a grief made real to everyone who joins the song."
+          "cannot": "It cannot remove grief, only distribute its weight; the singer bears the gathering of it; and a grief shared is a grief made real to everyone who joins the song.",
+          "functions": [
+            "empower"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
+        },
+        {
+          "rank": 2,
+          "name": "The Named Sorrow",
+          "grants": "The lament finds the true shape of what is mourned. Singing it, you perceive what the grief is ACTUALLY for — the loss beneath the stated one — and those who join hear it named as well, often for the first time.",
+          "cannot": "Naming is not mending; a sorrow correctly named can wound worse before it eases. The singer cannot choose what surfaces, and what the lament names in company cannot be unnamed.",
+          "functions": [
+            "empower",
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
+        },
+        {
+          "rank": 3,
+          "name": "The Long Lament",
+          "grants": "Hold a lament across days rather than a night, and across a settlement rather than a room — a whole community may carry one loss together until it is bearable. The gathering-point can be handed to another singer, so the lament outlasts any one voice.",
+          "cannot": "You hold the gathering while you hold the lament, and days of it mark the singer; handing the point on requires a singer able to take it; and a grief carried by everyone becomes part of what that place IS — the GM records it in the world, not the character.",
+          "functions": [
+            "empower",
+            "reveal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "gated": "learned",

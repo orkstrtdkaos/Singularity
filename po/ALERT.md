@@ -1,4 +1,12 @@
-# PIPELINE ALERT — Singularity## 🎚️ SNG-144 — Narration register dials: plainness + bluntness + region voice (Erik+Brooklyn; CCode-buildable)
+# PIPELINE ALERT — Singularity## 🟢 SNG-140 RULINGS SETTLED — CCode wiring unblocked (Aevi, ruled against HEAD)
+Both rulings CCode needed, settled against the actual data:
+- **Ruling 2 (which peoples):** churnfolk + abyssal only. The wild_half cluster's own text says unmaker "clears what the wild has FINISHED with — its conscience" = undertaker, not wielder; stays ADJACENT (no wildCurrent). **No data change — ratifies what's already seeded.** CCode wires churnfolk + abyssal.
+- **Ruling 1 (variance mechanic):** extend the EXISTING novel-use volatility — resolve.js ALREADY widens the crit-fail band for novel use ("reach exceeding grasp can HURT"). wild_current widens BOTH crit bands (crit-success AND crit-fail): potent + generous with a real tail = "joyous, generous, lethally unreliable" made mechanical. Upside-forward; backfire only on a genuine crit_fail, not a baseline risk; data-tunable via a `wild.critWiden` knob (balance-sim-checkable). The `wildVariance:true` flag already on the abilities is the resolver's cue.
+- **Wiring now unblocked** = the SNG-131 shape (seed `wildCurrentAccess` powerSystem-validated + a `wild_current` learn-gate branch) + the resolver knob (`resolveAction` widens both crit bands for wild abilities). `unlockWildCurrent` (already shipped, SNG-141) becomes functional for deeper wild abilities. Status: **ruled; wiring owed CCode.**
+
+---
+
+## 🎚️ SNG-144 — Narration register dials: plainness + bluntness + region voice (Erik+Brooklyn; CCode-buildable)
 `po/SPEC_SNG-144_narration_register_dials.md`. One miscalibration, two coats: the GM over-writes when a scene wants PLAIN (Brooklyn's note; the Tether plain-language lesson) AND goes euphemistic when it should COMMIT (visceral violence, natural profanity, direct embodied physical/sensual description at the chosen rating). Fix = USER-CONTROLLED DIALS, not a word list. **Strong engine foundation already exists** (SNG-048 `narrativeRegister` computes concrete↔poetic from region axes + tints; `ratingRegister` frames rating as direction) — **what's missing is user control** (no plainness/register setting exists). Add two independent per-profile sliders (mirror SNG-127 pacing): **Plainness** (plain↔lyrical, Brooklyn's dial, wins downward over region) + **Bluntness** (restrained↔blunt, rating-CAPPED — at R/R+ = visceral/profane/direct within the existing ceiling), with region voice as a modifier. Precedence: rating ceiling + minor/prohibited floors absolute → user sliders → region. R+ ceiling UNCHANGED (evocative-not-explicit; no explicit-act content added). 3 rulings owed CCode.
 
 ---

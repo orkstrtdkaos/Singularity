@@ -74,7 +74,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.3210859101237002,
+    "spectrumId": -0.30503161461751516,
     "violence_peace": 0.1030845625,
     "chaos_order": 0.22692151233983043,
     "mechanical_spiritual": 0.24115964093656578,
@@ -860,78 +860,95 @@
         "player": "Name the sword — it has earned one. Speak it aloud here, in the forge, with Pell.",
         "summary": "Silas names the rune-bound short sword The Warden's Charge — her father kept it, now it keeps her. Pell tests the name against the iron and nods once.",
         "narration": "The forge coals breathe low and orange. Huginn shifts one foot on the back of the second bench, settles, and is still.\n\nYou turn the sword so the fuller catches the light — all four marks visible in sequence, rough at the join but holding. You have been thinking about this since the last mark cooled. Not trying to think of something good. Just waiting to hear what it already was.\n\n\"Kept,\" you say aloud. Then, quieter: \"Keeping.\" Neither of those is right. You look at Pell. She is watching you the way she watches iron — not impatient, just present.\n\nThen it comes, and it comes plainly, the way the right word always does: it does not arrive, it surfaces. \"The Warden's Charge,\" you say. \"That's what it is. Your father kept it. Now it keeps you.\"\n\nPell takes a slow breath in through her nose. She looks at the blade for a long moment. Then she says, \"Charge,\" testing it by itself, and nods once — the same nod she gives a piece of iron that has answered correctly. She closes her fingers around the grip and holds it upright, point toward the rafters. The lamp-black marks catch the coal-light and hold it.\n\nHuginn makes one sound. Low, short. Not a word. It does not deny it."
+      },
+      {
+        "player": "Or, if you're really full of fire - The Maelstorm... after your father.",
+        "summary": "Pell receives the idea of searching the Maelstorm for her father — holds it without flinching, agrees to the road's order, and names the commitment.",
+        "narration": "The forge-warmth is at your back. Pell holds The Warden's Charge upright, its new marks still faintly warm to the touch in the coal-light, and the night outside is quiet and very cold.\n\nYou say it plain. The Maelstorm. After her father.\n\nPell is still for a moment — not the stillness of surprise, but the stillness of someone who has been holding that word at arm's length and is now deciding whether to put it down. She lowers the sword. She sets its tip on the stone floor between her feet and wraps both hands around the grip, and she looks at you across the low orange light.\n\n\"I know,\" she says finally. Her voice is even. \"I've known since Calvar said 'mentor' and named the specification. Whoever my father was when he made that sword — he was still making plans. Still pointing the way without saying so.\" She draws a breath. \"That doesn't mean he isn't dead. But it means there's something to find out there, and I'd rather know than not know.\"\n\nHuginn shifts once on the back of the bench — a single foot, settled. It says nothing. Its silence is not a denial.\n\nPell looks down at The Warden's Charge, then back up at you. \"Home first,\" she says. \"Your mother. Then the Disputed Zone, then whatever the Zone opens into.\" She pauses. \"And if there's a Maelstorm after that — we go to it. Together.\" The last word lands in the register she uses for iron she has decided to trust."
       }
     ],
     "lastTurn": {
-      "narration": "The forge coals breathe low and orange. Huginn shifts one foot on the back of the second bench, settles, and is still.\n\nYou turn the sword so the fuller catches the light — all four marks visible in sequence, rough at the join but holding. You have been thinking about this since the last mark cooled. Not trying to think of something good. Just waiting to hear what it already was.\n\n\"Kept,\" you say aloud. Then, quieter: \"Keeping.\" Neither of those is right. You look at Pell. She is watching you the way she watches iron — not impatient, just present.\n\nThen it comes, and it comes plainly, the way the right word always does: it does not arrive, it surfaces. \"The Warden's Charge,\" you say. \"That's what it is. Your father kept it. Now it keeps you.\"\n\nPell takes a slow breath in through her nose. She looks at the blade for a long moment. Then she says, \"Charge,\" testing it by itself, and nods once — the same nod she gives a piece of iron that has answered correctly. She closes her fingers around the grip and holds it upright, point toward the rafters. The lamp-black marks catch the coal-light and hold it.\n\nHuginn makes one sound. Low, short. Not a word. It does not deny it.",
-      "sceneSummary": "Silas names the rune-bound short sword The Warden's Charge — her father kept it, now it keeps her. Pell tests the name against the iron and nods once.",
+      "narration": "The forge-warmth is at your back. Pell holds The Warden's Charge upright, its new marks still faintly warm to the touch in the coal-light, and the night outside is quiet and very cold.\n\nYou say it plain. The Maelstorm. After her father.\n\nPell is still for a moment — not the stillness of surprise, but the stillness of someone who has been holding that word at arm's length and is now deciding whether to put it down. She lowers the sword. She sets its tip on the stone floor between her feet and wraps both hands around the grip, and she looks at you across the low orange light.\n\n\"I know,\" she says finally. Her voice is even. \"I've known since Calvar said 'mentor' and named the specification. Whoever my father was when he made that sword — he was still making plans. Still pointing the way without saying so.\" She draws a breath. \"That doesn't mean he isn't dead. But it means there's something to find out there, and I'd rather know than not know.\"\n\nHuginn shifts once on the back of the bench — a single foot, settled. It says nothing. Its silence is not a denial.\n\nPell looks down at The Warden's Charge, then back up at you. \"Home first,\" she says. \"Your mother. Then the Disputed Zone, then whatever the Zone opens into.\" She pauses. \"And if there's a Maelstorm after that — we go to it. Together.\" The last word lands in the register she uses for iron she has decided to trust.",
+      "sceneSummary": "Pell receives the idea of searching the Maelstorm for her father — holds it without flinching, agrees to the road's order, and names the commitment.",
       "choices": [
         {
-          "label": "Check the rough join on the order-sense capacitor — there may be a way to tighten it before sleep",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "difficulty": 15,
-          "intentTags": [
-            "craft",
-            "careful"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Turn to the brigandine — begin thinking through what rune-work it needs before the road",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 0,
-          "intentTags": [
-            "plan"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Let the sword rest. Bank the forge and go to bed — the drill is at first light and you need the sleep",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Agree: home first, then the Zone, then the Maelstorm — seal the order aloud between you",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "sustain"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Ask Pell what her father would have called it",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Ask her what she actually hopes to find — his body, his work, or him alive",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "comfort"
+            "study"
           ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Look at Huginn and ask plainly what it reads about the Maelstorm — what is ending there, if anything",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "The night is late — bank the forge, take her hand, and sleep before the road begins",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "sustain"
+          ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         }
       ],
       "scene": {
-        "setting": "Interior of the Fell Pell — Pell's forge, Millbrook. Forge-light low and orange, coal-smoke and iron-oil warm in the air. The chest under the second bench is open, oilcloth wrapping folded aside. Rune-craft kit open on the bench, lamp-black vial spent down, tooling leather marked.",
+        "setting": "Interior of the Fell Pell — Pell's forge, Millbrook. Forge coals low and orange, coal-smoke and iron-oil warm in the air. The chest under the second bench is open, oilcloth wrapping folded aside. Rune-craft kit open on the bench, lamp-black vial spent down, tooling leather marked.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Holding The Warden's Charge upright, point toward the rafters, fingers closed around the grip — blade catching the coal-light across all four marks."
+            "state": "Standing with The Warden's Charge tip-down on the stone floor between her feet, both hands on the grip, looking at Silas across the low coal-light — the Maelstorm named and sitting between them now."
           },
           {
             "name": "Huginn",
-            "state": "Still on the back of the second bench, one foot settled, attending."
+            "state": "On the back of the second bench, one foot settled, silent — its silence timed, and the timing is a comment."
           }
         ],
         "objects": [
-          "The Warden's Charge — short sword, rune-bound, four threads seated: ironsense, Ashwarden-Huginn, shadow-harm focus, rough order-sense capacitor",
-          "brigandine — split front, riveted plate, oiled leather backing, on the bench, not yet rune-worked",
+          "The Warden's Charge — short sword, rune-bound, four threads seated, tip resting on the stone floor",
+          "brigandine — split front, riveted plate, oiled leather backing, on the bench",
           "rune-craft kit — open, lamp-black vial mostly spent, wax stub used, tooling leather marked",
           "open chest under the second bench — oilcloth wrapping folded aside",
           "banked forge coals — low orange light",
           "sealed document roll — on the counter, Mara's to deliver"
         ],
         "threads": [
-          "The rough join on the order-sense capacitor — functional but improvised; a trained eye would see it",
-          "Brigandine rune-work — not yet begun",
-          "Pell's unfinished sentence about her father's reaction — still unspoken",
+          "The road's order agreed in principle — home first, then the Zone, then the Maelstorm — but not yet sealed aloud between them",
+          "What Pell actually hopes to find in the Maelstorm is unspoken",
+          "Huginn's read on the Maelstorm has not been asked",
+          "The brigandine's rune-work has not yet been begun",
           "Drill agreed for first light — footwork, angles, real contact"
         ]
       },
@@ -940,65 +957,63 @@
           "op": "update",
           "npcId": "pell-ran-marsh",
           "name": "Pell Ran Marsh",
-          "note": "Received the name The Warden's Charge — tested it against the iron, nodded once in the register she gives iron that has answered correctly. Holds the blade upright toward the rafters.",
+          "role": "Village blacksmith, Millbrook — traveling companion",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "Received the idea of searching the Maelstorm for her father — held it without flinching, named the road's order herself: home first, then the Zone, then the Maelstorm. Committed to together.",
           "learned": [
-            "The sword is named The Warden's Charge — her father kept it, now it keeps her"
+            "She has been holding the Maelstorm possibility at arm's length since Calvar named the specification and her father's planning became plain — and she is now willing to put it down and go.",
+            "She reads her father's silence not as absence but as method — pointing the way without saying so."
           ],
           "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "In the Fell Pell — holding The Warden's Charge upright, name received and settled."
-        }
-      ],
-      "itemUpdates": [
-        {
-          "name": "The Warden's Charge",
-          "description": "A short sword in patient iron — kept for decades without use, rune-bound now with four threads: Pell's ironsense as anchor deep in the grain, Huginn's Ashwarden ending-sense threaded through the fuller, a shadow-harm focus pressed at the quillon, and a rough order-sense capacitor that closed on Pell's own reading idiom. Named The Warden's Charge at the Fell Pell on World-day 18 evening — her father kept it, now it keeps her.",
-          "provenance": "Kept by Pell's father; passed to her; rune-bound by Silas Weir at the Fell Pell forge; named aloud in her presence."
+          "statusNote": "In the Fell Pell — holding The Warden's Charge, the Maelstorm now named between them, committed to the road's order."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "the-wardens-charge",
-          "label": "The Warden's Charge",
-          "kind": "lore",
-          "entityId": "pell-ran-marsh",
-          "fact": "The rune-bound short sword named The Warden's Charge at the Fell Pell on World-day 18 evening — four threads seated, named aloud by Silas Weir, received by Pell with the nod she gives iron that has answered correctly.",
+          "topic": "the-maelstorm",
+          "label": "The Maelstorm",
+          "kind": "mystery",
+          "fact": "Pell's father may be connected to the Maelstorm — or his work points toward it. Pell has named the intention to go there, after home and the Disputed Zone. What the Maelstorm holds is unknown.",
           "links": [
+            "the-water-crisis",
+            "pell-ran-marsh",
             "millbrook",
-            "the-fell-pell",
-            "pell-ran-marsh"
+            "the-edge-district-ledger"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief moment of naming in the forge — no time to speak of."
+        "why": "A short exchange in the forge — a name spoken, a commitment settled."
       }
     },
     "sceneState": {
-      "setting": "Interior of the Fell Pell — Pell's forge, Millbrook. Forge-light low and orange, coal-smoke and iron-oil warm in the air. The chest under the second bench is open, oilcloth wrapping folded aside. Rune-craft kit open on the bench, lamp-black vial spent down, tooling leather marked.",
+      "setting": "Interior of the Fell Pell — Pell's forge, Millbrook. Forge coals low and orange, coal-smoke and iron-oil warm in the air. The chest under the second bench is open, oilcloth wrapping folded aside. Rune-craft kit open on the bench, lamp-black vial spent down, tooling leather marked.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Holding The Warden's Charge upright, point toward the rafters, fingers closed around the grip — blade catching the coal-"
+          "state": "Standing with The Warden's Charge tip-down on the stone floor between her feet, both hands on the grip, looking at Silas"
         },
         {
           "name": "Huginn",
-          "state": "Still on the back of the second bench, one foot settled, attending."
+          "state": "On the back of the second bench, one foot settled, silent — its silence timed, and the timing is a comment."
         }
       ],
       "objects": [
-        "The Warden's Charge — short sword, rune-bound, four threads seated: ironsense, A",
-        "brigandine — split front, riveted plate, oiled leather backing, on the bench, no",
+        "The Warden's Charge — short sword, rune-bound, four threads seated, tip resting ",
+        "brigandine — split front, riveted plate, oiled leather backing, on the bench",
         "rune-craft kit — open, lamp-black vial mostly spent, wax stub used, tooling leat",
         "open chest under the second bench — oilcloth wrapping folded aside",
         "banked forge coals — low orange light",
         "sealed document roll — on the counter, Mara's to deliver"
       ],
       "threads": [
-        "The rough join on the order-sense capacitor — functional but improvised; a trained eye would see it",
-        "Brigandine rune-work — not yet begun",
-        "Pell's unfinished sentence about her father's reaction — still unspoken",
+        "The road's order agreed in principle — home first, then the Zone, then the Maelstorm — but not yet sealed aloud between them",
+        "What Pell actually hopes to find in the Maelstorm is unspoken",
+        "Huginn's read on the Maelstorm has not been asked",
+        "The brigandine's rune-work has not yet been begun",
         "Drill agreed for first light — footwork, angles, real contact"
       ]
     }
@@ -1430,7 +1445,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d5] Received 'you are sexy, Pell' plainly and warm — said 'I know' without smugness, shoulder found his, the real version of her face showing.",
         "[d5] Received Silas's accounting of watching her work with a sidelong look and the frank acknowledgment that she's been watching back — pleased, present, entirely herself.",
         "[d5] Received Silas's honest accounting of the limestone-bend gap — agreed to drill tomorrow morning before the waygate, named footwork and angle-holding as her contribution.",
         "[d5] Named a brigandine her father made — split front, riveted plate — and a short sword she kept but never sold. Promised to pull both before sleep. Received the armor-and-real-sparring plan without pushback.",
@@ -1439,17 +1453,18 @@
         "[d5] Received Silas's protective bond plan without deflection — her ironsense moved ahead of the conversation and named the sword as anchor before he finished explaining. Holds the blade flat across both palms, waiting.",
         "[d5] Walked Silas through the sword's grain — named patient iron as the anchor logic before he asked. Watched the first mark set without speaking, which is approval. Received his brigandine observation with the flat regard of a woman who has made her peace with who she married.",
         "[d5] Held her ironsense open through the full rune-binding — it cost her, and she did not flinch. The final mark used her own shape rather than Silas's geometry; the sword is more hers than she expected.",
-        "[d5] Received the name The Warden's Charge — tested it against the iron, nodded once in the register she gives iron that has answered correctly. Holds the blade upright toward the rafters."
+        "[d5] Received the name The Warden's Charge — tested it against the iron, nodded once in the register she gives iron that has answered correctly. Holds the blade upright toward the rafters.",
+        "[d5] Received the idea of searching the Maelstorm for her father — held it without flinching, named the road's order herself: home first, then the Zone, then the Maelstorm. Committed to together."
       ],
       "knownFacts": [
-        "Her father made her a brigandine — split front, riveted plate — and left a short sword she has held onto without selling",
-        "She agrees real contact sparring is what the drill requires",
         "The brigandine fits her still — her father measured her for it and the work held. The short sword's grip-cord was replaced at least once by a careful hand.",
         "Said yes without hesitation when Silas asked to rune-work the brigandine — the small held distance is gone",
         "The short sword carries her ironsense in its grain — a lifetime of work, the body-memory of two hundred heats. Threading Ashwarden craft through the iron means threading through her.",
         "Patient iron holds a mark longer than tested iron — the sword's quality as an anchor is its years of careful, unused attention",
         "The sword's order-sense capacitor closed on her shape, not Silas's — the iron chose her idiom for the reading capacity",
-        "The sword is named The Warden's Charge — her father kept it, now it keeps her"
+        "The sword is named The Warden's Charge — her father kept it, now it keeps her",
+        "She has been holding the Maelstorm possibility at arm's length since Calvar named the specification and her father's planning became plain — and she is now willing to put it down and go.",
+        "She reads her father's silence not as absence but as method — pointing the way without saying so."
       ],
       "skillsObserved": [
         "reading a person's deep grain through a shared rune-thread —",
@@ -1460,7 +1475,7 @@
         "holding ironsense open under active craft pressure for an ex"
       ],
       "status": "active",
-      "statusNote": "In the Fell Pell — holding The Warden's Charge upright, name received and settled.",
+      "statusNote": "In the Fell Pell — holding The Warden's Charge, the Maelstorm now named between them, committed to the road's order.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
@@ -3677,21 +3692,21 @@
     }
   },
   "tendencies": {
-    "strategic": 20.861817899808784,
-    "cerebral": 8.108836611164318,
-    "social": 16.80910457982161,
-    "generous": 2.90982293863646,
-    "cautious": 6.0148953503044895,
-    "physical": 1.054612399434191,
-    "risky": 0.23313362767261706,
-    "ruthless": 1.5273287916219336,
-    "carousing": 0.023400608304801486,
-    "amorous": 12.43493753831475,
-    "patient": 2.67612882144172,
-    "stealth": 0.5919965416549028,
-    "devotion": 1.3229024516782322,
-    "craft": 0.3039874379710392,
-    "leadership": 0.5876204882136226
+    "strategic": 21.340272452313563,
+    "cerebral": 7.90611569588521,
+    "social": 16.38887696532607,
+    "generous": 2.8370773651705483,
+    "cautious": 5.864522966546877,
+    "physical": 1.0282470894483362,
+    "risky": 0.22730528698080163,
+    "ruthless": 1.4891455718313853,
+    "carousing": 0.02281559309718145,
+    "amorous": 12.124064099856882,
+    "patient": 2.6092256009056767,
+    "stealth": 0.5771966281135302,
+    "devotion": 1.2898298903862764,
+    "craft": 0.2963877520217632,
+    "leadership": 0.572929976008282
   },
   "aptitudes": [
     "strategist",
@@ -3701,7 +3716,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 508,
+  "actionCount": 509,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -3947,8 +3962,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784404136541,
-  "rev": 746,
+  "updatedAt": 1784404351183,
+  "rev": 747,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5020,7 +5035,7 @@
   "syncedAt": 1784392733860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 327
+    "valley": 328
   },
   "foreclosed": [
     "rootkin",
@@ -5075,10 +5090,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T19:48:56.539Z",
+      "lastAt": "2026-07-18T19:52:31.182Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 52,
+      "beats": 53,
       "_recapError": null,
       "recap": "Day eighteen, and Silas Weir moved like a man who'd finally stopped fighting the shape of what he was. On the road he disarmed three opportunists without breaking bones, read the grief sitting behind the broad man's eyes, named it plainly, pressed provisions into their hands, and sent them toward something worth doing — mercy given as instruction, not sentiment. Then he brought the hard people together: Dara, Aldric, Fendt, Mara, Calvar, all of them in the heat of Pell's forge with no exits easy and no pretense left, and in that single evening he turned a valley's quiet panic into four working threads — engineering, logistics, supply, accounts — each with a named lead and a direction to face. The crisis didn't end, but it stopped being formless, and that was his doing."
     }

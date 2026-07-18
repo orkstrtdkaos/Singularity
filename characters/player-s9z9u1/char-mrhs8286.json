@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 14,
-  "xp": 1369,
+  "xp": 1385,
   "attributes": {
     "physical": 4,
     "mental": 5,
@@ -78,7 +78,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.28978003388663937,
+    "spectrumId": -0.32529103219230737,
     "violence_peace": 0.1030845625,
     "chaos_order": 0.243796664886697,
     "mechanical_spiritual": 0.2400392471479881,
@@ -93,7 +93,7 @@
   "maxHealth": 95,
   "health": 95,
   "maxEnergy": 165,
-  "energy": 165,
+  "energy": 160,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -763,6 +763,21 @@
       "spread": [],
       "day": 5,
       "worldDay": 18
+    },
+    {
+      "at": "2026-07-18T20:50:14.964Z",
+      "locationId": "gen-waygate",
+      "communityId": null,
+      "description": "Sparred Pell at the waygate at first light — belt knife against rune-read blade, came out of it with one real lesson and two feet she said were good",
+      "tags": [
+        "training",
+        "craft",
+        "partnership"
+      ],
+      "weight": 1,
+      "spread": [],
+      "day": 6,
+      "worldDay": 18
     }
   ],
   "relationships": {},
@@ -771,12 +786,182 @@
     "The Fell Pell gathering: Pell's brigandine finished with full protective rune-work collar to hem, one radiant mark at the chest from the vial's last scraping, and a partial Shielding Word seated in its outer ring with the promise of completion. Pell's short sword rune-bound with four threads including Huginn's ending-sense and her own ironsense. The forge named the Fell Pell; the fellowship formally opened. Calvar took the repair lead, Dara the logistics, Mara supply and comms, Aldric the accounts; Fendt named to the fellowship and vouched for by Aldric. The document roll sealed with every witness line present, Pip Cotter named as carrier. Silas and Pell settled the road: south lane in the morning, home first, then the Disputed Zone. The coals cooled. The night was quiet.",
     "Silas and Pell sleep, share a last morning meal at the forge, establish a relay protocol with Mara Wells, say their farewells, and step south out of Millbrook at a measured morning hour."
   ],
-  "currentLocationId": "millbrook",
-  "activeScene": null,
+  "currentLocationId": "gen-waygate",
+  "activeScene": {
+    "locationId": "gen-waygate",
+    "turns": [
+      {
+        "player": "Spar with Pell using the belt knife — test footwork and close-range work against a blade she now reads with ironsense",
+        "summary": "Silas and Pell spar at the waygate at dawn — belt knife against rune-bound blade, ironsense against footwork. The stepping dark needs work; the feet are good.",
+        "narration": "The waygate is a simple thing — two upright stones and a lintel, frost still in the grain, the south lane running away behind you into the dim. Pell is already moving when you clear the gate, the rune-bound sword loose in her wrist, not yet fully raised. She does not say ready. She never does.\n\nYou draw the belt knife and she comes in low and you learn immediately that ironsense changes everything about fighting a blacksmith. She is not reading your body the way a trained blade-hand reads posture and weight — she is reading the knife. You can feel it in how she moves, the way her line shifts before your shoulder commits, adjusting to the iron rather than your face. You try to step inside her measure and she has already given you the inside, taken a half-step back, and the sword is at an angle that would have opened your ribs. She holds it there. A breath. Then she resets.\n\nYou go again. And again after that. You find the rhythm eventually — not of beating her read, which you cannot do, but of working with the fact that she has it. She knows the knife, so you become the knife less. You use your feet. You use the distance. You shadowstep once, a short hop between the gate's stone shadow and the deeper dark of the lintel, and she turns to the space you were not quite fast enough to leave and the sword is waiting at your sternum when you arrive. 'You telegraph it,' she says. 'The shadow pulls before you do.' She is breathing harder now but she is right, and you know she is right, and that is useful.\n\nThe spar ends without ceremony — she sheathes the sword, you wipe frost-damp from the belt knife and slide it home. Huginn has watched from the lintel stone the whole time with the deep patience of something that has attended a great many more violent conclusions than this and found them uniformly unimpressive. Pell looks at you with the particular expression she saves for work that came out better than expected and says, 'You use your feet well. The stepping dark wants practice, but you use your feet well.' Coming from her, that is almost a speech."
+      }
+    ],
+    "lastTurn": {
+      "narration": "The waygate is a simple thing — two upright stones and a lintel, frost still in the grain, the south lane running away behind you into the dim. Pell is already moving when you clear the gate, the rune-bound sword loose in her wrist, not yet fully raised. She does not say ready. She never does.\n\nYou draw the belt knife and she comes in low and you learn immediately that ironsense changes everything about fighting a blacksmith. She is not reading your body the way a trained blade-hand reads posture and weight — she is reading the knife. You can feel it in how she moves, the way her line shifts before your shoulder commits, adjusting to the iron rather than your face. You try to step inside her measure and she has already given you the inside, taken a half-step back, and the sword is at an angle that would have opened your ribs. She holds it there. A breath. Then she resets.\n\nYou go again. And again after that. You find the rhythm eventually — not of beating her read, which you cannot do, but of working with the fact that she has it. She knows the knife, so you become the knife less. You use your feet. You use the distance. You shadowstep once, a short hop between the gate's stone shadow and the deeper dark of the lintel, and she turns to the space you were not quite fast enough to leave and the sword is waiting at your sternum when you arrive. 'You telegraph it,' she says. 'The shadow pulls before you do.' She is breathing harder now but she is right, and you know she is right, and that is useful.\n\nThe spar ends without ceremony — she sheathes the sword, you wipe frost-damp from the belt knife and slide it home. Huginn has watched from the lintel stone the whole time with the deep patience of something that has attended a great many more violent conclusions than this and found them uniformly unimpressive. Pell looks at you with the particular expression she saves for work that came out better than expected and says, 'You use your feet well. The stepping dark wants practice, but you use your feet well.' Coming from her, that is almost a speech.",
+      "sceneSummary": "Silas and Pell spar at the waygate at dawn — belt knife against rune-bound blade, ironsense against footwork. The stepping dark needs work; the feet are good.",
+      "scene": {
+        "setting": "The waygate south of Millbrook — two standing stones with a frost-rimed lintel, open road running south in the early-spring dawn light. Cold air, no wind, a pale sky just beginning to fill.",
+        "npcsPresent": [
+          {
+            "name": "Pell Marsh",
+            "state": "sword re-sheathed, breathing steadily, watching Silas with the look she uses for work that came out well"
+          },
+          {
+            "name": "Huginn",
+            "state": "perched on the lintel stone, preening one wing with a complete lack of interest in the outcome"
+          }
+        ],
+        "objects": [
+          "two upright waygate stones, frost in the grain",
+          "Memory (spear), road-lashed at Silas's back",
+          "Pell's rune-bound short sword, sheathed",
+          "south lane, open and empty ahead"
+        ],
+        "threads": [
+          "Pell's note that the shadowstep telegraphs — the shadow pulls before the step",
+          "The road south: home first, then the Disputed Zone"
+        ]
+      },
+      "choices": [
+        {
+          "label": "Ask Pell to walk you through what she read — how the ironsense tracks the knife, and what it feels like from the inside",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Try the shadowstep again, deliberate this time — work on hiding the pull before it moves",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "difficulty": 15,
+          "intentTags": [
+            "plan",
+            "careful"
+          ],
+          "abilityId": "shadowstep",
+          "energyCost": 4
+        },
+        {
+          "label": "Leave the spar where it is and set out south — the road to your mother's house is already waiting",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 0,
+          "intentTags": [
+            "travel"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Use Order-Sense on the waygate itself — it is old, and the stones feel like they are part of something larger than a road marker",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false
+        }
+      ],
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Marsh",
+          "note": "Sparred Silas at the waygate at dawn — read the belt knife through ironsense and held the line; gave him one note at the end: the shadowstep telegraphs, the shadow pulls before the step.",
+          "learned": [
+            "Silas's footwork is genuinely good under pressure",
+            "The shadowstep can be read by someone attentive to the shadow's shift before the body moves"
+          ],
+          "skillsObserved": [
+            "reading iron in motion through ironsense — tracking a blade's line as it commits, adjusting before the shoulder moves",
+            "clean reset between passes without ceremony"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the waygate south of Millbrook — spar concluded, ready to move south.",
+          "pronouns": "she/her",
+          "gender": "woman"
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "shadowstep",
+          "label": "Shadowstep — Telegraph Problem",
+          "kind": "lore",
+          "fact": "Pell identified at dawn sparring: the shadowstep telegraphs before the step arrives — the shadow shifts to receive the body before the body moves, visible to anyone watching the dark rather than the man. Needs work to conceal.",
+          "links": [
+            "pell-ran-marsh"
+          ]
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.5,
+        "why": "A dawn spar at the waygate — enough passes to learn something, not a long morning"
+      },
+      "deeds": [
+        {
+          "description": "Sparred Pell at the waygate at first light — belt knife against rune-read blade, came out of it with one real lesson and two feet she said were good",
+          "tags": [
+            "training",
+            "craft",
+            "partnership"
+          ],
+          "weight": 1,
+          "communityId": null
+        }
+      ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-edge-district-ledger",
+          "note": "Document roll sealed and complete, Pip Cotter named as carrier, all witness lines present. Silas and Pell have stepped away from Millbrook — the roll is in Mara's hands."
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Pell named the shadowstep's tell at the waygate dawn spar — the shadow shifts to receive the body before the body arrives; visible to anyone reading the dark. Silas now knows it.",
+          "subjectId": "pell-ran-marsh"
+        }
+      ],
+      "characterDeltas": {
+        "xp": 8
+      }
+    },
+    "sceneState": {
+      "setting": "The waygate south of Millbrook — two standing stones with a frost-rimed lintel, open road running south in the early-spring dawn light. Cold air, no wind, a pale sky just beginning to fill.",
+      "npcsPresent": [
+        {
+          "name": "Pell Marsh",
+          "state": "sword re-sheathed, breathing steadily, watching Silas with the look she uses for work that came out well"
+        },
+        {
+          "name": "Huginn",
+          "state": "perched on the lintel stone, preening one wing with a complete lack of interest in the outcome"
+        }
+      ],
+      "objects": [
+        "two upright waygate stones, frost in the grain",
+        "Memory (spear), road-lashed at Silas's back",
+        "Pell's rune-bound short sword, sheathed",
+        "south lane, open and empty ahead"
+      ],
+      "threads": [
+        "Pell's note that the shadowstep telegraphs — the shadow pulls before the step",
+        "The road south: home first, then the Disputed Zone"
+      ]
+    }
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 6,
-    "hour": 4,
+    "hour": 7,
     "realAnchor": null
   },
   "companions": [
@@ -1076,14 +1261,14 @@
         "s3"
       ],
       "progress": [
-        "Codex: Grael is entered as an entity, linked to Fendt. He becomes aware that someone is looking.",
         "Codex: the pattern is named. Grael moves from 'an official' to 'a regional power'. He begins to act against you.",
         "The chain is fully documented — Grael's authority, Vael's role, the keeper's silence, and the pattern of prior marks written in Silas's hand alongside Fendt's testimony. The document roll is sealed. Remaining: present it to the appropriate authority, and decide what the truth is for.",
         "Document roll on Mara's counter, gathering called for tonight. The moment of decision — what the truth is for — arrives at the forge this evening.",
         "The full chain laid out at the Fell Pell — every witness speaking their part, the document roll complete and present. The gathering now sits with the central question: what is the truth for?",
         "Mara named the document roll's destination without being asked — the carrier and route are hers to arrange before the week's end. The accountability chain now has a clear path to the district records office.",
         "Mara named Pip Cotter as carrier — document roll departs in two days for the district records office. Final witness lines open tonight. The accountability chain is nearly sealed.",
-        "Silas's own witness statement added to the roll. Fendt named to the fellowship. The gathering sealed with 'Thus begins the fellowship of the Fell.' Document roll now complete — all lines present, ready for Mara to seal and Pip Cotter to carry."
+        "Silas's own witness statement added to the roll. Fendt named to the fellowship. The gathering sealed with 'Thus begins the fellowship of the Fell.' Document roll now complete — all lines present, ready for Mara to seal and Pip Cotter to carry.",
+        "Document roll sealed and complete, Pip Cotter named as carrier, all witness lines present. Silas and Pell have stepped away from Millbrook — the roll is in Mara's hands."
       ],
       "aliases": [],
       "startedAt": "2026-07-16T21:27:42.515Z",
@@ -1200,8 +1385,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d5] Received the name The Warden's Charge — tested it against the iron, nodded once in the register she gives iron that has answered correctly. Holds the blade upright toward the rafters.",
-        "[d5] Received the idea of searching the Maelstorm for her father — held it without flinching, named the road's order herself: home first, then the Zone, then the Maelstorm. Committed to together.",
         "[d5] Approved radiant embellishment on the brigandine's plate with conditions — practical first, pretty after. Holds the armor in her lap and waits.",
         "[d5] Read the first protective mark on the brigandine's shoulder collar and named it good — three breaths, then 'That will hold.'",
         "[d5] Held the far edge of the brigandine steady while Silas worked the back panel — unprompted. Ran her thumb along three plate rows and confirmed the full thread. Named it 'all of them' without question.",
@@ -1209,31 +1392,33 @@
         "[d5] Watched the partial ward settle without complaint — named it more than the plate had before. Practical about limits.",
         "[d5] Received the partial-ward promise without reproach — named the radiant mark as the place the completion will find itself. The evening closed on that.",
         "[d5] Scene closed together in the forge's cooling warmth — Morning, then. Named the day ahead and let the night finish.",
-        "[d5] Was up before Silas, laid out the morning meal without ceremony, walked out the south gate beside him with the brigandine on her shoulders. The road has begun."
+        "[d5] Was up before Silas, laid out the morning meal without ceremony, walked out the south gate beside him with the brigandine on her shoulders. The road has begun.",
+        "[d6] Walked the south lane in measured silence, arrived at the waygate, drew the rune-bound sword and challenged Silas to show her his close-range work.",
+        "[d6] Sparred Silas at the waygate at dawn — read the belt knife through ironsense and held the line; gave him one note at the end: the shadowstep telegraphs, the shadow pulls before the step."
       ],
       "knownFacts": [
-        "The sword's order-sense capacitor closed on her shape, not Silas's — the iron chose her idiom for the reading capacity",
-        "The sword is named The Warden's Charge — her father kept it, now it keeps her",
         "She has been holding the Maelstorm possibility at arm's length since Calvar named the specification and her father's planning became plain — and she is now willing to put it down and go.",
         "She reads her father's silence not as absence but as method — pointing the way without saying so.",
         "The first death-warding thread is seated into the brigandine's shoulder collar — quiet, economical, holding.",
         "The full protective thread is seated in every plate row of the brigandine — collar to hem, inside edge, unannounced from outside",
         "The brigandine now carries one radiant mark at the chest's center ridge — her choice of placement",
-        "The Shielding Word is partially seated in the brigandine's radiant mark — the outer ring holds; completion requires a proper substrate"
+        "The Shielding Word is partially seated in the brigandine's radiant mark — the outer ring holds; completion requires a proper substrate",
+        "Silas's footwork is genuinely good under pressure",
+        "The shadowstep can be read by someone attentive to the shadow's shift before the body moves"
       ],
       "skillsObserved": [
-        "confirming a blade's balance in one slow pass, no performanc",
-        "reading a rune-bond's structural logic from the grain before",
         "reading iron's grain and naming its character as diagnostic ",
         "holding ironsense open under active craft pressure for an ex",
         "reading a rune-mark from the inside of a finished piece with",
-        "reading a rune-thread's presence through ironsense across mu"
+        "reading a rune-thread's presence through ironsense across mu",
+        "reading iron in motion through ironsense — tracking a blade'",
+        "clean reset between passes without ceremony"
       ],
       "status": "active",
-      "statusNote": "On the south lane out of Millbrook — road-ready, brigandine on, traveling south with Silas.",
+      "statusNote": "At the waygate south of Millbrook — spar concluded, ready to move south.",
       "lastSeen": {
-        "locationId": "millbrook",
-        "day": 5
+        "locationId": "gen-waygate",
+        "day": 6
       },
       "bondType": "romantic",
       "bondStage": "partner",
@@ -1257,7 +1442,6 @@
       },
       "relationship": 8,
       "history": [
-        "[d2] Sent a follow-up package via Pip — Aldric waterskin reminder and a vial of pre-Transition purification tabs from her own stock.",
         "[d5] Greeted Calvar directly on sight — used Dara's phrase back unprompted, extended her hand to him first. Already operational.",
         "[d5] Confirmed iron sleeves without hesitation and watched Calvar's face when she said it — reading his reaction as diagnostic data. Received the document roll's placement on her counte",
         "[d5] Left with Calvar to settle him — called to the forge tonight after she's done.",
@@ -1266,17 +1450,18 @@
         "[d5] Placed the document roll on the forge block and named its destination without being asked — she knows the carrier already.",
         "[d5] Named Pip Cotter as the document roll's carrier to the district records office — two days from now. Fingers on the roll, waiting for final witness lines tonight.",
         "[d5] Fingers on the document roll — waiting for the word to seal it. All lines now present.",
-        "[d5] Established the relay-contact protocol — Pip Cotter to the split-rock relay point, chalk-scratch for passage, Huginn as a distance option. Wrote the relay point into her ledger's margin. Confirmed the document roll goes out in two days."
+        "[d5] Established the relay-contact protocol — Pip Cotter to the split-rock relay point, chalk-scratch for passage, Huginn as a distance option. Wrote the relay point into her ledger's margin. Confirmed the document roll goes out in two days.",
+        "[d6] Confirmed Bren placed with Aldric on smokehouse deliveries, Curis with Dara's irrigation crew. Named Silas's introduction as the thing that opened the door."
       ],
       "knownFacts": [
-        "Acts proactively on expedition logistics even after a party has departed",
-        "Silas returned with someone who matches the 'knows what they're looking at' criterion — she recognized it immediately",
         "Calvar asks about intake sleeve material as a first diagnostic — iron matters to his read",
         "Calvar defers authority explicitly — he is a witness, not a claimant",
         "The document roll is now on her counter; the question of its destination is hers to answer",
         "Formally tasked with resupply, communications, and document-roll delivery — named the carrier and route before the question was asked",
         "Pip Cotter is her chosen carrier for the document roll — fast, quiet, reliable",
-        "Split-rock relay point north of the pass-trail is the agreed contact point for urgent messages"
+        "Split-rock relay point north of the pass-trail is the agreed contact point for urgent messages",
+        "Bren Thalle is on smokehouse delivery with Aldric for the week",
+        "Curis is on irrigation ditch repair with Dara's crew — useful with stone"
       ],
       "skillsObserved": [
         "rapid trail-kit assembly from known inventory",
@@ -1287,10 +1472,10 @@
         "naming a destination and a carrier without prompting — opera"
       ],
       "status": "active",
-      "statusNote": "In her store — ledger updated, document roll departure confirmed in two days, relay protocol noted.",
+      "statusNote": "In her store — ledger in hand, both opportunists placed in honest work, relay protocol in place.",
       "lastSeen": {
         "locationId": "millbrook",
-        "day": 5
+        "day": 6
       },
       "gender": "woman",
       "pronouns": "she/her",
@@ -1751,7 +1936,6 @@
     "millbrook": {
       "visits": 3,
       "notes": [
-        "[d5] Two road opportunists disarmed and sent to Mara Wells with Silas Weir's name — the limestone bend saw mercy shown and weapons taken on World-day 18 morning.",
         "[d5] Calvar — pre-Transition filtration engineer — arrived in Millbrook on World-day 18 morning with the sealed document roll. First contact point and his read of the east channel are the immediate next st",
         "[d5] Calvar brought to Mara Wells's store on World-day 18 mid-morning — first contact with Millbrook's supply network made.",
         "[d5] Forge relit on World-day 18 afternoon — Pell set the fire and arranged seating for an evening meeting. The forge is warm again after standing cold since departure.",
@@ -1762,7 +1946,8 @@
         "[d5] Pell's short sword rune-bound at the forge on World-day 18 evening — four threads seated rough but holding. The lamp-black vial is spent down and the tooling leather is marked from the work.",
         "[d5] Brigandine rune-work completed to the full protective layer on World-day 18 evening — every plate row threaded inside, lamp-black spent. Radiant embellishment not yet begun.",
         "[d5] The brigandine's radiant embellishment completed — one mark, chest center, pressed with the vial's last scraping. The rune-craft kit is now entirely spent. The armor is fully finished.",
-        "[d5] Silas and Pell departed Millbrook by the south lane on World-day 19 mid-morning — the forge cold, the fellowship in place, the document roll two days from departure."
+        "[d5] Silas and Pell departed Millbrook by the south lane on World-day 19 mid-morning — the forge cold, the fellowship in place, the document roll two days from departure.",
+        "[d6] Silas and Pell arrived at the waygate south of Millbrook on World-day 19 late morning — the threshold is the first sparring ground on the road south."
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -1846,6 +2031,13 @@
           "visited": true,
           "note": "Site of the bull kill — body down in dry grass, Deathbound Runic Spear in the animal, Huginn attending.",
           "parentId": "millbrook"
+        },
+        "waygate": {
+          "name": "Waygate",
+          "parentId": "millbrook",
+          "day": 6,
+          "visited": true,
+          "note": "A dry-stone threshold of two uprights and a lintel on the low ridge at Millbrook's south approach — old placement, the valley on one side and open country on the other."
         }
       },
       "vectorsKnown": [
@@ -2014,6 +2206,11 @@
           "parentId": "old_switchback"
         }
       }
+    },
+    "gen-waygate": {
+      "visits": 1,
+      "notes": [],
+      "flags": {}
     }
   },
   "worldState": {
@@ -2139,7 +2336,6 @@
         "label": "Millbrook",
         "kind": "event",
         "facts": [
-          "[d1] Order-Sense at the forge lintel (World-day 14 pre-dawn): north now reads as two or three distinct presences — each with its own cadence, loosely synchronized, alive, holding ground. Not approaching. T",
           "[d1] Boar sounder in the north wood has been pushing rooting ground higher — away from streamside sedge toward drier scrub — because the river smell is carrying north on the low air. Corvin has been tracki",
           "[d1] Order-Sense at the mud-strip (World-day 14 pre-dawn): sow and young in the sedge strip ahead — twenty minutes out. Something heavier passed through last night and did not stay. Bull present at this ra",
           "[d1] Order-Sense on the bull track (World-day 14 pre-dawn): bull moved northwest toward drier scrub, unhurried, between midnight and first light — destination unclear past the canopy bend. Track and Huginn",
@@ -2162,17 +2358,18 @@
           "[d5] The brigandine's first protective thread seated into the shoulder collar on World-day 18 evening — death-warding, conserved, confirmed good by Pell's ironsense.",
           "[d5] The brigandine's full protective thread completed at the Fell Pell on World-day 18 evening — every plate row from collar to hem, inside edge, before any decoration. Lamp-black spent.",
           "[d5] The brigandine's radiant embellishment completed on World-day 18 evening — one mark at the chest's highest point, pressed with the lamp-black vial's last scraping. Pell named its placement herself. The armor is done.",
-          "[d5] The brigandine's radiant mark now holds a partial Shielding Word in its outer ring — seated on World-day 18 evening with a depleted kit and a thin substrate. The full ward requires a stronger lattice to complete."
+          "[d5] The brigandine's radiant mark now holds a partial Shielding Word in its outer ring — seated on World-day 18 evening with a depleted kit and a thin substrate. The full ward requires a stronger lattice to complete.",
+          "[d6] Mara Wells placed both men: Bren on Aldric's smokehouse delivery run, Curis on Dara's irrigation ditch crew. Silas Weir's name was the introduction that made it possible."
         ],
         "links": [
-          "precursor-signs-in-the-valley",
-          "mara-wells",
-          "pell",
           "order-sense",
           "find-the-engineer",
           "pell-ran-marsh",
           "deathsense",
-          "the-fell-pell"
+          "the-fell-pell",
+          "aldric",
+          "dara-holt",
+          "mara-wells"
         ],
         "aliases": [
           "Millbrook's Elder Declaration",
@@ -2180,11 +2377,12 @@
           "The River's Discoloration",
           "The Water Crisis",
           "The Fell Pell",
-          "The Fell Pell Bond — Planned Architecture"
+          "The Fell Pell Bond — Planned Architecture",
+          "Bren Thalle and Curis — Placed in Millbrook"
         ],
         "createdDay": 1,
         "entityId": "millbrook",
-        "updatedDay": 5
+        "updatedDay": 6
       },
       "silas-background-gift": {
         "id": "silas-background-gift",
@@ -3447,31 +3645,29 @@
     }
   },
   "tendencies": {
-    "strategic": 19.82505780905226,
-    "cerebral": 6.622096044109923,
-    "social": 14.702185573058905,
-    "generous": 2.376312151175288,
-    "cautious": 6.6968587206502885,
-    "physical": 0.8612511181625179,
-    "risky": 0.1903889975331689,
-    "ruthless": 1.247295812463355,
-    "carousing": 0.019110148978910238,
-    "amorous": 10.155014169092308,
-    "patient": 3.0891533194879433,
-    "stealth": 0.4834550435042977,
-    "devotion": 1.0803506732322565,
-    "craft": 3.818963149519485,
-    "leadership": 0.4798813315685538
+    "strategic": 19.821195579730304,
+    "cerebral": 6.295130051931995,
+    "social": 13.976265160389122,
+    "generous": 2.258981738711008,
+    "cautious": 8.36620132131818,
+    "physical": 0.8187268442032435,
+    "risky": 0.18098854077996868,
+    "ruthless": 1.1857105817229767,
+    "carousing": 0.018166585373076544,
+    "amorous": 9.653610344493375,
+    "patient": 2.936626374338226,
+    "stealth": 0.45958445073127296,
+    "devotion": 1.0270083587414138,
+    "craft": 3.6304018440119603,
+    "leadership": 0.4561871908223564
   },
   "aptitudes": [
     "strategist",
     "silver_tongue",
     "tactician",
-    "charmer",
-    "devoted_lover",
-    "ardent"
+    "charmer"
   ],
-  "actionCount": 516,
+  "actionCount": 518,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -3717,8 +3913,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784406991579,
-  "rev": 761,
+  "updatedAt": 1784407814967,
+  "rev": 763,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4386,24 +4582,32 @@
         "image": "https://image.pollinations.ai/prompt/The%20Low%20Lamp%20Inn%3A%20Tucked%20into%20the%20lower%20tier%20of%20the%20Edge%20District%20where%20the%20light-guide%20streets%20run%20closest%20to%20the%20valley%20floor%2C%20the%20Low%20Lamp%20sits%20over%20a%20junction%20conduit%20%E2%80%94%20the%20glow%20rises%20through%20pale%20stone%20floors%20and%20fills%20the%20common%20room%20from%20below%2C%20warm%20and%20directionless%20as%20afternoon%20through%20cloud.%20The%20building%20is%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=64375&nologo=true",
         "parentId": "radiant_plateau_edge",
         "_promotedFromSubPlace": true
+      },
+      "gen-waygate": {
+        "id": "gen-waygate",
+        "name": "Waygate",
+        "regionId": "valley",
+        "parentId": "millbrook",
+        "_promotedFromSubPlace": true,
+        "descriptionSeed": "A place the road led to — Waygate. The fiction brought you here before the map knew its name.",
+        "tags": [
+          "transitional"
+        ],
+        "connections": [
+          "millbrook"
+        ],
+        "_gen": true,
+        "_mintedAs": "transit",
+        "map": {
+          "x": 409.5058087856015,
+          "y": 397.4185998280231
+        }
       }
     },
     "arc": {}
   },
   "opLossPending": false,
   "establishedFacts": [
-    {
-      "id": "leth",
-      "text": "The intruder entered Leth's archive room through a shared rear corridor connecting three rooms in the same row — an east-wall door, flush with shelving, with disturbed dust confirming recent use. Acce",
-      "day": 3,
-      "subjectId": "leth"
-    },
-    {
-      "id": "vash",
-      "text": "Vash witnessed Grael's runner — a figure with a cut-cord pack who collects from the optics array on the first and third morning of each week — removing Calvar's calibration files from the district sec",
-      "day": 3,
-      "subjectId": "vash"
-    },
     {
       "id": "leth",
       "text": "The optics array intake collection log — a live, non-restricted working document in the array-office foyer — records every collector visit by name, date, and initials. Leth confirms it would hold the ",
@@ -4631,6 +4835,18 @@
       "text": "A relay-contact protocol is established with Mara Wells — Pip Cotter carries urgent messages to the split-rock relay point on the pass-trail, marked with chalk for passage. Huginn can serve as a distance option when needed. Mara has this in her ledger.",
       "day": 5,
       "subjectId": "mara-wells"
+    },
+    {
+      "id": "f41",
+      "text": "Bren Thalle placed on Aldric's smokehouse delivery run; Curis placed with Dara's irrigation repair crew — both working honest labor in Millbrook with Silas Weir's name as introduction.",
+      "day": 6,
+      "subjectId": null
+    },
+    {
+      "id": "pell-ran-marsh",
+      "text": "Pell named the shadowstep's tell at the waygate dawn spar — the shadow shifts to receive the body before the body arrives; visible to anyone reading the dark. Silas now knows it.",
+      "day": 6,
+      "subjectId": "pell-ran-marsh"
     }
   ],
   "practice": {
@@ -4791,7 +5007,7 @@
   "syncedAt": 1784392733860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 336
+    "valley": 338
   },
   "foreclosed": [
     "rootkin",
@@ -4802,7 +5018,8 @@
     "radiant_plateau_edge",
     "millbrook",
     "the-low-lamp-inn",
-    "old_switchback"
+    "old_switchback",
+    "gen-waygate"
   ],
   "opLossLog": [
     {
@@ -4846,10 +5063,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T20:36:31.577Z",
+      "lastAt": "2026-07-18T20:50:14.964Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 61,
+      "beats": 63,
       "_recapError": null,
       "recap": "Day eighteen, and Silas Weir moved like a man who'd finally stopped fighting the shape of what he was. On the road he disarmed three opportunists without breaking bones, read the grief sitting behind the broad man's eyes, named it plainly, pressed provisions into their hands, and sent them toward something worth doing — mercy given as instruction, not sentiment. Then he brought the hard people together: Dara, Aldric, Fendt, Mara, Calvar, all of them in the heat of Pell's forge with no exits easy and no pretense left, and in that single evening he turned a valley's quiet panic into four working threads — engineering, logistics, supply, accounts — each with a named lead and a direction to face. The crisis didn't end, but it stopped being formless, and that was his doing."
     }
@@ -4900,5 +5117,10 @@
       }
     }
   },
-  "_intentAsked": null
+  "_intentAsked": null,
+  "_turnApplyError": {
+    "at": "2026-07-18T20:40:31.982Z",
+    "message": "Cannot create property 'engagementScore' on boolean 'true'",
+    "stack": "TypeError: Cannot create property 'engagementScore' on boolean 'true' <-     at recordAttention (https://orkstrtdkaos.github.io/Singularity/engine/generate.js:340:21) <-     at noteGeneratedAttention (https://orkstrtdkaos.github.io/Singularity/app.js?v=1.8.119:1511:16) <-     at applyTurn (https://orkstrtdkaos.github.io/Singularity/app.js?v=1.8.119:2941:7)"
+  }
 }

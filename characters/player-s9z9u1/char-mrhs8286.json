@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 12,
-  "xp": 1122,
+  "xp": 1127,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -67,6 +67,10 @@
     {
       "abilityId": "the_ended_threat",
       "level": 1
+    },
+    {
+      "abilityId": "the_shadow_work",
+      "level": 1
     }
   ],
   "alignment": {
@@ -85,7 +89,7 @@
   "maxHealth": 85,
   "health": 85,
   "maxEnergy": 155,
-  "energy": 150,
+  "energy": 145,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -287,7 +291,94 @@
         "explorer"
       ],
       "weight": 2,
-      "spread": [],
+      "spread": [
+        "mason.bedrock",
+        "seraphic.choirheight",
+        "figurist.cloudform",
+        "domain.deepwood",
+        "blazeborn.glasshome",
+        "valley.greywater_stilts",
+        "rootkin.grovehome",
+        "valley.harmonic_heights",
+        "valley.kestrels_roost",
+        "valley.old_switchback",
+        "enginewright.pressureholt",
+        "valley.radiant_plateau",
+        "unspooling.spindrift",
+        "valley.sunken_choir",
+        "abyssal.halls",
+        "syllogist.axiom",
+        "center.gate",
+        "abyssal.gate",
+        "blazeborn.blaze",
+        "domain.blocklands",
+        "syllogist.bloodless",
+        "wright.ceaseless",
+        "churnfolk.edge",
+        "unmaker.clearing",
+        "somatic.cogitarium",
+        "center.crossing",
+        "figurist.works",
+        "verist.flensing",
+        "somatic.temple",
+        "wright.forge",
+        "hourkeeper.archive",
+        "enginewright.verge",
+        "unspooling.gralloch",
+        "lattice.grand",
+        "center.coliseum",
+        "enginewright.engine",
+        "rootkin.greenward",
+        "threnodist.griefhouse",
+        "wright.cathedral",
+        "veilwright.hall",
+        "umbral.harborward",
+        "rootkin.heartroot",
+        "ashwarden.hollowing",
+        "center.markets",
+        "veilwright.court",
+        "numinous.hermitage",
+        "umbral.market",
+        "veilwright.lastmask",
+        "mason.leaden",
+        "blazeborn.lensward",
+        "horizon.longspan",
+        "riven.marchward",
+        "abyssal.maw",
+        "seraphic.mercyhouse",
+        "somatic.middleway",
+        "numinous.numen",
+        "syllogist.proofhalls",
+        "rootkin.eaves",
+        "center.quiethouse",
+        "riven.redline",
+        "unmaker.scour",
+        "unmaker.scouring",
+        "enginewright.serviceways",
+        "hourkeeper.slowhour",
+        "rootkin.orchard",
+        "umbral.stair",
+        "riven.stillhold",
+        "hourkeeper.stopped",
+        "numinous.thinning",
+        "verist.toldground",
+        "verist.stone",
+        "umbral.underlight",
+        "seraphic.unfallen",
+        "horizon.unlanded",
+        "umbral.unlit",
+        "lattice.unplanned",
+        "figurist.untethered",
+        "horizon.wayhouse",
+        "mason.weighingyard",
+        "threnodist.deep",
+        "unspooling.wend",
+        "valley.thornwake_glade",
+        "lattice.tier7",
+        "unspooling.tumbledown",
+        "threnodist.wellspring",
+        "valley.radiant_plateau_edge"
+      ],
       "day": 1,
       "worldDay": 12
     },
@@ -318,7 +409,94 @@
         "uncanny"
       ],
       "weight": 2,
-      "spread": [],
+      "spread": [
+        "mason.bedrock",
+        "seraphic.choirheight",
+        "figurist.cloudform",
+        "domain.deepwood",
+        "blazeborn.glasshome",
+        "valley.greywater_stilts",
+        "rootkin.grovehome",
+        "valley.harmonic_heights",
+        "valley.kestrels_roost",
+        "valley.old_switchback",
+        "enginewright.pressureholt",
+        "valley.radiant_plateau",
+        "unspooling.spindrift",
+        "valley.sunken_choir",
+        "abyssal.halls",
+        "syllogist.axiom",
+        "center.gate",
+        "abyssal.gate",
+        "blazeborn.blaze",
+        "domain.blocklands",
+        "syllogist.bloodless",
+        "wright.ceaseless",
+        "churnfolk.edge",
+        "unmaker.clearing",
+        "somatic.cogitarium",
+        "center.crossing",
+        "figurist.works",
+        "verist.flensing",
+        "somatic.temple",
+        "wright.forge",
+        "hourkeeper.archive",
+        "enginewright.verge",
+        "unspooling.gralloch",
+        "lattice.grand",
+        "center.coliseum",
+        "enginewright.engine",
+        "rootkin.greenward",
+        "threnodist.griefhouse",
+        "wright.cathedral",
+        "veilwright.hall",
+        "umbral.harborward",
+        "rootkin.heartroot",
+        "ashwarden.hollowing",
+        "center.markets",
+        "veilwright.court",
+        "numinous.hermitage",
+        "umbral.market",
+        "veilwright.lastmask",
+        "mason.leaden",
+        "blazeborn.lensward",
+        "horizon.longspan",
+        "riven.marchward",
+        "abyssal.maw",
+        "seraphic.mercyhouse",
+        "somatic.middleway",
+        "numinous.numen",
+        "syllogist.proofhalls",
+        "rootkin.eaves",
+        "center.quiethouse",
+        "riven.redline",
+        "unmaker.scour",
+        "unmaker.scouring",
+        "enginewright.serviceways",
+        "hourkeeper.slowhour",
+        "rootkin.orchard",
+        "umbral.stair",
+        "riven.stillhold",
+        "hourkeeper.stopped",
+        "numinous.thinning",
+        "verist.toldground",
+        "verist.stone",
+        "umbral.underlight",
+        "seraphic.unfallen",
+        "horizon.unlanded",
+        "umbral.unlit",
+        "lattice.unplanned",
+        "figurist.untethered",
+        "horizon.wayhouse",
+        "mason.weighingyard",
+        "threnodist.deep",
+        "unspooling.wend",
+        "valley.thornwake_glade",
+        "lattice.tier7",
+        "unspooling.tumbledown",
+        "threnodist.wellspring",
+        "valley.radiant_plateau_edge"
+      ],
       "_bonusApplied": 0.25,
       "day": 1,
       "worldDay": 13
@@ -366,7 +544,94 @@
         "community"
       ],
       "weight": 2,
-      "spread": [],
+      "spread": [
+        "mason.bedrock",
+        "seraphic.choirheight",
+        "figurist.cloudform",
+        "domain.deepwood",
+        "blazeborn.glasshome",
+        "valley.greywater_stilts",
+        "rootkin.grovehome",
+        "valley.harmonic_heights",
+        "valley.kestrels_roost",
+        "valley.old_switchback",
+        "enginewright.pressureholt",
+        "valley.radiant_plateau",
+        "unspooling.spindrift",
+        "valley.sunken_choir",
+        "abyssal.halls",
+        "syllogist.axiom",
+        "center.gate",
+        "abyssal.gate",
+        "blazeborn.blaze",
+        "domain.blocklands",
+        "syllogist.bloodless",
+        "wright.ceaseless",
+        "churnfolk.edge",
+        "unmaker.clearing",
+        "somatic.cogitarium",
+        "center.crossing",
+        "figurist.works",
+        "verist.flensing",
+        "somatic.temple",
+        "wright.forge",
+        "hourkeeper.archive",
+        "enginewright.verge",
+        "unspooling.gralloch",
+        "lattice.grand",
+        "center.coliseum",
+        "enginewright.engine",
+        "rootkin.greenward",
+        "threnodist.griefhouse",
+        "wright.cathedral",
+        "veilwright.hall",
+        "umbral.harborward",
+        "rootkin.heartroot",
+        "ashwarden.hollowing",
+        "center.markets",
+        "veilwright.court",
+        "numinous.hermitage",
+        "umbral.market",
+        "veilwright.lastmask",
+        "mason.leaden",
+        "blazeborn.lensward",
+        "horizon.longspan",
+        "riven.marchward",
+        "abyssal.maw",
+        "seraphic.mercyhouse",
+        "somatic.middleway",
+        "numinous.numen",
+        "syllogist.proofhalls",
+        "rootkin.eaves",
+        "center.quiethouse",
+        "riven.redline",
+        "unmaker.scour",
+        "unmaker.scouring",
+        "enginewright.serviceways",
+        "hourkeeper.slowhour",
+        "rootkin.orchard",
+        "umbral.stair",
+        "riven.stillhold",
+        "hourkeeper.stopped",
+        "numinous.thinning",
+        "verist.toldground",
+        "verist.stone",
+        "umbral.underlight",
+        "seraphic.unfallen",
+        "horizon.unlanded",
+        "umbral.unlit",
+        "lattice.unplanned",
+        "figurist.untethered",
+        "horizon.wayhouse",
+        "mason.weighingyard",
+        "threnodist.deep",
+        "unspooling.wend",
+        "valley.thornwake_glade",
+        "lattice.tier7",
+        "unspooling.tumbledown",
+        "threnodist.wellspring",
+        "valley.radiant_plateau_edge"
+      ],
       "_bonusApplied": 0.25,
       "day": 1,
       "worldDay": 14
@@ -996,125 +1261,216 @@
         "player": "Tell her it's time — name the road aloud, start getting up, begin moving toward Calvar's signal.",
         "summary": "Silas names the road aloud — they dress, pack, and move toward Calvar's signal, hours overdue.",
         "narration": "You say it quietly, without apology: \"It's time.\"\n\nPell doesn't argue. Her hands leave your forearms — deliberate, a clean release — and she stands in the cooled bath with the unhurried economy she brings to everything she has decided to do. Water runs off her in sheets, catches the junction-conduit light from the pale stone floor, goes still in the trough again. She reaches for the folded cloth on the partition ledge without looking for it. You do the same. The cedar smell is still in everything — the room, the cloth, the air — and you let it be a last thing rather than chase it.\n\nHuginn drops from the rafter without announcement and lands on Memory's shaft in the corner, grips once, and looks at the door. Its one too-calm eye carries no opinion about timing. It is simply correct that the road is now the shape of the next thing.\n\nYou dress in the flat gray light, the rain still ticking against the diffusion panels — Pell lacing her vest, you settling your belt knife and checking the road-lash on Memory's socket by feel, the habit of it. She picks up the River Whetstone from where it rested on the ledge and pockets it without ceremony. The Traveler's Pack, the waterskins, the preserved parcels — you go through the inventory the way two people go through it when they have done it before and know each other's rhythm now. Not new. Roomier, the way she said.\n\nCalvar's lamp signal was to come at first light. It is well past that — afternoon pressing against whatever margin he left himself. You name it aloud as you shoulder the pack: \"Calvar's lamp should have gone hours ago. We move now and check his window on the way out of the district.\" Pell nods once. She doesn't add to it. That's how you know she has already been tracking the same number."
+      },
+      {
+        "player": "Head to the cooperage lane at a deliberate pace, scanning the district on the way — Calvar being late warrants watching who else is moving in the quarter this afternoon.",
+        "summary": "Arrived at the cooperage lane — Calvar's lamp not in the window, a watcher stationed under the chandler's awning opposite, the district moving around a quiet pressure.",
+        "narration": "The Edge District in afternoon rain is a place of deliberate movement — the light-guide streets run dimmer when the sky closes in, the conduit glow bleeding up through wet stone with nowhere to go, turning puddles into pale mirrors. You keep Memory across your back and your attention wide. Pell's boots find the same rhythm as yours; Huginn rides your left shoulder, head tucked just enough to keep the rain off.\n\nThe cooperage lane runs east off the third turning, rising slightly against the district's grade. It is the kind of street that has always just finished something — barrels on the wet cobbles, the iron tang of fresh-hooped wood in the air, a cat working the gaps under the loading dock without looking up at you. You watch what's moving. A figure in a grey working cloak crossing the far end of the lane at pace — not threading, not browsing, going somewhere specific. A second figure standing near the tallow-chandler's awning across from the cooperage, not looking at the cooperage, which is a way of looking at the cooperage. They have been there a few minutes at least; their boots are drier than their shoulders. Not a neighbor catching rain under a close awning. Someone with a reason to be still.\n\nCalvar's window is on the second floor, facing the lane. The lamp is not in the window. The room behind the glass shows nothing — no movement, no light — but the casement is latched rather than open, which is not how you left it last evening. The cooperage itself has its ground-floor door propped with a wood block, the cooper's trade going on as it always does: mallet-ring, timber-flex, the smell of green oak. The watcher under the tallow-chandler's awning turns his head by a few degrees. He hasn't decided whether you are what he was told to watch for.\n\nPell comes level with you, shoulders close. She's already read the figure under the awning — you can tell by the angle of her chin, the slight cant of her pack away from that side, the small unhurried readiness that has nothing to do with alarm. Huginn says nothing. Its silence this particular moment is a comment."
       }
     ],
     "lastTurn": {
-      "narration": "You say it quietly, without apology: \"It's time.\"\n\nPell doesn't argue. Her hands leave your forearms — deliberate, a clean release — and she stands in the cooled bath with the unhurried economy she brings to everything she has decided to do. Water runs off her in sheets, catches the junction-conduit light from the pale stone floor, goes still in the trough again. She reaches for the folded cloth on the partition ledge without looking for it. You do the same. The cedar smell is still in everything — the room, the cloth, the air — and you let it be a last thing rather than chase it.\n\nHuginn drops from the rafter without announcement and lands on Memory's shaft in the corner, grips once, and looks at the door. Its one too-calm eye carries no opinion about timing. It is simply correct that the road is now the shape of the next thing.\n\nYou dress in the flat gray light, the rain still ticking against the diffusion panels — Pell lacing her vest, you settling your belt knife and checking the road-lash on Memory's socket by feel, the habit of it. She picks up the River Whetstone from where it rested on the ledge and pockets it without ceremony. The Traveler's Pack, the waterskins, the preserved parcels — you go through the inventory the way two people go through it when they have done it before and know each other's rhythm now. Not new. Roomier, the way she said.\n\nCalvar's lamp signal was to come at first light. It is well past that — afternoon pressing against whatever margin he left himself. You name it aloud as you shoulder the pack: \"Calvar's lamp should have gone hours ago. We move now and check his window on the way out of the district.\" Pell nods once. She doesn't add to it. That's how you know she has already been tracking the same number.",
-      "sceneSummary": "Silas names the road aloud — they dress, pack, and move toward Calvar's signal, hours overdue.",
+      "narration": "The Edge District in afternoon rain is a place of deliberate movement — the light-guide streets run dimmer when the sky closes in, the conduit glow bleeding up through wet stone with nowhere to go, turning puddles into pale mirrors. You keep Memory across your back and your attention wide. Pell's boots find the same rhythm as yours; Huginn rides your left shoulder, head tucked just enough to keep the rain off.\n\nThe cooperage lane runs east off the third turning, rising slightly against the district's grade. It is the kind of street that has always just finished something — barrels on the wet cobbles, the iron tang of fresh-hooped wood in the air, a cat working the gaps under the loading dock without looking up at you. You watch what's moving. A figure in a grey working cloak crossing the far end of the lane at pace — not threading, not browsing, going somewhere specific. A second figure standing near the tallow-chandler's awning across from the cooperage, not looking at the cooperage, which is a way of looking at the cooperage. They have been there a few minutes at least; their boots are drier than their shoulders. Not a neighbor catching rain under a close awning. Someone with a reason to be still.\n\nCalvar's window is on the second floor, facing the lane. The lamp is not in the window. The room behind the glass shows nothing — no movement, no light — but the casement is latched rather than open, which is not how you left it last evening. The cooperage itself has its ground-floor door propped with a wood block, the cooper's trade going on as it always does: mallet-ring, timber-flex, the smell of green oak. The watcher under the tallow-chandler's awning turns his head by a few degrees. He hasn't decided whether you are what he was told to watch for.\n\nPell comes level with you, shoulders close. She's already read the figure under the awning — you can tell by the angle of her chin, the slight cant of her pack away from that side, the small unhurried readiness that has nothing to do with alarm. Huginn says nothing. Its silence this particular moment is a comment.",
+      "sceneSummary": "Arrived at the cooperage lane — Calvar's lamp not in the window, a watcher stationed under the chandler's awning opposite, the district moving around a quiet pressure.",
       "choices": [
         {
-          "label": "Go directly to Calvar's window above the cooperage — check the lamp signal before anything else.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "trivial": true,
+          "label": "Read the watcher's situation and the lane's design — find out if this is a loose watch or a tight one, how many, and whether Calvar is still upstairs.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "chaos_order": 0.3,
+            "falsehood_truth": 0.4
+          },
+          "difficulty": 15,
           "intentTags": [
-            "travel",
+            "scout",
+            "careful"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use the Ended Threat — read whether what's forming around Calvar's window can be ended at its source before it executes.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "chaos_order": 0.5,
+            "falsehood_truth": 0.3
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "careful",
+            "plan"
+          ],
+          "abilityId": "the_ended_threat",
+          "energyCost": 1,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Go straight in through the cooperage — use the ground-floor trade entrance, get upstairs to Calvar's room without crossing the watcher's sightline.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {
+            "chaos_order": 0.1,
+            "falsehood_truth": 0.2
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "sneak",
             "careful"
           ],
           "abilityId": null,
-          "energyCost": null
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Stop at Maret's desk on the way out — settle any last word with her and ask if anyone has been asking after Calvar or his building.",
+          "label": "Walk directly to the watcher and open a conversation — a traveler asking directions, or not bothering with the pretext at all.",
           "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "trivial": true,
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": -0.2,
+            "chaos_order": 0.2
+          },
+          "difficulty": 15,
           "intentTags": [
-            "scout",
-            "careful"
+            "persuade",
+            "gamble"
           ],
           "abilityId": null,
-          "energyCost": null
-        },
-        {
-          "label": "Use The Attended End on the way through the inn's lower hall — the conduit pulse last night was never read; this is the moment to know what, if anything, is ending under this building.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
+          "energyCost": null,
           "trivial": false,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "the-attended-end",
-          "energyCost": 2
-        },
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [
         {
-          "label": "Head to the cooperage lane at a deliberate pace, scanning the district on the way — Calvar being late warrants watching who else is moving in the quarter this afternoon.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
-          "trivial": false,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null
+          "op": "progress",
+          "questId": "find-the-engineer",
+          "note": "Arrived at the cooperage lane — Calvar's lamp not in the window, a watcher positioned under the chandler's awning. The departure is delayed or compromised."
         }
       ],
       "scene": {
-        "setting": "The bath trough room at the Low Lamp Inn — water cooled, steam long gone, junction-conduit warmth through the pale stone floor. Rain ticking against the diffusion panels, flat gray afternoon light. Both dressed and packed, Memory in hand, ready to move.",
+        "setting": "The cooperage lane, Edge District — wet cobbles, afternoon rain, conduit glow caught in puddles. Calvar's second-floor window is lamp-dark, casement latched. A figure watches from under the tallow-chandler's awning across the lane; the cooperage ground-floor door is propped open.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Dressed, vest laced, whetstone pocketed — pack on, ready, tracking the same lateness Silas just named."
+            "state": "Level with Silas, pack angled away from the watcher — reading the lane without comment, unhurried and ready."
           },
           {
             "name": "Huginn",
-            "state": "Perched on Memory's shaft, eye on the door. Correct about the timing. Silent."
+            "state": "On Silas's left shoulder, head tucked, silent — its silence timed."
+          },
+          {
+            "name": "Unknown watcher",
+            "state": "Standing under the tallow-chandler's awning, boots drier than shoulders, not looking at the cooperage directly — has not yet decided whether Silas is what he was told to watch for."
           }
         ],
         "objects": [
-          "Bath trough — emptied of company, water still and cooling",
-          "Memory (spear) — in hand, road-lash checked",
-          "Traveler's Pack — shouldered, inventory confirmed",
-          "Partition window — flat gray afternoon light, rain audible"
+          "Memory (spear) — across Silas's back",
+          "Calvar's second-floor window — lamp absent, casement latched",
+          "Cooperage ground-floor door — propped open with a wood block",
+          "Wet cobbles and pale conduit-puddles running the length of the lane"
         ],
         "threads": [
-          "Calvar's lamp signal — departure agreed at first light; now hours overdue — must check his window",
-          "The conduit pulse at the third hour — still unread by The Attended End",
-          "The road to Millbrook runs wetter than it looks for the first quarter-mile after rain — it is raining now"
+          "Calvar's lamp not in the window — departure signal not given; status unknown",
+          "Watcher under the chandler's awning — loose watch or something tighter?",
+          "Second figure in grey cloak crossed the far end of the lane at pace — unknown relation",
+          "The conduit pulse at the third hour — still unread"
         ]
-      },
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A short exchange and the practical business of dressing and packing — a quarter hour at most."
       },
       "npcUpdates": [
         {
           "op": "update",
+          "npcId": "calvar",
+          "name": "Calvar",
+          "note": "Lamp not in window; casement latched rather than open. Status unknown — may still be in the room, may have been moved.",
+          "statusNote": "In his room above the cooperage — lamp absent from window; a watcher stationed opposite. Situation uncertain."
+        },
+        {
+          "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Rose from the bath and dressed without hesitation when the road was named — settled, present, ready. Pocketed the whetstone without ceremony.",
-          "statusNote": "Dressed, packed, at Silas's side — ready to move toward Calvar's signal.",
-          "status": "active"
+          "note": "Read the lane independently — has already angled away from the watcher without being asked. Ready and tracking.",
+          "statusNote": "At Silas's side on the cooperage lane — packed, alert, reading the watcher."
+        }
+      ],
+      "generateRequest": [
+        {
+          "type": "npc",
+          "hint": "a watcher stationed under a chandler's awning on the cooperage lane — dry boots, wet shoulders, deliberately not looking at what he's watching; connected to Grael's net or hired independent",
+          "why": "A named figure is stationed on the lane watching Calvar's building; he'll need a stable identity if the players approach or confront him"
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A short walk through the district from the Low Lamp Inn to the cooperage lane in the rain"
+      },
+      "codexUpdates": [
+        {
+          "topic": "calvar",
+          "label": "Calvar — the Engineer",
+          "kind": "person",
+          "entityId": "calvar",
+          "fact": "Calvar's departure lamp is absent from the window on World-day 18 afternoon; a watcher with dry boots is stationed under the tallow-chandler's awning opposite the cooperage. The agreed signal has not been given and the building is under observation.",
+          "links": [
+            "find-the-engineer",
+            "overseer-grael",
+            "radiant-plateau-edge",
+            "the-edge-district-ledger"
+          ]
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "A watcher was stationed under the tallow-chandler's awning opposite the cooperage on World-day 18 afternoon — Calvar's departure lamp absent from window, casement latched.",
+          "subPlace": {
+            "name": "Cooperage Lane — East District",
+            "note": "Rising lane east of the third turning — barrels on cobbles, cooperage ground floor open, Calvar's second-floor window above; observed by a watcher on World-day 18 afternoon.",
+            "visited": true
+          }
         }
       ]
     },
     "sceneState": {
-      "setting": "The bath trough room at the Low Lamp Inn — water cooled, steam long gone, junction-conduit warmth through the pale stone floor. Rain ticking against the diffusion panels, flat gray afternoon light. Both dressed and packed, Memory in hand, ready to move.",
+      "setting": "The cooperage lane, Edge District — wet cobbles, afternoon rain, conduit glow caught in puddles. Calvar's second-floor window is lamp-dark, casement latched. A figure watches from under the tallow-chandler's awning across the lane; the cooperage ground-floor door is propped open.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Dressed, vest laced, whetstone pocketed — pack on, ready, tracking the same lateness Silas just named."
+          "state": "Level with Silas, pack angled away from the watcher — reading the lane without comment, unhurried and ready."
         },
         {
           "name": "Huginn",
-          "state": "Perched on Memory's shaft, eye on the door. Correct about the timing. Silent."
+          "state": "On Silas's left shoulder, head tucked, silent — its silence timed."
+        },
+        {
+          "name": "Unknown watcher",
+          "state": "Standing under the tallow-chandler's awning, boots drier than shoulders, not looking at the cooperage directly — has not"
         }
       ],
       "objects": [
-        "Bath trough — emptied of company, water still and cooling",
-        "Memory (spear) — in hand, road-lash checked",
-        "Traveler's Pack — shouldered, inventory confirmed",
-        "Partition window — flat gray afternoon light, rain audible"
+        "Memory (spear) — across Silas's back",
+        "Calvar's second-floor window — lamp absent, casement latched",
+        "Cooperage ground-floor door — propped open with a wood block",
+        "Wet cobbles and pale conduit-puddles running the length of the lane"
       ],
       "threads": [
-        "Calvar's lamp signal — departure agreed at first light; now hours overdue — must check his window",
-        "The conduit pulse at the third hour — still unread by The Attended End",
-        "The road to Millbrook runs wetter than it looks for the first quarter-mile after rain — it is raining now"
+        "Calvar's lamp not in the window — departure signal not given; status unknown",
+        "Watcher under the chandler's awning — loose watch or something tighter?",
+        "Second figure in grey cloak crossed the far end of the lane at pace — unknown relation",
+        "The conduit pulse at the third hour — still unread"
       ]
     }
   },
@@ -1164,14 +1520,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Rennic's name and six-week schedule confirmed in the intake log. Silas and Pell now stand at the cooperage on the east lane — Calvar's lamp is burning in the upper room.",
         "Calvar opened his door — said 'I wondered what shape it would come in.' He is present, waiting, and has stepped back from the threshold.",
         "Order-Sense confirms: Calvar's room is a transit node. He has been waiting to hand something outward. His isolation is ending — not him. The chain has one remaining step.",
         "Calvar has heard the complete chain — Leth, Vash, Rennic, Fendt's Testimony now on his drafting surface. One step remains: what he has been holding in those bundled papers, and where the calibration files went.",
         "Calvar revealed the bundle — a second record of the seventh-band method survives as personal correspondence, missed by Grael's runner. Three copies were made; one is here. The other two destinations are the next question.",
         "Third copy of the calibration files identified: Filtration Council annex, lower Plateau district, sent fourteen years ago. Status of the copy unknown — the next step is the annex.",
         "Calvar has agreed to travel with the group — he will vouch as the pre-Transition calibration author and can attest to the seventh-band specification outside the Radiant hierarchy. The road to Millbrook is the next step.",
-        "Calvar committed to first light departure — the group is assembled and the road to Millbrook is the next step. Silas named each person's work for the journey."
+        "Calvar committed to first light departure — the group is assembled and the road to Millbrook is the next step. Silas named each person's work for the journey.",
+        "Arrived at the cooperage lane — Calvar's lamp not in the window, a watcher positioned under the chandler's awning. The departure is delayed or compromised."
       ],
       "aliases": [],
       "startedAt": "2026-07-16T19:11:11.950Z"
@@ -1540,7 +1896,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d4] Received 'you are what comes after' without management — went still in the way of a thing correctly named, then crossed to the bath without reconsidering anything. Now settled agai",
         "[d4] Received Silas's full attention in the bath without self-consciousness — let him look, then asked plainly whether he was getting in.",
         "[d4] Received the full inventory of Silas's attention — every place named, every place touched. Her hands on his forearms the whole time. Her response: 'You have been paying a great dea",
         "[d4] Received 'I haven't finished paying attention yet' with an unguarded laugh — gave her weight to Silas more completely than before. Entirely present, no habit remaining.",
@@ -1549,7 +1904,8 @@
         "[d4] Answered Silas's plain question plainly — she thought there'd be a different register on the other side, but it's the same, just more room. Said it precisely, not defensively.",
         "[d4] Confirmed the Weir mark accepted — 'it's in me the way ironsense is, I don't look for it, it's just there when I reach.' Confirmed happy — quieter than expected, but real. Asked th",
         "[d4] Received the wordless answer — arms tightening, her settling closer — without comment or management. Exhaled all the way out and released the last held shape. Thumb moved once acro",
-        "[d4] Rose from the bath and dressed without hesitation when the road was named — settled, present, ready. Pocketed the whetstone without ceremony."
+        "[d4] Rose from the bath and dressed without hesitation when the road was named — settled, present, ready. Pocketed the whetstone without ceremony.",
+        "[d4] Read the lane independently — has already angled away from the watcher without being asked. Ready and tracking."
       ],
       "knownFacts": [
         "Her laugh is real and low when it is not managed — it moves through her whole back.",
@@ -1570,13 +1926,15 @@
         "ironsense transmitted deliberately through a rune-threshold"
       ],
       "status": "active",
-      "statusNote": "Dressed, packed, at Silas's side — ready to move toward Calvar's signal.",
+      "statusNote": "At Silas's side on the cooperage lane — packed, alert, reading the watcher.",
       "lastSeen": {
         "locationId": "the-low-lamp-inn",
         "day": 4
       },
       "bondType": "romantic",
-      "bondStage": "committed"
+      "bondStage": "committed",
+      "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Pell%2C%20Village%20blacksmith%2C%20Millbrook%20%E2%80%94%20traveling%20companion%2C%20committed%20romantic%20to%20Silas%20Weir%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=26396&nologo=true",
+      "_portraitTier": "committed"
     },
     "mara-wells": {
       "id": "mara-wells",
@@ -1894,7 +2252,6 @@
       },
       "relationship": 8,
       "history": [
-        "[d3] Named the third copy's destination: the Filtration Council annex in the lower Plateau district, sent fourteen years ago. Acknowledged the six-week clock without flinching. Now seat",
         "[d3] Said yes — named Grael's method as the thing he understands, named his own failure to move three years ago, and asked for the road. He is now committed to traveling with Silas and ",
         "[d3] The Attended End read his yes as a clean ending — a three-year private refusal closed, not a sacrifice. The bundle moving is his release from the waiting room. He does not need to ",
         "[d3] Shifted weight, exhaled, went still — holding the room, giving it what it needs.",
@@ -1903,7 +2260,8 @@
         "[d3] Held the room through the entire memory-witnessing — did not crowd it, did not watch it too closely. Waiting now to be asked about the road.",
         "[d3] Named the Plateau lattice's indifference to outsiders plainly and without apology — redirected to practical needs. Ready to answer Pell's question about the morning.",
         "[d3] Named the annex odds without softening them — filing date, binding description, cover notation are his retrieval tools; hierarchy standing is gone. Lower Plateau district is the on",
-        "[d3] Received his tasking plainly — bring his experience and Radiant standing to the road, teach what he knows when it's needed. Accepted it without performance. Committed to first ligh"
+        "[d3] Received his tasking plainly — bring his experience and Radiant standing to the road, teach what he knows when it's needed. Accepted it without performance. Committed to first ligh",
+        "[d4] Lamp not in window; casement latched rather than open. Status unknown — may still be in the room, may have been moved."
       ],
       "knownFacts": [
         "Has the instinct to hold a room still when it needs holding",
@@ -1923,11 +2281,13 @@
         "identifying the structural flaw in Grael's appeal-capture me"
       ],
       "status": "active",
-      "statusNote": "In his room above the cooperage — will be packed by first light; lamp in the window is the departure signal.",
+      "statusNote": "In his room above the cooperage — lamp absent from window; a watcher stationed opposite. Situation uncertain.",
       "lastSeen": {
-        "locationId": "radiant_plateau_edge",
-        "day": 3
-      }
+        "locationId": "the-low-lamp-inn",
+        "day": 4
+      },
+      "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Calvar%2C%20Pre-Transition%20filtration%20engineer%2C%20Edge%20District%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=84827&nologo=true",
+      "_portraitTier": "devoted"
     },
     "maret-doss": {
       "id": "maret-doss",
@@ -2146,7 +2506,8 @@
         "[d4] The junction conduit beneath the inn pulsed once in the third hour of the night — brighter than its normal output, gone before it could be examined. Silas let it pass; it did not read as an ending.",
         "[d4] The bath trough was filled and shared by Silas and Pell on World-day 17 morning — the cistern tap and junction conduit warmth working without trouble.",
         "[d4] The bath trough room at the Low Lamp Inn was the site of Silas and Pell's consummation on World-day 17 midday — the water cooled around them, the steam thinned, Huginn relocated to the rafters without",
-        "[d4] Maret Doss is the innkeeper — keeps the ledger, does not ask after guests' business, knows the local roads in detail. The road to Millbrook runs wetter than it looks for the first quarter-mile after a"
+        "[d4] Maret Doss is the innkeeper — keeps the ledger, does not ask after guests' business, knows the local roads in detail. The road to Millbrook runs wetter than it looks for the first quarter-mile after a",
+        "[d4] A watcher was stationed under the tallow-chandler's awning opposite the cooperage on World-day 18 afternoon — Calvar's departure lamp absent from window, casement latched."
       ],
       "flags": {},
       "lastVisit": 3,
@@ -2175,13 +2536,19 @@
           "day": 4,
           "visited": true,
           "note": "Foot of the stairs — pale sandstone, hall bench, junction-conduit warmth, where Maret moves between floors."
+        },
+        "cooperage-lane-east-district": {
+          "name": "Cooperage Lane — East District",
+          "day": 4,
+          "visited": true,
+          "note": "Rising lane east of the third turning — barrels on cobbles, cooperage ground floor open, Calvar's second-floor window ab"
         }
       }
     }
   },
   "worldState": {
     "schemaVersion": 1,
-    "lastTickDay": 3,
+    "lastTickDay": 4,
     "eventStages": {
       "water_crisis": {
         "stage": 1,
@@ -2220,12 +2587,37 @@
         "worldDay": 11,
         "text": "This reaches your area — The lower filtration ledger — containing three weeks of falsified purity readings under Fendt's initials — has been removed from the array-office in the Edge District. (near radiant plateau edge)",
         "impactsLocal": true
+      },
+      {
+        "day": 4,
+        "worldDay": 18,
+        "text": "Word has spread beyond millbrook: Raised a cleaned rabbit from the dead in the upper meadow — no ritual, no preparation, hands and will and the valley's old grain answering"
+      },
+      {
+        "day": 4,
+        "worldDay": 18,
+        "text": "Word has spread beyond millbrook: Silas Weir bound death-runes into the assembled spear at an open-sky fire, with Pell Marsh's maker's mark seated into the blade and Huginn witness at the stone ring."
+      },
+      {
+        "day": 4,
+        "worldDay": 18,
+        "text": "Word has spread beyond millbrook: Delivered a dressed bull and sow to Aldric's smokehouse — a significant haul by village standards, carried down from the north wood by three hunters."
+      },
+      {
+        "day": 4,
+        "worldDay": 18,
+        "text": "Calvar: Reviewing last night's seventh-band log, Calvar found a seventeen-minute gap in the low-frequency baseline that his specification explicitly flags as instrument drift — but the gap's edges are too clean, too symmetrical, and he has spent the morning re-running the check three times rather than recording it as error."
+      },
+      {
+        "day": 4,
+        "worldDay": 18,
+        "text": "Vash: While dressing her wheel's edge before first light, Vash reconstructed the overheard phrase word by word and realized the term she couldn't place was a pre-Transition calibration interval — specific enough that whoever said it had read the same foundational documents the array's optical layer was built from."
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-17T19:12:53.291Z",
-    "lastTickWorldDay": 17,
-    "lastCanonWorldDay": 17
+    "lastSharedReadAt": "2026-07-18T00:41:45.456Z",
+    "lastTickWorldDay": 18,
+    "lastCanonWorldDay": 18
   },
   "domains": {
     "primary": "ashwarden",
@@ -2248,7 +2640,7 @@
     "wits": 5
   },
   "pendingSubPoints": 0,
-  "skillPoints": 2,
+  "skillPoints": 0,
   "discoveries": [],
   "codex": {
     "schemaVersion": 1,
@@ -3182,7 +3574,9 @@
           "[d3] Calvar filed a copy of the seventh-band calibration files as personal correspondence — Pell's father's own letters with margin notations in his hand. Rennic missed it. Calvar sent copies to three loca",
           "[d3] The third copy of the seventh-band calibration files was sent by Calvar to the Filtration Council annex in the lower Plateau district approximately fourteen years ago — before the administrative chang",
           "[d3] Agreed to travel with Silas and Pell to Millbrook — will vouch as the pre-Transition calibration author and attest to the seventh-band specification outside the Radiant hierarchy. Named his own three-",
-          "[d3] Filed the third copy of the seventh-band calibration files as personal correspondence bound with Pell's father's letters — deliberately obscured to survive Rennic's collection. Located in the Filtrati"
+          "[d3] Filed the third copy of the seventh-band calibration files as personal correspondence bound with Pell's father's letters — deliberately obscured to survive Rennic's collection. Located in the Filtrati",
+          "[d4] [while away] Reviewing last night's seventh-band log, Calvar found a seventeen-minute gap in the low-frequency baseline that his specification explicitly flags as instrument drift — but the gap's edge",
+          "[d4] Calvar's departure lamp is absent from the window on World-day 18 afternoon; a watcher with dry boots is stationed under the tallow-chandler's awning opposite the cooperage. The agreed signal has not "
         ],
         "links": [
           "the-water-crisis",
@@ -3199,7 +3593,7 @@
           "Find the Engineer"
         ],
         "createdDay": 3,
-        "updatedDay": 3,
+        "updatedDay": 4,
         "entityId": "calvar"
       },
       "find-the-engineer": {
@@ -3231,7 +3625,8 @@
           "[d3] The folded page is three days old — written the same morning Calvar left the diagram with Leth, within hours of the corridor conversation. The hand is even, the pressure controlled. Vash was not frigh",
           "[d3] Vash is an eyewitness to the file removal — Grael's runner (cut-cord pack, optics array collector, first and third mornings) took the calibration files from the secondary stack six weeks ago. Vash add",
           "[d3] Vash's testimony relayed to Leth — confirmed: the four characters added to Calvar's diagram are authentication marks from a binding receipt, and the folded page explicitly names Grael's runner (cut-co",
-          "[d3] Leth will notify Vash tonight that his folded page reached the right hands — he has been waiting three days for that confirmation."
+          "[d3] Leth will notify Vash tonight that his folded page reached the right hands — he has been waiting three days for that confirmation.",
+          "[d4] [while away] While dressing her wheel's edge before first light, Vash reconstructed the overheard phrase word by word and realized the term she couldn't place was a pre-Transition calibration interval"
         ],
         "links": [
           "leth-archive-complaint",
@@ -3245,7 +3640,7 @@
           "Vash"
         ],
         "createdDay": 3,
-        "updatedDay": 3,
+        "updatedDay": 4,
         "entityId": "vash"
       },
       "grael-runner": {
@@ -3373,20 +3768,20 @@
     }
   },
   "tendencies": {
-    "strategic": 7.358804193777418,
-    "cerebral": 14.484754462340113,
-    "social": 16.29984368049648,
-    "generous": 1.7607302674640681,
-    "cautious": 5.692442048746034,
-    "physical": 0.17524252805287122,
-    "risky": 1.5179705987172842,
-    "ruthless": 0.21698182511064248,
-    "carousing": 0.15236512961858056,
-    "amorous": 17.508802925928997,
-    "patient": 2.1584398258287503,
-    "stealth": 0.17877791479209298,
-    "devotion": 2.102469870153601,
-    "craft": 0.4798813315685538
+    "strategic": 8.174834088932982,
+    "cerebral": 14.12263560078161,
+    "social": 15.892347588484068,
+    "generous": 1.7167120107774665,
+    "cautious": 6.550130997527383,
+    "physical": 0.17086146485154943,
+    "risky": 1.4800213337493522,
+    "ruthless": 0.21155727948287642,
+    "carousing": 0.14855600137811606,
+    "amorous": 17.071082852780773,
+    "patient": 2.1044788301830315,
+    "stealth": 0.17430846692229066,
+    "devotion": 2.049908123399761,
+    "craft": 0.4678842982793399
   },
   "aptitudes": [
     "strategist",
@@ -3398,10 +3793,26 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 434,
+  "actionCount": 435,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
+    {
+      "kind": "portrait",
+      "prompt": "a person, character portrait, named Calvar, Pre-Transition filtration engineer, Edge District",
+      "url": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Calvar%2C%20Pre-Transition%20filtration%20engineer%2C%20Edge%20District%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=84827&nologo=true",
+      "caption": "Calvar — devoted",
+      "worldDay": 18,
+      "at": "2026-07-18T00:41:45.054Z"
+    },
+    {
+      "kind": "portrait",
+      "prompt": "a person, character portrait, named Pell, Village blacksmith, Millbrook — traveling companion, committed romantic to Silas Weir",
+      "url": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Pell%2C%20Village%20blacksmith%2C%20Millbrook%20%E2%80%94%20traveling%20companion%2C%20committed%20romantic%20to%20Silas%20Weir%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=26396&nologo=true",
+      "caption": "Pell — committed partner · devoted",
+      "worldDay": 18,
+      "at": "2026-07-18T00:41:45.052Z"
+    },
     {
       "kind": "moment",
       "prompt": "A pale stone bath trough room lit gold from below by a junction conduit, steam thinning in slow columns, a man and a woman settled together in cooling water — her head against his shoulder, his hands ",
@@ -3587,9 +3998,9 @@
       "at": "2026-07-12T12:41:03.559Z"
     }
   ],
-  "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=11860&nologo=true",
-  "updatedAt": 1784333205392,
-  "rev": 616,
+  "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
+  "updatedAt": 1784339418317,
+  "rev": 622,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -3845,7 +4256,7 @@
           "entityId": "calvar",
           "type": "npc",
           "birthWeight": 10,
-          "engagementScore": 54,
+          "engagementScore": 57,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -3883,14 +4294,6 @@
               "day": 3
             },
             {
-              "kind": "fact",
-              "day": 3
-            },
-            {
-              "kind": "interact",
-              "day": 3
-            },
-            {
               "kind": "interact",
               "day": 3
             },
@@ -3953,15 +4356,29 @@
             {
               "kind": "interact",
               "day": 3
+            },
+            {
+              "kind": "interact",
+              "day": 4
+            },
+            {
+              "kind": "fact",
+              "day": 4
             }
           ],
           "createdDay": 3,
           "repaired": false,
           "stubbed": false,
           "romanceEligible": true,
-          "lastAttentionDay": 3,
+          "lastAttentionDay": 4,
           "promotedWorldDay": 17,
-          "canonTier": "variant"
+          "canonTier": "variant",
+          "offscreen": [
+            {
+              "worldDay": 18,
+              "note": "Reviewing last night's seventh-band log, Calvar found a seventeen-minute gap in the low-frequency baseline that his specification explicitly flags as instrument drift — but the gap's edges are too clean, too symmetrical, and he has spent the morning re-running the check three times rather than recording it as error."
+            }
+          ]
         },
         "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%20of%20Calvar%2C%20Pre-Transition%20filtration%20engineer%2C%20author%20of%20the%20seventh-band%20monitoring%20specification%20%E2%80%94%20a%20man%20who%20stopped%20moving%20fifteen%20years%20ago%20because%20the%20light%20in%20one%20room%20told%20him%20everything%20he%20still%20needed%20to%20know.%20Unhurried%20in%20a%20way%20that%20is%20not%20rudeness%20%E2%80%94%20he%20simply%20will%20not%20be%20rushed%20past%20the%20part%20that%20matters.%20Speaks%20about%20light%20the%20way%20other%20engineers%20speak%20about%20load-bearing%20calculations%3A%20not%20reverently%2C%20but%20exactly.%20When%20he%20senses%20evasion%20he%20goes%20very%20quiet%20and%20waits%2C%20and%20the%20waiting%20is%20harder%20than%20argument.%20Will%20not%20leave%20a%20sentence%20technically%20imprecise%20even%20when%20it%20costs%20him%20emotionally.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=65863&nologo=true"
       },
@@ -4057,7 +4474,13 @@
           "romanceEligible": true,
           "lastAttentionDay": 3,
           "promotedWorldDay": 17,
-          "canonTier": "variant"
+          "canonTier": "variant",
+          "offscreen": [
+            {
+              "worldDay": 18,
+              "note": "While dressing her wheel's edge before first light, Vash reconstructed the overheard phrase word by word and realized the term she couldn't place was a pre-Transition calibration interval — specific enough that whoever said it had read the same foundational documents the array's optical layer was built from."
+            }
+          ]
         },
         "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%20of%20Vash%2C%20Piecework%20lens-grinder%20of%20the%20Edge%20District%20%E2%80%94%20the%20one%20whose%20wheel%20was%20turning%20before%20the%20district%20woke%2C%20and%20who%20understands%20the%20array's%20optical%20layer%20the%20way%20water%20understands%20a%20crack.%20Unhurried.%20Speaks%20in%20the%20cadence%20of%20someone%20who%20has%20spent%20years%20listening%20to%20the%20pitch%20of%20a%20wheel%20and%20knows%20that%20rushing%20ruins%20the%20curve.%20Does%20not%20perform%20ignorance%20but%20does%20not%20announce%20knowledge%20either%20%E2%80%94%20waits%20to%20see%20whether%20you%20are%20asking%20the%20real%20question%20or%20the%20surface%20one.%20When%20she%20decides%20you%20mean%20it%2C%20she%20will%20tell%20you%20exactly%20what%20she%20heard%2C%20what%20she%20saw%2C%20and%20what%20she%20made%20of%20it%2C%20in%20that%20order%2C%20without%20decoration.%2C%20dark%2C%20intense%2C%20dramatic%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=12224&nologo=true"
       }
@@ -4515,10 +4938,10 @@
       "at": "2026-07-13T12:11:17.802Z"
     }
   ],
-  "syncedAt": 1784292613822,
+  "syncedAt": 1784333205392,
   "teachers": {},
   "regionsKnown": {
-    "valley": 251
+    "valley": 252
   },
   "foreclosed": [
     "rootkin",
@@ -4536,8 +4959,6 @@
     }
   ],
   "_pinsInitialized": true,
-  "_chronicleBusy": true,
-  "_chronicleError": null,
   "chronicleCache": {
     "hash": "d5|bpell:romantic:together|c|q|L10|You took the short way, and the short way was wr",
     "text": "You have become the man who took the short way and found it was the only way — the path back gone, the light wrong, and something in you already changed before you understood what had changed you. You talked Calvar out of the Edge District, pulled him away from his filtration schematics and his seventh-band specifications and set him walking toward Millbrook to say what he knew about Grael's reign, and you did the same with Fendt, who carried his testimony in his own hands, the falsified ledger thread no longer just evidence but a wound walking upright. You fed a village — a dressed bull and sow carried down from the north wood — and you raised a cleaned rabbit in the upper meadow with no ritual and no preparation, just your hands and whatever the valley keeps in its old grain, which answered. At Pell Marsh's forge you named the death-bound spear Memory at dawn after a night of wine and repair, her maker's mark seated into the blade and Huginn watching at the stone ring; you kissed her at the forge bench while the light was still coming on, and that word, that deed, that mouth — all of it holds. You are bound now: to Pell, to Calvar who trusted you, to Aldric and Fendt and the rest of them; the spear carries your death-runes and a name that stuck, and wherever the hillside door leads, you are carrying all of that through it.",
@@ -4560,17 +4981,16 @@
       "startDay": 17,
       "endDay": 17,
       "beats": 15,
-      "_recapBusy": false,
       "_recapError": null,
       "recap": "Day seventeen passed through Silas Weir like weather through an open window — present, felt, and gone without leaving a mark anyone could name. No blood on his hands, no new doors opened or closed, no word carried to ears that needed it. He existed inside the hours, which is its own kind of labor, the kind that leaves no scar but slowly shapes the bone beneath. The world held its breath, and Silas held his alongside it."
     },
     {
       "id": "sess-3",
       "startedAt": "2026-07-17T17:39:40.705Z",
-      "lastAt": "2026-07-18T00:06:45.392Z",
+      "lastAt": "2026-07-18T01:50:18.307Z",
       "startDay": 17,
       "endDay": 18,
-      "beats": 59
+      "beats": 60
     }
   ],
   "company": [
@@ -4592,5 +5012,8 @@
       "liaisonFor": null,
       "joinedDay": 17
     }
-  ]
+  ],
+  "livingCurrentAccess": [],
+  "braidDiscount": 0,
+  "portraitPinned": true
 }

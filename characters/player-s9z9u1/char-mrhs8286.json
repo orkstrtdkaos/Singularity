@@ -1578,126 +1578,205 @@
         "player": "Kiss her and seal the naming.  Then prepare for their arrival.",
         "summary": "Silas seals the naming with a kiss; Pell rights herself and the forge; the gathering arrives.",
         "narration": "You close the last inch between you. The kiss is unhurried — not a question, not a performance, just the naming finding its final form in the press of her mouth against yours. Her hand stays flat at your neck. She breathes in through her nose, steady, the way she breathes when she's decided something, and kisses you back with the same quality of attention she brings to a weld she cares about. The forge holds its warmth around you both. Huginn does not move.\n\nWhen you pull back, her forehead comes to yours again for a breath — her eyes still closed, the name settled, the naming done. She opens them. Looks at you the way she looks at finished work: not admiring, just seeing it for what it is. 'Right,' she says, quietly. And that is all. It is enough.\n\nShe straightens first. Her hand slides from your neck to your shoulder, a brief grip, and then she's moving — unhurried but deliberate, the same hands that were at your neck now checking the stool arrangement, nudging the cooler bench a half-inch, reading the forge temperature with a practiced glance. She picks up Memory from where it leans near the door and sets it a foot to the side, out of the path between the entrance and the fire. Making room. You know the motion: not putting away what matters, just clearing the working surface.\n\nHuginn turns its head one degree toward the lane. Outside, feet on packed earth — more than one pair, coming at a steady walk. The coals are lit, the seats are arranged, and the people who need to be in this room are arriving. You straighten, roll your shoulders once, and face the door."
+      },
+      {
+        "player": "Open the door to meet them — you're the one who called this",
+        "summary": "Silas opens the forge door; the gathering arrives — Dara, Aldric, Mara, Calvar, and Fendt file into the warm forge, the meeting about to begin.",
+        "narration": "You cross to the forge door and pull it open.\n\nThe lane is dark between the houses, the last of the day's light gone to a thin blue line above the western ridge. They come in a loose group — Dara first, coat buttoned to the collar, mug traded for nothing, hands free and moving like she's already sorted tomorrow's first task. Aldric a step behind, his apron still on, fillet knife absent for once but the habit of the work still in the set of his shoulders. Mara beside him, a page folded into her breast pocket, ledger closed for the night but her eyes still in accounting mode, cataloguing the room the moment the firelight reaches her. Calvar last, one hand out of his coat now, taking the forge's warmth with the measured attention of a man who still reads every room he walks into as a system he hasn't mapped yet. Fendt at his shoulder — smaller than the rest, carrying himself with the particular quietness of someone walking toward a thing they've spent a season being afraid of.\n\nYou step back and let them in. The forge is warm and smells of iron and the last of the raked ash. Pell moves to the cooler bench — not deferring, just placing herself where she can see everyone's hands. Huginn turns on the crossbeam and regards the room, five new faces catalogued in a single sweep, then looks back at you. Its silence has a quality tonight. Not judgment. Just attendance.\n\nThe door stays open a crack behind the last of them. The lane goes quiet. Whatever this room becomes in the next hour, it starts here: the six of them settling into the arranged stools and the forge block, the document roll on Mara's person or close to it, the coals holding steady, and the weight of what everyone in this room separately knows pressing toward the moment someone speaks first."
       }
     ],
     "lastTurn": {
-      "narration": "You close the last inch between you. The kiss is unhurried — not a question, not a performance, just the naming finding its final form in the press of her mouth against yours. Her hand stays flat at your neck. She breathes in through her nose, steady, the way she breathes when she's decided something, and kisses you back with the same quality of attention she brings to a weld she cares about. The forge holds its warmth around you both. Huginn does not move.\n\nWhen you pull back, her forehead comes to yours again for a breath — her eyes still closed, the name settled, the naming done. She opens them. Looks at you the way she looks at finished work: not admiring, just seeing it for what it is. 'Right,' she says, quietly. And that is all. It is enough.\n\nShe straightens first. Her hand slides from your neck to your shoulder, a brief grip, and then she's moving — unhurried but deliberate, the same hands that were at your neck now checking the stool arrangement, nudging the cooler bench a half-inch, reading the forge temperature with a practiced glance. She picks up Memory from where it leans near the door and sets it a foot to the side, out of the path between the entrance and the fire. Making room. You know the motion: not putting away what matters, just clearing the working surface.\n\nHuginn turns its head one degree toward the lane. Outside, feet on packed earth — more than one pair, coming at a steady walk. The coals are lit, the seats are arranged, and the people who need to be in this room are arriving. You straighten, roll your shoulders once, and face the door.",
-      "sceneSummary": "Silas seals the naming with a kiss; Pell rights herself and the forge; the gathering arrives.",
+      "narration": "You cross to the forge door and pull it open.\n\nThe lane is dark between the houses, the last of the day's light gone to a thin blue line above the western ridge. They come in a loose group — Dara first, coat buttoned to the collar, mug traded for nothing, hands free and moving like she's already sorted tomorrow's first task. Aldric a step behind, his apron still on, fillet knife absent for once but the habit of the work still in the set of his shoulders. Mara beside him, a page folded into her breast pocket, ledger closed for the night but her eyes still in accounting mode, cataloguing the room the moment the firelight reaches her. Calvar last, one hand out of his coat now, taking the forge's warmth with the measured attention of a man who still reads every room he walks into as a system he hasn't mapped yet. Fendt at his shoulder — smaller than the rest, carrying himself with the particular quietness of someone walking toward a thing they've spent a season being afraid of.\n\nYou step back and let them in. The forge is warm and smells of iron and the last of the raked ash. Pell moves to the cooler bench — not deferring, just placing herself where she can see everyone's hands. Huginn turns on the crossbeam and regards the room, five new faces catalogued in a single sweep, then looks back at you. Its silence has a quality tonight. Not judgment. Just attendance.\n\nThe door stays open a crack behind the last of them. The lane goes quiet. Whatever this room becomes in the next hour, it starts here: the six of them settling into the arranged stools and the forge block, the document roll on Mara's person or close to it, the coals holding steady, and the weight of what everyone in this room separately knows pressing toward the moment someone speaks first.",
+      "sceneSummary": "Silas opens the forge door; the gathering arrives — Dara, Aldric, Mara, Calvar, and Fendt file into the warm forge, the meeting about to begin.",
       "choices": [
         {
-          "label": "Open the door to meet them — you're the one who called this",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "intentTags": [
-            "lead"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Let Pell open — stand at the forge, let the room read you where you are",
+          "label": "Open with the water — give the engineering read first, the ledger second. Let Calvar speak to the sleeve failures from the start.",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
             "lead",
-            "careful"
+            "rally"
           ],
           "trivial": true
         },
         {
-          "label": "Before anyone speaks, use Order-Sense on the group as they enter — read the shape of this gathering before it begins",
+          "label": "Open with the ledger — name Grael, Rendic Vael, and the falsified readings before anything else. The accountability chain is why Calvar is here.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "lead",
+            "negotiate"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Let Fendt open it — he's the one who filed the notice, took the mark, and walked here. This is his testimony before it's yours.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "lead",
+            "help"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Say nothing yet — close the door, take your seat, and wait to see who speaks first. Read the room before you shape it.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "abilityId": "order_sense",
-          "energyCost": 2,
           "difficulty": 0,
           "intentTags": [
             "study",
-            "plan"
+            "careful"
           ],
-          "trivial": false
-        },
-        {
-          "label": "Let them settle, then open with Calvar — put the expert's read of the drainage cut on the table first, before anything else",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 15,
-          "intentTags": [
-            "lead",
-            "plan"
-          ],
-          "trivial": false
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "Pell's forge interior, Millbrook — banked coals steady and warm, full dark at the door gap, the gathering arriving on the lane outside. Seating arranged: forge block, stools, cooler bench.",
+        "setting": "Pell's forge interior, Millbrook — banked coals steady and warm, full dark outside, forge door just pulled open. The gathering has filed in: Dara, Aldric, Mara, Calvar, and Fendt settling into arranged seating. Door left ajar behind them.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Straightening the room — stool nudged, cooler bench set, Memory shifted clear of the door-path. Facing the door now, ready."
+            "state": "Positioned at the cooler bench — can see everyone's hands. Present and quiet."
           },
           {
             "name": "Huginn",
-            "state": "On the crossbeam — head turned toward the lane, attending the footsteps outside."
+            "state": "On the crossbeam — catalogued all five arrivals in one look, now watching Silas."
+          },
+          {
+            "name": "Dara Holt",
+            "state": "First through the door, coat buttoned, hands free — already in operational mode."
+          },
+          {
+            "name": "Aldric",
+            "state": "Apron still on, fillet knife absent — taking a seat on the forge block."
+          },
+          {
+            "name": "Mara Wells",
+            "state": "Folded page in her breast pocket, ledger-eyes cataloguing the room."
+          },
+          {
+            "name": "Calvar",
+            "state": "One hand fully out of his coat now — reading the forge as a system, measuring the heat."
+          },
+          {
+            "name": "Fendt",
+            "state": "At Calvar's shoulder — carrying the quietness of someone walking toward a long-feared thing."
           }
         ],
         "objects": [
-          "Memory (spear) — moved one foot clear of the door-path",
+          "Memory (spear) — set one foot clear of the door-path",
           "Traveler's Pack — set down",
           "Valve Failure Timeline — in inventory",
           "Trade-Knives (pair) — in inventory",
           "Forge fire — lit and steady at banked coals",
-          "Forge block and stools arranged for the meeting",
-          "Cooler bench set in position"
+          "Forge block and stools — occupied",
+          "Cooler bench — Pell seated",
+          "Document roll — on Mara's person or close to hand"
         ],
         "threads": [
-          "Gathering arriving — Dara, Aldric, Fendt, Mara, Calvar — footsteps on the lane, arrival imminent",
+          "The gathering is assembled — someone must speak first",
           "Calvar's unspoken read of the drainage cut not yet shared with the group",
-          "Document roll on Mara's counter — destination undecided",
+          "The document roll — destination undecided",
           "Quiet's trajectory past the loosening not yet spoken aloud",
-          "The Edge District Ledger — what the truth is for, to be decided tonight"
+          "The Edge District Ledger — what the truth is for, to be decided tonight",
+          "Fendt is here in person — his testimony becomes live the moment it's named"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "note": "Received the sealing kiss — steady, present, answered it in kind. Named it 'right' and went straight to work. Cleared the forge for the gathering without ceremony.",
-          "statusNote": "At the forge with Silas — the naming sealed; now preparing the room for the evening meeting."
+          "npcId": "dara-holt",
+          "name": "Dara Holt",
+          "note": "Arrived at the forge — first through the door, coat buttoned, hands free. Operational mode from the first step inside.",
+          "statusNote": "At Pell's forge for the evening gathering — seated and ready.",
+          "status": "active"
+        },
+        {
+          "op": "update",
+          "npcId": "aldric",
+          "name": "Aldric",
+          "note": "Arrived at the forge — apron still on, fillet knife gone, settled onto the forge block.",
+          "statusNote": "At Pell's forge for the evening gathering — on the forge block.",
+          "status": "active"
+        },
+        {
+          "op": "update",
+          "npcId": "mara-wells",
+          "name": "Mara Wells",
+          "note": "Arrived with a folded page in her breast pocket — ledger-eyes reading the room. Document roll on her person.",
+          "statusNote": "At Pell's forge for the evening gathering — carrying the document roll.",
+          "status": "active"
+        },
+        {
+          "op": "update",
+          "npcId": "calvar",
+          "name": "Calvar",
+          "note": "Arrived last — one hand fully clear of his coat, reading the forge as a system. Quiet. Measuring.",
+          "statusNote": "At Pell's forge for the evening gathering — taking in the room before speaking.",
+          "status": "active"
+        }
+      ],
+      "generateRequest": [
+        {
+          "type": "npc",
+          "hint": "Fendt — the keeper who took Grael's mark and walked to Millbrook to present himself. Small, quiet, carrying the particular stillness of someone who has been afraid for a long season and is now at the thing he feared.",
+          "why": "Fendt arrives in person at the gathering — he has been referenced throughout the quest but this is the first time he is physically present in a scene with the player, and he needs a stable, durable identity to carry what comes next."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short intimate beat — the naming, the kiss, the clearing of the forge before the gathering arrives."
+        "why": "A brief transition — opening the door, the group filing in, settling into place."
       }
     },
     "sceneState": {
-      "setting": "Pell's forge interior, Millbrook — banked coals steady and warm, full dark at the door gap, the gathering arriving on the lane outside. Seating arranged: forge block, stools, cooler bench.",
+      "setting": "Pell's forge interior, Millbrook — banked coals steady and warm, full dark outside, forge door just pulled open. The gathering has filed in: Dara, Aldric, Mara, Calvar, and Fendt settling into arranged seating. Door left ajar behind them.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Straightening the room — stool nudged, cooler bench set, Memory shifted clear of the door-path. Facing the door now, rea"
+          "state": "Positioned at the cooler bench — can see everyone's hands. Present and quiet."
         },
         {
           "name": "Huginn",
-          "state": "On the crossbeam — head turned toward the lane, attending the footsteps outside."
+          "state": "On the crossbeam — catalogued all five arrivals in one look, now watching Silas."
+        },
+        {
+          "name": "Dara Holt",
+          "state": "First through the door, coat buttoned, hands free — already in operational mode."
+        },
+        {
+          "name": "Aldric",
+          "state": "Apron still on, fillet knife absent — taking a seat on the forge block."
+        },
+        {
+          "name": "Mara Wells",
+          "state": "Folded page in her breast pocket, ledger-eyes cataloguing the room."
+        },
+        {
+          "name": "Calvar",
+          "state": "One hand fully out of his coat now — reading the forge as a system, measuring the heat."
+        },
+        {
+          "name": "Fendt",
+          "state": "At Calvar's shoulder — carrying the quietness of someone walking toward a long-feared thing."
         }
       ],
       "objects": [
-        "Memory (spear) — moved one foot clear of the door-path",
+        "Memory (spear) — set one foot clear of the door-path",
         "Traveler's Pack — set down",
         "Valve Failure Timeline — in inventory",
         "Trade-Knives (pair) — in inventory",
         "Forge fire — lit and steady at banked coals",
-        "Forge block and stools arranged for the meeting",
-        "Cooler bench set in position"
+        "Forge block and stools — occupied",
+        "Cooler bench — Pell seated",
+        "Document roll — on Mara's person or close to hand"
       ],
       "threads": [
-        "Gathering arriving — Dara, Aldric, Fendt, Mara, Calvar — footsteps on the lane, arrival imminent",
+        "The gathering is assembled — someone must speak first",
         "Calvar's unspoken read of the drainage cut not yet shared with the group",
-        "Document roll on Mara's counter — destination undecided",
+        "The document roll — destination undecided",
         "Quiet's trajectory past the loosening not yet spoken aloud",
         "The Edge District Ledger — what the truth is for, to be decided tonight"
       ]
@@ -2080,7 +2159,6 @@
       },
       "relationship": 6,
       "history": [
-        "[d2] Took the standing credit deduction without ceremony — ledger marked, waterskin handed over, knife back in the perch row. Sent Silas off with 'safe road' to the block.",
         "[d2] Inside at the morning perch row, in a circling conversation with Sorel — neither saying the load-bearing thing yet.",
         "[d2] Set the knife down when Silas named Mara — done circling, watching the two threads converge.",
         "[d2] Knife back in hand at the perch row — reading the room without inserting himself, giving the conversation to its rightful owners.",
@@ -2089,7 +2167,8 @@
         "[d2] Named the thing he was holding: recognized the engineer's CCW stain pattern in the sealed original east-channel bed, seen three days ago when Sorel first arrived. Knew the pattern ",
         "[d2] Named the channel seal as a deliberate lid — whatever was running when it was sealed was known to the person who sealed it. The design intent is now explicit: containment, not repa",
         "[d2] Received farewell and clear tasking — watch the downstream catch numbers, report changes to Dara. Nod given, no hand. Said 'come back with someone who knows what they're looking at",
-        "[d5] Called to the forge tonight with the specific note that Calvar is here and has already seen the iron sleeves."
+        "[d5] Called to the forge tonight with the specific note that Calvar is here and has already seen the iron sleeves.",
+        "[d5] Arrived at the forge — apron still on, fillet knife gone, settled onto the forge block."
       ],
       "knownFacts": [
         "Dara Holt knows and is staging mitigation; Mara holds a second copy of the timeline",
@@ -2110,7 +2189,7 @@
         "reading structural intent from material evidence"
       ],
       "status": "active",
-      "statusNote": "At the smokehouse — called to the forge this evening with Calvar's arrival confirmed.",
+      "statusNote": "At Pell's forge for the evening gathering — on the forge block.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
@@ -2182,7 +2261,6 @@
       },
       "relationship": 7,
       "history": [
-        "[d2] Named Dara Holt unprompted — gave her location (blue gate-post, bend before upper meadow), her seniority (22 years, east channel), and advised Silas to see the site before briefing",
         "[d2] Received the surge scope briefing without interruption — tied off her ledger as a personal hold-flag, confirmed the east furlong farmer's second sleeve blank return, and directed S",
         "[d2] Named two old pass circuit contacts with Edge District knowledge — Sorel (spice-broker, wintered there two years) and Leth (archivist type, likely still resident). Took the Valve F",
         "[d2] Equipped Silas with three expedition essentials without prompting the list — tallow, oilcloth, pine-tar salve. Priced at eight cord-weight or Aldric offset. Suggested Aldric for a ",
@@ -2191,7 +2269,8 @@
         "[d2] Sent a follow-up package via Pip — Aldric waterskin reminder and a vial of pre-Transition purification tabs from her own stock.",
         "[d5] Greeted Calvar directly on sight — used Dara's phrase back unprompted, extended her hand to him first. Already operational.",
         "[d5] Confirmed iron sleeves without hesitation and watched Calvar's face when she said it — reading his reaction as diagnostic data. Received the document roll's placement on her counte",
-        "[d5] Left with Calvar to settle him — called to the forge tonight after she's done."
+        "[d5] Left with Calvar to settle him — called to the forge tonight after she's done.",
+        "[d5] Arrived with a folded page in her breast pocket — ledger-eyes reading the room. Document roll on her person."
       ],
       "knownFacts": [
         "Aldric sometimes has cured winter-butchering bladder that works as a waterskin",
@@ -2212,7 +2291,7 @@
         "holding a significant object's authority question without ru"
       ],
       "status": "active",
-      "statusNote": "At her store — settling Calvar, called to the forge this evening.",
+      "statusNote": "At Pell's forge for the evening gathering — carrying the document roll.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
@@ -2282,7 +2361,6 @@
       },
       "relationship": 5,
       "history": [
-        "[d2] Heard World-day minus-eighteen and recognized it — not new information but earlier information that closed a gap in her unvoiced theory. Asked whether both failure sites share the ",
         "[d2] Heard the northeast axis and the CCW torque mechanism — absorbed it cleanly. Named that she ordered pipe sections six days ago, without knowing what she was preparing for. Asked ho",
         "[d2] Order-Sense reveals Dara's pipe-section stack is a pre-staged repair schedule — she has been counting runs and sizing sections for specific valve seats in silence. She asked how lo",
         "[d2] Received the six-week window and surge scope plainly — folded the timeline note into her apron and confirmed the figure to herself as a working number. Her gaze returned to the pip",
@@ -2291,7 +2369,8 @@
         "[d2] Watching the exchange between Silas, Pell, and Huginn without comment — waiting for Silas's first move.",
         "[d2] Advised Silas to brief Mara first, then Aldric — sent them off with plain tactical guidance.",
         "[d2] Received a proper farewell — tipped her mug, named her one requirement (someone who can get their hands dirty), and closed her door. Already moving to first task.",
-        "[d5] Called to the forge tonight with the note that the expert arrived this morning and read the drainage cut before speaking."
+        "[d5] Called to the forge tonight with the note that the expert arrived this morning and read the drainage cut before speaking.",
+        "[d5] Arrived at the forge — first through the door, coat buttoned, hands free. Operational mode from the first step inside."
       ],
       "knownFacts": [
         "Silas and Pell will seek a pre-Transition expert and bring them to Millbrook",
@@ -2312,7 +2391,7 @@
         "tactical advice under time pressure — sequencing the morning"
       ],
       "status": "active",
-      "statusNote": "At her house — called to the forge this evening; told Calvar read the road approach before anything.",
+      "statusNote": "At Pell's forge for the evening gathering — seated and ready.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
@@ -2501,7 +2580,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d5] Named Pell's father as exacting — said he would have been pleased by the forge. Filed it without more, which was the right amount.",
         "[d5] Watching Silas's Palework read at the ford without interruption — absorbing the assessment.",
         "[d5] Right hand found the document roll inside his coat the moment the figures appeared — document is his priority, clear without words.",
         "[d5] Backed to the outcrop the moment the fight split — right hand on the document roll, still and watching. Exactly where he should be.",
@@ -2510,7 +2588,8 @@
         "[d5] Right hand finally out of his coat entirely — document safe, watching the two men go with quiet assessment.",
         "[d5] Arrived in Millbrook for the first time — studied the drainage cut on the road approach without comment. Now reading the village layout from just inside the north gate.",
         "[d5] Entering Mara's store — she came around the counter for him, hand extended. First real introduction in Millbrook.",
-        "[d5] Set the document roll on Mara's counter unprompted — named himself witness, not authority, and deferred to her judgment on whose hands it belongs in. Asked about intake sleeve mate"
+        "[d5] Set the document roll on Mara's counter unprompted — named himself witness, not authority, and deferred to her judgment on whose hands it belongs in. Asked about intake sleeve mate",
+        "[d5] Arrived last — one hand fully clear of his coat, reading the forge as a system. Quiet. Measuring."
       ],
       "knownFacts": [
         "The valley knows the water is wrong and has been pretending otherwise",
@@ -2531,7 +2610,7 @@
         "precise diagnostic questioning under a first meeting"
       ],
       "status": "active",
-      "statusNote": "In Mara's store — document roll on the counter, first real Millbrook briefing underway.",
+      "statusNote": "At Pell's forge for the evening gathering — taking in the room before speaking.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
@@ -4355,20 +4434,21 @@
     }
   },
   "tendencies": {
-    "strategic": 15.619000948851284,
-    "cerebral": 10.792264098736798,
-    "social": 11.686043041634575,
-    "generous": 3.7577045161803713,
-    "cautious": 8.96060578417161,
-    "physical": 1.8407352444392713,
-    "risky": 0.40691469714485123,
-    "ruthless": 2.6658210524489205,
-    "carousing": 0.04084374929697032,
-    "amorous": 10.989674942757981,
-    "patient": 3.2090086134983227,
-    "stealth": 1.0332790505734424,
-    "devotion": 0.5635984591484604,
-    "craft": 0.5305839294515197
+    "strategic": 15.22852592513,
+    "cerebral": 10.522457496268377,
+    "social": 11.39389196559371,
+    "generous": 3.6637619032758617,
+    "cautious": 8.73659063956732,
+    "physical": 1.7947168633282895,
+    "risky": 0.39674182971622995,
+    "ruthless": 2.5991755261376976,
+    "carousing": 0.03982265556454606,
+    "amorous": 10.714933069189032,
+    "patient": 3.1287833981608646,
+    "stealth": 1.0074470743091064,
+    "devotion": 0.5495084976697489,
+    "craft": 0.5173193312152317,
+    "leadership": 1
   },
   "aptitudes": [
     "strategist",
@@ -4378,7 +4458,7 @@
     "stalwart",
     "charmer"
   ],
-  "actionCount": 486,
+  "actionCount": 487,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -4624,8 +4704,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784391174287,
-  "rev": 702,
+  "updatedAt": 1784391344535,
+  "rev": 703,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4924,10 +5004,6 @@
             },
             {
               "kind": "interact",
-              "day": 4
-            },
-            {
-              "kind": "interact",
               "day": 5
             },
             {
@@ -4988,6 +5064,10 @@
             },
             {
               "kind": "fact",
+              "day": 5
+            },
+            {
+              "kind": "interact",
               "day": 5
             }
           ],
@@ -5656,7 +5736,7 @@
   "syncedAt": 1784382065804,
   "teachers": {},
   "regionsKnown": {
-    "valley": 304
+    "valley": 305
   },
   "foreclosed": [
     "rootkin",
@@ -5711,10 +5791,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T16:12:54.286Z",
+      "lastAt": "2026-07-18T16:15:44.531Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 29
+      "beats": 30
     }
   ],
   "company": [

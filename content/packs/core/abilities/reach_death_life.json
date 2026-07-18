@@ -52,9 +52,6 @@
         "SURVIVE",
         "FIGHT"
       ],
-      "challengeProfile": {
-        "SURVIVE": 3
-      },
       "tradition": "rootkin",
       "harmRung": "none",
       "nativeOrCombination": "native"
@@ -127,14 +124,6 @@
         "PUZZLE",
         "SOCIAL"
       ],
-      "challengeProfile": {
-        "SURVIVE": 3,
-        "FIGHT": 2,
-        "PUZZLE": 2,
-        "INVESTIGATE": 2,
-        "CHASE": 1,
-        "SOCIAL": 1
-      },
       "tradition": "ashwarden",
       "harmRung": "lethal",
       "nativeOrCombination": "native"
@@ -196,11 +185,6 @@
         "INVESTIGATE",
         "PUZZLE"
       ],
-      "challengeProfile": {
-        "INVESTIGATE": 2,
-        "FIGHT": 1,
-        "PUZZLE": 1
-      },
       "tradition": "ashwarden",
       "harmRung": "none",
       "nativeOrCombination": "native"
@@ -262,10 +246,6 @@
         "INVESTIGATE",
         "STEALTH"
       ],
-      "challengeProfile": {
-        "INVESTIGATE": 2,
-        "PUZZLE": 1
-      },
       "tradition": "rootkin",
       "harmRung": "none",
       "nativeOrCombination": "native"
@@ -311,9 +291,6 @@
         "SURVIVE",
         "FIGHT"
       ],
-      "challengeProfile": {
-        "SURVIVE": 3
-      },
       "tradition": "rootkin",
       "harmRung": "none",
       "nativeOrCombination": "native"
@@ -377,12 +354,6 @@
         "PUZZLE",
         "CHASE"
       ],
-      "challengeProfile": {
-        "FIGHT": 2,
-        "DUEL": 2,
-        "PUZZLE": 2,
-        "CHASE": 1
-      },
       "tradition": "ashwarden",
       "harmRung": "damaging",
       "nativeOrCombination": "native"
@@ -428,11 +399,6 @@
       "challengeTypes": [
         "SURVIVE"
       ],
-      "challengeProfile": {
-        "SURVIVE": 3,
-        "PUZZLE": 1,
-        "EXPLORE": 1
-      },
       "tradition": "rootkin",
       "harmRung": "damaging",
       "nativeOrCombination": "native"
@@ -497,13 +463,6 @@
         "FIGHT",
         "STEALTH"
       ],
-      "challengeProfile": {
-        "SURVIVE": 3,
-        "FIGHT": 2,
-        "DUEL": 2,
-        "EXPLORE": 1,
-        "STEALTH": 1
-      },
       "tradition": "ashwarden",
       "harmRung": "none",
       "nativeOrCombination": "native"
@@ -516,7 +475,7 @@
       "powerSystem": "reach_death_life",
       "attribute": "social",
       "axes": {
-        "death_life": 0.0,
+        "death_life": 0,
         "emotional_logical": -0.2
       },
       "functions": [
@@ -539,13 +498,6 @@
         "SOCIAL",
         "INVESTIGATE"
       ],
-      "challengeProfile": {
-        "SURVIVE": 3,
-        "INVESTIGATE": 2,
-        "SOCIAL": 2,
-        "FIGHT": 1,
-        "PUZZLE": 1
-      },
       "tradition": "rootkin",
       "harmRung": "lethal",
       "nativeOrCombination": "native"
@@ -609,10 +561,6 @@
         "FIGHT",
         "SOCIAL"
       ],
-      "challengeProfile": {
-        "FIGHT": 3,
-        "SOCIAL": 2
-      },
       "harmRung": "incapacitating",
       "nativeOrCombination": "native"
     },
@@ -661,9 +609,6 @@
       "challengeTypes": [
         "FIGHT"
       ],
-      "challengeProfile": {
-        "FIGHT": 3
-      },
       "harmRung": "damaging",
       "nativeOrCombination": "native"
     },
@@ -729,10 +674,6 @@
         "FIGHT",
         "SOCIAL"
       ],
-      "challengeProfile": {
-        "FIGHT": 3,
-        "SOCIAL": 3
-      },
       "harmRung": "incapacitating",
       "nativeOrCombination": "native"
     },
@@ -781,10 +722,6 @@
         "INVESTIGATE",
         "SOCIAL"
       ],
-      "challengeProfile": {
-        "INVESTIGATE": 3,
-        "SOCIAL": 2
-      },
       "harmRung": "none",
       "nativeOrCombination": "native"
     },
@@ -819,9 +756,6 @@
       "challengeTypes": [
         "FIGHT"
       ],
-      "challengeProfile": {
-        "FIGHT": 5
-      },
       "harmRung": "lethal",
       "nativeOrCombination": "native"
     },
@@ -873,12 +807,6 @@
         "SURVIVE",
         "STEALTH"
       ],
-      "challengeProfile": {
-        "EXPLORE": 3,
-        "SURVIVE": 3,
-        "STEALTH": 2,
-        "CHASE": 1
-      },
       "tradition": "ashwarden",
       "harmRung": "none",
       "nativeOrCombination": "native"
@@ -929,11 +857,6 @@
         "SURVIVE",
         "EXPLORE"
       ],
-      "challengeProfile": {
-        "SURVIVE": 4,
-        "EXPLORE": 2,
-        "INVESTIGATE": 1
-      },
       "tradition": "ashwarden",
       "harmRung": "none",
       "nativeOrCombination": "native"
@@ -989,12 +912,6 @@
         "EXPLORE",
         "SURVIVE"
       ],
-      "challengeProfile": {
-        "FIGHT": 3,
-        "EXPLORE": 2,
-        "SURVIVE": 2,
-        "INVESTIGATE": 1
-      },
       "tradition": "rootkin",
       "harmRung": "incapacitating",
       "nativeOrCombination": "native"
@@ -1049,11 +966,6 @@
         "SURVIVE",
         "EXPLORE"
       ],
-      "challengeProfile": {
-        "FIGHT": 3,
-        "SURVIVE": 4,
-        "EXPLORE": 2
-      },
       "tradition": "rootkin",
       "harmRung": "none",
       "nativeOrCombination": "native"
@@ -1109,12 +1021,6 @@
         "EXPLORE",
         "SOCIAL"
       ],
-      "challengeProfile": {
-        "INVESTIGATE": 4,
-        "EXPLORE": 3,
-        "SOCIAL": 2,
-        "SURVIVE": 1
-      },
       "tradition": "rootkin",
       "harmRung": "none",
       "nativeOrCombination": "native"
@@ -1169,12 +1075,6 @@
         "SURVIVE",
         "STEALTH"
       ],
-      "challengeProfile": {
-        "EXPLORE": 4,
-        "SURVIVE": 3,
-        "STEALTH": 2,
-        "CHASE": 2
-      },
       "tradition": "rootkin",
       "harmRung": "none",
       "nativeOrCombination": "native"

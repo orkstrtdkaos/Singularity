@@ -139,6 +139,15 @@ for (const [k, v] of Object.entries(measured)) {
 check("invalid harmRung values are always zero (enum is machine-checked from here)", badHarm.length === 0,
   badHarm.map(a => `${a.id}:${a.harmRung}`).join(", "));
 
+// SNG-147a: challengeProfile is RETIRED (280 records carried it; zero runtime consumers, zero CI
+// validation, an abandoned cognitive/physical/social triad on ~89). A retired field must STAY
+// retired — a value with no reader teaches every future author that authoring it matters.
+// (challengeTypes is HELD, not retired: content_ci.mjs's FIGHT/notFor lint is the only automated
+// guard for the 147c failure class until the 147c grants-rewrite ships. Retire it after.)
+const profileGhosts = abilityRecords.filter(a => "challengeProfile" in a);
+check("147a: challengeProfile stays retired (zero records carry it)", profileGhosts.length === 0,
+  profileGhosts.slice(0, 5).map(a => a.id).join(", "));
+
 // ---------- advisory: orphan-export sweep ----------
 const engineFiles = readdirSync(join(root, "engine")).filter(f => f.endsWith(".js"));
 const allSrc = engineFiles.map(f => ({ f, src: read(`engine/${f}`) }));

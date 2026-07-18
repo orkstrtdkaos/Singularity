@@ -1,964 +1,863 @@
 {
- "schemaVersion": 1,
- "powerSystem": "reach_body_mind",
- "note": "Crafts of the Somatic Reaches/Cogitarium (body_mind axis). Soma is the body-pole tradition (the physical masteries, the body as instrument); Noesis the mind-pole (mental disciplines, memory-palaces, thought as force). Learned by traveling the Reach or training with Somatics/Cogitants. Both drift the wielder toward their pole; the perfected athlete-scholar is where they co-fire, the disembodied Cogitant where mind wins absolutely. axes signed for engine compat. Authored by Aevi (PO), SNG-016 — the last of the six near-axis traditions.",
- "gated": "learned",
- "abilities": [
-  {
-   "id": "soma",
-   "name": "Soma",
-   "levelReq": 2,
-   "energyCost": 5,
-   "powerSystem": "reach_body_mind",
-   "attribute": "physical",
-   "axes": {
-    "body_mind": -0.5,
-    "violence_peace": 0.1,
-    "death_life": 0.2
-   },
-   "effectTags": [
-    "body",
-    "breath",
-    "endure"
-   ],
-   "narrationHints": "The body made instrument — breath, poise, endurance past what should be possible, movement as a language spoken without words.",
-   "description": "The body-pole mastery: breath-control, endurance, poise, the physical self honed to an instrument. The Flesh-Temples' art.",
-   "notFor": "Thought-work or memory (that's Noesis); brute force alone (Soma is control, not just strength); anything requiring you to leave the body behind.",
-   "tree": [
+  "schemaVersion": 1,
+  "powerSystem": "reach_body_mind",
+  "note": "Crafts of the Somatic Reaches/Cogitarium (body_mind axis). Soma is the body-pole tradition (the physical masteries, the body as instrument); Noesis the mind-pole (mental disciplines, memory-palaces, thought as force). Learned by traveling the Reach or training with Somatics/Cogitants. Both drift the wielder toward their pole; the perfected athlete-scholar is where they co-fire, the disembodied Cogitant where mind wins absolutely. axes signed for engine compat. Authored by Aevi (PO), SNG-016 — the last of the six near-axis traditions.",
+  "gated": "learned",
+  "abilities": [
     {
-     "rank": 1,
-     "name": "The Trained Body",
-     "grants": "Endurance and poise past the ordinary; control breath and heartbeat to steady fear, pain, or cold; move with a precision that reads as grace.",
-     "cannot": "The body still has limits; Soma raises the ceiling, it doesn't remove it."
+      "id": "soma",
+      "name": "Soma",
+      "levelReq": 2,
+      "energyCost": 5,
+      "powerSystem": "reach_body_mind",
+      "attribute": "physical",
+      "axes": {
+        "body_mind": -0.5,
+        "violence_peace": 0.1,
+        "death_life": 0.2
+      },
+      "effectTags": [
+        "body",
+        "breath",
+        "endure"
+      ],
+      "narrationHints": "The body made instrument — breath, poise, endurance past what should be possible, movement as a language spoken without words.",
+      "description": "The body-pole mastery: breath-control, endurance, poise, the physical self honed to an instrument. The Flesh-Temples' art.",
+      "notFor": "Thought-work or memory (that's Noesis); brute force alone (Soma is control, not just strength); anything requiring you to leave the body behind.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Trained Body",
+          "grants": "Endurance and poise past the ordinary; control breath and heartbeat to steady fear, pain, or cold; move with a precision that reads as grace.",
+          "cannot": "The body still has limits; Soma raises the ceiling, it doesn't remove it."
+        },
+        {
+          "rank": 2,
+          "name": "The Instrument",
+          "grants": "Feats of body that look impossible — hold a bridge-pose an hour, run past collapse, slow your own bleeding, take a blow and keep the form; teach the body a skill in days that takes others years.",
+          "cannot": "Pushing past the true limit still breaks you; the body remembers what you spend."
+        },
+        {
+          "rank": 3,
+          "name": "The Perfected Vessel",
+          "grants": "The body as a mastered whole — survive what kills others, perform at the edge of the humanly possible, make the physical self answer the will completely. The Flesh-Temples' power in miniature.",
+          "cannot": "The wielder drifts body-hot — and the Temple that rejects thought forgets to warn itself; a perfected body with a starved mind is its own foreclosure, mastery with nothing left to aim it."
+        }
+      ],
+      "functions": [
+        "sustain",
+        "strike",
+        "move",
+        "resist"
+      ],
+      "challengeTypes": [
+        "SURVIVE",
+        "CHASE",
+        "FIGHT"
+      ],
+      "tradition": "somatic",
+      "nativeOrCombination": "native"
     },
     {
-     "rank": 2,
-     "name": "The Instrument",
-     "grants": "Feats of body that look impossible — hold a bridge-pose an hour, run past collapse, slow your own bleeding, take a blow and keep the form; teach the body a skill in days that takes others years.",
-     "cannot": "Pushing past the true limit still breaks you; the body remembers what you spend."
+      "id": "noesis",
+      "name": "Noesis",
+      "levelReq": 2,
+      "energyCost": 5,
+      "powerSystem": "reach_body_mind",
+      "attribute": "mental",
+      "axes": {
+        "body_mind": 0.5,
+        "concrete_abstract": 0.3,
+        "chaos_order": 0.2
+      },
+      "effectTags": [
+        "mind",
+        "memory",
+        "thought"
+      ],
+      "narrationHints": "Thought made a discipline and a force — memory-palaces, absolute focus, reasoning that outruns the room, the mind holding what the body can't.",
+      "description": "The mind-pole mastery: memory, focus, reason, thought as an instrument sharp enough to act on the world. The Cogitarium's art.",
+      "notFor": "Physical feats (that's Soma); wisdom (Noesis is sharp, not necessarily wise); anything requiring presence in the body it keeps trying to leave.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Ordered Mind",
+          "grants": "Perfect recall of what you attend to; focus that ignores pain, fear, and distraction; reason a problem faster and further than the unpracticed.",
+          "cannot": "Recall is not understanding; focus this tight can miss the body's warnings."
+        },
+        {
+          "rank": 2,
+          "name": "The Memory-Palace",
+          "grants": "Hold vast structured knowledge and retrieve it instantly; model a system or a person in your head and predict them; think through a crisis in the space others panic in.",
+          "cannot": "The model is only as good as its inputs; a mind that lives in the model loses the room."
+        },
+        {
+          "rank": 3,
+          "name": "The Cogitant's Height",
+          "grants": "Thought as force — solve the unsolvable, hold a hundred threads at once, out-think a situation so completely you seem to move before it does. The Cogitarium's power in miniature.",
+          "cannot": "The wielder drifts mind-hot, toward leaving the body behind as the Cogitants have — and a mind that abandons its body abandons the world it was for; the coldest foreclosure, thought that has forgotten it was ever meant to be lived."
+        }
+      ],
+      "functions": [
+        "reveal",
+        "strike"
+      ],
+      "challengeTypes": [
+        "FIGHT",
+        "INVESTIGATE",
+        "PUZZLE"
+      ],
+      "tradition": "cogitant",
+      "nativeOrCombination": "native"
     },
     {
-     "rank": 3,
-     "name": "The Perfected Vessel",
-     "grants": "The body as a mastered whole — survive what kills others, perform at the edge of the humanly possible, make the physical self answer the will completely. The Flesh-Temples' power in miniature.",
-     "cannot": "The wielder drifts body-hot — and the Temple that rejects thought forgets to warn itself; a perfected body with a starved mind is its own foreclosure, mastery with nothing left to aim it."
+      "id": "body_read",
+      "name": "Body-Read",
+      "levelReq": 1,
+      "energyCost": 3,
+      "attribute": "physical",
+      "axes": {
+        "body_mind": -0.3
+      },
+      "functions": [
+        "reveal"
+      ],
+      "narrationHints": "A person's health, strength, and hurt read from how they stand.",
+      "description": "Read a body — its condition, hidden injury, strength, exhaustion, tells.",
+      "notFor": "Reading thoughts; healing.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Body-Read",
+          "grants": "Read another's physical condition, hidden hurts, and capacities at a glance.",
+          "cannot": "Body, not mind; the trained conceal tells."
+        },
+        {
+          "rank": 2,
+          "name": "The Whole Tell",
+          "grants": "Read the whole body at once — weight, breath, the held shoulder, what the hands are doing when the face is busy lying.",
+          "cannot": "It reads the body's report. A trained body reports what its owner chooses."
+        },
+        {
+          "rank": 3,
+          "name": "The Body Cannot Lie",
+          "grants": "Nothing a body does escapes you. Pain, intent, love, the decision made a half-second before it is acted on.",
+          "cannot": "You cannot stop reading. The Somatics say knowing every body in a room is its own kind of loneliness."
+        }
+      ],
+      "powerSystem": "reach_body_mind",
+      "gated": "learned",
+      "challengeTypes": [
+        "INVESTIGATE",
+        "FIGHT"
+      ],
+      "tradition": "somatic",
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "mind_read_folk",
+      "name": "Cold-Read",
+      "levelReq": 1,
+      "energyCost": 3,
+      "attribute": "mental",
+      "axes": {
+        "body_mind": 0.3
+      },
+      "functions": [
+        "reveal"
+      ],
+      "narrationHints": "The turn of a mind inferred from a hundred small signs.",
+      "description": "Infer another's thoughts and intent from micro-signals — not magic, mastery of tells.",
+      "notFor": "Actual telepathy; the disciplined/alien.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Cold-Read",
+          "grants": "Deduce a person's likely thoughts and next move from their signals.",
+          "cannot": "Inference, not certainty; masters and non-humans resist."
+        },
+        {
+          "rank": 2,
+          "name": "The Cold Line",
+          "grants": "Follow a mind's reasoning as it happens — where it is going, what it has already ruled out.",
+          "cannot": "You follow the reasoning, not the reasons. A mind moving on feeling is opaque to a cold line."
+        },
+        {
+          "rank": 3,
+          "name": "The Open Book",
+          "grants": "A mind at rest is legible to you — its shape, its habits, the thing it keeps returning to.",
+          "cannot": "The Cogitants consider unbidden reading a violence, and they are right, and they do it anyway."
+        }
+      ],
+      "powerSystem": "reach_body_mind",
+      "gated": "learned",
+      "challengeTypes": [
+        "SOCIAL",
+        "INVESTIGATE"
+      ],
+      "tradition": "cogitant",
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "second_wind",
+      "name": "Second Wind",
+      "levelReq": 1,
+      "energyCost": 4,
+      "attribute": "physical",
+      "axes": {
+        "body_mind": -0.3
+      },
+      "functions": [
+        "empower",
+        "sustain",
+        "heal"
+      ],
+      "narrationHints": "Past the wall, and the body finds more.",
+      "description": "Push the body past exhaustion, pain, or shock for a burst — folk-Soma.",
+      "notFor": "True healing; limitless use.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Second Wind",
+          "grants": "Ignore pain, fatigue, or shock for a short, decisive burst of physical effort.",
+          "cannot": "The body remembers the debt; overuse breaks you."
+        },
+        {
+          "rank": 2,
+          "name": "The Third Wind",
+          "grants": "Find breath and strength past where the body had none — twice, in one day, at a cost.",
+          "cannot": "The body is borrowing from tomorrow, and tomorrow collects with interest."
+        },
+        {
+          "rank": 3,
+          "name": "The Wind That Doesn't End",
+          "grants": "Go on past exhaustion for as long as the thing needs doing — the body simply does not stop.",
+          "cannot": "It does not stop, but it does break. Somatics who lean on this die young and know it."
+        }
+      ],
+      "powerSystem": "reach_body_mind",
+      "gated": "learned",
+      "challengeTypes": [
+        "SURVIVE",
+        "CHASE",
+        "FIGHT"
+      ],
+      "tradition": "somatic",
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "total_focus",
+      "name": "Total Focus",
+      "levelReq": 1,
+      "energyCost": 4,
+      "attribute": "mental",
+      "axes": {
+        "body_mind": 0.3
+      },
+      "functions": [
+        "resist",
+        "reveal"
+      ],
+      "narrationHints": "The world narrows to the one thing, and nothing reaches you.",
+      "description": "Enter absolute focus — ignore fear, distraction, and pain to think or work clean. Folk-Noesis.",
+      "notFor": "Physical feats; wisdom.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Total Focus",
+          "grants": "Focus so completely that fear, pain, and distraction fall away while you think or work.",
+          "cannot": "Can miss the body's warnings; tight focus narrows the view."
+        },
+        {
+          "rank": 2,
+          "name": "The Narrowed World",
+          "grants": "Narrow to one thing so completely that fear, pain, and noise stop reaching you.",
+          "cannot": "What you narrow out is still happening. People have been focused to death."
+        },
+        {
+          "rank": 3,
+          "name": "The Single Point",
+          "grants": "Narrow to one thing so completely that nothing else exists — not fear, not pain, not the wound you are standing on. The task is completed.",
+          "cannot": "You will not notice what it cost until afterward. Cogitants have finished the task and then simply fallen over."
+        }
+      ],
+      "powerSystem": "reach_body_mind",
+      "gated": "learned",
+      "challengeTypes": [
+        "FIGHT",
+        "PUZZLE",
+        "SURVIVE"
+      ],
+      "tradition": "cogitant",
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "perfect_motion",
+      "name": "Perfect Motion",
+      "levelReq": 2,
+      "energyCost": 5,
+      "attribute": "physical",
+      "axes": {
+        "body_mind": -0.4
+      },
+      "functions": [
+        "move",
+        "shield",
+        "resist"
+      ],
+      "narrationHints": "The body does exactly and only what's needed, flawlessly.",
+      "description": "Execute a physical feat with impossible precision and economy — mid-tier Soma.",
+      "notFor": "Feats past the body's true ceiling; thought-work.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Perfect Motion",
+          "grants": "Perform a physical act at the very edge of the possible — balance, speed, precision, control.",
+          "cannot": "The true limit still holds; costs the body dearly."
+        },
+        {
+          "rank": 2,
+          "name": "The Unwasted Motion",
+          "grants": "No motion you make is wasted — every step, block, and reach does exactly and only what it must.",
+          "cannot": "Efficiency is not power. A perfect motion still loses to a stronger one."
+        },
+        {
+          "rank": 3,
+          "name": "Motion Without Thought",
+          "grants": "The body acts correctly before the mind knows there was a decision — and it is right.",
+          "cannot": "The body chooses. If you have trained it badly, it will do that beautifully."
+        }
+      ],
+      "powerSystem": "reach_body_mind",
+      "gated": "learned",
+      "challengeTypes": [
+        "DUEL",
+        "CHASE",
+        "EXPLORE"
+      ],
+      "tradition": "somatic",
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "memory_palace",
+      "name": "Memory-Palace",
+      "levelReq": 3,
+      "energyCost": 6,
+      "attribute": "mental",
+      "axes": {
+        "body_mind": 0.4,
+        "concrete_abstract": 0.3
+      },
+      "functions": [
+        "reveal",
+        "restore"
+      ],
+      "narrationHints": "Vast knowledge held in a built inner architecture, retrieved instantly.",
+      "description": "Hold and instantly retrieve vast structured knowledge; model a person or system in the mind — mid-tier Noesis.",
+      "notFor": "Wisdom; presence in the body it forgets.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Memory-Palace",
+          "grants": "Store and recall huge structured knowledge; model and predict a system or person in your head.",
+          "cannot": "Only as good as its inputs; living in the model loses the room."
+        },
+        {
+          "rank": 2,
+          "name": "The Deeper Rooms",
+          "grants": "Store not just facts but experiences whole — walk back into a conversation and hear it again exactly.",
+          "cannot": "What you store, you keep. Including what you would rather have let fade."
+        },
+        {
+          "rank": 3,
+          "name": "The Palace Entire",
+          "grants": "Nothing you have attended to is lost. The whole of your life is a place you can walk through.",
+          "cannot": "The Cogitants who build the deepest palaces have trouble leaving them."
+        }
+      ],
+      "powerSystem": "reach_body_mind",
+      "gated": "learned",
+      "challengeTypes": [
+        "INVESTIGATE",
+        "PUZZLE"
+      ],
+      "tradition": "cogitant",
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "the_whole_act",
+      "name": "The Whole Act",
+      "levelReq": 4,
+      "energyCost": 9,
+      "attribute": "physical",
+      "axes": {
+        "body_mind": 0
+      },
+      "functions": [
+        "move",
+        "reveal"
+      ],
+      "narrationHints": "Thought and motion stop being two things.",
+      "description": "The braid-craft: body and mind as one instrument, acting faster than either could decide — the Middle Way's ideal.",
+      "notFor": "Body-heavy or mind-heavy wielders (needs both near-equal); the extremes.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Whole Act",
+          "grants": "Act with body and mind fused — perception, decision, and motion as a single instant.",
+          "cannot": "Needs both trained near-equal; the pure poles cannot do it."
+        }
+      ],
+      "powerSystem": "reach_body_mind",
+      "gated": "learned",
+      "challengeTypes": [
+        "FIGHT",
+        "DUEL"
+      ],
+      "tradition": "somatic",
+      "nativeOrCombination": "combination"
+    },
+    {
+      "id": "pathless_way",
+      "name": "The Pathless Way",
+      "levelReq": 5,
+      "energyCost": 10,
+      "attribute": "physical",
+      "axes": {
+        "body_mind": -0.3,
+        "space_time": 0.2
+      },
+      "functions": [
+        "travel",
+        "sustain",
+        "resist"
+      ],
+      "narrationHints": "The unclimbable is climbed, the uncrossable crossed — the body finds a way where there is none.",
+      "description": "The traversal capstone: cross terrain that stops everyone else — sheer faces, killing cold, drowning fords, the deep dark — by mastery of the body pushed past every ordinary limit.",
+      "notFor": "Teleportation or flight (it's mastery, not magic); carrying others easily; ignoring true lethality unwarned.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Pathless Way",
+          "grants": "Cross the uncrossable — any natural barrier yields to enough skill, breath, and will; lead a party through what would kill them alone.",
+          "cannot": "The truly impossible (a sheer mile of ice in a storm) still exacts a price; you can fail, spectacularly, and the fall is real."
+        }
+      ],
+      "powerSystem": "reach_body_mind",
+      "gated": "learned",
+      "tradition": "somatic",
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "skydancer",
+      "name": "Skydancer",
+      "levelReq": 4,
+      "energyCost": 9,
+      "attribute": "physical",
+      "axes": {
+        "body_mind": -0.3,
+        "space_time": 0.2
+      },
+      "functions": [
+        "move",
+        "travel"
+      ],
+      "narrationHints": "The body treats the air like ground — a leap becomes a bound becomes something the earth stopped being able to stop.",
+      "description": "Flight-by-mastery: prodigious leaps, wall-runs, glides, and air-steps that keep you aloft in bursts. Not true hovering — a body so trained the air briefly holds it. Cross rooftops, chasms, close on a fleeing foe from above.",
+      "notFor": "Sustained hovering or true flight (it's bursts, momentum-bound); carrying heavy loads aloft.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Skydancer",
+          "grants": "Move through the air in bounds, glides, and wall-runs — cross gaps, scale heights, drop on a target.",
+          "cannot": "Momentum-bound (you must keep moving, no hover); a mistimed step falls; heavy burden grounds you."
+        }
+      ],
+      "powerSystem": "reach_body_mind",
+      "gated": "learned",
+      "tradition": "somatic",
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "the_working_model",
+      "name": "The Working Model",
+      "levelReq": 3,
+      "energyCost": 2,
+      "powerSystem": "attribute",
+      "attribute": "mental",
+      "axes": {
+        "body_mind": 0.4,
+        "concrete_abstract": 0.4
+      },
+      "effectTags": [
+        "construct",
+        "analyze",
+        "precision"
+      ],
+      "narrationHints": "Think it through until it builds itself. A plan become a blueprint become a thing.",
+      "description": "You can think a thing into existence — model it so completely in your mind that the making is just following the thought.",
+      "notFor": [],
+      "tradition": "cogitant",
+      "harmRung": "none",
+      "functions": [
+        "make",
+        "reveal"
+      ],
+      "challengeTypes": [
+        "craft",
+        "technical",
+        "intellectual"
+      ],
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Blueprint",
+          "grants": "Think through a construction or modification so precisely that the making is near-guaranteed, even with inferior tools; identify exactly what you need before you touch anything.",
+          "cannot": null
+        },
+        {
+          "rank": 2,
+          "name": "The Complete Model",
+          "grants": "Build a mental model of a complex system — a machine, a building, a body — complete enough to diagnose its faults and redesign its structure from the inside out.",
+          "cannot": null
+        },
+        {
+          "rank": 3,
+          "name": "Think-Built",
+          "grants": "A thing you have modeled completely you can build with uncanny precision and speed — faster and more accurately than available materials or tools should allow.",
+          "cannot": null
+        }
+      ],
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "the_necessary_case",
+      "name": "The Necessary Case",
+      "levelReq": 3,
+      "energyCost": 2,
+      "powerSystem": "attribute",
+      "attribute": "mental",
+      "axes": {
+        "body_mind": 0.4,
+        "concrete_abstract": 0.3
+      },
+      "effectTags": [
+        "argument",
+        "logic",
+        "pressure"
+      ],
+      "narrationHints": "Not persuasion. Demonstration. The conclusion is the only place the logic goes.",
+      "description": "You present a case so airtight that refusal becomes irrational. Not manipulation — proof. The other person can disagree, but they cannot explain why.",
+      "notFor": [],
+      "tradition": "cogitant",
+      "harmRung": "none",
+      "functions": [
+        "command",
+        "bind",
+        "reveal"
+      ],
+      "challengeTypes": [
+        "social",
+        "intellectual",
+        "negotiation"
+      ],
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Closed Argument",
+          "grants": "Present a case so logically complete that the other person cannot find a gap — not because you've overwhelmed them, but because there isn't one.",
+          "cannot": null
+        },
+        {
+          "rank": 2,
+          "name": "Demonstrated Necessity",
+          "grants": "Show that a conclusion follows so inevitably that the person cannot act against it without explaining why — and you can dismantle whatever they offer.",
+          "cannot": null
+        },
+        {
+          "rank": 3,
+          "name": "The Only Conclusion",
+          "grants": "Make the logic of a situation so visible that a group reorganizes around it — not because you commanded them, but because the structure of the situation leaves no other rational position.",
+          "cannot": null
+        }
+      ],
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "the_clear_path",
+      "name": "The Clear Path",
+      "levelReq": 2,
+      "energyCost": 1,
+      "powerSystem": "attribute",
+      "attribute": "mental",
+      "axes": {
+        "body_mind": 0.3,
+        "space_time": 0.2
+      },
+      "effectTags": [
+        "navigation",
+        "prediction",
+        "movement"
+      ],
+      "narrationHints": "The gap is there before you look. The model says where to step.",
+      "description": "Navigate by modeling everything — obstacles, crowd, guard rotation — before you move a foot. The path is solved before it is walked.",
+      "notFor": [],
+      "tradition": "cogitant",
+      "harmRung": "none",
+      "functions": [
+        "move",
+        "reveal",
+        "foresee"
+      ],
+      "challengeTypes": [
+        "navigation",
+        "stealth",
+        "tactical"
+      ],
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Modeled Route",
+          "grants": "Find the quickest, safest route through any observable space — crowd, ruin, wilderness — by calculating rather than feeling your way.",
+          "cannot": null
+        },
+        {
+          "rank": 2,
+          "name": "Anticipatory Movement",
+          "grants": "Move through a dynamic space without friction by staying two steps ahead of everyone in it — the guard, the crowd, the chaos.",
+          "cannot": null
+        },
+        {
+          "rank": 3,
+          "name": "The Written Choreography",
+          "grants": "In a space you understand, you move as if you designed the whole scene — every obstacle parts, every gap opens, every opening appears the instant you need it.",
+          "cannot": null
+        }
+      ],
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "the_long_form",
+      "name": "The Long Form",
+      "levelReq": 2,
+      "energyCost": 1,
+      "powerSystem": "attribute",
+      "attribute": "mental",
+      "axes": {
+        "body_mind": 0.4
+      },
+      "effectTags": [
+        "endurance",
+        "cognition",
+        "persistence"
+      ],
+      "narrationHints": "The problem is still there. So is the mind working it.",
+      "description": "Mental work that doesn't stop — held across days, against exhaustion, against everything that says to let go.",
+      "notFor": [],
+      "tradition": "cogitant",
+      "harmRung": "none",
+      "functions": [
+        "sustain",
+        "resist"
+      ],
+      "challengeTypes": [
+        "endurance",
+        "intellectual",
+        "hardship"
+      ],
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Maintained Function",
+          "grants": "Hold a complex train of thought through interruption, fear, pain, or deprivation; return to exactly where you were without loss.",
+          "cannot": null
+        },
+        {
+          "rank": 2,
+          "name": "Extended Work",
+          "grants": "Sustain complex cognitive work — a problem, a plan, a translation — across days without the thinking degrading, even as sleep and food grow scarce.",
+          "cannot": null
+        },
+        {
+          "rank": 3,
+          "name": "The Mind That Holds",
+          "grants": "Your mind is simply the last thing to fail. Function clearly under conditions that have broken better bodies — cold, injury, grief, weeks of pressure — until the work is done.",
+          "cannot": null
+        }
+      ],
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "the_shaped_body",
+      "name": "The Shaped Body",
+      "levelReq": 3,
+      "energyCost": 2,
+      "powerSystem": "attribute",
+      "attribute": "physical",
+      "axes": {
+        "body_mind": -0.4
+      },
+      "effectTags": [
+        "transform",
+        "adapt",
+        "discipline"
+      ],
+      "narrationHints": "Train the body past what the body thinks it can be. A new configuration, held.",
+      "description": "Reshape a physical capacity through extreme, focused training — not temporary effort, but permanent change in what the body is capable of.",
+      "notFor": [],
+      "tradition": "somatic",
+      "harmRung": "none",
+      "functions": [
+        "transform",
+        "sustain"
+      ],
+      "challengeTypes": [
+        "endurance",
+        "craft",
+        "physical"
+      ],
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Focused Adaptation",
+          "grants": "Through extreme, focused training, significantly alter one specific physical capacity — grip strength, pain threshold, cold tolerance, sprinting burst — in ways ordinary training doesn't reach.",
+          "cannot": null
+        },
+        {
+          "rank": 2,
+          "name": "New Configuration",
+          "grants": "Reshape something structural about how you move across weeks of sustained effort — a different gait, a changed shoulder set, a fundamental adaptation that the body now holds.",
+          "cannot": null
+        },
+        {
+          "rank": 3,
+          "name": "The Body Is Clay",
+          "grants": "You have worked your body long enough to know it as material. Any physical capacity you turn full, sustained attention to becomes, in time, what you need it to be.",
+          "cannot": null
+        }
+      ],
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "the_weight_of_presence",
+      "name": "The Weight of Presence",
+      "levelReq": 2,
+      "energyCost": 1,
+      "powerSystem": "attribute",
+      "attribute": "physical",
+      "axes": {
+        "body_mind": -0.3,
+        "violence_peace": 0.1
+      },
+      "effectTags": [
+        "authority",
+        "gravity",
+        "presence"
+      ],
+      "narrationHints": "Full inhabitation of a body has a gravity. Other bodies feel it before the mind does.",
+      "description": "Your physical presence is difficult to ignore or act against — not threat, but the authority of someone completely at home in their body.",
+      "notFor": [],
+      "tradition": "somatic",
+      "harmRung": "none",
+      "functions": [
+        "command",
+        "bind"
+      ],
+      "challengeTypes": [
+        "social",
+        "tactical",
+        "intimidation"
+      ],
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Present Weight",
+          "grants": "Your physical presence in a space is difficult to ignore — people make room, the uneasy grow more so, those considering action against you reconsider.",
+          "cannot": null
+        },
+        {
+          "rank": 2,
+          "name": "The Organizing Fact",
+          "grants": "Command a space through presence alone — enter a room and it restructures; stand still and the situation organizes itself relative to where you are.",
+          "cannot": null
+        },
+        {
+          "rank": 3,
+          "name": "Immovable Ground",
+          "grants": "Your presence is the fixed fact in a room. Anyone who would act against you must first account for what your body represents — and most find they cannot.",
+          "cannot": null
+        }
+      ],
+      "nativeOrCombination": "native"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "the_unmoving_mind",
+      "name": "The Unmoving Mind",
+      "levelReq": 4,
+      "energyCost": 11,
+      "powerSystem": "reach_body_mind",
+      "tradition": "cogitant",
+      "attribute": "mental",
+      "axes": {
+        "body_mind": 0.7
+      },
+      "functions": [
+        "resist",
+        "reveal"
+      ],
+      "narrationHints": "Everything they throw at your thoughts slides off a stillness that was there before they arrived and will be there after they tire. You did not brace. You were simply already still.",
+      "description": "The Cogitant art of mushin — no-mind, the perfect stillness that nothing can move: not fear, not deception, not the fastest attack, because a mind that does not flinch reads everything and grants nothing. The blade-discipline made total.",
+      "notFor": "It is defense and clarity, never force — you cannot strike with stillness, only see and endure. And a mind held perfectly still holds nothing else; while you are unmoving you are only unmoving.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Unmoving Mind",
+          "grants": "Enter a perfect mental stillness — immune to fear, deception, and disruption, reading all with total clarity.",
+          "cannot": "It grants no offense, only the unshakeable read; it occupies you wholly to hold; and a stillness this deep can look, to those who love you, like you have gone somewhere they cannot follow."
+        }
+      ],
+      "gated": "learned",
+      "nativeOrCombination": "native",
+      "challengeTypes": [
+        "DEFEND",
+        "INVESTIGATE"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "the_single_stroke",
+      "name": "The Single Stroke",
+      "levelReq": 5,
+      "energyCost": 13,
+      "powerSystem": "reach_body_mind",
+      "tradition": "cogitant",
+      "attribute": "mental",
+      "axes": {
+        "body_mind": 0.8
+      },
+      "functions": [
+        "strike",
+        "foresee"
+      ],
+      "narrationHints": "You have already seen it — the one moment, the only opening, the single stroke that ends the contest before it was properly a contest. You do not rush. You wait for the instant you already know is coming, and then it simply is.",
+      "description": "The Cogitant capstone — mind and act become one perfect stroke, the whole contest read to its single decisive instant and then delivered without waste. The sword-saint's art: not the fastest blade, the ONLY necessary one.",
+      "notFor": "One stroke, read and delivered perfectly, at enormous cost of focus — and it demands the opening be real; against something with no decisive instant (a flood, a crowd, a lie with no center) there is no single stroke to find.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Single Stroke",
+          "grants": "Read a contest to its one decisive instant and deliver the single perfect stroke that ends it.",
+          "cannot": "It costs nearly all your focus, it requires a real decisive instant to exist, and it is the blade's truth and the pen's alike — some contests have no single stroke, and mistaking that is how the sure-handed fall."
+        }
+      ],
+      "gated": "learned",
+      "nativeOrCombination": "native",
+      "challengeTypes": [
+        "FIGHT"
+      ],
+      "harmRung": "lethal"
     }
-   ],
-   "functions": [
-    "sustain",
-    "strike",
-    "move",
-    "resist"
-   ],
-   "challengeTypes": [
-    "SURVIVE",
-    "CHASE",
-    "FIGHT"
-   ],
-   "challengeProfile": {
-    "CHASE": 2,
-    "EXPLORE": 2,
-    "FIGHT": 2,
-    "DUEL": 2,
-    "SURVIVE": 2
-   },
-   "tradition": "somatic",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "noesis",
-   "name": "Noesis",
-   "levelReq": 2,
-   "energyCost": 5,
-   "powerSystem": "reach_body_mind",
-   "attribute": "mental",
-   "axes": {
-    "body_mind": 0.5,
-    "concrete_abstract": 0.3,
-    "chaos_order": 0.2
-   },
-   "effectTags": [
-    "mind",
-    "memory",
-    "thought"
-   ],
-   "narrationHints": "Thought made a discipline and a force — memory-palaces, absolute focus, reasoning that outruns the room, the mind holding what the body can't.",
-   "description": "The mind-pole mastery: memory, focus, reason, thought as an instrument sharp enough to act on the world. The Cogitarium's art.",
-   "notFor": "Physical feats (that's Soma); wisdom (Noesis is sharp, not necessarily wise); anything requiring presence in the body it keeps trying to leave.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "The Ordered Mind",
-     "grants": "Perfect recall of what you attend to; focus that ignores pain, fear, and distraction; reason a problem faster and further than the unpracticed.",
-     "cannot": "Recall is not understanding; focus this tight can miss the body's warnings."
-    },
-    {
-     "rank": 2,
-     "name": "The Memory-Palace",
-     "grants": "Hold vast structured knowledge and retrieve it instantly; model a system or a person in your head and predict them; think through a crisis in the space others panic in.",
-     "cannot": "The model is only as good as its inputs; a mind that lives in the model loses the room."
-    },
-    {
-     "rank": 3,
-     "name": "The Cogitant's Height",
-     "grants": "Thought as force — solve the unsolvable, hold a hundred threads at once, out-think a situation so completely you seem to move before it does. The Cogitarium's power in miniature.",
-     "cannot": "The wielder drifts mind-hot, toward leaving the body behind as the Cogitants have — and a mind that abandons its body abandons the world it was for; the coldest foreclosure, thought that has forgotten it was ever meant to be lived."
-    }
-   ],
-   "functions": [
-    "reveal",
-    "strike"
-   ],
-   "challengeTypes": [
-    "FIGHT",
-    "INVESTIGATE",
-    "PUZZLE"
-   ],
-   "challengeProfile": {
-    "INVESTIGATE": 2,
-    "FIGHT": 2,
-    "PUZZLE": 2,
-    "DUEL": 2
-   },
-   "tradition": "cogitant",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "body_read",
-   "name": "Body-Read",
-   "levelReq": 1,
-   "energyCost": 3,
-   "attribute": "physical",
-   "axes": {
-    "body_mind": -0.3
-   },
-   "functions": [
-    "reveal"
-   ],
-   "narrationHints": "A person's health, strength, and hurt read from how they stand.",
-   "description": "Read a body — its condition, hidden injury, strength, exhaustion, tells.",
-   "notFor": "Reading thoughts; healing.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Body-Read",
-     "grants": "Read another's physical condition, hidden hurts, and capacities at a glance.",
-     "cannot": "Body, not mind; the trained conceal tells."
-    },
-    {
-     "rank": 2,
-     "name": "The Whole Tell",
-     "grants": "Read the whole body at once — weight, breath, the held shoulder, what the hands are doing when the face is busy lying.",
-     "cannot": "It reads the body's report. A trained body reports what its owner chooses."
-    },
-    {
-     "rank": 3,
-     "name": "The Body Cannot Lie",
-     "grants": "Nothing a body does escapes you. Pain, intent, love, the decision made a half-second before it is acted on.",
-     "cannot": "You cannot stop reading. The Somatics say knowing every body in a room is its own kind of loneliness."
-    }
-   ],
-   "powerSystem": "reach_body_mind",
-   "gated": "learned",
-   "challengeTypes": [
-    "INVESTIGATE",
-    "FIGHT"
-   ],
-   "challengeProfile": {
-    "INVESTIGATE": 2,
-    "FIGHT": 1,
-    "PUZZLE": 1
-   },
-   "tradition": "somatic",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "mind_read_folk",
-   "name": "Cold-Read",
-   "levelReq": 1,
-   "energyCost": 3,
-   "attribute": "mental",
-   "axes": {
-    "body_mind": 0.3
-   },
-   "functions": [
-    "reveal"
-   ],
-   "narrationHints": "The turn of a mind inferred from a hundred small signs.",
-   "description": "Infer another's thoughts and intent from micro-signals — not magic, mastery of tells.",
-   "notFor": "Actual telepathy; the disciplined/alien.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Cold-Read",
-     "grants": "Deduce a person's likely thoughts and next move from their signals.",
-     "cannot": "Inference, not certainty; masters and non-humans resist."
-    },
-    {
-     "rank": 2,
-     "name": "The Cold Line",
-     "grants": "Follow a mind's reasoning as it happens — where it is going, what it has already ruled out.",
-     "cannot": "You follow the reasoning, not the reasons. A mind moving on feeling is opaque to a cold line."
-    },
-    {
-     "rank": 3,
-     "name": "The Open Book",
-     "grants": "A mind at rest is legible to you — its shape, its habits, the thing it keeps returning to.",
-     "cannot": "The Cogitants consider unbidden reading a violence, and they are right, and they do it anyway."
-    }
-   ],
-   "powerSystem": "reach_body_mind",
-   "gated": "learned",
-   "challengeTypes": [
-    "SOCIAL",
-    "INVESTIGATE"
-   ],
-   "challengeProfile": {
-    "INVESTIGATE": 2,
-    "FIGHT": 1,
-    "PUZZLE": 1
-   },
-   "tradition": "cogitant",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "second_wind",
-   "name": "Second Wind",
-   "levelReq": 1,
-   "energyCost": 4,
-   "attribute": "physical",
-   "axes": {
-    "body_mind": -0.3
-   },
-   "functions": [
-    "empower",
-    "sustain",
-    "heal"
-   ],
-   "narrationHints": "Past the wall, and the body finds more.",
-   "description": "Push the body past exhaustion, pain, or shock for a burst — folk-Soma.",
-   "notFor": "True healing; limitless use.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Second Wind",
-     "grants": "Ignore pain, fatigue, or shock for a short, decisive burst of physical effort.",
-     "cannot": "The body remembers the debt; overuse breaks you."
-    },
-    {
-     "rank": 2,
-     "name": "The Third Wind",
-     "grants": "Find breath and strength past where the body had none — twice, in one day, at a cost.",
-     "cannot": "The body is borrowing from tomorrow, and tomorrow collects with interest."
-    },
-    {
-     "rank": 3,
-     "name": "The Wind That Doesn't End",
-     "grants": "Go on past exhaustion for as long as the thing needs doing — the body simply does not stop.",
-     "cannot": "It does not stop, but it does break. Somatics who lean on this die young and know it."
-    }
-   ],
-   "powerSystem": "reach_body_mind",
-   "gated": "learned",
-   "challengeTypes": [
-    "SURVIVE",
-    "CHASE",
-    "FIGHT"
-   ],
-   "challengeProfile": {
-    "SURVIVE": 3,
-    "CHASE": 2,
-    "EXPLORE": 2
-   },
-   "tradition": "somatic",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "total_focus",
-   "name": "Total Focus",
-   "levelReq": 1,
-   "energyCost": 4,
-   "attribute": "mental",
-   "axes": {
-    "body_mind": 0.3
-   },
-   "functions": [
-    "resist",
-    "reveal"
-   ],
-   "narrationHints": "The world narrows to the one thing, and nothing reaches you.",
-   "description": "Enter absolute focus — ignore fear, distraction, and pain to think or work clean. Folk-Noesis.",
-   "notFor": "Physical feats; wisdom.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Total Focus",
-     "grants": "Focus so completely that fear, pain, and distraction fall away while you think or work.",
-     "cannot": "Can miss the body's warnings; tight focus narrows the view."
-    },
-    {
-     "rank": 2,
-     "name": "The Narrowed World",
-     "grants": "Narrow to one thing so completely that fear, pain, and noise stop reaching you.",
-     "cannot": "What you narrow out is still happening. People have been focused to death."
-    },
-    {
-     "rank": 3,
-     "name": "The Single Point",
-     "grants": "Narrow to one thing so completely that nothing else exists — not fear, not pain, not the wound you are standing on. The task is completed.",
-     "cannot": "You will not notice what it cost until afterward. Cogitants have finished the task and then simply fallen over."
-    }
-   ],
-   "powerSystem": "reach_body_mind",
-   "gated": "learned",
-   "challengeTypes": [
-    "FIGHT",
-    "PUZZLE",
-    "SURVIVE"
-   ],
-   "challengeProfile": {
-    "FIGHT": 2,
-    "DUEL": 2,
-    "INVESTIGATE": 2
-   },
-   "tradition": "cogitant",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "perfect_motion",
-   "name": "Perfect Motion",
-   "levelReq": 2,
-   "energyCost": 5,
-   "attribute": "physical",
-   "axes": {
-    "body_mind": -0.4
-   },
-   "functions": [
-    "move",
-    "shield",
-    "resist"
-   ],
-   "narrationHints": "The body does exactly and only what's needed, flawlessly.",
-   "description": "Execute a physical feat with impossible precision and economy — mid-tier Soma.",
-   "notFor": "Feats past the body's true ceiling; thought-work.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Perfect Motion",
-     "grants": "Perform a physical act at the very edge of the possible — balance, speed, precision, control.",
-     "cannot": "The true limit still holds; costs the body dearly."
-    },
-    {
-     "rank": 2,
-     "name": "The Unwasted Motion",
-     "grants": "No motion you make is wasted — every step, block, and reach does exactly and only what it must.",
-     "cannot": "Efficiency is not power. A perfect motion still loses to a stronger one."
-    },
-    {
-     "rank": 3,
-     "name": "Motion Without Thought",
-     "grants": "The body acts correctly before the mind knows there was a decision — and it is right.",
-     "cannot": "The body chooses. If you have trained it badly, it will do that beautifully."
-    }
-   ],
-   "powerSystem": "reach_body_mind",
-   "gated": "learned",
-   "challengeTypes": [
-    "DUEL",
-    "CHASE",
-    "EXPLORE"
-   ],
-   "challengeProfile": {
-    "CHASE": 2,
-    "EXPLORE": 2,
-    "FIGHT": 2,
-    "DUEL": 2,
-    "SURVIVE": 1
-   },
-   "tradition": "somatic",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "memory_palace",
-   "name": "Memory-Palace",
-   "levelReq": 3,
-   "energyCost": 6,
-   "attribute": "mental",
-   "axes": {
-    "body_mind": 0.4,
-    "concrete_abstract": 0.3
-   },
-   "functions": [
-    "reveal",
-    "restore"
-   ],
-   "narrationHints": "Vast knowledge held in a built inner architecture, retrieved instantly.",
-   "description": "Hold and instantly retrieve vast structured knowledge; model a person or system in the mind — mid-tier Noesis.",
-   "notFor": "Wisdom; presence in the body it forgets.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Memory-Palace",
-     "grants": "Store and recall huge structured knowledge; model and predict a system or person in your head.",
-     "cannot": "Only as good as its inputs; living in the model loses the room."
-    },
-    {
-     "rank": 2,
-     "name": "The Deeper Rooms",
-     "grants": "Store not just facts but experiences whole — walk back into a conversation and hear it again exactly.",
-     "cannot": "What you store, you keep. Including what you would rather have let fade."
-    },
-    {
-     "rank": 3,
-     "name": "The Palace Entire",
-     "grants": "Nothing you have attended to is lost. The whole of your life is a place you can walk through.",
-     "cannot": "The Cogitants who build the deepest palaces have trouble leaving them."
-    }
-   ],
-   "powerSystem": "reach_body_mind",
-   "gated": "learned",
-   "challengeTypes": [
-    "INVESTIGATE",
-    "PUZZLE"
-   ],
-   "challengeProfile": {
-    "INVESTIGATE": 3,
-    "SOCIAL": 2,
-    "FIGHT": 1,
-    "PUZZLE": 1,
-    "DUEL": 1
-   },
-   "tradition": "cogitant",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "the_whole_act",
-   "name": "The Whole Act",
-   "levelReq": 4,
-   "energyCost": 9,
-   "attribute": "physical",
-   "axes": {
-    "body_mind": 0.0
-   },
-   "functions": [
-    "move",
-    "reveal"
-   ],
-   "narrationHints": "Thought and motion stop being two things.",
-   "description": "The braid-craft: body and mind as one instrument, acting faster than either could decide — the Middle Way's ideal.",
-   "notFor": "Body-heavy or mind-heavy wielders (needs both near-equal); the extremes.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "The Whole Act",
-     "grants": "Act with body and mind fused — perception, decision, and motion as a single instant.",
-     "cannot": "Needs both trained near-equal; the pure poles cannot do it."
-    }
-   ],
-   "powerSystem": "reach_body_mind",
-   "gated": "learned",
-   "challengeTypes": [
-    "FIGHT",
-    "DUEL"
-   ],
-   "challengeProfile": {
-    "CHASE": 3,
-    "EXPLORE": 2,
-    "INVESTIGATE": 2,
-    "FIGHT": 1,
-    "PUZZLE": 1
-   },
-   "tradition": "somatic",
-   "nativeOrCombination": "combination"
-  },
-  {
-   "id": "pathless_way",
-   "name": "The Pathless Way",
-   "levelReq": 5,
-   "energyCost": 10,
-   "attribute": "physical",
-   "axes": {
-    "body_mind": -0.3,
-    "space_time": 0.2
-   },
-   "functions": [
-    "travel",
-    "sustain",
-    "resist"
-   ],
-   "challengeProfile": {
-    "EXPLORE": 3,
-    "CHASE": 2,
-    "SURVIVE": 2
-   },
-   "narrationHints": "The unclimbable is climbed, the uncrossable crossed — the body finds a way where there is none.",
-   "description": "The traversal capstone: cross terrain that stops everyone else — sheer faces, killing cold, drowning fords, the deep dark — by mastery of the body pushed past every ordinary limit.",
-   "notFor": "Teleportation or flight (it's mastery, not magic); carrying others easily; ignoring true lethality unwarned.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "The Pathless Way",
-     "grants": "Cross the uncrossable — any natural barrier yields to enough skill, breath, and will; lead a party through what would kill them alone.",
-     "cannot": "The truly impossible (a sheer mile of ice in a storm) still exacts a price; you can fail, spectacularly, and the fall is real."
-    }
-   ],
-   "powerSystem": "reach_body_mind",
-   "gated": "learned",
-   "tradition": "somatic",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "skydancer",
-   "name": "Skydancer",
-   "levelReq": 4,
-   "energyCost": 9,
-   "attribute": "physical",
-   "axes": {
-    "body_mind": -0.3,
-    "space_time": 0.2
-   },
-   "functions": [
-    "move",
-    "travel"
-   ],
-   "challengeProfile": {
-    "EXPLORE": 3,
-    "CHASE": 3,
-    "FIGHT": 1
-   },
-   "narrationHints": "The body treats the air like ground — a leap becomes a bound becomes something the earth stopped being able to stop.",
-   "description": "Flight-by-mastery: prodigious leaps, wall-runs, glides, and air-steps that keep you aloft in bursts. Not true hovering — a body so trained the air briefly holds it. Cross rooftops, chasms, close on a fleeing foe from above.",
-   "notFor": "Sustained hovering or true flight (it's bursts, momentum-bound); carrying heavy loads aloft.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Skydancer",
-     "grants": "Move through the air in bounds, glides, and wall-runs — cross gaps, scale heights, drop on a target.",
-     "cannot": "Momentum-bound (you must keep moving, no hover); a mistimed step falls; heavy burden grounds you."
-    }
-   ],
-   "powerSystem": "reach_body_mind",
-   "gated": "learned",
-   "tradition": "somatic",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "the_working_model",
-   "name": "The Working Model",
-   "levelReq": 3,
-   "energyCost": 2,
-   "powerSystem": "attribute",
-   "attribute": "mental",
-   "axes": {
-    "body_mind": 0.4,
-    "concrete_abstract": 0.4
-   },
-   "effectTags": [
-    "construct",
-    "analyze",
-    "precision"
-   ],
-   "narrationHints": "Think it through until it builds itself. A plan become a blueprint become a thing.",
-   "description": "You can think a thing into existence — model it so completely in your mind that the making is just following the thought.",
-   "notFor": [],
-   "tradition": "cogitant",
-   "harmRung": "none",
-   "functions": [
-    "make",
-    "reveal"
-   ],
-   "challengeTypes": [
-    "craft",
-    "technical",
-    "intellectual"
-   ],
-   "challengeProfile": {
-    "cognitive": 0.7,
-    "physical": 0.1,
-    "social": 0.2
-   },
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Blueprint",
-     "grants": "Think through a construction or modification so precisely that the making is near-guaranteed, even with inferior tools; identify exactly what you need before you touch anything.",
-     "cannot": null
-    },
-    {
-     "rank": 2,
-     "name": "The Complete Model",
-     "grants": "Build a mental model of a complex system — a machine, a building, a body — complete enough to diagnose its faults and redesign its structure from the inside out.",
-     "cannot": null
-    },
-    {
-     "rank": 3,
-     "name": "Think-Built",
-     "grants": "A thing you have modeled completely you can build with uncanny precision and speed — faster and more accurately than available materials or tools should allow.",
-     "cannot": null
-    }
-   ],
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "the_necessary_case",
-   "name": "The Necessary Case",
-   "levelReq": 3,
-   "energyCost": 2,
-   "powerSystem": "attribute",
-   "attribute": "mental",
-   "axes": {
-    "body_mind": 0.4,
-    "concrete_abstract": 0.3
-   },
-   "effectTags": [
-    "argument",
-    "logic",
-    "pressure"
-   ],
-   "narrationHints": "Not persuasion. Demonstration. The conclusion is the only place the logic goes.",
-   "description": "You present a case so airtight that refusal becomes irrational. Not manipulation — proof. The other person can disagree, but they cannot explain why.",
-   "notFor": [],
-   "tradition": "cogitant",
-   "harmRung": "none",
-   "functions": [
-    "command",
-    "bind",
-    "reveal"
-   ],
-   "challengeTypes": [
-    "social",
-    "intellectual",
-    "negotiation"
-   ],
-   "challengeProfile": {
-    "cognitive": 0.6,
-    "social": 0.4,
-    "physical": 0.0
-   },
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Closed Argument",
-     "grants": "Present a case so logically complete that the other person cannot find a gap — not because you've overwhelmed them, but because there isn't one.",
-     "cannot": null
-    },
-    {
-     "rank": 2,
-     "name": "Demonstrated Necessity",
-     "grants": "Show that a conclusion follows so inevitably that the person cannot act against it without explaining why — and you can dismantle whatever they offer.",
-     "cannot": null
-    },
-    {
-     "rank": 3,
-     "name": "The Only Conclusion",
-     "grants": "Make the logic of a situation so visible that a group reorganizes around it — not because you commanded them, but because the structure of the situation leaves no other rational position.",
-     "cannot": null
-    }
-   ],
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "the_clear_path",
-   "name": "The Clear Path",
-   "levelReq": 2,
-   "energyCost": 1,
-   "powerSystem": "attribute",
-   "attribute": "mental",
-   "axes": {
-    "body_mind": 0.3,
-    "space_time": 0.2
-   },
-   "effectTags": [
-    "navigation",
-    "prediction",
-    "movement"
-   ],
-   "narrationHints": "The gap is there before you look. The model says where to step.",
-   "description": "Navigate by modeling everything — obstacles, crowd, guard rotation — before you move a foot. The path is solved before it is walked.",
-   "notFor": [],
-   "tradition": "cogitant",
-   "harmRung": "none",
-   "functions": [
-    "move",
-    "reveal",
-    "foresee"
-   ],
-   "challengeTypes": [
-    "navigation",
-    "stealth",
-    "tactical"
-   ],
-   "challengeProfile": {
-    "cognitive": 0.6,
-    "physical": 0.3,
-    "social": 0.1
-   },
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Modeled Route",
-     "grants": "Find the quickest, safest route through any observable space — crowd, ruin, wilderness — by calculating rather than feeling your way.",
-     "cannot": null
-    },
-    {
-     "rank": 2,
-     "name": "Anticipatory Movement",
-     "grants": "Move through a dynamic space without friction by staying two steps ahead of everyone in it — the guard, the crowd, the chaos.",
-     "cannot": null
-    },
-    {
-     "rank": 3,
-     "name": "The Written Choreography",
-     "grants": "In a space you understand, you move as if you designed the whole scene — every obstacle parts, every gap opens, every opening appears the instant you need it.",
-     "cannot": null
-    }
-   ],
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "the_long_form",
-   "name": "The Long Form",
-   "levelReq": 2,
-   "energyCost": 1,
-   "powerSystem": "attribute",
-   "attribute": "mental",
-   "axes": {
-    "body_mind": 0.4
-   },
-   "effectTags": [
-    "endurance",
-    "cognition",
-    "persistence"
-   ],
-   "narrationHints": "The problem is still there. So is the mind working it.",
-   "description": "Mental work that doesn't stop — held across days, against exhaustion, against everything that says to let go.",
-   "notFor": [],
-   "tradition": "cogitant",
-   "harmRung": "none",
-   "functions": [
-    "sustain",
-    "resist"
-   ],
-   "challengeTypes": [
-    "endurance",
-    "intellectual",
-    "hardship"
-   ],
-   "challengeProfile": {
-    "cognitive": 0.7,
-    "physical": 0.3,
-    "social": 0.0
-   },
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Maintained Function",
-     "grants": "Hold a complex train of thought through interruption, fear, pain, or deprivation; return to exactly where you were without loss.",
-     "cannot": null
-    },
-    {
-     "rank": 2,
-     "name": "Extended Work",
-     "grants": "Sustain complex cognitive work — a problem, a plan, a translation — across days without the thinking degrading, even as sleep and food grow scarce.",
-     "cannot": null
-    },
-    {
-     "rank": 3,
-     "name": "The Mind That Holds",
-     "grants": "Your mind is simply the last thing to fail. Function clearly under conditions that have broken better bodies — cold, injury, grief, weeks of pressure — until the work is done.",
-     "cannot": null
-    }
-   ],
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "the_shaped_body",
-   "name": "The Shaped Body",
-   "levelReq": 3,
-   "energyCost": 2,
-   "powerSystem": "attribute",
-   "attribute": "physical",
-   "axes": {
-    "body_mind": -0.4
-   },
-   "effectTags": [
-    "transform",
-    "adapt",
-    "discipline"
-   ],
-   "narrationHints": "Train the body past what the body thinks it can be. A new configuration, held.",
-   "description": "Reshape a physical capacity through extreme, focused training — not temporary effort, but permanent change in what the body is capable of.",
-   "notFor": [],
-   "tradition": "somatic",
-   "harmRung": "none",
-   "functions": [
-    "transform",
-    "sustain"
-   ],
-   "challengeTypes": [
-    "endurance",
-    "craft",
-    "physical"
-   ],
-   "challengeProfile": {
-    "cognitive": 0.1,
-    "physical": 0.8,
-    "social": 0.1
-   },
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Focused Adaptation",
-     "grants": "Through extreme, focused training, significantly alter one specific physical capacity — grip strength, pain threshold, cold tolerance, sprinting burst — in ways ordinary training doesn't reach.",
-     "cannot": null
-    },
-    {
-     "rank": 2,
-     "name": "New Configuration",
-     "grants": "Reshape something structural about how you move across weeks of sustained effort — a different gait, a changed shoulder set, a fundamental adaptation that the body now holds.",
-     "cannot": null
-    },
-    {
-     "rank": 3,
-     "name": "The Body Is Clay",
-     "grants": "You have worked your body long enough to know it as material. Any physical capacity you turn full, sustained attention to becomes, in time, what you need it to be.",
-     "cannot": null
-    }
-   ],
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "the_weight_of_presence",
-   "name": "The Weight of Presence",
-   "levelReq": 2,
-   "energyCost": 1,
-   "powerSystem": "attribute",
-   "attribute": "physical",
-   "axes": {
-    "body_mind": -0.3,
-    "violence_peace": 0.1
-   },
-   "effectTags": [
-    "authority",
-    "gravity",
-    "presence"
-   ],
-   "narrationHints": "Full inhabitation of a body has a gravity. Other bodies feel it before the mind does.",
-   "description": "Your physical presence is difficult to ignore or act against — not threat, but the authority of someone completely at home in their body.",
-   "notFor": [],
-   "tradition": "somatic",
-   "harmRung": "none",
-   "functions": [
-    "command",
-    "bind"
-   ],
-   "challengeTypes": [
-    "social",
-    "tactical",
-    "intimidation"
-   ],
-   "challengeProfile": {
-    "cognitive": 0.1,
-    "physical": 0.5,
-    "social": 0.4
-   },
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Present Weight",
-     "grants": "Your physical presence in a space is difficult to ignore — people make room, the uneasy grow more so, those considering action against you reconsider.",
-     "cannot": null
-    },
-    {
-     "rank": 2,
-     "name": "The Organizing Fact",
-     "grants": "Command a space through presence alone — enter a room and it restructures; stand still and the situation organizes itself relative to where you are.",
-     "cannot": null
-    },
-    {
-     "rank": 3,
-     "name": "Immovable Ground",
-     "grants": "Your presence is the fixed fact in a room. Anyone who would act against you must first account for what your body represents — and most find they cannot.",
-     "cannot": null
-    }
-   ],
-   "nativeOrCombination": "native"
-  },
-  {
-   "schemaVersion": 1,
-   "id": "the_unmoving_mind",
-   "name": "The Unmoving Mind",
-   "levelReq": 4,
-   "energyCost": 11,
-   "powerSystem": "reach_body_mind",
-   "tradition": "cogitant",
-   "attribute": "mental",
-   "axes": {
-    "body_mind": 0.7
-   },
-   "functions": [
-    "resist",
-    "reveal"
-   ],
-   "narrationHints": "Everything they throw at your thoughts slides off a stillness that was there before they arrived and will be there after they tire. You did not brace. You were simply already still.",
-   "description": "The Cogitant art of mushin — no-mind, the perfect stillness that nothing can move: not fear, not deception, not the fastest attack, because a mind that does not flinch reads everything and grants nothing. The blade-discipline made total.",
-   "notFor": "It is defense and clarity, never force — you cannot strike with stillness, only see and endure. And a mind held perfectly still holds nothing else; while you are unmoving you are only unmoving.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "The Unmoving Mind",
-     "grants": "Enter a perfect mental stillness — immune to fear, deception, and disruption, reading all with total clarity.",
-     "cannot": "It grants no offense, only the unshakeable read; it occupies you wholly to hold; and a stillness this deep can look, to those who love you, like you have gone somewhere they cannot follow."
-    }
-   ],
-   "gated": "learned",
-   "nativeOrCombination": "native",
-   "challengeTypes": [
-    "DEFEND",
-    "INVESTIGATE"
-   ],
-   "challengeProfile": {
-    "DEFEND": 4,
-    "INVESTIGATE": 4
-   }
-  },
-  {
-   "schemaVersion": 1,
-   "id": "the_single_stroke",
-   "name": "The Single Stroke",
-   "levelReq": 5,
-   "energyCost": 13,
-   "powerSystem": "reach_body_mind",
-   "tradition": "cogitant",
-   "attribute": "mental",
-   "axes": {
-    "body_mind": 0.8
-   },
-   "functions": [
-    "strike",
-    "foresee"
-   ],
-   "narrationHints": "You have already seen it — the one moment, the only opening, the single stroke that ends the contest before it was properly a contest. You do not rush. You wait for the instant you already know is coming, and then it simply is.",
-   "description": "The Cogitant capstone — mind and act become one perfect stroke, the whole contest read to its single decisive instant and then delivered without waste. The sword-saint's art: not the fastest blade, the ONLY necessary one.",
-   "notFor": "One stroke, read and delivered perfectly, at enormous cost of focus — and it demands the opening be real; against something with no decisive instant (a flood, a crowd, a lie with no center) there is no single stroke to find.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "The Single Stroke",
-     "grants": "Read a contest to its one decisive instant and deliver the single perfect stroke that ends it.",
-     "cannot": "It costs nearly all your focus, it requires a real decisive instant to exist, and it is the blade's truth and the pen's alike — some contests have no single stroke, and mistaking that is how the sure-handed fall."
-    }
-   ],
-   "gated": "learned",
-   "nativeOrCombination": "native",
-   "challengeTypes": [
-    "FIGHT"
-   ],
-   "challengeProfile": {
-    "FIGHT": 5
-   },
-   "harmRung": "lethal"
-  }
- ],
- "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
+  ],
+  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
 }

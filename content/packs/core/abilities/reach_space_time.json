@@ -1,1028 +1,941 @@
 {
- "schemaVersion": 1,
- "powerSystem": "reach_space_time",
- "gated": "learned",
- "note": "Crafts of The Open Reach/The Kept Reach (space_time axis). SPANWORK is the space-pole craft of the Horizon-Walkers — nomads for whom everywhere is a place not yet arrived; HOURCRAFT is the time-pole craft of the Hourkeepers, who tend duration and pay for it. The Valley's Shortfold and Waygate are folk-shadows of Spanwork. NOTE (engine): these crafts touch the world-clock (SNG-041) — hour-craft effects are LOCAL to the active frame and never rewrite the shared absolute clock. Authored by Aevi, SNG-054.",
- "abilities": [
-  {
-   "id": "spanwork",
-   "name": "Spanwork",
-   "levelReq": 2,
-   "energyCost": 6,
-   "powerSystem": "reach_space_time",
-   "attribute": "physical",
-   "axes": {
-    "space_time": -0.5,
-    "chaos_order": -0.1
-   },
-   "functions": [
-    "travel",
-    "reveal"
-   ],
-   "narrationHints": "The distance was there a moment ago. It is somehow no longer the point.",
-   "description": "The space-pole mastery: distance as a material to be worked. To a Horizon-Walker, 'far' is a claim, and claims can be argued with.",
-   "notFor": "Time (Hourcraft's country); arriving somewhere you cannot picture.",
-   "tree": [
+  "schemaVersion": 1,
+  "powerSystem": "reach_space_time",
+  "gated": "learned",
+  "note": "Crafts of The Open Reach/The Kept Reach (space_time axis). SPANWORK is the space-pole craft of the Horizon-Walkers — nomads for whom everywhere is a place not yet arrived; HOURCRAFT is the time-pole craft of the Hourkeepers, who tend duration and pay for it. The Valley's Shortfold and Waygate are folk-shadows of Spanwork. NOTE (engine): these crafts touch the world-clock (SNG-041) — hour-craft effects are LOCAL to the active frame and never rewrite the shared absolute clock. Authored by Aevi, SNG-054.",
+  "abilities": [
     {
-     "rank": 1,
-     "name": "The Long Stride",
-     "grants": "Cover ground far past what a body should — a day's march in an hour, tirelessly.",
-     "cannot": "The ground is still crossed. What is on it still meets you."
+      "id": "spanwork",
+      "name": "Spanwork",
+      "levelReq": 2,
+      "energyCost": 6,
+      "powerSystem": "reach_space_time",
+      "attribute": "physical",
+      "axes": {
+        "space_time": -0.5,
+        "chaos_order": -0.1
+      },
+      "functions": [
+        "travel",
+        "reveal"
+      ],
+      "narrationHints": "The distance was there a moment ago. It is somehow no longer the point.",
+      "description": "The space-pole mastery: distance as a material to be worked. To a Horizon-Walker, 'far' is a claim, and claims can be argued with.",
+      "notFor": "Time (Hourcraft's country); arriving somewhere you cannot picture.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Long Stride",
+          "grants": "Cover ground far past what a body should — a day's march in an hour, tirelessly.",
+          "cannot": "The ground is still crossed. What is on it still meets you."
+        },
+        {
+          "rank": 2,
+          "name": "The Closed Distance",
+          "grants": "Close a distance you can see — arrive at the far ridge, the far bank, the far door, without crossing the between.",
+          "cannot": "You must SEE it. And whatever was in the between is still in the between, un-dealt-with."
+        },
+        {
+          "rank": 3,
+          "name": "The Open Reach",
+          "grants": "Distance stops being an obstacle for you and those you carry — the far place is simply a place you may be.",
+          "cannot": "The world is very large. Horizon-Walkers at this depth stop being FROM anywhere, and it is not always a gift."
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "EXPLORE",
+        "CHASE",
+        "FIGHT"
+      ],
+      "tradition": "horizon",
+      "nativeOrCombination": "native"
     },
     {
-     "rank": 2,
-     "name": "The Closed Distance",
-     "grants": "Close a distance you can see — arrive at the far ridge, the far bank, the far door, without crossing the between.",
-     "cannot": "You must SEE it. And whatever was in the between is still in the between, un-dealt-with."
+      "id": "way_sense",
+      "name": "Way-Sense",
+      "levelReq": 1,
+      "energyCost": 3,
+      "powerSystem": "reach_space_time",
+      "attribute": "physical",
+      "axes": {
+        "space_time": -0.3
+      },
+      "functions": [
+        "track",
+        "travel",
+        "reveal"
+      ],
+      "narrationHints": "He knows which way, and does not know how he knows.",
+      "description": "Know where you are, where things lie, and the true way between — the first gift of the Open Reach.",
+      "notFor": "Reading time; knowing what waits at the far end.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Way-Sense",
+          "grants": "Never be lost. Know your bearing, your distance, and the shape of the way ahead.",
+          "cannot": "Knowing the way is not knowing what is on it."
+        },
+        {
+          "rank": 2,
+          "name": "The Read Road",
+          "grants": "Read a route's true cost before walking it — where it will be hard, where it will be watched, where it lies.",
+          "cannot": "A read road is still a road. It does not walk itself."
+        },
+        {
+          "rank": 3,
+          "name": "The Whole Map",
+          "grants": "Hold a region entire in your sense of it — every way in, every way out, every gap between the ways.",
+          "cannot": "Regions change. The map you hold is the one you built, and it ages."
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "EXPLORE",
+        "CHASE"
+      ],
+      "tradition": "horizon",
+      "nativeOrCombination": "native"
     },
     {
-     "rank": 3,
-     "name": "The Open Reach",
-     "grants": "Distance stops being an obstacle for you and those you carry — the far place is simply a place you may be.",
-     "cannot": "The world is very large. Horizon-Walkers at this depth stop being FROM anywhere, and it is not always a gift."
+      "id": "hourcraft",
+      "name": "Hourcraft",
+      "levelReq": 2,
+      "energyCost": 6,
+      "powerSystem": "reach_space_time",
+      "attribute": "mental",
+      "axes": {
+        "space_time": 0.5,
+        "chaos_order": 0.2
+      },
+      "functions": [
+        "foresee",
+        "bind",
+        "reveal"
+      ],
+      "narrationHints": "The moment does not pass. It sits there, being looked at.",
+      "description": "The time-pole mastery: duration tended, held, and read. The Hourkeepers remember forward and backward, and pay for both.",
+      "notFor": "Space (Spanwork's country); undoing what happened — nothing undoes.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Kept Hour",
+          "grants": "Hold a moment exactly — perceive it whole, at length, while it is still happening.",
+          "cannot": "The moment still passes for everyone else. You get to look; you do not get to act longer."
+        },
+        {
+          "rank": 2,
+          "name": "The Slow Hour",
+          "grants": "Slow duration around you — a fight, a fall, a conversation stretches, and you have room inside it.",
+          "cannot": "It costs continuously and it costs steeply. And the world outside your slow hour arrives on time regardless."
+        },
+        {
+          "rank": 3,
+          "name": "The Pre-Remembered",
+          "grants": "Remember forward — an hour that has not happened arrives in you as memory does, with a memory's specificity and a memory's unreliability.",
+          "cannot": "You cannot tell a true pre-memory from a feared one. Hourkeepers who trust it wrongly are the reason the craft is feared."
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "INVESTIGATE",
+        "FIGHT",
+        "SOCIAL"
+      ],
+      "tradition": "hourkeeper",
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "hour_sense",
+      "name": "Hour-Sense",
+      "levelReq": 1,
+      "energyCost": 3,
+      "powerSystem": "reach_space_time",
+      "attribute": "mental",
+      "axes": {
+        "space_time": 0.3
+      },
+      "functions": [
+        "foresee",
+        "reveal"
+      ],
+      "narrationHints": "She knows how long it has been, and how long it has left.",
+      "description": "Know duration truly — how long since, how long until — the first gift of the Kept Reach.",
+      "notFor": "Knowing WHAT will happen. This knows WHEN.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Hour-Sense",
+          "grants": "Know exactly how long since a thing happened, and how long until a thing due will come.",
+          "cannot": "When, never what. The hour is knowable; the event is not."
+        },
+        {
+          "rank": 2,
+          "name": "The Long Count",
+          "grants": "Read the age of a place, a wound, a working, or a lie — and when it will fail.",
+          "cannot": "It counts. It does not care whether you are ready."
+        },
+        {
+          "rank": 3,
+          "name": "The Kept Ledger",
+          "grants": "Hold the whole duration of a place or a people — its beginning, its hours, and the hour it is running out of.",
+          "cannot": "Knowing a people's remaining hours and being unable to say so is the Hourkeepers' particular grief."
+        }
+      ],
+      "gated": "learned",
+      "challengeTypes": [
+        "INVESTIGATE",
+        "EXPLORE"
+      ],
+      "tradition": "hourkeeper",
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "the_long_reach",
+      "name": "The Long Reach",
+      "levelReq": 2,
+      "energyCost": 1,
+      "powerSystem": "attribute",
+      "attribute": "physical",
+      "axes": {
+        "space_time": -0.4,
+        "violence_peace": 0.2
+      },
+      "effectTags": [
+        "range",
+        "distance",
+        "strike"
+      ],
+      "narrationHints": "The distance was their advantage. He closed it in the throwing.",
+      "description": "Attack at range or in motion — the horizon fighter's harm is always the far brought suddenly close.",
+      "notFor": [],
+      "tradition": "horizon",
+      "harmRung": "damaging",
+      "functions": [
+        "strike",
+        "move"
+      ],
+      "challengeTypes": [
+        "combat",
+        "ranged",
+        "tactical"
+      ],
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Distance Closed",
+          "grants": "Strike from further away than expected — a thrown weapon, a sprint into contact, an attack timed at the moment of arrival.",
+          "cannot": null
+        },
+        {
+          "rank": 2,
+          "name": "The Running Strike",
+          "grants": "Attack in full motion — without losing accuracy or force to the movement; the speed is the weapon.",
+          "cannot": null
+        },
+        {
+          "rank": 3,
+          "name": "From Wherever You Are",
+          "grants": "Distance ceases to reduce your effectiveness — whether across a room or across a field, you arrive with full force or make the throw as if there were no gap at all.",
+          "cannot": null
+        }
+      ],
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "the_fresh_horizon",
+      "name": "The Fresh Horizon",
+      "levelReq": 2,
+      "energyCost": 2,
+      "powerSystem": "attribute",
+      "attribute": "physical",
+      "axes": {
+        "space_time": -0.3
+      },
+      "effectTags": [
+        "restoration",
+        "renewal",
+        "distance"
+      ],
+      "narrationHints": "The next ridge. The next valley. The sight of more ahead is what keeps them going.",
+      "description": "Distance restores — a journey that heals, the sight of the next horizon renewing the will to go on.",
+      "notFor": [],
+      "tradition": "horizon",
+      "harmRung": "none",
+      "functions": [
+        "restore",
+        "empower"
+      ],
+      "challengeTypes": [
+        "healing",
+        "morale",
+        "endurance"
+      ],
+      "tree": [
+        {
+          "rank": 1,
+          "name": "New Ground",
+          "grants": "Move to a new place and the weight of the last one lifts — wounds feel less, fear recedes, the body and will recover in the way only distance makes possible.",
+          "cannot": null
+        },
+        {
+          "rank": 2,
+          "name": "The Road Restores",
+          "grants": "A journey restores the party — physically and otherwise; the movement is the medicine, and you know how to pace it so it heals rather than depletes.",
+          "cannot": null
+        },
+        {
+          "rank": 3,
+          "name": "Always More Ahead",
+          "grants": "Show someone the next horizon and it fills them again — despair fails against the sight of further to go, and you can make that sight real.",
+          "cannot": null
+        }
+      ],
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "the_kept_distance",
+      "name": "The Kept Distance",
+      "levelReq": 2,
+      "energyCost": 1,
+      "powerSystem": "attribute",
+      "attribute": "physical",
+      "axes": {
+        "space_time": -0.3
+      },
+      "effectTags": [
+        "range",
+        "evasion",
+        "protection"
+      ],
+      "narrationHints": "The threat was real. She simply stayed where it wasn't.",
+      "description": "Protection through range — keep the threat far and its power collapses.",
+      "notFor": [],
+      "tradition": "horizon",
+      "harmRung": "none",
+      "functions": [
+        "shield",
+        "move"
+      ],
+      "challengeTypes": [
+        "combat",
+        "evasion",
+        "tactical"
+      ],
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Out of Reach",
+          "grants": "Maintain enough distance that what threatens you cannot effectively reach you — moving before it closes, keeping the gap that keeps you safe.",
+          "cannot": null
+        },
+        {
+          "rank": 2,
+          "name": "The Managed Gap",
+          "grants": "Control the distance between yourself and a threat — always too far for it to act, close enough for you to — and maintain that gap through a whole engagement.",
+          "cannot": null
+        },
+        {
+          "rank": 3,
+          "name": "Untouchable Distance",
+          "grants": "Stay perpetually where the threat isn't — and bring others with you. The person who cannot close the gap cannot win.",
+          "cannot": null
+        }
+      ],
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "the_made_crossing",
+      "name": "The Made Crossing",
+      "levelReq": 3,
+      "energyCost": 2,
+      "powerSystem": "attribute",
+      "attribute": "physical",
+      "axes": {
+        "space_time": -0.4
+      },
+      "effectTags": [
+        "path",
+        "distance",
+        "open"
+      ],
+      "narrationHints": "A gap is a statement about what the land thinks is possible. He disagreed.",
+      "description": "Create a crossing where there was none — not by building but by knowing where the distance can be made to yield.",
+      "notFor": [],
+      "tradition": "horizon",
+      "harmRung": "none",
+      "functions": [
+        "make",
+        "open",
+        "travel"
+      ],
+      "challengeTypes": [
+        "exploration",
+        "navigation",
+        "tactical"
+      ],
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Found Way",
+          "grants": "Find a crossing across an obstacle that wasn't apparent — the shallows, the ledge, the fallen tree — by reading terrain the way a horizon-walker does.",
+          "cannot": null
+        },
+        {
+          "rank": 2,
+          "name": "Where the Gap Yields",
+          "grants": "Identify and exploit the specific point where an obstacle can be crossed — not the obvious attempt but the place where the distance relents.",
+          "cannot": null
+        },
+        {
+          "rank": 3,
+          "name": "No Uncrossable Gap",
+          "grants": "Make the crossing — any crossing — by knowing exactly where to commit and exactly how. What the land calls uncrossable is only waiting for someone who can read its grain.",
+          "cannot": null
+        }
+      ],
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "the_land_knowledge",
+      "name": "The Land Knowledge",
+      "levelReq": 2,
+      "energyCost": 1,
+      "powerSystem": "attribute",
+      "attribute": "physical",
+      "axes": {
+        "space_time": -0.3
+      },
+      "effectTags": [
+        "terrain",
+        "authority",
+        "intelligence"
+      ],
+      "narrationHints": "She knew where the pass was before anyone asked. That was enough.",
+      "description": "Command through knowing what others don't — the terrain, the route, the distances that change everything about what's possible.",
+      "notFor": [],
+      "tradition": "horizon",
+      "harmRung": "none",
+      "functions": [
+        "command",
+        "reveal"
+      ],
+      "challengeTypes": [
+        "leadership",
+        "navigation",
+        "social"
+      ],
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Scout's Word",
+          "grants": "Speak with the authority of someone who has been where others haven't — your intelligence about terrain, routes, and distances commands genuine trust.",
+          "cannot": null
+        },
+        {
+          "rank": 2,
+          "name": "The Strategic Ground",
+          "grants": "Use knowledge of land and distance to direct others effectively — the advice that wins a chase, the route that avoids the trap, the position that changes everything.",
+          "cannot": null
+        },
+        {
+          "rank": 3,
+          "name": "Known Land",
+          "grants": "In territory you have walked, your knowledge is comprehensive enough to command any situation that depends on terrain — you are the map and the map is right.",
+          "cannot": null
+        }
+      ],
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "the_road_ahead",
+      "name": "The Road Ahead",
+      "levelReq": 1,
+      "energyCost": 1,
+      "powerSystem": "attribute",
+      "attribute": "physical",
+      "axes": {
+        "space_time": -0.3
+      },
+      "effectTags": [
+        "endurance",
+        "forward",
+        "distance"
+      ],
+      "narrationHints": "As long as there is further to go, they go.",
+      "description": "Sustain through forward motion — the horizon-walker who keeps moving doesn't run out.",
+      "notFor": [],
+      "tradition": "horizon",
+      "harmRung": "none",
+      "functions": [
+        "sustain",
+        "travel"
+      ],
+      "challengeTypes": [
+        "endurance",
+        "survival",
+        "travel"
+      ],
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Keep Walking",
+          "grants": "Sustain movement and function past the ordinary limit — as long as there is ground ahead, you cover it.",
+          "cannot": null
+        },
+        {
+          "rank": 2,
+          "name": "The Sustained March",
+          "grants": "Keep a party moving and functional across brutal distances — through exhaustion, injury, and conditions that would stop others — by knowing how to pace the impossible road.",
+          "cannot": null
+        },
+        {
+          "rank": 3,
+          "name": "No Stopping Place",
+          "grants": "You and your party can go on for as long as the task requires — rest when you must, move when you must — until the road has been walked.",
+          "cannot": null
+        }
+      ],
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "the_wrong_moment",
+      "name": "The Wrong Moment",
+      "levelReq": 2,
+      "energyCost": 1,
+      "powerSystem": "attribute",
+      "attribute": "mental",
+      "axes": {
+        "space_time": 0.4,
+        "violence_peace": 0.1
+      },
+      "effectTags": [
+        "timing",
+        "disruption",
+        "strike"
+      ],
+      "narrationHints": "She waited for the moment they couldn't answer. Then she acted.",
+      "description": "Strike or act at the precise moment when the other person cannot respond — the hourkeeper's harm is perfect timing, not force.",
+      "notFor": [],
+      "tradition": "hourkeeper",
+      "harmRung": "incapacitating",
+      "functions": [
+        "hinder",
+        "strike"
+      ],
+      "challengeTypes": [
+        "combat",
+        "social",
+        "tactical"
+      ],
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Their Bad Moment",
+          "grants": "Identify and act in the precise instant when a person is off-balance, distracted, or committed — so your action lands without meaningful response.",
+          "cannot": null
+        },
+        {
+          "rank": 2,
+          "name": "Chosen Time",
+          "grants": "Dictate when the confrontation happens by waiting for the exact moment that advantages you most — the ambush, the interruption, the word at the one instant it cannot be answered.",
+          "cannot": null
+        },
+        {
+          "rank": 3,
+          "name": "No Good Moment for Them",
+          "grants": "Act in a sequence of moments so precisely chosen that the other person is never in a position to respond effectively — they are always recovering from the last thing when the next arrives.",
+          "cannot": null
+        }
+      ],
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "the_given_time",
+      "name": "The Given Time",
+      "levelReq": 2,
+      "energyCost": 2,
+      "powerSystem": "attribute",
+      "attribute": "mental",
+      "axes": {
+        "space_time": 0.4
+      },
+      "effectTags": [
+        "restoration",
+        "duration",
+        "healing"
+      ],
+      "narrationHints": "She gave them the hour they needed that wasn't there.",
+      "description": "Stretch a moment or buy time that wasn't available — so that what needed longer to heal or resolve has it.",
+      "notFor": [],
+      "tradition": "hourkeeper",
+      "harmRung": "none",
+      "functions": [
+        "heal",
+        "restore"
+      ],
+      "challengeTypes": [
+        "healing",
+        "logistics",
+        "endurance"
+      ],
+      "tree": [
+        {
+          "rank": 1,
+          "name": "A Little More Time",
+          "grants": "Buy the minutes or hours that make a difference — slow enough that care can happen, or hold the situation open long enough that recovery begins.",
+          "cannot": null
+        },
+        {
+          "rank": 2,
+          "name": "The Hour Given",
+          "grants": "Create the time a person or situation needs — not by stopping anything, but by managing the duration so that what needs time to work has time to work.",
+          "cannot": null
+        },
+        {
+          "rank": 3,
+          "name": "All the Time It Needs",
+          "grants": "Hold open the duration of a recovery, a negotiation, or a healing — as long as it requires — without the outside closing in until it is ready.",
+          "cannot": null
+        }
+      ],
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "the_wasted_moment",
+      "name": "The Wasted Moment",
+      "levelReq": 2,
+      "energyCost": 1,
+      "powerSystem": "attribute",
+      "attribute": "mental",
+      "axes": {
+        "space_time": 0.3
+      },
+      "effectTags": [
+        "protection",
+        "timing",
+        "deflection"
+      ],
+      "narrationHints": "She knew the blow was coming. She was elsewhere in it.",
+      "description": "Protect through perfect foreknowledge of timing — make their moment of action count for nothing by not being in it.",
+      "notFor": [],
+      "tradition": "hourkeeper",
+      "harmRung": "none",
+      "functions": [
+        "shield",
+        "foresee"
+      ],
+      "challengeTypes": [
+        "combat",
+        "defense",
+        "tactical"
+      ],
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Their Moment Wasted",
+          "grants": "See the attack forming early enough to be gone before it lands — not blocking, not armoring, but the exact move that empties the moment of consequence.",
+          "cannot": null
+        },
+        {
+          "rank": 2,
+          "name": "No Good Window",
+          "grants": "Protect someone by watching their threat's timing and calling the move — the dodge, the step, the word — at the instant that makes the attack miss without effort.",
+          "cannot": null
+        },
+        {
+          "rank": 3,
+          "name": "The Protected Duration",
+          "grants": "For as long as you attend to a person's safety, no moment that could harm them arrives — you see it and fill or empty it before it becomes a wound.",
+          "cannot": null
+        }
+      ],
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "the_shaped_duration",
+      "name": "The Shaped Duration",
+      "levelReq": 3,
+      "energyCost": 2,
+      "powerSystem": "attribute",
+      "attribute": "mental",
+      "axes": {
+        "space_time": 0.5
+      },
+      "effectTags": [
+        "time",
+        "transform",
+        "duration"
+      ],
+      "narrationHints": "The hour was not the same hour as before. She had worked on it.",
+      "description": "Shape how long something takes — stretch a moment, compress an hour, make duration do what you need rather than what it would naturally do.",
+      "notFor": [],
+      "tradition": "hourkeeper",
+      "harmRung": "none",
+      "functions": [
+        "transform",
+        "bind"
+      ],
+      "challengeTypes": [
+        "tactical",
+        "craft",
+        "intellectual"
+      ],
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Stretched Moment",
+          "grants": "Make a short span feel and function longer — enough to act fully in what should only be an instant.",
+          "cannot": null
+        },
+        {
+          "rank": 2,
+          "name": "Compressed Duration",
+          "grants": "Collapse a long span into less — a day's travel has the fatigue of an hour, a complex process completes in time it shouldn't.",
+          "cannot": null
+        },
+        {
+          "rank": 3,
+          "name": "Duration to Order",
+          "grants": "Shape how long something takes with precision — bend the duration of any ongoing process to what you need it to be.",
+          "cannot": null
+        }
+      ],
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "the_opened_moment",
+      "name": "The Opened Moment",
+      "levelReq": 3,
+      "energyCost": 2,
+      "powerSystem": "attribute",
+      "attribute": "mental",
+      "axes": {
+        "space_time": 0.5
+      },
+      "effectTags": [
+        "passage",
+        "time",
+        "opening"
+      ],
+      "narrationHints": "She stepped between the moments and was already through.",
+      "description": "Open a gap in the flow of events to move through — the hourkeeper's passage happens between moments others don't see.",
+      "notFor": [],
+      "tradition": "hourkeeper",
+      "harmRung": "none",
+      "functions": [
+        "move",
+        "open"
+      ],
+      "challengeTypes": [
+        "stealth",
+        "navigation",
+        "tactical"
+      ],
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Between Moments",
+          "grants": "Move in the gap between one moment and the next — where attention lapses, where the pattern holds its breath — and arrive without being witnessed.",
+          "cannot": null
+        },
+        {
+          "rank": 2,
+          "name": "The Cleared Interval",
+          "grants": "Open a window in time — a pause in a guard rotation, a silence in a conversation, a beat between alarms — and move through it cleanly.",
+          "cannot": null
+        },
+        {
+          "rank": 3,
+          "name": "The Moment Made",
+          "grants": "Create the gap that didn't exist — find or open the instant that allows passage — and step through it, bringing others if needed.",
+          "cannot": null
+        }
+      ],
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "the_long_watch",
+      "name": "The Long Watch",
+      "levelReq": 1,
+      "energyCost": 1,
+      "powerSystem": "attribute",
+      "attribute": "mental",
+      "axes": {
+        "space_time": 0.3
+      },
+      "effectTags": [
+        "endurance",
+        "patience",
+        "duration"
+      ],
+      "narrationHints": "She felt time differently. Waiting was not the hardship it was for others.",
+      "description": "Endure through understanding duration — the hourkeeper who feels time differently can wait, hold, or persist longer than anyone else.",
+      "notFor": [],
+      "tradition": "hourkeeper",
+      "harmRung": "none",
+      "functions": [
+        "sustain",
+        "resist"
+      ],
+      "challengeTypes": [
+        "endurance",
+        "stealth",
+        "hardship"
+      ],
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Patient Duration",
+          "grants": "Hold a position, a vigil, a watch — past the point where others have lost focus or given in — because the passage of time does not wear on you as it does on them.",
+          "cannot": null
+        },
+        {
+          "rank": 2,
+          "name": "The Longer Wait",
+          "grants": "Sustain any activity that requires patience across duration — a negotiation, a stake-out, a long recovery — by feeling the time accurately rather than agonizingly.",
+          "cannot": null
+        },
+        {
+          "rank": 3,
+          "name": "As Long as It Takes",
+          "grants": "You can hold as long as the situation requires — the vigil, the wait, the watch — and remain fully functional throughout. Time is not your enemy.",
+          "cannot": null
+        }
+      ],
+      "nativeOrCombination": "native"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "the_far_step",
+      "name": "The Far Step",
+      "levelReq": 4,
+      "energyCost": 11,
+      "powerSystem": "reach_space_time",
+      "tradition": "horizon",
+      "attribute": "physical",
+      "axes": {
+        "space_time": -0.6
+      },
+      "functions": [
+        "travel"
+      ],
+      "narrationHints": "You take one step and the horizon that was a day's walk is under your feet — distance folding to meet a will that simply declined to accept it.",
+      "description": "The Horizon art of the far step — collapsing a great distance into a single stride, arriving where the eye could only reach. The wandering peoples' deepest gift: no place is truly far.",
+      "notFor": "It moves you, not others or things beyond what you carry — and it needs a place you can see or truly know; you cannot far-step to a horizon you have never met. Arrive somewhere unready and you arrive alone and far from help.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Far Step",
+          "grants": "Cross a great visible or known distance in a single step.",
+          "cannot": "It carries only you and what you bear, it needs a seen or known destination, and it strands you as easily as it delivers you — far is far, whichever way you stepped."
+        }
+      ],
+      "gated": "learned",
+      "nativeOrCombination": "native",
+      "challengeTypes": [
+        "TRAVEL"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "the_edge_of_the_map",
+      "name": "The Edge of the Map",
+      "levelReq": 5,
+      "energyCost": 13,
+      "powerSystem": "reach_space_time",
+      "tradition": "horizon",
+      "attribute": "physical",
+      "axes": {
+        "space_time": -0.9
+      },
+      "functions": [
+        "travel",
+        "reveal"
+      ],
+      "narrationHints": "You step past the last known place, off the edge of every map, and stand somewhere the world had not gotten around to deciding yet — and by standing there, you help it decide.",
+      "description": "The Horizon capstone — the step beyond the known world entirely, into the unmapped, where the traveller does not just find new places but helps CALL them into being by arriving. The furthest gift of the wandering kind.",
+      "notFor": "One passage beyond the known, at enormous cost — and where you arrive is not yet fixed; you shape it by arriving, which means you cannot know what you are stepping into, only that your step will help make it. There is no far-step home from the edge; you walk back.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Edge of the Map",
+          "grants": "Step beyond the known world into the unmapped, helping call a new place into being by arriving.",
+          "cannot": "It costs nearly all you have, the destination is unfixed until you make it, and there is no quick way back — the edge of the map is reached by stepping and left by walking."
+        }
+      ],
+      "gated": "learned",
+      "nativeOrCombination": "native",
+      "challengeTypes": [
+        "TRAVEL"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "the_held_hour",
+      "name": "The Held Hour",
+      "levelReq": 4,
+      "energyCost": 12,
+      "powerSystem": "reach_space_time",
+      "tradition": "hourkeeper",
+      "attribute": "mental",
+      "axes": {
+        "space_time": 0.6
+      },
+      "functions": [
+        "bind",
+        "foresee"
+      ],
+      "narrationHints": "You take the hour and HOLD it — not stopping time, but holding one hour of it open, refusing to let it pass until what needs doing in it is done.",
+      "description": "The Hourkeeper art of the held hour — keeping a single hour open past its natural passing, a pocket of kept time in which the necessary can be finished. The timekeepers' patient gift.",
+      "notFor": "It holds time, it does not reverse it — a held hour ends and cannot be held twice over the same ground. And holding an hour costs you the holding of it; you do not rest inside kept time, you carry it.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Held Hour",
+          "grants": "Hold a single hour open past its passing, keeping time for what must be finished.",
+          "cannot": "It cannot rewind, only delay the passing; the same hour cannot be re-held; and the one holding time does not get to rest in it."
+        }
+      ],
+      "gated": "learned",
+      "nativeOrCombination": "native",
+      "challengeTypes": [
+        "DEFEND"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "the_kept_hour",
+      "name": "The Long Foreseeing",
+      "levelReq": 5,
+      "energyCost": 14,
+      "powerSystem": "reach_space_time",
+      "tradition": "hourkeeper",
+      "attribute": "mental",
+      "axes": {
+        "space_time": 0.9
+      },
+      "functions": [
+        "foresee",
+        "bind"
+      ],
+      "narrationHints": "You follow one thread of what-will-be all the way down — not a glimpse but the whole long braid of consequence, every branch, to where it finally comes to rest.",
+      "description": "The Hourkeeper capstone — the long foreseeing, one possible future traced to its very end rather than glimpsed. To see this far is to carry a certainty most are mercifully spared, and to be bound to what you have seen.",
+      "notFor": "One thread, once, at enormous cost — and what you see, you are bound by; a foreseeing this deep changes how you act, and acting changes the future you saw. You cannot un-know the end you followed to.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Long Foreseeing",
+          "grants": "Trace one possible future to its very end, seeing the whole braid of its consequence.",
+          "cannot": "It costs nearly all you have, it binds you to what you've seen, and the deepest mercy of not-knowing is one you have chosen to give up."
+        }
+      ],
+      "gated": "learned",
+      "nativeOrCombination": "native",
+      "challengeTypes": [
+        "INVESTIGATE"
+      ]
     }
-   ],
-   "gated": "learned",
-   "challengeTypes": [
-    "EXPLORE",
-    "CHASE",
-    "FIGHT"
-   ],
-   "challengeProfile": {
-    "EXPLORE": 3,
-    "CHASE": 3
-   },
-   "tradition": "horizon",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "way_sense",
-   "name": "Way-Sense",
-   "levelReq": 1,
-   "energyCost": 3,
-   "powerSystem": "reach_space_time",
-   "attribute": "physical",
-   "axes": {
-    "space_time": -0.3
-   },
-   "functions": [
-    "track",
-    "travel",
-    "reveal"
-   ],
-   "narrationHints": "He knows which way, and does not know how he knows.",
-   "description": "Know where you are, where things lie, and the true way between — the first gift of the Open Reach.",
-   "notFor": "Reading time; knowing what waits at the far end.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Way-Sense",
-     "grants": "Never be lost. Know your bearing, your distance, and the shape of the way ahead.",
-     "cannot": "Knowing the way is not knowing what is on it."
-    },
-    {
-     "rank": 2,
-     "name": "The Read Road",
-     "grants": "Read a route's true cost before walking it — where it will be hard, where it will be watched, where it lies.",
-     "cannot": "A read road is still a road. It does not walk itself."
-    },
-    {
-     "rank": 3,
-     "name": "The Whole Map",
-     "grants": "Hold a region entire in your sense of it — every way in, every way out, every gap between the ways.",
-     "cannot": "Regions change. The map you hold is the one you built, and it ages."
-    }
-   ],
-   "gated": "learned",
-   "challengeTypes": [
-    "EXPLORE",
-    "CHASE"
-   ],
-   "challengeProfile": {
-    "EXPLORE": 3,
-    "CHASE": 2
-   },
-   "tradition": "horizon",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "hourcraft",
-   "name": "Hourcraft",
-   "levelReq": 2,
-   "energyCost": 6,
-   "powerSystem": "reach_space_time",
-   "attribute": "mental",
-   "axes": {
-    "space_time": 0.5,
-    "chaos_order": 0.2
-   },
-   "functions": [
-    "foresee",
-    "bind",
-    "reveal"
-   ],
-   "narrationHints": "The moment does not pass. It sits there, being looked at.",
-   "description": "The time-pole mastery: duration tended, held, and read. The Hourkeepers remember forward and backward, and pay for both.",
-   "notFor": "Space (Spanwork's country); undoing what happened — nothing undoes.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "The Kept Hour",
-     "grants": "Hold a moment exactly — perceive it whole, at length, while it is still happening.",
-     "cannot": "The moment still passes for everyone else. You get to look; you do not get to act longer."
-    },
-    {
-     "rank": 2,
-     "name": "The Slow Hour",
-     "grants": "Slow duration around you — a fight, a fall, a conversation stretches, and you have room inside it.",
-     "cannot": "It costs continuously and it costs steeply. And the world outside your slow hour arrives on time regardless."
-    },
-    {
-     "rank": 3,
-     "name": "The Pre-Remembered",
-     "grants": "Remember forward — an hour that has not happened arrives in you as memory does, with a memory's specificity and a memory's unreliability.",
-     "cannot": "You cannot tell a true pre-memory from a feared one. Hourkeepers who trust it wrongly are the reason the craft is feared."
-    }
-   ],
-   "gated": "learned",
-   "challengeTypes": [
-    "INVESTIGATE",
-    "FIGHT",
-    "SOCIAL"
-   ],
-   "challengeProfile": {
-    "INVESTIGATE": 3,
-    "FIGHT": 2
-   },
-   "tradition": "hourkeeper",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "hour_sense",
-   "name": "Hour-Sense",
-   "levelReq": 1,
-   "energyCost": 3,
-   "powerSystem": "reach_space_time",
-   "attribute": "mental",
-   "axes": {
-    "space_time": 0.3
-   },
-   "functions": [
-    "foresee",
-    "reveal"
-   ],
-   "narrationHints": "She knows how long it has been, and how long it has left.",
-   "description": "Know duration truly — how long since, how long until — the first gift of the Kept Reach.",
-   "notFor": "Knowing WHAT will happen. This knows WHEN.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Hour-Sense",
-     "grants": "Know exactly how long since a thing happened, and how long until a thing due will come.",
-     "cannot": "When, never what. The hour is knowable; the event is not."
-    },
-    {
-     "rank": 2,
-     "name": "The Long Count",
-     "grants": "Read the age of a place, a wound, a working, or a lie — and when it will fail.",
-     "cannot": "It counts. It does not care whether you are ready."
-    },
-    {
-     "rank": 3,
-     "name": "The Kept Ledger",
-     "grants": "Hold the whole duration of a place or a people — its beginning, its hours, and the hour it is running out of.",
-     "cannot": "Knowing a people's remaining hours and being unable to say so is the Hourkeepers' particular grief."
-    }
-   ],
-   "gated": "learned",
-   "challengeTypes": [
-    "INVESTIGATE",
-    "EXPLORE"
-   ],
-   "challengeProfile": {
-    "INVESTIGATE": 3
-   },
-   "tradition": "hourkeeper",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "the_long_reach",
-   "name": "The Long Reach",
-   "levelReq": 2,
-   "energyCost": 1,
-   "powerSystem": "attribute",
-   "attribute": "physical",
-   "axes": {
-    "space_time": -0.4,
-    "violence_peace": 0.2
-   },
-   "effectTags": [
-    "range",
-    "distance",
-    "strike"
-   ],
-   "narrationHints": "The distance was their advantage. He closed it in the throwing.",
-   "description": "Attack at range or in motion — the horizon fighter's harm is always the far brought suddenly close.",
-   "notFor": [],
-   "tradition": "horizon",
-   "harmRung": "damaging",
-   "functions": [
-    "strike",
-    "move"
-   ],
-   "challengeTypes": [
-    "combat",
-    "ranged",
-    "tactical"
-   ],
-   "challengeProfile": {
-    "cognitive": 0.2,
-    "physical": 0.7,
-    "social": 0.1
-   },
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Distance Closed",
-     "grants": "Strike from further away than expected — a thrown weapon, a sprint into contact, an attack timed at the moment of arrival.",
-     "cannot": null
-    },
-    {
-     "rank": 2,
-     "name": "The Running Strike",
-     "grants": "Attack in full motion — without losing accuracy or force to the movement; the speed is the weapon.",
-     "cannot": null
-    },
-    {
-     "rank": 3,
-     "name": "From Wherever You Are",
-     "grants": "Distance ceases to reduce your effectiveness — whether across a room or across a field, you arrive with full force or make the throw as if there were no gap at all.",
-     "cannot": null
-    }
-   ],
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "the_fresh_horizon",
-   "name": "The Fresh Horizon",
-   "levelReq": 2,
-   "energyCost": 2,
-   "powerSystem": "attribute",
-   "attribute": "physical",
-   "axes": {
-    "space_time": -0.3
-   },
-   "effectTags": [
-    "restoration",
-    "renewal",
-    "distance"
-   ],
-   "narrationHints": "The next ridge. The next valley. The sight of more ahead is what keeps them going.",
-   "description": "Distance restores — a journey that heals, the sight of the next horizon renewing the will to go on.",
-   "notFor": [],
-   "tradition": "horizon",
-   "harmRung": "none",
-   "functions": [
-    "restore",
-    "empower"
-   ],
-   "challengeTypes": [
-    "healing",
-    "morale",
-    "endurance"
-   ],
-   "challengeProfile": {
-    "cognitive": 0.1,
-    "physical": 0.5,
-    "social": 0.4
-   },
-   "tree": [
-    {
-     "rank": 1,
-     "name": "New Ground",
-     "grants": "Move to a new place and the weight of the last one lifts — wounds feel less, fear recedes, the body and will recover in the way only distance makes possible.",
-     "cannot": null
-    },
-    {
-     "rank": 2,
-     "name": "The Road Restores",
-     "grants": "A journey restores the party — physically and otherwise; the movement is the medicine, and you know how to pace it so it heals rather than depletes.",
-     "cannot": null
-    },
-    {
-     "rank": 3,
-     "name": "Always More Ahead",
-     "grants": "Show someone the next horizon and it fills them again — despair fails against the sight of further to go, and you can make that sight real.",
-     "cannot": null
-    }
-   ],
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "the_kept_distance",
-   "name": "The Kept Distance",
-   "levelReq": 2,
-   "energyCost": 1,
-   "powerSystem": "attribute",
-   "attribute": "physical",
-   "axes": {
-    "space_time": -0.3
-   },
-   "effectTags": [
-    "range",
-    "evasion",
-    "protection"
-   ],
-   "narrationHints": "The threat was real. She simply stayed where it wasn't.",
-   "description": "Protection through range — keep the threat far and its power collapses.",
-   "notFor": [],
-   "tradition": "horizon",
-   "harmRung": "none",
-   "functions": [
-    "shield",
-    "move"
-   ],
-   "challengeTypes": [
-    "combat",
-    "evasion",
-    "tactical"
-   ],
-   "challengeProfile": {
-    "cognitive": 0.3,
-    "physical": 0.6,
-    "social": 0.1
-   },
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Out of Reach",
-     "grants": "Maintain enough distance that what threatens you cannot effectively reach you — moving before it closes, keeping the gap that keeps you safe.",
-     "cannot": null
-    },
-    {
-     "rank": 2,
-     "name": "The Managed Gap",
-     "grants": "Control the distance between yourself and a threat — always too far for it to act, close enough for you to — and maintain that gap through a whole engagement.",
-     "cannot": null
-    },
-    {
-     "rank": 3,
-     "name": "Untouchable Distance",
-     "grants": "Stay perpetually where the threat isn't — and bring others with you. The person who cannot close the gap cannot win.",
-     "cannot": null
-    }
-   ],
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "the_made_crossing",
-   "name": "The Made Crossing",
-   "levelReq": 3,
-   "energyCost": 2,
-   "powerSystem": "attribute",
-   "attribute": "physical",
-   "axes": {
-    "space_time": -0.4
-   },
-   "effectTags": [
-    "path",
-    "distance",
-    "open"
-   ],
-   "narrationHints": "A gap is a statement about what the land thinks is possible. He disagreed.",
-   "description": "Create a crossing where there was none — not by building but by knowing where the distance can be made to yield.",
-   "notFor": [],
-   "tradition": "horizon",
-   "harmRung": "none",
-   "functions": [
-    "make",
-    "open",
-    "travel"
-   ],
-   "challengeTypes": [
-    "exploration",
-    "navigation",
-    "tactical"
-   ],
-   "challengeProfile": {
-    "cognitive": 0.3,
-    "physical": 0.6,
-    "social": 0.1
-   },
-   "tree": [
-    {
-     "rank": 1,
-     "name": "The Found Way",
-     "grants": "Find a crossing across an obstacle that wasn't apparent — the shallows, the ledge, the fallen tree — by reading terrain the way a horizon-walker does.",
-     "cannot": null
-    },
-    {
-     "rank": 2,
-     "name": "Where the Gap Yields",
-     "grants": "Identify and exploit the specific point where an obstacle can be crossed — not the obvious attempt but the place where the distance relents.",
-     "cannot": null
-    },
-    {
-     "rank": 3,
-     "name": "No Uncrossable Gap",
-     "grants": "Make the crossing — any crossing — by knowing exactly where to commit and exactly how. What the land calls uncrossable is only waiting for someone who can read its grain.",
-     "cannot": null
-    }
-   ],
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "the_land_knowledge",
-   "name": "The Land Knowledge",
-   "levelReq": 2,
-   "energyCost": 1,
-   "powerSystem": "attribute",
-   "attribute": "physical",
-   "axes": {
-    "space_time": -0.3
-   },
-   "effectTags": [
-    "terrain",
-    "authority",
-    "intelligence"
-   ],
-   "narrationHints": "She knew where the pass was before anyone asked. That was enough.",
-   "description": "Command through knowing what others don't — the terrain, the route, the distances that change everything about what's possible.",
-   "notFor": [],
-   "tradition": "horizon",
-   "harmRung": "none",
-   "functions": [
-    "command",
-    "reveal"
-   ],
-   "challengeTypes": [
-    "leadership",
-    "navigation",
-    "social"
-   ],
-   "challengeProfile": {
-    "cognitive": 0.4,
-    "physical": 0.2,
-    "social": 0.4
-   },
-   "tree": [
-    {
-     "rank": 1,
-     "name": "The Scout's Word",
-     "grants": "Speak with the authority of someone who has been where others haven't — your intelligence about terrain, routes, and distances commands genuine trust.",
-     "cannot": null
-    },
-    {
-     "rank": 2,
-     "name": "The Strategic Ground",
-     "grants": "Use knowledge of land and distance to direct others effectively — the advice that wins a chase, the route that avoids the trap, the position that changes everything.",
-     "cannot": null
-    },
-    {
-     "rank": 3,
-     "name": "Known Land",
-     "grants": "In territory you have walked, your knowledge is comprehensive enough to command any situation that depends on terrain — you are the map and the map is right.",
-     "cannot": null
-    }
-   ],
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "the_road_ahead",
-   "name": "The Road Ahead",
-   "levelReq": 1,
-   "energyCost": 1,
-   "powerSystem": "attribute",
-   "attribute": "physical",
-   "axes": {
-    "space_time": -0.3
-   },
-   "effectTags": [
-    "endurance",
-    "forward",
-    "distance"
-   ],
-   "narrationHints": "As long as there is further to go, they go.",
-   "description": "Sustain through forward motion — the horizon-walker who keeps moving doesn't run out.",
-   "notFor": [],
-   "tradition": "horizon",
-   "harmRung": "none",
-   "functions": [
-    "sustain",
-    "travel"
-   ],
-   "challengeTypes": [
-    "endurance",
-    "survival",
-    "travel"
-   ],
-   "challengeProfile": {
-    "cognitive": 0.1,
-    "physical": 0.8,
-    "social": 0.1
-   },
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Keep Walking",
-     "grants": "Sustain movement and function past the ordinary limit — as long as there is ground ahead, you cover it.",
-     "cannot": null
-    },
-    {
-     "rank": 2,
-     "name": "The Sustained March",
-     "grants": "Keep a party moving and functional across brutal distances — through exhaustion, injury, and conditions that would stop others — by knowing how to pace the impossible road.",
-     "cannot": null
-    },
-    {
-     "rank": 3,
-     "name": "No Stopping Place",
-     "grants": "You and your party can go on for as long as the task requires — rest when you must, move when you must — until the road has been walked.",
-     "cannot": null
-    }
-   ],
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "the_wrong_moment",
-   "name": "The Wrong Moment",
-   "levelReq": 2,
-   "energyCost": 1,
-   "powerSystem": "attribute",
-   "attribute": "mental",
-   "axes": {
-    "space_time": 0.4,
-    "violence_peace": 0.1
-   },
-   "effectTags": [
-    "timing",
-    "disruption",
-    "strike"
-   ],
-   "narrationHints": "She waited for the moment they couldn't answer. Then she acted.",
-   "description": "Strike or act at the precise moment when the other person cannot respond — the hourkeeper's harm is perfect timing, not force.",
-   "notFor": [],
-   "tradition": "hourkeeper",
-   "harmRung": "incapacitating",
-   "functions": [
-    "hinder",
-    "strike"
-   ],
-   "challengeTypes": [
-    "combat",
-    "social",
-    "tactical"
-   ],
-   "challengeProfile": {
-    "cognitive": 0.6,
-    "physical": 0.3,
-    "social": 0.1
-   },
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Their Bad Moment",
-     "grants": "Identify and act in the precise instant when a person is off-balance, distracted, or committed — so your action lands without meaningful response.",
-     "cannot": null
-    },
-    {
-     "rank": 2,
-     "name": "Chosen Time",
-     "grants": "Dictate when the confrontation happens by waiting for the exact moment that advantages you most — the ambush, the interruption, the word at the one instant it cannot be answered.",
-     "cannot": null
-    },
-    {
-     "rank": 3,
-     "name": "No Good Moment for Them",
-     "grants": "Act in a sequence of moments so precisely chosen that the other person is never in a position to respond effectively — they are always recovering from the last thing when the next arrives.",
-     "cannot": null
-    }
-   ],
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "the_given_time",
-   "name": "The Given Time",
-   "levelReq": 2,
-   "energyCost": 2,
-   "powerSystem": "attribute",
-   "attribute": "mental",
-   "axes": {
-    "space_time": 0.4
-   },
-   "effectTags": [
-    "restoration",
-    "duration",
-    "healing"
-   ],
-   "narrationHints": "She gave them the hour they needed that wasn't there.",
-   "description": "Stretch a moment or buy time that wasn't available — so that what needed longer to heal or resolve has it.",
-   "notFor": [],
-   "tradition": "hourkeeper",
-   "harmRung": "none",
-   "functions": [
-    "heal",
-    "restore"
-   ],
-   "challengeTypes": [
-    "healing",
-    "logistics",
-    "endurance"
-   ],
-   "challengeProfile": {
-    "cognitive": 0.5,
-    "physical": 0.2,
-    "social": 0.3
-   },
-   "tree": [
-    {
-     "rank": 1,
-     "name": "A Little More Time",
-     "grants": "Buy the minutes or hours that make a difference — slow enough that care can happen, or hold the situation open long enough that recovery begins.",
-     "cannot": null
-    },
-    {
-     "rank": 2,
-     "name": "The Hour Given",
-     "grants": "Create the time a person or situation needs — not by stopping anything, but by managing the duration so that what needs time to work has time to work.",
-     "cannot": null
-    },
-    {
-     "rank": 3,
-     "name": "All the Time It Needs",
-     "grants": "Hold open the duration of a recovery, a negotiation, or a healing — as long as it requires — without the outside closing in until it is ready.",
-     "cannot": null
-    }
-   ],
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "the_wasted_moment",
-   "name": "The Wasted Moment",
-   "levelReq": 2,
-   "energyCost": 1,
-   "powerSystem": "attribute",
-   "attribute": "mental",
-   "axes": {
-    "space_time": 0.3
-   },
-   "effectTags": [
-    "protection",
-    "timing",
-    "deflection"
-   ],
-   "narrationHints": "She knew the blow was coming. She was elsewhere in it.",
-   "description": "Protect through perfect foreknowledge of timing — make their moment of action count for nothing by not being in it.",
-   "notFor": [],
-   "tradition": "hourkeeper",
-   "harmRung": "none",
-   "functions": [
-    "shield",
-    "foresee"
-   ],
-   "challengeTypes": [
-    "combat",
-    "defense",
-    "tactical"
-   ],
-   "challengeProfile": {
-    "cognitive": 0.6,
-    "physical": 0.3,
-    "social": 0.1
-   },
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Their Moment Wasted",
-     "grants": "See the attack forming early enough to be gone before it lands — not blocking, not armoring, but the exact move that empties the moment of consequence.",
-     "cannot": null
-    },
-    {
-     "rank": 2,
-     "name": "No Good Window",
-     "grants": "Protect someone by watching their threat's timing and calling the move — the dodge, the step, the word — at the instant that makes the attack miss without effort.",
-     "cannot": null
-    },
-    {
-     "rank": 3,
-     "name": "The Protected Duration",
-     "grants": "For as long as you attend to a person's safety, no moment that could harm them arrives — you see it and fill or empty it before it becomes a wound.",
-     "cannot": null
-    }
-   ],
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "the_shaped_duration",
-   "name": "The Shaped Duration",
-   "levelReq": 3,
-   "energyCost": 2,
-   "powerSystem": "attribute",
-   "attribute": "mental",
-   "axes": {
-    "space_time": 0.5
-   },
-   "effectTags": [
-    "time",
-    "transform",
-    "duration"
-   ],
-   "narrationHints": "The hour was not the same hour as before. She had worked on it.",
-   "description": "Shape how long something takes — stretch a moment, compress an hour, make duration do what you need rather than what it would naturally do.",
-   "notFor": [],
-   "tradition": "hourkeeper",
-   "harmRung": "none",
-   "functions": [
-    "transform",
-    "bind"
-   ],
-   "challengeTypes": [
-    "tactical",
-    "craft",
-    "intellectual"
-   ],
-   "challengeProfile": {
-    "cognitive": 0.7,
-    "physical": 0.1,
-    "social": 0.2
-   },
-   "tree": [
-    {
-     "rank": 1,
-     "name": "The Stretched Moment",
-     "grants": "Make a short span feel and function longer — enough to act fully in what should only be an instant.",
-     "cannot": null
-    },
-    {
-     "rank": 2,
-     "name": "Compressed Duration",
-     "grants": "Collapse a long span into less — a day's travel has the fatigue of an hour, a complex process completes in time it shouldn't.",
-     "cannot": null
-    },
-    {
-     "rank": 3,
-     "name": "Duration to Order",
-     "grants": "Shape how long something takes with precision — bend the duration of any ongoing process to what you need it to be.",
-     "cannot": null
-    }
-   ],
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "the_opened_moment",
-   "name": "The Opened Moment",
-   "levelReq": 3,
-   "energyCost": 2,
-   "powerSystem": "attribute",
-   "attribute": "mental",
-   "axes": {
-    "space_time": 0.5
-   },
-   "effectTags": [
-    "passage",
-    "time",
-    "opening"
-   ],
-   "narrationHints": "She stepped between the moments and was already through.",
-   "description": "Open a gap in the flow of events to move through — the hourkeeper's passage happens between moments others don't see.",
-   "notFor": [],
-   "tradition": "hourkeeper",
-   "harmRung": "none",
-   "functions": [
-    "move",
-    "open"
-   ],
-   "challengeTypes": [
-    "stealth",
-    "navigation",
-    "tactical"
-   ],
-   "challengeProfile": {
-    "cognitive": 0.6,
-    "physical": 0.3,
-    "social": 0.1
-   },
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Between Moments",
-     "grants": "Move in the gap between one moment and the next — where attention lapses, where the pattern holds its breath — and arrive without being witnessed.",
-     "cannot": null
-    },
-    {
-     "rank": 2,
-     "name": "The Cleared Interval",
-     "grants": "Open a window in time — a pause in a guard rotation, a silence in a conversation, a beat between alarms — and move through it cleanly.",
-     "cannot": null
-    },
-    {
-     "rank": 3,
-     "name": "The Moment Made",
-     "grants": "Create the gap that didn't exist — find or open the instant that allows passage — and step through it, bringing others if needed.",
-     "cannot": null
-    }
-   ],
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "the_long_watch",
-   "name": "The Long Watch",
-   "levelReq": 1,
-   "energyCost": 1,
-   "powerSystem": "attribute",
-   "attribute": "mental",
-   "axes": {
-    "space_time": 0.3
-   },
-   "effectTags": [
-    "endurance",
-    "patience",
-    "duration"
-   ],
-   "narrationHints": "She felt time differently. Waiting was not the hardship it was for others.",
-   "description": "Endure through understanding duration — the hourkeeper who feels time differently can wait, hold, or persist longer than anyone else.",
-   "notFor": [],
-   "tradition": "hourkeeper",
-   "harmRung": "none",
-   "functions": [
-    "sustain",
-    "resist"
-   ],
-   "challengeTypes": [
-    "endurance",
-    "stealth",
-    "hardship"
-   ],
-   "challengeProfile": {
-    "cognitive": 0.5,
-    "physical": 0.4,
-    "social": 0.1
-   },
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Patient Duration",
-     "grants": "Hold a position, a vigil, a watch — past the point where others have lost focus or given in — because the passage of time does not wear on you as it does on them.",
-     "cannot": null
-    },
-    {
-     "rank": 2,
-     "name": "The Longer Wait",
-     "grants": "Sustain any activity that requires patience across duration — a negotiation, a stake-out, a long recovery — by feeling the time accurately rather than agonizingly.",
-     "cannot": null
-    },
-    {
-     "rank": 3,
-     "name": "As Long as It Takes",
-     "grants": "You can hold as long as the situation requires — the vigil, the wait, the watch — and remain fully functional throughout. Time is not your enemy.",
-     "cannot": null
-    }
-   ],
-   "nativeOrCombination": "native"
-  },
-  {
-   "schemaVersion": 1,
-   "id": "the_far_step",
-   "name": "The Far Step",
-   "levelReq": 4,
-   "energyCost": 11,
-   "powerSystem": "reach_space_time",
-   "tradition": "horizon",
-   "attribute": "physical",
-   "axes": {
-    "space_time": -0.6
-   },
-   "functions": [
-    "travel"
-   ],
-   "narrationHints": "You take one step and the horizon that was a day's walk is under your feet — distance folding to meet a will that simply declined to accept it.",
-   "description": "The Horizon art of the far step — collapsing a great distance into a single stride, arriving where the eye could only reach. The wandering peoples' deepest gift: no place is truly far.",
-   "notFor": "It moves you, not others or things beyond what you carry — and it needs a place you can see or truly know; you cannot far-step to a horizon you have never met. Arrive somewhere unready and you arrive alone and far from help.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "The Far Step",
-     "grants": "Cross a great visible or known distance in a single step.",
-     "cannot": "It carries only you and what you bear, it needs a seen or known destination, and it strands you as easily as it delivers you — far is far, whichever way you stepped."
-    }
-   ],
-   "gated": "learned",
-   "nativeOrCombination": "native",
-   "challengeTypes": [
-    "TRAVEL"
-   ],
-   "challengeProfile": {
-    "TRAVEL": 4
-   }
-  },
-  {
-   "schemaVersion": 1,
-   "id": "the_edge_of_the_map",
-   "name": "The Edge of the Map",
-   "levelReq": 5,
-   "energyCost": 13,
-   "powerSystem": "reach_space_time",
-   "tradition": "horizon",
-   "attribute": "physical",
-   "axes": {
-    "space_time": -0.9
-   },
-   "functions": [
-    "travel",
-    "reveal"
-   ],
-   "narrationHints": "You step past the last known place, off the edge of every map, and stand somewhere the world had not gotten around to deciding yet — and by standing there, you help it decide.",
-   "description": "The Horizon capstone — the step beyond the known world entirely, into the unmapped, where the traveller does not just find new places but helps CALL them into being by arriving. The furthest gift of the wandering kind.",
-   "notFor": "One passage beyond the known, at enormous cost — and where you arrive is not yet fixed; you shape it by arriving, which means you cannot know what you are stepping into, only that your step will help make it. There is no far-step home from the edge; you walk back.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "The Edge of the Map",
-     "grants": "Step beyond the known world into the unmapped, helping call a new place into being by arriving.",
-     "cannot": "It costs nearly all you have, the destination is unfixed until you make it, and there is no quick way back — the edge of the map is reached by stepping and left by walking."
-    }
-   ],
-   "gated": "learned",
-   "nativeOrCombination": "native",
-   "challengeTypes": [
-    "TRAVEL"
-   ],
-   "challengeProfile": {
-    "TRAVEL": 5
-   }
-  },
-  {
-   "schemaVersion": 1,
-   "id": "the_held_hour",
-   "name": "The Held Hour",
-   "levelReq": 4,
-   "energyCost": 12,
-   "powerSystem": "reach_space_time",
-   "tradition": "hourkeeper",
-   "attribute": "mental",
-   "axes": {
-    "space_time": 0.6
-   },
-   "functions": [
-    "bind",
-    "foresee"
-   ],
-   "narrationHints": "You take the hour and HOLD it — not stopping time, but holding one hour of it open, refusing to let it pass until what needs doing in it is done.",
-   "description": "The Hourkeeper art of the held hour — keeping a single hour open past its natural passing, a pocket of kept time in which the necessary can be finished. The timekeepers' patient gift.",
-   "notFor": "It holds time, it does not reverse it — a held hour ends and cannot be held twice over the same ground. And holding an hour costs you the holding of it; you do not rest inside kept time, you carry it.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "The Held Hour",
-     "grants": "Hold a single hour open past its passing, keeping time for what must be finished.",
-     "cannot": "It cannot rewind, only delay the passing; the same hour cannot be re-held; and the one holding time does not get to rest in it."
-    }
-   ],
-   "gated": "learned",
-   "nativeOrCombination": "native",
-   "challengeTypes": [
-    "DEFEND"
-   ],
-   "challengeProfile": {
-    "DEFEND": 4
-   }
-  },
-  {
-   "schemaVersion": 1,
-   "id": "the_kept_hour",
-   "name": "The Long Foreseeing",
-   "levelReq": 5,
-   "energyCost": 14,
-   "powerSystem": "reach_space_time",
-   "tradition": "hourkeeper",
-   "attribute": "mental",
-   "axes": {
-    "space_time": 0.9
-   },
-   "functions": [
-    "foresee",
-    "bind"
-   ],
-   "narrationHints": "You follow one thread of what-will-be all the way down — not a glimpse but the whole long braid of consequence, every branch, to where it finally comes to rest.",
-   "description": "The Hourkeeper capstone — the long foreseeing, one possible future traced to its very end rather than glimpsed. To see this far is to carry a certainty most are mercifully spared, and to be bound to what you have seen.",
-   "notFor": "One thread, once, at enormous cost — and what you see, you are bound by; a foreseeing this deep changes how you act, and acting changes the future you saw. You cannot un-know the end you followed to.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "The Long Foreseeing",
-     "grants": "Trace one possible future to its very end, seeing the whole braid of its consequence.",
-     "cannot": "It costs nearly all you have, it binds you to what you've seen, and the deepest mercy of not-knowing is one you have chosen to give up."
-    }
-   ],
-   "gated": "learned",
-   "nativeOrCombination": "native",
-   "challengeTypes": [
-    "INVESTIGATE"
-   ],
-   "challengeProfile": {
-    "INVESTIGATE": 5
-   }
-  }
- ],
- "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
+  ],
+  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
 }

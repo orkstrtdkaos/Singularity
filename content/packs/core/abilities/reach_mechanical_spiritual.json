@@ -1,967 +1,865 @@
 {
- "schemaVersion": 1,
- "powerSystem": "reach_mechanical_spiritual",
- "note": "Crafts of the Gearlands/Numinous Reach (mechanical_spiritual axis) — the axis whose deep peak is What Sleeps Under. Enginecraft is the mechanical-pole tradition (Precursor arts at their most technical); Numenwork the spiritual-pole (the mystic disciplines the framework keeps converging toward). Learned by traveling the Reach or training with Enginewrights/the Numinous. Both drift the wielder toward their pole; the doubly-charged Forge of Ends is where they meet. Distinct from precursor.json: Precursor is the Valley's dangerous folk-access to the deep; these are the Reach's true traditions. axes signed for engine compat. Authored by Aevi (PO), SNG-016.",
- "gated": "learned",
- "abilities": [
-  {
-   "id": "enginecraft",
-   "name": "Enginecraft",
-   "levelReq": 3,
-   "energyCost": 8,
-   "powerSystem": "reach_mechanical_spiritual",
-   "attribute": "practical",
-   "axes": {
-    "mechanical_spiritual": -0.6,
-    "concrete_abstract": 0.3,
-    "chaos_order": 0.2
-   },
-   "effectTags": [
-    "machine",
-    "precursor",
-    "build"
-   ],
-   "narrationHints": "Mechanism as a language spoken fluently — systems built, run, and understood at a depth the Valley's tinkers only gesture at.",
-   "description": "The mechanical-pole mastery: design, run, and command machine-systems, Precursor works included, at the Enginewrights' depth.",
-   "notFor": "The numinous/meaning side of a Precursor site (that's Numenwork); life or growth; anything that must be felt rather than built.",
-   "tree": [
+  "schemaVersion": 1,
+  "powerSystem": "reach_mechanical_spiritual",
+  "note": "Crafts of the Gearlands/Numinous Reach (mechanical_spiritual axis) — the axis whose deep peak is What Sleeps Under. Enginecraft is the mechanical-pole tradition (Precursor arts at their most technical); Numenwork the spiritual-pole (the mystic disciplines the framework keeps converging toward). Learned by traveling the Reach or training with Enginewrights/the Numinous. Both drift the wielder toward their pole; the doubly-charged Forge of Ends is where they meet. Distinct from precursor.json: Precursor is the Valley's dangerous folk-access to the deep; these are the Reach's true traditions. axes signed for engine compat. Authored by Aevi (PO), SNG-016.",
+  "gated": "learned",
+  "abilities": [
     {
-     "rank": 1,
-     "name": "The Wright's Eye",
-     "grants": "Understand any mechanism's design and purpose on study; build reliable machines and devices; run Precursor systems that Latticespeak could only ask.",
-     "cannot": "Understanding function is not understanding WHY it was made; live-hostile systems still resist."
+      "id": "enginecraft",
+      "name": "Enginecraft",
+      "levelReq": 3,
+      "energyCost": 8,
+      "powerSystem": "reach_mechanical_spiritual",
+      "attribute": "practical",
+      "axes": {
+        "mechanical_spiritual": -0.6,
+        "concrete_abstract": 0.3,
+        "chaos_order": 0.2
+      },
+      "effectTags": [
+        "machine",
+        "precursor",
+        "build"
+      ],
+      "narrationHints": "Mechanism as a language spoken fluently — systems built, run, and understood at a depth the Valley's tinkers only gesture at.",
+      "description": "The mechanical-pole mastery: design, run, and command machine-systems, Precursor works included, at the Enginewrights' depth.",
+      "notFor": "The numinous/meaning side of a Precursor site (that's Numenwork); life or growth; anything that must be felt rather than built.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Wright's Eye",
+          "grants": "Understand any mechanism's design and purpose on study; build reliable machines and devices; run Precursor systems that Latticespeak could only ask.",
+          "cannot": "Understanding function is not understanding WHY it was made; live-hostile systems still resist."
+        },
+        {
+          "rank": 2,
+          "name": "System-Speaker",
+          "grants": "Command a machine-system to reconfigure toward your intent; chain devices into working wholes; repair or repurpose Precursor works at the component level.",
+          "cannot": "The system does what its mechanism allows, not what you wish; the numinous layer stays opaque — you move the body, not the meaning."
+        },
+        {
+          "rank": 3,
+          "name": "Master of the Works",
+          "grants": "Command machine-country — a whole Precursor installation bent toward a purpose; wake or still a mechanical site at scale; build engines that outlive you. The Great Engine's power in miniature.",
+          "cannot": "The wielder drifts hard-mechanical; a person who becomes all-Engine forgets why anything is FOR — the framework's foreclosure by another road; and the Great Engine notices a rival wright."
+        }
+      ],
+      "functions": [
+        "mend",
+        "make",
+        "command"
+      ],
+      "challengeTypes": [
+        "PUZZLE"
+      ],
+      "tradition": "enginewright",
+      "nativeOrCombination": "native"
     },
     {
-     "rank": 2,
-     "name": "System-Speaker",
-     "grants": "Command a machine-system to reconfigure toward your intent; chain devices into working wholes; repair or repurpose Precursor works at the component level.",
-     "cannot": "The system does what its mechanism allows, not what you wish; the numinous layer stays opaque — you move the body, not the meaning."
+      "id": "numenwork",
+      "name": "Numenwork",
+      "levelReq": 3,
+      "energyCost": 8,
+      "powerSystem": "reach_mechanical_spiritual",
+      "attribute": "social",
+      "axes": {
+        "mechanical_spiritual": 0.6,
+        "concrete_abstract": 0.3,
+        "death_life": 0.2
+      },
+      "effectTags": [
+        "meaning",
+        "spirit",
+        "attend"
+      ],
+      "narrationHints": "The disciplines of pure meaning — attention made a force, presence that changes what it attends to, the material world going briefly negotiable.",
+      "description": "The spiritual-pole mastery: the mystic practices where meaning acts directly on the world. The road the Valley's framework keeps recognizing itself in.",
+      "notFor": "Building or commanding mechanism (that's Enginecraft); forcing an outcome (Numenwork attends, it does not compel); anything that treats spirit as a lever.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "True Attention",
+          "grants": "Attend so fully that the truth of a person, place, or moment surfaces; steady a soul in crisis by presence alone; perceive the meaning-layer of a Precursor site the Engine can't reach.",
+          "cannot": "Attention reveals and steadies; it does not command or coerce; the unwilling can close to it."
+        },
+        {
+          "rank": 2,
+          "name": "The Negotiable World",
+          "grants": "Where meaning is dense, the material softens — a symbol made briefly real, a threshold held open by significance, a wound that was always metaphor healed as one. Read the numinous truth of the deep works.",
+          "cannot": "Only where meaning already runs dense; it bends the world, never breaks it; the price is proportional to the bending."
+        },
+        {
+          "rank": 3,
+          "name": "The Standing Presence",
+          "grants": "Attention as a force that holds — keep a foreclosing thing open by significance alone, hold a truth in a place until it can't be unsaid, meet the numinous heart of What Sleeps Under as an equal rather than a trespasser. The Numen's power in miniature; the framework's 'hold the aperture' made a discipline.",
+          "cannot": "The wielder drifts hard-spiritual, toward leaving the material behind entirely; presence holds, it does not decide; what you hold open, others must walk through."
+        }
+      ],
+      "functions": [
+        "summon",
+        "reveal",
+        "restore"
+      ],
+      "challengeTypes": [
+        "INVESTIGATE",
+        "SOCIAL",
+        "SURVIVE"
+      ],
+      "tradition": "numinous",
+      "nativeOrCombination": "native"
     },
     {
-     "rank": 3,
-     "name": "Master of the Works",
-     "grants": "Command machine-country — a whole Precursor installation bent toward a purpose; wake or still a mechanical site at scale; build engines that outlive you. The Great Engine's power in miniature.",
-     "cannot": "The wielder drifts hard-mechanical; a person who becomes all-Engine forgets why anything is FOR — the framework's foreclosure by another road; and the Great Engine notices a rival wright."
+      "id": "mech_sense",
+      "name": "Mechanism-Sense",
+      "levelReq": 1,
+      "energyCost": 3,
+      "attribute": "mental",
+      "axes": {
+        "mechanical_spiritual": -0.3
+      },
+      "functions": [
+        "reveal"
+      ],
+      "narrationHints": "The workings of a thing felt like a diagram behind the eyes.",
+      "description": "Perceive how a mechanism or system functions on sight.",
+      "notFor": "The why/meaning of it; living things.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Mechanism-Sense",
+          "grants": "Understand a device or machine-system's function and flaws at a glance.",
+          "cannot": "Function, not purpose; the numinous stays dark."
+        },
+        {
+          "rank": 2,
+          "name": "The Whole Mechanism",
+          "grants": "Read a machine entire — what it does, what it was FOR, where it will fail, and what someone changed.",
+          "cannot": "It reads mechanism. What a machine MEANS is the Numinous's country, not yours."
+        },
+        {
+          "rank": 3,
+          "name": "The Engine's Confession",
+          "grants": "A mechanism tells you its whole history — every hand that touched it, every misuse, every repair made in a hurry.",
+          "cannot": "The Precursor works do not confess. They only answer, and only sometimes."
+        }
+      ],
+      "powerSystem": "reach_mechanical_spiritual",
+      "gated": "learned",
+      "challengeTypes": [
+        "INVESTIGATE",
+        "PUZZLE"
+      ],
+      "tradition": "enginewright",
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "numen_sense",
+      "name": "Numen-Sense",
+      "levelReq": 1,
+      "energyCost": 3,
+      "attribute": "social",
+      "axes": {
+        "mechanical_spiritual": 0.3
+      },
+      "functions": [
+        "reveal"
+      ],
+      "narrationHints": "The weight of meaning in a place felt on the skin.",
+      "description": "Sense where meaning runs dense — sacred ground, a charged moment, a numinous site.",
+      "notFor": "Reading mechanism; forcing the meaning.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Numen-Sense",
+          "grants": "Feel the significance-density of a place or moment; know where the world is 'thin.'",
+          "cannot": "Feel, not command; barren places read empty."
+        },
+        {
+          "rank": 2,
+          "name": "The Thinning",
+          "grants": "Feel where the veil is thin — where meaning presses close enough to touch, and where something is pressing back.",
+          "cannot": "Feeling the thin place is not surviving it. Not everything on the other side is glad to be noticed."
+        },
+        {
+          "rank": 3,
+          "name": "The Numen Plain",
+          "grants": "The numinous is simply visible to you — the sacred, the haunted, the charged, all plain as furniture.",
+          "cannot": "Once seen, never unseen. The Numinous who reach this depth find the ordinary world thin and hard to care about."
+        }
+      ],
+      "powerSystem": "reach_mechanical_spiritual",
+      "gated": "learned",
+      "challengeTypes": [
+        "INVESTIGATE",
+        "EXPLORE"
+      ],
+      "tradition": "numinous",
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "mend_device",
+      "name": "Mend",
+      "levelReq": 1,
+      "energyCost": 4,
+      "attribute": "practical",
+      "axes": {
+        "mechanical_spiritual": -0.3
+      },
+      "functions": [
+        "mend",
+        "make"
+      ],
+      "narrationHints": "Parts find their places and the dead thing hums again.",
+      "description": "Repair a broken mechanism or device with a craftsman's sure touch.",
+      "notFor": "Precursor deep-systems (that's Enginecraft); living hurts.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Mend",
+          "grants": "Fix a broken tool, machine, or simple device reliably.",
+          "cannot": "Ordinary mechanism only; the deep works resist."
+        },
+        {
+          "rank": 2,
+          "name": "The True Mend",
+          "grants": "Mend a thing so it works as it was meant to — not patched, but restored to its intent.",
+          "cannot": "You must know what it was FOR. A mend against the true intent will not hold."
+        },
+        {
+          "rank": 3,
+          "name": "Better Than New",
+          "grants": "The mended thing is better than it was — you understood it well enough to improve it in the mending.",
+          "cannot": "The Enginewrights' pride and their sin: not everything you can improve should be."
+        }
+      ],
+      "powerSystem": "reach_mechanical_spiritual",
+      "gated": "learned",
+      "challengeTypes": [
+        "PUZZLE",
+        "SURVIVE"
+      ],
+      "tradition": "enginewright",
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "steady_soul",
+      "name": "Steady the Soul",
+      "levelReq": 1,
+      "energyCost": 4,
+      "attribute": "social",
+      "axes": {
+        "mechanical_spiritual": 0.3
+      },
+      "functions": [
+        "empower",
+        "heal",
+        "resist"
+      ],
+      "narrationHints": "Presence alone, and the breaking person holds.",
+      "description": "Steady another's spirit in crisis by attention and presence — folk-Numenwork.",
+      "notFor": "Healing the body; compelling calm.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Steady the Soul",
+          "grants": "Calm and steady a person in spiritual/emotional crisis through pure presence.",
+          "cannot": "Opens the door, never shoves; the closed resist."
+        },
+        {
+          "rank": 2,
+          "name": "The Steadied Hand",
+          "grants": "Steady another person through terror, grief, or the shakes — they can act when they could not.",
+          "cannot": "Steadying is a loan against their own strength. It comes due when you let go."
+        },
+        {
+          "rank": 3,
+          "name": "The Unshaken",
+          "grants": "Nothing shakes you, and nearness to you steadies others without effort — panic does not propagate through you.",
+          "cannot": "Unshakable is not unhurt. It means the hurt does not show, and does not get put down."
+        }
+      ],
+      "powerSystem": "reach_mechanical_spiritual",
+      "gated": "learned",
+      "challengeTypes": [
+        "SOCIAL",
+        "SURVIVE"
+      ],
+      "tradition": "numinous",
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "command_engine",
+      "name": "Command the Small Engine",
+      "levelReq": 2,
+      "energyCost": 5,
+      "attribute": "practical",
+      "axes": {
+        "mechanical_spiritual": -0.4,
+        "chaos_order": 0.2
+      },
+      "functions": [
+        "command",
+        "mend"
+      ],
+      "narrationHints": "A word to the machine and it does the new thing.",
+      "description": "Direct a machine-system to reconfigure toward your intent — mid-tier Enginecraft.",
+      "notFor": "The meaning-layer; wishes the mechanism can't do.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Command the Small Engine",
+          "grants": "Make a device or system do something within its mechanism it wasn't set to.",
+          "cannot": "Only what the mechanism allows; meaning stays opaque."
+        },
+        {
+          "rank": 2,
+          "name": "The Larger Engine",
+          "grants": "Command engines beyond the small — a mill, a lock-system, a Precursor door that still half-listens.",
+          "cannot": "Commanding a thing is not understanding it. Engines obey the words, not the wish."
+        },
+        {
+          "rank": 3,
+          "name": "The Engine Obeys",
+          "grants": "Mechanism answers you as if you were its maker — it does what you mean, not merely what you say.",
+          "cannot": "Halvex Coil began exactly here, and did not stop. The Enginewrights teach this rank with a warning attached."
+        }
+      ],
+      "powerSystem": "reach_mechanical_spiritual",
+      "gated": "learned",
+      "challengeTypes": [
+        "PUZZLE",
+        "FIGHT"
+      ],
+      "tradition": "enginewright",
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "thin_place",
+      "name": "Open the Thin Place",
+      "levelReq": 3,
+      "energyCost": 6,
+      "attribute": "social",
+      "axes": {
+        "mechanical_spiritual": 0.4,
+        "concrete_abstract": 0.3
+      },
+      "functions": [
+        "summon",
+        "reveal",
+        "ward"
+      ],
+      "narrationHints": "Where meaning is thick, a threshold opens that was never a door.",
+      "description": "Where significance runs dense, briefly make a symbol real — a threshold held by meaning. Mid-tier Numenwork.",
+      "notFor": "Where meaning is thin; forcing the world.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Open the Thin Place",
+          "grants": "In a meaning-dense place, make a symbol briefly literal — a held threshold, a metaphor made real.",
+          "cannot": "Only where meaning is dense; costs proportional."
+        },
+        {
+          "rank": 2,
+          "name": "The Held Thin Place",
+          "grants": "Hold a thin place open — long enough for others to see, to speak, to pass a thing through.",
+          "cannot": "Held open is held open from BOTH sides. Whatever is on the other side also has a door now."
+        },
+        {
+          "rank": 3,
+          "name": "The Open Door",
+          "grants": "Open a thin place where there was none, in a room that had no reason to be sacred.",
+          "cannot": "The Numinous forbid this to most of their own. What you invite has its own opinions."
+        }
+      ],
+      "powerSystem": "reach_mechanical_spiritual",
+      "gated": "learned",
+      "challengeTypes": [
+        "PUZZLE",
+        "EXPLORE",
+        "SURVIVE"
+      ],
+      "tradition": "numinous",
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "meaning_engine",
+      "name": "The Meaning-Engine",
+      "levelReq": 4,
+      "energyCost": 9,
+      "attribute": "mental",
+      "axes": {
+        "mechanical_spiritual": 0
+      },
+      "functions": [
+        "mend",
+        "reveal"
+      ],
+      "narrationHints": "The machine runs on why, not just how.",
+      "description": "The braid-craft: command a Precursor work by significance, not only mechanism — body and meaning at once.",
+      "notFor": "Pure-mechanism or pure-spirit approaches; shallow substrate.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Meaning-Engine",
+          "grants": "Run a deep Precursor work by both its mechanism AND its meaning — the way to treat with What Sleeps Under.",
+          "cannot": "Needs dense substrate; what answers may not be tame."
+        }
+      ],
+      "powerSystem": "reach_mechanical_spiritual",
+      "gated": "learned",
+      "challengeTypes": [
+        "PUZZLE",
+        "INVESTIGATE"
+      ],
+      "tradition": "cross_pole_braid",
+      "nativeOrCombination": "combination"
+    },
+    {
+      "id": "shortfold",
+      "name": "Shortfold",
+      "levelReq": 3,
+      "energyCost": 7,
+      "attribute": "mental",
+      "axes": {
+        "mechanical_spiritual": 0.3,
+        "space_time": 0.4
+      },
+      "functions": [
+        "travel",
+        "move"
+      ],
+      "narrationHints": "The space between here and there folds for a step, and you are across it.",
+      "description": "A short-range teleport — fold the space between you and a spot you can SEE, and step through. Blink across a gap, past a door, out of a grip. Needs substrate to fold against.",
+      "notFor": "Somewhere unseen (line-of-sight only); long distance; carrying a crowd.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Shortfold",
+          "grants": "Instantly cross to a visible point within ~30 paces — through, past, or over what's between.",
+          "cannot": "Line-of-sight only; substrate-thin places (the origin-flats) refuse it; costs sharply, a botch drops you mid-fold (hurt)."
+        },
+        {
+          "rank": 2,
+          "name": "The Longer Fold",
+          "grants": "Fold a longer distance — a valley rather than a courtyard — and bring others through with you.",
+          "cannot": "Both ends must be places you truly know. A fold to a half-remembered place ends half-way."
+        },
+        {
+          "rank": 3,
+          "name": "The Folded Road",
+          "grants": "Fold distance as a road you can walk repeatedly — a route through the short way that stays open.",
+          "cannot": "The folded road is a hole in the world, and the world notices holes."
+        }
+      ],
+      "powerSystem": "reach_mechanical_spiritual",
+      "gated": "learned",
+      "tradition": "enginewright",
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "waygate",
+      "name": "Waygate",
+      "levelReq": 5,
+      "energyCost": 12,
+      "attribute": "mental",
+      "axes": {
+        "mechanical_spiritual": 0.5,
+        "space_time": 0.6
+      },
+      "functions": [
+        "travel",
+        "open",
+        "summon"
+      ],
+      "narrationHints": "A door opens onto a place you have stood before, a hundred miles closed to a single step.",
+      "description": "The long teleport capstone: open a fold to a place you KNOW WELL (have been, and can hold clearly), crossing any distance. Move a small party through. The Precursor way-network's power, woken.",
+      "notFor": "Anywhere you haven't been/can't hold; instant repeat; an unwilling passenger.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Waygate",
+          "grants": "Open a gate to a well-known distant place and step (or lead a few) through, crossing any distance at once.",
+          "cannot": "Only to places held clearly in memory; enormous cost + cooldown; a botch opens the wrong gate, or a dangerous one."
+        }
+      ],
+      "powerSystem": "reach_mechanical_spiritual",
+      "gated": "learned",
+      "tradition": "numinous",
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "the_fault_strike",
+      "name": "The Fault Strike",
+      "levelReq": 2,
+      "energyCost": 1,
+      "powerSystem": "attribute",
+      "attribute": "practical",
+      "axes": {
+        "mechanical_spiritual": -0.4,
+        "violence_peace": 0.2
+      },
+      "effectTags": [
+        "precision",
+        "exploit",
+        "mechanism"
+      ],
+      "harmRung": "damaging",
+      "narrationHints": "He didn't hit the person. He hit the load-bearing piece.",
+      "description": "Strike at the known structural weak point — the joint, the fault, the critical piece — for maximum effect from minimum force.",
+      "notFor": [],
+      "tradition": "enginewright",
+      "functions": [
+        "strike",
+        "break"
+      ],
+      "challengeTypes": [
+        "combat",
+        "technical",
+        "tactical"
+      ],
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Fault Point",
+          "grants": "Strike a person or device at its structural weak point — the joint under load, the nerve cluster, the part compensating for an earlier damage — for targeted, efficient harm.",
+          "cannot": null
+        },
+        {
+          "rank": 2,
+          "name": "Controlled Failure",
+          "grants": "Hit a mechanism's fault so precisely it fails in the way you need — not just broken, stopped; not just damaged, disabled at the point that matters.",
+          "cannot": null
+        },
+        {
+          "rank": 3,
+          "name": "One Strike",
+          "grants": "End what would otherwise require sustained effort through one well-placed action — because you knew where it would break before you moved.",
+          "cannot": null
+        }
+      ],
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "the_mechanical_defense",
+      "name": "The Mechanical Defense",
+      "levelReq": 2,
+      "energyCost": 1,
+      "powerSystem": "attribute",
+      "attribute": "practical",
+      "axes": {
+        "mechanical_spiritual": -0.4,
+        "chaos_order": 0.2
+      },
+      "effectTags": [
+        "shield",
+        "engineering",
+        "redirect"
+      ],
+      "harmRung": "none",
+      "narrationHints": "The blow arrives. Something redirects it. She engineered for this.",
+      "description": "Protection through engineered response — interlocking parts and redirected force, not brute resistance.",
+      "notFor": [],
+      "tradition": "enginewright",
+      "functions": [
+        "shield",
+        "resist"
+      ],
+      "challengeTypes": [
+        "combat",
+        "craft",
+        "defense"
+      ],
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Redirected Force",
+          "grants": "Protect through engineered positioning — the blow lands on something that can take it, redirected away from what can't.",
+          "cannot": null
+        },
+        {
+          "rank": 2,
+          "name": "Set Defense",
+          "grants": "Build a mechanical defense that holds without constant attention — barriers and redirects that work while you work on something else.",
+          "cannot": null
+        },
+        {
+          "rank": 3,
+          "name": "Active System",
+          "grants": "A defense that adapts — interlocking protections that cover the group and respond to the threat's form, not just its direction.",
+          "cannot": null
+        }
+      ],
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "the_running_engine",
+      "name": "The Running Engine",
+      "levelReq": 1,
+      "energyCost": 1,
+      "powerSystem": "attribute",
+      "attribute": "practical",
+      "axes": {
+        "mechanical_spiritual": -0.3
+      },
+      "effectTags": [
+        "endurance",
+        "optimization",
+        "self-maintenance"
+      ],
+      "harmRung": "none",
+      "narrationHints": "The body is a mechanism. He treated it accordingly. It kept running.",
+      "description": "Sustain through precise self-maintenance — the right fuel, the right rhythm, the understood limit approached without crossing.",
+      "notFor": [],
+      "tradition": "enginewright",
+      "functions": [
+        "sustain",
+        "resist"
+      ],
+      "challengeTypes": [
+        "endurance",
+        "craft",
+        "hardship"
+      ],
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Calibrated Effort",
+          "grants": "Push past fatigue by treating the body as a mechanism — the right rhythm, the right intake, the precisely understood limit that can be approached safely.",
+          "cannot": null
+        },
+        {
+          "rank": 2,
+          "name": "Maintained Function",
+          "grants": "Keep working through damage and deprivation by knowing exactly what the mechanism needs — no panic, no waste, no unnecessary expenditure.",
+          "cannot": null
+        },
+        {
+          "rank": 3,
+          "name": "Indefinite Run",
+          "grants": "The body does what it must for as long as it must — calibrated to exact need, running past what others would call the wall.",
+          "cannot": null
+        }
+      ],
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "the_dimmed_meaning",
+      "name": "The Dimmed Meaning",
+      "levelReq": 2,
+      "energyCost": 2,
+      "powerSystem": "attribute",
+      "attribute": "social",
+      "axes": {
+        "mechanical_spiritual": 0.4
+      },
+      "effectTags": [
+        "dissolution",
+        "meaning",
+        "disruption"
+      ],
+      "harmRung": "incapacitating",
+      "narrationHints": "The significance drained out of it. What remained was just a thing.",
+      "description": "Strip numinous weight from a working, a symbol, or a belief — when meaning departs, what it was holding falls.",
+      "notFor": [],
+      "tradition": "numinous",
+      "functions": [
+        "hinder",
+        "break"
+      ],
+      "challengeTypes": [
+        "magical",
+        "intellectual",
+        "combat"
+      ],
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Weight Withdrawn",
+          "grants": "Drain numinous significance from a working, a symbol, or a belief — it still exists but loses whatever meaning made it matter.",
+          "cannot": null
+        },
+        {
+          "rank": 2,
+          "name": "Broken Meaning",
+          "grants": "Break a thing's significance so completely that those who relied on it lose orientation — the sacred desecrated in ways they feel immediately.",
+          "cannot": null
+        },
+        {
+          "rank": 3,
+          "name": "The Voided Place",
+          "grants": "Withdraw numinous presence from an entire place or working — what meaning was sustaining simply stops, and what it held together comes apart.",
+          "cannot": null
+        }
+      ],
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "the_weight_of_practice",
+      "name": "The Weight of Practice",
+      "levelReq": 2,
+      "energyCost": 1,
+      "powerSystem": "attribute",
+      "attribute": "social",
+      "axes": {
+        "mechanical_spiritual": 0.4
+      },
+      "effectTags": [
+        "presence",
+        "authority",
+        "spiritual"
+      ],
+      "harmRung": "none",
+      "narrationHints": "She didn't say anything commanding. She was there. That was enough.",
+      "description": "The gravity of someone who has dissolved deeply into practice — not commanded, simply present; people organize around it.",
+      "notFor": [],
+      "tradition": "numinous",
+      "functions": [
+        "command",
+        "bind"
+      ],
+      "challengeTypes": [
+        "social",
+        "leadership",
+        "spiritual"
+      ],
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Settled Presence",
+          "grants": "Your presence carries the weight of genuine practice — people feel it, and it settles them, orients them toward what they already know is right.",
+          "cannot": null
+        },
+        {
+          "rank": 2,
+          "name": "The Deep Pull",
+          "grants": "Bind a person or group to a truth they have been avoiding — not manipulation, the simple pull of someone who has been further in.",
+          "cannot": null
+        },
+        {
+          "rank": 3,
+          "name": "Organizing Presence",
+          "grants": "Your presence is simply the authority in the room — not commanded, not explained, present; people naturally arrange themselves relative to where you stand.",
+          "cannot": null
+        }
+      ],
+      "nativeOrCombination": "native"
+    },
+    {
+      "id": "the_unbroken_practice",
+      "name": "The Unbroken Practice",
+      "levelReq": 1,
+      "energyCost": 1,
+      "powerSystem": "attribute",
+      "attribute": "social",
+      "axes": {
+        "mechanical_spiritual": 0.3
+      },
+      "effectTags": [
+        "endurance",
+        "discipline",
+        "spirit"
+      ],
+      "harmRung": "none",
+      "narrationHints": "When everything was taken, the practice was still there. So was she.",
+      "description": "Sustain through unbroken spiritual discipline — the form that holds you when nothing else does.",
+      "notFor": [],
+      "tradition": "numinous",
+      "functions": [
+        "sustain",
+        "resist"
+      ],
+      "challengeTypes": [
+        "endurance",
+        "hardship",
+        "spiritual"
+      ],
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Form Holds",
+          "grants": "Maintain function through hardship by continuing the practice — when everything else is stripped, the discipline remains and it is enough to stand on.",
+          "cannot": null
+        },
+        {
+          "rank": 2,
+          "name": "Endurance of Attendance",
+          "grants": "The form holds you in conditions that break people who have nothing to return to — not will, the practice; not trying harder, attending more fully.",
+          "cannot": null
+        },
+        {
+          "rank": 3,
+          "name": "As Long as the Practice Continues",
+          "grants": "You do not run out as long as you can still attend. The body may fail; the practice holds what the body was holding.",
+          "cannot": null
+        }
+      ],
+      "nativeOrCombination": "native"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "the_self_mending_work",
+      "name": "The Self-Mending Work",
+      "levelReq": 4,
+      "energyCost": 12,
+      "powerSystem": "reach_mechanical_spiritual",
+      "tradition": "enginewright",
+      "attribute": "practical",
+      "axes": {
+        "mechanical_spiritual": -0.6
+      },
+      "functions": [
+        "make",
+        "mend"
+      ],
+      "narrationHints": "You build the repair INTO the thing — so that when it breaks, and it will, it knows how to find its own way back to whole without you.",
+      "description": "The Enginewright art of the work that mends itself — a mechanism, a structure, a system built with its own healing folded in, so it survives its maker. To build this well is to build something that no longer needs you.",
+      "notFor": "It makes durable things, not living ones — a self-mending work is still a work, patient and unfeeling. And building the mending in costs far more than building the thing; you pay the whole future's repairs up front.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Self-Mending Work",
+          "grants": "Build a mechanism or structure that repairs itself, enduring long past its making.",
+          "cannot": "It cannot mend the living, only the made; it costs the future's repairs at the moment of making; and a thing built to outlast you will — with all the grief that carries."
+        }
+      ],
+      "gated": "learned",
+      "nativeOrCombination": "native",
+      "challengeTypes": [
+        "CREATE"
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "id": "the_deep_works",
+      "name": "The Deep Works",
+      "levelReq": 5,
+      "energyCost": 13,
+      "powerSystem": "reach_mechanical_spiritual",
+      "tradition": "enginewright",
+      "attribute": "practical",
+      "axes": {
+        "mechanical_spiritual": -0.9
+      },
+      "functions": [
+        "make"
+      ],
+      "narrationHints": "It is too large to see the whole of at once — a work of such scale and precision that finishing it is less like building and more like agreeing to spend a piece of your life becoming the kind of person who could.",
+      "description": "The Enginewright capstone — a great work of the deep kind, a mechanism or edifice at the scale the dwarven-mechanical peoples are named for. The making of it changes the maker; you do not finish a Deep Work the same person who began it.",
+      "notFor": "One great work, built over real time and enormous cost — it is not a thing you produce in a beat but a thing you commit a season of yourself to. And a Deep Work, once made, is a fact of the world; it cannot be quietly unmade.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Deep Works",
+          "grants": "Commit to and complete a great work of deep making — a mechanism or edifice at world-scale.",
+          "cannot": "It demands real time and nearly all you have, it changes who you are in the building, and once made it is permanent — the world now has this thing in it, and so do you."
+        }
+      ],
+      "gated": "learned",
+      "nativeOrCombination": "native",
+      "challengeTypes": [
+        "CREATE"
+      ]
     }
-   ],
-   "functions": [
-    "mend",
-    "make",
-    "command"
-   ],
-   "challengeTypes": [
-    "PUZZLE"
-   ],
-   "challengeProfile": {
-    "PUZZLE": 3,
-    "SOCIAL": 2,
-    "SURVIVE": 1,
-    "EXPLORE": 1,
-    "FIGHT": 1,
-    "DUEL": 1
-   },
-   "tradition": "enginewright",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "numenwork",
-   "name": "Numenwork",
-   "levelReq": 3,
-   "energyCost": 8,
-   "powerSystem": "reach_mechanical_spiritual",
-   "attribute": "social",
-   "axes": {
-    "mechanical_spiritual": 0.6,
-    "concrete_abstract": 0.3,
-    "death_life": 0.2
-   },
-   "effectTags": [
-    "meaning",
-    "spirit",
-    "attend"
-   ],
-   "narrationHints": "The disciplines of pure meaning — attention made a force, presence that changes what it attends to, the material world going briefly negotiable.",
-   "description": "The spiritual-pole mastery: the mystic practices where meaning acts directly on the world. The road the Valley's framework keeps recognizing itself in.",
-   "notFor": "Building or commanding mechanism (that's Enginecraft); forcing an outcome (Numenwork attends, it does not compel); anything that treats spirit as a lever.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "True Attention",
-     "grants": "Attend so fully that the truth of a person, place, or moment surfaces; steady a soul in crisis by presence alone; perceive the meaning-layer of a Precursor site the Engine can't reach.",
-     "cannot": "Attention reveals and steadies; it does not command or coerce; the unwilling can close to it."
-    },
-    {
-     "rank": 2,
-     "name": "The Negotiable World",
-     "grants": "Where meaning is dense, the material softens — a symbol made briefly real, a threshold held open by significance, a wound that was always metaphor healed as one. Read the numinous truth of the deep works.",
-     "cannot": "Only where meaning already runs dense; it bends the world, never breaks it; the price is proportional to the bending."
-    },
-    {
-     "rank": 3,
-     "name": "The Standing Presence",
-     "grants": "Attention as a force that holds — keep a foreclosing thing open by significance alone, hold a truth in a place until it can't be unsaid, meet the numinous heart of What Sleeps Under as an equal rather than a trespasser. The Numen's power in miniature; the framework's 'hold the aperture' made a discipline.",
-     "cannot": "The wielder drifts hard-spiritual, toward leaving the material behind entirely; presence holds, it does not decide; what you hold open, others must walk through."
-    }
-   ],
-   "functions": [
-    "summon",
-    "reveal",
-    "restore"
-   ],
-   "challengeTypes": [
-    "INVESTIGATE",
-    "SOCIAL",
-    "SURVIVE"
-   ],
-   "challengeProfile": {
-    "INVESTIGATE": 3,
-    "SURVIVE": 2,
-    "FIGHT": 1,
-    "PUZZLE": 1,
-    "EXPLORE": 1,
-    "STEALTH": 1
-   },
-   "tradition": "numinous",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "mech_sense",
-   "name": "Mechanism-Sense",
-   "levelReq": 1,
-   "energyCost": 3,
-   "attribute": "mental",
-   "axes": {
-    "mechanical_spiritual": -0.3
-   },
-   "functions": [
-    "reveal"
-   ],
-   "narrationHints": "The workings of a thing felt like a diagram behind the eyes.",
-   "description": "Perceive how a mechanism or system functions on sight.",
-   "notFor": "The why/meaning of it; living things.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Mechanism-Sense",
-     "grants": "Understand a device or machine-system's function and flaws at a glance.",
-     "cannot": "Function, not purpose; the numinous stays dark."
-    },
-    {
-     "rank": 2,
-     "name": "The Whole Mechanism",
-     "grants": "Read a machine entire — what it does, what it was FOR, where it will fail, and what someone changed.",
-     "cannot": "It reads mechanism. What a machine MEANS is the Numinous's country, not yours."
-    },
-    {
-     "rank": 3,
-     "name": "The Engine's Confession",
-     "grants": "A mechanism tells you its whole history — every hand that touched it, every misuse, every repair made in a hurry.",
-     "cannot": "The Precursor works do not confess. They only answer, and only sometimes."
-    }
-   ],
-   "powerSystem": "reach_mechanical_spiritual",
-   "gated": "learned",
-   "challengeTypes": [
-    "INVESTIGATE",
-    "PUZZLE"
-   ],
-   "challengeProfile": {
-    "INVESTIGATE": 2,
-    "FIGHT": 1,
-    "PUZZLE": 1
-   },
-   "tradition": "enginewright",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "numen_sense",
-   "name": "Numen-Sense",
-   "levelReq": 1,
-   "energyCost": 3,
-   "attribute": "social",
-   "axes": {
-    "mechanical_spiritual": 0.3
-   },
-   "functions": [
-    "reveal"
-   ],
-   "narrationHints": "The weight of meaning in a place felt on the skin.",
-   "description": "Sense where meaning runs dense — sacred ground, a charged moment, a numinous site.",
-   "notFor": "Reading mechanism; forcing the meaning.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Numen-Sense",
-     "grants": "Feel the significance-density of a place or moment; know where the world is 'thin.'",
-     "cannot": "Feel, not command; barren places read empty."
-    },
-    {
-     "rank": 2,
-     "name": "The Thinning",
-     "grants": "Feel where the veil is thin — where meaning presses close enough to touch, and where something is pressing back.",
-     "cannot": "Feeling the thin place is not surviving it. Not everything on the other side is glad to be noticed."
-    },
-    {
-     "rank": 3,
-     "name": "The Numen Plain",
-     "grants": "The numinous is simply visible to you — the sacred, the haunted, the charged, all plain as furniture.",
-     "cannot": "Once seen, never unseen. The Numinous who reach this depth find the ordinary world thin and hard to care about."
-    }
-   ],
-   "powerSystem": "reach_mechanical_spiritual",
-   "gated": "learned",
-   "challengeTypes": [
-    "INVESTIGATE",
-    "EXPLORE"
-   ],
-   "challengeProfile": {
-    "INVESTIGATE": 2,
-    "FIGHT": 1,
-    "PUZZLE": 1
-   },
-   "tradition": "numinous",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "mend_device",
-   "name": "Mend",
-   "levelReq": 1,
-   "energyCost": 4,
-   "attribute": "practical",
-   "axes": {
-    "mechanical_spiritual": -0.3
-   },
-   "functions": [
-    "mend",
-    "make"
-   ],
-   "narrationHints": "Parts find their places and the dead thing hums again.",
-   "description": "Repair a broken mechanism or device with a craftsman's sure touch.",
-   "notFor": "Precursor deep-systems (that's Enginecraft); living hurts.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Mend",
-     "grants": "Fix a broken tool, machine, or simple device reliably.",
-     "cannot": "Ordinary mechanism only; the deep works resist."
-    },
-    {
-     "rank": 2,
-     "name": "The True Mend",
-     "grants": "Mend a thing so it works as it was meant to — not patched, but restored to its intent.",
-     "cannot": "You must know what it was FOR. A mend against the true intent will not hold."
-    },
-    {
-     "rank": 3,
-     "name": "Better Than New",
-     "grants": "The mended thing is better than it was — you understood it well enough to improve it in the mending.",
-     "cannot": "The Enginewrights' pride and their sin: not everything you can improve should be."
-    }
-   ],
-   "powerSystem": "reach_mechanical_spiritual",
-   "gated": "learned",
-   "challengeTypes": [
-    "PUZZLE",
-    "SURVIVE"
-   ],
-   "challengeProfile": {
-    "PUZZLE": 1,
-    "SURVIVE": 1,
-    "EXPLORE": 1
-   },
-   "tradition": "enginewright",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "steady_soul",
-   "name": "Steady the Soul",
-   "levelReq": 1,
-   "energyCost": 4,
-   "attribute": "social",
-   "axes": {
-    "mechanical_spiritual": 0.3
-   },
-   "functions": [
-    "empower",
-    "heal",
-    "resist"
-   ],
-   "narrationHints": "Presence alone, and the breaking person holds.",
-   "description": "Steady another's spirit in crisis by attention and presence — folk-Numenwork.",
-   "notFor": "Healing the body; compelling calm.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Steady the Soul",
-     "grants": "Calm and steady a person in spiritual/emotional crisis through pure presence.",
-     "cannot": "Opens the door, never shoves; the closed resist."
-    },
-    {
-     "rank": 2,
-     "name": "The Steadied Hand",
-     "grants": "Steady another person through terror, grief, or the shakes — they can act when they could not.",
-     "cannot": "Steadying is a loan against their own strength. It comes due when you let go."
-    },
-    {
-     "rank": 3,
-     "name": "The Unshaken",
-     "grants": "Nothing shakes you, and nearness to you steadies others without effort — panic does not propagate through you.",
-     "cannot": "Unshakable is not unhurt. It means the hurt does not show, and does not get put down."
-    }
-   ],
-   "powerSystem": "reach_mechanical_spiritual",
-   "gated": "learned",
-   "challengeTypes": [
-    "SOCIAL",
-    "SURVIVE"
-   ],
-   "challengeProfile": {
-    "SURVIVE": 3
-   },
-   "tradition": "numinous",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "command_engine",
-   "name": "Command the Small Engine",
-   "levelReq": 2,
-   "energyCost": 5,
-   "attribute": "practical",
-   "axes": {
-    "mechanical_spiritual": -0.4,
-    "chaos_order": 0.2
-   },
-   "functions": [
-    "command",
-    "mend"
-   ],
-   "narrationHints": "A word to the machine and it does the new thing.",
-   "description": "Direct a machine-system to reconfigure toward your intent — mid-tier Enginecraft.",
-   "notFor": "The meaning-layer; wishes the mechanism can't do.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Command the Small Engine",
-     "grants": "Make a device or system do something within its mechanism it wasn't set to.",
-     "cannot": "Only what the mechanism allows; meaning stays opaque."
-    },
-    {
-     "rank": 2,
-     "name": "The Larger Engine",
-     "grants": "Command engines beyond the small — a mill, a lock-system, a Precursor door that still half-listens.",
-     "cannot": "Commanding a thing is not understanding it. Engines obey the words, not the wish."
-    },
-    {
-     "rank": 3,
-     "name": "The Engine Obeys",
-     "grants": "Mechanism answers you as if you were its maker — it does what you mean, not merely what you say.",
-     "cannot": "Halvex Coil began exactly here, and did not stop. The Enginewrights teach this rank with a warning attached."
-    }
-   ],
-   "powerSystem": "reach_mechanical_spiritual",
-   "gated": "learned",
-   "challengeTypes": [
-    "PUZZLE",
-    "FIGHT"
-   ],
-   "challengeProfile": {
-    "SOCIAL": 2,
-    "FIGHT": 1,
-    "DUEL": 1,
-    "PUZZLE": 1,
-    "SURVIVE": 1,
-    "EXPLORE": 1
-   },
-   "tradition": "enginewright",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "thin_place",
-   "name": "Open the Thin Place",
-   "levelReq": 3,
-   "energyCost": 6,
-   "attribute": "social",
-   "axes": {
-    "mechanical_spiritual": 0.4,
-    "concrete_abstract": 0.3
-   },
-   "functions": [
-    "summon",
-    "reveal",
-    "ward"
-   ],
-   "narrationHints": "Where meaning is thick, a threshold opens that was never a door.",
-   "description": "Where significance runs dense, briefly make a symbol real — a threshold held by meaning. Mid-tier Numenwork.",
-   "notFor": "Where meaning is thin; forcing the world.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Open the Thin Place",
-     "grants": "In a meaning-dense place, make a symbol briefly literal — a held threshold, a metaphor made real.",
-     "cannot": "Only where meaning is dense; costs proportional."
-    },
-    {
-     "rank": 2,
-     "name": "The Held Thin Place",
-     "grants": "Hold a thin place open — long enough for others to see, to speak, to pass a thing through.",
-     "cannot": "Held open is held open from BOTH sides. Whatever is on the other side also has a door now."
-    },
-    {
-     "rank": 3,
-     "name": "The Open Door",
-     "grants": "Open a thin place where there was none, in a room that had no reason to be sacred.",
-     "cannot": "The Numinous forbid this to most of their own. What you invite has its own opinions."
-    }
-   ],
-   "powerSystem": "reach_mechanical_spiritual",
-   "gated": "learned",
-   "challengeTypes": [
-    "PUZZLE",
-    "EXPLORE",
-    "SURVIVE"
-   ],
-   "challengeProfile": {
-    "INVESTIGATE": 3,
-    "SURVIVE": 2,
-    "FIGHT": 1,
-    "PUZZLE": 1,
-    "EXPLORE": 1,
-    "STEALTH": 1
-   },
-   "tradition": "numinous",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "meaning_engine",
-   "name": "The Meaning-Engine",
-   "levelReq": 4,
-   "energyCost": 9,
-   "attribute": "mental",
-   "axes": {
-    "mechanical_spiritual": 0.0
-   },
-   "functions": [
-    "mend",
-    "reveal"
-   ],
-   "narrationHints": "The machine runs on why, not just how.",
-   "description": "The braid-craft: command a Precursor work by significance, not only mechanism — body and meaning at once.",
-   "notFor": "Pure-mechanism or pure-spirit approaches; shallow substrate.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "The Meaning-Engine",
-     "grants": "Run a deep Precursor work by both its mechanism AND its meaning — the way to treat with What Sleeps Under.",
-     "cannot": "Needs dense substrate; what answers may not be tame."
-    }
-   ],
-   "powerSystem": "reach_mechanical_spiritual",
-   "gated": "learned",
-   "challengeTypes": [
-    "PUZZLE",
-    "INVESTIGATE"
-   ],
-   "challengeProfile": {
-    "INVESTIGATE": 3,
-    "PUZZLE": 2,
-    "SURVIVE": 1,
-    "EXPLORE": 1,
-    "FIGHT": 1
-   },
-   "tradition": "cross_pole_braid",
-   "nativeOrCombination": "combination"
-  },
-  {
-   "id": "shortfold",
-   "name": "Shortfold",
-   "levelReq": 3,
-   "energyCost": 7,
-   "attribute": "mental",
-   "axes": {
-    "mechanical_spiritual": 0.3,
-    "space_time": 0.4
-   },
-   "functions": [
-    "travel",
-    "move"
-   ],
-   "challengeProfile": {
-    "CHASE": 2,
-    "EXPLORE": 2,
-    "STEALTH": 1
-   },
-   "narrationHints": "The space between here and there folds for a step, and you are across it.",
-   "description": "A short-range teleport — fold the space between you and a spot you can SEE, and step through. Blink across a gap, past a door, out of a grip. Needs substrate to fold against.",
-   "notFor": "Somewhere unseen (line-of-sight only); long distance; carrying a crowd.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Shortfold",
-     "grants": "Instantly cross to a visible point within ~30 paces — through, past, or over what's between.",
-     "cannot": "Line-of-sight only; substrate-thin places (the origin-flats) refuse it; costs sharply, a botch drops you mid-fold (hurt)."
-    },
-    {
-     "rank": 2,
-     "name": "The Longer Fold",
-     "grants": "Fold a longer distance — a valley rather than a courtyard — and bring others through with you.",
-     "cannot": "Both ends must be places you truly know. A fold to a half-remembered place ends half-way."
-    },
-    {
-     "rank": 3,
-     "name": "The Folded Road",
-     "grants": "Fold distance as a road you can walk repeatedly — a route through the short way that stays open.",
-     "cannot": "The folded road is a hole in the world, and the world notices holes."
-    }
-   ],
-   "powerSystem": "reach_mechanical_spiritual",
-   "gated": "learned",
-   "tradition": "enginewright",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "waygate",
-   "name": "Waygate",
-   "levelReq": 5,
-   "energyCost": 12,
-   "attribute": "mental",
-   "axes": {
-    "mechanical_spiritual": 0.5,
-    "space_time": 0.6
-   },
-   "functions": [
-    "travel",
-    "open",
-    "summon"
-   ],
-   "challengeProfile": {
-    "EXPLORE": 3,
-    "CHASE": 2
-   },
-   "narrationHints": "A door opens onto a place you have stood before, a hundred miles closed to a single step.",
-   "description": "The long teleport capstone: open a fold to a place you KNOW WELL (have been, and can hold clearly), crossing any distance. Move a small party through. The Precursor way-network's power, woken.",
-   "notFor": "Anywhere you haven't been/can't hold; instant repeat; an unwilling passenger.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Waygate",
-     "grants": "Open a gate to a well-known distant place and step (or lead a few) through, crossing any distance at once.",
-     "cannot": "Only to places held clearly in memory; enormous cost + cooldown; a botch opens the wrong gate, or a dangerous one."
-    }
-   ],
-   "powerSystem": "reach_mechanical_spiritual",
-   "gated": "learned",
-   "tradition": "numinous",
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "the_fault_strike",
-   "name": "The Fault Strike",
-   "levelReq": 2,
-   "energyCost": 1,
-   "powerSystem": "attribute",
-   "attribute": "practical",
-   "axes": {
-    "mechanical_spiritual": -0.4,
-    "violence_peace": 0.2
-   },
-   "effectTags": [
-    "precision",
-    "exploit",
-    "mechanism"
-   ],
-   "harmRung": "damaging",
-   "narrationHints": "He didn't hit the person. He hit the load-bearing piece.",
-   "description": "Strike at the known structural weak point — the joint, the fault, the critical piece — for maximum effect from minimum force.",
-   "notFor": [],
-   "tradition": "enginewright",
-   "functions": [
-    "strike",
-    "break"
-   ],
-   "challengeTypes": [
-    "combat",
-    "technical",
-    "tactical"
-   ],
-   "challengeProfile": {
-    "cognitive": 0.5,
-    "physical": 0.4,
-    "social": 0.1
-   },
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Fault Point",
-     "grants": "Strike a person or device at its structural weak point — the joint under load, the nerve cluster, the part compensating for an earlier damage — for targeted, efficient harm.",
-     "cannot": null
-    },
-    {
-     "rank": 2,
-     "name": "Controlled Failure",
-     "grants": "Hit a mechanism's fault so precisely it fails in the way you need — not just broken, stopped; not just damaged, disabled at the point that matters.",
-     "cannot": null
-    },
-    {
-     "rank": 3,
-     "name": "One Strike",
-     "grants": "End what would otherwise require sustained effort through one well-placed action — because you knew where it would break before you moved.",
-     "cannot": null
-    }
-   ],
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "the_mechanical_defense",
-   "name": "The Mechanical Defense",
-   "levelReq": 2,
-   "energyCost": 1,
-   "powerSystem": "attribute",
-   "attribute": "practical",
-   "axes": {
-    "mechanical_spiritual": -0.4,
-    "chaos_order": 0.2
-   },
-   "effectTags": [
-    "shield",
-    "engineering",
-    "redirect"
-   ],
-   "harmRung": "none",
-   "narrationHints": "The blow arrives. Something redirects it. She engineered for this.",
-   "description": "Protection through engineered response — interlocking parts and redirected force, not brute resistance.",
-   "notFor": [],
-   "tradition": "enginewright",
-   "functions": [
-    "shield",
-    "resist"
-   ],
-   "challengeTypes": [
-    "combat",
-    "craft",
-    "defense"
-   ],
-   "challengeProfile": {
-    "cognitive": 0.5,
-    "physical": 0.4,
-    "social": 0.1
-   },
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Redirected Force",
-     "grants": "Protect through engineered positioning — the blow lands on something that can take it, redirected away from what can't.",
-     "cannot": null
-    },
-    {
-     "rank": 2,
-     "name": "Set Defense",
-     "grants": "Build a mechanical defense that holds without constant attention — barriers and redirects that work while you work on something else.",
-     "cannot": null
-    },
-    {
-     "rank": 3,
-     "name": "Active System",
-     "grants": "A defense that adapts — interlocking protections that cover the group and respond to the threat's form, not just its direction.",
-     "cannot": null
-    }
-   ],
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "the_running_engine",
-   "name": "The Running Engine",
-   "levelReq": 1,
-   "energyCost": 1,
-   "powerSystem": "attribute",
-   "attribute": "practical",
-   "axes": {
-    "mechanical_spiritual": -0.3
-   },
-   "effectTags": [
-    "endurance",
-    "optimization",
-    "self-maintenance"
-   ],
-   "harmRung": "none",
-   "narrationHints": "The body is a mechanism. He treated it accordingly. It kept running.",
-   "description": "Sustain through precise self-maintenance — the right fuel, the right rhythm, the understood limit approached without crossing.",
-   "notFor": [],
-   "tradition": "enginewright",
-   "functions": [
-    "sustain",
-    "resist"
-   ],
-   "challengeTypes": [
-    "endurance",
-    "craft",
-    "hardship"
-   ],
-   "challengeProfile": {
-    "cognitive": 0.4,
-    "physical": 0.5,
-    "social": 0.1
-   },
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Calibrated Effort",
-     "grants": "Push past fatigue by treating the body as a mechanism — the right rhythm, the right intake, the precisely understood limit that can be approached safely.",
-     "cannot": null
-    },
-    {
-     "rank": 2,
-     "name": "Maintained Function",
-     "grants": "Keep working through damage and deprivation by knowing exactly what the mechanism needs — no panic, no waste, no unnecessary expenditure.",
-     "cannot": null
-    },
-    {
-     "rank": 3,
-     "name": "Indefinite Run",
-     "grants": "The body does what it must for as long as it must — calibrated to exact need, running past what others would call the wall.",
-     "cannot": null
-    }
-   ],
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "the_dimmed_meaning",
-   "name": "The Dimmed Meaning",
-   "levelReq": 2,
-   "energyCost": 2,
-   "powerSystem": "attribute",
-   "attribute": "social",
-   "axes": {
-    "mechanical_spiritual": 0.4
-   },
-   "effectTags": [
-    "dissolution",
-    "meaning",
-    "disruption"
-   ],
-   "harmRung": "incapacitating",
-   "narrationHints": "The significance drained out of it. What remained was just a thing.",
-   "description": "Strip numinous weight from a working, a symbol, or a belief — when meaning departs, what it was holding falls.",
-   "notFor": [],
-   "tradition": "numinous",
-   "functions": [
-    "hinder",
-    "break"
-   ],
-   "challengeTypes": [
-    "magical",
-    "intellectual",
-    "combat"
-   ],
-   "challengeProfile": {
-    "cognitive": 0.6,
-    "physical": 0.1,
-    "social": 0.3
-   },
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Weight Withdrawn",
-     "grants": "Drain numinous significance from a working, a symbol, or a belief — it still exists but loses whatever meaning made it matter.",
-     "cannot": null
-    },
-    {
-     "rank": 2,
-     "name": "Broken Meaning",
-     "grants": "Break a thing's significance so completely that those who relied on it lose orientation — the sacred desecrated in ways they feel immediately.",
-     "cannot": null
-    },
-    {
-     "rank": 3,
-     "name": "The Voided Place",
-     "grants": "Withdraw numinous presence from an entire place or working — what meaning was sustaining simply stops, and what it held together comes apart.",
-     "cannot": null
-    }
-   ],
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "the_weight_of_practice",
-   "name": "The Weight of Practice",
-   "levelReq": 2,
-   "energyCost": 1,
-   "powerSystem": "attribute",
-   "attribute": "social",
-   "axes": {
-    "mechanical_spiritual": 0.4
-   },
-   "effectTags": [
-    "presence",
-    "authority",
-    "spiritual"
-   ],
-   "harmRung": "none",
-   "narrationHints": "She didn't say anything commanding. She was there. That was enough.",
-   "description": "The gravity of someone who has dissolved deeply into practice — not commanded, simply present; people organize around it.",
-   "notFor": [],
-   "tradition": "numinous",
-   "functions": [
-    "command",
-    "bind"
-   ],
-   "challengeTypes": [
-    "social",
-    "leadership",
-    "spiritual"
-   ],
-   "challengeProfile": {
-    "cognitive": 0.2,
-    "physical": 0.1,
-    "social": 0.7
-   },
-   "tree": [
-    {
-     "rank": 1,
-     "name": "Settled Presence",
-     "grants": "Your presence carries the weight of genuine practice — people feel it, and it settles them, orients them toward what they already know is right.",
-     "cannot": null
-    },
-    {
-     "rank": 2,
-     "name": "The Deep Pull",
-     "grants": "Bind a person or group to a truth they have been avoiding — not manipulation, the simple pull of someone who has been further in.",
-     "cannot": null
-    },
-    {
-     "rank": 3,
-     "name": "Organizing Presence",
-     "grants": "Your presence is simply the authority in the room — not commanded, not explained, present; people naturally arrange themselves relative to where you stand.",
-     "cannot": null
-    }
-   ],
-   "nativeOrCombination": "native"
-  },
-  {
-   "id": "the_unbroken_practice",
-   "name": "The Unbroken Practice",
-   "levelReq": 1,
-   "energyCost": 1,
-   "powerSystem": "attribute",
-   "attribute": "social",
-   "axes": {
-    "mechanical_spiritual": 0.3
-   },
-   "effectTags": [
-    "endurance",
-    "discipline",
-    "spirit"
-   ],
-   "harmRung": "none",
-   "narrationHints": "When everything was taken, the practice was still there. So was she.",
-   "description": "Sustain through unbroken spiritual discipline — the form that holds you when nothing else does.",
-   "notFor": [],
-   "tradition": "numinous",
-   "functions": [
-    "sustain",
-    "resist"
-   ],
-   "challengeTypes": [
-    "endurance",
-    "hardship",
-    "spiritual"
-   ],
-   "challengeProfile": {
-    "cognitive": 0.4,
-    "physical": 0.3,
-    "social": 0.3
-   },
-   "tree": [
-    {
-     "rank": 1,
-     "name": "The Form Holds",
-     "grants": "Maintain function through hardship by continuing the practice — when everything else is stripped, the discipline remains and it is enough to stand on.",
-     "cannot": null
-    },
-    {
-     "rank": 2,
-     "name": "Endurance of Attendance",
-     "grants": "The form holds you in conditions that break people who have nothing to return to — not will, the practice; not trying harder, attending more fully.",
-     "cannot": null
-    },
-    {
-     "rank": 3,
-     "name": "As Long as the Practice Continues",
-     "grants": "You do not run out as long as you can still attend. The body may fail; the practice holds what the body was holding.",
-     "cannot": null
-    }
-   ],
-   "nativeOrCombination": "native"
-  },
-  {
-   "schemaVersion": 1,
-   "id": "the_self_mending_work",
-   "name": "The Self-Mending Work",
-   "levelReq": 4,
-   "energyCost": 12,
-   "powerSystem": "reach_mechanical_spiritual",
-   "tradition": "enginewright",
-   "attribute": "practical",
-   "axes": {
-    "mechanical_spiritual": -0.6
-   },
-   "functions": [
-    "make",
-    "mend"
-   ],
-   "narrationHints": "You build the repair INTO the thing — so that when it breaks, and it will, it knows how to find its own way back to whole without you.",
-   "description": "The Enginewright art of the work that mends itself — a mechanism, a structure, a system built with its own healing folded in, so it survives its maker. To build this well is to build something that no longer needs you.",
-   "notFor": "It makes durable things, not living ones — a self-mending work is still a work, patient and unfeeling. And building the mending in costs far more than building the thing; you pay the whole future's repairs up front.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "The Self-Mending Work",
-     "grants": "Build a mechanism or structure that repairs itself, enduring long past its making.",
-     "cannot": "It cannot mend the living, only the made; it costs the future's repairs at the moment of making; and a thing built to outlast you will — with all the grief that carries."
-    }
-   ],
-   "gated": "learned",
-   "nativeOrCombination": "native",
-   "challengeTypes": [
-    "CREATE"
-   ],
-   "challengeProfile": {
-    "CREATE": 4
-   }
-  },
-  {
-   "schemaVersion": 1,
-   "id": "the_deep_works",
-   "name": "The Deep Works",
-   "levelReq": 5,
-   "energyCost": 13,
-   "powerSystem": "reach_mechanical_spiritual",
-   "tradition": "enginewright",
-   "attribute": "practical",
-   "axes": {
-    "mechanical_spiritual": -0.9
-   },
-   "functions": [
-    "make"
-   ],
-   "narrationHints": "It is too large to see the whole of at once — a work of such scale and precision that finishing it is less like building and more like agreeing to spend a piece of your life becoming the kind of person who could.",
-   "description": "The Enginewright capstone — a great work of the deep kind, a mechanism or edifice at the scale the dwarven-mechanical peoples are named for. The making of it changes the maker; you do not finish a Deep Work the same person who began it.",
-   "notFor": "One great work, built over real time and enormous cost — it is not a thing you produce in a beat but a thing you commit a season of yourself to. And a Deep Work, once made, is a fact of the world; it cannot be quietly unmade.",
-   "tree": [
-    {
-     "rank": 1,
-     "name": "The Deep Works",
-     "grants": "Commit to and complete a great work of deep making — a mechanism or edifice at world-scale.",
-     "cannot": "It demands real time and nearly all you have, it changes who you are in the building, and once made it is permanent — the world now has this thing in it, and so do you."
-    }
-   ],
-   "gated": "learned",
-   "nativeOrCombination": "native",
-   "challengeTypes": [
-    "CREATE"
-   ],
-   "challengeProfile": {
-    "CREATE": 5
-   }
-  }
- ],
- "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
+  ],
+  "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"
 }

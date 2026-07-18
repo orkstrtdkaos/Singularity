@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 13,
-  "xp": 1251,
+  "xp": 1259,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -89,7 +89,7 @@
   "maxHealth": 90,
   "health": 89,
   "maxEnergy": 160,
-  "energy": 126,
+  "energy": 121,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -268,6 +268,30 @@
       "kind": "tool",
       "qty": 1,
       "description": "A tight-woven square of filtering cloth, pre-Transition manufacture — can strain contaminated water through multiple passes.",
+      "consumable": false
+    },
+    {
+      "id": null,
+      "name": "Confiscated Hatchet",
+      "kind": "weapon",
+      "qty": 1,
+      "description": "A long-handled hatchet taken from the broad man at the limestone bend — plain iron head, worn grip, functional. Could be traded, given, or put to use.",
+      "consumable": false
+    },
+    {
+      "id": null,
+      "name": "Pilfered Camp Tin",
+      "kind": "misc",
+      "qty": 1,
+      "description": "A small tin from the opportunists' pack — likely taken from someone's unattended camp. Contents unknown.",
+      "consumable": false
+    },
+    {
+      "id": null,
+      "name": "Trade-Knives (pair)",
+      "kind": "weapon",
+      "qty": 1,
+      "description": "Two small belt-trade knives confiscated from the road opportunists — plain, serviceable, nothing special.",
       "consumable": false
     }
   ],
@@ -705,6 +729,21 @@
       "weight": 2,
       "spread": [],
       "day": 4,
+      "worldDay": 18
+    },
+    {
+      "at": "2026-07-18T13:29:31.019Z",
+      "locationId": "millbrook",
+      "communityId": "valley.millbrook",
+      "description": "Showed mercy to road opportunists after disarming them — named the broad man's grief, gave them provisions, and sent them to honest work rather than leaving them in the mud",
+      "tags": [
+        "mercy",
+        "community",
+        "uncanny"
+      ],
+      "weight": 2,
+      "spread": [],
+      "day": 5,
       "worldDay": 18
     }
   ],
@@ -1438,46 +1477,19 @@
         "player": "Step on the crook — put your boot through what's left of it while the lean man watches — and let the silence do the work.",
         "summary": "Silas boots the crook apart; the lean man folds, the broad man reads the room, and both men stand down.",
         "narration": "You bring your boot down on the split shaft — one clean press — and the crook gives up. The wood doesn't splinter dramatically; it just folds along the grain with a dry creak, the iron shoe dropping into the mud, the upper half rolling against the lean man's boot. He still has his hand out where the grip was. Takes him a moment to close it.\n\nHuginn hasn't moved. It sits on the branch above with the patience of something that has watched worse than this and found it unremarkable. The lean man sees it looking at him and that is, finally, the thing that decides it. He takes one step back. Then another.\n\nBehind you, Pell shifts her weight — the broad man is in the hawthorn with nowhere to go, her elbow still angled forward, his hatchet arm pinned against a branch by the simple geometry of where she is standing. He's not looking at her anymore. He's looking at his partner backing away and doing the arithmetic.\n\n\"Road's still behind you,\" you say. No threat in it. Just a fact, the way the morning is a fact. The broad man's hatchet hand opens. He doesn't drop it — but he stops pretending he's going to use it. Pell reads it without being told and steps back a half-pace, giving him the room to get out of the hawthorn without having to go through her to do it."
+      },
+      {
+        "player": "Tell about the sister, take their weapons and go through their belongings to find things they may have stolen - let them keep some provisions but tell them to get back to an honest life.  Have the see Mara Wells in Millbrook if they need honest work. We'll need able bodied men to save the valley.",
+        "summary": "Silas named the broad man's grief, confiscated both weapons, and sent them to Mara Wells in Millbrook with the offer of honest work.",
+        "narration": "You let the silence sit for another breath, then step toward the lean man — not fast, not threatening, just closing the distance until he has nowhere to look but at you. \"The broad man's sister,\" you say quietly. \"Come summer. You already know it.\" You watch the lean man's face go still as the broad man's breath catches behind you. Neither of them asked how you know. They've heard of Ashwardens.\n\nYou don't wait for a response. You hold out your hand to the lean man — palm up, not a fist. He looks at it for a moment, then sets the broken handle of whatever he'd been carrying into it. The broad man turns the hatchet in his hand twice and then, with the flat deliberateness of someone making a decision they can't take back, offers it grip-first. You take it. Pell steps around the broad man and goes through both packs without ceremony — flour parcel, a length of cord, two small trade-knives, a tin they nicked from somebody's unattended camp. You set the food back. The rest you keep. The broad man watches his hatchet in your hand and says nothing.\n\n\"Mara Wells. Millbrook, west side of the well.\" You let him hear the name clearly. \"She runs the supply store. Tell her Silas Weir sent you — that you need honest work. She'll have something, or she'll know who does.\" You look from one to the other. \"The valley is going to need every able pair of hands before this season is finished. That's not a threat. That's a fact.\" The lean man's jaw tightens. The broad man just nods — the short, private nod of a man recalibrating toward something he hadn't expected to be offered.\n\nYou step back. Pell is already angled toward the road south, pack settled, watching the tree line out of habit. Huginn drops from the branch in one unhurried arc and lands on Memory's socket, rides it for a moment, then lifts again to a branch further down the track — the direction you're going. The two men stand in the mud at the limestone bend, one lighter a hatchet and a road-crook, both watching you leave. Neither follows."
       }
     ],
     "lastTurn": {
-      "narration": "You bring your boot down on the split shaft — one clean press — and the crook gives up. The wood doesn't splinter dramatically; it just folds along the grain with a dry creak, the iron shoe dropping into the mud, the upper half rolling against the lean man's boot. He still has his hand out where the grip was. Takes him a moment to close it.\n\nHuginn hasn't moved. It sits on the branch above with the patience of something that has watched worse than this and found it unremarkable. The lean man sees it looking at him and that is, finally, the thing that decides it. He takes one step back. Then another.\n\nBehind you, Pell shifts her weight — the broad man is in the hawthorn with nowhere to go, her elbow still angled forward, his hatchet arm pinned against a branch by the simple geometry of where she is standing. He's not looking at her anymore. He's looking at his partner backing away and doing the arithmetic.\n\n\"Road's still behind you,\" you say. No threat in it. Just a fact, the way the morning is a fact. The broad man's hatchet hand opens. He doesn't drop it — but he stops pretending he's going to use it. Pell reads it without being told and steps back a half-pace, giving him the room to get out of the hawthorn without having to go through her to do it.",
-      "sceneSummary": "Silas boots the crook apart; the lean man folds, the broad man reads the room, and both men stand down.",
+      "narration": "You let the silence sit for another breath, then step toward the lean man — not fast, not threatening, just closing the distance until he has nowhere to look but at you. \"The broad man's sister,\" you say quietly. \"Come summer. You already know it.\" You watch the lean man's face go still as the broad man's breath catches behind you. Neither of them asked how you know. They've heard of Ashwardens.\n\nYou don't wait for a response. You hold out your hand to the lean man — palm up, not a fist. He looks at it for a moment, then sets the broken handle of whatever he'd been carrying into it. The broad man turns the hatchet in his hand twice and then, with the flat deliberateness of someone making a decision they can't take back, offers it grip-first. You take it. Pell steps around the broad man and goes through both packs without ceremony — flour parcel, a length of cord, two small trade-knives, a tin they nicked from somebody's unattended camp. You set the food back. The rest you keep. The broad man watches his hatchet in your hand and says nothing.\n\n\"Mara Wells. Millbrook, west side of the well.\" You let him hear the name clearly. \"She runs the supply store. Tell her Silas Weir sent you — that you need honest work. She'll have something, or she'll know who does.\" You look from one to the other. \"The valley is going to need every able pair of hands before this season is finished. That's not a threat. That's a fact.\" The lean man's jaw tightens. The broad man just nods — the short, private nod of a man recalibrating toward something he hadn't expected to be offered.\n\nYou step back. Pell is already angled toward the road south, pack settled, watching the tree line out of habit. Huginn drops from the branch in one unhurried arc and lands on Memory's socket, rides it for a moment, then lifts again to a branch further down the track — the direction you're going. The two men stand in the mud at the limestone bend, one lighter a hatchet and a road-crook, both watching you leave. Neither follows.",
+      "sceneSummary": "Silas named the broad man's grief, confiscated both weapons, and sent them to Mara Wells in Millbrook with the offer of honest work.",
       "choices": [
         {
-          "label": "Let them go — stand aside and watch them leave, no parting words",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "intentTags": [
-            "guard"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Hold them one moment — The Attended End already told you something about the broad man (a sister dying come summer). Speak to that, not the fight.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 15,
-          "intentTags": [
-            "comfort",
-            "calm"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Ask, plainly, whether anyone sent them — or if this was their own idea",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "negotiate"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Say nothing and move on — get Calvar clear of the bend and put the road behind you",
+          "label": "Move out — take the road south toward Millbrook, Calvar between you and Pell",
           "attribute": "physical",
           "subAttribute": "agility",
           "difficulty": 0,
@@ -1485,31 +1497,137 @@
             "travel",
             "careful"
           ],
-          "trivial": true
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Read the road as you walk — Order-Sense on the landscape ahead, looking for the shortcut the land is trying to show you",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "concrete_abstract": -0.3
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "scout",
+            "study"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Walk with Calvar — ask him what he makes of the country here, ease him into the road",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "calm",
+            "help"
+          ],
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Pell what she's thinking — the fight is over, the road is open; this is the first quiet beat you've had",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "comfort",
+            "romantic"
+          ],
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [
+        {
+          "description": "Showed mercy to road opportunists after disarming them — named the broad man's grief, gave them provisions, and sent them to honest work rather than leaving them in the mud",
+          "tags": [
+            "mercy",
+            "community",
+            "uncanny"
+          ],
+          "weight": 2,
+          "communityId": "valley.millbrook"
+        }
+      ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [
+          {
+            "name": "Confiscated Hatchet",
+            "kind": "weapon",
+            "description": "A long-handled hatchet taken from the broad man at the limestone bend — plain iron head, worn grip, functional. Could be traded, given, or put to use.",
+            "consumable": false
+          },
+          {
+            "name": "Pilfered Camp Tin",
+            "kind": "misc",
+            "description": "A small tin from the opportunists' pack — likely taken from someone's unattended camp. Contents unknown.",
+            "consumable": false
+          },
+          {
+            "name": "Trade-Knives (pair)",
+            "kind": "weapon",
+            "description": "Two small belt-trade knives confiscated from the road opportunists — plain, serviceable, nothing special.",
+            "consumable": false
+          }
+        ],
+        "xp": 3
+      },
+      "ledgerEvents": [
+        {
+          "what": "Two road opportunists at the limestone bend were disarmed and sent to Mara Wells in Millbrook for honest work — Silas Weir's name given as introduction",
+          "tags": [
+            "mercy",
+            "community",
+            "millbrook"
+          ],
+          "visibility": "witnessed",
+          "spectrumDeltas": {
+            "violence_peace": 0.03,
+            "falsehood_truth": 0.02
+          },
+          "impactsLocal": true
+        }
+      ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "find-the-engineer",
+          "note": "Party cleared the limestone bend without casualties — Calvar and the document roll are intact. Road south to Millbrook is open."
         }
       ],
       "scene": {
-        "setting": "The trade track at the limestone bend — hawthorn screening left, outcrop right. Morning light full from the east. The broken crook lies in two pieces in the mud. Both opportunists are on their feet but no longer pressing.",
+        "setting": "The trade track at the limestone bend — hawthorn left, limestone outcrop right, morning light full from the east. The broken crook lies in two pieces in the mud. Both opportunists are on their feet, standing in place, watching the party prepare to move.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Half-pace back from the broad man, elbow lowered — reading his hands, ready, not committed."
+            "state": "Angled toward the road south, pack settled, watching the tree line — ready to move."
           },
           {
             "name": "Calvar",
-            "state": "Still at the limestone outcrop, right hand inside his coat, watching both men without expression."
+            "state": "At the outcrop, right hand relaxing from inside his coat — watching the broad man's face as the hatchet changed hands."
           },
           {
             "name": "Huginn",
-            "state": "On the branch above — motionless, watching the lean man specifically."
+            "state": "On a branch further down the track, in the direction of Millbrook — waiting."
           },
           {
             "name": "Broad Opportunist",
-            "state": "Out of the hawthorn, hatchet hand open — not dropped, not raised. Looking at his partner."
+            "state": "Standing in the mud, lighter a hatchet, watching you go. Mara Wells's name is in him now."
           },
           {
             "name": "Lean Opportunist",
-            "state": "Two more steps back, hand still shaped around a weapon that isn't there anymore. Deciding."
+            "state": "Two steps back from where he stood — provisions at his feet, the rest gone. Not following."
           }
         ],
         "objects": [
@@ -1518,14 +1636,14 @@
           "Sealed document roll — inside Calvar's coat",
           "Pell's pack — on her back",
           "River Whetstone — at Pell's belt",
-          "Valve Failure Timeline — in Silas's pack",
-          "Long-handled hatchet — in the broad man's hand, grip loosened",
-          "Split crook — in two pieces in the mud, iron shoe separate"
+          "Confiscated Hatchet — in Silas's hand",
+          "Split crook — in two pieces in the mud, iron shoe separate",
+          "Remaining provisions — left at the lean man's feet"
         ],
         "threads": [
-          "Both men are standing down but neither has left yet — the next word or movement seals it",
-          "The broad man's grief (a sister, come summer) sits unaddressed between you",
-          "Calvar and the document roll are safe — but the party hasn't moved yet"
+          "The road south to Millbrook is open — the party has not yet moved",
+          "The broad man has Mara Wells's name; whether he uses it is unresolved",
+          "The land may be offering a shortcut — something the ground here wants to show a reader"
         ]
       },
       "npcUpdates": [
@@ -1533,49 +1651,69 @@
           "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "note": "Read the broad man's open hatchet-hand without instruction and stepped back to give him room — field read, no words needed.",
-          "status": "active",
-          "statusNote": "At the limestone bend — stepped back from the broad man, both on their feet, fight concluded.",
-          "skillsObserved": [
-            "reading an opponent's capitulation and stepping back to confirm it without prompting"
-          ]
+          "note": "Stepped back cleanly after the broad man stood down — field read, no words. Now facing south and ready to move.",
+          "statusNote": "At the limestone bend — fight concluded, road south open, waiting on Silas's lead.",
+          "relationshipDelta": 0
         },
         {
           "op": "update",
           "npcId": "calvar",
           "name": "Calvar",
-          "note": "Held his position at the outcrop throughout — right hand on the document, watching, saying nothing. Correct.",
-          "status": "active",
-          "statusNote": "At the limestone outcrop — safe, document roll intact, watching the road opportunists stand down."
+          "note": "Watched the hatchet change hands without expression — right hand finally left his coat. The document is safe.",
+          "statusNote": "At the limestone bend — document roll intact, watching the party prepare to move south.",
+          "relationshipDelta": 1
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "the-attended-end",
+          "label": "The Attended End",
+          "kind": "lore",
+          "fact": "Named a man's coming grief — a sister, come summer — aloud in front of him, and he knew without asking how the Ashwarden knew. The reading, shown on the face, is its own argument.",
+          "links": [
+            "find-the-engineer",
+            "millbrook"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short, sharp roadside confrontation — a few minutes of tension and its resolution."
-      }
+        "why": "A short confrontation and its resolution — ten minutes at the limestone bend"
+      },
+      "placeUpdates": [
+        {
+          "note": "Two road opportunists disarmed and sent to Mara Wells with Silas Weir's name — the limestone bend saw mercy shown and weapons taken on World-day 18 morning."
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Two road opportunists at the limestone bend were disarmed and directed to Mara Wells in Millbrook — Silas Weir's name given as introduction for honest work. The broad man's grief (a sister, come summer) was named aloud."
+        }
+      ]
     },
     "sceneState": {
-      "setting": "The trade track at the limestone bend — hawthorn screening left, outcrop right. Morning light full from the east. The broken crook lies in two pieces in the mud. Both opportunists are on their feet but no longer pressing.",
+      "setting": "The trade track at the limestone bend — hawthorn left, limestone outcrop right, morning light full from the east. The broken crook lies in two pieces in the mud. Both opportunists are on their feet, standing in place, watching the party prepare to move.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Half-pace back from the broad man, elbow lowered — reading his hands, ready, not committed."
+          "state": "Angled toward the road south, pack settled, watching the tree line — ready to move."
         },
         {
           "name": "Calvar",
-          "state": "Still at the limestone outcrop, right hand inside his coat, watching both men without expression."
+          "state": "At the outcrop, right hand relaxing from inside his coat — watching the broad man's face as the hatchet changed hands."
         },
         {
           "name": "Huginn",
-          "state": "On the branch above — motionless, watching the lean man specifically."
+          "state": "On a branch further down the track, in the direction of Millbrook — waiting."
         },
         {
           "name": "Broad Opportunist",
-          "state": "Out of the hawthorn, hatchet hand open — not dropped, not raised. Looking at his partner."
+          "state": "Standing in the mud, lighter a hatchet, watching you go. Mara Wells's name is in him now."
         },
         {
           "name": "Lean Opportunist",
-          "state": "Two more steps back, hand still shaped around a weapon that isn't there anymore. Deciding."
+          "state": "Two steps back from where he stood — provisions at his feet, the rest gone. Not following."
         }
       ],
       "objects": [
@@ -1584,14 +1722,14 @@
         "Sealed document roll — inside Calvar's coat",
         "Pell's pack — on her back",
         "River Whetstone — at Pell's belt",
-        "Valve Failure Timeline — in Silas's pack",
-        "Long-handled hatchet — in the broad man's hand, grip loosened",
-        "Split crook — in two pieces in the mud, iron shoe separate"
+        "Confiscated Hatchet — in Silas's hand",
+        "Split crook — in two pieces in the mud, iron shoe separate",
+        "Remaining provisions — left at the lean man's feet"
       ],
       "threads": [
-        "Both men are standing down but neither has left yet — the next word or movement seals it",
-        "The broad man's grief (a sister, come summer) sits unaddressed between you",
-        "Calvar and the document roll are safe — but the party hasn't moved yet"
+        "The road south to Millbrook is open — the party has not yet moved",
+        "The broad man has Mara Wells's name; whether he uses it is unresolved",
+        "The land may be offering a shortcut — something the ground here wants to show a reader"
       ]
     }
   },
@@ -1641,14 +1779,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Calvar has agreed to travel with the group — he will vouch as the pre-Transition calibration author and can attest to the seventh-band specification outside the Radiant hierarchy. The road to Millbrook is the next step.",
         "Calvar committed to first light departure — the group is assembled and the road to Millbrook is the next step. Silas named each person's work for the journey.",
         "Arrived at the cooperage lane — Calvar's lamp not in the window, a watcher positioned under the chandler's awning. The departure is delayed or compromised.",
         "Calvar confirms a rear service passage through the cooperage to the cut-lane — the watcher's eye-line doesn't cover it. The escape route exists; sequencing it is the next step.",
         "Calvar and the rolled document are through to the cut-lane — the watcher is fixed on a dead casement. One relay figure blocks the final gate. The window is real but not yet closed.",
         "Calvar is through the cut-lane gate with the rolled document — the relay figure neutralized without alarm. The Low Lamp Inn is the next destination.",
         "Calvar is safe at the Low Lamp Inn with the document — the extraction is complete. Remaining work before Millbrook: establish Grael's chain of authority and confirm the intake log as evidence.",
-        "Calvar briefed on Millbrook — the valley layout, the key people, the stakes. He absorbed it without ceremony and asked one practical question about the intake sleeves. The road south is underway."
+        "Calvar briefed on Millbrook — the valley layout, the key people, the stakes. He absorbed it without ceremony and asked one practical question about the intake sleeves. The road south is underway.",
+        "Party cleared the limestone bend without casualties — Calvar and the document roll are intact. Road south to Millbrook is open."
       ],
       "aliases": [],
       "startedAt": "2026-07-16T19:11:11.950Z"
@@ -2021,7 +2159,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d5] Read Silas's failed craft-moment without asking — picked up her pack and waited. No words needed.",
         "[d5] Pulled the Inn door shut behind her, moved to Silas's right without being asked — her traveling mode, economical and present.",
         "[d5] Keeping pace on Silas's right through the briefing — present, economical, no words interjected.",
         "[d5] Named the shape of her father to Calvar plainly — he knew his hand before his name meant something to her; that is enough, for now. Jaw settled after. No management.",
@@ -2030,7 +2167,8 @@
         "[d5] Engaged the broad man at Silas's direction — forced his hatchet arm wide, crowded his reach. He found his second wind and is pushing back; she has him occupied, not beaten.",
         "[d5] Still engaged with the broad man — held him through his second wind; now the dynamic is shifting as his partner's collapse registers on him.",
         "[d5] Read the broad man's broken attention the instant Silas took the window and drove him into the hawthorn without instruction — pure field read, no words.",
-        "[d5] Read the broad man's open hatchet-hand without instruction and stepped back to give him room — field read, no words needed."
+        "[d5] Read the broad man's open hatchet-hand without instruction and stepped back to give him room — field read, no words needed.",
+        "[d5] Stepped back cleanly after the broad man stood down — field read, no words. Now facing south and ready to move."
       ],
       "knownFacts": [
         "Thought there'd be a new register after the consummation; found instead the same one with more space in it — named it as 'more room'",
@@ -2051,7 +2189,7 @@
         "reading an opponent's capitulation and stepping back to conf"
       ],
       "status": "active",
-      "statusNote": "At the limestone bend — stepped back from the broad man, both on their feet, fight concluded.",
+      "statusNote": "At the limestone bend — fight concluded, road south open, waiting on Silas's lead.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
@@ -2391,7 +2529,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d4] Sleeping with the document roll inside his coat — ready for the road at first light.",
         "[d5] Rose before being called — dressed, document secured, ready for the road south at first light without ceremony.",
         "[d5] Standing at the door in full road gear, document roll secured, waiting on Silas's lead.",
         "[d5] Stepped out at pre-dawn without prompting, document roll secured, fell in on Silas's left without ceremony — road discipline from the first step.",
@@ -2400,7 +2537,8 @@
         "[d5] Watching Silas's Palework read at the ford without interruption — absorbing the assessment.",
         "[d5] Right hand found the document roll inside his coat the moment the figures appeared — document is his priority, clear without words.",
         "[d5] Backed to the outcrop the moment the fight split — right hand on the document roll, still and watching. Exactly where he should be.",
-        "[d5] Held his position at the outcrop throughout — right hand on the document, watching, saying nothing. Correct."
+        "[d5] Held his position at the outcrop throughout — right hand on the document, watching, saying nothing. Correct.",
+        "[d5] Watched the hatchet change hands without expression — right hand finally left his coat. The document is safe."
       ],
       "knownFacts": [
         "The document now holds two hands — Calvar's authorship and Silas's chain-record — sealed together. He named the difference plainly.",
@@ -2421,7 +2559,7 @@
         "filing operational intelligence in sequence without editoria"
       ],
       "status": "active",
-      "statusNote": "At the limestone outcrop — safe, document roll intact, watching the road opportunists stand down.",
+      "statusNote": "At the limestone bend — document roll intact, watching the party prepare to move south.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
@@ -2547,7 +2685,6 @@
     "millbrook": {
       "visits": 3,
       "notes": [
-        "[d2] The forge morning between Silas and Pell concluded here on World-day 15 — Pell's unguarded finish and her open-faced aftermath are part of what this place now holds.",
         "[d2] The forge morning's close: Silas and Pell touched Memory together — the spear took a shared imprint. The rune at the collar north quarter rang once, audible, then settled. This place now holds that as",
         "[d2] The child's errand at the south-lane door — retreated unanswered; may recur on the lane before Pell departs.",
         "[d2] Silas gave Pell the river whetstone at the forge threshold on World-day 15 mid-morning — the last thing said before departure: asking is a skill, practice it on me. The forge now stands cold and empty",
@@ -2558,7 +2695,8 @@
         "[d2] The overhang camp on the far side of the pass holds this night — Pell unguarded, the last of the coals burning low, Huginn attending from the stone lip.",
         "[d3] The lower ford crossing, half a mile south of the Edge District on the trade track, is showing gray seepage from east-side stones as of World-day 17 — a passing traveler warned against filling watersk",
         "[d4] Rendic Vael's name extracted from the optics array intake log on World-day 18 evening — the log was unaltered, the visit unrecorded.",
-        "[d4] The document roll — Fendt's testimony and Silas's chain-record, sealed with Calvar's wax and brass wire — was completed at the corner booth of the Low Lamp Inn on World-day 18 evening. Two hands on th"
+        "[d4] The document roll — Fendt's testimony and Silas's chain-record, sealed with Calvar's wax and brass wire — was completed at the corner booth of the Low Lamp Inn on World-day 18 evening. Two hands on th",
+        "[d5] Two road opportunists disarmed and sent to Mara Wells with Silas Weir's name — the limestone bend saw mercy shown and weapons taken on World-day 18 morning."
       ],
       "flags": {
         "resurrection_occurred": true,
@@ -4026,7 +4164,8 @@
         "kind": "lore",
         "facts": [
           "[d3] The Attended End can anchor a maker's mark — a permanent grain-signature sent as offer rather than claim — through Memory's rune-threshold. The craft stirs and holds it when something acquires permane",
-          "[d5] The Attended End read both men at the limestone bend: no death in either frame. The broad man carries a bruised rib and will bury a sister come summer — the aggression is borrowed from grief not yet a"
+          "[d5] The Attended End read both men at the limestone bend: no death in either frame. The broad man carries a bruised rib and will bury a sister come summer — the aggression is borrowed from grief not yet a",
+          "[d5] Named a man's coming grief — a sister, come summer — aloud in front of him, and he knew without asking how the Ashwarden knew. The reading, shown on the face, is its own argument."
         ],
         "links": [
           "pell",
@@ -4106,20 +4245,20 @@
     }
   },
   "tendencies": {
-    "strategic": 19.445613030593982,
-    "cerebral": 12.058423131190493,
-    "social": 9.464726310133415,
-    "generous": 2.2372242734284784,
-    "cautious": 12.939749296952693,
-    "physical": 2.903409177219194,
-    "risky": 0.6418304151043855,
-    "ruthless": 2.127244316539202,
-    "carousing": 0.06442323354165341,
-    "amorous": 7.4030961201922825,
-    "patient": 2.4171462560051347,
-    "stealth": 1.6298008565469415,
-    "devotion": 0.8889692004874431,
-    "craft": 0.8368950693524826
+    "strategic": 18.959472704829132,
+    "cerebral": 12.75696255291073,
+    "social": 10.228108152380079,
+    "generous": 2.1812936665927665,
+    "cautious": 12.616255564528876,
+    "physical": 2.830823947788714,
+    "risky": 0.6257846547267759,
+    "ruthless": 3.074063208625722,
+    "carousing": 0.06281265270311208,
+    "amorous": 7.2180187171874755,
+    "patient": 2.3567175996050063,
+    "stealth": 1.589055835133268,
+    "devotion": 0.866744970475257,
+    "craft": 0.8159726926186706
   },
   "aptitudes": [
     "strategist",
@@ -4129,7 +4268,7 @@
     "stalwart",
     "charmer"
   ],
-  "actionCount": 468,
+  "actionCount": 469,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -4359,8 +4498,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784380678743,
-  "rev": 680,
+  "updatedAt": 1784381371021,
+  "rev": 681,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4630,10 +4769,6 @@
           },
           "attentionHistory": [
             {
-              "kind": "fact",
-              "day": 4
-            },
-            {
               "kind": "interact",
               "day": 4
             },
@@ -4688,6 +4823,10 @@
             {
               "kind": "interact",
               "day": 4
+            },
+            {
+              "kind": "interact",
+              "day": 5
             },
             {
               "kind": "interact",
@@ -5031,12 +5170,6 @@
   "opLossPending": false,
   "establishedFacts": [
     {
-      "id": "pell",
-      "text": "Silas named the pass-opening as deliberate to Pell at Dara's gate — the buried structure, the cradle-recess removal, and the contamination are one connected signal. Pell accepted it and moved.",
-      "day": 2,
-      "subjectId": "pell"
-    },
-    {
       "id": "dara-holt",
       "text": "Dara Holt has been given the six-week vault-failure window, the surge scope, and the surface footprint location — she has folded the timeline note into her apron and confirmed the figure as a working ",
       "day": 2,
@@ -5269,6 +5402,12 @@
       "text": "The complete accountability chain — Grael, Rendic Vael, the keeper's silence, the seven-band inquiry, and the pattern of at least three prior marks — is now written in Silas's hand in the document rol",
       "day": 4,
       "subjectId": "the-edge-district-ledger"
+    },
+    {
+      "id": "f41",
+      "text": "Two road opportunists at the limestone bend were disarmed and directed to Mara Wells in Millbrook — Silas Weir's name given as introduction for honest work. The broad man's grief (a sister, come summe",
+      "day": 5,
+      "subjectId": null
     }
   ],
   "practice": {
@@ -5391,7 +5530,7 @@
   "syncedAt": 1784348465253,
   "teachers": {},
   "regionsKnown": {
-    "valley": 285
+    "valley": 286
   },
   "foreclosed": [
     "rootkin",
@@ -5446,10 +5585,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T13:17:58.742Z",
+      "lastAt": "2026-07-18T13:29:31.018Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 10
+      "beats": 11
     }
   ],
   "company": [

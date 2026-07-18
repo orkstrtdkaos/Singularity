@@ -3371,7 +3371,7 @@ await (async () => {
   const gmSrc142 = readFileSync(join(root, "engine/gm.js"), "utf8");
   check("SNG-142: rule 16B (offer the toolkit, lightly) is in the GM contract with the ≤1/never-on-clear-intent discipline", /16B\. OFFER THE TOOLKIT — LIGHTLY[\s\S]{0,600}NEVER when the player already stated a clear intent/.test(gmSrc142));
   check("SNG-142: rule 16B forbids committing another player's party character (agency guard)", /never commit another player's PARTY character/i.test(gmSrc142));
-  check("SNG-142: the TOOLKIT scene block is rendered (toolkitDetail), guarded + destructured", /if \(toolkitDetail\) scene\.push\(/.test(gmSrc142) && /anomalyDetail, toolkitDetail \} = ctx/.test(gmSrc142));
+  check("SNG-142: the TOOLKIT scene block is rendered (toolkitDetail), guarded + destructured", /if \(toolkitDetail\) scene\.push\(/.test(gmSrc142) && /anomalyDetail, toolkitDetail[,\s\w]* \} = ctx/.test(gmSrc142));
 })();
 
 // --- SNG-143: NPC sex/gender as explicit data (the Pell-rendered-male fix) + OOC item-evolution routing ---
@@ -4034,6 +4034,35 @@ await (async () => {
     npcPortraitTier(pell) === "partner"); // the app skips when n._portraitTier === this tier
 }
 
+// --- SNG-148: waygates — discovery AND skill compose; either alone routes to the hub ---
+{
+  const { isWaygate, hubWaygate, wayfaringTier, resolveWaygateTransit, waygateBlockForGM, knownWaygates } = await import('../engine/waygate.js');
+  const locs = {
+    the_crossing: { id: "the_crossing", name: "The Crossing", waygate: true, waygateHub: true, waygateTier: 1, regionId: "the_center" },
+    far_gate: { id: "far_gate", name: "The Far Gate", waygate: true, waygateTier: 3, regionId: "the_palelands" },
+    near_gate: { id: "near_gate", name: "The Near Gate", waygate: true, waygateTier: 1, regionId: "the_given_land" },
+    plain_town: { id: "plain_town", name: "Plain Town", regionId: "the_given_land" }
+  };
+  const novice = { currentLocationId: "the_crossing", knownPlaces: ["the_crossing"], subAttributes: { wits: 2 }, regionsKnown: {} };
+  const master = { currentLocationId: "the_crossing", knownPlaces: ["the_crossing", "far_gate"], subAttributes: { wits: 6 }, regionsKnown: { a: 1, b: 1, c: 1, d: 1, e: 1 } };
+  check("148: BOTH (discovered + skilled) → the NAMED gate", resolveWaygateTransit({ character: master, destId: "far_gate", locations: locs })?.routed === "named");
+  check("148: skill WITHOUT discovery → the hub", resolveWaygateTransit({ character: { ...master, knownPlaces: ["the_crossing"] }, destId: "far_gate", locations: locs })?.destId === "the_crossing");
+  check("148: discovery WITHOUT skill → the hub", resolveWaygateTransit({ character: { ...novice, knownPlaces: ["the_crossing", "far_gate"] }, destId: "far_gate", locations: locs })?.routed === "hub");
+  check("148: not standing at a gate → null (standard travel, a routing outcome not a failure)",
+    resolveWaygateTransit({ character: { ...novice, currentLocationId: "plain_town" }, destId: "far_gate", locations: locs }) === null);
+  check("148: aiming at a NON-gate → null (the network only links gates)", resolveWaygateTransit({ character: novice, destId: "plain_town", locations: locs }) === null);
+  check("148: the hub is always reachable from any gate", resolveWaygateTransit({ character: { ...novice, currentLocationId: "near_gate" }, destId: "the_crossing", locations: locs })?.routed === "hub");
+  check("148: wayfaring = wits/2 + traveled-breadth bonus, floor 1", wayfaringTier(novice) === 1 && wayfaringTier(master) === 4 && wayfaringTier({}) === 1);
+  check("148: GM block only when STANDING at a gate (no per-turn spam)",
+    waygateBlockForGM(novice, locs) !== null && waygateBlockForGM({ ...novice, currentLocationId: "plain_town" }, locs) === null);
+  check("148: the GM block carries the offer-lightly discipline", /never as a menu/.test(waygateBlockForGM(master, locs)));
+  check("148: the REAL content seed — the Crossing is the hub, the Axis Gate is a gate", (() => {
+    const crossing = JSON.parse(readFileSync(new URL('../content/packs/valley/locations/the_crossing.json', import.meta.url), 'utf8'));
+    const axis = JSON.parse(readFileSync(new URL('../content/packs/valley/locations/the_axis_gate.json', import.meta.url), 'utf8'));
+    return crossing.waygate === true && crossing.waygateHub === true && axis.waygate === true && hubWaygate({ the_crossing: crossing }).id === "the_crossing";
+  })());
+}
+
 // --- SNG-145: intent confirmation for costly acts (Law 9 in the play loop) ---
 {
   const { harmGateFor, departureGateFor, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } = await import('../engine/intent.js');
@@ -4089,8 +4118,8 @@ await (async () => {
       ratingLineForGM: () => "rating", maybeLegendDetail: () => null, sharedCanonForGM: () => null }
   };
   const ctx = assembleGMContext("turn", env);
-  check("§23: turn view assembles every registered key (43) with no builder throwing",
-    Object.keys(ctx).length === registryKeys("turn").length && Object.keys(ctx).length === 43);
+  check("§23: turn view assembles every registered key with no builder throwing (registry may grow; parity is the wiring audit's gate)",
+    Object.keys(ctx).length === registryKeys("turn").length && Object.keys(ctx).length >= 43);
   check("§23: the assembled ctx feeds gm.js tierParts/buildTurnContext (a real prompt renders)",
     typeof buildTurnContext(ctx) === "string" && buildTurnContext(ctx).length > 100);
   check("§23: ask view excludes turn ephemera (no one-shot can double-fire through an ask)",

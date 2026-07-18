@@ -29,6 +29,7 @@ import { toolkitForGM } from "./engine/toolkit.js";
 import { fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc } from "./engine/personalArc.js";
 import { assembleGMContext } from "./engine/gm_registry.js"; // BATCH-11 §23: the GM context is a DECLARED registry, iterated — never hand-listed
 import { harmGateFor, departureGateFor, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop)
+import { resolveWaygateTransit } from "./engine/waygate.js"; // SNG-148: waygates — map control routes named/hub; GM offer via the registry row
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./engine/entityDetail.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
@@ -3622,6 +3623,14 @@ function renderMap(selectedId = null) {
       ${l.id !== here ? (reachable
         ? `<button class="btn" id="map-travel" data-dest="${esc(l.id)}" style="margin-top:8px">Travel here (+${ADVANCE.travel}h)</button>`
         : `<div class="hint" style="margin-top:6px">Not directly reachable from ${esc(CONTENT.locations[here]?.name || "here")} — travel via a connected place.</div>`) : ""}
+      ${(() => { // SNG-148: standing at a gate, aiming at another gate — routing decides (named/hub); never a failure
+        const r = l.id !== here ? resolveWaygateTransit({ character, destId: l.id, locations: CONTENT.locations }) : null;
+        if (!r) return "";
+        const destName = CONTENT.locations[r.destId]?.name || l.name;
+        const note = r.routed === "hub" && r.destId !== l.id
+          ? ` — the gate carries you to ${esc(destName)}, the hub (${!r.known ? "an undiscovered gate can't be aimed at" : "beyond your wayfaring to aim true"})` : ` to ${esc(destName)}`;
+        return `<button class="btn" id="map-waygate" data-wgdest="${esc(r.destId)}" style="margin-top:6px">◈ Step through the waygate${note} (+${ADVANCE.travel}h)</button>`;
+      })()}
     </div>`;
   }
   chrome(`<div class="screen" style="max-width:900px">
@@ -3652,6 +3661,8 @@ function renderMap(selectedId = null) {
   for (const g of app.querySelectorAll("[data-mapsel]")) g.onclick = () => renderMap(g.dataset.mapsel === selectedId ? null : g.dataset.mapsel);
   const travelBtn = document.getElementById("map-travel");
   if (travelBtn) travelBtn.onclick = () => travelTo(travelBtn.dataset.dest);
+  const wgBtn = document.getElementById("map-waygate");
+  if (wgBtn) wgBtn.onclick = () => travelTo(wgBtn.dataset.wgdest); // SNG-148: the click IS the confirmed intent; transit is real travel
   for (const b of app.querySelectorAll("[data-subgo]")) b.onclick = () => {
     const pm = character.placeMemory?.[b.dataset.subloc];
     const sp = pm?.subPlaces?.[b.dataset.subgo];

@@ -175,7 +175,7 @@ export function ratingRegister(preset = "PG-13") {
  *  before a breakpoint. Ephemeral per-turn inputs (time, resolution, player words) live
  *  in `player`, which goes AFTER the last breakpoint, uncached. See callClaude systemBlocks. */
 export function tierParts(ctx) {
-  const { character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail, structuredQuestsDetail, sceneState, npcRegistryDetail, placeMemoryDetail, newsDetail, abilityLawDetail, codexDetail, encounterDetail, encounterWeaveDetail, worldPressureDetail, substrateDetail, romanceGuidanceDetail, masteryDetail, availableEncounters, partyDetail, opLossNote, emergenceDetail, perilNote, exactWords, factsDetail, evolvedItemsDetail, itemAdvance, ratingDetail, registerDetail, livingWorldDetail, sharedCanonDetail, legendDetail, worldDateLabel, travelDirective, anomalyDetail, toolkitDetail } = ctx;
+  const { character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail, structuredQuestsDetail, sceneState, npcRegistryDetail, placeMemoryDetail, newsDetail, abilityLawDetail, codexDetail, encounterDetail, encounterWeaveDetail, worldPressureDetail, substrateDetail, romanceGuidanceDetail, masteryDetail, availableEncounters, partyDetail, opLossNote, emergenceDetail, perilNote, exactWords, factsDetail, evolvedItemsDetail, itemAdvance, ratingDetail, registerDetail, livingWorldDetail, sharedCanonDetail, legendDetail, worldDateLabel, travelDirective, anomalyDetail, toolkitDetail, waygateDetail } = ctx;
   const system = [], world = [], scene = [], state = [], player = [];
 
   // ---- TIER 1: rules/constitution (constant; GM_SYSTEM is prepended in gmTurn) ----
@@ -204,6 +204,7 @@ export function tierParts(ctx) {
   if (legendDetail) world.push(legendDetail);
   if (sharedCanonDetail) world.push(`## SHARED WORLD CANON — figures, places, and threads OTHER travelers grew real enough to enter the whole world's canon (already filtered to THIS player's content ceiling; a line marked [dialed to your ceiling] has been softened — honor that register, never sharpen it back up). Reference them as established parts of the wider world if the scene reaches that far; "rumored" ones are contested variants — speak them as hearsay, not settled fact. Do not re-introduce them as freshly invented.\n${sharedCanonDetail}`);
   if (placeMemoryDetail) world.push(`## PLACE HISTORY — what ${character.name} knows changed here (established fact — see rule 15)\n${placeMemoryDetail}`);
+  if (waygateDetail) world.push(`## WAYGATE (SNG-148 — a door, offered lightly, never a menu)\n${waygateDetail}`);
   world.push(`## LOCAL REPUTATION\n${reputationSummary(character, location.communityId, rules)}`);
   if (availableEncounters) world.push(`## AVAILABLE ENCOUNTERS at this location (rule 18 — offer ONLY these ids via a choice's "encounterId" when the fiction invites it)\n${availableEncounters}`);
 

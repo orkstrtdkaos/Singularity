@@ -3,45 +3,165 @@
   "title": "Location",
   "description": "One place. DERIVED from the authored packs/*/locations corpus (SNG-BATCH-9 build-step-1) — the authored set is cleanly uniform (all 26 carry the same 14 fields), so those 14 are `required`. generate('location', ctx) authors to this shape in-grain from the arriving location's poleIntensity (± a rolled asymmetric secondary axis, per the substrate's asymmetry rule); repair fills any required field the model omits (map coords from the parent + offset, communityId/loreRefs from context, empty arrays where apt). Optional fields (dangerLevel, npcsPresent, seedFiction/nativeLogic for manifest domains, encounterSeeds, image) are added when the grain calls for them.",
   "type": "object",
-  "required": ["schemaVersion", "id", "name", "regionId", "communityId", "spectrum", "tags", "connections", "descriptionSeed", "loreRefs", "encounterFlavor", "questSeeds", "map", "poleIntensity"],
+  "required": [
+    "schemaVersion",
+    "id",
+    "name",
+    "regionId",
+    "communityId",
+    "spectrum",
+    "tags",
+    "connections",
+    "descriptionSeed",
+    "loreRefs",
+    "encounterFlavor",
+    "questSeeds",
+    "map",
+    "poleIntensity"
+  ],
   "properties": {
-    "schemaVersion": { "type": "integer" },
-    "id": { "type": "string", "description": "stable slug; generated places mint via the SNG-019 resolver (resolve-before-mint)" },
-    "name": { "type": "string" },
-    "regionId": { "type": "string", "description": "e.g. valley; a generated place inherits the arriving region" },
-    "communityId": { "type": ["string", "null"] },
+    "schemaVersion": {
+      "type": "integer"
+    },
+    "id": {
+      "type": "string",
+      "description": "stable slug; generated places mint via the SNG-019 resolver (resolve-before-mint)"
+    },
+    "name": {
+      "type": "string"
+    },
+    "regionId": {
+      "type": "string",
+      "description": "e.g. valley; a generated place inherits the arriving region"
+    },
+    "communityId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "spectrum": {
       "type": "object",
       "description": "disposition fingerprint: axisId -> [-1,1] (same 14-axis vocabulary as NPC.spectrum). Generated in-grain: keep the locale's dominant axis; roll the secondary axis varied so the next place over is in-grain but surprising.",
-      "additionalProperties": { "type": "number" }
+      "additionalProperties": {
+        "type": "number"
+      }
     },
     "poleIntensity": {
       "type": "object",
       "description": "single-ended intensities (pole -> 0..1) driving affinities + drift (SNG-022 derives this from spectrum when absent). Known poles: abstract/concrete, dark/light, space/time, truth/falsehood, mechanical/spiritual, chaos/order, individual/collective, death/life, violence/peace, destruction/creation, demonic/angelic, body/mind, emotional/logical, tradition/innovation.",
-      "additionalProperties": { "type": "number" }
+      "additionalProperties": {
+        "type": "number"
+      }
     },
-    "tags": { "type": "array", "items": { "type": "string" } },
-    "connections": { "type": "array", "items": { "type": "string" }, "description": "adjacent location ids; a generated place connects back to the location it was reached from" },
-    "descriptionSeed": { "type": "string", "description": "the sensory establishing text; the taste-carrier for place voice" },
-    "loreRefs": { "type": "array", "items": { "type": "string" } },
-    "encounterFlavor": { "type": "string" },
-    "questSeeds": { "type": "array", "items": { "type": "string" }, "description": "hooks the GM can pull; may be empty" },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "connections": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "adjacent location ids; a generated place connects back to the location it was reached from"
+    },
+    "descriptionSeed": {
+      "type": "string",
+      "description": "the sensory establishing text; the taste-carrier for place voice"
+    },
+    "loreRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "encounterFlavor": {
+      "type": "string"
+    },
+    "questSeeds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "hooks the GM can pull; may be empty"
+    },
     "map": {
       "type": "object",
-      "required": ["x", "y"],
-      "properties": { "x": { "type": "number" }, "y": { "type": "number" } }
+      "required": [
+        "x",
+        "y"
+      ],
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        }
+      }
     },
-    "dangerLevel": { "type": "integer" },
-    "npcsPresent": { "type": "array", "items": { "type": "string" } },
-    "image": { "type": "string" },
+    "dangerLevel": {
+      "type": "integer"
+    },
+    "npcsPresent": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "image": {
+      "type": "string"
+    },
     "encounterSeeds": {
       "type": "array",
       "description": "either a bare encounterId string or a {encounterId, hint} object — the authored corpus uses both",
-      "items": { "type": ["object", "string"], "properties": { "encounterId": { "type": "string" }, "hint": { "type": "string" } } }
+      "items": {
+        "type": [
+          "object",
+          "string"
+        ],
+        "properties": {
+          "encounterId": {
+            "type": "string"
+          },
+          "hint": {
+            "type": "string"
+          }
+        }
+      }
     },
-    "seedFiction": { "type": "string", "description": "manifest-domain: the fiction this place runs on as native law" },
-    "nativeLogic": { "type": "string", "description": "manifest-domain: the rules-as-law the GM enforces inside" },
-    "axisVector": { "type": "array", "items": { "type": "number" }, "description": "optional numeric 12-axis disposition vector (some authored places carry it alongside spectrum)" },
-    "rating": { "type": "string", "description": "content-rating tag stamped at generation (SNG-BATCH-9 §3); absent on authored core" }
+    "seedFiction": {
+      "type": "string",
+      "description": "manifest-domain: the fiction this place runs on as native law"
+    },
+    "nativeLogic": {
+      "type": "string",
+      "description": "manifest-domain: the rules-as-law the GM enforces inside"
+    },
+    "axisVector": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "optional numeric 12-axis disposition vector (some authored places carry it alongside spectrum)"
+    },
+    "rating": {
+      "type": "string",
+      "description": "content-rating tag stamped at generation (SNG-BATCH-9 §3); absent on authored core"
+    },
+    "waygate": {
+      "type": "boolean",
+      "description": "SNG-148: this location is a waygate — a node in the gate network"
+    },
+    "waygateTier": {
+      "type": "number",
+      "description": "SNG-148: how hard this gate is to AIM at (wayfaringTier gate); default 1"
+    },
+    "waygateHub": {
+      "type": "boolean",
+      "description": "SNG-148: the network hub (the Crossing) — every unaimed transit lands here"
+    }
   }
 }

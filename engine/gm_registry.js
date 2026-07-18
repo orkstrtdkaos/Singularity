@@ -52,6 +52,7 @@ import { narrativeRegister } from "./gm.js";
 import { livingWorldForGM } from "./generate.js";
 import { worldDate } from "./worldtime.js";
 import { encounterReceiptForGM } from "./encounters.js";
+import { waygateBlockForGM } from "./waygate.js";
 
 const ALL = ["turn", "ask", "quest", "gambit"];
 
@@ -203,6 +204,9 @@ export const GM_CONTEXT = [
   { key: "worldDateLabel", builder: "worldtime.worldDate (SNG-041)", carries: ["shared absolute calendar"],
     reachedBy: "always", spec: "§10", views: ["turn"],
     build: (env) => worldDate().label },
+  { key: "waygateDetail", builder: "waygate.waygateBlockForGM (SNG-148)", carries: ["gate here", "aimable gates", "hub routing"],
+    reachedBy: "map ◈ Waygate control + GM offer", spec: "§9", views: ["turn"],
+    build: (env) => waygateBlockForGM(env.character, env.CONTENT.locations) },
 ];
 
 /** Assemble the GM context for a view by ITERATING the registry (Law 16 / §23.2).

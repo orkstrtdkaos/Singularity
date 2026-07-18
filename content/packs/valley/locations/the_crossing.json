@@ -5,18 +5,18 @@
   "regionId": "the_center",
   "communityId": "center.crossing",
   "axisVector": [
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
   ],
   "spectrum": {},
   "tags": [
@@ -50,5 +50,8 @@
     "y": 290
   },
   "poleIntensity": {},
-  "startingLocation": true
+  "startingLocation": true,
+  "waygate": true,
+  "waygateHub": true,
+  "waygateTier": 1
 }

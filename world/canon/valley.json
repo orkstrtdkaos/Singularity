@@ -62,10 +62,8 @@
         "birthWeight": 1,
         "overtook": "lenten"
       }
-    }
-  },
-  "variants": [
-    {
+    },
+    "calvar": {
       "schemaVersion": 1,
       "id": "calvar",
       "name": "Calvar",
@@ -118,7 +116,7 @@
         "type": "npc",
         "weight": 30,
         "rating": "R+",
-        "tier": "variant",
+        "tier": "canonical",
         "provenance": {
           "playerKey": "player-s9z9u1",
           "characterId": "char-mrhs8286",
@@ -133,11 +131,10 @@
           "characterId": "char-mrhs8286"
         },
         "promotedWorldDay": 17,
-        "birthWeight": 10,
-        "rivalId": "calvar"
+        "birthWeight": 10
       }
     },
-    {
+    "vash": {
       "schemaVersion": 1,
       "id": "vash",
       "name": "Vash",
@@ -183,7 +180,7 @@
         "type": "npc",
         "weight": 14,
         "rating": "R",
-        "tier": "variant",
+        "tier": "canonical",
         "provenance": {
           "playerKey": "player-s9z9u1",
           "characterId": "char-mrhs8286",
@@ -198,9 +195,9 @@
           "characterId": "char-mrhs8286"
         },
         "promotedWorldDay": 17,
-        "birthWeight": 10,
-        "rivalId": "vash"
+        "birthWeight": 10
       }
     }
-  ]
+  },
+  "variants": []
 }

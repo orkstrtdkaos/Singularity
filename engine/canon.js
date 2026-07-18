@@ -167,6 +167,25 @@ export function resolveContradiction(incomingWeight, existingWeight, rng = Math.
  *  the spine locally; an incoming loss files it as a variant of the authored id. Pure given rng.
  *
  *  results: [{ entityId, outcome:'landed'|'won'|'variant', against?, rivalId?, weight }]. */
+/** PURE (SNG-159). Is this "collision" actually the candidate's OWN previously-promoted copy,
+ *  rather than a genuine rival? True only when the entity id matches AND the same character
+ *  authored both. Two DIFFERENT characters who each grew a "Calvar" are a real contest and must
+ *  still contest — this only recognises a record meeting itself after a retry. */
+export function isSameEntity(rec, collision) {
+  const other = collision?.record;
+  if (!other) return false;
+  const sameId = collision.id === rec.id || other?._canon?.entityId === rec.id;
+  if (!sameId) return false;
+  const mine = rec?._gen?.provenance || {};
+  const theirs = other?._canon?.contributedBy || other?._canon?.provenance || {};
+  // POSITIVE attribution match only. Without it we cannot prove this is our own record, and
+  // guessing "self" would silently skip a genuine contest between two players who each grew a
+  // same-named entity — a worse failure than the one being fixed. Every real promoted record
+  // carries provenance (the live Calvar/Vash both do), so the retry case is covered.
+  if (!mine.characterId || !theirs.characterId) return false;
+  return mine.characterId === theirs.characterId;
+}
+
 export function promoteInto(store, candidates, { authored = {}, worldDay = null, rng = Math.random } = {}) {
   ensureCanonStore(store);
   // `authored` may be a flat pool or a type→pool getter (so an authored NPC and an authored
@@ -178,6 +197,24 @@ export function promoteInto(store, candidates, { authored = {}, worldDay = null,
     const type = rec._gen?.type || null;
     const weight = cand.weight ?? effectiveWeight(rec);
     const collision = findCanonCollision(type, rec.name, { canon: store.entities, authored: authoredFor(type) });
+
+    // SNG-159: A RETRY MUST NEVER CONTEST A RECORD AGAINST ITSELF.
+    // Promotion runs inside pushMergedFile's merge callback, which RE-RUNS against a freshly-read
+    // remote on every attempt. If attempt 1 landed server-side but its response was lost (GH_TIMEOUT
+    // or a 409), attempt 2 re-reads, finds the record it just wrote, treats it as a rival, and can
+    // demote the entity to a "variant" of itself — which is exactly what happened to Calvar and Vash
+    // in the live valley (`rivalId === entityId`, contributed by the same character). Promotion has to
+    // be IDEMPOTENT under retry, the same property mergeBeat has for scenes.
+    if (collision && collision.where === "canon" && isSameEntity(rec, collision)) {
+      results.push({ entityId: collision.id, outcome: "already", weight });
+      continue; // already landed on a previous attempt — not a contest, and never a demotion
+    }
+    // Same story if the prior attempt landed it in the variants pile: don't mint a second copy.
+    const priorVariant = (store.variants || []).findIndex(v => isSameEntity(rec, { id: v?.id, record: v }));
+    if (priorVariant >= 0 && !collision) {
+      results.push({ entityId: store.variants[priorVariant].id, outcome: "already", weight });
+      continue;
+    }
 
     if (!collision) {
       const cr = buildCanonRecord(rec, { worldDay, tier: "canonical" });

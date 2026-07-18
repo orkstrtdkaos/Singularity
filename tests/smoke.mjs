@@ -4036,6 +4036,35 @@ await (async () => {
     npcPortraitTier(pell) === "partner"); // the app skips when n._portraitTier === this tier
 }
 
+// --- SNG-159: canon promotion is IDEMPOTENT under retry (no self-demotion) ---
+{
+  const { promoteInto, ensureCanonStore, isSameEntity } = await import('../engine/canon.js');
+  const mkRec = (id, name, charId) => ({ id, name, _gen: { type: "npc", tier: "nominated", birthWeight: 10, engagementScore: 8,
+    provenance: { playerKey: "p1", characterId: charId } } });
+
+  // The live failure: promote, then promote the SAME candidate again against the store that already
+  // holds it — which is what pushMergedFile does when attempt 1 lands but its response is lost.
+  const store = ensureCanonStore({});
+  const cand = [{ record: mkRec("calvar", "Calvar", "char-a"), weight: 30 }];
+  promoteInto(store, cand, { worldDay: 17, rng: () => 0.99 }); // rng hostile: a real contest would LOSE
+  const first = Object.keys(store.entities);
+  const again = promoteInto(store, cand, { worldDay: 17, rng: () => 0.99 });
+  check("159: a re-run promotion recognises its own record instead of contesting it",
+    again.results[0].outcome === "already");
+  check("159: the entity STAYS canonical after a retry (this is the Calvar/Vash bug)",
+    Object.keys(store.entities).length === 1 && store.entities.calvar?._canon?.tier === "canonical" && store.variants.length === 0);
+  check("159: no duplicate copy is minted on retry", first.length === 1 && Object.keys(store.entities).length === 1);
+
+  // A DIFFERENT character's same-named entity is still a genuine contest — the guard must not over-reach.
+  const rival = [{ record: mkRec("calvar", "Calvar", "char-b"), weight: 99 }];
+  const contest = promoteInto(store, rival, { worldDay: 18, rng: () => 0.01 });
+  check("159: another character's same-named entity STILL contests (guard is not a blanket skip)",
+    contest.results[0].outcome === "won" || contest.results[0].outcome === "variant");
+  check("159: isSameEntity is id AND author, not id alone",
+    isSameEntity(mkRec("x", "X", "char-a"), { id: "x", record: { _canon: { entityId: "x", contributedBy: { characterId: "char-a" } } } }) === true &&
+    isSameEntity(mkRec("x", "X", "char-a"), { id: "x", record: { _canon: { entityId: "x", contributedBy: { characterId: "char-b" } } } }) === false);
+}
+
 // --- SNG-158: scenes actually close (contract + engine pressure + a manual control) ---
 {
   const { assembleGMContext } = await import('../engine/gm_registry.js');

@@ -770,7 +770,25 @@
           "rank": 1,
           "name": "The Perfect Veil",
           "grants": "Veil a thing so completely it is not merely unseen but un-looked-for.",
-          "cannot": "It hides but does not protect, it cuts off help as surely as harm, and a thing kept perfectly secret is a thing kept perfectly alone."
+          "cannot": "It hides but does not protect, it cuts off help as surely as harm, and a thing kept perfectly secret is a thing kept perfectly alone.",
+          "functions": [
+            "conceal",
+            "deceive"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
+        },
+        {
+          "rank": 2,
+          "name": "The Veil That Keeps",
+          "grants": "The veil no longer needs your attention — set it and it keeps itself. And it can take what is larger than a thing: a route, a meeting, an event, the fact that something happened at all. Those inside a kept veil need not know they are held in one.",
+          "cannot": "It still hides without defending, and still cuts off help exactly as well as harm. A veil that keeps itself is a veil you may forget you set. And people held inside one without knowing cannot ask to be let out.",
+          "functions": [
+            "conceal",
+            "deceive"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "gated": "learned",

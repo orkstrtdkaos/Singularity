@@ -4031,6 +4031,22 @@ await (async () => {
     npcPortraitTier(pell) === "partner"); // the app skips when n._portraitTier === this tier
 }
 
+// --- BATCH-11 146f: the personal arc is STARTABLE (the listing/start asymmetry) ---
+{
+  const { fallbackPersonalArc } = await import('../engine/personalArc.js');
+  const ch = { name: "Tester", playerKey: "p", origin: "valley", domains: { primary: "soma_edge" },
+    bio: { motivation: "to find who burned the mill", story: "Left home after the fire took everything the family had built over years.", hometown: "Millbrook" } };
+  const arc = fallbackPersonalArc(ch);
+  check("146f: fallbackPersonalArc yields an isRealQuest-valid def", isRealQuest(arc) === true);
+  const r = startStructuredQuest({ ...ch, quests: [] }, arc, { worldDay: 1, nowISO: "2026-07-18T12:00:00.000Z" });
+  check("146f: the personal arc STARTS as a structured quest ('Take it on' works)", r.ok === true && r.quest?.status === "active");
+  check("146f: a missing def refuses cleanly instead of throwing", startStructuredQuest({ quests: [] }, undefined).ok === false);
+  const appSrc146f = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+  check("146f: the start lookup searches the SAME spliced array as the listing (personalArc included)",
+    /const startable = \[\.\.\.\(CONTENT\.quests \|\| \[\]\), \.\.\.\(character\.personalArc \? \[character\.personalArc\] : \[\]\)\]/.test(appSrc146f) &&
+    /startable\.find\(d =>/.test(appSrc146f));
+}
+
 // --- BATCH-11 146b/c: scene lifecycle + open-scene index ---
 {
   const { sceneIsOpen, closeScene } = await import('../engine/party.js');

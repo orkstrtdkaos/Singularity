@@ -181,6 +181,7 @@ export function structuredQuestRecord(def) {
 
 /** Start a structured quest (idempotent — never forks a duplicate). */
 export function startStructuredQuest(character, def, ctx = {}) {
+  if (!def || !def.id) return { ok: false, why: "unknown quest" }; // 146f: a missing def refuses cleanly, never throws
   character.quests = character.quests || [];
   const id = slugify(def.id);
   const existing = character.quests.find(q => q.id === id);

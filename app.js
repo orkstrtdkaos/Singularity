@@ -4715,7 +4715,11 @@ function renderQuestLog() {
   </div>`);
   for (const b of app.querySelectorAll("[data-quest]")) b.onclick = () => renderQuestDetail(b.dataset.quest);
   for (const b of app.querySelectorAll("[data-startquest]")) b.onclick = () => {
-    const def = (CONTENT.quests || []).find(d => (d.id || "").replace(/[^a-z0-9]+/gi, "-").replace(/(^-|-$)/g, "") === b.dataset.startquest || d.id === b.dataset.startquest);
+    // BATCH-11 146f: the start lookup must search the SAME spliced array the listing
+    // uses — the generated personalArc is not in CONTENT.quests, so looking only there
+    // made "Take it on" fail on every personal arc (def === undefined).
+    const startable = [...(CONTENT.quests || []), ...(character.personalArc ? [character.personalArc] : [])];
+    const def = startable.find(d => (d.id || "").replace(/[^a-z0-9]+/gi, "-").replace(/(^-|-$)/g, "") === b.dataset.startquest || d.id === b.dataset.startquest);
     const r = startStructuredQuest(character, def, { worldDay: absoluteWorldDay(), nowISO: new Date().toISOString() });
     if (r.ok) { saveCharacter(character); renderQuestDetail(r.quest.id); } else alert(r.why || "Couldn't start that.");
   };

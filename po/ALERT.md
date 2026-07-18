@@ -1,4 +1,17 @@
-# PIPELINE ALERT — Singularity## 🟢 SNG-140 — The Wild Half tangled substrate AUTHORED + VALIDATED (content done; wiring owed CCode)
+# PIPELINE ALERT — Singularity## ✅ SNG-131 — CLOSED GREEN (innate substrate wired end-to-end; Aevi HEAD audit, v1.8.99)
+CCode wired all three fields; **Aevi verified each has a real reader at origin** (the "value with no reader is a lie" discipline — every SNG-131 field now drives something). progression.js syntax-clean.
+- **`seedInnateSubstrate`** — the false-access guard VERIFIED by construction: `if (catalog[id]?.powerSystem === sys ...)` — an id only seeds into precursorAccess/livingCurrentAccess if it's ACTUALLY that powerSystem, so a mis-authored id (e.g. pointing innatePrecursor at a reach_* capstone, as I originally wrongly did) silently no-ops instead of faking access. Law-14-safe (opens access, never grants an ability). ✓
+- **`effectiveLevelReq` living_current branch** — mirrors precursor exactly: `return livingCurrentAccess.includes(ab.id) ? base : null` — locked (null/unlearnable) unless seeded. **Erik's ruling 1 made mechanical: innate access opens the door (id in the list) but the ability still returns its `base` levelReq — you pay level + point, then rank up normally. Access ≠ free.** ✓
+- **`learnAbility` routes to the ACCESS gate, not the domain gate** — so a rootkin-DOMAIN character can't just learn the living current; it's innate to the PEOPLE, not the domain. ✓
+- **`braidAffinity` READ in the cost path** (progression.js L481): a `reach_*` diameter braid costs `braidDiscount` less, floored at 1. CCode browser-proved on real data: `quickening` costs 3 for a domained valleyfolk, 1 with braidAffinity. ✓
+Seeded in `finish()` (born with access) + `migrate()` (existing saves pick it up). **The substrate cosmology is now mechanically real: fabricated-kept (seraphic), living-kept (rootkin), + the center that braids both. Closed.**
+
+### 🌿 Aevi flag → SNG-141 (not blocking): `the_green_road` stranded
+CCode correctly flagged: `the_green_road` (living_current T4) has no unlock path — only `quicken_the_ground` is seeded, and there's no `unlockLivingCurrent` op to mirror `unlockPrecursor`. That's a stranded ability (a "value with no reader" in ability form — my authoring left it unreachable). Specced the parity fix as **SNG-141** (`unlockLivingCurrent` + `unlockWildCurrent` mirroring `unlockPrecursor`, powerSystem-validated) rather than leave it hanging. Same gap applies to SNG-140's deeper wild_current abilities.
+
+---
+
+## 🟢 SNG-140 — The Wild Half tangled substrate AUTHORED + VALIDATED (content done; wiring owed CCode)
 Authored the third keeper-kind. **content_ci + full npm suite GREEN locally BEFORE ship — and the suite caught a real error pre-ship that I fixed before any byte left (the discipline working as intended).**
 - **Authored `wild_current.json`** (new powerSystem): `the_churns_gift` (churnfolk T3 — the fae gift that's never what you asked), `the_wild_flowering` (churnfolk T4 — tangled growth-and-ruin), `the_honest_bargain` (abyssal T4 — the fair-but-wild demonic pact). Each carries `wildVariance:true` (documentary until CCode wires the variance resolver) + the wildness in the fiction (always read).
 - **`wildCurrent` on origins:** churnfolk=[the_churns_gift], abyssal=[the_honest_bargain]. **Abyssal now carries BOTH `innatePrecursor` AND `wildCurrent`** — keeps the fabricated deep AND runs wild (canon: it's in two clusters). All ids verified against real abilities.

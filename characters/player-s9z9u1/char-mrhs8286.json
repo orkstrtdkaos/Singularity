@@ -898,128 +898,94 @@
         "player": "Speak — one quiet word to Tane while you have him at the wrong angle; let him decide whether to yield or continue on bad footing",
         "summary": "Silas speaks one word — Ankle — and Tane Solr yields on his own terms. The bout ends without the weakness pressed.",
         "narration": "You let the moment sit for a breath — his weight committed, your position solid, the ankle already the question in the room. Then you say it, low enough that only Tane hears it. One word. 'Ankle.'\n\nHis eyes sharpen, and then something behind them settles into a different kind of attention. He has not moved yet. He is looking at you the way a careful person looks at something they underestimated — not angry, not embarrassed, just recalibrating.\n\nFor three full seconds he is still. Then he turns his head once, brief, toward Orvil — and gives a short downward pull of his chin.\n\nOrvil's baton comes down. 'Yield,' he says, clear enough for the gallery. That is all. He does not say it twice.\n\nA ripple goes through the dozen watchers above — not a cheer, something quieter than that. Recognition, maybe. The two seconds at the far arc exchange a look. One of them uncorks the water flask.\n\nPell lets out a breath at the near arc, slow and controlled. She does not say anything yet. She is still reading it."
+      },
+      {
+        "player": "Walk over to Tane — acknowledge the bout properly, fighter to fighter",
+        "summary": "Silas crosses the sand to acknowledge Tane Solr properly — brief, honest, fighter to fighter. Tane names his curiosity rather than his embarrassment; Pell vouches without ceremony.",
+        "narration": "You close the distance to Tane Solr at a walk — no hurry, no ceremony, Memory still on your back. The sand between you is three steps, maybe four.\n\nYou stop when you are close enough to speak without raising your voice. He is watching you with that new quality of attention — the kind that comes after something unexpected has happened and the mind is still filing it properly. His weight is back on both feet now, the ankle not favored but treated more carefully than it was a minute ago.\n\nYou say it plainly. Good bout. You gave me a clean read and you gave yourself a clean yield. That is not nothing.\n\nTane holds the look for a moment. Then the corner of his mouth shifts — not quite a smile, but the shape a smile would have if it did not want to commit to the name. He says, without any particular heat: I have been walking that ankle for three years and no one has ever named it in the first breath. He pauses. I should be embarrassed. I find I am mostly curious.\n\nFrom the near arc, Pell speaks without looking up from whatever she has been reading in the exchange. She says to Tane: He does that. Holds his flask out at arm's length a moment later — offered in the straightforward way of someone who has just decided this person is worth a drink of water. You hear Huginn shift once on your shoulder, unhurried."
       }
     ],
     "lastTurn": {
-      "narration": "You let the moment sit for a breath — his weight committed, your position solid, the ankle already the question in the room. Then you say it, low enough that only Tane hears it. One word. 'Ankle.'\n\nHis eyes sharpen, and then something behind them settles into a different kind of attention. He has not moved yet. He is looking at you the way a careful person looks at something they underestimated — not angry, not embarrassed, just recalibrating.\n\nFor three full seconds he is still. Then he turns his head once, brief, toward Orvil — and gives a short downward pull of his chin.\n\nOrvil's baton comes down. 'Yield,' he says, clear enough for the gallery. That is all. He does not say it twice.\n\nA ripple goes through the dozen watchers above — not a cheer, something quieter than that. Recognition, maybe. The two seconds at the far arc exchange a look. One of them uncorks the water flask.\n\nPell lets out a breath at the near arc, slow and controlled. She does not say anything yet. She is still reading it.",
-      "sceneSummary": "Silas speaks one word — Ankle — and Tane Solr yields on his own terms. The bout ends without the weakness pressed.",
+      "narration": "You close the distance to Tane Solr at a walk — no hurry, no ceremony, Memory still on your back. The sand between you is three steps, maybe four.\n\nYou stop when you are close enough to speak without raising your voice. He is watching you with that new quality of attention — the kind that comes after something unexpected has happened and the mind is still filing it properly. His weight is back on both feet now, the ankle not favored but treated more carefully than it was a minute ago.\n\nYou say it plainly. Good bout. You gave me a clean read and you gave yourself a clean yield. That is not nothing.\n\nTane holds the look for a moment. Then the corner of his mouth shifts — not quite a smile, but the shape a smile would have if it did not want to commit to the name. He says, without any particular heat: I have been walking that ankle for three years and no one has ever named it in the first breath. He pauses. I should be embarrassed. I find I am mostly curious.\n\nFrom the near arc, Pell speaks without looking up from whatever she has been reading in the exchange. She says to Tane: He does that. Holds his flask out at arm's length a moment later — offered in the straightforward way of someone who has just decided this person is worth a drink of water. You hear Huginn shift once on your shoulder, unhurried.",
+      "sceneSummary": "Silas crosses the sand to acknowledge Tane Solr properly — brief, honest, fighter to fighter. Tane names his curiosity rather than his embarrassment; Pell vouches without ceremony.",
       "choices": [
         {
-          "label": "Walk over to Tane — acknowledge the bout properly, fighter to fighter",
+          "label": "Ask Tane what threshold-walking is — the work of it, not the name",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "comfort",
-            "negotiate"
+            "plan"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Stay where you are and ask Orvil if there is another bout on the board this morning",
+          "label": "Tell him what deathsense actually reads — the craft behind the word 'ankle'",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "negotiate"
+            "plan"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Let Pell say what she saw — her read of the exchange, from the arc",
+          "label": "Thank him and let the conversation close — the gallery is watching and the road is waiting",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "negotiate"
+            "plan"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Ask Tane Solr directly — threshold-walking is not a common craft; where did he study it",
+          "label": "Accept his curiosity and ask if he wants a second bout — different terms, no deathsense",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "negotiate",
-            "study"
+            "plan",
+            "risky"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         }
       ],
-      "deeds": [
-        {
-          "description": "Won a Coliseum bout with a single spoken word — never pressed the weakness, let the opponent decide",
-          "tags": [
-            "mercy",
-            "skill",
-            "restraint"
-          ],
-          "weight": 1,
-          "communityId": "waygate"
-        }
-      ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -2,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
       "scene": {
-        "setting": "Inside the Hub Coliseum at early morning — packed sand underfoot, stone gallery above with a dozen watchers settling after the yield, low-angle light through the open top. Silas stands at Tane Solr's left flank; Orvil's baton is lowered. The bout is finished.",
+        "setting": "Inside the Hub Coliseum at early morning — packed sand underfoot, stone gallery above with a dozen watchers quieting after the yield, low-angle light through the open top. Silas stands close to Tane Solr at his left flank; Orvil's baton is down and the bout fully concluded.",
         "npcsPresent": [
           {
-            "name": "Orvil",
-            "state": "Baton lowered — yield called, watching both fighters now with the neutral attention of a man whose work just finished cleanly."
+            "name": "Tane Solr",
+            "state": "Weight back on both feet, ankle handled carefully — watching Silas with recalibrated attention, curious rather than embarrassed."
           },
           {
-            "name": "Tane Solr",
-            "state": "Standing at his left flank, still, recalibrating — weight carefully back on both feet, eyes on Silas with a different quality of attention than before."
+            "name": "Orvil",
+            "state": "Standing at the center-line, work done, watching both fighters with neutral morning attention."
           },
           {
             "name": "Pell Marsh",
-            "state": "At the near arc — breath just released, reading the aftermath the way she reads ironwork. Has not spoken yet."
+            "state": "At the near arc — flask extended toward Tane, reading the exchange the way she reads ironwork."
           },
           {
             "name": "Siol",
-            "state": "Just inside the gate, watching the ring — a faint shift in her stillness that might be approval."
+            "state": "Just inside the gate, the faint shift of approval in her stillness unchanged."
           },
           {
             "name": "Huginn",
-            "state": "On Silas's shoulder, eye still on Tane Solr — unchanged, unhurried."
+            "state": "On Silas's shoulder, shifted once — settled and unhurried."
           }
         ],
         "objects": [
           "Packed sand floor — marks from the one exchange, nothing more",
-          "Stone gallery benches — a dozen watchers quieting after the yield",
+          "Stone gallery benches — a dozen watchers quieted after the yield",
           "Memory — peace-bound at Silas's back",
           "Orvil's short baton, lowered",
-          "Tane's two seconds — at the far arc, one uncorking the water flask"
+          "Tane's two seconds at the far arc, one uncorking the water flask",
+          "Pell's flask, extended toward Tane"
         ],
         "threads": [
-          "Tane Solr is recalibrating — something in his attention has shifted; the bout ended with more information exchanged than a typical yield",
-          "Pell has a read she has not yet spoken",
+          "Tane Solr is curious, not embarrassed — something in his attention has shifted toward wanting to understand the craft",
+          "Pell has vouched without ceremony; the group dynamic is visible to anyone watching",
           "The gallery has registered the exchange — a dozen people saw how it ended"
         ]
       },
@@ -1028,85 +994,59 @@
           "op": "update",
           "npcId": "tane-solr",
           "name": "Tane Solr",
-          "role": "Bout opponent, threshold-walker",
-          "gender": "man",
-          "pronouns": "he/him",
-          "note": "Yielded on the word 'Ankle' — one chin-drop to Orvil, clean and without argument. Recalibrating now.",
+          "note": "Named his curiosity directly — three years on that ankle, never named in the first breath. Not embarrassed; wants to understand the craft.",
           "learned": [
-            "Silas named his weakness without pressing it — yielded on his own terms",
-            "The bout ended in one exchange; the deathsense read was the whole contest"
-          ],
-          "skillsObserved": [
-            "accepting a clean yield without ceremony or excuse"
+            "Silas named his ankle weakness from deathsense in the opening breath — not footwork, not testing; a read of what was already declining"
           ],
           "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "Standing at the far flank after yielding — recalibrating, watching Silas with a different kind of attention."
+          "statusNote": "At his left flank after yielding — recalibrating toward curiosity, watching Silas with a different quality of attention."
         },
         {
           "op": "update",
-          "npcId": "orvil",
-          "name": "Orvil",
-          "role": "Coliseum referee, morning rotation",
-          "gender": "man",
-          "pronouns": "he/him",
-          "note": "Called the yield cleanly — did not editorialize. Baton down.",
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Marsh",
+          "note": "Vouched for Silas plainly to Tane — 'He does that' — and extended her flask without ceremony.",
           "status": "active",
-          "statusNote": "At the center-line — bout called, watching the aftermath with neutral attention."
+          "statusNote": "At the near arc — flask extended toward Tane, steady, reading the aftermath."
         }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "tane-solr",
-          "label": "Tane Solr",
-          "kind": "person",
-          "entityId": "tane-solr",
-          "fact": "Yielded in the first exchange when Silas named his ankle aloud — did not wait for it to be pressed. A careful man who makes his own decisions.",
-          "links": [
-            "waygate",
-            "the-edge-district-ledger"
-          ]
-        }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "One short Coliseum exchange — a few minutes at most"
-      }
+      ]
     },
     "sceneState": {
-      "setting": "Inside the Hub Coliseum at early morning — packed sand underfoot, stone gallery above with a dozen watchers settling after the yield, low-angle light through the open top. Silas stands at Tane Solr's left flank; Orvil's baton is lowered. The bout is finished.",
+      "setting": "Inside the Hub Coliseum at early morning — packed sand underfoot, stone gallery above with a dozen watchers quieting after the yield, low-angle light through the open top. Silas stands close to Tane Solr at his left flank; Orvil's baton is down and the bout fully concluded.",
       "npcsPresent": [
         {
-          "name": "Orvil",
-          "state": "Baton lowered — yield called, watching both fighters now with the neutral attention of a man whose work just finished cl"
+          "name": "Tane Solr",
+          "state": "Weight back on both feet, ankle handled carefully — watching Silas with recalibrated attention, curious rather than emba"
         },
         {
-          "name": "Tane Solr",
-          "state": "Standing at his left flank, still, recalibrating — weight carefully back on both feet, eyes on Silas with a different qu"
+          "name": "Orvil",
+          "state": "Standing at the center-line, work done, watching both fighters with neutral morning attention."
         },
         {
           "name": "Pell Marsh",
-          "state": "At the near arc — breath just released, reading the aftermath the way she reads ironwork. Has not spoken yet."
+          "state": "At the near arc — flask extended toward Tane, reading the exchange the way she reads ironwork."
         },
         {
           "name": "Siol",
-          "state": "Just inside the gate, watching the ring — a faint shift in her stillness that might be approval."
+          "state": "Just inside the gate, the faint shift of approval in her stillness unchanged."
         },
         {
           "name": "Huginn",
-          "state": "On Silas's shoulder, eye still on Tane Solr — unchanged, unhurried."
+          "state": "On Silas's shoulder, shifted once — settled and unhurried."
         }
       ],
       "objects": [
         "Packed sand floor — marks from the one exchange, nothing more",
-        "Stone gallery benches — a dozen watchers quieting after the yield",
+        "Stone gallery benches — a dozen watchers quieted after the yield",
         "Memory — peace-bound at Silas's back",
         "Orvil's short baton, lowered",
-        "Tane's two seconds — at the far arc, one uncorking the water flask"
+        "Tane's two seconds at the far arc, one uncorking the water flask",
+        "Pell's flask, extended toward Tane"
       ],
       "threads": [
-        "Tane Solr is recalibrating — something in his attention has shifted; the bout ended with more information exchanged than a typical yield",
-        "Pell has a read she has not yet spoken",
+        "Tane Solr is curious, not embarrassed — something in his attention has shifted toward wanting to understand the craft",
+        "Pell has vouched without ceremony; the group dynamic is visible to anyone watching",
         "The gallery has registered the exchange — a dozen people saw how it ended"
       ]
     }
@@ -1114,7 +1054,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 6,
-    "hour": 8,
+    "hour": 9,
     "realAnchor": null
   },
   "companions": [
@@ -1538,7 +1478,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d6] Took Silas's hand and walked through the waygate without a word — settled and present.",
         "[d6] Walked through the waygate without ceremony, hand brushing the left upright, and turned back to wait for Silas — already looking south.",
         "[d6] Stepped through the waygate first, settled at the plaza edge, asked where they start — present and ready",
         "[d6] Stepped through the waygate first, settled at the plaza edge, watching Silas finish the Order-Sense read — present and ready to move",
@@ -1547,7 +1486,8 @@
         "[d6] After watching Siol and weighing her, asked the practical question directly: is there a toll, a keeper, or anything waiting on the other side of the sixth gate?",
         "[d6] Received Siol's answer with a single structural nod — question settled, attention returned to Silas",
         "[d6] Named her preference plainly — walk the floor before watching it. No ceremony.",
-        "[d6] Walking the Coliseum floor before watching anyone else on it — reading the space on her own terms first."
+        "[d6] Walking the Coliseum floor before watching anyone else on it — reading the space on her own terms first.",
+        "[d6] Vouched for Silas plainly to Tane — 'He does that' — and extended her flask without ceremony."
       ],
       "knownFacts": [
         "The first death-warding thread is seated into the brigandine's shoulder collar — quiet, economical, holding.",
@@ -1568,7 +1508,7 @@
         "receiving a genuine technique acknowledgment without ceremon"
       ],
       "status": "active",
-      "statusNote": "On the Coliseum sand, walking the arc of the ring slowly — her first time here, doing it her way",
+      "statusNote": "At the near arc — flask extended toward Tane, steady, reading the aftermath.",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 6
@@ -2177,19 +2117,21 @@
         "locationId": "gen-waygate",
         "day": 6
       },
-      "relationship": 1,
+      "relationship": 2,
       "history": [
         "[d6] Accepted the bout through Orvil without ceremony — crossed to the center-line and is waiting for declarations.",
         "[d6] Deathsense read complete — old left ankle injury, healed imperfectly, compensated automatically. Not a fatal weakness but a real one on lateral footwork.",
         "[d6] Silas arrived at his left flank on the opening call — Tane turned from the waist to compensate, weight redistributed off the ankle. Steady. Assessing.",
-        "[d6] Yielded on the word 'Ankle' — one chin-drop to Orvil, clean and without argument. Recalibrating now."
+        "[d6] Yielded on the word 'Ankle' — one chin-drop to Orvil, clean and without argument. Recalibrating now.",
+        "[d6] Named his curiosity directly — three years on that ankle, never named in the first breath. Not embarrassed; wants to understand the craft."
       ],
       "knownFacts": [
         "Threshold-walking declared as his craft at the gate",
         "Two seconds present, stepped back for the bout",
         "Left ankle carries old ligament damage — healed imperfectly, compensated so automatically he does not think about it; costs him on fast lateral steps on packed sand",
         "Silas named his weakness without pressing it — yielded on his own terms",
-        "The bout ended in one exchange; the deathsense read was the whole contest"
+        "The bout ended in one exchange; the deathsense read was the whole contest",
+        "Silas named his ankle weakness from deathsense in the opening breath — not footwork, not testing; a read of what was already declining"
       ],
       "skillsObserved": [
         "accepting a clean yield without ceremony or excuse"
@@ -2197,7 +2139,7 @@
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "Standing at the far flank after yielding — recalibrating, watching Silas with a different kind of attention.",
+      "statusNote": "At his left flank after yielding — recalibrating toward curiosity, watching Silas with a different quality of attention.",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 6
@@ -3985,29 +3927,30 @@
     }
   },
   "tendencies": {
-    "strategic": 15.302124980553202,
-    "cerebral": 8.319399341108207,
-    "social": 17.629874481815087,
-    "generous": 2.153306654388235,
-    "cautious": 6.928883872301105,
-    "physical": 2.031693639420323,
-    "risky": 1.0786937603268414,
-    "ruthless": 0.6793291351393113,
-    "carousing": 0.010408181321949154,
-    "amorous": 6.736218103502091,
-    "patient": 1.6824812781948884,
-    "stealth": 0.26330970833124756,
-    "devotion": 0.5884038743340232,
-    "craft": 2.0799660413901955,
-    "leadership": 0.2613633162931382
+    "strategic": 14.919571856039372,
+    "cerebral": 8.111414357580502,
+    "social": 19.18912761976971,
+    "generous": 2.099473988028529,
+    "cautious": 6.755661775493577,
+    "physical": 1.9809012984348149,
+    "risky": 1.0517264163186704,
+    "ruthless": 0.6623459067608285,
+    "carousing": 0.010147976788900425,
+    "amorous": 6.567812650914539,
+    "patient": 1.640419246240016,
+    "stealth": 0.2567269656229664,
+    "devotion": 0.5736937774756726,
+    "craft": 2.0279668903554406,
+    "leadership": 0.2548292333858097
   },
   "aptitudes": [
     "strategist",
     "silver_tongue",
     "tactician",
+    "orator",
     "charmer"
   ],
-  "actionCount": 540,
+  "actionCount": 541,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -4277,8 +4220,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784412592717,
-  "rev": 793,
+  "updatedAt": 1784412722450,
+  "rev": 794,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5035,7 +4978,7 @@
           "entityId": "tane-solr",
           "type": "npc",
           "birthWeight": 23,
-          "engagementScore": 8,
+          "engagementScore": 10,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -5066,6 +5009,10 @@
             },
             {
               "kind": "fact",
+              "day": 6
+            },
+            {
+              "kind": "interact",
               "day": 6
             }
           ],
@@ -5621,7 +5568,7 @@
   "syncedAt": 1784392733860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 360
+    "valley": 361
   },
   "foreclosed": [
     "rootkin",
@@ -5678,10 +5625,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T22:09:52.716Z",
+      "lastAt": "2026-07-18T22:12:02.449Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 85,
+      "beats": 86,
       "_recapError": null,
       "recap": "Day eighteen, and Silas Weir moved like a man who'd finally stopped fighting the shape of what he was. On the road he disarmed three opportunists without breaking bones, read the grief sitting behind the broad man's eyes, named it plainly, pressed provisions into their hands, and sent them toward something worth doing — mercy given as instruction, not sentiment. Then he brought the hard people together: Dara, Aldric, Fendt, Mara, Calvar, all of them in the heat of Pell's forge with no exits easy and no pretense left, and in that single evening he turned a valley's quiet panic into four working threads — engineering, logistics, supply, accounts — each with a named lead and a direction to face. The crisis didn't end, but it stopped being formless, and that was his doing."
     }

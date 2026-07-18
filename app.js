@@ -25,6 +25,7 @@ import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ri
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs } from "./engine/companions.js";
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges } from "./engine/company.js";
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
+import { toolkitForGM } from "./engine/toolkit.js";
 import { fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc } from "./engine/personalArc.js";
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./engine/entityDetail.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier } from "./engine/npcs.js";
@@ -48,7 +49,7 @@ import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challe
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.99";
+const APP_VERSION = "1.8.100";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2550,6 +2551,12 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   if (romanceGuidanceDetail) autoVerifyLeg("romance-flirt", "a flirtatious action was tagged romantic and the romance guidance loaded in play — the one live-model surface"); // ROMANCE leg auto-detect (dev-only)
   const masteryDetail = masteryReadyForGM(); // ability-arch v2: owned rank-2 crafts ripe for a defining moment
   const anomalyDetail = anomaliesForGM(detectAnomalies(character, { rules: CONTENT.rules })); // SNG-137: surface likely errors so the GM can repair them
+  const toolkitDetail = toolkitForGM(character, { // SNG-142: what the player COULD reach for — the GM offers ONE, lightly (rule 16B)
+    catalog: fullCatalog(), fnIndex: FN_INDEX, rules: CONTENT.rules,
+    coverageMissing: functionCoverage(character, fullCatalog(), FN_INDEX).missing,
+    companions: activeCompanions(character, CONTENT.companions),
+    party: sharedScene ? sharedScene.party.filter(m => m.characterId !== character.id) : []
+  });
   // SNG-122: if the player's action this turn is a travel intent, force the GM to emit moveTo to the named
   // destination (+ enumerate reachable known places so its target resolves). Fixes the CAUSE — the deferred
   // SNG-117 no-moveTo boundary that blocked normal in-fiction travel.
@@ -2591,6 +2598,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
     romanceGuidanceDetail, // romance: pulled craft guidance on a flirtatious/romantic beat
     masteryDetail,        // ability-arch v2: rank-2 crafts ripe for a GM-marked defining moment
     anomalyDetail,        // SNG-137: POSSIBLE ERROR — a consistency check the GM may repair this turn
+    toolkitDetail,        // SNG-142: TOOLKIT — what the player could reach for; the GM offers one, lightly
     availableEncounters: activeEnc() ? null : listAvailableEncounters(),
     partyDetail: partyBlockForGM(sharedScene, character.id),
     ratingDetail: ratingLineForGM(), // SNG-BATCH-9 §3 consumer (a): narrate to this player's ceiling

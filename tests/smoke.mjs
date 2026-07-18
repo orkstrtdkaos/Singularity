@@ -3297,6 +3297,50 @@ await (async () => {
   check("SNG-131 e2e: valleyfolk carries a real braidAffinity discount", (oget("valleyfolk").braidAffinity?.discount || 0) >= 1);
 })();
 
+// --- SNG-142: the GM offers the player's own toolkit (skills/combos/aspirations/items/companions/party) ---
+(async () => {
+  const { toolkitForGM } = await import("../engine/toolkit.js");
+  const fnIndex = { families: ["KNOW", "HARM", "RESTORE"], verbToFamily: { sense: "KNOW", read: "KNOW", strike: "HARM", mend: "RESTORE" } };
+  const cat = {
+    deathsense: { id: "deathsense", name: "Deathsense", functions: ["sense"] },
+    order_sense: { id: "order_sense", name: "Order-Sense", functions: ["read"] },
+    palework: { id: "palework", name: "Palework", functions: ["strike"] },
+    the_kept_breath: { id: "the_kept_breath", name: "The Kept Breath", functions: ["mend"] }
+  };
+  const rules = { practice: { aspirationRipe: 10 } };
+
+  // a rich character: an unused craft, a co-used pair, a declared aspiration, a named item, a companion
+  const rich = {
+    abilities: [{ abilityId: "deathsense" }, { abilityId: "order_sense" }, { abilityId: "palework" }],
+    practice: { uses: { deathsense: 5, order_sense: 4, palework: 0 }, coActivations: { "deathsense|order_sense": 3 }, aspirations: [{ abilityId: "the_kept_breath", since: "x", progress: 4 }] },
+    inventory: [{ name: "spear", customName: "Memory", kind: "weapon", uses: [{ label: "channel deathsense" }] }, { name: "rope", kind: "tool" }]
+  };
+  const companions = [{ id: "huginn", name: "Huginn", role: "carrion bird that attends endings", knowledge: ["where the dying are", "the old roads"] }];
+  const block = toolkitForGM(rich, { catalog: cat, fnIndex, rules, coverageMissing: ["RESTORE"], companions, party: [] });
+
+  check("SNG-142: the toolkit surfaces a craft not yet leaned on (unused proxy — palework at 0 uses)", /not yet leaned on:[^\n]*Palework/.test(block));
+  check("SNG-142: it offers a combination of two OWNED crafts (ranked by prior co-use)", /reach further together: (Deathsense \+ Order-Sense|Order-Sense \+ Deathsense)/.test(block) && /woven these before/.test(block));
+  check("SNG-142: it surfaces the declared ASPIRATION + progress (the 0-mention gap closed)", /Aspiration in play: working toward The Kept Breath \(4\/10\)/.test(block));
+  check("SNG-142: it flags a carried item's CAPABILITY (Memory — channel deathsense), not just its name", /Carried[^\n]*Memory — channel deathsense/.test(block));
+  check("SNG-142: it surfaces a COMPANION capability (role + what they know), not just presence", /With you: Huginn \(carrion bird that attends endings\) — knows where the dying are/.test(block));
+  check("SNG-142: it pipes the SNG-124 function-GAP nudge", /no RESTORE craft/.test(block));
+  check("SNG-142: the attribute-action floor is always offered", /a plain attribute action \(a feat of Strength\/Agility\/Wits\/Presence/.test(block));
+
+  // Part 1B: a shared family scene surfaces a party member as a COOPERATIVE (agency-preserving) invitation
+  const shared = toolkitForGM(rich, { catalog: cat, fnIndex, rules, companions: [], party: [{ characterId: "p2", name: "Aelyn" }, { characterId: "p3", name: "Saehara" }] });
+  check("SNG-142: a shared scene offers a cooperative move with a party member — INVITE, never commit them", /shared scene: Aelyn, Saehara[^\n]*cooperative move[^\n]*INVITE their player; never commit their character/.test(shared));
+
+  // discipline: an empty/fresh character gets NO block (only the attribute floor isn't worth surfacing)
+  check("SNG-142: a fresh character with no toolkit signal gets an empty block (not attribute-floor spam)", toolkitForGM({}, { catalog: cat, fnIndex, rules }) === "");
+  check("SNG-142: a novice with just one owned craft still gets its 'not yet leaned on' nudge (block non-empty)", toolkitForGM({ abilities: [{ abilityId: "palework" }], practice: { uses: {} } }, { catalog: cat, fnIndex, rules }) !== "");
+
+  // gm.js contract — rule 16B + the TOOLKIT scene block + the ctx destructure shipped
+  const gmSrc142 = readFileSync(join(root, "engine/gm.js"), "utf8");
+  check("SNG-142: rule 16B (offer the toolkit, lightly) is in the GM contract with the ≤1/never-on-clear-intent discipline", /16B\. OFFER THE TOOLKIT — LIGHTLY[\s\S]{0,600}NEVER when the player already stated a clear intent/.test(gmSrc142));
+  check("SNG-142: rule 16B forbids committing another player's party character (agency guard)", /never commit another player's PARTY character/i.test(gmSrc142));
+  check("SNG-142: the TOOLKIT scene block is rendered (toolkitDetail), guarded + destructured", /if \(toolkitDetail\) scene\.push\(/.test(gmSrc142) && /anomalyDetail, toolkitDetail \} = ctx/.test(gmSrc142));
+})();
+
 // --- SNG-076: authored prose is not truncated mid-word ---
 (() => {
   const short = "Fendt is going to be ruined by a piece of paper that does not exist.";

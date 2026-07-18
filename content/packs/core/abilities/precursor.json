@@ -30,23 +30,40 @@
           "rank": 1,
           "name": "The Standing Vector",
           "grants": "Read a location's or object's strong spectrum axes on sight — which way it leans and how hard. Reveals location vectors fully without approximation.",
-          "cannot": "One target at a time; the read fades when you look away; people resist unless still and willing."
+          "cannot": "One target at a time; the read fades when you look away; people resist unless still and willing.",
+          "functions": [
+            "reveal"
+          ],
+          "harmRung": "none",
+          "gains": "broaden"
         },
         {
           "rank": 2,
           "name": "Coordinate Read",
           "grants": "Read a person's deep vector — their standing alignment, not their mood; sense when a place's vector has recently SHIFTED and roughly toward what.",
-          "cannot": "Not mind-reading — vector is disposition, not thought; shift-sense gives direction, not cause."
+          "cannot": "Not mind-reading — vector is disposition, not thought; shift-sense gives direction, not cause.",
+          "functions": [
+            "reveal"
+          ],
+          "harmRung": "none",
+          "gains": "deepen"
         },
         {
           "rank": 3,
           "name": "The Address Itself",
           "grants": "Perceive the unrepeatable coordinate of a thing — its cosmic address, the point it alone occupies; find your way to a place or person by their vector alone across any distance.",
-          "cannot": "The address is felt, not spoken — you can navigate to it but not name it; the drift-cost compounds; the Precursors' own addresses read as holes in the field."
+          "cannot": "The address is felt, not spoken — you can navigate to it but not name it; the drift-cost compounds; the Precursors' own addresses read as holes in the field.",
+          "functions": [
+            "reveal",
+            "track"
+          ],
+          "harmRung": "none",
+          "gains": "broaden"
         }
       ],
       "functions": [
-        "reveal"
+        "reveal",
+        "track"
       ],
       "challengeTypes": [
         "INVESTIGATE",
@@ -81,19 +98,35 @@
           "rank": 1,
           "name": "The Handshake",
           "grants": "Rouse a dormant mechanism to answer simple queries — what it is, whether it's safe, roughly what it does.",
-          "cannot": "Dormant only; live systems ignore or lash out; answers are functional, never why."
+          "cannot": "Dormant only; live systems ignore or lash out; answers are functional, never why.",
+          "functions": [
+            "reveal"
+          ],
+          "harmRung": "none",
+          "gains": "broaden"
         },
         {
           "rank": 2,
           "name": "Deeper Grammar",
           "grants": "Ask a mechanism to perform its function once, on its terms; read a lattice node's state (dormant/cycling/waking) with certainty; safely interface at the edge of live systems.",
-          "cannot": "It performs its OWN function, not yours; one ask before it closes; waking systems still refuse."
+          "cannot": "It performs its OWN function, not yours; one ask before it closes; waking systems still refuse.",
+          "functions": [
+            "reveal"
+          ],
+          "harmRung": "none",
+          "gains": "deepen"
         },
         {
           "rank": 3,
           "name": "Fluent in the Old Tongue",
           "grants": "Hold sustained exchange with any Precursor system, live included; negotiate a live remnant toward dormancy; understand what a mechanism was FOR (function's shadow of purpose).",
-          "cannot": "Purpose glimpsed is not purpose grasped — the GM holds the truth; negotiating a live system risks waking it further; fluency deepens the drift most of all."
+          "cannot": "Purpose glimpsed is not purpose grasped — the GM holds the truth; negotiating a live system risks waking it further; fluency deepens the drift most of all.",
+          "functions": [
+            "reveal",
+            "bind"
+          ],
+          "harmRung": "none",
+          "gains": "broaden"
         }
       ],
       "functions": [
@@ -134,19 +167,39 @@
           "rank": 1,
           "name": "Stir the Buried",
           "grants": "Wake a short buried alignment to partial function — a conduit carries again, a marker lights, a door remembers opening.",
-          "cannot": "Partial and brief; you can't choose exactly what function returns; it sleeps again on its own timing, not yours."
+          "cannot": "Partial and brief; you can't choose exactly what function returns; it sleeps again on its own timing, not yours.",
+          "functions": [
+            "open",
+            "summon"
+          ],
+          "harmRung": "none",
+          "gains": "broaden"
         },
         {
           "rank": 2,
           "name": "The Line Runs",
           "grants": "Wake a full stretch to sustained function; direct crude what the waking does (carry water THIS way, light THAT path); sense everything else your waking stirred nearby.",
-          "cannot": "Direction is crude; waking one line tugs adjacent ones; the GM names what else stirred."
+          "cannot": "Direction is crude; waking one line tugs adjacent ones; the GM names what else stirred.",
+          "functions": [
+            "open",
+            "summon",
+            "command"
+          ],
+          "harmRung": "none",
+          "gains": "broaden"
         },
         {
           "rank": 3,
           "name": "The Road Remembers",
           "grants": "Rouse a whole lattice district toward its old purpose; the woken network partly obeys sustained intent; once woken by you, a line answers you faster forever after.",
-          "cannot": "A district woken is a district AWAKE — consequences ripple beyond the scene and persist; some lines, once run, cannot be stopped by you at all; deepest drift-cost in the tree."
+          "cannot": "A district woken is a district AWAKE — consequences ripple beyond the scene and persist; some lines, once run, cannot be stopped by you at all; deepest drift-cost in the tree.",
+          "functions": [
+            "open",
+            "summon",
+            "command"
+          ],
+          "harmRung": "none",
+          "gains": "deepen"
         }
       ],
       "functions": [
@@ -188,24 +241,40 @@
           "rank": 1,
           "name": "Close the Door",
           "grants": "Foreclose a single immediate possibility — an attack cannot land, a path cannot be taken, a thing cannot ignite. Absolute for the moment.",
-          "cannot": "One narrow possibility; the moment only; each use nudges your vector toward dark/destruction/death — the engine tracks it and the GM will name where it takes you."
+          "cannot": "One narrow possibility; the moment only; each use nudges your vector toward dark/destruction/death — the engine tracks it and the GM will name where it takes you.",
+          "functions": [
+            "bind"
+          ],
+          "harmRung": "none",
+          "gains": "broaden"
         },
         {
           "rank": 2,
           "name": "Standing Denial",
           "grants": "Foreclose a possibility for a scene — a room stays sealed, a working stays dead, a person cannot do a named thing while you hold it. ",
-          "cannot": "Holding it costs continuously; the drift accelerates the longer you hold; break your concentration and it snaps open, sometimes worse."
+          "cannot": "Holding it costs continuously; the drift accelerates the longer you hold; break your concentration and it snaps open, sometimes worse.",
+          "functions": [
+            "bind"
+          ],
+          "harmRung": "incapacitating",
+          "gains": "deepen"
         },
         {
           "rank": 3,
           "name": "It Will Not Be",
           "grants": "Foreclose something lasting — a threat unmade, an outcome permanently denied, a door closed for good. The tool at full strength.",
-          "cannot": "The vector-cost is severe and lasting — sustained use walks a wielder toward the contraction the framework names as the enemy; the GM may rule a character too-foreclosed has changed. Never used without weighing what it makes of you."
+          "cannot": "The vector-cost is severe and lasting — sustained use walks a wielder toward the contraction the framework names as the enemy; the GM may rule a character too-foreclosed has changed. Never used without weighing what it makes of you.",
+          "functions": [
+            "bind",
+            "break"
+          ],
+          "harmRung": "incapacitating",
+          "gains": "broaden"
         }
       ],
       "functions": [
-        "break",
-        "bind"
+        "bind",
+        "break"
       ],
       "challengeTypes": [
         "FIGHT",
@@ -241,24 +310,44 @@
           "rank": 1,
           "name": "The Lesser Seals",
           "grants": "Open minor Precursor bindings — a sealed cache, a locked mechanism, a bound remnant. Read a seal's rough weight (minor/major/grave) before you try.",
-          "cannot": "Minor seals only; weight-read is rough; what's inside is the GM's to reveal — sometimes gift, sometimes not."
+          "cannot": "Minor seals only; weight-read is rough; what's inside is the GM's to reveal — sometimes gift, sometimes not.",
+          "functions": [
+            "open",
+            "reveal"
+          ],
+          "harmRung": "none",
+          "gains": "broaden"
         },
         {
           "rank": 2,
           "name": "The Deep Doors",
           "grants": "Open major seals — vaults, containments, the doors the valley learned to walk around; sense a seal's PURPOSE-shadow (prison? dam? mercy?) before opening.",
-          "cannot": "Purpose-shadow is a hint, not certainty; some doors notice being opened and remember you; grave seals still refuse."
+          "cannot": "Purpose-shadow is a hint, not certainty; some doors notice being opened and remember you; grave seals still refuse.",
+          "functions": [
+            "open",
+            "reveal"
+          ],
+          "harmRung": "none",
+          "gains": "deepen"
         },
         {
           "rank": 3,
           "name": "Nothing Stays Shut",
           "grants": "Open grave seals — the ones holding back the worst the Precursors feared; open a thing at distance by its address (with Address-Sense); the valley's deepest containments become reachable.",
-          "cannot": "What grave seals hold is grave for a reason — the GM's absolute domain; opening some things cannot be undone by any ability; this is the edge of the map."
+          "cannot": "What grave seals hold is grave for a reason — the GM's absolute domain; opening some things cannot be undone by any ability; this is the edge of the map.",
+          "functions": [
+            "open",
+            "reveal",
+            "break"
+          ],
+          "harmRung": "none",
+          "gains": "broaden"
         }
       ],
       "functions": [
+        "break",
         "open",
-        "break"
+        "reveal"
       ],
       "challengeTypes": [
         "PUZZLE"
@@ -293,25 +382,45 @@
           "rank": 1,
           "name": "The Held Gap",
           "grants": "Keep one foreclosing possibility open through a scene — a collapsing path stays passable, a dying ember stays lit, a closing chance stays open a while longer.",
-          "cannot": "One thing, one scene; costs continuously; when you let go it closes as it always meant to."
+          "cannot": "One thing, one scene; costs continuously; when you let go it closes as it always meant to.",
+          "functions": [
+            "open",
+            "ward"
+          ],
+          "harmRung": "none",
+          "gains": "broaden"
         },
         {
           "rank": 2,
           "name": "Against the Tendency",
           "grants": "Hold open something larger — a way that wants to seal, an outcome the lattice is foreclosing, a person the machinery is writing out; others can act through the gap you hold. Using this REVERSES drift — it pulls your vector toward life/creation/light.",
-          "cannot": "The push-back is relentless and real; hold too much too long and it costs health, not just energy; you cannot hold and act freely at once."
+          "cannot": "The push-back is relentless and real; hold too much too long and it costs health, not just energy; you cannot hold and act freely at once.",
+          "functions": [
+            "open",
+            "ward",
+            "bind"
+          ],
+          "harmRung": "none",
+          "gains": "broaden"
         },
         {
           "rank": 3,
           "name": "The Standing Refusal",
           "grants": "Hold a great aperture open against the lattice's full will — a district's foreclosure halted, a grave outcome refused entry, a door the old world sealed kept open by your standing there. The framework's answer to its own antagonist, made an act.",
-          "cannot": "This is the hardest thing in the game and the GM prices it as such — sustained holding can cost gravely; you hold, you do not win; what walks through the gap is not yours to command; but nothing you hold open forecloses while you stand."
+          "cannot": "This is the hardest thing in the game and the GM prices it as such — sustained holding can cost gravely; you hold, you do not win; what walks through the gap is not yours to command; but nothing you hold open forecloses while you stand.",
+          "functions": [
+            "open",
+            "ward",
+            "bind"
+          ],
+          "harmRung": "none",
+          "gains": "deepen"
         }
       ],
       "functions": [
+        "bind",
         "open",
-        "ward",
-        "bind"
+        "ward"
       ],
       "challengeTypes": [
         "SURVIVE",

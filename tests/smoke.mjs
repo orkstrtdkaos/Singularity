@@ -4036,6 +4036,43 @@ await (async () => {
     npcPortraitTier(pell) === "partner"); // the app skips when n._portraitTier === this tier
 }
 
+// --- SNG-160: known people — one entry per person, and the player can name/merge them ---
+{
+  const appSrc160 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+  const { NOMINATE_AT, ESTABLish_AT } = await import('../engine/generate.js');
+  const { setNpcName } = await import('../engine/npcs.js');
+  const { applyStateOps } = await import('../engine/corrections.js');
+
+  check("160: a partner is filtered out of who's-here so they aren't listed twice",
+    /const partnerIds = new Set\(partners\.map\(p => p\.id\)\.filter\(Boolean\)\)/.test(appSrc160) &&
+    /const hereRest = hereP\.filter\(p => !partnerIds\.has\(p\.id\)\)/.test(appSrc160));
+  check("160: every listed person carries rename + merge controls", /data-setname="\$\{esc\(p\.id\)\}"/.test(appSrc160) && /data-mergenpc="\$\{esc\(p\.id\)\}"/.test(appSrc160));
+  check("160: the rename prompt pre-fills the current name so it EXTENDS rather than replaces", /const cur = character\.npcRegistry\?\.\[b\.dataset\.setname\]\?\.name/.test(appSrc160));
+
+  // renaming keeps the old name findable — the GM still resolves "Pell" after "Pell Ran Marsh"
+  const ch = { npcRegistry: { pell: { id: "pell", name: "Pell", relationship: 10, history: [], knownFacts: [], skillsObserved: [], aliases: [] } } };
+  check("160: extending a name keeps the old one as an alias (the GM can still resolve it)",
+    setNpcName(ch, "pell", "Pell Ran Marsh", 3) === true &&
+    ch.npcRegistry.pell.name === "Pell Ran Marsh" && (ch.npcRegistry.pell.aliases || []).includes("Pell"));
+
+  // the player-only merge: two records nothing textual could ever match
+  const ch2 = { npcRegistry: {
+    "broad-opportunist": { id: "broad-opportunist", name: "Broad Opportunist", relationship: 0, history: ["[d1] shook you down"], knownFacts: ["works the road"], skillsObserved: [], aliases: [] },
+    "bren-thalle": { id: "bren-thalle", name: "Bren Thalle", relationship: 1, history: ["[d4] gave his name"], knownFacts: [], skillsObserved: [], aliases: [] } } };
+  const r = applyStateOps(ch2, [{ op: "mergeEntity", fromId: "broad-opportunist", intoId: "bren-thalle", why: "player: same person" }], {});
+  check("160: merging two unrelated-looking names unions their record and drops the duplicate",
+    r.applied.length === 1 && !ch2.npcRegistry["broad-opportunist"] &&
+    ch2.npcRegistry["bren-thalle"].history.length === 2 &&
+    ch2.npcRegistry["bren-thalle"].knownFacts.includes("works the road") &&
+    (ch2.npcRegistry["bren-thalle"].aliases || []).includes("Broad Opportunist"));
+
+  // the canon-progress badge shows the gating number, not the decorative one
+  check("160: the threshold that gates canon is exported for the UI", NOMINATE_AT === 8);
+  check("160: the badge reads progress-to-canon, not realness weight",
+    /\$\{t\.score\}\/\$\{NOMINATE_AT\} to canon/.test(appSrc160) && /ready for canon/.test(appSrc160));
+  check("160: the badge names what actually moves the number", /⭐ Keep \+4/.test(appSrc160));
+}
+
 // --- SNG-159: canon promotion is IDEMPOTENT under retry (no self-demotion) ---
 {
   const { promoteInto, ensureCanonStore, isSameEntity } = await import('../engine/canon.js');

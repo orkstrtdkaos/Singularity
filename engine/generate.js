@@ -321,6 +321,11 @@ export async function generate(type, context = {}, deps = {}) {
 // entities offscreen — that world-tick coupling is Phase 2, gated on SNG-041 (the one clock).
 
 const TIER_AT = { established: 3, nominated: 8 };   // engagementScore thresholds
+/** SNG-160: the thresholds the UI must show. Promotion to shared canon keys on `engagementScore`
+ *  reaching `nominated` — NOT on `effectiveWeight`, which is what the badge used to display. A
+ *  player watching "weight 13" climb had no way to know the number that gates canon was 4/8. */
+export const NOMINATE_AT = TIER_AT.nominated;
+export const ESTABLISH_AT = TIER_AT.established;
 const FRESH_WINDOW_DAYS = 4;                          // untouched-fresh grace before it goes dormant
 const ATTENTION_WEIGHT = { revisit: 2, interact: 2, fact: 1, quest: 2, session: 1, keep: 4 }; // keep = the explicit ⭐ (Phase 2): one tap reaches established, two reach nominated
 const ATTENTION_CAP = 60;

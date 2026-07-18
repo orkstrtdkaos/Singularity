@@ -12,7 +12,7 @@ import { gmTurn, parseIntent, gmAsk, generateBio, suggestBuild, extractGambit, s
 import { applyQuestUpdates, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, slugify } from "./engine/quests.js";
 import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM } from "./engine/corrections.js";
 import { getApiKey, setApiKey, callClaude, callClaudeJSON } from "./engine/claude.js";
-import { generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight } from "./engine/generate.js";
+import { generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight, NOMINATE_AT } from "./engine/generate.js";
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, ghList, fetchRepoJSON, raceTimeout } from "./engine/sync.js";
 import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates } from "./engine/inventory.js";
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
@@ -55,7 +55,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // SNG-155: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.113";
+const APP_VERSION = "1.8.114";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4942,7 +4942,15 @@ function renderChronicle() {
         <div class="auth-stat"><span class="auth-num accent">${auth.worldEffect}</span><span class="auth-label">world-effect — your fingerprint on the shared world</span></div>
       </div>
       <div class="hint" style="margin-top:6px">Of the world you've touched, <strong>${auth.authoredCount}</strong> ${auth.authoredCount === 1 ? "place/person was" : "were"} written before you — and you <strong>called ${auth.novelCount} new ${auth.novelCount === 1 ? "one" : "ones"} into being</strong>.${auth.novelCount ? ` Of those, ${auth.persisted.shared} ${auth.persisted.shared === 1 ? "is" : "are"} now canon the whole valley reads${auth.persisted.rumor ? `, ${auth.persisted.rumor} live${auth.persisted.rumor === 1 ? "s" : ""} on as rumor others may yet confirm` : ""}; ${auth.persisted.personal} real to you, not yet shared.` : ""}</div>
-      ${auth.topAttention.length ? `<div style="margin-top:8px"><div class="sys-label">What you're making real right now</div>${auth.topAttention.map(t => `<div class="known-npc"><span class="npc-name">${esc(t.name)}</span> <span class="cost">${esc(t.type || "")} · ${esc(t.tier)}</span> <span class="rep-band ${t.tier === "nominated" ? "trusted" : ""}" title="realness weight — the closer to promotion, the more real">weight ${t.weight}</span></div>`).join("")}</div>` : ""}
+      ${/* SNG-160: show the number that ACTUALLY gates promotion. This badge used to read
+            "weight N" (birthWeight + score/2) — so the Low Lamp Inn showed "weight 13" while
+            sitting at 4 of the 8 engagement it needs, and a higher weight looked like it was
+            closer to canon when it wasn't. Now: progress to the threshold, and what moves it. */""}
+      ${auth.topAttention.length ? `<div style="margin-top:8px"><div class="sys-label">What you're making real right now</div>${auth.topAttention.map(t => {
+        const ready = t.score >= NOMINATE_AT;
+        const need = Math.max(0, NOMINATE_AT - t.score);
+        return `<div class="known-npc"><span class="npc-name">${esc(t.name)}</span> <span class="cost">${esc(t.type || "")} · ${esc(t.tier)}</span> <span class="rep-band ${ready ? "trusted" : ""}" title="Shared-world canon needs ${NOMINATE_AT} engagement. Revisit +2 · interact +2 · tie to a quest +2 · ⭐ Keep +4. (realness weight ${t.weight})">${ready ? "ready for canon" : `${t.score}/${NOMINATE_AT} to canon · needs ${need}`}</span></div>`;
+      }).join("")}</div>` : ""}
       <label class="rating-check" style="margin-top:10px"><input type="checkbox" id="chr-share" ${profile?.sharedChronicle ? "checked" : ""}> Share my chronicle with the family (they can see these authorship stats)</label>
     </section>
     <section><h3>Sessions${sessions.length ? ` (${sessions.length})` : ""}</h3>
@@ -5904,7 +5912,16 @@ function renderPlay(turn, opts = {}) {
       const hereP = knownPeopleAt(character, character.currentLocationId, { locations: CONTENT.locations, npcs: CONTENT.npcs });
       const partners = partnerAdjacentNpcs(character, CONTENT.rules);
       if (!rep && !hereP.length && !partners.length) return "";
-      const body = `${partners.length ? `<div class="partner-adjacent" style="margin-bottom:6px">${partners.map(p => `<div class="known-npc partner"><span class="npc-name entity-hover" ${p.id ? `data-entity="npc:${esc(p.id)}"` : ""}>❤ ${esc(p.name)}</span> <span class="rep-band trusted" title="A committed partner — with you in all but the mechanics">${esc(p.label)} · with you</span></div>`).join("")}</div>` : ""}${rep ? `<div style="margin-bottom:4px"><span class="rep-band ${rep.band}">${rep.band} (${rep.score})</span></div>` : ""}${hereP.length ? hereP.map(p => `<div class="known-npc"><span class="npc-name entity-hover" ${p.id ? `data-entity="npc:${esc(p.id)}"` : ""}>${esc(p.name)}</span> <span class="rep-band ${p.bondType === "romantic" ? "trusted" : ""}">${esc(p.label)}</span></div>`).join("") : `<span class="insight">no one you know is here right now</span>`}`;
+      // SNG-160: a partner is shown ONCE. The banner and the who's-here list were both rendering
+      // them, so Pell appeared twice — the same person, listed as two people.
+      const partnerIds = new Set(partners.map(p => p.id).filter(Boolean));
+      const hereRest = hereP.filter(p => !partnerIds.has(p.id));
+      // Per-person controls: the GM is supposed to emit revealName/nameExtend when the fiction
+      // learns a name, and it intermittently doesn't — leaving "Broad Opportunist" beside the same
+      // person's real name. Only the player knows they are the same, so give the player the verbs.
+      const peopleCtl = (p) => p.id ? ` <button class="npc-ctl" data-setname="${esc(p.id)}" title="Set or extend this person's name (e.g. Pell → Pell Ran Marsh)">✎</button><button class="npc-ctl" data-mergenpc="${esc(p.id)}" title="This is the same person as someone else you know — merge them">⇊</button>` : "";
+      const row = (p, extra = "") => `<div class="known-npc"><span class="npc-name entity-hover" ${p.id ? `data-entity="npc:${esc(p.id)}"` : ""}>${esc(p.name)}</span> <span class="rep-band ${p.bondType === "romantic" ? "trusted" : ""}">${esc(p.label)}${extra}</span>${peopleCtl(p)}</div>`;
+      const body = `${partners.length ? `<div class="partner-adjacent" style="margin-bottom:6px">${partners.map(p => `<div class="known-npc partner"><span class="npc-name entity-hover" ${p.id ? `data-entity="npc:${esc(p.id)}"` : ""}>❤ ${esc(p.name)}</span> <span class="rep-band trusted" title="A committed partner — with you in all but the mechanics">${esc(p.label)} · with you</span>${peopleCtl(p)}</div>`).join("")}</div>` : ""}${rep ? `<div style="margin-bottom:4px"><span class="rep-band ${rep.band}">${rep.band} (${rep.score})</span></div>` : ""}${hereRest.length ? hereRest.map(p => row(p)).join("") : (partners.length ? "" : `<span class="insight">no one you know is here right now</span>`)}`;
       return `<details class="sidebar-sec" data-sec="whoshere"${sectionOpen("whoshere", true) ? " open" : ""}><summary><span class="sec-title">${esc(location.name)} — who's here</span>${rep ? ` <span class="sec-sum">· ${rep.band}</span>` : ""}</summary><div class="sec-body">${body}</div></details>`;
     })()}
     <details class="sidebar-sec" data-sec="playstyle"${sectionOpen("playstyle", false) ? " open" : ""}><summary><span class="sec-title">Play-style</span></summary><div class="sec-body">${aptitudeChips()}</div></details>
@@ -6168,8 +6185,37 @@ function renderPlay(turn, opts = {}) {
   bindItemCardHandlers(() => renderPlay(character.activeScene?.lastTurn || null, {}));
   for (const b of app.querySelectorAll("[data-setname]")) b.onclick = (e) => {
     e.stopPropagation();
-    const nn = prompt("What is their name?");
+    // SNG-160: pre-fill with the current name so this also EXTENDS a partial one
+    // ("Pell" → "Pell Ran Marsh"), not just names an unknown. The old empty prompt read as
+    // "name this stranger" and gave no hint it could correct someone already named.
+    const cur = character.npcRegistry?.[b.dataset.setname]?.name || "";
+    const nn = prompt(`Their full name?\n\n(You can extend it — "Pell" → "Pell Ran Marsh". The old name is kept as an alias so the GM still recognises it.)`, cur);
     if (nn && setNpcName(character, b.dataset.setname, nn, readClock(character.clock).day)) { saveCharacter(character); renderPlay(character.activeScene?.lastTurn || null, {}); }
+  };
+  // SNG-160: "this is the same person as…" — the merge only the PLAYER can make. Auto-merge matches
+  // on NAME, so it can never know "Broad Opportunist" and "Bren Thalle" are one man; nothing in the
+  // text says so. Reuses the audited mergeEntity op (history/facts/skills unioned, best standing
+  // kept, the absorbed name retained as an alias, logged + reversible in the Repair panel).
+  for (const b of app.querySelectorAll("[data-mergenpc]")) b.onclick = (e) => {
+    e.stopPropagation();
+    const fromId = b.dataset.mergenpc;
+    const reg = character.npcRegistry || {};
+    const from = reg[fromId];
+    if (!from) return;
+    const others = Object.entries(reg).filter(([id]) => id !== fromId);
+    if (!others.length) { alert("There's no one else you know to merge them with yet."); return; }
+    const listed = others.map(([id, n], i) => `${i + 1}. ${n.name}`).join("\n");
+    const pick = prompt(`"${from.name}" is really the same person as which of these?\n\n${listed}\n\nType the number. Their records combine; the kept name is the one you choose.`);
+    const idx = Number(pick) - 1;
+    if (!Number.isInteger(idx) || idx < 0 || idx >= others.length) return;
+    const intoId = others[idx][0];
+    const r = applyStateOps(character, [{ op: "mergeEntity", fromId, intoId, why: `player: same person (${from.name} → ${others[idx][1].name})` }], {
+      backgrounds: CONTENT.backgrounds || [], traditionIndex: CONTENT.traditionIndex, locations: CONTENT.locations,
+      resolveLocationId, worldDay: absoluteWorldDay(), nowISO: new Date().toISOString()
+    });
+    saveCharacter(character);
+    const ok = r.applied.length > 0;
+    renderPlay(character.activeScene?.lastTurn || null, { aside: ok ? `Merged — ${from.name} and ${others[idx][1].name} are one person now.` : (r.refused?.[0]?.reason || "Couldn't merge those two.") });
   };
   for (const d of app.querySelectorAll("[data-npcgroup]")) d.ontoggle = () => {
     const k = d.dataset.npcgroup;

@@ -26,24 +26,47 @@
           "rank": 1,
           "name": "Focused Push",
           "grants": "Move, rattle, or knock over objects up to a person's weight within ~10 paces; crack brittle material (pottery, thin ice, old mortar); knock a weapon from an unready hand.",
-          "cannot": "No effect through solid stone; nothing heavier than a person; no sustained force — each use is a pulse."
+          "cannot": "No effect through solid stone; nothing heavier than a person; no sustained force — each use is a pulse.",
+          "functions": [
+            "move",
+            "break"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Standing Wave",
           "grants": "Sustained pressure — hold a door shut or force it, pin a light object to a wall, shatter dense material (green wood, cheap iron fittings); shape the pulse around one ally.",
-          "cannot": "Cannot lift (only push); two targets max; fails in heavy interference without a check."
+          "cannot": "Cannot lift (only push); two targets max; fails in heavy interference without a check.",
+          "functions": [
+            "move",
+            "break",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Resonant Break",
           "grants": "Find and exploit a structure's resonant frequency: collapse a wall section, shatter quality steel, stun everyone in a small room (nonlethal); precise enough to break one link of a chain.",
-          "cannot": "Not lethal by design — the field limits output near living tissue; exhausting (double energy) in Radiant territory."
+          "cannot": "Not lethal by design — the field limits output near living tissue; exhausting (double energy) in Radiant territory.",
+          "functions": [
+            "move",
+            "break",
+            "bind",
+            "strike"
+          ],
+          "gains": "broaden",
+          "harmRung": "damaging"
         }
       ],
       "functions": [
-        "strike",
-        "break"
+        "bind",
+        "break",
+        "move",
+        "strike"
       ],
       "challengeTypes": [
         "FIGHT",
@@ -76,19 +99,34 @@
           "rank": 1,
           "name": "Near Echo",
           "grants": "Map bodies and large objects through one wall or in darkness within ~10 paces; count people; sense sudden movement behind you.",
-          "cannot": "No fine detail (a face, a small tool); one wall only; loud environments blind it."
+          "cannot": "No fine detail (a face, a small tool); one wall only; loud environments blind it.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Carried Echo",
           "grants": "Range ~30 paces and two walls; distinguish individuals you know by gait and breath; overhear muffled speech as rhythm and tone (not words); sense hollow spaces and hidden voids.",
-          "cannot": "Still cannot resolve words reliably; running water scrambles it."
+          "cannot": "Still cannot resolve words reliably; running water scrambles it.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Deep Listening",
           "grants": "Hear actual words through barriers at ~20 paces; read a building's whole layout in a minute of stillness; detect the sub-sound of active nanite fields and Precursor machinery.",
-          "cannot": "Requires stillness — cannot deep-listen while moving or fighting; Precursor tech notices being listened to."
+          "cannot": "Requires stillness — cannot deep-listen while moving or fighting; Precursor tech notices being listened to.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "functions": [
@@ -124,24 +162,41 @@
           "rank": 1,
           "name": "Flicker Guard",
           "grants": "A heartbeat's barrier that deflects one projectile or blunts one blow; enough warning-shimmer to interrupt an ambush.",
-          "cannot": "One impact then gone; only protects you; cannot hold against sustained force."
+          "cannot": "One impact then gone; only protects you; cannot hold against sustained force.",
+          "functions": [
+            "shield"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Held Chord",
           "grants": "Sustain the barrier several breaths; cover yourself plus one adjacent ally; shrug off thrown stones, arrows, tool-swings.",
-          "cannot": "Walking pace only while held; heavy impacts (a charging animal) break it and cost you the energy anyway."
+          "cannot": "Walking pace only while held; heavy impacts (a charging animal) break it and cost you the energy anyway.",
+          "functions": [
+            "shield",
+            "resist"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Bulwark Harmony",
           "grants": "Room-corner dome for up to four people, held a full scene if unmolested; turns crossbow bolts and a Radiant lance's first strike; can be tuned to let allies' actions pass outward.",
-          "cannot": "Immobile once anchored; collapses instantly if you take a hit inside it; useless against the ground shaking."
+          "cannot": "Immobile once anchored; collapses instantly if you take a hit inside it; useless against the ground shaking.",
+          "functions": [
+            "shield",
+            "resist"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "functions": [
-        "shield",
-        "resist"
+        "resist",
+        "shield"
       ],
       "challengeTypes": [
         "FIGHT",
@@ -174,24 +229,40 @@
           "rank": 1,
           "name": "Calming Undertone",
           "grants": "Ease fear and hostility in a conversation-sized group; steady a panicking person or animal; make your words land as sincere (when they are).",
-          "cannot": "Cannot change anyone's mind — only their temperature; breaks if you or an ally acts aggressively."
+          "cannot": "Cannot change anyone's mind — only their temperature; breaks if you or an ally acts aggressively.",
+          "functions": [
+            "empower"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Carrying Tone",
           "grants": "Project clearly to a crowd or across a river without shouting; lace a negotiation with patience — hotheads get one reflexive pause before doing something irreversible.",
-          "cannot": "The pause is a heartbeat, not a hold; crowds beyond ~50 resist; costs double against trained Radiant negotiators."
+          "cannot": "The pause is a heartbeat, not a hold; crowds beyond ~50 resist; costs double against trained Radiant negotiators.",
+          "functions": [
+            "empower"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Concord",
           "grants": "Bring a room to genuine willingness to listen — feuding parties will hear one full argument out; quiet a mob's edge; sung over the wounded, grants deep restorative sleep.",
-          "cannot": "Cannot make anyone agree; one use per gathering — people feel it the second time and harden."
+          "cannot": "Cannot make anyone agree; one use per gathering — people feel it the second time and harden.",
+          "functions": [
+            "empower",
+            "heal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "functions": [
         "empower",
-        "command"
+        "heal"
       ],
       "challengeTypes": [
         "SOCIAL",
@@ -224,24 +295,43 @@
           "rank": 1,
           "name": "Held Breath",
           "grants": "A room-corner of hush for a few minutes — whispers stay in, ordinary noise outside arrives dulled; sleep comes easier inside it.",
-          "cannot": "Sudden loud sounds (a shout, a shatter) punch through; moving with it breaks it."
+          "cannot": "Sudden loud sounds (a shout, a shatter) punch through; moving with it breaks it.",
+          "functions": [
+            "conceal",
+            "ward"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Long Quiet",
           "grants": "Room-sized, held near an hour; carry it at a slow walk; your own steps and works are near-silent inside.",
-          "cannot": "Cannot cover a second person's noise unless they stay within arm's reach; echo-senses feel the DEADNESS as clearly as noise."
+          "cannot": "Cannot cover a second person's noise unless they stay within arm's reach; echo-senses feel the DEADNESS as clearly as noise.",
+          "functions": [
+            "conceal",
+            "ward"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Unspoken",
           "grants": "Shape holes in the field — let one voice pass while all else stills; still an alarm bell mid-swing; grant a whole camp true rest.",
-          "cannot": "A Harmonic adept notices the theft of sound instantly; holding a shaped field is exhausting (double energy)."
+          "cannot": "A Harmonic adept notices the theft of sound instantly; holding a shaped field is exhausting (double energy).",
+          "functions": [
+            "conceal",
+            "ward",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "functions": [
         "bind",
-        "resist",
+        "conceal",
         "ward"
       ],
       "challengeTypes": [
@@ -275,19 +365,34 @@
           "rank": 1,
           "name": "Ground Ear",
           "grants": "Feel approach through earth within ~30 paces: count walkers, tell cart from horse, catch a digger at work below.",
-          "cannot": "Still targets are invisible; rain and river-roar drown it; wooden floors blur everything."
+          "cannot": "Still targets are invisible; rain and river-roar drown it; wooden floors blur everything.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Deep Tread",
           "grants": "Range ~80 paces on good ground; know a known person's gait; feel hollow spaces underfoot; sense a collapse or slide seconds early.",
-          "cannot": "Cannot localize precisely past 40 paces (direction and count only); a crowd is one bright smear."
+          "cannot": "Cannot localize precisely past 40 paces (direction and count only); a crowd is one bright smear.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Valley's Pulse",
           "grants": "Standing still a full minute, read a hillside: every mover, every void, water veins, the grind of old machinery underground.",
-          "cannot": "The minute of stillness is absolute — one step resets it; Precursor works read as SILENCE, and that silence is information others notice you noticing."
+          "cannot": "The minute of stillness is absolute — one step resets it; Precursor works read as SILENCE, and that silence is information others notice you noticing.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "functions": [
@@ -324,23 +429,41 @@
           "rank": 1,
           "name": "Re-seat",
           "grants": "Close hairline cracks in pot, beam, or blade; re-tighten a sprung joint; a repaired thing holds for honest use.",
-          "cannot": "Cannot restore missing material; the mend shows as a bright seam; metal fatigue returns under hard strain."
+          "cannot": "Cannot restore missing material; the mend shows as a bright seam; metal fatigue returns under hard strain.",
+          "functions": [
+            "mend"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "True the Frame",
           "grants": "Mend structural work — a cartwheel, a roof truss, a boat's strake; blend the seam near-invisible; strengthen a sound joint beyond its original make.",
-          "cannot": "An hour's hum per major mend; cannot work while anything hammers or shouts nearby."
+          "cannot": "An hour's hum per major mend; cannot work while anything hammers or shouts nearby.",
+          "functions": [
+            "mend",
+            "empower"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Songwright",
           "grants": "Rebuild from parts: a shattered mechanism whose pieces are gathered sings itself back together under your sustained chord; mend Radiant crystal (carefully).",
-          "cannot": "Every missing sliver stays missing; Precursor material refuses the song outright — it has its own, and yours is not invited."
+          "cannot": "Every missing sliver stays missing; Precursor material refuses the song outright — it has its own, and yours is not invited.",
+          "functions": [
+            "mend",
+            "empower",
+            "restore"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "functions": [
-        "heal",
+        "empower",
         "mend",
         "restore"
       ],
@@ -376,24 +499,40 @@
           "rank": 1,
           "name": "Work-Rhythm",
           "grants": "A crew of four moves in sync — lifts, hauls, watches; simple signals (now, hold, left, danger) land instantly.",
-          "cannot": "Participants must have practiced with you an hour; breaks if the group scatters past shouting distance."
+          "cannot": "Participants must have practiced with you an hour; breaks if the group scatters past shouting distance.",
+          "functions": [
+            "empower"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Hunting Chord",
           "grants": "Eight people, signals in true silence, coordination under stress — an ambush, a rescue, a night crossing; each member feels where the others are.",
-          "cannot": "A panicked member floods the chord with their fear; deaf companions cannot join it."
+          "cannot": "A panicked member floods the chord with their fear; deaf companions cannot join it.",
+          "functions": [
+            "empower"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "One Body",
           "grants": "A dozen move as one organism for a scene — a bucket-line, a fighting retreat, a barn-raising in an afternoon; the group ROLLS as if led by your presence.",
-          "cannot": "When it ends, all of you feel the sudden loneliness; over-use breeds dependence a village elder will name to your face."
+          "cannot": "When it ends, all of you feel the sudden loneliness; over-use breeds dependence a village elder will name to your face.",
+          "functions": [
+            "empower",
+            "command"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "functions": [
-        "empower",
-        "command"
+        "command",
+        "empower"
       ],
       "challengeTypes": [
         "EXPLORE",
@@ -426,24 +565,41 @@
           "rank": 1,
           "name": "Set Stance",
           "grants": "Hold against a strong man's shove, a panicked animal, a river current to the waist; keep your feet in a quake's first shock.",
-          "cannot": "One anchored spot — lifting a foot ends it; your arms are braced too (no fine work while holding)."
+          "cannot": "One anchored spot — lifting a foot ends it; your arms are braced too (no fine work while holding).",
+          "functions": [
+            "resist"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Breakwater",
           "grants": "Hold a rope against a falling weight, be the fixed point a climber trusts, stand in a floodgate current; one ally may brace THROUGH you.",
-          "cannot": "Sustained crushing force wins eventually (minutes, not hours); the ground itself must be sound."
+          "cannot": "Sustained crushing force wins eventually (minutes, not hours); the ground itself must be sound.",
+          "functions": [
+            "resist",
+            "shield"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Mountain's Patience",
           "grants": "Anchor against a rockslide's edge, a stampede, a Radiant lance's push; while anchored, your voice carries the stillness of something older than the argument.",
-          "cannot": "You are a fixed target for anything ranged; unanchoring after a long hold costs a full breather."
+          "cannot": "You are a fixed target for anything ranged; unanchoring after a long hold costs a full breather.",
+          "functions": [
+            "resist",
+            "shield"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "functions": [
-        "bind",
-        "ward"
+        "resist",
+        "shield"
       ],
       "challengeTypes": [
         "SURVIVE",
@@ -476,24 +632,41 @@
           "rank": 1,
           "name": "Catch the Beat",
           "grants": "A sprint half again your best over open ground; sure feet across a known path in the dark; land jumps you'd normally balk at.",
-          "cannot": "Broken ground breaks the beat; the burst lasts a few hundred paces, then the debt comes due in wind."
+          "cannot": "Broken ground breaks the beat; the burst lasts a few hundred paces, then the debt comes due in wind.",
+          "functions": [
+            "move"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Carried Cadence",
           "grants": "Hold the stride a mile; carry a burden at speed; pass the beat to one runner beside you.",
-          "cannot": "Cornering hard drops the rhythm; a stumble at speed is a REAL fall."
+          "cannot": "Cornering hard drops the rhythm; a stumble at speed is a REAL fall.",
+          "functions": [
+            "move",
+            "empower"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Thunder-Step",
           "grants": "For a dozen heartbeats, outrun a horse; cross a collapsing surface before it finishes falling; arrive with momentum that counts as force.",
-          "cannot": "Once per scene; the stop costs a slide of several body-lengths — plan the landing or eat it."
+          "cannot": "Once per scene; the stop costs a slide of several body-lengths — plan the landing or eat it.",
+          "functions": [
+            "move",
+            "empower"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "functions": [
-        "move",
-        "empower"
+        "empower",
+        "move"
       ],
       "challengeTypes": [
         "CHASE",
@@ -526,24 +699,43 @@
           "rank": 1,
           "name": "Flaw-Note",
           "grants": "A minute's study names the weakest point of a door, a wall section, a machine housing — your next strike or lever there counts double.",
-          "cannot": "Knowing the point is not reaching it; sound-dead materials (lead, cloth, water) keep their secrets."
+          "cannot": "Knowing the point is not reaching it; sound-dead materials (lead, cloth, water) keep their secrets.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Read the Load",
           "grants": "See where a bridge, scaffold, or dam WILL fail and when; sabotage that looks like age; certify a structure safe with real authority.",
-          "cannot": "Predictions hold only while loads stay as read; a lie about what you read is still a lie."
+          "cannot": "Predictions hold only while loads stay as read; a lie about what you read is still a lie.",
+          "functions": [
+            "reveal",
+            "foresee"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Thin Song",
           "grants": "Read a mechanism mid-motion; call the shatterpoint of a Harmonic shield or Radiant lattice in a single held breath; your warning shouted in time counts as an ally's reroll.",
-          "cannot": "Reading Precursor work at this depth is a two-way door — log what you learn AND accept being learned."
+          "cannot": "Reading Precursor work at this depth is a two-way door — log what you learn AND accept being learned.",
+          "functions": [
+            "reveal",
+            "foresee",
+            "break"
+          ],
+          "gains": "broaden",
+          "harmRung": "damaging"
         }
       ],
       "functions": [
         "break",
-        "strike"
+        "foresee",
+        "reveal"
       ],
       "challengeTypes": [
         "FIGHT",
@@ -576,24 +768,38 @@
           "rank": 1,
           "name": "Lingering Note",
           "grants": "In a quiet room, recover the tone of the last loud event — argument or laughter, how many voices, a door slammed or eased shut.",
-          "cannot": "Words stay smeared; hours old at best; open sky holds almost nothing."
+          "cannot": "Words stay smeared; hours old at best; open sky holds almost nothing.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Stone Remembers",
           "grants": "Recover fragments of actual words from the last day in an enclosed space; identify a known voice; hear the ORDER of events.",
-          "cannot": "Fragments, never transcripts; a space scrubbed by wind or a Stillness Field yields nothing — and the scrubbing itself is evidence."
+          "cannot": "Fragments, never transcripts; a space scrubbed by wind or a Stillness Field yields nothing — and the scrubbing itself is evidence.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Long Echo",
           "grants": "In deep stone — a cellar, the Archive, a cave — reach back weeks; recover a conversation's spine; hear what a Precursor mechanism last said, if it spoke.",
-          "cannot": "Costs a night's sleep of focus; what the deep stacks answer, you cannot unhear — some echoes look back."
+          "cannot": "Costs a night's sleep of focus; what the deep stacks answer, you cannot unhear — some echoes look back.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "functions": [
-        "reveal",
-        "track"
+        "reveal"
       ],
       "challengeTypes": [
         "INVESTIGATE"

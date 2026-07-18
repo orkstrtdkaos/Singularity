@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 13,
-  "xp": 1219,
+  "xp": 1221,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -76,10 +76,10 @@
   "alignment": {
     "spectrumId": -0.48500368297662205,
     "violence_peace": 0.09798375000000001,
-    "chaos_order": 0.22307527614718994,
+    "chaos_order": 0.22692151233983043,
     "mechanical_spiritual": 0.23279962203849028,
     "concrete_abstract": -0.03561964806827624,
-    "death_life": -0.20959067558615135,
+    "death_life": -0.21911114180684377,
     "emotional_logical": 0.03083749999999999,
     "falsehood_truth": 0.27404975347118554,
     "demonic_angelic": 0.03,
@@ -89,7 +89,7 @@
   "maxHealth": 90,
   "health": 90,
   "maxEnergy": 160,
-  "energy": 160,
+  "energy": 156,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1377,122 +1377,94 @@
         "player": "Wake before first light — check on Huginn, read the lane, and rouse Calvar for the road",
         "summary": "Pre-dawn: Huginn stands a clean watch, Calvar rises dressed and ready, Pell wakes without ceremony — the party assembles at the Low Lamp Inn for the road south.",
         "narration": "The darkness in the room is absolute until it isn't — a thread of grey-blue presses through the shutter's gap, thin as a blade, early spring's first light still twenty minutes from committing to the horizon. You are awake before it arrives. Pell sleeps on the pallet beside you, face turned toward the wall, her breathing low and even. The boots are exactly where she left them.\n\nYou dress without a sound. Belt knife, traveler's pack settled across the shoulders, Memory leaned against your forearm for the carry. The stairs are cold boards; you step the ones that want to speak and arrive in the common hall without announcement. Huginn is on the coat rack where you left it, both eyes open now, watching the lane-side window with the flat attention of something that has not blinked all night. It turns its head a quarter-turn when it hears you. No alarm — the small clockwork of that movement means all clear, the lane is clean, nothing came that needed raising. You give it a nod and it drops from the rack to your shoulder, settling its weight with the familiar deliberate care of a thing that knows how much it costs you to stumble.\n\nCalvar's door is already cracked when you reach it. He is seated on the edge of his own pallet, fully dressed, document roll inside his coat's breast, laces done. His hands are on his knees and he is looking at the floor in the way of a man who has been awake for a while and has made peace with it. He looks up when you push the door open and rises without being asked — no complaint, no ceremony, just a man in his sixties who has been to enough early mornings to know they do not improve with delay. You return upstairs to rouse Pell. She is already sitting up, the habit entirely absent and the steadiness entirely present, reaching for her boots in the exact motion of someone who never fully went under.\n\nMaret Doss is already in the hall when you come down the second time — grey-wrapped, a mug in each hand, saying nothing because nothing needs saying. She sets one mug on the corner table within reach, drains the trough as promised, and disappears back behind her door before the first cock in the lane has finished its opinion of the hour. The road south is waiting. The trade track back to Millbrook, Calvar beside you, the document inside his coat, the valley on the other end of a day's walk."
+      },
+      {
+        "player": "Read the lane with The Attended End before stepping out — make sure nothing on this road is ending in a way that touches us",
+        "summary": "The Attended End snags on the Edge District's layered interference — the road south unread, the party assembling anyway.",
+        "narration": "You settle your attention the way the craft demands — quiet, no hurry, the lane outside the frosted glass held in the same regard you'd give a dying thing. The Attended End should open cleanly: endings plain, timeline readable, the road either safe or not. Instead the craft snags on something it cannot parse.\n\nThe valley is wrong here. Not the lane — the lane is an ordinary lane, two ruts and a drainage ditch, nothing ending on it that matters. What the craft catches is the background noise of the place itself: death-life held at arm's length, the Edge District's photonic order pressing on everything organic, the faint mineral taint in the groundwater beneath the flagstones. The ending-sense that usually reads a room like a page comes back as static — too many small endings layered under the district's insistence on clarity, each one a word the page can't hold. You get nothing useful. What you get instead is a low, persistent resonance of wrongness you cannot locate or name, which is worse than getting nothing at all.\n\nHuginn's head turns toward you from the coat rack. One slow, deliberate rotation. It does not croak. That particular silence is its own comment: you asked the craft and the craft told you it couldn't see, and now you are standing in the common hall holding the residue of a question that came back mud. Pell's eyes are already open — she registered the stillness in you, the half-second where you went somewhere and came back empty-handed. She doesn't ask. She picks up her pack.\n\nCalvar is at the door, document roll seated inside his coat, hands at his sides. The lane-side window shows the grey-blue edge of early spring, the light that hasn't committed yet. Whatever is on that road, you are going to have to read it with your eyes."
       }
     ],
     "lastTurn": {
-      "narration": "The darkness in the room is absolute until it isn't — a thread of grey-blue presses through the shutter's gap, thin as a blade, early spring's first light still twenty minutes from committing to the horizon. You are awake before it arrives. Pell sleeps on the pallet beside you, face turned toward the wall, her breathing low and even. The boots are exactly where she left them.\n\nYou dress without a sound. Belt knife, traveler's pack settled across the shoulders, Memory leaned against your forearm for the carry. The stairs are cold boards; you step the ones that want to speak and arrive in the common hall without announcement. Huginn is on the coat rack where you left it, both eyes open now, watching the lane-side window with the flat attention of something that has not blinked all night. It turns its head a quarter-turn when it hears you. No alarm — the small clockwork of that movement means all clear, the lane is clean, nothing came that needed raising. You give it a nod and it drops from the rack to your shoulder, settling its weight with the familiar deliberate care of a thing that knows how much it costs you to stumble.\n\nCalvar's door is already cracked when you reach it. He is seated on the edge of his own pallet, fully dressed, document roll inside his coat's breast, laces done. His hands are on his knees and he is looking at the floor in the way of a man who has been awake for a while and has made peace with it. He looks up when you push the door open and rises without being asked — no complaint, no ceremony, just a man in his sixties who has been to enough early mornings to know they do not improve with delay. You return upstairs to rouse Pell. She is already sitting up, the habit entirely absent and the steadiness entirely present, reaching for her boots in the exact motion of someone who never fully went under.\n\nMaret Doss is already in the hall when you come down the second time — grey-wrapped, a mug in each hand, saying nothing because nothing needs saying. She sets one mug on the corner table within reach, drains the trough as promised, and disappears back behind her door before the first cock in the lane has finished its opinion of the hour. The road south is waiting. The trade track back to Millbrook, Calvar beside you, the document inside his coat, the valley on the other end of a day's walk.",
-      "sceneSummary": "Pre-dawn: Huginn stands a clean watch, Calvar rises dressed and ready, Pell wakes without ceremony — the party assembles at the Low Lamp Inn for the road south.",
+      "narration": "You settle your attention the way the craft demands — quiet, no hurry, the lane outside the frosted glass held in the same regard you'd give a dying thing. The Attended End should open cleanly: endings plain, timeline readable, the road either safe or not. Instead the craft snags on something it cannot parse.\n\nThe valley is wrong here. Not the lane — the lane is an ordinary lane, two ruts and a drainage ditch, nothing ending on it that matters. What the craft catches is the background noise of the place itself: death-life held at arm's length, the Edge District's photonic order pressing on everything organic, the faint mineral taint in the groundwater beneath the flagstones. The ending-sense that usually reads a room like a page comes back as static — too many small endings layered under the district's insistence on clarity, each one a word the page can't hold. You get nothing useful. What you get instead is a low, persistent resonance of wrongness you cannot locate or name, which is worse than getting nothing at all.\n\nHuginn's head turns toward you from the coat rack. One slow, deliberate rotation. It does not croak. That particular silence is its own comment: you asked the craft and the craft told you it couldn't see, and now you are standing in the common hall holding the residue of a question that came back mud. Pell's eyes are already open — she registered the stillness in you, the half-second where you went somewhere and came back empty-handed. She doesn't ask. She picks up her pack.\n\nCalvar is at the door, document roll seated inside his coat, hands at his sides. The lane-side window shows the grey-blue edge of early spring, the light that hasn't committed yet. Whatever is on that road, you are going to have to read it with your eyes.",
+      "sceneSummary": "The Attended End snags on the Edge District's layered interference — the road south unread, the party assembling anyway.",
       "choices": [
         {
-          "label": "Set out immediately — hit the trade track before full light and make the most of the cool morning hours",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {
-            "violence_peace": 0.6,
-            "chaos_order": 0.4
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "travel",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Before leaving — eat something from the trail parcel and make sure Calvar is provisioned for the walk",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {
-            "violence_peace": 0.7,
-            "chaos_order": 0.4
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "sustain",
-            "help"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Read the lane with The Attended End before stepping out — make sure nothing on this road is ending in a way that touches us",
+          "label": "Step out and read the lane the plain way — eyes, ears, Huginn's attention — and move south once you're satisfied",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.4,
-            "chaos_order": 0.3
-          },
           "difficulty": 0,
           "intentTags": [
             "scout",
             "careful"
           ],
-          "abilityId": "the-attended-end",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Walk the trade track south to Millbrook — a day's road, the three of you, the document sealed inside Calvar's coat",
+          "label": "Ask Huginn directly: anything ending on this lane between here and the valley pass?",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "scout"
+          ],
+          "abilityId": null,
+          "trivial": true
+        },
+        {
+          "label": "Move out now — the road south is a day's walk and the timeline doesn't wait; trust the watch Huginn kept",
           "attribute": "physical",
           "subAttribute": "agility",
-          "axes": {
-            "violence_peace": 0.6,
-            "chaos_order": 0.4
-          },
           "difficulty": 0,
           "intentTags": [
             "travel"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
+        },
+        {
+          "label": "Head south toward Millbrook — full day's walk on the trade track with Pell and Calvar",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 0,
+          "intentTags": [
+            "travel"
+          ],
+          "trivial": true
         }
       ],
       "characterDeltas": {
-        "health": 3,
-        "energy": 51
+        "energy": -2
       },
       "scene": {
-        "setting": "Common hall of the Low Lamp Inn, Edge District — pre-dawn, a single mug steaming on the corner table, trough drained, Maret retreated. The lane-side window shows the first grey-blue edge of early spring light.",
+        "setting": "Common hall of the Low Lamp Inn, Edge District — pre-dawn pressing toward first light, a single mug cooling on the corner table, Maret behind her door. The lane-side window shows grey-blue early spring light that hasn't fully committed.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Downstairs, boots on, pack settled — waiting without performance, ready to move."
+            "state": "Pack on her back, eyes open, reading Silas's stillness — waiting without a word."
           },
           {
             "name": "Huginn",
-            "state": "On Silas's shoulder, watch concluded, both eyes open and scanning the lane."
+            "state": "On the coat rack, head turned toward Silas, one deliberate rotation — silent comment on the failed read."
           },
           {
             "name": "Calvar",
-            "state": "Standing near the door in his full road gear, document roll inside his coat, hands loose at his sides — waiting on Silas's word."
+            "state": "At the door in full road gear, document roll inside his coat, hands loose — waiting on Silas to move."
           },
           {
             "name": "Maret Doss",
-            "state": "Retreated behind her door after setting out the mug — heard but not seen."
+            "state": "Behind her door, heard but not seen."
           }
         ],
         "objects": [
           "Memory (spear) — in Silas's carry",
           "Traveler's Pack — on Silas's back",
           "Sealed document roll — inside Calvar's coat",
-          "Steaming mug — corner table, within reach",
+          "Cooling mug — corner table",
           "Pell's pack — on her back, ready"
         ],
         "threads": [
-          "The trade track south — a day's walk to Millbrook, the contamination timeline pressing",
-          "Pell's father — Calvar cannot confirm a mark; the council archive may hold the answer",
+          "The Attended End returned static — something on this road or in this district is layered enough to defeat the read; unknown whether it's the place or a genuine threat",
+          "The trade track south — a day's walk to Millbrook, contamination timeline pressing",
+          "Pell's father — the council archive may hold the answer Calvar couldn't give",
           "Grael's deeper motive — acting alone or for a wider structure, still open",
           "Rendic Vael — named and confirmed, not yet interviewed or located"
         ]
@@ -1500,87 +1472,69 @@
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "calvar",
-          "name": "Calvar",
-          "role": "Pre-Transition filtration engineer, Edge District",
-          "gender": "man",
-          "pronouns": "he/him",
-          "note": "Rose before being called — dressed, document secured, ready for the road south at first light without ceremony.",
-          "status": "active",
-          "statusNote": "In the Low Lamp Inn common hall — road-ready, document roll inside his coat, departing south with Silas and Pell at first light."
-        },
-        {
-          "op": "update",
           "npcId": "pell",
           "name": "Pell",
-          "role": "Village blacksmith, Millbrook — traveling companion",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Woke without ceremony, boots on, pack settled — the habit entirely absent and the steadiness entirely present.",
-          "status": "active",
-          "statusNote": "In the Low Lamp Inn common hall — boots on, pack ready, departing south at first light."
+          "note": "Read Silas's failed craft-moment without asking — picked up her pack and waited. No words needed.",
+          "statusNote": "In the Low Lamp Inn common hall — pack on, ready to move south at first light."
         },
         {
           "op": "update",
-          "npcId": "maret-doss",
-          "name": "Maret Doss",
-          "role": "Innkeeper, Low Lamp Inn — Edge District",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Had the trough drained and a mug on the table before the party came downstairs — no words, no ceremony. Retreated to her back room.",
-          "status": "active",
-          "statusNote": "Behind her door at the Low Lamp Inn — her work for this party complete."
+          "npcId": "calvar",
+          "name": "Calvar",
+          "note": "Standing at the door in full road gear, document roll secured, waiting on Silas's lead.",
+          "statusNote": "At the Low Lamp Inn door — road-ready, document roll inside his coat, waiting for departure."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "edge-district-interference",
+          "label": "Edge District — Craft Interference",
+          "kind": "lore",
+          "entityId": null,
+          "fact": "The Edge District's photonic order and layered mineral contamination in its groundwater interfere with death-reading crafts — The Attended End returned static noise rather than a clean read. The place resists endings-sense, suppressing it with too many small, layered endings beneath its insistence on clarity.",
+          "links": [
+            "the-water-crisis",
+            "millbrook",
+            "find-the-engineer"
+          ]
         }
       ],
       "timeOps": {
-        "hoursPassed": 8,
-        "why": "Full night's sleep — retired late, waking before first light on World-day 19 pre-dawn"
-      },
-      "codexUpdates": [
-        {
-          "topic": "the-edge-district-ledger",
-          "label": "The Edge District Ledger",
-          "kind": "event",
-          "fact": "The document roll is sealed and on the road — two hands, Calvar's wax, brass wire. The chain travels south inside his coat.",
-          "links": [
-            "find-the-engineer",
-            "calvar",
-            "millbrook",
-            "the-water-crisis"
-          ]
-        }
-      ]
+        "hoursPassed": 0.25,
+        "why": "A brief stillness in the common hall — the failed craft read and the party assembling takes only minutes."
+      }
     },
     "sceneState": {
-      "setting": "Common hall of the Low Lamp Inn, Edge District — pre-dawn, a single mug steaming on the corner table, trough drained, Maret retreated. The lane-side window shows the first grey-blue edge of early spring light.",
+      "setting": "Common hall of the Low Lamp Inn, Edge District — pre-dawn pressing toward first light, a single mug cooling on the corner table, Maret behind her door. The lane-side window shows grey-blue early spring light that hasn't fully committed.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Downstairs, boots on, pack settled — waiting without performance, ready to move."
+          "state": "Pack on her back, eyes open, reading Silas's stillness — waiting without a word."
         },
         {
           "name": "Huginn",
-          "state": "On Silas's shoulder, watch concluded, both eyes open and scanning the lane."
+          "state": "On the coat rack, head turned toward Silas, one deliberate rotation — silent comment on the failed read."
         },
         {
           "name": "Calvar",
-          "state": "Standing near the door in his full road gear, document roll inside his coat, hands loose at his sides — waiting on Silas"
+          "state": "At the door in full road gear, document roll inside his coat, hands loose — waiting on Silas to move."
         },
         {
           "name": "Maret Doss",
-          "state": "Retreated behind her door after setting out the mug — heard but not seen."
+          "state": "Behind her door, heard but not seen."
         }
       ],
       "objects": [
         "Memory (spear) — in Silas's carry",
         "Traveler's Pack — on Silas's back",
         "Sealed document roll — inside Calvar's coat",
-        "Steaming mug — corner table, within reach",
+        "Cooling mug — corner table",
         "Pell's pack — on her back, ready"
       ],
       "threads": [
-        "The trade track south — a day's walk to Millbrook, the contamination timeline pressing",
-        "Pell's father — Calvar cannot confirm a mark; the council archive may hold the answer",
+        "The Attended End returned static — something on this road or in this district is layered enough to defeat the read; unknown whether it's the place or a genuine ",
+        "The trade track south — a day's walk to Millbrook, contamination timeline pressing",
+        "Pell's father — the council archive may hold the answer Calvar couldn't give",
         "Grael's deeper motive — acting alone or for a wider structure, still open",
         "Rendic Vael — named and confirmed, not yet interviewed or located"
       ]
@@ -2012,7 +1966,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d4] Took the booth's edge position with a clear sight-line to the door — still reading the room, pack at the wall.",
         "[d4] Named the authorship chain running backward — the specification's origin points to her father, and the council archive may hold the original filing with his name intact. Delivered ",
         "[d4] Received Calvar's disclosure with one degree of jaw-tension — filing the full picture. The authorship chain from her father through Calvar to the specification is now confirmed in ",
         "[d4] Watching the hallway — she tracked where Silas went without being told.",
@@ -2021,7 +1974,8 @@
         "[d4] Did not speak when Calvar named the shape — jaw one degree tighter, eyes on the hearth. Filing it without performance.",
         "[d4] Returned Memory without performance — collar rune under her thumb, passed it back the way she returns a file to its hook. Said 'he'll be ready' of Calvar and left it there. The hab",
         "[d4] Settled for the night without ceremony — boots upright, asleep before Silas, habit entirely absent.",
-        "[d5] Woke without ceremony, boots on, pack settled — the habit entirely absent and the steadiness entirely present."
+        "[d5] Woke without ceremony, boots on, pack settled — the habit entirely absent and the steadiness entirely present.",
+        "[d5] Read Silas's failed craft-moment without asking — picked up her pack and waited. No words needed."
       ],
       "knownFacts": [
         "Her voice is low and specific when it surfaces in this register — naming things without filing them afterward",
@@ -2042,7 +1996,7 @@
         "naming the load-bearing implication without editorializing"
       ],
       "status": "active",
-      "statusNote": "In the Low Lamp Inn common hall — boots on, pack ready, departing south at first light.",
+      "statusNote": "In the Low Lamp Inn common hall — pack on, ready to move south at first light.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
@@ -2382,7 +2336,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d4] Named Grael's authority structure in full — the board mechanism, the procedural gap (no keeper log entry), and the chain needed to challenge: keeper testimony + intake log + Fendt'",
         "[d4] Went very still when Pell named the authorship chain — the reaction of a man who has correctly suspected something for thirty years and just heard it confirmed by someone who had n",
         "[d4] Named Grael as the marking authority — acting alone, using a keeper's filed silence to remove Fendt's question from the record. The chain is now complete.",
         "[d4] Waiting in the booth with the document — has given everything he holds; ready for the road.",
@@ -2391,7 +2344,8 @@
         "[d4] Cannot confirm Pell's father was marked — was a junior drafter then and checked the board when the man left; no mark was visible. But named the structural shape: a man who had just",
         "[d4] Took the document roll inside his coat and went to bed without ceremony — named 'sleep, then' and meant it. Ready for the road at first light.",
         "[d4] Sleeping with the document roll inside his coat — ready for the road at first light.",
-        "[d5] Rose before being called — dressed, document secured, ready for the road south at first light without ceremony."
+        "[d5] Rose before being called — dressed, document secured, ready for the road south at first light without ceremony.",
+        "[d5] Standing at the door in full road gear, document roll secured, waiting on Silas's lead."
       ],
       "knownFacts": [
         "Grael marked Fendt himself — no external order; he is the order",
@@ -2412,7 +2366,7 @@
         "precise disclosure of held knowledge when given the right ha"
       ],
       "status": "active",
-      "statusNote": "In the Low Lamp Inn common hall — road-ready, document roll inside his coat, departing south with Silas and Pell at first light.",
+      "statusNote": "At the Low Lamp Inn door — road-ready, document roll inside his coat, waiting for departure.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
@@ -3993,24 +3947,40 @@
         "aliases": [],
         "createdDay": 4,
         "updatedDay": 4
+      },
+      "edge-district-interference": {
+        "id": "edge-district-interference",
+        "label": "Edge District — Craft Interference",
+        "kind": "lore",
+        "facts": [
+          "[d5] The Edge District's photonic order and layered mineral contamination in its groundwater interfere with death-reading crafts — The Attended End returned static noise rather than a clean read. The place"
+        ],
+        "links": [
+          "the-water-crisis",
+          "millbrook",
+          "find-the-engineer"
+        ],
+        "aliases": [],
+        "createdDay": 5,
+        "updatedDay": 5
       }
     }
   },
   "tendencies": {
-    "strategic": 19.52386041599678,
-    "cerebral": 13.63310981563396,
-    "social": 12.384401452802843,
-    "generous": 1.799168786216126,
-    "cautious": 11.36644632311617,
-    "physical": 0.10561651270791553,
-    "risky": 0.9148621787817186,
-    "ruthless": 1.6067689644789425,
-    "carousing": 0.09182858651610484,
-    "amorous": 10.552339818841538,
-    "patient": 2.251490091521248,
-    "stealth": 2.323110789877957,
-    "devotion": 1.2671326887734264,
-    "craft": 1.1929064571285042
+    "strategic": 20.03576390559686,
+    "cerebral": 13.292282070243111,
+    "social": 12.074791416482771,
+    "generous": 1.7541895665607228,
+    "cautious": 12.082285165038266,
+    "physical": 0.10297609989021764,
+    "risky": 0.8919906243121756,
+    "ruthless": 1.566599740366969,
+    "carousing": 0.08953287185320222,
+    "amorous": 10.2885313233705,
+    "patient": 2.195202839233217,
+    "stealth": 2.2650330201310083,
+    "devotion": 1.2354543715540907,
+    "craft": 1.1630837957002915
   },
   "aptitudes": [
     "strategist",
@@ -4022,7 +3992,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 454,
+  "actionCount": 455,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -4252,8 +4222,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784347800165,
-  "rev": 663,
+  "updatedAt": 1784347963996,
+  "rev": 664,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4524,10 +4494,6 @@
           "attentionHistory": [
             {
               "kind": "interact",
-              "day": 3
-            },
-            {
-              "kind": "interact",
               "day": 4
             },
             {
@@ -4613,6 +4579,10 @@
             {
               "kind": "interact",
               "day": 4
+            },
+            {
+              "kind": "interact",
+              "day": 5
             },
             {
               "kind": "interact",
@@ -5173,7 +5143,7 @@
       "palework": 22,
       "deathsense": 20,
       "shadowstep": 14,
-      "the-attended-end": 25,
+      "the-attended-end": 26,
       "wildcraft": 4,
       "the_raised_thing": 4,
       "the_ended_threat": 2,
@@ -5282,7 +5252,7 @@
   "syncedAt": 1784347165795,
   "teachers": {},
   "regionsKnown": {
-    "valley": 271
+    "valley": 272
   },
   "foreclosed": [
     "rootkin",
@@ -5329,10 +5299,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-17T17:39:40.705Z",
-      "lastAt": "2026-07-18T04:10:00.157Z",
+      "lastAt": "2026-07-18T04:12:43.989Z",
       "startDay": 17,
       "endDay": 18,
-      "beats": 79
+      "beats": 80
     }
   ],
   "company": [

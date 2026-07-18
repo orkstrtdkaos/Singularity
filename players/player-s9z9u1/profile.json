@@ -28,25 +28,27 @@
     "preset": "R+",
     "setBy": "erik",
     "isMinor": false,
-    "updatedAt": 1784347328022,
+    "updatedAt": 1784376010631,
     "adultVerified": true
   },
-  "pacing": "eventful",
   "uiSidebar": {
     "open": [
       "quests",
-      "company",
       "items",
       "whoshere",
-      "playstyle"
+      "company",
+      "attributes",
+      "playstyle",
+      "maprest",
+      "codex"
     ],
     "closed": [
-      "abilities",
-      "attributes"
+      "abilities"
     ]
   },
+  "pacing": "eventful",
   "sharedChronicle": true,
-  "contentGenerator": true,
   "plainness": "balanced",
-  "bluntness": "blunt"
+  "bluntness": "blunt",
+  "contentGenerator": true
 }

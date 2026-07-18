@@ -16,7 +16,9 @@
         "death_life": 0.6
       },
       "functions": [
-        "open"
+        "open",
+        "reveal",
+        "sustain"
       ],
       "narrationHints": "You press your hand to the earth and it ANSWERS — the living current beneath everything stirring up to meet you, green and enormous and older than the nanites.",
       "description": "The first touch of the living substrate — waking the green current in the ground, the deep life-layer the Rootkin never gave up as their kin gave up the nanites. Where the substrate-keepers channel the fabricated deep, the Rootkin channel the living one.",
@@ -30,6 +32,32 @@
           "functions": [
             "open"
           ],
+          "gains": "broaden",
+          "harmRung": "none"
+        },
+        {
+          "rank": 2,
+          "name": "The Ground Answers",
+          "grants": "Hold the waking through a scene rather than a moment, and feel BACK along it — the roused current reports what is rooted near it: who passed and how recently, what grows under the surface, what living thing lies buried and still breathing.",
+          "cannot": "Feeling back is not seeing — you get presence and direction, never faces; the made and the dead remain absent from it; and holding the waking costs continuously.",
+          "functions": [
+            "open",
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
+        },
+        {
+          "rank": 3,
+          "name": "The Deep Rousing",
+          "grants": "Wake the living current across a whole rooted district. Ground once woken by you answers your touch faster ever after, and the roused life will carry others — a party moving over ground you have quickened travels rested, fed by what you woke.",
+          "cannot": "A district roused is a district AWAKE; the Rootkin hold that what you wake you tend, and the GM will name what the waking costs the land; ground worked too often goes sullen and answers slower, not faster.",
+          "functions": [
+            "open",
+            "reveal",
+            "sustain"
+          ],
+          "gains": "broaden",
           "harmRung": "none"
         }
       ],

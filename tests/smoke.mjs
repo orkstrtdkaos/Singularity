@@ -4031,5 +4031,23 @@ await (async () => {
     npcPortraitTier(pell) === "partner"); // the app skips when n._portraitTier === this tier
 }
 
+// --- BATCH-11 146a: scene writes route through pushMergedFile (Law 7) ---
+{
+  const partySrc = readFileSync(new URL('../engine/party.js', import.meta.url), 'utf8');
+  // The defect was structural: content computed from a T0 read, PUT with a fresh T1 sha
+  // via pushOwnedFile. The guard is structural too: party.js must not touch pushOwnedFile,
+  // and pushSceneWithMerge must run its mutate INSIDE pushMergedFile's callback so the
+  // content and the sha come from the same read.
+  check("146a: party.js no longer imports or calls pushOwnedFile (the lost-update path)",
+    !/import[^;]*pushOwnedFile/.test(partySrc) && !/pushOwnedFile\s*\(/.test(partySrc));
+  check("146a: pushSceneWithMerge routes through pushMergedFile", /pushMergedFile\(scenePath\(sceneId\)/.test(partySrc));
+  check("146a: mutate runs inside the merge callback against the fresh remote", /const base = remote \|\| seedScene/.test(partySrc) && /merged = mutate\(base\)/.test(partySrc));
+  // sync.js side of the contract: pushMergedFile re-reads inside the attempt loop and PUTs with that same read's sha
+  const syncSrc = readFileSync(new URL('../engine/sync.js', import.meta.url), 'utf8');
+  const pmf = syncSrc.slice(syncSrc.indexOf('export async function pushMergedFile'), syncSrc.indexOf('export async function appendLedger'));
+  check("146a: pushMergedFile ghGet sits INSIDE the attempt loop (fresh read per attempt)", /for \(let attempt[\s\S]*?const existing = await ghGet\(path\)/.test(pmf));
+  check("146a: pushMergedFile PUTs with the sha of the read the content came from", /ghPut\(path, JSON\.stringify\(merged, null, 2\), message, existing\?\.sha\)/.test(pmf));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);

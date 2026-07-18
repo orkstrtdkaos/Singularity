@@ -3,11 +3,16 @@
 // the others' presence and actions.
 //
 // CONCURRENCY: the shared scene file is the deliberate exception to the
-// owned-file law. Writes go through pushSceneWithMerge — on SHA conflict we
-// REFETCH the remote scene, re-apply our beat via mergeBeat (idempotent by
-// (by, at) key), and retry. Never a blind overwrite.
+// owned-file law. Writes go through pushSceneWithMerge → sync.pushMergedFile,
+// which re-reads the remote and RE-RUNS mutate against that fresh read on every
+// attempt, PUTting with the sha of the very read the content was computed from.
+// A concurrent write therefore raises a real SHA conflict and we re-merge onto
+// the winner (mergeBeat is idempotent by (by, at) key). Never a blind overwrite.
+// (BATCH-11 146a: the old path computed `next` from a T0 read but PUT with a
+// fresh T1 sha via pushOwnedFile — a concurrent beat between the reads was
+// silently lost with no conflict ever raised.)
 
-import { syncEnabled, fetchRepoJSON, pushOwnedFile, ghList } from "./sync.js";
+import { syncEnabled, fetchRepoJSON, pushMergedFile, ghList } from "./sync.js";
 
 const CAPS = { beats: 40, party: 6 };
 
@@ -122,16 +127,24 @@ export function lastSceneError() { return _lastSceneError; }
 
 export async function pushSceneWithMerge(sceneId, mutate, seedScene = null) {
   if (!syncEnabled()) { _lastSceneError = "sync not configured"; return null; }
-  for (let attempt = 0; attempt < 3; attempt++) {
+  // Outer loop covers TRANSIENT failures (timeouts, 5xx). SHA conflicts are
+  // handled INSIDE pushMergedFile, which re-reads + re-merges per attempt.
+  // A GH_TIMEOUT that actually landed server-side is safe to retry: the retry
+  // re-reads the applied state and mergeBeat/addMember are idempotent on it.
+  for (let attempt = 0; attempt < 2; attempt++) {
+    let merged = null;
     try {
-      const remote = (await fetchRepoJSON(scenePath(sceneId))) || seedScene;
-      if (!remote) { _lastSceneError = "no scene and no seed"; return null; }
-      const next = mutate(remote);
-      await pushOwnedFile(scenePath(sceneId), next, `scene: ${sceneId}`);
+      await pushMergedFile(scenePath(sceneId), (remote) => {
+        const base = remote || seedScene;
+        if (!base) return null;               // no scene and no seed — nothing to write
+        merged = mutate(base);                // recomputed against the FRESH remote every attempt
+        return merged;
+      }, `scene: ${sceneId}`);
+      if (!merged) { _lastSceneError = "no scene and no seed"; return null; }
       _lastSceneError = null;
-      return next;
+      return merged;
     } catch (err) {
-      if (attempt === 2) { _lastSceneError = err.message; console.warn("[party] scene push failed:", err.message); return null; }
+      if (attempt === 1) { _lastSceneError = err.message; console.warn("[party] scene push failed:", err.message); return null; }
     }
   }
   return null;

@@ -5,7 +5,11 @@
 
 import { smartClamp } from "./namematch.js"; // SNG-152
 
-const CAPS = { notes: 12, flags: 10 };
+// SNG-154: the sub-place cap was an inline 12. It is load-bearing (unbounded interiors would grow
+// the save the way unbounded scene history did in SNG-157), so it stays a cap — but it is named
+// here, and raised: a real interior tier nests (Millbrook → the Edge District → the Inn → a booth)
+// and Millbrook was ALREADY at 12 with the truncation bug hiding collisions behind shared slugs.
+const CAPS = { notes: 12, flags: 10, subPlaces: 24 };
 
 /** SNG-152/154: a sub-place's IDENTITY slug, derived from the FULL name — never
  *  from a truncated one (two long names sharing a 40-char prefix used to collapse
@@ -21,6 +25,23 @@ export function subPlaceSlug(fullName) { // registry:internal
   return slug;
 }
 
+/** SNG-154. Find the place a name is a SUB-PLACE of, anywhere in placeMemory. This is what makes
+ *  promotion parent-preserving: when the GM turns "the Low Lamp Inn" from a room inside the Edge
+ *  District into a location of its own, the new location must remember it is still IN the Edge
+ *  District. Returns { parentId, slug } or null. Pure. */
+export function findSubPlaceParent(character, nameOrSlug) {
+  const want = subPlaceSlug(String(nameOrSlug || ""));
+  if (!want) return null;
+  for (const [locId, p] of Object.entries(character?.placeMemory || {})) {
+    const subs = p?.subPlaces || {};
+    if (subs[want]) return { parentId: subs[want].parentId || locId, slug: want };
+    for (const [slug, sp] of Object.entries(subs)) {
+      if (subPlaceSlug(sp?.name || "") === want) return { parentId: sp.parentId || locId, slug };
+    }
+  }
+  return null;
+}
+
 export function notePlaceVisit(character, locationId, day = null) {
   character.placeMemory = character.placeMemory || {};
   const p = character.placeMemory[locationId] || (character.placeMemory[locationId] = { visits: 0, notes: [], flags: {} });
@@ -32,6 +53,7 @@ export function notePlaceVisit(character, locationId, day = null) {
 export function applyPlaceUpdates(character, locationId, updates = [], ctx = {}) {
   character.placeMemory = character.placeMemory || {};
   const p = character.placeMemory[locationId] || (character.placeMemory[locationId] = { visits: 1, notes: [], flags: {} });
+  const notes = []; // SNG-154: containment corrections, surfaced never silent
   for (const u of (updates || []).slice(0, 4)) {
     if (u.note) {
       const note = `[d${ctx.day ?? "?"}] ${smartClamp(String(u.note), 300)}`; // SNG-152
@@ -45,15 +67,31 @@ export function applyPlaceUpdates(character, locationId, updates = [], ctx = {})
       const fullName = String(u.subPlace.name || u.subPlace);
       const name = smartClamp(fullName, 120);
       const slug = subPlaceSlug(fullName);
-      p.subPlaces = p.subPlaces || {};
-      if (p.subPlaces[slug] || Object.keys(p.subPlaces).length < 12) {
-        const prev = p.subPlaces[slug] || {};
-        p.subPlaces[slug] = {
+      // SNG-154 CONTAINMENT: a sub-place belongs to a place, and until now that was inferred
+      // per-write from wherever the engine last believed the character was standing — which is how
+      // the back booth (inside the Low Lamp Inn) got filed under the Old Switchback, and how four
+      // cooperage places landed inside the Inn. The GM may now NAME the parent; a named parent that
+      // isn't where we think we are means a moveTo was missed, so we honour the fiction and record
+      // it under the named place, flagging it rather than silently trusting the stale location.
+      const named = u.subPlace.parent ? String(u.subPlace.parent) : null;
+      const namedId = named ? (ctx.resolveLocationId ? ctx.resolveLocationId(named, ctx.locations || {}) : null) : null;
+      const mismatched = !!(named && namedId && namedId !== locationId);
+      const host = mismatched
+        ? (character.placeMemory[namedId] || (character.placeMemory[namedId] = { visits: 1, notes: [], flags: {} }))
+        : p;
+      const hostId = mismatched ? namedId : locationId;
+      host.subPlaces = host.subPlaces || {};
+      if (host.subPlaces[slug] || Object.keys(host.subPlaces).length < CAPS.subPlaces) {
+        const prev = host.subPlaces[slug] || {};
+        host.subPlaces[slug] = {
           name: prev.name || name,
+          parentId: hostId,                       // EXPLICIT containment — never re-inferred
           day: prev.day ?? ctx.day ?? null,
           visited: prev.visited || u.subPlace.visited !== false,
-          note: u.subPlace.note ? smartClamp(String(u.subPlace.note), 200) : prev.note || "" // SNG-152
+          note: u.subPlace.note ? smartClamp(String(u.subPlace.note), 200) : prev.note || "", // SNG-152
+          ...(named && !namedId ? { parentUnresolved: smartClamp(named, 60) } : {}) // named a place we don't know — keep the claim
         };
+        if (mismatched) notes.push(`"${name}" was placed in ${namedId} (the fiction named it), not ${locationId}`);
       }
     }
     if (u.flag && typeof u.flag === "object") {
@@ -64,6 +102,7 @@ export function applyPlaceUpdates(character, locationId, updates = [], ctx = {})
       }
     }
   }
+  if (notes.length) p._containmentNotes = notes.slice(-4);
   return p;
 }
 

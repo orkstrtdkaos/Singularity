@@ -4036,6 +4036,69 @@ await (async () => {
     npcPortraitTier(pell) === "partner"); // the app skips when n._portraitTier === this tier
 }
 
+// --- SNG-154 stage 2-4: containment — parentId, validation on write, and repair ---
+{
+  const { applyPlaceUpdates, findSubPlaceParent } = await import('../engine/places.js');
+  const { CHARACTER_STEPS } = await import('../engine/reconcile.js');
+  const { autoMapPositions } = await import('../engine/worldmap.js');
+  const resolveId = (ref, locs) => Object.keys(locs || {}).find(id => id === ref || locs[id]?.name === ref) || null;
+  const locs = { millbrook: { id: "millbrook", name: "Millbrook" }, the_inn: { id: "the_inn", name: "The Low Lamp Inn" } };
+
+  // stage 2 — every sub-place records what it is INSIDE
+  const c1 = { placeMemory: {} };
+  applyPlaceUpdates(c1, "millbrook", [{ subPlace: { name: "Pell's Forge" } }], { day: 1, resolveLocationId: resolveId, locations: locs });
+  check("154: a sub-place records parentId explicitly (containment is stored, not inferred)",
+    c1.placeMemory.millbrook.subPlaces["pell-s-forge"].parentId === "millbrook");
+
+  // stage 3 — a GM-named parent that isn't where we think we are wins, and is surfaced
+  const c2 = { placeMemory: {} };
+  const p2 = applyPlaceUpdates(c2, "old_switchback", [{ subPlace: { name: "Back Corner Booth", parent: "the_inn" } }], { day: 2, resolveLocationId: resolveId, locations: locs });
+  check("154: the booth lands in the INN the fiction named, not the stale current location (Erik's bug)",
+    !!c2.placeMemory.the_inn?.subPlaces["back-corner-booth"] && !c2.placeMemory.old_switchback?.subPlaces?.["back-corner-booth"]);
+  check("154: the re-parenting is surfaced, never silent", (p2._containmentNotes || []).some(n => /the fiction named it/.test(n)));
+  check("154: an unresolvable named parent keeps the claim instead of dropping it",
+    (() => { const c = { placeMemory: {} };
+      applyPlaceUpdates(c, "millbrook", [{ subPlace: { name: "The Sunken Vault", parent: "Nowhere At All" } }], { day: 1, resolveLocationId: resolveId, locations: locs });
+      return c.placeMemory.millbrook.subPlaces["the-sunken-vault"].parentUnresolved === "Nowhere At All"; })());
+
+  // promotion preserves containment
+  const c3 = { placeMemory: { edge: { subPlaces: { "the-low-lamp-inn": { name: "The Low Lamp Inn", parentId: "edge" } } } } };
+  check("154: findSubPlaceParent recovers what a promoted place was inside of",
+    findSubPlaceParent(c3, "The Low Lamp Inn")?.parentId === "edge" && findSubPlaceParent(c3, "nothing here") === null);
+
+  // the REPORTED map bug: a parentless place hash-grids; with a parent it anchors beside it
+  const far = autoMapPositions([{ id: "edge", map: { x: 700, y: 100 } }, { id: "inn" }]);
+  const near = autoMapPositions([{ id: "edge", map: { x: 700, y: 100 } }, { id: "inn", parentId: "edge" }]);
+  const dist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
+  check("154: a place with a parentId is placed BESIDE its parent, not hash-gridded across the map",
+    dist(near.inn, near.edge) < 110 && dist(near.inn, near.edge) < dist(far.inn, far.edge));
+
+  // stage 4 — repair, on the shape of Erik's real save
+  const step = CHARACTER_STEPS.find(s => s.id === "place-containment");
+  const c4 = { placeMemory: {
+      edge: { subPlaces: { "the-low-lamp-inn": { name: "The Low Lamp Inn" } } },
+      millbrook: { subPlaces: { "upper-meadow": { name: "Upper Meadow" }, "upper-meadow-north-of-mill": { name: "Upper Meadow (north of Millbrook)" } } } },
+    // a stale hash-gridded coord, exactly as it sits on the real save
+    generated: { location: { "the-low-lamp-inn": { id: "the-low-lamp-inn", name: "The Low Lamp Inn", map: { x: 545, y: 175 }, _gen: { type: "location" } } } } };
+  const out = step.apply(c4, {});
+  check("154: repair relinks a promoted location to its parent (the Inn → the Edge District)",
+    c4.generated.location["the-low-lamp-inn"].parentId === "edge");
+  check("154: repair INVALIDATES the stale coord — parentId alone can't move it, since a stored map wins",
+    c4.generated.location["the-low-lamp-inn"].map === undefined);
+  check("154: and it then re-derives beside the parent", (() => {
+    const pos = autoMapPositions([{ id: "edge", map: { x: 700, y: 100 } }, { id: "the-low-lamp-inn", parentId: "edge" }]);
+    return Math.hypot(pos["the-low-lamp-inn"].x - pos.edge.x, pos["the-low-lamp-inn"].y - pos.edge.y) < 110;
+  })());
+  check("154: repair collapses truncation twins, keeping the FULLER name",
+    Object.keys(c4.placeMemory.millbrook.subPlaces).length === 1 &&
+    Object.values(c4.placeMemory.millbrook.subPlaces)[0].name === "Upper Meadow (north of Millbrook)");
+  check("154: repair stamps parentId on every surviving sub-place", Object.values(c4.placeMemory.edge.subPlaces)[0].parentId === "edge");
+  check("154: repair tells the player what changed", (out.notes || []).length >= 1);
+  check("154: repair is idempotent (running twice changes nothing)", JSON.stringify(step.apply(c4, {})) === "{}");
+  check("154: a place is NEVER deleted — only duplicates of itself are collapsed",
+    !!c4.placeMemory.edge.subPlaces["the-low-lamp-inn"]);
+}
+
 // --- SNG-160: known people — one entry per person, and the player can name/merge them ---
 {
   const appSrc160 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');

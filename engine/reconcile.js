@@ -107,6 +107,76 @@ export const CHARACTER_STEPS = [
       const nm = t => idx.byId?.[t]?.name || t;
       return { notes: [`Your place on the great circle is set (from what you've mastered): ${nm(inf.primary)}${inf.secondary ? " · " + nm(inf.secondary) : ""}${inf.tertiary ? " · " + nm(inf.tertiary) : ""}. Nothing you already hold is lost.`] };
     }
+  },
+  {
+    version: 6, id: "place-containment", playerFacing: true,
+    // SNG-154 stage 4. Repair a save whose place hierarchy was scrambled before `parentId` existed.
+    // Containment used to be inferred per-write from wherever the engine last believed the
+    // character was standing, so rooms landed in the wrong building and a place promoted out of a
+    // sub-place forgot what it was inside of. NOTHING IS DELETED: every sub-place keeps its record.
+    //  (a) stamp parentId on every sub-place that lacks it (its current host — the status quo, now explicit)
+    //  (b) a location that ALSO exists as someone's sub-place gains that parentId (the promotion link
+    //      the Low Lamp Inn lost, which is why the map hash-gridded it across the world)
+    //  (c) collapse truncation twins: two sub-places under ONE parent whose names are prefixes of
+    //      each other (`upper-meadow` / `upper-meadow-north-of-millbrook-`) are one place recorded
+    //      twice by the pre-SNG-152 40-char cut. Keep the longer name, union the notes.
+    apply: (c) => {
+      const pm = c.placeMemory || {};
+      if (!Object.keys(pm).length) return {};
+      let stamped = 0, linked = 0;
+      const merged = [];
+      for (const [locId, p] of Object.entries(pm)) {
+        const subs = p?.subPlaces || {};
+        for (const sp of Object.values(subs)) if (sp && !sp.parentId) { sp.parentId = locId; stamped++; }
+        // (c) truncation twins, within this parent only
+        const entries = Object.entries(subs).sort((a, b) => (b[1]?.name || "").length - (a[1]?.name || "").length);
+        for (let i = 0; i < entries.length; i++) {
+          const [keepSlug, keep] = entries[i];
+          if (!subs[keepSlug]) continue;
+          for (let j = i + 1; j < entries.length; j++) {
+            const [dropSlug, drop] = entries[j];
+            if (!subs[dropSlug] || dropSlug === keepSlug) continue;
+            const a = String(keep?.name || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
+            const b = String(drop?.name || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
+            if (!a || !b || a === b || !a.startsWith(b) || b.length < 6) continue; // prefix-of, not merely similar
+            if (drop?.note && !keep.note) keep.note = drop.note;
+            keep.visited = keep.visited || drop.visited;
+            keep.day = keep.day ?? drop.day;
+            delete subs[dropSlug];
+            merged.push(keep.name);
+          }
+        }
+      }
+      // (b) promoted-out-of-a-sub-place locations regain their parent
+      for (const [, recs] of Object.entries(c.generated || {})) {
+        for (const rec of Object.values(recs || {})) {
+          if (!rec || rec.parentId || rec._gen?.type !== "location") continue;
+          const slug = String(rec.id || "").toLowerCase();
+          for (const [locId, p] of Object.entries(pm)) {
+            if (locId === rec.id) continue;
+            const subs = p?.subPlaces || {};
+            const hit = subs[slug] || Object.values(subs).find(sp => String(sp?.name || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") === slug);
+            if (hit) {
+              rec.parentId = locId; rec._promotedFromSubPlace = true; linked++;
+              // Relinking the parent is not enough on its own: `autoMapPositions` prefers a STORED
+              // `map` coord over any anchor, so the hash-gridded coordinate the place was born with
+              // would keep it across the map even once it knows its container. `map` is a DERIVED
+              // CACHE of position, not the truth — so invalidate it and let it re-derive beside the
+              // parent. (Caught in the browser: parentId was right and the Inn was still 416px away.)
+              delete rec.map;
+              break;
+            }
+          }
+        }
+      }
+      if (!stamped && !linked && !merged.length) return {};
+      const notes = [];
+      if (linked) notes.push(linked === 1
+        ? `The world remembered its shape — a place you made real now knows what it sits inside, and the map puts it there.`
+        : `The world remembered its shape — ${linked} places you made real now know what they sit inside, and the map puts them there.`);
+      if (merged.length) notes.push(`Merged ${merged.length} place${merged.length === 1 ? "" : "s"} that had been recorded twice under a cut-off name: ${[...new Set(merged)].slice(0, 3).join(", ")}.`);
+      return notes.length ? { notes } : {};
+    }
   }
   // Future steps register here — e.g. innate-talent GRANT (offers[], when talent content
   // lands with SNG-017), Reach-tradition eligibility surfacing, universal-role tagging.

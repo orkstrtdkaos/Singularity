@@ -24,11 +24,16 @@ export function autoMapPositions(locations, { width = 800, height = 440, margin 
     if (l.map && Number.isFinite(l.map.x) && Number.isFinite(l.map.y)) out[l.id] = { x: l.map.x, y: l.map.y };
     else need.push(l);
   }
-  // resolve coordless locations relative to a positioned neighbour, a few passes so chains fill in
+  // resolve coordless locations relative to a positioned neighbour, a few passes so chains fill in.
+  // SNG-154: CONTAINMENT ANCHORS FIRST. A place promoted out of another place (the Low Lamp Inn was
+  // a sub-place of the Edge District before a generateRequest made it a location) belongs NEXT TO
+  // its parent. Without parentId the only fallbacks were a connected neighbour or — failing that —
+  // a hash grid, which is literally why the Inn rendered on the far side of the map. `parentId`
+  // outranks `connections` because containment is a stronger claim about where a place IS.
   for (let pass = 0; pass < 4 && need.length; pass++) {
     for (let i = need.length - 1; i >= 0; i--) {
       const l = need[i];
-      const anchor = (l.connections || []).map(c => out[c]).find(Boolean);
+      const anchor = (l.parentId && out[l.parentId]) || (l.connections || []).map(c => out[c]).find(Boolean);
       if (!anchor) continue;
       const h = hashN(l.id);
       const ang = (h % 360) * Math.PI / 180;

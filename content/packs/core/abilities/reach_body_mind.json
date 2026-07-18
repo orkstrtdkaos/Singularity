@@ -860,7 +860,12 @@
           "rank": 1,
           "name": "The Single Stroke",
           "grants": "Read a contest to its one decisive instant and deliver the single perfect stroke that ends it.",
-          "cannot": "It costs nearly all your focus, it requires a real decisive instant to exist, and it is the blade's truth and the pen's alike — some contests have no single stroke, and mistaking that is how the sure-handed fall."
+          "cannot": "It costs nearly all your focus, it requires a real decisive instant to exist, and it is the blade's truth and the pen's alike — some contests have no single stroke, and mistaking that is how the sure-handed fall.",
+          "harmRung": "lethal",
+          "functions": [
+            "strike",
+            "foresee"
+          ]
         }
       ],
       "gated": "learned",

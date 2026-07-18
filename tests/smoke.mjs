@@ -3391,6 +3391,22 @@ await (async () => {
   check("SNG-143: the NPC schema declares gender", !!schema143.properties.gender);
 })();
 
+// --- SNG-141: substrate-unlock parity (living_current + wild_current get precursor's fiction-unlock door) ---
+(() => {
+  const appSrc = readFileSync(join(root, "app.js"), "utf8");
+  const gmSrc = readFileSync(join(root, "engine/gm.js"), "utf8");
+
+  // the generalized, powerSystem-validated unlock handler (mirrors unlockPrecursor) routes to the right access list
+  check("SNG-141: the unlock handler maps precursor/living_current/wild_current to their access lists", /SUBSTRATE_ACCESS = \{ precursor: "precursorAccess", living_current: "livingCurrentAccess", wild_current: "wildCurrentAccess" \}/.test(appSrc));
+  check("SNG-141: it validates the ability's OWN powerSystem before unlocking (a wrong-system id can't unlock)", /const listKey = ab && SUBSTRATE_ACCESS\[ab\.powerSystem\]/.test(appSrc) && /if \(!listKey\) continue/.test(appSrc));
+  check("SNG-141: unlockPrecursor stays a back-compat alias (still handled)", /turn\.unlockSubstrate, turn\.unlockPrecursor, turn\.unlockLivingCurrent, turn\.unlockWildCurrent/.test(appSrc));
+
+  // the GM contract: the op spec + rule 19 extension + salvage recovery
+  check("SNG-141: gm.js declares the unlockSubstrate op (precursor|living_current|wild_current)", /"unlockSubstrate": \{"abilityId": "a precursor \| living_current \| wild_current ability id/.test(gmSrc));
+  check("SNG-141: rule 19 extends the fiction-unlock door to the living + wild currents", /The LIVING current/.test(gmSrc) && /WILD current/.test(gmSrc) && /emit "unlockSubstrate"/.test(gmSrc) && /Access opens the door; the craft still costs a level \+ a point/.test(gmSrc));
+  check("SNG-141: unlockSubstrate survives a truncated reply (in the salvageOps key list)", /"unlockSubstrate", "unlockPrecursor"/.test(gmSrc));
+})();
+
 // --- SNG-076: authored prose is not truncated mid-word ---
 (() => {
   const short = "Fendt is going to be ruined by a piece of paper that does not exist.";

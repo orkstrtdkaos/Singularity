@@ -49,7 +49,7 @@ import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challe
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.101";
+const APP_VERSION = "1.8.102";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2761,13 +2761,20 @@ function applyTurn(turn, resolution, playerWords = null) {
     if (resolution.action?.novel && gain) gain += xpT.novelBonus ?? 0;
     character.xp += gain;
   }
-  // SNG-011: precursor access unlock — only when the fiction earns it
-  if (turn.unlockPrecursor?.abilityId && turn.unlockPrecursor?.via) {
-    const pid = turn.unlockPrecursor.abilityId;
-    const ab = fullCatalog()[pid];
-    if (ab?.powerSystem === "precursor" && !(character.precursorAccess || []).includes(pid)) {
-      character.precursorAccess = [...(character.precursorAccess || []), pid];
-      turn.narration += `\n\n*✦ A door opens that was never on any list: **${ab.name}** may now be learned (${String(turn.unlockPrecursor.via).slice(0, 80)}).*`;
+  // SNG-011 + SNG-131 + SNG-141: substrate ACCESS unlocks — only when the fiction earns it. Precursor,
+  // living-current, and wild-current all open per-ability through the SAME door (parity). One generalized
+  // op (unlockSubstrate); unlockPrecursor stays as a back-compat alias. The target list is chosen from the
+  // ability's OWN powerSystem (validated) — a wrong-system id can't unlock anything (mirrors the seed guard).
+  // wild_current opens its list here; its learn-gate reader lands with SNG-140 (until then the unlock is inert, by design).
+  const SUBSTRATE_ACCESS = { precursor: "precursorAccess", living_current: "livingCurrentAccess", wild_current: "wildCurrentAccess" };
+  for (const u of [turn.unlockSubstrate, turn.unlockPrecursor, turn.unlockLivingCurrent, turn.unlockWildCurrent]) {
+    if (!u?.abilityId || !u?.via) continue;
+    const ab = fullCatalog()[u.abilityId];
+    const listKey = ab && SUBSTRATE_ACCESS[ab.powerSystem]; // powerSystem-validated — never unlock the wrong system
+    if (!listKey) continue;
+    if (!(character[listKey] || []).includes(u.abilityId)) {
+      character[listKey] = [...(character[listKey] || []), u.abilityId];
+      turn.narration += `\n\n*✦ A door opens that was never on any list: **${ab.name}** may now be learned (${String(u.via).slice(0, 80)}).*`;
     }
   }
   // ability-arch v2: the GM marks a defining moment → rank 3 (mastery). The engine confirms the earn

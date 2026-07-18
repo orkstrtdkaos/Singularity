@@ -1499,55 +1499,72 @@
         "player": "Go straight to Mara Wells's store — she's the first link in the chain Dara named, and she'll know how to place Calvar.",
         "summary": "Party arrives at Mara Wells's store — she takes one look at Calvar and greets him as the man she's been waiting for.",
         "narration": "The lane south from the gate runs narrow between two stone-set garden walls, damp moss in the gaps, last night's frost still retreating from the shadowed side. You know the way. Mara's store sits a dozen paces past the well, door open in the morning cool — she opens it early and closes it late, and the regularity is a kind of civic service.\n\nHalf a dozen villagers are moving in the lane as you come through — a woman with a yoke and two full buckets turns to look, holds the look a beat longer than politeness requires, and then continues on without comment. Word travels in Millbrook the way smoke does: you don't see it move, but it gets everywhere. The well-circle is empty except for a child sitting on the lip, feet dangling, watching Huginn with the focused attention of someone who has decided the bird is personally significant. Huginn settles on the store's roof beam and ignores the attention with professional ease.\n\nMara is at the counter when you push the door — ledger open, a stub of marking chalk between her fingers. She looks up, takes in you, Pell, and the man behind you in one practiced sweep, and her eyes settle on Calvar the way a builder's eyes settle on a cornerstone: figuring weight, figuring fit. She sets the chalk down. \"You found someone who knows what they're looking at,\" she says, and it is not quite a question — Dara's phrase, almost exactly, returned without ceremony. She comes around the counter and extends her hand to Calvar directly, as if the introduction belongs to him first, not to you. \"Mara Wells. I run supply here. I've been watching the catch numbers and not saying anything out loud. I expect you're going to tell me I was right to worry.\""
+      },
+      {
+        "player": "Let Mara and Calvar find their own footing — step back and watch how he reads her, and how she reads him.",
+        "summary": "Mara and Calvar find their footing in sixty seconds flat — the document roll surfaces, and Calvar names himself witness, not authority.",
+        "narration": "The handshake lasts three seconds — long enough for both of them to finish their read. Mara's chalk hand drops first, and she steps back to the counter without hurry, pulling the ledger around so it faces him. \"Dara Holt needs someone who can get their hands dirty,\" she says, as if confirming something she already filed this morning. \"I assume you are that person.\" It is not quite a question.\n\nCalvar looks at the ledger page — not to read it, you think, but to see how she keeps her numbers. Something in his expression settles. \"Intake sleeve material,\" he says. \"Iron or bronze?\" His voice is the same measured register he used on the road, but there is a quality of attention behind it now that was not visible until this moment — the way a man looks when the instrument he has been handed is better than he expected.\n\n\"Iron,\" Mara says, and she watches his face when she says it.\n\nWhatever he reads there, he nods once — the kind of nod that closes a calculation, not a conversation. He draws the document roll from inside his coat and sets it on the counter beside the ledger, one hand remaining on it. \"This should go to someone with standing to receive it. Not me — I am the witness, not the authority.\" His thumb taps the brass wire twice. \"You will know better than I do whose hands it belongs in.\"\n\nPell's weight shifts slightly beside you — a small, satisfied movement, barely a thing. She read him right on the road. Mara reads him right now. You have done the thing that needed doing simply by bringing the two of them into the same room, and the room is already doing the rest."
       }
     ],
     "lastTurn": {
-      "narration": "The lane south from the gate runs narrow between two stone-set garden walls, damp moss in the gaps, last night's frost still retreating from the shadowed side. You know the way. Mara's store sits a dozen paces past the well, door open in the morning cool — she opens it early and closes it late, and the regularity is a kind of civic service.\n\nHalf a dozen villagers are moving in the lane as you come through — a woman with a yoke and two full buckets turns to look, holds the look a beat longer than politeness requires, and then continues on without comment. Word travels in Millbrook the way smoke does: you don't see it move, but it gets everywhere. The well-circle is empty except for a child sitting on the lip, feet dangling, watching Huginn with the focused attention of someone who has decided the bird is personally significant. Huginn settles on the store's roof beam and ignores the attention with professional ease.\n\nMara is at the counter when you push the door — ledger open, a stub of marking chalk between her fingers. She looks up, takes in you, Pell, and the man behind you in one practiced sweep, and her eyes settle on Calvar the way a builder's eyes settle on a cornerstone: figuring weight, figuring fit. She sets the chalk down. \"You found someone who knows what they're looking at,\" she says, and it is not quite a question — Dara's phrase, almost exactly, returned without ceremony. She comes around the counter and extends her hand to Calvar directly, as if the introduction belongs to him first, not to you. \"Mara Wells. I run supply here. I've been watching the catch numbers and not saying anything out loud. I expect you're going to tell me I was right to worry.\"",
-      "sceneSummary": "Party arrives at Mara Wells's store — she takes one look at Calvar and greets him as the man she's been waiting for.",
+      "narration": "The handshake lasts three seconds — long enough for both of them to finish their read. Mara's chalk hand drops first, and she steps back to the counter without hurry, pulling the ledger around so it faces him. \"Dara Holt needs someone who can get their hands dirty,\" she says, as if confirming something she already filed this morning. \"I assume you are that person.\" It is not quite a question.\n\nCalvar looks at the ledger page — not to read it, you think, but to see how she keeps her numbers. Something in his expression settles. \"Intake sleeve material,\" he says. \"Iron or bronze?\" His voice is the same measured register he used on the road, but there is a quality of attention behind it now that was not visible until this moment — the way a man looks when the instrument he has been handed is better than he expected.\n\n\"Iron,\" Mara says, and she watches his face when she says it.\n\nWhatever he reads there, he nods once — the kind of nod that closes a calculation, not a conversation. He draws the document roll from inside his coat and sets it on the counter beside the ledger, one hand remaining on it. \"This should go to someone with standing to receive it. Not me — I am the witness, not the authority.\" His thumb taps the brass wire twice. \"You will know better than I do whose hands it belongs in.\"\n\nPell's weight shifts slightly beside you — a small, satisfied movement, barely a thing. She read him right on the road. Mara reads him right now. You have done the thing that needed doing simply by bringing the two of them into the same room, and the room is already doing the rest.",
+      "sceneSummary": "Mara and Calvar find their footing in sixty seconds flat — the document roll surfaces, and Calvar names himself witness, not authority.",
       "choices": [
         {
-          "label": "Introduce Calvar formally — his name, his background, and why he's here — then let him speak for himself.",
+          "label": "Name Dara Holt as the right authority for the document roll — walk Calvar down to her house yourself and make the introduction while Mara holds the ledger.",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "lead",
-            "help"
+            "lead"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Hand Mara the Valve Failure Timeline and let the document do the first work — then bring in Calvar.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "plan",
-            "help"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask Mara first: have Bren Thalle and Curis come through the north gate yet? Size up what she already knows before the briefing.",
+          "label": "Stay and let Mara brief him — she knows the drainage timeline, the catch numbers, and the east-bend situation. Listen for what he does not say.",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "scout",
             "study"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Let Mara and Calvar find their own footing — step back and watch how he reads her, and how she reads him.",
+          "label": "Ask Calvar what he saw in the drainage cut on the road in — he crouched and said nothing; whatever he read there, it belongs in the room now.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Step outside to Huginn and take a breath — Pell is here, Calvar is in good hands. Sometimes the space between the work is its own work.",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "careful"
+            "sustain"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "characterDeltas": {
@@ -1555,88 +1572,84 @@
         "energy": 0
       },
       "scene": {
-        "setting": "Mara Wells's store, Millbrook — a tight, well-ordered room behind a counter stacked with cloth, cord, and sealed tins. Door open to the lane, morning light angled in from the south. Huginn on the roof beam outside.",
+        "setting": "Mara Wells's store, Millbrook — tight, well-ordered room behind a counter stacked with cloth, cord, and sealed tins. Door open to the lane, afternoon light angled in from the south. Huginn on the roof beam outside.",
         "npcsPresent": [
           {
             "name": "Mara Wells",
-            "state": "Standing at the counter, ledger open, chalk set down — has come around the counter to greet Calvar directly, hand extended."
-          },
-          {
-            "name": "Pell",
-            "state": "Just inside the door, pack still on, watching Mara's read of Calvar with quiet attention."
+            "state": "Behind the counter, ledger turned to face Calvar, reading his reaction to the iron answer."
           },
           {
             "name": "Calvar",
-            "state": "Meeting Mara's gaze — hand coming up to take hers, measuring her the way she is measuring him."
+            "state": "Hand resting on the document roll, now placed on the counter — measuring Mara with the full attention he has been holding back."
+          },
+          {
+            "name": "Pell",
+            "state": "Just inside the door, pack still on, weight settled — satisfied, watching."
           },
           {
             "name": "Huginn",
-            "state": "Settled on the store's exterior roof beam, watching the lane."
+            "state": "On the store's exterior roof beam, attending the lane."
           }
         ],
         "objects": [
           "Memory (spear) — in Silas's grip",
           "Traveler's Pack — on Silas's back",
-          "Sealed document roll — inside Calvar's coat",
+          "Sealed document roll — now on Mara's counter, Calvar's hand resting on it",
           "Pell's pack — on her back",
           "River Whetstone — at Pell's belt",
           "Trade-Knives (pair) — in Silas's inventory",
           "Valve Failure Timeline — in Silas's inventory",
-          "Mara's open ledger and chalk on the counter"
+          "Mara's open ledger on the counter"
         ],
         "threads": [
-          "The document roll's final destination and how it's presented has not been decided",
-          "Calvar has not yet met Dara Holt or Aldric",
+          "The document roll's final destination and whose hands receive it — Calvar has named himself witness, not authority, and deferred to Mara's judgment",
           "Calvar's unspoken read of the drainage cut on the road approach",
-          "Bren Thalle and Curis may already be in the village — Mara may or may not know they're coming",
-          "Mara is waiting for confirmation of what the catch numbers mean"
+          "Calvar has not yet met Dara Holt or Aldric",
+          "Bren Thalle and Curis may already be approaching the village — Mara does not yet know they are coming with Silas's name"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "mara-wells",
-          "name": "Mara Wells",
-          "note": "Greeted Calvar directly on sight — used Dara's phrase back unprompted, extended her hand to him first. Already operational.",
-          "learned": [
-            "Silas returned with someone who matches the 'knows what they're looking at' criterion — she recognized it immediately"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At her store, ledger open, now face to face with Calvar — ready for the briefing."
-        },
-        {
-          "op": "update",
           "npcId": "calvar",
           "name": "Calvar",
-          "note": "Entering Mara's store — she came around the counter for him, hand extended. First real introduction in Millbrook.",
+          "role": "Pre-Transition filtration engineer, traveling south with the party",
+          "gender": "man",
+          "pronouns": "he/him",
+          "note": "Set the document roll on Mara's counter unprompted — named himself witness, not authority, and deferred to her judgment on whose hands it belongs in. Asked about intake sleeve material (iron or bronze) and filed Mara's answer with visible recalibration.",
           "learned": [
-            "Mara Wells is the right first contact — she already knows something is wrong and is ready to hear it confirmed"
+            "Millbrook's intake sleeves are iron — filed as a load-bearing engineering fact",
+            "Mara Wells is a competent operational contact — her ledger-keeping confirmed it",
+            "The document roll's authority question is deferred to Mara's local knowledge"
           ],
+          "skillsObserved": [
+            "self-positioning of authority — named himself witness, not authority, without prompting",
+            "precise diagnostic questioning under a first meeting"
+          ],
+          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "Inside Mara's store, meeting her for the first time — document roll secure, assessing."
+          "statusNote": "In Mara's store — document roll on the counter, first real Millbrook briefing underway."
         },
         {
           "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "note": "Watching Mara's read of Calvar with quiet attention — pack still on, not yet home.",
+          "npcId": "mara-wells",
+          "name": "Mara Wells",
+          "role": "Village supply store operator, Millbrook",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "Confirmed iron sleeves without hesitation and watched Calvar's face when she said it — reading his reaction as diagnostic data. Received the document roll's placement on her counter without comment; now holds the question of whose hands it belongs in.",
+          "learned": [
+            "Calvar asks about intake sleeve material as a first diagnostic — iron matters to his read",
+            "Calvar defers authority explicitly — he is a witness, not a claimant",
+            "The document roll is now on her counter; the question of its destination is hers to answer"
+          ],
+          "skillsObserved": [
+            "reading a technical expert's reaction as diagnostic data",
+            "holding a significant object's authority question without rushing it"
+          ],
+          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "Inside Mara's store, pack on, watching."
-        }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "Short walk from the north gate to Mara's store — a few minutes in the morning lane."
-      },
-      "placeUpdates": [
-        {
-          "note": "Calvar brought to Mara Wells's store on World-day 18 mid-morning — first contact with Millbrook's supply network made.",
-          "subPlace": {
-            "name": "Mara Wells's Store",
-            "note": "Calvar introduced here — Mara greeted him directly, hand extended, ledger open. Briefing pending.",
-            "visited": true
-          }
+          "statusNote": "At her store — document roll on counter, Calvar briefing now fully underway."
         }
       ],
       "codexUpdates": [
@@ -1645,53 +1658,56 @@
           "label": "Find the Engineer",
           "kind": "event",
           "entityId": "calvar",
-          "fact": "Calvar brought to Mara Wells's store on World-day 18 mid-morning — she recognized his purpose immediately, used Dara's phrase back unprompted, and extended her hand to him first. The briefing chain begins here.",
+          "fact": "Calvar placed the document roll on Mara's counter and named himself witness, not authority — deferring to local knowledge on whose hands it belongs in. His first diagnostic question was intake sleeve material (iron or bronze); Mara's answer of iron landed as a load-bearing engineering fact.",
           "links": [
+            "the-edge-district-ledger",
             "mara-wells",
             "dara-holt",
             "millbrook",
-            "the-water-crisis",
-            "the-edge-district-ledger"
+            "the-water-crisis"
           ]
         }
-      ]
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A short exchange — the introductions and the document roll placement, a few minutes at most."
+      }
     },
     "sceneState": {
-      "setting": "Mara Wells's store, Millbrook — a tight, well-ordered room behind a counter stacked with cloth, cord, and sealed tins. Door open to the lane, morning light angled in from the south. Huginn on the roof beam outside.",
+      "setting": "Mara Wells's store, Millbrook — tight, well-ordered room behind a counter stacked with cloth, cord, and sealed tins. Door open to the lane, afternoon light angled in from the south. Huginn on the roof beam outside.",
       "npcsPresent": [
         {
           "name": "Mara Wells",
-          "state": "Standing at the counter, ledger open, chalk set down — has come around the counter to greet Calvar directly, hand extend"
-        },
-        {
-          "name": "Pell",
-          "state": "Just inside the door, pack still on, watching Mara's read of Calvar with quiet attention."
+          "state": "Behind the counter, ledger turned to face Calvar, reading his reaction to the iron answer."
         },
         {
           "name": "Calvar",
-          "state": "Meeting Mara's gaze — hand coming up to take hers, measuring her the way she is measuring him."
+          "state": "Hand resting on the document roll, now placed on the counter — measuring Mara with the full attention he has been holdin"
+        },
+        {
+          "name": "Pell",
+          "state": "Just inside the door, pack still on, weight settled — satisfied, watching."
         },
         {
           "name": "Huginn",
-          "state": "Settled on the store's exterior roof beam, watching the lane."
+          "state": "On the store's exterior roof beam, attending the lane."
         }
       ],
       "objects": [
         "Memory (spear) — in Silas's grip",
         "Traveler's Pack — on Silas's back",
-        "Sealed document roll — inside Calvar's coat",
+        "Sealed document roll — now on Mara's counter, Calvar's hand resting on it",
         "Pell's pack — on her back",
         "River Whetstone — at Pell's belt",
         "Trade-Knives (pair) — in Silas's inventory",
         "Valve Failure Timeline — in Silas's inventory",
-        "Mara's open ledger and chalk on the counter"
+        "Mara's open ledger on the counter"
       ],
       "threads": [
-        "The document roll's final destination and how it's presented has not been decided",
-        "Calvar has not yet met Dara Holt or Aldric",
+        "The document roll's final destination and whose hands receive it — Calvar has named himself witness, not authority, and deferred to Mara's judgment",
         "Calvar's unspoken read of the drainage cut on the road approach",
-        "Bren Thalle and Curis may already be in the village — Mara may or may not know they're coming",
-        "Mara is waiting for confirmation of what the catch numbers mean"
+        "Calvar has not yet met Dara Holt or Aldric",
+        "Bren Thalle and Curis may already be approaching the village — Mara does not yet know they are coming with Silas's name"
       ]
     }
   },
@@ -2172,9 +2188,8 @@
         "locationId": "millbrook",
         "day": 1
       },
-      "relationship": 6,
+      "relationship": 7,
       "history": [
-        "[d2] Gave Silas candid intelligence on Pell's romantic history — a tinker from the heights, three years back, ended quietly. Warned him against over-engineering the approach.",
         "[d2] Produced valve failure dates from two separate ledgers without hesitation — four sleeve blank sales in three weeks, both failures confirmed returned. Tore a note page unprompted an",
         "[d2] Named Dara Holt unprompted — gave her location (blue gate-post, bend before upper meadow), her seniority (22 years, east channel), and advised Silas to see the site before briefing",
         "[d2] Received the surge scope briefing without interruption — tied off her ledger as a personal hold-flag, confirmed the east furlong farmer's second sleeve blank return, and directed S",
@@ -2183,34 +2198,37 @@
         "[d2] Settled the Aldric offset without ceremony — handed Silas a torn note strip with her initials and the adjusted figure. Advised briefing Aldric directly on the east furlong situatio",
         "[d2] Sent a child runner to catch Silas before the north gate with a cloth-wrapped message — urgent enough to act on after their dawn parting.",
         "[d2] Sent a follow-up package via Pip — Aldric waterskin reminder and a vial of pre-Transition purification tabs from her own stock.",
-        "[d5] Greeted Calvar directly on sight — used Dara's phrase back unprompted, extended her hand to him first. Already operational."
+        "[d5] Greeted Calvar directly on sight — used Dara's phrase back unprompted, extended her hand to him first. Already operational.",
+        "[d5] Confirmed iron sleeves without hesitation and watched Calvar's face when she said it — reading his reaction as diagnostic data. Received the document roll's placement on her counte"
       ],
       "knownFacts": [
-        "Sorel: spice-broker, wintered in the Edge District two years running, not heard from in a season",
-        "Leth: archivist type, kept careful records, Mara expects her still resident in the Edge District",
-        "Mara keeps expedition logic running in the background once she knows a search is happening",
         "Aldric sometimes has cured winter-butchering bladder that works as a waterskin",
         "Aldric has been watching the catch numbers and not saying anything out loud — he'll want to connect the pieces when told about the east furlong",
         "Holds pre-Transition purification tabs — possibly one of the last stocks in the valley",
         "Acts proactively on expedition logistics even after a party has departed",
-        "Silas returned with someone who matches the 'knows what they're looking at' criterion — she recognized it immediately"
+        "Silas returned with someone who matches the 'knows what they're looking at' criterion — she recognized it immediately",
+        "Calvar asks about intake sleeve material as a first diagnostic — iron matters to his read",
+        "Calvar defers authority explicitly — he is a witness, not a claimant",
+        "The document roll is now on her counter; the question of its destination is hers to answer"
       ],
       "skillsObserved": [
-        "accurate recall of local relationships and property arrangem",
-        "producing Edge District contact names from memory without pr",
         "filing civic information without naming a price",
         "rapid trail-kit assembly from known inventory",
         "proactive trail advice without being asked",
-        "proactive expedition resupply from personal stock without pr"
+        "proactive expedition resupply from personal stock without pr",
+        "reading a technical expert's reaction as diagnostic data",
+        "holding a significant object's authority question without ru"
       ],
       "status": "active",
-      "statusNote": "At her store, ledger open, now face to face with Calvar — ready for the briefing.",
+      "statusNote": "At her store — document roll on counter, Calvar briefing now fully underway.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
       },
       "gender": "woman",
-      "pronouns": "she/her"
+      "pronouns": "she/her",
+      "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Mara%20Wells%2C%20woman%2C%20Village%20supply%20store%20operator%2C%20Millbrook%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=8967&nologo=true",
+      "_portraitTier": "devoted"
     },
     "corvin": {
       "id": "corvin",
@@ -2491,7 +2509,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d5] Received a full briefing on Millbrook — people, layout, stakes. Asked one practical question (intake sleeve material: iron, pre-Transition). Filed the rest without comment.",
         "[d5] Named Pell's father as exacting — said he would have been pleased by the forge. Filed it without more, which was the right amount.",
         "[d5] Watching Silas's Palework read at the ford without interruption — absorbing the assessment.",
         "[d5] Right hand found the document roll inside his coat the moment the figures appeared — document is his priority, clear without words.",
@@ -2500,28 +2517,29 @@
         "[d5] Watched the hatchet change hands without expression — right hand finally left his coat. The document is safe.",
         "[d5] Right hand finally out of his coat entirely — document safe, watching the two men go with quiet assessment.",
         "[d5] Arrived in Millbrook for the first time — studied the drainage cut on the road approach without comment. Now reading the village layout from just inside the north gate.",
-        "[d5] Entering Mara's store — she came around the counter for him, hand extended. First real introduction in Millbrook."
+        "[d5] Entering Mara's store — she came around the counter for him, hand extended. First real introduction in Millbrook.",
+        "[d5] Set the document roll on Mara's counter unprompted — named himself witness, not authority, and deferred to her judgment on whose hands it belongs in. Asked about intake sleeve mate"
       ],
       "knownFacts": [
-        "A man who filed the seventh-band specification and understood its implications would have been a natural target for Grael's method",
-        "Millbrook layout: Echo River, west bank, terraced gardens, two water wheels, well, dock",
-        "Key people: Aldric (smokehouse, catch-numbers), Dara Holt (east-channel, week-five deadline), Mara Wells (supply store)",
         "The valley knows the water is wrong and has been pretending otherwise",
         "Pell's father was exacting in his teaching — Calvar holds this as the whole of the man he knew",
         "Millbrook's visual layout — water wheels, lane structure, smokehouse, well positions — observed on arrival",
         "Noticed something at a road drainage cut on approach; did not name it aloud",
-        "Mara Wells is the right first contact — she already knows something is wrong and is ready to hear it confirmed"
+        "Mara Wells is the right first contact — she already knows something is wrong and is ready to hear it confirmed",
+        "Millbrook's intake sleeves are iron — filed as a load-bearing engineering fact",
+        "Mara Wells is a competent operational contact — her ledger-keeping confirmed it",
+        "The document roll's authority question is deferred to Mara's local knowledge"
       ],
       "skillsObserved": [
-        "sustained positional surveillance from a static interior pos",
-        "holding composure at a chokepoint under time pressure",
         "precise procedural exposition under calm — named the gap, th",
         "naming the complete accountability chain without editorializ",
         "precise disclosure of held knowledge when given the right ha",
-        "filing operational intelligence in sequence without editoria"
+        "filing operational intelligence in sequence without editoria",
+        "self-positioning of authority — named himself witness, not a",
+        "precise diagnostic questioning under a first meeting"
       ],
       "status": "active",
-      "statusNote": "Inside Mara's store, meeting her for the first time — document roll secure, assessing.",
+      "statusNote": "In Mara's store — document roll on the counter, first real Millbrook briefing underway.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
@@ -4017,17 +4035,18 @@
           "[d4] The Attended End confirms Calvar is alive behind his door on World-day 18 afternoon — his stillness is deliberate. The room is holding itself; nothing is ending. He went quiet on purpose.",
           "[d4] Confirmed the cooperage has a rear delivery exit to the cut-lane on the south side — has been tracking the watcher's position for two hours from inside and confirms he hasn't moved.",
           "[d4] Calvar's cooperage rear exit is covered by a relay figure — Grael's watch-net extends to the cut-lane, not only the street face. The network has two eyes, not one.",
-          "[d5] Calvar brought to Mara Wells's store on World-day 18 mid-morning — she recognized his purpose immediately, used Dara's phrase back unprompted, and extended her hand to him first. The briefing chain be"
+          "[d5] Calvar brought to Mara Wells's store on World-day 18 mid-morning — she recognized his purpose immediately, used Dara's phrase back unprompted, and extended her hand to him first. The briefing chain be",
+          "[d5] Calvar placed the document roll on Mara's counter and named himself witness, not authority — deferring to local knowledge on whose hands it belongs in. His first diagnostic question was intake sleeve "
         ],
         "links": [
-          "fendt",
           "vash-lens-grinder-east-room",
           "find-the-engineer",
           "overseer-grael",
           "mara-wells",
           "dara-holt",
           "millbrook",
-          "the-water-crisis"
+          "the-water-crisis",
+          "the-edge-district-ledger"
         ],
         "aliases": [
           "Calvar",
@@ -4286,20 +4305,20 @@
     }
   },
   "tendencies": {
-    "strategic": 17.705109748589564,
-    "cerebral": 11.240104765716461,
-    "social": 9.011942044276001,
-    "generous": 2.8487878305869665,
-    "cautious": 11.116128444227641,
-    "physical": 2.49422678905522,
-    "risky": 0.5513761642501456,
-    "ruthless": 3.612231744859625,
-    "carousing": 0.05534395778519014,
-    "amorous": 6.359765206301244,
-    "patient": 3.0271187274762146,
-    "stealth": 1.4001102528435072,
-    "devotion": 0.7636852607266476,
-    "craft": 0.7189500253651637
+    "strategic": 17.262482004874823,
+    "cerebral": 11.95910214657355,
+    "social": 8.7866434931691,
+    "generous": 2.7775681348222925,
+    "cautious": 11.83822523312195,
+    "physical": 2.4318711193288394,
+    "risky": 0.5375917601438919,
+    "ruthless": 3.5219259512381345,
+    "carousing": 0.053960358840560385,
+    "amorous": 6.200771076143713,
+    "patient": 2.951440759289309,
+    "stealth": 1.3651074965224195,
+    "devotion": 0.7445931292084813,
+    "craft": 0.7009762747310346
   },
   "aptitudes": [
     "strategist",
@@ -4309,10 +4328,18 @@
     "stalwart",
     "charmer"
   ],
-  "actionCount": 474,
+  "actionCount": 475,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
+    {
+      "kind": "portrait",
+      "prompt": "a person, character portrait, named Mara Wells, woman, Village supply store operator, Millbrook",
+      "url": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Mara%20Wells%2C%20woman%2C%20Village%20supply%20store%20operator%2C%20Millbrook%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=8967&nologo=true",
+      "caption": "Mara Wells — devoted",
+      "worldDay": 18,
+      "at": "2026-07-18T15:30:08.163Z"
+    },
     {
       "kind": "portrait",
       "prompt": "a person, character portrait, named Calvar, man, Pre-Transition filtration engineer, Edge District",
@@ -4539,8 +4566,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784388399316,
-  "rev": 689,
+  "updatedAt": 1784388608164,
+  "rev": 690,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4843,14 +4870,6 @@
             },
             {
               "kind": "interact",
-              "day": 4
-            },
-            {
-              "kind": "interact",
-              "day": 4
-            },
-            {
-              "kind": "interact",
               "day": 5
             },
             {
@@ -4895,6 +4914,14 @@
             },
             {
               "kind": "interact",
+              "day": 5
+            },
+            {
+              "kind": "interact",
+              "day": 5
+            },
+            {
+              "kind": "fact",
               "day": 5
             },
             {
@@ -5571,7 +5598,7 @@
   "syncedAt": 1784382065804,
   "teachers": {},
   "regionsKnown": {
-    "valley": 291
+    "valley": 292
   },
   "foreclosed": [
     "rootkin",
@@ -5626,10 +5653,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T15:26:39.310Z",
+      "lastAt": "2026-07-18T15:30:08.157Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 16
+      "beats": 17
     }
   ],
   "company": [

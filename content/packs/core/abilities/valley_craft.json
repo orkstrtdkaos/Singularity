@@ -722,19 +722,34 @@
           "rank": 1,
           "name": "Hunter's Strike",
           "grants": "Strike effectively with common weapons; land a killing blow on beast or foe.",
-          "cannot": "No warrior's forms; one target, honest force."
+          "cannot": "No warrior's forms; one target, honest force.",
+          "harmRung": "lethal",
+          "functions": [
+            "strike"
+          ],
+          "gains": "broaden"
         },
         {
           "rank": 2,
           "name": "The Clean Kill",
           "grants": "Strike where a thing actually ends — quickly, without waste, without suffering you did not need.",
-          "cannot": "Clean is a discipline, not a mercy. The animal is still dead, and you still did it."
+          "cannot": "Clean is a discipline, not a mercy. The animal is still dead, and you still did it.",
+          "harmRung": "lethal",
+          "functions": [
+            "strike"
+          ],
+          "gains": "deepen"
         },
         {
           "rank": 3,
           "name": "The Strike That Feeds",
           "grants": "Nothing is wasted — the strike, the taking, the use. The old Valley ethic made into a single motion.",
-          "cannot": "It is a hunter's craft, not a soldier's. Turned on people it is exactly as ugly as it sounds."
+          "cannot": "It is a hunter's craft, not a soldier's. Turned on people it is exactly as ugly as it sounds.",
+          "harmRung": "lethal",
+          "functions": [
+            "strike"
+          ],
+          "gains": "deepen"
         }
       ],
       "challengeTypes": [

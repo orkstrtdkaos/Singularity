@@ -182,7 +182,7 @@
         {
           "rank": 3,
           "name": "The Hour Known",
-          "grants": "The dying stands plain: its cause, its trajectory, and what would turn it aside — if anything would. The Ashwarden reads a living thing's end as clearly as its beginning.",
+          "grants": "The dying stands plain: you perceive its cause, its trajectory, and what would turn it aside — if anything would. The Ashwarden reads a living thing's end as clearly as its beginning, and can say aloud what is present in them right now.",
           "cannot": "Some endings have no turning-aside. Deathsense does not make endings negotiable; it makes them visible.",
           "functions": [
             "foresee",
@@ -226,7 +226,7 @@
         {
           "rank": 1,
           "name": "Lifesense",
-          "grants": "Feel living things through walls and dark; judge their vigor; notice one hiding.",
+          "grants": "Perceive living things through walls and dark — how many, where, and how strong; judge their vigor; notice one holding still to avoid being found.",
           "cannot": "Vigor, not identity; the barely-alive read faint.",
           "functions": [
             "reveal"
@@ -330,8 +330,7 @@
       },
       "functions": [
         "break",
-        "hinder",
-        "strike"
+        "hinder"
       ],
       "narrationHints": "Touch, and the quick goes out of a thing — a vine, a lock's wooden pin, a reaching hand.",
       "description": "Hasten decay in a thing — rot wood, wilt growth, age a structure past its holding. Palework's edge turned on the material world. The Grey Hand handles people; Wither handles everything else.",
@@ -367,10 +366,9 @@
           "cannot": "The Ashwardens permit this only against what should end. Used as a weapon it marks the wielder, and the marking is visible to everyone who has ever seen Palework.",
           "functions": [
             "hinder",
-            "break",
-            "strike"
+            "break"
           ],
-          "gains": "broaden",
+          "gains": "deepen",
           "harmRung": "damaging"
         }
       ],
@@ -566,8 +564,7 @@
         "body_mind": -0.2
       },
       "functions": [
-        "hinder",
-        "strike"
+        "hinder"
       ],
       "narrationHints": "The strength goes out of him like water out of a cracked jar, and he can feel it going.",
       "description": "Enfeeblement. You take the vigour out of a living thing by touch or by near-hand — not its life, its STRENGTH. It is still standing. It simply cannot do what it could a moment ago.",
@@ -601,10 +598,9 @@
           "grants": "Weaken a group, or weaken one thing so thoroughly it cannot stand.",
           "cannot": "What you have weakened this far is nearly dead, and the Ashwardens will ask whether you meant to go that far.",
           "functions": [
-            "hinder",
-            "strike"
+            "hinder"
           ],
-          "gains": "broaden",
+          "gains": "deepen",
           "harmRung": "incapacitating"
         }
       ],
@@ -686,7 +682,6 @@
       },
       "functions": [
         "bind",
-        "foresee",
         "hinder"
       ],
       "narrationHints": "He feels his own ending arrive early — not as a thought, as a temperature.",
@@ -723,10 +718,9 @@
           "cannot": "Some of them will thank you. Some of them will never be right again. You will not be able to tell in advance which.",
           "functions": [
             "hinder",
-            "bind",
-            "foresee"
+            "bind"
           ],
-          "gains": "broaden",
+          "gains": "deepen",
           "harmRung": "incapacitating"
         }
       ],

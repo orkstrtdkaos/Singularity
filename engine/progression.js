@@ -146,6 +146,7 @@ export function retroNativeGrants(character, rules) {
 export function seedInnateSubstrate(character, originRecord = {}, catalog = {}) {
   character.precursorAccess = character.precursorAccess || [];
   character.livingCurrentAccess = character.livingCurrentAccess || [];
+  character.wildCurrentAccess = character.wildCurrentAccess || [];
   const seeded = [];
   const seed = (ids, list, sys) => {
     for (const id of ids || []) {
@@ -154,6 +155,7 @@ export function seedInnateSubstrate(character, originRecord = {}, catalog = {}) 
   };
   seed(originRecord.innatePrecursor, character.precursorAccess, "precursor");
   seed(originRecord.innateLivingCurrent, character.livingCurrentAccess, "living_current");
+  seed(originRecord.wildCurrent, character.wildCurrentAccess, "wild_current"); // SNG-140: the Wild Half (churnfolk/abyssal)
   character.braidDiscount = originRecord.braidAffinity?.discount || 0; // derived; harmless to restamp
   return seeded;
 }
@@ -282,6 +284,12 @@ export function effectiveLevelReq(ab, character, rules) {
     // seeded into livingCurrentAccess at creation. Locked for everyone else exactly like precursor is;
     // access is per-ability (the innate base), then grown by the normal level/point path.
     return (character.livingCurrentAccess || []).includes(ab.id) ? base : null;
+  }
+  if (sys === "wild_current") {
+    // SNG-140: the TANGLED substrate — both currents wild, innate to the Wild Half (churnfolk/abyssal),
+    // seeded into wildCurrentAccess at creation. Same per-ability innate-access gate as precursor/living;
+    // deeper wild craft opens via unlockSubstrate (SNG-141). The wildness is in the RESOLVER, not the gate.
+    return (character.wildCurrentAccess || []).includes(ab.id) ? base : null;
   }
   if (origin === "valley") return base;
   if (sys === origin) return base;
@@ -446,7 +454,7 @@ export function learnAbility(character, abilityId, catalog, rules, opts = {}) {
   // SNG-131: precursor AND living_current are per-ability innate-access systems (seeded by origin, then
   // grown) — both route to effectiveLevelReq's access gate, NOT the domain gate (else any rootkin-domain
   // character could learn the living current, defeating "innate to the people").
-  const innateAccess = ab.powerSystem === "precursor" || ab.powerSystem === "living_current";
+  const innateAccess = ab.powerSystem === "precursor" || ab.powerSystem === "living_current" || ab.powerSystem === "wild_current";
   const req = ab.accord ? (ab.levelReq || 1)
     : innateAccess ? effectiveLevelReq(ab, character, rules)
     : (character?.domains?.primary && idx) ? (domainGateFor(ab, character, idx).allowed ? (ab.levelReq || 1) : null)

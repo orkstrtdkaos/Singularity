@@ -131,10 +131,18 @@ export function resolveAction(ctx, rng = Math.random) {
   const chance = successChance(ctx);
   const roll = Math.floor(rng() * 100) + 1;
   const d = rules.d100;
-  const critLow = d.critSuccessMax + (ctx.aptitudeMods?.critSuccessBonus || 0);
+  let critLow = d.critSuccessMax + (ctx.aptitudeMods?.critSuccessBonus || 0);
   let critHigh = d.critFailMin - (ctx.aptitudeMods?.critFailPenalty || 0);
   // Novel use is volatile: the crit-failure band widens — reach exceeding grasp can HURT
   if (ctx.action.novel && !ctx.action.discoveryBonus) critHigh -= rules.novel?.critFailWiden ?? 3;
+  // SNG-140: a WILD-current craft channels both substrates untamed — the tangled current amplifies BOTH
+  // tails, upside-forward: more likely to bloom past what you aimed (crit-success widens MORE) AND more
+  // likely to slip (crit-failure widens, a real but smaller tail). "Joyous, generous, and lethally
+  // unreliable" — backfire lands only on a genuine crit-fail, never a flat per-cast penalty. Data-tunable.
+  if (ctx.action.wildVariance) {
+    critLow += rules.wild?.critSuccessWiden ?? 6;
+    critHigh -= rules.wild?.critFailWiden ?? 3;
+  }
 
   let degree;
   if (roll <= critLow) degree = "crit_success";

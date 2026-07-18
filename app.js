@@ -49,7 +49,7 @@ import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challe
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.102";
+const APP_VERSION = "1.8.103";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3009,6 +3009,8 @@ async function onChoice(choice) {
     axes: choice.axes || {}, difficulty: choice.difficulty || 0, intentTags: choice.intentTags || [], abilityLevel,
     tags: choice.intentTags || [], planned: (choice.intentTags || []).some(t => ["plan", "prepare", "scout"].includes(t)),
     novel: !!choice.novel, comboAbilities: choice.comboAbilities || [], noveltyHint: choice.noveltyHint || "",
+    // SNG-140: a wild_current craft carries the tangled current's variance — the resolver widens both crit bands
+    wildVariance: [choice.abilityId, ...(choice.comboAbilities || [])].filter(Boolean).some(id => { const ab = fullCatalog()[id]; return !!(ab?.wildVariance || ab?.powerSystem === "wild_current"); }),
     travelTo: choice.travelTo || null, exactWords: choice.exactWords || null // SNG-122: travel destination + literal words for travel-intent detection
   };
   // accepting ripe emergence (GM-offered choice carrying an engine-verified emergenceId)

@@ -3407,6 +3407,50 @@ await (async () => {
   check("SNG-141: unlockSubstrate survives a truncated reply (in the salvageOps key list)", /"unlockSubstrate", "unlockPrecursor"/.test(gmSrc));
 })();
 
+// --- SNG-140: the Wild Half — the tangled substrate (wild_current: innate seed + gate + resolver variance) ---
+(async () => {
+  const { resolveAction } = await import("../engine/resolve.js");
+  const wcat = {
+    the_churns_gift: { id: "the_churns_gift", powerSystem: "wild_current", levelReq: 3, wildVariance: true },
+    the_wild_bloom: { id: "the_wild_bloom", powerSystem: "wild_current", levelReq: 4, wildVariance: true },
+    address_sense: { id: "address_sense", powerSystem: "precursor", levelReq: 2 }
+  };
+
+  // seed: a Wild Half origin seeds wildCurrentAccess (churnfolk/abyssal), powerSystem-validated
+  const churn = { origin: "churnfolk" };
+  const seeded = seedInnateSubstrate(churn, { wildCurrent: ["the_churns_gift"] }, wcat);
+  check("SNG-140: a Wild Half origin is seeded innate WILD-current access", churn.wildCurrentAccess.includes("the_churns_gift") && seeded.includes("the_churns_gift"));
+  check("SNG-140: abyssal can carry BOTH innatePrecursor AND wildCurrent (the canon duality)", (() => { const ab = { origin: "abyssal" }; seedInnateSubstrate(ab, { innatePrecursor: ["address_sense"], wildCurrent: ["the_churns_gift"] }, wcat); return ab.precursorAccess.includes("address_sense") && ab.wildCurrentAccess.includes("the_churns_gift"); })());
+  check("SNG-140: a mis-authored wildCurrent id (wrong powerSystem) is REFUSED", (() => { const x = {}; seedInnateSubstrate(x, { wildCurrent: ["address_sense"] }, wcat); return !x.wildCurrentAccess.includes("address_sense"); })());
+
+  // gate: wild_current is LOCKED without access, learnable once seeded — same shape as precursor/living
+  check("SNG-140: wild_current is LOCKED without the innate access", effectiveLevelReq(wcat.the_churns_gift, { wildCurrentAccess: [] }, {}) === null);
+  check("SNG-140: wild_current returns its levelReq once seeded", effectiveLevelReq(wcat.the_churns_gift, { wildCurrentAccess: ["the_churns_gift"] }, {}) === 3);
+  const wlearn = learnAbility({ origin: "churnfolk", domains: { primary: "churnfolk" }, level: 3, skillPoints: 3, abilities: [], wildCurrentAccess: ["the_churns_gift"] }, "the_churns_gift", wcat, {}, {});
+  check("SNG-140: a seeded Wild Half character can learn the wild craft (access gates it, not domain)", wlearn.ok === true);
+
+  // resolver variance: wildVariance widens BOTH crit bands (upside-forward), vs a plain action. Reuses the
+  // module-scope char/action/loc/rules (real loaded rules incl. the `wild` knob).
+  const degAt = (n, extra) => resolveAction({ character: char, action: { ...action, ...extra }, location: loc, rules }, () => (n - 1) / 100).degree; // force roll n
+  const csMax = rules.d100.critSuccessMax, cfMin = rules.d100.critFailMin;
+  const upRoll = csMax + 2;   // just past the plain crit-success band, inside the wild one
+  const tailRoll = cfMin - 2; // just shy of the plain crit-fail band, inside the wild one
+  check("SNG-140: a WILD craft crit-SUCCEEDS on a roll a plain action would not (upside band widened)", degAt(upRoll, {}) !== "crit_success" && degAt(upRoll, { wildVariance: true }) === "crit_success");
+  check("SNG-140: a WILD craft crit-FAILS on a high roll a plain action would not (the real tail)", degAt(tailRoll, {}) !== "crit_failure" && degAt(tailRoll, { wildVariance: true }) === "crit_failure");
+  check("SNG-140: the upside is FORWARD of the tail (crit-success widens more than crit-fail)", (rules.wild.critSuccessWiden > rules.wild.critFailWiden));
+
+  // raw-source + real content
+  const appSrc = readFileSync(join(root, "app.js"), "utf8");
+  check("SNG-140: app.js flags an action wildVariance from a wild_current ability", /wildVariance: \[choice\.abilityId[\s\S]{0,140}powerSystem === "wild_current"/.test(appSrc));
+  const resJson = JSON.parse(readFileSync(join(root, "content/packs/core/rules/resolution.json"), "utf8"));
+  check("SNG-140: the wild.critWiden knob is authored + upside-forward", (resJson.wild?.critSuccessWiden || 0) > (resJson.wild?.critFailWiden || 0));
+  const wcReal = JSON.parse(readFileSync(join(root, "content/packs/core/abilities/wild_current.json"), "utf8")).abilities;
+  const origins140 = JSON.parse(readFileSync(join(root, "content/packs/core/rules/origins.json"), "utf8")).origins;
+  const wcIds = new Set(wcReal.map(a => a.id));
+  check("SNG-140 e2e: authored wild_current abilities carry wildVariance", wcReal.every(a => a.powerSystem === "wild_current") && wcReal.some(a => a.wildVariance));
+  check("SNG-140 e2e: churnfolk + abyssal wildCurrent point at REAL wild_current ids", ["churnfolk", "abyssal"].every(id => (origins140.find(o => o.id === id)?.wildCurrent || []).every(x => wcIds.has(x))));
+})();
+
 // --- SNG-076: authored prose is not truncated mid-word ---
 (() => {
   const short = "Fendt is going to be ruined by a piece of paper that does not exist.";

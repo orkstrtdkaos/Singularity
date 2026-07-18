@@ -211,6 +211,11 @@
     "backlashEnergy": 10,
     "discoveryBonus": 20
   },
+  "wild": {
+    "critSuccessWiden": 6,
+    "critFailWiden": 3,
+    "note": "SNG-140: a wild_current (wildVariance) craft widens BOTH crit bands — upside-forward (crit-success +6, crit-fail +3). Potent + generous with a real but smaller tail; the Wild Half's 'lethally unreliable' made tunable."
+  },
   "gambit": {
     "maxSteps": 5,
     "adaptationBase": 1,

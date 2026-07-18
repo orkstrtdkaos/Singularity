@@ -70,7 +70,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.5070927234836696,
+    "spectrumId": -0.48173808730948614,
     "violence_peace": 0.09798375000000001,
     "chaos_order": 0.2085002906812526,
     "mechanical_spiritual": 0.23279962203849028,
@@ -976,126 +976,208 @@
         "player": "Ask Pell what she is thinking right now — plainly, the way she has been answering.",
         "summary": "Pell answers plainly in the cooled bath — she thought there'd be a different register on the other side; instead it's the same, just more room.",
         "narration": "The water has gone from warm to cool around you both, the steam long since thinned to nothing. Pell is still settled against your shoulder, her hands on your forearms — not holding on, just resting there, the weight of them easy and without intent. The junction-conduit warmth comes up through the stone floor and takes some of the chill off the air, but not all of it. Outside, a sudden shift — the light at the partition-window goes flat and gray, and you hear it: rain, quick and decided, ticking against the diffusion panels on the inn's deep-set windows. Early-spring making its mind up about something.\n\nYou ask it the way she has been answering things. Plainly. *What are you thinking right now?*\n\nShe is quiet for a moment — not the managed quiet, not the pause before she files something away. Just the pause of a person actually checking. Her thumb moves once across your forearm, a small unconscious motion, like she is reading the grain.\n\n\"That I'm cold,\" she says, \"and I don't want to move yet.\"\n\nA beat. The rain ticks on.\n\n\"And that I thought —\" She stops. Starts again, more carefully, because she is being precise, not cautious. \"I thought there'd be something different on the other side of this. Some register I hadn't been in before.\" Her voice is low and specific in the way it gets when she means something exactly. \"But it's the same. Just — more of it. More room.\" A short exhale through her nose. \"That's what I'm thinking.\"\n\nHuginn, on his rafter, says nothing. The rain outside makes its small sound against the glass. The bath water is cold enough now that it should matter, and neither of you has moved."
+      },
+      {
+        "player": "Did you accept my Weir mark?  Are you happy?",
+        "summary": "Maret confirms payment is settled and offers road-wisdom about the rain.",
+        "narration": "You find Maret Doss at the foot of the stairs — she is carrying a folded stack of linens with the economical precision of someone who has done this ten thousand times and made peace with every one of them. She doesn't stop walking when she answers you.\n\n\"The Weir mark's in the ledger.\" She doesn't look up. \"Settled at check-in. You know it is.\"\n\nShe sets the linens on the hall bench and smooths the top fold once with the back of her hand. Then she does look at you — briefly, the flat professional attention of a woman who reads guests the way a river-reader reads weather: fast, accurate, and without opinion about what she finds.\n\n\"Happy's not my trade,\" she says. \"Satisfied — yes. The trough will want draining before the third hour. The rain's going to sit on the roof until supper and then clear. The road to Millbrook runs wetter than it looks for the first quarter-mile after a squall, so if you're leaving today, wait for the mud to settle or plan on slower going than you'd like.\"\n\nShe picks the linens back up. The conversation, from her perspective, has concluded — thoroughly and without unkindness."
       }
     ],
     "lastTurn": {
-      "narration": "The water has gone from warm to cool around you both, the steam long since thinned to nothing. Pell is still settled against your shoulder, her hands on your forearms — not holding on, just resting there, the weight of them easy and without intent. The junction-conduit warmth comes up through the stone floor and takes some of the chill off the air, but not all of it. Outside, a sudden shift — the light at the partition-window goes flat and gray, and you hear it: rain, quick and decided, ticking against the diffusion panels on the inn's deep-set windows. Early-spring making its mind up about something.\n\nYou ask it the way she has been answering things. Plainly. *What are you thinking right now?*\n\nShe is quiet for a moment — not the managed quiet, not the pause before she files something away. Just the pause of a person actually checking. Her thumb moves once across your forearm, a small unconscious motion, like she is reading the grain.\n\n\"That I'm cold,\" she says, \"and I don't want to move yet.\"\n\nA beat. The rain ticks on.\n\n\"And that I thought —\" She stops. Starts again, more carefully, because she is being precise, not cautious. \"I thought there'd be something different on the other side of this. Some register I hadn't been in before.\" Her voice is low and specific in the way it gets when she means something exactly. \"But it's the same. Just — more of it. More room.\" A short exhale through her nose. \"That's what I'm thinking.\"\n\nHuginn, on his rafter, says nothing. The rain outside makes its small sound against the glass. The bath water is cold enough now that it should matter, and neither of you has moved.",
-      "sceneSummary": "Pell answers plainly in the cooled bath — she thought there'd be a different register on the other side; instead it's the same, just more room.",
+      "narration": "You find Maret Doss at the foot of the stairs — she is carrying a folded stack of linens with the economical precision of someone who has done this ten thousand times and made peace with every one of them. She doesn't stop walking when she answers you.\n\n\"The Weir mark's in the ledger.\" She doesn't look up. \"Settled at check-in. You know it is.\"\n\nShe sets the linens on the hall bench and smooths the top fold once with the back of her hand. Then she does look at you — briefly, the flat professional attention of a woman who reads guests the way a river-reader reads weather: fast, accurate, and without opinion about what she finds.\n\n\"Happy's not my trade,\" she says. \"Satisfied — yes. The trough will want draining before the third hour. The rain's going to sit on the roof until supper and then clear. The road to Millbrook runs wetter than it looks for the first quarter-mile after a squall, so if you're leaving today, wait for the mud to settle or plan on slower going than you'd like.\"\n\nShe picks the linens back up. The conversation, from her perspective, has concluded — thoroughly and without unkindness.",
+      "sceneSummary": "Maret confirms payment is settled and offers road-wisdom about the rain.",
       "choices": [
         {
-          "label": "Tell her what you're thinking — the same plainness back to her.",
+          "label": "Ask Maret about the conduit pulse at the third hour of the night — obliquely, as an infrastructure question, not naming what you saw",
           "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
+          "subAttribute": "insight",
+          "axes": {
+            "falsehood_truth": 0.4
+          },
+          "difficulty": 15,
           "intentTags": [
-            "romantic"
+            "study",
+            "careful"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Get out of the cold water — together, without making it a ceremony.",
+          "label": "Accept her road advice and go back upstairs to dress and pack — wait out the rain, leave when the mud settles",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "travel",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Thank her and leave now anyway — the rain is a squall, the road is manageable, and Calvar's lamp has been dark since morning",
           "attribute": "physical",
           "subAttribute": "agility",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "travel"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Ask what 'more room' means to her — press gently on the specific thing she said.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
+          "label": "Ask Maret, straight-faced, about the guest in the corner room who hasn't come down today — the one she hasn't mentioned",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.3
+          },
+          "difficulty": 15,
           "intentTags": [
-            "study"
+            "study",
+            "negotiate"
           ],
-          "trivial": true
-        },
-        {
-          "label": "Stay still a moment longer — let her have the cold and the rain and the room, without filling it.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "calm"
-          ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
       "scene": {
-        "setting": "The Low Lamp Inn bath trough room — early afternoon, water now cold, steam entirely gone, junction-conduit warmth still present through the pale stone floor. A sudden squall has moved in outside — rain ticking against the diffusion panels, the light at the partition-window gone flat and gray.",
+        "setting": "The Low Lamp Inn hallway at the foot of the stairs — pale sandstone, junction-conduit warmth rising through the floor, rain audible against the diffusion panels outside. Afternoon light flat and gray through the deep-set windows.",
         "npcsPresent": [
           {
-            "name": "Pell",
-            "state": "Settled against Silas's shoulder, hands on his forearms, having just answered plainly. No management in her anywhere."
+            "name": "Maret Doss",
+            "state": "Carrying a folded stack of linens, now picking them back up — conversation concluded from her side."
           },
           {
             "name": "Huginn",
-            "state": "On his rafter, one eye toward the lane. Silent. The timing of the silence is a comment."
+            "state": "On his rafter upstairs. Silent."
+          },
+          {
+            "name": "Pell",
+            "state": "Upstairs in the bath trough room, cooled water, no management in her anywhere."
           }
         ],
         "objects": [
-          "Memory (spear) — leaned in the corner, collar rune settled and at rest",
-          "Bath trough — filled with cold water, steam gone",
-          "Partition — wooden, does not reach the ceiling",
-          "Copper kettle — emptied, set back near the coals",
-          "Tallow candle on the window sill — burned out, wick cold",
-          "Low lantern bracket over the inn door — burning oil",
-          "Boots — off, at Silas's bed's foot"
+          "Folded linens — on the hall bench, smoothed once",
+          "Hall bench — against the wall at the stair foot",
+          "Junction-conduit warmth — through the pale stone floor",
+          "Memory (spear) — leaned in the corner of the bath trough room upstairs",
+          "Bath trough — cooled, upstairs",
+          "Boots — at Silas's bed's foot, upstairs"
         ],
         "threads": [
-          "Pell named 'more room' — what she means by it is present in the air, not yet pressed",
-          "Calvar's lamp signal — the morning departure has passed; the group is overdue to move",
-          "The rain outside — a squall, not a storm; will pass, but the road to Millbrook is now wet",
-          "The Edge District Ledger quest remains active — Grael, the annex, the intake log unresolved",
-          "The conduit pulse at the third hour — not an ending, not yet resolved"
+          "The conduit pulse at the third hour — not resolved",
+          "The guest in the corner room who hasn't come down — Maret hasn't mentioned it",
+          "Calvar's lamp signal passed — the group is overdue to move",
+          "The rain — sitting on the roof until supper, per Maret; the road runs wetter than it looks for the first quarter-mile"
         ]
       },
       "npcUpdates": [
         {
-          "op": "update",
-          "npcId": "pell",
-          "name": "Pell",
-          "note": "Answered Silas's plain question plainly — she thought there'd be a different register on the other side, but it's the same, just more room. Said it precisely, not defensively.",
+          "op": "meet",
+          "npcId": "maret-doss",
+          "name": "Maret Doss",
+          "role": "Innkeeper, Low Lamp Inn — Edge District",
+          "description": "A compact woman of sixty-odd years; does not ask your name, your business, or where you're going; reads guests fast and accurately; keeps the ledger and the road-wisdom both, and offers them with equal economy.",
+          "note": "Confirmed the Weir mark is settled in the ledger. Offered unprompted road advice: the road to Millbrook runs wetter than it looks for the first quarter-mile after a squall.",
           "learned": [
-            "Thought there'd be a new register after the consummation; found instead the same one with more space in it — named it as 'more room'"
+            "Does not deal in happy — satisfied is her metric, and she named it plainly",
+            "Knows the road to Millbrook's mud behavior after rain — practical and specific",
+            "The trough wants draining before the third hour"
           ],
-          "statusNote": "In the cold bath trough with Silas — settled, the habit entirely gone, answering plainly and without management."
+          "skillsObserved": [
+            "accurate ledger-keeping without ceremony",
+            "reading a guest's situation and offering exactly relevant practical advice"
+          ],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "At the Low Lamp Inn — running the hall, linens in hand, conversation finished."
+        }
+      ],
+      "factUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "Maret Doss is the innkeeper — keeps the ledger, does not ask after guests' business, knows the local roads in detail. The road to Millbrook runs wetter than it looks for the first quarter-mile after a squall.",
+          "subPlace": {
+            "name": "Low Lamp Inn hallway",
+            "note": "Foot of the stairs — pale sandstone, hall bench, junction-conduit warmth, where Maret moves between floors.",
+            "visited": true
+          }
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A quiet exchange in the cooling bath — less than a quarter hour"
-      }
+        "why": "A brief exchange at the foot of the stairs."
+      },
+      "codexUpdates": [
+        {
+          "topic": "maret-doss",
+          "label": "Maret Doss",
+          "kind": "person",
+          "entityId": "maret-doss",
+          "fact": "Innkeeper of the Low Lamp Inn — keeps the ledger without ceremony, reads guests fast, offers practical road-knowledge without being asked. Confirmed Silas's Weir mark settled at check-in. Knows the Millbrook road runs wetter than it looks for the first quarter-mile after rain.",
+          "links": [
+            "radiant-plateau-edge",
+            "find-the-engineer",
+            "the-low-lamp-inn"
+          ]
+        }
+      ],
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Low Lamp Inn bath trough room — early afternoon, water now cold, steam entirely gone, junction-conduit warmth still present through the pale stone floor. A sudden squall has moved in outside — rain ticking against the diffusion panels, the light at the partition-window gone flat and gray.",
+      "setting": "The Low Lamp Inn hallway at the foot of the stairs — pale sandstone, junction-conduit warmth rising through the floor, rain audible against the diffusion panels outside. Afternoon light flat and gray through the deep-set windows.",
       "npcsPresent": [
         {
-          "name": "Pell",
-          "state": "Settled against Silas's shoulder, hands on his forearms, having just answered plainly. No management in her anywhere."
+          "name": "Maret Doss",
+          "state": "Carrying a folded stack of linens, now picking them back up — conversation concluded from her side."
         },
         {
           "name": "Huginn",
-          "state": "On his rafter, one eye toward the lane. Silent. The timing of the silence is a comment."
+          "state": "On his rafter upstairs. Silent."
+        },
+        {
+          "name": "Pell",
+          "state": "Upstairs in the bath trough room, cooled water, no management in her anywhere."
         }
       ],
       "objects": [
-        "Memory (spear) — leaned in the corner, collar rune settled and at rest",
-        "Bath trough — filled with cold water, steam gone",
-        "Partition — wooden, does not reach the ceiling",
-        "Copper kettle — emptied, set back near the coals",
-        "Tallow candle on the window sill — burned out, wick cold",
-        "Low lantern bracket over the inn door — burning oil",
-        "Boots — off, at Silas's bed's foot"
+        "Folded linens — on the hall bench, smoothed once",
+        "Hall bench — against the wall at the stair foot",
+        "Junction-conduit warmth — through the pale stone floor",
+        "Memory (spear) — leaned in the corner of the bath trough room upstairs",
+        "Bath trough — cooled, upstairs",
+        "Boots — at Silas's bed's foot, upstairs"
       ],
       "threads": [
-        "Pell named 'more room' — what she means by it is present in the air, not yet pressed",
-        "Calvar's lamp signal — the morning departure has passed; the group is overdue to move",
-        "The rain outside — a squall, not a storm; will pass, but the road to Millbrook is now wet",
-        "The Edge District Ledger quest remains active — Grael, the annex, the intake log unresolved",
-        "The conduit pulse at the third hour — not an ending, not yet resolved"
+        "The conduit pulse at the third hour — not resolved",
+        "The guest in the corner room who hasn't come down — Maret hasn't mentioned it",
+        "Calvar's lamp signal passed — the group is overdue to move",
+        "The rain — sitting on the roof until supper, per Maret; the road runs wetter than it looks for the first quarter-mile"
       ]
     }
   },
@@ -1909,6 +1991,35 @@
         "locationId": "radiant_plateau_edge",
         "day": 3
       }
+    },
+    "maret-doss": {
+      "id": "maret-doss",
+      "name": "Maret Doss",
+      "role": "Innkeeper, Low Lamp Inn — Edge District",
+      "description": "A compact woman of sixty-odd years; does not ask your name, your business, or where you're going; reads guests fast and accurately; keeps the ledger and the road-wisdom both, and offers them with equal economy.",
+      "firstMet": {
+        "locationId": "the-low-lamp-inn",
+        "day": 4
+      },
+      "relationship": 1,
+      "history": [
+        "[d4] Confirmed the Weir mark is settled in the ledger. Offered unprompted road advice: the road to Millbrook runs wetter than it looks for the first quarter-mile after a squall."
+      ],
+      "knownFacts": [
+        "Does not deal in happy — satisfied is her metric, and she named it plainly",
+        "Knows the road to Millbrook's mud behavior after rain — practical and specific",
+        "The trough wants draining before the third hour"
+      ],
+      "skillsObserved": [
+        "accurate ledger-keeping without ceremony",
+        "reading a guest's situation and offering exactly relevant pr"
+      ],
+      "status": "active",
+      "statusNote": "At the Low Lamp Inn — running the hall, linens in hand, conversation finished.",
+      "lastSeen": {
+        "locationId": "the-low-lamp-inn",
+        "day": 4
+      }
     }
   },
   "placeMemory": {
@@ -2097,7 +2208,8 @@
         "[d3] The tallow candle on the window sill burned out on World-day 17 evening during a long quiet sitting — the room continued in junction-conduit light alone.",
         "[d4] The junction conduit beneath the inn pulsed once in the third hour of the night — brighter than its normal output, gone before it could be examined. Silas let it pass; it did not read as an ending.",
         "[d4] The bath trough was filled and shared by Silas and Pell on World-day 17 morning — the cistern tap and junction conduit warmth working without trouble.",
-        "[d4] The bath trough room at the Low Lamp Inn was the site of Silas and Pell's consummation on World-day 17 midday — the water cooled around them, the steam thinned, Huginn relocated to the rafters without"
+        "[d4] The bath trough room at the Low Lamp Inn was the site of Silas and Pell's consummation on World-day 17 midday — the water cooled around them, the steam thinned, Huginn relocated to the rafters without",
+        "[d4] Maret Doss is the innkeeper — keeps the ledger, does not ask after guests' business, knows the local roads in detail. The road to Millbrook runs wetter than it looks for the first quarter-mile after a"
       ],
       "flags": {},
       "lastVisit": 3,
@@ -2120,6 +2232,12 @@
           "day": 4,
           "visited": true,
           "note": "Gravity-fed heated bath trough, wide enough for two; junction conduit feeds the cistern warmth; cedar smell intensifies "
+        },
+        "low-lamp-inn-hallway": {
+          "name": "Low Lamp Inn hallway",
+          "day": 4,
+          "visited": true,
+          "note": "Foot of the stairs — pale sandstone, hall bench, junction-conduit warmth, where Maret moves between floors."
         }
       }
     }
@@ -3297,24 +3415,41 @@
         "aliases": [],
         "createdDay": 3,
         "updatedDay": 3
+      },
+      "maret-doss": {
+        "id": "maret-doss",
+        "label": "Maret Doss",
+        "kind": "person",
+        "facts": [
+          "[d4] Innkeeper of the Low Lamp Inn — keeps the ledger without ceremony, reads guests fast, offers practical road-knowledge without being asked. Confirmed Silas's Weir mark settled at check-in. Knows the Mi"
+        ],
+        "links": [
+          "radiant-plateau-edge",
+          "find-the-engineer",
+          "the-low-lamp-inn"
+        ],
+        "aliases": [],
+        "createdDay": 4,
+        "entityId": "maret-doss",
+        "updatedDay": 4
       }
     }
   },
   "tendencies": {
-    "strategic": 7.939504516289128,
-    "cerebral": 15.627780063550755,
-    "social": 16.560461160029245,
-    "generous": 1.8996735804329197,
-    "cautious": 6.141645865907149,
-    "physical": 0.1890713227698336,
-    "risky": 1.6377571826549033,
-    "ruthless": 0.23410436465687418,
-    "carousing": 0.1643886157148495,
-    "amorous": 17.83852369829997,
-    "patient": 2.3287673233372113,
-    "stealth": 0.19288569508410378,
-    "devotion": 2.2683806485245954,
-    "craft": 0.5177498814947562
+    "strategic": 7.7410169033819,
+    "cerebral": 15.237085561961987,
+    "social": 17.146449631028513,
+    "generous": 1.8521817409220966,
+    "cautious": 5.9881047192594705,
+    "physical": 0.18434453970058776,
+    "risky": 1.5968132530885306,
+    "ruthless": 0.22825175554045232,
+    "carousing": 0.16027890032197825,
+    "amorous": 17.39256060584247,
+    "patient": 2.270548140253781,
+    "stealth": 0.18806355270700117,
+    "devotion": 2.2116711323114804,
+    "craft": 0.5048061344573873
   },
   "aptitudes": [
     "strategist",
@@ -3326,7 +3461,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 431,
+  "actionCount": 432,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3516,8 +3651,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=11860&nologo=true",
-  "updatedAt": 1784332131846,
-  "rev": 612,
+  "updatedAt": 1784332799181,
+  "rev": 613,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4446,7 +4581,7 @@
   "syncedAt": 1784292613822,
   "teachers": {},
   "regionsKnown": {
-    "valley": 247
+    "valley": 248
   },
   "foreclosed": [
     "rootkin",
@@ -4495,10 +4630,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-17T17:39:40.705Z",
-      "lastAt": "2026-07-17T23:48:51.845Z",
+      "lastAt": "2026-07-17T23:59:59.180Z",
       "startDay": 17,
       "endDay": 17,
-      "beats": 55
+      "beats": 56
     }
   ],
   "company": [

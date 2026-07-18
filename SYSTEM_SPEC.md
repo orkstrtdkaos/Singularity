@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Status** | `round-2-complete` — Aevi (PO) authored the DESIGN + CONTRACT layers; **CCode performed ROUND 2 (v1.8.26): every claim substrate-verified against HEAD, all `[CCODE]` markers filled, corrections marked ⚠️ inline.** Ready for Aevi to review the corrections and promote. |
+| **Status** | `round-2-complete + BATCH-11 build` — Aevi (PO) authored the DESIGN + CONTRACT layers; CCode ROUND 2 (v1.8.26) substrate-verified every claim; **BATCH-11 (v1.8.105–108, 2026-07-18) added Law 16 + §23 (the Wiring Contract, machine-gated), SNG-145 intent gates (§11), SNG-148 waygates (§9), the 146a–c/f multiplayer fixes (§18), and 147a/d skill-integrity (ratcheted in `npm test`).** |
 | **Supersedes** | System Specification v1.0 (which predates the great circle, traditions, domains, the generative world, shared canon, and ~20 of the 38 engine modules) |
 | **HEAD verified** | BATCH-11 at **v1.8.105** · confirmed against origin: 52 engine modules · 18 core rules files · 92 locations / 24 regions · 285 abilities / 24 traditions (+3 folk) · 44 combinations · 41 NPCs · 9 companions · 58 random-encounter entries. **Count freshness is now machine-gated** — `tests/wiring_audit.mjs` fails the build when this line drifts from HEAD (the 38/137-era drift, found by BATCH-11 §0, must not recur silently). |
 | **Authoring rule** | Aevi owns §2 (laws), §4–§18 (design + contracts), §21 (process). **CCode owns implementation detail** — module APIs, signatures, dispatch, data flow — marked `[CCODE]`. A claim in this document that contradicts HEAD is a **bug in this document**; report it. |
@@ -35,6 +35,7 @@ A single-player-and-family tabletop RPG run by a language model, in a world whos
 13. **THE FLOORS ARE ABSOLUTE AND RATING-INDEPENDENT.** See §17. No setting, ceiling, GM op, correction, promotion or lens may cross them.
 14. **A repair is not an advance.** Self-healing tools (§13) fix what is *wrong*; they never grant power. Power comes from play.
 15. **⛔ DESIGN CANON LIVES IN CONTENT, NEVER IN THE BACKLOG.** *(Learned: the gambit definition and the multi-mode challenge design were authored on 2026-07-06, lived only in `SPEC_BACKLOG.md`, and were **destroyed by a backlog rewrite**. The number SNG-049 was then reused for something else. Only the content-pack files from that session survived.)* **`SPEC_BACKLOG.md` and `ALERT.md` are for WORK ITEMS. Design canon — definitions, laws, principles, playtest findings — belongs in `content/packs/**` where it is versioned, loaded, and CI-checked.** A finding that exists only in a work-tracking doc is one rewrite from oblivion. Self-healing tools (§13) fix what is *wrong*; they never grant power. Power comes from play.
+16. **EVERY CAPABILITY DECLARES THE PATH BY WHICH A PLAYER REACHES IT.** *(Ratified by PM 2026-07-18, BATCH-11. Learned: `challengeTypes` — 45 values across 285 abilities, schema-valid, CI-green, and read by nothing. And the PO, auditing her own engine, could not tell which capabilities reached the GM without reading `app.js` line by line.)* The GM context is a **declared registry** (`engine/gm_registry.js`), not an emergent assembly. A capability ships complete when its whole chain is stated: **engine → consumer → registered → reachable → contracted** (§23). Registration is what makes a capability real to the model, and the build verifies the registry against the code (`tests/wiring_audit.mjs`).
 
 ---
 
@@ -212,6 +213,7 @@ Form-based. **Parity is mandatory:** identical character shape, same domain coun
   - **⚠️ ROUND-2 FINDING — the design says "sustained action drifts a character's own spectrum" and it does; but it says or implies a place's disposition pulls the character over time, and THAT is not implemented.** Drift comes only from the **action's own axes**, regardless of where you stand. Acting with/against a place changes the *roll* and the *affinity bonus*, never adds location-sourced drift.
   - **Decay:** there is **no decay routine.** The only attenuation is the EWMA's own 5%/turn — and only on turns that re-touch that axis; untouched axes hold their value indefinitely, and precursor drift only ever grows. *If "drift fades when you stop" is intended, it is unbuilt.*
 - **Random encounters:** 58 entries; **22 regions carry their own texture.** Triggers: `onTravel` 35% · `onRest` 15% · `onEnterLocation` 12%. Flavors: beneficial · benign · **beautiful** · dangerous · theft · chase · fight. *A world that only threatens you is not a world.*
+- **Waygates (SNG-148, v1.8.107).** A network of gates; **the Crossing is the hub** — earned by geography, not decreed. Waygates are **content** (Law 2): `waygate: true` + `waygateTier` on a location, `waygateHub` on the hub (all three documented in `location.schema.json`). **Competence is BOTH, and they compose:** *knowledge* (the destination gate is in `knownPlaces` — discovered by travel) and *skill* (`wayfaringTier` = wits/2 + a traveled-breadth bonus, floor 1). Both → the **named** gate; either alone → the **hub**; not at a gate / aiming at a non-gate → **standard travel — a routing outcome, never a failure state**. Transit is real travel (normal hours; a cross-region jump on the play-loop path is a `departure` trigger under SNG-145). Chain per §23: engine `waygate.js` · consumer map **◈ control** (bypasses `connections[]` — that is the point) + gm.js WAYGATE block · registered `waygateDetail` · reachable map control + GM offer (never a menu, never every beat) · contracted here. **Content lane open:** only the Crossing (hub, tier 1) and the Axis Gate (tier 2) are seeded — per-region gates are PO authoring.
 
 ## 9b. Substrate — the second difficulty map (SNG-090, unbuilt)
 
@@ -272,7 +274,8 @@ Form-based. **Parity is mandatory:** identical character shape, same domain coun
   | `discovery{name,description}` | `recordDiscovery` | **engine-vetoed** — only if `resolution.discoveryEligible` |
   | `unlockPrecursor{abilityId,via}` | in-line | only if the ability's `powerSystem === "precursor"` |
   | `newAbility{}` | `sanitizeNewAbility` → `applyNewAbility` | clamp; learned-tier only |
-  | `ledgerEvents[]` | `appendLedger` | only when `syncEnabled()` |
+  | `ledgerEvents[]` | `appendLedger` | only when `syncEnabled()`; **`impactsLocal: true` events HOLD in escrow for the player's confirm (SNG-145 trigger 3)** — narration stands, propagation waits; unanswered never propagates |
+  | `offerIntent{kind,act,cost,options[],default}` | `sanitizeOfferIntent` → `character._pendingIntent` (SNG-145) | kinds `harm\|departure\|irreversible` · options 2–4 · default must be an option (falls back to last) · **gambit discipline: emitting it forbids also emitting the act's effects that turn** · engine-side gates (declared lethal cast, cross-region travel) fire pre-dice in `onChoice` and never involve the GM |
   | `sceneEnded` (bool) | chronicle push + scene reset | — |
   | `generateRequest[]` | `handleGenerateRequests` — **in the outer `runGM`, not `applyTurn`** | ≤3/call + per-scene governor (§13) |
   | `imagePrompt` (string) | outer `runGM` — **not `applyTurn`** | gated `imagesEnabled()` + ≤1 art/scene; 300-char slice (§16) |
@@ -353,6 +356,8 @@ Every quest (`quest_structure.json`) carries:
 ## 18. Sync & Multiplayer
 
 - **Transport:** GitHub, via `sync.js`. **Single-owner writes** (your character, your profile) + **append-only ledgers** + `pushMergedFile` (read-merge-write-retry) so concurrent writers never clobber (Law 7).
+- **⛔ THE SHA AND THE CONTENT MUST COME FROM THE SAME READ (146a, v1.8.105).** *(Learned: `pushSceneWithMerge` computed the next scene from a T0 read but PUT with a fresh T1 sha via `pushOwnedFile` — a concurrent beat between the reads was silently lost, no conflict ever raised, and the documented retry loop never fired. The optimistic-concurrency token was re-acquired after the decision it guarded.)* Every shared-file write runs its mutate INSIDE `pushMergedFile`'s callback against the fresh read of each attempt. Acceptance is LIVE, not a code read: `scripts/verify_scene_merge.mjs` (two clients, same window, both beats survive) — rerun it after any change to the scene write path. **Honest residual:** a `GH_TIMEOUT` after a server-side apply retries safely for beats (`mergeBeat` is idempotent by `(by,at)`), but `setEncounterState`/`removeMember` stay last-writer-wins on their fields.
+- **Scene lifecycle + discovery (146b/c, v1.8.105):** scenes carry `closedAt`; the last member leaving closes; idle-past-72h expires LAZILY (no write needed). The join path reads `world/scenes/_open_index.json` — one small file maintained at the write choke point (fire-and-forget merged write, self-pruning), bound applied AFTER the open-filter, scene file remains the truth. Legacy directory walk only until the first indexed write.
 - **Identity:** one person, one profile — resolved by **person**, not per-device key. *(Erik became two Eriks because identity was keyed per device.)*
 - **Cross-device:** on open, pull the authoritative latest and reconcile. **⛔ STALE-LOCAL-OVERWRITE GUARD — non-negotiable, fires in BOTH directions:** never let an older save clobber a fresher one; on a genuine both-advanced conflict keep remote, preserve local as a recovery copy, and surface it.
 - **Party (pending):** a **LEADER** decides party-level things — where to travel, which thread, whether to accept an offer. **Turn-by-turn stays each player's own** — combat, skills, gambits. **Your character is always yours; the leader never plays your turn.**
@@ -441,6 +446,28 @@ Plus: suites + `parse_probe` green, **fresh-port boot check** (a temporal-dead-z
 - **No passive energy regen anywhere** and `energy.regenPerRest` is a dead key (§4). Intended-or-not is a design call, but the dead key should be removed so it stops implying a rule that isn't wired.
 - **Several module headers carry stale self-descriptions** (`reputation.js` "(v0.3)", `state.js` "localStorage-only / sync optional", `worldtime.js`) — the *code* is current; the *comments* predate the shared-world subsystem. Cosmetic, but they mislead a reader doing exactly what Round 2 is for.
 - **`parse_probe` cannot reach `boot()`.** Boot-time regressions (TDZ, a bad import) pass every headless suite and only surface in a real browser on a fresh port. Until a headless-DOM boot test exists, the fresh-port leg is load-bearing and must not be skipped.
+- **⚠️ SUPERSEDED CLAIM, corrected by BATCH-11 ROUND 2 (2026-07-18): `stateOps` is BUILT.** The footnote below records it "unbuilt" as of the v1.8.26 round — it was built the same day by SNG-070 (`corrections.js:32 applyStateOps`, called in `applyTurn`, tested), and extended by SNG-137/143. The stale claim survived here for six days and propagated into a new spec — the documentation-layer version of the partial-surface failure Law 16 exists to stop. Status claims in this section now age against `po/results/` before reuse.
+- **✅ RESOLVED by BATCH-11 (v1.8.105–107):** shared-scene lost-update fixed at the transport (146a — `pushSceneWithMerge` → `pushMergedFile`; live two-client acceptance test in `scripts/verify_scene_merge.mjs`) · scene lifecycle + open-scene index (146b/c) · personalArc startable (146f — the listing/start asymmetry at the quest log) · GM context registry + wiring audit gate (§23) · intent gates (SNG-145) · waygates (SNG-148) · `challengeProfile` retired (147a) · skill-integrity ratchet standing in `npm test` (147d).
+
+## 23. The Wiring Contract (Law 16, BATCH-11)
+
+**23.1 The reachability chain.** Every capability carries five links. It is *done* when all five hold — not when the code works.
+
+| # | Link | Means | Verified by |
+|---|---|---|---|
+| 1 | **ENGINE** | the module and its exports exist | import graph |
+| 2 | **CONSUMER** | something calls it | reference sweep |
+| 3 | **REGISTERED** | declared where the model can meet it — a **context key** in `engine/gm_registry.js` (`GM_CONTEXT`), or an **op** in the gm.js reply contract | registry ↔ code diff (`tests/wiring_audit.mjs`) |
+| 4 | **REACHABLE** | a player can trigger it — a UI control, or a GM offer | registry `reachedBy` |
+| 5 | **CONTRACTED** | this document describes it | spec cross-ref |
+
+Links 1–2 are what we build and already check. **Links 3–4 are where intent used to be dropped; the audit now checks them.**
+
+**23.2 The GM Context Registry.** `engine/gm_registry.js` — one declared table, the single source of truth for what the model is told. One row per contributor: `{ key, builder, carries, reachedBy, spec, views, build(env) }`. `app.js` assembles the GM context **by iterating this registry** at all four call sites (`turn` / `ask` / `quest` / `gambit` views — ROUND 2 found four, not three), via one `gmEnv()` bag. Prompt ordering stays owned by `gm.js tierParts` — the registry is a bag of keys, which is what makes one table serve four sites. Site divergences ride env overrides (`focusQuest`, `recentTurnsWindow`), not forked tables. Ops (offerIntent, stateOps, …) register in the gm.js reply contract — the op vocabulary is the registry's sibling, checked by the salvage whitelist.
+
+**23.3 The gate.** `tests/wiring_audit.mjs` runs in `npm test` and FAILS on: registry ↔ `tierParts` parity drift (both directions — a key consumed but never provided can never land; a row never read is a value with no reader) · a hand-listed ctx literal at any gmTurn/gmAsk call site · SYSTEM_SPEC header count drift (this file's certified counts vs HEAD — the 38/137-era drift must not recur silently) · skill-integrity ratchet regression (`tests/wiring_baseline.json`: missing `harmRung` 140 / non-canon challenge types 89 / combat-claimed-not-taught 105 may only DECREASE; invalid enum values are always zero; `challengeProfile` stays retired). Advisory (printed, never fails): orphan-export sweep, silenced per-export with `// registry:internal`. *(The audit red-gated its own author's second ship for an undercounted header — the gate works on the people who built it.)*
+
+**23.4 Authoring rule.** A spec is not promotable until it names, for each capability it introduces, the five links. Anything left blank is a declared gap, not an oversight.
 
 ---
 

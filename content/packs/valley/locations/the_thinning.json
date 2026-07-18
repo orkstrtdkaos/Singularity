@@ -35,7 +35,7 @@
     "the_numen",
     "the_axis_gate"
   ],
-  "descriptionSeed": "A settlement where the veil is thin enough to feel and the residents have stopped finding that remarkable. Buildings here are provisional — the Numinous find permanent architecture a slightly embarrassing attachment. People are kind, dreamy, and prone to stopping mid-sentence because something more interesting than you is happening adjacent to reality.",
+  "descriptionSeed": "A settlement where the veil is thin enough to feel and the residents have stopped finding that remarkable. Buildings here are provisional — the Numinous find permanent architecture a slightly embarrassing attachment. People are kind, dreamy, and prone to stopping mid-sentence because something more interesting than you is happening adjacent to reality. The waygate here needed no making — the place was already thin, and someone long ago simply named where the thinness opened. It is the only gate in the network that predates its own discovery.",
   "loreRefs": [
     "the_twelve_reaches",
     "traditions"
@@ -55,5 +55,7 @@
     "abstract": 0.4,
     "time": 0.2
   },
-  "startingLocation": true
+  "startingLocation": true,
+  "waygate": true,
+  "waygateTier": 2
 }

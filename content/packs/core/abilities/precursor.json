@@ -321,40 +321,45 @@
         {
           "rank": 2,
           "name": "The Deep Doors",
-          "grants": "Open major seals — vaults, containments, the doors the valley learned to walk around; sense a seal's PURPOSE-shadow (prison? dam? mercy?) before opening.",
+          "grants": "Open major seals — vaults, containments, the doors the valley learned to walk around; sense a seal's PURPOSE-shadow (prison? dam? mercy?) before opening. The shadow is a warning, not a formality: a seal set as a prison has something in it, and it has had a very long time to want out.",
           "cannot": "Purpose-shadow is a hint, not certainty; some doors notice being opened and remember you; grave seals still refuse.",
           "functions": [
+            "reveal",
             "open",
-            "reveal"
+            "break"
           ],
-          "harmRung": "none",
+          "harmRung": "damaging",
           "gains": "deepen"
         },
         {
           "rank": 3,
           "name": "Nothing Stays Shut",
-          "grants": "Open grave seals — the ones holding back the worst the Precursors feared; open a thing at distance by its address (with Address-Sense); the valley's deepest containments become reachable.",
-          "cannot": "What grave seals hold is grave for a reason — the GM's absolute domain; opening some things cannot be undone by any ability; this is the edge of the map.",
+          "grants": "Open grave seals — the ones holding back the worst the Precursors feared; open a thing at distance by its address (with Address-Sense); the valley's deepest containments become things you may simply undo. AND WHAT WAS HELD COMES OUT. A grave seal can be opened onto a place, or onto people — the Precursors did not seal these because they were dangerous to leave alone, but because they were dangerous to MEET, and meeting them kills.",
+          "cannot": "Nothing about this is aimed. What comes out was contained by people cleverer than you, and it does not distinguish between what you opened it at and whatever else is standing there — including you. It cannot be re-sealed by the hand that opened it: re-containment is a different working, usually a longer one, and usually somebody else's.",
           "functions": [
-            "open",
             "reveal",
-            "break"
+            "open",
+            "break",
+            "summon",
+            "strike"
           ],
-          "harmRung": "none",
+          "harmRung": "lethal",
           "gains": "broaden"
         }
       ],
       "functions": [
         "break",
         "open",
-        "reveal"
+        "reveal",
+        "strike",
+        "summon"
       ],
       "challengeTypes": [
         "PUZZLE"
       ],
       "tradition": "precursor",
       "nativeOrCombination": "native",
-      "harmRung": "none"
+      "harmRung": "lethal"
     },
     {
       "id": "hold_the_aperture",

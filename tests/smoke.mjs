@@ -4031,6 +4031,31 @@ await (async () => {
     npcPortraitTier(pell) === "partner"); // the app skips when n._portraitTier === this tier
 }
 
+// --- BATCH-11 146b/c: scene lifecycle + open-scene index ---
+{
+  const { sceneIsOpen, closeScene } = await import('../engine/party.js');
+  const now = "2026-07-18T12:00:00.000Z";
+  const fresh = newSharedScene('millbrook', { id: 'c1', name: 'A', playerKey: 'p' }, "2026-07-18T11:00:00.000Z");
+  check("146b: a fresh scene with a member is open", sceneIsOpen(fresh, now) === true);
+  check("146b: a closed scene is not open", sceneIsOpen(closeScene(fresh, now), now) === false);
+  check("146b: an empty-party scene is not open", sceneIsOpen({ ...fresh, party: [] }, now) === false);
+  check("146b: a scene idle past TTL is not open (lazy expiry, no write needed)",
+    sceneIsOpen({ ...fresh, updatedAt: "2026-07-10T11:00:00.000Z" }, now) === false);
+  check("146b: the last member leaving stamps closedAt", (() => {
+    const gone = removeMember(fresh, 'c1');
+    return gone.party.length === 0 && !!gone.closedAt;
+  })());
+  check("146b: a member leaving a 2-party scene does NOT close it", (() => {
+    const two = addMember(fresh, { id: 'c2', name: 'B', playerKey: 'q' });
+    const one = removeMember(two, 'c1');
+    return one.party.length === 1 && !one.closedAt;
+  })());
+  const partySrcBC = readFileSync(new URL('../engine/party.js', import.meta.url), 'utf8');
+  check("146c: the join path reads the open-scene index, not the whole directory", /fetchRepoJSON\(OPEN_INDEX_PATH\)/.test(partySrcBC));
+  check("146c: the scene FILE stays the truth — candidates re-checked via sceneIsOpen", /if \(sc && sceneIsOpen\(sc\)\) scenes\.push\(sc\)/.test(partySrcBC));
+  check("146c: the index is maintained at the write choke point, fire-and-forget", /updateOpenIndex\(merged\)/.test(partySrcBC));
+}
+
 // --- BATCH-11 146a: scene writes route through pushMergedFile (Law 7) ---
 {
   const partySrc = readFileSync(new URL('../engine/party.js', import.meta.url), 'utf8');

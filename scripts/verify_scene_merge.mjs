@@ -30,7 +30,8 @@ globalThis.localStorage = {
   removeItem(k) { this._m.delete(k); }
 };
 
-const { newSharedScene, mergeBeat, pushSceneWithMerge, scenePath, fetchScene, lastSceneError } = await import("../engine/party.js");
+const { newSharedScene, mergeBeat, removeMember, pushSceneWithMerge, scenePath, fetchScene, lastSceneError, OPEN_INDEX_PATH } = await import("../engine/party.js");
+const { fetchRepoJSON } = await import("../engine/sync.js");
 
 const API = "https://api.github.com";
 const HEADERS = { authorization: `Bearer ${PAT}`, accept: "application/vnd.github+json", "content-type": "application/json" };
@@ -74,6 +75,16 @@ try {
   check("remote scene readable after concurrent pushes", !!remote);
   check("BOTH beats survived the same-window concurrent write (Law 7)", byIds.includes("verify-a") && byIds.includes("verify-b"));
   if (failures) console.error("remote beats:", JSON.stringify(remote?.beats ?? null, null, 2));
+
+  // 146b/c live: an open scene is indexed; the last member leaving closes it and clears the entry.
+  await new Promise(r => setTimeout(r, 1500)); // let the fire-and-forget index write land
+  const idxOpen = await fetchRepoJSON(OPEN_INDEX_PATH);
+  check("146c: open scene has an index entry", !!idxOpen?.scenes?.[sceneId]);
+  const closed = await pushSceneWithMerge(sceneId, s => removeMember(s, "verify-a"));
+  check("146b: last member leaving stamps closedAt", !!closed?.closedAt && closed.party.length === 0);
+  await new Promise(r => setTimeout(r, 1500));
+  const idxClosed = await fetchRepoJSON(OPEN_INDEX_PATH);
+  check("146c: closed scene's index entry is removed", !idxClosed?.scenes?.[sceneId]);
 } finally {
   // 4. cleanup — scratch artifact only; git history retains it either way.
   const cleaned = await deleteFile(scenePath(sceneId), `cleanup: 146a merge verification scratch scene`).catch(() => false);

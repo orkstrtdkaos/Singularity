@@ -286,3 +286,51 @@ Substrate verification requested before promotion. Where the PO has asserted rat
 **Only Aevi closes, and only on the reproduced symptom — never on the ship report.**
 
 *— Aevi (PO), ROUND 1. Every count in §0 measured at HEAD this session. Two PO claims retracted above; both are in the record rather than overwritten.*
+
+
+---
+
+## §10 · AMENDMENT A1 — the per-rank model (PM direction, same session, POST-ROUND-1)
+
+**PM direction:** *"Functions are rightly additive as skills level up — sometimes they deepen and sometimes they broaden. Every level up should be meaningful."*
+
+This amends §4 (SNG-147) and §2 (SNG-145) **before** CCode ROUND 2. Verify against this, not the original text.
+
+### The structural gap
+
+`functions` and `harmRung` are **ability-level scalars describing something that escalates by rank.** Palework declares `functions: [strike, hinder, foresee]` and `harmRung: "none"` for all three ranks at once — so "additive as you level" was not expressible, and an ability that can end a life declared no harm at all.
+
+Unlike `challengeTypes`, **`functions` IS read** — `functions.js` (SNG-124) resolves the verbs into the 8 families and the skill wheel surfaces them (`app.js:3671, 3854`). So this data is live and player-visible, and per-rank attribution reaches the player immediately.
+
+### The model (shipped as pilot, `6eb45961`)
+
+Each rank in `tree[]` now carries:
+- **`functions`** — the verbs THIS rank grants (cumulative)
+- **`gains`** — `"broaden"` (a new verb) or `"deepen"` (an existing verb materially extended)
+- **`harmRung`** — the rung reachable AT THIS RANK
+
+Ability-level `functions` becomes the **union**; ability-level `harmRung` becomes the **ceiling**. Both are derived, so nothing old breaks (Law 3, additive-only).
+
+**Every rank must broaden or deepen, and declare which.** That is the enforceable form of "every level up should be meaningful" — a rank that does neither is an authoring bug the audit can catch.
+
+### ⚠️ Consequence for SNG-145 — the intent gate must read the RANK
+
+`progression.js:610` reads `ab.harmRung` (ability-level) into the GM's `HARM:` line. Under this model that is the **ceiling**, not what the character can currently do. A rank-1 Paleworker would trip a lethal gate they cannot reach.
+
+**Amendment:** the harm gate and the `HARM:` line both read `rank.harmRung`, falling back to `ability.harmRung` when a rank omits it. **CCode: this is a small change at a known line, but it is load-bearing for SNG-145 — flag if the rank is not in scope at that call site.**
+
+### ⚠️ Correction to §0 — the "71 abilities" figure is inflated
+
+Hand-review of the 6 flagged in `reach_death_life.json` found **1 true positive** (`palework`). The other five: `the_grey_hand` teaches it (*"weaken a living thing by touch"*), `the_dread` teaches it, `wither` teaches it and is correctly scoped to things, `death_ward` teaches defensive use, and `lifesense` should not claim FIGHT at all (metadata corrected, not prose written).
+
+**The detector encodes a generic combat vocabulary** — strike/hit/wound — and misses this world's idiom: wither, weaken, drain, dread, refuse. **It therefore systematically misjudges every tradition that fights in its own way, which is exactly the design principle it was written to serve.** The real count is unknown and much lower than 71.
+
+**The per-rank model is also the fix.** Once a rank declares `functions`, the check stops guessing from prose: *does this rank declare `strike`, and does its `grants` describe an effect on a target?* Tractable, idiom-neutral, and it replaces the regex.
+
+### Pilot shipped — `content/packs/core/abilities/reach_death_life.json`
+
+7 abilities carry the per-rank model. **Palework's offense is now taught in its own idiom:** rank 2 hastens a decline *already present* in a living opponent; rank 3 is the full ending, pulled forward. Both are slow, visible, and known to the target — which is what `notFor` always promised and no rank ever delivered. Per-rank rungs: `none → damaging → lethal`.
+
+`npm test` and `content_ci.mjs` green locally **before** the push, per the standing authoring discipline. Verified at origin by content hash.
+
+**Remaining:** the corrected detector, then the rest of the corpus. Scaling waits on the detector — authoring against an inflated list would rewrite abilities that are already correct.

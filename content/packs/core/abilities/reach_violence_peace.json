@@ -29,19 +29,34 @@
           "rank": 1,
           "name": "The First Cut",
           "grants": "Strike with trained decisiveness — the fighter's discipline applied cleanly. Stand where others break. End a fight fast once you commit.",
-          "cannot": "Force is force — it makes enemies and consequences; the Edge cannot un-hurt. Reading the fight is Read the Fight's territory, not this one."
+          "cannot": "Force is force — it makes enemies and consequences; the Edge cannot un-hurt. Reading the fight is Read the Fight's territory, not this one.",
+          "harmRung": "damaging",
+          "functions": [
+            "strike"
+          ],
+          "gains": "broaden"
         },
         {
           "rank": 2,
           "name": "The Marcher's Calm",
           "grants": "Fight many, fight cornered, fight wounded and keep the discipline; disarm and disable without killing when you choose; make your reputation do half the work.",
-          "cannot": "The calm can slip; every use of the Edge writes on you; a foe past reason isn't disabled by skill alone."
+          "cannot": "The calm can slip; every use of the Edge writes on you; a foe past reason isn't disabled by skill alone.",
+          "harmRung": "lethal",
+          "functions": [
+            "strike"
+          ],
+          "gains": "deepen"
         },
         {
           "rank": 3,
           "name": "The Ender",
           "grants": "Meet even the great and the many; end a threat at the scale of a warband; the Edge at full mastery, where a single figure turns a field. The Redline's power in miniature.",
-          "cannot": "The wielder drifts violence-hot — the Ender who forgets peace becomes the thing the Marches are fleeing from; force at this scale foreclosing on everything it touches."
+          "cannot": "The wielder drifts violence-hot — the Ender who forgets peace becomes the thing the Marches are fleeing from; force at this scale foreclosing on everything it touches.",
+          "harmRung": "lethal",
+          "functions": [
+            "strike"
+          ],
+          "gains": "deepen"
         }
       ],
       "functions": [

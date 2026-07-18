@@ -28,7 +28,7 @@ import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkill
 import { toolkitForGM } from "./engine/toolkit.js";
 import { fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc } from "./engine/personalArc.js";
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./engine/entityDetail.js";
-import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier } from "./engine/npcs.js";
+import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "./engine/places.js";
 import { initWorldState, runWorldTick, syncSharedWorld, advanceGeneratedOffscreen, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
@@ -49,7 +49,7 @@ import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challe
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-const APP_VERSION = "1.8.100";
+const APP_VERSION = "1.8.101";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1107,6 +1107,8 @@ function migrate(c) {
   if (!c.quests) c.quests = [];
   migrateRelationships(c, CONTENT.npcs);
   mergeDuplicateNpcs(c, Object.keys(CONTENT.locations)); // heal duplicate/id-named people
+  { const bf = backfillNpcGender(c); // SNG-143: stamp gender from each record's own narration where unambiguous (the Pell fix); leaves ambiguous unset
+    if (bf.length) c._reconcileNotes = [...(c._reconcileNotes || []), `From their own story, gender is now explicit for: ${bf.join(", ")} (correct any in 🔧 Repair if wrong).`]; }
   if (!c.placeMemory) c.placeMemory = {};
   if (!c.worldState) c.worldState = initWorldState(readClock(c.clock).day);
   ensureSubAttributes(c);
@@ -4474,6 +4476,13 @@ function renderRepairScreen(note = "") {
           </select></div>`).join("")}
     </div>` : ""}
 
+    ${Object.keys(character.npcRegistry || {}).length ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Set a person's gender <span class="hint" style="text-transform:none">— the game rendered someone wrong? fix it here</span></h3>
+      <p class="hint" style="margin-bottom:8px">Gender is explicit data now — the portrait and narration read it. Type a value to set or correct it; leave blank to keep. Free and inclusive (woman, man, nonbinary, …). A corrected portrait re-mints with the right gender.</p>
+      ${Object.values(character.npcRegistry).slice(0, 30).map(n => `
+        <div class="cs-attr"><span class="cs-attr-name" style="width:auto; flex:1">${esc(n.name || n.id)} <span class="hint">${esc(n.gender || "— unset —")}</span></span>
+          <input data-npcgender="${esc(n.id)}" placeholder="woman / man / …" value="" style="max-width:160px"></div>`).join("")}
+    </div>` : ""}
+
     <div style="margin-top:14px; display:flex; gap:8px; flex-wrap:wrap">
       <button class="btn" id="rp-apply">Apply repairs</button>
       <button class="btn secondary" id="rp-back">Back</button>
@@ -4500,6 +4509,13 @@ function renderRepairScreen(note = "") {
     for (const cb of app.querySelectorAll("[data-strip]:checked")) ops.push({ op: "removeEntity", kind: "ability", id: cb.dataset.strip, why });
     for (const cb of app.querySelectorAll("[data-rmcomp]:checked")) ops.push({ op: "removeEntity", kind: "companion", id: cb.dataset.rmcomp, why });
     for (const sel of app.querySelectorAll("[data-quest]")) { if (sel.value) ops.push({ op: "unstickQuest", questId: sel.dataset.quest, toStatus: sel.value, why }); }
+    // SNG-143: set/correct a known person's gender — derive obvious pronouns, leave the rest free
+    for (const inp of app.querySelectorAll("[data-npcgender]")) {
+      const v = (inp.value || "").trim(); if (!v) continue;
+      const s = v.toLowerCase();
+      const pr = /\b(woman|female|she|girl|lady)\b/.test(s) ? "she/her" : /\b(man|male|he|boy|guy)\b/.test(s) ? "he/him" : /\b(nonbinary|non-binary|enby|they|nb)\b/.test(s) ? "they/them" : undefined;
+      ops.push({ op: "correctNpcGender", id: inp.dataset.npcgender, gender: v, pronouns: pr, why });
+    }
     // SNG-137: one-click fixes for the anomalies the game spotted — each maps to a repair op
     for (const cb of app.querySelectorAll("[data-fix]:checked")) {
       const an = anomalies[Number(cb.dataset.fix)];

@@ -62,13 +62,17 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
         history: [],
         knownFacts: [],
         skillsObserved: [],
-        status: "active"
+        status: "active",
+        gender: u.gender ? String(u.gender).slice(0, 40) : null,       // SNG-143: sex/gender is explicit DATA, captured the first time they appear (never inferred at render)
+        pronouns: u.pronouns ? String(u.pronouns).slice(0, 40) : null
       };
     }
     // updates are additive/evolving — never silently rewrite identity
     if (u.name && !n.name) n.name = String(u.name).slice(0, 60);
     if (u.role) n.role = String(u.role).slice(0, 100);
     if (u.description && !n.description) n.description = String(u.description).slice(0, 240);
+    if (u.gender && !n.gender) n.gender = String(u.gender).slice(0, 40);       // SNG-143: fill it the first time the GM records it
+    if (u.pronouns && !n.pronouns) n.pronouns = String(u.pronouns).slice(0, 40);
     if (u.revealName) {
       const newName = prettifyNpcName(String(u.revealName).slice(0, 60));
       const curTokens = new Set(String(n.name || "").toLowerCase().split(/\s+/).filter(Boolean));
@@ -253,7 +257,7 @@ export function npcRegistryForGM(character, { locationId = null, sceneNpcNames =
   const pick = [...relevant, ...rest].slice(0, 12);
   if (!pick.length) return null;
   return pick.map(n =>
-    `- ${n.name}${n.role ? ` (${n.role})` : ""} — ${relationshipBand(n.relationship)} (${n.relationship}), status: ${n.status}.` +
+    `- ${n.name}${n.role ? ` (${n.role})` : ""}${n.gender || n.pronouns ? ` [${[n.gender, n.pronouns].filter(Boolean).join(", ")} — use these pronouns]` : ""} — ${relationshipBand(n.relationship)} (${n.relationship}), status: ${n.status}.` +
     (n.bondType && n.bondType !== "platonic" ? ` BOND: ${relationshipLabel(n)} — established fact; honor the KIND of this relationship.` : "") +
     (n.description ? ` ${n.description}` : "") +
     (n.statusNote ? ` CURRENT SITUATION: ${n.statusNote}.` : "") +
@@ -292,6 +296,32 @@ export function mergeDuplicateNpcs(character, dropTokens = []) {
   }
   for (const n of Object.values(reg)) n.name = prettifyNpcName(n.name, dropTokens);
   return character;
+}
+
+/** SNG-143: one-time retro-backfill of NPC gender from the record's own narration (the Pell fix — she was
+ *  rendered male because her gender lived only in prose, never as a field). Scans an NPC's text fields for
+ *  gendered pronouns and stamps `gender`/`pronouns` ONLY when one gender clearly dominates — a record often
+ *  mentions others (a female NPC's history names her male partner), so it requires a 2× margin, never a bare
+ *  count, and leaves genuinely mixed/ambiguous records UNSET (never guesses). Clears a baked portrait `image`
+ *  when it stamps, so the next SNG-136 mint regenerates with the gender in the seed. Never overwrites an
+ *  already-set gender. Pure over the registry; returns the names it set. */
+export function backfillNpcGender(character) {
+  const reg = character?.npcRegistry || {};
+  const stamped = [];
+  for (const [id, n] of Object.entries(reg)) {
+    if (!n || n.gender) continue; // never overwrite an explicit value
+    const text = [n.description, n.role, ...(n.history || []), ...(n.knownFacts || []), ...(n.aliases || [])].filter(Boolean).join(" ");
+    const f = (text.match(/\b(she|her|hers|herself)\b/gi) || []).length;
+    const m = (text.match(/\b(he|him|his|himself)\b/gi) || []).length;
+    let g = null, p = null;
+    if (f >= 2 && f >= m * 2 + 1) { g = "woman"; p = "she/her"; }
+    else if (m >= 2 && m >= f * 2 + 1) { g = "man"; p = "he/him"; }
+    if (!g) continue; // ambiguous / mixed / thin — leave unset, never guess
+    n.gender = g; if (!n.pronouns) n.pronouns = p;
+    if (n.image) { delete n.image; delete n._portraitTier; } // the baked portrait had no gender term — re-mint it
+    stamped.push(n.name || id);
+  }
+  return stamped;
 }
 
 /** One-time migration: fold the old shallow relationships map into the registry. */

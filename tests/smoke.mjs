@@ -13,7 +13,7 @@ import { companionBonus, companionsForGM, activeCompanions, partnerAdjacentNpcs 
 import { applyQuestUpdates, questsForGM, slugify, resolveQuest, dedupeQuests, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, threadTouched } from "../engine/quests.js";
 import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, touchSession, endSession, sessionLog, buildSessionPrompt, authorshipStats, crossCharacterAuthorship } from "../engine/chronicle.js";
 import { sanitizeScene, buildTurnContext, sanitizeIntent, narrativeRegister, ratingRegister, renderSceneHistory, tierParts } from "../engine/gm.js";
-import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, findExistingNpc, prettifyNpcName, relationshipBand, advanceBond, relationshipLabel, isPartnerAdjacent, knownPeopleAt, npcPortraitTier } from "../engine/npcs.js";
+import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, findExistingNpc, prettifyNpcName, relationshipBand, advanceBond, relationshipLabel, isPartnerAdjacent, knownPeopleAt, npcPortraitTier, backfillNpcGender } from "../engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
 import { initWorldState, runWorldTick, advanceGeneratedOffscreen, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "../engine/worldtick.js";
 import { assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "../engine/gambit.js";
@@ -3339,6 +3339,56 @@ await (async () => {
   check("SNG-142: rule 16B (offer the toolkit, lightly) is in the GM contract with the ≤1/never-on-clear-intent discipline", /16B\. OFFER THE TOOLKIT — LIGHTLY[\s\S]{0,600}NEVER when the player already stated a clear intent/.test(gmSrc142));
   check("SNG-142: rule 16B forbids committing another player's party character (agency guard)", /never commit another player's PARTY character/i.test(gmSrc142));
   check("SNG-142: the TOOLKIT scene block is rendered (toolkitDetail), guarded + destructured", /if \(toolkitDetail\) scene\.push\(/.test(gmSrc142) && /anomalyDetail, toolkitDetail \} = ctx/.test(gmSrc142));
+})();
+
+// --- SNG-143: NPC sex/gender as explicit data (the Pell-rendered-male fix) + OOC item-evolution routing ---
+(async () => {
+  const { npcPromptSeed } = await import("../engine/art.js");
+  const ctx = { locationId: "millbrook", day: 5, rules: {} };
+
+  // Part 1: the GM CAPTURES gender/pronouns on meet
+  const c1 = { npcRegistry: {} };
+  applyNpcUpdates(c1, [{ op: "meet", npcId: "pell", name: "Pell", role: "Village blacksmith", gender: "woman", pronouns: "she/her" }], ctx);
+  check("SNG-143: meet captures gender + pronouns onto the registry record", c1.npcRegistry.pell.gender === "woman" && c1.npcRegistry.pell.pronouns === "she/her");
+  applyNpcUpdates(c1, [{ op: "update", npcId: "pell", pronouns: "she/her" }], ctx); // idempotent-ish, no overwrite of gender
+  check("SNG-143: an update fills gender the first time only, never rewrites an explicit value", (() => { applyNpcUpdates(c1, [{ op: "update", npcId: "pell", gender: "man" }], ctx); return c1.npcRegistry.pell.gender === "woman"; })());
+
+  // Part 1: npcPromptSeed STATES the gender (the direct portrait fix — a woman NPC prompts as a woman)
+  const seed = npcPromptSeed({ name: "Pell", role: "Village blacksmith", gender: "woman" }, { name: "Silas" });
+  check("SNG-143: npcPromptSeed states gender so the portrait can't default (Pell prompts as a woman)", /\bwoman\b/.test(seed) && /Pell/.test(seed) && /blacksmith/.test(seed));
+  check("SNG-143: a gender-less NPC seed is unchanged (no phantom gender injected)", !/\b(woman|man)\b/.test(npcPromptSeed({ name: "Vash", role: "smuggler" }, { name: "Silas" })));
+
+  // Part 1: the KNOWN PEOPLE context surfaces gender/pronouns so narration stays consistent
+  const detail = npcRegistryForGM({ name: "Silas", npcRegistry: { pell: { id: "pell", name: "Pell", role: "blacksmith", gender: "woman", pronouns: "she/her", relationship: 8, status: "active", history: [], knownFacts: [], skillsObserved: [] } } }, "millbrook", []);
+  check("SNG-143: the KNOWN PEOPLE block carries gender + pronouns (consistent narration)", /Pell[^\n]*woman[^\n]*she\/her[^\n]*use these pronouns/.test(detail));
+
+  // Part 1: retro-backfill — stamps woman from a female-DOMINANT record (even when it names a male partner), man for male-dominant, leaves ambiguous UNSET
+  const bf = { npcRegistry: {
+    pell: { id: "pell", name: "Pell", role: "blacksmith", image: "http://old-male-portrait", description: "Her shop, her forge.", history: ["Her hands on his forearms", "She names happiness", "her laugh is low", "her weight to Silas"], knownFacts: [] },
+    sorel: { id: "sorel", name: "Sorel", role: "dock-master", history: ["He knew the tides", "his rope, his ledger", "him at the pier"], knownFacts: [] },
+    vex: { id: "vex", name: "Vex", role: "courier", history: ["They came and went"], knownFacts: [] }
+  } };
+  const stamped = backfillNpcGender(bf);
+  check("SNG-143: retro-backfill stamps Pell = woman from her own female-dominant narration (the fix)", bf.npcRegistry.pell.gender === "woman" && bf.npcRegistry.pell.pronouns === "she/her");
+  check("SNG-143: it stamps a male-dominant record = man", bf.npcRegistry.sorel.gender === "man");
+  check("SNG-143: it leaves an AMBIGUOUS/thin record unset (never guesses)", !bf.npcRegistry.vex.gender);
+  check("SNG-143: stamping Pell clears her baked (male) portrait so it re-mints with gender", !bf.npcRegistry.pell.image && !bf.npcRegistry.pell._portraitTier && stamped.includes("Pell"));
+  check("SNG-143: backfill never overwrites an already-set gender", (() => { const x = { npcRegistry: { a: { id: "a", name: "A", gender: "nonbinary", history: ["she her she her"] } } }; backfillNpcGender(x); return x.npcRegistry.a.gender === "nonbinary"; })());
+
+  // Part 1: player-correctable — the correctNpcGender op sets gender, clears the portrait, logs; refuses gracefully
+  const cc = { npcRegistry: { pell: { id: "pell", name: "Pell", gender: "man", image: "http://wrong" } } };
+  const r = applyStateOps(cc, [{ op: "correctNpcGender", id: "pell", gender: "woman", pronouns: "she/her", why: "she is a woman" }], {});
+  check("SNG-143: correctNpcGender sets gender/pronouns + clears the wrong portrait + logs", r.applied.length === 1 && cc.npcRegistry.pell.gender === "woman" && !cc.npcRegistry.pell.image && cc.corrections.some(x => x.kind === "gender"));
+  check("SNG-143: correctNpcGender refuses an unknown person / an empty ask", applyStateOps({ npcRegistry: {} }, [{ op: "correctNpcGender", id: "ghost", gender: "woman" }], {}).refused.length === 1 && applyStateOps(cc, [{ op: "correctNpcGender", id: "pell" }], {}).refused.length === 1);
+  check("SNG-143: describeCorrection gives a human line for a gender fix", /gender was set right/.test(describeCorrection({ npcGender: "pell" })));
+
+  // raw-source: the GM contract + schema + OOC routing shipped
+  const gmSrc = readFileSync(join(root, "engine/gm.js"), "utf8");
+  check("SNG-143: the npcUpdates op captures gender + pronouns, and rule 14 records them on meet", /"npcUpdates":[\s\S]{0,400}"gender":[\s\S]{0,200}"pronouns":/.test(gmSrc) && /RECORD their "gender"\/"pronouns"/.test(gmSrc));
+  check("SNG-143: correctNpcGender is in the stateOps repair vocabulary", /correctNpcGender \(a known person shown as the wrong sex\/gender/.test(gmSrc));
+  check("SNG-143 (P2): the OOC channel routes an item EVOLUTION to in-play itemUpdates, not the sheet editor", /DISTINGUISH A CREATION-REPAIR FROM AN ITEM GROWING IN PLAY/.test(gmSrc) && /Route the second to play, never to the editor/.test(gmSrc) && /DO NOT send them to the Repair panel/.test(gmSrc));
+  const schema143 = JSON.parse(readFileSync(join(root, "schemas/npc.schema.json"), "utf8"));
+  check("SNG-143: the NPC schema declares gender", !!schema143.properties.gender);
 })();
 
 // --- SNG-076: authored prose is not truncated mid-word ---

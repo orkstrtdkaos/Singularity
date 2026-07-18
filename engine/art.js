@@ -200,6 +200,7 @@ export function npcPromptSeed(npc = {}, character = {}) {
   const lead = String(npc.appearance || npc.form || formOf(npc) || npc.description || npc.role || npc.name || "a person").slice(0, 200);
   const bits = [`${lead}, character portrait`];
   if (npc.name) bits.push(`named ${npc.name}`);
+  if (npc.gender || npc.pronouns) bits.push(String(npc.gender || npc.pronouns).slice(0, 40)); // SNG-143: state gender explicitly so the generator can't default (the Pell-rendered-male fix)
   if (npc.role) bits.push(String(npc.role).slice(0, 100));
   const label = [npc.bondStage, npc.bondType].filter(Boolean).join(" ").trim();
   if (label) bits.push(`${label} to ${character.name || "the traveler"}`);

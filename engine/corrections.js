@@ -182,6 +182,20 @@ export function applyStateOps(character, ops = [], ctx = {}) {
         applied.push({ merged: op.fromId, into: op.intoId });
         break;
       }
+      // SNG-143: correct a known person's sex/gender + pronouns (the Pell-rendered-male fix, player-side).
+      // Free-string + inclusive; never guessed. Clears a baked portrait so it re-mints with the right gender.
+      case "correctNpcGender": {
+        const n = character.npcRegistry?.[op.id];
+        if (!n) { refused.push({ op, reason: `no known person "${op.id}"` }); break; }
+        if (op.gender == null && op.pronouns == null) { refused.push({ op, reason: "correctNpcGender needs a gender and/or pronouns" }); break; }
+        const from = { gender: n.gender, pronouns: n.pronouns };
+        if (op.gender != null) n.gender = String(op.gender).slice(0, 40) || null;
+        if (op.pronouns != null) n.pronouns = String(op.pronouns).slice(0, 40) || null;
+        if (n.image) { delete n.image; delete n._portraitTier; } // re-mint the portrait with the corrected gender
+        log(character, { kind: "gender", id: op.id, from, to: { gender: n.gender, pronouns: n.pronouns }, why }, ctx);
+        applied.push({ npcGender: op.id });
+        break;
+      }
       case "refuse": {
         // the GM declined an advance in fiction — record it so the ledger shows the ask was made.
         refused.push({ op, reason: op.what ? `declined: ${String(op.what).slice(0, 80)}` : "declined an advance" });
@@ -206,6 +220,7 @@ export function describeCorrection(a) {
   if (a.vital) return `${a.vital} was re-synced → ${a.to}`;
   if (a.attribute) return `a mis-set ${a.attribute} was corrected (${a.from}→${a.to})`;
   if (a.merged) return `two records for one person were merged`;
+  if (a.npcGender) return `a person's gender was set right`;
   return "corrected";
 }
 

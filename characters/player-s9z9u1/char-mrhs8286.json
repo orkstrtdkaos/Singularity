@@ -74,7 +74,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.48173808730948614,
+    "spectrumId": -0.4576511829440118,
     "violence_peace": 0.09798375000000001,
     "chaos_order": 0.22307527614718994,
     "mechanical_spiritual": 0.23279962203849028,
@@ -1286,73 +1286,121 @@
         "player": "Open the door quietly without knocking — he knows someone is coming and you'd rather not announce to the stairwell.",
         "summary": "Silas opens Calvar's door without a knock — finds him already packed and waiting, tracking the watcher's movements from inside.",
         "narration": "The latch is old brass, worn smooth at the thumb-plate by decades of the same hand. You depress it slowly — no click, just a soft release of tension — and ease the door inward an inch, then two. The hinge has been oiled recently. Someone who expected to need quiet egress, or simply a careful man keeping his house.\n\nCalvar is at the far end of the room, seated sideways at a drafting table with his back to the wall and his face toward the door — the position of a man who stopped pretending he wasn't waiting an hour ago. The room is dim: shutters drawn to a finger's gap, the conduit-bleed from the floor joints providing the same directionless warmth as downstairs, just less of it. A tin cup. A rolled document weighted at both ends by river stones. A traveling case on the floor beside the chair, already buckled.\n\nHe looks at you the way he looked at you the first time — the measured non-reaction, the quick inventory behind still eyes. Then he looks past you at Pell, and something in his face adjusts: not surprise, not relief, something quieter. Recognition of a shape he had already calculated for. He lets out a breath that has been held since at least midmorning.\n\n\"Close it,\" he says, low and even. \"The watcher outside shifted twice in the last half-hour. He's been counting casement angles.\""
+      },
+      {
+        "player": " [GM updates Memory's description and abilities in my inventory to match how it's evolved] Let's all put our heads together and make a plan to get out of here unseen. I can shadow step easily, but can't bring you along yet... i can make shadow, use wildcraft, and some other tricks, without outright attacking these guys... you guys have any skills or ideas?  We need to break this down into 5 or fewer steps, each with a logical fallback approach.",
+        "summary": "Silas proposes a collaborative escape; Pell names the rear service passage, Calvar confirms the cut-lane exit — a plan takes shape.",
+        "narration": "You keep your voice low — barely above the room's own quiet — and lay it out plainly. Pell sets her pack down without a sound and leans her shoulder against the wall beside the door. Calvar turns from the shuttered gap where he's been watching the watcher and gives you the focused, unhurried attention of a man who has been waiting for exactly this conversation.\n\nYou name what you have: Shadowstep gets one person through a dark gap unseen, not three. You can Shape a pocket of shadow where there isn't one — a screen, a dark wall — if the light cooperates. Wildcraft can turn a moment of chaos into an exit if the plan needs a seam split open. And the stairwell, the loading dock, the cooperage's own bulk — the building itself is a tool if you read it right.\n\nPell thinks for four seconds. 'The cooperage has a rear service passage to the barrel-yard,' she says, voice flat and precise. 'Calvar, does it connect to the alley behind the tallow-chandler or does it dead-end?' Calvar shakes his head once — not dead-end. 'Delivery exit. Opens onto the cut-lane, south side. The watcher's eye-line doesn't reach it unless he moves.' He taps the rolled document on the table and adds, quietly, 'I have been watching him for two hours. He has not moved.' Huginn makes one short sound from the door-frame shadow — not a word, just a click of beak that says: *so far*.\n\nSo the shape of it comes together here, in this dim room, between four people who each know one wall of the problem. The cooperage itself is the route. The question is how you sequence it so the watcher stays fixed on a casement that no longer matters — and what happens if he shifts."
       }
     ],
     "lastTurn": {
-      "narration": "The latch is old brass, worn smooth at the thumb-plate by decades of the same hand. You depress it slowly — no click, just a soft release of tension — and ease the door inward an inch, then two. The hinge has been oiled recently. Someone who expected to need quiet egress, or simply a careful man keeping his house.\n\nCalvar is at the far end of the room, seated sideways at a drafting table with his back to the wall and his face toward the door — the position of a man who stopped pretending he wasn't waiting an hour ago. The room is dim: shutters drawn to a finger's gap, the conduit-bleed from the floor joints providing the same directionless warmth as downstairs, just less of it. A tin cup. A rolled document weighted at both ends by river stones. A traveling case on the floor beside the chair, already buckled.\n\nHe looks at you the way he looked at you the first time — the measured non-reaction, the quick inventory behind still eyes. Then he looks past you at Pell, and something in his face adjusts: not surprise, not relief, something quieter. Recognition of a shape he had already calculated for. He lets out a breath that has been held since at least midmorning.\n\n\"Close it,\" he says, low and even. \"The watcher outside shifted twice in the last half-hour. He's been counting casement angles.\"",
-      "sceneSummary": "Silas opens Calvar's door without a knock — finds him already packed and waiting, tracking the watcher's movements from inside.",
+      "narration": "You keep your voice low — barely above the room's own quiet — and lay it out plainly. Pell sets her pack down without a sound and leans her shoulder against the wall beside the door. Calvar turns from the shuttered gap where he's been watching the watcher and gives you the focused, unhurried attention of a man who has been waiting for exactly this conversation.\n\nYou name what you have: Shadowstep gets one person through a dark gap unseen, not three. You can Shape a pocket of shadow where there isn't one — a screen, a dark wall — if the light cooperates. Wildcraft can turn a moment of chaos into an exit if the plan needs a seam split open. And the stairwell, the loading dock, the cooperage's own bulk — the building itself is a tool if you read it right.\n\nPell thinks for four seconds. 'The cooperage has a rear service passage to the barrel-yard,' she says, voice flat and precise. 'Calvar, does it connect to the alley behind the tallow-chandler or does it dead-end?' Calvar shakes his head once — not dead-end. 'Delivery exit. Opens onto the cut-lane, south side. The watcher's eye-line doesn't reach it unless he moves.' He taps the rolled document on the table and adds, quietly, 'I have been watching him for two hours. He has not moved.' Huginn makes one short sound from the door-frame shadow — not a word, just a click of beak that says: *so far*.\n\nSo the shape of it comes together here, in this dim room, between four people who each know one wall of the problem. The cooperage itself is the route. The question is how you sequence it so the watcher stays fixed on a casement that no longer matters — and what happens if he shifts.",
+      "sceneSummary": "Silas proposes a collaborative escape; Pell names the rear service passage, Calvar confirms the cut-lane exit — a plan takes shape.",
       "choices": [
         {
-          "label": "Tell him what the Ended Threat read — the watcher is upstream of action, not at a trigger yet. You have a window. Lay out the plan for getting him out.",
+          "label": "Plan the escape as a gambit — lay out the full sequence: distraction, passage, exit, fallbacks",
           "attribute": "mental",
-          "subAttribute": "reason",
+          "subAttribute": "wits",
+          "axes": {
+            "chaos_order": 0.3
+          },
           "difficulty": 0,
           "intentTags": [
             "plan"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Ask him what he's seen — how long the watcher has been there, whether anyone else has come to the door, and whether the traveling case means he was already planning to move.",
+          "label": "Ask Calvar what's in the rolled document before you move — if it's the diagram or the specification, it changes what you carry out",
           "attribute": "mental",
-          "subAttribute": "insight",
+          "subAttribute": "reason",
+          "axes": {
+            "falsehood_truth": 0.4
+          },
           "difficulty": 0,
-          "intentTags": [
-            "scout"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Let Pell take the lead here — she's his connection to her father's work, and Calvar's adjustment when he saw her was real. Let that be the room's gravity for a moment.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "help"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Use Order-Sense on the room — read the whole design Calvar is part of, including what isn't present. The traveling case, the rolled document, the window angles: see what he's already planned.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
           "intentTags": [
             "study"
           ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Huginn directly — it's been watching the corner angles since you arrived; it may know something about the watcher the rest of you don't",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "mechanical_spiritual": 0.3
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Move now — the route is clear enough; more planning is more time the watcher has to shift",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {
+            "chaos_order": -0.2
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "travel",
+            "careful",
+            "sneak"
+          ],
+          "abilityId": "shadowstep",
+          "energyCost": 4,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": []
+      },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "find-the-engineer",
+          "note": "Calvar confirms a rear service passage through the cooperage to the cut-lane — the watcher's eye-line doesn't cover it. The escape route exists; sequencing it is the next step."
         }
       ],
       "scene": {
-        "setting": "Calvar's room above the cooperage, Edge District — dim interior, shutters drawn to a finger's gap, conduit-bleed light from floor joints. Door now closed behind the party.",
+        "setting": "Calvar's room above the cooperage, Edge District — dim interior, shutters drawn to a finger's gap, conduit-bleed light from floor joints. Door closed behind the party. The cooperage bulk below has a rear service passage to the barrel-yard, connecting to the cut-lane on the south side — out of the watcher's eye-line.",
         "npcsPresent": [
           {
             "name": "Calvar",
-            "state": "Seated sideways at his drafting table, back to the wall, face to the door — already packed, watching Silas and Pell, breath released."
+            "state": "Turned from the shuttered gap, seated at the drafting table with his back to the wall — confirming the cut-lane exit from two hours of watching, calm and ready."
           },
           {
             "name": "Pell",
-            "state": "Just inside the door at Silas's shoulder — pack settled, reading Calvar's adjustment when he saw her."
+            "state": "Shoulder against the wall beside the door, pack settled — named the rear service passage, now waiting for the plan's shape to firm up."
           },
           {
             "name": "Huginn",
-            "state": "In the door-frame shadow, now inside — head tilted toward the room's corner angles, still."
+            "state": "In the door-frame shadow — made one short click of beak after Calvar confirmed the watcher hasn't moved. Watching the room's corner angles."
           },
           {
             "name": "Unknown watcher",
-            "state": "Outside under the chandler's awning — unaware of entry, counting casement angles, per Calvar."
+            "state": "Outside under the chandler's awning — fixed on Calvar's casement, has not shifted position in two hours per Calvar's count."
           }
         ],
         "objects": [
@@ -1360,13 +1408,13 @@
           "Traveling case — on the floor beside Calvar's chair, already buckled",
           "Rolled document — on the drafting table, weighted at both ends by river stones",
           "Tin cup — on the table",
-          "Shutters — drawn to a finger's gap, diffuse light"
+          "Shutters — drawn to a finger's gap, diffuse light",
+          "Rear service passage — connects the cooperage ground floor to the barrel-yard and cut-lane, south side, out of watcher's sightline (named this beat)"
         ],
         "threads": [
-          "Calvar has been tracking the watcher from inside — he knows more than he's said yet",
-          "The traveling case is buckled: he was already planning to move",
-          "The rolled document weighted on the table — unknown contents, potentially the diagram or the filed specification",
-          "The watcher shifted twice in the last half-hour and is counting casement angles — the window is real and narrowing",
+          "The rolled document on the table — contents unknown, potentially the diagram or filed specification",
+          "The watcher has been fixed for two hours but hasn't moved yet — Huginn's click noted the 'so far'",
+          "The rear service passage is the route; the sequence of distraction, passage, and exit is unplanned",
           "The conduit pulse at the third hour — still unread"
         ]
       },
@@ -1375,37 +1423,96 @@
           "op": "update",
           "npcId": "calvar",
           "name": "Calvar",
-          "note": "Opened into the room already packed and wall-seated — had been tracking the watcher's casement angles from inside. Released a held breath when Silas and Pell entered. First words: 'Close it — the watcher shifted twice in the last half-hour.'",
+          "note": "Named the cut-lane delivery exit from the cooperage's rear service passage — confirmed the watcher has not shifted position in two hours of his own counting. Steady and contributing.",
           "learned": [
-            "Had been tracking the watcher independently from inside — counted two position shifts and casement angles",
-            "The traveling case was already buckled before Silas arrived — he had decided to move"
+            "The cooperage has a rear delivery exit opening onto the cut-lane, south side — outside the watcher's fixed eye-line"
           ],
-          "statusNote": "In his room above the cooperage — packed, wall-seated, tracking the watcher from inside. Party is now with him; door closed."
+          "skillsObserved": [
+            "sustained positional surveillance from a static interior position — two hours of watcher-counting without breaking composure"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "In Calvar's room above the cooperage — packed, contributing to escape planning, ready to move when the sequence is set."
+        },
+        {
+          "op": "update",
+          "npcId": "pell",
+          "name": "Pell",
+          "note": "Named the rear service passage without prompting — practical structural knowledge, immediately useful.",
+          "learned": [],
+          "skillsObserved": [
+            "immediate structural mapping of an unfamiliar building under pressure"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "In Calvar's room — shoulder against the wall, pack down, waiting for the plan to firm."
         }
       ],
+      "placeUpdates": [
+        {
+          "subPlace": {
+            "name": "Cooperage rear service passage — cut-lane exit",
+            "note": "A rear delivery passage running from the cooperage ground floor through the barrel-yard to a cut-lane on the south side — outside the watcher's fixed eye-line on the north-facing casement. Calvar confirmed it after two hours of positional observation.",
+            "visited": false
+          }
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "calvar",
+          "label": "Calvar — the Engineer",
+          "kind": "person",
+          "entityId": "calvar",
+          "fact": "Confirmed the cooperage has a rear delivery exit to the cut-lane on the south side — has been tracking the watcher's position for two hours from inside and confirms he hasn't moved.",
+          "links": [
+            "find-the-engineer",
+            "the-edge-district-ledger",
+            "radiant-plateau-edge"
+          ]
+        }
+      ],
+      "gambitOps": {
+        "goal": "Exit the cooperage with Calvar and the rolled document unseen — leaving the watcher fixed on a casement that no longer matters.",
+        "steps": [
+          {
+            "text": "Shape Shadow Work into a screen at Calvar's casement — a dark panel across the gap that reads as shutters-closed from the lane, giving the watcher nothing to watch and no reason to shift.",
+            "fallback": "If the conduit light is too diffuse to anchor a shadow screen at the casement, have Calvar draw the shutters fully before you leave — slower, but it removes the target."
+          },
+          {
+            "text": "Move through the cooperage's interior stair to the ground-floor loading area — Calvar leads, he knows the footing; Pell carries the rolled document and the traveling case.",
+            "fallback": "If someone is on the ground floor (a worker, a tenant), Wildcraft — turn the moment of encounter into a direction-change, a distraction, something that lets the party slip past without confrontation."
+          },
+          {
+            "text": "Take the rear service passage to the barrel-yard and out through the cut-lane delivery exit — south side, out of the watcher's sightline entirely.",
+            "fallback": "If the cut-lane exit is blocked or watched, Shadowstep carries one person through the gap ahead to confirm it's clear before the rest follow on foot."
+          }
+        ]
+      },
       "timeOps": {
-        "hoursPassed": 0.1,
-        "why": "A quiet entry — seconds, not minutes"
-      }
+        "hoursPassed": 0.25,
+        "why": "A quick planning exchange — four people, one wall each, a route named and confirmed."
+      },
+      "gambitApt": true,
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Calvar's room above the cooperage, Edge District — dim interior, shutters drawn to a finger's gap, conduit-bleed light from floor joints. Door now closed behind the party.",
+      "setting": "Calvar's room above the cooperage, Edge District — dim interior, shutters drawn to a finger's gap, conduit-bleed light from floor joints. Door closed behind the party. The cooperage bulk below has a rear service passage to the barrel-yard, connecting to the cut-lane on the south side — out of the watcher's eye-line.",
       "npcsPresent": [
         {
           "name": "Calvar",
-          "state": "Seated sideways at his drafting table, back to the wall, face to the door — already packed, watching Silas and Pell, bre"
+          "state": "Turned from the shuttered gap, seated at the drafting table with his back to the wall — confirming the cut-lane exit fro"
         },
         {
           "name": "Pell",
-          "state": "Just inside the door at Silas's shoulder — pack settled, reading Calvar's adjustment when he saw her."
+          "state": "Shoulder against the wall beside the door, pack settled — named the rear service passage, now waiting for the plan's sha"
         },
         {
           "name": "Huginn",
-          "state": "In the door-frame shadow, now inside — head tilted toward the room's corner angles, still."
+          "state": "In the door-frame shadow — made one short click of beak after Calvar confirmed the watcher hasn't moved. Watching the ro"
         },
         {
           "name": "Unknown watcher",
-          "state": "Outside under the chandler's awning — unaware of entry, counting casement angles, per Calvar."
+          "state": "Outside under the chandler's awning — fixed on Calvar's casement, has not shifted position in two hours per Calvar's cou"
         }
       ],
       "objects": [
@@ -1413,13 +1520,13 @@
         "Traveling case — on the floor beside Calvar's chair, already buckled",
         "Rolled document — on the drafting table, weighted at both ends by river stones",
         "Tin cup — on the table",
-        "Shutters — drawn to a finger's gap, diffuse light"
+        "Shutters — drawn to a finger's gap, diffuse light",
+        "Rear service passage — connects the cooperage ground floor to the barrel-yard an"
       ],
       "threads": [
-        "Calvar has been tracking the watcher from inside — he knows more than he's said yet",
-        "The traveling case is buckled: he was already planning to move",
-        "The rolled document weighted on the table — unknown contents, potentially the diagram or the filed specification",
-        "The watcher shifted twice in the last half-hour and is counting casement angles — the window is real and narrowing",
+        "The rolled document on the table — contents unknown, potentially the diagram or filed specification",
+        "The watcher has been fixed for two hours but hasn't moved yet — Huginn's click noted the 'so far'",
+        "The rear service passage is the route; the sequence of distraction, passage, and exit is unplanned",
         "The conduit pulse at the third hour — still unread"
       ]
     }
@@ -1470,14 +1577,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Calvar opened his door — said 'I wondered what shape it would come in.' He is present, waiting, and has stepped back from the threshold.",
         "Order-Sense confirms: Calvar's room is a transit node. He has been waiting to hand something outward. His isolation is ending — not him. The chain has one remaining step.",
         "Calvar has heard the complete chain — Leth, Vash, Rennic, Fendt's Testimony now on his drafting surface. One step remains: what he has been holding in those bundled papers, and where the calibration files went.",
         "Calvar revealed the bundle — a second record of the seventh-band method survives as personal correspondence, missed by Grael's runner. Three copies were made; one is here. The other two destinations are the next question.",
         "Third copy of the calibration files identified: Filtration Council annex, lower Plateau district, sent fourteen years ago. Status of the copy unknown — the next step is the annex.",
         "Calvar has agreed to travel with the group — he will vouch as the pre-Transition calibration author and can attest to the seventh-band specification outside the Radiant hierarchy. The road to Millbrook is the next step.",
         "Calvar committed to first light departure — the group is assembled and the road to Millbrook is the next step. Silas named each person's work for the journey.",
-        "Arrived at the cooperage lane — Calvar's lamp not in the window, a watcher positioned under the chandler's awning. The departure is delayed or compromised."
+        "Arrived at the cooperage lane — Calvar's lamp not in the window, a watcher positioned under the chandler's awning. The departure is delayed or compromised.",
+        "Calvar confirms a rear service passage through the cooperage to the cut-lane — the watcher's eye-line doesn't cover it. The escape route exists; sequencing it is the next step."
       ],
       "aliases": [],
       "startedAt": "2026-07-16T19:11:11.950Z"
@@ -1846,7 +1953,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d4] Received Silas's full attention in the bath without self-consciousness — let him look, then asked plainly whether he was getting in.",
         "[d4] Received the full inventory of Silas's attention — every place named, every place touched. Her hands on his forearms the whole time. Her response: 'You have been paying a great dea",
         "[d4] Received 'I haven't finished paying attention yet' with an unguarded laugh — gave her weight to Silas more completely than before. Entirely present, no habit remaining.",
         "[d4] Said 'yes, we're ready' to Huginn on behalf of both of them — unguarded, warm, not performing it",
@@ -1855,7 +1961,8 @@
         "[d4] Confirmed the Weir mark accepted — 'it's in me the way ironsense is, I don't look for it, it's just there when I reach.' Confirmed happy — quieter than expected, but real. Asked th",
         "[d4] Received the wordless answer — arms tightening, her settling closer — without comment or management. Exhaled all the way out and released the last held shape. Thumb moved once acro",
         "[d4] Rose from the bath and dressed without hesitation when the road was named — settled, present, ready. Pocketed the whetstone without ceremony.",
-        "[d4] Read the lane independently — has already angled away from the watcher without being asked. Ready and tracking."
+        "[d4] Read the lane independently — has already angled away from the watcher without being asked. Ready and tracking.",
+        "[d4] Named the rear service passage without prompting — practical structural knowledge, immediately useful."
       ],
       "knownFacts": [
         "Her laugh is real and low when it is not managed — it moves through her whole back.",
@@ -1868,15 +1975,15 @@
         "Receives wordless confirmation the same way she receives all of this — present, without performance; the grain of Weir is in her and it is not theoretical"
       ],
       "skillsObserved": [
-        "precise technical questioning under field conditions",
         "reading a subject's frame and shifting the dynamic deliberat",
         "holding material knowledge in reserve until it becomes load-",
         "holding confirmed knowledge without performance — named the ",
         "holding partial knowledge without performance — named the ha",
-        "ironsense transmitted deliberately through a rune-threshold"
+        "ironsense transmitted deliberately through a rune-threshold",
+        "immediate structural mapping of an unfamiliar building under"
       ],
       "status": "active",
-      "statusNote": "At Silas's side on the cooperage lane — packed, alert, reading the watcher.",
+      "statusNote": "In Calvar's room — shoulder against the wall, pack down, waiting for the plan to firm.",
       "lastSeen": {
         "locationId": "the-low-lamp-inn",
         "day": 4
@@ -2202,7 +2309,6 @@
       },
       "relationship": 8,
       "history": [
-        "[d3] Shifted weight, exhaled, went still — holding the room, giving it what it needs.",
         "[d3] Gave Pell a single low affirmative when she asked about the specification method — understood what she needed the question to do and gave her only the answer, without the weight of",
         "[d3] Held the room still without watching Pell — looked at the wall above the window, giving grief the air it needs.",
         "[d3] Held the room through the entire memory-witnessing — did not crowd it, did not watch it too closely. Waiting now to be asked about the road.",
@@ -2211,27 +2317,29 @@
         "[d3] Received his tasking plainly — bring his experience and Radiant standing to the road, teach what he knows when it's needed. Accepted it without performance. Committed to first ligh",
         "[d4] Lamp not in window; casement latched rather than open. Status unknown — may still be in the room, may have been moved.",
         "[d4] Lamp absent from window, casement latched — The Ended Threat reads the watcher as waiting on Calvar's movement, not yet dispatched. His situation remains unknown but the threat is ",
-        "[d4] Opened into the room already packed and wall-seated — had been tracking the watcher's casement angles from inside. Released a held breath when Silas and Pell entered. First words: "
+        "[d4] Opened into the room already packed and wall-seated — had been tracking the watcher's casement angles from inside. Released a held breath when Silas and Pell entered. First words: ",
+        "[d4] Named the cut-lane delivery exit from the cooperage's rear service passage — confirmed the watcher has not shifted position in two hours of his own counting. Steady and contributin"
       ],
       "knownFacts": [
-        "The Plateau lattice does not speak to those who lack Radiant training or long residence — Calvar spent three years discovering this himself",
         "The third copy is filed as personal correspondence bound with Pell's father's letters and margin notations — filed to survive Rennic's sweep",
         "Administrative restructuring fourteen years ago makes the annex's current organization uncertain",
         "Calvar's standing inside the Radiant hierarchy is gone — his approach would be as a citing traveler, not a credentialed author",
         "Has been assigned the role of practical mentor on the road — Pell learns her father's craft from him directly",
         "Silas has named the Ashwarden work with Huginn as a third track alongside the retrieval task",
         "Had been tracking the watcher independently from inside — counted two position shifts and casement angles",
-        "The traveling case was already buckled before Silas arrived — he had decided to move"
+        "The traveling case was already buckled before Silas arrived — he had decided to move",
+        "The cooperage has a rear delivery exit opening onto the cut-lane, south side — outside the watcher's fixed eye-line"
       ],
       "skillsObserved": [
         "receiving unexpected visitors without flinching",
         "precise self-positioning under uncertainty — named what he n",
         "measured disclosure — named the three copies without being a",
         "precise self-accounting of delay and its cause",
-        "identifying the structural flaw in Grael's appeal-capture me"
+        "identifying the structural flaw in Grael's appeal-capture me",
+        "sustained positional surveillance from a static interior pos"
       ],
       "status": "active",
-      "statusNote": "In his room above the cooperage — packed, wall-seated, tracking the watcher from inside. Party is now with him; door closed.",
+      "statusNote": "In Calvar's room above the cooperage — packed, contributing to escape planning, ready to move when the sequence is set.",
       "lastSeen": {
         "locationId": "the-low-lamp-inn",
         "day": 4
@@ -2492,6 +2600,12 @@
           "day": 4,
           "visited": true,
           "note": "Rising lane east of the third turning — barrels on cobbles, cooperage ground floor open, Calvar's second-floor window ab"
+        },
+        "cooperage-rear-service-passage-cut-lan": {
+          "name": "Cooperage rear service passage — cut-lan",
+          "day": 4,
+          "visited": false,
+          "note": "A rear delivery passage running from the cooperage ground floor through the barrel-yard to a cut-lane on the south side "
         }
       }
     }
@@ -3528,7 +3642,8 @@
           "[d4] [while away] Reviewing last night's seventh-band log, Calvar found a seventeen-minute gap in the low-frequency baseline that his specification explicitly flags as instrument drift — but the gap's edge",
           "[d4] Calvar's departure lamp is absent from the window on World-day 18 afternoon; a watcher with dry boots is stationed under the tallow-chandler's awning opposite the cooperage. The agreed signal has not ",
           "[d4] The Ended Threat reads the watcher outside his cooperage window as patient and reporting — no trigger imminent, no action yet dispatched. The threat is real but upstream of its own edge. A window exis",
-          "[d4] The Attended End confirms Calvar is alive behind his door on World-day 18 afternoon — his stillness is deliberate. The room is holding itself; nothing is ending. He went quiet on purpose."
+          "[d4] The Attended End confirms Calvar is alive behind his door on World-day 18 afternoon — his stillness is deliberate. The room is holding itself; nothing is ending. He went quiet on purpose.",
+          "[d4] Confirmed the cooperage has a rear delivery exit to the cut-lane on the south side — has been tracking the watcher's position for two hours from inside and confirms he hasn't moved."
         ],
         "links": [
           "the-water-crisis",
@@ -3720,20 +3835,20 @@
     }
   },
   "tendencies": {
-    "strategic": 8.314357949037191,
-    "cerebral": 13.737454776135861,
-    "social": 14.361722069316471,
-    "generous": 1.5513718558300909,
-    "cautious": 9.771758439472945,
-    "physical": 0.15440543676079427,
-    "risky": 1.337477357175951,
-    "ruthless": 0.19118175164224416,
-    "carousing": 0.1342482595250743,
-    "amorous": 15.426930853914062,
-    "patient": 1.901792034913071,
-    "stealth": 2.108145450791082,
-    "devotion": 1.8524771480101818,
-    "craft": 0.42282137456861496
+    "strategic": 10.106499000311262,
+    "cerebral": 13.394018406732464,
+    "social": 14.002679017583558,
+    "generous": 1.5125875594343385,
+    "cautious": 10.527464478486122,
+    "physical": 0.15054530084177442,
+    "risky": 1.3040404232465523,
+    "ruthless": 0.18640220785118805,
+    "carousing": 0.13089205303694743,
+    "amorous": 15.04125758256621,
+    "patient": 1.8542472340402443,
+    "stealth": 2.055441814521305,
+    "devotion": 1.8061652193099271,
+    "craft": 0.41225084020439956
   },
   "aptitudes": [
     "strategist",
@@ -3744,7 +3859,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 439,
+  "actionCount": 440,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3950,8 +4065,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784341257476,
-  "rev": 629,
+  "updatedAt": 1784342574031,
+  "rev": 630,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4221,14 +4336,6 @@
           },
           "attentionHistory": [
             {
-              "kind": "fact",
-              "day": 3
-            },
-            {
-              "kind": "interact",
-              "day": 3
-            },
-            {
               "kind": "interact",
               "day": 3
             },
@@ -4314,6 +4421,14 @@
             },
             {
               "kind": "interact",
+              "day": 4
+            },
+            {
+              "kind": "interact",
+              "day": 4
+            },
+            {
+              "kind": "fact",
               "day": 4
             }
           ],
@@ -4893,7 +5008,7 @@
   "syncedAt": 1784339418317,
   "teachers": {},
   "regionsKnown": {
-    "valley": 256
+    "valley": 257
   },
   "foreclosed": [
     "rootkin",
@@ -4939,10 +5054,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-17T17:39:40.705Z",
-      "lastAt": "2026-07-18T02:20:57.475Z",
+      "lastAt": "2026-07-18T02:42:54.029Z",
       "startDay": 17,
       "endDay": 18,
-      "beats": 64
+      "beats": 65
     }
   ],
   "company": [

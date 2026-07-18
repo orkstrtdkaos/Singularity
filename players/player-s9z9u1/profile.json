@@ -34,14 +34,16 @@
   "pacing": "eventful",
   "uiSidebar": {
     "open": [
-      "abilities",
       "quests",
       "company",
       "items",
       "whoshere",
       "playstyle"
     ],
-    "closed": []
+    "closed": [
+      "abilities",
+      "attributes"
+    ]
   },
   "sharedChronicle": true,
   "contentGenerator": true,

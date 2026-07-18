@@ -413,7 +413,25 @@
           "rank": 1,
           "name": "The Whole Act",
           "grants": "Act with body and mind fused — perception, decision, and motion as a single instant.",
-          "cannot": "Needs both trained near-equal; the pure poles cannot do it."
+          "cannot": "Needs both trained near-equal; the pure poles cannot do it.",
+          "functions": [
+            "move",
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
+        },
+        {
+          "rank": 2,
+          "name": "The Unbroken Act",
+          "grants": "Hold the fusion across a whole engagement rather than a single instant. Every movement in the exchange is one continuous act — you are already correct before you have consciously read why, and you stay correct as the situation changes under you.",
+          "cannot": "It still needs both trained near-equal and the pure poles still cannot do it; holding it leaves you unable to afterward explain what you did or why, which matters when someone asks; and a whole act cannot be interrupted and resumed — broken, it must be re-entered from stillness.",
+          "functions": [
+            "move",
+            "reveal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "powerSystem": "reach_body_mind",
@@ -480,7 +498,25 @@
           "rank": 1,
           "name": "Skydancer",
           "grants": "Move through the air in bounds, glides, and wall-runs — cross gaps, scale heights, drop on a target.",
-          "cannot": "Momentum-bound (you must keep moving, no hover); a mistimed step falls; heavy burden grounds you."
+          "cannot": "Momentum-bound (you must keep moving, no hover); a mistimed step falls; heavy burden grounds you.",
+          "functions": [
+            "move",
+            "travel"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
+        },
+        {
+          "rank": 2,
+          "name": "The Long Air",
+          "grants": "Chain the air-steps without touching down — cross a canyon, ascend a tower face in one unbroken sequence, hold the air long enough to choose your landing. And you may carry another person through it with you.",
+          "cannot": "Still momentum-bound; there is no hover at any mastery, only better momentum. Carrying another halves your reach and a mistimed step now falls two people. Heavy burden still grounds you outright.",
+          "functions": [
+            "move",
+            "travel"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "powerSystem": "reach_body_mind",
@@ -825,7 +861,25 @@
           "rank": 1,
           "name": "The Unmoving Mind",
           "grants": "Enter a perfect mental stillness — immune to fear, deception, and disruption, reading all with total clarity.",
-          "cannot": "It grants no offense, only the unshakeable read; it occupies you wholly to hold; and a stillness this deep can look, to those who love you, like you have gone somewhere they cannot follow."
+          "cannot": "It grants no offense, only the unshakeable read; it occupies you wholly to hold; and a stillness this deep can look, to those who love you, like you have gone somewhere they cannot follow.",
+          "functions": [
+            "resist",
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
+        },
+        {
+          "rank": 2,
+          "name": "The Moving Stillness",
+          "grants": "The stillness no longer occupies you wholly — hold it while fighting, walking, negotiating, and the clarity holds with it. And it reaches past you: those who stand with you and trust you are steadied by proximity, and do not break when they should.",
+          "cannot": "Extending it thins it — the more you shelter, the less clearly you read. It still grants no offense at any depth. And those sheltered feel the flinch you are not having, which more than one person has found worse than their own fear.",
+          "functions": [
+            "resist",
+            "reveal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "gated": "learned",

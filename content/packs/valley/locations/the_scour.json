@@ -35,7 +35,7 @@
     "the_scouring",
     "the_axis_gate"
   ],
-  "descriptionSeed": "A city of controlled ruin and beautiful demolitions, where ending a thing WELL is a craft and the world is held to be choked with what should have ended. The Unmakers are not nihilists — they are gardeners with a very long view of what needs clearing, and they are usually right, and being usually right is not the same as being welcome.",
+  "descriptionSeed": "A city of controlled ruin and beautiful demolitions, where ending a thing WELL is a craft and the world is held to be choked with what should have ended. The Unmakers are not nihilists — they are gardeners with a very long view of what needs clearing, and they are usually right, and being usually right is not the same as being welcome. The Unmakers keep a waygate and keep, beside it, the written method for taking it apart safely — the only region that has bothered to work out how to close one properly.",
   "loreRefs": [
     "the_twelve_reaches",
     "traditions"
@@ -55,5 +55,7 @@
     "chaos": 0.2,
     "death": 0.2
   },
-  "startingLocation": true
+  "startingLocation": true,
+  "waygate": true,
+  "waygateTier": 2
 }

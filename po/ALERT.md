@@ -504,3 +504,20 @@ CCode built all three top-down; **Aevi confirmed at authenticated origin** (not 
 ---
 
 ## 🎲 SNG-106
+
+## SNG-155 — CLOSED GREEN (Erik, browser leg, 2026-07-18)
+
+Erik's verdict on the read-aloud free tier: **"the default voice is good."** That is the only proof that
+counted — CCode's own verification was honestly limited (preview browser exposes 3 legacy SAPI voices),
+so the audible result could only be confirmed at Erik's machine. It has been.
+
+**Tier 2 (cloud TTS) is CANCELLED, not deferred.** Consequences:
+- CCode's ROUND 2 questions 1, 5 and 6 are moot — no provider choice to make, no third credential.
+- No new secret surface is introduced to a client-side app that has leaked one before. Given
+  SECRET-COMMIT-GUARD exists precisely because of that leak, not adding a third key is the win.
+- CCode was right to refuse to answer the secret-surface question speculatively. It never needed answering.
+
+What shipped and stands: quality-ranked voice picker with wrong-language DISQUALIFYING (its own test caught
+a ja-JP "Premium Natural" outranking a plain en-US voice), per-profile voices so each daughter gets her own,
+`speakableText` as a projection on the turn object rather than a DOM regex, and `readAloudDetail` as registry
+row 46 — the prose constraint, which is worth more than the voice and does not soften content.

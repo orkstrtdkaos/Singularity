@@ -38,6 +38,30 @@ Three substrate relationships now, not two:
 - **Ring NOT moved** (SNG-131 lesson) — the Wild Half already sits at 2-4; this adds substrate identity, not geometry.
 - **Reader-confirmed before claiming live** — `wildCurrent` is inert until the CCode gate reads it (the "value with no reader is a lie" discipline); flag honestly until wired.
 
+## ✅ RULINGS SETTLED (Aevi, 2026-07-17) — verified against HEAD, wiring unblocked
+Both settled against the actual data, not asserted.
+
+**Ruling 2 — which peoples are wild-keepers: churnfolk + abyssal. NOT unmaker.**
+The `the_wild_half` cluster's OWN canon text settles it: unmaker are *"the Wild Half's undertakers… who clear what the wild has FINISHED with — its conscience."* They follow the tangled current to END what it leaves; they don't channel it. Making the one people whose identity is *ending* wild things into a *wielder* of them would blur exactly what makes them distinct. So:
+- **churnfolk** — the fae, native to the tangled current. `wildCurrent: [the_churns_gift]` (already seeded ✓).
+- **abyssal** — keeps the fabricated deep (`innatePrecursor: [latticespeak]`) AND runs wild (`wildCurrent: [the_honest_bargain]`) — the canon duality, already seeded ✓.
+- **unmaker** — stays ADJACENT: no wildCurrent. The wild's undertaker, not its wielder.
+**No data change needed** — this ratifies exactly what's already seeded. CCode wires churnfolk + abyssal only.
+
+**Ruling 1 — the wildness/variance mechanic: extend the EXISTING novel-use volatility pattern (potent-with-variance + upside; rare backfire only on a genuine crit-fail).**
+Verified in `resolve.js`: outcomes already grade on five degrees (`crit_success | success | partial | failure | crit_failure`), and there is ALREADY a precedent — novel use WIDENS the crit-failure band (`ctx.action.novel → critHigh -= novel.critFailWiden`, "reach exceeding grasp can HURT"). Wild-current is the same shape, one step further:
+- **A wild_current ability shifts probability toward the EXTREMES** — it widens BOTH the crit-success and crit-failure bands (the tangled current amplifies: more likely to bloom into something better than aimed, AND more likely to slip). Net: potent and generous, with a real tail. This is "joyous, generous, and lethally unreliable" made mechanical — NOT a flat penalty, NOT strictly-better.
+- **The "not as you aimed" flavor lives on `partial` + `crit_success`** — a wild success gives you the effect its OWN way (the GM narrates the sideways-generous outcome; the `wildVariance:true` flag already on the abilities is the resolver's cue).
+- **Backfire is rare and earned** — only on a genuine `crit_failure` (whose band the wild widening enlarges), never a baseline risk on an ordinary use. Upside-forward for a player people; the tail is the price of the power, paid occasionally, not every cast.
+- **Bounded by the same knobs as novel** — reuse `novel.critFailWiden`-style tuning (a `wild.critWiden` both-directions value in rules JSON), so it's data-tunable and balance-sim-checkable, not hardcoded.
+
+### CCODE WIRING NOW UNBLOCKED (the SNG-131-shaped change + the resolver knob)
+1. `seedInnateSubstrate` also seeds `wildCurrentAccess` from `origin.wildCurrent` (churnfolk + abyssal), powerSystem-validated (`=== "wild_current"`) — same guard shape as precursor/living.
+2. `effectiveLevelReq` gains a `wild_current` branch mirroring precursor/living (locked unless in `wildCurrentAccess`); `learnAbility` routes it to the access gate. `unlockWildCurrent` (already shipped) then becomes functional for deeper wild abilities.
+3. `resolveAction` reads `wildVariance` (or `powerSystem==="wild_current"`) → applies `wild.critWiden` to BOTH crit bands; balance_sim covers the new variance.
+
+## RESOLVED — the open questions above are now ruled (see RULINGS SETTLED)
+
 ## OPEN QUESTIONS — ERIK + CCODE
 1. **[ERIK]** Is the Wild Half's wildness a BENEFIT-with-variance (potent but unpredictable) or a genuine double-edge (can turn on the caster)? (Recommend variance-with-upside for a player people, with rare backfire on a crit-fail — "lethally unreliable" earned, not punishing.)
 2. **[ERIK]** Which peoples are Wild Half substrate-wild — just churnfolk + abyssal, or the whole cluster (unmaker too)? (Unmaker "clears what the wild finished" — maybe NOT wild-current itself, but adjacent. Your call.)

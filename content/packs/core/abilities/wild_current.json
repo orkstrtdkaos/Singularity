@@ -1,104 +1,105 @@
 {
- "schemaVersion": 1,
- "powerSystem": "wild_current",
- "note": "SNG-140: the TANGLED substrate — wild nanites AND living current together, kept by no one. The Wild Half's deep-power (fae/demonic/ruin, ring 2-4). Where the Continuous keep the fabricated deep in disciplined form and the Rootkin tend the living current, the Wild Half channels BOTH, undisciplined — potent but 'nothing twice, nothing where you left it.' `wildVariance:true` marks abilities whose outcome carries an uncontrolled element (CCode wires the variance resolver; until then the wildness lives in the fiction). A THIRD keeper-kind, NOT antipodal to the others — a different relationship to the substrate (tangled/wild), not a different pole.",
- "abilities": [
-  {
-   "schemaVersion": 1,
-   "id": "the_churns_gift",
-   "name": "The Churn's Gift",
-   "levelReq": 3,
-   "energyCost": 7,
-   "powerSystem": "wild_current",
-   "tradition": "churnfolk",
-   "attribute": "social",
-   "axes": {
-    "chaos_order": -0.6
-   },
-   "functions": [
-    "transform",
-    "make"
-   ],
-   "narrationHints": "You offer the working and it BLOOMS — generous, dazzling, exactly what was needed and never once what you asked for, the tangled current improvising on your intent like a musician who heard the tune only once.",
-   "description": "The first wild-current working of the fae — a gift shaped from the tangled substrate, potent and giving, but it comes out its OWN way. The Wild Half does not obey; it accretes, it improvises, it gives you something better or stranger than you aimed for. Nobody is driving, and that is the gift and the danger both.",
-   "notFor": "It gives, it does not command — you cannot aim it precisely; the current decides the details. And a gift from the Churn is real but never quite controllable; take what it offers, not what you meant to ask for.",
-   "tree": [
+  "schemaVersion": 1,
+  "powerSystem": "wild_current",
+  "note": "SNG-140: the TANGLED substrate — wild nanites AND living current together, kept by no one. The Wild Half's deep-power (fae/demonic/ruin, ring 2-4). Where the Continuous keep the fabricated deep in disciplined form and the Rootkin tend the living current, the Wild Half channels BOTH, undisciplined — potent but 'nothing twice, nothing where you left it.' `wildVariance:true` marks abilities whose outcome carries an uncontrolled element (CCode wires the variance resolver; until then the wildness lives in the fiction). A THIRD keeper-kind, NOT antipodal to the others — a different relationship to the substrate (tangled/wild), not a different pole.",
+  "abilities": [
     {
-     "rank": 1,
-     "name": "The Churn's Gift",
-     "grants": "Shape a potent working from the wild substrate — generous and strong, but never exactly as aimed.",
-     "cannot": "You cannot control its precise form, it gives its own way rather than yours, and the wild current owes you nothing — it may give more than you asked, or sideways to it."
-    }
-   ],
-   "gated": "learned",
-   "nativeOrCombination": "native",
-   "wildVariance": true
-  },
-  {
-   "schemaVersion": 1,
-   "id": "the_wild_flowering",
-   "name": "The Wild Flowering",
-   "levelReq": 4,
-   "energyCost": 11,
-   "powerSystem": "wild_current",
-   "tradition": "churnfolk",
-   "attribute": "physical",
-   "axes": {
-    "chaos_order": -0.8,
-    "death_life": 0.2
-   },
-   "functions": [
-    "transform",
-    "open"
-   ],
-   "narrationHints": "Life and ruin at once — growth erupting where you touched, blooming and rotting and blooming again, the fabricated and the living currents tangled past any telling which is which, and none of it where you left it a moment ago.",
-   "description": "The deeper wild working — the tangled substrate let loose as growth-and-decay together, life and unmaking in one uncontrolled flowering. The fae art of nothing-twice: a burst of wild creation that is also wild dissolution, potent and beautiful and impossible to hold in one shape.",
-   "notFor": "It creates and unmakes at once, uncontrolled — you cannot get pure growth or pure ruin from it, only the tangle. And what it makes does not stay made; the Wild Flowering is nothing-where-you-left-it given form.",
-   "tree": [
+      "schemaVersion": 1,
+      "id": "the_churns_gift",
+      "name": "The Churn's Gift",
+      "levelReq": 3,
+      "energyCost": 7,
+      "powerSystem": "wild_current",
+      "tradition": "churnfolk",
+      "attribute": "social",
+      "axes": {
+        "chaos_order": -0.6
+      },
+      "functions": [
+        "transform",
+        "make"
+      ],
+      "narrationHints": "You offer the working and it BLOOMS — generous, dazzling, exactly what was needed and never once what you asked for, the tangled current improvising on your intent like a musician who heard the tune only once.",
+      "description": "The first wild-current working of the fae — a gift shaped from the tangled substrate, potent and giving, but it comes out its OWN way. The Wild Half does not obey; it accretes, it improvises, it gives you something better or stranger than you aimed for. Nobody is driving, and that is the gift and the danger both.",
+      "notFor": "It gives, it does not command — you cannot aim it precisely; the current decides the details. And a gift from the Churn is real but never quite controllable; take what it offers, not what you meant to ask for.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Churn's Gift",
+          "grants": "Shape a potent working from the wild substrate — generous and strong, but never exactly as aimed.",
+          "cannot": "You cannot control its precise form, it gives its own way rather than yours, and the wild current owes you nothing — it may give more than you asked, or sideways to it."
+        }
+      ],
+      "gated": "learned",
+      "nativeOrCombination": "native",
+      "wildVariance": true,
+      "harmRung": "none"
+    },
     {
-     "rank": 1,
-     "name": "The Wild Flowering",
-     "grants": "Unleash a wild flowering of tangled growth-and-ruin — potent, beautiful, and beyond precise control.",
-     "cannot": "It cannot be aimed at pure creation or pure destruction, what it makes will not hold its shape, and the wild current, once opened, flowers where IT wills, not only where you meant."
-    }
-   ],
-   "gated": "learned",
-   "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
-   "wildVariance": true
-  },
-  {
-   "schemaVersion": 1,
-   "id": "the_honest_bargain",
-   "name": "The Honest Bargain",
-   "levelReq": 4,
-   "energyCost": 11,
-   "powerSystem": "wild_current",
-   "tradition": "abyssal",
-   "attribute": "social",
-   "axes": {
-    "demonic_angelic": -0.7,
-    "chaos_order": -0.3
-   },
-   "functions": [
-    "bind",
-    "command"
-   ],
-   "narrationHints": "You name the terms and they are FAIR — scrupulously, horrifyingly fair — and the tangled current seals them, and now the bargain will keep itself, in ways neither of you can fully predict or take back.",
-   "description": "The Wild Half's demonic bargain — a pact struck from the tangled substrate, honest in its terms (the Abyssals bargain fairly; that is the horror) but wild in its keeping. Once sealed, the bargain runs its own way, fair to the letter and uncontrollable in the fulfilling. Appetite made a contract nobody is driving.",
-   "notFor": "It binds only a struck bargain — no bargain, no bond; and it is scrupulously FAIR, which is the danger, not the safety. Once sealed, neither party fully controls how the wild current fulfills it; the terms hold, the manner runs wild.",
-   "tree": [
+      "schemaVersion": 1,
+      "id": "the_wild_flowering",
+      "name": "The Wild Flowering",
+      "levelReq": 4,
+      "energyCost": 11,
+      "powerSystem": "wild_current",
+      "tradition": "churnfolk",
+      "attribute": "physical",
+      "axes": {
+        "chaos_order": -0.8,
+        "death_life": 0.2
+      },
+      "functions": [
+        "transform",
+        "open"
+      ],
+      "narrationHints": "Life and ruin at once — growth erupting where you touched, blooming and rotting and blooming again, the fabricated and the living currents tangled past any telling which is which, and none of it where you left it a moment ago.",
+      "description": "The deeper wild working — the tangled substrate let loose as growth-and-decay together, life and unmaking in one uncontrolled flowering. The fae art of nothing-twice: a burst of wild creation that is also wild dissolution, potent and beautiful and impossible to hold in one shape.",
+      "notFor": "It creates and unmakes at once, uncontrolled — you cannot get pure growth or pure ruin from it, only the tangle. And what it makes does not stay made; the Wild Flowering is nothing-where-you-left-it given form.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Wild Flowering",
+          "grants": "Unleash a wild flowering of tangled growth-and-ruin — potent, beautiful, and beyond precise control.",
+          "cannot": "It cannot be aimed at pure creation or pure destruction, what it makes will not hold its shape, and the wild current, once opened, flowers where IT wills, not only where you meant."
+        }
+      ],
+      "gated": "learned",
+      "nativeOrCombination": "native",
+      "harmRung": "incapacitating",
+      "wildVariance": true
+    },
     {
-     "rank": 1,
-     "name": "The Honest Bargain",
-     "grants": "Seal a fair but wild bargain that keeps itself — the terms exact, the fulfilling uncontrollable.",
-     "cannot": "It needs a genuine bargain to bind, it is fair to the letter (which is the horror), and once sealed it fulfills its terms its OWN way — you cannot take it back, and you cannot fully steer how it comes due."
+      "schemaVersion": 1,
+      "id": "the_honest_bargain",
+      "name": "The Honest Bargain",
+      "levelReq": 4,
+      "energyCost": 11,
+      "powerSystem": "wild_current",
+      "tradition": "abyssal",
+      "attribute": "social",
+      "axes": {
+        "demonic_angelic": -0.7,
+        "chaos_order": -0.3
+      },
+      "functions": [
+        "bind",
+        "command"
+      ],
+      "narrationHints": "You name the terms and they are FAIR — scrupulously, horrifyingly fair — and the tangled current seals them, and now the bargain will keep itself, in ways neither of you can fully predict or take back.",
+      "description": "The Wild Half's demonic bargain — a pact struck from the tangled substrate, honest in its terms (the Abyssals bargain fairly; that is the horror) but wild in its keeping. Once sealed, the bargain runs its own way, fair to the letter and uncontrollable in the fulfilling. Appetite made a contract nobody is driving.",
+      "notFor": "It binds only a struck bargain — no bargain, no bond; and it is scrupulously FAIR, which is the danger, not the safety. Once sealed, neither party fully controls how the wild current fulfills it; the terms hold, the manner runs wild.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "The Honest Bargain",
+          "grants": "Seal a fair but wild bargain that keeps itself — the terms exact, the fulfilling uncontrollable.",
+          "cannot": "It needs a genuine bargain to bind, it is fair to the letter (which is the horror), and once sealed it fulfills its terms its OWN way — you cannot take it back, and you cannot fully steer how it comes due."
+        }
+      ],
+      "gated": "learned",
+      "nativeOrCombination": "native",
+      "harmRung": "incapacitating",
+      "wildVariance": true
     }
-   ],
-   "gated": "learned",
-   "nativeOrCombination": "native",
-   "harmRung": "incapacitating",
-   "wildVariance": true
-  }
- ]
+  ]
 }

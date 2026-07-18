@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 13,
-  "xp": 1279,
+  "xp": 1284,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -89,7 +89,7 @@
   "maxHealth": 90,
   "health": 89,
   "maxEnergy": 160,
-  "energy": 102,
+  "energy": 97,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1573,14 +1573,19 @@
         "player": "Hold this — stay close, say nothing, let the gathering come when it comes",
         "summary": "Silas and Pell hold the quiet at the forge — the name sealed, the coals ticking — until footsteps on the lane signal the gathering's arrival.",
         "narration": "You stay. Her hand flat at your neck, your forehead finding hers — the naming done, the forge holding its low warmth, the dark fully in at the door gap now. Huginn sits the crossbeam and does not move. The coals tick.\n\nThere is nothing to do with a moment like this except be in it. The three change-points are named and filed; the meeting will come when it comes. For now the forge is just a forge — warm stone and raked ash and the smell of iron cooling — and Pell is here with her palm flat at your neck and the name between you like something pressed into cooling metal, permanent now in the way that only a few things become permanent.\n\nThe lane outside stays quiet for a little while longer. A dog somewhere across the village. The last ember-light off the stone. Then the first sound of boots on the lane — unhurried, deliberate, someone who knows where they're going — and Huginn's head turns a degree toward the door without comment.\n\nThey're coming."
+      },
+      {
+        "player": "Kiss her and seal the naming.  Then prepare for their arrival.",
+        "summary": "Silas seals the naming with a kiss; Pell rights herself and the forge; the gathering arrives.",
+        "narration": "You close the last inch between you. The kiss is unhurried — not a question, not a performance, just the naming finding its final form in the press of her mouth against yours. Her hand stays flat at your neck. She breathes in through her nose, steady, the way she breathes when she's decided something, and kisses you back with the same quality of attention she brings to a weld she cares about. The forge holds its warmth around you both. Huginn does not move.\n\nWhen you pull back, her forehead comes to yours again for a breath — her eyes still closed, the name settled, the naming done. She opens them. Looks at you the way she looks at finished work: not admiring, just seeing it for what it is. 'Right,' she says, quietly. And that is all. It is enough.\n\nShe straightens first. Her hand slides from your neck to your shoulder, a brief grip, and then she's moving — unhurried but deliberate, the same hands that were at your neck now checking the stool arrangement, nudging the cooler bench a half-inch, reading the forge temperature with a practiced glance. She picks up Memory from where it leans near the door and sets it a foot to the side, out of the path between the entrance and the fire. Making room. You know the motion: not putting away what matters, just clearing the working surface.\n\nHuginn turns its head one degree toward the lane. Outside, feet on packed earth — more than one pair, coming at a steady walk. The coals are lit, the seats are arranged, and the people who need to be in this room are arriving. You straighten, roll your shoulders once, and face the door."
       }
     ],
     "lastTurn": {
-      "narration": "You stay. Her hand flat at your neck, your forehead finding hers — the naming done, the forge holding its low warmth, the dark fully in at the door gap now. Huginn sits the crossbeam and does not move. The coals tick.\n\nThere is nothing to do with a moment like this except be in it. The three change-points are named and filed; the meeting will come when it comes. For now the forge is just a forge — warm stone and raked ash and the smell of iron cooling — and Pell is here with her palm flat at your neck and the name between you like something pressed into cooling metal, permanent now in the way that only a few things become permanent.\n\nThe lane outside stays quiet for a little while longer. A dog somewhere across the village. The last ember-light off the stone. Then the first sound of boots on the lane — unhurried, deliberate, someone who knows where they're going — and Huginn's head turns a degree toward the door without comment.\n\nThey're coming.",
-      "sceneSummary": "Silas and Pell hold the quiet at the forge — the name sealed, the coals ticking — until footsteps on the lane signal the gathering's arrival.",
+      "narration": "You close the last inch between you. The kiss is unhurried — not a question, not a performance, just the naming finding its final form in the press of her mouth against yours. Her hand stays flat at your neck. She breathes in through her nose, steady, the way she breathes when she's decided something, and kisses you back with the same quality of attention she brings to a weld she cares about. The forge holds its warmth around you both. Huginn does not move.\n\nWhen you pull back, her forehead comes to yours again for a breath — her eyes still closed, the name settled, the naming done. She opens them. Looks at you the way she looks at finished work: not admiring, just seeing it for what it is. 'Right,' she says, quietly. And that is all. It is enough.\n\nShe straightens first. Her hand slides from your neck to your shoulder, a brief grip, and then she's moving — unhurried but deliberate, the same hands that were at your neck now checking the stool arrangement, nudging the cooler bench a half-inch, reading the forge temperature with a practiced glance. She picks up Memory from where it leans near the door and sets it a foot to the side, out of the path between the entrance and the fire. Making room. You know the motion: not putting away what matters, just clearing the working surface.\n\nHuginn turns its head one degree toward the lane. Outside, feet on packed earth — more than one pair, coming at a steady walk. The coals are lit, the seats are arranged, and the people who need to be in this room are arriving. You straighten, roll your shoulders once, and face the door.",
+      "sceneSummary": "Silas seals the naming with a kiss; Pell rights herself and the forge; the gathering arrives.",
       "choices": [
         {
-          "label": "Step back from Pell and take a position by the forge — ready to open the meeting when the first person through the door",
+          "label": "Open the door to meet them — you're the one who called this",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
@@ -1590,97 +1595,111 @@
           "trivial": true
         },
         {
-          "label": "Stay close a moment longer — let Pell be the one to greet them at the door while you collect yourself",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Let Pell open — stand at the forge, let the room read you where you are",
+          "attribute": "social",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
+            "lead",
             "careful"
           ],
           "trivial": true
         },
         {
-          "label": "Ask Pell quietly, before they arrive — whether the trajectory past the loosening is something she's willing to name tonight, in front of the others",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "plan"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Watch the door with Order-Sense primed — read who arrives first and what they're carrying into the room (mood, urgency, what they mean to say)",
+          "label": "Before anyone speaks, use Order-Sense on the group as they enter — read the shape of this gathering before it begins",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
           "abilityId": "order_sense",
           "energyCost": 2,
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "plan"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Let them settle, then open with Calvar — put the expert's read of the drainage cut on the table first, before anything else",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 15,
+          "intentTags": [
+            "lead",
+            "plan"
+          ],
           "trivial": false
         }
       ],
       "scene": {
-        "setting": "Pell's forge interior, Millbrook — banked coals holding low iron warmth, full dark at the door gap, evening fully in. Footsteps audible on the lane outside — the gathering beginning to arrive.",
+        "setting": "Pell's forge interior, Millbrook — banked coals steady and warm, full dark at the door gap, the gathering arriving on the lane outside. Seating arranged: forge block, stools, cooler bench.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Palm flat at Silas's neck, forehead close — holding the moment, turning toward the sound of the lane."
+            "state": "Straightening the room — stool nudged, cooler bench set, Memory shifted clear of the door-path. Facing the door now, ready."
           },
           {
             "name": "Huginn",
-            "state": "On the crossbeam — head turned one degree toward the door, wings still folded, attending."
+            "state": "On the crossbeam — head turned toward the lane, attending the footsteps outside."
           }
         ],
         "objects": [
-          "Memory (spear) — leaned near the door",
+          "Memory (spear) — moved one foot clear of the door-path",
           "Traveler's Pack — set down",
           "Valve Failure Timeline — in inventory",
           "Trade-Knives (pair) — in inventory",
-          "Forge block and stools arranged for the evening meeting",
-          "Cooler bench dragged from the corner",
-          "Forge fire — lit and steady at banked coals"
+          "Forge fire — lit and steady at banked coals",
+          "Forge block and stools arranged for the meeting",
+          "Cooler bench set in position"
         ],
         "threads": [
+          "Gathering arriving — Dara, Aldric, Fendt, Mara, Calvar — footsteps on the lane, arrival imminent",
+          "Calvar's unspoken read of the drainage cut not yet shared with the group",
+          "Document roll on Mara's counter — destination undecided",
           "Quiet's trajectory past the loosening not yet spoken aloud",
-          "Evening gathering — Dara, Aldric, Fendt, Mara, Calvar — footsteps on the lane, first arrival imminent",
-          "Calvar's unspoken read of the drainage cut not yet named to the group",
-          "Document roll on Mara's counter — destination undecided"
+          "The Edge District Ledger — what the truth is for, to be decided tonight"
         ]
       },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "pell",
+          "name": "Pell",
+          "note": "Received the sealing kiss — steady, present, answered it in kind. Named it 'right' and went straight to work. Cleared the forge for the gathering without ceremony.",
+          "statusNote": "At the forge with Silas — the naming sealed; now preparing the room for the evening meeting."
+        }
+      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief held moment at the forge before the gathering's arrival"
+        "why": "A short intimate beat — the naming, the kiss, the clearing of the forge before the gathering arrives."
       }
     },
     "sceneState": {
-      "setting": "Pell's forge interior, Millbrook — banked coals holding low iron warmth, full dark at the door gap, evening fully in. Footsteps audible on the lane outside — the gathering beginning to arrive.",
+      "setting": "Pell's forge interior, Millbrook — banked coals steady and warm, full dark at the door gap, the gathering arriving on the lane outside. Seating arranged: forge block, stools, cooler bench.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Palm flat at Silas's neck, forehead close — holding the moment, turning toward the sound of the lane."
+          "state": "Straightening the room — stool nudged, cooler bench set, Memory shifted clear of the door-path. Facing the door now, rea"
         },
         {
           "name": "Huginn",
-          "state": "On the crossbeam — head turned one degree toward the door, wings still folded, attending."
+          "state": "On the crossbeam — head turned toward the lane, attending the footsteps outside."
         }
       ],
       "objects": [
-        "Memory (spear) — leaned near the door",
+        "Memory (spear) — moved one foot clear of the door-path",
         "Traveler's Pack — set down",
         "Valve Failure Timeline — in inventory",
         "Trade-Knives (pair) — in inventory",
-        "Forge block and stools arranged for the evening meeting",
-        "Cooler bench dragged from the corner",
-        "Forge fire — lit and steady at banked coals"
+        "Forge fire — lit and steady at banked coals",
+        "Forge block and stools arranged for the meeting",
+        "Cooler bench set in position"
       ],
       "threads": [
+        "Gathering arriving — Dara, Aldric, Fendt, Mara, Calvar — footsteps on the lane, arrival imminent",
+        "Calvar's unspoken read of the drainage cut not yet shared with the group",
+        "Document roll on Mara's counter — destination undecided",
         "Quiet's trajectory past the loosening not yet spoken aloud",
-        "Evening gathering — Dara, Aldric, Fendt, Mara, Calvar — footsteps on the lane, first arrival imminent",
-        "Calvar's unspoken read of the drainage cut not yet named to the group",
-        "Document roll on Mara's counter — destination undecided"
+        "The Edge District Ledger — what the truth is for, to be decided tonight"
       ]
     }
   },
@@ -2110,7 +2129,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d5] Received 'Pell Ran Marsh' with a quiet thing at the corner of her mouth — not objecting. Named the forge as both changed and unchanged. Said yes to looking through her father's equ",
         "[d5] Received 'I love you, Pelly' — crossed the floor, took his face in both hands, forehead to his. Said his name in the register that goes all the way in. Nothing managed. Nothing hel",
         "[d5] Your bond deepens — partner.",
         "[d5] Received the middle-name question in the quiet after the declaration — not guessing yet, asking what kind of name to listen for before she commits.",
@@ -2119,7 +2137,8 @@
         "[d5] Received the full shape of Quiet's ending without alarm — named all three change-points as 'something that grew past what it was built for.' Gave Silas his middle name, Ran, with c",
         "[d5] Named Silas's middle name — Fell — by reading the grain of the spear-binding and the soul-mark exchange. Waiting for confirmation.",
         "[d5] Tested 'Fell' aloud — full name, Silas Fell Weir — and named it kept, not worn. Hand flat at his neck now, past the reading, simply present.",
-        "[d5] Heard 'Fell' said back in Silas's own voice — received it as the sealing. Said the full name once to fix it, brought her forehead to his. The name is now a settled fact between the"
+        "[d5] Heard 'Fell' said back in Silas's own voice — received it as the sealing. Said the full name once to fix it, brought her forehead to his. The name is now a settled fact between the",
+        "[d5] Received the sealing kiss — steady, present, answered it in kind. Named it 'right' and went straight to work. Cleared the forge for the gathering without ceremony."
       ],
       "knownFacts": [
         "Huginn named Quiet as ending in Silas",
@@ -2140,7 +2159,7 @@
         "reading a person's deep grain through a shared rune-thread —"
       ],
       "status": "active",
-      "statusNote": "At the forge with Silas — forehead to his, hand at his neck, entirely present; waiting for the gathering to arrive.",
+      "statusNote": "At the forge with Silas — the naming sealed; now preparing the room for the evening meeting.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
@@ -4336,20 +4355,20 @@
     }
   },
   "tendencies": {
-    "strategic": 14.993847127026958,
-    "cerebral": 11.068988819217228,
-    "social": 11.985685170907256,
-    "generous": 3.85405591403115,
-    "cautious": 9.190364906842678,
-    "physical": 1.8879335840402782,
-    "risky": 0.41734840732805256,
-    "ruthless": 2.7341754384091495,
-    "carousing": 0.041891024919969565,
-    "amorous": 10.24582045411075,
-    "patient": 3.2912908856393055,
-    "stealth": 1.0597733852035307,
-    "devotion": 0.5780497016907287,
-    "craft": 0.5441886455913022
+    "strategic": 15.619000948851284,
+    "cerebral": 10.792264098736798,
+    "social": 11.686043041634575,
+    "generous": 3.7577045161803713,
+    "cautious": 8.96060578417161,
+    "physical": 1.8407352444392713,
+    "risky": 0.40691469714485123,
+    "ruthless": 2.6658210524489205,
+    "carousing": 0.04084374929697032,
+    "amorous": 10.989674942757981,
+    "patient": 3.2090086134983227,
+    "stealth": 1.0332790505734424,
+    "devotion": 0.5635984591484604,
+    "craft": 0.5305839294515197
   },
   "aptitudes": [
     "strategist",
@@ -4359,7 +4378,7 @@
     "stalwart",
     "charmer"
   ],
-  "actionCount": 485,
+  "actionCount": 486,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -4605,8 +4624,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784391071091,
-  "rev": 701,
+  "updatedAt": 1784391174287,
+  "rev": 702,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5637,7 +5656,7 @@
   "syncedAt": 1784382065804,
   "teachers": {},
   "regionsKnown": {
-    "valley": 303
+    "valley": 304
   },
   "foreclosed": [
     "rootkin",
@@ -5692,10 +5711,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T16:11:11.079Z",
+      "lastAt": "2026-07-18T16:12:54.286Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 28
+      "beats": 29
     }
   ],
   "company": [

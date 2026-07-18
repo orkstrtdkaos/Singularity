@@ -110,8 +110,7 @@
       },
       "functions": [
         "bind",
-        "reveal",
-        "heal"
+        "reveal"
       ],
       "narrationHints": "The room turns — a crowd, a court, a mob — moved as one by the exact true thing said the exact right way.",
       "description": "The social capstone: move a whole gathering at once — turn a hostile crowd, sway a council, stop a mob — by finding and speaking the one thing that reaches all of them. Pathos and Logos fused into mass persuasion.",
@@ -121,7 +120,25 @@
           "rank": 1,
           "name": "The Turning Word",
           "grants": "Turn a crowd or council decisively — the room moves as one when you find the word that reaches them.",
-          "cannot": "Needs a real shared chord to strike; a crowd set immovably resists; you feel/carry what you move."
+          "cannot": "Needs a real shared chord to strike; a crowd set immovably resists; you feel/carry what you move.",
+          "functions": [
+            "bind",
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
+        },
+        {
+          "rank": 2,
+          "name": "The Word That Holds",
+          "grants": "The turning holds past the moment — a crowd moved stays moved after you have gone, a council's decision keeps its shape when you are not in the room. And where there is no shared chord to strike, you can make one: name the thing they did not know they held in common.",
+          "cannot": "A chord you made is a chord you are answerable for; the Rhetors hold that inventing a commonality is how peoples are built and also how they are ruined. It still cannot move a will genuinely set. And you carry what you move for as long as it stays moved.",
+          "functions": [
+            "bind",
+            "reveal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "powerSystem": "reach_emotional_logical",
@@ -719,7 +736,25 @@
           "rank": 1,
           "name": "The Inescapable Conclusion",
           "grants": "Bind a reasoning mind to a conclusion by an argument it cannot honestly escape.",
-          "cannot": "It fails against those who refuse reason itself, it binds its wielder to the same truth, and a conclusion someone was walked into by force of logic can curdle into resentment of the one who walked them."
+          "cannot": "It fails against those who refuse reason itself, it binds its wielder to the same truth, and a conclusion someone was walked into by force of logic can curdle into resentment of the one who walked them.",
+          "functions": [
+            "bind",
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "incapacitating"
+        },
+        {
+          "rank": 2,
+          "name": "The Standing Proof",
+          "grants": "Walk a whole body of reasoning minds to the same conclusion at once — a council, a court, a school — and the binding holds against later private doubt, because each of them watched the others agree. The chain can be built across days now rather than one exchange.",
+          "cannot": "It still fails entirely against those who will simply refuse a true conclusion, and a group holds more of them than a person does. It binds you to the same truth, publicly and on the record. And a conclusion a body was walked into together curdles together — the Syllogists have begun more than one schism this way.",
+          "functions": [
+            "bind",
+            "reveal"
+          ],
+          "gains": "deepen",
+          "harmRung": "incapacitating"
         }
       ],
       "gated": "learned",
@@ -854,7 +889,25 @@
           "rank": 1,
           "name": "The Names of the Lost",
           "grants": "Sing the names of the lost, holding them present in memory for the length of the lament.",
-          "cannot": "It cannot restore the dead, only attend them; it lays every named loss on the singer at once; and the song ends, and they are gone again, and you chose to feel that twice."
+          "cannot": "It cannot restore the dead, only attend them; it lays every named loss on the singer at once; and the song ends, and they are gone again, and you chose to feel that twice.",
+          "functions": [
+            "empower",
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
+        },
+        {
+          "rank": 2,
+          "name": "The Kept Names",
+          "grants": "The names keep past the lament. Sung over a place — a barrow, a battlefield, a hall — the attending holds without you, and any who come after feel the lost attended there. The song can hold names you were told rather than only names you carried yourself.",
+          "cannot": "It still does not return them; a name kept is not a life restored. A place that holds its lost is a place that does not move on, which is not always mercy. And a name taken from another's telling is held on trust — sing one wrong and the Threnodists count it a wound.",
+          "functions": [
+            "empower",
+            "reveal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "gated": "learned",

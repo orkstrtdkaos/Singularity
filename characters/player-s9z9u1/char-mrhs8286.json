@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 12,
-  "xp": 1137,
+  "xp": 1142,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -89,7 +89,7 @@
   "maxHealth": 85,
   "health": 85,
   "maxEnergy": 155,
-  "energy": 136,
+  "energy": 132,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1276,16 +1276,21 @@
         "player": "Shadowstep — the lane has shadow at its edges; arrive at Calvar's stair-door without giving the watcher a clear moment to clock your entry.",
         "summary": "Shadowstepped the watcher's blind to the cooperage stair-door — inside, unobserved.",
         "narration": "The lane has shadow enough — the cooperage loading dock throws a deep one against the east wall, and the chandler's awning makes a second. You don't hurry. You let the watcher's attention settle on Calvar's casement the way it was already pointing, and then you step.\n\nThe Stepping Dark is a quiet thing at conserved scale — not a vanishing, just a choice about which part of the street you occupy. One moment you are at the lane's edge behind the barrel rack, the next you are at the cooperage stair-door, the ten yards between unwitnessed. Pell is a half-step behind, reading the move the instant you make it — she has seen the dock shadow, has angled herself into it before you signal, and she arrives at your shoulder in the same unhurried register she brings to all of it. The watcher's gaze hasn't shifted.\n\nHuginn drops off your shoulder into the shadow of the door-frame and goes still, exactly as useful as a finial. The stair-door is unlatched — the propped cooperage door below means the building is open to something, if not to everyone. You press the door inward with two fingers and listen to the creak it makes before you commit your weight to the first step.\n\nThe stair above is dim, lit only by the conduit-bleed through the floor joints. Calvar's room is at the top. The casement is latched, the lamp absent — but the door may answer."
+      },
+      {
+        "player": "Use The Attended End quietly — read what, if anything, is ending on the other side of that door.",
+        "summary": "The Attended End confirms Calvar is alive and waiting behind the door — his absence was deliberate, not disaster.",
+        "narration": "You let the craft come without reaching for it — a light touch, the way you'd rest a hand against a door to feel whether there's fire behind it rather than heat. The Attended End moves outward through the wood and plaster, unhurried.\n\nCalvar is in there. You can feel the shape of what isn't ending: his breath, steady and old and deliberate, someone who has been waiting in a still room for long enough that the waiting has become its own kind of work. Nothing in that space is finishing. No truce unraveling, no body losing its argument with cold, no last hour making itself known. Whatever is behind that door is alive and present and has been sitting with its own patience.\n\nWhat the craft does find — faint, not urgent — is that the room on the other side has been holding itself. Calvar went quiet on purpose. The absence of the lamp was a choice, not a sign of trouble.\n\nPell reads your exhale. She shifts her pack strap once, settles, and gives you the briefest look: *well?*"
       }
     ],
     "lastTurn": {
-      "narration": "The lane has shadow enough — the cooperage loading dock throws a deep one against the east wall, and the chandler's awning makes a second. You don't hurry. You let the watcher's attention settle on Calvar's casement the way it was already pointing, and then you step.\n\nThe Stepping Dark is a quiet thing at conserved scale — not a vanishing, just a choice about which part of the street you occupy. One moment you are at the lane's edge behind the barrel rack, the next you are at the cooperage stair-door, the ten yards between unwitnessed. Pell is a half-step behind, reading the move the instant you make it — she has seen the dock shadow, has angled herself into it before you signal, and she arrives at your shoulder in the same unhurried register she brings to all of it. The watcher's gaze hasn't shifted.\n\nHuginn drops off your shoulder into the shadow of the door-frame and goes still, exactly as useful as a finial. The stair-door is unlatched — the propped cooperage door below means the building is open to something, if not to everyone. You press the door inward with two fingers and listen to the creak it makes before you commit your weight to the first step.\n\nThe stair above is dim, lit only by the conduit-bleed through the floor joints. Calvar's room is at the top. The casement is latched, the lamp absent — but the door may answer.",
-      "sceneSummary": "Shadowstepped the watcher's blind to the cooperage stair-door — inside, unobserved.",
+      "narration": "You let the craft come without reaching for it — a light touch, the way you'd rest a hand against a door to feel whether there's fire behind it rather than heat. The Attended End moves outward through the wood and plaster, unhurried.\n\nCalvar is in there. You can feel the shape of what isn't ending: his breath, steady and old and deliberate, someone who has been waiting in a still room for long enough that the waiting has become its own kind of work. Nothing in that space is finishing. No truce unraveling, no body losing its argument with cold, no last hour making itself known. Whatever is behind that door is alive and present and has been sitting with its own patience.\n\nWhat the craft does find — faint, not urgent — is that the room on the other side has been holding itself. Calvar went quiet on purpose. The absence of the lamp was a choice, not a sign of trouble.\n\nPell reads your exhale. She shifts her pack strap once, settles, and gives you the briefest look: *well?*",
+      "sceneSummary": "The Attended End confirms Calvar is alive and waiting behind the door — his absence was deliberate, not disaster.",
       "choices": [
         {
-          "label": "Knock once, low and deliberate — Calvar's pattern, the way you arrived before.",
+          "label": "Knock once — a specific pattern Calvar would recognize as deliberate, not random.",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
             "careful"
@@ -1293,78 +1298,87 @@
           "trivial": true
         },
         {
-          "label": "Use Order-Sense on the door before knocking — read the whole design of what's in that room before you enter.",
+          "label": "Open the door quietly without knocking — he knows someone is coming and you'd rather not announce to the stairwell.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 0,
+          "intentTags": [
+            "careful",
+            "sneak"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Let Huginn lead — send the bird ahead through any gap in the door-frame as a signal before you follow.",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "study",
             "careful"
           ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false
+          "trivial": true
         },
         {
-          "label": "Use The Attended End quietly — read what, if anything, is ending on the other side of that door.",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Tell Pell what you read — confirm it aloud in a low voice before you move so she has the full picture.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "study",
             "careful"
           ],
-          "abilityId": "the-attended-end",
-          "energyCost": 2,
-          "trivial": false
-        },
-        {
-          "label": "Don't knock yet — listen at the door for thirty seconds first. What the room sounds like tells you more than a knock will.",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "difficulty": 15,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "trivial": false
+          "trivial": true
         }
       ],
       "characterDeltas": {
-        "energy": -4
+        "health": 0,
+        "energy": -2
       },
       "scene": {
         "setting": "Cooperage stair-door, Edge District — interior threshold, dim stair lit only by conduit-bleed through floor joints. The lane and the watcher are behind you, unaware. Calvar's room is at the top of the stair.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "At Silas's shoulder, inside the door — pack settled, breathing steady, watching the stair above."
+            "state": "At Silas's shoulder — pack settled, reading his exhale, waiting for the signal."
           },
           {
             "name": "Huginn",
-            "state": "Perched in the door-frame shadow, still as a carving."
+            "state": "Perched in the door-frame shadow, head tilted toward the upper door, still."
           },
           {
             "name": "Unknown watcher",
-            "state": "Still under the chandler's awning, gaze on Calvar's casement — unaware of the entry."
+            "state": "Still under the chandler's awning outside, gaze on Calvar's casement — unaware of entry."
           }
         ],
         "objects": [
           "Memory (spear) — across Silas's back",
-          "Cooperage stair-door — unlatched, creaking softly behind them",
+          "Cooperage stair-door — unlatched, closed behind them",
           "Dim stair — conduit-bleed through floor joints, no lamp",
-          "Calvar's room door — at the top of the stair, unlit"
+          "Calvar's room door — at the top of the stair, unlit but occupied"
         ],
         "threads": [
-          "Calvar's lamp not in the window — status inside the room unknown",
+          "Calvar is alive and waiting — his stillness was chosen, not forced",
           "Watcher outside — unaware of entry, window still open but narrowing",
           "Cooperage ground-floor door propped open — someone expected passage or left in a hurry",
           "The conduit pulse at the third hour — still unread"
         ]
       },
+      "codexUpdates": [
+        {
+          "topic": "calvar",
+          "label": "Calvar — the Engineer",
+          "kind": "person",
+          "entityId": "calvar",
+          "fact": "The Attended End confirms Calvar is alive behind his door on World-day 18 afternoon — his stillness is deliberate. The room is holding itself; nothing is ending. He went quiet on purpose.",
+          "links": [
+            "find-the-engineer",
+            "the-edge-district-ledger",
+            "radiant-plateau-edge"
+          ]
+        }
+      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A quiet crossing of the lane — a handful of minutes at most."
+        "why": "A brief moment on the stair — one quiet cast and a breath"
       }
     },
     "sceneState": {
@@ -1372,25 +1386,25 @@
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "At Silas's shoulder, inside the door — pack settled, breathing steady, watching the stair above."
+          "state": "At Silas's shoulder — pack settled, reading his exhale, waiting for the signal."
         },
         {
           "name": "Huginn",
-          "state": "Perched in the door-frame shadow, still as a carving."
+          "state": "Perched in the door-frame shadow, head tilted toward the upper door, still."
         },
         {
           "name": "Unknown watcher",
-          "state": "Still under the chandler's awning, gaze on Calvar's casement — unaware of the entry."
+          "state": "Still under the chandler's awning outside, gaze on Calvar's casement — unaware of entry."
         }
       ],
       "objects": [
         "Memory (spear) — across Silas's back",
-        "Cooperage stair-door — unlatched, creaking softly behind them",
+        "Cooperage stair-door — unlatched, closed behind them",
         "Dim stair — conduit-bleed through floor joints, no lamp",
-        "Calvar's room door — at the top of the stair, unlit"
+        "Calvar's room door — at the top of the stair, unlit but occupied"
       ],
       "threads": [
-        "Calvar's lamp not in the window — status inside the room unknown",
+        "Calvar is alive and waiting — his stillness was chosen, not forced",
         "Watcher outside — unaware of entry, window still open but narrowing",
         "Cooperage ground-floor door propped open — someone expected passage or left in a hurry",
         "The conduit pulse at the third hour — still unread"
@@ -3500,7 +3514,8 @@
           "[d3] Filed the third copy of the seventh-band calibration files as personal correspondence bound with Pell's father's letters — deliberately obscured to survive Rennic's collection. Located in the Filtrati",
           "[d4] [while away] Reviewing last night's seventh-band log, Calvar found a seventeen-minute gap in the low-frequency baseline that his specification explicitly flags as instrument drift — but the gap's edge",
           "[d4] Calvar's departure lamp is absent from the window on World-day 18 afternoon; a watcher with dry boots is stationed under the tallow-chandler's awning opposite the cooperage. The agreed signal has not ",
-          "[d4] The Ended Threat reads the watcher outside his cooperage window as patient and reporting — no trigger imminent, no action yet dispatched. The threat is real but upstream of its own edge. A window exis"
+          "[d4] The Ended Threat reads the watcher outside his cooperage window as patient and reporting — no trigger imminent, no action yet dispatched. The threat is real but upstream of its own edge. A window exis",
+          "[d4] The Attended End confirms Calvar is alive behind his door on World-day 18 afternoon — his stillness is deliberate. The room is holding itself; nothing is ending. He went quiet on purpose."
         ],
         "links": [
           "the-water-crisis",
@@ -3692,20 +3707,20 @@
     }
   },
   "tendencies": {
-    "strategic": 8.746201655791918,
-    "cerebral": 13.425330467993017,
-    "social": 15.107662926302666,
-    "generous": 1.631949355245329,
-    "cautious": 8.201718279524467,
-    "physical": 0.16242518002450418,
-    "risky": 1.4069452803954778,
-    "ruthless": 0.20111163880840938,
-    "carousing": 0.14122104881007158,
-    "amorous": 16.22819813692472,
-    "patient": 2.000570187942744,
-    "stealth": 1.1657019863680025,
-    "devotion": 1.9486939098068976,
-    "craft": 0.4447825110517975
+    "strategic": 8.527546614397119,
+    "cerebral": 14.089697206293192,
+    "social": 14.7299713531451,
+    "generous": 1.5911506213641957,
+    "cautious": 8.996675322536355,
+    "physical": 0.15836455052389156,
+    "risky": 1.3717716483855908,
+    "ruthless": 0.19608384783819913,
+    "carousing": 0.13769052258981979,
+    "amorous": 15.822493183501603,
+    "patient": 1.9505559332441755,
+    "stealth": 1.1365594367088023,
+    "devotion": 1.899976562061725,
+    "craft": 0.43366294827550256
   },
   "aptitudes": [
     "strategist",
@@ -3716,7 +3731,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 437,
+  "actionCount": 438,
   "grantsVersion": 1,
   "reconcileVersion": 5,
   "gallery": [
@@ -3922,8 +3937,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784340885317,
-  "rev": 627,
+  "updatedAt": 1784341108285,
+  "rev": 628,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4193,10 +4208,6 @@
           },
           "attentionHistory": [
             {
-              "kind": "fact",
-              "day": 3
-            },
-            {
               "kind": "interact",
               "day": 3
             },
@@ -4282,6 +4293,10 @@
             },
             {
               "kind": "interact",
+              "day": 4
+            },
+            {
+              "kind": "fact",
               "day": 4
             },
             {
@@ -4759,7 +4774,7 @@
       "palework": 22,
       "deathsense": 19,
       "shadowstep": 10,
-      "the-attended-end": 24,
+      "the-attended-end": 25,
       "wildcraft": 3,
       "the_raised_thing": 4,
       "the_ended_threat": 1
@@ -4865,7 +4880,7 @@
   "syncedAt": 1784339418317,
   "teachers": {},
   "regionsKnown": {
-    "valley": 254
+    "valley": 255
   },
   "foreclosed": [
     "rootkin",
@@ -4911,10 +4926,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-17T17:39:40.705Z",
-      "lastAt": "2026-07-18T02:14:45.317Z",
+      "lastAt": "2026-07-18T02:18:28.283Z",
       "startDay": 17,
       "endDay": 18,
-      "beats": 62
+      "beats": 63
     }
   ],
   "company": [

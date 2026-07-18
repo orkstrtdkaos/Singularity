@@ -16,8 +16,8 @@
         "chaos_order": -0.1
       },
       "functions": [
-        "travel",
-        "reveal"
+        "move",
+        "travel"
       ],
       "narrationHints": "The distance was there a moment ago. It is somehow no longer the point.",
       "description": "The space-pole mastery: distance as a material to be worked. To a Horizon-Walker, 'far' is a claim, and claims can be argued with.",
@@ -27,19 +27,36 @@
           "rank": 1,
           "name": "The Long Stride",
           "grants": "Cover ground far past what a body should — a day's march in an hour, tirelessly.",
-          "cannot": "The ground is still crossed. What is on it still meets you."
+          "cannot": "The ground is still crossed. What is on it still meets you.",
+          "functions": [
+            "move"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Closed Distance",
           "grants": "Close a distance you can see — arrive at the far ridge, the far bank, the far door, without crossing the between.",
-          "cannot": "You must SEE it. And whatever was in the between is still in the between, un-dealt-with."
+          "cannot": "You must SEE it. And whatever was in the between is still in the between, un-dealt-with.",
+          "functions": [
+            "move",
+            "travel"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Open Reach",
           "grants": "Distance stops being an obstacle for you and those you carry — the far place is simply a place you may be.",
-          "cannot": "The world is very large. Horizon-Walkers at this depth stop being FROM anywhere, and it is not always a gift."
+          "cannot": "The world is very large. Horizon-Walkers at this depth stop being FROM anywhere, and it is not always a gift.",
+          "functions": [
+            "move",
+            "travel"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "gated": "learned",
@@ -63,9 +80,9 @@
         "space_time": -0.3
       },
       "functions": [
-        "track",
-        "travel",
-        "reveal"
+        "foresee",
+        "reveal",
+        "track"
       ],
       "narrationHints": "He knows which way, and does not know how he knows.",
       "description": "Know where you are, where things lie, and the true way between — the first gift of the Open Reach.",
@@ -75,19 +92,37 @@
           "rank": 1,
           "name": "Way-Sense",
           "grants": "Never be lost. Know your bearing, your distance, and the shape of the way ahead.",
-          "cannot": "Knowing the way is not knowing what is on it."
+          "cannot": "Knowing the way is not knowing what is on it.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Read Road",
           "grants": "Read a route's true cost before walking it — where it will be hard, where it will be watched, where it lies.",
-          "cannot": "A read road is still a road. It does not walk itself."
+          "cannot": "A read road is still a road. It does not walk itself.",
+          "functions": [
+            "reveal",
+            "foresee"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Whole Map",
           "grants": "Hold a region entire in your sense of it — every way in, every way out, every gap between the ways.",
-          "cannot": "Regions change. The map you hold is the one you built, and it ages."
+          "cannot": "Regions change. The map you hold is the one you built, and it ages.",
+          "functions": [
+            "reveal",
+            "foresee",
+            "track"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "gated": "learned",
@@ -111,8 +146,8 @@
         "chaos_order": 0.2
       },
       "functions": [
-        "foresee",
         "bind",
+        "foresee",
         "reveal"
       ],
       "narrationHints": "The moment does not pass. It sits there, being looked at.",
@@ -123,19 +158,37 @@
           "rank": 1,
           "name": "The Kept Hour",
           "grants": "Hold a moment exactly — perceive it whole, at length, while it is still happening.",
-          "cannot": "The moment still passes for everyone else. You get to look; you do not get to act longer."
+          "cannot": "The moment still passes for everyone else. You get to look; you do not get to act longer.",
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Slow Hour",
           "grants": "Slow duration around you — a fight, a fall, a conversation stretches, and you have room inside it.",
-          "cannot": "It costs continuously and it costs steeply. And the world outside your slow hour arrives on time regardless."
+          "cannot": "It costs continuously and it costs steeply. And the world outside your slow hour arrives on time regardless.",
+          "functions": [
+            "reveal",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Pre-Remembered",
           "grants": "Remember forward — an hour that has not happened arrives in you as memory does, with a memory's specificity and a memory's unreliability.",
-          "cannot": "You cannot tell a true pre-memory from a feared one. Hourkeepers who trust it wrongly are the reason the craft is feared."
+          "cannot": "You cannot tell a true pre-memory from a feared one. Hourkeepers who trust it wrongly are the reason the craft is feared.",
+          "functions": [
+            "reveal",
+            "bind",
+            "foresee"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "gated": "learned",
@@ -170,19 +223,37 @@
           "rank": 1,
           "name": "Hour-Sense",
           "grants": "Know exactly how long since a thing happened, and how long until a thing due will come.",
-          "cannot": "When, never what. The hour is knowable; the event is not."
+          "cannot": "When, never what. The hour is knowable; the event is not.",
+          "functions": [
+            "reveal",
+            "foresee"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Long Count",
           "grants": "Read the age of a place, a wound, a working, or a lie — and when it will fail.",
-          "cannot": "It counts. It does not care whether you are ready."
+          "cannot": "It counts. It does not care whether you are ready.",
+          "functions": [
+            "reveal",
+            "foresee"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Kept Ledger",
           "grants": "Hold the whole duration of a place or a people — its beginning, its hours, and the hour it is running out of.",
-          "cannot": "Knowing a people's remaining hours and being unable to say so is the Hourkeepers' particular grief."
+          "cannot": "Knowing a people's remaining hours and being unable to say so is the Hourkeepers' particular grief.",
+          "functions": [
+            "reveal",
+            "foresee"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "gated": "learned",
@@ -216,8 +287,8 @@
       "tradition": "horizon",
       "harmRung": "damaging",
       "functions": [
-        "strike",
-        "move"
+        "move",
+        "strike"
       ],
       "challengeTypes": [
         "combat",
@@ -229,19 +300,37 @@
           "rank": 1,
           "name": "Distance Closed",
           "grants": "Strike from further away than expected — a thrown weapon, a sprint into contact, an attack timed at the moment of arrival.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "move",
+            "strike"
+          ],
+          "gains": "broaden",
+          "harmRung": "damaging"
         },
         {
           "rank": 2,
           "name": "The Running Strike",
           "grants": "Attack in full motion — without losing accuracy or force to the movement; the speed is the weapon.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "move",
+            "strike"
+          ],
+          "gains": "deepen",
+          "harmRung": "damaging"
         },
         {
           "rank": 3,
           "name": "From Wherever You Are",
           "grants": "Distance ceases to reduce your effectiveness — whether across a room or across a field, you arrive with full force or make the throw as if there were no gap at all.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "move",
+            "strike"
+          ],
+          "gains": "deepen",
+          "harmRung": "damaging"
         }
       ],
       "nativeOrCombination": "native"
@@ -267,8 +356,10 @@
       "tradition": "horizon",
       "harmRung": "none",
       "functions": [
+        "empower",
+        "heal",
         "restore",
-        "empower"
+        "sustain"
       ],
       "challengeTypes": [
         "healing",
@@ -280,19 +371,40 @@
           "rank": 1,
           "name": "New Ground",
           "grants": "Move to a new place and the weight of the last one lifts — wounds feel less, fear recedes, the body and will recover in the way only distance makes possible.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "heal",
+            "restore"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Road Restores",
           "grants": "A journey restores the party — physically and otherwise; the movement is the medicine, and you know how to pace it so it heals rather than depletes.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "heal",
+            "restore",
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Always More Ahead",
           "grants": "Show someone the next horizon and it fills them again — despair fails against the sight of further to go, and you can make that sight real.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "heal",
+            "restore",
+            "sustain",
+            "empower"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -318,8 +430,9 @@
       "tradition": "horizon",
       "harmRung": "none",
       "functions": [
-        "shield",
-        "move"
+        "move",
+        "resist",
+        "shield"
       ],
       "challengeTypes": [
         "combat",
@@ -331,19 +444,39 @@
           "rank": 1,
           "name": "Out of Reach",
           "grants": "Maintain enough distance that what threatens you cannot effectively reach you — moving before it closes, keeping the gap that keeps you safe.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "move",
+            "resist"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Managed Gap",
           "grants": "Control the distance between yourself and a threat — always too far for it to act, close enough for you to — and maintain that gap through a whole engagement.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "move",
+            "resist",
+            "shield"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Untouchable Distance",
           "grants": "Stay perpetually where the threat isn't — and bring others with you. The person who cannot close the gap cannot win.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "move",
+            "resist",
+            "shield"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -371,6 +504,7 @@
       "functions": [
         "make",
         "open",
+        "reveal",
         "travel"
       ],
       "challengeTypes": [
@@ -383,19 +517,37 @@
           "rank": 1,
           "name": "The Found Way",
           "grants": "Find a crossing across an obstacle that wasn't apparent — the shallows, the ledge, the fallen tree — by reading terrain the way a horizon-walker does.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Where the Gap Yields",
           "grants": "Identify and exploit the specific point where an obstacle can be crossed — not the obvious attempt but the place where the distance relents.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "No Uncrossable Gap",
           "grants": "Make the crossing — any crossing — by knowing exactly where to commit and exactly how. What the land calls uncrossable is only waiting for someone who can read its grain.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "make",
+            "open",
+            "travel"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -434,19 +586,37 @@
           "rank": 1,
           "name": "The Scout's Word",
           "grants": "Speak with the authority of someone who has been where others haven't — your intelligence about terrain, routes, and distances commands genuine trust.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "command"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Strategic Ground",
           "grants": "Use knowledge of land and distance to direct others effectively — the advice that wins a chase, the route that avoids the trap, the position that changes everything.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "command"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Known Land",
           "grants": "In territory you have walked, your knowledge is comprehensive enough to command any situation that depends on terrain — you are the map and the map is right.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "reveal",
+            "command"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -472,8 +642,8 @@
       "tradition": "horizon",
       "harmRung": "none",
       "functions": [
-        "sustain",
-        "travel"
+        "empower",
+        "sustain"
       ],
       "challengeTypes": [
         "endurance",
@@ -485,19 +655,36 @@
           "rank": 1,
           "name": "Keep Walking",
           "grants": "Sustain movement and function past the ordinary limit — as long as there is ground ahead, you cover it.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Sustained March",
           "grants": "Keep a party moving and functional across brutal distances — through exhaustion, injury, and conditions that would stop others — by knowing how to pace the impossible road.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain",
+            "empower"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "No Stopping Place",
           "grants": "You and your party can go on for as long as the task requires — rest when you must, move when you must — until the road has been walked.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain",
+            "empower"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -522,7 +709,7 @@
       "description": "Strike or act at the precise moment when the other person cannot respond — the hourkeeper's harm is perfect timing, not force.",
       "notFor": [],
       "tradition": "hourkeeper",
-      "harmRung": "incapacitating",
+      "harmRung": "lethal",
       "functions": [
         "hinder",
         "strike"
@@ -537,19 +724,37 @@
           "rank": 1,
           "name": "Their Bad Moment",
           "grants": "Identify and act in the precise instant when a person is off-balance, distracted, or committed — so your action lands without meaningful response.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "hinder",
+            "strike"
+          ],
+          "gains": "broaden",
+          "harmRung": "incapacitating"
         },
         {
           "rank": 2,
           "name": "Chosen Time",
           "grants": "Dictate when the confrontation happens by waiting for the exact moment that advantages you most — the ambush, the interruption, the word at the one instant it cannot be answered.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "hinder",
+            "strike"
+          ],
+          "gains": "deepen",
+          "harmRung": "incapacitating"
         },
         {
           "rank": 3,
           "name": "No Good Moment for Them",
           "grants": "Act in a sequence of moments so precisely chosen that the other person is never in a position to respond effectively — they are always recovering from the last thing when the next arrives.",
-          "cannot": null
+          "cannot": "It needs someone who can be caught off-balance — the genuinely unpredictable, the unhurried, and anyone who simply refuses to be drawn all defeat it. And a sequence this precise is a decision to finish someone, made several moments before the last one: the Reach does not let its people pretend otherwise afterward.",
+          "functions": [
+            "hinder",
+            "strike"
+          ],
+          "gains": "deepen",
+          "harmRung": "lethal"
         }
       ],
       "nativeOrCombination": "native"
@@ -576,7 +781,8 @@
       "harmRung": "none",
       "functions": [
         "heal",
-        "restore"
+        "restore",
+        "sustain"
       ],
       "challengeTypes": [
         "healing",
@@ -588,19 +794,37 @@
           "rank": 1,
           "name": "A Little More Time",
           "grants": "Buy the minutes or hours that make a difference — slow enough that care can happen, or hold the situation open long enough that recovery begins.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "heal"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Hour Given",
           "grants": "Create the time a person or situation needs — not by stopping anything, but by managing the duration so that what needs time to work has time to work.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "heal",
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "All the Time It Needs",
           "grants": "Hold open the duration of a recovery, a negotiation, or a healing — as long as it requires — without the outside closing in until it is ready.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "heal",
+            "sustain",
+            "restore"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -626,8 +850,8 @@
       "tradition": "hourkeeper",
       "harmRung": "none",
       "functions": [
-        "shield",
-        "foresee"
+        "foresee",
+        "shield"
       ],
       "challengeTypes": [
         "combat",
@@ -639,19 +863,36 @@
           "rank": 1,
           "name": "Their Moment Wasted",
           "grants": "See the attack forming early enough to be gone before it lands — not blocking, not armoring, but the exact move that empties the moment of consequence.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "foresee"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "No Good Window",
           "grants": "Protect someone by watching their threat's timing and calling the move — the dodge, the step, the word — at the instant that makes the attack miss without effort.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "foresee",
+            "shield"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Protected Duration",
           "grants": "For as long as you attend to a person's safety, no moment that could harm them arrives — you see it and fill or empty it before it becomes a wound.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "foresee",
+            "shield"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -675,10 +916,11 @@
       "description": "Shape how long something takes — stretch a moment, compress an hour, make duration do what you need rather than what it would naturally do.",
       "notFor": [],
       "tradition": "hourkeeper",
-      "harmRung": "none",
+      "harmRung": "incapacitating",
       "functions": [
-        "transform",
-        "bind"
+        "bind",
+        "hinder",
+        "transform"
       ],
       "challengeTypes": [
         "tactical",
@@ -690,19 +932,36 @@
           "rank": 1,
           "name": "The Stretched Moment",
           "grants": "Make a short span feel and function longer — enough to act fully in what should only be an instant.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "transform"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "Compressed Duration",
           "grants": "Collapse a long span into less — a day's travel has the fatigue of an hour, a complex process completes in time it shouldn't.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "transform"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "Duration to Order",
-          "grants": "Shape how long something takes with precision — bend the duration of any ongoing process to what you need it to be.",
-          "cannot": null
+          "grants": "Shape how long something takes with precision — bend the duration of any ongoing process to what you need it to be. AND A BODY IS FULL OF ONGOING PROCESSES: a poison's hour arrives in a minute, a wound's bleeding runs its whole course at once, an exhaustion that was days away lands now. Nothing is added — the thing that was going to happen simply stops taking its time.",
+          "cannot": "It only bends what is ALREADY running — it starts nothing, so a healthy body with nothing working in it offers the craft no handle. Bending toward a person is slow, deliberate work that a fight rarely allows. And the Hourkeepers consider this the ugliest thing in the tradition precisely because it never has to touch anyone.",
+          "functions": [
+            "transform",
+            "bind",
+            "hinder"
+          ],
+          "gains": "broaden",
+          "harmRung": "incapacitating"
         }
       ],
       "nativeOrCombination": "native"
@@ -728,6 +987,7 @@
       "tradition": "hourkeeper",
       "harmRung": "none",
       "functions": [
+        "make",
         "move",
         "open"
       ],
@@ -741,19 +1001,37 @@
           "rank": 1,
           "name": "Between Moments",
           "grants": "Move in the gap between one moment and the next — where attention lapses, where the pattern holds its breath — and arrive without being witnessed.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "move"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Cleared Interval",
           "grants": "Open a window in time — a pause in a guard rotation, a silence in a conversation, a beat between alarms — and move through it cleanly.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "move",
+            "open"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "The Moment Made",
           "grants": "Create the gap that didn't exist — find or open the instant that allows passage — and step through it, bringing others if needed.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "move",
+            "open",
+            "make"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"
@@ -779,8 +1057,8 @@
       "tradition": "hourkeeper",
       "harmRung": "none",
       "functions": [
-        "sustain",
-        "resist"
+        "resist",
+        "sustain"
       ],
       "challengeTypes": [
         "endurance",
@@ -792,19 +1070,36 @@
           "rank": 1,
           "name": "Patient Duration",
           "grants": "Hold a position, a vigil, a watch — past the point where others have lost focus or given in — because the passage of time does not wear on you as it does on them.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 2,
           "name": "The Longer Wait",
           "grants": "Sustain any activity that requires patience across duration — a negotiation, a stake-out, a long recovery — by feeling the time accurately rather than agonizingly.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain",
+            "resist"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
         },
         {
           "rank": 3,
           "name": "As Long as It Takes",
           "grants": "You can hold as long as the situation requires — the vigil, the wait, the watch — and remain fully functional throughout. Time is not your enemy.",
-          "cannot": null
+          "cannot": null,
+          "functions": [
+            "sustain",
+            "resist"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "nativeOrCombination": "native"

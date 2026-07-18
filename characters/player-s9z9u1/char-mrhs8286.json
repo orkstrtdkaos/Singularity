@@ -75,6 +75,14 @@
     {
       "abilityId": "the_shielding_word",
       "level": 1
+    },
+    {
+      "abilityId": "the_kept_breath",
+      "level": 1
+    },
+    {
+      "abilityId": "ask_the_dead",
+      "level": 1
     }
   ],
   "alignment": {
@@ -835,93 +843,108 @@
         "player": "Ask Siol about the Ent's circle as you walk — what is it, and is it the kind of thing a traveler can approach",
         "summary": "Siol names the Ent as Taur — ancient, present before the city, approachable but not reliably conversational. The party moves toward the Coliseum.",
         "narration": "You fall into step beside Siol as the party moves across the crescent stones, the Coliseum wall ahead and the market stalls opening to your right. The Ent's circle catches your eye to the east — a low ring of stone with something vast and patient rooted at its center, and two figures visible high in the branches. You ask Siol about it as you walk, keeping your voice easy.\n\nShe glances east without breaking her stride. 'The Ent has been here longer than the city,' she says. 'The circle was not built around it — the city grew toward it, carefully, and stopped at the right distance.' She lets that settle for a pace or two. 'His name is Taur. He chose this ground a long time ago and he has not said why, though people have asked.' A brief pause. 'He is approachable. He does not speak quickly, so visitors need patience, and he does not speak to everyone. But he is not unkind about it.'\n\nPell glances at the branches and the two figures there. 'People sleep in it?' she says.\n\n'Some mornings,' Siol says. 'He allows it. Whether he invites it is a different question.' She angles her path slightly north toward the Coliseum outer wall, its soot-marks visible in the low dawn light. 'If you have time before the road, it is worth a few minutes to stand at the ring. Whether he speaks is his business, not yours.'\n\nHuginn turns his head east toward the circle and holds it there for a moment — that particular stillness that is not indifference — and then faces forward again."
+      },
+      {
+        "player": "Ask Siol what the Coliseum duels are like — what to expect before you step into one",
+        "summary": "Siol describes the Coliseum duels as honest bouts with declared crafts, a referee named Orvil, and yield as the end — the party reaches the outer wall.",
+        "narration": "The Coliseum outer wall is close now — close enough to read the soot-marks on the stone above the nearest gate, and to hear, faintly, the sound of feet on packed sand inside. The gates stand open. A few figures move in and out at a measured pace, none of them in any hurry.\n\nYou ask Siol what the duels here are like. What to expect before you step into one.\n\nShe considers the question for a few steps before she answers. 'They are honest,' she says. 'That is the first thing. No hidden weapons, no interference from the gallery. The Coliseum keeps a referee — a compact man named Orvil, if he is still on the morning rotation — and Orvil does not look the other way.' She glances at Memory riding at your back. 'Spears are allowed. Most things are, as long as you declare them at the gate.' She pauses. 'They will ask you to name your craft before you enter the circle. Not as a condition — as a courtesy, so the person across from you knows the shape of what they are agreeing to.'\n\nPell says nothing, but her eyes move to the open gate with the attention she gives to things she is quietly deciding about.\n\nSiol adds one more thing as you reach the wall's shadow. 'They do not fight to death here,' she says. 'Yield is the end. If someone is not going to yield, Orvil calls it.' She looks at Huginn. 'Your bird will be visible from the gallery. That may affect who chooses to step in across from you.'"
       }
     ],
     "lastTurn": {
-      "narration": "You fall into step beside Siol as the party moves across the crescent stones, the Coliseum wall ahead and the market stalls opening to your right. The Ent's circle catches your eye to the east — a low ring of stone with something vast and patient rooted at its center, and two figures visible high in the branches. You ask Siol about it as you walk, keeping your voice easy.\n\nShe glances east without breaking her stride. 'The Ent has been here longer than the city,' she says. 'The circle was not built around it — the city grew toward it, carefully, and stopped at the right distance.' She lets that settle for a pace or two. 'His name is Taur. He chose this ground a long time ago and he has not said why, though people have asked.' A brief pause. 'He is approachable. He does not speak quickly, so visitors need patience, and he does not speak to everyone. But he is not unkind about it.'\n\nPell glances at the branches and the two figures there. 'People sleep in it?' she says.\n\n'Some mornings,' Siol says. 'He allows it. Whether he invites it is a different question.' She angles her path slightly north toward the Coliseum outer wall, its soot-marks visible in the low dawn light. 'If you have time before the road, it is worth a few minutes to stand at the ring. Whether he speaks is his business, not yours.'\n\nHuginn turns his head east toward the circle and holds it there for a moment — that particular stillness that is not indifference — and then faces forward again.",
-      "sceneSummary": "Siol names the Ent as Taur — ancient, present before the city, approachable but not reliably conversational. The party moves toward the Coliseum.",
+      "narration": "The Coliseum outer wall is close now — close enough to read the soot-marks on the stone above the nearest gate, and to hear, faintly, the sound of feet on packed sand inside. The gates stand open. A few figures move in and out at a measured pace, none of them in any hurry.\n\nYou ask Siol what the duels here are like. What to expect before you step into one.\n\nShe considers the question for a few steps before she answers. 'They are honest,' she says. 'That is the first thing. No hidden weapons, no interference from the gallery. The Coliseum keeps a referee — a compact man named Orvil, if he is still on the morning rotation — and Orvil does not look the other way.' She glances at Memory riding at your back. 'Spears are allowed. Most things are, as long as you declare them at the gate.' She pauses. 'They will ask you to name your craft before you enter the circle. Not as a condition — as a courtesy, so the person across from you knows the shape of what they are agreeing to.'\n\nPell says nothing, but her eyes move to the open gate with the attention she gives to things she is quietly deciding about.\n\nSiol adds one more thing as you reach the wall's shadow. 'They do not fight to death here,' she says. 'Yield is the end. If someone is not going to yield, Orvil calls it.' She looks at Huginn. 'Your bird will be visible from the gallery. That may affect who chooses to step in across from you.'",
+      "sceneSummary": "Siol describes the Coliseum duels as honest bouts with declared crafts, a referee named Orvil, and yield as the end — the party reaches the outer wall.",
       "choices": [
         {
-          "label": "Head to the Coliseum — Siol said to go there before the petition queue fills",
+          "label": "Step through the gate and register for a duel — declare Memory and your crafts at the gate as Siol described",
           "attribute": "physical",
           "subAttribute": "agility",
-          "axes": {
-            "violence_peace": 0.3
-          },
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "travel"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Detour to the Ent's circle first — approach the stone ring and see whether Taur speaks",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "mechanical_spiritual": 0.3
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "scout"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Ask Siol what the Coliseum duels are like — what to expect before you step into one",
+          "label": "Ask Siol if she knows who tends to fight here in the mornings — what kind of opponent might step in across from a spear-carrier with a crow on his shoulder",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "scout"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Ask Siol what the Council of Mavens actually does — what kind of petition they hear, and whether the water crisis is the kind of thing they can act on",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {
-            "falsehood_truth": 0.2
-          },
+          "label": "Let Pell say whether she wants to watch or walk the circle herself first — this is her first time here",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "help"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Tell Siol you will take her word for it and step inside — but ask if Taur can wait, or whether the Ent's circle is better visited before the city wakes fully",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "scene": {
-        "setting": "Hub Waygate Plaza and its northern edge, early dawn — the party moves across the crescent stones heading toward the Coliseum outer wall to the northwest; the Ent's circle is visible to the east between market stalls, two figures in the high branches.",
+        "setting": "The Coliseum outer wall, early dawn — the party stands at the edge of the wall's shadow, the open gate a few steps ahead; soot-marks on the stone above, the sound of feet on packed sand audible from inside.",
         "npcsPresent": [
           {
             "name": "Siol",
-            "state": "Walking ahead, coat settled, angling north toward the Coliseum — answering questions without breaking stride"
+            "state": "Standing at the wall's shadow, having just finished her account of the Coliseum — watching Huginn with dry attention"
           },
           {
             "name": "Pell Marsh",
-            "state": "Beside Silas, eyes moving east toward the Ent's circle after Siol's answer — taking it in without comment beyond her one question"
+            "state": "Eyes on the open gate, quietly deciding something"
           },
           {
             "name": "Huginn",
-            "state": "On Silas's left shoulder — held his gaze east toward the Ent's circle for a long moment before facing forward again"
+            "state": "On Silas's left shoulder, visible and unhurried"
           }
         ],
         "objects": [
-          "Seven waygate arches behind — the sixth identified: lower lintel, darker stone",
-          "Coliseum outer wall ahead to the northwest — fresh soot-marks, outer gates open",
-          "Ent's circle to the east — low stone ring, vast rooted figure at center, two figures visible in the high branches",
-          "Council of Mavens colonnade to the north — petition board visible",
+          "Coliseum open gate — figures moving in and out at a measured pace",
+          "Soot-marks on the stone above the nearest gate",
           "Memory — the assembled spear, road-lashed at Silas's back",
-          "Market stalls to the right, awnings going up in the dawn light"
+          "Seven waygate arches behind to the south",
+          "Ent's circle visible to the east — low stone ring, vast rooted figure, two figures in the branches",
+          "Council of Mavens colonnade to the north — petition board visible"
         ],
         "threads": [
-          "Whether Taur the Ent will speak to Silas — Siol named it as his business, not a guarantee",
-          "Huginn's reaction to the Ent's circle — held east longer than curiosity alone would explain",
-          "Coliseum — duel opportunity pending",
-          "Council of Mavens petition board — water crisis unaddressed at that level",
-          "Siol's acquaintance with Huginn — door still open"
+          "Whether to duel, watch, or move on to the Ent's circle or the petition board",
+          "Pell's unspoken read of the gate — she is deciding something",
+          "Huginn's visibility from the gallery — Siol named it; its effect on challengers is unknown",
+          "Orvil the referee — named but not yet met",
+          "Taur the Ent — approachable but on his own terms; Huginn's earlier eastward attention unresolved"
         ]
       },
       "npcUpdates": [
@@ -929,60 +952,69 @@
           "op": "update",
           "npcId": "siol",
           "name": "Siol",
-          "note": "Named the Ent as Taur — ancient, present before the city, approachable but speaks on his own terms; noted the circle is worth a few minutes if there is time",
+          "note": "Described the Coliseum duels plainly — honest bouts, crafts declared at the gate, a referee named Orvil, yield as the end. Noted Huginn's gallery visibility as a factor. Dry, practical, complete.",
           "learned": [
-            "The Ent's name is Taur — chose this ground before the city existed and has not explained why; approachable, patient, speaks to some and not others — his choice, not the visitor's"
+            "Coliseum duels require craft declaration at the gate — as a courtesy to the opponent, not a condition of entry",
+            "The referee is named Orvil — compact man, morning rotation, does not look the other way",
+            "Spears are allowed; most weapons are, declared at the gate",
+            "Yield ends the bout; Orvil calls it if someone will not",
+            "Huginn's presence in the gallery will affect who chooses to step across from Silas"
           ],
-          "statusNote": "Walking with the party across the plaza toward the Coliseum — city tour in progress"
+          "skillsObserved": [
+            "precise practical briefing on an institution's rules without editorializing"
+          ],
+          "statusNote": "Walking with the party at the Coliseum outer wall — tour continuing",
+          "pronouns": "she/her",
+          "gender": "woman"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "taur-the-ent",
-          "label": "Taur — the Ent of the Hub",
-          "kind": "person",
-          "fact": "The Ent at the Hub circle is named Taur. He chose this ground before the city was built — the city grew toward him and stopped at a respectful distance. He is approachable and not unkind, but speaks on his own terms and not to everyone. Some visitors sleep in his branches with his allowance. His reason for choosing this ground has never been stated.",
+          "topic": "hub-coliseum",
+          "label": "The Hub Coliseum",
+          "kind": "place",
+          "fact": "Duels are honest bouts — crafts declared at the gate as courtesy, not condition. Referee named Orvil on the morning rotation. Spears allowed. Yield ends the fight; Orvil calls it if someone refuses. Huginn's presence in the gallery will be noticed by potential challengers.",
           "links": [
-            "waygate",
-            "the-water-crisis"
+            "siol",
+            "waygate"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short exchange while walking across the plaza — a few minutes of conversation"
+        "why": "walking from the plaza to the Coliseum wall and a short exchange on the road"
       }
     },
     "sceneState": {
-      "setting": "Hub Waygate Plaza and its northern edge, early dawn — the party moves across the crescent stones heading toward the Coliseum outer wall to the northwest; the Ent's circle is visible to the east between market stalls, two figures in the high branches.",
+      "setting": "The Coliseum outer wall, early dawn — the party stands at the edge of the wall's shadow, the open gate a few steps ahead; soot-marks on the stone above, the sound of feet on packed sand audible from inside.",
       "npcsPresent": [
         {
           "name": "Siol",
-          "state": "Walking ahead, coat settled, angling north toward the Coliseum — answering questions without breaking stride"
+          "state": "Standing at the wall's shadow, having just finished her account of the Coliseum — watching Huginn with dry attention"
         },
         {
           "name": "Pell Marsh",
-          "state": "Beside Silas, eyes moving east toward the Ent's circle after Siol's answer — taking it in without comment beyond her one"
+          "state": "Eyes on the open gate, quietly deciding something"
         },
         {
           "name": "Huginn",
-          "state": "On Silas's left shoulder — held his gaze east toward the Ent's circle for a long moment before facing forward again"
+          "state": "On Silas's left shoulder, visible and unhurried"
         }
       ],
       "objects": [
-        "Seven waygate arches behind — the sixth identified: lower lintel, darker stone",
-        "Coliseum outer wall ahead to the northwest — fresh soot-marks, outer gates open",
-        "Ent's circle to the east — low stone ring, vast rooted figure at center, two fig",
-        "Council of Mavens colonnade to the north — petition board visible",
+        "Coliseum open gate — figures moving in and out at a measured pace",
+        "Soot-marks on the stone above the nearest gate",
         "Memory — the assembled spear, road-lashed at Silas's back",
-        "Market stalls to the right, awnings going up in the dawn light"
+        "Seven waygate arches behind to the south",
+        "Ent's circle visible to the east — low stone ring, vast rooted figure, two figur",
+        "Council of Mavens colonnade to the north — petition board visible"
       ],
       "threads": [
-        "Whether Taur the Ent will speak to Silas — Siol named it as his business, not a guarantee",
-        "Huginn's reaction to the Ent's circle — held east longer than curiosity alone would explain",
-        "Coliseum — duel opportunity pending",
-        "Council of Mavens petition board — water crisis unaddressed at that level",
-        "Siol's acquaintance with Huginn — door still open"
+        "Whether to duel, watch, or move on to the Ent's circle or the petition board",
+        "Pell's unspoken read of the gate — she is deciding something",
+        "Huginn's visibility from the gallery — Siol named it; its effect on challengers is unknown",
+        "Orvil the referee — named but not yet met",
+        "Taur the Ent — approachable but on his own terms; Huginn's earlier eastward attention unresolved"
       ]
     }
   },
@@ -1976,27 +2008,29 @@
         "[d6] Answered Pell's gate question directly — no toll, no keeper, but the March reads arrivals and Huginn's presence will be felt before Silas steps through",
         "[d6] Named her road as south but turning before the Steadwood thins — offered a day or so of shared travel if the pace is easy. Dry comment about Huginn not objecting.",
         "[d6] Accepted Silas's invitation to tour the Hub before the road south — stepped clear of her camp without ceremony, named the Coliseum before the petition queue as the practical morning order, and began leading the party north.",
-        "[d6] Named the Ent as Taur — ancient, present before the city, approachable but speaks on his own terms; noted the circle is worth a few minutes if there is time"
+        "[d6] Named the Ent as Taur — ancient, present before the city, approachable but speaks on his own terms; noted the circle is worth a few minutes if there is time",
+        "[d6] Described the Coliseum duels plainly — honest bouts, crafts declared at the gate, a referee named Orvil, yield as the end. Noted Huginn's gallery visibility as a factor. Dry, practical, complete."
       ],
       "knownFacts": [
-        "The March has no toll or threshold keeper — entry is open but arrival is always known",
-        "Huginn's presence will be felt by the March before Silas steps out of the arch on the far side",
-        "The Steadwood passage road is three days from the Hub to the March mouth if weather holds — she confirmed it as clear two days past",
         "Her road runs south from the Hub but turns before the Steadwood thins — not as far as the March mouth",
         "She does not keep a strict morning schedule — flexible about shared travel",
         "She noticed Huginn's sound and named it directly, without ceremony",
         "Prefers the Coliseum before the Council petition board — the queue fills early and physical activity makes the wait bearable; practical city knowledge, not opinion",
-        "The Ent's name is Taur — chose this ground before the city existed and has not explained why; approachable, patient, speaks to some and not others — his choice, not the visitor's"
+        "The Ent's name is Taur — chose this ground before the city existed and has not explained why; approachable, patient, speaks to some and not others — his choice, not the visitor's",
+        "Coliseum duels require craft declaration at the gate — as a courtesy to the opponent, not a condition of entry",
+        "The referee is named Orvil — compact man, morning rotation, does not look the other way",
+        "Spears are allowed; most weapons are, declared at the gate"
       ],
       "skillsObserved": [
         "reading a traveler's affiliation from companion presence alo",
         "plain directional knowledge of the waygate network",
-        "reading two strangers' practical needs and sequencing a morn"
+        "reading two strangers' practical needs and sequencing a morn",
+        "precise practical briefing on an institution's rules without"
       ],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Walking with the party across the plaza toward the Coliseum — city tour in progress",
+      "statusNote": "Walking with the party at the Coliseum outer wall — tour continuing",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 6
@@ -2438,7 +2472,7 @@
     "wits": 5
   },
   "pendingSubPoints": 0,
-  "skillPoints": 2,
+  "skillPoints": 0,
   "discoveries": [],
   "codex": {
     "schemaVersion": 1,
@@ -3776,21 +3810,21 @@
     }
   },
   "tendencies": {
-    "strategic": 16.49467279296515,
-    "cerebral": 7.997512181225178,
-    "social": 16.897442893418265,
-    "generous": 1.5848105000917818,
-    "cautious": 7.405589691739518,
-    "physical": 1.2939341279620005,
-    "risky": 0.12697426230105466,
-    "ruthless": 0.8318467333236401,
-    "carousing": 0.012744943775638323,
-    "amorous": 8.24858045166083,
-    "patient": 2.060218652123008,
-    "stealth": 0.3224259190397174,
-    "devotion": 0.72050765294993,
-    "craft": 2.5469435468857364,
-    "leadership": 0.3200425384736293
+    "strategic": 16.082305973141022,
+    "cerebral": 8.797574376694548,
+    "social": 16.475006821082808,
+    "generous": 1.5451902375894873,
+    "cautious": 7.22044994944603,
+    "physical": 1.2615857747629504,
+    "risky": 0.12379990574352828,
+    "ruthless": 0.8110505649905491,
+    "carousing": 0.012426320181247364,
+    "amorous": 8.04236594036931,
+    "patient": 2.0087131858199325,
+    "stealth": 0.31436527106372447,
+    "devotion": 0.7024949616261817,
+    "craft": 2.483269958213593,
+    "leadership": 0.3120414750117885
   },
   "aptitudes": [
     "strategist",
@@ -3798,7 +3832,7 @@
     "tactician",
     "charmer"
   ],
-  "actionCount": 532,
+  "actionCount": 533,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -4052,8 +4086,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784411000897,
-  "rev": 779,
+  "updatedAt": 1784411490158,
+  "rev": 784,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4639,8 +4673,8 @@
           "entityId": "siol-elven-traveler-at-the-hub-plaza-tal",
           "type": "npc",
           "birthWeight": 23,
-          "engagementScore": 0,
-          "tier": "fresh",
+          "engagementScore": 8,
+          "tier": "nominated",
           "rating": "R+",
           "provenance": {
             "playerKey": "player-s9z9u1",
@@ -4651,11 +4685,21 @@
             "hint": "Siol — Elven traveler at the Hub plaza, tall, pale coat, birch-quiet stillness, named Huginn as Marrow without being tol",
             "why": "First genuine named encounter in the Hub — needs a stable identity so she can recur and the Steadwood passage can be a t"
           },
-          "attentionHistory": [],
+          "attentionHistory": [
+            {
+              "kind": "keep",
+              "day": 6
+            },
+            {
+              "kind": "keep",
+              "day": 6
+            }
+          ],
           "createdDay": 6,
           "repaired": false,
           "stubbed": true,
-          "romanceEligible": true
+          "romanceEligible": true,
+          "lastAttentionDay": 6
         },
         "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Siol%20%E2%80%94%20Elven%20traveler%20at%20the%20Hub%20plaza%2C%20tall%2C%20pale%20coat%2C%20bir%2C%20someone%20of%20Waygate%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=4185&nologo=true"
       }
@@ -5203,7 +5247,7 @@
   "syncedAt": 1784392733860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 352
+    "valley": 353
   },
   "foreclosed": [
     "rootkin",
@@ -5260,10 +5304,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T21:43:20.894Z",
+      "lastAt": "2026-07-18T21:51:30.156Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 77,
+      "beats": 78,
       "_recapError": null,
       "recap": "Day eighteen, and Silas Weir moved like a man who'd finally stopped fighting the shape of what he was. On the road he disarmed three opportunists without breaking bones, read the grief sitting behind the broad man's eyes, named it plainly, pressed provisions into their hands, and sent them toward something worth doing — mercy given as instruction, not sentiment. Then he brought the hard people together: Dara, Aldric, Fendt, Mara, Calvar, all of them in the heat of Pell's forge with no exits easy and no pretense left, and in that single evening he turned a valley's quiet panic into four working threads — engineering, logistics, supply, accounts — each with a named lead and a direction to face. The crisis didn't end, but it stopped being formless, and that was his doing."
     }

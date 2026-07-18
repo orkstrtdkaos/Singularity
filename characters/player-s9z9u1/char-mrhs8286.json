@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 14,
-  "xp": 1366,
+  "xp": 1369,
   "attributes": {
     "physical": 4,
     "mental": 5,
@@ -71,10 +71,14 @@
     {
       "abilityId": "the_shadow_work",
       "level": 1
+    },
+    {
+      "abilityId": "the_shielding_word",
+      "level": 1
     }
   ],
   "alignment": {
-    "spectrumId": -0.30503161461751516,
+    "spectrumId": -0.28978003388663937,
     "violence_peace": 0.1030845625,
     "chaos_order": 0.243796664886697,
     "mechanical_spiritual": 0.2400392471479881,
@@ -89,7 +93,7 @@
   "maxHealth": 95,
   "health": 95,
   "maxEnergy": 165,
-  "energy": 128,
+  "energy": 125,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -163,10 +167,11 @@
       "name": "Assembled Mid-Weight Spear",
       "kind": "weapon",
       "qty": 1,
-      "description": "A seasoned ash shaft six feet long with the mid-weight iron tip road-lashed at the socket throat — wide-cut blade, cross-guard shoulder, oiled leather binding. Not finish work, but it won't shift on a boar.",
+      "description": "A seasoned ash shaft six feet long with the mid-weight iron tip road-lashed at the socket throat — wide-cut blade, cross-guard shoulder, oiled leather binding. Four threads seated: ironsense as anchor, Huginn's Ashwarden ending-sense through the fuller, a shadow-harm focus at the quillon, and an order-sense capacitor closed on Pell's reading idiom. The maker's mark is Pell's. Silas's…",
       "consumable": false,
       "customName": "Memory",
-      "pinned": true
+      "pinned": true,
+      "provenance": "Rune-bound at the Fell Pell on World-day 18 evening, with Huginn as witness at the stone ring."
     },
     {
       "id": null,
@@ -877,74 +882,80 @@
         "player": "The lamp-black is gone — but the vial itself might yield one mark more if you scrape it clean. Offer Pell the radiant embellishment now, in firelight, with whatever remains.",
         "summary": "The lamp-black's last scraping laid a single radiant mark at the brigandine's chest — the declaration Pell chose, placed where the light catches first. The practical work is complete. The armor is done.",
         "narration": "You pick up the empty vial and tip it toward the firelight. There is nothing left to pour. But the inside of the glass is still dark with residue, and the stylus is thin enough to reach it. You work the tip along the curve of the vial's shoulder — once, twice — and come away with enough lamp-black for one mark. Maybe one and a half, if you press light and move slow.\n\nPell watches you do this without comment. She knows what you are doing. She has watched you husband materials her whole working life.\n\nYou look up at her across the brigandine's hem. \"Radiant work now,\" you say. \"One mark. Tell me where it goes.\"\n\nShe considers the armor in your lap the way she considers iron — reading it rather than looking at it. Then she reaches over and touches the center of the chest plate, just below the collarbone. The highest point of the row. \"There,\" she says. \"Where the light would catch it first.\"\n\nYou press the mark. It is small, precise, and it catches the ember-red of the coals immediately — a single peak of brightness along the plate's center ridge, as if the iron remembered sunlight and is only now deciding to say so. It is not a protective thread. It is a declaration. You do not need more than one.\n\nPell is quiet for a moment. Then: \"That'll do,\" she says. Which is, from Pell, the same as beautiful."
+      },
+      {
+        "player": "Infuse the shielding word into that last rune.",
+        "summary": "Silas attempts to seat the Shielding Word into the brigandine's radiant mark — the substrate runs thin and the ward takes only partial hold, outer ring set but not fully through. Pell names it more than the plate had before.",
+        "narration": "You press the stylus's dry tip against the inside of the vial and coax out what little remains — not enough to redraw the mark, barely enough to trace what is already there. The radiant thread is still wet at its edge. You work the Shielding Word along it: spoken low, barely above breath, because the room is quiet and the coal-light is doing something careful to the air.\n\nThe mark takes the word in part. You feel it — the thread accepting the weight of the ward, then the substrate thinning beneath your intent, the lattice here running lean, and the weave going narrow rather than deep. The Word seats itself into the outer ring of the radiant mark but does not reach all the way through. What settles is not the full ward: more a readiness, a place where the shield could find purchase if you return to it with a fuller kit and a substrate to draw from. It is not nothing. But it is not what you meant.\n\nPell watches your face and reads the result before you say it. She tips her chin at the mark — a question without words.\n\n\"Partial,\" you say. \"The word is in the ring. It will hold a light blow, maybe turn the edge of a thing that meant harm. Not the full ward.\"\n\nShe is quiet for a moment. Then she says, \"That is more than the plate had before.\"\n\nHuginn shifts once on the back of the bench, settles, and does not comment. Which is, in its way, agreement.\n\n*✦ Memory has changed — description, provenance.*"
       }
     ],
     "lastTurn": {
-      "narration": "You pick up the empty vial and tip it toward the firelight. There is nothing left to pour. But the inside of the glass is still dark with residue, and the stylus is thin enough to reach it. You work the tip along the curve of the vial's shoulder — once, twice — and come away with enough lamp-black for one mark. Maybe one and a half, if you press light and move slow.\n\nPell watches you do this without comment. She knows what you are doing. She has watched you husband materials her whole working life.\n\nYou look up at her across the brigandine's hem. \"Radiant work now,\" you say. \"One mark. Tell me where it goes.\"\n\nShe considers the armor in your lap the way she considers iron — reading it rather than looking at it. Then she reaches over and touches the center of the chest plate, just below the collarbone. The highest point of the row. \"There,\" she says. \"Where the light would catch it first.\"\n\nYou press the mark. It is small, precise, and it catches the ember-red of the coals immediately — a single peak of brightness along the plate's center ridge, as if the iron remembered sunlight and is only now deciding to say so. It is not a protective thread. It is a declaration. You do not need more than one.\n\nPell is quiet for a moment. Then: \"That'll do,\" she says. Which is, from Pell, the same as beautiful.",
-      "sceneSummary": "The lamp-black's last scraping laid a single radiant mark at the brigandine's chest — the declaration Pell chose, placed where the light catches first. The practical work is complete. The armor is done.",
+      "narration": "You press the stylus's dry tip against the inside of the vial and coax out what little remains — not enough to redraw the mark, barely enough to trace what is already there. The radiant thread is still wet at its edge. You work the Shielding Word along it: spoken low, barely above breath, because the room is quiet and the coal-light is doing something careful to the air.\n\nThe mark takes the word in part. You feel it — the thread accepting the weight of the ward, then the substrate thinning beneath your intent, the lattice here running lean, and the weave going narrow rather than deep. The Word seats itself into the outer ring of the radiant mark but does not reach all the way through. What settles is not the full ward: more a readiness, a place where the shield could find purchase if you return to it with a fuller kit and a substrate to draw from. It is not nothing. But it is not what you meant.\n\nPell watches your face and reads the result before you say it. She tips her chin at the mark — a question without words.\n\n\"Partial,\" you say. \"The word is in the ring. It will hold a light blow, maybe turn the edge of a thing that meant harm. Not the full ward.\"\n\nShe is quiet for a moment. Then she says, \"That is more than the plate had before.\"\n\nHuginn shifts once on the back of the bench, settles, and does not comment. Which is, in its way, agreement.\n\n*✦ Memory has changed — description, provenance.*",
+      "sceneSummary": "Silas attempts to seat the Shielding Word into the brigandine's radiant mark — the substrate runs thin and the ward takes only partial hold, outer ring set but not fully through. Pell names it more than the plate had before.",
       "choices": [
         {
-          "label": "Hold up the finished brigandine — let the forge coals show the full work",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "intentTags": [
-            "help"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask Huginn what it reads in the road ahead — the Zone, the Maelstorm",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Name the departure — morning, south lane, first to your mother. Seal it as the plan.",
+          "label": "The armor is finished — what it holds, it holds. Bank the forge, say goodnight to the fellowship, and rest before the road.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "plan"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Let the night settle. Bank the forge, breathe, and let the quiet be the close.",
-          "attribute": "mental",
-          "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
             "sustain"
           ],
           "trivial": true
+        },
+        {
+          "label": "Ask Huginn what the road ahead looks like — its read on the first leg south, toward your mother.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "scout"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Tell Pell plainly: the ward is partial but the mark will hold the place — when you find a proper substrate, you'll finish what you started. Name it a promise, not an apology.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "comfort"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Step outside the forge into the cold night air — close the door on the gathering, let the evening settle, and take stock of what tomorrow actually asks of you.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 0,
+          "intentTags": [
+            "plan"
+          ],
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "Interior of the Fell Pell — Pell's forge, Millbrook. Forge coals at ember-red, low. The rune-craft kit is now fully spent — vial empty and scraped clean, wax stub exhausted, stylus set down. The brigandine lies across Silas's knees, complete: every plate row threaded inside, and one radiant mark at the chest's highest point catching the coal-light.",
+        "setting": "Interior of the Fell Pell — Pell's forge, Millbrook. Forge coals at ember-red, low. The rune-craft kit is fully spent. The brigandine lies across Silas's knees, complete to its practical thread and its single radiant mark — the Shielding Word seated into the mark's outer ring, partial but present.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Seated across the bench, eyes on the finished mark at the chest plate — quiet, the corner of her mouth not quite still."
+            "state": "Seated across the bench, eyes on the brigandine — she has named the partial ward good enough for now."
           },
           {
             "name": "Huginn",
-            "state": "On the back of the second bench, one foot shifted, watching the room with its usual unhurried calm."
+            "state": "On the back of the second bench, settled, not commenting."
           }
         ],
         "objects": [
           "The Warden's Charge — short sword, rune-bound, leaning against the bench-side",
-          "Brigandine — full protective thread collar to hem, single radiant mark at chest center ridge",
+          "Brigandine — full protective thread collar to hem, single radiant mark at chest with Shielding Word partial in its outer ring",
           "Rune-craft kit — fully spent: vial scraped clean, wax exhausted, stylus down",
           "Open chest under the second bench — oilcloth wrapping folded aside",
           "Banked forge coals — ember-red, low",
           "Sealed document roll — on the counter, Mara's to deliver"
         ],
         "threads": [
+          "The Shielding Word in the brigandine's radiant mark is partial — outer ring holds, the full ward needs a proper substrate to complete",
           "The road's departure not yet formally named for morning",
           "Huginn's read on the road ahead has not been asked",
           "What Pell hopes to find in the Maelstorm is unspoken"
@@ -955,26 +966,16 @@
           "op": "update",
           "npcId": "pell-ran-marsh",
           "name": "Pell Ran Marsh",
-          "role": "Village blacksmith, Millbrook — traveling companion",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Chose where the radiant mark goes — the highest point of the chest plate, where light catches first. Named the finished work 'That'll do.'",
-          "learned": [
-            "The brigandine now carries one radiant mark at the chest's center ridge — her choice of placement"
-          ],
-          "statusNote": "In the Fell Pell — brigandine complete, armor fully done, watching the mark settle in the coal-light.",
+          "note": "Watched the partial ward settle without complaint — named it more than the plate had before. Practical about limits.",
+          "statusNote": "In the Fell Pell — brigandine on her knees, ready to close the evening.",
           "status": "active"
         }
       ],
-      "placeUpdates": [
+      "itemUpdates": [
         {
-          "note": "The brigandine's radiant embellishment completed — one mark, chest center, pressed with the vial's last scraping. The rune-craft kit is now entirely spent. The armor is fully finished.",
-          "subPlace": {
-            "name": "Pell's Forge — Interior",
-            "parent": "Millbrook",
-            "note": "Brigandine fully complete — protective thread collar to hem, one radiant mark at chest. Rune-craft kit spent entirely. Forge coals at ember-red.",
-            "visited": true
-          }
+          "name": "Memory",
+          "description": "A seasoned ash shaft six feet long with the mid-weight iron tip road-lashed at the socket throat — wide-cut blade, cross-guard shoulder, oiled leather binding. Four threads seated: ironsense as anchor, Huginn's Ashwarden ending-sense through the fuller, a shadow-harm focus at the quillon, and an order-sense capacitor closed on Pell's reading idiom. The maker's mark is Pell's. Silas's witness-seal is the wax. Not finish work, but everything in it is true.",
+          "provenance": "Rune-bound at the Fell Pell on World-day 18 evening, with Huginn as witness at the stone ring."
         }
       ],
       "codexUpdates": [
@@ -983,7 +984,7 @@
           "label": "Millbrook",
           "kind": "place",
           "entityId": "millbrook",
-          "fact": "The brigandine's radiant embellishment completed on World-day 18 evening — one mark at the chest's highest point, pressed with the lamp-black vial's last scraping. Pell named its placement herself. The armor is done.",
+          "fact": "The brigandine's radiant mark now holds a partial Shielding Word in its outer ring — seated on World-day 18 evening with a depleted kit and a thin substrate. The full ward requires a stronger lattice to complete.",
           "links": [
             "pell-ran-marsh",
             "the-fell-pell"
@@ -992,19 +993,19 @@
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short careful task — scraping the vial and pressing the final mark."
+        "why": "A few minutes of close work at the end of the forge session."
       }
     },
     "sceneState": {
-      "setting": "Interior of the Fell Pell — Pell's forge, Millbrook. Forge coals at ember-red, low. The rune-craft kit is now fully spent — vial empty and scraped clean, wax stub exhausted, stylus set down. The brigandine lies across Silas's knees, complete: every plate row threaded inside, and one radiant mark at the chest's highest point catching the coal-light.",
+      "setting": "Interior of the Fell Pell — Pell's forge, Millbrook. Forge coals at ember-red, low. The rune-craft kit is fully spent. The brigandine lies across Silas's knees, complete to its practical thread and its single radiant mark — the Shielding Word seated into the mark's outer ring, partial but present.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Seated across the bench, eyes on the finished mark at the chest plate — quiet, the corner of her mouth not quite still."
+          "state": "Seated across the bench, eyes on the brigandine — she has named the partial ward good enough for now."
         },
         {
           "name": "Huginn",
-          "state": "On the back of the second bench, one foot shifted, watching the room with its usual unhurried calm."
+          "state": "On the back of the second bench, settled, not commenting."
         }
       ],
       "objects": [
@@ -1016,6 +1017,7 @@
         "Sealed document roll — on the counter, Mara's to deliver"
       ],
       "threads": [
+        "The Shielding Word in the brigandine's radiant mark is partial — outer ring holds, the full ward needs a proper substrate to complete",
         "The road's departure not yet formally named for morning",
         "Huginn's read on the road ahead has not been asked",
         "What Pell hopes to find in the Maelstorm is unspoken"
@@ -1449,7 +1451,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d5] Received Silas's accounting of the fit and the view — answered dryly and with warmth. Said yes to the rune-kit without the old bracket of hesitation. Holds the brigandine out toward the forge-light, waiting.",
         "[d5] Received Silas's protective bond plan without deflection — her ironsense moved ahead of the conversation and named the sword as anchor before he finished explaining. Holds the blade flat across both palms, waiting.",
         "[d5] Walked Silas through the sword's grain — named patient iron as the anchor logic before he asked. Watched the first mark set without speaking, which is approval. Received his brigandine observation with the flat regard of a woman who has made her peace with who she married.",
         "[d5] Held her ironsense open through the full rune-binding — it cost her, and she did not flinch. The final mark used her own shape rather than Silas's geometry; the sword is more hers than she expected.",
@@ -1458,7 +1459,8 @@
         "[d5] Approved radiant embellishment on the brigandine's plate with conditions — practical first, pretty after. Holds the armor in her lap and waits.",
         "[d5] Read the first protective mark on the brigandine's shoulder collar and named it good — three breaths, then 'That will hold.'",
         "[d5] Held the far edge of the brigandine steady while Silas worked the back panel — unprompted. Ran her thumb along three plate rows and confirmed the full thread. Named it 'all of them' without question.",
-        "[d5] Chose where the radiant mark goes — the highest point of the chest plate, where light catches first. Named the finished work 'That'll do.'"
+        "[d5] Chose where the radiant mark goes — the highest point of the chest plate, where light catches first. Named the finished work 'That'll do.'",
+        "[d5] Watched the partial ward settle without complaint — named it more than the plate had before. Practical about limits."
       ],
       "knownFacts": [
         "Patient iron holds a mark longer than tested iron — the sword's quality as an anchor is its years of careful, unused attention",
@@ -1479,7 +1481,7 @@
         "reading a rune-thread's presence through ironsense across mu"
       ],
       "status": "active",
-      "statusNote": "In the Fell Pell — brigandine complete, armor fully done, watching the mark settle in the coal-light.",
+      "statusNote": "In the Fell Pell — brigandine on her knees, ready to close the evening.",
       "lastSeen": {
         "locationId": "millbrook",
         "day": 5
@@ -2359,7 +2361,7 @@
     "wits": 5
   },
   "pendingSubPoints": 0,
-  "skillPoints": 2,
+  "skillPoints": 1,
   "discoveries": [],
   "codex": {
     "schemaVersion": 1,
@@ -2388,7 +2390,6 @@
         "label": "Millbrook",
         "kind": "event",
         "facts": [
-          "[d1] Order-Sense on Huginn's vigil (World-day 13 deep night): whatever is north cycles at a steady interval — patterned, not urgent, not approaching. Vigil without alarm.",
           "[d1] Order-Sense at the forge lintel (World-day 14 pre-dawn): north now reads as two or three distinct presences — each with its own cadence, loosely synchronized, alive, holding ground. Not approaching. T",
           "[d1] Boar sounder in the north wood has been pushing rooting ground higher — away from streamside sedge toward drier scrub — because the river smell is carrying north on the low air. Corvin has been tracki",
           "[d1] Order-Sense at the mud-strip (World-day 14 pre-dawn): sow and young in the sedge strip ahead — twenty minutes out. Something heavier passed through last night and did not stay. Bull present at this ra",
@@ -2411,7 +2412,8 @@
           "[d5] The short sword is the proposed anchor for a protective rune-bond between Silas and Pell — her ironsense is already in the iron's grain, so threading Ashwarden craft and Huginn's attendance through the blade's fuller creates a shared line: she feels danger forming, he feels when she is pressed…",
           "[d5] The brigandine's first protective thread seated into the shoulder collar on World-day 18 evening — death-warding, conserved, confirmed good by Pell's ironsense.",
           "[d5] The brigandine's full protective thread completed at the Fell Pell on World-day 18 evening — every plate row from collar to hem, inside edge, before any decoration. Lamp-black spent.",
-          "[d5] The brigandine's radiant embellishment completed on World-day 18 evening — one mark at the chest's highest point, pressed with the lamp-black vial's last scraping. Pell named its placement herself. The armor is done."
+          "[d5] The brigandine's radiant embellishment completed on World-day 18 evening — one mark at the chest's highest point, pressed with the lamp-black vial's last scraping. Pell named its placement herself. The armor is done.",
+          "[d5] The brigandine's radiant mark now holds a partial Shielding Word in its outer ring — seated on World-day 18 evening with a depleted kit and a thin substrate. The full ward requires a stronger lattice to complete."
         ],
         "links": [
           "precursor-signs-in-the-valley",
@@ -3696,21 +3698,21 @@
     }
   },
   "tendencies": {
-    "strategic": 19.28494579779404,
-    "cerebral": 7.144661016251709,
-    "social": 14.810429654508168,
-    "generous": 2.5638324596709055,
-    "cautious": 7.225323389160614,
-    "physical": 0.9292144433048626,
-    "risky": 0.20541303531959088,
-    "ruthless": 1.3457228206418639,
-    "carousing": 0.020618175199350212,
-    "amorous": 10.956369912201955,
-    "patient": 3.3329255794471986,
-    "stealth": 0.5216056033357787,
-    "devotion": 1.165603652908249,
-    "craft": 4.120326397431633,
-    "leadership": 0.5177498814947562
+    "strategic": 19.80282215284919,
+    "cerebral": 6.966044490845416,
+    "social": 14.440168913145463,
+    "generous": 2.4997366481791325,
+    "cautious": 7.044690304431599,
+    "physical": 0.905984082222241,
+    "risky": 0.2002777094366011,
+    "ruthless": 1.3120797501258172,
+    "carousing": 0.020102720819366458,
+    "amorous": 10.682460664396906,
+    "patient": 3.2496024399610186,
+    "stealth": 0.5085654632523842,
+    "devotion": 1.1364635615855427,
+    "craft": 4.017318237495842,
+    "leadership": 0.5048061344573873
   },
   "aptitudes": [
     "strategist",
@@ -3720,7 +3722,7 @@
     "devoted_lover",
     "ardent"
   ],
-  "actionCount": 513,
+  "actionCount": 514,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -3966,8 +3968,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784404908318,
-  "rev": 751,
+  "updatedAt": 1784405057451,
+  "rev": 753,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4899,7 +4901,8 @@
       "draw_down": 1,
       "wither": 2,
       "the_grey_road": 1,
-      "the_grey_hand": 1
+      "the_grey_hand": 1,
+      "the_shielding_word": 1
     },
     "coActivations": {
       "lightsense+numen_sense": 1,
@@ -5039,7 +5042,7 @@
   "syncedAt": 1784392733860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 332
+    "valley": 333
   },
   "foreclosed": [
     "rootkin",
@@ -5094,10 +5097,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T20:01:48.317Z",
+      "lastAt": "2026-07-18T20:04:17.450Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 57,
+      "beats": 58,
       "_recapError": null,
       "recap": "Day eighteen, and Silas Weir moved like a man who'd finally stopped fighting the shape of what he was. On the road he disarmed three opportunists without breaking bones, read the grief sitting behind the broad man's eyes, named it plainly, pressed provisions into their hands, and sent them toward something worth doing — mercy given as instruction, not sentiment. Then he brought the hard people together: Dara, Aldric, Fendt, Mara, Calvar, all of them in the heat of Pell's forge with no exits easy and no pretense left, and in that single evening he turned a valley's quiet panic into four working threads — engineering, logistics, supply, accounts — each with a named lead and a direction to face. The crisis didn't end, but it stopped being formless, and that was his doing."
     }

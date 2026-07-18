@@ -853,153 +853,196 @@
         "player": "Let Pell say whether she wants to watch or walk the circle herself first — this is her first time here",
         "summary": "Pell decides to walk the Coliseum floor before watching — the party prepares to step through the gate.",
         "narration": "You look to Pell and let the question sit easy between you — whether she wants to watch from the gallery first, or step down onto the sand herself.\n\nShe is quiet for a moment. Her eyes are on the open gate, reading it the way she reads a new piece of iron: not with excitement, but with the attention that comes before a decision. Then she says, 'I'll walk it.' She says it the way she says most things — without ceremony, as if she is simply reporting what she has already concluded. 'I want to see the floor before I see anyone else on it.'\n\nSiol makes a small sound — not quite approval, but something adjacent. 'That is the sensible order,' she says, and she means it.\n\nHuginn shifts on your shoulder and looks through the open gate. He is not commenting. He simply looks, with the calm patience of something that has attended more arrivals than it can count, and waits to see what this one becomes."
+      },
+      {
+        "player": "Step through the gate with Pell — walk the floor together, read the space, and declare crafts at the gate if Orvil asks",
+        "summary": "The party steps through the Coliseum gate — Orvil logs their crafts, Pell walks the floor, and the sand of the morning's early bouts is still unsettled underfoot.",
+        "narration": "You step through the gate together — Pell half a pace to your left, Huginn riding your shoulder, Siol just behind. The sound changes the moment you cross the threshold. Outside it was the open air and the market waking up. Inside it is packed sand underfoot and the low echo of a space that holds its noise close. The Coliseum is not as large as you expected, but it is well-used. The sand shows the marks of the morning's early bouts — feet, and occasionally knees, and one long scrape that ends abruptly in the middle of the circle. The gallery runs the full ring above, stone benches already holding a dozen or so watchers. The light comes in at a low angle through the open top, catching the dust still in the air.\n\nA compact man is standing near the gate, not blocking it, but positioned to catch arrivals. He has a short baton tucked under his arm and the look of someone who has done this task so many times that the boredom left years ago and left behind something quieter and more alert. He takes in the party in one sweep — you, Pell, Huginn, Siol — and his gaze settles on Memory at your back. 'Crafts,' he says, without preamble. His voice is level, not unfriendly. 'And the spear stays peace-bound unless you're stepping in.'\n\nSiol says, beside you, 'That is Orvil.' She does not say it for your benefit so much as to confirm the world is still in order.\n\nYou name your crafts at the gate, and Pell names hers. Orvil notes them with a small dip of the chin — neither impressed nor suspicious, just filed. He steps back a pace to let you pass. Pell moves out onto the sand first, and you follow. She does not rush it. She walks the near arc of the ring slowly, one hand loose at her side, the other thumb hooked in her belt, reading the floor the way she said she would — for what it is, before she sees anyone else on it. Huginn's eye follows the gallery above. From up there, the bird would be visible to every watcher in the ring. It knows this. It sits with the unhurried patience it brings to everything."
       }
     ],
     "lastTurn": {
-      "narration": "You look to Pell and let the question sit easy between you — whether she wants to watch from the gallery first, or step down onto the sand herself.\n\nShe is quiet for a moment. Her eyes are on the open gate, reading it the way she reads a new piece of iron: not with excitement, but with the attention that comes before a decision. Then she says, 'I'll walk it.' She says it the way she says most things — without ceremony, as if she is simply reporting what she has already concluded. 'I want to see the floor before I see anyone else on it.'\n\nSiol makes a small sound — not quite approval, but something adjacent. 'That is the sensible order,' she says, and she means it.\n\nHuginn shifts on your shoulder and looks through the open gate. He is not commenting. He simply looks, with the calm patience of something that has attended more arrivals than it can count, and waits to see what this one becomes.",
-      "sceneSummary": "Pell decides to walk the Coliseum floor before watching — the party prepares to step through the gate.",
+      "narration": "You step through the gate together — Pell half a pace to your left, Huginn riding your shoulder, Siol just behind. The sound changes the moment you cross the threshold. Outside it was the open air and the market waking up. Inside it is packed sand underfoot and the low echo of a space that holds its noise close. The Coliseum is not as large as you expected, but it is well-used. The sand shows the marks of the morning's early bouts — feet, and occasionally knees, and one long scrape that ends abruptly in the middle of the circle. The gallery runs the full ring above, stone benches already holding a dozen or so watchers. The light comes in at a low angle through the open top, catching the dust still in the air.\n\nA compact man is standing near the gate, not blocking it, but positioned to catch arrivals. He has a short baton tucked under his arm and the look of someone who has done this task so many times that the boredom left years ago and left behind something quieter and more alert. He takes in the party in one sweep — you, Pell, Huginn, Siol — and his gaze settles on Memory at your back. 'Crafts,' he says, without preamble. His voice is level, not unfriendly. 'And the spear stays peace-bound unless you're stepping in.'\n\nSiol says, beside you, 'That is Orvil.' She does not say it for your benefit so much as to confirm the world is still in order.\n\nYou name your crafts at the gate, and Pell names hers. Orvil notes them with a small dip of the chin — neither impressed nor suspicious, just filed. He steps back a pace to let you pass. Pell moves out onto the sand first, and you follow. She does not rush it. She walks the near arc of the ring slowly, one hand loose at her side, the other thumb hooked in her belt, reading the floor the way she said she would — for what it is, before she sees anyone else on it. Huginn's eye follows the gallery above. From up there, the bird would be visible to every watcher in the ring. It knows this. It sits with the unhurried patience it brings to everything.",
+      "sceneSummary": "The party steps through the Coliseum gate — Orvil logs their crafts, Pell walks the floor, and the sand of the morning's early bouts is still unsettled underfoot.",
       "choices": [
         {
-          "label": "Step through the gate with Pell — walk the floor together, read the space, and declare crafts at the gate if Orvil asks",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "trivial": true,
-          "abilityId": null,
-          "energyCost": null,
-          "axes": {}
-        },
-        {
-          "label": "Step through the gate and look for Orvil the referee — introduce yourself and ask what challengers are on the floor this morning",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "scout",
-            "negotiate"
-          ],
-          "trivial": false,
-          "abilityId": null,
-          "energyCost": null,
-          "axes": {}
-        },
-        {
-          "label": "Use Order-Sense as you step inside — read the Coliseum's design: what the space was built to do, and how the craft-declaration rule fits into it",
+          "label": "Walk the ring with Pell — read the space together and see who else is on the sand this morning",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "trivial": false,
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "axes": {
-            "chaos_order": 0.4
-          }
-        },
-        {
-          "label": "Ask Siol, before you go in, whether she herself has ever fought here — and what she learned from it",
-          "attribute": "social",
-          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
             "scout"
           ],
-          "trivial": true,
-          "abilityId": null,
-          "energyCost": null,
-          "axes": {}
+          "trivial": true
+        },
+        {
+          "label": "Introduce yourself to Orvil and ask about entering a bout — who is here, what the shape of a match looks like this morning",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "negotiate"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Find a place to stand and let Pell have the floor to herself for a few minutes — watch who watches her",
+          "attribute": "mental",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "scout"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Step to the center of the ring — feel the ground under Memory and see if Order-Sense reads the Coliseum's design",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "chaos_order": 0.4
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false
         }
       ],
       "scene": {
-        "setting": "The Coliseum outer wall at early dawn — the party stands a step from the open gate, soot-marks on the stone above, the sound of feet on packed sand audible from inside.",
+        "setting": "Inside the Hub Coliseum at early dawn — packed sand underfoot with the marks of the morning's early bouts, a gallery of stone benches ringing the full circle above, light coming in at a low angle through the open top.",
         "npcsPresent": [
           {
-            "name": "Siol",
-            "state": "Standing at Pell's shoulder, dry approval settled on her face — watching the gate with the ease of someone who has been through it before"
+            "name": "Orvil",
+            "state": "Standing near the gate, baton under his arm — crafts logged, watching the floor with practiced attention"
           },
           {
             "name": "Pell Marsh",
-            "state": "Decision made — facing the gate, ready to step through and read the floor for herself"
+            "state": "Walking the near arc of the ring slowly, reading the floor — one hand loose, one thumb at her belt"
+          },
+          {
+            "name": "Siol",
+            "state": "Just inside the gate, watching the ring with easy familiarity"
           },
           {
             "name": "Huginn",
-            "state": "On Silas's left shoulder, looking through the open gate with unhurried attention"
+            "state": "On Silas's shoulder, eye tracking the gallery above — visible to every watcher in the ring"
           }
         ],
         "objects": [
-          "Coliseum open gate — figures moving in and out at a measured pace",
-          "Soot-marks on the stone above the nearest gate",
-          "Memory — the assembled spear, road-lashed at Silas's back",
-          "Seven waygate arches behind to the south",
-          "Ent's circle visible to the east — low stone ring, vast rooted figure, two figures in the branches",
-          "Council of Mavens colonnade to the north — petition board visible"
+          "Packed sand floor — marks of morning bouts, one long scrape ending abruptly mid-circle",
+          "Stone gallery benches — a dozen or so watchers already seated",
+          "Memory — peace-bound at Silas's back per Orvil's instruction",
+          "Orvil's short baton, tucked under his arm"
         ],
         "threads": [
-          "Pell has decided to walk the floor — the party is about to step through the gate",
-          "Orvil the referee — named but not yet met",
-          "Huginn's visibility from the gallery — its effect on challengers unknown",
-          "Taur the Ent — approachable but on his own terms; Huginn's earlier eastward attention unresolved",
-          "Whether Silas will duel this morning, and against whom"
+          "Pell is walking the floor — her read of the space still forming",
+          "Huginn is visible from the gallery — its effect on watchers and potential challengers unknown",
+          "Whether Silas will enter a bout this morning, and against whom",
+          "Siol is present — her road south overlaps for a day or so"
         ]
       },
       "npcUpdates": [
         {
+          "op": "meet",
+          "npcId": "orvil",
+          "name": "Orvil",
+          "role": "Coliseum referee, morning rotation",
+          "gender": "man",
+          "pronouns": "he/him",
+          "description": "A compact man with a short baton and the alertness that outlasts boredom — does the gate work so many times that ceremony has been worn away and left something more useful.",
+          "note": "Logged the party's crafts at the gate without ceremony — noted Memory and required it peace-bound. Not unfriendly; just running the floor.",
+          "learned": [
+            "Requires craft declaration at entry",
+            "Requires weapons peace-bound unless a bout is entered",
+            "Morning rotation confirmed"
+          ],
+          "skillsObserved": [
+            "reading a party's composition and equipment in one sweep"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the Coliseum gate, morning rotation — floor referee, baton tucked, watching the ring"
+        },
+        {
           "op": "update",
           "npcId": "pell-ran-marsh",
           "name": "Pell Ran Marsh",
-          "note": "Named her preference plainly — walk the floor before watching it. No ceremony.",
-          "statusNote": "Beside Silas at the Coliseum gate — decision made, ready to step through and read the sand."
+          "note": "Walking the Coliseum floor before watching anyone else on it — reading the space on her own terms first.",
+          "status": "active",
+          "statusNote": "On the Coliseum sand, walking the arc of the ring slowly — her first time here, doing it her way"
         },
         {
           "op": "update",
           "npcId": "siol",
           "name": "Siol",
-          "note": "Approved Pell's choice as the sensible order — dry, genuine.",
-          "statusNote": "At the Coliseum gate with the party — tour continuing."
+          "note": "Named Orvil as the world confirming itself — dry, without ceremony. Standing just inside the gate.",
+          "status": "active",
+          "statusNote": "Inside the Coliseum gate with the party — tour continuing, road south still ahead"
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "The party entered and declared crafts at the gate — Orvil on morning rotation, sand showing early-bout marks, gallery occupied at dawn.",
+          "subPlace": {
+            "name": "The Hub Coliseum (interior)",
+            "parent": "Waygate",
+            "note": "Packed sand ring, full gallery above, gate-entrance with referee — active before full light, honest bouts declared at entry.",
+            "visited": true
+          }
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "orvil",
+          "label": "Orvil — Coliseum Referee",
+          "kind": "person",
+          "entityId": "orvil",
+          "fact": "Compact man, morning rotation referee at the Hub Coliseum — requires craft declaration at the gate and weapons peace-bound until a bout is entered. Does not look the other way. Confirmed in person.",
+          "links": [
+            "the-hub-coliseum",
+            "waygate"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange at the gate — a few minutes at most."
-      }
+        "why": "brief walk through the gate and initial read of the floor"
+      },
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Coliseum outer wall at early dawn — the party stands a step from the open gate, soot-marks on the stone above, the sound of feet on packed sand audible from inside.",
+      "setting": "Inside the Hub Coliseum at early dawn — packed sand underfoot with the marks of the morning's early bouts, a gallery of stone benches ringing the full circle above, light coming in at a low angle through the open top.",
       "npcsPresent": [
         {
-          "name": "Siol",
-          "state": "Standing at Pell's shoulder, dry approval settled on her face — watching the gate with the ease of someone who has been "
+          "name": "Orvil",
+          "state": "Standing near the gate, baton under his arm — crafts logged, watching the floor with practiced attention"
         },
         {
           "name": "Pell Marsh",
-          "state": "Decision made — facing the gate, ready to step through and read the floor for herself"
+          "state": "Walking the near arc of the ring slowly, reading the floor — one hand loose, one thumb at her belt"
+        },
+        {
+          "name": "Siol",
+          "state": "Just inside the gate, watching the ring with easy familiarity"
         },
         {
           "name": "Huginn",
-          "state": "On Silas's left shoulder, looking through the open gate with unhurried attention"
+          "state": "On Silas's shoulder, eye tracking the gallery above — visible to every watcher in the ring"
         }
       ],
       "objects": [
-        "Coliseum open gate — figures moving in and out at a measured pace",
-        "Soot-marks on the stone above the nearest gate",
-        "Memory — the assembled spear, road-lashed at Silas's back",
-        "Seven waygate arches behind to the south",
-        "Ent's circle visible to the east — low stone ring, vast rooted figure, two figur",
-        "Council of Mavens colonnade to the north — petition board visible"
+        "Packed sand floor — marks of morning bouts, one long scrape ending abruptly mid-",
+        "Stone gallery benches — a dozen or so watchers already seated",
+        "Memory — peace-bound at Silas's back per Orvil's instruction",
+        "Orvil's short baton, tucked under his arm"
       ],
       "threads": [
-        "Pell has decided to walk the floor — the party is about to step through the gate",
-        "Orvil the referee — named but not yet met",
-        "Huginn's visibility from the gallery — its effect on challengers unknown",
-        "Taur the Ent — approachable but on his own terms; Huginn's earlier eastward attention unresolved",
-        "Whether Silas will duel this morning, and against whom"
+        "Pell is walking the floor — her read of the space still forming",
+        "Huginn is visible from the gallery — its effect on watchers and potential challengers unknown",
+        "Whether Silas will enter a bout this morning, and against whom",
+        "Siol is present — her road south overlaps for a day or so"
       ]
     }
   },
@@ -1430,7 +1473,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d6] Received the kiss without resistance and a sound close to a laugh. Received the ironsense warning as a good tool — no ceremony, no argument. Said she'll think on it in the register that means she already is.",
         "[d6] Took Silas's hand and walked through the waygate without a word — settled and present.",
         "[d6] Walked through the waygate without ceremony, hand brushing the left upright, and turned back to wait for Silas — already looking south.",
         "[d6] Stepped through the waygate first, settled at the plaza edge, asked where they start — present and ready",
@@ -1439,7 +1481,8 @@
         "[d6] Introduced formally as Silas's soul wife — received Siol's acknowledgment with quiet weight",
         "[d6] After watching Siol and weighing her, asked the practical question directly: is there a toll, a keeper, or anything waiting on the other side of the sixth gate?",
         "[d6] Received Siol's answer with a single structural nod — question settled, attention returned to Silas",
-        "[d6] Named her preference plainly — walk the floor before watching it. No ceremony."
+        "[d6] Named her preference plainly — walk the floor before watching it. No ceremony.",
+        "[d6] Walking the Coliseum floor before watching anyone else on it — reading the space on her own terms first."
       ],
       "knownFacts": [
         "The first death-warding thread is seated into the brigandine's shoulder collar — quiet, economical, holding.",
@@ -1460,7 +1503,7 @@
         "receiving a genuine technique acknowledgment without ceremon"
       ],
       "status": "active",
-      "statusNote": "Beside Silas at the Coliseum gate — decision made, ready to step through and read the sand.",
+      "statusNote": "On the Coliseum sand, walking the arc of the ring slowly — her first time here, doing it her way",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 6
@@ -1995,7 +2038,8 @@
         "[d6] Accepted Silas's invitation to tour the Hub before the road south — stepped clear of her camp without ceremony, named the Coliseum before the petition queue as the practical morning order, and began leading the party north.",
         "[d6] Named the Ent as Taur — ancient, present before the city, approachable but speaks on his own terms; noted the circle is worth a few minutes if there is time",
         "[d6] Described the Coliseum duels plainly — honest bouts, crafts declared at the gate, a referee named Orvil, yield as the end. Noted Huginn's gallery visibility as a factor. Dry, practical, complete.",
-        "[d6] Approved Pell's choice as the sensible order — dry, genuine."
+        "[d6] Approved Pell's choice as the sensible order — dry, genuine.",
+        "[d6] Named Orvil as the world confirming itself — dry, without ceremony. Standing just inside the gate."
       ],
       "knownFacts": [
         "Her road runs south from the Hub but turns before the Steadwood thins — not as far as the March mouth",
@@ -2016,7 +2060,37 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the Coliseum gate with the party — tour continuing.",
+      "statusNote": "Inside the Coliseum gate with the party — tour continuing, road south still ahead",
+      "lastSeen": {
+        "locationId": "gen-waygate",
+        "day": 6
+      }
+    },
+    "orvil": {
+      "id": "orvil",
+      "name": "Orvil",
+      "role": "Coliseum referee, morning rotation",
+      "description": "A compact man with a short baton and the alertness that outlasts boredom — does the gate work so many times that ceremony has been worn away and left something more useful.",
+      "firstMet": {
+        "locationId": "gen-waygate",
+        "day": 6
+      },
+      "relationship": 0,
+      "history": [
+        "[d6] Logged the party's crafts at the gate without ceremony — noted Memory and required it peace-bound. Not unfriendly; just running the floor."
+      ],
+      "knownFacts": [
+        "Requires craft declaration at entry",
+        "Requires weapons peace-bound unless a bout is entered",
+        "Morning rotation confirmed"
+      ],
+      "skillsObserved": [
+        "reading a party's composition and equipment in one sweep"
+      ],
+      "status": "active",
+      "gender": "man",
+      "pronouns": "he/him",
+      "statusNote": "At the Coliseum gate, morning rotation — floor referee, baton tucked, watching the ring",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 6
@@ -2304,7 +2378,8 @@
         "[d6] The waygate opens onto the south lane — a shallow valley running south, tree line low, packed-dirt road with recent wheel ruts. First stop on the road from Millbrook toward the Disputed Zone.",
         "[d6] Order-Sense partial read on dawn of World-day 18: the seven gates are calibration marks for a measuring function centered on the plaza. Design predates the roads. Full purpose unresolved — lattice too thin.",
         "[d6] The Hub's major landmarks identified from the plaza at dawn: Council of Mavens colonnade (north), Coliseum (northwest behind market row), Ent circle (east), Elven camp (west paving). The city is active before full light.",
-        "[d6] The sixth waygate from the south lane — lower lintel, darker stone — is the connection to the Ashwarden March. Confirmed by Siol of the Elves."
+        "[d6] The sixth waygate from the south lane — lower lintel, darker stone — is the connection to the Ashwarden March. Confirmed by Siol of the Elves.",
+        "[d6] The party entered and declared crafts at the gate — Orvil on morning rotation, sand showing early-bout marks, gallery occupied at dawn."
       ],
       "flags": {},
       "vectorsKnown": [],
@@ -2350,6 +2425,13 @@
           "day": 6,
           "visited": false,
           "note": "Lower lintel and darker stone than the other arches — the gate that leads to the Ashwarden March, identified by Siol."
+        },
+        "the-hub-coliseum-interior": {
+          "name": "The Hub Coliseum (interior)",
+          "parentId": "gen-waygate",
+          "day": 6,
+          "visited": true,
+          "note": "Packed sand ring, full gallery above, gate-entrance with referee — active before full light, honest bouts declared at entry."
         }
       }
     },
@@ -3796,21 +3878,21 @@
     }
   },
   "tendencies": {
-    "strategic": 15.680248323812496,
-    "cerebral": 8.577635017277185,
-    "social": 16.063131650555736,
-    "generous": 2.5065604816497498,
-    "cautious": 7.039938700709879,
-    "physical": 1.2300461303938766,
-    "risky": 0.12070490809994007,
-    "ruthless": 0.7907743008657853,
-    "carousing": 0.01211566217671618,
-    "amorous": 7.8413067918600765,
-    "patient": 1.9584953561744343,
-    "stealth": 0.30650613928713133,
-    "devotion": 0.6849325875855272,
-    "craft": 2.421188209258253,
-    "leadership": 0.3042404381364938
+    "strategic": 16.288242115717182,
+    "cerebral": 8.363194141845256,
+    "social": 15.661553359291842,
+    "generous": 2.443896469608506,
+    "cautious": 7.863940233192132,
+    "physical": 1.1992949771340295,
+    "risky": 0.11768728539744157,
+    "ruthless": 0.7710049433441406,
+    "carousing": 0.011812770622298274,
+    "amorous": 7.645274122063574,
+    "patient": 1.9095329722700733,
+    "stealth": 0.298843485804953,
+    "devotion": 0.667809272895889,
+    "craft": 2.3606585040267967,
+    "leadership": 0.2966344271830815
   },
   "aptitudes": [
     "strategist",
@@ -3818,7 +3900,7 @@
     "tactician",
     "charmer"
   ],
-  "actionCount": 534,
+  "actionCount": 535,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -4072,8 +4154,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784411627844,
-  "rev": 785,
+  "updatedAt": 1784411708637,
+  "rev": 786,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5233,7 +5315,7 @@
   "syncedAt": 1784392733860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 354
+    "valley": 355
   },
   "foreclosed": [
     "rootkin",
@@ -5290,10 +5372,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T21:53:47.844Z",
+      "lastAt": "2026-07-18T21:55:08.636Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 79,
+      "beats": 80,
       "_recapError": null,
       "recap": "Day eighteen, and Silas Weir moved like a man who'd finally stopped fighting the shape of what he was. On the road he disarmed three opportunists without breaking bones, read the grief sitting behind the broad man's eyes, named it plainly, pressed provisions into their hands, and sent them toward something worth doing — mercy given as instruction, not sentiment. Then he brought the hard people together: Dara, Aldric, Fendt, Mara, Calvar, all of them in the heat of Pell's forge with no exits easy and no pretense left, and in that single evening he turned a valley's quiet panic into four working threads — engineering, logistics, supply, accounts — each with a named lead and a direction to face. The crisis didn't end, but it stopped being formless, and that was his doing."
     }

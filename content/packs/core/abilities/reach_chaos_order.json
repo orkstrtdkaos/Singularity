@@ -401,9 +401,9 @@
         "chaos_order": 0
       },
       "functions": [
-        "command",
+        "bind",
         "break",
-        "bind"
+        "command"
       ],
       "narrationHints": "Unmake and re-make in one motion — collapse it, and catch the pieces as what you need.",
       "description": "The braid-craft: unmake a structure and re-bind its falling pieces into a new form mid-collapse.",
@@ -413,7 +413,27 @@
           "rank": 1,
           "name": "The Riding Order",
           "grants": "Break a thing and reforge its pieces into what you need in the same motion.",
-          "cannot": "A heartbeat's window; miss it and you've only made chaos."
+          "cannot": "A heartbeat's window; miss it and you've only made chaos.",
+          "functions": [
+            "command",
+            "break",
+            "bind"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
+        },
+        {
+          "rank": 2,
+          "name": "The Long Riding",
+          "grants": "The window widens from a heartbeat to a breath, and the scale from a thing to a structure — ride the collapse of a wall, a wagon, a bridge, a formation, and set what is falling into the shape you need before it lands.",
+          "cannot": "A widened window is still a window. The larger the collapse the cruder the form that comes out of it. And what you ride, you own — a structure re-bound wrong comes down on you first, and the Riders consider that only fair.",
+          "functions": [
+            "command",
+            "break",
+            "bind"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "powerSystem": "reach_chaos_order",

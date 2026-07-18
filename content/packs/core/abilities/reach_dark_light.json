@@ -556,7 +556,13 @@
           "rank": 1,
           "name": "The Never-There",
           "grants": "Move through the most-watched place leaving no trace, memory, or evidence you were ever there.",
-          "cannot": "A single overt action ends it; a Verity-reader present may feel the absence; costs enormously to sustain."
+          "cannot": "A single overt action ends it; a Verity-reader present may feel the absence; costs enormously to sustain.",
+          "functions": [
+            "conceal",
+            "deceive"
+          ],
+          "harmRung": "none",
+          "gains": "broaden"
         }
       ],
       "powerSystem": "reach_dark_light",
@@ -1148,7 +1154,12 @@
           "rank": 1,
           "name": "The Last Light",
           "grants": "Spend your entire inner fire in one absolute light that unmakes all shadow in reach.",
-          "cannot": "It leaves you spent to nothing and cold after, it cannot be held or sustained, and it cannot be half-given — the last light is all of it or none."
+          "cannot": "It leaves you spent to nothing and cold after, it cannot be held or sustained, and it cannot be half-given — the last light is all of it or none.",
+          "functions": [
+            "strike"
+          ],
+          "harmRung": "damaging",
+          "gains": "broaden"
         }
       ],
       "gated": "learned",
@@ -1156,7 +1167,7 @@
       "challengeTypes": [
         "FIGHT"
       ],
-      "harmRung": "none"
+      "harmRung": "damaging"
     }
   ],
   "functionVocabulary": "content/packs/core/rules/function_vocabulary.json (SNG-092 — 24 verbs, 8 families)"

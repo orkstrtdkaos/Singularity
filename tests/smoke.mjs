@@ -4036,6 +4036,30 @@ await (async () => {
     npcPortraitTier(pell) === "partner"); // the app skips when n._portraitTier === this tier
 }
 
+// --- SNG-163: a failed module load must never strand the player on "Loading the Valley…" ---
+{
+  const html163 = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+  // The watchdog's whole value is that it survives the failure it reports. A module can't do that:
+  // a dead module graph never executes. So it MUST be a classic inline script.
+  const wd = html163.slice(html163.indexOf("SNG-163"));
+  check("163: the watchdog is a CLASSIC inline script, not a module (a module dies with the graph)",
+    /<script>\s*\(function \(\)/.test(wd) && !/<script type="module">/.test(wd));
+  check("163: it listens in the CAPTURE phase, where resource-load errors actually fire",
+    /addEventListener\("error"[\s\S]*?\}, true\)/.test(wd));
+  check("163: it never blames the entry script for a nested import's failure (better vague than wrong)",
+    /name === "app\.js"[\s\S]{0,40}return;/.test(wd));
+  check("163: it only acts when genuinely stranded — never over a booted app",
+    /function stranded\(\)/.test(wd) && /app\.children\.length === 1/.test(wd) && /if \(!stranded\(\)\) return;/.test(wd));
+  check("163: it NAMES the file that failed when it knows it", /failed\.slice\(0, 3\)\.join\(", "\)/.test(wd));
+  check("163: it reassures that the save is intact — the likely first fear", /nothing has been lost/.test(wd));
+  check("163: it offers a cache-busting reload, because a failed file stays cached",
+    /boot-hard/.test(wd) && /\?fresh=" \+ Date\.now\(\)/.test(wd));
+  check("163: the timeout is patient enough for a slow phone (>= 10s)",
+    (() => { const m = wd.match(/setTimeout\(giveUp, (\d+)\)/); return m && Number(m[1]) >= 10000; })());
+  // it must not be stripped by the version-stamp sed that runs on every ship
+  check("163: the watchdog carries no version stamp to drift", !/v=1\.8\.\d+/.test(wd));
+}
+
 // --- SNG-155: the narration reads aloud (free half: quality-ranked picker + speakable projection) ---
 {
   const nv = await import('../engine/narration_voice.js');

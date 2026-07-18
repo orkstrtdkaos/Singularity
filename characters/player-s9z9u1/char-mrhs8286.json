@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 15,
-  "xp": 1409,
+  "xp": 1417,
   "attributes": {
     "physical": 4,
     "mental": 5,
@@ -101,7 +101,7 @@
   "maxHealth": 100,
   "health": 100,
   "maxEnergy": 170,
-  "energy": 161,
+  "energy": 157,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -868,33 +868,24 @@
         "player": "Ask Orvil to put it to the grey-coat — you're ready",
         "summary": "Silas calls for the bout — Orvil crosses the sand, the grey-coat accepts, and the two opponents stand at the center-line for the craft declaration.",
         "narration": "You nod to Orvil and tell him plainly: put it to the grey-coat. You are ready.\n\nOrvil does not waste words on it. He tucks his baton under his arm, crosses the sand in the easy walk of a man who has done this ten thousand times, and stops at the far arc. You cannot hear what he says from here, but the grey-coat turns, looks across the ring at you, and then says something short to one of the two seconds beside him. The seconds step back. The grey-coat hands over a water flask without looking at it — already done with that, eyes on the ring.\n\nPell has stopped walking. She is standing at the near arc, one thumb still at her belt, and she watches the grey-coat cross to the center-line without hurry. She reads him the way she reads everything — from the outside in, without rushing the conclusion.\n\nOrvil comes back and plants himself between you, two paces left of the center-line. 'Bout between Silas Weir, Ashwarden craft, and' — he glances at the grey-coat — 'Tane Solr, threshold-walking.' He says it the way he says everything. Like a man reading from a page that is already written. Then he says, 'Declare your crafts to each other. Then we begin.'"
+      },
+      {
+        "player": "Declare honestly, then look at him with deathsense before the first exchange — read what is already declining in him",
+        "summary": "Silas declares crafts honestly to Tane Solr and opens deathsense — a quiet read that finds an old ankle injury in the threshold-walker: healed imperfectly, compensated automatically, a liability on a fast lateral step.",
+        "narration": "You look at Orvil and say the crafts plainly. Ashwarden — deathsense, order-sense. The spear is Memory; it stays on your back unless the bout asks otherwise. Tane Solr listens without moving. He has the stillness of someone who has done this before and is not bothered by the catalogue.\n\nOrvil nods and steps back. That is all the permission you need.\n\nYou let deathsense open — restrained, a quiet thing, the way you might hold a door open to hear what is on the other side without going through it. Tane comes clear immediately. He is a lean man in good health, road-fit, nothing catastrophically failing. But there it is, small and plain: his left ankle. Old damage, healed imperfectly — a ligament that was pulled and never fully reset. He compensates so automatically that he does not think about it anymore. On dry packed sand, it costs him almost nothing. On a lateral step, especially a fast one, it will cost him something.\n\nYou exhale through your nose and look at him the ordinary way again. He is watching you back with exactly the patience he has been showing since he first crossed to the center-line. He has declared threshold-walking, and you believe him — there is a quality of someone who has spent a great deal of time at edges, waiting for the right moment to step. The ankle will not end the bout for him. But it is there, and you know where it is."
       }
     ],
     "lastTurn": {
-      "narration": "You nod to Orvil and tell him plainly: put it to the grey-coat. You are ready.\n\nOrvil does not waste words on it. He tucks his baton under his arm, crosses the sand in the easy walk of a man who has done this ten thousand times, and stops at the far arc. You cannot hear what he says from here, but the grey-coat turns, looks across the ring at you, and then says something short to one of the two seconds beside him. The seconds step back. The grey-coat hands over a water flask without looking at it — already done with that, eyes on the ring.\n\nPell has stopped walking. She is standing at the near arc, one thumb still at her belt, and she watches the grey-coat cross to the center-line without hurry. She reads him the way she reads everything — from the outside in, without rushing the conclusion.\n\nOrvil comes back and plants himself between you, two paces left of the center-line. 'Bout between Silas Weir, Ashwarden craft, and' — he glances at the grey-coat — 'Tane Solr, threshold-walking.' He says it the way he says everything. Like a man reading from a page that is already written. Then he says, 'Declare your crafts to each other. Then we begin.'",
-      "sceneSummary": "Silas calls for the bout — Orvil crosses the sand, the grey-coat accepts, and the two opponents stand at the center-line for the craft declaration.",
+      "narration": "You look at Orvil and say the crafts plainly. Ashwarden — deathsense, order-sense. The spear is Memory; it stays on your back unless the bout asks otherwise. Tane Solr listens without moving. He has the stillness of someone who has done this before and is not bothered by the catalogue.\n\nOrvil nods and steps back. That is all the permission you need.\n\nYou let deathsense open — restrained, a quiet thing, the way you might hold a door open to hear what is on the other side without going through it. Tane comes clear immediately. He is a lean man in good health, road-fit, nothing catastrophically failing. But there it is, small and plain: his left ankle. Old damage, healed imperfectly — a ligament that was pulled and never fully reset. He compensates so automatically that he does not think about it anymore. On dry packed sand, it costs him almost nothing. On a lateral step, especially a fast one, it will cost him something.\n\nYou exhale through your nose and look at him the ordinary way again. He is watching you back with exactly the patience he has been showing since he first crossed to the center-line. He has declared threshold-walking, and you believe him — there is a quality of someone who has spent a great deal of time at edges, waiting for the right moment to step. The ankle will not end the bout for him. But it is there, and you know where it is.",
+      "sceneSummary": "Silas declares crafts honestly to Tane Solr and opens deathsense — a quiet read that finds an old ankle injury in the threshold-walker: healed imperfectly, compensated automatically, a liability on a fast lateral step.",
       "choices": [
         {
-          "label": "Declare your crafts honestly — Ashwarden: deathsense, palework, order-sense",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "negotiate"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Declare selectively — name the reading crafts but not palework's offensive reach",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
+          "label": "Press him laterally in the first exchange — drive him toward footwork that tests the ankle",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "difficulty": 15,
           "intentTags": [
-            "deceive",
+            "attack",
             "feint"
           ],
           "abilityId": null,
@@ -902,47 +893,59 @@
           "trivial": false
         },
         {
-          "label": "Ask Tane what he brings first — let him declare before you",
+          "label": "Use order-sense in the first exchange — read how his threshold-walking works before committing to a move",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
-            "study"
+            "study",
+            "careful"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false
+        },
+        {
+          "label": "Open with a warding step and Memory at guard — give him the first move and read it",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 15,
+          "intentTags": [
+            "defend",
+            "careful"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
+          "trivial": false
         },
         {
-          "label": "Declare honestly, then look at him with deathsense before the first exchange — read what is already declining in him",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 0,
+          "label": "Shadow-step into his flank the moment Orvil says go — arrive where the ankle is already committed",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 15,
           "intentTags": [
-            "study",
-            "scout"
+            "attack",
+            "risky"
           ],
-          "abilityId": "deathsense",
-          "energyCost": 2,
+          "abilityId": "shadowstep",
+          "energyCost": 4,
           "trivial": false
         }
       ],
       "scene": {
-        "setting": "Inside the Hub Coliseum at early dawn — packed sand underfoot, stone gallery above with a dozen watchers, low-angle light through the open top. Silas and Tane Solr stand near the center-line with Orvil between them.",
+        "setting": "Inside the Hub Coliseum at early dawn — packed sand underfoot, stone gallery above with a dozen watchers, low-angle light through the open top. Silas and Tane Solr stand at the center-line with Orvil stepped back — crafts declared, the bout about to begin.",
         "npcsPresent": [
           {
             "name": "Orvil",
-            "state": "Standing at the center-line between the two fighters, baton under his arm, waiting for the craft declarations."
+            "state": "Stepped back from the center-line, baton in hand — the bout is declared, he is waiting to call the start."
           },
           {
             "name": "Tane Solr",
-            "state": "Standing at ease at the center-line, eyes on Silas — waiting, unhurried, two seconds stepped back at the far arc."
+            "state": "At the center-line, watching Silas with patient attention — threshold-walking declared, old ankle injury present, compensating automatically."
           },
           {
             "name": "Pell Marsh",
-            "state": "Stopped at the near arc, thumb at her belt, reading Tane from the outside in."
+            "state": "At the near arc, thumb at her belt — stopped walking, watching Tane with the focused read she gives a piece of ironwork she has not touched yet."
           },
           {
             "name": "Siol",
@@ -950,72 +953,78 @@
           },
           {
             "name": "Huginn",
-            "state": "On Silas's shoulder, eye tracking Tane Solr at the center-line."
+            "state": "On Silas's shoulder, eye on Tane Solr — its stillness unchanged from before the deathsense read."
           }
         ],
         "objects": [
           "Packed sand floor — marks of morning bouts, one long scrape ending abruptly mid-ring",
-          "Stone gallery benches — a dozen or so watchers already seated",
+          "Stone gallery benches — a dozen or so watchers seated",
           "Memory — peace-bound at Silas's back",
-          "Orvil's short baton, tucked under his arm",
-          "Tane's two seconds — stepped back to the far arc, water flask in hand"
+          "Orvil's short baton, now in hand",
+          "Tane's two seconds — at the far arc, water flask between them"
         ],
         "threads": [
-          "Craft declarations must be exchanged before the bout begins",
+          "Tane Solr's left ankle — old ligament damage, healed imperfectly, a liability on a fast lateral step",
+          "Orvil is ready to call the start — the bout's first exchange is about to begin",
           "Pell is reading Tane from the near arc — her read not yet spoken",
           "Huginn is watching Tane — its stillness is a kind of attention"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
+          "op": "update",
           "npcId": "tane-solr",
           "name": "Tane Solr",
-          "role": "Bout opponent, threshold-walker — was waiting at the far arc with two seconds before Silas arrived",
-          "gender": "man",
-          "pronouns": "he/him",
-          "description": "A lean man in a grey coat, unhurried in his movements — handed off his water flask without looking at it, eyes already on the ring. The quality of someone who has been here before and is comfortable waiting.",
-          "note": "Accepted the bout through Orvil without ceremony — crossed to the center-line and is waiting for declarations.",
+          "note": "Deathsense read complete — old left ankle injury, healed imperfectly, compensated automatically. Not a fatal weakness but a real one on lateral footwork.",
           "learned": [
-            "Threshold-walking declared as his craft at the gate",
-            "Two seconds present, stepped back for the bout"
+            "Left ankle carries old ligament damage — healed imperfectly, compensated so automatically he does not think about it; costs him on fast lateral steps on packed sand"
           ],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the Coliseum center-line, waiting for craft declarations before the morning bout."
+          "statusNote": "At the center-line, bout declared, crafts exchanged — the first exchange about to begin."
         },
         {
           "op": "update",
           "npcId": "orvil",
           "name": "Orvil",
-          "note": "Crossed the sand and brought Tane Solr's acceptance back without fuss — now standing at the center-line between the two fighters, waiting for declarations.",
+          "note": "Stepped back after declarations — bout is properly formed, he is ready to call the start.",
           "status": "active",
-          "statusNote": "At the Coliseum center-line, running the bout — waiting for craft declarations."
+          "statusNote": "At the center-line edge, baton in hand, waiting to call the bout's first exchange."
         }
       ],
-      "generateRequest": [
+      "codexUpdates": [
         {
-          "type": "npc",
-          "hint": "Tane Solr — a lean threshold-walker in a grey coat, unhurried, experienced on the sand, waiting with two seconds at the Coliseum far arc before dawn",
-          "why": "He is now Silas's named bout opponent at the center-line and will need a stable identity, personality, and history for the exchange to have weight."
+          "topic": "tane-solr",
+          "label": "Tane Solr",
+          "kind": "person",
+          "entityId": "tane-solr",
+          "fact": "Deathsense reads an old left ankle injury — ligament, healed imperfectly, compensated automatically. On dry packed sand he manages it. On a fast lateral step, it will cost him something.",
+          "links": [
+            "the-edge-district-ledger"
+          ]
         }
-      ]
+      ],
+      "characterDeltas": {
+        "energy": -2
+      },
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "Craft declarations exchanged, a brief deathsense read — the bout is moments from beginning."
+      }
     },
     "sceneState": {
-      "setting": "Inside the Hub Coliseum at early dawn — packed sand underfoot, stone gallery above with a dozen watchers, low-angle light through the open top. Silas and Tane Solr stand near the center-line with Orvil between them.",
+      "setting": "Inside the Hub Coliseum at early dawn — packed sand underfoot, stone gallery above with a dozen watchers, low-angle light through the open top. Silas and Tane Solr stand at the center-line with Orvil stepped back — crafts declared, the bout about to begin.",
       "npcsPresent": [
         {
           "name": "Orvil",
-          "state": "Standing at the center-line between the two fighters, baton under his arm, waiting for the craft declarations."
+          "state": "Stepped back from the center-line, baton in hand — the bout is declared, he is waiting to call the start."
         },
         {
           "name": "Tane Solr",
-          "state": "Standing at ease at the center-line, eyes on Silas — waiting, unhurried, two seconds stepped back at the far arc."
+          "state": "At the center-line, watching Silas with patient attention — threshold-walking declared, old ankle injury present, compen"
         },
         {
           "name": "Pell Marsh",
-          "state": "Stopped at the near arc, thumb at her belt, reading Tane from the outside in."
+          "state": "At the near arc, thumb at her belt — stopped walking, watching Tane with the focused read she gives a piece of ironwork "
         },
         {
           "name": "Siol",
@@ -1023,18 +1032,19 @@
         },
         {
           "name": "Huginn",
-          "state": "On Silas's shoulder, eye tracking Tane Solr at the center-line."
+          "state": "On Silas's shoulder, eye on Tane Solr — its stillness unchanged from before the deathsense read."
         }
       ],
       "objects": [
         "Packed sand floor — marks of morning bouts, one long scrape ending abruptly mid-",
-        "Stone gallery benches — a dozen or so watchers already seated",
+        "Stone gallery benches — a dozen or so watchers seated",
         "Memory — peace-bound at Silas's back",
-        "Orvil's short baton, tucked under his arm",
-        "Tane's two seconds — stepped back to the far arc, water flask in hand"
+        "Orvil's short baton, now in hand",
+        "Tane's two seconds — at the far arc, water flask between them"
       ],
       "threads": [
-        "Craft declarations must be exchanged before the bout begins",
+        "Tane Solr's left ankle — old ligament damage, healed imperfectly, a liability on a fast lateral step",
+        "Orvil is ready to call the start — the bout's first exchange is about to begin",
         "Pell is reading Tane from the near arc — her read not yet spoken",
         "Huginn is watching Tane — its stillness is a kind of attention"
       ]
@@ -2073,7 +2083,8 @@
       "history": [
         "[d6] Logged the party's crafts at the gate without ceremony — noted Memory and required it peace-bound. Not unfriendly; just running the floor.",
         "[d6] Gave Silas the shape of a morning bout — three exchanges, yield or the sand calls it, crafts declared to opponent. Named the grey-coat at the far arc as a potential match.",
-        "[d6] Crossed the sand and brought Tane Solr's acceptance back without fuss — now standing at the center-line between the two fighters, waiting for declarations."
+        "[d6] Crossed the sand and brought Tane Solr's acceptance back without fuss — now standing at the center-line between the two fighters, waiting for declarations.",
+        "[d6] Stepped back after declarations — bout is properly formed, he is ready to call the start."
       ],
       "knownFacts": [
         "Requires craft declaration at entry",
@@ -2089,7 +2100,7 @@
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "At the Coliseum center-line, running the bout — waiting for craft declarations.",
+      "statusNote": "At the center-line edge, baton in hand, waiting to call the bout's first exchange.",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 6
@@ -2106,17 +2117,19 @@
       },
       "relationship": 0,
       "history": [
-        "[d6] Accepted the bout through Orvil without ceremony — crossed to the center-line and is waiting for declarations."
+        "[d6] Accepted the bout through Orvil without ceremony — crossed to the center-line and is waiting for declarations.",
+        "[d6] Deathsense read complete — old left ankle injury, healed imperfectly, compensated automatically. Not a fatal weakness but a real one on lateral footwork."
       ],
       "knownFacts": [
         "Threshold-walking declared as his craft at the gate",
-        "Two seconds present, stepped back for the bout"
+        "Two seconds present, stepped back for the bout",
+        "Left ankle carries old ligament damage — healed imperfectly, compensated so automatically he does not think about it; costs him on fast lateral steps on packed sand"
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "At the Coliseum center-line, waiting for craft declarations before the morning bout.",
+      "statusNote": "At the center-line, bout declared, crafts exchanged — the first exchange about to begin.",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 6
@@ -3904,21 +3917,21 @@
     }
   },
   "tendencies": {
-    "strategic": 15.484010161253646,
-    "cerebral": 7.950261431091644,
-    "social": 16.863264162176804,
-    "generous": 2.323229081421586,
-    "cautious": 7.47565818417827,
-    "physical": 1.1400797876380369,
-    "risky": 0.11187647568094289,
-    "ruthless": 0.7329365742665237,
-    "carousing": 0.011229515072822296,
-    "amorous": 7.267788712286684,
-    "patient": 1.8152497817642383,
-    "stealth": 0.2840880886933334,
-    "devotion": 0.6348361900466544,
-    "craft": 2.2441009903904736,
-    "leadership": 0.2819881023409168
+    "strategic": 16.096909907222305,
+    "cerebral": 8.751504895314353,
+    "social": 16.441682558122384,
+    "generous": 2.2651483543860462,
+    "cautious": 7.288766729573813,
+    "physical": 1.1115777929470858,
+    "risky": 0.10907956378891931,
+    "ruthless": 0.7146131599098606,
+    "carousing": 0.010948777196001739,
+    "amorous": 7.086093994479517,
+    "patient": 1.7698685372201324,
+    "stealth": 0.2769858864760001,
+    "devotion": 0.618965285295488,
+    "craft": 2.1879984656307117,
+    "leadership": 0.27493839978239387
   },
   "aptitudes": [
     "strategist",
@@ -3926,10 +3939,18 @@
     "tactician",
     "charmer"
   ],
-  "actionCount": 537,
+  "actionCount": 538,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
+    {
+      "kind": "npc",
+      "prompt": "Tane Solr",
+      "url": "https://image.pollinations.ai/prompt/Lean%20in%20the%20way%20the%20valley's%20early-spring%20wind%20is%20lean%20%E2%80%94%20nothing%20wasted%2C%20everything%20purposeful.%20Grey%20coat%2C%20collarless%2C%20worn%20to%20the%20colour%20of%20old%20flint%20at%20the%20cuffs.%20Two%20seconds%20coiled%20at%20his%20left%20hip%2C%2C%20character%20portrait%2C%20named%20Tane%20Solr%2C%20Threshold-walker%20and%20named%20bout%20opponent%20%E2%80%94%20a%20man%20who%20has%20crossed%20the%20center-line%20enough%20times%20to%20sto%2C%20Unhurried%20in%20a%20way%20that%20is%20not%20laziness%20but%20arithmetic%20%E2%80%94%20he%20has%20already%20run%20the%20numbers%20on%20you%20and%20d%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13653&nologo=true",
+      "caption": "Tane Solr",
+      "worldDay": 18,
+      "at": "2026-07-18T22:02:27.881Z"
+    },
     {
       "kind": "npc",
       "prompt": "Maren Voss",
@@ -4188,8 +4209,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784412124171,
-  "rev": 789,
+  "updatedAt": 1784412255916,
+  "rev": 791,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4900,6 +4921,81 @@
           "romanceEligible": true
         },
         "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Maren%20Voss%2C%20Liminal%20fighter%20who%20crosses%20thresholds%20to%20win%20%E2%80%94%20patient%20at%20every%20gate%2C%20lethal%20the%20moment%20one%20opens%2C%20Speaks%20the%20way%20someone%20waits%20%E2%80%94%20fully%2C%20without%20fidgeting.%20Grey%20coat%2C%20collar%20up%20against%20the%20early-spri%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=5247&nologo=true"
+      },
+      "tane-solr": {
+        "schemaVersion": 1,
+        "id": "tane-solr",
+        "name": "Tane Solr",
+        "role": "Threshold-walker and named bout opponent — a man who has crossed the center-line enough times to stop counting and started watching the sand instead",
+        "homeLocation": "waygate_valley",
+        "communityId": "coliseum.farcarc",
+        "personality": {
+          "warmth": 0.4,
+          "trust": 0.35,
+          "candor": 0.65,
+          "patience": 0.85
+        },
+        "spectrum": {
+          "body_mind": -0.2,
+          "emotional_logical": -0.3,
+          "rest_motion": -0.6,
+          "falsehood_truth": 0.5
+        },
+        "functions": [
+          "reveal",
+          "strike",
+          "bind"
+        ],
+        "voiceHints": "Unhurried in a way that is not laziness but arithmetic — he has already run the numbers on you and does not need to rush. Speaks in short declaratives with long pauses between them, as if he is giving the words time to land before he adds more weight. Calls the sand 'the floor' the way carpenters call wood 'the material.' Does not brag. Does not diminish. Names things exactly. When he says your name he means it.",
+        "appearance": "Lean in the way the valley's early-spring wind is lean — nothing wasted, everything purposeful. Grey coat, collarless, worn to the colour of old flint at the cuffs. Two seconds coiled at his left hip, their grip-wraps re-done so many times the cord beneath has fused into something that is no longer rope and not yet bone. Dawn finds him standing at the far arc before the torches are lit, not warming up, just watching the center-line as if it owes him a conversation.",
+        "knowledge": [
+          "The Waygate Coliseum's far arc — every degree of angle the pre-dawn light hits the sand, and what it does to a fighter's depth perception",
+          "How the valley's threshold law reads a bout: where the line is, what crossing it costs, and the three ways experienced fighters use the cost as a weapon",
+          "The particular grammar of two seconds — reach, wrap, redirect, the half-breath of slack that telegraphs everything if you know to listen for it",
+          "Silas's name, and therefore something about Silas — enough to have agreed to the bout, not enough to have made up his mind"
+        ],
+        "wants": "A bout that is true — not won or lost but honest, where both fighters come to the center-line having brought everything they actually are and no more.",
+        "fears": "That he has crossed so many thresholds he no longer feels them, and that the day he stops feeling the line underfoot is the day he becomes dangerous for the wrong reasons.",
+        "history": "Tane came up through the valley circuit in a leaner season, when the Coliseum ran bouts by firelight because they could not afford dawn slots. He lost his first twelve named matches and won the thirteenth by not moving when every instinct in the crowd — and his opponent — was certain he would. He has been studying stillness as a weapon ever since. The grey coat was his instructor's; she died between seasons, not on the sand, and he has not replaced it. He is not sentimental about this. He is precise about it.",
+        "reactsToReputation": {
+          "experienced": "a single nod — peer-recognition, no ceremony",
+          "reckless": "watches more carefully, says less, waits for the recklessness to teach the lesson he will not deliver in words",
+          "seeking": "will speak plainly, once, about what the center-line actually is — then stops, because the rest has to be walked",
+          "named_opponent": "meets their eyes at the far arc before dawn and lets the sand do the introduction"
+        },
+        "_gen": {
+          "entityId": "tane-solr",
+          "type": "npc",
+          "birthWeight": 23,
+          "engagementScore": 3,
+          "tier": "established",
+          "rating": "R+",
+          "provenance": {
+            "playerKey": "player-s9z9u1",
+            "characterId": "char-mrhs8286",
+            "locationId": "gen-waygate",
+            "day": 6,
+            "worldDay": null,
+            "hint": "Tane Solr — a lean threshold-walker in a grey coat, unhurried, experienced on the sand, waiting with two seconds at the ",
+            "why": "He is now Silas's named bout opponent at the center-line and will need a stable identity, personality, and history for t"
+          },
+          "attentionHistory": [
+            {
+              "kind": "interact",
+              "day": 6
+            },
+            {
+              "kind": "fact",
+              "day": 6
+            }
+          ],
+          "createdDay": 6,
+          "repaired": false,
+          "stubbed": false,
+          "romanceEligible": true,
+          "lastAttentionDay": 6
+        },
+        "image": "https://image.pollinations.ai/prompt/Lean%20in%20the%20way%20the%20valley's%20early-spring%20wind%20is%20lean%20%E2%80%94%20nothing%20wasted%2C%20everything%20purposeful.%20Grey%20coat%2C%20collarless%2C%20worn%20to%20the%20colour%20of%20old%20flint%20at%20the%20cuffs.%20Two%20seconds%20coiled%20at%20his%20left%20hip%2C%2C%20character%20portrait%2C%20named%20Tane%20Solr%2C%20Threshold-walker%20and%20named%20bout%20opponent%20%E2%80%94%20a%20man%20who%20has%20crossed%20the%20center-line%20enough%20times%20to%20sto%2C%20Unhurried%20in%20a%20way%20that%20is%20not%20laziness%20but%20arithmetic%20%E2%80%94%20he%20has%20already%20run%20the%20numbers%20on%20you%20and%20d%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13653&nologo=true"
       }
     },
     "location": {
@@ -5294,7 +5390,7 @@
       "lightsense": 2,
       "order_sense": 53,
       "palework": 26,
-      "deathsense": 21,
+      "deathsense": 22,
       "shadowstep": 16,
       "the-attended-end": 28,
       "wildcraft": 4,
@@ -5445,7 +5541,7 @@
   "syncedAt": 1784392733860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 357
+    "valley": 358
   },
   "foreclosed": [
     "rootkin",
@@ -5502,10 +5598,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T22:02:04.170Z",
+      "lastAt": "2026-07-18T22:04:15.915Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 82,
+      "beats": 83,
       "_recapError": null,
       "recap": "Day eighteen, and Silas Weir moved like a man who'd finally stopped fighting the shape of what he was. On the road he disarmed three opportunists without breaking bones, read the grief sitting behind the broad man's eyes, named it plainly, pressed provisions into their hands, and sent them toward something worth doing — mercy given as instruction, not sentiment. Then he brought the hard people together: Dara, Aldric, Fendt, Mara, Calvar, all of them in the heat of Pell's forge with no exits easy and no pretense left, and in that single evening he turned a valley's quiet panic into four working threads — engineering, logistics, supply, accounts — each with a named lead and a direction to face. The crisis didn't end, but it stopped being formless, and that was his doing."
     }

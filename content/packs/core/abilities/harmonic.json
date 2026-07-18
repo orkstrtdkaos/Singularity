@@ -627,7 +627,25 @@
           "rank": 1,
           "name": "The Sustained Chord",
           "grants": "Sustain a resonant chord that holds all attuned to it in strength and coherence.",
-          "cannot": "It cannot harm, only hold; it ends the instant you stop carrying it; and a chord that holds many depends entirely on the one voice sustaining it."
+          "cannot": "It cannot harm, only hold; it ends the instant you stop carrying it; and a chord that holds many depends entirely on the one voice sustaining it.",
+          "functions": [
+            "empower",
+            "sustain"
+          ],
+          "gains": "broaden",
+          "harmRung": "none"
+        },
+        {
+          "rank": 2,
+          "name": "The Standing Chord",
+          "grants": "Set the chord and let it stand — it no longer depends on your breath, but rings on its own resonance through a night's march or a night's sleep, and it holds a company where before it held a circle. Those inside it recover as though rested and keep coherence through what should scatter them.",
+          "cannot": "A standing chord is tuned to what it was set for and will not adapt; re-tuning means beginning the note again from silence; and a chord that rings without you still draws from you — you wake tired, and you cannot hold two at once.",
+          "functions": [
+            "empower",
+            "sustain"
+          ],
+          "gains": "deepen",
+          "harmRung": "none"
         }
       ],
       "gated": "learned",

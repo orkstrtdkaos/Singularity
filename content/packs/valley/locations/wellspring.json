@@ -36,7 +36,7 @@
     "the_wellspring_deep",
     "the_axis_gate"
   ],
-  "descriptionSeed": "A tidal city where nobody feels anything privately. Grief is conducted in public halls; joy is conducted in public halls; the architecture is SHAPED for feeling and it amplifies it deliberately. Visitors either weep within a day or flee within a day, and the Threnodists consider both responses entirely healthy and neither of them embarrassing.",
+  "descriptionSeed": "A tidal city where nobody feels anything privately. Grief is conducted in public halls; joy is conducted in public halls; the architecture is SHAPED for feeling and it amplifies it deliberately. Visitors either weep within a day or flee within a day, and the Threnodists consider both responses entirely healthy and neither of them embarrassing. A waygate opens onto the lower steps, where the singers can hear who has come. Arriving here is loud in a way no other gate is: the city feels you land.",
   "loreRefs": [
     "the_twelve_reaches",
     "traditions"
@@ -56,5 +56,7 @@
     "life": 0.3,
     "truth": 0.2
   },
-  "startingLocation": true
+  "startingLocation": true,
+  "waygate": true,
+  "waygateTier": 2
 }

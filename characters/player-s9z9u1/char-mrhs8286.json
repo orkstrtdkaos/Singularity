@@ -86,7 +86,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.3838733582777347,
+    "spectrumId": -0.36467969036384795,
     "violence_peace": 0.1030845625,
     "chaos_order": 0.24682516555723183,
     "mechanical_spiritual": 0.2400392471479881,
@@ -864,65 +864,68 @@
         "player": "Answer honestly: both. You came to see what fits and to show what you've made — let her judge which of those this conversation becomes.",
         "summary": "Silas answers the seller honestly — both learner and builder — and she names him as someone the Ashwarden March has more to offer than he has yet been shown.",
         "narration": "You meet her question without flinching. Both, you tell her. You came to see what fits, and to show what you have already made. Let her judge which of those this conversation becomes.\n\nShe is quiet for a moment. Her hands come back to the table edge — not defensive, just resting there. She looks at Memory, then at you, and then at Huginn on the arch-stone. The bird does not acknowledge her. She accepts this as information.\n\nThen she nods. Once. The kind of nod a teacher gives when a student has finally said the correct thing after a long and patient wait.\n\n\"That,\" she says, \"is the only honest answer to that question.\" She reaches beneath the dark cloth and sets two more bone-handled tools on the table — the absent pieces of the sequence. They fit the gap exactly. \"Most people who find this stall tell me they came to learn. A few tell me they came to show me something. You are the first in some time who understood that those are the same errand.\" She tilts her head toward Memory. \"The Ashwarden grain in your fuller is seated well. But it is seated in a wright's spear, in a wright's hand. That is a door, not a dwelling. There is more of the March in you than you have been taught to find.\""
+      },
+      {
+        "player": "Introduce your full name and your history - tell her you would be honored to know the same of her.",
+        "summary": "Silas names himself fully — Silas Fell Weir, Ashwarden-trained — and the seller names herself in return: Veth Ondra, former warden of the March's south-facing edge, now teaching at the stall.",
+        "narration": "You set your right hand briefly on Memory's shaft — not a gesture of protection, just a placement, the way a person puts a hand on something that belongs to them before they speak about themselves.\n\n\"Silas Fell Weir,\" you tell her. \"Ashwarden-trained, Wright by origin. I was schooled in the March's craft by a warden I've not seen in some years, and most of what I know I've built since then — from practice, from necessity, and from two people I trust.\" You nod toward Huginn on the arch-stone. \"The bird preceded me in most of it.\" Then you hold her gaze. \"I would be honored to know your name and your history, if you're willing to offer them.\"\n\nShe considers you for a moment. Not the considering of someone deciding whether to trust — more the considering of someone who has already decided and is choosing where to begin.\n\n\"Veth,\" she says. \"Veth Ondra. I held a warden post on the south-facing edge of the Ashwarden March for eleven years, until the post was dissolved and the holding reassigned. I did not go back to the center. I came here instead.\" She touches the edge of the teaching kit with one finger. \"I carry what the March taught me, and I teach it where I find someone worth teaching. The stall is cover. The tools are the door.\" She looks at Memory again. \"You have walked farther into this craft than most who find the stall. I would like to know how.\""
       }
     ],
     "lastTurn": {
-      "narration": "You meet her question without flinching. Both, you tell her. You came to see what fits, and to show what you have already made. Let her judge which of those this conversation becomes.\n\nShe is quiet for a moment. Her hands come back to the table edge — not defensive, just resting there. She looks at Memory, then at you, and then at Huginn on the arch-stone. The bird does not acknowledge her. She accepts this as information.\n\nThen she nods. Once. The kind of nod a teacher gives when a student has finally said the correct thing after a long and patient wait.\n\n\"That,\" she says, \"is the only honest answer to that question.\" She reaches beneath the dark cloth and sets two more bone-handled tools on the table — the absent pieces of the sequence. They fit the gap exactly. \"Most people who find this stall tell me they came to learn. A few tell me they came to show me something. You are the first in some time who understood that those are the same errand.\" She tilts her head toward Memory. \"The Ashwarden grain in your fuller is seated well. But it is seated in a wright's spear, in a wright's hand. That is a door, not a dwelling. There is more of the March in you than you have been taught to find.\"",
-      "sceneSummary": "Silas answers the seller honestly — both learner and builder — and she names him as someone the Ashwarden March has more to offer than he has yet been shown.",
+      "narration": "You set your right hand briefly on Memory's shaft — not a gesture of protection, just a placement, the way a person puts a hand on something that belongs to them before they speak about themselves.\n\n\"Silas Fell Weir,\" you tell her. \"Ashwarden-trained, Wright by origin. I was schooled in the March's craft by a warden I've not seen in some years, and most of what I know I've built since then — from practice, from necessity, and from two people I trust.\" You nod toward Huginn on the arch-stone. \"The bird preceded me in most of it.\" Then you hold her gaze. \"I would be honored to know your name and your history, if you're willing to offer them.\"\n\nShe considers you for a moment. Not the considering of someone deciding whether to trust — more the considering of someone who has already decided and is choosing where to begin.\n\n\"Veth,\" she says. \"Veth Ondra. I held a warden post on the south-facing edge of the Ashwarden March for eleven years, until the post was dissolved and the holding reassigned. I did not go back to the center. I came here instead.\" She touches the edge of the teaching kit with one finger. \"I carry what the March taught me, and I teach it where I find someone worth teaching. The stall is cover. The tools are the door.\" She looks at Memory again. \"You have walked farther into this craft than most who find the stall. I would like to know how.\"",
+      "sceneSummary": "Silas names himself fully — Silas Fell Weir, Ashwarden-trained — and the seller names herself in return: Veth Ondra, former warden of the March's south-facing edge, now teaching at the stall.",
       "choices": [
         {
-          "label": "Ask her name and what she teaches — and whether she would take you as a student",
+          "label": "Tell her exactly how — the meadow resurrection, the spear-binding, the soul-mark exchange — the three things that changed the grain of what you carry",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "help"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask what she looks for in a student — what the March demands of someone who would go deeper into this craft",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask why she left the March's center — what it means that a warden's post was dissolved and she chose this over return",
           "attribute": "social",
           "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask plainly what she can teach that you have not yet reached — name the gap between what you built and what the March holds beyond it",
+          "attribute": "social",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
             "negotiate"
           ],
           "trivial": true
-        },
-        {
-          "label": "Ask what she means by 'a door, not a dwelling' — press her to say plainly what the March could teach that you have not found",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Show her what the absent pieces of the kit tell you — read their design aloud, the way she tested you with the gap",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 15,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false
-        },
-        {
-          "label": "Ask Huginn plainly — in front of her — what he reads in this woman. Let the bird speak for you.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "trivial": true
         }
       ],
       "scene": {
-        "setting": "The dark-cloth stall in the Hub market row — Silas standing at the near table edge, Memory upright on the dirt between them, the seller across with both hands resting on the table edge. The two absent pieces of the teaching kit now laid out in the gap. Morning light over the stalls.",
+        "setting": "The dark-cloth stall in the Hub market row — Silas at the near table edge, Memory upright on the dirt between them, Veth Ondra across with both hands resting on the table edge. Morning light over the stalls.",
         "npcsPresent": [
           {
-            "name": "Unnamed seller",
-            "state": "Both hands on the table edge, looking at Silas steadily — the nod given, the two missing pieces placed, waiting for what comes next."
+            "name": "Veth Ondra",
+            "state": "Both hands on the table edge, looking at Silas directly — she has named herself and now wants to know how he walked this far into the craft."
           },
           {
             "name": "Huginn",
-            "state": "On the arch-stone to the north — did not acknowledge the seller's look; the bird's silence its own comment."
+            "state": "On the arch-stone to the north — did not acknowledge Veth's look; the bird's silence its own comment."
           },
           {
             "name": "Siol",
@@ -936,66 +939,76 @@
         "objects": [
           "Memory — upright in Silas's grip, butt on the dirt",
           "dark cloth covering the table",
-          "bone-handled tools in teaching sequence — gap now filled, all pieces present",
+          "bone-handled tools in teaching sequence — all pieces present",
           "seven waygate arches visible to the north"
         ],
         "threads": [
-          "The seller's assessment: a door, not a dwelling — what the March holds that Silas has not yet been taught",
+          "Veth wants to know how Silas walked this far into the craft — her question is open and waiting",
           "Whether she will offer to teach, and what that would cost",
           "Pell's unspoken answer to the evening suggestion — filed, not resolved",
           "The Ent circle: still to visit"
         ]
       },
-      "generateRequest": [
-        {
-          "type": "npc",
-          "hint": "A death-attuned seller at the dark-cloth stall in the Hub market row — bone-handled teaching tools, still presence, likely connected to the Ashwarden March or its outer edges; woman, middle years, a teacher's patience",
-          "why": "She has now spoken and named Silas as someone the March has more to offer — she needs a stable identity to persist as a possible teacher or contact"
-        }
-      ],
       "npcUpdates": [
         {
-          "op": "update",
-          "npcId": "siol",
-          "name": "Siol",
-          "note": "Accompanying Pell in the market row — not present at the stall exchange.",
-          "statusNote": "In the Hub market row with Pell, still choosing."
-        },
-        {
-          "op": "update",
-          "npcId": "pell-ran-marsh",
-          "name": "Pell Ran Marsh",
-          "note": "Shopping with Siol — the evening suggestion still unresolved.",
-          "statusNote": "In the Hub market row with Siol, choosing travel clothes and the private something."
+          "op": "meet",
+          "npcId": "veth-ondra",
+          "name": "Veth Ondra",
+          "role": "Former Ashwarden warden, now teaching at the dark-cloth stall in the Hub market row",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "description": "A still, direct woman — held a south-facing warden post on the Ashwarden March for eleven years before the post was dissolved. Chose the Hub over the March's center. The stall is cover; the teaching kit is the door.",
+          "note": "Named herself plainly and in full after Silas named himself. Now wants to know how he walked this far into the craft without a functioning warden post behind him.",
+          "learned": [
+            "Held a warden post on the south-facing edge of the Ashwarden March for eleven years",
+            "Her post was dissolved and the holding reassigned — she did not return to the center",
+            "Came to the Hub instead and has been teaching at the stall since",
+            "The stall and the tools are a door, not a livelihood"
+          ],
+          "skillsObserved": [
+            "reading a traveler's craft from a single object without prompting",
+            "precise self-introduction — history offered in plain sequence without embellishment"
+          ],
+          "relationshipDelta": 2,
+          "status": "active",
+          "statusNote": "At the dark-cloth stall in the Hub market row — named herself to Silas and is now asking how he came this far."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "ashwarden-march-access",
-          "label": "The Ashwarden March — What Silas Has Not Been Taught",
-          "kind": "mystery",
-          "fact": "The dark-cloth seller at the Hub market named Silas's Ashwarden grain as a door, not a dwelling — there is more of the March in him than he has been taught to find. She recognized the Ashwarden thread in Memory's fuller immediately and called it well-seated but incomplete.",
+          "topic": "veth-ondra",
+          "label": "Veth Ondra — Former Ashwarden Warden",
+          "kind": "person",
+          "entityId": "veth-ondra",
+          "fact": "Full name: Veth Ondra. Held a south-facing warden post on the Ashwarden March for eleven years. Her post was dissolved and the holding reassigned; she came to the Hub rather than returning to the March's center. Now teaches at the dark-cloth stall — the stall is cover, the teaching kit is the door.",
           "links": [
             "the-edge-district-ledger",
-            "the-water-crisis"
+            "radiant-plateau-edge"
           ]
+        }
+      ],
+      "generateRequest": [
+        {
+          "type": "npc",
+          "hint": "Veth Ondra — former Ashwarden warden, south-facing post, eleven years, dissolved and reassigned; now at the Hub teaching at the dark-cloth stall with bone-handled tools as her kit; woman, direct, patient, death-craft practitioner",
+          "why": "She has named herself and is now a named, recurring contact — she needs a stable generated identity so she persists correctly across scenes"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short exchange at the stall — a few minutes of conversation."
+        "why": "A brief exchange of names and histories at the stall"
       }
     },
     "sceneState": {
-      "setting": "The dark-cloth stall in the Hub market row — Silas standing at the near table edge, Memory upright on the dirt between them, the seller across with both hands resting on the table edge. The two absent pieces of the teaching kit now laid out in the gap. Morning light over the stalls.",
+      "setting": "The dark-cloth stall in the Hub market row — Silas at the near table edge, Memory upright on the dirt between them, Veth Ondra across with both hands resting on the table edge. Morning light over the stalls.",
       "npcsPresent": [
         {
-          "name": "Unnamed seller",
-          "state": "Both hands on the table edge, looking at Silas steadily — the nod given, the two missing pieces placed, waiting for what"
+          "name": "Veth Ondra",
+          "state": "Both hands on the table edge, looking at Silas directly — she has named herself and now wants to know how he walked this"
         },
         {
           "name": "Huginn",
-          "state": "On the arch-stone to the north — did not acknowledge the seller's look; the bird's silence its own comment."
+          "state": "On the arch-stone to the north — did not acknowledge Veth's look; the bird's silence its own comment."
         },
         {
           "name": "Siol",
@@ -1009,11 +1022,11 @@
       "objects": [
         "Memory — upright in Silas's grip, butt on the dirt",
         "dark cloth covering the table",
-        "bone-handled tools in teaching sequence — gap now filled, all pieces present",
+        "bone-handled tools in teaching sequence — all pieces present",
         "seven waygate arches visible to the north"
       ],
       "threads": [
-        "The seller's assessment: a door, not a dwelling — what the March holds that Silas has not yet been taught",
+        "Veth wants to know how Silas walked this far into the craft — her question is open and waiting",
         "Whether she will offer to teach, and what that would cost",
         "Pell's unspoken answer to the evening suggestion — filed, not resolved",
         "The Ent circle: still to visit"
@@ -2125,6 +2138,37 @@
       "gender": "man",
       "pronouns": "he/him",
       "statusNote": "Departing the Coliseum with his seconds — the morning's bouts concluded on good terms.",
+      "lastSeen": {
+        "locationId": "gen-waygate",
+        "day": 6
+      }
+    },
+    "veth-ondra": {
+      "id": "veth-ondra",
+      "name": "Veth Ondra",
+      "role": "Former Ashwarden warden, now teaching at the dark-cloth stall in the Hub market row",
+      "description": "A still, direct woman — held a south-facing warden post on the Ashwarden March for eleven years before the post was dissolved. Chose the Hub over the March's center. The stall is cover; the teaching kit is the door.",
+      "firstMet": {
+        "locationId": "gen-waygate",
+        "day": 6
+      },
+      "relationship": 2,
+      "history": [
+        "[d6] Named herself plainly and in full after Silas named himself. Now wants to know how he walked this far into the craft without a functioning warden post behind him."
+      ],
+      "knownFacts": [
+        "Held a warden post on the south-facing edge of the Ashwarden March for eleven years",
+        "Her post was dissolved and the holding reassigned — she did not return to the center",
+        "Came to the Hub instead and has been teaching at the stall since"
+      ],
+      "skillsObserved": [
+        "reading a traveler's craft from a single object without prom",
+        "precise self-introduction — history offered in plain sequenc"
+      ],
+      "status": "active",
+      "gender": "woman",
+      "pronouns": "she/her",
+      "statusNote": "At the dark-cloth stall in the Hub market row — named herself to Silas and is now asking how he came this far.",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 6
@@ -3933,21 +3977,21 @@
     }
   },
   "tendencies": {
-    "strategic": 13.705380910371014,
-    "cerebral": 13.256586443997563,
-    "social": 20.649722426392785,
-    "generous": 2.754889130640464,
-    "cautious": 5.65107003523522,
-    "physical": 1.2558735655980875,
-    "risky": 1.3170322309610787,
-    "ruthless": 0.41992133391011194,
-    "carousing": 0.006433725801256719,
-    "amorous": 5.023002313589066,
-    "patient": 1.0400110139152248,
-    "stealth": 0.16276258183931025,
-    "devotion": 0.36371668313261885,
-    "craft": 1.2857127265845765,
-    "leadership": 0.8284796051336276
+    "strategic": 13.362746387611738,
+    "cerebral": 12.925171782897623,
+    "social": 21.133479365732963,
+    "generous": 2.6860169023744525,
+    "cautious": 5.509793284354339,
+    "physical": 1.2244767264581353,
+    "risky": 1.2841064251870518,
+    "ruthless": 0.40942330056235915,
+    "carousing": 0.006272882656225301,
+    "amorous": 4.8974272557493395,
+    "patient": 1.014010738567344,
+    "stealth": 0.15869351729332748,
+    "devotion": 0.35462376605430335,
+    "craft": 1.253569908419962,
+    "leadership": 0.8077676150052869
   },
   "aptitudes": [
     "strategist",
@@ -3955,7 +3999,7 @@
     "scholar",
     "orator"
   ],
-  "actionCount": 559,
+  "actionCount": 560,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -4225,8 +4269,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784415726337,
-  "rev": 814,
+  "updatedAt": 1784416021160,
+  "rev": 815,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5601,7 +5645,7 @@
   "syncedAt": 1784392733860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 380
+    "valley": 381
   },
   "foreclosed": [
     "rootkin",
@@ -5658,10 +5702,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-18T23:02:06.335Z",
+      "lastAt": "2026-07-18T23:07:01.158Z",
       "startDay": 18,
       "endDay": 18,
-      "beats": 105,
+      "beats": 106,
       "_recapError": null,
       "recap": "Day eighteen, and Silas Weir moved like a man who'd finally stopped fighting the shape of what he was. On the road he disarmed three opportunists without breaking bones, read the grief sitting behind the broad man's eyes, named it plainly, pressed provisions into their hands, and sent them toward something worth doing — mercy given as instruction, not sentiment. Then he brought the hard people together: Dara, Aldric, Fendt, Mara, Calvar, all of them in the heat of Pell's forge with no exits easy and no pretense left, and in that single evening he turned a valley's quiet panic into four working threads — engineering, logistics, supply, accounts — each with a named lead and a direction to face. The crisis didn't end, but it stopped being formless, and that was his doing."
     }

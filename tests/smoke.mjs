@@ -4090,6 +4090,18 @@ await (async () => {
     time: readClock(newClock()), resolution: null, playerInput: null, exactWords: null, itemAdvance: [], travelDirective: null, ephemera: {},
     app: { fullCatalog: () => ({}), FN_INDEX: () => ({ families: [], verbToFamily: {}, byFamily: {} }), activeEnc: () => null,
       listAvailableEncounters: () => null, masteryReadyForGM: () => null, ratingLineForGM: () => "R", maybeLegendDetail: () => null, sharedCanonForGM: () => null } });
+  // the control must sit WITH the narration, not in a sidebar drawer (Erik: "buried way down with the map")
+  const appSrc155 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+  const cssSrc155 = readFileSync(new URL('../style.css', import.meta.url), 'utf8');
+  check("155: the speak control renders INSIDE the beat, with the prose it reads",
+    /main \+= `<div class="beat">\$\{speakCtl\}/.test(appSrc155) && /class="beat-speak"/.test(appSrc155));
+  check("155: it is no longer in the Map & Rest sidebar", !/id="do-speak"[\s\S]{0,200}Map &amp; Rest/.test(appSrc155) &&
+    (appSrc155.match(/id="do-speak"/g) || []).length === 1);
+  check("155: it speaks the DISPLAYED beat, not always the last one",
+    /toggleSpeakTurn\(turn\)/.test(appSrc155) && /function toggleSpeakTurn\(displayed = null\)/.test(appSrc155));
+  check("155: it is styled to sit out of the prose flow, and stays findable on touch",
+    /\.beat-speak\s*\{[\s\S]{0,240}float: right/.test(cssSrc155) && /max-width: 600px[\s\S]{0,80}\.beat-speak/.test(cssSrc155));
+
   check("155: a silent session carries NO read-aloud directive (it costs nothing when off)",
     assembleGMContext("turn", env(false)).readAloudDetail === null);
   const dir = assembleGMContext("turn", env(true)).readAloudDetail || "";

@@ -431,6 +431,18 @@ img[data-lightbox] { cursor: zoom-in; }
 .transcript { flex: 1; }
 .beat { margin-bottom: 18px; }
 .beat p { margin-bottom: 10px; }
+/* SNG-155: the read-aloud control sits WITH the narration it speaks — floated out of the text
+   flow so it never breaks the prose, quiet until hovered. At the table this is the button you
+   reach for while reading, so it belongs at the beat, not in a sidebar drawer. */
+.beat-speak {
+  float: right; margin: 0 0 6px 12px; padding: 3px 10px;
+  font-family: var(--font-ui); font-size: 12px; line-height: 1.6;
+  color: var(--ink-dim); background: transparent;
+  border: 1px solid var(--border); border-radius: 999px; cursor: pointer;
+  opacity: .55; transition: opacity .15s ease, color .15s ease, border-color .15s ease;
+}
+.beat-speak:hover, .beat-speak:focus-visible { opacity: 1; color: var(--accent); border-color: var(--accent); }
+@media (max-width: 600px) { .beat-speak { opacity: .85; } } /* no hover on touch — keep it findable */
 .beat.player-action { color: var(--accent); font-style: italic; }
 .beat .roll-receipt { font-family: var(--font-ui); font-size: 12px; color: var(--ink-dim); border-left: 2px solid var(--border); padding-left: 10px; margin: 6px 0; }
 .roll-receipt .crit_success { color: var(--accent); } .roll-receipt .success { color: var(--ok); }

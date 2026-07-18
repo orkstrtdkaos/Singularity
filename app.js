@@ -56,7 +56,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // SNG-162: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.118";
+const APP_VERSION = "1.8.119";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3574,8 +3574,10 @@ function speakTurn(turn) {
   }
   return true;
 }
-function toggleSpeakTurn() {
-  const turn = character?.activeScene?.lastTurn || null;
+/** SNG-155: read the beat the player is LOOKING AT. The control lives on the beat now, so it must
+ *  speak the DISPLAYED turn — falling back to lastTurn only when it was invoked without one. */
+function toggleSpeakTurn(displayed = null) {
+  const turn = displayed || character?.activeScene?.lastTurn || null;
   if (_speaking) { stopSpeaking(); renderPlay(turn, {}); return; }
   if (!speakTurn(turn)) { renderPlay(turn, { aside: ttsAvailable() ? "Nothing to read aloud yet." : "This browser has no speech voices available." }); return; }
   renderPlay(turn, {});
@@ -6079,7 +6081,6 @@ function renderPlay(turn, opts = {}) {
       <button class="opt" id="do-endscene" style="margin-top:8px; display:block; width:100%" title="Draw this scene to a close and write it into your chronicle. A new scene opens on your next action.">⏹ End this scene${sceneTurns.length ? ` (${sceneTurns.length} beats)` : ""}</button>
       ${/* SNG-155: read the narration aloud at the table. Narration only — choices, costs and
             receipts are never spoken. Hidden entirely when the device has no voices (tier 0). */""}
-      ${ttsAvailable() ? `<button class="opt" id="do-speak" style="margin-top:8px; display:block; width:100%" title="Read this beat aloud. Narration only — choices and costs are not spoken.">${_speaking ? "⏸ Stop reading" : "▶ Read this aloud"}</button>` : ""}
     </div></details>
     <details class="sidebar-sec" data-sec="codex"${sectionOpen("codex", false) ? " open" : ""}><summary><span class="sec-title">Codex &amp; Library</span></summary><div class="sec-body">
       <button class="opt" id="open-codex" style="display:block; width:100%">${Object.keys(character.codex?.topics || {}).length} topic${Object.keys(character.codex?.topics || {}).length === 1 ? "" : "s"} discovered — open Codex</button>
@@ -6158,7 +6159,13 @@ function renderPlay(turn, opts = {}) {
   if (opts.error) main += `<div class="error-card">The GM stumbled: ${esc(opts.error)}<br><button class="btn" id="retry" style="margin-top:8px">Try again</button></div>`;
 
   if (turn) {
-    main += `<div class="beat">${turn.narration.split(/\n\n+/).map(p => `<p>${esc(p)}</p>`).join("")}</div>`;
+    // SNG-155: the speak control belongs ON THE BEAT — it reads THIS narration, so it sits with it.
+    // It was in the Map & Rest sidebar, nowhere near the prose it speaks: the same mistake as the
+    // ⭐ in SNG-161, putting the control next to the plumbing instead of next to the thing it acts on.
+    const speakCtl = ttsAvailable()
+      ? `<button class="beat-speak" id="do-speak" title="Read this beat aloud. Narration only — choices and costs are not spoken.">${_speaking ? "⏸ Stop" : "▶ Read aloud"}</button>`
+      : "";
+    main += `<div class="beat">${speakCtl}${turn.narration.split(/\n\n+/).map(p => `<p>${esc(p)}</p>`).join("")}</div>`;
     if (turn.momentArt) main += `<div class="moment-art"><img src="${esc(turn.momentArt)}" alt="${esc(turn.sceneSummary || "a moment")}" data-lightbox="moment" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`; // SNG-035/053
     if (opts.degraded) main += `<div class="degraded-note">(${esc(turn._opNote || "The GM's structured reply failed — plain narration mode this turn.")})</div>`;
     turn.choices = lethalOfferClamp(turn.choices, { ...(CONTENT.encounters || {}), ...(character.customEncounters || {}) });
@@ -6379,7 +6386,7 @@ function renderPlay(turn, opts = {}) {
   const moreBtn = document.getElementById("open-inventory-more"); if (moreBtn) moreBtn.onclick = () => renderInventoryScreen(); // SNG-121
   // (SNG-114: item name/drop now bound via bindItemCardHandlers above — the duplicated data-nameit/data-drop wiring is gone.)
   const endSceneBtn = document.getElementById("do-endscene"); if (endSceneBtn) endSceneBtn.onclick = () => endSceneNow(); // SNG-158
-  const speakBtn = document.getElementById("do-speak"); if (speakBtn) speakBtn.onclick = () => toggleSpeakTurn(); // SNG-155
+  const speakBtn = document.getElementById("do-speak"); if (speakBtn) speakBtn.onclick = () => toggleSpeakTurn(turn); // SNG-155: speaks the DISPLAYED beat
   const restBtn = document.getElementById("do-rest"); if (restBtn) restBtn.onclick = () => rest("sleep");
   const breatherBtn = document.getElementById("do-breather"); if (breatherBtn) breatherBtn.onclick = () => rest("breather");
   const mapBtn = document.getElementById("open-map"); if (mapBtn) mapBtn.onclick = () => renderMap();

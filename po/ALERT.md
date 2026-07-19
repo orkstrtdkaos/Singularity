@@ -200,3 +200,44 @@ suppressors work, and the roll receipt names the carried cause (invariant 5).
 STILL OPEN FOR ERIK, unchanged: §D.1 Ent->people affiliation (blocks item 2, SNG-171 §2 history
 credit), §D.2 region renames, §D.3 stakes dial default, §D.4 falloff scales. Remaining build: items
 2, 7, 8, 9. -->
+
+---
+
+<!-- status: BATCH-13 items 1b + 2 COMPLETE_PENDING_REVIEW (CCode 2026-07-19). v1.8.137 SNG-176 /
+v1.8.138 SNG-171 §2. Suite green. Map/axes work is PAUSED at Erik's direction — he is thinking about
+how the map interacts with the axes; see po/results/20260719_WORLDSPACE_finding.md.
+
+SNG-176 — YOUR Q2 AND Q4 WERE BOTH RIGHT, and you were right to make me check. TWO of the four
+blocks in your table were ALREADY GLOBAL: the CODEX scores rather than filters (location is a +3
+boost with a newest-few fallback, and searchCodex already exists), and npcRegistryForGM already takes
+location-relevant NPCs first then fills from the rest by relationship strength. Only LORE and
+placeMemoryForGM are genuinely here-only. findSubPlaceParent already scans all of placeMemory, as you
+suspected — it just returns {parentId, slug} rather than the record. So the spec overstates the
+defect by half, in your favour. Built places.recallPlaces/recallForGM (places the player's words name,
+found anywhere, sub-places included) plus playerInput fed into the codex scorer at +4 so a topic the
+player NAMED outranks the one they are standing on. ANSWERING Q1: the registry pass, NOT parseIntent —
+env already carries playerInput/exactWords, so deterministic namematch costs no round-trip and recalls
+better than a Haiku call would. The block is EMPTY on turns that name nowhere (a test asserts it), and
+recall is memory not omniscience — an unheard-of place stays unfindable. §2.4 bio anchors NOT built:
+register-at-creation vs resolve-lazily is your ruling.
+
+SNG-171 §2 — ⚠️ THE ENGINE IS RIGHT, THE RULING IS RIGHT, AND THE DATA STILL CANNOT REACH IT. Measured
+on Erik's save: only 1 of his 14 positive bonds is creditable. Pell, Calvar, Veth, Mara, Siol, Aldric
+and the rest are GM-GENERATED and carry NO people and NO domains — 0 of 14. SNG-174 authored those
+fields onto the 41 AUTHORED NPCs; the population that actually accumulates in play is generated. His
+Ent is not in the registry under an authored id either, so the very bond that prompted the spec is
+unattributable today and rootkin stays at -1. I did NOT paper over it: generated NPCs carry
+firstMet.locationId and the region->tradition map IS unambiguous (24 regions, one tradition each,
+already authored), but "where you met someone" is not "what they practise" and at a hub like the
+Crossing it would be actively wrong — §2c.4 says credit nothing, so it credits nothing. THE REAL FIX
+IS TO STAMP people/domains AT MINT TIME IN generate.js. That is engine work I can do; it changes what
+generation produces, so I want it ruled rather than assumed. RECOMMEND IT AS THE NEXT ITEM — without
+it, item 2's outcome cannot land however correct the step is.
+
+Step behaviour: authored bonds by band (devoted 3 / ally 2 / friendly 1; primary full, secondary
+half, tertiary quarter; an Epic NPC's several primaries split the share) + practised craft from the
+use ledger. Idempotent BY RECORD, not just by the version gate. Capped at +6 — thirty devoted bonds
+cannot buy `kin`.
+
+Remaining in the batch: 7 (SNG-171 §1 arc anchors), 8 (166/167 rest, 168, 170), 9 (SNG-172 power
+sources), 10 (SNG-175 companions + curricula). -->

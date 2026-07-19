@@ -1,10 +1,13 @@
 # The Claiming of the Old Warden Post
 
 **Silas Weir and company · Stillwater's Trouble · Day 6, midday, early-spring · world-day 19**
-**Source: live play, 2026-07-19.** This is the GM's text, which is canon.
-An earlier version of this file carried an out-of-session improvisation by Aevi with different
-architecture — three rooms, a stair, a corner tower, a south terrace. **It was wrong and has been
-replaced.** Lower layer wins: the table is closer to the world than the notes are.
+**Source: live play, 2026-07-19. This is the GM's text and it is canon.**
+
+> ⚠️ **The site is NOT authored as a location, deliberately.** It sits in the **Pale March, near the
+> waygate** — not the Valley, where I first placed it. I authored a location from a scene without
+> knowing its region, which is the one fact a place cannot be inferred without. That location has
+> been reverted in full. **This file is a play record only.** Erik will weave the site in once the
+> canon around it settles.
 
 ---
 
@@ -57,52 +60,55 @@ her work gave it something to press against.
 
 ---
 
-# §1 — Why this is in the repo
+# §1 — The thin ground cut both ways, and the game charged for it correctly
 
-**The Warden Post did not exist in content.** It was invented across an entire quest in narration and
-**never written to state** — no location record, no `placeUpdates`, no sub-places. The game described
-a site in detail and had no idea where it was.
+*"The substrate is thin here and you feel it — the shadow-shapes cost more than they should."*
 
-That is SNG-176 and SNG-179 demonstrating themselves in live play, and it is the answer to why three
-op-classes firing zero times matters. **This is what gets lost:** not a stat, but five people
-spending an afternoon making a ruin into a place.
-
-`content/packs/valley/locations/the_old_warden_post.json` now exists, connected to Millbrook, the
-Echo River Crossing and the old switchback.
-
-# §2 — The thin ground cut both ways, and the game charged for it correctly
-
-*"The substrate is thin here and you feel it — the shadow-shapes cost more than they should, and the
-second one frays at the edge before you close it."*
-
-**That is the right answer and it arrived without being told to.** Shadow-work is umbral, classified
+**That is the right answer and nothing told it to be.** Shadow-work is umbral, classified
 `lattice 0.6 / natural 0.4` in `power_sources.json`, shipped hours before this scene was played. A
-lattice-leaning craft in unreached ground **should** pay above its rate.
+lattice-leaning craft in thin ground **should** pay above its rate.
 
-And the other half held too: what is laid down here **meets no competition.** The wards hold. They
-hold *rough* — felt, not sealed; a deterrent, not a lock — which is a better outcome than either
-"it works" or "it fails," and it is the two-sided band doing exactly what §9b describes.
+And the other half held: what was laid down **met no competition.** The wards hold — *rough*, felt
+rather than sealed, a deterrent and not a lock. That is a better outcome than either "it works" or
+"it fails," and it is the two-sided band doing what §9b describes.
 
-This is the first live confirmation that **thin ground is a fact with two faces**, per Erik's ruling.
+**First live confirmation that thin ground is a fact with two faces**, which is Erik's ruling arriving
+in play rather than in a spec.
 
-# §3 — Two corrections to the record
+Veth's black-salt chalk is the other half worth keeping: **two power sources composing.** The
+March's old form hardens against passive drift, under a spatial read that could not close cleanly on
+its own. Neither did the other's job, and the threshold doubled.
 
-1. **Stillwater is not a settlement. It is Veth's Raven name**, used for the first time in that
-   house. I had assumed from the quest title that it was a place and looked for it in the location
-   corpus. *Stillwater's Trouble* is **hers**.
-2. **The architecture in the first version of this file was invented and wrong.** One long room, not
-   three and a stair. An alcove, not an upper storey. A bench inside the door, not a terrace.
-   Corrected in the location record and above.
+# §2 — Corrections to my own record
 
-# §4 — The split, which is the point
+1. **Stillwater is Veth's Raven name, not a settlement.** I assumed from the quest title that it was
+   a place and searched the location corpus for it. *Stillwater's Trouble* is **hers.**
+2. **The site is in the Pale March near the waygate.** I placed it in the Valley on no evidence.
+3. **I authored a location out of a scene.** Erik: *"I shouldn't have asked — you didn't have the
+   context."* Generous, and the error is still mine: **region was the one property I could not infer
+   and did not flag as unknown.** Every other field I derived from the text; that one I invented and
+   presented identically to the rest. The lesson is not "ask more" — it is **mark the inferred field
+   as inferred**, the same discipline as SNG-177's provenance stamping, which I specced and did not
+   apply to myself.
 
-The Post carries five sub-places as **architecture** — the Long Room, the South Corner, the Back
-Alcove, the Threshold, the Apex Stone. True for anyone who ever walks up that hill.
+# §3 — Appendix: an unused draft (Erik: *"I like your 3 rooms"*)
 
-**Pell's forge corner, Veth's ground, Cassiel's kept ground, Huginn's rook and the Maker's hollow are
-not in that file and must not be.** They are this company's answer to a building. Another character
-finds the same five spaces and makes a woodpile of the corner.
+Before the GM's text arrived I improvised the site with a different architecture. It is not canon and
+the Post is one long room. Kept because Erik liked it and it may suit somewhere else — a larger post,
+or this one before it fell in.
 
-**A place is world content. What a company makes of it is a save.** The same separation as
-disposition-versus-position in SNG-180: what a thing *is*, and what it has *become to someone*, are
-different facts and must be free to differ.
+> **Three rooms and a stair**, all of them wrong for what they were built for and most of them right
+> for something else. The long room faces east and takes morning light through arrow-slits that were
+> never meant to let anything in; the hearth-wall is thick enough to hold heat for a day. **Above**,
+> the stair opens on a room with a shuttered window and a floor that slopes very slightly toward the
+> outer wall — a fault in a barracks and a virtue anywhere something might spill. **The south
+> terrace**, where the wall gives out and the hill takes over, and the light stays longest; nothing
+> buried in it yet, which is exactly the point, because a keeper's ground has to be chosen before it
+> is needed — choosing it after is just a burial. **The corner tower**, three walls and a floor and
+> open sky on the fourth side, the only part built to *watch* rather than to withstand.
+>
+> And the boundary, walked by everyone, because a ward woven by one hand only holds against what that
+> hand thought to fear. Not a circle — circles are for people who have not looked at the terrain.
+> Shadow first, drawn thin and laid along the line like a seam, so a thing looking in finds not a
+> barrier but an *absence of interest*, a place the eye slides off. Then craft over it, hammered in at
+> intervals, so anything pressing hard enough to notice the shadow meets something that pushes back.

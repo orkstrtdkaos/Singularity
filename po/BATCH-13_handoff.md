@@ -18,6 +18,7 @@ Build order is CCode's own recommendation, accepted without change.
 | **7** | **SNG-171 §1 · arc anchors** | Stages cannot name a place; outcomes ship `effects: []`. |
 | **8** | **SNG-166 / 167 rest, 168, 170** | Address derivation, NPC quest seeds, map viewport + pinch, stakes dial. |
 | **9** | **SNG-172 · power sources** | Largest, ratified, and wants the substrate field landed first. |
+| **10** | **SNG-175 · companion evolution + teacher curricula** | `recruit()` stores a membership row; authored companions carry `stages`/`persona`/`boundaries`. Two classes, one alive. `teaches` authored on ONE npc as a bare string. Erik has two bonded teachers and has been taught nothing. |
 
 ---
 
@@ -65,6 +66,11 @@ taxonomy and `progression.js:154` seeds domain access from it. **Power source ne
 (36 abilities have no `powerSystem` at all — separate defect, worth closing in the same pass.)
 
 ---
+
+# §C2 — ALSO RATIFIED
+
+**Multiple primaries credit standing at REDUCED gain each** (SNG-174 §4.1). Erik: *"you can only
+learn so much at a time."* Breadth is not strictly better than depth.
 
 # §D — RULINGS STILL OPEN FOR ERIK
 

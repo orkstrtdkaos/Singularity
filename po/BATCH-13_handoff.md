@@ -18,6 +18,7 @@ Build order is CCode's own recommendation, accepted without change.
 | **7** | **SNG-171 §1 · arc anchors** | Stages cannot name a place; outcomes ship `effects: []`. |
 | **8** | **SNG-166 / 167 rest, 168, 170** | Address derivation, NPC quest seeds, map viewport + pinch, stakes dial. |
 | **9** | **SNG-172 · power sources** | Largest, ratified, and wants the substrate field landed first. |
+| **1b** | **SNG-176 · the GM can only see HERE** | Runs WITH the lore loader — same defect class, same files. Every world block is current-location-scoped, so a question about anywhere else is unanswerable. Erik hit it asking where his mother's house is. |
 | **10** | **SNG-175 · companion evolution + teacher curricula** | `recruit()` stores a membership row; authored companions carry `stages`/`persona`/`boundaries`. Two classes, one alive. `teaches` authored on ONE npc as a bare string. Erik has two bonded teachers and has been taught nothing. |
 
 ---

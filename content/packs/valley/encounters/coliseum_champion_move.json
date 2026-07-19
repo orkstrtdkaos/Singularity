@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "coliseum_champion_move",
+  "type": "duel",
+  "name": "The Bout: The Long Yard",
+  "locationId": "the_great_coliseum",
+  "setup": "Aro has never been hit in this arena. Not blocked — hit. The bout is a hundred paces of open sand and the entire question is whether you can close it.",
+  "lethal": false,
+  "opponent": {
+    "name": "Aro of the Horizon Reach",
+    "health": 3,
+    "threat": 44,
+    "yieldAt": 1,
+    "fleeDifficulty": 10,
+    "spectrum": {
+      "space_time": 0.4
+    },
+    "tacticTags": [
+      "never-where-you-swing",
+      "closes-in-one-step",
+      "turns-the-sand",
+      "makes-you-chase"
+    ]
+  }
+}

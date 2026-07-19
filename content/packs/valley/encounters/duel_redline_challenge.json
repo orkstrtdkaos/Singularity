@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "duel_redline_challenge",
+  "type": "duel",
+  "name": "The Redline Challenge",
+  "locationId": "the_redline",
+  "setup": "On the Redline a challenge is issued in front of witnesses and declining is a matter of public record. This one has been issued to you. The witnesses are already gathering.",
+  "lethal": false,
+  "opponent": {
+    "name": "a Redline duelist",
+    "health": 5,
+    "threat": 42,
+    "yieldAt": 1,
+    "fleeDifficulty": 20,
+    "spectrum": {
+      "violence_peace": -0.5
+    },
+    "tacticTags": [
+      "makes-it-public",
+      "escalates-if-you-hedge",
+      "fights-to-first-yield",
+      "plays-to-the-witnesses"
+    ]
+  }
+}

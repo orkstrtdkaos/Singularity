@@ -298,3 +298,57 @@ enrichment is earned. app.js enrichNpcDepth fires on the crossing, additive-only
 STILL OPEN FOR ERIK: the hub-attribution question (16 of 20 registry NPCs have no backing record at
 all; I declined to derive them from firstMet because at a hub it is actively wrong), and the map/axes
 ruling. Remaining build: 7 (SNG-171 §1 arc anchors), 8 (166/167 rest, 168, 170), 9 (SNG-172). -->
+
+---
+
+<!-- status: BATCH-13 items 1b/2/7/8-partial/8c COMPLETE_PENDING_REVIEW (CCode 2026-07-19).
+v1.8.142 SNG-179 · v1.8.143 SNG-171 §1 · v1.8.144 SNG-181 · v1.8.145 SNG-167 §1c.1 · v1.8.146
+SNG-167 §2. Suite green at every ship, verified by EXIT CODE. ROUND 2 answers filed in
+po/results/20260719_ROUND2_worldspace_and_179.md as directed. WORLDSPACE UNTOUCHED — SNG-180 not
+started, pending Erik's map/axes thinking.
+
+SNG-179 — YOUR THIRD POSSIBILITY WAS THE RIGHT ONE, and it needed no live turn. Four ops demand a
+`traditionId` (markTeacher, standingOps, offerAcquisition, the acquisition reply) and THE PROMPT HAS
+NEVER LISTED THE VALID IDS — a grep for a tradition vocabulary block in gm.js returns nothing. The
+ids are blazeborn/rootkin/ashwarden…27 of them; `radiant` is not one, and Erik's teacher is "a
+Radiant teacher". app.js then discarded the miss in total silence. An enum the writer has never seen
+is not an enum. Shipped: traditionVocab as a world-tier block (caches once), the guard now RECORDS
+the miss, and logOpOutcome tallies applied/rejected onto the feedback report so never-emitted reads
+differently from emitted-and-rejected (§4.4). ⚠️ IT ALSO CORRECTS MY OWN "three ops, one shape" —
+`discovery` is double-gated on discoveryEligible (crit-success on a NOVEL action; possibly not a bug
+at all) and `markDefiningMoment` takes an abilityId, which IS in the prompt. THREE CAUSES, NOT ONE
+SHAPE. Erik's instrumented turn is still worth having for markDefiningMoment; it will now arrive
+pre-diagnosed.
+
+SNG-171 §1 — both defects confirmed verbatim then fixed. Stages carry resolvable `anchors` (dropped
+if they name nothing real; `unanchored` flagged so "not ready to show" is checkable). Outcomes carry
+real effects clamped to the SAME quests.js vocabulary, so an arc ending runs through the existing
+applier rather than a second half-built path. §1c.2: the prompt now HANDS the author the character's
+known places, met people, carried items and peoples — validating invented prose afterwards would
+have produced the same abstraction and then deleted it.
+
+SNG-181 — a SLICE, not CSS, and the evidence is exact: Erik's truncated line is 80 characters TO THE
+CHARACTER, and gm.js:603 read `.slice(0, 80)`. Both intent paths now smartClamp, and `playerWords`
+carries the full typed text to the log — the one string that must never be truncated is the one the
+player wrote. A test asserts the 80, so a regression is caught by arithmetic rather than a screenshot.
+
+SNG-167 §1c.1 — region lore is automatic now; 11 locations gain their Reach. ⚠️ CORRECTING MY ROUND 2:
+I said the `reach_<regionId>` rule "matches ZERO of three" and listed `the_unspooling`. The id is
+`unspooling` — TWO of three match exactly, only reach_somatic/somatic_reaches needs a fallback. I
+asserted a detail without checking it. That change is in your favour: two-of-three is why this is a
+lookup with one normalisation rather than a mapping table nobody would maintain.
+
+SNG-167 §2 — npcSeedDetail registered and consumed as rule 10b. DERIVED rather than blocked on
+authoring per your ROUND 2 ruling: 0 of 47 NPCs carry seeds, 45 carry wants, so the want is the
+fallback premise and the block marks it so the GM shapes it into a named opportunity. CI ratchet
+prints the backlog (41) every run and may only go down — the number-not-aspiration shape you asked for.
+
+⚠️ PROCESS ERROR, RECORDED: one ship (v1.8.143) went out RED. My command was
+`npm test | grep ... && git commit`, which chains on GREP's exit status, not the suite's. The
+rawProseCaps ratchet caught two raw slices I had added and I piped the gate into a mask. Fixed within
+minutes, and every ship since verifies with `npm test > log; echo EXIT=$?`.
+
+STILL OPEN FOR ERIK: the hub-attribution question (16 of 20 registry NPCs have no backing record;
+I declined to derive from firstMet because at a hub it is actively wrong), and the map/axes ruling.
+REMAINING BUILD: 8 (SNG-166 address derivation + naming, SNG-168 viewport/pinch, SNG-170 stakes
+dial), 8b (SNG-180 worldspace), 9 (SNG-172 power sources). -->

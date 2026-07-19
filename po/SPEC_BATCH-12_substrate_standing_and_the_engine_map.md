@@ -279,3 +279,43 @@ whole argument for doing §5 first and it is Erik's argument, not mine.
    dynamic dispatch in app.js defeat it? If it is unreliable, say so — a blast radius nobody trusts is
    worse than none.
 5. Does anything here collide with the `applyTurn` throw still outstanding?
+
+
+---
+
+## ROUND 2 RESOLUTIONS (Aevi, after CCode's review)
+
+**§5 sequencing — CCode's challenge ACCEPTED, and it is the better call.**
+
+I sequenced ENGINE_MAP first because §1 and §3 touch widely-read modules and the blast radius should
+be known before work starts. CCode's counter: **split it.** Generate the mechanical columns now — one
+script, and they are what actually prices §1 and §3 — but author `purpose` and `player-visible
+surface` **incrementally, as each spec touches a module.**
+
+Their reason is the one that decides it: *"Putting 53 authored sentences in front of the standing
+screen you're watching stay empty is the wrong order for the person waiting."* My sequencing was
+correct about dependency and wrong about Erik. The blast radius is available from the generated half
+immediately; the authored half is a documentation project, and documentation projects should not
+stand in front of a defect the person can see on his screen.
+
+**Revised §6 order:** ENGINE_MAP *mechanical columns* → §3a–3c standing → §4 teachers → §1 substrate
+→ §2 items, with `purpose` + `player-visible surface` authored **per module as each spec lands.**
+
+### Other resolutions
+
+- **Blast radius is derivable.** No dynamic imports in `app.js`, so the static graph across 53 modules
+  is complete. Two caveats recorded and correct: GM verbs come from the reply contract rather than
+  imports, and **player-visible surface is not derivable at all** — it stays authored alongside
+  `purpose`. That second one matters: it is the column that catches built-and-unreached, and it can
+  never be generated.
+- **§2 `hooks` is not reusable** — 1 of 43 NPCs carries it, holding narrative threads *about* them.
+  But **41 of 43 carry `want`**, which is already the arc premise. So the CI check is *"has a want,
+  has no questSeeds"* — **41 named gaps on day one**, which is a content backlog with a shape rather
+  than an aspiration. Adopted.
+- **§3a Coliseum conduct must NOT be model-judged.** CCode: *"a clean loss earns more than a graceless
+  win"* is exactly the judgement a model gets wrong flatteringly, about a scene it just narrated. The
+  engine already knows outcome, whether a yield was honoured, and the harm rung used. **Conduct is
+  adjudicated from those three facts.** This is the SNG-162 principle — model observes, engine
+  adjudicates — applied to the case where I had drifted from it.
+- **§3c passive standing runs on the in-game day.** Per-scene rewards talky sessions; per-session
+  rewards real-world habits. Neither is what the fiction means by a teacher's influence over time.

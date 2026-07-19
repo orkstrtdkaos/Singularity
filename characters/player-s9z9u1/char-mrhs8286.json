@@ -293,10 +293,10 @@
     },
     {
       "id": null,
-      "name": "Abandoned Sealed Tin",
-      "kind": "misc",
+      "name": "Seventh-Band Lens-Blanks (tin)",
+      "kind": "quest",
       "qty": 1,
-      "description": "A small wax-sealed tin, the width of a palm — dry and clean, set deliberately in a hollow under the neighboring stall's table and not collected. Contents shift when tilted: loose, small, not powder. The seal is intact.",
+      "description": "A small wax-sealed tin holding seven unfinished lens-blanks nested in folded linen, plus a slip of paper with grinding measurements in two hands — a margin note reads 'seventh-band, confirm before cutting.' Found abandoned in a dry hollow beneath a neighboring market stall.",
       "consumable": false
     }
   ],
@@ -1112,24 +1112,19 @@
         "player": "Use The Attended End on the tin — read whether what's inside is ending, and how",
         "summary": "The Attended End reads the sealed tin — nothing inside is ending; the contents are stable, the abandonment was not voluntary.",
         "narration": "You hold the tin still in both hands and let Marrow's sense settle into it — quiet, economical, the way you'd rest a palm on a door to feel whether there's heat on the other side.\n\nWhat comes back is simple. Nothing inside that tin is ending. Nothing has an hour written on it, no trajectory bending toward a close. Whatever is in there is inert and stable — small objects, not living, not dying, not poisoned, not decaying. The wax seal has kept them dry. They are in roughly the condition they were placed.\n\nThat tells you two things. The tin was left here by someone who expected to return, and that person has not been back recently enough to disturb anything. Whatever interrupted their return, it was not the tin.\n\nVeth watches you from a foot away, bag already on her shoulder. She says nothing. Huginn has turned its attention to the north end of the market row."
+      },
+      {
+        "player": "Break the seal and open the tin now — see what was worth hiding here",
+        "summary": "Silas opens the abandoned tin and finds seven unfinished seventh-band lens-blanks with a specification note in two hands — Huginn looks longer than usual before turning away.",
+        "narration": "The wax seal gives cleanly under your thumbnail — whoever set it used good wax, the kind that doesn't crumble or stick. You work it free in one piece and set it on the neighboring stall's crossbar, then lever the lid.\n\nInside, on a thin pad of folded linen, sit seven lens-blanks. Each one is roughly the diameter of a thumb-joint, ground to a consistent curve, and nested in its own impression in the cloth. They are not finished lenses — the edges are still rough from the wheel — but the grinding on each face is precise and deliberate. Someone knew exactly what they were making. Tucked against the inner wall of the tin, folded twice, is a slip of paper. The writing on it is small and neat: a series of measurements, two columns, with a margin note in a different hand that reads seventh-band, confirm before cutting.\n\nYou have seen that phrase before. Not the handwriting — but the phrase itself, and the specification it belongs to.\n\nVeth stands at your shoulder, reading it with you. She says nothing for a moment. Then she says, \"Someone was working to spec,\" — and pauses — \"and did not finish.\"\n\nHuginn turns its head from the north end of the row and looks at the tin. It looks at it for three full seconds, which is longer than Huginn usually takes to decide something is not its business. Then it looks away."
       }
     ],
     "lastTurn": {
-      "narration": "You hold the tin still in both hands and let Marrow's sense settle into it — quiet, economical, the way you'd rest a palm on a door to feel whether there's heat on the other side.\n\nWhat comes back is simple. Nothing inside that tin is ending. Nothing has an hour written on it, no trajectory bending toward a close. Whatever is in there is inert and stable — small objects, not living, not dying, not poisoned, not decaying. The wax seal has kept them dry. They are in roughly the condition they were placed.\n\nThat tells you two things. The tin was left here by someone who expected to return, and that person has not been back recently enough to disturb anything. Whatever interrupted their return, it was not the tin.\n\nVeth watches you from a foot away, bag already on her shoulder. She says nothing. Huginn has turned its attention to the north end of the market row.",
-      "sceneSummary": "The Attended End reads the sealed tin — nothing inside is ending; the contents are stable, the abandonment was not voluntary.",
+      "narration": "The wax seal gives cleanly under your thumbnail — whoever set it used good wax, the kind that doesn't crumble or stick. You work it free in one piece and set it on the neighboring stall's crossbar, then lever the lid.\n\nInside, on a thin pad of folded linen, sit seven lens-blanks. Each one is roughly the diameter of a thumb-joint, ground to a consistent curve, and nested in its own impression in the cloth. They are not finished lenses — the edges are still rough from the wheel — but the grinding on each face is precise and deliberate. Someone knew exactly what they were making. Tucked against the inner wall of the tin, folded twice, is a slip of paper. The writing on it is small and neat: a series of measurements, two columns, with a margin note in a different hand that reads seventh-band, confirm before cutting.\n\nYou have seen that phrase before. Not the handwriting — but the phrase itself, and the specification it belongs to.\n\nVeth stands at your shoulder, reading it with you. She says nothing for a moment. Then she says, \"Someone was working to spec,\" — and pauses — \"and did not finish.\"\n\nHuginn turns its head from the north end of the row and looks at the tin. It looks at it for three full seconds, which is longer than Huginn usually takes to decide something is not its business. Then it looks away.",
+      "sceneSummary": "Silas opens the abandoned tin and finds seven unfinished seventh-band lens-blanks with a specification note in two hands — Huginn looks longer than usual before turning away.",
       "choices": [
         {
-          "label": "Break the seal and open the tin now — see what was worth hiding here",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Pocket the tin unopened and go find Pell and Siol — open it when the party is together",
+          "label": "Pocket the tin and its contents — this belongs with Calvar or Vash, and you'll carry it there",
           "attribute": "mental",
           "subAttribute": "reason",
           "difficulty": 0,
@@ -1139,36 +1134,59 @@
           "trivial": true
         },
         {
-          "label": "Ask Huginn — it has watched every stall in this row since before first light; does it know who left this?",
+          "label": "Study the measurements on the slip — see if they match anything you know about the seventh-band specification",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
             "study"
           ],
-          "trivial": true
+          "trivial": false
         },
         {
-          "label": "Ask Veth directly — she has worked this market row long enough to know the neighboring stall and its keeper",
+          "label": "Ask Veth directly — eleven years on the March's south post, does she know what seventh-band lens-work is for",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "plan"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Go find Pell and Siol and bring the party together — introductions first, then the tin",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "lead"
           ],
           "trivial": true
         }
       ],
+      "characterDeltas": {
+        "inventoryAdd": [
+          {
+            "name": "Seventh-Band Lens-Blanks (tin)",
+            "kind": "quest",
+            "description": "A small wax-sealed tin holding seven unfinished lens-blanks nested in folded linen, plus a slip of paper with grinding measurements in two hands — a margin note reads 'seventh-band, confirm before cutting.' Found abandoned in a dry hollow beneath a neighboring market stall.",
+            "consumable": false
+          }
+        ],
+        "inventoryRemove": [
+          "Abandoned Sealed Tin"
+        ]
+      },
       "scene": {
-        "setting": "The dark-cloth stall in the Hub market row, morning light strengthening over the row. Veth is packed and standing. The neighboring stall is still closed, its cloth knotted around the legs. The dry hollow beneath it is now empty.",
+        "setting": "The dark-cloth stall in the Hub market row, midday light falling flat and clear across the packed earth. Veth is packed and standing at Silas's shoulder. The neighboring stall is still closed, its cloth knotted around the legs. The dry hollow beneath it is empty.",
         "npcsPresent": [
           {
             "name": "Veth Ondra",
-            "state": "Bag on shoulder, watching Silas with the tin — calm, waiting."
+            "state": "Standing at Silas's shoulder, reading the slip in the tin — bag on shoulder, stall bundle lashed to outside, ready to travel."
           },
           {
             "name": "Huginn",
-            "state": "Attention shifted north toward the far end of the market row."
+            "state": "Turned away from the tin now — attention back toward the north end of the market row, giving nothing further."
           },
           {
             "name": "Siol",
@@ -1181,13 +1199,13 @@
         ],
         "objects": [
           "Memory — leaning against the stall frame, shaft upright",
-          "Veth's canvas shoulder bag — packed tight, stall bundle lashed to outside",
-          "Small sealed tin — wax intact, contents stable and inert, now in Silas's hands",
-          "Dry hollow under the neighboring stall's crossbar — now empty",
+          "Seventh-Band Lens-Blanks (tin) — open in Silas's hands, seven lens-blanks on folded linen, slip of paper with measurements inside",
+          "Wax seal — lifted intact, resting on the neighboring crossbar",
           "Seven waygate arches visible to the north"
         ],
         "threads": [
-          "Sealed tin — contents unknown but stable; abandonment was not voluntary",
+          "Seventh-band lens-blanks — whose work, and who didn't come back for them",
+          "Huginn looked three full seconds before turning away — it saw something",
           "Pell and Siol not yet introduced to Veth — party not yet assembled",
           "The evening suggestion between Silas and Pell — filed, not resolved"
         ]
@@ -1197,38 +1215,53 @@
           "op": "update",
           "npcId": "veth-stillwater-ondra",
           "name": "Veth (Stillwater) Ondra",
-          "note": "Watched Silas use The Attended End on the tin — did not ask what he read, waiting for him to share or act.",
-          "statusNote": "Stall folded, bag on shoulder, ready to travel — watching Silas with the retrieved tin.",
-          "status": "active"
+          "note": "Stood at Silas's shoulder as he opened the tin — read the slip, named the abandonment plainly: someone working to spec, did not finish.",
+          "learned": [
+            "The tin held seventh-band lens-blanks with a specification note in two hands — she read it and named the incompleteness without hesitation"
+          ],
+          "skillsObserved": [
+            "reading an abandoned object's situation from a single look"
+          ],
+          "status": "active",
+          "statusNote": "Packed and ready to travel — stall folded, at Silas's shoulder, party not yet assembled."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "neighboring-stall-tin",
-          "label": "Abandoned Sealed Tin — Market Row",
+          "topic": "seventh-band-lens-blanks",
+          "label": "Seventh-Band Lens-Blanks — Market Row Cache",
           "kind": "mystery",
-          "fact": "The Attended End confirms: nothing inside the tin is ending. The contents are inert, stable, and in roughly the condition they were placed. The abandonment was not voluntary — whoever left this expected to return.",
+          "fact": "Seven unfinished lens-blanks ground to a consistent curve, nested in a tin abandoned in a dry hollow beneath a Hub market stall. A slip of paper inside carries grinding measurements in two hands — a margin note reads 'seventh-band, confirm before cutting.' Someone was working to Calvar's specification and did not return to collect the work.",
           "links": [
-            "the-edge-district-ledger",
-            "waygate"
+            "vash-lens-grinder-east-room",
+            "calvar",
+            "the-water-crisis",
+            "the-edge-district-ledger"
           ]
         }
       ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief craft read — moments only"
-      }
+      "placeUpdates": [
+        {
+          "note": "A sealed tin of unfinished seventh-band lens-blanks retrieved from the dry hollow beneath the neighboring stall's crossbar — the hollow is now empty, the tin in Silas Weir's possession.",
+          "subPlace": {
+            "name": "Neighboring Stall Cache — Market Row",
+            "parent": "Hub Waygate Plaza",
+            "note": "Dry hollow now emptied — tin recovered by Silas Weir on World-day 19 midday. The stall it belonged to has not opened.",
+            "visited": true
+          }
+        }
+      ]
     },
     "sceneState": {
-      "setting": "The dark-cloth stall in the Hub market row, morning light strengthening over the row. Veth is packed and standing. The neighboring stall is still closed, its cloth knotted around the legs. The dry hollow beneath it is now empty.",
+      "setting": "The dark-cloth stall in the Hub market row, midday light falling flat and clear across the packed earth. Veth is packed and standing at Silas's shoulder. The neighboring stall is still closed, its cloth knotted around the legs. The dry hollow beneath it is empty.",
       "npcsPresent": [
         {
           "name": "Veth Ondra",
-          "state": "Bag on shoulder, watching Silas with the tin — calm, waiting."
+          "state": "Standing at Silas's shoulder, reading the slip in the tin — bag on shoulder, stall bundle lashed to outside, ready to tr"
         },
         {
           "name": "Huginn",
-          "state": "Attention shifted north toward the far end of the market row."
+          "state": "Turned away from the tin now — attention back toward the north end of the market row, giving nothing further."
         },
         {
           "name": "Siol",
@@ -1241,13 +1274,13 @@
       ],
       "objects": [
         "Memory — leaning against the stall frame, shaft upright",
-        "Veth's canvas shoulder bag — packed tight, stall bundle lashed to outside",
-        "Small sealed tin — wax intact, contents stable and inert, now in Silas's hands",
-        "Dry hollow under the neighboring stall's crossbar — now empty",
+        "Seventh-Band Lens-Blanks (tin) — open in Silas's hands, seven lens-blanks on fol",
+        "Wax seal — lifted intact, resting on the neighboring crossbar",
         "Seven waygate arches visible to the north"
       ],
       "threads": [
-        "Sealed tin — contents unknown but stable; abandonment was not voluntary",
+        "Seventh-band lens-blanks — whose work, and who didn't come back for them",
+        "Huginn looked three full seconds before turning away — it saw something",
         "Pell and Siol not yet introduced to Veth — party not yet assembled",
         "The evening suggestion between Silas and Pell — filed, not resolved"
       ]
@@ -1256,7 +1289,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 6,
-    "hour": 12,
+    "hour": 13,
     "realAnchor": null
   },
   "companions": [
@@ -2382,30 +2415,31 @@
         "[d6] Broke the stall down in under ten minutes — packed light, no food, new straps on an old bag. Noted Pell hasn't been introduced yet. Ready to move.",
         "[d6] You know this person's name now: Veth (Stillwater) Ondra (was \"Veth Ondra\")",
         "[d6] Watched Silas retrieve the tin from the neighboring hollow — clocked it immediately, said nothing, waiting.",
-        "[d6] Watched Silas use The Attended End on the tin — did not ask what he read, waiting for him to share or act."
+        "[d6] Watched Silas use The Attended End on the tin — did not ask what he read, waiting for him to share or act.",
+        "[d6] Stood at Silas's shoulder as he opened the tin — read the slip, named the abandonment plainly: someone working to spec, did not finish."
       ],
       "knownFacts": [
-        "Her Raven name is Stillwater — no one in the world holds this from her except Silas now",
         "Not one of her wards on the south-facing post died clean — every one she had to work for; the other wardens found it useful before the post was dissolved",
         "She is done standing at the edge of things without knowing what is on the other side — plain condition of walking with the party",
         "The road goes: Raven's Home and the dead warden post first, then back to the valley's water situation",
         "Silas intends to gain standing with the March properly — not by inheritance",
         "She has not been back to the Home since the post dissolved — named it plainly, did not explain it",
         "Packs with no food — her travel provisioning method is unknown",
-        "Breaks camp fast and in the dark by habit — eleven years of warden post practice"
+        "Breaks camp fast and in the dark by habit — eleven years of warden post practice",
+        "The tin held seventh-band lens-blanks with a specification note in two hands — she read it and named the incompleteness without hesitation"
       ],
       "skillsObserved": [
-        "reading a traveler's craft from a single object without prom",
         "precise self-introduction — history offered in plain sequenc",
         "naming a secret thing plainly and without ceremony as a comm",
         "accepting a compact without ceremony — named the cost and mo",
         "field-stripping a portable stall in under ten minutes",
-        "packing a teaching kit by sequence without looking"
+        "packing a teaching kit by sequence without looking",
+        "reading an abandoned object's situation from a single look"
       ],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Stall folded, bag on shoulder, ready to travel — watching Silas with the retrieved tin.",
+      "statusNote": "Packed and ready to travel — stall folded, at Silas's shoulder, party not yet assembled.",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 6
@@ -2697,7 +2731,6 @@
     "gen-waygate": {
       "visits": 1,
       "notes": [
-        "[d6] The waygate opens onto the south lane — a shallow valley running south, tree line low, packed-dirt road with recent wheel ruts. First stop on the road from Millbrook toward the Disputed Zone.",
         "[d6] Order-Sense partial read on dawn of World-day 18: the seven gates are calibration marks for a measuring function centered on the plaza. Design predates the roads. Full purpose unresolved — lattice too thin.",
         "[d6] The Hub's major landmarks identified from the plaza at dawn: Council of Mavens colonnade (north), Coliseum (northwest behind market row), Ent circle (east), Elven camp (west paving). The city is active before full light.",
         "[d6] The sixth waygate from the south lane — lower lintel, darker stone — is the connection to the Ashwarden March. Confirmed by Siol of the Elves.",
@@ -2708,7 +2741,8 @@
         "[d6] Council Maven confirmed: two survey parties sent into the Disputed Zone came back early — craft interference prevents systematic water-source reading.",
         "[d6] A seller at the dark-cloth stall in the market row lays out bone-handled tools as a deliberate test for someone who can read their design — the kit is a teaching sequence, its center piece the seller herself.",
         "[d6] A small abandoned cache found under the neighboring stall table — a dry hollow, something left by someone who did not come back to collect it.",
-        "[d6] The dry hollow under the neighboring stall's table crossbar is now empty — a small sealed tin retrieved from it by Silas Weir on World-day 19 morning."
+        "[d6] The dry hollow under the neighboring stall's table crossbar is now empty — a small sealed tin retrieved from it by Silas Weir on World-day 19 morning.",
+        "[d6] A sealed tin of unfinished seventh-band lens-blanks retrieved from the dry hollow beneath the neighboring stall's crossbar — the hollow is now empty, the tin in Silas Weir's possession."
       ],
       "flags": {},
       "vectorsKnown": [],
@@ -2782,7 +2816,7 @@
           "parentId": "gen-waygate",
           "day": 6,
           "visited": true,
-          "note": "Dry hollow under the neighboring stall's front crossbar — now empty, tin retrieved."
+          "note": "Dry hollow now emptied — tin recovered by Silas Weir on World-day 19 midday. The stall it belonged to has not opened."
         }
       }
     },
@@ -4271,21 +4305,21 @@
     }
   },
   "tendencies": {
-    "strategic": 13.675717668578246,
-    "cerebral": 13.338938193841209,
-    "social": 23.185400076721525,
-    "generous": 2.3666379249726184,
-    "cautious": 4.854655134145014,
-    "physical": 1.0788811703010486,
-    "risky": 1.1314206410474137,
-    "ruthless": 0.36074110688647565,
-    "carousing": 0.005527009893348828,
-    "amorous": 4.315102063581565,
-    "patient": 0.8934404947718458,
-    "stealth": 0.1398241746512023,
-    "devotion": 0.3124574730333292,
-    "craft": 1.1045150476337346,
-    "leadership": 0.7117205668163319
+    "strategic": 13.333824726863789,
+    "cerebral": 14.005464738995178,
+    "social": 22.605765074803486,
+    "generous": 2.3074719768483027,
+    "cautious": 4.7332887557913885,
+    "physical": 1.0519091410435224,
+    "risky": 1.1031351250212282,
+    "ruthless": 0.35172257921431377,
+    "carousing": 0.005388834646015107,
+    "amorous": 4.207224511992026,
+    "patient": 0.8711044824025497,
+    "stealth": 0.13632857028492226,
+    "devotion": 0.304646036207496,
+    "craft": 1.0769021714428912,
+    "leadership": 0.6939275526459235
   },
   "aptitudes": [
     "strategist",
@@ -4293,7 +4327,7 @@
     "scholar",
     "orator"
   ],
-  "actionCount": 565,
+  "actionCount": 566,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -4571,8 +4605,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784423746387,
-  "rev": 828,
+  "updatedAt": 1784423822850,
+  "rev": 829,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5965,7 +5999,7 @@
   "syncedAt": 1784392733860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 387
+    "valley": 388
   },
   "foreclosed": [
     "rootkin",
@@ -6022,10 +6056,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-19T01:15:46.383Z",
+      "lastAt": "2026-07-19T01:17:02.847Z",
       "startDay": 18,
       "endDay": 19,
-      "beats": 112,
+      "beats": 113,
       "_recapError": null,
       "recap": "Day eighteen, and Silas Weir moved like a man who'd finally stopped fighting the shape of what he was. On the road he disarmed three opportunists without breaking bones, read the grief sitting behind the broad man's eyes, named it plainly, pressed provisions into their hands, and sent them toward something worth doing — mercy given as instruction, not sentiment. Then he brought the hard people together: Dara, Aldric, Fendt, Mara, Calvar, all of them in the heat of Pell's forge with no exits easy and no pretense left, and in that single evening he turned a valley's quiet panic into four working threads — engineering, logistics, supply, accounts — each with a named lead and a direction to face. The crisis didn't end, but it stopped being formless, and that was his doing."
     }

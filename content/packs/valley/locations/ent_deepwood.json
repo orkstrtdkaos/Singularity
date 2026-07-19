@@ -1,20 +1,57 @@
 {
-  "schemaVersion": 1, "id": "ent_deepwood", "name": "The Deepwood", "regionId": "manifest_domain", "communityId": "domain.deepwood",
-  "poleIntensity": {"life": 0.7, "spiritual": 0.5, "peace": 0.4, "time": 0.4},
-  "spectrum": {"death_life": 0.7, "mechanical_spiritual": 0.5, "violence_peace": 0.4, "space_time": 0.4},
-  "tags": ["manifest-domain", "ent", "deepwood", "ancient", "slow-time", "pocket-reality"],
-  "connections": ["the_quickwood_eaves", "thornwake_glade"],
+  "schemaVersion": 1,
+  "id": "ent_deepwood",
+  "name": "The Deepwood",
+  "regionId": "manifest_domain",
+  "communityId": "domain.deepwood",
+  "poleIntensity": {
+    "life": 0.7,
+    "spiritual": 0.5,
+    "peace": 0.4,
+    "time": 0.4
+  },
+  "spectrum": {
+    "death_life": 0.7,
+    "mechanical_spiritual": 0.5,
+    "violence_peace": 0.4,
+    "space_time": 0.4
+  },
+  "tags": [
+    "manifest-domain",
+    "ent",
+    "deepwood",
+    "ancient",
+    "slow-time",
+    "pocket-reality"
+  ],
+  "connections": [
+    "the_quickwood_eaves",
+    "thornwake_glade"
+  ],
   "seedFiction": "the ENT race (walking, thinking trees) manifested",
-  "nativeLogic": "The native domain of the Ents \u2014 trees that think in centuries, speak in slow deep resonance, walk when they must, and remember everything. Time runs GREEN and slow here: haste is the one true sin, an hour of talk may cost a day outside, and a thing rushed goes wrong. The Ents judge INTENT over long spans \u2014 a kindness or a harm is weighed against centuries, and a wrong done in the Deepwood is remembered until repaid, however long that takes. Fire and axe are the deep terror and the deep taboo. The GM enforces this as LAW inside: patience is rewarded and haste punished by the domain itself; the Ents cannot be rushed, bribed, or deceived at speed; violence against the wood turns the whole domain hostile and it does not forget.",
-  "descriptionSeed": "The true forest the Ents came from \u2014 of which Thornwake Glade is only a far, thinned foothill. Trees vast as towers that turn to watch you; a green dimness where time pools and slows; voices like roots grinding, asking questions that take a day to finish. Life and spirit and a deep patient peace all run hot, and under them the slow tick of a time that isn't yours. Beautiful, and utterly unhurried, and it will outlast you and everyone you've ever known.",
-  "loreRefs": ["manifest_locals", "the_twelve_reaches", "cofiring_nodes"],
-  "encounterFlavor": "Ancient green patience \u2014 an Ent taking an hour to decide whether to speak, a grudge older than the cities, a grove that rearranges to test you, the vertigo of time running slow, a question you must sit with rather than answer.",
+  "nativeLogic": "The native domain of the Ents — trees that think in centuries, speak in slow deep resonance, walk when they must, and remember everything. Time runs GREEN and slow here: haste is the one true sin, an hour of talk may cost a day outside, and a thing rushed goes wrong. The Ents judge INTENT over long spans — a kindness or a harm is weighed against centuries, and a wrong done in the Deepwood is remembered until repaid, however long that takes. Fire and axe are the deep terror and the deep taboo. The GM enforces this as LAW inside: patience is rewarded and haste punished by the domain itself; the Ents cannot be rushed, bribed, or deceived at speed; violence against the wood turns the whole domain hostile and it does not forget.",
+  "descriptionSeed": "The true forest the Ents came from — of which Thornwake Glade is only a far, thinned foothill. Trees vast as towers that turn to watch you; a green dimness where time pools and slows; voices like roots grinding, asking questions that take a day to finish. Life and spirit and a deep patient peace all run hot, and under them the slow tick of a time that isn't yours. Beautiful, and utterly unhurried, and it will outlast you and everyone you've ever known.",
+  "loreRefs": [
+    "manifest_locals",
+    "the_twelve_reaches",
+    "cofiring_nodes"
+  ],
+  "encounterFlavor": "Ancient green patience — an Ent taking an hour to decide whether to speak, a grudge older than the cities, a grove that rearranges to test you, the vertigo of time running slow, a question you must sit with rather than answer.",
   "dangerLevel": 3,
   "questSeeds": [
-    "An old wrong \u2014 a burning, a felling \u2014 was done to the Deepwood generations ago and it has finally decided to collect; someone must answer for ancestors, or broker a peace across a century of memory",
-    "The Old Stag of Thornwake is dying and the Deepwood knows; whether it sends an heir, withdraws its green from the Glade, or judges the valley unworthy is being decided slowly, and you can weigh in \u2014 if you can bear the pace",
-    "A person is lost in the Deepwood's slow-time \u2014 gone an afternoon, returned to find years passed, or the reverse; the domain's time is a maze and the way out is patience, not speed",
+    "An old wrong — a burning, a felling — was done to the Deepwood generations ago and it has finally decided to collect; someone must answer for ancestors, or broker a peace across a century of memory",
+    "The Old Stag of Thornwake is dying and the Deepwood knows; whether it sends an heir, withdraws its green from the Glade, or judges the valley unworthy is being decided slowly, and you can weigh in — if you can bear the pace",
+    "A person is lost in the Deepwood's slow-time — gone an afternoon, returned to find years passed, or the reverse; the domain's time is a maze and the way out is patience, not speed",
     "An Ent wishes to walk OUT into the wider world and needs to understand haste to survive it; teaching an ancient thing to hurry, gently, without breaking what makes it worth saving"
   ],
-  "map": {"x": 40, "y": 300}
+  "map": {
+    "x": 40,
+    "y": 300
+  },
+  "substrateSource": {
+    "kind": "pool",
+    "strength": 0.97,
+    "radius": 175,
+    "reason": "Slow-time and a pocket-reality — the Deepwood keeps its own hours and its own lattice, and neither has thinned."
+  }
 }

@@ -1115,193 +1115,259 @@
         "player": null,
         "summary": "Silas briefs the group: the binding holds Stillwater's Trouble but does not end it — the post is a caught stone, not a stopped one. Huginn's eye is on the closed door.",
         "narration": "You straighten from the post and look at Veth. She has held her question the whole time you worked, jaw set, eyes on your face.\n\n\"The binding holds,\" you tell her. \"All of it. But it is not ended — it is caught. Think of a stone mid-roll, not a stone that stopped on its own. What was rising here had eleven years of pressure behind it. The runes buy time.\"\n\nVeth's gaze moves to the post for a moment, then back to you. \"The accumulation,\" she says, quietly. \"I thought it might be that. The post was a seal as much as a station — the warden was managing something, not just watching.\"\n\nPell has not moved from the tree line. Memory is loose at her side. She does not need the briefing repeated; she heard every word, and the set of her shoulders says she filed it.\n\nHuginn has not moved from the roof-ridge either. It shifts its weight once, a small adjustment, and fixes its eye on the closed door. That is not a comment on the binding. That is a comment on the door."
+      },
+      {
+        "player": "Veth proceeds the group up the path to what was once knows as the Raven's Home... now renamed 'Stillwater's Trouble' (what the waysign now indicates).  She wants to be the first to see what has become of her old warden post.  on the way we catch up to the person who made the tracks; Cassiel Ord.  We had yet to interact with him - but Veth is in the lead here.  The Warden Post is over the hill from this rise with a hollow where Cassiel Ord sits.",
+        "summary": "Veth leads the group over the rise to Stillwater's Trouble and finds Cassiel Ord sitting at the hollow's rim — the heel-heavy tracks resolved, the encounter beginning on Veth's terms.",
+        "narration": "Veth does not wait for a signal. She turns from the post and walks north-northwest on a path her feet still know — eleven years gone, and the ground has not moved. You and Pell fall in behind her. Huginn lifts from the roof-ridge without a sound and crosses overhead, already ahead of the group.\n\nThe rise is short but steep, heather catching at your ankles, the birch thinning to bare sky at the crest. Over the hill the ground drops into a shallow hollow — limestone outcrop at the far rim, dark earth at the center, the circle of birch stopping at the bowl's edge exactly as Veth described it. This is Stillwater's Trouble: the old ground, the accumulation's source.\n\nCassiel Ord is sitting at the near edge of the hollow with his back to the outcrop and his pack open beside him. He is a lean man, grey-coated, with the stillness of someone who has been waiting in a specific place long enough to stop watching the path. He looks up when Veth crests the rise. He does not reach for anything. His boot-heels are worn down on the inner edge — heel-heavy, exactly the weight of the tracks that led here. He says nothing first. He looks at Veth the way a man looks at a face he was not certain he would see again.\n\nVeth stops at the hollow's rim. She does not come down into it. Her voice, when she speaks, is level. \"Cassiel,\" she says. That is all — his name, offered like a question with the question mark removed. Pell holds her position two steps back and to your right, Memory easy in her grip. Huginn drops onto a limestone spur above Cassiel's head and settles its weight once, its eye on the man below."
       }
     ],
     "lastTurn": {
-      "narration": "You straighten from the post and look at Veth. She has held her question the whole time you worked, jaw set, eyes on your face.\n\n\"The binding holds,\" you tell her. \"All of it. But it is not ended — it is caught. Think of a stone mid-roll, not a stone that stopped on its own. What was rising here had eleven years of pressure behind it. The runes buy time.\"\n\nVeth's gaze moves to the post for a moment, then back to you. \"The accumulation,\" she says, quietly. \"I thought it might be that. The post was a seal as much as a station — the warden was managing something, not just watching.\"\n\nPell has not moved from the tree line. Memory is loose at her side. She does not need the briefing repeated; she heard every word, and the set of her shoulders says she filed it.\n\nHuginn has not moved from the roof-ridge either. It shifts its weight once, a small adjustment, and fixes its eye on the closed door. That is not a comment on the binding. That is a comment on the door.",
-      "sceneSummary": "Silas briefs the group: the binding holds Stillwater's Trouble but does not end it — the post is a caught stone, not a stopped one. Huginn's eye is on the closed door.",
+      "narration": "Veth does not wait for a signal. She turns from the post and walks north-northwest on a path her feet still know — eleven years gone, and the ground has not moved. You and Pell fall in behind her. Huginn lifts from the roof-ridge without a sound and crosses overhead, already ahead of the group.\n\nThe rise is short but steep, heather catching at your ankles, the birch thinning to bare sky at the crest. Over the hill the ground drops into a shallow hollow — limestone outcrop at the far rim, dark earth at the center, the circle of birch stopping at the bowl's edge exactly as Veth described it. This is Stillwater's Trouble: the old ground, the accumulation's source.\n\nCassiel Ord is sitting at the near edge of the hollow with his back to the outcrop and his pack open beside him. He is a lean man, grey-coated, with the stillness of someone who has been waiting in a specific place long enough to stop watching the path. He looks up when Veth crests the rise. He does not reach for anything. His boot-heels are worn down on the inner edge — heel-heavy, exactly the weight of the tracks that led here. He says nothing first. He looks at Veth the way a man looks at a face he was not certain he would see again.\n\nVeth stops at the hollow's rim. She does not come down into it. Her voice, when she speaks, is level. \"Cassiel,\" she says. That is all — his name, offered like a question with the question mark removed. Pell holds her position two steps back and to your right, Memory easy in her grip. Huginn drops onto a limestone spur above Cassiel's head and settles its weight once, its eye on the man below.",
+      "sceneSummary": "Veth leads the group over the rise to Stillwater's Trouble and finds Cassiel Ord sitting at the hollow's rim — the heel-heavy tracks resolved, the encounter beginning on Veth's terms.",
       "choices": [
         {
-          "label": "Open the door — whoever walked in did not walk out, and the binding is as good as it gets right now.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 0,
-          "intentTags": [
-            "careful"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Use The Attended End on the door itself before opening it — know what is ending on the other side before you cross the threshold.",
+          "label": "Let Veth lead — hold your position at the rim and read Cassiel with Order-Sense before anyone speaks further",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "the-attended-end",
-          "energyCost": 2,
-          "trivial": false
-        },
-        {
-          "label": "Ask Veth what she knows about the warden who held this post — what they were managing, and how it was supposed to end.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "axes": {
+            "chaos_order": 0.4,
+            "death_life": 0.1
+          },
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "study",
+            "careful"
           ],
-          "trivial": true
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Ask Huginn directly what it sees at the door — it has been still on that ridge-line since before the binding work, and its timing is always a comment.",
+          "label": "Step up beside Veth — make it clear that whoever Cassiel is, she did not come alone",
           "attribute": "social",
           "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.2,
+            "violence_peace": -0.1
+          },
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "guard",
+            "lead"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Read Cassiel with Deathsense — quietly, from the rim — understand what the hollow has done to him",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "death_life": -0.3,
+            "concrete_abstract": 0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "deathsense",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Stay back and watch — let Veth and Cassiel have their first words without your weight in it",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.1
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "careful",
+            "scout"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-door-that-closed-behind",
+          "note": "Cassiel Ord found at the hollow of Stillwater's Trouble — the heel-heavy tracks resolved; the encounter at the source begins."
         }
       ],
       "scene": {
-        "setting": "Raven's Home — the old Ashwarden warden post on rising ground, grey birch and heather around it, overcast cold midday. Binding runes and a fresh Boundary-Stone mark are now on the post's face. The single set of heel-heavy boot-tracks ends at the closed door.",
+        "setting": "Stillwater's Trouble — a shallow hollow two miles northwest of Raven's Home, dark earth floor, limestone outcrop at the far rim, birch stopped at the bowl's edge. Overcast cold midday. The group stands at the hollow's rim.",
         "npcsPresent": [
           {
-            "name": "Pell Marsh",
-            "state": "Still at the tree line, Memory loose at her side — the briefing filed, watching the door."
+            "name": "Veth Ondra",
+            "state": "Standing at the hollow's rim, having spoken Cassiel's name — still, waiting for what comes back."
           },
           {
-            "name": "Veth Ondra",
-            "state": "Facing Silas, the unasked follow-up question now settling into a different shape — she named 'the accumulation' and is waiting to see if he confirms it."
+            "name": "Pell Marsh",
+            "state": "Two steps back and right of Silas, Memory easy in her grip — watching Cassiel."
           },
           {
             "name": "Huginn",
-            "state": "On the roof-ridge, weight shifted once, eye fixed on the closed door."
+            "state": "Settled on a limestone spur above Cassiel, weight down, eye fixed on the man below."
+          },
+          {
+            "name": "Cassiel Ord",
+            "state": "Sitting at the hollow's near edge, back to the outcrop, pack open beside him — looking up at Veth, not reaching for anything."
           }
         ],
         "objects": [
-          "Old Ashwarden timber warden post — door closed, weathered grey",
-          "Binding runes — Wither and The Raised Thing in the post's lower face",
-          "Boundary-Stone mark — chalk circle at the post's crown",
-          "Single set of heel-heavy boot-tracks ending at the threshold",
-          "Low heather and stands of grey birch on rising ground",
-          "Memory — road-lashed at Silas's back"
+          "Dark earth hollow — the accumulation's source, caught-not-ended behind the binding at the post",
+          "Limestone outcrop at the far rim",
+          "Birch stand stopping precisely at the hollow's edge",
+          "Cassiel Ord's open pack",
+          "Memory — loose in Pell's grip"
         ],
         "threads": [
-          "The boot-tracks end at the threshold with no return",
-          "Huginn's eye is fixed on the closed door — its stillness is timed, and the timing is a comment",
-          "Veth named 'the accumulation' — she has prior knowledge of what was rising here",
-          "The door is still closed"
+          "Veth has spoken only Cassiel's name — his answer has not come",
+          "Huginn is positioned above Cassiel — a timed silence, and the timing is a comment",
+          "Cassiel looked at Veth like a man who was not certain he would see her again",
+          "The hollow is the source of Stillwater's Trouble — the binding at the post holds what rose from here"
         ]
       },
       "npcUpdates": [
         {
-          "op": "update",
-          "npcId": "veth-ondra",
-          "name": "Veth Ondra",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "role": "Former Ashwarden warden, traveling companion",
-          "note": "Received Silas's deathsense briefing on the post. Named 'the accumulation' without prompting — she has prior knowledge of what was rising here and is confirming rather than learning.",
+          "op": "meet",
+          "npcId": "cassiel-ord",
+          "name": "Cassiel Ord",
+          "role": "Unknown — found at Stillwater's Trouble hollow; connection to Veth and the old warden post unclear",
+          "gender": "man",
+          "pronouns": "he/him",
+          "description": "A lean man in a grey coat, heel-worn boots, the stillness of someone who has been waiting in one place long enough to stop watching the path.",
+          "note": "Found sitting at the rim of the Stillwater's Trouble hollow — boot-tracks identified as his. Looked up at Veth without reaching for anything. Recognized her. Has not yet spoken.",
           "learned": [
-            "The post was a seal as much as a station — the warden was managing something, not just watching",
-            "The binding holds Stillwater's Trouble but does not end it — it is a caught stone, not a stopped one"
+            "He walked to Stillwater's Trouble and did not walk back — his tracks confirm it",
+            "He recognized Veth Ondra — the look of a man who was not certain he would see her again"
           ],
-          "statusNote": "At Raven's Home, receiving the deathsense briefing — her own knowledge of this place now surfacing."
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Sitting at the rim of the Stillwater's Trouble hollow — waiting, recognized by Veth, has not yet spoken."
+        },
+        {
+          "op": "update",
+          "npcId": "veth",
+          "name": "Veth Ondra",
+          "note": "Led the group over the rise to Stillwater's Trouble on muscle memory — her feet knew the path. Spoke only Cassiel's name at the rim. Waiting for his answer.",
+          "statusNote": "At the rim of the Stillwater's Trouble hollow — first words spoken, waiting."
         },
         {
           "op": "update",
           "npcId": "pell-ran-marsh",
           "name": "Pell Ran Marsh",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "role": "Village blacksmith, traveling companion",
-          "note": "Heard the full briefing from the tree line. Filed it without comment. Watching the door.",
-          "statusNote": "At Raven's Home tree line, Memory loose at her side — briefing received, attention on the closed door."
+          "note": "Held position two steps back and right of Silas at the hollow rim — Memory loose, watching Cassiel.",
+          "statusNote": "At the rim of Stillwater's Trouble hollow — two steps back from Silas, Memory in hand."
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Cassiel Ord was found sitting at the rim of the Stillwater's Trouble hollow on World-day 19 — the heel-heavy boot-tracks resolved to him. He recognized Veth Ondra and did not run.",
+          "subjectId": "cassiel-ord"
         }
       ],
       "placeUpdates": [
         {
-          "note": "Binding runes (Wither and The Raised Thing) seated in the post's lower face, plus a Boundary-Stone chalk mark at the crown. The post now holds Stillwater's Trouble in check — caught but not ended. The surrounding area is a protected refuge by Boundary-Stone ward.",
+          "note": "Cassiel Ord found at the hollow's near rim on World-day 19 — pack open, heel-worn boots, waiting. First visitor confirmed at the source.",
           "flag": {
-            "binding_seated": "true",
-            "stillwaters_trouble_state": "caught_not_ended",
-            "boundary_stone_active": "true"
+            "cassiel_found": "true",
+            "first_visit": "world_day_19"
           },
           "subPlace": {
-            "name": "Raven's Home warden post",
-            "parent": "Stillwater's Trouble",
-            "note": "Old Ashwarden timber post on rising ground — binding runes and Boundary-Stone now seated. The door is closed. One set of heel-heavy tracks ends at the threshold with no return.",
+            "name": "Stillwater's Trouble hollow",
+            "parent": "gen-stillwater-s-trouble",
+            "note": "The shallow circular depression — dark earth, limestone outcrop at far rim, birch stopped at the edge. The accumulation's source, bound at the post but not ended. Cassiel Ord found here.",
             "visited": true
           }
         }
       ],
       "codexUpdates": [
         {
-          "topic": "stillwaters-trouble",
-          "label": "Stillwater's Trouble",
-          "kind": "mystery",
-          "fact": "Deathsense confirms: the post was a seal as much as a station. The warden was managing an eleven-year accumulation — a watershed process building behind a silted dam, not a creature or person. The binding runes caught it but did not end it. A caught stone, not a stopped one. The pressure behind it is real and still present.",
+          "topic": "cassiel-ord",
+          "label": "Cassiel Ord",
+          "kind": "person",
+          "entityId": "cassiel-ord",
+          "fact": "A lean man found sitting at the rim of the Stillwater's Trouble hollow on World-day 19 — heel-heavy boot-tracks resolved to him. Recognized Veth Ondra without alarm. Connection to the warden post and the accumulation unknown.",
           "links": [
             "the-door-that-closed-behind",
-            "veth-ondra",
-            "the-water-crisis"
-          ]
-        },
-        {
-          "topic": "the-door-that-closed-behind",
-          "label": "The Door That Closed Behind",
-          "kind": "mystery",
-          "fact": "Raven's Home post: binding seated, Boundary-Stone ward active. One set of heel-heavy tracks ends at the closed door with no return. Huginn's eye is fixed on the door — its stillness is a comment. Veth named 'the accumulation' without prompting, suggesting prior knowledge of what was rising here.",
-          "links": [
-            "stillwaters-trouble",
-            "veth-ondra",
-            "the-water-crisis"
+            "gen-stillwater-s-trouble",
+            "veth"
           ]
         }
       ],
-      "questUpdates": [
+      "generateRequest": [
         {
-          "op": "progress",
-          "questId": "the-door-that-closed-behind",
-          "note": "Deathsense briefed to the group: the binding holds, the accumulation is caught not ended, the post was a seal as much as a station. Huginn's eye is on the closed door. The tracks still end at the threshold."
+          "type": "npc",
+          "hint": "Cassiel Ord — a lean grey-coated man sitting at the rim of the Stillwater's Trouble hollow, heel-worn boots, the stillness of a long wait; recognized Veth Ondra without alarm; connection to the dead warden post and the eleven-year accumulation unclear",
+          "why": "He is the person whose tracks led to the closed door — his identity and history with Veth and the post are central to the Door That Closed Behind quest"
         }
       ],
+      "moveTo": {
+        "location": "gen-stillwater-s-trouble",
+        "why": "Veth led the group over the rise from Raven's Home on muscle memory — two miles northwest, the familiar path to her old ground"
+      },
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "Brief briefing exchange between Silas and the group at the post."
-      }
+        "hoursPassed": 0.5,
+        "why": "A short walk over the rise from Raven's Home to Stillwater's Trouble"
+      },
+      "scene_ended": false
     },
     "sceneState": {
-      "setting": "Raven's Home — the old Ashwarden warden post on rising ground, grey birch and heather around it, overcast cold midday. Binding runes and a fresh Boundary-Stone mark are now on the post's face. The single set of heel-heavy boot-tracks ends at the closed door.",
+      "setting": "Stillwater's Trouble — a shallow hollow two miles northwest of Raven's Home, dark earth floor, limestone outcrop at the far rim, birch stopped at the bowl's edge. Overcast cold midday. The group stands at the hollow's rim.",
       "npcsPresent": [
         {
-          "name": "Pell Marsh",
-          "state": "Still at the tree line, Memory loose at her side — the briefing filed, watching the door."
+          "name": "Veth Ondra",
+          "state": "Standing at the hollow's rim, having spoken Cassiel's name — still, waiting for what comes back."
         },
         {
-          "name": "Veth Ondra",
-          "state": "Facing Silas, the unasked follow-up question now settling into a different shape — she named 'the accumulation' and is w"
+          "name": "Pell Marsh",
+          "state": "Two steps back and right of Silas, Memory easy in her grip — watching Cassiel."
         },
         {
           "name": "Huginn",
-          "state": "On the roof-ridge, weight shifted once, eye fixed on the closed door."
+          "state": "Settled on a limestone spur above Cassiel, weight down, eye fixed on the man below."
+        },
+        {
+          "name": "Cassiel Ord",
+          "state": "Sitting at the hollow's near edge, back to the outcrop, pack open beside him — looking up at Veth, not reaching for anyt"
         }
       ],
       "objects": [
-        "Old Ashwarden timber warden post — door closed, weathered grey",
-        "Binding runes — Wither and The Raised Thing in the post's lower face",
-        "Boundary-Stone mark — chalk circle at the post's crown",
-        "Single set of heel-heavy boot-tracks ending at the threshold",
-        "Low heather and stands of grey birch on rising ground",
-        "Memory — road-lashed at Silas's back"
+        "Dark earth hollow — the accumulation's source, caught-not-ended behind the bindi",
+        "Limestone outcrop at the far rim",
+        "Birch stand stopping precisely at the hollow's edge",
+        "Cassiel Ord's open pack",
+        "Memory — loose in Pell's grip"
       ],
       "threads": [
-        "The boot-tracks end at the threshold with no return",
-        "Huginn's eye is fixed on the closed door — its stillness is timed, and the timing is a comment",
-        "Veth named 'the accumulation' — she has prior knowledge of what was rising here",
-        "The door is still closed"
+        "Veth has spoken only Cassiel's name — his answer has not come",
+        "Huginn is positioned above Cassiel — a timed silence, and the timing is a comment",
+        "Cassiel looked at Veth like a man who was not certain he would see her again",
+        "The hollow is the source of Stillwater's Trouble — the binding at the post holds what rose from here"
       ]
     }
   },
@@ -1685,7 +1751,8 @@
         "↳ Silas bound Stillwater's Trouble at the post with compound rune-work — Wither and The Raised Thing braided into the old Ashwarden timber, the eleven-year rising held in the moment before it completed.",
         "↳ Deathsense read the post fully — Stillwater's Trouble is a process not a person, the binding holds all of it, and the trajectory confirmed it was arriving rather than ending; the question of what…",
         "The party arrived at Stillwater's Trouble — a figure sits at the far limestone, the heel-heavy tracks accounted for. The question of what closed here and what opened is now on the ground.",
-        "Deathsense briefed to the group: the binding holds, the accumulation is caught not ended, the post was a seal as much as a station. Huginn's eye is on the closed door. The tracks still end at the threshold."
+        "Deathsense briefed to the group: the binding holds, the accumulation is caught not ended, the post was a seal as much as a station. Huginn's eye is on the closed door. The tracks still end at the threshold.",
+        "Cassiel Ord found at the hollow of Stillwater's Trouble — the heel-heavy tracks resolved; the encounter at the source begins."
       ],
       "aliases": [],
       "startedAt": "2026-07-19T14:27:08.855Z",
@@ -1806,7 +1873,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d6] Fell into road-pace without ceremony at the waygate threshold — the silence of someone who has done this before.",
         "[d6] Stepped through the waygate without ceremony — at Silas's left, road-ready.",
         "[d6] Fell into road-pace at Silas's left without a word — pack settled, hand loose, road-ready",
         "[d6] Came through the gate road-ready — pack squared, Memory at shoulder, reading the ground ahead without comment.",
@@ -1815,7 +1881,8 @@
         "[d6] Watching the tree line with Memory loose at her side while Silas works the runes — alert, giving him the space to work.",
         "[d6] Still holding the tree line — giving Silas the space to complete the ward work.",
         "[d6] Called Memory back to hand and fell in on Silas's left without being asked — road discipline, no ceremony.",
-        "[d6] Heard the full briefing from the tree line. Filed it without comment. Watching the door."
+        "[d6] Heard the full briefing from the tree line. Filed it without comment. Watching the door.",
+        "[d6] Held position two steps back and right of Silas at the hollow rim — Memory loose, watching Cassiel."
       ],
       "knownFacts": [
         "Silas wants something private for the evenings — she is thinking about what that means",
@@ -1836,7 +1903,7 @@
         "feeding ironsense through physical contact to anchor a rune-"
       ],
       "status": "active",
-      "statusNote": "At Raven's Home tree line, Memory loose at her side — briefing received, attention on the closed door.",
+      "statusNote": "At the rim of Stillwater's Trouble hollow — two steps back from Silas, Memory in hand.",
       "lastSeen": {
         "locationId": "gen-stillwater-s-trouble",
         "day": 6
@@ -2503,7 +2570,6 @@
       },
       "relationship": 9,
       "history": [
-        "[d6] Stepped through the waygate with the party — road-ready, warden's bearing easy, eyes already on the March ahead.",
         "[d6] Oriented the group from field memory on the first stretch of road — named the marker stone, the left branch, and the gone survey post without being asked",
         "[d6] Named the left branch and the marker stone from warden memory on first sight of the road — something she has been holding a long time, released quietly.",
         "[d6] Heard Silas's Order-Sense report — responded to the single set of tracks with 'no return' said without question; visibly affected by the news about the post she held for eleven years.",
@@ -2512,7 +2578,8 @@
         "[d6] Asked 'Well?' the moment Silas straightened from the post — waiting for his read, contained but intent.",
         "[d6] Held her question through the Boundary-Stone work — waiting for Silas to brief the group on what Deathsense found.",
         "[d6] Named Stillwater's Trouble as two miles northwest without prompting — her feet remembered the path. Stopped at the bowl's rim ahead of Silas, shoulders set.",
-        "[d6] Received Silas's deathsense briefing on the post. Named 'the accumulation' without prompting — she has prior knowledge of what was rising here and is confirming rather than learning."
+        "[d6] Received Silas's deathsense briefing on the post. Named 'the accumulation' without prompting — she has prior knowledge of what was rising here and is confirming rather than learning.",
+        "[d6] Led the group over the rise to Stillwater's Trouble on muscle memory — her feet knew the path. Spoke only Cassiel's name at the rim. Waiting for his answer."
       ],
       "knownFacts": [
         "Raven's Home is past the first tributary — left branch at the marker stone; right branch leads to the old survey post, which is gone",
@@ -2535,7 +2602,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At Raven's Home, receiving the deathsense briefing — her own knowledge of this place now surfacing.",
+      "statusNote": "At the rim of the Stillwater's Trouble hollow — first words spoken, waiting.",
       "lastSeen": {
         "locationId": "gen-stillwater-s-trouble",
         "day": 6
@@ -2547,6 +2614,33 @@
         "Veth Ondra"
       ],
       "nameRevealed": true
+    },
+    "cassiel-ord": {
+      "id": "cassiel-ord",
+      "name": "Cassiel Ord",
+      "role": "Unknown — found at Stillwater's Trouble hollow; connection to Veth and the old warden post unclear",
+      "description": "A lean man in a grey coat, heel-worn boots, the stillness of someone who has been waiting in one place long enough to stop watching the path.",
+      "firstMet": {
+        "locationId": "gen-stillwater-s-trouble",
+        "day": 6
+      },
+      "relationship": 0,
+      "history": [
+        "[d6] Found sitting at the rim of the Stillwater's Trouble hollow — boot-tracks identified as his. Looked up at Veth without reaching for anything. Recognized her. Has not yet spoken."
+      ],
+      "knownFacts": [
+        "He walked to Stillwater's Trouble and did not walk back — his tracks confirm it",
+        "He recognized Veth Ondra — the look of a man who was not certain he would see her again"
+      ],
+      "skillsObserved": [],
+      "status": "active",
+      "gender": "man",
+      "pronouns": "he/him",
+      "statusNote": "Sitting at the rim of the Stillwater's Trouble hollow — waiting, recognized by Veth, has not yet spoken.",
+      "lastSeen": {
+        "locationId": "gen-stillwater-s-trouble",
+        "day": 6
+      }
     }
   },
   "placeMemory": {
@@ -3022,11 +3116,14 @@
     "gen-stillwater-s-trouble": {
       "visits": 0,
       "notes": [
-        "[d6] Binding runes (Wither and The Raised Thing) seated in the post's lower face, plus a Boundary-Stone chalk mark at the crown. The post now holds Stillwater's Trouble in check — caught but not ended. The surrounding area is a protected refuge by Boundary-Stone ward."
+        "[d6] Binding runes (Wither and The Raised Thing) seated in the post's lower face, plus a Boundary-Stone chalk mark at the crown. The post now holds Stillwater's Trouble in check — caught but not ended. The surrounding area is a protected refuge by Boundary-Stone ward.",
+        "[d6] Cassiel Ord found at the hollow's near rim on World-day 19 — pack open, heel-worn boots, waiting. First visitor confirmed at the source."
       ],
       "flags": {
         "binding_seated": "true",
-        "stillwaters_trouble_state": "caught_not_ended"
+        "stillwaters_trouble_state": "caught_not_ended",
+        "cassiel_found": "true",
+        "first_visit": "world_day_19"
       },
       "vectorsKnown": [],
       "subPlaces": {
@@ -3036,6 +3133,13 @@
           "day": 6,
           "visited": true,
           "note": "Old Ashwarden timber post on rising ground — binding runes and Boundary-Stone now seated. The door is closed. One set of heel-heavy tracks ends at the threshold with no return."
+        },
+        "stillwater-s-trouble-hollow": {
+          "name": "Stillwater's Trouble hollow",
+          "parentId": "gen-stillwater-s-trouble",
+          "day": 6,
+          "visited": true,
+          "note": "The shallow circular depression — dark earth, limestone outcrop at far rim, birch stopped at the edge. The accumulation's source, bound at the post but not ended. Cassiel Ord found here."
         }
       }
     }
@@ -3149,7 +3253,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-19T15:07:12.049Z",
+    "lastSharedReadAt": "2026-07-19T17:06:25.764Z",
     "lastTickWorldDay": 19,
     "lastCanonWorldDay": 19
   },
@@ -4517,21 +4621,21 @@
     }
   },
   "tendencies": {
-    "strategic": 16.937881805679698,
-    "cerebral": 21.329212129043995,
-    "social": 12.004238142131083,
-    "generous": 2.720246231357246,
-    "cautious": 5.6065834462419115,
-    "physical": 0.5585905980702917,
-    "risky": 0.5857929028230194,
-    "ruthless": 0.18677366534075998,
-    "carousing": 0.0028616087173017014,
-    "amorous": 2.234143582057133,
-    "patient": 1.1641383877922,
-    "stealth": 0.07239394985576213,
-    "devotion": 1.4789421522741868,
-    "craft": 0.5718625350215413,
-    "leadership": 0.36849323912653664
+    "strategic": 17.514434760537704,
+    "cerebral": 21.795981825817893,
+    "social": 11.704132188577805,
+    "generous": 2.652240075573315,
+    "cautious": 5.466418860085864,
+    "physical": 0.5446258331185343,
+    "risky": 0.5711480802524439,
+    "ruthless": 0.18210432370724097,
+    "carousing": 0.002790068499369159,
+    "amorous": 2.1782899925057047,
+    "patient": 1.135034928097395,
+    "stealth": 0.07058410110936807,
+    "devotion": 1.441968598467332,
+    "craft": 0.5575659716460027,
+    "leadership": 0.3592809081483732
   },
   "aptitudes": [
     "strategist",
@@ -4539,9 +4643,9 @@
     "scholar",
     "sage"
   ],
-  "actionCount": 591,
+  "actionCount": 592,
   "grantsVersion": 1,
-  "reconcileVersion": 8,
+  "reconcileVersion": 10,
   "gallery": [
     {
       "kind": "npc",
@@ -4841,8 +4945,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784477453768,
-  "rev": 886,
+  "updatedAt": 1784481276455,
+  "rev": 890,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4979,7 +5083,11 @@
           "stubbed": false,
           "romanceEligible": true
         },
-        "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%20of%20Bette%20Harrow%2C%20the%20Seed%20Ledger%2C%20Contract%20seed-agent%20for%20the%20upvalley%20growers'%20cooperative%2C%20collecting%20outstanding%20grain-debts%20before%20the%20expedition%20locks%20up%20the%20forge%20accounts.%20Mid-forties%2C%20weathered%20apron%2C%20ink-stained%20fingers.%20Speaks%20in%20numbered%20points%20without%20meaning%20to%20%E2%80%94%20'First.%20Second.%20Done.'%20Knock%20was%20three%20times%2C%20flat%20and%20evenly%20spaced%2C%20the%20knock%20of%20someone%20who%20has%20knocked%20on%20a%20hundred%20doors%20this%20season%20and%20will%20knock%20on%20a%20hundred%20more.%20Carries%20a%20wax-sealed%20ledger%20book%20under%20one%20arm%20and%20smells%20faintly%20of%20thaw-mud%20and%20linseed.%20Does%20not%20waste%20warmth%2C%20but%20is%20not%20cold%20%E2%80%94%20simply%20occupied.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=77560&nologo=true"
+        "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%20of%20Bette%20Harrow%2C%20the%20Seed%20Ledger%2C%20Contract%20seed-agent%20for%20the%20upvalley%20growers'%20cooperative%2C%20collecting%20outstanding%20grain-debts%20before%20the%20expedition%20locks%20up%20the%20forge%20accounts.%20Mid-forties%2C%20weathered%20apron%2C%20ink-stained%20fingers.%20Speaks%20in%20numbered%20points%20without%20meaning%20to%20%E2%80%94%20'First.%20Second.%20Done.'%20Knock%20was%20three%20times%2C%20flat%20and%20evenly%20spaced%2C%20the%20knock%20of%20someone%20who%20has%20knocked%20on%20a%20hundred%20doors%20this%20season%20and%20will%20knock%20on%20a%20hundred%20more.%20Carries%20a%20wax-sealed%20ledger%20book%20under%20one%20arm%20and%20smells%20faintly%20of%20thaw-mud%20and%20linseed.%20Does%20not%20waste%20warmth%2C%20but%20is%20not%20cold%20%E2%80%94%20simply%20occupied.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=77560&nologo=true",
+        "domains": {
+          "primary": "harmonic"
+        },
+        "domainsSource": "derived"
       },
       "pip-cotter-mara-s-errand-runner": {
         "schemaVersion": 1,
@@ -5428,7 +5536,11 @@
           "stubbed": false,
           "romanceEligible": true
         },
-        "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Dav%20Cutter%2C%20Cut-cord%20relay%20watcher%20for%20Grael's%20network%20%E2%80%94%20posted%20to%20the%20south%20cut-lane%20behind%20the%20cooperage%20barre%2C%20Young%20enough%20that%20his%20stillness%20costs%20him%20something%20%E2%80%94%20he%20practices%20it.%20Speaks%20rarely%20and%20in%20pieces%3A%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=52595&nologo=true"
+        "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Dav%20Cutter%2C%20Cut-cord%20relay%20watcher%20for%20Grael's%20network%20%E2%80%94%20posted%20to%20the%20south%20cut-lane%20behind%20the%20cooperage%20barre%2C%20Young%20enough%20that%20his%20stillness%20costs%20him%20something%20%E2%80%94%20he%20practices%20it.%20Speaks%20rarely%20and%20in%20pieces%3A%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=52595&nologo=true",
+        "domains": {
+          "primary": "harmonic"
+        },
+        "domainsSource": "derived"
       },
       "siol-elven-traveler-at-the-hub-plaza-tal": {
         "schemaVersion": 1,
@@ -5478,7 +5590,11 @@
           "promotedWorldDay": 18,
           "canonTier": "variant"
         },
-        "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Siol%20%E2%80%94%20Elven%20traveler%20at%20the%20Hub%20plaza%2C%20tall%2C%20pale%20coat%2C%20bir%2C%20someone%20of%20Waygate%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=4185&nologo=true"
+        "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Siol%20%E2%80%94%20Elven%20traveler%20at%20the%20Hub%20plaza%2C%20tall%2C%20pale%20coat%2C%20bir%2C%20someone%20of%20Waygate%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=4185&nologo=true",
+        "domains": {
+          "primary": "harmonic"
+        },
+        "domainsSource": "derived"
       },
       "maren-voss": {
         "schemaVersion": 1,
@@ -5574,7 +5690,11 @@
           "stubbed": false,
           "romanceEligible": true
         },
-        "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Maren%20Voss%2C%20Liminal%20fighter%20who%20crosses%20thresholds%20to%20win%20%E2%80%94%20patient%20at%20every%20gate%2C%20lethal%20the%20moment%20one%20opens%2C%20Speaks%20the%20way%20someone%20waits%20%E2%80%94%20fully%2C%20without%20fidgeting.%20Grey%20coat%2C%20collar%20up%20against%20the%20early-spri%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=5247&nologo=true"
+        "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Maren%20Voss%2C%20Liminal%20fighter%20who%20crosses%20thresholds%20to%20win%20%E2%80%94%20patient%20at%20every%20gate%2C%20lethal%20the%20moment%20one%20opens%2C%20Speaks%20the%20way%20someone%20waits%20%E2%80%94%20fully%2C%20without%20fidgeting.%20Grey%20coat%2C%20collar%20up%20against%20the%20early-spri%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=5247&nologo=true",
+        "domains": {
+          "primary": "harmonic"
+        },
+        "domainsSource": "derived"
       },
       "tane-solr": {
         "schemaVersion": 1,
@@ -5701,7 +5821,11 @@
             }
           ]
         },
-        "image": "https://image.pollinations.ai/prompt/Lean%20in%20the%20way%20the%20valley's%20early-spring%20wind%20is%20lean%20%E2%80%94%20nothing%20wasted%2C%20everything%20purposeful.%20Grey%20coat%2C%20collarless%2C%20worn%20to%20the%20colour%20of%20old%20flint%20at%20the%20cuffs.%20Two%20seconds%20coiled%20at%20his%20left%20hip%2C%2C%20character%20portrait%2C%20named%20Tane%20Solr%2C%20Threshold-walker%20and%20named%20bout%20opponent%20%E2%80%94%20a%20man%20who%20has%20crossed%20the%20center-line%20enough%20times%20to%20sto%2C%20Unhurried%20in%20a%20way%20that%20is%20not%20laziness%20but%20arithmetic%20%E2%80%94%20he%20has%20already%20run%20the%20numbers%20on%20you%20and%20d%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13653&nologo=true"
+        "image": "https://image.pollinations.ai/prompt/Lean%20in%20the%20way%20the%20valley's%20early-spring%20wind%20is%20lean%20%E2%80%94%20nothing%20wasted%2C%20everything%20purposeful.%20Grey%20coat%2C%20collarless%2C%20worn%20to%20the%20colour%20of%20old%20flint%20at%20the%20cuffs.%20Two%20seconds%20coiled%20at%20his%20left%20hip%2C%2C%20character%20portrait%2C%20named%20Tane%20Solr%2C%20Threshold-walker%20and%20named%20bout%20opponent%20%E2%80%94%20a%20man%20who%20has%20crossed%20the%20center-line%20enough%20times%20to%20sto%2C%20Unhurried%20in%20a%20way%20that%20is%20not%20laziness%20but%20arithmetic%20%E2%80%94%20he%20has%20already%20run%20the%20numbers%20on%20you%20and%20d%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13653&nologo=true",
+        "domains": {
+          "primary": "harmonic"
+        },
+        "domainsSource": "derived"
       },
       "cassiel-ord": {
         "schemaVersion": 1,
@@ -5757,8 +5881,8 @@
           "entityId": "cassiel-ord",
           "type": "npc",
           "birthWeight": 24,
-          "engagementScore": 0,
-          "tier": "fresh",
+          "engagementScore": 3,
+          "tier": "established",
           "rating": "R+",
           "provenance": {
             "playerKey": "player-s9z9u1",
@@ -5769,11 +5893,21 @@
             "hint": "A figure sitting against the limestone outcrop at the far edge of Stillwater's Trouble — someone who walked here from th",
             "why": "The boot-tracks that ended at the Raven's Home threshold belong to someone, and that someone is sitting in the bowl righ"
           },
-          "attentionHistory": [],
+          "attentionHistory": [
+            {
+              "kind": "interact",
+              "day": 6
+            },
+            {
+              "kind": "fact",
+              "day": 6
+            }
+          ],
           "createdDay": 6,
           "repaired": false,
           "stubbed": false,
-          "romanceEligible": true
+          "romanceEligible": true,
+          "lastAttentionDay": 6
         },
         "image": "https://image.pollinations.ai/prompt/A%20lean%20man%20somewhere%20in%20his%20middle%20forties%2C%20the%20kind%20of%20lean%20that%20is%20not%20hunger%20but%20habit%20%E2%80%94%20he%20has%20been%20moving%20through%20difficult%20ground%20for%20a%20long%20time%20and%20his%20body%20organized%20itself%20around%20that.%20March%2C%20character%20portrait%2C%20named%20Cassiel%20Ord%2C%20Former%20march-warden%20who%20walked%20away%20from%20the%20post%20and%20sat%20down%20in%20the%20bowl%20and%20has%20not%20decided%20what%20%2C%20Economy%20of%20words%20born%20from%20years%20of%20writing%20terse%20post-reports%20nobody%20acted%20on.%20Does%20not%20explain%20him%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=64922&nologo=true"
       }
@@ -5981,12 +6115,6 @@
   },
   "opLossPending": false,
   "establishedFacts": [
-    {
-      "id": "pell",
-      "text": "Silas named Pell as 'what comes after' on World-day 17 morning — she received it in full, without management, said alright in the register that goes all the way through. They shared the heated bath to",
-      "day": 4,
-      "subjectId": "pell"
-    },
     {
       "id": "pell",
       "text": "Silas and Pell consummated their bond in the bath trough at the Low Lamp Inn on World-day 17 midday — unhurried, entirely themselves, the habit entirely gone and not returning. The naming (soul wife) ",
@@ -6220,6 +6348,12 @@
       "text": "The party arrived on the Ashwarden March Road through the waygate on World-day 19 midday — Veth named the left branch at the marker stone as the route to Raven's Home. The road is open and clear.",
       "day": 6,
       "subjectId": null
+    },
+    {
+      "id": "cassiel-ord",
+      "text": "Cassiel Ord was found sitting at the rim of the Stillwater's Trouble hollow on World-day 19 — the heel-heavy boot-tracks resolved to him. He recognized Veth Ondra and did not run.",
+      "day": 6,
+      "subjectId": "cassiel-ord"
     }
   ],
   "practice": {
@@ -6419,10 +6553,10 @@
       "at": "2026-07-19T12:49:09.209Z"
     }
   ],
-  "syncedAt": 1784473174184,
+  "syncedAt": 1784477453768,
   "teachers": {},
   "regionsKnown": {
-    "valley": 416
+    "valley": 417
   },
   "foreclosed": [
     "rootkin",
@@ -6492,10 +6626,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-07-19T11:58:49.560Z",
-      "lastAt": "2026-07-19T16:10:53.747Z",
+      "lastAt": "2026-07-19T17:14:36.450Z",
       "startDay": 19,
       "endDay": 19,
-      "beats": 9
+      "beats": 10
     }
   ],
   "company": [
@@ -6626,10 +6760,14 @@
     "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
   "peopleDisposition": {
-    "ashwarden": 4,
+    "ashwarden": 6,
     "cogitant": 2,
     "figurist": 1,
-    "rootkin": -1
+    "rootkin": -1,
+    "verist": 3,
+    "lattice": 3.5,
+    "syllogist": 0.8,
+    "umbral": 1
   },
   "standingLedger": [
     {
@@ -6660,5 +6798,12 @@
       "text": "Your birth and training are known: ashwarden +4, cogitant +2, figurist +1, rootkin -1."
     }
   ],
-  "_pendingIntent": null
+  "_pendingIntent": null,
+  "_standingHistoryCredit": {
+    "verist": 3,
+    "lattice": 3.5,
+    "syllogist": 0.8,
+    "ashwarden": 2,
+    "umbral": 1
+  }
 }

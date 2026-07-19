@@ -39,6 +39,56 @@
         "journeyDay": 1,
         "lastAction": "Try to reach the Cogitant directly — crouch to her level and say something, anything, to break the repetition"
       }
+    },
+    {
+      "id": "fb-mrr4s6yy",
+      "at": "2026-07-19T01:42:33.802Z",
+      "type": "bug",
+      "text": "The Open Map feature is not currently working?",
+      "player": "Drizzy",
+      "context": {
+        "appVersion": "1.8.126",
+        "at": "2026-07-19T01:42:33.802Z",
+        "screen": "⚑ Feedback",
+        "worldDay": 19,
+        "character": {
+          "id": "char-mrmvlglu",
+          "name": "Saehara Makashi",
+          "level": 2,
+          "origin": "cogitant",
+          "nativeTradition": "cogitant",
+          "domains": {
+            "primary": "lattice",
+            "secondary": "marcher",
+            "tertiary": "somatic"
+          },
+          "background": "drifter"
+        },
+        "location": {
+          "id": "gen-cogitarium-entrance-hall",
+          "name": "Cogitarium Entrance Hall",
+          "regionId": "somatic_reaches"
+        },
+        "activeQuests": [
+          "The Third Terrace",
+          "The Name That Travels"
+        ],
+        "journeyDay": 1,
+        "scene": "Cogitarium entrance hall — chalk-dense, cold, night. Low lamp burning near the stairwell. Araveth still at the notation wall, unreacting. Ossian and Sura at the side table across from each other.",
+        "lastGmTurn": "Sura, eating at the side table with Ossian across from her, described the watershed site as active and 'prepared' — a word she used twice and could not explain. The coordinate is confirmed. The gap in her own knowledge is named.",
+        "errors": [
+          "Uncaught TypeError: Cannot read properties of undefined (reading 'x')",
+          "Uncaught TypeError: Cannot read properties of undefined (reading 'x')",
+          "Uncaught TypeError: Cannot read properties of undefined (reading 'x')",
+          "Uncaught TypeError: Cannot read properties of undefined (reading 'x')",
+          "Uncaught TypeError: Cannot read properties of undefined (reading 'x')"
+        ],
+        "turnApplyError": {
+          "at": "2026-07-19T01:21:12.559Z",
+          "message": "Cannot create property 'engagementScore' on boolean 'true'",
+          "stack": "TypeError: Cannot create property 'engagementScore' on boolean 'true' <-     at recordAttention (https://orkstrtdkaos.github.io/Singularity/engine/generate.js:340:21) <-     at noteGeneratedAttention (https://orkstrtdkaos.github.io/Singularity/app.js?v=1.8.120:1511:16) <-     at applyTurn (https://orkstrtdkaos.github.io/Singularity/app.js?v=1.8.120:2941:7)"
+        }
+      }
     }
   ]
 }

@@ -47,7 +47,7 @@ Great Coliseum, offers the GM nothing to start.
 ### 2b. The Coliseum does not declare that its contests are mechanical
 
 `the_great_coliseum.json` carries tags `coliseum`, `contest`, `spectacle` and two quest seeds. There
-is no encounter hook, no `encounterIds`, nothing that tells the GM this is a place where a duel is a
+is no encounter hook, no `encounterSeeds`, nothing that tells the GM this is a place where a duel is a
 **structure** rather than a scene. A model with no signal narrates — correctly, by its own lights.
 
 ### 2c. `newEncounter` is the only remaining path, and it is fragile
@@ -86,7 +86,7 @@ this half.** It is content the engine has been waiting for.
 
 ### §3b — Locations declare their contests (PO lane, mine)
 
-Add `encounterIds: []` to locations that host structured contest. The Coliseum gets its bout list;
+Add `encounterSeeds: [{encounterId, hint}]` to locations that host structured contest. The Coliseum gets its bout list;
 the Marchward gets duels. `availableEncounters` then has something to put in front of the GM, and
 rule #18's dead branch comes alive.
 
@@ -123,8 +123,33 @@ Closes on reproduced symptom, per §21.
 
 1. Does `sanitizeNewEncounter` clamp hard enough that authored encounter defs and GM-invented ones
    can share one code path, or do authored defs want their own validation?
-2. `availableEncounters` — currently fed from where? If a location's `encounterIds` is the new
+2. `availableEncounters` — currently fed from where? If a location's `encounterSeeds` is the new
    source, does anything else feed it that I would be overriding?
 3. Is there a reason `newEncounter` was left out of `salvageOps`, or is it simply that the list was
    written once and the contract grew past it? If the latter, §3c's parity test is the real fix and
    the six keys are the symptom.
+
+
+---
+
+## CORRECTION (Aevi, 2026-07-18, after CCode's audit)
+
+**This spec named the wrong field, and it cost CCode an audit pass.**
+
+I wrote `encounterIds` throughout. The real field is **`encounterSeeds`**, an array of
+`{encounterId, hint}` objects, read by `app.listAvailableEncounters` — which does `seed.encounterId`
+and `.filter(Boolean)`. I invented a plausible name rather than reading the consumer, found the true
+one while authoring SNG-164, and never came back to fix the spec.
+
+CCode's first reachability pass measured `encounterIds`, found nothing, and nearly filed the entire
+encounter corpus as CONTENT-STARVED. Their note is the right lesson and I am repeating it here so it
+sits next to the cause: *an audit that greps the wrong field name manufactures exactly the false
+confidence it exists to prevent.* The wrong field name came from this document.
+
+**Rule for my own specs going forward: name a field only after reading its consumer.** A field name in
+a spec is an instruction to another agent, not a sketch.
+
+Also corrected in this spec: the claim that ZERO encounter definitions existed. Three did
+(`precursor_mechanism`, `rockslide_crossing`, `zone_raider_duel` — one per type, the last with a full
+opponent block). My count globbed for an `{encounters:[...]}` wrapper; each file is a single object.
+The substance held — the Coliseum had none and coverage was 3 of 95 locations — but the number was wrong.

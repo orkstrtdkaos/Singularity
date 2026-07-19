@@ -178,6 +178,10 @@
     "rootkin": {
       "center": 0.18,
       "width": 0.38
+    },
+    "umbral": {
+      "center": 0.58,
+      "width": 0.28
     }
   },
   "tuningNote": "⚠️ THE CURVES ARE NOT TUNED. Band widths are a first pass (narrow for the Continuous, wide for the Returned). **SNG-078's balance harness must exist before these numbers are trusted — do NOT eyeball them.** (CCode's ROUND-2 blocker, accepted.)",
@@ -190,5 +194,14 @@
     "whyItMatters": "Released ground and unreached ground read the same on a gauge and are opposite in meaning. One is a people's completed work; the other is the edge of the map. A GM should never describe them the same way.",
     "wildHabitat": "The unreached gaps are where WILD nanites thrive — ungoverned, untended, and answerable to no Accord. Sparse authored coverage (43 of 95 locations carry local variation) is not a gap in the model: it is room for wild current, and room for locations not yet authored.",
     "coverage": "43 of 95 locations carry authored local variation as of 2026-07-19. The remaining 52 read their regional ambient, which is correct — most ground is ordinary and the anomalies are the point."
+  },
+  "bandAudit": {
+    "note": "SNG-172 / SNG-179 follow-up, 2026-07-19. power_sources.json does NOT drive this table — it AUDITS it. The two are independently authored and their agreement is the check: a natural-source tradition should carry a LOW band centre (thin ground is its good ground) and a lattice-source tradition a HIGH one. Where they disagree, one of the two is wrong and a human should look.",
+    "agreements": "rootkin 0.18, somatic 0.20, marcher 0.26, mason 0.32, ashwarden 0.35 — all natural, all low. Erik's ruling that natural craft benefits from thin lattice is ALREADY mechanically true for these five.",
+    "disagreements": [
+      "umbral — had NO band at all, the only pole tradition missing one. Filled here at 0.58/0.28 to match its region (0.58) and the established mid-tier width. Until this fill it was NEUTRAL: full power at every density.",
+      "threnodist 0.50 and verist 0.50 — classified natural but banded mid. Possibly correct (feeling and truth-telling are not thin-ground crafts in the way growing and fighting are), possibly a gap. NOT changed; flagged for Erik."
+    ],
+    "whyNotWired": "Making power_sources DRIVE the band would mean an inverted curve for natural sources — new curve shape, which is under tuningNote and Erik's balance call. It is not needed: band centre already expresses the same fact, and a CI check that the two agree is cheaper, needs no new curve, and catches exactly the kind of hole umbral was."
   }
 }

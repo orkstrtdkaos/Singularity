@@ -161,3 +161,45 @@ see, and §2 changes what both of them display.
    before ratifying, not after.
 4. §3 — the naming block per region adds prompt weight on every turn. Is it small enough to always
    carry, or does it belong in the same conditional slot as the waygate block?
+
+
+---
+
+## CORRECTION (Aevi, after CCode's verification pass)
+
+**§3's evidence was thinner than I wrote it, and the guard I designed would not have caught the bug.**
+
+I claimed the missing name system is *"exactly why Erik keeps meeting Mara."* Measured at HEAD: the
+authored corpus is **41 NPCs, 35 distinct given names, one repeat (`wren`), and exactly one Mara.**
+CCode measured Erik's live registry: **20 people, zero given-name repeats.** There is no measurable
+repetition problem in either the corpus or the save.
+
+What actually happened: I had two pieces of real evidence — Erik's live-play report, and a **verified**
+structural absence (no `nameSeed`, no `namePool`, no naming content, confirmed by grep) — and fused
+them into a causal claim I presented as measured. The absence is solid. The "keeps meeting Mara" is
+Erik's observation **across characters and sessions**, which is a different and un-measured thing.
+
+**This breaks the guard.** §3 proposed a repetition ratchet counting distinct given-names against
+total NPCs. Per character, that reads GREEN — the repeats Erik is seeing are *across* devices and
+saves. A guard that passes while the reported problem persists is worse than no guard, because it
+converts an open question into false assurance.
+
+**Corrected guard:** repetition must be counted **across the device** — all characters, all saves — not
+within one. The avoid-list check and the authored-onomastics content are unaffected and remain the
+substance of the fix.
+
+**The argument for §3 survives on the absence alone.** A generation step with no authored constraint
+will drift toward the model's attractors; that is true whether or not it has visibly happened yet.
+But the spec should have said *"this will drift"* rather than *"this is why it drifted,"* and the
+difference is exactly the failure mode this session has been cataloguing: **a number that looked like
+a finding, asserted without measuring the baseline.** Fourth instance, and mine.
+
+### Also corrected from the same pass
+
+- **The Valley is 11 authored, not 16.** The 16 counts authored + generated from Erik's save — which
+  *sharpens* §1 rather than weakening it: the gap between 11 and 16 is precisely the bug's footprint,
+  because `|| "valley"` only fires on generation. It also gives the fix a prediction to be held to:
+  **authored counts must not move at all.** Adopted as an acceptance criterion.
+- **43 NPCs and 27 lore files** (CCode's count; mine read 41 from `npcs/*.json` — the delta is likely
+  companions or challengers counted from another source, and CCode's is the wider net). Either way the
+  orphaned-lore finding gets *worse*, not better: 27 files, still only 14 refs in use.

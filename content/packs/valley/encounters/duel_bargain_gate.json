@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "duel_bargain_gate",
+  "type": "duel",
+  "name": "The Bargain and the Blade",
+  "locationId": "the_bargain_gate",
+  "setup": "The Abyssal offers you terms before the first exchange, and will offer again after each one. Every offer is genuine and fairly priced. That is what makes it a duel and not a mugging.",
+  "lethal": false,
+  "opponent": {
+    "name": "an Abyssal of the Descent",
+    "health": 5,
+    "threat": 38,
+    "yieldAt": 1,
+    "fleeDifficulty": 15,
+    "spectrum": {
+      "demonic_angelic": -0.6
+    },
+    "tacticTags": [
+      "offers-terms-each-round",
+      "prices-your-yielding",
+      "never-lies-about-the-cost",
+      "wins-either-way"
+    ]
+  }
+}

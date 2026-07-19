@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "coliseum_champion_sustain",
+  "type": "duel",
+  "name": "The Bout: The Attrition",
+  "locationId": "the_great_coliseum",
+  "setup": "Hallis will not end this and neither may you — the cell forbids it. Both of you simply continue. She has done this for six hours before, twice, and both times the other competitor was younger.",
+  "lethal": false,
+  "opponent": {
+    "name": "Hallis of the Palelands",
+    "health": 7,
+    "threat": 26,
+    "yieldAt": 2,
+    "fleeDifficulty": 15,
+    "spectrum": {
+      "death_life": -0.3
+    },
+    "tacticTags": [
+      "outlasts",
+      "does-not-tire",
+      "lets-you-spend-yourself",
+      "is-still-there"
+    ]
+  }
+}

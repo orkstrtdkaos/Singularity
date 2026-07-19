@@ -305,6 +305,9 @@ export async function generate(type, context = {}, deps = {}) {
   entity._gen.stubbed = stubbed;
   // structural minor protection: a minor NPC is never romance/sexual-eligible, any tier, any player
   entity._gen.romanceEligible = !(type === "npc" && isMinorEntity(entity));
+  // SNG-177: an NPC arrives affiliated. Without this the standing system cannot see the people a
+  // player actually spends their time with — every bond in play is with a generated NPC.
+  if (type === "npc") Object.assign(entity, affiliationFor(entity, context, context.traditionIndex || null));
   if (floored.action !== "clean") entity._gen.floor = floored.action;
   // SNG-035/046-L3: born-WITH-image — an injected image builder stamps the record's picture at
   // mint, so a generated NPC/location arrives with its art regardless of the caller (persist-once;
@@ -426,6 +429,61 @@ export function nominationsFor(character) {
 
 /** Build the schema-constrained generation prompt from the substrate grammar + local
  *  disposition + few-shot taste. Pure: (type, context) → { system, user }. */
+/** SNG-177 (Erik's ruling, 2026-07-19): every generated NPC gets a PEOPLE and DOMAINS at mint.
+ *
+ *  Measured on Erik's save before this existed: 0 of 14 generated NPCs carried either, while 41 of
+ *  41 AUTHORED ones did. So SNG-174's ruling — kind is what you ARE, domains are what you PRACTISE,
+ *  and standing is held per tradition — could not reach the population that actually accumulates in
+ *  play. His Ent bond credited nothing.
+ *
+ *  Erik: "we can allow them to enrich, but they need a starting point."
+ *
+ *  Three sources, strongest first, and the SOURCE IS RECORDED so a later pass can tell a real
+ *  choice from a floor:
+ *    "generated" — the model authored it in-grain, with the fiction in hand. Best.
+ *    "derived"   — from the location's region. traditions.json maps region -> tradition 1:1 across
+ *                  24 regions, so this is a DERIVATION from authored data, not a guess.
+ *    (absent)    — `people` is NOT derivable: no tradition names a people, and defaulting everyone
+ *                  to "human" would be wrong in the Deepwood. Left null to enrich rather than lied about.
+ *
+ *  Why the distinction earns its keep: a derived domain says "someone of this country", which is a
+ *  fine starting point for the GM but weak evidence for standing credit. Recording the source lets
+ *  the credit path weigh them differently instead of treating a floor as a fact.
+ */
+export function affiliationFor(entity, context = {}, traditionIndex = null) {
+  const loc = context.location || {};
+  const valid = t => !!t && (!traditionIndex?.byId || !!traditionIndex.byId[t]);
+  const out = {};
+
+  // (1) what the model authored, if it is real
+  const raw = entity?.domains;
+  if (raw && typeof raw === "object") {
+    const keep = {};
+    for (const slot of ["primary", "secondary", "tertiary"]) {
+      const v = raw[slot];
+      if (Array.isArray(v)) { const ok = v.filter(valid); if (ok.length) keep[slot] = ok.length === 1 ? ok[0] : ok; }
+      else if (valid(v)) keep[slot] = v;
+    }
+    if (keep.primary) { out.domains = keep; out.domainsSource = "generated"; }
+  }
+
+  // (2) the floor: the tradition whose home this region is
+  if (!out.domains) {
+    const region = loc.regionId || loc.region || context.regionId || null;
+    const home = region && traditionIndex?.byId
+      ? Object.values(traditionIndex.byId).find(t => t?.region === region)?.traditionId
+      : null;
+    if (valid(home)) { out.domains = { primary: home }; out.domainsSource = "derived"; }
+  }
+
+  // (3) people — model-authored only. Never invented.
+  if (typeof entity?.people === "string" && entity.people.trim()) {
+    out.people = entity.people.trim().toLowerCase();
+    out.peopleSource = "generated";
+  }
+  return out;
+}
+
 export function buildGeneratePrompt(type, context = {}, { schema = {}, examples = [], substrate = null } = {}) {
   const loc = context.location || {};
   const grammar = substrate?.generationGrammar || {};
@@ -453,6 +511,8 @@ export function buildGeneratePrompt(type, context = {}, { schema = {}, examples 
     `WHERE: ${loc.name || "the valley"}${loc.regionId ? ` (${loc.regionId})` : ""}`,
     dispo ? `LOCAL DISPOSITION: ${dispo}` : "",
     roleLine, seedLine, arcLine, seasonLine,
+    type === "npc" ? `
+AFFILIATION (required, and they are INDEPENDENT): "people" is the KIND OF BEING they are (human, ent, precursor-construct, …) — what they ARE. "domains" is {primary, secondary, tertiary} naming the TRADITIONS they PRACTISE — what they DO. An Ent of the Deepwood may practise rootkin craft; a human of the Gearlands may practise umbral. Choose both from the grain of this place, and do not assume they match.` : "",
     exText ? `\n${exText}` : "",
     `\nAuthor the ${type} now as a single in-grain JSON object.`
   ].filter(Boolean).join("\n");

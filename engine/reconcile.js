@@ -19,6 +19,7 @@ import { dedupeInventory } from "./inventory.js";
 import { inferDomains } from "./traditions.js";
 import { fallbackPersonalArc } from "./personalArc.js";
 import { seedStandingAtCreation } from "./standing.js";
+import { namesMatch } from "./namematch.js";
 
 // ---------- character migration steps (extensible registry) ----------
 // Each step: { version, id, playerFacing, apply(entity, ctx) → { notes?, offers?, warnings? } }.
@@ -180,18 +181,28 @@ export const CHARACTER_STEPS = [
         (why[tid] = why[tid] || new Set()).add(reason);
       };
       // (1) BONDS — the people whose craft your friends practice have heard of you.
+      // SNG-177: a bond in play is almost always with a GENERATED NPC, so resolve against the
+      // generated store as well as the authored one. Their ids DRIFT — the registry holds `dara-holt`
+      // while the generated record is `dara-holt-the-ditch-mother` — so fall back to name matching,
+      // which is what namematch exists for. Before this, 18 of Erik's 20 known people were invisible.
+      const genStore = Object.values(c.generated?.npc || {});
+      const resolve = (n) => npcs[n.id] || (c.generated?.npc || {})[n.id]
+        || genStore.find(g => namesMatch(g.name || "", n.name || ""));
       for (const n of Object.values(c.npcRegistry || {})) {
         const rel = Number(n?.relationship) || 0;
         if (rel < 1) continue;                                  // only positive; enmity with one is not enmity with a people
-        const authored = npcs[n.id];
-        const dom = authored?.domains;
+        const rec = resolve(n);
+        const dom = rec?.domains || n.domains;
         if (!dom) continue;                                     // unattributable — say nothing (§2c.4)
-        const weight = rel >= 7 ? 3 : rel >= 4 ? 2 : 1;         // devoted / ally / friendly
+        let weight = rel >= 7 ? 3 : rel >= 4 ? 2 : 1;           // devoted / ally / friendly
+        // A DERIVED domain means "someone of this country", not "someone who practises this". Fine as
+        // a starting point for the GM; weak evidence for standing. Halved rather than refused.
+        if ((rec?.domainsSource || n.domainsSource) === "derived") weight = weight / 2;
         const primaries = Array.isArray(dom.primary) ? dom.primary : [dom.primary];
         const share = weight / Math.max(1, primaries.length);   // an Epic NPC's several primaries split the credit
-        for (const t of primaries) add(t, share, authored.name || n.name);
-        if (dom.secondary) add(dom.secondary, weight / 2, authored.name || n.name);
-        if (dom.tertiary) add(dom.tertiary, weight / 4, authored.name || n.name);
+        for (const t of primaries) add(t, share, n.name || rec.name);
+        if (dom.secondary) add(dom.secondary, weight / 2, n.name || rec.name);
+        if (dom.tertiary) add(dom.tertiary, weight / 4, n.name || rec.name);
       }
       // (2) CRAFT — a people notices someone who works in their idiom. The practice ledger already
       // counts it; this is the same signal live accrual uses for a focused day.
@@ -231,6 +242,32 @@ export const CHARACTER_STEPS = [
       const nm = t => String(idx?.byId?.[t]?.name || t).replace(/^The\s+/i, "");   // the authored names already carry their article
       const top = moved.slice(0, 3).map(m => `the ${nm(m.tid)}${m.who.length ? ` (${m.who.join(", ")})` : ""}`);
       return { notes: [`What you have already done has caught up with you — ${top.join(", ")} count you differently now.`] };
+    }
+  },
+  {
+    version: 10, id: "generated-npc-affiliation", playerFacing: false,
+    // SNG-177. Mint-time affiliation ships in this batch, so every generated NPC already in a save
+    // was born without one — which is exactly why v9 could credit only 1 of Erik's 14 bonds.
+    // Derived only: there is no model in a reconcile pass, so this can give the FLOOR (the tradition
+    // whose home this NPC's region is) and nothing more. Marked `derived` so the credit path weighs
+    // it as the weaker evidence it is, and so a later enrichment can tell it apart from a choice.
+    // Silent — it changes no power and grants nothing on its own.
+    apply: (c, ctx) => {
+      const idx = ctx.content?.traditionIndex;
+      const locations = ctx.content?.locations || {};
+      if (!idx?.byId) return {};
+      const homeTradition = (regionId) => Object.values(idx.byId).find(t => t?.region === regionId)?.traditionId || null;
+      let n = 0;
+      for (const rec of Object.values(c.generated?.npc || {})) {
+        if (!rec || rec.domains) continue;
+        const loc = locations[rec.homeLocation];
+        const t = homeTradition(loc?.regionId || loc?.region);
+        if (!t) continue;                                     // unknown country — invent nothing
+        rec.domains = { primary: t };
+        rec.domainsSource = "derived";
+        n++;
+      }
+      return n ? { notes: [`affiliated ${n} generated NPC(s) from their home country`] } : {};
     }
   },
   {

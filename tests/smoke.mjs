@@ -5188,6 +5188,56 @@ await (async () => {
   check("171: the backfill is capped — thirty devoted bonds cannot buy `kin`", many.peopleDisposition.rootkin <= 6);
 }
 
+// --- SNG-177: a generated NPC arrives affiliated (Erik's ruling: they need a starting point) ---
+{
+  const g = await import("../engine/generate.js");
+  const idx = { byId: {
+    rootkin: { traditionId: "rootkin", name: "The Rootkin", region: "the_quickwood" },
+    umbral: { traditionId: "umbral", name: "The Umbrals", region: "umbral_depths" }
+  } };
+  // Strongest source: the model authored it in-grain, with the fiction in hand.
+  const chosen = g.affiliationFor({ people: "Ent", domains: { primary: "rootkin", secondary: "umbral" } }, { location: { regionId: "umbral_depths" } }, idx);
+  check("177: a model-authored affiliation is kept and marked `generated`",
+    chosen.domains.primary === "rootkin" && chosen.domainsSource === "generated");
+  check("177: kind and disposition stay INDEPENDENT — an Ent may practise rootkin (SNG-174)",
+    chosen.people === "ent" && chosen.domains.primary === "rootkin");
+
+  // The floor: derived from the country it was minted in. A derivation, not a guess —
+  // traditions.json maps region -> tradition 1:1 across 24 regions.
+  const floor = g.affiliationFor({}, { location: { regionId: "umbral_depths" } }, idx);
+  check("177: with nothing authored, the home country supplies the floor", floor.domains.primary === "umbral");
+  check("177: and the floor is MARKED derived, so credit can weigh it as weaker evidence", floor.domainsSource === "derived");
+
+  // Never accept an invented tradition, and never invent a people.
+  const bogus = g.affiliationFor({ domains: { primary: "wizards" } }, { location: { regionId: "umbral_depths" } }, idx);
+  check("177: a tradition that does not exist is refused, not stamped", bogus.domains.primary === "umbral" && bogus.domainsSource === "derived");
+  check("177: `people` is never invented — no tradition names one, and defaulting to human is wrong in the Deepwood",
+    floor.people === undefined);
+  check("177: an unknown country stamps NOTHING rather than guessing",
+    Object.keys(g.affiliationFor({}, { location: { regionId: "nowhere" } }, idx)).length === 0);
+
+  // v9 must resolve a bond against the GENERATED store, whose ids drift from the registry's.
+  const rc = await import("../engine/reconcile.js");
+  const v9 = rc.CHARACTER_STEPS.find(x => x.id === "standing-history-credit");
+  const c = {
+    npcRegistry: { "dara-holt": { id: "dara-holt", name: "Dara Holt", relationship: 8 } },
+    generated: { npc: { "dara-holt-the-ditch-mother": { id: "dara-holt-the-ditch-mother", name: "Dara Holt, the Ditch-Mother", domains: { primary: "rootkin" }, domainsSource: "generated" } } },
+    peopleDisposition: {}
+  };
+  v9.apply(c, { content: { npcs: {}, abilities: {}, traditionIndex: idx } });
+  check("177: a bond resolves to its generated record by NAME when the ids have drifted",
+    (c.peopleDisposition.rootkin || 0) > 0);
+
+  const derivedOnly = {
+    npcRegistry: { x: { id: "x", name: "Someone", relationship: 8 } },
+    generated: { npc: { x: { id: "x", name: "Someone", domains: { primary: "rootkin" }, domainsSource: "derived" } } },
+    peopleDisposition: {}
+  };
+  v9.apply(derivedOnly, { content: { npcs: {}, abilities: {}, traditionIndex: idx } });
+  check("177: a DERIVED domain credits half — 'someone of this country' is weaker than 'someone who practises this'",
+    derivedOnly.peopleDisposition.rootkin < c.peopleDisposition.rootkin);
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

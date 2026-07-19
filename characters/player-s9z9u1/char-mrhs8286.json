@@ -86,7 +86,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.32912342055337274,
+    "spectrumId": -0.31266724952570407,
     "violence_peace": 0.1030845625,
     "chaos_order": 0.24682516555723183,
     "mechanical_spiritual": 0.2400392471479881,
@@ -298,6 +298,30 @@
       "qty": 1,
       "description": "A small wax-sealed tin holding seven unfinished lens-blanks nested in folded linen, plus a slip of paper with grinding measurements in two hands — a margin note reads 'seventh-band, confirm before cutting.' Found abandoned in a dry hollow beneath a neighboring market stall.",
       "consumable": false
+    },
+    {
+      "id": null,
+      "name": "Copper Wire Coil (rune-work)",
+      "kind": "tool",
+      "qty": 1,
+      "description": "A short coil of fine copper wire — for rune-thread seating and binding work on the road.",
+      "consumable": false
+    },
+    {
+      "id": null,
+      "name": "Chalk Blanks (pair)",
+      "kind": "tool",
+      "qty": 1,
+      "description": "Two pressed chalk blanks for marking and rune-work. Plain, solid, road-ready.",
+      "consumable": true
+    },
+    {
+      "id": null,
+      "name": "Binding Paste (twist-wrap)",
+      "kind": "tool",
+      "qty": 1,
+      "description": "Dried binding paste in a paper twist — for setting rune-work in place. Veth added black salt to the purchase; it holds in wet weather.",
+      "consumable": true
     }
   ],
   "deeds": [
@@ -1024,9 +1048,9 @@
     "Silas, Pell, and Huginn step through the waygate together at dawn — the road south beginning in earnest.",
     "Silas thanks Tane at the close of the morning bouts, rejoins Siol, and hears her plain assessment of the fight. Siol offers a tour of the Hub — plaza first, Ent circle last — and the scene at the Coliseum reaches its natural end."
   ],
-  "currentLocationId": "gen-waygate",
+  "currentLocationId": "gen-the-ent-grove",
   "activeScene": {
-    "locationId": "gen-waygate",
+    "locationId": "gen-the-ent-grove",
     "turns": [
       {
         "player": "Before the tour — ask Siol plainly what she knows about Taur, and whether the bench-seam light connects to the water",
@@ -1117,171 +1141,233 @@
         "player": "Break the seal and open the tin now — see what was worth hiding here",
         "summary": "Silas opens the abandoned tin and finds seven unfinished seventh-band lens-blanks with a specification note in two hands — Huginn looks longer than usual before turning away.",
         "narration": "The wax seal gives cleanly under your thumbnail — whoever set it used good wax, the kind that doesn't crumble or stick. You work it free in one piece and set it on the neighboring stall's crossbar, then lever the lid.\n\nInside, on a thin pad of folded linen, sit seven lens-blanks. Each one is roughly the diameter of a thumb-joint, ground to a consistent curve, and nested in its own impression in the cloth. They are not finished lenses — the edges are still rough from the wheel — but the grinding on each face is precise and deliberate. Someone knew exactly what they were making. Tucked against the inner wall of the tin, folded twice, is a slip of paper. The writing on it is small and neat: a series of measurements, two columns, with a margin note in a different hand that reads seventh-band, confirm before cutting.\n\nYou have seen that phrase before. Not the handwriting — but the phrase itself, and the specification it belongs to.\n\nVeth stands at your shoulder, reading it with you. She says nothing for a moment. Then she says, \"Someone was working to spec,\" — and pauses — \"and did not finish.\"\n\nHuginn turns its head from the north end of the row and looks at the tin. It looks at it for three full seconds, which is longer than Huginn usually takes to decide something is not its business. Then it looks away."
+      },
+      {
+        "player": "Ask Siol whether the Ent circle is a place where a traveling Ashwarden could make a formal introduction — or whether the Ent simply watches and decides",
+        "summary": "Pell and Siol return from the market row — Pell presents the new travel coat and meets Veth Ondra without ceremony. Siol explains the Ent circle: it does not receive introductions; it responds to sustained, unhurried presence.",
+        "narration": "Pell arrives first, a length of dark wool folded over one arm and Siol a step behind her. She takes in Veth Ondra in a single look — the packed bundle, the teaching kit lashed to the outside, the open tin in Silas's hands — and extends her hand without waiting for an explanation. Veth takes it the same way she took yours. Then Pell holds up the wool and says, flatly, that Siol found it and she agreed with the eye, so here it is.\n\nSiol sets her attention on Silas as Pell and Veth exchange the brief, practical words of two people sizing up the road ahead. You ask Siol the question plainly: is the Ent circle the kind of place where a traveling Ashwarden could make a formal introduction, or does it simply watch and decide on its own terms?\n\nSiol is quiet for a moment. Not hesitating — thinking accurately. Then she says that the Ent does not receive introductions the way a person does. It already knows what you are, she says, or it knows nothing that words would change. What it responds to is presence — sustained, unhurried presence, with no particular want pressing through it. An Ashwarden, she says, is perhaps better placed than most to offer that. She does not promise anything beyond that.\n\nHuginn, sitting on Memory's shaft, shifts its weight from one foot to the other and says nothing. The market row is quieter now. The seven arches stand to the north, and the road to the Ent grove is a short walk south through the Hub's outer ring."
       }
     ],
     "lastTurn": {
-      "narration": "The wax seal gives cleanly under your thumbnail — whoever set it used good wax, the kind that doesn't crumble or stick. You work it free in one piece and set it on the neighboring stall's crossbar, then lever the lid.\n\nInside, on a thin pad of folded linen, sit seven lens-blanks. Each one is roughly the diameter of a thumb-joint, ground to a consistent curve, and nested in its own impression in the cloth. They are not finished lenses — the edges are still rough from the wheel — but the grinding on each face is precise and deliberate. Someone knew exactly what they were making. Tucked against the inner wall of the tin, folded twice, is a slip of paper. The writing on it is small and neat: a series of measurements, two columns, with a margin note in a different hand that reads seventh-band, confirm before cutting.\n\nYou have seen that phrase before. Not the handwriting — but the phrase itself, and the specification it belongs to.\n\nVeth stands at your shoulder, reading it with you. She says nothing for a moment. Then she says, \"Someone was working to spec,\" — and pauses — \"and did not finish.\"\n\nHuginn turns its head from the north end of the row and looks at the tin. It looks at it for three full seconds, which is longer than Huginn usually takes to decide something is not its business. Then it looks away.",
-      "sceneSummary": "Silas opens the abandoned tin and finds seven unfinished seventh-band lens-blanks with a specification note in two hands — Huginn looks longer than usual before turning away.",
+      "narration": "Pell arrives first, a length of dark wool folded over one arm and Siol a step behind her. She takes in Veth Ondra in a single look — the packed bundle, the teaching kit lashed to the outside, the open tin in Silas's hands — and extends her hand without waiting for an explanation. Veth takes it the same way she took yours. Then Pell holds up the wool and says, flatly, that Siol found it and she agreed with the eye, so here it is.\n\nSiol sets her attention on Silas as Pell and Veth exchange the brief, practical words of two people sizing up the road ahead. You ask Siol the question plainly: is the Ent circle the kind of place where a traveling Ashwarden could make a formal introduction, or does it simply watch and decide on its own terms?\n\nSiol is quiet for a moment. Not hesitating — thinking accurately. Then she says that the Ent does not receive introductions the way a person does. It already knows what you are, she says, or it knows nothing that words would change. What it responds to is presence — sustained, unhurried presence, with no particular want pressing through it. An Ashwarden, she says, is perhaps better placed than most to offer that. She does not promise anything beyond that.\n\nHuginn, sitting on Memory's shaft, shifts its weight from one foot to the other and says nothing. The market row is quieter now. The seven arches stand to the north, and the road to the Ent grove is a short walk south through the Hub's outer ring.",
+      "sceneSummary": "Pell and Siol return from the market row — Pell presents the new travel coat and meets Veth Ondra without ceremony. Siol explains the Ent circle: it does not receive introductions; it responds to sustained, unhurried presence.",
       "choices": [
         {
-          "label": "Pocket the tin and its contents — this belongs with Calvar or Vash, and you'll carry it there",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "label": "Head to the Ent grove now — the party is assembled and the road is ready",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "careful"
+            "travel"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Study the measurements on the slip — see if they match anything you know about the seventh-band specification",
+          "label": "Ask Siol what she personally knows of the Raven's Home — she has been deliberate about sequencing; see if she will say more now that Veth is standing here",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 15,
+          "axes": {},
+          "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Ask Veth directly — eleven years on the March's south post, does she know what seventh-band lens-work is for",
+          "label": "Take a moment before the party moves — tell Pell about the lens-blanks and the tin, and what the Attended End read from them",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "plan"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Go find Pell and Siol and bring the party together — introductions first, then the tin",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Ask Veth directly — as the only Ashwarden March veteran present — whether the Ent is something the March has a record of, or a thing the Hub simply grew around",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "lead"
+            "study"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
+      "deeds": [],
       "characterDeltas": {
-        "inventoryAdd": [
-          {
-            "name": "Seventh-Band Lens-Blanks (tin)",
-            "kind": "quest",
-            "description": "A small wax-sealed tin holding seven unfinished lens-blanks nested in folded linen, plus a slip of paper with grinding measurements in two hands — a margin note reads 'seventh-band, confirm before cutting.' Found abandoned in a dry hollow beneath a neighboring market stall.",
-            "consumable": false
-          }
-        ],
-        "inventoryRemove": [
-          "Abandoned Sealed Tin"
-        ]
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
       },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-edge-district-ledger",
+          "note": "Party fully assembled at the south market row — Veth Ondra introduced to Pell, road to the Raven's Home and the dead warden post confirmed. Lens-blanks in hand, Siol's assessment of the Ent circle received."
+        }
+      ],
       "scene": {
-        "setting": "The dark-cloth stall in the Hub market row, midday light falling flat and clear across the packed earth. Veth is packed and standing at Silas's shoulder. The neighboring stall is still closed, its cloth knotted around the legs. The dry hollow beneath it is empty.",
+        "setting": "The south market row of the Hub, midday light flat and clear across packed earth. The dark-cloth stall is stripped and bundled. The party is assembled — Silas, Pell (new travel coat, dark wool), Veth Ondra (pack and teaching kit, stall bundle), Siol, and Huginn on Memory's shaft. The neighboring stall remains closed, its hollow now empty. Seven waygate arches stand to the north; the Ent grove is a short walk south through the Hub's outer ring.",
         "npcsPresent": [
           {
-            "name": "Veth Ondra",
-            "state": "Standing at Silas's shoulder, reading the slip in the tin — bag on shoulder, stall bundle lashed to outside, ready to travel."
+            "name": "Pell",
+            "state": "Standing with the new travel coat on — has met Veth without ceremony, watching the exchange between Silas and Siol."
           },
           {
-            "name": "Huginn",
-            "state": "Turned away from the tin now — attention back toward the north end of the market row, giving nothing further."
+            "name": "Veth Ondra",
+            "state": "Pack on shoulder, stall bundle lashed and ready, exchanging brief practical words with Pell."
           },
           {
             "name": "Siol",
-            "state": "Deeper in the market row with Pell, still choosing."
+            "state": "Standing at ease, having just answered Silas's question — attention quiet, no further comment pressing."
           },
           {
-            "name": "Pell",
-            "state": "Walking the stalls with Siol — not yet introduced to Veth."
+            "name": "Huginn",
+            "state": "Perched on Memory's shaft, weight shifted once, watching the group."
           }
         ],
         "objects": [
-          "Memory — leaning against the stall frame, shaft upright",
-          "Seventh-Band Lens-Blanks (tin) — open in Silas's hands, seven lens-blanks on folded linen, slip of paper with measurements inside",
+          "Memory — spear, shaft upright against the stripped stall frame",
+          "Seventh-Band Lens-Blanks (tin) — open, in Silas's hands",
           "Wax seal — lifted intact, resting on the neighboring crossbar",
           "Seven waygate arches visible to the north"
         ],
         "threads": [
-          "Seventh-band lens-blanks — whose work, and who didn't come back for them",
-          "Huginn looked three full seconds before turning away — it saw something",
-          "Pell and Siol not yet introduced to Veth — party not yet assembled",
+          "Seventh-band lens-blanks — whose work, and who did not come back for them",
+          "Huginn looked three full seconds at the tin before turning away — it saw something",
+          "The Ent grove: Siol says presence, not introduction — what that means for an Ashwarden with a dead warden post as destination",
           "The evening suggestion between Silas and Pell — filed, not resolved"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "veth-stillwater-ondra",
-          "name": "Veth (Stillwater) Ondra",
-          "note": "Stood at Silas's shoulder as he opened the tin — read the slip, named the abandonment plainly: someone working to spec, did not finish.",
+          "npcId": "siol",
+          "name": "Siol",
+          "note": "Explained the Ent circle plainly: it does not receive formal introductions; it responds to sustained unhurried presence with no particular want pressing through it. Named an Ashwarden as perhaps better placed than most to offer that.",
           "learned": [
-            "The tin held seventh-band lens-blanks with a specification note in two hands — she read it and named the incompleteness without hesitation"
+            "The Ent does not receive introductions — it already knows what you are, or words would change nothing. It responds to sustained, unhurried presence."
           ],
           "skillsObserved": [
-            "reading an abandoned object's situation from a single look"
+            "accurate qualification of a living entity's nature without overpromising its response"
           ],
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "Packed and ready to travel — stall folded, at Silas's shoulder, party not yet assembled."
+          "statusNote": "With the party at the south market row — answered Silas's question, ready to lead to the Ent grove."
+        },
+        {
+          "op": "update",
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "note": "Returned from the market row with Siol, presented the new travel coat, met Veth Ondra without ceremony — extended her hand first, no explanation needed.",
+          "learned": [
+            "Veth Ondra is now part of the party — read the situation in one look and accepted it without ceremony."
+          ],
+          "skillsObserved": [
+            "reading a newcomer's practical standing from pack and posture alone"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "With the party at the south market row, new travel coat on, ready to move toward the Ent grove."
+        },
+        {
+          "op": "update",
+          "npcId": "veth-stillwater-ondra",
+          "name": "Veth (Stillwater) Ondra",
+          "note": "Met Pell Marsh — brief practical exchange, two people sizing up the road. Introduction complete without ceremony.",
+          "learned": [
+            "Pell Marsh is Silas's partner — read it without being told and extended her hand accordingly."
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Traveling with the party — pack and teaching kit ready, stall fully broken down, Pell introduced."
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Veth Ondra has been formally introduced to Pell Marsh at the south market row — the party is fully assembled: Silas, Pell, Veth, Siol, and Huginn.",
+          "subjectId": "veth-stillwater-ondra"
+        },
+        {
+          "op": "add",
+          "text": "Siol has explained the Ent circle's nature: it does not receive formal introductions; it responds to sustained unhurried presence. An Ashwarden may be better placed than most to offer this.",
+          "subjectId": "siol"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "seventh-band-lens-blanks",
-          "label": "Seventh-Band Lens-Blanks — Market Row Cache",
-          "kind": "mystery",
-          "fact": "Seven unfinished lens-blanks ground to a consistent curve, nested in a tin abandoned in a dry hollow beneath a Hub market stall. A slip of paper inside carries grinding measurements in two hands — a margin note reads 'seventh-band, confirm before cutting.' Someone was working to Calvar's specification and did not return to collect the work.",
+          "topic": "the-ent-grove",
+          "label": "The Ent Grove",
+          "kind": "place",
+          "entityId": "the-ent-grove",
+          "fact": "Siol's account: the Ent does not receive formal introductions — it already knows what you are, or words would change nothing. It responds to sustained, unhurried presence with no particular want pressing through it. An Ashwarden may be better placed than most to offer that.",
           "links": [
-            "vash-lens-grinder-east-room",
-            "calvar",
-            "the-water-crisis",
+            "siol",
+            "veth-stillwater-ondra",
             "the-edge-district-ledger"
           ]
         }
       ],
-      "placeUpdates": [
-        {
-          "note": "A sealed tin of unfinished seventh-band lens-blanks retrieved from the dry hollow beneath the neighboring stall's crossbar — the hollow is now empty, the tin in Silas Weir's possession.",
-          "subPlace": {
-            "name": "Neighboring Stall Cache — Market Row",
-            "parent": "Hub Waygate Plaza",
-            "note": "Dry hollow now emptied — tin recovered by Silas Weir on World-day 19 midday. The stall it belonged to has not opened.",
-            "visited": true
-          }
-        }
-      ]
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "Brief exchange — Pell and Siol return, introduction made, question answered."
+      },
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The dark-cloth stall in the Hub market row, midday light falling flat and clear across the packed earth. Veth is packed and standing at Silas's shoulder. The neighboring stall is still closed, its cloth knotted around the legs. The dry hollow beneath it is empty.",
+      "setting": "The south market row of the Hub, midday light flat and clear across packed earth. The dark-cloth stall is stripped and bundled. The party is assembled — Silas, Pell (new travel coat, dark wool), Veth Ondra (pack and teaching kit, stall bundle), Siol, and Huginn on Memory's shaft. The neighboring stall remains closed, its hollow now empty. Seven waygate arches stand to the north; the Ent grove is…",
       "npcsPresent": [
         {
-          "name": "Veth Ondra",
-          "state": "Standing at Silas's shoulder, reading the slip in the tin — bag on shoulder, stall bundle lashed to outside, ready to tr"
+          "name": "Pell",
+          "state": "Standing with the new travel coat on — has met Veth without ceremony, watching the exchange between Silas and Siol."
         },
         {
-          "name": "Huginn",
-          "state": "Turned away from the tin now — attention back toward the north end of the market row, giving nothing further."
+          "name": "Veth Ondra",
+          "state": "Pack on shoulder, stall bundle lashed and ready, exchanging brief practical words with Pell."
         },
         {
           "name": "Siol",
-          "state": "Deeper in the market row with Pell, still choosing."
+          "state": "Standing at ease, having just answered Silas's question — attention quiet, no further comment pressing."
         },
         {
-          "name": "Pell",
-          "state": "Walking the stalls with Siol — not yet introduced to Veth."
+          "name": "Huginn",
+          "state": "Perched on Memory's shaft, weight shifted once, watching the group."
         }
       ],
       "objects": [
-        "Memory — leaning against the stall frame, shaft upright",
-        "Seventh-Band Lens-Blanks (tin) — open in Silas's hands, seven lens-blanks on fol",
+        "Memory — spear, shaft upright against the stripped stall frame",
+        "Seventh-Band Lens-Blanks (tin) — open, in Silas's hands",
         "Wax seal — lifted intact, resting on the neighboring crossbar",
         "Seven waygate arches visible to the north"
       ],
       "threads": [
-        "Seventh-band lens-blanks — whose work, and who didn't come back for them",
-        "Huginn looked three full seconds before turning away — it saw something",
-        "Pell and Siol not yet introduced to Veth — party not yet assembled",
+        "Seventh-band lens-blanks — whose work, and who did not come back for them",
+        "Huginn looked three full seconds at the tin before turning away — it saw something",
+        "The Ent grove: Siol says presence, not introduction — what that means for an Ashwarden with a dead warden post as destination",
         "The evening suggestion between Silas and Pell — filed, not resolved"
       ]
     }
@@ -1589,14 +1675,14 @@
         "s3"
       ],
       "progress": [
-        "The full chain laid out at the Fell Pell — every witness speaking their part, the document roll complete and present. The gathering now sits with the central question: what is the truth for?",
         "Mara named the document roll's destination without being asked — the carrier and route are hers to arrange before the week's end. The accountability chain now has a clear path to the district records office.",
         "Mara named Pip Cotter as carrier — document roll departs in two days for the district records office. Final witness lines open tonight. The accountability chain is nearly sealed.",
         "Silas's own witness statement added to the roll. Fendt named to the fellowship. The gathering sealed with 'Thus begins the fellowship of the Fell.' Document roll now complete — all lines present, ready for Mara to seal and Pip Cotter to carry.",
         "Document roll sealed and complete, Pip Cotter named as carrier, all witness lines present. Silas and Pell have stepped away from Millbrook — the roll is in Mara's hands.",
         "Silas and Pell have stepped through the waygate — the document roll is in Mara's hands, Pip Cotter named as carrier. The road south has begun.",
         "Calvar's name placed with the Hub Council water committee — Mara Wells named as relay. The accountability chain is spreading beyond Millbrook.",
-        "Road set for the Raven's Home — the valley's situation deferred but not abandoned. Veth Ondra now traveling with the party; her knowledge of the Ashwarden March's south-facing edge may be relevant to the Disputed Zone thread."
+        "Road set for the Raven's Home — the valley's situation deferred but not abandoned. Veth Ondra now traveling with the party; her knowledge of the Ashwarden March's south-facing edge may be relevant to the Disputed Zone thread.",
+        "Party fully assembled at the south market row — Veth Ondra introduced to Pell, road to the Raven's Home and the dead warden post confirmed. Lens-blanks in hand, Siol's assessment of the Ent circle received."
       ],
       "aliases": [],
       "startedAt": "2026-07-16T21:27:42.515Z",
@@ -1713,8 +1799,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d6] Vouched for Silas plainly to Tane — 'He does that' — and extended her flask without ceremony.",
-        "[d6] Accepted the second bout without argument — handed off the flask, crossed the sand, declared iron to Tane Solr. Running this on her own terms.",
         "[d6] Running her own bout against Tane Solr — ironsense open, patient and methodical. Silas stepped back and let her work.",
         "[d6] Silas read her method clearly this exchange — she is running one breath ahead via ironsense, using the buckle and brace-pin as read-points, catching the back-foot settle twice and declining to press either time.",
         "[d6] Ended the second bout cleanly on Silas's word — flat strike, no edge, hands open after. Received the call and acted without argument.",
@@ -1722,30 +1806,32 @@
         "[d6] Fell in beside Silas without a word — flask clipped, eyes already reading the plaza",
         "[d6] Waited at the colonnade steps during the Council meeting; now at the market row, watching Silas hold up the blue-green cloth.",
         "[d6] Received Silas's whispered suggestion with a held look and a corner-of-mouth reply — filed it and turned back to the stalls. Now shopping with Siol.",
-        "[d6] Shopping with Siol — the evening suggestion still unresolved."
+        "[d6] Shopping with Siol — the evening suggestion still unresolved.",
+        "[d6] Met Veth Ondra at the south market row — read the situation in one look and extended her hand without waiting for an explanation.",
+        "[d6] Returned from the market row with Siol, presented the new travel coat, met Veth Ondra without ceremony — extended her hand first, no explanation needed."
       ],
       "knownFacts": [
-        "The shadowstep can be read by someone attentive to the shadow's shift before the body moves",
-        "A clean shadowstep arrival with no pre-pull is readable only after the fact — the body registers contact before the shadow shows movement",
         "Not all opponents carry iron — an opponent who knows about the ironsense can exploit it by leaving iron at home; bone, rope, empty hands are outside the read",
         "Uses multiple iron reference points simultaneously — buckle, brace-pin, coat eyelets — to build a continuous read of Tane's weight and attention",
         "Caught the back-foot settle twice and declined to press both times — waiting for the cleaner entry",
         "Half-offered iron near his chest deliberately to pull his eyes left — a manufactured diversion, not a real move",
         "Responded to Silas's direction mid-bout without hesitation — the call was enough",
-        "Silas wants something private for the evenings — she is thinking about what that means"
+        "Silas wants something private for the evenings — she is thinking about what that means",
+        "Veth Ondra is now traveling with the party — Pell took the measure of her immediately and accepted it without ceremony",
+        "Veth Ondra is now part of the party — read the situation in one look and accepted it without ceremony."
       ],
       "skillsObserved": [
-        "receiving a genuine technique acknowledgment without ceremon",
         "trading exchanges under ironsense without overreaching",
         "giving false information with body position to open an angle",
         "manufacturing a false iron-read to pull opponent attention",
         "declining a pressable opening to wait for the cleaner one",
-        "controlled finish strike — flat hilt to the leading arm, no "
+        "controlled finish strike — flat hilt to the leading arm, no ",
+        "reading a newcomer's practical standing from pack and postur"
       ],
       "status": "active",
-      "statusNote": "In the Hub market row with Siol, choosing travel clothes and the private something.",
+      "statusNote": "With the party at the south market row, new travel coat on, ready to move toward the Ent grove.",
       "lastSeen": {
-        "locationId": "gen-waygate",
+        "locationId": "gen-the-ent-grove",
         "day": 6
       },
       "bondType": "romantic",
@@ -2270,8 +2356,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d6] Named Orvil as the world confirming itself — dry, without ceremony. Standing just inside the gate.",
-        "[d6] Watching the second bout from inside the gate — quiet, experienced attention. Something slightly different from what she usually sees.",
         "[d6] Read the bout plainly when Silas asked — named what Pell is doing to Tane in one sentence, without embellishment.",
         "[d6] Confirmed she has seen the bench-seam light three times — always slow, always the upper seam, never lamp-circuit or sun. First occurrence predated the water discoloration. She had come from speaking with Taur that day. Named the facts without drawing the connection.",
         "[d6] Named her read of the bouts plainly: Pell reads iron the way a river reads a bank — finds where it is going, does not push. Silas read the man; Pell read the craft in him. Filed both without comparison. Offered a tour: plaza first, Ent circle last.",
@@ -2279,31 +2363,34 @@
         "[d6] Led Silas and Pell north to the waygate plaza without ceremony — stopped at center and waited for Silas to see what she sees",
         "[d6] Accompanied Silas and Pell to the Council colonnade and the market row — present throughout, no intervention.",
         "[d6] Accepted the shopping task without ceremony — took Silas's trust in her eye as practical information and moved.",
-        "[d6] Accompanying Pell in the market row — not present at the stall exchange."
+        "[d6] Accompanying Pell in the market row — not present at the stall exchange.",
+        "[d6] Present at the party assembly — watching Huginn angle north, not intervening in the introduction.",
+        "[d6] Explained the Ent circle plainly: it does not receive formal introductions; it responds to sustained unhurried presence with no particular want pressing through it. Named an Ashwarden as perhaps better placed than most to offer that."
       ],
       "knownFacts": [
-        "Has seen the bench-seam light three times, always in the upper seam, slow and lateral",
         "The first occurrence was before the water changed color — she noted the timing afterward",
         "She came from speaking with Taur directly before the first sighting; she does not claim a connection but does not deny one",
         "Distinguishes between reading a person and reading the craft in them — filed Silas and Pell as separate and complementary tools",
         "Offered to lead the party on a tour of the Hub — her sequencing is deliberate",
         "Taur is a voice and a direction — she knows him only through intermediary; does not know his face",
         "Taur has been interested in the waygate calibration question longer than the water has been gray",
-        "The bench-seam light first appeared the morning after someone asked Siol what she knew about the plaza arches — she names the sequence, not the cause"
+        "The bench-seam light first appeared the morning after someone asked Siol what she knew about the plaza arches — she names the sequence, not the cause",
+        "The Ent does not receive introductions — it already knows what you are, or words would change nothing. It responds to sustained, unhurried presence."
       ],
       "skillsObserved": [
         "reading a traveler's affiliation from companion presence alo",
         "plain directional knowledge of the waygate network",
         "reading two strangers' practical needs and sequencing a morn",
         "precise practical briefing on an institution's rules without",
-        "plain comparative assessment of two fighters' methods withou"
+        "plain comparative assessment of two fighters' methods withou",
+        "accurate qualification of a living entity's nature without o"
       ],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "In the Hub market row with Pell, still choosing.",
+      "statusNote": "With the party at the south market row — answered Silas's question, ready to lead to the Ent grove.",
       "lastSeen": {
-        "locationId": "gen-waygate",
+        "locationId": "gen-the-ent-grove",
         "day": 6
       }
     },
@@ -2405,10 +2492,8 @@
         "locationId": "gen-waygate",
         "day": 6
       },
-      "relationship": 7,
+      "relationship": 8,
       "history": [
-        "[d6] Named herself plainly and in full after Silas named himself. Now wants to know how he walked this far into the craft without a functioning warden post behind him.",
-        "[d6] Named her Raven name — Troubler — as a bond. Asked to walk the path with Silas. The offer is open.",
         "[d6] Named her Raven name — Stillwater — and extended her hand in the Ashwarden way. She is in. She asks only to be told where the road goes — not to approve, but because she is done standing at edges without knowing what is on the other side.",
         "[d6] Your bond becomes sworn.",
         "[d6] Took Silas's open palm, named the Raven's Home without flinching, and began folding the stall. She is in — practically and without ceremony.",
@@ -2416,32 +2501,34 @@
         "[d6] You know this person's name now: Veth (Stillwater) Ondra (was \"Veth Ondra\")",
         "[d6] Watched Silas retrieve the tin from the neighboring hollow — clocked it immediately, said nothing, waiting.",
         "[d6] Watched Silas use The Attended End on the tin — did not ask what he read, waiting for him to share or act.",
-        "[d6] Stood at Silas's shoulder as he opened the tin — read the slip, named the abandonment plainly: someone working to spec, did not finish."
+        "[d6] Stood at Silas's shoulder as he opened the tin — read the slip, named the abandonment plainly: someone working to spec, did not finish.",
+        "[d6] Added black salt to the rune-supply purchase unprompted — named its practical purpose and paid from her own pocket. Met Pell at the south end of the row; hand extended and taken without ceremony.",
+        "[d6] Met Pell Marsh — brief practical exchange, two people sizing up the road. Introduction complete without ceremony."
       ],
       "knownFacts": [
-        "Not one of her wards on the south-facing post died clean — every one she had to work for; the other wardens found it useful before the post was dissolved",
-        "She is done standing at the edge of things without knowing what is on the other side — plain condition of walking with the party",
-        "The road goes: Raven's Home and the dead warden post first, then back to the valley's water situation",
         "Silas intends to gain standing with the March properly — not by inheritance",
         "She has not been back to the Home since the post dissolved — named it plainly, did not explain it",
         "Packs with no food — her travel provisioning method is unknown",
         "Breaks camp fast and in the dark by habit — eleven years of warden post practice",
-        "The tin held seventh-band lens-blanks with a specification note in two hands — she read it and named the incompleteness without hesitation"
+        "The tin held seventh-band lens-blanks with a specification note in two hands — she read it and named the incompleteness without hesitation",
+        "Buys from operational knowledge, not sentiment — named the paste's wet-weather failure before being asked",
+        "Pell Marsh is now known to her — the introduction complete",
+        "Pell Marsh is Silas's partner — read it without being told and extended her hand accordingly."
       ],
       "skillsObserved": [
-        "precise self-introduction — history offered in plain sequenc",
         "naming a secret thing plainly and without ceremony as a comm",
         "accepting a compact without ceremony — named the cost and mo",
         "field-stripping a portable stall in under ten minutes",
         "packing a teaching kit by sequence without looking",
-        "reading an abandoned object's situation from a single look"
+        "reading an abandoned object's situation from a single look",
+        "proactive supply correction from field knowledge — identifie"
       ],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Packed and ready to travel — stall folded, at Silas's shoulder, party not yet assembled.",
+      "statusNote": "Traveling with the party — pack and teaching kit ready, stall fully broken down, Pell introduced.",
       "lastSeen": {
-        "locationId": "gen-waygate",
+        "locationId": "gen-the-ent-grove",
         "day": 6
       },
       "bondType": "sworn",
@@ -2731,7 +2818,6 @@
     "gen-waygate": {
       "visits": 1,
       "notes": [
-        "[d6] Order-Sense partial read on dawn of World-day 18: the seven gates are calibration marks for a measuring function centered on the plaza. Design predates the roads. Full purpose unresolved — lattice too thin.",
         "[d6] The Hub's major landmarks identified from the plaza at dawn: Council of Mavens colonnade (north), Coliseum (northwest behind market row), Ent circle (east), Elven camp (west paving). The city is active before full light.",
         "[d6] The sixth waygate from the south lane — lower lintel, darker stone — is the connection to the Ashwarden March. Confirmed by Siol of the Elves.",
         "[d6] The party entered and declared crafts at the gate — Orvil on morning rotation, sand showing early-bout marks, gallery occupied at dawn.",
@@ -2742,7 +2828,8 @@
         "[d6] A seller at the dark-cloth stall in the market row lays out bone-handled tools as a deliberate test for someone who can read their design — the kit is a teaching sequence, its center piece the seller herself.",
         "[d6] A small abandoned cache found under the neighboring stall table — a dry hollow, something left by someone who did not come back to collect it.",
         "[d6] The dry hollow under the neighboring stall's table crossbar is now empty — a small sealed tin retrieved from it by Silas Weir on World-day 19 morning.",
-        "[d6] A sealed tin of unfinished seventh-band lens-blanks retrieved from the dry hollow beneath the neighboring stall's crossbar — the hollow is now empty, the tin in Silas Weir's possession."
+        "[d6] A sealed tin of unfinished seventh-band lens-blanks retrieved from the dry hollow beneath the neighboring stall's crossbar — the hollow is now empty, the tin in Silas Weir's possession.",
+        "[d6] A contact note left in the dry hollow beneath the neighboring stall's crossbar — folded bark-paper, stone-weighted, naming Silas Weir and the Fell Pell forge in Millbrook as the finder."
       ],
       "flags": {},
       "vectorsKnown": [],
@@ -2816,7 +2903,7 @@
           "parentId": "gen-waygate",
           "day": 6,
           "visited": true,
-          "note": "Dry hollow now emptied — tin recovered by Silas Weir on World-day 19 midday. The stall it belonged to has not opened."
+          "note": "Dry hollow now holds a contact note — folded bark-paper, stone-weighted. Tin retrieved by Silas Weir; note left for whoever comes back."
         }
       }
     },
@@ -2829,6 +2916,11 @@
       "_containmentNotes": [
         "\"Hub Waygate Plaza\" was placed in gen-waygate (the fiction named it), not gen-center"
       ]
+    },
+    "gen-the-ent-grove": {
+      "visits": 1,
+      "notes": [],
+      "flags": {}
     }
   },
   "worldState": {
@@ -3989,7 +4081,8 @@
           "[d3] Vash's testimony relayed to Leth — confirmed: the four characters added to Calvar's diagram are authentication marks from a binding receipt, and the folded page explicitly names Grael's runner (cut-co",
           "[d3] Leth will notify Vash tonight that his folded page reached the right hands — he has been waiting three days for that confirmation.",
           "[d4] [while away] While dressing her wheel's edge before first light, Vash reconstructed the overheard phrase word by word and realized the term she couldn't place was a pre-Transition calibration interval",
-          "[d6] [while away] Vash paused her wheel mid-grind this morning and spent an hour reworking the fragment she overheard into a sequence of optical terms she does know, arriving at an arrangement that almost coheres — close enough that her uncertainty has sharpened from fog into a specific question."
+          "[d6] [while away] Vash paused her wheel mid-grind this morning and spent an hour reworking the fragment she overheard into a sequence of optical terms she does know, arriving at an arrangement that almost coheres — close enough that her uncertainty has sharpened from fog into a specific question.",
+          "[d6] Seven unfinished seventh-band lens-blanks found abandoned in a dry hollow beneath a market stall — same spec as Vash's work; the grinding is precise and deliberate, the abandonment not voluntary. To be brought to Calvar or Vash for identification."
         ],
         "links": [
           "leth-archive-complaint",
@@ -3997,7 +4090,9 @@
           "the-document-roll-leth-s-desk",
           "radiant-plateau-edge",
           "find-the-engineer",
-          "overseer-grael"
+          "overseer-grael",
+          "the-water-crisis",
+          "the-edge-district-ledger"
         ],
         "aliases": [
           "Vash"
@@ -4305,21 +4400,21 @@
     }
   },
   "tendencies": {
-    "strategic": 13.333824726863789,
-    "cerebral": 14.005464738995178,
-    "social": 22.605765074803486,
-    "generous": 2.3074719768483027,
-    "cautious": 4.7332887557913885,
-    "physical": 1.0519091410435224,
-    "risky": 1.1031351250212282,
-    "ruthless": 0.35172257921431377,
-    "carousing": 0.005388834646015107,
-    "amorous": 4.207224511992026,
-    "patient": 0.8711044824025497,
-    "stealth": 0.13632857028492226,
-    "devotion": 0.304646036207496,
-    "craft": 1.0769021714428912,
-    "leadership": 0.6939275526459235
+    "strategic": 13.650467130974889,
+    "cerebral": 14.31394491750729,
+    "social": 21.489605424235062,
+    "generous": 2.1935405479914176,
+    "cautious": 4.499582623474189,
+    "physical": 0.9999711272044984,
+    "risky": 1.048667828223305,
+    "ruthless": 0.33435627686560704,
+    "carousing": 0.005122760935368112,
+    "amorous": 3.999492801712419,
+    "patient": 0.8280936985839237,
+    "stealth": 0.12959734712710422,
+    "devotion": 0.28960413816975084,
+    "craft": 1.0237301267278984,
+    "leadership": 0.6596648797340311
   },
   "aptitudes": [
     "strategist",
@@ -4327,7 +4422,7 @@
     "scholar",
     "orator"
   ],
-  "actionCount": 566,
+  "actionCount": 568,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -4605,8 +4700,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784423822850,
-  "rev": 829,
+  "updatedAt": 1784424251891,
+  "rev": 831,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5568,7 +5663,8 @@
         ],
         "connections": [
           "millbrook",
-          "gen-center"
+          "gen-center",
+          "gen-the-ent-grove"
         ],
         "_gen": true,
         "_mintedAs": "transit",
@@ -5594,24 +5690,30 @@
           "x": 483.2482839825773,
           "y": 379.03253576244833
         }
+      },
+      "gen-the-ent-grove": {
+        "id": "gen-the-ent-grove",
+        "name": "The Ent Grove",
+        "regionId": "valley",
+        "descriptionSeed": "A place the road led to — The Ent Grove. The fiction brought you here before the map knew its name.",
+        "tags": [
+          "transitional"
+        ],
+        "connections": [
+          "gen-waygate"
+        ],
+        "_gen": true,
+        "_mintedAs": "transit",
+        "map": {
+          "x": 439.5117053691912,
+          "y": 333.07074694842095
+        }
       }
     },
     "arc": {}
   },
   "opLossPending": false,
   "establishedFacts": [
-    {
-      "id": "calvar",
-      "text": "Calvar has agreed to travel with Silas and Pell — he will attest as the pre-Transition calibration author outside the Radiant hierarchy, changing Grael's appeal-capture method from functional to defea",
-      "day": 3,
-      "subjectId": "calvar"
-    },
-    {
-      "id": "pell",
-      "text": "Pell has named the shape of her father plainly: he planned for her without telling her he was planning — the specification method taught first so she'd have the language when she arrived. She reads th",
-      "day": 3,
-      "subjectId": "pell"
-    },
     {
       "id": "pell",
       "text": "Silas returned Pell's warmth through Memory's rune-thread on World-day 17 evening — a deliberate act, not words, not a claim: the warmth she carried, given back. Pell received it; her exhale confirmed",
@@ -5839,6 +5941,18 @@
       "text": "Veth Ondra has accepted the open-palm compact and agreed to travel with Silas — destination named as the Raven's Home and the dead warden post, then the valley's water situation. She is folding the stall and will be ready in ten minutes.",
       "day": 6,
       "subjectId": "veth-ondra"
+    },
+    {
+      "id": "veth-stillwater-ondra",
+      "text": "Veth Ondra has been formally introduced to Pell Marsh at the south market row — the party is fully assembled: Silas, Pell, Veth, Siol, and Huginn.",
+      "day": 6,
+      "subjectId": "veth-stillwater-ondra"
+    },
+    {
+      "id": "siol",
+      "text": "Siol has explained the Ent circle's nature: it does not receive formal introductions; it responds to sustained unhurried presence. An Ashwarden may be better placed than most to offer this.",
+      "day": 6,
+      "subjectId": "siol"
     }
   ],
   "practice": {
@@ -5999,7 +6113,7 @@
   "syncedAt": 1784392733860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 388
+    "valley": 390
   },
   "foreclosed": [
     "rootkin",
@@ -6012,7 +6126,8 @@
     "the-low-lamp-inn",
     "old_switchback",
     "gen-waygate",
-    "gen-center"
+    "gen-center",
+    "gen-the-ent-grove"
   ],
   "opLossLog": [
     {
@@ -6056,10 +6171,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-19T01:17:02.847Z",
+      "lastAt": "2026-07-19T01:24:11.890Z",
       "startDay": 18,
       "endDay": 19,
-      "beats": 113,
+      "beats": 115,
       "_recapError": null,
       "recap": "Day eighteen, and Silas Weir moved like a man who'd finally stopped fighting the shape of what he was. On the road he disarmed three opportunists without breaking bones, read the grief sitting behind the broad man's eyes, named it plainly, pressed provisions into their hands, and sent them toward something worth doing — mercy given as instruction, not sentiment. Then he brought the hard people together: Dara, Aldric, Fendt, Mara, Calvar, all of them in the heat of Pell's forge with no exits easy and no pretense left, and in that single evening he turned a valley's quiet panic into four working threads — engineering, logistics, supply, accounts — each with a named lead and a direction to face. The crisis didn't end, but it stopped being formless, and that was his doing."
     }
@@ -6130,8 +6245,8 @@
   },
   "_intentAsked": null,
   "_turnApplyError": {
-    "at": "2026-07-18T21:11:25.563Z",
+    "at": "2026-07-19T01:21:00.411Z",
     "message": "Cannot create property 'engagementScore' on boolean 'true'",
-    "stack": "TypeError: Cannot create property 'engagementScore' on boolean 'true' <-     at recordAttention (https://orkstrtdkaos.github.io/Singularity/engine/generate.js:340:21) <-     at noteGeneratedAttention (https://orkstrtdkaos.github.io/Singularity/app.js?v=1.8.119:1511:16) <-     at applyTurn (https://orkstrtdkaos.github.io/Singularity/app.js?v=1.8.119:2941:7)"
+    "stack": "TypeError: Cannot create property 'engagementScore' on boolean 'true' <-     at recordAttention (https://orkstrtdkaos.github.io/Singularity/engine/generate.js:340:21) <-     at noteGeneratedAttention (https://orkstrtdkaos.github.io/Singularity/app.js?v=1.8.123:1511:16) <-     at applyTurn (https://orkstrtdkaos.github.io/Singularity/app.js?v=1.8.123:2956:7)"
   }
 }

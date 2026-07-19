@@ -8,7 +8,7 @@
   "whyHere": "You noticed the paying. You came out to see whether there was another way to be a mind.",
   "background": "drifter",
   "level": 1,
-  "xp": 38,
+  "xp": 41,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -44,13 +44,13 @@
   "alignment": {
     "spectrumId": -0.1382253125,
     "body_mind": 0.0485,
-    "concrete_abstract": 0.0468125
+    "concrete_abstract": 0.059471875
   },
   "attunement": 1,
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 51,
+  "energy": 45,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -84,11 +84,6 @@
   "activeScene": {
     "locationId": "old_switchback",
     "turns": [
-      {
-        "player": null,
-        "summary": "Saehara enters the Cogitarium at morning — a tower of brilliant, slowly-dimming minds — and takes in the cold, the chalk, and the forgetting.",
-        "narration": "The Cogitarium announces itself before you see it: a low, persistent hum that lives behind the ears rather than in them, and a faint smell of ozone and old parchment. Then the structure itself resolves from the morning mist — pale stone terraces stacked like an argument, each level cantilevered slightly further than the last, as if the building keeps reaching upward and forgetting to stop. Narrow windows glow with a bluish inner light even in daylight. Kon pads at your heel and slows as you approach the outer arch, the fox's coat flickering once with ember-warmth before settling. Not warning-hot. Just noting something.\n\nInside, the entrance hall smells of cold and chalk dust. The ceiling is high enough that sound behaves strangely — your footstep arrives at you a half-beat late, as if the room is thinking before it agrees to echo. A handful of Cogitants drift through the space: robed figures with the unfocused gaze of people whose attention is somewhere interior. One sits cross-legged on the stone floor mid-hall, eyes open, lips moving with no sound. Another stands before a wall covered in looping notation and has not moved since you entered. They are thin. All of them are thin in a way that reads less like poverty than like sustained forgetting.\n\nYou are Saehara Makashi — ronin, nomad, a man writing his life as he lives it. You carry a traveler's pack and a waterskin that has grown more precious by the week as the Echo River runs gray-green on bad mornings. The water crisis is not here yet, not visibly, but the Cogitarium has its own quiet emergency: these people are brilliant and they are starving because eating requires them to remember they have bodies. You are a stranger in this place — no reputation precedes you, and the few glances you draw are less suspicious than simply absent, the way a genius looks at a chair.\n\nKon sits precisely at the edge of a shaft of window-light, tail wrapped over its paws, watching the cross-legged Cogitant with what might be professional curiosity."
-      },
       {
         "player": "I'll reach down to my waist grasping for the sturdy handle and tsuba of my katana just to remind myself that it is still present.",
         "summary": "Saehara grounds himself with a hand on his katana while Kon studies the Cogitants and the hall stays oblivious to their arrival.",
@@ -283,44 +278,38 @@
         "player": "Push the door open slowly and enter — let whoever is inside register your presence before you speak",
         "summary": "Saehara enters the third terrace and finds the lost Cogitant alive at the center of the room — seated, chalk-covered, arm moving in ceaseless repetition across a board.",
         "narration": "You press two fingers to the door and push. The hinges give without sound — whoever maintains this tower oils what matters — and the third terrace opens in front of you.\n\nThe room is long and low-ceilinged, a single window at the far end letting in the last of the evening's grey-orange light. Every surface is covered in chalk. Not the careful notation of the entrance hall, not Araveth's watershed arcs — this is something denser, more compressed, lines running over lines where the available stone has run out and the work continued anyway. A pallet in the corner has been untouched long enough to gather chalk-dust. A cup stands beside it, empty and dry.\n\nThe Cogitant is in the center of the room. She is seated on the bare floor, legs folded under her, back to the door. Her robe is grey with chalk from hem to shoulder. Her right arm moves: reaches forward to the low board she has dragged to arm's length in front of her, makes a mark, resets. Reaches, marks, resets. The four-second interval. She has been doing this so long the floor around her has a faint groove in the chalk-dust where her arm travels. She does not turn. She does not pause.\n\nKon stops just inside the threshold, one forepaw raised, coat a steady quiet warmth — not the hot alarm of a Precursor site, not the sharp heat of something wrong. Something between attention and recognition, as though the room is familiar to the fox in a way it shouldn't be. Ossian halts behind your shoulder, says nothing. The dragging sound continues, exactly as it has for four days, possibly longer."
+      },
+      {
+        "player": "Use Order-Sense on the room itself — read the structure of what she's been building across every surface",
+        "summary": "Saehara used Order-Sense on the third-terrace room and pulled a partial read — a single continuous calculation, four days old, built outward from a fixed coordinate that marks something in the valley with surgical precision. Ossian, stepping in beside her, named it: the source. The third-terrace Cogitant alive, unreachable, still working. Scene closes on that word.",
+        "narration": "You let your gaze go wide rather than deep — take the whole room at once rather than any single chalk line — and Order-Sense comes in thin and effortful, the substrate here barely enough to work with. It's like reading by bad light: fragments arrive, not the whole.\n\nWhat you can pull together: there is a structure here. The notation isn't madness or deterioration — it has load-bearing points, the same way a good argument does. You can see axes, something like a coordinate system, repeated markers that anchor one surface's work to the next. She has been building a model. Of what, exactly, the thinness of the lattice won't let you reach — the connective tissue between the sections slips away before you can hold it. But the shape of the endeavor is clear enough: this is a single continuous calculation, not scattered thinking, and it has been growing outward from a fixed center point on the board in front of her for four days without a break.\n\nThe center point, directly beneath her chalk hand, is the only clear thing you can hold. It is a coordinate. A location. Somewhere in the valley, marked with a precision that makes your jaw tighten — this is not a rough estimate. Someone spent four sleepless days narrowing something down to a point.\n\nOssian steps up beside you, just inside the threshold. They look at the walls the way you just did. Then, very quietly, they say: \"She was working on the source.\""
       }
     ],
     "lastTurn": {
-      "narration": "You press two fingers to the door and push. The hinges give without sound — whoever maintains this tower oils what matters — and the third terrace opens in front of you.\n\nThe room is long and low-ceilinged, a single window at the far end letting in the last of the evening's grey-orange light. Every surface is covered in chalk. Not the careful notation of the entrance hall, not Araveth's watershed arcs — this is something denser, more compressed, lines running over lines where the available stone has run out and the work continued anyway. A pallet in the corner has been untouched long enough to gather chalk-dust. A cup stands beside it, empty and dry.\n\nThe Cogitant is in the center of the room. She is seated on the bare floor, legs folded under her, back to the door. Her robe is grey with chalk from hem to shoulder. Her right arm moves: reaches forward to the low board she has dragged to arm's length in front of her, makes a mark, resets. Reaches, marks, resets. The four-second interval. She has been doing this so long the floor around her has a faint groove in the chalk-dust where her arm travels. She does not turn. She does not pause.\n\nKon stops just inside the threshold, one forepaw raised, coat a steady quiet warmth — not the hot alarm of a Precursor site, not the sharp heat of something wrong. Something between attention and recognition, as though the room is familiar to the fox in a way it shouldn't be. Ossian halts behind your shoulder, says nothing. The dragging sound continues, exactly as it has for four days, possibly longer.",
-      "sceneSummary": "Saehara enters the third terrace and finds the lost Cogitant alive at the center of the room — seated, chalk-covered, arm moving in ceaseless repetition across a board.",
+      "narration": "You let your gaze go wide rather than deep — take the whole room at once rather than any single chalk line — and Order-Sense comes in thin and effortful, the substrate here barely enough to work with. It's like reading by bad light: fragments arrive, not the whole.\n\nWhat you can pull together: there is a structure here. The notation isn't madness or deterioration — it has load-bearing points, the same way a good argument does. You can see axes, something like a coordinate system, repeated markers that anchor one surface's work to the next. She has been building a model. Of what, exactly, the thinness of the lattice won't let you reach — the connective tissue between the sections slips away before you can hold it. But the shape of the endeavor is clear enough: this is a single continuous calculation, not scattered thinking, and it has been growing outward from a fixed center point on the board in front of her for four days without a break.\n\nThe center point, directly beneath her chalk hand, is the only clear thing you can hold. It is a coordinate. A location. Somewhere in the valley, marked with a precision that makes your jaw tighten — this is not a rough estimate. Someone spent four sleepless days narrowing something down to a point.\n\nOssian steps up beside you, just inside the threshold. They look at the walls the way you just did. Then, very quietly, they say: \"She was working on the source.\"",
+      "sceneSummary": "Saehara used Order-Sense on the third-terrace room and pulled a partial read — a single continuous calculation, four days old, built outward from a fixed coordinate that marks something in the valley with surgical precision. Ossian, stepping in beside her, named it: the source. The third-terrace Cogitant alive, unreachable, still working. Scene closes on that word.",
       "choices": [
         {
-          "label": "Step into her line of sight — place yourself where she could see you if her eyes were tracking",
+          "label": "Ask Ossian directly — what source, and how long has she been working on this specific coordinate",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "careful"
+            "persuade"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Read what she's marking on the board — get close enough to see the notation before you speak",
+          "label": "Step closer and try to read the center-point coordinate precisely — exact location in the valley",
           "attribute": "mental",
           "subAttribute": "reason",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Use Order-Sense on the room itself — read the structure of what she's been building across every surface",
-          "attribute": "mental",
-          "subAttribute": "insight",
           "axes": {
-            "concrete_abstract": 0.3
+            "chaos_order": 0.4
           },
           "difficulty": 15,
           "intentTags": [
@@ -328,96 +317,130 @@
           ],
           "abilityId": "order_sense",
           "energyCost": 3,
-          "trivial": false
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Speak quietly — say your name, say you're from below, give her something to anchor to without demanding she surface",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Look at the room through Kon — watch where the fox's attention goes, if it goes anywhere",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "calm",
-            "careful"
+            "scout"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Try to reach the Cogitant directly — crouch to her level and say something, anything, to break the repetition",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": 15,
+          "intentTags": [
+            "calm",
+            "persuade"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "characterDeltas": {
         "health": 0,
-        "energy": 0
+        "energy": -3
       },
       "scene": {
-        "setting": "Third terrace of the Cogitarium — long, low-ceilinged stone room, every surface covered in chalk notation dense enough to run over itself. A single window at the far end admits the last grey-orange evening light. A pallet in the corner is chalk-dusty and unused. The door stands open behind Saehara.",
+        "setting": "Third terrace of the Cogitarium — long, low-ceilinged stone room, every surface covered in dense chalk notation running over itself. A single window at the far end holds the last grey-orange evening light. A pallet in the corner is chalk-dusty and unused. The door stands open behind Saehara. Ossian has stepped just inside the threshold.",
         "npcsPresent": [
           {
             "name": "Third-Terrace Cogitant",
-            "state": "Seated on the bare floor at center room, back to the door, chalk-grey robe from hem to shoulder — right arm moving in steady four-second repetition: reach, mark, reset. Has not turned or paused."
+            "state": "Seated at the room's center, chalk-grey robe, right arm moving in the same four-second repetition across the low board — has not registered the entry or Ossian's words."
           },
           {
             "name": "Ossian",
-            "state": "Standing just behind Saehara's shoulder in the doorway — silent, watching."
+            "state": "Just inside the threshold beside Saehara — has spoken two quiet words ('She was working on the source') and is watching the walls."
           },
           {
             "name": "Kon",
-            "state": "Just inside the threshold, one forepaw raised, coat a steady quiet warmth — attention fixed on the room, not alarmed."
+            "state": "At Saehara's heel, one forepaw raised, coat a steady warm coal-red — attentive to the room, not alarmed."
           }
         ],
         "objects": [
-          "Low chalk board — dragged to arm's length before the Cogitant, surface covered in notation",
-          "Chalk-groove in the floor dust — where her arm has traveled, over and over",
+          "Low chalk board — dragged to arm's length before the Cogitant, its center-point notation the anchor of the whole room's structure",
+          "Chalk-groove in the floor dust — worn by four days of the same arm movement",
           "Dry empty cup beside the unused pallet",
           "Traveler's Pack on Saehara's shoulders",
           "Waterskin — secured",
           "Katana at Saehara's waist"
         ],
         "threads": [
-          "Third-terrace Cogitant: alive, seated, working — has not registered the entry; nature and content of her notation unknown",
-          "Kon's warmth: steady and attentive, not alarm — the room reads as familiar to the fox in some way",
-          "Ossian has still not named who this Cogitant is",
-          "The notation covers every surface — what she has been building for four days is visible but unread"
+          "Ossian has named the work: 'the source' — what source, and what exactly the coordinate marks, is unspoken",
+          "The center-point coordinate is precise enough to locate something in the valley — the full read was partial; the exact location slipped away",
+          "The Cogitant is alive and still working — unreachable, unknown name still unspoken by Ossian",
+          "Kon is steady and warm — not alarmed, but attentive"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
-          "npcId": "third-terrace-cogitant",
-          "name": "Third-Terrace Cogitant",
-          "role": "Cogitant — the one missing from the third terrace for four days",
-          "description": "Seated on the bare floor at the center of a chalk-covered room, robe grey from hem to shoulder, arm moving in ceaseless four-second repetition across a low board — alive, working, unreachable.",
-          "note": "Saehara entered the room. The Cogitant did not turn or pause.",
-          "learned": [
-            "Alive and physically functional — sustained repetition, not collapse",
-            "Has been working long enough that the floor-dust shows a groove where her arm travels",
-            "The pallet in the corner is chalk-dusty and unused — she has not slept",
-            "The cup beside the pallet is empty and dry — she has not drunk"
-          ],
-          "status": "active",
-          "statusNote": "Seated on the third-terrace floor of the Cogitarium — alive, working in ceaseless repetition, no external awareness registered."
-        },
-        {
           "op": "update",
           "npcId": "ossian",
           "name": "Ossian",
-          "note": "Followed Saehara into the doorway — standing behind the shoulder, silent. Has not named the Cogitant.",
+          "note": "Stepped inside the threshold and named the third-terrace work: 'She was working on the source.' Two words, quietly spoken, watching the walls.",
+          "learned": [
+            "Named the third-terrace Cogitant's four-day project as work on 'the source' — spoken without elaboration"
+          ],
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "On the third-terrace threshold behind Saehara — watching, silent, not leading."
+          "statusNote": "Just inside the third-terrace threshold — has named the work, not yet elaborated."
+        },
+        {
+          "op": "update",
+          "npcId": "third-terrace-cogitant",
+          "name": "Third-Terrace Cogitant",
+          "note": "Order-Sense partial read: her notation is a single continuous calculation built outward from a fixed coordinate — a precise location somewhere in the valley, four days of sleepless work to narrow it. Ossian calls it 'the source.'",
+          "learned": [
+            "Her four-day notation is a single structured model built outward from a fixed coordinate — a precise valley location",
+            "Ossian identifies her project as work on 'the source'"
+          ],
+          "status": "active",
+          "statusNote": "Seated on the third-terrace floor — alive, arm moving in ceaseless four-second repetition, unreachable. Her work is a coordinate-locked model Ossian calls 'the source.'"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "third-terrace-cogitant",
-          "label": "Third-Terrace Cogitant",
-          "kind": "person",
+          "topic": "the-third-terrace",
+          "label": "The Third Terrace",
+          "kind": "mystery",
           "entityId": "third-terrace-cogitant",
-          "fact": "Found alive on the third-terrace floor — seated, chalk-covered from hem to shoulder, arm moving in ceaseless four-second repetition across a low board. Pallet unused and dust-covered. Cup empty and dry. Has not surfaced to register entry. Kon's warmth was steady and attentive, not alarmed — the room read as somehow familiar to the fox.",
+          "fact": "Order-Sense partial read: the notation is a single continuous structured calculation, four days old, built outward from a fixed coordinate — a precise location somewhere in the valley. Ossian stepped in and named it: 'She was working on the source.' The exact location slipped past the partial read.",
           "links": [
             "cogitarium",
             "cogitants",
             "third-terrace-collapse",
-            "ossian"
+            "ossian",
+            "the-cogitariums-calculated-crisis",
+            "the-four-conditions-source-remediation"
+          ]
+        },
+        {
+          "topic": "the-four-conditions-source-remediation",
+          "label": "The Four Conditions (Source Remediation)",
+          "kind": "mystery",
+          "fact": "The third-terrace Cogitant has spent four days narrowing a coordinate — Ossian calls it 'the source.' The precision of the model suggests she may have calculated the site's exact location, one of the four conditions for remediation.",
+          "links": [
+            "cogitarium",
+            "cogitants",
+            "cogitarium-crisis",
+            "the-cogitariums-calculated-crisis",
+            "the-third-terrace"
           ]
         }
       ],
@@ -425,53 +448,44 @@
         {
           "op": "progress",
           "questId": "third-terrace-collapse",
-          "note": "Saehara entered the third terrace. The missing Cogitant is alive — seated on the bare floor, arm moving in sustained repetition across a low board. Not collapse, not distress. Unreachable but present. What she's been building for four days covers every surface."
+          "note": "The third-terrace Cogitant's four-day project is partially read: a structured model built toward a precise valley coordinate — Ossian calls it 'the source.' The coordinate itself remains just out of reach. The Cogitant is alive and still working."
         }
       ],
-      "placeUpdates": [
-        {
-          "subPlace": {
-            "name": "Third Terrace",
-            "note": "Long low-ceilinged room — every wall, board, and surface covered in dense chalk notation. A Cogitant found here after four days unseen: seated, working without pause, pallet unused, cup dry.",
-            "visited": true
-          }
-        }
-      ],
+      "sceneEnded": false,
       "timeOps": {
-        "hoursPassed": 0.1,
-        "why": "Crossing the threshold — a moment, no more."
-      },
-      "sceneEnded": false
+        "hoursPassed": 0.25,
+        "why": "A careful read of the room — brief, measured."
+      }
     },
     "sceneState": {
-      "setting": "Third terrace of the Cogitarium — long, low-ceilinged stone room, every surface covered in chalk notation dense enough to run over itself. A single window at the far end admits the last grey-orange evening light. A pallet in the corner is chalk-dusty and unused. The door stands open behind Saehara.",
+      "setting": "Third terrace of the Cogitarium — long, low-ceilinged stone room, every surface covered in dense chalk notation running over itself. A single window at the far end holds the last grey-orange evening light. A pallet in the corner is chalk-dusty and unused. The door stands open behind Saehara. Ossian has stepped just inside the threshold.",
       "npcsPresent": [
         {
           "name": "Third-Terrace Cogitant",
-          "state": "Seated on the bare floor at center room, back to the door, chalk-grey robe from hem to shoulder — right arm moving in st"
+          "state": "Seated at the room's center, chalk-grey robe, right arm moving in the same four-second repetition across the low board —"
         },
         {
           "name": "Ossian",
-          "state": "Standing just behind Saehara's shoulder in the doorway — silent, watching."
+          "state": "Just inside the threshold beside Saehara — has spoken two quiet words ('She was working on the source') and is watching "
         },
         {
           "name": "Kon",
-          "state": "Just inside the threshold, one forepaw raised, coat a steady quiet warmth — attention fixed on the room, not alarmed."
+          "state": "At Saehara's heel, one forepaw raised, coat a steady warm coal-red — attentive to the room, not alarmed."
         }
       ],
       "objects": [
-        "Low chalk board — dragged to arm's length before the Cogitant, surface covered i",
-        "Chalk-groove in the floor dust — where her arm has traveled, over and over",
+        "Low chalk board — dragged to arm's length before the Cogitant, its center-point ",
+        "Chalk-groove in the floor dust — worn by four days of the same arm movement",
         "Dry empty cup beside the unused pallet",
         "Traveler's Pack on Saehara's shoulders",
         "Waterskin — secured",
         "Katana at Saehara's waist"
       ],
       "threads": [
-        "Third-terrace Cogitant: alive, seated, working — has not registered the entry; nature and content of her notation unknown",
-        "Kon's warmth: steady and attentive, not alarm — the room reads as familiar to the fox in some way",
-        "Ossian has still not named who this Cogitant is",
-        "The notation covers every surface — what she has been building for four days is visible but unread"
+        "Ossian has named the work: 'the source' — what source, and what exactly the coordinate marks, is unspoken",
+        "The center-point coordinate is precise enough to locate something in the valley — the full read was partial; the exact location slipped away",
+        "The Cogitant is alive and still working — unreachable, unknown name still unspoken by Ossian",
+        "Kon is steady and warm — not alarmed, but attentive"
       ]
     }
   },
@@ -524,10 +538,91 @@
         "Saehara is moving to the stairwell with Ossian — the dragging sound from above continues; the climb begins now.",
         "Reached the third-terrace landing — dragging sound confirmed within the half-open room; Ossian and Kon both reading it as outside normal parameters.",
         "Read the Fight confirms: not violence, not acute collapse — a body at sustained, controlled, inhuman repetition. The Cogitant is alive and working.",
-        "Saehara entered the third terrace. The missing Cogitant is alive — seated on the bare floor, arm moving in sustained repetition across a low board. Not collapse, not distress. Unreachable but present. What she's been building for four days covers every surface."
+        "Saehara entered the third terrace. The missing Cogitant is alive — seated on the bare floor, arm moving in sustained repetition across a low board. Not collapse, not distress. Unreachable but present. What she's been building for four days covers every surface.",
+        "The third-terrace Cogitant's four-day project is partially read: a structured model built toward a precise valley coordinate — Ossian calls it 'the source.' The coordinate itself remains just out of reach. The Cogitant is alive and still working."
       ],
       "aliases": [],
       "startedAt": "2026-07-16T03:39:50.283Z"
+    },
+    {
+      "id": "the-name-that-travels",
+      "title": "The Name That Travels",
+      "structured": true,
+      "status": "active",
+      "premise": "A blade honed as sharply as Saehara's does not stay secret. The way he reads a room before he draws, the stillness of the wicker-hatted ronin with the kanji for Honor on his back — word of it travels the way wind carries a scent. And where a name travels, others come to measure themselves against it. This is the oldest road a swordsman walks: musha shugyō, the warrior's pilgrimage, in which the blade is refined not in the dojo but on the road, against every hand that rises to test it. Saehara did not ask for challengers. His skill asked for them.",
+      "stakes": "Every duel won carves the name deeper — and a deeper name draws a longer line of those who would make THEIR name by ending his. This is the swordsman's paradox, and it is the engine of his arc: prestige is not a prize he keeps but a fire he feeds, and each victory raises the stakes of the next challenge. He can climb it (become the name every duelist measures against — the sword-saint of the valley), redefine it (the ronin who writes rather than kills — victory by refusing the frame, filling his book instead of a graveyard), or be undone by it (meet the one blade faster than his, and learn what his name costs). The book he is writing will have a title by the end. What the title IS depends on which road he walks.",
+      "axis": "mechanical_spiritual",
+      "traditions": [
+        "cogitant",
+        "syllogist",
+        "blazeborn"
+      ],
+      "giver": null,
+      "legend": null,
+      "region": "valley",
+      "tier": "legendary",
+      "arcId": "saehara_prestige_arc",
+      "locationId": null,
+      "stages": [
+        {
+          "id": "s1",
+          "objective": "Answer (or decline) the first challenger who sought you by name.",
+          "condition": "A duelist finds Saehara specifically — not a random encounter, but someone who came because of the name. Face them (skill battle) or turn them away (there is always a decline path; even refusing writes something).",
+          "change": "Codex: the name has begun to travel. Word of the ronin with the Honor-kanji is loose in the valley."
+        },
+        {
+          "id": "s2",
+          "objective": "Meet the challenge of a ryūha — a sword-school defending its lineage.",
+          "condition": "A school champion or rival ronin challenges not just Saehara but what his nameless, masterless way IMPLIES about their tradition. The duel is about more than the blade — it's about whether a ronin's road can stand against a lineage.",
+          "change": "Codex: the ryūha have a position on Saehara now — some hostile, some curious. A rival may become a sworn one, or a student."
+        },
+        {
+          "id": "s3",
+          "objective": "Face the challenge that decides what your name means.",
+          "condition": "The defining duel — a blade (or a fire, or a mind) that may genuinely be his equal or better. This is the Ganryūjima beat: the one that the book will be about. The GM lets Saehara's whole arc of choices — how he's won, whom he's spared, whether he's killed for the name or refused to — shape who this last challenger is and what the duel costs.",
+          "change": "Codex: the title of the book is written. Whether it reads as a saint's name, a killer's, or a teacher's is Saehara's to earn."
+        }
+      ],
+      "routes": [
+        {
+          "id": "kensei",
+          "name": "Become the name (the sword-saint's road)",
+          "note": "Win, and keep winning, until the name IS the measure — every duelist in the valley sharpens against the memory of him. The classic ascent; it asks whether a name won on others' defeats is a thing worth becoming."
+        },
+        {
+          "id": "brush",
+          "name": "The ronin who writes (redefine the frame)",
+          "note": "His true motivation — the book. Victory by REFUSING the duel's terms: sparing, teaching, out-thinking (cogitant/syllogist) rather than out-cutting. The pen fills instead of the grave. The rarest road, and the one his own bio points toward — 'another way to be a mind.'"
+        },
+        {
+          "id": "ganryu",
+          "name": "The blade that costs (undone by the name)",
+          "note": "Meet the one faster hand, and learn what the name was worth. Not a fail-state — a tragic/tempering road; the book's title becomes something humbler and truer for it."
+        }
+      ],
+      "outcomes": [
+        {
+          "id": "saint",
+          "narration": [],
+          "effects": null
+        },
+        {
+          "id": "teacher",
+          "narration": [],
+          "effects": null
+        },
+        {
+          "id": "tempered",
+          "narration": [],
+          "effects": null
+        }
+      ],
+      "stageIndex": 0,
+      "completedStages": [],
+      "progress": [],
+      "aliases": [],
+      "startedAt": "2026-07-19T00:03:32.576Z",
+      "startedWorldDay": 19
     }
   ],
   "npcRegistry": {
@@ -542,7 +637,6 @@
       },
       "relationship": 0,
       "history": [
-        "[d1] Saehara proposed a division of labor — Waymarker runner for resupply, Saehara taking the third terrace. Ossian is deliberating; no answer given yet.",
         "[d1] Delivered survival estimates unprompted by Saehara's framing — had the numbers already. Eight to twelve days for Araveth and upper-terrace Cogitants; two to three for the fallen wo",
         "[d1] Gave directions to Waymarker: eleven kilometers northeast, junction cairn then dry-stone wall, three hours. Confirmed no map exists for external use. Calculated that carrying the f",
         "[d1] Named the runner (Brenn — freckled, jaw scar, east archway) and the Waymarker contact (Lenten the builder). Explained the payment was notation — applied theoretical work. Raised a ",
@@ -551,17 +645,18 @@
         "[d1] Received the fallen Cogitant's status — acknowledged the two-day window margin as 'acceptable', cited Lenten's competence as accounting for forty percent of the variance. Rose and ",
         "[d1] Climbed the stairs behind Saehara in silence — voice went careful on the third-terrace landing; admitted they have not heard the dragging sound before",
         "[d1] Held silent on the landing while Saehara read the room — listening, not leading.",
-        "[d1] Followed Saehara into the doorway — standing behind the shoulder, silent. Has not named the Cogitant."
+        "[d1] Followed Saehara into the doorway — standing behind the shoulder, silent. Has not named the Cogitant.",
+        "[d1] Stepped inside the threshold and named the third-terrace work: 'She was working on the source.' Two words, quietly spoken, watching the walls."
       ],
       "knownFacts": [
-        "No external map exists",
         "The runner's name was Brenn — young, freckled, pronounced scar along his left jaw",
         "Brenn came to the east archway and was paid in notation: tensile load calculations, grain storage optimization",
         "The contact at Waymarker is Lenten — a builder who used the Cogitarium's applied theoretical work",
         "Ossian's first priority on Saehara's return is the fallen woman's timeline, not the logistics",
         "The fallen Cogitant is alive and receiving care at Lenten's shed — two-day window still running",
         "Lenten will escalate if her condition changes",
-        "Ossian has not heard the third-terrace dragging sound before — it is outside their model"
+        "Ossian has not heard the third-terrace dragging sound before — it is outside their model",
+        "Named the third-terrace Cogitant's four-day project as work on 'the source' — spoken without elaboration"
       ],
       "skillsObserved": [
         "systematic elimination of alternatives",
@@ -572,7 +667,7 @@
         "resource-state assessment under uncertainty"
       ],
       "status": "active",
-      "statusNote": "On the third-terrace threshold behind Saehara — watching, silent, not leading.",
+      "statusNote": "Just inside the third-terrace threshold — has named the work, not yet elaborated.",
       "lastSeen": {
         "locationId": "old_switchback",
         "day": 1
@@ -687,7 +782,9 @@
       "lastSeen": {
         "locationId": "the_cogitarium",
         "day": 1
-      }
+      },
+      "gender": "woman",
+      "pronouns": "she/her"
     },
     "third-terrace-cogitant": {
       "id": "third-terrace-cogitant",
@@ -700,20 +797,25 @@
       },
       "relationship": 0,
       "history": [
-        "[d1] Saehara entered the room. The Cogitant did not turn or pause."
+        "[d1] Saehara entered the room. The Cogitant did not turn or pause.",
+        "[d1] Order-Sense partial read: her notation is a single continuous calculation built outward from a fixed coordinate — a precise location somewhere in the valley, four days of sleepless work to narrow it. Ossian calls it 'the source.'"
       ],
       "knownFacts": [
         "Alive and physically functional — sustained repetition, not collapse",
         "Has been working long enough that the floor-dust shows a groove where her arm travels",
-        "The pallet in the corner is chalk-dusty and unused — she has not slept"
+        "The pallet in the corner is chalk-dusty and unused — she has not slept",
+        "Her four-day notation is a single structured model built outward from a fixed coordinate — a precise valley location",
+        "Ossian identifies her project as work on 'the source'"
       ],
       "skillsObserved": [],
       "status": "active",
-      "statusNote": "Seated on the third-terrace floor of the Cogitarium — alive, working in ceaseless repetition, no external awareness registered.",
+      "statusNote": "Seated on the third-terrace floor — alive, arm moving in ceaseless four-second repetition, unreachable. Her work is a coordinate-locked model Ossian calls 'the source.'",
       "lastSeen": {
         "locationId": "old_switchback",
         "day": 1
-      }
+      },
+      "gender": "woman",
+      "pronouns": "she/her"
     }
   },
   "placeMemory": {
@@ -736,7 +838,8 @@
           "name": "Lenten's Long Shed",
           "day": 1,
           "visited": true,
-          "note": "The builder's working shed at the far edge of the central work-yard — wide doors, draw-plane sound, fresh timber smell"
+          "note": "The builder's working shed at the far edge of the central work-yard — wide doors, draw-plane sound, fresh timber smell",
+          "parentId": "the_cogitarium"
         }
       }
     },
@@ -751,7 +854,8 @@
           "name": "Third Terrace",
           "day": 1,
           "visited": true,
-          "note": "Long low-ceilinged room — every wall, board, and surface covered in dense chalk notation. A Cogitant found here after fo"
+          "note": "Long low-ceilinged room — every wall, board, and surface covered in dense chalk notation. A Cogitant found here after fo",
+          "parentId": "old_switchback"
         }
       }
     }
@@ -808,12 +912,28 @@
         "day": 1,
         "worldDay": 17,
         "text": "Lenten: Lenten spent part of the evening re-walking a section of the coldest stretch of the supply route alone, muttering figures under his breath — not to recalculate anything, but to remind himself what the numbers actually feel like when the wind is in your face."
+      },
+      {
+        "day": 1,
+        "worldDay": 18,
+        "text": "This reaches your area — Two road opportunists at the limestone bend were disarmed and sent to Mara Wells in Millbrook for honest work — Silas Weir's name given as introduction (near millbrook)",
+        "impactsLocal": true
+      },
+      {
+        "day": 1,
+        "worldDay": 18,
+        "text": "Lenten: Lenten spent the evening tallying last season's spoilage figures by hand, making a clean copy to press into the hands of whoever calls the next planning meeting — evidence that the route's cost speaks for itself, in numbers no one sat at a desk produced."
+      },
+      {
+        "day": 1,
+        "worldDay": 19,
+        "text": "Lenten: Lenten spent the evening re-marking her worn route maps with fresh charcoal, underlining the three stretches where cold and load together broke two carriers last winter — her quiet way of preparing evidence no committee meeting can ignore."
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-17T19:34:17.603Z",
-    "lastTickWorldDay": 17,
-    "lastCanonWorldDay": 17
+    "lastSharedReadAt": "2026-07-19T00:02:58.311Z",
+    "lastTickWorldDay": 19,
+    "lastCanonWorldDay": 19
   },
   "domains": {
     "primary": "lattice",
@@ -937,7 +1057,8 @@
         "label": "The Four Conditions (Source Remediation)",
         "kind": "mystery",
         "facts": [
-          "[d1] The Cogitarium calculated source-remediation requires: (1) direct interface with the site's instruction architecture; (2) pre-Transition override syntax; (3) sufficient nanite-dense substrate at the s"
+          "[d1] The Cogitarium calculated source-remediation requires: (1) direct interface with the site's instruction architecture; (2) pre-Transition override syntax; (3) sufficient nanite-dense substrate at the s",
+          "[d1] The third-terrace Cogitant has spent four days narrowing a coordinate — Ossian calls it 'the source.' The precision of the model suggests she may have calculated the site's exact location, one of the four conditions for remediation."
         ],
         "links": [
           "cogitarium-crisis",
@@ -1054,7 +1175,9 @@
         "facts": [
           "[d1] A builder at Waymarker who arranged the supply line with the Cogitarium. Paid in notation — applied theoretical work. The name Saehara should use if there is doubt at Waymarker.",
           "[d1] Builder at Waymarker — the one who made the Cogitarium's supply line work, and who knows exactly what it cost to make it work",
-          "[d1] [while away] Lenten spent part of the evening re-walking a section of the coldest stretch of the supply route alone, muttering figures under his breath — not to recalculate anything, but to remind him"
+          "[d1] [while away] Lenten spent part of the evening re-walking a section of the coldest stretch of the supply route alone, muttering figures under his breath — not to recalculate anything, but to remind him",
+          "[d1] [while away] Lenten spent the evening tallying last season's spoilage figures by hand, making a clean copy to press into the hands of whoever calls the next planning meeting — evidence that the route's cost speaks for itself, in numbers no one sat at a desk produced.",
+          "[d1] [while away] Lenten spent the evening re-marking her worn route maps with fresh charcoal, underlining the three stretches where cold and load together broke two carriers last winter — her quiet way of preparing evidence no committee meeting can ignore."
         ],
         "links": [
           "waymarker",
@@ -1110,7 +1233,8 @@
         "label": "Third-Terrace Cogitant",
         "kind": "person",
         "facts": [
-          "[d1] Found alive on the third-terrace floor — seated, chalk-covered from hem to shoulder, arm moving in ceaseless four-second repetition across a low board. Pallet unused and dust-covered. Cup empty and dr"
+          "[d1] Found alive on the third-terrace floor — seated, chalk-covered from hem to shoulder, arm moving in ceaseless four-second repetition across a low board. Pallet unused and dust-covered. Cup empty and dr",
+          "[d1] Order-Sense partial read: the notation is a single continuous structured calculation, four days old, built outward from a fixed coordinate — a precise location somewhere in the valley. Ossian stepped in and named it: 'She was working on the source.' The exact location slipped past the partial read."
         ],
         "links": [
           "cogitarium",
@@ -1118,7 +1242,9 @@
           "third-terrace-collapse",
           "ossian"
         ],
-        "aliases": [],
+        "aliases": [
+          "The Third Terrace"
+        ],
         "createdDay": 1,
         "entityId": "third-terrace-cogitant",
         "updatedDay": 1
@@ -1126,12 +1252,12 @@
     }
   },
   "tendencies": {
-    "strategic": 19.996122832394413,
-    "social": 6.7453228197161765,
-    "cerebral": 8.543848625311274,
-    "generous": 8.579514872430469,
-    "cautious": 13.248160223923168,
-    "risky": 0.8428749934203057
+    "strategic": 19.496219761584552,
+    "social": 6.576689749223272,
+    "cerebral": 9.330252409678492,
+    "generous": 8.365027000619706,
+    "cautious": 12.916956218325089,
+    "risky": 0.821803118584798
   },
   "aptitudes": [
     "strategist",
@@ -1139,9 +1265,9 @@
     "tactician",
     "stalwart"
   ],
-  "actionCount": 40,
+  "actionCount": 41,
   "grantsVersion": 1,
-  "reconcileVersion": 5,
+  "reconcileVersion": 6,
   "gallery": [
     {
       "kind": "npc",
@@ -1160,8 +1286,8 @@
       "at": "2026-07-16T02:18:04.820Z"
     }
   ],
-  "updatedAt": 1784319229095,
-  "rev": 74,
+  "updatedAt": 1784419504922,
+  "rev": 85,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1258,6 +1384,14 @@
             {
               "worldDay": 17,
               "note": "Lenten spent part of the evening re-walking a section of the coldest stretch of the supply route alone, muttering figures under his breath — not to recalculate anything, but to remind himself what the numbers actually feel like when the wind is in your face."
+            },
+            {
+              "worldDay": 18,
+              "note": "Lenten spent the evening tallying last season's spoilage figures by hand, making a clean copy to press into the hands of whoever calls the next planning meeting — evidence that the route's cost speaks for itself, in numbers no one sat at a desk produced."
+            },
+            {
+              "worldDay": 19,
+              "note": "Lenten spent the evening re-marking her worn route maps with fresh charcoal, underlining the three stretches where cold and load together broke two carriers last winter — her quiet way of preparing evidence no committee meeting can ignore."
             }
           ]
         },
@@ -1269,7 +1403,7 @@
   },
   "regionsKnown": {
     "somatic_reaches": 39,
-    "valley": 1
+    "valley": 2
   },
   "opLossPending": false,
   "establishedFacts": [
@@ -1298,7 +1432,8 @@
     "schemaVersion": 1,
     "uses": {
       "total_focus": 4,
-      "read_the_fight": 4
+      "read_the_fight": 4,
+      "order_sense": 1
     },
     "coActivations": {
       "read_the_fight+total_focus": 1
@@ -1360,10 +1495,21 @@
       "startDay": 17,
       "endDay": 17,
       "beats": 2
+    },
+    {
+      "id": "sess-2",
+      "startedAt": "2026-07-19T00:05:04.919Z",
+      "lastAt": "2026-07-19T00:05:04.919Z",
+      "startDay": 19,
+      "endDay": 19,
+      "beats": 1
     }
   ],
   "knownPlaces": [
     "old_switchback"
   ],
-  "_pendingArrival": null
+  "_pendingArrival": null,
+  "livingCurrentAccess": [],
+  "wildCurrentAccess": [],
+  "braidDiscount": 0
 }

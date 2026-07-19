@@ -456,3 +456,43 @@ Deleted rather than special-cased. Ratchet improved 8 -> 7.
 
 REMAINING: SNG-172 power sources (ruling 2 unblocked the 285-ability classification; largest left),
 SNG-166 §2 renames (now land THROUGH SNG-182), SNG-170 stakes dial (default still yours). -->
+
+---
+
+<!-- status: SNG-183 CAPSTONE COMPLETE_PENDING_REVIEW (CCode 2026-07-19). v1.8.152. Suite green,
+verified by exit code. Results: po/results/20260719_SNG-183_full_accounting.md.
+
+FOUR OF THE SIX LENSES NOW RUN IN npm test. L1 (testOnlyExports/importedNeverCalled) and L4 (loreRef
+gate) already existed. The two that were only ideas are now gates:
+
+  L2 permission-isn't-initiative — ENGINE_MAP gains a third authored column, `what makes it fire`.
+  A module with a real player surface and NONE for a trigger is a capability nothing makes happen —
+  the teacher gate that never fired. Gate requires all THREE columns present or all absent; warns on
+  the L2 shape. 24/55 described (incremental per the accepted split). Verified by flipping gm.js to
+  NONE and watching the warn fire.
+
+  L5 static half — the missing link was DISPATCH. GUARD 2 already checked schema<->salvage parity;
+  wiring_audit now also checks every documented op has a turn.<op> consumer in applyTurn. An op with
+  full wiring that nothing reads is dead on arrival, caught at build. Proven with a phantom op. The
+  runtime _opLedger (SNG-179) is the other half.
+
+  L6 universal-gate-for-a-local-fact — content_ci finds a random encounter whose minDanger exceeds
+  the dangerLevel of every location its tags match. re_toll_bandits is fixed (reaches all 6 tag-homes
+  now). ⚠️ THE CHECK IMMEDIATELY SURFACED A LIVE SECOND INSTANCE THE BATCH HAD NOT FOUND:
+  re_creature_chase, minDanger 3, whose only "wild"-tagged home is dl2 — a predator that can never
+  appear on the one wild road. Ratcheted at 1 and NAMED, because the fix is a number Erik owns (lower
+  the floor or raise a location's danger). A second new instance fails the build.
+
+  L3 guard-in-a-pipe — the ONE lens that cannot be a gate, because it IS the verification layer.
+  Lives as a rule (verify by exit code, no test result across a pipe) in the lens table, and it is
+  the discipline every ship since has followed. Reported as unmechanizable rather than faked.
+
+NOT DONE, DELIBERATELY: the full op->engine->surface connection GRAPH as a single rendered artifact
+(§3d). The pieces exist (registry, dispatch check, authored surface column); I did not want to ship a
+half-derived graph and call it the accounting. Natural next increment.
+
+STILL OPEN AND YOURS: the substrate ruler (my handoff question — does your implementation renormalise
+per region? mine forces drift to ~0 by construction and I believe that is what breaks invariant 1 at
+your radiusWorld scale), SNG-172 power-source classification, the renames themselves (land through
+SNG-182), the stakes-dial default, SNG-179's live instrumented turn for markDefiningMoment, and
+re_creature_chase's danger number. -->

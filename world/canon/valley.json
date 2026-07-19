@@ -263,6 +263,73 @@
         "birthWeight": 23,
         "overtook": "tane-solr"
       }
+    },
+    "pip-cotter-mara-s-errand-runner": {
+      "schemaVersion": 1,
+      "id": "pip-cotter-mara-s-errand-runner",
+      "name": "Pip Cotter, Mara's Errand-Runner",
+      "role": "Child courier and small-task helper for Mara Wells",
+      "homeLocation": "millbrook",
+      "communityId": "valley.millbrook",
+      "personality": {
+        "warmth": 0.8,
+        "trust": 0.75,
+        "candor": 0.9,
+        "patience": 0.3
+      },
+      "spectrum": {
+        "chaos_order": 0.6,
+        "death_life": 0.7,
+        "concrete_abstract": -0.8,
+        "emotional_logical": -0.3
+      },
+      "appearance": "Seven years old, possibly eight — she is unsure and will tell you both ages depending on which she remembers. Wears an oversized blue wool coat that was someone else's first, the cuffs rolled four times and still dragging. Cheeks red from the cold and the running. Clutches whatever she's carrying in both hands like it is the most important object in the world, because Mara said so.",
+      "voiceHints": "Breathless sentences, pauses to swallow air mid-thought. Repeats Mara's instructions almost verbatim before adding her own opinions uninvited. Calls adults by full name because that is what she has heard done. Takes promises seriously and remembers them exactly.",
+      "functions": [
+        "move",
+        "reveal"
+      ],
+      "kit": {
+        "move": "Knows every shortcut between Millbrook's lanes and garden gates — the gap in the Cotter fence, the stepping-stones behind the mill, the path along the east ditch that stays dry into spring.",
+        "reveal": "Absorbs overheard details without meaning to and repeats them with complete accuracy when she trusts the listener, or when she forgets to be careful."
+      },
+      "knowledge": [
+        "The contents of the cloth Mara sent — she memorized Mara's words about it before she left, in case the cloth got wet",
+        "Every house in Millbrook that keeps a dog and which ones bite",
+        "That Mara has been up before dawn three mornings running — Pip noticed because she was also up, feeding the goat",
+        "Which neighbor children are sick this season and which are not — valley gossip absorbed from doorstep conversations while waiting to be let in"
+      ],
+      "wants": "To complete the errand correctly, catch her breath, and be given a small task on the return trip so the journey feels useful twice.",
+      "fears": "Losing or ruining something she was trusted to carry. Being told she arrived too late.",
+      "reactsToReputation": {
+        "trusted-by-mara": "opens up immediately, will answer two questions for every one asked",
+        "unkind-to-children": "goes quiet, delivers the message in the fewest possible words, leaves fast"
+      },
+      "notes": "Not yet aware that she is a reliable source of low-level local intelligence. Mara is aware. Pip is loyal to Mara first and will report any strange treatment back to her without being asked.",
+      "image": "https://image.pollinations.ai/prompt/Seven%20years%20old%2C%20possibly%20eight%20%E2%80%94%20she%20is%20unsure%20and%20will%20tell%20you%20both%20ages%20depending%20on%20which%20she%20remembers.%20Wears%20an%20oversized%20blue%20wool%20coat%20that%20was%20someone%20else's%20first%2C%20the%20cuffs%20rolled%20four%20times%20and%20still%20draggin%2C%20character%20portrait%20of%20Pip%20Cotter%2C%20Mara's%20Errand-Runner%2C%20Child%20courier%20and%20small-task%20helper%20for%20Mara%20Wells.%20Breathless%20sentences%2C%20pauses%20to%20swallow%20air%20mid-thought.%20Repeats%20Mara's%20instructions%20almost%20verbatim%20before%20adding%20her%20own%20opinions%20uninvited.%20Calls%20adults%20by%20full%20name%20because%20that%20is%20what%20she%20has%20heard%20done.%20Takes%20promises%20seriously%20and%20remembers%20them%20exactly.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=14341&nologo=true",
+      "_canon": {
+        "entityId": "pip-cotter-mara-s-errand-runner",
+        "type": "npc",
+        "weight": 11,
+        "rating": "R+",
+        "tier": "canonical",
+        "provenance": {
+          "playerKey": "player-s9z9u1",
+          "characterId": "char-mrhs8286",
+          "locationId": "millbrook",
+          "day": 2,
+          "worldDay": null,
+          "hint": "a girl of seven or eight in an oversized blue wool coat — Mara's errand-runner, practical and out of breath",
+          "why": "The child messenger has just arrived in-scene with a cloth from Mara and needs a stable identity for future encounters"
+        },
+        "contributedBy": {
+          "playerKey": "player-s9z9u1",
+          "characterId": "char-mrhs8286"
+        },
+        "promotedWorldDay": 19,
+        "birthWeight": 7,
+        "overtook": "pip-cotter-mara-s-errand-runner"
+      }
     }
   },
   "variants": [

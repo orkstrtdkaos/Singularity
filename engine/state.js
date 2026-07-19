@@ -4,6 +4,7 @@
 // configured. Content packs always load from the served repo files.
 
 import { reconcileContent } from "./reconcile.js";
+import { applySubstrateField } from "./substrate.js";
 import { loadLegends } from "./legends.js";
 import { buildTraditionIndex } from "./traditions.js";
 
@@ -191,6 +192,17 @@ export async function loadContent() {
   let legends = { roster: [], beats: {}, tiers: {} };
   try { legends = loadLegends(await fetchJSON("content/packs/valley/lore/legends.json")); } catch { /* no legends */ }
   for (const fig of legends.roster) if (fig.id && !npcs[fig.id]) npcs[fig.id] = fig;
+
+  // BATCH-13 §A.6: resolve the geographic substrate field onto the in-memory locations. Density
+  // stops being a flat table of regional averages and becomes a field with authored causes — the
+  // lattice pooled where the Transition never took, withdrew where the Returned completed it.
+  // Stamped onto `location.substrateDensity`, which is the branch `locationDensity` ALREADY reads
+  // first, so nothing downstream changes. The authored files are untouched; an authored override
+  // still wins. 26 sources were inert content until this line existed.
+  try {
+    const stamped = applySubstrateField(locations, substrateModel || {});
+    if (stamped) console.log(`[substrate] field resolved onto ${stamped} location(s) from ${Object.values(locations).filter(l => l.substrateSource).length} authored source(s)`);
+  } catch (e) { console.warn("[substrate] field resolution skipped:", e?.message); } // never block boot on it
 
   const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, challengerPools, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, regions, accords, helpText, substrateModel, romanceGuidance, skillBattle, functionVocabulary, startingLocation: valley.startingLocation };
   // SNG-022: bring every loaded record up to current (derive missing additive fields,

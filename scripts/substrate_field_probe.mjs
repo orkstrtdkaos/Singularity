@@ -22,6 +22,7 @@ const L = readdirSync(d).filter(x => x.endsWith(".json")).map(x => JSON.parse(re
 const byId = Object.fromEntries(L.map(l => [l.id, l]));
 const base = model.substrateDensity || {};
 const SUPPORT = 2.5;
+const RENORM = process.env.RENORM !== "0";   // RENORM=0 -> raw field, no per-region correction
 
 const adj = {};
 const xy = l => [l.map?.x ?? 0, l.map?.y ?? 0];
@@ -62,7 +63,11 @@ export function resolveField() {
     const radius = Number(src.radius);
     const ambient = base[s.regionId];
     if (typeof ambient !== "number") continue;
-    const peak = Number(src.strength) - ambient;      // delta AT the source, vs its OWN region's ambient
+    // BATCH-13 §B: sources are now ±delta against the region background, not an absolute strength.
+    // Erik: "they're basically big auras." That makes the pool-below-ambient inversion structurally
+    // unrepresentable (kind follows the sign) and makes a geographic source the same kind of object
+    // as substrateCharge / substrateAura — a ±magnitude with a reach. One concept, three carriers.
+    const peak = Number(src.delta);
     for (const [id, pd] of reach(s.id, radius * SUPPORT)) {
       const delta = peak * Math.exp(-pd / radius);
       if (src.kind === "sink") sink.set(id, Math.max(sink.get(id) || 0, -delta));
@@ -87,7 +92,7 @@ export function resolveField() {
   const out = new Map();
   for (const [rg, ids] of Object.entries(groups)) {
     const hit = ids.filter(touched);
-    if (!hit.length) { for (const id of ids) out.set(id, raw.get(id)); continue; }
+    if (!RENORM || !hit.length) { for (const id of ids) out.set(id, Math.max(0, Math.min(1, raw.get(id)))); continue; }
     const mean = ids.reduce((a, id) => a + raw.get(id), 0) / ids.length;
     const shift = (base[rg] - mean) * ids.length / hit.length;   // whole correction, borne by the touched
     for (const id of ids) out.set(id, Math.max(0, Math.min(1, raw.get(id) + (touched(id) ? shift : 0))));

@@ -18,7 +18,7 @@ import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, f
 import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates } from "./engine/inventory.js";
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
-import { substrateVerdict, locationDensity, carriedSubstrate } from "./engine/substrate.js"; // SNG-090
+import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources } from "./engine/substrate.js"; // SNG-090 + BATCH-13
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed } from "./engine/art.js";
 import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
@@ -57,7 +57,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.135";
+const APP_VERSION = "1.8.136";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3119,8 +3119,15 @@ function substrateForAction(choice, location) {
   if (!tradition) return null;
   const density = locationDensity(location, CONTENT.substrateModel);
   if (density == null) return null;
-  const carried = carriedSubstrate(character, CONTENT.items, activeCompanions(character, CONTENT.companions));
-  return substrateVerdict({ tradition, density, carried, data: CONTENT.substrateModel });
+  const comps = activeCompanions(character, CONTENT.companions);
+  const carried = carriedSubstrate(character, CONTENT.items, comps);
+  const verdict = substrateVerdict({ tradition, density, carried, data: CONTENT.substrateModel });
+  // §9b invariant 5: when something CARRIED is why the ground reads differently, the receipt must
+  // say which thing. A ward that quietly halves your craft — or a staff that quietly saves it — is
+  // the "cruellest possible bug" the SNG-090 round-2 note names. Attribution rides the verdict.
+  if (carried !== 0) verdict.carriedBy = carriedSubstrateSources(character, CONTENT.items, comps);
+  verdict.carried = carried;
+  return verdict;
 }
 
 /** SNG-116: THE single source of truth for an action's substrate CHANCE penalty — the exact number the
@@ -3277,7 +3284,7 @@ async function onChoice(choice) {
   // SNG-090: surface the substrate when it bit (starved/crowded) — a receipt line + a note the GM
   // narrates so the fiction matches ("the lattice is thin here; your craft runs at a fraction").
   if (substrate && substrate.side !== "full" && substrate.side !== "neutral") {
-    resolution.substrate = { percent: substrate.percent, side: substrate.side };
+    resolution.substrate = { percent: substrate.percent, side: substrate.side, carriedBy: substrate.carriedBy || null };
     pendingSubstrateNote = substrate.side === "starved"
       ? `The lattice is THIN here — the character's craft is running at ~${substrate.percent}% (starved of substrate). Let the effort show the strain; a weapon or mundane means is unaffected.`
       : `The lattice is DENSE and CROWDS the character's craft here — it runs at ~${substrate.percent}% (too much signal is noise). Let it read as interference, not weakness.`;
@@ -6344,7 +6351,11 @@ function renderPlay(turn, opts = {}) {
       const intBit = r.intensity && r.intensity !== "standard" ? ` · <span class="intensity-${esc(r.intensity)}">${esc(r.intensity)}</span>${r.energySpent != null ? ` (${r.energySpent} energy)` : ""}` : "";
       const blBit = r.surgeBacklash ? `<div class="roll-backlash">⚡ surge backlash: ${r.backlash.health} health, ${r.backlash.energy} energy</div>` : "";
       // SNG-090: the substrate receipt — the lattice thin (starved) or crowding (interference) here.
-      const subBit = r.substrate ? `<div class="roll-affinity">${r.substrate.side === "starved" ? "the lattice is thin — your craft ran at" : "the lattice crowds your signal — your craft ran at"} ${r.substrate.percent}% ${infoDot("roll.spectral_fit")}</div>` : "";
+      // BATCH-13 invariant 5: name the CARRIED cause. The ground reading differently because of what
+      // you walked in with is unexplainable at exactly the moment it matters, unless the receipt says so.
+      const carriedBit = (r.substrate?.carriedBy || []).length
+        ? ` <span class="cost">(${esc(r.substrate.carriedBy.map(c => `${c.name} ${c.delta > 0 ? "+" : ""}${c.delta}`).join(", "))})</span>` : "";
+      const subBit = r.substrate ? `<div class="roll-affinity">${r.substrate.side === "starved" ? "the lattice is thin — your craft ran at" : "the lattice crowds your signal — your craft ran at"} ${r.substrate.percent}%${carriedBit} ${infoDot("roll.spectral_fit")}</div>` : "";
       // SNG-084 Ph2: one contextual ⓘ on the roll — why it was hard (novel), suddenly easy (discovery), or the d100-vs-chance basics.
       const rollHelp = r.action?.novel ? infoDot("roll.novel") : (r.usedDiscovery || r.action?.discoveryBonus) ? infoDot("roll.discovery") : infoDot("roll.difficulty");
       // SNG-106: the chance is tappable → the full component breakdown (only when this turn retained one).

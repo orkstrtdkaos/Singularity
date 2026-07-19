@@ -5066,6 +5066,50 @@ await (async () => {
   check("173: recordUse without a day still counts (no caller is broken)", c2.practice.uses.a1 === 1);
 }
 
+// --- BATCH-13 §A.6: the substrate FIELD (pools/sinks over the connection graph) ---
+{
+  const sb = await import("../engine/substrate.js");
+  const model = { substrateDensity: { r1: 0.50, r2: 0.50 } };
+  // A—B—C in one region; D in another, sharing A's coordinates but NOT connected to it.
+  const locs = {
+    A: { id: "A", regionId: "r1", map: { x: 0, y: 0 }, connections: ["B"], substrateSource: { kind: "pool", delta: 0.30, radius: 100 } },
+    B: { id: "B", regionId: "r1", map: { x: 50, y: 0 }, connections: ["A", "C"] },
+    C: { id: "C", regionId: "r1", map: { x: 900, y: 0 }, connections: ["B"] },
+    D: { id: "D", regionId: "r2", map: { x: 0, y: 0 }, connections: [] }
+  };
+  const f = sb.resolveSubstrateField(locs, model);
+  check("B13: a pool site resolves ABOVE its region ambient (invariant 1)", f.get("A") > 0.50);
+  check("B13: a place far along the graph is untouched — distance ends (invariant 3)", Math.abs(f.get("C") - 0.50) < 1e-9);
+  check("B13: every location resolves (invariant 6)", [...f.keys()].length === 4);
+  // THE CASE §3 RAISED: same coordinates, different region, no connection. Euclidean says full
+  // bleed; the graph says nothing reaches it. This is why distance is path, not straight line.
+  check("B13: an UNCONNECTED place at identical coordinates is not touched by the pool",
+    Math.abs(f.get("D") - 0.50) < 1e-9);
+
+  // A sink is the same object with the opposite sign — the inversion is unrepresentable now.
+  const sunk = { ...locs, A: { ...locs.A, substrateSource: { kind: "sink", delta: -0.30, radius: 100 } } };
+  check("B13: a sink site resolves BELOW its region ambient", sb.resolveSubstrateField(sunk, model).get("A") < 0.50);
+
+  // Regional calibration: the authored table is the target, never overwritten (invariant 2).
+  const mean = ["A", "B", "C"].reduce((a, k) => a + f.get(k), 0) / 3;
+  check("B13: regional calibration holds — the region mean stays at its authored value", Math.abs(mean - 0.50) < 0.01);
+
+  // applySubstrateField must never clobber an authored override.
+  const withOverride = { ...locs, B: { ...locs.B, substrateDensity: 0.99 } };
+  sb.applySubstrateField(withOverride, model);
+  check("B13: an authored per-location override always wins", withOverride.B.substrateDensity === 0.99);
+
+  // carriedSubstrate: negatives now count (a suppressor is a legitimate weapon).
+  check("B13: a carried SUPPRESSOR lowers effective density (was discarded by a c>0 guard)",
+    sb.carriedSubstrate({ inventory: [{ name: "ward", substrateCharge: -0.10 }] }) === -0.10);
+  check("B13: a carried charge still raises it", sb.carriedSubstrate({ inventory: [{ name: "staff", substrateCharge: 0.18 }] }) === 0.18);
+  check("B13: charge and ward cancel", Math.abs(sb.carriedSubstrate({ inventory: [{ substrateCharge: 0.18 }, { substrateCharge: -0.18 }] })) < 1e-9);
+  // invariant 5 — the receipt must be ABLE to name the cause.
+  const named = sb.carriedSubstrateSources({ inventory: [{ name: "ward", substrateCharge: -0.10 }] }, {}, [{ name: "Aevi", substrateAura: 0.20 }]);
+  check("B13: the carried cause is itemised strongest-first, so a receipt can name it",
+    named.length === 2 && named[0].name === "Aevi" && named[1].name === "ward");
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

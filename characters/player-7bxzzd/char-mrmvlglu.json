@@ -8,7 +8,7 @@
   "whyHere": "You noticed the paying. You came out to see whether there was another way to be a mind.",
   "background": "drifter",
   "level": 2,
-  "xp": 119,
+  "xp": 124,
   "attributes": {
     "physical": 4,
     "mental": 4,
@@ -50,7 +50,7 @@
   "maxHealth": 35,
   "health": 35,
   "maxEnergy": 105,
-  "energy": 97,
+  "energy": 92,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -191,29 +191,19 @@
         "player": "Stay close and listen — what Sura says next about the watershed may matter as much as the coordinate itself",
         "summary": "Sura, eating at the side table with Ossian across from her, described the watershed site as active and 'prepared' — a word she used twice and could not explain. The coordinate is confirmed. The gap in her own knowledge is named.",
         "narration": "Ossian settles across from Sura and puts his hands flat on the table — the gesture of a man who has learned that stillness invites more than questions. You take a step back and stay near the stairwell, close enough to hear everything, far enough that the conversation belongs to the two of them.\n\nSura eats another piece of bread while she speaks. She does not look at Ossian when she talks — she looks at the table, or at her hand, or at nothing in particular — but the words come out in the right order, which is more than she was managing an hour ago. She says: the site is active, not dormant. The sediment shift she modeled is consistent with a reactivation event, not natural drift. The flow rates in the second notation column are what she calls 'prepared' — the word she uses twice, without elaborating on what it was prepared for, or by whom. When Ossian asks her to clarify, she stops chewing, looks at him directly for the first time, and says: *I don't know. That is the part I didn't finish.*\n\nOssian receives this the way he receives most things — with visible recalculation rather than visible feeling. He repeats 'prepared' once, quietly, like he's testing how much weight the word holds. Then he looks across the room at the chalk wall, where Araveth's finger has not stopped moving through any of this.\n\nKon hasn't moved from the top of the landing. It is watching Sura.\n\nThere is enough here now — the coordinate, the purpose, the word Sura chose and cannot yet explain — to act on. The question is what action the information calls for."
+      },
+      {
+        "player": "Ask Sura what 'prepared' means to her — push gently while the thread is still live",
+        "summary": "Sura clarified 'prepared' — the watershed site's output is induced, not natural; the flow rates imply instruction and a deliberate downstream result, but she did not reach the part of the notation that names the instruction or its source.",
+        "narration": "You step closer to the table and crouch slightly so you're level with Sura's eyeline — not leaning over her, not pressing, just present at the same height. \"Prepared,\" you say, quiet and even. \"You used that word twice. What does it mean to you — the way you mean it when you're inside the notation?\"\n\nShe sets the bread down on the table. Not away from her, not done with it — just sets it down, because the answer is going to need both hands on the thought. She stares at a point between her and Ossian for long enough that you think the thread has gone. Then: \"Prepared means the state was induced. The flow rates don't drift into that configuration — they require instruction. There is a directionality to the output that the terrain alone does not explain.\" She pauses. \"The site was set to produce a specific downstream result. The numbers say so. I cannot tell you the instruction, or who gave it. That is the part of the notation I did not reach.\"\n\nOssian, across the table, draws a slow breath. He says nothing yet. He is filing it — the distinction between malfunction and intent, between a thing gone wrong and a thing doing exactly what it was told.\n\nKon, at the top of the landing, sits down. It does not go still the way it does near active Precursor heat, but it is watching the room with the careful attention of an animal that has heard a word it recognizes."
       }
     ],
     "lastTurn": {
-      "narration": "Ossian settles across from Sura and puts his hands flat on the table — the gesture of a man who has learned that stillness invites more than questions. You take a step back and stay near the stairwell, close enough to hear everything, far enough that the conversation belongs to the two of them.\n\nSura eats another piece of bread while she speaks. She does not look at Ossian when she talks — she looks at the table, or at her hand, or at nothing in particular — but the words come out in the right order, which is more than she was managing an hour ago. She says: the site is active, not dormant. The sediment shift she modeled is consistent with a reactivation event, not natural drift. The flow rates in the second notation column are what she calls 'prepared' — the word she uses twice, without elaborating on what it was prepared for, or by whom. When Ossian asks her to clarify, she stops chewing, looks at him directly for the first time, and says: *I don't know. That is the part I didn't finish.*\n\nOssian receives this the way he receives most things — with visible recalculation rather than visible feeling. He repeats 'prepared' once, quietly, like he's testing how much weight the word holds. Then he looks across the room at the chalk wall, where Araveth's finger has not stopped moving through any of this.\n\nKon hasn't moved from the top of the landing. It is watching Sura.\n\nThere is enough here now — the coordinate, the purpose, the word Sura chose and cannot yet explain — to act on. The question is what action the information calls for.",
-      "sceneSummary": "Sura, eating at the side table with Ossian across from her, described the watershed site as active and 'prepared' — a word she used twice and could not explain. The coordinate is confirmed. The gap in her own knowledge is named.",
+      "narration": "You step closer to the table and crouch slightly so you're level with Sura's eyeline — not leaning over her, not pressing, just present at the same height. \"Prepared,\" you say, quiet and even. \"You used that word twice. What does it mean to you — the way you mean it when you're inside the notation?\"\n\nShe sets the bread down on the table. Not away from her, not done with it — just sets it down, because the answer is going to need both hands on the thought. She stares at a point between her and Ossian for long enough that you think the thread has gone. Then: \"Prepared means the state was induced. The flow rates don't drift into that configuration — they require instruction. There is a directionality to the output that the terrain alone does not explain.\" She pauses. \"The site was set to produce a specific downstream result. The numbers say so. I cannot tell you the instruction, or who gave it. That is the part of the notation I did not reach.\"\n\nOssian, across the table, draws a slow breath. He says nothing yet. He is filing it — the distinction between malfunction and intent, between a thing gone wrong and a thing doing exactly what it was told.\n\nKon, at the top of the landing, sits down. It does not go still the way it does near active Precursor heat, but it is watching the room with the careful attention of an animal that has heard a word it recognizes.",
+      "sceneSummary": "Sura clarified 'prepared' — the watershed site's output is induced, not natural; the flow rates imply instruction and a deliberate downstream result, but she did not reach the part of the notation that names the instruction or its source.",
       "choices": [
         {
-          "label": "Write it down — the coordinate, 'active not dormant,' 'prepared,' and Sura's exact words while she's still saying them",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "craft"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Sura what 'prepared' means to her — push gently while the thread is still live",
+          "label": "Ask what downstream result the numbers point toward — what was the site instructed to produce?",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
@@ -229,9 +219,9 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Ossian directly — he named three sources of override syntax; does 'prepared watershed' fit any of them?",
+          "label": "Ask Ossian directly — his three override-syntax sources, any of them capable of watershed-scale instruction?",
           "attribute": "mental",
-          "subAttribute": "insight",
+          "subAttribute": "reason",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
@@ -244,9 +234,9 @@
           "emergenceId": null
         },
         {
-          "label": "Let them talk — step outside for a moment, breathe the night air, and let Ossian and Sura work through it together",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Write down what Sura just said — word for word, before it exists only in memory",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
@@ -257,26 +247,55 @@
           "trivial": true,
           "encounterId": null,
           "emergenceId": null
+        },
+        {
+          "label": "Name the coordinate aloud for the first time — write it down in front of both of them, and formally close this thread before the night ends",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
+            "sustain"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "third-terrace-collapse",
+          "note": "Sura clarified 'prepared': the flow rates imply instruction, not drift — a deliberate downstream result was set into the site. She did not reach the part of the notation naming the instruction or its source."
         }
       ],
       "scene": {
-        "setting": "Cogitarium entrance hall — chalk-dense, cold, night. Low lamp burning near the stairwell. Araveth still at the notation wall, unreacting. Ossian and Sura at the side table across from each other.",
+        "setting": "Cogitarium entrance hall — chalk-dense, cold, early-spring night. Low lamp burning near the stairwell. Araveth still at the notation wall, unreacting.",
         "npcsPresent": [
           {
             "name": "Sura",
-            "state": "At the side table, bedroll across both shoulders, eating — speaking in short confirmed facts, arm trembling less than before"
+            "state": "At the side table, bread set down, looking at a point between herself and Ossian — the thread still live, arm steadier than before"
           },
           {
             "name": "Ossian",
-            "state": "Seated across from Sura, hands flat on the table, listening — repeating 'prepared' quietly to himself, now looking at the chalk wall"
+            "state": "Across from Sura, hands flat on the table, drawing a slow breath — filing the distinction between malfunction and intent"
           },
           {
             "name": "Araveth",
-            "state": "At the chalk watershed notation wall — finger tracing loops, no reaction"
+            "state": "At the chalk watershed notation wall — finger tracing loops, no reaction to anything in the room"
           },
           {
             "name": "Kon",
-            "state": "At the top of the landing, watching Sura without moving"
+            "state": "Seated at the top of the landing, watching the room with careful animal attention — not still-and-hot, but clearly listening"
           }
         ],
         "objects": [
@@ -288,8 +307,9 @@
         ],
         "threads": [
           "The coordinate is confirmed and held in memory — not yet written down",
-          "Sura used the word 'prepared' twice and cannot explain what the site was prepared for, or by whom — the gap in her own notation is now named",
-          "Ossian is recalculating against his three known sources of override syntax",
+          "Sura named the gap in her notation: the downstream result was induced, but she did not reach the instruction or its source",
+          "Ossian is processing the distinction between malfunction and deliberate instruction",
+          "Kon is watching the room with quiet attention — not alarmed, but present",
           "The Name That Travels quest is unaddressed"
         ]
       },
@@ -298,33 +318,25 @@
           "op": "update",
           "npcId": "sura",
           "name": "Sura",
-          "role": "Cogitant — third-terrace calculator",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Described the watershed site as active, not dormant — modeled sediment shift consistent with reactivation, not drift. Used 'prepared' twice to describe the flow rates. Could not explain what it was prepared for.",
+          "note": "Clarified 'prepared': the flow rates were induced, not drifted — a specific downstream result was set into the site by instruction. She did not reach the notation's answer about what that instruction was or who gave it.",
           "learned": [
-            "The watershed site is active, not dormant — a reactivation event, not natural drift",
-            "The flow rates in the second notation column are 'prepared' — her word, used twice",
-            "She does not know what the site was prepared for, or by whom — that is the part she did not finish"
+            "'Prepared' means the state was induced — the flow rates require instruction, not terrain alone",
+            "There is a directionality to the output that the site's geography does not explain",
+            "A specific downstream result was set — she could not reach the part of the notation naming the instruction or its source"
           ],
           "status": "injured",
-          "statusNote": "At the side table in the entrance hall — eating, speaking, arm trembling less; the thread of the calculation still accessible but fraying at its edges"
+          "statusNote": "At the side table in the entrance hall — eating, thread still live, arm steadier; named the gap in her notation clearly"
         },
         {
           "op": "update",
           "npcId": "ossian",
           "name": "Ossian",
-          "role": "Cogitant, entrance hall",
-          "gender": "man",
-          "pronouns": "he/him",
-          "note": "Heard 'prepared' from Sura — repeated it quietly once, then looked at the chalk wall. Recalculating against his known sources of override syntax.",
+          "note": "Heard Sura's clarification of 'prepared' — filing the difference between a site that malfunctioned and a site that was instructed. Has not yet spoken his conclusion.",
           "learned": [
-            "The site is active, not dormant — reactivation, not drift",
-            "Flow rates described as 'prepared' — Sura's word, without an explanation she could give",
-            "Sura's notation has a gap: she does not know what it was prepared for"
+            "The watershed site's output is induced, not natural — a distinction between malfunction and deliberate instruction"
           ],
           "status": "active",
-          "statusNote": "Seated at the side table with Sura — processing the word 'prepared' against his model of three override-syntax sources"
+          "statusNote": "At the side table in the entrance hall — processing Sura's clarification, hands flat, drawing breath before speaking"
         }
       ],
       "codexUpdates": [
@@ -332,39 +344,38 @@
           "topic": "the-four-conditions-source-remediation",
           "label": "The Four Conditions (Source Remediation)",
           "kind": "mystery",
-          "fact": "Sura described the site as active, not dormant — a reactivation event, not natural drift. The flow rates in her second notation column are 'prepared' — her word, used twice. She could not say what the site was prepared for, or by whom. That gap is the part she did not finish.",
+          "fact": "Sura clarified 'prepared': the flow rates at the watershed site were induced, not natural — they imply instruction and a specific downstream result. The site was set to produce a deliberate output. She did not reach the part of the notation naming the instruction or who gave it.",
           "links": [
             "the-cogitariums-calculated-crisis",
-            "third-terrace-cogitant",
+            "sura",
             "ossian",
-            "the-evacuation-calculation",
-            "sura"
+            "the-evacuation-calculation"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short exchange at the side table — Sura speaking, Ossian listening, Saehara nearby"
+        "why": "A short exchange at the side table — a few minutes of careful questioning"
       }
     },
     "sceneState": {
-      "setting": "Cogitarium entrance hall — chalk-dense, cold, night. Low lamp burning near the stairwell. Araveth still at the notation wall, unreacting. Ossian and Sura at the side table across from each other.",
+      "setting": "Cogitarium entrance hall — chalk-dense, cold, early-spring night. Low lamp burning near the stairwell. Araveth still at the notation wall, unreacting.",
       "npcsPresent": [
         {
           "name": "Sura",
-          "state": "At the side table, bedroll across both shoulders, eating — speaking in short confirmed facts, arm trembling less than be"
+          "state": "At the side table, bread set down, looking at a point between herself and Ossian — the thread still live, arm steadier t"
         },
         {
           "name": "Ossian",
-          "state": "Seated across from Sura, hands flat on the table, listening — repeating 'prepared' quietly to himself, now looking at th"
+          "state": "Across from Sura, hands flat on the table, drawing a slow breath — filing the distinction between malfunction and intent"
         },
         {
           "name": "Araveth",
-          "state": "At the chalk watershed notation wall — finger tracing loops, no reaction"
+          "state": "At the chalk watershed notation wall — finger tracing loops, no reaction to anything in the room"
         },
         {
           "name": "Kon",
-          "state": "At the top of the landing, watching Sura without moving"
+          "state": "Seated at the top of the landing, watching the room with careful animal attention — not still-and-hot, but clearly liste"
         }
       ],
       "objects": [
@@ -376,8 +387,9 @@
       ],
       "threads": [
         "The coordinate is confirmed and held in memory — not yet written down",
-        "Sura used the word 'prepared' twice and cannot explain what the site was prepared for, or by whom — the gap in her own notation is now named",
-        "Ossian is recalculating against his three known sources of override syntax",
+        "Sura named the gap in her notation: the downstream result was induced, but she did not reach the instruction or its source",
+        "Ossian is processing the distinction between malfunction and deliberate instruction",
+        "Kon is watching the room with quiet attention — not alarmed, but present",
         "The Name That Travels quest is unaddressed"
       ]
     }
@@ -428,14 +440,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Ossian has begun eating — the mind-pole's most articulate voice is now, tentatively, remembering the body. The third-terrace Cogitant remains at the board; her notation columns are nearly at the right margin.",
         "Ossian confirmed: the coordinate finishes when the notation reaches the right margin — tonight, possibly. Someone must be on the third terrace to receive it. He cannot go up himself.",
         "Ossian named three possible sources of override syntax (condition two): cooperative Precursor remnants, the Warden Archive at the Radiant Plateau, and Maren Soule — a former warden who may still carry working override vocabulary and lives somewhere in the middle valley.",
         "Saehara arrived at the third terrace to find the notation complete and the Cogitant's arm stilled — she may be surfacing; the coordinate is within reach",
         "The notation is complete; Saehara has read the coordinate from the board. The Cogitant has surfaced and spoken. The coordinate must now be confirmed and recorded — and Ossian must be told.",
         "The coordinate confirmed — spoken directly by the Cogitant herself to Saehara. She is present, fragile, and speaking. The quest's core retrieval is complete; what remains is recording the coordinate, reporting to Ossian, and ensuring her physical recovery.",
         "Sura is on her feet and descending — she has reached the entrance hall, Ossian now knows the notation is complete and the coordinate is doubly confirmed.",
-        "Sura is at the side table, eating — bread in hand, body beginning to return. She named the watershed problem aloud for the first time."
+        "Sura is at the side table, eating — bread in hand, body beginning to return. She named the watershed problem aloud for the first time.",
+        "Sura clarified 'prepared': the flow rates imply instruction, not drift — a deliberate downstream result was set into the site. She did not reach the part of the notation naming the instruction or its source."
       ],
       "aliases": [],
       "startedAt": "2026-07-16T03:39:50.283Z"
@@ -533,7 +545,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d1] Eyes tracked once to the meal bag when Saehara set it down — the body remembering something. Did not speak.",
         "[d1] Named his own physical needs when asked directly — warmth from the cold floor, gaps in his eating he cannot account for. The first time he has answered a question about himself rather than a system.",
         "[d1] Saehara draped a cloth over his shoulders without asking permission and told him plainly that body-tending extends cognitive output. He reached for the bread — slowly, deliberately, as a self-assigned task. Said the oversight was significant.",
         "[d1] Finished the flatbread without prompting. Watched Saehara write with focused silence — eyes on the book, not the ceiling. Did not speak. From him, that is attention.",
@@ -542,17 +553,18 @@
         "[d1] Looked up as Sura descended — ran a visible recalculation. Heard 'the notation is complete' and 'the coordinate, confirmed twice' without visible relief, but with the quality of a weight set down.",
         "[d1] One floor below — knows the notation is complete and coordinate confirmed, has not yet spoken with Sura directly.",
         "[d1] Climbed the stairs on Saehara's word — met Sura at the side table; heard 'upper watershed, active site, the numbers hold' and is now listening with full attention",
-        "[d1] Heard 'prepared' from Sura — repeated it quietly once, then looked at the chalk wall. Recalculating against his known sources of override syntax."
+        "[d1] Heard 'prepared' from Sura — repeated it quietly once, then looked at the chalk wall. Recalculating against his known sources of override syntax.",
+        "[d1] Heard Sura's clarification of 'prepared' — filing the difference between a site that malfunctioned and a site that was instructed. Has not yet spoken his conclusion."
       ],
       "knownFacts": [
-        "Maren Soule: former warden, kept a post on the old ridge road, was present at a remediation site closure — exposed to active override vocabulary; lives somewhere in the middle valley, location…",
         "Ossian has not sent anyone to the Warden Archive — he calls the gap in his modeling 'notable'",
         "The third-terrace notation is complete",
         "The coordinate is doubly confirmed — from the board and from Sura directly",
         "Sura confirmed: upper watershed, active site, the numbers hold — heard directly from her",
         "The site is active, not dormant — reactivation, not drift",
         "Flow rates described as 'prepared' — Sura's word, without an explanation she could give",
-        "Sura's notation has a gap: she does not know what it was prepared for"
+        "Sura's notation has a gap: she does not know what it was prepared for",
+        "The watershed site's output is induced, not natural — a distinction between malfunction and deliberate instruction"
       ],
       "skillsObserved": [
         "caloric-deficit timeline calculation",
@@ -563,7 +575,7 @@
         "structured enumeration of partial-knowledge categories under"
       ],
       "status": "active",
-      "statusNote": "Seated at the side table with Sura — processing the word 'prepared' against his model of three override-syntax sources",
+      "statusNote": "At the side table in the entrance hall — processing Sura's clarification, hands flat, drawing breath before speaking",
       "lastSeen": {
         "locationId": "gen-cogitarium-entrance-hall",
         "day": 1
@@ -702,7 +714,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d1] Saehara returned to find her arm stilled and the board complete — she is on the edge of surfacing after four days of continuous calculation",
         "[d1] Surfaced — opened her eyes, found Saehara, and spoke her first words in four days: 'You're sitting on the floor.' Focus arriving in stages. Bedroll still on her shoulders.",
         "[d1] Surfaced enough to verify the coordinate directly — spoke all four numbers in order, dry and deliberate. The confirmation is complete.",
         "[d1] Their name is revealed: Sura (was known as \"Third-Terrace Cogitant\")",
@@ -711,23 +722,24 @@
         "[d1] Accepted Saehara's hands, stood, descended the stairwell with support — body holding but costly. Confirmed the notation to Ossian in two words.",
         "[d1] Walked to the side table with support, put bread in her hand directly — she ate, and then reached for a second piece without prompting. Named the calculation's purpose aloud: 'There's a water problem in the upper watershed.'",
         "[d1] Looked up when Ossian entered — confirmed the watershed and numbers directly to him; arm trembling less, still eating",
-        "[d1] Described the watershed site as active, not dormant — modeled sediment shift consistent with reactivation, not drift. Used 'prepared' twice to describe the flow rates. Could not explain what it was prepared for."
+        "[d1] Described the watershed site as active, not dormant — modeled sediment shift consistent with reactivation, not drift. Used 'prepared' twice to describe the flow rates. Could not explain what it was prepared for.",
+        "[d1] Clarified 'prepared': the flow rates were induced, not drifted — a specific downstream result was set into the site by instruction. She did not reach the notation's answer about what that instruction was or who gave it."
       ],
       "knownFacts": [
-        "Standing was harder than expected — she noted it without complaint",
-        "She accepted physical assistance without resistance for the first time",
-        "She named the calculation's purpose without being asked: a water problem in the upper watershed — that is what the four-day notation was for.",
         "She is eating without prompting now — something is returning.",
         "Met Ossian face-to-face at the side table for the first time since the notation completed",
         "The watershed site is active, not dormant — a reactivation event, not natural drift",
         "The flow rates in the second notation column are 'prepared' — her word, used twice",
-        "She does not know what the site was prepared for, or by whom — that is the part she did not finish"
+        "She does not know what the site was prepared for, or by whom — that is the part she did not finish",
+        "'Prepared' means the state was induced — the flow rates require instruction, not terrain alone",
+        "There is a directionality to the output that the site's geography does not explain",
+        "A specific downstream result was set — she could not reach the part of the notation naming the instruction or its source"
       ],
       "skillsObserved": [
         "Precise verbal economy under physical duress"
       ],
       "status": "injured",
-      "statusNote": "At the side table in the entrance hall — eating, speaking, arm trembling less; the thread of the calculation still accessible but fraying at its edges",
+      "statusNote": "At the side table in the entrance hall — eating, thread still live, arm steadier; named the gap in her notation clearly",
       "lastSeen": {
         "locationId": "gen-cogitarium-entrance-hall",
         "day": 1
@@ -915,7 +927,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-19T01:28:45.549Z",
+    "lastSharedReadAt": "2026-07-19T02:00:25.461Z",
     "lastTickWorldDay": 19,
     "lastCanonWorldDay": 19
   },
@@ -1052,7 +1064,8 @@
           "[d1] The coordinate — condition four — has been read from the chalk board: four numbers in the final column, bottom right, set down with flat precision. A fixed point in the upper watershed. Saehara holds it in memory; it is not yet recorded.",
           "[d1] The coordinate — condition four — has been confirmed directly from the third-terrace Cogitant. She surfaced enough to verify all four numbers aloud. The coordinate is now doubly confirmed: from the board, and from her own voice. It is not yet written.",
           "[d1] Sura named the calculation's purpose directly: 'There's a water problem in the upper watershed.' The four-day notation was a working model of an active watershed crisis centered on the source coordinate.",
-          "[d1] Sura described the site as active, not dormant — a reactivation event, not natural drift. The flow rates in her second notation column are 'prepared' — her word, used twice. She could not say what the site was prepared for, or by whom. That gap is the part she did not finish."
+          "[d1] Sura described the site as active, not dormant — a reactivation event, not natural drift. The flow rates in her second notation column are 'prepared' — her word, used twice. She could not say what the site was prepared for, or by whom. That gap is the part she did not finish.",
+          "[d1] Sura clarified 'prepared': the flow rates at the watershed site were induced, not natural — they imply instruction and a specific downstream result. The site was set to produce a deliberate output. She did not reach the part of the notation naming the instruction or who gave it."
         ],
         "links": [
           "the-cogitariums-calculated-crisis",
@@ -1319,14 +1332,14 @@
     }
   },
   "tendencies": {
-    "strategic": 13.998798872603476,
-    "social": 12.124557694489203,
-    "cerebral": 9.439758697719137,
-    "generous": 11.859381062641226,
-    "cautious": 9.645271554314013,
-    "risky": 0.47083564101431963,
-    "patient": 1.3750625908161551,
-    "leadership": 0.975
+    "strategic": 13.64882890078839,
+    "social": 11.821443752126973,
+    "cerebral": 10.20376473027616,
+    "generous": 11.562896536075195,
+    "cautious": 10.404139765456161,
+    "risky": 0.45906474998896163,
+    "patient": 1.3406860260457512,
+    "leadership": 0.9506249999999999
   },
   "aptitudes": [
     "strategist",
@@ -1334,7 +1347,7 @@
     "good_samaritan",
     "stalwart"
   ],
-  "actionCount": 63,
+  "actionCount": 64,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -1363,8 +1376,8 @@
       "at": "2026-07-16T02:18:04.820Z"
     }
   ],
-  "updatedAt": 1784424871230,
-  "rev": 121,
+  "updatedAt": 1784426526476,
+  "rev": 128,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1520,7 +1533,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "somatic_reaches": 57,
+    "somatic_reaches": 58,
     "valley": 7
   },
   "opLossPending": false,
@@ -1706,10 +1719,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-19T00:05:04.919Z",
-      "lastAt": "2026-07-19T01:34:31.229Z",
+      "lastAt": "2026-07-19T02:02:06.473Z",
       "startDay": 19,
       "endDay": 19,
-      "beats": 24
+      "beats": 25
     }
   ],
   "knownPlaces": [

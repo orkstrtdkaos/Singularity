@@ -582,7 +582,7 @@ abilityId must be one the character actually has, or null. novelUse=true when an
     const raw = await callClaudeJSON([{ role: "user", content }], { task: "intent-parse", system: sys });
     return sanitizeIntent(raw, character, playerText);
   } catch {
-    return { label: playerText.slice(0, 60), attribute: "practical", subAttribute: null, axes: {}, difficulty: 0, intentTags: [], abilityId: null, comboAbilities: [], novelUse: false, noveltyHint: "", feasible: true };
+    return { label: smartClamp(playerText, 60), playerWords: String(playerText || ""), attribute: "practical", subAttribute: null, axes: {}, difficulty: 0, intentTags: [], abilityId: null, comboAbilities: [], novelUse: false, noveltyHint: "", feasible: true };
   }
 }
 
@@ -600,7 +600,14 @@ export function sanitizeIntent(raw, character, playerText = "") {
   }
   const diff = Number(raw?.difficulty);
   return {
-    label: String(raw?.label || playerText).slice(0, 80),
+    // SNG-181: this raw 80-char cut is what chopped Erik's own sentence mid-word in his own log —
+    // "…eager to see what h", exactly 80 characters, no ellipsis. The label is a compact UI/prompt
+    // string and staying short is right, but a mid-word cut never is: smartClamp ends on a word
+    // boundary and marks the elision. `playerWords` carries what they ACTUALLY typed, in full,
+    // because the one string in this application that must never be truncated is the one the
+    // player wrote.
+    label: smartClamp(String(raw?.label || playerText), 80),
+    playerWords: String(playerText || ""),
     attribute: ["physical", "mental", "social", "practical"].includes(raw?.attribute) ? raw.attribute : "practical",
     subAttribute: SUBS8.includes(raw?.subAttribute) ? raw.subAttribute : null,
     axes,

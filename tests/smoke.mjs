@@ -5400,6 +5400,31 @@ await (async () => {
   check("171a: and that every route must change something", /EVERY ROUTE MUST CHANGE SOMETHING/.test(system));
 }
 
+// --- SNG-181: the player's own words are never cut mid-word ---
+{
+  const { smartClamp } = await import("../engine/namematch.js");
+  const gmSrc2 = readFileSync(new URL('../engine/gm.js', import.meta.url), 'utf8');
+  const appSrc3 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+
+  // The exact line from Erik's screenshot is 80 characters — the old slice(0, 80), to the character.
+  const erik = "Veth leads the group up the path toward the old Warden Post, eager to see what h";
+  check("181: the reported truncation is exactly the old 80-char slice", erik.length === 80);
+
+  const full = erik + "appens when we get there and whether the door still holds.";
+  const clamped = smartClamp(full, 80);
+  check("181: the label now ends on a word boundary, not mid-word", !/\bwhat h$/.test(clamped));
+  check("181: and marks the elision instead of vanishing characters", /…$/.test(clamped));
+  check("181: and still respects the bound", clamped.length <= 80);
+
+  // The structural half: the label may stay short, but the typed words must survive whole.
+  check("181: intent parsing carries the player's FULL words alongside the short label",
+    /playerWords: String\(playerText/.test(gmSrc2));
+  check("181: the raw slice is gone from both intent paths",
+    !/String\(raw\?\.label \|\| playerText\)\.slice\(0, 80\)/.test(gmSrc2) && !/playerText\.slice\(0, 60\)/.test(gmSrc2));
+  check("181: the log renders what they TYPED, falling back to the label only for choice buttons",
+    /opts\.playerBeat\.playerWords \|\|/.test(appSrc3));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

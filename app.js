@@ -57,7 +57,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.143";
+const APP_VERSION = "1.8.144";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3288,9 +3288,9 @@ async function onChoice(choice) {
       }
       saveCharacter(character);
       if (minted) {
-        renderPlay(null, { thinking: "…", playerBeat: { label: choice.label } });
+        renderPlay(null, { thinking: "…", playerBeat: { label: choice.label, playerWords: choice.playerWords || null } });
         const result = await runGM({ resolution: null, playerInput: `(Practice has ripened into breakthrough: the character accepts "${minted.name}" — ${tpl.tier === "combo" ? tpl.discoveredBlurb || tpl.description : tpl.grants}. Narrate the moment it clicks into something repeatable, then continue the scene.)` });
-        if (result) renderPlay(result.turn, { playerBeat: { label: choice.label }, degraded: result.degraded });
+        if (result) renderPlay(result.turn, { playerBeat: { label: choice.label, playerWords: choice.playerWords || null }, degraded: result.degraded });
         return;
       }
     }
@@ -3304,18 +3304,18 @@ async function onChoice(choice) {
     const oppSheet = isSB ? synthesizeOpponentSheet(def.opponent, CONTENT.skillBattle.engine) : null;
     character.activeEncounter = { defId: def.id, state: startEncounter(def, { oppSheet }) };
     saveCharacter(character);
-    renderPlay(null, { thinking: "…", playerBeat: { label: choice.label } });
+    renderPlay(null, { thinking: "…", playerBeat: { label: choice.label, playerWords: choice.playerWords || null } });
     const result = await runGM({ resolution: null, playerInput: `(The encounter "${def.name}" begins: ${def.setup} Narrate the opening${isSB ? " of the contest (the mechanics play out in a panel — just set the scene and the stakes)" : " and offer round choices"}.)` });
-    if (result) renderPlay(result.turn, { playerBeat: { label: choice.label }, degraded: result.degraded });
+    if (result) renderPlay(result.turn, { playerBeat: { label: choice.label, playerWords: choice.playerWords || null }, degraded: result.degraded });
     if (isSB) renderSkillBattle(); // take over the rounds with the contest panel
     return;
   }
   // trivial actions — no real chance of failure, no cost: no dice, no energy
   if (choice.trivial && !choice.abilityId && !(choice.comboAbilities || []).length && !action.novel) {
     const resolution = { action, degree: "auto", roll: null, chance: null };
-    renderPlay(null, { thinking: "…", playerBeat: { label: choice.label } });
+    renderPlay(null, { thinking: "…", playerBeat: { label: choice.label, playerWords: choice.playerWords || null } });
     const result = await runGM({ resolution, playerInput: null, exactWords: choice.exactWords || null });
-    if (result) renderPlay(result.turn, { playerBeat: { label: choice.label }, degraded: result.degraded });
+    if (result) renderPlay(result.turn, { playerBeat: { label: choice.label, playerWords: choice.playerWords || null }, degraded: result.degraded });
     return;
   }
   // a technique already discovered isn't novel anymore — it's earned skill
@@ -6411,7 +6411,11 @@ function renderPlay(turn, opts = {}) {
     main += `<div class="news-flash"><div class="news-title">While you were away…</div>${opts.newsFlash.map(n => `<div class="news-item">◈ ${esc(n.text)}</div>`).join("")}</div>`;
   }
   if (opts.playerBeat) {
-    main += `<div class="beat player-action">▸ ${esc(opts.playerBeat.label)}</div>`;
+    // SNG-181: render what the player TYPED, in full — not the compact action label. `label` is a
+    // short UI/prompt string by design; the log is the one place their own sentence must survive
+    // whole. Falls back to the label for choice-button beats, which have no typed words.
+    const said = opts.playerBeat.playerWords || opts.playerBeat.resolution?.action?.playerWords || opts.playerBeat.label;
+    main += `<div class="beat player-action">▸ ${esc(said)}</div>`;
     if (opts.playerBeat.resolution) {
       const r = opts.playerBeat.resolution;
       // SNG-169 §2c: the item that aided the roll is now tappable. `entityHover`'s item branch and

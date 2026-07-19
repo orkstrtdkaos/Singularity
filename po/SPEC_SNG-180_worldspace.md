@@ -113,3 +113,81 @@ its two arguments does not.
    2-D; depth makes it a shell model, and I do not know which is cheaper for you to compute against.
 4. Does anything consume `map.x/y` for **mechanics** today other than substrate falloff? That is the
    real blast radius of the demotion.
+
+
+---
+
+# §7 — CORRECTION (Erik, 2026-07-19): the axes are TENDENCIES, not opposing forces
+
+> *"Body and mind both being at .5 doesn't cancel each other out — these axes are tendencies not
+> counteractive forces necessarily. And every location has some number from all of the powers. The
+> ones furthest from their poles will be weakest from the geographic location sense, but local pools
+> and bastions will affect these numbers."*
+
+**This corrects §2 and demotes `axisVector` from primitive to derived view.**
+
+## 7a. The representation was wrong, and the corpus already holds the right one
+
+A 12-component **signed** vector encodes *net position per axis*. It **cannot** say "body 0.5 AND
+mind 0.5" — it says 0.00, which is also what it says for a place indifferent to the axis. I recorded
+that as a gap in §2 and treated it as an edge case. **It is the general case stated wrongly.**
+
+**24 pole-magnitudes, not 12 signed axes.** Body and mind are two powers, both present, neither
+subtracting from the other. `the_middle_way` is not balanced-to-nothing; it is a place where **both
+run strong**, which is the entire content of its name.
+
+**`poleIntensity` is already that representation** — a pole→magnitude map, and the corpus uses all
+**24 of 24** poles across 94 locations.
+
+| | |
+|---|---|
+| **`poleIntensity`** | the **primitive**. Pole→magnitude. Can hold both ends of an axis at full strength. |
+| **`axisVector`** | a **lossy derived view** (net = positive pole − negative pole). Useful for ring bearing; must never be the source of truth. |
+
+The 22 vectors I authored this turn are **derived from `poleIntensity`, which is intact** — so no
+content was lost, but the derivation is lossy and `axisVector` should be regenerable rather than
+authored. **Nothing to re-author; something to re-rank.**
+
+## 7b. The 24-power profile is DENSE, and mostly geographic
+
+> *"Every location has some number from all of the powers. The ones furthest from their poles will be
+> weakest from the geographic location sense."*
+
+`poleIntensity` authors 3–5 poles per location (76 of 94 author exactly 3). Those are the **notable**
+presences — not the whole truth. **Every one of the 24 powers is present everywhere**, at a strength
+set by how far that place sits from that power's Reach.
+
+So the full profile is:
+
+```
+power_p(location) = geographic falloff from p's Reach          ← dense, derived, all 24
+                  + authored poleIntensity                      ← the notable local deviation
+                  + local pools / bastions                      ← modifiers
+```
+
+**This is the same architecture as the substrate field**, one power generalised to twenty-four:
+regional baseline + authored sources + modifiers, with distance doing the work. One mechanism, two
+consumers — and the substrate pool/sink content already shipped is the worked example.
+
+**And it closes the bastion loop.** A bastion is a **local modifier that lifts one power far above
+what geography alone would give** — a Seraphic city in ordinary country is *authored high on the
+seraphic power*, and the field says so without anyone moving it on a map. Bastions stop being an
+exception the model tolerates and become a thing the model expresses natively.
+
+## 7c. Outcomes — replacing §2's `tension` proposal
+
+1. **`poleIntensity` is the source of truth.** `axisVector` is derived, regenerable, and never authored.
+2. **A place may author both poles of an axis**, and both stand. No netting at the authoring layer.
+3. **The full 24-power profile is derivable** — geographic falloff from each Reach, plus authored
+   deviations, plus modifiers. Sparse authoring, dense result.
+4. **Bastions are authored as local power modifiers**, not as positions.
+5. **§2's `tension` field is withdrawn.** It was a patch on a representation that should not have been
+   the primitive. Twenty-four magnitudes need no tension field — *contested* is simply two large
+   numbers, and *absent* is two small ones.
+
+## 7d. On the record
+
+I found the contested-axis problem, wrote it up correctly, and then proposed a patch instead of
+asking whether the representation was right. Erik answered that in one sentence. **A gap that shows
+up three times in twenty-two records is not an edge case — it is the model telling you the shape is
+wrong**, and I had the evidence in front of me.

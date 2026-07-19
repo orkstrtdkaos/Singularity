@@ -88,10 +88,3 @@ export function namesToAvoid(characters = [], limit = 24) {
     .slice(0, limit)
     .map(([name]) => name);
 }
-
-/** How often a given name has been reused ACROSS characters — the number the ratchet watches. */
-export function nameRepetitionCount(characters = []) {
-  let repeats = 0;
-  for (const [, who] of usedGivenNames(characters)) if (who.size > 1) repeats++;
-  return repeats;
-}

@@ -322,3 +322,51 @@ export function knownOverlay(character, positions, content = {}) {
   }
   return out;
 }
+
+// ---------- SNG-180: THE WORLD IS A SPHERE ----------
+// Canon says "a great circle with uniform antipodal topology", and a great circle is a SPHERICAL
+// term — a geodesic on a sphere. Both Aevi and I had read it as a disc for months.
+//
+// The property that decides it, and it is not aesthetic: on a DISC, cutting through the centre is
+// 2r against πr around, so the hub is a degenerate shortcut every optimal route wants to abuse. On a
+// SPHERE the antipodal trip is πR either way — routing via the Crossing costs EXACTLY NOTHING. A
+// natural waypoint that is not a cheat is not something you can arrange by hand; the tier-1 waygate,
+// the Council and the Coliseum all sitting there stops being worldbuilding and becomes a consequence.
+//
+// Erik's ruling 3: world positions are AUTHORED, not derived. Deriving position from disposition is
+// what forbids bastions — a Seraphic city in ordinary country is out of place ON PURPOSE.
+//   longitude   — which disposition's quarter of the world
+//   colatitude  — 0 at the Crossing (all axes balanced) to 90 at a pole locus (one axis at full)
+//   depth       — southern latitude in effect: the Deep Works and the Unlit Deep run DOWN
+
+/** The unit-sphere position of a location. Null when it has not been placed in the world. Pure. */
+export function worldVector(loc) {
+  const w = loc?.worldPos;
+  if (!w || typeof w.colatitude !== "number" || typeof w.longitude !== "number") return null;
+  const theta = (w.colatitude * Math.PI) / 180;      // 0 at the hub
+  const phi = (w.longitude * Math.PI) / 180;
+  return { x: Math.sin(theta) * Math.cos(phi), y: Math.sin(theta) * Math.sin(phi), z: Math.cos(theta), depth: Number(w.depth) || 0 };
+}
+
+/** Great-circle (geodesic) distance between two placed locations, in RADII. Null if either is
+ *  unplaced — a missing position is reported, never guessed at, because a wrong distance is worse
+ *  than a known-missing one and everything downstream already tolerates null.
+ *
+ *  DEPTH is composed as a separate leg rather than bent into the surface arc: going down is not
+ *  travel across the world, and treating it as such would make a cellar as far away as a county. */
+export function geodesic(a, b, { depthScale = 0.05 } = {}) {
+  const va = worldVector(a), vb = worldVector(b);
+  if (!va || !vb) return null;
+  const dot = Math.max(-1, Math.min(1, va.x * vb.x + va.y * vb.y + va.z * vb.z));
+  const surface = Math.acos(dot);                                  // radians = radii on a unit sphere
+  const vertical = Math.abs(va.depth - vb.depth) * depthScale;
+  return Math.hypot(surface, vertical);
+}
+
+/** Geodesic distance in WALKING DAYS, at Erik's year-to-walk scale: antipode-to-antipode (πR) is
+ *  300 days, so a radius is 300/π days. Waygates become infrastructure and a pilgrimage to your
+ *  antipode is a life event, which is the point. */
+export function walkingDays(a, b, opts = {}) {
+  const d = geodesic(a, b, opts);
+  return d == null ? null : d * (300 / Math.PI);
+}

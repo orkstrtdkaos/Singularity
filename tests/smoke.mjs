@@ -5574,9 +5574,9 @@ await (async () => {
     { name: "Brayden", npcRegistry: { a: { name: "Mara Stone" }, b: { name: "Teva" } } },
     { name: "Third", npcRegistry: { a: { name: "Mara" } } }
   ];
-  check("166c: within ONE save nothing repeats — which is why the old framing read green",
-    nm2.nameRepetitionCount([saves[0]]) === 0);
-  check("166c: across the DEVICE the repetition is visible", nm2.nameRepetitionCount(saves) === 1);
+  const repeatsIn = (list) => [...nm2.usedGivenNames(list).values()].filter(w => w.size > 1).length;
+  check("166c: within ONE save nothing repeats — which is why the old framing read green", repeatsIn([saves[0]]) === 0);
+  check("166c: across the DEVICE the repetition is visible", repeatsIn(saves) === 1);
 
   const used = nm2.usedGivenNames(saves);
   check("166c: and it knows HOW MANY characters met her", used.get("mara").size === 3);
@@ -5648,6 +5648,50 @@ await (async () => {
 
   check("182: collectTokens reports WHERE, so a CI failure names the file and field",
     nz.collectTokens({ note: "{{region:x}}" })[0].path === "note");
+}
+
+// --- SNG-180: the world is a sphere, and the hub costs nothing ---
+{
+  const wm2 = await import("../engine/worldmap.js");
+  const hub = { worldPos: { colatitude: 0, longitude: 0, depth: 0 } };
+  const poleA = { worldPos: { colatitude: 90, longitude: 0, depth: 0 } };
+  const poleB = { worldPos: { colatitude: 90, longitude: 180, depth: 0 } };
+  const near = { worldPos: { colatitude: 90, longitude: 15, depth: 0 } };
+
+  check("180: an unplaced location has no world vector", wm2.worldVector({}) === null);
+  check("180: and its distance is NULL rather than a guess", wm2.geodesic({}, hub) === null);
+
+  // THE PROPERTY THAT DECIDES THE SHAPE. On a disc, through-the-centre is 2r vs πr around, so the
+  // hub is a degenerate shortcut. On a sphere it is exactly equal — a waypoint that is not a cheat.
+  const direct = wm2.geodesic(poleA, poleB);
+  const viaHub = wm2.geodesic(poleA, hub) + wm2.geodesic(hub, poleB);
+  check("180: antipode to antipode is πR", Math.abs(direct - Math.PI) < 1e-9);
+  check("180: routing the antipodal trip VIA the hub costs exactly nothing", Math.abs(viaHub - direct) < 1e-9);
+  check("180: the hub sits πR/2 from every Reach", Math.abs(wm2.geodesic(hub, poleA) - Math.PI / 2) < 1e-9);
+
+  // 15° of longitude apart is one step around the ring — the 12x ratio is the same 12 as the axes.
+  const step = wm2.geodesic(poleA, near);
+  check("180: neighbouring Reaches are one ring-step apart", Math.abs(step - (15 * Math.PI / 180)) < 1e-9);
+  check("180: and the antipode/neighbour ratio is 12 — the same 12 as the axes", Math.abs(direct / step - 12) < 1e-6);
+
+  // Erik's year-to-walk scale.
+  check("180: antipode to antipode is ~300 walking days", Math.abs(wm2.walkingDays(poleA, poleB) - 300) < 1);
+  check("180: and the antipodal pair is recognisable from the distance itself", Math.abs(direct - Math.PI) < 1e-9);
+
+  // Depth is a separate leg — going down a cellar must not read as crossing a county.
+  const deep = { worldPos: { colatitude: 90, longitude: 0, depth: -2 } };
+  const dd = wm2.geodesic(poleA, deep);
+  check("180: depth adds distance", dd > 0);
+  check("180: but a cellar is not a county — depth is scaled, not bent into the surface arc", dd < step);
+
+  // The authored corpus must actually be placed, or none of this can be measured.
+  const { readdirSync } = await import("node:fs");
+  const dir = new URL('../content/packs/valley/locations/', import.meta.url);
+  const locs = readdirSync(dir).filter(f => f.endsWith(".json")).map(f => JSON.parse(readFileSync(new URL(f, dir), "utf8")));
+  check("180: every authored location carries a world position", locs.every(l => wm2.worldVector(l) !== null));
+  const cross = locs.find(l => l.id === "the_crossing");
+  check("180: and the Crossing is at the pole, where all axes balance",
+    cross && cross.worldPos.colatitude === 0);
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

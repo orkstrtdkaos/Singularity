@@ -10,12 +10,12 @@
 
 - **depends on / depended on by** — static `import` statements. Complete: `app.js` has zero dynamic imports.
 - **reach** — transitive closure of *depended on by*. `app.js` counts once if reachable at all, directly or through a chain.
-- **content it reads** — literal `*.json`/`*.md` paths, `CONTENT.*` keys, and content-schema fields harvested from the real location and NPC corpus. **Excluded:** field names that collide with JS members (`map`, `name`, `id`, …) and fields ≥9 modules read, which discriminate nothing. 35 fields qualify.
+- **content it reads** — literal `*.json`/`*.md` paths, `CONTENT.*` keys, and content-schema fields harvested from the real location and NPC corpus. **Excluded:** field names that collide with JS members (`map`, `name`, `id`, …) and fields ≥9 modules read, which discriminate nothing. 36 fields qualify.
 - **GM verbs** — from `applyTurn`'s dispatch in `app.js`, *not* from imports: each `turn.<verb>` handler block is walked and the verb attributed to whichever module owns the functions called inside it.
 
 | module | purpose | player surface | exports | depends on | depended on by | reach | content it reads | GM verbs |
 |---|---|---|---|---|---|---|---|---|
-| `engine/namematch.js` | The one name-resolution primitive — slugify and fuzzy-match an entity the same way everywhere, so codex, quests and inventory can never disagree about what the GM just named. | Indirect but constant: every id the player sees, and the quest panel's "couldn't match" note when the GM names something that does not resolve. | 8 | — | `canon.js` `codex.js` `corrections.js` `encounters.js` `facts.js` `generate.js` `gm.js` `inventory.js` `npcs.js` `party.js` `personalArc.js` `places.js` `practice.js` `progression.js` `quests.js` `reconcile.js` `worldtick.js` `app.js` | **26** | — | — |
+| `engine/namematch.js` | The one name-resolution primitive — slugify and fuzzy-match an entity the same way everywhere, so codex, quests and inventory can never disagree about what the GM just named. | Indirect but constant: every id the player sees, and the quest panel's "couldn't match" note when the GM names something that does not resolve. | 7 | — | `canon.js` `codex.js` `corrections.js` `encounters.js` `facts.js` `generate.js` `gm.js` `inventory.js` `npcs.js` `party.js` `personalArc.js` `places.js` `practice.js` `progression.js` `quests.js` `reconcile.js` `worldtick.js` `app.js` | **26** | — | — |
 | `engine/quests.js` | Quests as typed state the GM drives through clamped ops — the model proposes, the engine adjudicates and refuses in the open. | The quest panel: active quests, stage progress lines (✦ …), the resolution choice when every stage is done, and refusal notes when the GM names the wrong stage. | 15 | `namematch.js` | `codex.js` `generate.js` `gm_registry.js` `npcs.js` `progression.js` `reconcile.js` `app.js` | **19** | `.people` `.domains` `.arcId` `.boundToCharacter` | `questUpdates` `stageOps` |
 | `engine/playerprofile.js` | Player identity across characters, and the earned play-style (tendencies, aptitudes) that accrues on each character from how it is actually played. | The profile screen's play-style readout, and the character-select roster. | 19 | — | `art.js` `canon.js` `app.js` | **15** | — | — |
 | `engine/art.js` | Images for characters, locations, items, NPCs and big moments, from either a static file or a generated prompt, behind one seam. | Every image in the app: location art, portraits, item art, the moment gallery. | 20 | `playerprofile.js` | `corrections.js` `npcs.js` `app.js` | **13** | `.descriptionSeed` `.encounterFlavor` `.voiceHints` `.appearance` | `imagePrompt` |
@@ -69,7 +69,7 @@
 | `engine/random_encounters.js` | *— unstated —* | *—* | 14 | — | `app.js` | **1** | `.communityId` `.dangerLevel` | — |
 | `engine/recurrence.js` | *— unstated —* | *—* | 11 | — | `app.js` | **1** | `.arcId` `.challengers` | — |
 | `engine/vectors.js` | *— unstated —* | *—* | 4 | — | `app.js` | **1** | — | — |
-| `engine/worldmap.js` | The data-driven map foundation: stable auto-positioning for every location including ones minted mid-play, plus the three zoom tiers. | The map screen and its World / Region / Location tier bar. | 13 | — | `app.js` | **1** | `.connections` `.poleIntensity` `.waygate` `.waygateHub` | — |
+| `engine/worldmap.js` | The data-driven map foundation: stable auto-positioning for every location including ones minted mid-play, plus the three zoom tiers. | The map screen and its World / Region / Location tier bar. | 16 | — | `app.js` | **1** | `.connections` `.poleIntensity` `.worldPos` `.waygate` | — |
 
 ## GM verbs handled inside `app.js` itself
 

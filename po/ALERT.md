@@ -1,5 +1,15 @@
 # PO ALERT
 
+> **➡️ BATCH-13 capstone: `po/SPEC_SNG-183_full_accounting.md`.** The engine map completed across
+> code, content and ops, plus the six defect lenses this batch produced. Read with
+> `po/BATCH-13_handoff.md` for the build order.
+>
+> **Substrate geography is CLOSED.** `threeGrounds` is canon: thin has three causes — *pooled*
+> (never transitioned), *released* (completed; the lattice withdrew), and *unreached* (never
+> arrived). The first two are authored sources; the third is ordinary country and needs none.
+> 43 of 95 locations carry local variation and **Erik has ruled that correct** — the gaps are
+> wild-nanite habitat and room to expand.
+
 > **➡️ START AT `po/BATCH-13_handoff.md`.** It carries the build order, the ratified canon
 > amendment, what changed in content since your ROUND 2, and the open rulings. Everything below is
 > still true and is the detail behind it.

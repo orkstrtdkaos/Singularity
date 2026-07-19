@@ -330,6 +330,81 @@
         "birthWeight": 7,
         "overtook": "pip-cotter-mara-s-errand-runner"
       }
+    },
+    "cassiel-ord": {
+      "schemaVersion": 1,
+      "id": "cassiel-ord",
+      "name": "Cassiel Ord",
+      "role": "Former march-warden who walked away from the post and sat down in the bowl and has not decided what comes next",
+      "homeLocation": "stillwaters_trouble",
+      "communityId": "march.veth_posting",
+      "personality": {
+        "warmth": 0.4,
+        "trust": -0.3,
+        "candor": 0.3,
+        "patience": 0.8
+      },
+      "spectrum": {
+        "falsehood_truth": -0.2,
+        "dark_light": -0.1,
+        "space_time": 0.5,
+        "body_mind": -0.3
+      },
+      "voiceHints": "Economy of words born from years of writing terse post-reports nobody acted on. Does not explain himself unless pushed, and when pushed gives one careful sentence more than expected and then stops. The silence after he speaks is not unfriendly — it is the silence of someone who has learned that most follow-up questions answer themselves if you wait. Stillwater grain: surface calm, something held under it that has not been named yet.",
+      "knowledge": [
+        "The March in the years bracketing Veth's posting — patrol routes, seasonal flood-lines, which threshold markers are still true and which have drifted",
+        "Why the Veth post was dissolved, or at least the version of it he was given, and the part of it he does not believe",
+        "The Raven's Home threshold: he has crossed it twice, knows what it costs, knows what it gives back, and will not say more than that without trust he has not granted yet",
+        "Early-spring snowmelt read from limestone and sky — when a valley like this will sheet-flood and how much warning you actually get",
+        "The name of whoever ordered the dissolution and what that person's interests are in the March going unwatched"
+      ],
+      "wants": "To sit here long enough to know whether what he is feeling is conscience or exhaustion — and to answer that honestly before he moves again.",
+      "fears": "That the dissolution was not incompetence but intent, and that knowing it changes what he is obligated to do with the rest of his life.",
+      "reactsToReputation": {
+        "warden_or_posted": "goes very still, then asks one quiet question about where and when before he decides anything",
+        "connected_to_veth": "trusts nothing, offers nothing, watches everything — but does not leave",
+        "civilian_or_outsider": "slightly more open; the professional wariness does not apply and he is tired of it anyway",
+        "trustworthy_established": "speaks in longer sentences, eventually stops editing himself"
+      },
+      "appearance": "A lean man somewhere in his middle forties, the kind of lean that is not hunger but habit — he has been moving through difficult ground for a long time and his body organized itself around that. March-warden coat, wool, the grey-green of limestone shadow, one brass closure replaced with knotted cord. Boots still muddy from the threshold. He is sitting with his back to the outcrop and his knees drawn up, not sleeping — just not moving. His face is weather-seamed and unhurried, the expression of someone who has decided to be still until he is ready not to be. There is a short-handled field axe laid flat beside him, not gripped, not put away.",
+      "people": "human",
+      "domains": {
+        "primary": "hourkeeper",
+        "secondary": "umbral",
+        "tertiary": "syllogist"
+      },
+      "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Kind and domain are independent: a people tends toward positions, an individual holds their own.",
+      "functions": [
+        "reveal",
+        "bind",
+        "conceal"
+      ],
+      "functionsNote": "Reveal: carries March knowledge the players cannot otherwise access cleanly. Bind: his loyalty to the post's dissolution-secret creates a tension that hooks the scene forward. Conceal: he is actively withholding the threshold-crossing account until trust is established — the concealment is the scene's pressure valve.",
+      "inGrainNote": "Stillwater's Trouble grain: peace + falsehood — the bowl is quiet and the quiet is not honest. Cassiel sits in both registers: genuinely still, genuinely not ready to tell the truth. Early-spring sets the mood — snowmelt, limestone cold, the world pretending winter is done.",
+      "image": "https://image.pollinations.ai/prompt/A%20lean%20man%20somewhere%20in%20his%20middle%20forties%2C%20the%20kind%20of%20lean%20that%20is%20not%20hunger%20but%20habit%20%E2%80%94%20he%20has%20been%20moving%20through%20difficult%20ground%20for%20a%20long%20time%20and%20his%20body%20organized%20itself%20around%20that.%20March%2C%20character%20portrait%2C%20named%20Cassiel%20Ord%2C%20Former%20march-warden%20who%20walked%20away%20from%20the%20post%20and%20sat%20down%20in%20the%20bowl%20and%20has%20not%20decided%20what%20%2C%20Economy%20of%20words%20born%20from%20years%20of%20writing%20terse%20post-reports%20nobody%20acted%20on.%20Does%20not%20explain%20him%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=64922&nologo=true",
+      "_canon": {
+        "entityId": "cassiel-ord",
+        "type": "npc",
+        "weight": 41,
+        "rating": "R+",
+        "tier": "canonical",
+        "provenance": {
+          "playerKey": "player-s9z9u1",
+          "characterId": "char-mrhs8286",
+          "locationId": "gen-stillwater-s-trouble",
+          "day": 6,
+          "worldDay": null,
+          "hint": "A figure sitting against the limestone outcrop at the far edge of Stillwater's Trouble — someone who walked here from th",
+          "why": "The boot-tracks that ended at the Raven's Home threshold belong to someone, and that someone is sitting in the bowl righ"
+        },
+        "contributedBy": {
+          "playerKey": "player-s9z9u1",
+          "characterId": "char-mrhs8286"
+        },
+        "promotedWorldDay": 19,
+        "birthWeight": 24,
+        "overtook": "cassiel-ord"
+      }
     }
   },
   "variants": [

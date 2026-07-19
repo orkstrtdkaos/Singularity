@@ -9,12 +9,13 @@ import { recordDeed, standingWith, reputationSummary } from "./engine/reputation
 import { seedStandingAtCreation, accrueStandingForDays, applyStandingOps, standingRoster } from "./engine/standing.js"; // BATCH-12 §3
 import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, touchSession, endSession, sessionLog, buildSessionPrompt, authorshipStats, crossCharacterAuthorship } from "./engine/chronicle.js";
 import { newProfile, updateProfile, aptitudeMods, profileInsight, grantAptitudes, fadingAptitudes, ensureCharacterStyle, ensureRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, revokeAdultGate, RATING_ORDER, RATING_LEVEL } from "./engine/playerprofile.js";
-import { gmTurn, parseIntent, gmAsk, generateBio, suggestBuild, extractGambit, sanitizeScene, narrativeRegister, ratingRegister, bluntnessDirective } from "./engine/gm.js";
+import { gmTurn, parseIntent, gmAsk, generateBio, suggestBuild, extractGambit, sanitizeScene, narrativeRegister, ratingRegister, bluntnessDirective, SALVAGEABLE_OPS } from "./engine/gm.js";
 import { namesToAvoid } from "./engine/namematch.js";
 import { affiliationOf, regionHomeTradition, buildPeopleVocab } from "./engine/affiliation.js"; // SNG-185
 import { applyQuestUpdates, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, slugify, advanceStructuredQuest } from "./engine/quests.js";
 import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM } from "./engine/corrections.js";
-import { getApiKey, setApiKey, callClaude, callClaudeJSON, parseLooseJSON } from "./engine/claude.js";
+import { getApiKey, setApiKey, callClaude, callClaudeJSON, parseLooseJSON, setCallObserver } from "./engine/claude.js";
+import { armDevCapture, recordCall, annotateLatest, devCaptures, clearCaptures } from "./engine/devcapture.js"; // SNG-186 §2f: see the machine
 import { unearnedDepth, generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight, NOMINATE_AT } from "./engine/generate.js";
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, ghList, fetchRepoJSON, raceTimeout } from "./engine/sync.js";
 import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates } from "./engine/inventory.js";
@@ -59,7 +60,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.156";
+const APP_VERSION = "1.8.157";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -247,6 +248,10 @@ let pendingRankAdvances = []; // ability-arch v2: abilities that auto-advanced t
     if (p.get("dev") === "0") { sessionStorage.removeItem("singularity.dev"); localStorage.removeItem("singularity.devPersist"); }
     if (localStorage.getItem("singularity.dev") === "1") localStorage.removeItem("singularity.dev"); // retire the sticky flag
   } catch { /* ignore */ }
+  // SNG-186 §2f: arm the model-exchange capture ONLY in dev mode, and point the transport's observer
+  // at it. In a player view isDevMode() is false — nothing is armed and setCallObserver is never
+  // called, so the capture stays null and inert (§3.4: no dev path the normal turn can reach).
+  try { if (isDevMode()) { armDevCapture(true); setCallObserver(recordCall); } } catch { /* ignore */ }
   wireLightbox(); // SNG-053: click any image → larger view
   try {
     CONTENT = await loadContent();
@@ -343,6 +348,7 @@ function chrome(inner) {
         <button id="nav-settings">Settings</button>
         <button id="nav-feedback" title="Feedback / bug report — your version, location, character and last turn attach automatically">⚑ Feedback</button>
         ${devEnabled() ? `<button id="nav-dev" title="Dev preview-legs checklist">🧪 Legs</button>` : ""}
+        ${devEnabled() ? `<button id="nav-machine" title="SNG-186 §2f — see the machine: the assembled prompt, raw response, parsed result and ops fired for recent model calls">🔬 Machine</button>` : ""}
       </div>
     </div>
     ${inner}`;
@@ -352,6 +358,8 @@ function chrome(inner) {
   if (fbBtn) fbBtn.onclick = () => { _feedbackType = "bug"; openFeedback(); };
   const devBtn = document.getElementById("nav-dev");
   if (devBtn) devBtn.onclick = () => renderPreviewLegs();
+  const machBtn = document.getElementById("nav-machine");
+  if (machBtn) machBtn.onclick = () => renderMachine();
 }
 
 // ---------- SNG-053: image lightbox (click any portrait/scene/moment art → larger view) ----------
@@ -696,6 +704,12 @@ function buildFeedbackContext() {
   if (lastPlayerAction) ctx.lastAction = String(lastPlayerAction).slice(0, 160);
   if (_capturedErrors.length) ctx.errors = _capturedErrors.slice(-5);
   if (character?._turnApplyError) ctx.turnApplyError = character._turnApplyError; // CCODE-07: a swallowed-render event travels with the report
+  // SNG-186 §3.2: a bug report must declare its dev provenance. Dev mode being ON at all is
+  // load-bearing triage context — the workbench may have staged encounters, minted entities, or set
+  // state — and a report that hides it wastes everyone's time. Mutating levers append to
+  // character._devActions (a visible ledger); the flag rides here whether or not any lever was pulled.
+  if (isDevMode()) ctx.devMode = true;
+  if (character?._devActions?.length) ctx.devActions = character._devActions.slice(-12);
   return ctx;
 }
 function _feedbackScreenLabel() {
@@ -866,6 +880,86 @@ async function renderPreviewLegs() {
     catch { document.getElementById("legs-copied").textContent = summary; }
   };
   document.getElementById("legs-back").onclick = () => renderRoster();
+}
+
+// ---------- SNG-186 §2f: see the machine ----------
+
+/** The dev workbench's highest-value lever: the assembled prompt, raw model response, parsed result
+ *  and which ops fired for the last two-dozen model calls this session — the by-hand SNG-179
+ *  diagnosis (read the prompt, read the raw output, see what the engine did with it) made a standing
+ *  button. Dev-only; captures live in memory for the session (armed at boot only under isDevMode()). */
+function renderMachine() {
+  const caps = devCaptures();
+  const ledger = character?._opLedger || {};
+  // Every documented op (SALVAGEABLE_OPS — the ONE source the salvager and the audit already share)
+  // plus the scalars and whatever the live ledger tracks, so an op that has NEVER fired shows as 0
+  // instead of vanishing. A zero is the bug signature — three ops read zero for sixteen levels before
+  // a deliberate capture found it (SNG-183 §3c); this makes that visible without a play session.
+  const vocab = [...new Set([...SALVAGEABLE_OPS, "sceneEnded", "gambitApt", ...Object.keys(ledger)])];
+  const fired = vocab.filter(op => (ledger[op]?.applied || 0) > 0);
+  const rejectedOnly = vocab.filter(op => !((ledger[op]?.applied || 0) > 0) && (ledger[op]?.rejected || 0) > 0);
+  const zero = vocab.filter(op => !ledger[op] || (!ledger[op].applied && !ledger[op].rejected)).sort();
+
+  const tallyChip = (op) => {
+    const r = ledger[op] || {};
+    const a = r.applied || 0, x = r.rejected || 0;
+    const cls = a > 0 ? "mach-fired" : x > 0 ? "mach-rej" : "mach-zero";
+    const why = x > 0 && r.lastWhy ? ` title="last rejection: ${esc(r.lastWhy)}"` : "";
+    return `<span class="mach-op ${cls}"${why}>${esc(op)} <b>${a}</b>${x ? `<span class="mach-x">✗${x}</span>` : ""}</span>`;
+  };
+
+  const promptText = (c) => {
+    const sys = (c.system || []).map((b, i) => `━━ SYSTEM BLOCK ${i + 1}${b.cache_control ? " (cached)" : ""} ━━\n${b.text || ""}`).join("\n\n");
+    const msgs = (c.messages || []).map(m => `━━ ${String(m.role || "user").toUpperCase()} ━━\n${typeof m.content === "string" ? m.content : JSON.stringify(m.content, null, 2)}`).join("\n\n");
+    return [sys, msgs].filter(Boolean).join("\n\n");
+  };
+  const usageLine = (c) => {
+    const u = c.usage || {};
+    const bits = [];
+    if (u.input_tokens != null) bits.push(`in ${u.input_tokens}`);
+    if (u.output_tokens != null) bits.push(`out ${u.output_tokens}`);
+    if (u.cache_read_input_tokens) bits.push(`cache ${u.cache_read_input_tokens}`);
+    if (c.ms != null) bits.push(`${c.ms}ms`);
+    if (c.stop_reason) bits.push(`stop:${c.stop_reason}`);
+    return bits.join(" · ");
+  };
+
+  const card = (c) => `<details class="mach-card"${caps[0] === c ? " open" : ""}>
+    <summary><span class="mach-task">${esc(c.task)}</span> <span class="hint">${esc(c.model)} · ${esc(usageLine(c))}${c.at ? " · " + esc(String(c.at).slice(11, 19)) : ""}</span></summary>
+    ${c.opsFired?.length ? `<div class="mach-sec"><span class="mach-label">emitted</span> ${c.opsFired.map(o => `<span class="mach-op mach-fired">${esc(o.op)} <code>${esc(o.shape)}</code></span>`).join(" ")}</div>` : (c.parsed ? `<div class="mach-sec hint">no ops emitted — narration only</div>` : "")}
+    <details class="mach-inner"><summary>Assembled prompt (${(c.system || []).length} block${(c.system || []).length === 1 ? "" : "s"} + ${(c.messages || []).length} msg)</summary><pre class="mach-pre">${esc(promptText(c))}</pre></details>
+    <details class="mach-inner"><summary>Raw response (${(c.raw || "").length} chars)</summary><pre class="mach-pre">${esc(c.raw || "")}</pre></details>
+    ${c.parsed ? `<details class="mach-inner"><summary>Parsed result</summary><pre class="mach-pre">${esc(JSON.stringify(c.parsed, null, 2))}</pre></details>` : ""}
+    <button class="btn secondary mach-copy" data-mach-copy="${esc(c.id)}">Copy this exchange</button>
+  </details>`;
+
+  chrome(`<div class="screen" style="max-width:900px">
+    <h2>🔬 See the Machine <span class="hint" style="text-transform:none">— last ${caps.length} model call${caps.length === 1 ? "" : "s"} this session</span></h2>
+    <p class="hint" style="margin-bottom:12px">The assembled prompt, the raw model response, what parsed, and which ops fired — the SNG-179 diagnosis as a standing panel. Captures live in memory for this session only (dev-mode; a player never reaches this).</p>
+
+    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Firing counts — this character, cumulative</h3>
+      <p class="hint" style="margin-bottom:8px">A <strong>zero is a signature</strong> — an op that has never fired may be built and unreachable. <span class="mach-op mach-fired">fired</span> <span class="mach-op mach-rej">rejected-only</span> <span class="mach-op mach-zero">never</span></p>
+      ${fired.length ? `<div class="mach-tally"><span class="mach-label">fired</span> ${fired.map(tallyChip).join(" ")}</div>` : ""}
+      ${rejectedOnly.length ? `<div class="mach-tally"><span class="mach-label">emitted then rejected, never applied</span> ${rejectedOnly.map(tallyChip).join(" ")}</div>` : ""}
+      <div class="mach-tally"><span class="mach-label">never fired (${zero.length})</span> ${zero.map(tallyChip).join(" ") || "<span class='hint'>— none; every op has fired at least once</span>"}</div>
+    </div>
+
+    ${caps.length ? caps.map(card).join("") : "<div class='insight'>No model calls captured yet. Take a turn in play, then return — every GM turn and its sub-calls (intent-parse, narrate) land here.</div>"}
+
+    <div style="display:flex; gap:8px; margin-top:14px; flex-wrap:wrap">
+      <button class="btn secondary" id="mach-clear">Clear captures</button>
+      <button class="btn secondary" id="mach-back">Back</button>
+    </div>
+  </div>`);
+
+  for (const b of app.querySelectorAll("[data-mach-copy]")) b.onclick = async () => {
+    const c = devCaptures().find(x => x.id === b.dataset.machCopy);
+    if (!c) return;
+    const text = `TASK ${c.task} · ${c.model} · ${usageLine(c)}\n\n=== ASSEMBLED PROMPT ===\n${promptText(c)}\n\n=== RAW RESPONSE ===\n${c.raw || ""}\n\n=== PARSED ===\n${c.parsed ? JSON.stringify(c.parsed, null, 2) : "(not a parsed turn)"}\n\n=== OPS EMITTED ===\n${(c.opsFired || []).map(o => `${o.op} ${o.shape}`).join("\n") || "(none)"}`;
+    try { await navigator.clipboard.writeText(text); b.textContent = "Copied ✓"; } catch { b.textContent = "Copy failed — select the text above"; }
+  };
+  document.getElementById("mach-clear").onclick = () => { clearCaptures(); renderMachine(); };
+  document.getElementById("mach-back").onclick = () => renderRoster();
 }
 
 // ---------- settings ----------
@@ -1536,6 +1630,28 @@ function logOpOutcome(op, outcome) {
   const row = character._opLedger[op] = character._opLedger[op] || { applied: 0, rejected: 0, lastWhy: null };
   if (outcome === "applied") row.applied++;
   else { row.rejected++; row.lastWhy = outcome; }
+}
+
+/** SNG-186 §2f: a compact "what did the model actually emit this turn" — every top-level key of the
+ *  parsed turn except pure narration, with its magnitude (array length / object keys / scalar).
+ *  This is the direct read of which ops FIRED this turn; the panel pairs it with _opLedger's
+ *  cumulative applied/rejected so an op that fired-but-rejected reads differently from never-fired
+ *  (the exact distinction the SNG-179 diagnosis turned on). Empty arrays/objects/strings are skipped
+ *  so the list shows only what the model actually put on the wire. */
+function opsFiredIn(turn) {
+  if (!turn || typeof turn !== "object") return [];
+  const skip = new Set(["narration", "ok", "error", "_applyFailed"]);
+  const out = [];
+  for (const [k, v] of Object.entries(turn)) {
+    if (skip.has(k) || v == null) continue;
+    let shape;
+    if (Array.isArray(v)) { if (!v.length) continue; shape = `[${v.length}]`; }
+    else if (typeof v === "object") { const ks = Object.keys(v); if (!ks.length) continue; shape = `{${ks.slice(0, 4).join(",")}${ks.length > 4 ? ",…" : ""}}`; }
+    else if (typeof v === "string") { if (!v.trim()) continue; shape = JSON.stringify(v.slice(0, 40)); }
+    else shape = String(v);
+    out.push({ op: k, shape });
+  }
+  return out;
 }
 
 /** SNG-185: affiliate a met NPC — its people + domains, from the same helper generate.js uses, with
@@ -2800,6 +2916,10 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
       saveCharacter(character);
     } catch (err2) { console.error("[applyTurn] recovery save also failed:", err2); }
   }
+  // SNG-186 §2f: bind this turn's parsed result + what fired to the model exchange that produced it,
+  // so "see the machine" shows prompt → raw → parsed → ops end to end. Dev-only; a no-op when disarmed.
+  // Runs after apply so opLedger reflects what actually landed (applied/rejected), even on a partial.
+  annotateLatest("gm-narrate", { parsed: result.turn, opsFired: opsFiredIn(result.turn), opLedger: character?._opLedger ? { ...character._opLedger } : null });
   // ability-arch v2: rank 2 is earned through use, not bought — surface any craft that just became
   // fluent this turn (deduped). Rank 3 is never here; it comes as a GM-marked defining moment.
   if (pendingRankAdvances.length) {

@@ -359,14 +359,18 @@ export function salvageNarration(raw) {
 /** Best-effort op recovery from malformed JSON: extract recognizable top-level
  *  arrays/objects by balanced-bracket scan and parse each independently. Only
  *  ops that later clamp-validate will ever apply — salvage never widens trust. */
+// CCODE-12 (SNG-165 §6): the contract documents these and the salvager must be able to recover
+// them, or a stray comma in a long reply silently drops an op the player earned. `factUpdates`,
+// `discovery`, `newEncounter` and `newAbility` were documented and NOT here — a truncated reply
+// lost a discovery or a granted ability outright. tests/wiring_audit.mjs GUARD 2 reads THIS const by
+// name and gates it against the contract so the two can never drift. Exported so the dev "see the
+// machine" panel (SNG-186 §2f) shows a firing count for EVERY documented op — including the ones at
+// zero, which is the whole point: three ops read zero for sixteen levels (SNG-183 §3c).
+export const SALVAGEABLE_OPS = ["questUpdates", "stageOps", "standingOps", "npcUpdates", "placeUpdates", "codexUpdates", "deeds", "ledgerEvents", "encounterOps", "characterDeltas", "scene", "relationshipDeltas", "timeOps", "moveTo", "stateOps", "itemUpdates", "gambitOps", "markDefiningMoment", "markTeacher", "offerPromotion", "offerAcquisition", "offerIntent", "generateRequest", "imagePrompt", "unlockSubstrate", "unlockPrecursor", "factUpdates", "discovery", "newEncounter", "newAbility"];
+
 export function salvageOps(raw) {
   const out = {};
-  // CCODE-12 (SNG-165 §6): the contract documents these and the salvager must be able to recover
-  // them, or a stray comma in a long reply silently drops an op the player earned. `factUpdates`,
-  // `discovery`, `newEncounter` and `newAbility` were documented and NOT here — a truncated reply
-  // lost a discovery or a granted ability outright. tests/wiring_audit.mjs now gates this list
-  // against the contract so the two can never drift again.
-  const keys = ["questUpdates", "stageOps", "standingOps", "npcUpdates", "placeUpdates", "codexUpdates", "deeds", "ledgerEvents", "encounterOps", "characterDeltas", "scene", "relationshipDeltas", "timeOps", "moveTo", "stateOps", "itemUpdates", "gambitOps", "markDefiningMoment", "markTeacher", "offerPromotion", "offerAcquisition", "offerIntent", "generateRequest", "imagePrompt", "unlockSubstrate", "unlockPrecursor", "factUpdates", "discovery", "newEncounter", "newAbility"];
+  const keys = SALVAGEABLE_OPS;
   const text = String(raw || "");
   for (const key of keys) {
     const m = text.indexOf('"' + key + '"');

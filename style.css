@@ -736,3 +736,23 @@ img[data-lightbox] { cursor: zoom-in; }
 /* SNG-134: a hoverable/tappable entity (skill · name · item) — subtle affordance, one detail everywhere */
 .entity-hover { cursor: help; border-bottom: 1px dotted var(--ink-dim); }
 .entity-hover:hover { color: var(--accent2); border-bottom-color: var(--accent2); }
+
+/* SNG-186 §2f — "see the machine" dev panel */
+.mach-card { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; background: var(--panel); }
+.mach-card > summary { padding: 8px 12px; cursor: pointer; user-select: none; }
+.mach-task { font-weight: 600; color: var(--accent2); text-transform: uppercase; font-size: 12px; letter-spacing: .5px; }
+.mach-sec { padding: 4px 12px 8px; display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+.mach-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--ink-dim); margin-right: 4px; }
+.mach-inner { margin: 0 12px 6px; }
+.mach-inner > summary { cursor: pointer; font-size: 13px; color: var(--ink-dim); padding: 3px 0; }
+.mach-inner > summary:hover { color: var(--ink); }
+.mach-pre { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 10px; margin: 4px 0 0; font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 12px; line-height: 1.5; white-space: pre-wrap; word-break: break-word; max-height: 420px; overflow: auto; color: var(--ink); }
+.mach-copy { margin: 4px 12px 12px; }
+.mach-tally { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; margin-bottom: 8px; }
+.mach-op { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; padding: 2px 7px; border-radius: 10px; border: 1px solid var(--border); background: var(--panel2); font-family: ui-monospace, Menlo, Consolas, monospace; }
+.mach-op b { font-weight: 700; }
+.mach-op code { font-size: 11px; color: var(--ink-dim); background: none; padding: 0; }
+.mach-op.mach-fired { border-color: #4a9d5b; color: #8fce9c; }
+.mach-op.mach-rej { border-color: #c0a24a; color: #d8c07a; }
+.mach-op.mach-zero { border-color: var(--border); color: var(--ink-dim); }
+.mach-x { color: #c0524a; font-size: 11px; margin-left: 2px; }

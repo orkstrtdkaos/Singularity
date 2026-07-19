@@ -44,6 +44,15 @@ function buildSystemArray(systemBlocks, model) {
 export function getApiKey() { return localStorage.getItem("singularity.anthropicKey") || ""; }
 export function setApiKey(k) { localStorage.setItem("singularity.anthropicKey", k.trim()); }
 
+// SNG-186 §2f: a single optional observer of every model exchange. The transport stays
+// dev-agnostic — it knows nothing about the dev workbench; app.js registers devcapture here ONLY
+// under isDevMode(). In normal play `_callObserver` is null, so the call below is a no-op and the
+// whole capture path costs nothing and ships nothing reachable (§3.4). Every model call in the app
+// routes through callClaude, so this one seam sees the GM turn AND every sub-call (intent-parse,
+// gm-narrate, generate, chronicle) for free.
+let _callObserver = null;
+export function setCallObserver(fn) { _callObserver = typeof fn === "function" ? fn : null; }
+
 /** Call Claude. messages: [{role, content}]. opts: { task, system, maxTokens }. Returns text. */
 export async function callClaude(messages, opts = {}) {
   const task = opts.task || "_default";
@@ -66,6 +75,7 @@ export async function callClaude(messages, opts = {}) {
   if (opts.systemBlocks?.length) body.system = buildSystemArray(opts.systemBlocks, model);
   else if (opts.system) body.system = [{ type: "text", text: opts.system, cache_control: { type: "ephemeral", ttl: "1h" } }];
 
+  const startedAt = Date.now();
   const res = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
     headers: {
@@ -83,7 +93,14 @@ export async function callClaude(messages, opts = {}) {
   const data = await res.json();
   const u = data.usage || {};
   console.log(`[callClaude] task=${task} model=${model} stop=${data.stop_reason} out=${u.output_tokens} in=${u.input_tokens} cacheWrite=${u.cache_creation_input_tokens ?? 0} cacheRead=${u.cache_read_input_tokens ?? 0}`);
-  return data.content?.map(b => b.text || "").join("") || "";
+  const text = data.content?.map(b => b.text || "").join("") || "";
+  // SNG-186 §2f: hand the whole exchange to the dev observer if one is armed. Wrapped so a capture
+  // bug can never break a turn — observation must be strictly safer than not observing.
+  if (_callObserver) {
+    try { _callObserver({ task, model, system: body.system || (opts.system ? [{ type: "text", text: opts.system }] : []), messages, raw: text, stop_reason: data.stop_reason, usage: u, ms: Date.now() - startedAt, at: new Date().toISOString() }); }
+    catch (e) { console.warn("[devcapture] observer threw (ignored):", e?.message); }
+  }
+  return text;
 }
 
 /** Call expecting a JSON object back. Strips code fences; throws on unparseable.

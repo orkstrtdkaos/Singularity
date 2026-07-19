@@ -197,7 +197,7 @@ check("APP_VERSION matches index.html's cache stamp (feedback reports name the r
 // Widest blast radius of the three: a documented op absent from salvage is LOST to a stray comma in
 // a long reply. newEncounter / newAbility / discovery / sceneEnded were all in that state.
 {
-  const salvageKeys = (() => { const m = gmSrc.match(/const keys = \[([^\]]+)\]/); return m ? [...m[1].matchAll(/"([^"]+)"/g)].map(x => x[1]) : []; })();
+  const salvageKeys = (() => { const m = gmSrc.match(/const SALVAGEABLE_OPS = \[([^\]]+)\]/); return m ? [...m[1].matchAll(/"([^"]+)"/g)].map(x => x[1]) : []; })();
   // TOP-LEVEL reply keys only — a naive scan also collects each op's nested fields and invents gaps.
   const documented = (() => {
     const start = gmSrc.indexOf('"narration"');

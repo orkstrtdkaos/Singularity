@@ -140,5 +140,10 @@
     "purpose": "The one answer to 'what kind of being is this person, and what do they practise' — read from their own role, skills and region with provenance, so the two mint paths can never disagree about it again.",
     "playerVisibleSurface": "Indirect: every teacher who can now teach and every people who can now credit you — a met NPC's craft becoming legible is what lets standing move and a mentor mentor.",
     "whatMakesItFire": "Meeting anyone in play (npcs.js applyNpcUpdates), minting anyone (generate.js), and the reconcile v11 backfill over people already in the save. Before SNG-185 the meet-path stamped nothing, which is why registry-only people had no craft."
+  },
+  "devcapture.js": {
+    "purpose": "See the machine: a dev-only ring buffer holding the last two-dozen model exchanges — assembled prompt, raw response, parsed result, ops fired — so the by-hand SNG-179 diagnosis (read the prompt, read the raw output, see what the engine did) is a standing instrument, not a devtools dig.",
+    "playerVisibleSurface": "None for a player — it is dev-mode-only (the 🔬 Machine screen behind isDevMode()). Its value is that a defect that used to cost a live play session to find is now visible in a panel.",
+    "whatMakesItFire": "callClaude invokes the observer app.js registers ONLY under isDevMode() at boot; every model call (GM turn + intent-parse + narrate + generate) routes through that one seam. In a player view the observer is null and nothing is recorded (§3.4)."
   }
 }

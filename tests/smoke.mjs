@@ -3154,7 +3154,7 @@ await (async () => {
   check("SNG-137: stateOps rule carries the widened repair vocabulary", /correctAbilityRank[\s\S]{0,200}correctBond[\s\S]{0,200}correctVital[\s\S]{0,200}mergeEntity/.test(gmSrc));
   check("SNG-137: 'acknowledge means emit — same turn' is in the stateOps rule", /ACKNOWLEDGE MEANS EMIT/i.test(gmSrc));
   check("SNG-137: itemUpdates is a reply-format key AND a rule (items grow with the story)", /"itemUpdates":\s*\[/.test(gmSrc) && /ITEMS GROW WITH THE STORY/i.test(gmSrc));
-  check("SNG-137: itemUpdates survives a malformed reply (in the salvageOps key list)", /const keys = \[[\s\S]*?"itemUpdates"[\s\S]*?\]/.test(gmSrc));
+  check("SNG-137: itemUpdates survives a malformed reply (in the salvageOps key list)", /const SALVAGEABLE_OPS = \[[\s\S]*?"itemUpdates"[\s\S]*?\]/.test(gmSrc));
   check("SNG-137: a POSSIBLE ERROR block (anomalyDetail) is rendered into the scene", /anomalyDetail\b/.test(gmSrc) && /POSSIBLE ERROR/.test(gmSrc));
 })();
 
@@ -5814,6 +5814,43 @@ await (async () => {
   const snap = JSON.stringify(save.npcRegistry);
   step.apply(save, ctx);
   check("185: re-running the backfill changes nothing (§4.5)", JSON.stringify(save.npcRegistry) === snap);
+}
+
+// --- SNG-186 §2f: see the machine — the dev capture ring, inert until armed ---
+{
+  const dc = await import("../engine/devcapture.js");
+  const gm = await import("../engine/gm.js");
+
+  // INERT until armed — a player view holds no prompts. recordCall is a no-op returning null.
+  dc.clearCaptures();
+  check("186: disarmed, recordCall records nothing and returns null (§3.4)", dc.recordCall({ task: "gm-narrate", raw: "x" }) === null && dc.devCaptures().length === 0);
+
+  // Armed, it captures with the fields the panel reads, newest-first.
+  dc.armDevCapture(true);
+  const id1 = dc.recordCall({ task: "intent-parse", model: "haiku", raw: "{}", system: [{ text: "S" }], messages: [{ role: "user", content: "hi" }] });
+  const id2 = dc.recordCall({ task: "gm-narrate", model: "sonnet", raw: '{"narration":"n"}' });
+  check("186: armed, a call is captured with a stable, distinct id", !!id1 && !!id2 && id1 !== id2);
+  check("186: devCaptures is newest-first", dc.devCaptures()[0].task === "gm-narrate");
+  check("186: the capture carries the assembled prompt + raw the panel shows", dc.devCaptures()[1].system?.[0]?.text === "S" && dc.devCaptures()[1].messages?.[0]?.content === "hi");
+
+  // annotateLatest binds the parsed turn + ops to the NEWEST call of that task — a GM turn fans out
+  // into intent-parse + narrate + a prose pass, so the parsed turn belongs to the newest gm-narrate.
+  dc.recordCall({ task: "gm-narrate", model: "sonnet", raw: "second" });
+  dc.annotateLatest("gm-narrate", { parsed: { narration: "n", npcUpdates: [{ op: "meet" }] }, opsFired: [{ op: "npcUpdates", shape: "[1]" }] });
+  const gmCaps = dc.devCaptures().filter(c => c.task === "gm-narrate");
+  check("186: annotateLatest binds to the newest gm-narrate, not the intent-parse before it", gmCaps[0].opsFired?.[0]?.op === "npcUpdates" && gmCaps[0].parsed?.npcUpdates?.length === 1);
+  check("186: the older gm-narrate stays unannotated (latest-only, no cross-talk)", gmCaps[1].opsFired === undefined);
+
+  // The ring is bounded — a long session cannot grow memory without limit.
+  dc.clearCaptures();
+  for (let i = 0; i < 30; i++) dc.recordCall({ task: "t", raw: String(i) });
+  check("186: the ring caps at 24, oldest fall off", dc.devCaptures().length === 24 && dc.devCaptures()[0].raw === "29" && dc.devCaptures()[23].raw === "6");
+  dc.clearCaptures();
+  dc.armDevCapture(false); // leave it as a player would find it
+
+  // The zero-count vocabulary the panel shows is the ONE list the salvager + wiring audit already share.
+  check("186: SALVAGEABLE_OPS is the shared op vocabulary, exported once", Array.isArray(gm.SALVAGEABLE_OPS) && gm.SALVAGEABLE_OPS.length > 20);
+  check("186: it carries the three ops that read zero for sixteen levels (SNG-183 §3c)", ["markTeacher", "discovery", "markDefiningMoment"].every(o => gm.SALVAGEABLE_OPS.includes(o)));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

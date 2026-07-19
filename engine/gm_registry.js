@@ -187,7 +187,8 @@ export const GM_CONTEXT = [
       catalog: env.app.fullCatalog(), fnIndex: env.app.FN_INDEX(), rules: env.CONTENT.rules,
       coverageMissing: functionCoverage(env.character, env.app.fullCatalog(), env.app.FN_INDEX()).missing,
       companions: activeCompanions(env.character, env.CONTENT.companions),
-      party: env.sharedScene ? env.sharedScene.party.filter(m => m.characterId !== env.character.id) : []
+      party: env.sharedScene ? env.sharedScene.party.filter(m => m.characterId !== env.character.id) : [],
+      day: env.worldDay ?? null   // SNG-173: recency needs a clock, or the quiet-craft pool cannot judge
     }) },
   { key: "availableEncounters", builder: "app.listAvailableEncounters", carries: ["encounters the GM may fire"],
     reachedBy: "GM offer + decline path", spec: "§15", views: ["turn"],

@@ -57,7 +57,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.134";
+const APP_VERSION = "1.8.135";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2626,6 +2626,7 @@ function gmEnv(extra = {}) {
   return {
     character, location: hereNow(), CONTENT, sceneTurns, sceneState, sharedScene, profile,
     time: readClock(character.clock),
+    worldDay: (() => { try { return absoluteWorldDay(); } catch { return null; } })(), // SNG-173: recency needs a clock
     app: {
       fullCatalog, FN_INDEX: () => FN_INDEX, activeEnc, listAvailableEncounters,
       masteryReadyForGM, ratingLineForGM, maybeLegendDetail, sharedCanonForGM
@@ -3302,7 +3303,7 @@ async function onChoice(choice) {
   // SNG-010: practice ledger — the single counting site
   {
     const usedIds = [choice.abilityId, ...(choice.comboAbilities || [])].filter(Boolean);
-    if (usedIds.length) { recordUse(character, usedIds); pendingRankAdvances.push(...autoAdvancePracticedRanks(character, CONTENT.rules, { branchForks: CONTENT.branchForks, catalog: fullCatalog(), traditionIndex: CONTENT.traditionIndex })); }
+    if (usedIds.length) { recordUse(character, usedIds, { day: absoluteWorldDay() }); pendingRankAdvances.push(...autoAdvancePracticedRanks(character, CONTENT.rules, { branchForks: CONTENT.branchForks, catalog: fullCatalog(), traditionIndex: CONTENT.traditionIndex })); }
     // SNG-010C: a cast channeled with a bond-source companion present wakes evolving gear
     itemsAdvanced = noteCoUseAndRefresh(character, { usedAbilityIds: usedIds, activeCompanionIds: activeCompanions(character, CONTENT.companions).map(c => c.id), catalog: CONTENT.items });
     if (usedIds.length) notePerception(character, character.currentLocationId, hereNow(), { visited: true, usedAbilityIds: usedIds }, CONTENT.rules);
@@ -5905,7 +5906,7 @@ async function finishGambit(run) {
   for (const r of run.receipts) {
     const a = g.actions[r.index];
     const ids = [a?.abilityId, ...(a?.comboAbilities || [])].filter(Boolean);
-    if (ids.length) { recordUse(character, ids); pendingRankAdvances.push(...autoAdvancePracticedRanks(character, CONTENT.rules, { branchForks: CONTENT.branchForks, catalog: fullCatalog(), traditionIndex: CONTENT.traditionIndex })); }
+    if (ids.length) { recordUse(character, ids, { day: absoluteWorldDay() }); pendingRankAdvances.push(...autoAdvancePracticedRanks(character, CONTENT.rules, { branchForks: CONTENT.branchForks, catalog: fullCatalog(), traditionIndex: CONTENT.traditionIndex })); }
   }
   // the human planned: that's who they are becoming
   const allTags = ["plan", "prepare", ...new Set(g.actions.flatMap(a => a.intentTags || []))];

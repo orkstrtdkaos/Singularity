@@ -3352,7 +3352,9 @@ await (async () => {
   const companions = [{ id: "huginn", name: "Huginn", role: "carrion bird that attends endings", knowledge: ["where the dying are", "the old roads"] }];
   const block = toolkitForGM(rich, { catalog: cat, fnIndex, rules, coverageMissing: ["RESTORE"], companions, party: [] });
 
-  check("SNG-142: the toolkit surfaces a craft not yet leaned on (unused proxy — palework at 0 uses)", /not yet leaned on:[^\n]*Palework/.test(block));
+  // SNG-173 renamed this line "Crafts gone quiet" — never-used is now one way in, not the only one.
+  // Asserting the intent (an unleaned-on craft is surfaced) rather than the old wording.
+  check("SNG-142: the toolkit surfaces a craft not yet leaned on (palework at 0 uses)", /gone quiet:[^\n]*Palework/.test(block));
   check("SNG-142: it offers a combination of two OWNED crafts (ranked by prior co-use)", /reach further together: (Deathsense \+ Order-Sense|Order-Sense \+ Deathsense)/.test(block) && /woven these before/.test(block));
   check("SNG-142: it surfaces the declared ASPIRATION + progress (the 0-mention gap closed)", /Aspiration in play: working toward The Kept Breath \(4\/10\)/.test(block));
   check("SNG-142: it flags a carried item's CAPABILITY (Memory — channel deathsense), not just its name", /Carried[^\n]*Memory — channel deathsense/.test(block));
@@ -5027,6 +5029,41 @@ await (async () => {
     const roster = standingRoster(c, RULES);
     check("§3e: the roster omits holders who have never heard of you", roster.length === 1);
   }
+}
+
+// --- SNG-173: the toolkit pool must not drain monotonically ---
+{
+  const { toolkitForGM } = await import("../engine/toolkit.js");
+  const cat = { a1: { name: "Alpha" }, a2: { name: "Beta" }, a3: { name: "Gamma" } };
+  const mk = (uses, lastUsed) => ({ abilities: [{ abilityId: "a1" }, { abilityId: "a2" }, { abilityId: "a3" }], practice: { uses, lastUsed, aspirations: [] }, inventory: [] });
+  const first = s => (String(s).split(/\r?\n/)[0] || "");
+
+  // The defect: one use removed a craft from the pool forever.
+  const allUsedToday = mk({ a1: 3, a2: 1, a3: 9 }, { a1: 100, a2: 100, a3: 100 });
+  check("173: a craft used TODAY is not offered as quiet", !first(toolkitForGM(allUsedToday, { catalog: cat, rules: {}, day: 100 })).includes("Alpha"));
+
+  const oneWentQuiet = mk({ a1: 3, a2: 1, a3: 9 }, { a1: 80, a2: 100, a3: 100 });
+  check("173: the SAME craft returns to the pool once it goes quiet — the pool does not drain monotonically",
+    first(toolkitForGM(oneWentQuiet, { catalog: cat, rules: {}, day: 100 })).includes("Alpha"));
+
+  // Never-used stays the quietest of all.
+  const neverUsed = mk({ a1: 5 }, { a1: 100 });
+  check("173: a never-used craft is still surfaced", first(toolkitForGM(neverUsed, { catalog: cat, rules: {}, day: 100 })).includes("Beta"));
+
+  // Migration: a pre-stamp save must NOT name its most-used crafts as quiet. This is the version
+  // that shipped wrong first — it called Silas's 58-use Order-Sense "gone quiet".
+  const preStamp = mk({ a1: 58, a2: 1, a3: 27 }, undefined);
+  const line = first(toolkitForGM(preStamp, { catalog: cat, rules: {}, day: 400 }));
+  check("173: an unstamped save does not call its MOST-used craft quiet", !line.includes("Alpha") && !line.includes("Gamma"));
+  check("173: an unstamped save does surface its barely-used craft", line.includes("Beta"));
+
+  // recordUse must stamp when given a day, and stay backward-safe when not.
+  const c = { practice: { uses: {}, coActivations: {}, aspirations: [] } };
+  recordUse(c, ["a1"], { day: 42 });
+  check("173: recordUse stamps lastUsed when given a day", c.practice.lastUsed?.a1 === 42);
+  const c2 = { practice: { uses: {}, coActivations: {}, aspirations: [] } };
+  recordUse(c2, ["a1"]);
+  check("173: recordUse without a day still counts (no caller is broken)", c2.practice.uses.a1 === 1);
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

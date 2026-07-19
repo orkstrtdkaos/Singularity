@@ -14,9 +14,17 @@ export function ensurePractice(character) {
 
 /** Single counting site: call once per validated ability resolution.
  *  2+ abilities in one action increments every pair's co-activation. */
-export function recordUse(character, abilityIds = []) {
+export function recordUse(character, abilityIds = [], { day = null } = {}) {
   ensurePractice(character);
   const ids = [...new Set(abilityIds.filter(Boolean))];
+  // SNG-173: stamp WHEN, not just how many times. The toolkit's "crafts not yet leaned on" pool read
+  // `uses === 0`, so an ability used a single time left the pool permanently — the feature worked for
+  // a level-1 character who did not need it and emptied for a level-16 one who did. Measured on
+  // Silas Weir at level 16: 15 of 17 abilities excluded, 5 of them after exactly ONE use.
+  if (day != null) {
+    character.practice.lastUsed = character.practice.lastUsed || {};
+    for (const id of ids) character.practice.lastUsed[id] = day;
+  }
   for (const id of ids) character.practice.uses[id] = (character.practice.uses[id] || 0) + 1;
   if (ids.length >= 2) {
     for (let i = 0; i < ids.length; i++) for (let j = i + 1; j < ids.length; j++) {

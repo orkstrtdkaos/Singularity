@@ -55,9 +55,37 @@ export function toolkitForGM(character, opts = {}) {
   const co = character?.practice?.coActivations || {};
   const lines = [];
 
-  // (1) crafts perhaps forgotten — owned abilities never leaned on (no recency stamp exists; use-count is the proxy)
-  const forgotten = cap(owned.filter(a => (uses[a.abilityId] || 0) === 0).map(a => catalog[a.abilityId]?.name || a.abilityId), 3);
-  if (forgotten.length) lines.push(`- Crafts not yet leaned on: ${forgotten.join(", ")}.`);
+  // (1) SNG-173: crafts gone QUIET — never used, or not used lately. This read `uses === 0`, which
+  // meant a single use removed an ability from the pool forever: the block emptied precisely as the
+  // toolkit grew large enough to be worth holding up. Recency restores it without loosening rule
+  // 16B's offer rate — the pool is what was broken, not the rate.
+  //
+  // MIGRATION MATTERS HERE, and the obvious version is wrong. A save from before `lastUsed` existed
+  // has no stamps at all. Treating every unstamped ability as long-quiet made the block name Silas's
+  // THREE MOST-USED crafts — Order-Sense (58 uses), Palework (27), Deathsense (25) — as "gone quiet",
+  // which reads as nonsense to the player and would have discredited the whole block on first sight.
+  // So an unstamped ability is judged by frequency instead: heavily-used ones are presumed in play
+  // and wait until they earn a stamp; lightly-used ones (the five Silas used exactly once) come back.
+  const quietAfter = rules?.practice?.toolkitQuietDays ?? 7;
+  const presumedInUse = rules?.practice?.toolkitInUseThreshold ?? 5;
+  const lastUsed = character?.practice?.lastUsed || {};
+  const day = Number.isFinite(Number(opts.day)) ? Number(opts.day) : null;
+  // Returns null when the craft is NOT quiet; otherwise a rank where larger = quieter.
+  const quietness = (id) => {
+    const n = uses[id] || 0;
+    if (!n) return Infinity;                               // never leaned on — the quietest of all
+    const at = lastUsed[id];
+    if (at == null) return n <= presumedInUse ? presumedInUse - n : null;  // pre-stamp save: judge by frequency
+    if (day == null) return null;                          // stamped but no clock — cannot judge recency
+    const quiet = day - at;
+    return quiet >= quietAfter ? quiet : null;
+  };
+  const forgotten = cap(
+    owned.map(a => ({ id: a.abilityId, q: quietness(a.abilityId) }))
+      .filter(x => x.q != null)
+      .sort((a, b) => b.q - a.q)
+      .map(x => catalog[x.id]?.name || x.id), 3);
+  if (forgotten.length) lines.push(`- Crafts gone quiet: ${forgotten.join(", ")}.`);
 
   // (2) two owned crafts that might braid further together (rule 16 combo, as an INVITATION)
   if (fnIndex && owned.length >= 2) {

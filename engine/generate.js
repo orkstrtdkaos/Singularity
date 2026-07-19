@@ -67,7 +67,9 @@ export function mintId(name, taken = {}) {
  *  Derives every field from context — never fabricates specifics it wasn't given. */
 export function stubEntity(type, context = {}, schema = {}) {
   const loc = context.location || {};
-  const region = loc.regionId || context.regionId || "valley";
+  // SNG-166 §1: the literal "valley" default is gone — an unresolvable region is now NULL and
+  // marked, because a wrong address is worse than a known-missing one.
+  const region = loc.regionId || context.regionId || null;
   const name = context.hint ? String(context.hint).slice(0, 60) : `a presence in ${loc.name || "the valley"}`;
   const base = { schemaVersion: 1, id: slugify(name) || "generated", name };
   if (type === "npc") {
@@ -98,6 +100,58 @@ export function stubEntity(type, context = {}, schema = {}) {
   // fill any remaining required key the schema wants but we didn't set
   for (const k of missingRequired(base, schema)) base[k] = defaultFor(schema.properties?.[k]);
   return base;
+}
+
+/** SNG-166 §1: WHERE A GENERATED PLACE ACTUALLY IS.
+ *
+ *  `stubEntity` defaulted `region` to the literal "valley", and the general path never asked the
+ *  model for one, so EVERY generated location in Erik's save landed in the valley — including
+ *  `gen-center` (which is the Crossing), `gen-the-ent-grove` (Deepwood) and
+ *  `gen-ashwarden-march-road` (the Palelands). 6 of 6.
+ *
+ *  Evidence in order of strength, and the order matters. The ANCHOR is deliberately not first:
+ *  the anchor is usually wherever the player is standing, so inheriting it is the bug itself —
+ *  a grove in the Deepwood generated while the player stands in Millbrook is not in the valley.
+ *    1. a valid regionId the model gave us (it is now shown the list — see buildGeneratePrompt)
+ *    2. a TRADITION or Reach named in the place's own name/prose, resolved to that people's home
+ *       region via traditions.json — what the place IS beats where it was minted from
+ *    3. the anchor's region, when nothing in the place itself says otherwise
+ *    4. UNRESOLVED — null, and said so. Per ROUND 2: "a wrong address is worse than a known-missing
+ *       one", and everything downstream already tolerates a null region.
+ */
+export function resolveRegionFor(entity = {}, context = {}, traditionIndex = null, regions = null) {
+  const loc = context.location || {};
+  const valid = (r) => !!r && (!regions || regions.has(r));
+
+  const given = entity.regionId || entity.region;
+  if (valid(given)) return { regionId: given, regionSource: "authored" };
+
+  // what the place says it IS
+  const text = [entity.name, entity.id, entity.descriptionSeed, entity.seedFiction].filter(Boolean).join(" ").toLowerCase();
+  // A place that names its own REGION outranks everything but an explicit valid regionId — this is
+  // how `gen-center` stops being filed in the valley when it is plainly the Crossing.
+  if (text && regions) {
+    for (const r of regions) {
+      const bare = String(r).replace(/^the_/, "").replace(/_/g, " ");
+      if (bare.length > 3 && (text.includes(bare) || text.includes(String(r).replace(/_/g, "-")))) {
+        return { regionId: r, regionSource: "named" };
+      }
+    }
+  }
+  if (text && traditionIndex?.byId) {
+    for (const t of Object.values(traditionIndex.byId)) {
+      if (!t?.region || !valid(t.region)) continue;
+      const tid = String(t.traditionId || "").toLowerCase();
+      const nm = String(t.name || "").toLowerCase().replace(/^the\s+/, "").replace(/s$/, "");
+      const hit = (tid.length > 3 && text.includes(tid)) || (nm.length > 3 && text.includes(nm));
+      if (hit) return { regionId: t.region, regionSource: "named" };
+    }
+  }
+
+  const anchor = loc.regionId || loc.region || context.regionId;
+  if (valid(anchor)) return { regionId: anchor, regionSource: "anchor" };
+
+  return { regionId: null, regionSource: "unresolved" };
 }
 
 /** deterministic near-by map coords for a generated place (offset from its parent). */
@@ -308,6 +362,9 @@ export async function generate(type, context = {}, deps = {}) {
   // SNG-177: an NPC arrives affiliated. Without this the standing system cannot see the people a
   // player actually spends their time with — every bond in play is with a generated NPC.
   if (type === "npc") Object.assign(entity, affiliationFor(entity, context, context.traditionIndex || null));
+  // SNG-166 §1: a generated PLACE gets an address derived from what it is, not from where the player
+  // happened to be standing. 6 of 6 in Erik's save were stamped "valley", the Crossing included.
+  if (type === "location") Object.assign(entity, resolveRegionFor(entity, context, context.traditionIndex || null, context.validRegions || null));
   if (floored.action !== "clean") entity._gen.floor = floored.action;
   // SNG-035/046-L3: born-WITH-image — an injected image builder stamps the record's picture at
   // mint, so a generated NPC/location arrives with its art regardless of the caller (persist-once;
@@ -559,6 +616,9 @@ export function buildGeneratePrompt(type, context = {}, { schema = {}, examples 
     context.hint ? `WHAT'S NEEDED: ${context.hint}` : `A new ${type} for this place.`,
     context.why ? `WHY: ${context.why}` : "",
     `WHERE: ${loc.name || "the valley"}${loc.regionId ? ` (${loc.regionId})` : ""}`,
+    type === "location" && context.validRegions?.size
+      ? `VALID regionId VALUES — pick the one this place actually belongs to, which is NOT necessarily the one above: ${[...context.validRegions].join(", ")}. Anything else is discarded and the place is left unaddressed.`
+      : "",
     dispo ? `LOCAL DISPOSITION: ${dispo}` : "",
     roleLine, seedLine, arcLine, seasonLine,
     type === "npc" ? `

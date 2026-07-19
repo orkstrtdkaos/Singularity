@@ -5521,6 +5521,45 @@ await (async () => {
   check("168: and it ends cleanly when a finger lifts", /touchend/.test(src));
 }
 
+// --- SNG-166 §1: a generated place gets an address derived from what it IS ---
+{
+  const g2 = await import("../engine/generate.js");
+  const idx = { byId: {
+    ashwarden: { traditionId: "ashwarden", name: "The Ashwardens", region: "the_palelands" },
+    umbral: { traditionId: "umbral", name: "The Umbrals", region: "umbral_depths" }
+  } };
+  const regions = new Set(["valley", "the_center", "the_palelands", "umbral_depths", "manifest_domain"]);
+  const anchor = { location: { id: "millbrook", name: "Millbrook", regionId: "valley" } };
+
+  // The defect: every generated location in Erik's save was stamped "valley" — 6 of 6.
+  check("166: a place that names its own REGION is filed there, not where the player stood",
+    g2.resolveRegionFor({ id: "gen-center", name: "The Center" }, anchor, idx, regions).regionId === "the_center");
+  check("166: a place that names a PEOPLE is filed in that people's home region",
+    g2.resolveRegionFor({ id: "gen-ashwarden-march-road", name: "Ashwarden March Road" }, anchor, idx, regions).regionId === "the_palelands");
+  check("166: and the source is recorded, so a derivation is distinguishable from a statement",
+    g2.resolveRegionFor({ name: "Ashwarden Road" }, anchor, idx, regions).regionSource === "named");
+
+  // The anchor is deliberately NOT first — inheriting where the player stands is the bug itself.
+  check("166: an ordinary place with no signal falls back to the anchor",
+    g2.resolveRegionFor({ name: "The Old Barn" }, anchor, idx, regions).regionSource === "anchor");
+
+  // A model-supplied region is honoured only if it is real.
+  check("166: a valid model-supplied regionId wins outright",
+    g2.resolveRegionFor({ name: "X", regionId: "umbral_depths" }, anchor, idx, regions).regionSource === "authored");
+  check("166: an invented region is refused and does not become the address",
+    g2.resolveRegionFor({ name: "Y", regionId: "narnia" }, anchor, idx, regions).regionId !== "narnia");
+
+  // ROUND 2: a wrong address is worse than a known-missing one.
+  const un = g2.resolveRegionFor({ name: "Nowhere" }, {}, idx, regions);
+  check("166: with nothing to go on the place is UNRESOLVED, not guessed into the valley",
+    un.regionId === null && un.regionSource === "unresolved");
+
+  // The literal default is gone from the source entirely.
+  const genSrc = readFileSync(new URL('../engine/generate.js', import.meta.url), 'utf8');
+  check("166: the hardcoded `|| \"valley\"` region default no longer exists",
+    !/context\.regionId \|\| "valley"/.test(genSrc));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

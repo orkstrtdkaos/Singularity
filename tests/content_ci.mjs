@@ -235,6 +235,27 @@ for (const pack of PACKS) {
     `${gap.length} exceeds the ${CEILING} recorded when this check shipped — author seeds, or re-baseline deliberately`);
 }
 
+// (3c-iv) SNG-166 §1 — no location may carry a DEFAULTED address.
+// ROUND 2 §6.1: "the seed guard caught 10 dead encounter seeds because it checked that a reference
+// RESOLVES. regionSource deserves the same — because if the fix is implemented as 'derive, else
+// default', the default will come back." It came back once already: `stubEntity` hardcoded "valley"
+// and all 6 generated locations in the live save were filed there, the Crossing included. Making
+// the absence of a default enforceable is what stops this being re-fixed in three months.
+{
+  const genSrc = readFileSync(join(root, "engine/generate.js"), "utf8");
+  check("SNG-166: generation carries no hardcoded region default",
+    !/context\.regionId \|\| "valley"/.test(genSrc) && !/regionSource: "default"/.test(genSrc),
+    "a 'derive, else default' fallback silently addresses every generated place to one region");
+
+  // Authored content must still resolve — a location with no region cannot compute substrate,
+  // and unresolved is only legitimate for a place minted mid-play with nothing to go on.
+  const locDir = "content/packs/valley/locations";
+  const files = readdirSync(join(root, locDir)).filter(f => f.endsWith(".json"));
+  const homeless = files.map(f => rj(`${locDir}/${f}`)).filter(l => !l.regionId && !l.region);
+  check("SNG-166: every AUTHORED location has a real address", homeless.length === 0,
+    `${homeless.length} authored location(s) carry no regionId: ${homeless.map(l => l.id).slice(0, 6).join(", ")}`);
+}
+
 // (3d) romance guidance — the doc pulled into the GM prompt on romantic intent must load and carry
 // non-empty prose. A registered-but-empty (or missing) doc means the GM narrates romance blind.
 {

@@ -4036,6 +4036,45 @@ await (async () => {
     npcPortraitTier(pell) === "partner"); // the app skips when n._portraitTier === this tier
 }
 
+// --- SNG-165: a GM-narrated waygate transit routes, and never MINTS a place out of the words ---
+{
+  const { routeGmMoveTo } = await import('../engine/waygate.js');
+  const locs = {
+    the_crossing: { id: "the_crossing", name: "The Crossing", waygate: true, waygateHub: true, waygateTier: 1 },
+    far_gate: { id: "far_gate", name: "The Far Gate", waygate: true, waygateTier: 3 },
+    millbrook: { id: "millbrook", name: "Millbrook" }
+  };
+  const resolve = (ref, L) => Object.keys(L).find(id => id === ref || L[id]?.name?.toLowerCase() === String(ref).toLowerCase()) || null;
+  const atGate = { currentLocationId: "the_crossing", knownPlaces: ["the_crossing"], subAttributes: { wits: 2 }, regionsKnown: {} };
+
+  // THE REPORTED BUG: the GM says "you step through the waygate" / "you arrive at the Center".
+  // Neither is a place. Both used to mint one.
+  for (const junk of ["the waygate", "Waygate", "the Center", "Centre", "the gate"]) {
+    const r = routeGmMoveTo({ character: atGate, moveRef: junk, locations: locs, resolve });
+    check(`165: "${junk}" from a gate routes to the HUB, never a minted room`,
+      r?.destId === "the_crossing" && r.why === "unresolvable-from-gate");
+  }
+  check("165: naming a REAL gate still routes by the normal rules (undiscovered → hub)",
+    routeGmMoveTo({ character: atGate, moveRef: "The Far Gate", locations: locs, resolve })?.destId === "the_crossing");
+  check("165: with discovery AND wayfaring, the named gate is reached", (() => {
+    const adept = { currentLocationId: "the_crossing", knownPlaces: ["the_crossing", "far_gate"], subAttributes: { wits: 6 }, regionsKnown: { a:1,b:1,c:1,d:1,e:1 } };
+    const r = routeGmMoveTo({ character: adept, moveRef: "far_gate", locations: locs, resolve });
+    return r?.destId === "far_gate" && r.routed === "named";
+  })());
+  check("165: a real NON-gate destination is ordinary travel — the router doesn't claim it",
+    routeGmMoveTo({ character: atGate, moveRef: "Millbrook", locations: locs, resolve }) === null);
+  check("165: NOT standing at a gate → null, so normal minting is untouched (SNG-117 preserved)",
+    routeGmMoveTo({ character: { currentLocationId: "millbrook" }, moveRef: "the waygate", locations: locs, resolve }) === null);
+
+  const appSrc165 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+  check("165: the moveTo handler consults the router BEFORE minting",
+    appSrc165.indexOf("routeGmMoveTo({ character, moveRef") < appSrc165.indexOf("|| mintTransitLocation(moveRef)"));
+  check("165: landing at the hub is surfaced to the player, never silent", /The gate set you down at/.test(appSrc165));
+  const wgSrc165 = readFileSync(new URL('../engine/waygate.js', import.meta.url), 'utf8');
+  check("165: the contract forbids a generic moveTo for the transit itself",
+    /MUST NAME THE DESTINATION GATE/.test(wgSrc165) && /Name where they COME OUT/.test(wgSrc165));
+}
+
 // --- SNG-163: a failed module load must never strand the player on "Loading the Valley…" ---
 {
   const html163 = readFileSync(new URL('../index.html', import.meta.url), 'utf8');

@@ -1016,7 +1016,7 @@
     "Silas, Pell, and Huginn step through the waygate together at dawn — the road south beginning in earnest.",
     "Silas thanks Tane at the close of the morning bouts, rejoins Siol, and hears her plain assessment of the fight. Siol offers a tour of the Hub — plaza first, Ent circle last — and the scene at the Coliseum reaches its natural end."
   ],
-  "currentLocationId": "gen-waygate",
+  "currentLocationId": "the_crossing",
   "activeScene": {
     "locationId": "gen-waygate",
     "turns": [
@@ -2735,107 +2735,6 @@
           "parentId": "old_switchback"
         }
       }
-    },
-    "gen-waygate": {
-      "visits": 1,
-      "notes": [
-        "[d6] The waygate opens onto the south lane — a shallow valley running south, tree line low, packed-dirt road with recent wheel ruts. First stop on the road from Millbrook toward the Disputed Zone.",
-        "[d6] Order-Sense partial read on dawn of World-day 18: the seven gates are calibration marks for a measuring function centered on the plaza. Design predates the roads. Full purpose unresolved — lattice too thin.",
-        "[d6] The Hub's major landmarks identified from the plaza at dawn: Council of Mavens colonnade (north), Coliseum (northwest behind market row), Ent circle (east), Elven camp (west paving). The city is active before full light.",
-        "[d6] The sixth waygate from the south lane — lower lintel, darker stone — is the connection to the Ashwarden March. Confirmed by Siol of the Elves.",
-        "[d6] The party entered and declared crafts at the gate — Orvil on morning rotation, sand showing early-bout marks, gallery occupied at dawn.",
-        "[d6] A line of unaccountable brightness moved through pooled water in the upper bench seam of the Coliseum — slow, lateral, gone in three seconds. Not lamplight, not sun. Huginn observed it. First Precursor sign noted inside the city.",
-        "[d6] Second bout concluded — Pell Marsh over Tane Solr, controlled finish, Orvil's call. Sand carries marks from both bouts.",
-        "[d6] In full morning light, the seven arches read plainly as a measuring instrument — each slightly differently angled, differently spaced. The Hub grew up around something that was already here.",
-        "[d6] Council Maven confirmed: two survey parties sent into the Disputed Zone came back early — craft interference prevents systematic water-source reading.",
-        "[d6] A seller at the dark-cloth stall in the market row lays out bone-handled tools as a deliberate test for someone who can read their design — the kit is a teaching sequence, its center piece the seller herself.",
-        "[d6] A small abandoned cache found under the neighboring stall table — a dry hollow, something left by someone who did not come back to collect it."
-      ],
-      "flags": {},
-      "vectorsKnown": [],
-      "subPlaces": {
-        "south-lane-beyond-the-waygate": {
-          "name": "South Lane beyond the Waygate",
-          "parentId": "gen-waygate",
-          "day": 6,
-          "visited": true,
-          "note": "Packed dirt road with wheel ruts, a shallow valley opening south, the waygate stones visible behind."
-        },
-        "hub-waygate-plaza": {
-          "name": "Hub Waygate Plaza",
-          "parentId": "gen-waygate",
-          "day": 6,
-          "visited": true,
-          "note": "Seven-arch crescent, worn central paving, market row at south edge — the measuring instrument the city grew around. Visited in morning light with Siol as guide."
-        },
-        "council-of-mavens-hall": {
-          "name": "Council of Mavens Hall",
-          "parentId": "gen-waygate",
-          "day": 6,
-          "visited": false,
-          "note": "A broad stone colonnade on the Hub's near northern tier — petition board outside, scales-and-eye seal on the lintel. Open at dawn."
-        },
-        "the-hub-coliseum": {
-          "name": "The Hub Coliseum",
-          "parentId": "gen-waygate",
-          "day": 6,
-          "visited": false,
-          "note": "Working fighting ground northwest of the plaza, past the market row — fresh soot-marks on the outer wall, gates open before first light."
-        },
-        "the-ent-s-circle": {
-          "name": "The Ent's Circle",
-          "parentId": "gen-waygate",
-          "day": 6,
-          "visited": false,
-          "note": "A cleared ground ringed by low stone to the east of the plaza — an ancient Ent rooted here on purpose, healed bark-carvings on the lower trunk, two figures in the branches."
-        },
-        "the-sixth-gate-ashwarden-passage": {
-          "name": "The Sixth Gate — Ashwarden Passage",
-          "parentId": "gen-waygate",
-          "day": 6,
-          "visited": false,
-          "note": "Lower lintel and darker stone than the other arches — the gate that leads to the Ashwarden March, identified by Siol."
-        },
-        "the-hub-coliseum-interior": {
-          "name": "The Hub Coliseum (interior)",
-          "parentId": "gen-waygate",
-          "day": 6,
-          "visited": true,
-          "note": "Second bout finished — controlled yield-strike, no edge, Orvil's baton down."
-        },
-        "council-of-mavens-hall-interior": {
-          "name": "Council of Mavens Hall (interior)",
-          "parentId": "gen-waygate",
-          "day": 6,
-          "visited": true,
-          "note": "Junior Maven's report room — field reports on the water crisis, Calvar's name now logged, Mara Wells as relay.",
-          "parentUnresolved": "Council of Mavens Hall (heard of only)"
-        },
-        "dark-cloth-stall-market-row": {
-          "name": "Dark-Cloth Stall — Market Row",
-          "parentId": "gen-waygate",
-          "day": 6,
-          "visited": false,
-          "note": "A narrow stall set back from the main market lane, southeast of the plaza — dark cloth over the table, bone-handled tools in deliberate sequence, the seller motionless and waiting."
-        },
-        "neighboring-stall-cache-market-row": {
-          "name": "Neighboring Stall Cache — Market Row",
-          "parentId": "gen-waygate",
-          "day": 6,
-          "visited": false,
-          "note": "A dry hollow under the table edge of the stall adjacent to Veth's dark-cloth stall — a small forgotten object, noticed while breaking camp."
-        }
-      }
-    },
-    "gen-center": {
-      "visits": 1,
-      "notes": [
-        "[d6] First arrival at the Hub plaza — seven arches, crescent arrangement, open to the metropolis. The Coliseum visible to the north."
-      ],
-      "flags": {},
-      "_containmentNotes": [
-        "\"Hub Waygate Plaza\" was placed in gen-waygate (the fiction named it), not gen-center"
-      ]
     }
   },
   "worldState": {
@@ -5532,45 +5431,6 @@
         "image": "https://image.pollinations.ai/prompt/The%20Low%20Lamp%20Inn%3A%20Tucked%20into%20the%20lower%20tier%20of%20the%20Edge%20District%20where%20the%20light-guide%20streets%20run%20closest%20to%20the%20valley%20floor%2C%20the%20Low%20Lamp%20sits%20over%20a%20junction%20conduit%20%E2%80%94%20the%20glow%20rises%20through%20pale%20stone%20floors%20and%20fills%20the%20common%20room%20from%20below%2C%20warm%20and%20directionless%20as%20afternoon%20through%20cloud.%20The%20building%20is%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=64375&nologo=true",
         "parentId": "radiant_plateau_edge",
         "_promotedFromSubPlace": true
-      },
-      "gen-waygate": {
-        "id": "gen-waygate",
-        "name": "Waygate",
-        "regionId": "valley",
-        "parentId": "millbrook",
-        "_promotedFromSubPlace": true,
-        "descriptionSeed": "A place the road led to — Waygate. The fiction brought you here before the map knew its name.",
-        "tags": [
-          "transitional"
-        ],
-        "connections": [
-          "millbrook",
-          "gen-center"
-        ],
-        "_gen": true,
-        "_mintedAs": "transit",
-        "map": {
-          "x": 409.5058087856015,
-          "y": 397.4185998280231
-        }
-      },
-      "gen-center": {
-        "id": "gen-center",
-        "name": "Center",
-        "regionId": "valley",
-        "descriptionSeed": "A place the road led to — Center. The fiction brought you here before the map knew its name.",
-        "tags": [
-          "transitional"
-        ],
-        "connections": [
-          "gen-waygate"
-        ],
-        "_gen": true,
-        "_mintedAs": "transit",
-        "map": {
-          "x": 483.2482839825773,
-          "y": 379.03253576244833
-        }
       }
     },
     "arc": {}
@@ -5988,8 +5848,7 @@
     "millbrook",
     "the-low-lamp-inn",
     "old_switchback",
-    "gen-waygate",
-    "gen-center"
+    "the_crossing"
   ],
   "opLossLog": [
     {

@@ -68,6 +68,40 @@ export function resolveWaygateTransit({ character, destId, locations }) {
     : { destId: hub.id, routed: "hub", known, skilled };
 }
 
+/** SNG-165. Route a GM-narrated `moveTo` that is a WAYGATE TRANSIT.
+ *
+ *  The bug this closes: SNG-148 declared its REACHABLE link as "map control + GM offer" and only
+ *  ever wired the map control. The GM was told gates exist and may narrate stepping through one —
+ *  but its `moveTo` went straight to resolveLocationId → mintTransitLocation with zero waygate
+ *  awareness. So "you step through the waygate" and "you arrive at the Center" MINTED two generic
+ *  places named "Waygate" and "Center", and the player landed in invented rooms instead of the hub.
+ *  (Erik's save: gen-waygate + gen-center, both mintedAs transit.)
+ *
+ *  Returns { destId, routed, why } when the move is a transit we should own, else null:
+ *   - standing at a gate, naming a real gate      → normal routing (named | hub)
+ *   - standing at a gate, naming nothing resolvable → the HUB, never a minted place
+ *   - not at a gate                                → null (ordinary travel, mint as before)
+ *  `resolve` is the app's resolveLocationId, injected so this module stays transport-free. */
+export function routeGmMoveTo({ character, moveRef, locations, resolve }) {
+  const origin = locations?.[character?.currentLocationId];
+  if (!isWaygate(origin)) return null;                 // not at a gate — nothing to claim
+  const hub = hubWaygate(locations);
+  if (!hub) return null;
+  const ref = String(moveRef || "").trim();
+  if (!ref) return null;
+
+  const directId = resolve ? resolve(ref, locations) : (locations[ref] ? ref : null);
+  if (directId && locations[directId] && !isWaygate(locations[directId])) return null; // a real non-gate place: ordinary travel
+
+  if (directId && isWaygate(locations[directId])) {
+    const t = resolveWaygateTransit({ character, destId: directId, locations });
+    return t ? { ...t, why: "gate-to-gate" } : null;
+  }
+  // Unresolvable FROM A GATE. The fiction said they stepped through; the only honest destinations
+  // are a real gate or the hub — never a new place invented out of the words "waygate"/"center".
+  return { destId: hub.id, routed: "hub", known: false, skilled: false, why: "unresolvable-from-gate" };
+}
+
 /** GM context row (§23 REGISTERED link): only when the character STANDS AT a
  *  gate — a compact door the GM may offer in fiction, never a menu. Null
  *  elsewhere (no per-turn spam for a rare capability). */
@@ -84,5 +118,7 @@ export function waygateBlockForGM(character, locations) {
     (aimable.length
       ? `Gates they can aim true at: ${aimable.join(", ")}. Anywhere else through the gate lands at ${hub.name} — the hub; that is routing, not failure. `
       : `They cannot yet aim at a distant gate (undiscovered, or beyond their wayfaring) — the gate will carry them to ${hub.name}, the hub. `) +
-    `You MAY surface the gate as a door woven into the fiction when travel is on the character's mind — never as a menu, never every beat.`;
+    `You MAY surface the gate as a door woven into the fiction when travel is on the character's mind — never as a menu, never every beat. ` +
+    `⛔ IF THE CHARACTER STEPS THROUGH, your "moveTo" MUST NAME THE DESTINATION GATE — one of the gates listed above, or ${hub.name}. ` +
+    `Never emit a moveTo of "the waygate", "the gate", "the centre" or any other generic word for the transit itself: those are not places, and naming one lands the character in a room that does not exist. Name where they COME OUT.`;
 }

@@ -1071,8 +1071,220 @@
     "The party followed Siol north through the Hub's quieter lanes and arrived at the edge of the Ent grove circle at midday — the path giving way to older ground, the circle of trees ahead, Siol stopping at its edge.",
     "The party stepped through the sixth waygate at the Hub — Siol at the arch's edge, the gate-keeper's instruction plain, the March setting confirmed north-by-northwest. The road to Raven's Home has begun."
   ],
-  "currentLocationId": "gen-waygate",
-  "activeScene": null,
+  "currentLocationId": "gen-ashwarden-march-road",
+  "activeScene": {
+    "locationId": "gen-ashwarden-march-road",
+    "turns": [
+      {
+        "player": null,
+        "summary": "The party arrives on the Ashwarden March Road through the waygate — Veth names the left branch, the marker stone visible ahead, the road to Raven's Home open.",
+        "narration": "The waygate deposits you on open ground. The air is colder here — not the Hub's sheltered plaza cold, but a real edge to it, the kind that has been sitting over open ground since before dawn. The March road begins ten yards ahead, a pale dirt track running north between scrub grass and low stone outcrops. The last snow of the season has not come yet, but the sky to the northwest carries the suggestion of it.\n\nVeth steps out of the gate's threshold beside you and stops, one hand raised to shield her eyes from the flat midday light. She takes a slow look north along the road, then south, then at the ground. Then she says, \"Left branch at the marker stone. That is the way to Raven's Home.\" She says it the way someone says a thing they have been holding for a long time — not announcement, just release.\n\nPell comes through a step behind her, pack squared, Memory at her shoulder. She rolls her neck once, reads the road in the practiced way she has — checking the ground, the verge, the horizon — and says nothing about what she sees. Huginn lands on a low stone to your right, tucks one foot up, and turns its pale eye northwest. It does not croak. It watches the road the way it watches everything: as though it already knows where the road ends.\n\nThe marker stone is perhaps a quarter mile ahead. The road is clear. The valley floor is quiet, and the morning is yours."
+      }
+    ],
+    "lastTurn": {
+      "narration": "The waygate deposits you on open ground. The air is colder here — not the Hub's sheltered plaza cold, but a real edge to it, the kind that has been sitting over open ground since before dawn. The March road begins ten yards ahead, a pale dirt track running north between scrub grass and low stone outcrops. The last snow of the season has not come yet, but the sky to the northwest carries the suggestion of it.\n\nVeth steps out of the gate's threshold beside you and stops, one hand raised to shield her eyes from the flat midday light. She takes a slow look north along the road, then south, then at the ground. Then she says, \"Left branch at the marker stone. That is the way to Raven's Home.\" She says it the way someone says a thing they have been holding for a long time — not announcement, just release.\n\nPell comes through a step behind her, pack squared, Memory at her shoulder. She rolls her neck once, reads the road in the practiced way she has — checking the ground, the verge, the horizon — and says nothing about what she sees. Huginn lands on a low stone to your right, tucks one foot up, and turns its pale eye northwest. It does not croak. It watches the road the way it watches everything: as though it already knows where the road ends.\n\nThe marker stone is perhaps a quarter mile ahead. The road is clear. The valley floor is quiet, and the morning is yours.",
+      "sceneSummary": "The party arrives on the Ashwarden March Road through the waygate — Veth names the left branch, the marker stone visible ahead, the road to Raven's Home open.",
+      "choices": [
+        {
+          "label": "Walk to the marker stone and take the left branch — put miles under your feet toward Raven's Home.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "travel"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Veth what she remembers of the warden post at Raven's Home — what it was, and what might be left.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "scout"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Read the road ahead with Order-Sense — take the lay of the March before committing to it.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "chaos_order": 0.3
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "study"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Check in with Pell — a quiet word on the road before the first real miles begin.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-edge-district-ledger",
+          "note": "Party has transited the waygate — the road to Raven's Home begun. The question of what the truth is for travels with them."
+        }
+      ],
+      "stageOps": [],
+      "scene": {
+        "setting": "The Ashwarden March Road, open ground north of the waygate arrival point — flat pale dirt track, scrub grass and low stone outcrops to either side, sky overcast and cold with a northwest edge. Midday light, flat and diffuse. The marker stone is roughly a quarter mile ahead.",
+        "npcsPresent": [
+          {
+            "name": "Pell Marsh",
+            "state": "Pack squared, Memory at her shoulder — reading the road ahead in silence."
+          },
+          {
+            "name": "Veth Ondra",
+            "state": "Standing at the threshold, one hand shielding her eyes — orienting from warden memory, gaze on the northwest."
+          },
+          {
+            "name": "Huginn",
+            "state": "Perched on a low stone to the right — pale eye fixed northwest, watching the road without comment."
+          }
+        ],
+        "objects": [
+          "The waygate threshold behind the party",
+          "The March road ahead, pale dirt running northwest",
+          "Low stone outcrops along the verge",
+          "Marker stone visible roughly a quarter mile ahead"
+        ],
+        "threads": [
+          "Left branch at the marker stone leads to Raven's Home — not yet reached",
+          "The warden post at Raven's Home has been empty eleven years",
+          "The sky to the northwest carries the suggestion of late-season snow"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "veth-ondra",
+          "name": "Veth Ondra",
+          "role": "Former Ashwarden warden, now traveling companion",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "Named the left branch and the marker stone from warden memory on first sight of the road — something she has been holding a long time, released quietly.",
+          "learned": [
+            "Oriented from field memory the moment the road came into view — left branch at the marker stone is her held knowledge, not a guess"
+          ],
+          "statusNote": "Walking the March road with the party — first leg begun, marker stone ahead.",
+          "relationshipDelta": 0
+        },
+        {
+          "op": "update",
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "role": "Village blacksmith, Millbrook — traveling companion",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "Came through the gate road-ready — pack squared, Memory at shoulder, reading the ground ahead without comment.",
+          "statusNote": "Walking the March road with the party — left branch at the marker stone is the destination.",
+          "relationshipDelta": 0
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "The party arrived on the Ashwarden March Road through the waygate on World-day 19 midday — Veth named the left branch at the marker stone as the route to Raven's Home. The road is open and clear.",
+          "subjectId": null
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "The party arrived here through the waygate on World-day 19 midday — the marker stone is roughly a quarter mile north, left branch leads to Raven's Home.",
+          "subPlace": {
+            "name": "Waygate Arrival Point",
+            "parent": "Ashwarden March Road",
+            "note": "Open ground just south of the marker stone — where the waygate deposits travelers onto the March.",
+            "visited": true
+          }
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "ashwarden-march-road",
+          "label": "Ashwarden March Road",
+          "kind": "place",
+          "entityId": "ashwarden-march-road",
+          "fact": "The party stepped onto the March road at midday on World-day 19 — cold, clear, the marker stone a quarter mile north. Left branch at the stone leads to Raven's Home. Veth Ondra oriented from warden memory on first sight.",
+          "links": [
+            "veth-ondra",
+            "raven-s-home",
+            "the-edge-district-ledger"
+          ]
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0,
+        "why": "Scene opening — arrival through the waygate, no time elapsed beyond the transit already logged."
+      },
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "The Ashwarden March Road, open ground north of the waygate arrival point — flat pale dirt track, scrub grass and low stone outcrops to either side, sky overcast and cold with a northwest edge. Midday light, flat and diffuse. The marker stone is roughly a quarter mile ahead.",
+      "npcsPresent": [
+        {
+          "name": "Pell Marsh",
+          "state": "Pack squared, Memory at her shoulder — reading the road ahead in silence."
+        },
+        {
+          "name": "Veth Ondra",
+          "state": "Standing at the threshold, one hand shielding her eyes — orienting from warden memory, gaze on the northwest."
+        },
+        {
+          "name": "Huginn",
+          "state": "Perched on a low stone to the right — pale eye fixed northwest, watching the road without comment."
+        }
+      ],
+      "objects": [
+        "The waygate threshold behind the party",
+        "The March road ahead, pale dirt running northwest",
+        "Low stone outcrops along the verge",
+        "Marker stone visible roughly a quarter mile ahead"
+      ],
+      "threads": [
+        "Left branch at the marker stone leads to Raven's Home — not yet reached",
+        "The warden post at Raven's Home has been empty eleven years",
+        "The sky to the northwest carries the suggestion of late-season snow"
+      ]
+    }
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 6,
@@ -1376,13 +1588,13 @@
         "s3"
       ],
       "progress": [
-        "Silas's own witness statement added to the roll. Fendt named to the fellowship. The gathering sealed with 'Thus begins the fellowship of the Fell.' Document roll now complete — all lines present, ready for Mara to seal and Pip Cotter to carry.",
         "Document roll sealed and complete, Pip Cotter named as carrier, all witness lines present. Silas and Pell have stepped away from Millbrook — the roll is in Mara's hands.",
         "Silas and Pell have stepped through the waygate — the document roll is in Mara's hands, Pip Cotter named as carrier. The road south has begun.",
         "Calvar's name placed with the Hub Council water committee — Mara Wells named as relay. The accountability chain is spreading beyond Millbrook.",
         "Road set for the Raven's Home — the valley's situation deferred but not abandoned. Veth Ondra now traveling with the party; her knowledge of the Ashwarden March's south-facing edge may be relevant to the Disputed Zone thread.",
         "Party fully assembled at the south market row — Veth Ondra introduced to Pell, road to the Raven's Home and the dead warden post confirmed. Lens-blanks in hand, Siol's assessment of the Ent circle received.",
         "Veth named the March's three-line record of the Ent — it predates the Hub, the March left it uncontacted, and the Raven's Home warden left a margin note that the Ent acknowledges endings without being asked. Party ready to move.",
+        "Party has transited the waygate — the road to Raven's Home begun. The question of what the truth is for travels with them.",
         "Party has transited the waygate — the road to Raven's Home begun. The question of what the truth is for travels with them."
       ],
       "aliases": [],
@@ -1500,8 +1712,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d6] Went still in the way she goes still at the anvil when iron tells her something unexpected — the naming landed on her too.",
-        "[d6] Received the weight of the deathsense read without being told it — the quality of a smith who feels the iron move before the hammer does.",
         "[d6] Went still at the completion of the Palework — recognized the sound of something cooling into its final shape without being told what it was.",
         "[d6] Held the quiet after the Palework without filling it — stayed at Silas's shoulder through the ending's settling.",
         "[d6] Held the silence through the failed read without comment — her presence at his shoulder unchanged.",
@@ -1509,7 +1719,9 @@
         "[d6] Entered the Ent circle at Silas's open-hand invitation — ironsense open, hand at his wrist, the grove took note of her. The join found its seat in part through her.",
         "[d6] Named the implication of Siol's answer in one line: the grove took the thought, not the craft. Filed it as a thing worth knowing.",
         "[d6] Fell into road-pace without ceremony at the waygate threshold — the silence of someone who has done this before.",
-        "[d6] Stepped through the waygate without ceremony — at Silas's left, road-ready."
+        "[d6] Stepped through the waygate without ceremony — at Silas's left, road-ready.",
+        "[d6] Fell into road-pace at Silas's left without a word — pack settled, hand loose, road-ready",
+        "[d6] Came through the gate road-ready — pack squared, Memory at shoulder, reading the ground ahead without comment."
       ],
       "knownFacts": [
         "Silas wants something private for the evenings — she is thinking about what that means",
@@ -1530,9 +1742,9 @@
         "feeding ironsense through physical contact to anchor a rune-"
       ],
       "status": "active",
-      "statusNote": "Traveling with the party on the March road, heading toward Raven's Home.",
+      "statusNote": "Walking the March road with the party — left branch at the marker stone is the destination.",
       "lastSeen": {
-        "locationId": "gen-waygate",
+        "locationId": "gen-ashwarden-march-road",
         "day": 6
       },
       "bondType": "romantic",
@@ -2195,8 +2407,6 @@
       },
       "relationship": 9,
       "history": [
-        "[d6] Her expression shifted during Silas's attunement — she is revising a held read about the Ent, visibly, eyes on the canopy.",
-        "[d6] The grove settling onto Silas has pushed her revision further than she budgeted — lips pressed, eyes on the canopy, not yet speaking it.",
         "[d6] Her revision outran the sentence she was building — she stopped before speaking it. The Palework-as-channel has pushed what she was revising past the point where her old framework catches it.",
         "[d6] Found her sentence and spoke it: the Ent was in conversation with whatever needed to end here, and had not yet found the right attendant.",
         "[d6] Watched the failed read, then looked back to the treeline — warden's patience, revision spoken, no pressure added.",
@@ -2204,17 +2414,19 @@
         "[d6] Entered the circle without hesitation at Silas's invitation — warden's bearing, hands open, the posture of bearing witness without crowding. Present inside the circle for the gift-working.",
         "[d6] Her face holds something quieter than usual — a prior understanding revised by what she just witnessed and what Siol named. She has not yet said it aloud.",
         "[d6] Settled into road-pace at Silas's right — departure is familiar ground for a former warden. The unsaid revision about the Ent is filed; she is ready for the road.",
-        "[d6] Stepped through the waygate with the party — road-ready, warden's bearing easy, eyes already on the March ahead."
+        "[d6] Stepped through the waygate with the party — road-ready, warden's bearing easy, eyes already on the March ahead.",
+        "[d6] Oriented the group from field memory on the first stretch of road — named the marker stone, the left branch, and the gone survey post without being asked",
+        "[d6] Named the left branch and the marker stone from warden memory on first sight of the road — something she has been holding a long time, released quietly."
       ],
       "knownFacts": [
-        "The Ent grove's canopy drew her attention immediately on approach — she is already reading it",
-        "The March's position was not hostile non-contact — they believed the Ent was already in conversation with something else and chose not to interrupt",
         "The Ent's response to sustained presence is visible enough to revise a prior institutional read in real time",
         "The Ent's response to Silas's naming is larger evidence than Veth's prior March-read accounted for — she is revising substantially",
         "Silas's use of the grove as a Palework channel has exceeded her prior March-read in a way she has not yet articulated",
         "Named the revision plainly: the Ent's prior conversation was with whatever needed to end here; Silas was the right attendant.",
         "The Ashwarden posture of bearing witness served as a genuine contribution to the collective working — not craft, but a quality of presence.",
-        "The Ent received the intention of the ward, not the craft — the grove's response to presence and intention rather than mechanism is something the March's records did not fully capture"
+        "The Ent received the intention of the ward, not the craft — the grove's response to presence and intention rather than mechanism is something the March's records did not fully capture",
+        "Raven's Home is past the first tributary — left branch at the marker stone; right branch leads to the old survey post, which is gone",
+        "Oriented from field memory the moment the road came into view — left branch at the marker stone is her held knowledge, not a guess"
       ],
       "skillsObserved": [
         "packing a teaching kit by sequence without looking",
@@ -2227,9 +2439,9 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Traveling with the party on the March road, heading toward Raven's Home.",
+      "statusNote": "Walking the March road with the party — first leg begun, marker stone ahead.",
       "lastSeen": {
-        "locationId": "gen-waygate",
+        "locationId": "gen-ashwarden-march-road",
         "day": 6
       },
       "bondType": "sworn",
@@ -2519,7 +2731,6 @@
     "gen-waygate": {
       "visits": 1,
       "notes": [
-        "[d6] The sixth waygate from the south lane — lower lintel, darker stone — is the connection to the Ashwarden March. Confirmed by Siol of the Elves.",
         "[d6] The party entered and declared crafts at the gate — Orvil on morning rotation, sand showing early-bout marks, gallery occupied at dawn.",
         "[d6] A line of unaccountable brightness moved through pooled water in the upper bench seam of the Coliseum — slow, lateral, gone in three seconds. Not lamplight, not sun. Huginn observed it. First Precursor sign noted inside the city.",
         "[d6] Second bout concluded — Pell Marsh over Tane Solr, controlled finish, Orvil's call. Sand carries marks from both bouts.",
@@ -2530,7 +2741,8 @@
         "[d6] The dry hollow under the neighboring stall's table crossbar is now empty — a small sealed tin retrieved from it by Silas Weir on World-day 19 morning.",
         "[d6] A sealed tin of unfinished seventh-band lens-blanks retrieved from the dry hollow beneath the neighboring stall's crossbar — the hollow is now empty, the tin in Silas Weir's possession.",
         "[d6] A contact note left in the dry hollow beneath the neighboring stall's crossbar — folded bark-paper, stone-weighted, naming Silas Weir and the Fell Pell forge in Millbrook as the finder.",
-        "[d6] Party transited through the sixth waygate — the March setting confirmed north-by-northwest by the gate-keeper. Siol held the arch's edge as they departed."
+        "[d6] Party transited through the sixth waygate — the March setting confirmed north-by-northwest by the gate-keeper. Siol held the arch's edge as they departed.",
+        "[d6] The March road runs north-by-northwest from the waygate — packed earth, foot traffic only, birch stands on both sides. First tributary ahead; marker stone at the branch, left for Raven's Home, right for the gone survey post."
       ],
       "flags": {
         "party_departed": "world-day-19-midday"
@@ -2607,6 +2819,14 @@
           "day": 6,
           "visited": true,
           "note": "Dry hollow now holds a contact note — folded bark-paper, stone-weighted. Tin retrieved by Silas Weir; note left for whoever comes back."
+        },
+        "ashwarden-march-road-first-stretch": {
+          "name": "Ashwarden March Road — First Stretch",
+          "parentId": "gen-waygate",
+          "day": 6,
+          "visited": true,
+          "note": "Packed earth track through winter-grey birch, shallow rise behind, dark water thread ahead. Huginn walked this stretch first.",
+          "parentUnresolved": "ashwarden-march-road"
         }
       }
     },
@@ -2656,6 +2876,22 @@
         }
       },
       "vectorsKnown": []
+    },
+    "gen-ashwarden-march-road": {
+      "visits": 1,
+      "notes": [
+        "[d6] The party arrived here through the waygate on World-day 19 midday — the marker stone is roughly a quarter mile north, left branch leads to Raven's Home."
+      ],
+      "flags": {},
+      "subPlaces": {
+        "waygate-arrival-point": {
+          "name": "Waygate Arrival Point",
+          "parentId": "gen-ashwarden-march-road",
+          "day": 6,
+          "visited": true,
+          "note": "Open ground just south of the marker stone — where the waygate deposits travelers onto the March."
+        }
+      }
     }
   },
   "worldState": {
@@ -2767,7 +3003,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-19T05:00:08.401Z",
+    "lastSharedReadAt": "2026-07-19T11:58:05.758Z",
     "lastTickWorldDay": 19,
     "lastCanonWorldDay": 19
   },
@@ -4135,21 +4371,21 @@
     }
   },
   "tendencies": {
-    "strategic": 12.870938146678684,
-    "cerebral": 20.46351172521324,
-    "social": 14.69933463478348,
-    "generous": 3.3309743750743537,
-    "cautious": 4.733111400456427,
-    "physical": 0.6840009359745504,
-    "risky": 0.7173104867901359,
-    "ruthless": 0.22870660972421353,
-    "carousing": 0.003504074446990581,
-    "amorous": 2.7357358081353063,
-    "patient": 1.4255015204419312,
-    "stealth": 0.08864726622914763,
-    "devotion": 1.8109825333659888,
-    "craft": 0.7002525831168596,
-    "leadership": 0.4512244232781152
+    "strategic": 12.549164693011717,
+    "cerebral": 19.95192393208291,
+    "social": 14.331851268913892,
+    "generous": 3.247700015697495,
+    "cautious": 5.614783615445017,
+    "physical": 0.6669009125751866,
+    "risky": 0.6993777246203825,
+    "ruthless": 0.22298894448110818,
+    "carousing": 0.0034164725858158167,
+    "amorous": 2.6673424129319234,
+    "patient": 1.389863982430883,
+    "stealth": 0.08643108457341894,
+    "devotion": 1.765707970031839,
+    "craft": 0.682746268538938,
+    "leadership": 0.4399438126961623
   },
   "aptitudes": [
     "strategist",
@@ -4158,7 +4394,7 @@
     "orator",
     "sage"
   ],
-  "actionCount": 583,
+  "actionCount": 584,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -4436,8 +4672,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784437264220,
-  "rev": 854,
+  "updatedAt": 1784462329566,
+  "rev": 861,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4622,8 +4858,8 @@
           "entityId": "pip-cotter-mara-s-errand-runner",
           "type": "npc",
           "birthWeight": 7,
-          "engagementScore": 0,
-          "tier": "fresh",
+          "engagementScore": 8,
+          "tier": "nominated",
           "rating": "R+",
           "provenance": {
             "playerKey": "player-s9z9u1",
@@ -4634,11 +4870,23 @@
             "hint": "a girl of seven or eight in an oversized blue wool coat — Mara's errand-runner, practical and out of breath",
             "why": "The child messenger has just arrived in-scene with a cloth from Mara and needs a stable identity for future encounters"
           },
-          "attentionHistory": [],
+          "attentionHistory": [
+            {
+              "kind": "keep",
+              "day": 6
+            },
+            {
+              "kind": "keep",
+              "day": 6
+            }
+          ],
           "createdDay": 2,
           "repaired": false,
           "stubbed": false,
-          "romanceEligible": true
+          "romanceEligible": true,
+          "lastAttentionDay": 6,
+          "promotedWorldDay": 19,
+          "canonTier": "canonical"
         },
         "image": "https://image.pollinations.ai/prompt/Seven%20years%20old%2C%20possibly%20eight%20%E2%80%94%20she%20is%20unsure%20and%20will%20tell%20you%20both%20ages%20depending%20on%20which%20she%20remembers.%20Wears%20an%20oversized%20blue%20wool%20coat%20that%20was%20someone%20else's%20first%2C%20the%20cuffs%20rolled%20four%20times%20and%20still%20draggin%2C%20character%20portrait%20of%20Pip%20Cotter%2C%20Mara's%20Errand-Runner%2C%20Child%20courier%20and%20small-task%20helper%20for%20Mara%20Wells.%20Breathless%20sentences%2C%20pauses%20to%20swallow%20air%20mid-thought.%20Repeats%20Mara's%20instructions%20almost%20verbatim%20before%20adding%20her%20own%20opinions%20uninvited.%20Calls%20adults%20by%20full%20name%20because%20that%20is%20what%20she%20has%20heard%20done.%20Takes%20promises%20seriously%20and%20remembers%20them%20exactly.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=14341&nologo=true"
       },
@@ -5400,7 +5648,8 @@
         "connections": [
           "millbrook",
           "gen-center",
-          "gen-the-ent-grove"
+          "gen-the-ent-grove",
+          "gen-ashwarden-march-road"
         ],
         "_gen": true,
         "_mintedAs": "transit",
@@ -5444,18 +5693,30 @@
           "x": 439.5117053691912,
           "y": 333.07074694842095
         }
+      },
+      "gen-ashwarden-march-road": {
+        "id": "gen-ashwarden-march-road",
+        "name": "Ashwarden March Road",
+        "regionId": "valley",
+        "descriptionSeed": "A place the road led to — Ashwarden March Road. The fiction brought you here before the map knew its name.",
+        "tags": [
+          "transitional"
+        ],
+        "connections": [
+          "gen-waygate"
+        ],
+        "_gen": true,
+        "_mintedAs": "transit",
+        "map": {
+          "x": 336.03134186125055,
+          "y": 342.0516176980347
+        }
       }
     },
     "arc": {}
   },
   "opLossPending": false,
   "establishedFacts": [
-    {
-      "id": "pell",
-      "text": "Silas named Pell 'soul wife' aloud on World-day 17 evening — she received it with the last of the habit gone, said alright in the register that goes all the way in, and held his wrist. The bond is nam",
-      "day": 3,
-      "subjectId": "pell"
-    },
     {
       "id": "pell",
       "text": "Silas named Pell as 'what comes after' on World-day 17 morning — she received it in full, without management, said alright in the register that goes all the way through. They shared the heated bath to",
@@ -5689,6 +5950,12 @@
       "text": "A thin ward is now seated in the Ent grove circle at the Hub — Raised Thing and Boundary-Stone braided into the grove's own shape, Weirmark at the join with Pell's ironsense as anchor. The Ent received the gift. Casual harm aimed at the grove meets the ward first.",
       "day": 6,
       "subjectId": null
+    },
+    {
+      "id": "f41",
+      "text": "The party arrived on the Ashwarden March Road through the waygate on World-day 19 midday — Veth named the left branch at the marker stone as the route to Raven's Home. The road is open and clear.",
+      "day": 6,
+      "subjectId": null
     }
   ],
   "practice": {
@@ -5852,7 +6119,7 @@
   "syncedAt": 1784429149276,
   "teachers": {},
   "regionsKnown": {
-    "valley": 405
+    "valley": 407
   },
   "foreclosed": [
     "rootkin",
@@ -5866,7 +6133,8 @@
     "old_switchback",
     "gen-waygate",
     "gen-center",
-    "gen-the-ent-grove"
+    "gen-the-ent-grove",
+    "gen-ashwarden-march-road"
   ],
   "opLossLog": [
     {
@@ -5910,12 +6178,20 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-19T05:01:04.197Z",
+      "lastAt": "2026-07-19T05:02:50.520Z",
       "startDay": 18,
       "endDay": 19,
-      "beats": 130,
+      "beats": 131,
       "_recapError": null,
       "recap": "Day eighteen, and Silas Weir moved like a man who'd finally stopped fighting the shape of what he was. On the road he disarmed three opportunists without breaking bones, read the grief sitting behind the broad man's eyes, named it plainly, pressed provisions into their hands, and sent them toward something worth doing — mercy given as instruction, not sentiment. Then he brought the hard people together: Dara, Aldric, Fendt, Mara, Calvar, all of them in the heat of Pell's forge with no exits easy and no pretense left, and in that single evening he turned a valley's quiet panic into four working threads — engineering, logistics, supply, accounts — each with a named lead and a direction to face. The crisis didn't end, but it stopped being formless, and that was his doing."
+    },
+    {
+      "id": "sess-5",
+      "startedAt": "2026-07-19T11:58:49.560Z",
+      "lastAt": "2026-07-19T11:58:49.560Z",
+      "startDay": 19,
+      "endDay": 19,
+      "beats": 1
     }
   ],
   "company": [
@@ -5984,7 +6260,7 @@
   },
   "_intentAsked": null,
   "_turnApplyError": {
-    "at": "2026-07-19T04:56:50.773Z",
+    "at": "2026-07-19T05:02:50.529Z",
     "message": "Cannot create property 'engagementScore' on boolean 'true'",
     "stack": "TypeError: Cannot create property 'engagementScore' on boolean 'true' <-     at recordAttention (https://orkstrtdkaos.github.io/Singularity/engine/generate.js:341:21) <-     at noteGeneratedAttention (https://orkstrtdkaos.github.io/Singularity/app.js?v=1.8.129:1511:16) <-     at applyTurn (https://orkstrtdkaos.github.io/Singularity/app.js?v=1.8.129:2978:7)"
   }

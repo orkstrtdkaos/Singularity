@@ -399,3 +399,50 @@ cost measured at 52 occurrences across 18 files, ids provably unaffected), SNG-1
 SNG-172 power sources (wants the substrate ruler settled). Also still open: the hub-attribution
 question — 16 of 20 registry NPCs have no backing record, and I declined to derive them from
 firstMet because at a hub it is actively wrong. -->
+
+---
+
+<!-- status: SNG-182 + SNG-180 COMPLETE_PENDING_REVIEW (CCode 2026-07-19). v1.8.150 SNG-182 ·
+v1.8.151 SNG-180. Suite green, verified by exit code.
+
+SNG-182 — ANSWERING YOUR Q1 BEFORE BUILDING: there is no resolver, there are FIFTY-SEVEN. 57 ad-hoc
+"look the record up by id, take .name, fall back to the id" sites across app.js and engine/, 52 of
+them for traditions alone, and the region lookup written out verbatim twice. Erik's generalisation is
+exactly right. Q2: {{…}} is unreserved. Q4: ZERO tokens today, so this is the cheapest possible
+moment for the gate — your guess, confirmed. Q3 — RESOLUTION BELONGS AT ASSEMBLY, NOT LOAD, and
+SNG-111 decides it: progressive naming is PER-CHARACTER, so the same NPC id is "the dock-master" to
+one character and "Sorel" to another; baking a name at load destroys that permanently. Wired at
+assembleGMContext, the one choke point every view already passes through, so no builder has to
+remember and the model can never see token syntax. §2.3 acceptance test PASSES — change the record,
+every reference follows, one edit. §2.4 is the loreRefs lesson applied IN ADVANCE: unresolvable
+tokens fail CI and degrade readably at runtime, never a blank and never raw {{…}} to a player.
+Verified by planting a broken token — it failed, named the file and field, and resolved the good
+token in the same file. Migration stays incremental per §2.7; nothing retrofitted.
+
+SNG-180 — the sphere ships. Geodesic on your authored worldPos, and the geometry confirms itself:
+the_great_engine <-> the_numen = 3.1277 radii (~π, 299 walking days), and routing that trip VIA THE
+CROSSING costs 3.1314 — a difference of 0.0036. The hub sits exactly πR/2 from every Reach and the
+antipode/neighbour ratio is 12, the same 12 as the axes. walkingDays is wired to the map place card
+so the year-to-walk scale is immediately player-visible.
+
+⚠️⚠️ THE SUBSTRATE RULER DOES NOT SHIP AND THIS IS THE PART TO READ. Erik is right that mechanics
+should not measure with a drawing, so I switched the substrate field to geodesic — and the §9b
+invariants BROKE: pools/sinks 25/26 -> 11/26, locations with local variation 73 -> 0. Not a constant
+problem; I derived the conversion twice, first from median pairwise ratio (222) then properly from
+median CONNECTED-EDGE length (309) since the radii were tuned against reach along the graph. Both
+flat. CAUSE: intra-region geodesic distance has a median of 0.234 radii against a converted radius of
+0.388, so a source sits at ~55% strength across its ENTIRE region — every location gets a near-uniform
+delta and per-region renormalisation cancels it to nothing. YOUR worldPos IS NOT THE PROBLEM: it is
+distinct for all 95 and 0% identical within any region. The issue is GRANULARITY — the sphere resolves
+regions; the substrate field needs sub-region resolution. Either the 26 radii re-author much smaller
+in world units, or substrate keeps the travel graph as its ruler. A design call with numbers attached,
+not something to dial until it passes. I reverted rather than ship a flat field to satisfy an
+architectural preference.
+
+MY OWN GATES CAUGHT ME TWICE IN THIS SHIP: the revert left geodesic with no consumer (testOnlyExports
+8 -> 10, "CANNOT FIRE IN PLAY"), which is what prompted the place-card wiring; then isAntipodal and
+nameRepetitionCount were still test-only — speculative API I wrote because it seemed worth having.
+Deleted rather than special-cased. Ratchet improved 8 -> 7.
+
+REMAINING: SNG-172 power sources (ruling 2 unblocked the 285-ability classification; largest left),
+SNG-166 §2 renames (now land THROUGH SNG-182), SNG-170 stakes dial (default still yours). -->

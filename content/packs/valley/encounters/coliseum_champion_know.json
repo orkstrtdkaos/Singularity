@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "coliseum_champion_know",
+  "type": "duel",
+  "name": "The Bout: The Named Blow",
+  "locationId": "the_great_coliseum",
+  "setup": "Sethran watches your first three exchanges and then begins calling your moves aloud, a beat before you make them, loud enough for the stands. It is not taunting. It is the contest.",
+  "lethal": false,
+  "opponent": {
+    "name": "Sethran of the Reasoned Hold",
+    "health": 4,
+    "threat": 42,
+    "yieldAt": 1,
+    "fleeDifficulty": 15,
+    "spectrum": {
+      "emotional_logical": 0.5
+    },
+    "tacticTags": [
+      "calls-your-next-move",
+      "names-your-tell",
+      "argues-mid-exchange",
+      "waits-for-the-pattern"
+    ]
+  }
+}

@@ -2,7 +2,50 @@
 
 **2026-07-18 · Aevi (PO).** Read this first, then `SYSTEM_SPEC.md §9b`.
 
-## ⚠️ Retraction before anything else
+## ✅ ROUND 2 received — build order accepted, lore loader FIRST
+
+CCode's ROUND 2 landed on all six. **Recommended order accepted without change: the lore loader is
+first.** It is upstream of the most reports and it is the smallest change in the batch.
+
+**SNG-167 §1 is superseded** — I diagnosed an authoring gap; the cause is `state.js:130`. My proposed
+pass would have improved nothing. Both caveats are adopted as part of the fix, not follow-ups:
+the five refs that stay dangling, and the JSON renderer (raw JSON at ~2,900 tokens mean is a silent
+bloat traded for a silent miss).
+
+**Substrate math accepted as CCode's.** Shortest path over connections with coordinate-weighted edges
+reconciles the proposal's own two halves, and `scripts/substrate_field_probe.mjs` being persistent is
+the property my `/tmp` script lacked. Drift 0.0000 and cliffs 0.287 → 0.286 both beat anything I ran.
+
+**Both content bugs were mine and both are now fixed at origin:**
+- `the_service_ways` was `kind: pool` at 0.96 inside a 0.98 region — acting as a sink. **Now 0.99.**
+  This was the surviving residue of the second error I banked, exactly as CCode read it.
+- **`the_gearlands` at 0.98 leaves 0.02 of headroom, which is why `the_great_engine` is the one
+  invariant violation. NOT fixed — it needs Erik's ruling.** A region whose authored *mean* sits
+  0.02 below the world ceiling cannot contain a pool. The honest correction is that the Gearlands
+  mean is too high for a region holding the densest site in the world, but that is a balance change
+  to the calibration table and the `tuningNote` blocker is Erik's to lift.
+
+**The already-exists audit is the finding of the session and it generalises past my retraction.**
+Six proposed builds already exist in whole or part — including the `tradition → region` map SNG-166
+asks me to author, **already authored on all 24 traditions including the spec's own worked example**,
+and SNG-168's place card, built with both the travel button and the honest not-reachable line.
+Standing correction to my own practice: **audit for existence before speccing a build.** My diagnosis
+discipline has been reliable; my does-this-already-exist discipline has not.
+
+**Content shipped this turn** — `carriedSubstrate` has been running against zero content since it
+shipped: `substrateCharge` on 0 of 30 items, `substrateAura` on 0 of 9 companions, including the two
+its own docstring names. Now authored: **8 items** (Waystaff 0.18, the Unfinished Spear 0.12, two
+**suppressors** — the Stillhold veil −0.10 and truce token −0.05) and **6 companions** (Aevi 0.20,
+Coil 0.14, Sprig −0.08). ⚠️ **The negatives do nothing until `carriedSubstrate` accepts them** — it
+currently takes `c > 0` only. Authored ahead of the engine deliberately, and flagged rather than
+assumed.
+
+**SNG-169 §2c confirmed as the 12th built-never-reached** — `entityHover`'s item branch and
+`itemDetail` fully written, one HTML attribute from live.
+
+---
+
+## ⚠️ Retraction (stands)
 
 **Every per-location substrate number I published in `po/PROPOSAL_substrate_border_blend.md`
 REV2/REV3 is WITHDRAWN.** You were right to stop. The verification ran from an uncommitted `/tmp`

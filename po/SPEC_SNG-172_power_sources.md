@@ -115,3 +115,27 @@ lattice-dominant Rootkin, the pass is wrong, not the world.
 3. §3.3 — is there a clean place in the resolve chain for a weighted two-source term, or does that
    collide with the SNG-079 spectral-fit separation the way §9b warns about?
 4. Does the 36-missing `powerSystem` gap have a known cause, or is it simply unfinished authoring?
+
+
+---
+
+## §6 — The 36-missing gap is CLOSED (content, 2026-07-19)
+
+§2 flagged 36 abilities carrying no `powerSystem` as "a separate defect worth fixing while we are in
+here." Closed. All 36 were the three **folk** traditions — `harmonic` 12, `valley_craft` 12,
+`radiant_folk` 12 — and the mapping was already demonstrated by 7 authored siblings:
+
+| tradition | powerSystem | already authored |
+|---|---|---|
+| `harmonic` | `harmonic` | 2 |
+| `radiant_folk` | `radiant` | 2 |
+| `valley_craft` | `valley_craft` | 3 |
+
+**Completion, not judgement.** No new ids minted — `progression.js:154` validates against the catalog,
+so an invented value would have created false domain access. **Corpus: 0 abilities missing
+`powerSystem`.** Suite green by explicit exit code.
+
+**This does not touch §3.** `powerSystem` remains the *access* taxonomy; how a craft is **powered**
+(lattice / wild / natural / combination) is still the separate axis this spec asks for, and is still
+blocked on Erik's ratification and CCode's §5.1 answer on whether it is a field or a tradition-keyed
+map with overrides.

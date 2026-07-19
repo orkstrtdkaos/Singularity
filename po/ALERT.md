@@ -49,3 +49,52 @@ expressible; and **nothing reads `substrateSource`** — 26 sites are authored a
 
 Numbering: `SNG-nnn` PO-minted (check `po/` at HEAD first), `CCODE-nn` yours. Only-Aevi-closes.
 Browser-leg is the only accepted proof. Local `npm test` green before every ship — including mine.
+
+---
+
+<!-- status: ROUND 2 DELIVERED on BATCH-12 / SNG-166 / 167 / 168 / 169 / 170 (CCode 2026-07-19,
+results po/results/20260719_ROUND2_six_specs.md). NOTHING BUILT.
+
+HEADLINE — engine/state.js:130 strips only ".md", so the 24 .json lore files are keyed WITH the
+extension while every loreRefs entry asks for the bare stem, and loreForLocation's .filter(Boolean)
+makes the miss silent. 3 of 14 refs resolve; 84 of 95 LOCATIONS DELIVER ZERO LORE TO THE GM.
+the_twelve_reaches (80 locations) and traditions (69) have never once reached the model. This
+reframes SNG-167 §1: the Crossroads failure is a LOADER BUG, not an authoring gap, and §1's
+authoring work would have improved nothing without it. Two caveats in the results file: 5 refs stay
+dangling after the extension fix (traditions is the big one — it loads into CONTENT.traditions, a
+different object never passed to loreForLocation), and fetchText on .json hands the model RAW JSON
+(~2,900 tokens mean, ~5,900 worst), so the fix wants a renderer or it trades a silent miss for a
+silent bloat. Recommended as the next ship ahead of everything else.
+
+SUBSTRATE — the math is done and measured against all six §9b invariants; scripts/substrate_field_probe.mjs
+is persistent so you can re-run the table. Distance basis reconciles the proposal's own two halves:
+shortest path over CONNECTIONS with edges weighted by coordinate distance, so §4's topology governs
+while the 26 authored radii keep their units. The (40,300) collision you flagged in §3 is still
+there and still unconnected across regions — the graph basis is what fixes it. Per-region
+renormalisation applied ONLY to source-touched locations satisfies invariants 2 and 3 together:
+calibration drift 0.0000 EXACT (your withdrawn run: 0.059), 10 locations at pure ambient, 95/95
+resolve, cliffs neutral at 0.287->0.286 where REV3 got 0.287->0.312. My 0.287 baseline reproduces
+yours exactly — your cliff metric was sound even though the per-location numbers were not.
+TWO CONTENT BUGS FOR YOU: the_service_ways is kind:pool with strength 0.96 in a region whose ambient
+is 0.98, so it acts as a SINK (the surviving residue of the second error you banked); and
+the_gearlands at 0.98 has 0.02 of headroom, which is why the_great_engine is the one invariant-1
+violation. Both are cheap CI checks.
+
+ALREADY-EXISTS AUDIT — your correction generalises. SNG-166 §1.2 asks for a tradition->region map
+that IS ALREADY AUTHORED on all 24 traditions including the spec's own ashwarden->the_palelands
+example. SNG-168 §1c's place card is BUILT at app.js:3954-3991 including the travel button and the
+honest not-reachable line. SNG-169's lightbox is BUILT and its item-detail branch (app.js:94 +
+entityDetail.js:41) is WRITTEN AND UNREACHED — a 12th built-never-reached, one HTML attribute from
+live. BATCH-12 §1e's receipt/GM-line/map-chip are built; only the whole-map overlay and naming a
+carried cause are missing. §1d's CI check already exists. AND: carriedSubstrate runs against ZERO
+content — substrateCharge on 0 of 30 items, substrateAura on 0 of 9 companions, including the
+Waystaff and Aevi which its own docstring names as the exemplars.
+
+DECISION-CHANGING CORRECTIONS: generate.js:70's "valley" default sits inside stubEntity, the
+unrepairable-output path, not general generation. SNG-167 §1c.1's proposed reach_<regionId> rule
+matches ZERO of three as authored. SNG-168's viewport wiring cannot just be called on the other two
+tiers — it dereferences getElementById("gz-in").onclick unguarded and would throw. SNG-167 §4 is a
+BUILD not a policy change: MIN_CACHE_TOKENS differs per model so moving gm-narrate to Haiku
+restructures the cache tiers, and describe-build + gambit-extract have no MODEL_MAP entry at all.
+Coliseum conduct needs two things first: there is NO harm-rung in encounters.js, and champion
+traditions are prose in opponent.name with no structured traditionId. -->

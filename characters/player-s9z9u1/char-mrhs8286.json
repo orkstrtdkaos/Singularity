@@ -1089,14 +1089,19 @@
         "player": "Tell her what you see ahead, and the boot prints - then ask the group about whether to stop at the Raven's Home first, or to continue on to your Mother's house first?",
         "summary": "Silas shares what Order-Sense found — one set of tracks to Raven's Home with no return — and the group considers whether to check the dead warden post first or continue south to his mother's house.",
         "narration": "You tell Veth what Order-Sense showed you. A road that belongs to the landscape rather than cutting it. The left branch clear to the old warden post, two miles past the marker stone. And one set of tracks, heel-heavy, heading toward Raven's Home without returning.\n\nVeth listens without interrupting. When you finish, she says, \"One set. No return.\" She does not make it a question. She looks northwest along the pale dirt track, and her jaw tightens once, briefly. \"The post has been empty eleven years,\" she says. \"Someone is there, or was there, and did not come back the way they went.\"\n\nPell has been reading the ground while you spoke. She straightens now and looks at you directly. \"Your mother's house,\" she says. \"How far?\" She is not steering you — she is asking for the shape of the choice, the same way she'd ask about a road's grade before deciding the pace.\n\nHuginn turns on his stone and fixes the northwest sky with his pale eye. He says nothing. His silence has the quality of a thing already decided, watching you catch up to it.\n\nThe marker stone is a quarter mile ahead. The left branch is there. The right branch leads away from Raven's Home, toward the road south. Both are open."
+      },
+      {
+        "player": "Take the left branch — go to Raven's Home first. Someone walked in and did not walk out, and the post has been empty eleven years.",
+        "summary": "The party takes the left branch at the marker stone and begins the two-mile walk to Raven's Home, following the single set of heel-heavy tracks northwest.",
+        "narration": "You say: Raven's Home first. Pell gives a short nod and turns northwest without ceremony. Veth is already moving.\n\nThe three of you walk the quarter mile to the marker stone in silence. The stone itself is old — waist-high, rounded at the top by years of weather, with a faint groove cut into its face where a warden's direction-mark used to be. The left branch opens past it: the same pale dirt, narrower, with low heather pressing in from both sides and the scrub giving way gradually to stands of grey birch as the ground rises.\n\nThe boot-tracks are clearer here on the softer verge. Heel-heavy, as you read them — the stride of someone moving with weight on their back, or someone tired, or both. They lead straight up the left branch without wandering. Veth walks beside them rather than over them, reading them as she goes. She says, 'Not running. Not lost. They knew this road.' She pauses, then adds quietly, 'I knew this road too, once.'\n\nHuginn lifts from his stone and flies ahead without being asked, grey-black against the overcast, gaining altitude over the birch line and vanishing northwest. He does not call back. Pell watches him go, then glances at you once, and you walk on. The marker stone is behind you. The road to Raven's Home runs ahead, rising gently, the sky flat and pale above it and the smell of cold stone coming down off the high ground."
       }
     ],
     "lastTurn": {
-      "narration": "You tell Veth what Order-Sense showed you. A road that belongs to the landscape rather than cutting it. The left branch clear to the old warden post, two miles past the marker stone. And one set of tracks, heel-heavy, heading toward Raven's Home without returning.\n\nVeth listens without interrupting. When you finish, she says, \"One set. No return.\" She does not make it a question. She looks northwest along the pale dirt track, and her jaw tightens once, briefly. \"The post has been empty eleven years,\" she says. \"Someone is there, or was there, and did not come back the way they went.\"\n\nPell has been reading the ground while you spoke. She straightens now and looks at you directly. \"Your mother's house,\" she says. \"How far?\" She is not steering you — she is asking for the shape of the choice, the same way she'd ask about a road's grade before deciding the pace.\n\nHuginn turns on his stone and fixes the northwest sky with his pale eye. He says nothing. His silence has the quality of a thing already decided, watching you catch up to it.\n\nThe marker stone is a quarter mile ahead. The left branch is there. The right branch leads away from Raven's Home, toward the road south. Both are open.",
-      "sceneSummary": "Silas shares what Order-Sense found — one set of tracks to Raven's Home with no return — and the group considers whether to check the dead warden post first or continue south to his mother's house.",
+      "narration": "You say: Raven's Home first. Pell gives a short nod and turns northwest without ceremony. Veth is already moving.\n\nThe three of you walk the quarter mile to the marker stone in silence. The stone itself is old — waist-high, rounded at the top by years of weather, with a faint groove cut into its face where a warden's direction-mark used to be. The left branch opens past it: the same pale dirt, narrower, with low heather pressing in from both sides and the scrub giving way gradually to stands of grey birch as the ground rises.\n\nThe boot-tracks are clearer here on the softer verge. Heel-heavy, as you read them — the stride of someone moving with weight on their back, or someone tired, or both. They lead straight up the left branch without wandering. Veth walks beside them rather than over them, reading them as she goes. She says, 'Not running. Not lost. They knew this road.' She pauses, then adds quietly, 'I knew this road too, once.'\n\nHuginn lifts from his stone and flies ahead without being asked, grey-black against the overcast, gaining altitude over the birch line and vanishing northwest. He does not call back. Pell watches him go, then glances at you once, and you walk on. The marker stone is behind you. The road to Raven's Home runs ahead, rising gently, the sky flat and pale above it and the smell of cold stone coming down off the high ground.",
+      "sceneSummary": "The party takes the left branch at the marker stone and begins the two-mile walk to Raven's Home, following the single set of heel-heavy tracks northwest.",
       "choices": [
         {
-          "label": "Take the left branch — go to Raven's Home first. Someone walked in and did not walk out, and the post has been empty eleven years.",
+          "label": "Walk and watch — follow Huginn's line and read what the road gives you as you go",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
@@ -1104,86 +1109,70 @@
             "scout",
             "careful"
           ],
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Take the right branch — continue south to your mother's house first. The tracks may be old. The road there waits.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 0,
-          "intentTags": [
-            "travel"
-          ],
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Huginn what he sees to the northwest — plainly, before you decide.",
+          "label": "Use Order-Sense again as the ground rises — read the post itself before you arrive",
           "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
+          "subAttribute": "reason",
+          "difficulty": 15,
           "intentTags": [
+            "scout",
             "study"
           ],
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false
         },
         {
-          "label": "Ask Veth directly — she held this post for eleven years. Does she know who might have reason to walk to Raven's Home today?",
+          "label": "Ask Veth what she remembers of the post — who last held Raven's Home, and how it was closed",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "plan"
+            "study"
           ],
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
+        },
+        {
+          "label": "Watch the boot-tracks as you walk — read more from their pattern before you reach the post",
+          "attribute": "mental",
+          "subAttribute": "wits",
+          "difficulty": 15,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "trivial": false
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
-      "standingOps": [],
-      "stageOps": [],
       "scene": {
-        "setting": "The Ashwarden March Road, open ground north of the waygate — flat pale dirt track, scrub grass and low stone outcrops, overcast sky with a cold northwest edge. Midday, flat diffuse light. The marker stone is a quarter mile ahead.",
+        "setting": "The Ashwarden March Road, left branch past the marker stone — a narrower pale dirt track rising gently northwest through grey birch and low heather, overcast sky, cold northwest edge to the air. Midday, flat diffuse light. Raven's Home roughly two miles ahead.",
         "npcsPresent": [
           {
             "name": "Pell Marsh",
-            "state": "Standing on the track, facing Silas — she has straightened from reading the ground and is waiting for an answer about his mother's house."
+            "state": "Walking northwest on the left branch, pack squared, reading the ground ahead without comment."
           },
           {
             "name": "Veth Ondra",
-            "state": "Standing slightly ahead, jaw set, looking northwest along the road after hearing the boot-track report."
+            "state": "Walking beside the boot-tracks rather than over them, jaw set, watching the road."
           },
           {
             "name": "Huginn",
-            "state": "Turned on his low stone to face northwest, pale eye fixed on the horizon, silent."
+            "state": "Airborne ahead — flew northwest over the birch line and is out of sight."
           }
         ],
         "objects": [
-          "The waygate threshold behind the party",
-          "The March road ahead, pale dirt running northwest",
-          "Low stone outcrops along the verge",
-          "Marker stone visible roughly a quarter mile ahead",
-          "One set of heel-heavy boot-tracks in the pale dirt, heading northwest toward Raven's Home with no return"
+          "The marker stone — old, waist-high, rounded, direction-mark groove faded — now behind the party",
+          "A single set of heel-heavy boot-tracks in the pale dirt, leading northwest without returning",
+          "Low heather pressing in from both sides of the narrower left branch",
+          "Stands of grey birch rising as the ground lifts toward Raven's Home",
+          "The waygate threshold behind the party to the south"
         ],
         "threads": [
-          "One set of tracks leads to Raven's Home without returning — source unknown",
-          "Left branch at the marker stone leads to Raven's Home, two miles past the fork",
-          "Right branch leads south, away from Raven's Home, toward the road to Silas's mother",
-          "The warden post at Raven's Home has been empty eleven years",
-          "The sky to the northwest carries the suggestion of late-season snow",
-          "Huginn is watching the northwest with the quality of something already decided"
+          "One set of tracks leads to Raven's Home with no return — source unknown",
+          "The warden post has been empty eleven years — Veth held a south-facing station, not this one",
+          "Huginn flew ahead without being asked — he does not do that idly"
         ]
       },
       "npcUpdates": [
@@ -1191,67 +1180,77 @@
           "op": "update",
           "npcId": "veth-ondra",
           "name": "Veth Ondra",
-          "note": "Heard Silas's Order-Sense report — responded to the single set of tracks with 'no return' said without question; visibly affected by the news about the post she held for eleven years.",
-          "statusNote": "Walking the March road with the party — at the open ground before the marker stone fork, jaw set after hearing about the tracks.",
+          "note": "Read the tracks aloud as the party walked — not running, not lost, they knew this road. Added quietly that she knew this road once.",
           "learned": [
-            "One set of heel-heavy tracks leads to Raven's Home with no return — something is there, or was there"
-          ]
+            "The tracks belong to someone who knew the route — purposeful stride, no wandering"
+          ],
+          "statusNote": "Walking the left branch of the March road toward Raven's Home — reading the tracks beside her as she goes."
         },
         {
           "op": "update",
-          "npcId": "pell-ran-marsh",
-          "name": "Pell Ran Marsh",
-          "note": "Read the ground while Silas reported; straightened and asked plainly about the distance to his mother's house — shaping the choice, not steering it.",
-          "statusNote": "On the March road before the marker stone fork — waiting for Silas's answer about his mother's house."
+          "npcId": "pell-marsh",
+          "name": "Pell Marsh",
+          "note": "Turned northwest without ceremony at Silas's decision — walking ahead, reading the ground.",
+          "statusNote": "Walking the left branch of the March road toward Raven's Home, pack squared, quiet."
         }
       ],
-      "codexUpdates": [
+      "placeUpdates": [
         {
-          "topic": "ashwarden-march-road",
-          "label": "Ashwarden March Road",
-          "kind": "place",
-          "fact": "One set of heel-heavy boot-tracks leads from the waygate arrival point toward Raven's Home along the left branch — no return tracks. Someone walked in and did not walk out.",
-          "links": [
-            "the-edge-district-ledger",
-            "the-door-that-closed-behind"
-          ]
+          "note": "The party passed the marker stone and took the left branch northwest toward Raven's Home on World-day 19 midday.",
+          "subPlace": {
+            "name": "Marker Stone Fork",
+            "parent": "Ashwarden March Road",
+            "note": "Old waist-high stone, direction-mark groove faded — left branch to Raven's Home, right branch south. The left branch narrows past it into grey birch and heather.",
+            "visited": true
+          }
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A short exchange on the road before the marker stone"
+        "hoursPassed": 0.5,
+        "why": "A quarter mile to the marker stone and the first stretch of the left branch — perhaps half an hour of walking at a measured pace."
       },
+      "codexUpdates": [
+        {
+          "topic": "ravens-home",
+          "label": "Raven's Home",
+          "kind": "place",
+          "fact": "The left branch past the marker stone leads two miles northwest to the old warden post at Raven's Home. One set of heel-heavy boot-tracks leads there without returning. Huginn flew ahead without being asked.",
+          "links": [
+            "the-door-that-closed-behind",
+            "veth-ondra",
+            "the-edge-district-ledger"
+          ]
+        }
+      ],
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Ashwarden March Road, open ground north of the waygate — flat pale dirt track, scrub grass and low stone outcrops, overcast sky with a cold northwest edge. Midday, flat diffuse light. The marker stone is a quarter mile ahead.",
+      "setting": "The Ashwarden March Road, left branch past the marker stone — a narrower pale dirt track rising gently northwest through grey birch and low heather, overcast sky, cold northwest edge to the air. Midday, flat diffuse light. Raven's Home roughly two miles ahead.",
       "npcsPresent": [
         {
           "name": "Pell Marsh",
-          "state": "Standing on the track, facing Silas — she has straightened from reading the ground and is waiting for an answer about hi"
+          "state": "Walking northwest on the left branch, pack squared, reading the ground ahead without comment."
         },
         {
           "name": "Veth Ondra",
-          "state": "Standing slightly ahead, jaw set, looking northwest along the road after hearing the boot-track report."
+          "state": "Walking beside the boot-tracks rather than over them, jaw set, watching the road."
         },
         {
           "name": "Huginn",
-          "state": "Turned on his low stone to face northwest, pale eye fixed on the horizon, silent."
+          "state": "Airborne ahead — flew northwest over the birch line and is out of sight."
         }
       ],
       "objects": [
-        "The waygate threshold behind the party",
-        "The March road ahead, pale dirt running northwest",
-        "Low stone outcrops along the verge",
-        "Marker stone visible roughly a quarter mile ahead",
-        "One set of heel-heavy boot-tracks in the pale dirt, heading northwest toward Rav"
+        "The marker stone — old, waist-high, rounded, direction-mark groove faded — now b",
+        "A single set of heel-heavy boot-tracks in the pale dirt, leading northwest witho",
+        "Low heather pressing in from both sides of the narrower left branch",
+        "Stands of grey birch rising as the ground lifts toward Raven's Home",
+        "The waygate threshold behind the party to the south"
       ],
       "threads": [
-        "One set of tracks leads to Raven's Home without returning — source unknown",
-        "Left branch at the marker stone leads to Raven's Home, two miles past the fork",
-        "Right branch leads south, away from Raven's Home, toward the road to Silas's mother",
-        "The warden post at Raven's Home has been empty eleven years",
-        "The sky to the northwest carries the suggestion of late-season snow"
+        "One set of tracks leads to Raven's Home with no return — source unknown",
+        "The warden post has been empty eleven years — Veth held a south-facing station, not this one",
+        "Huginn flew ahead without being asked — he does not do that idly"
       ]
     }
   },
@@ -1747,7 +1746,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d6] Held the quiet after the Palework without filling it — stayed at Silas's shoulder through the ending's settling.",
         "[d6] Held the silence through the failed read without comment — her presence at his shoulder unchanged.",
         "[d6] Named the ward failure's cause plainly from the circle's edge — the mark needs something to hold it; a threshold needs a frame before the seal can land.",
         "[d6] Entered the Ent circle at Silas's open-hand invitation — ironsense open, hand at his wrist, the grove took note of her. The join found its seat in part through her.",
@@ -1756,7 +1754,8 @@
         "[d6] Stepped through the waygate without ceremony — at Silas's left, road-ready.",
         "[d6] Fell into road-pace at Silas's left without a word — pack settled, hand loose, road-ready",
         "[d6] Came through the gate road-ready — pack squared, Memory at shoulder, reading the ground ahead without comment.",
-        "[d6] Read the ground while Silas reported; straightened and asked plainly about the distance to his mother's house — shaping the choice, not steering it."
+        "[d6] Read the ground while Silas reported; straightened and asked plainly about the distance to his mother's house — shaping the choice, not steering it.",
+        "[d6] Turned northwest without ceremony at Silas's decision — walking ahead, reading the ground."
       ],
       "knownFacts": [
         "Silas wants something private for the evenings — she is thinking about what that means",
@@ -1777,7 +1776,7 @@
         "feeding ironsense through physical contact to anchor a rune-"
       ],
       "status": "active",
-      "statusNote": "On the March road before the marker stone fork — waiting for Silas's answer about his mother's house.",
+      "statusNote": "Walking the left branch of the March road toward Raven's Home, pack squared, quiet.",
       "lastSeen": {
         "locationId": "gen-ashwarden-march-road",
         "day": 6
@@ -2444,7 +2443,6 @@
       },
       "relationship": 9,
       "history": [
-        "[d6] Found her sentence and spoke it: the Ent was in conversation with whatever needed to end here, and had not yet found the right attendant.",
         "[d6] Watched the failed read, then looked back to the treeline — warden's patience, revision spoken, no pressure added.",
         "[d6] Held warden's patience through the failed ward attempt — watching the circle, not filling the silence.",
         "[d6] Entered the circle without hesitation at Silas's invitation — warden's bearing, hands open, the posture of bearing witness without crowding. Present inside the circle for the gift-working.",
@@ -2453,17 +2451,18 @@
         "[d6] Stepped through the waygate with the party — road-ready, warden's bearing easy, eyes already on the March ahead.",
         "[d6] Oriented the group from field memory on the first stretch of road — named the marker stone, the left branch, and the gone survey post without being asked",
         "[d6] Named the left branch and the marker stone from warden memory on first sight of the road — something she has been holding a long time, released quietly.",
-        "[d6] Heard Silas's Order-Sense report — responded to the single set of tracks with 'no return' said without question; visibly affected by the news about the post she held for eleven years."
+        "[d6] Heard Silas's Order-Sense report — responded to the single set of tracks with 'no return' said without question; visibly affected by the news about the post she held for eleven years.",
+        "[d6] Read the tracks aloud as the party walked — not running, not lost, they knew this road. Added quietly that she knew this road once."
       ],
       "knownFacts": [
-        "The Ent's response to Silas's naming is larger evidence than Veth's prior March-read accounted for — she is revising substantially",
         "Silas's use of the grove as a Palework channel has exceeded her prior March-read in a way she has not yet articulated",
         "Named the revision plainly: the Ent's prior conversation was with whatever needed to end here; Silas was the right attendant.",
         "The Ashwarden posture of bearing witness served as a genuine contribution to the collective working — not craft, but a quality of presence.",
         "The Ent received the intention of the ward, not the craft — the grove's response to presence and intention rather than mechanism is something the March's records did not fully capture",
         "Raven's Home is past the first tributary — left branch at the marker stone; right branch leads to the old survey post, which is gone",
         "Oriented from field memory the moment the road came into view — left branch at the marker stone is her held knowledge, not a guess",
-        "One set of heel-heavy tracks leads to Raven's Home with no return — something is there, or was there"
+        "One set of heel-heavy tracks leads to Raven's Home with no return — something is there, or was there",
+        "The tracks belong to someone who knew the route — purposeful stride, no wandering"
       ],
       "skillsObserved": [
         "packing a teaching kit by sequence without looking",
@@ -2476,7 +2475,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Walking the March road with the party — at the open ground before the marker stone fork, jaw set after hearing about the tracks.",
+      "statusNote": "Walking the left branch of the March road toward Raven's Home — reading the tracks beside her as she goes.",
       "lastSeen": {
         "locationId": "gen-ashwarden-march-road",
         "day": 6
@@ -2917,7 +2916,8 @@
     "gen-ashwarden-march-road": {
       "visits": 1,
       "notes": [
-        "[d6] The party arrived here through the waygate on World-day 19 midday — the marker stone is roughly a quarter mile north, left branch leads to Raven's Home."
+        "[d6] The party arrived here through the waygate on World-day 19 midday — the marker stone is roughly a quarter mile north, left branch leads to Raven's Home.",
+        "[d6] The party passed the marker stone and took the left branch northwest toward Raven's Home on World-day 19 midday."
       ],
       "flags": {},
       "subPlaces": {
@@ -2927,6 +2927,13 @@
           "day": 6,
           "visited": true,
           "note": "Open ground just south of the marker stone — where the waygate deposits travelers onto the March."
+        },
+        "marker-stone-fork": {
+          "name": "Marker Stone Fork",
+          "parentId": "gen-ashwarden-march-road",
+          "day": 6,
+          "visited": true,
+          "note": "Old waist-high stone, direction-mark groove faded — left branch to Raven's Home, right branch south. The left branch narrows past it into grey birch and heather."
         }
       },
       "vectorsKnown": []
@@ -3041,7 +3048,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-19T14:26:15.556Z",
+    "lastSharedReadAt": "2026-07-19T15:07:12.049Z",
     "lastTickWorldDay": 19,
     "lastCanonWorldDay": 19
   },
@@ -4409,21 +4416,21 @@
     }
   },
   "tendencies": {
-    "strategic": 14.904549686294263,
-    "cerebral": 20.94179768793631,
-    "social": 13.624216112511268,
-    "generous": 3.087344827422431,
-    "cautious": 5.337553674432419,
-    "physical": 0.6339726800167866,
-    "risky": 0.6648459494672511,
-    "ruthless": 0.21197886534735344,
-    "carousing": 0.003247784251891161,
-    "amorous": 2.5356423812934095,
-    "patient": 1.321239448298358,
-    "stealth": 0.08216354977260638,
-    "devotion": 1.678526139011517,
-    "craft": 0.649035671529828,
-    "leadership": 0.4182215869442893
+    "strategic": 15.531935944136906,
+    "cerebral": 20.418252745737902,
+    "social": 13.283610709698486,
+    "generous": 3.01016120673687,
+    "cautious": 6.204114832571609,
+    "physical": 0.618123363016367,
+    "risky": 0.6482248007305698,
+    "ruthless": 0.2066793937136696,
+    "carousing": 0.0031665896455938818,
+    "amorous": 2.472251321761074,
+    "patient": 1.2882084620908991,
+    "stealth": 0.08010946102829122,
+    "devotion": 1.636562985536229,
+    "craft": 0.6328097797415823,
+    "leadership": 0.40776604727068205
   },
   "aptitudes": [
     "strategist",
@@ -4431,7 +4438,7 @@
     "scholar",
     "sage"
   ],
-  "actionCount": 586,
+  "actionCount": 587,
   "grantsVersion": 1,
   "reconcileVersion": 8,
   "gallery": [
@@ -4717,8 +4724,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784473174184,
-  "rev": 873,
+  "updatedAt": 1784475125689,
+  "rev": 877,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -6197,10 +6204,10 @@
       "at": "2026-07-19T12:49:09.209Z"
     }
   ],
-  "syncedAt": 1784462544880,
+  "syncedAt": 1784473174184,
   "teachers": {},
   "regionsKnown": {
-    "valley": 409
+    "valley": 410
   },
   "foreclosed": [
     "rootkin",
@@ -6269,10 +6276,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-07-19T11:58:49.560Z",
-      "lastAt": "2026-07-19T14:59:34.179Z",
+      "lastAt": "2026-07-19T15:32:05.661Z",
       "startDay": 19,
       "endDay": 19,
-      "beats": 3
+      "beats": 4
     }
   ],
   "company": [

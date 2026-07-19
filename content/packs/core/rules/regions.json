@@ -121,7 +121,7 @@
     },
     {
       "regionId": "the_palelands",
-      "name": "The Palelands / The Hollow March",
+      "name": "The Palelands",
       "terrain": "ash-fields, grey heath",
       "elevation": "flat, low, quiet",
       "palette": {
@@ -323,7 +323,7 @@
     },
     {
       "regionId": "the_veiled_reach",
-      "name": "The Veiled Reach",
+      "name": "The Mirrorlands",
       "terrain": "mirrored terrain — it does not survey correctly",
       "elevation": "untrustworthy",
       "palette": {
@@ -339,11 +339,13 @@
       "water": [
         "reflecting pools"
       ],
-      "visualIdentity": "The map is LYING here and should look like it — doubled features, an outline that doesn't quite close."
+      "visualIdentity": "The map is LYING here and should look like it — doubled features, an outline that doesn't quite close.",
+      "formerName": "The Veiled Reach",
+      "renameNote": "The map lies there; mirrors are its whole idiom. (SNG-166 §2 / Erik 2026-07-19. Ids are unchanged — saves, regionsKnown and substrate keys all key on the id.)"
     },
     {
       "regionId": "the_stark_reach",
-      "name": "The Stark Reach",
+      "name": "The Told Ground",
       "terrain": "bare stone, no ornament",
       "elevation": "exposed",
       "palette": {
@@ -358,7 +360,9 @@
       "water": [
         "none, and they will tell you so"
       ],
-      "visualIdentity": "Utterly bare. No decoration anywhere. The Told Ground's stones are the only marks, and there are thousands."
+      "visualIdentity": "Utterly bare. No decoration anywhere. The Told Ground's stones are the only marks, and there are thousands.",
+      "formerName": "The Stark Reach",
+      "renameNote": "Its great feature is a field of standing stones, each one a sentence. The name was already in its own canon. (SNG-166 §2 / Erik 2026-07-19. Ids are unchanged — saves, regionsKnown and substrate keys all key on the id.)"
     },
     {
       "regionId": "the_descent",
@@ -422,7 +426,7 @@
     },
     {
       "regionId": "the_pattern_reach",
-      "name": "The Pattern Reach",
+      "name": "Cloudform",
       "terrain": "impossible geometry — resists mapping",
       "elevation": "non-Euclidean",
       "palette": {
@@ -438,11 +442,13 @@
       "water": [
         "none that stay put"
       ],
-      "visualIdentity": "The cartographer gave up. Draw it as a region that will not hold its own shape — the honest failure of a map."
+      "visualIdentity": "The cartographer gave up. Draw it as a region that will not hold its own shape — the honest failure of a map.",
+      "formerName": "The Pattern Reach",
+      "renameNote": "Its city is Cloudform and its terrain will not hold a shape. (SNG-166 §2 / Erik 2026-07-19. Ids are unchanged — saves, regionsKnown and substrate keys all key on the id.)"
     },
     {
       "regionId": "the_open_reach",
-      "name": "The Open Reach",
+      "name": "The Long Horizon",
       "terrain": "open plain, endless roads",
       "elevation": "featureless by choice",
       "palette": {
@@ -458,11 +464,13 @@
       "water": [
         "seasonal rivers"
       ],
-      "visualIdentity": "Roads and horizon. The settlement should be marked as MOVING — it will not be there next season."
+      "visualIdentity": "Roads and horizon. The settlement should be marked as MOVING — it will not be there next season.",
+      "formerName": "The Open Reach",
+      "renameNote": "Endless roads and a settlement that MOVES. Horizon is already its word. (SNG-166 §2 / Erik 2026-07-19. Ids are unchanged — saves, regionsKnown and substrate keys all key on the id.)"
     },
     {
       "regionId": "the_kept_reach",
-      "name": "The Kept Reach",
+      "name": "The Kept Hours",
       "terrain": "clock-country — towers and archives",
       "elevation": "measured",
       "palette": {
@@ -478,7 +486,9 @@
       "water": [
         "a river that runs slow"
       ],
-      "visualIdentity": "Every structure is a clock. The Stopped should look like a still frame inside a moving picture."
+      "visualIdentity": "Every structure is a clock. The Stopped should look like a still frame inside a moving picture.",
+      "formerName": "The Kept Reach",
+      "renameNote": "Clock-country: archives, the Slow Hour. The name should say TIME, not PLACE. (SNG-166 §2 / Erik 2026-07-19. Ids are unchanged — saves, regionsKnown and substrate keys all key on the id.)"
     },
     {
       "regionId": "the_unmade",

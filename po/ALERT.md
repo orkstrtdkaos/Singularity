@@ -145,3 +145,58 @@ BUILD not a policy change: MIN_CACHE_TOKENS differs per model so moving gm-narra
 restructures the cache tiers, and describe-build + gambit-extract have no MODEL_MAP entry at all.
 Coliseum conduct needs two things first: there is NO harm-rung in encounters.js, and champion
 traditions are prose in opponent.name with no structured traditionId. -->
+
+---
+
+<!-- status: BATCH-13 items 1/3/5/6 COMPLETE_PENDING_REVIEW (CCode 2026-07-19, results
+po/results/20260719_BATCH-13_first_four.md). v1.8.133 lore loader / v1.8.134 item popup+lightbox /
+v1.8.135 SNG-173 toolkit / v1.8.136 substrate field. Suite green at every ship.
+
+ITEM 4 WAS ALREADY DONE — the handoff lists BATCH-12 §3 standing as "company accrual + standingOps
+remain", but both shipped in v1.8.132 (395f60ec) before the handoff was written. accrueStandingForDays
+and applyStandingOps are live in app.js, standingOps is in the gm.js contract and salvage list, and
+the GM row is registered. Nothing to do; skipped.
+
+ITEM 1 LORE LOADER: 3 of 14 refs resolved -> 9 of 14; 84 of 95 lore-blind locations -> 0. the_crossing
+verified live at 16,904 chars where it had 0. CORRECTION TO MY OWN ROUND 2: I called the raw-JSON risk
+a "silent bloat" at ~2,900 tokens. Wrong emphasis — rendering to prose saves only 4%, because that
+cost is the CONTENT not the syntax, and it lands in gm.js tier 2 which is CACHED, so it is paid per
+region-stay not per turn. The renderer earns its place on readability. THE 5 DANGLING REFS ARE YOURS
+AND THE BIGGEST HAS NO CHEAP FIX: `traditions` (69 locations) exists at core/rules/traditions.json,
+but loading it takes those locations from ~2,700 to ~13,000 prompt tokens; tradition_profiles.json is
+no cheaper (~11,700). That ref wants a per-tradition SLICE or it wants dropping — not a file. The
+other four look like rename drift (domain_detail_and_connections vs domain_detail.json;
+precursor_glimpse vs precursors.md; reach_body_mind and reach_violence_peace read as pole-axis names,
+not regions). CI now names all five every run, ratcheted so a sixth fails the build.
+
+ITEM 3: your "one HTML attribute" placement does not work and checking was the job. The inventory
+.item-name button already carries data-item-toggle and owns a RICHER inline expand, so the attribute
+there would fire both handlers or downgrade the interaction. itemCard is the only item surface and
+both its call sites have that expand. Put the popup where an item is named and CANNOT be inspected:
+the roll receipt's "aided by X". Also had to split resolution.itemHelpers out of equipHelpers, which
+mixes items and companions — a blanket attribute would have made companion names look tappable and
+silently do nothing.
+
+ITEM 5 SNG-173: measured on Erik's actual save — Silas at level 16 has 17 abilities and 2 left in the
+pool, 5 excluded after exactly ONE use. Fixed with a lastUsed stamp + quiet-days window; 16B untouched.
+THE MIGRATION IS THE PART THAT NEEDED CARE AND I GOT IT WRONG FIRST: treating unstamped abilities as
+long-quiet made the block name Silas's THREE MOST-USED crafts (Order-Sense 58 uses, Palework 27,
+Deathsense 25) as "gone quiet" — caught only by running against the real save instead of a fixture.
+YOUR OUTCOME 2, ANSWERED: the other three categories are NOT draining, they are STATIC. Ten
+consecutive turns for an identical character produce a byte-identical braid pair, item line and
+companion line. Different failure from the one specced; flagged, not built.
+
+ITEM 6 SUBSTRATE: your ±delta re-authoring works as predicted — the_great_engine rises 0.98->1.000
+and THE GEARLANDS RULING IS DISSOLVED, no longer needs Erik. Distance is shortest path over
+CONNECTIONS weighted by coordinate distance, which reconciles your §3 and §4 instead of picking one;
+verified live that ent_deepwood rises to 1.000 while the_lampless_market at the SAME coordinates but
+unconnected stays at its own ambient. Renormalisation chosen on measurement, not taste: raw field
+drifts a regional mean by 0.1332 and 19 of 25 regions have one-signed sources, and §9b forbids
+overwriting the authored table. ONE VIOLATION REMAINS AND IT IS CONTENT: the_service_ways 0.98->0.954,
+because the_gearlands has 2 pools, 0 sinks and 4 locations, so the correction pushes the weaker pool
+under. Add a sink or accept it. carriedSubstrate now takes negatives so your three authored
+suppressors work, and the roll receipt names the carried cause (invariant 5).
+
+STILL OPEN FOR ERIK, unchanged: §D.1 Ent->people affiliation (blocks item 2, SNG-171 §2 history
+credit), §D.2 region renames, §D.3 stakes dial default, §D.4 falloff scales. Remaining build: items
+2, 7, 8, 9. -->

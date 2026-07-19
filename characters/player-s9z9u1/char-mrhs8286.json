@@ -1130,94 +1130,80 @@
         "player": "Let Veth lead — stay back and listen to what passes between them",
         "summary": "Veth descends to Cassiel at the hollow's rim — a quiet exchange begins; he came to say something, and she is giving him the space to say it.",
         "narration": "You step back beside Pell without a word. She reads the gesture and shifts her weight, Memory settling easy against her shoulder — neither of you speaks.\n\nVeth walks down the hollow's near slope the way someone enters a room they once lived in. Her feet find the grade without looking. She stops three paces from Cassiel and stands.\n\n\"Stillwater,\" said Cassiel. His voice is dry, unhurried, the voice of a man who has been practicing what to say and decided none of it was right. \"I felt the binding go in before dawn. I thought it might be you.\"\n\n\"It was,\" said Veth. She does not move closer. \"How long have you been here?\"\n\n\"Since yesterday evening,\" said Cassiel. \"I came to see if it was still rising. It was.\" He pauses. \"I did not want it to rise alone.\"\n\nHuginn shifts one foot on the limestone spur above him. The small sound of talon on stone carries in the cold air. Cassiel glances up at the bird — not startled, just noting it — and then his eyes come back to Veth.\n\n\"There is something I came to say,\" said Cassiel. He does not look at you or Pell. \"I think you already know what it is. But I came to say it here, where it happened, because I thought it deserved that.\"\n\nVeth's hands are still at her sides. She watches him. She is giving him the room to say it in his own time."
+      },
+      {
+        "player": "Step forward beside Veth — not to interrupt, but to be present as a witness when whatever this is lands",
+        "summary": "Cassiel names the thing he came to say: eleven years ago a woman sat in the hollow and told it what it was for — completion or beginning, he still does not know which, and he came to Veth to find out.",
+        "narration": "Cassiel's voice pauses. Not startled — he registers your movement the way a man registers a cloud crossing the sun. His eyes stay on Veth.\n\nYou step down the hollow's near slope and come to stand at Veth's left shoulder. Not close enough to crowd the exchange. Close enough that Cassiel can see you are with her, and that she is not alone in this.\n\nPell holds the rim. Huginn is still on the limestone spur, one foot shifted, watching.\n\n\"The one who bound it,\" said Cassiel. He is looking at you now, briefly. Not an accusation — a filing. Then his gaze moves back to Veth.\n\n\"There was someone here before,\" said Cassiel. He says it carefully, the way a man says something he has been holding a long time and does not want to drop. \"At the end of the warden tenure. A season before the post closed. She came up from the valley in the bad week — when the hollow was running hot — and she sat where I am sitting now and she said the accumulation was not the problem. She said the problem was that no one had told it what it was for.\"\n\nVeth has not moved.\n\n\"She told it,\" said Cassiel. \"Whatever she said, the hollow quieted. Not for long. But long enough that the last season's watch was bearable.\" He looks down at the dark earth between his boots. \"I was her second that year. I have been trying to decide, for eleven years, whether what she did was a completion or a beginning.\"\n\nHe looks up at Veth again.\n\n\"I came here because I thought you might know which one it was,\" said Cassiel."
       }
     ],
     "lastTurn": {
-      "narration": "You step back beside Pell without a word. She reads the gesture and shifts her weight, Memory settling easy against her shoulder — neither of you speaks.\n\nVeth walks down the hollow's near slope the way someone enters a room they once lived in. Her feet find the grade without looking. She stops three paces from Cassiel and stands.\n\n\"Stillwater,\" said Cassiel. His voice is dry, unhurried, the voice of a man who has been practicing what to say and decided none of it was right. \"I felt the binding go in before dawn. I thought it might be you.\"\n\n\"It was,\" said Veth. She does not move closer. \"How long have you been here?\"\n\n\"Since yesterday evening,\" said Cassiel. \"I came to see if it was still rising. It was.\" He pauses. \"I did not want it to rise alone.\"\n\nHuginn shifts one foot on the limestone spur above him. The small sound of talon on stone carries in the cold air. Cassiel glances up at the bird — not startled, just noting it — and then his eyes come back to Veth.\n\n\"There is something I came to say,\" said Cassiel. He does not look at you or Pell. \"I think you already know what it is. But I came to say it here, where it happened, because I thought it deserved that.\"\n\nVeth's hands are still at her sides. She watches him. She is giving him the room to say it in his own time.",
-      "sceneSummary": "Veth descends to Cassiel at the hollow's rim — a quiet exchange begins; he came to say something, and she is giving him the space to say it.",
+      "narration": "Cassiel's voice pauses. Not startled — he registers your movement the way a man registers a cloud crossing the sun. His eyes stay on Veth.\n\nYou step down the hollow's near slope and come to stand at Veth's left shoulder. Not close enough to crowd the exchange. Close enough that Cassiel can see you are with her, and that she is not alone in this.\n\nPell holds the rim. Huginn is still on the limestone spur, one foot shifted, watching.\n\n\"The one who bound it,\" said Cassiel. He is looking at you now, briefly. Not an accusation — a filing. Then his gaze moves back to Veth.\n\n\"There was someone here before,\" said Cassiel. He says it carefully, the way a man says something he has been holding a long time and does not want to drop. \"At the end of the warden tenure. A season before the post closed. She came up from the valley in the bad week — when the hollow was running hot — and she sat where I am sitting now and she said the accumulation was not the problem. She said the problem was that no one had told it what it was for.\"\n\nVeth has not moved.\n\n\"She told it,\" said Cassiel. \"Whatever she said, the hollow quieted. Not for long. But long enough that the last season's watch was bearable.\" He looks down at the dark earth between his boots. \"I was her second that year. I have been trying to decide, for eleven years, whether what she did was a completion or a beginning.\"\n\nHe looks up at Veth again.\n\n\"I came here because I thought you might know which one it was,\" said Cassiel.",
+      "sceneSummary": "Cassiel names the thing he came to say: eleven years ago a woman sat in the hollow and told it what it was for — completion or beginning, he still does not know which, and he came to Veth to find out.",
       "choices": [
         {
-          "label": "Stay back — let Cassiel speak and listen to whatever it is he came here to say",
+          "label": "Listen — let Veth answer him first; she was the warden and this is still her ground",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "careful"
+            "careful",
+            "guard"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Use Order-Sense on the hollow — read the whole of what the accumulation was part of while Veth holds Cassiel's attention",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {
-            "chaos_order": 0.4
-          },
-          "difficulty": 15,
+          "label": "Ask Cassiel who she was — the woman who sat here and told the hollow what it was for",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "abilityId": "order_sense",
+          "trivial": true
+        },
+        {
+          "label": "Use the Attended End quietly — read the hollow itself, not Cassiel; understand whether what was done eleven years ago was a completion or a beginning",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "the-attended-end",
           "energyCost": 2,
           "trivial": false
         },
         {
-          "label": "Watch Cassiel's face while he speaks — read what he is not saying with plain Insight",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Step forward beside Veth — not to interrupt, but to be present as a witness when whatever this is lands",
+          "label": "Speak your own reading — tell him what Deathsense found: finished, not harmed; received, not consumed",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "help"
+            "help",
+            "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
-      "standingOps": [],
-      "stageOps": [],
       "scene": {
-        "setting": "Stillwater's Trouble hollow — shallow bowl, dark earth floor, limestone outcrop at the far rim, birch stopped at the bowl's edge. Overcast cold midday. Veth has descended the near slope and stands three paces from Cassiel; Silas and Pell hold the rim.",
+        "setting": "Stillwater's Trouble hollow — shallow bowl, dark earth floor, limestone outcrop at the far rim, birch stopped at the bowl's edge. Overcast cold midday. Silas has descended to stand at Veth's left shoulder; Pell holds the rim above.",
         "npcsPresent": [
           {
             "name": "Veth Ondra",
-            "state": "Standing three paces from Cassiel on the hollow's floor — still, hands at her sides, giving him room."
+            "state": "Standing three paces from Cassiel — still, has not moved, receiving what he came to say"
           },
           {
             "name": "Pell Marsh",
-            "state": "At the rim beside Silas, Memory easy at her shoulder — watching and waiting."
+            "state": "At the rim above, Memory easy at her shoulder — watching and waiting"
           },
           {
             "name": "Huginn",
-            "state": "On the limestone spur above Cassiel — shifted one foot; noted by Cassiel, returned to stillness."
+            "state": "On the limestone spur above Cassiel — one foot shifted, watching"
           },
           {
             "name": "Cassiel Ord",
-            "state": "Sitting at the hollow's near edge, pack open beside him — has just said he came to say something specific, looking at Veth."
+            "state": "Sitting at the hollow's near edge, looking up at Veth — the thing he came to say now said, waiting for her answer"
           }
         ],
         "objects": [
@@ -1227,9 +1213,9 @@
           "Cassiel Ord's open pack"
         ],
         "threads": [
-          "Cassiel came to say something specific to Veth here — it is not yet said",
-          "Huginn noted Cassiel and returned to stillness — it has not signaled an ending",
-          "The hollow received Cassiel, not harmed him — the nature of what he completed here is still unnamed"
+          "Cassiel has named the thing he came to say: completion or beginning — he needs Veth's answer",
+          "The woman who sat here before and told the hollow what it was for is unnamed",
+          "Huginn has not signaled; the hollow has not moved"
         ]
       },
       "npcUpdates": [
@@ -1237,62 +1223,58 @@
           "op": "update",
           "npcId": "cassiel-ord",
           "name": "Cassiel Ord",
-          "note": "Confirmed he arrived yesterday evening, before the binding. Felt it go in. Says he did not want the accumulation to rise alone. Has something specific to say to Veth — named it as such, named this place as the right one to say it.",
+          "note": "Named the thing he came to say: eleven years ago a woman sat in the hollow and told it what it was for; the hollow quieted; he was her second; he has been deciding ever since whether it was a completion or a beginning; he came to ask Veth",
           "learned": [
-            "Arrived the evening before the binding — was present at Stillwater's Trouble overnight",
-            "Did not want the accumulation to rise unwitnessed",
-            "Has a specific thing to say to Veth that he came here to say in this place"
+            "Was the second to an unnamed woman who sat in the hollow a season before the post closed and told the accumulation what it was for",
+            "The hollow quieted after she spoke — not permanently, but enough that the last season's watch was bearable",
+            "Has been holding the completion-or-beginning question for eleven years",
+            "Came specifically to ask Veth which one it was"
           ],
-          "statusNote": "Sitting at the hollow's near edge — has begun the exchange with Veth; the thing he came to say is not yet said.",
-          "status": "active"
-        },
-        {
-          "op": "update",
-          "npcId": "veth-ondra",
-          "name": "Veth Ondra",
-          "note": "Descended to Cassiel without hesitation — feet remembered the grade. Standing still three paces from him, giving him the room to speak.",
-          "statusNote": "In the hollow, facing Cassiel — waiting for him to say the thing he came here to say.",
-          "status": "active"
+          "statusNote": "Sitting in the hollow — the thing he came to say now said; waiting for Veth's answer",
+          "relationshipDelta": 0
         }
       ],
-      "factUpdates": [],
-      "placeUpdates": [],
       "codexUpdates": [
         {
           "topic": "cassiel-ord",
           "label": "Cassiel Ord",
           "kind": "person",
           "entityId": "cassiel-ord",
-          "fact": "Arrived at Stillwater's Trouble the evening before the binding — stayed overnight, did not want the accumulation to rise unwitnessed. Has a specific thing to say to Veth, and chose this place to say it.",
+          "fact": "Eleven years ago Cassiel was second to an unnamed woman who sat in the hollow and told the accumulation what it was for — the hollow quieted after she spoke. He has been deciding since whether it was a completion or a beginning. He came to ask Veth.",
           "links": [
             "the-door-that-closed-behind",
-            "veth-ondra"
+            "stillwaters-trouble"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a short exchange at the hollow's rim — minutes only"
+        "why": "a short exchange at the hollow's rim"
+      },
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "xp": 0
       }
     },
     "sceneState": {
-      "setting": "Stillwater's Trouble hollow — shallow bowl, dark earth floor, limestone outcrop at the far rim, birch stopped at the bowl's edge. Overcast cold midday. Veth has descended the near slope and stands three paces from Cassiel; Silas and Pell hold the rim.",
+      "setting": "Stillwater's Trouble hollow — shallow bowl, dark earth floor, limestone outcrop at the far rim, birch stopped at the bowl's edge. Overcast cold midday. Silas has descended to stand at Veth's left shoulder; Pell holds the rim above.",
       "npcsPresent": [
         {
           "name": "Veth Ondra",
-          "state": "Standing three paces from Cassiel on the hollow's floor — still, hands at her sides, giving him room."
+          "state": "Standing three paces from Cassiel — still, has not moved, receiving what he came to say"
         },
         {
           "name": "Pell Marsh",
-          "state": "At the rim beside Silas, Memory easy at her shoulder — watching and waiting."
+          "state": "At the rim above, Memory easy at her shoulder — watching and waiting"
         },
         {
           "name": "Huginn",
-          "state": "On the limestone spur above Cassiel — shifted one foot; noted by Cassiel, returned to stillness."
+          "state": "On the limestone spur above Cassiel — one foot shifted, watching"
         },
         {
           "name": "Cassiel Ord",
-          "state": "Sitting at the hollow's near edge, pack open beside him — has just said he came to say something specific, looking at Ve"
+          "state": "Sitting at the hollow's near edge, looking up at Veth — the thing he came to say now said, waiting for her answer"
         }
       ],
       "objects": [
@@ -1302,9 +1284,9 @@
         "Cassiel Ord's open pack"
       ],
       "threads": [
-        "Cassiel came to say something specific to Veth here — it is not yet said",
-        "Huginn noted Cassiel and returned to stillness — it has not signaled an ending",
-        "The hollow received Cassiel, not harmed him — the nature of what he completed here is still unnamed"
+        "Cassiel has named the thing he came to say: completion or beginning — he needs Veth's answer",
+        "The woman who sat here before and told the hollow what it was for is unnamed",
+        "Huginn has not signaled; the hollow has not moved"
       ]
     }
   },
@@ -2565,23 +2547,24 @@
       "history": [
         "[d6] Found sitting at the rim of the Stillwater's Trouble hollow — boot-tracks identified as his. Looked up at Veth without reaching for anything. Recognized her. Has not yet spoken.",
         "[d6] Spoke his first words to Veth — was not certain she would come; felt the binding go in before dawn; has been here since before dawn.",
-        "[d6] Confirmed he arrived yesterday evening, before the binding. Felt it go in. Says he did not want the accumulation to rise alone. Has something specific to say to Veth — named it as such, named this place as the right one to say it."
+        "[d6] Confirmed he arrived yesterday evening, before the binding. Felt it go in. Says he did not want the accumulation to rise alone. Has something specific to say to Veth — named it as such, named this place as the right one to say it.",
+        "[d6] Named the thing he came to say: eleven years ago a woman sat in the hollow and told it what it was for; the hollow quieted; he was her second; he has been deciding ever since whether it was a completion or a beginning; he came to ask Veth"
       ],
       "knownFacts": [
-        "He walked to Stillwater's Trouble and did not walk back — his tracks confirm it",
-        "He recognized Veth Ondra — the look of a man who was not certain he would see her again",
-        "Felt the binding go in — he was present and aware of the rune-work from within the hollow's radius",
         "Has been sitting at the hollow's rim since before dawn — a vigil, not an arrival",
         "Was not certain Veth would come — he knew enough to wait for her specifically",
         "Arrived the evening before the binding — was present at Stillwater's Trouble overnight",
         "Did not want the accumulation to rise unwitnessed",
-        "Has a specific thing to say to Veth that he came here to say in this place"
+        "Has a specific thing to say to Veth that he came here to say in this place",
+        "Was the second to an unnamed woman who sat in the hollow a season before the post closed and told the accumulation what it was for",
+        "The hollow quieted after she spoke — not permanently, but enough that the last season's watch was bearable",
+        "Has been holding the completion-or-beginning question for eleven years"
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "Sitting at the hollow's near edge — has begun the exchange with Veth; the thing he came to say is not yet said.",
+      "statusNote": "Sitting in the hollow — the thing he came to say now said; waiting for Veth's answer",
       "lastSeen": {
         "locationId": "gen-stillwater-s-trouble",
         "day": 6
@@ -4566,21 +4549,21 @@
     }
   },
   "tendencies": {
-    "strategic": 17.649659544236155,
-    "cerebral": 21.694805223168135,
-    "social": 11.126240661766776,
-    "generous": 2.5212857218418825,
-    "cautious": 6.171514428869124,
-    "physical": 0.5177349326083066,
-    "risky": 0.5429476437899795,
-    "ruthless": 0.17311292272419596,
-    "carousing": 0.0026523088672128067,
-    "amorous": 2.070736924125735,
-    "patient": 1.0789925785225862,
-    "stealth": 0.06709901111709302,
-    "devotion": 1.3707713989180075,
-    "craft": 0.5300361517959814,
-    "leadership": 0.34154141330854726
+    "strategic": 17.20841805563025,
+    "cerebral": 21.15243509258893,
+    "social": 10.848084645222606,
+    "generous": 3.4582535787958353,
+    "cautious": 6.017226568147396,
+    "physical": 0.5047915592930989,
+    "risky": 0.52937395269523,
+    "ruthless": 0.16878509965609106,
+    "carousing": 0.0025860011455324863,
+    "amorous": 2.018968501022592,
+    "patient": 1.0520177640595216,
+    "stealth": 0.06542153583916568,
+    "devotion": 1.3365021139450572,
+    "craft": 0.5167852480010818,
+    "leadership": 0.33300287797583356
   },
   "aptitudes": [
     "strategist",
@@ -4588,7 +4571,7 @@
     "scholar",
     "sage"
   ],
-  "actionCount": 594,
+  "actionCount": 595,
   "grantsVersion": 1,
   "reconcileVersion": 10,
   "gallery": [
@@ -4890,8 +4873,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784481593496,
-  "rev": 892,
+  "updatedAt": 1784484577357,
+  "rev": 893,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5826,7 +5809,7 @@
           "entityId": "cassiel-ord",
           "type": "npc",
           "birthWeight": 24,
-          "engagementScore": 9,
+          "engagementScore": 12,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -5839,6 +5822,14 @@
             "why": "The boot-tracks that ended at the Raven's Home threshold belong to someone, and that someone is sitting in the bowl righ"
           },
           "attentionHistory": [
+            {
+              "kind": "interact",
+              "day": 6
+            },
+            {
+              "kind": "fact",
+              "day": 6
+            },
             {
               "kind": "interact",
               "day": 6
@@ -6520,7 +6511,7 @@
   "syncedAt": 1784477453768,
   "teachers": {},
   "regionsKnown": {
-    "valley": 419
+    "valley": 420
   },
   "foreclosed": [
     "rootkin",
@@ -6590,10 +6581,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-07-19T11:58:49.560Z",
-      "lastAt": "2026-07-19T17:19:53.494Z",
+      "lastAt": "2026-07-19T18:09:37.355Z",
       "startDay": 19,
       "endDay": 19,
-      "beats": 12
+      "beats": 13
     }
   ],
   "company": [

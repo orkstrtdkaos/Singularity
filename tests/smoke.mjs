@@ -5560,6 +5560,42 @@ await (async () => {
     !/context\.regionId \|\| "valley"/.test(genSrc));
 }
 
+// --- SNG-166 §3: he keeps meeting Mara — and only a CROSS-DEVICE check can see it ---
+{
+  const nm2 = await import("../engine/namematch.js");
+
+  check("166c: a given name is the first token, normalised", nm2.givenName("Mara Wells, the Water Keeper") === "mara");
+  check("166c: and a bare name works too", nm2.givenName("Calvar") === "calvar");
+
+  // THE CORRECTION THAT MATTERS. Within one save there is exactly one Mara, so a per-character
+  // ratchet reads GREEN forever. Three saves, one Mara each — the repetition is only visible across them.
+  const saves = [
+    { name: "Silas", npcRegistry: { a: { name: "Mara Wells" }, b: { name: "Fendt" } } },
+    { name: "Brayden", npcRegistry: { a: { name: "Mara Stone" }, b: { name: "Teva" } } },
+    { name: "Third", npcRegistry: { a: { name: "Mara" } } }
+  ];
+  check("166c: within ONE save nothing repeats — which is why the old framing read green",
+    nm2.nameRepetitionCount([saves[0]]) === 0);
+  check("166c: across the DEVICE the repetition is visible", nm2.nameRepetitionCount(saves) === 1);
+
+  const used = nm2.usedGivenNames(saves);
+  check("166c: and it knows HOW MANY characters met her", used.get("mara").size === 3);
+
+  // The avoid-list is what actually reaches the generator, worst offender first.
+  const avoid = nm2.namesToAvoid(saves, 5);
+  check("166c: the most-reused name sorts first, so truncation keeps the worst offenders", avoid[0] === "mara");
+  check("166c: names met only once are not forbidden — the world may have one Fendt", !avoid.includes("fendt") || avoid.indexOf("fendt") > 0);
+  check("166c: placeholder names are never treated as real people", !nm2.namesToAvoid([{ name: "X", npcRegistry: { a: { name: "Unknown" } } }]).includes("unknown"));
+  check("166c: no saves, no avoid-list, no crash", nm2.namesToAvoid([]).length === 0);
+
+  // And the guidance has to actually reach the prompt, or none of it matters.
+  const genSrc2 = readFileSync(new URL('../engine/generate.js', import.meta.url), 'utf8');
+  check("166c: the generator is TOLD which names are already in play",
+    /ALREADY IN PLAY on this device and must NOT be reused/.test(genSrc2));
+  check("166c: and is given the people's own grain to name from",
+    /This people's grain/.test(genSrc2));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

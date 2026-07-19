@@ -10,6 +10,7 @@ import { seedStandingAtCreation, accrueStandingForDays, applyStandingOps, standi
 import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, touchSession, endSession, sessionLog, buildSessionPrompt, authorshipStats, crossCharacterAuthorship } from "./engine/chronicle.js";
 import { newProfile, updateProfile, aptitudeMods, profileInsight, grantAptitudes, fadingAptitudes, ensureCharacterStyle, ensureRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, revokeAdultGate, RATING_ORDER, RATING_LEVEL } from "./engine/playerprofile.js";
 import { gmTurn, parseIntent, gmAsk, generateBio, suggestBuild, extractGambit, sanitizeScene, narrativeRegister, ratingRegister, bluntnessDirective } from "./engine/gm.js";
+import { namesToAvoid } from "./engine/namematch.js";
 import { applyQuestUpdates, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, slugify, advanceStructuredQuest } from "./engine/quests.js";
 import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM } from "./engine/corrections.js";
 import { getApiKey, setApiKey, callClaude, callClaudeJSON, parseLooseJSON } from "./engine/claude.js";
@@ -57,7 +58,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.148";
+const APP_VERSION = "1.8.149";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1536,6 +1537,26 @@ function logOpOutcome(op, outcome) {
   else { row.rejected++; row.lastWhy = outcome; }
 }
 
+/** SNG-166 §3: every save on this device, for the cross-character name guard. A per-character check
+ *  reads GREEN forever — within any one save there is exactly one Mara; she is in FOUR of them. */
+function allCharactersOnDevice() {
+  const out = [];
+  for (const entry of listCharacters()) {
+    try { const c = loadCharacter(entry.id); if (c) out.push(c); } catch { /* a broken save never blocks a mint */ }
+  }
+  return out;
+}
+
+/** The naming grain of the people whose country this is — traditions.json already carries an
+ *  `aesthetic` line for all 24, so a people's names can sound like the country that made them
+ *  without anyone authoring a phoneme table. */
+function namingAestheticHere() {
+  const region = hereNow()?.regionId;
+  if (!region) return null;
+  const t = Object.values(CONTENT.traditionIndex?.byId || {}).find(x => x?.region === region);
+  return t?.aesthetic || null;
+}
+
 function noteGeneratedAttention(id, kind, day) {
   if (!id || !character.generated) return;
   const slug = String(id);
@@ -1635,6 +1656,10 @@ async function handleGenerateRequests(turn) {
       known: { authored, generated: character.generated?.[type] || {} },
       examples: pickExamples(type, location), substrate: CONTENT.substrate, genBudget: budget,
       traditionIndex: CONTENT.traditionIndex,  // SNG-177: a generated NPC arrives with a people + domains
+      // SNG-166 §3: he keeps meeting Mara. Across 10 characters on this device, 5 given names
+      // recur and Mara appears in FOUR saves — invisible to any per-character check.
+      avoidNames: namesToAvoid(allCharactersOnDevice(), 24),
+      namingAesthetic: namingAestheticHere(),
       validRegions: new Set(Object.keys(CONTENT.substrateModel?.substrateDensity || {}).concat((CONTENT.regions || []).map(r => r.regionId || r.id).filter(Boolean)))   // SNG-166 §1
     };
     // SNG-035/046-L3: born-WITH-image is now IN the generate path (deps.imageFor) so the record

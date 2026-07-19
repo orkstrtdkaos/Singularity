@@ -616,6 +616,9 @@ export function buildGeneratePrompt(type, context = {}, { schema = {}, examples 
     context.hint ? `WHAT'S NEEDED: ${context.hint}` : `A new ${type} for this place.`,
     context.why ? `WHY: ${context.why}` : "",
     `WHERE: ${loc.name || "the valley"}${loc.regionId ? ` (${loc.regionId})` : ""}`,
+    type === "npc" && (context.avoidNames?.length || context.namingAesthetic)
+      ? `NAMING — ${context.avoidNames?.length ? `these given names are ALREADY IN PLAY on this device and must NOT be reused: ${context.avoidNames.join(", ")}. ` : ""}${context.namingAesthetic ? `This people's grain: ${context.namingAesthetic}. Let the NAME carry that grain — a people's names should sound like the country that made them, not like a fantasy default.` : ""}`
+      : "",
     type === "location" && context.validRegions?.size
       ? `VALID regionId VALUES — pick the one this place actually belongs to, which is NOT necessarily the one above: ${[...context.validRegions].join(", ")}. Anything else is discarded and the place is left unaddressed.`
       : "",

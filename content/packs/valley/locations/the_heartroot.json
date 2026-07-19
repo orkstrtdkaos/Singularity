@@ -62,7 +62,9 @@
     "kind": "sink",
     "delta": -0.1,
     "radius": 175,
-    "reason": "The Rootkin finished what everyone else abandoned. The Heartroot is not empty by accident — the lattice was released here, deliberately, and the green current took its place."
+    "reason": "The Rootkin finished what everyone else abandoned. The Heartroot is not empty by accident — the lattice was released here, deliberately, and the green current took its place.",
+    "radiusWorld": 0.105,
+    "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
   },
   "worldPos": {
     "colatitude": 90.0,

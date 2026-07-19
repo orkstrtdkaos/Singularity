@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "id": "the_old_warden_post",
+  "name": "The Old Warden Post",
+  "regionId": "valley",
+  "dangerLevel": 2,
+  "tags": [
+    "ruin",
+    "fortification",
+    "shoulder-ground",
+    "claimable",
+    "unreached"
+  ],
+  "descriptionSeed": "A shoulder of ground that has been holding weather off the valley below for longer than anyone has kept records for. Three rooms and a stair, a corner tower open on one side, a bare south terrace where the wall gives out and the hill takes over, and behind it all a fold in the ground where the hill turns in on itself. Built to withstand. Mostly still standing.",
+  "substrateDensity": 0.22,
+  "substrateNote": "UNREACHED ground, not released — the third case in threeGrounds. The lattice here is thin because the old works never came this far out, not because anything was given up. Nothing was lost here; nothing arrived. Wards and craft laid in the hollow meet no competition and hold longer than they should.",
+  "poleIntensity": {
+    "peace": 0.3,
+    "concrete": 0.4,
+    "time": 0.3
+  },
+  "axisVector": [
+    0,
+    0,
+    0,
+    0.3,
+    -0.4,
+    0,
+    0,
+    0,
+    0,
+    0.3,
+    0,
+    0
+  ],
+  "worldPos": {
+    "colatitude": 24.0,
+    "longitude": 252.0,
+    "depth": 0
+  },
+  "worldPosNote": "Valley shoulder-ground above the river settlements, a little out from Millbrook. Near-centre folk country. (SNG-180: authored position — WHERE it sits, independent of axisVector.)",
+  "connections": [
+    "millbrook",
+    "echo_river_crossing",
+    "old_switchback"
+  ],
+  "subPlaces": {
+    "the_long_room": {
+      "name": "The Long Room",
+      "note": "East-facing, arrow-slits that were never meant to let anything in. The hearth-wall is thick enough to hold heat for a day, and the chimney has drawn for two hundred years."
+    },
+    "the_upper_room": {
+      "name": "The Upper Room",
+      "note": "Off the stair. A shuttered window and a floor that slopes very slightly toward the outer wall — a fault in a barracks, a virtue anywhere something might spill. Cold in the mornings."
+    },
+    "the_south_terrace": {
+      "name": "The South Terrace",
+      "note": "Where the wall gives out and the hill takes over. The light stays longest here. Nothing is buried in it."
+    },
+    "the_corner_tower": {
+      "name": "The Corner Tower",
+      "note": "Three walls, a floor, and open sky on the fourth side. Sightlines from the road to the treeline. The only part of the Post built to WATCH rather than to withstand."
+    },
+    "the_hollow": {
+      "name": "The Hollow",
+      "note": "Down the back slope, where the hill folds in on itself. Thin ground of the unreached kind. Good for work that does not want the lattice arguing with it."
+    }
+  },
+  "claimableNote": "The five spaces above are ARCHITECTURE — true for anyone who comes here. What a company makes of them is that company's own: a forge in the long room because the flue already draws, a laboratory upstairs because the floor already slopes, a keeper's ground on the terrace chosen before it is needed rather than after. Those assignments belong in a character's place-memory (placeUpdates.subPlace), never in this file. The Post is a place; what it becomes is a save.",
+  "communityId": "valley.the_old_warden_post",
+  "spectrum": {
+    "violence_peace": 0.3,
+    "concrete_abstract": -0.4,
+    "space_time": 0.3,
+    "chaos_order": 0.2
+  },
+  "loreRefs": [
+    "valley_primer"
+  ],
+  "encounterFlavor": "Weather, and the sounds a building makes when it is deciding whether to keep standing. Scavengers who assumed it was empty. Someone from the settlements below come up to see who has moved in and why. Old warden fittings worth more as iron than as history. Nothing here hunts you — but nothing here is watching the road for you either, until someone starts.",
+  "questSeeds": [
+    "The Post has no owner anyone can name, which is either an opportunity or a question somebody below has already asked",
+    "The corner tower's sightlines cover the road to the treeline — whoever holds it sees who comes to Stillwater first",
+    "The hollow behind the Post is thin ground of the unreached kind, and thin ground is worth something to the wrong people too"
+  ],
+  "map": {
+    "x": 437,
+    "y": 296
+  }
+}

@@ -90,7 +90,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.3321821926969479,
+    "spectrumId": -0.36557308306210046,
     "violence_peace": 0.1030845625,
     "chaos_order": 0.24948390727937025,
     "mechanical_spiritual": 0.2580372847905887,
@@ -106,7 +106,7 @@
   "maxHealth": 105,
   "health": 105,
   "maxEnergy": 175,
-  "energy": 142,
+  "energy": 140,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1072,9 +1072,9 @@
     "The party followed Siol north through the Hub's quieter lanes and arrived at the edge of the Ent grove circle at midday — the path giving way to older ground, the circle of trees ahead, Siol stopping at its edge.",
     "The party stepped through the sixth waygate at the Hub — Siol at the arch's edge, the gate-keeper's instruction plain, the March setting confirmed north-by-northwest. The road to Raven's Home has begun."
   ],
-  "currentLocationId": "gen-ashwarden-march-road",
+  "currentLocationId": "gen-stillwater-s-trouble",
   "activeScene": {
-    "locationId": "gen-ashwarden-march-road",
+    "locationId": "gen-stillwater-s-trouble",
     "turns": [
       {
         "player": null,
@@ -1110,98 +1110,74 @@
         "player": "As She answers. Perform a boundary stone on the waypost to make the surrounding area a protected place in case of need.",
         "summary": "Silas seats a Boundary-Stone at the post's crown — the warden station is now a protected refuge, its ward pressing into the post's held intention.",
         "narration": "Veth says 'Well?' the moment you straighten from the post. You hold up one hand — a small gesture, nothing urgent — and crouch again.\n\nYou pull a chalk blank from your kit and draw the Boundary-Stone mark at the post's crown, just above the binding runes. Two lines and a closed circle. Clean work, unhurried. The binding is already seated in the wood's grain, and the post knows what it is now — a warden station, a held place, a threshold with intention. The Boundary-Stone finds that intention and presses into it the way a hand finds a familiar grip. You spend two fingers of energy, no more. The craft does not resist.\n\nThe change is not visible. It does not need to be. What settles around the post and the small clearing of heather and grey birch is a quality of attention — the way a well-kept room differs from an abandoned one, even in the dark. Animals will find somewhere else to shelter tonight. Rain that drives in hard from the northwest will angle off this ground a little more than it should. A person stumbling through in the cold will feel, faintly, that this particular rise of ground is already spoken for. The post stands the way a post with a warden at it stands, even though the warden post has had no warden for eleven years.\n\nYou stand and brush chalk dust from your knee. Huginn has not moved from the roof-ridge. Pell is still watching the tree line. Veth is watching you, jaw set, one question still waiting in her face — the door behind you is closed, the boot-tracks end at its threshold, and you have not told her yet what Deathsense found inside."
+      },
+      {
+        "player": null,
+        "summary": "Silas briefs the group: the binding holds Stillwater's Trouble but does not end it — the post is a caught stone, not a stopped one. Huginn's eye is on the closed door.",
+        "narration": "You straighten from the post and look at Veth. She has held her question the whole time you worked, jaw set, eyes on your face.\n\n\"The binding holds,\" you tell her. \"All of it. But it is not ended — it is caught. Think of a stone mid-roll, not a stone that stopped on its own. What was rising here had eleven years of pressure behind it. The runes buy time.\"\n\nVeth's gaze moves to the post for a moment, then back to you. \"The accumulation,\" she says, quietly. \"I thought it might be that. The post was a seal as much as a station — the warden was managing something, not just watching.\"\n\nPell has not moved from the tree line. Memory is loose at her side. She does not need the briefing repeated; she heard every word, and the set of her shoulders says she filed it.\n\nHuginn has not moved from the roof-ridge either. It shifts its weight once, a small adjustment, and fixes its eye on the closed door. That is not a comment on the binding. That is a comment on the door."
       }
     ],
     "lastTurn": {
-      "narration": "Veth says 'Well?' the moment you straighten from the post. You hold up one hand — a small gesture, nothing urgent — and crouch again.\n\nYou pull a chalk blank from your kit and draw the Boundary-Stone mark at the post's crown, just above the binding runes. Two lines and a closed circle. Clean work, unhurried. The binding is already seated in the wood's grain, and the post knows what it is now — a warden station, a held place, a threshold with intention. The Boundary-Stone finds that intention and presses into it the way a hand finds a familiar grip. You spend two fingers of energy, no more. The craft does not resist.\n\nThe change is not visible. It does not need to be. What settles around the post and the small clearing of heather and grey birch is a quality of attention — the way a well-kept room differs from an abandoned one, even in the dark. Animals will find somewhere else to shelter tonight. Rain that drives in hard from the northwest will angle off this ground a little more than it should. A person stumbling through in the cold will feel, faintly, that this particular rise of ground is already spoken for. The post stands the way a post with a warden at it stands, even though the warden post has had no warden for eleven years.\n\nYou stand and brush chalk dust from your knee. Huginn has not moved from the roof-ridge. Pell is still watching the tree line. Veth is watching you, jaw set, one question still waiting in her face — the door behind you is closed, the boot-tracks end at its threshold, and you have not told her yet what Deathsense found inside.",
-      "sceneSummary": "Silas seats a Boundary-Stone at the post's crown — the warden station is now a protected refuge, its ward pressing into the post's held intention.",
+      "narration": "You straighten from the post and look at Veth. She has held her question the whole time you worked, jaw set, eyes on your face.\n\n\"The binding holds,\" you tell her. \"All of it. But it is not ended — it is caught. Think of a stone mid-roll, not a stone that stopped on its own. What was rising here had eleven years of pressure behind it. The runes buy time.\"\n\nVeth's gaze moves to the post for a moment, then back to you. \"The accumulation,\" she says, quietly. \"I thought it might be that. The post was a seal as much as a station — the warden was managing something, not just watching.\"\n\nPell has not moved from the tree line. Memory is loose at her side. She does not need the briefing repeated; she heard every word, and the set of her shoulders says she filed it.\n\nHuginn has not moved from the roof-ridge either. It shifts its weight once, a small adjustment, and fixes its eye on the closed door. That is not a comment on the binding. That is a comment on the door.",
+      "sceneSummary": "Silas briefs the group: the binding holds Stillwater's Trouble but does not end it — the post is a caught stone, not a stopped one. Huginn's eye is on the closed door.",
       "choices": [
         {
-          "label": "Open the door and read what's inside with Order-Sense before touching anything.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "chaos_order": 0.6
-          },
+          "label": "Open the door — whoever walked in did not walk out, and the binding is as good as it gets right now.",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "difficulty": 0,
           "intentTags": [
-            "study",
             "careful"
           ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Tell Veth and Pell what Deathsense found — Stillwater's Trouble is a process, not a person — then open the door together.",
+          "label": "Use The Attended End on the door itself before opening it — know what is ending on the other side before you cross the threshold.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "the-attended-end",
+          "energyCost": 2,
+          "trivial": false
+        },
+        {
+          "label": "Ask Veth what she knows about the warden who held this post — what they were managing, and how it was supposed to end.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "plan",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Huginn — who has not moved since before the binding — what it sees from the roof-ridge.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Use The Attended End on the door itself — read what is ending at this threshold before the door opens.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.4
-          },
+          "label": "Ask Huginn directly what it sees at the door — it has been still on that ridge-line since before the binding work, and its timing is always a comment.",
+          "attribute": "social",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "careful"
+            "study"
           ],
-          "abilityId": "the-attended-end",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "energy": -2
-      },
       "scene": {
         "setting": "Raven's Home — the old Ashwarden warden post on rising ground, grey birch and heather around it, overcast cold midday. Binding runes and a fresh Boundary-Stone mark are now on the post's face. The single set of heel-heavy boot-tracks ends at the closed door.",
         "npcsPresent": [
           {
             "name": "Pell Marsh",
-            "state": "Still watching the tree line, Memory loose at her side."
+            "state": "Still at the tree line, Memory loose at her side — the briefing filed, watching the door."
           },
           {
             "name": "Veth Ondra",
-            "state": "Eyes on Silas's face — jaw set, the unasked question held."
+            "state": "Facing Silas, the unasked follow-up question now settling into a different shape — she named 'the accumulation' and is waiting to see if he confirms it."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the roof-ridge — has not moved since before the binding."
+            "state": "On the roof-ridge, weight shifted once, eye fixed on the closed door."
           }
         ],
         "objects": [
@@ -1214,8 +1190,8 @@
         ],
         "threads": [
           "The boot-tracks end at the threshold with no return",
-          "Veth is waiting for Silas's briefing on what Deathsense found",
-          "Huginn has not moved from the roof-ridge",
+          "Huginn's eye is fixed on the closed door — its stillness is timed, and the timing is a comment",
+          "Veth named 'the accumulation' — she has prior knowledge of what was rising here",
           "The door is still closed"
         ]
       },
@@ -1224,52 +1200,77 @@
           "op": "update",
           "npcId": "veth-ondra",
           "name": "Veth Ondra",
-          "role": "Former Ashwarden warden, traveling companion",
           "gender": "woman",
           "pronouns": "she/her",
-          "note": "Held her question through the Boundary-Stone work — waiting for Silas to brief the group on what Deathsense found.",
-          "statusNote": "At the warden post, waiting on Silas's full briefing about the boot-tracks and what Deathsense found."
+          "role": "Former Ashwarden warden, traveling companion",
+          "note": "Received Silas's deathsense briefing on the post. Named 'the accumulation' without prompting — she has prior knowledge of what was rising here and is confirming rather than learning.",
+          "learned": [
+            "The post was a seal as much as a station — the warden was managing something, not just watching",
+            "The binding holds Stillwater's Trouble but does not end it — it is a caught stone, not a stopped one"
+          ],
+          "statusNote": "At Raven's Home, receiving the deathsense briefing — her own knowledge of this place now surfacing."
         },
         {
           "op": "update",
           "npcId": "pell-ran-marsh",
           "name": "Pell Ran Marsh",
-          "role": "Village blacksmith, traveling companion",
           "gender": "woman",
           "pronouns": "she/her",
-          "note": "Still holding the tree line — giving Silas the space to complete the ward work.",
-          "statusNote": "At the warden post, watching the tree line with Memory loose at her side."
+          "role": "Village blacksmith, traveling companion",
+          "note": "Heard the full briefing from the tree line. Filed it without comment. Watching the door.",
+          "statusNote": "At Raven's Home tree line, Memory loose at her side — briefing received, attention on the closed door."
         }
       ],
       "placeUpdates": [
         {
-          "note": "Boundary-Stone seated at the post's crown on World-day 19 midday — the warden station now functions as a protected refuge. Animals, weather, and casual intrusion turned aside. The post reads as occupied.",
+          "note": "Binding runes (Wither and The Raised Thing) seated in the post's lower face, plus a Boundary-Stone chalk mark at the crown. The post now holds Stillwater's Trouble in check — caught but not ended. The surrounding area is a protected refuge by Boundary-Stone ward.",
           "flag": {
-            "boundary_stone_active": true
+            "binding_seated": "true",
+            "stillwaters_trouble_state": "caught_not_ended",
+            "boundary_stone_active": "true"
           },
           "subPlace": {
-            "name": "Raven's Home Warden Post",
-            "parent": "Ashwarden March Road",
-            "note": "Warden post now warded with binding runes (Wither + Raised Thing) at the lower face and Boundary-Stone at the crown — a protected refuge, door still closed, boot-tracks ending at the threshold.",
+            "name": "Raven's Home warden post",
+            "parent": "Stillwater's Trouble",
+            "note": "Old Ashwarden timber post on rising ground — binding runes and Boundary-Stone now seated. The door is closed. One set of heel-heavy tracks ends at the threshold with no return.",
             "visited": true
           }
         }
       ],
       "codexUpdates": [
         {
-          "topic": "ravens-home-warden-post",
-          "label": "Raven's Home Warden Post",
-          "kind": "place",
-          "fact": "A Boundary-Stone ward is now seated at the post's crown alongside the binding runes — the station functions as a protected refuge. A determined person can still enter, but the place turns aside animals, weather, and casual intrusion. The door remains closed; the boot-tracks end at its threshold.",
+          "topic": "stillwaters-trouble",
+          "label": "Stillwater's Trouble",
+          "kind": "mystery",
+          "fact": "Deathsense confirms: the post was a seal as much as a station. The warden was managing an eleven-year accumulation — a watershed process building behind a silted dam, not a creature or person. The binding runes caught it but did not end it. A caught stone, not a stopped one. The pressure behind it is real and still present.",
           "links": [
             "the-door-that-closed-behind",
-            "the-attended-end"
+            "veth-ondra",
+            "the-water-crisis"
           ]
+        },
+        {
+          "topic": "the-door-that-closed-behind",
+          "label": "The Door That Closed Behind",
+          "kind": "mystery",
+          "fact": "Raven's Home post: binding seated, Boundary-Stone ward active. One set of heel-heavy tracks ends at the closed door with no return. Huginn's eye is fixed on the door — its stillness is a comment. Veth named 'the accumulation' without prompting, suggesting prior knowledge of what was rising here.",
+          "links": [
+            "stillwaters-trouble",
+            "veth-ondra",
+            "the-water-crisis"
+          ]
+        }
+      ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-door-that-closed-behind",
+          "note": "Deathsense briefed to the group: the binding holds, the accumulation is caught not ended, the post was a seal as much as a station. Huginn's eye is on the closed door. The tracks still end at the threshold."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "brief warding work at the post — chalk, wire, one small mark"
+        "why": "Brief briefing exchange between Silas and the group at the post."
       }
     },
     "sceneState": {
@@ -1277,15 +1278,15 @@
       "npcsPresent": [
         {
           "name": "Pell Marsh",
-          "state": "Still watching the tree line, Memory loose at her side."
+          "state": "Still at the tree line, Memory loose at her side — the briefing filed, watching the door."
         },
         {
           "name": "Veth Ondra",
-          "state": "Eyes on Silas's face — jaw set, the unasked question held."
+          "state": "Facing Silas, the unasked follow-up question now settling into a different shape — she named 'the accumulation' and is w"
         },
         {
           "name": "Huginn",
-          "state": "Perched on the roof-ridge — has not moved since before the binding."
+          "state": "On the roof-ridge, weight shifted once, eye fixed on the closed door."
         }
       ],
       "objects": [
@@ -1298,8 +1299,8 @@
       ],
       "threads": [
         "The boot-tracks end at the threshold with no return",
-        "Veth is waiting for Silas's briefing on what Deathsense found",
-        "Huginn has not moved from the roof-ridge",
+        "Huginn's eye is fixed on the closed door — its stillness is timed, and the timing is a comment",
+        "Veth named 'the accumulation' — she has prior knowledge of what was rising here",
         "The door is still closed"
       ]
     }
@@ -1682,7 +1683,9 @@
       "progress": [
         "Compound rune-work bound Stillwater's Trouble at the post — Wither into the timber's eleven-year history, The Raised Thing over it as a holding thread. The thing inside the post is held. What it is remains unread.",
         "↳ Silas bound Stillwater's Trouble at the post with compound rune-work — Wither and The Raised Thing braided into the old Ashwarden timber, the eleven-year rising held in the moment before it completed.",
-        "↳ Deathsense read the post fully — Stillwater's Trouble is a process not a person, the binding holds all of it, and the trajectory confirmed it was arriving rather than ending; the question of what…"
+        "↳ Deathsense read the post fully — Stillwater's Trouble is a process not a person, the binding holds all of it, and the trajectory confirmed it was arriving rather than ending; the question of what…",
+        "The party arrived at Stillwater's Trouble — a figure sits at the far limestone, the heel-heavy tracks accounted for. The question of what closed here and what opened is now on the ground.",
+        "Deathsense briefed to the group: the binding holds, the accumulation is caught not ended, the post was a seal as much as a station. Huginn's eye is on the closed door. The tracks still end at the threshold."
       ],
       "aliases": [],
       "startedAt": "2026-07-19T14:27:08.855Z",
@@ -1803,8 +1806,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d6] Entered the Ent circle at Silas's open-hand invitation — ironsense open, hand at his wrist, the grove took note of her. The join found its seat in part through her.",
-        "[d6] Named the implication of Siol's answer in one line: the grove took the thought, not the craft. Filed it as a thing worth knowing.",
         "[d6] Fell into road-pace without ceremony at the waygate threshold — the silence of someone who has done this before.",
         "[d6] Stepped through the waygate without ceremony — at Silas's left, road-ready.",
         "[d6] Fell into road-pace at Silas's left without a word — pack settled, hand loose, road-ready",
@@ -1812,7 +1813,9 @@
         "[d6] Read the ground while Silas reported; straightened and asked plainly about the distance to his mother's house — shaping the choice, not steering it.",
         "[d6] Turned northwest without ceremony at Silas's decision — walking ahead, reading the ground.",
         "[d6] Watching the tree line with Memory loose at her side while Silas works the runes — alert, giving him the space to work.",
-        "[d6] Still holding the tree line — giving Silas the space to complete the ward work."
+        "[d6] Still holding the tree line — giving Silas the space to complete the ward work.",
+        "[d6] Called Memory back to hand and fell in on Silas's left without being asked — road discipline, no ceremony.",
+        "[d6] Heard the full briefing from the tree line. Filed it without comment. Watching the door."
       ],
       "knownFacts": [
         "Silas wants something private for the evenings — she is thinking about what that means",
@@ -1833,9 +1836,9 @@
         "feeding ironsense through physical contact to anchor a rune-"
       ],
       "status": "active",
-      "statusNote": "At the warden post, watching the tree line with Memory loose at her side.",
+      "statusNote": "At Raven's Home tree line, Memory loose at her side — briefing received, attention on the closed door.",
       "lastSeen": {
-        "locationId": "gen-ashwarden-march-road",
+        "locationId": "gen-stillwater-s-trouble",
         "day": 6
       },
       "bondType": "romantic",
@@ -2500,8 +2503,6 @@
       },
       "relationship": 9,
       "history": [
-        "[d6] Her face holds something quieter than usual — a prior understanding revised by what she just witnessed and what Siol named. She has not yet said it aloud.",
-        "[d6] Settled into road-pace at Silas's right — departure is familiar ground for a former warden. The unsaid revision about the Ent is filed; she is ready for the road.",
         "[d6] Stepped through the waygate with the party — road-ready, warden's bearing easy, eyes already on the March ahead.",
         "[d6] Oriented the group from field memory on the first stretch of road — named the marker stone, the left branch, and the gone survey post without being asked",
         "[d6] Named the left branch and the marker stone from warden memory on first sight of the road — something she has been holding a long time, released quietly.",
@@ -2509,17 +2510,19 @@
         "[d6] Read the tracks aloud as the party walked — not running, not lost, they knew this road. Added quietly that she knew this road once.",
         "[d6] Watched Silas bind the post with compound rune-work — named the thing by its name, Stillwater's Trouble, without being told. Asked plainly if the binding holds.",
         "[d6] Asked 'Well?' the moment Silas straightened from the post — waiting for his read, contained but intent.",
-        "[d6] Held her question through the Boundary-Stone work — waiting for Silas to brief the group on what Deathsense found."
+        "[d6] Held her question through the Boundary-Stone work — waiting for Silas to brief the group on what Deathsense found.",
+        "[d6] Named Stillwater's Trouble as two miles northwest without prompting — her feet remembered the path. Stopped at the bowl's rim ahead of Silas, shoulders set.",
+        "[d6] Received Silas's deathsense briefing on the post. Named 'the accumulation' without prompting — she has prior knowledge of what was rising here and is confirming rather than learning."
       ],
       "knownFacts": [
-        "Named the revision plainly: the Ent's prior conversation was with whatever needed to end here; Silas was the right attendant.",
-        "The Ashwarden posture of bearing witness served as a genuine contribution to the collective working — not craft, but a quality of presence.",
-        "The Ent received the intention of the ward, not the craft — the grove's response to presence and intention rather than mechanism is something the March's records did not fully capture",
         "Raven's Home is past the first tributary — left branch at the marker stone; right branch leads to the old survey post, which is gone",
         "Oriented from field memory the moment the road came into view — left branch at the marker stone is her held knowledge, not a guess",
         "One set of heel-heavy tracks leads to Raven's Home with no return — something is there, or was there",
         "The tracks belong to someone who knew the route — purposeful stride, no wandering",
-        "Named 'Stillwater's Trouble' without prompting — she knows what was rising, or has a name for it already"
+        "Named 'Stillwater's Trouble' without prompting — she knows what was rising, or has a name for it already",
+        "Stillwater's Trouble is her old ground — she has walked it before and her body remembers it",
+        "The post was a seal as much as a station — the warden was managing something, not just watching",
+        "The binding holds Stillwater's Trouble but does not end it — it is a caught stone, not a stopped one"
       ],
       "skillsObserved": [
         "packing a teaching kit by sequence without looking",
@@ -2532,9 +2535,9 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the warden post, waiting on Silas's full briefing about the boot-tracks and what Deathsense found.",
+      "statusNote": "At Raven's Home, receiving the deathsense briefing — her own knowledge of this place now surfacing.",
       "lastSeen": {
-        "locationId": "gen-ashwarden-march-road",
+        "locationId": "gen-stillwater-s-trouble",
         "day": 6
       },
       "bondType": "sworn",
@@ -2976,7 +2979,8 @@
         "[d6] The party arrived here through the waygate on World-day 19 midday — the marker stone is roughly a quarter mile north, left branch leads to Raven's Home.",
         "[d6] The party passed the marker stone and took the left branch northwest toward Raven's Home on World-day 19 midday.",
         "[d6] Binding runes — Wither and The Raised Thing braided in chalk and copper wire — seated in the lower face of the warden post on World-day 19 midday. Stillwater's Trouble held but not ended.",
-        "[d6] Boundary-Stone seated at the post's crown on World-day 19 midday — the warden station now functions as a protected refuge. Animals, weather, and casual intrusion turned aside. The post reads as occupied."
+        "[d6] Boundary-Stone seated at the post's crown on World-day 19 midday — the warden station now functions as a protected refuge. Animals, weather, and casual intrusion turned aside. The post reads as occupied.",
+        "[d6] Stillwater's Trouble reached on World-day 19 midday — a hillside bowl, dark close earth, roughly circular and below grade, grey birch stopping at its rim. A figure sits against the far limestone outcrop."
       ],
       "flags": {
         "binding_seated": true,
@@ -3004,9 +3008,36 @@
           "day": 6,
           "visited": true,
           "note": "Warden post now warded with binding runes (Wither + Raised Thing) at the lower face and Boundary-Stone at the crown — a protected refuge, door still closed, boot-tracks ending at the threshold."
+        },
+        "stillwater-s-trouble": {
+          "name": "Stillwater's Trouble",
+          "parentId": "gen-ashwarden-march-road",
+          "day": 6,
+          "visited": true,
+          "note": "A circular depression in the hillside, two miles northwest of the Raven's Home warden post — dark earth, limestone outcrop at the far rim, birch stopping at its edge. Veth's old ground."
         }
       },
       "vectorsKnown": []
+    },
+    "gen-stillwater-s-trouble": {
+      "visits": 0,
+      "notes": [
+        "[d6] Binding runes (Wither and The Raised Thing) seated in the post's lower face, plus a Boundary-Stone chalk mark at the crown. The post now holds Stillwater's Trouble in check — caught but not ended. The surrounding area is a protected refuge by Boundary-Stone ward."
+      ],
+      "flags": {
+        "binding_seated": "true",
+        "stillwaters_trouble_state": "caught_not_ended"
+      },
+      "vectorsKnown": [],
+      "subPlaces": {
+        "raven-s-home-warden-post": {
+          "name": "Raven's Home warden post",
+          "parentId": "gen-stillwater-s-trouble",
+          "day": 6,
+          "visited": true,
+          "note": "Old Ashwarden timber post on rising ground — binding runes and Boundary-Stone now seated. The door is closed. One set of heel-heavy tracks ends at the threshold with no return."
+        }
+      }
     }
   },
   "worldState": {
@@ -4486,21 +4517,21 @@
     }
   },
   "tendencies": {
-    "strategic": 16.346545441722768,
-    "cerebral": 20.850473978506663,
-    "social": 12.312039120134445,
-    "generous": 2.789996134725381,
-    "cautious": 5.750341996145551,
-    "physical": 0.5729134339182479,
-    "risky": 0.6008132336646353,
-    "ruthless": 0.19156273368283075,
-    "carousing": 0.0029349832997966167,
-    "amorous": 2.291429314930393,
-    "patient": 1.193988090043282,
-    "stealth": 0.07425020498026885,
-    "devotion": 1.516863745922243,
-    "craft": 0.5865256769451705,
-    "leadership": 0.37794178371952475
+    "strategic": 16.937881805679698,
+    "cerebral": 21.329212129043995,
+    "social": 12.004238142131083,
+    "generous": 2.720246231357246,
+    "cautious": 5.6065834462419115,
+    "physical": 0.5585905980702917,
+    "risky": 0.5857929028230194,
+    "ruthless": 0.18677366534075998,
+    "carousing": 0.0028616087173017014,
+    "amorous": 2.234143582057133,
+    "patient": 1.1641383877922,
+    "stealth": 0.07239394985576213,
+    "devotion": 1.4789421522741868,
+    "craft": 0.5718625350215413,
+    "leadership": 0.36849323912653664
   },
   "aptitudes": [
     "strategist",
@@ -4508,10 +4539,18 @@
     "scholar",
     "sage"
   ],
-  "actionCount": 590,
+  "actionCount": 591,
   "grantsVersion": 1,
   "reconcileVersion": 8,
   "gallery": [
+    {
+      "kind": "npc",
+      "prompt": "Cassiel Ord",
+      "url": "https://image.pollinations.ai/prompt/A%20lean%20man%20somewhere%20in%20his%20middle%20forties%2C%20the%20kind%20of%20lean%20that%20is%20not%20hunger%20but%20habit%20%E2%80%94%20he%20has%20been%20moving%20through%20difficult%20ground%20for%20a%20long%20time%20and%20his%20body%20organized%20itself%20around%20that.%20March%2C%20character%20portrait%2C%20named%20Cassiel%20Ord%2C%20Former%20march-warden%20who%20walked%20away%20from%20the%20post%20and%20sat%20down%20in%20the%20bowl%20and%20has%20not%20decided%20what%20%2C%20Economy%20of%20words%20born%20from%20years%20of%20writing%20terse%20post-reports%20nobody%20acted%20on.%20Does%20not%20explain%20him%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=64922&nologo=true",
+      "caption": "Cassiel Ord",
+      "worldDay": 19,
+      "at": "2026-07-19T15:57:23.298Z"
+    },
     {
       "kind": "moment",
       "prompt": "A man kneels at the base of a weathered grey timber post in a stand of birch and low heather, chalk dust on his hands, copper wire pressed into a freshly carved groove — two runes braided into the old",
@@ -4802,8 +4841,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784476425930,
-  "rev": 883,
+  "updatedAt": 1784477453768,
+  "rev": 886,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5663,6 +5702,80 @@
           ]
         },
         "image": "https://image.pollinations.ai/prompt/Lean%20in%20the%20way%20the%20valley's%20early-spring%20wind%20is%20lean%20%E2%80%94%20nothing%20wasted%2C%20everything%20purposeful.%20Grey%20coat%2C%20collarless%2C%20worn%20to%20the%20colour%20of%20old%20flint%20at%20the%20cuffs.%20Two%20seconds%20coiled%20at%20his%20left%20hip%2C%2C%20character%20portrait%2C%20named%20Tane%20Solr%2C%20Threshold-walker%20and%20named%20bout%20opponent%20%E2%80%94%20a%20man%20who%20has%20crossed%20the%20center-line%20enough%20times%20to%20sto%2C%20Unhurried%20in%20a%20way%20that%20is%20not%20laziness%20but%20arithmetic%20%E2%80%94%20he%20has%20already%20run%20the%20numbers%20on%20you%20and%20d%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13653&nologo=true"
+      },
+      "cassiel-ord": {
+        "schemaVersion": 1,
+        "id": "cassiel-ord",
+        "name": "Cassiel Ord",
+        "role": "Former march-warden who walked away from the post and sat down in the bowl and has not decided what comes next",
+        "homeLocation": "stillwaters_trouble",
+        "communityId": "march.veth_posting",
+        "personality": {
+          "warmth": 0.4,
+          "trust": -0.3,
+          "candor": 0.3,
+          "patience": 0.8
+        },
+        "spectrum": {
+          "falsehood_truth": -0.2,
+          "dark_light": -0.1,
+          "space_time": 0.5,
+          "body_mind": -0.3
+        },
+        "voiceHints": "Economy of words born from years of writing terse post-reports nobody acted on. Does not explain himself unless pushed, and when pushed gives one careful sentence more than expected and then stops. The silence after he speaks is not unfriendly — it is the silence of someone who has learned that most follow-up questions answer themselves if you wait. Stillwater grain: surface calm, something held under it that has not been named yet.",
+        "knowledge": [
+          "The March in the years bracketing Veth's posting — patrol routes, seasonal flood-lines, which threshold markers are still true and which have drifted",
+          "Why the Veth post was dissolved, or at least the version of it he was given, and the part of it he does not believe",
+          "The Raven's Home threshold: he has crossed it twice, knows what it costs, knows what it gives back, and will not say more than that without trust he has not granted yet",
+          "Early-spring snowmelt read from limestone and sky — when a valley like this will sheet-flood and how much warning you actually get",
+          "The name of whoever ordered the dissolution and what that person's interests are in the March going unwatched"
+        ],
+        "wants": "To sit here long enough to know whether what he is feeling is conscience or exhaustion — and to answer that honestly before he moves again.",
+        "fears": "That the dissolution was not incompetence but intent, and that knowing it changes what he is obligated to do with the rest of his life.",
+        "reactsToReputation": {
+          "warden_or_posted": "goes very still, then asks one quiet question about where and when before he decides anything",
+          "connected_to_veth": "trusts nothing, offers nothing, watches everything — but does not leave",
+          "civilian_or_outsider": "slightly more open; the professional wariness does not apply and he is tired of it anyway",
+          "trustworthy_established": "speaks in longer sentences, eventually stops editing himself"
+        },
+        "appearance": "A lean man somewhere in his middle forties, the kind of lean that is not hunger but habit — he has been moving through difficult ground for a long time and his body organized itself around that. March-warden coat, wool, the grey-green of limestone shadow, one brass closure replaced with knotted cord. Boots still muddy from the threshold. He is sitting with his back to the outcrop and his knees drawn up, not sleeping — just not moving. His face is weather-seamed and unhurried, the expression of someone who has decided to be still until he is ready not to be. There is a short-handled field axe laid flat beside him, not gripped, not put away.",
+        "people": "human",
+        "domains": {
+          "primary": "hourkeeper",
+          "secondary": "umbral",
+          "tertiary": "syllogist"
+        },
+        "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Kind and domain are independent: a people tends toward positions, an individual holds their own.",
+        "functions": [
+          "reveal",
+          "bind",
+          "conceal"
+        ],
+        "functionsNote": "Reveal: carries March knowledge the players cannot otherwise access cleanly. Bind: his loyalty to the post's dissolution-secret creates a tension that hooks the scene forward. Conceal: he is actively withholding the threshold-crossing account until trust is established — the concealment is the scene's pressure valve.",
+        "inGrainNote": "Stillwater's Trouble grain: peace + falsehood — the bowl is quiet and the quiet is not honest. Cassiel sits in both registers: genuinely still, genuinely not ready to tell the truth. Early-spring sets the mood — snowmelt, limestone cold, the world pretending winter is done.",
+        "_gen": {
+          "entityId": "cassiel-ord",
+          "type": "npc",
+          "birthWeight": 24,
+          "engagementScore": 0,
+          "tier": "fresh",
+          "rating": "R+",
+          "provenance": {
+            "playerKey": "player-s9z9u1",
+            "characterId": "char-mrhs8286",
+            "locationId": "gen-stillwater-s-trouble",
+            "day": 6,
+            "worldDay": null,
+            "hint": "A figure sitting against the limestone outcrop at the far edge of Stillwater's Trouble — someone who walked here from th",
+            "why": "The boot-tracks that ended at the Raven's Home threshold belong to someone, and that someone is sitting in the bowl righ"
+          },
+          "attentionHistory": [],
+          "createdDay": 6,
+          "repaired": false,
+          "stubbed": false,
+          "romanceEligible": true
+        },
+        "image": "https://image.pollinations.ai/prompt/A%20lean%20man%20somewhere%20in%20his%20middle%20forties%2C%20the%20kind%20of%20lean%20that%20is%20not%20hunger%20but%20habit%20%E2%80%94%20he%20has%20been%20moving%20through%20difficult%20ground%20for%20a%20long%20time%20and%20his%20body%20organized%20itself%20around%20that.%20March%2C%20character%20portrait%2C%20named%20Cassiel%20Ord%2C%20Former%20march-warden%20who%20walked%20away%20from%20the%20post%20and%20sat%20down%20in%20the%20bowl%20and%20has%20not%20decided%20what%20%2C%20Economy%20of%20words%20born%20from%20years%20of%20writing%20terse%20post-reports%20nobody%20acted%20on.%20Does%20not%20explain%20him%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=64922&nologo=true"
       }
     },
     "location": {
@@ -5833,13 +5946,34 @@
           "transitional"
         ],
         "connections": [
-          "gen-waygate"
+          "gen-waygate",
+          "gen-stillwater-s-trouble"
         ],
         "_gen": true,
         "_mintedAs": "transit",
         "map": {
           "x": 336.03134186125055,
           "y": 342.0516176980347
+        }
+      },
+      "gen-stillwater-s-trouble": {
+        "id": "gen-stillwater-s-trouble",
+        "name": "Stillwater'S Trouble",
+        "regionId": "valley",
+        "parentId": "gen-ashwarden-march-road",
+        "_promotedFromSubPlace": true,
+        "descriptionSeed": "A place the road led to — Stillwater'S Trouble. The fiction brought you here before the map knew its name.",
+        "tags": [
+          "transitional"
+        ],
+        "connections": [
+          "gen-ashwarden-march-road"
+        ],
+        "_gen": true,
+        "_mintedAs": "transit",
+        "map": {
+          "x": 297.8908972987956,
+          "y": 384.4108727502462
         }
       }
     },
@@ -6097,7 +6231,7 @@
       "palework": 28,
       "deathsense": 26,
       "shadowstep": 17,
-      "the-attended-end": 30,
+      "the-attended-end": 31,
       "wildcraft": 6,
       "the_raised_thing": 8,
       "the_ended_threat": 4,
@@ -6288,7 +6422,7 @@
   "syncedAt": 1784473174184,
   "teachers": {},
   "regionsKnown": {
-    "valley": 413
+    "valley": 416
   },
   "foreclosed": [
     "rootkin",
@@ -6303,7 +6437,8 @@
     "gen-waygate",
     "gen-center",
     "gen-the-ent-grove",
-    "gen-ashwarden-march-road"
+    "gen-ashwarden-march-road",
+    "gen-stillwater-s-trouble"
   ],
   "opLossLog": [
     {
@@ -6357,10 +6492,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-07-19T11:58:49.560Z",
-      "lastAt": "2026-07-19T15:53:45.912Z",
+      "lastAt": "2026-07-19T16:10:53.747Z",
       "startDay": 19,
       "endDay": 19,
-      "beats": 7
+      "beats": 9
     }
   ],
   "company": [
@@ -6431,9 +6566,9 @@
     "scene:gen-ashwarden-march-road": true
   },
   "_turnApplyError": {
-    "at": "2026-07-19T05:02:50.529Z",
+    "at": "2026-07-19T15:56:57.590Z",
     "message": "Cannot create property 'engagementScore' on boolean 'true'",
-    "stack": "TypeError: Cannot create property 'engagementScore' on boolean 'true' <-     at recordAttention (https://orkstrtdkaos.github.io/Singularity/engine/generate.js:341:21) <-     at noteGeneratedAttention (https://orkstrtdkaos.github.io/Singularity/app.js?v=1.8.129:1511:16) <-     at applyTurn (https://orkstrtdkaos.github.io/Singularity/app.js?v=1.8.129:2978:7)"
+    "stack": "TypeError: Cannot create property 'engagementScore' on boolean 'true' <-     at recordAttention (https://orkstrtdkaos.github.io/Singularity/engine/generate.js:341:21) <-     at noteGeneratedAttention (https://orkstrtdkaos.github.io/Singularity/app.js?v=1.8.130:1519:16) <-     at applyTurn (https://orkstrtdkaos.github.io/Singularity/app.js?v=1.8.130:2986:7)"
   },
   "personalArc": {
     "id": "the-door-that-closed-behind",

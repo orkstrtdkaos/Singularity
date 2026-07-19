@@ -59,7 +59,9 @@
     "kind": "sink",
     "delta": -0.08,
     "radius": 130,
-    "reason": "Grown, not built. Nothing in the orchard has ever needed the lattice, and it has not stayed where it was not needed."
+    "reason": "Grown, not built. Nothing in the orchard has ever needed the lattice, and it has not stayed where it was not needed.",
+    "radiusWorld": 0.078,
+    "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
   },
   "worldPos": {
     "colatitude": 86.0,

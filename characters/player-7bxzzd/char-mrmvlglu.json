@@ -88,9 +88,9 @@
   "chronicle": [
     "Saehara returned to the Cogitarium, reported the fallen Cogitant's survival to Ossian, climbed to the third terrace, and found the missing Cogitant alive — seated, chalk-covered, arm moving in ceaseless four-second repetition across a low board for four days. Order-Sense pulled a partial read: a single structured calculation built outward from a precise valley coordinate, which Ossian named 'the source.' A direct attempt to reach her — crouching to her level, one quiet word — stopped her arm for three seconds. She did not turn. She resumed. She is reachable, barely, and she has not finished what she started."
   ],
-  "currentLocationId": "the_cogitarium",
+  "currentLocationId": "gen-cogitarium-entrance-hall",
   "activeScene": {
-    "locationId": "the_cogitarium",
+    "locationId": "gen-cogitarium-entrance-hall",
     "turns": [
       {
         "player": null,
@@ -176,80 +176,116 @@
         "player": "Settle the bedroll back across both her shoulders and ask how she feels — body first, before anything else",
         "summary": "Saehara settled the bedroll across both Sura's shoulders and asked after her body — she reported cold, a trembling arm, and uncertain hunger.",
         "narration": "You reach across and settle the bedroll back over her shoulders — both of them this time, even the left where it had slipped — tucking it close without fuss. The wool is not warm yet, just insulating, holding what little heat her body is still making. Sura watches your hands do this the way she watched you read the board: with the attention of someone cataloguing an unfamiliar process.\n\nKon shifts against your knee, nose pointed at her, and exhales a small breath that carries just enough warmth to be deliberate.\n\n\"How do you feel?\" you ask. \"Body first. Before anything else.\"\n\nShe takes the question seriously — you can see her actually checking, the way a person does when they have been away from the body long enough that its reports are news. \"Cold,\" she says, after a moment. \"My arm.\" She raises the right one slightly — the calculating arm, the one that moved without stopping for four days — and there is something in the motion that is not quite right, a tremor in the elbow she doesn't comment on. \"I cannot tell if I'm hungry. I know that I should be.\"\n\nShe looks at the empty cup tipped sideways near her knee. \"That was water,\" she says, not accusatory, just noting a finished thing. Her voice is steadying — each sentence a fraction clearer than the last, like a lamp that has been turned up one notch at a time. She is present. She is cold, and still, and her arm is shaking, and she is here."
+      },
+      {
+        "player": "Seat Sura near the side table and get food into her hands before anything else — the coordinate can wait sixty seconds; she cannot",
+        "summary": "Saehara walked Sura to the side table and put bread in her trembling hand — she ate, without prompting a second time, and said aloud for the first time what the notation was for.",
+        "narration": "You get an arm under hers and bring her to her feet the same way you did on the stairs — slow, letting her find her weight before you ask it to hold. She rises without complaint, legs uncertain for the first moment and then steadying. The bedroll stays across both shoulders. You walk her to the side table.\n\nThe bread Ferris brought is there, a wedge of it, still dense and real. You break a piece off and set it directly in her right hand — the one that's trembling. Not in front of her on the table, where it might go unregistered. In her hand. She looks down at it, and then, with the slow deliberateness of someone following a procedure they've been reminded of rather than one they remember, she raises it to her mouth and eats.\n\nKon settles at the base of the table and doesn't move. Just present.\n\nSura chews. Swallows. Her eyes stay level, not quite focused on anything in the room. After a moment she says, without inflection: \"There's a water problem in the upper watershed.\" A beat. \"That's what the calculation was for.\" She takes another piece of bread without being prompted this time. Something is returning, in increments too small to point at but real enough to see."
       }
     ],
     "lastTurn": {
-      "narration": "You reach across and settle the bedroll back over her shoulders — both of them this time, even the left where it had slipped — tucking it close without fuss. The wool is not warm yet, just insulating, holding what little heat her body is still making. Sura watches your hands do this the way she watched you read the board: with the attention of someone cataloguing an unfamiliar process.\n\nKon shifts against your knee, nose pointed at her, and exhales a small breath that carries just enough warmth to be deliberate.\n\n\"How do you feel?\" you ask. \"Body first. Before anything else.\"\n\nShe takes the question seriously — you can see her actually checking, the way a person does when they have been away from the body long enough that its reports are news. \"Cold,\" she says, after a moment. \"My arm.\" She raises the right one slightly — the calculating arm, the one that moved without stopping for four days — and there is something in the motion that is not quite right, a tremor in the elbow she doesn't comment on. \"I cannot tell if I'm hungry. I know that I should be.\"\n\nShe looks at the empty cup tipped sideways near her knee. \"That was water,\" she says, not accusatory, just noting a finished thing. Her voice is steadying — each sentence a fraction clearer than the last, like a lamp that has been turned up one notch at a time. She is present. She is cold, and still, and her arm is shaking, and she is here.",
-      "sceneSummary": "Saehara settled the bedroll across both Sura's shoulders and asked after her body — she reported cold, a trembling arm, and uncertain hunger.",
+      "narration": "You get an arm under hers and bring her to her feet the same way you did on the stairs — slow, letting her find her weight before you ask it to hold. She rises without complaint, legs uncertain for the first moment and then steadying. The bedroll stays across both shoulders. You walk her to the side table.\n\nThe bread Ferris brought is there, a wedge of it, still dense and real. You break a piece off and set it directly in her right hand — the one that's trembling. Not in front of her on the table, where it might go unregistered. In her hand. She looks down at it, and then, with the slow deliberateness of someone following a procedure they've been reminded of rather than one they remember, she raises it to her mouth and eats.\n\nKon settles at the base of the table and doesn't move. Just present.\n\nSura chews. Swallows. Her eyes stay level, not quite focused on anything in the room. After a moment she says, without inflection: \"There's a water problem in the upper watershed.\" A beat. \"That's what the calculation was for.\" She takes another piece of bread without being prompted this time. Something is returning, in increments too small to point at but real enough to see.",
+      "sceneSummary": "Saehara walked Sura to the side table and put bread in her trembling hand — she ate, without prompting a second time, and said aloud for the first time what the notation was for.",
       "choices": [
         {
-          "label": "Refill the cup from the waterskin and press it into her hands — warmth in drinking, even cold water, and the cup gives her hands something to hold",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "difficulty": 0,
-          "intentTags": [
-            "help",
-            "sustain"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Take her right arm gently and walk it through a slow extension — the tremor needs movement, not rest, and you've worked through enough exhaustion to know the difference",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 0,
-          "intentTags": [
-            "help",
-            "sustain"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Tell her plainly: she needs to stand and walk, even just to the door and back — the floor is cold and the body does not recover lying in one position",
+          "label": "Tell her you know — that the calculation pointed at a source coordinate in the upper watershed, and that you're already working on what to do with it. Let her know the information reached someone.",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "help",
-            "calm"
+            "calm",
+            "help"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Help her to her feet now and start moving her downstairs toward Ossian — he should know the notation is complete, and she should not spend another hour on this cold floor",
-          "attribute": "physical",
-          "subAttribute": "strength",
+          "label": "Ask her to describe the calculation itself — not the number, but what it means: what the watershed problem actually is, in her own words, before you try to act on it.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Let the talking wait. Get the coordinate written down first — take out something to write on and set the four numbers down while she eats. The memory is solid, but paper is better.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Go down one floor and bring Ossian up — he needs to hear what she says, and she should be the one to say it to him, while she still has the thread.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "help",
-            "travel"
+            "lead"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         }
       ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "third-terrace-collapse",
+          "note": "Sura is at the side table, eating — bread in hand, body beginning to return. She named the watershed problem aloud for the first time."
+        }
+      ],
       "scene": {
-        "setting": "Third terrace of the Cogitarium — low-ceilinged, chalk-dense, cold and still. Night. A single lamp burns low on the window ledge. The chalk board is complete, coordinate confirmed in the final column bottom right.",
+        "setting": "Cogitarium entrance hall — chalk-dense, cold, night. The side table holds the remains of Ferris's supply drop. A single lamp burns steady near the stairwell. Araveth is still at the notation wall, unmoving.",
         "npcsPresent": [
           {
             "name": "Sura",
-            "state": "Seated on the floor, bedroll now settled across both shoulders, eyes finding steadiness — reporting her body's state carefully, right arm showing a faint tremor at the elbow"
+            "state": "Seated at the side table, bedroll across both shoulders, bread in her right hand — eating without being prompted now, eyes level and not quite focused."
+          },
+          {
+            "name": "Ossian",
+            "state": "Somewhere below — one flight down, last seen in the entrance hall with bread half-finished, waiting on the coordinate."
+          },
+          {
+            "name": "Araveth",
+            "state": "Still at the chalk watershed notation wall — finger tracing loops, no reaction to anything."
           },
           {
             "name": "Kon",
-            "state": "Pressed warm against Saehara's knee, nose directed at Sura, having exhaled a deliberate warm breath"
+            "state": "Settled at the base of the side table, still and watchful."
           }
         ],
         "objects": [
-          "Chalk board — notation complete, coordinate in the final column bottom right",
-          "Bedroll — now settled across both Sura's shoulders",
-          "Cup — tipped sideways, empty",
-          "Traveler's Pack — on Saehara's back, waterskin lighter",
-          "Low lamp — burning on the window ledge"
+          "Side table — bread remaining, food supply from Ferris's run",
+          "Chalk board — notation complete, coordinate in final column bottom right",
+          "Bedroll — across Sura's shoulders",
+          "Traveler's Pack — on Saehara's back",
+          "Low lamp — burning near the stairwell"
         ],
         "threads": [
           "The coordinate is confirmed and held in memory — not yet written down",
-          "Sura is cold, arm trembling, uncertain if she is hungry — needs warmth, water, movement",
-          "Ossian is one flight below and does not yet know she has surfaced or that the coordinate is confirmed",
+          "Sura has named the calculation's purpose aloud — the watershed problem — but not explained it yet",
+          "Ossian is one floor below and has not yet spoken with Sura directly",
           "The Name That Travels quest is unaddressed"
         ]
       },
@@ -258,44 +294,100 @@
           "op": "update",
           "npcId": "sura",
           "name": "Sura",
-          "note": "Bedroll re-settled across both shoulders. Reported her body's state honestly: cold, trembling arm (right, calculating arm), uncertain hunger. Voice steadying sentence by sentence. Present and checking in.",
+          "note": "Walked to the side table with support, put bread in her hand directly — she ate, and then reached for a second piece without prompting. Named the calculation's purpose aloud: 'There's a water problem in the upper watershed.'",
           "learned": [
-            "Her right arm carries a tremor at the elbow after four days of sustained movement — she notes it without comment",
-            "She knows she should be hungry but cannot feel it yet — body-sense returning unevenly",
-            "She is tracking the cup as a finished fact — she knows it was water and that it is gone"
+            "She named the calculation's purpose without being asked: a water problem in the upper watershed — that is what the four-day notation was for.",
+            "She is eating without prompting now — something is returning."
           ],
+          "relationshipDelta": 0,
           "status": "injured",
-          "statusNote": "On the third terrace floor — cold, arm trembling, uncertain of hunger, but present and speaking. Needs warmth, water, and movement before she can safely descend."
+          "statusNote": "At the side table in the entrance hall — seated, eating bread, bedroll across both shoulders. Body returning in increments. Still cold, arm still trembling, but present and feeding herself."
+        },
+        {
+          "op": "update",
+          "npcId": "ossian",
+          "name": "Ossian",
+          "note": "One floor below — knows the notation is complete and coordinate confirmed, has not yet spoken with Sura directly.",
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "In the entrance hall one floor below — bread in hand, waiting on the coordinate delivery, unaware Sura has named the calculation's purpose."
         }
       ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Sura named the calculation's purpose aloud: 'There's a water problem in the upper watershed.' The four-day notation was a working model of a watershed crisis, not an abstract calculation.",
+          "subjectId": "sura"
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "the-four-conditions-source-remediation",
+          "label": "The Four Conditions (Source Remediation)",
+          "kind": "mystery",
+          "entityId": null,
+          "fact": "Sura named the calculation's purpose directly: 'There's a water problem in the upper watershed.' The four-day notation was a working model of an active watershed crisis centered on the source coordinate.",
+          "links": [
+            "cogitarium",
+            "sura",
+            "the-evacuation-calculation",
+            "third-terrace-collapse"
+          ]
+        },
+        {
+          "topic": "sura",
+          "label": "Sura",
+          "kind": "person",
+          "entityId": "sura",
+          "fact": "She named the watershed problem aloud without prompting — the first time she has spoken of the calculation's purpose rather than its structure. She is eating without being asked now; something is returning.",
+          "links": [
+            "the-four-conditions-source-remediation",
+            "third-terrace-collapse",
+            "cogitarium"
+          ]
+        }
+      ],
+      "moveTo": {
+        "location": "cogitarium-entrance-hall",
+        "why": "Walked Sura down from the third terrace to the entrance hall side table"
+      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange — settling the bedroll, a short honest accounting of her body's state"
-      }
+        "why": "A short walk down the stairs and settling Sura at the table — a few minutes at most."
+      },
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Third terrace of the Cogitarium — low-ceilinged, chalk-dense, cold and still. Night. A single lamp burns low on the window ledge. The chalk board is complete, coordinate confirmed in the final column bottom right.",
+      "setting": "Cogitarium entrance hall — chalk-dense, cold, night. The side table holds the remains of Ferris's supply drop. A single lamp burns steady near the stairwell. Araveth is still at the notation wall, unmoving.",
       "npcsPresent": [
         {
           "name": "Sura",
-          "state": "Seated on the floor, bedroll now settled across both shoulders, eyes finding steadiness — reporting her body's state car"
+          "state": "Seated at the side table, bedroll across both shoulders, bread in her right hand — eating without being prompted now, ey"
+        },
+        {
+          "name": "Ossian",
+          "state": "Somewhere below — one flight down, last seen in the entrance hall with bread half-finished, waiting on the coordinate."
+        },
+        {
+          "name": "Araveth",
+          "state": "Still at the chalk watershed notation wall — finger tracing loops, no reaction to anything."
         },
         {
           "name": "Kon",
-          "state": "Pressed warm against Saehara's knee, nose directed at Sura, having exhaled a deliberate warm breath"
+          "state": "Settled at the base of the side table, still and watchful."
         }
       ],
       "objects": [
-        "Chalk board — notation complete, coordinate in the final column bottom right",
-        "Bedroll — now settled across both Sura's shoulders",
-        "Cup — tipped sideways, empty",
-        "Traveler's Pack — on Saehara's back, waterskin lighter",
-        "Low lamp — burning on the window ledge"
+        "Side table — bread remaining, food supply from Ferris's run",
+        "Chalk board — notation complete, coordinate in final column bottom right",
+        "Bedroll — across Sura's shoulders",
+        "Traveler's Pack — on Saehara's back",
+        "Low lamp — burning near the stairwell"
       ],
       "threads": [
         "The coordinate is confirmed and held in memory — not yet written down",
-        "Sura is cold, arm trembling, uncertain if she is hungry — needs warmth, water, movement",
-        "Ossian is one flight below and does not yet know she has surfaced or that the coordinate is confirmed",
+        "Sura has named the calculation's purpose aloud — the watershed problem — but not explained it yet",
+        "Ossian is one floor below and has not yet spoken with Sura directly",
         "The Name That Travels quest is unaddressed"
       ]
     }
@@ -346,14 +438,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Saehara has returned to the Cogitarium and is ascending to the third terrace — the Cogitant and the unfinished coordinate calculation are within reach",
-        "Returned to the third terrace — cup filled, bedroll laid across her shoulders, temperature checked. She has not stopped the calculation but the worst of the cold is answered. She is reachable.",
         "Ossian has begun eating — the mind-pole's most articulate voice is now, tentatively, remembering the body. The third-terrace Cogitant remains at the board; her notation columns are nearly at the right margin.",
         "Ossian confirmed: the coordinate finishes when the notation reaches the right margin — tonight, possibly. Someone must be on the third terrace to receive it. He cannot go up himself.",
         "Ossian named three possible sources of override syntax (condition two): cooperative Precursor remnants, the Warden Archive at the Radiant Plateau, and Maren Soule — a former warden who may still carry working override vocabulary and lives somewhere in the middle valley.",
         "Saehara arrived at the third terrace to find the notation complete and the Cogitant's arm stilled — she may be surfacing; the coordinate is within reach",
         "The notation is complete; Saehara has read the coordinate from the board. The Cogitant has surfaced and spoken. The coordinate must now be confirmed and recorded — and Ossian must be told.",
-        "The coordinate confirmed — spoken directly by the Cogitant herself to Saehara. She is present, fragile, and speaking. The quest's core retrieval is complete; what remains is recording the coordinate, reporting to Ossian, and ensuring her physical recovery."
+        "The coordinate confirmed — spoken directly by the Cogitant herself to Saehara. She is present, fragile, and speaking. The quest's core retrieval is complete; what remains is recording the coordinate, reporting to Ossian, and ensuring her physical recovery.",
+        "Sura is on her feet and descending — she has reached the entrance hall, Ossian now knows the notation is complete and the coordinate is doubly confirmed.",
+        "Sura is at the side table, eating — bread in hand, body beginning to return. She named the watershed problem aloud for the first time."
       ],
       "aliases": [],
       "startedAt": "2026-07-16T03:39:50.283Z"
@@ -451,8 +543,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d1] Saehara arrived at the threshold — Ossian registered the return but has not yet spoken",
-        "[d1] Registered Saehara's return and the absence of the fallen Cogitant. Did not speak. Still cross-legged in the entrance hall.",
         "[d1] Confirmed the fallen Cogitant's name — Deren — on first ask. Registered her survival as confirmation of probability, not news. Said 'Speak.' and is now waiting.",
         "[d1] Refused Saehara's appeal to obligation flatly — does not trade knowledge for gratitude. Confirmed the fourth condition (the coordinate) is still only in the third-terrace Cogitant's possession; he does not have it. Restated the four conditions without addition.",
         "[d1] Eyes tracked once to the meal bag when Saehara set it down — the body remembering something. Did not speak.",
@@ -460,17 +550,19 @@
         "[d1] Saehara draped a cloth over his shoulders without asking permission and told him plainly that body-tending extends cognitive output. He reached for the bread — slowly, deliberately, as a self-assigned task. Said the oversight was significant.",
         "[d1] Finished the flatbread without prompting. Watched Saehara write with focused silence — eyes on the book, not the ceiling. Did not speak. From him, that is attention.",
         "[d1] Laid out the full four-condition sequence precisely — identified that the coordinate is the last missing piece, that it is in the third-terrace Cogitant's head, and that someone must be present to receive it when she finishes; noted he cannot climb the stairs quickly",
-        "[d1] Named three sources of pre-Transition override syntax: cooperative Precursor remnants, the Warden Archive at the Radiant Plateau, and Maren Soule — a former warden present at a remediation site closure who lives somewhere in the middle valley. Admitted finding the gap in his own modeling…"
+        "[d1] Named three sources of pre-Transition override syntax: cooperative Precursor remnants, the Warden Archive at the Radiant Plateau, and Maren Soule — a former warden present at a remediation site closure who lives somewhere in the middle valley. Admitted finding the gap in his own modeling…",
+        "[d1] Looked up as Sura descended — ran a visible recalculation. Heard 'the notation is complete' and 'the coordinate, confirmed twice' without visible relief, but with the quality of a weight set down.",
+        "[d1] One floor below — knows the notation is complete and coordinate confirmed, has not yet spoken with Sura directly."
       ],
       "knownFacts": [
-        "He can be moved not by argument but by the math of his own argument turned on himself",
-        "The act of recording — writing — held his attention in a way conversation rarely does; he understands what it means to set a thing down",
         "The coordinate is the last of the four conditions — still only in the third-terrace Cogitant's head",
         "When the notation finishes, she will say or write it once — if no one is present, it becomes harder to recover",
         "Ossian cannot climb the stairs quickly — he cannot go up himself",
         "Override syntax exists in three places: cooperative Precursor remnants, the Warden Archive at the Radiant Plateau, and in individuals who had direct Transition-era contact with Precursor systems",
         "Maren Soule: former warden, kept a post on the old ridge road, was present at a remediation site closure — exposed to active override vocabulary; lives somewhere in the middle valley, location…",
-        "Ossian has not sent anyone to the Warden Archive — he calls the gap in his modeling 'notable'"
+        "Ossian has not sent anyone to the Warden Archive — he calls the gap in his modeling 'notable'",
+        "The third-terrace notation is complete",
+        "The coordinate is doubly confirmed — from the board and from Sura directly"
       ],
       "skillsObserved": [
         "caloric-deficit timeline calculation",
@@ -481,9 +573,9 @@
         "structured enumeration of partial-knowledge categories under"
       ],
       "status": "active",
-      "statusNote": "Seated in the entrance hall, cloth across shoulders, bread eaten — has just disclosed three potential override syntax sources including the name Maren Soule",
+      "statusNote": "In the entrance hall one floor below — bread in hand, waiting on the coordinate delivery, unaware Sura has named the calculation's purpose.",
       "lastSeen": {
-        "locationId": "the_cogitarium",
+        "locationId": "gen-cogitarium-entrance-hall",
         "day": 1
       },
       "aliases": [
@@ -620,8 +712,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d1] Saehara crouched to her level and spoke one quiet word — the arm stopped for three seconds. Her face loosened by one degree. She did not turn. The arm resumed.",
-        "[d1] Still at the board on Saehara's return — arm in unbroken four-second arc, new notation columns added since morning, margin not yet reached. The coordinate at the model's center is unchanged.",
         "[d1] Still at the board on the third terrace — arm in unbroken four-second arc, new notation columns added since morning, cup remains empty and dry. Saehara is returning.",
         "[d1] Saehara returned, set a filled cup beside her, laid the bedroll from the Traveler's Pack across her shoulders. She blinked once — slowly, like surfacing. Arm has not broken its arc. Cold measured: chilled but not critical.",
         "[d1] Saehara returned to find her arm stilled and the board complete — she is on the edge of surfacing after four days of continuous calculation",
@@ -629,23 +719,27 @@
         "[d1] Surfaced enough to verify the coordinate directly — spoke all four numbers in order, dry and deliberate. The confirmation is complete.",
         "[d1] Their name is revealed: Sura (was known as \"Third-Terrace Cogitant\")",
         "[d1] Spoke her name when Saehara asked — dry, certain, misplaced not forgotten. Made proper eye contact for the first time.",
-        "[d1] Bedroll re-settled across both shoulders. Reported her body's state honestly: cold, trembling arm (right, calculating arm), uncertain hunger. Voice steadying sentence by sentence. Present and checking in."
+        "[d1] Bedroll re-settled across both shoulders. Reported her body's state honestly: cold, trembling arm (right, calculating arm), uncertain hunger. Voice steadying sentence by sentence. Present and checking in.",
+        "[d1] Accepted Saehara's hands, stood, descended the stairwell with support — body holding but costly. Confirmed the notation to Ossian in two words.",
+        "[d1] Walked to the side table with support, put bread in her hand directly — she ate, and then reached for a second piece without prompting. Named the calculation's purpose aloud: 'There's a water problem in the upper watershed.'"
       ],
       "knownFacts": [
-        "Her breathing has shifted from the sustained working trance to something shallower and more rapid — she is near the surface",
-        "The coordinate is in the final column at the bottom right of the board",
-        "Saehara was present when she surfaced — the first face she saw",
-        "Confirmed the coordinate to Saehara verbally — four numbers, same order as the board, deliberate and careful",
         "Her name is Sura — given plainly when asked, after the coordinate was confirmed",
         "Her right arm carries a tremor at the elbow after four days of sustained movement — she notes it without comment",
         "She knows she should be hungry but cannot feel it yet — body-sense returning unevenly",
-        "She is tracking the cup as a finished fact — she knows it was water and that it is gone"
+        "She is tracking the cup as a finished fact — she knows it was water and that it is gone",
+        "Standing was harder than expected — she noted it without complaint",
+        "She accepted physical assistance without resistance for the first time",
+        "She named the calculation's purpose without being asked: a water problem in the upper watershed — that is what the four-day notation was for.",
+        "She is eating without prompting now — something is returning."
       ],
-      "skillsObserved": [],
+      "skillsObserved": [
+        "Precise verbal economy under physical duress"
+      ],
       "status": "injured",
-      "statusNote": "On the third terrace floor — cold, arm trembling, uncertain of hunger, but present and speaking. Needs warmth, water, and movement before she can safely descend.",
+      "statusNote": "At the side table in the entrance hall — seated, eating bread, bedroll across both shoulders. Body returning in increments. Still cold, arm still trembling, but present and feeding herself.",
       "lastSeen": {
-        "locationId": "the_cogitarium",
+        "locationId": "gen-cogitarium-entrance-hall",
         "day": 1
       },
       "gender": "woman",
@@ -691,7 +785,8 @@
         "[d1] The fallen Cogitant has been removed from the entrance hall — Kon and Saehara have departed northeast through the arch toward Waymarker.",
         "[d1] Saehara arrived carrying a fallen Cogitant — workers in the yard saw the grey robes; the settlement now knows a Cogitant was brought in",
         "[d1] Saehara's bedroll now covers the third-terrace Cogitant's shoulders. The cup beside the chalk board has been refilled from the waterskin.",
-        "[d1] Side table in entrance hall now stocked with supplies — flatbread, lentils, hard cheese, meal bag. Placed in clear sight so Cogitants encounter food without having to choose to find it."
+        "[d1] Side table in entrance hall now stocked with supplies — flatbread, lentils, hard cheese, meal bag. Placed in clear sight so Cogitants encounter food without having to choose to find it.",
+        "[d1] Sura has left the third terrace for the first time since beginning the four-day calculation — the floor is bare chalk now, the board finished, the lamp still burning."
       ],
       "flags": {
         "fallen_cogitant_removed": true,
@@ -749,6 +844,11 @@
       ]
     },
     "gen-cogitarium-third-terrace": {
+      "visits": 1,
+      "notes": [],
+      "flags": {}
+    },
+    "gen-cogitarium-entrance-hall": {
       "visits": 1,
       "notes": [],
       "flags": {}
@@ -825,7 +925,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-19T00:16:40.191Z",
+    "lastSharedReadAt": "2026-07-19T01:28:45.549Z",
     "lastTickWorldDay": 19,
     "lastCanonWorldDay": 19
   },
@@ -960,17 +1060,18 @@
           "[d1] The coordinate (condition four) is the last missing piece — held only in the third-terrace Cogitant's head. When the notation reaches the right margin, she will say or write it once. If no one is present, it becomes harder to recover. Ossian cannot climb the stairs himself.",
           "[d1] Condition two — override syntax — has three possible sources: (1) a cooperative Precursor remnant in the upper valley, unknown which qualify; (2) the Warden Archive at the Radiant Plateau, integrity unconfirmed; (3) individuals who carried working override vocabulary through the Transition, most…",
           "[d1] The coordinate — condition four — has been read from the chalk board: four numbers in the final column, bottom right, set down with flat precision. A fixed point in the upper watershed. Saehara holds it in memory; it is not yet recorded.",
-          "[d1] The coordinate — condition four — has been confirmed directly from the third-terrace Cogitant. She surfaced enough to verify all four numbers aloud. The coordinate is now doubly confirmed: from the board, and from her own voice. It is not yet written."
+          "[d1] The coordinate — condition four — has been confirmed directly from the third-terrace Cogitant. She surfaced enough to verify all four numbers aloud. The coordinate is now doubly confirmed: from the board, and from her own voice. It is not yet written.",
+          "[d1] Sura named the calculation's purpose directly: 'There's a water problem in the upper watershed.' The four-day notation was a working model of an active watershed crisis centered on the source coordinate."
         ],
         "links": [
-          "cogitarium",
-          "cogitants",
           "the-cogitariums-calculated-crisis",
           "third-terrace-cogitant",
           "ossian",
           "third-terrace-collapse",
           "maren-soule",
-          "radiant-plateau"
+          "radiant-plateau",
+          "sura",
+          "the-evacuation-calculation"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -1153,7 +1254,9 @@
           "[d1] A direct quiet word — crouching to her level, one syllable — stopped her arm for three seconds. Her face loosened. She did not turn. She resumed. She is reachable, barely, and she is not done with the calculation.",
           "[d1] Cold to the touch — shaded-stone cold, not critical. Blinked once when the bedroll settled across her shoulders. Body-awareness faint but present. Cup refilled and within reach. The chalk columns are nearly at the right margin.",
           "[d1] Surfaced from the four-day calculation trance the moment the notation was complete. First words: 'You're sitting on the floor.' Her focus arrived in stages. She is present, fragile, and has not yet spoken the coordinate aloud.",
-          "[d1] Her name is Sura. She gave it plainly when asked — dry, a little rough from disuse, but certain. The first true personal fact she has offered."
+          "[d1] Her name is Sura. She gave it plainly when asked — dry, a little rough from disuse, but certain. The first true personal fact she has offered.",
+          "[d1] Descended from the third terrace with Saehara's help — legs holding, body costly, present. Confirmed the notation's completion to Ossian in two words: 'Third margin. Bottom right.'",
+          "[d1] She named the watershed problem aloud without prompting — the first time she has spoken of the calculation's purpose rather than its structure. She is eating without being asked now; something is returning."
         ],
         "links": [
           "cogitarium",
@@ -1225,13 +1328,13 @@
     }
   },
   "tendencies": {
-    "strategic": 15.490745220589115,
-    "social": 13.41675352770715,
-    "cerebral": 9.339240666246077,
-    "generous": 9.966822374273448,
-    "cautious": 10.673233153144546,
-    "risky": 0.5210157687171009,
-    "patient": 1.5216122790636792
+    "strategic": 14.725889675322527,
+    "social": 12.75430132227661,
+    "cerebral": 8.878115658350177,
+    "generous": 11.449710519543697,
+    "cautious": 10.146242266208034,
+    "risky": 0.4952906151366939,
+    "patient": 1.44648267278491
   },
   "aptitudes": [
     "strategist",
@@ -1240,7 +1343,7 @@
     "tactician",
     "stalwart"
   ],
-  "actionCount": 59,
+  "actionCount": 61,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -1269,8 +1372,8 @@
       "at": "2026-07-16T02:18:04.820Z"
     }
   ],
-  "updatedAt": 1784423994899,
-  "rev": 114,
+  "updatedAt": 1784424689381,
+  "rev": 119,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1403,12 +1506,30 @@
           "x": 605.6573248931513,
           "y": 168.79118227906136
         }
+      },
+      "gen-cogitarium-entrance-hall": {
+        "id": "gen-cogitarium-entrance-hall",
+        "name": "Cogitarium Entrance Hall",
+        "regionId": "somatic_reaches",
+        "descriptionSeed": "A place the road led to — Cogitarium Entrance Hall. The fiction brought you here before the map knew its name.",
+        "tags": [
+          "transitional"
+        ],
+        "connections": [
+          "the_cogitarium"
+        ],
+        "_gen": true,
+        "_mintedAs": "transit",
+        "map": {
+          "x": 99.60283566954209,
+          "y": 400
+        }
       }
     },
     "arc": {}
   },
   "regionsKnown": {
-    "somatic_reaches": 53,
+    "somatic_reaches": 55,
     "valley": 7
   },
   "opLossPending": false,
@@ -1466,6 +1587,18 @@
       "text": "The third-terrace Cogitant's name is Sura — confirmed by her directly after surfacing from the four-day calculation trance.",
       "day": 1,
       "subjectId": "third-terrace-cogitant"
+    },
+    {
+      "id": "sura",
+      "text": "Sura has descended from the third terrace to the entrance hall — on her feet, with support, bedroll across her shoulders. Ossian now knows the notation is complete and the coordinate doubly confirmed.",
+      "day": 1,
+      "subjectId": "sura"
+    },
+    {
+      "id": "sura",
+      "text": "Sura named the calculation's purpose aloud: 'There's a water problem in the upper watershed.' The four-day notation was a working model of a watershed crisis, not an abstract calculation.",
+      "day": 1,
+      "subjectId": "sura"
     }
   ],
   "customAbilities": {},
@@ -1582,16 +1715,17 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-19T00:05:04.919Z",
-      "lastAt": "2026-07-19T01:19:54.898Z",
+      "lastAt": "2026-07-19T01:31:29.378Z",
       "startDay": 19,
       "endDay": 19,
-      "beats": 20
+      "beats": 22
     }
   ],
   "knownPlaces": [
     "old_switchback",
     "gen-cogitarium-third-terrace",
-    "the_cogitarium"
+    "the_cogitarium",
+    "gen-cogitarium-entrance-hall"
   ],
   "_pendingArrival": null,
   "livingCurrentAccess": [],
@@ -1600,11 +1734,16 @@
   "_intentAsked": null,
   "_pendingIntent": null,
   "_turnApplyError": {
-    "at": "2026-07-19T00:19:51.496Z",
+    "at": "2026-07-19T01:21:12.559Z",
     "message": "Cannot create property 'engagementScore' on boolean 'true'",
     "stack": "TypeError: Cannot create property 'engagementScore' on boolean 'true' <-     at recordAttention (https://orkstrtdkaos.github.io/Singularity/engine/generate.js:340:21) <-     at noteGeneratedAttention (https://orkstrtdkaos.github.io/Singularity/app.js?v=1.8.120:1511:16) <-     at applyTurn (https://orkstrtdkaos.github.io/Singularity/app.js?v=1.8.120:2941:7)"
   },
   "locationImages": {
     "the_cogitarium": "https://image.pollinations.ai/prompt/The%20Cogitarium%3A%20Floating%20thought-halls%20where%20the%20Cogitants%20have%20nearly%20left%20their%20bodies%20behind%20for%20pure%20mind%20%E2%80%94%20and%20are%20dying%20of%20it.%20What%20rides%20with%20the%20mind-pole%20here%20is%20ABSTRACT%20and%20a%20growing%20DARK%3A%20brilliance%20shading%20into%20a%20cold%20that%20forgets%20warmth%2C%20forgets%20the%20body%2C%20forgets%20the%20world%20thought%20was%20ever%20meant%20to%20se%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=44200&nologo=true"
+  },
+  "chronicleCache": {
+    "hash": "d1|b|c|q|L2|He had a vision of writing his own life in a boo",
+    "text": "You have become a man with a vision older than his deeds — the book not yet written, the generations not yet taught, but the shape of the life already declared. In the Lattice-Cities you found your way to the Marchers, to the Somatics and the Threnodists, to people who argue with their bodies about what bodies are owed. And once, in a hall where argument ran cold and abstract, you crossed the floor and laid a cloth across Ossian's shoulders and said plainly what you believed: that the body matters, that it is here, that it counts. The most deliberate mind in the room reached for bread.",
+    "at": "2026-07-19T01:26:25.743Z"
   }
 }

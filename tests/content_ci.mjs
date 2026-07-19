@@ -334,6 +334,70 @@ for (const pack of PACKS) {
     `${stranded.length} exceeds the ${KNOWN_L6} recorded when this check shipped — lower the floor or raise a location's danger, per Erik's local-not-universal principle`);
 }
 
+// (3c-vii) SNG-172 AUDIT — power source classification must AGREE with the substrate band centre.
+// Erik: "band centres already encode source." A tradition classified `natural` in power_sources.json
+// works BELOW the lattice — it should have a LOW band centre; a `lattice` tradition needs density and
+// should have a HIGH one. This reads power_sources.json (which had NO engine consumer — an L4 orphan
+// the ENGINE_MAP lens found), so the audit itself is now that file's reader. It is a cheap check that
+// catches the umbral-shaped hole (umbral had NO band at all — neutral at every density, benefiting
+// nowhere) without driving an inverted curve, which is the expensive path under tuningNote.
+{
+  let ps, sub;
+  try { ps = rj("content/packs/core/rules/power_sources.json"); sub = rj("content/packs/core/rules/the_substrate.json"); } catch { ps = sub = null; }
+  if (ps && sub) {
+    const bands = sub.substrateBand || {};
+    const byT = ps.byTradition || {};
+    // Erik's two flagged-not-changed disagreements: natural-classified, banded 0.50.
+    const KNOWN_DISAGREE = new Set(["threnodist", "verist"]);
+    const noBand = [], wrongSide = [];
+    for (const [t, c] of Object.entries(byT)) {
+      const b = bands[t];
+      const primary = c && c.primary;
+      // Every pole tradition must HAVE a band — the umbral hole was "no band → neutral everywhere".
+      if (!b || typeof b.center !== "number") { if (primary && primary !== "combination") noBand.push(t); continue; }
+      if (KNOWN_DISAGREE.has(t)) continue;
+      // natural works in thin ground (low centre); lattice needs dense (high centre). wild/combination
+      // are mixed sources and deliberately unconstrained.
+      if (primary === "natural" && b.center > 0.45) wrongSide.push(`${t} natural but centre ${b.center}`);
+      if (primary === "lattice" && b.center < 0.55) wrongSide.push(`${t} lattice but centre ${b.center}`);
+    }
+    check("every power-classified tradition has a substrate band (no umbral-shaped hole)", noBand.length === 0,
+      `${noBand.length} classified but band-less — neutral at every density: ${noBand.join(", ")}`);
+    check("power classification and band centre agree (natural low, lattice high)", wrongSide.length === 0,
+      `${wrongSide.length} disagree beyond the known threnodist/verist pair: ${wrongSide.join(" · ")}`);
+    if (KNOWN_DISAGREE.size) console.log(`note  SNG-172: ${[...KNOWN_DISAGREE].join(", ")} are natural-classified but banded 0.50 — flagged, not changed (Erik's call)`);
+  }
+}
+
+// (3c-viii) SNG-183 L4 for RULES FILES — Erik: "registered-but-unloaded should not pass, and that gap
+// is what found this." A rules file registered in the manifest that the LOADER never reads is dead
+// exactly as an uncalled function is (power_sources was such a file until the audit above read it).
+// A file's OWN `kind` is the signal: design/reference kinds (design_canon, world_structure, …) are
+// meant to be unloaded; `kind: "rules"` claims to be operational and MUST have a consumer — the
+// loader, or a CI check. Ratcheted so an existing authoring-reference (quest_structure) is named
+// rather than reclassified by me, and a NEW unloaded operational rules file fails the build.
+{
+  const man = rj("content/packs/core/manifest.json");
+  const rules = (man.provides && man.provides.rules) || [];
+  const state = readFileSync(join(root, "engine/state.js"), "utf8");
+  const loaderNames = [...state.matchAll(/(?:loadRule|rulePath)\(\s*["']([^"']+)["']/g)].map(m => m[1]);
+  // what the test corpus reads by filename (this file included — it makes power_sources non-orphan)
+  const testCorpus = readdirSync(join(root, "tests")).filter(f => /\.(mjs|js)$/.test(f)).map(f => readFileSync(join(root, "tests", f), "utf8")).join("\n");
+  const loaded = (r) => loaderNames.some(n => r.includes(n));
+  const ciRead = (r) => testCorpus.includes(r.split("/").pop());
+  const orphanOperational = [];
+  for (const r of rules) {
+    let doc; try { doc = rj(`content/packs/core/${r}`); } catch { continue; }
+    if (doc.kind !== "rules") continue;                       // reference/design kinds are meant to be unloaded
+    if (loaded(r) || ciRead(r)) continue;                     // has a real consumer
+    orphanOperational.push(r.split("/").pop());
+  }
+  const KNOWN_ORPHAN_RULES = 1;   // quest_structure.json — authoring guidance, not engine-consumed (Aevi's to reclassify)
+  if (orphanOperational.length) console.log(`note  SNG-183 L4: ${orphanOperational.length} operational rules file(s) registered but read by neither loader nor CI: ${orphanOperational.join(", ")}`);
+  check("no NEW operational rules file is registered-but-unread (SNG-183 L4)", orphanOperational.length <= KNOWN_ORPHAN_RULES,
+    `${orphanOperational.length} exceeds the ${KNOWN_ORPHAN_RULES} recorded — wire it into the loader, give it a CI reader, or mark its kind as a design reference`);
+}
+
 // (3d) romance guidance — the doc pulled into the GM prompt on romantic intent must load and carry
 // non-empty prose. A registered-but-empty (or missing) doc means the GM narrates romance blind.
 {

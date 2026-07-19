@@ -125,10 +125,20 @@ export async function loadContent() {
     const e = await fetchJSON(`content/packs/valley/${path}`);
     encounters[e.id] = e;
   }
+  // BATCH-13 §A.1. This stripped ONLY ".md". 24 of the 27 lore files are .json, so they were keyed
+  // as "the_twelve_reaches.json" while every location's loreRefs asks for the bare stem — and
+  // loreForLocation's .filter(Boolean) swallowed the miss. Measured before the fix: 3 of 14 refs
+  // resolved, and 84 of 95 locations delivered ZERO lore to the GM. `the_twelve_reaches`, named by
+  // 80 locations, had never once reached the model. That is why the GM could not answer about the
+  // Crossroads — a loader bug wearing an authoring gap's clothes.
   const lore = {};
   for (const path of valley.provides.lore) {
-    const name = path.split("/").pop().replace(".md", "");
-    lore[name] = await fetchText(`content/packs/valley/${path}`);
+    const file = path.split("/").pop();
+    const name = file.replace(/\.(md|json)$/, "");
+    const raw = await fetchText(`content/packs/valley/${path}`);
+    // A .json file handed to the model raw is ~2,900 tokens of braces and quotes per turn — it
+    // would trade a silent miss for a silent bloat, which is worse because it looks like it works.
+    lore[name] = file.endsWith(".json") ? loreToProse(raw) : raw;
   }
   // SNG-BATCH-10 Phase 3 / SNG-065: structured quests. The manifest listed provides.quests but the
   // loader had no branch — the authored quests silently did not load. Now they do. Optional: a miss
@@ -200,9 +210,54 @@ async function fetchText(path) {
   return res.text();
 }
 
-/** Assemble the lore text relevant to a location (only what this turn needs). */
-export function loreForLocation(location, loreMap) {
-  return (location.loreRefs || []).map(ref => loreMap[ref]).filter(Boolean).join("\n\n");
+// Envelope keys carry no world information — they are how the file is stored, not what it says.
+const LORE_SKIP = new Set(["schemaVersion", "id", "kind"]);
+const humanize = k => k.replace(/_/g, " ").replace(/([a-z])([A-Z])/g, "$1 $2");
+
+/** Render one JSON value as something a model reads as prose rather than as a data structure. */
+function loreValue(v, depth = 0) {
+  if (v == null) return "";
+  if (typeof v !== "object") return String(v);
+  if (Array.isArray(v)) {
+    return v.map(x => {
+      const inner = loreValue(x, depth + 1);
+      return inner.includes("\n") ? inner.split("\n").map((l, i) => (i ? "  " + l : "- " + l)).join("\n") : `- ${inner}`;
+    }).join("\n");
+  }
+  const parts = Object.entries(v).filter(([k]) => !LORE_SKIP.has(k) && v[k] != null && v[k] !== "");
+  // A shallow object reads better inline; a deep one wants its own lines.
+  const flat = parts.every(([, val]) => typeof val !== "object" || val === null);
+  if (flat && depth > 0) return parts.map(([k, val]) => `${humanize(k)}: ${val}`).join(" · ");
+  return parts.map(([k, val]) => {
+    const rendered = loreValue(val, depth + 1);
+    return rendered.includes("\n") ? `${humanize(k).toUpperCase()}\n${rendered}` : `${humanize(k)}: ${rendered}`;
+  }).join("\n");
+}
+
+/** JSON lore → prose for the prompt. Falls through to the raw text if it does not parse, because a
+ *  lore file that reaches the model imperfectly is better than one that does not reach it at all. */
+export function loreToProse(raw) {
+  try { return loreValue(JSON.parse(raw)).trim(); } catch { return raw; }
+}
+
+/** Assemble the lore text relevant to a location (only what this turn needs).
+ *  BATCH-13: a ref that resolves to nothing is now RETURNED as a marker rather than dropped, so a
+ *  broken reference is visible in the prompt and countable by CI instead of silently vanishing —
+ *  the silence is what let 84 of 95 locations run lore-blind unnoticed. */
+export function loreForLocation(location, loreMap, { markMissing = false } = {}) {
+  const refs = location.loreRefs || [];
+  const out = [];
+  for (const ref of refs) {
+    if (loreMap[ref]) out.push(loreMap[ref]);
+    else if (markMissing) out.push(`[lore "${ref}" is referenced here but no such file is loaded]`);
+  }
+  return out.join("\n\n");
+}
+
+/** Which of a location's loreRefs resolve, and which do not. Pure — the CI gate reads this. */
+export function loreRefStatus(location, loreMap) {
+  const refs = location.loreRefs || [];
+  return { resolved: refs.filter(r => !!loreMap[r]), missing: refs.filter(r => !loreMap[r]) };
 }
 
 /** Active-event summaries for the GM, including the GM-eyes-only truth. */

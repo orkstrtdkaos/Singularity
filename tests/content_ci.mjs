@@ -165,6 +165,48 @@ for (const pack of PACKS) {
     `${noDensity.length} with no density (region not in the_substrate.json): ${noDensity.slice(0, 8).join(", ")}`);
 }
 
+// (3c-ii) BATCH-13 — every loreRef must RESOLVE to a loaded lore file.
+// This check exists because its absence hid the worst content bug of the batch: state.js keyed the
+// 24 .json lore files WITH their extension while every loreRef asked for the bare stem, and
+// loreForLocation dropped the misses with .filter(Boolean). 3 of 14 refs resolved and 84 of 95
+// locations delivered ZERO lore to the GM — for as long as the loader has existed. A reference that
+// fails silently is indistinguishable from one that works, so the fix is not just the loader: it is
+// making the failure loud. Same shape as the encounter-seed guard, which found 10 dead seeds.
+{
+  const loreDir = "content/packs/valley/lore";
+  const stems = new Set(readdirSync(join(root, loreDir)).filter(f => /\.(md|json)$/.test(f)).map(f => f.replace(/\.(md|json)$/, "")));
+  const locDir = "content/packs/valley/locations";
+  const files = readdirSync(join(root, locDir)).filter(f => f.endsWith(".json"));
+  const missing = new Map();
+  let instances = 0, blind = 0;
+  for (const f of files) {
+    const l = rj(`${locDir}/${f}`);
+    const refs = l.loreRefs || [];
+    const bad = refs.filter(r => !stems.has(r));
+    for (const r of bad) missing.set(r, (missing.get(r) || 0) + 1);
+    instances += bad.length;
+    if (refs.length && bad.length === refs.length) blind++;
+  }
+  const named = [...missing.entries()].sort((a, b) => b[1] - a[1]).map(([r, n]) => `${r} (${n} locations)`);
+  check("every location delivers at least one resolvable lore file to the GM", blind === 0,
+    `${blind} location(s) reference only lore that does not resolve — they run lore-blind`);
+  // The dangling refs themselves are CONTENT (PO's lane): author the file, or drop the ref.
+  // Named every run so the gap is a number rather than a silence.
+  // The 5 dangling refs are CONTENT (PO's lane) and none has a cheap fix — see below. Ratcheted
+  // rather than hard-failed so the suite stays green and a SIXTH still fails the build, and named
+  // every run so the gap is a number rather than a silence.
+  //
+  // `traditions` (69 locations) deserves its own note, because the obvious fix is wrong: the file
+  // exists at content/packs/core/rules/traditions.json, and loading it into the lore map would take
+  // those locations from ~2,700 to ~13,000 prompt tokens. `tradition_profiles.json` is no cheaper
+  // (~11,700). The ref wants a per-tradition SLICE or it wants dropping — not a file.
+  const KNOWN_DANGLING = ["traditions", "reach_body_mind", "reach_violence_peace", "domain_detail_and_connections", "precursor_glimpse"];
+  const unexpected = [...missing.keys()].filter(r => !KNOWN_DANGLING.includes(r));
+  if (missing.size) console.log(`note  ${missing.size} known-dangling loreRef(s) across ${instances} location references: ${named.join(" · ")}`);
+  check("no NEW unresolved loreRef", unexpected.length === 0,
+    `${unexpected.length} new dangling ref(s) — author the file or drop the ref: ${unexpected.join(", ")}`);
+}
+
 // (3d) romance guidance — the doc pulled into the GM prompt on romantic intent must load and carry
 // non-empty prose. A registered-but-empty (or missing) doc means the GM narrates romance blind.
 {

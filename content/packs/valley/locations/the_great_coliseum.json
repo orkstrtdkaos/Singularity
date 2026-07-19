@@ -34,7 +34,7 @@
     "the_crossing",
     "the_hundred_markets"
   ],
-  "descriptionSeed": "Champions of every Reach, in ritual contest, for entertainment and wealth and prestige — and the whole world watches. This is where a Blazeborn and an Umbral can face each other and NOT annihilate each other, because here it is a game with rules and an audience, and both walk out. The Coliseum is the center's genius: it takes the thing that would otherwise be a war and makes it a spectacle people pay to see. It is also, obviously, a war being held very carefully in a bottle.",
+  "descriptionSeed": "Champions of every Reach, in ritual contest, for entertainment and wealth and prestige — and the whole world watches. This is where a Blazeborn and an Umbral can face each other and NOT annihilate each other, because here it is a game with rules and an audience, and both walk out. The Coliseum is the center's genius: it takes the thing that would otherwise be a war and makes it a spectacle people pay to see. It is also, obviously, a war being held very carefully in a bottle. Bouts here are FOUGHT, not described. A challenge issued on the sand is answered in earnest, under forms, and the crowd reads every exchange — they know the grid, they know which cell was drawn, and they will tell you afterward exactly where it turned.",
   "loreRefs": [
     "the_twelve_reaches",
     "traditions",
@@ -53,5 +53,39 @@
   "poleIntensity": {
     "violence": 0.2,
     "order": 0.2
-  }
+  },
+  "encounterSeeds": [
+    {
+      "encounterId": "coliseum_champion_harm",
+      "hint": "A Marcher holds the sand today and the bout board has your name free"
+    },
+    {
+      "encounterId": "coliseum_champion_restore",
+      "hint": "Oreth is taking challengers — the Standing Wound, and he has never lost it badly"
+    },
+    {
+      "encounterId": "coliseum_champion_protect",
+      "hint": "Vantia is holding the line cell again; the stands are betting on the bell"
+    },
+    {
+      "encounterId": "coliseum_champion_know",
+      "hint": "Sethran calls the bout aloud as he fights, and the crowd comes for that"
+    },
+    {
+      "encounterId": "coliseum_champion_shape",
+      "hint": "Bricke has been granted his satchel, which means the sand will not stay flat"
+    },
+    {
+      "encounterId": "coliseum_champion_influence",
+      "hint": "Lys is on the board, and the crowd is already on their side"
+    },
+    {
+      "encounterId": "coliseum_champion_move",
+      "hint": "Aro has not been touched in this arena in two seasons"
+    },
+    {
+      "encounterId": "coliseum_champion_sustain",
+      "hint": "Hallis is taking the Attrition, and it will not be over quickly"
+    }
+  ]
 }

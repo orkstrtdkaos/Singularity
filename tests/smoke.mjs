@@ -5066,33 +5066,44 @@ await (async () => {
   check("173: recordUse without a day still counts (no caller is broken)", c2.practice.uses.a1 === 1);
 }
 
-// --- BATCH-13 §A.6: the substrate FIELD (pools/sinks over the connection graph) ---
+// --- BATCH-13 §A.6 + SNG-180: the substrate FIELD (pools/sinks, DIRECT geodesic, no renormalisation) ---
 {
   const sb = await import("../engine/substrate.js");
   const model = { substrateDensity: { r1: 0.50, r2: 0.50 } };
-  // A—B—C in one region; D in another, sharing A's coordinates but NOT connected to it.
+  // Positions on the sphere (worldPos). A is a pool; N is near it; F is far; D is in another region.
+  // The field measures DIRECT geodesic distance (SNG-180) — the lattice radiates through space, not
+  // along roads — so there is no connection graph and no A—B—C chain any more.
   const locs = {
-    A: { id: "A", regionId: "r1", map: { x: 0, y: 0 }, connections: ["B"], substrateSource: { kind: "pool", delta: 0.30, radius: 100 } },
-    B: { id: "B", regionId: "r1", map: { x: 50, y: 0 }, connections: ["A", "C"] },
-    C: { id: "C", regionId: "r1", map: { x: 900, y: 0 }, connections: ["B"] },
-    D: { id: "D", regionId: "r2", map: { x: 0, y: 0 }, connections: [] }
+    A: { id: "A", regionId: "r1", worldPos: { colatitude: 40, longitude: 0, depth: 0 }, substrateSource: { kind: "pool", delta: 0.30, radiusWorld: 0.08 } },
+    N: { id: "N", regionId: "r1", worldPos: { colatitude: 41, longitude: 0, depth: 0 } },
+    F: { id: "F", regionId: "r1", worldPos: { colatitude: 40, longitude: 90, depth: 0 } },
+    D: { id: "D", regionId: "r2", worldPos: { colatitude: 40, longitude: 0.0001, depth: 0 } }
   };
   const f = sb.resolveSubstrateField(locs, model);
-  check("B13: a pool site resolves ABOVE its region ambient (invariant 1)", f.get("A") > 0.50);
-  check("B13: a place far along the graph is untouched — distance ends (invariant 3)", Math.abs(f.get("C") - 0.50) < 1e-9);
+  check("B13: a pool site resolves ABOVE its region ambient — STRUCTURAL, not renormalised (invariant 1)", f.get("A") > 0.50);
+  check("B13: a place FAR from every source resolves to its ambient — distance ends (invariant 3)", Math.abs(f.get("F") - 0.50) < 1e-9);
   check("B13: every location resolves (invariant 6)", [...f.keys()].length === 4);
-  // THE CASE §3 RAISED: same coordinates, different region, no connection. Euclidean says full
-  // bleed; the graph says nothing reaches it. This is why distance is path, not straight line.
-  check("B13: an UNCONNECTED place at identical coordinates is not touched by the pool",
-    Math.abs(f.get("D") - 0.50) < 1e-9);
+  // SNG-180: a place in ANOTHER region at nearly the same position IS reached — the field is spatial
+  // now, so a bastion of unlike disposition next door feels its neighbour's lattice. (The old
+  // connection-graph model refused this; direct geodesic is why the sphere corrected it.)
+  check("B13: a place a hair away in space is reached regardless of region (spatial field)", f.get("D") > 0.50);
 
-  // A sink is the same object with the opposite sign — the inversion is unrepresentable now.
-  const sunk = { ...locs, A: { ...locs.A, substrateSource: { kind: "sink", delta: -0.30, radius: 100 } } };
+  // A sink is the same object with the opposite sign — the inversion is unrepresentable.
+  const sunk = { ...locs, A: { ...locs.A, substrateSource: { kind: "sink", delta: -0.30, radiusWorld: 0.08 } } };
   check("B13: a sink site resolves BELOW its region ambient", sb.resolveSubstrateField(sunk, model).get("A") < 0.50);
 
-  // Regional calibration: the authored table is the target, never overwritten (invariant 2).
-  const mean = ["A", "B", "C"].reduce((a, k) => a + f.get(k), 0) / 3;
-  check("B13: regional calibration holds — the region mean stays at its authored value", Math.abs(mean - 0.50) < 0.01);
+  // NO renormalisation: the region mean DRIFTS from its authored value, and that drift is healthy.
+  // Forcing it to zero is what broke invariant 1 at the real radiusWorld scale (PO's corrected §9b).
+  // This synthetic region is deliberately tiny and source-dense (3 locations, one at +0.30), so its
+  // drift is large; the REAL corpus drifts ~0.05 because most ground has no source near it. The
+  // point the test makes is directional: the mean is ABOVE its ambient (a positive source lifted it)
+  // and was NOT dragged back to exactly the ambient by a correction — which is the invariant-2 shift
+  // I removed. The measured-corpus drift lives in the CI/probe, not here.
+  const mean = ["A", "N", "F"].reduce((a, k) => a + f.get(k), 0) / 3;
+  check("B13: the region mean drifts ABOVE ambient as a consequence, never forced back to match it (invariant 2)",
+    mean > 0.50);
+  check("B13: an untouched place sits at EXACTLY its ambient — the drift is the sources', not a global shift",
+    f.get("F") === 0.50);
 
   // applySubstrateField must never clobber an authored override.
   const withOverride = { ...locs, B: { ...locs.B, substrateDensity: 0.99 } };

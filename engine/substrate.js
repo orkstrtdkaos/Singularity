@@ -18,6 +18,8 @@
 // The curves are TUNABLE CONSTANTS, validated against the design anchors by tests/balance_sim.mjs.
 // Do NOT eyeball them — re-run the sim after any change (CCode's Round-2 blocker, accepted).
 
+import { geodesic } from "./worldmap.js";   // SNG-180: the substrate field measures direct geodesic distance
+
 export const SUBSTRATE_TUNING = {
   starveExp: 1.15,      // below-band falloff steepness (Seraph@Quickwood → ≈13%)
   starveFloor: 0.0,     // a starved craft can reach ~0
@@ -126,99 +128,67 @@ export function locationDensity(location, data) {
 // the Transition never took and WITHDREW where the Returned completed it, and 26 sites carry an
 // authored ±delta saying so.
 //
-// DISTANCE IS SHORTEST PATH OVER CONNECTIONS, each edge weighted by coordinate distance. The
-// proposal's §3 proved raw coordinates are the wrong DRIVER — they are hand-placed for legibility,
-// and ent_deepwood and the_lampless_market share (40,300) while sitting in different regions with
-// no connection between them, so euclidean distance says "full bleed" and is wrong. §4 proved
-// connections are the right topology. Weighting graph edges by coordinate distance keeps the 26
-// authored `radius` values meaningful in the units they were written in, while travel adjacency
-// decides what reaches what. Verified: the graph is one connected component, 0 dangling, 0
-// asymmetric, 0 isolated.
+// DISTANCE IS THE GEODESIC ON THE SPHERE (SNG-180), and it is DIRECT — not shortest-path over the
+// travel graph. That distinction is the correction to my first two attempts, and the PO's reply
+// settled it: the lattice pooled and withdrew in SPACE, and its influence radiates through space,
+// not along roads. Travel distance (walkingDays) is path-over-connections because walking follows
+// roads; the substrate FIELD is direct geodesic because the lattice does not care whether there is a
+// path. My path-over-connections instinct was right for travel and wrong for the field. Verified:
+// direct geodesic reproduces the PO's published drift (0.0515) to the digit; path-over-connections
+// does not.
 //
-// CALIBRATION. §9b invariant 2 says the authored table is the target and must not be overwritten.
-// 19 of 25 regions have sources of only ONE sign, so an uncorrected field drifts the regional mean
-// by up to 0.133 — that IS overwriting it. Renormalising per region, across only the locations a
-// source actually touched, holds drift at 0.0005 while leaving untouched ground at exactly its
-// region's ambient (invariant 3). Measured both ways in scripts/substrate_field_probe.mjs.
-//
-// It also makes the untuned falloff safe against `tuningNote`: the scales change the SHAPE within a
-// region and can no longer move the regional calibration at all.
+// NO CALIBRATION STEP. §9b invariant 2 asks regional means to stay NEAR their authored values AS A
+// CONSEQUENCE of the field, never by a correction applied to make them match — the PO's corrected
+// wording after I read "the authored table is the target" as "hit the target" and renormalised. That
+// forcing broke invariant 1 at the tight `radiusWorld` scale: making every local lift pay itself back
+// within the region pushes a source onto the wrong side of its own baseline. Over-satisfying
+// invariant 2 ate invariant 1. The ~0.05 residual drift is emergent and healthy. `pools rise / sinks
+// fall` is now STRUCTURAL — a source keeps its own signed delta and nothing can flip it.
 
 const FIELD_SUPPORT = 2.5;   // compact support: nothing past radius × this
-
-/** Undirected adjacency over location connections, weighted by map distance. Pure. */
-function connectionGraph(locations) {
-  const adj = {};
-  const xy = l => [l?.map?.x ?? 0, l?.map?.y ?? 0];
-  for (const l of Object.values(locations)) {
-    adj[l.id] = adj[l.id] || new Map();
-    for (const c of l.connections || []) {
-      const to = typeof c === "string" ? c : (c?.to || c?.id || c?.locationId);
-      const dest = to && locations[to];
-      if (!dest) continue;
-      const w = Math.hypot(xy(l)[0] - xy(dest)[0], xy(l)[1] - xy(dest)[1]);
-      adj[l.id].set(to, w);
-      (adj[to] = adj[to] || new Map()).set(l.id, w);
-    }
-  }
-  return adj;
-}
-
-/** Dijkstra from one source, bounded by maxDist. Returns Map<locationId, pathDistance>. */
-function reachWithin(adj, fromId, maxDist) {
-  const dist = new Map([[fromId, 0]]);
-  const pq = [[0, fromId]];
-  while (pq.length) {
-    pq.sort((a, b) => a[0] - b[0]);
-    const [d, n] = pq.shift();
-    if (d > (dist.get(n) ?? Infinity)) continue;
-    for (const [m, w] of adj[n] || []) {
-      const nd = d + w;
-      if (nd > maxDist) continue;
-      if (nd < (dist.get(m) ?? Infinity)) { dist.set(m, nd); pq.push([nd, m]); }
-    }
-  }
-  return dist;
-}
 
 /** Resolve the geographic substrate field. Returns Map<locationId, density>. Pure — no I/O, no
  *  mutation. `locations` is the id→record map; `data` is the_substrate.json. */
 export function resolveSubstrateField(locations = {}, data = {}) {
   const base = data?.substrateDensity || {};
   const all = Object.values(locations).filter(l => l && l.id);
-  const adj = connectionGraph(locations);
+  const sources = all.filter(l => l.substrateSource);
   const pool = new Map(), sink = new Map();
 
-  for (const s of all) {
+  for (const s of sources) {
     const src = s.substrateSource;
-    const radius = Number(src?.radius);
+    // radiusWorld is RADII on the sphere and is what mechanics use; `radius` (legacy map units) is
+    // only a fallback for any source not yet re-authored.
+    const radius = Number.isFinite(Number(src?.radiusWorld)) ? Number(src.radiusWorld) : Number(src?.radius) / 309;
     const peak = Number(src?.delta);
     if (!Number.isFinite(radius) || radius <= 0 || !Number.isFinite(peak) || peak === 0) continue;
-    for (const [id, pathDist] of reachWithin(adj, s.id, radius * FIELD_SUPPORT)) {
-      const delta = peak * Math.exp(-pathDist / radius);
-      // kind follows the SIGN — a "pool" authored below the background is now unrepresentable
-      if (delta < 0) sink.set(id, Math.max(sink.get(id) || 0, -delta));
-      else pool.set(id, Math.max(pool.get(id) || 0, delta));
+    for (const l of all) {
+      const g = geodesic(s, l);
+      if (g == null || g > radius * FIELD_SUPPORT) continue;   // compact support; unplaced → skip
+      const delta = peak * Math.exp(-g / radius);
+      // kind follows the SIGN — a "pool" authored below the background is unrepresentable
+      if (delta < 0) sink.set(l.id, Math.max(sink.get(l.id) || 0, -delta));
+      else pool.set(l.id, Math.max(pool.get(l.id) || 0, delta));
     }
   }
 
-  const raw = new Map();
+  // The field IS the density — no normalisation step. Each location is its region's baseline plus
+  // the strongest positive delta reaching it minus the strongest negative one (the `max` above, not
+  // a sum, so overlapping sources do not stack). §9b's invariant 2 asks regional means to stay NEAR
+  // their authored values AS A CONSEQUENCE of the field, never by a correction applied to make them
+  // match — the PO's corrected wording after I got this exactly wrong.
+  //
+  // I previously renormalised per region to force the mean to its authored value, and it broke
+  // invariant 1 at the tight radiusWorld scale: forcing drift to zero means every local lift is paid
+  // back somewhere in the same region, which pushes a source back onto the wrong side of its own
+  // baseline. Over-satisfying invariant 2 ate invariant 1. The residual drift (~0.05) is emergent
+  // and healthy; drift forced to zero was the symptom. `pools rise / sinks fall` is now STRUCTURAL —
+  // a source keeps its own signed delta and nothing can flip it.
+  const out = new Map();
   for (const l of all) {
     const b = base[l.regionId || l.region];
     if (typeof b !== "number") continue;              // no ambient → locationDensity's own fallback handles it
-    raw.set(l.id, b + (pool.get(l.id) || 0) - (sink.get(l.id) || 0));
-  }
-
-  const byRegion = {};
-  for (const l of all) if (raw.has(l.id)) (byRegion[l.regionId || l.region] = byRegion[l.regionId || l.region] || []).push(l.id);
-  const touched = id => (pool.get(id) || 0) !== 0 || (sink.get(id) || 0) !== 0;
-  const out = new Map();
-  for (const [region, ids] of Object.entries(byRegion)) {
-    const hit = ids.filter(touched);
-    if (!hit.length) { for (const id of ids) out.set(id, clamp01(raw.get(id))); continue; }
-    const mean = ids.reduce((a, id) => a + raw.get(id), 0) / ids.length;
-    const shift = (base[region] - mean) * ids.length / hit.length;   // the whole correction, borne by the touched
-    for (const id of ids) out.set(id, clamp01(raw.get(id) + (touched(id) ? shift : 0)));
+    out.set(l.id, clamp01(b + (pool.get(l.id) || 0) - (sink.get(l.id) || 0)));
   }
   return out;
 }

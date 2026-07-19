@@ -294,8 +294,12 @@ and already half-built in `carriedSubstrate`. What the physics needs that the co
 Stated as outcomes so the engineering is free:
 
 1. A **pool site** resolves **above** its region's authored density; a **sink site** resolves **below** it.
-2. **Regional calibration holds** — the mean of a region's locations stays close to its authored value.
-   The authored table is the calibration target, not a value to be overwritten.
+2. **Regional calibration holds** — a region's mean stays NEAR its authored value **as a consequence of
+   the field, never by a correction applied to make it match.** Drift of a few hundredths is expected
+   and healthy; **drift forced to zero is a symptom** — renormalising to hit the authored value exactly
+   makes every local lift pay itself back within the region and pushes a source onto the wrong side of
+   its own baseline, which is over-satisfying this invariant at the cost of invariant 1 (SNG-183,
+   measured). The authored table is a value not to be *overwritten*, not a target to be *hit*.
 3. **Distance matters and ends.** A source's influence falls with distance and reaches zero; a place far
    from every source resolves to its region's ambient.
 4. **Mobile and geographic sources compose** through the existing `effectiveDensity` path — carried is not

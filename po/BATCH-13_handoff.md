@@ -68,10 +68,11 @@ taxonomy and `progression.js:154` seeds domain access from it. **Power source ne
 
 # §D — RULINGS STILL OPEN FOR ERIK
 
-1. **Which people does a bond with an Ent credit?** He expects Rootkin; the Ents are authored
-   `manifest-domain`. Must be **authored data**, not inferred at credit-time — otherwise the
-   backfill bakes a silent decision about world structure into every save at once. Blocks §A item 2.
-   General form: **every NPC needs an unambiguous people-affiliation for standing to work at all.**
+1. ~~**Which people does a bond with an Ent credit?**~~ **✅ RULED 2026-07-18 — see `po/SPEC_SNG-174`.**
+   Kind and disposition are **independent**: a people is a kind of being, a domain is what they
+   practice. **41 NPCs now carry `people` + primary/secondary/tertiary `domains`**, derived from their
+   own authored spectrums; Epic NPCs hold multiple primaries. A bond credits the NPC's **domains**,
+   not their species. **§A item 2 is unblocked.**
 2. **Region renames** (SNG-166 §2) — display-name migration, ids stable. Cost first.
 3. **Stakes dial default** (SNG-170) — and whether I flip the boar and greatcat to lethal before the
    dial exists. I have not, because that imposes rather than offers.

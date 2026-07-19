@@ -299,13 +299,67 @@ check(`no // registry:internal marker is hiding a test-only export (${leverSuppr
   leverSuppressed.length === 0,
   `these are marked internal but have NO same-module caller — the marker is lowering the ratchet, not describing the code:\n      ${leverSuppressed.join("\n      ")}`);
 
+// ---------- shared consumer corpus (used by the ratchets below AND the orphan sweep) ----------
+const engineFiles = readdirSync(join(root, "engine")).filter(f => f.endsWith(".js"));
+const allSrc = engineFiles.map(f => ({ f, src: read(`engine/${f}`) }));
+const readDirSrc = (dir, exts) => {
+  try {
+    return readdirSync(join(root, dir)).filter(f => exts.some(e => f.endsWith(e)))
+      .map(f => read(`${dir}/${f}`)).join("\n");
+  } catch { return ""; }
+};
+
+// ---------- CCODE-14: IMPORTED BUT NEVER CALLED ----------
+// The orphan sweep counts an `import` statement as a consumer, so a capability that is imported and
+// never invoked reads as fully wired. That is the ENTIRE built-and-unreached signature — the class
+// this audit exists to catch — and the sweep reported 0 while instances accumulated. SNG-169 found
+// `npcImage` this way, by hand, as the 11th of the batch. The instrument should have found it.
+//
+// Measured honestly: "imported, and the name never appears outside an import" is 12, but 10 of those
+// are used INSIDE their own module — needless public surface, not dead capability. Excluding
+// own-module use leaves the real 2 (art.js:npcImage, playerprofile.js:profileInsight). Shipping 12
+// would have been a number that looked like a finding.
+// Strip imports AND comments. Comments matter more than they look: this check first reported 3
+// instead of 5 because the paragraph above — naming `npcImage` and `profileInsight` as examples —
+// sits in tests/, which is part of the consumer corpus. The audit read its own documentation as
+// evidence the capability was wired. An instrument that is silenced by describing it is not an
+// instrument. (The original orphan sweep has the same flaw and now shares this corpus.)
+const stripImports = s => s
+  .replace(/^\s*import\s[\s\S]*?from\s*["'][^"']+["'];?\s*$/gm, "")
+  .replace(/\/\*[\s\S]*?\*\//g, "")
+  .replace(/(^|[^:"'`\\])\/\/[^\n]*/g, "$1");   // line comments, but not the // in https://
+const consumerNoImports = [appSrc, read("index.html"), readDirSrc("tests", [".mjs", ".js"]), readDirSrc("scripts", [".mjs", ".js"])].map(stripImports).join("\n");
+const importedNeverCalled = [];
+for (const { f, src } of allSrc) {
+  const othersNoImports = allSrc.filter(x => x.f !== f).map(x => stripImports(x.src)).join("\n");
+  for (const m of src.matchAll(/^export (?:async )?(?:function|const|let) (\w+)/gm)) {
+    const name = m[1];
+    const line = src.slice(src.lastIndexOf("\n", m.index) + 1, src.indexOf("\n", m.index));
+    if (/registry:internal/.test(line)) continue;
+    const importRe = new RegExp(`import[^;]*\\b${name}\\b[^;]*from`, "s");
+    if (!importRe.test(appSrc) && !allSrc.some(x => x.f !== f && importRe.test(x.src))) continue; // orphan sweep owns that case
+    const re = new RegExp(`\\b${name}\\b`);
+    if (re.test(consumerNoImports) || re.test(othersNoImports)) continue;
+    importedNeverCalled.push(`${f}:${name}`);
+  }
+}
+importedNeverCalled.sort();
+// Named EVERY run, not only on regression. The ratchet keeps the count from growing; printing the
+// list is what keeps five known-dead exports from becoming scenery. Two of these are dead
+// capability (npcImage — SNG-169; profileInsight); three are live code whose export is needless
+// (ART_MODES, locationImage, TIME_MODES are each used only inside their own module).
+// Three disjoint categories, together complete: never imported → orphan sweep · imported only by a
+// test → testOnlyExports · imported by app/engine and never invoked → here.
+if (importedNeverCalled.length) console.log(`note  ${importedNeverCalled.length} export(s) imported and never invoked (ratcheted below): ${importedNeverCalled.join(", ")}`);
+
 const measured = {
   testOnlyExports: testOnlyExports.length,
   abilitiesMissingHarmRung: missingHarm.length,
   abilitiesInvalidHarmRung: badHarm.length,
   abilitiesNonCanonChallengeTypes: nonCanonTypes.length,
   abilitiesCombatClaimedNotTaught: combatUntaught.length,
-  rawProseCaps: rawProseCaps.length
+  rawProseCaps: rawProseCaps.length,
+  importedNeverCalled: importedNeverCalled.length
 };
 
 const baselinePath = join(root, "tests", "wiring_baseline.json");
@@ -325,7 +379,9 @@ for (const [k, v] of Object.entries(measured)) {
       ? `a new fixed-length cap on model prose — use smartClamp, or mark the line // prose-cap-ok if it is genuinely an identifier:\n      ${rawProseCaps.slice(0, 6).join(", ")}`
       : k === "testOnlyExports"
         ? `a NEW export reachable only from a test — it passes CI and CANNOT FIRE IN PLAY. Wire it or delete it:\n      ${testOnlyExports.join("\n      ")}`
-        : `regressed past baseline`;
+        : k === "importedNeverCalled"
+          ? `a NEW export that is imported and never invoked — built, shipped, and unreachable in play. Call it, surface it, or delete it:\n      ${importedNeverCalled.join("\n      ")}`
+          : `regressed past baseline`;
   check(`ratchet: ${k} = ${v} (baseline ${baseline[k] ?? "unset"}) — may only go DOWN`, v <= (baseline[k] ?? v), why);
 }
 check("invalid harmRung values are always zero (enum is machine-checked from here)", badHarm.length === 0,
@@ -346,14 +402,7 @@ check("147a: challengeProfile stays retired (zero records carry it)", profileGho
 // dumping the whole list every run. That is the advisory that cries wolf, which the PO flagged as
 // A2 and which I fixed once already. Restored, with the ratchet: the known set is silent and only
 // what CHANGED is named.
-const engineFiles = readdirSync(join(root, "engine")).filter(f => f.endsWith(".js"));
-const allSrc = engineFiles.map(f => ({ f, src: read(`engine/${f}`) }));
-const readDirSrc = (dir, exts) => {
-  try {
-    return readdirSync(join(root, dir)).filter(f => exts.some(e => f.endsWith(e)))
-      .map(f => read(`${dir}/${f}`)).join("\n");
-  } catch { return ""; }
-};
+// engineFiles / allSrc / readDirSrc are defined above with the ratchets — one corpus, two sweeps.
 // A test IS a consumer, and so is a standing maintenance script.
 const consumerCorpus = [appSrc, allSrc.map(x => x.src).join("\n"), read("index.html"),
   readDirSrc("tests", [".mjs", ".js"]), readDirSrc("scripts", [".mjs", ".js"])].join("\n");
@@ -375,6 +424,7 @@ const goneOrphans = knownOrphans.filter(o => !orphans.includes(o));
 if (newOrphans.length) console.log(`note  ${newOrphans.length} NEW export(s) with no consumer — wire it, test it, or mark it // registry:internal:\n      ${newOrphans.join(", ")}`);
 if (goneOrphans.length) console.log(`ok    ${goneOrphans.length} previously-orphaned export(s) now have a consumer (re-baseline with UPDATE_WIRING_BASELINE=1)`);
 if (!newOrphans.length && !goneOrphans.length) console.log(`ok    orphan-export sweep: ${orphans.length} known un-consumed export(s), no change (advisory)`);
+
 
 // CCODE-12: the suite is INTENTIONALLY RED right now. The PO asked to watch the seed guard fail
 // before repairing the content, and a deliberate red is only useful if it stays legible — otherwise

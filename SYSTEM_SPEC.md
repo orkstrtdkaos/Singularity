@@ -471,7 +471,24 @@ Links 1–2 are what we build and already check. **Links 3–4 are where intent 
 
 **23.2 The GM Context Registry.** `engine/gm_registry.js` — one declared table, the single source of truth for what the model is told. One row per contributor: `{ key, builder, carries, reachedBy, spec, views, build(env) }`. `app.js` assembles the GM context **by iterating this registry** at all four call sites (`turn` / `ask` / `quest` / `gambit` views — ROUND 2 found four, not three), via one `gmEnv()` bag. Prompt ordering stays owned by `gm.js tierParts` — the registry is a bag of keys, which is what makes one table serve four sites. Site divergences ride env overrides (`focusQuest`, `recentTurnsWindow`), not forked tables. Ops (offerIntent, stateOps, …) register in the gm.js reply contract — the op vocabulary is the registry's sibling, checked by the salvage whitelist.
 
-**23.3 The gate.** `tests/wiring_audit.mjs` runs in `npm test` and FAILS on: registry ↔ `tierParts` parity drift (both directions — a key consumed but never provided can never land; a row never read is a value with no reader) · a hand-listed ctx literal at any gmTurn/gmAsk call site · SYSTEM_SPEC header count drift (this file's certified counts vs HEAD — the 38/137-era drift must not recur silently) · skill-integrity ratchet regression (`tests/wiring_baseline.json`: missing `harmRung` 140 / non-canon challenge types 89 / combat-claimed-not-taught 105 may only DECREASE; invalid enum values are always zero; `challengeProfile` stays retired). Advisory (printed, never fails): orphan-export sweep, silenced per-export with `// registry:internal`. *(The audit red-gated its own author's second ship for an undercounted header — the gate works on the people who built it.)*
+**23.3 The gate.** `tests/wiring_audit.mjs` runs in `npm test` and FAILS on: registry ↔ `tierParts` parity drift (both directions — a key consumed but never provided can never land; a row never read is a value with no reader) · a hand-listed ctx literal at any gmTurn/gmAsk call site · SYSTEM_SPEC header count drift (this file's certified counts vs HEAD — the 38/137-era drift must not recur silently) · skill-integrity ratchet regression (`tests/wiring_baseline.json`: missing `harmRung` 140 / non-canon challenge types 89 / combat-claimed-not-taught 105 may only DECREASE; invalid enum values are always zero; `challengeProfile` stays retired). · **`importedNeverCalled` ratchet (CCODE-14)** — see 23.5. Advisory (printed, never fails): orphan-export sweep, silenced per-export with `// registry:internal`. *(The audit red-gated its own author's second ship for an undercounted header — the gate works on the people who built it.)*
+
+**23.5 The three reachability categories, disjoint and complete.** An export is in exactly one:
+
+| category | meaning | where it is caught |
+|---|---|---|
+| never imported | nothing anywhere names it | orphan sweep (advisory, `0`) |
+| imported only by a test | passes CI, cannot fire in play | `testOnlyExports` ratchet (`8`) |
+| **imported and never invoked** | **built, shipped, unreachable** | **`importedNeverCalled` ratchet (`5`)** |
+
+The third category was invisible until CCODE-14: the orphan sweep counts an `import` statement as a consumer, so a capability that is imported and never called read as fully wired. It reported `0` while instances accumulated — SNG-169 found `npcImage` by hand as the **11th** built-never-reached of the batch, which the instrument should have found first.
+
+Two lessons are worth keeping, both discovered by the check failing on itself:
+
+1. **The consumer corpus must strip comments, not just imports.** The check first reported `3` instead of `5` because the paragraph in `wiring_audit.mjs` documenting the fix *named the dead exports as examples* — and `tests/` is part of the corpus. The audit read its own documentation as evidence of wiring. An instrument that can be silenced by describing it is not an instrument.
+2. **The raw number was not the finding.** "Imported, name never appears outside an import" counts `12`; ten of those are used inside their own module — needless public surface, not dead capability. The real figure is `5`, of which `2` are dead capability (`npcImage`, `profileInsight`) and `3` are live code with a needless export. Shipping `12` would have been a number that looked like a finding.
+
+The list is printed **every run**, not only on regression — the ratchet stops the count growing, but printing is what stops five known-dead exports becoming scenery.
 
 **23.4 Authoring rule.** A spec is not promotable until it names, for each capability it introduces, the five links. Anything left blank is a declared gap, not an oversight.
 

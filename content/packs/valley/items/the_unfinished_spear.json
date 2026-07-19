@@ -31,7 +31,8 @@
         "death",
         "ritual",
         "binding",
-        "hunt"
+        "hunt",
+        "substrate-gathering"
       ],
       "notFor": "It is not yet an artifact and must not be narrated as one. **It is a good spear with an open register and a beginning.** Everything else it has to earn.",
       "evolution": {
@@ -125,7 +126,9 @@
         "1️⃣ Used the WAYSTAFF'S EXISTING engine (`evolution.js`) instead of inventing a growth system. It was already there.",
         "2️⃣ Erik's catch: 'do not let the game finish it for him' would have made the artifact permanently unreachable — a treadmill, not a story — and it got his character BACKWARDS. **Silas is the Wright who FINISHES.** It must be completable, and the completion is HIS.",
         "3️⃣ ⛔ Aevi's stages had NO `unlockBond`/`unlockCoUse` gates. `currentStage` defaults missing gates to 0, so **EVERY stage would have passed and the engine would have stamped it FINISHED on the first refresh.** Over-corrected from *never finishes* straight into *finishes instantly*. **Now properly gated: 0/0 → 3/4 → 5/9 → 7/15 → 9/22.**"
-      ]
+      ],
+      "substrateCharge": 0.12,
+      "substrateNote": "Runes that are load-bearing rather than decorative — the haft has become a capacitor through use."
     }
   ]
 }

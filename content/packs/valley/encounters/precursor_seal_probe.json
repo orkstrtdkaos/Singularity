@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "precursor_seal_probe",
+  "type": "puzzle",
+  "name": "The Reluctant Seal",
+  "locationId": "the_hollowing",
+  "setup": "A precursor seal, intact, and the purpose-shadow on it reads PRISON rather than vault. It is not locked so much as decided. Probing it is permitted; opening it is a different question and a worse one.",
+  "difficulty": 35,
+  "attribute": "mental",
+  "subAttribute": "reason",
+  "axes": {
+    "mechanical_spiritual": -0.4,
+    "concrete_abstract": 0.3
+  },
+  "hintTiers": [
+    "The seam does not respond to force, pressure, or heat. It responded, once, to being addressed.",
+    "The shadow on it is not decoration — it is a label, and it was left by someone who expected to be read.",
+    "It can be opened. Everything about how it was made is an argument that it should not be."
+  ]
+}

@@ -5,10 +5,11 @@
   "note": "SNG-054 Phase 1 — the canonical TRADITION MAP. Abilities belong to a PEOPLE, not to an axis. Each of the 12 axes is the tension between two pole-civilizations, each with its craft. Replaces the 'Reach' grouping in the learn-screen/skill-graph. Authored by Aevi 2026-07-11 from the_twelve_reaches.json + world_framing.json canon; the 6 canon-named axes use their canon names, the 6 unnamed were authored here.",
   "principle": "A tradition is a PEOPLE's craft. You learn it by being native to that people, standing in their region, or being taught by one of them (teacher or tome). An axis is not a tradition — it is the tension between two of them.",
   "architecture": {
-    "poleTraditions": "24 (2 per axis × 12). The great crafts, practiced at the Reaches. 16 have abilities today; 8 are authored stubs owing trees.",
+    "poleTraditions": "24 (2 per axis x 12). The great crafts, practised at the Reaches. **ALL 24 now carry ability trees** (233 abilities, 7-13 each; verist is thinnest at 7). Corrected 2026-07-19 — this line previously read '16 have abilities today; 8 are authored stubs owing trees', which had been false for some time. Unlike the SYSTEM_SPEC header counts, this claim is NOT machine-gated, which is why it drifted silently.",
     "folkTraditions": "The Valley's near-center crafts — FOLK-SHADOWS of the great poles, diluted and mixed because the Valley sits near the center where all axes cross faintly. Canon: 'Prism Sight is folk-Radiance'; 'Harmonic Heights is a Valley-edge foothill leaning mechanical'; 'the Valley's Mediator's Tongue is a folk-shadow of Stillcraft'.",
     "specialSystems": "Outside the pole matrix: Precursor (ancient nanite-tech, fiction-gated).",
-    "cultsOfPurity": "Each pole's PURE locus is held not by the civilization but by a cult (world_framing.bearers_vary) — the civilization lives at the livable near-pole; the cult occupies the extreme. Listed per tradition as cultOfPurity."
+    "cultsOfPurity": "Each pole's PURE locus is held not by the civilization but by a cult (world_framing.bearers_vary) — the civilization lives at the livable near-pole; the cult occupies the extreme. Listed per tradition as cultOfPurity.",
+    "staleClaimNote": "A self-describing count inside a content file is a claim with no guard. SNG-183 L4 should treat prose counts in rules files the same way tests/wiring_audit.mjs treats the SYSTEM_SPEC header: either gate it or do not state it."
   },
   "accessGates": {
     "principle": "SNG-049/SNG-050 landing in mechanics — this closes the 'I can learn any Reach's capstone by picking it' hole. You may learn/rank a pole-tradition ability only if ONE of:",

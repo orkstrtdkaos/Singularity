@@ -8,7 +8,7 @@
   "whyHere": "You noticed the paying. You came out to see whether there was another way to be a mind.",
   "background": "drifter",
   "level": 1,
-  "xp": 88,
+  "xp": 93,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -43,14 +43,14 @@
   ],
   "alignment": {
     "spectrumId": -0.18131404687500002,
-    "body_mind": 0.026074999999999994,
-    "concrete_abstract": 0.059471875
+    "body_mind": 0.03477125,
+    "concrete_abstract": 0.07149828124999999
   },
   "attunement": 1,
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 47,
+  "energy": 44,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -109,241 +109,148 @@
         "player": "I'll wait for the runner to arrive and show him around but also start distributing supplies to those who need it most.",
         "summary": "Ferris the runner arrived and was shown the Cogitarium — supplies distributed to the side table, the arrangement explained, the name Deren given as warning and instruction.",
         "narration": "The lamp on the switchback grows steadier as the minutes pass — a young man named Ferris, broad-shouldered and already breathing hard when he shoulders through the arch into the yard, a pack nearly as wide as he is riding his back. He stops when he sees the Cogitarium's pale towers stacked above him in the dark and you can read the exact moment wonder tips into unease on his face. You meet him in the yard before it tips any further.\n\nYou take him through it efficiently: the yard, the arch, the entrance hall where Ossian sits like a held thought and Araveth traces chalk against stone without blinking. You name them, explain what the stillness means, tell him not to wait for acknowledgment he won't get. You show him where supplies go — the alcove beside the stairwell, the low shelf the previous runner knew — and you start working through his pack while you talk. Flatbread, dried lentils, a waxed round of hard cheese. You set the food in clear view on the entrance hall's side table, close enough that any Cogitant passing will encounter it without having to decide to eat. That's the architecture Lenten would recognize: make the right thing the easiest thing.\n\nFerris watches you work. 'They really don't eat unless you put it in front of them?' he asks, keeping his voice low, eyes sliding toward Araveth's uninterrupted loop. You tell him: sometimes not even then. Watch Deren — you give him the name, the workbench in Lenten's shed, the two-day window — so he knows what happens when the body's patience runs out. His jaw tightens but he nods, the nod of someone filing it under things he'll think about later. Good enough.\n\nOssian has not moved through any of this. But when you set the last of the food down — a small cloth bag of meal, the kind that becomes porridge with hot water and patience — his eyes track to it once, and then back to the middle distance. You note it. Not hunger exactly. Something older than hunger: the body remembering, briefly, that it has conditions."
+      },
+      {
+        "player": "Sit down near Ossian and ask, simply and without leverage: what do you actually need from the world right now — not the calculation, the body",
+        "summary": "Saehara sat beside Ossian without leverage and asked what he actually needed — the body answered through the mind: cold floor, inconsistent meals, gaps in his own accounting.",
+        "narration": "The entrance hall is quieter now — Ferris has found a corner of his own, the pack set down, eyes still cataloguing the strangeness. Araveth traces chalk. Kon is a warm coal-shape at the stairwell foot, watching upward with the particular patience of a thing that knows what it's waiting for.\n\nYou cross the flagstones and sit. Not across from Ossian in the way of a conversation that wants something — beside him, close to his level, back against the cold wall. You let the chalk-smell settle. You let the silence have a moment. Then you ask it plain, without the lever of debt or the frame of negotiation: not what the calculation needs, not what the Cogitarium requires. What does he need. The body. Right now.\n\nThe question lands in him visibly. His eyes, which had been aimed at the middle distance, move to you — not fast, not startled, but with the quality of a compass needle completing its swing. Something behind that dense extraordinary gaze makes a small adjustment, the way a room changes when someone opens a window and the air moves for the first time in days. He does not answer immediately. The silence is different from his usual silence, which is the silence of a mind occupied elsewhere. This one is a man sitting in a question he has not been asked in a long time.\n\n\"Warmth,\" he says finally. The word is precise, not plaintive. \"The floor conducts cold upward at a rate I have been disregarding.\" A pause — three, four seconds, long enough to feel like he is checking something internal. \"And the supply has not been regular. There are gaps in my accounting of the last several days that I cannot close. I believe I have not eaten consistently.\" He states this the way he states everything: as data, as a model's output. But the model is his own body, and the fact that he has lost track of it at all is the thing that sits between the words like a weight.\n\nHis eyes return to the middle distance. But he has not moved away."
       }
     ],
     "lastTurn": {
-      "narration": "The lamp on the switchback grows steadier as the minutes pass — a young man named Ferris, broad-shouldered and already breathing hard when he shoulders through the arch into the yard, a pack nearly as wide as he is riding his back. He stops when he sees the Cogitarium's pale towers stacked above him in the dark and you can read the exact moment wonder tips into unease on his face. You meet him in the yard before it tips any further.\n\nYou take him through it efficiently: the yard, the arch, the entrance hall where Ossian sits like a held thought and Araveth traces chalk against stone without blinking. You name them, explain what the stillness means, tell him not to wait for acknowledgment he won't get. You show him where supplies go — the alcove beside the stairwell, the low shelf the previous runner knew — and you start working through his pack while you talk. Flatbread, dried lentils, a waxed round of hard cheese. You set the food in clear view on the entrance hall's side table, close enough that any Cogitant passing will encounter it without having to decide to eat. That's the architecture Lenten would recognize: make the right thing the easiest thing.\n\nFerris watches you work. 'They really don't eat unless you put it in front of them?' he asks, keeping his voice low, eyes sliding toward Araveth's uninterrupted loop. You tell him: sometimes not even then. Watch Deren — you give him the name, the workbench in Lenten's shed, the two-day window — so he knows what happens when the body's patience runs out. His jaw tightens but he nods, the nod of someone filing it under things he'll think about later. Good enough.\n\nOssian has not moved through any of this. But when you set the last of the food down — a small cloth bag of meal, the kind that becomes porridge with hot water and patience — his eyes track to it once, and then back to the middle distance. You note it. Not hunger exactly. Something older than hunger: the body remembering, briefly, that it has conditions.",
-      "sceneSummary": "Ferris the runner arrived and was shown the Cogitarium — supplies distributed to the side table, the arrangement explained, the name Deren given as warning and instruction.",
+      "narration": "The entrance hall is quieter now — Ferris has found a corner of his own, the pack set down, eyes still cataloguing the strangeness. Araveth traces chalk. Kon is a warm coal-shape at the stairwell foot, watching upward with the particular patience of a thing that knows what it's waiting for.\n\nYou cross the flagstones and sit. Not across from Ossian in the way of a conversation that wants something — beside him, close to his level, back against the cold wall. You let the chalk-smell settle. You let the silence have a moment. Then you ask it plain, without the lever of debt or the frame of negotiation: not what the calculation needs, not what the Cogitarium requires. What does he need. The body. Right now.\n\nThe question lands in him visibly. His eyes, which had been aimed at the middle distance, move to you — not fast, not startled, but with the quality of a compass needle completing its swing. Something behind that dense extraordinary gaze makes a small adjustment, the way a room changes when someone opens a window and the air moves for the first time in days. He does not answer immediately. The silence is different from his usual silence, which is the silence of a mind occupied elsewhere. This one is a man sitting in a question he has not been asked in a long time.\n\n\"Warmth,\" he says finally. The word is precise, not plaintive. \"The floor conducts cold upward at a rate I have been disregarding.\" A pause — three, four seconds, long enough to feel like he is checking something internal. \"And the supply has not been regular. There are gaps in my accounting of the last several days that I cannot close. I believe I have not eaten consistently.\" He states this the way he states everything: as data, as a model's output. But the model is his own body, and the fact that he has lost track of it at all is the thing that sits between the words like a weight.\n\nHis eyes return to the middle distance. But he has not moved away.",
+      "sceneSummary": "Saehara sat beside Ossian without leverage and asked what he actually needed — the body answered through the mind: cold floor, inconsistent meals, gaps in his own accounting.",
       "choices": [
         {
-          "label": "Go back up to the third terrace — the chalk columns are almost at the right margin, and when they run out of surface, something will happen",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "body_mind": 0.7,
-            "concrete_abstract": 0.4
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Sit down near Ossian and ask, simply and without leverage: what do you actually need from the world right now — not the calculation, the body",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "body_mind": 0.2,
-            "concrete_abstract": 0.3
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "persuade",
-            "comfort"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Show Ferris the dry-stone wall-path section on his way out — walk him to the arch, describe the drop on the right, make sure he knows it before he runs this route in the dark",
+          "label": "Put food directly in his hands — not on the side table, in front of him where the choice is already made",
           "attribute": "practical",
-          "subAttribute": "wits",
-          "axes": {},
+          "subAttribute": "craft",
           "difficulty": 0,
           "intentTags": [
-            "help"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Eat something yourself and rest briefly in the entrance hall — energy at forty-seven, and the night is still young",
-          "attribute": "physical",
-          "subAttribute": "strength",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
+            "help",
             "sustain"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        }
-      ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "xp": 20
-      },
-      "ledgerEvents": [],
-      "questUpdates": [
+          "trivial": true
+        },
         {
-          "op": "complete",
-          "questId": "cogitarium-supply-line",
-          "title": "Reopen the Supply Line",
-          "note": "Ferris arrived, was shown the route and the arrangement, supplies distributed to the side table. The line is open.",
-          "xpReward": 20
+          "label": "Ask what the floor feels like — stay in the body, one small thing at a time, keep him here before the machinery pulls him back",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "calm",
+            "comfort"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Tell him about Deren — not the fact of her survival, but what she looked like: chalk on her hands, lips moving, robes pooled with terrible neatness on Lenten's workbench",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "comfort",
+            "persuade"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Say nothing more — just stay beside him in the quiet, let the warmth of being near another body do the work words can't",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "sustain",
+            "calm"
+          ],
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "Entrance hall of the Cogitarium — chalk-smell, cold stone, low lamp-light. Night at the narrow windows. The yard is quiet; Ferris's lamp is now inside.",
+        "setting": "Entrance hall of the Cogitarium — chalk-smell, cold stone flagstones, low lamp-light. Night at the narrow windows. Saehara is seated beside Ossian against the wall near the threshold.",
         "npcsPresent": [
           {
             "name": "Ossian",
-            "state": "Cross-legged near the threshold — eyes tracked to the meal bag once, then back to the middle distance"
+            "state": "Seated beside Saehara against the wall — eyes returned to middle distance, but not fully gone; the question still settling in him"
           },
           {
             "name": "Araveth",
-            "state": "Still at the chalk watershed model — finger tracing loops, no reaction to the new arrival or the distributed supplies"
+            "state": "Still at the chalk watershed model — finger tracing loops, no reaction to anything"
           },
           {
             "name": "Kon",
-            "state": "Seated at the stairwell entrance, coat ember-red, watching upward — ears forward, coat calm"
+            "state": "Warm coal-shape at the stairwell foot, watching upward with patient stillness"
           },
           {
             "name": "Ferris",
-            "state": "Standing near the side table, pack now lightened, jaw tight, absorbing what he's been told — getting ready to understand this job"
+            "state": "In a corner of the hall, pack down, quietly absorbing the strangeness of the place"
           }
         ],
         "objects": [
           "Chalk watershed model — tributaries, flow-rates, particulate marks across the full wall",
-          "Side table — flatbread, dried lentils, hard cheese round, small cloth bag of meal now set out",
+          "Side table — flatbread, dried lentils, hard cheese round, small cloth bag of meal",
           "Traveler's Pack — waterskin lighter, bedroll deployed upstairs",
           "Stairwell to the third terrace above",
           "Arch to the yard and the switchback below"
         ],
         "threads": [
-          "The third-terrace Cogitant holds the coordinate — chalk columns nearly at the right margin; something will happen when she runs out of surface",
-          "Ossian's eyes tracked to the meal bag — something registered there",
-          "Ferris is new to this arrangement and will need guidance to do it well long-term"
+          "Ossian has named two physical needs: warmth from the cold floor, and inconsistent eating — both answerable",
+          "The third-terrace Cogitant holds the coordinate — chalk columns nearly at the right margin",
+          "Ferris is settling in; his first solo run will test whether the arrangement holds"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
-          "npcId": "ferris",
-          "name": "Ferris",
-          "role": "Supply runner — Lenten's replacement for Brenn, now covering the Waymarker-to-Cogitarium route",
-          "gender": "man",
-          "pronouns": "he/him",
-          "description": "Broad-shouldered and young, breathing hard from the climb, the kind of face that files difficult things under 'later' and gets on with the job",
-          "note": "Arrived at the Cogitarium, was given a tour and briefing by Saehara — shown where supplies go, told about Deren as a cautionary fact, warned about the dry-stone wall-path section",
-          "learned": [
-            "Cogitants do not reliably eat unless food is placed in front of them",
-            "Deren is at Waymarker on Lenten's workbench — a warning of what happens when the body's window closes",
-            "Supply goes to the alcove shelf beside the stairwell"
-          ],
-          "skillsObserved": [],
-          "relationshipDelta": 1,
-          "status": "active",
-          "statusNote": "In the entrance hall — tour complete, pack lightened, settling into the reality of this route"
-        },
-        {
           "op": "update",
           "npcId": "ossian",
           "name": "Ossian",
-          "note": "Eyes tracked once to the meal bag when Saehara set it down — the body remembering something. Did not speak.",
+          "note": "Named his own physical needs when asked directly — warmth from the cold floor, gaps in his eating he cannot account for. The first time he has answered a question about himself rather than a system.",
           "learned": [
-            "Food is now on the side table — placed without requiring a decision to seek it"
+            "The floor's cold conducts upward and he has been disregarding it",
+            "He has not eaten consistently — gaps in his own accounting he cannot close",
+            "He can be reached through a direct question with no leverage attached"
           ],
-          "statusNote": "Cross-legged in the entrance hall — supply line now confirmed operational; registered the meal bag's placement"
-        }
-      ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "The Cogitarium supply line is now operational — Ferris is the new runner, the arrangement explained, food distributed to the side table. The line will hold as long as Ferris does.",
-          "subjectId": "ferris"
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "Side table in entrance hall now stocked with supplies — flatbread, lentils, hard cheese, meal bag. Placed in clear sight so Cogitants encounter food without having to choose to find it.",
-          "flag": {
-            "side_table_stocked": "true"
-          },
-          "subPlace": {
-            "name": "Entrance Hall Side Table",
-            "parent": "The Cogitarium",
-            "note": "Low shelf beside the stairwell — the designated supply drop point, now restocked for the first time in nineteen days",
-            "visited": true
-          }
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "Seated in the entrance hall beside Saehara — still thinking, but present in a way he wasn't before the question"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "the-cogitariums-calculated-crisis",
-          "label": "The Cogitarium's Calculated Crisis",
-          "kind": "event",
-          "entityId": "cogitarium",
-          "fact": "Supply line formally operational — Ferris arrived, shown the route and the arrangement, food distributed to the side table. Nineteen days of gap closed.",
-          "links": [
-            "cogitarium-supply-line",
-            "lenten",
-            "ferris",
-            "deren"
-          ]
-        },
-        {
-          "topic": "ferris",
-          "label": "Ferris",
+          "topic": "ossian",
+          "label": "Ossian",
           "kind": "person",
-          "entityId": "ferris",
-          "fact": "Lenten's replacement runner for Brenn — broad-shouldered, young, now briefed on the Cogitarium's particular needs. Was told about Deren. Knows the dry-stone wall-path hazard.",
+          "entityId": "ossian",
+          "fact": "When asked directly and without leverage what his body needs, he answered: warmth (the floor conducts cold he has been ignoring) and consistent food (gaps in the last several days he cannot close). He states his own deprivation as data — which makes it no less real.",
           "links": [
-            "lenten",
-            "cogitarium-supply-line",
-            "deren",
-            "brenn-missing-runner"
+            "cogitarium",
+            "cogitants",
+            "the-cogitariums-calculated-crisis"
           ]
-        }
-      ],
-      "generateRequest": [
-        {
-          "type": "npc",
-          "hint": "Ferris — a broad-shouldered young man, Lenten's replacement runner for the Cogitarium route, now briefed and settling into the strangeness of this job",
-          "why": "Named and introduced this beat as a new recurring presence on the supply route — needs a stable, durable identity"
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "A brief but real exchange — the runner arrived, was shown around, supplies distributed; half an hour of quiet purposeful work"
-      },
-      "sceneEnded": false
+        "hoursPassed": 0.25,
+        "why": "A quiet exchange beside the wall — a few minutes of sitting and one honest answer"
+      }
     },
     "sceneState": {
-      "setting": "Entrance hall of the Cogitarium — chalk-smell, cold stone, low lamp-light. Night at the narrow windows. The yard is quiet; Ferris's lamp is now inside.",
+      "setting": "Entrance hall of the Cogitarium — chalk-smell, cold stone flagstones, low lamp-light. Night at the narrow windows. Saehara is seated beside Ossian against the wall near the threshold.",
       "npcsPresent": [
         {
           "name": "Ossian",
-          "state": "Cross-legged near the threshold — eyes tracked to the meal bag once, then back to the middle distance"
+          "state": "Seated beside Saehara against the wall — eyes returned to middle distance, but not fully gone; the question still settli"
         },
         {
           "name": "Araveth",
-          "state": "Still at the chalk watershed model — finger tracing loops, no reaction to the new arrival or the distributed supplies"
+          "state": "Still at the chalk watershed model — finger tracing loops, no reaction to anything"
         },
         {
           "name": "Kon",
-          "state": "Seated at the stairwell entrance, coat ember-red, watching upward — ears forward, coat calm"
+          "state": "Warm coal-shape at the stairwell foot, watching upward with patient stillness"
         },
         {
           "name": "Ferris",
-          "state": "Standing near the side table, pack now lightened, jaw tight, absorbing what he's been told — getting ready to understand"
+          "state": "In a corner of the hall, pack down, quietly absorbing the strangeness of the place"
         }
       ],
       "objects": [
@@ -354,9 +261,9 @@
         "Arch to the yard and the switchback below"
       ],
       "threads": [
-        "The third-terrace Cogitant holds the coordinate — chalk columns nearly at the right margin; something will happen when she runs out of surface",
-        "Ossian's eyes tracked to the meal bag — something registered there",
-        "Ferris is new to this arrangement and will need guidance to do it well long-term"
+        "Ossian has named two physical needs: warmth from the cold floor, and inconsistent eating — both answerable",
+        "The third-terrace Cogitant holds the coordinate — chalk columns nearly at the right margin",
+        "Ferris is settling in; his first solo run will test whether the arrangement holds"
       ]
     }
   },
@@ -509,9 +416,8 @@
         "locationId": "the_cogitarium",
         "day": 1
       },
-      "relationship": 0,
+      "relationship": 1,
       "history": [
-        "[d1] Climbed the stairs behind Saehara in silence — voice went careful on the third-terrace landing; admitted they have not heard the dragging sound before",
         "[d1] Held silent on the landing while Saehara read the room — listening, not leading.",
         "[d1] Followed Saehara into the doorway — standing behind the shoulder, silent. Has not named the Cogitant.",
         "[d1] Stepped inside the threshold and named the third-terrace work: 'She was working on the source.' Two words, quietly spoken, watching the walls.",
@@ -520,17 +426,18 @@
         "[d1] Registered Saehara's return and the absence of the fallen Cogitant. Did not speak. Still cross-legged in the entrance hall.",
         "[d1] Confirmed the fallen Cogitant's name — Deren — on first ask. Registered her survival as confirmation of probability, not news. Said 'Speak.' and is now waiting.",
         "[d1] Refused Saehara's appeal to obligation flatly — does not trade knowledge for gratitude. Confirmed the fourth condition (the coordinate) is still only in the third-terrace Cogitant's possession; he does not have it. Restated the four conditions without addition.",
-        "[d1] Eyes tracked once to the meal bag when Saehara set it down — the body remembering something. Did not speak."
+        "[d1] Eyes tracked once to the meal bag when Saehara set it down — the body remembering something. Did not speak.",
+        "[d1] Named his own physical needs when asked directly — warmth from the cold floor, gaps in his eating he cannot account for. The first time he has answered a question about himself rather than a system."
       ],
       "knownFacts": [
-        "Ossian has not heard the third-terrace dragging sound before — it is outside their model",
-        "Named the third-terrace Cogitant's four-day project as work on 'the source' — spoken without elaboration",
-        "Deren is the name of the Cogitant Saehara carried to Waymarker",
         "Ossian confirms her survival as probability, not surprise — he had already calculated it",
         "Ossian does not operate on debt or reciprocity — knowledge is not payment",
         "The fourth condition's coordinate is only in the third-terrace Cogitant's head — Ossian does not have it",
         "Ossian has registered Deren's rescue and the runner arrangement as facts, not obligations",
-        "Food is now on the side table — placed without requiring a decision to seek it"
+        "Food is now on the side table — placed without requiring a decision to seek it",
+        "The floor's cold conducts upward and he has been disregarding it",
+        "He has not eaten consistently — gaps in his own accounting he cannot close",
+        "He can be reached through a direct question with no leverage attached"
       ],
       "skillsObserved": [
         "systematic elimination of alternatives",
@@ -541,7 +448,7 @@
         "resource-state assessment under uncertainty"
       ],
       "status": "active",
-      "statusNote": "Cross-legged in the entrance hall — supply line now confirmed operational; registered the meal bag's placement",
+      "statusNote": "Seated in the entrance hall beside Saehara — still thinking, but present in a way he wasn't before the question",
       "lastSeen": {
         "locationId": "the_cogitarium",
         "day": 1
@@ -1050,7 +957,8 @@
           "[d1] Ossian modeled every probable respondent category and assigned a combined 0.003 probability to someone like Saehara arriving: no settlement, no mandate, a Glade-changed companion, challenged the evacu",
           "[d1] Ossian set a private six-hour intervention threshold for the fallen Cogitant and has been tracking her collapse to the minute — he had a plan, deferred. What the plan was, he has not said.",
           "[d1] Declared his pre-calculated intervention plan voided by Saehara's arrival — Saehara was the trigger for deferral and is now the reason the original path is closed. Ossian considers this 'consistent.' ",
-          "[d1] Does not trade knowledge for obligation or gratitude — what Saehara has done for the Cogitarium is registered as fact, not debt. He is not the Builder; he does not barter."
+          "[d1] Does not trade knowledge for obligation or gratitude — what Saehara has done for the Cogitarium is registered as fact, not debt. He is not the Builder; he does not barter.",
+          "[d1] When asked directly and without leverage what his body needs, he answered: warmth (the floor conducts cold he has been ignoring) and consistent food (gaps in the last several days he cannot close). He states his own deprivation as data — which makes it no less real."
         ],
         "links": [
           "cogitarium",
@@ -1230,13 +1138,13 @@
     }
   },
   "tendencies": {
-    "strategic": 18.84724803289386,
-    "social": 8.134082139330049,
-    "cerebral": 8.594567458988104,
-    "generous": 10.49833775712437,
-    "cautious": 11.475514968521653,
-    "risky": 0.6711269990475469,
-    "patient": 0.8810956933593749
+    "strategic": 18.376066832071512,
+    "social": 9.930730085846797,
+    "cerebral": 8.379703272513401,
+    "generous": 10.23587931319626,
+    "cautious": 11.188627094308611,
+    "risky": 0.6543488240713582,
+    "patient": 0.8590683010253904
   },
   "aptitudes": [
     "strategist",
@@ -1244,7 +1152,7 @@
     "tactician",
     "stalwart"
   ],
-  "actionCount": 49,
+  "actionCount": 50,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -1273,8 +1181,8 @@
       "at": "2026-07-16T02:18:04.820Z"
     }
   ],
-  "updatedAt": 1784421931133,
-  "rev": 103,
+  "updatedAt": 1784422073007,
+  "rev": 104,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1412,7 +1320,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "somatic_reaches": 43,
+    "somatic_reaches": 44,
     "valley": 7
   },
   "opLossPending": false,
@@ -1467,7 +1375,7 @@
     "uses": {
       "total_focus": 4,
       "read_the_fight": 5,
-      "order_sense": 1
+      "order_sense": 2
     },
     "coActivations": {
       "read_the_fight+total_focus": 1
@@ -1572,10 +1480,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-19T00:05:04.919Z",
-      "lastAt": "2026-07-19T00:45:31.132Z",
+      "lastAt": "2026-07-19T00:47:53.006Z",
       "startDay": 19,
       "endDay": 19,
-      "beats": 10
+      "beats": 11
     }
   ],
   "knownPlaces": [

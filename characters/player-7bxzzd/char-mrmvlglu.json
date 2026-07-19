@@ -44,7 +44,7 @@
   "alignment": {
     "spectrumId": -0.18131404687500002,
     "body_mind": 0.023032687499999996,
-    "concrete_abstract": 0.09902719882812497
+    "concrete_abstract": 0.09907583888671873
   },
   "attunement": 2,
   "maxHealth": 35,
@@ -166,21 +166,72 @@
         "player": "Speak plainly: tell her you have the coordinate, that you know what she was working on, and confirm it from her directly before it slips",
         "summary": "Saehara confirmed the coordinate directly from the third-terrace Cogitant — she surfaced enough to verify all four numbers before the thread could slip.",
         "narration": "You stay on the floor beside her — no standing, no sudden movements, nothing that would cost her the thread she's just barely holding. Her eyes are still working to settle, pupils adjusting to the lamp as though the light itself is a new fact to calculate. The bedroll is heavy across her shoulders. She hasn't moved to pull it tighter, but she hasn't shrugged it off either.\n\n\"I have the coordinate,\" you say. Quiet, even — the same register you'd use to confirm a route with a fellow traveler. \"Four numbers. Final column, bottom right. I read them before you surfaced.\" You don't recite them yet. You give her a breath first, watching her face for the moment the words land rather than merely arrive. \"I need you to tell me I have it right.\"\n\nSomething sharpens in her. Not alarm — more like the feeling of a notation clicking into place. Her gaze drops to the board, to that final column, and then comes back to you. Her lips part. She gives you the coordinate — four numbers, same four, same order — in a voice that has been silent for four days and sounds like it: dry, careful, deliberate, as though each digit costs something. When the last one is out she stops, and just breathes.\n\nKon has not moved. The fox-thing sits at the edge of the lamplight with its heat pressed against the cold stone floor, eyes still on the Cogitant — attentive the way it gets when something thin in the world has just, quietly, sealed."
+      },
+      {
+        "player": "Ask her name — she surfaced for the first time in four days and you still don't know it",
+        "summary": "The third-terrace Cogitant gave her name: Sura.",
+        "narration": "You let the silence settle one beat after the coordinate — let her catch her breath, let the numbers sit between you like something solid. Then, quiet as before: \"I don't know your name.\"\n\nShe blinks. The question seems to reach her from a greater distance than the others — the coordinate was work, something she could locate in the notation, hand across like a finished thing. Her name is different. It belongs to the part of her that hasn't been present for four days.\n\nHer lips move once without sound. Then: \"Sura.\" Dry, a little rough from disuse, but certain — the way a person says a thing they haven't forgotten, only misplaced. Her eyes find yours properly for the first time. The lamp catches them: dark, enormously tired, still lit somewhere behind the exhaustion with something that isn't quite done calculating.\n\nKon shifts against your knee, warm and still. The chalk board looms behind her, its columns complete, the coordinate sitting in the bottom-right corner like a period at the end of a very long sentence. Sura — you have a name now — does not look at the board. She looks at you, and the bedroll slips a fraction from one shoulder, and she does not fix it."
       }
     ],
     "lastTurn": {
-      "narration": "You stay on the floor beside her — no standing, no sudden movements, nothing that would cost her the thread she's just barely holding. Her eyes are still working to settle, pupils adjusting to the lamp as though the light itself is a new fact to calculate. The bedroll is heavy across her shoulders. She hasn't moved to pull it tighter, but she hasn't shrugged it off either.\n\n\"I have the coordinate,\" you say. Quiet, even — the same register you'd use to confirm a route with a fellow traveler. \"Four numbers. Final column, bottom right. I read them before you surfaced.\" You don't recite them yet. You give her a breath first, watching her face for the moment the words land rather than merely arrive. \"I need you to tell me I have it right.\"\n\nSomething sharpens in her. Not alarm — more like the feeling of a notation clicking into place. Her gaze drops to the board, to that final column, and then comes back to you. Her lips part. She gives you the coordinate — four numbers, same four, same order — in a voice that has been silent for four days and sounds like it: dry, careful, deliberate, as though each digit costs something. When the last one is out she stops, and just breathes.\n\nKon has not moved. The fox-thing sits at the edge of the lamplight with its heat pressed against the cold stone floor, eyes still on the Cogitant — attentive the way it gets when something thin in the world has just, quietly, sealed.",
-      "sceneSummary": "Saehara confirmed the coordinate directly from the third-terrace Cogitant — she surfaced enough to verify all four numbers before the thread could slip.",
+      "narration": "You let the silence settle one beat after the coordinate — let her catch her breath, let the numbers sit between you like something solid. Then, quiet as before: \"I don't know your name.\"\n\nShe blinks. The question seems to reach her from a greater distance than the others — the coordinate was work, something she could locate in the notation, hand across like a finished thing. Her name is different. It belongs to the part of her that hasn't been present for four days.\n\nHer lips move once without sound. Then: \"Sura.\" Dry, a little rough from disuse, but certain — the way a person says a thing they haven't forgotten, only misplaced. Her eyes find yours properly for the first time. The lamp catches them: dark, enormously tired, still lit somewhere behind the exhaustion with something that isn't quite done calculating.\n\nKon shifts against your knee, warm and still. The chalk board looms behind her, its columns complete, the coordinate sitting in the bottom-right corner like a period at the end of a very long sentence. Sura — you have a name now — does not look at the board. She looks at you, and the bedroll slips a fraction from one shoulder, and she does not fix it.",
+      "sceneSummary": "The third-terrace Cogitant gave her name: Sura.",
       "choices": [
         {
-          "label": "Write the coordinate into your book right now — before another word is spoken",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {
-            "concrete_abstract": 0.2
-          },
+          "label": "Write the coordinate down — now, in the book, while you're still sitting beside her",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
+            "craft"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Settle the bedroll back across both her shoulders and ask how she feels — body first, before anything else",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "comfort",
+            "help"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Tell her what you did while she was working — the supply line, Deren at Waymarker, Ossian eating — let her hear the shape of the days she missed",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "comfort",
+            "help"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Take her downstairs to Ossian now — he needs to know she's surfaced, and she needs to be somewhere warmer than this floor",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "help",
             "careful"
           ],
           "abilityId": null,
@@ -188,156 +239,107 @@
           "trivial": true,
           "encounterId": null,
           "emergenceId": null
-        },
-        {
-          "label": "Ask her name — she surfaced for the first time in four days and you still don't know it",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "concrete_abstract": 0.1
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "comfort"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Go back down and tell Ossian — he has been waiting one floor below and cannot climb himself",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "concrete_abstract": 0.1
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "travel"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Stay with her a few minutes — she's been alone on this floor for four days; the coordinate can wait that long",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "concrete_abstract": 0
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "comfort",
-            "sustain"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
       "scene": {
-        "setting": "Third terrace of the Cogitarium — low-ceilinged, chalk-dense, cold and still. Night. A single lamp burns low on the window ledge. The chalk board before the Cogitant is complete, the coordinate confirmed in the final column at the bottom right.",
+        "setting": "Third terrace of the Cogitarium — low-ceilinged, chalk-dense, cold and still. Night. A single lamp burns low on the window ledge. The chalk board is complete, coordinate confirmed in the final column bottom right.",
         "npcsPresent": [
           {
-            "name": "Third-Terrace Cogitant",
-            "state": "Seated on the floor, bedroll across her shoulders, eyes open and present — has just spoken the coordinate aloud, voice dry from four days of silence. Breathing slowly."
+            "name": "Sura",
+            "state": "Seated on the floor, bedroll half-slipped from one shoulder, eyes open and finding focus — has just spoken her name for the first time in four days."
           },
           {
             "name": "Kon",
-            "state": "Still at the edge of the lamplight, pressed warm against the cold stone, watching the Cogitant with total attention."
+            "state": "Pressed warm against Saehara's knee, still and attentive, watching Sura."
           }
         ],
         "objects": [
-          "Chalk board — notation complete, coordinate confirmed in final column bottom right",
-          "Bedroll — across the Cogitant's shoulders",
+          "Chalk board — notation complete, coordinate in the final column bottom right",
+          "Bedroll — half-slipped from Sura's right shoulder",
           "Cup — tipped sideways, empty",
           "Traveler's Pack — on Saehara's back, waterskin lighter",
           "Low lamp — burning on the window ledge"
         ],
         "threads": [
-          "The coordinate is now confirmed and held in memory — not yet written down",
-          "The Cogitant has surfaced and verified the number — her condition is fragile and unknown beyond this moment",
+          "The coordinate is confirmed and held in memory — not yet written down",
+          "Sura is fragile, cold, and on the floor — she needs warmth, water, and to move",
           "Ossian is one flight below and does not yet know she has surfaced or that the coordinate is confirmed",
-          "Her name is still unknown to Saehara"
+          "The name That Travels quest is unaddressed"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "third-terrace-cogitant",
-          "name": "Third-Terrace Cogitant",
-          "note": "Surfaced enough to verify the coordinate directly — spoke all four numbers in order, dry and deliberate. The confirmation is complete.",
+          "name": "Sura",
+          "revealName": "Sura",
+          "role": "Cogitant — third-terrace calculator",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "Spoke her name when Saehara asked — dry, certain, misplaced not forgotten. Made proper eye contact for the first time.",
           "learned": [
-            "Confirmed the coordinate to Saehara verbally — four numbers, same order as the board, deliberate and careful"
+            "Her name is Sura — given plainly when asked, after the coordinate was confirmed"
           ],
           "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "Seated on the third terrace, surfaced from four-day calculation trance, coordinate confirmed — fragile but present and speaking"
+          "statusNote": "Seated on the third terrace floor, surfaced from trance, bedroll slipping, exhausted but present — needs warmth, water, and movement"
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "The third-terrace Cogitant's name is Sura — confirmed by her directly after surfacing from the four-day calculation trance.",
+          "subjectId": "third-terrace-cogitant"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "the-four-conditions-source-remediation",
-          "label": "The Four Conditions (Source Remediation)",
-          "kind": "mystery",
-          "fact": "The coordinate — condition four — has been confirmed directly from the third-terrace Cogitant. She surfaced enough to verify all four numbers aloud. The coordinate is now doubly confirmed: from the board, and from her own voice. It is not yet written.",
+          "topic": "third-terrace-cogitant",
+          "label": "Sura",
+          "kind": "person",
+          "entityId": "third-terrace-cogitant",
+          "fact": "Her name is Sura. She gave it plainly when asked — dry, a little rough from disuse, but certain. The first true personal fact she has offered.",
           "links": [
             "cogitarium",
-            "third-terrace-cogitant",
-            "ossian",
+            "the-four-conditions-source-remediation",
             "third-terrace-collapse",
-            "the-cogitariums-calculated-crisis"
+            "cogitants"
           ]
         }
       ],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "third-terrace-collapse",
-          "note": "The coordinate confirmed — spoken directly by the Cogitant herself to Saehara. She is present, fragile, and speaking. The quest's core retrieval is complete; what remains is recording the coordinate, reporting to Ossian, and ensuring her physical recovery."
-        }
-      ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "xp": 5
-      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange — quiet words and a breath between them"
+        "why": "a brief exchange — asking a name, hearing it spoken"
       }
     },
     "sceneState": {
-      "setting": "Third terrace of the Cogitarium — low-ceilinged, chalk-dense, cold and still. Night. A single lamp burns low on the window ledge. The chalk board before the Cogitant is complete, the coordinate confirmed in the final column at the bottom right.",
+      "setting": "Third terrace of the Cogitarium — low-ceilinged, chalk-dense, cold and still. Night. A single lamp burns low on the window ledge. The chalk board is complete, coordinate confirmed in the final column bottom right.",
       "npcsPresent": [
         {
-          "name": "Third-Terrace Cogitant",
-          "state": "Seated on the floor, bedroll across her shoulders, eyes open and present — has just spoken the coordinate aloud, voice d"
+          "name": "Sura",
+          "state": "Seated on the floor, bedroll half-slipped from one shoulder, eyes open and finding focus — has just spoken her name for "
         },
         {
           "name": "Kon",
-          "state": "Still at the edge of the lamplight, pressed warm against the cold stone, watching the Cogitant with total attention."
+          "state": "Pressed warm against Saehara's knee, still and attentive, watching Sura."
         }
       ],
       "objects": [
-        "Chalk board — notation complete, coordinate confirmed in final column bottom rig",
-        "Bedroll — across the Cogitant's shoulders",
+        "Chalk board — notation complete, coordinate in the final column bottom right",
+        "Bedroll — half-slipped from Sura's right shoulder",
         "Cup — tipped sideways, empty",
         "Traveler's Pack — on Saehara's back, waterskin lighter",
         "Low lamp — burning on the window ledge"
       ],
       "threads": [
-        "The coordinate is now confirmed and held in memory — not yet written down",
-        "The Cogitant has surfaced and verified the number — her condition is fragile and unknown beyond this moment",
+        "The coordinate is confirmed and held in memory — not yet written down",
+        "Sura is fragile, cold, and on the floor — she needs warmth, water, and to move",
         "Ossian is one flight below and does not yet know she has surfaced or that the coordinate is confirmed",
-        "Her name is still unknown to Saehara"
+        "The name That Travels quest is unaddressed"
       ]
     }
   },
@@ -652,16 +654,15 @@
     },
     "third-terrace-cogitant": {
       "id": "third-terrace-cogitant",
-      "name": "Third-Terrace Cogitant",
-      "role": "Cogitant — the one missing from the third terrace for four days",
+      "name": "Sura",
+      "role": "Cogitant — third-terrace calculator",
       "description": "Seated on the bare floor at the center of a chalk-covered room, robe grey from hem to shoulder, arm moving in ceaseless four-second repetition across a low board — alive, working, unreachable.",
       "firstMet": {
         "locationId": "old_switchback",
         "day": 1
       },
-      "relationship": 2,
+      "relationship": 3,
       "history": [
-        "[d1] Saehara entered the room. The Cogitant did not turn or pause.",
         "[d1] Order-Sense partial read: her notation is a single continuous calculation built outward from a fixed coordinate — a precise location somewhere in the valley, four days of sleepless work to narrow it. Ossian calls it 'the source.'",
         "[d1] Saehara crouched to her level and spoke one quiet word — the arm stopped for three seconds. Her face loosened by one degree. She did not turn. The arm resumed.",
         "[d1] Still at the board on Saehara's return — arm in unbroken four-second arc, new notation columns added since morning, margin not yet reached. The coordinate at the model's center is unchanged.",
@@ -669,27 +670,33 @@
         "[d1] Saehara returned, set a filled cup beside her, laid the bedroll from the Traveler's Pack across her shoulders. She blinked once — slowly, like surfacing. Arm has not broken its arc. Cold measured: chilled but not critical.",
         "[d1] Saehara returned to find her arm stilled and the board complete — she is on the edge of surfacing after four days of continuous calculation",
         "[d1] Surfaced — opened her eyes, found Saehara, and spoke her first words in four days: 'You're sitting on the floor.' Focus arriving in stages. Bedroll still on her shoulders.",
-        "[d1] Surfaced enough to verify the coordinate directly — spoke all four numbers in order, dry and deliberate. The confirmation is complete."
+        "[d1] Surfaced enough to verify the coordinate directly — spoke all four numbers in order, dry and deliberate. The confirmation is complete.",
+        "[d1] Their name is revealed: Sura (was known as \"Third-Terrace Cogitant\")",
+        "[d1] Spoke her name when Saehara asked — dry, certain, misplaced not forgotten. Made proper eye contact for the first time."
       ],
       "knownFacts": [
-        "She is reachable — a direct quiet presence stopped the repetition for three seconds; she is not fully lost",
         "Cold to the touch — shaded-stone cold, not dangerous yet; bedroll now across her shoulders",
         "Blinked once when the bedroll settled — some body-awareness remains",
         "The notation has reached the right margin and stopped — the calculation may be complete",
         "Her breathing has shifted from the sustained working trance to something shallower and more rapid — she is near the surface",
         "The coordinate is in the final column at the bottom right of the board",
         "Saehara was present when she surfaced — the first face she saw",
-        "Confirmed the coordinate to Saehara verbally — four numbers, same order as the board, deliberate and careful"
+        "Confirmed the coordinate to Saehara verbally — four numbers, same order as the board, deliberate and careful",
+        "Her name is Sura — given plainly when asked, after the coordinate was confirmed"
       ],
       "skillsObserved": [],
       "status": "active",
-      "statusNote": "Seated on the third terrace, surfaced from four-day calculation trance, coordinate confirmed — fragile but present and speaking",
+      "statusNote": "Seated on the third terrace floor, surfaced from trance, bedroll slipping, exhausted but present — needs warmth, water, and movement",
       "lastSeen": {
         "locationId": "the_cogitarium",
         "day": 1
       },
       "gender": "woman",
-      "pronouns": "she/her"
+      "pronouns": "she/her",
+      "aliases": [
+        "Third-Terrace Cogitant"
+      ],
+      "nameRevealed": true
     },
     "ferris": {
       "id": "ferris",
@@ -1188,7 +1195,8 @@
           "[d1] Order-Sense partial read: the notation is a single continuous structured calculation, four days old, built outward from a fixed coordinate — a precise location somewhere in the valley. Ossian stepped in and named it: 'She was working on the source.' The exact location slipped past the partial read.",
           "[d1] A direct quiet word — crouching to her level, one syllable — stopped her arm for three seconds. Her face loosened. She did not turn. She resumed. She is reachable, barely, and she is not done with the calculation.",
           "[d1] Cold to the touch — shaded-stone cold, not critical. Blinked once when the bedroll settled across her shoulders. Body-awareness faint but present. Cup refilled and within reach. The chalk columns are nearly at the right margin.",
-          "[d1] Surfaced from the four-day calculation trance the moment the notation was complete. First words: 'You're sitting on the floor.' Her focus arrived in stages. She is present, fragile, and has not yet spoken the coordinate aloud."
+          "[d1] Surfaced from the four-day calculation trance the moment the notation was complete. First words: 'You're sitting on the floor.' Her focus arrived in stages. She is present, fragile, and has not yet spoken the coordinate aloud.",
+          "[d1] Her name is Sura. She gave it plainly when asked — dry, a little rough from disuse, but certain. The first true personal fact she has offered."
         ],
         "links": [
           "cogitarium",
@@ -1198,7 +1206,8 @@
           "the-four-conditions-source-remediation"
         ],
         "aliases": [
-          "The Third Terrace"
+          "The Third Terrace",
+          "Sura"
         ],
         "createdDay": 1,
         "entityId": "third-terrace-cogitant",
@@ -1259,13 +1268,13 @@
     }
   },
   "tendencies": {
-    "strategic": 16.295326990757783,
-    "social": 12.036032639271165,
-    "cerebral": 9.824316282704618,
-    "generous": 9.432554765836633,
-    "cautious": 11.227595690355868,
-    "risky": 0.5480770742586203,
-    "patient": 1.6006440805403597
+    "strategic": 15.887943815988837,
+    "social": 12.735131823289386,
+    "cerebral": 9.578708375637003,
+    "generous": 9.196740896690716,
+    "cautious": 10.94690579809697,
+    "risky": 0.5343751474021547,
+    "patient": 1.5606279785268506
   },
   "aptitudes": [
     "strategist",
@@ -1274,7 +1283,7 @@
     "tactician",
     "stalwart"
   ],
-  "actionCount": 57,
+  "actionCount": 58,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -1303,8 +1312,8 @@
       "at": "2026-07-16T02:18:04.820Z"
     }
   ],
-  "updatedAt": 1784423860673,
-  "rev": 112,
+  "updatedAt": 1784423932694,
+  "rev": 113,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1442,7 +1451,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "somatic_reaches": 51,
+    "somatic_reaches": 52,
     "valley": 7
   },
   "opLossPending": false,
@@ -1494,6 +1503,12 @@
       "text": "Ossian has eaten — reached for bread of his own motion after accepting that tending the body is calculably correct. The body is not yet abandoned.",
       "day": 1,
       "subjectId": "ossian"
+    },
+    {
+      "id": "third-terrace-cogitant",
+      "text": "The third-terrace Cogitant's name is Sura — confirmed by her directly after surfacing from the four-day calculation trance.",
+      "day": 1,
+      "subjectId": "third-terrace-cogitant"
     }
   ],
   "customAbilities": {},
@@ -1610,10 +1625,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-19T00:05:04.919Z",
-      "lastAt": "2026-07-19T01:17:40.672Z",
+      "lastAt": "2026-07-19T01:18:52.694Z",
       "startDay": 19,
       "endDay": 19,
-      "beats": 18
+      "beats": 19
     }
   ],
   "knownPlaces": [

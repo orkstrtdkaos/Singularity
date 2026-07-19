@@ -527,3 +527,45 @@ seeing an ambiguous half-landed state. I can extend the L4 gate to rules files e
 
 STILL OPEN AND YOURS: stakes-dial default, SNG-179's live turn, re_creature_chase's danger number,
 and the power_sources wire-or-flag decision. -->
+
+---
+
+<!-- status: SNG-172 audit + L4 rules gate (v1.8.154) and SNG-179 fix (v1.8.155) COMPLETE_PENDING_REVIEW
+(CCode 2026-07-19). Suite green, verified by exit code + regression-proven gates. Results:
+20260719_SNG-179_FIX.md, and the audit/gate in the same commits.
+
+SNG-172 — AUDIT, not wired, per Erik. content_ci now checks classification agrees with band centre
+(natural low, lattice high). Verified the relationship before encoding: naturals 0.18-0.36, lattice
+0.58-0.95, cleanly separable. threnodist + verist (natural, banded 0.50) are your two
+flagged-not-changed disagreements — known-listed, reported, not failed. The umbral hole is closed
+(0.58/0.28) and the check proves it fires by stripping a band. AND this reads power_sources.json, so
+it is no longer the L4 orphan.
+
+SNG-183 L4 FOR RULES FILES — closed the gap you named ("registered-but-unloaded should not pass").
+A kind:"rules" file must have a consumer (loader or CI); design/reference kinds are exempt.
+power_sources passes via the audit; quest_structure (kind:rules, authoring guidance) is ratcheted at
+1, named not reclassified. A NEW unloaded operational rules file fails — proven with a probe.
+
+SNG-179 — I CHECKED ALL THREE MAPPINGS AND ONLY ONE WAS SAFE TO BUILD, which is what "check each
+pairing" is for. markTeacher: BUILT — derived from bondType:"mentor" + the mentor's own domain,
+never invented, additive to explicit markTeacher. discovery: NOT derived — it is precondition-gated
+(discoveryEligible, a crit-success on novel; Silas has 0), so deriving from codexUpdates would fire a
+false reward. markDefiningMoment: NOT derived — Silas HAS ripe candidates so it IS substitution, but
+a deed carries no abilityId and there is nothing clean to derive from. Both 19C and 19B rebalanced —
+brake to the middle, qualifier last, NO emphasis added. 19B's engine confirm-and-refuse reframed from
+a warning into the safety net that PERMITS firing.
+
+⚠️ THE VERIFICATION IS ERIK'S and I did not pretend a unit test suffices — you said it wouldn't.
+Re-run "Ask Veth to teach you," confirm character.teachers non-empty, confirm the capstone unlock
+opens. TWO UPSTREAM DEPENDENCIES you will hit, both the SAME open gap: the captured Veth turn set
+NEITHER bondType NOR a domain (she is sworn, registry-only, no backing record). The 19C rebalance
+makes the model likelier to set the bond; the domain needs the SNG-177 backfill for REGISTRY-ONLY
+NPCs — the same hub-attribution gap behind the Ent crediting nothing. Mechanism verified; Veth's
+end-to-end waits on that gap. logOpOutcome now records "derived-from-bond" so the op-ledger shows it.
+
+THE HUB-ATTRIBUTION GAP (registry-only NPCs with no domain) is now the single upstream dependency
+behind BOTH the Ent-standing and the Veth-teacher outcomes. Recommend it as its own ticket — it is
+the last thing between three shipped mechanisms and the outcomes Erik reported.
+
+STILL OPEN AND YOURS: stakes-dial default, re_creature_chase's danger number, the reproduced-symptom
+verification of SNG-179, and the registry-only-NPC affiliation gap. -->

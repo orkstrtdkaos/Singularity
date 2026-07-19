@@ -4036,6 +4036,44 @@ await (async () => {
     npcPortraitTier(pell) === "partner"); // the app skips when n._portraitTier === this tier
 }
 
+// --- SNG-133 backfill: a character created before personal arcs existed still gets one ---
+{
+  const { CHARACTER_STEPS } = await import('../engine/reconcile.js');
+  const step = CHARACTER_STEPS.find(s => s.id === "personal-arc-backfill");
+  const mk = (over = {}) => ({ name: "Silas Weir", level: 16, domains: { primary: "ashwarden" },
+    bio: { motivation: "to find who burned the mill", story: "Left home after the fire took the family's work." }, ...over });
+
+  check("133: a character with NO arc is given one (the slot was never fillable after creation)", (() => {
+    const c = mk();
+    const out = step.apply(c, {});
+    return !!c.personalArc?.id && isRealQuest(c.personalArc) && (out.notes || []).length === 1;
+  })());
+  check("133: the backfilled arc is STARTABLE — the SNG-146f path lands on something real now", (() => {
+    const c = mk(); step.apply(c, {});
+    return startStructuredQuest({ ...c, quests: [] }, c.personalArc, { worldDay: 1, nowISO: "2026-07-19T00:00:00Z" }).ok === true;
+  })());
+  check("133: it flags for the same model enrichment a new character gets", (() => {
+    const c = mk(); step.apply(c, {}); return c._personalArcNeedsEnrich === true;
+  })());
+  check("133: an existing arc is never overwritten (idempotent — a lived arc is not clobbered)", (() => {
+    const c = mk({ personalArc: { id: "mine", name: "My Own Thread", stages: [] } });
+    const out = step.apply(c, {});
+    return c.personalArc.id === "mine" && JSON.stringify(out) === "{}";
+  })());
+  check("133: a character with NO bio to draw on gets nothing — an arc is never fabricated from air", (() => {
+    const c = mk({ bio: {} });
+    const out = step.apply(c, {});
+    return !c.personalArc && JSON.stringify(out) === "{}";
+  })());
+  check("133: re-running changes nothing", (() => {
+    const c = mk(); step.apply(c, {}); const before = JSON.stringify(c.personalArc);
+    step.apply(c, {}); return JSON.stringify(c.personalArc) === before;
+  })());
+  const appSrc133 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+  check("133: the backfilled arc is actually enriched on load, not left thinner than a new one",
+    /_personalArcNeedsEnrich/.test(appSrc133) && /enrichPersonalArc\(c\)/.test(appSrc133));
+}
+
 // --- SNG-162: quests advance from PLAY, not from clicking ---
 {
   const { advanceStructuredQuest, applyQuestUpdates, structuredQuestsForGM, dedupeQuests } = await import('../engine/quests.js');

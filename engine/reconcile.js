@@ -17,6 +17,7 @@ import { mergeCodexTopics } from "./codex.js";
 import { dedupeQuests } from "./quests.js";
 import { dedupeInventory } from "./inventory.js";
 import { inferDomains } from "./traditions.js";
+import { fallbackPersonalArc } from "./personalArc.js";
 
 // ---------- character migration steps (extensible registry) ----------
 // Each step: { version, id, playerFacing, apply(entity, ctx) → { notes?, offers?, warnings? } }.
@@ -106,6 +107,29 @@ export const CHARACTER_STEPS = [
       c.domains = inf;
       const nm = t => idx.byId?.[t]?.name || t;
       return { notes: [`Your place on the great circle is set (from what you've mastered): ${nm(inf.primary)}${inf.secondary ? " · " + nm(inf.secondary) : ""}${inf.tertiary ? " · " + nm(inf.tertiary) : ""}. Nothing you already hold is lost.`] };
+    }
+  },
+  {
+    version: 7, id: "personal-arc-backfill", playerFacing: true,
+    // SNG-133 seeds a personal arc at CHARACTER CREATION and nowhere else — `finish()` is the only
+    // caller of fallbackPersonalArc. A character created before that shipped therefore has no arc
+    // and never will: nothing in the codebase can give one to an existing save. Silas Weir reached
+    // LEVEL 16 with `personalArc: undefined`, and the SNG-146f fix earlier this session made the
+    // "Take it on" button work for a quest that was never generated in the first place — the start
+    // path was repaired above an empty slot.
+    //
+    // This is exactly what reconcile is for ("a save from before a feature existed gains what it is
+    // owed on next login"). Seeds the same light fallback creation uses, from the bio the character
+    // already has. app.js enriches it via the model afterwards, the same as at creation, so an old
+    // character ends up with the arc a new one would have been born with.
+    apply: (c) => {
+      if (c.personalArc) return {};                       // already has one — idempotent
+      if (!c.bio?.motivation && !c.bio?.story) return {};  // nothing to draw an arc FROM; never fabricate one
+      const arc = fallbackPersonalArc(c);
+      if (!arc || !arc.id) return {};
+      c.personalArc = arc;
+      c._personalArcNeedsEnrich = true;                   // app.js picks this up and enriches once
+      return { notes: [`Your own thread has surfaced — *${arc.name}*. It's waiting in your quest log; take it up when you're ready.`] };
     }
   },
   {

@@ -1102,7 +1102,184 @@
     "Silas Weir arrived at the Stillwater's Trouble hollow on World-day 19 with Pell, Veth Ondra, and Cassiel Ord — planted Memory at the site's center using three braided crafts with Pell's ironsense as anchor, claimed and named the Raven's Home warden post as his own Ashwarden base, seated two Boundary-Stone wards at the post's crown and the hollow's mouth, led Veth down into the hollow so the eleven-year completion could be witnessed by all four principals, walked the post's interior and named every space — Pell's forge corner, Veth's teaching alcove, Cassiel's keeper's threshold, Huginn's rook, Silas's Maker's hollow — added a shadow-and-boundary ward skin to the walls, invited Veth to demonstrate her March-form threshold-hardening which settled into the base layer, and in the quiet after the work finished, Cassiel named himself keeper of the threshold. The post is claimed, named, anchored, and held."
   ],
   "currentLocationId": "gen-stillwater-s-trouble",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "gen-stillwater-s-trouble",
+    "turns": [
+      {
+        "player": null,
+        "summary": "The work at Stillwater's Trouble is complete — all four principals inside the named and warded post in early-spring afternoon light.",
+        "narration": "The work is done.\n\nSilas Weir stands in the center of the post's main room — under the ridgeline, in the Maker's hollow — and the afternoon light comes in low and gold through the west-facing gaps in the timber. The post smells of chalk and cold earth and, faintly now, of the pine-tar salve that sealed the binding paste on the lower runes. Huginn is at the apex rafter. He is not moving. He is simply there, the way he is always simply there when something has finished.\n\nPell is at the south corner, measuring the hearth draw with two fingers against the wall. She has not said anything in several minutes. That means she is satisfied. Veth sits in the back alcove with her teaching kit in her lap — open but still, the way a book looks when someone has been reading it a long time and has stopped needing to turn the pages. Cassiel is on his bench at the door. He is looking out over the hollow's mouth. He does not look like a man waiting for something. He looks like a man who has arrived.\n\nThe ward hums at the edges of Silas's perception — not loudly, not urgently. It hums the way a well-made gate hums when the latch is seated. Memory stands in the hollow's center through the open door, the spear's shadow long in the afternoon sun, its runes quiet and present. The site has a shape now. It breathes. Outside, early-spring birch, the limestone shelf at the far rim, the sound of the valley below carrying no particular urgency. This is, for the first time in eleven years, a place someone tends."
+      }
+    ],
+    "lastTurn": {
+      "narration": "The work is done.\n\nSilas Weir stands in the center of the post's main room — under the ridgeline, in the Maker's hollow — and the afternoon light comes in low and gold through the west-facing gaps in the timber. The post smells of chalk and cold earth and, faintly now, of the pine-tar salve that sealed the binding paste on the lower runes. Huginn is at the apex rafter. He is not moving. He is simply there, the way he is always simply there when something has finished.\n\nPell is at the south corner, measuring the hearth draw with two fingers against the wall. She has not said anything in several minutes. That means she is satisfied. Veth sits in the back alcove with her teaching kit in her lap — open but still, the way a book looks when someone has been reading it a long time and has stopped needing to turn the pages. Cassiel is on his bench at the door. He is looking out over the hollow's mouth. He does not look like a man waiting for something. He looks like a man who has arrived.\n\nThe ward hums at the edges of Silas's perception — not loudly, not urgently. It hums the way a well-made gate hums when the latch is seated. Memory stands in the hollow's center through the open door, the spear's shadow long in the afternoon sun, its runes quiet and present. The site has a shape now. It breathes. Outside, early-spring birch, the limestone shelf at the far rim, the sound of the valley below carrying no particular urgency. This is, for the first time in eleven years, a place someone tends.",
+      "sceneSummary": "The work at Stillwater's Trouble is complete — all four principals inside the named and warded post in early-spring afternoon light.",
+      "choices": [
+        {
+          "label": "Sit in the Maker's hollow and be still for a while — let the post settle around you before the road calls again.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "sustain"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask Cassiel plainly what he needs — provisions, tools, a line of contact — so the post does not leave him stranded come the first hard week.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "help"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Walk the hollow's rim one more time with Order-Sense — confirm the ward's full shape from the outside before you go.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": true
+        },
+        {
+          "label": "Begin saying the goodbyes — it is afternoon and the road south does not wait forever. Home first, then the Zone.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "travel"
+          ],
+          "trivial": true
+        }
+      ],
+      "scene": {
+        "setting": "Inside the Stillwater's Trouble warden post — main room, Maker's hollow under the ridgeline. Early-spring afternoon, low gold light through the west timber gaps. Door open to the hollow; Memory stands outside at the center.",
+        "npcsPresent": [
+          {
+            "name": "Pell Marsh",
+            "state": "At the south corner hearth — measuring draw with two fingers, quiet and satisfied."
+          },
+          {
+            "name": "Veth Ondra",
+            "state": "In the back alcove — teaching kit open in her lap, still, watching."
+          },
+          {
+            "name": "Cassiel Ord",
+            "state": "On the keeper's bench at the door — looking out over the hollow's mouth, settled."
+          },
+          {
+            "name": "Huginn",
+            "state": "At the apex rafter — unmoving, attending."
+          }
+        ],
+        "objects": [
+          "Memory (spear) — standing at the hollow's center through the open door, shadow long, runes quiet",
+          "Veth's teaching kit — open on her lap in the alcove",
+          "Chalk marks — crown of the post's north face and at the hollow's mouth",
+          "Binding runes — seated in the post's lower face, visible as dark lines in the timber",
+          "Pell's tools — at the south corner with her"
+        ],
+        "threads": [
+          "The road south is open — home first, then the Disputed Zone",
+          "Cassiel will be alone at the post once the party departs — his practical needs unaddressed",
+          "The water crisis source remains upstream in the Disputed Zone"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "cassiel-ord",
+          "name": "Cassiel Ord",
+          "role": "Keeper of Stillwater's Trouble threshold",
+          "gender": "man",
+          "pronouns": "he/him",
+          "note": "Settled on his bench at the door, looking out over the hollow — arrived, not waiting.",
+          "statusNote": "Seated at the keeper's bench inside Stillwater's Trouble — keeper named and resident; the post is held.",
+          "status": "active"
+        },
+        {
+          "op": "update",
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "role": "Village blacksmith, traveling companion",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "Quiet at the south corner, measuring hearth draw — satisfied with the work.",
+          "statusNote": "At the south corner of the post — measuring hearth draw, satisfied, present.",
+          "status": "active"
+        },
+        {
+          "op": "update",
+          "npcId": "veth-stillwater-ondra",
+          "name": "Veth (Stillwater) Ondra",
+          "role": "Former Ashwarden warden, traveling companion",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "In the back alcove with her teaching kit open — still, watching the room settle.",
+          "statusNote": "Inside the post's alcove — teaching kit open, work complete, watching what comes next.",
+          "status": "active"
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "stillwaters-trouble-post",
+          "label": "Stillwater's Trouble — The Post Complete",
+          "kind": "place",
+          "entityId": "stillwaters-trouble",
+          "fact": "On World-day 19, afternoon: all four principals (Silas, Pell, Veth, Cassiel) are inside the completed and named warden post. Every space is named and held. The ward runs from crown to hollow's mouth. The post is no longer abandoned — it is tended.",
+          "links": [
+            "cassiel-ord",
+            "veth-stillwater-ondra",
+            "pell-ran-marsh",
+            "the-edge-district-ledger"
+          ]
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0,
+        "why": "Scene opening — no time has passed; positioning the scene at the beat's natural start."
+      }
+    },
+    "sceneState": {
+      "setting": "Inside the Stillwater's Trouble warden post — main room, Maker's hollow under the ridgeline. Early-spring afternoon, low gold light through the west timber gaps. Door open to the hollow; Memory stands outside at the center.",
+      "npcsPresent": [
+        {
+          "name": "Pell Marsh",
+          "state": "At the south corner hearth — measuring draw with two fingers, quiet and satisfied."
+        },
+        {
+          "name": "Veth Ondra",
+          "state": "In the back alcove — teaching kit open in her lap, still, watching."
+        },
+        {
+          "name": "Cassiel Ord",
+          "state": "On the keeper's bench at the door — looking out over the hollow's mouth, settled."
+        },
+        {
+          "name": "Huginn",
+          "state": "At the apex rafter — unmoving, attending."
+        }
+      ],
+      "objects": [
+        "Memory (spear) — standing at the hollow's center through the open door, shadow l",
+        "Veth's teaching kit — open on her lap in the alcove",
+        "Chalk marks — crown of the post's north face and at the hollow's mouth",
+        "Binding runes — seated in the post's lower face, visible as dark lines in the ti",
+        "Pell's tools — at the south corner with her"
+      ],
+      "threads": [
+        "The road south is open — home first, then the Disputed Zone",
+        "Cassiel will be alone at the post once the party departs — his practical needs unaddressed",
+        "The water crisis source remains upstream in the Disputed Zone"
+      ]
+    }
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 6,
@@ -1612,7 +1789,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d6] Came through the gate road-ready — pack squared, Memory at shoulder, reading the ground ahead without comment.",
         "[d6] Read the ground while Silas reported; straightened and asked plainly about the distance to his mother's house — shaping the choice, not steering it.",
         "[d6] Turned northwest without ceremony at Silas's decision — walking ahead, reading the ground.",
         "[d6] Watching the tree line with Memory loose at her side while Silas works the runes — alert, giving him the space to work.",
@@ -1621,7 +1797,8 @@
         "[d6] Heard the full briefing from the tree line. Filed it without comment. Watching the door.",
         "[d6] Held position two steps back and right of Silas at the hollow rim — Memory loose, watching Cassiel.",
         "[d6] Came down into the hollow without being called — read the open-hand gesture and answered it. Held Memory's shaft through the anchoring, her ironsense running quiet as the structural layer.",
-        "[d6] Received the naming of her forge corner — south wall, hearth, bench — with eyes already measuring the flue. Has not spoken; is doing the calculation."
+        "[d6] Received the naming of her forge corner — south wall, hearth, bench — with eyes already measuring the flue. Has not spoken; is doing the calculation.",
+        "[d6] Quiet at the south corner, measuring hearth draw — satisfied with the work."
       ],
       "knownFacts": [
         "Silas wants something private for the evenings — she is thinking about what that means",
@@ -1642,7 +1819,7 @@
         "feeding ironsense through the spear-shaft as a structural an"
       ],
       "status": "active",
-      "statusNote": "At the south corner of the post — measuring hearth draw and window light, arms crossed, planning.",
+      "statusNote": "At the south corner of the post — measuring hearth draw, satisfied, present.",
       "lastSeen": {
         "locationId": "gen-stillwater-s-trouble",
         "day": 6
@@ -2309,7 +2486,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d6] Cassiel has spoken to her — she has not yet replied; the exchange has begun on her ground.",
         "[d6] Descended to Cassiel without hesitation — feet remembered the grade. Standing still three paces from him, giving him the room to speak.",
         "[d6] Still present at the exchange's hinge — has not yet answered Cassiel.",
         "[d6] Witnessed Silas step forward toward the post and attempt the door-read; has not yet answered Cassiel; still holding the moment",
@@ -2318,7 +2494,8 @@
         "[d6] Followed Silas up to the post — watching the naming without interrupting it",
         "[d6] Held position on the slope between post and hollow — watching without interrupting Silas's read.",
         "[d6] Entered the hollow floor for the first time — stood still, looked at Memory and the chalk mark, said 'Eleven years' to the hollow itself and then 'It holds.' Nothing more. The weight she has carried since the post was dissolved is visible in what she did not say.",
-        "[d6] Responded to her Raven name — Stillwater — when used for the first time in the post. Added March-form threshold-hardening lines to Silas's shadow-and-boundary layer; her lines are thinner and more precise, and settled the rough edge of his work."
+        "[d6] Responded to her Raven name — Stillwater — when used for the first time in the post. Added March-form threshold-hardening lines to Silas's shadow-and-boundary layer; her lines are thinner and more precise, and settled the rough edge of his work.",
+        "[d6] In the back alcove with her teaching kit open — still, watching the room settle."
       ],
       "knownFacts": [
         "The tracks belong to someone who knew the route — purposeful stride, no wandering",
@@ -2365,7 +2542,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d6] Silas stepped toward the post and attempted a craft-read of the sealed door — Cassiel did not look at him during it; still watching Veth, still waiting",
         "[d6] Received Veth's answer — named it the whole of what he came for, and said the woman was right to do it. Something in him set down. He has not yet risen.",
         "[d6] Silas named the binding plainly — a lock, not a reopening — and put the question of tending the site to Cassiel directly. Cassiel has lifted his head and said 'You are asking me something.'",
         "[d6] Turned from below to watch Silas name the post — not yet spoken; his answer to the tending-question still forming",
@@ -2374,7 +2550,8 @@
         "[d6] Watched the second Boundary-Stone seated without speaking — gave a single deliberate nod when the ward extended. His answer is still forming but his body has not moved toward departure.",
         "[d6] Watched Veth come down the slope and enter — hat still in hands, his own answer still forming. The hollow is complete around him and he has not moved toward departure.",
         "[d6] Received the naming of the keeper's threshold — the bench just inside the door, the peg-rail, the sight-line over the hollow's mouth — with a single careful nod. Watching Veth's work now from the bench.",
-        "[d6] Named himself keeper of the threshold — quiet, plain, no preface. His eleven-year answer finished forming inside the completed ward."
+        "[d6] Named himself keeper of the threshold — quiet, plain, no preface. His eleven-year answer finished forming inside the completed ward.",
+        "[d6] Settled on his bench at the door, looking out over the hollow — arrived, not waiting."
       ],
       "knownFacts": [
         "The hollow quieted after she spoke — not permanently, but enough that the last season's watch was bearable",
@@ -2390,7 +2567,7 @@
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "Seated at the keeper's bench inside Stillwater's Trouble — has named himself keeper of the threshold; staying.",
+      "statusNote": "Seated at the keeper's bench inside Stillwater's Trouble — keeper named and resident; the post is held.",
       "lastSeen": {
         "locationId": "gen-stillwater-s-trouble",
         "day": 6
@@ -3043,7 +3220,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-19T17:06:25.764Z",
+    "lastSharedReadAt": "2026-07-19T20:34:05.977Z",
     "lastTickWorldDay": 19,
     "lastCanonWorldDay": 19
   },
@@ -4744,8 +4921,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784493164235,
-  "rev": 910,
+  "updatedAt": 1784493285175,
+  "rev": 913,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5680,7 +5857,7 @@
           "entityId": "cassiel-ord",
           "type": "npc",
           "birthWeight": 24,
-          "engagementScore": 35,
+          "engagementScore": 37,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -5772,13 +5949,19 @@
             {
               "kind": "fact",
               "day": 6
+            },
+            {
+              "kind": "interact",
+              "day": 6
             }
           ],
           "createdDay": 6,
           "repaired": false,
           "stubbed": false,
           "romanceEligible": true,
-          "lastAttentionDay": 6
+          "lastAttentionDay": 6,
+          "promotedWorldDay": 19,
+          "canonTier": "canonical"
         },
         "image": "https://image.pollinations.ai/prompt/A%20lean%20man%20somewhere%20in%20his%20middle%20forties%2C%20the%20kind%20of%20lean%20that%20is%20not%20hunger%20but%20habit%20%E2%80%94%20he%20has%20been%20moving%20through%20difficult%20ground%20for%20a%20long%20time%20and%20his%20body%20organized%20itself%20around%20that.%20March%2C%20character%20portrait%2C%20named%20Cassiel%20Ord%2C%20Former%20march-warden%20who%20walked%20away%20from%20the%20post%20and%20sat%20down%20in%20the%20bowl%20and%20has%20not%20decided%20what%20%2C%20Economy%20of%20words%20born%20from%20years%20of%20writing%20terse%20post-reports%20nobody%20acted%20on.%20Does%20not%20explain%20him%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=64922&nologo=true"
       }
@@ -6438,7 +6621,7 @@
   "syncedAt": 1784477453768,
   "teachers": {},
   "regionsKnown": {
-    "valley": 431
+    "valley": 432
   },
   "foreclosed": [
     "rootkin",
@@ -6508,10 +6691,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-07-19T11:58:49.560Z",
-      "lastAt": "2026-07-19T20:32:44.233Z",
+      "lastAt": "2026-07-19T20:34:45.172Z",
       "startDay": 19,
       "endDay": 19,
-      "beats": 24
+      "beats": 25
     }
   ],
   "company": [

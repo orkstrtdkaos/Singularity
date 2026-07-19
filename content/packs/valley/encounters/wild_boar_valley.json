@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "wild_boar_valley",
+  "type": "duel",
+  "name": "The Boar",
+  "locationId": "the_quickwood_eaves",
+  "setup": "A safe village does not mean a safe boar. It has not run and it is not going to, and the distance between you is now its decision rather than yours.",
+  "lethal": false,
+  "opponent": {
+    "name": "a valley boar",
+    "health": 5,
+    "threat": 40,
+    "yieldAt": 0,
+    "fleeDifficulty": 18,
+    "tacticTags": [
+      "does-not-yield",
+      "charges-the-noise",
+      "turns-faster-than-it-should",
+      "is-not-afraid-of-you"
+    ]
+  }
+}

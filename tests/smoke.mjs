@@ -5492,6 +5492,35 @@ await (async () => {
     np.npcQuestSeedBlock({ npcRegistry: {} }, { npcs, locationId: "millbrook" }) === "");
 }
 
+// --- SNG-168: the map viewport on every tier, pinch, and the shared-state leak ---
+{
+  const src = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+  const bodyOf = (fn) => { const a = src.indexOf("function " + fn); const b = src.indexOf("\nfunction ", a + 10); return src.slice(a, b < 0 ? a + 9000 : b); };
+
+  // §1a — two of the three tiers had a bare <svg> and so could never pan or zoom.
+  for (const [fn, label] of [["renderMapWorld", "world"], ["renderMapLocation", "location"], ["renderMap(selectedId", "region"]]) {
+    const body = bodyOf(fn);
+    check(`168: the ${label} tier has a viewport group`, /class="graph-vp"/.test(body));
+    check(`168: the ${label} tier wires pan/zoom`, /wireSkillGraphViewport\(\)/.test(body));
+  }
+
+  // §1.3 — the leak. One module-level graphView served map, wheel AND graph.
+  check("168: viewport state is keyed per surface, not one shared variable",
+    /let graphViews = \{\}/.test(src) && !/\blet graphView\b/.test(src));
+  const surfaces = [...src.matchAll(/setGraphSurface\("(\w+)"\)/g)].map(m => m[1]);
+  check("168: every pan/zoom surface declares which one it is",
+    new Set(surfaces).size === 5 && ["world", "location", "map", "wheel", "graph"].every(x => surfaces.includes(x)));
+
+  // The null-guard is what made one wiring safe to call from five places.
+  check("168: the tier-only zoom controls are null-guarded, so the wiring cannot throw elsewhere",
+    /const ctl = \(id, fn\) =>/.test(src) && !/document\.getElementById\("gz-in"\)\.onclick/.test(src));
+
+  // §1b — pinch. touches[1] appeared ZERO times repo-wide; a phone has no wheel.
+  check("168: two-finger pinch is handled", /e\.touches\.length >= 2/.test(src));
+  check("168: pinch scales about the midpoint of the two fingers", /midOf/.test(src) && /spanOf/.test(src));
+  check("168: and it ends cleanly when a finger lifts", /touchend/.test(src));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

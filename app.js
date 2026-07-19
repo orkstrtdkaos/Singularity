@@ -57,7 +57,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.146";
+const APP_VERSION = "1.8.147";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3907,10 +3907,11 @@ function renderMapWorld() {
     <h2>World Map</h2>
     <p class="hint" style="margin-bottom:8px">${nodes.length} regions${nodes.reduce((n, r) => n + r.gates.length, 0) ? ` · ${nodes.reduce((n, r) => n + r.gates.length, 0)} waygates` : ""}. The scale where the question is <em>which Reach am I in</em>.</p>
     ${mapTierBar()}
-    <div class="graph-wrap"><svg viewBox="0 0 800 ${Math.max(220, rows * ch + 30)}" class="world-map" preserveAspectRatio="xMidYMid meet">${cells}</svg></div>
+    <div class="graph-wrap"><svg id="skill-svg" viewBox="0 0 800 ${Math.max(220, rows * ch + 30)}" class="world-map" preserveAspectRatio="xMidYMid meet"><g class="graph-vp">${cells}</g></svg></div>
     <button class="btn secondary" id="map-back" style="margin-top:12px">Back</button>
   </div>`);
   for (const g of app.querySelectorAll("[data-mapregion]")) g.onclick = () => { mapTier = "region"; mapFocus = g.dataset.mapregion; renderMap(); };
+  setGraphSurface("world"); wireSkillGraphViewport();   // SNG-168: the world tier can pan and zoom now
   wireMapTierBar();
   document.getElementById("map-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
 }
@@ -3935,19 +3936,20 @@ function renderMapLocation(locationId) {
     <h2>${esc(name)} — inside</h2>
     <p class="hint" style="margin-bottom:8px">${children.length ? `${children.length} place${children.length === 1 ? "" : "s"} within.` : "Nothing recorded inside here yet — the places you visit and the GM names will appear here."} A ringed node is somewhere that grew into a place of its own.</p>
     ${mapTierBar()}
-    <div class="graph-wrap"><svg viewBox="0 0 800 460" class="world-map" preserveAspectRatio="xMidYMid meet">
+    <div class="graph-wrap"><svg id="skill-svg" viewBox="0 0 800 460" class="world-map" preserveAspectRatio="xMidYMid meet"><g class="graph-vp">
       <circle cx="400" cy="230" r="34" class="map-node here"/>
       <text x="400" y="235" text-anchor="middle" class="map-icon">${iconForTags(host?.tags || [])}</text>
       <text x="400" y="286" text-anchor="middle" class="map-label">${esc(name)}</text>
       ${laid.map(c => `<line x1="400" y1="230" x2="${c.x.toFixed(1)}" y2="${c.y.toFixed(1)}" class="map-edge"/>`).join("")}
       ${nodes}
-    </svg></div>
+    </g></svg></div>
     <button class="btn secondary" id="map-back" style="margin-top:12px">Back</button>
   </div>`);
   // a promoted interior is a real location — you can step into ITS interior too (nesting)
   for (const g of app.querySelectorAll("[data-mapinner]")) g.onclick = () => {
     if (g.dataset.innerkind === "location" && CONTENT.locations[g.dataset.mapinner]) { mapFocus = g.dataset.mapinner; renderMap(); }
   };
+  setGraphSurface("location"); wireSkillGraphViewport();   // SNG-168: the location tier too
   wireMapTierBar();
   document.getElementById("map-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
 }
@@ -4100,10 +4102,11 @@ function renderMap(selectedId = null) {
     ${details}
     <button class="btn secondary" id="map-back" style="margin-top:12px">Back</button>
   </div>`);
+  setGraphSurface("map");   // SNG-168: the region tier keeps its own view
   wireSkillGraphViewport();
   const meBtn = document.getElementById("gz-me");
-  if (meBtn) meBtn.onclick = () => { const p = pos[here]; if (!p) return; const k = 2.2; graphView = { k, tx: 400 - p.x * k, ty: 220 - p.y * k };
-    const vp = document.querySelector("#skill-svg .graph-vp"); if (vp) vp.setAttribute("transform", `translate(${graphView.tx} ${graphView.ty}) scale(${k})`); };
+  if (meBtn) meBtn.onclick = () => { const p = pos[here]; if (!p) return; const k = 2.2; graphViews[graphSurface] = { k, tx: 400 - p.x * k, ty: 220 - p.y * k };
+    const vp = document.querySelector("#skill-svg .graph-vp"); if (vp) vp.setAttribute("transform", `translate(${graphViews[graphSurface].tx} ${graphViews[graphSurface].ty}) scale(${k})`); };
   document.getElementById("map-kg-toggle").onclick = () => { mapShowKG = !mapShowKG; renderMap(selectedId); };
   document.getElementById("map-sub-toggle").onclick = () => { mapShowSub = !mapShowSub; renderMap(selectedId); };
   for (const g of app.querySelectorAll("[data-kgtopic]")) g.onclick = () => renderCodexScreen("", g.dataset.kgtopic);
@@ -4123,7 +4126,7 @@ function renderMap(selectedId = null) {
     renderPlay(character.activeScene?.lastTurn || null, {});
     onFreeform(`Head to the ${sp.name}`);
   };
-  document.getElementById("map-back").onclick = () => { graphView = null; renderPlay(character.activeScene?.lastTurn || null, {}); };
+  document.getElementById("map-back").onclick = () => { graphViews[graphSurface] = null; renderPlay(character.activeScene?.lastTurn || null, {}); };
 }
 
 // ---------- skill KG graph (SNG-011 Phase 3a — rendered like the world map) ----------
@@ -4330,7 +4333,7 @@ function renderSkillWheel(selectedId = null, status = "") {
         de-collided labels (owned/selected always; matched added at zoom). */""}
     ${(() => {
       const filterOn = wheelFnFilter.size > 0;
-      const zoomed = (graphView?.k || 1) >= 1.25;
+      const zoomed = (graphViews[graphSurface]?.k || 1) >= 1.25;
       // de-collision: gather label-bearing nodes, greedily nudge overlapping label anchors downward.
       const labelSet = m.nodes.filter(nd => nd.name && (nd.owned || selectedId === nd.id || (zoomed && filterOn && (nd.families || []).some(f => wheelFnFilter.has(f)))));
       const placed = [], labelAt = {};
@@ -4413,6 +4416,7 @@ function renderSkillWheel(selectedId = null, status = "") {
       <button class="btn secondary" id="wheel-list">List view</button>
     </div>
   </div>`);
+  setGraphSurface("wheel");   // SNG-168: its own view, not the map's
   wireSkillGraphViewport();
   for (const g of app.querySelectorAll("[data-wheelnode]")) g.onclick = () => {
     if (_graphDidPan) { _graphDidPan = false; return; }
@@ -4425,8 +4429,8 @@ function renderSkillWheel(selectedId = null, status = "") {
   };
   const fnClear = document.getElementById("fn-filter-clear"); if (fnClear) fnClear.onclick = () => { wheelFnFilter = new Set(); renderSkillWheel(selectedId, status); };
   wireSkillSelectionActions((id, msg) => renderSkillWheel(id, msg)); // SNG-097: learn/deepen in place
-  document.getElementById("wheel-back").onclick = () => { graphView = null; renderCharacterScreen(); };
-  document.getElementById("wheel-list").onclick = () => { graphView = null; renderSkillGraph(); };
+  document.getElementById("wheel-back").onclick = () => { graphViews[graphSurface] = null; renderCharacterScreen(); };
+  document.getElementById("wheel-list").onclick = () => { graphViews[graphSurface] = null; renderSkillGraph(); };
 }
 
 function renderSkillGraph(selectedId = null, status = "") {
@@ -4501,27 +4505,34 @@ function renderSkillGraph(selectedId = null, status = "") {
       <button class="btn secondary" id="graph-wheel">✦ Wheel view</button>
     </div>
   </div>`);
+  setGraphSurface("graph");   // SNG-168: its own view, not the map's
   wireSkillGraphViewport();
   for (const g of app.querySelectorAll("[data-skillnode]")) g.onclick = (ev) => {
     if (_graphDidPan) { _graphDidPan = false; return; } // a drag-pan, not a select
     renderSkillGraph(g.dataset.skillnode === selectedId ? null : g.dataset.skillnode);
   };
   wireSkillSelectionActions((id, msg) => renderSkillGraph(id, msg)); // SNG-097: learn/deepen in place
-  document.getElementById("graph-back").onclick = () => { graphView = null; renderCharacterScreen(); };
-  document.getElementById("graph-wheel").onclick = () => { graphView = null; renderSkillWheel(); };
+  document.getElementById("graph-back").onclick = () => { graphViews[graphSurface] = null; renderCharacterScreen(); };
+  document.getElementById("graph-wheel").onclick = () => { graphViews[graphSurface] = null; renderSkillWheel(); };
 }
 
 // SNG-054 Phase 0: pan/zoom for the skill graph (the fixed viewBox overflowed unusably on
 // desktop). Pure viewport work — a transform on the <g class="graph-vp"> group; state persists
-// across node-select re-renders (graphView) so zoom isn't lost on click. Fit/reset = identity.
-let graphView = null;      // { k, tx, ty } — persisted transform, or null = fit
+// across node-select re-renders (graphViews[surface]) so zoom isn't lost on click. Fit/reset = identity.
+// SNG-168: PER-SURFACE viewport state. This was ONE module-level variable shared by the map, the
+// skill wheel and the skill graph, reset only on explicit back/fit buttons — so zooming the map and
+// then opening the wheel from the character screen inherited the map's transform. Keyed by surface,
+// the surfaces stop leaking into each other and each remembers its own view.
+let graphViews = {};                       // { [surface]: { k, tx, ty } }
+let graphSurface = "map";                  // which one the current screen is
+const setGraphSurface = (name) => { graphSurface = name; };
 let _graphDidPan = false;  // suppress a node-select when a drag actually panned
 
 function wireSkillGraphViewport() {
   const svg = document.getElementById("skill-svg");
   const vp = svg?.querySelector(".graph-vp");
   if (!svg || !vp) return;
-  const apply = () => { const v = graphView || { k: 1, tx: 0, ty: 0 }; vp.setAttribute("transform", `translate(${v.tx} ${v.ty}) scale(${v.k})`); };
+  const apply = () => { const v = graphViews[graphSurface] || { k: 1, tx: 0, ty: 0 }; vp.setAttribute("transform", `translate(${v.tx} ${v.ty}) scale(${v.k})`); };
   const clampK = k => Math.max(0.3, Math.min(4, k));
   // convert a client point to the SVG's viewBox coordinate space
   const toSvg = (clientX, clientY) => {
@@ -4530,11 +4541,11 @@ function wireSkillGraphViewport() {
     return { x: (clientX - r.left) / r.width * vb.width, y: (clientY - r.top) / r.height * vb.height };
   };
   const zoomAt = (clientX, clientY, factor) => {
-    const v = graphView || { k: 1, tx: 0, ty: 0 };
+    const v = graphViews[graphSurface] || { k: 1, tx: 0, ty: 0 };
     const p = toSvg(clientX, clientY);
     const k2 = clampK(v.k * factor);
     // keep the point under the cursor fixed: p = (p - t)/k invariant
-    graphView = { k: k2, tx: p.x - (p.x - v.tx) * (k2 / v.k), ty: p.y - (p.y - v.ty) * (k2 / v.k) };
+    graphViews[graphSurface] = { k: k2, tx: p.x - (p.x - v.tx) * (k2 / v.k), ty: p.y - (p.y - v.ty) * (k2 / v.k) };
     apply();
   };
   svg.addEventListener("wheel", (e) => { e.preventDefault(); zoomAt(e.clientX, e.clientY, e.deltaY < 0 ? 1.12 : 1 / 1.12); }, { passive: false });
@@ -4546,21 +4557,49 @@ function wireSkillGraphViewport() {
     const r = svg.getBoundingClientRect(); const vb = svg.viewBox.baseVal;
     const dx = (x - last.x) / r.width * vb.width, dy = (y - last.y) / r.height * vb.height;
     moved += Math.abs(x - last.x) + Math.abs(y - last.y);
-    const v = graphView || { k: 1, tx: 0, ty: 0 };
-    graphView = { k: v.k, tx: v.tx + dx, ty: v.ty + dy };
+    const v = graphViews[graphSurface] || { k: 1, tx: 0, ty: 0 };
+    graphViews[graphSurface] = { k: v.k, tx: v.tx + dx, ty: v.ty + dy };
     last = { x, y }; if (moved > 6) _graphDidPan = true; apply();
   };
   const up = () => { dragging = false; };
   svg.addEventListener("mousedown", e => down(e.clientX, e.clientY));
   window.addEventListener("mousemove", e => move(e.clientX, e.clientY));
   window.addEventListener("mouseup", up);
-  svg.addEventListener("touchstart", e => { if (e.touches[0]) down(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
-  svg.addEventListener("touchmove", e => { if (e.touches[0]) { move(e.touches[0].clientX, e.touches[0].clientY); } }, { passive: true });
+  // SNG-168: PINCH. Zoom was wheel-only and a phone has no wheel — `touches[1]` appeared zero times
+  // in the whole repo, so the map could be panned on a tablet and never zoomed. Two fingers set the
+  // scale about their midpoint, which is the gesture everyone already expects.
+  let pinch = null;
+  const spanOf = t => Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
+  const midOf = t => ({ x: (t[0].clientX + t[1].clientX) / 2, y: (t[0].clientY + t[1].clientY) / 2 });
+  svg.addEventListener("touchstart", e => {
+    if (e.touches.length >= 2) { pinch = { span: spanOf(e.touches), k: (graphViews[graphSurface] || { k: 1 }).k }; up(); }
+    else if (e.touches[0]) { pinch = null; down(e.touches[0].clientX, e.touches[0].clientY); }
+  }, { passive: true });
+  svg.addEventListener("touchmove", e => {
+    if (pinch && e.touches.length >= 2) {
+      const span = spanOf(e.touches);
+      if (pinch.span > 0) {
+        const m = midOf(e.touches);
+        const v = graphViews[graphSurface] || { k: 1, tx: 0, ty: 0 };
+        const k2 = clampK(pinch.k * (span / pinch.span));
+        const pt = toSvg(m.x, m.y);
+        graphViews[graphSurface] = { k: k2, tx: pt.x - (pt.x - v.tx) * (k2 / v.k), ty: pt.y - (pt.y - v.ty) * (k2 / v.k) };
+        apply();
+      }
+      return;
+    }
+    if (e.touches[0]) move(e.touches[0].clientX, e.touches[0].clientY);
+  }, { passive: true });
+  svg.addEventListener("touchend", e => { if (e.touches.length < 2) pinch = null; }, { passive: true });
   svg.addEventListener("touchend", up);
   const r = svg.getBoundingClientRect();
-  document.getElementById("gz-in").onclick = () => zoomAt(r.left + r.width / 2, r.top + r.height / 2, 1.25);
-  document.getElementById("gz-out").onclick = () => zoomAt(r.left + r.width / 2, r.top + r.height / 2, 1 / 1.25);
-  document.getElementById("gz-fit").onclick = () => { graphView = null; apply(); };
+  // SNG-168: these three controls are rendered by the REGION tier only. Dereferencing them
+  // unguarded is why the wiring could not simply be called on the world and location tiers — it
+  // threw before reaching the pan/zoom listeners. Guarded, so one wiring serves every surface.
+  const ctl = (id, fn) => { const el = document.getElementById(id); if (el) el.onclick = fn; };
+  ctl("gz-in", () => zoomAt(r.left + r.width / 2, r.top + r.height / 2, 1.25));
+  ctl("gz-out", () => zoomAt(r.left + r.width / 2, r.top + r.height / 2, 1 / 1.25));
+  ctl("gz-fit", () => { graphViews[graphSurface] = null; apply(); });
   apply();
 }
 

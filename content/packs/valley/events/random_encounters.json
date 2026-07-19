@@ -150,7 +150,7 @@
       "id": "re_toll_bandits",
       "flavor": "theft",
       "weight": 2,
-      "minDanger": 3,
+      "minDanger": 2,
       "regions": [
         "*"
       ],
@@ -160,7 +160,8 @@
       ],
       "routing": "narrative",
       "seed": "Someone claims the road and asks a price to pass. It can be paid, talked down (Mediator's Tongue), slipped (Quiet Step), or refused into a fight. Always a way through that isn't blood.",
-      "avoidable": true
+      "avoidable": true,
+      "dangerNote": "Erik's ruling 2026-07-19: toll bandits belong on the old switchback. Danger is reduced LOCALLY — by someone clearing them out — never by a universal floor that keeps them out of the road they are named for. The stakes dial governs what a 'safe region' means now."
     },
     {
       "id": "re_pursuit_flee",
@@ -783,10 +784,22 @@
     },
     "pacingModes": {
       "note": "SNG-127 — player-selectable liveliness (profile.pacing). Each is a multiplier on every roll rate + a cooldown override. Default balanced; a new/family player may start on eventful.",
-      "calm": { "mult": 0.5, "cooldown": 3 },
-      "balanced": { "mult": 1, "cooldown": 1 },
-      "eventful": { "mult": 1.6, "cooldown": 1 },
-      "relentless": { "mult": 2.4, "cooldown": 0 }
+      "calm": {
+        "mult": 0.5,
+        "cooldown": 3
+      },
+      "balanced": {
+        "mult": 1,
+        "cooldown": 1
+      },
+      "eventful": {
+        "mult": 1.6,
+        "cooldown": 1
+      },
+      "relentless": {
+        "mult": 2.4,
+        "cooldown": 0
+      }
     },
     "flavorWeightByDanger": "low-danger locations skew beneficial/benign/beautiful; high-danger skew dangerous/theft/chase/fight — but every location retains a chance of beauty and kindness. The valley is hopeful-strange, not grim.",
     "lethalRule": "any fight/dangerous encounter that could incapacitate MUST present a decline/flee path before engagement (SNG-002b). No ambush-lethality."

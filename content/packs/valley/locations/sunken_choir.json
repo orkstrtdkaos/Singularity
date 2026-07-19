@@ -57,7 +57,9 @@
     "kind": "pool",
     "delta": 0.26,
     "radius": 95,
-    "reason": "A pre-Transition sonic work, flooded and intact. The water preserved the lattice as surely as it preserved the stone."
+    "reason": "A pre-Transition sonic work, flooded and intact. The water preserved the lattice as surely as it preserved the stone.",
+    "radiusWorld": 0.057,
+    "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
   },
   "axisVector": [
     0.0,

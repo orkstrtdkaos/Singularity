@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 16,
-  "xp": 1577,
+  "xp": 1582,
   "attributes": {
     "physical": 4,
     "mental": 5,
@@ -95,7 +95,7 @@
     "chaos_order": 0.24948390727937025,
     "mechanical_spiritual": 0.2580372847905887,
     "concrete_abstract": -0.0326467323816193,
-    "death_life": -0.16846492778215544,
+    "death_life": -0.18004168139304766,
     "emotional_logical": 0.008330843749999983,
     "falsehood_truth": 0.31383840738235763,
     "demonic_angelic": 0.013499999999999998,
@@ -105,7 +105,7 @@
   "maxHealth": 105,
   "health": 105,
   "maxEnergy": 175,
-  "energy": 148,
+  "energy": 146,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1099,237 +1099,152 @@
         "player": "Before proceeding use palework and wither to etch new runes into the post.  The 'Stillwater's Trouble' is ready to rise from the 11 year death... finish the rune with the raised thing.",
         "summary": "Silas binds Stillwater's Trouble at the post with compound rune-work — Wither and The Raised Thing braided into old Ashwarden timber, the eleven-year rising held in place.",
         "narration": "You drop to one knee at the base of the post and pull the copper wire coil and chalk blanks from your pack. The post is old Ashwarden timber — driven into the earth eleven years ago, weathered to grey, the grain still tight and sound where the soil kept it. You press your palm flat against the wood and feel it immediately: the thing inside is close to the surface. Not hostile yet. Not awake yet. But close.\n\nYou begin with Wither, tracing the first rune along the post's lower face — not to rot the wood, but to find the grain of what has already gone in the timber, the slow eleven-year change, and set the mark into that history. The chalk bites cleanly. The copper wire follows it, pressed into the groove with your thumbnail. You feel Wither resist slightly — this is not its ordinary work, and the craft knows it. But the wood has age in it, and age is something Wither understands. The rune seats.\n\nThen The Raised Thing, braided over the first. This is the compound work — holding the Wither-mark in place while you draw the second rune through it, the way you'd pass a thread through a loop before tightening the knot. Your hands are steady. The craft pushes back once, like a door with real weight behind it, and you lean into it rather than forcing it. The rune finds the grain. The post accepts both threads together, and the binding closes.\n\nVeth stands behind you without speaking. When you rise, she looks at the post for a long moment and then at you. \"Stillwater's Trouble,\" she says — your name for it, the thing that has been rising in the old warden post for eleven years. Her voice is level. \"It will hold?\" she asks. Pell is already watching the tree line, Memory in hand at her side, loose and ready.\n\n*✦ The Door That Closed Behind — a step forward.*"
+      },
+      {
+        "player": "Read the post with Deathsense — understand what was rising, and whether the binding holds the whole of it",
+        "summary": "Deathsense reads the post — Stillwater's Trouble is caught fully in the binding, but not ended; the accumulation was arriving, not dying, and the runes bought time rather than resolution.",
+        "narration": "You lay your palm flat against the post's lower face, beside the fresh runes, and open Deathsense without fanfare.\n\nWhat comes back is clean and specific. Stillwater's Trouble is not a person. It is not a creature. It is a process — eleven years of slow accumulation, the way a watershed builds behind a silted dam. Whatever the dead warden was working to prevent built itself quietly in the empty post while the door stayed closed. The runes have caught it. Not ended it, not dispersed it — caught it, the way you catch a stone mid-roll. The binding holds the whole of it. Nothing slipped through the seam.\n\nDeathsense also shows you the trajectory. The accumulation was not ending — it was arriving. Another week, perhaps two, and it would have come through the door on its own terms. The binding bought time. It did not buy the same time twice.\n\nVeth says, from behind you, quietly, \"Well?\"\n\nYou straighten and turn. \"The binding holds,\" you say. \"All of it. But this is a door held, not a door closed. Whatever was building here — it was almost ready.\" You look at her directly. \"What was this post watching for, in the last years before it was abandoned?\"\n\n*✦ The Door That Closed Behind — a step forward.*"
       }
     ],
     "lastTurn": {
-      "narration": "You drop to one knee at the base of the post and pull the copper wire coil and chalk blanks from your pack. The post is old Ashwarden timber — driven into the earth eleven years ago, weathered to grey, the grain still tight and sound where the soil kept it. You press your palm flat against the wood and feel it immediately: the thing inside is close to the surface. Not hostile yet. Not awake yet. But close.\n\nYou begin with Wither, tracing the first rune along the post's lower face — not to rot the wood, but to find the grain of what has already gone in the timber, the slow eleven-year change, and set the mark into that history. The chalk bites cleanly. The copper wire follows it, pressed into the groove with your thumbnail. You feel Wither resist slightly — this is not its ordinary work, and the craft knows it. But the wood has age in it, and age is something Wither understands. The rune seats.\n\nThen The Raised Thing, braided over the first. This is the compound work — holding the Wither-mark in place while you draw the second rune through it, the way you'd pass a thread through a loop before tightening the knot. Your hands are steady. The craft pushes back once, like a door with real weight behind it, and you lean into it rather than forcing it. The rune finds the grain. The post accepts both threads together, and the binding closes.\n\nVeth stands behind you without speaking. When you rise, she looks at the post for a long moment and then at you. \"Stillwater's Trouble,\" she says — your name for it, the thing that has been rising in the old warden post for eleven years. Her voice is level. \"It will hold?\" she asks. Pell is already watching the tree line, Memory in hand at her side, loose and ready.\n\n*✦ The Door That Closed Behind — a step forward.*\n\n*▲ Practiced — **The Raised Thing** is fluent now (rank 2), earned through use.*",
-      "sceneSummary": "Silas binds Stillwater's Trouble at the post with compound rune-work — Wither and The Raised Thing braided into old Ashwarden timber, the eleven-year rising held in place.",
+      "narration": "You lay your palm flat against the post's lower face, beside the fresh runes, and open Deathsense without fanfare.\n\nWhat comes back is clean and specific. Stillwater's Trouble is not a person. It is not a creature. It is a process — eleven years of slow accumulation, the way a watershed builds behind a silted dam. Whatever the dead warden was working to prevent built itself quietly in the empty post while the door stayed closed. The runes have caught it. Not ended it, not dispersed it — caught it, the way you catch a stone mid-roll. The binding holds the whole of it. Nothing slipped through the seam.\n\nDeathsense also shows you the trajectory. The accumulation was not ending — it was arriving. Another week, perhaps two, and it would have come through the door on its own terms. The binding bought time. It did not buy the same time twice.\n\nVeth says, from behind you, quietly, \"Well?\"\n\nYou straighten and turn. \"The binding holds,\" you say. \"All of it. But this is a door held, not a door closed. Whatever was building here — it was almost ready.\" You look at her directly. \"What was this post watching for, in the last years before it was abandoned?\"\n\n*✦ The Door That Closed Behind — a step forward.*",
+      "sceneSummary": "Deathsense reads the post — Stillwater's Trouble is caught fully in the binding, but not ended; the accumulation was arriving, not dying, and the runes bought time rather than resolution.",
       "choices": [
         {
-          "label": "Read the post with Deathsense — understand what was rising, and whether the binding holds the whole of it",
+          "label": "Ask Veth directly — she knows this post, and the name Stillwater's Trouble came from her without prompting.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "persuade"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Open the door — someone walked in and did not walk out, and you need to know what is on the other side.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 15,
+          "intentTags": [
+            "risky",
+            "scout"
+          ]
+        },
+        {
+          "label": "Ask Huginn — he perched on the roof-ridge before the binding was done, and he does not do that idly.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.4
-          },
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "abilityId": "deathsense",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Tell Veth plainly: yes, it holds — and ask what she knows about who walked this post",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "calm",
-            "persuade"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Step toward the post building itself and push inside — the boot-tracks led here, and the door has been closed",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
-          "difficulty": 15,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Order-Sense on the post itself — read the design the rune-work is now part of, and what it was built to do eleven years ago",
+          "label": "Use Order-Sense on the post — read the whole structure it belongs to, including the eleven years of closed door.",
           "attribute": "mental",
           "subAttribute": "reason",
-          "axes": {
-            "chaos_order": 0.3
-          },
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
           "abilityId": "order_sense",
           "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -6,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
       "scene": {
-        "setting": "Raven's Home — the old Ashwarden warden post, a weathered timber structure on rising ground in grey birch and heather. Overcast, cold northwest air, flat midday light. The binding runes are fresh on the post's lower face, copper wire pressed into chalk-marked grooves.",
+        "setting": "Raven's Home — the old Ashwarden warden post, weathered timber on rising ground in grey birch and heather. Overcast, cold northwest air, flat midday light. Binding runes fresh on the post's lower face, copper wire pressed into chalk grooves. The single set of heel-heavy boot-tracks ends at the threshold. The door is closed.",
         "npcsPresent": [
           {
             "name": "Pell Marsh",
-            "state": "Watching the tree line with Memory loose at her side — alert, not tense."
+            "state": "Watching the tree line with Memory loose at her side — alert, waiting on Silas's read."
           },
           {
             "name": "Veth Ondra",
-            "state": "Standing behind Silas, looking at the post and then at him — waiting for his answer."
+            "state": "Standing behind Silas, eyes on his face — jaw set, waiting for the answer."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the post's roof-ridge above — returned from ahead, watching the door."
+            "state": "Perched on the post's roof-ridge above — has not moved since before the binding was laid."
           }
         ],
         "objects": [
           "Old Ashwarden timber warden post — door closed, weathered grey",
-          "The binding runes — Wither and The Raised Thing braided into the post's lower face in chalk and copper wire",
-          "The single set of heel-heavy boot-tracks — they end at the post's threshold",
+          "The binding runes — Wither and The Raised Thing braided into the post's lower face, copper wire set in chalk grooves",
+          "The single set of heel-heavy boot-tracks — ending at the threshold, no return",
           "Low heather and stands of grey birch on rising ground around the post",
           "Memory (Silas's spear) — road-lashed at his back"
         ],
         "threads": [
-          "Stillwater's Trouble is bound but not ended — what was rising is still inside the post",
-          "The boot-tracks lead to the door and do not come back — someone is in there, or was",
-          "Huginn returned from ahead unbidden and perched on the roof-ridge — he does not do that idly",
-          "Veth asked if the binding holds — she knows this post, or knew it"
+          "The binding holds all of Stillwater's Trouble — but it is a door held, not closed; another week or two and it would have come through on its own",
+          "The accumulation was arriving, not dying — this post was watching for something, and eleven years of absence let it build",
+          "Huginn has been on the roof-ridge since before the binding was laid and has not moved",
+          "The boot-tracks end at the threshold — someone is inside, or was"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "veth-stillwater-ondra",
-          "name": "Veth (Stillwater) Ondra",
-          "role": "Former Ashwarden warden, now traveling companion",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Watched Silas bind the post with compound rune-work — named the thing by its name, Stillwater's Trouble, without being told. Asked plainly if the binding holds.",
-          "learned": [
-            "Named 'Stillwater's Trouble' without prompting — she knows what was rising, or has a name for it already"
-          ],
-          "statusNote": "At the warden post, watching Silas work — waiting for his answer.",
-          "status": "active"
-        },
-        {
-          "op": "update",
-          "npcId": "pell-ran-marsh",
-          "name": "Pell Ran Marsh",
-          "role": "Village blacksmith, Millbrook — traveling companion",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Watching the tree line with Memory loose at her side while Silas works the runes — alert, giving him the space to work.",
-          "statusNote": "At the warden post, covering the tree line while Silas completes the binding.",
-          "status": "active"
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "Binding runes — Wither and The Raised Thing braided in chalk and copper wire — seated in the lower face of the warden post on World-day 19 midday. Stillwater's Trouble held but not ended.",
-          "flag": {
-            "binding_seated": true,
-            "stillwaters_trouble": "bound"
-          },
-          "subPlace": {
-            "name": "Raven's Home Warden Post",
-            "parent": "Ashwarden March Road",
-            "note": "Old Ashwarden timber warden post on rising ground — the post at the end of the left branch. Empty eleven years. Boot-tracks end at its threshold. Binding runes now seated in its lower face.",
-            "visited": true
-          }
-        }
-      ],
       "codexUpdates": [
         {
           "topic": "stillwaters-trouble",
           "label": "Stillwater's Trouble",
           "kind": "mystery",
-          "fact": "Something has been rising in the old warden post at Raven's Home across eleven years of absence — Wither and The Raised Thing braided into the post's timber held it on World-day 19 midday. Veth named it 'Stillwater's Trouble' without being told.",
+          "fact": "Deathsense confirms: Stillwater's Trouble is not a person or creature — it is a process, eleven years of slow accumulation behind a closed door. The binding holds the whole of it, but is a door held not closed. Left another week or two it would have come through on its own. The accumulation was arriving, not ending.",
           "links": [
-            "veth-stillwater-ondra",
             "the-door-that-closed-behind",
-            "the-edge-district-ledger"
+            "raven-s-home-warden-post",
+            "veth-ondra"
           ]
         }
       ],
-      "questUpdates": [
+      "npcUpdates": [
         {
-          "op": "progress",
-          "questId": "the-door-that-closed-behind",
-          "note": "Compound rune-work bound Stillwater's Trouble at the post — Wither into the timber's eleven-year history, The Raised Thing over it as a holding thread. The thing inside the post is held. What it is remains unread."
+          "op": "update",
+          "npcId": "veth-ondra",
+          "name": "Veth Ondra",
+          "note": "Asked 'Well?' the moment Silas straightened from the post — waiting for his read, contained but intent.",
+          "statusNote": "At the warden post, waiting for Silas's answer about what Deathsense found."
         }
       ],
       "stageOps": [
         {
           "questId": "the-door-that-closed-behind",
-          "stageId": "s1",
-          "evidence": "Silas bound Stillwater's Trouble at the post with compound rune-work — Wither and The Raised Thing braided into the old Ashwarden timber, the eleven-year rising held in the moment before it completed."
-        }
-      ],
-      "ledgerEvents": [
-        {
-          "what": "Compound rune-work — Wither and The Raised Thing — bound an eleven-year rising in the old Ashwarden warden post at Raven's Home.",
-          "tags": [
-            "warden-post",
-            "rune-work",
-            "ashwarden-march",
-            "binding"
-          ],
-          "visibility": "witnessed",
-          "spectrumDeltas": {
-            "death_life": 0.05,
-            "mechanical_spiritual": 0.04
-          },
-          "impactsLocal": false
+          "stageId": "s2",
+          "evidence": "Deathsense read the post fully — Stillwater's Trouble is a process not a person, the binding holds all of it, and the trajectory confirmed it was arriving rather than ending; the question of what the warden was watching for is now the live thread."
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "The walk from the marker stone to the warden post and the time taken to seat the compound rune-work."
-      },
-      "imagePrompt": "A man kneels at the base of a weathered grey timber post in a stand of birch and low heather, chalk dust on his hands, copper wire pressed into a freshly carved groove — two runes braided into the old wood, frost-pale light overhead, a large grey-black bird perched on the roof-ridge above him, watching.",
-      "momentArt": "https://image.pollinations.ai/prompt/A%20man%20kneels%20at%20the%20base%20of%20a%20weathered%20grey%20timber%20post%20in%20a%20stand%20of%20birch%20and%20low%20heather%2C%20chalk%20dust%20on%20his%20hands%2C%20copper%20wire%20pressed%20into%20a%20freshly%20carved%20groove%20%E2%80%94%20two%20runes%20braided%20into%20the%20old%20wood%2C%20frost-pale%20light%20overhead%2C%20a%20large%20grey-black%20bird%20perched%20on%20the%20roof-ridge%20above%20him%2C%20watch%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=48393&nologo=true"
+        "hoursPassed": 0.25,
+        "why": "A brief focused Deathsense read at the post threshold."
+      }
     },
     "sceneState": {
-      "setting": "Raven's Home — the old Ashwarden warden post, a weathered timber structure on rising ground in grey birch and heather. Overcast, cold northwest air, flat midday light. The binding runes are fresh on the post's lower face, copper wire pressed into chalk-marked grooves.",
+      "setting": "Raven's Home — the old Ashwarden warden post, weathered timber on rising ground in grey birch and heather. Overcast, cold northwest air, flat midday light. Binding runes fresh on the post's lower face, copper wire pressed into chalk grooves. The single set of heel-heavy boot-tracks ends at the threshold. The door is closed.",
       "npcsPresent": [
         {
           "name": "Pell Marsh",
-          "state": "Watching the tree line with Memory loose at her side — alert, not tense."
+          "state": "Watching the tree line with Memory loose at her side — alert, waiting on Silas's read."
         },
         {
           "name": "Veth Ondra",
-          "state": "Standing behind Silas, looking at the post and then at him — waiting for his answer."
+          "state": "Standing behind Silas, eyes on his face — jaw set, waiting for the answer."
         },
         {
           "name": "Huginn",
-          "state": "Perched on the post's roof-ridge above — returned from ahead, watching the door."
+          "state": "Perched on the post's roof-ridge above — has not moved since before the binding was laid."
         }
       ],
       "objects": [
         "Old Ashwarden timber warden post — door closed, weathered grey",
         "The binding runes — Wither and The Raised Thing braided into the post's lower fa",
-        "The single set of heel-heavy boot-tracks — they end at the post's threshold",
+        "The single set of heel-heavy boot-tracks — ending at the threshold, no return",
         "Low heather and stands of grey birch on rising ground around the post",
         "Memory (Silas's spear) — road-lashed at his back"
       ],
       "threads": [
-        "Stillwater's Trouble is bound but not ended — what was rising is still inside the post",
-        "The boot-tracks lead to the door and do not come back — someone is in there, or was",
-        "Huginn returned from ahead unbidden and perched on the roof-ridge — he does not do that idly",
-        "Veth asked if the binding holds — she knows this post, or knew it"
+        "The binding holds all of Stillwater's Trouble — but it is a door held, not closed; another week or two and it would have come through on its own",
+        "The accumulation was arriving, not dying — this post was watching for something, and eleven years of absence let it build",
+        "Huginn has been on the roof-ridge since before the binding was laid and has not moved",
+        "The boot-tracks end at the threshold — someone is inside, or was"
       ]
     }
   },
@@ -1703,13 +1618,15 @@
           "effects": []
         }
       ],
-      "stageIndex": 1,
+      "stageIndex": 2,
       "completedStages": [
-        "s1"
+        "s1",
+        "s2"
       ],
       "progress": [
         "Compound rune-work bound Stillwater's Trouble at the post — Wither into the timber's eleven-year history, The Raised Thing over it as a holding thread. The thing inside the post is held. What it is remains unread.",
-        "↳ Silas bound Stillwater's Trouble at the post with compound rune-work — Wither and The Raised Thing braided into the old Ashwarden timber, the eleven-year rising held in the moment before it completed."
+        "↳ Silas bound Stillwater's Trouble at the post with compound rune-work — Wither and The Raised Thing braided into the old Ashwarden timber, the eleven-year rising held in the moment before it completed.",
+        "↳ Deathsense read the post fully — Stillwater's Trouble is a process not a person, the binding holds all of it, and the trajectory confirmed it was arriving rather than ending; the question of what…"
       ],
       "aliases": [],
       "startedAt": "2026-07-19T14:27:08.855Z",
@@ -2527,7 +2444,6 @@
       },
       "relationship": 9,
       "history": [
-        "[d6] Held warden's patience through the failed ward attempt — watching the circle, not filling the silence.",
         "[d6] Entered the circle without hesitation at Silas's invitation — warden's bearing, hands open, the posture of bearing witness without crowding. Present inside the circle for the gift-working.",
         "[d6] Her face holds something quieter than usual — a prior understanding revised by what she just witnessed and what Siol named. She has not yet said it aloud.",
         "[d6] Settled into road-pace at Silas's right — departure is familiar ground for a former warden. The unsaid revision about the Ent is filed; she is ready for the road.",
@@ -2536,7 +2452,8 @@
         "[d6] Named the left branch and the marker stone from warden memory on first sight of the road — something she has been holding a long time, released quietly.",
         "[d6] Heard Silas's Order-Sense report — responded to the single set of tracks with 'no return' said without question; visibly affected by the news about the post she held for eleven years.",
         "[d6] Read the tracks aloud as the party walked — not running, not lost, they knew this road. Added quietly that she knew this road once.",
-        "[d6] Watched Silas bind the post with compound rune-work — named the thing by its name, Stillwater's Trouble, without being told. Asked plainly if the binding holds."
+        "[d6] Watched Silas bind the post with compound rune-work — named the thing by its name, Stillwater's Trouble, without being told. Asked plainly if the binding holds.",
+        "[d6] Asked 'Well?' the moment Silas straightened from the post — waiting for his read, contained but intent."
       ],
       "knownFacts": [
         "Named the revision plainly: the Ent's prior conversation was with whatever needed to end here; Silas was the right attendant.",
@@ -2559,7 +2476,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the warden post, watching Silas work — waiting for his answer.",
+      "statusNote": "At the warden post, waiting for Silas's answer about what Deathsense found.",
       "lastSeen": {
         "locationId": "gen-ashwarden-march-road",
         "day": 6
@@ -4511,21 +4428,21 @@
     }
   },
   "tendencies": {
-    "strategic": 16.143637545533483,
-    "cerebral": 20.907796427094453,
-    "social": 12.951520441956024,
-    "generous": 2.9349071765684482,
-    "cautious": 6.049011961757318,
-    "physical": 0.6026702789409577,
-    "risky": 0.6320191807123055,
-    "ruthless": 0.20151240887082786,
-    "carousing": 0.0030874249044540347,
-    "amorous": 2.4104450387170475,
-    "patient": 1.2560032505386267,
-    "stealth": 0.07810672450258394,
-    "devotion": 1.5956489108978231,
-    "craft": 0.6169895352480427,
-    "leadership": 0.39757189608891497
+    "strategic": 15.740046606895145,
+    "cerebral": 21.38510151641709,
+    "social": 12.627732430907123,
+    "generous": 2.861534497154237,
+    "cautious": 5.8977866627133855,
+    "physical": 0.5876035219674337,
+    "risky": 0.6162187011944978,
+    "ruthless": 0.19647459864905717,
+    "carousing": 0.003010239281842684,
+    "amorous": 2.350183912749121,
+    "patient": 1.224603169275161,
+    "stealth": 0.07615405639001933,
+    "devotion": 1.5557576881253774,
+    "craft": 0.6015647968668416,
+    "leadership": 0.3876325986866921
   },
   "aptitudes": [
     "strategist",
@@ -4533,7 +4450,7 @@
     "scholar",
     "sage"
   ],
-  "actionCount": 588,
+  "actionCount": 589,
   "grantsVersion": 1,
   "reconcileVersion": 8,
   "gallery": [
@@ -4827,8 +4744,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784475490719,
-  "rev": 881,
+  "updatedAt": 1784476232346,
+  "rev": 882,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -6120,7 +6037,7 @@
       "lightsense": 2,
       "order_sense": 58,
       "palework": 28,
-      "deathsense": 25,
+      "deathsense": 26,
       "shadowstep": 17,
       "the-attended-end": 30,
       "wildcraft": 6,
@@ -6313,7 +6230,7 @@
   "syncedAt": 1784473174184,
   "teachers": {},
   "regionsKnown": {
-    "valley": 411
+    "valley": 412
   },
   "foreclosed": [
     "rootkin",
@@ -6382,10 +6299,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-07-19T11:58:49.560Z",
-      "lastAt": "2026-07-19T15:38:10.692Z",
+      "lastAt": "2026-07-19T15:50:32.339Z",
       "startDay": 19,
       "endDay": 19,
-      "beats": 5
+      "beats": 6
     }
   ],
   "company": [

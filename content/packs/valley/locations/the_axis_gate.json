@@ -75,5 +75,11 @@
     "space": 0.3
   },
   "waygate": true,
-  "waygateTier": 2
+  "waygateTier": 2,
+  "substrateSource": {
+    "kind": "pool",
+    "strength": 0.88,
+    "radius": 150,
+    "reason": "Every waygate in the world routes through here. The traffic itself keeps the lattice thick."
+  }
 }

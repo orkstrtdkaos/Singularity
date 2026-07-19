@@ -60,13 +60,25 @@ her work gave it something to press against.
 
 ---
 
-# §1 — The thin ground cut both ways, and the game charged for it correctly
+# §1 — The thin ground cut both ways — but the ENGINE did not charge for it. ⚠ CORRECTED
 
 *"The substrate is thin here and you feel it — the shadow-shapes cost more than they should."*
 
-**That is the right answer and nothing told it to be.** Shadow-work is umbral, classified
-`lattice 0.6 / natural 0.4` in `power_sources.json`, shipped hours before this scene was played. A
-lattice-leaning craft in thin ground **should** pay above its rate.
+**⚠ CORRECTION, 2026-07-19 — I over-claimed this and CCode caught it.**
+
+I wrote that the game *charged* correctly for umbral craft in thin ground. **It did not.** `umbral`
+was the **only pole tradition with no `substrateBand` at all**, which made it mechanically NEUTRAL —
+full power at every density. Nothing was charged.
+
+What actually happened: **the model read the location's thin substrate from context and narrated the
+friction itself.** That is good behaviour and it is not mechanical confirmation, and I presented it
+as the latter. Exactly the failure I spent the day cataloguing in others: **a claim that looked like
+a finding, asserted without checking what was measured.**
+
+The classification stands — umbral is `lattice 0.6 / natural 0.4`, and a lattice-leaning craft in
+thin ground *should* pay above its rate. **It now can**: `umbral` has been given a band (0.58/0.28,
+matching its region and the established mid-tier width), so 24 of 24 pole traditions are banded.
+Next time this scene plays, the cost will be real.
 
 And the other half held: what was laid down **met no competition.** The wards hold — *rough*, felt
 rather than sealed, a deterrent and not a lock. That is a better outcome than either "it works" or

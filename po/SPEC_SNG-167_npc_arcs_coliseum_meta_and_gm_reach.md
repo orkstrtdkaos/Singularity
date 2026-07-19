@@ -171,3 +171,35 @@ player-facing prose in the moment.
    its own engine path so "how you won" is adjudicated rather than model-judged?
 4. §4 — is there a clean place in the turn pipeline to decide tier *before* the call, or would this
    need a cheap pre-classify (which is itself a Haiku call and may pay for itself)?
+
+
+---
+
+## §1 SUPERSEDED BY CCODE'S ROUND 2 — I diagnosed one layer too high
+
+**The first-order cause is a loader bug, not an authoring gap.** `engine/state.js:130`:
+
+```js
+const name = path.split("/").pop().replace(".md", "");
+```
+
+It strips only `.md`. **24 of 27 lore files are `.json`**, so they are keyed as
+`the_twelve_reaches.json` while every `loreRefs` entry asks for the bare stem — and
+`loreForLocation`'s `.filter(Boolean)` swallows every miss in silence.
+
+**3 of 14 refs resolve. 84 of 95 locations deliver ZERO lore to the GM.** `the_twelve_reaches`
+(referenced by 80 locations) and `traditions` (69) have **never once reached the model.**
+
+My §1 read the symptom correctly and then blamed the layer above it. Worse: **the authoring pass I
+proposed would have improved nothing** — wiring more refs into a loader that drops them by extension
+adds orphans to an unread list. This is the same shape as the substrate retraction: a real symptom,
+a plausible cause, and no check that the plausible cause was the operative one.
+
+**The orphan finding survives as a second-order fact** — files referenced by nothing are still
+unreachable after the fix — but it is no longer the headline and must not be built first.
+
+**CCode's two caveats are adopted into the spec:** five refs stay dangling afterwards (`traditions`
+loads into a different object that never reaches `loreForLocation`), and `fetchText` on `.json` hands
+the model raw JSON at ~2,900 tokens mean / ~5,900 worst. **A renderer is part of the fix, not a
+follow-up** — otherwise it trades a silent miss for a silent bloat, which is the worse trade because
+it costs money on every turn and looks like it is working.

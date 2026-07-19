@@ -160,3 +160,27 @@ shape is ready:
    without three near-duplicate paragraphs in the prompt?
 3. §2.1 — `npcUpdates` is already a long contract. Does adding a required field on `meet` risk the
    model dropping others, and is that measurable before we ship it?
+
+
+---
+
+## CORRECTION + §2 CLOSED (Aevi)
+
+**§2 said authored NPCs "do carry `appearance`" and render distinctly. Measured: 1 of 42 did.**
+
+The portrait convergence was never mainly a generated-NPC problem — it was corpus-wide. The prompt
+seed leads with `npc.appearance` and there was almost nothing to lead with, so effectively every
+portrait in the game resolved from `role` and `name`. Another claim asserted from the shape of the
+code rather than from counting the data.
+
+**§2 content half is now SHIPPED: 40 NPCs given physical descriptions** — build, height, age,
+colouring, one distinguishing mark, bearing, and how the clothing has worn. Deliberate variety:
+most are past forty, several past seventy, few are symmetrical, and the non-human forms (three Ents,
+the Old Stag, the Lightless Seraph) are described as what they are rather than as people.
+
+**This is live with no engine change** — `npcPromptSeed` already reads the field. Unlike the substrate
+pass, which needs a resolver before it does anything.
+
+**Still open in §2:** the `npcUpdates` contract field (so NPCs met in play get an appearance too),
+the variety directive in the prompt, and the per-region look notes that pair with SNG-166's onomastics.
+Those are build/prompt work, not content.

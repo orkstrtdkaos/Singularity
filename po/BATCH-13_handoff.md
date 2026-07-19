@@ -10,7 +10,8 @@ Build order is CCode's own recommendation, accepted without change.
 | # | item | why here |
 |---|---|---|
 | **1** | **Lore loader** (`state.js:130`) | Upstream of the most reports, smallest change in the batch. **Includes both caveats as part of the fix**: the five refs that stay dangling, and a **renderer** for `.json` — raw JSON at ~2,900 tokens mean trades a silent miss for a silent bloat, which is worse because it costs on every turn and looks like it works. |
-| **2** | **SNG-171 §2 · reconcile history-credit** | Erik is level 16 and unknown to people he has actually worked with. v7/v8 are the precedent; this is the same shape over history rather than origin. ⚠️ blocked on §D ruling. |
+| **2** | **SNG-179 · the ops that never fire** | **CCode's finding.** List-shaped ops fire heavily; all three one-shot marks (`discovery`, `markTeacher`, `markDefiningMoment`) have **never** fired in 16 levels. Root cause behind the Ent, the teachers, and the standing. Four specs describe behaviour that cannot happen until this lands. Needs a live instrumented turn from Erik — prompt weight and parse loss have different tells. |
+| **2b** | **SNG-171 §2 · reconcile history-credit** | Erik is level 16 and unknown to people he has actually worked with. v7/v8 are the precedent; this is the same shape over history rather than origin. ⚠️ blocked on §D ruling. |
 | **3** | **SNG-169 §2c · one HTML attribute** | 12th built-never-reached. `entityHover`'s item branch + `itemDetail` fully written and unreached. Cheapest live win in the batch. |
 | **4** | **BATCH-12 §3 · standing** | Read path complete, display live, **only** structured-quest effects write it. Origin seeding shipped (v8); company accrual + `standingOps` remain. |
 | **5** | **SNG-173 · toolkit decay** (new, below) | One-line cause, and it is why Erik stopped seeing SNG-142. |
@@ -118,6 +119,21 @@ offer rate over a shrinking candidate pool reads as silence.
    rather than a decaying one. Browser-leg is Erik's.
 
 ---
+
+# §E2 — ROUND 2 EXCHANGE
+
+Full record with my responses: **`po/results/20260718_BATCH-13_ROUND2.md`**. Erik's correction —
+the back-and-forth belongs in alerts, specs and results, not in chat. Adopted as standing practice.
+
+Superseded by CCode's ROUND 2: **SNG-175 §1** (the `fresh → established → nominated` ladder already
+existed and was inert — SNG-178's `TIER_SCHEMA` is the better framing, and lazy-not-eager is the
+load-bearing choice I would have got wrong). **SNG-175 §5 Q4 answered before authoring** — 285/285
+abilities carry `levelReq`, so the curriculum spine derives and a teacher authors only deviations.
+**No content pass needed.** Asking before authoring has now paid for itself twice in one session.
+
+**SNG-177 provenance adopted:** a *derived* domain credits at **half weight**; `people` is never
+invented. I specced how a bond credits domains and never asked how confident we are that those
+domains are real.
 
 # §F — STANDING NOTES ON MY OWN PRACTICE
 

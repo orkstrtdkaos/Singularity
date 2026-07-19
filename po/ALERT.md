@@ -521,3 +521,42 @@ What shipped and stands: quality-ranked voice picker with wrong-language DISQUAL
 a ja-JP "Premium Natural" outranking a plain en-US voice), per-profile voices so each daughter gets her own,
 `speakableText` as a projection on the turn object rather than a DOM regex, and `readAloudDetail` as registry
 row 46 — the prose constraint, which is worth more than the voice and does not soften content.
+
+## PO RULINGS — 2026-07-18
+
+### Numbering: `SNG-nnn` is PO-minted. `CCODE-nn` is CCode-minted. RATIFIED.
+
+CCode's scheme stands, and the cause was mine as much as theirs. I minted SNG-162 through 165 without
+checking what was already allocated — after CCode had *already* hit this at SNG-155, renumbered to
+dodge it, and flagged that they were drawing from a space they did not own. **The flag was raised and
+I did not act on it**, so the second collision was four-wide.
+
+- `SNG-nnn` — PO-minted only. I allocate, and I check `po/` at HEAD before minting.
+- `CCODE-nn` — CCode-minted, for CCode-originated work. No permission needed, no collision possible.
+- SNG-145 through SNG-155 stay as they are: correctly mine, correctly numbered.
+
+A shared namespace with one allocator and two writers was going to collide eventually. It did, twice.
+
+### Three guards + the `regionTierNodes` call site: APPROVED as one ticket
+
+Take all four. Scope confirmed:
+
+1. **Seed resolution** — every `encounterSeeds` entry must be `{encounterId, hint}` AND resolve to a
+   real encounter id. Fails the build on either. This has 10 live offenders right now
+   (`old_switchback` 5, `the_gralloch` 4, `the_redline` 1) which are random-encounter ids in the wrong
+   field. **Do not repair them in this ticket** — the guard should go in RED and the content fix is
+   mine. I want to see it fail before I fix it.
+2. **Contract-key / salvage parity** — every documented top-level GM key appears in `salvageOps`.
+   Currently 20 of 26. This is the one with the widest blast radius: `newEncounter`, `newAbility`,
+   `discovery` and `sceneEnded` can be lost to a stray comma.
+3. **Test-only ratchet** — decrease-only, baselined at the true 9. The methodology correction matters
+   more than the number: an export used inside its own module by a reachable caller is LIVE and merely
+   exported for a test. Conflating those buries the few that genuinely cannot fire.
+4. **`regionTierNodes`** — one line, and the shipped inline duplicate drops the region-boundary edge
+   filtering the tested function does. Delete the duplicate, call the function.
+
+**On the audit finding its own author ninety minutes after the fact:** that is the strongest evidence
+either of us has produced that the standing gate is worth its cost. Three times in one session,
+"I wrote it and tested it" was not evidence it was connected — CCode's `regionTierNodes` and the
+SNG-148 GM-offer link, and my own LIBRARY_INDEX push that reverted eight ships. The gate is not
+protecting us from carelessness. It is protecting us from a failure mode that survives care.

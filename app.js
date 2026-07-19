@@ -11,6 +11,7 @@ import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, tou
 import { newProfile, updateProfile, aptitudeMods, profileInsight, grantAptitudes, fadingAptitudes, ensureCharacterStyle, ensureRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, revokeAdultGate, RATING_ORDER, RATING_LEVEL } from "./engine/playerprofile.js";
 import { gmTurn, parseIntent, gmAsk, generateBio, suggestBuild, extractGambit, sanitizeScene, narrativeRegister, ratingRegister, bluntnessDirective } from "./engine/gm.js";
 import { namesToAvoid } from "./engine/namematch.js";
+import { affiliationOf, regionHomeTradition, buildPeopleVocab } from "./engine/affiliation.js"; // SNG-185
 import { applyQuestUpdates, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, slugify, advanceStructuredQuest } from "./engine/quests.js";
 import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM } from "./engine/corrections.js";
 import { getApiKey, setApiKey, callClaude, callClaudeJSON, parseLooseJSON } from "./engine/claude.js";
@@ -58,7 +59,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.155";
+const APP_VERSION = "1.8.156";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1537,6 +1538,16 @@ function logOpOutcome(op, outcome) {
   else { row.rejected++; row.lastWhy = outcome; }
 }
 
+/** SNG-185: affiliate a met NPC — its people + domains, from the same helper generate.js uses, with
+ *  the meet-location's region as the weakest fallback. The people vocabulary is built once from the
+ *  authored NPC corpus (a new authored people appears automatically). */
+let _peopleVocab = null;
+function affiliateNpc(record) {
+  if (!_peopleVocab) _peopleVocab = buildPeopleVocab({ npcs: CONTENT.npcs || {} });
+  const region = CONTENT.locations?.[record?.lastSeen?.locationId || record?.firstMet?.locationId || character.currentLocationId]?.regionId;
+  return affiliationOf(record, { traditionIndex: CONTENT.traditionIndex, peopleVocab: _peopleVocab, regionHome: regionHomeTradition(region, CONTENT.traditionIndex) });
+}
+
 /** SNG-166 §3: every save on this device, for the cross-character name guard. A per-character check
  *  reads GREEN forever — within any one save there is exactly one Mara; she is in FOUR of them. */
 function allCharactersOnDevice() {
@@ -1638,7 +1649,7 @@ async function handleGenerateRequests(turn) {
   ensureGenerated(character);
   const location = hereNow();
   const time = readClock(character.clock);
-  const memCtx = { locationId: location.id, day: time.day, entities: codexEntities(), rules: CONTENT.rules };
+  const memCtx = { locationId: location.id, day: time.day, entities: codexEntities(), rules: CONTENT.rules, affiliate: affiliateNpc };
   const notes = [];
   for (const req of reqs.slice(0, 3)) {
     const type = req?.type;
@@ -2887,7 +2898,7 @@ function applyTurn(turn, resolution, playerWords = null) {
     }
   }
   // people & places remember (typed ops, clamped)
-  const memCtx = { locationId: location.id, day: readClock(character.clock).day, entities: codexEntities(), rules: CONTENT.rules };
+  const memCtx = { locationId: location.id, day: readClock(character.clock).day, entities: codexEntities(), rules: CONTENT.rules, affiliate: affiliateNpc };
   applyNpcUpdates(character, turn.npcUpdates || [], memCtx);
   // legacy relationshipDeltas: tolerated but may only UPDATE existing people —
   // this path once minted duplicate id-named registry entries

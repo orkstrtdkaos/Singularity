@@ -135,5 +135,10 @@
     "purpose": "One name, one home — a display name lives on the record its id points at, and every reference resolves it rather than spelling it.",
     "playerVisibleSurface": "Every authored name a player reads: a rename changes the record and the prose follows, and SNG-111's progressive naming renders the same person differently to someone who has learned their name.",
     "whatMakesItFire": "Prompt assembly and any render of authored prose — a {{kind:id}} token resolves to the current display name. Always, but a no-op on strings without a token."
+  },
+  "affiliation.js": {
+    "purpose": "The one answer to 'what kind of being is this person, and what do they practise' — read from their own role, skills and region with provenance, so the two mint paths can never disagree about it again.",
+    "playerVisibleSurface": "Indirect: every teacher who can now teach and every people who can now credit you — a met NPC's craft becoming legible is what lets standing move and a mentor mentor.",
+    "whatMakesItFire": "Meeting anyone in play (npcs.js applyNpcUpdates), minting anyone (generate.js), and the reconcile v11 backfill over people already in the save. Before SNG-185 the meet-path stamped nothing, which is why registry-only people had no craft."
   }
 }

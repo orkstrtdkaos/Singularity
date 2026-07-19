@@ -129,6 +129,16 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
     if (u.bondType || u.bondStage) advanceBond(n, { bondType: u.bondType, bondStage: u.bondStage }, ctx.rules, ctx.day);
     if (u.status && ["active", "injured", "missing", "dead", "departed"].includes(u.status)) n.status = u.status;
     if (u.statusNote) n.statusNote = smartClamp(String(u.statusNote), 240); // SNG-152
+    // SNG-185: STAMP AFFILIATION HERE. This is the second mint path — anyone the GM meets in play —
+    // and until now it stamped nothing, so registry-only people (Veth, the Crossing Ent) carried no
+    // domains and could neither teach nor be credited. Same helper generate.js uses, so the two mints
+    // can no longer disagree. Runs after role/skillsObserved are populated (its evidence), only fills
+    // what is missing, and assigns nothing the record cannot support.
+    if (ctx.affiliate && (!n.domains || !n.people)) {
+      const a = ctx.affiliate(n);
+      if (a.domains && !n.domains) { n.domains = a.domains; n.domainsSource = a.domainsSource; }
+      if (a.people && !n.people) { n.people = a.people; n.peopleSource = a.peopleSource; }
+    }
     n.lastSeen = { locationId: ctx.locationId || null, day: ctx.day ?? null };
   }
   return character.npcRegistry;

@@ -20,6 +20,7 @@ import { inferDomains } from "./traditions.js";
 import { fallbackPersonalArc } from "./personalArc.js";
 import { seedStandingAtCreation } from "./standing.js";
 import { namesMatch } from "./namematch.js";
+import { affiliationOf, regionHomeTradition, buildPeopleVocab } from "./affiliation.js";
 
 // ---------- character migration steps (extensible registry) ----------
 // Each step: { version, id, playerFacing, apply(entity, ctx) → { notes?, offers?, warnings? } }.
@@ -268,6 +269,34 @@ export const CHARACTER_STEPS = [
         n++;
       }
       return n ? { notes: [`affiliated ${n} generated NPC(s) from their home country`] } : {};
+    }
+  },
+  {
+    version: 11, id: "npc-affiliation-backfill", playerFacing: false,
+    // SNG-185. The GM meet-path never stamped affiliation, so every registry-only NPC in an existing
+    // save carries no domains — which is why the Ent credited nothing and Veth could not teach. The
+    // engine now stamps on meet (npcs.js), but Veth and the Crossing Ent exist NOW and must not need
+    // re-meeting. This runs the SAME helper over the registry: role string, then skillsObserved, then
+    // region home (half-weight, marked derived), reading the people vocabulary the same way.
+    //
+    // Idempotent by construction — it only fills a record with no domains, so re-running changes
+    // nothing (acceptance §5). Never invents a people (§2.4). Silent: it grants no power, it makes
+    // existing bonds and teachers legible.
+    apply: (c, ctx) => {
+      const idx = ctx.content?.traditionIndex;
+      const locations = ctx.content?.locations || {};
+      if (!idx?.byId) return {};
+      const peopleVocab = buildPeopleVocab({ npcs: ctx.content?.npcs || {} });
+      let n = 0;
+      for (const rec of Object.values(c.npcRegistry || {})) {
+        if (!rec || rec.domains) continue;
+        const region = locations[rec.lastSeen?.locationId || rec.firstMet?.locationId]?.regionId;
+        const a = affiliationOf(rec, { traditionIndex: idx, peopleVocab, regionHome: regionHomeTradition(region, idx) });
+        if (a.domains) { rec.domains = a.domains; rec.domainsSource = a.domainsSource; }
+        if (a.people && !rec.people) { rec.people = a.people; rec.peopleSource = a.peopleSource; }
+        if (a.domains) n++;
+      }
+      return n ? { notes: [`affiliated ${n} person(s) you already know — their crafts are legible now`] } : {};
     }
   },
   {

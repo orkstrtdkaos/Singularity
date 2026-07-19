@@ -18,6 +18,7 @@
 
 import { slugify } from "./quests.js";
 import { namesMatch } from "./namematch.js";
+import { affiliationOf, regionHomeTradition } from "./affiliation.js";   // SNG-185: the ONE affiliation impl
 import { validate, missingRequired, defaultFor } from "./genschema.js";
 
 export const GEN_TYPES = ["npc", "location", "arc"];
@@ -557,38 +558,15 @@ export function nominationsFor(character) {
  *  fine starting point for the GM but weak evidence for standing credit. Recording the source lets
  *  the credit path weigh them differently instead of treating a floor as a fact.
  */
+// SNG-185 §5.1: this WAS a second implementation of the affiliation logic, and a second
+// implementation is how the mint paths drifted — generated NPCs got domains, met NPCs got nothing.
+// It now delegates to engine/affiliation.js, the single home both paths share. The shared version is
+// a strict superset (it also reads the role string and skillsObserved), so generation gains those
+// too; nothing here regresses.
 export function affiliationFor(entity, context = {}, traditionIndex = null) {
   const loc = context.location || {};
-  const valid = t => !!t && (!traditionIndex?.byId || !!traditionIndex.byId[t]);
-  const out = {};
-
-  // (1) what the model authored, if it is real
-  const raw = entity?.domains;
-  if (raw && typeof raw === "object") {
-    const keep = {};
-    for (const slot of ["primary", "secondary", "tertiary"]) {
-      const v = raw[slot];
-      if (Array.isArray(v)) { const ok = v.filter(valid); if (ok.length) keep[slot] = ok.length === 1 ? ok[0] : ok; }
-      else if (valid(v)) keep[slot] = v;
-    }
-    if (keep.primary) { out.domains = keep; out.domainsSource = "generated"; }
-  }
-
-  // (2) the floor: the tradition whose home this region is
-  if (!out.domains) {
-    const region = loc.regionId || loc.region || context.regionId || null;
-    const home = region && traditionIndex?.byId
-      ? Object.values(traditionIndex.byId).find(t => t?.region === region)?.traditionId
-      : null;
-    if (valid(home)) { out.domains = { primary: home }; out.domainsSource = "derived"; }
-  }
-
-  // (3) people — model-authored only. Never invented.
-  if (typeof entity?.people === "string" && entity.people.trim()) {
-    out.people = entity.people.trim().toLowerCase();
-    out.peopleSource = "generated";
-  }
-  return out;
+  const regionHome = regionHomeTradition(loc.regionId || loc.region || context.regionId || null, traditionIndex);
+  return affiliationOf(entity, { traditionIndex, peopleVocab: context.peopleVocab || null, regionHome });
 }
 
 export function buildGeneratePrompt(type, context = {}, { schema = {}, examples = [], substrate = null } = {}) {

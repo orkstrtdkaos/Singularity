@@ -5754,6 +5754,68 @@ await (async () => {
   check("179fix: and no emphasis was added — the derivation carries it, the prompt does not shout", !/markTeacher.*MUST.*MUST/.test(gmSrc3));
 }
 
+// --- SNG-185: registry-only people get domains — ONE helper, both mint paths, the trap avoided ---
+{
+  const af = await import("../engine/affiliation.js");
+  const np = await import("../engine/npcs.js");
+  const idx = { byId: {
+    ashwarden: { traditionId: "ashwarden", name: "The Ashwardens", region: "the_palelands" },
+    umbral: { traditionId: "umbral", name: "The Umbrals", region: "umbral_depths" },
+    mason: { traditionId: "mason", name: "The Masons", region: "the_making" }
+  } };
+  const peopleVocab = new Set(["ent", "human", "seraph"]);
+
+  // §4.1 — Veth resolves an Ashwarden domain from HER OWN ROLE TEXT, marked derived (source "role").
+  const veth = af.affiliationOf({ name: "Veth Ondra", role: "Former Ashwarden warden, traveling companion" }, { traditionIndex: idx, peopleVocab });
+  check("185: the role string resolves the tradition (strongest signal, first)", veth.domains?.primary === "ashwarden");
+  check("185: and provenance is 'role', not 'generated' — it was read, not stated", veth.domainsSource === "role");
+
+  // §3 order — role beats region; skillsObserved is the second read.
+  const bySkill = af.affiliationOf({ name: "x", role: "a wandering tinker", skillsObserved: ["deep umbral shadow-work"] }, { traditionIndex: idx, peopleVocab });
+  check("185: skillsObserved is read when the role names no craft", bySkill.domains?.primary === "umbral" && bySkill.domainsSource === "observed");
+
+  // ⛔ THE TRAP — a role naming a PEOPLE is not a craft. "Ent" is a kind, not a tradition.
+  const ent = af.affiliationOf({ name: "an ancient Ent", role: "an ancient Ent of the grove" }, { traditionIndex: idx, peopleVocab });
+  check("185: an Ent resolves people:ent (§4.2)", ent.people === "ent" && ent.peopleSource === "role");
+  check("185: and gets NO domain invented from being an Ent — the trap avoided", ent.domains === undefined);
+
+  // People and tradition vocabularies never cross: 'mason' the craft must not be read as a people,
+  // and a people-word must not be read as a craft.
+  const mason = af.affiliationOf({ name: "Bevan", role: "a Mason of the Making" }, { traditionIndex: idx, peopleVocab });
+  check("185: a real tradition in a role resolves as a domain, not a people", mason.domains?.primary === "mason" && !mason.people);
+
+  // A common-English tradition id must not false-match inside another word.
+  const noFalse = af.affiliationOf({ name: "y", role: "a stonemasonry apprentice with no craft named" }, { traditionIndex: idx, peopleVocab });
+  check("185: 'mason' inside 'stonemasonry' does not false-match (whole-word only)", noFalse.domains === undefined);
+
+  // §2.4 — never invents a people; §4.4 — never assigns what the record cannot support.
+  const bare = af.affiliationOf({ name: "someone", role: "a quiet traveler" }, { traditionIndex: idx, peopleVocab });
+  check("185: a record naming neither craft nor people gets neither — nothing invented", !bare.domains && !bare.people);
+
+  // Region home is the WEAKEST fallback, half-weight marked derived (§3.3).
+  const byRegion = af.affiliationOf({ name: "z", role: "a local" }, { traditionIndex: idx, peopleVocab, regionHome: "umbral" });
+  check("185: region home is the last-resort fallback, marked 'derived'", byRegion.domains?.primary === "umbral" && byRegion.domainsSource === "derived");
+
+  // §5.1 — the MEET PATH (npcs.js) now stamps, using the same helper. This was the whole gap.
+  const c = { npcRegistry: {} };
+  const affiliate = (rec) => af.affiliationOf(rec, { traditionIndex: idx, peopleVocab });
+  np.applyNpcUpdates(c, [{ op: "meet", npcId: "w", name: "A Warden", role: "Ashwarden warden" }], { locationId: "x", day: 1, affiliate });
+  check("185: a person MET in play is now affiliated at meet — the second mint path stamps", c.npcRegistry.w?.domains?.primary === "ashwarden");
+  check("185: and the meet-path records provenance too", c.npcRegistry.w?.domainsSource === "role");
+
+  // The reconcile backfill is idempotent (§4.5) — only fills a domainless record.
+  const rc = await import("../engine/reconcile.js");
+  const step = rc.CHARACTER_STEPS.find(x => x.id === "npc-affiliation-backfill");
+  check("185: the backfill step is registered", !!step);
+  const save = { npcRegistry: { veth: { id: "veth", name: "Veth", role: "Former Ashwarden warden", lastSeen: { locationId: "loc" } } } };
+  const ctx = { content: { traditionIndex: idx, npcs: {}, locations: { loc: { regionId: "the_palelands" } } } };
+  step.apply(save, ctx);
+  check("185: the backfill gives an existing registry NPC its domain", save.npcRegistry.veth.domains?.primary === "ashwarden");
+  const snap = JSON.stringify(save.npcRegistry);
+  step.apply(save, ctx);
+  check("185: re-running the backfill changes nothing (§4.5)", JSON.stringify(save.npcRegistry) === snap);
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

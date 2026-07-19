@@ -58,7 +58,9 @@
     "kind": "sink",
     "delta": -0.18,
     "radius": 120,
-    "reason": "Mason work is concrete work — weight that holds without the lattice. The Leaden Deep is the deepest expression of a craft that refuses it."
+    "reason": "Mason work is concrete work — weight that holds without the lattice. The Leaden Deep is the deepest expression of a craft that refuses it.",
+    "radiusWorld": 0.072,
+    "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
   },
   "worldPos": {
     "colatitude": 87.0,

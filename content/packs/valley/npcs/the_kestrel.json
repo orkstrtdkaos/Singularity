@@ -5,16 +5,31 @@
   "role": "Keeper of the pass-ledger; unofficial law of Kestrel's Roost",
   "homeLocation": "kestrels_roost",
   "communityId": "valley.kestrels_roost",
-  "personality": {"warmth": 0.3, "trust": -0.1, "candor": 0.4, "patience": 0.5},
-  "spectrum": {"chaos_order": 0.3, "falsehood_truth": 0.2, "individual_collective": -0.2, "concrete_abstract": -0.2},
+  "personality": {
+    "warmth": 0.3,
+    "trust": -0.1,
+    "candor": 0.4,
+    "patience": 0.5
+  },
+  "spectrum": {
+    "chaos_order": 0.3,
+    "falsehood_truth": 0.2,
+    "individual_collective": -0.2,
+    "concrete_abstract": -0.2
+  },
   "voiceHints": "Sharp, economical, reads a person's worth in a glance and rarely wrong. Speaks in favors owed and favors due. Warmth is real but transactional until you've proven you pay what you owe. Missing two fingers on her left hand; never explains them.",
   "knowledge": [
-    "Every debt, grudge, and secret that has crossed the pass in fifteen years \u2014 the ledger is in her head as much as on paper",
+    "Every debt, grudge, and secret that has crossed the pass in fifteen years — the ledger is in her head as much as on paper",
     "Who is really buying up pass-debts, and that the pattern frightens her",
     "The safe and unsafe ways over the high pass in every season",
     "Which 'salvage' coming through the Roost is Precursor-live and dangerous, and who's lying about it"
   ],
-  "wants": "To keep the Roost free \u2014 owned by no city, no faction, only its own ledger \u2014 and to find who's trying to buy it out from under her before it's too late.",
+  "wants": "To keep the Roost free — owned by no city, no faction, only its own ledger — and to find who's trying to buy it out from under her before it's too late.",
   "fears": "That the thing she built to be beholden to no one becomes someone's possession by patient arithmetic she didn't see coming.",
-  "reactsToReputation": {"reliable": "extends real trust and better terms", "debtor": "cold, watched, cut off", "dangerous": "keeps at arm's length, uses through intermediaries"}
+  "reactsToReputation": {
+    "reliable": "extends real trust and better terms",
+    "debtor": "cold, watched, cut off",
+    "dangerous": "keeps at arm's length, uses through intermediaries"
+  },
+  "appearance": "Ageless-lean, somewhere past fifty, sharp-featured with a hooked nose that earned the name. Iron-grey hair scraped back hard. Wears a coat with more pockets than seems reasonable and keeps the ledger in the innermost."
 }

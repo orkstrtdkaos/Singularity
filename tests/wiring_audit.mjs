@@ -101,7 +101,7 @@ check(`SYSTEM_SPEC header certifies the real ability count (${abilityCount})`,
   specAbilities && Number(specAbilities[1]) === abilityCount,
   `header says ${specAbilities?.[1] ?? "?"}, HEAD has ${abilityCount}`);
 
-// SNG-164 (PO finding A3): this gate covered engine modules and abilities ONLY, while the header
+// CCODE-09 (PO finding A3): this gate covered engine modules and abilities ONLY, while the header
 // also certifies locations, regions and rules files. The PO added three locations, a region and a
 // rules file and the header drifted silently — 92→95, 24→25, 18→29 — under a check that reads as
 // certification. HALF-GATED FRESHNESS IS WORSE THAN NONE: an unchecked number beside a checked one
@@ -130,7 +130,7 @@ check(`SYSTEM_SPEC header certifies the real core-rules count (${rulesCount})`,
   specRules && Number(specRules[1]) === rulesCount,
   `header says ${specRules?.[1] ?? "?"}, HEAD has ${rulesCount}`);
 
-// ---------- 3b. version coherence (SNG-162) ----------
+// ---------- 3b. version coherence (CCODE-07) ----------
 // APP_VERSION stamps every feedback report; index.html's ?v= busts the cache. When they drift, bug
 // reports are filed against a version that was never running — which is how a stale 1.8.104 label
 // survived five ships. Cheap to check, expensive to debug without.

@@ -208,7 +208,7 @@ export const GM_CONTEXT = [
   { key: "waygateDetail", builder: "waygate.waygateBlockForGM (SNG-148)", carries: ["gate here", "aimable gates", "hub routing"],
     reachedBy: "map ◈ Waygate control + GM offer", spec: "§9", views: ["turn"],
     build: (env) => waygateBlockForGM(env.character, env.CONTENT.locations) },
-  // SNG-158: scenes were never closing (a real save ran 169 beats in ONE scene), so the chronicle
+  // CCODE-03: scenes were never closing (a real save ran 169 beats in ONE scene), so the chronicle
   // stayed thin and the save bloated. The contract now tells the GM when to close; this tells it
   // that THIS scene has run long. Silent until it matters — pressure, not nagging (the SNG-080 shape).
   // SNG-155 §3a: read-aloud is a PROSE CONSTRAINT, not only an output channel — so it belongs in

@@ -68,7 +68,7 @@ export function resolveWaygateTransit({ character, destId, locations }) {
     : { destId: hub.id, routed: "hub", known, skilled };
 }
 
-/** SNG-165. Route a GM-narrated `moveTo` that is a WAYGATE TRANSIT.
+/** CCODE-10. Route a GM-narrated `moveTo` that is a WAYGATE TRANSIT.
  *
  *  The bug this closes: SNG-148 declared its REACHABLE link as "map control + GM offer" and only
  *  ever wired the map control. The GM was told gates exist and may narrate stepping through one —

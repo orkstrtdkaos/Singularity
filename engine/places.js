@@ -6,7 +6,7 @@
 import { smartClamp } from "./namematch.js"; // SNG-152
 
 // SNG-154: the sub-place cap was an inline 12. It is load-bearing (unbounded interiors would grow
-// the save the way unbounded scene history did in SNG-157), so it stays a cap — but it is named
+// the save the way unbounded scene history did in CCODE-02), so it stays a cap — but it is named
 // here, and raised: a real interior tier nests (Millbrook → the Edge District → the Inn → a booth)
 // and Millbrook was ALREADY at 12 with the truncation bug hiding collisions behind shared slugs.
 const CAPS = { notes: 12, flags: 10, subPlaces: 24 };
@@ -15,7 +15,7 @@ const CAPS = { notes: 12, flags: 10, subPlaces: 24 };
  *  from a truncated one (two long names sharing a 40-char prefix used to collapse
  *  into one record). A very long slug is bounded, but distinctness is preserved by
  *  a deterministic hash suffix of the full name — same name, same slug, forever. */
-export function subPlaceSlug(fullName) { // registry:internal
+export function subPlaceSlug(fullName) { // registry:internal
   let slug = String(fullName).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
   if (slug.length > 60) {
     let h = 0;

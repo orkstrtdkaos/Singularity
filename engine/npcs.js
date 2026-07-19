@@ -257,7 +257,7 @@ export function npcRegistryForGM(character, { locationId = null, sceneNpcNames =
     .slice(0, Math.max(0, 12 - relevant.length));
   const pick = [...relevant, ...rest].slice(0, 12);
   if (!pick.length) return null;
-  // SNG-152 + SNG-162 (prompt budget): STORAGE is generous — the full description/notes are kept on
+  // SNG-152 + CCODE-07 (prompt budget): STORAGE is generous — the full description/notes are kept on
   // the save and stay reachable in the UI. The PROMPT is a bounded PROJECTION of that: this is the
   // largest single block in the GM context (measured ~20.7k chars on a real 18-NPC save), and it is
   // re-sent every turn, so the read boundary is where the bound belongs — not the write boundary,

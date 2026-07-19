@@ -1,4 +1,4 @@
-// repair_self_variants.mjs — SNG-159 data repair.
+// repair_self_variants.mjs — CCODE-04 data repair.
 //
 // Restores shared-canon records that were demoted to "variant" by contesting against THEIR OWN
 // previously-promoted copy (a non-idempotent retry inside pushMergedFile's merge callback). The

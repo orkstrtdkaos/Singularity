@@ -199,7 +199,8 @@ export function birthWeightOf(context = {}) {
 
 /** Attach the `_gen` sidecar: entityId, birth-weight, engagement/tier, rating-tag, provenance,
  *  attention history. Clean provenance from day one so Phase-3 promotion is zero-rework. */
-export function stampGenerated(entity, type, entityId, context = {}) { // registry:internal
+export function stampGenerated(entity, type, entityId, context = {}) {
+ // registry:internal
   entity.id = entityId;
   entity._gen = {
     entityId, type,
@@ -230,7 +231,8 @@ export function stampGenerated(entity, type, entityId, context = {}) { // regis
 
 /** Write a generated record into the per-save store + drop a codex topic pointing at the
  *  same entityId (so the knowledge-graph surfacing finds it). Returns the stored record. */
-export function persistGenerated(character, type, record, deps = {}) { // registry:internal
+export function persistGenerated(character, type, record, deps = {}) {
+ // registry:internal
   ensureGenerated(character);
   character.generated[type][record.id] = record;
   // lightweight codex node so codexForGM surfaces it (person/place/lore by type)
@@ -321,7 +323,7 @@ export async function generate(type, context = {}, deps = {}) {
 // entities offscreen — that world-tick coupling is Phase 2, gated on SNG-041 (the one clock).
 
 const TIER_AT = { established: 3, nominated: 8 };   // engagementScore thresholds
-/** SNG-160: the thresholds the UI must show. Promotion to shared canon keys on `engagementScore`
+/** CCODE-05: the thresholds the UI must show. Promotion to shared canon keys on `engagementScore`
  *  reaching `nominated` — NOT on `effectiveWeight`, which is what the badge used to display. A
  *  player watching "weight 13" climb had no way to know the number that gates canon was 4/8. */
 export const NOMINATE_AT = TIER_AT.nominated;
@@ -458,7 +460,8 @@ export function buildGeneratePrompt(type, context = {}, { schema = {}, examples 
 }
 
 /** A short natural-language read of a place's disposition, for the generation prompt. */
-export function describeDisposition(loc = {}) { // registry:internal
+export function describeDisposition(loc = {}) {
+ // registry:internal
   const pi = loc.poleIntensity || {};
   const poles = Object.entries(pi).filter(([, v]) => Math.abs(v) > 0.15).sort((a, b) => Math.abs(b[1]) - Math.abs(a[1])).slice(0, 4);
   if (poles.length) return poles.map(([p, v]) => `${p} (${v > 0 ? "strong" : "leaning"})`).join(", ");

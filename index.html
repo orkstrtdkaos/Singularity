@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Singularity — The Valley of Echoes</title>
-  <link rel="stylesheet" href="style.css?v=1.8.125">
+  <link rel="stylesheet" href="style.css?v=1.8.126">
 </head>
 <body>
   <div id="app">
     <div class="boot">Loading the Valley…</div>
   </div>
-  <script type="module" src="app.js?v=1.8.125"></script>
-  <!-- SNG-163: BOOT WATCHDOG. Deliberately a CLASSIC script, not a module, and deliberately inline:
+  <script type="module" src="app.js?v=1.8.126"></script>
+  <!-- CCODE-08: BOOT WATCHDOG. Deliberately a CLASSIC script, not a module, and deliberately inline:
        it must survive the exact failure it reports on. A module that fails to fetch (GitHub Pages
        returned 503 on engine/canon.js on 2026-07-18) dies at module-graph RESOLUTION, before app.js
        runs a single line — so boot()'s own try/catch never fires, and the static "Loading the

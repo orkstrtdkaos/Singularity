@@ -154,7 +154,7 @@ export function authorshipStats(character, content = {}) {
   const worldEffect = promotedShared.reduce((sum, r) => sum + effectiveWeight(r), 0); // Q3: weighted, not a bare count
 
   const topAttention = personal
-    // SNG-161: carry the record id so the readout can offer ⭐ Keep inline (it showed a shortfall
+    // CCODE-06: carry the record id so the readout can offer ⭐ Keep inline (it showed a shortfall
     // with no way to act on it — the control lived only on the codex topic page).
     .map(r => ({ id: r.id, name: r.name || r.id, type: r._gen?.type || null, score: r._gen?.engagementScore || 0, tier: r._gen?.tier || "fresh", weight: effectiveWeight(r) }))
     .sort((a, b) => b.score - a.score || b.weight - a.weight)

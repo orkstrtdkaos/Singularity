@@ -302,7 +302,8 @@ export function dedupePlayers() {
 }
 
 /** Full profile objects on this device (not just {playerKey,displayName}). */
-export function listPlayerProfiles() { // registry:internal
+export function listPlayerProfiles() {
+ // registry:internal
   const out = [];
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
@@ -350,7 +351,7 @@ export function saveCharacter(c, { stamp = true } = {}) {
   try {
     localStorage.setItem(LS.character(c.id), payload);
   } catch (err) {
-    // SNG-157: the character save is the one write that MUST land. If storage is full, the
+    // CCODE-02: the character save is the one write that MUST land. If storage is full, the
     // expendable tenants are the recovery snapshots — evict them all and retry before failing.
     console.warn("[save] character write failed, evicting recovery snapshots and retrying:", err?.name || err);
     for (const k of recoveryKeys()) { try { localStorage.removeItem(k); } catch { /* best-effort */ } }
@@ -410,7 +411,7 @@ export function pruneRecovery(characterId, keep = RECOVERY_KEEP) {
 /** Preserve a losing copy under a recovery key so a both-advanced conflict never
  *  destroys work. Returns the recovery key, or null if it could not be written.
  *
- *  SNG-157: this is a SAFETY NET, and a safety net must never be the thing that breaks the
+ *  CCODE-02: this is a SAFETY NET, and a safety net must never be the thing that breaks the
  *  app. It previously wrote a full character copy under a NEW key every time (keyed by
  *  `updatedAt`) and never pruned — so snapshots accumulated until localStorage's ~5MB quota
  *  was gone, and the raw `setItem` threw QuotaExceededError straight through the character

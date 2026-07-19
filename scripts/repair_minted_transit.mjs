@@ -1,6 +1,6 @@
-// repair_minted_transit.mjs — SNG-165 data repair.
+// repair_minted_transit.mjs — CCODE-10 data repair.
 //
-// Before SNG-165, a GM-narrated waygate transit fell through to mintTransitLocation, so the WORDS
+// Before CCODE-10, a GM-narrated waygate transit fell through to mintTransitLocation, so the WORDS
 // of the transit became places: a location literally named "Waygate", another named "Center". The
 // player then stands in a room that was never authored and has no connections.
 //

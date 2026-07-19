@@ -216,7 +216,7 @@ export function tierParts(ctx) {
     scene.push(`## CURRENT SCENE STATE (AUTHORITATIVE — do not contradict; see rule 13)\nSetting: ${sceneState.setting}\nPresent: ${(sceneState.npcsPresent || []).map(n => `${n.name} (${n.state})`).join("; ") || "no one else"}\nObjects: ${(sceneState.objects || []).join(", ") || "nothing notable"}\nOpen threads: ${(sceneState.threads || []).join("; ") || "none"}`);
   }
   if (readAloudDetail) scene.push(`## READ ALOUD (SNG-155 — a prose constraint)\n${readAloudDetail}`);
-  if (scenePacingDetail) scene.push(`## SCENE PACING (SNG-158)\n${scenePacingDetail}`);
+  if (scenePacingDetail) scene.push(`## SCENE PACING (CCODE-03)\n${scenePacingDetail}`);
   if (partyDetail) scene.push(`## PARTY — other PLAYERS' characters in this shared scene (present and active; narrate them in, never decide for them)\n${partyDetail}`);
   if (companionsDetail) scene.push(`## COMPANIONS (traveling with the character — present in this scene)\n${companionsDetail}`);
   if (inventoryDetail) scene.push(`## INVENTORY (usable in scenes — reference items by their exact names)\n${inventoryDetail}`);
@@ -269,7 +269,8 @@ export function tierParts(ctx) {
 
 /** Cache-tier blocks for the runtime prompt: four stable→volatile prefix tiers, then the
  *  uncached player turn. Tier 1's constant rules are folded onto GM_SYSTEM by the caller. */
-export function buildTiers(ctx) { // registry:internal
+export function buildTiers(ctx) {
+ // registry:internal
   const t = tierParts(ctx);
   return {
     rules: t.system.join("\n\n"),

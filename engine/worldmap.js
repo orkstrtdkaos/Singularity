@@ -47,7 +47,7 @@ export function autoMapPositions(locations, { width = 800, height = 440, margin 
     const h = hashN(l.id);
     out[l.id] = { x: margin + (h % (width - 2 * margin)), y: margin + (Math.floor(h / 97) % (height - 2 * margin)) };
   }
-  // SNG-166 (PO finding): two AUTHORED locations can share an exact coordinate — ent_deepwood and
+  // CCODE-11 (PO finding): two AUTHORED locations can share an exact coordinate — ent_deepwood and
   // the_lampless_market both sit at (40,300) — and one then hides the other completely. Separate
   // them deterministically (never randomly: the map must look the same on every render) by nudging
   // later ids onto a small ring around the shared point. Authored geography is respected; only an

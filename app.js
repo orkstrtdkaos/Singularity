@@ -53,10 +53,10 @@ import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challe
 import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
-// SNG-162: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
+// CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.125";
+const APP_VERSION = "1.8.126";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -164,7 +164,7 @@ let wheelFnFilter = new Set(); // SNG-124 Phase B: active function-family filter
 let character = null;    // active character
 let profile = null;      // the player's profile (the human)
 let sceneTurns = [];     // recent beats: {summary, narration} for scene continuity
-// SNG-157: the stored scene history is BOUNDED. It was unbounded, and a long-running scene that
+// CCODE-02: the stored scene history is BOUNDED. It was unbounded, and a long-running scene that
 // never ended grew to 169 turns (~341KB) on a real save — 59% of a 600KB character — which is what
 // exhausted the localStorage quota and hung character load. Every consumer reads at most
 // `.slice(-6)` (the GM prompt, the gambit extractor), so 40 is generous headroom, not a trim of
@@ -687,7 +687,7 @@ function buildFeedbackContext() {
   if (lastTurn) ctx.lastGmTurn = smartClamp(lastTurn.summary || lastTurn.narration || "", 400);
   if (lastPlayerAction) ctx.lastAction = String(lastPlayerAction).slice(0, 160);
   if (_capturedErrors.length) ctx.errors = _capturedErrors.slice(-5);
-  if (character?._turnApplyError) ctx.turnApplyError = character._turnApplyError; // SNG-162: a swallowed-render event travels with the report
+  if (character?._turnApplyError) ctx.turnApplyError = character._turnApplyError; // CCODE-07: a swallowed-render event travels with the report
   return ctx;
 }
 function _feedbackScreenLabel() {
@@ -1155,14 +1155,14 @@ function migrate(c) {
   // on "writing your story…" forever. Clear them on load so a stale busy self-heals.
   delete c._chronicleBusy; delete c._chronicleError;
   (c.sessions || []).forEach(s => { if (s) delete s._recapBusy; });
-  // SNG-157: heal a save already bloated by the unbounded scene history — Erik's carried 169 turns
+  // CCODE-02: heal a save already bloated by the unbounded scene history — Erik's carried 169 turns
   // (~341KB, 59% of the file), which is what blew the storage quota. Trimming on load means an
   // affected save fixes itself on next open instead of needing a wipe. Nothing readable is lost:
   // consumers read at most the last 6, and each ended scene's summary lives in the chronicle.
   if (c.activeScene?.turns?.length > SCENE_TURN_CAP) {
     const before = c.activeScene.turns.length;
     c.activeScene.turns = c.activeScene.turns.slice(-SCENE_TURN_CAP);
-    console.warn(`[migrate] trimmed scene history ${before} → ${SCENE_TURN_CAP} turns (SNG-157 storage bound)`);
+    console.warn(`[migrate] trimmed scene history ${before} → ${SCENE_TURN_CAP} turns (CCODE-02 storage bound)`);
   }
   normalizeInventory(c, CONTENT.items);
   if (!c.clock) c.clock = newClock();
@@ -2666,7 +2666,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   // action label. Without this the GM's "history" is a monologue of its own prose and the player's
   // half of the scene has no permanence (the deepest continuity bug in the project).
   const playerWords = exactWords || resolution?.action?.label || (typeof playerInput === "string" && !/^\(/.test(playerInput) ? playerInput : null);
-  // SNG-162 (Design Law 5): the model already answered — the player has WAITED for this beat and
+  // CCODE-07 (Design Law 5): the model already answered — the player has WAITED for this beat and
   // paid for it. Bookkeeping must never be able to swallow it. Before this guard, ANY throw inside
   // applyTurn propagated out of runGM, the caller's `renderPlay(result.turn, …)` never ran, and the
   // narration vanished — while `character.activeScene.lastTurn` had ALREADY been persisted mid-way
@@ -2724,7 +2724,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
 }
 
 function applyTurn(turn, resolution, playerWords = null) {
-  // SNG-162: NEVER let a stranded currentLocationId throw. A place promoted from a sub-place, or a
+  // CCODE-07: NEVER let a stranded currentLocationId throw. A place promoted from a sub-place, or a
   // generated location whose record didn't survive a reload, leaves `CONTENT.locations[id]`
   // undefined — and this function reads `location.communityId` (deeds) and `location.id` (ledger).
   // The ledger read sits AFTER the save, so a throw there persisted the turn and lost the render.
@@ -2934,7 +2934,7 @@ function applyTurn(turn, resolution, playerWords = null) {
     // SNG-117: the header follows the fiction even to a place with no record yet — resolve it, or MINT it
     // (a named-but-unrecorded destination like "the pass" becomes a real, travelable place). Never no-op
     // and leave the header asserting a place the fiction has left.
-    // SNG-165: a transit FROM A WAYGATE is routed by the gate network, not by name-matching. Without
+    // CCODE-10: a transit FROM A WAYGATE is routed by the gate network, not by name-matching. Without
     // this, "you step through the waygate" minted a place called "Waygate" and "you arrive at the
     // Center" minted one called "Center" — the GM-offer half of SNG-148's REACHABLE link was never
     // actually wired, so the fiction's transit fell through to mintTransitLocation.
@@ -3005,7 +3005,7 @@ function applyTurn(turn, resolution, playerWords = null) {
   // chronicle + scene persistence
   if (turn.sceneSummary) {
     sceneTurns.push({ player: playerWords || null, summary: turn.sceneSummary, narration: turn.narration || "" }); // SNG-081: keep the player's half
-    if (sceneTurns.length > SCENE_TURN_CAP) sceneTurns = sceneTurns.slice(-SCENE_TURN_CAP); // SNG-157: bounded storage
+    if (sceneTurns.length > SCENE_TURN_CAP) sceneTurns = sceneTurns.slice(-SCENE_TURN_CAP); // CCODE-02: bounded storage
     if (turn.sceneEnded) { character.chronicle.push(turn.sceneSummary); sceneTurns = []; sceneState = null; character._intentAsked = null; } // SNG-145: a new scene may ask again
   }
   character.activeScene = turn.sceneEnded ? null : { locationId: character.currentLocationId, turns: sceneTurns, lastTurn: turn, sceneState };
@@ -3171,7 +3171,7 @@ async function onChoice(choice) {
   // The resume is the CHOICE itself (plain JSON): the answer annotates it and re-enters onChoice.
   if (!choice.intentRung && !choice.departureConfirmed) {
     const askedKey = activeEnc() ? `enc:${activeEnc().defId}` : `scene:${character.currentLocationId}`;
-    // SNG-156: the rung is per-RANK (147c moved it into ab.tree[]) — gate on what this character
+    // CCODE-01: the rung is per-RANK (147c moved it into ab.tree[]) — gate on what this character
     // can actually do at the rank they hold, not on the ability's lifetime ceiling.
     const ownedLevels = Object.fromEntries((character.abilities || []).map(a => [a.abilityId, a.level]));
     const harmGate = harmGateFor(abilityIds, fullCatalog(), askedKey, character._intentAsked, ownedLevels);
@@ -3535,7 +3535,7 @@ async function answerLedger(send) {
   renderPlay(character.activeScene?.lastTurn || null, { aside: send ? "Word of it travels — the world will hear." : "It stays local — a story this valley keeps." });
 }
 
-/** SNG-158: close the current scene on the player's say-so. The GM writes the closing beat and
+/** CCODE-03: close the current scene on the player's say-so. The GM writes the closing beat and
  *  the summing-up (so the chronicle entry is real prose, not a stub); the engine then does exactly
  *  what a GM-emitted sceneEnded does. If the GM can't answer, the scene still closes — a scene the
  *  player asked to end must end, or we are back to the 169-beat scene this exists to prevent. */
@@ -3767,7 +3767,7 @@ function renderMapLocation(locationId) {
       <title>${esc(c.name)}${c.promoted ? " — a place of its own now, still inside " + esc(name) : ""}${c.note ? " — " + esc(c.note) : ""}${c.visited ? "" : " (heard of, not seen)"}</title>
       <circle class="hit" cx="${c.x.toFixed(1)}" cy="${c.y.toFixed(1)}" r="22"/>
       <circle cx="${c.x.toFixed(1)}" cy="${c.y.toFixed(1)}" r="${c.promoted ? 11 : 8}"/>
-      ${/* SNG-166: stagger the label's distance by index so two adjacent ring nodes can never put
+      ${/* CCODE-11: stagger the label's distance by index so two adjacent ring nodes can never put
             their labels in the same horizontal band — measured 3 colliding pairs in the Edge
             District (long authored names) before this. The full name stays in the <title>. */""}
       <text x="${c.x.toFixed(1)}" y="${(c.y + (c.y > 230 ? 26 + (i % 2) * 14 : -14 - (i % 2) * 14)).toFixed(1)}" text-anchor="middle" class="map-label">${esc(c.name.length > 20 ? c.name.slice(0, 19) + "…" : c.name)}</text>
@@ -5162,14 +5162,14 @@ function renderChronicle() {
         <div class="auth-stat"><span class="auth-num accent">${auth.worldEffect}</span><span class="auth-label">world-effect — your fingerprint on the shared world</span></div>
       </div>
       <div class="hint" style="margin-top:6px">Of the world you've touched, <strong>${auth.authoredCount}</strong> ${auth.authoredCount === 1 ? "place/person was" : "were"} written before you — and you <strong>called ${auth.novelCount} new ${auth.novelCount === 1 ? "one" : "ones"} into being</strong>.${auth.novelCount ? ` Of those, ${auth.persisted.shared} ${auth.persisted.shared === 1 ? "is" : "are"} now canon the whole valley reads${auth.persisted.rumor ? `, ${auth.persisted.rumor} live${auth.persisted.rumor === 1 ? "s" : ""} on as rumor others may yet confirm` : ""}; ${auth.persisted.personal} real to you, not yet shared.` : ""}</div>
-      ${/* SNG-160: show the number that ACTUALLY gates promotion. This badge used to read
+      ${/* CCODE-05: show the number that ACTUALLY gates promotion. This badge used to read
             "weight N" (birthWeight + score/2) — so the Low Lamp Inn showed "weight 13" while
             sitting at 4 of the 8 engagement it needs, and a higher weight looked like it was
             closer to canon when it wasn't. Now: progress to the threshold, and what moves it. */""}
       ${auth.topAttention.length ? `<div style="margin-top:8px"><div class="sys-label">What you're making real right now</div>${auth.topAttention.map(t => {
         const ready = t.score >= NOMINATE_AT;
         const need = Math.max(0, NOMINATE_AT - t.score);
-        // SNG-161: the ⭐ lives HERE too, not only buried on the codex topic page. This row is
+        // CCODE-06: the ⭐ lives HERE too, not only buried on the codex topic page. This row is
         // where the player learns something "needs 4" — showing a shortfall with no way to act on
         // it is the readout half-built. ⭐ Keep is +4, so one tap is usually the whole gap.
         return `<div class="known-npc"><span class="npc-name">${esc(t.name)}</span> <span class="cost">${esc(t.type || "")} · ${esc(t.tier)}</span> <span class="rep-band ${ready ? "trusted" : ""}" title="Shared-world canon needs ${NOMINATE_AT} engagement. Revisit +2 · interact +2 · tie to a quest +2 · ⭐ Keep +4. (realness weight ${t.weight})">${ready ? "ready for canon" : `${t.score}/${NOMINATE_AT} to canon · needs ${need}`}</span>${t.id && !ready ? ` <button class="npc-ctl" data-keepfrom="${esc(t.id)}" title="⭐ Keep — mark this as one that matters to you (+4 toward canon)">⭐</button>` : ""}</div>`;
@@ -5204,7 +5204,7 @@ function renderChronicle() {
   const share = document.getElementById("chr-share"); if (share) share.onchange = (e) => { if (profile) { profile.sharedChronicle = e.target.checked; saveProfile(profile); } };
   const endBtn = document.getElementById("chr-endsession"); if (endBtn) endBtn.onclick = () => { endSession(character); saveCharacter(character); renderChronicle(); };
   for (const b of app.querySelectorAll(".session-recap")) b.onclick = () => ensureSessionRecap(b.dataset.sess);
-  // SNG-161: ⭐ Keep straight from the progress row (+4 — usually the whole remaining gap).
+  // CCODE-06: ⭐ Keep straight from the progress row (+4 — usually the whole remaining gap).
   for (const b of app.querySelectorAll("[data-keepfrom]")) b.onclick = () => {
     const rec = findGenerated(character, b.dataset.keepfrom);
     if (!rec) return;
@@ -6066,7 +6066,7 @@ function renderPlay(turn, opts = {}) {
   }
   // SNG-070: surface a just-applied GM correction as an aside, whichever path rendered this turn.
   if (character?._correctionAside) { opts = { ...opts, aside: [opts.aside, character._correctionAside].filter(Boolean).join("\n\n") }; delete character._correctionAside; }
-  // SNG-162: the beat survived but some of its bookkeeping didn't — say so plainly rather than
+  // CCODE-07: the beat survived but some of its bookkeeping didn't — say so plainly rather than
   // letting the player discover a quest/NPC update silently missing. The GM restates next turn.
   if (turn?._applyFailed) { opts = { ...opts, aside: [opts.aside, "*(The scene stands, but part of this turn's bookkeeping didn't land — the GM will restate it next beat.)*"].filter(Boolean).join("\n\n") }; }
   const location = hereNow();
@@ -6192,7 +6192,7 @@ function renderPlay(turn, opts = {}) {
       const hereP = knownPeopleAt(character, character.currentLocationId, { locations: CONTENT.locations, npcs: CONTENT.npcs });
       const partners = partnerAdjacentNpcs(character, CONTENT.rules);
       if (!rep && !hereP.length && !partners.length) return "";
-      // SNG-160: a partner is shown ONCE. The banner and the who's-here list were both rendering
+      // CCODE-05: a partner is shown ONCE. The banner and the who's-here list were both rendering
       // them, so Pell appeared twice — the same person, listed as two people.
       const partnerIds = new Set(partners.map(p => p.id).filter(Boolean));
       const hereRest = hereP.filter(p => !partnerIds.has(p.id));
@@ -6209,7 +6209,7 @@ function renderPlay(turn, opts = {}) {
       <button class="opt map-open" id="open-map" style="margin:2px 0 6px; display:block; width:100%">🗺 Open Map — travel & places</button>
       <button class="opt" id="do-breather" style="margin-top:8px; display:block; width:100%">Breather (+${recoveryEnergy("breather", character, rules)} energy, 1h)</button>
       <button class="opt" id="do-rest" style="margin-top:4px; display:block; width:100%">Sleep (+${recoveryEnergy("sleep", character, rules)} energy, ${rules.recovery?.sleep?.hours ?? 8}h)</button>
-      ${/* SNG-158: the player can always close a scene themselves — the GM should do it, but a
+      ${/* CCODE-03: the player can always close a scene themselves — the GM should do it, but a
             scene that won't end is the player's to end. Writes the chronicle entry either way. */""}
       <button class="opt" id="do-endscene" style="margin-top:8px; display:block; width:100%" title="Draw this scene to a close and write it into your chronicle. A new scene opens on your next action.">⏹ End this scene${sceneTurns.length ? ` (${sceneTurns.length} beats)` : ""}</button>
       ${/* SNG-155: read the narration aloud at the table. Narration only — choices, costs and
@@ -6294,7 +6294,7 @@ function renderPlay(turn, opts = {}) {
   if (turn) {
     // SNG-155: the speak control belongs ON THE BEAT — it reads THIS narration, so it sits with it.
     // It was in the Map & Rest sidebar, nowhere near the prose it speaks: the same mistake as the
-    // ⭐ in SNG-161, putting the control next to the plumbing instead of next to the thing it acts on.
+    // ⭐ in CCODE-06, putting the control next to the plumbing instead of next to the thing it acts on.
     const speakCtl = ttsAvailable()
       ? `<button class="beat-speak" id="do-speak" title="Read this beat aloud. Narration only — choices and costs are not spoken.">${_speaking ? "⏸ Stop" : "▶ Read aloud"}</button>`
       : "";
@@ -6473,14 +6473,14 @@ function renderPlay(turn, opts = {}) {
   bindItemCardHandlers(() => renderPlay(character.activeScene?.lastTurn || null, {}));
   for (const b of app.querySelectorAll("[data-setname]")) b.onclick = (e) => {
     e.stopPropagation();
-    // SNG-160: pre-fill with the current name so this also EXTENDS a partial one
+    // CCODE-05: pre-fill with the current name so this also EXTENDS a partial one
     // ("Pell" → "Pell Ran Marsh"), not just names an unknown. The old empty prompt read as
     // "name this stranger" and gave no hint it could correct someone already named.
     const cur = character.npcRegistry?.[b.dataset.setname]?.name || "";
     const nn = prompt(`Their full name?\n\n(You can extend it — "Pell" → "Pell Ran Marsh". The old name is kept as an alias so the GM still recognises it.)`, cur);
     if (nn && setNpcName(character, b.dataset.setname, nn, readClock(character.clock).day)) { saveCharacter(character); renderPlay(character.activeScene?.lastTurn || null, {}); }
   };
-  // SNG-160: "this is the same person as…" — the merge only the PLAYER can make. Auto-merge matches
+  // CCODE-05: "this is the same person as…" — the merge only the PLAYER can make. Auto-merge matches
   // on NAME, so it can never know "Broad Opportunist" and "Bren Thalle" are one man; nothing in the
   // text says so. Reuses the audited mergeEntity op (history/facts/skills unioned, best standing
   // kept, the absorbed name retained as an alias, logged + reversible in the Repair panel).
@@ -6518,7 +6518,7 @@ function renderPlay(turn, opts = {}) {
   };
   const moreBtn = document.getElementById("open-inventory-more"); if (moreBtn) moreBtn.onclick = () => renderInventoryScreen(); // SNG-121
   // (SNG-114: item name/drop now bound via bindItemCardHandlers above — the duplicated data-nameit/data-drop wiring is gone.)
-  const endSceneBtn = document.getElementById("do-endscene"); if (endSceneBtn) endSceneBtn.onclick = () => endSceneNow(); // SNG-158
+  const endSceneBtn = document.getElementById("do-endscene"); if (endSceneBtn) endSceneBtn.onclick = () => endSceneNow(); // CCODE-03
   const speakBtn = document.getElementById("do-speak"); if (speakBtn) speakBtn.onclick = () => toggleSpeakTurn(turn); // SNG-155: speaks the DISPLAYED beat
   const restBtn = document.getElementById("do-rest"); if (restBtn) restBtn.onclick = () => rest("sleep");
   const breatherBtn = document.getElementById("do-breather"); if (breatherBtn) breatherBtn.onclick = () => rest("breather");

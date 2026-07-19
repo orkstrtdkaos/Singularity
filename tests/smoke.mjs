@@ -4036,7 +4036,7 @@ await (async () => {
     npcPortraitTier(pell) === "partner"); // the app skips when n._portraitTier === this tier
 }
 
-// --- SNG-166: three map tiers — zoom as NAVIGATION, and no two places share a coordinate ---
+// --- CCODE-11: three map tiers — zoom as NAVIGATION, and no two places share a coordinate ---
 {
   const wm = await import('../engine/worldmap.js');
   const CONTENT = {
@@ -4111,7 +4111,7 @@ await (async () => {
     (appSrc166.match(/mapTierBar\(\)/g) || []).length >= 3 && /data-maptier=/.test(appSrc166));
 }
 
-// --- SNG-165: a GM-narrated waygate transit routes, and never MINTS a place out of the words ---
+// --- CCODE-10: a GM-narrated waygate transit routes, and never MINTS a place out of the words ---
 {
   const { routeGmMoveTo } = await import('../engine/waygate.js');
   const locs = {
@@ -4150,12 +4150,12 @@ await (async () => {
     /MUST NAME THE DESTINATION GATE/.test(wgSrc165) && /Name where they COME OUT/.test(wgSrc165));
 }
 
-// --- SNG-163: a failed module load must never strand the player on "Loading the Valley…" ---
+// --- CCODE-08: a failed module load must never strand the player on "Loading the Valley…" ---
 {
   const html163 = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
   // The watchdog's whole value is that it survives the failure it reports. A module can't do that:
   // a dead module graph never executes. So it MUST be a classic inline script.
-  const wd = html163.slice(html163.indexOf("SNG-163"));
+  const wd = html163.slice(html163.indexOf("CCODE-08"));
   check("163: the watchdog is a CLASSIC inline script, not a module (a module dies with the graph)",
     /<script>\s*\(function \(\)/.test(wd) && !/<script type="module">/.test(wd));
   check("163: it listens in the CAPTURE phase, where resource-load errors actually fire",
@@ -4393,7 +4393,7 @@ await (async () => {
     !!c4.placeMemory.edge.subPlaces["the-low-lamp-inn"]);
 }
 
-// --- SNG-160: known people — one entry per person, and the player can name/merge them ---
+// --- CCODE-05: known people — one entry per person, and the player can name/merge them ---
 {
   const appSrc160 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
   const { NOMINATE_AT, ESTABLish_AT } = await import('../engine/generate.js');
@@ -4429,7 +4429,7 @@ await (async () => {
     /\$\{t\.score\}\/\$\{NOMINATE_AT\} to canon/.test(appSrc160) && /ready for canon/.test(appSrc160));
   check("160: the badge names what actually moves the number", /⭐ Keep \+4/.test(appSrc160));
 
-  // SNG-161: the ⭐ must be reachable FROM the readout that reports the shortfall
+  // CCODE-06: the ⭐ must be reachable FROM the readout that reports the shortfall
   const { authorshipStats } = await import('../engine/chronicle.js');
   const { recordAttention } = await import('../engine/generate.js');
   const chr = { generated: { location: { "the-low-lamp-inn": { id: "the-low-lamp-inn", name: "The Low Lamp Inn",
@@ -4444,7 +4444,7 @@ await (async () => {
     (rec._gen.engagementScore || 0) >= NOMINATE_AT && rec._gen.tier === "nominated");
 }
 
-// --- SNG-159: canon promotion is IDEMPOTENT under retry (no self-demotion) ---
+// --- CCODE-04: canon promotion is IDEMPOTENT under retry (no self-demotion) ---
 {
   const { promoteInto, ensureCanonStore, isSameEntity } = await import('../engine/canon.js');
   const mkRec = (id, name, charId) => ({ id, name, _gen: { type: "npc", tier: "nominated", birthWeight: 10, engagementScore: 8,
@@ -4473,7 +4473,7 @@ await (async () => {
     isSameEntity(mkRec("x", "X", "char-a"), { id: "x", record: { _canon: { entityId: "x", contributedBy: { characterId: "char-b" } } } }) === false);
 }
 
-// --- SNG-158: scenes actually close (contract + engine pressure + a manual control) ---
+// --- CCODE-03: scenes actually close (contract + engine pressure + a manual control) ---
 {
   const { assembleGMContext } = await import('../engine/gm_registry.js');
   const gmSrc158 = readFileSync(new URL('../engine/gm.js', import.meta.url), 'utf8');
@@ -4495,7 +4495,7 @@ await (async () => {
     /character\.chronicle\.push\(summary\)[\s\S]{0,200}character\.activeScene = null/.test(appSrc158));
 }
 
-// --- SNG-157: storage quota — a safety net must never brick the app it protects ---
+// --- CCODE-02: storage quota — a safety net must never brick the app it protects ---
 {
   // A faithful localStorage stand-in with a hard byte budget, so the quota path is EXERCISED,
   // not asserted about. This is the failure Erik hit: QuotaExceededError out of preserveRecovery,
@@ -4563,7 +4563,7 @@ await (async () => {
   check("152: exact-length input is not clamped", smartClamp("x".repeat(50), 50) === "x".repeat(50));
 }
 
-// --- SNG-162: a bookkeeping throw can never swallow a turn the player already waited for (Law 5) ---
+// --- CCODE-07: a bookkeeping throw can never swallow a turn the player already waited for (Law 5) ---
 {
   const appSrc155 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
   // The structural guarantee: applyTurn is CALLED inside a try, and the catch preserves the beat.
@@ -4620,7 +4620,7 @@ await (async () => {
 {
   const { harmGateFor, departureGateFor, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents, rungAtRank } = await import('../engine/intent.js');
   const catalog = { blade: { name: "The Single Stroke", harmRung: "lethal" }, mend: { name: "Mend", harmRung: "none" }, bruise: { name: "Bruise", harmRung: "damaging" } };
-  // SNG-156: SNG-147c moved the canonical rung PER-RANK into ab.tree[]; the top-level value is the
+  // CCODE-01: SNG-147c moved the canonical rung PER-RANK into ab.tree[]; the top-level value is the
   // ceiling. Gating on the ceiling fires on a rank-1 use of a craft that only kills at rank 3.
   const grows = { id: "grows", name: "The Long Study", harmRung: "lethal",
     tree: [{ rank: 1, harmRung: "none" }, { rank: 2, harmRung: "incapacitating" }, { rank: 3, harmRung: "lethal" }] };

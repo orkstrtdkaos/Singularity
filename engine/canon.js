@@ -25,12 +25,15 @@ import { namesMatch } from "./namematch.js";
 import { effectiveWeight, GEN_TYPES, generatedRecords } from "./generate.js";
 import { RATING_LEVEL, ratingLevel, isMinorProfile } from "./playerprofile.js";
 
-export const CANON_SCHEMA_VERSION = 1; // registry:internal
+export const CANON_SCHEMA_VERSION = 1;
+ // registry:internal
 
 // The gate: only entities the engagement governor raised to NOMINATED promote (Phase-2
 // `nominationsFor` surfaces exactly these). A weight floor can raise the bar further.
-export const PROMOTE_TIER = "nominated"; // registry:internal
-export const PROMOTE_WEIGHT_FLOOR = 0; // registry:internal
+export const PROMOTE_TIER = "nominated";
+ // registry:internal
+export const PROMOTE_WEIGHT_FLOOR = 0;
+ // registry:internal
 
 // Authored core canon is the designed spine — it sits at a weight a generated entity effectively
 // never out-rolls, so a promotion that collides with authored content becomes a variant, not an
@@ -119,7 +122,8 @@ export function contributionsBy(store) {
 
 /** Realness weight of any record — a canon record (`_canon.weight`), an authored-content record
  *  (the high spine floor), or a fresh generated record (`effectiveWeight`). */
-export function weightOf(record, { authored = false } = {}) { // registry:internal
+export function weightOf(record, { authored = false } = {}) {
+ // registry:internal
   if (authored) return AUTHORED_CANON_WEIGHT;
   if (record?._canon) return record._canon.weight ?? 1;
   return effectiveWeight(record);
@@ -167,7 +171,7 @@ export function resolveContradiction(incomingWeight, existingWeight, rng = Math.
  *  the spine locally; an incoming loss files it as a variant of the authored id. Pure given rng.
  *
  *  results: [{ entityId, outcome:'landed'|'won'|'variant', against?, rivalId?, weight }]. */
-/** PURE (SNG-159). Is this "collision" actually the candidate's OWN previously-promoted copy,
+/** PURE (CCODE-04). Is this "collision" actually the candidate's OWN previously-promoted copy,
  *  rather than a genuine rival? True only when the entity id matches AND the same character
  *  authored both. Two DIFFERENT characters who each grew a "Calvar" are a real contest and must
  *  still contest — this only recognises a record meeting itself after a retry. */
@@ -198,7 +202,7 @@ export function promoteInto(store, candidates, { authored = {}, worldDay = null,
     const weight = cand.weight ?? effectiveWeight(rec);
     const collision = findCanonCollision(type, rec.name, { canon: store.entities, authored: authoredFor(type) });
 
-    // SNG-159: A RETRY MUST NEVER CONTEST A RECORD AGAINST ITSELF.
+    // CCODE-04: A RETRY MUST NEVER CONTEST A RECORD AGAINST ITSELF.
     // Promotion runs inside pushMergedFile's merge callback, which RE-RUNS against a freshly-read
     // remote on every attempt. If attempt 1 landed server-side but its response was lost (GH_TIMEOUT
     // or a 409), attempt 2 re-reads, finds the record it just wrote, treats it as a rival, and can

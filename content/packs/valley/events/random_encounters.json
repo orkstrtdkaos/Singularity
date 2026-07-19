@@ -184,7 +184,7 @@
       "id": "re_creature_chase",
       "flavor": "chase",
       "weight": 1,
-      "minDanger": 3,
+      "minDanger": 2,
       "regions": [
         "*"
       ],
@@ -194,7 +194,10 @@
       "routing": "challenge",
       "seed": "A wary predator or spooked beast — a chase that Beastfriend can END instead of win, turning pursuit into parley. The peaceful out is always on the table.",
       "stages": 2,
-      "peacefulOut": "beastfriend"
+      "peacefulOut": "beastfriend",
+      "lethal": false,
+      "lethalNote": "Erik's ruling 2026-07-19: the CHASE is not lethal — its whole design is that Beastfriend can end it and the peaceful out is always on the table. **Unless it turns into a fight.** A pursuit and a duel are different encounters: choosing to stand and fight a predator is choosing a lethal encounter, and wild animals are lethal because they are. That escalation must arrive through lethalOfferClamp (SNG-002b) — OFFERED and marked, never imposed by the chase itself.",
+      "dangerNote": "minDanger 3 -> 2 per Erik's ruling on re_toll_bandits: danger is reduced LOCALLY, never by a universal floor that keeps an encounter out of the country it belongs in."
     },
     {
       "id": "re_raider_duel",

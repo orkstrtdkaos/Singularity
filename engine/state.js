@@ -45,152 +45,161 @@ export async function loadContent() {
   const rulePath = name => { const p = (index.provides.rules || []).find(r => r.includes(name)); return p ? `content/packs/core/${p}` : null; };
   const resPath = rulePath("resolution");
   if (!resPath) throw new Error("manifest: core provides.rules is missing resolution.json (the base rules)");
-  const rules = await fetchJSON(resPath);
   // Every optional core rule loads the same way: found by name in the manifest, fetched, fallback on
   // a miss. No inline .find(), no hardcoded path, no positional index.
   const loadRule = async (name, fallback) => { const p = rulePath(name); if (!p) return fallback; try { return await fetchJSON(p); } catch { return fallback; } };
-  const emergence = await loadRule("emergence", { recipes: [], branchTemplates: [] });
-  const attributeGates = await loadRule("attribute_gates", { gates: {} });
-  const skillCapacity = await loadRule("skill_capacity", { skillsKnownByLevel: {} });
-  const locationAffinities = await loadRule("location_affinities", { typeAffinity: {}, tagAliases: {}, vectorAlignment: {} });
-  const intensity = await loadRule("intensity_scaling", { steps: {} });
-  const branchForks = await loadRule("branch_forks", { forks: {} });
-  const romanceGuidance = await loadRule("romance_guidance", null); // pulled into the GM prompt on romantic intent
-  const functionVocabulary = await loadRule("function_vocabulary", { families: {} }); // SNG-124: the 8 function families (verb→family), for coverage + badges
-  // SNG-101b: by-right native-grant table (anchors + lean-matched basics per tradition). Merged INTO the
-  // rules bag so nativeGrantIdsFor(character, rules) reads it directly; absence leaves grants a no-op.
-  const nativeGrants = await loadRule("native_grants", { traditionNativeGrants: {}, grantCap: 5 });
+  // SNG-187: the base rules and every optional core rule are independent fetches (loadRule tolerates
+  // its own misses; only the base `rules` is fatal, as before). Load them as ONE wave instead of ~12
+  // serial round-trips. rankProgression comments retained on the consumers below.
+  const [rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks,
+         romanceGuidance, functionVocabulary, nativeGrants, skillBattle, traditionsRaw] = await Promise.all([
+    fetchJSON(resPath),
+    loadRule("emergence", { recipes: [], branchTemplates: [] }),
+    loadRule("attribute_gates", { gates: {} }),
+    loadRule("skill_capacity", { skillsKnownByLevel: {} }),
+    loadRule("location_affinities", { typeAffinity: {}, tagAliases: {}, vectorAlignment: {} }),
+    loadRule("intensity_scaling", { steps: {} }),
+    loadRule("branch_forks", { forks: {} }),
+    loadRule("romance_guidance", null),                                 // pulled into the GM prompt on romantic intent
+    loadRule("function_vocabulary", { families: {} }),                  // SNG-124: the 8 function families (verb→family)
+    loadRule("native_grants", { traditionNativeGrants: {}, grantCap: 5 }), // SNG-101b: by-right native-grant table
+    loadRule("skill_battle_system", null),                              // SNG-098: the skill-battle machine layer
+    loadRule("traditions", null)                                        // SNG-055/059: the great-circle domain-access map
+  ]);
+  // SNG-101b: the native-grant table merges INTO the rules bag so nativeGrantIdsFor reads it directly.
   rules.traditionNativeGrants = nativeGrants.traditionNativeGrants || {};
   rules.grantCap = nativeGrants.grantCap ?? 5;
-  // SNG-098: the skill-battle machine layer (matchup table, opponent policy, sense-visibility, momentum).
-  const skillBattle = await loadRule("skill_battle_system", null);
-  // SNG-055/059: the great-circle traditions map (domain-access model). Optional — absence leaves the
-  // domain gates ungoverned (open), never breaks load.
-  let traditions = await loadRule("traditions", null), traditionIndex = null;
+  // SNG-055/059: traditions optional — absence leaves the domain gates ungoverned (open), never breaks load.
+  let traditions = traditionsRaw, traditionIndex = null;
   if (traditions) { try { traditionIndex = buildTraditionIndex(traditions); } catch { traditions = null; } }
 
+  // SNG-187: the manifest groups below are 252 files that were fetched STRICTLY SEQUENTIALLY — each
+  // await waiting on the one before it — which was the entire 15.3s cold load (10–20s of pure
+  // round-trip latency, not payload). Every group reads a path list known in full before the first
+  // request, so they fetch in parallel now — one HTTP/2 wave instead of 252. Two invariants held
+  // EXACTLY (the spec's cautions):
+  //   • FAILURE TOLERANCE — where the old code try-wrapped a group so one bad file didn't kill the
+  //     load (valley items, quests), that stays: allSettled, skip the rejected. Every other group was
+  //     fatal-on-miss before and stays fatal (Promise.all rejects the batch).
+  //   • MANIFEST-ORDER FOLD — Promise.all/allSettled preserve INPUT order in their result arrays, so
+  //     the fold loops below run in the SAME order the sequential loops did. For an id-keyed map that
+  //     means the same entry wins a duplicate-id collision (last-write-wins unchanged); for the quests
+  //     array, the same concatenation order. Verified byte-identical to the sequential load.
+  const jAll = list => Promise.all((list || []).map(p => fetchJSON(p)));
+  const jSettled = list => Promise.allSettled((list || []).map(p => fetchJSON(p)));
+  const corePath = p => `content/packs/core/${p}`, valleyPath = p => `content/packs/valley/${p}`;
+  const loreProvides = valley.provides.lore || [];
+  const eventProvides = valley.provides.events || [];
+  // Fire every group concurrently — creating the promises before the first await is what overlaps them.
+  const abilitiesP = jAll((index.provides.abilities || []).map(corePath));
+  const coreItemsP = jAll((index.provides.items || []).map(corePath));
+  const valleyItemsP = jSettled((valley.provides.items || []).map(valleyPath));
+  const locationsP = jAll((valley.provides.locations || []).map(valleyPath));
+  const npcsP = jAll((valley.provides.npcs || []).map(valleyPath));
+  const eventsP = jAll(eventProvides.map(valleyPath));
+  const companionsP = jAll((valley.provides.companions || []).map(valleyPath));
+  const encountersP = jAll((valley.provides.encounters || []).map(valleyPath));
+  const loreP = Promise.all(loreProvides.map(p => fetchText(valleyPath(p))));
+  const questsP = jSettled((valley.provides.quests || []).map(valleyPath));
+
+  // ability-arch v2: tolerant defaults so the engine can read the new fields before the content
+  // classification pass tags every ability. rankProgression defaults to "use" (depth is earned, not
+  // bought); nativeOrCombination stays null until authored (consumers treat null as unclassified).
   const abilities = {};
-  for (const path of index.provides.abilities) {
-    const pack = await fetchJSON(`content/packs/core/${path}`);
-    // ability-arch v2: tolerant defaults so the engine can read the new fields before the content
-    // classification pass tags every ability. rankProgression defaults to "use" (depth is earned, not
-    // bought); nativeOrCombination stays null until authored (consumers treat null as unclassified).
-    for (const a of pack.abilities) abilities[a.id] = {
-      ...a, powerSystem: pack.powerSystem,
-      rankProgression: a.rankProgression || "use",
-      nativeOrCombination: a.nativeOrCombination || null,
-      combinationAxis: a.combinationAxis ?? null,
-      rankThresholds: a.rankThresholds || { rank1: "given", rank2: "practiced_use", rank3: "defining_moment" }
-    };
-  }
+  for (const pack of await abilitiesP) for (const a of pack.abilities) abilities[a.id] = {
+    ...a, powerSystem: pack.powerSystem,
+    rankProgression: a.rankProgression || "use",
+    nativeOrCombination: a.nativeOrCombination || null,
+    combinationAxis: a.combinationAxis ?? null,
+    rankThresholds: a.rankThresholds || { rank1: "given", rank2: "practiced_use", rank3: "defining_moment" }
+  };
 
   const items = {};
-  for (const path of index.provides.items || []) {
-    const pack = await fetchJSON(`content/packs/core/${path}`);
-    for (const it of pack.items) items[it.id] = it;
-  }
-  // SNG-BATCH-10 Phase 4: valley.provides.items was declared but the loader never read it — the
-  // Waystaff, riven-gear and valley-kit item defs (19 items) silently did not load, the same class
-  // of bug as quests. Now they do. Optional; a miss leaves the core items intact.
-  for (const path of valley.provides.items || []) {
-    try { const pack = await fetchJSON(`content/packs/valley/${path}`); for (const it of pack.items || []) items[it.id] = it; }
-    catch { /* valley items optional */ }
-  }
+  for (const pack of await coreItemsP) for (const it of pack.items) items[it.id] = it;
+  // SNG-BATCH-10 Phase 4: valley.provides.items OVERLAYS core items by id, so it folds AFTER core
+  // (unchanged), tolerant of a miss (the Waystaff/riven-gear/valley-kit defs — 19 items — are optional).
+  for (const r of await valleyItemsP) if (r.status === "fulfilled") for (const it of (r.value.items || [])) items[it.id] = it;
 
   const locations = {};
-  for (const path of valley.provides.locations) {
-    const loc = await fetchJSON(`content/packs/valley/${path}`);
-    locations[loc.id] = loc;
-  }
+  for (const loc of await locationsP) locations[loc.id] = loc;
+
   const npcs = {};
-  const challengerPools = {}; // SNG-138: a challenger_pool is a COLLECTION (challengers[]), not a single NPC —
-  for (const path of valley.provides.npcs) {                              // keep it loaded (manifest intent) but out
-    const npc = await fetchJSON(`content/packs/valley/${path}`);          // of the single-NPC registry so it never
-    if (npc && (npc.kind === "challenger_pool" || Array.isArray(npc.challengers))) { if (npc.id) challengerPools[npc.id] = npc; continue; } // pollutes name-resolution / GM reuse
+  const challengerPools = {}; // SNG-138: a challenger_pool is a COLLECTION (challengers[]), kept out of the
+  for (const npc of await npcsP) {                                        // single-NPC registry so it never pollutes
+    if (npc && (npc.kind === "challenger_pool" || Array.isArray(npc.challengers))) { if (npc.id) challengerPools[npc.id] = npc; continue; } // name-resolution / GM reuse
     npcs[npc.id] = npc;
   }
+
   const events = {};
   let randomEncounters = null;
-  for (const path of valley.provides.events) {
-    const ev = await fetchJSON(`content/packs/valley/${path}`);
+  { const packs = await eventsP; eventProvides.forEach((path, i) => {
+    const ev = packs[i];
     if (ev.id) events[ev.id] = ev;
     else if (path.includes("random_encounters")) randomEncounters = ev; // SNG-014 table (no id)
-  }
+  }); }
+
   const companions = {};
-  for (const path of valley.provides.companions || []) {
-    const c = await fetchJSON(`content/packs/valley/${path}`);
-    companions[c.id] = c;
-  }
+  for (const c of await companionsP) companions[c.id] = c;
+
   const encounters = {};
-  for (const path of valley.provides.encounters || []) {
-    const e = await fetchJSON(`content/packs/valley/${path}`);
-    encounters[e.id] = e;
-  }
-  // BATCH-13 §A.1. This stripped ONLY ".md". 24 of the 27 lore files are .json, so they were keyed
-  // as "the_twelve_reaches.json" while every location's loreRefs asks for the bare stem — and
-  // loreForLocation's .filter(Boolean) swallowed the miss. Measured before the fix: 3 of 14 refs
-  // resolved, and 84 of 95 locations delivered ZERO lore to the GM. `the_twelve_reaches`, named by
-  // 80 locations, had never once reached the model. That is why the GM could not answer about the
-  // Crossroads — a loader bug wearing an authoring gap's clothes.
+  for (const e of await encountersP) encounters[e.id] = e;
+
+  // BATCH-13 §A.1. The name strips .md AND .json, because 24 of the 27 lore files are .json and were
+  // being keyed as "the_twelve_reaches.json" while every location's loreRefs asks for the bare stem —
+  // 84 of 95 locations delivered ZERO lore to the GM until this was fixed. A .json handed to the model
+  // raw is ~2,900 tokens of braces per turn, so loreToProse renders it — a silent miss traded for a
+  // silent bloat would be worse. (Fold is manifest-ordered; a dup stem resolves as it did sequentially.)
   const lore = {};
-  for (const path of valley.provides.lore) {
+  { const raws = await loreP; loreProvides.forEach((path, i) => {
     const file = path.split("/").pop();
     const name = file.replace(/\.(md|json)$/, "");
-    const raw = await fetchText(`content/packs/valley/${path}`);
-    // A .json file handed to the model raw is ~2,900 tokens of braces and quotes per turn — it
-    // would trade a silent miss for a silent bloat, which is worse because it looks like it works.
-    lore[name] = file.endsWith(".json") ? loreToProse(raw) : raw;
-  }
-  // SNG-BATCH-10 Phase 3 / SNG-065: structured quests. The manifest listed provides.quests but the
-  // loader had no branch — the authored quests silently did not load. Now they do. Optional: a miss
-  // leaves quests empty (freeform GM quests still work), never breaks load.
-  let quests = [];
-  for (const path of valley.provides.quests || []) {
-    // SNG-132: accept an aggregated file ({quests:[…]}), a bare array, OR a single standalone quest/arc
-    // object (a hand-authored or generated bound arc, e.g. the_reaching_light).
-    try { const qf = await fetchJSON(`content/packs/valley/${path}`); quests = quests.concat(qf.quests || (Array.isArray(qf) ? qf : (qf && qf.id ? [qf] : []))); }
-    catch { /* quests optional */ }
-  }
-  const region = await fetchJSON("world/regions/valley.json");
+    lore[name] = file.endsWith(".json") ? loreToProse(raws[i]) : raws[i];
+  }); }
 
-  // SNG-BATCH-9: the generative substrate grammar + the derived validation schemas that
-  // generate(type, context) authors against. Optional — a fetch miss disables generation
-  // (the GM's generateRequest is simply ignored) but never breaks content load.
-  let substrate = null;
-  try { substrate = await fetchJSON("content/packs/valley/lore/generative_substrate.json"); } catch { /* generation off */ }
-  let greaterArcs = [];
-  try { greaterArcs = (await fetchJSON("content/packs/valley/lore/greater_arcs.json")).arcs || []; } catch { /* no arc few-shot */ }
-  const genSchemas = {};
-  for (const t of ["npc", "location", "arc"]) {
-    try { genSchemas[t] = await fetchJSON(`schemas/${t}.schema.json`); } catch { /* type ungeneratable */ }
-  }
-  // SNG-063: origins (27 peoples) + backgrounds (15). SNG-092: via the manifest, not a hardcoded path.
-  const origins = (await loadRule("origins", {})).origins || [];
-  const backgrounds = (await loadRule("backgrounds", {})).backgrounds || [];
-  // SNG-082: authored terrain — regions with palette/terrain/elevation/features. Data-driven so a
-  // generated location inherits the right ground. Optional (a miss = the map renders without terrain).
-  const regions = (await loadRule("regions", {})).regions || [];
-  // SNG-089: the Accords — 7 crafts FREELY ACCESSED (not free to learn: you still spend the point;
-  // simply ungated by origin/domain/ring-penalty; the tuition is the JOURNEY to a waygate). Tag each
-  // signatory ability with `accord` so the learn-gate lets anyone take it.
-  const accords = await loadRule("the_accords", null);
+  // SNG-BATCH-10 Phase 3 / SNG-065: structured quests concatenate in MANIFEST order (allSettled
+  // preserves it). Optional per-file — a miss leaves the rest (freeform GM quests still work). SNG-132:
+  // accept an aggregated file ({quests:[…]}), a bare array, or a single standalone quest/arc object.
+  let quests = [];
+  for (const r of await questsP) if (r.status === "fulfilled") { const qf = r.value; quests = quests.concat(qf.quests || (Array.isArray(qf) ? qf : (qf && qf.id ? [qf] : []))); }
+  // SNG-187: the tail is all INDEPENDENT fetches — the region, the generative substrate grammar +
+  // arcs + gen schemas (SNG-BATCH-9, optional: a miss disables generation), origins/backgrounds
+  // (SNG-063), terrain regions (SNG-082), the Accords (SNG-089), helper text (SNG-084), the substrate
+  // model (SNG-090), the Prologue (SNG-062), and the legends (SNG-042). Load them as ONE wave, then
+  // fold the two that mutate already-loaded maps (accords tag abilities, legends hydrate into npcs).
+  // Failure semantics preserved exactly: `region` stays fatal; every optional one keeps its fallback.
+  const [region, substrate, greaterArcs, genNpc, genLoc, genArc, originsDoc, backgroundsDoc, regionsDoc,
+         accords, helpDoc, substrateModel, prologue, legendsLoaded] = await Promise.all([
+    fetchJSON("world/regions/valley.json"),
+    fetchJSON("content/packs/valley/lore/generative_substrate.json").catch(() => null),           // generation off on a miss
+    fetchJSON("content/packs/valley/lore/greater_arcs.json").then(x => x.arcs || []).catch(() => []), // no arc few-shot
+    fetchJSON("schemas/npc.schema.json").catch(() => null),
+    fetchJSON("schemas/location.schema.json").catch(() => null),
+    fetchJSON("schemas/arc.schema.json").catch(() => null),
+    loadRule("origins", {}),
+    loadRule("backgrounds", {}),
+    loadRule("regions", {}),                                                                       // SNG-082 authored terrain
+    loadRule("the_accords", null),                                                                 // SNG-089 the Accords
+    loadRule("helper_text", { entries: [] }),                                                      // SNG-084 in-context help
+    loadRule("the_substrate", null),                                                               // SNG-090 the substrate model
+    fetchJSON("content/packs/valley/prologue.json").catch(() => null),                             // SNG-062 the Prologue → form on a miss
+    fetchJSON("content/packs/valley/lore/legends.json").then(loadLegends).catch(() => ({ roster: [], beats: {}, tiers: {} }))
+  ]);
+  const genSchemas = {}; // SNG-BATCH-9 validation schemas that generate(type, context) authors against
+  if (genNpc) genSchemas.npc = genNpc;
+  if (genLoc) genSchemas.location = genLoc;
+  if (genArc) genSchemas.arc = genArc;
+  const origins = originsDoc.origins || [];       // SNG-063: origins (27 peoples) via the manifest
+  const backgrounds = backgroundsDoc.backgrounds || [];
+  const regions = regionsDoc.regions || [];
+  // SNG-089: the Accords — 7 crafts FREELY ACCESSED (still spend the point; ungated by origin/domain/
+  // ring-penalty; the tuition is the JOURNEY to a waygate). Tag each signatory ability so the learn-gate
+  // lets anyone take it. Folds after abilities (loaded above).
   if (accords) for (const sig of (accords.signatories || [])) { const ab = abilities[sig.opens]; if (ab) ab.accord = sig.tradition || true; }
-  // SNG-084: in-context helper text — every mechanic explains itself where it bites. Authored copy
-  // (id → {short, more}); indexed by id for O(1) lookup at the surface. Optional (a miss = no ⓘ).
-  const helpDoc = await loadRule("helper_text", { entries: [] });
-  const helpText = {};
+  const helpText = {}; // SNG-084: id → {short, more}, indexed for O(1) lookup at the surface
   for (const e of (helpDoc.entries || [])) if (e.id) helpText[e.id] = e;
-  // SNG-090: the substrate model (the second difficulty map) — per-tradition bands + per-region density.
-  // Loaded now; the resolve-chain factor is wired in Phase B. Optional (a miss = substrate-neutral).
-  const substrateModel = await loadRule("the_substrate", null);
-  // SNG-062: the Prologue — character creation as a played opening. Fetched directly. Optional
-  // (absence falls back to the quick-start form; never breaks load).
-  let prologue = null;
-  try { prologue = await fetchJSON("content/packs/valley/prologue.json"); } catch { /* no prologue → form only */ }
-  // SNG-042: the world's great figures. Authored anchors load as high-weight reusable canon
-  // (hydrated into npcs so SNG-019 resolves them by name + the GM reuses, never reinvents).
-  let legends = { roster: [], beats: {}, tiers: {} };
-  try { legends = loadLegends(await fetchJSON("content/packs/valley/lore/legends.json")); } catch { /* no legends */ }
+  // SNG-042: the world's great figures hydrate into npcs (so SNG-019 resolves them by name + the GM
+  // reuses, never reinvents) — after npcs is loaded, and never overwriting a same-id registry NPC.
+  const legends = legendsLoaded;
   for (const fig of legends.roster) if (fig.id && !npcs[fig.id]) npcs[fig.id] = fig;
 
   // BATCH-13 §A.6: resolve the geographic substrate field onto the in-memory locations. Density
@@ -204,6 +213,9 @@ export async function loadContent() {
     if (stamped) console.log(`[substrate] field resolved onto ${stamped} location(s) from ${Object.values(locations).filter(l => l.substrateSource).length} authored source(s)`);
   } catch (e) { console.warn("[substrate] field resolution skipped:", e?.message); } // never block boot on it
 
+  // SNG-187: a content-count canary at boot — cheap observability, and the proof that parallelising
+  // the loaders did not silently drop or reorder any manifest group (the counts must not move).
+  console.log(`[loadContent] abilities=${Object.keys(abilities).length} items=${Object.keys(items).length} locations=${Object.keys(locations).length} npcs=${Object.keys(npcs).length} challengerPools=${Object.keys(challengerPools).length} events=${Object.keys(events).length} companions=${Object.keys(companions).length} encounters=${Object.keys(encounters).length} lore=${Object.keys(lore).length} quests=${quests.length} abilitiesWithAccord=${Object.values(abilities).filter(a => a.accord).length} legendsInNpcs=${legends.roster.filter(f => f.id && npcs[f.id]).length}`);
   const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, challengerPools, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, regions, accords, helpText, substrateModel, romanceGuidance, skillBattle, functionVocabulary, startingLocation: valley.startingLocation };
   // SNG-022: bring every loaded record up to current (derive missing additive fields,
   // flag dangling cross-refs). In-memory only — Pages files are static.

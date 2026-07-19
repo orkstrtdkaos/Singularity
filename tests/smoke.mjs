@@ -5269,6 +5269,46 @@ await (async () => {
     g.TIER_SCHEMA.nominated.length > g.TIER_SCHEMA.established.length && g.TIER_SCHEMA.established.length > g.TIER_SCHEMA.fresh.length);
 }
 
+// --- SNG-175 §3: the teacher's curriculum (derived spine, authored deviations) ---
+{
+  const co = await import("../engine/company.js");
+  const catalog = {
+    soma: { id: "soma", name: "Soma", levelReq: 1 },
+    body_read: { id: "body_read", name: "Body-Read", levelReq: 2 },
+    skydancer: { id: "skydancer", name: "Skydancer", levelReq: 5 },
+    the_whole_act: { id: "the_whole_act", name: "The Whole Act", levelReq: 9 }
+  };
+  const idx = { byId: { somatic: { traditionId: "somatic", name: "The Somatics", abilities: ["soma", "body_read", "skydancer", "the_whole_act"] } } };
+  const char = { level: 3, abilities: [{ abilityId: "soma" }] };
+
+  const c = co.curriculumFor(char, "somatic", { catalog, traditionIndex: idx });
+  check("175: a teacher's whole set is legible, not just their tradition label", c.all.length === 4);
+  check("175: what the student already holds is marked as taught", c.taught === 1 && c.remaining === 3);
+  check("175: the derived spine orders by tier — no content pass needed (answering the PO's Q4)",
+    c.all.map(x => x.id).join(",") === "soma,body_read,skydancer,the_whole_act");
+  check("175: the next step is the nearest thing actually WITHIN REACH, not merely next on the list",
+    c.next.id === "body_read" && c.next.reachable === true);
+  check("175: an out-of-reach craft is listed but not offered", c.all.find(x => x.id === "the_whole_act").reachable === false);
+
+  // §3.2 — the path is the TEACHER'S judgement. Two teachers of one tradition walk it differently.
+  const contrarian = co.curriculumFor(char, "somatic", { catalog, traditionIndex: idx, teacherOrder: ["skydancer", "body_read"] });
+  check("175: a teacher's own ordering overrides the derived spine — this is characterisation",
+    contrarian.all[0].id === "skydancer" && contrarian.pathIsTheirs === true);
+  check("175: and a teacher with no declared path is not pretending to have one", c.pathIsTheirs === false);
+
+  // §3.3 — the GM block. A teacher who can only PERMIT is not a teacher.
+  const withTeacher = { ...char, teachers: { somatic: { met: true, willing: true, npcId: "taro" } }, company: [] };
+  const block = co.teachersForGM(withTeacher, { catalog, traditionIndex: idx, npcs: { taro: { name: "Master Taro" } } });
+  check("175: the GM is told who can teach what", /Master Taro can teach The Somatics/.test(block));
+  check("175: and told the next step to OFFER", /OFFER it/.test(block) && /Body-Read/.test(block));
+  check("175: a refusal is named as a legitimate answer (§3.4)", /not yet/i.test(block));
+
+  const unwilling = { ...char, teachers: { somatic: { met: true, willing: false } }, company: [] };
+  check("175: an unwilling teacher offers nothing", co.teachersForGM(unwilling, { catalog, traditionIndex: idx, npcs: {} }) === "");
+  check("175: and a character with no teachers costs nothing",
+    co.teachersForGM({ ...char, teachers: {}, company: [] }, { catalog, traditionIndex: idx, npcs: {} }) === "");
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

@@ -46,6 +46,8 @@ import { evolvedItemsForGM } from "./evolution.js";
 import { emergenceNoticeForGM } from "./practice.js";
 import { detectAnomalies, anomaliesForGM } from "./corrections.js";
 import { toolkitForGM } from "./toolkit.js";
+import { combinationsAvailableFor } from "./skilltree.js";
+import { teachersForGM } from "./company.js";
 import { functionCoverage } from "./functions.js";
 import { partyBlockForGM } from "./party.js";
 import { narrativeRegister } from "./gm.js";
@@ -191,6 +193,17 @@ export const GM_CONTEXT = [
   { key: "anomalyDetail", builder: "corrections.detectAnomalies→anomaliesForGM (SNG-137)", carries: ["POSSIBLE ERROR repairs"],
     reachedBy: "Repair panel", spec: "§11", views: ["turn"],
     build: (env) => anomaliesForGM(detectAnomalies(env.character, { rules: env.CONTENT.rules })) },
+  // SNG-175 §3.3: teachers appeared in NONE of the 48 rows. The teacher GATE existed — it decided
+  // what a player was permitted to learn — but nothing ever made a teacher ACT. Erik held a Radiant
+  // teacher and a bound Ashwarden teacher and was taught nothing, because permission is not
+  // initiative. This is the row that lets them offer the next step themselves.
+  { key: "teacherDetail", builder: "company.teachersForGM (SNG-175)", carries: ["what each bonded teacher can teach", "the next step THEY would choose", "braids that tradition opens"],
+    reachedBy: "GM offer in the fiction (rule 16B)", spec: "SNG-175 §3", views: ["turn", "ask"],
+    build: (env) => teachersForGM(env.character, {
+      catalog: env.app.fullCatalog(), traditionIndex: env.CONTENT.traditionIndex, npcs: env.CONTENT.npcs,
+      combosFor: (t) => combinationsAvailableFor(t, env.character, env.app.fullCatalog())
+    }) },
+
   { key: "toolkitDetail", builder: "toolkit.toolkitForGM (SNG-142)", carries: ["what the player COULD reach for"],
     reachedBy: "GM offer (rule 16B)", spec: "§7", views: ["turn"],
     build: (env) => toolkitForGM(env.character, {

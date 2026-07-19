@@ -106,3 +106,89 @@ const ROLE_BADGE = { companion: "🐾", trainer: "⚔", liaison: "🤝", partner
 export function roleBadges(roles = []) {
   return roles.map(r => ROLE_BADGE[r] ? `${ROLE_BADGE[r]} ${r}` : r).join(" · ");
 }
+
+/** SNG-175 §3: THE TEACHER'S CURRICULUM — what they can teach, and the order THEY would teach it.
+ *
+ *  Erik has held a Radiant teacher and a bound Ashwarden teacher and been taught nothing. `teaches`
+ *  was authored on exactly ONE NPC as a bare tradition string, so "what can my teacher teach me?"
+ *  had no answer in the data — only "which tradition are they of."
+ *
+ *  ANSWERING THE PO'S Q4 BEFORE AUTHORING ANYTHING: the ordering is already implied and needs no
+ *  content pass. All 285 abilities carry `levelReq`, every tradition declares its own `abilities`,
+ *  `tierOf` turns one into the other, and `combinationsAvailableFor` already answers the braid
+ *  question. So the DEFAULT curriculum is derived, and a teacher authors only their DEVIATIONS —
+ *  which is exactly the part that is characterisation. Two teachers of one tradition walk it
+ *  differently because they disagree about what comes first, not because someone typed out two
+ *  full syllabi.
+ *
+ *  Pure. `teacherOrder` is the NPC's optional authored path (ability ids, best first).
+ */
+export function curriculumFor(character, traditionId, { catalog = {}, traditionIndex = null, teacherOrder = null, known = null } = {}) {
+  if (!traditionId) return null;
+  const trad = traditionIndex?.byId?.[traditionId];
+  const ids = (trad?.abilities || []).filter(id => catalog[id]);
+  if (!ids.length) return null;
+
+  const held = known || new Set((character?.abilities || []).map(a => a.abilityId));
+  const level = character?.level || 1;
+  const order = Array.isArray(teacherOrder) ? teacherOrder.filter(id => ids.includes(id)) : [];
+  // The teacher's own path first, then everything else by tier — the derived spine.
+  const rank = (id) => {
+    const i = order.indexOf(id);
+    if (i >= 0) return i;                                   // the teacher's declared judgement wins
+    return order.length + (catalog[id]?.levelReq || 1);
+  };
+  const sorted = [...ids].sort((a, b) => rank(a) - rank(b));
+
+  const shape = (id) => ({
+    id, name: catalog[id]?.name || id, tier: catalog[id]?.levelReq || 1,
+    held: held.has(id),
+    reachable: !held.has(id) && (catalog[id]?.levelReq || 1) <= level + 1   // within reach, not merely listed
+  });
+  const all = sorted.map(shape);
+  // What they would offer NEXT: the first thing not yet held that the character could actually take.
+  const next = all.find(x => !x.held && x.reachable) || all.find(x => !x.held) || null;
+  return {
+    tradition: traditionId,
+    traditionName: trad?.name || traditionId,
+    all,
+    taught: all.filter(x => x.held).length,
+    remaining: all.filter(x => !x.held).length,
+    next,
+    // §3.2: the path is the TEACHER'S. Say so, so the player reads a character rather than a shop.
+    pathIsTheirs: order.length > 0
+  };
+}
+
+/** SNG-175 §3.3 + §3.6: what the GM needs to have a teacher OFFER the next step, and to name the
+ *  braids that tradition opens. Teachers appeared in NONE of the 47 GM context rows before this —
+ *  the gate existed, the initiative did not, which is why two bonded teachers taught nothing.
+ *  `combosFor(traditionId)` is injected so this stays pure and skilltree-agnostic. */
+export function teachersForGM(character, { catalog = {}, traditionIndex = null, npcs = {}, combosFor = null } = {}) {
+  ensureCompany(character);
+  const seen = new Set();
+  const lines = [];
+  const consider = (traditionId, whoName, npcId) => {
+    if (!traditionId || seen.has(traditionId)) return;
+    seen.add(traditionId);
+    const c = curriculumFor(character, traditionId, {
+      catalog, traditionIndex, teacherOrder: npcs[npcId]?.curriculum || null
+    });
+    if (!c) return;
+    const braids = typeof combosFor === "function" ? (combosFor(traditionId) || []).slice(0, 2) : [];
+    const bits = [`${whoName} can teach ${c.traditionName} — ${c.taught} of ${c.all.length} already yours.`];
+    if (c.next) bits.push(c.next.reachable
+      ? `The next step they would choose: ${c.next.name} (tier ${c.next.tier})${c.pathIsTheirs ? " — their own ordering" : ""}. OFFER it when the moment fits; a "not yet" from them is a real answer.`
+      : `Nothing they teach is within reach yet — ${c.next.name} needs more growing.`);
+    if (braids.length) bits.push(`Braids this opens: ${braids.map(b => b.name || b.id || b).join(", ")}.`);
+    lines.push("- " + bits.join(" "));
+  };
+  // a bound, willing teacher (markTeacher) and a company trainer are both teachers
+  for (const [tid, t] of Object.entries(character?.teachers || {})) {
+    if (t && t.met && t.willing) consider(tid, npcs[t.npcId]?.name || "Your teacher", t.npcId);
+  }
+  for (const m of character.company) {
+    if (m.roles.includes("trainer") && m.teaches) consider(m.teaches, npcs[m.npcId]?.name || "A trainer with you", m.npcId);
+  }
+  return lines.length ? lines.join("\n") : "";
+}

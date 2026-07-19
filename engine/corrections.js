@@ -12,6 +12,7 @@
 
 import { SUBS, syncParentAttributes } from "./progression.js";
 import { isMinorSubject } from "./art.js";
+import { smartClamp } from "./namematch.js"; // SNG-152 (missed in the first sweep — see below)
 import { BOND_TYPES, ROMANTIC_STAGES } from "./npcs.js";
 
 const CORRECTABLE_FIELDS = new Set(["background", "origin", "nativeTradition", "form"]);
@@ -36,7 +37,10 @@ export function applyStateOps(character, ops = [], ctx = {}) {
   const locations = ctx.locations || {};
   for (const op of (ops || []).slice(0, 6)) {
     if (!op || !op.op) continue;
-    const why = String(op.why || "a correction").slice(0, 200);
+    // SNG-152 (late): this is MODEL PROSE and it reaches the player. corrections.js was in the
+    // sweep table and never converted — the ten priority files were done and this one was left, so
+    // a GM `why` still severed mid-word at exactly 200 chars. Erik saw it: "…is meta-play instructio".
+    const why = smartClamp(String(op.why || "a correction"), 300);
     switch (op.op) {
       case "correctField": {
         const field = op.field;
@@ -105,7 +109,7 @@ export function applyStateOps(character, ops = [], ctx = {}) {
         const t = character.codex?.topics?.[op.topicId];
         if (!t) { refused.push({ op, reason: `no codex topic "${op.topicId}"` }); break; }
         const from = t.summary ?? t.description ?? null;
-        t.summary = String(op.text ?? "").slice(0, 400);
+        t.summary = smartClamp(String(op.text ?? ""), 400); // SNG-152: a corrected codex fact is prose
         log(character, { kind: "codexFact", id: op.topicId, from, to: t.summary, why }, ctx);
         applied.push({ codexFact: op.topicId });
         break;
@@ -198,7 +202,7 @@ export function applyStateOps(character, ops = [], ctx = {}) {
       }
       case "refuse": {
         // the GM declined an advance in fiction — record it so the ledger shows the ask was made.
-        refused.push({ op, reason: op.what ? `declined: ${String(op.what).slice(0, 80)}` : "declined an advance" });
+        refused.push({ op, reason: op.what ? `declined: ${smartClamp(String(op.what), 160)}` : "declined an advance" }); // SNG-152
         break;
       }
       default: refused.push({ op, reason: `unknown correction "${op.op}"` });

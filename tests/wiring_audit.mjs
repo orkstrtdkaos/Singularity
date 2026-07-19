@@ -133,11 +133,33 @@ const claimsCombat = (a) => (a.functions || []).some(f => ["strike", "break", "h
 const teachesCombat = (a) => (a.tree || a.ranks || []).some(r => /\b(strike|striking|attack|wound|fell|down(s|ing)?|disable|disarm|end(s|ing)? (a|the|an)\b|bring .{0,20}down|stop(s|ping)? (a|the|an)\b|break(s|ing)?|shatter|force|drive (back|off)|repel|bind|pin|stagger|fight|combat|offen[cs]|harm|weaken\w*|drain\w*|impair\w*|slow(s|ing)?|destroy\w*|dismantl\w*|unmak\w*)\b/i.test(String(r.grants || "")));
 const combatUntaught = abilityRecords.filter(a => claimsCombat(a) && !teachesCombat(a));
 
+// ---------- SNG-152 §5e: the gate that makes this the LAST truncation fix ----------
+// The spec asked for this and I shipped without it, so corrections.js — listed in my own sweep
+// table and simply not converted — kept severing GM prose at exactly 200 chars until Erik saw
+// "…is meta-play instructio" on screen. SNG-076 and SNG-088 were also site-specific fixes to a
+// systemic defect; without a gate this was always going to be the third, then the fourth.
+// Counts RAW fixed-length caps at prose scale (>= 100) that are not smartClamp. Ratcheted rather
+// than hard-zeroed: some are legitimately identifiers or diagnostics, and a decrease-only bound
+// stops regression without demanding a perfect classifier.
+const proseCapFiles = [...readdirSync(join(root, "engine")).filter(f => f.endsWith(".js")).map(f => `engine/${f}`), "app.js"];
+const rawProseCaps = [];
+for (const rel of proseCapFiles) {
+  if (rel.endsWith("namematch.js")) continue; // smartClamp's own home
+  const src = read(rel);
+  for (const m of src.matchAll(/\.slice\(\s*0\s*,\s*(\d{3,})\s*\)/g)) {
+    const line = src.slice(src.lastIndexOf("\n", m.index) + 1, src.indexOf("\n", m.index));
+    if (/smartClamp/.test(line)) continue;          // already clamped on this line
+    if (/prose-cap-ok/.test(line)) continue;        // deliberate, declared at the site
+    rawProseCaps.push(`${rel}:${src.slice(0, m.index).split("\n").length}`);
+  }
+}
+
 const measured = {
   abilitiesMissingHarmRung: missingHarm.length,
   abilitiesInvalidHarmRung: badHarm.length,
   abilitiesNonCanonChallengeTypes: nonCanonTypes.length,
-  abilitiesCombatClaimedNotTaught: combatUntaught.length
+  abilitiesCombatClaimedNotTaught: combatUntaught.length,
+  rawProseCaps: rawProseCaps.length
 };
 
 const baselinePath = join(root, "tests", "wiring_baseline.json");
@@ -151,8 +173,12 @@ if (process.env.UPDATE_WIRING_BASELINE === "1" || !existsSync(baselinePath)) {
 }
 const baseline = JSON.parse(readFileSync(baselinePath, "utf8"));
 for (const [k, v] of Object.entries(measured)) {
-  check(`ratchet: ${k} = ${v} (baseline ${baseline[k]}) — may only go DOWN`, v <= baseline[k],
-    k === "abilitiesCombatClaimedNotTaught" ? `regressed — a new ability claims combat its grants never teach (147c rule: if it can fight, a rank grants says HOW)` : `regressed past baseline`);
+  const why = k === "abilitiesCombatClaimedNotTaught"
+    ? `regressed — a new ability claims combat its grants never teach (147c rule: if it can fight, a rank grants says HOW)`
+    : k === "rawProseCaps"
+      ? `a new fixed-length cap on model prose — use smartClamp, or mark the line // prose-cap-ok if it is genuinely an identifier:\n      ${rawProseCaps.slice(0, 6).join(", ")}`
+      : `regressed past baseline`;
+  check(`ratchet: ${k} = ${v} (baseline ${baseline[k] ?? "unset"}) — may only go DOWN`, v <= (baseline[k] ?? v), why);
 }
 check("invalid harmRung values are always zero (enum is machine-checked from here)", badHarm.length === 0,
   badHarm.map(a => `${a.id}:${a.harmRung}`).join(", "));

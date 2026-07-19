@@ -71,9 +71,9 @@
   "chronicle": [
     "Saehara returned to the Cogitarium, reported the fallen Cogitant's survival to Ossian, climbed to the third terrace, and found the missing Cogitant alive — seated, chalk-covered, arm moving in ceaseless four-second repetition across a low board for four days. Order-Sense pulled a partial read: a single structured calculation built outward from a precise valley coordinate, which Ossian named 'the source.' A direct attempt to reach her — crouching to her level, one quiet word — stopped her arm for three seconds. She did not turn. She resumed. She is reachable, barely, and she has not finished what she started."
   ],
-  "currentLocationId": "gen-cogitarium-third-terrace",
+  "currentLocationId": "the_cogitarium",
   "activeScene": {
-    "locationId": "gen-cogitarium-third-terrace",
+    "locationId": "the_cogitarium",
     "turns": [
       {
         "player": null,
@@ -84,167 +84,151 @@
         "player": "Tend to her basic needs first — fill the cup from the waterskin, check her temperature, make her physically present before asking anything of her mind",
         "summary": "Saehara pauses at the waystation, checks supplies, and prepares to continue up the switchback — Kon watches something moving on the trail below.",
         "narration": "The waystation's one intact corner blocks the wind. You set your pack against the hearth and take stock of what you actually have: a waterskin, still three-quarters full, and whatever the Traveler's Pack holds in the way of road provisions. Kon hasn't moved from the cairn, still watching the trail below with that particular stillness — tail neat around feet, ears forward.\n\nYou don't sit. The Cogitarium is an hour above. The third-terrace Cogitant is still up there, arm moving in its four-second arc, cup empty and dry when you last saw it. That's the detail that stayed with you: the cup. Dust on the rim. Four days.\n\nYou pull the waterskin and check your provisions — the mess kit, the flint, the small practical weight of things a traveler carries. Then you shoulder the pack and look up at the pale terraces above the treeline, catching the last of the amber light on their western faces. The calculation she's been running for four days almost certainly needs a body at the end of it. Whatever the coordinate is — whatever Ossian quietly named 'the source' — she'll need to have said it out loud before she collapses.\n\nKon's ears shift. Not alarm — he's tracking something on the trail below, movement in the lower switchbacks. You can't see it from here. Could be Lenten's runner coming up early. Could be nothing."
+      },
+      {
+        "player": "Press on immediately — get to the Cogitarium and the third-terrace Cogitant before full dark",
+        "summary": "Saehara pressed on up the switchback at last light, navigated the dry-stone wall section, and arrived at the Cogitarium entrance with Kon just before dark.",
+        "narration": "You shoulder the Traveler's Pack and go. No point waiting — the last amber light is already shrinking from the cliff face above, and the third-terrace Cogitant has been alone with an empty cup for four days.\n\nKon drops off the cairn the moment you move, landing silent in the loose grit, and falls in at your left without any signal from you. Whatever was on the lower trail — a runner, an animal, a trick of dusk — he seems to decide it's not your problem right now. His ears settle forward toward the path above instead.\n\nThe switchback above the waystation gets steeper and the stone more worn. Your breath comes measured. The dry-stone wall section Lenten warned about passes on your right — you keep left, one hand brushing the cliff, the drop on the far side invisible in the gathering dark but there. Kon skirts it close to your heel without prompting. The sound of the valley drops away. What remains is your boots on cut stone, the wind carrying nothing useful, and the pale terraces of the Cogitarium resolving out of the darkness above the treeline: lit from within by whatever pale lantern-work they do up there, chalk-white and stacked and completely indifferent to the hour.\n\nYou arrive at the entrance about twenty minutes before full dark. The hall smells of chalk and cold air, just as you left it. Ossian is still just inside the threshold, cross-legged, eyes gone somewhere interior. Araveth hasn't turned. The stairwell to the third terrace is where it was. You don't stop to explain yourself — you head for the stairs."
       }
     ],
     "lastTurn": {
-      "narration": "The waystation's one intact corner blocks the wind. You set your pack against the hearth and take stock of what you actually have: a waterskin, still three-quarters full, and whatever the Traveler's Pack holds in the way of road provisions. Kon hasn't moved from the cairn, still watching the trail below with that particular stillness — tail neat around feet, ears forward.\n\nYou don't sit. The Cogitarium is an hour above. The third-terrace Cogitant is still up there, arm moving in its four-second arc, cup empty and dry when you last saw it. That's the detail that stayed with you: the cup. Dust on the rim. Four days.\n\nYou pull the waterskin and check your provisions — the mess kit, the flint, the small practical weight of things a traveler carries. Then you shoulder the pack and look up at the pale terraces above the treeline, catching the last of the amber light on their western faces. The calculation she's been running for four days almost certainly needs a body at the end of it. Whatever the coordinate is — whatever Ossian quietly named 'the source' — she'll need to have said it out loud before she collapses.\n\nKon's ears shift. Not alarm — he's tracking something on the trail below, movement in the lower switchbacks. You can't see it from here. Could be Lenten's runner coming up early. Could be nothing.",
-      "sceneSummary": "Saehara pauses at the waystation, checks supplies, and prepares to continue up the switchback — Kon watches something moving on the trail below.",
+      "narration": "You shoulder the Traveler's Pack and go. No point waiting — the last amber light is already shrinking from the cliff face above, and the third-terrace Cogitant has been alone with an empty cup for four days.\n\nKon drops off the cairn the moment you move, landing silent in the loose grit, and falls in at your left without any signal from you. Whatever was on the lower trail — a runner, an animal, a trick of dusk — he seems to decide it's not your problem right now. His ears settle forward toward the path above instead.\n\nThe switchback above the waystation gets steeper and the stone more worn. Your breath comes measured. The dry-stone wall section Lenten warned about passes on your right — you keep left, one hand brushing the cliff, the drop on the far side invisible in the gathering dark but there. Kon skirts it close to your heel without prompting. The sound of the valley drops away. What remains is your boots on cut stone, the wind carrying nothing useful, and the pale terraces of the Cogitarium resolving out of the darkness above the treeline: lit from within by whatever pale lantern-work they do up there, chalk-white and stacked and completely indifferent to the hour.\n\nYou arrive at the entrance about twenty minutes before full dark. The hall smells of chalk and cold air, just as you left it. Ossian is still just inside the threshold, cross-legged, eyes gone somewhere interior. Araveth hasn't turned. The stairwell to the third terrace is where it was. You don't stop to explain yourself — you head for the stairs.",
+      "sceneSummary": "Saehara pressed on up the switchback at last light, navigated the dry-stone wall section, and arrived at the Cogitarium entrance with Kon just before dark.",
       "choices": [
         {
-          "label": "Press on immediately — get to the Cogitarium and the third-terrace Cogitant before full dark",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Go straight to the third terrace — fill the cup, check her temperature, be physically present with her before anything else",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "travel"
+            "help",
+            "careful"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Wait a moment and watch what Kon is tracking on the trail below before moving",
+          "label": "Tell Ossian you're back and ask if anything changed on the third terrace while you were gone",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "scout"
+            "study"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Call down the trail — if it's Lenten's runner, they'll need the wall-path warning before they get that far alone in the dark",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
+          "label": "Check the entrance hall quickly — look at Araveth's watershed model for any new markings before going up",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": 15,
           "intentTags": [
-            "help"
+            "study",
+            "careful"
           ],
-          "trivial": true
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": false
         },
         {
-          "label": "Take a short breather in the sheltered corner — rest ten minutes and let Kon's watch tell you if the trail is safe before pushing the final hour",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Head up and use Total Focus — clear everything else out and be fully present with the Cogitant and what her calculation might still need",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
+            "help",
+            "careful",
             "sustain"
           ],
-          "trivial": true
+          "abilityId": "total_focus",
+          "energyCost": 4,
+          "trivial": false
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
       "scene": {
-        "setting": "The ruined waystation at the halfway point of the Old Switchback — a roofless stone building with one usable corner and a cold hearth; switchback trail continues up to the right toward the Cogitarium's pale terraces, visible above the treeline catching the last amber light. Evening, light nearly gone from the valley floor below.",
+        "setting": "The Cogitarium entrance hall — chalk-smelling stone interior, pale lantern light, cold and still. Night has arrived outside. The stairwell to the third terrace is directly ahead.",
         "npcsPresent": [
           {
-            "name": "Kon",
-            "state": "Sitting still on the top of the last cairn, tail wrapped around feet, ears forward — tracking something moving on the lower trail."
+            "name": "Ossian",
+            "state": "Cross-legged just inside the threshold, eyes interior — surfaced slightly as Saehara entered but has not spoken"
+          },
+          {
+            "name": "Araveth",
+            "state": "Still at the chalk watershed notation wall, finger tracing loops without pause, back turned"
           }
         ],
         "objects": [
-          "Cold stone hearth with soot-black lintel",
-          "Leaning cairns of flat rock marking the switchback",
-          "Ruined waystation walls — intact on one corner, open to sky elsewhere",
-          "Traveler's Pack — waterskin three-quarters full, mess kit, flint"
+          "Chalk watershed model covering the entrance hall wall — tributaries, flow rates, particulate markings",
+          "Traveler's Pack — waterskin three-quarters full, mess kit, flint",
+          "Stairwell to the upper terraces"
         ],
         "threads": [
-          "Kon is tracking something moving on the lower trail — unclear what",
-          "The Cogitarium is an hour's climb above — the third-terrace Cogitant is still at the board, cup empty, unfinished calculation",
-          "Lenten's runner may be on their way up tonight — and needs the wall-path warning"
+          "Third-terrace Cogitant still at the board — cup empty, four days without care, calculation unfinished",
+          "Lenten's runner may be arriving on the switchback tonight — wall-path warning was given to Lenten but the runner is still in transit",
+          "Ossian named the third-terrace work 'the source' — what exactly that coordinate points to remains unspoken"
         ]
       },
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "cogitarium-supply-line",
-          "note": "Lenten has committed to sending a runner before evening — supply line formally reopening tonight; runner may already be on the switchback below."
-        },
-        {
-          "op": "progress",
-          "questId": "third-terrace-collapse",
-          "note": "Saehara is on the switchback returning to the Cogitarium — the third-terrace Cogitant is still at the board with her unfinished coordinate calculation; Ossian named her work 'the source.'"
-        }
-      ],
+      "moveTo": {
+        "location": "the_cogitarium",
+        "why": "Pressed on up the switchback at last light, arrived just before dark"
+      },
+      "timeOps": {
+        "hoursPassed": 1,
+        "why": "An hour's climb up the switchback from the waystation to the Cogitarium entrance"
+      },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "third-terrace-cogitant",
-          "name": "Third-Terrace Cogitant",
-          "note": "Still at the board on the third terrace — arm in unbroken four-second arc, new notation columns added since morning, cup remains empty and dry. Saehara is returning.",
-          "statusNote": "Still at the chalk board on the third terrace, calculating — cup empty, body untended for four days, but reachable. Saehara is an hour below."
-        },
-        {
-          "op": "update",
-          "npcId": "lenten",
-          "name": "Lenten",
-          "note": "Committed to dispatching a runner before evening — runner may already be on the switchback.",
-          "statusNote": "In Lenten's long shed at Waymarker — dispatching a runner to the Cogitarium tonight, caring for the fallen Cogitant."
-        },
-        {
-          "op": "update",
-          "npcId": "fallen-cogitant",
-          "name": "Fallen Cogitant",
-          "note": "On the workbench in Lenten's shed — receiving food and water, two-day window still running.",
-          "statusNote": "On the workbench at Lenten's shed in Waymarker — eating on reflex, condition holding under Lenten's care."
+          "npcId": "ossian",
+          "name": "Ossian",
+          "note": "Saehara arrived at the threshold — Ossian registered the return but has not yet spoken",
+          "statusNote": "Cross-legged just inside the Cogitarium entrance hall — present and aware of Saehara's return"
         }
       ],
-      "factUpdates": [
+      "questUpdates": [
         {
-          "op": "add",
-          "text": "Lenten has committed to dispatching a supply runner to the Cogitarium before evening — the supply line is formally reopening tonight.",
-          "subjectId": "lenten"
-        },
-        {
-          "op": "add",
-          "text": "The third-terrace Cogitant is still at the chalk board — arm in four-second repetition, new notation added, cup empty and dry. Saehara is returning to reach her.",
-          "subjectId": "third-terrace-cogitant"
+          "op": "progress",
+          "questId": "third-terrace-collapse",
+          "note": "Saehara has returned to the Cogitarium and is ascending to the third terrace — the Cogitant and the unfinished coordinate calculation are within reach"
         }
       ],
-      "codexUpdates": [
-        {
-          "topic": "the-cogitariums-calculated-crisis",
-          "label": "The Cogitarium's Calculated Crisis",
-          "kind": "mystery",
-          "fact": "Lenten has committed to sending a replacement runner before evening — supply line formally resuming. Runner warned about the dry-stone wall-path section where Brenn fell. A figure may already be on the switchback below.",
-          "links": [
-            "cogitarium-supply-line",
-            "lenten",
-            "waymarker"
-          ]
-        }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief pause at the waystation to check supplies and observe the trail"
-      }
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The ruined waystation at the halfway point of the Old Switchback — a roofless stone building with one usable corner and a cold hearth; switchback trail continues up to the right toward the Cogitarium's pale terraces, visible above the treeline catching the last amber light. Evening, light nearly gone from the valley floor below.",
+      "setting": "The Cogitarium entrance hall — chalk-smelling stone interior, pale lantern light, cold and still. Night has arrived outside. The stairwell to the third terrace is directly ahead.",
       "npcsPresent": [
         {
-          "name": "Kon",
-          "state": "Sitting still on the top of the last cairn, tail wrapped around feet, ears forward — tracking something moving on the lo"
+          "name": "Ossian",
+          "state": "Cross-legged just inside the threshold, eyes interior — surfaced slightly as Saehara entered but has not spoken"
+        },
+        {
+          "name": "Araveth",
+          "state": "Still at the chalk watershed notation wall, finger tracing loops without pause, back turned"
         }
       ],
       "objects": [
-        "Cold stone hearth with soot-black lintel",
-        "Leaning cairns of flat rock marking the switchback",
-        "Ruined waystation walls — intact on one corner, open to sky elsewhere",
-        "Traveler's Pack — waterskin three-quarters full, mess kit, flint"
+        "Chalk watershed model covering the entrance hall wall — tributaries, flow rates,",
+        "Traveler's Pack — waterskin three-quarters full, mess kit, flint",
+        "Stairwell to the upper terraces"
       ],
       "threads": [
-        "Kon is tracking something moving on the lower trail — unclear what",
-        "The Cogitarium is an hour's climb above — the third-terrace Cogitant is still at the board, cup empty, unfinished calculation",
-        "Lenten's runner may be on their way up tonight — and needs the wall-path warning"
+        "Third-terrace Cogitant still at the board — cup empty, four days without care, calculation unfinished",
+        "Lenten's runner may be arriving on the switchback tonight — wall-path warning was given to Lenten but the runner is still in transit",
+        "Ossian named the third-terrace work 'the source' — what exactly that coordinate points to remains unspoken"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 19,
+    "hour": 20,
     "realAnchor": null
   },
   "companions": [
@@ -286,14 +270,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Saehara is moving to the stairwell with Ossian — the dragging sound from above continues; the climb begins now.",
         "Reached the third-terrace landing — dragging sound confirmed within the half-open room; Ossian and Kon both reading it as outside normal parameters.",
         "Read the Fight confirms: not violence, not acute collapse — a body at sustained, controlled, inhuman repetition. The Cogitant is alive and working.",
         "Saehara entered the third terrace. The missing Cogitant is alive — seated on the bare floor, arm moving in sustained repetition across a low board. Not collapse, not distress. Unreachable but present. What she's been building for four days covers every surface.",
         "The third-terrace Cogitant's four-day project is partially read: a structured model built toward a precise valley coordinate — Ossian calls it 'the source.' The coordinate itself remains just out of reach. The Cogitant is alive and still working.",
         "A direct quiet word stopped the Cogitant's arm for three seconds — she is reachable, not fully lost. The board's notation still holds the partial coordinate Ossian calls 'the source.' The name remains unspoken.",
         "Returned to the third terrace — Cogitant still at work, notation denser than before with new columns added since morning. The coordinate at the center of the model is unchanged. She has not finished.",
-        "Saehara is on the switchback returning to the Cogitarium — the third-terrace Cogitant is still at the board with her unfinished coordinate calculation; Ossian named her work 'the source.'"
+        "Saehara is on the switchback returning to the Cogitarium — the third-terrace Cogitant is still at the board with her unfinished coordinate calculation; Ossian named her work 'the source.'",
+        "Saehara has returned to the Cogitarium and is ascending to the third terrace — the Cogitant and the unfinished coordinate calculation are within reach"
       ],
       "aliases": [],
       "startedAt": "2026-07-16T03:39:50.283Z"
@@ -391,7 +375,6 @@
       },
       "relationship": 0,
       "history": [
-        "[d1] Gave directions to Waymarker: eleven kilometers northeast, junction cairn then dry-stone wall, three hours. Confirmed no map exists for external use. Calculated that carrying the f",
         "[d1] Named the runner (Brenn — freckled, jaw scar, east archway) and the Waymarker contact (Lenten the builder). Explained the payment was notation — applied theoretical work. Raised a ",
         "[d1] Last seen cross-legged in the entrance hall as Saehara departed — hands folded, already calculating",
         "[d1] Surfaced from calculation to acknowledge Saehara's return — first question was the fallen Cogitant's status, not the supply line",
@@ -400,7 +383,8 @@
         "[d1] Held silent on the landing while Saehara read the room — listening, not leading.",
         "[d1] Followed Saehara into the doorway — standing behind the shoulder, silent. Has not named the Cogitant.",
         "[d1] Stepped inside the threshold and named the third-terrace work: 'She was working on the source.' Two words, quietly spoken, watching the walls.",
-        "[d1] Let out a slow breath when the Cogitant's arm paused — watching, not speaking"
+        "[d1] Let out a slow breath when the Cogitant's arm paused — watching, not speaking",
+        "[d1] Saehara arrived at the threshold — Ossian registered the return but has not yet spoken"
       ],
       "knownFacts": [
         "The runner's name was Brenn — young, freckled, pronounced scar along his left jaw",
@@ -421,9 +405,9 @@
         "resource-state assessment under uncertainty"
       ],
       "status": "active",
-      "statusNote": "Just inside the third-terrace threshold — witnessed the brief pause; has not yet named the Cogitant",
+      "statusNote": "Cross-legged just inside the Cogitarium entrance hall — present and aware of Saehara's return",
       "lastSeen": {
-        "locationId": "old_switchback",
+        "locationId": "gen-cogitarium-third-terrace",
         "day": 1
       },
       "aliases": [
@@ -583,7 +567,7 @@
   },
   "placeMemory": {
     "the_cogitarium": {
-      "visits": 1,
+      "visits": 2,
       "notes": [
         "[d1] The fallen Cogitant has been removed from the entrance hall — Kon and Saehara have departed northeast through the arch toward Waymarker.",
         "[d1] Saehara arrived carrying a fallen Cogitant — workers in the yard saw the grey robes; the settlement now knows a Cogitant was brought in"
@@ -611,7 +595,8 @@
           "visited": true,
           "note": "Low-ceilinged room — every wall and board chalk-covered. Cogitant seated at center, still calculating. New columns near the margin added since Saehara's morning visit."
         }
-      }
+      },
+      "lastVisit": 1
     },
     "old_switchback": {
       "visits": 1,
@@ -1036,13 +1021,13 @@
     }
   },
   "tendencies": {
-    "strategic": 18.070254063084906,
-    "social": 7.046291550533988,
-    "cerebral": 8.647831917026851,
-    "generous": 9.728203697652505,
-    "cautious": 11.972201967419155,
-    "risky": 0.7616959248645566,
-    "patient": 1
+    "strategic": 17.618497711507782,
+    "social": 6.870134261770638,
+    "cerebral": 8.43163611910118,
+    "generous": 9.484998605211192,
+    "cautious": 11.672896918233675,
+    "risky": 0.7426535267429427,
+    "patient": 0.975
   },
   "aptitudes": [
     "strategist",
@@ -1050,10 +1035,18 @@
     "tactician",
     "stalwart"
   ],
-  "actionCount": 44,
+  "actionCount": 45,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
+    {
+      "kind": "location",
+      "prompt": "The Cogitarium",
+      "url": "https://image.pollinations.ai/prompt/The%20Cogitarium%3A%20Floating%20thought-halls%20where%20the%20Cogitants%20have%20nearly%20left%20their%20bodies%20behind%20for%20pure%20mind%20%E2%80%94%20and%20are%20dying%20of%20it.%20What%20rides%20with%20the%20mind-pole%20here%20is%20ABSTRACT%20and%20a%20growing%20DARK%3A%20brilliance%20shading%20into%20a%20cold%20that%20forgets%20warmth%2C%20forgets%20the%20body%2C%20forgets%20the%20world%20thought%20was%20ever%20meant%20to%20se%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=44200&nologo=true",
+      "caption": "The Cogitarium",
+      "worldDay": 19,
+      "at": "2026-07-19T00:24:38.386Z"
+    },
     {
       "kind": "npc",
       "prompt": "Lenten",
@@ -1071,8 +1064,8 @@
       "at": "2026-07-16T02:18:04.820Z"
     }
   ],
-  "updatedAt": 1784420568899,
-  "rev": 98,
+  "updatedAt": 1784420678386,
+  "rev": 99,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1211,7 +1204,7 @@
   },
   "regionsKnown": {
     "somatic_reaches": 39,
-    "valley": 6
+    "valley": 7
   },
   "opLossPending": false,
   "establishedFacts": [
@@ -1352,15 +1345,16 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-19T00:05:04.919Z",
-      "lastAt": "2026-07-19T00:22:48.897Z",
+      "lastAt": "2026-07-19T00:24:38.385Z",
       "startDay": 19,
       "endDay": 19,
-      "beats": 5
+      "beats": 6
     }
   ],
   "knownPlaces": [
     "old_switchback",
-    "gen-cogitarium-third-terrace"
+    "gen-cogitarium-third-terrace",
+    "the_cogitarium"
   ],
   "_pendingArrival": null,
   "livingCurrentAccess": [],
@@ -1372,5 +1366,8 @@
     "at": "2026-07-19T00:19:51.496Z",
     "message": "Cannot create property 'engagementScore' on boolean 'true'",
     "stack": "TypeError: Cannot create property 'engagementScore' on boolean 'true' <-     at recordAttention (https://orkstrtdkaos.github.io/Singularity/engine/generate.js:340:21) <-     at noteGeneratedAttention (https://orkstrtdkaos.github.io/Singularity/app.js?v=1.8.120:1511:16) <-     at applyTurn (https://orkstrtdkaos.github.io/Singularity/app.js?v=1.8.120:2941:7)"
+  },
+  "locationImages": {
+    "the_cogitarium": "https://image.pollinations.ai/prompt/The%20Cogitarium%3A%20Floating%20thought-halls%20where%20the%20Cogitants%20have%20nearly%20left%20their%20bodies%20behind%20for%20pure%20mind%20%E2%80%94%20and%20are%20dying%20of%20it.%20What%20rides%20with%20the%20mind-pole%20here%20is%20ABSTRACT%20and%20a%20growing%20DARK%3A%20brilliance%20shading%20into%20a%20cold%20that%20forgets%20warmth%2C%20forgets%20the%20body%2C%20forgets%20the%20world%20thought%20was%20ever%20meant%20to%20se%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=44200&nologo=true"
   }
 }

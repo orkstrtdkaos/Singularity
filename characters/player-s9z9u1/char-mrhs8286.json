@@ -91,7 +91,7 @@
     "chaos_order": 0.24682516555723183,
     "mechanical_spiritual": 0.2580372847905887,
     "concrete_abstract": -0.0326467323816193,
-    "death_life": -0.21907471222399497,
+    "death_life": -0.1931209766127952,
     "emotional_logical": 0.019295624999999986,
     "falsehood_truth": 0.31383840738235763,
     "demonic_angelic": 0.013499999999999998,
@@ -1057,19 +1057,24 @@
         "player": "Use The Attended End before stepping in — read whether anything inside that circle is ending, and what that means about what lives here.",
         "summary": "Silas reads The Attended End at the grove's edge — nothing inside is ending; the Ent carries no far shore the craft can find. Huginn watches without comment. Veth names the distinction: uncontacted, not unknown.",
         "narration": "You stand at the edge of the grove and open The Attended End without ceremony — a quiet thing, barely a breath's worth of effort, the craft settling into the space between the trees like a hand set flat on a table.\n\nWhat comes back is unhurried and plain. Nothing inside that circle is ending. Not the trees, not the moss, not the still air between the roots. The reading lands with a peculiar quality you do not often meet: an absence of edge. Most living things carry their ending somewhere in them, a faint grain of it, the way old wood holds the memory of the tree. The Ent holds nothing of the kind. It is not that it is young. It is that whatever measure the craft uses to feel for a thing's far shore finds no shore here at all.\n\nHuginn shifts on your shoulder. One unhurried look into the circle. No croak, no comment — but the bird does not look away, which is a kind of comment.\n\nVeth speaks quietly beside you, eyes still on the canopy. \"The March called it uncontacted, not unknown,\" she says. \"There is a difference.\" Pell says nothing. She is watching the trees the way she watches a piece of iron she has not yet put a name to."
+      },
+      {
+        "player": "Ask Huginn directly — it has been present at more endings than anything alive, and this place holds none. What does it make of that?",
+        "summary": "Huginn speaks two words — 'Not yet' — and will not say more. Veth names the March's old position: uncontacted because the Ent was already in conversation with something else.",
+        "narration": "You turn to Huginn and ask it plainly, the way you always ask — not softly, not with ceremony, just the question laid out where it can be heard.\n\n\"You have been at more endings than anything I have ever met,\" you say. \"And there is nothing ending in there. What do you make of that?\"\n\nHuginn turns one eye toward the circle. It holds that position for a moment that is longer than a look and shorter than a decision.\n\nThen it says, low and dry, the voice it uses maybe four times a season: \"Not yet.\"\n\nIt turns its head back to the trees. It does not elaborate. Its silence after that has the quality of a door pulled shut — not locked, just closed, because the rest is not its to say.\n\nPell does not look at the bird. She looks at the trees. \"Not yet,\" she says quietly, repeating it the way she repeats a measurement she wants to be sure she has right. Then she is quiet too.\n\nVeth Ondra shifts her weight slightly, eyes still on the canopy. \"The March's position was to leave it uncontacted,\" she says at last, to no one in particular. \"Not because it was hostile. Because it was already in conversation with something, and they did not want to interrupt.\" She pauses. \"That was the warden's read. I agreed with it then. I am less certain now that I am standing here.\""
       }
     ],
     "lastTurn": {
-      "narration": "You stand at the edge of the grove and open The Attended End without ceremony — a quiet thing, barely a breath's worth of effort, the craft settling into the space between the trees like a hand set flat on a table.\n\nWhat comes back is unhurried and plain. Nothing inside that circle is ending. Not the trees, not the moss, not the still air between the roots. The reading lands with a peculiar quality you do not often meet: an absence of edge. Most living things carry their ending somewhere in them, a faint grain of it, the way old wood holds the memory of the tree. The Ent holds nothing of the kind. It is not that it is young. It is that whatever measure the craft uses to feel for a thing's far shore finds no shore here at all.\n\nHuginn shifts on your shoulder. One unhurried look into the circle. No croak, no comment — but the bird does not look away, which is a kind of comment.\n\nVeth speaks quietly beside you, eyes still on the canopy. \"The March called it uncontacted, not unknown,\" she says. \"There is a difference.\" Pell says nothing. She is watching the trees the way she watches a piece of iron she has not yet put a name to.",
-      "sceneSummary": "Silas reads The Attended End at the grove's edge — nothing inside is ending; the Ent carries no far shore the craft can find. Huginn watches without comment. Veth names the distinction: uncontacted, not unknown.",
+      "narration": "You turn to Huginn and ask it plainly, the way you always ask — not softly, not with ceremony, just the question laid out where it can be heard.\n\n\"You have been at more endings than anything I have ever met,\" you say. \"And there is nothing ending in there. What do you make of that?\"\n\nHuginn turns one eye toward the circle. It holds that position for a moment that is longer than a look and shorter than a decision.\n\nThen it says, low and dry, the voice it uses maybe four times a season: \"Not yet.\"\n\nIt turns its head back to the trees. It does not elaborate. Its silence after that has the quality of a door pulled shut — not locked, just closed, because the rest is not its to say.\n\nPell does not look at the bird. She looks at the trees. \"Not yet,\" she says quietly, repeating it the way she repeats a measurement she wants to be sure she has right. Then she is quiet too.\n\nVeth Ondra shifts her weight slightly, eyes still on the canopy. \"The March's position was to leave it uncontacted,\" she says at last, to no one in particular. \"Not because it was hostile. Because it was already in conversation with something, and they did not want to interrupt.\" She pauses. \"That was the warden's read. I agreed with it then. I am less certain now that I am standing here.\"",
+      "sceneSummary": "Huginn speaks two words — 'Not yet' — and will not say more. Veth names the March's old position: uncontacted because the Ent was already in conversation with something else.",
       "choices": [
         {
-          "label": "Step into the circle and simply be present — no craft, no intention, nothing pressing. Let the Ent register what you are.",
+          "label": "Step into the circle — sustained, unhurried, with nothing pressing through you. Offer only presence, the way Siol described.",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "death_life": 0.2,
-            "mechanical_spiritual": 0.3
+            "mechanical_spiritual": 0.6,
+            "chaos_order": 0.2
           },
           "difficulty": 0,
           "intentTags": [
@@ -1078,35 +1083,30 @@
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": false,
+          "trivial": true,
           "encounterId": null,
           "emergenceId": null
         },
         {
-          "label": "Step in and open Order-Sense — read the design the Ent is part of, what larger thing these trees belong to.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {
-            "chaos_order": 0.3,
-            "mechanical_spiritual": 0.2
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Siol plainly what she has seen happen when others entered — what the grove actually did, not what she believes about it.",
+          "label": "Ask Huginn what it means by 'not yet' — press gently; it has already spoken once.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.2
-          },
+          "axes": {},
+          "difficulty": 15,
+          "intentTags": [
+            "persuade"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Veth what the March warden thought the Ent was in conversation with — she said she agreed with the read then; what has changed?",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "study"
@@ -1118,15 +1118,14 @@
           "emergenceId": null
         },
         {
-          "label": "Ask Huginn directly — it has been present at more endings than anything alive, and this place holds none. What does it make of that?",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": 0.3
-          },
+          "label": "Ask Siol directly — she stops at the edge every time. What is she waiting for the Ent to do?",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "study",
+            "persuade"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -1138,7 +1137,7 @@
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": -2
+        "energy": 0
       },
       "ledgerEvents": [],
       "questUpdates": [],
@@ -1148,7 +1147,7 @@
         "npcsPresent": [
           {
             "name": "Pell Marsh",
-            "state": "Standing at Silas's left, pack settled, watching the trees with the quiet attention she gives unfinished iron."
+            "state": "Standing at Silas's left, eyes on the trees, repeating Huginn's words quietly to herself — the measuring habit."
           },
           {
             "name": "Siol",
@@ -1156,11 +1155,11 @@
           },
           {
             "name": "Veth Ondra",
-            "state": "Eyes on the canopy, having just spoken — waiting without urgency."
+            "state": "Eyes on the canopy, having just named the March's old position — waiting, less certain than she was."
           },
           {
             "name": "Huginn",
-            "state": "On Silas's shoulder, watching the circle without looking away."
+            "state": "Watching the circle, eye returned to the trees, door pulled shut."
           }
         ],
         "objects": [
@@ -1169,8 +1168,9 @@
           "Traveler's Pack, settled on Silas's back"
         ],
         "threads": [
-          "The Ent holds no ending the craft can find — what that means is unanswered",
-          "Huginn's sustained attention on the circle without comment",
+          "Huginn said 'not yet' and will not say more — what the Ent is waiting for is unanswered",
+          "Veth named the March's read: the Ent was in conversation with something; she is less certain of the read now that she is here",
+          "Siol stops at the edge every time — her reason is not yet named",
           "Whether and how to enter the grove"
         ]
       },
@@ -1179,68 +1179,71 @@
           "op": "update",
           "npcId": "huginn",
           "name": "Huginn",
-          "note": "Shifted on Silas's shoulder at the Attended End result — looked into the circle, held the look. No croak. The silence was timed.",
+          "gender": "nonbinary",
+          "pronouns": "they/them",
+          "note": "Spoke two words — 'Not yet' — when asked what it makes of a place that holds no endings. Will not elaborate. Door closed.",
           "learned": [
-            "The Ent circle holds nothing the craft reads as ending — Huginn registered this and did not look away"
+            "The Ent holds no ending the craft can find — Huginn's read is 'not yet', not 'never'"
           ],
-          "statusNote": "On Silas's shoulder at the Ent grove edge, watching the circle."
+          "skillsObserved": [],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "On Silas's shoulder at the Ent grove's edge — watching the circle without looking away."
         },
         {
           "op": "update",
-          "npcId": "veth-stillwater-ondra",
-          "name": "Veth Ondra",
-          "note": "Named the March's distinction aloud: uncontacted, not unknown.",
-          "statusNote": "At the Ent grove's edge, eyes on the canopy, having named the March's distinction."
-        },
+          "npcId": "veth-ondra",
+          "name": "Veth (Stillwater) Ondra",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "Named the March's position: uncontacted because the Ent was already in conversation with something. Said she agreed then; standing here, she is less certain.",
+          "learned": [
+            "The March's position was not hostile non-contact — they believed the Ent was already in conversation with something else and chose not to interrupt"
+          ],
+          "skillsObserved": [
+            "precise recall of institutional rationale under direct field observation"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "At the Ent grove's edge, eyes on the canopy — less certain of the March's old read than she was before arriving."
+        }
+      ],
+      "factUpdates": [],
+      "placeUpdates": [
         {
-          "op": "update",
-          "npcId": "pell-ran-marsh",
-          "name": "Pell Marsh",
-          "note": "Watching the trees in silence — the attention she gives something unfinished.",
-          "statusNote": "At the Ent grove's edge, pack settled, watching the circle."
-        },
-        {
-          "op": "update",
-          "npcId": "siol",
-          "name": "Siol",
-          "note": "Still at the edge, coat still — has not moved forward.",
-          "statusNote": "At the Ent grove's edge, stopped where she always stops."
+          "note": "The March's warden position on the Ent: uncontacted not from hostility but because they believed the Ent was already in conversation with something else. Huginn's read on the circle: 'not yet' — not never.",
+          "flag": {
+            "huginn_read": "not_yet",
+            "march_position": "in_conversation_with_something"
+          }
         }
       ],
       "codexUpdates": [
         {
           "topic": "the-ent-grove",
           "label": "The Ent Grove",
-          "kind": "place",
-          "fact": "The Attended End finds nothing ending inside the circle — not the trees, not the moss, not the air. More precisely: the craft finds no far shore. The Ent does not read as young; it reads as something the craft's measure of mortality cannot locate. Nothing inside is dying. Nothing inside seems to be carrying the grain of an eventual end.",
+          "kind": "mystery",
+          "entityId": "the-ent-grove",
+          "fact": "Huginn, who attends every ending, read the circle and said 'not yet' — meaning the Ent's ending is coming but is not now. The March believed the Ent was already in conversation with something else, and chose not to interrupt. Standing here, Veth is less certain that read still holds.",
           "links": [
             "the-water-crisis",
+            "veth-ondra",
             "the-edge-district-ledger"
           ]
         }
       ],
-      "placeUpdates": [
-        {
-          "note": "The Attended End cast at the grove's edge on World-day 19 midday returns no ending from within the circle — the Ent carries nothing the craft reads as a far shore. Huginn watched without comment.",
-          "subPlace": {
-            "name": "Ent Grove Circle",
-            "parent": "The Ent Grove",
-            "note": "The inner ring of old trees — mossy, dry, quiet. The Attended End finds no ending inside it. The Ent holds no far shore.",
-            "visited": false
-          }
-        }
-      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief moment at the grove's edge — the craft cast and the party's quiet exchange."
-      }
+        "why": "a short exchange at the grove's edge — a question asked, two replies given"
+      },
+      "sceneEnded": false
     },
     "sceneState": {
       "setting": "The edge of the Ent grove circle, midday, early spring. Seven or eight old trees form a rough ring ahead; the ground inside is mossy and dry. The Hub's buildings are visible through the treeline but the grove reads as separate from them. The party stands at the boundary Siol stopped at.",
       "npcsPresent": [
         {
           "name": "Pell Marsh",
-          "state": "Standing at Silas's left, pack settled, watching the trees with the quiet attention she gives unfinished iron."
+          "state": "Standing at Silas's left, eyes on the trees, repeating Huginn's words quietly to herself — the measuring habit."
         },
         {
           "name": "Siol",
@@ -1248,11 +1251,11 @@
         },
         {
           "name": "Veth Ondra",
-          "state": "Eyes on the canopy, having just spoken — waiting without urgency."
+          "state": "Eyes on the canopy, having just named the March's old position — waiting, less certain than she was."
         },
         {
           "name": "Huginn",
-          "state": "On Silas's shoulder, watching the circle without looking away."
+          "state": "Watching the circle, eye returned to the trees, door pulled shut."
         }
       ],
       "objects": [
@@ -1261,8 +1264,9 @@
         "Traveler's Pack, settled on Silas's back"
       ],
       "threads": [
-        "The Ent holds no ending the craft can find — what that means is unanswered",
-        "Huginn's sustained attention on the circle without comment",
+        "Huginn said 'not yet' and will not say more — what the Ent is waiting for is unanswered",
+        "Veth named the March's read: the Ent was in conversation with something; she is less certain of the read now that she is here",
+        "Siol stops at the edge every time — her reason is not yet named",
         "Whether and how to enter the grove"
       ]
     }
@@ -2389,7 +2393,6 @@
       },
       "relationship": 8,
       "history": [
-        "[d6] Took Silas's open palm, named the Raven's Home without flinching, and began folding the stall. She is in — practically and without ceremony.",
         "[d6] Broke the stall down in under ten minutes — packed light, no food, new straps on an old bag. Noted Pell hasn't been introduced yet. Ready to move.",
         "[d6] You know this person's name now: Veth (Stillwater) Ondra (was \"Veth Ondra\")",
         "[d6] Watched Silas retrieve the tin from the neighboring hollow — clocked it immediately, said nothing, waiting.",
@@ -2398,30 +2401,31 @@
         "[d6] Added black salt to the rune-supply purchase unprompted — named its practical purpose and paid from her own pocket. Met Pell at the south end of the row; hand extended and taken without ceremony.",
         "[d6] Met Pell Marsh — brief practical exchange, two people sizing up the road. Introduction complete without ceremony.",
         "[d6] Named the March's three-line index entry on the Ent — it predates the Hub, the March's position was to leave it uncontacted, not hostile. Copied forward a margin note from the Raven's Home warden: the Ent acknowledges endings without being asked. Did not write it herself; she only carried it…",
-        "[d6] Walked in behind Silas, eyes on the canopy — reading the grove in the unhurried way of long warden habit."
+        "[d6] Walked in behind Silas, eyes on the canopy — reading the grove in the unhurried way of long warden habit.",
+        "[d6] Named the March's position: uncontacted because the Ent was already in conversation with something. Said she agreed then; standing here, she is less certain."
       ],
       "knownFacts": [
-        "The tin held seventh-band lens-blanks with a specification note in two hands — she read it and named the incompleteness without hesitation",
         "Buys from operational knowledge, not sentiment — named the paste's wet-weather failure before being asked",
         "Pell Marsh is now known to her — the introduction complete",
         "Pell Marsh is Silas's partner — read it without being told and extended her hand accordingly.",
         "The March's position on the Ent: leave it uncontacted — not hostile, not afraid, simply not the March's work",
         "The Raven's Home warden's margin note: the Ent acknowledges endings without being asked",
         "The Ent predates the Hub's founding as a waygate station — the grove was here first",
-        "The Ent grove's canopy drew her attention immediately on approach — she is already reading it"
+        "The Ent grove's canopy drew her attention immediately on approach — she is already reading it",
+        "The March's position was not hostile non-contact — they believed the Ent was already in conversation with something else and chose not to interrupt"
       ],
       "skillsObserved": [
-        "accepting a compact without ceremony — named the cost and mo",
         "field-stripping a portable stall in under ten minutes",
         "packing a teaching kit by sequence without looking",
         "reading an abandoned object's situation from a single look",
         "proactive supply correction from field knowledge — identifie",
-        "precise recall of thin institutional records under a direct "
+        "precise recall of thin institutional records under a direct ",
+        "precise recall of institutional rationale under direct field"
       ],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the Ent grove's edge, eyes on the canopy, listening.",
+      "statusNote": "At the Ent grove's edge, eyes on the canopy — less certain of the March's old read than she was before arriving.",
       "lastSeen": {
         "locationId": "gen-the-ent-grove",
         "day": 6
@@ -2816,9 +2820,13 @@
       "visits": 1,
       "notes": [
         "[d6] The Ent grove circle: seven or eight old trees forming a rough ring, mossy dry ground inside regardless of season. Siol stops at the edge and does not enter. The Hub's buildings are visible through the treeline but the grove reads as separate from them.",
-        "[d6] The Attended End cast at the grove's edge on World-day 19 midday returns no ending from within the circle — the Ent carries nothing the craft reads as a far shore. Huginn watched without comment."
+        "[d6] The Attended End cast at the grove's edge on World-day 19 midday returns no ending from within the circle — the Ent carries nothing the craft reads as a far shore. Huginn watched without comment.",
+        "[d6] The March's warden position on the Ent: uncontacted not from hostility but because they believed the Ent was already in conversation with something else. Huginn's read on the circle: 'not yet' — not never."
       ],
-      "flags": {},
+      "flags": {
+        "huginn_read": "not_yet",
+        "march_position": "in_conversation_with_something"
+      },
       "subPlaces": {
         "ent-grove-circle": {
           "name": "Ent Grove Circle",
@@ -4308,21 +4316,21 @@
     }
   },
   "tendencies": {
-    "strategic": 12.652063433473426,
-    "cerebral": 15.217639040025233,
-    "social": 19.917842252503117,
-    "generous": 2.0331036213484825,
-    "cautious": 4.170480338154147,
-    "physical": 0.9268326139788068,
-    "risky": 0.9719676078496597,
-    "ruthless": 0.30990124980298345,
-    "carousing": 0.004748078998829702,
-    "amorous": 3.7069673985121714,
-    "patient": 0.7675264079109338,
-    "stealth": 0.12011851615988586,
-    "devotion": 0.2684223105014289,
-    "craft": 0.9488538654276907,
-    "leadership": 0.6114165781397343
+    "strategic": 12.33576184763659,
+    "cerebral": 15.837198064024602,
+    "social": 19.41989619619054,
+    "generous": 1.9822760308147704,
+    "cautious": 4.066218329700293,
+    "physical": 0.9036617986293366,
+    "risky": 0.9476684176534182,
+    "ruthless": 0.30215371855790885,
+    "carousing": 0.00462937702385896,
+    "amorous": 3.614293213549367,
+    "patient": 0.7483382477131605,
+    "stealth": 0.11711555325588871,
+    "devotion": 0.2617117527388932,
+    "craft": 0.9251325187919984,
+    "leadership": 0.5961311636862409
   },
   "aptitudes": [
     "strategist",
@@ -4330,7 +4338,7 @@
     "scholar",
     "orator"
   ],
-  "actionCount": 571,
+  "actionCount": 572,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -4608,8 +4616,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784434022294,
-  "rev": 837,
+  "updatedAt": 1784434252595,
+  "rev": 838,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -6021,7 +6029,7 @@
   "syncedAt": 1784429149276,
   "teachers": {},
   "regionsKnown": {
-    "valley": 393
+    "valley": 394
   },
   "foreclosed": [
     "rootkin",
@@ -6079,10 +6087,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-19T04:07:02.285Z",
+      "lastAt": "2026-07-19T04:10:52.592Z",
       "startDay": 18,
       "endDay": 19,
-      "beats": 118,
+      "beats": 119,
       "_recapError": null,
       "recap": "Day eighteen, and Silas Weir moved like a man who'd finally stopped fighting the shape of what he was. On the road he disarmed three opportunists without breaking bones, read the grief sitting behind the broad man's eyes, named it plainly, pressed provisions into their hands, and sent them toward something worth doing — mercy given as instruction, not sentiment. Then he brought the hard people together: Dara, Aldric, Fendt, Mara, Calvar, all of them in the heat of Pell's forge with no exits easy and no pretense left, and in that single evening he turned a valley's quiet panic into four working threads — engineering, logistics, supply, accounts — each with a named lead and a direction to face. The crisis didn't end, but it stopped being formless, and that was his doing."
     }

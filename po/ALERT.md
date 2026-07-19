@@ -354,3 +354,48 @@ STILL OPEN FOR ERIK: the hub-attribution question (16 of 20 registry NPCs have n
 I declined to derive from firstMet because at a hub it is actively wrong), and the map/axes ruling.
 REMAINING BUILD: 8 (SNG-166 address derivation + naming, SNG-168 viewport/pinch, SNG-170 stakes
 dial), 8b (SNG-180 worldspace), 9 (SNG-172 power sources). -->
+
+---
+
+<!-- status: BATCH-13 item 8 SUBSTANTIALLY COMPLETE_PENDING_REVIEW (CCode 2026-07-19). v1.8.147
+SNG-168 viewport · v1.8.148 SNG-166 §1 address derivation · v1.8.149 SNG-166 §3 naming. Suite green
+at each, verified by EXIT CODE.
+
+SNG-168 — FOUR defects and the first explains the rest. The world and location tiers rendered a BARE
+<svg>, but the reason they were never simply wired is that wireSkillGraphViewport DEREFERENCED THREE
+CONTROLS only the region tier renders (getElementById("gz-in").onclick, unguarded) — so calling it
+anywhere else threw before reaching the listeners. The null-guard is what makes one wiring serve five
+surfaces; the markup fix alone would have crashed. PINCH: touches[1] appeared ZERO times repo-wide,
+so zoom was wheel-only and a phone has no wheel. THE LEAK IS REAL as your audit suspected — one
+module-level graphView served map AND wheel AND graph, so zooming the map and opening the wheel
+inherited the transform; state is now keyed per surface (world/location/map/wheel/graph). Verified
+against the app the browser actually serves, zero console errors.
+
+SNG-166 §1 — MEASURED ON THE LIVE SAVE: all 6 generated locations carried regionId=valley, including
+`gen-center`, which IS the Crossing, and `gen-ashwarden-march-road`, which is the Palelands. My ROUND
+2 noted the stubEntity default only fires on unrepairable output and MISSED the second cause: the
+general path never asked the model for a region at all, and the prompt handed it "WHERE: <the
+player's current place>" and nothing else. Same lesson as SNG-179 — the valid regionId list now ships
+in the prompt and says the right answer is NOT necessarily the place above. resolveRegionFor orders
+evidence authored -> named -> anchor -> unresolved, and THE ORDER IS THE FIX: the anchor is wherever
+the player stands, so inheriting it IS the bug. Re-resolved: gen-center -> the_center,
+gen-ashwarden-march-road -> the_palelands, the four genuinely-local ones correctly stay valley.
+Unresolvable now yields NULL + regionSource:"unresolved" per ROUND 2. CI guard added from my own
+ROUND 2 §6.1 — content_ci fails on a hardcoded region default, because "derive, else default" had
+already come back once.
+
+SNG-166 §3 — YOUR CORRECTION PROVING ITSELF, with the number. Across 10 characters on this device: 52
+distinct given names, 5 recurring, and MARA MET BY FOUR CHARACTERS. Within any one save there is
+exactly one Mara, so the per-character ratchet the spec first proposed would have read GREEN forever
+while the thing Erik noticed kept happening. namematch now carries givenName / usedGivenNames /
+namesToAvoid / nameRepetitionCount, counted across the device, avoid-list sorted worst-first so
+truncation keeps the real offenders. THE ONOMASTICS HALF CAME FROM CONTENT THAT ALREADY EXISTED —
+traditions.json carries an `aesthetic` line for all 24 peoples, so names can sound like the country
+that made them with no phoneme table and no authoring pass.
+
+REMAINING AND WAITING ON A RULING, NOT ON ME: SNG-166 §2 region renames (display-name migration —
+cost measured at 52 occurrences across 18 files, ids provably unaffected), SNG-170 stakes dial
+(default + whether the boar/greatcat flip to lethal), SNG-180 worldspace (Erik's map/axes thinking),
+SNG-172 power sources (wants the substrate ruler settled). Also still open: the hub-attribution
+question — 16 of 20 registry NPCs have no backing record, and I declined to derive them from
+firstMet because at a hub it is actively wrong. -->

@@ -667,4 +667,42 @@ sanitizeNewEncounter clamps it), §2a go-anywhere, §2b know-nothing reset. Then
 (received, briefed — Promise.all per manifest group; caution 3 the order-independence trap is noted).
 STILL OPEN AND YOURS: SNG-179's reproduced-symptom verification (now also the §2f live check). -->
 
+---
+
+<!-- status: SNG-187 cold-load COMPLETE_PENDING_REVIEW (CCode 2026-07-19). v1.8.158. Suite green by
+exit code; correctness proven byte-identical against the sequential load. Results:
+po/results/20260719_SNG-187_cold_load.md. Erik chose this over §2c and SNG-188.
+
+YOUR DIAGNOSIS WAS EXACT. loadContent awaited ~250 JSON files STRICTLY SEQUENTIALLY (Promise.all
+appeared zero times) = ~15s of pure round-trip latency, not payload. Counted the fetches: 250.
+
+THE FIX — three sequential stretches parallelised: the ~12 core rule-loads (one Promise.all), the 10
+content groups (the 252 files, promises created before the first await so groups OVERLAP), the
+~14-fetch tail. ~250 serial round-trips → a handful of waves.
+
+BOTH CAUTIONS HELD. Failure tolerance — valley items + quests keep allSettled (skip a bad file);
+every fatal-on-miss group stays Promise.all. Order-independence — Promise.all/allSettled preserve
+INPUT order in their results, so every fold runs in manifest order; an id collision's winner is
+unchanged (last-write-wins), quests concat in the same order. CAUTION 3 PROVEN NOT ASSUMED: a Node
+harness (fetch shim over the real files) ran loadContent both ways and compared a fingerprint —
+counts + a value-size hash per id-keyed map (catches a reordered collision winner, not just a drop) +
+accord-tagged abilities + legends-in-npcs — IDENTICAL TO THE DIGIT. That run also proves loadContent
+executes end-to-end without throwing.
+
+THE WIN, QUANTIFIED (localhost can't show latency — your point): synthetic per-fetch delay, 250
+fetches, PEAK CONCURRENCY 221 (was 1), parallel 258ms vs sequential-equivalent 6250ms at 25ms/fetch =
+24x. Scaled to ~60ms CDN the sequential path is ~15s — reproducing your 15.30s and confirming the
+diagnosis; parallel is a few waves, inside the <2s target.
+
+⚠️ VERIFICATION IS YOURS, and localhost cannot substitute — I could not even see the change in the
+in-app browser (its ES-module cache pinned the old state.js across a server restart + force reload;
+the stale-tab trap), and localhost is a disk read with no latency regardless. LCP before/after on the
+LIVE CDN is the real proof (§6). A [loadContent] count canary logs at boot so a silent group-drop on
+the real server shows in the console. Prompt caching untouched (§4). §3.5 early-paint + §5 bundling
+NOT done — likely moot now; measure the new LCP first.
+
+QUEUE NOW: SNG-186 §2c/§2a/§2b (workbench remainder), SNG-188 moved-without-consent (new spec at HEAD).
+STILL OPEN AND YOURS: SNG-179 reproduced-symptom check, SNG-187 CDN LCP. -->
+
+
 

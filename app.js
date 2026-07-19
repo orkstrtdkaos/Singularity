@@ -58,7 +58,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.154";
+const APP_VERSION = "1.8.155";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2980,11 +2980,30 @@ function applyTurn(turn, resolution, playerWords = null) {
   }
   if (turn.markTeacher?.traditionId && CONTENT.traditionIndex?.byId?.[turn.markTeacher.traditionId]) {
     logOpOutcome("markTeacher", "applied");
-    const tid = turn.markTeacher.traditionId;
-    const first = !character.teachers?.[tid]?.willing;
+    bindTeacher(turn.markTeacher.traditionId, turn.markTeacher.npcId, turn.markTeacher.willing !== false);
+  }
+  // SNG-179 (DERIVE, NOT DEMAND): a `bondType: "mentor"` on an npcUpdate IS a teaching relationship —
+  // read it as one rather than asking the model to ALSO emit markTeacher. The diagnosis proved the
+  // model records the mentoring richly in npcUpdates and never fires the thin one-shot mark beside it;
+  // asking it to say the same thing twice is asking it to choose, and it chooses the expressive op.
+  // The tradition is the mentor's OWN primary domain (SNG-177) — never invented — and an
+  // unattributable mentor (no resolvable domain, e.g. a registry-only NPC) binds NOTHING, which is
+  // honest rather than a guess. This is additive: an explicit markTeacher still works above.
+  for (const u of (turn.npcUpdates || [])) {
+    if (u?.bondType !== "mentor" || !u.npcId) continue;
+    const rec = CONTENT.npcs?.[u.npcId] || character.generated?.npc?.[u.npcId] || character.npcRegistry?.[u.npcId];
+    const dom = rec?.domains?.primary;
+    const tid = Array.isArray(dom) ? dom[0] : dom;
+    if (tid && CONTENT.traditionIndex?.byId?.[tid] && !character.teachers?.[tid]?.willing) {
+      bindTeacher(tid, u.npcId, true);
+      logOpOutcome("markTeacher", "derived-from-bond");
+    }
+  }
+  function bindTeacher(traditionId, npcId, willing) {
+    const first = !character.teachers?.[traditionId]?.willing;
     character.teachers = character.teachers || {};
-    character.teachers[tid] = { met: true, willing: turn.markTeacher.willing !== false, npcId: String(turn.markTeacher.npcId || "").slice(0, 60) || null };
-    if (first && character.teachers[tid].willing) turn.narration += `\n\n*✦ You have a teacher among the ${traditionLabel(tid)} now — their deepest craft opens to you as you earn their people's trust.*`;
+    character.teachers[traditionId] = { met: true, willing, npcId: String(npcId || "").slice(0, 60) || null };
+    if (first && willing) turn.narration += `\n\n*✦ You have a teacher among the ${traditionLabel(traditionId)} now — their deepest craft opens to you as you earn their people's trust.*`;
   }
   // SNG-101: the GM surfaces a promotion the character has EARNED — the engine flags it for the player to
   // commit (Law 9), and only if promotionEligible is genuinely met. The GM can offer; it can never foreclose.

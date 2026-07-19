@@ -5705,6 +5705,55 @@ await (async () => {
     cross && cross.worldPos.colatitude === 0);
 }
 
+// --- SNG-179 fix: derive the teacher from bondType "mentor" (DERIVE, not DEMAND) ---
+{
+  // The derivation logic as applyTurn runs it, isolated so the mapping is testable. Aevi's caveat
+  // stands — a green unit test is necessary and NOT sufficient; the real proof is Erik re-running a
+  // teaching beat and watching character.teachers fill. This asserts the mechanism, not the outcome.
+  const idx = { byId: { somatic: { traditionId: "somatic", name: "The Somatics" } } };
+  const derive = (character, npcs, updates) => {
+    for (const u of updates) {
+      if (u?.bondType !== "mentor" || !u.npcId) continue;
+      const rec = npcs[u.npcId] || character.generated?.npc?.[u.npcId] || character.npcRegistry?.[u.npcId];
+      const dom = rec?.domains?.primary; const tid = Array.isArray(dom) ? dom[0] : dom;
+      if (tid && idx.byId?.[tid] && !character.teachers?.[tid]?.willing) {
+        (character.teachers = character.teachers || {})[tid] = { met: true, willing: true, npcId: u.npcId };
+      }
+    }
+  };
+
+  // The whole point: a mentor bond IS a teaching relationship — read, not re-declared.
+  const c = { teachers: {}, npcRegistry: {}, generated: { npc: {} } };
+  derive(c, { taro: { id: "taro", name: "Taro", domains: { primary: "somatic" } } }, [{ npcId: "taro", bondType: "mentor", note: "a real lesson" }]);
+  check("179fix: a bondType 'mentor' beat binds a teacher WITHOUT a separate markTeacher op", c.teachers.somatic?.willing === true);
+  check("179fix: the tradition is the mentor's OWN primary domain, not invented", c.teachers.somatic?.npcId === "taro");
+
+  // Downstream: the teacher gate progression.js reads is now open for that people.
+  const t = c.teachers.somatic;
+  check("179fix: the capstone gate opens — met + willing is what progression.js:333 checks", !!(t && t.met && t.willing));
+
+  // NEVER invents: an unattributable mentor (registry-only, no domain — the Veth case) binds nothing.
+  const c2 = { teachers: {}, npcRegistry: { veth: { id: "veth", name: "Veth" } }, generated: { npc: {} } };
+  derive(c2, {}, [{ npcId: "veth", bondType: "mentor" }]);
+  check("179fix: a mentor with NO resolvable domain binds NOTHING — honest, not a guess", Object.keys(c2.teachers).length === 0);
+
+  // Only a mentor. A student bond (the character teaches THEM) or platonic does not make a teacher.
+  const c3 = { teachers: {}, npcRegistry: {}, generated: { npc: {} } };
+  derive(c3, { s: { id: "s", domains: { primary: "somatic" } } }, [{ npcId: "s", bondType: "student" }, { npcId: "s", bondType: "platonic" }]);
+  check("179fix: a 'student' or 'platonic' bond does not bind a teacher — direction matters", Object.keys(c3.teachers).length === 0);
+
+  // An invalid derived tradition is refused (the SNG-179 vocabulary lesson, applied to derivation too).
+  const c4 = { teachers: {}, npcRegistry: {}, generated: { npc: {} } };
+  derive(c4, { x: { id: "x", domains: { primary: "wizardry" } } }, [{ npcId: "x", bondType: "mentor" }]);
+  check("179fix: a mentor whose domain is not a real tradition binds nothing", Object.keys(c4.teachers).length === 0);
+
+  // The rule was rebalanced, not shouted: the brake is no longer the last word (SNG-179 §4.3).
+  const gmSrc3 = readFileSync(new URL('../engine/gm.js', import.meta.url), 'utf8');
+  check("179fix: rule 19C ends on the qualifying condition, not the brake", /When the beat is a genuine lesson, mark it\./.test(gmSrc3));
+  check("179fix: rule 19B ends on permission to fire, not anti-inflation", /When the listed craft carries the scene, mark it\./.test(gmSrc3));
+  check("179fix: and no emphasis was added — the derivation carries it, the prompt does not shout", !/markTeacher.*MUST.*MUST/.test(gmSrc3));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

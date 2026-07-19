@@ -57,7 +57,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.133";
+const APP_VERSION = "1.8.134";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3267,7 +3267,10 @@ async function onChoice(choice) {
   const aff = affinityFor(action, location);
   const iMod = usesAbility ? effectMod(intensity, CONTENT.intensity) : 0;
   const resolution = resolveAction({ character, action, location, rules: CONTENT.rules, aptitudeMods: mods, equipmentBonus: equip.bonus + comp.bonus + aff.bonus + iMod, substratePenalty: substrate?.chancePenalty || 0 });
-  if (equip.bonus + comp.bonus > 0) resolution.equipHelpers = [...equip.helpers, ...comp.helpers];
+  // SNG-169 §2c: keep the ITEM helpers separately. `equipHelpers` mixes items and companions, and
+  // the roll receipt makes item names tappable — a companion name looked up as an item would
+  // silently do nothing. Both lists are kept: equipHelpers stays for the bond-growth check above.
+  if (equip.bonus + comp.bonus > 0) { resolution.equipHelpers = [...equip.helpers, ...comp.helpers]; resolution.itemHelpers = [...equip.helpers]; }
   if (aff.bonus !== 0) resolution.locationAffinity = affinityReceipt(aff);
   if (usesAbility) { resolution.intensity = intensity; resolution.energySpent = energyCost; }
   // SNG-090: surface the substrate when it bit (starved/crowded) — a receipt line + a note the GM
@@ -5962,7 +5965,7 @@ function itemCard(it, { open = false, toggleAttr = "data-item-toggle", showPin =
   return `<div class="item-card ${open ? "open" : ""}">
     <button class="item-name" ${toggleAttr}="${esc(it.name)}">${esc(displayName(it))}${it.customName ? ` <span class="cost">(${esc(it.name)})</span>` : ""}${it.qty > 1 ? ` ×${it.qty}` : ""}</button>${showPin ? `<button class="item-pin ${it.pinned ? "on" : ""}" data-item-pin="${esc(it.name)}" title="${it.pinned ? "Pinned to the sidebar — tap to unpin" : "Pin to the sidebar for quick access"}">${it.pinned ? "📌" : "📍"}</button>` : ""}
     ${open ? `<div class="item-detail">
-      ${img ? `<img class="item-img" src="${esc(img)}" alt="${esc(it.name)}" loading="lazy" onerror="this.style.display='none'">` : ""}
+      ${img ? `<img class="item-img" data-lightbox="item" src="${esc(img)}" alt="${esc(it.name)}" loading="lazy" onerror="this.style.display='none'">` : ""}
       <div class="item-desc">${esc(it.description || it.kind)}</div>
       ${it.bonusTags?.length ? `<div class="item-tags">helps with: ${it.bonusTags.map(esc).join(", ")}</div>` : ""}
       ${it.effects ? `<div class="item-tags">${Object.entries(it.effects).map(([k, v]) => `${esc(k)} ${v > 0 ? "+" : ""}${esc(String(v))}`).join(", ")}</div>` : ""}
@@ -6325,7 +6328,17 @@ function renderPlay(turn, opts = {}) {
     main += `<div class="beat player-action">▸ ${esc(opts.playerBeat.label)}</div>`;
     if (opts.playerBeat.resolution) {
       const r = opts.playerBeat.resolution;
-      const helpers = r.equipHelpers?.length ? ` · aided by ${r.equipHelpers.map(esc).join(", ")}` : "";
+      // SNG-169 §2c: the item that aided the roll is now tappable. `entityHover`'s item branch and
+      // `itemDetail` were fully written and reached by nothing — a 12th built-never-reached. The
+      // spec proposed hanging it on the inventory `.item-name` button, but that button already owns
+      // a richer inline expand (and a second handler on it would fire both), so the popup belongs
+      // where an item is named and CANNOT be inspected: here, in the beat that it helped.
+      const itemSet = new Set(r.itemHelpers || []);
+      const helpers = r.equipHelpers?.length
+        ? ` · aided by ${r.equipHelpers.map(h => itemSet.has(h)
+          ? `<span class="entity-hover" data-entity="item:${esc(h)}">${esc(h)}</span>`
+          : esc(h)).join(", ")}`
+        : "";
       const locBits = r.locationAffinity?.length ? `<div class="roll-affinity">${r.locationAffinity.map(esc).join(" · ")} ${infoDot("roll.spectral_fit")}</div>` : "";
       const intBit = r.intensity && r.intensity !== "standard" ? ` · <span class="intensity-${esc(r.intensity)}">${esc(r.intensity)}</span>${r.energySpent != null ? ` (${r.energySpent} energy)` : ""}` : "";
       const blBit = r.surgeBacklash ? `<div class="roll-backlash">⚡ surge backlash: ${r.backlash.health} health, ${r.backlash.energy} energy</div>` : "";

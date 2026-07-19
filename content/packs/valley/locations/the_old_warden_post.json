@@ -11,7 +11,7 @@
     "claimable",
     "unreached"
   ],
-  "descriptionSeed": "A shoulder of ground that has been holding weather off the valley below for longer than anyone has kept records for. Three rooms and a stair, a corner tower open on one side, a bare south terrace where the wall gives out and the hill takes over, and behind it all a fold in the ground where the hill turns in on itself. Built to withstand. Mostly still standing.",
+  "descriptionSeed": "A shoulder of ground above the hollow, holding weather off the valley below. The post itself is ONE long room — stone-floored, low-beamed, a cold hearth on the east wall, two narrow windows facing the slope. A narrow alcove opens off the back with a stone shelf at waist height and a second small window. Just inside the door, a bench and a peg-rail, with a sight-line out over the hollow's mouth. Where the rafters meet, an apex stone. Built to watch a road nobody watches any more.",
   "substrateDensity": 0.22,
   "substrateNote": "UNREACHED ground, not released — the third case in threeGrounds. The lattice here is thin because the old works never came this far out, not because anything was given up. Nothing was lost here; nothing arrived. Wards and craft laid in the hollow meet no competition and hold longer than they should.",
   "poleIntensity": {
@@ -47,26 +47,26 @@
   "subPlaces": {
     "the_long_room": {
       "name": "The Long Room",
-      "note": "East-facing, arrow-slits that were never meant to let anything in. The hearth-wall is thick enough to hold heat for a day, and the chimney has drawn for two hundred years."
+      "note": "The post, entire. Stone floor, low beams, a hearth gone cold on the east wall, two narrow windows onto the slope. Their light crosses at the centre, under the ridgeline."
     },
-    "the_upper_room": {
-      "name": "The Upper Room",
-      "note": "Off the stair. A shuttered window and a floor that slopes very slightly toward the outer wall — a fault in a barracks, a virtue anywhere something might spill. Cold in the mornings."
+    "the_south_corner": {
+      "name": "The South Corner",
+      "note": "Where the west window's light falls longest. Stone floor, good draw to the chimney, and a wall that will take a bench."
     },
-    "the_south_terrace": {
-      "name": "The South Terrace",
-      "note": "Where the wall gives out and the hill takes over. The light stays longest here. Nothing is buried in it."
+    "the_back_alcove": {
+      "name": "The Back Alcove",
+      "note": "Narrow, off the main room. A stone shelf at waist height and a second small window. Room enough to receive one student at a time."
     },
-    "the_corner_tower": {
-      "name": "The Corner Tower",
-      "note": "Three walls, a floor, and open sky on the fourth side. Sightlines from the road to the treeline. The only part of the Post built to WATCH rather than to withstand."
+    "the_threshold": {
+      "name": "The Threshold",
+      "note": "A narrow bench just inside the door, a peg-rail above it, and a sight-line straight out over the hollow's mouth. Whoever sits here holds who enters."
     },
-    "the_hollow": {
-      "name": "The Hollow",
-      "note": "Down the back slope, where the hill folds in on itself. Thin ground of the unreached kind. Good for work that does not want the lattice arguing with it."
+    "the_apex_stone": {
+      "name": "The Apex Stone",
+      "note": "Where the rafters meet. The highest beam in the building, and the only place in it that sees the door without being near it."
     }
   },
-  "claimableNote": "The five spaces above are ARCHITECTURE — true for anyone who comes here. What a company makes of them is that company's own: a forge in the long room because the flue already draws, a laboratory upstairs because the floor already slopes, a keeper's ground on the terrace chosen before it is needed rather than after. Those assignments belong in a character's place-memory (placeUpdates.subPlace), never in this file. The Post is a place; what it becomes is a save.",
+  "claimableNote": "These five are ARCHITECTURE — true for anyone who walks up that hill: a corner where the light falls longest and the chimney draws, an alcove that fits one student, a bench that holds the door, an apex that sees everything. What a company MAKES of them is that company's own and belongs in place-memory, never in this file. One company's forge corner is another's woodpile. A place is world content; what it becomes is a save.",
   "communityId": "valley.the_old_warden_post",
   "spectrum": {
     "violence_peace": 0.3,
@@ -86,5 +86,6 @@
   "map": {
     "x": 437,
     "y": 296
-  }
+  },
+  "wardNote": "SNG-180 / threeGrounds, confirmed in play 2026-07-19: the thin ground here is UNREACHED, and thin ground cuts both ways. Lattice-leaning craft pays MORE — shadow-work shapes cost above their rate here and a second one frayed before it closed. But what is laid down meets no competition and holds. The wards at this post are felt, not sealed: a deterrent, not a lock."
 }

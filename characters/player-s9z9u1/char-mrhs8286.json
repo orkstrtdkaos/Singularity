@@ -290,6 +290,14 @@
       "qty": 1,
       "description": "Two small belt-trade knives confiscated from the road opportunists — plain, serviceable, nothing special.",
       "consumable": false
+    },
+    {
+      "id": null,
+      "name": "Abandoned Sealed Tin",
+      "kind": "misc",
+      "qty": 1,
+      "description": "A small wax-sealed tin, the width of a palm — dry and clean, set deliberately in a hollow under the neighboring stall's table and not collected. Contents shift when tilted: loose, small, not powder. The seal is intact.",
+      "consumable": false
     }
   ],
   "deeds": [
@@ -1016,7 +1024,7 @@
     "Silas, Pell, and Huginn step through the waygate together at dawn — the road south beginning in earnest.",
     "Silas thanks Tane at the close of the morning bouts, rejoins Siol, and hears her plain assessment of the fight. Siol offers a tour of the Hub — plaza first, Ent circle last — and the scene at the Coliseum reaches its natural end."
   ],
-  "currentLocationId": "the_crossing",
+  "currentLocationId": "gen-waygate",
   "activeScene": {
     "locationId": "gen-waygate",
     "turns": [
@@ -1094,94 +1102,70 @@
         "player": "Stay at the stall and help Veth fold — watch how she works and what she chooses to carry",
         "summary": "Silas helps Veth break down the stall — she packs fast and light, and points out that Pell hasn't been introduced yet.",
         "narration": "Veth works fast and without waste. She lifts the dark cloth from the table edge and folds it once, twice, a third time — each fold landing exactly on the last, the way someone does a thing they have done a thousand times. You take the far end when it comes within reach and she accepts the help without comment, adjusting her grip a fraction to match your pace.\n\nThe bone-handled tools go into a worn leather sleeve, smallest first. She does not look at them as she places them — her hands know the sequence. The sleeve rolls tight and is lashed with a single cord. That goes into a canvas shoulder bag, flat side down, the way you'd pack something breakable. The bag itself is old but not worn through: the straps are new, replaced recently, and the buckles are well-oiled. She packs the way Dara plans — sequence first, no wasted motion.\n\nThere is not much else. A small tin, a folded length of plain cloth, a water flask with a bone stopper. She does not carry food, which you note. The stall itself — two short uprights and a crossbar, the dark cloth already folded — breaks down in three pulls and ties into a bundle no longer than your forearm. She lashes it to the outside of the bag with the efficiency of someone who has broken camp in the dark.\n\nShe looks at the bag, then at you. \"Ten minutes was generous,\" she says, and it is not a boast. She lifts the bag onto her shoulder and glances toward where Pell and Siol have gone in the market row. \"Your partner doesn't know I'm joining yet.\"\n\nHuginn drops from the arch-stone without fanfare and lands on Memory's shaft, settling its wings."
+      },
+      {
+        "player": "Before you move, scan the surrounding stalls — something caught your eye while you were packing, a dry hollow under the neighboring table where something small has been left behind",
+        "summary": "Silas retrieves a sealed tin from the hollow under the neighboring stall — dry, intact, abandoned. Veth notes it; Huginn looks and turns away.",
+        "narration": "You crouch beside the neighboring stall's table before anyone moves. The table is empty — the stall hasn't opened yet this morning, its cloth still knotted around the legs. The dry hollow is just inside the table's front skirt: a gap between the packed earth and the lower crossbar, barely a hand's width tall.\n\nInside it sits a small tin, the same kind as the chalk dust you carry — wax-sealed, about the width of your palm. It is dry and clean, which means it was set there deliberately, not kicked in by accident. Someone chose this spot as a hiding place and did not come back.\n\nYou lift it carefully. The wax seal is intact and uncracked. Whatever is inside shifts slightly when you tilt it — loose and small, not powder. Not rattling like coin. Something between the two.\n\nVeth watches from two paces away, bag already on her shoulder. She says nothing, but she has clocked exactly what you found and where. Huginn drops from Memory's shaft, lands on the table edge above the hollow, and looks down into it. Then looks at you. Then looks away."
       }
     ],
     "lastTurn": {
-      "narration": "Veth works fast and without waste. She lifts the dark cloth from the table edge and folds it once, twice, a third time — each fold landing exactly on the last, the way someone does a thing they have done a thousand times. You take the far end when it comes within reach and she accepts the help without comment, adjusting her grip a fraction to match your pace.\n\nThe bone-handled tools go into a worn leather sleeve, smallest first. She does not look at them as she places them — her hands know the sequence. The sleeve rolls tight and is lashed with a single cord. That goes into a canvas shoulder bag, flat side down, the way you'd pack something breakable. The bag itself is old but not worn through: the straps are new, replaced recently, and the buckles are well-oiled. She packs the way Dara plans — sequence first, no wasted motion.\n\nThere is not much else. A small tin, a folded length of plain cloth, a water flask with a bone stopper. She does not carry food, which you note. The stall itself — two short uprights and a crossbar, the dark cloth already folded — breaks down in three pulls and ties into a bundle no longer than your forearm. She lashes it to the outside of the bag with the efficiency of someone who has broken camp in the dark.\n\nShe looks at the bag, then at you. \"Ten minutes was generous,\" she says, and it is not a boast. She lifts the bag onto her shoulder and glances toward where Pell and Siol have gone in the market row. \"Your partner doesn't know I'm joining yet.\"\n\nHuginn drops from the arch-stone without fanfare and lands on Memory's shaft, settling its wings.",
-      "sceneSummary": "Silas helps Veth break down the stall — she packs fast and light, and points out that Pell hasn't been introduced yet.",
+      "narration": "You crouch beside the neighboring stall's table before anyone moves. The table is empty — the stall hasn't opened yet this morning, its cloth still knotted around the legs. The dry hollow is just inside the table's front skirt: a gap between the packed earth and the lower crossbar, barely a hand's width tall.\n\nInside it sits a small tin, the same kind as the chalk dust you carry — wax-sealed, about the width of your palm. It is dry and clean, which means it was set there deliberately, not kicked in by accident. Someone chose this spot as a hiding place and did not come back.\n\nYou lift it carefully. The wax seal is intact and uncracked. Whatever is inside shifts slightly when you tilt it — loose and small, not powder. Not rattling like coin. Something between the two.\n\nVeth watches from two paces away, bag already on her shoulder. She says nothing, but she has clocked exactly what you found and where. Huginn drops from Memory's shaft, lands on the table edge above the hollow, and looks down into it. Then looks at you. Then looks away.",
+      "sceneSummary": "Silas retrieves a sealed tin from the hollow under the neighboring stall — dry, intact, abandoned. Veth notes it; Huginn looks and turns away.",
       "choices": [
         {
-          "label": "Walk the market row and introduce Veth to Pell and Siol — bring the party together now",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "help"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Veth directly: you noted she packed no food — how does she travel, and what does she need from us for the road ahead?",
-          "attribute": "social",
-          "subAttribute": "insight",
-          "axes": {},
+          "label": "Open the tin now — see what's inside before the party moves",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Before you move, scan the surrounding stalls — something caught your eye while you were packing, a dry hollow under the neighboring table where something small has been left behind",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "axes": {},
+          "label": "Pocket the tin unopened and carry it to Pell and Siol — open it together when the party is assembled",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "difficulty": 0,
           "intentTags": [
-            "scout"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Walk with Veth toward the market row — let her set the pace and watch how she moves through a crowd before introductions",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "scout",
             "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
+        },
+        {
+          "label": "Ask Veth if she recognizes the hollow — whether she knows who worked the stall beside her",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Use The Attended End on the tin — read whether what's inside is ending, and how",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "the-attended-end",
+          "energyCost": 2,
+          "trivial": false
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "The dark-cloth stall in the Hub market row — Veth Ondra has finished packing, stall broken down, bag on her shoulder. Morning light over the market row, stalls busy around them.",
+        "setting": "The dark-cloth stall in the Hub market row — Veth packed and ready, stall bundle lashed. Morning light over the row, neighboring stall still closed. Silas crouching beside the neighboring table, sealed tin in hand.",
         "npcsPresent": [
           {
             "name": "Veth Ondra",
-            "state": "Bag on shoulder, stall bundle lashed, ready — looking toward the market row where Pell and Siol are."
+            "state": "Bag on shoulder, watching Silas with the tin — calm, clocked it immediately."
           },
           {
             "name": "Huginn",
-            "state": "Settled on Memory's shaft, wings folded, watching."
+            "state": "Perched on the neighboring stall's table edge — looked into the hollow, looked at Silas, looked away."
           },
           {
             "name": "Siol",
@@ -1193,92 +1177,59 @@
           }
         ],
         "objects": [
-          "Memory — Huginn perched on its shaft",
+          "Memory — leaning against the stall frame, shaft upright",
           "Veth's canvas shoulder bag — packed tight, stall bundle lashed to outside",
-          "Seven waygate arches visible to the north",
-          "Neighboring stall to the left — a dry hollow visible under the table edge where something small has been left"
+          "Small sealed tin — wax intact, contents shifting slightly when tilted, retrieved from the dry hollow",
+          "Dry hollow under the neighboring stall's crossbar — now empty",
+          "Seven waygate arches visible to the north"
         ],
         "threads": [
-          "Pell and Siol not yet introduced to Veth — the party not yet assembled",
-          "A small abandoned object visible under the neighboring stall table",
+          "Sealed tin — contents unknown, wax intact, abandoned deliberately",
+          "Pell and Siol not yet introduced to Veth — party not yet assembled",
           "The evening suggestion between Silas and Pell — filed, not resolved"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "veth-ondra",
-          "name": "Veth Ondra",
-          "role": "Former Ashwarden warden, now joining the party",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Broke the stall down in under ten minutes — packed light, no food, new straps on an old bag. Noted Pell hasn't been introduced yet. Ready to move.",
-          "learned": [
-            "Packs with no food — her travel provisioning method is unknown",
-            "Breaks camp fast and in the dark by habit — eleven years of warden post practice"
-          ],
-          "skillsObserved": [
-            "field-stripping a portable stall in under ten minutes",
-            "packing a teaching kit by sequence without looking"
-          ],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Stall folded, bag on shoulder, ready to travel — joining the party for the road to the Raven's Home."
-        },
-        {
-          "op": "update",
-          "npcId": "huginn",
-          "name": "Huginn",
-          "role": "Companion — Ashwarden-touched carrion bird",
-          "gender": "a free phrase",
-          "pronouns": "they/them",
-          "note": "Dropped from the arch-stone without prompting and settled on Memory's shaft — present and watching.",
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "Perched on Memory's shaft in the market row — watching the new party member settle in."
-        }
-      ],
-      "factUpdates": [],
+      "characterDeltas": {
+        "inventoryAdd": [
+          {
+            "name": "Abandoned Sealed Tin",
+            "kind": "misc",
+            "description": "A small wax-sealed tin, the width of a palm — dry and clean, set deliberately in a hollow under the neighboring stall's table and not collected. Contents shift when tilted: loose, small, not powder. The seal is intact.",
+            "consumable": false
+          }
+        ]
+      },
       "placeUpdates": [
         {
-          "note": "A small abandoned cache found under the neighboring stall table — a dry hollow, something left by someone who did not come back to collect it.",
+          "note": "The dry hollow under the neighboring stall's table crossbar is now empty — a small sealed tin retrieved from it by Silas Weir on World-day 19 morning.",
           "subPlace": {
             "name": "Neighboring Stall Cache — Market Row",
             "parent": "Hub Waygate Plaza",
-            "note": "A dry hollow under the table edge of the stall adjacent to Veth's dark-cloth stall — a small forgotten object, noticed while breaking camp.",
-            "visited": false
+            "note": "Dry hollow under the neighboring stall's front crossbar — now empty, tin retrieved.",
+            "visited": true
           }
         }
       ],
-      "codexUpdates": [
+      "npcUpdates": [
         {
-          "topic": "veth-ondra",
-          "label": "Veth Ondra — Former South-Facing Warden",
-          "kind": "person",
-          "entityId": "veth-ondra",
-          "fact": "Packs light and fast — no food carried, new straps on an old bag, teaching kit in a worn leather sleeve. Breaks down a warden's camp in under ten minutes by hand-memory. Noted immediately that Pell has not yet been introduced.",
-          "links": [
-            "the-edge-district-ledger",
-            "ashwarden-march"
-          ]
+          "op": "update",
+          "npcId": "veth-stillwater-ondra",
+          "name": "Veth (Stillwater) Ondra",
+          "note": "Watched Silas retrieve the tin from the neighboring hollow — clocked it immediately, said nothing, waiting.",
+          "statusNote": "Stall folded, bag on shoulder, ready to travel — watching Silas with the retrieved tin."
         }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "a few minutes helping Veth break down the stall"
-      },
-      "sceneEnded": false
+      ]
     },
     "sceneState": {
-      "setting": "The dark-cloth stall in the Hub market row — Veth Ondra has finished packing, stall broken down, bag on her shoulder. Morning light over the market row, stalls busy around them.",
+      "setting": "The dark-cloth stall in the Hub market row — Veth packed and ready, stall bundle lashed. Morning light over the row, neighboring stall still closed. Silas crouching beside the neighboring table, sealed tin in hand.",
       "npcsPresent": [
         {
           "name": "Veth Ondra",
-          "state": "Bag on shoulder, stall bundle lashed, ready — looking toward the market row where Pell and Siol are."
+          "state": "Bag on shoulder, watching Silas with the tin — calm, clocked it immediately."
         },
         {
           "name": "Huginn",
-          "state": "Settled on Memory's shaft, wings folded, watching."
+          "state": "Perched on the neighboring stall's table edge — looked into the hollow, looked at Silas, looked away."
         },
         {
           "name": "Siol",
@@ -1290,14 +1241,15 @@
         }
       ],
       "objects": [
-        "Memory — Huginn perched on its shaft",
+        "Memory — leaning against the stall frame, shaft upright",
         "Veth's canvas shoulder bag — packed tight, stall bundle lashed to outside",
-        "Seven waygate arches visible to the north",
-        "Neighboring stall to the left — a dry hollow visible under the table edge where "
+        "Small sealed tin — wax intact, contents shifting slightly when tilted, retrieved",
+        "Dry hollow under the neighboring stall's crossbar — now empty",
+        "Seven waygate arches visible to the north"
       ],
       "threads": [
-        "Pell and Siol not yet introduced to Veth — the party not yet assembled",
-        "A small abandoned object visible under the neighboring stall table",
+        "Sealed tin — contents unknown, wax intact, abandoned deliberately",
+        "Pell and Siol not yet introduced to Veth — party not yet assembled",
         "The evening suggestion between Silas and Pell — filed, not resolved"
       ]
     }
@@ -1305,7 +1257,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 6,
-    "hour": 11,
+    "hour": 12,
     "realAnchor": null
   },
   "companions": [
@@ -2414,7 +2366,7 @@
     },
     "veth-ondra": {
       "id": "veth-ondra",
-      "name": "Veth Ondra",
+      "name": "Veth (Stillwater) Ondra",
       "role": "Former Ashwarden warden, now joining the party",
       "description": "A still, direct woman — held a south-facing warden post on the Ashwarden March for eleven years before the post was dissolved. Chose the Hub over the March's center. The stall is cover; the teaching kit is the door.",
       "firstMet": {
@@ -2428,7 +2380,9 @@
         "[d6] Named her Raven name — Stillwater — and extended her hand in the Ashwarden way. She is in. She asks only to be told where the road goes — not to approve, but because she is done standing at edges without knowing what is on the other side.",
         "[d6] Your bond becomes sworn.",
         "[d6] Took Silas's open palm, named the Raven's Home without flinching, and began folding the stall. She is in — practically and without ceremony.",
-        "[d6] Broke the stall down in under ten minutes — packed light, no food, new straps on an old bag. Noted Pell hasn't been introduced yet. Ready to move."
+        "[d6] Broke the stall down in under ten minutes — packed light, no food, new straps on an old bag. Noted Pell hasn't been introduced yet. Ready to move.",
+        "[d6] You know this person's name now: Veth (Stillwater) Ondra (was \"Veth Ondra\")",
+        "[d6] Watched Silas retrieve the tin from the neighboring hollow — clocked it immediately, said nothing, waiting."
       ],
       "knownFacts": [
         "Her Raven name is Stillwater — no one in the world holds this from her except Silas now",
@@ -2451,14 +2405,18 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Stall folded, bag on shoulder, ready to travel — joining the party for the road to the Raven's Home.",
+      "statusNote": "Stall folded, bag on shoulder, ready to travel — watching Silas with the retrieved tin.",
       "lastSeen": {
         "locationId": "gen-waygate",
         "day": 6
       },
       "bondType": "sworn",
       "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Veth%20Ondra%2C%20woman%2C%20Former%20Ashwarden%20warden%2C%20now%20teaching%20at%20the%20dark-cloth%20stall%20%E2%80%94%20has%20offered%20to%20join%20the%20party%2C%20sworn%20to%20Silas%20Weir%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=66052&nologo=true",
-      "_portraitTier": "sworn"
+      "_portraitTier": "sworn",
+      "aliases": [
+        "Veth Ondra"
+      ],
+      "nameRevealed": true
     }
   },
   "placeMemory": {
@@ -2735,6 +2693,108 @@
           "parentId": "old_switchback"
         }
       }
+    },
+    "gen-waygate": {
+      "visits": 1,
+      "notes": [
+        "[d6] The waygate opens onto the south lane — a shallow valley running south, tree line low, packed-dirt road with recent wheel ruts. First stop on the road from Millbrook toward the Disputed Zone.",
+        "[d6] Order-Sense partial read on dawn of World-day 18: the seven gates are calibration marks for a measuring function centered on the plaza. Design predates the roads. Full purpose unresolved — lattice too thin.",
+        "[d6] The Hub's major landmarks identified from the plaza at dawn: Council of Mavens colonnade (north), Coliseum (northwest behind market row), Ent circle (east), Elven camp (west paving). The city is active before full light.",
+        "[d6] The sixth waygate from the south lane — lower lintel, darker stone — is the connection to the Ashwarden March. Confirmed by Siol of the Elves.",
+        "[d6] The party entered and declared crafts at the gate — Orvil on morning rotation, sand showing early-bout marks, gallery occupied at dawn.",
+        "[d6] A line of unaccountable brightness moved through pooled water in the upper bench seam of the Coliseum — slow, lateral, gone in three seconds. Not lamplight, not sun. Huginn observed it. First Precursor sign noted inside the city.",
+        "[d6] Second bout concluded — Pell Marsh over Tane Solr, controlled finish, Orvil's call. Sand carries marks from both bouts.",
+        "[d6] In full morning light, the seven arches read plainly as a measuring instrument — each slightly differently angled, differently spaced. The Hub grew up around something that was already here.",
+        "[d6] Council Maven confirmed: two survey parties sent into the Disputed Zone came back early — craft interference prevents systematic water-source reading.",
+        "[d6] A seller at the dark-cloth stall in the market row lays out bone-handled tools as a deliberate test for someone who can read their design — the kit is a teaching sequence, its center piece the seller herself.",
+        "[d6] A small abandoned cache found under the neighboring stall table — a dry hollow, something left by someone who did not come back to collect it.",
+        "[d6] The dry hollow under the neighboring stall's table crossbar is now empty — a small sealed tin retrieved from it by Silas Weir on World-day 19 morning."
+      ],
+      "flags": {},
+      "vectorsKnown": [],
+      "subPlaces": {
+        "south-lane-beyond-the-waygate": {
+          "name": "South Lane beyond the Waygate",
+          "parentId": "gen-waygate",
+          "day": 6,
+          "visited": true,
+          "note": "Packed dirt road with wheel ruts, a shallow valley opening south, the waygate stones visible behind."
+        },
+        "hub-waygate-plaza": {
+          "name": "Hub Waygate Plaza",
+          "parentId": "gen-waygate",
+          "day": 6,
+          "visited": true,
+          "note": "Seven-arch crescent, worn central paving, market row at south edge — the measuring instrument the city grew around. Visited in morning light with Siol as guide."
+        },
+        "council-of-mavens-hall": {
+          "name": "Council of Mavens Hall",
+          "parentId": "gen-waygate",
+          "day": 6,
+          "visited": false,
+          "note": "A broad stone colonnade on the Hub's near northern tier — petition board outside, scales-and-eye seal on the lintel. Open at dawn."
+        },
+        "the-hub-coliseum": {
+          "name": "The Hub Coliseum",
+          "parentId": "gen-waygate",
+          "day": 6,
+          "visited": false,
+          "note": "Working fighting ground northwest of the plaza, past the market row — fresh soot-marks on the outer wall, gates open before first light."
+        },
+        "the-ent-s-circle": {
+          "name": "The Ent's Circle",
+          "parentId": "gen-waygate",
+          "day": 6,
+          "visited": false,
+          "note": "A cleared ground ringed by low stone to the east of the plaza — an ancient Ent rooted here on purpose, healed bark-carvings on the lower trunk, two figures in the branches."
+        },
+        "the-sixth-gate-ashwarden-passage": {
+          "name": "The Sixth Gate — Ashwarden Passage",
+          "parentId": "gen-waygate",
+          "day": 6,
+          "visited": false,
+          "note": "Lower lintel and darker stone than the other arches — the gate that leads to the Ashwarden March, identified by Siol."
+        },
+        "the-hub-coliseum-interior": {
+          "name": "The Hub Coliseum (interior)",
+          "parentId": "gen-waygate",
+          "day": 6,
+          "visited": true,
+          "note": "Second bout finished — controlled yield-strike, no edge, Orvil's baton down."
+        },
+        "council-of-mavens-hall-interior": {
+          "name": "Council of Mavens Hall (interior)",
+          "parentId": "gen-waygate",
+          "day": 6,
+          "visited": true,
+          "note": "Junior Maven's report room — field reports on the water crisis, Calvar's name now logged, Mara Wells as relay.",
+          "parentUnresolved": "Council of Mavens Hall (heard of only)"
+        },
+        "dark-cloth-stall-market-row": {
+          "name": "Dark-Cloth Stall — Market Row",
+          "parentId": "gen-waygate",
+          "day": 6,
+          "visited": false,
+          "note": "A narrow stall set back from the main market lane, southeast of the plaza — dark cloth over the table, bone-handled tools in deliberate sequence, the seller motionless and waiting."
+        },
+        "neighboring-stall-cache-market-row": {
+          "name": "Neighboring Stall Cache — Market Row",
+          "parentId": "gen-waygate",
+          "day": 6,
+          "visited": true,
+          "note": "Dry hollow under the neighboring stall's front crossbar — now empty, tin retrieved."
+        }
+      }
+    },
+    "gen-center": {
+      "visits": 1,
+      "notes": [
+        "[d6] First arrival at the Hub plaza — seven arches, crescent arrangement, open to the metropolis. The Coliseum visible to the north."
+      ],
+      "flags": {},
+      "_containmentNotes": [
+        "\"Hub Waygate Plaza\" was placed in gen-waygate (the fiction named it), not gen-center"
+      ]
     }
   },
   "worldState": {
@@ -2828,12 +2888,27 @@
         "day": 6,
         "worldDay": 18,
         "text": "Word has spread beyond millbrook: Persuaded Calvar — pre-Transition filtration engineer and author of the seventh-band specification — to leave the Edge District and travel to Millbrook to attest against Overseer Grael"
+      },
+      {
+        "day": 6,
+        "worldDay": 19,
+        "text": "Calvar: Calvar ran a manual recalibration of the seventh-band sensor overnight and found a three-point drift he cannot yet attribute to instrument error or source change — he has written nothing down, but he has not looked away from the window."
+      },
+      {
+        "day": 6,
+        "worldDay": 19,
+        "text": "Vash: Vash paused her wheel mid-grind this morning and spent an hour reworking the fragment she overheard into a sequence of optical terms she does know, arriving at an arrangement that almost coheres — close enough that her uncertainty has sharpened from fog into a specific question."
+      },
+      {
+        "day": 6,
+        "worldDay": 19,
+        "text": "Tane Solr: Tane spent the early part of the day watching two apprentices spar and said nothing, but afterward he smoothed the sand at the center-line himself, a thing he normally leaves to the groundskeepers."
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-18T23:34:44.489Z",
-    "lastTickWorldDay": 18,
-    "lastCanonWorldDay": 18
+    "lastSharedReadAt": "2026-07-19T01:02:29.370Z",
+    "lastTickWorldDay": 19,
+    "lastCanonWorldDay": 19
   },
   "domains": {
     "primary": "ashwarden",
@@ -3796,7 +3871,6 @@
         "label": "Calvar — the Engineer",
         "kind": "person",
         "facts": [
-          "[d3] His name is Calvar. He lives above the cooperage on the east lane of the Edge District. He authored the seventh-band monitoring specification and the calibration tolerances for the lower filtration re",
           "[d3] Pre-Transition filtration engineer, author of the seventh-band monitoring specification — a man who stopped moving fifteen years ago because the light in one room told him everything he still needed t",
           "[d3] The diagram Calvar left with Leth is not a full array schematic — it is specifically the seventh-band section, a proof-of-authorship anchor. He brought Leth the piece that establishes he designed the ",
           "[d3] Calvar left the diagram with Leth with specific verbal instructions: hold it off the shelves, under the cord, until someone came asking about the seventh band or the lower filtration ledge. He anticip",
@@ -3819,7 +3893,8 @@
           "[d4] Confirmed the cooperage has a rear delivery exit to the cut-lane on the south side — has been tracking the watcher's position for two hours from inside and confirms he hasn't moved.",
           "[d4] Calvar's cooperage rear exit is covered by a relay figure — Grael's watch-net extends to the cut-lane, not only the street face. The network has two eyes, not one.",
           "[d5] Calvar brought to Mara Wells's store on World-day 18 mid-morning — she recognized his purpose immediately, used Dara's phrase back unprompted, and extended her hand to him first. The briefing chain be",
-          "[d5] Calvar placed the document roll on Mara's counter and named himself witness, not authority — deferring to local knowledge on whose hands it belongs in. His first diagnostic question was intake sleeve "
+          "[d5] Calvar placed the document roll on Mara's counter and named himself witness, not authority — deferring to local knowledge on whose hands it belongs in. His first diagnostic question was intake sleeve ",
+          "[d6] [while away] Calvar ran a manual recalibration of the seventh-band sensor overnight and found a three-point drift he cannot yet attribute to instrument error or source change — he has written nothing down, but he has not looked away from the window."
         ],
         "links": [
           "vash-lens-grinder-east-room",
@@ -3836,7 +3911,7 @@
           "Find the Engineer"
         ],
         "createdDay": 3,
-        "updatedDay": 5,
+        "updatedDay": 6,
         "entityId": "calvar"
       },
       "find-the-engineer": {
@@ -3879,7 +3954,8 @@
           "[d3] Vash is an eyewitness to the file removal — Grael's runner (cut-cord pack, optics array collector, first and third mornings) took the calibration files from the secondary stack six weeks ago. Vash add",
           "[d3] Vash's testimony relayed to Leth — confirmed: the four characters added to Calvar's diagram are authentication marks from a binding receipt, and the folded page explicitly names Grael's runner (cut-co",
           "[d3] Leth will notify Vash tonight that his folded page reached the right hands — he has been waiting three days for that confirmation.",
-          "[d4] [while away] While dressing her wheel's edge before first light, Vash reconstructed the overheard phrase word by word and realized the term she couldn't place was a pre-Transition calibration interval"
+          "[d4] [while away] While dressing her wheel's edge before first light, Vash reconstructed the overheard phrase word by word and realized the term she couldn't place was a pre-Transition calibration interval",
+          "[d6] [while away] Vash paused her wheel mid-grind this morning and spent an hour reworking the fragment she overheard into a sequence of optical terms she does know, arriving at an arrangement that almost coheres — close enough that her uncertainty has sharpened from fog into a specific question."
         ],
         "links": [
           "leth-archive-complaint",
@@ -3893,7 +3969,7 @@
           "Vash"
         ],
         "createdDay": 3,
-        "updatedDay": 4,
+        "updatedDay": 6,
         "entityId": "vash"
       },
       "grael-runner": {
@@ -4195,21 +4271,21 @@
     }
   },
   "tendencies": {
-    "strategic": 13.360386765105321,
-    "cerebral": 12.979816640464124,
-    "social": 24.389638476498646,
-    "generous": 2.4895599473742207,
-    "cautious": 5.10680355991586,
-    "physical": 1.1349177333870333,
-    "risky": 1.190186078682355,
-    "ruthless": 0.3794778244696654,
-    "carousing": 0.005814080098197322,
-    "amorous": 4.539226365371798,
-    "patient": 0.9398453593918168,
-    "stealth": 0.14708657425504518,
-    "devotion": 0.32868636216523783,
-    "craft": 1.1618830218369334,
-    "leadership": 0.7486869867890408
+    "strategic": 14.026377095977688,
+    "cerebral": 12.655321224452521,
+    "social": 23.779897514586178,
+    "generous": 2.4273209486898653,
+    "cautious": 4.979133470917963,
+    "physical": 1.1065447900523575,
+    "risky": 1.1604314267152962,
+    "ruthless": 0.36999087885792376,
+    "carousing": 0.0056687280957423885,
+    "amorous": 4.425745706237503,
+    "patient": 0.9163492254070214,
+    "stealth": 0.14340940989866904,
+    "devotion": 0.3204692031111069,
+    "craft": 1.13283594629101,
+    "leadership": 0.7299698121193148
   },
   "aptitudes": [
     "strategist",
@@ -4217,7 +4293,7 @@
     "scholar",
     "orator"
   ],
-  "actionCount": 563,
+  "actionCount": 564,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -4495,8 +4571,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784420309249,
-  "rev": 821,
+  "updatedAt": 1784423178573,
+  "rev": 827,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -4873,6 +4949,10 @@
             {
               "worldDay": 18,
               "note": "Reviewing last night's seventh-band log, Calvar found a seventeen-minute gap in the low-frequency baseline that his specification explicitly flags as instrument drift — but the gap's edges are too clean, too symmetrical, and he has spent the morning re-running the check three times rather than recording it as error."
+            },
+            {
+              "worldDay": 19,
+              "note": "Calvar ran a manual recalibration of the seventh-band sensor overnight and found a three-point drift he cannot yet attribute to instrument error or source change — he has written nothing down, but he has not looked away from the window."
             }
           ]
         },
@@ -4975,6 +5055,10 @@
             {
               "worldDay": 18,
               "note": "While dressing her wheel's edge before first light, Vash reconstructed the overheard phrase word by word and realized the term she couldn't place was a pre-Transition calibration interval — specific enough that whoever said it had read the same foundational documents the array's optical layer was built from."
+            },
+            {
+              "worldDay": 19,
+              "note": "Vash paused her wheel mid-grind this morning and spent an hour reworking the fragment she overheard into a sequence of optical terms she does know, arriving at an arrangement that almost coheres — close enough that her uncertainty has sharpened from fog into a specific question."
             }
           ]
         },
@@ -5327,7 +5411,13 @@
           "romanceEligible": true,
           "lastAttentionDay": 6,
           "promotedWorldDay": 18,
-          "canonTier": "canonical"
+          "canonTier": "canonical",
+          "offscreen": [
+            {
+              "worldDay": 19,
+              "note": "Tane spent the early part of the day watching two apprentices spar and said nothing, but afterward he smoothed the sand at the center-line himself, a thing he normally leaves to the groundskeepers."
+            }
+          ]
         },
         "image": "https://image.pollinations.ai/prompt/Lean%20in%20the%20way%20the%20valley's%20early-spring%20wind%20is%20lean%20%E2%80%94%20nothing%20wasted%2C%20everything%20purposeful.%20Grey%20coat%2C%20collarless%2C%20worn%20to%20the%20colour%20of%20old%20flint%20at%20the%20cuffs.%20Two%20seconds%20coiled%20at%20his%20left%20hip%2C%2C%20character%20portrait%2C%20named%20Tane%20Solr%2C%20Threshold-walker%20and%20named%20bout%20opponent%20%E2%80%94%20a%20man%20who%20has%20crossed%20the%20center-line%20enough%20times%20to%20sto%2C%20Unhurried%20in%20a%20way%20that%20is%20not%20laziness%20but%20arithmetic%20%E2%80%94%20he%20has%20already%20run%20the%20numbers%20on%20you%20and%20d%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13653&nologo=true"
       }
@@ -5431,6 +5521,45 @@
         "image": "https://image.pollinations.ai/prompt/The%20Low%20Lamp%20Inn%3A%20Tucked%20into%20the%20lower%20tier%20of%20the%20Edge%20District%20where%20the%20light-guide%20streets%20run%20closest%20to%20the%20valley%20floor%2C%20the%20Low%20Lamp%20sits%20over%20a%20junction%20conduit%20%E2%80%94%20the%20glow%20rises%20through%20pale%20stone%20floors%20and%20fills%20the%20common%20room%20from%20below%2C%20warm%20and%20directionless%20as%20afternoon%20through%20cloud.%20The%20building%20is%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=64375&nologo=true",
         "parentId": "radiant_plateau_edge",
         "_promotedFromSubPlace": true
+      },
+      "gen-waygate": {
+        "id": "gen-waygate",
+        "name": "Waygate",
+        "regionId": "valley",
+        "parentId": "millbrook",
+        "_promotedFromSubPlace": true,
+        "descriptionSeed": "A place the road led to — Waygate. The fiction brought you here before the map knew its name.",
+        "tags": [
+          "transitional"
+        ],
+        "connections": [
+          "millbrook",
+          "gen-center"
+        ],
+        "_gen": true,
+        "_mintedAs": "transit",
+        "map": {
+          "x": 409.5058087856015,
+          "y": 397.4185998280231
+        }
+      },
+      "gen-center": {
+        "id": "gen-center",
+        "name": "Center",
+        "regionId": "valley",
+        "descriptionSeed": "A place the road led to — Center. The fiction brought you here before the map knew its name.",
+        "tags": [
+          "transitional"
+        ],
+        "connections": [
+          "gen-waygate"
+        ],
+        "_gen": true,
+        "_mintedAs": "transit",
+        "map": {
+          "x": 483.2482839825773,
+          "y": 379.03253576244833
+        }
       }
     },
     "arc": {}
@@ -5836,7 +5965,7 @@
   "syncedAt": 1784392733860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 385
+    "valley": 386
   },
   "foreclosed": [
     "rootkin",
@@ -5848,7 +5977,8 @@
     "millbrook",
     "the-low-lamp-inn",
     "old_switchback",
-    "the_crossing"
+    "gen-waygate",
+    "gen-center"
   ],
   "opLossLog": [
     {
@@ -5892,10 +6022,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-19T00:18:29.248Z",
+      "lastAt": "2026-07-19T01:06:18.571Z",
       "startDay": 18,
       "endDay": 19,
-      "beats": 110,
+      "beats": 111,
       "_recapError": null,
       "recap": "Day eighteen, and Silas Weir moved like a man who'd finally stopped fighting the shape of what he was. On the road he disarmed three opportunists without breaking bones, read the grief sitting behind the broad man's eyes, named it plainly, pressed provisions into their hands, and sent them toward something worth doing — mercy given as instruction, not sentiment. Then he brought the hard people together: Dara, Aldric, Fendt, Mara, Calvar, all of them in the heat of Pell's forge with no exits easy and no pretense left, and in that single evening he turned a valley's quiet panic into four working threads — engineering, logistics, supply, accounts — each with a named lead and a direction to face. The crisis didn't end, but it stopped being formless, and that was his doing."
     }
@@ -5927,6 +6057,15 @@
       "teaches": null,
       "liaisonFor": null,
       "joinedDay": 18
+    },
+    {
+      "npcId": "veth-ondra",
+      "roles": [
+        "ally"
+      ],
+      "teaches": null,
+      "liaisonFor": null,
+      "joinedDay": 19
     }
   ],
   "livingCurrentAccess": [],

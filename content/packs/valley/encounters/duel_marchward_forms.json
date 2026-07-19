@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "duel_marchward_forms",
+  "type": "duel",
+  "name": "A Duel Under Forms",
+  "locationId": "the_marchward",
+  "setup": "The Marchward's ground is neutral by treaty and its duels are formal by law. A challenge here is answered under forms: salute, engagement, a called stop. Withdrawal is permitted and it is remembered.",
+  "lethal": false,
+  "opponent": {
+    "name": "a Marcher of the ward",
+    "health": 5,
+    "threat": 40,
+    "yieldAt": 1,
+    "fleeDifficulty": 20,
+    "spectrum": {
+      "violence_peace": -0.2
+    },
+    "tacticTags": [
+      "formal-salute",
+      "calls-the-stop",
+      "punishes-the-unformed",
+      "will-not-strike-a-turned-back"
+    ]
+  }
+}

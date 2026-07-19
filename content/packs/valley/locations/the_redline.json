@@ -33,7 +33,11 @@
   "encounterFlavor": "Honed conflict as culture — a formal duel with witnesses, a child besting an adult by the forms, a challenge you can accept or honorably decline, a warrior reading your stance before your words.",
   "dangerLevel": 4,
   "encounterSeeds": [
-    "re_raider_duel"
+    "re_raider_duel",
+    {
+      "encounterId": "duel_redline_challenge",
+      "hint": "A challenge issued here becomes public record the moment it is spoken"
+    }
   ],
   "questSeeds": [
     "You're challenged on arrival by custom — how you handle a duel you didn't want (fight, decline, turn it to a Contest) sets your whole standing in the Marches",

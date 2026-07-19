@@ -252,6 +252,23 @@ export function loreToProse(raw) {
   try { return loreValue(JSON.parse(raw)).trim(); } catch { return raw; }
 }
 
+/** The `reach_<region>` file for a location's region, if one exists. Exact match first, then a light
+ *  normalisation — the corpus is ALMOST consistent: `reach_riven_marches`/`riven_marches` and
+ *  `reach_unspooling`/`unspooling` line up exactly, and only `reach_somatic`/`somatic_reaches` does
+ *  not. Two of three matching is why this is a lookup with one fallback rather than a mapping table
+ *  nobody would maintain. Pure; returns {key, text} or {}. */
+export function regionLoreFor(location, loreMap = {}) {
+  const region = location?.regionId || location?.region;
+  if (!region) return {};
+  const tries = [
+    `reach_${region}`,
+    `reach_${region.replace(/^the_/, "")}`,
+    `reach_${region.replace(/_reaches$/, "").replace(/^the_/, "")}`
+  ];
+  for (const key of tries) if (loreMap[key]) return { key, text: loreMap[key] };
+  return {};
+}
+
 /** Assemble the lore text relevant to a location (only what this turn needs).
  *  BATCH-13: a ref that resolves to nothing is now RETURNED as a marker rather than dropped, so a
  *  broken reference is visible in the prompt and countable by CI instead of silently vanishing —
@@ -259,6 +276,12 @@ export function loreToProse(raw) {
 export function loreForLocation(location, loreMap, { markMissing = false } = {}) {
   const refs = location.loreRefs || [];
   const out = [];
+  // SNG-167 §1c.1: REGION LORE IS AUTOMATIC, not opt-in. A location should not have to remember to
+  // name its own Reach, and three region files were written and reachable by nothing because none
+  // did. Pulled first — the wide frame before the local detail — and never duplicated when the
+  // location happens to name it explicitly.
+  const regionLore = regionLoreFor(location, loreMap);
+  if (regionLore.key && !refs.includes(regionLore.key)) out.push(regionLore.text);
   for (const ref of refs) {
     if (loreMap[ref]) out.push(loreMap[ref]);
     else if (markMissing) out.push(`[lore "${ref}" is referenced here but no such file is loaded]`);

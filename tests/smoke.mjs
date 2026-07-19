@@ -5425,6 +5425,41 @@ await (async () => {
     /opts\.playerBeat\.playerWords \|\|/.test(appSrc3));
 }
 
+// --- SNG-167 §1c.1: region lore is automatic, not opt-in ---
+{
+  const st2 = await import("../engine/state.js");
+  const map = {
+    reach_riven_marches: "THE RIVEN MARCHES: a contested frontier.",
+    reach_somatic: "THE SOMATIC REACHES: the body as instrument.",
+    the_twelve_reaches: "the world frame",
+    valley_primer: "the valley"
+  };
+
+  // Exact match — two of the three authored files line up with their regionId as written.
+  check("167: a region's own Reach file is found by exact id",
+    st2.regionLoreFor({ regionId: "riven_marches" }, map).key === "reach_riven_marches");
+  // One does not, and the fallback is why this is a lookup rather than a mapping table.
+  check("167: the one near-miss in the corpus still resolves (somatic_reaches -> reach_somatic)",
+    st2.regionLoreFor({ regionId: "somatic_reaches" }, map).key === "reach_somatic");
+  check("167: a region with no authored Reach file resolves to nothing, quietly",
+    st2.regionLoreFor({ regionId: "valley" }, map).key === undefined);
+  check("167: a location with no region at all does not throw", Object.keys(st2.regionLoreFor({}, map)).length === 0);
+
+  // The point: a location no longer has to REMEMBER to name its own Reach.
+  const loc = { regionId: "riven_marches", loreRefs: ["the_twelve_reaches"] };
+  const text = st2.loreForLocation(loc, map);
+  check("167: the Reach arrives without the location naming it", /contested frontier/.test(text));
+  check("167: and the location's own refs still arrive too", /world frame/.test(text));
+  check("167: the region frame comes FIRST — wide before local",
+    text.indexOf("contested frontier") < text.indexOf("world frame"));
+
+  // Never twice.
+  const explicit = { regionId: "riven_marches", loreRefs: ["reach_riven_marches"] };
+  const once = st2.loreForLocation(explicit, map);
+  check("167: a location that DOES name its Reach gets it once, not twice",
+    once.split("contested frontier").length - 1 === 1);
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

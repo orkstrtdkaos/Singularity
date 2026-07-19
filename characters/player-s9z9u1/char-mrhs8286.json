@@ -90,7 +90,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.29703388704941885,
+    "spectrumId": -0.3321821926969479,
     "violence_peace": 0.1030845625,
     "chaos_order": 0.24948390727937025,
     "mechanical_spiritual": 0.2580372847905887,
@@ -1084,75 +1084,90 @@
         "player": "Read the road ahead with Order-Sense — take the lay of the March before committing to it.",
         "summary": "Silas reads the March road with Order-Sense — the route to Raven's Home is clear, the left branch confirmed, and one set of heel-heavy tracks leads toward the dead warden post without returning.",
         "narration": "You let Order-Sense open quietly, the way you might open a hand rather than reach with it. The substrate here is thin — you feel that immediately, a slight drag on the craft, like reading through cloth. But it finds the road.\n\nThe March is a seam, not a scar. It belongs to the landscape rather than cutting across it. You read the pattern: the track runs northwest to the marker stone, forks, and the left branch continues another two miles before the ground rises toward what was once a warden's post. The road has been walked recently — not by many, but by someone who knew where they were going. One set of boot-tracks, heel-heavy, heading toward Raven's Home and not returning.\n\nThe right branch at the marker stone runs to open ground and nothing useful — Veth already said the survey post is gone, and the road confirms it. Nothing structural remains there.\n\nPell has been walking slowly, reading the verge without comment. She glances at you now. \"Anything?\" she says.\n\nHuginn shifts on his stone, pale eye still fixed northwest. He does not offer an opinion about the boot-tracks. He does not need to."
+      },
+      {
+        "player": "Tell her what you see ahead, and the boot prints - then ask the group about whether to stop at the Raven's Home first, or to continue on to your Mother's house first?",
+        "summary": "Silas shares what Order-Sense found — one set of tracks to Raven's Home with no return — and the group considers whether to check the dead warden post first or continue south to his mother's house.",
+        "narration": "You tell Veth what Order-Sense showed you. A road that belongs to the landscape rather than cutting it. The left branch clear to the old warden post, two miles past the marker stone. And one set of tracks, heel-heavy, heading toward Raven's Home without returning.\n\nVeth listens without interrupting. When you finish, she says, \"One set. No return.\" She does not make it a question. She looks northwest along the pale dirt track, and her jaw tightens once, briefly. \"The post has been empty eleven years,\" she says. \"Someone is there, or was there, and did not come back the way they went.\"\n\nPell has been reading the ground while you spoke. She straightens now and looks at you directly. \"Your mother's house,\" she says. \"How far?\" She is not steering you — she is asking for the shape of the choice, the same way she'd ask about a road's grade before deciding the pace.\n\nHuginn turns on his stone and fixes the northwest sky with his pale eye. He says nothing. His silence has the quality of a thing already decided, watching you catch up to it.\n\nThe marker stone is a quarter mile ahead. The left branch is there. The right branch leads away from Raven's Home, toward the road south. Both are open."
       }
     ],
     "lastTurn": {
-      "narration": "You let Order-Sense open quietly, the way you might open a hand rather than reach with it. The substrate here is thin — you feel that immediately, a slight drag on the craft, like reading through cloth. But it finds the road.\n\nThe March is a seam, not a scar. It belongs to the landscape rather than cutting across it. You read the pattern: the track runs northwest to the marker stone, forks, and the left branch continues another two miles before the ground rises toward what was once a warden's post. The road has been walked recently — not by many, but by someone who knew where they were going. One set of boot-tracks, heel-heavy, heading toward Raven's Home and not returning.\n\nThe right branch at the marker stone runs to open ground and nothing useful — Veth already said the survey post is gone, and the road confirms it. Nothing structural remains there.\n\nPell has been walking slowly, reading the verge without comment. She glances at you now. \"Anything?\" she says.\n\nHuginn shifts on his stone, pale eye still fixed northwest. He does not offer an opinion about the boot-tracks. He does not need to.",
-      "sceneSummary": "Silas reads the March road with Order-Sense — the route to Raven's Home is clear, the left branch confirmed, and one set of heel-heavy tracks leads toward the dead warden post without returning.",
+      "narration": "You tell Veth what Order-Sense showed you. A road that belongs to the landscape rather than cutting it. The left branch clear to the old warden post, two miles past the marker stone. And one set of tracks, heel-heavy, heading toward Raven's Home without returning.\n\nVeth listens without interrupting. When you finish, she says, \"One set. No return.\" She does not make it a question. She looks northwest along the pale dirt track, and her jaw tightens once, briefly. \"The post has been empty eleven years,\" she says. \"Someone is there, or was there, and did not come back the way they went.\"\n\nPell has been reading the ground while you spoke. She straightens now and looks at you directly. \"Your mother's house,\" she says. \"How far?\" She is not steering you — she is asking for the shape of the choice, the same way she'd ask about a road's grade before deciding the pace.\n\nHuginn turns on his stone and fixes the northwest sky with his pale eye. He says nothing. His silence has the quality of a thing already decided, watching you catch up to it.\n\nThe marker stone is a quarter mile ahead. The left branch is there. The right branch leads away from Raven's Home, toward the road south. Both are open.",
+      "sceneSummary": "Silas shares what Order-Sense found — one set of tracks to Raven's Home with no return — and the group considers whether to check the dead warden post first or continue south to his mother's house.",
       "choices": [
         {
-          "label": "Move on to the marker stone at a steady pace — left branch, no delay.",
+          "label": "Take the left branch — go to Raven's Home first. Someone walked in and did not walk out, and the post has been empty eleven years.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Take the right branch — continue south to your mother's house first. The tracks may be old. The road there waits.",
           "attribute": "physical",
           "subAttribute": "agility",
           "difficulty": 0,
           "intentTags": [
             "travel"
           ],
-          "trivial": true
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Ask Veth what she knows about those tracks — someone walked this road recently and didn't come back.",
+          "label": "Ask Huginn what he sees to the northwest — plainly, before you decide.",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "trivial": true
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Ask Huginn plainly — is anything on this road ending right now?",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Ask Veth directly — she held this post for eleven years. Does she know who might have reason to walk to Raven's Home today?",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "plan"
           ],
-          "trivial": true
-        },
-        {
-          "label": "Press Deathsense out along the road ahead — read what the March is carrying today.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.3
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "deathsense",
-          "energyCost": 2,
-          "trivial": false
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
+      "deeds": [],
       "characterDeltas": {
-        "energy": -2
+        "health": 0,
+        "energy": 0
       },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
+      "stageOps": [],
       "scene": {
-        "setting": "The Ashwarden March Road, open ground north of the waygate arrival point — flat pale dirt track, scrub grass and low stone outcrops to either side, sky overcast and cold with a northwest edge. Midday light, flat and diffuse. The marker stone is roughly a quarter mile ahead.",
+        "setting": "The Ashwarden March Road, open ground north of the waygate — flat pale dirt track, scrub grass and low stone outcrops, overcast sky with a cold northwest edge. Midday, flat diffuse light. The marker stone is a quarter mile ahead.",
         "npcsPresent": [
           {
             "name": "Pell Marsh",
-            "state": "Walking slowly along the verge, reading the ground — has just turned to ask Silas what he found."
+            "state": "Standing on the track, facing Silas — she has straightened from reading the ground and is waiting for an answer about his mother's house."
           },
           {
             "name": "Veth Ondra",
-            "state": "Standing a few yards ahead, still oriented northwest from warden memory, waiting for the party to move."
+            "state": "Standing slightly ahead, jaw set, looking northwest along the road after hearing the boot-track report."
           },
           {
             "name": "Huginn",
-            "state": "Perched on a low stone to the right — pale eye fixed northwest, silent."
+            "state": "Turned on his low stone to face northwest, pale eye fixed on the horizon, silent."
           }
         ],
         "objects": [
@@ -1160,46 +1175,68 @@
           "The March road ahead, pale dirt running northwest",
           "Low stone outcrops along the verge",
           "Marker stone visible roughly a quarter mile ahead",
-          "One set of heel-heavy boot-tracks in the pale dirt, heading northwest toward Raven's Home — no return tracks visible"
+          "One set of heel-heavy boot-tracks in the pale dirt, heading northwest toward Raven's Home with no return"
         ],
         "threads": [
-          "Left branch at the marker stone leads to Raven's Home — not yet reached",
+          "One set of tracks leads to Raven's Home without returning — source unknown",
+          "Left branch at the marker stone leads to Raven's Home, two miles past the fork",
+          "Right branch leads south, away from Raven's Home, toward the road to Silas's mother",
           "The warden post at Raven's Home has been empty eleven years",
-          "One set of heel-heavy tracks leads toward Raven's Home with no return",
-          "The sky to the northwest carries the suggestion of late-season snow"
+          "The sky to the northwest carries the suggestion of late-season snow",
+          "Huginn is watching the northwest with the quality of something already decided"
         ]
       },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "veth-ondra",
+          "name": "Veth Ondra",
+          "note": "Heard Silas's Order-Sense report — responded to the single set of tracks with 'no return' said without question; visibly affected by the news about the post she held for eleven years.",
+          "statusNote": "Walking the March road with the party — at the open ground before the marker stone fork, jaw set after hearing about the tracks.",
+          "learned": [
+            "One set of heel-heavy tracks leads to Raven's Home with no return — something is there, or was there"
+          ]
+        },
+        {
+          "op": "update",
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "note": "Read the ground while Silas reported; straightened and asked plainly about the distance to his mother's house — shaping the choice, not steering it.",
+          "statusNote": "On the March road before the marker stone fork — waiting for Silas's answer about his mother's house."
+        }
+      ],
       "codexUpdates": [
         {
           "topic": "ashwarden-march-road",
           "label": "Ashwarden March Road",
           "kind": "place",
-          "fact": "The March road belongs to the landscape rather than cutting across it — structurally coherent, recently walked by one person (heel-heavy tracks, heading toward Raven's Home, no return). The right branch at the marker stone leads nowhere useful; the survey post is confirmed gone.",
+          "fact": "One set of heel-heavy boot-tracks leads from the waygate arrival point toward Raven's Home along the left branch — no return tracks. Someone walked in and did not walk out.",
           "links": [
             "the-edge-district-ledger",
-            "veth-ondra"
+            "the-door-that-closed-behind"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief pause on the road to read ahead with Order-Sense."
-      }
+        "why": "A short exchange on the road before the marker stone"
+      },
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The Ashwarden March Road, open ground north of the waygate arrival point — flat pale dirt track, scrub grass and low stone outcrops to either side, sky overcast and cold with a northwest edge. Midday light, flat and diffuse. The marker stone is roughly a quarter mile ahead.",
+      "setting": "The Ashwarden March Road, open ground north of the waygate — flat pale dirt track, scrub grass and low stone outcrops, overcast sky with a cold northwest edge. Midday, flat diffuse light. The marker stone is a quarter mile ahead.",
       "npcsPresent": [
         {
           "name": "Pell Marsh",
-          "state": "Walking slowly along the verge, reading the ground — has just turned to ask Silas what he found."
+          "state": "Standing on the track, facing Silas — she has straightened from reading the ground and is waiting for an answer about hi"
         },
         {
           "name": "Veth Ondra",
-          "state": "Standing a few yards ahead, still oriented northwest from warden memory, waiting for the party to move."
+          "state": "Standing slightly ahead, jaw set, looking northwest along the road after hearing the boot-track report."
         },
         {
           "name": "Huginn",
-          "state": "Perched on a low stone to the right — pale eye fixed northwest, silent."
+          "state": "Turned on his low stone to face northwest, pale eye fixed on the horizon, silent."
         }
       ],
       "objects": [
@@ -1210,9 +1247,10 @@
         "One set of heel-heavy boot-tracks in the pale dirt, heading northwest toward Rav"
       ],
       "threads": [
-        "Left branch at the marker stone leads to Raven's Home — not yet reached",
+        "One set of tracks leads to Raven's Home without returning — source unknown",
+        "Left branch at the marker stone leads to Raven's Home, two miles past the fork",
+        "Right branch leads south, away from Raven's Home, toward the road to Silas's mother",
         "The warden post at Raven's Home has been empty eleven years",
-        "One set of heel-heavy tracks leads toward Raven's Home with no return",
         "The sky to the northwest carries the suggestion of late-season snow"
       ]
     }
@@ -1532,6 +1570,67 @@
       "aliases": [],
       "startedAt": "2026-07-16T21:27:42.515Z",
       "startedWorldDay": 16
+    },
+    {
+      "id": "the-door-that-closed-behind",
+      "title": "The Door That Closed Behind",
+      "structured": true,
+      "status": "active",
+      "premise": "A wright who finished something — completely, without pause, without asking if he should — discovers that the thin place was never an entrance. It was the consequence: the world sealed what he made into itself, and him with it, and now what he finished is alive somewhere ahead.",
+      "stakes": "To understand what he completed, and whether completion was the same as creation — or whether he built a door from the inside and never knew it.",
+      "axis": null,
+      "traditions": [],
+      "giver": null,
+      "legend": "the-finished-thing",
+      "region": "valley",
+      "tier": "personal",
+      "arcId": "silas-weir_personal_arc",
+      "locationId": null,
+      "stages": [
+        {
+          "id": "s1",
+          "objective": "the wrong angle of light — the thin place speaks in the grammar of his craft; read what it remembers of the making, and what it has already unmade since"
+        },
+        {
+          "id": "s2",
+          "objective": "the exilers were not entirely wrong — find who sent the warning before the council moved, and hear what they saw the work do in the last hour before it finished"
+        },
+        {
+          "id": "s3",
+          "objective": "what completion costs — the finished thing surfaces, wearing the logic of his hand, and asks to be read; what he made, he must now answer for"
+        }
+      ],
+      "routes": {
+        "author": "claim it — name what the finished thing is, take the consequence of having made it, and write the last word the work was missing: himself",
+        "unwrite": "finish it again, differently — use the craft that built it to unmake it properly this time, and accept that the door closing behind him was always the point",
+        "read": "refuse both poles — read the work as it asked to be read, let it be what it finished into, and walk forward through the consequence as its maker, not its god"
+      },
+      "outcomes": [
+        {
+          "id": "author",
+          "name": "Author",
+          "narration": [],
+          "effects": []
+        },
+        {
+          "id": "unwrite",
+          "name": "Unwrite",
+          "narration": [],
+          "effects": []
+        },
+        {
+          "id": "read",
+          "name": "Read",
+          "narration": [],
+          "effects": []
+        }
+      ],
+      "stageIndex": 0,
+      "completedStages": [],
+      "progress": [],
+      "aliases": [],
+      "startedAt": "2026-07-19T14:27:08.855Z",
+      "startedWorldDay": 19
     }
   ],
   "npcRegistry": {
@@ -1558,7 +1657,9 @@
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
-      }
+      },
+      "gender": "woman",
+      "pronouns": "she/her"
     },
     "cookhouse-boy": {
       "id": "cookhouse-boy",
@@ -1582,7 +1683,9 @@
       "lastSeen": {
         "locationId": "millbrook",
         "day": 1
-      }
+      },
+      "gender": "boy",
+      "pronouns": "he/him"
     },
     "aldric": {
       "id": "aldric",
@@ -1644,7 +1747,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d6] Went still at the completion of the Palework — recognized the sound of something cooling into its final shape without being told what it was.",
         "[d6] Held the quiet after the Palework without filling it — stayed at Silas's shoulder through the ending's settling.",
         "[d6] Held the silence through the failed read without comment — her presence at his shoulder unchanged.",
         "[d6] Named the ward failure's cause plainly from the circle's edge — the mark needs something to hold it; a threshold needs a frame before the seal can land.",
@@ -1653,7 +1755,8 @@
         "[d6] Fell into road-pace without ceremony at the waygate threshold — the silence of someone who has done this before.",
         "[d6] Stepped through the waygate without ceremony — at Silas's left, road-ready.",
         "[d6] Fell into road-pace at Silas's left without a word — pack settled, hand loose, road-ready",
-        "[d6] Came through the gate road-ready — pack squared, Memory at shoulder, reading the ground ahead without comment."
+        "[d6] Came through the gate road-ready — pack squared, Memory at shoulder, reading the ground ahead without comment.",
+        "[d6] Read the ground while Silas reported; straightened and asked plainly about the distance to his mother's house — shaping the choice, not steering it."
       ],
       "knownFacts": [
         "Silas wants something private for the evenings — she is thinking about what that means",
@@ -1674,7 +1777,7 @@
         "feeding ironsense through physical contact to anchor a rune-"
       ],
       "status": "active",
-      "statusNote": "Walking the March road with the party — left branch at the marker stone is the destination.",
+      "statusNote": "On the March road before the marker stone fork — waiting for Silas's answer about his mother's house.",
       "lastSeen": {
         "locationId": "gen-ashwarden-march-road",
         "day": 6
@@ -1931,7 +2034,9 @@
         "locationId": "millbrook",
         "day": 5
       },
-      "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Fendt%2C%20Filtration%20engineer%2C%20Edge%20District%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=11563&nologo=true",
+      "gender": "Man",
+      "pronouns": "he/him",
+      "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Fendt%2C%20Man%2C%20Filtration%20engineer%2C%20Edge%20District%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=11563&nologo=true",
       "_portraitTier": "devoted"
     },
     "road-traveler": {
@@ -2339,7 +2444,6 @@
       },
       "relationship": 9,
       "history": [
-        "[d6] Her revision outran the sentence she was building — she stopped before speaking it. The Palework-as-channel has pushed what she was revising past the point where her old framework catches it.",
         "[d6] Found her sentence and spoke it: the Ent was in conversation with whatever needed to end here, and had not yet found the right attendant.",
         "[d6] Watched the failed read, then looked back to the treeline — warden's patience, revision spoken, no pressure added.",
         "[d6] Held warden's patience through the failed ward attempt — watching the circle, not filling the silence.",
@@ -2348,17 +2452,18 @@
         "[d6] Settled into road-pace at Silas's right — departure is familiar ground for a former warden. The unsaid revision about the Ent is filed; she is ready for the road.",
         "[d6] Stepped through the waygate with the party — road-ready, warden's bearing easy, eyes already on the March ahead.",
         "[d6] Oriented the group from field memory on the first stretch of road — named the marker stone, the left branch, and the gone survey post without being asked",
-        "[d6] Named the left branch and the marker stone from warden memory on first sight of the road — something she has been holding a long time, released quietly."
+        "[d6] Named the left branch and the marker stone from warden memory on first sight of the road — something she has been holding a long time, released quietly.",
+        "[d6] Heard Silas's Order-Sense report — responded to the single set of tracks with 'no return' said without question; visibly affected by the news about the post she held for eleven years."
       ],
       "knownFacts": [
-        "The Ent's response to sustained presence is visible enough to revise a prior institutional read in real time",
         "The Ent's response to Silas's naming is larger evidence than Veth's prior March-read accounted for — she is revising substantially",
         "Silas's use of the grove as a Palework channel has exceeded her prior March-read in a way she has not yet articulated",
         "Named the revision plainly: the Ent's prior conversation was with whatever needed to end here; Silas was the right attendant.",
         "The Ashwarden posture of bearing witness served as a genuine contribution to the collective working — not craft, but a quality of presence.",
         "The Ent received the intention of the ward, not the craft — the grove's response to presence and intention rather than mechanism is something the March's records did not fully capture",
         "Raven's Home is past the first tributary — left branch at the marker stone; right branch leads to the old survey post, which is gone",
-        "Oriented from field memory the moment the road came into view — left branch at the marker stone is her held knowledge, not a guess"
+        "Oriented from field memory the moment the road came into view — left branch at the marker stone is her held knowledge, not a guess",
+        "One set of heel-heavy tracks leads to Raven's Home with no return — something is there, or was there"
       ],
       "skillsObserved": [
         "packing a teaching kit by sequence without looking",
@@ -2371,7 +2476,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Walking the March road with the party — first leg begun, marker stone ahead.",
+      "statusNote": "Walking the March road with the party — at the open ground before the marker stone fork, jaw set after hearing about the tracks.",
       "lastSeen": {
         "locationId": "gen-ashwarden-march-road",
         "day": 6
@@ -2936,7 +3041,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-19T11:58:05.758Z",
+    "lastSharedReadAt": "2026-07-19T14:26:15.556Z",
     "lastTickWorldDay": 19,
     "lastCanonWorldDay": 19
   },
@@ -4304,21 +4409,21 @@
     }
   },
   "tendencies": {
-    "strategic": 13.235435575686424,
-    "cerebral": 20.453125833780835,
-    "social": 13.973554987191045,
-    "generous": 3.1665075153050575,
-    "cautious": 5.474414025058891,
-    "physical": 0.6502283897608069,
-    "risky": 0.6818932815048729,
-    "ruthless": 0.21741422086908047,
-    "carousing": 0.003331060771170421,
-    "amorous": 2.600658852608625,
-    "patient": 1.3551173828701109,
-    "stealth": 0.08427030745908347,
-    "devotion": 1.721565270781043,
-    "craft": 0.6656776118254646,
-    "leadership": 0.42894521737875824
+    "strategic": 14.904549686294263,
+    "cerebral": 20.94179768793631,
+    "social": 13.624216112511268,
+    "generous": 3.087344827422431,
+    "cautious": 5.337553674432419,
+    "physical": 0.6339726800167866,
+    "risky": 0.6648459494672511,
+    "ruthless": 0.21197886534735344,
+    "carousing": 0.003247784251891161,
+    "amorous": 2.5356423812934095,
+    "patient": 1.321239448298358,
+    "stealth": 0.08216354977260638,
+    "devotion": 1.678526139011517,
+    "craft": 0.649035671529828,
+    "leadership": 0.4182215869442893
   },
   "aptitudes": [
     "strategist",
@@ -4326,10 +4431,18 @@
     "scholar",
     "sage"
   ],
-  "actionCount": 585,
+  "actionCount": 586,
   "grantsVersion": 1,
-  "reconcileVersion": 6,
+  "reconcileVersion": 8,
   "gallery": [
+    {
+      "kind": "portrait",
+      "prompt": "a person, character portrait, named Fendt, Man, Filtration engineer, Edge District",
+      "url": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Fendt%2C%20Man%2C%20Filtration%20engineer%2C%20Edge%20District%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=11563&nologo=true",
+      "caption": "Fendt — devoted",
+      "worldDay": 19,
+      "at": "2026-07-19T14:26:15.290Z"
+    },
     {
       "kind": "portrait",
       "prompt": "a person, character portrait, named Veth Ondra, woman, Former Ashwarden warden, now teaching at the dark-cloth stall — has offered to join the party, sworn to Silas Weir",
@@ -4604,8 +4717,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784462544880,
-  "rev": 862,
+  "updatedAt": 1784473174184,
+  "rev": 873,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -6046,12 +6159,48 @@
       "why": "player: same person (Lean Opportunist → Curis)",
       "worldDay": 18,
       "at": "2026-07-18T18:07:10.210Z"
+    },
+    {
+      "kind": "gender",
+      "id": "cookhouse-woman",
+      "from": {},
+      "to": {
+        "gender": "woman",
+        "pronouns": "she/her"
+      },
+      "why": "repaired via the Repair panel",
+      "worldDay": 19,
+      "at": "2026-07-19T12:49:09.209Z"
+    },
+    {
+      "kind": "gender",
+      "id": "cookhouse-boy",
+      "from": {},
+      "to": {
+        "gender": "boy",
+        "pronouns": "he/him"
+      },
+      "why": "repaired via the Repair panel",
+      "worldDay": 19,
+      "at": "2026-07-19T12:49:09.209Z"
+    },
+    {
+      "kind": "gender",
+      "id": "fendt",
+      "from": {},
+      "to": {
+        "gender": "Man",
+        "pronouns": "he/him"
+      },
+      "why": "repaired via the Repair panel",
+      "worldDay": 19,
+      "at": "2026-07-19T12:49:09.209Z"
     }
   ],
-  "syncedAt": 1784429149276,
+  "syncedAt": 1784462544880,
   "teachers": {},
   "regionsKnown": {
-    "valley": 408
+    "valley": 409
   },
   "foreclosed": [
     "rootkin",
@@ -6120,10 +6269,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-07-19T11:58:49.560Z",
-      "lastAt": "2026-07-19T12:02:24.858Z",
+      "lastAt": "2026-07-19T14:59:34.179Z",
       "startDay": 19,
       "endDay": 19,
-      "beats": 2
+      "beats": 3
     }
   ],
   "company": [
@@ -6195,5 +6344,95 @@
     "at": "2026-07-19T05:02:50.529Z",
     "message": "Cannot create property 'engagementScore' on boolean 'true'",
     "stack": "TypeError: Cannot create property 'engagementScore' on boolean 'true' <-     at recordAttention (https://orkstrtdkaos.github.io/Singularity/engine/generate.js:341:21) <-     at noteGeneratedAttention (https://orkstrtdkaos.github.io/Singularity/app.js?v=1.8.129:1511:16) <-     at applyTurn (https://orkstrtdkaos.github.io/Singularity/app.js?v=1.8.129:2978:7)"
-  }
+  },
+  "personalArc": {
+    "id": "the-door-that-closed-behind",
+    "name": "The Door That Closed Behind",
+    "arcId": "silas-weir_personal_arc",
+    "boundToCharacter": "Silas Weir",
+    "boundToPlayer": "player-s9z9u1",
+    "region": "valley",
+    "tier": "personal",
+    "premise": "A wright who finished something — completely, without pause, without asking if he should — discovers that the thin place was never an entrance. It was the consequence: the world sealed what he made into itself, and him with it, and now what he finished is alive somewhere ahead.",
+    "stakes": "To understand what he completed, and whether completion was the same as creation — or whether he built a door from the inside and never knew it.",
+    "legendNpc": {
+      "name": "The Finished Thing",
+      "role": "the work he completed, now loose in the substrate of the world, half-made in his image and half-made in nothing's"
+    },
+    "legend": "the-finished-thing",
+    "stages": [
+      {
+        "id": "s1",
+        "objective": "the wrong angle of light — the thin place speaks in the grammar of his craft; read what it remembers of the making, and what it has already unmade since"
+      },
+      {
+        "id": "s2",
+        "objective": "the exilers were not entirely wrong — find who sent the warning before the council moved, and hear what they saw the work do in the last hour before it finished"
+      },
+      {
+        "id": "s3",
+        "objective": "what completion costs — the finished thing surfaces, wearing the logic of his hand, and asks to be read; what he made, he must now answer for"
+      }
+    ],
+    "routes": {
+      "author": "claim it — name what the finished thing is, take the consequence of having made it, and write the last word the work was missing: himself",
+      "unwrite": "finish it again, differently — use the craft that built it to unmake it properly this time, and accept that the door closing behind him was always the point",
+      "read": "refuse both poles — read the work as it asked to be read, let it be what it finished into, and walk forward through the consequence as its maker, not its god"
+    },
+    "outcomes": [
+      {
+        "id": "author",
+        "name": "Author",
+        "effects": []
+      },
+      {
+        "id": "unwrite",
+        "name": "Unwrite",
+        "effects": []
+      },
+      {
+        "id": "read",
+        "name": "Read",
+        "effects": []
+      }
+    ],
+    "structured": true,
+    "source": "personal",
+    "notes_for_gm": "A generated PERSONAL arc (SNG-133) — surface it as a slow gravity across sessions; the ending is the player's, never foreclosed."
+  },
+  "peopleDisposition": {
+    "ashwarden": 4,
+    "cogitant": 2,
+    "figurist": 1,
+    "rootkin": -1
+  },
+  "standingLedger": [
+    {
+      "at": null,
+      "kind": "seed",
+      "entries": [
+        {
+          "people": "ashwarden",
+          "delta": 4,
+          "why": "born to this people"
+        },
+        {
+          "people": "cogitant",
+          "delta": 2,
+          "why": "kin to this people"
+        },
+        {
+          "people": "figurist",
+          "delta": 1,
+          "why": "a hand in this people's craft"
+        },
+        {
+          "people": "rootkin",
+          "delta": -1,
+          "why": "the far side of the circle from your own"
+        }
+      ],
+      "text": "Your birth and training are known: ashwarden +4, cogitant +2, figurist +1, rootkin -1."
+    }
+  ]
 }

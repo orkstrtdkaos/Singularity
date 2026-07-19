@@ -23,8 +23,10 @@ the property my `/tmp` script lacked. Drift 0.0000 and cliffs 0.287 → 0.286 bo
 **Both content bugs were mine and both are now fixed at origin:**
 - `the_service_ways` was `kind: pool` at 0.96 inside a 0.98 region — acting as a sink. **Now 0.99.**
   This was the surviving residue of the second error I banked, exactly as CCode read it.
-- **`the_gearlands` at 0.98 leaves 0.02 of headroom, which is why `the_great_engine` is the one
-  invariant violation. NOT fixed — it needs Erik's ruling.** A region whose authored *mean* sits
+- ~~`the_gearlands` headroom~~ **✅ DISSOLVED, no ruling needed.** Pools/sinks are now ±deltas
+  against the region background (Erik: *"they're basically big auras"*), so `the_great_engine` is
+  `+0.22` above ambient wherever the regional mean sits. The metric that produced the violation
+  no longer exists. A region whose authored *mean* sits
   0.02 below the world ceiling cannot contain a pool. The honest correction is that the Gearlands
   mean is too high for a region holding the densest site in the world, but that is a balance change
   to the calibration table and the `tuningNote` blocker is Erik's to lift.

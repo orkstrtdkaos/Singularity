@@ -44,7 +44,9 @@
     "kind": "sink",
     "delta": -0.12,
     "radius": 110,
-    "reason": "Declining, and the decline is the mechanism — a mind-work that has been letting go of its substrate for generations."
+    "reason": "Declining, and the decline is the mechanism — a mind-work that has been letting go of its substrate for generations.",
+    "radiusWorld": 0.066,
+    "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
   },
   "axisVector": [
     0.0,

@@ -53,5 +53,11 @@
   "startingLocation": true,
   "waygate": true,
   "waygateHub": true,
-  "waygateTier": 1
+  "waygateTier": 1,
+  "worldPos": {
+    "colatitude": 0.0,
+    "longitude": 0.0,
+    "depth": 0
+  },
+  "worldPosNote": "The pole itself. Every axis crosses here and none of them dominates — colatitude 0 by definition. (SNG-180: authored position — WHERE it sits. Independent of axisVector, which is WHAT it is; a bastion is where the two disagree.)"
 }

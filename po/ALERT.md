@@ -626,3 +626,45 @@ its SYSTEM_SPEC row + three ENGINE_MAP columns (my own ratchets caught the omiss
 STILL OPEN AND YOURS: stakes-dial default, re_creature_chase's danger number, and the reproduced-
 symptom verification of SNG-179 (now unblocked on the domain half). -->
 
+---
+
+<!-- status: SNG-186 §2f (see the machine) COMPLETE_PENDING_REVIEW (CCode 2026-07-19). v1.8.157.
+Suite green by exit code; 🔬 Machine screen verified live in the browser. Results:
+po/results/20260719_SNG-186_2f_see_the_machine.md. §2f ONLY — §2c/§2a/§2b are the next increments.
+
+Stakes + re_creature_chase (minDanger 3→2) received at HEAD; the creature-chase number passes my L6
+check clean (reachable on dl2 now), no re-baseline. Built §2f first per your §4 order.
+
+YOUR §5, ANSWERED BY BUILDING IT. §5.1 (clean seam?) — ONE, and the cleanest possible: every model
+call routes through callClaude, so a single optional observer there (setCallObserver) captures the GM
+turn AND every sub-call (intent-parse/narrate/generate) for free. The transport stays dev-agnostic;
+app.js registers the capture ONLY under isDevMode() at boot. No lever reached past a path. §5.2 (prompt
+recoverable?) — was NOT retained (locals in gmTurn); is now, at that one seam, 24-entry ring, dev-only.
+§5.4 — one screen with sections; §2f is the first.
+
+§3.4 HELD AND TESTED — armed starts false; in a player view the observer is null and NOTHING is
+captured. Disarmed recordCall returns null (asserted).
+
+THE ZERO IS THE SIGNATURE. The firing-counts panel shows a count for EVERY documented op including the
+never-fired — the SNG-183 §3c view (three ops read zero for sixteen levels) without a play session.
+Verified live: NEVER FIRED (32) lists discovery/markTeacher/markDefiningMoment at 0. To avoid a THIRD
+copy of the op list I made salvageOps' array the exported SALVAGEABLE_OPS — the ONE source the
+salvager, the wiring audit GUARD 2, and this panel share; two source-regex consumers updated so the
+rename can't drift them. Ops-fired from the parsed turn, applied/rejected from the real _opLedger
+(reused) — fired / rejected-only / never read as three states.
+
+§3.2 — feedback reports now carry ctx.devMode + a _devActions ledger (the mutating levers §2c/d/e will
+append to). §2f is read-only so it appends nothing, but a dev session can no longer hide itself.
+
+⚠️ THE ONE PATH NOT EXERCISED: an actual API capture (prompt→raw→parsed for a real turn) needs a key +
+a played turn — it is Erik's browser-leg AND it DOUBLES as the SNG-179 verification. Play a turn with
+dev on, open 🔬 Machine, and the Veth teach-me exchange is right there: raw npcUpdates, whether
+bondType:"mentor" fired, whether markTeacher derived. The instrument and the thing it diagnoses arrive
+together. 9 new smoke tests; devcapture.js earned its SYSTEM_SPEC row + ENGINE_MAP columns + count bump.
+
+REMAINING IN SNG-186: §2c stage-an-encounter (seam confirmed clean — startEncounter takes a full def,
+sanitizeNewEncounter clamps it), §2a go-anywhere, §2b know-nothing reset. Then SNG-187 cold-load
+(received, briefed — Promise.all per manifest group; caution 3 the order-independence trap is noted).
+STILL OPEN AND YOURS: SNG-179's reproduced-symptom verification (now also the §2f live check). -->
+
+

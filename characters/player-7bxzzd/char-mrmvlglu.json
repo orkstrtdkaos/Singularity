@@ -7,8 +7,8 @@
   "nativeTradition": "cogitant",
   "whyHere": "You noticed the paying. You came out to see whether there was another way to be a mind.",
   "background": "drifter",
-  "level": 1,
-  "xp": 93,
+  "level": 2,
+  "xp": 104,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -46,11 +46,11 @@
     "body_mind": 0.03477125,
     "concrete_abstract": 0.07149828124999999
   },
-  "attunement": 1,
-  "maxHealth": 30,
-  "health": 30,
-  "maxEnergy": 100,
-  "energy": 44,
+  "attunement": 2,
+  "maxHealth": 35,
+  "health": 35,
+  "maxEnergy": 105,
+  "energy": 105,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -66,7 +66,24 @@
       "pinned": true
     }
   ],
-  "deeds": [],
+  "deeds": [
+    {
+      "at": "2026-07-19T00:52:07.441Z",
+      "locationId": "the_cogitarium",
+      "communityId": "cogitarium",
+      "description": "Placed a cloth across Ossian's shoulders and argued plainly for the body — and the most deliberate mind in the hall reached for bread",
+      "tags": [
+        "care",
+        "persuasion",
+        "cogitarium"
+      ],
+      "weight": 2,
+      "spread": [],
+      "_bonusApplied": 0.25,
+      "day": 1,
+      "worldDay": 19
+    }
+  ],
   "relationships": {},
   "chronicle": [
     "Saehara returned to the Cogitarium, reported the fallen Cogitant's survival to Ossian, climbed to the third terrace, and found the missing Cogitant alive — seated, chalk-covered, arm moving in ceaseless four-second repetition across a low board for four days. Order-Sense pulled a partial read: a single structured calculation built outward from a precise valley coordinate, which Ossian named 'the source.' A direct attempt to reach her — crouching to her level, one quiet word — stopped her arm for three seconds. She did not turn. She resumed. She is reachable, barely, and she has not finished what she started."
@@ -114,63 +131,125 @@
         "player": "Sit down near Ossian and ask, simply and without leverage: what do you actually need from the world right now — not the calculation, the body",
         "summary": "Saehara sat beside Ossian without leverage and asked what he actually needed — the body answered through the mind: cold floor, inconsistent meals, gaps in his own accounting.",
         "narration": "The entrance hall is quieter now — Ferris has found a corner of his own, the pack set down, eyes still cataloguing the strangeness. Araveth traces chalk. Kon is a warm coal-shape at the stairwell foot, watching upward with the particular patience of a thing that knows what it's waiting for.\n\nYou cross the flagstones and sit. Not across from Ossian in the way of a conversation that wants something — beside him, close to his level, back against the cold wall. You let the chalk-smell settle. You let the silence have a moment. Then you ask it plain, without the lever of debt or the frame of negotiation: not what the calculation needs, not what the Cogitarium requires. What does he need. The body. Right now.\n\nThe question lands in him visibly. His eyes, which had been aimed at the middle distance, move to you — not fast, not startled, but with the quality of a compass needle completing its swing. Something behind that dense extraordinary gaze makes a small adjustment, the way a room changes when someone opens a window and the air moves for the first time in days. He does not answer immediately. The silence is different from his usual silence, which is the silence of a mind occupied elsewhere. This one is a man sitting in a question he has not been asked in a long time.\n\n\"Warmth,\" he says finally. The word is precise, not plaintive. \"The floor conducts cold upward at a rate I have been disregarding.\" A pause — three, four seconds, long enough to feel like he is checking something internal. \"And the supply has not been regular. There are gaps in my accounting of the last several days that I cannot close. I believe I have not eaten consistently.\" He states this the way he states everything: as data, as a model's output. But the model is his own body, and the fact that he has lost track of it at all is the thing that sits between the words like a weight.\n\nHis eyes return to the middle distance. But he has not moved away."
+      },
+      {
+        "player": "I'll grab a warm cloth from nearby and drape it over Ossian. \"You know, if you people just realized that if you took care of your basic necessities, you could prolong you lives and therefor increase the amount of things you can solve mentally or thoughts you can catalog.\"",
+        "summary": "Saehara draped a cloth over Ossian's shoulders and said plainly that tending the body extends the mind's years — Ossian reached for the bread and admitted it was a significant oversight.",
+        "narration": "There is a cloth folded over the pack's outer strap — you'd wrapped it around the waterskin on the climb to keep the metal from biting your hand in the cold. You pull it free, shake it open, and without ceremony you lay it across Ossian's shoulders.\n\nHe doesn't flinch. He doesn't speak. But his eyes, which had returned to that middle distance where the calculations live, come back. They fix on you with the same unsettling density as before — only this time the measurement feels less like appraisal and more like recognition of an unexpected variable. You let him look. You say what you mean plainly, the way you'd tell someone to clean a wound before worrying about the scar: if the Cogitants tended the body, the mind would have more years to fill. More problems solved. More thoughts catalogued. The math is simple enough that a child could run it.\n\nOssian is quiet for a long moment. Not the dismissive quiet of someone who has decided the point is beneath them. A different quiet — the kind that happens when something lands on a surface and finds traction. He looks at the cloth on his shoulders. He looks at the side table where the flatbread and hard cheese sit in plain view. Then, slowly, with the particular deliberateness of a man performing an action he has assigned to himself as a task, he reaches toward the side table, breaks a piece of flatbread free, and eats it.\n\nHe does not say thank you. He says: \"The marginal output gain per unit of caloric input is calculable. I had not applied the model to myself.\" A pause. Then: \"It is a significant oversight.\"\n\n*You feel it settle into you — a new steadiness. (Level 2: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
       }
     ],
     "lastTurn": {
-      "narration": "The entrance hall is quieter now — Ferris has found a corner of his own, the pack set down, eyes still cataloguing the strangeness. Araveth traces chalk. Kon is a warm coal-shape at the stairwell foot, watching upward with the particular patience of a thing that knows what it's waiting for.\n\nYou cross the flagstones and sit. Not across from Ossian in the way of a conversation that wants something — beside him, close to his level, back against the cold wall. You let the chalk-smell settle. You let the silence have a moment. Then you ask it plain, without the lever of debt or the frame of negotiation: not what the calculation needs, not what the Cogitarium requires. What does he need. The body. Right now.\n\nThe question lands in him visibly. His eyes, which had been aimed at the middle distance, move to you — not fast, not startled, but with the quality of a compass needle completing its swing. Something behind that dense extraordinary gaze makes a small adjustment, the way a room changes when someone opens a window and the air moves for the first time in days. He does not answer immediately. The silence is different from his usual silence, which is the silence of a mind occupied elsewhere. This one is a man sitting in a question he has not been asked in a long time.\n\n\"Warmth,\" he says finally. The word is precise, not plaintive. \"The floor conducts cold upward at a rate I have been disregarding.\" A pause — three, four seconds, long enough to feel like he is checking something internal. \"And the supply has not been regular. There are gaps in my accounting of the last several days that I cannot close. I believe I have not eaten consistently.\" He states this the way he states everything: as data, as a model's output. But the model is his own body, and the fact that he has lost track of it at all is the thing that sits between the words like a weight.\n\nHis eyes return to the middle distance. But he has not moved away.",
-      "sceneSummary": "Saehara sat beside Ossian without leverage and asked what he actually needed — the body answered through the mind: cold floor, inconsistent meals, gaps in his own accounting.",
+      "narration": "There is a cloth folded over the pack's outer strap — you'd wrapped it around the waterskin on the climb to keep the metal from biting your hand in the cold. You pull it free, shake it open, and without ceremony you lay it across Ossian's shoulders.\n\nHe doesn't flinch. He doesn't speak. But his eyes, which had returned to that middle distance where the calculations live, come back. They fix on you with the same unsettling density as before — only this time the measurement feels less like appraisal and more like recognition of an unexpected variable. You let him look. You say what you mean plainly, the way you'd tell someone to clean a wound before worrying about the scar: if the Cogitants tended the body, the mind would have more years to fill. More problems solved. More thoughts catalogued. The math is simple enough that a child could run it.\n\nOssian is quiet for a long moment. Not the dismissive quiet of someone who has decided the point is beneath them. A different quiet — the kind that happens when something lands on a surface and finds traction. He looks at the cloth on his shoulders. He looks at the side table where the flatbread and hard cheese sit in plain view. Then, slowly, with the particular deliberateness of a man performing an action he has assigned to himself as a task, he reaches toward the side table, breaks a piece of flatbread free, and eats it.\n\nHe does not say thank you. He says: \"The marginal output gain per unit of caloric input is calculable. I had not applied the model to myself.\" A pause. Then: \"It is a significant oversight.\"\n\n*You feel it settle into you — a new steadiness. (Level 2: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*",
+      "sceneSummary": "Saehara draped a cloth over Ossian's shoulders and said plainly that tending the body extends the mind's years — Ossian reached for the bread and admitted it was a significant oversight.",
       "choices": [
         {
-          "label": "Put food directly in his hands — not on the side table, in front of him where the choice is already made",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Stay beside him — ask about the third-terrace Cogitant's notation columns; she's nearly at the right margin and might finish tonight",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "body_mind": 0.7,
+            "concrete_abstract": 0.5
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Go upstairs and sit with the third-terrace Cogitant — she's close to finishing; be there when the arm finally stops",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "body_mind": -0.3,
+            "concrete_abstract": -0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "help",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Check on Ferris — give him a real sense of what the first week alone up here will feel like",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "concrete_abstract": -0.3
+          },
           "difficulty": 0,
           "intentTags": [
             "help",
             "sustain"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Ask what the floor feels like — stay in the body, one small thing at a time, keep him here before the machinery pulls him back",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "calm",
-            "comfort"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Tell him about Deren — not the fact of her survival, but what she looked like: chalk on her hands, lips moving, robes pooled with terrible neatness on Lenten's workbench",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "comfort",
-            "persuade"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Say nothing more — just stay beside him in the quiet, let the warmth of being near another body do the work words can't",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Pull out your book and write what just happened — a mind that feeds itself thinks longer; this is a page worth keeping",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "concrete_abstract": 0.2
+          },
           "difficulty": 0,
           "intentTags": [
             "sustain",
-            "calm"
+            "careful"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [
+        {
+          "description": "Placed a cloth across Ossian's shoulders and argued plainly for the body — and the most deliberate mind in the hall reached for bread",
+          "tags": [
+            "care",
+            "persuasion",
+            "cogitarium"
+          ],
+          "weight": 2,
+          "communityId": "cogitarium"
+        }
+      ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 3
+      },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "third-terrace-collapse",
+          "note": "Ossian has begun eating — the mind-pole's most articulate voice is now, tentatively, remembering the body. The third-terrace Cogitant remains at the board; her notation columns are nearly at the right margin."
         }
       ],
       "scene": {
-        "setting": "Entrance hall of the Cogitarium — chalk-smell, cold stone flagstones, low lamp-light. Night at the narrow windows. Saehara is seated beside Ossian against the wall near the threshold.",
+        "setting": "Entrance hall of the Cogitarium — chalk-smell, cold stone flagstones, low lamp-light. Night at the narrow windows. Saehara is seated beside Ossian against the wall near the threshold, a cloth now across his shoulders.",
         "npcsPresent": [
           {
             "name": "Ossian",
-            "state": "Seated beside Saehara against the wall — eyes returned to middle distance, but not fully gone; the question still settling in him"
+            "state": "Eating a piece of flatbread with deliberate, task-like precision — eyes returned to Saehara, the distant calculation momentarily set aside"
           },
           {
             "name": "Araveth",
@@ -182,20 +261,20 @@
           },
           {
             "name": "Ferris",
-            "state": "In a corner of the hall, pack down, quietly absorbing the strangeness of the place"
+            "state": "In a corner of the hall, pack down, watching Ossian eat with quiet, wide-eyed relief"
           }
         ],
         "objects": [
-          "Chalk watershed model — tributaries, flow-rates, particulate marks across the full wall",
-          "Side table — flatbread, dried lentils, hard cheese round, small cloth bag of meal",
+          "Chalk watershed model — tributaries, flow-rates, particulate marks across the full entrance wall",
+          "Side table — flatbread (one piece broken), dried lentils, hard cheese round, small cloth bag of meal",
           "Traveler's Pack — waterskin lighter, bedroll deployed upstairs",
           "Stairwell to the third terrace above",
           "Arch to the yard and the switchback below"
         ],
         "threads": [
-          "Ossian has named two physical needs: warmth from the cold floor, and inconsistent eating — both answerable",
-          "The third-terrace Cogitant holds the coordinate — chalk columns nearly at the right margin",
-          "Ferris is settling in; his first solo run will test whether the arrangement holds"
+          "The third-terrace Cogitant holds the coordinate — chalk columns nearly at the right margin; she may finish tonight",
+          "Ossian has eaten once — the model is accepted; whether it holds past this moment is unresolved",
+          "Ferris's first solo stretch begins from tonight"
         ]
       },
       "npcUpdates": [
@@ -203,15 +282,27 @@
           "op": "update",
           "npcId": "ossian",
           "name": "Ossian",
-          "note": "Named his own physical needs when asked directly — warmth from the cold floor, gaps in his eating he cannot account for. The first time he has answered a question about himself rather than a system.",
+          "gender": "man",
+          "pronouns": "he/him",
+          "note": "Saehara draped a cloth over his shoulders without asking permission and told him plainly that body-tending extends cognitive output. He reached for the bread — slowly, deliberately, as a self-assigned task. Said the oversight was significant.",
           "learned": [
-            "The floor's cold conducts upward and he has been disregarding it",
-            "He has not eaten consistently — gaps in his own accounting he cannot close",
-            "He can be reached through a direct question with no leverage attached"
+            "The marginal output gain per unit of caloric input is calculable — and he had not applied the model to himself",
+            "The cloth is across his shoulders — warmth registered, first physical need partly answered",
+            "He can be moved not by argument but by the math of his own argument turned on himself"
           ],
-          "relationshipDelta": 1,
+          "skillsObserved": [
+            "self-correction under new data"
+          ],
+          "relationshipDelta": 2,
           "status": "active",
-          "statusNote": "Seated in the entrance hall beside Saehara — still thinking, but present in a way he wasn't before the question"
+          "statusNote": "Seated in the entrance hall beside Saehara — eating for the first time, cloth across his shoulders, most articulate version of himself beginning to remember the body"
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Ossian has eaten — reached for bread of his own motion after accepting that tending the body is calculably correct. The body is not yet abandoned.",
+          "subjectId": "ossian"
         }
       ],
       "codexUpdates": [
@@ -220,25 +311,26 @@
           "label": "Ossian",
           "kind": "person",
           "entityId": "ossian",
-          "fact": "When asked directly and without leverage what his body needs, he answered: warmth (the floor conducts cold he has been ignoring) and consistent food (gaps in the last several days he cannot close). He states his own deprivation as data — which makes it no less real.",
+          "fact": "Reached for bread after Saehara argued that caloric input extends cognitive output — called his failure to apply the model to himself 'a significant oversight.' He moves when the math is his own math turned back on him.",
           "links": [
             "cogitarium",
             "cogitants",
-            "the-cogitariums-calculated-crisis"
+            "the-cogitariums-calculated-crisis",
+            "third-terrace-collapse"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A quiet exchange beside the wall — a few minutes of sitting and one honest answer"
+        "why": "A quiet exchange beside the wall — the cloth, the words, the bread. A quarter-hour at most."
       }
     },
     "sceneState": {
-      "setting": "Entrance hall of the Cogitarium — chalk-smell, cold stone flagstones, low lamp-light. Night at the narrow windows. Saehara is seated beside Ossian against the wall near the threshold.",
+      "setting": "Entrance hall of the Cogitarium — chalk-smell, cold stone flagstones, low lamp-light. Night at the narrow windows. Saehara is seated beside Ossian against the wall near the threshold, a cloth now across his shoulders.",
       "npcsPresent": [
         {
           "name": "Ossian",
-          "state": "Seated beside Saehara against the wall — eyes returned to middle distance, but not fully gone; the question still settli"
+          "state": "Eating a piece of flatbread with deliberate, task-like precision — eyes returned to Saehara, the distant calculation mom"
         },
         {
           "name": "Araveth",
@@ -250,20 +342,20 @@
         },
         {
           "name": "Ferris",
-          "state": "In a corner of the hall, pack down, quietly absorbing the strangeness of the place"
+          "state": "In a corner of the hall, pack down, watching Ossian eat with quiet, wide-eyed relief"
         }
       ],
       "objects": [
         "Chalk watershed model — tributaries, flow-rates, particulate marks across the fu",
-        "Side table — flatbread, dried lentils, hard cheese round, small cloth bag of mea",
+        "Side table — flatbread (one piece broken), dried lentils, hard cheese round, sma",
         "Traveler's Pack — waterskin lighter, bedroll deployed upstairs",
         "Stairwell to the third terrace above",
         "Arch to the yard and the switchback below"
       ],
       "threads": [
-        "Ossian has named two physical needs: warmth from the cold floor, and inconsistent eating — both answerable",
-        "The third-terrace Cogitant holds the coordinate — chalk columns nearly at the right margin",
-        "Ferris is settling in; his first solo run will test whether the arrangement holds"
+        "The third-terrace Cogitant holds the coordinate — chalk columns nearly at the right margin; she may finish tonight",
+        "Ossian has eaten once — the model is accepted; whether it holds past this moment is unresolved",
+        "Ferris's first solo stretch begins from tonight"
       ]
     }
   },
@@ -313,14 +405,14 @@
       "locationEntityId": null,
       "status": "active",
       "progress": [
-        "Read the Fight confirms: not violence, not acute collapse — a body at sustained, controlled, inhuman repetition. The Cogitant is alive and working.",
         "Saehara entered the third terrace. The missing Cogitant is alive — seated on the bare floor, arm moving in sustained repetition across a low board. Not collapse, not distress. Unreachable but present. What she's been building for four days covers every surface.",
         "The third-terrace Cogitant's four-day project is partially read: a structured model built toward a precise valley coordinate — Ossian calls it 'the source.' The coordinate itself remains just out of reach. The Cogitant is alive and still working.",
         "A direct quiet word stopped the Cogitant's arm for three seconds — she is reachable, not fully lost. The board's notation still holds the partial coordinate Ossian calls 'the source.' The name remains unspoken.",
         "Returned to the third terrace — Cogitant still at work, notation denser than before with new columns added since morning. The coordinate at the center of the model is unchanged. She has not finished.",
         "Saehara is on the switchback returning to the Cogitarium — the third-terrace Cogitant is still at the board with her unfinished coordinate calculation; Ossian named her work 'the source.'",
         "Saehara has returned to the Cogitarium and is ascending to the third terrace — the Cogitant and the unfinished coordinate calculation are within reach",
-        "Returned to the third terrace — cup filled, bedroll laid across her shoulders, temperature checked. She has not stopped the calculation but the worst of the cold is answered. She is reachable."
+        "Returned to the third terrace — cup filled, bedroll laid across her shoulders, temperature checked. She has not stopped the calculation but the worst of the cold is answered. She is reachable.",
+        "Ossian has begun eating — the mind-pole's most articulate voice is now, tentatively, remembering the body. The third-terrace Cogitant remains at the board; her notation columns are nearly at the right margin."
       ],
       "aliases": [],
       "startedAt": "2026-07-16T03:39:50.283Z"
@@ -416,9 +508,8 @@
         "locationId": "the_cogitarium",
         "day": 1
       },
-      "relationship": 1,
+      "relationship": 3,
       "history": [
-        "[d1] Held silent on the landing while Saehara read the room — listening, not leading.",
         "[d1] Followed Saehara into the doorway — standing behind the shoulder, silent. Has not named the Cogitant.",
         "[d1] Stepped inside the threshold and named the third-terrace work: 'She was working on the source.' Two words, quietly spoken, watching the walls.",
         "[d1] Let out a slow breath when the Cogitant's arm paused — watching, not speaking",
@@ -427,28 +518,29 @@
         "[d1] Confirmed the fallen Cogitant's name — Deren — on first ask. Registered her survival as confirmation of probability, not news. Said 'Speak.' and is now waiting.",
         "[d1] Refused Saehara's appeal to obligation flatly — does not trade knowledge for gratitude. Confirmed the fourth condition (the coordinate) is still only in the third-terrace Cogitant's possession; he does not have it. Restated the four conditions without addition.",
         "[d1] Eyes tracked once to the meal bag when Saehara set it down — the body remembering something. Did not speak.",
-        "[d1] Named his own physical needs when asked directly — warmth from the cold floor, gaps in his eating he cannot account for. The first time he has answered a question about himself rather than a system."
+        "[d1] Named his own physical needs when asked directly — warmth from the cold floor, gaps in his eating he cannot account for. The first time he has answered a question about himself rather than a system.",
+        "[d1] Saehara draped a cloth over his shoulders without asking permission and told him plainly that body-tending extends cognitive output. He reached for the bread — slowly, deliberately, as a self-assigned task. Said the oversight was significant."
       ],
       "knownFacts": [
-        "Ossian confirms her survival as probability, not surprise — he had already calculated it",
-        "Ossian does not operate on debt or reciprocity — knowledge is not payment",
-        "The fourth condition's coordinate is only in the third-terrace Cogitant's head — Ossian does not have it",
         "Ossian has registered Deren's rescue and the runner arrangement as facts, not obligations",
         "Food is now on the side table — placed without requiring a decision to seek it",
         "The floor's cold conducts upward and he has been disregarding it",
         "He has not eaten consistently — gaps in his own accounting he cannot close",
-        "He can be reached through a direct question with no leverage attached"
+        "He can be reached through a direct question with no leverage attached",
+        "The marginal output gain per unit of caloric input is calculable — and he had not applied the model to himself",
+        "The cloth is across his shoulders — warmth registered, first physical need partly answered",
+        "He can be moved not by argument but by the math of his own argument turned on himself"
       ],
       "skillsObserved": [
-        "systematic elimination of alternatives",
         "population tracking",
         "probabilistic collapse modeling",
         "survival modeling",
         "caloric-deficit timeline calculation",
-        "resource-state assessment under uncertainty"
+        "resource-state assessment under uncertainty",
+        "self-correction under new data"
       ],
       "status": "active",
-      "statusNote": "Seated in the entrance hall beside Saehara — still thinking, but present in a way he wasn't before the question",
+      "statusNote": "Seated in the entrance hall beside Saehara — eating for the first time, cloth across his shoulders, most articulate version of himself beginning to remember the body",
       "lastSeen": {
         "locationId": "the_cogitarium",
         "day": 1
@@ -812,8 +904,8 @@
     "craft": 3,
     "wits": 3
   },
-  "pendingSubPoints": 0,
-  "skillPoints": 0,
+  "pendingSubPoints": 1,
+  "skillPoints": 1,
   "discoveries": [],
   "codex": {
     "schemaVersion": 1,
@@ -958,7 +1050,8 @@
           "[d1] Ossian set a private six-hour intervention threshold for the fallen Cogitant and has been tracking her collapse to the minute — he had a plan, deferred. What the plan was, he has not said.",
           "[d1] Declared his pre-calculated intervention plan voided by Saehara's arrival — Saehara was the trigger for deferral and is now the reason the original path is closed. Ossian considers this 'consistent.' ",
           "[d1] Does not trade knowledge for obligation or gratitude — what Saehara has done for the Cogitarium is registered as fact, not debt. He is not the Builder; he does not barter.",
-          "[d1] When asked directly and without leverage what his body needs, he answered: warmth (the floor conducts cold he has been ignoring) and consistent food (gaps in the last several days he cannot close). He states his own deprivation as data — which makes it no less real."
+          "[d1] When asked directly and without leverage what his body needs, he answered: warmth (the floor conducts cold he has been ignoring) and consistent food (gaps in the last several days he cannot close). He states his own deprivation as data — which makes it no less real.",
+          "[d1] Reached for bread after Saehara argued that caloric input extends cognitive output — called his failure to apply the model to himself 'a significant oversight.' He moves when the math is his own math turned back on him."
         ],
         "links": [
           "cogitarium",
@@ -966,7 +1059,8 @@
           "the-cogitariums-calculated-crisis",
           "araveth",
           "the-collapsing-cogitants",
-          "the-four-conditions-source-remediation"
+          "the-four-conditions-source-remediation",
+          "third-terrace-collapse"
         ],
         "aliases": [
           "The Cogitarium's Calculated Crisis",
@@ -1138,21 +1232,22 @@
     }
   },
   "tendencies": {
-    "strategic": 18.376066832071512,
-    "social": 9.930730085846797,
-    "cerebral": 8.379703272513401,
-    "generous": 10.23587931319626,
-    "cautious": 11.188627094308611,
-    "risky": 0.6543488240713582,
-    "patient": 0.8590683010253904
+    "strategic": 17.916665161269723,
+    "social": 11.682461833700627,
+    "cerebral": 8.170210690700566,
+    "generous": 10.979982330366354,
+    "cautious": 10.908911416950895,
+    "risky": 0.6379901034695742,
+    "patient": 0.8375915934997556
   },
   "aptitudes": [
     "strategist",
+    "silver_tongue",
     "good_samaritan",
     "tactician",
     "stalwart"
   ],
-  "actionCount": 50,
+  "actionCount": 51,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -1181,8 +1276,8 @@
       "at": "2026-07-16T02:18:04.820Z"
     }
   ],
-  "updatedAt": 1784422073007,
-  "rev": 104,
+  "updatedAt": 1784422327442,
+  "rev": 105,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1320,7 +1415,7 @@
     "arc": {}
   },
   "regionsKnown": {
-    "somatic_reaches": 44,
+    "somatic_reaches": 45,
     "valley": 7
   },
   "opLossPending": false,
@@ -1366,10 +1461,18 @@
       "text": "The Cogitarium supply line is now operational — Ferris is the new runner, the arrangement explained, food distributed to the side table. The line will hold as long as Ferris does.",
       "day": 1,
       "subjectId": "ferris"
+    },
+    {
+      "id": "ossian",
+      "text": "Ossian has eaten — reached for bread of his own motion after accepting that tending the body is calculably correct. The body is not yet abandoned.",
+      "day": 1,
+      "subjectId": "ossian"
     }
   ],
   "customAbilities": {},
-  "companionBonds": {},
+  "companionBonds": {
+    "ember": 0.5
+  },
   "practice": {
     "schemaVersion": 1,
     "uses": {
@@ -1480,10 +1583,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-19T00:05:04.919Z",
-      "lastAt": "2026-07-19T00:47:53.006Z",
+      "lastAt": "2026-07-19T00:52:07.441Z",
       "startDay": 19,
       "endDay": 19,
-      "beats": 11
+      "beats": 12
     }
   ],
   "knownPlaces": [

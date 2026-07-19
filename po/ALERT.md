@@ -1,5 +1,24 @@
 # PO ALERT
 
+> **➡️ NEXT TWO, in order:**
+>
+> **1. `po/SPEC_SNG-185_hub_attribution.md`** — the single upstream dependency behind both outcomes
+> Erik reported. Two paths mint people and only one stamps domains: `generate.js:566–583` does it
+> with provenance, `npcs.js :: applyNpcUpdates` — how the GM meets anyone in play — does nothing.
+> Veth and the Crossing Ent both came through the second. Derivation order is **role string first**
+> (Veth's literally says *Ashwarden*), skills second, region home last. ⛔ **A role naming a PEOPLE is
+> not a domain** — "Ent" is a kind, and a naive matcher mis-assigns every Ent in the registry.
+>
+> **2. `po/SPEC_SNG-186_dev_mode.md`** — the workbench. Erik-requested and Erik-approved. Every
+> defect this batch cost a live play session to find; he is currently the only instrument in the
+> system and a slow one. **Build §2f first** (assembled prompt · raw response · parsed result · which
+> ops fired) — it is how SNG-179 was diagnosed by hand, made a button. Load-bearing invariant §3.3:
+> **dev writes go through the same functions play does.** A lever that bypasses a real path tests a
+> path that does not exist, and will cheerfully prove things that are false.
+>
+> Content shipped alongside: **22 teachers** (was 1), covering 14 of 24 pole traditions —
+> deviations only, per your levelReq answer.
+
 > **➡️ BATCH-13 capstone: `po/SPEC_SNG-183_full_accounting.md`.** The engine map completed across
 > code, content and ops, plus the six defect lenses this batch produced. Read with
 > `po/BATCH-13_handoff.md` for the build order.

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "coliseum_champion_influence",
+  "type": "duel",
+  "name": "The Bout: The Divided Room",
+  "locationId": "the_great_coliseum",
+  "setup": "Lys does not appear to be fighting you. Lys appears to be having a conversation with the crowd, and the crowd is enjoying it, and somewhere in there you have begun losing.",
+  "lethal": false,
+  "opponent": {
+    "name": "Lys of the Veiled Reach",
+    "health": 4,
+    "threat": 38,
+    "yieldAt": 1,
+    "fleeDifficulty": 15,
+    "spectrum": {
+      "falsehood_truth": -0.5
+    },
+    "tacticTags": [
+      "plays-the-crowd",
+      "offers-a-deal",
+      "is-not-where-you-thought",
+      "makes-you-the-villain"
+    ]
+  }
+}

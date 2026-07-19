@@ -58,7 +58,9 @@
     "kind": "pool",
     "delta": 0.17,
     "radius": 155,
-    "reason": "Duration pools here the way water pools in a low place — the Stopped is a basin in time and the lattice fell into it."
+    "reason": "Duration pools here the way water pools in a low place — the Stopped is a basin in time and the lattice fell into it.",
+    "radiusWorld": 0.093,
+    "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
   },
   "worldPos": {
     "colatitude": 87.0,

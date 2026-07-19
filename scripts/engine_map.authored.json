@@ -3,110 +3,137 @@
     "AUTHORED columns for ENGINE_MAP.md. Never generated, never overwritten by scripts/engine_map.mjs.",
     "",
     "purpose — one sentence. If a module needs two, it is probably two modules.",
-    "playerVisibleSurface — the control, receipt, panel or prose the PLAYER actually meets. Write NONE",
-    "  when nothing reaches them. NONE is not a failure; some machinery is correctly invisible. It is a",
-    "  FLAG: a module with NONE, no content dependency and no GM verb is the exact shape that produced",
-    "  the eight built-and-unreached capabilities, and it is a different question from reachability —",
-    "  skill_battle was reachable in principle and invisible in practice for months.",
+    "playerVisibleSurface — the control, receipt, panel or prose the PLAYER actually meets, or NONE.",
+    "  NONE is the L1 flag: a module with NONE, no content dependency and no GM verb is the exact shape",
+    "  that produced the eight built-and-unreached capabilities. A different question from reachability.",
+    "whatMakesItFire — SNG-183 L2, 'permission isn't initiative'. What actually TRIGGERS this module's",
+    "  capability in play: an always-on context block, a player control, a GM op, a threshold crossing.",
+    "  Write NONE only for pure libraries nothing 'fires'. NONE on a module that HAS a player surface is",
+    "  the flag that matters — the teacher gate that decided what you could learn and never made a",
+    "  teacher act. It is the judgement no other gate catches and the one this batch most needed.",
     "",
-    "Backfill is incremental (ROUND 2 §5): a module gets its two lines when a spec touches it. The CI",
-    "gate WARNS on an undescribed module and FAILS on a half-described one, because a purpose with no",
-    "surface reads as complete when it is not."
+    "All THREE must be present or all absent. Backfill is incremental (ROUND 2 §5): a module earns its",
+    "three lines when a spec touches it. The gate WARNS on an undescribed module and FAILS on a partly",
+    "described one, because a partial description reads as complete."
   ],
   "namematch.js": {
     "purpose": "The one name-resolution primitive — slugify and fuzzy-match an entity the same way everywhere, so codex, quests and inventory can never disagree about what the GM just named.",
-    "playerVisibleSurface": "Indirect but constant: every id the player sees, and the quest panel's \"couldn't match\" note when the GM names something that does not resolve."
+    "playerVisibleSurface": "Indirect but constant: every id the player sees, and the quest panel's \"couldn't match\" note when the GM names something that does not resolve.",
+    "whatMakesItFire": "Always — every entity the GM names is resolved through it on the turn it is mentioned."
   },
   "quests.js": {
     "purpose": "Quests as typed state the GM drives through clamped ops — the model proposes, the engine adjudicates and refuses in the open.",
-    "playerVisibleSurface": "The quest panel: active quests, stage progress lines (✦ …), the resolution choice when every stage is done, and refusal notes when the GM names the wrong stage."
+    "playerVisibleSurface": "The quest panel: active quests, stage progress lines (✦ …), the resolution choice when every stage is done, and refusal notes when the GM names the wrong stage.",
+    "whatMakesItFire": "A GM stageOps/questUpdates op, or the quest-log 'Take it on' button. SNG-162 gave it a play-time trigger; before that a structured quest could only be closed from the fix button."
   },
   "playerprofile.js": {
     "purpose": "Player identity across characters, and the earned play-style (tendencies, aptitudes) that accrues on each character from how it is actually played.",
-    "playerVisibleSurface": "The profile screen's play-style readout, and the character-select roster."
+    "playerVisibleSurface": "The profile screen's play-style readout, and the character-select roster.",
+    "whatMakesItFire": "Every resolved action accrues play-style; the profile screen and character-select read it."
   },
   "art.js": {
     "purpose": "Images for characters, locations, items, NPCs and big moments, from either a static file or a generated prompt, behind one seam.",
-    "playerVisibleSurface": "Every image in the app: location art, portraits, item art, the moment gallery."
+    "playerVisibleSurface": "Every image in the app: location art, portraits, item art, the moment gallery.",
+    "whatMakesItFire": "Any record without an image, at first render or on a bond crossing (ensureBondPortraits) — never eagerly, so a passing face costs nothing."
   },
   "npcs.js": {
     "purpose": "NPC permanence — everyone met, authored or invented mid-scene, gets a durable registry entry the GM writes to through clamped npcUpdates.",
-    "playerVisibleSurface": "The people list and each NPC's detail card: who they are, where you met, what has passed between you."
+    "playerVisibleSurface": "The people list and each NPC's detail card: who they are, where you met, what has passed between you.",
+    "whatMakesItFire": "A GM npcUpdates op writes the registry; the people list and detail card read it. NB (SNG-179): the mark-a-relationship ops fire far less than the list-shaped ones."
   },
   "traditions.js": {
     "purpose": "The Great Circle geometry — the 24-station ring, neighbours, antipodes and distances — read from content, never hardcoded.",
-    "playerVisibleSurface": "The skill wheel's ring layout and the tradition labels shown on abilities and standing."
+    "playerVisibleSurface": "The skill wheel's ring layout and the tradition labels shown on abilities and standing.",
+    "whatMakesItFire": "Always — the ring geometry is read whenever an ability, domain or standing is shown."
   },
   "skilltree.js": {
     "purpose": "Skill legibility and gating: tiers, attribute gates, and what is learnable now versus later.",
-    "playerVisibleSurface": "The skill wheel and skill graph — tier rings, locked/unlocked state, and the reason a locked ability is locked."
+    "playerVisibleSurface": "The skill wheel and skill graph — tier rings, locked/unlocked state, and the reason a locked ability is locked.",
+    "whatMakesItFire": "Opening the skill wheel or graph; a learn/deepen action re-reads it in place."
   },
   "company.js": {
     "purpose": "The unified company: companion, trainer, liaison, partner and ally are stacking ROLES a person in your party holds, each wired to the system that already implements it.",
-    "playerVisibleSurface": "The company panel — who travels with you and what each one is to you."
+    "playerVisibleSurface": "The company panel — who travels with you and what each one is to you.",
+    "whatMakesItFire": "Recruiting a met NPC, and — SNG-175 — a bonded teacher's next-step offer now surfaces through teachersForGM. The gate existed for levels; the initiative did not until then."
   },
   "reputation.js": {
     "purpose": "Deeds are the source of truth and reputation is a VIEW over them — a community's opinion is the sum of the deeds it knows about.",
-    "playerVisibleSurface": "The standing list on the character screen (band per people). Empty for most players today — the gap BATCH-12 §3 exists to close."
+    "playerVisibleSurface": "The standing list on the character screen (band per people). Empty for most players today — the gap BATCH-12 §3 exists to close.",
+    "whatMakesItFire": "A deed is recorded (GM deeds op or an encounter), and the standing list reads the view. Deeds fire heavily; the mark-ops that would move people-standing do not (SNG-179)."
   },
   "progression.js": {
     "purpose": "Character growth with numbers you can point at — sub-attributes, levelling, ability acquisition and the receipts for each.",
-    "playerVisibleSurface": "Level-up prompts, the attribute allocation screen, new-ability offers, and the ✦ receipt lines when something is earned."
+    "playerVisibleSurface": "Level-up prompts, the attribute allocation screen, new-ability offers, and the ✦ receipt lines when something is earned.",
+    "whatMakesItFire": "A resolved action that crosses a threshold, a level-up, or a GM offerAcquisition/offerPromotion — the player commits on their own screen (Law 9)."
   },
   "state.js": {
     "purpose": "Content-pack loading and save/load — localStorage is authoritative, GitHub sync is optional on top.",
-    "playerVisibleSurface": "Boot (\"Loading the Valley\"), the save/load controls, and the recovery-slot list when a save fails to write."
+    "playerVisibleSurface": "Boot (\"Loading the Valley\"), the save/load controls, and the recovery-slot list when a save fails to write.",
+    "whatMakesItFire": "Boot loads content; every save/load and the recovery path fire it. Always-on infrastructure."
   },
   "generate.js": {
     "purpose": "The ONE generative path — authors a new NPC, location or arc in-grain for its locale, validates against the derived schema, resolves before minting so it never duplicates, and persists it.",
-    "playerVisibleSurface": "Any place or person that did not exist until the fiction needed it; the player meets these as ordinary world content."
+    "playerVisibleSurface": "Any place or person that did not exist until the fiction needed it; the player meets these as ordinary world content.",
+    "whatMakesItFire": "The fiction naming a person or place that does not exist yet — a GM generateRequest, or the mint-on-move path. Never eager."
   },
   "places.js": {
     "purpose": "Location permanence — durable changes, things left behind and discoveries that OUTLIVE the scene, fed back on every return visit.",
-    "playerVisibleSurface": "The location panel's \"what happened here\" lines on returning somewhere you have been."
+    "playerVisibleSurface": "The location panel's \"what happened here\" lines on returning somewhere you have been.",
+    "whatMakesItFire": "A GM placeUpdates op writes durable change; returning to a place reads it back. SNG-176 added recall keyed to the QUESTION, not only to where you stand."
   },
   "claude.js": {
     "purpose": "Anthropic API transport, with MODEL_MAP as the single source of truth for task→model routing and a token/stop_reason log per call.",
-    "playerVisibleSurface": "NONE directly — but every latency the player feels and every API error card comes from here."
+    "playerVisibleSurface": "NONE directly — but every latency the player feels and every API error card comes from here.",
+    "whatMakesItFire": "Every callClaude — the play loop, ask-the-GM, generation, world-tick. NONE player-facing directly; it is the transport."
   },
   "worldmap.js": {
     "purpose": "The data-driven map foundation: stable auto-positioning for every location including ones minted mid-play, plus the three zoom tiers.",
-    "playerVisibleSurface": "The map screen and its World / Region / Location tier bar."
+    "playerVisibleSurface": "The map screen and its World / Region / Location tier bar.",
+    "whatMakesItFire": "Opening the map (any of three tiers), and SNG-180 wired walkingDays to the place card so the world scale is met on travel."
   },
   "intent.js": {
     "purpose": "Intent confirmation for costly acts — nothing irreversible or world-scale commits until the player confirms, the same shape character creation already uses.",
-    "playerVisibleSurface": "The confirmation card before a harmful or departing act, naming the cost in plain language."
+    "playerVisibleSurface": "The confirmation card before a harmful or departing act, naming the cost in plain language.",
+    "whatMakesItFire": "A costly or irreversible act reaching resolution — the confirmation card is what makes it fire, and it commits nothing until the player says yes."
   },
   "waygate.js": {
     "purpose": "The waygate network and its hub at the Crossing, including routing a GM's moveTo to a real gate rather than letting it mint a destination.",
-    "playerVisibleSurface": "The waygate travel control and the destination list when standing at a gate."
+    "playerVisibleSurface": "The waygate travel control and the destination list when standing at a gate.",
+    "whatMakesItFire": "Standing at a gate (the travel control), and a GM moveTo that names a gate is routed through it rather than minting a destination."
   },
   "gm.js": {
     "purpose": "Assembles the GM prompt and parses the structured reply — code owns the rules and the dice, the model owns the words.",
-    "playerVisibleSurface": "All narration and the choice buttons; also the salvage path that keeps prose on screen when the reply parses badly."
+    "playerVisibleSurface": "All narration and the choice buttons; also the salvage path that keeps prose on screen when the reply parses badly.",
+    "whatMakesItFire": "Every turn — it assembles the prompt and parses the reply. The one module that fires on literally every beat."
   },
   "substrate.js": {
     "purpose": "The SECOND difficulty map — the nanite lattice varies in density by place and each tradition is tuned to a band of it, so where you stand changes what you can do.",
-    "playerVisibleSurface": "The success-chance readout before acting (the penalty is folded in, per SNG-116) and the thin/crowded lattice note the GM works into prose. No named receipt of its own."
+    "playerVisibleSurface": "The success-chance readout before acting (the penalty is folded in, per SNG-116) and the thin/crowded lattice note the GM works into prose. No named receipt of its own.",
+    "whatMakesItFire": "An ABILITY action at a place (weapon actions are substrate-free, SNG-089). The success-chance readout and the thin/crowded note are the surfaces; SNG-183 note — the geographic FIELD is precomputed at load but the ruler question is open."
   },
   "practice.js": {
     "purpose": "Competency as the residue of attention — an engine-owned ledger of ability use and co-activation that unlocks ranks at zero skill-point cost.",
-    "playerVisibleSurface": "Aspiration progress and the unlock notices when practice crosses a threshold."
+    "playerVisibleSurface": "Aspiration progress and the unlock notices when practice crosses a threshold.",
+    "whatMakesItFire": "Every ability use records to the ledger; an aspiration or rank threshold crossing surfaces the unlock. SNG-173 made the toolkit's quiet-craft pool recency-based so it stops draining."
   },
   "party.js": {
     "purpose": "Shared-world play — scene publication, the open-scene index, and merge-safe writes so two players in one scene cannot clobber each other.",
-    "playerVisibleSurface": "The party beat feed and the presence indicator when someone else is in your scene."
+    "playerVisibleSurface": "The party beat feed and the presence indicator when someone else is in your scene.",
+    "whatMakesItFire": "Publishing a scene beat in a shared session, and the presence indicator when another player is in your scene."
   },
   "gm_registry.js": {
     "purpose": "The declared table of everything the GM can be told — one row per context block, iterated at every call site so a capability cannot be built and left unreachable.",
-    "playerVisibleSurface": "NONE. It is the §23 wiring contract itself; the player meets it only as a GM that knows things."
+    "playerVisibleSurface": "NONE. It is the §23 wiring contract itself; the player meets it only as a GM that knows things.",
+    "whatMakesItFire": "Every GM call — assembleGMContext iterates it at all four call sites. NONE player-facing; the player meets it only as a GM that knows things. SNG-182 also resolves name tokens here."
   },
   "standing.js": {
     "purpose": "How a people regards you — seeded at creation from who you are, drifting with the company you keep, and moved by narrated acts the engine adjudicates rather than the model.",
-    "playerVisibleSurface": "The standing list on the Chronicle (band per people and settlement), the ✦ receipt when a band changes, and the GM's own knowledge of your welcome."
+    "playerVisibleSurface": "The standing list on the Chronicle (band per people and settlement), the ✦ receipt when a band changes, and the GM's own knowledge of your welcome.",
+    "whatMakesItFire": "Seeded at character creation; drips per in-game day from the company you keep; a GM standingOps op moves it from a narrated act. BATCH-12 §3 — before it, only a structured quest with a people-effect ever wrote peopleDisposition, which is why Erik's standing screen sat empty."
   },
   "names.js": {
     "purpose": "One name, one home — a display name lives on the record its id points at, and every reference resolves it rather than spelling it.",
-    "playerVisibleSurface": "Every authored name a player reads: a rename changes the record and the prose follows, and SNG-111's progressive naming renders the same person differently to someone who has learned their name."
+    "playerVisibleSurface": "Every authored name a player reads: a rename changes the record and the prose follows, and SNG-111's progressive naming renders the same person differently to someone who has learned their name.",
+    "whatMakesItFire": "Prompt assembly and any render of authored prose — a {{kind:id}} token resolves to the current display name. Always, but a no-op on strings without a token."
   }
 }

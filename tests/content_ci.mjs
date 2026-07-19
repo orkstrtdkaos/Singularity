@@ -306,6 +306,34 @@ for (const pack of PACKS) {
     `${broken.length} unresolvable: ${broken.slice(0, 5).join(" · ")}`);
 }
 
+// (3c-vi) SNG-183 L6 — a universal gate that encodes a LOCAL fact. Erik's line: "danger levels should
+// be minimized only locally, not universally." A random encounter with a `minDanger` floor and
+// location `tags` can be gated out of every location whose tags it names — re_toll_bandits at
+// minDanger 3 could never appear on the road it is NAMED for (Erik lowered it to 2). This finds the
+// same shape anywhere: an encounter that matches locations by tag but whose floor exceeds the danger
+// of ALL of them is stranded. Content — the fix is a number Erik owns — so it is named, not failed.
+{
+  let re; try { re = rj("content/packs/valley/events/random_encounters.json"); } catch { re = null; }
+  const arr = re ? (re.encounters || re.table || (Array.isArray(re) ? re : Object.values(re))) : [];
+  const encs = (Array.isArray(arr) ? arr : []).filter(e => e && e.id);
+  const locDir = "content/packs/valley/locations";
+  let locs = [];
+  try { locs = readdirSync(join(root, locDir)).filter(f => f.endsWith(".json")).map(f => rj(`${locDir}/${f}`)); } catch { }
+  const stranded = [];
+  for (const e of encs) {
+    const tags = e.locationTags || e.tags || [];
+    if (!tags.length || !(Number(e.minDanger) > 0)) continue;            // no local binding, or no floor
+    const homes = locs.filter(l => (l.tags || []).some(t => tags.includes(t)));
+    if (!homes.length) continue;                                          // matches nothing by tag — a different gap
+    const reachable = homes.filter(l => (Number(l.dangerLevel) || 0) >= Number(e.minDanger));
+    if (!reachable.length) stranded.push(`${e.id} (minDanger ${e.minDanger}, tags ${tags.join("/")}, its tag-homes cap at dl${Math.max(...homes.map(l => Number(l.dangerLevel) || 0))})`);
+  }
+  const KNOWN_L6 = 1;   // re_creature_chase at time of shipping — the only "wild" location is dl2
+  if (stranded.length) console.log(`note  SNG-183 L6: ${stranded.length} encounter(s) gated out of every location matching their own tags: ${stranded.join(" · ")}`);
+  check("no NEW encounter gated out of its own tag-homes (SNG-183 L6 ratchet)", stranded.length <= KNOWN_L6,
+    `${stranded.length} exceeds the ${KNOWN_L6} recorded when this check shipped — lower the floor or raise a location's danger, per Erik's local-not-universal principle`);
+}
+
 // (3d) romance guidance — the doc pulled into the GM prompt on romantic intent must load and carry
 // non-empty prose. A registered-but-empty (or missing) doc means the GM narrates romance blind.
 {

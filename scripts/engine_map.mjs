@@ -124,6 +124,7 @@ const rows = engineFiles.map(file => {
     module: `engine/${file}`,
     purpose: a.purpose || null,
     playerVisibleSurface: a.playerVisibleSurface || null,
+    whatMakesItFire: a.whatMakesItFire || null,   // SNG-183 L2: the trigger, or "NONE" — see the CI note
     exportCount: exports.length,
     exports,
     dependsOn,
@@ -189,18 +190,30 @@ if (process.argv.includes("--check")) {
 
   const noPurpose = rows.filter(r => !r.purpose);
   const noSurface = rows.filter(r => !r.playerVisibleSurface);
+  const noFire = rows.filter(r => !r.whatMakesItFire);
   // A module with NO content dependency AND no player-visible surface is the shape that produced
   // the original eight: pure machinery nothing feeds and nobody meets.
   const suspicious = rows.filter(r => r.playerVisibleSurface === "NONE" && !r.contentRead.length && !r.gmVerbs.length);
+  // SNG-183 L2 — "permission isn't initiative", the shape no other gate catches. A module the player
+  // CAN meet (a real surface) whose trigger is authored as NONE is a capability with no impulse — the
+  // teacher gate that never fired, SNG-142's toolkit whose offers never came. Advisory because it is
+  // a judgement call the author records, not a fact the script can prove; but it is the judgement
+  // this batch most needed and never had a place to write down.
+  const noInitiative = rows.filter(r => r.playerVisibleSurface && r.playerVisibleSurface !== "NONE" && r.whatMakesItFire === "NONE");
   console.log(`ENGINE_MAP: ${rows.length} modules`);
   console.log(`  authored purpose:  ${rows.length - noPurpose.length}/${rows.length}`);
   console.log(`  authored surface:  ${rows.length - noSurface.length}/${rows.length}`);
+  console.log(`  authored trigger:  ${rows.length - noFire.length}/${rows.length}`);
   if (noPurpose.length) { warn++; console.log(`  note  ${noPurpose.length} module(s) still need a purpose line (backfill in progress — warn, not fail):\n        ${noPurpose.map(r => r.module).join(", ")}`); }
   if (suspicious.length) { warn++; console.log(`  note  ${suspicious.length} module(s) have NO content dependency, NO GM verb and surface NONE — the shape that produced the original eight:\n        ${suspicious.map(r => r.module).join(", ")}`); }
-  // HARD failure: a module that is authored must be authored COMPLETELY, and a new module may not
-  // arrive with neither column. Warn on the backlog; fail on a regression.
-  const halfAuthored = rows.filter(r => (r.purpose && !r.playerVisibleSurface) || (!r.purpose && r.playerVisibleSurface));
-  if (halfAuthored.length) { fail++; console.log(`  FAIL  ${halfAuthored.length} module(s) are half-authored — a purpose without a surface (or vice versa) is worse than neither, it reads as complete:\n        ${halfAuthored.map(r => r.module).join(", ")}`); }
+  if (noInitiative.length) { warn++; console.log(`  note  L2 (permission isn't initiative): ${noInitiative.length} module(s) have a player surface but NO stated trigger — a capability nothing makes fire:\n        ${noInitiative.map(r => r.module).join(", ")}`); }
+  // HARD failure: a module that is authored must be authored COMPLETELY across ALL THREE columns, and
+  // a new module may not arrive with only some. A partial description reads as complete when it is
+  // not — that is the whole failure mode, and it applies to the trigger exactly as to the surface.
+  const anyAuthored = r => r.purpose || r.playerVisibleSurface || r.whatMakesItFire;
+  const allAuthored = r => r.purpose && r.playerVisibleSurface && r.whatMakesItFire;
+  const halfAuthored = rows.filter(r => anyAuthored(r) && !allAuthored(r));
+  if (halfAuthored.length) { fail++; console.log(`  FAIL  ${halfAuthored.length} module(s) are partly authored — purpose/surface/trigger must all three be present or all absent, because a partial description reads as complete:\n        ${halfAuthored.map(r => `${r.module} [${[r.purpose && "purpose", r.playerVisibleSurface && "surface", r.whatMakesItFire && "trigger"].filter(Boolean).join("+") || "none"}]`).join("\n        ")}`); }
   console.log(fail ? `\nENGINE_MAP: ${fail} FAILURE(S)` : `\nENGINE_MAP: ok${warn ? ` (${warn} advisory)` : ""}`);
   process.exit(fail ? 1 : 0);
 }
@@ -213,9 +226,9 @@ out.push(`# ENGINE MAP`);
 out.push(``);
 out.push(`> **Generated** by \`scripts/engine_map.mjs\` — re-run it rather than editing this file.`);
 out.push(`> Mechanical columns are derived from the static import graph, which is complete: \`app.js\` contains **zero dynamic imports**.`);
-out.push(`> **\`purpose\` and \`player-visible surface\` are AUTHORED** in \`scripts/engine_map.authored.json\` and are never overwritten by a regeneration.`);
+out.push(`> **\`purpose\`, \`player-visible surface\` and \`what makes it fire\` are AUTHORED** in \`scripts/engine_map.authored.json\` and are never overwritten by a regeneration.`);
 out.push(``);
-out.push(`**${rows.length} modules · ${authoredCount}/${rows.length} described.** \`player-visible surface: NONE\` is the flag that matters — it is a different question from reachability, and it is how a capability gets built, tested, and never met.`);
+out.push(`**${rows.length} modules · ${authoredCount}/${rows.length} described.** Two flags carry the defect shapes this map exists to catch. **\`player-visible surface: NONE\`** (L1) is how a capability gets built, tested, and never met. **\`what makes it fire: NONE\` on a module that DOES have a surface** (L2, "permission isn't initiative") is how a capability the player can reach still never happens — the teacher gate that never fired.`);
 out.push(``);
 out.push(`**How each derived column is measured** — so the columns can be trusted or corrected rather than believed:`);
 out.push(``);
@@ -224,10 +237,10 @@ out.push(`- **reach** — transitive closure of *depended on by*. \`app.js\` cou
 out.push(`- **content it reads** — literal \`*.json\`/\`*.md\` paths, \`CONTENT.*\` keys, and content-schema fields harvested from the real location and NPC corpus. **Excluded:** field names that collide with JS members (\`map\`, \`name\`, \`id\`, …) and fields ≥${COMMON_FIELD_CUTOFF} modules read, which discriminate nothing. ${schemaFields.length} fields qualify.`);
 out.push(`- **GM verbs** — from \`applyTurn\`'s dispatch in \`app.js\`, *not* from imports: each \`turn.<verb>\` handler block is walked and the verb attributed to whichever module owns the functions called inside it.`);
 out.push(``);
-out.push(`| module | purpose | player surface | exports | depends on | depended on by | reach | content it reads | GM verbs |`);
+out.push(`| module | purpose | player surface | what makes it fire | exports | depended on by | reach | content it reads | GM verbs |`);
 out.push(`|---|---|---|---|---|---|---|---|---|`);
 for (const r of rows.sort((a, b) => b.reachCount - a.reachCount || a.module.localeCompare(b.module))) {
-  out.push(`| \`${r.module}\` | ${r.purpose ? esc(r.purpose) : "*— unstated —*"} | ${r.playerVisibleSurface ? esc(r.playerVisibleSurface) : "*—*"} | ${r.exportCount} | ${r.dependsOn.length ? r.dependsOn.map(d => `\`${d}\``).join(" ") : "—"} | ${r.dependedOnBy.length ? r.dependedOnBy.map(d => `\`${d}\``).join(" ") : "**nothing**"} | **${r.reachCount}** | ${r.contentRead.slice(0, 4).map(c => `\`${esc(c)}\``).join(" ") || "—"} | ${r.gmVerbs.map(v => `\`${v}\``).join(" ") || "—"} |`);
+  out.push(`| \`${r.module}\` | ${r.purpose ? esc(r.purpose) : "*— unstated —*"} | ${r.playerVisibleSurface ? esc(r.playerVisibleSurface) : "*—*"} | ${r.whatMakesItFire ? esc(r.whatMakesItFire) : "*—*"} | ${r.exportCount} | ${r.dependedOnBy.length ? r.dependedOnBy.map(d => `\`${d}\``).join(" ") : "**nothing**"} | **${r.reachCount}** | ${r.contentRead.slice(0, 4).map(c => `\`${esc(c)}\``).join(" ") || "—"} | ${r.gmVerbs.map(v => `\`${v}\``).join(" ") || "—"} |`);
 }
 out.push(``);
 out.push(`## GM verbs handled inside \`app.js\` itself`);
@@ -241,6 +254,21 @@ out.push(``);
 out.push(`\`reach\` is the TRANSITIVE count: every module that can be affected by a change here, not just direct importers. A spec touching one of these should state the number before work starts.`);
 out.push(``);
 for (const r of rows.slice(0, 8)) out.push(`- \`${r.module}\` — **${r.reachCount}** modules downstream${r.gmVerbs.length ? `, serves \`${r.gmVerbs.join("` `")}\`` : ""}`);
+out.push(``);
+out.push(`## The six lenses (SNG-183) — the defect shapes this batch produced, and where each is caught`);
+out.push(``);
+out.push(`Not one of this batch's twelve built-never-reached, three never-fired op-classes, or the lore-blind loader was a *coding* error. Each was a missing **connection** — a value duplicated where nobody updates it, or a chain with a broken link. These are the shapes, stated so they are checked rather than remembered.`);
+out.push(``);
+out.push(`| lens | the shape | caught by |`);
+out.push(`|---|---|---|`);
+out.push(`| **L1** built-never-reached | an export with no non-test caller | \`testOnlyExports\` + \`importedNeverCalled\` ratchets (wiring_audit) |`);
+out.push(`| **L2** permission isn't initiative | a reachable capability with no *trigger* | this map's **what makes it fire** column — \`NONE\` on a module with a surface |`);
+out.push(`| **L3** a guard whose result is not read | \`npm test \\| grep … && commit\` chains on grep's status | discipline: every ship verifies by explicit exit code, no test result across a pipe |`);
+out.push(`| **L4** orphaned content | a content file no consumer references | loreRef resolution gate (content_ci); \`content it reads\` column here |`);
+out.push(`| **L5** never-fired ops | an op with all its wiring that still does nothing | dispatch check (wiring_audit) + the runtime \`_opLedger\` on the feedback report |`);
+out.push(`| **L6** a universal gate for a local fact | a global floor encoding a local condition | stranded-encounter check (content_ci): \`minDanger\` past every tag-home's \`dangerLevel\` |`);
+out.push(``);
+out.push(`L3 is the one that cannot be caught by more verification — it *is* the verification layer — so it lives as a rule, not a gate. The rest run in \`npm test\`.`);
 out.push(``);
 writeFileSync(join(root, "ENGINE_MAP.md"), out.join("\n") + "\n");
 console.log(`wrote ENGINE_MAP.md — ${rows.length} modules, ${authoredCount} described`);

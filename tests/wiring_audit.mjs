@@ -219,6 +219,18 @@ check("APP_VERSION matches index.html's cache stamp (feedback reports name the r
   const scalarPass = /for \(const \[key, kind\] of \[\["sceneEnded", "bool"\]/.test(gmSrc);
   check("scalar ops (sceneEnded/gambitApt/imagePrompt) have a recovery path at all", scalarPass,
     "the balanced-bracket scan only opens on [ or { — a boolean or string needs the scalar pass");
+
+  // SNG-183 L5 — THE THIRD LINK: DISPATCH. An op can have a schema entry, a prompt rule and a
+  // salvage slot and STILL never do anything, because nothing in applyTurn reads it. That is exactly
+  // the shape that hid the never-fired ops: markTeacher had all its wiring and did nothing until
+  // SNG-179 found the vocabulary gap. The static half of the lens is cheaper and catches the plainer
+  // case — an op the model is TOLD to emit that no code consumes. `turn.<op>` in app.js is the read.
+  const dispatched = new Set([...appSrc.matchAll(/\bturn\.(\w+)/g)].map(m => m[1]));
+  const NON_DISPATCH = new Set(["narration", "choices", "sceneSummary"]);   // consumed by the render, not applyTurn
+  const undispatched = documented.filter(k => !NON_DISPATCH.has(k) && !dispatched.has(k));
+  check(`every documented op is DISPATCHED — read by applyTurn, not merely described (${documented.length} ops)`,
+    undispatched.length === 0,
+    `documented to the model but NOTHING reads turn.<op> — dead on arrival: ${undispatched.join(", ")}`);
 }
 
 // ---------- 4. skill-integrity ratchet (SNG-147d) ----------

@@ -18,6 +18,8 @@ Build order is CCode's own recommendation, accepted without change.
 | **6** | **Substrate field** | `substrate_field_probe.mjs` is the reference. Content re-authored as ±deltas (§B). `carriedSubstrate` needs to accept negatives. |
 | **7** | **SNG-171 §1 · arc anchors** | Stages cannot name a place; outcomes ship `effects: []`. |
 | **8** | **SNG-166 / 167 rest, 168, 170** | Address derivation, NPC quest seeds, map viewport + pinch, stakes dial. |
+| **8b** | **SNG-180 · worldspace** | Disposition ≠ position — deriving one from the other forbids bastions. The world is a **sphere** (canon's "great circle" is spherical); routing an antipodal trip via the Crossing costs exactly zero extra. **All 95 locations now carry `axisVector`** (22 authored this turn, incl. `ent_deepwood`, which had never been placed in the world). Store 3-D, measure geodesic, project only for the screen. |
+| **8c** | **SNG-173 · toolkit decay** · **SNG-181 · truncated player input** | Both small, both Erik-reported. |
 | **9** | **SNG-172 · power sources** | Largest, ratified, and wants the substrate field landed first. |
 | **1b** | **SNG-176 · the GM can only see HERE** | Runs WITH the lore loader — same defect class, same files. Every world block is current-location-scoped, so a question about anywhere else is unanswerable. Erik hit it asking where his mother's house is. |
 | **10** | **SNG-175 · companion evolution + teacher curricula** | `recruit()` stores a membership row; authored companions carry `stages`/`persona`/`boundaries`. Two classes, one alive. `teaches` authored on ONE npc as a bare string. Erik has two bonded teachers and has been taught nothing. |

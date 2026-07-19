@@ -101,6 +101,35 @@ check(`SYSTEM_SPEC header certifies the real ability count (${abilityCount})`,
   specAbilities && Number(specAbilities[1]) === abilityCount,
   `header says ${specAbilities?.[1] ?? "?"}, HEAD has ${abilityCount}`);
 
+// SNG-164 (PO finding A3): this gate covered engine modules and abilities ONLY, while the header
+// also certifies locations, regions and rules files. The PO added three locations, a region and a
+// rules file and the header drifted silently — 92→95, 24→25, 18→29 — under a check that reads as
+// certification. HALF-GATED FRESHNESS IS WORSE THAN NONE: an unchecked number beside a checked one
+// inherits its credibility. Either the gate covers every count the header asserts, or the header
+// stops asserting it. Covering it.
+const locFiles = (() => { try { return readdirSync(join(root, "content/packs/valley/locations")).filter(f => f.endsWith(".json")); } catch { return []; } })();
+const locationCount = locFiles.length;
+const regionCount = (() => {
+  const ids = new Set();
+  for (const f of locFiles) {
+    try { const j = JSON.parse(readFileSync(join(root, "content/packs/valley/locations", f), "utf8")); if (j.regionId || j.region) ids.add(j.regionId || j.region); } catch { /* skip */ }
+  }
+  return ids.size;
+})();
+const rulesCount = (() => { try { return readdirSync(join(root, "content/packs/core/rules")).filter(f => f.endsWith(".json")).length; } catch { return 0; } })();
+
+const specLocations = specSrc.match(/(\d+) locations \/ (\d+) regions/);
+check(`SYSTEM_SPEC header certifies the real location count (${locationCount})`,
+  specLocations && Number(specLocations[1]) === locationCount,
+  `header says ${specLocations?.[1] ?? "?"}, HEAD has ${locationCount}`);
+check(`SYSTEM_SPEC header certifies the real region count (${regionCount})`,
+  specLocations && Number(specLocations[2]) === regionCount,
+  `header says ${specLocations?.[2] ?? "?"}, HEAD has ${regionCount}`);
+const specRules = specSrc.match(/(\d+) core rules files/);
+check(`SYSTEM_SPEC header certifies the real core-rules count (${rulesCount})`,
+  specRules && Number(specRules[1]) === rulesCount,
+  `header says ${specRules?.[1] ?? "?"}, HEAD has ${rulesCount}`);
+
 // ---------- 3b. version coherence (SNG-162) ----------
 // APP_VERSION stamps every feedback report; index.html's ?v= busts the cache. When they drift, bug
 // reports are filed against a version that was never running — which is how a stale 1.8.104 label

@@ -37,6 +37,7 @@ expressible; and **nothing reads `substrateSource`** — 26 sites are authored a
 | **SNG-167** | 18 of 27 lore files reachable by no location · NPC-borne quest arcs (41 of 43 have a `want`, none have seeds) · Coliseum standing (**conduct adjudicated from outcome/yield/harm-rung, never model-judged** — your call, adopted) · Haiku-default routing |
 | **SNG-168** | map viewport on all three tiers + pinch (touch reads only `e.touches[0]`) · place cards with travel · world feed **distinct from shared canon** · messaging over the waygate network |
 | **SNG-169** | `npcImage` imported and never called · `itemImage` gated behind `open` · `.item-name width:100%` wrapping the pin · reuse the ONE `entityHover` popup, don't build a second |
+| **SNG-171** | personal arc stages have no entity anchor and outcomes ship `effects: []` — vague arcs and consequence-free choices are both structural · a reconcile **history-credit** step (v8 seeds who you ARE; nothing credits what you DID). ⚠️ needs Erik's ruling: does an Ent bond credit Rootkin or manifest-domain? |
 | **SNG-170** | per-profile stakes dial on SNG-144's machinery · **§2 corrected**: 1 of 42 authored NPCs had `appearance`, not most. Content half shipped — 40 authored |
 
 ## Shipped content this session (inert until wired)

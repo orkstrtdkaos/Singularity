@@ -3,7 +3,7 @@
 // typed placeUpdates for changes that should OUTLIVE the scene; the engine stores
 // them per-location and feeds them back on every return visit.
 
-import { smartClamp } from "./namematch.js"; // SNG-152
+import { smartClamp, normName } from "./namematch.js"; // SNG-152 + SNG-176
 
 // SNG-154: the sub-place cap was an inline 12. It is load-bearing (unbounded interiors would grow
 // the save the way unbounded scene history did in CCODE-02), so it stays a cap — but it is named
@@ -118,4 +118,71 @@ export function placeMemoryForGM(character, locationId) {
   const subs = Object.values(p.subPlaces || {});
   if (subs.length) parts.push(`Known places within: ${subs.map(sp => `${sp.name}${sp.visited ? "" : " (heard of only)"}${sp.note ? ` — ${sp.note}` : ""}`).join("; ")}`);
   return parts.join("\n");
+}
+
+/** SNG-176: RECALL — the places the player's own words name, found anywhere in the save.
+ *
+ *  Erik asked where his mother's house was and the GM had nothing. The record almost certainly
+ *  existed; it was simply out of scope from wherever he was standing. Every world block the GM gets
+ *  is keyed to the CURRENT location, and present-location scoping is exactly wrong for memory — a
+ *  mother's house, a hometown, a grave are precisely the places you are NOT standing in when you
+ *  speak of them.
+ *
+ *  This is SELECTION, not volume (§3): the question says which records matter, so the block stays
+ *  small. Deterministic name matching, no model call — `namematch` already resolves entities the
+ *  same way everywhere, and a Haiku round-trip would add latency to buy worse recall.
+ *
+ *  Searches locations (known ones only — you cannot remember somewhere you have never heard of),
+ *  their sub-places, and the character's place memory. Returns [] when the turn asks nothing.
+ */
+export function recallPlaces(character, text, { locations = {}, limit = 3, isKnown = null } = {}) {
+  const words = String(text || "").trim();
+  if (words.length < 3) return [];
+  const known = typeof isKnown === "function" ? isKnown : (() => true);
+  const hits = [];
+  const seen = new Set();
+
+  const push = (rec) => { if (rec && !seen.has(rec.key)) { seen.add(rec.key); hits.push(rec); } };
+  // A phrase matches a record when the record's NAME appears in what the player said. Matching the
+  // other way round would let a two-word place name swallow the sentence.
+  const mentions = (name) => {
+    const n = normName(name);
+    if (!n || n.length < 4) return false;
+    return normName(words).includes(n);
+  };
+
+  for (const [locId, loc] of Object.entries(locations)) {
+    if (!loc?.name) continue;
+    const mem = character?.placeMemory?.[locId];
+    // "known" = the character has been there or heard of it. Unknown places stay unfindable.
+    if (!mem && !known(locId)) continue;
+    if (mentions(loc.name)) push({
+      key: locId, kind: "location", name: loc.name, locationId: locId,
+      detail: placeMemoryForGM(character, locId) || (mem ? null : "heard of, never visited")
+    });
+  }
+
+  for (const [locId, p] of Object.entries(character?.placeMemory || {})) {
+    for (const sp of Object.values(p?.subPlaces || {})) {
+      if (!sp?.name || !mentions(sp.name)) continue;
+      const parentId = sp.parentId || locId;
+      const parent = locations[parentId];
+      push({
+        key: `${parentId}/${subPlaceSlug(sp.name)}`, kind: "sub-place", name: sp.name,
+        locationId: parentId,
+        detail: `within ${parent?.name || parentId}${sp.visited ? "" : " (heard of only)"}${sp.note ? ` — ${sp.note}` : ""}`
+      });
+    }
+  }
+  return hits.slice(0, limit);
+}
+
+/** Render recalled places for the GM prompt. Empty string when the turn named nothing — a block
+ *  that costs nothing on the turns that ask nothing is what makes §3's budget work. */
+export function recallForGM(character, text, opts = {}) {
+  const hits = recallPlaces(character, text, opts);
+  if (!hits.length) return "";
+  return hits.map(h =>
+    `- ${h.name} (${h.kind}${h.locationId && h.kind === "sub-place" ? "" : ""}): ${h.detail || "known of, nothing recorded yet"}`
+  ).join("\n");
 }

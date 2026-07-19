@@ -380,15 +380,20 @@ function normNameTokens(s) {
 
 /** Topics relevant right now: linked to this location, tied to active quests,
  *  or freshly updated. This is how "accumulated knowledge" comes BACK to you. */
-export function codexForGM(character, { locationId = null, questTitles = [] } = {}) {
+export function codexForGM(character, { locationId = null, questTitles = [], playerInput = "" } = {}) {
   const topics = Object.values(character.codex?.topics || {});
   if (!topics.length) return null;
   const locSlug = slugify(locationId || "");
   const questWords = questTitles.flatMap(t => slugify(t).split("-")).filter(w => w.length > 3);
+  // SNG-176: the codex was ALREADY global — location is a +3 boost, not a filter, and there is a
+  // newest-few fallback. The gap was never scope; it was that the scorer never saw the QUESTION.
+  // A topic the player just named outranks the one they happen to be standing on.
+  const askWords = slugify(String(playerInput || "")).split("-").filter(w => w.length > 3);
   const scored = topics.map(t => {
     let score = 0;
     if (t.links.includes(locSlug) || t.id === locSlug) score += 3;
     if (questWords.some(w => t.id.includes(w) || t.links.some(l => l.includes(w)))) score += 2;
+    if (askWords.length && (askWords.some(w => t.id.includes(w)) || askWords.some(w => slugify(t.label || "").includes(w)))) score += 4;
     score += Math.min(2, (t.updatedDay ?? 0) / 50); // gentle recency lean
     return { t, score };
   }).filter(x => x.score > 0).sort((a, b) => b.score - a.score).slice(0, 8);

@@ -38,7 +38,7 @@ import { inventoryForGM } from "./inventory.js";
 import { companionsForGM, activeCompanions } from "./companions.js";
 import { questsForGM, structuredQuestsForGM } from "./quests.js";
 import { npcRegistryForGM } from "./npcs.js";
-import { placeMemoryForGM } from "./places.js";
+import { placeMemoryForGM, recallForGM } from "./places.js";
 import { abilitiesForGM } from "./progression.js";
 import { codexForGM } from "./codex.js";
 import { factsForGM } from "./facts.js";
@@ -92,6 +92,16 @@ export const GM_CONTEXT = [
     reachedBy: "always", spec: "BATCH-12 §3", views: ALL,
     build: (env) => standingForGM(env.character, env.CONTENT.rules, { settlements: [env.location?.communityId].filter(Boolean) }) },
 
+  // SNG-176: every other world block is keyed to where the character is STANDING, which is exactly
+  // wrong for memory — a mother's house, a hometown, a grave are the places you are not standing in
+  // when you speak of them. This row is keyed to the QUESTION instead, and costs nothing on a turn
+  // that names nowhere.
+  { key: "recalledDetail", builder: "places.recallForGM (SNG-176)", carries: ["places the question named, from anywhere in the save"],
+    reachedBy: "always (empty unless the player names a known place)", spec: "SNG-176", views: ALL,
+    build: (env) => recallForGM(env.character, `${env.playerInput || ""} ${env.exactWords || ""}`, {
+      locations: env.CONTENT.locations, isKnown: env.app.isPlaceKnown || null
+    }) },
+
   // ---- shared by turn + ask + gambit ----
   { key: "inventoryDetail", builder: "inventory.inventoryForGM", carries: ["carried items", "uses"],
     reachedBy: "always", spec: "§12", views: ["turn", "ask", "gambit"],
@@ -112,7 +122,7 @@ export const GM_CONTEXT = [
     build: (env) => structuredQuestsForGM(env.character, { npcs: env.CONTENT.npcs }) },
   { key: "codexDetail", builder: "codex.codexForGM", carries: ["codex topics", "known facts"],
     reachedBy: "codex screen", spec: "§13", views: ["turn", "ask", "quest"],
-    build: (env) => codexForGM(env.character, { locationId: env.character.currentLocationId, questTitles: env.focusQuest ? [env.focusQuest.title] : (env.character.quests || []).filter(q => q.status === "active").map(q => q.title) }) },
+    build: (env) => codexForGM(env.character, { playerInput: env.playerInput || env.exactWords || "", locationId: env.character.currentLocationId, questTitles: env.focusQuest ? [env.focusQuest.title] : (env.character.quests || []).filter(q => q.status === "active").map(q => q.title) }) },
 
   // ---- shared by turn + ask ----
   { key: "companionsDetail", builder: "companions.companionsForGM", carries: ["companion capabilities"],

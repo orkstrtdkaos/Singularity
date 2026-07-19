@@ -5110,6 +5110,42 @@ await (async () => {
     named.length === 2 && named[0].name === "Aevi" && named[1].name === "ward");
 }
 
+// --- SNG-176: the GM can only see HERE — recall follows the QUESTION, not the position ---
+{
+  const pl = await import("../engine/places.js");
+  const locations = { millbrook: { id: "millbrook", name: "Millbrook" }, the_crossing: { id: "the_crossing", name: "The Crossing" } };
+  // The mother's house: a named sub-place of Millbrook, while the character stands at the Crossing.
+  const c = { placeMemory: { millbrook: { visits: 3, notes: [], flags: {}, subPlaces: {
+    "my-mothers-house": { name: "my mother's house", parentId: "millbrook", visited: true, note: "the shutters are still green" } } } } };
+
+  const hits = pl.recallPlaces(c, "where is my mother's house from here?", { locations });
+  check("176: a named sub-place is recalled from ANYWHERE, not only under its parent",
+    hits.length === 1 && hits[0].kind === "sub-place");
+  check("176: the recall says which place it is within", /Millbrook/.test(hits[0].detail));
+  check("176: and carries what was established about it", /green/.test(hits[0].detail));
+
+  // A turn that names nowhere must cost nothing — this is what keeps §3's budget honest.
+  check("176: a turn that names no place returns NOTHING", pl.recallForGM(c, "I draw my sword and step forward", { locations }) === "");
+  check("176: a too-short input is ignored", pl.recallPlaces(c, "go", { locations }).length === 0);
+
+  // A location the character has never heard of stays unfindable — recall is memory, not omniscience.
+  const stranger = { placeMemory: {} };
+  check("176: an unknown place is NOT recalled (recall is memory, not omniscience)",
+    pl.recallPlaces(stranger, "tell me about Millbrook", { locations, isKnown: () => false }).length === 0);
+  check("176: a KNOWN location is recalled by name", 
+    pl.recallPlaces(stranger, "tell me about Millbrook", { locations, isKnown: () => true }).length === 1);
+
+  // The codex was already global; the fix was that its scorer never saw the question.
+  const cx = await import("../engine/codex.js");
+  const withCodex = { codex: { topics: {
+    "the-green-shutters": { id: "the-green-shutters", label: "The Green Shutters", kind: "place", facts: ["mother's house in Millbrook"], links: [], updatedDay: 1 },
+    "salt-road": { id: "salt-road", label: "Salt Road", kind: "place", facts: ["a trade route"], links: ["the_crossing"], updatedDay: 90 }
+  } } };
+  const asked = cx.codexForGM(withCodex, { locationId: "the_crossing", playerInput: "what happened at the green shutters" });
+  check("176: a topic the player NAMED outranks the one they are standing on", 
+    asked.indexOf("Green Shutters") < asked.indexOf("Salt Road"));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

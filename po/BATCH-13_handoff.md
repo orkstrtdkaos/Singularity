@@ -76,6 +76,21 @@ taxonomy and `progression.js:154` seeds domain access from it. **Power source ne
 **Multiple primaries credit standing at REDUCED gain each** (SNG-174 §4.1). Erik: *"you can only
 learn so much at a time."* Breadth is not strictly better than depth.
 
+# §D2 — ERIK'S RULINGS, 2026-07-19 — ALL SIX CLOSED
+
+| # | ruling | effect |
+|---|---|---|
+| **1** | **Falloff scales ship as named constants for now.** | `tuningNote` blocker **LIFTED** for this. Constants are provisional by definition and must live in one place so `balance_sim` can move them. **Substrate field unblocked.** |
+| **2** | **Natural craft BENEFITS from a thin lattice.** | SNG-172 §3.1 answered. The Quickwood is not merely survivable for the Returned — it is *their* good ground. **The 285-ability classification is unblocked.** |
+| **3** | **Author world positions.** | Not derived. SNG-180 §6.2 answered — deriving position from disposition is what forbids bastions. 95 locations, Aevi's lane. |
+| **4** | **Make the renames and propagate** — *and* the architectural directive behind it: **resolve names from ids so prose never hardcodes them.** | Became **SNG-182**, which is larger and more valuable than the renames. Renames land *through* it. |
+| **5** | **Wild animals are lethal. They are.** | ✅ **SHIPPED.** `wild_boar_valley` + `wild_greatcat_quickwood` → `lethal: true`, `yieldAt` removed — a predator does not surrender. The stakes dial governs whether a profile *meets* them, not whether a boar can kill. |
+| **6** | **Toll bandits belong on the switchback.** *"Danger levels should be minimized only locally, not universally."* | ✅ **SHIPPED.** `minDanger` 3→2. Principle recorded: a universal floor must not keep an encounter off the road it is named for. **Local clearing is the right suppressor** — someone takes them out, and they are gone *there*. Audit: no other encounter is fully gated out of its own regions. |
+
+**Erik's ruling-6 principle generalises and should be a review lens:** *a universal gate is the wrong
+tool for a local fact.* Same family as the here-scoped retrieval (SNG-176) — the mechanism was coarser
+than the question.
+
 # §D — RULINGS STILL OPEN FOR ERIK
 
 1. ~~**Which people does a bond with an Ent credit?**~~ **✅ RULED 2026-07-18 — see `po/SPEC_SNG-174`.**

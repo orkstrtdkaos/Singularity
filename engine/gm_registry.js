@@ -87,6 +87,16 @@ export const GM_CONTEXT = [
     reachedBy: "always", spec: "§13", views: ALL,
     build: (env) => npcRegistryForGM(env.character, { locationId: env.character.currentLocationId, sceneNpcNames: (env.sceneState?.npcsPresent || []).map(n => n.name) }) },
 
+  // SNG-179: the id vocabulary itself. World tier — it is stable for the whole game, so it caches
+  // once and costs nothing per turn. ~27 ids and their names.
+  { key: "traditionVocab", builder: "CONTENT.traditionIndex ids + names (SNG-179)", carries: ["the valid traditionId enum"],
+    reachedBy: "always", spec: "SNG-179", views: ALL,
+    build: (env) => {
+      const by = env.CONTENT.traditionIndex?.byId || {};
+      const rows = Object.values(by).filter(t => t?.traditionId).map(t => `${t.traditionId} = ${t.name || t.traditionId}`);
+      return rows.length ? rows.join(" · ") : "";
+    } },
+
   // BATCH-12 §3: who regards you how, across BOTH holder kinds. Without this the GM could describe a
   // people's welcome only from the settlement deed-reputation it already had, so a character the
   // Radiants counted as kin was met by strangers.

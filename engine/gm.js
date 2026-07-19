@@ -180,7 +180,7 @@ export function ratingRegister(preset = "PG-13") {
  *  before a breakpoint. Ephemeral per-turn inputs (time, resolution, player words) live
  *  in `player`, which goes AFTER the last breakpoint, uncached. See callClaude systemBlocks. */
 export function tierParts(ctx) {
-  const { character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail, structuredQuestsDetail, sceneState, npcRegistryDetail, placeMemoryDetail, newsDetail, abilityLawDetail, codexDetail, encounterDetail, encounterWeaveDetail, worldPressureDetail, substrateDetail, romanceGuidanceDetail, masteryDetail, availableEncounters, partyDetail, opLossNote, emergenceDetail, perilNote, exactWords, factsDetail, evolvedItemsDetail, itemAdvance, ratingDetail, registerDetail, livingWorldDetail, sharedCanonDetail, legendDetail, worldDateLabel, travelDirective, anomalyDetail, toolkitDetail, waygateDetail, scenePacingDetail, readAloudDetail, standingDetail, recalledDetail, teacherDetail } = ctx;
+  const { character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail, structuredQuestsDetail, sceneState, npcRegistryDetail, placeMemoryDetail, newsDetail, abilityLawDetail, codexDetail, encounterDetail, encounterWeaveDetail, worldPressureDetail, substrateDetail, romanceGuidanceDetail, masteryDetail, availableEncounters, partyDetail, opLossNote, emergenceDetail, perilNote, exactWords, factsDetail, evolvedItemsDetail, itemAdvance, ratingDetail, registerDetail, livingWorldDetail, sharedCanonDetail, legendDetail, worldDateLabel, travelDirective, anomalyDetail, toolkitDetail, waygateDetail, scenePacingDetail, readAloudDetail, standingDetail, recalledDetail, teacherDetail, traditionVocab } = ctx;
   const system = [], world = [], scene = [], state = [], player = [];
 
   // ---- TIER 1: rules/constitution (constant; GM_SYSTEM is prepended in gmTurn) ----
@@ -212,6 +212,14 @@ export function tierParts(ctx) {
   // nothing, so it costs nothing when it has nothing to say.
   if (recalledDetail) world.push(`## RECALLED — places the character KNOWS that this turn mentioned (answer from these; if a place they named is NOT here, say plainly it has not been placed yet rather than inventing one)
 ${recalledDetail}`);
+  // SNG-179: THE VOCABULARY. Four ops ask the model for a `traditionId` — markTeacher, standingOps,
+  // offerAcquisition, the acquisition reply — and until now the prompt never once listed the valid
+  // ids. It described the field ("the people whose craft this NPC teaches") and left the model to
+  // invent the token. app.js then silently dropped anything that did not resolve, so `markTeacher`
+  // never landed in sixteen levels of play: Erik's teacher is of "the Radiants", and the id is
+  // `blazeborn`. An enum the writer has never seen is not an enum.
+  if (traditionVocab) world.push(`## THE PEOPLES — VALID traditionId VALUES (use these EXACT ids in markTeacher, standingOps and offerAcquisition; any other value is DISCARDED, so never invent one from the prose)
+${traditionVocab}`);
   if (standingDetail) world.push(`## HOW YOU ARE REGARDED (standing — bands are earned; do not invent a warmer welcome than this)
 ${standingDetail}`);
   if (npcRegistryDetail) world.push(`## KNOWN PEOPLE (established fact — see rule 14; reuse these people, never reinvent them)\n${npcRegistryDetail}`);

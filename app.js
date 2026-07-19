@@ -57,7 +57,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.141";
+const APP_VERSION = "1.8.142";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -682,6 +682,11 @@ function buildFeedbackContext() {
     const activeQuests = (character.quests || []).filter(q => q.status === "active").map(q => q.title || q.id);
     if (activeQuests.length) ctx.activeQuests = activeQuests;
     ctx.journeyDay = (() => { try { return readClock(character.clock).day; } catch { return null; } })();
+    // SNG-179 §4.4: attach what the OPS actually did. A report that says "the teacher never
+    // registered" is a mystery; one that says markTeacher was rejected 3× on an unknown traditionId
+    // is a diagnosis. Never-emitted and emitted-but-rejected are the two cases the cause turns on.
+    if (character._opLedger && Object.keys(character._opLedger).length) ctx.opLedger = character._opLedger;
+    if (character._opVocabMisses?.length) ctx.opVocabMisses = character._opVocabMisses;
   }
   if (typeof sceneState !== "undefined" && sceneState?.setting) ctx.scene = String(sceneState.setting).slice(0, 200);
   const lastTurn = (typeof sceneTurns !== "undefined" && sceneTurns.length) ? sceneTurns[sceneTurns.length - 1] : (character?.activeScene?.lastTurn || null);
@@ -1512,6 +1517,25 @@ function hydrateGeneratedIntoContent(c) {
 
 /** §2 engagement: record an implicit attention signal on a generated entity by id (across
  *  all types). Attention keeps a grown thing real + surfacing; inattention lets it go dormant. */
+/** SNG-179 §4.4: SILENT OP-LOSS BECOMES DETECTABLE.
+ *
+ *  Three ops had never fired across sixteen levels and nothing anywhere said so — it took someone
+ *  going looking. This keeps a per-character tally of what each op actually DID: applied, or
+ *  rejected and why. An op class that is emitted-and-rejected now reads differently from one that is
+ *  never emitted at all, which is exactly the distinction SNG-179 §3 says the diagnosis turns on and
+ *  which no amount of prompt-reading can settle.
+ *
+ *  Cheap by construction — two counters per op, capped, and it rides the save so it survives reloads
+ *  and shows up in a feedback report. Same reasoning that made unstickQuest self-report past three uses.
+ */
+function logOpOutcome(op, outcome) {
+  if (!character) return;
+  character._opLedger = character._opLedger || {};
+  const row = character._opLedger[op] = character._opLedger[op] || { applied: 0, rejected: 0, lastWhy: null };
+  if (outcome === "applied") row.applied++;
+  else { row.rejected++; row.lastWhy = outcome; }
+}
+
 function noteGeneratedAttention(id, kind, day) {
   if (!id || !character.generated) return;
   const slug = String(id);
@@ -2917,7 +2941,19 @@ function applyTurn(turn, resolution, playerWords = null) {
   }
   // SNG-100b: the GM records a willing teacher of a people (durable — unlocks that people's capstones,
   // and later promotion/acquisition). Only for a real tradition; the engine never invents one.
+  // SNG-179: this guard used to DISCARD an unresolvable traditionId in silence. The op has a rule, a
+  // schema entry, a dispatch and a salvage slot, and still never fired once in sixteen levels —
+  // because the model was asked for an id it had never been shown and reasonably wrote the word from
+  // the fiction ("radiant"; the id is `blazeborn`). The vocabulary block now ships in the prompt, and
+  // a miss is RECORDED rather than swallowed, so the next one is a number instead of a mystery.
+  if (turn.markTeacher?.traditionId && !CONTENT.traditionIndex?.byId?.[turn.markTeacher.traditionId]) {
+    const bad = String(turn.markTeacher.traditionId).slice(0, 40);
+    character._opVocabMisses = [...(character._opVocabMisses || []), `markTeacher: "${bad}" is not a traditionId`].slice(-6);
+    console.warn("[ops] markTeacher discarded — unknown traditionId:", bad);
+    logOpOutcome("markTeacher", "rejected-vocab");
+  }
   if (turn.markTeacher?.traditionId && CONTENT.traditionIndex?.byId?.[turn.markTeacher.traditionId]) {
+    logOpOutcome("markTeacher", "applied");
     const tid = turn.markTeacher.traditionId;
     const first = !character.teachers?.[tid]?.willing;
     character.teachers = character.teachers || {};

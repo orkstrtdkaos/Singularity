@@ -5309,6 +5309,35 @@ await (async () => {
     co.teachersForGM({ ...char, teachers: {}, company: [] }, { catalog, traditionIndex: idx, npcs: {} }) === "");
 }
 
+// --- SNG-179: the ops that never fire — the vocabulary they were never given ---
+{
+  const reg = await import("../engine/gm_registry.js");
+  const gmSrc = readFileSync(new URL('../engine/gm.js', import.meta.url), 'utf8');
+  const appSrc2 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+
+  const vocabRow = reg.GM_CONTEXT.find(r => r.key === "traditionVocab");
+  check("179: the valid traditionId enum is a registered GM block", !!vocabRow);
+
+  const idx = { byId: { blazeborn: { traditionId: "blazeborn", name: "The Blazeborn" }, rootkin: { traditionId: "rootkin", name: "The Rootkin" } } };
+  const out = vocabRow.build({ CONTENT: { traditionIndex: idx } });
+  check("179: it lists ids WITH their display names, so the model can map prose to id",
+    /blazeborn = The Blazeborn/.test(out) && /rootkin = The Rootkin/.test(out));
+  check("179: an empty index yields an empty block rather than a broken one",
+    vocabRow.build({ CONTENT: {} }) === "");
+
+  // The whole failure in one assertion: four ops demand a traditionId, so the prompt must carry the enum.
+  check("179: the prompt now TELLS the model the ids are an enum and that a miss is discarded",
+    /VALID traditionId VALUES/.test(gmSrc) && /DISCARDED/.test(gmSrc));
+
+  // The guard that swallowed it must now record the miss.
+  check("179: an unresolvable traditionId is RECORDED, not silently dropped",
+    /_opVocabMisses/.test(appSrc2) && /is not a traditionId/.test(appSrc2));
+  check("179: op outcomes are tallied so never-emitted reads differently from emitted-and-rejected",
+    /function logOpOutcome/.test(appSrc2) && /rejected-vocab/.test(appSrc2));
+  check("179: and the tally rides the feedback report, so nobody has to go looking",
+    /ctx\.opLedger/.test(appSrc2));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

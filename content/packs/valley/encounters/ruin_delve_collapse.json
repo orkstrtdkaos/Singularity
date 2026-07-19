@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "ruin_delve_collapse",
+  "type": "challenge",
+  "name": "The Delve",
+  "locationId": "dw_the_thinedge",
+  "setup": "The ruin has been settling for four hundred years and it has opinions about being entered. This is not a fight; it is a negotiation with a building that is losing an argument with gravity.",
+  "stages": [
+    {
+      "id": "the_descent",
+      "difficulty": 20,
+      "objective": "Get down into the first gallery without bringing the shaft with you",
+      "change": "You are in, and the way you came is narrower than it was."
+    },
+    {
+      "id": "the_gallery",
+      "difficulty": 25,
+      "objective": "Cross the gallery floor, which is a lid rather than a floor",
+      "change": "The gallery is crossed. Something below registered the weight."
+    },
+    {
+      "id": "the_way_back",
+      "difficulty": 30,
+      "objective": "Leave, carrying whatever you came for",
+      "change": "Out, with the ruin substantially more closed than you found it."
+    }
+  ]
+}

@@ -9,7 +9,7 @@ import { recordDeed, standingWith, standingWithPeople, reputationSummary } from 
 import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, touchSession, endSession, sessionLog, buildSessionPrompt, authorshipStats, crossCharacterAuthorship } from "./engine/chronicle.js";
 import { newProfile, updateProfile, aptitudeMods, profileInsight, grantAptitudes, fadingAptitudes, ensureCharacterStyle, ensureRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, revokeAdultGate, RATING_ORDER, RATING_LEVEL } from "./engine/playerprofile.js";
 import { gmTurn, parseIntent, gmAsk, generateBio, suggestBuild, extractGambit, sanitizeScene, narrativeRegister, ratingRegister, bluntnessDirective } from "./engine/gm.js";
-import { applyQuestUpdates, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, slugify } from "./engine/quests.js";
+import { applyQuestUpdates, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, slugify, advanceStructuredQuest } from "./engine/quests.js";
 import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM } from "./engine/corrections.js";
 import { getApiKey, setApiKey, callClaude, callClaudeJSON, parseLooseJSON } from "./engine/claude.js";
 import { generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight, NOMINATE_AT } from "./engine/generate.js";
@@ -56,7 +56,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.128";
+const APP_VERSION = "1.8.129";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2916,6 +2916,28 @@ function applyTurn(turn, resolution, playerWords = null) {
   const questNotes = applyQuestUpdates(character, turn.questUpdates || [], { entities: codexEntities() });
   if (questNotes.some(n => /couldn't match/i.test(n))) console.warn("[quests]", questNotes.filter(n => /couldn't match/i.test(n)));
   if (questNotes.some(n => /complet/i.test(n))) autoVerifyLeg("b7-inv", "a quest progressed to complete"); // SNG-051 auto-verify
+  // SNG-162 §3: an unmatched quest op is a CONTENT bug worth seeing. It was already never silent,
+  // but it landed in GM notes where a player never looks — surface it in the quest panel instead.
+  const unmatched = questNotes.filter(n => /couldn't match/i.test(n));
+  if (unmatched.length) character._questMatchNotes = unmatched.slice(-3);
+  // SNG-162 §1: STAGE OPS — the fiction advancing a structured quest. The model observed; the
+  // engine adjudicates. Rejections are recorded (never silent) so a GM that keeps naming the wrong
+  // stage is visible rather than mysteriously ineffective.
+  if (turn.stageOps?.length) {
+    const advanced = [], refusedStages = [];
+    for (const op of turn.stageOps.slice(0, 3)) {
+      const r = advanceStructuredQuest(character, op, { day: dayNow });
+      if (r.ok) advanced.push(r); else refusedStages.push(r);
+    }
+    for (const r of advanced) {
+      turn.narration = (turn.narration || "") + `\n\n*✦ ${r.title} — ${r.change || "a step forward"}.${r.awaitingResolution ? " Every stage is done; how it ends is yours to choose." : ""}*`;
+    }
+    if (refusedStages.length) {
+      character._stageOpRefusals = refusedStages.map(r => `${r.questId || "?"}: ${r.why}${r.why === "not-current-stage" ? ` (named "${r.named}", current is "${r.expected}")` : ""}`).slice(-4);
+      console.warn("[quests] stageOps refused:", character._stageOpRefusals);
+    }
+    if (advanced.length) autoVerifyLeg("sng162-stage", `a structured quest advanced FROM PLAY (${advanced[0].title})`);
+  }
   // SNG-032 narrative-driven time: when the fiction moves time (a night's sleep, a
   // journey montage, a long vigil — or a quick exchange), the GM declares it via
   // timeOps.hoursPassed and the engine advances the clock to match, INSTEAD of the fixed
@@ -4980,10 +5002,15 @@ function renderStructuredQuestDetail(q) {
     ${q.stages.map(stageRow).join("")}
     <h3 class="codex-title" style="font-size:15px;margin-top:16px">How you might go through it <span class="hint" style="text-transform:none">(your domains open the lit routes)</span></h3>
     ${routes.map(r => `<div class="quest-route ${r.open ? "open" : ""}"><span class="quest-route-trad">${esc(traditionLabel(r.trad))}${r.open ? " ✦" : ""}</span> ${esc(r.text)}</div>`).join("")}
-    ${!resolved ? `<h3 class="codex-title" style="font-size:15px;margin-top:16px">Resolve — decide what the truth is for</h3>
-      <div class="hint" style="margin-bottom:8px">Every ending is a real ending. What you choose changes the world durably — you'll be able to go back and see it.</div>
+    ${/* SNG-162 §2: the outcome menu appears ONLY at the decision point. Showing every ending
+          throughout is what invited clicking through a quest to see how it could go — and made
+          resolution feel like a panel chore rather than a moment. Progress is automatic now; the
+          ENDING stays the player's, and it surfaces when it's time. */""}
+    ${!resolved && q.awaitingResolution ? `<h3 class="codex-title" style="font-size:15px;margin-top:16px">Resolve — decide what the truth is for</h3>
+      <div class="hint" style="margin-bottom:8px">Every stage is behind you. Every ending is a real ending — what you choose changes the world durably, and you'll be able to go back and see it.</div>
       ${q.outcomes.map(o => `<button class="opt quest-outcome-btn" data-outcome="${esc(o.id)}" style="display:block;width:100%;text-align:left;margin:4px 0">
         <strong>${esc(o.name)}</strong><div class="hint" style="text-transform:none">${esc(o.summary)}</div></button>`).join("")}`
+    : !resolved ? `<div class="hint" style="margin-top:16px">This isn't finished yet. Play it — the stages close as you actually do them, and the endings appear when you reach the decision.</div>`
     : `<h3 class="codex-title" style="font-size:15px;margin-top:16px">What you did</h3>
       ${((q.outcomes.find(o => o.id === q.outcomeId)?.narration) || (q.outcomes.find(o => o.id === q.outcomeId)?.consequences) || []).map(c => `<div class="codex-fact">${esc(c)}</div>`).join("")}`}
     <button class="btn secondary" id="sq-back" style="margin-top:16px">Back</button>

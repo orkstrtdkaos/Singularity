@@ -92,6 +92,12 @@ export function applyStateOps(character, ops = [], ctx = {}) {
         const from = { status: q.status, stageIndex: q.stageIndex };
         if (op.toStatus && ["active", "available", "resolved", "failed"].includes(op.toStatus)) q.status = op.toStatus;
         if (q.structured && op.toStage != null && Array.isArray(q.stages)) { const si = q.stages.findIndex(s => s.id === op.toStage); if (si >= 0) q.stageIndex = si; }
+        // SNG-162 §4: A REPAIR TOOL USED ROUTINELY IS A DEFECT REPORT THE GAME IS FILING AGAINST
+        // ITSELF. Two players independently adopted this op as the normal way to finish a quest,
+        // and we only learned that because Erik happened to mention it. Count it, so the next time
+        // the primary path is decorative the game says so without needing a human to notice.
+        character.telemetry = character.telemetry || {};
+        character.telemetry.unstickQuestUses = (character.telemetry.unstickQuestUses || 0) + 1;
         log(character, { kind: "quest", id: q.id, from, to: { status: q.status, stageIndex: q.stageIndex }, why }, ctx);
         applied.push({ quest: q.id, to: { status: q.status, stageIndex: q.stageIndex } });
         break;
@@ -254,6 +260,11 @@ export function detectAnomalies(character, { rules = {} } = {}) {
   // (3) a vital past its max (a desync)
   if ((character?.health ?? 0) > (character?.maxHealth ?? Infinity)) out.push({ kind: "vitalDesync", vital: "health", value: character.health, max: character.maxHealth, note: `health ${character.health} exceeds max ${character.maxHealth}` });
   if ((character?.energy ?? 0) > (character?.maxEnergy ?? Infinity)) out.push({ kind: "vitalDesync", vital: "energy", value: character.energy, max: character.maxEnergy, note: `energy ${character.energy} exceeds max ${character.maxEnergy}` });
+  // (4) SNG-162 §4: the repair path reporting on itself. Past a few uses, `unstickQuest` is no
+  // longer repairing an edge case — it IS the interface, and the primary path is decorative.
+  const unstickUses = character?.telemetry?.unstickQuestUses || 0;
+  if (unstickUses > 3) out.push({ kind: "repairAsRoutine", uses: unstickUses,
+    note: `quests have been unstuck by REPAIR ${unstickUses} times — the fiction should be advancing them via stageOps. If a quest's current stage has genuinely been satisfied in play, emit stageOps for it rather than leaving the player to repair it.` });
   return out;
 }
 

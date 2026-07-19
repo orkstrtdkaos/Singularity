@@ -4036,6 +4036,89 @@ await (async () => {
     npcPortraitTier(pell) === "partner"); // the app skips when n._portraitTier === this tier
 }
 
+// --- SNG-162: quests advance from PLAY, not from clicking ---
+{
+  const { advanceStructuredQuest, applyQuestUpdates, structuredQuestsForGM, dedupeQuests } = await import('../engine/quests.js');
+  const mkQuest = () => ({
+    id: "the-ledger", title: "The Ledger", structured: true, status: "active", stageIndex: 0,
+    completedStages: [], progress: [], stakes: "the truth about the tally",
+    stages: [{ id: "s1", objective: "find the ledger", condition: "you hold it", change: "You have the ledger." },
+             { id: "s2", objective: "show Fendt", condition: "he has seen it", change: "Fendt has seen it." }],
+    outcomes: [{ id: "burn", name: "Burn it" }, { id: "file", name: "File it" }]
+  });
+  const ch = () => ({ quests: [mkQuest()] });
+
+  // THE FIX: the fiction advances the quest, no panel, no click.
+  const c1 = ch();
+  const r1 = advanceStructuredQuest(c1, { questId: "the-ledger", stageId: "s1", evidence: "Silas lifted the ledger from the cooperage desk" });
+  check("162: a stage advances from PLAY — no button involved", r1.ok === true && c1.quests[0].stageIndex === 1);
+  check("162: the authored change note AND the evidence are both visible to the player",
+    c1.quests[0].progress.some(p => /You have the ledger/.test(p)) && c1.quests[0].progress.some(p => /lifted the ledger/.test(p)));
+
+  // THE LOAD-BEARING CHECK: stage order is un-jumpable whatever the model claims.
+  const c2 = ch();
+  const r2 = advanceStructuredQuest(c2, { questId: "the-ledger", stageId: "s2", evidence: "showed him everything" });
+  check("162: naming a LATER stage cannot skip ahead", r2.ok === false && r2.why === "not-current-stage");
+  check("162: the rejection is RECORDED with what was named vs expected, never silent",
+    r2.named === "s2" && r2.expected === "s1" && c2.quests[0].stageIndex === 0);
+  check("162: no evidence → refused (the model must say what actually happened)",
+    advanceStructuredQuest(ch(), { questId: "the-ledger", stageId: "s1" }).why === "no-evidence");
+  check("162: re-reporting a done stage is idempotent, not a double-advance", (() => {
+    const c = ch();
+    advanceStructuredQuest(c, { questId: "the-ledger", stageId: "s1", evidence: "did it" });
+    const again = advanceStructuredQuest(c, { questId: "the-ledger", stageId: "s1", evidence: "did it again" });
+    return again.why === "already-done" && c.quests[0].stageIndex === 1;
+  })());
+  check("162: an unknown quest is refused cleanly", advanceStructuredQuest(ch(), { questId: "nope", stageId: "s1", evidence: "x" }).why === "no-such-quest");
+
+  // RESOLUTION STAYS THE PLAYER'S — the final stage never auto-resolves.
+  const c3 = ch();
+  advanceStructuredQuest(c3, { questId: "the-ledger", stageId: "s1", evidence: "found it" });
+  const rFinal = advanceStructuredQuest(c3, { questId: "the-ledger", stageId: "s2", evidence: "Fendt read every line" });
+  check("162: completing the LAST stage sets awaitingResolution and stops — it never picks an ending",
+    rFinal.ok === true && c3.quests[0].awaitingResolution === true && c3.quests[0].status === "active" && !c3.quests[0].outcomeId);
+  const gmView = structuredQuestsForGM(c3, {});
+  check("162: at the decision point the GM is told to bring the choice into the FICTION",
+    /AT ITS DECISION POINT/.test(gmView) && /do NOT emit stageOps for it/i.test(gmView));
+  check("162: before that, the GM is given the CURRENT stage id so it can report against it",
+    /CURRENT STAGE ID: "s1"/.test(structuredQuestsForGM(ch(), {})));
+
+  // §3 — a terminal op is never lost to the slice cap
+  const c4 = { quests: [{ id: "q1", title: "Q1", status: "active", progress: [], aliases: [] }] };
+  applyQuestUpdates(c4, [
+    { op: "progress", questId: "q1", note: "a" }, { op: "progress", questId: "q1", note: "b" },
+    { op: "progress", questId: "q1", note: "c" }, { op: "progress", questId: "q1", note: "d" },
+    { op: "complete", questId: "q1", note: "done", xpReward: 10 }
+  ], {});
+  check("162: a `complete` behind four `progress` ops still closes the quest (was dropped by array order)",
+    c4.quests[0].status === "completed");
+
+  // §6.4 — awaitingResolution must survive a merge
+  const c5 = { quests: [
+    { id: "the-ledger", title: "The Ledger", structured: true, status: "active", progress: [], aliases: [], stageIndex: 0, completedStages: [] },
+    { id: "the-ledger-2", title: "The Ledger", structured: true, status: "active", progress: [], aliases: [], stageIndex: 2, completedStages: ["s1", "s2"], awaitingResolution: true }
+  ] };
+  dedupeQuests(c5);
+  check("162: awaitingResolution survives dedupe — a merge cannot silently hide the endings",
+    c5.quests.length === 1 && c5.quests[0].awaitingResolution === true && c5.quests[0].stageIndex === 2);
+
+  // §4 — the repair path reports on itself
+  const { applyStateOps, detectAnomalies } = await import('../engine/corrections.js');
+  const c6 = { quests: [{ id: "q1", status: "active", stageIndex: 0 }], telemetry: {} };
+  for (let i = 0; i < 4; i++) applyStateOps(c6, [{ op: "unstickQuest", questId: "q1", toStatus: "active", why: "stuck" }], {});
+  check("162: unstickQuest is counted", c6.telemetry.unstickQuestUses === 4);
+  check("162: past a few uses the game files the defect report against ITSELF",
+    detectAnomalies(c6, {}).some(a => a.kind === "repairAsRoutine" && /stageOps/.test(a.note)));
+
+  const appSrc162 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+  check("162: outcome buttons render ONLY at the decision point", /!resolved && q\.awaitingResolution \?/.test(appSrc162));
+  check("162: and an unfinished quest says so instead of showing a menu", /the endings appear when you reach the decision/.test(appSrc162));
+  const gmSrc162 = readFileSync(new URL('../engine/gm.js', import.meta.url), 'utf8');
+  check("162: stageOps is contracted AND salvageable", /"stageOps": \[\{"questId"/.test(gmSrc162) && /"questUpdates", "stageOps"/.test(gmSrc162));
+  check("162: the contract keeps the NEVER-adjudicate rule while adding the OBSERVE duty",
+    /NEVER resolve a quest or hand out a branch, effect or XP yourself/.test(gmSrc162) && /You are OBSERVING, not adjudicating/.test(gmSrc162));
+}
+
 // --- CCODE-13: the two dead exports are gone, and the ratchet's lever announces itself ---
 {
   const canonSrc = readFileSync(new URL('../engine/canon.js', import.meta.url), 'utf8');
@@ -4624,22 +4707,22 @@ await (async () => {
   const appSrc155 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
   // The structural guarantee: applyTurn is CALLED inside a try, and the catch preserves the beat.
   const guarded = /try \{\s*applyTurn\(result\.turn, resolution, playerWords\);\s*\} catch \(err\) \{/.test(appSrc155);
-  check("162: applyTurn is wrapped so a throw cannot discard the rendered narration", guarded);
-  check("162: the catch persists activeScene.lastTurn so continuity survives a partial apply",
+  check("CCODE-07: applyTurn is wrapped so a throw cannot discard the rendered narration", guarded);
+  check("CCODE-07: the catch persists activeScene.lastTurn so continuity survives a partial apply",
     /_applyFailed = true/.test(appSrc155) && /catch \(err\)[\s\S]{0,700}?character\.activeScene = \{ locationId: character\.currentLocationId, turns: sceneTurns, lastTurn: result\.turn/.test(appSrc155));
-  check("162: a partial apply sets opLossPending so the GM restates the lost ops next turn (SNG-009 contract)",
+  check("CCODE-07: a partial apply sets opLossPending so the GM restates the lost ops next turn (SNG-009 contract)",
     /catch \(err\)[\s\S]{0,600}?character\.opLossPending = true/.test(appSrc155));
-  check("162: the player is TOLD the bookkeeping lagged — never a silent partial", /part of this turn's bookkeeping didn't land/.test(appSrc155));
-  check("162: the failure travels with the feedback report", /ctx\.turnApplyError = character\._turnApplyError/.test(appSrc155));
+  check("CCODE-07: the player is TOLD the bookkeeping lagged — never a silent partial", /part of this turn's bookkeeping didn't land/.test(appSrc155));
+  check("CCODE-07: the failure travels with the feedback report", /ctx\.turnApplyError = character\._turnApplyError/.test(appSrc155));
   // The specific trigger found in Erik's save class: a currentLocationId that resolves to nothing.
-  check("162: a stranded currentLocationId falls back instead of throwing on location.id / .communityId",
+  check("CCODE-07: a stranded currentLocationId falls back instead of throwing on location.id / .communityId",
     /const location = CONTENT\.locations\[character\.currentLocationId\]\s*\|\|\s*\{ id: character\.currentLocationId \|\| "unknown"/.test(appSrc155) &&
     /_stranded: true/.test(appSrc155));
   // ...and the ledger block that reads location.id sits after the save — that ordering is WHY it lost the render.
   const applyBody = appSrc155.slice(appSrc155.indexOf("function applyTurn("));
   const savePos = applyBody.indexOf("character.activeScene = turn.sceneEnded ? null :");
   const ledgerPos = applyBody.indexOf("where: location.id");
-  check("162: regression witness — the ledger's location read still follows the save (guard is what protects it)",
+  check("CCODE-07: regression witness — the ledger's location read still follows the save (guard is what protects it)",
     savePos > 0 && ledgerPos > savePos);
 }
 

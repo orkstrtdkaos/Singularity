@@ -48,7 +48,15 @@ export function applyQuestUpdates(character, updates = [], ctx = {}) {
   character.quests = character.quests || [];
   const notes = [];
   const clampNote = n => smartClamp(n, 600); // SNG-076: model note — bound generously, on a word boundary
-  for (const u of updates.slice(0, 4)) {
+  // SNG-162 §3: PARTITION BEFORE CAPPING. `updates.slice(0, 4)` dropped by ARRAY ORDER, so a busy
+  // turn emitting three `progress` ops and one `complete` could lose the complete — arbitrarily,
+  // depending on where the model happened to put it. That is a second, independent cause of "the
+  // quest didn't close". Terminal ops go first and are never dropped; start/progress fill the rest.
+  // Same total work per turn.
+  const terminal = updates.filter(u => u?.op === "complete" || u?.op === "fail");
+  const rest = updates.filter(u => u?.op !== "complete" && u?.op !== "fail");
+  const budgeted = [...terminal, ...rest].slice(0, Math.max(4, terminal.length));
+  for (const u of budgeted) {
     const op = u.op;
     const existing = resolveQuest(character, u);
     if (op === "start") {
@@ -123,6 +131,12 @@ export function dedupeQuests(character) {
         p.giverEntityId = p.giverEntityId || s.giverEntityId;
         p.locationEntityId = p.locationEntityId || s.locationEntityId;
         if (s.status !== "active" && p.status === "active") { p.status = s.status; p.resolvedAt = s.resolvedAt; }
+        // SNG-162 §6.4: dedupe merges NAMED fields only, so a flag added later is silently lost in
+        // a merge. awaitingResolution is the gate on the outcome buttons — drop it and a quest that
+        // reached its decision point quietly stops offering one.
+        if (s.awaitingResolution) p.awaitingResolution = true;
+        p.stageIndex = Math.max(p.stageIndex || 0, s.stageIndex || 0);
+        for (const cs of s.completedStages || []) if (!(p.completedStages || []).includes(cs)) p.completedStages = [...(p.completedStages || []), cs];
         quests.splice(quests.indexOf(s), 1);
         merged.push({ into: p.title, absorbed: s.title });
         changed = true;
@@ -195,6 +209,55 @@ export function startStructuredQuest(character, def, ctx = {}) {
 
 /** Mark a stage complete (its engine-testable condition met), applying the stage `change`
  *  as a findable progress note and advancing the stage pointer. */
+/** SNG-162. THE TRIGGER, not a second adjudicator.
+ *
+ *  The engine half was already correct — `completeQuestStage` and `resolveStructuredQuest` do the
+ *  right thing and are untouched. What did not exist was a way for the FICTION to reach them: their
+ *  only callers were two button handlers, so a player could spend three scenes satisfying a stage's
+ *  condition and the quest would not move until they left the narrative and clicked. "When the
+ *  player acts" had been implemented as "when the player clicks", which is why two players
+ *  independently adopted `unstickQuest` — a REPAIR op — as the normal way to finish a quest.
+ *
+ *  The model OBSERVES; the engine ADJUDICATES (same shape as SNG-153's gating). The GM reports that
+ *  something happened and names the stage; every check here is free and structural, and the model
+ *  never selects an outcome, picks a branch, or sets XP.
+ *
+ *  Deliberately NOT matching `evidence` against the stage's authored `condition` prose (PO ruling,
+ *  §6.3): prose-matching prose is the judgement the model is already making, and re-checking it in
+ *  the engine buys precision we cannot verify. Check 2 is what actually protects the player.
+ *
+ *  Returns { ok, why?, change?, stage?, awaitingResolution? }. A rejection is RECORDED, never silent. */
+export function advanceStructuredQuest(character, op = {}, ctx = {}) {
+  const qid = op.questId ? slugify(op.questId) : null;
+  const q = (character.quests || []).find(x => x.id === qid && x.structured);
+  if (!q || q.status !== "active") return { ok: false, why: "no-such-quest", questId: qid };
+  const stages = q.stages || [];
+  const current = stages[q.stageIndex || 0];
+  // ALREADY-DONE IS CHECKED FIRST, ahead of the stage-order gate. Once a stage completes the index
+  // has moved past it, so a re-report would otherwise come back "not-current-stage" — true, but the
+  // wrong diagnosis: it reads as the model misbehaving when it is simply repeating itself on a
+  // retry. Both still refuse; only the recorded reason differs, and these reasons are surfaced.
+  if ((q.completedStages || []).includes(op.stageId)) return { ok: false, why: "already-done", questId: qid };
+  // THE LOAD-BEARING CHECK: the named stage must be the CURRENT one. A model naming a later stage
+  // may not skip ahead, whatever it claims happened — stage order is un-jumpable structurally.
+  if (!current || op.stageId !== current.id) {
+    return { ok: false, why: "not-current-stage", questId: qid, named: op.stageId || null, expected: current?.id || null };
+  }
+  const evidence = smartClamp(String(op.evidence || "").trim(), 200);
+  if (!evidence) return { ok: false, why: "no-evidence", questId: qid };
+
+  const r = completeQuestStage(character, q.id, op.stageId);   // the EXISTING applier, unchanged
+  if (!r.ok) return { ok: false, why: r.why, questId: qid };
+  // The reason the stage advanced is visible to the player, beside the authored change note.
+  q.progress = [...(q.progress || []), `↳ ${evidence}`].slice(-12);
+
+  // THE FINAL STAGE NEVER AUTO-RESOLVES. Progress is automatic; RESOLUTION is always the player's
+  // explicit choice — "how I want to resolve it until it's time".
+  const done = (q.completedStages || []).length >= stages.length || (q.stageIndex || 0) >= stages.length;
+  if (done && !q.awaitingResolution) q.awaitingResolution = true;
+  return { ok: true, questId: q.id, title: q.title, change: r.change, stage: r.stage, nextStage: r.nextStage, awaitingResolution: !!q.awaitingResolution };
+}
+
 export function completeQuestStage(character, questId, stageId) {
   const q = (character.quests || []).find(x => x.id === slugify(questId) && x.structured);
   if (!q || q.status !== "active") return { ok: false, why: "no active structured quest" };
@@ -402,6 +465,14 @@ export function structuredQuestsForGM(character, opts = {}) {
     const stage = q.stages[q.stageIndex] || q.stages[q.stages.length - 1];
     const open = routesForCharacter(q, character).filter(r => r.open).map(r => r.trad);
     let line = `- [${q.id}] ${q.title} (axis: ${q.axis || "?"}) — STAKES: ${q.stakes}\n  Now: ${stage?.objective || "resolve"}${stage?.condition ? ` (${stage.condition})` : ""}${open.length ? `\n  This character's domains open: ${open.join(", ")}` : ""}`;
+    // SNG-162 §1: the stage the model may report against, named explicitly. Without the id in the
+    // prompt the GM cannot emit a stageOp that passes the current-stage gate.
+    if (stage?.id && !q.awaitingResolution) line += `\n  CURRENT STAGE ID: "${stage.id}" — if the character's actions THIS BEAT satisfy that condition, emit stageOps for it.`;
+    // SNG-162 §2: at the decision point the GM brings the choice into the FICTION rather than
+    // leaving it to a panel the player may never open.
+    if (q.awaitingResolution) {
+      line += `\n  ⚑ AT ITS DECISION POINT — every stage is done. Bring the choice into the fiction THIS BEAT: put the moment in front of the character and let them choose how it ends. Do NOT pick an outcome, do NOT narrate a resolution, and do NOT emit stageOps for it — the player resolves it themselves.`;
+    }
     if ((q.legend || q.legendNpc) && (q.boundToCharacter || q.boundToPlayer)) {
       const leg = q.legendNpc || npcs[q.legend] || null; // SNG-133: a generated arc carries its legend inline
       const legName = leg?.name || q.legend || "a distant force";

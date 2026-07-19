@@ -380,10 +380,12 @@ if (!newOrphans.length && !goneOrphans.length) console.log(`ok    orphan-export 
 // before repairing the content, and a deliberate red is only useful if it stays legible — otherwise
 // the next real regression hides inside "the suite is red anyway", which is worse than no gate.
 // This names the expected failure, so any OTHER failure is unmistakable.
-const KNOWN_RED = [{
-  match: /encounterSeeds entry resolves/,
-  note: "EXPECTED — 10 bare-string seeds (old_switchback 5, the_gralloch 4, the_redline 1). PO lane; she asked to see it fail before fixing. Remove this entry the moment it goes green."
-}];
+// Empty by design. The seed guard's 10 bare-string offenders were repaired and it went 19/19, so
+// its entry was removed the moment it went green — which is the discipline this list needs to keep
+// working. A known-red entry that outlives its failure is how a suite ends up permanently red and
+// stops being read at all. Add an entry ONLY alongside a deliberate, dated, someone-else's-lane
+// failure, and delete it the same day it passes.
+const KNOWN_RED = [];
 if (failures > 0) {
   const expected = KNOWN_RED.filter(k => failureLabels.some(l => k.match.test(l)));
   const unexpected = failures - expected.length;

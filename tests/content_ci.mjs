@@ -207,6 +207,34 @@ for (const pack of PACKS) {
     `${unexpected.length} new dangling ref(s) — author the file or drop the ref: ${unexpected.join(", ")}`);
 }
 
+// (3c-iii) SNG-167 §2 — an NPC with a WANT and no questSeeds is a content gap with a number.
+// A location can start an arc and a person cannot: prompt rule 10 weaves the LOCATION's questSeeds
+// and nothing does the same for anyone you meet, which is backwards — the memorable arcs start with
+// someone. The engine now falls back to the want as the premise (SNG-167 §2 "derive, do not just
+// author"), so this is a RATCHET on the authoring backlog rather than a failure: it names how many
+// people are still relying on the fallback, and fails only if the number grows.
+{
+  const npcDir = "content/packs/valley/npcs";
+  let files = [];
+  try { files = readdirSync(join(root, npcDir)).filter(f => f.endsWith(".json")); } catch { }
+  let withWant = 0, withSeeds = 0, gap = [];
+  for (const f of files) {
+    const j = rj(`${npcDir}/${f}`);
+    const recs = Array.isArray(j?.challengers) ? j.challengers : (j?.roster || [j]);
+    for (const n of recs) {
+      if (!n || !n.id) continue;
+      const want = n.want || (Array.isArray(n.wants) ? n.wants[0] : n.wants);
+      const seeds = (n.questSeeds || []).length;
+      if (seeds) withSeeds++;
+      if (want) { withWant++; if (!seeds) gap.push(n.id); }
+    }
+  }
+  console.log(`note  SNG-167 §2: ${withSeeds} NPC(s) carry authored questSeeds; ${gap.length} have a WANT and rely on the derived fallback`);
+  const CEILING = 45;   // the measured backlog at the time this shipped — may only go DOWN
+  check("no NEW want-without-seed NPC (SNG-167 §2 backlog ratchet)", gap.length <= CEILING,
+    `${gap.length} exceeds the ${CEILING} recorded when this check shipped — author seeds, or re-baseline deliberately`);
+}
+
 // (3d) romance guidance — the doc pulled into the GM prompt on romantic intent must load and carry
 // non-empty prose. A registered-but-empty (or missing) doc means the GM narrates romance blind.
 {

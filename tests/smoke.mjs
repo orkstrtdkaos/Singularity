@@ -5460,6 +5460,38 @@ await (async () => {
     once.split("contested frontier").length - 1 === 1);
 }
 
+// --- SNG-167 §2: a PERSON can start an arc, not only a place ---
+{
+  const np = await import("../engine/npcs.js");
+  const npcs = {
+    taro: { id: "taro", name: "Master Taro", questSeeds: ["the ledger his brother never closed"], wants: "quiet" },
+    lissome: { id: "lissome", name: "Lissome", wants: "to see the grove outlive her" },
+    silent: { id: "silent", name: "Silent" }
+  };
+  const char = { npcRegistry: {
+    taro: { id: "taro", name: "Master Taro", lastSeen: { locationId: "millbrook" } },
+    lissome: { id: "lissome", name: "Lissome", lastSeen: { locationId: "millbrook" } },
+    silent: { id: "silent", name: "Silent", lastSeen: { locationId: "millbrook" } },
+    elsewhere: { id: "elsewhere", name: "Elsewhere", lastSeen: { locationId: "the_crossing" } }
+  } };
+
+  const seeds = np.npcQuestSeedsForGM(char, { npcs, locationId: "millbrook" });
+  check("167b: an authored NPC seed is offered", seeds.some(s => s.source === "authored" && /ledger/.test(s.seed)));
+  check("167b: an NPC with only a WANT still offers one — the want IS the arc premise",
+    seeds.some(s => s.npcId === "lissome" && s.source === "want"));
+  check("167b: an NPC with neither offers nothing rather than a vague hook",
+    !seeds.some(s => s.npcId === "silent"));
+  check("167b: someone last seen elsewhere is not in this scene",
+    !seeds.some(s => s.npcId === "elsewhere"));
+
+  const block2 = np.npcQuestSeedBlock(char, { npcs, locationId: "millbrook" });
+  check("167b: a derived seed is marked so the GM shapes it into a NAMED opportunity with stakes",
+    /their own want/.test(block2));
+  check("167b: an authored seed is NOT marked as derived", !/ledger.*their own want/.test(block2));
+  check("167b: a scene with nobody present costs nothing",
+    np.npcQuestSeedBlock({ npcRegistry: {} }, { npcs, locationId: "millbrook" }) === "");
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

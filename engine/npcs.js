@@ -362,3 +362,42 @@ export function migrateRelationships(character, npcCatalog = {}) {
   }
   return character;
 }
+
+/** SNG-167 §2: NPC-BORNE ARCS. A location can start an arc and a person cannot — prompt rule 10
+ *  weaves the LOCATION's questSeeds and there is no equivalent for anyone you meet, which is
+ *  backwards: the memorable arcs start with someone, not somewhere.
+ *
+ *  Measured: 0 of 47 authored NPC records carry `questSeeds`, while 45 carry `wants`. So the ROUND 2
+ *  ruling was to DERIVE rather than only author — the want IS the arc premise, and "has a want and
+ *  no seed" names the real gaps with a number instead of an aspiration.
+ *
+ *  Returns the seeds this scene could offer, authored ones first, with the want as the fallback
+ *  premise. Pure; empty when nobody present carries either.
+ */
+export function npcQuestSeedsForGM(character, { npcs = {}, locationId = null, sceneNpcNames = [], limit = 3 } = {}) {
+  const reg = character?.npcRegistry || {};
+  const scene = sceneNpcNames.map(n => String(n).toLowerCase());
+  const here = Object.values(reg).filter(n =>
+    n?.lastSeen?.locationId === locationId || scene.some(s => s.includes(String(n.name || "").toLowerCase()) || String(n.name || "").toLowerCase().includes(s))
+  );
+  const out = [];
+  for (const n of here) {
+    const authored = npcs[n.id];
+    const seeds = (authored?.questSeeds || []).filter(Boolean);
+    if (seeds.length) {
+      out.push({ npcId: n.id, name: n.name, seed: String(seeds[0]), source: "authored" });
+      continue;
+    }
+    // The want is already the arc premise — SNG-167 §2's "derive, do not just author".
+    const want = authored?.want || (Array.isArray(authored?.wants) ? authored.wants[0] : authored?.wants);
+    if (want) out.push({ npcId: n.id, name: n.name, seed: String(want), source: "want" });
+  }
+  return out.slice(0, limit);
+}
+
+/** Render NPC-borne seeds for the prompt. Empty when nobody present offers one. */
+export function npcQuestSeedBlock(character, opts = {}) {
+  const seeds = npcQuestSeedsForGM(character, opts);
+  if (!seeds.length) return "";
+  return seeds.map(s => `- ${s.name}: ${s.seed}${s.source === "want" ? " (their own want — shape it into a concrete, named opportunity with stakes)" : ""}`).join("\n");
+}

@@ -180,7 +180,7 @@ export function ratingRegister(preset = "PG-13") {
  *  before a breakpoint. Ephemeral per-turn inputs (time, resolution, player words) live
  *  in `player`, which goes AFTER the last breakpoint, uncached. See callClaude systemBlocks. */
 export function tierParts(ctx) {
-  const { character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail, structuredQuestsDetail, sceneState, npcRegistryDetail, placeMemoryDetail, newsDetail, abilityLawDetail, codexDetail, encounterDetail, encounterWeaveDetail, worldPressureDetail, substrateDetail, romanceGuidanceDetail, masteryDetail, availableEncounters, partyDetail, opLossNote, emergenceDetail, perilNote, exactWords, factsDetail, evolvedItemsDetail, itemAdvance, ratingDetail, registerDetail, livingWorldDetail, sharedCanonDetail, legendDetail, worldDateLabel, travelDirective, anomalyDetail, toolkitDetail, waygateDetail, scenePacingDetail, readAloudDetail, standingDetail, recalledDetail, teacherDetail, traditionVocab } = ctx;
+  const { character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail, structuredQuestsDetail, sceneState, npcRegistryDetail, placeMemoryDetail, newsDetail, abilityLawDetail, codexDetail, encounterDetail, encounterWeaveDetail, worldPressureDetail, substrateDetail, romanceGuidanceDetail, masteryDetail, availableEncounters, partyDetail, opLossNote, emergenceDetail, perilNote, exactWords, factsDetail, evolvedItemsDetail, itemAdvance, ratingDetail, registerDetail, livingWorldDetail, sharedCanonDetail, legendDetail, worldDateLabel, travelDirective, anomalyDetail, toolkitDetail, waygateDetail, scenePacingDetail, readAloudDetail, standingDetail, recalledDetail, teacherDetail, traditionVocab, npcSeedDetail } = ctx;
   const system = [], world = [], scene = [], state = [], player = [];
 
   // ---- TIER 1: rules/constitution (constant; GM_SYSTEM is prepended in gmTurn) ----
@@ -198,6 +198,9 @@ export function tierParts(ctx) {
   // ---- TIER 2: world model — location, lore, NPC registry, tradition, world events ----
   world.push(`## LOCATION: ${location.name}\n${location.descriptionSeed}\nSpectrum character of this place: ${JSON.stringify(location.spectrum)}\nEncounter flavor: ${location.encounterFlavor || "n/a"}`);
   if (registerDetail) world.push(`## NARRATIVE REGISTER (rule 5 — the voice THIS place has earned; default concrete, poetic only where the world is abstract and charged)\n${registerDetail}`);
+  // SNG-167 §2 / rule 10b: the same standard as a location's seeds, applied to the people present.
+  if (npcSeedDetail) world.push(`## WHAT THE PEOPLE HERE WANT (rule 10b — when a scene establishes or deepens a bond with one of them, you may surface ONE as a CONCRETE, NAMED opportunity with stakes; the same standard as a location's seeds, never a vague offer)
+${npcSeedDetail}`);
   if (location.questSeeds?.length) world.push(`## QUEST SEEDS for this location (weave in when the scene needs drive)\n${location.questSeeds.map(s => `- ${s}`).join("\n")}`);
   if (lore) world.push(`## LORE (authoritative)\n${lore}`);
   if (region?.activeEvents?.length) world.push(`## ACTIVE WORLD EVENTS\n${region.activeEvents.map(e => `- ${e.summaryForGM}`).join("\n")}`);

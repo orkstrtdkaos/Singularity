@@ -37,7 +37,7 @@ import { buildRegionView, newsForGM } from "./worldtick.js";
 import { inventoryForGM } from "./inventory.js";
 import { companionsForGM, activeCompanions } from "./companions.js";
 import { questsForGM, structuredQuestsForGM } from "./quests.js";
-import { npcRegistryForGM } from "./npcs.js";
+import { npcRegistryForGM, npcQuestSeedBlock } from "./npcs.js";
 import { placeMemoryForGM, recallForGM } from "./places.js";
 import { abilitiesForGM } from "./progression.js";
 import { codexForGM } from "./codex.js";
@@ -86,6 +86,17 @@ export const GM_CONTEXT = [
   { key: "npcRegistryDetail", builder: "npcs.npcRegistryForGM", carries: ["known people", "bonds", "gender/pronouns"],
     reachedBy: "always", spec: "§13", views: ALL,
     build: (env) => npcRegistryForGM(env.character, { locationId: env.character.currentLocationId, sceneNpcNames: (env.sceneState?.npcsPresent || []).map(n => n.name) }) },
+
+  // SNG-167 §2: a LOCATION can start an arc and a PERSON cannot — rule 10 weaves the location's
+  // questSeeds and there is no equivalent for anyone you meet. That is backwards: the memorable arcs
+  // start with someone, not somewhere. 0 of 47 authored NPCs carry seeds and 45 carry `wants`, so
+  // the want is the fallback premise rather than a reason to wait for a content pass.
+  { key: "npcSeedDetail", builder: "npcs.npcQuestSeedBlock (SNG-167 §2)", carries: ["quest seeds carried by the PEOPLE present"],
+    reachedBy: "GM offer (rule 10b)", spec: "SNG-167 §2", views: ["turn", "ask"],
+    build: (env) => npcQuestSeedBlock(env.character, {
+      npcs: env.CONTENT.npcs, locationId: env.character.currentLocationId,
+      sceneNpcNames: (env.sceneState?.npcsPresent || []).map(n => n.name)
+    }) },
 
   // SNG-179: the id vocabulary itself. World tier — it is stable for the whole game, so it caches
   // once and costs nothing per turn. ~27 ids and their names.

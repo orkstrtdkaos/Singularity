@@ -20,6 +20,7 @@ import { assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitRes
 import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, autoAdvancePracticedRanks, markDefiningMoment, meetsStandingBar, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy, nativeGrantIdsFor, applyNativeGrants, retroNativeGrants, seedInnateSubstrate } from "../engine/progression.js";
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, liaisonMultiplierFor, roleBadges, COMPANY_ROLES } from "../engine/company.js";
 import { standingWithPeople } from "../engine/reputation.js";
+import { seedStandingAtCreation, accrueStandingForDays, companyStandingRates, applyStandingOps, standingFor, standingRoster, dripScale, DRIP, CREATION_SEEDS } from "../engine/standing.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, resolveTopic, namesMatch, mergeCodexTopics, mergeInto, suggestMerges, markNotSame } from "../engine/codex.js";
 import { reconcile, reconcileContent, CHARACTER_STEPS, CONTENT_STEPS, topReconcileVersion } from "../engine/reconcile.js";
 import { sceneImage, locationImage } from "../engine/art.js";
@@ -4935,5 +4936,99 @@ await (async () => {
   check("146a: pushMergedFile PUTs with the sha of the read the content came from", /ghPut\(path, JSON\.stringify\(merged, null, 2\), message, existing\?\.sha\)/.test(pmf));
 }
 
+// --- BATCH-12 §3: STANDING (seed / drip / ops) ---
+{
+  const RULES = { peopleStandingBands: [{ min: 20, band: "kin" }, { min: 10, band: "trusted" }, { min: 4, band: "known" }, { min: 0, band: "neutral" }, { min: -4, band: "wary" }, { min: -999, band: "estranged" }] };
+  const IDX = buildTraditionIndex(JSON.parse(readFileSync(new URL('../content/packs/core/rules/traditions.json', import.meta.url), 'utf8')));
+
+  // §3b — seeding. The defect was that being born to a people meant nothing.
+  {
+    const c = { domains: { primary: "somatic", secondary: null, tertiary: null } };
+    const r = seedStandingAtCreation(c, { traditionIndex: IDX, rules: RULES });
+    check("§3b: the primary domain seeds standing with your own people", c.peopleDisposition.somatic === 4);
+    check("§3b: born-to reads as `known`, not `trusted` — birth is recognition, not trust", standingWithPeople(c, "somatic", RULES).band === "known");
+    check("§3b: the antipode is seeded negative from the great circle, not a hand-list", r.seeded.some(s => s.delta < 0));
+    check("§3b: the seed leaves a receipt the player can read", (c.standingLedger || []).length === 1);
+  }
+  // idempotence matters more here than usual: this same function backfills EXISTING saves, where
+  // play has already moved some scores and must not be overwritten.
+  {
+    const c = { domains: { primary: "somatic" }, peopleDisposition: { somatic: 17 } };
+    seedStandingAtCreation(c, { traditionIndex: IDX, rules: RULES });
+    check("§3b: seeding never overwrites a score play has already moved (safe to backfill)", c.peopleDisposition.somatic === 17);
+  }
+
+  // §3c — the Calvar case, stated as a test: a willing teacher in the party and zero standing.
+  {
+    const c = { teachers: { radiant: { met: true, willing: true } }, peopleDisposition: {} };
+    const before = c.peopleDisposition.radiant || 0;
+    accrueStandingForDays(c, 10, { rules: RULES });
+    check("§3c: a bound willing teacher moves standing with their people over time (Calvar)", (c.peopleDisposition.radiant || 0) > before);
+    check("§3c: ten days of drip is a nudge, not a coronation", c.peopleDisposition.radiant < 10);
+  }
+  {
+    const c = { company: [{ npcId: "n1", roles: ["liaison"], liaisonFor: "somatic" }], peopleDisposition: {} };
+    const plain = companyStandingRates(c);
+    const focused = companyStandingRates(c, { focusedPeople: ["somatic"] });
+    check("§3c: a liaison earns faster than a plain member", plain.somatic > DRIP.base);
+    check("§3c: a day spent working with that people earns faster still", focused.somatic > plain.somatic);
+  }
+  {
+    // "uncapped-slow": the rate must decelerate, and must never reach zero.
+    check("§3c: drip decelerates as standing rises", dripScale(0) > dripScale(18));
+    check("§3c: drip never stops entirely — uncapped, per the spec", dripScale(1000) > 0);
+    const c = { teachers: { radiant: { met: true, willing: true } }, peopleDisposition: { radiant: 19 } };
+    accrueStandingForDays(c, 1, { rules: RULES });
+    check("§3c: a party member cannot idle you into `kin` in a day", standingWithPeople(c, "radiant", RULES).band !== "kin");
+  }
+  {
+    const c = { teachers: {}, company: [], peopleDisposition: {} };
+    const r = accrueStandingForDays(c, 5, { rules: RULES });
+    check("§3c: no company, no drip — standing is not weather", r.peoples.length === 0);
+  }
+
+  // §3d — the model reports, the engine adjudicates (the SNG-162 principle).
+  {
+    const c = { peopleDisposition: { somatic: 0 } };
+    const r = applyStandingOps(c, [{ people: "somatic", delta: 99, why: "saved their archive" }], { rules: RULES });
+    check("§3d: an oversized delta is clamped, not refused", r.applied.length === 1 && c.peopleDisposition.somatic <= 4);
+    check("§3d: a single act cannot jump a band", standingWithPeople(c, "somatic", RULES).band === "neutral");
+    check("§3d: the clamp is reported so it is not silent", r.applied[0].held === true && r.applied[0].requested === 99);
+    check("§3d: magnitude and band clamps are reported SEPARATELY — they mean different things", r.applied[0].heldAtMagnitude === true && r.applied[0].heldAtBand === false);
+  }
+  {
+    const c = { peopleDisposition: {} };
+    const r = applyStandingOps(c, [
+      { people: "somatic", delta: 2 },                    // no reason
+      { people: "", delta: 2, why: "x" },                 // no people
+      { people: "nowhere", delta: 2, why: "x" },          // not a real people
+      { people: "somatic", delta: 2, why: "mended a wall" }
+    ], { rules: RULES, knownPeople: new Set(["somatic"]) });
+    check("§3d: an op with no stated reason is refused", r.refused.some(x => x.why === "no-reason"));
+    check("§3d: an op naming a people that does not exist is refused", r.refused.some(x => x.why === "unknown-people"));
+    check("§3d: refusals are recorded, never swallowed", (c._standingOpRefusals || []).length === 3);
+    check("§3d: the valid op still applies alongside refused ones", r.applied.length === 1);
+  }
+  {
+    const c = { peopleDisposition: { somatic: 8 }, company: [{ npcId: "n", roles: ["liaison"], liaisonFor: "somatic" }] };
+    applyStandingOps(c, [{ people: "somatic", delta: 1, why: "spoke for them" }], { rules: RULES, liaisonMult: { somatic: 1.5 } });
+    const c2 = { peopleDisposition: { somatic: 8 } };
+    applyStandingOps(c2, [{ people: "somatic", delta: -1, why: "insulted them" }], { rules: RULES, liaisonMult: { somatic: 1.5 } });
+    check("§3d: a liaison speeds gains", c.peopleDisposition.somatic > 9);
+    check("§3d: a liaison does NOT soften losses", c2.peopleDisposition.somatic === 7);
+  }
+
+  // §3e — one shape for every holder kind.
+  {
+    const c = { peopleDisposition: { somatic: 12 }, deeds: [] };
+    const p = standingFor(c, "somatic", "people", RULES);
+    check("§3e: people and settlement answer the same {holderId,kind,score,band} shape",
+      p.holderId === "somatic" && p.kind === "people" && p.band === "trusted" && typeof p.score === "number");
+    const roster = standingRoster(c, RULES);
+    check("§3e: the roster omits holders who have never heard of you", roster.length === 1);
+  }
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
+

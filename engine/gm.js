@@ -47,6 +47,7 @@ REPLY FORMAT — a single JSON object, no other text:
   "characterDeltas": {"health": 0, "energy": 0, "inventoryAdd": [{"name": "...", "kind": "weapon|tool|consumable|quest|misc", "description": "...", "consumable": false, "effects": {"health": 0, "energy": 0}}], "inventoryRemove": ["exact item name"], "xp": 0},
   "ledgerEvents": [{"what": "...", "tags": ["..."], "visibility": "witnessed", "spectrumDeltas": {}, "impactsLocal": false}],
   "questUpdates": [{"op": "start|progress|complete|fail", "questId": "kebab-id", "title": "...", "summary": "...", "giver": "...", "note": "...", "xpReward": 25}],
+  "standingOps": [{"people": "traditionId", "delta": "integer -3..+3", "why": "one clause: what was actually done for or against them"}],
   "stageOps": [{"questId": "kebab-id", "stageId": "the CURRENT stage's id, exactly as given in STRUCTURED QUESTS", "evidence": "one sentence: what the character actually DID that satisfies it"}],
   "scene": {"setting": "1-2 sentences: EXACTLY where the character is (indoor/outdoor, position, lighting, weather)", "npcsPresent": [{"name": "...", "state": "what they're doing right now"}], "objects": ["notable objects in view or reach"], "threads": ["unresolved in-scene threads (a question hanging, someone waiting for an answer)"]},
   "npcUpdates": [{"op": "meet|update", "npcId": "kebab-id (stable across scenes)", "name": "...", "role": "...", "gender": "their sex/gender in your fiction — woman|man|nonbinary|a free phrase — RECORD IT on meet so a portrait never defaults it", "pronouns": "she/her|he/him|they/them — so narration stays consistent", "description": "one line, on meet", "note": "what passed between you this beat", "learned": ["fact about them / something they experienced"], "skillsObserved": ["skill they demonstrated"], "relationshipDelta": 1, "status": "active|injured|missing|dead|departed", "statusNote": "their CURRENT situation in one line (rescued and safe at the mill, injured in the Zone, now travels with the party) — fed every turn, not just once", "revealName": "their true name, ONLY when the fiction reveals the identity of a known-but-unnamed person", "nameExtend": "MORE of an already-known person's name (a surname, a title) — e.g. you learn Pell's surname is Marsh: nameExtend \"Marsh\" composes \"Pell Marsh\", keeping the given name. Use this, not revealName, when the person is already named", "bondType": "the KIND of bond, set ONLY on a real relational beat: platonic|mentor|student|rival|family|romantic|sworn", "bondStage": "for a romantic bond ONLY, its stage on a genuine beat (a confession, going steady, a vow): courting|together|committed|partner — one step at a time, never leaping"}],
@@ -179,7 +180,7 @@ export function ratingRegister(preset = "PG-13") {
  *  before a breakpoint. Ephemeral per-turn inputs (time, resolution, player words) live
  *  in `player`, which goes AFTER the last breakpoint, uncached. See callClaude systemBlocks. */
 export function tierParts(ctx) {
-  const { character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail, structuredQuestsDetail, sceneState, npcRegistryDetail, placeMemoryDetail, newsDetail, abilityLawDetail, codexDetail, encounterDetail, encounterWeaveDetail, worldPressureDetail, substrateDetail, romanceGuidanceDetail, masteryDetail, availableEncounters, partyDetail, opLossNote, emergenceDetail, perilNote, exactWords, factsDetail, evolvedItemsDetail, itemAdvance, ratingDetail, registerDetail, livingWorldDetail, sharedCanonDetail, legendDetail, worldDateLabel, travelDirective, anomalyDetail, toolkitDetail, waygateDetail, scenePacingDetail, readAloudDetail } = ctx;
+  const { character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail, structuredQuestsDetail, sceneState, npcRegistryDetail, placeMemoryDetail, newsDetail, abilityLawDetail, codexDetail, encounterDetail, encounterWeaveDetail, worldPressureDetail, substrateDetail, romanceGuidanceDetail, masteryDetail, availableEncounters, partyDetail, opLossNote, emergenceDetail, perilNote, exactWords, factsDetail, evolvedItemsDetail, itemAdvance, ratingDetail, registerDetail, livingWorldDetail, sharedCanonDetail, legendDetail, worldDateLabel, travelDirective, anomalyDetail, toolkitDetail, waygateDetail, scenePacingDetail, readAloudDetail, standingDetail } = ctx;
   const system = [], world = [], scene = [], state = [], player = [];
 
   // ---- TIER 1: rules/constitution (constant; GM_SYSTEM is prepended in gmTurn) ----
@@ -202,6 +203,11 @@ export function tierParts(ctx) {
   if (region?.activeEvents?.length) world.push(`## ACTIVE WORLD EVENTS\n${region.activeEvents.map(e => `- ${e.summaryForGM}`).join("\n")}`);
   if (newsDetail) world.push(`## RECENT NEWS in the valley (rumors NPCs may repeat; things that happened while the character was elsewhere)\n${newsDetail}`);
   if (abilityLawDetail) world.push(`## ABILITY LAW (rule 2 — what powers can, cannot, and are not for at current rank)\n${abilityLawDetail}`);
+  // BATCH-12 §3: WORLD tier — standing is stable while you are somewhere, so it caches with the
+  // world rather than re-costing every turn. A people's welcome should not have to be re-narrated
+  // from scratch each beat.
+  if (standingDetail) world.push(`## HOW YOU ARE REGARDED (standing — bands are earned; do not invent a warmer welcome than this)
+${standingDetail}`);
   if (npcRegistryDetail) world.push(`## KNOWN PEOPLE (established fact — see rule 14; reuse these people, never reinvent them)\n${npcRegistryDetail}`);
   if (codexDetail) world.push(`## CODEX — what ${character.name} KNOWS that's relevant here (rule 17; don't re-explain, let them act on it)\n${codexDetail}`);
   if (livingWorldDetail) world.push(`## LIVING WORLD — content GROWN through play that is ALREADY real here (durable; reference it naturally by name, honor its accumulated facts, and NEVER re-introduce it as if new). Tagged by canon tier + weight; established/nominated are firm personal canon.\n${livingWorldDetail}`);
@@ -340,7 +346,7 @@ export function salvageOps(raw) {
   // `discovery`, `newEncounter` and `newAbility` were documented and NOT here — a truncated reply
   // lost a discovery or a granted ability outright. tests/wiring_audit.mjs now gates this list
   // against the contract so the two can never drift again.
-  const keys = ["questUpdates", "stageOps", "npcUpdates", "placeUpdates", "codexUpdates", "deeds", "ledgerEvents", "encounterOps", "characterDeltas", "scene", "relationshipDeltas", "timeOps", "moveTo", "stateOps", "itemUpdates", "gambitOps", "markDefiningMoment", "markTeacher", "offerPromotion", "offerAcquisition", "offerIntent", "generateRequest", "imagePrompt", "unlockSubstrate", "unlockPrecursor", "factUpdates", "discovery", "newEncounter", "newAbility"];
+  const keys = ["questUpdates", "stageOps", "standingOps", "npcUpdates", "placeUpdates", "codexUpdates", "deeds", "ledgerEvents", "encounterOps", "characterDeltas", "scene", "relationshipDeltas", "timeOps", "moveTo", "stateOps", "itemUpdates", "gambitOps", "markDefiningMoment", "markTeacher", "offerPromotion", "offerAcquisition", "offerIntent", "generateRequest", "imagePrompt", "unlockSubstrate", "unlockPrecursor", "factUpdates", "discovery", "newEncounter", "newAbility"];
   const text = String(raw || "");
   for (const key of keys) {
     const m = text.indexOf('"' + key + '"');

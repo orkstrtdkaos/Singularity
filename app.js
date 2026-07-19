@@ -5,7 +5,8 @@ import { loadContent, loreForLocation, eventsForGM, getPlayerKey, setPlayerKey, 
 import { resolveAction, successChance, applyEnergyCost } from "./engine/resolve.js";
 import { senseAction, senseTier, senseOpponent } from "./engine/sense.js";
 import { synthesizeOpponentSheet } from "./engine/skill_battle.js";
-import { recordDeed, standingWith, standingWithPeople, reputationSummary } from "./engine/reputation.js";
+import { recordDeed, standingWith, reputationSummary } from "./engine/reputation.js";
+import { seedStandingAtCreation, accrueStandingForDays, applyStandingOps, standingRoster } from "./engine/standing.js"; // BATCH-12 §3
 import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, touchSession, endSession, sessionLog, buildSessionPrompt, authorshipStats, crossCharacterAuthorship } from "./engine/chronicle.js";
 import { newProfile, updateProfile, aptitudeMods, profileInsight, grantAptitudes, fadingAptitudes, ensureCharacterStyle, ensureRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, revokeAdultGate, RATING_ORDER, RATING_LEVEL } from "./engine/playerprofile.js";
 import { gmTurn, parseIntent, gmAsk, generateBio, suggestBuild, extractGambit, sanitizeScene, narrativeRegister, ratingRegister, bluntnessDirective } from "./engine/gm.js";
@@ -56,7 +57,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.131";
+const APP_VERSION = "1.8.132";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2175,6 +2176,7 @@ function renderCreate() {
     applyNativeGrants(character, CONTENT.rules); // SNG-101b: granted their primary tradition's basics by right of being what they are
     seedInnateSubstrate(character, originRecord(character.origin), fullCatalog()); // SNG-131: a substrate-keeper is born with innate precursor/living-current ACCESS + the center's braid discount
     { const g = backgroundById(character.background)?.grantsAptitudes; if (g?.length) grantAptitudes(character, g, CONTENT.rules.playerAptitudes, CONTENT.rules); } // SNG-113: lineage aptitude(s)
+    seedStandingAtCreation(character, { traditionIndex: CONTENT.traditionIndex, rules: CONTENT.rules, day: 1 }); // BATCH-12 §3b: being Rootkin-born should mean the Rootkin have heard of you
     character.nativeGrantsVersion = 1; // born with the starter kit — no retro native-grant owed
     character.reconcileVersion = topReconcileVersion("character"); // born current — no migration owed (no aggregate seed)
     character.pendingSubPoints = 2; // shape your edge from day one — specialize two subs
@@ -2956,6 +2958,44 @@ function applyTurn(turn, resolution, playerWords = null) {
   const hours = declared ? Math.max(0.25, Math.min(72, Number(turn.timeOps.hoursPassed))) : beatDefault;
   advanceClock(character.clock, hours);
   if (declared && hours >= 2) autoVerifyLeg("b8-time", `narrative time moved ${hours}h via timeOps`); // SNG-051 auto-verify
+  // BATCH-12 §3c: the company you keep earns standing with their people, on the IN-GAME DAY. Erik's
+  // Calvar case — a willing Radiant teacher travelling with him and zero Radiant standing, because
+  // only a quest with a `people` effect ever wrote to it. The day is the clock (ROUND 2): per-scene
+  // would reward a talky evening, per-session would reward real-world habit. "Calvar has been with
+  // you eleven days" is a sentence; "nine scenes" is not.
+  {
+    const daysPassed = hours / 24;
+    // FOCUSED (§3c) is DERIVED, never model-judged. Two of the spec's three triggers are available:
+    //   · "use of their craft" — the tradition of the ability actually used this turn
+    //   · "work at their behest" — a people this turn's standingOps names
+    // The third, "travel in their country", is NOT derivable: a location carries `communityId` (a
+    // settlement) and `regionId`, and NOTHING maps either to a people. `nativeLogic` is a paragraph
+    // of GM prose, not an id — passing it here would have shipped a sentence as a tradition. That
+    // link is SNG-166's lane (region derivation); when it lands, add it to this list and nowhere else.
+    const usedAbility = resolution?.action?.abilityId || (resolution?.action?.comboAbilities || [])[0] || null;
+    const craftPeople = usedAbility ? traditionOf(fullCatalog()[usedAbility], CONTENT.traditionIndex) : null;
+    const focusedPeople = [...new Set([
+      craftPeople,
+      ...(turn.standingOps || []).map(o => o && o.people).filter(Boolean)
+    ].filter(Boolean))];
+    const drip = accrueStandingForDays(character, daysPassed, { rules: CONTENT.rules, focusedPeople, day: absoluteWorldDay() });
+    for (const m of drip.moved) turn.narration = (turn.narration || "") + `\n\n*✦ The ${traditionLabel(m.people)} now count you ${m.to}.*`;
+    if (drip.moved.length) autoVerifyLeg("b12-standing-drip", `standing with ${drip.moved[0].people} reached ${drip.moved[0].to} from company alone`);
+  }
+  // BATCH-12 §3d: STANDING OPS — an act that plainly helps or offends a people, without a quest.
+  // Model reports, engine adjudicates (SNG-162). Clamped twice: ±3, and never across a band edge.
+  if (turn.standingOps?.length) {
+    const known = new Set(Object.keys(CONTENT.traditionIndex?.byId || {}));
+    const so = applyStandingOps(character, turn.standingOps, {
+      rules: CONTENT.rules, knownPeople: known.size ? known : null,
+      day: absoluteWorldDay(), liaisonMult: liaisonFactions(character)
+    });
+    for (const a of so.applied) {
+      turn.narration = (turn.narration || "") + `\n\n*✦ ${traditionLabel(a.people)}: ${a.delta > 0 ? "+" : ""}${a.delta} — ${a.why}${a.held ? " (held at the band's edge)" : ""}.*`;
+    }
+    if (so.refused.length) console.warn("[standing] ops refused:", character._standingOpRefusals);
+    if (so.applied.length) autoVerifyLeg("b12-standing-ops", `a narrated act moved standing with ${so.applied[0].people}`);
+  }
   // SNG-056: THE HEADER FOLLOWS THE FICTION. When the GM narration moved the character to a real
   // place, update the AUTHORITATIVE currentLocationId so every location surface (header, map "you
   // are here", GM context) agrees with the prose — instead of the header showing a stale place.
@@ -5108,10 +5148,13 @@ function chronicleViewCtx(character) {
     .slice(0, 8)
     .map(n => ({ id: n.id, name: n.name, label: relationshipLabel(n) })); // SNG-134: id → the shared name-hover
   const traditions = [character.domains?.primary, character.domains?.secondary, character.domains?.tertiary].filter(Boolean);
-  const standing = [];
-  for (const t of traditions) { const s = standingWithPeople(character, t, CONTENT.rules); if (s.score) standing.push({ who: traditionLabel(t), band: s.band }); }
+  // BATCH-12 §3: this used to iterate ONLY the character's own three domains, so standing with any
+  // OTHER people could never appear no matter what the character earned — a second, quieter reason
+  // Erik's standing panel read empty. standingRoster returns every holder with a non-zero score,
+  // people and settlements in one shape (§3e), strongest first.
   const home = CONTENT.locations?.[character.currentLocationId]?.communityId;
-  if (home) { const s = standingWith(character, home, CONTENT.rules); if (s.score) standing.push({ who: CONTENT.locations[character.currentLocationId]?.name || home, band: s.band }); }
+  const standing = standingRoster(character, CONTENT.rules, { settlements: [home].filter(Boolean) })
+    .map(s => ({ who: s.kind === "people" ? traditionLabel(s.holderId) : (CONTENT.locations?.[character.currentLocationId]?.name || s.holderId), band: s.band }));
   const dshape = traditions.map(traditionLabel).join(" · ");
   const fore = (character.foreclosed || []).length ? ` Foreclosed (braid-only): ${character.foreclosed.map(traditionLabel).join(", ")}.` : "";
   const aim = character.bio?.currentAim || character.bio?.motivation || "";

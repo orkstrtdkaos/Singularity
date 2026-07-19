@@ -18,6 +18,7 @@ import { dedupeQuests } from "./quests.js";
 import { dedupeInventory } from "./inventory.js";
 import { inferDomains } from "./traditions.js";
 import { fallbackPersonalArc } from "./personalArc.js";
+import { seedStandingAtCreation } from "./standing.js";
 
 // ---------- character migration steps (extensible registry) ----------
 // Each step: { version, id, playerFacing, apply(entity, ctx) → { notes?, offers?, warnings? } }.
@@ -130,6 +131,25 @@ export const CHARACTER_STEPS = [
       c.personalArc = arc;
       c._personalArcNeedsEnrich = true;                   // app.js picks this up and enriches once
       return { notes: [`Your own thread has surfaced — *${arc.name}*. It's waiting in your quest log; take it up when you're ready.`] };
+    }
+  },
+  {
+    version: 8, id: "standing-seed-backfill", playerFacing: true,
+    // BATCH-12 §3b. Standing at creation ships in the same batch as this step, so EVERY character
+    // that exists today was born without it — including Erik's, who is level 16 and unknown to his
+    // own people. Same shape as v7's personalArc backfill: a save from before a feature existed
+    // gains what it is owed on next login.
+    //
+    // seedStandingAtCreation is idempotent by construction — it writes only peoples with no entry at
+    // all — so a character whose play HAS moved a score keeps it, and re-running this can never
+    // inflate anything. That property is what makes it safe to reuse the creation path here rather
+    // than writing a second, subtly different one.
+    apply: (c, ctx) => {
+      if (!c.domains?.primary) return {};                       // nothing to seed FROM; never invent a people
+      const r = seedStandingAtCreation(c, { traditionIndex: ctx.content?.traditionIndex || null, rules: ctx.content?.rules || {} });
+      if (!r.count) return {};
+      const nm = t => ctx.content?.traditionIndex?.byId?.[t]?.name || t;
+      return { notes: [`Word of who you are has caught up with you: ${r.seeded.map(x => `the ${nm(x.people)} ${x.delta > 0 ? "know your name" : "do not"}`).join(", ")}.`] };
     }
   },
   {

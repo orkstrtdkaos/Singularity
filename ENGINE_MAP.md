@@ -4,7 +4,7 @@
 > Mechanical columns are derived from the static import graph, which is complete: `app.js` contains **zero dynamic imports**.
 > **`purpose` and `player-visible surface` are AUTHORED** in `scripts/engine_map.authored.json` and are never overwritten by a regeneration.
 
-**53 modules · 22/53 described.** `player-visible surface: NONE` is the flag that matters — it is a different question from reachability, and it is how a capability gets built, tested, and never met.
+**54 modules · 23/54 described.** `player-visible surface: NONE` is the flag that matters — it is a different question from reachability, and it is how a capability gets built, tested, and never met.
 
 **How each derived column is measured** — so the columns can be trusted or corrected rather than believed:
 
@@ -19,11 +19,11 @@
 | `engine/quests.js` | Quests as typed state the GM drives through clamped ops — the model proposes, the engine adjudicates and refuses in the open. | The quest panel: active quests, stage progress lines (✦ …), the resolution choice when every stage is done, and refusal notes when the GM names the wrong stage. | 15 | `namematch.js` | `codex.js` `generate.js` `gm_registry.js` `npcs.js` `progression.js` `reconcile.js` `app.js` | **19** | `.arcId` `.boundToCharacter` | `questUpdates` `stageOps` |
 | `engine/playerprofile.js` | Player identity across characters, and the earned play-style (tendencies, aptitudes) that accrues on each character from how it is actually played. | The profile screen's play-style readout, and the character-select roster. | 19 | — | `art.js` `canon.js` `app.js` | **15** | — | — |
 | `engine/art.js` | Images for characters, locations, items, NPCs and big moments, from either a static file or a generated prompt, behind one seam. | Every image in the app: location art, portraits, item art, the moment gallery. | 20 | `playerprofile.js` | `corrections.js` `npcs.js` `app.js` | **13** | `.descriptionSeed` `.encounterFlavor` `.voiceHints` `.arcId` | `imagePrompt` |
+| `engine/traditions.js` | The Great Circle geometry — the 24-station ring, neighbours, antipodes and distances — read from content, never hardcoded. | The skill wheel's ring layout and the tradition labels shown on abilities and standing. | 14 | — | `functions.js` `progression.js` `reconcile.js` `standing.js` `state.js` `app.js` | **13** | — | — |
 | `engine/npcs.js` | NPC permanence — everyone met, authored or invented mid-scene, gets a durable registry entry the GM writes to through clamped npcUpdates. | The people list and each NPC's detail card: who they are, where you met, what has passed between you. | 17 | `art.js` `namematch.js` `quests.js` | `companions.js` `company.js` `corrections.js` `entityDetail.js` `gm_registry.js` `worldtick.js` `app.js` | **12** | `.communityId` `.homeLocation` `.pronouns` `.relationships` | `npcUpdates` `relationshipDeltas` |
-| `engine/traditions.js` | The Great Circle geometry — the 24-station ring, neighbours, antipodes and distances — read from content, never hardcoded. | The skill wheel's ring layout and the tradition labels shown on abilities and standing. | 14 | — | `functions.js` `progression.js` `reconcile.js` `state.js` `app.js` | **12** | — | — |
+| `engine/reputation.js` | Deeds are the source of truth and reputation is a VIEW over them — a community's opinion is the sum of the deeds it knows about. | The standing list on the character screen (band per people). Empty for most players today — the gap BATCH-12 §3 exists to close. | 5 | — | `gm.js` `progression.js` `standing.js` `app.js` | **11** | `.communityId` | `deeds` |
 | `engine/skilltree.js` | Skill legibility and gating: tiers, attribute gates, and what is learnable now versus later. | The skill wheel and skill graph — tier rings, locked/unlocked state, and the reason a locked ability is locked. | 22 | — | `intensity.js` `progression.js` `app.js` | **9** | — | — |
 | `engine/company.js` | The unified company: companion, trainer, liaison, partner and ally are stacking ROLES a person in your party holds, each wired to the system that already implements it. | The company panel — who travels with you and what each one is to you. | 11 | `npcs.js` | `progression.js` `app.js` | **8** | `.teaches` `.liaisonFor` | — |
-| `engine/reputation.js` | Deeds are the source of truth and reputation is a VIEW over them — a community's opinion is the sum of the deeds it knows about. | The standing list on the character screen (band per people). Empty for most players today — the gap BATCH-12 §3 exists to close. | 5 | — | `gm.js` `progression.js` `app.js` | **8** | `.communityId` | `deeds` |
 | `engine/progression.js` | Character growth with numbers you can point at — sub-attributes, levelling, ability acquisition and the receipts for each. | Level-up prompts, the attribute allocation screen, new-ability offers, and the ✦ receipt lines when something is earned. | 34 | `company.js` `namematch.js` `quests.js` `reputation.js` `skilltree.js` `traditions.js` | `backfill.js` `corrections.js` `gm.js` `gm_registry.js` `practice.js` `app.js` | **7** | — | `markDefiningMoment` `newAbility` `offerPromotion` |
 | `engine/genschema.js` | *— unstated —* | *—* | 3 | — | `generate.js` | **6** | — | — |
 | `engine/resolve.js` | *— unstated —* | *—* | 4 | — | `gambit.js` `sense.js` `skill_battle.js` `app.js` | **6** | — | — |
@@ -33,12 +33,13 @@
 | `engine/inventory.js` | *— unstated —* | *—* | 17 | `namematch.js` | `entityDetail.js` `gm_registry.js` `reconcile.js` `app.js` | **5** | — | `itemUpdates` |
 | `engine/personalArc.js` | *— unstated —* | *—* | 4 | — | `reconcile.js` `app.js` | **4** | — | — |
 | `engine/practice.js` | Competency as the residue of attention — an engine-owned ledger of ability use and co-activation that unlocks ranks at zero skill-point cost. | Aspiration progress and the unlock notices when practice crosses a threshold. | 15 | `namematch.js` `progression.js` | `backfill.js` `evolution.js` `gm_registry.js` `app.js` | **4** | — | — |
+| `engine/standing.js` | How a people regards you — seeded at creation from who you are, drifting with the company you keep, and moved by narrated acts the engine adjudicates rather than the model. | The standing list on the Chronicle (band per people and settlement), the ✦ receipt when a band changes, and the GM's own knowledge of your welcome. | 11 | `reputation.js` `traditions.js` | `gm_registry.js` `reconcile.js` `app.js` | **4** | `.teaches` `.liaisonFor` | — |
 | `engine/sync.js` | *— unstated —* | *—* | 14 | — | `party.js` `worldtick.js` `app.js` | **4** | — | — |
 | `engine/canon.js` | *— unstated —* | *—* | 17 | `generate.js` `namematch.js` `playerprofile.js` | `worldtick.js` | **3** | `.regionId` | — |
 | `engine/companions.js` | *— unstated —* | *—* | 7 | `npcs.js` | `backfill.js` `gm_registry.js` `app.js` | **3** | `.voiceHints` `.knowledge` `.appearance` `.hooks` | — |
 | `engine/functions.js` | *— unstated —* | *—* | 11 | `traditions.js` | `gm_registry.js` `toolkit.js` `app.js` | **3** | `function_vocabulary.json` | — |
 | `engine/legends.js` | *— unstated —* | *—* | 7 | — | `state.js` `app.js` | **3** | — | — |
-| `engine/reconcile.js` | *— unstated —* | *—* | 5 | `codex.js` `inventory.js` `personalArc.js` `quests.js` `traditions.js` | `state.js` `app.js` | **3** | `.connections` `.poleIntensity` | — |
+| `engine/reconcile.js` | *— unstated —* | *—* | 5 | `codex.js` `inventory.js` `personalArc.js` `quests.js` `standing.js` `traditions.js` | `state.js` `app.js` | **3** | `.connections` `.poleIntensity` | — |
 | `engine/skill_battle.js` | *— unstated —* | *—* | 4 | `resolve.js` | `encounters.js` `app.js` | **3** | — | — |
 | `engine/worldtime.js` | *— unstated —* | *—* | 14 | — | `gm_registry.js` `worldtick.js` `app.js` | **3** | — | `timeOps` |
 | `engine/corrections.js` | *— unstated —* | *—* | 5 | `art.js` `namematch.js` `npcs.js` `progression.js` | `gm_registry.js` `app.js` | **2** | `.pronouns` | — |
@@ -59,7 +60,7 @@
 | `engine/chronicle.js` | *— unstated —* | *—* | 10 | `generate.js` | `app.js` | **1** | — | — |
 | `engine/entityDetail.js` | *— unstated —* | *—* | 4 | `inventory.js` `npcs.js` | `app.js` | **1** | — | — |
 | `engine/gambit.js` | *— unstated —* | *—* | 6 | `claude.js` `resolve.js` `sense.js` | `app.js` | **1** | — | — |
-| `engine/gm_registry.js` | The declared table of everything the GM can be told — one row per context block, iterated at every call site so a capability cannot be built and left unreachable. | NONE. It is the §23 wiring contract itself; the player meets it only as a GM that knows things. | 3 | `codex.js` `companions.js` `corrections.js` `encounters.js` `evolution.js` `facts.js` `functions.js` `generate.js` `gm.js` `inventory.js` `narration_voice.js` `npcs.js` `party.js` `places.js` `practice.js` `progression.js` `quests.js` `state.js` `toolkit.js` `waygate.js` `worldtick.js` `worldtime.js` | `app.js` | **1** | `CONTENT.region` `CONTENT.events` `CONTENT.lore` `CONTENT.rules` | — |
+| `engine/gm_registry.js` | The declared table of everything the GM can be told — one row per context block, iterated at every call site so a capability cannot be built and left unreachable. | NONE. It is the §23 wiring contract itself; the player meets it only as a GM that knows things. | 3 | `codex.js` `companions.js` `corrections.js` `encounters.js` `evolution.js` `facts.js` `functions.js` `generate.js` `gm.js` `inventory.js` `narration_voice.js` `npcs.js` `party.js` `places.js` `practice.js` `progression.js` `quests.js` `standing.js` `state.js` `toolkit.js` `waygate.js` `worldtick.js` `worldtime.js` | `app.js` | **1** | `CONTENT.region` `CONTENT.events` `CONTENT.lore` `CONTENT.rules` | — |
 | `engine/intensity.js` | *— unstated —* | *—* | 10 | `skilltree.js` | `app.js` | **1** | — | — |
 | `engine/intent.js` | Intent confirmation for costly acts — nothing irreversible or world-scale commits until the player confirms, the same shape character creation already uses. | The confirmation card before a harmful or departing act, naming the cost in plain language. | 7 | — | `app.js` | **1** | `.regionId` | `offerIntent` |
 | `engine/pacing.js` | *— unstated —* | *—* | 4 | — | `app.js` | **1** | — | — |
@@ -71,9 +72,9 @@
 
 ## GM verbs handled inside `app.js` itself
 
-16 of the reply contract's ops never reach an engine module — `applyTurn` handles them inline. Some of those are correct (a narration flag has nowhere else to live); some are engine logic sitting in the view layer, which is where it gets hard to test.
+17 of the reply contract's ops never reach an engine module — `applyTurn` handles them inline. Some of those are correct (a narration flag has nowhere else to live); some are engine logic sitting in the view layer, which is where it gets hard to test.
 
-`characterDeltas` · `discovery` · `gambitApt` · `gambitOps` · `generateRequest` · `ledgerEvents` · `markTeacher` · `momentArt` · `offerAcquisition` · `sceneEnded` · `stateOps` · `timeAdvanceHours` · `unlockLivingCurrent` · `unlockPrecursor` · `unlockSubstrate` · `unlockWildCurrent`
+`characterDeltas` · `discovery` · `gambitApt` · `gambitOps` · `generateRequest` · `ledgerEvents` · `markTeacher` · `momentArt` · `offerAcquisition` · `sceneEnded` · `standingOps` · `stateOps` · `timeAdvanceHours` · `unlockLivingCurrent` · `unlockPrecursor` · `unlockSubstrate` · `unlockWildCurrent`
 
 ## Blast radius — read this before changing a module
 
@@ -83,8 +84,8 @@
 - `engine/quests.js` — **19** modules downstream, serves `questUpdates` `stageOps`
 - `engine/playerprofile.js` — **15** modules downstream
 - `engine/art.js` — **13** modules downstream, serves `imagePrompt`
+- `engine/traditions.js` — **13** modules downstream
 - `engine/npcs.js` — **12** modules downstream, serves `npcUpdates` `relationshipDeltas`
-- `engine/traditions.js` — **12** modules downstream
+- `engine/reputation.js` — **11** modules downstream, serves `deeds`
 - `engine/skilltree.js` — **9** modules downstream
-- `engine/company.js` — **8** modules downstream
 

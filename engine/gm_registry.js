@@ -50,6 +50,7 @@ import { functionCoverage } from "./functions.js";
 import { partyBlockForGM } from "./party.js";
 import { narrativeRegister } from "./gm.js";
 import { livingWorldForGM } from "./generate.js";
+import { standingForGM } from "./standing.js"; // BATCH-12 §3
 import { worldDate } from "./worldtime.js";
 import { encounterReceiptForGM } from "./encounters.js";
 import { waygateBlockForGM } from "./waygate.js";
@@ -83,6 +84,13 @@ export const GM_CONTEXT = [
   { key: "npcRegistryDetail", builder: "npcs.npcRegistryForGM", carries: ["known people", "bonds", "gender/pronouns"],
     reachedBy: "always", spec: "§13", views: ALL,
     build: (env) => npcRegistryForGM(env.character, { locationId: env.character.currentLocationId, sceneNpcNames: (env.sceneState?.npcsPresent || []).map(n => n.name) }) },
+
+  // BATCH-12 §3: who regards you how, across BOTH holder kinds. Without this the GM could describe a
+  // people's welcome only from the settlement deed-reputation it already had, so a character the
+  // Radiants counted as kin was met by strangers.
+  { key: "standingDetail", builder: "standing.standingForGM", carries: ["people standing", "settlement standing", "bands"],
+    reachedBy: "always", spec: "BATCH-12 §3", views: ALL,
+    build: (env) => standingForGM(env.character, env.CONTENT.rules, { settlements: [env.location?.communityId].filter(Boolean) }) },
 
   // ---- shared by turn + ask + gambit ----
   { key: "inventoryDetail", builder: "inventory.inventoryForGM", carries: ["carried items", "uses"],

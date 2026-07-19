@@ -13,7 +13,6 @@
     "gate WARNS on an undescribed module and FAILS on a half-described one, because a purpose with no",
     "surface reads as complete when it is not."
   ],
-
   "namematch.js": {
     "purpose": "The one name-resolution primitive — slugify and fuzzy-match an entity the same way everywhere, so codex, quests and inventory can never disagree about what the GM just named.",
     "playerVisibleSurface": "Indirect but constant: every id the player sees, and the quest panel's \"couldn't match\" note when the GM names something that does not resolve."
@@ -101,5 +100,9 @@
   "gm_registry.js": {
     "purpose": "The declared table of everything the GM can be told — one row per context block, iterated at every call site so a capability cannot be built and left unreachable.",
     "playerVisibleSurface": "NONE. It is the §23 wiring contract itself; the player meets it only as a GM that knows things."
+  },
+  "standing.js": {
+    "purpose": "How a people regards you — seeded at creation from who you are, drifting with the company you keep, and moved by narrated acts the engine adjudicates rather than the model.",
+    "playerVisibleSurface": "The standing list on the Chronicle (band per people and settlement), the ✦ receipt when a band changes, and the GM's own knowledge of your welcome."
   }
 }

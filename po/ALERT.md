@@ -569,3 +569,41 @@ the last thing between three shipped mechanisms and the outcomes Erik reported.
 
 STILL OPEN AND YOURS: stakes-dial default, re_creature_chase's danger number, the reproduced-symptom
 verification of SNG-179, and the registry-only-NPC affiliation gap. -->
+
+---
+
+<!-- status: SNG-185 hub-attribution COMPLETE_PENDING_REVIEW (CCode 2026-07-19). v1.8.156. Suite
+green, verified by exit code. Results: po/results/20260719_SNG-185_hub_attribution.md. This CLOSES
+the single upstream dependency the last three blocks kept naming.
+
+YOUR ONE-LINE GAP WAS EXACT — two paths mint people, only generate.js stamped domains. §5.1 answered
+by DOING it: generate.js:affiliationFor is no longer a second implementation, it delegates to a new
+engine/affiliation.js that the GM meet-path (npcs.js applyNpcUpdates) and the reconcile v11 backfill
+also call. One rule now. The shared version is a strict superset, so generation gains role +
+skillsObserved reading with nothing regressed.
+
+§5.2 — SAFE, and I did NOT add a third required-on-meet field. You warned the list (gender,
+appearance) is getting long and the model drops fields under load; deriving from the ROLE the model
+already writes sidesteps it entirely. Order per §3: role string FIRST, skillsObserved second, region
+home LAST (marked derived, half-weight). §5.3 backfill uses that same order.
+
+⛔ THE TRAP AVOIDED, STRUCTURALLY not carefully — readPeople and readDomains match SEPARATE
+vocabularies and share no code path. The Crossing Ent resolves people:ent AND no domain invented from
+being an Ent. Whole-word too, so `mason` never matches inside `stonemasonry`. Erik's SNG-174 ruling
+made mechanical.
+
+⚠️ AN HONEST NUMBER: the backfill affiliated 1 of 21 registry NPCs and that is CORRECT. 20 were met
+in the VALLEY, home to no single tradition, and their roles name no craft — so region-fallback rightly
+abstains (§4.4, never assign what the record cannot support) rather than manufacturing 20 domains.
+I'd rather report 1/21 with the reason than tune the fallback to fire for the mixed basin.
+
+VETH: the DOMAIN half — the blocker — is CLOSED. She carries ashwarden (source role) after backfill;
+markTeacher would resolve it and open the capstone gate. The remaining half is the model setting
+bondType:"mentor" on the live turn (the SNG-179 rebalance) — that stays your reproduced-symptom check.
+THE ENT was never in Silas's registry at all (SNG-179 finding), so nothing to backfill; going forward
+the meet-path stamps it people:ent at meet. 14 new tests, all acceptance points. affiliation.js earned
+its SYSTEM_SPEC row + three ENGINE_MAP columns (my own ratchets caught the omission).
+
+STILL OPEN AND YOURS: stakes-dial default, re_creature_chase's danger number, and the reproduced-
+symptom verification of SNG-179 (now unblocked on the domain half). -->
+

@@ -44,7 +44,9 @@
     "kind": "sink",
     "delta": -0.14,
     "radius": 130,
-    "reason": "Sealed and at peace. The Stillhold gave the lattice up as part of the same vow that gave up the war."
+    "reason": "Sealed and at peace. The Stillhold gave the lattice up as part of the same vow that gave up the war.",
+    "radiusWorld": 0.078,
+    "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
   },
   "axisVector": [
     0.0,

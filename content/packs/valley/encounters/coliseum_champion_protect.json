@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "coliseum_champion_protect",
+  "type": "duel",
+  "name": "The Bout: The Held Line",
+  "locationId": "the_great_coliseum",
+  "setup": "Vantia does not advance. She has held this cell eleven times and won nine without a single offensive exchange. The bell is her ally and she knows exactly how far away it is.",
+  "lethal": false,
+  "opponent": {
+    "name": "Vantia of the Stillhold",
+    "health": 6,
+    "threat": 28,
+    "yieldAt": 2,
+    "fleeDifficulty": 20,
+    "spectrum": {
+      "violence_peace": 0.5
+    },
+    "tacticTags": [
+      "will-not-be-moved",
+      "covers-the-opening",
+      "absorbs-and-waits",
+      "counts-down-the-bell"
+    ]
+  }
+}

@@ -19,7 +19,7 @@ import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, AD
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { substrateVerdict, locationDensity, carriedSubstrate } from "./engine/substrate.js"; // SNG-090
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed } from "./engine/art.js";
-import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, locationTierNodes, interiorLayout } from "./engine/worldmap.js";
+import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal } from "./engine/traditions.js";
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs } from "./engine/companions.js";
@@ -56,7 +56,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.126";
+const APP_VERSION = "1.8.127";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3805,16 +3805,18 @@ function renderMap(selectedId = null) {
   if (mapTier === "world") return renderMapWorld();
   if (mapTier === "location") return renderMapLocation(mapFocus);
   const focusRegion = mapFocus || currentRegionId();
-  const locs = Object.values(CONTENT.locations).filter(l => (l.regionId || l.region) === focusRegion);
+  // CCODE-12: call the TESTED function instead of re-deriving it here. The inline filter this
+  // replaces was written 90 minutes after regionTierNodes shipped with 8 passing tests, and dropped
+  // the region-boundary edge filtering the real one does — so an edge leaving the region drew as if
+  // it belonged to it. The reachability audit caught its own author; this is that finding closed.
+  const { locations: locs, edges: regionEdges } = regionTierNodes(CONTENT, character, focusRegion);
   const here = character.currentLocationId;
   const connectedToHere = CONTENT.locations[here]?.connections || [];
-  // dedupe edges
-  const edges = [];
-  const seen = new Set();
-  for (const l of locs) for (const c of l.connections || []) {
-    const key = [l.id, c].sort().join("~");
-    if (!seen.has(key) && CONTENT.locations[c]) { seen.add(key); edges.push([l.id, c]); }
-  }
+  // CCODE-12: edges come from regionTierNodes too. The inline version this replaces accepted ANY
+  // connection whose target merely existed in CONTENT.locations — including targets in a DIFFERENT
+  // region, which at the region tier drew a line to a node that isn't on the canvas. That is the
+  // untested divergence the audit predicted from the duplicate existing at all.
+  const edges = regionEdges;
   const stage = character.worldState?.eventStages?.water_crisis?.stage ?? 1;
   const isVisited = id => (character.placeMemory?.[id]?.visits || 0) > 0 || id === here;
   const isKnown = id => isPlaceKnown(character, id, CONTENT.locations); // SNG-117: heard-of / adjacent / en-route, not just visited

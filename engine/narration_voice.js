@@ -35,7 +35,7 @@ const LEGACY_MARKERS = [/\balbert\b/i, /\bzarvox\b/i, /\bbad news\b/i, /\bbells\
 
 /** PURE. Score one voice. Higher is better. Language match is a tie-breaker BELOW quality —
  *  the opposite of Heimrún's ordering, and the whole point of §1. */
-export function voiceScore(voice, { lang = "en" } = {}) {
+export function voiceScore(voice, { lang = "en" } = {}) { // registry:internal
   if (!voice) return -Infinity;
   const name = String(voice.name || "");
   let score = 0;

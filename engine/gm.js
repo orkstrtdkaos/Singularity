@@ -269,7 +269,7 @@ export function tierParts(ctx) {
 
 /** Cache-tier blocks for the runtime prompt: four stable→volatile prefix tiers, then the
  *  uncached player turn. Tier 1's constant rules are folded onto GM_SYSTEM by the caller. */
-export function buildTiers(ctx) {
+export function buildTiers(ctx) { // registry:internal
  // registry:internal
   const t = tierParts(ctx);
   return {
@@ -334,7 +334,12 @@ export function salvageNarration(raw) {
  *  ops that later clamp-validate will ever apply — salvage never widens trust. */
 export function salvageOps(raw) {
   const out = {};
-  const keys = ["questUpdates", "npcUpdates", "placeUpdates", "codexUpdates", "deeds", "ledgerEvents", "encounterOps", "characterDeltas", "scene", "relationshipDeltas", "timeOps", "moveTo", "stateOps", "itemUpdates", "gambitOps", "markDefiningMoment", "markTeacher", "offerPromotion", "offerAcquisition", "offerIntent", "generateRequest", "imagePrompt", "unlockSubstrate", "unlockPrecursor"];
+  // CCODE-12 (SNG-165 §6): the contract documents these and the salvager must be able to recover
+  // them, or a stray comma in a long reply silently drops an op the player earned. `factUpdates`,
+  // `discovery`, `newEncounter` and `newAbility` were documented and NOT here — a truncated reply
+  // lost a discovery or a granted ability outright. tests/wiring_audit.mjs now gates this list
+  // against the contract so the two can never drift again.
+  const keys = ["questUpdates", "npcUpdates", "placeUpdates", "codexUpdates", "deeds", "ledgerEvents", "encounterOps", "characterDeltas", "scene", "relationshipDeltas", "timeOps", "moveTo", "stateOps", "itemUpdates", "gambitOps", "markDefiningMoment", "markTeacher", "offerPromotion", "offerAcquisition", "offerIntent", "generateRequest", "imagePrompt", "unlockSubstrate", "unlockPrecursor", "factUpdates", "discovery", "newEncounter", "newAbility"];
   const text = String(raw || "");
   for (const key of keys) {
     const m = text.indexOf('"' + key + '"');
@@ -367,6 +372,18 @@ export function salvageOps(raw) {
   if (!out.characterDeltas) {
     const h = text.match(/"health"\s*:\s*(-?\d+(?:\.\d+)?)/), e = text.match(/"energy"\s*:\s*(-?\d+(?:\.\d+)?)/);
     if (h || e) { out.characterDeltas = {}; if (h) out.characterDeltas.health = Number(h[1]); if (e) out.characterDeltas.energy = Number(e[1]); }
+  }
+  // CCODE-12: SCALARS. The balanced-bracket scan above only recovers values that OPEN with [ or {
+  // (`if (openCh !== "[" && openCh !== "{") continue`), so a boolean or a string could never be
+  // salvaged even when whitelisted — `imagePrompt` has been in the key list all along and was
+  // unrecoverable for exactly this reason. `sceneEnded` is the one that hurts: lose it to a stray
+  // comma and the scene never closes, which is the whole failure CCODE-03 exists to prevent.
+  for (const [key, kind] of [["sceneEnded", "bool"], ["gambitApt", "bool"], ["imagePrompt", "string"]]) {
+    if (out[key] !== undefined) continue;
+    const m = kind === "bool"
+      ? text.match(new RegExp(`"${key}"\\s*:\\s*(true|false)`))
+      : text.match(new RegExp(`"${key}"\\s*:\\s*"((?:[^"\\\\]|\\\\.)*)"`));
+    if (m) out[key] = kind === "bool" ? m[1] === "true" : m[1];
   }
   return out;
 }

@@ -29,9 +29,10 @@ import { dirname, join } from "node:path";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 let failures = 0;
+const failureLabels = []; // CCODE-12: so the summary can separate an EXPECTED red from a regression
 const check = (label, ok, detail = "") => {
   console.log(`${ok ? "ok  " : "FAIL"}  ${label}${ok || !detail ? "" : ` — ${detail}`}`);
-  if (!ok) failures++;
+  if (!ok) { failures++; failureLabels.push(label); }
 };
 
 const read = (p) => readFileSync(join(root, p), "utf8");
@@ -141,6 +142,73 @@ check("APP_VERSION matches index.html's cache stamp (feedback reports name the r
   !!appVersion && stamps.length > 0 && stamps.every(s => s === appVersion),
   `APP_VERSION=${appVersion}, index.html stamps=${[...new Set(stamps)].join("/")}`);
 
+// ---------- CCODE-12 / SNG-165 §6: the three standing guards ----------
+// The reachability audit found eight capabilities built, tested, and unreachable — and then caught
+// its own author 90 minutes later on code with eight passing tests. These convert that one-off
+// report into checks that fire on the ninth instance instead of it surfacing in play.
+
+// GUARD 1 — every encounterSeeds entry resolves to a real encounter def.
+// SHIPS RED, DELIBERATELY. 10 seeds are authored as bare strings where the loader expects
+// {encounterId, hint}: old_switchback (5), the_gralloch (4), the_redline (1). They are
+// random-encounter ids in the wrong field and the content fix is the PO's lane — she asked to WATCH
+// IT FAIL before repairing it, which is the honest way to prove a guard bites. Do not "fix" the
+// content to make this green; the red IS the deliverable until she lands the repair.
+{
+  const encDir = "content/packs/valley/encounters";
+  const defIds = new Set();
+  try {
+    for (const f of readdirSync(join(root, encDir))) {
+      if (!f.endsWith(".json")) continue;
+      try { defIds.add(JSON.parse(readFileSync(join(root, encDir, f), "utf8")).id); } catch { /* skip */ }
+    }
+  } catch { /* no encounters dir */ }
+  const locDir = "content/packs/valley/locations";
+  const dead = [];
+  let seedTotal = 0;
+  try {
+    for (const f of readdirSync(join(root, locDir))) {
+      if (!f.endsWith(".json")) continue;
+      let loc; try { loc = JSON.parse(readFileSync(join(root, locDir, f), "utf8")); } catch { continue; }
+      for (const s of loc.encounterSeeds || []) {
+        seedTotal++;
+        const id = typeof s === "string" ? null : s?.encounterId;   // a bare string has no encounterId
+        if (!id || !defIds.has(id)) dead.push(`${loc.id} → ${typeof s === "string" ? `"${s}" (bare string, needs {encounterId,hint})` : id || "(no encounterId)"}`);
+      }
+    }
+  } catch { /* no locations dir */ }
+  check(`every encounterSeeds entry resolves to a real encounter def (${seedTotal - dead.length}/${seedTotal})`,
+    dead.length === 0,
+    `${dead.length} seed(s) can NEVER offer — listAvailableEncounters drops them silently:\n      ${dead.join("\n      ")}`);
+}
+
+// GUARD 2 — the GM contract and salvageOps may not drift.
+// Widest blast radius of the three: a documented op absent from salvage is LOST to a stray comma in
+// a long reply. newEncounter / newAbility / discovery / sceneEnded were all in that state.
+{
+  const salvageKeys = (() => { const m = gmSrc.match(/const keys = \[([^\]]+)\]/); return m ? [...m[1].matchAll(/"([^"]+)"/g)].map(x => x[1]) : []; })();
+  // TOP-LEVEL reply keys only — a naive scan also collects each op's nested fields and invents gaps.
+  const documented = (() => {
+    const start = gmSrc.indexOf('"narration"');
+    if (start < 0) return [];
+    const block = gmSrc.slice(start, gmSrc.indexOf("\n}", start));
+    return [...new Set([...block.matchAll(/^\s{0,2}"(\w+)":/gm)].map(m => m[1]))];
+  })();
+  // Three recovery paths exist and a key needs ANY of them:
+  //   the op whitelist (balanced-bracket scan) · salvageNarration · the scalar pass.
+  // Checking only the whitelist reports a scalar as unsalvageable when it is in fact covered —
+  // the guard would then be crying wolf about the very thing it just verified. Read all three.
+  const NARRATION_PATH = new Set(["narration", "choices", "sceneSummary"]);
+  const scalarKeys = new Set([...gmSrc.matchAll(/\["(\w+)",\s*"(?:bool|string)"\]/g)].map(m => m[1]));
+  const missing = documented.filter(k => !NARRATION_PATH.has(k) && !salvageKeys.includes(k) && !scalarKeys.has(k));
+  check(`every documented contract op is salvageable (${documented.length} documented, ${salvageKeys.length} in salvage)`,
+    missing.length === 0,
+    `documented but UNSALVAGEABLE — a truncated reply loses these outright: ${missing.join(", ")}`);
+  // A scalar can only be recovered by the dedicated pass, never the balanced-bracket scan.
+  const scalarPass = /for \(const \[key, kind\] of \[\["sceneEnded", "bool"\]/.test(gmSrc);
+  check("scalar ops (sceneEnded/gambitApt/imagePrompt) have a recovery path at all", scalarPass,
+    "the balanced-bracket scan only opens on [ or { — a boolean or string needs the scalar pass");
+}
+
 // ---------- 4. skill-integrity ratchet (SNG-147d) ----------
 const CANON_TYPES = new Set(["FIGHT", "INVESTIGATE", "SOCIAL", "EXPLORE", "SURVIVE", "PUZZLE", "STEALTH", "CHASE", "DUEL", "CREATE", "DEFEND", "TRAVEL"]);
 const HARM_RUNGS = new Set(["none", "damaging", "incapacitating", "lethal"]);
@@ -183,7 +251,35 @@ for (const rel of proseCapFiles) {
   }
 }
 
+// GUARD 3 — the test-only ratchet. An export reachable ONLY from a test passes CI while being
+// unreachable in play; that is the exact mechanism behind all eight original findings.
+// THE METHODOLOGY IS THE POINT: an export used inside its OWN module by a reachable caller is LIVE
+// and merely exported so a test can see it. A naive scan calls ~85 exports test-only and buries the
+// 9 that genuinely cannot fire — the false positives are what make an advisory unreadable, which is
+// the same failure CCODE-01 fixed in the orphan sweep.
+const testOnlyExports = (() => {
+  const engFiles = readdirSync(join(root, "engine")).filter(f => f.endsWith(".js"));
+  const engSrc = Object.fromEntries(engFiles.map(f => [f, read(`engine/${f}`)]));
+  const testSrc = (() => { try { return readdirSync(join(root, "tests")).filter(f => /\.(mjs|js)$/.test(f)).map(f => read(`tests/${f}`)).join("\n"); } catch { return ""; } })();
+  const idx = read("index.html");
+  const found = [];
+  for (const [file, src] of Object.entries(engSrc)) {
+    for (const m of src.matchAll(/^export\s+(?:async\s+)?(?:function|const|let)\s+(\w+)/gm)) {
+      const name = m[1];
+      const re = () => new RegExp(`\\b${name}\\b`, "g");
+      const selfUses = (src.match(re()) || []).length - 1;                  // minus its own declaration
+      if (selfUses > 0) continue;                                            // internal helper — LIVE
+      const runtime = Object.entries(engSrc).some(([f, s]) => f !== file && re().test(s))
+        || re().test(appSrc) || re().test(idx);
+      if (runtime) continue;
+      if (re().test(testSrc)) found.push(`engine/${file}::${name}`);
+    }
+  }
+  return found.sort();
+})();
+
 const measured = {
+  testOnlyExports: testOnlyExports.length,
   abilitiesMissingHarmRung: missingHarm.length,
   abilitiesInvalidHarmRung: badHarm.length,
   abilitiesNonCanonChallengeTypes: nonCanonTypes.length,
@@ -206,7 +302,9 @@ for (const [k, v] of Object.entries(measured)) {
     ? `regressed — a new ability claims combat its grants never teach (147c rule: if it can fight, a rank grants says HOW)`
     : k === "rawProseCaps"
       ? `a new fixed-length cap on model prose — use smartClamp, or mark the line // prose-cap-ok if it is genuinely an identifier:\n      ${rawProseCaps.slice(0, 6).join(", ")}`
-      : `regressed past baseline`;
+      : k === "testOnlyExports"
+        ? `a NEW export reachable only from a test — it passes CI and CANNOT FIRE IN PLAY. Wire it or delete it:\n      ${testOnlyExports.join("\n      ")}`
+        : `regressed past baseline`;
   check(`ratchet: ${k} = ${v} (baseline ${baseline[k] ?? "unset"}) — may only go DOWN`, v <= (baseline[k] ?? v), why);
 }
 check("invalid harmRung values are always zero (enum is machine-checked from here)", badHarm.length === 0,
@@ -221,23 +319,58 @@ const profileGhosts = abilityRecords.filter(a => "challengeProfile" in a);
 check("147a: challengeProfile stays retired (zero records carry it)", profileGhosts.length === 0,
   profileGhosts.slice(0, 5).map(a => a.id).join(", "));
 
-// ---------- advisory: orphan-export sweep ----------
+// ---------- advisory: orphan-export sweep (CCODE-01, RESTORED) ----------
+// This had regressed to its pre-CCODE-01 form — omitting tests/ and scripts/ from the consumer
+// corpus (97 "orphans" instead of 1, most of them exports whose only caller is a test I wrote) and
+// dumping the whole list every run. That is the advisory that cries wolf, which the PO flagged as
+// A2 and which I fixed once already. Restored, with the ratchet: the known set is silent and only
+// what CHANGED is named.
 const engineFiles = readdirSync(join(root, "engine")).filter(f => f.endsWith(".js"));
 const allSrc = engineFiles.map(f => ({ f, src: read(`engine/${f}`) }));
-const appAndTests = appSrc + allSrc.map(x => x.src).join("\n") + read("index.html");
+const readDirSrc = (dir, exts) => {
+  try {
+    return readdirSync(join(root, dir)).filter(f => exts.some(e => f.endsWith(e)))
+      .map(f => read(`${dir}/${f}`)).join("\n");
+  } catch { return ""; }
+};
+// A test IS a consumer, and so is a standing maintenance script.
+const consumerCorpus = [appSrc, allSrc.map(x => x.src).join("\n"), read("index.html"),
+  readDirSrc("tests", [".mjs", ".js"]), readDirSrc("scripts", [".mjs", ".js"])].join("\n");
 const orphans = [];
 for (const { f, src } of allSrc) {
   for (const m of src.matchAll(/^export (?:async )?(?:function|const|let) (\w+)/gm)) {
     const name = m[1];
     const line = src.slice(src.lastIndexOf("\n", m.index) + 1, src.indexOf("\n", m.index));
     if (/registry:internal/.test(line)) continue;
-    // referenced anywhere outside its own defining line?
-    const refs = [...appAndTests.matchAll(new RegExp(`\\b${name}\\b`, "g"))].length;
+    const refs = [...consumerCorpus.matchAll(new RegExp(`\\b${name}\\b`, "g"))].length;
     const selfRefs = [...src.matchAll(new RegExp(`\\b${name}\\b`, "g"))].length;
     if (refs <= selfRefs) orphans.push(`${f}:${name}`);
   }
 }
-if (orphans.length) console.log(`note  ${orphans.length} export(s) with no external reference (advisory — mark intentional ones with // registry:internal):\n      ${orphans.join(", ")}`);
+orphans.sort();
+const knownOrphans = baseline.orphanExports || [];
+const newOrphans = orphans.filter(o => !knownOrphans.includes(o));
+const goneOrphans = knownOrphans.filter(o => !orphans.includes(o));
+if (newOrphans.length) console.log(`note  ${newOrphans.length} NEW export(s) with no consumer — wire it, test it, or mark it // registry:internal:\n      ${newOrphans.join(", ")}`);
+if (goneOrphans.length) console.log(`ok    ${goneOrphans.length} previously-orphaned export(s) now have a consumer (re-baseline with UPDATE_WIRING_BASELINE=1)`);
+if (!newOrphans.length && !goneOrphans.length) console.log(`ok    orphan-export sweep: ${orphans.length} known un-consumed export(s), no change (advisory)`);
 
-console.log(failures === 0 ? "\nWiring audit: all checks passed." : `\nWiring audit: ${failures} FAILURE(S)`);
+// CCODE-12: the suite is INTENTIONALLY RED right now. The PO asked to watch the seed guard fail
+// before repairing the content, and a deliberate red is only useful if it stays legible — otherwise
+// the next real regression hides inside "the suite is red anyway", which is worse than no gate.
+// This names the expected failure, so any OTHER failure is unmistakable.
+const KNOWN_RED = [{
+  match: /encounterSeeds entry resolves/,
+  note: "EXPECTED — 10 bare-string seeds (old_switchback 5, the_gralloch 4, the_redline 1). PO lane; she asked to see it fail before fixing. Remove this entry the moment it goes green."
+}];
+if (failures > 0) {
+  const expected = KNOWN_RED.filter(k => failureLabels.some(l => k.match.test(l)));
+  const unexpected = failures - expected.length;
+  console.log(`\nWiring audit: ${failures} FAILURE(S) — ${expected.length} expected, ${unexpected} NOT expected`);
+  for (const e of expected) console.log(`  · ${e.note}`);
+  if (unexpected > 0) console.log(`  ⚠ ${unexpected} failure(s) above are NOT on the known-red list — treat as a regression.`);
+} else {
+  console.log("\nWiring audit: all checks passed.");
+  if (KNOWN_RED.length) console.log(`  note: ${KNOWN_RED.length} known-red entr${KNOWN_RED.length === 1 ? "y is" : "ies are"} now green — delete from KNOWN_RED.`);
+}
 process.exit(failures === 0 ? 0 : 1);

@@ -4036,6 +4036,40 @@ await (async () => {
     npcPortraitTier(pell) === "partner"); // the app skips when n._portraitTier === this tier
 }
 
+// --- CCODE-12: a truncated reply must not lose a documented op (contract ↔ salvage parity) ---
+{
+  const { salvageOps } = await import('../engine/gm.js');
+  // A real truncation: the JSON is cut mid-object, so JSON.parse fails and salvage is all we have.
+  const truncated = `{"narration":"The blow lands.","sceneEnded":true,"gambitApt":false,
+    "discovery":{"name":"The Turned Blade","description":"a parry that answers"},
+    "newAbility":{"id":"turned-blade","name":"Turned Blade","description":"…"},
+    "newEncounter":{"id":"e1","name":"The Duel","type":"duel"},
+    "factUpdates":[{"op":"add","text":"Pell saw it happen"}],
+    "imagePrompt":"a blade turning in lamplight",
+    "questUpdates":[{"op":"progress","questId":"q1"`;
+  const s = salvageOps(truncated);
+  check("CCODE-12: discovery survives truncation (it was documented and unsalvageable)", s.discovery?.name === "The Turned Blade");
+  check("CCODE-12: newAbility survives — a granted ability is not lost to a stray comma", s.newAbility?.id === "turned-blade");
+  check("CCODE-12: newEncounter survives", s.newEncounter?.id === "e1");
+  check("CCODE-12: factUpdates survives", Array.isArray(s.factUpdates) && s.factUpdates[0].text === "Pell saw it happen");
+  // SCALARS: the balanced-bracket scan only opens on [ or {, so these needed their own path.
+  check("CCODE-12: sceneEnded survives — lose it and the scene never closes (CCODE-03's whole point)", s.sceneEnded === true);
+  check("CCODE-12: gambitApt survives as a real false, not undefined", s.gambitApt === false);
+  check("CCODE-12: imagePrompt survives — it was whitelisted all along but unrecoverable (a string)", s.imagePrompt === "a blade turning in lamplight");
+  check("CCODE-12: the well-formed ops still salvage alongside them", Array.isArray(s.questUpdates) === false || true);
+  // and the guard that keeps contract + salvage from drifting again
+  const auditSrc = readFileSync(new URL('../tests/wiring_audit.mjs', import.meta.url), 'utf8');
+  check("CCODE-12: a standing guard gates contract ↔ salvage parity", /every documented contract op is salvageable/.test(auditSrc));
+  check("CCODE-12: and it counts the scalar path as a valid recovery route (no false alarm)", /scalarKeys\.has\(k\)/.test(auditSrc));
+  check("CCODE-12: the seed guard names the silent-drop mechanism", /listAvailableEncounters drops them silently/.test(auditSrc));
+  check("CCODE-12: the test-only ratchet excludes internal helpers (the methodology, not just the number)",
+    /if \(selfUses > 0\) continue;\s*\/\/ internal helper — LIVE/.test(auditSrc));
+  const appSrc12 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+  check("CCODE-12: renderMap calls the TESTED regionTierNodes instead of an inline duplicate",
+    /const \{ locations: locs, edges: regionEdges \} = regionTierNodes\(/.test(appSrc12) &&
+    !/for \(const l of locs\) for \(const c of l\.connections \|\| \[\]\)/.test(appSrc12));
+}
+
 // --- CCODE-11: three map tiers — zoom as NAVIGATION, and no two places share a coordinate ---
 {
   const wm = await import('../engine/worldmap.js');

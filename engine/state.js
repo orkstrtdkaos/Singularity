@@ -302,7 +302,7 @@ export function dedupePlayers() {
 }
 
 /** Full profile objects on this device (not just {playerKey,displayName}). */
-export function listPlayerProfiles() {
+export function listPlayerProfiles() { // registry:internal
  // registry:internal
   const out = [];
   for (let i = 0; i < localStorage.length; i++) {
@@ -401,7 +401,7 @@ export function recoveryKeys(characterId = null) {
 }
 
 /** Drop all but the newest `keep` snapshots for a character. Returns the keys removed. */
-export function pruneRecovery(characterId, keep = RECOVERY_KEEP) {
+export function pruneRecovery(characterId, keep = RECOVERY_KEEP) { // registry:internal
   const keys = recoveryKeys(characterId);
   const drop = keys.slice(0, Math.max(0, keys.length - keep));
   for (const k of drop) { try { localStorage.removeItem(k); } catch { /* eviction is best-effort */ } }

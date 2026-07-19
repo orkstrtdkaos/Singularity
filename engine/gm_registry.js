@@ -53,6 +53,7 @@ import { partyBlockForGM } from "./party.js";
 import { narrativeRegister } from "./gm.js";
 import { livingWorldForGM } from "./generate.js";
 import { standingForGM } from "./standing.js"; // BATCH-12 §3
+import { renderNamesDeep } from "./names.js"; // SNG-182
 import { worldDate } from "./worldtime.js";
 import { encounterReceiptForGM } from "./encounters.js";
 import { waygateBlockForGM } from "./waygate.js";
@@ -289,7 +290,13 @@ export function assembleGMContext(view, env) {
     if (!row.views.includes(view)) continue;
     ctx[row.key] = row.build(env);
   }
-  return ctx;
+  // SNG-182 §2.5: THE GM GETS NAMES, NOT TOKENS. This is the single choke point every view already
+  // passes through, so resolving here means no builder has to remember to — and the model can never
+  // see token syntax and start inventing it. Per-character, because SNG-111's progressive naming
+  // makes the same id read differently to someone who has learned it (which is also why this cannot
+  // happen at content load). A no-op on the overwhelming majority of blocks: renderNames returns the
+  // string untouched unless it actually contains "{{".
+  return renderNamesDeep(ctx, env.CONTENT || {}, { character: env.character });
 }
 
 /** The keys a view produces — for the wiring audit's parity check. */

@@ -5596,6 +5596,60 @@ await (async () => {
     /This people's grain/.test(genSrc2));
 }
 
+// --- SNG-182: names resolve from ids; a rename is ONE edit ---
+{
+  const nz = await import("../engine/names.js");
+  const content = {
+    regions: [{ regionId: "the_stark_reach", name: "The Stark Reach" }],
+    locations: { millbrook: { id: "millbrook", name: "Millbrook" } },
+    traditionIndex: { byId: { ashwarden: { traditionId: "ashwarden", name: "The Ashwardens" } } },
+    npcs: { sorel: { id: "sorel", name: "Sorel" } }
+  };
+
+  check("182: a token resolves to the record's current name",
+    nz.renderNames("Into {{region:the_stark_reach}}.", content) === "Into The Stark Reach.");
+  check("182: kinds resolve from their own homes",
+    nz.renderNames("{{loc:millbrook}} · {{tradition:ashwarden}}", content) === "Millbrook · The Ashwardens");
+
+  // §2.3 — THE ACCEPTANCE TEST. Change the record; every reference follows.
+  const before = nz.renderNames("The {{region:the_stark_reach}} road.", content);
+  content.regions[0].name = "The Told Ground";
+  const after = nz.renderNames("The {{region:the_stark_reach}} road.", content);
+  check("182: a rename is ONE edit — the reference follows the record",
+    before === "The The Stark Reach road." && after === "The The Told Ground road.");
+
+  // §2.5 + Q3 — per-character, which is WHY resolution cannot happen at content load.
+  check("182: an unknown person renders by their record",
+    nz.renderNames("{{npc:sorel}}", content, { character: { npcRegistry: {} } }) === "Sorel");
+  check("182: and a character who has learned the name renders THEIRS (SNG-111)",
+    nz.renderNames("{{npc:sorel}}", content, { character: { npcRegistry: { sorel: { name: "Sorel the Dock-Master" } } } }) === "Sorel the Dock-Master");
+
+  // §2.4 — the loreRefs lesson, applied in advance: never a silent blank, never a raw token.
+  const misses = [];
+  const out = nz.renderNames("Beyond {{region:narnia}}.", content, { onMissing: m => misses.push(m) });
+  check("182: an unresolvable token is REPORTED", misses.length === 1 && misses[0].id === "narnia");
+  check("182: and never shown to a player as raw token syntax", !/\{\{/.test(out));
+  check("182: degrading readably rather than leaving a hole", /narnia/.test(out));
+
+  // §4 — resolution only. Not a template language.
+  check("182: a string with no token is returned untouched (the common case is free)",
+    nz.renderNames("plain prose", content) === "plain prose");
+  check("182: an unknown KIND is not resolved", nz.nameOf("spell", "x", content) === null);
+
+  // Deep resolution is what lets the assembly choke point cover every block at once.
+  const deep = nz.renderNamesDeep({ a: "{{loc:millbrook}}", b: ["{{tradition:ashwarden}}"], n: 3 }, content);
+  check("182: nested strings resolve; non-strings pass through",
+    deep.a === "Millbrook" && deep.b[0] === "The Ashwardens" && deep.n === 3);
+
+  // §2.5 — the GM must never see a token, and the choke point is where that is guaranteed.
+  const regSrc = readFileSync(new URL('../engine/gm_registry.js', import.meta.url), 'utf8');
+  check("182: assembleGMContext resolves names, so no builder has to remember to",
+    /renderNamesDeep\(ctx/.test(regSrc));
+
+  check("182: collectTokens reports WHERE, so a CI failure names the file and field",
+    nz.collectTokens({ note: "{{region:x}}" })[0].path === "note");
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

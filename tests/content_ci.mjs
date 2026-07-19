@@ -256,6 +256,56 @@ for (const pack of PACKS) {
     `${homeless.length} authored location(s) carry no regionId: ${homeless.map(l => l.id).slice(0, 6).join(", ")}`);
 }
 
+// (3c-v) SNG-182 §2.4 — every {{kind:id}} token in authored content must RESOLVE.
+// "A token pointing at nothing must be a CI error, never a silent blank or a raw token shown to a
+// player. This is the loreRefs lesson." There are ZERO tokens today, which makes this the cheapest
+// possible moment to add the gate — it starts green and stays that way only if authors keep it so.
+{
+  const { collectTokens, nameOf } = await import("../engine/names.js");
+  const content = {
+    locations: {}, npcs: {}, items: {}, abilities: {},
+    regions: (() => { try { const r = rj("content/packs/core/rules/regions.json"); return r.regions || r; } catch { return []; } })(),
+    traditionIndex: (() => {
+      try {
+        const t = rj("content/packs/core/rules/traditions.json");
+        const by = {};
+        for (const x of [...(t.traditions || []), ...(t.folkTraditions || [])]) if (x.traditionId) by[x.traditionId] = x;
+        return { byId: by };
+      } catch { return { byId: {} }; }
+    })()
+  };
+  for (const dir of ["content/packs/valley/locations", "content/packs/valley/npcs", "content/packs/valley/items", "content/packs/core/items"]) {
+    let files = []; try { files = readdirSync(join(root, dir)).filter(f => f.endsWith(".json")); } catch { continue; }
+    for (const f of files) {
+      const j = rj(`${dir}/${f}`);
+      const bag = dir.includes("locations") ? "locations" : dir.includes("npcs") ? "npcs" : "items";
+      const recs = Array.isArray(j?.items) ? j.items : Array.isArray(j?.challengers) ? j.challengers : [j];
+      for (const r of recs) if (r?.id) content[bag][r.id] = r;
+    }
+  }
+  let scanned = 0;
+  const broken = [];
+  const walkDir = (dir) => {
+    let entries = []; try { entries = readdirSync(join(root, dir), { withFileTypes: true }); } catch { return; }
+    for (const e of entries) {
+      const rel = `${dir}/${e.name}`;
+      if (e.isDirectory()) { if (!/assets/.test(rel)) walkDir(rel); continue; }
+      if (!/\.(json|md)$/.test(e.name)) continue;
+      let raw; try { raw = readFileSync(join(root, rel), "utf8"); } catch { continue; }
+      if (!raw.includes("{{")) continue;
+      let val; try { val = e.name.endsWith(".json") ? JSON.parse(raw) : raw; } catch { val = raw; }
+      for (const t of collectTokens(val)) {
+        scanned++;
+        if (!nameOf(t.kind, t.id, content)) broken.push(`${rel} ${t.path ? `(${t.path}) ` : ""}${t.raw}`);
+      }
+    }
+  };
+  walkDir("content");
+  console.log(`note  SNG-182: ${scanned} name token(s) in authored content`);
+  check("every {{kind:id}} token in content resolves to a real record", broken.length === 0,
+    `${broken.length} unresolvable: ${broken.slice(0, 5).join(" · ")}`);
+}
+
 // (3d) romance guidance — the doc pulled into the GM prompt on romantic intent must load and carry
 // non-empty prose. A registered-but-empty (or missing) doc means the GM narrates romance blind.
 {

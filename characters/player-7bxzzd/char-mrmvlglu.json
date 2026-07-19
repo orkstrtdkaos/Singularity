@@ -83,7 +83,112 @@
     "Saehara returned to the Cogitarium, reported the fallen Cogitant's survival to Ossian, climbed to the third terrace, and found the missing Cogitant alive — seated, chalk-covered, arm moving in ceaseless four-second repetition across a low board for four days. Order-Sense pulled a partial read: a single structured calculation built outward from a precise valley coordinate, which Ossian named 'the source.' A direct attempt to reach her — crouching to her level, one quiet word — stopped her arm for three seconds. She did not turn. She resumed. She is reachable, barely, and she has not finished what she started."
   ],
   "currentLocationId": "old_switchback",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "old_switchback",
+    "turns": [
+      {
+        "player": null,
+        "summary": "Saehara reaches the ruined waystation at the halfway point of the Old Switchback, Kon alert on the cairn behind him, the Cogitarium still an hour above.",
+        "narration": "The Old Switchback is cold at this hour. The stone-cut steps run uphill in long diagonal courses, each switchback marked by a cairn of stacked flat rock — half of them leaning, none of them fallen. To the east, the valley floor is already shadow; the last light catches the upper face of the cliff above the trail and holds it amber for another few minutes before it goes.\n\nYou are halfway up the switchback, at the ruined waystation: a low stone building open to the sky where the roof gave way, one intact corner still holding a hearth with a soot-black lintel. Kon is a few paces back, sitting on the top of the last cairn with his tail wrapped around his feet, watching the trail below with the particular stillness that means he's heard something you haven't. The air smells of cold rock and the first thin edge of woodsmoke from somewhere higher up.\n\nThe Cogitarium is another hour's climb — you can see the pale stack of terraces above the treeline, the upper ones already dark against the sky. Your energy is low; the day has cost you. The waystation hearth is cold but usable, and there is time to stop, or time to push on."
+      }
+    ],
+    "lastTurn": {
+      "narration": "The Old Switchback is cold at this hour. The stone-cut steps run uphill in long diagonal courses, each switchback marked by a cairn of stacked flat rock — half of them leaning, none of them fallen. To the east, the valley floor is already shadow; the last light catches the upper face of the cliff above the trail and holds it amber for another few minutes before it goes.\n\nYou are halfway up the switchback, at the ruined waystation: a low stone building open to the sky where the roof gave way, one intact corner still holding a hearth with a soot-black lintel. Kon is a few paces back, sitting on the top of the last cairn with his tail wrapped around his feet, watching the trail below with the particular stillness that means he's heard something you haven't. The air smells of cold rock and the first thin edge of woodsmoke from somewhere higher up.\n\nThe Cogitarium is another hour's climb — you can see the pale stack of terraces above the treeline, the upper ones already dark against the sky. Your energy is low; the day has cost you. The waystation hearth is cold but usable, and there is time to stop, or time to push on.",
+      "sceneSummary": "Saehara reaches the ruined waystation at the halfway point of the Old Switchback, Kon alert on the cairn behind him, the Cogitarium still an hour above.",
+      "choices": [
+        {
+          "label": "Press on up the switchback — reach the Cogitarium before full dark.",
+          "attribute": "physical",
+          "subAttribute": "agility",
+          "difficulty": 0,
+          "intentTags": [
+            "travel"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
+        },
+        {
+          "label": "Stop at the waystation — light the hearth, rest before the final climb.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "difficulty": 0,
+          "intentTags": [
+            "sustain"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Check what Kon heard — move to the edge of the trail and look down at the switchback below.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "scout"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
+        },
+        {
+          "label": "Sit at the hearth and write in your book while the light lasts — what happened in the Cogitarium wants setting down.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 0,
+          "intentTags": [
+            "sustain"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        }
+      ],
+      "scene": {
+        "setting": "The ruined waystation at the halfway point of the Old Switchback — a roofless stone building with one usable corner and a cold hearth; switchback trail continues up to the right toward the Cogitarium's pale terraces, visible above the treeline. Evening, amber light dying on the cliff face above.",
+        "npcsPresent": [
+          {
+            "name": "Kon",
+            "state": "Sitting still on the top of the last cairn, tail wrapped around feet, watching the trail below — alert."
+          }
+        ],
+        "objects": [
+          "Cold stone hearth with soot-black lintel",
+          "Leaning cairns of flat rock marking the switchback",
+          "Ruined waystation walls — intact on one corner, open to sky elsewhere"
+        ],
+        "threads": [
+          "Kon is watching something on the trail below — unclear if it is a threat or just movement",
+          "The Cogitarium is an hour's climb above — the third-terrace Cogitant and her unfinished calculation are still unresolved",
+          "Saehara's energy is low after a full day's work"
+        ]
+      },
+      "timeOps": {
+        "hoursPassed": 0.5,
+        "why": "Climbing from the valley floor to the halfway waystation on the switchback."
+      }
+    },
+    "sceneState": {
+      "setting": "The ruined waystation at the halfway point of the Old Switchback — a roofless stone building with one usable corner and a cold hearth; switchback trail continues up to the right toward the Cogitarium's pale terraces, visible above the treeline. Evening, amber light dying on the cliff face above.",
+      "npcsPresent": [
+        {
+          "name": "Kon",
+          "state": "Sitting still on the top of the last cairn, tail wrapped around feet, watching the trail below — alert."
+        }
+      ],
+      "objects": [
+        "Cold stone hearth with soot-black lintel",
+        "Leaning cairns of flat rock marking the switchback",
+        "Ruined waystation walls — intact on one corner, open to sky elsewhere"
+      ],
+      "threads": [
+        "Kon is watching something on the trail below — unclear if it is a threat or just movement",
+        "The Cogitarium is an hour's climb above — the third-terrace Cogitant and her unfinished calculation are still unresolved",
+        "Saehara's energy is low after a full day's work"
+      ]
+    }
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
@@ -271,7 +376,9 @@
       "aliases": [
         "Unknown Cogitant"
       ],
-      "nameRevealed": true
+      "nameRevealed": true,
+      "gender": "man",
+      "pronouns": "he/him"
     },
     "araveth": {
       "id": "araveth",
@@ -337,7 +444,9 @@
       "lastSeen": {
         "locationId": "the_cogitarium",
         "day": 1
-      }
+      },
+      "gender": "woman",
+      "pronouns": "she/her"
     },
     "lenten": {
       "id": "lenten",
@@ -379,8 +488,8 @@
         "locationId": "the_cogitarium",
         "day": 1
       },
-      "gender": "woman",
-      "pronouns": "she/her"
+      "gender": "man",
+      "pronouns": "he/him"
     },
     "third-terrace-cogitant": {
       "id": "third-terrace-cogitant",
@@ -529,7 +638,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-19T00:02:58.311Z",
+    "lastSharedReadAt": "2026-07-19T00:16:40.191Z",
     "lastTickWorldDay": 19,
     "lastCanonWorldDay": 19
   },
@@ -886,8 +995,8 @@
       "at": "2026-07-16T02:18:04.820Z"
     }
   ],
-  "updatedAt": 1784419640073,
-  "rev": 86,
+  "updatedAt": 1784420224548,
+  "rev": 92,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1003,7 +1112,7 @@
   },
   "regionsKnown": {
     "somatic_reaches": 39,
-    "valley": 3
+    "valley": 4
   },
   "opLossPending": false,
   "establishedFacts": [
@@ -1082,6 +1191,45 @@
       "why": "repaired via the Repair panel",
       "worldDay": 16,
       "at": "2026-07-16T04:32:54.612Z"
+    },
+    {
+      "kind": "gender",
+      "id": "cross-legged-cogitant",
+      "from": {},
+      "to": {
+        "gender": "man",
+        "pronouns": "he/him"
+      },
+      "why": "repaired via the Repair panel",
+      "worldDay": 19,
+      "at": "2026-07-19T00:10:24.345Z"
+    },
+    {
+      "kind": "gender",
+      "id": "fallen-cogitant",
+      "from": {},
+      "to": {
+        "gender": "woman",
+        "pronouns": "she/her"
+      },
+      "why": "repaired via the Repair panel",
+      "worldDay": 19,
+      "at": "2026-07-19T00:10:24.345Z"
+    },
+    {
+      "kind": "gender",
+      "id": "lenten",
+      "from": {
+        "gender": "woman",
+        "pronouns": "she/her"
+      },
+      "to": {
+        "gender": "man",
+        "pronouns": "he/him"
+      },
+      "why": "repaired via the Repair panel",
+      "worldDay": 19,
+      "at": "2026-07-19T00:10:24.345Z"
     }
   ],
   "company": [],
@@ -1099,10 +1247,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-19T00:05:04.919Z",
-      "lastAt": "2026-07-19T00:07:20.072Z",
+      "lastAt": "2026-07-19T00:17:04.546Z",
       "startDay": 19,
       "endDay": 19,
-      "beats": 2
+      "beats": 3
     }
   ],
   "knownPlaces": [

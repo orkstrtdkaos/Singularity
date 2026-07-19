@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 16,
-  "xp": 1544,
+  "xp": 1554,
   "attributes": {
     "physical": 4,
     "mental": 5,
@@ -83,6 +83,10 @@
     {
       "abilityId": "ask_the_dead",
       "level": 1
+    },
+    {
+      "abilityId": "boundary_stone",
+      "level": 1
     }
   ],
   "alignment": {
@@ -101,7 +105,7 @@
   "maxHealth": 105,
   "health": 105,
   "maxEnergy": 175,
-  "energy": 173,
+  "energy": 171,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1092,86 +1096,77 @@
         "player": "Use ordersense and wildcraft together again now, after the palework flowed through the ent a ls a channel.  What has changed - and what does it mean.",
         "summary": "Silas reached for the grove's changed grain with Order-Sense and Wildcraft together — the combination found nothing new; the Ent after the Palework is complete, not in motion, and the craft had no seam to enter.",
         "narration": "You reach for it the same way you did before — Order-Sense steady, Wildcraft loose alongside it, the two braided into that particular listening that found the grove's grain in the first place.\n\nThis time the grove does not open.\n\nIt is not hostility. Nothing in the circle closes against you or pushes back. It is more like asking a question of someone who has just said something true and is now sitting with having said it. The attention is still there — you can feel the weight of the Ent's notice, settled and unhurried as before — but the grain of it has moved somewhere the craft cannot follow right now. Wildcraft wants chaos to work through, a moment coming apart at the seam. The grove after the Palework is the opposite of that. It has just witnessed something complete. It is not in motion. There is no seam to find.\n\nOrder-Sense reaches and finds the same seven-in-one design it found before. It cannot tell you whether that design has changed, because the craft reads what is, not the distance between what is and what was. The substrate thins under the effort and the combination does not click into place. The two crafts slide past each other like the wrong ends of a lodestone, and you are left sitting at the edge of the circle with your hands in your lap and no new answer.\n\nPell does not say anything. Veth watches, then looks back to the treeline. Siol turns a fraction toward you, reads the result in your posture, and sets her jaw. Huginn does not look back from the circle. The grove is not troubled by the question going unanswered. Some things settle in their own time."
+      },
+      {
+        "player": "Step into the circle now and use THE RAISED THING and Boundary stone to create a ward against strong winds or any harms that might be aimed at these Treeants.  Seal it with the Weirmark like Pell showed you... this is your gift to the grove. ",
+        "summary": "Silas stepped into the Ent circle and attempted to braid The Raised Thing and Boundary-Stone into a ward for the grove — the crafts disagreed at the join; the Ent has no seam to seal against, and the ward dissipated clean.",
+        "narration": "You step into the circle.\n\nThe moss is dry under your boots, just as the place history said it would be — dry and still, regardless of the season. The seven trees stand around you, unhurried, the same as they have been. The Ent's attention is present the way a person in the room is present — not looking at you directly, but aware of you completely.\n\nYou reach for The Raised Thing and Boundary-Stone together, braiding them the way Pell showed you the Weirmark should be laid: the raised structure first, the ward sealed into it after, your own mark pressed into the join like a maker's stamp into cooling iron. The Raised Thing answers — you can feel it beginning, a lintel taking shape, the old Wright-restlessness rising in your hands. The Boundary-Stone comes up alongside it. You have done both separately. The braid should work.\n\nIt does not work.\n\nThe two crafts meet at the join and — not collapse, exactly, but arrive at a disagreement. The Raised Thing wants to build outward. The Boundary-Stone wants to draw a line around what already is. The grove's grain is neither of those things: it is not a structure to be raised, and it is not a dwelling to be warded. It is seven trees that are one older thing, with edges that extend past the trees themselves, and no center. Where you would press the Weirmark, there is no seam. The ward finds nothing to seal against. The craft dissipates — clean, without backlash, without harm — but it leaves nothing behind. The circle stands exactly as it stood. The Ent has not been touched, and the Ent does not appear to mind.\n\nPell's voice comes from the edge of the circle, plain and without judgment. \"The mark needs something to hold it,\" she says. \"You can't seal a threshold that doesn't have a frame.\"\n\nSiol does not move. She watches from outside with the expression of someone who has seen a capable person discover a thing the hard way, and who is content to let the lesson land on its own.\n\nHuginn makes a sound. Not a word. But timed."
       }
     ],
     "lastTurn": {
-      "narration": "You reach for it the same way you did before — Order-Sense steady, Wildcraft loose alongside it, the two braided into that particular listening that found the grove's grain in the first place.\n\nThis time the grove does not open.\n\nIt is not hostility. Nothing in the circle closes against you or pushes back. It is more like asking a question of someone who has just said something true and is now sitting with having said it. The attention is still there — you can feel the weight of the Ent's notice, settled and unhurried as before — but the grain of it has moved somewhere the craft cannot follow right now. Wildcraft wants chaos to work through, a moment coming apart at the seam. The grove after the Palework is the opposite of that. It has just witnessed something complete. It is not in motion. There is no seam to find.\n\nOrder-Sense reaches and finds the same seven-in-one design it found before. It cannot tell you whether that design has changed, because the craft reads what is, not the distance between what is and what was. The substrate thins under the effort and the combination does not click into place. The two crafts slide past each other like the wrong ends of a lodestone, and you are left sitting at the edge of the circle with your hands in your lap and no new answer.\n\nPell does not say anything. Veth watches, then looks back to the treeline. Siol turns a fraction toward you, reads the result in your posture, and sets her jaw. Huginn does not look back from the circle. The grove is not troubled by the question going unanswered. Some things settle in their own time.",
-      "sceneSummary": "Silas reached for the grove's changed grain with Order-Sense and Wildcraft together — the combination found nothing new; the Ent after the Palework is complete, not in motion, and the craft had no seam to enter.",
+      "narration": "You step into the circle.\n\nThe moss is dry under your boots, just as the place history said it would be — dry and still, regardless of the season. The seven trees stand around you, unhurried, the same as they have been. The Ent's attention is present the way a person in the room is present — not looking at you directly, but aware of you completely.\n\nYou reach for The Raised Thing and Boundary-Stone together, braiding them the way Pell showed you the Weirmark should be laid: the raised structure first, the ward sealed into it after, your own mark pressed into the join like a maker's stamp into cooling iron. The Raised Thing answers — you can feel it beginning, a lintel taking shape, the old Wright-restlessness rising in your hands. The Boundary-Stone comes up alongside it. You have done both separately. The braid should work.\n\nIt does not work.\n\nThe two crafts meet at the join and — not collapse, exactly, but arrive at a disagreement. The Raised Thing wants to build outward. The Boundary-Stone wants to draw a line around what already is. The grove's grain is neither of those things: it is not a structure to be raised, and it is not a dwelling to be warded. It is seven trees that are one older thing, with edges that extend past the trees themselves, and no center. Where you would press the Weirmark, there is no seam. The ward finds nothing to seal against. The craft dissipates — clean, without backlash, without harm — but it leaves nothing behind. The circle stands exactly as it stood. The Ent has not been touched, and the Ent does not appear to mind.\n\nPell's voice comes from the edge of the circle, plain and without judgment. \"The mark needs something to hold it,\" she says. \"You can't seal a threshold that doesn't have a frame.\"\n\nSiol does not move. She watches from outside with the expression of someone who has seen a capable person discover a thing the hard way, and who is content to let the lesson land on its own.\n\nHuginn makes a sound. Not a word. But timed.",
+      "sceneSummary": "Silas stepped into the Ent circle and attempted to braid The Raised Thing and Boundary-Stone into a ward for the grove — the crafts disagreed at the join; the Ent has no seam to seal against, and the ward dissipated clean.",
       "choices": [
         {
-          "label": "Sit longer. Don't reach — let the grove come to what it will, on its own terms. Ask Siol what she has seen on this side of this moment before.",
+          "label": "Step back to the edge, sit with what just happened, and ask Siol plainly — she has been on this side of this moment before. What is the Ent's nature that made the ward find nothing to hold?",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "calm"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Ask Veth directly — eleven years on the March, a margin note at Raven's Home about this place. What does the warden's record say the Ent does after a witnessed ending?",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Name the road aloud to the group — Raven's Home, the dead warden post, the Disputed Zone. The Ent has witnessed what it needed to witness. It is time to move.",
+          "label": "Ask Pell — 'what does a threshold need before the mark can seal it? What would a frame look like, here, with this kind of grain?'",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Stay inside the circle. Not to cast anything — just to stand in it, without reaching, and let the grove's attention settle on you fully. You came to give a gift; the form failed. See if sitting here openly, the way you named yourself, is enough.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "devote",
+            "careful"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Accept that this is not the gift the grove wants or needs. Step back out to the edge and name the road ahead to the group — Raven's Home, the dead warden post, the Disputed Zone. The ending here is done; the next work is waiting.",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "lead"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
-        },
-        {
-          "label": "Step inside the circle for the first time — not to ask anything, not to read anything. Just stand where the grove can see you fully, after what ran through it.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "chaos_order": 0.3
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "careful",
-            "devote"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
         }
       ],
       "scene": {
-        "setting": "The edge of the Ent grove circle, midday, early spring. The Palework has run and the silence after it has settled fully. The seven old trees stand unchanged. The moss inside is dry and still. Silas sits at the circle's edge, the craft attempt finished without result.",
+        "setting": "Inside the Ent grove circle at midday, early spring — mossy dry ground underfoot, seven old trees in a rough ring, the Hub's buildings visible through the treeline. The ward attempt has dissipated; nothing in the circle has changed.",
         "npcsPresent": [
           {
             "name": "Pell Marsh",
-            "state": "At Silas's left shoulder, silent, not moving away — holding the quiet."
+            "state": "Standing at the edge of the circle — named the craft's problem plainly, waiting without pressure."
           },
           {
             "name": "Siol",
-            "state": "Turned a fraction toward Silas, jaw set — read the result in his posture, has not spoken."
+            "state": "Watching from outside the circle with the expression of someone content to let a lesson land on its own."
           },
           {
             "name": "Veth Ondra",
-            "state": "Watching, then looking back to the treeline — waiting with warden's patience."
+            "state": "At the grove's edge, watching, warden's patience — has not moved."
           },
           {
             "name": "Huginn",
-            "state": "Looking away from Silas, attention on the circle — verdict filed, not looking back."
+            "state": "Perched at the edge of the circle — made a sound, timed, not a word."
           }
         ],
         "objects": [
@@ -1180,11 +1175,10 @@
           "The Ent grove circle — seven or eight old trees, mossy dry ground inside"
         ],
         "threads": [
-          "The craft reached and found nothing new — the grove is complete, not in motion; the question of what changed is unanswered",
-          "Siol has still not said what she has seen on this side of this moment before",
-          "Veth's revision is spoken and waiting for a response",
-          "The circle has not been entered",
-          "The road ahead — Raven's Home, the dead warden post, the Disputed Zone — has not yet been named aloud to the group"
+          "The ward attempt failed clean — no backlash, but no gift left behind; the question of what form the gift could take remains open",
+          "Siol still has not named what she has seen on this side of this moment before",
+          "The road ahead — Raven's Home, the dead warden post, the Disputed Zone — has not yet been named aloud to the group",
+          "Pell named the craft's limitation: no frame, no seam to seal against — the technical question is live"
         ]
       },
       "npcUpdates": [
@@ -1192,56 +1186,65 @@
           "op": "update",
           "npcId": "pell-ran-marsh",
           "name": "Pell Ran Marsh",
-          "role": "Village blacksmith, Millbrook — traveling companion",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Held the silence through the failed read without comment — her presence at his shoulder unchanged.",
-          "statusNote": "At Silas's left shoulder at the Ent's edge — holding the quiet through the failed attempt, not speaking."
+          "note": "Named the ward failure's cause plainly from the circle's edge — the mark needs something to hold it; a threshold needs a frame before the seal can land.",
+          "learned": [
+            "The Weirmark cannot seal a threshold that has no frame — the ward finds nothing to press into if the structure isn't there first."
+          ],
+          "skillsObserved": [
+            "precise diagnosis of a failed rune-work attempt from position and visible craft behavior"
+          ],
+          "statusNote": "At the edge of the Ent circle — named the craft's problem, waiting without pressure."
         },
         {
           "op": "update",
           "npcId": "siol",
           "name": "Siol",
-          "role": "Elven traveler, Hub plaza",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Read the failed attempt in Silas's posture — turned a fraction, set her jaw, said nothing.",
-          "statusNote": "At the grove's edge — read the failed craft attempt in Silas's posture; has not spoken; something she has seen before sits unspoken."
+          "note": "Watched the ward attempt dissipate and held her position — the expression of someone content to let a lesson land on its own.",
+          "statusNote": "Outside the Ent circle — watching, not yet speaking, still holding what she has seen before."
         },
         {
           "op": "update",
           "npcId": "veth-stillwater-ondra",
           "name": "Veth (Stillwater) Ondra",
-          "role": "Former Ashwarden warden, now joining the party",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Watched the failed read, then looked back to the treeline — warden's patience, revision spoken, no pressure added.",
-          "statusNote": "At the grove's edge — revision spoken, watching the treeline, waiting without pressure."
+          "note": "Held warden's patience through the failed ward attempt — watching the circle, not filling the silence.",
+          "statusNote": "At the grove's edge — waiting with warden's patience, revision already spoken."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "the-ent-grove",
+          "label": "The Ent Grove",
+          "kind": "place",
+          "fact": "The grove's grain cannot be warded by The Raised Thing and Boundary-Stone braided — it is not a structure to be raised, and not a dwelling to be warded. It has no frame, no seam to seal against. The Weirmark finds nothing to hold. The grove is seven trees as one older thing, with edges that extend past the trees, and no center.",
+          "links": [
+            "the-edge-district-ledger",
+            "millbrook"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief attempt and its settling — minutes, not a long stretch."
+        "why": "A brief attempt and its settling — a quarter-hour inside the circle."
       }
     },
     "sceneState": {
-      "setting": "The edge of the Ent grove circle, midday, early spring. The Palework has run and the silence after it has settled fully. The seven old trees stand unchanged. The moss inside is dry and still. Silas sits at the circle's edge, the craft attempt finished without result.",
+      "setting": "Inside the Ent grove circle at midday, early spring — mossy dry ground underfoot, seven old trees in a rough ring, the Hub's buildings visible through the treeline. The ward attempt has dissipated; nothing in the circle has changed.",
       "npcsPresent": [
         {
           "name": "Pell Marsh",
-          "state": "At Silas's left shoulder, silent, not moving away — holding the quiet."
+          "state": "Standing at the edge of the circle — named the craft's problem plainly, waiting without pressure."
         },
         {
           "name": "Siol",
-          "state": "Turned a fraction toward Silas, jaw set — read the result in his posture, has not spoken."
+          "state": "Watching from outside the circle with the expression of someone content to let a lesson land on its own."
         },
         {
           "name": "Veth Ondra",
-          "state": "Watching, then looking back to the treeline — waiting with warden's patience."
+          "state": "At the grove's edge, watching, warden's patience — has not moved."
         },
         {
           "name": "Huginn",
-          "state": "Looking away from Silas, attention on the circle — verdict filed, not looking back."
+          "state": "Perched at the edge of the circle — made a sound, timed, not a word."
         }
       ],
       "objects": [
@@ -1250,11 +1253,10 @@
         "The Ent grove circle — seven or eight old trees, mossy dry ground inside"
       ],
       "threads": [
-        "The craft reached and found nothing new — the grove is complete, not in motion; the question of what changed is unanswered",
-        "Siol has still not said what she has seen on this side of this moment before",
-        "Veth's revision is spoken and waiting for a response",
-        "The circle has not been entered",
-        "The road ahead — Raven's Home, the dead warden post, the Disputed Zone — has not yet been named aloud to the group"
+        "The ward attempt failed clean — no backlash, but no gift left behind; the question of what form the gift could take remains open",
+        "Siol still has not named what she has seen on this side of this moment before",
+        "The road ahead — Raven's Home, the dead warden post, the Disputed Zone — has not yet been named aloud to the group",
+        "Pell named the craft's limitation: no frame, no seam to seal against — the technical question is live"
       ]
     }
   },
@@ -1685,7 +1687,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d6] Met Veth Ondra at the south market row — read the situation in one look and extended her hand without waiting for an explanation.",
         "[d6] Returned from the market row with Siol, presented the new travel coat, met Veth Ondra without ceremony — extended her hand first, no explanation needed.",
         "[d6] Walked the lane to the Ent grove at Silas's left shoulder without comment — pack settled, watching the circle.",
         "[d6] Watching the trees in silence — the attention she gives something unfinished.",
@@ -1694,28 +1695,29 @@
         "[d6] Received the weight of the deathsense read without being told it — the quality of a smith who feels the iron move before the hammer does.",
         "[d6] Went still at the completion of the Palework — recognized the sound of something cooling into its final shape without being told what it was.",
         "[d6] Held the quiet after the Palework without filling it — stayed at Silas's shoulder through the ending's settling.",
-        "[d6] Held the silence through the failed read without comment — her presence at his shoulder unchanged."
+        "[d6] Held the silence through the failed read without comment — her presence at his shoulder unchanged.",
+        "[d6] Named the ward failure's cause plainly from the circle's edge — the mark needs something to hold it; a threshold needs a frame before the seal can land."
       ],
       "knownFacts": [
-        "Caught the back-foot settle twice and declined to press both times — waiting for the cleaner entry",
         "Half-offered iron near his chest deliberately to pull his eyes left — a manufactured diversion, not a real move",
         "Responded to Silas's direction mid-bout without hesitation — the call was enough",
         "Silas wants something private for the evenings — she is thinking about what that means",
         "Veth Ondra is now traveling with the party — Pell took the measure of her immediately and accepted it without ceremony",
         "Veth Ondra is now part of the party — read the situation in one look and accepted it without ceremony.",
         "Silas completed the ending of Quiet in the Ent's witness — Palework run clean through himself and the grove as channel",
-        "Quiet's ending ran clean through Silas and the grove both — she held it without comment."
+        "Quiet's ending ran clean through Silas and the grove both — she held it without comment.",
+        "The Weirmark cannot seal a threshold that has no frame — the ward finds nothing to press into if the structure isn't there first."
       ],
       "skillsObserved": [
-        "trading exchanges under ironsense without overreaching",
         "giving false information with body position to open an angle",
         "manufacturing a false iron-read to pull opponent attention",
         "declining a pressable opening to wait for the cleaner one",
         "controlled finish strike — flat hilt to the leading arm, no ",
-        "reading a newcomer's practical standing from pack and postur"
+        "reading a newcomer's practical standing from pack and postur",
+        "precise diagnosis of a failed rune-work attempt from positio"
       ],
       "status": "active",
-      "statusNote": "At Silas's left shoulder at the Ent's edge — holding the quiet through the failed attempt, not speaking.",
+      "statusNote": "At the edge of the Ent circle — named the craft's problem, waiting without pressure.",
       "lastSeen": {
         "locationId": "gen-the-ent-grove",
         "day": 6
@@ -2242,7 +2244,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d6] Accompanying Pell in the market row — not present at the stall exchange.",
         "[d6] Present at the party assembly — watching Huginn angle north, not intervening in the introduction.",
         "[d6] Explained the Ent circle plainly: it does not receive formal introductions; it responds to sustained unhurried presence with no particular want pressing through it. Named an Ashwarden as perhaps better placed than most to offer that.",
         "[d6] Led the party to the Ent grove edge and stopped there — named it as far as she goes without elaboration.",
@@ -2251,7 +2252,8 @@
         "[d6] Said nothing — she has been on this side of this moment before and knows what it is.",
         "[d6] Watching with the expression of someone who has been on this side of this moment before and did not expect to be here again so soon.",
         "[d6] Did not fill the silence. Turned a fraction at Veth's revision but did not contradict it.",
-        "[d6] Read the failed attempt in Silas's posture — turned a fraction, set her jaw, said nothing."
+        "[d6] Read the failed attempt in Silas's posture — turned a fraction, set her jaw, said nothing.",
+        "[d6] Watched the ward attempt dissipate and held her position — the expression of someone content to let a lesson land on its own."
       ],
       "knownFacts": [
         "Offered to lead the party on a tour of the Hub — her sequencing is deliberate",
@@ -2274,7 +2276,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the grove's edge — read the failed craft attempt in Silas's posture; has not spoken; something she has seen before sits unspoken.",
+      "statusNote": "Outside the Ent circle — watching, not yet speaking, still holding what she has seen before.",
       "lastSeen": {
         "locationId": "gen-the-ent-grove",
         "day": 6
@@ -2380,7 +2382,6 @@
       },
       "relationship": 8,
       "history": [
-        "[d6] Added black salt to the rune-supply purchase unprompted — named its practical purpose and paid from her own pocket. Met Pell at the south end of the row; hand extended and taken without ceremony.",
         "[d6] Met Pell Marsh — brief practical exchange, two people sizing up the road. Introduction complete without ceremony.",
         "[d6] Named the March's three-line index entry on the Ent — it predates the Hub, the March's position was to leave it uncontacted, not hostile. Copied forward a margin note from the Raven's Home warden: the Ent acknowledges endings without being asked. Did not write it herself; she only carried it…",
         "[d6] Walked in behind Silas, eyes on the canopy — reading the grove in the unhurried way of long warden habit.",
@@ -2389,7 +2390,8 @@
         "[d6] The grove settling onto Silas has pushed her revision further than she budgeted — lips pressed, eyes on the canopy, not yet speaking it.",
         "[d6] Her revision outran the sentence she was building — she stopped before speaking it. The Palework-as-channel has pushed what she was revising past the point where her old framework catches it.",
         "[d6] Found her sentence and spoke it: the Ent was in conversation with whatever needed to end here, and had not yet found the right attendant.",
-        "[d6] Watched the failed read, then looked back to the treeline — warden's patience, revision spoken, no pressure added."
+        "[d6] Watched the failed read, then looked back to the treeline — warden's patience, revision spoken, no pressure added.",
+        "[d6] Held warden's patience through the failed ward attempt — watching the circle, not filling the silence."
       ],
       "knownFacts": [
         "The Raven's Home warden's margin note: the Ent acknowledges endings without being asked",
@@ -2412,7 +2414,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the grove's edge — revision spoken, watching the treeline, waiting without pressure.",
+      "statusNote": "At the grove's edge — waiting with warden's patience, revision already spoken.",
       "lastSeen": {
         "locationId": "gen-the-ent-grove",
         "day": 6
@@ -2967,11 +2969,11 @@
     "insight": 5,
     "presence": 7,
     "rapport": 5,
-    "craft": 6,
+    "craft": 7,
     "wits": 5
   },
-  "pendingSubPoints": 1,
-  "skillPoints": 1,
+  "pendingSubPoints": 0,
+  "skillPoints": 0,
   "discoveries": [],
   "codex": {
     "schemaVersion": 1,
@@ -4314,21 +4316,21 @@
     }
   },
   "tendencies": {
-    "strategic": 11.478357665662372,
-    "cerebral": 22.146160595582966,
-    "social": 16.683017231350853,
-    "generous": 1.7029105019553994,
-    "cautious": 5.3718471627189315,
-    "physical": 0.7763072060500529,
-    "risky": 0.8141118974889422,
-    "ruthless": 0.25957068165004676,
-    "carousing": 0.003976951054692495,
-    "amorous": 3.104924730371454,
-    "patient": 1.6178736670552627,
-    "stealth": 0.10061025935918497,
-    "devotion": 2.0553755364087776,
-    "craft": 0.7947520211419823,
-    "leadership": 0.5121173859762279
+    "strategic": 12.191398724020813,
+    "cerebral": 21.592506580693392,
+    "social": 16.26594180056708,
+    "generous": 2.6603377394065144,
+    "cautious": 5.237550983650958,
+    "physical": 0.7568995258988015,
+    "risky": 0.7937591000517186,
+    "ruthless": 0.2530814146087956,
+    "carousing": 0.0038775272783251823,
+    "amorous": 3.0273016121121676,
+    "patient": 1.577426825378881,
+    "stealth": 0.09809500287520534,
+    "devotion": 2.003991147998558,
+    "craft": 0.7748832206134327,
+    "leadership": 0.49931445132682223
   },
   "aptitudes": [
     "strategist",
@@ -4337,7 +4339,7 @@
     "orator",
     "sage"
   ],
-  "actionCount": 578,
+  "actionCount": 579,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -4615,8 +4617,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784435691622,
-  "rev": 844,
+  "updatedAt": 1784436222980,
+  "rev": 847,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5881,14 +5883,15 @@
       "shadowstep": 17,
       "the-attended-end": 30,
       "wildcraft": 6,
-      "the_raised_thing": 6,
+      "the_raised_thing": 7,
       "the_ended_threat": 4,
       "the_shadow_work": 2,
       "draw_down": 1,
       "wither": 2,
       "the_grey_road": 1,
       "the_grey_hand": 1,
-      "the_shielding_word": 1
+      "the_shielding_word": 1,
+      "boundary_stone": 1
     },
     "coActivations": {
       "lightsense+numen_sense": 1,
@@ -5907,13 +5910,14 @@
       "shadowstep+wither": 1,
       "shadowstep+the_grey_hand": 1,
       "the_grey_hand+wither": 1,
-      "order_sense+wildcraft": 2
+      "order_sense+wildcraft": 2,
+      "boundary_stone+the_raised_thing": 1
     },
     "aspirations": [
       {
         "abilityId": "hunters_strike",
         "since": "2026-07-12T16:27:52.479Z",
-        "progress": 0
+        "progress": 1
       },
       {
         "abilityId": "pattern_sense",
@@ -6029,7 +6033,7 @@
   "syncedAt": 1784429149276,
   "teachers": {},
   "regionsKnown": {
-    "valley": 400
+    "valley": 401
   },
   "foreclosed": [
     "rootkin",
@@ -6087,10 +6091,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-19T04:34:51.617Z",
+      "lastAt": "2026-07-19T04:43:42.973Z",
       "startDay": 18,
       "endDay": 19,
-      "beats": 125,
+      "beats": 126,
       "_recapError": null,
       "recap": "Day eighteen, and Silas Weir moved like a man who'd finally stopped fighting the shape of what he was. On the road he disarmed three opportunists without breaking bones, read the grief sitting behind the broad man's eyes, named it plainly, pressed provisions into their hands, and sent them toward something worth doing — mercy given as instruction, not sentiment. Then he brought the hard people together: Dara, Aldric, Fendt, Mara, Calvar, all of them in the heat of Pell's forge with no exits easy and no pretense left, and in that single evening he turned a valley's quiet panic into four working threads — engineering, logistics, supply, accounts — each with a named lead and a direction to face. The crisis didn't end, but it stopped being formless, and that was his doing."
     }

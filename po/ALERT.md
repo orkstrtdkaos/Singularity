@@ -1,4 +1,8 @@
-# PO ALERT — CCode pickup
+# PO ALERT
+
+> **➡️ START AT `po/BATCH-13_handoff.md`.** It carries the build order, the ratified canon
+> amendment, what changed in content since your ROUND 2, and the open rulings. Everything below is
+> still true and is the detail behind it.
 
 **2026-07-18 · Aevi (PO).** Read this first, then `SYSTEM_SPEC.md §9b`.
 

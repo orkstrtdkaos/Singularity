@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "coliseum_champion_shape",
+  "type": "duel",
+  "name": "The Bout: The Made Ground",
+  "locationId": "the_great_coliseum",
+  "setup": "Bricke arrives with a satchel and permission to use it. By the third exchange the sand has a wall in it that was not there, and the terms of the bout have quietly changed.",
+  "lethal": false,
+  "opponent": {
+    "name": "Bricke of the Making",
+    "health": 5,
+    "threat": 36,
+    "yieldAt": 1,
+    "fleeDifficulty": 15,
+    "spectrum": {
+      "destruction_creation": 0.5
+    },
+    "tacticTags": [
+      "builds-the-ground",
+      "changes-the-terms",
+      "makes-a-tool-from-nothing",
+      "fights-you-in-a-room-he-built"
+    ]
+  }
+}

@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 15,
-  "xp": 1488,
+  "xp": 1493,
   "attributes": {
     "physical": 4,
     "mental": 5,
@@ -101,7 +101,7 @@
   "maxHealth": 100,
   "health": 100,
   "maxEnergy": 170,
-  "energy": 98,
+  "energy": 96,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1107,14 +1107,19 @@
         "player": "Before you move, scan the surrounding stalls — something caught your eye while you were packing, a dry hollow under the neighboring table where something small has been left behind",
         "summary": "Silas retrieves a sealed tin from the hollow under the neighboring stall — dry, intact, abandoned. Veth notes it; Huginn looks and turns away.",
         "narration": "You crouch beside the neighboring stall's table before anyone moves. The table is empty — the stall hasn't opened yet this morning, its cloth still knotted around the legs. The dry hollow is just inside the table's front skirt: a gap between the packed earth and the lower crossbar, barely a hand's width tall.\n\nInside it sits a small tin, the same kind as the chalk dust you carry — wax-sealed, about the width of your palm. It is dry and clean, which means it was set there deliberately, not kicked in by accident. Someone chose this spot as a hiding place and did not come back.\n\nYou lift it carefully. The wax seal is intact and uncracked. Whatever is inside shifts slightly when you tilt it — loose and small, not powder. Not rattling like coin. Something between the two.\n\nVeth watches from two paces away, bag already on her shoulder. She says nothing, but she has clocked exactly what you found and where. Huginn drops from Memory's shaft, lands on the table edge above the hollow, and looks down into it. Then looks at you. Then looks away."
+      },
+      {
+        "player": "Use The Attended End on the tin — read whether what's inside is ending, and how",
+        "summary": "The Attended End reads the sealed tin — nothing inside is ending; the contents are stable, the abandonment was not voluntary.",
+        "narration": "You hold the tin still in both hands and let Marrow's sense settle into it — quiet, economical, the way you'd rest a palm on a door to feel whether there's heat on the other side.\n\nWhat comes back is simple. Nothing inside that tin is ending. Nothing has an hour written on it, no trajectory bending toward a close. Whatever is in there is inert and stable — small objects, not living, not dying, not poisoned, not decaying. The wax seal has kept them dry. They are in roughly the condition they were placed.\n\nThat tells you two things. The tin was left here by someone who expected to return, and that person has not been back recently enough to disturb anything. Whatever interrupted their return, it was not the tin.\n\nVeth watches you from a foot away, bag already on her shoulder. She says nothing. Huginn has turned its attention to the north end of the market row."
       }
     ],
     "lastTurn": {
-      "narration": "You crouch beside the neighboring stall's table before anyone moves. The table is empty — the stall hasn't opened yet this morning, its cloth still knotted around the legs. The dry hollow is just inside the table's front skirt: a gap between the packed earth and the lower crossbar, barely a hand's width tall.\n\nInside it sits a small tin, the same kind as the chalk dust you carry — wax-sealed, about the width of your palm. It is dry and clean, which means it was set there deliberately, not kicked in by accident. Someone chose this spot as a hiding place and did not come back.\n\nYou lift it carefully. The wax seal is intact and uncracked. Whatever is inside shifts slightly when you tilt it — loose and small, not powder. Not rattling like coin. Something between the two.\n\nVeth watches from two paces away, bag already on her shoulder. She says nothing, but she has clocked exactly what you found and where. Huginn drops from Memory's shaft, lands on the table edge above the hollow, and looks down into it. Then looks at you. Then looks away.",
-      "sceneSummary": "Silas retrieves a sealed tin from the hollow under the neighboring stall — dry, intact, abandoned. Veth notes it; Huginn looks and turns away.",
+      "narration": "You hold the tin still in both hands and let Marrow's sense settle into it — quiet, economical, the way you'd rest a palm on a door to feel whether there's heat on the other side.\n\nWhat comes back is simple. Nothing inside that tin is ending. Nothing has an hour written on it, no trajectory bending toward a close. Whatever is in there is inert and stable — small objects, not living, not dying, not poisoned, not decaying. The wax seal has kept them dry. They are in roughly the condition they were placed.\n\nThat tells you two things. The tin was left here by someone who expected to return, and that person has not been back recently enough to disturb anything. Whatever interrupted their return, it was not the tin.\n\nVeth watches you from a foot away, bag already on her shoulder. She says nothing. Huginn has turned its attention to the north end of the market row.",
+      "sceneSummary": "The Attended End reads the sealed tin — nothing inside is ending; the contents are stable, the abandonment was not voluntary.",
       "choices": [
         {
-          "label": "Open the tin now — see what's inside before the party moves",
+          "label": "Break the seal and open the tin now — see what was worth hiding here",
           "attribute": "practical",
           "subAttribute": "wits",
           "difficulty": 0,
@@ -1124,9 +1129,9 @@
           "trivial": true
         },
         {
-          "label": "Pocket the tin unopened and carry it to Pell and Siol — open it together when the party is assembled",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Pocket the tin unopened and go find Pell and Siol — open it when the party is together",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "difficulty": 0,
           "intentTags": [
             "careful"
@@ -1134,9 +1139,9 @@
           "trivial": true
         },
         {
-          "label": "Ask Veth if she recognizes the hollow — whether she knows who worked the stall beside her",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Ask Huginn — it has watched every stall in this row since before first light; does it know who left this?",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
             "study"
@@ -1144,28 +1149,26 @@
           "trivial": true
         },
         {
-          "label": "Use The Attended End on the tin — read whether what's inside is ending, and how",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Ask Veth directly — she has worked this market row long enough to know the neighboring stall and its keeper",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "abilityId": "the-attended-end",
-          "energyCost": 2,
-          "trivial": false
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "The dark-cloth stall in the Hub market row — Veth packed and ready, stall bundle lashed. Morning light over the row, neighboring stall still closed. Silas crouching beside the neighboring table, sealed tin in hand.",
+        "setting": "The dark-cloth stall in the Hub market row, morning light strengthening over the row. Veth is packed and standing. The neighboring stall is still closed, its cloth knotted around the legs. The dry hollow beneath it is now empty.",
         "npcsPresent": [
           {
             "name": "Veth Ondra",
-            "state": "Bag on shoulder, watching Silas with the tin — calm, clocked it immediately."
+            "state": "Bag on shoulder, watching Silas with the tin — calm, waiting."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the neighboring stall's table edge — looked into the hollow, looked at Silas, looked away."
+            "state": "Attention shifted north toward the far end of the market row."
           },
           {
             "name": "Siol",
@@ -1179,57 +1182,53 @@
         "objects": [
           "Memory — leaning against the stall frame, shaft upright",
           "Veth's canvas shoulder bag — packed tight, stall bundle lashed to outside",
-          "Small sealed tin — wax intact, contents shifting slightly when tilted, retrieved from the dry hollow",
+          "Small sealed tin — wax intact, contents stable and inert, now in Silas's hands",
           "Dry hollow under the neighboring stall's crossbar — now empty",
           "Seven waygate arches visible to the north"
         ],
         "threads": [
-          "Sealed tin — contents unknown, wax intact, abandoned deliberately",
+          "Sealed tin — contents unknown but stable; abandonment was not voluntary",
           "Pell and Siol not yet introduced to Veth — party not yet assembled",
           "The evening suggestion between Silas and Pell — filed, not resolved"
         ]
       },
-      "characterDeltas": {
-        "inventoryAdd": [
-          {
-            "name": "Abandoned Sealed Tin",
-            "kind": "misc",
-            "description": "A small wax-sealed tin, the width of a palm — dry and clean, set deliberately in a hollow under the neighboring stall's table and not collected. Contents shift when tilted: loose, small, not powder. The seal is intact.",
-            "consumable": false
-          }
-        ]
-      },
-      "placeUpdates": [
-        {
-          "note": "The dry hollow under the neighboring stall's table crossbar is now empty — a small sealed tin retrieved from it by Silas Weir on World-day 19 morning.",
-          "subPlace": {
-            "name": "Neighboring Stall Cache — Market Row",
-            "parent": "Hub Waygate Plaza",
-            "note": "Dry hollow under the neighboring stall's front crossbar — now empty, tin retrieved.",
-            "visited": true
-          }
-        }
-      ],
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "veth-stillwater-ondra",
           "name": "Veth (Stillwater) Ondra",
-          "note": "Watched Silas retrieve the tin from the neighboring hollow — clocked it immediately, said nothing, waiting.",
-          "statusNote": "Stall folded, bag on shoulder, ready to travel — watching Silas with the retrieved tin."
+          "note": "Watched Silas use The Attended End on the tin — did not ask what he read, waiting for him to share or act.",
+          "statusNote": "Stall folded, bag on shoulder, ready to travel — watching Silas with the retrieved tin.",
+          "status": "active"
         }
-      ]
+      ],
+      "codexUpdates": [
+        {
+          "topic": "neighboring-stall-tin",
+          "label": "Abandoned Sealed Tin — Market Row",
+          "kind": "mystery",
+          "fact": "The Attended End confirms: nothing inside the tin is ending. The contents are inert, stable, and in roughly the condition they were placed. The abandonment was not voluntary — whoever left this expected to return.",
+          "links": [
+            "the-edge-district-ledger",
+            "waygate"
+          ]
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A brief craft read — moments only"
+      }
     },
     "sceneState": {
-      "setting": "The dark-cloth stall in the Hub market row — Veth packed and ready, stall bundle lashed. Morning light over the row, neighboring stall still closed. Silas crouching beside the neighboring table, sealed tin in hand.",
+      "setting": "The dark-cloth stall in the Hub market row, morning light strengthening over the row. Veth is packed and standing. The neighboring stall is still closed, its cloth knotted around the legs. The dry hollow beneath it is now empty.",
       "npcsPresent": [
         {
           "name": "Veth Ondra",
-          "state": "Bag on shoulder, watching Silas with the tin — calm, clocked it immediately."
+          "state": "Bag on shoulder, watching Silas with the tin — calm, waiting."
         },
         {
           "name": "Huginn",
-          "state": "Perched on the neighboring stall's table edge — looked into the hollow, looked at Silas, looked away."
+          "state": "Attention shifted north toward the far end of the market row."
         },
         {
           "name": "Siol",
@@ -1243,12 +1242,12 @@
       "objects": [
         "Memory — leaning against the stall frame, shaft upright",
         "Veth's canvas shoulder bag — packed tight, stall bundle lashed to outside",
-        "Small sealed tin — wax intact, contents shifting slightly when tilted, retrieved",
+        "Small sealed tin — wax intact, contents stable and inert, now in Silas's hands",
         "Dry hollow under the neighboring stall's crossbar — now empty",
         "Seven waygate arches visible to the north"
       ],
       "threads": [
-        "Sealed tin — contents unknown, wax intact, abandoned deliberately",
+        "Sealed tin — contents unknown but stable; abandonment was not voluntary",
         "Pell and Siol not yet introduced to Veth — party not yet assembled",
         "The evening suggestion between Silas and Pell — filed, not resolved"
       ]
@@ -2382,7 +2381,8 @@
         "[d6] Took Silas's open palm, named the Raven's Home without flinching, and began folding the stall. She is in — practically and without ceremony.",
         "[d6] Broke the stall down in under ten minutes — packed light, no food, new straps on an old bag. Noted Pell hasn't been introduced yet. Ready to move.",
         "[d6] You know this person's name now: Veth (Stillwater) Ondra (was \"Veth Ondra\")",
-        "[d6] Watched Silas retrieve the tin from the neighboring hollow — clocked it immediately, said nothing, waiting."
+        "[d6] Watched Silas retrieve the tin from the neighboring hollow — clocked it immediately, said nothing, waiting.",
+        "[d6] Watched Silas use The Attended End on the tin — did not ask what he read, waiting for him to share or act."
       ],
       "knownFacts": [
         "Her Raven name is Stillwater — no one in the world holds this from her except Silas now",
@@ -4271,21 +4271,21 @@
     }
   },
   "tendencies": {
-    "strategic": 14.026377095977688,
-    "cerebral": 12.655321224452521,
-    "social": 23.779897514586178,
-    "generous": 2.4273209486898653,
-    "cautious": 4.979133470917963,
-    "physical": 1.1065447900523575,
-    "risky": 1.1604314267152962,
-    "ruthless": 0.36999087885792376,
-    "carousing": 0.0056687280957423885,
-    "amorous": 4.425745706237503,
-    "patient": 0.9163492254070214,
-    "stealth": 0.14340940989866904,
-    "devotion": 0.3204692031111069,
-    "craft": 1.13283594629101,
-    "leadership": 0.7299698121193148
+    "strategic": 13.675717668578246,
+    "cerebral": 13.338938193841209,
+    "social": 23.185400076721525,
+    "generous": 2.3666379249726184,
+    "cautious": 4.854655134145014,
+    "physical": 1.0788811703010486,
+    "risky": 1.1314206410474137,
+    "ruthless": 0.36074110688647565,
+    "carousing": 0.005527009893348828,
+    "amorous": 4.315102063581565,
+    "patient": 0.8934404947718458,
+    "stealth": 0.1398241746512023,
+    "devotion": 0.3124574730333292,
+    "craft": 1.1045150476337346,
+    "leadership": 0.7117205668163319
   },
   "aptitudes": [
     "strategist",
@@ -4293,7 +4293,7 @@
     "scholar",
     "orator"
   ],
-  "actionCount": 564,
+  "actionCount": 565,
   "grantsVersion": 1,
   "reconcileVersion": 6,
   "gallery": [
@@ -4571,8 +4571,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784423178573,
-  "rev": 827,
+  "updatedAt": 1784423746387,
+  "rev": 828,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5816,7 +5816,7 @@
       "palework": 26,
       "deathsense": 24,
       "shadowstep": 17,
-      "the-attended-end": 28,
+      "the-attended-end": 29,
       "wildcraft": 4,
       "the_raised_thing": 6,
       "the_ended_threat": 4,
@@ -5965,7 +5965,7 @@
   "syncedAt": 1784392733860,
   "teachers": {},
   "regionsKnown": {
-    "valley": 386
+    "valley": 387
   },
   "foreclosed": [
     "rootkin",
@@ -6022,10 +6022,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-18T12:05:42.242Z",
-      "lastAt": "2026-07-19T01:06:18.571Z",
+      "lastAt": "2026-07-19T01:15:46.383Z",
       "startDay": 18,
       "endDay": 19,
-      "beats": 111,
+      "beats": 112,
       "_recapError": null,
       "recap": "Day eighteen, and Silas Weir moved like a man who'd finally stopped fighting the shape of what he was. On the road he disarmed three opportunists without breaking bones, read the grief sitting behind the broad man's eyes, named it plainly, pressed provisions into their hands, and sent them toward something worth doing — mercy given as instruction, not sentiment. Then he brought the hard people together: Dara, Aldric, Fendt, Mara, Calvar, all of them in the heat of Pell's forge with no exits easy and no pretense left, and in that single evening he turned a valley's quiet panic into four working threads — engineering, logistics, supply, accounts — each with a named lead and a direction to face. The crisis didn't end, but it stopped being formless, and that was his doing."
     }

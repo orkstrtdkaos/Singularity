@@ -1,7 +1,71 @@
-{"schemaVersion":1,"items":[
-  {"id":"marcher_blade","name":"Marcher's Blade","kind":"weapon","description":"A duelist's blade of the Redline \u2014 perfectly balanced, honestly deadly, carried openly because hiding it would be dishonor. Eases the Edge; marks you as someone who knows the forms.","bonusTags":["melee","edge","honor"],"consumable":false},
-  {"id":"truce_token","name":"Truce-Token","kind":"focus","description":"A split stone whose halves are held by two parties to a Stillcraft truce \u2014 while both halves exist and are kept, the truce is witnessed. Breaking your half breaks your word visibly. Eases Stillcraft binding.","bonusTags":["bind","truce","witness"],"consumable":false},
-  {"id":"marchward_ledger","name":"Marchward Ledger","kind":"tool","description":"A mediator's book of who owes whom what across the two cultures \u2014 grievances, debts, standing. Read it and you can walk into a dispute already knowing its shape. Corran keeps the master copy.","bonusTags":["mediate","knowledge","standing"],"consumable":false},
-  {"id":"stillhold_veil","name":"Stillhold Veil","kind":"armor","description":"A fine woven veil of the peace-city \u2014 wearing it reads as 'I hold the peace,' and in the Stillhold that is real protection. Elsewhere it marks you as someone who was let inside, for good or ill.","bonusTags":["peace","social","protection"],"consumable":false},
-  {"id":"forms_manual","name":"The Forms","kind":"tool","description":"A Redline training-scroll of the Edge's disciplines \u2014 studying it teaches the etiquette of challenge and refusal as much as the strike. Knowing the forms can end a fight before it starts.","bonusTags":["edge","etiquette","learn"],"consumable":false}
-]}
+{
+  "schemaVersion": 1,
+  "items": [
+    {
+      "id": "marcher_blade",
+      "name": "Marcher's Blade",
+      "kind": "weapon",
+      "description": "A duelist's blade of the Redline — perfectly balanced, honestly deadly, carried openly because hiding it would be dishonor. Eases the Edge; marks you as someone who knows the forms.",
+      "bonusTags": [
+        "melee",
+        "edge",
+        "honor"
+      ],
+      "consumable": false
+    },
+    {
+      "id": "truce_token",
+      "name": "Truce-Token",
+      "kind": "focus",
+      "description": "A split stone whose halves are held by two parties to a Stillcraft truce — while both halves exist and are kept, the truce is witnessed. Breaking your half breaks your word visibly. Eases Stillcraft binding.",
+      "bonusTags": [
+        "bind",
+        "truce",
+        "witness",
+        "substrate-suppressing"
+      ],
+      "consumable": false,
+      "substrateCharge": -0.05,
+      "substrateNote": "A split stone of the Stillhold accord — quiet in the hand and quiet around it."
+    },
+    {
+      "id": "marchward_ledger",
+      "name": "Marchward Ledger",
+      "kind": "tool",
+      "description": "A mediator's book of who owes whom what across the two cultures — grievances, debts, standing. Read it and you can walk into a dispute already knowing its shape. Corran keeps the master copy.",
+      "bonusTags": [
+        "mediate",
+        "knowledge",
+        "standing"
+      ],
+      "consumable": false
+    },
+    {
+      "id": "stillhold_veil",
+      "name": "Stillhold Veil",
+      "kind": "armor",
+      "description": "A fine woven veil of the peace-city — wearing it reads as 'I hold the peace,' and in the Stillhold that is real protection. Elsewhere it marks you as someone who was let inside, for good or ill.",
+      "bonusTags": [
+        "peace",
+        "social",
+        "protection",
+        "substrate-suppressing"
+      ],
+      "consumable": false,
+      "substrateCharge": -0.1,
+      "substrateNote": "Woven in the peace-city, which gave the lattice up with the war. The veil reads as a refusal and thins the ground around its wearer."
+    },
+    {
+      "id": "forms_manual",
+      "name": "The Forms",
+      "kind": "tool",
+      "description": "A Redline training-scroll of the Edge's disciplines — studying it teaches the etiquette of challenge and refusal as much as the strike. Knowing the forms can end a fight before it starts.",
+      "bonusTags": [
+        "edge",
+        "etiquette",
+        "learn"
+      ],
+      "consumable": false
+    }
+  ]
+}

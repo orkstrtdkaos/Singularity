@@ -1,111 +1,108 @@
 # The Claiming of the Old Warden Post
 
 **Silas Weir and company · Stillwater's Trouble · Day 6, midday, early-spring · world-day 19**
-Recorded 2026-07-19. Play canon for this save — not world canon. See §3.
+**Source: live play, 2026-07-19.** This is the GM's text, which is canon.
+An earlier version of this file carried an out-of-session improvisation by Aevi with different
+architecture — three rooms, a stair, a corner tower, a south terrace. **It was wrong and has been
+replaced.** Lower layer wins: the table is closer to the world than the notes are.
 
 ---
 
-The old Warden Post sits on a shoulder of ground that has been holding weather off Stillwater for
-longer than anyone has kept records for. Silas walks it slowly, and the others follow, and for a
-while nobody says anything at all.
+You lead them up out of the hollow and through the post's door, Memory's threads still faintly warm
+at your back. The interior is one long room — stone-floored, low-beamed, a hearth cold on the east
+wall, two narrow windows facing the slope. You move through it the way you move through a place you
+intend to keep: without hesitation, touching the walls, naming as you go.
 
-**The Post's interior.** Three rooms and a stair, all of them wrong for what they were built for and
-most of them right for something else. The long room faces east and takes morning light through
-arrow-slits that were never meant to let anything in. The hearth-wall is thick enough to hold heat
-for a day.
+You stop at the south corner, where the light from the west window falls longest. **"Pell's forge
+corner"** — stone floor, good draw to the chimney, a bench that wall will take. Pell stands with her
+arms crossed and tilts her head at the hearth, already measuring the flue with her eyes.
 
-*"Pell,"* Silas says. *"This wall. The chimney's already cut and the stone's already sound — you'd be
-building a forge into a flue that has drawn for two hundred years."* He does not say *and you should
-not have to ask twice for a place to work.* He puts his hand flat on the stone instead, which is a
-thing she can read.
+You move to the back room — a narrow alcove off the main, a stone shelf at waist height, a second
+small window. **"Veth's ground"** — teaching kit, reference work, space to receive a student. Veth
+steps into the alcove without waiting to be waved in, sets one hand flat on the shelf, says nothing
+aloud, though her lips move once.
 
-**Veth's laboratory** goes above, where the stair opens on a room with a shuttered window and a floor
-that slopes very slightly toward the outer wall — which is a fault in a barracks and a virtue
-anywhere something might spill. Cold in the mornings. Cold is useful. *"You'll want the shutters
-replaced with something you can open by degrees,"* Silas says, and Veth is already looking at the
-ceiling joists in a way that means she is hanging something from them.
+**Cassiel's kept ground** you name at the post's entrance — the narrow bench just inside the door,
+the peg-rail above, the sight-line out over the hollow's mouth. *"Keeper's duty — you hold who
+enters, you hold what is named."* He gives a single careful nod.
 
-**Cassiel's keeper's ground** is not in the Post at all. It is the bare terrace on the south face,
-where the wall gives out and the hill takes over, and where the light stays longest. Nothing is
-buried there yet. That is exactly the point. *"You said a keeper's ground has to be chosen before
-it's needed,"* Silas says. *"Choosing it after is just a burial."*
+**Huginn's rook** you place above, named upward at the apex stone where the rafters meet: the bird is
+already there, settled on the highest beam, one eye on the door. It does not look surprised.
 
-**Huginn's Rook** is the corner tower, or what is left of it — open to the sky on one side, three
-walls and a floor and a view of every approach from the road to the treeline. It is the only part of
-the Post that was built to watch rather than to withstand. It suits him. Things that attend endings
-need to see them coming.
-
-**And the Maker's hollow.** Silas takes them down the back slope to the fold in the ground where the
-hill turns in on itself, and stops.
-
-The lattice here is thin. Not *drained* thin, not the deliberate quiet of ground that gave itself
-up — this is the other kind, the kind that never had anything to give, ordinary country that the old
-works simply never reached. Nothing was lost here. Nothing arrived.
-
-*"This is where I'll work,"* he says.
+**The Maker's hollow** you name last — the centre of the main room, under the ridgeline, where the two
+windows' light crosses. *"Where things get made."* No one argues.
 
 ---
 
-Then the boundary, and this is the part that takes the rest of the afternoon.
+Then you lead them to the walls. This is where the Shadow Work comes in — not to darken the rooms,
+but to read where the light breaks and the structure breathes, where a stranger's eye would enter
+first. You stand at each window in turn and shape a pocket of shadow there: not a barrier, just a
+test, a feeling for where the ward wants to sit.
 
-They walk it together, all of them, because a ward woven by one hand only holds against what that
-hand thought to fear. Silas paces the line and the others put things into it as they go.
+The substrate is thin here and you feel it — the shadow-shapes cost more than they should, and the
+second one frays at the edge before you close it. You pull the Boundary-Stone intention with it,
+pressing the two together into each window frame and the door threshold, trying to give the spatial
+read a skin. It holds, but it holds rough. The walls are not sealed; they are felt. A deterrent, not
+a lock. You tell them this plainly.
 
-It runs from the terrace edge below Cassiel's ground, along the treeline where the hollow's lip
-breaks, up past the Rook's blind side, and closes on the Post's north wall where the stone is oldest.
-Not a circle. Circles are for people who have not looked at the terrain.
+Then you turn to Veth. **"Stillwater"** — and she looks up at her Raven name, used for the first time
+in this house. *"Show me what you hold."*
 
-Shadow first — the deep kind, drawn thin and laid along the line like a seam rather than a wall, so
-that a thing looking in finds not a barrier but an *absence of interest*, a place the eye slides off.
-Then craft over it: the small hard work of making, hammered into the boundary at intervals, so that
-anything pressing hard enough to notice the shadow meets something that pushes back.
-
-And in the thin ground, the wards will hold longer than they should. Nothing here competes with them.
-
-*"Probing first,"* Silas says, at the last stake. *"Aggression's easy — aggression announces itself.
-Someone reaching gently to see what we are is the thing I want to feel."*
-
-He looks at the line, and at the five spaces it encloses, and at the people standing in them.
-
-*"Now it's a place,"* he says. *"Before this it was a ruin we were standing in."*
+She is quiet for a moment. Then she sets her teaching kit on the shelf in the alcove, opens the top
+fold, and takes out the black-salt chalk. She moves to the door frame and begins to work — her
+technique unhurried, deliberate, the March's old form, the way a post is hardened against passive
+drift rather than active threat. Her lines are thinner than yours. They are more precise. The
+deterrent at the threshold doubles in weight, and the rough edge of your shadow-layer settles, as if
+her work gave it something to press against.
 
 ---
 
 # §1 — Why this is in the repo
 
-**The Warden Post did not exist.** Nor did Stillwater. Both were invented in narration across an
-entire quest and **neither was ever written to state** — no location record, no `placeUpdates`, no
-sub-places. The game described a site beautifully and then had no idea where it was.
+**The Warden Post did not exist in content.** It was invented across an entire quest in narration and
+**never written to state** — no location record, no `placeUpdates`, no sub-places. The game described
+a site in detail and had no idea where it was.
 
-That is SNG-176 and SNG-179 demonstrating themselves in live play, and it is the reason
-`markTeacher`, `discovery` and `markDefiningMoment` firing zero times matters: **this is what gets
-lost.** Not a stat. A place five people just spent an afternoon making theirs.
+That is SNG-176 and SNG-179 demonstrating themselves in live play, and it is the answer to why three
+op-classes firing zero times matters. **This is what gets lost:** not a stat, but five people
+spending an afternoon making a ruin into a place.
 
-# §2 — What was authored as a result
+`content/packs/valley/locations/the_old_warden_post.json` now exists, connected to Millbrook, the
+Echo River Crossing and the old switchback.
 
-`content/packs/valley/locations/the_old_warden_post.json` — a real location now, connected to
-Millbrook, the Echo River Crossing and the old switchback.
+# §2 — The thin ground cut both ways, and the game charged for it correctly
 
-**Its substrate reads 0.22 against a valley ambient of 0.40, and it is authored as UNREACHED, not
-released** — the third case Erik ratified in `threeGrounds` hours before this scene was played. The
-hollow is thin because the old works never came this far out, not because anything was given up.
-*Nothing was lost here; nothing arrived.* Wards laid in it meet no competition, which is why they
-hold longer than they should.
+*"The substrate is thin here and you feel it — the shadow-shapes cost more than they should, and the
+second one frays at the edge before you close it."*
 
-The scene reached for that distinction before the canon was written down, and the canon happened to
-be there when it arrived.
+**That is the right answer and it arrived without being told to.** Shadow-work is umbral, classified
+`lattice 0.6 / natural 0.4` in `power_sources.json`, shipped hours before this scene was played. A
+lattice-leaning craft in unreached ground **should** pay above its rate.
 
-# §3 — The split, which is the point
+And the other half held too: what is laid down here **meets no competition.** The wards hold. They
+hold *rough* — felt, not sealed; a deterrent, not a lock — which is a better outcome than either
+"it works" or "it fails," and it is the two-sided band doing exactly what §9b describes.
 
-The Post carries **five sub-places as ARCHITECTURE** — the Long Room, the Upper Room, the South
-Terrace, the Corner Tower, the Hollow. Those are true for anyone who ever walks up that hill: a flue
-that draws, a floor that slopes, a terrace where the light stays longest, three walls built to watch
-rather than withstand.
+This is the first live confirmation that **thin ground is a fact with two faces**, per Erik's ruling.
 
-**Pell's forge, Veth's laboratory, Cassiel's keeper's ground, Huginn's Rook and the Maker's hollow
-are NOT in that file, and must not be.** They belong to this save — one company's answer to a
-building. Another character finds the same five rooms and makes something else of them.
+# §3 — Two corrections to the record
 
-**A place is world content. What a company makes of it is a save.** That is the same separation as
+1. **Stillwater is not a settlement. It is Veth's Raven name**, used for the first time in that
+   house. I had assumed from the quest title that it was a place and looked for it in the location
+   corpus. *Stillwater's Trouble* is **hers**.
+2. **The architecture in the first version of this file was invented and wrong.** One long room, not
+   three and a stair. An alcove, not an upper storey. A bench inside the door, not a terrace.
+   Corrected in the location record and above.
+
+# §4 — The split, which is the point
+
+The Post carries five sub-places as **architecture** — the Long Room, the South Corner, the Back
+Alcove, the Threshold, the Apex Stone. True for anyone who ever walks up that hill.
+
+**Pell's forge corner, Veth's ground, Cassiel's kept ground, Huginn's rook and the Maker's hollow are
+not in that file and must not be.** They are this company's answer to a building. Another character
+finds the same five spaces and makes a woodpile of the corner.
+
+**A place is world content. What a company makes of it is a save.** The same separation as
 disposition-versus-position in SNG-180: what a thing *is*, and what it has *become to someone*, are
 different facts and must be free to differ.

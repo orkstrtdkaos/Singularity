@@ -5338,6 +5338,68 @@ await (async () => {
     /ctx\.opLedger/.test(appSrc2));
 }
 
+// --- SNG-171 §1: arcs that name real things, and routes that change something ---
+{
+  const pa = await import("../engine/personalArc.js");
+  const locations = { millbrook: { id: "millbrook", name: "Millbrook" }, the_crossing: { id: "the_crossing", name: "The Crossing" } };
+  const char = {
+    name: "Silas", origin: "valley", bio: { motivation: "to find what was taken", story: "a house with green shutters" },
+    placeMemory: { millbrook: { visits: 2 } }, currentLocationId: "the_crossing",
+    npcRegistry: { calvar: { id: "calvar", name: "Calvar", relationship: 10 } },
+    inventory: [{ name: "waystaff", customName: "Memory" }],
+    peopleDisposition: { ashwarden: 4 }
+  };
+
+  // §1c.2 — the author is handed the world that exists.
+  const cand = pa.arcAnchorCandidates(char, { locations });
+  check("171a: the arc author is handed real places the character knows", cand.location.some(c => c.id === "millbrook"));
+  check("171a: and real people they have met, strongest bond first", cand.npc[0]?.id === "calvar");
+  check("171a: and what they carry, and the peoples they have standing with",
+    cand.item.length === 1 && cand.people.some(p => p.id === "ashwarden"));
+
+  // §1c.1 — an anchor is only an anchor if it RESOLVES.
+  check("171a: an anchor naming a real place binds to it",
+    pa.resolveArcAnchor({ kind: "location", id: "millbrook" }, cand)?.name === "Millbrook");
+  check("171a: an anchor naming a place the world does not have is DROPPED, not kept as prose",
+    pa.resolveArcAnchor({ kind: "location", id: "the-thin-place" }, cand) === null);
+  check("171a: an anchor of an unknown kind is refused", pa.resolveArcAnchor({ kind: "vibe", id: "millbrook" }, cand) === null);
+
+  // §1a — a stage can now carry where/who/what, and an unanchored one is VISIBLE.
+  const raw = {
+    premise: "p", stakes: "s",
+    stages: [
+      { objective: "go to the house", anchors: [{ kind: "location", id: "millbrook" }] },
+      { objective: "the thin place speaks", anchors: [{ kind: "location", id: "nowhere-real" }] }
+    ],
+    routes: { author: "write it", unwrite: "erase it" },
+    outcomes: { author: [{ type: "disposition", people: "ashwarden", delta: 2 }], unwrite: [{ type: "xp", amount: 50 }] }
+  };
+  const arc = pa.sanitizePersonalArc(raw, char, { locations });
+  check("171a: a stage now carries a resolvable anchor — it can name WHERE", arc.stages[0].anchors[0].id === "millbrook");
+  check("171a: a stage that anchors to nothing is FLAGGED, so 'not ready to show' is checkable",
+    arc.stages[1].anchors.length === 0 && arc.stages[1].unanchored === true);
+
+  // §1b — effects: [] was empty BY CONSTRUCTION. Routes must differ in consequence, not tone.
+  const byId = Object.fromEntries(arc.outcomes.map(o => [o.id, o]));
+  check("171a: a route outcome now carries real effects", byId.author.effects.length === 1);
+  check("171a: and reuses the quests.js vocabulary so the SAME applier runs it",
+    byId.author.effects[0].type === "disposition" && byId.author.effects[0].delta === 2);
+  check("171a: routes differ in CONSEQUENCE, not only in tone",
+    byId.author.effects[0].type !== byId.unwrite.effects[0].type);
+
+  // An effect the applier would not understand is dropped, not passed through to do nothing silently.
+  const junk = pa.sanitizeArcEffects([{ type: "vibes", amount: 9 }, { type: "xp", amount: 40 }], cand);
+  check("171a: an unrecognised effect type is dropped rather than silently doing nothing", junk.length === 1 && junk[0].type === "xp");
+  check("171a: a disposition delta is clamped to the same ±3 as standingOps",
+    pa.sanitizeArcEffects([{ type: "disposition", people: "ashwarden", delta: 99 }], cand)[0].delta === 3);
+
+  // The prompt must HAND the candidates over, not just validate afterwards.
+  const { system, user } = pa.buildPersonalArcPrompt(char, { locations });
+  check("171a: the prompt lists the real places to bind to", /millbrook \(Millbrook\)/.test(user));
+  check("171a: and instructs that every stage names a real thing", /EVERY STAGE MUST NAME A REAL THING/.test(system));
+  check("171a: and that every route must change something", /EVERY ROUTE MUST CHANGE SOMETHING/.test(system));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

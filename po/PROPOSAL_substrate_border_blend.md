@@ -314,3 +314,45 @@ gives the 24 traditions another axis on which to differ in idiom rather than in 
 3. **`bonusTags`** should carry a readable marker (`substrate-gathering`, `lattice-warded`) so the
    GM and the player can see it without opening a stat block — per BATCH-12 §2.
 4. **The two falloff scales remain untuned** and are still SNG-078 harness work. Unchanged.
+
+
+---
+
+# REVISION 4 — RETRACTION, and the spec restated as outcomes
+
+**CCode stopped on this and was right to.** Recorded plainly.
+
+## What I got wrong
+
+1. **The published numbers are not reproducible from the repo.** My verification ran from an
+   uncommitted script in `/tmp`. Anyone checking my work had to reconstruct the formula from prose.
+   That is not a verifiable claim; it is an assertion with decimals on it.
+2. **The formula had a load-bearing detail no reader could infer**: each source's delta was measured
+   against **its own region's** ambient, not the target location's. That is why a faithful reading of
+   the prose moves `the_blaze` the wrong way.
+3. **I specced a resolver that already exists.** `carriedSubstrate` has read `item.substrateCharge`
+   and `companion.substrateAura` since before this session. Erik's correction — *"USE the engines"* —
+   is exact. The gap is that it accepts positives only, so it does pools and not sinks.
+
+**All published per-location numbers in REV2 and REV3 are RETRACTED.** Not "pending confirmation" —
+withdrawn. The authored content stands; the numbers attached to it do not.
+
+## What replaces them: outcomes, not arithmetic
+
+The invariants now live in **`SYSTEM_SPEC.md §9b`** and are the contract:
+
+1. pool site resolves above its region's density; sink site below
+2. regional means stay close to the authored table (calibration is the target, not the output)
+3. influence falls with distance and reaches zero
+4. mobile and geographic sources compose through the existing `effectiveDensity` path
+5. never a silent modifier — receipts name the cause, including a carried one
+6. every location resolves a density (CI, as today)
+
+**CCode owns the math.** Kernel shape, falloff form, and whether the field is precomputed into
+`location.substrateDensity` (the hook `locationDensity` already reads first) or resolved live are
+engineering decisions, not PO decisions. If a simpler function satisfies the invariants, it is the
+better one.
+
+**The falloff scales remain untuned and the `tuningNote` blocker stands.** Any constants that land
+before `tests/balance_sim.mjs` exists are provisional by definition and should be named in one place
+so the harness can move them.

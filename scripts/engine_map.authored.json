@@ -1,0 +1,105 @@
+{
+  "_README": [
+    "AUTHORED columns for ENGINE_MAP.md. Never generated, never overwritten by scripts/engine_map.mjs.",
+    "",
+    "purpose — one sentence. If a module needs two, it is probably two modules.",
+    "playerVisibleSurface — the control, receipt, panel or prose the PLAYER actually meets. Write NONE",
+    "  when nothing reaches them. NONE is not a failure; some machinery is correctly invisible. It is a",
+    "  FLAG: a module with NONE, no content dependency and no GM verb is the exact shape that produced",
+    "  the eight built-and-unreached capabilities, and it is a different question from reachability —",
+    "  skill_battle was reachable in principle and invisible in practice for months.",
+    "",
+    "Backfill is incremental (ROUND 2 §5): a module gets its two lines when a spec touches it. The CI",
+    "gate WARNS on an undescribed module and FAILS on a half-described one, because a purpose with no",
+    "surface reads as complete when it is not."
+  ],
+
+  "namematch.js": {
+    "purpose": "The one name-resolution primitive — slugify and fuzzy-match an entity the same way everywhere, so codex, quests and inventory can never disagree about what the GM just named.",
+    "playerVisibleSurface": "Indirect but constant: every id the player sees, and the quest panel's \"couldn't match\" note when the GM names something that does not resolve."
+  },
+  "quests.js": {
+    "purpose": "Quests as typed state the GM drives through clamped ops — the model proposes, the engine adjudicates and refuses in the open.",
+    "playerVisibleSurface": "The quest panel: active quests, stage progress lines (✦ …), the resolution choice when every stage is done, and refusal notes when the GM names the wrong stage."
+  },
+  "playerprofile.js": {
+    "purpose": "Player identity across characters, and the earned play-style (tendencies, aptitudes) that accrues on each character from how it is actually played.",
+    "playerVisibleSurface": "The profile screen's play-style readout, and the character-select roster."
+  },
+  "art.js": {
+    "purpose": "Images for characters, locations, items, NPCs and big moments, from either a static file or a generated prompt, behind one seam.",
+    "playerVisibleSurface": "Every image in the app: location art, portraits, item art, the moment gallery."
+  },
+  "npcs.js": {
+    "purpose": "NPC permanence — everyone met, authored or invented mid-scene, gets a durable registry entry the GM writes to through clamped npcUpdates.",
+    "playerVisibleSurface": "The people list and each NPC's detail card: who they are, where you met, what has passed between you."
+  },
+  "traditions.js": {
+    "purpose": "The Great Circle geometry — the 24-station ring, neighbours, antipodes and distances — read from content, never hardcoded.",
+    "playerVisibleSurface": "The skill wheel's ring layout and the tradition labels shown on abilities and standing."
+  },
+  "skilltree.js": {
+    "purpose": "Skill legibility and gating: tiers, attribute gates, and what is learnable now versus later.",
+    "playerVisibleSurface": "The skill wheel and skill graph — tier rings, locked/unlocked state, and the reason a locked ability is locked."
+  },
+  "company.js": {
+    "purpose": "The unified company: companion, trainer, liaison, partner and ally are stacking ROLES a person in your party holds, each wired to the system that already implements it.",
+    "playerVisibleSurface": "The company panel — who travels with you and what each one is to you."
+  },
+  "reputation.js": {
+    "purpose": "Deeds are the source of truth and reputation is a VIEW over them — a community's opinion is the sum of the deeds it knows about.",
+    "playerVisibleSurface": "The standing list on the character screen (band per people). Empty for most players today — the gap BATCH-12 §3 exists to close."
+  },
+  "progression.js": {
+    "purpose": "Character growth with numbers you can point at — sub-attributes, levelling, ability acquisition and the receipts for each.",
+    "playerVisibleSurface": "Level-up prompts, the attribute allocation screen, new-ability offers, and the ✦ receipt lines when something is earned."
+  },
+  "state.js": {
+    "purpose": "Content-pack loading and save/load — localStorage is authoritative, GitHub sync is optional on top.",
+    "playerVisibleSurface": "Boot (\"Loading the Valley\"), the save/load controls, and the recovery-slot list when a save fails to write."
+  },
+  "generate.js": {
+    "purpose": "The ONE generative path — authors a new NPC, location or arc in-grain for its locale, validates against the derived schema, resolves before minting so it never duplicates, and persists it.",
+    "playerVisibleSurface": "Any place or person that did not exist until the fiction needed it; the player meets these as ordinary world content."
+  },
+  "places.js": {
+    "purpose": "Location permanence — durable changes, things left behind and discoveries that OUTLIVE the scene, fed back on every return visit.",
+    "playerVisibleSurface": "The location panel's \"what happened here\" lines on returning somewhere you have been."
+  },
+  "claude.js": {
+    "purpose": "Anthropic API transport, with MODEL_MAP as the single source of truth for task→model routing and a token/stop_reason log per call.",
+    "playerVisibleSurface": "NONE directly — but every latency the player feels and every API error card comes from here."
+  },
+  "worldmap.js": {
+    "purpose": "The data-driven map foundation: stable auto-positioning for every location including ones minted mid-play, plus the three zoom tiers.",
+    "playerVisibleSurface": "The map screen and its World / Region / Location tier bar."
+  },
+  "intent.js": {
+    "purpose": "Intent confirmation for costly acts — nothing irreversible or world-scale commits until the player confirms, the same shape character creation already uses.",
+    "playerVisibleSurface": "The confirmation card before a harmful or departing act, naming the cost in plain language."
+  },
+  "waygate.js": {
+    "purpose": "The waygate network and its hub at the Crossing, including routing a GM's moveTo to a real gate rather than letting it mint a destination.",
+    "playerVisibleSurface": "The waygate travel control and the destination list when standing at a gate."
+  },
+  "gm.js": {
+    "purpose": "Assembles the GM prompt and parses the structured reply — code owns the rules and the dice, the model owns the words.",
+    "playerVisibleSurface": "All narration and the choice buttons; also the salvage path that keeps prose on screen when the reply parses badly."
+  },
+  "substrate.js": {
+    "purpose": "The SECOND difficulty map — the nanite lattice varies in density by place and each tradition is tuned to a band of it, so where you stand changes what you can do.",
+    "playerVisibleSurface": "The success-chance readout before acting (the penalty is folded in, per SNG-116) and the thin/crowded lattice note the GM works into prose. No named receipt of its own."
+  },
+  "practice.js": {
+    "purpose": "Competency as the residue of attention — an engine-owned ledger of ability use and co-activation that unlocks ranks at zero skill-point cost.",
+    "playerVisibleSurface": "Aspiration progress and the unlock notices when practice crosses a threshold."
+  },
+  "party.js": {
+    "purpose": "Shared-world play — scene publication, the open-scene index, and merge-safe writes so two players in one scene cannot clobber each other.",
+    "playerVisibleSurface": "The party beat feed and the presence indicator when someone else is in your scene."
+  },
+  "gm_registry.js": {
+    "purpose": "The declared table of everything the GM can be told — one row per context block, iterated at every call site so a capability cannot be built and left unreachable.",
+    "playerVisibleSurface": "NONE. It is the §23 wiring contract itself; the player meets it only as a GM that knows things."
+  }
+}

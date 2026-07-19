@@ -8,10 +8,10 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 17,
-  "xp": 1600,
+  "xp": 1640,
   "attributes": {
     "physical": 4,
-    "mental": 5,
+    "mental": 6,
     "social": 6,
     "practical": 6
   },
@@ -106,7 +106,7 @@
   "maxHealth": 110,
   "health": 110,
   "maxEnergy": 180,
-  "energy": 180,
+  "energy": 176,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1070,7 +1070,16 @@
     "Silas, Pell, and Huginn step through the waygate together at dawn — the road south beginning in earnest.",
     "Silas thanks Tane at the close of the morning bouts, rejoins Siol, and hears her plain assessment of the fight. Siol offers a tour of the Hub — plaza first, Ent circle last — and the scene at the Coliseum reaches its natural end.",
     "The party followed Siol north through the Hub's quieter lanes and arrived at the edge of the Ent grove circle at midday — the path giving way to older ground, the circle of trees ahead, Siol stopping at its edge.",
-    "The party stepped through the sixth waygate at the Hub — Siol at the arch's edge, the gate-keeper's instruction plain, the March setting confirmed north-by-northwest. The road to Raven's Home has begun."
+    "The party stepped through the sixth waygate at the Hub — Siol at the arch's edge, the gate-keeper's instruction plain, the March setting confirmed north-by-northwest. The road to Raven's Home has begun.",
+    {
+      "kind": "quest_resolved",
+      "questId": "the-door-that-closed-behind",
+      "title": "The Door That Closed Behind",
+      "outcome": "Read",
+      "narration": [],
+      "worldDay": 19,
+      "at": "2026-07-19T18:31:52.037Z"
+    }
   ],
   "currentLocationId": "gen-stillwater-s-trouble",
   "activeScene": {
@@ -1140,61 +1149,83 @@
         "player": "Use the Attended End quietly — read the hollow itself, not Cassiel; understand whether what was done eleven years ago was a completion or a beginning",
         "summary": "The Attended End reads the hollow plainly: completion, not beginning — the naming eleven years ago was a settled fact, not a seed.",
         "narration": "You do not move. Cassiel is still watching Veth, and Veth has not yet spoken. The moment belongs to them.\n\nYou let the Attended End open the way you let your eyes adjust to a dim room — no effort, just permission. You are not reading Cassiel. You are reading the hollow.\n\nWhat comes back is plain, and quick. The hollow is not a beginning. It was never a beginning. Something was placed here eleven years ago — a naming, a frame, a word spoken into dark earth that told the accumulation what shape to hold. That act is complete. It has been complete since the woman sat here and said what she said. The hollow did not grow into a door. It settled into a fact.\n\nCassiel has been sitting on a closed thing and calling it open because he could not bear for it to be finished.\n\n*You feel it settle into you — a new steadiness. (Level 17: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*\n\n*✦ The Door That Closed Behind — a step forward. Every stage is done; how it ends is yours to choose.*"
+      },
+      {
+        "player": "Step forward and Claim your own role in this - but let the Door that Closed Behind be read by you now, in your current form.  And let come what may.",
+        "summary": "Silas steps forward and attempts to read the sealed door through order-sense and deathsense combined — the two crafts do not braid here; the door's full design remains unread.",
+        "narration": "You step forward. Not toward Cassiel, not toward Veth — toward the post. Toward the door that was here before any of you arrived, the one whose tracks you sealed into the binding without fully reading.\n\nYou open Order-Sense and Deathsense together, the way you would press two hands against a surface to feel what is on the other side. You are not looking for what is ending. You are looking for what the sealed thing was part of — the design it belonged to, the whole of it, including the parts that are not present. The hollow is caught-not-ended behind the binding. The post stands on the ridge above. You are asking: what does this door complete?\n\nIt does not answer cleanly. The two crafts do not braid here — Order-Sense reaches for the design's full shape and finds the death-lens in the way, a dark glass laid over the geometry. Deathsense reaches for what is ending and finds the structure's logic interrupting, a frame without a body to read. The place is sealed. What you touch is the outside of something that has already been closed. You can feel the door's weight and its age. You cannot read what it is a door to. The craft comes back empty-handed, and you let it go without forcing it.\n\nCassiel has not looked at you. He is still watching Veth, waiting. The hollow holds its quiet. Whatever the door is part of, it is not yet yours to know."
       }
     ],
     "lastTurn": {
-      "narration": "You do not move. Cassiel is still watching Veth, and Veth has not yet spoken. The moment belongs to them.\n\nYou let the Attended End open the way you let your eyes adjust to a dim room — no effort, just permission. You are not reading Cassiel. You are reading the hollow.\n\nWhat comes back is plain, and quick. The hollow is not a beginning. It was never a beginning. Something was placed here eleven years ago — a naming, a frame, a word spoken into dark earth that told the accumulation what shape to hold. That act is complete. It has been complete since the woman sat here and said what she said. The hollow did not grow into a door. It settled into a fact.\n\nCassiel has been sitting on a closed thing and calling it open because he could not bear for it to be finished.\n\n*You feel it settle into you — a new steadiness. (Level 17: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*\n\n*✦ The Door That Closed Behind — a step forward. Every stage is done; how it ends is yours to choose.*",
-      "sceneSummary": "The Attended End reads the hollow plainly: completion, not beginning — the naming eleven years ago was a settled fact, not a seed.",
+      "narration": "You step forward. Not toward Cassiel, not toward Veth — toward the post. Toward the door that was here before any of you arrived, the one whose tracks you sealed into the binding without fully reading.\n\nYou open Order-Sense and Deathsense together, the way you would press two hands against a surface to feel what is on the other side. You are not looking for what is ending. You are looking for what the sealed thing was part of — the design it belonged to, the whole of it, including the parts that are not present. The hollow is caught-not-ended behind the binding. The post stands on the ridge above. You are asking: what does this door complete?\n\nIt does not answer cleanly. The two crafts do not braid here — Order-Sense reaches for the design's full shape and finds the death-lens in the way, a dark glass laid over the geometry. Deathsense reaches for what is ending and finds the structure's logic interrupting, a frame without a body to read. The place is sealed. What you touch is the outside of something that has already been closed. You can feel the door's weight and its age. You cannot read what it is a door to. The craft comes back empty-handed, and you let it go without forcing it.\n\nCassiel has not looked at you. He is still watching Veth, waiting. The hollow holds its quiet. Whatever the door is part of, it is not yet yours to know.",
+      "sceneSummary": "Silas steps forward and attempts to read the sealed door through order-sense and deathsense combined — the two crafts do not braid here; the door's full design remains unread.",
       "choices": [
         {
-          "label": "Tell Cassiel quietly — what was done here eleven years ago was finished the moment it was done. He has been holding a question that already has an answer.",
+          "label": "Tell Veth and Cassiel plainly what you found — the door resists reading; the design behind it is sealed",
           "attribute": "social",
           "subAttribute": "presence",
-          "difficulty": 15,
+          "difficulty": 0,
+          "trivial": true,
           "intentTags": [
-            "comfort",
-            "calm"
+            "help"
           ],
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "axes": {}
         },
         {
-          "label": "Say nothing — let Veth answer. She was the warden here. The answer is hers to give, and you have only confirmed what she likely already knows.",
+          "label": "Hold your silence and let Veth answer Cassiel first — her word comes before your read",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
+          "trivial": true,
           "intentTags": [
-            "careful"
+            "guard"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "axes": {}
         },
         {
-          "label": "Speak to Veth alone — step half-aside, give her the read in a low word so she can decide what to do with it before Cassiel hears it.",
+          "label": "Ask Cassiel a direct question — who was the woman who sat here, and where is she now",
           "attribute": "social",
           "subAttribute": "rapport",
-          "difficulty": 0,
+          "difficulty": 15,
+          "trivial": false,
           "intentTags": [
-            "careful",
-            "plan"
+            "study",
+            "persuade"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "axes": {
+            "falsehood_truth": 0.4
+          }
         },
         {
-          "label": "Hold the read and watch Veth answer on her own — see whether she arrives at the same truth without you.",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Walk up the rise to the warden post and put your hands on the sealed door itself — not a craft attempt, just contact",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "difficulty": 0,
+          "trivial": true,
           "intentTags": [
-            "study"
+            "scout"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "axes": {}
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -2
+      },
       "scene": {
-        "setting": "Stillwater's Trouble hollow — shallow bowl, dark earth floor, limestone outcrop at the far rim, birch stopped at the bowl's edge. Overcast cold midday. Silas stands at Veth's left shoulder; Pell holds the rim above.",
+        "setting": "Stillwater's Trouble hollow — shallow bowl, dark earth floor, limestone outcrop at the far rim, birch stopped at the bowl's edge. Overcast cold midday. Silas stands at Veth's left shoulder, one step forward toward the post above; Pell holds the rim above.",
         "npcsPresent": [
           {
             "name": "Veth Ondra",
-            "state": "Standing three paces from Cassiel — still, waiting to answer him"
+            "state": "Standing three paces from Cassiel — still, has not yet answered him; watching Silas's step forward"
           },
           {
             "name": "Pell Marsh",
@@ -1206,19 +1237,20 @@
           },
           {
             "name": "Cassiel Ord",
-            "state": "Sitting at the hollow's near edge, looking at Veth — the thing he came to say said, waiting for her answer"
+            "state": "Sitting at the hollow's near edge, looking at Veth — the thing he came to say said; did not look at Silas during the read attempt; waiting for Veth's answer"
           }
         ],
         "objects": [
           "Dark earth hollow — accumulation's source, caught-not-ended behind the binding",
           "Limestone outcrop at the far rim",
           "Birch stand stopping precisely at the hollow's edge",
-          "Cassiel Ord's open pack"
+          "Cassiel Ord's open pack",
+          "Raven's Home warden post — on the ridge above, door sealed, binding runes seated"
         ],
         "threads": [
-          "Cassiel waits for Veth's answer — completion or beginning",
-          "Silas holds a plain read from the Attended End: completion, settled eleven years ago",
-          "The woman who sat here and named the hollow is still unnamed",
+          "Cassiel waits for Veth's answer — completion or beginning; the hollow reads as completion but the door's design remains unread",
+          "The sealed door resisted Silas's combined craft read — its full design is not yet known",
+          "The woman who sat here eleven years ago is still unnamed",
           "Huginn has not signaled"
         ]
       },
@@ -1227,48 +1259,42 @@
           "op": "update",
           "npcId": "cassiel-ord",
           "name": "Cassiel Ord",
-          "note": "Silas read the hollow with the Attended End — confirmed it is a completion, not a beginning. Cassiel has been sitting on a finished thing.",
-          "statusNote": "Sitting in the hollow — the thing he came to say now said; waiting for Veth's answer while Silas holds a read he has not yet shared."
+          "note": "Silas stepped toward the post and attempted a craft-read of the sealed door — Cassiel did not look at him during it; still watching Veth, still waiting",
+          "statusNote": "Sitting in the hollow — still waiting for Veth's answer; has not yet acknowledged Silas's step or the failed read"
         },
         {
           "op": "update",
           "npcId": "veth-ondra",
           "name": "Veth Ondra",
-          "note": "Still present at the exchange's hinge — has not yet answered Cassiel.",
-          "statusNote": "Standing three paces from Cassiel in the hollow — waiting, present, not yet answering."
+          "note": "Witnessed Silas step forward toward the post and attempt the door-read; has not yet answered Cassiel; still holding the moment",
+          "statusNote": "Standing three paces from Cassiel in the hollow — the exchange at its hinge, Cassiel waiting, Silas's read unresolved"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "the-door-that-closed-behind",
-          "label": "The Door That Closed Behind",
+          "topic": "raven-home-sealed-door",
+          "label": "Raven's Home — The Sealed Door",
           "kind": "mystery",
-          "fact": "The Attended End reads the hollow plainly: the naming eleven years ago was a completion. The hollow settled into a fact the moment the woman spoke. It is not a seed. Cassiel has been holding the question open against a thing that was already finished.",
+          "fact": "Order-Sense and Deathsense combined could not read the design behind the sealed door — the two crafts did not braid in this place; the door's full structure remains unknown. The place is sealed from the outside, not open to death-reading.",
           "links": [
+            "the-edge-district-ledger",
+            "the-water-crisis",
             "cassiel-ord",
-            "veth-ondra",
-            "the-edge-district-ledger"
+            "veth-ondra"
           ]
-        }
-      ],
-      "stageOps": [
-        {
-          "questId": "the-door-that-closed-behind",
-          "stageId": "s3",
-          "evidence": "Silas used the Attended End to read the hollow directly — confirmed the act eleven years ago was a completion, not a beginning; the hollow settled into a fact and did not become a door."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A quiet read in a still hollow — a few minutes, no more."
+        "why": "a brief craft attempt and its quiet failure"
       }
     },
     "sceneState": {
-      "setting": "Stillwater's Trouble hollow — shallow bowl, dark earth floor, limestone outcrop at the far rim, birch stopped at the bowl's edge. Overcast cold midday. Silas stands at Veth's left shoulder; Pell holds the rim above.",
+      "setting": "Stillwater's Trouble hollow — shallow bowl, dark earth floor, limestone outcrop at the far rim, birch stopped at the bowl's edge. Overcast cold midday. Silas stands at Veth's left shoulder, one step forward toward the post above; Pell holds the rim above.",
       "npcsPresent": [
         {
           "name": "Veth Ondra",
-          "state": "Standing three paces from Cassiel — still, waiting to answer him"
+          "state": "Standing three paces from Cassiel — still, has not yet answered him; watching Silas's step forward"
         },
         {
           "name": "Pell Marsh",
@@ -1280,19 +1306,20 @@
         },
         {
           "name": "Cassiel Ord",
-          "state": "Sitting at the hollow's near edge, looking at Veth — the thing he came to say said, waiting for her answer"
+          "state": "Sitting at the hollow's near edge, looking at Veth — the thing he came to say said; did not look at Silas during the rea"
         }
       ],
       "objects": [
         "Dark earth hollow — accumulation's source, caught-not-ended behind the binding",
         "Limestone outcrop at the far rim",
         "Birch stand stopping precisely at the hollow's edge",
-        "Cassiel Ord's open pack"
+        "Cassiel Ord's open pack",
+        "Raven's Home warden post — on the ridge above, door sealed, binding runes seated"
       ],
       "threads": [
-        "Cassiel waits for Veth's answer — completion or beginning",
-        "Silas holds a plain read from the Attended End: completion, settled eleven years ago",
-        "The woman who sat here and named the hollow is still unnamed",
+        "Cassiel waits for Veth's answer — completion or beginning; the hollow reads as completion but the door's design remains unread",
+        "The sealed door resisted Silas's combined craft read — its full design is not yet known",
+        "The woman who sat here eleven years ago is still unnamed",
         "Huginn has not signaled"
       ]
     }
@@ -1617,7 +1644,7 @@
       "id": "the-door-that-closed-behind",
       "title": "The Door That Closed Behind",
       "structured": true,
-      "status": "active",
+      "status": "resolved",
       "premise": "A wright who finished something — completely, without pause, without asking if he should — discovers that the thin place was never an entrance. It was the consequence: the world sealed what he made into itself, and him with it, and now what he finished is alive somewhere ahead.",
       "stakes": "To understand what he completed, and whether completion was the same as creation — or whether he built a door from the inside and never knew it.",
       "axis": null,
@@ -1685,7 +1712,11 @@
       "aliases": [],
       "startedAt": "2026-07-19T14:27:08.855Z",
       "startedWorldDay": 19,
-      "awaitingResolution": true
+      "awaitingResolution": true,
+      "outcomeId": "read",
+      "outcomeName": "Read",
+      "resolvedAt": "2026-07-19T18:31:52.037Z",
+      "resolvedWorldDay": 19
     }
   ],
   "npcRegistry": {
@@ -2499,7 +2530,6 @@
       },
       "relationship": 9,
       "history": [
-        "[d6] Read the tracks aloud as the party walked — not running, not lost, they knew this road. Added quietly that she knew this road once.",
         "[d6] Watched Silas bind the post with compound rune-work — named the thing by its name, Stillwater's Trouble, without being told. Asked plainly if the binding holds.",
         "[d6] Asked 'Well?' the moment Silas straightened from the post — waiting for his read, contained but intent.",
         "[d6] Held her question through the Boundary-Stone work — waiting for Silas to brief the group on what Deathsense found.",
@@ -2508,7 +2538,8 @@
         "[d6] Led the group over the rise to Stillwater's Trouble on muscle memory — her feet knew the path. Spoke only Cassiel's name at the rim. Waiting for his answer.",
         "[d6] Cassiel has spoken to her — she has not yet replied; the exchange has begun on her ground.",
         "[d6] Descended to Cassiel without hesitation — feet remembered the grade. Standing still three paces from him, giving him the room to speak.",
-        "[d6] Still present at the exchange's hinge — has not yet answered Cassiel."
+        "[d6] Still present at the exchange's hinge — has not yet answered Cassiel.",
+        "[d6] Witnessed Silas step forward toward the post and attempt the door-read; has not yet answered Cassiel; still holding the moment"
       ],
       "knownFacts": [
         "Raven's Home is past the first tributary — left branch at the marker stone; right branch leads to the old survey post, which is gone",
@@ -2531,7 +2562,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Standing three paces from Cassiel in the hollow — waiting, present, not yet answering.",
+      "statusNote": "Standing three paces from Cassiel in the hollow — the exchange at its hinge, Cassiel waiting, Silas's read unresolved",
       "lastSeen": {
         "locationId": "gen-stillwater-s-trouble",
         "day": 6
@@ -2559,7 +2590,8 @@
         "[d6] Spoke his first words to Veth — was not certain she would come; felt the binding go in before dawn; has been here since before dawn.",
         "[d6] Confirmed he arrived yesterday evening, before the binding. Felt it go in. Says he did not want the accumulation to rise alone. Has something specific to say to Veth — named it as such, named this place as the right one to say it.",
         "[d6] Named the thing he came to say: eleven years ago a woman sat in the hollow and told it what it was for; the hollow quieted; he was her second; he has been deciding ever since whether it was a completion or a beginning; he came to ask Veth",
-        "[d6] Silas read the hollow with the Attended End — confirmed it is a completion, not a beginning. Cassiel has been sitting on a finished thing."
+        "[d6] Silas read the hollow with the Attended End — confirmed it is a completion, not a beginning. Cassiel has been sitting on a finished thing.",
+        "[d6] Silas stepped toward the post and attempted a craft-read of the sealed door — Cassiel did not look at him during it; still watching Veth, still waiting"
       ],
       "knownFacts": [
         "Has been sitting at the hollow's rim since before dawn — a vigil, not an arrival",
@@ -2575,7 +2607,7 @@
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "Sitting in the hollow — the thing he came to say now said; waiting for Veth's answer while Silas holds a read he has not yet shared.",
+      "statusNote": "Sitting in the hollow — still waiting for Veth's answer; has not yet acknowledged Silas's step or the failed read",
       "lastSeen": {
         "locationId": "gen-stillwater-s-trouble",
         "day": 6
@@ -3210,13 +3242,13 @@
     "strength": 3,
     "agility": 4,
     "reason": 5,
-    "insight": 5,
+    "insight": 6,
     "presence": 7,
     "rapport": 5,
     "craft": 7,
     "wits": 5
   },
-  "pendingSubPoints": 1,
+  "pendingSubPoints": 0,
   "skillPoints": 1,
   "discoveries": [],
   "codex": {
@@ -4560,21 +4592,21 @@
     }
   },
   "tendencies": {
-    "strategic": 16.778207604239494,
-    "cerebral": 21.62362421527421,
-    "social": 10.57688252909204,
-    "generous": 3.3717972393259394,
-    "cautious": 5.866795903943711,
-    "physical": 0.4921717703107715,
-    "risky": 0.5161396038778493,
-    "ruthless": 0.16456547216468878,
-    "carousing": 0.0025213511168941743,
-    "amorous": 1.9684942884970271,
-    "patient": 1.0257173199580336,
-    "stealth": 0.06378599744318654,
-    "devotion": 1.3030895610964308,
-    "craft": 0.5038656168010548,
-    "leadership": 0.3246778060264377
+    "strategic": 16.358752414133505,
+    "cerebral": 23.083033609892354,
+    "social": 10.31246046586474,
+    "generous": 3.287502308342791,
+    "cautious": 6.720126006345118,
+    "physical": 0.4798674760530022,
+    "risky": 0.503236113780903,
+    "ruthless": 0.16045133536057155,
+    "carousing": 0.00245831733897182,
+    "amorous": 1.9192819312846015,
+    "patient": 1.0000743869590827,
+    "stealth": 0.06219134750710688,
+    "devotion": 1.27051232206902,
+    "craft": 0.4912689763810284,
+    "leadership": 0.31656086087577673
   },
   "aptitudes": [
     "strategist",
@@ -4582,7 +4614,7 @@
     "scholar",
     "sage"
   ],
-  "actionCount": 596,
+  "actionCount": 597,
   "grantsVersion": 1,
   "reconcileVersion": 10,
   "gallery": [
@@ -4884,8 +4916,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784485536743,
-  "rev": 894,
+  "updatedAt": 1784486033336,
+  "rev": 897,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5820,7 +5852,7 @@
           "entityId": "cassiel-ord",
           "type": "npc",
           "birthWeight": 24,
-          "engagementScore": 14,
+          "engagementScore": 16,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -5863,6 +5895,10 @@
             },
             {
               "kind": "fact",
+              "day": 6
+            },
+            {
+              "kind": "interact",
               "day": 6
             },
             {
@@ -6328,9 +6364,9 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 58,
+      "order_sense": 59,
       "palework": 28,
-      "deathsense": 27,
+      "deathsense": 28,
       "shadowstep": 17,
       "the-attended-end": 32,
       "wildcraft": 6,
@@ -6350,7 +6386,7 @@
       "lightsense+order_sense": 1,
       "deathsense+palework": 3,
       "order_sense+palework": 5,
-      "deathsense+order_sense": 3,
+      "deathsense+order_sense": 4,
       "palework+the-attended-end": 1,
       "deathsense+the-attended-end": 2,
       "order_sense+the-attended-end": 1,
@@ -6381,7 +6417,8 @@
     ],
     "lastUsed": {
       "deathsense": 19,
-      "the-attended-end": 19
+      "the-attended-end": 19,
+      "order_sense": 19
     }
   },
   "companionBonds": {
@@ -6527,7 +6564,7 @@
   "syncedAt": 1784477453768,
   "teachers": {},
   "regionsKnown": {
-    "valley": 421
+    "valley": 422
   },
   "foreclosed": [
     "rootkin",
@@ -6597,10 +6634,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-07-19T11:58:49.560Z",
-      "lastAt": "2026-07-19T18:25:36.742Z",
+      "lastAt": "2026-07-19T18:33:53.333Z",
       "startDay": 19,
       "endDay": 19,
-      "beats": 14
+      "beats": 15
     }
   ],
   "company": [
@@ -6776,5 +6813,6 @@
     "syllogist": 0.8,
     "ashwarden": 2,
     "umbral": 1
-  }
+  },
+  "worldEvents": []
 }

@@ -13,7 +13,7 @@ import { gmTurn, parseIntent, gmAsk, generateBio, suggestBuild, extractGambit, s
 import { applyQuestUpdates, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, slugify, advanceStructuredQuest } from "./engine/quests.js";
 import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM } from "./engine/corrections.js";
 import { getApiKey, setApiKey, callClaude, callClaudeJSON, parseLooseJSON } from "./engine/claude.js";
-import { generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight, NOMINATE_AT } from "./engine/generate.js";
+import { unearnedDepth, generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight, NOMINATE_AT } from "./engine/generate.js";
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, ghList, fetchRepoJSON, raceTimeout } from "./engine/sync.js";
 import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates } from "./engine/inventory.js";
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
@@ -57,7 +57,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.139";
+const APP_VERSION = "1.8.140";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1517,8 +1517,48 @@ function noteGeneratedAttention(id, kind, day) {
   const slug = String(id);
   for (const type of ["npc", "location", "arc"]) {
     const rec = character.generated[type]?.[slug];
-    if (rec) { recordAttention(rec, kind, day); return; }
+    if (rec) {
+      recordAttention(rec, kind, day);
+      // SNG-178: the ladder measured investment and never spent it. A rung crossing is the moment a
+      // record became owed more than it carries, so deepen it — lazily, once, and never blocking.
+      if (rec._gen?.needsDepth && type === "npc") enrichNpcDepth(rec);
+      return;
+    }
   }
+}
+
+/** SNG-178: author the fields this NPC has EARNED. Best-effort and non-blocking, the same shape as
+ *  enrichPersonalArc — a person who has become important should read as one, but a failed call must
+ *  never cost the turn. Fires once per rung: the flag clears whether or not the model answers, so a
+ *  bad call does not retry forever on every subsequent interaction. */
+async function enrichNpcDepth(rec) {
+  const owed = unearnedDepth(rec);
+  if (!owed.length || !getApiKey()) { if (rec._gen) delete rec._gen.needsDepth; return; }
+  const tier = rec._gen?.tier || "established";
+  if (rec._gen) delete rec._gen.needsDepth;             // one attempt per rung, success or not
+  try {
+    const system = `You deepen an EXISTING person in a narrative RPG. They have become someone the player returns to, so they need the substance that earns. Keep every established fact — you are ADDING, never revising. Author ONLY these fields as one JSON object: ${owed.join(", ")}. Match the world's voice: concrete, in-grain, no genre boilerplate.`;
+    const user = [
+      `WHO THEY ARE SO FAR:
+${JSON.stringify({ name: rec.name, role: rec.role, homeLocation: rec.homeLocation, people: rec.people, domains: rec.domains, wants: rec.wants, fears: rec.fears, knowledge: rec.knowledge }, null, 1)}`,
+      `WHAT THE PLAYER HAS DONE WITH THEM: ${(rec._gen?.attentionHistory || []).map(a => a.kind).join(", ") || "returned to them"}`,
+      tier === "nominated"
+        ? `They are now DURABLE CANON — this person has their own life, their own reach, and reasons of their own. Author accordingly.`
+        : `They are ESTABLISHED — enough that they can be met again and be recognisably the same person.`,
+      `Return ONLY the JSON object with those fields.`
+    ].join("\n\n");
+    const raw = await callClaudeJSON([{ role: "user", content: user }], { task: "generate", system });
+    if (!raw || typeof raw !== "object") return;
+    let filled = 0;
+    for (const f of owed) {                              // ADDITIVE ONLY — never overwrite what play established
+      const v = raw[f];
+      if (v == null || v === "") continue;
+      const cur = rec[f];
+      const empty = cur == null || cur === "" || (Array.isArray(cur) && !cur.length) || (typeof cur === "object" && !Array.isArray(cur) && !Object.keys(cur).length);
+      if (empty) { rec[f] = typeof v === "string" ? smartClamp(v, 400) : v; filled++; }
+    }
+    if (filled) { rec._gen.depthTier = tier; saveCharacter(character); }
+  } catch { /* depth is a convenience; a person stays as they were */ }
 }
 
 /** Few-shot taste for generation: a few AUTHORED records of the type, disposition-near the

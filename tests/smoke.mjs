@@ -5238,6 +5238,37 @@ await (async () => {
     derivedOnly.peopleDisposition.rootkin < c.peopleDisposition.rootkin);
 }
 
+// --- SNG-178: depth follows investment (Erik's NPC-progression direction) ---
+{
+  const g = await import("../engine/generate.js");
+  const face = { _gen: { tier: "fresh", engagementScore: 0 }, name: "Someone", role: "a face in the crowd" };
+  check("178: a face nobody returns to owes NOTHING beyond the basics", g.unearnedDepth(face).length === 0);
+  check("178: and is not flagged for enrichment", g.needsEnrichment(face) === false);
+
+  // Returning to someone twice makes them established — and the record becomes owed more.
+  g.recordAttention(face, "interact", 1); g.recordAttention(face, "interact", 1);
+  check("178: two returns reach `established`", face._gen.tier === "established");
+  check("178: crossing a rung FLAGS the record as owed more than it carries", face._gen.needsDepth === "established");
+  check("178: an established person owes the fields that let them be met again",
+    g.unearnedDepth(face).includes("appearance") && g.unearnedDepth(face).includes("voiceHints"));
+
+  // Keep climbing and they owe the fields of durable canon — the doorway to Epic.
+  for (let i = 0; i < 3; i++) g.recordAttention(face, "quest", 2);
+  check("178: sustained investment reaches `nominated`", face._gen.tier === "nominated");
+  check("178: durable canon owes their own reach — seeds, arc, boundaries",
+    ["questSeeds", "arcId", "boundaries"].every(f => g.unearnedDepth(face).includes(f)));
+
+  // Depth already present is never re-owed — this is what keeps the check cheap on every turn.
+  const written = { _gen: { tier: "established" }, appearance: "a", voiceHints: "b", personality: { x: 1 }, history: "c", relationships: { y: 1 } };
+  check("178: a record already as deep as its standing owes nothing", g.unearnedDepth(written).length === 0);
+  check("178: and is not re-flagged", g.needsEnrichment(written) === false);
+
+  // The ladder must not demand depth of the tier that exists to stay cheap.
+  check("178: `fresh` is deliberately empty — a cast of thirty stays cheap", g.TIER_SCHEMA.fresh.length === 0);
+  check("178: each rung owes strictly more than the one below",
+    g.TIER_SCHEMA.nominated.length > g.TIER_SCHEMA.established.length && g.TIER_SCHEMA.established.length > g.TIER_SCHEMA.fresh.length);
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

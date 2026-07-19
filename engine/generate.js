@@ -345,7 +345,12 @@ export function recordAttention(entity, kind = "interact", day = null) {
   if (day != null) g.lastAttentionDay = day;
   else if (g.lastAttentionDay == null) g.lastAttentionDay = g.createdDay ?? null;
   g.attentionHistory = [...(g.attentionHistory || []), { kind, day: day ?? null }].slice(-24);
+  const before = g.tier;
   recomputeTier(entity);
+  // SNG-178: the rung crossing is the event worth acting on — it is the moment the record became
+  // owed more than it carries. Flagged rather than filled: authoring depth is a model call, and the
+  // caller decides when to spend it.
+  if (g.tier !== before && needsEnrichment(entity)) g.needsDepth = g.tier;
   return entity;
 }
 
@@ -366,6 +371,51 @@ export function recomputeTier(entity) {
   else if (s >= TIER_AT.established) g.tier = "established";
   else if (g.tier !== "established" && g.tier !== "nominated") g.tier = "fresh";
   return g.tier;
+}
+
+/** SNG-178 (Erik's direction, 2026-07-19): DEPTH FOLLOWS INVESTMENT.
+ *
+ *  Erik: "the ones that don't get attention and follow the promotion path don't really need more
+ *  than the basics filled into their schema. However, as they progress they need more persistence
+ *  and a richer schema filled in. Eventually they could become an EPIC npc."
+ *
+ *  The promotion LADDER already existed — fresh → established → nominated, driven by recordAttention
+ *  and the TIER_AT thresholds. What did not exist is any consequence for the RECORD: a person the
+ *  player has returned to nine times carried exactly the same seven stub fields as a face passed
+ *  once in a corridor. The ladder measured investment and never spent it.
+ *
+ *  This declares what each rung is OWED. It does not author anything itself — filling these is a
+ *  model call, and the caller schedules it — but it makes "is this record as deep as it has earned?"
+ *  a question with an answer, which is what lets the enrichment be lazy instead of eager. A cast of
+ *  thirty stays cheap; the four people who matter get written properly.
+ *
+ *  Deliberately NOT eager: enriching at mint would pay for depth on every passing face, which is the
+ *  cost Erik is explicitly declining. Enrichment is earned, not granted.
+ */
+export const TIER_SCHEMA = {
+  // a face in a crowd — what the stub already gives, and nothing more
+  fresh: [],
+  // someone the player has come back to: enough that they can be MET again consistently
+  established: ["appearance", "voiceHints", "personality", "history", "relationships"],
+  // durable personal canon, and the doorway to Epic: they have their own life and their own reach
+  nominated: ["appearance", "voiceHints", "personality", "history", "relationships",
+              "wants", "fears", "knowledge", "questSeeds", "arcId", "boundaries", "stages"]
+};
+
+/** Which fields this entity has EARNED but does not yet carry. Empty when it is as deep as its
+ *  standing warrants — which is the common case, and why this is cheap to ask on every turn. */
+export function unearnedDepth(entity) {
+  const tier = entity?._gen?.tier || "fresh";
+  const owed = TIER_SCHEMA[tier] || [];
+  return owed.filter(f => {
+    const v = entity[f];
+    return v == null || v === "" || (Array.isArray(v) && !v.length) || (typeof v === "object" && !Array.isArray(v) && !Object.keys(v).length);
+  });
+}
+
+/** Has this entity climbed past the depth it carries? The flag the caller acts on. Pure. */
+export function needsEnrichment(entity) {
+  return unearnedDepth(entity).length > 0 && (entity?._gen?.tier || "fresh") !== "fresh";
 }
 
 /** Is a FRESH entity dormant (untouched past the window)? Dormant = stops propagating —

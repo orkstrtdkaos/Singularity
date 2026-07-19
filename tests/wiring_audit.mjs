@@ -22,6 +22,18 @@
 //   - Orphan-export sweep. Some exports are legitimately internal (e.g.
 //     LEGEND_BEATS, a module-internal validation constant) — mark those with a
 //     trailing `// registry:internal` comment on the export line to silence.
+//
+// ⚠ `// registry:internal` IS A LEVER ON A RATCHET — know this before you reach for it.
+// The marker suppresses BOTH the orphan sweep AND the test-only ratchet. So marking an export
+// lowers `testOnlyExports` without wiring anything: the number improves and the capability is
+// still unreachable. That is the precise failure this whole audit exists to catch, available as a
+// one-line edit to whoever is under time pressure and does not know the lever is here.
+// It is being used correctly today — the PO checked all 11 markers added in CCODE-12 against the
+// test-only classification with the marker ignored, and zero of them would have classified
+// test-only unmarked, so the baseline of 8 is honest. Ratchets with levers get pulled eventually,
+// so the audit now REPORTS any marker that is actually suppressing a would-be test-only finding
+// (see "lever check" below) — a printed line cannot be missed the way this comment can.
+// Use it for a genuine module-internal helper. Never to make a number go down.
 
 import { readFileSync, readdirSync, writeFileSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
@@ -257,26 +269,35 @@ for (const rel of proseCapFiles) {
 // and merely exported so a test can see it. A naive scan calls ~85 exports test-only and buries the
 // 9 that genuinely cannot fire — the false positives are what make an advisory unreadable, which is
 // the same failure CCODE-01 fixed in the orphan sweep.
-const testOnlyExports = (() => {
+const { testOnlyExports, leverSuppressed } = (() => {
   const engFiles = readdirSync(join(root, "engine")).filter(f => f.endsWith(".js"));
   const engSrc = Object.fromEntries(engFiles.map(f => [f, read(`engine/${f}`)]));
   const testSrc = (() => { try { return readdirSync(join(root, "tests")).filter(f => /\.(mjs|js)$/.test(f)).map(f => read(`tests/${f}`)).join("\n"); } catch { return ""; } })();
   const idx = read("index.html");
-  const found = [];
+  const found = [], suppressed = [];
   for (const [file, src] of Object.entries(engSrc)) {
     for (const m of src.matchAll(/^export\s+(?:async\s+)?(?:function|const|let)\s+(\w+)/gm)) {
       const name = m[1];
+      const declLine = src.slice(src.lastIndexOf("\n", m.index) + 1, src.indexOf("\n", m.index));
       const re = () => new RegExp(`\\b${name}\\b`, "g");
       const selfUses = (src.match(re()) || []).length - 1;                  // minus its own declaration
       if (selfUses > 0) continue;                                            // internal helper — LIVE
       const runtime = Object.entries(engSrc).some(([f, s]) => f !== file && re().test(s))
         || re().test(appSrc) || re().test(idx);
       if (runtime) continue;
-      if (re().test(testSrc)) found.push(`engine/${file}::${name}`);
+      if (!re().test(testSrc)) continue;
+      // THE LEVER CHECK: this export WOULD count as test-only. If a marker is hiding it, the
+      // ratchet just went down without anything being wired — say so out loud. Marking a genuine
+      // module-internal helper never lands here, because selfUses > 0 already returned above.
+      if (/registry:internal/.test(declLine)) suppressed.push(`engine/${file}::${name}`);
+      else found.push(`engine/${file}::${name}`);
     }
   }
-  return found.sort();
+  return { testOnlyExports: found.sort(), leverSuppressed: suppressed.sort() };
 })();
+check(`no // registry:internal marker is hiding a test-only export (${leverSuppressed.length} suppressed)`,
+  leverSuppressed.length === 0,
+  `these are marked internal but have NO same-module caller — the marker is lowering the ratchet, not describing the code:\n      ${leverSuppressed.join("\n      ")}`);
 
 const measured = {
   testOnlyExports: testOnlyExports.length,

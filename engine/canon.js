@@ -61,11 +61,6 @@ export function ensureCanonStore(store, regionId = "valley") {
   return store;
 }
 
-/** All current canonical records in the store. */
-export function canonRecords(store) {
-  return Object.values(ensureCanonStore(store).entities);
-}
-
 // ---------- promotion (pure) ----------
 
 /** The local entities eligible to promote right now: nominated-tier, weight at/above the floor,

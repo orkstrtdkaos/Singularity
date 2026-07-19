@@ -4036,6 +4036,28 @@ await (async () => {
     npcPortraitTier(pell) === "partner"); // the app skips when n._portraitTier === this tier
 }
 
+// --- CCODE-13: the two dead exports are gone, and the ratchet's lever announces itself ---
+{
+  const canonSrc = readFileSync(new URL('../engine/canon.js', import.meta.url), 'utf8');
+  const genSrc13 = readFileSync(new URL('../engine/generate.js', import.meta.url), 'utf8');
+  check("CCODE-13: canonRecords is deleted (exported, never called, anywhere)", !/export function canonRecords/.test(canonSrc));
+  check("CCODE-13: ESTABLISH_AT is deleted", !/export const ESTABLISH_AT/.test(genSrc13));
+  check("CCODE-13: NOMINATE_AT — the threshold that IS consumed — survives", /export const NOMINATE_AT/.test(genSrc13));
+
+  // THE LEVER. `registry:internal` suppresses both the orphan sweep AND the test-only ratchet, so
+  // marking an export lowers the ratchet without wiring anything — the number improves and the
+  // capability is still unreachable. Verified by hand by the PO for CCODE-12's 11 markers; now a
+  // standing check, because a ratchet with an undocumented lever eventually gets pulled.
+  const auditSrc13 = readFileSync(new URL('../tests/wiring_audit.mjs', import.meta.url), 'utf8');
+  check("CCODE-13: the audit checks for a marker that is hiding a test-only export",
+    /no \/\/ registry:internal marker is hiding a test-only export/.test(auditSrc13));
+  check("CCODE-13: the lever check only fires when there is NO same-module caller (a real internal helper is never flagged)",
+    /if \(selfUses > 0\) continue;/.test(auditSrc13) &&
+    /if \(\/registry:internal\/\.test\(declLine\)\) suppressed\.push/.test(auditSrc13));
+  check("CCODE-13: the lever is documented AT the marker's definition, not only in the audit's head",
+    /IS A LEVER ON A RATCHET/.test(auditSrc13) && /Never to make a number go down/.test(auditSrc13));
+}
+
 // --- CCODE-12: a truncated reply must not lose a documented op (contract ↔ salvage parity) ---
 {
   const { salvageOps } = await import('../engine/gm.js');

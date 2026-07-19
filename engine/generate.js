@@ -327,7 +327,8 @@ const TIER_AT = { established: 3, nominated: 8 };   // engagementScore threshold
  *  reaching `nominated` — NOT on `effectiveWeight`, which is what the badge used to display. A
  *  player watching "weight 13" climb had no way to know the number that gates canon was 4/8. */
 export const NOMINATE_AT = TIER_AT.nominated;
-export const ESTABLISH_AT = TIER_AT.established;
+// (ESTABLISH_AT was exported here alongside NOMINATE_AT and never used by anything — deleted in
+// CCODE-13. `TIER_AT.established` is right there for whoever needs the establish threshold next.)
 const FRESH_WINDOW_DAYS = 4;                          // untouched-fresh grace before it goes dormant
 const ATTENTION_WEIGHT = { revisit: 2, interact: 2, fact: 1, quest: 2, session: 1, keep: 4 }; // keep = the explicit ⭐ (Phase 2): one tap reaches established, two reach nominated
 const ATTENTION_CAP = 60;

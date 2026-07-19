@@ -19,7 +19,7 @@ import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, AD
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { substrateVerdict, locationDensity, carriedSubstrate } from "./engine/substrate.js"; // SNG-090
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed } from "./engine/art.js";
-import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown } from "./engine/worldmap.js";
+import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, locationTierNodes, interiorLayout } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal } from "./engine/traditions.js";
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs } from "./engine/companions.js";
@@ -56,7 +56,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // SNG-162: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.123";
+const APP_VERSION = "1.8.125";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3693,8 +3693,119 @@ async function onAsk(text) {
 // SNG-080: danger, made legible on the map — so the player can SEE where fighting lives.
 function dangerLabel(dl) { return ["safe", "quiet", "uneasy", "dangerous", "deadly"][Math.max(0, Math.min(4, dl | 0))]; }
 
+// SNG-154 stage 6: ZOOM IS NAVIGATION BETWEEN TIERS, not a scale slider. 95 places on one
+// 800×440 canvas is unreadable — every label collides and the thing you're looking for is a dot
+// among ninety-four others. Each tier answers one question at the scale that question lives at:
+//   WORLD    which Reach am I in — regions as territories, and the gates that cross them
+//   REGION   where can I go from here — the settlements around me (today's map, finally scoped)
+//   LOCATION what is INSIDE this place — Millbrook → the Edge District → the Inn → the booth
+// The LOCATION tier never existed, which is why containment bugs had nowhere to become visible.
+let mapTier = "region";   // "world" | "region" | "location"
+let mapFocus = null;      // regionId when tier=region, locationId when tier=location
+
+function currentRegionId() {
+  const here = CONTENT.locations[character.currentLocationId];
+  return here?.regionId || here?.region || (CONTENT.regions || [])[0]?.regionId || null;
+}
+
+/** The tier strip + breadcrumb. Always shows where you are in the hierarchy and how to go up. */
+function mapTierBar() {
+  const rid = mapTier === "region" ? (mapFocus || currentRegionId()) : currentRegionId();
+  const rName = (CONTENT.regions || []).find(r => r.regionId === rid)?.name || String(rid || "").replace(/_/g, " ");
+  const locName = mapTier === "location" ? (CONTENT.locations[mapFocus]?.name || mapFocus) : null;
+  const crumb = (label, tier, focus, active) =>
+    `<button class="opt map-tier ${active ? "selected" : ""}" data-maptier="${tier}" data-mapfocus="${esc(focus || "")}">${esc(label)}</button>`;
+  return `<div class="map-tiers" style="margin-bottom:8px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+    ${crumb("🌍 World", "world", "", mapTier === "world")}
+    <span class="hint">›</span>
+    ${crumb(rName || "Region", "region", rid, mapTier === "region")}
+    ${locName ? `<span class="hint">›</span>${crumb("⌂ " + locName, "location", mapFocus, true)}` : ""}
+    <span class="hint" style="margin-left:auto">${mapTier === "world" ? "Click a region to enter it" : mapTier === "region" ? "Click a place, then “Look inside”" : "What's inside this place"}</span>
+  </div>`;
+}
+
+/** WORLD tier — regions as territories. Individual settlements are noise at this scale; the
+ *  questions here are "which Reach is this" and "how do I cross the world" (the gates). */
+function renderMapWorld() {
+  const nodes = worldTierNodes(CONTENT, character);
+  const cols = 5, cw = 800 / cols, ch = 96;
+  const cells = nodes.map((n, i) => {
+    const cx = (i % cols) * cw + cw / 2, cy = Math.floor(i / cols) * ch + 58;
+    const pal = n.palette || {};
+    const hub = n.gates.find(g => g.hub);
+    return `<g class="map-region-cell ${n.here ? "here" : ""} ${n.known ? "known" : "unknown"}" data-mapregion="${esc(n.regionId)}">
+      <title>${esc(n.name)} — ${n.count} place${n.count === 1 ? "" : "s"}${n.gates.length ? ` · ${n.gates.length} waygate${n.gates.length === 1 ? "" : "s"}` : " · no waygate"}${n.here ? " · you are here" : ""}</title>
+      <rect x="${cx - cw / 2 + 8}" y="${cy - 34}" width="${cw - 16}" height="72" rx="10"
+            fill="${esc(pal.base || "#242a24")}" stroke="${esc(n.here ? (pal.accent || "#c9a227") : (pal.edge || "#333"))}" stroke-width="${n.here ? 2.5 : 1}"/>
+      <text x="${cx}" y="${cy - 8}" text-anchor="middle" class="map-label" fill="${esc(pal.accent || "#9a9")}">${esc(n.name)}</text>
+      <text x="${cx}" y="${cy + 10}" text-anchor="middle" class="map-visits">${n.count} place${n.count === 1 ? "" : "s"}</text>
+      ${n.gates.length ? `<text x="${cx}" y="${cy + 26}" text-anchor="middle" class="map-visits">◈ ${hub ? "hub" : n.gates.length + " gate" + (n.gates.length === 1 ? "" : "s")}</text>` : ""}
+      ${n.here ? `<circle cx="${cx - cw / 2 + 20}" cy="${cy - 22}" r="5" class="map-here-dot" fill="${esc(pal.accent || "#c9a227")}"/>` : ""}
+    </g>`;
+  }).join("");
+  const rows = Math.ceil(nodes.length / cols);
+  chrome(`<div class="screen" style="max-width:900px">
+    <h2>World Map</h2>
+    <p class="hint" style="margin-bottom:8px">${nodes.length} regions${nodes.reduce((n, r) => n + r.gates.length, 0) ? ` · ${nodes.reduce((n, r) => n + r.gates.length, 0)} waygates` : ""}. The scale where the question is <em>which Reach am I in</em>.</p>
+    ${mapTierBar()}
+    <div class="graph-wrap"><svg viewBox="0 0 800 ${Math.max(220, rows * ch + 30)}" class="world-map" preserveAspectRatio="xMidYMid meet">${cells}</svg></div>
+    <button class="btn secondary" id="map-back" style="margin-top:12px">Back</button>
+  </div>`);
+  for (const g of app.querySelectorAll("[data-mapregion]")) g.onclick = () => { mapTier = "region"; mapFocus = g.dataset.mapregion; renderMap(); };
+  wireMapTierBar();
+  document.getElementById("map-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
+}
+
+/** LOCATION tier — the interior. THE TIER THAT DID NOT EXIST. Sub-places and any place promoted
+ *  out of this one (SNG-154's parentId), drawn around their container so containment is finally
+ *  something you can SEE rather than something the engine merely asserts. */
+function renderMapLocation(locationId) {
+  const { host, children } = locationTierNodes(character, CONTENT, locationId);
+  const laid = interiorLayout(children);
+  const name = host?.name || CONTENT.locations[locationId]?.name || locationId;
+  const nodes = laid.map((c, i) => `<g class="map-node ${c.visited ? "" : "unvisited"} ${c.promoted ? "reachable" : ""}" data-mapinner="${esc(c.id)}" data-innerkind="${esc(c.kind)}">
+      <title>${esc(c.name)}${c.promoted ? " — a place of its own now, still inside " + esc(name) : ""}${c.note ? " — " + esc(c.note) : ""}${c.visited ? "" : " (heard of, not seen)"}</title>
+      <circle class="hit" cx="${c.x.toFixed(1)}" cy="${c.y.toFixed(1)}" r="22"/>
+      <circle cx="${c.x.toFixed(1)}" cy="${c.y.toFixed(1)}" r="${c.promoted ? 11 : 8}"/>
+      ${/* SNG-166: stagger the label's distance by index so two adjacent ring nodes can never put
+            their labels in the same horizontal band — measured 3 colliding pairs in the Edge
+            District (long authored names) before this. The full name stays in the <title>. */""}
+      <text x="${c.x.toFixed(1)}" y="${(c.y + (c.y > 230 ? 26 + (i % 2) * 14 : -14 - (i % 2) * 14)).toFixed(1)}" text-anchor="middle" class="map-label">${esc(c.name.length > 20 ? c.name.slice(0, 19) + "…" : c.name)}</text>
+    </g>`).join("");
+  chrome(`<div class="screen" style="max-width:900px">
+    <h2>${esc(name)} — inside</h2>
+    <p class="hint" style="margin-bottom:8px">${children.length ? `${children.length} place${children.length === 1 ? "" : "s"} within.` : "Nothing recorded inside here yet — the places you visit and the GM names will appear here."} A ringed node is somewhere that grew into a place of its own.</p>
+    ${mapTierBar()}
+    <div class="graph-wrap"><svg viewBox="0 0 800 460" class="world-map" preserveAspectRatio="xMidYMid meet">
+      <circle cx="400" cy="230" r="34" class="map-node here"/>
+      <text x="400" y="235" text-anchor="middle" class="map-icon">${iconForTags(host?.tags || [])}</text>
+      <text x="400" y="286" text-anchor="middle" class="map-label">${esc(name)}</text>
+      ${laid.map(c => `<line x1="400" y1="230" x2="${c.x.toFixed(1)}" y2="${c.y.toFixed(1)}" class="map-edge"/>`).join("")}
+      ${nodes}
+    </svg></div>
+    <button class="btn secondary" id="map-back" style="margin-top:12px">Back</button>
+  </div>`);
+  // a promoted interior is a real location — you can step into ITS interior too (nesting)
+  for (const g of app.querySelectorAll("[data-mapinner]")) g.onclick = () => {
+    if (g.dataset.innerkind === "location" && CONTENT.locations[g.dataset.mapinner]) { mapFocus = g.dataset.mapinner; renderMap(); }
+  };
+  wireMapTierBar();
+  document.getElementById("map-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
+}
+
+function wireMapTierBar() {
+  for (const b of app.querySelectorAll("[data-maptier]")) b.onclick = () => {
+    mapTier = b.dataset.maptier;
+    mapFocus = b.dataset.mapfocus || null;
+    renderMap();
+  };
+}
+
 function renderMap(selectedId = null) {
-  const locs = Object.values(CONTENT.locations);
+  if (mapTier === "world") return renderMapWorld();
+  if (mapTier === "location") return renderMapLocation(mapFocus);
+  const focusRegion = mapFocus || currentRegionId();
+  const locs = Object.values(CONTENT.locations).filter(l => (l.regionId || l.region) === focusRegion);
   const here = character.currentLocationId;
   const connectedToHere = CONTENT.locations[here]?.connections || [];
   // dedupe edges
@@ -3733,7 +3844,7 @@ function renderMap(selectedId = null) {
     <text x="20" y="50" class="map-sub">Day ${readClock(character.clock).day} · Water Crisis stage ${stage}${mapShowKG ? " · showing what you know" : ""}</text>
     ${edges.map(([a, b]) => { const A = pos[a], B = pos[b]; const spine = a === "the_axis_gate" || b === "the_axis_gate" || a === "the_crossing" || b === "the_crossing";
       return `<line x1="${A.x}" y1="${A.y}" x2="${B.x}" y2="${B.y}" class="map-edge ${a === here || b === here ? "active" : ""} ${spine ? "spine" : ""}"/>`; }).join("")}
-    ${locs.map(l => {
+    ${locs.map((l, li) => {
       const P = pos[l.id];
       const visited = isVisited(l.id);
       const reachable = connectedToHere.includes(l.id);
@@ -3795,6 +3906,7 @@ function renderMap(selectedId = null) {
         : `<p class="map-details-desc">You've heard travelers mention it, nothing more. Someone would have to go and see.</p>`}
       ${l.id !== here ? (reachable
         ? `<button class="btn" id="map-travel" data-dest="${esc(l.id)}" style="margin-top:8px">Travel here (+${ADVANCE.travel}h)</button>`
+        + `<button class="opt" id="map-lookinside" data-inside="${esc(l.id)}" style="margin:8px 0 0 6px" title="What's within this place">⌂ Look inside</button>`
         : `<div class="hint" style="margin-top:6px">Not directly reachable from ${esc(CONTENT.locations[here]?.name || "here")} — travel via a connected place.</div>`) : ""}
       ${(() => { // SNG-148: standing at a gate, aiming at another gate — routing decides (named/hub); never a failure
         const r = l.id !== here ? resolveWaygateTransit({ character, destId: l.id, locations: CONTENT.locations }) : null;
@@ -3807,8 +3919,11 @@ function renderMap(selectedId = null) {
     </div>`;
   }
   chrome(`<div class="screen" style="max-width:900px">
-    <h2>World Map</h2>
-    <p class="hint" style="margin-bottom:8px">92 places across 24 regions, each ground coloured by its disposition. Gold ring: you are here. The Axis Gate's twelve roads are the spine. <strong>Scroll to zoom, drag to pan.</strong></p>
+    <h2>${esc((CONTENT.regions || []).find(r => r.regionId === focusRegion)?.name || "Region")}</h2>
+    ${/* SNG-154 stage 6: this count is now the REGION's, not the world's — and it is derived, so it
+          can't drift the way the old hardcoded "92 places across 24 regions" line silently did. */""}
+    <p class="hint" style="margin-bottom:8px">${locs.length} place${locs.length === 1 ? "" : "s"} in this region, ground coloured by disposition. Gold ring: you are here. <strong>Scroll to zoom, drag to pan.</strong></p>
+    ${mapTierBar()}
     <div style="margin-bottom:8px"><button class="opt ${mapShowKG ? "selected" : ""}" id="map-kg-toggle" title="People you've met (solid) and threads you've only heard of (dimmed diamonds) — where they live">${mapShowKG ? "✓ " : ""}Show what you know</button>
       <button class="opt ${mapShowSub ? "selected" : ""}" id="map-sub-toggle" title="The places WITHIN each location (satellites around each node)" style="margin-left:6px">${mapShowSub ? "✓ " : ""}Show sub-places</button>
       ${mapShowKG && !kg.length ? `<span class="hint" style="margin-left:8px">You haven't met anyone or heard a rumour yet — the world is still a rumour. Play on.</span>` : mapShowKG ? `<span class="hint" style="margin-left:8px">◆ dimmed = heard of · ● solid = met</span>` : ""}</div>
@@ -3832,6 +3947,9 @@ function renderMap(selectedId = null) {
   document.getElementById("map-sub-toggle").onclick = () => { mapShowSub = !mapShowSub; renderMap(selectedId); };
   for (const g of app.querySelectorAll("[data-kgtopic]")) g.onclick = () => renderCodexScreen("", g.dataset.kgtopic);
   for (const g of app.querySelectorAll("[data-mapsel]")) g.onclick = () => renderMap(g.dataset.mapsel === selectedId ? null : g.dataset.mapsel);
+  wireMapTierBar(); // SNG-154 stage 6
+  const insideBtn = document.getElementById("map-lookinside");
+  if (insideBtn) insideBtn.onclick = () => { mapTier = "location"; mapFocus = insideBtn.dataset.inside; renderMap(); };
   const travelBtn = document.getElementById("map-travel");
   if (travelBtn) travelBtn.onclick = () => travelTo(travelBtn.dataset.dest);
   const wgBtn = document.getElementById("map-waygate");

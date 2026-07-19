@@ -47,7 +47,123 @@ export function autoMapPositions(locations, { width = 800, height = 440, margin 
     const h = hashN(l.id);
     out[l.id] = { x: margin + (h % (width - 2 * margin)), y: margin + (Math.floor(h / 97) % (height - 2 * margin)) };
   }
+  // SNG-166 (PO finding): two AUTHORED locations can share an exact coordinate — ent_deepwood and
+  // the_lampless_market both sit at (40,300) — and one then hides the other completely. Separate
+  // them deterministically (never randomly: the map must look the same on every render) by nudging
+  // later ids onto a small ring around the shared point. Authored geography is respected; only an
+  // exact tie is broken.
+  // An EXACT tie is DATA LOSS — one place renders invisibly on top of another and cannot be
+  // clicked at all. Break it. A NEAR tie only crowds two labels, and separating those would mean
+  // MOVING AUTHORED COORDINATES, which SNG-046 contracts as preserved exactly: an author who
+  // places a location at (x,y) means it. (I first pushed near ties apart too and it broke that
+  // contract — the existing test caught it. Authored geography wins; a crowded label is the
+  // cheaper cost, and the tier split already removed most of the crowding.)
+  // Only the LATER id in sort order moves, so the first authored coord is always untouched.
+  const seenAt = new Map();
+  for (const id of Object.keys(out).sort()) {
+    const key = `${Math.round(out[id].x)},${Math.round(out[id].y)}`;
+    const prior = seenAt.get(key) || 0;
+    if (prior > 0) {
+      const ang = (hashN(id) % 360) * Math.PI / 180;
+      const r = 26 + prior * 10;
+      out[id] = {
+        x: clamp(out[id].x + Math.cos(ang) * r, margin, width - margin),
+        y: clamp(out[id].y + Math.sin(ang) * r, margin, height - margin)
+      };
+    }
+    seenAt.set(key, prior + 1);
+  }
   return out;
+}
+
+// ---------- SNG-154 stage 6: THREE TIERS ----------
+// Zoom is NAVIGATION BETWEEN TIERS, not a scale slider. 95 locations on one 800×440 canvas is the
+// unreadable map Erik screenshotted; each tier answers one question at the scale that question
+// lives at. The LOCATION tier is the one that never existed — and it is where every place bug has
+// been hiding, because containment had nowhere to be drawn.
+
+/** WORLD — regions as territories. The question is "which Reach am I in", so individual
+ *  settlements are noise here. Waygates surface because they are how you cross the world. */
+export function worldTierNodes(CONTENT, character) {
+  const locs = Object.values(CONTENT?.locations || {});
+  const byRegion = new Map();
+  for (const l of locs) {
+    const rid = l.regionId || l.region;
+    if (!rid) continue;
+    const e = byRegion.get(rid) || { regionId: rid, count: 0, gates: [], here: false };
+    e.count++;
+    if (l.waygate) e.gates.push({ id: l.id, name: l.name, hub: !!l.waygateHub });
+    if (l.id === character?.currentLocationId) e.here = true;
+    byRegion.set(rid, e);
+  }
+  const meta = Object.fromEntries((CONTENT?.regions || []).map(r => [r.regionId, r]));
+  return [...byRegion.values()].map(e => ({
+    ...e,
+    name: meta[e.regionId]?.name || String(e.regionId).replace(/_/g, " "),
+    palette: meta[e.regionId]?.palette || {},
+    known: locs.some(l => (l.regionId || l.region) === e.regionId && (character?.placeMemory?.[l.id]?.visits || 0) > 0)
+  })).sort((a, b) => a.name.localeCompare(b.name));
+}
+
+/** REGION — the settlements and points of interest inside ONE region. This is today's map, finally
+ *  scoped: the same drawing, showing the places that are actually near each other. */
+export function regionTierNodes(CONTENT, character, regionId) {
+  const locs = Object.values(CONTENT?.locations || {})
+    .filter(l => (l.regionId || l.region) === regionId);
+  const ids = new Set(locs.map(l => l.id));
+  const edges = [];
+  const seen = new Set();
+  for (const l of locs) for (const c of l.connections || []) {
+    if (!ids.has(c)) continue;                       // an edge leaving the region belongs to the world tier
+    const key = [l.id, c].sort().join("~");
+    if (!seen.has(key)) { seen.add(key); edges.push([l.id, c]); }
+  }
+  return { locations: locs, edges };
+}
+
+/** LOCATION — the interior. Millbrook → the Edge District → the Low Lamp Inn → the back booth.
+ *  THIS TIER DID NOT EXIST, which is why containment bugs had nowhere to become visible. Built on
+ *  SNG-154's parentId: sub-places of this place, plus any LOCATION promoted out of it (a sub-place
+ *  the fiction grew into a place of its own still belongs inside its container). */
+export function locationTierNodes(character, CONTENT, locationId) {
+  const pm = character?.placeMemory?.[locationId] || {};
+  const subs = Object.entries(pm.subPlaces || {}).map(([slug, sp]) => ({
+    id: slug, name: sp.name || slug, kind: "subplace",
+    visited: !!sp.visited, note: sp.note || "", parentId: sp.parentId || locationId
+  }));
+  // places promoted OUT of here keep their containment (SNG-154) — draw them as interiors too
+  const promoted = [];
+  for (const recs of Object.values(character?.generated || {})) {
+    for (const r of Object.values(recs || {})) {
+      if (r?.parentId === locationId && r?._gen?.type === "location") {
+        promoted.push({ id: r.id, name: r.name, kind: "location", visited: true, note: "", parentId: locationId, promoted: true });
+      }
+    }
+  }
+  const host = CONTENT?.locations?.[locationId] || null;
+  return { host, children: [...promoted, ...subs] };
+}
+
+/** PURE. Lay children out on a ring inside the interior view — deterministic, never overlapping,
+ *  and stable across renders (the same place sits in the same spot every time you open it). */
+export function interiorLayout(children, { cx = 400, cy = 230, r = 150 } = {}) {
+  const n = children.length;
+  if (!n) return [];
+  if (n === 1) return [{ ...children[0], x: cx, y: cy - r, ring: 0 }];
+  // Deterministic jitter LOOKED organic and cost readability: neighbours landed at similar radii
+  // and their labels overlapped (measured: 2–3 colliding pairs per interior). Even angular spacing,
+  // and a second ring past 8, so no two labels ever share a band. Readability beats prettiness —
+  // this tier exists to be READ.
+  const inner = n <= 8 ? children : children.slice(0, Math.ceil(n / 2));
+  const outer = n <= 8 ? [] : children.slice(Math.ceil(n / 2));
+  const place = (list, radius, ringIdx, offset) => list.map((c, i) => {
+    const ang = (i / list.length) * Math.PI * 2 - Math.PI / 2 + offset;
+    return { ...c, x: cx + Math.cos(ang) * radius, y: cy + Math.sin(ang) * radius, ring: ringIdx, angle: ang };
+  });
+  return [
+    ...place(inner, outer.length ? r * 0.62 : r, 0, 0),
+    ...place(outer, r * 1.08, 1, Math.PI / Math.max(1, outer.length)) // offset so rings interleave, never align
+  ];
 }
 
 /** Assign a stable coord to a freshly-generated location near its parent, avoiding existing

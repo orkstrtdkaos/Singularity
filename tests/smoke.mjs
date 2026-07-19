@@ -4036,6 +4036,81 @@ await (async () => {
     npcPortraitTier(pell) === "partner"); // the app skips when n._portraitTier === this tier
 }
 
+// --- SNG-166: three map tiers — zoom as NAVIGATION, and no two places share a coordinate ---
+{
+  const wm = await import('../engine/worldmap.js');
+  const CONTENT = {
+    locations: {
+      millbrook: { id: "millbrook", name: "Millbrook", regionId: "valley", connections: ["mill_road"], map: { x: 100, y: 100 } },
+      mill_road: { id: "mill_road", name: "Mill Road", regionId: "valley", connections: ["millbrook", "the_crossing"], map: { x: 160, y: 120 } },
+      the_crossing: { id: "the_crossing", name: "The Crossing", regionId: "the_center", waygate: true, waygateHub: true, connections: ["mill_road"], map: { x: 400, y: 220 } },
+      far_hall: { id: "far_hall", name: "Far Hall", regionId: "the_palelands", map: { x: 700, y: 300 } }
+    },
+    regions: [{ regionId: "valley", name: "The Valley" }, { regionId: "the_center", name: "The Centre" }, { regionId: "the_palelands", name: "The Palelands" }]
+  };
+  const ch = { currentLocationId: "millbrook", placeMemory: { millbrook: { visits: 3, subPlaces: {
+    "pell-s-forge": { name: "Pell's Forge", parentId: "millbrook", visited: true },
+    "the-cookhouse": { name: "The Cookhouse", parentId: "millbrook", visited: false } } } },
+    generated: { location: { "the-low-lamp-inn": { id: "the-low-lamp-inn", name: "The Low Lamp Inn", parentId: "millbrook", _gen: { type: "location" } } } } };
+
+  const world = wm.worldTierNodes(CONTENT, ch);
+  check("166: WORLD tier lists REGIONS, not settlements", world.length === 3 && world.every(r => r.regionId && typeof r.count === "number"));
+  check("166: the world tier marks where you are and counts gates",
+    world.find(r => r.regionId === "valley").here === true && world.find(r => r.regionId === "the_center").gates.length === 1);
+
+  const reg = wm.regionTierNodes(CONTENT, ch, "valley");
+  check("166: REGION tier shows only that region's places — the readability fix",
+    reg.locations.length === 2 && reg.locations.every(l => l.regionId === "valley"));
+  check("166: an edge LEAVING the region belongs to the world tier, not this one",
+    reg.edges.length === 1 && reg.edges.every(([a, b]) => reg.locations.some(l => l.id === a) && reg.locations.some(l => l.id === b)));
+
+  const loc = wm.locationTierNodes(ch, CONTENT, "millbrook");
+  check("166: LOCATION tier — the interior that never existed — lists sub-places", loc.children.filter(c => c.kind === "subplace").length === 2);
+  check("166: a place PROMOTED out of here still draws inside it (SNG-154 parentId)",
+    loc.children.some(c => c.id === "the-low-lamp-inn" && c.promoted && c.kind === "location"));
+  check("166: the host place is carried so the interior can be drawn around it", loc.host?.id === "millbrook");
+  check("166: a place with nothing recorded inside yields an empty interior, not a crash",
+    wm.locationTierNodes(ch, CONTENT, "far_hall").children.length === 0);
+
+  const laid = wm.interiorLayout(loc.children);
+  check("166: interior layout is deterministic (same map every time you open it)",
+    JSON.stringify(laid) === JSON.stringify(wm.interiorLayout(loc.children)));
+  check("166: interior children never stack on one point", new Set(laid.map(c => `${Math.round(c.x)},${Math.round(c.y)}`)).size === laid.length);
+  // Readability is the whole point of the tier, so the GEOMETRY that produces it is asserted here —
+  // measured in a real browser at 0 colliding labels for both interiors (was 2 and 3).
+  const minSep = (pts) => { let m = Infinity; for (let i = 0; i < pts.length; i++) for (let k = i + 1; k < pts.length; k++) m = Math.min(m, Math.hypot(pts[i].x - pts[k].x, pts[i].y - pts[k].y)); return m; };
+  check("166: interior nodes keep real breathing room (even spacing, no jitter pile-ups)", laid.length < 2 || minSep(laid) > 40);
+  const many = wm.interiorLayout(Array.from({ length: 14 }, (_, i) => ({ id: "s" + i, name: "Place " + i })));
+  check("166: past 8 children it opens a SECOND ring rather than crowding one", new Set(many.map(c => c.ring)).size === 2);
+  check("166: and the two rings interleave rather than aligning spokes", minSep(many) > 30);
+  // The line I had to draw: an EXACT tie is data loss (one place is invisible and unclickable) and
+  // must be broken; a NEAR tie only crowds labels, and fixing it would move authored coordinates,
+  // which SNG-046 contracts as exact. Authored geography wins.
+  const nearTie = wm.autoMapPositions([{ id: "a", map: { x: 100, y: 100 } }, { id: "b", map: { x: 118, y: 104 } }]);
+  check("166: NEAR-tied authored coords are left exactly where the author put them (SNG-046 holds)",
+    nearTie.a.x === 100 && nearTie.a.y === 100 && nearTie.b.x === 118 && nearTie.b.y === 104);
+  const exactTie = wm.autoMapPositions([{ id: "a", map: { x: 40, y: 300 } }, { id: "b", map: { x: 40, y: 300 } }]);
+  check("166: an EXACT tie moves only the LATER id — the first authored coord is never touched",
+    exactTie.a.x === 40 && exactTie.a.y === 300 && (exactTie.b.x !== 40 || exactTie.b.y !== 300));
+
+  // the PO-reported collision: two AUTHORED places sharing one coordinate hid each other
+  const collide = wm.autoMapPositions([
+    { id: "ent_deepwood", map: { x: 40, y: 300 } },
+    { id: "the_lampless_market", map: { x: 40, y: 300 } }
+  ]);
+  check("166: two places authored at the SAME coordinate are separated deterministically",
+    `${collide.ent_deepwood.x},${collide.ent_deepwood.y}` !== `${collide.the_lampless_market.x},${collide.the_lampless_market.y}`);
+  check("166: and the separation is stable across renders",
+    JSON.stringify(collide) === JSON.stringify(wm.autoMapPositions([
+      { id: "ent_deepwood", map: { x: 40, y: 300 } }, { id: "the_lampless_market", map: { x: 40, y: 300 } }])));
+
+  const appSrc166 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+  check("166: the region tier's count is DERIVED, not the hardcoded '92 places across 24 regions'",
+    !/>92 places across 24 regions/.test(appSrc166) && /\$\{locs\.length\} place/.test(appSrc166));
+  check("166: every tier carries the breadcrumb, so you always know where you are and how to go up",
+    (appSrc166.match(/mapTierBar\(\)/g) || []).length >= 3 && /data-maptier=/.test(appSrc166));
+}
+
 // --- SNG-165: a GM-narrated waygate transit routes, and never MINTS a place out of the words ---
 {
   const { routeGmMoveTo } = await import('../engine/waygate.js');

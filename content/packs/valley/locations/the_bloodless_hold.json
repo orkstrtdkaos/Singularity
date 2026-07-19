@@ -58,7 +58,9 @@
     "kind": "pool",
     "delta": 0.14,
     "radius": 135,
-    "reason": "The proofs are held IN the substrate here — an argument the Syllogists have never had to re-derive."
+    "reason": "The proofs are held IN the substrate here — an argument the Syllogists have never had to re-derive.",
+    "radiusWorld": 0.081,
+    "radiusNote": "`radius` is in legacy map units; `radiusWorld` is RADII on the sphere and is the one mechanics should use. Chosen by sweep against the authored worldPos: at this scale all 26 sources resolve on the correct side of their region baseline and calibration drift stays ~0.05. Larger radii blanket a whole region (a source at ~55% strength everywhere inside it) and renormalization cancels the field flat — the failure CCode measured and reverted."
   },
   "worldPos": {
     "colatitude": 85.0,

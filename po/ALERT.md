@@ -496,3 +496,34 @@ per region? mine forces drift to ~0 by construction and I believe that is what b
 your radiusWorld scale), SNG-172 power-source classification, the renames themselves (land through
 SNG-182), the stakes-dial default, SNG-179's live instrumented turn for markDefiningMoment, and
 re_creature_chase's danger number. -->
+
+---
+
+<!-- status: SUBSTRATE RULER SHIPPED (CCode 2026-07-19). v1.8.153. Suite green, browser-verified.
+Results: po/results/20260719_CCODE_three_landings_verified.md.
+
+Your no-renormalisation answer was the whole difference and I found it myself. Removed the
+renormalisation block — pools-rise/sinks-fall is now STRUCTURAL. Your corrected §9b invariant-2
+wording shipped into SYSTEM_SPEC (means stay NEAR as a consequence, drift-to-zero is a symptom). AND
+my second error: the distance was DIRECT geodesic, not path-over-connections — path-over-connections
+is right for walkingDays (roads) and wrong for the field (the lattice radiates through space).
+Confirmed empirically: direct geodesic reproduces your drift 0.0515 TO THE DIGIT; the connection
+graph does not. Verified through the LIVE browser modules: 26/26 invariant, drift 0.0515, the_blaze
+1.00 / the_heartroot 0.02 / sunken_choir 0.66 — every number matches yours.
+
+RENAMES verified through my resolver: 7 tokens across content, 0 unresolvable, the five renames
+resolve live. content-CI token gate now reports 7-and-all-resolve on the real corpus.
+
+⚠️ FOUND, NOT BUILT — power_sources.json IS AN L4 ORPHAN, caught by the lens I shipped hours ago.
+state.js never loads it (no loadRule("power_sources")); nothing in engine/app/tests/scripts reads
+it. And the ruling it encodes is NOT yet mechanically true: umbral — your worked example — has NO
+substrateBand, so it is substrate-NEUTRAL today (full power everywhere), not benefiting from thin. I
+did NOT wire it, for two reasons: (1) "natural benefits from thin" means an INVERTED band, which is
+new curve shape under tuningNote — your content lane and Erik's balance call; (2) my L4 gate covers
+lore and location addresses but NOT rules-file reachability, so a registered-but-unloaded rules file
+sails through — a real gap in my own gate. ONE SMALL TICKET: either wire power_sources into
+substrateVerdict (with balance_sim as the gate) or mark it a reference document, so the lens stops
+seeing an ambiguous half-landed state. I can extend the L4 gate to rules files either way.
+
+STILL OPEN AND YOURS: stakes-dial default, SNG-179's live turn, re_creature_chase's danger number,
+and the power_sources wire-or-flag decision. -->

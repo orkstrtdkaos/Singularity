@@ -222,7 +222,12 @@ Form-based. **Parity is mandatory:** identical character shape, same domain coun
 - **Random encounters:** 58 entries; **22 regions carry their own texture.** Triggers: `onTravel` 35% · `onRest` 15% · `onEnterLocation` 12%. Flavors: beneficial · benign · **beautiful** · dangerous · theft · chase · fight. *A world that only threatens you is not a world.*
 - **Waygates (SNG-148, v1.8.107).** A network of gates; **the Crossing is the hub** — earned by geography, not decreed. Waygates are **content** (Law 2): `waygate: true` + `waygateTier` on a location, `waygateHub` on the hub (all three documented in `location.schema.json`). **Competence is BOTH, and they compose:** *knowledge* (the destination gate is in `knownPlaces` — discovered by travel) and *skill* (`wayfaringTier` = wits/2 + a traveled-breadth bonus, floor 1). Both → the **named** gate; either alone → the **hub**; not at a gate / aiming at a non-gate → **standard travel — a routing outcome, never a failure state**. Transit is real travel (normal hours; a cross-region jump on the play-loop path is a `departure` trigger under SNG-145). Chain per §23: engine `waygate.js` · consumer map **◈ control** (bypasses `connections[]` — that is the point) + gm.js WAYGATE block · registered `waygateDetail` · reachable map control + GM offer (never a menu, never every beat) · contracted here. **Content lane open:** only the Crossing (hub, tier 1) and the Axis Gate (tier 2) are seeded — per-region gates are PO authoring.
 
-## 9b. Substrate — the second difficulty map (SNG-090, unbuilt)
+## 9b. Substrate — the second difficulty map (SNG-090 / BATCH-12)
+
+> **Status corrected 2026-07-18.** This section previously read *"unbuilt."* `engine/substrate.js` exists and
+> carries `substrateVerdict`, `carriedSubstrate`, `locationDensity`, `bandFor`, `bandFactor`,
+> `effectiveDensity`. What remains unbuilt is the **geographic field**, the **receipts**, and the
+> **balance harness**. Documented here as it actually is.
 
 **Physics:** every craft is nanite-mediated (`lore/power_systems.md`). Lattice density varies by region — and peoples differ in how much they need (`content/packs/core/rules/the_substrate.json`).
 
@@ -243,9 +248,69 @@ Form-based. **Parity is mandatory:** identical character shape, same domain coun
 
 **Data:** `the_substrate.json` has `substrateBand` (center + width per tradition) and `substrateDensity` (per region). Each location derives density from its `regionId`; an optional per-location override allows a lattice-vault inside natural ground or a dead cell inside a city. CI: every location must resolve an effective density.
 
-**Build order:** (1) load `the_substrate.json` + CI check → (2) pure `engine/substrate.js` factor, tuned by `tests/balance_sim.mjs` — **never eyeball the curves** → (3) wire into `successChance` + gate + energy mult → (4) receipts + GM line + map overlay → (5) carried-charge logistics (Waystaff charge property).
+### What is BUILT (`engine/substrate.js`)
 
-*⚠️ This is design canon + engine contract. The engine code does not yet exist. Do not build until `tests/balance_sim.mjs` exists and tunes the curves.*
+| function | what it does |
+|---|---|
+| `locationDensity(location, data)` | **a per-location `substrateDensity` wins; otherwise the region's value.** Returns `null` when neither resolves, which CI flags. |
+| `carriedSubstrate(character, itemCatalog, companions)` | sums `item.substrateCharge` across inventory and `companion.substrateAura` across the party, clamped 0–1. **This is the mobile-source mechanism and it already exists.** Currently accepts **positive values only.** |
+| `effectiveDensity(density, carried)` | composes place + carried into the number the band is judged against |
+| `bandFor` / `bandFactor` / `substrateVerdict` | the two-sided band: starvation below (steep), interference above (mild, floored) |
+
+### The geography — POOLS and SINKS (authored, not yet resolved)
+
+**Erik's physics, 2026-07-18:** the lattice **pools** where the Transition never took, and **withdrew**
+where the Returned completed it. Density is not a table of regional averages — it is a *field* with causes.
+
+26 sites now carry an authored `substrateSource` in `content/packs/valley/locations/*.json`:
+
+```json
+"substrateSource": { "kind": "pool" | "sink", "strength": 0.97, "radius": 160,
+                     "reason": "one line: WHY this place holds or drains the lattice" }
+```
+
+`strength` is **the density at the source itself**. `radius` is its reach. Region density in
+`the_substrate.json` remains the regional **mean** — so a pool sits above its own region's ambient
+and a sink below it.
+
+**⛔ Nothing reads `substrateSource` yet.** The content is authored and inert. Resolution is the build.
+
+### Mobile sources — items, creatures, and skills
+
+Already canon above (*"The Waystaff is a nanite battery. The companion Aevi is a living substrate source"*)
+and already half-built in `carriedSubstrate`. What the physics needs that the code does not yet do:
+
+- **Sinks as well as pools.** `carriedSubstrate` takes positives only. A suppressor — an Ent-embassy ward,
+  a dampening focus — must be expressible. A suppressor is a legitimate weapon: carry one into the
+  Gearlands and it protects a Rootkin while crippling an Enginewright.
+- **Reach.** A carried source affects its bearer at minimum; some should affect the party or the site.
+- **Skills with auras** — a craft that thickens or thins the ground around its user for a duration.
+- **This is how Epic NPCs travel.** They are not hardier; they **carry their own weather**, which also
+  makes them detectable and makes their company a real, legible benefit.
+
+### Invariants — what any correct implementation must satisfy
+
+Stated as outcomes so the engineering is free:
+
+1. A **pool site** resolves **above** its region's authored density; a **sink site** resolves **below** it.
+2. **Regional calibration holds** — the mean of a region's locations stays close to its authored value.
+   The authored table is the calibration target, not a value to be overwritten.
+3. **Distance matters and ends.** A source's influence falls with distance and reaches zero; a place far
+   from every source resolves to its region's ambient.
+4. **Mobile and geographic sources compose** through the existing `effectiveDensity` path — carried is not
+   a second, parallel system.
+5. **Never a silent modifier.** SNG-090 ROUND 2 §54: a hidden success-chance penalty is *"the cruellest
+   possible bug."* Receipt line + GM context line + map overlay, and when a **carried** source is the
+   cause, the receipt must name it.
+6. **Every location resolves a density** — CI-enforced, as today.
+
+### Still unbuilt
+
+Field resolution from `substrateSource`; sinks in `carriedSubstrate`; the receipt/GM/overlay surface;
+`tests/balance_sim.mjs`.
+
+*⚠️ **The falloff scales and band curves are UNTUNED.** `the_substrate.json :: tuningNote` stands:
+do not eyeball them. The balance harness is the gate before these numbers are trusted in play.*
 
 
 ## 10. Time (one world, one clock)

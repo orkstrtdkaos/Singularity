@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "coliseum_champion_restore",
+  "type": "duel",
+  "name": ".The Bout: The Standing Wound",
+  "locationId": "the_great_coliseum",
+  "setup": "Oreth attends rather than attacks. Whatever you do on this sand, he undoes — and the crowd scores the undoing, not the doing. He has never in his career put a competitor down and has never once lost badly.",
+  "lethal": false,
+  "opponent": {
+    "name": "Oreth of the Quiet Ground",
+    "health": 6,
+    "threat": 30,
+    "yieldAt": 2,
+    "fleeDifficulty": 15,
+    "spectrum": {
+      "death_life": 0.4
+    },
+    "tacticTags": [
+      "undoes-what-you-did",
+      "refuses-to-be-hurried",
+      "tends-you-mid-bout",
+      "yields-nothing-by-conceding"
+    ]
+  }
+}

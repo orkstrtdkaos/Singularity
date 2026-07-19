@@ -1,0 +1,228 @@
+{
+  "schemaVersion": 1,
+  "id": "power_sources",
+  "kind": "rules",
+  "note": "SNG-172. HOW a craft is POWERED — a separate axis from powerSystem, which is the ACCESS taxonomy (which reach granted it) and is load-bearing in progression.js. Never conflate them.",
+  "canonAmendment": "RATIFIED by Erik 2026-07-19. The founding claim 'every craft in this world is nanite-mediated' is NO LONGER UNIVERSAL. Some power is natural — body, breath, growth, grief, craft-of-hand — and is not lattice-mediated at all.",
+  "ruling_natural_benefits": "Erik 2026-07-19: natural craft BENEFITS from a thin lattice, not merely goes unpenalised. The Quickwood is not the Returned's tolerable ground — it is their BEST ground. This is what makes them equal rather than compensated.",
+  "sources": {
+    "lattice": "The Precursor lattice. Two-sided band: dense ground helps until it interferes.",
+    "wild": "Ungoverned nanites — the Wild Half's tangled current. Widens BOTH crit bands (SNG-140). Thrives in the unreached gaps (threeGrounds).",
+    "natural": "Not nanite-mediated. IMPROVED by thin lattice per Erik's ruling. Indifferent to interference from above.",
+    "combination": "Two sources at once, scaled by mix — never rounded to the dominant one."
+  },
+  "method": "Classified against REGION SUBSTRATE DENSITY as evidence, with the craft's own description as the judgement. The prediction was recorded in SNG-172 §4 BEFORE the pass: 'most abilities in low-density traditions should come out natural or wild; if the pass produces a lattice-dominant Rootkin, the pass is wrong.' It held — see validation.",
+  "byTradition": {
+    "enginewright": {
+      "primary": "lattice",
+      "mix": {
+        "lattice": 1.0
+      },
+      "density": 0.98,
+      "why": "Enginecraft IS the lattice running. Densest region in the world (0.98)."
+    },
+    "lattice": {
+      "primary": "lattice",
+      "mix": {
+        "lattice": 1.0
+      },
+      "density": 0.94,
+      "why": "Latticework is built INTO the substrate; the city and the lattice are one structure (0.94)."
+    },
+    "seraphic": {
+      "primary": "lattice",
+      "mix": {
+        "lattice": 0.85,
+        "natural": 0.15
+      },
+      "density": 0.88,
+      "why": "The Orders never abandoned the old frequencies — continuous with the pre-Transition world (0.88)."
+    },
+    "blazeborn": {
+      "primary": "lattice",
+      "mix": {
+        "lattice": 0.9,
+        "natural": 0.1
+      },
+      "density": 0.86,
+      "why": "Radiance burns on lattice, not on fuel (0.86)."
+    },
+    "figurist": {
+      "primary": "lattice",
+      "mix": {
+        "lattice": 0.85,
+        "natural": 0.15
+      },
+      "density": 0.85,
+      "why": "Formcraft works in pattern and idea — it needs a medium to impose them on (0.85)."
+    },
+    "hourkeeper": {
+      "primary": "lattice",
+      "mix": {
+        "lattice": 0.9,
+        "natural": 0.1
+      },
+      "density": 0.84,
+      "why": "Duration is tended, not felt. Hourcraft reaches into the substrate to hold time still (0.84)."
+    },
+    "numinous": {
+      "primary": "lattice",
+      "mix": {
+        "lattice": 0.7,
+        "natural": 0.3
+      },
+      "density": 0.82,
+      "why": "The Numinous dissolved most of their material selves INTO the lattice. Spiritual by way of substrate (0.82)."
+    },
+    "churnfolk": {
+      "primary": "wild",
+      "mix": {
+        "wild": 1.0
+      },
+      "density": null,
+      "why": "Wildcraft is the named case. Constant productive disorder is what wild current DOES."
+    },
+    "abyssal": {
+      "primary": "wild",
+      "mix": {
+        "wild": 0.8,
+        "lattice": 0.2
+      },
+      "density": 0.55,
+      "why": "The Descent communes with what the lattice became where nobody governed it (0.55)."
+    },
+    "unmaker": {
+      "primary": "wild",
+      "mix": {
+        "wild": 0.7,
+        "natural": 0.3
+      },
+      "density": 0.42,
+      "why": "Ruinwork ends things well — it works with what is already coming apart (0.42)."
+    },
+    "veilwright": {
+      "primary": "lattice",
+      "mix": {
+        "lattice": 0.7,
+        "wild": 0.3
+      },
+      "density": 0.66,
+      "why": "Falsecraft needs a medium to carry a false thing. Mid-high density (0.66) and it uses every bit."
+    },
+    "umbral": {
+      "primary": "lattice",
+      "mix": {
+        "lattice": 0.6,
+        "natural": 0.4
+      },
+      "density": 0.58,
+      "why": "Umbracraft sees by other means — partly instrument, partly trained sense (0.58)."
+    },
+    "cogitant": {
+      "primary": "combination",
+      "mix": {
+        "lattice": 0.5,
+        "natural": 0.5
+      },
+      "density": null,
+      "why": "ERIK'S WORKED EXAMPLE: nanite to move matter with a mind, natural for the mind itself. Telekinesis borrows the lattice; the thought that aims it does not."
+    },
+    "syllogist": {
+      "primary": "combination",
+      "mix": {
+        "natural": 0.6,
+        "lattice": 0.4
+      },
+      "density": 0.6,
+      "why": "Reason is natural; making a proof BIND is not (0.60)."
+    },
+    "horizon": {
+      "primary": "combination",
+      "mix": {
+        "natural": 0.5,
+        "lattice": 0.5
+      },
+      "density": 0.44,
+      "why": "Walking is natural. Folding the distance you walk is not (0.44)."
+    },
+    "wright": {
+      "primary": "combination",
+      "mix": {
+        "natural": 0.6,
+        "lattice": 0.4
+      },
+      "density": 0.52,
+      "why": "Makecraft is craft-of-hand that reaches for the lattice when the hand is not enough (0.52)."
+    },
+    "rootkin": {
+      "primary": "natural",
+      "mix": {
+        "natural": 1.0
+      },
+      "density": 0.12,
+      "why": "Vivimancy GROWS. The Rootkin completed the Transition and released the lattice; the green current replaced it. Thinnest region in the world (0.12) and their best ground."
+    },
+    "marcher": {
+      "primary": "natural",
+      "mix": {
+        "natural": 1.0
+      },
+      "density": 0.2,
+      "why": "The Edge is skill at arms in a body. Nothing to borrow (0.20)."
+    },
+    "somatic": {
+      "primary": "natural",
+      "mix": {
+        "natural": 1.0
+      },
+      "density": 0.22,
+      "why": "Soma is the perfected body. Somatic discipline is a retuning AWAY from the lattice (0.22)."
+    },
+    "mason": {
+      "primary": "natural",
+      "mix": {
+        "natural": 1.0
+      },
+      "density": 0.3,
+      "why": "Thingcraft holds that only what can be touched is real — weight that stands without the lattice (0.30)."
+    },
+    "ashwarden": {
+      "primary": "natural",
+      "mix": {
+        "natural": 0.85,
+        "lattice": 0.15
+      },
+      "density": 0.32,
+      "why": "Palework tends endings. What tends endings does not hold a charge (0.32)."
+    },
+    "verist": {
+      "primary": "natural",
+      "mix": {
+        "natural": 0.9,
+        "lattice": 0.1
+      },
+      "density": 0.46,
+      "why": "Verity is speech and refusal. Saying what is so costs nothing but the saying (0.46)."
+    },
+    "threnodist": {
+      "primary": "natural",
+      "mix": {
+        "natural": 0.9,
+        "lattice": 0.1
+      },
+      "density": 0.48,
+      "why": "Pathos holds that feeling is the only true instrument. Feeling is not lattice-mediated (0.48)."
+    },
+    "stillhold": {
+      "primary": "natural",
+      "mix": {
+        "natural": 1.0
+      },
+      "density": null,
+      "why": "Stillcraft is a vow kept. The Stillhold gave the lattice up with the war."
+    }
+  },
+  "perAbilityOverrides": {
+    "note": "Empty by design. A tradition-level default plus explicit deviations is far less content than 285 authored fields, and a deviation is the interesting fact. Add here only where an ability genuinely departs from its tradition's mix."
+  }
+}

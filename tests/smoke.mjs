@@ -5146,6 +5146,48 @@ await (async () => {
     asked.indexOf("Green Shutters") < asked.indexOf("Salt Road"));
 }
 
+// --- SNG-171 §2: standing credit for what already HAPPENED (reconcile v9) ---
+{
+  const rc = await import("../engine/reconcile.js");
+  const step = rc.CHARACTER_STEPS.find(x => x.id === "standing-history-credit");
+  check("171: the history-credit step is registered", !!step);
+
+  // SNG-174's ruling in one test: an Ent is `people: ent` and practises rootkin, so a bond with one
+  // credits the ROOTKIN — kind and disposition are independent.
+  const npcs = { an_ent: { id: "an_ent", name: "Vaskar", people: "ent", domains: { primary: "rootkin", secondary: "numinous" } } };
+  const idx = { byId: { rootkin: { name: "The Rootkin" }, numinous: { name: "The Numinous" } }, abilityToTradition: {} };
+  const c = { npcRegistry: { an_ent: { id: "an_ent", name: "Vaskar", relationship: 8 } }, peopleDisposition: {} };
+  const out = step.apply(c, { content: { npcs, traditionIndex: idx, abilities: {} } });
+  check("171: a bond with an Ent credits the ROOTKIN — what they PRACTISE, not what they ARE",
+    (c.peopleDisposition.rootkin || 0) > 0);
+  check("171: the secondary domain is credited less than the primary", c.peopleDisposition.numinous < c.peopleDisposition.rootkin);
+  check("171: the player is told, in fiction, what caught up with them", /caught up with you/.test(out.notes?.[0] || ""));
+  check("171: and the article is not doubled", !/the The/.test(out.notes?.[0] || ""));
+
+  // §2c.3 — re-running must NEVER inflate. Version-gated in practice; a property of the step here.
+  const snapshot = JSON.stringify(c.peopleDisposition);
+  const again = step.apply(c, { content: { npcs, traditionIndex: idx, abilities: {} } });
+  check("171: re-running grants nothing — idempotent by record, not just by version gate",
+    JSON.stringify(c.peopleDisposition) === snapshot && !again.notes);
+
+  // §2c.2/4 — nothing is fabricated, and ambiguity credits NOTHING.
+  const unattributable = { npcRegistry: { ghost: { id: "ghost", name: "Someone", relationship: 10 } }, peopleDisposition: {} };
+  step.apply(unattributable, { content: { npcs: {}, traditionIndex: idx, abilities: {} } });
+  check("171: a bond with no authored domains credits nothing — a wrong attribution is worse than a missing one",
+    Object.keys(unattributable.peopleDisposition).length === 0);
+
+  const hostile = { npcRegistry: { an_ent: { id: "an_ent", name: "Vaskar", relationship: -8 } }, peopleDisposition: {} };
+  step.apply(hostile, { content: { npcs, traditionIndex: idx, abilities: {} } });
+  check("171: enmity with ONE member is not enmity with a people", Object.keys(hostile.peopleDisposition).length === 0);
+
+  // A backfill may not hand out `kin`; closeness of that order is play's to give.
+  const many = { npcRegistry: {}, peopleDisposition: {} };
+  const bigNpcs = {};
+  for (let i = 0; i < 30; i++) { bigNpcs["n" + i] = { id: "n" + i, name: "N" + i, domains: { primary: "rootkin" } }; many.npcRegistry["n" + i] = { id: "n" + i, name: "N" + i, relationship: 10 }; }
+  step.apply(many, { content: { npcs: bigNpcs, traditionIndex: idx, abilities: {} } });
+  check("171: the backfill is capped — thirty devoted bonds cannot buy `kin`", many.peopleDisposition.rootkin <= 6);
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

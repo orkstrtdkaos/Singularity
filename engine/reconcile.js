@@ -153,6 +153,87 @@ export const CHARACTER_STEPS = [
     }
   },
   {
+    version: 9, id: "standing-history-credit", playerFacing: true,
+    // SNG-171 §2. v8 seeds standing from who a character IS — origin and kin. This credits what they
+    // DID. Erik reached level 16 with a sworn bond, a romantic partner and two bound teachers, and
+    // the opening screen still said those peoples did not know him.
+    //
+    // THE ATTRIBUTION RULE IS ERIK'S SNG-174 RULING, AND IT IS WHY THIS COULD NOT BE GUESSED:
+    // kind and disposition are INDEPENDENT. An NPC's `people` is what they ARE (ent, human,
+    // precursor-construct); their `domains` are what they PRACTICE. Standing is held per TRADITION,
+    // so a bond credits the domains — which is how a bond with an Ent credits the ROOTKIN, exactly
+    // as Erik expected, while the Ent stays an ent. The three authored Ents came out with three
+    // different dispositions, which is the ruling proving itself.
+    //
+    // Conservative by construction (§2c.4): only positive bonds count, only authored NPCs with
+    // authored domains count, and a people whose attribution is unclear gets nothing and is not
+    // mentioned. A wrong attribution is worse than a missing one. Nothing is fabricated — every
+    // point traces to a relationship or a use-count already in the save.
+    apply: (c, ctx) => {
+      const npcs = ctx.content?.npcs || {};
+      const idx = ctx.content?.traditionIndex || null;
+      const credit = {}, why = {};
+      const add = (tid, amount, reason) => {
+        if (!tid || !amount) return;
+        if (idx && idx.byId && !idx.byId[tid]) return;         // not a real tradition — credit nothing
+        credit[tid] = (credit[tid] || 0) + amount;
+        (why[tid] = why[tid] || new Set()).add(reason);
+      };
+      // (1) BONDS — the people whose craft your friends practice have heard of you.
+      for (const n of Object.values(c.npcRegistry || {})) {
+        const rel = Number(n?.relationship) || 0;
+        if (rel < 1) continue;                                  // only positive; enmity with one is not enmity with a people
+        const authored = npcs[n.id];
+        const dom = authored?.domains;
+        if (!dom) continue;                                     // unattributable — say nothing (§2c.4)
+        const weight = rel >= 7 ? 3 : rel >= 4 ? 2 : 1;         // devoted / ally / friendly
+        const primaries = Array.isArray(dom.primary) ? dom.primary : [dom.primary];
+        const share = weight / Math.max(1, primaries.length);   // an Epic NPC's several primaries split the credit
+        for (const t of primaries) add(t, share, authored.name || n.name);
+        if (dom.secondary) add(dom.secondary, weight / 2, authored.name || n.name);
+        if (dom.tertiary) add(dom.tertiary, weight / 4, authored.name || n.name);
+      }
+      // (2) CRAFT — a people notices someone who works in their idiom. The practice ledger already
+      // counts it; this is the same signal live accrual uses for a focused day.
+      const uses = c.practice?.uses || {};
+      const byTradition = {};
+      for (const [abId, n] of Object.entries(uses)) {
+        const ab = ctx.content?.abilities?.[abId];
+        const t = ab?.tradition || (idx?.abilityToTradition?.[abId]) || ab?.powerSystem;
+        if (t && n > 0) byTradition[t] = (byTradition[t] || 0) + n;
+      }
+      for (const [t, n] of Object.entries(byTradition)) {
+        if (n >= 30) add(t, 2, "your own craft");
+        else if (n >= 10) add(t, 1, "your own craft");
+      }
+      if (!Object.keys(credit).length) return {};
+
+      // A backfill may bring a people to KNOWN or a little past it; it may never hand out `kin`.
+      // Closeness of that order is play's to give, not a migration's.
+      const BACKFILL_CAP = 6;
+      c.peopleDisposition = c.peopleDisposition || {};
+      // Idempotent by RECORD, not just by version gate. reconcileVersion already runs this once, but
+      // "re-running must never inflate" (§2c.3) should be a property of the step, not of its caller —
+      // a future re-baseline or a hand-run must be safe.
+      c._standingHistoryCredit = c._standingHistoryCredit || {};
+      const moved = [];
+      for (const [tid, amount] of Object.entries(credit)) {
+        const want = Math.min(Math.round(amount * 10) / 10, BACKFILL_CAP);
+        const already = c._standingHistoryCredit[tid] || 0;
+        const granted = Math.round((want - already) * 10) / 10;
+        if (granted <= 0) continue;
+        c.peopleDisposition[tid] = (c.peopleDisposition[tid] || 0) + granted;
+        c._standingHistoryCredit[tid] = want;
+        moved.push({ tid, granted, who: [...(why[tid] || [])].filter(Boolean).slice(0, 2) });
+      }
+      if (!moved.length) return {};
+      moved.sort((a, b) => b.granted - a.granted);
+      const nm = t => String(idx?.byId?.[t]?.name || t).replace(/^The\s+/i, "");   // the authored names already carry their article
+      const top = moved.slice(0, 3).map(m => `the ${nm(m.tid)}${m.who.length ? ` (${m.who.join(", ")})` : ""}`);
+      return { notes: [`What you have already done has caught up with you — ${top.join(", ")} count you differently now.`] };
+    }
+  },
+  {
     version: 6, id: "place-containment", playerFacing: true,
     // SNG-154 stage 4. Repair a save whose place hierarchy was scrambled before `parentId` existed.
     // Containment used to be inferred per-write from wherever the engine last believed the

@@ -1,7 +1,9 @@
 # SNG-172 — What actually powers a craft
 
 **Author:** Aevi (PO) · 2026-07-18 · Erik-directed
-**Form:** outcomes and invariants. ⚠️ **This amends core canon** and needs Erik's ratification before build.
+**Form:** outcomes and invariants. ⚠️ **Amends core canon — RATIFIED by Erik 2026-07-19.**
+
+**§3.1 RULED:** *"Let's say that the natural craft benefits from a thin lattice."* Natural-powered craft is **improved** by thin ground, not merely unpenalised. The Quickwood becomes the Returned's *good* ground rather than their tolerable one — which is what makes them equal rather than compensated.
 
 Erik: *"A thinned lattice (such as what Root does) should benefit the Natural based skills… we likely
 need another pass through the skills to categorize how they are powered — we have lattice/nanite

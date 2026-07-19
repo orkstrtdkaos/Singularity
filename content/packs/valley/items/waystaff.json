@@ -6,7 +6,12 @@
       "name": "Waystaff",
       "kind": "focus",
       "description": "A resonance-crystal translator staff — pale crystal nodes set along dark wood, tuned to catch and carry the old frequencies. In steady hands it steadies a cast; in the right company it begins to do more than carry.",
-      "bonusTags": ["resonance", "focus", "translate"],
+      "bonusTags": [
+        "resonance",
+        "focus",
+        "translate",
+        "substrate-gathering"
+      ],
       "consumable": false,
       "evolution": {
         "bondSource": "aevi",
@@ -19,7 +24,10 @@
             "unlockBond": 0,
             "unlockCoUse": 0,
             "description": "A well-made translator staff. It carries what you send and returns what it catches, faithfully and no more.",
-            "bonusTags": ["resonance", "focus"],
+            "bonusTags": [
+              "resonance",
+              "focus"
+            ],
             "narrationHints": "Cool crystal, a faint steady hum under the hand. It does exactly what a good instrument does — and waits."
           },
           {
@@ -28,7 +36,11 @@
             "unlockBond": 4,
             "unlockCoUse": 6,
             "description": "The crystal warms a half-beat before you ask. Aevi's motes have learned to gather at the upper nodes, and between them the staff starts to lean toward what you mean — resonance and radiant work through it come easier, steadier, surer.",
-            "bonusTags": ["resonance", "focus", "attune"],
+            "bonusTags": [
+              "resonance",
+              "focus",
+              "attune"
+            ],
             "grant": "Casts channeled through the Waystaff with Aevi present gain a small steadiness bonus (reduced backlash risk on resonance/radiant work).",
             "narrationHints": "The nodes brighten before the word is finished. Aevi condenses along the shaft, and the staff answers the intention, not just the instruction."
           },
@@ -38,12 +50,19 @@
             "unlockBond": 8,
             "unlockCoUse": 14,
             "description": "Aevi and the Waystaff have integrated — the Kindled Chorus running the crystal-lattice as easily as her own field. It speaks now, faintly, in the old resonance-tongue: casts made together carry further and land truer, and once in a great while the staff offers something back you did not ask for and needed.",
-            "bonusTags": ["resonance", "focus", "attune", "answer"],
+            "bonusTags": [
+              "resonance",
+              "focus",
+              "attune",
+              "answer"
+            ],
             "grant": "Casts with Aevi through the Waystaff reach further and hold longer; once per scene the staff may surface a true reading or a needed warning on its own (GM-offered, engine-gated — never a mechanical guarantee).",
             "narrationHints": "The crystal is lit from inside now, warm as a held hand. Aevi and the staff are hard to tell apart mid-cast — two things that used to be separate, answering as one. Old, and less alone than before."
           }
         ]
-      }
+      },
+      "substrateCharge": 0.18,
+      "substrateNote": "Pale crystal nodes tuned to catch and carry the old frequencies — the staff holds a working charge wherever it is carried. Named in carriedSubstrate's own docstring as the exemplar."
     }
   ]
 }

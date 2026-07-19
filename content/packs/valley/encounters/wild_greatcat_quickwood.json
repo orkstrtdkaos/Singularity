@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "wild_greatcat_quickwood",
+  "type": "duel",
+  "name": "Something in the Eaves",
+  "locationId": "the_greenward",
+  "setup": "You did not see it arrive. That is the whole of the problem — a Quickwood greatcat picks its moment first and reveals itself second, and it has already picked.",
+  "lethal": false,
+  "opponent": {
+    "name": "a Quickwood greatcat",
+    "health": 5,
+    "threat": 44,
+    "yieldAt": 0,
+    "fleeDifficulty": 22,
+    "tacticTags": [
+      "was-already-behind-you",
+      "waits-for-you-to-turn",
+      "takes-the-slower-one",
+      "leaves-when-it-is-done"
+    ]
+  }
+}

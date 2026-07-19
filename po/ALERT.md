@@ -241,3 +241,60 @@ cannot buy `kin`.
 
 Remaining in the batch: 7 (SNG-171 §1 arc anchors), 8 (166/167 rest, 168, 170), 9 (SNG-172 power
 sources), 10 (SNG-175 companions + curricula). -->
+
+---
+
+<!-- status: BATCH-13 items 10 + SNG-177 + SNG-178 COMPLETE_PENDING_REVIEW (CCode 2026-07-19).
+v1.8.139 mint-time affiliation / v1.8.140 tiered depth / v1.8.141 teacher curricula. Suite green.
+Map/axes still PAUSED at Erik's direction.
+
+⚠️⚠️ THE FINDING THAT MATTERS MOST THIS SESSION — THREE DURABLE OPS HAVE NEVER FIRED. Measured on
+Silas at level 16 (scripts/op_emission_audit.mjs, persistent, re-runnable):
+
+    codexUpdates 60 · factUpdates 40 · itemUpdates 23 · npcUpdates 21 · deeds 18 · placeUpdates 9 ·
+    questUpdates 4        BUT:  discovery 0 · markTeacher 0 · markDefiningMoment 0
+
+Every op shaped as a LIST OF UPDATES fires heavily. All three shaped as a one-shot MARK-THIS-MOMENT
+have never fired once. Same class as the scalar ops (sceneEnded/gambitApt/imagePrompt) I built a
+recovery pass for earlier today.
+
+THIS IS THE ROOT CAUSE BEHIND THREE OF ERIK'S REPORTS: the Ent bond that credited nothing (never
+registered via npcUpdates), the teachers who taught nothing (character.teachers is EMPTY — so
+SNG-175's premise of "two bonded teachers" is true in the fiction and false in the data), and
+standing that never moved. markTeacher is FULLY wired — rule 19C instructs it, the schema declares
+it, app.js dispatches it, it is in the salvage allowlist. It has simply never fired. In every case
+the machinery is built and correct and the GM narrates the relationship without recording it.
+
+I have NOT guessed the cure — prompt weight and parse loss are different diseases — and I am NOT
+inferring teachers from prose, which would bake a guess into the save. It wants measuring against a
+live turn. RECOMMEND IT AS THE NEXT TICKET; several specs' outcomes are downstream of it.
+
+SNG-175 §3 — ANSWERING YOUR Q4 BEFORE AUTHORING: the curriculum ordering is ALREADY IMPLIED and
+needs NO content pass. 285/285 abilities carry levelReq, every tradition declares its abilities,
+tierOf exists, combinationsAvailableFor already answers §3.6. So the spine is DERIVED and a teacher
+authors only DEVIATIONS — which is exactly the characterisation half. curriculumFor + teachersForGM
+built; teacherDetail is now a registry row (teachers appeared in NONE of the previous 48 — the GATE
+existed, the INITIATIVE did not, and permission is not initiative). Refusal named as a legitimate
+answer per §3.4. Parity 49/49. Your Q1 (promote vs view) and Q2/Q3 are NOT built — §1 companion
+unification and §2 accrual are still open.
+
+SNG-177 (Erik's ruling: stamp at mint, allow enrichment, but they need a starting point) — generate.js
+now stamps people + domains at mint from three sources and RECORDS WHICH: `generated` (model authored
+in-grain; the prompt now states that kind and craft are INDEPENDENT per SNG-174), `derived` (the
+tradition whose home the region is — a derivation, not a guess: region->tradition is 1:1 across 24
+regions), or absent (`people` is NEVER invented; no tradition names one and defaulting to human is
+wrong in the Deepwood). Provenance is load-bearing: v9 credits a `derived` domain at HALF weight
+rather than treating a floor as a fact. v9 also now resolves bonds against the GENERATED store by
+NAME as well as id, because the stores drift (`dara-holt` vs `dara-holt-the-ditch-mother`). v10
+backfills existing generated records. On Erik's save this lit up Siol, Tane Solr, Dara Holt, Calvar.
+
+SNG-178 (Erik's NPC-progression direction) — the promotion LADDER already existed (fresh ->
+established -> nominated via recordAttention/TIER_AT) and spent nothing: a person returned to nine
+times carried the same seven stub fields as a face passed once. TIER_SCHEMA now declares what each
+rung is OWED — fresh deliberately EMPTY so a cast of thirty stays cheap, established gets what lets
+them be met again, nominated gets their own life and reach (the doorway to Epic). Lazy, not eager;
+enrichment is earned. app.js enrichNpcDepth fires on the crossing, additive-only, one attempt per rung.
+
+STILL OPEN FOR ERIK: the hub-attribution question (16 of 20 registry NPCs have no backing record at
+all; I declined to derive them from firstMet because at a hub it is actively wrong), and the map/axes
+ruling. Remaining build: 7 (SNG-171 §1 arc anchors), 8 (166/167 rest, 168, 170), 9 (SNG-172). -->

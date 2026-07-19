@@ -8,7 +8,7 @@ const slug = s => String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").repl
 const titleize = s => String(s || "").replace(/[-_]+/g, " ").replace(/\b\w/g, c => c.toUpperCase());
 
 /** The bio fields that seed an arc (SNG-133 mapping). Returns a compact context object. Pure. */
-import { namesMatch } from "./namematch.js";
+import { namesMatch, smartClamp } from "./namematch.js";
 
 export function arcSeed(character) {
   const b = character?.bio || {};
@@ -114,10 +114,11 @@ export function sanitizeArcEffects(raw, candidates) {
       const amount = Math.max(0, Math.min(200, Math.round(Number(e.amount) || 0)));
       if (amount) out.push({ type, amount });
     } else if (type === "codex_fact") {
-      if (e.text) out.push({ type, text: String(e.text).slice(0, 200), secret: !!e.secret });
+      if (e.text) out.push({ type, text: smartClamp(String(e.text), 200), secret: !!e.secret });
     } else {
       const keep = { type };
-      for (const k of ["npc", "state", "note", "event", "location", "seed", "ally", "text"]) if (e[k] != null) keep[k] = String(e[k]).slice(0, 120);
+      // SNG-152: these carry model prose (note/text especially), so they clamp on a word boundary.
+      for (const k of ["npc", "state", "note", "event", "location", "seed", "ally", "text"]) if (e[k] != null) keep[k] = smartClamp(String(e[k]), 120);
       if (Object.keys(keep).length > 1) out.push(keep);
     }
   }

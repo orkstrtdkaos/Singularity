@@ -1,19 +1,64 @@
 {
-  "schemaVersion": 1, "id": "dw_the_burnscar", "name": "The Burnscar", "regionId": "manifest_domain", "communityId": "domain.deepwood",
-  "poleIntensity": {"death": 0.6, "life": 0.5, "spiritual": 0.4, "time": 0.4},
-  "spectrum": {"death_life": -0.1, "mechanical_spiritual": 0.4, "space_time": 0.4, "destruction_creation": -0.3},
-  "tags": ["manifest-domain", "ent", "deepwood", "wound", "memory", "co-firing"],
-  "connections": ["dw_the_thinedge"],
+  "schemaVersion": 1,
+  "id": "dw_the_burnscar",
+  "name": "The Burnscar",
+  "regionId": "manifest_domain",
+  "communityId": "domain.deepwood",
+  "poleIntensity": {
+    "death": 0.6,
+    "life": 0.5,
+    "spiritual": 0.4,
+    "time": 0.4
+  },
+  "spectrum": {
+    "death_life": -0.1,
+    "mechanical_spiritual": 0.4,
+    "space_time": 0.4,
+    "destruction_creation": -0.3
+  },
+  "tags": [
+    "manifest-domain",
+    "ent",
+    "deepwood",
+    "wound",
+    "memory",
+    "co-firing"
+  ],
+  "connections": [
+    "dw_the_thinedge"
+  ],
   "seedFiction": "the ENT race manifested",
-  "nativeLogic": "The deep-memory place where a great felling-or-burning was done to the Deepwood generations ago \u2014 still raw in Ent-time, the grudge that shapes how the whole domain treats humankind. A co-firing wound: death (the burning, the loss) and life (the wood's stubborn regrowth over the scar) both hot at once. Slow-time makes the old wound present; to stand here is to feel a century-old grief as this morning's. GM: the Burnscar remembers; a human here is answering for ancestors whether they know it or not.",
-  "descriptionSeed": "A wide scar in the deep wood where fire once took the ancient trees \u2014 black stumps like broken teeth, and over and through them the fierce green of regrowth that refuses to concede. Death and life both blazing: the wound and the healing in one place, held raw across a century because the Ents grieve in ages. This is why the Deepwood mistrusts humankind, and it is where that mistrust could be healed \u2014 or hardened forever.",
-  "loreRefs": ["manifest_locals", "cofiring_nodes", "greater_arcs"],
-  "encounterFlavor": "A wound kept present \u2014 grief a century old felt as fresh, the fierce green fighting up through the char, an Ent who remembers the burning as if it were dawn, the weight of an old wrong waiting to be answered.",
+  "nativeLogic": "The deep-memory place where a great felling-or-burning was done to the Deepwood generations ago — still raw in Ent-time, the grudge that shapes how the whole domain treats humankind. A co-firing wound: death (the burning, the loss) and life (the wood's stubborn regrowth over the scar) both hot at once. Slow-time makes the old wound present; to stand here is to feel a century-old grief as this morning's. GM: the Burnscar remembers; a human here is answering for ancestors whether they know it or not.",
+  "descriptionSeed": "A wide scar in the deep wood where fire once took the ancient trees — black stumps like broken teeth, and over and through them the fierce green of regrowth that refuses to concede. Death and life both blazing: the wound and the healing in one place, held raw across a century because the Ents grieve in ages. This is why the Deepwood mistrusts humankind, and it is where that mistrust could be healed — or hardened forever.",
+  "loreRefs": [
+    "manifest_locals",
+    "cofiring_nodes",
+    "greater_arcs"
+  ],
+  "encounterFlavor": "A wound kept present — grief a century old felt as fresh, the fierce green fighting up through the char, an Ent who remembers the burning as if it were dawn, the weight of an old wrong waiting to be answered.",
   "dangerLevel": 3,
   "questSeeds": [
-    "Heal the Burnscar's grudge \u2014 answer for the ancient felling in a way the Ents accept \u2014 and the Green Schism turns toward the Walkers; fail or offend, and the Rootbound win a generation",
+    "Heal the Burnscar's grudge — answer for the ancient felling in a way the Ents accept — and the Green Schism turns toward the Walkers; fail or offend, and the Rootbound win a generation",
     "Who did the burning, and why, is a buried truth; uncovering it might exonerate humankind or damn it further",
-    "An Ent-character may carry lineage-memory of the burning itself \u2014 walking the Burnscar is walking their own oldest wound, and how they hold it shapes the domain's read of all humankind"
+    "An Ent-character may carry lineage-memory of the burning itself — walking the Burnscar is walking their own oldest wound, and how they hold it shapes the domain's read of all humankind"
   ],
-  "map": {"x": 70, "y": 340}
+  "map": {
+    "x": 70,
+    "y": 340
+  },
+  "axisVector": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.4,
+    0.0,
+    0.0,
+    -0.1,
+    0.4,
+    0.0,
+    0.0
+  ],
+  "axisVectorNote": "Derived from authored poleIntensity against world_node_atlas.axisOrder (SNG-180). Disposition — what this place IS. Distinct from world position."
 }

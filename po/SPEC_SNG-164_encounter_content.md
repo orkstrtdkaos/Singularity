@@ -100,7 +100,7 @@ stage a REAL encounter — and there is nothing to stage.
 
 ## §6 — Location wiring (Law 16)
 
-Add `encounterIds: []` to hosting locations:
+Add `encounterSeeds: [{encounterId, hint}]` to hosting locations:
 
 - `the_great_coliseum` → all eight champions
 - `the_marchward` → `duel_marchward_forms`
@@ -122,3 +122,28 @@ crowd reads every exchange. The GM narrates what a place tells it a place is.
 2. `tacticTags` show up as opponent character, not filler.
 3. A boar hunt stages a real encounter in a peaceful valley.
 4. `challenge` and `puzzle` types each stage once, proving all three shapes work.
+
+
+---
+
+## CORRECTION (Aevi, 2026-07-18, after CCode's audit)
+
+**This spec named the wrong field, and it cost CCode an audit pass.**
+
+I wrote `encounterIds` throughout. The real field is **`encounterSeeds`**, an array of
+`{encounterId, hint}` objects, read by `app.listAvailableEncounters` — which does `seed.encounterId`
+and `.filter(Boolean)`. I invented a plausible name rather than reading the consumer, found the true
+one while authoring SNG-164, and never came back to fix the spec.
+
+CCode's first reachability pass measured `encounterIds`, found nothing, and nearly filed the entire
+encounter corpus as CONTENT-STARVED. Their note is the right lesson and I am repeating it here so it
+sits next to the cause: *an audit that greps the wrong field name manufactures exactly the false
+confidence it exists to prevent.* The wrong field name came from this document.
+
+**Rule for my own specs going forward: name a field only after reading its consumer.** A field name in
+a spec is an instruction to another agent, not a sketch.
+
+Also corrected in this spec: the claim that ZERO encounter definitions existed. Three did
+(`precursor_mechanism`, `rockslide_crossing`, `zone_raider_duel` — one per type, the last with a full
+opponent block). My count globbed for an `{encounters:[...]}` wrapper; each file is a single object.
+The substance held — the Coliseum had none and coverage was 3 of 95 locations — but the number was wrong.

@@ -2086,11 +2086,12 @@ await (async () => {
     rules: {}, timeLabel: "Day 8, morning (late-spring)"
   });
 
-  // the GM is given the SHARED world calendar + told to reference-not-invent dates
-  const withWorld = buildTurnContext({ ...baseCtx(), worldDateLabel: "World-day 208 (harvest)" });
-  check("41c: GM context surfaces the shared world calendar", /World-day 208 \(harvest\)/.test(withWorld) && /shared world calendar/i.test(withWorld));
-  check("41c: GM is told to reference dates as given, never invent a bare day-number", /never invent a bare day-number/i.test(withWorld));
-  check("41c: the local journey clock is still present alongside the world calendar", /Day 8, morning/.test(withWorld));
+  // SNG-191: the GM is given the WORLD COUNT (the Kept Count) as a shared ORDERING mark — not a
+  // calendar — and told plainly it is NOT a date, so there is no day-number to invent.
+  const withWorld = buildTurnContext({ ...baseCtx(), worldCountLabel: "the Kept Count stands at 4992" });
+  check("41c/191: GM context surfaces the world count (the Kept Count), a shared ordering mark", /the Kept Count stands at 4992/.test(withWorld) && /World time:/.test(withWorld));
+  check("41c/191: GM is told the count is NOT a date and never to state a day-number", /NEVER convert it to a day-number/i.test(withWorld) && /never say "World-day N"/.test(withWorld));
+  check("41c: the local journey clock is still present alongside the world count", /Day 8, morning/.test(withWorld));
   // backward-safe: no worldDateLabel → no crash, no shared-calendar line
   const withoutWorld = buildTurnContext(baseCtx());
   check("41c: omitting the world calendar is graceful (still renders current time)", /CURRENT TIME/.test(withoutWorld) && !/shared world calendar/i.test(withoutWorld));
@@ -5938,9 +5939,10 @@ await (async () => {
   check("190 §5a: the LIVE push coerces the summary first (no raw object reaches the chronicle)",
     /turn\.sceneSummary = coerceSceneSummary\(turn\.sceneSummary, turn\.narration\)/.test(appSrc190) && /function coerceSceneSummary/.test(appSrc190));
 
-  // SNG-190 §5b: the time clamp no longer silently truncates a multi-day journey, and reports when it must.
-  check("190 §5b: the per-turn time ceiling is raised to a week and a truncation is recorded, not silent",
-    /const HOURS_CAP = 168/.test(appSrc190) && /character\._timeClampNote = \{ asked/.test(appSrc190));
+  // SNG-191 §1/§5 SUPERSEDES SNG-190 §5b: character time is now UNCAPPED — the clamp is gone entirely,
+  // because there is no shared unit to clamp against (world time is a separate real-time count).
+  check("191 §1: the per-turn timeOps clamp is GONE — character time is uncapped",
+    !/const HOURS_CAP = 168/.test(appSrc190) && !/character\._timeClampNote = \{/.test(appSrc190) && /CHARACTER time is UNCAPPED/.test(appSrc190));
 
   // RUNNING_FIXES A5: the GM denied a REAL place (The Blocklands) because recall was gated to VISITED
   // places — absence from context rendered as absence from the world. A place the player NAMES now
@@ -6019,6 +6021,24 @@ await (async () => {
     /function markDevAction/.test(appSrcDev) && /character\._devActions = \[/.test(appSrcDev) && /markDevAction\(`jumped to/.test(appSrcDev));
   check("186 §2a: a jump lands the player straight in play at the new location",
     /if \(r\.ok\) enterPlay\(\)/.test(appSrcDev));
+}
+
+// --- SNG-191 Phase A: two clocks, different units — world time is the Kept Count, not a day-number ---
+{
+  const wt = await import("../engine/worldtime.js");
+  const epoch = { atMs: 1000000, worldDay: 5, rate: 1 };
+  const c0 = wt.worldCount(1000000, epoch);
+  check("191 §1: the world count climbs ~1 per real HOUR (a count, not days)", wt.worldCount(1000000 + 3600000, epoch) === c0 + 1);
+  check("191 §1: a real DAY is ~24 counts — a different unit from character days, so the two never make a day-number", wt.worldCount(1000000 + 86400000, epoch) === c0 + 24);
+  check("191 §1: the count is monotonic and never negative before the epoch", wt.worldCount(0, epoch) >= 0 && wt.worldCount(1000000 + 7200000, epoch) > c0);
+  // The unit name the spec reserved for Erik is ALREADY resolved in canon — nothing is pending.
+  const clockJson = JSON.parse(readFileSync(new URL('../content/packs/core/rules/world_clock.json', import.meta.url), 'utf8'));
+  check("191 §2: the unit name is canon (count / the Kept Count) — no ruling pending", clockJson.unit?.canonical === "count" && clockJson.unit?.formal === "the Kept Count");
+  // Wiring: state loads it, the prompt shows the count and no calendar day, the clamp is gone.
+  const stateSrc191 = readFileSync(new URL('../engine/state.js', import.meta.url), 'utf8');
+  check("191: world_clock.json is loaded and rides on CONTENT.worldClock", /loadRule\("world_clock"/.test(stateSrc191) && /worldClock,/.test(stateSrc191));
+  const gmSrc191 = readFileSync(new URL('../engine/gm.js', import.meta.url), 'utf8');
+  check("191: the CURRENT TIME block shows the world COUNT, never a shared calendar day", /World time: \$\{worldCountLabel\}/.test(gmSrc191) && !/Shared world calendar/.test(gmSrc191));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

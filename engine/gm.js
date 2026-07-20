@@ -180,7 +180,7 @@ export function ratingRegister(preset = "PG-13") {
  *  before a breakpoint. Ephemeral per-turn inputs (time, resolution, player words) live
  *  in `player`, which goes AFTER the last breakpoint, uncached. See callClaude systemBlocks. */
 export function tierParts(ctx) {
-  const { character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail, structuredQuestsDetail, sceneState, npcRegistryDetail, placeMemoryDetail, newsDetail, abilityLawDetail, codexDetail, encounterDetail, encounterWeaveDetail, worldPressureDetail, substrateDetail, romanceGuidanceDetail, masteryDetail, availableEncounters, partyDetail, opLossNote, emergenceDetail, perilNote, exactWords, factsDetail, evolvedItemsDetail, itemAdvance, ratingDetail, registerDetail, livingWorldDetail, sharedCanonDetail, legendDetail, worldDateLabel, travelDirective, anomalyDetail, toolkitDetail, waygateDetail, scenePacingDetail, readAloudDetail, standingDetail, recalledDetail, teacherDetail, traditionVocab, npcSeedDetail } = ctx;
+  const { character, location, region, lore, rules, resolution, playerInput, recentTurns, timeLabel, inventoryDetail, companionsDetail, questsDetail, structuredQuestsDetail, sceneState, npcRegistryDetail, placeMemoryDetail, newsDetail, abilityLawDetail, codexDetail, encounterDetail, encounterWeaveDetail, worldPressureDetail, substrateDetail, romanceGuidanceDetail, masteryDetail, availableEncounters, partyDetail, opLossNote, emergenceDetail, perilNote, exactWords, factsDetail, evolvedItemsDetail, itemAdvance, ratingDetail, registerDetail, livingWorldDetail, sharedCanonDetail, legendDetail, worldCountLabel, travelDirective, anomalyDetail, toolkitDetail, waygateDetail, scenePacingDetail, readAloudDetail, standingDetail, recalledDetail, teacherDetail, traditionVocab, npcSeedDetail } = ctx;
   const system = [], world = [], scene = [], state = [], player = [];
 
   // ---- TIER 1: rules/constitution (constant; GM_SYSTEM is prepended in gmTurn) ----
@@ -269,7 +269,7 @@ ${teacherDetail}`);
 
   // ---- AFTER breakpoint 4 (UNCACHED): this-turn ephemeral inputs ----
   if (opLossNote) player.push(`## PREVIOUS TURN OPS LOST\n${opLossNote}`);
-  if (timeLabel) player.push(`## CURRENT TIME\n${timeLabel}${worldDateLabel ? `\nShared world calendar (SNG-041 — the ONE calendar every character shares; the far world runs on this in real time): ${worldDateLabel}` : ""}\n(Reference dates ONLY as given here — the engine owns the calendar; never invent a bare day-number.)`);
+  if (timeLabel) player.push(`## CURRENT TIME\n${timeLabel}${worldCountLabel ? `\nWorld time: ${worldCountLabel}` : ""}\n(SNG-191 — TWO CLOCKS, DIFFERENT UNITS. Narrate ONLY from the character's own time above — days, season, time of day. The world count is a shared ORDERING mark that only ever climbs; it is NOT a date and NOT days. NEVER convert it to a day-number, never say "World-day N", never state or invent a calendar date. Time the scene causes passes on the character's clock; the world's count moves on its own and the return-tick reports what changed.)`);
   if (itemAdvance) player.push(`## AN ITEM WAKES (narrate this shift into the scene — a real, felt change in the object)\n${itemAdvance}`);
   if (resolution?.gambit) {
     player.push(`## RESOLUTION — GAMBIT (already rolled by the engine; narrate the whole run per rule 15A)\nGoal: ${resolution.gambit.goal}\nOutcome: ${resolution.gambit.outcome}\n${resolution.gambit.steps.join("\n")}`);

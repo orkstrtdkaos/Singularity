@@ -54,7 +54,7 @@ import { narrativeRegister } from "./gm.js";
 import { livingWorldForGM } from "./generate.js";
 import { standingForGM } from "./standing.js"; // BATCH-12 §3
 import { renderNamesDeep } from "./names.js"; // SNG-182
-import { worldDate } from "./worldtime.js";
+import { worldCount } from "./worldtime.js";
 import { encounterReceiptForGM } from "./encounters.js";
 import { waygateBlockForGM } from "./waygate.js";
 import { readAloudDirective } from "./narration_voice.js";
@@ -256,9 +256,9 @@ export const GM_CONTEXT = [
   { key: "sharedCanonDetail", builder: "app.sharedCanonForGM", carries: ["other players' promoted canon"],
     reachedBy: "always (rating-lensed)", spec: "§18", views: ["turn"],
     build: (env) => env.app.sharedCanonForGM() },
-  { key: "worldDateLabel", builder: "worldtime.worldDate (SNG-041)", carries: ["shared absolute calendar"],
+  { key: "worldCountLabel", builder: "worldtime.worldCount (SNG-191)", carries: ["the world count — a shared ordering mark, never a date"],
     reachedBy: "always", spec: "§10", views: ["turn"],
-    build: (env) => worldDate().label },
+    build: (env) => { const n = worldCount(); const unit = env.CONTENT?.worldClock?.unit?.formal || "the Kept Count"; return `${unit} stands at ${n}`; } },
   { key: "waygateDetail", builder: "waygate.waygateBlockForGM (SNG-148)", carries: ["gate here", "aimable gates", "hub routing"],
     reachedBy: "map ◈ Waygate control + GM offer", spec: "§9", views: ["turn"],
     build: (env) => waygateBlockForGM(env.character, env.CONTENT.locations) },

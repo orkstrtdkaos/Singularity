@@ -110,6 +110,18 @@ export function absoluteWorldDay(nowMs = Date.now(), epoch = getWorldEpoch()) {
   return epoch.worldDay + Math.floor(elapsedDays);
 }
 
+const MS_PER_HOUR = MS_PER_DAY / 24;
+/** SNG-191: WORLD TIME as a monotonic COUNT — real-time-derived, ~1 per hour, never rewound. It is the
+ *  shared ORDERING key, and it is deliberately NOT in the same unit as character days: two clocks in
+ *  the same unit invite arithmetic (and a day-number to invent), two clocks in different units simply
+ *  coexist. Same epoch → same count on every device. This is the logical clock the whole system agrees
+ *  a "before/after" on, and it is what removes the world day-number the GM kept fabricating. */
+export function worldCount(nowMs = Date.now(), epoch = getWorldEpoch()) {
+  const elapsedHours = Math.max(0, (nowMs - epoch.atMs) / MS_PER_HOUR) * (epoch.rate || 1);
+  const base = Number.isFinite(epoch.worldDay) ? epoch.worldDay * 24 : 24;   // the count where the day-epoch stood, ×24
+  return base + Math.floor(elapsedHours);
+}
+
 /** Full absolute world-date reading (day + season + label) — what the world clock shows. */
 export function worldDate(nowMs = Date.now(), epoch = getWorldEpoch()) {
   const worldDay = absoluteWorldDay(nowMs, epoch);

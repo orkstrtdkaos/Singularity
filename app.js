@@ -19,7 +19,7 @@ import { armDevCapture, recordCall, annotateLatest, devCaptures, clearCaptures }
 import { unearnedDepth, generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight, NOMINATE_AT } from "./engine/generate.js";
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, ghList, fetchRepoJSON, raceTimeout } from "./engine/sync.js";
 import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates } from "./engine/inventory.js";
-import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
+import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
 import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources } from "./engine/substrate.js"; // SNG-090 + BATCH-13
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed } from "./engine/art.js";
@@ -60,7 +60,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.166";
+const APP_VERSION = "1.8.167";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -625,7 +625,7 @@ const LEG_RUNNERS = {
     const ep = getWorldEpoch();
     setWorldEpoch({ atMs: ep.atMs - days * 86400000, worldDay: ep.worldDay, rate: ep.rate });
     const news = await maybeTick();
-    renderPlay(character.activeScene?.lastTurn || null, { newsFlash: news, aside: `🔧 DEV: jumped the shared clock +${days} world-day(s) → now world-day ${absoluteWorldDay()}. Return to play to see what advanced.` });
+    renderPlay(character.activeScene?.lastTurn || null, { newsFlash: news, aside: `🔧 DEV: advanced the shared clock +${days} day(s) → the Kept Count now stands at ${worldCount()}. Return to play to see what advanced.` });
   },
   portraitBeat: () => {
     ensureTestCharacter();
@@ -3313,19 +3313,12 @@ function applyTurn(turn, resolution, playerWords = null) {
   const beatDefault = (turn.sceneEnded ? ADVANCE.sceneEnd : ADVANCE.beat) + extraHours;
   const declared = turn.timeOps && Number.isFinite(Number(turn.timeOps.hoursPassed));
   const declaredHours = declared ? Number(turn.timeOps.hoursPassed) : null;
-  // SNG-190 §5 / SNG-189 §2: the old 72h (3-day) ceiling silently truncated the party's FOUR-day walk
-  // to Cairnhold to three, and told the model nothing — a silent ceiling on a declared duration is how
-  // the fiction and the clock drifted apart in the first place. Raised to 168h (7 days) so a normal
-  // montage journey is expressible, and — regardless of the shared-calendar ruling (SNG-189 §5 Q1) — a
-  // truncation is now RECORDED, never silent: the character clock advances what it can, and the overflow
-  // is stamped so the discrepancy is visible instead of being papered over with an invented day-number.
-  const HOURS_CAP = 168;
-  const hours = declared ? Math.max(0.25, Math.min(HOURS_CAP, declaredHours)) : beatDefault;
-  if (declared && declaredHours > HOURS_CAP) {
-    character._timeClampNote = { asked: Math.round(declaredHours), applied: HOURS_CAP, at: new Date().toISOString() };
-  } else if (character._timeClampNote) {
-    delete character._timeClampNote; // clear once a normal turn passes
-  }
+  // SNG-191 §1/§5: CHARACTER time is UNCAPPED — the 72h/168h clamp DIES here. A four-day journey costs
+  // four character-days and narrates as four (acceptance §6.1). There is no shared unit to clamp
+  // against any more: the world's own time is a separate real-time count, not days, so the fiction's
+  // days and the world's count can never drift into a disagreement to paper over. A sane floor of a
+  // quarter-hour stays so a beat still ticks; there is no ceiling.
+  const hours = declared ? Math.max(0.25, declaredHours) : beatDefault;
   advanceClock(character.clock, hours);
   if (declared && hours >= 2) autoVerifyLeg("b8-time", `narrative time moved ${hours}h via timeOps`); // SNG-051 auto-verify
   // BATCH-12 §3c: the company you keep earns standing with their people, on the IN-GAME DAY. Erik's
@@ -6752,7 +6745,7 @@ function renderPlay(turn, opts = {}) {
   const time = readClock(character.clock);
   let main = `<div class="play">
     ${banner ? `<img class="scene-banner" src="${esc(banner)}" alt="${esc(location.name)}" onerror="this.style.display='none'">` : ""}
-    <div class="location-tag" ${sceneState?.setting ? `title="${esc(sceneState.setting)}"` : ""}>${esc(location.name)}${rep ? ` <span class="rep-band loc-standing ${rep.band}" title="Your standing with ${esc(CONTENT.locations[character.currentLocationId]?.name || "the people here")} — ${rep.band} (${rep.score})">· ${esc(rep.band)}</span>` : ""}<span class="time-tag" title="Your journey clock (local, play-paced) · the shared world calendar (SNG-041, real-time)">${esc(time.label)} <span class="world-day-tag">· world-day ${absoluteWorldDay()}</span></span></div>
+    <div class="location-tag" ${sceneState?.setting ? `title="${esc(sceneState.setting)}"` : ""}>${esc(location.name)}${rep ? ` <span class="rep-band loc-standing ${rep.band}" title="Your standing with ${esc(CONTENT.locations[character.currentLocationId]?.name || "the people here")} — ${rep.band} (${rep.score})">· ${esc(rep.band)}</span>` : ""}<span class="time-tag" title="Your own clock — days, season, time of day (SNG-191). The world's count is a separate shared tally, not a date.">${esc(time.label)} <span class="world-day-tag" title="The Kept Count — the shared world tally; it only ever climbs and is not a date">· ⧗ ${worldCount()}</span></span></div>
     ${(() => { const e = activeEnc(); if (!e) return ""; const st = e.state, d = e.def;
       let status = "";
       if (d.type === "duel") status = `${esc(d.opponent.name)}: ${"▮".repeat(Math.max(0, st.opponentHealth))}${"▯".repeat(Math.max(0, d.opponent.health - st.opponentHealth))} · you: ${character.health}/${character.maxHealth}${st.tactic ? ` · tactic: ${esc(st.tactic)}` : ""}`;

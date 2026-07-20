@@ -88,6 +88,40 @@ gm.js RECALLED header now says "you are UNAWARE of it" for a name in neither tie
 yet." Refines SNG-176 (no KNOWLEDGE of unheard-of places) without undoing it (a non-atlas name stays
 unfindable). Reproduced-symptom test on the literal Blocklands capture.
 
+
+### A6 · THE WRITERLY AUDIT — prose that reads as instruction and cannot be evaluated ⚠ class, not instance
+**Where:** every prompt rule in `gm.js`, and every spec in `po/` that becomes prompt text.
+**What:** language that *sounds* like a rule and gives a model nothing to test against.
+**Why it matters more here than it looks:** **memorable phrasing gets copied verbatim into prompts;
+precise phrasing gets summarised away.** A good line in a spec is therefore a hazard — it is the one
+that propagates. Erik caught this directly: *"will the GM even know what that means?"*
+
+**Five markers, all mechanically greppable enough to start:**
+1. **Undefined metaphor used as a condition** — *"in a gap, not a grip"*, *"when the moment earns
+   it"*, *"when it feels right"*. If the term appears once and is never defined, it is decoration
+   holding a load.
+2. **An aphorism standing where a rule belongs.** If a paragraph's most quotable sentence is not its
+   most precise one, the quotable one will be what survives.
+3. **Cautions stacked at the end of a rule** — **rule 19C's shape** (SNG-179 §3d): three
+   discouragements positioned closest to the decision point, each individually correct, together
+   producing a model that hedges in cases that plainly qualify.
+4. **⭐ A judgement the ENGINE could compute.** The deepest one. Asking the model to evaluate scene
+   state, aptness, or timing that is already tracked in `sceneState` / `encounterState` /
+   `_pendingIntent`. **Derive, do not demand** (SNG-179's whole lesson).
+5. **A term used once and never defined anywhere else in the prompt.**
+
+**Known instances, and two of the three are mine:**
+- *"an offer arrives in a GAP, never in a GRIP"* — SNG-195 §4, **struck by Erik, corrected to
+  engine-computed conditions in §4b.** The correction is better than the rewording would have been.
+- The world-tick guardrail — *"do not let the tick generate work Erik must undo"* — SNG-191 §4b,
+  **struck by Erik.** 19C's shape wearing better prose; its effect would have been a timid world.
+- **Rule 19C itself**, in the live prompt. Rebalanced by CCode, and it is the origin case.
+
+**Fold into SNG-195** — the prompt review's column 4 (*instructed, not permitted*) is the same audit
+from the other side. **A permission and an unevaluable metaphor fail identically: the model cannot act
+on either with confidence.**
+**Status:** OPEN · standing · added 2026-07-19 at Erik's direction
+
 ---
 
 # B · CONTENT — mine to author, queued

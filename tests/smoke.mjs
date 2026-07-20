@@ -6006,6 +6006,21 @@ await (async () => {
     /if \(isSpeechAct\(action\.label\)\) return null/.test(appSrc188));
 }
 
+// --- SNG-186 §2a/§2b: the workbench levers — go anywhere, know everything/nothing, through real paths ---
+{
+  const appSrcDev = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+  check("186 §2a: go-anywhere jumps via the REAL move fields (currentLocationId + knownPlaces), not a shadow",
+    /function devJumpTo/.test(appSrcDev) && /character\.currentLocationId = id/.test(appSrcDev) && /addKnownPlace\(id\)/.test(appSrcDev) && /notePlaceVisit\(character, id/.test(appSrcDev));
+  check("186 §2a: it resolves ANY location by id or name, ignoring connections (reachable or not)",
+    /resolveLocationId\(ref, CONTENT\.locations\) \|\| \(CONTENT\.locations\[ref\]/.test(appSrcDev));
+  check("186 §2b: know-everything reveals all locations; know-nothing resets to here",
+    /function devKnowEverything/.test(appSrcDev) && /character\.knownPlaces = Object\.keys\(CONTENT\.locations/.test(appSrcDev) && /function devKnowNothing/.test(appSrcDev) && /knownPlaces = character\.currentLocationId \? \[character\.currentLocationId\]/.test(appSrcDev));
+  check("186 §3.2: every lever marks the save (markDevAction → _devActions, into feedback)",
+    /function markDevAction/.test(appSrcDev) && /character\._devActions = \[/.test(appSrcDev) && /markDevAction\(`jumped to/.test(appSrcDev));
+  check("186 §2a: a jump lands the player straight in play at the new location",
+    /if \(r\.ok\) enterPlay\(\)/.test(appSrcDev));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

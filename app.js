@@ -60,7 +60,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.165";
+const APP_VERSION = "1.8.166";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -884,6 +884,53 @@ async function renderPreviewLegs() {
 
 // ---------- SNG-186 §2f: see the machine ----------
 
+/** SNG-186 §3.2: every dev action is marked on the save, visibly — it rides into feedback reports
+ *  (the ctx.devActions line), so a bug report from a hand-edited save can never hide that it was touched. */
+function markDevAction(reason) {
+  if (!character) return;
+  const text = String(reason).slice(0, 120); // prose-cap-ok: engine-authored dev-action label, not model prose
+  character._devActions = [...(character._devActions || []), { at: new Date().toISOString(), reason: text }].slice(-20);
+}
+
+/** SNG-186 §2a: GO ANYWHERE — jump the character to ANY location by id or name, ignoring connections,
+ *  waygates and travel time (including places no path reaches — a class of bug this finds). §3.3: the
+ *  jump writes through the SAME fields play's move path uses (currentLocationId, knownPlaces, place
+ *  visit, perception) — it exercises the real engine, never a dev-only shadow. Clears the active scene
+ *  so play resumes FRESH at the new place instead of replaying the old one. */
+function devJumpTo(ref) {
+  const id = resolveLocationId(ref, CONTENT.locations) || (CONTENT.locations[ref] ? ref : null);
+  if (!id || !CONTENT.locations[id]) return { ok: false, msg: `no location matches "${ref}"` };
+  const day = (() => { try { return readClock(character.clock).day; } catch { return null; } })();
+  character.currentLocationId = id;
+  addKnownPlace(id);
+  try { notePlaceVisit(character, id, day); } catch { /* convenience */ }
+  try { notePerception(character, id, CONTENT.locations[id], { visited: true, usedAbilityIds: [] }, CONTENT.rules); } catch { /* convenience */ }
+  try { ensureLocationImage(id); } catch { /* art never blocks */ }
+  character.activeScene = null; sceneTurns = []; sceneState = null; // land fresh at the new place
+  markDevAction(`jumped to ${CONTENT.locations[id].name} (${id})`);
+  saveCharacter(character);
+  return { ok: true, id, msg: `Now at ${CONTENT.locations[id].name}` };
+}
+
+/** SNG-186 §2b: KNOW EVERYTHING — mark every location known, so the GM's recall and the map treat the
+ *  whole atlas as reachable-known. This is the live blocker Erik hit: a dev character could not reach a
+ *  real place to test. Locations are the axis he hit; fuller omniscience (NPCs/codex/traditions) is a
+ *  further increment on the same lever. */
+function devKnowEverything() {
+  character.knownPlaces = Object.keys(CONTENT.locations || {});
+  markDevAction(`know everything: all ${character.knownPlaces.length} locations revealed`);
+  saveCharacter(character);
+}
+
+/** SNG-186 §2b, the inverse that matters MORE: reset knowledge to just where you stand, so retrieval
+ *  bugs (SNG-176) that only appear from IGNORANCE can be reproduced — a tester who knows everything
+ *  never can. */
+function devKnowNothing() {
+  character.knownPlaces = character.currentLocationId ? [character.currentLocationId] : [];
+  markDevAction("know nothing: knowledge reset to the current location only");
+  saveCharacter(character);
+}
+
 /** The dev workbench's highest-value lever: the assembled prompt, raw model response, parsed result
  *  and which ops fired for the last two-dozen model calls this session — the by-hand SNG-179
  *  diagnosis (read the prompt, read the raw output, see what the engine did with it) made a standing
@@ -947,9 +994,28 @@ function renderMachine() {
     <button class="btn secondary mach-copy" data-mach-copy="${esc(c.id)}">Copy this exchange</button>
   </details>`;
 
+  const totalLocs = Object.keys(CONTENT.locations || {}).length;
+  const knownCount = character ? (character.knownPlaces || []).length : 0;
+  const locOptions = character ? Object.values(CONTENT.locations || {}).sort((a, b) => (a.name || "").localeCompare(b.name || "")).map(l => `<option value="${esc(l.id)}">${esc(l.name)} — ${esc(l.id)}</option>`).join("") : "";
+  const leversBlock = character ? `
+    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Levers <span class="hint" style="text-transform:none">— dev writes go through the real paths; every action is marked on the save</span></h3>
+      <div class="mach-lever"><span class="mach-label">Go anywhere</span>
+        <input id="mach-jump" list="mach-locs" placeholder="location name or id — any of ${totalLocs}, reachable or not" autocomplete="off">
+        <datalist id="mach-locs">${locOptions}</datalist>
+        <button class="btn secondary" id="mach-jump-go">Jump &amp; play</button>
+        <span class="hint" id="mach-jump-msg">at ${esc(CONTENT.locations[character.currentLocationId]?.name || character.currentLocationId || "—")}</span>
+      </div>
+      <div class="mach-lever"><span class="mach-label">Know</span>
+        <button class="btn secondary" id="mach-know-all">Know everything (${totalLocs} places)</button>
+        <button class="btn secondary" id="mach-know-none">Know nothing (reset to here)</button>
+        <span class="hint" id="mach-know-msg">${knownCount} of ${totalLocs} places known</span>
+      </div>
+    </div>` : `<div class="cs-block hint">Load a character (open Play) to use Go-anywhere and Know — these levers act on the live save.</div>`;
+
   chrome(`<div class="screen" style="max-width:900px">
     <h2>🔬 See the Machine <span class="hint" style="text-transform:none">— last ${caps.length} model call${caps.length === 1 ? "" : "s"} this session</span></h2>
     <p class="hint" style="margin-bottom:12px">The assembled prompt, the raw model response, what parsed, and which ops fired — the SNG-179 diagnosis as a standing panel. Captures live in memory for this session only (dev-mode; a player never reaches this).</p>
+    ${leversBlock}
 
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Op emission — this character, cumulative <span class="hint" style="text-transform:none">(${turns} GM turn${turns === 1 ? "" : "s"} observed)</span></h3>
       <p class="hint" style="margin-bottom:8px">Counts are <strong>emissions</strong> — the model putting an op in a turn — tracked for every op. Applied/rejected outcome (✓/✗) is instrumented only for <code>markTeacher</code>; for the rest the number is emission alone. ${turns > 0 ? `A persistent <strong>0 after ${turns} turn${turns === 1 ? "" : "s"}</strong> is the real signature — a built op the model never reaches.` : `<strong>No turns observed yet</strong> — a 0 here just means this character has not played; it is not a finding.`}</p>
@@ -973,6 +1039,17 @@ function renderMachine() {
   };
   document.getElementById("mach-clear").onclick = () => { clearCaptures(); renderMachine(); };
   document.getElementById("mach-back").onclick = () => renderRoster();
+  // SNG-186 §2a/§2b levers (only present when a character is loaded)
+  const jumpBtn = document.getElementById("mach-jump-go");
+  if (jumpBtn) jumpBtn.onclick = () => {
+    const r = devJumpTo((document.getElementById("mach-jump").value || "").trim());
+    if (r.ok) enterPlay(); // land straight in play at the new location
+    else { const m = document.getElementById("mach-jump-msg"); if (m) m.textContent = r.msg; }
+  };
+  const knowAll = document.getElementById("mach-know-all");
+  if (knowAll) knowAll.onclick = () => { devKnowEverything(); renderMachine(); };
+  const knowNone = document.getElementById("mach-know-none");
+  if (knowNone) knowNone.onclick = () => { devKnowNothing(); renderMachine(); };
 }
 
 // ---------- settings ----------

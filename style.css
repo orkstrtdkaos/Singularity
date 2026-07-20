@@ -756,6 +756,8 @@ img[data-lightbox] { cursor: zoom-in; }
 .mach-op.mach-rej { border-color: #c0a24a; color: #d8c07a; }
 .mach-op.mach-zero { border-color: var(--border); color: var(--ink-dim); }
 .mach-x { color: #c0524a; font-size: 11px; margin-left: 2px; }
+.mach-lever { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 7px 0; }
+.mach-lever input { flex: 1 1 260px; min-width: 200px; padding: 5px 8px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--ink); font-size: 13px; }
 
 /* SNG-190 §4 — engine-authored asides within a beat (was: raw *✦…* asterisks on screen, read aloud) */
 .beat-aside { font-style: italic; color: var(--accent2); margin: 0.5em 0; font-size: 0.96em; }

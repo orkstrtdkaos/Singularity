@@ -1689,88 +1689,93 @@
         "player": "Help her at the counter — pick up the bread, pour what needs pouring, be useful",
         "summary": "Silas moves to help at the counter — flatbread lifted, tea poured, his mother opens a door for Pell with a plain word.",
         "narration": "You move to the counter without asking permission.\n\nThe flatbread is done — you can smell it — so you lift it from the hearthstone with the back of your hand and set it on the wooden board beside the flour jar. Your mother does not stop you. She slides one cup toward you without looking and you fill it from the clay pot on the hearthstone shelf, the tea still hot enough to steam in the afternoon draft.\n\nShe watches your hands for a moment the way she used to when you were learning to set a table without breaking anything. Then she seems satisfied and turns back to the other two cups.\n\n'The bread is Pell's to slice, if she wants something to do with her hands,' your mother says, quietly, to no one in particular — or to the room in general, which amounts to the same thing. It is not a test. It is just a door she is leaving open.\n\nVeth stands near the second chair, not sitting yet, watching the room settle the way she watches everything — as though the settling itself is useful information. Huginn turns one eye toward the flatbread, then deliberately looks at the dried herbs instead, performing complete disinterest in food with the conviction of an animal that is thinking about food.\n\nYour mother sets the third cup on the table and then, finally, turns and looks at all four of you together — at you, at Pell, at Veth, at the bird on the chair. She takes a small breath through her nose.\n\n'There is enough bread,' she says."
+      },
+      {
+        "player": "Sit and let the quiet do its work — this is a room that knows how to hold people",
+        "summary": "Silas sits; the kitchen settles into its first real quiet — his mother, Pell at the bread, Veth at the table, Huginn waiting for an opening.",
+        "narration": "You pull out the chair nearest the window — the one Huginn is not on — and sit down.\n\nThe room settles around you the way rooms do when the people in them finally stop moving. Your mother sets the last cup down and takes her own chair at the table's head. Pell has the bread knife now. The sound of it against the board is steady and unhurried, and it fills the kitchen the way that sound always has.\n\nVeth finds the second chair and takes it without ceremony. She folds her hands on the table. Huginn shifts his weight on the chair-back behind her, tucks one foot, and stares at the flatbread with the focused, patient attention of someone who has decided that wanting a thing and asking for it are two separate decisions and one of them is beneath him.\n\nYour mother looks at the three of you in turn. She does not rush it. She is the kind of woman who has always known that a room tells you what it is if you let it, and she is letting it.\n\n'You look like you slept outside more than once,' she says finally. She is talking to you, but she is not only talking to you. It is the kind of sentence that opens a door rather than closing one."
       }
     ],
     "lastTurn": {
-      "narration": "You move to the counter without asking permission.\n\nThe flatbread is done — you can smell it — so you lift it from the hearthstone with the back of your hand and set it on the wooden board beside the flour jar. Your mother does not stop you. She slides one cup toward you without looking and you fill it from the clay pot on the hearthstone shelf, the tea still hot enough to steam in the afternoon draft.\n\nShe watches your hands for a moment the way she used to when you were learning to set a table without breaking anything. Then she seems satisfied and turns back to the other two cups.\n\n'The bread is Pell's to slice, if she wants something to do with her hands,' your mother says, quietly, to no one in particular — or to the room in general, which amounts to the same thing. It is not a test. It is just a door she is leaving open.\n\nVeth stands near the second chair, not sitting yet, watching the room settle the way she watches everything — as though the settling itself is useful information. Huginn turns one eye toward the flatbread, then deliberately looks at the dried herbs instead, performing complete disinterest in food with the conviction of an animal that is thinking about food.\n\nYour mother sets the third cup on the table and then, finally, turns and looks at all four of you together — at you, at Pell, at Veth, at the bird on the chair. She takes a small breath through her nose.\n\n'There is enough bread,' she says.",
-      "sceneSummary": "Silas moves to help at the counter — flatbread lifted, tea poured, his mother opens a door for Pell with a plain word.",
+      "narration": "You pull out the chair nearest the window — the one Huginn is not on — and sit down.\n\nThe room settles around you the way rooms do when the people in them finally stop moving. Your mother sets the last cup down and takes her own chair at the table's head. Pell has the bread knife now. The sound of it against the board is steady and unhurried, and it fills the kitchen the way that sound always has.\n\nVeth finds the second chair and takes it without ceremony. She folds her hands on the table. Huginn shifts his weight on the chair-back behind her, tucks one foot, and stares at the flatbread with the focused, patient attention of someone who has decided that wanting a thing and asking for it are two separate decisions and one of them is beneath him.\n\nYour mother looks at the three of you in turn. She does not rush it. She is the kind of woman who has always known that a room tells you what it is if you let it, and she is letting it.\n\n'You look like you slept outside more than once,' she says finally. She is talking to you, but she is not only talking to you. It is the kind of sentence that opens a door rather than closing one.",
+      "sceneSummary": "Silas sits; the kitchen settles into its first real quiet — his mother, Pell at the bread, Veth at the table, Huginn waiting for an opening.",
       "choices": [
         {
-          "label": "Let Pell take the bread and knife — and sit down with your mother",
+          "label": "Tell her plainly where you have been and what you have been doing — the short true version",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "comfort",
-            "calm"
+            "help"
           ],
           "trivial": true
         },
         {
-          "label": "Sit and let the quiet do its work — this is a room that knows how to hold people",
+          "label": "Ask her about herself — how has the house been, how has she been, before anything else",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
+            "comfort"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Let Pell have the floor if she wants it — stay quiet and see what she and your mother find between them",
+          "attribute": "social",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
             "calm"
           ],
           "trivial": true
         },
         {
-          "label": "Say something plain and honest — why you came home first, before the road ahead",
+          "label": "Confirm her suspicion — 'More than once. The road has been long. But the work needed doing.'",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "comfort"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask about the house — how she has been, what the season has looked like from here",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "comfort"
+            "help"
           ],
           "trivial": true
         }
       ],
       "scene": {
-        "setting": "Inside Silas's mother's kitchen in Cairnhold — warm from the low hearth, smelling of dried herbs and flatbread on the wooden board. Late-afternoon light through the single window. All three travelers inside, door closed.",
+        "setting": "Inside Silas's mother's kitchen in Cairnhold — warm from the low hearth, smelling of dried herbs and flatbread. Late-afternoon light through the single window. All three travelers seated or settling; the bread is being sliced.",
         "npcsPresent": [
           {
             "name": "Silas's Mother",
-            "state": "Standing at the table with three cups set out — has just looked at all four arrivals together and said 'there is enough bread.'"
+            "state": "Seated at the head of the table — cups distributed, looking at all three travelers in turn with patient attention. Has just spoken."
           },
           {
             "name": "Pell Ran Marsh",
-            "state": "Present in the room — a door has been opened for her; she has not moved toward the bread yet."
+            "state": "Standing at the bread board with the knife — slicing steadily, not performing, listening."
           },
           {
             "name": "Veth Ondra",
-            "state": "Standing near the second chair, not yet seated, reading the room settle."
+            "state": "Seated at the second chair, hands folded on the table, still and present."
           },
           {
             "name": "Huginn",
-            "state": "On the back of the nearest chair — performing complete disinterest in the flatbread while thinking about the flatbread."
+            "state": "On the back of the chair behind Veth — one foot tucked, staring at the flatbread with elaborate restraint."
           }
         ],
         "objects": [
           "Low fire in the hearth",
-          "Three cups of tea on the table",
-          "Flatbread on the wooden board — done, ready to slice",
-          "Two chairs — Huginn on the back of one",
+          "Three cups of tea on the table — filled, steaming",
+          "Flatbread on the wooden board — being sliced by Pell",
+          "Two chairs at the table — occupied by Silas and Veth",
+          "Huginn on the back of the second chair",
           "Dried herbs hanging from the ceiling beam",
           "Work counter — flour-dusted",
           "Second door — the heath door — still open a hand's width at the room's far end"
         ],
         "threads": [
-          "The bread is on the board — Silas's mother named Pell as the one to slice it if she wants something to do",
-          "Huginn on the chair — noted, not yet remarked upon by Silas's mother",
+          "Silas's mother has opened a door with 'you look like you slept outside more than once' — waiting for an answer",
+          "Huginn has not yet been remarked upon by Silas's mother",
           "The heath door is still open a hand's width",
-          "The room has not yet settled into conversation — everyone is finding their footing"
+          "The bread is being sliced — when it is done, it will need to be passed"
         ]
       },
       "npcUpdates": [
@@ -1778,52 +1783,64 @@
           "op": "update",
           "npcId": "silass-mother",
           "name": "Silas's Mother",
-          "note": "Watched Silas move to the counter without asking — allowed it. Passed him a cup without looking. Set the third cup on the table and looked at all four arrivals together. Said 'there is enough bread' and left a door open for Pell with the bread and knife.",
-          "learned": [
-            "Silas knows where the bread is and how to turn it — the kitchen knowledge is still in his hands"
-          ],
-          "statusNote": "In her kitchen in Cairnhold — all three travelers inside, cups on the table, bread on the board. The room is settling."
+          "note": "Distributed cups, took her seat, read the room settle. Opened with a plain observation about the road — speaking to all three travelers at once.",
+          "statusNote": "Seated at her kitchen table in Cairnhold — the room settled, the bread being sliced, the first real quiet arrived."
+        },
+        {
+          "op": "update",
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "note": "Took the bread knife and is slicing — found something useful to do with her hands without being managed into it.",
+          "statusNote": "At the bread board in Silas's mother's kitchen — slicing flatbread, listening, present."
+        },
+        {
+          "op": "update",
+          "npcId": "veth-stillwater-ondra",
+          "name": "Veth (Stillwater) Ondra",
+          "note": "Took the second chair without ceremony, folded her hands on the table. Holding the room's quiet the way she holds a threshold.",
+          "statusNote": "Seated at Silas's mother's table in Cairnhold — present, still, reading the room settle."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short domestic exchange — bread turned, tea poured, a few words"
+        "why": "A short quiet beat — the room settling, cups distributed, the bread being sliced."
       }
     },
     "sceneState": {
-      "setting": "Inside Silas's mother's kitchen in Cairnhold — warm from the low hearth, smelling of dried herbs and flatbread on the wooden board. Late-afternoon light through the single window. All three travelers inside, door closed.",
+      "setting": "Inside Silas's mother's kitchen in Cairnhold — warm from the low hearth, smelling of dried herbs and flatbread. Late-afternoon light through the single window. All three travelers seated or settling; the bread is being sliced.",
       "npcsPresent": [
         {
           "name": "Silas's Mother",
-          "state": "Standing at the table with three cups set out — has just looked at all four arrivals together and said 'there is enough "
+          "state": "Seated at the head of the table — cups distributed, looking at all three travelers in turn with patient attention. Has j"
         },
         {
           "name": "Pell Ran Marsh",
-          "state": "Present in the room — a door has been opened for her; she has not moved toward the bread yet."
+          "state": "Standing at the bread board with the knife — slicing steadily, not performing, listening."
         },
         {
           "name": "Veth Ondra",
-          "state": "Standing near the second chair, not yet seated, reading the room settle."
+          "state": "Seated at the second chair, hands folded on the table, still and present."
         },
         {
           "name": "Huginn",
-          "state": "On the back of the nearest chair — performing complete disinterest in the flatbread while thinking about the flatbread."
+          "state": "On the back of the chair behind Veth — one foot tucked, staring at the flatbread with elaborate restraint."
         }
       ],
       "objects": [
         "Low fire in the hearth",
-        "Three cups of tea on the table",
-        "Flatbread on the wooden board — done, ready to slice",
-        "Two chairs — Huginn on the back of one",
+        "Three cups of tea on the table — filled, steaming",
+        "Flatbread on the wooden board — being sliced by Pell",
+        "Two chairs at the table — occupied by Silas and Veth",
+        "Huginn on the back of the second chair",
         "Dried herbs hanging from the ceiling beam",
         "Work counter — flour-dusted",
         "Second door — the heath door — still open a hand's width at the room's far end"
       ],
       "threads": [
-        "The bread is on the board — Silas's mother named Pell as the one to slice it if she wants something to do",
-        "Huginn on the chair — noted, not yet remarked upon by Silas's mother",
+        "Silas's mother has opened a door with 'you look like you slept outside more than once' — waiting for an answer",
+        "Huginn has not yet been remarked upon by Silas's mother",
         "The heath door is still open a hand's width",
-        "The room has not yet settled into conversation — everyone is finding their footing"
+        "The bread is being sliced — when it is done, it will need to be passed"
       ]
     }
   },
@@ -2336,7 +2353,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d6] Came down into the hollow without being called — read the open-hand gesture and answered it. Held Memory's shaft through the anchoring, her ironsense running quiet as the structural layer.",
         "[d6] Received the naming of her forge corner — south wall, hearth, bench — with eyes already measuring the flue. Has not spoken; is doing the calculation.",
         "[d6] Quiet at the south corner, measuring hearth draw — satisfied with the work.",
         "[d6] Came to the alcove when called, settled beside Silas, listened to Veth's Pale Reach account. Noted plainly that four days means five in early spring.",
@@ -2345,7 +2361,8 @@
         "[d12] Arrived at Silas's mother's gate — reading the lane, steady, waiting for his lead",
         "[d12] Watched Silas's back while he used Deathsense at the gate — asked quietly if he was all right.",
         "[d12] Silas read her through the soul bond at the gate — she felt the Deathsense come back through it as information, accepted it, and told him to take his time.",
-        "[d12] Stepped into the room when named — steady, not performing, waiting for the moment to open further."
+        "[d12] Stepped into the room when named — steady, not performing, waiting for the moment to open further.",
+        "[d12] Took the bread knife and is slicing — found something useful to do with her hands without being managed into it."
       ],
       "knownFacts": [
         "Veth Ondra is now traveling with the party — Pell took the measure of her immediately and accepted it without ceremony",
@@ -2366,7 +2383,7 @@
         "feeding ironsense through the spear-shaft as a structural an"
       ],
       "status": "active",
-      "statusNote": "Inside Silas's mother's kitchen in Cairnhold — introduced, received, not yet spoken to directly.",
+      "statusNote": "At the bread board in Silas's mother's kitchen — slicing flatbread, listening, present.",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 12
@@ -3037,7 +3054,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d6] Responded to her Raven name — Stillwater — when used for the first time in the post. Added March-form threshold-hardening lines to Silas's shadow-and-boundary layer; her lines are thinner and more precise, and settled the rough edge of his work.",
         "[d6] In the back alcove with her teaching kit open — still, watching the room settle.",
         "[d6] Gave Silas her most valued lesson plainly and without preamble: the Ashwarden who cannot remain in an ending's aftermath reads only half the world. Then demonstrated it by sitting still and waiting.",
         "[d6] Named the Pale Reach's geography: four days to Cairnhold's outer district from this post, five in early spring. Beathstone crossing is knee-deep. Pre-Transition infrastructure above Cairnhold, plus warden signs not on the March's current register — named without drama.",
@@ -3046,7 +3062,8 @@
         "[d12] Watching the house's placement on the cairn-line with careful attention — has not spoken",
         "[d12] Still reading the house's placement on the cairn-line. Has not spoken what she sees.",
         "[d12] Still outside the door — holding the threshold, not yet introduced.",
-        "[d12] Stepped inside when the door was opened — entered without ceremony, holding the same stillness she kept on the threshold."
+        "[d12] Stepped inside when the door was opened — entered without ceremony, holding the same stillness she kept on the threshold.",
+        "[d12] Took the second chair without ceremony, folded her hands on the table. Holding the room's quiet the way she holds a threshold."
       ],
       "knownFacts": [
         "Silas understands the difference between tending a closed site and reopening it — named it himself, unprompted",
@@ -3069,7 +3086,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Inside Silas's mother's kitchen in Cairnhold — just introduced, received with a nod and a cup.",
+      "statusNote": "Seated at Silas's mother's table in Cairnhold — present, still, reading the room settle.",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 12
@@ -3143,7 +3160,8 @@
         "[d12] Crossed to Silas in three quick steps and held him — her first words: 'You are thinner.'",
         "[d12] Received Pell's introduction plainly — looked from Pell to Silas, made the small internal adjustment of a confirmed suspicion, then turned to Pell and said 'come in, both of you, the bread is done.'",
         "[d12] Received Veth with a single nod and took down a third cup without being asked — then noticed Huginn on the chair and chose not to remark on him yet.",
-        "[d12] Watched Silas move to the counter without asking — allowed it. Passed him a cup without looking. Set the third cup on the table and looked at all four arrivals together. Said 'there is enough bread' and left a door open for Pell with the bread and knife."
+        "[d12] Watched Silas move to the counter without asking — allowed it. Passed him a cup without looking. Set the third cup on the table and looked at all four arrivals together. Said 'there is enough bread' and left a door open for Pell with the bread and knife.",
+        "[d12] Distributed cups, took her seat, read the room settle. Opened with a plain observation about the road — speaking to all three travelers at once."
       ],
       "knownFacts": [
         "Silas has come home — she did not know he was coming",
@@ -3157,7 +3175,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "In her kitchen in Cairnhold — all three travelers inside, cups on the table, bread on the board. The room is settling.",
+      "statusNote": "Seated at her kitchen table in Cairnhold — the room settled, the bread being sliced, the first real quiet arrived.",
       "domains": {
         "primary": "ashwarden"
       },
@@ -5242,21 +5260,21 @@
     }
   },
   "tendencies": {
-    "strategic": 14.362821471756194,
-    "cerebral": 18.139241689929033,
-    "social": 13.686928927754483,
-    "generous": 5.485029954696413,
-    "cautious": 5.507526196437717,
-    "physical": 0.2966258625179268,
-    "risky": 0.3110709805303462,
-    "ruthless": 0.09918158266309718,
-    "carousing": 0.0015195872556587873,
-    "amorous": 1.1863872562588214,
-    "patient": 0.6181871921260597,
-    "stealth": 0.03844303482949554,
-    "devotion": 0.7853560246949335,
-    "craft": 1.023221986912978,
-    "leadership": 0.19567931373270073
+    "strategic": 14.003750934962289,
+    "cerebral": 17.68576064768081,
+    "social": 13.34475570456062,
+    "generous": 5.347904205829003,
+    "cautious": 5.369838041526774,
+    "physical": 0.2892102159549786,
+    "risky": 0.30329420601708756,
+    "ruthless": 0.09670204309651975,
+    "carousing": 0.0014815975742673176,
+    "amorous": 1.156727574852351,
+    "patient": 0.6027325123229081,
+    "stealth": 0.03748195895875815,
+    "devotion": 0.7657221240775601,
+    "craft": 0.9976414372401534,
+    "leadership": 0.1907873308893832
   },
   "aptitudes": [
     "strategist",
@@ -5265,7 +5283,7 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 616,
+  "actionCount": 617,
   "grantsVersion": 1,
   "reconcileVersion": 11,
   "gallery": [
@@ -5599,8 +5617,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784516256763,
-  "rev": 943,
+  "updatedAt": 1784516407536,
+  "rev": 944,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -7428,7 +7446,7 @@
   "regionsKnown": {
     "valley": 435,
     "the_palelands": 6,
-    "the_center": 4
+    "the_center": 5
   },
   "foreclosed": [
     "rootkin",
@@ -7500,10 +7518,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-07-19T11:58:49.560Z",
-      "lastAt": "2026-07-20T02:57:36.761Z",
+      "lastAt": "2026-07-20T03:00:07.535Z",
       "startDay": 19,
       "endDay": 20,
-      "beats": 38
+      "beats": 39
     }
   ],
   "company": [

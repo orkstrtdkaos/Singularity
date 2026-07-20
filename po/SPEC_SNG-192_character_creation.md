@@ -111,12 +111,56 @@ and for COVERAGE (what you would otherwise lack), and label which is which.
 
 ---
 
+# §6b — POWER-SOURCE FIT ⭐ Erik's addition, and it COMPUTES
+
+> Erik: *"With the natural build it should suggest to not take nanotechnology-dependent skills, for
+> example, but take wild or natural powered skills first."*
+
+**Yes — and we can do better than an advisory, because the numbers already exist.** Every tradition
+carries a `substrateBand` (centre + width) and a power source. **Intersect the bands of a build's
+traditions and you get the density window where the WHOLE kit works.** Computed against live content:
+
+| build | sources | common ground | reading |
+|---|---|---|---|
+| ashwarden + rootkin + somatic | natural | **0.00–0.56** | thin-to-middle; coherent |
+| **ashwarden + enginewright** | natural + lattice | **⚠ NONE** | **half-powered everywhere** |
+| ashwarden + wright + syllogist | natural + combination | **0.34–0.73** | **wider than pure natural** |
+| enginewright + lattice + blazeborn | lattice | 0.77–1.00 | dense only; strong at home, weak abroad |
+| **Silas as actually built** | all four | 0.30–0.68 | middle country — works, by luck not design |
+
+**Three findings worth building on:**
+
+1. **Erik's warning case is real and provable.** A natural primary plus one lattice craft has **no
+   density at all** where both halves work. Not "suboptimal" — *there is no such ground.* The engine
+   can say so exactly, at the moment of the pick, instead of the player finding out at level 8.
+2. **Combination traditions are BRIDGES, and the numbers say so.** Adding wright + syllogist to an
+   ashwarden build gave a **wider** window (0.34–0.73) than the pure-natural build (0.00–0.56). That
+   is a real mechanical reason for `combination` being first-class, and it makes a combination
+   tradition the smart second source rather than a compromise.
+3. **Silas has all four sources and it works** — 0.30–0.68 — because his traditions happen to cluster
+   mid-band. **That is luck, not design, and the tool would have shown him that.** Which is exactly
+   the argument for building it.
+
+## How it should surface
+
+- **Order the pool by source fit.** A natural-primary player sees natural and wild crafts first;
+  lattice crafts fold below **with the reason attached** — *"draws on the lattice; your craft does
+  not, and thin ground is your best ground."*
+- **Show the common-ground window as a place, not a number** — *"your crafts all work in thin
+  country: the Quickwood, the Palelands, the Given Land."* **That tells a player where their
+  character BELONGS**, which is worth more than any stat.
+- **⛔ Never block, and never call an off-source pick a mistake.** A deliberate lattice craft in a
+  natural build is **a tool for elsewhere** and should be framed that way. The only thing the engine
+  owes the player is the truth about where it will and will not work.
+- **The no-overlap case earns a real warning**, because it is the one outcome nobody chooses on
+  purpose: *"these two crafts share no ground — wherever you stand, one of them is starved."*
+
 # §7 — INVARIANTS
 
 1. **Nothing is hidden that costs a choice.** Grants shown before picks, always.
 2. **Every suggestion carries its reason**, drawn from what the player actually did or wrote.
 3. **Suggestions never restrict.** The full pool stays reachable in one click.
-4. **Coverage gaps are surfaced, never blocked.**
+4. **Coverage gaps and source mismatches are surfaced, never blocked** — including the no-common-ground case, which is warned about and still permitted.
 5. **An archetype is a lens, not a class** — it selects, it does not lock.
 6. **Creation must be completable fast.** A player who wants to accept every default and play should
    be able to, in under a minute.

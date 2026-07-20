@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 18,
-  "xp": 1737,
+  "xp": 1742,
   "attributes": {
     "physical": 4,
     "mental": 6,
@@ -110,7 +110,7 @@
   "maxHealth": 115,
   "health": 115,
   "maxEnergy": 185,
-  "energy": 163,
+  "energy": 159,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1680,29 +1680,44 @@
         "player": "Study the map's edge — press the Waymarker toward what it showed at the Disputed Zone boundary, and try to read the accumulation's shape more clearly before the image fades.",
         "summary": "Silas pressed the Waymarker toward the Disputed Zone boundary — the accumulation resolved into a three-line structure, two channels finished, a third left open by his father's hand.",
         "narration": "The shadow-build has not faded yet. You press your attention toward its northern edge — the place where the drainage channel thins and the structure beneath it thickens — and the Waymarker grows warm in your joined grip.\n\nThe image does not surge or flood. It settles, the way a flame steadies when you cup your hands around it. The accumulation at the Disputed Zone's upper reach comes into focus slowly, a degree at a time. It is not a pocket of loose material. It is a shape. Something gathered with intention — channeled the way water is channeled, directed toward a point that is not yet named. The drainage work your father watched was one current among several. The accumulation sits where two others meet.\n\nPell's thumb moves once against the back of your hand. She has seen it too. \"It is not one thing,\" she says quietly. \"It is where three lines end.\" She does not say what ends them. She does not need to. The shape is plain enough: someone drew those lines, and whoever finished two of them left the third open.\n\nVeth speaks from across the table, her voice even. \"The sealed letter told you why he stopped,\" she says. \"The build is telling you what he stopped before finishing.\" She glances at Ama — not for permission, only to acknowledge her presence in the room. \"That third line is still open.\""
+      },
+      {
+        "player": "Hold the build a moment longer and look for any seam or marker in the accumulation — something that identifies who made the third line or when it was last touched.",
+        "summary": "The shadow-build's third line yields a second-hand mark beneath Silas's father's work — an older, incomplete datum from a different craftsman who reached the same limit and stopped.",
+        "narration": "You hold the Waymarker steady in your joined grip and let the image run another moment longer than comfort allows. The shadow-build thins at its edges — you can feel it wanting to recede — but the third line stays present, and you bring your full attention to bear on the place where it stops.\n\nThere is a seam. It is not dramatic. It reads the way the end of a rune-thread reads when the hand that placed it simply stopped mid-stroke: the cut is clean, intentional, but there is no closing mark. Your father's work has a closing mark on the two finished channels — a tight spiral pressed into the structural layer, barely visible in the shadow-build but there. The third line has no spiral. It ends in something closer to a held breath.\n\nBelow the cut, faint and older than anything else in the image, is a second-hand mark. Not your father's. The groove is set at a different angle — the pressure lighter, the interval shorter — and it runs only a few inches before the shadow swallows it. It is the kind of mark a craftsman leaves on the front end of a project, not the back: a builder's datum, placed to guide what comes after. Someone set this line's beginning. Your father found it and extended it. And then he stopped.\n\nVeth speaks first. 'Two hands,' she says. 'The older mark predates your father's work by some years, I would read. The groove angle is off from his by a measure I can feel from here.' Pell has not moved. She lifts her thumb from the disc once, slowly, the way she tests a joint in iron — not breaking contact, only checking. 'The older mark is not finished either,' she says. 'Both of them stopped in the same place. That is not coincidence. That is a limit they both reached and could not cross.'"
       }
     ],
     "lastTurn": {
-      "narration": "The shadow-build has not faded yet. You press your attention toward its northern edge — the place where the drainage channel thins and the structure beneath it thickens — and the Waymarker grows warm in your joined grip.\n\nThe image does not surge or flood. It settles, the way a flame steadies when you cup your hands around it. The accumulation at the Disputed Zone's upper reach comes into focus slowly, a degree at a time. It is not a pocket of loose material. It is a shape. Something gathered with intention — channeled the way water is channeled, directed toward a point that is not yet named. The drainage work your father watched was one current among several. The accumulation sits where two others meet.\n\nPell's thumb moves once against the back of your hand. She has seen it too. \"It is not one thing,\" she says quietly. \"It is where three lines end.\" She does not say what ends them. She does not need to. The shape is plain enough: someone drew those lines, and whoever finished two of them left the third open.\n\nVeth speaks from across the table, her voice even. \"The sealed letter told you why he stopped,\" she says. \"The build is telling you what he stopped before finishing.\" She glances at Ama — not for permission, only to acknowledge her presence in the room. \"That third line is still open.\"",
-      "sceneSummary": "Silas pressed the Waymarker toward the Disputed Zone boundary — the accumulation resolved into a three-line structure, two channels finished, a third left open by his father's hand.",
+      "narration": "You hold the Waymarker steady in your joined grip and let the image run another moment longer than comfort allows. The shadow-build thins at its edges — you can feel it wanting to recede — but the third line stays present, and you bring your full attention to bear on the place where it stops.\n\nThere is a seam. It is not dramatic. It reads the way the end of a rune-thread reads when the hand that placed it simply stopped mid-stroke: the cut is clean, intentional, but there is no closing mark. Your father's work has a closing mark on the two finished channels — a tight spiral pressed into the structural layer, barely visible in the shadow-build but there. The third line has no spiral. It ends in something closer to a held breath.\n\nBelow the cut, faint and older than anything else in the image, is a second-hand mark. Not your father's. The groove is set at a different angle — the pressure lighter, the interval shorter — and it runs only a few inches before the shadow swallows it. It is the kind of mark a craftsman leaves on the front end of a project, not the back: a builder's datum, placed to guide what comes after. Someone set this line's beginning. Your father found it and extended it. And then he stopped.\n\nVeth speaks first. 'Two hands,' she says. 'The older mark predates your father's work by some years, I would read. The groove angle is off from his by a measure I can feel from here.' Pell has not moved. She lifts her thumb from the disc once, slowly, the way she tests a joint in iron — not breaking contact, only checking. 'The older mark is not finished either,' she says. 'Both of them stopped in the same place. That is not coincidence. That is a limit they both reached and could not cross.'",
+      "sceneSummary": "The shadow-build's third line yields a second-hand mark beneath Silas's father's work — an older, incomplete datum from a different craftsman who reached the same limit and stopped.",
       "choices": [
         {
-          "label": "Hold the build a moment longer and look for any seam or marker in the accumulation — something that identifies who made the third line or when it was last touched.",
+          "label": "Ask Ama directly: did she ever meet a craftsman from the Crossing — someone who worked with your father before you were born?",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "ask",
+            "negotiate"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Use Order-Sense on the older mark itself — press attention into its angle and interval and try to read what tradition shaped it.",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 15,
           "intentTags": [
-            "study",
-            "careful"
+            "study"
           ],
           "abilityId": "order_sense",
-          "energyCost": null,
+          "energyCost": 2,
           "trivial": false
         },
         {
-          "label": "Let the build settle and speak what you saw aloud — name the three lines, the open terminus, the fact that the work is unfinished — so Pell, Veth, and Ama can all hold the same picture.",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Let the build fade — you have what you need. Name aloud what the two stopped hands mean for the road to the Crossing.",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "difficulty": 0,
           "intentTags": [
             "plan"
@@ -1710,61 +1725,49 @@
           "trivial": true
         },
         {
-          "label": "Ask Huginn. You have looked at the structure. Huginn looks at endings. Ask the bird what it reads at that northern edge.",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Pass the Waymarker to Veth and ask her to press her Ashwarden read into the older mark — her craft reads endings; this mark reads like one.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Close the Waymarker — the image has given what it has to give tonight. Fold the letter, settle the sequence, and rest. The road to Millbrook starts in the morning.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
+            "help",
             "careful"
           ],
           "trivial": true
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -2
-      },
       "scene": {
-        "setting": "The kitchen of Ama's house on Cairnhold's center lane, night. The table lamp burns low. The Waymarker sits warm in Silas and Pell's joined grip at the table's center. The shadow-build still holds, its northern edge now resolved into three distinct channels, one open.",
+        "setting": "The kitchen of Ama's house on Cairnhold's center lane, night. The table lamp burns low. The shadow-build still holds, thinning at its edges, the northern end's third line and its two-handed mark still faintly visible.",
         "npcsPresent": [
           {
             "name": "Ama",
-            "state": "Sitting back, hands folded, watching the shadow-build in silence — her face holds the look of someone recognizing something she already half-knew."
+            "state": "Sitting back, hands folded, watching the shadow-build — her expression has shifted slightly, as though Veth's words landed somewhere she has been expecting."
           },
           {
             "name": "Pell Ran Marsh",
-            "state": "Holding Silas's hand across the table, thumb resting still against the back of it. Looking at the northern edge of the build."
+            "state": "Holding Silas's hand, thumb lifted from the disc but still in contact — looking at the older mark in the image with flat, careful attention."
           },
           {
             "name": "Veth (Stillwater) Ondra",
-            "state": "Hands flat on the table, voice even. She has named the third line's open end and is waiting."
+            "state": "Hands flat on the table, eyes on the third line's lower edge where the older mark sits. She has named what she sees and is waiting."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the back of Silas's chair, head canted slightly toward the shadow-build's northern edge."
+            "state": "Perched on the back of Silas's chair, head canted toward the fading image's northern edge."
           }
         ],
         "objects": [
           "Father's Sealed Letter — open on the table",
           "Waymarker — warm from use, seated to Stillwater's Trouble, held in Silas and Pell's joined grip",
-          "Shadow-build — still present, three channels visible, one terminus open at the Disputed Zone",
+          "Shadow-build — still present but thinning, three channels visible, third line showing two-handed marks",
           "Table lamp, burning low",
           "Kitchen warmth, the last of the evening fire"
         ],
         "threads": [
-          "The accumulation at the Disputed Zone's edge has three lines — two finished, one open, the third line's maker and timeline unknown",
-          "Edvar Crane — last known at the Crossing; holds the second thread",
-          "The road sequence named — Millbrook, Stillwater's Trouble, the Crossing, the Zone"
+          "The older mark beneath the father's work — a second craftsman who reached the same limit and stopped; identity unknown",
+          "Ama's reaction to Veth's two-handed reading — she shifted, as if expecting it",
+          "The accumulation's three channels: two finished, one open, the third line's datum pre-dating Silas's father",
+          "Edvar Crane — last known at the Crossing; holds the second thread"
         ]
       },
       "npcUpdates": [
@@ -1772,96 +1775,91 @@
           "op": "update",
           "npcId": "pell-ran-marsh",
           "name": "Pell Ran Marsh",
-          "note": "Named the accumulation plainly — not one thing, but where three lines end. Her ironsense and the Waymarker worked together to resolve the northern edge.",
+          "note": "Read the older mark's angle and interval from the shadow-build — named it as a builder's datum, and named the shared stopping-point as a limit both craftsmen reached.",
           "learned": [
-            "The Disputed Zone accumulation sits at the convergence of three structural channels — two finished, one left open"
+            "The older mark in the third line is a builder's datum — set to guide what comes after, not to finish. Both craftsmen stopped at the same place, and that is a shared limit, not coincidence."
           ],
-          "statusNote": "Holding Silas's hand at the kitchen table in Cairnhold — the shadow-build still present, northern edge resolved."
+          "skillsObserved": [
+            "reading a structural mark's pressure and interval from an ironsense-fed shadow-build"
+          ],
+          "statusNote": "Holding the Waymarker with Silas at the kitchen table in Cairnhold — the shadow-build thinning, two-handed mark named."
         },
         {
           "op": "update",
           "npcId": "veth-stillwater-ondra",
           "name": "Veth (Stillwater) Ondra",
-          "note": "Named the third line's open end plainly — the letter explains why the work stopped; the build explains what was left unfinished.",
+          "note": "Named the older mark's tradition-distance from Silas's father by groove angle — estimated it predates the father's work by some years.",
           "learned": [
-            "The sealed letter and the shadow-build are complementary records — one names the reason for stopping, the other names what was not finished"
+            "The older mark's groove angle differs from the father's by a measurable degree — a different hand, years earlier, reaching the same stopping point."
           ],
-          "statusNote": "Hands flat on the table in Cairnhold kitchen — the sequence named, waiting on what comes next."
+          "skillsObserved": [
+            "reading a mark's tradition-distance and temporal distance from groove angle in a shadow-build"
+          ],
+          "statusNote": "Hands flat on the kitchen table in Cairnhold — the two-handed mark named, waiting on what comes next."
         },
         {
           "op": "update",
           "npcId": "silass-mother",
           "name": "Silas's Mother",
-          "note": "Sat back in silence as the northern edge resolved — her expression is recognition, not surprise.",
-          "learned": [
-            "The accumulation has three structural channels — her husband's work is more complex than a single thread"
-          ],
-          "statusNote": "Seated at the kitchen table in Cairnhold — watching the shadow-build's northern edge with quiet recognition."
+          "note": "Shifted visibly at Veth's two-handed reading — her expression suggests the older mark is not entirely news to her.",
+          "statusNote": "Seated at the kitchen table in Cairnhold — watching the shadow-build's fading edge, her reaction to the older mark unspoken."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "the-water-crisis",
-          "label": "The Water Crisis",
-          "kind": "mystery",
-          "fact": "The accumulation at the Disputed Zone's upper reach sits at the convergence of three structural channels. Two are finished. One is open — left so by Silas's father when he stopped the work. The third line's maker and its intended terminus are unknown.",
-          "links": [
-            "the-second-thread",
-            "stillwaters-trouble",
-            "calvar",
-            "millbrook",
-            "pell"
-          ]
-        },
-        {
           "topic": "the-second-thread",
           "label": "The Second Thread",
           "kind": "mystery",
-          "fact": "The Waymarker's shadow-build resolved the Disputed Zone accumulation into three lines at the kitchen table in Cairnhold. Two channels are complete. The third is open where Silas's father stopped. Edvar Crane holds whatever was meant to close it.",
+          "fact": "The third channel's terminus holds two-handed marks: the father's work extends an older datum set by a different craftsman. Both reached the same stopping-point. The older mark is a builder's datum — a guide for whoever comes after — not a finished stroke. Its tradition-distance from the father's work reads as several years older.",
           "links": [
             "the-water-crisis",
             "stillwaters-trouble",
             "calvar",
-            "pell"
+            "the-edge-district-ledger"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief, focused study of the shadow-build's edge — a matter of minutes at the table."
+        "why": "A short focused working at the table — the build held a moment longer, the mark read, the two voices naming what they saw."
+      },
+      "characterDeltas": {
+        "health": 0,
+        "energy": -2
       }
     },
     "sceneState": {
-      "setting": "The kitchen of Ama's house on Cairnhold's center lane, night. The table lamp burns low. The Waymarker sits warm in Silas and Pell's joined grip at the table's center. The shadow-build still holds, its northern edge now resolved into three distinct channels, one open.",
+      "setting": "The kitchen of Ama's house on Cairnhold's center lane, night. The table lamp burns low. The shadow-build still holds, thinning at its edges, the northern end's third line and its two-handed mark still faintly visible.",
       "npcsPresent": [
         {
           "name": "Ama",
-          "state": "Sitting back, hands folded, watching the shadow-build in silence — her face holds the look of someone recognizing someth"
+          "state": "Sitting back, hands folded, watching the shadow-build — her expression has shifted slightly, as though Veth's words land"
         },
         {
           "name": "Pell Ran Marsh",
-          "state": "Holding Silas's hand across the table, thumb resting still against the back of it. Looking at the northern edge of the b"
+          "state": "Holding Silas's hand, thumb lifted from the disc but still in contact — looking at the older mark in the image with flat"
         },
         {
           "name": "Veth (Stillwater) Ondra",
-          "state": "Hands flat on the table, voice even. She has named the third line's open end and is waiting."
+          "state": "Hands flat on the table, eyes on the third line's lower edge where the older mark sits. She has named what she sees and "
         },
         {
           "name": "Huginn",
-          "state": "Perched on the back of Silas's chair, head canted slightly toward the shadow-build's northern edge."
+          "state": "Perched on the back of Silas's chair, head canted toward the fading image's northern edge."
         }
       ],
       "objects": [
         "Father's Sealed Letter — open on the table",
         "Waymarker — warm from use, seated to Stillwater's Trouble, held in Silas and Pel",
-        "Shadow-build — still present, three channels visible, one terminus open at the D",
+        "Shadow-build — still present but thinning, three channels visible, third line sh",
         "Table lamp, burning low",
         "Kitchen warmth, the last of the evening fire"
       ],
       "threads": [
-        "The accumulation at the Disputed Zone's edge has three lines — two finished, one open, the third line's maker and timeline unknown",
-        "Edvar Crane — last known at the Crossing; holds the second thread",
-        "The road sequence named — Millbrook, Stillwater's Trouble, the Crossing, the Zone"
+        "The older mark beneath the father's work — a second craftsman who reached the same limit and stopped; identity unknown",
+        "Ama's reaction to Veth's two-handed reading — she shifted, as if expecting it",
+        "The accumulation's three channels: two finished, one open, the third line's datum pre-dating Silas's father",
+        "Edvar Crane — last known at the Crossing; holds the second thread"
       ]
     }
   },
@@ -2472,7 +2470,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d12] Let Silas name it. Did not say it for him. Held still under his mother's second read of her.",
         "[d12] Eyes on the two objects — reading them before anyone opens anything",
         "[d12] Reading the material of the Waymarker the way she reads iron — quietly, without being asked.",
         "[d12] Watched the Waymarker seating with full attention — read the finish the way she reads iron.",
@@ -2481,28 +2478,29 @@
         "[d12] Said nothing at the promise — sat back, shoulders settled. Heard what she needed.",
         "[d12] Named the second layer of the Waymarker as the load-bearing reason for the Crossing leg. The sequence landed for her as structural, not exploratory.",
         "[d12] Took Silas's hand without hesitation and fed ironsense into the Waymarker — read the shadow-build from the inside out and named the load-bearing truth: the father was watching the Disputed Zone accumulation, not just the hollow.",
-        "[d12] Named the accumulation plainly — not one thing, but where three lines end. Her ironsense and the Waymarker worked together to resolve the northern edge."
+        "[d12] Named the accumulation plainly — not one thing, but where three lines end. Her ironsense and the Waymarker worked together to resolve the northern edge.",
+        "[d12] Read the older mark's angle and interval from the shadow-build — named it as a builder's datum, and named the shared stopping-point as a limit both craftsmen reached."
       ],
       "knownFacts": [
-        "The hearthstone was Silas's grandmother's before his mother's — the stone remembers the heat",
         "Silas's mother will ask for embarrassing stories when given the opening",
         "Silas's mother read her correctly and said so plainly — craft-language first, bread board right, hinge-bolt stopped in time",
         "The shadow-map of Stillwater's Trouble shows the chalk ward-marks as bright strokes — she read them clearly",
         "The chalk ward-marks at Stillwater's Trouble's mouth are load-bearing, not decorative — the same hand that left room in the Waymarker's locating layer placed them to last",
         "The Wright's finish connects the Waymarker's open second layer to the hollow's structure — the same hand, building toward something unfinished",
         "The drainage channel runs through or past an unfinished deliberate accumulation at the Disputed Zone's upper reach — same intention as Stillwater's Trouble, older",
-        "The Disputed Zone accumulation sits at the convergence of three structural channels — two finished, one left open"
+        "The Disputed Zone accumulation sits at the convergence of three structural channels — two finished, one left open",
+        "The older mark in the third line is a builder's datum — set to guide what comes after, not to finish. Both craftsmen stopped at the same place, and that is a shared limit, not coincidence."
       ],
       "skillsObserved": [
-        "reading a newcomer's practical standing from pack and postur",
         "precise diagnosis of a failed rune-work attempt from positio",
         "feeding ironsense through physical contact to anchor a rune-",
         "feeding ironsense through the spear-shaft as a structural an",
         "finding the honest entry point into an unfamiliar room",
-        "reading a shadow-build's structure from ironsense feed — fol"
+        "reading a shadow-build's structure from ironsense feed — fol",
+        "reading a structural mark's pressure and interval from an ir"
       ],
       "status": "active",
-      "statusNote": "Holding Silas's hand at the kitchen table in Cairnhold — the shadow-build still present, northern edge resolved.",
+      "statusNote": "Holding the Waymarker with Silas at the kitchen table in Cairnhold — the shadow-build thinning, two-handed mark named.",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 12
@@ -3173,7 +3171,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d12] Cited as the one who can see the bond, if asked — the Ashwarden witness still present and available.",
         "[d12] Recognized the shape of the maker's seal — has not named what she recognizes yet",
         "[d12] Gaze moving between the Waymarker and the sealed letter — the maker's mark still held back, not yet spoken.",
         "[d12] Went still at the seating moment — the maker's mark on the letter still held back.",
@@ -3182,30 +3179,31 @@
         "[d12] Named the accumulation's deliberate shape before the letter confirmed it — her read was correct. Received the confirmation without visible reaction.",
         "[d12] Remained still — her read was correct, the confirmation is in. Waiting on what comes next.",
         "[d12] Named the day at Stillwater's Trouble as right, and named Cassiel's silence as the thing that makes it necessary. 'He never did ask.' Received the sequence without dispute.",
-        "[d12] Named the third line's open end plainly — the letter explains why the work stopped; the build explains what was left unfinished."
+        "[d12] Named the third line's open end plainly — the letter explains why the work stopped; the build explains what was left unfinished.",
+        "[d12] Named the older mark's tradition-distance from Silas's father by groove angle — estimated it predates the father's work by some years."
       ],
       "knownFacts": [
-        "The soul bond between Silas and Pell is visible to Ashwarden sight — sits in the grain, like a rune in iron",
         "Silas intends to introduce Pell to his mother in Cairnhold",
         "The shadow-map shows the accumulation caught and held at the hollow's center — the binding reads in the shadow-craft's image",
         "The accumulation at Stillwater's Trouble's hollow center is being collected deliberately — the shadow-image showed it caught and held, not draining",
         "She believes the sealed letter holds the explanation for what the accumulation is for",
         "The accumulation at Stillwater's Trouble was channeled deliberately by Silas's father — a slow careful directing of what was already moving",
         "The second layer of the Waymarker completes that work — a bond between holder and post",
-        "The sealed letter and the shadow-build are complementary records — one names the reason for stopping, the other names what was not finished"
+        "The sealed letter and the shadow-build are complementary records — one names the reason for stopping, the other names what was not finished",
+        "The older mark's groove angle differs from the father's by a measurable degree — a different hand, years earlier, reaching the same stopping point."
       ],
       "skillsObserved": [
-        "March-form spatial hardening — post-threshold technique, unh",
         "reading a ward's rough edge and filling it without being ask",
         "naming a student's pattern plainly without softening it",
         "demonstrating a lesson at the same time as naming it",
         "reading a soul bond's character from outside — named its qua",
-        "framing an Ashwarden companion's nature for a civilian witho"
+        "framing an Ashwarden companion's nature for a civilian witho",
+        "reading a mark's tradition-distance and temporal distance fr"
       ],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Hands flat on the table in Cairnhold kitchen — the sequence named, waiting on what comes next.",
+      "statusNote": "Hands flat on the kitchen table in Cairnhold — the two-handed mark named, waiting on what comes next.",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 12
@@ -3275,7 +3273,6 @@
       },
       "relationship": 8,
       "history": [
-        "[d12] Heard the Ashwarden explanation of Huginn; received Veth's framing without visible surprise; asked for the hinge-bolt story by name.",
         "[d12] Named her verdict on Pell plainly to Silas — suits you, because she isn't soft about it. Cup back in hand. Verdict delivered without ceremony.",
         "[d12] Received the soul bond plainly — judged both Silas and Pell by how it was said. Named both correct: Silas for saying it first, Pell for letting him.",
         "[d12] Watching Silas's face after he set the Waymarker down — waiting to hear what he read in it.",
@@ -3284,7 +3281,8 @@
         "[d12] Heard the letter read aloud at her own kitchen table — hands flat, middle distance, the look of someone whose long wait has been named by someone else at last.",
         "[d12] Folded the letter back along its original creases and gave it to Silas for the road — named it plainly: it belongs on the road now, not in a drawer.",
         "[d12] Sat back without a word when the shadow-build rose — watching, not interrupting. The map is not a surprise to her in the way a surprise lands; it is a confirmation of a shape she has been carrying for years.",
-        "[d12] Sat back in silence as the northern edge resolved — her expression is recognition, not surprise."
+        "[d12] Sat back in silence as the northern edge resolved — her expression is recognition, not surprise.",
+        "[d12] Shifted visibly at Veth's two-handed reading — her expression suggests the older mark is not entirely news to her."
       ],
       "knownFacts": [
         "The Waymarker holds a second unfinished layer — her husband stopped the work deliberately and left room in it.",
@@ -3300,7 +3298,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Seated at the kitchen table in Cairnhold — watching the shadow-build's northern edge with quiet recognition.",
+      "statusNote": "Seated at the kitchen table in Cairnhold — watching the shadow-build's fading edge, her reaction to the older mark unspoken.",
       "domains": {
         "primary": "ashwarden"
       },
@@ -4036,7 +4034,7 @@
     "lastTickWorldDay": 20,
     "lastCanonWorldDay": 20,
     "lastGenCount": 502,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "The shadow-build showed Calvar's drainage failure precisely — the sleeve geometry, the collar, the east-bend junction — before it showed…",
@@ -5411,21 +5409,21 @@
     }
   },
   "tendencies": {
-    "strategic": 13.402366928512466,
-    "cerebral": 20.06132975523742,
-    "social": 11.039558502483363,
-    "generous": 3.4774595443295286,
-    "cautious": 3.491721958792344,
-    "physical": 0.1880581227865026,
-    "risky": 0.19721619738520998,
-    "ruthless": 0.06288022929723176,
-    "carousing": 0.6849840901850976,
-    "amorous": 1.4901571711427666,
-    "patient": 0.3919251069176743,
-    "stealth": 0.024372537522125697,
-    "devotion": 0.49790863975751093,
-    "craft": 1.4653653191302551,
-    "leadership": 0.12405892087881859
+    "strategic": 13.067307755299653,
+    "cerebral": 20.559796511356485,
+    "social": 10.763569539921278,
+    "generous": 3.39052305572129,
+    "cautious": 4.404428909822535,
+    "physical": 0.18335666971684003,
+    "risky": 0.19228579245057972,
+    "ruthless": 0.061308223564800965,
+    "carousing": 0.6678594879304702,
+    "amorous": 1.4529032418641974,
+    "patient": 0.38212697924473243,
+    "stealth": 0.023763224084072554,
+    "devotion": 0.48546092376357314,
+    "craft": 1.4287311861519987,
+    "leadership": 0.12095744785684813
   },
   "aptitudes": [
     "strategist",
@@ -5433,7 +5431,7 @@
     "scholar",
     "sage"
   ],
-  "actionCount": 634,
+  "actionCount": 635,
   "grantsVersion": 1,
   "reconcileVersion": 13,
   "gallery": [
@@ -5783,8 +5781,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784585806855,
-  "rev": 975,
+  "updatedAt": 1784585932235,
+  "rev": 976,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -7404,7 +7402,7 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 65,
+      "order_sense": 66,
       "palework": 29,
       "deathsense": 30,
       "shadowstep": 17,
@@ -7612,7 +7610,7 @@
   "regionsKnown": {
     "valley": 435,
     "the_palelands": 6,
-    "the_center": 22
+    "the_center": 23
   },
   "foreclosed": [
     "rootkin",
@@ -7700,10 +7698,10 @@
     {
       "id": "sess-7",
       "startedAt": "2026-07-20T22:07:15.953Z",
-      "lastAt": "2026-07-20T22:16:46.853Z",
+      "lastAt": "2026-07-20T22:18:52.233Z",
       "startDay": 20,
       "endDay": 20,
-      "beats": 3
+      "beats": 4
     }
   ],
   "company": [
@@ -7891,22 +7889,22 @@
     "the_crossing": "https://image.pollinations.ai/prompt/The%20Crossing%3A%20Every%20axis%20crosses%20here%20at%20nothing%2C%20and%20the%20result%20is%20not%20grey%20%E2%80%94%20it%20is%20CROWDED.%20The%20Crossing%20leans%20toward%20no%20pole%2C%20which%20is%20precisely%20why%20it%20can%20hold%20them%20all%3A%20an%20Umbral%20and%20a%20Blazeborn%20drink%20at%20the%20same%20table%20because%20neither%20has%20the%20standing%20to%20make%20the%20other%20leave.%20The%20poles%20are%20lonely%20places.%20The%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=24144&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 10,
-    "choices": 10,
-    "characterDeltas": 5,
-    "scene": 10,
-    "npcUpdates": 10,
+    "sceneSummary": 11,
+    "choices": 11,
+    "characterDeltas": 6,
+    "scene": 11,
+    "npcUpdates": 11,
     "factUpdates": 2,
     "placeUpdates": 2,
-    "codexUpdates": 9,
-    "timeOps": 8,
+    "codexUpdates": 10,
+    "timeOps": 9,
     "imagePrompt": 1,
     "sceneEnded": 4,
     "itemUpdates": 1,
     "questUpdates": 1,
     "offer": 1
   },
-  "_opTurns": 10,
+  "_opTurns": 11,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

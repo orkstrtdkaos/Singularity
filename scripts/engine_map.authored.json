@@ -155,5 +155,160 @@
     "purpose": "The world's OWN agenda: latent arcs foment on the world count whether or not the player has seen them, and surface at thresholds as first contact — so discovery is a late event in something that has been building, and the world is not hero-dependent. Every arc carries a cause that existed before it surfaced.",
     "playerVisibleSurface": "The return-tick surfaces an arc as a rumour now specific enough to repeat, or reports one that resolved itself without you; a surfaced arc rides in the STIRRING IN THE WORLD block for the GM to develop into a face, a changed place, or a thread.",
     "whatMakesItFire": "runGenerationTurn (in worldtick.js) runs on the world count alongside the return-tick — seeds new arcs from the disposition of the regions the player knows, foments the existing ones, and surfaces those past the threshold. No known regions → nothing seeds; an arc may resolve or grow with no player involvement."
+  },
+  "codex.js": {
+    "purpose": "The character's knowledge graph — what they have LEARNED as linked, typed topics (mysteries, factions, lore, people, places) with accumulating facts, written only through clamped ops.",
+    "playerVisibleSurface": "The codex screen and the CODEX block, which lets the GM have the character ACT on what they know instead of re-explaining it.",
+    "whatMakesItFire": "A GM codexUpdates op writes a topic or fact; auto-consolidation (SNG-153) folds duplicates past a threshold; the codex screen reads it."
+  },
+  "resolve.js": {
+    "purpose": "Deterministic d100 action resolution — the model never rolls; this turns an action and its modifiers into a rolled degree of success the whole engine reads. Pure.",
+    "playerVisibleSurface": "Indirect but constant: the success-chance readout before acting and the outcome degree the narration is handed. No panel of its own — it is the dice under everything.",
+    "whatMakesItFire": "Every action that resolves — and every encounter, gambit and skill-battle round routes its roll through here."
+  },
+  "genschema.js": {
+    "purpose": "A dependency-free JSON-Schema checker and repair helper for the generative pipeline — exactly the subset the derived npc/location/arc schemas use, so a grown entity is shaped like an authored one.",
+    "playerVisibleSurface": "NONE directly — it validates generation; the player meets it only as generated content that never arrives malformed.",
+    "whatMakesItFire": "A generateRequest — generate.js validates (and auto-repairs) the model's output against the derived schema before minting."
+  },
+  "inventory.js": {
+    "purpose": "Items as first-class objects the character can carry and USE — normalized losslessly from legacy string saves, with quantities, uses and dedupe.",
+    "playerVisibleSurface": "The inventory panel and the INVENTORY block; the receipt when an item is used or consumed.",
+    "whatMakesItFire": "A GM itemUpdates op writes the pack; using an item in a scene reads and decrements it."
+  },
+  "personalArc.js": {
+    "purpose": "Every character's PRIMARY arc, generated from the backstory they wrote — the bound-arc shape SNG-132's runtime surfaces and paces, so a player's own throughline is a real quest that is never foreclosed.",
+    "playerVisibleSurface": "The personal-arc quest in STRUCTURED QUESTS, surfaced and paced like any bound arc.",
+    "whatMakesItFire": "Character creation generates it from the bio; a beat that touches it advances it; reconcile backfills it onto older saves."
+  },
+  "sync.js": {
+    "purpose": "GitHub transport for the shared world, swappable by design — nothing outside this file knows the world lives on GitHub. Character/profile backup, ledger append, shared-scene primitives.",
+    "playerVisibleSurface": "The save-sync status and the shared-world writes; localStorage stays authoritative and this is the optional layer on top.",
+    "whatMakesItFire": "A save/backup, a ledger append, or a shared-scene write in a co-op session."
+  },
+  "canon.js": {
+    "purpose": "Shared family canon — a personal-canon entity a player grew real EARNS its way into a shared store the whole world reads, contradictions RANKED by realness rather than rejected. Pure.",
+    "playerVisibleSurface": "The SHARED WORLD CANON block — other players' promoted figures, places and threads the GM may reference as established.",
+    "whatMakesItFire": "A nominated entity's weight crossing the promotion threshold (the threshold IS the gate; no human curator). The sync orchestration that carries it across the repo lives in worldtick.js."
+  },
+  "companions.js": {
+    "purpose": "Traveling companions — present in every scene, voiced by the GM, mechanically helpful where their nature fits; the character carries only the ids, definitions are content.",
+    "playerVisibleSurface": "The COMPANIONS block and the companion detail card — who travels with you and what they can do.",
+    "whatMakesItFire": "Always, for a present companion; an evolution threshold deepens one (SNG-175)."
+  },
+  "functions.js": {
+    "purpose": "The function-family axis over the skill system — inverts the authored verb→family vocabulary (8 families, 24 verbs), measures a character's coverage, and recommends skills that fill the gap.",
+    "playerVisibleSurface": "The function-gap line in the toolkit block, and the coverage read where a kit's missing family is named.",
+    "whatMakesItFire": "Assembling the toolkit (the gap), and any place the engine reasons about what KIND of act an ability performs."
+  },
+  "legends.js": {
+    "purpose": "The world's great figures — heroes witnessed and villains scaling from riffraff to arc, so a world feels large when greatness passes through it. The engine detects the beat and GOVERNS the rarity; the GM narrates.",
+    "playerVisibleSurface": "The LEGEND block — a great figure surfacing in the fiction, governed so it stays rare.",
+    "whatMakesItFire": "A qualifying beat (maybeLegendDetail governs the rarity); rides the generate + weight/recurrence + codex machinery."
+  },
+  "reconcile.js": {
+    "purpose": "Save and content migration — versioned, idempotent, one-time steps that bring a character or content authored by an older engine up to current, so nobody loses a save to a schema change.",
+    "playerVisibleSurface": "The one-time '✦ …' notices on load when a migration grants a character what a newer feature owes it.",
+    "whatMakesItFire": "Loading a save (or content) whose reconcile-version trails the engine — each step runs once, in order, then never again."
+  },
+  "skill_battle.js": {
+    "purpose": "The two-sided contest — both wills declare a skill and intensity and roll through resolve.js; the higher net wins the round and shifts a bidirectional momentum meter, with energy attrition the second win condition.",
+    "playerVisibleSurface": "The skill-battle receipt — momentum, each side's real math (the opponent's roll fogged by sense.js until earned), and the win.",
+    "whatMakesItFire": "Entering a structured skill duel (SNG-098); the recurrence engine's prestige challengers resolve through it."
+  },
+  "worldtime.js": {
+    "purpose": "The two clocks — character time (days and season, the player's own) and the world Kept Count (a shared, monotonic mark spoken in the local people's idiom), in different units so neither invents a date for the other.",
+    "playerVisibleSurface": "The CURRENT TIME narration and the count rendered in the local idiom; the story/real time-mode setting.",
+    "whatMakesItFire": "Always — readClock runs every turn and the count advances about once per real hour; SNG-191 removed the invented day-number."
+  },
+  "corrections.js": {
+    "purpose": "The game self-heals — a bounded stateOps the GM proposes and the engine validates and applies to the asking player's OWN save. REPAIR, not wish: fix data that is wrong, never grant what play did not earn.",
+    "playerVisibleSurface": "The POSSIBLE ERROR advisory in the prompt and the Repair panel; the ✦ receipt when a correction lands.",
+    "whatMakesItFire": "An anomaly detected at assembly (detectAnomalies), or the player opening the Repair panel — the GM emits stateOps, the engine adjudicates."
+  },
+  "encounters.js": {
+    "purpose": "Typed multi-round structures — duels, challenges, puzzles — that CONSUME the d100 resolution and map receipts onto encounter state through data tables; the GM narrates the state, never advances it.",
+    "playerVisibleSurface": "The ACTIVE ENCOUNTER receipt each round and the AVAILABLE ENCOUNTERS the GM may offer here.",
+    "whatMakesItFire": "A GM newEncounter/encounterOps, or firing one of the location's available encounters; each round consumes an ordinary resolve.js roll."
+  },
+  "evolution.js": {
+    "purpose": "Living gear — an item that wakes through stages as a companion bond and the item×companion co-use count cross thresholds; the stage the engine owns, never the model.",
+    "playerVisibleSurface": "The LIVING GEAR block and the AN ITEM WAKES beat when a stage unlocks.",
+    "whatMakesItFire": "A stage's unlockBond and unlockCoUse both met through play — the engine advances the stage, the GM narrates the change."
+  },
+  "facts.js": {
+    "purpose": "A durable, non-scrolling ledger of load-bearing facts (a rescue, a death, a promise) — unlike the windowed chronicle, the whole active ledger is fed every turn as truth the GM must never contradict.",
+    "playerVisibleSurface": "The ESTABLISHED FACTS block — persistent, authoritative truths regardless of how many scenes have passed.",
+    "whatMakesItFire": "A GM factUpdates op adds or resolves a fact; every turn the active ledger is carried into the prompt."
+  },
+  "narration_voice.js": {
+    "purpose": "The narration's voice for table play — the place's earned register (concrete↔poetic) and the read-aloud constraint, plus a picker that prefers the good installed voices over the default worst one.",
+    "playerVisibleSurface": "The NARRATIVE REGISTER and READ ALOUD blocks, the Settings read-aloud toggle, and the ▶ speak control's voice.",
+    "whatMakesItFire": "Always (the register colours every beat); the read-aloud directive when spoken play is on."
+  },
+  "sense.js": {
+    "purpose": "The graduated sense-of-success filter — the engine always knows the true odds; the character perceives only what their attunement earns, and an opponent's roll is fogged until sense is high enough. Pure.",
+    "playerVisibleSurface": "The precision of the success-chance readout (a vague versus exact odds read) and the fog over an opponent's roll in a skill battle.",
+    "whatMakesItFire": "Any success preview and any skill-battle round — attunement gates how much of the true math is shown."
+  },
+  "toolkit.js": {
+    "purpose": "The 'what you could reach for' summary — a compact, recency-weighted hold-up of the player's OWN crafts, combines, aspiration, carried items and function-gap, so the GM can offer ONE, lightly.",
+    "playerVisibleSurface": "The TOOLKIT block — options the player may have forgotten, surfaced as a light offer (rule 16B), never a menu.",
+    "whatMakesItFire": "Assembled each turn; SNG-173 made its quiet-craft pool recency-based so long-unused crafts fade rather than crowd."
+  },
+  "affinities.js": {
+    "purpose": "How a place shapes a roll, both ways and both legible — a TYPE affinity (a tag's flat bump to matching skills) and a VECTOR alignment (an ability whose axes agree with the place's strong spectrum).",
+    "playerVisibleSurface": "The affinity receipt line — why THIS place helped or resisted the action.",
+    "whatMakesItFire": "An action at a place — the flat and vector modifiers are computed and surfaced on resolve."
+  },
+  "backfill.js": {
+    "purpose": "One-time retroactive credit for characters made before engine-XP, bonds and the practice ledger existed — a principled, CAPPED reconstruction from each character's own durable record, never an exact replay.",
+    "playerVisibleSurface": "The one-time credit a pre-feature character receives on load (XP, bonds, practice), shown as its receipts.",
+    "whatMakesItFire": "Loading a character created before a feature existed, once — the same versioned, idempotent discipline reconcile.js generalizes."
+  },
+  "chronicle.js": {
+    "purpose": "The Chronicle reads the accreted self back to the player — one assembled page that WITNESSES who the character has become, from deeds, bonds, standing and the grown arc.",
+    "playerVisibleSurface": "The Chronicle screen and the CHRONICLE block — the character's story so far, plus a one-paragraph 'story so far' synthesis.",
+    "whatMakesItFire": "A scene closing appends a line; opening the Chronicle assembles the page (app.js owns the async synthesis call)."
+  },
+  "entityDetail.js": {
+    "purpose": "ONE formatter for the hover/tap detail of the three things that recur everywhere — a skill, an NPC name, an item — so the detail reads identically at every render site. Pure.",
+    "playerVisibleSurface": "The detail card that appears wherever a skill, name or item is shown — the same shape everywhere.",
+    "whatMakesItFire": "Opening any entity's detail — the app gathers the live values and this formats them."
+  },
+  "gambit.js": {
+    "purpose": "Declared multi-step plans — the player lays out a sequence of intended actions with fallbacks, sees what their experience reveals of each step's odds, and executes; steps resolve in order through the same deterministic resolver.",
+    "playerVisibleSurface": "The gambit builder (goal, steps, fallbacks) and the step-by-step run receipts.",
+    "whatMakesItFire": "The player asking to plan — a gambitOps op opens the builder pre-filled; a failed step blocks the run per its fallback."
+  },
+  "intensity.js": {
+    "purpose": "The three intensities a craft resolves at — Conserve / Standard / Surge — scaling energy and effect, with backlash risk carried by Surge alone; AUTO picks the minimum the task needs and never auto-surges.",
+    "playerVisibleSurface": "The intensity choice on an ability action and the backlash receipt when a surge costs.",
+    "whatMakesItFire": "An ability action with an intensity setting — surge is always the player's deliberate choice."
+  },
+  "pacing.js": {
+    "purpose": "Scene rhythm — the world PUSHES when a beat goes quiet (pressure, escalating and place-respecting) and OFFERS when there is room (SNG-194), so the player never has to ask the world to be interesting. Pure.",
+    "playerVisibleSurface": "The woven THE WORLD ACTS pressure beat and the THERE IS ROOM offer cue — both in-fiction, never a system announcement.",
+    "whatMakesItFire": "Quiet turns crossing a threshold (pressure); roomForAnOffer computing a positive opening off cooldown (offer)."
+  },
+  "random_encounters.js": {
+    "purpose": "The living valley — on travel, rest, arrival or world-tick the engine MAY roll one flavored encounter, weighted by the place's dangerLevel and tags, across a tonal spectrum that is never grim by default.",
+    "playerVisibleSurface": "The woven SOMETHING HAPPENS beat when a roll lands.",
+    "whatMakesItFire": "A travel/rest/arrival/tick roll (SNG-075) — weighted by the location, and never announced as a system event."
+  },
+  "recurrence.js": {
+    "purpose": "Prestige-driven recurring challengers — a bound arc draws duel challengers as the character's renown rises, the swordsman's paradox as an engine: prestige feeds challengers feeds prestige.",
+    "playerVisibleSurface": "A returning challenger arriving in the fiction, scaled to your renown band.",
+    "whatMakesItFire": "A renown (deeds-driven reputation) band crossing plus a challenger cooldown — the duel runs as an ordinary SNG-098 skill battle."
+  },
+  "vectors.js": {
+    "purpose": "Makes a location's spectrum character legible to the PLAYER — a place's strong axes are felt after a visit, subtler axes need attunement or a perceiving ability, and precursor address_sense reveals all.",
+    "playerVisibleSurface": "The place's felt axes shown to the player (the GM already has the full vector); SNG-011 progressive legibility.",
+    "whatMakesItFire": "Visiting a place, using a perceiving ability there, or precursor address_sense — each reveals more of the vector."
+  },
+  "worldtick.js": {
+    "purpose": "The world moves while you are away — on re-entry after in-game days pass, active events advance on their own clocks, delegated work progresses and arcs ferment, so a crisis ignored worsens and time away is time the world used.",
+    "playerVisibleSurface": "The away-digest news on return — what advanced, what a delegated crew did, what stirred in the world.",
+    "whatMakesItFire": "Re-entering play after in-game days have passed (runWorldTick plus the SNG-191 generation turn on the world count)."
   }
 }

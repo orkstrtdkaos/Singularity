@@ -6243,6 +6243,19 @@ await (async () => {
   check("194: the room block only fires when the engine set offerDetail (model never judges gap vs grip)", /if \(offerDetail\) scene\.push/.test(gmSrc194));
 }
 
+// --- SNG-195 G3: the Machine panel's outcome-badge set must EQUAL the ops that write outcome ---
+{
+  const appSrc195 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+  // every op passed to logOpOutcome("<op>", ...) writes an applied/rejected outcome the panel should render
+  const outcomeOps = new Set([...appSrc195.matchAll(/logOpOutcome\("(\w+)"/g)].map(m => m[1]));
+  const setMatch = appSrc195.match(/OUTCOME_INSTRUMENTED = new Set\(\[([^\]]*)\]\)/);
+  const shown = new Set((setMatch && setMatch[1].match(/"(\w+)"/g) || []).map(s => s.replace(/"/g, "")));
+  const missing = [...outcomeOps].filter(op => !shown.has(op));
+  if (missing.length) console.log("   outcome ops written but not shown: " + missing.join(", "));
+  check("195 G3: every logOpOutcome-writing op is in OUTCOME_INSTRUMENTED (no display drift)", outcomeOps.size >= 5 && missing.length === 0);
+  check("195 G3: the 5 known outcome ops are all shown", ["markTeacher", "delegateOps", "arcOps", "adoptSchool", "offer"].every(op => shown.has(op)));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

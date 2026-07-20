@@ -62,7 +62,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.173";
+const APP_VERSION = "1.8.174";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -951,7 +951,10 @@ function renderMachine() {
   for (const c of caps) for (const o of (c.opsFired || [])) seenInCaptures.add(o.op);
   const turns = character?._opTurns || caps.filter(c => c.parsed).length;
   const isEmitted = op => (emitted[op] || 0) > 0 || seenInCaptures.has(op);
-  const OUTCOME_INSTRUMENTED = new Set(["markTeacher"]);
+  // SNG-195 G3: every op that writes an applied/rejected outcome via logOpOutcome must render its badge —
+  // the set had drifted to markTeacher alone while four more ops (delegateOps/arcOps/adoptSchool/offer)
+  // wrote outcome data the panel never showed. A smoke test now pins this set to the logOpOutcome callers.
+  const OUTCOME_INSTRUMENTED = new Set(["markTeacher", "delegateOps", "arcOps", "adoptSchool", "offer"]);
   const vocab = [...new Set([...SALVAGEABLE_OPS, "sceneEnded", "gambitApt", ...Object.keys(ledger), ...Object.keys(emitted)])];
   const firedOps = vocab.filter(isEmitted).sort((a, b) => (emitted[b] || 0) - (emitted[a] || 0));
   const neverOps = vocab.filter(op => !isEmitted(op)).sort();

@@ -94,7 +94,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.35232387128972953,
+    "spectrumId": -0.334707677725243,
     "violence_peace": 0.1030845625,
     "chaos_order": 0.25700971191540173,
     "mechanical_spiritual": 0.2580372847905887,
@@ -331,6 +331,22 @@
       "qty": 1,
       "description": "Dried binding paste in a paper twist — for setting rune-work in place. Veth added black salt to the purchase; it holds in wet weather.",
       "consumable": true
+    },
+    {
+      "id": null,
+      "name": "Waymarker (father's)",
+      "kind": "tool",
+      "qty": 1,
+      "description": "A small object in oilcloth — a Wright's tool, his father's name attached. Called a Waymarker: reads the design of a place you have seated yourself into and can locate it again from a distance. The deep drawer held it for years.",
+      "consumable": false
+    },
+    {
+      "id": null,
+      "name": "Father's Sealed Letter",
+      "kind": "quest",
+      "qty": 1,
+      "description": "A folded letter in his father's hand, sealed with a maker's mark — genuine, bone-deep in craft. Written when Silas was four. Kept by Ama until the right moment. That moment is now.",
+      "consumable": false
     }
   ],
   "deeds": [
@@ -1633,15 +1649,7 @@
     "Silas thanks Tane at the close of the morning bouts, rejoins Siol, and hears her plain assessment of the fight. Siol offers a tour of the Hub — plaza first, Ent circle last — and the scene at the Coliseum reaches its natural end.",
     "The party followed Siol north through the Hub's quieter lanes and arrived at the edge of the Ent grove circle at midday — the path giving way to older ground, the circle of trees ahead, Siol stopping at its edge.",
     "The party stepped through the sixth waygate at the Hub — Siol at the arch's edge, the gate-keeper's instruction plain, the March setting confirmed north-by-northwest. The road to Raven's Home has begun.",
-    {
-      "kind": "quest_resolved",
-      "questId": "the-door-that-closed-behind",
-      "title": "The Door That Closed Behind",
-      "outcome": "Read",
-      "narration": [],
-      "worldDay": 19,
-      "at": "2026-07-19T18:31:52.037Z"
-    },
+    "(a scene whose summary was lost to a formatting error)",
     "Silas Weir arrived at the Stillwater's Trouble hollow on World-day 19 with Pell, Veth Ondra, and Cassiel Ord — planted Memory at the site's center using three braided crafts with Pell's ironsense as anchor, claimed and named the Raven's Home warden post as his own Ashwarden base, seated two Boundary-Stone wards at the post's crown and the hollow's mouth, led Veth down into the hollow so the eleven-year completion could be witnessed by all four principals, walked the post's interior and named every space — Pell's forge corner, Veth's teaching alcove, Cassiel's keeper's threshold, Huginn's rook, Silas's Maker's hollow — added a shadow-and-boundary ward skin to the walls, invited Veth to demonstrate her March-form threshold-hardening which settled into the base layer, and in the quiet after the work finished, Cassiel named himself keeper of the threshold. The post is claimed, named, anchored, and held.",
     "Silas asked Veth to read the soul bond — she confirmed it plainly, named it rune-in-grain. He announced the road to Cairnhold and the introduction to his mother. The party departed Stillwater's Trouble on World-day 19 afternoon and arrived at Cairnhold's outer district on World-day 23.",
     "The party walks from the western crossing lane to Silas's mother's house in Cairnhold's center district — the road ends at an open door and a chimney smoking."
@@ -1724,118 +1732,124 @@
         "player": "Fill Ama (Maret) in on where you've been since she last saw you - the work you finished, name it cleanly [GM to invent some Necromancer based creation] and how it caused your exodus, but now you're back to embrace it.  The water crisis - falling for Pell - The \"Stillwater's Trouble\". Everything. Let others add where they'd like.",
         "summary": "Silas tells Ama everything — the thin place and the exile, the water crisis and the fellowship, Stillwater's Trouble and the claimed post, and finally how he fell for Pell — and his mother receives it all with the plain attention of someone who saw most of it at the door.",
         "narration": "You look at your mother across the table and you say her name first. 'Ama.' The way you said it when you were small and had done something you needed to account for.\n\nShe puts her cup down and waits. That has always been her way.\n\nYou start at the beginning — or what felt like the beginning, though you understand now it was the middle. You tell her about the thin place. The door in the hillside that was not on any map, and the path behind you that was no longer there when you turned. You tell her what you found on the other side: a piece of old work, Precursor-touched, something that had been shaping the ground around it for longer than anyone had noticed. A reclamation site, you call it, because that is the honest word. It was following its last instruction, and the instruction was old, and no one living had given it.\n\nYou tell her what you did with it. You do not soften that part. You say that you ended what needed ending, and that the people who held authority over that ground did not agree with your right to do it, and that for a time the road home was not available to you. You say it plainly because she will read the hollow version and be disappointed by it.\n\nHere Veth sets both palms flat on the table and adds one sentence. 'The work was sound,' she says. 'I have seen the site. It holds.'\n\nYou nod at that and continue.\n\nYou tell her about the water. The Echo River running gray-green at the intake two mornings in three. Fish catches down. Mara Wells keeping a written log. A filtration engineer named Calvar, a document roll, a gathering at the forge that was named the Fell Pell before the coals cooled. You tell her the accountability chain is moving toward the district records office and that the source is still upstream in the Disputed Zone, and that you are on your way there once you have sat in this kitchen long enough to mean it.\n\nYou tell her about Stillwater's Trouble — the warden post on the Ashwarden March that was dissolved eleven years ago, and the hollow beside it, and what was accumulating there. You tell her you claimed it. Named it. Set your hand on the door and seated the name into the March's design. You say Veth's old post now belongs to someone, and you are that someone, and Cassiel Ord is keeping the threshold until you return.\n\nThen you are quiet for a moment.\n\nPell does not fill the silence. She is watching your mother's face the way she watches iron — reading the temperature without touching it.\n\nYou say the last thing. 'And somewhere between the thin place and the post and the gray water, I fell for her.' You do not gesture at Pell. You do not need to. 'Not carefully. Not with a plan. Just — completely.'\n\nYour mother picks up her cup. She looks at Pell for a long moment. Then she looks at you.\n\n'I know,' she says. 'I saw it at the door.'\n\nHuginn, from the back of Veth's chair, makes one quiet sound. It is not a word. It is the sound of a thing that was already finished being confirmed."
+      },
+      {
+        "player": "Tell Ama about your plans for Stillwater's Trouble - you will use it to grow your capabilities and those of your party... it will be your base of operations in the world as you solve the water crisis and any other events that need you... ask if your father left anything for you - that might help you along the way - He was a Wright and more... ",
+        "summary": "Silas tells Ama his plans for Stillwater's Trouble — base, fellowship, the water crisis ahead — and she opens the deep drawer and sets two things on the table: a Waymarker his father called it, and a sealed letter written when Silas was four.",
+        "narration": "The kitchen has settled into the particular quiet of a room that has received a lot. The fire is low. The tea has been refilled once. Your mother has not moved from her seat except to bring the pot, and that tells you something — she is not done yet.\n\nYou tell her about Stillwater's Trouble plainly. The post on the March, the name you seated into it, Cassiel at the threshold. You tell her what you mean to make of it — a base, a place to return to, a ground from which to work the water crisis and whatever comes after. You tell her about Pell's forge corner and Veth's teaching alcove and the chalk marks at the crown and the hollow's mouth, and you watch your mother's face the way you watched the hollow itself — for what it tells you without being asked.\n\nShe nods, once, when you describe seating the name into the March's design. She knows what that costs. She was married to a Wright.\n\nWhen you finish, you ask. Carefully, plainly, the way she taught you to ask for something you actually want. You tell her your father was a Wright and more — you have always known 'more' was there — and you ask if he left anything. Anything intended for you.\n\nYour mother is quiet for a moment. Not the quiet of someone who does not know. The other kind.\n\n'He left two things,' she says. 'One I have kept. One I have been keeping for you.' She stands without ceremony and crosses to the work counter, and she opens the drawer beneath it — the deep one, the one that always stuck — and she brings back a small object wrapped in oilcloth and a folded letter, sealed with a mark you do not recognize but which your Order-Sense places immediately: a maker's seal, genuine, from a hand that knew the craft to its bone.\n\n'The object he called a Waymarker,' she says, setting it on the table between you. 'He said it was for finding your way back to a place you had already been — that it read the design of a place you had seated yourself into, and could locate it again from a distance.' She touches the letter but does not push it forward yet. 'The letter is his. He wrote it when you were four. He said you would know when to open it.' She looks at you with the plain attention she has given everything tonight. 'I think that might be now.'"
       }
     ],
     "lastTurn": {
-      "narration": "You look at your mother across the table and you say her name first. 'Ama.' The way you said it when you were small and had done something you needed to account for.\n\nShe puts her cup down and waits. That has always been her way.\n\nYou start at the beginning — or what felt like the beginning, though you understand now it was the middle. You tell her about the thin place. The door in the hillside that was not on any map, and the path behind you that was no longer there when you turned. You tell her what you found on the other side: a piece of old work, Precursor-touched, something that had been shaping the ground around it for longer than anyone had noticed. A reclamation site, you call it, because that is the honest word. It was following its last instruction, and the instruction was old, and no one living had given it.\n\nYou tell her what you did with it. You do not soften that part. You say that you ended what needed ending, and that the people who held authority over that ground did not agree with your right to do it, and that for a time the road home was not available to you. You say it plainly because she will read the hollow version and be disappointed by it.\n\nHere Veth sets both palms flat on the table and adds one sentence. 'The work was sound,' she says. 'I have seen the site. It holds.'\n\nYou nod at that and continue.\n\nYou tell her about the water. The Echo River running gray-green at the intake two mornings in three. Fish catches down. Mara Wells keeping a written log. A filtration engineer named Calvar, a document roll, a gathering at the forge that was named the Fell Pell before the coals cooled. You tell her the accountability chain is moving toward the district records office and that the source is still upstream in the Disputed Zone, and that you are on your way there once you have sat in this kitchen long enough to mean it.\n\nYou tell her about Stillwater's Trouble — the warden post on the Ashwarden March that was dissolved eleven years ago, and the hollow beside it, and what was accumulating there. You tell her you claimed it. Named it. Set your hand on the door and seated the name into the March's design. You say Veth's old post now belongs to someone, and you are that someone, and Cassiel Ord is keeping the threshold until you return.\n\nThen you are quiet for a moment.\n\nPell does not fill the silence. She is watching your mother's face the way she watches iron — reading the temperature without touching it.\n\nYou say the last thing. 'And somewhere between the thin place and the post and the gray water, I fell for her.' You do not gesture at Pell. You do not need to. 'Not carefully. Not with a plan. Just — completely.'\n\nYour mother picks up her cup. She looks at Pell for a long moment. Then she looks at you.\n\n'I know,' she says. 'I saw it at the door.'\n\nHuginn, from the back of Veth's chair, makes one quiet sound. It is not a word. It is the sound of a thing that was already finished being confirmed.",
-      "sceneSummary": "Silas tells Ama everything — the thin place and the exile, the water crisis and the fellowship, Stillwater's Trouble and the claimed post, and finally how he fell for Pell — and his mother receives it all with the plain attention of someone who saw most of it at the door.",
+      "narration": "The kitchen has settled into the particular quiet of a room that has received a lot. The fire is low. The tea has been refilled once. Your mother has not moved from her seat except to bring the pot, and that tells you something — she is not done yet.\n\nYou tell her about Stillwater's Trouble plainly. The post on the March, the name you seated into it, Cassiel at the threshold. You tell her what you mean to make of it — a base, a place to return to, a ground from which to work the water crisis and whatever comes after. You tell her about Pell's forge corner and Veth's teaching alcove and the chalk marks at the crown and the hollow's mouth, and you watch your mother's face the way you watched the hollow itself — for what it tells you without being asked.\n\nShe nods, once, when you describe seating the name into the March's design. She knows what that costs. She was married to a Wright.\n\nWhen you finish, you ask. Carefully, plainly, the way she taught you to ask for something you actually want. You tell her your father was a Wright and more — you have always known 'more' was there — and you ask if he left anything. Anything intended for you.\n\nYour mother is quiet for a moment. Not the quiet of someone who does not know. The other kind.\n\n'He left two things,' she says. 'One I have kept. One I have been keeping for you.' She stands without ceremony and crosses to the work counter, and she opens the drawer beneath it — the deep one, the one that always stuck — and she brings back a small object wrapped in oilcloth and a folded letter, sealed with a mark you do not recognize but which your Order-Sense places immediately: a maker's seal, genuine, from a hand that knew the craft to its bone.\n\n'The object he called a Waymarker,' she says, setting it on the table between you. 'He said it was for finding your way back to a place you had already been — that it read the design of a place you had seated yourself into, and could locate it again from a distance.' She touches the letter but does not push it forward yet. 'The letter is his. He wrote it when you were four. He said you would know when to open it.' She looks at you with the plain attention she has given everything tonight. 'I think that might be now.'",
+      "sceneSummary": "Silas tells Ama his plans for Stillwater's Trouble — base, fellowship, the water crisis ahead — and she opens the deep drawer and sets two things on the table: a Waymarker his father called it, and a sealed letter written when Silas was four.",
       "choices": [
         {
-          "label": "Ask Ama what she has heard of the water situation from Cairnhold's side — she notices things, and Cairnhold sits on its own watershed",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
+          "label": "Open the letter now — your mother says you will know when, and you know",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "abilityId": null,
+          "energyCost": null
         },
         {
-          "label": "Ask Ama plainly what she needs from you before you leave for the Disputed Zone — she did not ask you to come home, but you came, and you want to know if there is something owed here",
+          "label": "Unwrap the Waymarker first — hold it, read it with Order-Sense before you read the words",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": false,
+          "abilityId": "order_sense",
+          "energyCost": 2
+        },
+        {
+          "label": "Ask Ama what she knows about what your father was — the 'and more' — before you open anything",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true,
+          "abilityId": null,
+          "energyCost": null
+        },
+        {
+          "label": "Let Pell and Veth see both objects before you open or read anything — this is not a private moment",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "comfort"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Let the room settle into an ordinary afternoon — bread, tea, no agenda — and just be here for a while",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "sustain"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Veth to tell Ama something about the March she does not already know — let Veth hold the floor for once",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "help"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "abilityId": null,
+          "energyCost": null
         }
       ],
-      "deeds": [],
       "characterDeltas": {
         "health": 0,
         "energy": 0,
-        "inventoryAdd": [],
+        "inventoryAdd": [
+          {
+            "name": "Waymarker (father's)",
+            "kind": "tool",
+            "description": "A small object in oilcloth — a Wright's tool, his father's name attached. Called a Waymarker: reads the design of a place you have seated yourself into and can locate it again from a distance. The deep drawer held it for years.",
+            "consumable": false,
+            "effects": {}
+          },
+          {
+            "name": "Father's Sealed Letter",
+            "kind": "quest",
+            "description": "A folded letter in his father's hand, sealed with a maker's mark — genuine, bone-deep in craft. Written when Silas was four. Kept by Ama until the right moment. That moment is now.",
+            "consumable": false,
+            "effects": {}
+          }
+        ],
         "inventoryRemove": [],
         "xp": 0
       },
-      "ledgerEvents": [],
-      "questUpdates": [],
-      "standingOps": [],
-      "stageOps": [],
       "scene": {
-        "setting": "Inside Silas's mother's kitchen in Cairnhold — warm from the low hearth, smelling of dried herbs and flatbread. Late-afternoon light through the single window. All seated around the table.",
+        "setting": "Inside Silas's mother's kitchen in Cairnhold — low fire, late evening, single window dark now. Ama is standing at the work counter, having just returned to her seat with two objects on the table between everyone.",
         "npcsPresent": [
           {
             "name": "Ama (Silas's Mother)",
-            "state": "Cup in both hands, watching Silas with the plain attention of someone who already knew most of it — settled now, the receiving done"
+            "state": "Seated again, hands in her lap, watching Silas's face — the deep drawer open behind her, its long work done"
           },
           {
             "name": "Pell Ran Marsh",
-            "state": "Still at the table, watching Ama's face the way she watches iron — reading the temperature"
+            "state": "Still at the table — her eyes have moved from Ama's face to the two objects on the table, reading them the way she reads iron"
           },
           {
             "name": "Veth Ondra",
-            "state": "Palms flat on the table, at rest — her one sentence given, her part complete for now"
+            "state": "Palms still flat on the table, gaze on the sealed letter — the maker's mark is something she recognizes the shape of, if not the source"
           },
           {
             "name": "Huginn",
-            "state": "On the back of Veth's chair — made one quiet sound at the end of the telling, now watching the bread board again"
+            "state": "On the back of Veth's chair — very still, watching the oilcloth-wrapped object with the specific attention it gives things that are ending or beginning"
           }
         ],
         "objects": [
+          "Waymarker (father's) — oilcloth-wrapped, on the table between everyone",
+          "Father's Sealed Letter — folded, sealed with an unfamiliar maker's mark, beside the Waymarker",
           "Low fire in the hearth",
-          "Three cups of tea on the table — filled",
-          "Flatbread on the wooden board — half-eaten, still warm",
+          "Three cups of tea on the table — refilled, warm",
+          "Flatbread on the wooden board — mostly eaten",
           "Dried herbs hanging from the ceiling beam",
-          "Work counter — flour-dusted",
-          "Second door — the heath door — still open a hand's width at the room's far end"
+          "Work counter — deep drawer now open behind Ama",
+          "Second door — the heath door — still open a hand's width"
         ],
         "threads": [
-          "The hinge-bolt story has been invoked but not yet told — still hanging",
-          "The room has received everything — what Ama wants to give back is still unspoken",
-          "The heath door is still open a hand's width",
-          "The Disputed Zone road is ahead — departure timing unresolved"
+          "The Waymarker and the letter sit unopened on the table — what his father meant to give him, waiting",
+          "The maker's seal on the letter is unfamiliar — Order-Sense placed it, but the source is not yet named",
+          "Ama knows more about what his father was — 'and more' — and has not yet said it",
+          "The heath door remains open a hand's width",
+          "Departure timing for the Disputed Zone road remains unresolved"
         ]
       },
       "npcUpdates": [
@@ -1843,84 +1857,109 @@
           "op": "update",
           "npcId": "silasmother",
           "name": "Ama",
-          "role": "Mother — lives at the cairn-line house on Cairnhold's center lane",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Received the full accounting — thin place, exile, water crisis, Stillwater's Trouble, and the falling for Pell — with the plain attention of someone who saw most of it at the door. Said: 'I know. I saw it at the door.'",
+          "note": "Opened the deep drawer and placed two of his father's things on the table — a Waymarker and a sealed letter written when Silas was four. Named both plainly. Sat back down.",
           "learned": [
-            "The thin place was a pre-Transition reclamation site Silas ended without authorization — the exile came from that",
-            "The Echo River water crisis is real and active — a document roll is moving toward the district records office",
-            "Stillwater's Trouble is now claimed as Silas's Ashwarden base — Cassiel Ord keeping the threshold",
-            "Silas fell for Pell completely and without a plan"
+            "His father left a Waymarker — a tool for locating a place you have already seated yourself into, from a distance",
+            "His father wrote a sealed letter for Silas when he was four — kept by Ama until the right moment",
+            "Ama judged tonight as that moment and acted without ceremony"
           ],
           "relationshipDelta": 1,
-          "status": "active",
-          "statusNote": "Seated at the kitchen table in Cairnhold — received the full telling, verdict quiet, watching the room settle after the last thing said.",
-          "revealName": "Ama"
+          "statusNote": "Seated at the kitchen table in Cairnhold — both objects now on the table, the deep drawer open behind her, watching to see what Silas does next"
+        },
+        {
+          "op": "update",
+          "npcId": "pell",
+          "name": "Pell Ran Marsh",
+          "note": "Eyes on the two objects — reading them before anyone opens anything",
+          "statusNote": "Seated at the kitchen table in Cairnhold — watching the Waymarker and the letter, present for all of it"
+        },
+        {
+          "op": "update",
+          "npcId": "veth",
+          "name": "Veth Ondra",
+          "note": "Recognized the shape of the maker's seal — has not named what she recognizes yet",
+          "statusNote": "Seated at the kitchen table in Cairnhold — palms flat, gaze on the sealed letter, something held back"
         }
       ],
       "factUpdates": [
         {
           "op": "add",
-          "text": "Silas's mother's name is Ama — named aloud by Silas at the kitchen table in Cairnhold on World-day 20.",
-          "subjectId": "silasmother"
+          "text": "Silas's father left two objects in Ama's keeping: a Waymarker (a Wright's tool for locating a place you have already seated yourself into, from a distance) and a sealed letter written when Silas was four, sealed with an unfamiliar maker's mark. Both now on the table in Cairnhold."
         }
       ],
-      "placeUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "The deep drawer beneath the work counter held Silas's father's Waymarker and sealed letter for years — both now retrieved and on the table. The drawer is open.",
+          "subPlace": {
+            "name": "Kitchen work counter — deep drawer",
+            "parent": "Cairnhold — Ama's house",
+            "note": "The deep drawer that always stuck — held a Wright's Waymarker and a sealed letter for Silas across his whole childhood. Both retrieved on Day 12 evening.",
+            "visited": true
+          }
+        }
+      ],
       "codexUpdates": [
         {
-          "topic": "silasmother",
-          "label": "Ama — Silas's Mother",
+          "topic": "silas-father",
+          "label": "Silas's Father — Wright and More",
           "kind": "person",
-          "entityId": "silasmother",
-          "fact": "Her name is Ama. She received the full accounting of Silas's road — the thin place, the exile, the water crisis, Stillwater's Trouble, Pell — with the plain attention of someone who already knew at the door.",
+          "fact": "Silas's father left two things in Ama's keeping: a Waymarker — a Wright's tool for locating a place you have already seated yourself into, from a distance — and a sealed letter written when Silas was four, sealed with a genuine maker's mark that Order-Sense recognizes as bone-deep in craft. The letter was held until the right moment. Ama judged tonight as that moment.",
           "links": [
-            "pell",
             "stillwaters-trouble",
-            "the-water-crisis",
-            "the-edge-district-ledger"
+            "the-edge-district-ledger",
+            "order-sense"
           ]
         }
       ],
       "timeOps": {
-        "hoursPassed": 1,
-        "why": "A long telling at the kitchen table — the full accounting of road and work and falling"
+        "hoursPassed": 0.5,
+        "why": "A quiet half-hour at the kitchen table while Silas told his plans and Ama went to the drawer — no real time passing, but the evening is settling deeper"
       },
-      "sceneEnded": false
+      "imagePrompt": "A low-lit kitchen at evening — a woman standing at a work counter, a deep-drawer open, setting a small oilcloth bundle and a folded sealed letter on a worn wooden table where three others sit in silence watching. A large grey-black bird on the back of a chair is very still. The fire is banked low.",
+      "deeds": [],
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
+      "stageOps": [],
+      "sceneEnded": false,
+      "momentArt": "https://image.pollinations.ai/prompt/A%20low-lit%20kitchen%20at%20evening%20%E2%80%94%20a%20woman%20standing%20at%20a%20work%20counter%2C%20a%20deep-drawer%20open%2C%20setting%20a%20small%20oilcloth%20bundle%20and%20a%20folded%20sealed%20letter%20on%20a%20worn%20wooden%20table%20where%20three%20others%20sit%20in%20silence%20watching.%20A%20large%20grey-black%20bird%20on%20the%20back%20of%20a%20chair%20is%20very%20still.%20The%20fire%20is%20banked%20low.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=3086&nologo=true"
     },
     "sceneState": {
-      "setting": "Inside Silas's mother's kitchen in Cairnhold — warm from the low hearth, smelling of dried herbs and flatbread. Late-afternoon light through the single window. All seated around the table.",
+      "setting": "Inside Silas's mother's kitchen in Cairnhold — low fire, late evening, single window dark now. Ama is standing at the work counter, having just returned to her seat with two objects on the table between everyone.",
       "npcsPresent": [
         {
           "name": "Ama (Silas's Mother)",
-          "state": "Cup in both hands, watching Silas with the plain attention of someone who already knew most of it — settled now, the rec"
+          "state": "Seated again, hands in her lap, watching Silas's face — the deep drawer open behind her, its long work done"
         },
         {
           "name": "Pell Ran Marsh",
-          "state": "Still at the table, watching Ama's face the way she watches iron — reading the temperature"
+          "state": "Still at the table — her eyes have moved from Ama's face to the two objects on the table, reading them the way she reads"
         },
         {
           "name": "Veth Ondra",
-          "state": "Palms flat on the table, at rest — her one sentence given, her part complete for now"
+          "state": "Palms still flat on the table, gaze on the sealed letter — the maker's mark is something she recognizes the shape of, if"
         },
         {
           "name": "Huginn",
-          "state": "On the back of Veth's chair — made one quiet sound at the end of the telling, now watching the bread board again"
+          "state": "On the back of Veth's chair — very still, watching the oilcloth-wrapped object with the specific attention it gives thin"
         }
       ],
       "objects": [
+        "Waymarker (father's) — oilcloth-wrapped, on the table between everyone",
+        "Father's Sealed Letter — folded, sealed with an unfamiliar maker's mark, beside ",
         "Low fire in the hearth",
-        "Three cups of tea on the table — filled",
-        "Flatbread on the wooden board — half-eaten, still warm",
+        "Three cups of tea on the table — refilled, warm",
+        "Flatbread on the wooden board — mostly eaten",
         "Dried herbs hanging from the ceiling beam",
-        "Work counter — flour-dusted",
-        "Second door — the heath door — still open a hand's width at the room's far end"
+        "Work counter — deep drawer now open behind Ama",
+        "Second door — the heath door — still open a hand's width"
       ],
       "threads": [
-        "The hinge-bolt story has been invoked but not yet told — still hanging",
-        "The room has received everything — what Ama wants to give back is still unspoken",
-        "The heath door is still open a hand's width",
-        "The Disputed Zone road is ahead — departure timing unresolved"
+        "The Waymarker and the letter sit unopened on the table — what his father meant to give him, waiting",
+        "The maker's seal on the letter is unfamiliar — Order-Sense placed it, but the source is not yet named",
+        "Ama knows more about what his father was — 'and more' — and has not yet said it",
+        "The heath door remains open a hand's width",
+        "Departure timing for the Disputed Zone road remains unresolved"
       ]
     }
   },
@@ -2433,7 +2472,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d9] Arrived at Cairnhold western crossing lane with Silas — named the destination plainly: home first. Road-worn but steady.",
         "[d12] Arrived at Silas's mother's gate — reading the lane, steady, waiting for his lead",
         "[d12] Watched Silas's back while he used Deathsense at the gate — asked quietly if he was all right.",
         "[d12] Silas read her through the soul bond at the gate — she felt the Deathsense come back through it as information, accepted it, and told him to take his time.",
@@ -2442,7 +2480,8 @@
         "[d12] Opened with the hearthstone — craft-language, honest, no performance. Found the right entry point for Silas's mother without prompting.",
         "[d12] Introduced herself to Silas's mother plainly — forge, craft, and intent stated without ceremony. Cut off the hinge-bolt story before it landed.",
         "[d12] Held still under Silas's mother's verdict — the right thing to do. Something in her jaw eased afterward.",
-        "[d12] Let Silas name it. Did not say it for him. Held still under his mother's second read of her."
+        "[d12] Let Silas name it. Did not say it for him. Held still under his mother's second read of her.",
+        "[d12] Eyes on the two objects — reading them before anyone opens anything"
       ],
       "knownFacts": [
         "Quiet's ending ran clean through Silas and the grove both — she held it without comment.",
@@ -2463,7 +2502,7 @@
         "finding the honest entry point into an unfamiliar room"
       ],
       "status": "active",
-      "statusNote": "Seated at the kitchen table in Cairnhold — soul bond named aloud, her part in it plain.",
+      "statusNote": "Seated at the kitchen table in Cairnhold — watching the Waymarker and the letter, present for all of it",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 12
@@ -3134,7 +3173,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d6] Named the Pale Reach's geography: four days to Cairnhold's outer district from this post, five in early spring. Beathstone crossing is knee-deep. Pre-Transition infrastructure above Cairnhold, plus warden signs not on the March's current register — named without drama.",
         "[d6] Confirmed she can see the soul bond between Silas and Pell — named it 'rune-in-grain, not on the surface.' Agreed to walk the road to Cairnhold without being asked to. Traveled the four-day road north with the party.",
         "[d9] Named plainly that word travels faster than roads — observing the town's read of Silas.",
         "[d12] Watching the house's placement on the cairn-line with careful attention — has not spoken",
@@ -3143,7 +3181,8 @@
         "[d12] Stepped inside when the door was opened — entered without ceremony, holding the same stillness she kept on the threshold.",
         "[d12] Took the second chair without ceremony, folded her hands on the table. Holding the room's quiet the way she holds a threshold.",
         "[d12] Gave the Ashwarden framing of Huginn to Silas's mother — plain, accurate, without elaboration beyond what was needed.",
-        "[d12] Cited as the one who can see the bond, if asked — the Ashwarden witness still present and available."
+        "[d12] Cited as the one who can see the bond, if asked — the Ashwarden witness still present and available.",
+        "[d12] Recognized the shape of the maker's seal — has not named what she recognizes yet"
       ],
       "knownFacts": [
         "Silas understands the difference between tending a closed site and reopening it — named it himself, unprompted",
@@ -3166,7 +3205,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Seated at the kitchen table in Cairnhold — at rest, the bond's existence now named to the household.",
+      "statusNote": "Seated at the kitchen table in Cairnhold — palms flat, gaze on the sealed letter, something held back",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 12
@@ -3854,15 +3893,27 @@
           "visited": true,
           "note": "Warm kitchen with a low hearth, dried herbs, flatbread baking, two chairs and a table. One cup of tea still steaming when Silas arrived.",
           "parentUnresolved": "Silas's Mother's House"
+        },
+        "kitchen-work-counter-deep-drawer": {
+          "name": "Kitchen work counter — deep drawer",
+          "parentId": "cairnhold",
+          "day": 12,
+          "visited": true,
+          "note": "The deep drawer that always stuck — held a Wright's Waymarker and a sealed letter for Silas across his whole childhood. Both retrieved on Day 12 evening."
         }
       }
     },
     "the_crossing": {
       "visits": 1,
-      "notes": [],
+      "notes": [
+        "[d12] The deep drawer beneath the work counter held Silas's father's Waymarker and sealed letter for years — both now retrieved and on the table. The drawer is open."
+      ],
       "flags": {},
       "lastVisit": 12,
-      "vectorsKnown": []
+      "vectorsKnown": [],
+      "_containmentNotes": [
+        "\"Kitchen work counter — deep drawer\" was placed in cairnhold (the fiction named it), not the_crossing"
+      ]
     }
   },
   "worldState": {
@@ -3978,7 +4029,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-20T02:56:03.044Z",
+    "lastSharedReadAt": "2026-07-20T16:05:43.683Z",
     "lastTickWorldDay": 20,
     "lastCanonWorldDay": 20
   },
@@ -5349,21 +5400,21 @@
     }
   },
   "tendencies": {
-    "strategic": 13.030178523680778,
-    "cerebral": 17.070760726944865,
-    "social": 13.39091598571578,
-    "generous": 4.594214980148062,
-    "cautious": 4.613057643115916,
-    "physical": 0.24845132885962976,
-    "risky": 0.2605504382739442,
-    "ruthless": 0.08307365986861132,
-    "carousing": 0.9049606841359291,
-    "amorous": 1.9687079924776292,
-    "patient": 0.5177883953340059,
-    "stealth": 0.03219956280180378,
-    "devotion": 0.6578076041888629,
-    "craft": 0.8570421345224274,
-    "leadership": 0.16389934820431143
+    "strategic": 13.704424060588758,
+    "cerebral": 16.643991708771242,
+    "social": 13.056143086072886,
+    "generous": 4.479359605644361,
+    "cautious": 4.497731202038017,
+    "physical": 0.242240045638139,
+    "risky": 0.25403667731709556,
+    "ruthless": 0.08099681837189603,
+    "carousing": 0.8823366670325309,
+    "amorous": 1.9194902926656885,
+    "patient": 0.5048436854506557,
+    "stealth": 0.03139457373175868,
+    "devotion": 0.6413624140841413,
+    "craft": 0.8356160811593667,
+    "leadership": 0.15980186449920364
   },
   "aptitudes": [
     "strategist",
@@ -5371,10 +5422,18 @@
     "scholar",
     "sage"
   ],
-  "actionCount": 623,
+  "actionCount": 624,
   "grantsVersion": 1,
-  "reconcileVersion": 11,
+  "reconcileVersion": 12,
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "A low-lit kitchen at evening — a woman standing at a work counter, a deep-drawer open, setting a small oilcloth bundle and a folded sealed letter on a worn wooden table where three others sit in silen",
+      "url": "https://image.pollinations.ai/prompt/A%20low-lit%20kitchen%20at%20evening%20%E2%80%94%20a%20woman%20standing%20at%20a%20work%20counter%2C%20a%20deep-drawer%20open%2C%20setting%20a%20small%20oilcloth%20bundle%20and%20a%20folded%20sealed%20letter%20on%20a%20worn%20wooden%20table%20where%20three%20others%20sit%20in%20silence%20watching.%20A%20large%20grey-black%20bird%20on%20the%20back%20of%20a%20chair%20is%20very%20still.%20The%20fire%20is%20banked%20low.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=3086&nologo=true",
+      "caption": "Silas tells Ama his plans for Stillwater's Trouble — base, fellowship, the water crisis ah",
+      "worldDay": 20,
+      "at": "2026-07-20T16:11:33.551Z"
+    },
     {
       "kind": "portrait",
       "prompt": "a person, character portrait, named Silas's Mother, woman, Mother — lives at the cairn-line house on Cairnhold's center lane",
@@ -5713,8 +5772,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784562422530,
-  "rev": 950,
+  "updatedAt": 1784563893551,
+  "rev": 955,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -7089,12 +7148,6 @@
   "opLossPending": false,
   "establishedFacts": [
     {
-      "id": "bren-thalle",
-      "text": "Silas returned the confiscated hatchet to Bren Thalle at the limestone bend — named it a tool, not a weapon, and sent both men north toward Mara Wells in Millbrook for honest work.",
-      "day": 5,
-      "subjectId": "bren-thalle"
-    },
-    {
       "id": "pell",
       "text": "Silas named the soul-mark exchange aloud at the forge on World-day 18 afternoon and said 'I love you, Pelly' — she crossed to him, took his face, said his name like something she intends to keep. The ",
       "day": 5,
@@ -7327,6 +7380,12 @@
       "text": "Silas's mother's name is Ama — named aloud by Silas at the kitchen table in Cairnhold on World-day 20.",
       "day": 12,
       "subjectId": "silasmother"
+    },
+    {
+      "id": "f41",
+      "text": "Silas's father left two objects in Ama's keeping: a Waymarker (a Wright's tool for locating a place you have already seated yourself into, from a distance) and a sealed letter written when Silas was four, sealed with an unfamiliar maker's mark. Both now on the table in Cairnhold.",
+      "day": 12,
+      "subjectId": null
     }
   ],
   "practice": {
@@ -7542,7 +7601,7 @@
   "regionsKnown": {
     "valley": 435,
     "the_palelands": 6,
-    "the_center": 11
+    "the_center": 12
   },
   "foreclosed": [
     "rootkin",
@@ -7622,10 +7681,10 @@
     {
       "id": "sess-6",
       "startedAt": "2026-07-20T15:47:02.528Z",
-      "lastAt": "2026-07-20T15:47:02.528Z",
+      "lastAt": "2026-07-20T16:11:33.541Z",
       "startDay": 20,
       "endDay": 20,
-      "beats": 1
+      "beats": 2
     }
   ],
   "company": [
@@ -7811,5 +7870,19 @@
   "locationImages": {
     "cairnhold": "https://image.pollinations.ai/prompt/Cairnhold%3A%20The%20Ashwardens'%20city%2C%20and%20the%20least%20frightening%20place%20in%20the%20world%20once%20you%20are%20inside%20it.%20Cairnhold%20is%20built%20along%20the%20cairn-lines%20%E2%80%94%20low%20grey%20terraces%20following%20the%20stone%20rows%20out%20onto%20the%20heath%20%E2%80%94%20and%20every%20house%20has%20a%20second%20door%20that%20opens%20toward%20the%20fields%2C%20because%20that%20is%20the%20door%20the%20dead%20leav%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=70150&nologo=true",
     "the_crossing": "https://image.pollinations.ai/prompt/The%20Crossing%3A%20Every%20axis%20crosses%20here%20at%20nothing%2C%20and%20the%20result%20is%20not%20grey%20%E2%80%94%20it%20is%20CROWDED.%20The%20Crossing%20leans%20toward%20no%20pole%2C%20which%20is%20precisely%20why%20it%20can%20hold%20them%20all%3A%20an%20Umbral%20and%20a%20Blazeborn%20drink%20at%20the%20same%20table%20because%20neither%20has%20the%20standing%20to%20make%20the%20other%20leave.%20The%20poles%20are%20lonely%20places.%20The%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=24144&nologo=true"
-  }
+  },
+  "_opEmitted": {
+    "sceneSummary": 1,
+    "choices": 1,
+    "characterDeltas": 1,
+    "scene": 1,
+    "npcUpdates": 1,
+    "factUpdates": 1,
+    "placeUpdates": 1,
+    "codexUpdates": 1,
+    "timeOps": 1,
+    "imagePrompt": 1,
+    "sceneEnded": 1
+  },
+  "_opTurns": 1
 }

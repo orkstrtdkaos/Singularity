@@ -6317,6 +6317,31 @@ await (async () => {
   check("195 G4: timeAdvanceHours is marked a legacy alias of timeOps", /timeAdvanceHours is a legacy alias of timeOps/.test(appSrcG4));
 }
 
+// --- SNG-192 Phase A: grants shown first, and suggestions with reasons from the player's own input ---
+{
+  const fn = await import("../engine/functions.js");
+  const fnIndex = fn.buildFunctionIndex({ families: { HARM: ["strike"], KNOW: ["read"] } });
+  const learnable = [
+    { id: "disarm", name: "Disarm", functions: ["strike"], tradition: "marcher", nativeOrCombination: "native" },
+    { id: "farsight", name: "Farsight", functions: ["read"], tradition: "seer", nativeOrCombination: "native" }
+  ];
+  const catalog = Object.fromEntries(learnable.map(a => [a.id, a]));
+  const character = { domains: { primary: "marcher" }, attributes: { mental: 3 }, abilities: [] };
+  // §3 — the prologue is the best signal: the paths the player actually chose (a revealed preference).
+  const sug = fn.suggestForCreation({ learnable, character, prologueTags: { seer: 2 }, fnIndex, traditionIndex: {}, catalog, primary: "marcher", max: 5 });
+  check("192 §3: a prologue-favoured craft surfaces with the revealed-preference reason", sug.some(s => s.abilityId === "farsight" && /took the .*path 2 times/i.test(s.why)));
+  check("192 §3: every suggestion carries a reason (never a bare wall)", sug.length > 0 && sug.every(s => s.why && s.why.length > 3));
+  check("192 §3: a word the player wrote about themselves is an honest bio nudge", (() => { const s = fn.suggestForCreation({ learnable, character, prologueTags: {}, bio: { livelihood: "a disarm specialist" }, fnIndex, traditionIndex: {}, catalog, primary: "seer", max: 5 }); return s.some(x => x.abilityId === "disarm" && /wrote about yourself/.test(x.why)); })());
+  check("192 §3: no signal at all → no bare-reasonless suggestions", fn.suggestForCreation({ learnable: [{ id: "x", name: "X", functions: [], tradition: "none" }], character: { domains: { primary: "marcher" }, attributes: {}, abilities: [{ abilityId: "x" }] }, prologueTags: {}, bio: {}, fnIndex, traditionIndex: {}, catalog: {}, primary: "marcher" }).every(s => s.why));
+
+  // wiring: §1 grants computed + excluded, §3 suggested, §2 folded.
+  const appSrc192 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+  check("192 §1: the ability step computes native grants and EXCLUDES them from the choosable pool", /const grantIds = nativeGrantIdsFor\(\{ domains: state\.domains/.test(appSrc192) && /choosable = okAb\.filter\(a => !grantSet\.has\(a\.id\)\)/.test(appSrc192));
+  check("192 §1: grants are shown as a non-spendable 'yours by right' group", /Yours by right of being/.test(appSrc192) && /don't spend a pick on these/.test(appSrc192));
+  check("192 §3: the ability step calls suggestForCreation with the prologue + bio", /suggestForCreation\(\{/.test(appSrc192) && /prologueTags: state\.prologue\?\.tags/.test(appSrc192));
+  check("192 §2: the full pool is folded behind a details/summary (no 45-button wall)", /See all crafts your domains open/.test(appSrc192));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

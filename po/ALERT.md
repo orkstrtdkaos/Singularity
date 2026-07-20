@@ -797,6 +797,33 @@ mine: A2 (scene closed on a live thread), A4 (the CLASS of unguarded prose-count
 browser-legs: SNG-179, SNG-187 LCP, SNG-190 §1/§2 and SNG-188 live checks, and the SNG-189 §5 Q1
 calendar ruling (C1). -->
 
+---
+
+<!-- status: SNG-186 §2a + §2b COMPLETE_PENDING_REVIEW (CCode 2026-07-19). v1.8.166. Suite green.
+Built BEFORE §2c per Erik's reorder — the dev character couldn't reach a real location to test, so
+go-anywhere and know-everything were the live blockers on his whole verification workflow.
+
+§2a GO ANYWHERE — jump to any of the ~95 locations by id/name, ignoring connections/waygates/travel
+time (incl. unreachable ones), through the REAL move fields (currentLocationId/addKnownPlace/
+notePlaceVisit/notePerception — §3.3), clears the scene and drops into Play at the new place. §2b KNOW
+EVERYTHING / NOTHING — reveal all locations, or reset to just where you stand (the inverse matters
+more: SNG-176 retrieval bugs only reproduce from ignorance). §3.2: markDevAction stamps every pull
+onto _devActions, which rides into feedback. 5 source guards green; no-character render verified live;
+the with-character lever is Erik's real-save test (the purpose). §2c (encounter harness) remains.
+
+SNG-191 READ AND SCOPED, not yet started — it is genuinely the big one, and the unit-name ruling it
+flags is ALREADY resolved in canon (world_clock.json: canonical "count", formal "the Kept Count"), so
+nothing is blocked. Five phases: (A) the two-clock SPLIT — world time becomes a COUNT not days, which
+is what removes the day-number the GM keeps inventing (closes C1/SNG-189 §2/SNG-190 §5; scoped, low
+blast radius: add worldCount + rewrite the CURRENT TIME block + uncap timeOps + load world_clock.json);
+(B) the peoples' idioms on top of the count; (C) party formation syncs CHARACTER clocks; (D §4) the
+WORLD-TICK INVERSION — stop imagining vignettes, advance delegated assignments (the substantive half,
+a real rewrite of worldtick.js); (E §7) the GENERATION TURN — latent arcs foment on the world count
+and surface at thresholds (a whole new proactive subsystem). Recommend building Phase A first — it is
+the highest-value, most-contained, and closes the recurring day-number bug. D and E are large enough
+to each warrant their own focused build. -->
+
+
 
 
 

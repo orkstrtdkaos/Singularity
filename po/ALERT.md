@@ -1033,6 +1033,25 @@ legacy at the dispatch. No behaviour change; 4 tests. AUDIT G-fixes now all done
 G1's split — reactsToReputation WIRED (G2), personality CUT (no-build), gains WIRE-to-engine which rides
 SNG-192. Moving to SNG-192 next (Erik-directed). -->
 
+<!-- status: SNG-192 PHASE A COMPLETE_PENDING_REVIEW (CCode 2026-07-20). v1.8.177. Suite green by exit code.
+Results: po/results/20260720_SNG-192-PhaseA_grants_and_suggestions.md. SNG-192 decomposed (it lacked one);
+Erik chose Phase A (grants-first + suggestions). §8 answered from code: Q1 attributes precede the ability
+step + it recomputes on entry (nativeGrantIdsFor safe); Q2 class_archetypes.json is a genuine loader orphan
+(Phase C); Q3 prologue.tags is on state.
+§1 THE FIX — renderAbilityStep computes nativeGrantIdsFor at render, shows 'Yours by right of being an
+<people>' as a NON-SPENDABLE group AND excludes those crafts from the choosable pool: a pick can no longer
+be wasted (Erik's screenshot). §3 SUGGESTIONS — functions.suggestForCreation wraps recommendSkills with the
+PROLOGUE (revealed preference: paths actually chosen) + a light bio nudge; every suggestion carries a reason
+from the player's own input ('you took the Seer path twice'); reasonless crafts dropped. §2 the 45-button
+wall folds behind details/summary, one click to see all. 8 tests.
+⚠ BROWSER NOTE: boot hit the KNOWN stale-module cache (bare engine imports don't ?v=-bust; the long-lived
+preview tab served a cached old functions.js vs the version-busted app.js → CCODE-08 watchdog, its designed
+cache-mismatch self-heal via Reload-fresh). Served files VERIFIED correct (functions.js exports
+suggestForCreation; app.js has the import+grants) — isolates it to browser cache, not code. Creation VISUAL
+is Erik's real-save test (fresh load). REMAINING SNG-192: Phase B (coverage/source-fit §6b/braids §6c;
+gains-to-engine lands here — still owe verifying gains values are in the 24-verb vocab), Phase C (archetype
+picker + class_archetypes.json load). -->
+
 
 
 

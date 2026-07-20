@@ -2089,7 +2089,7 @@ await (async () => {
   // SNG-191: the GM is given the WORLD COUNT (the Kept Count) as a shared ORDERING mark — not a
   // calendar — and told plainly it is NOT a date, so there is no day-number to invent.
   const withWorld = buildTurnContext({ ...baseCtx(), worldCountLabel: "the Kept Count stands at 4992" });
-  check("41c/191: GM context surfaces the world count (the Kept Count), a shared ordering mark", /the Kept Count stands at 4992/.test(withWorld) && /World time:/.test(withWorld));
+  check("41c/191: GM context surfaces the world count (the Kept Count), a shared ordering mark", /the Kept Count stands at 4992/.test(withWorld) && /World time \(the shared count/.test(withWorld));
   check("41c/191: GM is told the count is NOT a date and never to state a day-number", /NEVER convert it to a day-number/i.test(withWorld) && /never say "World-day N"/.test(withWorld));
   check("41c: the local journey clock is still present alongside the world count", /Day 8, morning/.test(withWorld));
   // backward-safe: no worldDateLabel → no crash, no shared-calendar line
@@ -6034,11 +6034,16 @@ await (async () => {
   // The unit name the spec reserved for Erik is ALREADY resolved in canon — nothing is pending.
   const clockJson = JSON.parse(readFileSync(new URL('../content/packs/core/rules/world_clock.json', import.meta.url), 'utf8'));
   check("191 §2: the unit name is canon (count / the Kept Count) — no ruling pending", clockJson.unit?.canonical === "count" && clockJson.unit?.formal === "the Kept Count");
+  // §2 Phase B: one count underneath, the LOCAL people's word on top.
+  check("191 §2: Cairnhold's ashwardens speak the count as 'tolls'", wt.worldCountLabel(4821, clockJson, "ashwarden") === "4821 tolls");
+  check("191 §2: the enginewrights say 'revolutions', the rootkin 'risings'", wt.worldCountLabel(100, clockJson, "enginewright") === "100 revolutions" && wt.worldCountLabel(7, clockJson, "rootkin") === "7 risings");
+  check("191 §2: churnfolk keep no steady word — the count falls back to the formal term (the joke, mechanical)", wt.worldCountLabel(50, clockJson, "churnfolk") === "the Kept Count stands at 50");
+  check("191 §2: an absent people, or absent clock data, uses the canonical formal term", wt.worldCountLabel(9, clockJson, null) === "the Kept Count stands at 9" && wt.worldCountLabel(9, null, "ashwarden") === "the Kept Count stands at 9");
   // Wiring: state loads it, the prompt shows the count and no calendar day, the clamp is gone.
   const stateSrc191 = readFileSync(new URL('../engine/state.js', import.meta.url), 'utf8');
   check("191: world_clock.json is loaded and rides on CONTENT.worldClock", /loadRule\("world_clock"/.test(stateSrc191) && /worldClock,/.test(stateSrc191));
   const gmSrc191 = readFileSync(new URL('../engine/gm.js', import.meta.url), 'utf8');
-  check("191: the CURRENT TIME block shows the world COUNT, never a shared calendar day", /World time: \$\{worldCountLabel\}/.test(gmSrc191) && !/Shared world calendar/.test(gmSrc191));
+  check("191: the CURRENT TIME block shows the world COUNT, never a shared calendar day", /World time \(the shared count, spoken as the people here count it\): \$\{worldCountLabel\}/.test(gmSrc191) && !/Shared world calendar/.test(gmSrc191));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

@@ -54,7 +54,7 @@ import { narrativeRegister } from "./gm.js";
 import { livingWorldForGM } from "./generate.js";
 import { standingForGM } from "./standing.js"; // BATCH-12 §3
 import { renderNamesDeep } from "./names.js"; // SNG-182
-import { worldCount } from "./worldtime.js";
+import { worldCount, worldCountLabel } from "./worldtime.js";
 import { encounterReceiptForGM } from "./encounters.js";
 import { waygateBlockForGM } from "./waygate.js";
 import { readAloudDirective } from "./narration_voice.js";
@@ -256,9 +256,17 @@ export const GM_CONTEXT = [
   { key: "sharedCanonDetail", builder: "app.sharedCanonForGM", carries: ["other players' promoted canon"],
     reachedBy: "always (rating-lensed)", spec: "§18", views: ["turn"],
     build: (env) => env.app.sharedCanonForGM() },
-  { key: "worldCountLabel", builder: "worldtime.worldCount (SNG-191)", carries: ["the world count — a shared ordering mark, never a date"],
-    reachedBy: "always", spec: "§10", views: ["turn"],
-    build: (env) => { const n = worldCount(); const unit = env.CONTENT?.worldClock?.unit?.formal || "the Kept Count"; return `${unit} stands at ${n}`; } },
+  { key: "worldCountLabel", builder: "worldtime.worldCount + worldCountLabel (SNG-191)", carries: ["the world count in the LOCAL people's idiom — a shared ordering mark, never a date"],
+    reachedBy: "always", spec: "§2/§10", views: ["turn"],
+    build: (env) => {
+      // SNG-191 §2: the count is one number underneath, spoken in the idiom of the people whose region
+      // the character stands in. Resolve that people from the location's region (region → home tradition).
+      const loc = env.CONTENT?.locations?.[env.character?.currentLocationId];
+      const regionId = loc?.regionId || loc?.region || null;
+      const byId = env.CONTENT?.traditionIndex?.byId || {};
+      const people = regionId ? (Object.values(byId).find(t => t?.region === regionId)?.traditionId || null) : null;
+      return worldCountLabel(worldCount(), env.CONTENT?.worldClock, people);
+    } },
   { key: "waygateDetail", builder: "waygate.waygateBlockForGM (SNG-148)", carries: ["gate here", "aimable gates", "hub routing"],
     reachedBy: "map ◈ Waygate control + GM offer", spec: "§9", views: ["turn"],
     build: (env) => waygateBlockForGM(env.character, env.CONTENT.locations) },

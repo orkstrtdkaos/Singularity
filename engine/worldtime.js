@@ -122,6 +122,18 @@ export function worldCount(nowMs = Date.now(), epoch = getWorldEpoch()) {
   return base + Math.floor(elapsedHours);
 }
 
+/** SNG-191 §2: render the count in the LOCAL people's idiom — one count underneath, many words on top.
+ *  Cairnhold's ashwardens say "tolls", the enginewrights "revolutions", the rootkin "risings". A people
+ *  whose idiom is the parenthetical refusal (the churnfolk, who cheerfully keep no steady one) falls
+ *  back to the canonical formal term. `worldClock` is CONTENT.worldClock; `peopleId` is the traditionId
+ *  of the region the character stands in. Pure. */
+export function worldCountLabel(count, worldClock = null, peopleId = null) {
+  const formal = worldClock?.unit?.formal || "the Kept Count";
+  const raw = peopleId && worldClock?.idioms?.[peopleId]?.word;
+  const idiom = raw && !String(raw).startsWith("(") ? String(raw) : null;
+  return idiom ? `${count} ${idiom}` : `${formal} stands at ${count}`;
+}
+
 /** Full absolute world-date reading (day + season + label) — what the world clock shows. */
 export function worldDate(nowMs = Date.now(), epoch = getWorldEpoch()) {
   const worldDay = absoluteWorldDay(nowMs, epoch);

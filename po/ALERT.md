@@ -823,6 +823,32 @@ and surface at thresholds (a whole new proactive subsystem). Recommend building 
 the highest-value, most-contained, and closes the recurring day-number bug. D and E are large enough
 to each warrant their own focused build. -->
 
+---
+
+<!-- status: SNG-191 PHASE A COMPLETE_PENDING_REVIEW (CCode 2026-07-19). v1.8.167. Node suite green;
+code proven in the browser via a cache-busted fresh loadContent. Results:
+po/results/ pending (will file). The two-clock split — the piece that kills the invented day-numbers.
+
+worldCount() is the world's monotonic COUNT (~1/real-hour, never rewound, the shared ordering key).
+world_clock.json loads onto CONTENT.worldClock (unit "count"/"the Kept Count" + custody + 11 idioms —
+the unit-name ruling was ALREADY resolved in canon). The CURRENT TIME block now shows the character's
+own days/season + the Kept Count as an ORDERING mark that is explicitly NOT a date — no world
+day-number remains to invent (closes C1 / SNG-189 §2 / SNG-190 §5). timeOps UNCAPPED (RUNNING_FIXES A1
+dies — a four-day journey costs four character-days). worldDateLabel → worldCountLabel.
+
+⚠️ HONEST VERIFICATION NOTE: the preview browser's static-import boot shows the known STALE-MODULE
+artifact — this session edited many bare-imported engine modules and the mcp browser holds them hard
+(no service worker; pure HTTP module cache) against a fresh app.js. A cache-busted fresh loadContent
+returns 95 locations, world_clock loaded, 285 abilities — so the CODE is correct; a clean full-boot in
+THIS preview wasn't demonstrable without a fresh origin. Erik's fresh deploy loads clean (Pages ETag
+revalidation); a hard reload clears it if a returning tab hits it. The CURRENT TIME prompt is his
+browser-leg (narrate from character time; no day-number).
+
+REMAINING SNG-191: B (peoples' idioms on the count) + C (party-formation syncs CHARACTER clocks) are
+small; D §4 (world-tick inversion — advance delegated assignments, not vignettes) + E §7 (the
+generation turn — latent arcs foment and surface) are large, each its own focused build. -->
+
+
 
 
 

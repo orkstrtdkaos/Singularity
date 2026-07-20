@@ -142,6 +142,56 @@ universality.** Divergence is generative *and* it costs something real. Both hal
 **Canonical line, Erik's words, to carry in the content:** *the pure never loses, because it never
 leaned on anything.*
 
+# §4b — ✅ Q1 RULED: material is a FLOOR, not an absence
+
+> Erik 2026-07-19: *"Material should still feel something — but I might be thinking of the combined
+> skills. A marcher's material skill by itself is good, but combined with inherent power or
+> nanite-infused, it's amazing. But that extra loses something from the pure if in a material place.
+> **The pure never loses because it never leaned on anything.**"*
+
+**This is a better model than the one I proposed and it changes the shape of the answer.**
+
+I said material was *flat — no band, indifferent.* That is right about the pure form and it misses
+what happens when material is **built on**:
+
+1. **Pure material is FLAT and can never be starved.** A hammer works in the Gearlands exactly as it
+   works in the Given Land. **Nothing can be taken from a craft that borrowed nothing.**
+2. **Material AUGMENTED — by inherent power or lattice infusion — is better than pure.** That is the
+   reason to reach at all, and it is where a Marcher stops being good and becomes remarkable.
+3. **The augmentation carries the band. The material underneath does not.**
+4. **So in wrong ground, an augmented craft DEGRADES TOWARD ITS PURE FORM** — it does not fail. The
+   edge still cuts. You lose the extra, not the craft.
+
+**Material is therefore a floor, not a curve.** It is the only source in the world that guarantees a
+practitioner is never helpless anywhere, and it pays for that guarantee with a lower ceiling.
+
+## Why this is the strongest version
+
+It makes each source a genuine and different **bet**, rather than a stat block:
+
+| source | promise | cost |
+|---|---|---|
+| **material** | never starved, anywhere | lower ceiling |
+| **inherent** | clearest where the least apparatus stands between | interfered with in dense country |
+| **lattice** | highest power where the machine is thick | starved where it is thin |
+| **wild** | widened both ways | unreliable by nature |
+
+And it gives the world a line worth keeping: **the pure never loses because it never leaned on
+anything.** That is a fact about the Masons and the Marchers, and it is also the reason someone would
+choose to stay pure when augmentation is available.
+
+## §4c — it also improves the creation reading (SNG-192 §6b)
+
+The band-intersection tool should stop reporting **one window** and report **two numbers**:
+
+- **YOUR FLOOR** — what works anywhere, always. Material crafts, and the material component of
+  anything augmented.
+- **YOUR CEILING** — what works *here*, and where "here" has to be.
+
+*"You can always do this. In thin country you can also do this."* **That is a far better thing to
+tell a player than a single density range**, and it makes an augmented build legible as what it is:
+a higher ceiling bought with a variable one.
+
 # §5 — QUESTIONS FOR ERIK
 
 1. ~~Ratify the split?~~ ✅ **RATIFIED 2026-07-19**, and amended by §4b's leaning rule, which is better than what I proposed.

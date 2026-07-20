@@ -1003,6 +1003,26 @@ reactsToReputation WIRE-to-prompt (offer material), personality CUT (redundant w
 eligible/prompt-ineligible), gains WIRE-to-engine (779 functional tags for SNG-192 coverage), never prompt.
 Awaiting Erik's go on A7-first. -->
 
+<!-- status: SNG-195 G2 COMPLETE_PENDING_REVIEW (CCode 2026-07-20). v1.8.175. Suite green by exit code.
+Results: po/results/20260720_SNG-195-G2_teacher_initiative.md. Erik: skip A7 (phantom — old screenshot),
+do G2 now.
+TEACHER INITIATIVE — the oldest complaint, teachers that teach nothing. The block's 'OFFER when the moment
+fits' (permission the model rarely acted on, the SNG-179 shape) is GONE. roomForATeacherOffer (pacing.js):
+a present teacher with a REACHABLE next step + opening + no grip + not-the-general-offer-this-beat + off the
+shared offer cooldown → the block FLIPS to 'A TEACHER TAKES THE INITIATIVE' (unconditional). teacherOfferReady
+(company.js): company trainer always present; bonded willing teacher only when in-scene; unreachable step =
+not room ('not yet' is real). Shares turnsSinceOffer (the offer op counts + rate-limits it).
+reactsToReputation WIN (G1 ⭐) — npcReactionsForGM wires the 40-NPC orphan into the offer material; the offer
+draws from 'HOW THEY READ WHO THE PLAYER IS', attribution built in. FINDING/deviation from the ruling: the
+keys are NOT a fixed taxonomy (adept_sona: balanced/extreme/seeking; brann: kind/threatening/honest) and no
+classifier exists — that's WHY it was never wired. So the whole map is surfaced and the GM selects; the
+engine never computes a key it cannot compute. WANTS already ride the SNG-194 offer (same seam). 26 tests,
+SYSTEM_SPEC §13, ENGINE_MAP regen (59/59 held). personality NOT touched (Aevi: CUT/stop-authoring, no churn).
+gains (WIRE-to-engine, SNG-192 coverage) is out of scope for G2's prompt seam — belongs with SNG-192.
+REMAINING from the audit: G4 contract cleanup (relationshipDeltas not in contract + 3 aliases); gains-to-
+engine (with SNG-192); personality schema-cut. Erik's browser-leg: stand in a lull beside a trainer with a
+reachable step — they open it; never mid-encounter, never twice running. -->
+
 
 
 

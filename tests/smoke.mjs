@@ -277,13 +277,21 @@ const region2 = buildRegionView(tickContent, wanderer);
 check("region view reflects campaign stage", region2.activeEvents[0].stage === 4);
 const shifted = effectiveLocation({ id: "millbrook", spectrum: { death_life: 0.4 } }, wanderer.worldState);
 check("effective location merges drift", shifted.spectrum.death_life < 0.4);
-const evolved = { name: "K", worldState: initWorldState(1), npcRegistry: { hela: { id: "hela", name: "Hela", role: "dock-master", relationship: 3, history: [], knownFacts: [], skillsObserved: [], status: "active" } }, deeds: [] };
-await runWorldTick({ character: evolved, content: tickContent, currentDay: 8, evolveNpcs: async () => ({ npcUpdates: [{ npcId: "hela", note: "Fell ill from the water; recovering.", status: "injured" }], news: ["The dock-master took sick last week."] }) });
-check("offscreen npc evolution applies", evolved.npcRegistry.hela.status === "injured" && evolved.npcRegistry.hela.history.length === 1);
-check("evolution news lands", evolved.worldState.news.some(n => n.text.includes("took sick")));
-const failing = { name: "K", worldState: initWorldState(1), npcRegistry: { x: { id: "x", name: "X", role: "", relationship: 0, history: [], knownFacts: [], skillsObserved: [], status: "active" } }, deeds: [] };
-await runWorldTick({ character: failing, content: tickContent, currentDay: 8, evolveNpcs: async () => { throw new Error("api down"); } });
-check("evolution failure never blocks the tick", failing.worldState.lastTickDay === 8);
+// SNG-191 §4 — the tick advances DELEGATED WORK, not NPC vignettes. A person's situation is an
+// OUTCOME (state), not a mood; a problem/done is derived into news; the colour rides on statusNote.
+const evolved = { name: "K", worldState: { ...initWorldState(1), assignments: { "calvar::the-repair-crews": { id: "calvar::the-repair-crews", npcId: "calvar", npcName: "Calvar", charge: "the repair crews", targetEventId: "water_crisis", progress: 0, status: "working" } } }, npcRegistry: { calvar: { id: "calvar", name: "Calvar", role: "engineer", relationship: 3, history: [], knownFacts: [], skillsObserved: [], status: "active" } }, deeds: [] };
+await runWorldTick({ character: evolved, content: tickContent, currentDay: 8, advanceAssignments: async () => ({ advancements: [{ assignmentId: "calvar::the-repair-crews", outcome: "problem", note: "A cracked sluice set the crews back a week." }] }) });
+check("191 §4: a delegated assignment advances — the OUTCOME lands on state, not a mood", evolved.worldState.assignments["calvar::the-repair-crews"].status === "problem");
+check("191 §4.3/4.4: a PROBLEM is DERIVED into news (a state change that bears on the work)", evolved.worldState.news.some(n => /Calvar has hit trouble with the repair crews/.test(n.text)));
+check("191 §4.5: personal colour rides on the person's statusNote, never a news slot", /cracked sluice/.test(evolved.npcRegistry.calvar.statusNote || ""));
+// §4.2 — the delegated work is the mechanism a crisis is affected by: charges pushing on it HOLD it
+// from worsening (without help the same tick advances the stage — the test above at day 14 proves that).
+const defended = { name: "D", worldState: { ...initWorldState(1), assignments: { "c::crews": { id: "c::crews", npcId: "c", npcName: "C", charge: "the crews", targetEventId: "water_crisis", progress: 3, status: "working" }, "m::supply": { id: "m::supply", npcId: "m", npcName: "M", charge: "supply", targetEventId: "water_crisis", progress: 2, status: "working" } } }, npcRegistry: {}, deeds: [] };
+await runWorldTick({ character: defended, content: tickContent, currentDay: 14, advanceAssignments: null });
+check("191 §4.2: charges set against a crisis HOLD it from worsening (delegation is the mechanism)", defended.worldState.eventStages.water_crisis.stage === 1 && defended.worldState.news.some(n => /HELD/.test(n.text)));
+const failing = { name: "K", worldState: { ...initWorldState(1), assignments: { "x::y": { id: "x::y", npcId: "x", npcName: "X", charge: "y", targetEventId: null, progress: 0, status: "working" } } }, npcRegistry: { x: { id: "x", name: "X", role: "", relationship: 0, history: [], knownFacts: [], skillsObserved: [], status: "active" } }, deeds: [] };
+await runWorldTick({ character: failing, content: tickContent, currentDay: 8, advanceAssignments: async () => { throw new Error("api down"); } });
+check("191 §4: an assignment-pass failure never blocks the tick", failing.worldState.lastTickDay === 8);
 
 // --- gambits ---
 const gActions = [
@@ -6044,6 +6052,28 @@ await (async () => {
   check("191: world_clock.json is loaded and rides on CONTENT.worldClock", /loadRule\("world_clock"/.test(stateSrc191) && /worldClock,/.test(stateSrc191));
   const gmSrc191 = readFileSync(new URL('../engine/gm.js', import.meta.url), 'utf8');
   check("191: the CURRENT TIME block shows the world COUNT, never a shared calendar day", /World time \(the shared count, spoken as the people here count it\): \$\{worldCountLabel\}/.test(gmSrc191) && !/Shared world calendar/.test(gmSrc191));
+}
+
+// --- SNG-191 §4 assignments: the pure model + the delegateOps capture (the world honours delegated work) ---
+{
+  const asg = await import("../engine/assignments.js");
+  const ws = { assignments: {} };
+  const a1 = asg.addAssignment(ws, { npcId: "calvar", npcName: "Calvar", charge: "the repair crews", targetEventId: "water_crisis" }, 100);
+  check("191 §4: a delegation becomes a keyed assignment (npc + charge), working, against the crisis", a1.id === "calvar::the-repair-crews" && a1.status === "working" && a1.targetEventId === "water_crisis");
+  const a1b = asg.addAssignment(ws, { npcId: "calvar", charge: "the repair crews" }, 110);
+  check("191 §4: re-delegating the same charge UPDATES, never duplicates (keeps the first stamp)", Object.keys(ws.assignments).length === 1 && a1b.stampedAtWorldCount === 100);
+  asg.addAssignment(ws, { npcId: "mara", npcName: "Mara", charge: "supply", targetEventId: "water_crisis" }, 100);
+  asg.addAssignment(ws, { npcId: "aldric", npcName: "Aldric", charge: "the accounts", targetEventId: null }, 100);
+  check("191 §4.2: progressAgainst returns only charges pushing on THAT crisis", asg.progressAgainst(ws, "water_crisis").length === 2);
+  asg.advanceAssignment(ws.assignments["mara::supply"], "problem");
+  check("191 §4.2: a charge in TROUBLE no longer counts as helping the crisis", asg.progressAgainst(ws, "water_crisis").length === 1);
+  asg.advanceAssignment(ws.assignments["calvar::the-repair-crews"], "progress");
+  check("191 §4b: advancement is unguardrailed — progress climbs, a problem stays a problem", ws.assignments["calvar::the-repair-crews"].progress === 1 && ws.assignments["mara::supply"].status === "problem");
+  check("191 §4: assignmentsForGM renders the commitments; null when none are delegated", /Calvar — the repair crews/.test(asg.assignmentsForGM(ws) || "") && asg.assignmentsForGM({ assignments: {} }) === null);
+  const appSrcD = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+  check("191 §4: delegateOps dispatches into worldState via addAssignment", /if \(turn\.delegateOps\?\.length\)/.test(appSrcD) && /addAssignment\(character\.worldState/.test(appSrcD));
+  const gmSrcD = readFileSync(new URL('../engine/gm.js', import.meta.url), 'utf8');
+  check("191 §4: delegateOps is documented in the contract AND the world-tick advances it (not vignettes)", /"delegateOps":/.test(gmSrcD) && /THE INVERSION/.test(readFileSync(new URL('../engine/worldtick.js', import.meta.url), 'utf8')));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

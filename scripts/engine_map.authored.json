@@ -145,5 +145,10 @@
     "purpose": "See the machine: a dev-only ring buffer holding the last two-dozen model exchanges — assembled prompt, raw response, parsed result, ops fired — so the by-hand SNG-179 diagnosis (read the prompt, read the raw output, see what the engine did) is a standing instrument, not a devtools dig.",
     "playerVisibleSurface": "None for a player — it is dev-mode-only (the 🔬 Machine screen behind isDevMode()). Its value is that a defect that used to cost a live play session to find is now visible in a panel.",
     "whatMakesItFire": "callClaude invokes the observer app.js registers ONLY under isDevMode() at boot; every model call (GM turn + intent-parse + narrate + generate) routes through that one seam. In a player view the observer is null and nothing is recorded (§3.4)."
+  },
+  "assignments.js": {
+    "purpose": "Hold DELEGATED WORK as state so the world turns instead of narrating: a named person put in charge of ongoing work is an assignment the tick ADVANCES (progress/stall/problem/done), and a charge set against a crisis is the mechanism that can push the crisis back — the inversion of asking what a person merely felt.",
+    "playerVisibleSurface": "The return-tick's news reports what MOVED on the work (a problem hit, a charge finished, a crisis EASED/HELD); the DELEGATED WORK block lets the GM speak to the commitments; the person's statusNote carries the colour.",
+    "whatMakesItFire": "delegateOps (the player puts a known person in charge of ongoing work) writes an assignment; runWorldTick advances them on return and lets progressAgainst a crisis counter its worsening. No delegation → no assignments, and an empty news block is legitimate."
   }
 }

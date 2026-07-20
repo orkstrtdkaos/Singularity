@@ -16,7 +16,8 @@ import { applyCodexUpdates } from "./codex.js";
 import { smartClamp } from "./namematch.js"; // SNG-076: word-boundary clamp for the away-digest/news
 import { generatedRecords } from "./generate.js";
 import { syncEnabled, fetchRepoJSON, fetchLedger, pushOwnedFile, pushMergedFile } from "./sync.js";
-import { absoluteWorldDay, worldDayAt } from "./worldtime.js";
+import { absoluteWorldDay, worldDayAt, worldCount } from "./worldtime.js";
+import { advanceAssignment, progressAgainst } from "./assignments.js"; // SNG-191 §4: the world advances delegated work
 import { ensureCanonStore, promotionCandidates, promoteInto, canonForViewer } from "./canon.js";
 
 const NEWS_CAP = 20;
@@ -49,14 +50,17 @@ export function effectiveLocation(location, worldState) {
 
 /** Run the tick if days have passed. Mutates character.worldState (and deeds/npcs).
  *  evolveNpcs is injectable for tests; defaults to the AI pass. Never throws. */
-export async function runWorldTick({ character, content, currentDay, evolveNpcs = aiNpcEvolution }) {
+export async function runWorldTick({ character, content, currentDay, advanceAssignments = aiAssignmentAdvancement }) {
   if (!character.worldState) character.worldState = initWorldState(currentDay);
   const ws = character.worldState;
   const elapsed = currentDay - (ws.lastTickDay ?? currentDay);
   if (elapsed <= 0) return { ticked: false, news: [] };
   const news = [];
+  const clampDrift = v => Math.max(-0.5, Math.min(0.5, v));
 
-  // 1. event advancement
+  // 1. event advancement — and SNG-191 §4.2: a crisis RESPONDS to the delegated work. Ignoring a
+  //    crisis worsens it (this always worked); the missing half is that DOING something measurably
+  //    helps, and the mechanism is a charge set against it. A crisis nothing can affect is theatre.
   for (const { eventId, stage } of content.region.activeEvents || []) {
     const ev = content.events[eventId];
     if (!ev) continue;
@@ -66,14 +70,27 @@ export async function runWorldTick({ character, content, currentDay, evolveNpcs 
       const def = ev.stages.find(s => s.stage === st.stage);
       if (!def || !def.days || def.days >= 900) break;
       if (currentDay - st.sinceDay < def.days) break;
+      const helped = progressAgainst(ws, eventId).length; // charges making headway against THIS crisis
+      if (helped >= 2 && st.stage > 1) {
+        // eased — strong, sustained delegated work pushes the crisis a stage back toward resolution.
+        st.sinceDay += def.days; st.stage = st.stage - 1;
+        for (const [ax, v] of Object.entries(def.spectrumShift || {})) ws.spectrumDrift[ax] = clampDrift((ws.spectrumDrift[ax] || 0) - v); // unwind this stage's pressure
+        const now = ev.stages.find(s => s.stage === st.stage);
+        news.push(`${ev.name} has EASED — the delegated work held and pushed it back${now ? ` to ${now.name}` : ""}.`);
+        continue;
+      }
+      if (helped >= 1) {
+        // held — the crews bought this interval; the crisis does not worsen, but it does not recede.
+        st.sinceDay += def.days;
+        news.push(`${ev.name} was HELD at ${def.name} — the delegated work kept it from worsening.`);
+        continue;
+      }
+      // untended — it worsens (UNGUARDRAILED, §4b: it runs as far as its own logic takes it).
       const next = ev.stages.find(s => s.stage === st.stage + 1);
       if (!next) break;
       st.sinceDay += def.days;
       st.stage = next.stage;
-      // stage's pressure seeps into the region's spectrum
-      for (const [ax, v] of Object.entries(next.spectrumShift || {})) {
-        ws.spectrumDrift[ax] = Math.max(-0.5, Math.min(0.5, (ws.spectrumDrift[ax] || 0) + v));
-      }
+      for (const [ax, v] of Object.entries(next.spectrumShift || {})) ws.spectrumDrift[ax] = clampDrift((ws.spectrumDrift[ax] || 0) + v);
       news.push(`${ev.name} has worsened — ${next.name}: ${next.summary}`);
     }
   }
@@ -90,17 +107,26 @@ export async function runWorldTick({ character, content, currentDay, evolveNpcs 
     news.push(`Word has spread beyond ${deed.communityId.split(".").pop()}: ${deed.description}`);
   }
 
-  // 3. offscreen npc evolution (AI pass — skipped gracefully on any failure)
-  if (elapsed >= 3 && Object.keys(character.npcRegistry || {}).length && evolveNpcs) {
+  // 3. SNG-191 §4 THE INVERSION — the world TURNS, it does not narrate. Advance the DELEGATED work
+  //    (progress / stall / problem / done); never imagine what a worker was FEELING. News is DERIVED
+  //    from what MOVED and only when it bears on the work (§4.3/§4.4); personal colour rides on the
+  //    person's statusNote, not the news (§4.5). No assignments → no pass, and an empty news block is a
+  //    legitimate result. UNGUARDRAILED (§4b): a problem may be real, a success real — not softened.
+  const active = Object.values(ws.assignments || {}).filter(a => a.status !== "done");
+  if (elapsed >= 3 && active.length && advanceAssignments) {
     try {
-      const result = await evolveNpcs({ character, content, elapsed, currentDay });
-      if (result?.npcUpdates?.length) {
-        applyNpcUpdates(character, result.npcUpdates.slice(0, 3).map(u => ({ ...u, op: "update" })), { day: currentDay });
-        for (const n of (result.news || []).slice(0, 3)) news.push(smartClamp(n, 600));
+      const result = await advanceAssignments({ character, content, assignments: active.slice(0, 6), elapsed, currentDay });
+      const statusUpdates = [];
+      for (const adv of (result?.advancements || []).slice(0, 6)) {
+        const a = ws.assignments[adv?.assignmentId];
+        if (!a) continue;
+        advanceAssignment(a, adv.outcome, worldCount());
+        if (adv.outcome === "problem") news.push(`${a.npcName} has hit trouble with ${a.charge}${adv.note ? ` — ${smartClamp(adv.note, 200)}` : ""}.`);
+        else if (adv.outcome === "done") news.push(`${a.npcName} has finished ${a.charge}.`);
+        if (adv.note && a.npcId) statusUpdates.push({ op: "update", npcId: a.npcId, statusNote: smartClamp(adv.note, 200) });
       }
-    } catch (err) {
-      console.warn("[worldtick] npc evolution skipped:", err.message);
-    }
+      if (statusUpdates.length) applyNpcUpdates(character, statusUpdates, { day: currentDay });
+    } catch (err) { console.warn("[worldtick] assignment advancement skipped:", err.message); }
   }
 
   ws.lastTickDay = currentDay;
@@ -313,19 +339,21 @@ export function newsForGM(character) {
   return news.slice(-8).map(n => `- [${Number.isFinite(n.worldDay) ? `world-day ${n.worldDay}` : `day ${n.day}`}] ${n.text}`).join("\n");
 }
 
-/** The AI pass: what happened to known people while the character was away. */
-async function aiNpcEvolution({ character, content, elapsed, currentDay }) {
-  const reg = Object.values(character.npcRegistry).slice(0, 12).map(n =>
-    `- ${n.id}: ${n.name} (${n.role}) — ${n.status}, relationship ${n.relationship}. Knows: ${n.knownFacts.join("; ") || "little"}. Last: ${n.history.slice(-2).join(" | ") || "n/a"}`
+/** SNG-191 §4 — the AI pass, inverted. NOT "what happened to a person" (which writes colour) but "what
+ *  PROGRESSED on the work they were delegated." Each assignment gets an OUTCOME (state) plus one line of
+ *  what moved on the WORK — which becomes the person's status, never a news slot spent on a small day.
+ *  Work set against a crisis should visibly bear on it. UNGUARDRAILED — no softening to keep things tidy. */
+async function aiAssignmentAdvancement({ character, content, assignments, elapsed, currentDay }) {
+  const list = assignments.map(a =>
+    `- ${a.id}: ${a.npcName} holds "${a.charge}"${a.targetEventId ? ` (against ${a.targetEventId})` : ""} — currently ${a.status}, ${a.progress} step(s) in`
   ).join("\n");
-  const events = (content.region.activeEvents || []).map(({ eventId }) => {
+  const crises = (content.region.activeEvents || []).map(({ eventId }) => {
     const ev = content.events[eventId];
     const st = character.worldState.eventStages[eventId];
     const def = ev?.stages.find(s => s.stage === (st?.stage ?? 1));
-    return ev ? `${ev.name} — stage ${st?.stage ?? 1} (${def?.name}): ${def?.summary}` : null;
+    return ev ? `- ${eventId}: ${ev.name} — ${def?.name}: ${def?.summary}` : null;
   }).filter(Boolean).join("\n");
-  const sys = `You advance the offscreen lives of RPG NPCs. ${elapsed} in-game days passed while the player was away. Given the known people and world events, decide what plausibly happened to AT MOST 3 of them — small, grounded developments (work, family, the crisis touching them, something they learned). No deaths or drastic turns unless the world events strongly imply it. Reply ONLY JSON:
-{"npcUpdates": [{"npcId": "exact-id-from-list", "note": "what happened to them (1 sentence)", "learned": ["new fact they now know, if any"], "status": "active|injured|missing|departed (only if changed)"}], "news": ["short rumor the player might hear about it, if it would travel"]}`;
-  const content2 = `Days passed: ${elapsed} (now day ${currentDay}).\n\nKNOWN PEOPLE:\n${reg}\n\nWORLD EVENTS:\n${events || "quiet"}`;
+  const sys = `You advance DELEGATED WORK in an RPG while the player was away — the WORK, not the workers' moods. ${elapsed} in-game days passed. For each assignment, decide what PROGRESSED: an OUTCOME (progress | stall | problem | done) and ONE grounded sentence of what actually MOVED on the work. Work against a crisis must visibly bear on that crisis. The world is UNGUARDRAILED — a problem may be serious, a success real; never soften an outcome to keep things tidy, and never invent work that was not delegated. Reply ONLY JSON: {"advancements":[{"assignmentId":"exact-id-from-the-list","outcome":"progress|stall|problem|done","note":"one sentence: what moved on the WORK (this becomes the person's current status)"}]}`;
+  const content2 = `Days passed: ${elapsed} (now day ${currentDay}).\n\nDELEGATED WORK (advance these):\n${list}\n\nCRISES IN THE REGION (work may bear on these):\n${crises || "none active"}`;
   return callClaudeJSON([{ role: "user", content: content2 }], { task: "world-tick", system: sys, maxTokens: 1024 });
 }

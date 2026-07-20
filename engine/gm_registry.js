@@ -39,6 +39,7 @@ import { companionsForGM, activeCompanions } from "./companions.js";
 import { questsForGM, structuredQuestsForGM } from "./quests.js";
 import { npcRegistryForGM, npcQuestSeedBlock } from "./npcs.js";
 import { placeMemoryForGM, recallForGM } from "./places.js";
+import { assignmentsForGM } from "./assignments.js"; // SNG-191 §4: delegated commitments the world is honouring
 import { abilitiesForGM } from "./progression.js";
 import { codexForGM } from "./codex.js";
 import { factsForGM } from "./facts.js";
@@ -253,6 +254,9 @@ export const GM_CONTEXT = [
   { key: "livingWorldDetail", builder: "generate.livingWorldForGM", carries: ["live grown content"],
     reachedBy: "always", spec: "§19", views: ["turn"],
     build: (env) => livingWorldForGM(env.character, { locationId: env.character.currentLocationId, day: env.time.day }) },
+  { key: "assignmentsDetail", builder: "assignments.assignmentsForGM (SNG-191 §4)", carries: ["delegated commitments the world is honouring while away"],
+    reachedBy: "the player putting a known person in charge of ongoing work (delegateOps)", spec: "§4", views: ["turn"],
+    build: (env) => assignmentsForGM(env.character.worldState) },
   { key: "sharedCanonDetail", builder: "app.sharedCanonForGM", carries: ["other players' promoted canon"],
     reachedBy: "always (rating-lensed)", spec: "§18", views: ["turn"],
     build: (env) => env.app.sharedCanonForGM() },

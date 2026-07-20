@@ -1674,92 +1674,90 @@
         "player": "[Note for GM - we did not go through a waygate. we are still in Cairnhold in Silas's mother's house.]  Greets his mother with  \"Ama Deyja\"  Take two steps toward her with arms open wide.",
         "summary": "Silas greets his mother with open arms — she crosses to him in three quick steps and holds on; her first words are that he is thinner.",
         "narration": "You take two steps toward her with your arms open wide.\n\n\"Ama Deyja,\" you say.\n\nShe crosses the remaining distance between you in three quick steps — quicker than you expected, quicker than the Deathsense prepared you for — and she puts her arms around you and holds on. Her hands press flat against your back, flour-dusted and warm from the hearthstone. She is shorter than you remember, or you have grown into your height more fully than you realized. The dried herbs brush the top of your head. The flatbread on the hearthstone begins to smell done.\n\nShe does not say anything for a moment. She just holds you. Then she says, quietly and against your shoulder, \"You are thinner.\"\n\nBehind you, Pell is still in the doorway. She has not moved. She is giving this its space, reading the room the way she reads a forge — letting the heat settle before she touches anything. Huginn shifts once on your shoulder, then stills. He is, for the moment, simply a bird on a man's shoulder in a warm kitchen, and he seems to have decided that is sufficient."
+      },
+      {
+        "player": "Pull back gently, look at her face, and introduce Pell — 'Ama, this is Pell. She is mine and I am hers.'",
+        "summary": "Silas introduces Pell to his mother with plain words — 'She is mine and I am hers' — and his mother receives her into the house without ceremony.",
+        "narration": "You pull back gently from the embrace — one hand still at her arm, not breaking contact entirely, just making enough space to turn and look at her face.\n\nShe lets you. Her hands drop to your forearms and stay there, and she looks up at you with the particular expression of a mother doing a thorough accounting — not worried, exactly, but tallying. The flour on her hands leaves two pale prints on your sleeves.\n\n\"Ama,\" you say, \"this is Pell.\"\n\nPell steps through the doorway as you say it, taking the half-step forward that makes her present in the room rather than framed by it. She does not overreach — does not extend a hand before it is wanted, does not perform warmth she has not been invited to yet. She simply stands there, steady, the same way she stood at the gate.\n\n\"She is mine,\" you say, \"and I am hers.\"\n\nYour mother looks at Pell for a long moment. Then she looks back at you. Something in her face does something small and precise — not surprise, but the specific adjustment a person makes when a thing they suspected is confirmed in a form they had not quite imagined.\n\nShe releases your forearms and turns toward Pell fully. \"Then come in,\" she says. \"Both of you. The bread is done.\"\n\nThe flatbread is already done — one edge is beginning to brown at the bottom — and Huginn, for reasons of his own, eyes the dried herbs above the hearth with the cautious attention of a bird that has decided something is not his business."
       }
     ],
     "lastTurn": {
-      "narration": "You take two steps toward her with your arms open wide.\n\n\"Ama Deyja,\" you say.\n\nShe crosses the remaining distance between you in three quick steps — quicker than you expected, quicker than the Deathsense prepared you for — and she puts her arms around you and holds on. Her hands press flat against your back, flour-dusted and warm from the hearthstone. She is shorter than you remember, or you have grown into your height more fully than you realized. The dried herbs brush the top of your head. The flatbread on the hearthstone begins to smell done.\n\nShe does not say anything for a moment. She just holds you. Then she says, quietly and against your shoulder, \"You are thinner.\"\n\nBehind you, Pell is still in the doorway. She has not moved. She is giving this its space, reading the room the way she reads a forge — letting the heat settle before she touches anything. Huginn shifts once on your shoulder, then stills. He is, for the moment, simply a bird on a man's shoulder in a warm kitchen, and he seems to have decided that is sufficient.",
-      "sceneSummary": "Silas greets his mother with open arms — she crosses to him in three quick steps and holds on; her first words are that he is thinner.",
+      "narration": "You pull back gently from the embrace — one hand still at her arm, not breaking contact entirely, just making enough space to turn and look at her face.\n\nShe lets you. Her hands drop to your forearms and stay there, and she looks up at you with the particular expression of a mother doing a thorough accounting — not worried, exactly, but tallying. The flour on her hands leaves two pale prints on your sleeves.\n\n\"Ama,\" you say, \"this is Pell.\"\n\nPell steps through the doorway as you say it, taking the half-step forward that makes her present in the room rather than framed by it. She does not overreach — does not extend a hand before it is wanted, does not perform warmth she has not been invited to yet. She simply stands there, steady, the same way she stood at the gate.\n\n\"She is mine,\" you say, \"and I am hers.\"\n\nYour mother looks at Pell for a long moment. Then she looks back at you. Something in her face does something small and precise — not surprise, but the specific adjustment a person makes when a thing they suspected is confirmed in a form they had not quite imagined.\n\nShe releases your forearms and turns toward Pell fully. \"Then come in,\" she says. \"Both of you. The bread is done.\"\n\nThe flatbread is already done — one edge is beginning to brown at the bottom — and Huginn, for reasons of his own, eyes the dried herbs above the hearth with the cautious attention of a bird that has decided something is not his business.",
+      "sceneSummary": "Silas introduces Pell to his mother with plain words — 'She is mine and I am hers' — and his mother receives her into the house without ceremony.",
       "choices": [
         {
-          "label": "Hold her, say nothing — let the moment be what it is",
+          "label": "Turn the flatbread — step to the hearthstone and see to it before it burns",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "help"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Let your mother lead — stand back and follow her rhythm; see where she takes it",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "comfort",
             "calm"
           ],
           "trivial": true
         },
         {
-          "label": "Pull back gently, look at her face, and introduce Pell — 'Ama, this is Pell. She is mine and I am hers.'",
+          "label": "Introduce Veth — bring her inside; leave no one standing on the threshold of a family moment",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "persuade"
+            "help"
           ],
           "trivial": true
         },
         {
-          "label": "Say something honest — 'The road was long. I have a great deal to tell you. But first — how are you?'",
+          "label": "Something else entirely.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
-          "intentTags": [
-            "comfort"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Check the flatbread — reach past her and turn it before it burns, the easy domestic reflex of someone who grew up in this kitchen",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "craft"
-          ],
+          "intentTags": [],
           "trivial": true
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
       "scene": {
-        "setting": "Inside Silas's mother's house — the kitchen, warm from the low hearth, smelling of dried herbs and flatbread nearly done on the hearthstone. Late-afternoon light through a single window.",
+        "setting": "Inside Silas's mother's house — the kitchen, warm from the low hearth, smelling of dried herbs and flatbread now done on the hearthstone. Late-afternoon light through a single window. Pell has stepped inside.",
         "npcsPresent": [
           {
             "name": "Silas's Mother",
-            "state": "Arms around Silas, holding on — flour-dusted hands flat against his back. Has just said 'You are thinner.'"
+            "state": "Turned toward Pell, arms released from Silas — has just invited both of them in, flour on her hands, accounting-look not quite finished."
           },
           {
             "name": "Pell Ran Marsh",
-            "state": "Still in the doorway behind Silas — not moving, giving the moment its space."
+            "state": "Stepped into the room properly — standing steady, not overreaching, present without performing."
           },
           {
             "name": "Veth Ondra",
-            "state": "Just outside the door, holding her position."
+            "state": "Still just outside the door — threshold, waiting."
           },
           {
             "name": "Huginn",
-            "state": "On Silas's shoulder — still, for once simply a bird in a warm kitchen."
+            "state": "On Silas's shoulder — eyeing the dried herbs above the hearth with decided non-interest."
           }
         ],
         "objects": [
           "Low fire in the hearth",
           "Table with one steaming cup of tea",
           "Two chairs",
-          "Dried herbs hanging from the ceiling beam — brushing Silas's head",
+          "Dried herbs hanging from the ceiling beam",
           "Work counter — flour-dusted",
-          "Flatbread on the hearthstone — nearly done, beginning to smell it",
-          "Second door — the heath door — still open a hand's width at the room's far end"
+          "Flatbread on the hearthstone — done, one edge beginning to brown",
+          "Second door — the heath door — still open a hand's width at the room's far end",
+          "Two pale flour-prints on Silas's sleeves"
         ],
         "threads": [
-          "Silas's mother has said 'You are thinner' — her first words, a mother's first accounting",
-          "Pell is in the doorway, not yet introduced",
-          "Veth is outside — her reading of the cairn-line placement still unspoken",
-          "The flatbread will burn if not turned soon"
+          "Veth is still outside — on the threshold, not yet introduced or invited in",
+          "The flatbread needs turning or it will burn",
+          "Silas's mother has not yet spoken to Pell directly — 'come in' is an invitation, not a meeting"
         ]
       },
       "npcUpdates": [
@@ -1767,50 +1765,74 @@
           "op": "update",
           "npcId": "silass-mother",
           "name": "Silas's Mother",
-          "note": "Crossed to Silas in three quick steps and held him — her first words: 'You are thinner.'",
+          "note": "Received Pell's introduction plainly — looked from Pell to Silas, made the small internal adjustment of a confirmed suspicion, then turned to Pell and said 'come in, both of you, the bread is done.'",
           "learned": [
-            "Silas has returned — he is thinner than when he left"
+            "Pell is Silas's partner — named plainly by Silas as 'she is mine and I am hers'"
           ],
-          "relationshipDelta": 2,
-          "status": "active",
-          "statusNote": "In her kitchen in Cairnhold, holding her son — alive, present, first words spoken."
+          "relationshipDelta": 1,
+          "statusNote": "In her kitchen in Cairnhold — has just received Pell into the house; Veth not yet introduced.",
+          "status": "active"
+        },
+        {
+          "op": "update",
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "note": "Stepped into the room when named — steady, not performing, waiting for the moment to open further.",
+          "statusNote": "Inside Silas's mother's kitchen in Cairnhold — introduced, received, not yet spoken to directly.",
+          "status": "active"
+        },
+        {
+          "op": "update",
+          "npcId": "veth-ondra",
+          "name": "Veth Ondra",
+          "note": "Still outside the door — holding the threshold, not yet introduced.",
+          "statusNote": "On the threshold of Silas's mother's house in Cairnhold — waiting outside while the family moment settles.",
+          "status": "active"
         }
-      ]
+      ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A brief exchange — the introduction and the invitation in."
+      }
     },
     "sceneState": {
-      "setting": "Inside Silas's mother's house — the kitchen, warm from the low hearth, smelling of dried herbs and flatbread nearly done on the hearthstone. Late-afternoon light through a single window.",
+      "setting": "Inside Silas's mother's house — the kitchen, warm from the low hearth, smelling of dried herbs and flatbread now done on the hearthstone. Late-afternoon light through a single window. Pell has stepped inside.",
       "npcsPresent": [
         {
           "name": "Silas's Mother",
-          "state": "Arms around Silas, holding on — flour-dusted hands flat against his back. Has just said 'You are thinner.'"
+          "state": "Turned toward Pell, arms released from Silas — has just invited both of them in, flour on her hands, accounting-look not"
         },
         {
           "name": "Pell Ran Marsh",
-          "state": "Still in the doorway behind Silas — not moving, giving the moment its space."
+          "state": "Stepped into the room properly — standing steady, not overreaching, present without performing."
         },
         {
           "name": "Veth Ondra",
-          "state": "Just outside the door, holding her position."
+          "state": "Still just outside the door — threshold, waiting."
         },
         {
           "name": "Huginn",
-          "state": "On Silas's shoulder — still, for once simply a bird in a warm kitchen."
+          "state": "On Silas's shoulder — eyeing the dried herbs above the hearth with decided non-interest."
         }
       ],
       "objects": [
         "Low fire in the hearth",
         "Table with one steaming cup of tea",
         "Two chairs",
-        "Dried herbs hanging from the ceiling beam — brushing Silas's head",
+        "Dried herbs hanging from the ceiling beam",
         "Work counter — flour-dusted",
-        "Flatbread on the hearthstone — nearly done, beginning to smell it",
-        "Second door — the heath door — still open a hand's width at the room's far end"
+        "Flatbread on the hearthstone — done, one edge beginning to brown",
+        "Second door — the heath door — still open a hand's width at the room's far end",
+        "Two pale flour-prints on Silas's sleeves"
       ],
       "threads": [
-        "Silas's mother has said 'You are thinner' — her first words, a mother's first accounting",
-        "Pell is in the doorway, not yet introduced",
-        "Veth is outside — her reading of the cairn-line placement still unspoken",
-        "The flatbread will burn if not turned soon"
+        "Veth is still outside — on the threshold, not yet introduced or invited in",
+        "The flatbread needs turning or it will burn",
+        "Silas's mother has not yet spoken to Pell directly — 'come in' is an invitation, not a meeting"
       ]
     }
   },
@@ -2323,7 +2345,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d6] Held position two steps back and right of Silas at the hollow rim — Memory loose, watching Cassiel.",
         "[d6] Came down into the hollow without being called — read the open-hand gesture and answered it. Held Memory's shaft through the anchoring, her ironsense running quiet as the structural layer.",
         "[d6] Received the naming of her forge corner — south wall, hearth, bench — with eyes already measuring the flue. Has not spoken; is doing the calculation.",
         "[d6] Quiet at the south corner, measuring hearth draw — satisfied with the work.",
@@ -2332,7 +2353,8 @@
         "[d9] Arrived at Cairnhold western crossing lane with Silas — named the destination plainly: home first. Road-worn but steady.",
         "[d12] Arrived at Silas's mother's gate — reading the lane, steady, waiting for his lead",
         "[d12] Watched Silas's back while he used Deathsense at the gate — asked quietly if he was all right.",
-        "[d12] Silas read her through the soul bond at the gate — she felt the Deathsense come back through it as information, accepted it, and told him to take his time."
+        "[d12] Silas read her through the soul bond at the gate — she felt the Deathsense come back through it as information, accepted it, and told him to take his time.",
+        "[d12] Stepped into the room when named — steady, not performing, waiting for the moment to open further."
       ],
       "knownFacts": [
         "Veth Ondra is now traveling with the party — Pell took the measure of her immediately and accepted it without ceremony",
@@ -2353,9 +2375,9 @@
         "feeding ironsense through the spear-shaft as a structural an"
       ],
       "status": "active",
-      "statusNote": "At the gate of Silas's mother's house on Cairnhold's center lane, World-day 23 afternoon. Steady. Waiting for his lead.",
+      "statusNote": "Inside Silas's mother's kitchen in Cairnhold — introduced, received, not yet spoken to directly.",
       "lastSeen": {
-        "locationId": "cairnhold",
+        "locationId": "the_crossing",
         "day": 12
       },
       "bondType": "romantic",
@@ -3024,7 +3046,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d6] Held position on the slope between post and hollow — watching without interrupting Silas's read.",
         "[d6] Entered the hollow floor for the first time — stood still, looked at Memory and the chalk mark, said 'Eleven years' to the hollow itself and then 'It holds.' Nothing more. The weight she has carried since the post was dissolved is visible in what she did not say.",
         "[d6] Responded to her Raven name — Stillwater — when used for the first time in the post. Added March-form threshold-hardening lines to Silas's shadow-and-boundary layer; her lines are thinner and more precise, and settled the rough edge of his work.",
         "[d6] In the back alcove with her teaching kit open — still, watching the room settle.",
@@ -3033,7 +3054,8 @@
         "[d6] Confirmed she can see the soul bond between Silas and Pell — named it 'rune-in-grain, not on the surface.' Agreed to walk the road to Cairnhold without being asked to. Traveled the four-day road north with the party.",
         "[d9] Named plainly that word travels faster than roads — observing the town's read of Silas.",
         "[d12] Watching the house's placement on the cairn-line with careful attention — has not spoken",
-        "[d12] Still reading the house's placement on the cairn-line. Has not spoken what she sees."
+        "[d12] Still reading the house's placement on the cairn-line. Has not spoken what she sees.",
+        "[d12] Still outside the door — holding the threshold, not yet introduced."
       ],
       "knownFacts": [
         "Silas understands the difference between tending a closed site and reopening it — named it himself, unprompted",
@@ -3056,9 +3078,9 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the gate of Silas's mother's house on Cairnhold's center lane, World-day 23 afternoon.",
+      "statusNote": "On the threshold of Silas's mother's house in Cairnhold — waiting outside while the family moment settles.",
       "lastSeen": {
-        "locationId": "cairnhold",
+        "locationId": "the_crossing",
         "day": 12
       },
       "bondType": "sworn",
@@ -3124,20 +3146,22 @@
         "locationId": "cairnhold",
         "day": 12
       },
-      "relationship": 2,
+      "relationship": 3,
       "history": [
         "[d12] Turned from the work counter and said Silas's full name. One step taken toward him. Flour-dusted hands.",
-        "[d12] Crossed to Silas in three quick steps and held him — her first words: 'You are thinner.'"
+        "[d12] Crossed to Silas in three quick steps and held him — her first words: 'You are thinner.'",
+        "[d12] Received Pell's introduction plainly — looked from Pell to Silas, made the small internal adjustment of a confirmed suspicion, then turned to Pell and said 'come in, both of you, the bread is done.'"
       ],
       "knownFacts": [
         "Silas has come home — she did not know he was coming",
-        "Silas has returned — he is thinner than when he left"
+        "Silas has returned — he is thinner than when he left",
+        "Pell is Silas's partner — named plainly by Silas as 'she is mine and I am hers'"
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "In her kitchen in Cairnhold, holding her son — alive, present, first words spoken.",
+      "statusNote": "In her kitchen in Cairnhold — has just received Pell into the house; Veth not yet introduced.",
       "domains": {
         "primary": "ashwarden"
       },
@@ -5222,21 +5246,21 @@
     }
   },
   "tendencies": {
-    "strategic": 15.496225057610486,
-    "cerebral": 19.57065136221882,
-    "social": 13.741355238225307,
-    "generous": 3.7870145670117585,
-    "cautious": 5.942137874408097,
-    "physical": 0.32003329795086416,
-    "risky": 0.33561831376021445,
-    "ruthless": 0.10700823160266053,
-    "carousing": 0.001639501413748755,
-    "amorous": 1.2800078288670504,
-    "patient": 0.6669697785881054,
-    "stealth": 0.04147666395400656,
-    "devotion": 0.847330291820087,
-    "craft": 1.1039668093263642,
-    "leadership": 0.2111208226519808
+    "strategic": 15.108819431170224,
+    "cerebral": 19.081385078163347,
+    "social": 14.397821357269674,
+    "generous": 3.6923392028364646,
+    "cautious": 5.793584427547894,
+    "physical": 0.31203246550209257,
+    "risky": 0.32722785591620906,
+    "ruthless": 0.10433302581259402,
+    "carousing": 0.001598513878405036,
+    "amorous": 1.2480076331453742,
+    "patient": 0.6502955341234027,
+    "stealth": 0.040439747355156395,
+    "devotion": 0.8261470345245848,
+    "craft": 1.076367639093205,
+    "leadership": 0.20584280208568126
   },
   "aptitudes": [
     "strategist",
@@ -5245,7 +5269,7 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 613,
+  "actionCount": 614,
   "grantsVersion": 1,
   "reconcileVersion": 11,
   "gallery": [
@@ -5579,8 +5603,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784513946840,
-  "rev": 935,
+  "updatedAt": 1784514079931,
+  "rev": 936,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -7408,7 +7432,7 @@
   "regionsKnown": {
     "valley": 435,
     "the_palelands": 6,
-    "the_center": 1
+    "the_center": 2
   },
   "foreclosed": [
     "rootkin",
@@ -7480,10 +7504,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-07-19T11:58:49.560Z",
-      "lastAt": "2026-07-20T02:19:06.838Z",
+      "lastAt": "2026-07-20T02:21:19.930Z",
       "startDay": 19,
       "endDay": 20,
-      "beats": 35
+      "beats": 36
     }
   ],
   "company": [

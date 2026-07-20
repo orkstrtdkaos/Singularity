@@ -33,7 +33,7 @@ import { toolkitForGM } from "./engine/toolkit.js";
 import { fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc } from "./engine/personalArc.js";
 import { assembleGMContext } from "./engine/gm_registry.js"; // BATCH-11 §23: the GM context is a DECLARED registry, iterated — never hand-listed
 import { rankVoices, pickVoice, speakableText, chunkForSpeech, renderProseHtml } from "./engine/narration_voice.js"; // SNG-155: read aloud at the table; SNG-190 §4: render engine asides, never raw asterisks
-import { harmGateFor, departureGateFor, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop)
+import { harmGateFor, departureGateFor, isSpeechAct, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop); SNG-188: speech-act guard
 import { resolveWaygateTransit, routeGmMoveTo } from "./engine/waygate.js"; // SNG-148: waygates — map control routes named/hub; GM offer via the registry row
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./engine/entityDetail.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet } from "./engine/npcs.js";
@@ -60,7 +60,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.164";
+const APP_VERSION = "1.8.165";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3846,6 +3846,12 @@ const NOT_A_PLACE = /^(?:there|here|him|her|them|it|me|us|you|home|back|inside|o
  *  Returns {ref,name,destId} or null; destId null (trusted only) means "mint on arrival." */
 function travelIntentOf(action) {
   if (!action) return null;
+  // SNG-188 §4: DISCUSSING travel is not DOING it. A label led by a speech verb (announce, confide,
+  // tell, discuss, plan…) is a conversation about a journey, never a departure — however many
+  // place-names it holds. The code belt behind the parser prompt: a travelTo the model set on a speech
+  // act is stopped HERE, before buildTravelDirective can force a move. Erik's exact turn — "confide in
+  // Veth … and announce travel plans to Cairnhold" — leaves him in the alcove because of this line.
+  if (isSpeechAct(action.label)) return null;
   const titleize = s => String(s).replace(/[-_]+/g, " ").replace(/\b\w/g, c => c.toUpperCase()).slice(0, 60);
   // (1) trusted explicit destination from the free-text parser
   let ref = action.travelTo && String(action.travelTo).trim();
@@ -3875,7 +3881,7 @@ function buildTravelDirective(ti) {
   const adj = (here?.connections || []).map(id => CONTENT.locations[id]).filter(Boolean)
     .filter(l => isPlaceKnown(character, l.id, CONTENT.locations)).map(l => `${l.name} (${l.id})`);
   const dest = ti.destId ? `${CONTENT.locations[ti.destId].name} (id ${ti.destId})` : `"${ti.ref}"`;
-  return `The player is TRAVELING to ${dest}. You MUST emit "moveTo": {"location": "${ti.destId || ti.ref}", "why": "…"} this turn so they actually arrive — narrate the trip (a montage if it's far, with timeOps) but do NOT end the beat without moveTo. ${adj.length ? `Places reachable from ${here?.name || "here"}: ${adj.join(", ")}.` : ""}`;
+  return `The player INTENDS to travel to ${dest}. If the fiction actually DEPARTS this beat — they set out, are led, or the trip is a montage with time passing on the road — emit "moveTo": {"location": "${ti.destId || ti.ref}", "why": "…"} so they arrive, and narrate the journey (with timeOps if far). But if this beat is still PLANNING or discussing the trip and they have NOT left yet, do NOT move them — keep the scene where it is and offer the road as the next step. Never relocate a character who only spoke about going (SNG-188). ${adj.length ? `Places reachable from ${here?.name || "here"}: ${adj.join(", ")}.` : ""}`;
 }
 
 /** SNG-122: the one-tap safety net — the travel beat didn't move the player, so arrive now via the SAME

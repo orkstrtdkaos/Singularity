@@ -59,30 +59,63 @@ export function harmGateFor(abilityIds, catalog, askedKey, asked = {}, ownedLeve
   };
 }
 
-/** PURE. Should a departure gate fire for this travel intent? Only on a REAL
- *  region crossing — in-location and intra-region movement never gates, so the
- *  moveTo always-emit discipline is untouched (the gate runs BEFORE the GM is
- *  even called). Fails open when either region is unknown; a minted destination
- *  inherits the origin's region (app.mintTransitLocation) so it can never
- *  spuriously read as a crossing. */
+// SNG-188 §4: a label whose GOVERNING (leading) verb is a speech verb is DISCUSSING a journey, not
+// making it — "announce travel plans to Cairnhold" is not "travel to Cairnhold" however many places
+// it names. Anchored at the start (optionally after I/I'll/let's/we) so it reads the governing verb.
+const SPEECH_ACT = /^\s*(?:i(?:'?ll|'?m|'?d| will| am| would)?\s+(?:want to |going to |plan to |mean to |need to )?|let'?s\s+|we(?:'?ll| will)?\s+)?(announc\w*|tell\w*|say|saying|said|speak\w*|talk\w*|confid\w*|discuss\w*|propos\w*|promis\w*|mention\w*|explain\w*|suggest\w*|reassur\w*|admit\w*|confess\w*|declar\w*|inform\w*|warn\w*|ask|asking|asks|chat\w*|whisper\w*|shar\w*)\b/i;
+
+/** PURE. Is this action label a SPEECH act about travel rather than travel itself? SNG-188 §4 — the
+ *  code belt behind the parser prompt: a `travelTo` the model set on "announce/confide/discuss …
+ *  travel plans" is caught here before buildTravelDirective can force a move. Reads the governing verb. */
+export function isSpeechAct(label) {
+  return SPEECH_ACT.test(String(label || "").trim());
+}
+
+/** PURE. Should a departure gate fire for this travel intent? SNG-188: travel is OFFERED, never
+ *  imposed (§4.1, the same contract lethal encounters carry). The gate now FAILS CLOSED — an
+ *  unresolvable origin or destination is the case where the engine knows LEAST about the consequence
+ *  of moving, so it ASKS rather than skipping (the old fail-OPEN here is exactly why Silas was
+ *  relocated: his origin, an unrecorded warden post, did not resolve). It gates any CONSEQUENTIAL
+ *  move — crossing a region, or a journey to a place not directly connected to where they stand —
+ *  while an adjacent step in the same region proceeds without a prompt (acceptance §2: a real
+ *  departure is not a nag). Returns null only when there is no travel intent, or the move is an
+ *  ordinary adjacent step. The gate runs BEFORE the GM is called. */
 export function departureGateFor(travelIntent, character, locations) {
-  if (!travelIntent?.destId) return null; // unresolvable destination → no gate (fail open)
+  if (!travelIntent || (!travelIntent.destId && !travelIntent.ref)) return null; // not a travel intent
   const here = locations?.[character?.currentLocationId];
-  const there = locations?.[travelIntent.destId];
+  const there = travelIntent.destId ? locations?.[travelIntent.destId] : null;
   const fromRegion = here?.regionId || here?.region || null;
   const toRegion = there?.regionId || there?.region || null;
-  if (!fromRegion || !toRegion || fromRegion === toRegion) return null;
+  const destName = travelIntent.name || there?.name || travelIntent.ref || "there";
   const pretty = (r) => String(r).replace(/_/g, " ");
-  return {
-    kind: "departure",
-    act: `${travelIntent.name || "That road"} lies in ${pretty(toRegion)} — beyond ${pretty(fromRegion)}.`,
-    cost: "Leaving the region is a real journey: hours on the road, and the scene here ends.",
-    options: [
-      { id: "go", label: `Take the road to ${travelIntent.name || pretty(toRegion)}` },
-      { id: "stay", label: "Hold here for now" }
-    ],
+  const ask = (act, cost) => ({
+    kind: "departure", act, cost,
+    options: [{ id: "go", label: `Take the road to ${destName}` }, { id: "stay", label: "Stay here for now" }],
     default: "stay"
-  };
+  });
+
+  // §4.2 FAIL CLOSED — origin or destination the engine cannot resolve is a reason to ASK, not to skip
+  // asking. Name what it could not pin down, so the choice is honest rather than a silent relocation.
+  if (!there || !fromRegion || !toRegion) {
+    return ask(
+      `Set out for ${destName}? ${!there ? "The way there isn't certain from here" : "where you stand isn't fixed on the map"} — leaving is a real journey, so it is yours to choose.`,
+      "Travel takes hours on the road, and the scene here ends."
+    );
+  }
+
+  // §5 same-region travel is still travel. CONSEQUENTIAL = a region crossing OR a place not directly
+  // connected to where they stand (a journey, not a step). An adjacent place in the same region is an
+  // ordinary step and does not gate — that is what keeps a genuine departure from becoming a nag.
+  const crossing = fromRegion !== toRegion;
+  const adjacent = (here?.connections || []).includes(travelIntent.destId);
+  if (!crossing && adjacent) return null;
+
+  return ask(
+    crossing
+      ? `${destName} lies in ${pretty(toRegion)} — beyond ${pretty(fromRegion)}. Set out?`
+      : `${destName} is a journey from here, not a step across the room. Set out?`,
+    "Leaving is a real journey: hours on the road, and the scene here ends."
+  );
 }
 
 /** PURE. Validate a GM-emitted offerIntent op (the fiction-recognized cases the

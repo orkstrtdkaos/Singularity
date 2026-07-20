@@ -4835,13 +4835,17 @@ await (async () => {
     g?.kind === "harm" && g.default === "incapacitate" && g.options.length === 2);
   check("145: damaging does NOT gate (the gate must be rare)", harmGateFor(["bruise"], catalog, "enc:duel", {}) === null);
   check("145: never twice for the same encounter (dedupe by askedKey)", harmGateFor(["blade"], catalog, "enc:duel", { "enc:duel": true }) === null);
-  const locs = { home: { regionId: "the_given_land" }, far: { regionId: "the_crossing" }, near: { regionId: "the_given_land" }, nowhere: {} };
+  const locs = { home: { regionId: "the_given_land", connections: ["near"] }, far: { regionId: "the_crossing" }, near: { regionId: "the_given_land" }, distant: { regionId: "the_given_land" }, nowhere: {} };
   const ch = { currentLocationId: "home" };
   check("145: a cross-REGION travel intent gates, with STAY as the default",
     departureGateFor({ destId: "far", name: "The Crossing" }, ch, locs)?.default === "stay");
-  check("145: intra-region travel never gates (always-emit moveTo untouched)", departureGateFor({ destId: "near", name: "Nearby" }, ch, locs) === null);
-  check("145: a null regionId fails OPEN — no gate, never a boundary", departureGateFor({ destId: "nowhere", name: "?" }, ch, locs) === null);
-  check("145: unresolvable destination fails open", departureGateFor({ destId: null, name: "The Pass" }, ch, locs) === null);
+  // SNG-188 §5 changed this: an ADJACENT same-region place is a step (no gate), but a NON-adjacent
+  // same-region place is a journey and IS offered — travel is still travel.
+  check("145/188 §5: an ADJACENT same-region step does not gate (no nag)", departureGateFor({ destId: "near", name: "Nearby" }, ch, locs) === null);
+  check("188 §5: a NON-adjacent same-region journey IS offered", departureGateFor({ destId: "distant", name: "Distant Hall" }, ch, locs)?.kind === "departure");
+  // SNG-188 §2 changed this: a null/unknown region now FAILS CLOSED — it asks rather than moving silently.
+  check("145/188 §2: a null regionId now fails CLOSED — it asks (was fail-open)", departureGateFor({ destId: "nowhere", name: "?" }, ch, locs)?.kind === "departure");
+  check("145: neither destId nor ref is not a travel intent — no gate", departureGateFor({ destId: null, name: "The Pass" }, ch, locs) === null);
   const off = sanitizeOfferIntent({ kind: "harm", act: "your hand is at his throat", options: [{ id: "spare", label: "Spare him" }, { id: "kill", label: "End it" }], default: "spare" });
   check("145: GM offerIntent sanitizes (kind whitelisted, options 2-4, default must be an option)",
     off?.kind === "harm" && off.default === "spare" && sanitizeOfferIntent({ kind: "wish", options: [] }) === null);
@@ -5958,6 +5962,48 @@ await (async () => {
     hits[0]?.name === "Cairnhold" && hits[0]?.known === true && hits.some(h => h.name === "The Blocklands" && h.known === false));
   check("A5: the GM prompt no longer tells it to deny an unrecalled place ('has not been placed yet' is gone)",
     !/has not been placed yet/.test(readFileSync(new URL('../engine/gm.js', import.meta.url), 'utf8')));
+}
+
+// --- SNG-188: moved without consent — discussing travel is not doing it; the guard fails closed ---
+{
+  const it = await import("../engine/intent.js");
+
+  // §4: DISCUSSING travel is not DOING it — the governing verb decides.
+  check("188 §4: Erik's exact turn is a speech act, not travel", it.isSpeechAct("confide in Veth about soul bond and announce travel plans to Cairnhold"));
+  check("188 §4: 'announce travel plans to Cairnhold' — a speech verb governs, travelTo stays null", it.isSpeechAct("announce travel plans to Cairnhold"));
+  check("188 §4: 'tell Veth I mean to leave' is discussing, not departing", it.isSpeechAct("tell Veth I mean to leave for the mill"));
+  check("188 §4: 'travel to Cairnhold' is a real departure, NOT a speech act", !it.isSpeechAct("travel to Cairnhold"));
+  check("188 §4: 'head back to the mill' is a real departure", !it.isSpeechAct("head back to the mill"));
+  check("188 §4: 'go to the edge district' is a real departure", !it.isSpeechAct("go to the edge district"));
+
+  // §2 + §5: the departure guard fails CLOSED and gates consequential travel, not adjacent steps.
+  const locs = {
+    alcove: { id: "alcove", name: "The Warden Post", regionId: "the_hollow", connections: ["hollow_mouth"] },
+    hollow_mouth: { id: "hollow_mouth", name: "The Hollow's Mouth", regionId: "the_hollow", connections: ["alcove"] },
+    far_hall: { id: "far_hall", name: "The Far Hall", regionId: "the_hollow", connections: [] },
+    cairnhold: { id: "cairnhold", name: "Cairnhold", regionId: "the_palelands", connections: [] }
+  };
+  const at = (id) => ({ currentLocationId: id });
+  // Erik's ROOT case: the origin (warden post) never resolved. Old code fail-OPEN → moved silently.
+  check("188 §2: an UNRESOLVED origin now ASKS (fail closed), never silently moves",
+    it.departureGateFor({ destId: "cairnhold", name: "Cairnhold" }, { currentLocationId: "unrecorded-warden-post" }, locs)?.kind === "departure");
+  check("188 §2: an unresolvable destination asks too",
+    it.departureGateFor({ ref: "somewhere vague", destId: null }, at("alcove"), locs)?.kind === "departure");
+  check("188: a region crossing is offered", it.departureGateFor({ destId: "cairnhold", name: "Cairnhold" }, at("alcove"), locs)?.kind === "departure");
+  check("188 §5: a same-region journey to a non-adjacent place is offered (travel is still travel)",
+    it.departureGateFor({ destId: "far_hall", name: "The Far Hall" }, at("alcove"), locs)?.kind === "departure");
+  check("188 §2: an adjacent step in the same region does NOT gate (a departure is not a nag)",
+    it.departureGateFor({ destId: "hollow_mouth", name: "The Hollow's Mouth" }, at("alcove"), locs) === null);
+  check("188: no travel intent → no gate", it.departureGateFor(null, at("alcove"), locs) === null && it.departureGateFor({}, at("alcove"), locs) === null);
+  const g = it.departureGateFor({ destId: "cairnhold", name: "Cairnhold" }, at("alcove"), locs);
+  check("188 §1: the offer is go/stay with STAY the default (declining commits nothing, SNG-145)",
+    g.options.some(o => o.id === "go") && g.options.some(o => o.id === "stay") && g.default === "stay");
+
+  const appSrc188 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+  check("188 §3: buildTravelDirective is no longer an absolute MUST-move (GM judgement restored)",
+    /if this beat is still PLANNING/.test(appSrc188) && /Never relocate a character who only spoke about going/.test(appSrc188));
+  check("188 §4: travelIntentOf guards on the speech act before any move can be forced",
+    /if \(isSpeechAct\(action\.label\)\) return null/.test(appSrc188));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

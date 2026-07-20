@@ -1,5 +1,18 @@
 # PO ALERT
 
+> **✅ SNG-193b CLOSED GREEN by Aevi at HEAD `45328420`** — verified at origin, not taken on report:
+> the §3.3 seam is single (`substrate.js:161`, `bandForSchool`), `SOURCE_BAND` + `materialFloor` 0.7
+> present, the §3.5 CI gate genuinely fails a bad affinity (`smoke.mjs:6158`), and **`adoptSchool`
+> dispatches through `setCharacterSchool` at `app.js:3397` with `logOpOutcome` attached** — countable
+> from day one, which is SNG-190 §3's lesson applied unprompted. Two follow-ons correctly flagged
+> rather than improvised: the creation-time school picker (SNG-192's) and the augmented-ceiling curve
+> (Erik's balance call).
+>
+> **➡️ NEXT:** engine connections review (Erik-directed), then `po/SPEC_SNG-195_prompt_review.md` —
+> five columns per engine, and **§4b is the shape to copy: the ENGINE computes room, the model never
+> judges.** Add **RUNNING_FIXES A6, the writerly audit**, to that sweep — column 4 of SNG-195 is the
+> same audit from the other side.
+
 > **➡️ NEXT TWO, in order:**
 >
 > **1. `po/SPEC_SNG-185_hub_attribution.md`** — the single upstream dependency behind both outcomes

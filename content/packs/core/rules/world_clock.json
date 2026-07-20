@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "id": "world_clock",
+  "kind": "rules",
+  "note": "SNG-191. TWO CLOCKS, DIFFERENT UNITS. Character time is days and seasons — personal, human, advanced by timeOps, uncapped. World time is a monotonic COUNT — shared, real-time-derived, never rewound. They do not share a unit ON PURPOSE: two clocks in the same unit invite arithmetic, two clocks in different units simply coexist.",
+  "ruling": "Erik 2026-07-19: a journey advances ONLY the traveller's clock. The world moves on its own and the tick reports what was missed.",
+  "unit": {
+    "canonical": "count",
+    "formal": "the Kept Count",
+    "granularity": "~1 count per hour of real time",
+    "why": "A week away reads as ~170 — a number that has plainly BUILT. Fine enough to accumulate, coarse enough to mean something."
+  },
+  "custody": {
+    "keeps": "hourkeeper",
+    "keepsNote": "The Hourkeepers KEEP the time — custody, authority, continuity. It is their craft and their charge.",
+    "measures": "lattice",
+    "measuresNote": "The Lattice-Cities maintain the MEASUREMENT, because measurement is HOW a thing is kept: the standard, the instruments, the calibration that makes one count mean the same thing in two places.",
+    "whyBoth": "Neither owns it alone, and that division is why it is trusted — the people who hold the count are not the people who verify it. Erik's ruling 2026-07-19."
+  },
+  "idioms": {
+    "hourkeeper": {
+      "word": "the kept count",
+      "note": "The canonical form. Theirs to keep, and they state it without flourish."
+    },
+    "lattice": {
+      "word": "measures",
+      "note": "The standard, given precisely and a little pedantically. They will correct your rounding."
+    },
+    "ashwarden": {
+      "word": "tolls",
+      "note": "A bell, rung. Counting is how you attend an ending, and Cairnhold already keeps a bench beside the gate."
+    },
+    "enginewright": {
+      "word": "revolutions",
+      "note": "The Engine turns. They count its turning and consider every other method approximate."
+    },
+    "marcher": {
+      "word": "watches",
+      "note": "You count what you must stand."
+    },
+    "rootkin": {
+      "word": "risings",
+      "note": "They mark growth, not machinery — and are unbothered that this makes them imprecise."
+    },
+    "umbral": {
+      "word": "darks",
+      "note": "They count what everyone else stops counting at."
+    },
+    "churnfolk": {
+      "word": "(inconsistent, cheerfully)",
+      "note": "They refuse to keep a steady one and are entirely unbothered. Asked twice, you get two answers, both delivered with confidence."
+    },
+    "mason": {
+      "word": "courses",
+      "note": "A course of stone laid. What is counted should be something you could point at."
+    },
+    "stillhold": {
+      "word": "stills",
+      "note": "They count intervals of quiet held, which is the only thing they consider worth counting."
+    },
+    "verist": {
+      "word": "counts",
+      "note": "The plain word. They will not dress it up and think less of those who do."
+    }
+  },
+  "usage": {
+    "gmNarratesFrom": "CHARACTER time, always — days, seasons, time of day.",
+    "worldCountAppears": "On news, on shared-canon stamps, and in a people's own idiom when a character asks or an NPC would say it. NEVER as a bare day-number in prose.",
+    "why": "There is no longer a world day-number available to invent with. This is the root fix for the invented 'World-day 23' entries that reached durable records (SNG-189 §2, SNG-190 §5)."
+  },
+  "partySync": "SNG-191 §3, Erik's ruling: forming a party syncs the members' CHARACTER clocks — not world time. From the join forward they advance together. Their PASTS stay different lengths, and that is biography, not an error. Nothing is retconned."
+}

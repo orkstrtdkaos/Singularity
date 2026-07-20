@@ -123,21 +123,35 @@ on either with confidence.**
 **Status:** OPEN · standing · added 2026-07-19 at Erik's direction
 
 
-### A7 · CONTENT FILES ARE NOT CACHE-BUSTED — every content ship is invisible to the player ⚠
-**Where:** `engine/state.js:228` — `async function fetchJSON(path) { const res = await fetch(path); … }`
-**What:** Erik screenshotted literal `\n` in a quest premise **that had been fixed and verified at
-origin hours earlier.** He was reading cached JSON.
-**Why:** **verified.** `index.html` loads `app.js?v=1.8.165` and `style.css?v=1.8.165` — the CODE is
-versioned. The 252 content files are fetched with a bare path and no version string, so the browser
-serves whatever it cached.
-**Consequences, and they are worse than a stale quest:**
-- **Every content ship is invisible until a browser decides to refetch** — the teacher pass, the
-  schools, the world clock, both arcs.
-- **It makes the browser-leg unreliable for the one person who runs it.** Erik cannot verify content
-  he cannot receive, and may report a fixed defect as live — as happened here.
-**Fix:** version the content fetches the way the code is versioned (`?v=APP_VERSION`). One change in
-`fetchJSON`/`fetchText`, and it makes every future content verification trustworthy.
-**Status:** OPEN · **high** — it silently invalidates content verification · found 2026-07-20
+### A7 · ~~CONTENT FILES ARE NOT CACHE-BUSTED~~ — ❌ RETRACTED, NOT A DEFECT
+**Status:** WITHDRAWN 2026-07-20 · **do not build. I was wrong and I moved CCode's queue on it.**
+
+**What I claimed:** `fetchJSON` (`state.js:228`) is a bare `fetch(path)` while `app.js` loads with
+`?v=1.8.175`, therefore content updates never reach the player and every content browser-leg is
+untrustworthy. I marked it **high** and ruled it ahead of the whole SNG-195 queue.
+
+**What is actually true — measured against the live site, which is what I should have done first:**
+```
+content JSON : cache-control: max-age=600 · etag present · last-modified present
+app.js       : cache-control: max-age=600 · etag present
+```
+**Ten minutes, with ETag revalidation, and the versioned file has the IDENTICAL policy.** Content
+reaches the player within ten minutes on its own. The `?v=` was never doing the work I attributed to
+it. **There is no defect and there is nothing to fix.**
+
+**How I got here, because the mechanism is the useful part:** I verified one true fact (no query
+string), inferred a consequence I never checked (therefore stale), and then read Erik's screenshot as
+confirmation — **it was an old screenshot, predating the fix.** Two unverified steps and a phantom,
+escalated to "do this first."
+
+**The shape, and it is one I named twice today for the system while running it myself:** *absence
+from my check rendered as absence from the system.* I looked in the layer I expected a thing to live
+in, did not find it, and reported that as a finding — the same error as the firing panel
+(`logOpOutcome` checked, `opsFiredIn` missed), `recallForGM` (grepped `app.js`, called from
+`gm_registry`), and the chronicle coercion (checked the push, missed the upstream guard).
+
+**Standing correction for the PO: a claim about live behaviour gets measured against live behaviour
+before it is ranked, and never on a single screenshot.**
 
 ---
 

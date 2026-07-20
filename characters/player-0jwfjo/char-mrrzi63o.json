@@ -74,156 +74,109 @@
         "player": null,
         "summary": "Brynjar arrives in the Marchward — a border town between war and false peace — and takes his first look at the square.",
         "narration": "The Marchward sits at the edge of two worlds and looks like neither. It is a working town — stone buildings with patched roofs, a main street packed to mud by boot and cart, cookfire smoke threading straight up in the still spring air. The snow is gone but the cold lingers in the shade, and the light has that early-season flatness where everything looks a little undecided.\n\nYou came through the gate road from the north two hours ago, and the town noticed you the way a border town notices everyone: a look, a pause, a resumed conversation. A scarred Redline warrior with a jawbone necklace ate his breakfast on a bench and watched you pass without expression. A woman in grey Stillhold cloth crossed without making eye contact. Freki walked at your heel and watched both, ears forward.\n\nYou are standing now at the edge of the Marchward's central square — more of a wide junction than a proper square, but there is a well here, and a public board with bills tacked to it, and a low building to your left marked WARDHOUSE in worn paint. Across the square a tavern, the hearthfire visible through an open shutter. To your right, the road continues east toward the Redline; behind you, the road runs west toward the Stillhold. A waygate anchor-stone stands at the square's far corner, old and plain and exactly where the treaty says it must be — nobody stands near it.\n\nFreki puts her nose to the mud and circles the well twice, then sits beside you and looks up at your face."
+      },
+      {
+        "player": "I’ll find a tree and rest against ",
+        "summary": "Brynjar settles against a birch at the square's edge to take the measure of the Marchward.",
+        "narration": "You find a birch at the square's edge, bark white and cold, and put your back to it. Freki circles once and settles against your left leg, the solid warmth of him a thing you've stopped noticing the way you stop noticing your own heartbeat. From here you can see the whole square without looking like you're watching it.\n\nThe Redline warrior finishes his breakfast and sets the bowl on the bench beside him. He doesn't move. His eyes track the square the same way yours do — not suspicious, just professional. You've met that look before, in men who've spent enough time in dangerous places that vigilance became habit and habit became muscle. His jawbone necklace is old, polished smooth from handling. Someone's, once.\n\nThe notice board has three bills tacked to it. At this distance you can make out the shapes but not the words. One is a long column of text, black ink, official-looking. Another is hand-lettered and recent — the ink still dark. The Wardhouse door behind the warrior is closed but not barred; there's a strip of lamplight showing under it even now, which means someone's already at work inside.\n\nFreki's ear — the notched one — rotates toward the tavern. Something in there: voices, the scratch of a bench on stone, the particular note of people already in an argument before the morning's properly started."
       }
     ],
     "lastTurn": {
-      "narration": "The Marchward sits at the edge of two worlds and looks like neither. It is a working town — stone buildings with patched roofs, a main street packed to mud by boot and cart, cookfire smoke threading straight up in the still spring air. The snow is gone but the cold lingers in the shade, and the light has that early-season flatness where everything looks a little undecided.\n\nYou came through the gate road from the north two hours ago, and the town noticed you the way a border town notices everyone: a look, a pause, a resumed conversation. A scarred Redline warrior with a jawbone necklace ate his breakfast on a bench and watched you pass without expression. A woman in grey Stillhold cloth crossed without making eye contact. Freki walked at your heel and watched both, ears forward.\n\nYou are standing now at the edge of the Marchward's central square — more of a wide junction than a proper square, but there is a well here, and a public board with bills tacked to it, and a low building to your left marked WARDHOUSE in worn paint. Across the square a tavern, the hearthfire visible through an open shutter. To your right, the road continues east toward the Redline; behind you, the road runs west toward the Stillhold. A waygate anchor-stone stands at the square's far corner, old and plain and exactly where the treaty says it must be — nobody stands near it.\n\nFreki puts her nose to the mud and circles the well twice, then sits beside you and looks up at your face.",
-      "sceneSummary": "Brynjar arrives in the Marchward — a border town between war and false peace — and takes his first look at the square.",
+      "narration": "You find a birch at the square's edge, bark white and cold, and put your back to it. Freki circles once and settles against your left leg, the solid warmth of him a thing you've stopped noticing the way you stop noticing your own heartbeat. From here you can see the whole square without looking like you're watching it.\n\nThe Redline warrior finishes his breakfast and sets the bowl on the bench beside him. He doesn't move. His eyes track the square the same way yours do — not suspicious, just professional. You've met that look before, in men who've spent enough time in dangerous places that vigilance became habit and habit became muscle. His jawbone necklace is old, polished smooth from handling. Someone's, once.\n\nThe notice board has three bills tacked to it. At this distance you can make out the shapes but not the words. One is a long column of text, black ink, official-looking. Another is hand-lettered and recent — the ink still dark. The Wardhouse door behind the warrior is closed but not barred; there's a strip of lamplight showing under it even now, which means someone's already at work inside.\n\nFreki's ear — the notched one — rotates toward the tavern. Something in there: voices, the scratch of a bench on stone, the particular note of people already in an argument before the morning's properly started.",
+      "sceneSummary": "Brynjar settles against a birch at the square's edge to take the measure of the Marchward.",
       "choices": [
         {
-          "label": "Go to the Wardhouse and ask who runs things here — and whether there is work for someone who knows how to read a fight before it starts.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "travel",
-            "negotiate"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Cross to the tavern — a warm hearth and a drink, and listen to whatever the room is saying this morning.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "travel"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Read the public board — bills, warrants, notices; see what the Marchward is worried about right now.",
+          "label": "Cross to the notice board and read the bills",
           "attribute": "mental",
           "subAttribute": "reason",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "scout"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Approach the scarred Redline warrior who was watching — a direct nod and a word. You understand a man who sizes up strangers.",
+          "label": "Approach the Redline warrior on the bench — direct, without pretense",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {
-            "violence_peace": -0.2
-          },
           "difficulty": 15,
           "intentTags": [
             "negotiate"
           ],
-          "abilityId": null,
-          "energyCost": null,
+          "trivial": false
+        },
+        {
+          "label": "Follow Freki's lead and head into the tavern to see what the argument is about",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "scout"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Go to the Wardhouse and introduce yourself to whoever is working inside",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 15,
+          "intentTags": [
+            "negotiate"
+          ],
           "trivial": false
         }
       ],
-      "deeds": [],
       "characterDeltas": {
         "health": 0,
         "energy": 0
       },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "The Marchward's central square — a wide mud-packed junction, early morning, pale spring light, cookfire smoke rising straight in still air. Overcast but dry.",
+        "setting": "The Marchward's central square — wide mud-packed junction, early morning pale spring light, cookfire smoke rising straight in still air. Brynjar is leaning against a birch at the square's edge, Freki settled at his left leg.",
         "npcsPresent": [
           {
             "name": "Scarred Redline warrior",
-            "state": "Still on the bench near the Wardhouse entrance, eating, watching the square with a steady professional calm."
-          },
-          {
-            "name": "Stillhold woman in grey",
-            "state": "Has moved on down the western road, nearly out of sight."
+            "state": "Finished eating, sitting still on the bench near the Wardhouse, bowl set aside, watching the square."
           }
         ],
         "objects": [
           "Stone well at the square's center",
-          "Public notice board with several bills tacked to it",
-          "Wardhouse — low stone building, worn painted sign",
-          "Tavern across the square — hearthfire visible through open shutter",
-          "Waygate anchor-stone at the square's far corner, alone and unmarked by any person"
+          "Public notice board — three bills tacked: one long official column, one recent hand-lettered bill, one other",
+          "Wardhouse — low stone building, lamplight under the door",
+          "Tavern across the square — voices and argument audible within",
+          "Waygate anchor-stone at the far corner, unmarked and alone"
         ],
         "threads": [
-          "Who the Marchward's authority is and whether they'll hire or help a stranger",
-          "What the public board says about current tensions",
-          "The Redline warrior watching Brynjar from the bench"
+          "The Redline warrior watching the square with professional calm — what does he want here?",
+          "The notice board's three bills, unread",
+          "An argument already underway in the tavern",
+          "Someone working inside the Wardhouse before full morning"
         ]
       },
-      "npcUpdates": [],
-      "factUpdates": [],
-      "placeUpdates": [
-        {
-          "note": "Brynjar arrived in the Marchward on World-day 20, early morning. First impressions: Redline warrior on bench near Wardhouse, Stillhold woman in grey, waygate anchor-stone visible but avoided by locals.",
-          "subPlace": {
-            "name": "Central Square",
-            "parent": "The Marchward",
-            "note": "Wide mud-packed junction with a well, public notice board, access to the Wardhouse, tavern, and the waygate anchor-stone.",
-            "visited": true
-          }
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "the-marchward",
-          "label": "The Marchward",
-          "kind": "place",
-          "entityId": "the_marchward",
-          "fact": "A border town between the Redline and the Stillhold — Redliners and Stillholders use the same square without warmth. A waygate anchor-stone sits at the corner under truce-law; no one stands near it. The Wardhouse is the visible seat of local authority.",
-          "links": [
-            "the_redline",
-            "the_stillhold",
-            "riven_marches"
-          ]
-        }
-      ],
       "timeOps": {
-        "hoursPassed": 0,
-        "why": "Scene opening — no time passes beyond the arrival"
-      },
-      "scene_ended": false
+        "hoursPassed": 0.25,
+        "why": "A brief rest against a tree — a few minutes to settle and observe"
+      }
     },
     "sceneState": {
-      "setting": "The Marchward's central square — a wide mud-packed junction, early morning, pale spring light, cookfire smoke rising straight in still air. Overcast but dry.",
+      "setting": "The Marchward's central square — wide mud-packed junction, early morning pale spring light, cookfire smoke rising straight in still air. Brynjar is leaning against a birch at the square's edge, Freki settled at his left leg.",
       "npcsPresent": [
         {
           "name": "Scarred Redline warrior",
-          "state": "Still on the bench near the Wardhouse entrance, eating, watching the square with a steady professional calm."
-        },
-        {
-          "name": "Stillhold woman in grey",
-          "state": "Has moved on down the western road, nearly out of sight."
+          "state": "Finished eating, sitting still on the bench near the Wardhouse, bowl set aside, watching the square."
         }
       ],
       "objects": [
         "Stone well at the square's center",
-        "Public notice board with several bills tacked to it",
-        "Wardhouse — low stone building, worn painted sign",
-        "Tavern across the square — hearthfire visible through open shutter",
-        "Waygate anchor-stone at the square's far corner, alone and unmarked by any perso"
+        "Public notice board — three bills tacked: one long official column, one recent h",
+        "Wardhouse — low stone building, lamplight under the door",
+        "Tavern across the square — voices and argument audible within",
+        "Waygate anchor-stone at the far corner, unmarked and alone"
       ],
       "threads": [
-        "Who the Marchward's authority is and whether they'll hire or help a stranger",
-        "What the public board says about current tensions",
-        "The Redline warrior watching Brynjar from the bench"
+        "The Redline warrior watching the square with professional calm — what does he want here?",
+        "The notice board's three bills, unread",
+        "An argument already underway in the tavern",
+        "Someone working inside the Wardhouse before full morning"
       ]
     }
   },
@@ -359,7 +312,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-20T02:26:53.157Z",
+    "lastSharedReadAt": "2026-07-20T02:28:15.360Z",
     "lastTickWorldDay": 20,
     "lastCanonWorldDay": 20
   },
@@ -521,8 +474,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784514447081,
-  "rev": 12,
+  "updatedAt": 1784514700624,
+  "rev": 15,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -532,7 +485,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 2
+    "riven_marches": 3
   },
   "practice": {
     "schemaVersion": 1,
@@ -566,10 +519,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-07-20T02:27:27.074Z",
-      "lastAt": "2026-07-20T02:27:27.074Z",
+      "lastAt": "2026-07-20T02:31:40.618Z",
       "startDay": 20,
       "endDay": 20,
-      "beats": 1
+      "beats": 2
     }
   ],
   "_pendingArrival": null

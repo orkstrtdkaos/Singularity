@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "quests": [
+    {
+      "schemaVersion": 1,
+      "id": "the_second_thread",
+      "name": "The Second Thread",
+      "region": "the_crossing",
+      "tier": "legendary",
+      "arcId": "silas_the_second_thread",
+      "boundToCharacter": "Silas Weir",
+      "boundToPlayer": null,
+      "giver": "Edvar Crane",
+      "legend": null,
+      "kind": "epic_arc",
+      "axis": "space_time",
+      "traditions": [
+        "wright",
+        "ashwarden",
+        "numinous",
+        "horizon"
+      ],
+      "premise": "His father left two threads. The first was in a drawer: the Waymarker, and Ama held it until he came asking.\\n\\nThe second could not be left in a drawer, because a drawer holds NOTES and what his father left was WORK — begun, unfinished, and standing somewhere still. He left it with a craftsman named Edvar Crane, at the Crossing, where all roads meet. Fifteen years ago.\\n\\nThe Waymarkers were not surveyors. They were the last people who knew how a waygate is made — and they had never made one. The Numinous built every gate in the world before the Transition, by touching meaning directly, and then dissolved most of the way out of the world that could have taught anyone else. What the Waymarkers held was the leavings: a practice reconstructed backwards from finished gates by people who could not do what the builders did.\\n\\nSilas's father was trying to finish one. **There is a half-made waygate.** A fold begun and never closed, standing since before the post fell — neither open nor shut, and a fold that is neither is not stable, it is WAITING. It is near the Crossing. Everything crosses at the Crossing.",
+      "stakes": "A half-made fold does not stay half-made forever. It resolves, one way or the other, and nobody alive knows which way or when.\\n\\nAnd it cannot be finished by a Numinous, because finishing is not what it needs — it was begun by reaching and it has stopped where reaching ends. **It needs a maker's hand to close it and a warden's contact to let it go, and those are the same man exactly once in a generation.** Silas is a wright who tends endings. That is not a coincidence in his lineage. It is what the lineage was FOR.",
+      "recurrence": "once",
+      "stages": [
+        {
+          "id": "s1",
+          "title": "Find Edvar Crane, or find what is left of him",
+          "objective": "Fifteen years is a long time. Learn what happened to the man who held the second thread.",
+          "condition": "The Crossing is the great centre-market where every road ends. Crane was a craftsman. Craftsmen leave trails: guild rolls, debts, a bench someone else inherited, a mark on a piece of work. Follow those, not a name.",
+          "change": "Codex: Edvar Crane, established as real — his trade, his standing, and whether he is above ground.",
+          "unlockHint": "The Crossing opens as a place with a memory, not a hub you pass through."
+        },
+        {
+          "id": "s2",
+          "title": "The thing that could not go in a drawer",
+          "objective": "Take custody of the second thread and understand what kind of object it is.",
+          "condition": "It is not a document. It is a WORK — partly made, with the maker's intent still legible in it the way a half-cut joint tells you what it was going to be. Silas can read it as a wright, which is precisely why his father left it to a craftsman to hold rather than a scholar.",
+          "change": "A real item enters inventory, unfinished, with its own evolution track. It is not a key and does not open anything yet.",
+          "unlockHint": "The item can be worked on. Working on it teaches things nothing else teaches."
+        },
+        {
+          "id": "s3",
+          "title": "The post that fell",
+          "objective": "Find out what actually happened where your father worked — and why the work stopped.",
+          "condition": "The post fell. That is the phrase everyone uses and nobody unpacks. Whether it fell to a failure, an attack, an Accord, or the fold itself is the question, and the answer determines whether Silas is finishing his father's work or correcting it.",
+          "change": "Codex: what the post was, what it was doing, and what stopped it. A named cause where there was a euphemism.",
+          "unlockHint": "Standing with the Waymarkers' survivors, if any — or the knowledge that he is the last of them."
+        },
+        {
+          "id": "s4",
+          "title": "Stand in front of it",
+          "objective": "Reach the half-made fold and read it. Do nothing else.",
+          "condition": "Deathsense will tell him something is ending here, slowly, and has been for fifteen years. Order-sense will tell him the design is sound and incomplete. **The Double Register is the only way to perceive both at once, and he discovered that braid himself, in play, before he knew it was needed.** No craft yet — just standing there and understanding what he is looking at.",
+          "change": "The fold becomes a known location with a state that advances on the world count whether or not he returns.",
+          "unlockHint": "A visible timer on the world's own clock. It is resolving. He now knows roughly how long."
+        },
+        {
+          "id": "s5",
+          "title": "Learn what nobody can teach",
+          "objective": "Find the practice. Reconstruct, borrow, or invent what the Waymarkers could not finish.",
+          "condition": "Three doors and all three should be walkable: **the Numinous**, who built the gates and mostly cannot explain it because they did it by reaching; **the Lattice-Cities**, who maintain gates and understand the measurement without ever having made one; and **the work itself**, which is the door his father chose and the reason the second thread exists. Whichever he uses shapes what the finished fold IS.",
+          "change": "A new practice enters the character — braided, not taught. Something no existing tradition owns.",
+          "unlockHint": "A combination or ability minted from this arc, attributable to Silas, that did not exist in the world before."
+        },
+        {
+          "id": "s6",
+          "title": "Finish it or end it",
+          "objective": "Resolve the fold. Both are real completions; neither is a failure.",
+          "condition": "To FINISH: close the fold as a maker closes a joint, and there is a new way through the world where there was none — the first waygate made since the Transition, made by a man who is not Numinous, by a route the builders did not use. To END it: let it go, cleanly, as an Ashwarden lets things go — and the danger stops, the work stops, and his father's unfinished thing is finished by being concluded.\\n\\n**He can do both because he is both.** That is the whole arc.",
+          "change": "The world map changes, or a standing danger to the Crossing is removed. Either way it is permanent and public.",
+          "unlockHint": "An outcome the whole world can see. Other characters' saves will meet it as canon."
+        }
+      ],
+      "routes": [
+        {
+          "id": "finished",
+          "note": "The fold is closed as a made thing. A new gate stands. It is his and it is the first in an age."
+        },
+        {
+          "id": "ended",
+          "note": "The fold is released. The danger is gone, the work is concluded, and nothing new stands where it was."
+        },
+        {
+          "id": "given",
+          "note": "He finishes it and gives it to someone else — the Numinous, the Cities, the Crossing itself. The making was his; the keeping is not."
+        }
+      ],
+      "outcomes": [
+        {
+          "id": "finished",
+          "when": "finished",
+          "text": "The first waygate made since the Transition, and it was not made by reaching. It was made by a wright who tends endings, out of a half-work his father could not leave in a drawer, with a practice braided from three peoples who each held a piece and none of whom could have done it. The Numinous touched meaning to build theirs. Silas MADE his. That is a different thing and the world now contains proof."
+        },
+        {
+          "id": "ended",
+          "when": "ended",
+          "text": "He let it go. Fifteen years of a fold waiting to resolve, resolved on purpose and on his terms, and the Crossing will never know what it was standing next to. His father's work is finished — concluded rather than completed, which an Ashwarden knows is not the lesser of the two. He is the only person alive who could have done it and one of very few who would have chosen to."
+        },
+        {
+          "id": "given",
+          "when": "given",
+          "text": "He made it and handed it over. A gate that bears no name and gets used every day by people who will never ask who cut it. The Waymarkers' whole purpose, discharged by the last of them, and then set down."
+        }
+      ],
+      "notes_for_gm": "EPIC ARC — Erik-directed. Runs long, across regions, and every stage must LAND SOMETHING (his explicit note: he burned the last arc too easily and saw no result). s1 opens a place, s2 gives a real item with an evolution track, s3 replaces a euphemism with a cause, s4 puts a visible timer on the world clock, s5 mints a practice that did not exist, s6 changes the map. **No stage is only a conversation and no stage is only a fight.**\\n\\n⛔ The fold is NOT a monster and NOT a dungeon. The danger is that it is unresolved, and unresolved things resolve.\\n\\nThe three doors at s5 must all genuinely work. If the Numinous route is the 'right' one the arc collapses into a fetch. His father chose the third door — the work itself — and that is a statement about the man, not a hint.\\n\\n**Pell, Veth and Cassiel each have a place here**: a smith for the making, an Ashwarden for the letting-go, a keeper for what is named. Huginn attends the ending if there is one. And whatever grew in the hollow should be present at s6 — it is the proof that Silas can make a thing that carries an ending forward, and that is the exact skill this fold has been waiting fifteen years for someone to have."
+    }
+  ]
+}

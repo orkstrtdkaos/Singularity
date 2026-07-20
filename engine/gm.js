@@ -213,7 +213,7 @@ ${npcSeedDetail}`);
   // WORLD tier beside the local lore because it IS world knowledge — it is simply selected by the
   // question rather than by where the character happens to be standing. Absent on turns that ask
   // nothing, so it costs nothing when it has nothing to say.
-  if (recalledDetail) world.push(`## RECALLED — places the character KNOWS that this turn mentioned (answer from these; if a place they named is NOT here, say plainly it has not been placed yet rather than inventing one)
+  if (recalledDetail) world.push(`## RECALLED — places this turn mentioned (answer from these). Ones listed with detail are places the character KNOWS. Any under "REAL PLACES THIS CHARACTER HAS NOT BEEN TO" genuinely EXIST — confirm they are real and that the way is not yet known; offer to seek the route. If a place the player named appears NOWHERE below, you are simply UNAWARE of it — say so honestly ("I don't know that name") and never claim it does not exist or invent a location for it (RUNNING_FIXES A5: absence from your context is not absence from the world).
 ${recalledDetail}`);
   // SNG-179: THE VOCABULARY. Four ops ask the model for a `traditionId` — markTeacher, standingOps,
   // offerAcquisition, the acquisition reply — and until now the prompt never once listed the valid

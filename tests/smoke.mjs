@@ -5157,12 +5157,17 @@ await (async () => {
   check("176: a turn that names no place returns NOTHING", pl.recallForGM(c, "I draw my sword and step forward", { locations }) === "");
   check("176: a too-short input is ignored", pl.recallPlaces(c, "go", { locations }).length === 0);
 
-  // A location the character has never heard of stays unfindable — recall is memory, not omniscience.
+  // RUNNING_FIXES A5 refines SNG-176: recall is not omniscience about a place's DETAILS — but a place
+  // the player NAMES that EXISTS surfaces as real-but-route-unknown (existence, not knowledge), so the
+  // GM confirms it exists rather than denying authored content. A name NOT in the atlas stays unfindable.
   const stranger = { placeMemory: {} };
-  check("176: an unknown place is NOT recalled (recall is memory, not omniscience)",
-    pl.recallPlaces(stranger, "tell me about Millbrook", { locations, isKnown: () => false }).length === 0);
-  check("176: a KNOWN location is recalled by name", 
-    pl.recallPlaces(stranger, "tell me about Millbrook", { locations, isKnown: () => true }).length === 1);
+  const far = pl.recallPlaces(stranger, "tell me about Millbrook", { locations, isKnown: () => false });
+  check("176/A5: a real but unknown NAMED place surfaces as existence-only (route unknown, no detail)",
+    far.length === 1 && far[0].known === false && !far[0].detail);
+  check("176: a place NOT in the atlas is never recalled (recall is not omniscience about non-existence)",
+    pl.recallPlaces(stranger, "tell me about Xanadu-that-is-not", { locations, isKnown: () => false }).length === 0);
+  check("176: a KNOWN location is recalled by name, WITH its detail",
+    (() => { const h = pl.recallPlaces(stranger, "tell me about Millbrook", { locations, isKnown: () => true }); return h.length === 1 && h[0].known === true; })());
 
   // The codex was already global; the fix was that its scorer never saw the question.
   const cx = await import("../engine/codex.js");
@@ -5932,6 +5937,27 @@ await (async () => {
   // SNG-190 §5b: the time clamp no longer silently truncates a multi-day journey, and reports when it must.
   check("190 §5b: the per-turn time ceiling is raised to a week and a truncation is recorded, not silent",
     /const HOURS_CAP = 168/.test(appSrc190) && /character\._timeClampNote = \{ asked/.test(appSrc190));
+
+  // RUNNING_FIXES A5: the GM denied a REAL place (The Blocklands) because recall was gated to VISITED
+  // places — absence from context rendered as absence from the world. A place the player NAMES now
+  // resolves against the full atlas, marked route-unknown, so the GM confirms it exists.
+  const { recallForGM, recallPlaces } = await import("../engine/places.js");
+  const atlas = {
+    cairnhold: { id: "cairnhold", name: "Cairnhold", regionId: "the_palelands" },
+    the_blocklands: { id: "the_blocklands", name: "The Blocklands", regionId: "manifest_domain" }
+  };
+  const silas = { placeMemory: { cairnhold: { visits: 3, notes: [], flags: {} } } }; // been to Cairnhold, NOT the Blocklands
+  const isKnown = (id) => id === "cairnhold";
+  const out = recallForGM(silas, "Travel to the Blocklands", { locations: atlas, isKnown });
+  check("A5: a real but unvisited place the player NAMED is surfaced, not empty", out.includes("The Blocklands"));
+  check("A5: it is marked REAL / route-unknown so the GM cannot deny it exists", /REAL PLACES THIS CHARACTER HAS NOT BEEN TO/.test(out));
+  check("A5: a name NOT in the atlas is never fabricated into recall (GM says 'I don't know that name')",
+    recallForGM(silas, "Travel to Xanadu-that-is-not", { locations: atlas, isKnown }) === "");
+  const hits = recallPlaces(silas, "back to Cairnhold and on to the Blocklands", { locations: atlas, isKnown });
+  check("A5: a known place ranks before a real-but-unknown one (memory is not crowded out)",
+    hits[0]?.name === "Cairnhold" && hits[0]?.known === true && hits.some(h => h.name === "The Blocklands" && h.known === false));
+  check("A5: the GM prompt no longer tells it to deny an unrecalled place ('has not been placed yet' is gone)",
+    !/has not been placed yet/.test(readFileSync(new URL('../engine/gm.js', import.meta.url), 'utf8')));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

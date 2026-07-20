@@ -132,17 +132,18 @@ export function placeMemoryForGM(character, locationId) {
  *  small. Deterministic name matching, no model call — `namematch` already resolves entities the
  *  same way everywhere, and a Haiku round-trip would add latency to buy worse recall.
  *
- *  Searches locations (known ones only — you cannot remember somewhere you have never heard of),
- *  their sub-places, and the character's place memory. Returns [] when the turn asks nothing.
+ *  Searches locations, their sub-places, and the character's place memory. Known places return with
+ *  their remembered detail; a place the player NAMES that is REAL but unvisited returns marked
+ *  route-unknown (RUNNING_FIXES A5), so the GM confirms it exists rather than denying authored content.
+ *  Returns [] when the turn names nothing.
  */
 export function recallPlaces(character, text, { locations = {}, limit = 3, isKnown = null } = {}) {
   const words = String(text || "").trim();
   if (words.length < 3) return [];
   const known = typeof isKnown === "function" ? isKnown : (() => true);
-  const hits = [];
+  const knownHits = [], subHits = [], farHits = [];
   const seen = new Set();
 
-  const push = (rec) => { if (rec && !seen.has(rec.key)) { seen.add(rec.key); hits.push(rec); } };
   // A phrase matches a record when the record's NAME appears in what the player said. Matching the
   // other way round would let a two-word place name swallow the sentence.
   const mentions = (name) => {
@@ -152,37 +153,53 @@ export function recallPlaces(character, text, { locations = {}, limit = 3, isKno
   };
 
   for (const [locId, loc] of Object.entries(locations)) {
-    if (!loc?.name) continue;
+    if (!loc?.name || seen.has(locId) || !mentions(loc.name)) continue;
+    seen.add(locId);
     const mem = character?.placeMemory?.[locId];
-    // "known" = the character has been there or heard of it. Unknown places stay unfindable.
-    if (!mem && !known(locId)) continue;
-    if (mentions(loc.name)) push({
-      key: locId, kind: "location", name: loc.name, locationId: locId,
-      detail: placeMemoryForGM(character, locId) || (mem ? null : "heard of, never visited")
-    });
+    if (mem || known(locId)) {
+      knownHits.push({ key: locId, kind: "location", name: loc.name, locationId: locId, known: true,
+        detail: placeMemoryForGM(character, locId) || (mem ? null : "heard of, never visited") });
+    } else {
+      // RUNNING_FIXES A5: the player NAMED a place that EXISTS in the atlas but this character has not
+      // been to. Whether they KNOW of it is a different question from whether it is REAL — and the two
+      // were collapsed, so the GM answered "not in the world" for authored, manifested, connected
+      // locations (The Blocklands). Surface it as real-but-route-unknown so the GM confirms it exists
+      // and says the way is not yet known — never denies authored content the player already paid for.
+      farHits.push({ key: locId, kind: "location", name: loc.name, locationId: locId, known: false, detail: null });
+    }
   }
 
   for (const [locId, p] of Object.entries(character?.placeMemory || {})) {
     for (const sp of Object.values(p?.subPlaces || {})) {
       if (!sp?.name || !mentions(sp.name)) continue;
+      const key = `${sp.parentId || locId}/${subPlaceSlug(sp.name)}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
       const parentId = sp.parentId || locId;
       const parent = locations[parentId];
-      push({
-        key: `${parentId}/${subPlaceSlug(sp.name)}`, kind: "sub-place", name: sp.name,
-        locationId: parentId,
-        detail: `within ${parent?.name || parentId}${sp.visited ? "" : " (heard of only)"}${sp.note ? ` — ${sp.note}` : ""}`
-      });
+      subHits.push({ key, kind: "sub-place", name: sp.name, locationId: parentId, known: true,
+        detail: `within ${parent?.name || parentId}${sp.visited ? "" : " (heard of only)"}${sp.note ? ` — ${sp.note}` : ""}` });
     }
   }
-  return hits.slice(0, limit);
+  // Known places (richer detail) and named sub-places first, then the real-but-unknown named places —
+  // so a far place the player mentioned never crowds out somewhere they actually remember.
+  return [...knownHits, ...subHits, ...farHits].slice(0, limit);
 }
 
 /** Render recalled places for the GM prompt. Empty string when the turn named nothing — a block
- *  that costs nothing on the turns that ask nothing is what makes §3's budget work. */
+ *  that costs nothing on the turns that ask nothing is what makes §3's budget work. Places the
+ *  character KNOWS render with their detail; places the player NAMED that are REAL but unvisited
+ *  (RUNNING_FIXES A5) render under an explicit instruction so the GM confirms they exist and says the
+ *  way is unknown — absence from the character's memory is never rendered as absence from the world. */
 export function recallForGM(character, text, opts = {}) {
   const hits = recallPlaces(character, text, opts);
   if (!hits.length) return "";
-  return hits.map(h =>
-    `- ${h.name} (${h.kind}${h.locationId && h.kind === "sub-place" ? "" : ""}): ${h.detail || "known of, nothing recorded yet"}`
-  ).join("\n");
+  const lines = [];
+  for (const h of hits.filter(h => h.known !== false)) lines.push(`- ${h.name} (${h.kind}): ${h.detail || "known of, nothing recorded yet"}`);
+  const far = hits.filter(h => h.known === false);
+  if (far.length) {
+    lines.push(`NAMED BY THE PLAYER — REAL PLACES THIS CHARACTER HAS NOT BEEN TO. These EXIST in the world; the character does not know the way. Confirm each is real and that the route is not yet known (offer to seek it) — NEVER say it does not exist or is "not a named location":`);
+    for (const h of far) lines.push(`- ${h.name}`);
+  }
+  return lines.join("\n");
 }

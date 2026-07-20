@@ -1657,7 +1657,173 @@
     "The party sits with Ama at the kitchen table in Cairnhold — the sealed letter open, the Waymarker seated, the father's work named and understood. Silas promises to return with news from the hollow. Ama folds the letter and gives it back to him for the road."
   ],
   "currentLocationId": "the_crossing",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "the_crossing",
+    "turns": [
+      {
+        "player": "You said there were two things he left for me... this is one.  What was the other?",
+        "summary": "Ama names the second bequest: not an object, but a person — Edvar Crane, a craftsman who knew Silas's father and holds the second thread of his unfinished work. Last known location: the Crossing.",
+        "narration": "Ama sets the letter down. She does not set it down the way you set down a thing you are finished with. She sets it down the way you set down a thing that has been waiting a long time to be set somewhere.\n\nShe looks at the letter for a moment. Then she looks at you.\n\n'The other one is not here,' she says. Her voice is plain about it — not apologetic, not evasive. The way she names a thing she has simply been holding until you were old enough to carry it. 'He left a name. A place. Said when you came asking about the Waymarker, you were ready to hear the other half.' She smooths the edge of the letter with one thumb. 'There is a person. Someone who knew your father in the years before the post fell. A craftsman — or was, then. Your father said this person holds the second thread. The part of the work he could not leave in a drawer.'\n\nShe is quiet for a breath. Huginn shifts on the back of your chair, the sound of feathers settling.\n\n'The name your father left,' Ama says, 'is Edvar Crane. He said to look in the Crossing — the great center-market, where all roads meet. That was fifteen years ago.' She meets your eyes steadily. 'Whether he is still there, I cannot tell you.'"
+      }
+    ],
+    "lastTurn": {
+      "narration": "Ama sets the letter down. She does not set it down the way you set down a thing you are finished with. She sets it down the way you set down a thing that has been waiting a long time to be set somewhere.\n\nShe looks at the letter for a moment. Then she looks at you.\n\n'The other one is not here,' she says. Her voice is plain about it — not apologetic, not evasive. The way she names a thing she has simply been holding until you were old enough to carry it. 'He left a name. A place. Said when you came asking about the Waymarker, you were ready to hear the other half.' She smooths the edge of the letter with one thumb. 'There is a person. Someone who knew your father in the years before the post fell. A craftsman — or was, then. Your father said this person holds the second thread. The part of the work he could not leave in a drawer.'\n\nShe is quiet for a breath. Huginn shifts on the back of your chair, the sound of feathers settling.\n\n'The name your father left,' Ama says, 'is Edvar Crane. He said to look in the Crossing — the great center-market, where all roads meet. That was fifteen years ago.' She meets your eyes steadily. 'Whether he is still there, I cannot tell you.'",
+      "sceneSummary": "Ama names the second bequest: not an object, but a person — Edvar Crane, a craftsman who knew Silas's father and holds the second thread of his unfinished work. Last known location: the Crossing.",
+      "choices": [
+        {
+          "label": "Ask Ama what she knows about Edvar Crane — what he was to your father, what the second thread might be.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Open Memory's Order-Sense thread quietly — read the design the letter and Waymarker together form. Does Edvar Crane appear in it?",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false
+        },
+        {
+          "label": "Tell Ama what you intend — that the road leads to the Crossing next. Let her hear it from you before you go.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "plan"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Step outside with Pell and Veth — name what you've just learned, decide together whether the Crossing comes before or after the Zone.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "plan"
+          ],
+          "trivial": true
+        }
+      ],
+      "scene": {
+        "setting": "The kitchen of Ama's house on Cairnhold's center lane, night. The table lamp burns low. The letter sits between Silas and his mother; the Waymarker rests on the table beside it.",
+        "npcsPresent": [
+          {
+            "name": "Ama (Silas's mother)",
+            "state": "Seated across the table, one hand resting near the letter, watching Silas steadily."
+          },
+          {
+            "name": "Pell Ran Marsh",
+            "state": "Seated to one side, quiet — the name landing on her the way new structural information always does."
+          },
+          {
+            "name": "Veth (Stillwater) Ondra",
+            "state": "Still, back straight, taking in what was just named without moving to fill the silence."
+          },
+          {
+            "name": "Huginn",
+            "state": "Perched on the back of Silas's chair, feathers settling after the shift."
+          }
+        ],
+        "objects": [
+          "Father's Sealed Letter — open on the table",
+          "Waymarker — resting beside the letter, seated to Stillwater's Trouble",
+          "Table lamp, burning low",
+          "Kitchen warmth, the last of the evening fire"
+        ],
+        "threads": [
+          "Edvar Crane — the name left by Silas's father; the second thread; last known at the Crossing, fifteen years ago",
+          "The second layer of the Waymarker, still open and waiting"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "silasmother",
+          "name": "Ama",
+          "note": "Named the second bequest: Edvar Crane, a craftsman who knew Silas's father, holds the second thread of the work. Last known location is the Crossing. Told it plainly, as she tells everything.",
+          "learned": [
+            "The second bequest is a name and a place — Edvar Crane, last known at the Crossing, holds the unfinished second thread of the father's work.",
+            "Her husband told her: when Silas came asking about the Waymarker, he would be ready to hear the other half."
+          ],
+          "statusNote": "Seated at the kitchen table in Cairnhold — the second bequest named, the full weight of the keeping now passed to Silas."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "edvar-crane",
+          "label": "Edvar Crane",
+          "kind": "person",
+          "fact": "A craftsman who knew Silas's father before the warden post fell. Silas's father named him the keeper of the second thread — the part of the work that could not be left in a drawer. Last known location: the Crossing. That was fifteen years ago.",
+          "links": [
+            "the-edge-district-ledger",
+            "stillwaters-trouble",
+            "waymarker-fathers"
+          ]
+        },
+        {
+          "topic": "waymarker-fathers",
+          "label": "Father's Waymarker — Second Thread",
+          "kind": "mystery",
+          "fact": "The Waymarker's second layer is open and waiting. The first thread seats the holder into a post. The second thread is held by Edvar Crane at the Crossing — a craftsman Silas's father trusted with the part of the work he could not leave behind.",
+          "links": [
+            "edvar-crane",
+            "stillwaters-trouble"
+          ]
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Silas's father left a second bequest: a name — Edvar Crane — and a location: the Crossing. Edvar holds the second thread of the Waymarker's unfinished work. Ama was told to pass the name only when Silas came asking about the Waymarker.",
+          "subjectId": "edvar-crane"
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A short exchange at the kitchen table — the second bequest named."
+      }
+    },
+    "sceneState": {
+      "setting": "The kitchen of Ama's house on Cairnhold's center lane, night. The table lamp burns low. The letter sits between Silas and his mother; the Waymarker rests on the table beside it.",
+      "npcsPresent": [
+        {
+          "name": "Ama (Silas's mother)",
+          "state": "Seated across the table, one hand resting near the letter, watching Silas steadily."
+        },
+        {
+          "name": "Pell Ran Marsh",
+          "state": "Seated to one side, quiet — the name landing on her the way new structural information always does."
+        },
+        {
+          "name": "Veth (Stillwater) Ondra",
+          "state": "Still, back straight, taking in what was just named without moving to fill the silence."
+        },
+        {
+          "name": "Huginn",
+          "state": "Perched on the back of Silas's chair, feathers settling after the shift."
+        }
+      ],
+      "objects": [
+        "Father's Sealed Letter — open on the table",
+        "Waymarker — resting beside the letter, seated to Stillwater's Trouble",
+        "Table lamp, burning low",
+        "Kitchen warmth, the last of the evening fire"
+      ],
+      "threads": [
+        "Edvar Crane — the name left by Silas's father; the second thread; last known at the Crossing, fifteen years ago",
+        "The second layer of the Waymarker, still open and waiting"
+      ]
+    }
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 12,
@@ -5099,21 +5265,21 @@
     }
   },
   "tendencies": {
-    "strategic": 12.699895669261466,
-    "cerebral": 18.93499949789417,
-    "social": 12.216118658897035,
-    "generous": 3.8480758461026645,
-    "cautious": 3.8638583022036874,
-    "physical": 0.20810074444666915,
-    "risky": 0.21823485678093266,
-    "ruthless": 0.06958179914720684,
-    "carousing": 0.757987461480042,
-    "amorous": 1.6489732645550428,
-    "patient": 0.4336952071434916,
-    "stealth": 0.026970083117158285,
-    "devotion": 0.5509741194088061,
-    "craft": 1.621539177776072,
-    "leadership": 0.13728071623602056
+    "strategic": 12.382398277529928,
+    "cerebral": 18.461624510446818,
+    "social": 11.910715692424608,
+    "generous": 3.751873949950098,
+    "cautious": 3.767261844648595,
+    "physical": 0.2028982258355024,
+    "risky": 0.21277898536140932,
+    "ruthless": 0.06784225416852667,
+    "carousing": 0.739037774943041,
+    "amorous": 1.6077489329411667,
+    "patient": 0.4228528269649043,
+    "stealth": 0.026295831039229327,
+    "devotion": 0.537199766423586,
+    "craft": 1.58100069833167,
+    "leadership": 0.13384869833012003
   },
   "aptitudes": [
     "strategist",
@@ -5121,7 +5287,7 @@
     "scholar",
     "sage"
   ],
-  "actionCount": 630,
+  "actionCount": 631,
   "grantsVersion": 1,
   "reconcileVersion": 12,
   "gallery": [
@@ -5471,8 +5637,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784573476904,
-  "rev": 963,
+  "updatedAt": 1784573963043,
+  "rev": 964,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -6847,12 +7013,6 @@
   "opLossPending": false,
   "establishedFacts": [
     {
-      "id": "pell",
-      "text": "Pell named the investigative frame for Quiet's ending: the three new things are the resurrection in the upper meadow, the spear-binding, and the soul-mark exchange. The theory is live and unresolved.",
-      "day": 5,
-      "subjectId": "pell"
-    },
-    {
       "id": "quiet-ending",
       "text": "Order-Sense inward read confirmed: Quiet's loosening has three structural causes — the resurrection in the upper meadow, the spear-binding with Huginn's thread and Pell's mark, and the soul-mark excha",
       "day": 5,
@@ -7085,6 +7245,12 @@
       "text": "Silas's father left the Waymarker's second layer open deliberately — it is a bond between holder and post, meant to seat the holder into Stillwater's Trouble so the accumulation there does not gather blind. He stopped the work when Silas was four and chose his son over the work. The letter names…",
       "day": 12,
       "subjectId": null
+    },
+    {
+      "id": "edvar-crane",
+      "text": "Silas's father left a second bequest: a name — Edvar Crane — and a location: the Crossing. Edvar holds the second thread of the Waymarker's unfinished work. Ama was told to pass the name only when Silas came asking about the Waymarker.",
+      "day": 12,
+      "subjectId": "edvar-crane"
     }
   ],
   "practice": {
@@ -7300,7 +7466,7 @@
   "regionsKnown": {
     "valley": 435,
     "the_palelands": 6,
-    "the_center": 18
+    "the_center": 19
   },
   "foreclosed": [
     "rootkin",
@@ -7380,10 +7546,10 @@
     {
       "id": "sess-6",
       "startedAt": "2026-07-20T15:47:02.528Z",
-      "lastAt": "2026-07-20T18:51:16.902Z",
+      "lastAt": "2026-07-20T18:59:23.039Z",
       "startDay": 20,
       "endDay": 20,
-      "beats": 8
+      "beats": 9
     }
   ],
   "company": [
@@ -7571,18 +7737,18 @@
     "the_crossing": "https://image.pollinations.ai/prompt/The%20Crossing%3A%20Every%20axis%20crosses%20here%20at%20nothing%2C%20and%20the%20result%20is%20not%20grey%20%E2%80%94%20it%20is%20CROWDED.%20The%20Crossing%20leans%20toward%20no%20pole%2C%20which%20is%20precisely%20why%20it%20can%20hold%20them%20all%3A%20an%20Umbral%20and%20a%20Blazeborn%20drink%20at%20the%20same%20table%20because%20neither%20has%20the%20standing%20to%20make%20the%20other%20leave.%20The%20poles%20are%20lonely%20places.%20The%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=24144&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 7,
-    "choices": 7,
+    "sceneSummary": 8,
+    "choices": 8,
     "characterDeltas": 4,
-    "scene": 7,
-    "npcUpdates": 7,
-    "factUpdates": 2,
+    "scene": 8,
+    "npcUpdates": 8,
+    "factUpdates": 3,
     "placeUpdates": 2,
-    "codexUpdates": 6,
-    "timeOps": 5,
+    "codexUpdates": 7,
+    "timeOps": 6,
     "imagePrompt": 1,
     "sceneEnded": 3,
     "itemUpdates": 1
   },
-  "_opTurns": 7
+  "_opTurns": 8
 }

@@ -848,6 +848,30 @@ REMAINING SNG-191: B (peoples' idioms on the count) + C (party-formation syncs C
 small; D §4 (world-tick inversion — advance delegated assignments, not vignettes) + E §7 (the
 generation turn — latent arcs foment and surface) are large, each its own focused build. -->
 
+---
+
+<!-- status: SNG-191 PHASE B COMPLETE_PENDING_REVIEW (CCode 2026-07-19). v1.8.168. Suite green.
+The count is spoken in the LOCAL people's idiom — one number underneath, many words on top (§2).
+worldCountLabel(count, worldClock, peopleId) resolves the idiom from world_clock.json canon; the
+gm_registry builder finds the people from the character's region (region → home tradition); the
+CURRENT TIME block frames it "the shared count, spoken as the people here count it." Cairnhold →
+tolls, Gearlands → revolutions, rootkin → risings; churnfolk (no steady word) and any absent people
+fall back to the formal "the Kept Count." Tested against the canon idiom table.
+
+⚠️ PHASE C RECLASSIFIED — NOT a quick phase. The shared scene (party.js) carries NO clock, so syncing
+members' CHARACTER clocks means propagating a time delta across players' saves on different devices —
+distributed infrastructure (each save is client-side; I cannot write another player's save
+synchronously), untestable without two players, and stamping the join ALONE would be inert data with
+no reader (the built-but-unconnected anti-pattern this batch's lenses exist to catch). So C sits in
+the D/E focused-build tier, not the quick one. My "B+C are quick" call was optimistic about C.
+
+WHERE SNG-191 STANDS: A+B shipped — the clock is now correct (world time is a count, no day-number to
+invent — C1/SNG-189 §2/SNG-190 §5 closed) and localized (each people's idiom). The three LARGE pieces
+remain, each its own focused build: C (distributed party clock-sync), D §4 (world-tick inversion — the
+substantive half), E §7 (the generation turn — the proactive world). Recommend D next for gameplay
+value. Erik to steer. -->
+
+
 
 
 

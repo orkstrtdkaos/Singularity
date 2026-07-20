@@ -871,6 +871,36 @@ remain, each its own focused build: C (distributed party clock-sync), D §4 (wor
 substantive half), E §7 (the generation turn — the proactive world). Recommend D next for gameplay
 value. Erik to steer. -->
 
+---
+
+<!-- status: SNG-191 PHASES D + E COMPLETE_PENDING_REVIEW (CCode 2026-07-19). v1.8.169 (D) · v1.8.170
+(E). Suite green by exit code. Erik: "Take D then E." Results:
+po/results/20260719_SNG-191_two_clocks_and_a_turning_world.md.
+
+D §4 THE WORLD TURNS — the tick stops imagining what a person FELT and advances what PROGRESSED on
+what they were DELEGATED. engine/assignments.js holds delegation as state; a delegateOps op captures
+it (contract + SALVAGEABLE_OPS + dispatch + rule 14). The tick advances each charge (progress/stall/
+problem/done — an OUTCOME); news is DERIVED from what moved and empty news is legitimate; personal
+colour → statusNote. §4.2 a charge against a crisis HOLDS it from worsening, two EASE it a stage back
+— an untended crisis worsens as before; delegation is how a crisis gets solved offscreen.
+UNGUARDRAILED (§4b). The GM sees the commitments (DELEGATED WORK block). 16 tests.
+
+E §7 THE GENERATION TURN — the proactive half generateRequest never built. engine/latentarcs.js:
+arcs FOMENT on the world count whether or not seen, and SURFACE at thresholds (discovery is a LATE
+event). Three fates — grows (unguardrailed), RESOLVES ITSELF (the world solves its own problem, §7.3),
+handled (model ready; trigger a follow-on). ATTRIBUTABLE — every arc carries a cause that existed
+before it surfaced (§7 inv2); new arcs seed from the disposition of the regions the player knows
+(regional). runGenerationTurn runs on return; surfaced arcs ride a STIRRING IN THE WORLD block. 10 tests.
+
+assignments.js + latentarcs.js earned their SYSTEM_SPEC rows + ENGINE_MAP columns + count 57→59.
+
+SNG-191 A/B/D/E SHIPPED. REMAINING follow-ons, each honestly scoped: C (party clock-sync — distributed,
+per-device saves, its own build), the handled-fate trigger (intervention capture), §7.4 seasonal
+pressure (a clean cyclical layer). The invented day-numbers are gone; the clock speaks the local tongue;
+the delegated work goes on; the world ferments its own trouble while you are away. Erik's browser-legs:
+the CURRENT TIME narration (no day-number), a return after time away (work moved, arcs stir). -->
+
+
 
 
 

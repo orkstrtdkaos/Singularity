@@ -1023,6 +1023,16 @@ REMAINING from the audit: G4 contract cleanup (relationshipDeltas not in contrac
 engine (with SNG-192); personality schema-cut. Erik's browser-leg: stand in a lull beside a trainer with a
 reachable step — they open it; never mid-encounter, never twice running. -->
 
+<!-- status: SNG-195 G4 COMPLETE_PENDING_REVIEW (CCode 2026-07-20). v1.8.176. Suite green by exit code.
+Contract cleanup. relationshipDeltas REMOVED from SALVAGEABLE_OPS — it is not in the contract (the model is
+told to move a bond via npcUpdates.relationshipDelta), so it is never emitted and cannot be salvaged; the
+one true salvage↔contract asymmetry the audit found, closed. Its inbound dispatch stays as pure legacy
+tolerance. The three undocumented aliases (unlockLivingCurrent/unlockWildCurrent — contract routes living/
+wild via unlockSubstrate by powerSystem; timeAdvanceHours — subsumed by timeOps) now explicitly commented
+legacy at the dispatch. No behaviour change; 4 tests. AUDIT G-fixes now all done (G2/G3/G4/G5); remaining is
+G1's split — reactsToReputation WIRED (G2), personality CUT (no-build), gains WIRE-to-engine which rides
+SNG-192. Moving to SNG-192 next (Erik-directed). -->
+
 
 
 

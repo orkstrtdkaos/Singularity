@@ -959,6 +959,33 @@ ignored offer's `from` into seedArc so an offered thread persists as a latent ar
 commitment — not built). Erik's browser-leg: arrive somewhere quiet and someone turned down scenes ago is
 at the door; never mid-duel. -->
 
+<!-- status: SNG-195 PROMPT REVIEW COMPLETE_PENDING_REVIEW (CCode 2026-07-20). AUDIT — no engine change, no
+version bump. Results: po/results/20260720_SNG-195_prompt_review.md. A6 (writerly audit) folded into column 4.
+
+METHOD: backbone from ENGINE_MAP + 56 gm_registry rows; three parallel evidence passes (block-by-block
+directive-mood classification of all 60 prompt blocks; op dispatch+firing observability; content-corpus
+orphan sweep). BOTH directions (§2a).
+
+HEADLINE: the pipeline fires — every op dispatches, and every op's FIRING is observed (the '31 uncounted'
+scare is STALE: opsFiredIn→_opEmitted drives the fired/never split, not logOpOutcome). The losses are all one
+shape (authored intent, no consumer). RANKED GAPS:
+- G1 ⭐ orphaned CONTENT — reactsToReputation (40 NPCs, only touch is a write-of-empty at generate.js:83),
+  personality (40, +warmth/trust/candor/patience), gains (779 rank-node strings). Real authored intent nothing
+  reads. WIRE (they're the offer's own material) or STOP AUTHORING. Aevi decides wire-vs-cut; CCode wires.
+- G2 permission→instruction: 2 of 7 permission blocks are genuine L2 gaps. WANTS (rule 10b) — SNG-194 already
+  built the engine half (the offer); simplify the block to material. TEACHERS (rule 16B) — the exact SNG-179
+  teacher-gate shape; clean next SNG-194-pattern target (roomForATeacherOffer). Other 5 correctly optional.
+- G3 (1-line bug): OUTCOME_INSTRUMENTED=Set(['markTeacher']) at app.js:954 renders the applied/rejected badge
+  for only 1 of the 5 ops that now write outcome (delegateOps/arcOps/adoptSchool/offer write data nobody sees).
+- G4 relationshipDeltas is salvageable+dispatched but NOT in the contract (model never told); 3 undocumented
+  aliases (unlockLivingCurrent/unlockWildCurrent/timeAdvanceHours).
+- G5 31 of 59 engines have no one-line purpose (§1c column-1 gap; author in engine_map.authored.json).
+- G6 A6 residue small; rule going forward: if a block must FIRE something, the engine computes it — SNG-194 is
+  the reference. schoolAffinity (3 abilities) is CI-validated (SNG-193b) but runtime-unconsumed — deliberate
+  per SNG-193 (not a gate); CCode owns that note.
+RECOMMENDED FOLLOW-ONS ranked in the doc. G1 (wire vs cut) is Aevi's call; G2/G3/G4/G5 are CCode-buildable.
+Nothing improvised past scope — this is the audit; the fixes are separate tickets. -->
+
 
 
 

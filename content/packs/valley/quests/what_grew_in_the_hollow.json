@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "quests": [
+    {
+      "schemaVersion": 1,
+      "id": "what_grew_in_the_hollow",
+      "name": "What Grew in the Hollow",
+      "region": "the_palelands",
+      "tier": "major",
+      "arcId": "silas_the_second_thread",
+      "boundToCharacter": "Silas Weir",
+      "boundToPlayer": null,
+      "giver": null,
+      "legend": null,
+      "kind": "personal_arc",
+      "axis": "death_life",
+      "traditions": [
+        "ashwarden",
+        "wright"
+      ],
+      "premise": "Memory was planted at the hollow's centre. Not stood, not leaned — PLANTED, in ground the old works never reached, where nothing competes with what you put down. A spear that is a living ending witness, carrying the accumulated weight of kept endings, set into earth that had nothing of its own.\\n\\nSomething took.\\n\\nIt is not hostile. That is the first thing and the hardest. It does not approach and it does not leave. It waits at the edge of the ward Silas wove, on the inside, where it has apparently always been permitted. Huginn does not react to it, which is its own answer — a raven who attends endings finds nothing here to attend.\\n\\nIt is his. Not summoned, not raised, not bargained for. MADE, the way a thing is made when a maker was not trying to make it.",
+      "stakes": "What Silas decides this is will be true afterwards. There is no authority to appeal to — the Ashwardens have no rite for a thing that never died, and the Wrights have no word for a work that continued without its maker. Whatever he names it, that is what it will have been.",
+      "recurrence": "once",
+      "stages": [
+        {
+          "id": "s1",
+          "title": "The ward holds something in",
+          "objective": "Notice that the boundary you wove is keeping something in as well as out — and that you permitted it.",
+          "condition": "Return to the hollow after time away. The ward is intact and reads WRONG: the shadow-seam sits closed from the inside. Deathsense returns nothing — there is no ending here to read, because nothing here has died.",
+          "change": "Codex: the hollow is no longer only ground. Something is inside the boundary and the boundary agrees with it.",
+          "unlockHint": "The hollow becomes a place with a state, not a location."
+        },
+        {
+          "id": "s2",
+          "title": "It knows the spear",
+          "objective": "Establish what it is by what it responds to — and accept the answer.",
+          "condition": "Every approach fails except one. It does not respond to name, to ward, to command, to Palework. It responds to MEMORY — moves when the spear moves, stills when it stills. Not obedience. Recognition. The spear is the nearer parent.",
+          "change": "Codex: it came from the spear and the ground and him. Three things, and he supplied two of them.",
+          "unlockHint": "Memory gains an entry it did not have: something has grown from what it carried."
+        },
+        {
+          "id": "s3",
+          "title": "Ask the dead, and get nothing",
+          "objective": "Confirm the category by the failure of every craft you have.",
+          "condition": "Ask the Dead returns silence — not refusal, ABSENCE. It has no death to answer from. It is not undead in the sense of returned. It is undead in the sense of NEVER HAVING DIED, and there is no word in Palework for that. Veth, asked, says plainly that she has not seen this and will not pretend to have.",
+          "change": "Codex: a category that the Ashwardens do not have. Silas is the first authority on it because there is no other.",
+          "unlockHint": "A new codex topic opens that only this character can write into."
+        },
+        {
+          "id": "s4",
+          "title": "The naming",
+          "objective": "Name it, or refuse to — and understand that both are permanent.",
+          "condition": "A name is not a label here. Silas is a wright: to name a made thing is to finish it. To refuse is to leave it unfinished, which is also a decision, and one he has made before with a spear. Pell should be present. So should Veth. Neither should be asked to decide.",
+          "change": "The thing has a name and a standing, or has neither on purpose. Either way it is now part of the household.",
+          "unlockHint": "It becomes a presence with its own record — not a companion, not an NPC, something the world has no slot for yet."
+        }
+      ],
+      "routes": [
+        {
+          "id": "claimed",
+          "note": "He names it and keeps it. A made offspring, acknowledged, with all the weight that carries."
+        },
+        {
+          "id": "unfinished",
+          "note": "He refuses the name and lets it remain unfinished — the same choice he made with the spear, made again knowingly."
+        },
+        {
+          "id": "released",
+          "note": "He gives it an ending. It would permit this. That is the hardest route and it is not a failure."
+        }
+      ],
+      "outcomes": [
+        {
+          "id": "claimed",
+          "when": "claimed",
+          "text": "Silas Weir made a thing that outlived its own making and then he said so out loud. Whatever it is, it is his, and the Palelands will have to find a word for it eventually. THE THING THIS TEACHES HIM — and it is the whole point of the work — is that a made thing can carry an ending forward and keep going. He will need to know that."
+        },
+        {
+          "id": "unfinished",
+          "when": "unfinished",
+          "text": "He left it open. A second unfinished work standing in his hollow, and a man who now has two. He knows exactly what he is doing and does it anyway, which is not the same as avoidance."
+        },
+        {
+          "id": "released",
+          "when": "released",
+          "text": "He ended it, well, the way an Ashwarden ends things. It let him. Something that never died, given a death by the man who made it — and he learned in the doing that he could have finished it instead, which is a heavier thing to carry than the ending was."
+        }
+      ],
+      "notes_for_gm": "⛔ NOT HOSTILE. Ever. There is no combat route and no reveal that it was dangerous all along — that would be a cheaper story and Erik has explicitly asked for the other one. Its strangeness is that it wants nothing.\\n\\nIt should be described precisely and never explained. No pronoun until Silas chooses one. It does not speak. It is not a child and the narration must not sentimentalise it into one — but Silas may, and the GM should let him without comment.\\n\\nEACH STAGE MUST LAND SOMETHING (Erik's direction): s1 gives the hollow a state, s2 gives Memory a new entry, s3 opens a codex topic no one else can write, s4 puts a presence in the household. No stage is only a conversation.\\n\\nThis arc is the REHEARSAL. It teaches that a made thing can carry an ending forward and persist — which is precisely the skill the second thread will demand."
+    }
+  ]
+}

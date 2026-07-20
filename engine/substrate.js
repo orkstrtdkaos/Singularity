@@ -80,6 +80,34 @@ export function bandForSchool(traditionId, school, substrateData) { // registry:
   return bandFor(traditionId, substrateData); // pure school, no school, or an extension we don't model
 }
 
+/** SNG-192 §6b: the density window where a WHOLE build works — the INTERSECTION of its traditions'
+ *  substrate bands. Coherent sources overlap into a shared window; Erik's warning case — a natural primary
+ *  plus one lattice craft — has NONE: wherever you stand, one half is starved, and the engine can say so
+ *  exactly at the moment of the pick. Untuned (folk/learned) traditions are substrate-neutral and never
+ *  constrain the window. Pure. `data` = the_substrate.json. Returns { window: [lo,hi]|null, per, empty }. */
+export function commonGroundFor(traditions, data) { // registry:internal
+  const bands = [...new Set((traditions || []).filter(Boolean))].map(t => ({ tradition: t, band: bandFor(t, data) })).filter(x => x.band);
+  if (!bands.length) return { window: null, per: [], empty: false, untuned: true };
+  let lo = 0, hi = 1;
+  for (const { band } of bands) { lo = Math.max(lo, band.center - band.width); hi = Math.min(hi, band.center + band.width); }
+  const empty = lo > hi;
+  return {
+    window: empty ? null : [Math.max(0, lo), Math.min(1, hi)],
+    per: bands.map(b => ({ tradition: b.tradition, lo: Math.max(0, b.band.center - b.band.width), hi: Math.min(1, b.band.center + b.band.width) })),
+    empty, untuned: false
+  };
+}
+
+/** SNG-192 §6b: name a density window as a KIND OF COUNTRY, not a number — where a build BELONGS, which is
+ *  worth more to a player than any stat. Null window (no common ground) has no place; that is the warning. */
+export function groundAsPlace(window) { // registry:internal
+  if (!window) return null;
+  const mid = (window[0] + window[1]) / 2;
+  return mid < 0.34 ? "thin country — the wild, unreached lands where the lattice runs faint"
+    : mid > 0.66 ? "dense country — the machine-thick cities and the deep Precursor sites"
+    : "the middle country — settled valleys and open roads, neither wild nor machine-thick";
+}
+
 /** SNG-193b Section 3.2: the school map a fresh character starts with — each practised domain defaults to
  *  its tradition's PURE/root school (the orthodoxy for material peoples, the never-starved safe start for
  *  the rest). A story-earned adoptSchool op, or a later creation pick, moves a domain to an augmented

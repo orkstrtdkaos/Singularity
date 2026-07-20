@@ -21,7 +21,7 @@ import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, f
 import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates } from "./engine/inventory.js";
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
-import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b
+import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool, commonGroundFor, groundAsPlace } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b + SNG-192 §6b
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed } from "./engine/art.js";
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
@@ -62,7 +62,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.177";
+const APP_VERSION = "1.8.178";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2303,6 +2303,30 @@ function renderCreate() {
     const byTrad = {};
     for (const a of choosable) { const t = traditionOf(a, CONTENT.traditionIndex) || a.powerSystem || "folk"; (byTrad[t] = byTrad[t] || []).push(a); }
     const abById = Object.fromEntries(choosable.map(a => [a.id, a]));
+    // SNG-192 Phase B — the robustness readout: what this build can and cannot DO (§5 coverage), where the
+    // WHOLE kit works (§6b common ground), and the honest coherence↔divergence framing (§6c). Never blocks.
+    const readoutHtml = (() => {
+      const buildAb = [...grantIds, ...state.abilities].map(id => ({ abilityId: id }));
+      if (!buildAb.length && !state.domains?.primary) return "";
+      const cov = functionCoverage({ abilities: buildAb }, fullCatalog(), FN_INDEX);
+      const trads = [state.domains?.primary, state.domains?.secondary, state.domains?.tertiary].filter(Boolean);
+      const cg = commonGroundFor(trads, CONTENT.substrateModel);
+      const covLine = buildAb.length
+        ? `<div>You can ${cov.covered.length ? cov.covered.map(f => `${FAMILY_GLYPH[f] || "·"} ${f.toLowerCase()}`).join(" · ") : "— nothing yet"}.${cov.missing.length ? ` <span class="hint">No way to ${cov.missing.map(f => f.toLowerCase()).join(", ")} — a real choice, not a mistake.</span>` : " <span class='hint'>a balanced kit.</span>"}</div>`
+        : "";
+      let groundLine = "";
+      if (cg.empty) {
+        const hiT = cg.per.slice().sort((a, b) => b.lo - a.lo)[0], loT = cg.per.slice().sort((a, b) => a.hi - b.hi)[0];
+        groundLine = `<div style="color:var(--warn,#e0b25a)">⚠ ${esc(traditionLabel(hiT.tradition))} and ${esc(traditionLabel(loT.tradition))} share no ground — wherever you stand, one of them is starved. A deliberate reach for two very different lands, never an accident.</div>`;
+      } else if (cg.window) {
+        groundLine = `<div>Your crafts all work in <strong>${esc(groundAsPlace(cg.window))}</strong> — where this character belongs.</div>`;
+      }
+      const width = cg.window ? cg.window[1] - cg.window[0] : 0;
+      const frameLine = (cg.empty || width < 0.22)
+        ? `<div class="hint" style="margin-top:2px">A <strong>divergent</strong> build — weaker in any one country, and exactly where new craft comes from. Off-source picks are seeds; the game will offer braids you never planned. <em>Divergence makes you new.</em></div>`
+        : (trads.length > 1 ? `<div class="hint" style="margin-top:2px">A <strong>coherent</strong> build — strong in its own country. <em>Coherence makes you strong here; divergence makes you new.</em></div>` : "");
+      return (covLine || groundLine || frameLine) ? `<div class="sys-group" style="margin-top:10px"><div class="sys-label">Your build so far</div>${covLine}${groundLine}${frameLine}</div>` : "";
+    })();
     chrome(`<div class="screen">
       <h2>What have you learned?</h2>
       <p class="hint" style="margin-bottom:10px">Choose <strong>${maxAbilities()}</strong>. The far pole of what you are isn't here — only your primary, its kin, your secondary and tertiary, and the Valley's open folk arts.</p>
@@ -2317,6 +2341,7 @@ function renderCreate() {
           <div class="sys-group"><div class="sys-label">${esc(traditionLabel(t))}</div>
           <div class="opt-row">${byTrad[t].map(a => abBtn(a)).join("")}</div></div>`).join("") || "<div class='insight'>No level-1 abilities available for your domains — you'll learn as you play.</div>"}
       </details>
+      ${readoutHtml}
       <div style="display:flex; gap:8px; margin-top:12px">
         <button class="btn secondary" id="ab-back">Back</button>
         <button class="btn" id="ab-done" ${state.abilities.length === maxAbilities() || !choosable.length ? "" : "disabled"}>Next: your companion</button>

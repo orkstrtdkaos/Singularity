@@ -262,6 +262,7 @@ Form-based. **Parity is mandatory:** identical character shape, same domain coun
 | `effectiveDensity(density, carried)` | composes place + carried into the number the band is judged against |
 | `bandFor` / `bandFactor` / `substrateVerdict` | the two-sided band: starvation below (steep), interference above (mild, floored) |
 | `schoolForTradition` / `bandForSchool` / `schoolsDetailForGM` | **SNG-193b — the band reads the SCHOOL, not the tradition** (see below) |
+| `commonGroundFor` / `groundAsPlace` | **SNG-192 §6b — the density window where a whole BUILD works**: the INTERSECTION of its traditions' bands, named as a *place* (thin/middle/dense country). A natural primary + one lattice craft intersects to NOTHING — the provable "half-powered everywhere" warning the creation screen shows at the moment of the pick. Never blocks; divergence is framed as generativity, not a penalty (§6c). |
 
 ### Schools (SNG-193b) — a tradition is a ROOT; a school is what it reaches WITH
 

@@ -6342,6 +6342,27 @@ await (async () => {
   check("192 §2: the full pool is folded behind a details/summary (no 45-button wall)", /See all crafts your domains open/.test(appSrc192));
 }
 
+// --- SNG-192 Phase B §6b: the power-source common-ground window (Erik's provable warning case) ---
+{
+  const sb = await import("../engine/substrate.js");
+  const model = JSON.parse(readFileSync(join(root, "content/packs/core/rules/the_substrate.json"), "utf8"));
+  // ashwarden (natural, low band) + enginewright (lattice, high band) → NO overlap: the case Erik warned of.
+  const clash = sb.commonGroundFor(["ashwarden", "enginewright"], model);
+  check("192 §6b: a natural + lattice build has NO common ground (provable, not merely 'suboptimal')", clash.empty === true && clash.window === null);
+  // an all-natural build → a real shared window (matches the spec table's 0.00–0.56 for ashwarden+rootkin+somatic).
+  const coherent = sb.commonGroundFor(["ashwarden", "rootkin", "somatic"], model);
+  check("192 §6b: an all-natural build shares a wide thin-country window (≈0.00–0.56)", !!coherent.window && coherent.window[0] < 0.05 && coherent.window[1] > 0.5 && coherent.window[1] < 0.6);
+  check("192 §6b: the window is named as a PLACE, not a number", /thin country/.test(sb.groundAsPlace(coherent.window)) && /dense country/.test(sb.groundAsPlace([0.85, 0.95])) && /middle country/.test(sb.groundAsPlace([0.4, 0.6])));
+  check("192 §6b: no window has no place — that IS the warning", sb.groundAsPlace(null) === null);
+  check("192 §6b: an untuned (folk/learned) build never constrains the window", sb.commonGroundFor(["folk", "learned"], model).untuned === true);
+
+  // wiring: the ability step renders the readout (coverage + common ground + framing), never blocking.
+  const appSrcB = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+  check("192 §5+§6b: the ability step renders a build readout (coverage + common ground)", /Your build so far/.test(appSrcB) && /commonGroundFor\(trads/.test(appSrcB) && /functionCoverage\(\{ abilities: buildAb/.test(appSrcB));
+  check("192 §6b: the no-common-ground case is a WARNING, not a block", /share no ground — wherever you stand, one of them is starved/.test(appSrcB));
+  check("192 §6c: coherence↔divergence is framed, never a penalty", /Coherence makes you strong here; divergence makes you new/.test(appSrcB) && /Off-source picks are seeds/.test(appSrcB));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

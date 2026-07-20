@@ -1669,14 +1669,40 @@
         "player": "Lift the latch — go in",
         "summary": "Silas lifts the gate latch and walks through the front door of his mother's house in Cairnhold — she is at the counter, she turns, and she says his full name.",
         "narration": "You lift the latch.\n\nThe gate swings inward without sound — the hinge is oiled, which tells you something. Someone has been maintaining this house with care. You step through and take the short path to the front door, three flagstones and a worn scrape of boot-leather at the threshold. Behind you, Pell follows. Behind her, Veth. Huginn shifts his weight on your shoulder but does not leave it.\n\nYou knock twice. Then you open the door, because it has never been locked against you.\n\nThe kitchen is warm and smells of dried herbs and something baking — flatbread, you think, from the particular close sweetness of it. A low fire burns in the hearth. Two chairs. A table with one cup on it, still steaming. On the far side of the room your mother stands at the work counter with her back to the door, and she does not turn immediately, because she is finishing what she is doing. That is her way. She finishes what she is doing.\n\nThen she turns, and she sees you, and her face does something that is not surprise — it is older than surprise. She takes one step, and then she says your name. Not Silas. The whole name. The one only she uses."
+      },
+      {
+        "player": "[Note for GM - we did not go through a waygate. we are still in Cairnhold in Silas's mother's house.]  Greets his mother with  \"Ama Deyja\"  Take two steps toward her with arms open wide.",
+        "summary": "Silas greets his mother with open arms — she crosses to him in three quick steps and holds on; her first words are that he is thinner.",
+        "narration": "You take two steps toward her with your arms open wide.\n\n\"Ama Deyja,\" you say.\n\nShe crosses the remaining distance between you in three quick steps — quicker than you expected, quicker than the Deathsense prepared you for — and she puts her arms around you and holds on. Her hands press flat against your back, flour-dusted and warm from the hearthstone. She is shorter than you remember, or you have grown into your height more fully than you realized. The dried herbs brush the top of your head. The flatbread on the hearthstone begins to smell done.\n\nShe does not say anything for a moment. She just holds you. Then she says, quietly and against your shoulder, \"You are thinner.\"\n\nBehind you, Pell is still in the doorway. She has not moved. She is giving this its space, reading the room the way she reads a forge — letting the heat settle before she touches anything. Huginn shifts once on your shoulder, then stills. He is, for the moment, simply a bird on a man's shoulder in a warm kitchen, and he seems to have decided that is sufficient."
       }
     ],
     "lastTurn": {
-      "narration": "You lift the latch.\n\nThe gate swings inward without sound — the hinge is oiled, which tells you something. Someone has been maintaining this house with care. You step through and take the short path to the front door, three flagstones and a worn scrape of boot-leather at the threshold. Behind you, Pell follows. Behind her, Veth. Huginn shifts his weight on your shoulder but does not leave it.\n\nYou knock twice. Then you open the door, because it has never been locked against you.\n\nThe kitchen is warm and smells of dried herbs and something baking — flatbread, you think, from the particular close sweetness of it. A low fire burns in the hearth. Two chairs. A table with one cup on it, still steaming. On the far side of the room your mother stands at the work counter with her back to the door, and she does not turn immediately, because she is finishing what she is doing. That is her way. She finishes what she is doing.\n\nThen she turns, and she sees you, and her face does something that is not surprise — it is older than surprise. She takes one step, and then she says your name. Not Silas. The whole name. The one only she uses.",
-      "sceneSummary": "Silas lifts the gate latch and walks through the front door of his mother's house in Cairnhold — she is at the counter, she turns, and she says his full name.",
+      "narration": "You take two steps toward her with your arms open wide.\n\n\"Ama Deyja,\" you say.\n\nShe crosses the remaining distance between you in three quick steps — quicker than you expected, quicker than the Deathsense prepared you for — and she puts her arms around you and holds on. Her hands press flat against your back, flour-dusted and warm from the hearthstone. She is shorter than you remember, or you have grown into your height more fully than you realized. The dried herbs brush the top of your head. The flatbread on the hearthstone begins to smell done.\n\nShe does not say anything for a moment. She just holds you. Then she says, quietly and against your shoulder, \"You are thinner.\"\n\nBehind you, Pell is still in the doorway. She has not moved. She is giving this its space, reading the room the way she reads a forge — letting the heat settle before she touches anything. Huginn shifts once on your shoulder, then stills. He is, for the moment, simply a bird on a man's shoulder in a warm kitchen, and he seems to have decided that is sufficient.",
+      "sceneSummary": "Silas greets his mother with open arms — she crosses to him in three quick steps and holds on; her first words are that he is thinner.",
       "choices": [
         {
-          "label": "Cross to her — close the distance, say nothing yet",
+          "label": "Hold her, say nothing — let the moment be what it is",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "comfort",
+            "calm"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Pull back gently, look at her face, and introduce Pell — 'Ama, this is Pell. She is mine and I am hers.'",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "persuade"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Say something honest — 'The road was long. I have a great deal to tell you. But first — how are you?'",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
@@ -1686,157 +1712,112 @@
           "trivial": true
         },
         {
-          "label": "Stay in the doorway and introduce Pell first — her name, what she is to you, plainly",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Check the flatbread — reach past her and turn it before it burns, the easy domestic reflex of someone who grew up in this kitchen",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
-            "lead"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask her to sit — you have things to tell her, and you want her comfortable first",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "comfort",
-            "careful"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Let the moment breathe — stand in the doorway and let her come to you, if she will",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "intentTags": [
-            "sustain"
+            "craft"
           ],
           "trivial": true
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
       "scene": {
-        "setting": "Inside Silas's mother's house — the kitchen, warm from the low hearth, smelling of dried herbs and flatbread baking. Late-afternoon light through a single window. One cup of tea on the table, still steaming.",
+        "setting": "Inside Silas's mother's house — the kitchen, warm from the low hearth, smelling of dried herbs and flatbread nearly done on the hearthstone. Late-afternoon light through a single window.",
         "npcsPresent": [
           {
             "name": "Silas's Mother",
-            "state": "Has turned from the work counter, Silas's full name just spoken, one step taken toward him — standing in the middle of the kitchen, both hands still flour-dusted."
+            "state": "Arms around Silas, holding on — flour-dusted hands flat against his back. Has just said 'You are thinner.'"
           },
           {
             "name": "Pell Ran Marsh",
-            "state": "In the doorway behind Silas, steady, reading the room."
+            "state": "Still in the doorway behind Silas — not moving, giving the moment its space."
           },
           {
             "name": "Veth Ondra",
-            "state": "Just outside the door, holding her position — giving the moment its proper space."
+            "state": "Just outside the door, holding her position."
           },
           {
             "name": "Huginn",
-            "state": "On Silas's shoulder. Has not moved."
+            "state": "On Silas's shoulder — still, for once simply a bird in a warm kitchen."
           }
         ],
         "objects": [
           "Low fire in the hearth",
           "Table with one steaming cup of tea",
           "Two chairs",
-          "Dried herbs hanging from the ceiling beam",
+          "Dried herbs hanging from the ceiling beam — brushing Silas's head",
           "Work counter — flour-dusted",
-          "Flatbread baking on the hearthstone",
+          "Flatbread on the hearthstone — nearly done, beginning to smell it",
           "Second door — the heath door — still open a hand's width at the room's far end"
         ],
         "threads": [
-          "Silas's mother has said his full name — what follows that is the whole shape of this reunion",
+          "Silas's mother has said 'You are thinner' — her first words, a mother's first accounting",
           "Pell is in the doorway, not yet introduced",
-          "Veth is outside — the cairn-line reading she has been sitting on is still unspoken",
-          "The flatbread will be done soon"
+          "Veth is outside — her reading of the cairn-line placement still unspoken",
+          "The flatbread will burn if not turned soon"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
-          "npcId": "silas-mother",
+          "op": "update",
+          "npcId": "silass-mother",
           "name": "Silas's Mother",
-          "role": "Mother — lives at the cairn-line house on Cairnhold's center lane",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "description": "A woman who finishes what she is doing before she turns. Flour on both hands. Face that knows the difference between surprise and recognition — this is the second one.",
-          "note": "Turned from the work counter and said Silas's full name. One step taken toward him. Flour-dusted hands.",
+          "note": "Crossed to Silas in three quick steps and held him — her first words: 'You are thinner.'",
           "learned": [
-            "Silas has come home — she did not know he was coming"
+            "Silas has returned — he is thinner than when he left"
           ],
-          "statusNote": "In her kitchen in Cairnhold, World-day 23 afternoon — alive, present, flour on her hands, one step toward her son."
+          "relationshipDelta": 2,
+          "status": "active",
+          "statusNote": "In her kitchen in Cairnhold, holding her son — alive, present, first words spoken."
         }
-      ],
-      "generateRequest": [
-        {
-          "type": "npc",
-          "hint": "Silas's mother — a woman who keeps a cairn-line house in Cairnhold, maintains it carefully, bakes flatbread, says her son's full name when she sees him after a long road",
-          "why": "She has just turned and spoken — she needs a real name, a full person, to sustain the scene that's beginning"
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "Silas entered his mother's house for the first time this visit — she was at the counter, she turned, she said his full name. The reunion has begun. World-day 23 afternoon.",
-          "subPlace": {
-            "name": "Silas's Mother's House — Kitchen",
-            "parent": "Silas's Mother's House",
-            "note": "Warm kitchen with a low hearth, dried herbs, flatbread baking, two chairs and a table. One cup of tea still steaming when Silas arrived.",
-            "visited": true
-          }
-        }
-      ],
-      "moveTo": {
-        "location": "Silas's Mother's House — Kitchen",
-        "why": "Silas lifted the gate latch, walked the short path, knocked twice, and opened the front door into the kitchen."
-      },
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A short walk from the gate to the door, a knock, the door opening — moments only."
-      }
+      ]
     },
     "sceneState": {
-      "setting": "Inside Silas's mother's house — the kitchen, warm from the low hearth, smelling of dried herbs and flatbread baking. Late-afternoon light through a single window. One cup of tea on the table, still steaming.",
+      "setting": "Inside Silas's mother's house — the kitchen, warm from the low hearth, smelling of dried herbs and flatbread nearly done on the hearthstone. Late-afternoon light through a single window.",
       "npcsPresent": [
         {
           "name": "Silas's Mother",
-          "state": "Has turned from the work counter, Silas's full name just spoken, one step taken toward him — standing in the middle of t"
+          "state": "Arms around Silas, holding on — flour-dusted hands flat against his back. Has just said 'You are thinner.'"
         },
         {
           "name": "Pell Ran Marsh",
-          "state": "In the doorway behind Silas, steady, reading the room."
+          "state": "Still in the doorway behind Silas — not moving, giving the moment its space."
         },
         {
           "name": "Veth Ondra",
-          "state": "Just outside the door, holding her position — giving the moment its proper space."
+          "state": "Just outside the door, holding her position."
         },
         {
           "name": "Huginn",
-          "state": "On Silas's shoulder. Has not moved."
+          "state": "On Silas's shoulder — still, for once simply a bird in a warm kitchen."
         }
       ],
       "objects": [
         "Low fire in the hearth",
         "Table with one steaming cup of tea",
         "Two chairs",
-        "Dried herbs hanging from the ceiling beam",
+        "Dried herbs hanging from the ceiling beam — brushing Silas's head",
         "Work counter — flour-dusted",
-        "Flatbread baking on the hearthstone",
+        "Flatbread on the hearthstone — nearly done, beginning to smell it",
         "Second door — the heath door — still open a hand's width at the room's far end"
       ],
       "threads": [
-        "Silas's mother has said his full name — what follows that is the whole shape of this reunion",
+        "Silas's mother has said 'You are thinner' — her first words, a mother's first accounting",
         "Pell is in the doorway, not yet introduced",
-        "Veth is outside — the cairn-line reading she has been sitting on is still unspoken",
-        "The flatbread will be done soon"
+        "Veth is outside — her reading of the cairn-line placement still unspoken",
+        "The flatbread will burn if not turned soon"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 12,
-    "hour": 16,
+    "hour": 17,
     "realAnchor": null
   },
   "companions": [
@@ -3143,24 +3124,26 @@
         "locationId": "cairnhold",
         "day": 12
       },
-      "relationship": 0,
+      "relationship": 2,
       "history": [
-        "[d12] Turned from the work counter and said Silas's full name. One step taken toward him. Flour-dusted hands."
+        "[d12] Turned from the work counter and said Silas's full name. One step taken toward him. Flour-dusted hands.",
+        "[d12] Crossed to Silas in three quick steps and held him — her first words: 'You are thinner.'"
       ],
       "knownFacts": [
-        "Silas has come home — she did not know he was coming"
+        "Silas has come home — she did not know he was coming",
+        "Silas has returned — he is thinner than when he left"
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "In her kitchen in Cairnhold, World-day 23 afternoon — alive, present, flour on her hands, one step toward her son.",
+      "statusNote": "In her kitchen in Cairnhold, holding her son — alive, present, first words spoken.",
       "domains": {
         "primary": "ashwarden"
       },
       "domainsSource": "derived",
       "lastSeen": {
-        "locationId": "cairnhold",
+        "locationId": "the_crossing",
         "day": 12
       }
     }
@@ -3869,7 +3852,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-20T00:25:16.876Z",
+    "lastSharedReadAt": "2026-07-20T02:15:15.293Z",
     "lastTickWorldDay": 20,
     "lastCanonWorldDay": 20
   },
@@ -5239,21 +5222,21 @@
     }
   },
   "tendencies": {
-    "strategic": 15.893564161651781,
-    "cerebral": 20.072462935609046,
-    "social": 13.068056654590059,
-    "generous": 3.8841175046274445,
-    "cautious": 6.094500384008304,
-    "physical": 0.3282392799496043,
-    "risky": 0.3442239115489379,
-    "ruthless": 0.10975203241298516,
-    "carousing": 0.0016815399115371846,
-    "amorous": 1.3128285424277442,
-    "patient": 0.6840715677826722,
-    "stealth": 0.042540168157955444,
-    "devotion": 0.8690567095590637,
-    "craft": 1.1322736505911428,
-    "leadership": 0.21653417707895467
+    "strategic": 15.496225057610486,
+    "cerebral": 19.57065136221882,
+    "social": 13.741355238225307,
+    "generous": 3.7870145670117585,
+    "cautious": 5.942137874408097,
+    "physical": 0.32003329795086416,
+    "risky": 0.33561831376021445,
+    "ruthless": 0.10700823160266053,
+    "carousing": 0.001639501413748755,
+    "amorous": 1.2800078288670504,
+    "patient": 0.6669697785881054,
+    "stealth": 0.04147666395400656,
+    "devotion": 0.847330291820087,
+    "craft": 1.1039668093263642,
+    "leadership": 0.2111208226519808
   },
   "aptitudes": [
     "strategist",
@@ -5262,10 +5245,18 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 612,
+  "actionCount": 613,
   "grantsVersion": 1,
   "reconcileVersion": 11,
   "gallery": [
+    {
+      "kind": "npc",
+      "prompt": "Hesta Vorn",
+      "url": "https://image.pollinations.ai/prompt/A%20woman%20somewhere%20in%20her%20middle%20fifties%2C%20broad%20through%20the%20shoulders%2C%20with%20Silas's%20same%20dark%20brow%20and%20the%20steadier%20version%20of%20his%20restlessness%20settled%20into%20competence.%20Her%20hair%20is%20iron-grey%2C%20braided%20c%2C%20character%20portrait%2C%20named%20Hesta%20Vorn%2C%20Cairn-keeper%20and%20mother%20%E2%80%94%20the%20still%20point%20a%20long%20road%20runs%20back%20to%2C%20Speaks%20in%20full%20sentences%20and%20means%20them.%20Unhurried.%20When%20Silas%20appears%20after%20a%20long%20absence%20she%20says%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=6879&nologo=true",
+      "caption": "Hesta Vorn",
+      "worldDay": 20,
+      "at": "2026-07-20T01:13:26.037Z"
+    },
     {
       "kind": "location",
       "prompt": "The Crossing",
@@ -5588,8 +5579,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784509974121,
-  "rev": 930,
+  "updatedAt": 1784513946840,
+  "rev": 935,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -6659,6 +6650,105 @@
           "canonTier": "canonical"
         },
         "image": "https://image.pollinations.ai/prompt/A%20lean%20man%20somewhere%20in%20his%20middle%20forties%2C%20the%20kind%20of%20lean%20that%20is%20not%20hunger%20but%20habit%20%E2%80%94%20he%20has%20been%20moving%20through%20difficult%20ground%20for%20a%20long%20time%20and%20his%20body%20organized%20itself%20around%20that.%20March%2C%20character%20portrait%2C%20named%20Cassiel%20Ord%2C%20Former%20march-warden%20who%20walked%20away%20from%20the%20post%20and%20sat%20down%20in%20the%20bowl%20and%20has%20not%20decided%20what%20%2C%20Economy%20of%20words%20born%20from%20years%20of%20writing%20terse%20post-reports%20nobody%20acted%20on.%20Does%20not%20explain%20him%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=64922&nologo=true"
+      },
+      "hesta-vorn": {
+        "schemaVersion": 1,
+        "id": "hesta-vorn",
+        "name": "Hesta Vorn",
+        "role": "Cairn-keeper and mother — the still point a long road runs back to",
+        "homeLocation": "the_center",
+        "communityId": "cairnhold.crossing",
+        "personality": {
+          "warmth": 0.85,
+          "trust": 0.6,
+          "candor": 0.65,
+          "patience": 0.8
+        },
+        "spectrum": {
+          "falsehood_truth": 0.55,
+          "dark_light": 0.4,
+          "concrete_abstract": -0.3,
+          "space_time": -0.2
+        },
+        "voiceHints": "Speaks in full sentences and means them. Unhurried. When Silas appears after a long absence she says his whole name — first, middle, and family-name — not in anger but as if she is counting him back into the world, making sure all of him arrived. Her questions come one at a time and she waits for the answer before asking the next. Her silences are not empty; she is listening to something slightly past what you said.",
+        "knowledge": [
+          "Every stone in her cairn-line and what each one was laid for — some go back three generations, some she placed herself last autumn",
+          "The Crossing's seasonal patterns: which roads flood first in the thaw, which traders come through and what they carry, who has not come through this year who should have",
+          "How to read a person who has been on the road too long — the particular hollowness behind the eyes, the way they hold their pack strap even after they've set it down",
+          "Early-spring flatbread — the precise moment to pull it from the hearthstone so the underside is charred just enough, the way her mother taught and her mother before that"
+        ],
+        "wants": "For the people she loves to be whole — not triumphant, not even safe, but whole. She'll settle for fed and warm as a start.",
+        "fears": "That one season Silas will not come back down the road, and she will add a stone to the cairn-line and not know what name to lay it for.",
+        "reactsToReputation": {
+          "traveller": "puts bread on without being asked",
+          "in_silas_debt": "measured gratitude, not effusive — she'll remember it",
+          "dangerous": "does not flinch, does not welcome; the door is open, the warmth is conditional",
+          "lost": "seats them near the hearth and asks about the road before she asks about them"
+        },
+        "appearance": "A woman somewhere in her middle fifties, broad through the shoulders, with Silas's same dark brow and the steadier version of his restlessness settled into competence. Her hair is iron-grey, braided close to the head and pinned with a flat cairn-stone worked smooth — a habit, not an ornament. Flour on her left wrist when she turns. Her hands are large and capable and she does not hide them. She stands in the doorway the way someone stands who has stood in many doorways watching many roads.",
+        "abilities": [
+          {
+            "id": "hearthfast",
+            "name": "Hearthfast",
+            "functions": [
+              "shield",
+              "heal"
+            ],
+            "description": "A place Hesta keeps is genuinely harder to come undone in. Those who rest under her roof overnight recover from fatigue and minor wounds as if they had slept a full season's night regardless of the actual hours. The effect is not magic so much as the accumulated intention of every careful thing she has done in that space.",
+            "domainExpression": "cairn-warden domestic — the Crossing's principle that a centre held carefully radiates outward"
+          },
+          {
+            "id": "full_name",
+            "name": "The Full Name",
+            "functions": [
+              "reveal",
+              "bind"
+            ],
+            "description": "When Hesta speaks someone's full name in full she does something that cannot be faked: she sees them as they are rather than as they have presented themselves on the road. The named person feels it — a moment of being entirely known. Those carrying concealment or deception find it briefly harder to sustain. Those who are genuinely lost find it briefly easier to remember who they were before the road took them.",
+            "domainExpression": "cairn-warden naming-rite — the Crossing's function as the place where paths converge and things are called by their right names"
+          },
+          {
+            "id": "cairn_tend",
+            "name": "Cairn-Tending",
+            "functions": [
+              "ward",
+              "reveal"
+            ],
+            "description": "Hesta maintains a line of cairns along the approach to her house. Each stone was laid with intention — for a safe return, for a death acknowledged, for a season survived. The line collectively wards the approach: she knows when someone passes it, and she knows something of what they are carrying — not their secrets, but their weight.",
+            "domainExpression": "cairn-warden threshold-craft — stone-memory as the Crossing's record of who has passed and what they bore"
+          }
+        ],
+        "people": "human",
+        "domains": {
+          "primary": "cairn-warden",
+          "secondary": "hearthkeeper",
+          "tertiary": "numinous"
+        },
+        "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Kind and domain are independent: a people tends toward positions, an individual holds their own. Her numinous tertiary is not studied — it accreted, the way cairn-stones do, one careful act at a time.",
+        "_gen": {
+          "entityId": "hesta-vorn",
+          "type": "npc",
+          "birthWeight": 26,
+          "engagementScore": 0,
+          "tier": "fresh",
+          "rating": "R+",
+          "provenance": {
+            "playerKey": "player-s9z9u1",
+            "characterId": "char-mrhs8286",
+            "locationId": "the_crossing",
+            "day": 12,
+            "worldDay": null,
+            "hint": "Silas's mother — a woman who keeps a cairn-line house in Cairnhold, maintains it carefully, bakes flatbread, says her so",
+            "why": "She has just turned and spoken — she needs a real name, a full person, to sustain the scene that's beginning"
+          },
+          "attentionHistory": [],
+          "createdDay": 12,
+          "repaired": false,
+          "stubbed": false,
+          "romanceEligible": true
+        },
+        "peopleSource": "generated",
+        "image": "https://image.pollinations.ai/prompt/A%20woman%20somewhere%20in%20her%20middle%20fifties%2C%20broad%20through%20the%20shoulders%2C%20with%20Silas's%20same%20dark%20brow%20and%20the%20steadier%20version%20of%20his%20restlessness%20settled%20into%20competence.%20Her%20hair%20is%20iron-grey%2C%20braided%20c%2C%20character%20portrait%2C%20named%20Hesta%20Vorn%2C%20Cairn-keeper%20and%20mother%20%E2%80%94%20the%20still%20point%20a%20long%20road%20runs%20back%20to%2C%20Speaks%20in%20full%20sentences%20and%20means%20them.%20Unhurried.%20When%20Silas%20appears%20after%20a%20long%20absence%20she%20says%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=6879&nologo=true"
       }
     },
     "location": {
@@ -7317,7 +7407,8 @@
   "teachers": {},
   "regionsKnown": {
     "valley": 435,
-    "the_palelands": 6
+    "the_palelands": 6,
+    "the_center": 1
   },
   "foreclosed": [
     "rootkin",
@@ -7389,10 +7480,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-07-19T11:58:49.560Z",
-      "lastAt": "2026-07-20T01:12:54.117Z",
+      "lastAt": "2026-07-20T02:19:06.838Z",
       "startDay": 19,
       "endDay": 20,
-      "beats": 34
+      "beats": 35
     }
   ],
   "company": [
@@ -7578,6 +7669,5 @@
   "locationImages": {
     "cairnhold": "https://image.pollinations.ai/prompt/Cairnhold%3A%20The%20Ashwardens'%20city%2C%20and%20the%20least%20frightening%20place%20in%20the%20world%20once%20you%20are%20inside%20it.%20Cairnhold%20is%20built%20along%20the%20cairn-lines%20%E2%80%94%20low%20grey%20terraces%20following%20the%20stone%20rows%20out%20onto%20the%20heath%20%E2%80%94%20and%20every%20house%20has%20a%20second%20door%20that%20opens%20toward%20the%20fields%2C%20because%20that%20is%20the%20door%20the%20dead%20leav%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=70150&nologo=true",
     "the_crossing": "https://image.pollinations.ai/prompt/The%20Crossing%3A%20Every%20axis%20crosses%20here%20at%20nothing%2C%20and%20the%20result%20is%20not%20grey%20%E2%80%94%20it%20is%20CROWDED.%20The%20Crossing%20leans%20toward%20no%20pole%2C%20which%20is%20precisely%20why%20it%20can%20hold%20them%20all%3A%20an%20Umbral%20and%20a%20Blazeborn%20drink%20at%20the%20same%20table%20because%20neither%20has%20the%20standing%20to%20make%20the%20other%20leave.%20The%20poles%20are%20lonely%20places.%20The%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=24144&nologo=true"
-  },
-  "_correctionAside": "The gate set you down at The Crossing — the hub; the way you reached for isn't a gate you can aim at yet."
+  }
 }

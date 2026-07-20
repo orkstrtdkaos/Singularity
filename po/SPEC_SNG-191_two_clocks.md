@@ -118,10 +118,24 @@ should be asking *did the repair crews make progress* — not *what was Calvar f
 5. **Personal colour still belongs — attached to the person, not the news.** `statusNote` is the
    right home for "he has not looked away from the window." The news block is for what moved.
 
-## §4b — the failure mode to design against
-**Do not let the tick generate work Erik must then undo.** A crisis that advances three stages while
-he is away, or an NPC who solves the campaign offscreen, is worse than a lens vignette. Progress
-should be **incremental, attributable, and legible**: who did it, what moved, how far.
+## §4b — ⚠ RETRACTED. Erik's correction, and he is right
+
+I originally wrote here: *"do not let the tick generate work Erik must then undo — a crisis that
+advances three stages while he is away is worse than a lens vignette."*
+
+**Erik struck it:** *"don't say the tick must not generate work you have to undo — the success of the
+work happening depends on how good the scene is prepared and luck — but it absolutely needs to be
+unguardrailed."*
+
+**He is right and the error is a familiar one.** That guardrail is the same shape as rule 19C, which
+I diagnosed this morning: a caution written so carefully it prevents the thing it guards. Its effect
+would have been a **timid world** — one that never does anything big enough to matter while you are
+gone, which is the whole point of a world that turns.
+
+**The standing rule instead: the world is UNGUARDRAILED.** Whether things go well depends on how
+well the scene was prepared and on luck — not on a ceiling. A crisis that runs three stages because
+nobody tended it is **the game working.** Progress should still be *attributable and legible* —
+who did it, what moved — but that is for readability, never as a limit on how far it may move.
 
 ---
 
@@ -142,3 +156,56 @@ should be **incremental, attributable, and legible**: who did it, what moved, ho
 4. The water crisis responds to whether the delegated work happened.
 5. Two characters forming a party share a clock going forward and keep their own pasts.
 6. No durable record is stamped with a date the engine did not issue.
+
+---
+
+# §7 — THE GENERATION TURN (Erik's addition — the world has its own agenda)
+
+> Erik: *"There needs to be a good generation turn too — what are the unknown arcs doing? They are
+> progressing in the background, or at least fomenting, and should show up somehow: new NPCs, local
+> events, seasonal. Those can pop into existence and either be handled, go away on their own, or grow
+> into a bigger problem. **All of this is the game itself.**"*
+
+## The gap this fills, stated exactly
+
+`generateRequest` is documented as **reactive only** — *"you request when the fiction needs it; the
+world does not spawn on its own here."* That was a correct scoping decision and it left **half the
+system unbuilt.** The world currently grows only when the GM reaches for something. It never reaches
+for anything itself.
+
+**The generation turn is the proactive half.** It runs on the world count, not on the player's
+attention.
+
+## What it does
+
+1. **Latent arcs advance whether or not anyone has seen them.** An arc does not begin when the player
+   discovers it — **discovery is a late event in a thing that has been building.** A feud, a
+   shortage, a rot in a granary, someone's slow decision: all of it fomenting on the world clock.
+2. **They SURFACE at thresholds** — as a new face, a local event, a rumour that is now specific
+   enough to repeat, a change in a place. The surfacing is the player's first contact, not the arc's
+   beginning.
+3. **Three fates, and the middle one is the important one:**
+   - **Handled** — the player intervenes.
+   - **Resolves itself** — *the world solves its own problems.* Without this the world is
+     hero-dependent, every thread waits politely for the player, and nothing that happens elsewhere
+     is real. **A problem that went away because someone else dealt with it is one of the strongest
+     signals a world can send.**
+   - **Grows** — unattended, it becomes larger, and it should be allowed to become genuinely large.
+4. **Seasonal pressure is its own layer** — a cyclical band under the arcs. Early-spring melt, a hard
+   winter's scarcity, harvest. These are not arcs; they are the conditions arcs happen in, and they
+   recur.
+5. **Regional, not global.** An arc belongs to a place and its people, and should be discoverable
+   from the disposition of that place. The Palelands ferment different problems than the Gearlands.
+
+## Invariants
+
+1. **Unguardrailed** (§4b). An arc may grow as far as its own logic takes it.
+2. **Attributable** — every surfaced thing has a cause that existed before it surfaced. **No arc
+   springs from nothing at the moment of contact**; that is the difference between a living world and
+   a random encounter table.
+3. **Not everything is the player's.** Arcs must be able to complete with no involvement, and the
+   player should sometimes learn only that it happened.
+4. **Surfacing is content, not notification.** An arc arrives as a person, a place changed, or
+   something overheard — not as an alert.
+5. **Uses the real minting paths** (SNG-177/185's shared helper), so anything generated here is a
+   full citizen: provenance, domains, people, recurrence.

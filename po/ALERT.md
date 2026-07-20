@@ -986,6 +986,23 @@ shape (authored intent, no consumer). RANKED GAPS:
 RECOMMENDED FOLLOW-ONS ranked in the doc. G1 (wire vs cut) is Aevi's call; G2/G3/G4/G5 are CCode-buildable.
 Nothing improvised past scope — this is the audit; the fixes are separate tickets. -->
 
+<!-- status: SNG-195 G3 + G5 SWEPT COMPLETE_PENDING_REVIEW (CCode 2026-07-20). v1.8.174. Suite green by
+exit code. Erik-directed ("sweep g3 and g5 as aevi digests"). No standalone results doc — two small
+fixes off the audit; detail here.
+G3 — OUTCOME_INSTRUMENTED widened from {markTeacher} to the 5 ops that actually write outcome
+(markTeacher/delegateOps/arcOps/adoptSchool/offer) at app.js:954; a smoke test now pins the display set
+to the logOpOutcome callers so it cannot drift again. Dev-panel display only, no behaviour change.
+G5 — authored purpose + player-surface + trigger for all 31 '— unstated —' engines in
+engine_map.authored.json (grounded in each module header); ENGINE_MAP regenerated 28/59 → 59/59 described,
+standing advisory cleared. Closes SNG-195 §1c.
+NOTE: Aevi's ruling (po/results/20260720_SNG-195_aevi_ruling.md) confirms the audit and reorders: A7
+content cache-busting goes FIRST (one line in fetchJSON/fetchText — until it lands Erik cannot verify any
+content browser-leg; he saw literal \n from a file fixed at origin hours earlier). Then G2
+roomForATeacherOffer carrying WANTS + reactsToReputation (WIRE to the offer path), then G4. G1 split:
+reactsToReputation WIRE-to-prompt (offer material), personality CUT (redundant with voiceHints, engine-
+eligible/prompt-ineligible), gains WIRE-to-engine (779 functional tags for SNG-192 coverage), never prompt.
+Awaiting Erik's go on A7-first. -->
+
 
 
 

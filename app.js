@@ -36,7 +36,7 @@ import { rankVoices, pickVoice, speakableText, chunkForSpeech, renderProseHtml }
 import { harmGateFor, departureGateFor, isSpeechAct, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop); SNG-188: speech-act guard
 import { resolveWaygateTransit, routeGmMoveTo } from "./engine/waygate.js"; // SNG-148: waygates — map control routes named/hub; GM offer via the registry row
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./engine/entityDetail.js";
-import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet } from "./engine/npcs.js";
+import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent } from "./engine/places.js";
 import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
 import { addAssignment } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
@@ -56,13 +56,13 @@ import { noteCoUseAndRefresh, refreshEvolvingItems, evolvedItemsForGM, currentSt
 import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarrativeKind, canIncapacitate, resolvePacing, beatHours } from "./engine/random_encounters.js";
 import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "./engine/recurrence.js";
-import { isEventfulTurn, pressureTier, pressureDirective } from "./engine/pacing.js";
+import { isEventfulTurn, pressureTier, pressureDirective, roomForAnOffer } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.172";
+const APP_VERSION = "1.8.173";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2965,6 +2965,26 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   ) : null;
   const worldPressureDetail = pendingPressure; pendingPressure = null; // SNG-080: a quiet-turn push
   const substrateDetail = pendingSubstrateNote; pendingSubstrateNote = null; // SNG-090: lattice thin/crowded here
+  // SNG-194 §4b: the ENGINE decides whether an unprompted OFFER has room this beat — the model never
+  // judges "gap vs grip." A grip (encounter/gambit/intent) or the world already pushing pressure is no
+  // room. When there IS room, hand the GM present people's FEARS (the one rich source that never reached
+  // the turn prompt) — wants, stirrings and the place are already above; the instruction lives in gm.js.
+  const offerDetail = (() => {
+    const room = roomForAnOffer({
+      encounterActive: !!activeEnc(),
+      gambitOpen: !!gambitDraft,
+      intentPending: !!character._pendingIntent,
+      worldActing: !!worldPressureDetail || !!encounterWeaveDetail,
+      lull: quietTurns >= 1,
+      arrived: (sceneTurns?.length || 0) <= 1,
+      turnsSinceOffer: character.worldState?.turnsSinceOffer ?? Infinity
+    });
+    if (!room) return null;
+    const fears = npcFearsForGM(character, { npcs: CONTENT.npcs, locationId: character.currentLocationId, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) });
+    return fears.length
+      ? "What the people here FEAR (a fear is a sympathetic reason for someone to act — not an attack):\n" + fears.map(f => `- ${f.name}: ${f.fear}`).join("\n")
+      : "No specific fear is surfaced here — draw the offer from what is stirring in the world, what these people want, or what this place is.";
+  })();
   // Romance: on a flirtatious/romantic intent this turn, pull the craft-guidance doc so the GM narrates
   // the beat well at the player's rating. Rides the intent tags parseIntent already emits — no extra call.
   const romanceGuidanceDetail = ((resolution?.action?.intentTags || []).some(t => /^(romantic|flirt)$/i.test(String(t))) && CONTENT.romanceGuidance?.text) ? CONTENT.romanceGuidance.text : null;
@@ -2981,7 +3001,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   // env.ephemera so a registry row can never double-fire them.
   const env = gmEnv({
     resolution, playerInput, exactWords, itemAdvance, travelDirective,
-    ephemera: { encounterWeaveDetail, worldPressureDetail, substrateDetail, romanceGuidanceDetail }
+    ephemera: { encounterWeaveDetail, worldPressureDetail, substrateDetail, romanceGuidanceDetail, offerDetail }
   });
   // SNG-100b: accrue region presence — a light per-turn accumulator of time spent among a people, so the
   // standing bar can ask "have you genuinely stood here" (region-standing gate for promotion/acquisition).
@@ -3397,6 +3417,19 @@ function applyTurn(turn, resolution, playerWords = null) {
   if (turn.adoptSchool?.tradition && turn.adoptSchool?.school) {
     const ok = setCharacterSchool(character, turn.adoptSchool.tradition, turn.adoptSchool.school, CONTENT.schools);
     logOpOutcome("adoptSchool", ok ? "applied" : "rejected-shape");
+  }
+  // SNG-194 §3: the unprompted OFFER — the GM introduced ONE thing the player was not reaching for, drawn
+  // from something already true and NAMING what it came from (attribution is the whole difference from a
+  // random-encounter table). Countable from day one (SNG-190 §3): the op is what lets us tell it is
+  // working. `turnsSinceOffer` drives the RARE cooldown — reset to 0 here, incremented every other turn.
+  const ws194 = character.worldState || (character.worldState = initWorldState(1));
+  if (turn.offer && typeof turn.offer === "object" && turn.offer.thing && turn.offer.from) {
+    ws194.turnsSinceOffer = 0;
+    ws194.recentOffers = [...(ws194.recentOffers || []), { thing: smartClamp(String(turn.offer.thing), 140), from: smartClamp(String(turn.offer.from), 140) }].slice(-5);
+    logOpOutcome("offer", "applied");
+  } else {
+    if (turn.offer) logOpOutcome("offer", "rejected-shape");
+    ws194.turnsSinceOffer = (ws194.turnsSinceOffer ?? 0) + 1;
   }
   // SNG-056: THE HEADER FOLLOWS THE FICTION. When the GM narration moved the character to a real
   // place, update the AUTHORITATIVE currentLocationId so every location surface (header, map "you

@@ -436,3 +436,23 @@ export function npcQuestSeedBlock(character, opts = {}) {
   if (!seeds.length) return "";
   return seeds.map(s => `- ${s.name}: ${s.seed}${s.source === "want" ? " (their own want — shape it into a concrete, named opportunity with stakes)" : ""}`).join("\n");
 }
+
+/** SNG-194 §5 Q1: present NPCs' FEARS — authored on 41 of 42 people and, until now, read ONLY in the
+ *  generate path (never the turn prompt). It is the single richest source for a NON-hostile surprise:
+ *  someone acting out of fear is doing something sympathetic, not attacking. Mirrors the presence test in
+ *  npcQuestSeedsForGM. Returns [{npcId, name, fear}]; surfaced only inside a room-gated offer so it costs
+ *  prompt weight only when it can be used. */
+export function npcFearsForGM(character, { npcs = {}, locationId = null, sceneNpcNames = [], limit = 3 } = {}) {
+  const reg = character?.npcRegistry || {};
+  const scene = sceneNpcNames.map(n => String(n).toLowerCase());
+  const here = Object.values(reg).filter(n =>
+    n?.lastSeen?.locationId === locationId || scene.some(s => s.includes(String(n.name || "").toLowerCase()) || String(n.name || "").toLowerCase().includes(s))
+  );
+  const out = [];
+  for (const n of here) {
+    const authored = npcs[n.id];
+    const fear = authored?.fear || (Array.isArray(authored?.fears) ? authored.fears[0] : authored?.fears);
+    if (fear) out.push({ npcId: n.id, name: n.name, fear: String(fear) });
+  }
+  return out.slice(0, limit);
+}

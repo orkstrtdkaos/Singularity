@@ -6199,6 +6199,50 @@ await (async () => {
   check("193b: backfill is idempotent — an existing schools map is untouched", alreadyHas.schools.cogitant === "cog_instrumented");
 }
 
+// --- SNG-194: the GM brings something of its own — an unprompted OFFER when the ENGINE finds room ---
+{
+  const pacing = await import("../engine/pacing.js");
+  const npcsMod = await import("../engine/npcs.js");
+  const appSrc194 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+  const gmSrc194 = readFileSync(new URL('../engine/gm.js', import.meta.url), 'utf8');
+  const regSrc194 = readFileSync(new URL('../engine/gm_registry.js', import.meta.url), 'utf8');
+  const room = (o) => pacing.roomForAnOffer(o);
+
+  // §4b — the ENGINE decides room; the truth table. The model never judges "gap vs grip."
+  check("194 §4b: a LULL with no grip, off cooldown → room", room({ lull: true, turnsSinceOffer: 99 }) === true);
+  check("194 §4b: an ARRIVAL with no grip → room", room({ arrived: true, turnsSinceOffer: 99 }) === true);
+  check("194 §4b: a live ENCOUNTER is a grip — never room", room({ lull: true, encounterActive: true, turnsSinceOffer: 99 }) === false);
+  check("194 §4b: an open GAMBIT is a grip — never room", room({ lull: true, gambitOpen: true, turnsSinceOffer: 99 }) === false);
+  check("194 §4b: an unresolved INTENT is a grip — never room", room({ lull: true, intentPending: true, turnsSinceOffer: 99 }) === false);
+  check("194 §4b: the WORLD already pushing pressure this beat → never room (no double-act)", room({ lull: true, worldActing: true, turnsSinceOffer: 99 }) === false);
+  check("194 §3 RARE: within cooldown of the last offer → no room even in a lull", room({ lull: true, turnsSinceOffer: 1 }) === false);
+  check("194 §4b: no positive opening (no lull, no arrival) → no room", room({ turnsSinceOffer: 99 }) === false);
+  check("194: default (no signals) → no room (fails closed)", room({}) === false);
+
+  // §5 Q1 — fears reaches the GM ONLY through the offer, and only for people PRESENT.
+  const chr = { npcRegistry: { veth: { id: "veth", name: "Veth", lastSeen: { locationId: "loc1" } }, far: { id: "far", name: "Far", lastSeen: { locationId: "loc2" } } } };
+  const npcCat = { veth: { fears: "Being made an example of." }, far: { fears: "The dark." } };
+  const fears = npcsMod.npcFearsForGM(chr, { npcs: npcCat, locationId: "loc1" });
+  check("194 §5Q1: npcFearsForGM surfaces a PRESENT person's fear", fears.length === 1 && fears[0].name === "Veth" && /example/.test(fears[0].fear));
+  check("194 §5Q1: it does NOT surface a person who is elsewhere", !fears.some(f => f.name === "Far"));
+  check("194 §5Q1: no present people with fears → empty (nothing to add)", npcsMod.npcFearsForGM({ npcRegistry: {} }, { npcs: npcCat, locationId: "loc1" }).length === 0);
+  check("194 §5Q1: the pre-existing seed path surfaces WANTS, not fears (why fears had to be added)", npcsMod.npcQuestSeedsForGM(chr, { npcs: { veth: { wants: "X", fears: "Y" } }, locationId: "loc1" }).every(s => s.source !== "fear"));
+
+  // §3 the OFFER op — countable, attributable, cooldown-resetting.
+  check("194 §3: offer is in SALVAGEABLE_OPS and the contract REQUIRES a source (from)", /"offer"/.test(gmSrc194) && /an offer with no source is a random-encounter table/.test(gmSrc194));
+  check("194 §3: the offer op is COUNTED via logOpOutcome (SNG-190 §3 lesson, applied unprompted)", /logOpOutcome\("offer", "applied"\)/.test(appSrc194) && /logOpOutcome\("offer", "rejected-shape"\)/.test(appSrc194));
+  check("194 §3 attributable: an offer needs BOTH a thing and a from to apply", /turn\.offer\.thing && turn\.offer\.from/.test(appSrc194));
+  check("194 §3 RARE: a fired offer resets turnsSinceOffer to 0; other turns increment it", /turnsSinceOffer = 0/.test(appSrc194) && /turnsSinceOffer \?\? 0\) \+ 1/.test(appSrc194));
+
+  // §4b wiring — the engine gates the invitation; the model only sees it when there is room.
+  check("194 §4b: no room → the engine returns null, so no offer block reaches the prompt", /if \(!room\) return null/.test(appSrc194));
+  check("194: the ephemera carries offerDetail into the prompt", /ephemera: \{[^}]*offerDetail/.test(appSrc194));
+  check("194: gm.js renders THERE IS ROOM with the non-blocking + attribution invariants", /THERE IS ROOM IN THIS BEAT/.test(gmSrc194) && /BESIDE the player's action/.test(gmSrc194) && /naming what it came FROM/.test(gmSrc194));
+  check("194: gm.js says it may be declined without cost and need NOT be trouble", /declined without cost/.test(gmSrc194) && /need NOT be trouble/.test(gmSrc194));
+  check("194: offerDetail is a registered GM context row reading the room-gated ephemera", /key: "offerDetail"/.test(regSrc194) && /env\.ephemera\?\.offerDetail/.test(regSrc194));
+  check("194: the room block only fires when the engine set offerDetail (model never judges gap vs grip)", /if \(offerDetail\) scene\.push/.test(gmSrc194));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

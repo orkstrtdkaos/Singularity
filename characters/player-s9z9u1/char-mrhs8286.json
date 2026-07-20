@@ -94,7 +94,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.334707677725243,
+    "spectrumId": -0.35232387128972953,
     "violence_peace": 0.1030845625,
     "chaos_order": 0.25700971191540173,
     "mechanical_spiritual": 0.2580372847905887,
@@ -1633,7 +1633,15 @@
     "Silas thanks Tane at the close of the morning bouts, rejoins Siol, and hears her plain assessment of the fight. Siol offers a tour of the Hub — plaza first, Ent circle last — and the scene at the Coliseum reaches its natural end.",
     "The party followed Siol north through the Hub's quieter lanes and arrived at the edge of the Ent grove circle at midday — the path giving way to older ground, the circle of trees ahead, Siol stopping at its edge.",
     "The party stepped through the sixth waygate at the Hub — Siol at the arch's edge, the gate-keeper's instruction plain, the March setting confirmed north-by-northwest. The road to Raven's Home has begun.",
-    "(a scene whose summary was lost to a formatting error)",
+    {
+      "kind": "quest_resolved",
+      "questId": "the-door-that-closed-behind",
+      "title": "The Door That Closed Behind",
+      "outcome": "Read",
+      "narration": [],
+      "worldDay": 19,
+      "at": "2026-07-19T18:31:52.037Z"
+    },
     "Silas Weir arrived at the Stillwater's Trouble hollow on World-day 19 with Pell, Veth Ondra, and Cassiel Ord — planted Memory at the site's center using three braided crafts with Pell's ironsense as anchor, claimed and named the Raven's Home warden post as his own Ashwarden base, seated two Boundary-Stone wards at the post's crown and the hollow's mouth, led Veth down into the hollow so the eleven-year completion could be witnessed by all four principals, walked the post's interior and named every space — Pell's forge corner, Veth's teaching alcove, Cassiel's keeper's threshold, Huginn's rook, Silas's Maker's hollow — added a shadow-and-boundary ward skin to the walls, invited Veth to demonstrate her March-form threshold-hardening which settled into the base layer, and in the quiet after the work finished, Cassiel named himself keeper of the threshold. The post is claimed, named, anchored, and held.",
     "Silas asked Veth to read the soul bond — she confirmed it plainly, named it rune-in-grain. He announced the road to Cairnhold and the introduction to his mother. The party departed Stillwater's Trouble on World-day 19 afternoon and arrived at Cairnhold's outer district on World-day 23.",
     "The party walks from the western crossing lane to Silas's mother's house in Cairnhold's center district — the road ends at an open door and a chimney smoking."
@@ -1713,158 +1721,213 @@
         "narration": "You put your cup down on the table with both hands, the way you do when you mean what comes next.\n\n'There is one more thing you should know,' you say to your mother. 'Before you read it somewhere else — in the grain of the room, or in the way we sit together.'\n\nYour mother does not move. She has been waiting for this since the door, you think. She is that kind of woman.\n\n'Pell and I carry a soul bond,' you say. 'A real one. Seated in the craft, in the iron, in — what we named to each other.' You glance at Pell, not for permission, but the way you glance at the spear to confirm it is still in your hand. 'It is not a figure of speech. Veth can see it, if she is asked. Huginn was there when it seated.'\n\nHuginn crooks his head at the mention of his name and says nothing, which in this kitchen now reads as confirmation.\n\nYour mother looks at Pell for a long moment. Then she looks at you. Then she picks up her cup and holds it in both hands.\n\n'I know what a soul bond is,' she says, plainly, as though you have told her the name of a road she has already walked. She does not say anything else for a moment. Then: 'You said it out loud to me before I had to ask. That was the right thing to do.' Her eyes return to Pell. 'And you let him say it, rather than say it for him.' A pause. 'Also right.'\n\nThe fire pops once in the hearth. The herbs hang quiet from the ceiling beam. Something in the room has settled — not resolved, not finished, but settled, the way a foundation settles: complete enough to build on.\n\n*You feel it settle into you — a new steadiness. (Level 18: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
       },
       {
-        "player": "Ask her to formally introduce herself... then to swap stories and jokes with Pell and Veth.",
-        "summary": "Maret Weir formally introduces herself; Pell matches her in craft-language and plain intent; the table opens into an exchange of stories, and Veth signals she is quietly taking notes.",
-        "narration": "Your mother hears the word 'formally' and her expression does something careful and very slight — not quite a smile, not quite a frown, but the face of a woman deciding whether to be amused or to let it pass.\n\nShe lets it pass.\n\nShe sets her cup down and straightens her back, not performing it, just doing it — the posture of a woman who knows how to stand for a thing.\n\n'Maret Weir,' she says. 'Daughter of the flint-setter Cael and his wife Orun. Lived here thirty-one years. Kept the house when the house needed keeping and the people in it when they needed that too.' She picks her cup back up. 'That is the formal version. The other version is that I make a good flatbread and I know when a door-hinge is about to fail.'\n\nPell says, without looking up from her cup, 'The bolt told me.'\n\nYour mother looks at her.\n\n'Cast iron, threaded the wrong direction for this climate,' says Pell. 'It will strip before it shears. I'd replace it with a driven pin — no threading, nothing to work loose.' She meets your mother's eyes then, even and plain. 'The formal version is: I'm Pell Marsh, I run the Fell Pell forge in Millbrook, I work primarily in iron, and I am Silas's keeper. The other version is the same.'\n\nThere is a quiet beat where your mother decides about Pell again, and this time the verdict comes out as a short sound at the back of her throat — not quite a laugh, but related to one.\n\n'Tell me a thing Silas has done that cost him more than it should have,' she says, 'and I'll tell you one.'\n\nVeth, from her side of the table, watches this exchange with the particular stillness of an Ashwarden at rest — not detached, just not inserting herself. After a moment she says, 'I have nothing on him yet. Three weeks on the road. I am collecting.'\n\nYour mother glances at her. 'Give it time,' she says. 'He's consistent.'\n\nHuginn shifts on the back of the chair and says nothing, which is its own comment on the proceedings."
-      },
-      {
-        "player": "Tell your own funny stories about Pell and ",
-        "summary": "Silas opens with the hinge-bolt story; Veth deploys the waygate count; Maret's composure fails at the shoulders; the table has found its warmth.",
-        "narration": "You start with the hinge-bolt.\n\nIt has been waiting all afternoon, patient as Huginn on a fence post, and the moment your mother refills her cup you let it out.\n\n'The forge on Millbrook's south row,' you say. 'Three days after I met her. She had a hinge I needed fitted and I told her how I wanted it done.'\n\nPell looks at you across the rim of her cup. It is not a warning look. It is a look that says: I know exactly which version of this you are telling, and I am curious.\n\n'She listened,' you continue. 'The whole thing. Very respectful. Then she picked up the bolt, looked at it for about half a second, set it down, and did it completely differently.'\n\nYour mother says, 'And was it right?'\n\n'It was correct,' you say, which is a different thing, and Pell makes a sound that is not quite a laugh but contains one.\n\nYour mother looks at Pell. 'And did you explain yourself?'\n\n'I showed him the finished hinge,' says Pell.\n\nThis satisfies your mother completely. She nods once and drinks.\n\nVeth, who has not moved much, shifts her weight and says, 'I have three weeks of material. I have been waiting for someone to open the door.' She does not smile exactly, but something in her stillness has changed — a settled quality, like a bird that has found the right branch.\n\n'The crossing at the waygate,' she says then. 'He told the gate-keeper we were a party of three.'\n\nThere is a pause.\n\n'Huginn was standing on his pack at the time,' Veth finishes, 'audibly.'\n\nHuginn turns his head forty-five degrees. He does not look at Veth. This is a response.\n\nYour mother covers her mouth with two fingers. She is absolutely not laughing. Her shoulders give her away.\n\nPell is watching you with an expression that is warm and dry in equal measure — the look of someone who has spent enough weeks on the road with you to know that all of these stories are true, and that she finds this, on balance, acceptable."
+        "player": "Fill Ama (Maret) in on where you've been since she last saw you - the work you finished, name it cleanly [GM to invent some Necromancer based creation] and how it caused your exodus, but now you're back to embrace it.  The water crisis - falling for Pell - The \"Stillwater's Trouble\". Everything. Let others add where they'd like.",
+        "summary": "Silas tells Ama everything — the thin place and the exile, the water crisis and the fellowship, Stillwater's Trouble and the claimed post, and finally how he fell for Pell — and his mother receives it all with the plain attention of someone who saw most of it at the door.",
+        "narration": "You look at your mother across the table and you say her name first. 'Ama.' The way you said it when you were small and had done something you needed to account for.\n\nShe puts her cup down and waits. That has always been her way.\n\nYou start at the beginning — or what felt like the beginning, though you understand now it was the middle. You tell her about the thin place. The door in the hillside that was not on any map, and the path behind you that was no longer there when you turned. You tell her what you found on the other side: a piece of old work, Precursor-touched, something that had been shaping the ground around it for longer than anyone had noticed. A reclamation site, you call it, because that is the honest word. It was following its last instruction, and the instruction was old, and no one living had given it.\n\nYou tell her what you did with it. You do not soften that part. You say that you ended what needed ending, and that the people who held authority over that ground did not agree with your right to do it, and that for a time the road home was not available to you. You say it plainly because she will read the hollow version and be disappointed by it.\n\nHere Veth sets both palms flat on the table and adds one sentence. 'The work was sound,' she says. 'I have seen the site. It holds.'\n\nYou nod at that and continue.\n\nYou tell her about the water. The Echo River running gray-green at the intake two mornings in three. Fish catches down. Mara Wells keeping a written log. A filtration engineer named Calvar, a document roll, a gathering at the forge that was named the Fell Pell before the coals cooled. You tell her the accountability chain is moving toward the district records office and that the source is still upstream in the Disputed Zone, and that you are on your way there once you have sat in this kitchen long enough to mean it.\n\nYou tell her about Stillwater's Trouble — the warden post on the Ashwarden March that was dissolved eleven years ago, and the hollow beside it, and what was accumulating there. You tell her you claimed it. Named it. Set your hand on the door and seated the name into the March's design. You say Veth's old post now belongs to someone, and you are that someone, and Cassiel Ord is keeping the threshold until you return.\n\nThen you are quiet for a moment.\n\nPell does not fill the silence. She is watching your mother's face the way she watches iron — reading the temperature without touching it.\n\nYou say the last thing. 'And somewhere between the thin place and the post and the gray water, I fell for her.' You do not gesture at Pell. You do not need to. 'Not carefully. Not with a plan. Just — completely.'\n\nYour mother picks up her cup. She looks at Pell for a long moment. Then she looks at you.\n\n'I know,' she says. 'I saw it at the door.'\n\nHuginn, from the back of Veth's chair, makes one quiet sound. It is not a word. It is the sound of a thing that was already finished being confirmed."
       }
     ],
     "lastTurn": {
-      "narration": "You start with the hinge-bolt.\n\nIt has been waiting all afternoon, patient as Huginn on a fence post, and the moment your mother refills her cup you let it out.\n\n'The forge on Millbrook's south row,' you say. 'Three days after I met her. She had a hinge I needed fitted and I told her how I wanted it done.'\n\nPell looks at you across the rim of her cup. It is not a warning look. It is a look that says: I know exactly which version of this you are telling, and I am curious.\n\n'She listened,' you continue. 'The whole thing. Very respectful. Then she picked up the bolt, looked at it for about half a second, set it down, and did it completely differently.'\n\nYour mother says, 'And was it right?'\n\n'It was correct,' you say, which is a different thing, and Pell makes a sound that is not quite a laugh but contains one.\n\nYour mother looks at Pell. 'And did you explain yourself?'\n\n'I showed him the finished hinge,' says Pell.\n\nThis satisfies your mother completely. She nods once and drinks.\n\nVeth, who has not moved much, shifts her weight and says, 'I have three weeks of material. I have been waiting for someone to open the door.' She does not smile exactly, but something in her stillness has changed — a settled quality, like a bird that has found the right branch.\n\n'The crossing at the waygate,' she says then. 'He told the gate-keeper we were a party of three.'\n\nThere is a pause.\n\n'Huginn was standing on his pack at the time,' Veth finishes, 'audibly.'\n\nHuginn turns his head forty-five degrees. He does not look at Veth. This is a response.\n\nYour mother covers her mouth with two fingers. She is absolutely not laughing. Her shoulders give her away.\n\nPell is watching you with an expression that is warm and dry in equal measure — the look of someone who has spent enough weeks on the road with you to know that all of these stories are true, and that she finds this, on balance, acceptable.",
-      "sceneSummary": "Silas opens with the hinge-bolt story; Veth deploys the waygate count; Maret's composure fails at the shoulders; the table has found its warmth.",
+      "narration": "You look at your mother across the table and you say her name first. 'Ama.' The way you said it when you were small and had done something you needed to account for.\n\nShe puts her cup down and waits. That has always been her way.\n\nYou start at the beginning — or what felt like the beginning, though you understand now it was the middle. You tell her about the thin place. The door in the hillside that was not on any map, and the path behind you that was no longer there when you turned. You tell her what you found on the other side: a piece of old work, Precursor-touched, something that had been shaping the ground around it for longer than anyone had noticed. A reclamation site, you call it, because that is the honest word. It was following its last instruction, and the instruction was old, and no one living had given it.\n\nYou tell her what you did with it. You do not soften that part. You say that you ended what needed ending, and that the people who held authority over that ground did not agree with your right to do it, and that for a time the road home was not available to you. You say it plainly because she will read the hollow version and be disappointed by it.\n\nHere Veth sets both palms flat on the table and adds one sentence. 'The work was sound,' she says. 'I have seen the site. It holds.'\n\nYou nod at that and continue.\n\nYou tell her about the water. The Echo River running gray-green at the intake two mornings in three. Fish catches down. Mara Wells keeping a written log. A filtration engineer named Calvar, a document roll, a gathering at the forge that was named the Fell Pell before the coals cooled. You tell her the accountability chain is moving toward the district records office and that the source is still upstream in the Disputed Zone, and that you are on your way there once you have sat in this kitchen long enough to mean it.\n\nYou tell her about Stillwater's Trouble — the warden post on the Ashwarden March that was dissolved eleven years ago, and the hollow beside it, and what was accumulating there. You tell her you claimed it. Named it. Set your hand on the door and seated the name into the March's design. You say Veth's old post now belongs to someone, and you are that someone, and Cassiel Ord is keeping the threshold until you return.\n\nThen you are quiet for a moment.\n\nPell does not fill the silence. She is watching your mother's face the way she watches iron — reading the temperature without touching it.\n\nYou say the last thing. 'And somewhere between the thin place and the post and the gray water, I fell for her.' You do not gesture at Pell. You do not need to. 'Not carefully. Not with a plan. Just — completely.'\n\nYour mother picks up her cup. She looks at Pell for a long moment. Then she looks at you.\n\n'I know,' she says. 'I saw it at the door.'\n\nHuginn, from the back of Veth's chair, makes one quiet sound. It is not a word. It is the sound of a thing that was already finished being confirmed.",
+      "sceneSummary": "Silas tells Ama everything — the thin place and the exile, the water crisis and the fellowship, Stillwater's Trouble and the claimed post, and finally how he fell for Pell — and his mother receives it all with the plain attention of someone who saw most of it at the door.",
       "choices": [
         {
-          "label": "Invite Pell to counter with a story about you",
+          "label": "Ask Ama what she has heard of the water situation from Cairnhold's side — she notices things, and Cairnhold sits on its own watershed",
           "attribute": "social",
           "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "comfort",
-            "calm"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask Veth what three weeks of material has actually taught her",
-          "attribute": "social",
-          "subAttribute": "insight",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Let the laughter run its course, then ask your mother what she remembers about this house when you were young",
+          "label": "Ask Ama plainly what she needs from you before you leave for the Disputed Zone — she did not ask you to come home, but you came, and you want to know if there is something owed here",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "presence",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "comfort"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Let the room settle into an ordinary afternoon — bread, tea, no agenda — and just be here for a while",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "sustain"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Veth to tell Ama something about the March she does not already know — let Veth hold the floor for once",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "help"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
+      "stageOps": [],
       "scene": {
         "setting": "Inside Silas's mother's kitchen in Cairnhold — warm from the low hearth, smelling of dried herbs and flatbread. Late-afternoon light through the single window. All seated around the table.",
         "npcsPresent": [
           {
-            "name": "Maret Weir",
-            "state": "Cup in both hands, shoulders still betraying the laugh she refused to show — the table has her full attention now."
+            "name": "Ama (Silas's Mother)",
+            "state": "Cup in both hands, watching Silas with the plain attention of someone who already knew most of it — settled now, the receiving done"
           },
           {
             "name": "Pell Ran Marsh",
-            "state": "Cup in hand, watching Silas with the warm-dry expression of someone who knows every one of these stories is true."
+            "state": "Still at the table, watching Ama's face the way she watches iron — reading the temperature"
           },
           {
             "name": "Veth Ondra",
-            "state": "Settled back in her chair, the stillness of a woman who has delivered her material and is waiting to see what comes next."
+            "state": "Palms flat on the table, at rest — her one sentence given, her part complete for now"
           },
           {
             "name": "Huginn",
-            "state": "On the back of Veth's chair — head turned forty-five degrees, maintaining dignified silence about the waygate count."
+            "state": "On the back of Veth's chair — made one quiet sound at the end of the telling, now watching the bread board again"
           }
         ],
         "objects": [
           "Low fire in the hearth",
-          "Three cups of tea on the table — refilled",
+          "Three cups of tea on the table — filled",
           "Flatbread on the wooden board — half-eaten, still warm",
           "Dried herbs hanging from the ceiling beam",
           "Work counter — flour-dusted",
           "Second door — the heath door — still open a hand's width at the room's far end"
         ],
         "threads": [
-          "Veth has named her three-week collection — the door is now open for what she has actually observed",
-          "Pell has not yet told a story about Silas",
-          "The heath door remains open a hand's width",
-          "The afternoon is warm and the introductions are done — the table is ready for something quieter or something more"
+          "The hinge-bolt story has been invoked but not yet told — still hanging",
+          "The room has received everything — what Ama wants to give back is still unspoken",
+          "The heath door is still open a hand's width",
+          "The Disputed Zone road is ahead — departure timing unresolved"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "sillass-mother",
-          "name": "Silas's Mother",
-          "note": "Her composure failed at the waygate count — shoulders gave her away; she is fully at ease now, the formal register behind her.",
+          "npcId": "silasmother",
+          "name": "Ama",
+          "role": "Mother — lives at the cairn-line house on Cairnhold's center lane",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "Received the full accounting — thin place, exile, water crisis, Stillwater's Trouble, and the falling for Pell — with the plain attention of someone who saw most of it at the door. Said: 'I know. I saw it at the door.'",
           "learned": [
-            "Silas told the gate-keeper they were a party of three when Huginn was audibly present on his pack"
+            "The thin place was a pre-Transition reclamation site Silas ended without authorization — the exile came from that",
+            "The Echo River water crisis is real and active — a document roll is moving toward the district records office",
+            "Stillwater's Trouble is now claimed as Silas's Ashwarden base — Cassiel Ord keeping the threshold",
+            "Silas fell for Pell completely and without a plan"
           ],
-          "statusNote": "Seated at the kitchen table in Cairnhold — at ease, composure broken by laughter, the afternoon warm around her."
-        },
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "Seated at the kitchen table in Cairnhold — received the full telling, verdict quiet, watching the room settle after the last thing said.",
+          "revealName": "Ama"
+        }
+      ],
+      "factUpdates": [
         {
-          "op": "update",
-          "npcId": "pell-ran-marsh",
-          "name": "Pell Ran Marsh",
-          "note": "Held still under the hinge-bolt story and confirmed it in two words — showed him the finished hinge.",
-          "statusNote": "Seated at the kitchen table in Cairnhold — watching Silas with warm dry regard, at ease."
-        },
+          "op": "add",
+          "text": "Silas's mother's name is Ama — named aloud by Silas at the kitchen table in Cairnhold on World-day 20.",
+          "subjectId": "silasmother"
+        }
+      ],
+      "placeUpdates": [],
+      "codexUpdates": [
         {
-          "op": "update",
-          "npcId": "veth-ondra",
-          "name": "Veth (Stillwater) Ondra",
-          "note": "Deployed the waygate count — three weeks of material, the door now open.",
-          "statusNote": "Seated at the kitchen table in Cairnhold — settled, material delivered, watching."
+          "topic": "silasmother",
+          "label": "Ama — Silas's Mother",
+          "kind": "person",
+          "entityId": "silasmother",
+          "fact": "Her name is Ama. She received the full accounting of Silas's road — the thin place, the exile, the water crisis, Stillwater's Trouble, Pell — with the plain attention of someone who already knew at the door.",
+          "links": [
+            "pell",
+            "stillwaters-trouble",
+            "the-water-crisis",
+            "the-edge-district-ledger"
+          ]
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "A comfortable stretch of story-swapping around the kitchen table."
-      }
+        "hoursPassed": 1,
+        "why": "A long telling at the kitchen table — the full accounting of road and work and falling"
+      },
+      "sceneEnded": false
     },
     "sceneState": {
       "setting": "Inside Silas's mother's kitchen in Cairnhold — warm from the low hearth, smelling of dried herbs and flatbread. Late-afternoon light through the single window. All seated around the table.",
       "npcsPresent": [
         {
-          "name": "Maret Weir",
-          "state": "Cup in both hands, shoulders still betraying the laugh she refused to show — the table has her full attention now."
+          "name": "Ama (Silas's Mother)",
+          "state": "Cup in both hands, watching Silas with the plain attention of someone who already knew most of it — settled now, the rec"
         },
         {
           "name": "Pell Ran Marsh",
-          "state": "Cup in hand, watching Silas with the warm-dry expression of someone who knows every one of these stories is true."
+          "state": "Still at the table, watching Ama's face the way she watches iron — reading the temperature"
         },
         {
           "name": "Veth Ondra",
-          "state": "Settled back in her chair, the stillness of a woman who has delivered her material and is waiting to see what comes next"
+          "state": "Palms flat on the table, at rest — her one sentence given, her part complete for now"
         },
         {
           "name": "Huginn",
-          "state": "On the back of Veth's chair — head turned forty-five degrees, maintaining dignified silence about the waygate count."
+          "state": "On the back of Veth's chair — made one quiet sound at the end of the telling, now watching the bread board again"
         }
       ],
       "objects": [
         "Low fire in the hearth",
-        "Three cups of tea on the table — refilled",
+        "Three cups of tea on the table — filled",
         "Flatbread on the wooden board — half-eaten, still warm",
         "Dried herbs hanging from the ceiling beam",
         "Work counter — flour-dusted",
         "Second door — the heath door — still open a hand's width at the room's far end"
       ],
       "threads": [
-        "Veth has named her three-week collection — the door is now open for what she has actually observed",
-        "Pell has not yet told a story about Silas",
-        "The heath door remains open a hand's width",
-        "The afternoon is warm and the introductions are done — the table is ready for something quieter or something more"
+        "The hinge-bolt story has been invoked but not yet told — still hanging",
+        "The room has received everything — what Ama wants to give back is still unspoken",
+        "The heath door is still open a hand's width",
+        "The Disputed Zone road is ahead — departure timing unresolved"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 12,
-    "hour": 17,
+    "hour": 18,
     "realAnchor": null
   },
   "companions": [
@@ -2370,6 +2433,8 @@
       },
       "relationship": 10,
       "history": [
+        "[d9] Arrived at Cairnhold western crossing lane with Silas — named the destination plainly: home first. Road-worn but steady.",
+        "[d12] Arrived at Silas's mother's gate — reading the lane, steady, waiting for his lead",
         "[d12] Watched Silas's back while he used Deathsense at the gate — asked quietly if he was all right.",
         "[d12] Silas read her through the soul bond at the gate — she felt the Deathsense come back through it as information, accepted it, and told him to take his time.",
         "[d12] Stepped into the room when named — steady, not performing, waiting for the moment to open further.",
@@ -2377,9 +2442,7 @@
         "[d12] Opened with the hearthstone — craft-language, honest, no performance. Found the right entry point for Silas's mother without prompting.",
         "[d12] Introduced herself to Silas's mother plainly — forge, craft, and intent stated without ceremony. Cut off the hinge-bolt story before it landed.",
         "[d12] Held still under Silas's mother's verdict — the right thing to do. Something in her jaw eased afterward.",
-        "[d12] Let Silas name it. Did not say it for him. Held still under his mother's second read of her.",
-        "[d12] Matched Maret's formal register in craft-language — named the hinge-bolt fault, gave her full introduction, named herself Silas's keeper without ceremony.",
-        "[d12] Held still under the hinge-bolt story and confirmed it in two words — showed him the finished hinge."
+        "[d12] Let Silas name it. Did not say it for him. Held still under his mother's second read of her."
       ],
       "knownFacts": [
         "Quiet's ending ran clean through Silas and the grove both — she held it without comment.",
@@ -2400,7 +2463,7 @@
         "finding the honest entry point into an unfamiliar room"
       ],
       "status": "active",
-      "statusNote": "Seated at the kitchen table in Cairnhold — watching Silas with warm dry regard, at ease.",
+      "statusNote": "Seated at the kitchen table in Cairnhold — soul bond named aloud, her part in it plain.",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 12
@@ -3071,6 +3134,8 @@
       },
       "relationship": 10,
       "history": [
+        "[d6] Named the Pale Reach's geography: four days to Cairnhold's outer district from this post, five in early spring. Beathstone crossing is knee-deep. Pre-Transition infrastructure above Cairnhold, plus warden signs not on the March's current register — named without drama.",
+        "[d6] Confirmed she can see the soul bond between Silas and Pell — named it 'rune-in-grain, not on the surface.' Agreed to walk the road to Cairnhold without being asked to. Traveled the four-day road north with the party.",
         "[d9] Named plainly that word travels faster than roads — observing the town's read of Silas.",
         "[d12] Watching the house's placement on the cairn-line with careful attention — has not spoken",
         "[d12] Still reading the house's placement on the cairn-line. Has not spoken what she sees.",
@@ -3078,9 +3143,7 @@
         "[d12] Stepped inside when the door was opened — entered without ceremony, holding the same stillness she kept on the threshold.",
         "[d12] Took the second chair without ceremony, folded her hands on the table. Holding the room's quiet the way she holds a threshold.",
         "[d12] Gave the Ashwarden framing of Huginn to Silas's mother — plain, accurate, without elaboration beyond what was needed.",
-        "[d12] Cited as the one who can see the bond, if asked — the Ashwarden witness still present and available.",
-        "[d12] Named herself as still collecting material on Silas — three weeks on the road, nothing yet, but watching.",
-        "[d12] Deployed the waygate count — three weeks of material, the door now open."
+        "[d12] Cited as the one who can see the bond, if asked — the Ashwarden witness still present and available."
       ],
       "knownFacts": [
         "Silas understands the difference between tending a closed site and reopening it — named it himself, unprompted",
@@ -3103,7 +3166,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Seated at the kitchen table in Cairnhold — settled, material delivered, watching.",
+      "statusNote": "Seated at the kitchen table in Cairnhold — at rest, the bond's existence now named to the household.",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 12
@@ -3173,6 +3236,7 @@
       },
       "relationship": 8,
       "history": [
+        "[d12] Crossed to Silas in three quick steps and held him — her first words: 'You are thinner.'",
         "[d12] Received Pell's introduction plainly — looked from Pell to Silas, made the small internal adjustment of a confirmed suspicion, then turned to Pell and said 'come in, both of you, the bread is done.'",
         "[d12] Received Veth with a single nod and took down a third cup without being asked — then noticed Huginn on the chair and chose not to remark on him yet.",
         "[d12] Watched Silas move to the counter without asking — allowed it. Passed him a cup without looking. Set the third cup on the table and looked at all four arrivals together. Said 'there is enough bread' and left a door open for Pell with the bread and knife.",
@@ -3181,24 +3245,23 @@
         "[d12] Watched Huginn take a slice of flatbread from the board and eat it without ceremony. Received this with a plain 'yes, then' — the question answered to her satisfaction, if not in the way she expected.",
         "[d12] Heard the Ashwarden explanation of Huginn; received Veth's framing without visible surprise; asked for the hinge-bolt story by name.",
         "[d12] Named her verdict on Pell plainly to Silas — suits you, because she isn't soft about it. Cup back in hand. Verdict delivered without ceremony.",
-        "[d12] Received the soul bond plainly — judged both Silas and Pell by how it was said. Named both correct: Silas for saying it first, Pell for letting him.",
-        "[d12] Her composure failed at the waygate count — shoulders gave her away; she is fully at ease now, the formal register behind her."
+        "[d12] Received the soul bond plainly — judged both Silas and Pell by how it was said. Named both correct: Silas for saying it first, Pell for letting him."
       ],
       "knownFacts": [
+        "A large carrion bird eating from her bread board is, apparently, acceptable",
         "Huginn is an Ashwarden companion — drawn by the craft, not trained; attends endings by nature",
         "Veth is an Ashwarden warden, not simply a traveler — she knows what Huginn is from the inside",
         "Pell runs a working forge, works primarily in iron, and describes herself as Silas's keeper with complete composure",
         "Pell introduced herself in craft-language first — that is what she respects",
         "Pell stopped the hinge-bolt story before it landed — paying attention to what the room needs",
         "Her verdict on Pell: she suits Silas because she isn't soft about it",
-        "The soul bond between Silas and Pell is a real craft-seated bond — not a figure of speech; Veth can see it, Huginn was present when it seated",
-        "Silas told the gate-keeper they were a party of three when Huginn was audibly present on his pack"
+        "The soul bond between Silas and Pell is a real craft-seated bond — not a figure of speech; Veth can see it, Huginn was present when it seated"
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Seated at the kitchen table in Cairnhold — at ease, composure broken by laughter, the afternoon warm around her.",
+      "statusNote": "Seated at the kitchen table in Cairnhold — soul bond received, verdict quiet, watching the room settle.",
       "domains": {
         "primary": "ashwarden"
       },
@@ -3915,7 +3978,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-20T12:35:11.692Z",
+    "lastSharedReadAt": "2026-07-20T02:56:03.044Z",
     "lastTickWorldDay": 20,
     "lastCanonWorldDay": 20
   },
@@ -5286,21 +5349,21 @@
     }
   },
   "tendencies": {
-    "strategic": 11.729424060588759,
-    "cerebral": 16.643991708771242,
-    "social": 14.056143086072886,
-    "generous": 4.479359605644361,
-    "cautious": 4.497731202038017,
-    "physical": 0.242240045638139,
-    "risky": 0.25403667731709556,
-    "ruthless": 0.08099681837189603,
-    "carousing": 1.882336667032531,
-    "amorous": 1.9194902926656885,
-    "patient": 0.5048436854506557,
-    "stealth": 0.03139457373175868,
-    "devotion": 0.6413624140841413,
-    "craft": 0.8356160811593667,
-    "leadership": 0.15980186449920364
+    "strategic": 13.030178523680778,
+    "cerebral": 17.070760726944865,
+    "social": 13.39091598571578,
+    "generous": 4.594214980148062,
+    "cautious": 4.613057643115916,
+    "physical": 0.24845132885962976,
+    "risky": 0.2605504382739442,
+    "ruthless": 0.08307365986861132,
+    "carousing": 0.9049606841359291,
+    "amorous": 1.9687079924776292,
+    "patient": 0.5177883953340059,
+    "stealth": 0.03219956280180378,
+    "devotion": 0.6578076041888629,
+    "craft": 0.8570421345224274,
+    "leadership": 0.16389934820431143
   },
   "aptitudes": [
     "strategist",
@@ -5308,9 +5371,9 @@
     "scholar",
     "sage"
   ],
-  "actionCount": 624,
+  "actionCount": 623,
   "grantsVersion": 1,
-  "reconcileVersion": 12,
+  "reconcileVersion": 11,
   "gallery": [
     {
       "kind": "portrait",
@@ -5650,8 +5713,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784552035901,
-  "rev": 954,
+  "updatedAt": 1784562422530,
+  "rev": 950,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -7027,12 +7090,6 @@
   "establishedFacts": [
     {
       "id": "bren-thalle",
-      "text": "Bren Thalle and Curis of the lower Wick settlement named themselves at the limestone bend — miners from a south-slope settlement two dry seasons running, three miles past the ford. Directed to Mara We",
-      "day": 5,
-      "subjectId": "bren-thalle"
-    },
-    {
-      "id": "bren-thalle",
       "text": "Silas returned the confiscated hatchet to Bren Thalle at the limestone bend — named it a tool, not a weapon, and sent both men north toward Mara Wells in Millbrook for honest work.",
       "day": 5,
       "subjectId": "bren-thalle"
@@ -7264,6 +7321,12 @@
       "text": "Silas named the soul bond aloud to his mother at the kitchen table in Cairnhold on World-day 20 — she received it without ceremony and judged them both by how it was said.",
       "day": 12,
       "subjectId": "silass-mother"
+    },
+    {
+      "id": "silasmother",
+      "text": "Silas's mother's name is Ama — named aloud by Silas at the kitchen table in Cairnhold on World-day 20.",
+      "day": 12,
+      "subjectId": "silasmother"
     }
   ],
   "practice": {
@@ -7474,12 +7537,12 @@
       "at": "2026-07-19T12:49:09.209Z"
     }
   ],
-  "syncedAt": 1784517358344,
+  "syncedAt": 1784477453768,
   "teachers": {},
   "regionsKnown": {
     "valley": 435,
     "the_palelands": 6,
-    "the_center": 12
+    "the_center": 11
   },
   "foreclosed": [
     "rootkin",
@@ -7558,11 +7621,11 @@
     },
     {
       "id": "sess-6",
-      "startedAt": "2026-07-20T12:41:19.058Z",
-      "lastAt": "2026-07-20T12:53:55.890Z",
+      "startedAt": "2026-07-20T15:47:02.528Z",
+      "lastAt": "2026-07-20T15:47:02.528Z",
       "startDay": 20,
       "endDay": 20,
-      "beats": 2
+      "beats": 1
     }
   ],
   "company": [
@@ -7748,14 +7811,5 @@
   "locationImages": {
     "cairnhold": "https://image.pollinations.ai/prompt/Cairnhold%3A%20The%20Ashwardens'%20city%2C%20and%20the%20least%20frightening%20place%20in%20the%20world%20once%20you%20are%20inside%20it.%20Cairnhold%20is%20built%20along%20the%20cairn-lines%20%E2%80%94%20low%20grey%20terraces%20following%20the%20stone%20rows%20out%20onto%20the%20heath%20%E2%80%94%20and%20every%20house%20has%20a%20second%20door%20that%20opens%20toward%20the%20fields%2C%20because%20that%20is%20the%20door%20the%20dead%20leav%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=70150&nologo=true",
     "the_crossing": "https://image.pollinations.ai/prompt/The%20Crossing%3A%20Every%20axis%20crosses%20here%20at%20nothing%2C%20and%20the%20result%20is%20not%20grey%20%E2%80%94%20it%20is%20CROWDED.%20The%20Crossing%20leans%20toward%20no%20pole%2C%20which%20is%20precisely%20why%20it%20can%20hold%20them%20all%3A%20an%20Umbral%20and%20a%20Blazeborn%20drink%20at%20the%20same%20table%20because%20neither%20has%20the%20standing%20to%20make%20the%20other%20leave.%20The%20poles%20are%20lonely%20places.%20The%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=24144&nologo=true"
-  },
-  "_opEmitted": {
-    "sceneSummary": 2,
-    "choices": 2,
-    "scene": 2,
-    "npcUpdates": 2,
-    "codexUpdates": 1,
-    "timeOps": 2
-  },
-  "_opTurns": 2
+  }
 }

@@ -16,9 +16,9 @@ import { applyCodexUpdates } from "./codex.js";
 import { smartClamp } from "./namematch.js"; // SNG-076: word-boundary clamp for the away-digest/news
 import { generatedRecords } from "./generate.js";
 import { syncEnabled, fetchRepoJSON, fetchLedger, pushOwnedFile, pushMergedFile } from "./sync.js";
-import { absoluteWorldDay, worldDayAt, worldCount } from "./worldtime.js";
+import { absoluteWorldDay, worldDayAt, worldCount, readClock } from "./worldtime.js";
 import { advanceAssignment, progressAgainst } from "./assignments.js"; // SNG-191 §4: the world advances delegated work
-import { seedArc, fomentArc, surfaceableArcs, markSurfaced } from "./latentarcs.js"; // SNG-191 §7: the world's own agenda
+import { seedArc, fomentArc, surfaceableArcs, markSurfaced, seasonalPressure } from "./latentarcs.js"; // SNG-191 §7: the world's own agenda
 import { ensureCanonStore, promotionCandidates, promoteInto, canonForViewer } from "./canon.js";
 
 const NEWS_CAP = 20;
@@ -157,10 +157,16 @@ export async function runGenerationTurn({ character, content, now = Date.now(), 
   ws.lastGenCount = count;
   const news = [];
 
-  // 1. foment existing arcs — they grow (unguardrailed), or the world quietly resolves one itself (§7.3).
+  // §7.4 seasonal pressure — the conditions arcs happen in, and they recur. The season TILTS which
+  // KINDS ferment (a shortage grows in deep-winter want, a feud in the working heat).
+  const season = (() => { try { return readClock(character.clock).season; } catch { return null; } })();
+  const tilts = new Set(seasonalPressure(season)?.tilts || []);
+  // 1. foment existing arcs — they grow (unguardrailed), or the world quietly resolves one itself (§7.3);
+  //    a growing arc the season leans on ferments a touch faster.
   for (const arc of Object.values(ws.latentArcs || {})) {
     const before = arc.fate;
     fomentArc(arc, elapsed, Math.random, count);
+    if (arc.fate === "growing" && tilts.has(arc.kind)) arc.stage += 1; // the season pushes on this kind
     if (before === "growing" && arc.fate === "resolved") news.push(`Word reaches you that ${arc.premise} — settled, it seems, without you.`);
   }
   // 2. surface arcs that have fomented enough — first contact, as something now specific enough to repeat.

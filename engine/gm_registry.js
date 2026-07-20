@@ -40,7 +40,7 @@ import { questsForGM, structuredQuestsForGM } from "./quests.js";
 import { npcRegistryForGM, npcQuestSeedBlock } from "./npcs.js";
 import { placeMemoryForGM, recallForGM } from "./places.js";
 import { assignmentsForGM } from "./assignments.js"; // SNG-191 §4: delegated commitments the world is honouring
-import { arcsForGM } from "./latentarcs.js"; // SNG-191 §7: latent arcs that have surfaced to the player
+import { arcsForGM, seasonalDetailForGM } from "./latentarcs.js"; // SNG-191 §7: surfaced arcs + §7.4 seasonal pressure
 import { abilitiesForGM } from "./progression.js";
 import { codexForGM } from "./codex.js";
 import { factsForGM } from "./facts.js";
@@ -261,6 +261,9 @@ export const GM_CONTEXT = [
   { key: "latentArcsDetail", builder: "latentarcs.arcsForGM (SNG-191 §7)", carries: ["latent arcs that have SURFACED — the world's own agenda, now in front of the player"],
     reachedBy: "the generation turn surfacing an arc that fomented on the world count", spec: "§7", views: ["turn"],
     build: (env) => arcsForGM(env.character.worldState) },
+  { key: "seasonalDetail", builder: "latentarcs.seasonalDetailForGM (SNG-191 §7.4)", carries: ["the season's conditions — the cyclical pressure a scene sits in"],
+    reachedBy: "always (the character clock always has a season)", spec: "§7.4", views: ["turn"],
+    build: (env) => seasonalDetailForGM(env.time?.season) },
   { key: "sharedCanonDetail", builder: "app.sharedCanonForGM", carries: ["other players' promoted canon"],
     reachedBy: "always (rating-lensed)", spec: "§18", views: ["turn"],
     build: (env) => env.app.sharedCanonForGM() },

@@ -40,6 +40,7 @@ import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicate
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent } from "./engine/places.js";
 import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
 import { addAssignment } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
+import { setArcFate } from "./engine/latentarcs.js"; // SNG-191 §7: the player closing a surfaced arc (the handled/resolved fate)
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
 import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, retroNativeGrants, applyNativeGrants, nativeGrantIdsFor, seedInnateSubstrate, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility, autoAdvancePracticedRanks, markDefiningMoment, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy } from "./engine/progression.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, mergeInto, mergeCodexTopics, suggestMerges, markNotSame, buildMergeAdjudicationPrompt, applyMergeVerdicts, mergeDigest, undoLastMerge } from "./engine/codex.js";
@@ -61,7 +62,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.170";
+const APP_VERSION = "1.8.171";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3375,6 +3376,15 @@ function applyTurn(turn, resolution, playerWords = null) {
       if (a) { n++; logOpOutcome("delegateOps", "applied"); }
     }
     if (n) turn.narration = (turn.narration || "") + `\n\n*✦ The charge is set — the work goes on while you are away, and you'll hear how it fared when you return.*`;
+  }
+  // SNG-191 §7: the player closed a SURFACED latent arc — the third fate (handled), or it concluded
+  // (resolved). Only a surfaced arc can be closed this way. The world stops carrying it as unfinished.
+  if (turn.arcOps?.length && character.worldState?.latentArcs) {
+    for (const o of turn.arcOps.slice(0, 4)) {
+      const arc = o?.arcId && character.worldState.latentArcs[o.arcId];
+      if (arc && setArcFate(arc, o.fate) && arc.fate === o.fate) logOpOutcome("arcOps", "applied");
+      else logOpOutcome("arcOps", "rejected-shape");
+    }
   }
   // SNG-056: THE HEADER FOLLOWS THE FICTION. When the GM narration moved the character to a real
   // place, update the AUTHORITATIVE currentLocationId so every location surface (header, map "you

@@ -6099,6 +6099,19 @@ await (async () => {
     /export async function runGenerationTurn/.test(wtSrcE) && /fomentArc\(arc, elapsed/.test(wtSrcE) && /surfaceableArcs\(ws\)/.test(wtSrcE) && /seedArc\(ws, s/.test(wtSrcE));
   const appSrcE = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
   check("191 §7: the generation turn runs on return alongside the world-tick", /await runGenerationTurn\(\{ character, content: CONTENT \}\)/.test(appSrcE));
+
+  // §7 the THIRD FATE (handled/resolved) — the follow-on trigger, via arcOps.
+  const unsurf = la.seedArc({ latentArcs: {} }, { id: "s", regionId: "r", premise: "p" }, 0);
+  check("191 §7: setArcFate refuses an UNSURFACED arc (you cannot resolve what you never met)", la.setArcFate(unsurf, "handled") && unsurf.fate === "growing");
+  la.markSurfaced(unsurf, 1);
+  check("191 §7: a surfaced arc can be HANDLED (the third fate lands)", la.setArcFate(unsurf, "handled").fate === "handled");
+  check("191 §7: an invalid fate is refused, not stored", la.setArcFate({ surfaced: true, fate: "growing" }, "bogus").fate === "growing");
+  check("191 §7: arcOps dispatches the fate through setArcFate", /if \(turn\.arcOps\?\.length/.test(appSrcE) && /setArcFate\(arc, o\.fate\)/.test(appSrcE));
+  // §7.4 seasonal pressure — the cyclical conditions arcs happen in, and they recur.
+  check("191 §7.4: seasonal pressure carries a condition + the KINDS it tilts", la.seasonalPressure("deep-winter").tilts.includes("shortage") && /scarcity/.test(la.seasonalPressure("deep-winter").condition));
+  check("191 §7.4: an unknown season degrades to null (graceful)", la.seasonalPressure("brumaire") === null && la.seasonalDetailForGM(null) === null);
+  check("191 §7.4: seasonalDetailForGM renders the line for the GM", /deep winter/.test(la.seasonalDetailForGM("deep-winter") || ""));
+  check("191 §7.4: the generation turn tilts a matching arc kind with the season", /tilts\.has\(arc\.kind\)/.test(wtSrcE) && /seasonalPressure\(season\)/.test(wtSrcE));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

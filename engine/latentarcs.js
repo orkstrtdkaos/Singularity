@@ -61,10 +61,40 @@ export function surfaceableArcs(worldState) {
 
 /** The player has made first contact — the arc is now live in front of them (§7.4: content, not alert). */
 export function markSurfaced(arc, worldCount = 0) { if (arc) { arc.surfaced = true; arc.surfacedAtCount = worldCount; } return arc; }
-// NOTE: the third fate — "handled", the player intervening — needs an intervention-capture path (a GM
-// op or a resolution heuristic on a surfaced arc) that is a Phase-E follow-on. The two automatic fates
-// (grows / resolves-itself) and surfacing are wired here; arcsForGM already respects a `handled` fate
-// the moment that trigger lands, so the model is ready for it.
+
+const ARC_FATES = new Set(["handled", "resolved"]);
+/** §7 THE THIRD FATE — the player intervened on a SURFACED arc (handled), or it concluded in play
+ *  (resolved). Only a surfaced arc can be closed this way: you cannot resolve a thing you never met.
+ *  Fired by the GM's arcOps when the fiction addresses one; arcsForGM then drops it from the live set. */
+export function setArcFate(arc, fate) {
+  if (arc && arc.surfaced && ARC_FATES.has(fate)) arc.fate = fate;
+  return arc;
+}
+
+// ---------- SNG-191 §7.4: SEASONAL PRESSURE — the conditions arcs happen in, and they recur ----------
+// Not arcs; the cyclical band UNDER them. The melt, the dry, the scarcity, the thaw — each colours what
+// the fiction feels like and tilts which KINDS of arc ferment (a shortage grows in deep-winter want).
+const SEASON_PRESSURE = {
+  "early-spring": { condition: "the melt — flood risk, mud, the first green; new starts, and old damage laid bare", tilts: ["rot", "shortage"] },
+  "late-spring":  { condition: "growth and mending — the season of repair and planting", tilts: [] },
+  "early-summer": { condition: "the working heat — long days, roads open, trade and tempers both up", tilts: ["feud"] },
+  "late-summer":  { condition: "the dry — water scarce, fire near, the land pulled tight", tilts: ["shortage", "omen"] },
+  "harvest":      { condition: "the gathering — plenty and hard labour, debts called in, the year weighed", tilts: ["decision"] },
+  "early-winter": { condition: "the drawing-in — stores counted, doors shut, who has and who has not", tilts: ["shortage"] },
+  "deep-winter":  { condition: "the scarcity — cold, want, and what people do when there is not enough", tilts: ["shortage", "feud"] },
+  "thaw":         { condition: "the breaking — held things move again; what froze in place comes loose", tilts: ["decision", "omen"] }
+};
+/** The current season's pressure — a condition line for the GM and the arc-kinds it tilts toward.
+ *  Pure; null for an unknown season (degrades gracefully). */
+export function seasonalPressure(season) {
+  const p = SEASON_PRESSURE[season];
+  return p ? { season, condition: p.condition, tilts: p.tilts } : null;
+}
+/** The GM's SEASONAL line: the conditions the scene sits in. Null when the season is unknown. */
+export function seasonalDetailForGM(season) {
+  const p = seasonalPressure(season);
+  return p ? `It is ${p.season.replace(/-/g, " ")} — ${p.condition}.` : null;
+}
 
 /** The GM's view: arcs the player has met that are still live, so the GM can develop them into the
  *  person / place / thread they surfaced as. Null when nothing is live (costs nothing then). */

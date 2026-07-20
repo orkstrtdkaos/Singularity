@@ -79,14 +79,19 @@
         "player": "I’ll find a tree and rest against ",
         "summary": "Brynjar settles against a birch at the square's edge to take the measure of the Marchward.",
         "narration": "You find a birch at the square's edge, bark white and cold, and put your back to it. Freki circles once and settles against your left leg, the solid warmth of him a thing you've stopped noticing the way you stop noticing your own heartbeat. From here you can see the whole square without looking like you're watching it.\n\nThe Redline warrior finishes his breakfast and sets the bowl on the bench beside him. He doesn't move. His eyes track the square the same way yours do — not suspicious, just professional. You've met that look before, in men who've spent enough time in dangerous places that vigilance became habit and habit became muscle. His jawbone necklace is old, polished smooth from handling. Someone's, once.\n\nThe notice board has three bills tacked to it. At this distance you can make out the shapes but not the words. One is a long column of text, black ink, official-looking. Another is hand-lettered and recent — the ink still dark. The Wardhouse door behind the warrior is closed but not barred; there's a strip of lamplight showing under it even now, which means someone's already at work inside.\n\nFreki's ear — the notched one — rotates toward the tavern. Something in there: voices, the scratch of a bench on stone, the particular note of people already in an argument before the morning's properly started."
+      },
+      {
+        "player": "I’ll sit against the tree with Freki and think back about everything I’ve experienced, the raid on Javiksholm, the death of my father by Kjotves hand. Think about the burning hatred and lust for revenge.",
+        "summary": "Brynjar sits against a birch in the Marchward square and turns the memory of the raid over in his hands — his father's death, Kjotve's cowardice, the weight of unfinished business.",
+        "narration": "The birch bark is cold through your shirt. Freki's weight is warm against your leg, steady as breathing.\n\nYou close your eyes and it comes easy — too easy. The raid doesn't take effort to recall. It comes back the way cold water comes back when you've been under it: all at once, total. The sound first — not the clash of weapons but the dogs barking, then stopping. The smell of thatch catching. Then the light of it, orange and wrong through the smoke. Your father's voice saying *go*, the single flat word that meant he'd already decided how this ended.\n\nYou looked back. You shouldn't have, but you did. You watched Kjotve Olafsson move — not like a warrior caught in a fight, but like a man ticking a task off a list. Andyr was still standing when the spear went into his back from behind. Not Kjotve's hand. Kjotve's *order*. That detail sits in your chest like a bone splinter, the specific cowardice of it. The duel was real until Kjotve was losing, and then it stopped being a duel, and Andyr fell, and Kjotve stood over him and said something you couldn't hear across the burning square.\n\nFreki shifts, pushing his flank harder against your leg. You open your eyes. The square is still here — the warrior on the bench, the anchor-stone at the far corner, cookfire smoke going straight up in cold still air.\n\nThe hatred isn't hot. That's what surprises you, still, when you look at it directly. It doesn't burn. It sits heavy and patient in your ribcage the way a stone sits at the bottom of still water. Kjotve has the village, the fields, the shore. He has Andyr's land and Andyr's name on no grave. And you are here, on the far side of the world, alive because your father told you to be.\n\nYou don't know yet what you're going to do with that. But you know it isn't finished."
       }
     ],
     "lastTurn": {
-      "narration": "You find a birch at the square's edge, bark white and cold, and put your back to it. Freki circles once and settles against your left leg, the solid warmth of him a thing you've stopped noticing the way you stop noticing your own heartbeat. From here you can see the whole square without looking like you're watching it.\n\nThe Redline warrior finishes his breakfast and sets the bowl on the bench beside him. He doesn't move. His eyes track the square the same way yours do — not suspicious, just professional. You've met that look before, in men who've spent enough time in dangerous places that vigilance became habit and habit became muscle. His jawbone necklace is old, polished smooth from handling. Someone's, once.\n\nThe notice board has three bills tacked to it. At this distance you can make out the shapes but not the words. One is a long column of text, black ink, official-looking. Another is hand-lettered and recent — the ink still dark. The Wardhouse door behind the warrior is closed but not barred; there's a strip of lamplight showing under it even now, which means someone's already at work inside.\n\nFreki's ear — the notched one — rotates toward the tavern. Something in there: voices, the scratch of a bench on stone, the particular note of people already in an argument before the morning's properly started.",
-      "sceneSummary": "Brynjar settles against a birch at the square's edge to take the measure of the Marchward.",
+      "narration": "The birch bark is cold through your shirt. Freki's weight is warm against your leg, steady as breathing.\n\nYou close your eyes and it comes easy — too easy. The raid doesn't take effort to recall. It comes back the way cold water comes back when you've been under it: all at once, total. The sound first — not the clash of weapons but the dogs barking, then stopping. The smell of thatch catching. Then the light of it, orange and wrong through the smoke. Your father's voice saying *go*, the single flat word that meant he'd already decided how this ended.\n\nYou looked back. You shouldn't have, but you did. You watched Kjotve Olafsson move — not like a warrior caught in a fight, but like a man ticking a task off a list. Andyr was still standing when the spear went into his back from behind. Not Kjotve's hand. Kjotve's *order*. That detail sits in your chest like a bone splinter, the specific cowardice of it. The duel was real until Kjotve was losing, and then it stopped being a duel, and Andyr fell, and Kjotve stood over him and said something you couldn't hear across the burning square.\n\nFreki shifts, pushing his flank harder against your leg. You open your eyes. The square is still here — the warrior on the bench, the anchor-stone at the far corner, cookfire smoke going straight up in cold still air.\n\nThe hatred isn't hot. That's what surprises you, still, when you look at it directly. It doesn't burn. It sits heavy and patient in your ribcage the way a stone sits at the bottom of still water. Kjotve has the village, the fields, the shore. He has Andyr's land and Andyr's name on no grave. And you are here, on the far side of the world, alive because your father told you to be.\n\nYou don't know yet what you're going to do with that. But you know it isn't finished.",
+      "sceneSummary": "Brynjar sits against a birch in the Marchward square and turns the memory of the raid over in his hands — his father's death, Kjotve's cowardice, the weight of unfinished business.",
       "choices": [
         {
-          "label": "Cross to the notice board and read the bills",
+          "label": "Read the notice board — cross the square and see what's posted",
           "attribute": "mental",
           "subAttribute": "reason",
           "difficulty": 0,
@@ -96,94 +101,115 @@
           "trivial": true
         },
         {
-          "label": "Approach the Redline warrior on the bench — direct, without pretense",
+          "label": "Go into the tavern — that argument has a name in it",
           "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 15,
-          "intentTags": [
-            "negotiate"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Follow Freki's lead and head into the tavern to see what the argument is about",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
             "scout"
           ],
-          "trivial": false
+          "trivial": true
         },
         {
-          "label": "Go to the Wardhouse and introduce yourself to whoever is working inside",
+          "label": "Speak to the warrior on the bench — he's been watching the square with the same attention you have",
           "attribute": "social",
           "subAttribute": "presence",
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
             "negotiate"
           ],
-          "trivial": false
+          "trivial": true
+        },
+        {
+          "label": "Go into the Wardhouse — someone's working before full morning",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "scout"
+          ],
+          "trivial": true
         }
       ],
       "characterDeltas": {
         "health": 0,
-        "energy": 0
+        "energy": 0,
+        "xp": 0
       },
       "scene": {
         "setting": "The Marchward's central square — wide mud-packed junction, early morning pale spring light, cookfire smoke rising straight in still air. Brynjar is leaning against a birch at the square's edge, Freki settled at his left leg.",
         "npcsPresent": [
           {
             "name": "Scarred Redline warrior",
-            "state": "Finished eating, sitting still on the bench near the Wardhouse, bowl set aside, watching the square."
+            "state": "Sitting still on the bench near the Wardhouse, bowl set aside, has glanced at Brynjar and looked back to the square — professional, not hostile."
           }
         ],
         "objects": [
           "Stone well at the square's center",
-          "Public notice board — three bills tacked: one long official column, one recent hand-lettered bill, one other",
+          "Public notice board — three bills tacked",
           "Wardhouse — low stone building, lamplight under the door",
-          "Tavern across the square — voices and argument audible within",
+          "Tavern across the square — argument audible, a woman's voice cutting through, a name mentioned",
           "Waygate anchor-stone at the far corner, unmarked and alone"
         ],
         "threads": [
-          "The Redline warrior watching the square with professional calm — what does he want here?",
+          "The Redline warrior watching the square — what does he want here?",
           "The notice board's three bills, unread",
-          "An argument already underway in the tavern",
-          "Someone working inside the Wardhouse before full morning"
+          "An argument in the tavern with a name in it",
+          "Someone working in the Wardhouse before full morning",
+          "Kjotve Olafsson — alive, holds Javiksholm, owes Andyr a grave"
         ]
       },
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief rest against a tree — a few minutes to settle and observe"
-      }
+      "codexUpdates": [
+        {
+          "topic": "kjotve-olafsson",
+          "label": "Kjotve Olafsson",
+          "kind": "person",
+          "fact": "Jarl who led the raid on Javiksholm. Won Andyr's land by having a spearman strike Andyr from behind mid-duel — a formal fight turned to murder when Kjotve was losing. Now holds Javiksholm's fields and shore. Andyr's body was thrown into the ocean.",
+          "links": [
+            "brynjar-andyrsson-thread",
+            "javiksholm"
+          ]
+        },
+        {
+          "topic": "javiksholm",
+          "label": "Javiksholm",
+          "kind": "place",
+          "fact": "Brynjar's home village — raided and razed by Kjotve Olafsson. Andyr died here, struck from behind. The longhouse was burned. Kjotve now holds the fertile fields and the oceanfront.",
+          "links": [
+            "kjotve-olafsson",
+            "brynjar-andyrsson-thread"
+          ]
+        }
+      ]
     },
     "sceneState": {
       "setting": "The Marchward's central square — wide mud-packed junction, early morning pale spring light, cookfire smoke rising straight in still air. Brynjar is leaning against a birch at the square's edge, Freki settled at his left leg.",
       "npcsPresent": [
         {
           "name": "Scarred Redline warrior",
-          "state": "Finished eating, sitting still on the bench near the Wardhouse, bowl set aside, watching the square."
+          "state": "Sitting still on the bench near the Wardhouse, bowl set aside, has glanced at Brynjar and looked back to the square — pr"
         }
       ],
       "objects": [
         "Stone well at the square's center",
-        "Public notice board — three bills tacked: one long official column, one recent h",
+        "Public notice board — three bills tacked",
         "Wardhouse — low stone building, lamplight under the door",
-        "Tavern across the square — voices and argument audible within",
+        "Tavern across the square — argument audible, a woman's voice cutting through, a ",
         "Waygate anchor-stone at the far corner, unmarked and alone"
       ],
       "threads": [
-        "The Redline warrior watching the square with professional calm — what does he want here?",
+        "The Redline warrior watching the square — what does he want here?",
         "The notice board's three bills, unread",
-        "An argument already underway in the tavern",
-        "Someone working inside the Wardhouse before full morning"
+        "An argument in the tavern with a name in it",
+        "Someone working in the Wardhouse before full morning",
+        "Kjotve Olafsson — alive, holds Javiksholm, owes Andyr a grave"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
-    "hour": 8,
+    "hour": 9,
     "realAnchor": null
   },
   "companions": [
@@ -362,16 +388,47 @@
         "createdDay": 1,
         "entityId": "the-marchward",
         "updatedDay": 1
+      },
+      "kjotve-olafsson": {
+        "id": "kjotve-olafsson",
+        "label": "Kjotve Olafsson",
+        "kind": "person",
+        "facts": [
+          "[d1] Jarl who led the raid on Javiksholm. Won Andyr's land by having a spearman strike Andyr from behind mid-duel — a formal fight turned to murder when Kjotve was losing. Now holds Javiksholm's fields and shore. Andyr's body was thrown into the ocean."
+        ],
+        "links": [
+          "brynjar-andyrsson-thread",
+          "javiksholm"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "javiksholm": {
+        "id": "javiksholm",
+        "label": "Javiksholm",
+        "kind": "place",
+        "facts": [
+          "[d1] Brynjar's home village — raided and razed by Kjotve Olafsson. Andyr died here, struck from behind. The longhouse was burned. Kjotve now holds the fertile fields and the oceanfront."
+        ],
+        "links": [
+          "kjotve-olafsson",
+          "brynjar-andyrsson-thread"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "leadership": 14
+    "leadership": 13.65,
+    "cerebral": 1
   },
   "aptitudes": [
     "banner"
   ],
-  "actionCount": 0,
+  "actionCount": 1,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -474,8 +531,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784514700624,
-  "rev": 15,
+  "updatedAt": 1784515295662,
+  "rev": 16,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -485,7 +542,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 3
+    "riven_marches": 4
   },
   "practice": {
     "schemaVersion": 1,
@@ -519,10 +576,10 @@
     {
       "id": "sess-1",
       "startedAt": "2026-07-20T02:27:27.074Z",
-      "lastAt": "2026-07-20T02:31:40.618Z",
+      "lastAt": "2026-07-20T02:41:35.650Z",
       "startDay": 20,
       "endDay": 20,
-      "beats": 2
+      "beats": 3
     }
   ],
   "_pendingArrival": null

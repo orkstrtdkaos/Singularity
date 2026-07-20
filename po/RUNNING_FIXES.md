@@ -54,6 +54,33 @@ written in prose inside a content file has no guard at all.
 or don't state it.
 **Status:** the one instance is fixed; **the class is not.** · found 2026-07-19
 
+
+### A5 · The GM DENIES REAL PLACES — "not in my context" is spoken as "not in the world" ⚠
+**Where:** `gm_registry.js:125` — `isKnown: env.app.isPlaceKnown || null`; `gm.js:216`
+**What:** Erik asked the GM to travel to **The Blocklands**. It replied that the Blocklands *"isn't a
+named location in the Valley of Echoes as the world is currently established"* and listed the valley
+settlements instead. **`content/packs/valley/locations/the_blocklands.json` exists**, is in the
+manifest, and has two inbound connections.
+**Why:** **verified.** `recallForGM` matches a place when its name appears in the player's words — and
+*"Travel to the Blocklands"* does contain it. But recall is gated by `isPlaceKnown`, so it returns
+only places **this character has been**. Silas has never been there, so `recalledDetail` came back
+empty, the RECALLED block was never pushed, and the GM answered from the only place-knowledge it
+had: the **lore**, which describes the Valley basin. The Blocklands is in `manifest_domain`, not the
+Valley. **The GM listed exactly what it was shown and was right about its context and wrong about the
+world.**
+**The design is deliberate and the failure is at its edge.** SNG-176 correctly scoped the GM to HERE
+for scene purposes. But 95 locations exist and the GM's horizon is *current location + region +
+visited*. Asked about anywhere else it does not say "I don't know" — **it says the place is not real.**
+**Fix (outcomes):**
+1. **A place NAMED BY THE PLAYER should resolve against the full atlas, not the visited set.** Whether
+   the character KNOWS of a place is a different question from whether it EXISTS, and the two are
+   currently collapsed.
+2. **The GM needs a way to say "that is real and you do not know the way"** — which is a far better
+   answer than a denial, and is usually the true one.
+3. **Absence from context must never render as absence from the world.** Same shape as the firing
+   panel's false zeros (SNG-190 §3): *a missing measurement presented as a finding.*
+**Status:** OPEN · found 2026-07-19 · **denies authored content, so it costs Erik world he already paid for**
+
 ---
 
 # B · CONTENT — mine to author, queued

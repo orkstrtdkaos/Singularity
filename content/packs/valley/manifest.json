@@ -221,8 +221,10 @@
     ],
     "quests": [
       "quests.json",
+      "quests/the_name_that_travels.json",
       "quests/the_reaching_light.json",
-      "quests/the_name_that_travels.json"
+      "quests/the_second_thread.json",
+      "quests/what_grew_in_the_hollow.json"
     ]
   },
   "note": "SNG-064 FIX (Aevi 2026-07-11): this manifest is a WHITELIST — engine/state.js iterates provides.* and loads ONLY what is listed. It listed 6 of 89 locations, 5 of 31 NPCs, 3 of 26 lore files. The live game was running on SIX LOCATIONS. Now lists everything. ANY new content file MUST be added here or it silently does not exist."

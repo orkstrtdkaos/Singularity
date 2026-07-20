@@ -122,6 +122,23 @@ from the other side. **A permission and an unevaluable metaphor fail identically
 on either with confidence.**
 **Status:** OPEN · standing · added 2026-07-19 at Erik's direction
 
+
+### A7 · CONTENT FILES ARE NOT CACHE-BUSTED — every content ship is invisible to the player ⚠
+**Where:** `engine/state.js:228` — `async function fetchJSON(path) { const res = await fetch(path); … }`
+**What:** Erik screenshotted literal `\n` in a quest premise **that had been fixed and verified at
+origin hours earlier.** He was reading cached JSON.
+**Why:** **verified.** `index.html` loads `app.js?v=1.8.165` and `style.css?v=1.8.165` — the CODE is
+versioned. The 252 content files are fetched with a bare path and no version string, so the browser
+serves whatever it cached.
+**Consequences, and they are worse than a stale quest:**
+- **Every content ship is invisible until a browser decides to refetch** — the teacher pass, the
+  schools, the world clock, both arcs.
+- **It makes the browser-leg unreliable for the one person who runs it.** Erik cannot verify content
+  he cannot receive, and may report a fixed defect as live — as happened here.
+**Fix:** version the content fetches the way the code is versioned (`?v=APP_VERSION`). One change in
+`fetchJSON`/`fetchText`, and it makes every future content verification trustworthy.
+**Status:** OPEN · **high** — it silently invalidates content verification · found 2026-07-20
+
 ---
 
 # B · CONTENT — mine to author, queued

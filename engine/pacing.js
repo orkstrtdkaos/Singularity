@@ -61,3 +61,17 @@ export function roomForAnOffer({ encounterActive = false, gambitOpen = false, in
   if (turnsSinceOffer < cooldown) return false;                                     // not twice running — the RARE invariant
   return !!(lull || arrived);                                                       // a positive opening, or no room
 }
+
+/** SNG-195 G2 — the same engine-gate, aimed at the oldest live-play complaint: teachers that teach
+ *  nothing. The teacher block used to say "OFFER it when the moment fits" — a permission the model rarely
+ *  acted on, the exact SNG-179 teacher-gate shape. Now the ENGINE decides a teacher present takes the
+ *  initiative: a bonded/trainer teacher IS here with a reachable next step, the beat has a positive
+ *  opening and no grip, the general offer is NOT firing this same beat (one unprompted thing at a time),
+ *  and the shared offer cooldown has passed. When true, the teacher block flips to an unconditional
+ *  instruction; the model never judges "when the moment fits." Pure. */
+export function roomForATeacherOffer({ teacherPresent = false, encounterActive = false, gambitOpen = false, intentPending = false, generalOfferThisBeat = false, lull = false, arrived = false, turnsSinceOffer = Infinity, cooldown = OFFER_COOLDOWN } = {}) {
+  if (!teacherPresent) return false;                                                 // no one to take the initiative
+  if (encounterActive || gambitOpen || intentPending || generalOfferThisBeat) return false; // a grip, or the world already offered this beat
+  if (turnsSinceOffer < cooldown) return false;                                      // shares the offer cooldown — never twice running
+  return !!(lull || arrived);                                                        // a positive opening, or no room
+}

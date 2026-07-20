@@ -192,3 +192,29 @@ export function teachersForGM(character, { catalog = {}, traditionIndex = null, 
   }
   return lines.length ? lines.join("\n") : "";
 }
+
+/** SNG-195 G2: the ONE present teacher whose next step is within reach right now — a company trainer
+ *  (always travelling with you) or a bonded, willing teacher present in THIS scene — as structured data
+ *  for the engine gate (roomForATeacherOffer) and the flip-to-instruction block. Returns null when no
+ *  present teacher has a REACHABLE next step: a "not yet" is a real answer, so an out-of-reach next step
+ *  does not count as room. This is what makes the teacher initiate instead of waiting to be asked. */
+export function teacherOfferReady(character, { catalog = {}, traditionIndex = null, npcs = {}, combosFor = null, sceneNpcNames = [] } = {}) {
+  ensureCompany(character);
+  const present = sceneNpcNames.map(n => String(n).toLowerCase());
+  const here = (npcId) => { const nm = String(npcs[npcId]?.name || "").toLowerCase(); return !!nm && present.some(s => s.includes(nm) || nm.includes(s)); };
+  const candidates = [];
+  for (const m of character.company) { // company trainers travel WITH the character — always present
+    if (m.roles.includes("trainer") && m.teaches) candidates.push({ tid: m.teaches, npcId: m.npcId });
+  }
+  for (const [tid, t] of Object.entries(character?.teachers || {})) { // a bonded, willing teacher counts only when in THIS scene
+    if (t && t.met && t.willing && here(t.npcId)) candidates.push({ tid, npcId: t.npcId });
+  }
+  for (const cand of candidates) {
+    const c = curriculumFor(character, cand.tid, { catalog, traditionIndex, teacherOrder: npcs[cand.npcId]?.curriculum || null });
+    if (c && c.next && c.next.reachable) {
+      const braids = typeof combosFor === "function" ? (combosFor(cand.tid) || []).slice(0, 2).map(b => b.name || b.id || b) : [];
+      return { name: npcs[cand.npcId]?.name || "Your teacher", traditionName: c.traditionName, nextStep: c.next.name, tier: c.next.tier, pathIsTheirs: !!c.pathIsTheirs, braids };
+    }
+  }
+  return null;
+}

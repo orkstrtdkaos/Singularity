@@ -27,7 +27,7 @@ import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainC
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal } from "./engine/traditions.js";
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs } from "./engine/companions.js";
-import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges } from "./engine/company.js";
+import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady } from "./engine/company.js";
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
 import { toolkitForGM } from "./engine/toolkit.js";
 import { fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc } from "./engine/personalArc.js";
@@ -36,7 +36,7 @@ import { rankVoices, pickVoice, speakableText, chunkForSpeech, renderProseHtml }
 import { harmGateFor, departureGateFor, isSpeechAct, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop); SNG-188: speech-act guard
 import { resolveWaygateTransit, routeGmMoveTo } from "./engine/waygate.js"; // SNG-148: waygates — map control routes named/hub; GM offer via the registry row
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./engine/entityDetail.js";
-import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM } from "./engine/npcs.js";
+import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent } from "./engine/places.js";
 import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
 import { addAssignment } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
@@ -56,13 +56,13 @@ import { noteCoUseAndRefresh, refreshEvolvingItems, evolvedItemsForGM, currentSt
 import { locationAffinity, affinityReceipt } from "./engine/affinities.js";
 import { rollTrigger, pickEncounter, buildOffer, rollNarrativeTime, classifyNarrativeKind, canIncapacitate, resolvePacing, beatHours } from "./engine/random_encounters.js";
 import { renownScore, bandForRenown, challengersForBand, findPrestigeArc, challengerPoolFor, pickChallenger, challengerToDuelEntry, challengeDeedWeight, challengeLossWeight, shouldFireChallenger, challengeCooldown } from "./engine/recurrence.js";
-import { isEventfulTurn, pressureTier, pressureDirective, roomForAnOffer } from "./engine/pacing.js";
+import { isEventfulTurn, pressureTier, pressureDirective, roomForAnOffer, roomForATeacherOffer } from "./engine/pacing.js";
 import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDifficulty, duelRound, skillBattleRound, challengeStage, puzzleAttempt, puzzleHints, puzzleUnlocks, checkIncapacitation, encounterReceiptForGM, sanitizeEncounterOps, applyEncounterOps } from "./engine/encounters.js";
 
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.174";
+const APP_VERSION = "1.8.175";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2983,10 +2983,35 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
       turnsSinceOffer: character.worldState?.turnsSinceOffer ?? Infinity
     });
     if (!room) return null;
-    const fears = npcFearsForGM(character, { npcs: CONTENT.npcs, locationId: character.currentLocationId, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) });
-    return fears.length
-      ? "What the people here FEAR (a fear is a sympathetic reason for someone to act — not an attack):\n" + fears.map(f => `- ${f.name}: ${f.fear}`).join("\n")
-      : "No specific fear is surfaced here — draw the offer from what is stirring in the world, what these people want, or what this place is.";
+    const npcOpts = { npcs: CONTENT.npcs, locationId: character.currentLocationId, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) };
+    const fears = npcFearsForGM(character, npcOpts);
+    const reactions = npcReactionsForGM(character, npcOpts); // SNG-195 G2: the reactsToReputation win
+    const parts = [];
+    if (reactions.length) parts.push("How the people here READ this character (their OWN reaction to who the player is — a self-writing beat whose attribution IS the person; pick the reading that fits this character):\n" + reactions.map(r => `- ${r.name}: ${r.reactions}`).join("\n"));
+    if (fears.length) parts.push("What the people here FEAR (a sympathetic reason for someone to act — not an attack):\n" + fears.map(f => `- ${f.name}: ${f.fear}`).join("\n"));
+    return parts.length ? parts.join("\n\n") : "No specific person-material here — draw the offer from what is stirring in the world, what these people want, or what this place is.";
+  })();
+  // SNG-195 G2: the oldest live-play complaint — teachers that teach nothing. The teacher block used to
+  // say "OFFER it when the moment fits" — a permission the model rarely acted on. Now the ENGINE decides a
+  // teacher present TAKES the initiative: a bonded/trainer teacher is here with a REACHABLE next step, the
+  // beat has a positive opening and no grip, and the general offer is NOT firing this same beat (one
+  // unprompted thing at a time). Shares the offer cooldown (the offer op resets it). When set, the teacher
+  // block flips from permission to an unconditional instruction — the model never judges the moment.
+  const teacherOfferDetail = (() => {
+    const ready = teacherOfferReady(character, { catalog: fullCatalog(), traditionIndex: CONTENT.traditionIndex, npcs: CONTENT.npcs, sceneNpcNames: (sceneState?.npcsPresent || []).map(n => n.name) });
+    if (!ready) return null;
+    const room = roomForATeacherOffer({
+      teacherPresent: true,
+      encounterActive: !!activeEnc(),
+      gambitOpen: !!gambitDraft,
+      intentPending: !!character._pendingIntent,
+      generalOfferThisBeat: !!offerDetail,
+      lull: quietTurns >= 1,
+      arrived: (sceneTurns?.length || 0) <= 1,
+      turnsSinceOffer: character.worldState?.turnsSinceOffer ?? Infinity
+    });
+    if (!room) return null;
+    return `${ready.name} is here and would open your next step: **${ready.nextStep}** (tier ${ready.tier}, ${ready.traditionName}${ready.pathIsTheirs ? " — their own ordering" : ""}).${ready.braids && ready.braids.length ? ` Braids it opens: ${ready.braids.join(", ")}.` : ""}`;
   })();
   // Romance: on a flirtatious/romantic intent this turn, pull the craft-guidance doc so the GM narrates
   // the beat well at the player's rating. Rides the intent tags parseIntent already emits — no extra call.
@@ -3004,7 +3029,7 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   // env.ephemera so a registry row can never double-fire them.
   const env = gmEnv({
     resolution, playerInput, exactWords, itemAdvance, travelDirective,
-    ephemera: { encounterWeaveDetail, worldPressureDetail, substrateDetail, romanceGuidanceDetail, offerDetail }
+    ephemera: { encounterWeaveDetail, worldPressureDetail, substrateDetail, romanceGuidanceDetail, offerDetail, teacherOfferDetail }
   });
   // SNG-100b: accrue region presence — a light per-turn accumulator of time spent among a people, so the
   // standing bar can ask "have you genuinely stood here" (region-standing gate for promotion/acquisition).

@@ -6256,6 +6256,54 @@ await (async () => {
   check("195 G3: the 5 known outcome ops are all shown", ["markTeacher", "delegateOps", "arcOps", "adoptSchool", "offer"].every(op => shown.has(op)));
 }
 
+// --- SNG-195 G2: teachers TAKE the initiative (engine-gated), and reactsToReputation reaches the offer ---
+{
+  const pacing2 = await import("../engine/pacing.js");
+  const co2 = await import("../engine/company.js");
+  const npcs2 = await import("../engine/npcs.js");
+  const appSrcG2 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+  const gmSrcG2 = readFileSync(new URL('../engine/gm.js', import.meta.url), 'utf8');
+  const regSrcG2 = readFileSync(new URL('../engine/gm_registry.js', import.meta.url), 'utf8');
+  const troom = (o) => pacing2.roomForATeacherOffer(o);
+
+  // the gate — a teacher must be PRESENT, and it stands down when the general offer fires this beat.
+  check("195 G2: no teacher present → never room (nothing to initiate)", troom({ teacherPresent: false, lull: true, turnsSinceOffer: 99 }) === false);
+  check("195 G2: a present teacher + a lull, off cooldown → room", troom({ teacherPresent: true, lull: true, turnsSinceOffer: 99 }) === true);
+  check("195 G2: a present teacher on an ARRIVAL → room", troom({ teacherPresent: true, arrived: true, turnsSinceOffer: 99 }) === true);
+  check("195 G2: the general offer firing this beat stands the teacher down (one unprompted thing)", troom({ teacherPresent: true, lull: true, generalOfferThisBeat: true, turnsSinceOffer: 99 }) === false);
+  check("195 G2: a grip (encounter) is never room", troom({ teacherPresent: true, lull: true, encounterActive: true, turnsSinceOffer: 99 }) === false);
+  check("195 G2: within the shared offer cooldown → no room", troom({ teacherPresent: true, lull: true, turnsSinceOffer: 1 }) === false);
+  check("195 G2: no positive opening → no room", troom({ teacherPresent: true, turnsSinceOffer: 99 }) === false);
+
+  // teacherOfferReady — the structured present-teacher next step (reuses the SNG-175 curriculum setup).
+  const catalog = { soma: { id: "soma", name: "Soma", levelReq: 1 }, body_read: { id: "body_read", name: "Body-Read", levelReq: 2 }, skydancer: { id: "skydancer", name: "Skydancer", levelReq: 5 } };
+  const idx = { byId: { somatic: { traditionId: "somatic", name: "The Somatics", abilities: ["soma", "body_read", "skydancer"] } } };
+  const base = { level: 3, abilities: [{ abilityId: "soma" }] };
+  const opts = { catalog, traditionIndex: idx, npcs: { taro: { name: "Master Taro" } } };
+  const bonded = { ...base, teachers: { somatic: { met: true, willing: true, npcId: "taro" } }, company: [] };
+  const readyPresent = co2.teacherOfferReady(bonded, { ...opts, sceneNpcNames: ["Master Taro"] });
+  check("195 G2: a bonded teacher PRESENT with a reachable next step is ready", !!readyPresent && readyPresent.name === "Master Taro" && readyPresent.nextStep === "Body-Read");
+  check("195 G2: the SAME teacher, NOT in the scene, is not ready (presence is required)", co2.teacherOfferReady(bonded, { ...opts, sceneNpcNames: [] }) === null);
+  const trainer = { ...base, teachers: {}, company: [{ npcId: "taro", roles: ["trainer"], teaches: "somatic" }] };
+  check("195 G2: a company TRAINER travels with you — ready without a scene mention", co2.teacherOfferReady(trainer, { ...opts, sceneNpcNames: [] })?.nextStep === "Body-Read");
+  check("195 G2: no teacher at all → null", co2.teacherOfferReady({ ...base, teachers: {}, company: [] }, opts) === null);
+
+  // reactsToReputation — the offer material; heterogeneous keys preserved, the GM selects.
+  const chr = { npcRegistry: { veth: { id: "veth", name: "Veth", lastSeen: { locationId: "loc1" } }, gone: { id: "gone", name: "Gone", lastSeen: { locationId: "loc2" } } } };
+  const npcCat = { veth: { reactsToReputation: { balanced: "instant kinship", extreme: "challenges them" } }, gone: { reactsToReputation: { kind: "x" } } };
+  const reactions = npcs2.npcReactionsForGM(chr, { npcs: npcCat, locationId: "loc1" });
+  check("195 G2: a present NPC's reaction map is surfaced with its OWN keys (no forced taxonomy)", reactions.length === 1 && /balanced/.test(reactions[0].reactions) && /extreme/.test(reactions[0].reactions));
+  check("195 G2: an NPC elsewhere is not surfaced", !reactions.some(r => r.name === "Gone"));
+
+  // wiring — the ephemera, the block flip, the offer material, the registry row.
+  check("195 G2: teacherOfferDetail rides the ephemera, gated off the general offer", /teacherOfferDetail\b/.test(appSrcG2) && /generalOfferThisBeat: !!offerDetail/.test(appSrcG2));
+  check("195 G2: reactsToReputation is wired into the offer material", /npcReactionsForGM\(character/.test(appSrcG2));
+  check("195 G2: the teacher block FLIPS to an instruction when the engine finds room", /A TEACHER TAKES THE INITIATIVE/.test(gmSrcG2) && /do NOT judge "when the moment fits" yourself/.test(gmSrcG2));
+  check("195 G2: absent room, the teacher block is REFERENCE, not the old permission wording", /YOUR TEACHERS \(reference/.test(gmSrcG2) && !/only when the moment fits; a teacher may also judge/.test(gmSrcG2));
+  check("195 G2: the offer draws from HOW THEY READ WHO THE PLAYER IS", /HOW THEY READ WHO THE PLAYER IS/.test(gmSrcG2));
+  check("195 G2: teacherOfferDetail is a registered GM context row", /key: "teacherOfferDetail"/.test(regSrcG2));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

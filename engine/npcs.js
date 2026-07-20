@@ -456,3 +456,28 @@ export function npcFearsForGM(character, { npcs = {}, locationId = null, sceneNp
   }
   return out.slice(0, limit);
 }
+
+/** SNG-195 G2 — the reactsToReputation win. Present NPCs' authored REACTIONS to who the character is,
+ *  the single largest orphan in the corpus (40 people, read by nothing until now). The keys are the
+ *  author's OWN scheme — some by disposition shape (balanced/extreme/seeking), some by how the player has
+ *  treated them (kind/threatening/honest) — so they are NOT a fixed taxonomy and the engine cannot pick
+ *  one; surface the whole small map (3–6 words each) and let the GM, who has the character in hand, choose
+ *  the reaction that fits. A reaction to the SHAPE of a character is a self-writing unprompted beat with
+ *  attribution already built in (the `from` is the person's own read of you). Rides in the room-gated
+ *  offer, so it costs prompt weight only when it can be used. */
+export function npcReactionsForGM(character, { npcs = {}, locationId = null, sceneNpcNames = [], limit = 3 } = {}) {
+  const reg = character?.npcRegistry || {};
+  const scene = sceneNpcNames.map(n => String(n).toLowerCase());
+  const here = Object.values(reg).filter(n =>
+    n?.lastSeen?.locationId === locationId || scene.some(s => s.includes(String(n.name || "").toLowerCase()) || String(n.name || "").toLowerCase().includes(s))
+  );
+  const out = [];
+  for (const n of here) {
+    const react = npcs[n.id]?.reactsToReputation;
+    if (react && typeof react === "object") {
+      const pairs = Object.entries(react).filter(([, v]) => v).slice(0, 4).map(([k, v]) => `${k} → ${v}`);
+      if (pairs.length) out.push({ npcId: n.id, name: n.name, reactions: pairs.join("; ") });
+    }
+  }
+  return out.slice(0, limit);
+}

@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 18,
-  "xp": 1709,
+  "xp": 1714,
   "attributes": {
     "physical": 4,
     "mental": 6,
@@ -110,7 +110,7 @@
   "maxHealth": 115,
   "health": 115,
   "maxEnergy": 185,
-  "energy": 180,
+  "energy": 176,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -337,8 +337,9 @@
       "name": "Waymarker (father's)",
       "kind": "tool",
       "qty": 1,
-      "description": "A small object in oilcloth — a Wright's tool, his father's name attached. Called a Waymarker: reads the design of a place you have seated yourself into and can locate it again from a distance. The deep drawer held it for years.",
-      "consumable": false
+      "description": "A small disc of pale grey material — neither quite stone nor quite metal — with a single groove worn into its face in a closed oval. His father's thumb wore that groove. Now seated to Stillwater's Trouble: the tool knows its home. A second unfinished layer remains open, deliberate, waiting for something his father did not supply.",
+      "consumable": false,
+      "provenance": "Kept in the deep drawer beneath the work counter in Cairnhold for years. Retrieved on World-day 23 evening. Seated to Stillwater's Trouble the same night…"
     },
     {
       "id": null,
@@ -1742,14 +1743,19 @@
         "player": "Unwrap the Waymarker first — hold it, read it with Order-Sense before you read the words",
         "summary": "Silas unwraps the Waymarker and reads it with Order-Sense — a locating tool of real depth, with a second unfinished layer his father left open.",
         "narration": "You take the Waymarker from the table. The oilcloth comes away in your hands — three folds, careful work, the cloth still supple after years in the drawer. What you hold is small enough to fit in your closed fist. A disc of pale grey material, neither quite stone nor quite metal, with a single groove worn into its face in a closed oval. Your father's thumb wore that groove. You can feel the shape of it.\n\nYou push Order-Sense into it hard, the way you do when a thing is trying not to be read. The substrate here is thin and the craft resists for a moment — a flutter at the edge of your awareness, the lattice giving way slowly. Then it opens.\n\nThe design comes in whole, not in parts. It is a locating tool — that much your mother said — but what Order-Sense shows you is the scale of it. The Waymarker does not find places. It finds the shape of a place you have already put yourself into, the specific grain of a location that you have touched with intention, and it holds that shape the way iron holds a rune. From anywhere you stand, at any distance, it reads the held location back to you. Not a direction. The full design — what the place is, how it sits in the world, what its structure is built from. You would know Stillwater's Trouble from the other side of the continent if this is seated to it.\n\nThere is something else, beneath that. A second layer that your father had not finished. You can feel the seam where the work stops — clean, deliberate, not abandoned but paused. He left room. Whether that was intention or interruption, the Waymarker does not say. You set it down on the table in front of you, the groove facing up, and you look at the sealed letter beside it. That, you do not open yet. You look up at Ama."
+      },
+      {
+        "player": "Seat the Waymarker to Stillwater's Trouble now, before you open the letter — give it a home before you read what your father had to say about the road.",
+        "summary": "Silas seats the Waymarker to Stillwater's Trouble before opening the letter — the tool now knows its home.",
+        "narration": "You set the letter aside without opening it. The Waymarker is already in your hands, and that feels like the right order — give it a home before you read what your father had to say about the road.\n\nYou close your fingers around the disc and settle into your chair. Order-Sense comes up quietly, the way it does when you are not forcing it — a conserved pull, reading the grain of the thing rather than demanding it open. The groove beneath your thumb is familiar now, worn to someone else's measure, and you let that familiarity be the entry point. You think of the hollow at Stillwater's Trouble. The crown of the post. The chalk marks at the mouth. The particular weight of the air there, the way it smells of iron and old wood and the March's edge. You hold that in your mind alongside the Waymarker, and you press the one into the other — gently, with the care you give a rune-thread when the iron is still warm.\n\nSomething answers. The disc shifts under your thumb — not physically, but in the grain of it, the way a seating rune goes from potential to set. You feel the design acknowledge the address. Stillwater's Trouble, named and held, now known to this tool the way a word is known when it has been spoken in the right room.\n\nPell has been watching your hands. Veth has gone still. Your mother does not move, but her chin drops a fraction — she recognized the moment a Wright finishes a seating even before you were old enough to understand what she was watching. You open your fingers and set the Waymarker groove-up on the table between the letter and the empty cup. It looks exactly the same as before. That is how good seating looks.\n\n*✦ Waymarker (father's) has changed — description, provenance.*"
       }
     ],
     "lastTurn": {
-      "narration": "You take the Waymarker from the table. The oilcloth comes away in your hands — three folds, careful work, the cloth still supple after years in the drawer. What you hold is small enough to fit in your closed fist. A disc of pale grey material, neither quite stone nor quite metal, with a single groove worn into its face in a closed oval. Your father's thumb wore that groove. You can feel the shape of it.\n\nYou push Order-Sense into it hard, the way you do when a thing is trying not to be read. The substrate here is thin and the craft resists for a moment — a flutter at the edge of your awareness, the lattice giving way slowly. Then it opens.\n\nThe design comes in whole, not in parts. It is a locating tool — that much your mother said — but what Order-Sense shows you is the scale of it. The Waymarker does not find places. It finds the shape of a place you have already put yourself into, the specific grain of a location that you have touched with intention, and it holds that shape the way iron holds a rune. From anywhere you stand, at any distance, it reads the held location back to you. Not a direction. The full design — what the place is, how it sits in the world, what its structure is built from. You would know Stillwater's Trouble from the other side of the continent if this is seated to it.\n\nThere is something else, beneath that. A second layer that your father had not finished. You can feel the seam where the work stops — clean, deliberate, not abandoned but paused. He left room. Whether that was intention or interruption, the Waymarker does not say. You set it down on the table in front of you, the groove facing up, and you look at the sealed letter beside it. That, you do not open yet. You look up at Ama.",
-      "sceneSummary": "Silas unwraps the Waymarker and reads it with Order-Sense — a locating tool of real depth, with a second unfinished layer his father left open.",
+      "narration": "You set the letter aside without opening it. The Waymarker is already in your hands, and that feels like the right order — give it a home before you read what your father had to say about the road.\n\nYou close your fingers around the disc and settle into your chair. Order-Sense comes up quietly, the way it does when you are not forcing it — a conserved pull, reading the grain of the thing rather than demanding it open. The groove beneath your thumb is familiar now, worn to someone else's measure, and you let that familiarity be the entry point. You think of the hollow at Stillwater's Trouble. The crown of the post. The chalk marks at the mouth. The particular weight of the air there, the way it smells of iron and old wood and the March's edge. You hold that in your mind alongside the Waymarker, and you press the one into the other — gently, with the care you give a rune-thread when the iron is still warm.\n\nSomething answers. The disc shifts under your thumb — not physically, but in the grain of it, the way a seating rune goes from potential to set. You feel the design acknowledge the address. Stillwater's Trouble, named and held, now known to this tool the way a word is known when it has been spoken in the right room.\n\nPell has been watching your hands. Veth has gone still. Your mother does not move, but her chin drops a fraction — she recognized the moment a Wright finishes a seating even before you were old enough to understand what she was watching. You open your fingers and set the Waymarker groove-up on the table between the letter and the empty cup. It looks exactly the same as before. That is how good seating looks.\n\n*✦ Waymarker (father's) has changed — description, provenance.*",
+      "sceneSummary": "Silas seats the Waymarker to Stillwater's Trouble before opening the letter — the tool now knows its home.",
       "choices": [
         {
-          "label": "Open the sealed letter now — your father wrote it when you were four, and you have waited long enough.",
+          "label": "Open the sealed letter now — the Waymarker is placed, and the letter is waiting",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
@@ -1759,7 +1765,7 @@
           "trivial": true
         },
         {
-          "label": "Ask Ama about the unfinished layer — your father stopped the work deliberately, and she may know why.",
+          "label": "Ask your mother what she knows about the maker's mark on the letter — Veth has recognized it and said nothing; Ama may have more",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
@@ -1769,22 +1775,22 @@
           "trivial": true
         },
         {
-          "label": "Tell Ama what you read in the Waymarker — the full design, the second layer, the room he left. Let her know what he built.",
+          "label": "Ask Veth what she has been holding back about the maker's mark — she has had it in her eye since the letter came out of the drawer",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "comfort"
+            "persuade"
           ],
           "trivial": true
         },
         {
-          "label": "Seat the Waymarker to Stillwater's Trouble now, before you open the letter — give it a home before you read what your father had to say about the road.",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Read the Waymarker's second unfinished layer with Order-Sense — your father left room in it deliberately, and you want to know what the room is shaped to hold",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": 15,
           "intentTags": [
-            "craft"
+            "study"
           ],
           "abilityId": "order_sense",
           "energyCost": 2,
@@ -1792,30 +1798,30 @@
         }
       ],
       "scene": {
-        "setting": "Inside Silas's mother's kitchen in Cairnhold — low fire, late evening, single window dark. The oilcloth lies in three folds on the table. The Waymarker rests groove-up between Silas and the sealed letter.",
+        "setting": "Inside Silas's mother's kitchen in Cairnhold — low fire, late evening, single window dark. The oilcloth lies in three folds on the table. The Waymarker rests groove-up between Silas and the sealed letter, freshly seated.",
         "npcsPresent": [
           {
             "name": "Ama (Silas's Mother)",
-            "state": "Watching Silas's face — still, hands in her lap, waiting to hear what he read."
+            "state": "Chin dropped a fraction — she recognized the seating moment. Still waiting, hands in her lap."
           },
           {
             "name": "Pell Ran Marsh",
-            "state": "Eyes on the Waymarker — reading the material of it the way she reads iron, quietly."
+            "state": "Eyes on Silas's hands — she watched the whole seating, reading the finish the way she reads iron."
           },
           {
             "name": "Veth Ondra",
-            "state": "Palms flat on the table, gaze moving between the Waymarker and the sealed letter — the maker's mark still unspoken."
+            "state": "Gone still — the maker's mark still held back, unspoken."
           },
           {
             "name": "Huginn",
-            "state": "Very still on the back of Veth's chair — the particular stillness it holds when something is not quite ending but is close to something that matters."
+            "state": "Very still on the back of Veth's chair — the particular stillness it holds when something is not quite ending but is close."
           }
         ],
         "objects": [
-          "Waymarker (father's) — unwrapped, groove-up on the table, oilcloth in three folds beside it",
+          "Waymarker (father's) — groove-up on the table, now seated to Stillwater's Trouble, oilcloth in three folds beside it",
           "Father's Sealed Letter — folded, sealed with an unfamiliar maker's mark, beside the Waymarker",
           "Low fire in the hearth",
-          "Three cups of tea on the table — refilled, warm",
+          "Three cups of tea on the table — warm",
           "Flatbread on the wooden board — mostly eaten",
           "Dried herbs hanging from the ceiling beam",
           "Work counter — deep drawer now open behind Ama",
@@ -1829,67 +1835,78 @@
           "The heath door remains open a hand's width"
         ]
       },
+      "characterDeltas": {
+        "energy": -2
+      },
       "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "silias-mother",
-          "name": "Silas's Mother",
-          "note": "Watching Silas's face after he set the Waymarker down — waiting to hear what he read in it.",
-          "statusNote": "Seated at the kitchen table in Cairnhold — watching Silas read the Waymarker, waiting.",
-          "learned": [
-            "The Waymarker holds a second unfinished layer — her husband stopped the work deliberately and left room in it."
-          ]
-        },
         {
           "op": "update",
           "npcId": "pell-ran-marsh",
           "name": "Pell Ran Marsh",
-          "note": "Reading the material of the Waymarker the way she reads iron — quietly, without being asked.",
-          "statusNote": "Seated at the kitchen table in Cairnhold — eyes on the Waymarker, reading it."
+          "note": "Watched the Waymarker seating with full attention — read the finish the way she reads iron.",
+          "statusNote": "Seated at the kitchen table in Cairnhold — eyes on Silas's hands, reading the seating finish."
         },
         {
           "op": "update",
           "npcId": "veth-ondra",
-          "name": "Veth (Stillwater) Ondra",
-          "note": "Gaze moving between the Waymarker and the sealed letter — the maker's mark still held back, not yet spoken.",
-          "statusNote": "Seated at the kitchen table in Cairnhold — holding what she recognizes about the maker's mark."
+          "name": "Veth Ondra",
+          "note": "Went still at the seating moment — the maker's mark on the letter still held back.",
+          "statusNote": "Seated at the kitchen table in Cairnhold — still, the maker's mark unspoken."
+        },
+        {
+          "op": "update",
+          "npcId": "silass-mother",
+          "name": "Silas's Mother",
+          "note": "Recognized the seating moment from long familiarity — chin dropped, waiting.",
+          "statusNote": "Seated at the kitchen table in Cairnhold — recognized the Wright's finish, waiting for what comes next."
+        }
+      ],
+      "itemUpdates": [
+        {
+          "name": "Waymarker (father's)",
+          "description": "A small disc of pale grey material — neither quite stone nor quite metal — with a single groove worn into its face in a closed oval. His father's thumb wore that groove. Now seated to Stillwater's Trouble: the tool knows its home. A second unfinished layer remains open, deliberate, waiting for something his father did not supply.",
+          "provenance": "Kept in the deep drawer beneath the work counter in Cairnhold for years. Retrieved on World-day 23 evening. Seated to Stillwater's Trouble the same night, before the letter was opened."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "silas-father",
-          "label": "Silas's Father — the Waymarker",
-          "kind": "person",
-          "fact": "The Waymarker is a locating tool of real depth — it holds the full design of a place the bearer has seated themselves into, readable from any distance. His father wore the thumb-groove into it. There is a second unfinished layer beneath the primary work — the seam where it stops is clean and deliberate, not abandoned. He left room in it. Whether that was intention or interruption is not yet known.",
+          "topic": "waymarker-fathers",
+          "label": "The Waymarker — Father's Tool",
+          "kind": "lore",
+          "fact": "The Waymarker has been seated to Stillwater's Trouble — it now knows that address. A second unfinished layer remains open, left deliberately by Silas's father, its purpose still unknown.",
           "links": [
-            "stillwaters-trouble",
             "the-edge-district-ledger",
-            "order-sense"
+            "stillwaters-trouble"
           ]
         }
       ],
-      "characterDeltas": {
-        "energy": -2
-      },
+      "placeUpdates": [
+        {
+          "note": "The Waymarker is now seated to Stillwater's Trouble — the tool carries the post's address and can locate it from a distance.",
+          "flag": {
+            "waymarker_seated": "stillwaters-trouble"
+          }
+        }
+      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short, focused examination of the Waymarker."
+        "why": "A short, quiet moment of craft work at the table — the seating itself took only minutes."
       }
     },
     "sceneState": {
-      "setting": "Inside Silas's mother's kitchen in Cairnhold — low fire, late evening, single window dark. The oilcloth lies in three folds on the table. The Waymarker rests groove-up between Silas and the sealed letter.",
+      "setting": "Inside Silas's mother's kitchen in Cairnhold — low fire, late evening, single window dark. The oilcloth lies in three folds on the table. The Waymarker rests groove-up between Silas and the sealed letter, freshly seated.",
       "npcsPresent": [
         {
           "name": "Ama (Silas's Mother)",
-          "state": "Watching Silas's face — still, hands in her lap, waiting to hear what he read."
+          "state": "Chin dropped a fraction — she recognized the seating moment. Still waiting, hands in her lap."
         },
         {
           "name": "Pell Ran Marsh",
-          "state": "Eyes on the Waymarker — reading the material of it the way she reads iron, quietly."
+          "state": "Eyes on Silas's hands — she watched the whole seating, reading the finish the way she reads iron."
         },
         {
           "name": "Veth Ondra",
-          "state": "Palms flat on the table, gaze moving between the Waymarker and the sealed letter — the maker's mark still unspoken."
+          "state": "Gone still — the maker's mark still held back, unspoken."
         },
         {
           "name": "Huginn",
@@ -1897,10 +1914,10 @@
         }
       ],
       "objects": [
-        "Waymarker (father's) — unwrapped, groove-up on the table, oilcloth in three fold",
+        "Waymarker (father's) — groove-up on the table, now seated to Stillwater's Troubl",
         "Father's Sealed Letter — folded, sealed with an unfamiliar maker's mark, beside ",
         "Low fire in the hearth",
-        "Three cups of tea on the table — refilled, warm",
+        "Three cups of tea on the table — warm",
         "Flatbread on the wooden board — mostly eaten",
         "Dried herbs hanging from the ceiling beam",
         "Work counter — deep drawer now open behind Ama",
@@ -2424,7 +2441,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d12] Watched Silas's back while he used Deathsense at the gate — asked quietly if he was all right.",
         "[d12] Silas read her through the soul bond at the gate — she felt the Deathsense come back through it as information, accepted it, and told him to take his time.",
         "[d12] Stepped into the room when named — steady, not performing, waiting for the moment to open further.",
         "[d12] Took the bread knife and is slicing — found something useful to do with her hands without being managed into it.",
@@ -2433,7 +2449,8 @@
         "[d12] Held still under Silas's mother's verdict — the right thing to do. Something in her jaw eased afterward.",
         "[d12] Let Silas name it. Did not say it for him. Held still under his mother's second read of her.",
         "[d12] Eyes on the two objects — reading them before anyone opens anything",
-        "[d12] Reading the material of the Waymarker the way she reads iron — quietly, without being asked."
+        "[d12] Reading the material of the Waymarker the way she reads iron — quietly, without being asked.",
+        "[d12] Watched the Waymarker seating with full attention — read the finish the way she reads iron."
       ],
       "knownFacts": [
         "Quiet's ending ran clean through Silas and the grove both — she held it without comment.",
@@ -2454,7 +2471,7 @@
         "finding the honest entry point into an unfamiliar room"
       ],
       "status": "active",
-      "statusNote": "Seated at the kitchen table in Cairnhold — eyes on the Waymarker, reading it.",
+      "statusNote": "Seated at the kitchen table in Cairnhold — eyes on Silas's hands, reading the seating finish.",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 12
@@ -3125,7 +3142,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d9] Named plainly that word travels faster than roads — observing the town's read of Silas.",
         "[d12] Watching the house's placement on the cairn-line with careful attention — has not spoken",
         "[d12] Still reading the house's placement on the cairn-line. Has not spoken what she sees.",
         "[d12] Still outside the door — holding the threshold, not yet introduced.",
@@ -3134,7 +3150,8 @@
         "[d12] Gave the Ashwarden framing of Huginn to Silas's mother — plain, accurate, without elaboration beyond what was needed.",
         "[d12] Cited as the one who can see the bond, if asked — the Ashwarden witness still present and available.",
         "[d12] Recognized the shape of the maker's seal — has not named what she recognizes yet",
-        "[d12] Gaze moving between the Waymarker and the sealed letter — the maker's mark still held back, not yet spoken."
+        "[d12] Gaze moving between the Waymarker and the sealed letter — the maker's mark still held back, not yet spoken.",
+        "[d12] Went still at the seating moment — the maker's mark on the letter still held back."
       ],
       "knownFacts": [
         "Silas understands the difference between tending a closed site and reopening it — named it himself, unprompted",
@@ -3157,7 +3174,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Seated at the kitchen table in Cairnhold — holding what she recognizes about the maker's mark.",
+      "statusNote": "Seated at the kitchen table in Cairnhold — still, the maker's mark unspoken.",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 12
@@ -3227,7 +3244,6 @@
       },
       "relationship": 8,
       "history": [
-        "[d12] Received Pell's introduction plainly — looked from Pell to Silas, made the small internal adjustment of a confirmed suspicion, then turned to Pell and said 'come in, both of you, the bread is done.'",
         "[d12] Received Veth with a single nod and took down a third cup without being asked — then noticed Huginn on the chair and chose not to remark on him yet.",
         "[d12] Watched Silas move to the counter without asking — allowed it. Passed him a cup without looking. Set the third cup on the table and looked at all four arrivals together. Said 'there is enough bread' and left a door open for Pell with the bread and knife.",
         "[d12] Distributed cups, took her seat, read the room settle. Opened with a plain observation about the road — speaking to all three travelers at once.",
@@ -3236,7 +3252,8 @@
         "[d12] Heard the Ashwarden explanation of Huginn; received Veth's framing without visible surprise; asked for the hinge-bolt story by name.",
         "[d12] Named her verdict on Pell plainly to Silas — suits you, because she isn't soft about it. Cup back in hand. Verdict delivered without ceremony.",
         "[d12] Received the soul bond plainly — judged both Silas and Pell by how it was said. Named both correct: Silas for saying it first, Pell for letting him.",
-        "[d12] Watching Silas's face after he set the Waymarker down — waiting to hear what he read in it."
+        "[d12] Watching Silas's face after he set the Waymarker down — waiting to hear what he read in it.",
+        "[d12] Recognized the seating moment from long familiarity — chin dropped, waiting."
       ],
       "knownFacts": [
         "Huginn is an Ashwarden companion — drawn by the craft, not trained; attends endings by nature",
@@ -3252,7 +3269,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Seated at the kitchen table in Cairnhold — watching Silas read the Waymarker, waiting.",
+      "statusNote": "Seated at the kitchen table in Cairnhold — recognized the Wright's finish, waiting for what comes next.",
       "domains": {
         "primary": "ashwarden"
       },
@@ -3858,9 +3875,12 @@
     "the_crossing": {
       "visits": 1,
       "notes": [
-        "[d12] The deep drawer beneath the work counter held Silas's father's Waymarker and sealed letter for years — both now retrieved and on the table. The drawer is open."
+        "[d12] The deep drawer beneath the work counter held Silas's father's Waymarker and sealed letter for years — both now retrieved and on the table. The drawer is open.",
+        "[d12] The Waymarker is now seated to Stillwater's Trouble — the tool carries the post's address and can locate it from a distance."
       ],
-      "flags": {},
+      "flags": {
+        "waymarker_seated": "stillwaters-trouble"
+      },
       "lastVisit": 12,
       "vectorsKnown": [],
       "_containmentNotes": [
@@ -5353,21 +5373,21 @@
     }
   },
   "tendencies": {
-    "strategic": 13.361813459074039,
-    "cerebral": 17.22789191605196,
-    "social": 12.729739508921064,
-    "generous": 4.367375615503252,
-    "cautious": 4.385287921987067,
-    "physical": 0.23618404449718552,
-    "risky": 0.24768576038416817,
-    "ruthless": 0.07897189791259862,
-    "carousing": 0.8602782503567176,
-    "amorous": 1.8715030353490463,
-    "patient": 0.49222259331438933,
-    "stealth": 0.030609709388464714,
-    "devotion": 0.6253283537320378,
-    "craft": 0.8147256791303825,
-    "leadership": 0.15580681788672354
+    "strategic": 13.027768122597188,
+    "cerebral": 16.79719461815066,
+    "social": 12.411496021198037,
+    "generous": 4.25819122511567,
+    "cautious": 4.2756557239373905,
+    "physical": 0.2302794433847559,
+    "risky": 0.24149361637456396,
+    "ruthless": 0.07699760046478366,
+    "carousing": 0.8387712940977996,
+    "amorous": 1.82471545946532,
+    "patient": 0.4799170284815296,
+    "stealth": 0.029844466653753097,
+    "devotion": 0.6096951448887368,
+    "craft": 1.794357537152123,
+    "leadership": 0.15191164743955546
   },
   "aptitudes": [
     "strategist",
@@ -5375,7 +5395,7 @@
     "scholar",
     "sage"
   ],
-  "actionCount": 625,
+  "actionCount": 626,
   "grantsVersion": 1,
   "reconcileVersion": 12,
   "gallery": [
@@ -5725,8 +5745,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784568925325,
-  "rev": 958,
+  "updatedAt": 1784569228366,
+  "rev": 959,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -7346,7 +7366,7 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 63,
+      "order_sense": 64,
       "palework": 29,
       "deathsense": 30,
       "shadowstep": 17,
@@ -7554,7 +7574,7 @@
   "regionsKnown": {
     "valley": 435,
     "the_palelands": 6,
-    "the_center": 13
+    "the_center": 14
   },
   "foreclosed": [
     "rootkin",
@@ -7634,10 +7654,10 @@
     {
       "id": "sess-6",
       "startedAt": "2026-07-20T15:47:02.528Z",
-      "lastAt": "2026-07-20T17:35:25.320Z",
+      "lastAt": "2026-07-20T17:40:28.363Z",
       "startDay": 20,
       "endDay": 20,
-      "beats": 3
+      "beats": 4
     }
   ],
   "company": [
@@ -7825,17 +7845,18 @@
     "the_crossing": "https://image.pollinations.ai/prompt/The%20Crossing%3A%20Every%20axis%20crosses%20here%20at%20nothing%2C%20and%20the%20result%20is%20not%20grey%20%E2%80%94%20it%20is%20CROWDED.%20The%20Crossing%20leans%20toward%20no%20pole%2C%20which%20is%20precisely%20why%20it%20can%20hold%20them%20all%3A%20an%20Umbral%20and%20a%20Blazeborn%20drink%20at%20the%20same%20table%20because%20neither%20has%20the%20standing%20to%20make%20the%20other%20leave.%20The%20poles%20are%20lonely%20places.%20The%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=24144&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 2,
-    "choices": 2,
-    "characterDeltas": 2,
-    "scene": 2,
-    "npcUpdates": 2,
+    "sceneSummary": 3,
+    "choices": 3,
+    "characterDeltas": 3,
+    "scene": 3,
+    "npcUpdates": 3,
     "factUpdates": 1,
-    "placeUpdates": 1,
-    "codexUpdates": 2,
-    "timeOps": 2,
+    "placeUpdates": 2,
+    "codexUpdates": 3,
+    "timeOps": 3,
     "imagePrompt": 1,
-    "sceneEnded": 1
+    "sceneEnded": 1,
+    "itemUpdates": 1
   },
-  "_opTurns": 2
+  "_opTurns": 3
 }

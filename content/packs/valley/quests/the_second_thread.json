@@ -20,8 +20,8 @@
         "numinous",
         "horizon"
       ],
-      "premise": "His father left two threads. The first was in a drawer: the Waymarker, and Ama held it until he came asking.\n\nThe second could not be left in a drawer, because a drawer holds NOTES and what his father left was WORK — begun, unfinished, and standing somewhere still. He left it with a craftsman named Edvar Crane, at the Crossing, where all roads meet. Fifteen years ago.\n\nThe Waymarkers were not surveyors. They were the last people who knew how a waygate is made — and they had never made one. The Numinous built every gate in the world before the Transition, by touching meaning directly, and then dissolved most of the way out of the world that could have taught anyone else. What the Waymarkers held was the leavings: a practice reconstructed backwards from finished gates by people who could not do what the builders did.\n\nSilas's father was trying to finish one. **There is a half-made waygate.** A fold begun and never closed, standing since before the post fell — neither open nor shut, and a fold that is neither is not stable, it is WAITING. It is near the Crossing. Everything crosses at the Crossing.",
-      "stakes": "A half-made fold does not stay half-made forever. It resolves, one way or the other, and nobody alive knows which way or when.\n\nAnd it cannot be finished by a Numinous, because finishing is not what it needs — it was begun by reaching and it has stopped where reaching ends. **It needs a maker's hand to close it and a warden's contact to let it go, and those are the same man exactly once in a generation.** Silas is a wright who tends endings. That is not a coincidence in his lineage. It is what the lineage was FOR.",
+      "premise": "His father left two threads. The first was in a drawer — the Waymarker — and Ama held it until he came asking.\n\nThe second could not go in a drawer. She would not say more than that, because she does not know more than that.\n\nWhat she gave him was a name, a place, and fifteen years of silence: **Edvar Crane**, a craftsman, at the Crossing where all roads meet. His father said this person holds the other half — the part of the work he could not leave behind him.",
+      "stakes": "A man his father trusted has been holding something for fifteen years. People move, trades fold, and the Crossing is the biggest market in the world.",
       "recurrence": "once",
       "stages": [
         {
@@ -30,7 +30,8 @@
           "objective": "Fifteen years is a long time. Learn what happened to the man who held the second thread.",
           "condition": "Fifteen years is a long time and the Crossing is the biggest market in the world. A craftsman leaves a trail even when a man doesn't — work carries a mark, and debts outlive their debtors.",
           "change": "Codex: Edvar Crane, established as real — his trade, his standing, and whether he is above ground.",
-          "unlockHint": "The Crossing opens as a place with a memory, not a hub you pass through."
+          "unlockHint": "The Crossing opens as a place with a memory, not a hub you pass through.",
+          "reveals": "Edvar Crane is real, and what became of him is no longer a rumour."
         },
         {
           "id": "s2",
@@ -38,7 +39,8 @@
           "objective": "Take custody of the second thread and understand what kind of object it is.",
           "condition": "Whatever your father left, it isn't paper. Ama was clear about that: it couldn't go in a drawer. Find out what kind of thing it is by handling it.",
           "change": "A real item enters inventory, unfinished, with its own evolution track. It is not a key and does not open anything yet.",
-          "unlockHint": "The item can be worked on. Working on it teaches things nothing else teaches."
+          "unlockHint": "The item can be worked on. Working on it teaches things nothing else teaches.",
+          "reveals": "The second thread is not a document. It is WORK — begun, unfinished, and legible to a wright."
         },
         {
           "id": "s3",
@@ -46,7 +48,8 @@
           "objective": "Find out what actually happened where your father worked — and why the work stopped.",
           "condition": "'The post fell.' Everyone says it that way and nobody says more. Someone alive knows what actually happened there.",
           "change": "Codex: what the post was, what it was doing, and what stopped it. A named cause where there was a euphemism.",
-          "unlockHint": "Standing with the Waymarkers' survivors, if any — or the knowledge that he is the last of them."
+          "unlockHint": "Standing with the Waymarkers' survivors, if any — or the knowledge that he is the last of them.",
+          "reveals": "'The post fell' has a cause now, and the cause decides whether this is your father's work or his correction."
         },
         {
           "id": "s4",
@@ -54,7 +57,8 @@
           "objective": "Reach the half-made fold and read it. Do nothing else.",
           "condition": "Go and stand in front of it. Don't work it, don't touch it — look at it properly, with everything you have, and understand what you are looking at.",
           "change": "The fold becomes a known location with a state that advances on the world count whether or not he returns.",
-          "unlockHint": "A visible timer on the world's own clock. It is resolving. He now knows roughly how long."
+          "unlockHint": "A visible timer on the world's own clock. It is resolving. He now knows roughly how long.",
+          "reveals": "There is a half-made fold, it has been waiting fifteen years, and it is resolving on its own clock."
         },
         {
           "id": "s5",
@@ -62,7 +66,8 @@
           "objective": "Find the practice. Reconstruct, borrow, or invent what the Waymarkers could not finish.",
           "condition": "Nobody alive has made one. Three peoples each hold a piece and none of them holds the whole. Find, borrow, or work out the rest.",
           "change": "A new practice enters the character — braided, not taught. Something no existing tradition owns.",
-          "unlockHint": "A combination or ability minted from this arc, attributable to Silas, that did not exist in the world before."
+          "unlockHint": "A combination or ability minted from this arc, attributable to Silas, that did not exist in the world before.",
+          "reveals": "Nobody alive has made a waygate. Three peoples hold a piece each. You now hold something none of them do."
         },
         {
           "id": "s6",
@@ -70,7 +75,8 @@
           "objective": "Resolve the fold. Both are real completions; neither is a failure.",
           "condition": "You know what it is now, and you know what you can do. Both roads are real.",
           "change": "The world map changes, or a standing danger to the Crossing is removed. Either way it is permanent and public.",
-          "unlockHint": "An outcome the whole world can see. Other characters' saves will meet it as canon."
+          "unlockHint": "An outcome the whole world can see. Other characters' saves will meet it as canon.",
+          "reveals": "It can be finished or it can be ended, and you are the only person who could do either."
         }
       ],
       "routes": {
@@ -102,7 +108,8 @@
           "summary": "You cut it and gave it away. A gate that bears no name, used daily by people who will never ask who made it."
         }
       ],
-      "notes_for_gm": "EPIC ARC — Erik-directed. Runs long, across regions, and every stage must LAND SOMETHING (his explicit note: he burned the last arc too easily and saw no result). s1 opens a place, s2 gives a real item with an evolution track, s3 replaces a euphemism with a cause, s4 puts a visible timer on the world clock, s5 mints a practice that did not exist, s6 changes the map. **No stage is only a conversation and no stage is only a fight.**\n\n⛔ The fold is NOT a monster and NOT a dungeon. The danger is that it is unresolved, and unresolved things resolve.\n\nThe three doors at s5 must all genuinely work. If the Numinous route is the 'right' one the arc collapses into a fetch. His father chose the third door — the work itself — and that is a statement about the man, not a hint.\n\n**Pell, Veth and Cassiel each have a place here**: a smith for the making, an Ashwarden for the letting-go, a keeper for what is named. Huginn attends the ending if there is one. And whatever grew in the hollow should be present at s6 — it is the proof that Silas can make a thing that carries an ending forward, and that is the exact skill this fold has been waiting fifteen years for someone to have.\n\n## STAGE MECHANISM (GM ONLY — stage `condition` is rendered to the PLAYER at app.js:5523, so none of this may go there)\n\ns1 — The Crossing is the great centre-market where every road ends. Crane was a craftsman. Craftsmen leave trails: guild rolls, debts, a bench someone else inherited, a mark on a piece of work. Follow those, not a name.\n\ns2 — It is not a document. It is a WORK — partly made, with the maker's intent still legible in it the way a half-cut joint tells you what it was going to be. Silas can read it as a wright, which is precisely why his father left it to a craftsman to hold rather than a scholar.\n\ns3 — The post fell. That is the phrase everyone uses and nobody unpacks. Whether it fell to a failure, an attack, an Accord, or the fold itself is the question, and the answer determines whether Silas is finishing his father's work or correcting it.\n\ns4 — Deathsense will tell him something is ending here, slowly, and has been for fifteen years. Order-sense will tell him the design is sound and incomplete. **The Double Register is the only way to perceive both at once, and he discovered that braid himself, in play, before he knew it was needed.** No craft yet — just standing there and understanding what he is looking at.\n\ns5 — Three doors and all three should be walkable: **the Numinous**, who built the gates and mostly cannot explain it because they did it by reaching; **the Lattice-Cities**, who maintain gates and understand the measurement without ever having made one; and **the work itself**, which is the door his father chose and the reason the second thread exists. Whichever he uses shapes what the finished fold IS.\n\ns6 — To FINISH: close the fold as a maker closes a joint, and there is a new way through the world where there was none — the first waygate made since the Transition, made by a man who is not Numinous, by a route the builders did not use. To END it: let it go, cleanly, as an Ashwarden lets things go — and the danger stops, the work stops, and his father's unfinished thing is finished by being concluded.\n\n**He can do both because he is both.** That is the whole arc."
+      "notes_for_gm": "EPIC ARC — Erik-directed. Runs long, across regions, and every stage must LAND SOMETHING (his explicit note: he burned the last arc too easily and saw no result). s1 opens a place, s2 gives a real item with an evolution track, s3 replaces a euphemism with a cause, s4 puts a visible timer on the world clock, s5 mints a practice that did not exist, s6 changes the map. **No stage is only a conversation and no stage is only a fight.**\n\n⛔ The fold is NOT a monster and NOT a dungeon. The danger is that it is unresolved, and unresolved things resolve.\n\nThe three doors at s5 must all genuinely work. If the Numinous route is the 'right' one the arc collapses into a fetch. His father chose the third door — the work itself — and that is a statement about the man, not a hint.\n\n**Pell, Veth and Cassiel each have a place here**: a smith for the making, an Ashwarden for the letting-go, a keeper for what is named. Huginn attends the ending if there is one. And whatever grew in the hollow should be present at s6 — it is the proof that Silas can make a thing that carries an ending forward, and that is the exact skill this fold has been waiting fifteen years for someone to have.\n\n## STAGE MECHANISM (GM ONLY — stage `condition` is rendered to the PLAYER at app.js:5523, so none of this may go there)\n\ns1 — The Crossing is the great centre-market where every road ends. Crane was a craftsman. Craftsmen leave trails: guild rolls, debts, a bench someone else inherited, a mark on a piece of work. Follow those, not a name.\n\ns2 — It is not a document. It is a WORK — partly made, with the maker's intent still legible in it the way a half-cut joint tells you what it was going to be. Silas can read it as a wright, which is precisely why his father left it to a craftsman to hold rather than a scholar.\n\ns3 — The post fell. That is the phrase everyone uses and nobody unpacks. Whether it fell to a failure, an attack, an Accord, or the fold itself is the question, and the answer determines whether Silas is finishing his father's work or correcting it.\n\ns4 — Deathsense will tell him something is ending here, slowly, and has been for fifteen years. Order-sense will tell him the design is sound and incomplete. **The Double Register is the only way to perceive both at once, and he discovered that braid himself, in play, before he knew it was needed.** No craft yet — just standing there and understanding what he is looking at.\n\ns5 — Three doors and all three should be walkable: **the Numinous**, who built the gates and mostly cannot explain it because they did it by reaching; **the Lattice-Cities**, who maintain gates and understand the measurement without ever having made one; and **the work itself**, which is the door his father chose and the reason the second thread exists. Whichever he uses shapes what the finished fold IS.\n\ns6 — To FINISH: close the fold as a maker closes a joint, and there is a new way through the world where there was none — the first waygate made since the Transition, made by a man who is not Numinous, by a route the builders did not use. To END it: let it go, cleanly, as an Ashwarden lets things go — and the danger stops, the work stops, and his father's unfinished thing is finished by being concluded.\n\n**He can do both because he is both.** That is the whole arc.",
+      "shape": "His father left two threads. The first was in a drawer: the Waymarker, and Ama held it until he came asking.\n\nThe second could not be left in a drawer, because a drawer holds NOTES and what his father left was WORK — begun, unfinished, and standing somewhere still. He left it with a craftsman named Edvar Crane, at the Crossing, where all roads meet. Fifteen years ago.\n\nThe Waymarkers were not surveyors. They were the last people who knew how a waygate is made — and they had never made one. The Numinous built every gate in the world before the Transition, by touching meaning directly, and then dissolved most of the way out of the world that could have taught anyone else. What the Waymarkers held was the leavings: a practice reconstructed backwards from finished gates by people who could not do what the builders did.\n\nSilas's father was trying to finish one. **There is a half-made waygate.** A fold begun and never closed, standing since before the post fell — neither open nor shut, and a fold that is neither is not stable, it is WAITING. It is near the Crossing. Everything crosses at the Crossing.\n\n## STAKES (GM)\nA half-made fold does not stay half-made forever. It resolves, one way or the other, and nobody alive knows which way or when.\n\nAnd it cannot be finished by a Numinous, because finishing is not what it needs — it was begun by reaching and it has stopped where reaching ends. **It needs a maker's hand to close it and a warden's contact to let it go, and those are the same man exactly once in a generation.** Silas is a wright who tends endings. That is not a coincidence in his lineage. It is what the lineage was FOR."
     }
   ]
 }

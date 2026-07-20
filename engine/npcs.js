@@ -6,8 +6,33 @@
 // (Offscreen NPC evolution — them growing while you're away — is world-tick work, v0.4.)
 
 import { slugify } from "./quests.js";
-import { smartClamp } from "./namematch.js"; // SNG-152: model prose clamps on a word boundary, never mid-word
+import { smartClamp, normName } from "./namematch.js"; // SNG-152: model prose clamps on a word boundary, never mid-word
 import { isMinorSubject } from "./art.js";
+
+/** SNG-190 §2: a generateRequest:npc in the SAME turn as an op:"meet" for that person is ONE person.
+ *  Both ops are mandatory by the contract (rule 14 + the generateRequest rule) and nothing reconciled
+ *  them, so Silas's mother was minted twice — a stub `silas-mother` from the meet AND `Hesta Vorn` from
+ *  the generation — at the campaign's most load-bearing moment. This re-homes the freshly generated
+ *  record onto the MET id so two ids never survive: the meet made the stub, the generation gives it a
+ *  face and a real name, and every op that already referenced the met id keeps working. Matches by the
+ *  request hint NAMING the met person (the model references who it just met). Mutates character; returns
+ *  the id the record now lives under (the met id when merged, else its own). Pure but for that mutation. */
+export function reconcileGeneratedNpcWithMeet(character, npcUpdates, req, rec) {
+  if (!rec?.id || !character?.npcRegistry) return rec?.id;
+  const hint = normName(`${req?.hint || ""} ${req?.name || ""}`);
+  const meet = (npcUpdates || []).find(u => u?.op === "meet" && u.npcId && u.name
+    && character.npcRegistry[u.npcId] && !character.npcRegistry[u.npcId]._filledFromGenerate
+    && (() => { const n = normName(u.name); return n.length > 2 && hint.includes(n); })());
+  if (!meet || meet.npcId === rec.id) return rec.id;
+  const oldId = rec.id;
+  if (character.generated?.npc) { delete character.generated.npc[oldId]; }   // drop the second id generate() persisted
+  rec.id = meet.npcId;
+  if (character.generated?.npc) character.generated.npc[rec.id] = rec;       // re-home under the met id
+  const stub = character.npcRegistry[meet.npcId];
+  stub.name = rec.name; stub._filledFromGenerate = true; stub._mergedFrom = oldId; // the stub becomes the person
+  for (const k of ["domains", "domainsSource", "people", "peopleSource", "appearance", "gender", "role"]) if (rec[k] != null && stub[k] == null) stub[k] = rec[k];
+  return rec.id;
+}
 
 const CAPS = { registry: 40, history: 10, knownFacts: 8, skills: 6 };
 

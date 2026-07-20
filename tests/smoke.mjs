@@ -5892,6 +5892,26 @@ await (async () => {
     renderProseHtml("A quiet room & a <held> breath.") === "<p>A quiet room &amp; a &lt;held&gt; breath.</p>");
   check("190 §4: the narration renderer uses it (no raw esc-only paragraph map)",
     /turn\.narration\.split\(\/\\n\\n\+\/\)\.map\(renderProseHtml\)/.test(appSrc190));
+
+  // SNG-190 §2: a generateRequest:npc in the same turn as an op:"meet" is ONE person — the exact capture.
+  const { reconcileGeneratedNpcWithMeet } = await import("../engine/npcs.js");
+  const char = {
+    generated: { npc: { "hesta-vorn": { id: "hesta-vorn", name: "Hesta Vorn", _gen: true, domains: { primary: "ashwarden" }, appearance: "a woman with flour on her hands" } } },
+    npcRegistry: { "silas-mother": { id: "silas-mother", name: "Silas's Mother", relationship: 4, bondType: "family" } }
+  };
+  const rec = char.generated.npc["hesta-vorn"];
+  const req = { type: "npc", hint: "Silas's mother — a woman who keeps a cairn-line house" };
+  const npcUpdates = [{ op: "meet", npcId: "silas-mother", name: "Silas's Mother" }];
+  const resolvedId = reconcileGeneratedNpcWithMeet(char, npcUpdates, req, rec);
+  check("190 §2: the generated record is re-homed onto the MET id (silas-mother)", resolvedId === "silas-mother" && rec.id === "silas-mother");
+  check("190 §2: only ONE record survives — the second id (hesta-vorn) is gone", !char.generated.npc["hesta-vorn"] && !!char.generated.npc["silas-mother"]);
+  check("190 §2: the met stub becomes the person — real name, prior bond kept", char.npcRegistry["silas-mother"].name === "Hesta Vorn" && char.npcRegistry["silas-mother"].bondType === "family" && char.npcRegistry["silas-mother"]._filledFromGenerate);
+  check("190 §2: the person's generated craft carries onto the stub", char.npcRegistry["silas-mother"].domains?.primary === "ashwarden");
+  // a request about a DIFFERENT person must not falsely merge with the meet
+  const char2 = { generated: { npc: { "tam-oren": { id: "tam-oren", name: "Tam Oren", _gen: true } } }, npcRegistry: { "silas-mother": { id: "silas-mother", name: "Silas's Mother" } } };
+  const rec2 = char2.generated.npc["tam-oren"];
+  reconcileGeneratedNpcWithMeet(char2, npcUpdates, { type: "npc", hint: "a wandering tinker met on the road" }, rec2);
+  check("190 §2: an unrelated generateRequest does NOT merge into the meet (no false dedup)", rec2.id === "tam-oren" && !!char2.generated.npc["tam-oren"] && char2.npcRegistry["silas-mother"].name === "Silas's Mother");
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

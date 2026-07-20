@@ -18,6 +18,7 @@ import { generatedRecords } from "./generate.js";
 import { syncEnabled, fetchRepoJSON, fetchLedger, pushOwnedFile, pushMergedFile } from "./sync.js";
 import { absoluteWorldDay, worldDayAt, worldCount } from "./worldtime.js";
 import { advanceAssignment, progressAgainst } from "./assignments.js"; // SNG-191 §4: the world advances delegated work
+import { seedArc, fomentArc, surfaceableArcs, markSurfaced } from "./latentarcs.js"; // SNG-191 §7: the world's own agenda
 import { ensureCanonStore, promotionCandidates, promoteInto, canonForViewer } from "./canon.js";
 
 const NEWS_CAP = 20;
@@ -138,6 +139,61 @@ export async function runWorldTick({ character, content, currentDay, advanceAssi
     ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
   }
   return { ticked: true, news };
+}
+
+/** SNG-191 §7 — THE GENERATION TURN. The world has its own agenda, and it runs on the world COUNT, not
+ *  the player's attention. Latent arcs foment whether or not anyone has seen them; some the world solves
+ *  itself (§7.3, the fate that keeps it from being hero-dependent); some SURFACE as the player's first
+ *  contact — a rumour now specific enough to repeat (§7.4, content not an alert). New arcs are seeded
+ *  from the DISPOSITION of the regions the player knows, so every one has a cause that existed before it
+ *  surfaced (§7 inv2 attributable). Runs alongside the return-tick. seedArcs injectable; never throws. */
+export async function runGenerationTurn({ character, content, now = Date.now(), seedArcs = aiSeedArcs } = {}) {
+  if (!character.worldState) character.worldState = initWorldState(1);
+  const ws = character.worldState;
+  const count = worldCount(now);
+  if (ws.lastGenCount == null) { ws.lastGenCount = count; return { news: [] }; } // first observation anchors the baseline
+  const elapsed = count - ws.lastGenCount;
+  if (elapsed <= 0) return { news: [] };
+  ws.lastGenCount = count;
+  const news = [];
+
+  // 1. foment existing arcs — they grow (unguardrailed), or the world quietly resolves one itself (§7.3).
+  for (const arc of Object.values(ws.latentArcs || {})) {
+    const before = arc.fate;
+    fomentArc(arc, elapsed, Math.random, count);
+    if (before === "growing" && arc.fate === "resolved") news.push(`Word reaches you that ${arc.premise} — settled, it seems, without you.`);
+  }
+  // 2. surface arcs that have fomented enough — first contact, as something now specific enough to repeat.
+  for (const arc of surfaceableArcs(ws).slice(0, 2)) {
+    markSurfaced(arc, count);
+    news.push(`Something has been building${arc.regionId ? ` in ${String(arc.regionId).replace(/_/g, " ")}` : ""}: ${arc.premise}`);
+  }
+  // 3. seed NEW arcs from the disposition of the regions the player knows — attributable, regional (§7.5).
+  if (elapsed >= 24 && seedArcs) {
+    try {
+      const seeded = await seedArcs({ character, content, count });
+      for (const s of (seeded?.arcs || []).slice(0, 2)) seedArc(ws, s, count); // silent — an arc is not news until it surfaces
+    } catch (err) { console.warn("[generation] seeding skipped:", err.message); }
+  }
+
+  if (news.length) {
+    const stamped = news.map(t => ({ day: ws.lastTickDay ?? null, worldDay: absoluteWorldDay(now), text: smartClamp(t, 400) }));
+    ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP);
+    ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP);
+  }
+  return { news };
+}
+
+/** SNG-191 §7 — the seeding pass: what is fomenting in the regions the player knows, FROM their
+ *  disposition. Every arc must follow from something already true of the place (§7 inv2) — never from
+ *  nothing. Regional, not global (§7.5). */
+async function aiSeedArcs({ character, content, count }) {
+  const knownRegions = [...new Set((character.knownPlaces || []).map(id => content.locations?.[id]?.regionId || content.locations?.[id]?.region).filter(Boolean))].slice(0, 4);
+  if (!knownRegions.length) return { arcs: [] };
+  const existing = Object.values(character.worldState?.latentArcs || {}).map(a => a.premise).slice(0, 6).join("; ") || "none";
+  const sys = `You seed LATENT ARCS in an RPG world — things quietly building in the background that no one has noticed yet. For AT MOST 2 of the regions, name ONE thing fomenting there and its CAUSE — something ALREADY TRUE of that place (its people, its tensions, its crisis). A feud, a shortage, a rot in a granary, someone's slow decision. It must FOLLOW from the place; never invent from nothing. Reply ONLY JSON: {"arcs":[{"id":"kebab-unique","regionId":"exact-region-id-from-the-list","kind":"feud|shortage|rot|decision|omen","premise":"one sentence: what is building","cause":"the thing already true that this grows from"}]}`;
+  const content2 = `Regions the character knows:\n${knownRegions.map(r => `- ${r}`).join("\n")}\n\nAlready fomenting (do not duplicate): ${existing}\n\nWorld count now: ${count}.`;
+  return callClaudeJSON([{ role: "user", content: content2 }], { task: "world-tick", system: sys, maxTokens: 900 });
 }
 
 /** SHARED WORLD consolidation (best-effort, never throws): when sync is on,

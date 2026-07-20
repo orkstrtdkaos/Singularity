@@ -4,7 +4,7 @@
 > Mechanical columns are derived from the static import graph, which is complete: `app.js` contains **zero dynamic imports**.
 > **`purpose`, `player-visible surface` and `what makes it fire` are AUTHORED** in `scripts/engine_map.authored.json` and are never overwritten by a regeneration.
 
-**58 modules · 27/58 described.** Two flags carry the defect shapes this map exists to catch. **`player-visible surface: NONE`** (L1) is how a capability gets built, tested, and never met. **`what makes it fire: NONE` on a module that DOES have a surface** (L2, "permission isn't initiative") is how a capability the player can reach still never happens — the teacher gate that never fired.
+**59 modules · 28/59 described.** Two flags carry the defect shapes this map exists to catch. **`player-visible surface: NONE`** (L1) is how a capability gets built, tested, and never met. **`what makes it fire: NONE` on a module that DOES have a surface** (L2, "permission isn't initiative") is how a capability the player can reach still never happens — the teacher gate that never fired.
 
 **How each derived column is measured** — so the columns can be trusted or corrected rather than believed:
 
@@ -41,6 +41,7 @@
 | `engine/canon.js` | *— unstated —* | *—* | *—* | 17 | `worldtick.js` | **3** | — | — |
 | `engine/companions.js` | *— unstated —* | *—* | *—* | 7 | `backfill.js` `gm_registry.js` `app.js` | **3** | `.voiceHints` `.knowledge` `.appearance` `.hooks` | — |
 | `engine/functions.js` | *— unstated —* | *—* | *—* | 11 | `gm_registry.js` `toolkit.js` `app.js` | **3** | `function_vocabulary.json` | — |
+| `engine/latentarcs.js` | The world's OWN agenda: latent arcs foment on the world count whether or not the player has seen them, and surface at thresholds as first contact — so discovery is a late event in something that has been building, and the world is not hero-dependent. Every arc carries a cause that existed before it surfaced. | The return-tick surfaces an arc as a rumour now specific enough to repeat, or reports one that resolved itself without you; a surfaced arc rides in the STIRRING IN THE WORLD block for the GM to develop into a face, a changed place, or a thread. | runGenerationTurn (in worldtick.js) runs on the world count alongside the return-tick — seeds new arcs from the disposition of the regions the player knows, foments the existing ones, and surfaces those past the threshold. No known regions → nothing seeds; an arc may resolve or grow with no player involvement. | 7 | `gm_registry.js` `worldtick.js` | **3** | — | — |
 | `engine/legends.js` | *— unstated —* | *—* | *—* | 7 | `state.js` `app.js` | **3** | — | — |
 | `engine/reconcile.js` | *— unstated —* | *—* | *—* | 5 | `state.js` `app.js` | **3** | `.connections` `.poleIntensity` `.homeLocation` | — |
 | `engine/skill_battle.js` | *— unstated —* | *—* | *—* | 4 | `encounters.js` `app.js` | **3** | — | — |
@@ -59,7 +60,7 @@
 | `engine/state.js` | Content-pack loading and save/load — localStorage is authoritative, GitHub sync is optional on top. | Boot ("Loading the Valley"), the save/load controls, and the recovery-slot list when a save fails to write. | Boot loads content; every save/load and the recovery path fire it. Always-on infrastructure. | 28 | `gm_registry.js` `app.js` | **2** | `content/packs/core/manifest.json` `content/packs/valley/manifest.json` `the_twelve_reaches.json` `world/regions/valley.json` | `moveTo` |
 | `engine/toolkit.js` | *— unstated —* | *—* | *—* | 1 | `gm_registry.js` `app.js` | **2** | `.knowledge` | — |
 | `engine/waygate.js` | The waygate network and its hub at the Crossing, including routing a GM's moveTo to a real gate rather than letting it mint a destination. | The waygate travel control and the destination list when standing at a gate. | Standing at a gate (the travel control), and a GM moveTo that names a gate is routed through it rather than minting a destination. | 9 | `gm_registry.js` `app.js` | **2** | `.waygate` `.waygateTier` `.waygateHub` | `moveTo` |
-| `engine/worldtick.js` | *— unstated —* | *—* | *—* | 9 | `gm_registry.js` `app.js` | **2** | `world/regions/valley.json` `.communityId` `.poleIntensity` `.wants` | — |
+| `engine/worldtick.js` | *— unstated —* | *—* | *—* | 10 | `gm_registry.js` `app.js` | **2** | `world/regions/valley.json` `.communityId` `.poleIntensity` `.wants` | — |
 | `engine/affinities.js` | *— unstated —* | *—* | *—* | 5 | `app.js` | **1** | — | — |
 | `engine/backfill.js` | *— unstated —* | *—* | *—* | 5 | `app.js` | **1** | — | — |
 | `engine/chronicle.js` | *— unstated —* | *—* | *—* | 10 | `app.js` | **1** | — | — |

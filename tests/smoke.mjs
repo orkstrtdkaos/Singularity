@@ -6076,6 +6076,31 @@ await (async () => {
   check("191 §4: delegateOps is documented in the contract AND the world-tick advances it (not vignettes)", /"delegateOps":/.test(gmSrcD) && /THE INVERSION/.test(readFileSync(new URL('../engine/worldtick.js', import.meta.url), 'utf8')));
 }
 
+// --- SNG-191 §7 the generation turn: the world's own agenda foments on the count and surfaces ---
+{
+  const la = await import("../engine/latentarcs.js");
+  const ws = { latentArcs: {}, news: [], unseenNews: [] };
+  const arc = la.seedArc(ws, { id: "granary-rot", regionId: "the_palelands", kind: "rot", premise: "a rot is spreading in the north granary", cause: "a wet spring and a slack quartermaster" }, 100);
+  check("191 §7 inv2: an arc seeds with a CAUSE, growing, unsurfaced (attributable — not from nothing)", arc.fate === "growing" && !arc.surfaced && arc.cause.includes("wet spring"));
+  check("191 §7: seeding is idempotent by id", la.seedArc(ws, { id: "granary-rot", regionId: "x", premise: "different" }, 200) === arc && Object.keys(ws.latentArcs).length === 1);
+  la.fomentArc(arc, 48 * 3, () => 0.99, 300); // 3 stages, rng high → grows, never resolves
+  check("191 §7 inv1: an untended arc GROWS on the world count, unguardrailed", arc.stage === 3 && arc.fate === "growing");
+  check("191 §7.2: fomented past the threshold it is surfaceable — first contact is a LATE event", la.surfaceableArcs(ws).length === 1);
+  const ws2 = { latentArcs: {} };
+  const a2 = la.seedArc(ws2, { id: "feud", regionId: "the_gearlands", premise: "a feud between two crews" }, 0);
+  la.fomentArc(a2, 48, () => 0.0, 48); // rng 0 → the world solves it itself
+  check("191 §7.3: an arc RESOLVES ITSELF with no player involvement — the world solves its own problems", a2.fate === "resolved" && !a2.surfaced);
+  check("191 §7.3: a resolved arc is not surfaceable", la.surfaceableArcs(ws2).length === 0);
+  la.markSurfaced(arc, 400);
+  check("191 §7.4: surfacing is first contact — it leaves the surfaceable set and goes live for the GM", arc.surfaced && la.surfaceableArcs(ws).length === 0 && /rot is spreading/.test(la.arcsForGM(ws) || ""));
+  // the generation-turn wiring: foments, surfaces, seeds from regional disposition, and runs on return.
+  const wtSrcE = readFileSync(new URL('../engine/worldtick.js', import.meta.url), 'utf8');
+  check("191 §7: runGenerationTurn foments, surfaces, and seeds from the known regions' disposition",
+    /export async function runGenerationTurn/.test(wtSrcE) && /fomentArc\(arc, elapsed/.test(wtSrcE) && /surfaceableArcs\(ws\)/.test(wtSrcE) && /seedArc\(ws, s/.test(wtSrcE));
+  const appSrcE = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+  check("191 §7: the generation turn runs on return alongside the world-tick", /await runGenerationTurn\(\{ character, content: CONTENT \}\)/.test(appSrcE));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

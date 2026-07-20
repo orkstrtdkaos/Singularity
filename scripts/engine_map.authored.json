@@ -150,5 +150,10 @@
     "purpose": "Hold DELEGATED WORK as state so the world turns instead of narrating: a named person put in charge of ongoing work is an assignment the tick ADVANCES (progress/stall/problem/done), and a charge set against a crisis is the mechanism that can push the crisis back — the inversion of asking what a person merely felt.",
     "playerVisibleSurface": "The return-tick's news reports what MOVED on the work (a problem hit, a charge finished, a crisis EASED/HELD); the DELEGATED WORK block lets the GM speak to the commitments; the person's statusNote carries the colour.",
     "whatMakesItFire": "delegateOps (the player puts a known person in charge of ongoing work) writes an assignment; runWorldTick advances them on return and lets progressAgainst a crisis counter its worsening. No delegation → no assignments, and an empty news block is legitimate."
+  },
+  "latentarcs.js": {
+    "purpose": "The world's OWN agenda: latent arcs foment on the world count whether or not the player has seen them, and surface at thresholds as first contact — so discovery is a late event in something that has been building, and the world is not hero-dependent. Every arc carries a cause that existed before it surfaced.",
+    "playerVisibleSurface": "The return-tick surfaces an arc as a rumour now specific enough to repeat, or reports one that resolved itself without you; a surfaced arc rides in the STIRRING IN THE WORLD block for the GM to develop into a face, a changed place, or a thread.",
+    "whatMakesItFire": "runGenerationTurn (in worldtick.js) runs on the world count alongside the return-tick — seeds new arcs from the disposition of the regions the player knows, foments the existing ones, and surfaces those past the threshold. No known regions → nothing seeds; an arc may resolve or grow with no player involvement."
   }
 }

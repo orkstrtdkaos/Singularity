@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 17,
-  "xp": 1689,
+  "xp": 1694,
   "attributes": {
     "physical": 4,
     "mental": 6,
@@ -110,7 +110,7 @@
   "maxHealth": 110,
   "health": 107,
   "maxEnergy": 180,
-  "energy": 169,
+  "energy": 165,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1654,48 +1654,51 @@
         "player": null,
         "summary": "The party arrives at Silas's mother's house on the center lane of Cairnhold — chimney smoking, gate unlatched, the second door open toward the heath as always.",
         "narration": "The center lane of Cairnhold runs between low grey-stone houses, each one set back just enough from its neighbor that the cairn-line stones are always visible at the lane's edge. The light this afternoon is the thin, clear light of early spring — no warmth in it yet, but honest. Huginn rides your left shoulder, unbothered by the town, which is itself unbothered by Huginn. A child in a doorway watches the bird with professional interest and says nothing.\n\nYour mother's house sits at the lane's end where the cairn-line turns north. Low grey stone, a good roof, smoke coming from the chimney in a straight unhurried column. The second door — the door that faces the heath — stands open a hand's width, the way it always has. The gate at the front is unlached. Nothing about the house has changed, which means she is well, because she changes the house when she is not.\n\nPell walks half a step behind you, reading the lane the way she reads a room — pack, posture, sight-lines. Veth is two steps back and to the right, her stillness taking on a slightly different quality here; she is watching how the houses sit on the cairn-line, not the houses themselves. She said nothing on the road from the western crossing, but she has been saying that nothing carefully.\n\nHuginn drops from your shoulder to the gate post, settles its wings, and looks at the chimney smoke. It does not croak. You have been away four days — four days is nothing to a town this unhurried, and everything to a mother who reads endings for a living."
+      },
+      {
+        "player": "Pause at the gate and use Deathsense — read the house before you enter, as an Ashwarden would",
+        "summary": "Silas reads his mother through Deathsense at the gate — alive, slowing naturally, a decade of ordinary life ahead. Huginn knows it too.",
+        "narration": "You rest one hand on the gate's iron latch and let Deathsense settle. It costs you almost nothing — two slow breaths, the craft coming quiet and familiar as old habit.\n\nThe house opens to you as a shape of time. Your mother is inside. She is not ending — not soon, not urgently. But the Deathsense is precise, and what it shows you is this: she has been slower this winter than last winter. The slowness is in her joints, not her lungs or her heart. A natural thinning. Years moving through her the way years do, leaving their small marks. She has perhaps a decade of this quality of life remaining, if nothing interrupts it. The reading is clean and ordinary and carries the particular weight of a thing you already suspected and are now required to know.\n\nHuginn shifts on your shoulder. One small adjustment of weight, nothing more. It has already seen what you just saw.\n\nBehind you, Pell says, quietly, \"You all right?\" She has been watching your back, not the house. She is reading you, not the door."
       }
     ],
     "lastTurn": {
-      "narration": "The center lane of Cairnhold runs between low grey-stone houses, each one set back just enough from its neighbor that the cairn-line stones are always visible at the lane's edge. The light this afternoon is the thin, clear light of early spring — no warmth in it yet, but honest. Huginn rides your left shoulder, unbothered by the town, which is itself unbothered by Huginn. A child in a doorway watches the bird with professional interest and says nothing.\n\nYour mother's house sits at the lane's end where the cairn-line turns north. Low grey stone, a good roof, smoke coming from the chimney in a straight unhurried column. The second door — the door that faces the heath — stands open a hand's width, the way it always has. The gate at the front is unlached. Nothing about the house has changed, which means she is well, because she changes the house when she is not.\n\nPell walks half a step behind you, reading the lane the way she reads a room — pack, posture, sight-lines. Veth is two steps back and to the right, her stillness taking on a slightly different quality here; she is watching how the houses sit on the cairn-line, not the houses themselves. She said nothing on the road from the western crossing, but she has been saying that nothing carefully.\n\nHuginn drops from your shoulder to the gate post, settles its wings, and looks at the chimney smoke. It does not croak. You have been away four days — four days is nothing to a town this unhurried, and everything to a mother who reads endings for a living.",
-      "sceneSummary": "The party arrives at Silas's mother's house on the center lane of Cairnhold — chimney smoking, gate unlatched, the second door open toward the heath as always.",
+      "narration": "You rest one hand on the gate's iron latch and let Deathsense settle. It costs you almost nothing — two slow breaths, the craft coming quiet and familiar as old habit.\n\nThe house opens to you as a shape of time. Your mother is inside. She is not ending — not soon, not urgently. But the Deathsense is precise, and what it shows you is this: she has been slower this winter than last winter. The slowness is in her joints, not her lungs or her heart. A natural thinning. Years moving through her the way years do, leaving their small marks. She has perhaps a decade of this quality of life remaining, if nothing interrupts it. The reading is clean and ordinary and carries the particular weight of a thing you already suspected and are now required to know.\n\nHuginn shifts on your shoulder. One small adjustment of weight, nothing more. It has already seen what you just saw.\n\nBehind you, Pell says, quietly, \"You all right?\" She has been watching your back, not the house. She is reading you, not the door.",
+      "sceneSummary": "Silas reads his mother through Deathsense at the gate — alive, slowing naturally, a decade of ordinary life ahead. Huginn knows it too.",
       "choices": [
         {
-          "label": "Open the gate and walk to the door — knock, or simply call out",
+          "label": "Open the gate and go in — she doesn't know you're standing here",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "help"
+            "travel"
           ],
           "trivial": true
         },
         {
-          "label": "Pause at the gate and use Deathsense — read the house before you enter, as an Ashwarden would",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "deathsense",
-          "energyCost": 2,
-          "trivial": false
-        },
-        {
-          "label": "Introduce Pell first — step aside at the gate and let your mother's first sight be the two of you together",
+          "label": "Tell Pell what you just read — she asked",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "romantic"
+            "comfort"
           ],
           "trivial": true
         },
         {
-          "label": "Ask Veth what she sees in the house's placement on the cairn-line before going in",
+          "label": "Call through the gate first — give her a moment to come to you",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "careful"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask Veth what she has been reading in the house's cairn-line placement — she has not spoken it yet",
           "attribute": "mental",
-          "subAttribute": "reason",
+          "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
             "study"
@@ -1704,97 +1707,104 @@
         }
       ],
       "scene": {
-        "setting": "The end of Cairnhold's center lane, early-spring afternoon — thin clear light, no warmth. Silas stands at the unlatched gate of his mother's low grey-stone house. Chimney smoke rises straight. The second door faces the heath, open a hand's width.",
+        "setting": "The end of Cairnhold's center lane, early-spring afternoon — thin clear light, no warmth. Silas stands at the unlatched gate of his mother's low grey-stone house, hand on the latch. Chimney smoke rises straight. The second door faces the heath, open a hand's width.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
-            "state": "Half a step behind Silas, reading the lane — pack, posture, sight-lines. Steady."
+            "state": "Half a step behind Silas, watching his back. Just asked if he's all right."
           },
           {
             "name": "Veth Ondra",
-            "state": "Two steps back and right, watching how the houses sit on the cairn-line, her stillness careful."
+            "state": "Two steps back and right, watching how the house sits on the cairn-line. Has not spoken."
           },
           {
             "name": "Huginn",
-            "state": "Settled on the gate post, wings folded, watching the chimney smoke. Silent."
+            "state": "On Silas's left shoulder — shifted weight once, settled. Knows what was read."
           }
         ],
         "objects": [
-          "Unlatched front gate",
+          "Unlatched front gate, hand on the latch",
           "Low grey-stone house with good roof",
           "Chimney smoke rising straight",
           "Second door open a hand's width toward the heath",
           "Cairn-line stones at the lane's edge"
         ],
         "threads": [
-          "No answer yet from inside — the door has not opened",
-          "Veth is reading something in the house's cairn-line placement and has not named it"
+          "Deathsense read complete — mother alive, slowing naturally, a decade ahead",
+          "Pell has asked if Silas is all right and is waiting for an answer",
+          "Veth has been reading the cairn-line placement and has not named what she sees",
+          "The door has not opened — no one inside knows the party is at the gate"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "pell-ran-marsh",
+          "npcId": "pell",
           "name": "Pell Ran Marsh",
-          "note": "Arrived at Silas's mother's gate — reading the lane, steady, waiting for his lead",
-          "statusNote": "At the gate of Silas's mother's house on Cairnhold's center lane, World-day 23 afternoon"
+          "note": "Watched Silas's back while he used Deathsense at the gate — asked quietly if he was all right.",
+          "statusNote": "At the gate of Silas's mother's house on Cairnhold's center lane, World-day 23 afternoon. Watching Silas, waiting for his answer.",
+          "pronouns": "she/her"
         },
         {
           "op": "update",
-          "npcId": "veth-ondra",
+          "npcId": "veth",
           "name": "Veth Ondra",
-          "note": "Watching the house's placement on the cairn-line with careful attention — has not spoken",
-          "statusNote": "At the gate of Silas's mother's house on Cairnhold's center lane, World-day 23 afternoon"
+          "note": "Still reading the house's placement on the cairn-line. Has not spoken what she sees.",
+          "statusNote": "At the gate of Silas's mother's house on Cairnhold's center lane, World-day 23 afternoon.",
+          "pronouns": "she/her"
         }
       ],
-      "placeUpdates": [
+      "codexUpdates": [
         {
-          "subPlace": {
-            "name": "Silas's Mother's House — Front Gate",
-            "parent": "Cairnhold",
-            "note": "Unlatched gate at the lane end where the cairn-line turns north — the party has arrived here, World-day 23 afternoon",
-            "visited": true
-          }
+          "topic": "silas-mother",
+          "label": "Silas's Mother — Deathsense Read",
+          "kind": "person",
+          "fact": "Alive and not ending soon. Her joints have slowed this winter relative to last — a natural thinning of years. Roughly a decade of this quality of life remaining if nothing interrupts it. The craft read clean and ordinary.",
+          "links": [
+            "cairnhold",
+            "the-attended-end"
+          ]
         }
       ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "Short walk from the western crossing lane to the center lane gate"
+      "characterDeltas": {
+        "energy": -2
       }
     },
     "sceneState": {
-      "setting": "The end of Cairnhold's center lane, early-spring afternoon — thin clear light, no warmth. Silas stands at the unlatched gate of his mother's low grey-stone house. Chimney smoke rises straight. The second door faces the heath, open a hand's width.",
+      "setting": "The end of Cairnhold's center lane, early-spring afternoon — thin clear light, no warmth. Silas stands at the unlatched gate of his mother's low grey-stone house, hand on the latch. Chimney smoke rises straight. The second door faces the heath, open a hand's width.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
-          "state": "Half a step behind Silas, reading the lane — pack, posture, sight-lines. Steady."
+          "state": "Half a step behind Silas, watching his back. Just asked if he's all right."
         },
         {
           "name": "Veth Ondra",
-          "state": "Two steps back and right, watching how the houses sit on the cairn-line, her stillness careful."
+          "state": "Two steps back and right, watching how the house sits on the cairn-line. Has not spoken."
         },
         {
           "name": "Huginn",
-          "state": "Settled on the gate post, wings folded, watching the chimney smoke. Silent."
+          "state": "On Silas's left shoulder — shifted weight once, settled. Knows what was read."
         }
       ],
       "objects": [
-        "Unlatched front gate",
+        "Unlatched front gate, hand on the latch",
         "Low grey-stone house with good roof",
         "Chimney smoke rising straight",
         "Second door open a hand's width toward the heath",
         "Cairn-line stones at the lane's edge"
       ],
       "threads": [
-        "No answer yet from inside — the door has not opened",
-        "Veth is reading something in the house's cairn-line placement and has not named it"
+        "Deathsense read complete — mother alive, slowing naturally, a decade ahead",
+        "Pell has asked if Silas is all right and is waiting for an answer",
+        "Veth has been reading the cairn-line placement and has not named what she sees",
+        "The door has not opened — no one inside knows the party is at the gate"
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 12,
-    "hour": 14,
+    "hour": 15,
     "realAnchor": null
   },
   "companions": [
@@ -2300,7 +2310,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d6] Called Memory back to hand and fell in on Silas's left without being asked — road discipline, no ceremony.",
         "[d6] Heard the full briefing from the tree line. Filed it without comment. Watching the door.",
         "[d6] Held position two steps back and right of Silas at the hollow rim — Memory loose, watching Cassiel.",
         "[d6] Came down into the hollow without being called — read the open-hand gesture and answered it. Held Memory's shaft through the anchoring, her ironsense running quiet as the structural layer.",
@@ -2309,7 +2318,8 @@
         "[d6] Came to the alcove when called, settled beside Silas, listened to Veth's Pale Reach account. Noted plainly that four days means five in early spring.",
         "[d6] Heard Veth name the soul bond aloud — watched Veth's face to read what kind of plain it was. Walked the four-day road north.",
         "[d9] Arrived at Cairnhold western crossing lane with Silas — named the destination plainly: home first. Road-worn but steady.",
-        "[d12] Arrived at Silas's mother's gate — reading the lane, steady, waiting for his lead"
+        "[d12] Arrived at Silas's mother's gate — reading the lane, steady, waiting for his lead",
+        "[d12] Watched Silas's back while he used Deathsense at the gate — asked quietly if he was all right."
       ],
       "knownFacts": [
         "Silas wants something private for the evenings — she is thinking about what that means",
@@ -2330,7 +2340,7 @@
         "feeding ironsense through the spear-shaft as a structural an"
       ],
       "status": "active",
-      "statusNote": "At the gate of Silas's mother's house on Cairnhold's center lane, World-day 23 afternoon",
+      "statusNote": "At the gate of Silas's mother's house on Cairnhold's center lane, World-day 23 afternoon. Watching Silas, waiting for his answer.",
       "lastSeen": {
         "locationId": "cairnhold",
         "day": 12
@@ -3001,7 +3011,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d6] Followed Silas up to the post — watching the naming without interrupting it",
         "[d6] Held position on the slope between post and hollow — watching without interrupting Silas's read.",
         "[d6] Entered the hollow floor for the first time — stood still, looked at Memory and the chalk mark, said 'Eleven years' to the hollow itself and then 'It holds.' Nothing more. The weight she has carried since the post was dissolved is visible in what she did not say.",
         "[d6] Responded to her Raven name — Stillwater — when used for the first time in the post. Added March-form threshold-hardening lines to Silas's shadow-and-boundary layer; her lines are thinner and more precise, and settled the rough edge of his work.",
@@ -3010,7 +3019,8 @@
         "[d6] Named the Pale Reach's geography: four days to Cairnhold's outer district from this post, five in early spring. Beathstone crossing is knee-deep. Pre-Transition infrastructure above Cairnhold, plus warden signs not on the March's current register — named without drama.",
         "[d6] Confirmed she can see the soul bond between Silas and Pell — named it 'rune-in-grain, not on the surface.' Agreed to walk the road to Cairnhold without being asked to. Traveled the four-day road north with the party.",
         "[d9] Named plainly that word travels faster than roads — observing the town's read of Silas.",
-        "[d12] Watching the house's placement on the cairn-line with careful attention — has not spoken"
+        "[d12] Watching the house's placement on the cairn-line with careful attention — has not spoken",
+        "[d12] Still reading the house's placement on the cairn-line. Has not spoken what she sees."
       ],
       "knownFacts": [
         "Silas understands the difference between tending a closed site and reopening it — named it himself, unprompted",
@@ -3033,7 +3043,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the gate of Silas's mother's house on Cairnhold's center lane, World-day 23 afternoon",
+      "statusNote": "At the gate of Silas's mother's house on Cairnhold's center lane, World-day 23 afternoon.",
       "lastSeen": {
         "locationId": "cairnhold",
         "day": 12
@@ -5151,21 +5161,21 @@
     }
   },
   "tendencies": {
-    "strategic": 17.147762206809183,
-    "cerebral": 19.57884704528025,
-    "social": 13.047347829426723,
-    "generous": 4.190622233958032,
-    "cautious": 6.575431557789773,
-    "physical": 0.35414140354312573,
-    "risky": 0.3713874195305387,
-    "ruthless": 0.11841282008177903,
-    "carousing": 0.0018142341296781778,
-    "amorous": 1.416426890463016,
-    "patient": 0.738053243279405,
-    "stealth": 0.04589711158497528,
-    "devotion": 0.9376359920393141,
-    "craft": 1.2216239929505412,
-    "leadership": 0.23362139167978385
+    "strategic": 16.719068151638954,
+    "cerebral": 20.089375869148242,
+    "social": 12.721164133691055,
+    "generous": 4.085856678109081,
+    "cautious": 6.411045768845028,
+    "physical": 0.34528786845454756,
+    "risky": 0.3621027340422752,
+    "ruthless": 0.11545249957973455,
+    "carousing": 0.0017688782764362233,
+    "amorous": 1.3810162182014405,
+    "patient": 0.7196019121974199,
+    "stealth": 0.044749683795350895,
+    "devotion": 0.9141950922383313,
+    "craft": 1.1910833931267777,
+    "leadership": 0.22778085688778926
   },
   "aptitudes": [
     "strategist",
@@ -5174,7 +5184,7 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 609,
+  "actionCount": 610,
   "grantsVersion": 1,
   "reconcileVersion": 11,
   "gallery": [
@@ -5492,8 +5502,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784507162155,
-  "rev": 927,
+  "updatedAt": 1784508760074,
+  "rev": 928,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -7016,7 +7026,7 @@
       "lightsense": 2,
       "order_sense": 62,
       "palework": 29,
-      "deathsense": 29,
+      "deathsense": 30,
       "shadowstep": 17,
       "the-attended-end": 33,
       "wildcraft": 6,
@@ -7069,7 +7079,7 @@
       }
     ],
     "lastUsed": {
-      "deathsense": 19,
+      "deathsense": 20,
       "the-attended-end": 19,
       "order_sense": 19,
       "boundary_stone": 19,
@@ -7221,7 +7231,7 @@
   "teachers": {},
   "regionsKnown": {
     "valley": 435,
-    "the_palelands": 3
+    "the_palelands": 4
   },
   "foreclosed": [
     "rootkin",
@@ -7292,10 +7302,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-07-19T11:58:49.560Z",
-      "lastAt": "2026-07-20T00:26:02.152Z",
+      "lastAt": "2026-07-20T00:52:40.069Z",
       "startDay": 19,
       "endDay": 20,
-      "beats": 31
+      "beats": 32
     }
   ],
   "company": [

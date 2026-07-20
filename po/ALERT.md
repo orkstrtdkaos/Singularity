@@ -1052,6 +1052,24 @@ is Erik's real-save test (fresh load). REMAINING SNG-192: Phase B (coverage/sour
 gains-to-engine lands here — still owe verifying gains values are in the 24-verb vocab), Phase C (archetype
 picker + class_archetypes.json load). -->
 
+<!-- status: SNG-192 PHASE B COMPLETE_PENDING_REVIEW (CCode 2026-07-20). v1.8.178. Suite green by exit code.
+Results: po/results/20260720_SNG-192-PhaseB_robustness.md. The 'robust' half of creation (§5+§6b+§6c).
+⚠ GAINS VERIFICATION (owed): gains has only TWO distinct values across 779 nodes — broaden(550)/deepen(229),
+a rank-PROGRESSION axis, NOT the 24-verb vocabulary. Aevi's G1 premise (gains = coverage tags) was inferred
+from the one-word sample and is WRONG; gains is NOT wired to coverage (§5 uses ability.functions via the
+existing functionCoverage). Third wrong-premise verify-before-build has caught this batch. If PO still wants
+a broaden/deepen surface it's a separate skill-wheel ticket.
+§6b commonGroundFor (substrate.js, novel + pure): intersect a build's traditions' substrate bands → the
+density window where the WHOLE kit works. Matches the spec table on live content — ashwarden+rootkin+somatic
+= [0.00,0.56]; ashwarden+enginewright = NONE (lo 0.77 > hi 0.73, Erik's provable half-powered-everywhere
+warning, said at the pick not at level 8). groundAsPlace names it a PLACE (thin/middle/dense country).
+§5 coverage rendered from functionCoverage ('you can harm·know·move; no way to restore — a real choice').
+§6c coherence↔divergence framed, never a penalty ('coherence makes you strong here; divergence makes you
+new'; off-source picks are seeds). 9 tests, SYSTEM_SPEC substrate row, ENGINE_MAP 59/59. Same creation
+browser-leg as Phase A (engine matches the spec table; UI source-verified; visual = Erik's real-save test).
+NOT done: pool source-reordering (§6b refinement) + gains-to-a-real-consumer (premise wrong). REMAINING:
+Phase C (archetype picker + class_archetypes.json load) is the last SNG-192 phase. -->
+
 
 
 

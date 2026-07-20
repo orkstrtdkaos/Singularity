@@ -5880,6 +5880,18 @@ await (async () => {
     /it is not a finding/.test(appSrc190) && /GM turn\$\{turns === 1/.test(appSrc190));
   check("190 §3: the false 'never fired' RENDERED label is gone (only the historical comments remain)",
     !/mach-label">never fired/.test(appSrc190));
+
+  // SNG-190 §4: engine-authored asides must never surface raw asterisks on screen (read aloud at a table).
+  const { renderProseHtml } = await import("../engine/narration_voice.js");
+  const captured = "*✦ The world grows — **Hesta Vorn** is now a real presence in this place.*";
+  const html = renderProseHtml(captured);
+  check("190 §4: the captured engine aside renders with NO raw asterisk on screen", !html.includes("*"));
+  check("190 §4: the introduced name renders bold, not literal **name**", html.includes("<strong>Hesta Vorn</strong>") && !html.includes("**"));
+  check("190 §4: it is a styled aside with its glyph kept", /class="beat-aside"/.test(html) && html.includes("✦"));
+  check("190 §4: plain prose stays escaped and unstyled (no false aside)",
+    renderProseHtml("A quiet room & a <held> breath.") === "<p>A quiet room &amp; a &lt;held&gt; breath.</p>");
+  check("190 §4: the narration renderer uses it (no raw esc-only paragraph map)",
+    /turn\.narration\.split\(\/\\n\\n\+\/\)\.map\(renderProseHtml\)/.test(appSrc190));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

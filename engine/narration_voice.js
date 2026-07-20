@@ -93,6 +93,25 @@ function cleanForSpeech(text) {
 /** PURE. THE SPEAKABLE PROJECTION of a turn (spec §3b). Narration and dialogue only —
  *  never choices, never energy costs, never dice math, never receipts. Defined on the TURN
  *  OBJECT so it is stable regardless of how the play surface renders. */
+/** SNG-190 §4: render ONE narration paragraph to safe HTML — the VISUAL twin of cleanForSpeech. Where
+ *  that strips the engine's `*✦ … **bold** …*` aside markup for SPEECH, this renders it for the SCREEN,
+ *  so raw asterisks never surface in a session read aloud at a table. Escapes FIRST (safety), THEN
+ *  converts inline emphasis to tags; a paragraph led by an aside glyph (✦ ▲ ★ ◆ ◇ ⚖ ⏹ ◈) becomes a
+ *  distinct `.beat-aside` with its outer italic markers consumed. Pure; no DOM. */
+export function renderProseHtml(paragraph) {
+  const esc = (t) => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  const md = (t) => esc(t)
+    .replace(/\*\*([^*\n]+)\*\*/g, "<strong>$1</strong>")   // **bold** first, so a lone * can't cross it
+    .replace(/\*([^*\n]+)\*/g, "<em>$1</em>");              // *emphasis* → italic (well-formed pairs only)
+  const s = String(paragraph || "").trim();
+  const m = s.match(/^\*?\s*([✦▲★◆◇⚖⏹◈])\s*/);
+  if (m) {
+    const body = s.replace(/^\*?\s*[✦▲★◆◇⚖⏹◈]\s*/, "").replace(/\s*\*$/, "");
+    return `<p class="beat-aside"><span class="beat-aside-mark">${m[1]}</span> ${md(body)}</p>`;
+  }
+  return `<p>${md(s)}</p>`;
+}
+
 export function speakableText(turn, { includeAside = false } = {}) {
   if (!turn) return "";
   const parts = [cleanForSpeech(turn.narration)];

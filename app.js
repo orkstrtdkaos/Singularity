@@ -32,7 +32,7 @@ import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkill
 import { toolkitForGM } from "./engine/toolkit.js";
 import { fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc } from "./engine/personalArc.js";
 import { assembleGMContext } from "./engine/gm_registry.js"; // BATCH-11 §23: the GM context is a DECLARED registry, iterated — never hand-listed
-import { rankVoices, pickVoice, speakableText, chunkForSpeech } from "./engine/narration_voice.js"; // SNG-155: read aloud at the table
+import { rankVoices, pickVoice, speakableText, chunkForSpeech, renderProseHtml } from "./engine/narration_voice.js"; // SNG-155: read aloud at the table; SNG-190 §4: render engine asides, never raw asterisks
 import { harmGateFor, departureGateFor, sanitizeOfferIntent, intentNoteFor, splitLedgerEvents } from "./engine/intent.js"; // SNG-145: intent confirmation for costly acts (Law 9 in the play loop)
 import { resolveWaygateTransit, routeGmMoveTo } from "./engine/waygate.js"; // SNG-148: waygates — map control routes named/hub; GM offer via the registry row
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./engine/entityDetail.js";
@@ -60,7 +60,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.160";
+const APP_VERSION = "1.8.161";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6737,7 +6737,7 @@ function renderPlay(turn, opts = {}) {
     const speakCtl = ttsAvailable()
       ? `<button class="beat-speak" id="do-speak" title="Read this beat aloud. Narration only — choices and costs are not spoken.">${_speaking ? "⏸ Stop" : "▶ Read aloud"}</button>`
       : "";
-    main += `<div class="beat">${speakCtl}${turn.narration.split(/\n\n+/).map(p => `<p>${esc(p)}</p>`).join("")}</div>`;
+    main += `<div class="beat">${speakCtl}${turn.narration.split(/\n\n+/).map(renderProseHtml).join("")}</div>`;
     if (turn.momentArt) main += `<div class="moment-art"><img src="${esc(turn.momentArt)}" alt="${esc(turn.sceneSummary || "a moment")}" data-lightbox="moment" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`; // SNG-035/053
     if (opts.degraded) main += `<div class="degraded-note">(${esc(turn._opNote || "The GM's structured reply failed — plain narration mode this turn.")})</div>`;
     turn.choices = lethalOfferClamp(turn.choices, { ...(CONTENT.encounters || {}), ...(character.customEncounters || {}) });

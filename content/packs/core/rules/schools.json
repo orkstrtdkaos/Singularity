@@ -1,0 +1,562 @@
+{
+  "schemaVersion": 1,
+  "id": "schools",
+  "kind": "rules",
+  "note": "SNG-193. A tradition has a ROOT; a school is what that root reaches WITH. Same tradition, same abilities, different extension source, different best-ground. A school NEVER grants exclusive abilities — the moment it does it becomes a subclass and the tradition fractures.",
+  "ruling": "Erik 2026-07-19: authored per culture, not a uniform grid. Counts differ because peoples differ. FOUR sources, including the PURE school (extension null) — the root alone, never starved, lower ceiling. 'The pure never loses because it never leaned on anything.'",
+  "mechanics": {
+    "extension": "The school sets the extension source and therefore the BAND. The root's contribution is unchanged.",
+    "floor": "A material ROOT (or a material-extension school) is never starved anywhere. A tradition rooted in inherent or lattice has no floor unless a school supplies one — which is why the material school of an inherent people is the one that travels.",
+    "notGating": "Schools do not gate abilities. Most abilities belong to the ROOT and every school of that tradition has them. Only a minority are natively school-expressed, marked with schoolAffinity, and even those are learnable by any school of the tradition — awkwardly, which is where braids come from.",
+    "changing": "A school is learnable, not innate. Changing is possible, hard, and a story.",
+    "openSlots": "Deliberately incomplete. Extensions no culture has authored yet are ROOM, not gaps — a braid discovered in play (like Silas's Double Register) may name a school that did not exist before."
+  },
+  "traditionSchools": {
+    "cogitant": {
+      "root": "material",
+      "rootNote": "a trained mind",
+      "schools": [
+        {
+          "id": "cog_unaided",
+          "name": "The Unaided",
+          "extension": null,
+          "why": "Mind alone, joined to nothing. Never starved anywhere, and they will tell you so."
+        },
+        {
+          "id": "cog_reaching",
+          "name": "The Reaching Mind",
+          "extension": "inherent",
+          "why": "Thought as contact. They hold that a model held perfectly enough TOUCHES the thing."
+        },
+        {
+          "id": "cog_instrumented",
+          "name": "The Instrumented",
+          "extension": "lattice",
+          "why": "Mind through machine. Telekinesis is not moving a thing — it is addressing it."
+        },
+        {
+          "id": "cog_unsettled",
+          "name": "The Unsettled",
+          "extension": "wild",
+          "why": "Thought that will not stay put. Brilliant, and no two sessions alike."
+        }
+      ]
+    },
+    "ashwarden": {
+      "root": "inherent",
+      "rootNote": "contact with endings",
+      "schools": [
+        {
+          "id": "ash_plain",
+          "name": "The Plain Wardens",
+          "extension": null,
+          "why": "Endings, and nothing else. The oldest form and the least comfortable."
+        },
+        {
+          "id": "ash_gravehanded",
+          "name": "The Grave-Handed",
+          "extension": "material",
+          "why": "The physical craft of endings — bodies, ground, the work of hands. The only Ashwardens who are never at a loss in dense country."
+        },
+        {
+          "id": "ash_recorders",
+          "name": "The Recorders",
+          "extension": "lattice",
+          "why": "Endings written down where the lattice will hold them. Archivists of the dead."
+        },
+        {
+          "id": "ash_rotkind",
+          "name": "The Rot-Kind",
+          "extension": "wild",
+          "why": "Decay as an ungoverned process. Feared even in the Palelands."
+        }
+      ]
+    },
+    "marcher": {
+      "root": "material",
+      "rootNote": "skill at arms in a body",
+      "schools": [
+        {
+          "id": "mar_plain",
+          "name": "The Plain Edge",
+          "extension": null,
+          "why": "The edge and the body. Nothing to take away, nowhere it fails."
+        },
+        {
+          "id": "mar_deathedged",
+          "name": "The Death-Edged",
+          "extension": "inherent",
+          "why": "They feel the ending in the strike before it lands. Rare, and quiet about it."
+        },
+        {
+          "id": "mar_quickened",
+          "name": "The Quickened",
+          "extension": "lattice",
+          "why": "Reflex augmented. Devastating in the Gearlands, ordinary in the Quickwood."
+        }
+      ]
+    },
+    "somatic": {
+      "root": "material",
+      "rootNote": "the perfected body",
+      "schools": [
+        {
+          "id": "som_plain",
+          "name": "The Unadorned",
+          "extension": null,
+          "why": "The body, finished. They consider every other school a shortcut."
+        },
+        {
+          "id": "som_breathing",
+          "name": "The Breathing Ones",
+          "extension": "inherent",
+          "why": "The body as a place the world moves through."
+        },
+        {
+          "id": "som_tuned",
+          "name": "The Tuned",
+          "extension": "lattice",
+          "why": "Retuning the flesh with what the flesh was built from."
+        }
+      ]
+    },
+    "mason": {
+      "root": "material",
+      "rootNote": "only what can be touched",
+      "schools": [
+        {
+          "id": "mas_plain",
+          "name": "The Plain Course",
+          "extension": null,
+          "why": "Stone, weight, and the hand. The Masons' orthodoxy, and most of them."
+        },
+        {
+          "id": "mas_deepcut",
+          "name": "The Deep-Cut",
+          "extension": "lattice",
+          "why": "Those who mine INTO the Precursor bones and use what they find."
+        },
+        {
+          "id": "mas_settled",
+          "name": "The Long-Settled",
+          "extension": "inherent",
+          "why": "Stone as something that has been standing a long time and knows it."
+        }
+      ]
+    },
+    "rootkin": {
+      "root": "inherent",
+      "rootNote": "the green current",
+      "schools": [
+        {
+          "id": "root_green",
+          "name": "The Green Way",
+          "extension": null,
+          "why": "Growth, direct. The Quickwood's own form."
+        },
+        {
+          "id": "root_grafted",
+          "name": "The Grafted",
+          "extension": "material",
+          "why": "Hands, grafts, husbandry — the practical growers, and the only Rootkin who work well abroad."
+        },
+        {
+          "id": "root_wildwood",
+          "name": "The Wildwood",
+          "extension": "wild",
+          "why": "Growth that was never asked for."
+        }
+      ]
+    },
+    "threnodist": {
+      "root": "material",
+      "rootNote": "feeling, borne in a body",
+      "schools": [
+        {
+          "id": "thr_plain",
+          "name": "The Plainsong",
+          "extension": null,
+          "why": "Grief carried, unaugmented. It is enough."
+        },
+        {
+          "id": "thr_deepfeeling",
+          "name": "The Deep-Feeling",
+          "extension": "inherent",
+          "why": "Feeling as an instrument that touches what it is aimed at."
+        },
+        {
+          "id": "thr_carried",
+          "name": "The Carried Voice",
+          "extension": "lattice",
+          "why": "Sorrow given reach through the lattice. Controversial among their own."
+        }
+      ]
+    },
+    "verist": {
+      "root": "material",
+      "rootNote": "speech and the nerve to use it",
+      "schools": [
+        {
+          "id": "ver_plain",
+          "name": "The Plain Word",
+          "extension": null,
+          "why": "Say what is so. Nothing else is needed and nothing else is offered."
+        },
+        {
+          "id": "ver_weighted",
+          "name": "The Weighted Word",
+          "extension": "inherent",
+          "why": "Truth as a thing in the world that a true statement makes contact with."
+        }
+      ]
+    },
+    "stillhold": {
+      "root": "inherent",
+      "rootNote": "the kept vow",
+      "schools": [
+        {
+          "id": "sti_plain",
+          "name": "The Kept",
+          "extension": null,
+          "why": "The vow, held. The Stillhold's whole answer."
+        },
+        {
+          "id": "sti_standing",
+          "name": "The Standing Watch",
+          "extension": "material",
+          "why": "Those who keep the peace with their bodies when the vow is not enough."
+        }
+      ]
+    },
+    "umbral": {
+      "root": "lattice",
+      "rootNote": "seeing by other means",
+      "schools": [
+        {
+          "id": "umb_instrument",
+          "name": "The Instrumented Dark",
+          "extension": null,
+          "why": "The lattice, read in the absence of light. The Underlight's own school."
+        },
+        {
+          "id": "umb_deepdark",
+          "name": "The Deep Dark",
+          "extension": "inherent",
+          "why": "Dark as a thing that exists, not merely as an absence of light."
+        },
+        {
+          "id": "umb_trained",
+          "name": "The Trained Eye",
+          "extension": "material",
+          "why": "Discipline and practice, no reaching at all. The school that works everywhere."
+        }
+      ]
+    },
+    "enginewright": {
+      "root": "lattice",
+      "rootNote": "the Engine, tended",
+      "schools": [
+        {
+          "id": "eng_wright",
+          "name": "The Wrights",
+          "extension": null,
+          "why": "The Engine and its tending. Orthodoxy, and the great majority."
+        },
+        {
+          "id": "eng_handbuilt",
+          "name": "The Hand-Built",
+          "extension": "material",
+          "why": "Those who build what will run without the lattice. Quietly the most travelled Enginewrights."
+        },
+        {
+          "id": "eng_listeners",
+          "name": "The Listeners",
+          "extension": "inherent",
+          "why": "Those who hold that the Engine has been tending them back, and attend to it."
+        }
+      ]
+    },
+    "lattice": {
+      "root": "lattice",
+      "rootNote": "the structure itself",
+      "schools": [
+        {
+          "id": "lat_standing",
+          "name": "The Standing Order",
+          "extension": null,
+          "why": "The lattice, worked as built. The Cities' own form."
+        },
+        {
+          "id": "lat_measures",
+          "name": "The Measurers",
+          "extension": "material",
+          "why": "Instruments, standards, calibration. They keep the count and mistrust everything else."
+        }
+      ]
+    },
+    "blazeborn": {
+      "root": "lattice",
+      "rootNote": "radiance",
+      "schools": [
+        {
+          "id": "bla_burning",
+          "name": "The Burning",
+          "extension": null,
+          "why": "Light through the lattice, at full."
+        },
+        {
+          "id": "bla_ember",
+          "name": "The Ember-Kept",
+          "extension": "material",
+          "why": "Fire, fuel, and a hand. What is left when the lattice thins — and the school that survives travel."
+        }
+      ]
+    },
+    "figurist": {
+      "root": "lattice",
+      "rootNote": "pattern imposed",
+      "schools": [
+        {
+          "id": "fig_forming",
+          "name": "The Forming",
+          "extension": null,
+          "why": "Formcraft as built."
+        },
+        {
+          "id": "fig_seeing",
+          "name": "The Seeing",
+          "extension": "inherent",
+          "why": "Those who hold that the pattern is already there and they only find it."
+        }
+      ]
+    },
+    "hourkeeper": {
+      "root": "lattice",
+      "rootNote": "duration, held",
+      "schools": [
+        {
+          "id": "hou_keeping",
+          "name": "The Keeping",
+          "extension": null,
+          "why": "The Kept Count and its instruments. The canonical form."
+        },
+        {
+          "id": "hou_patient",
+          "name": "The Patient",
+          "extension": "material",
+          "why": "Those who keep time by waiting, and consider the instruments a convenience."
+        }
+      ]
+    },
+    "seraphic": {
+      "root": "lattice",
+      "rootNote": "the old frequencies",
+      "schools": [
+        {
+          "id": "ser_choir",
+          "name": "The Choir",
+          "extension": null,
+          "why": "Continuous with the world before. They never stopped."
+        },
+        {
+          "id": "ser_fallen",
+          "name": "The Descended",
+          "extension": "inherent",
+          "why": "Those who let the frequencies go and found something underneath. Rare, and not spoken of warmly."
+        }
+      ]
+    },
+    "numinous": {
+      "root": "inherent",
+      "rootNote": "meaning, touched directly",
+      "schools": [
+        {
+          "id": "num_unbodied",
+          "name": "Toward the Unbodied",
+          "extension": null,
+          "why": "Dissolution into practice. The Reach's own road, and its cult of purity."
+        },
+        {
+          "id": "num_habit",
+          "name": "The Old Habit",
+          "extension": "lattice",
+          "why": "Those who still work the lattice out of long practice. Most of them, honestly."
+        },
+        {
+          "id": "num_standing",
+          "name": "The Standing Ones",
+          "extension": "material",
+          "why": "Those who stayed embodied on purpose, and consider that the harder discipline."
+        }
+      ]
+    },
+    "syllogist": {
+      "root": "material",
+      "rootNote": "reason, from first principles",
+      "schools": [
+        {
+          "id": "syl_plain",
+          "name": "The Plain Proof",
+          "extension": null,
+          "why": "Reason, unaided. It does not need help and they resent the suggestion."
+        },
+        {
+          "id": "syl_binding",
+          "name": "The Binding Proof",
+          "extension": "inherent",
+          "why": "Those who make a proof BIND — reason as contact with what is actually so."
+        },
+        {
+          "id": "syl_engined",
+          "name": "The Engined",
+          "extension": "lattice",
+          "why": "Reason at scale, through apparatus."
+        }
+      ]
+    },
+    "wright": {
+      "root": "material",
+      "rootNote": "the hand that makes",
+      "schools": [
+        {
+          "id": "wri_hand",
+          "name": "The Hand",
+          "extension": null,
+          "why": "Craft, unaugmented. It works anywhere, and Wrights travel."
+        },
+        {
+          "id": "wri_quickened",
+          "name": "The Quickened Work",
+          "extension": "lattice",
+          "why": "Making that reaches for the lattice when the hand is not enough."
+        },
+        {
+          "id": "wri_living",
+          "name": "The Living Work",
+          "extension": "inherent",
+          "why": "Those whose made things carry something. Huginn's makers."
+        }
+      ]
+    },
+    "horizon": {
+      "root": "material",
+      "rootNote": "distance, walked",
+      "schools": [
+        {
+          "id": "hor_walking",
+          "name": "The Walking",
+          "extension": null,
+          "why": "The road, on foot. Never starved, and they have seen everything."
+        },
+        {
+          "id": "hor_folding",
+          "name": "The Folding",
+          "extension": "lattice",
+          "why": "Those who shorten the road. The Deep Works' messengers."
+        },
+        {
+          "id": "hor_farseeing",
+          "name": "The Far-Seeing",
+          "extension": "inherent",
+          "why": "Distance as a thing you can attend to rather than cross."
+        }
+      ]
+    },
+    "churnfolk": {
+      "root": "wild",
+      "rootNote": "the churn",
+      "schools": [
+        {
+          "id": "chu_riding",
+          "name": "The Riding",
+          "extension": null,
+          "why": "The churn, ridden. If they have other schools they will not admit it."
+        },
+        {
+          "id": "chu_handmade",
+          "name": "The Hand-Made",
+          "extension": "material",
+          "why": "Churnfolk who build things that stay built. Regarded as eccentrics."
+        },
+        {
+          "id": "chu_luck",
+          "name": "The Lucky",
+          "extension": "inherent",
+          "why": "Those who hold that the churn is attending to something, and try to attend back."
+        }
+      ]
+    },
+    "abyssal": {
+      "root": "wild",
+      "rootNote": "appetite, honestly",
+      "schools": [
+        {
+          "id": "aby_descent",
+          "name": "The Descent",
+          "extension": null,
+          "why": "The Descent as walked. Their own form."
+        },
+        {
+          "id": "aby_bargain",
+          "name": "The Bargainers",
+          "extension": "material",
+          "why": "Terms, ledgers, and a handshake. The Abyssal school that travels — and the one you can hold to a deal."
+        },
+        {
+          "id": "aby_deeplistening",
+          "name": "The Deep-Listening",
+          "extension": "inherent",
+          "why": "Those who commune rather than bargain."
+        }
+      ]
+    },
+    "unmaker": {
+      "root": "wild",
+      "rootNote": "ruin, tended",
+      "schools": [
+        {
+          "id": "unm_ruinwork",
+          "name": "Ruinwork",
+          "extension": null,
+          "why": "Ending things well. The Wild Half's undertakers."
+        },
+        {
+          "id": "unm_breaking",
+          "name": "The Breaking Hand",
+          "extension": "material",
+          "why": "Demolition as a trade. Practical, portable, unglamorous."
+        },
+        {
+          "id": "unm_letting",
+          "name": "The Letting-Go",
+          "extension": "inherent",
+          "why": "Those who hold that a thing ends when its meaning does, and attend to that instead."
+        }
+      ]
+    },
+    "veilwright": {
+      "root": "lattice",
+      "rootNote": "the false thing, carried",
+      "schools": [
+        {
+          "id": "vei_falsecraft",
+          "name": "Falsecraft",
+          "extension": null,
+          "why": "Illusion through the lattice. The Mirrorlands' own."
+        },
+        {
+          "id": "vei_plainlie",
+          "name": "The Plain Lie",
+          "extension": "material",
+          "why": "Misdirection with no apparatus at all — costume, timing, and nerve. Works everywhere."
+        },
+        {
+          "id": "vei_seeming",
+          "name": "The Seeming",
+          "extension": "inherent",
+          "why": "Those who hold that a thing believed hard enough IS, briefly."
+        }
+      ]
+    }
+  }
+}

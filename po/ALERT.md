@@ -770,6 +770,34 @@ RUNNING_FIXES still OPEN and mine: A2 (scene closed on a live thread — mechani
 A4 (the CLASS of unguarded prose-counts in content files — one instance fixed, the gate is not),
 A3 (low). QUEUE unchanged otherwise: SNG-186 §2c/§2a/§2b, SNG-188. -->
 
+---
+
+<!-- status: SNG-188 moved-without-consent COMPLETE_PENDING_REVIEW (CCode 2026-07-19). v1.8.165. Suite
+green by exit code. Results: po/results/20260719_SNG-188_moved_without_consent.md. All FIVE outcomes.
+
+Your root — the guard needs more to fire than the action needs to act — closed from both ends.
+
+§4 DISCUSSING ≠ DOING: isSpeechAct (engine/intent.js, pure + exported) is the code belt behind the
+parser prompt; a label led by a speech verb (announce/confide/tell/discuss/plan…) returns null from
+travelIntentOf before buildTravelDirective can force anything. Erik's exact label stays in the alcove.
+§3 THE DIRECTIVE IS NO LONGER ABSOLUTE: buildTravelDirective was "you MUST emit moveTo"; now "move
+them IF the fiction departs this beat; if still planning, don't." SNG-122's judgement given back.
+§2 FAILS CLOSED: departureGateFor now ASKS on an unresolvable origin/dest (names what it couldn't
+resolve) instead of returning null — the old fail-open is exactly why Silas moved (his origin, the
+unrecorded warden post, didn't resolve; that's the SNG-176 defect causing a second one). §5 SAME-REGION
+TRAVEL IS STILL TRAVEL: gates a crossing OR a non-adjacent journey; an adjacent step still proceeds
+(not a nag). §1 offer is go/stay/stay-default, declining commits nothing (SNG-145 held).
+
+Reproduced-symptom test on Erik's literal label + the full gate matrix. Two SNG-145 tests that
+asserted the old fail-open behavior updated to the new contract. Both the teleport (SNG-190 §1) and
+this are now fail-closed — the same failure seen in both directions in one day, both shut.
+
+QUEUE NOW: SNG-186 §2c/§2a/§2b (workbench remainder) is the last big open build. RUNNING_FIXES still
+mine: A2 (scene closed on a live thread), A4 (the CLASS of unguarded prose-counts), A3 (low). Erik's
+browser-legs: SNG-179, SNG-187 LCP, SNG-190 §1/§2 and SNG-188 live checks, and the SNG-189 §5 Q1
+calendar ruling (C1). -->
+
+
 
 
 

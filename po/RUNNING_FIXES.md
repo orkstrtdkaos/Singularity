@@ -127,5 +127,5 @@ not thin-ground crafts the way growing and fighting are) or may be a gap. **Flag
 - **SNG-185** — registry-only people have no domains. *Upstream of both outcomes Erik reported.*
 - **SNG-186** — the dev-mode workbench. §2f shipped and already earning its keep.
 - **SNG-187** — the 15.30s cold load. 252 files fetched sequentially, zero `Promise.all`.
-- **SNG-188** — moved without consent on a turn that only discussed travel.
+- **SNG-188** — moved without consent on a turn that only discussed travel. ✅ ~~LANDED 2026-07-19~~ (v1.8.165).
 - **SNG-189** — four defects from the first capture, incl. `[object Object]` in the permanent chronicle.

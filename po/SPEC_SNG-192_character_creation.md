@@ -155,6 +155,51 @@ traditions and you get the density window where the WHOLE kit works.** Computed 
 - **The no-overlap case earns a real warning**, because it is the one outcome nobody chooses on
   purpose: *"these two crafts share no ground — wherever you stand, one of them is starved."*
 
+# §6c — BRAIDS: the build is raw material, not a loadout ⭐ Erik's addition
+
+> Erik: *"I want there to be something about braids and the generative nature of the game — it allows
+> and encourages you to CREATE."* And: *"you will need those [off-source picks] if you journey to
+> other lands, which most eventually will."*
+
+**§6b measures coherence, and coherence is only half the truth. Stated alone it would quietly teach
+players to build narrow, which is the opposite of this game.**
+
+## The resolution, and it is a real design tension worth naming
+
+**Coherence is EFFICIENCY. Divergence is GENERATIVITY.**
+
+- A perfectly source-coherent build is **strong and static.** It works beautifully in its own country
+  and it will not surprise anyone, including its owner.
+- A divergent build is **weaker in any one place and is where new craft comes from.** Two crafts that
+  do not obviously belong together are exactly the material a braid is made of.
+
+**Both are correct builds.** The creation screen must say so, or §6b becomes an optimiser and the
+game gets narrower every time someone uses it.
+
+## The evidence is already in the save
+
+**Silas's Double Register — `deathsense + order_sense`** — was *discovered in play* and authored back
+into content afterwards. Reading an ending and reading a design are not the same craft and were never
+meant to compose. **That braid exists because the build was divergent enough to have both.**
+44 combinations are authored; the emergence system mints more from practice.
+
+## What creation should say
+
+1. **Name the second use of an off-source pick.** It is not only a tool for elsewhere — **it is a
+   seed.** The screen should say plainly that crafts from different sources are what braids are made
+   from, and that the game will offer combinations the player never planned.
+2. **Show at least one reachable braid at creation**, drawn from the actual picks — *"these two could
+   braid; the game will offer it when the moment fits."* A player should leave creation knowing the
+   kit is a **beginning**, not a build.
+3. **Frame travel honestly.** Erik: most characters eventually journey. **A build perfectly tuned to
+   one country is a build that gets weaker the further it goes** — and going is the whole shape of
+   this world (SNG-016: *"you leave to move along an axis, and you become more of what that axis
+   makes"*). Off-source picks are how a character stays capable abroad.
+4. **⛔ Never present divergence as a penalty paid.** It is a different bet: less power now, more
+   possibility later. The engine owes the player that framing as much as it owes them the numbers.
+
+**The one-line version for the UI:** *coherence makes you strong here; divergence makes you new.*
+
 # §7 — INVARIANTS
 
 1. **Nothing is hidden that costs a choice.** Grants shown before picks, always.
@@ -162,7 +207,8 @@ traditions and you get the density window where the WHOLE kit works.** Computed 
 3. **Suggestions never restrict.** The full pool stays reachable in one click.
 4. **Coverage gaps and source mismatches are surfaced, never blocked** — including the no-common-ground case, which is warned about and still permitted.
 5. **An archetype is a lens, not a class** — it selects, it does not lock.
-6. **Creation must be completable fast.** A player who wants to accept every default and play should
+6. **Divergence is never shown as a mistake** — §6b's numbers and §6c's framing ship together or neither ships.
+7. **Creation must be completable fast.** A player who wants to accept every default and play should
    be able to, in under a minute.
 
 # §8 — QUESTIONS FOR CCODE

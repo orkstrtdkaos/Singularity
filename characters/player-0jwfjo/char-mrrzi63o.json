@@ -1,0 +1,576 @@
+{
+  "schemaVersion": 1,
+  "id": "char-mrrzi63o",
+  "playerKey": "player-0jwfjo",
+  "name": "Brynjar Andyrsson",
+  "origin": "marcher",
+  "nativeTradition": "marcher",
+  "whyHere": "You put down the blade, or you were sent away from it, or you are looking for a line worth holding that isn't theirs.",
+  "background": "war_leader",
+  "level": 1,
+  "xp": 0,
+  "attributes": {
+    "physical": 3,
+    "mental": 3,
+    "social": 3,
+    "practical": 3
+  },
+  "skills": {},
+  "abilities": [
+    {
+      "abilityId": "disarm",
+      "level": 1
+    },
+    {
+      "abilityId": "order_sense",
+      "level": 1
+    },
+    {
+      "abilityId": "read_the_fight",
+      "level": 1,
+      "native": true
+    }
+  ],
+  "alignment": {},
+  "attunement": 1,
+  "maxHealth": 30,
+  "health": 30,
+  "maxEnergy": 100,
+  "energy": 100,
+  "inventory": [
+    {
+      "id": "travelers_pack",
+      "name": "Traveler's Pack",
+      "kind": "tool",
+      "qty": 1,
+      "description": "A worn canvas pack with good straps — bedroll, flint, mess kit, fifty small comforts of the road.",
+      "bonusTags": [
+        "retreat",
+        "careful"
+      ],
+      "consumable": false
+    },
+    {
+      "id": "waterskin",
+      "name": "Waterskin",
+      "kind": "consumable",
+      "qty": 1,
+      "description": "Boiled and refilled at the last clean spring. Worth more every week the river runs gray.",
+      "effects": {
+        "energy": 10
+      },
+      "consumable": true,
+      "pinned": true
+    }
+  ],
+  "deeds": [],
+  "relationships": {},
+  "chronicle": [],
+  "currentLocationId": "the_marchward",
+  "activeScene": {
+    "locationId": "the_marchward",
+    "turns": [
+      {
+        "player": null,
+        "summary": "Brynjar arrives in the Marchward — a border town between war and false peace — and takes his first look at the square.",
+        "narration": "The Marchward sits at the edge of two worlds and looks like neither. It is a working town — stone buildings with patched roofs, a main street packed to mud by boot and cart, cookfire smoke threading straight up in the still spring air. The snow is gone but the cold lingers in the shade, and the light has that early-season flatness where everything looks a little undecided.\n\nYou came through the gate road from the north two hours ago, and the town noticed you the way a border town notices everyone: a look, a pause, a resumed conversation. A scarred Redline warrior with a jawbone necklace ate his breakfast on a bench and watched you pass without expression. A woman in grey Stillhold cloth crossed without making eye contact. Freki walked at your heel and watched both, ears forward.\n\nYou are standing now at the edge of the Marchward's central square — more of a wide junction than a proper square, but there is a well here, and a public board with bills tacked to it, and a low building to your left marked WARDHOUSE in worn paint. Across the square a tavern, the hearthfire visible through an open shutter. To your right, the road continues east toward the Redline; behind you, the road runs west toward the Stillhold. A waygate anchor-stone stands at the square's far corner, old and plain and exactly where the treaty says it must be — nobody stands near it.\n\nFreki puts her nose to the mud and circles the well twice, then sits beside you and looks up at your face."
+      }
+    ],
+    "lastTurn": {
+      "narration": "The Marchward sits at the edge of two worlds and looks like neither. It is a working town — stone buildings with patched roofs, a main street packed to mud by boot and cart, cookfire smoke threading straight up in the still spring air. The snow is gone but the cold lingers in the shade, and the light has that early-season flatness where everything looks a little undecided.\n\nYou came through the gate road from the north two hours ago, and the town noticed you the way a border town notices everyone: a look, a pause, a resumed conversation. A scarred Redline warrior with a jawbone necklace ate his breakfast on a bench and watched you pass without expression. A woman in grey Stillhold cloth crossed without making eye contact. Freki walked at your heel and watched both, ears forward.\n\nYou are standing now at the edge of the Marchward's central square — more of a wide junction than a proper square, but there is a well here, and a public board with bills tacked to it, and a low building to your left marked WARDHOUSE in worn paint. Across the square a tavern, the hearthfire visible through an open shutter. To your right, the road continues east toward the Redline; behind you, the road runs west toward the Stillhold. A waygate anchor-stone stands at the square's far corner, old and plain and exactly where the treaty says it must be — nobody stands near it.\n\nFreki puts her nose to the mud and circles the well twice, then sits beside you and looks up at your face.",
+      "sceneSummary": "Brynjar arrives in the Marchward — a border town between war and false peace — and takes his first look at the square.",
+      "choices": [
+        {
+          "label": "Go to the Wardhouse and ask who runs things here — and whether there is work for someone who knows how to read a fight before it starts.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "travel",
+            "negotiate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Cross to the tavern — a warm hearth and a drink, and listen to whatever the room is saying this morning.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "travel"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Read the public board — bills, warrants, notices; see what the Marchward is worried about right now.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "scout"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Approach the scarred Redline warrior who was watching — a direct nod and a word. You understand a man who sizes up strangers.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "violence_peace": -0.2
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "negotiate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "scene": {
+        "setting": "The Marchward's central square — a wide mud-packed junction, early morning, pale spring light, cookfire smoke rising straight in still air. Overcast but dry.",
+        "npcsPresent": [
+          {
+            "name": "Scarred Redline warrior",
+            "state": "Still on the bench near the Wardhouse entrance, eating, watching the square with a steady professional calm."
+          },
+          {
+            "name": "Stillhold woman in grey",
+            "state": "Has moved on down the western road, nearly out of sight."
+          }
+        ],
+        "objects": [
+          "Stone well at the square's center",
+          "Public notice board with several bills tacked to it",
+          "Wardhouse — low stone building, worn painted sign",
+          "Tavern across the square — hearthfire visible through open shutter",
+          "Waygate anchor-stone at the square's far corner, alone and unmarked by any person"
+        ],
+        "threads": [
+          "Who the Marchward's authority is and whether they'll hire or help a stranger",
+          "What the public board says about current tensions",
+          "The Redline warrior watching Brynjar from the bench"
+        ]
+      },
+      "npcUpdates": [],
+      "factUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "Brynjar arrived in the Marchward on World-day 20, early morning. First impressions: Redline warrior on bench near Wardhouse, Stillhold woman in grey, waygate anchor-stone visible but avoided by locals.",
+          "subPlace": {
+            "name": "Central Square",
+            "parent": "The Marchward",
+            "note": "Wide mud-packed junction with a well, public notice board, access to the Wardhouse, tavern, and the waygate anchor-stone.",
+            "visited": true
+          }
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "the-marchward",
+          "label": "The Marchward",
+          "kind": "place",
+          "entityId": "the_marchward",
+          "fact": "A border town between the Redline and the Stillhold — Redliners and Stillholders use the same square without warmth. A waygate anchor-stone sits at the corner under truce-law; no one stands near it. The Wardhouse is the visible seat of local authority.",
+          "links": [
+            "the_redline",
+            "the_stillhold",
+            "riven_marches"
+          ]
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0,
+        "why": "Scene opening — no time passes beyond the arrival"
+      },
+      "scene_ended": false
+    },
+    "sceneState": {
+      "setting": "The Marchward's central square — a wide mud-packed junction, early morning, pale spring light, cookfire smoke rising straight in still air. Overcast but dry.",
+      "npcsPresent": [
+        {
+          "name": "Scarred Redline warrior",
+          "state": "Still on the bench near the Wardhouse entrance, eating, watching the square with a steady professional calm."
+        },
+        {
+          "name": "Stillhold woman in grey",
+          "state": "Has moved on down the western road, nearly out of sight."
+        }
+      ],
+      "objects": [
+        "Stone well at the square's center",
+        "Public notice board with several bills tacked to it",
+        "Wardhouse — low stone building, worn painted sign",
+        "Tavern across the square — hearthfire visible through open shutter",
+        "Waygate anchor-stone at the square's far corner, alone and unmarked by any perso"
+      ],
+      "threads": [
+        "Who the Marchward's authority is and whether they'll hire or help a stranger",
+        "What the public board says about current tensions",
+        "The Redline warrior watching Brynjar from the bench"
+      ]
+    }
+  },
+  "clock": {
+    "schemaVersion": 1,
+    "day": 1,
+    "hour": 8,
+    "realAnchor": null
+  },
+  "companions": [
+    "bristle"
+  ],
+  "companionNames": {
+    "bristle": "Freki"
+  },
+  "quests": [
+    {
+      "id": "brynjar-andyrsson-thread",
+      "title": "The Thread of A Northern Village Called Javiksholm But It Was Raided And Razed.",
+      "structured": true,
+      "status": "active",
+      "premise": "Brynjar Andyrsson carries an unfinished thing: They were forced to flee from the raid that killed their father and razed their home village.. The valley will give them the chance to face it.",
+      "stakes": "who they become when the thing they left behind finally catches up",
+      "axis": null,
+      "traditions": [],
+      "giver": null,
+      "legend": null,
+      "region": "valley",
+      "tier": "personal",
+      "arcId": "brynjar-andyrsson_personal_arc",
+      "locationId": null,
+      "stages": [
+        {
+          "id": "s1",
+          "objective": "a first sign of They were forced to flee from the raid that killed their father and razed their home village. surfaces in the valley"
+        },
+        {
+          "id": "s2",
+          "objective": "the thread deepens — what it costs to pull it becomes clear"
+        },
+        {
+          "id": "s3",
+          "objective": "the reckoning — and the choice of what to do with it"
+        }
+      ],
+      "routes": {
+        "marcher": "answer it as your people would",
+        "seek": "seek the truth of it, wherever it leads"
+      },
+      "outcomes": [
+        {
+          "id": "marcher",
+          "name": "Marcher",
+          "narration": [],
+          "effects": []
+        },
+        {
+          "id": "seek",
+          "name": "Seek",
+          "narration": [],
+          "effects": []
+        }
+      ],
+      "stageIndex": 0,
+      "completedStages": [],
+      "progress": [],
+      "aliases": [],
+      "startedAt": "2026-07-19T16:06:41.716Z",
+      "startedWorldDay": 19
+    }
+  ],
+  "npcRegistry": {},
+  "placeMemory": {
+    "the_marchward": {
+      "visits": 1,
+      "notes": [
+        "[d1] Brynjar arrived in the Marchward on World-day 20, early morning. First impressions: Redline warrior on bench near Wardhouse, Stillhold woman in grey, waygate anchor-stone visible but avoided by locals."
+      ],
+      "flags": {},
+      "subPlaces": {
+        "central-square": {
+          "name": "Central Square",
+          "parentId": "the_marchward",
+          "day": 1,
+          "visited": true,
+          "note": "Wide mud-packed junction with a well, public notice board, access to the Wardhouse, tavern, and the waygate anchor-stone."
+        }
+      }
+    }
+  },
+  "worldState": {
+    "schemaVersion": 1,
+    "lastTickDay": 1,
+    "eventStages": {
+      "water_crisis": {
+        "stage": 1,
+        "sinceDay": 1
+      }
+    },
+    "spectrumDrift": {},
+    "news": [
+      {
+        "day": 1,
+        "worldDay": 19,
+        "text": "The Water Crisis stands at Discoloration across the valley: The Echo River runs gray-green on bad mornings. Fish catches are down. Communities murmur but cooperate."
+      },
+      {
+        "day": 1,
+        "worldDay": 13,
+        "text": "Word reaches you: Sow killed cleanly in the north wood — boar sounder now reduced; piglets scattered north into deeper scrub (near millbrook)"
+      },
+      {
+        "day": 1,
+        "worldDay": 13,
+        "text": "Word reaches you: Bull boar taken on the scrub oak ridge north of Millbrook — the hunt party completed the job, both animals down. (near millbrook)"
+      },
+      {
+        "day": 1,
+        "worldDay": 17,
+        "text": "This reaches your area — Fendt has left the Edge District and is walking to Millbrook — his testimony names Overseer Grael explicitly; when he arrives, the paper becomes a political event in both settlements. (near radiant plateau edge)",
+        "impactsLocal": true
+      },
+      {
+        "day": 1,
+        "worldDay": 18,
+        "text": "This reaches your area — Two road opportunists at the limestone bend were disarmed and sent to Mara Wells in Millbrook for honest work — Silas Weir's name given as introduction (near millbrook)",
+        "impactsLocal": true
+      },
+      {
+        "day": 1,
+        "worldDay": 19,
+        "text": "Word reaches you: Compound rune-work — Wither and The Raised Thing — bound an eleven-year rising in the old Ashwarden warden post at Raven's Home. (near gen-ashwarden-march-road)"
+      }
+    ],
+    "unseenNews": [],
+    "lastSharedReadAt": "2026-07-20T02:26:53.157Z",
+    "lastTickWorldDay": 20,
+    "lastCanonWorldDay": 20
+  },
+  "domains": {
+    "primary": "marcher",
+    "secondary": "somatic",
+    "tertiary": "lattice"
+  },
+  "form": "Stocky, average-height man with pale skin and icy blue eyes. Chestnut hair shaved at sides and back, long on top and knotted. Thick beard with two braids flanking the mouth. A dark blue Norse dragon-knot tattoo curls from behind his ear to his temple; vertical dark blue rune tattoos descend from above his brows, over both eyes and cheeks, into the beard. Blue tunic with light red cuff-and-collar accents, dark grey puffy trousers, dark blue shin-wraps over leather boots. Silver arm ring with two dragon heads on the right arm. Bronze-inlaid one-handed axe at the hip, seax at the back of the belt, pouches at the front.",
+  "bio": {
+    "hometown": "A northern village called Javiksholm but it was raided and razed.",
+    "residence": "They’ve been on the road joined by their hound Freki",
+    "livelihood": "Hunting and trading on the road",
+    "hobbies": "Hunt, board games,",
+    "motivation": "They were forced to flee from the raid that killed their father and razed their home village.",
+    "story": "Brynjar had fled from his village of Javiksholm during the raid as his father commanded. On his way out of the longhouse he made sure to grab his axe and shield. He also was followed by his dog Freki. Before he had fully escaped the village he looked back towards the longhouse and saw his father Andyr fighting off many of the raiders until one, the leader of this raid and a rival Jarl Kjotve Olafsson, who wanted the land Brynjar’s clan had owned due to its fertile fields and prime oceanfront access. Kjotve had locked into a duel with Andyr until he started loosing and he had one of his men strike him in the back with a spear, then it was all over. Kjotve had ordered his men to toss his body into the ocean and burn the longhouse down. After seeing this Brynjar had fled and escaped from the village. He has been on the road ever since surviving off of hunting wild game and trading with villages and traders he passed along the way, which leads us here."
+  },
+  "subAttributes": {
+    "strength": 3,
+    "agility": 3,
+    "reason": 3,
+    "insight": 3,
+    "presence": 3,
+    "rapport": 3,
+    "craft": 3,
+    "wits": 3
+  },
+  "pendingSubPoints": 2,
+  "skillPoints": 0,
+  "discoveries": [],
+  "codex": {
+    "schemaVersion": 1,
+    "topics": {
+      "the-marchward": {
+        "id": "the-marchward",
+        "label": "The Marchward",
+        "kind": "place",
+        "facts": [
+          "[d1] A border town between the Redline and the Stillhold — Redliners and Stillholders use the same square without warmth. A waygate anchor-stone sits at the corner under truce-law; no one stands near it. The Wardhouse is the visible seat of local authority."
+        ],
+        "links": [
+          "the-redline",
+          "the-stillhold",
+          "riven-marches"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "the-marchward",
+        "updatedDay": 1
+      }
+    }
+  },
+  "tendencies": {
+    "leadership": 14
+  },
+  "aptitudes": [
+    "banner"
+  ],
+  "actionCount": 0,
+  "grantsVersion": 1,
+  "precursorAccess": [],
+  "livingCurrentAccess": [],
+  "wildCurrentAccess": [],
+  "braidDiscount": 0,
+  "grantedAptitudes": [
+    "banner"
+  ],
+  "peopleDisposition": {
+    "marcher": 4,
+    "somatic": 2,
+    "lattice": 1,
+    "stillhold": -1
+  },
+  "standingLedger": [
+    {
+      "at": 1,
+      "kind": "seed",
+      "entries": [
+        {
+          "people": "marcher",
+          "delta": 4,
+          "why": "born to this people"
+        },
+        {
+          "people": "somatic",
+          "delta": 2,
+          "why": "kin to this people"
+        },
+        {
+          "people": "lattice",
+          "delta": 1,
+          "why": "a hand in this people's craft"
+        },
+        {
+          "people": "stillhold",
+          "delta": -1,
+          "why": "the far side of the circle from your own"
+        }
+      ],
+      "text": "Your birth and training are known: marcher +4, somatic +2, lattice +1, stillhold -1."
+    }
+  ],
+  "nativeGrantsVersion": 1,
+  "reconcileVersion": 11,
+  "gallery": [
+    {
+      "kind": "portrait",
+      "prompt": "Brynjar Andyrsson",
+      "url": "https://image.pollinations.ai/prompt/Stocky%2C%20average-height%20man%20with%20pale%20skin%20and%20icy%20blue%20eyes.%20Chestnut%20hair%20shaved%20at%20sides%20and%20back%2C%20long%20on%20top%20and%20knotted.%20Thick%20beard%20with%20two%20braids%20flanking%20the%20mouth.%20A%20dark%20blue%20Norse%20dragon-knot%20tattoo%20curls%20fro%2C%20full-body%20character%20portrait%2C%20named%20Brynjar%20Andyrsson%2C%20of%20the%20marcher%2C%20war%20leader%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20They%20were%20forced%20to%20flee%20from%20the%20raid%20that%20killed%20their%20father%20and%20razed%20their%20home%20village.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=53421&nologo=true",
+      "caption": "Brynjar Andyrsson — marcher",
+      "worldDay": 19,
+      "at": "2026-07-19T16:02:34.224Z"
+    }
+  ],
+  "portrait": "https://image.pollinations.ai/prompt/Stocky%2C%20average-height%20man%20with%20pale%20skin%20and%20icy%20blue%20eyes.%20Chestnut%20hair%20shaved%20at%20sides%20and%20back%2C%20long%20on%20top%20and%20knotted.%20Thick%20beard%20with%20two%20braids%20flanking%20the%20mouth.%20A%20dark%20blue%20Norse%20dragon-knot%20tattoo%20curls%20fro%2C%20full-body%20character%20portrait%2C%20named%20Brynjar%20Andyrsson%2C%20of%20the%20marcher%2C%20war%20leader%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20They%20were%20forced%20to%20flee%20from%20the%20raid%20that%20killed%20their%20father%20and%20razed%20their%20home%20village.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=53421&nologo=true",
+  "personalArc": {
+    "id": "brynjar-andyrsson-thread",
+    "name": "The Thread of A Northern Village Called Javiksholm But It Was Raided And Razed.",
+    "arcId": "brynjar-andyrsson_personal_arc",
+    "boundToCharacter": "Brynjar Andyrsson",
+    "boundToPlayer": "player-0jwfjo",
+    "region": "valley",
+    "tier": "personal",
+    "premise": "Brynjar Andyrsson carries an unfinished thing: They were forced to flee from the raid that killed their father and razed their home village.. The valley will give them the chance to face it.",
+    "stakes": "who they become when the thing they left behind finally catches up",
+    "legendNpc": null,
+    "legend": null,
+    "stages": [
+      {
+        "id": "s1",
+        "objective": "a first sign of They were forced to flee from the raid that killed their father and razed their home village. surfaces in the valley"
+      },
+      {
+        "id": "s2",
+        "objective": "the thread deepens — what it costs to pull it becomes clear"
+      },
+      {
+        "id": "s3",
+        "objective": "the reckoning — and the choice of what to do with it"
+      }
+    ],
+    "routes": {
+      "marcher": "answer it as your people would",
+      "seek": "seek the truth of it, wherever it leads"
+    },
+    "outcomes": [
+      {
+        "id": "marcher",
+        "name": "Marcher",
+        "effects": []
+      },
+      {
+        "id": "seek",
+        "name": "Seek",
+        "effects": []
+      }
+    ],
+    "structured": true,
+    "source": "personal_fallback",
+    "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
+  },
+  "updatedAt": 1784514447081,
+  "rev": 12,
+  "generated": {
+    "schemaVersion": 1,
+    "npc": {},
+    "location": {},
+    "arc": {}
+  },
+  "company": [],
+  "_pinsInitialized": true,
+  "regionsKnown": {
+    "riven_marches": 2
+  },
+  "practice": {
+    "schemaVersion": 1,
+    "uses": {},
+    "coActivations": {},
+    "aspirations": [
+      {
+        "abilityId": "hearthbinding",
+        "since": "2026-07-19T16:03:43.767Z",
+        "progress": 0
+      },
+      {
+        "abilityId": "beastfriend",
+        "since": "2026-07-19T16:03:59.776Z",
+        "progress": 0
+      }
+    ]
+  },
+  "customAbilities": {},
+  "companionBonds": {},
+  "establishedFacts": [],
+  "teachers": {},
+  "foreclosed": [
+    "stillhold",
+    "cogitant"
+  ],
+  "forkChoices": {},
+  "backfillVersion": 1,
+  "opLossPending": false,
+  "sessions": [
+    {
+      "id": "sess-1",
+      "startedAt": "2026-07-20T02:27:27.074Z",
+      "lastAt": "2026-07-20T02:27:27.074Z",
+      "startDay": 20,
+      "endDay": 20,
+      "beats": 1
+    }
+  ],
+  "_pendingArrival": null
+}

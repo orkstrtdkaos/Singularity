@@ -1647,7 +1647,150 @@
     "The party walks from the western crossing lane to Silas's mother's house in Cairnhold's center district — the road ends at an open door and a chimney smoking."
   ],
   "currentLocationId": "cairnhold",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "cairnhold",
+    "turns": [
+      {
+        "player": null,
+        "summary": "The party arrives at Silas's mother's house on the center lane of Cairnhold — chimney smoking, gate unlatched, the second door open toward the heath as always.",
+        "narration": "The center lane of Cairnhold runs between low grey-stone houses, each one set back just enough from its neighbor that the cairn-line stones are always visible at the lane's edge. The light this afternoon is the thin, clear light of early spring — no warmth in it yet, but honest. Huginn rides your left shoulder, unbothered by the town, which is itself unbothered by Huginn. A child in a doorway watches the bird with professional interest and says nothing.\n\nYour mother's house sits at the lane's end where the cairn-line turns north. Low grey stone, a good roof, smoke coming from the chimney in a straight unhurried column. The second door — the door that faces the heath — stands open a hand's width, the way it always has. The gate at the front is unlached. Nothing about the house has changed, which means she is well, because she changes the house when she is not.\n\nPell walks half a step behind you, reading the lane the way she reads a room — pack, posture, sight-lines. Veth is two steps back and to the right, her stillness taking on a slightly different quality here; she is watching how the houses sit on the cairn-line, not the houses themselves. She said nothing on the road from the western crossing, but she has been saying that nothing carefully.\n\nHuginn drops from your shoulder to the gate post, settles its wings, and looks at the chimney smoke. It does not croak. You have been away four days — four days is nothing to a town this unhurried, and everything to a mother who reads endings for a living."
+      }
+    ],
+    "lastTurn": {
+      "narration": "The center lane of Cairnhold runs between low grey-stone houses, each one set back just enough from its neighbor that the cairn-line stones are always visible at the lane's edge. The light this afternoon is the thin, clear light of early spring — no warmth in it yet, but honest. Huginn rides your left shoulder, unbothered by the town, which is itself unbothered by Huginn. A child in a doorway watches the bird with professional interest and says nothing.\n\nYour mother's house sits at the lane's end where the cairn-line turns north. Low grey stone, a good roof, smoke coming from the chimney in a straight unhurried column. The second door — the door that faces the heath — stands open a hand's width, the way it always has. The gate at the front is unlached. Nothing about the house has changed, which means she is well, because she changes the house when she is not.\n\nPell walks half a step behind you, reading the lane the way she reads a room — pack, posture, sight-lines. Veth is two steps back and to the right, her stillness taking on a slightly different quality here; she is watching how the houses sit on the cairn-line, not the houses themselves. She said nothing on the road from the western crossing, but she has been saying that nothing carefully.\n\nHuginn drops from your shoulder to the gate post, settles its wings, and looks at the chimney smoke. It does not croak. You have been away four days — four days is nothing to a town this unhurried, and everything to a mother who reads endings for a living.",
+      "sceneSummary": "The party arrives at Silas's mother's house on the center lane of Cairnhold — chimney smoking, gate unlatched, the second door open toward the heath as always.",
+      "choices": [
+        {
+          "label": "Open the gate and walk to the door — knock, or simply call out",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "help"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Pause at the gate and use Deathsense — read the house before you enter, as an Ashwarden would",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "deathsense",
+          "energyCost": 2,
+          "trivial": false
+        },
+        {
+          "label": "Introduce Pell first — step aside at the gate and let your mother's first sight be the two of you together",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask Veth what she sees in the house's placement on the cairn-line before going in",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        }
+      ],
+      "scene": {
+        "setting": "The end of Cairnhold's center lane, early-spring afternoon — thin clear light, no warmth. Silas stands at the unlatched gate of his mother's low grey-stone house. Chimney smoke rises straight. The second door faces the heath, open a hand's width.",
+        "npcsPresent": [
+          {
+            "name": "Pell Ran Marsh",
+            "state": "Half a step behind Silas, reading the lane — pack, posture, sight-lines. Steady."
+          },
+          {
+            "name": "Veth Ondra",
+            "state": "Two steps back and right, watching how the houses sit on the cairn-line, her stillness careful."
+          },
+          {
+            "name": "Huginn",
+            "state": "Settled on the gate post, wings folded, watching the chimney smoke. Silent."
+          }
+        ],
+        "objects": [
+          "Unlatched front gate",
+          "Low grey-stone house with good roof",
+          "Chimney smoke rising straight",
+          "Second door open a hand's width toward the heath",
+          "Cairn-line stones at the lane's edge"
+        ],
+        "threads": [
+          "No answer yet from inside — the door has not opened",
+          "Veth is reading something in the house's cairn-line placement and has not named it"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "note": "Arrived at Silas's mother's gate — reading the lane, steady, waiting for his lead",
+          "statusNote": "At the gate of Silas's mother's house on Cairnhold's center lane, World-day 23 afternoon"
+        },
+        {
+          "op": "update",
+          "npcId": "veth-ondra",
+          "name": "Veth Ondra",
+          "note": "Watching the house's placement on the cairn-line with careful attention — has not spoken",
+          "statusNote": "At the gate of Silas's mother's house on Cairnhold's center lane, World-day 23 afternoon"
+        }
+      ],
+      "placeUpdates": [
+        {
+          "subPlace": {
+            "name": "Silas's Mother's House — Front Gate",
+            "parent": "Cairnhold",
+            "note": "Unlatched gate at the lane end where the cairn-line turns north — the party has arrived here, World-day 23 afternoon",
+            "visited": true
+          }
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "Short walk from the western crossing lane to the center lane gate"
+      }
+    },
+    "sceneState": {
+      "setting": "The end of Cairnhold's center lane, early-spring afternoon — thin clear light, no warmth. Silas stands at the unlatched gate of his mother's low grey-stone house. Chimney smoke rises straight. The second door faces the heath, open a hand's width.",
+      "npcsPresent": [
+        {
+          "name": "Pell Ran Marsh",
+          "state": "Half a step behind Silas, reading the lane — pack, posture, sight-lines. Steady."
+        },
+        {
+          "name": "Veth Ondra",
+          "state": "Two steps back and right, watching how the houses sit on the cairn-line, her stillness careful."
+        },
+        {
+          "name": "Huginn",
+          "state": "Settled on the gate post, wings folded, watching the chimney smoke. Silent."
+        }
+      ],
+      "objects": [
+        "Unlatched front gate",
+        "Low grey-stone house with good roof",
+        "Chimney smoke rising straight",
+        "Second door open a hand's width toward the heath",
+        "Cairn-line stones at the lane's edge"
+      ],
+      "threads": [
+        "No answer yet from inside — the door has not opened",
+        "Veth is reading something in the house's cairn-line placement and has not named it"
+      ]
+    }
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 12,
@@ -2157,7 +2300,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d6] Still holding the tree line — giving Silas the space to complete the ward work.",
         "[d6] Called Memory back to hand and fell in on Silas's left without being asked — road discipline, no ceremony.",
         "[d6] Heard the full briefing from the tree line. Filed it without comment. Watching the door.",
         "[d6] Held position two steps back and right of Silas at the hollow rim — Memory loose, watching Cassiel.",
@@ -2166,7 +2308,8 @@
         "[d6] Quiet at the south corner, measuring hearth draw — satisfied with the work.",
         "[d6] Came to the alcove when called, settled beside Silas, listened to Veth's Pale Reach account. Noted plainly that four days means five in early spring.",
         "[d6] Heard Veth name the soul bond aloud — watched Veth's face to read what kind of plain it was. Walked the four-day road north.",
-        "[d9] Arrived at Cairnhold western crossing lane with Silas — named the destination plainly: home first. Road-worn but steady."
+        "[d9] Arrived at Cairnhold western crossing lane with Silas — named the destination plainly: home first. Road-worn but steady.",
+        "[d12] Arrived at Silas's mother's gate — reading the lane, steady, waiting for his lead"
       ],
       "knownFacts": [
         "Silas wants something private for the evenings — she is thinking about what that means",
@@ -2187,10 +2330,10 @@
         "feeding ironsense through the spear-shaft as a structural an"
       ],
       "status": "active",
-      "statusNote": "Arrived at Cairnhold outer district with Silas on World-day 23 — at the western crossing lane, watching ahead.",
+      "statusNote": "At the gate of Silas's mother's house on Cairnhold's center lane, World-day 23 afternoon",
       "lastSeen": {
         "locationId": "cairnhold",
-        "day": 9
+        "day": 12
       },
       "bondType": "romantic",
       "bondStage": "partner",
@@ -2201,7 +2344,11 @@
       "aliases": [
         "Pell"
       ],
-      "nameRevealed": true
+      "nameRevealed": true,
+      "domains": {
+        "primary": "ashwarden"
+      },
+      "domainsSource": "derived"
     },
     "mara-wells": {
       "id": "mara-wells",
@@ -2854,7 +3001,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d6] Explained the mechanics of the naming plainly — accumulations need a frame, the woman gave one, and the hollow believed her because she was calm and clear. Received Silas's declaration about not reopening the post without surprise.",
         "[d6] Followed Silas up to the post — watching the naming without interrupting it",
         "[d6] Held position on the slope between post and hollow — watching without interrupting Silas's read.",
         "[d6] Entered the hollow floor for the first time — stood still, looked at Memory and the chalk mark, said 'Eleven years' to the hollow itself and then 'It holds.' Nothing more. The weight she has carried since the post was dissolved is visible in what she did not say.",
@@ -2863,7 +3009,8 @@
         "[d6] Gave Silas her most valued lesson plainly and without preamble: the Ashwarden who cannot remain in an ending's aftermath reads only half the world. Then demonstrated it by sitting still and waiting.",
         "[d6] Named the Pale Reach's geography: four days to Cairnhold's outer district from this post, five in early spring. Beathstone crossing is knee-deep. Pre-Transition infrastructure above Cairnhold, plus warden signs not on the March's current register — named without drama.",
         "[d6] Confirmed she can see the soul bond between Silas and Pell — named it 'rune-in-grain, not on the surface.' Agreed to walk the road to Cairnhold without being asked to. Traveled the four-day road north with the party.",
-        "[d9] Named plainly that word travels faster than roads — observing the town's read of Silas."
+        "[d9] Named plainly that word travels faster than roads — observing the town's read of Silas.",
+        "[d12] Watching the house's placement on the cairn-line with careful attention — has not spoken"
       ],
       "knownFacts": [
         "Silas understands the difference between tending a closed site and reopening it — named it himself, unprompted",
@@ -2886,10 +3033,10 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Arrived at Cairnhold western crossing lane with the party on World-day 23 — two steps back, watching.",
+      "statusNote": "At the gate of Silas's mother's house on Cairnhold's center lane, World-day 23 afternoon",
       "lastSeen": {
         "locationId": "cairnhold",
-        "day": 9
+        "day": 12
       },
       "bondType": "sworn",
       "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Veth%20Ondra%2C%20woman%2C%20Former%20Ashwarden%20warden%2C%20now%20teaching%20at%20the%20dark-cloth%20stall%20%E2%80%94%20has%20offered%20to%20join%20the%20party%2C%20sworn%20to%20Silas%20Weir%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=66052&nologo=true",
@@ -3510,6 +3657,13 @@
           "day": 12,
           "visited": true,
           "note": "Low grey-stone house at the lane's end where the cairn-line turns north — chimney smoking, second door open toward the heath. The door has been closed only twice."
+        },
+        "silas-s-mother-s-house-front-gate": {
+          "name": "Silas's Mother's House — Front Gate",
+          "parentId": "cairnhold",
+          "day": 12,
+          "visited": true,
+          "note": "Unlatched gate at the lane end where the cairn-line turns north — the party has arrived here, World-day 23 afternoon"
         }
       }
     }
@@ -3525,26 +3679,6 @@
     },
     "spectrumDrift": {},
     "news": [
-      {
-        "day": 4,
-        "worldDay": 18,
-        "text": "Word has spread beyond millbrook: Delivered a dressed bull and sow to Aldric's smokehouse — a significant haul by village standards, carried down from the north wood by three hunters."
-      },
-      {
-        "day": 4,
-        "worldDay": 18,
-        "text": "Calvar: Reviewing last night's seventh-band log, Calvar found a seventeen-minute gap in the low-frequency baseline that his specification explicitly flags as instrument drift — but the gap's edges are too clean, too symmetrical, and he has spent the morning re-running the check three times rather than recording it as error."
-      },
-      {
-        "day": 4,
-        "worldDay": 18,
-        "text": "Vash: While dressing her wheel's edge before first light, Vash reconstructed the overheard phrase word by word and realized the term she couldn't place was a pre-Transition calibration interval — specific enough that whoever said it had read the same foundational documents the array's optical layer was built from."
-      },
-      {
-        "day": 6,
-        "worldDay": 18,
-        "text": "Word has spread beyond millbrook: Raised a cleaned rabbit from the dead in the upper meadow — no ritual, no preparation, hands and will and the valley's old grain answering"
-      },
       {
         "day": 6,
         "worldDay": 18,
@@ -3624,12 +3758,32 @@
         "day": 12,
         "worldDay": 19,
         "text": "Mara Wells is buying stored grain from two east-furlong families — quiet, no reason given, but people notice when the supply store is buying instead of selling."
+      },
+      {
+        "day": 12,
+        "worldDay": 20,
+        "text": "Vash: Vash spent the evening re-grinding a lens she'd already finished, turning the fragment of overheard conversation over in her mind until she placed it — the word used wasn't a maintenance term, it was a calibration term, and that distinction has been quietly unsettling her ever since."
+      },
+      {
+        "day": 12,
+        "worldDay": 20,
+        "text": "Calvar: Calvar noticed a drift of 0.003 in the seventh-band baseline reading and spent the night re-checking his instruments rather than the sky, unwilling to admit whether he is hoping to find instrument error or confirm the drift is real."
+      },
+      {
+        "day": 12,
+        "worldDay": 20,
+        "text": "Pip Cotter, Mara's Errand-Runner: On the return leg Pip talked her way into carrying a small bundle of waxed cord to a chandler two streets off her route, arriving back to Mara later than expected but plainly satisfied with herself."
+      },
+      {
+        "day": 12,
+        "worldDay": 20,
+        "text": "Siol — Elven traveler at the Hub plaza, tall, pale coat, bir: Siol remained at the Hub plaza through the cold part of the morning, watching the Waygate with the particular stillness of someone who has decided not to leave yet but has not decided why."
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-19T23:44:26.188Z",
-    "lastTickWorldDay": 19,
-    "lastCanonWorldDay": 19
+    "lastSharedReadAt": "2026-07-20T00:25:16.876Z",
+    "lastTickWorldDay": 20,
+    "lastCanonWorldDay": 20
   },
   "domains": {
     "primary": "ashwarden",
@@ -4220,13 +4374,14 @@
         "label": "Pip Cotter, Mara's Errand-Runner",
         "kind": "person",
         "facts": [
-          "[d2] Child courier and small-task helper for Mara Wells"
+          "[d2] Child courier and small-task helper for Mara Wells",
+          "[d12] [while away] On the return leg Pip talked her way into carrying a small bundle of waxed cord to a chandler two streets off her route, arriving back to Mara later than expected but plainly satisfied with herself."
         ],
         "links": [],
         "aliases": [],
         "createdDay": 2,
         "entityId": "pip-cotter-mara-s-errand-runner",
-        "updatedDay": 2
+        "updatedDay": 12
       },
       "sorel": {
         "id": "sorel",
@@ -4592,7 +4747,6 @@
         "label": "Calvar — the Engineer",
         "kind": "person",
         "facts": [
-          "[d3] Pre-Transition filtration engineer, author of the seventh-band monitoring specification — a man who stopped moving fifteen years ago because the light in one room told him everything he still needed t",
           "[d3] The diagram Calvar left with Leth is not a full array schematic — it is specifically the seventh-band section, a proof-of-authorship anchor. He brought Leth the piece that establishes he designed the ",
           "[d3] Calvar left the diagram with Leth with specific verbal instructions: hold it off the shelves, under the cord, until someone came asking about the seventh band or the lower filtration ledge. He anticip",
           "[d3] Deathsense read him at close range — his own ending is decades off, nothing urgent. The arrangement he is attending is a decision's ending: he left instructions with Leth and has been waiting three da",
@@ -4615,7 +4769,8 @@
           "[d4] Calvar's cooperage rear exit is covered by a relay figure — Grael's watch-net extends to the cut-lane, not only the street face. The network has two eyes, not one.",
           "[d5] Calvar brought to Mara Wells's store on World-day 18 mid-morning — she recognized his purpose immediately, used Dara's phrase back unprompted, and extended her hand to him first. The briefing chain be",
           "[d5] Calvar placed the document roll on Mara's counter and named himself witness, not authority — deferring to local knowledge on whose hands it belongs in. His first diagnostic question was intake sleeve ",
-          "[d6] [while away] Calvar ran a manual recalibration of the seventh-band sensor overnight and found a three-point drift he cannot yet attribute to instrument error or source change — he has written nothing down, but he has not looked away from the window."
+          "[d6] [while away] Calvar ran a manual recalibration of the seventh-band sensor overnight and found a three-point drift he cannot yet attribute to instrument error or source change — he has written nothing down, but he has not looked away from the window.",
+          "[d12] [while away] Calvar noticed a drift of 0.003 in the seventh-band baseline reading and spent the night re-checking his instruments rather than the sky, unwilling to admit whether he is hoping to find instrument error or confirm the drift is real."
         ],
         "links": [
           "vash-lens-grinder-east-room",
@@ -4632,7 +4787,7 @@
           "Find the Engineer"
         ],
         "createdDay": 3,
-        "updatedDay": 6,
+        "updatedDay": 12,
         "entityId": "calvar"
       },
       "find-the-engineer": {
@@ -4677,7 +4832,8 @@
           "[d3] Leth will notify Vash tonight that his folded page reached the right hands — he has been waiting three days for that confirmation.",
           "[d4] [while away] While dressing her wheel's edge before first light, Vash reconstructed the overheard phrase word by word and realized the term she couldn't place was a pre-Transition calibration interval",
           "[d6] [while away] Vash paused her wheel mid-grind this morning and spent an hour reworking the fragment she overheard into a sequence of optical terms she does know, arriving at an arrangement that almost coheres — close enough that her uncertainty has sharpened from fog into a specific question.",
-          "[d6] Seven unfinished seventh-band lens-blanks found abandoned in a dry hollow beneath a market stall — same spec as Vash's work; the grinding is precise and deliberate, the abandonment not voluntary. To be brought to Calvar or Vash for identification."
+          "[d6] Seven unfinished seventh-band lens-blanks found abandoned in a dry hollow beneath a market stall — same spec as Vash's work; the grinding is precise and deliberate, the abandonment not voluntary. To be brought to Calvar or Vash for identification.",
+          "[d12] [while away] Vash spent the evening re-grinding a lens she'd already finished, turning the fragment of overheard conversation over in her mind until she placed it — the word used wasn't a maintenance term, it was a calibration term, and that distinction has been quietly unsettling her ever since."
         ],
         "links": [
           "leth-archive-complaint",
@@ -4693,7 +4849,7 @@
           "Vash"
         ],
         "createdDay": 3,
-        "updatedDay": 6,
+        "updatedDay": 12,
         "entityId": "vash"
       },
       "grael-runner": {
@@ -5336,8 +5492,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784504857271,
-  "rev": 924,
+  "updatedAt": 1784507162155,
+  "rev": 927,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -5554,7 +5710,13 @@
           "romanceEligible": true,
           "lastAttentionDay": 6,
           "promotedWorldDay": 19,
-          "canonTier": "canonical"
+          "canonTier": "canonical",
+          "offscreen": [
+            {
+              "worldDay": 20,
+              "note": "On the return leg Pip talked her way into carrying a small bundle of waxed cord to a chandler two streets off her route, arriving back to Mara later than expected but plainly satisfied with herself."
+            }
+          ]
         },
         "image": "https://image.pollinations.ai/prompt/Seven%20years%20old%2C%20possibly%20eight%20%E2%80%94%20she%20is%20unsure%20and%20will%20tell%20you%20both%20ages%20depending%20on%20which%20she%20remembers.%20Wears%20an%20oversized%20blue%20wool%20coat%20that%20was%20someone%20else's%20first%2C%20the%20cuffs%20rolled%20four%20times%20and%20still%20draggin%2C%20character%20portrait%20of%20Pip%20Cotter%2C%20Mara's%20Errand-Runner%2C%20Child%20courier%20and%20small-task%20helper%20for%20Mara%20Wells.%20Breathless%20sentences%2C%20pauses%20to%20swallow%20air%20mid-thought.%20Repeats%20Mara's%20instructions%20almost%20verbatim%20before%20adding%20her%20own%20opinions%20uninvited.%20Calls%20adults%20by%20full%20name%20because%20that%20is%20what%20she%20has%20heard%20done.%20Takes%20promises%20seriously%20and%20remembers%20them%20exactly.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=14341&nologo=true"
       },
@@ -5734,6 +5896,10 @@
             {
               "worldDay": 19,
               "note": "Calvar ran a manual recalibration of the seventh-band sensor overnight and found a three-point drift he cannot yet attribute to instrument error or source change — he has written nothing down, but he has not looked away from the window."
+            },
+            {
+              "worldDay": 20,
+              "note": "Calvar noticed a drift of 0.003 in the seventh-band baseline reading and spent the night re-checking his instruments rather than the sky, unwilling to admit whether he is hoping to find instrument error or confirm the drift is real."
             }
           ]
         },
@@ -5840,6 +6006,10 @@
             {
               "worldDay": 19,
               "note": "Vash paused her wheel mid-grind this morning and spent an hour reworking the fragment she overheard into a sequence of optical terms she does know, arriving at an arrangement that almost coheres — close enough that her uncertainty has sharpened from fog into a specific question."
+            },
+            {
+              "worldDay": 20,
+              "note": "Vash spent the evening re-grinding a lens she'd already finished, turning the fragment of overheard conversation over in her mind until she placed it — the word used wasn't a maintenance term, it was a calibration term, and that distinction has been quietly unsettling her ever since."
             }
           ]
         },
@@ -5979,7 +6149,13 @@
           "romanceEligible": true,
           "lastAttentionDay": 6,
           "promotedWorldDay": 18,
-          "canonTier": "variant"
+          "canonTier": "variant",
+          "offscreen": [
+            {
+              "worldDay": 20,
+              "note": "Siol remained at the Hub plaza through the cold part of the morning, watching the Waygate with the particular stillness of someone who has decided not to leave yet but has not decided why."
+            }
+          ]
         },
         "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Siol%20%E2%80%94%20Elven%20traveler%20at%20the%20Hub%20plaza%2C%20tall%2C%20pale%20coat%2C%20bir%2C%20someone%20of%20Waygate%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=4185&nologo=true",
         "domains": {
@@ -7045,7 +7221,7 @@
   "teachers": {},
   "regionsKnown": {
     "valley": 435,
-    "the_palelands": 2
+    "the_palelands": 3
   },
   "foreclosed": [
     "rootkin",
@@ -7116,10 +7292,10 @@
     {
       "id": "sess-5",
       "startedAt": "2026-07-19T11:58:49.560Z",
-      "lastAt": "2026-07-19T23:47:37.269Z",
+      "lastAt": "2026-07-20T00:26:02.152Z",
       "startDay": 19,
-      "endDay": 19,
-      "beats": 30
+      "endDay": 20,
+      "beats": 31
     }
   ],
   "company": [

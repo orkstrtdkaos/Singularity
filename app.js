@@ -60,7 +60,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.159";
+const APP_VERSION = "1.8.160";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -891,21 +891,35 @@ async function renderPreviewLegs() {
 function renderMachine() {
   const caps = devCaptures();
   const ledger = character?._opLedger || {};
-  // Every documented op (SALVAGEABLE_OPS — the ONE source the salvager and the audit already share)
-  // plus the scalars and whatever the live ledger tracks, so an op that has NEVER fired shows as 0
-  // instead of vanishing. A zero is the bug signature — three ops read zero for sixteen levels before
-  // a deliberate capture found it (SNG-183 §3c); this makes that visible without a play session.
-  const vocab = [...new Set([...SALVAGEABLE_OPS, "sceneEnded", "gambitApt", ...Object.keys(ledger)])];
-  const fired = vocab.filter(op => (ledger[op]?.applied || 0) > 0);
-  const rejectedOnly = vocab.filter(op => !((ledger[op]?.applied || 0) > 0) && (ledger[op]?.rejected || 0) > 0);
-  const zero = vocab.filter(op => !ledger[op] || (!ledger[op].applied && !ledger[op].rejected)).sort();
+  const emitted = character?._opEmitted || {};
+  // SNG-190 §3, THE FALSE-ZERO FIX. EMISSION (the model putting an op in a turn) is counted for EVERY
+  // op, every turn, in runGM. APPLIED/REJECTED outcome is instrumented for ONLY these. The panel must
+  // never again render an un-instrumented op's absence as "NEVER FIRED" — that was the bug: 31 emitted
+  // ops shown as never-fired directly above an exchange that emitted six of them. Presence in THIS
+  // session's captures is also ground truth it fired, folded in so an op shown emitted in a card below
+  // can never read as "not emitted" above it — even before the cumulative counter has accrued here.
+  const seenInCaptures = new Set();
+  for (const c of caps) for (const o of (c.opsFired || [])) seenInCaptures.add(o.op);
+  const turns = character?._opTurns || caps.filter(c => c.parsed).length;
+  const isEmitted = op => (emitted[op] || 0) > 0 || seenInCaptures.has(op);
+  const OUTCOME_INSTRUMENTED = new Set(["markTeacher"]);
+  const vocab = [...new Set([...SALVAGEABLE_OPS, "sceneEnded", "gambitApt", ...Object.keys(ledger), ...Object.keys(emitted)])];
+  const firedOps = vocab.filter(isEmitted).sort((a, b) => (emitted[b] || 0) - (emitted[a] || 0));
+  const neverOps = vocab.filter(op => !isEmitted(op)).sort();
 
-  const tallyChip = (op) => {
-    const r = ledger[op] || {};
-    const a = r.applied || 0, x = r.rejected || 0;
-    const cls = a > 0 ? "mach-fired" : x > 0 ? "mach-rej" : "mach-zero";
-    const why = x > 0 && r.lastWhy ? ` title="last rejection: ${esc(r.lastWhy)}"` : "";
-    return `<span class="mach-op ${cls}"${why}>${esc(op)} <b>${a}</b>${x ? `<span class="mach-x">✗${x}</span>` : ""}</span>`;
+  const chip = (op) => {
+    const e = emitted[op] || 0;
+    const seen = e === 0 && seenInCaptures.has(op);
+    const r = ledger[op];
+    const cls = (e > 0 || seen) ? "mach-fired" : "mach-zero";
+    // Applied/rejected is shown ONLY where it is actually instrumented; for every other op the number
+    // is emission alone, and the hover says so rather than implying an engine outcome we never measured.
+    const outcome = OUTCOME_INSTRUMENTED.has(op)
+      ? ` <span class="mach-x" title="engine outcome — instrumented: applied${r?.rejected ? "/rejected" : ""}">✓${r?.applied || 0}${r?.rejected ? `✗${r.rejected}` : ""}</span>`
+      : "";
+    const tip = OUTCOME_INSTRUMENTED.has(op) ? "" : ` title="emission counted; applied/rejected NOT instrumented for this op — a 0 means not emitted, never 'rejected'"`;
+    const count = e > 0 ? `<b>${e}</b>` : seen ? `<b title="seen in a captured exchange this session">seen</b>` : "<b>0</b>";
+    return `<span class="mach-op ${cls}"${tip}>${esc(op)} ${count}${outcome}</span>`;
   };
 
   const promptText = (c) => {
@@ -937,11 +951,10 @@ function renderMachine() {
     <h2>🔬 See the Machine <span class="hint" style="text-transform:none">— last ${caps.length} model call${caps.length === 1 ? "" : "s"} this session</span></h2>
     <p class="hint" style="margin-bottom:12px">The assembled prompt, the raw model response, what parsed, and which ops fired — the SNG-179 diagnosis as a standing panel. Captures live in memory for this session only (dev-mode; a player never reaches this).</p>
 
-    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Firing counts — this character, cumulative</h3>
-      <p class="hint" style="margin-bottom:8px">A <strong>zero is a signature</strong> — an op that has never fired may be built and unreachable. <span class="mach-op mach-fired">fired</span> <span class="mach-op mach-rej">rejected-only</span> <span class="mach-op mach-zero">never</span></p>
-      ${fired.length ? `<div class="mach-tally"><span class="mach-label">fired</span> ${fired.map(tallyChip).join(" ")}</div>` : ""}
-      ${rejectedOnly.length ? `<div class="mach-tally"><span class="mach-label">emitted then rejected, never applied</span> ${rejectedOnly.map(tallyChip).join(" ")}</div>` : ""}
-      <div class="mach-tally"><span class="mach-label">never fired (${zero.length})</span> ${zero.map(tallyChip).join(" ") || "<span class='hint'>— none; every op has fired at least once</span>"}</div>
+    <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Op emission — this character, cumulative <span class="hint" style="text-transform:none">(${turns} GM turn${turns === 1 ? "" : "s"} observed)</span></h3>
+      <p class="hint" style="margin-bottom:8px">Counts are <strong>emissions</strong> — the model putting an op in a turn — tracked for every op. Applied/rejected outcome (✓/✗) is instrumented only for <code>markTeacher</code>; for the rest the number is emission alone. ${turns > 0 ? `A persistent <strong>0 after ${turns} turn${turns === 1 ? "" : "s"}</strong> is the real signature — a built op the model never reaches.` : `<strong>No turns observed yet</strong> — a 0 here just means this character has not played; it is not a finding.`}</p>
+      ${firedOps.length ? `<div class="mach-tally"><span class="mach-label">emitted</span> ${firedOps.map(chip).join(" ")}</div>` : ""}
+      <div class="mach-tally"><span class="mach-label">not emitted${turns > 0 ? ` in ${turns} turn${turns === 1 ? "" : "s"}` : " (no turns yet)"} · ${neverOps.length}</span> ${neverOps.map(chip).join(" ") || "<span class='hint'>— none; every op has been emitted at least once</span>"}</div>
     </div>
 
     ${caps.length ? caps.map(card).join("") : "<div class='insight'>No model calls captured yet. Take a turn in play, then return — every GM turn and its sub-calls (intent-parse, narrate) land here.</div>"}
@@ -2919,7 +2932,16 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
   // SNG-186 §2f: bind this turn's parsed result + what fired to the model exchange that produced it,
   // so "see the machine" shows prompt → raw → parsed → ops end to end. Dev-only; a no-op when disarmed.
   // Runs after apply so opLedger reflects what actually landed (applied/rejected), even on a partial.
-  annotateLatest("gm-narrate", { parsed: result.turn, opsFired: opsFiredIn(result.turn), opLedger: character?._opLedger ? { ...character._opLedger } : null });
+  // SNG-190 §3: a cumulative per-op EMISSION counter for EVERY op — not only markTeacher, the one op
+  // logOpOutcome instruments for applied/rejected. This is what lets the firing panel tell "this op
+  // has never been emitted for this character" (a real built-and-unreachable signature) from "outcome
+  // not instrumented" — the false-zero bug where 31 emitted ops rendered as NEVER FIRED above an
+  // exchange that emitted six of them. Rides the save like _opLedger, and runs for EVERY turn (not
+  // only dev-captured ones) so the count is real history. _opTurns is the denominator a zero needs.
+  const _opsFired = opsFiredIn(result.turn);
+  if (_opsFired.length) { character._opEmitted = character._opEmitted || {}; for (const o of _opsFired) character._opEmitted[o.op] = (character._opEmitted[o.op] || 0) + 1; }
+  character._opTurns = (character._opTurns || 0) + 1;
+  annotateLatest("gm-narrate", { parsed: result.turn, opsFired: _opsFired, opLedger: character?._opLedger ? { ...character._opLedger } : null });
   // ability-arch v2: rank 2 is earned through use, not bought — surface any craft that just became
   // fluent this turn (deduped). Rank 3 is never here; it comes as a GM-marked defining moment.
   if (pendingRankAdvances.length) {

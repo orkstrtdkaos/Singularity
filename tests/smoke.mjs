@@ -5869,6 +5869,17 @@ await (async () => {
   // The zero-count vocabulary the panel shows is the ONE list the salvager + wiring audit already share.
   check("186: SALVAGEABLE_OPS is the shared op vocabulary, exported once", Array.isArray(gm.SALVAGEABLE_OPS) && gm.SALVAGEABLE_OPS.length > 20);
   check("186: it carries the three ops that read zero for sixteen levels (SNG-183 §3c)", ["markTeacher", "discovery", "markDefiningMoment"].every(o => gm.SALVAGEABLE_OPS.includes(o)));
+
+  // SNG-190 §3: the firing panel must NEVER render an un-instrumented op's absence as a finding.
+  const appSrc190 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+  check("190 §3: emission is counted for EVERY op every turn (not just markTeacher)",
+    /character\._opEmitted\[o\.op\] = \(character\._opEmitted\[o\.op\] \|\| 0\) \+ 1/.test(appSrc190) && /character\._opTurns = \(character\._opTurns \|\| 0\) \+ 1/.test(appSrc190));
+  check("190 §3: the panel folds this session's captures so an emitted op never reads as not-emitted",
+    /const seenInCaptures = new Set\(\)/.test(appSrc190) && /const isEmitted = op =>/.test(appSrc190));
+  check("190 §3: a zero is tied to the turn denominator and explicitly not a finding",
+    /it is not a finding/.test(appSrc190) && /GM turn\$\{turns === 1/.test(appSrc190));
+  check("190 §3: the false 'never fired' RENDERED label is gone (only the historical comments remain)",
+    !/mach-label">never fired/.test(appSrc190));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

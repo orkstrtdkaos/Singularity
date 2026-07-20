@@ -101,10 +101,50 @@ The band-intersection tool gets sharper, not obsolete:
 
 ---
 
+# §4b — ✅ RATIFIED: THE LEANING RULE (Erik, 2026-07-19) — answers Q1 and improves it
+
+> Erik: *"A marcher's material skill by itself is good, but combined with inherent power or
+> nanite-infused, it's amazing… but that extra loses something from the pure if in a material place.
+> **The pure never loses because it never leaned on anything.**"*
+
+**A craft's band is not a property of its source. It is a measure of what the craft LEANS ON.**
+
+| what it leans on | band | in its ground | out of its ground |
+|---|---|---|---|
+| **nothing** (pure material) | **FLAT** | good | **good** |
+| the universe's own energies (inherent) | mirrored — thin is clear | excellent | diminished |
+| the machine (lattice) | standard — dense is powered | excellent | starved |
+| **material + an augment** | **inherits the AUGMENT's band** | **amazing** | **worse than pure** |
+
+## The three consequences, and the third is the one worth having
+
+1. **Material is flat only while it is PURE.** Augment a Marcher's edge-work with lattice or inherent
+   power and the augmented craft carries that source's band. The material half did not acquire a
+   dependency; **the character did.**
+2. **Augmentation degrades the baseline — it is a commitment, not an addition.** Technique built
+   around an assist assumes the assist. In ground that does not supply it, the augmented Marcher is
+   **worse than the pure one**, not merely un-boosted. You cannot lean and also stand as if you never
+   leaned.
+3. **Pure material's advantage is RELIABILITY, and it is a real one.** Never exceptional, never
+   diminished, identical in the Gearlands and the Quickwood and a pocket where reality went blocky.
+   **For a world whose whole shape is travel, the craft that never loses is worth more than it looks.**
+
+## Why this is the right rule for THIS world
+
+It makes the Returned's choice legible. **The Quickwood can never match a Lattice-City at full tilt —
+and can never be diminished either.** They gave up the ceiling to delete the floor. That is not a
+consolation; it is a different and defensible bet, and it is exactly what Erik's *"thin as an
+achievement"* has meant all along.
+
+It also gives §6c's braid framing its edge: **a braid buys you a ceiling and sells you your
+universality.** Divergence is generative *and* it costs something real. Both halves true at once.
+
+**Canonical line, Erik's words, to carry in the content:** *the pure never loses, because it never
+leaned on anything.*
+
 # §5 — QUESTIONS FOR ERIK
 
-1. **Ratify the split?** `natural` → `inherent` + `material`, with the Transition-as-route-change
-   canon behind it.
+1. ~~Ratify the split?~~ ✅ **RATIFIED 2026-07-19**, and amended by §4b's leaning rule, which is better than what I proposed.
 2. **`verist` and `threnodist`** both sit at band 0.50 and were flagged as disagreements weeks ago.
    Under this model: is speaking-what-is-so **inherent** (truth as a thing in the universe you touch)
    or **material** (it is only speech and nerve)? I lean **inherent** for threnodist, **material** for

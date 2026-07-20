@@ -4302,12 +4302,14 @@ await (async () => {
   const resolve = (ref, L) => Object.keys(L).find(id => id === ref || L[id]?.name?.toLowerCase() === String(ref).toLowerCase()) || null;
   const atGate = { currentLocationId: "the_crossing", knownPlaces: ["the_crossing"], subAttributes: { wits: 2 }, regionsKnown: {} };
 
-  // THE REPORTED BUG: the GM says "you step through the waygate" / "you arrive at the Center".
-  // Neither is a place. Both used to mint one.
-  for (const junk of ["the waygate", "Waygate", "the Center", "Centre", "the gate"]) {
-    const r = routeGmMoveTo({ character: atGate, moveRef: junk, locations: locs, resolve });
-    check(`165: "${junk}" from a gate routes to the HUB, never a minted room`,
-      r?.destId === "the_crossing" && r.why === "unresolvable-from-gate");
+  // SNG-190 §1.1/§1.2: an unresolvable ref from a gate is NOT evidence the fiction aimed at a real
+  // gate, and it must FAIL CLOSED — the router returns null and the move is handled locally, never
+  // hurled to the hub. (The old behavior teleported Erik to The Crossing for lifting his mother's
+  // garden latch, because Cairnhold happens to contain a gate.) "Silas's Mother's House — Kitchen" is
+  // the literal ref from the capture.
+  for (const junk of ["the waygate", "Waygate", "the Center", "Centre", "the gate", "Silas's Mother's House — Kitchen"]) {
+    check(`190: "${junk}" from a gate FAILS CLOSED (null) — never routes to the hub`,
+      routeGmMoveTo({ character: atGate, moveRef: junk, locations: locs, resolve }) === null);
   }
   check("165: naming a REAL gate still routes by the normal rules (undiscovered → hub)",
     routeGmMoveTo({ character: atGate, moveRef: "The Far Gate", locations: locs, resolve })?.destId === "the_crossing");
@@ -4321,9 +4323,25 @@ await (async () => {
   check("165: NOT standing at a gate → null, so normal minting is untouched (SNG-117 preserved)",
     routeGmMoveTo({ character: { currentLocationId: "millbrook" }, moveRef: "the waygate", locations: locs, resolve }) === null);
 
+  // SNG-190 §1.3: a moveTo naming a known SUB-PLACE resolves to its PARENT LOCATION (a real place the
+  // player already knows) — the fix that alone would have prevented the teleport. Matched by NAME, so
+  // the sub-place's storage key is irrelevant; parentId is always a real location.
+  const { findSubPlaceParent } = await import('../engine/places.js');
+  const charWithSub = { placeMemory: { cairnhold: { subPlaces: { k: { name: "Silas's Mother's House — Kitchen", parentId: "cairnhold" } } } } };
+  check("190: the captured sub-place resolves to its parent LOCATION (Cairnhold), not nowhere",
+    findSubPlaceParent(charWithSub, "Silas's Mother's House — Kitchen")?.parentId === "cairnhold");
+  check("190: an unknown place is not falsely claimed as a sub-place",
+    findSubPlaceParent(charWithSub, "some place never heard of") === null);
+
   const appSrc165 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
   check("165: the moveTo handler consults the router BEFORE minting",
     appSrc165.indexOf("routeGmMoveTo({ character, moveRef") < appSrc165.indexOf("|| mintTransitLocation(moveRef)"));
+  // SNG-190 §1.3/§1.1: the sub-place parent is resolved FIRST and, when it hits, the waygate router is
+  // skipped and the parent takes destId priority — so a local sub-place can never reach the hub branch.
+  check("190: the handler resolves a sub-place parent before (and instead of) the waygate router",
+    /const subParent = findSubPlaceParent\(character, moveRef\)/.test(appSrc165)
+    && /const wgRoute = subParentId \? null : routeGmMoveTo/.test(appSrc165)
+    && /let destId = subParentId \|\|/.test(appSrc165));
   check("165: landing at the hub is surfaced to the player, never silent", /The gate set you down at/.test(appSrc165));
   const wgSrc165 = readFileSync(new URL('../engine/waygate.js', import.meta.url), 'utf8');
   check("165: the contract forbids a generic moveTo for the transit itself",

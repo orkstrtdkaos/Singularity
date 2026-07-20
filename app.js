@@ -60,7 +60,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.158";
+const APP_VERSION = "1.8.159";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3259,22 +3259,31 @@ function applyTurn(turn, resolution, playerWords = null) {
     // SNG-117: the header follows the fiction even to a place with no record yet — resolve it, or MINT it
     // (a named-but-unrecorded destination like "the pass" becomes a real, travelable place). Never no-op
     // and leave the header asserting a place the fiction has left.
+    // SNG-190 §1.3: a moveTo naming a KNOWN SUB-PLACE resolves to its PARENT LOCATION — you do not
+    // leave Cairnhold to step into your mother's kitchen. Checked FIRST, and when it hits, the waygate
+    // router is skipped entirely (§1.1: a local sub-place is not a gate transit). This alone prevents
+    // the teleport: "Silas's Mother's House — Kitchen" is a sub-place of Cairnhold, so it now lands in
+    // Cairnhold (where he already stood) instead of falling through resolve→routeGmMoveTo's hub branch.
+    // (parentId is always a real location — places.js sets it to the location or a resolveLocationId id.)
+    const subParent = findSubPlaceParent(character, moveRef);
+    const subParentId = subParent && CONTENT.locations[subParent.parentId] ? subParent.parentId : null;
     // CCODE-10: a transit FROM A WAYGATE is routed by the gate network, not by name-matching. Without
     // this, "you step through the waygate" minted a place called "Waygate" and "you arrive at the
     // Center" minted one called "Center" — the GM-offer half of SNG-148's REACHABLE link was never
-    // actually wired, so the fiction's transit fell through to mintTransitLocation.
-    const wgRoute = routeGmMoveTo({ character, moveRef, locations: CONTENT.locations, resolve: resolveLocationId });
+    // actually wired, so the fiction's transit fell through to mintTransitLocation. NOT consulted for a
+    // known sub-place (§1.1) — a garden latch inside a gate-town is local movement, never a transit.
+    const wgRoute = subParentId ? null : routeGmMoveTo({ character, moveRef, locations: CONTENT.locations, resolve: resolveLocationId });
     if (wgRoute) {
       const landed = CONTENT.locations[wgRoute.destId];
       if (wgRoute.routed === "hub" && landed) {
         // Say so plainly: the player aimed somewhere and the gate put them at the hub. That is
         // routing, never failure — but it must never be silent, or the world stops making sense.
         character._correctionAside = [character._correctionAside,
-          `The gate set you down at ${landed.name}${wgRoute.why === "unresolvable-from-gate" ? " — the hub; the way you reached for isn't a gate you can aim at yet" : " — the hub"}.`]
+          `The gate set you down at ${landed.name} — the hub.`]
           .filter(Boolean).join(" ");
       }
     }
-    let destId = wgRoute?.destId || resolveLocationId(moveRef, CONTENT.locations) || mintTransitLocation(moveRef);
+    let destId = subParentId || wgRoute?.destId || resolveLocationId(moveRef, CONTENT.locations) || mintTransitLocation(moveRef);
     if (destId && destId !== character.currentLocationId) {
       character.currentLocationId = destId;
       addKnownPlace(destId);

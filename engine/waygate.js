@@ -97,9 +97,14 @@ export function routeGmMoveTo({ character, moveRef, locations, resolve }) {
     const t = resolveWaygateTransit({ character, destId: directId, locations });
     return t ? { ...t, why: "gate-to-gate" } : null;
   }
-  // Unresolvable FROM A GATE. The fiction said they stepped through; the only honest destinations
-  // are a real gate or the hub — never a new place invented out of the words "waygate"/"center".
-  return { destId: hub.id, routed: "hub", known: false, skilled: false, why: "unresolvable-from-gate" };
+  // SNG-190 §1.1/§1.2: an UNRESOLVABLE destination is NOT evidence the fiction used the gate. Standing
+  // in a gate-town is not stepping through the cairn, and an unresolvable ref (a garden latch, a
+  // sub-place, a typo) must FAIL CLOSED — never routed to the hub across the world. Returning null
+  // hands it back to the caller, which resolves a sub-place to its parent, mints an adjacent place, or
+  // stays put. The router now only CLAIMS a move whose destination is a real GATE it can aim at — the
+  // only honest evidence a gate was used. The fail-OPEN branch this replaces sent Erik to The Crossing
+  // for lifting his mother's garden latch, because Cairnhold happens to contain a gate.
+  return null;
 }
 
 /** GM context row (§23 REGISTERED link): only when the character STANDS AT a

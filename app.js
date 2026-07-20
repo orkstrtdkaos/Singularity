@@ -21,7 +21,7 @@ import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, f
 import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates } from "./engine/inventory.js";
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
 import { smartClamp } from "./engine/namematch.js"; // SNG-095: used at app.js:562 (GM context) + the gambit advise clamp — was never imported
-import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources } from "./engine/substrate.js"; // SNG-090 + BATCH-13
+import { substrateVerdict, locationDensity, carriedSubstrate, carriedSubstrateSources, schoolForTradition, defaultSchoolsForDomains, setCharacterSchool } from "./engine/substrate.js"; // SNG-090 + BATCH-13 + SNG-193b
 import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode, ART_MODES, imagesEnabled, ensureImage, ensureGallery, addGalleryImage, deleteGalleryImage, npcPromptSeed } from "./engine/art.js";
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
@@ -62,7 +62,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.171";
+const APP_VERSION = "1.8.172";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2472,6 +2472,10 @@ function renderCreate() {
       worldState: initWorldState(1),
       // SNG-055: the domains chosen on the great circle (what this character can ever learn)
       domains: (state.domains && state.domains.primary) ? { ...state.domains } : null,
+      // SNG-193b: each practised domain starts at its tradition's pure/root school (the orthodoxy). A
+      // teacher or a hard turning (adoptSchool, story-gated) can move it to an augmented school, which
+      // shifts that craft's best-ground — the whole point of §3.3.
+      schools: defaultSchoolsForDomains(state.domains, CONTENT.schools),
       // SNG-053: the physical form leads the portrait
       form: state.form || undefined,
       bio: bio && Object.values(bio).some(v => v) ? bio : null
@@ -3386,6 +3390,14 @@ function applyTurn(turn, resolution, playerWords = null) {
       else logOpOutcome("arcOps", "rejected-shape");
     }
   }
+  // SNG-193b §3.2: a story-earned change of school — a teacher's long training, a hard turning. Canon is
+  // "changing is possible, hard, and a story," so it is a GM op the fiction fires, not a menu toggle.
+  // setCharacterSchool refuses a school that isn't of that tradition, so a hallucinated id can't corrupt
+  // the map. The band this craft resolves at moves with it, per §3.3.
+  if (turn.adoptSchool?.tradition && turn.adoptSchool?.school) {
+    const ok = setCharacterSchool(character, turn.adoptSchool.tradition, turn.adoptSchool.school, CONTENT.schools);
+    logOpOutcome("adoptSchool", ok ? "applied" : "rejected-shape");
+  }
   // SNG-056: THE HEADER FOLLOWS THE FICTION. When the GM narration moved the character to a real
   // place, update the AUTHORITATIVE currentLocationId so every location surface (header, map "you
   // are here", GM context) agrees with the prose — instead of the header showing a stale place.
@@ -3526,7 +3538,12 @@ function substrateForAction(choice, location) {
   if (density == null) return null;
   const comps = activeCompanions(character, CONTENT.companions);
   const carried = carriedSubstrate(character, CONTENT.items, comps);
-  const verdict = substrateVerdict({ tradition, density, carried, data: CONTENT.substrateModel });
+  // SNG-193b §3.3: the band reads the character's SCHOOL for this tradition (its extension source), not
+  // the tradition — two practitioners of one tradition get opposite best-grounds. Floored by the material
+  // root. Un-schooled saves fall back to the pure/root school silently (schoolForTradition), so no shift.
+  const school = schoolForTradition(character, tradition, CONTENT.schools);
+  const root = CONTENT.schools?.traditionSchools?.[tradition]?.root || null;
+  const verdict = substrateVerdict({ tradition, school, root, density, carried, data: CONTENT.substrateModel });
   // §9b invariant 5: when something CARRIED is why the ground reads differently, the receipt must
   // say which thing. A ward that quietly halves your craft — or a staff that quietly saves it — is
   // the "cruellest possible bug" the SNG-090 round-2 note names. Attribution rides the verdict.

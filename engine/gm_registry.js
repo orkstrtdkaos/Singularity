@@ -41,6 +41,7 @@ import { npcRegistryForGM, npcQuestSeedBlock } from "./npcs.js";
 import { placeMemoryForGM, recallForGM } from "./places.js";
 import { assignmentsForGM } from "./assignments.js"; // SNG-191 §4: delegated commitments the world is honouring
 import { arcsForGM, seasonalDetailForGM } from "./latentarcs.js"; // SNG-191 §7: surfaced arcs + §7.4 seasonal pressure
+import { schoolsDetailForGM } from "./substrate.js"; // SNG-193b §3.6: the GM knows a character's school, not just their tradition
 import { abilitiesForGM } from "./progression.js";
 import { codexForGM } from "./codex.js";
 import { factsForGM } from "./facts.js";
@@ -264,6 +265,9 @@ export const GM_CONTEXT = [
   { key: "seasonalDetail", builder: "latentarcs.seasonalDetailForGM (SNG-191 §7.4)", carries: ["the season's conditions — the cyclical pressure a scene sits in"],
     reachedBy: "always (the character clock always has a season)", spec: "§7.4", views: ["turn"],
     build: (env) => seasonalDetailForGM(env.time?.season) },
+  { key: "schoolsDetail", builder: "substrate.schoolsDetailForGM (SNG-193b §3.6)", carries: ["the character's SCHOOL per practised domain — what each craft is joined to, and its best-ground"],
+    reachedBy: "always when schools.json is loaded and the character practises a domain", spec: "§3.6", views: ["turn"],
+    build: (env) => schoolsDetailForGM(env.character, env.CONTENT.schools) },
   { key: "sharedCanonDetail", builder: "app.sharedCanonForGM", carries: ["other players' promoted canon"],
     reachedBy: "always (rating-lensed)", spec: "§18", views: ["turn"],
     build: (env) => env.app.sharedCanonForGM() },

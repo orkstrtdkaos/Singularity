@@ -261,6 +261,30 @@ Form-based. **Parity is mandatory:** identical character shape, same domain coun
 | `carriedSubstrate(character, itemCatalog, companions)` | sums `item.substrateCharge` across inventory and `companion.substrateAura` across the party, clamped 0–1. **This is the mobile-source mechanism and it already exists.** Currently accepts **positive values only.** |
 | `effectiveDensity(density, carried)` | composes place + carried into the number the band is judged against |
 | `bandFor` / `bandFactor` / `substrateVerdict` | the two-sided band: starvation below (steep), interference above (mild, floored) |
+| `schoolForTradition` / `bandForSchool` / `schoolsDetailForGM` | **SNG-193b — the band reads the SCHOOL, not the tradition** (see below) |
+
+### Schools (SNG-193b) — a tradition is a ROOT; a school is what it reaches WITH
+
+`content/packs/core/rules/schools.json` (67 schools across 24 traditions). **A tradition is a root; a
+school is what that root reaches with, and the reach sets the substrate band.** Two practitioners of one
+tradition, in different schools, get **opposite best-grounds** — the Reaching Mind (inherent extension)
+wants thin, still ground; the Instrumented (lattice extension) wants dense machine-country. This is the
+whole feature, and it lives at **one seam**: `substrateVerdict` takes the character's `school` and its
+tradition's `root`, and `bandForSchool` resolves the band from the school's **extension source**
+(`SOURCE_BAND`: material→a flat floor, inherent/natural→low centre, lattice→high centre, wild→wide).
+
+- **The FLOOR is the root's** (§4). A **material** root — or a **material-extension** school — is never
+  *starved*: an augmented craft in wrong ground degrades **toward its pure form** (`materialFloor`, 0.7),
+  never to zero. A non-material root has no floor unless a school supplies one, which is why *"the material
+  school is the one that travels."*
+- **`schoolAffinity` is NOT a gate.** 19 abilities are marked (natively expressed through a school); the
+  other 266 are root-level. Any school can learn any of its tradition's craft — against the grain is where
+  braids come from. **CI (`smoke.mjs`): every `schoolAffinity` resolves to a school of its own tradition.**
+- **`character.schools`** is a `{traditionId → schoolId}` map, seeded per practised domain at creation to
+  the tradition's pure/root school (`defaultSchoolsForDomains`), backfilled onto old saves silently
+  (reconcile v13). It moves through the **`adoptSchool`** GM op — a *story-earned* change (a teacher's
+  training, a hard turning), never a menu toggle — validated by `setCharacterSchool`. The GM is told the
+  character's school (`schoolsDetail`), not just their tradition, because a teacher teaches **their** school.
 
 ### The geography — POOLS and SINKS (authored, not yet resolved)
 

@@ -6114,6 +6114,91 @@ await (async () => {
   check("191 §7.4: the generation turn tilts a matching arc kind with the season", /tilts\.has\(arc\.kind\)/.test(wtSrcE) && /seasonalPressure\(season\)/.test(wtSrcE));
 }
 
+// --- SNG-193b: a tradition is a ROOT; a school is what it reaches WITH — band resolution reads the school ---
+{
+  const sb = await import("../engine/substrate.js");
+  const rc = await import("../engine/reconcile.js");
+  const rjc193 = (rel) => JSON.parse(readFileSync(join(root, rel), "utf8"));
+  const schools = rjc193("content/packs/core/rules/schools.json");
+  const substrateModel = rjc193("content/packs/core/rules/the_substrate.json");
+  const stateSrc193 = readFileSync(new URL('../engine/state.js', import.meta.url), 'utf8');
+  const appSrc193 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+  const gmSrc193 = readFileSync(new URL('../engine/gm.js', import.meta.url), 'utf8');
+  const regSrc193 = readFileSync(new URL('../engine/gm_registry.js', import.meta.url), 'utf8');
+
+  // §1 — the file loads (the L4 gate's own test: a rules file shipped orphaned two days ago).
+  check("193b §1: schools.json is kind:rules with a traditionSchools map", schools.kind === "rules" && !!schools.traditionSchools);
+  check("193b §1: state.js loads schools into CONTENT (reached, not orphaned)", /loadRule\("schools"/.test(stateSrc193) && /worldClock, schools,/.test(stateSrc193));
+
+  const cog = schools.traditionSchools.cogitant;
+  const pure = cog.schools.find(s => s.extension === null);
+
+  // §5 Q3 — un-schooled falls back to the pure school, silently; a chosen school wins.
+  check("193b §5Q3: no character.schools → the tradition's pure school (silent fallback)", sb.schoolForTradition({}, "cogitant", schools).id === pure.id);
+  check("193b §5Q3: a chosen school overrides the fallback", sb.schoolForTradition({ schools: { cogitant: "cog_instrumented" } }, "cogitant", schools).id === "cog_instrumented");
+  check("193b: an unknown tradition resolves to null, never throws", sb.schoolForTradition({}, "no_such_people", schools) === null);
+
+  // §3.3 — THE FEATURE: two schools of ONE tradition, OPPOSITE best-grounds.
+  const reaching = { extension: "inherent" }, instrumented = { extension: "lattice" }, materialSchool = { extension: "material" };
+  check("193b §3.3: an inherent-extension school bands LOW (thin ground is best)", sb.bandForSchool("cogitant", reaching, substrateModel).center < 0.3);
+  check("193b §3.3: a lattice-extension school bands HIGH (dense ground is best)", sb.bandForSchool("cogitant", instrumented, substrateModel).center > 0.7);
+  const vReachThin = sb.substrateVerdict({ tradition: "cogitant", school: reaching, root: "material", density: 0.12, data: substrateModel });
+  const vInstrThin = sb.substrateVerdict({ tradition: "cogitant", school: instrumented, root: "material", density: 0.12, data: substrateModel });
+  const vReachDense = sb.substrateVerdict({ tradition: "cogitant", school: reaching, root: "material", density: 0.9, data: substrateModel });
+  const vInstrDense = sb.substrateVerdict({ tradition: "cogitant", school: instrumented, root: "material", density: 0.9, data: substrateModel });
+  check("193b §3.3: in THIN ground the reaching mind is FULL and the instrumented is impaired", vReachThin.factor === 1 && vInstrThin.factor < 1);
+  check("193b §3.3: in DENSE ground the instrumented is FULL and the reaching mind is impaired (OPPOSITE best-grounds)", vInstrDense.factor === 1 && vReachDense.factor < 1);
+
+  // §4 — the FLOOR is the root's. A material root never STARVES (degrades toward its pure form).
+  check("193b §4: a material-root lattice craft in thin ground is FLOORED, never off", vInstrThin.side === "floored" && vInstrThin.factor >= 0.7 && !vInstrThin.off);
+  check("193b §4: a material-EXTENSION school carries the floor on an inherent root (the school that travels)", sb.substrateVerdict({ tradition: "ashwarden", school: materialSchool, root: "inherent", density: 0.02, data: substrateModel }).factor === 1);
+  check("193b §4: an inherent-root LATTICE school has no floor and DOES starve in dead-thin ground", sb.substrateVerdict({ tradition: "ashwarden", school: instrumented, root: "inherent", density: 0.02, data: substrateModel }).factor < 0.7);
+  check("193b: a pure school keeps the tradition's authored band (no drift for existing saves)", JSON.stringify(sb.bandForSchool("cogitant", pure, substrateModel)) === JSON.stringify(sb.bandFor("cogitant", substrateModel)));
+
+  // §2 / §3.5 — CI GATE: every schoolAffinity resolves to a school of the ability's own tradition.
+  const abDir193 = join(root, "content/packs/core/abilities");
+  let affinities = 0; const badAffinity = [];
+  for (const f of readdirSync(abDir193).filter(n => n.endsWith(".json"))) {
+    const pk = JSON.parse(readFileSync(join(abDir193, f), "utf8"));
+    for (const ab of (pk.abilities || [])) {
+      if (!ab.schoolAffinity) continue;
+      affinities++;
+      const trad = ab.tradition || pk.powerSystem;
+      const list = schools.traditionSchools?.[trad]?.schools || [];
+      if (!list.some(s => s.id === ab.schoolAffinity)) badAffinity.push(`${ab.id}→${ab.schoolAffinity} (not a school of ${trad})`);
+    }
+  }
+  if (badAffinity.length) console.log("   schoolAffinity problems: " + badAffinity.join("; "));
+  check("193b §3.5 CI: every schoolAffinity resolves to a school of its own tradition", badAffinity.length === 0);
+  check("193b §2: the authored affinity set is 19 abilities", affinities === 19);
+
+  // §3.2 — creation seed + the ONE validated write-seam.
+  check("193b §3.2: creation seeds each practised domain with its pure/root school", sb.defaultSchoolsForDomains({ primary: "cogitant" }, schools).cogitant === pure.id);
+  check("193b §3.2: no domains → empty map (folk-only characters keep working)", Object.keys(sb.defaultSchoolsForDomains(null, schools)).length === 0);
+  check("193b §3.2: creation writes character.schools", /schools: defaultSchoolsForDomains\(state\.domains, CONTENT\.schools\)/.test(appSrc193));
+  const wc193 = { schools: {} };
+  check("193b §3.2: setCharacterSchool sets a valid school of the tradition", sb.setCharacterSchool(wc193, "cogitant", "cog_instrumented", schools) === true && wc193.schools.cogitant === "cog_instrumented");
+  check("193b §3.2: setCharacterSchool REFUSES a school not of that tradition (no dead ref)", sb.setCharacterSchool(wc193, "cogitant", "bogus_id", schools) === false && wc193.schools.cogitant === "cog_instrumented");
+  check("193b §3.2: adoptSchool op dispatches through setCharacterSchool", /turn\.adoptSchool\?\.tradition/.test(appSrc193) && /setCharacterSchool\(character, turn\.adoptSchool\.tradition/.test(appSrc193));
+  check("193b: adoptSchool is in SALVAGEABLE_OPS and the contract", /"adoptSchool"/.test(gmSrc193) && /a tradition id the character practises/.test(gmSrc193));
+
+  // §3.6 — the GM knows the school, not just the tradition.
+  const gmDetail = sb.schoolsDetailForGM({ domains: { primary: "cogitant" }, schools: { cogitant: "cog_instrumented" } }, schools);
+  check("193b §3.6: the GM school block names the current school + its best-ground", /Instrumented/.test(gmDetail) && /DENSE/.test(gmDetail));
+  check("193b §3.6: it lists sibling schools as adoptSchool targets", /cog_unaided|cog_reaching/.test(gmDetail));
+  check("193b §3.6: schoolsDetail is a registered GM key + a rendered block", /key: "schoolsDetail"/.test(regSrc193) && /THE CHARACTER'S SCHOOLS/.test(gmSrc193));
+
+  // reconcile v13 — backfill old saves (silent; idempotent).
+  const step13 = rc.CHARACTER_STEPS.find(s => s.id === "school-backfill");
+  check("193b: reconcile has the school-backfill step at v13", !!step13 && step13.version === 13 && rc.topReconcileVersion("character") >= 13);
+  const oldSave = { domains: { primary: "cogitant" } };
+  step13.apply(oldSave, { content: { schools } });
+  check("193b: backfill seeds an old save's schools from its domains", oldSave.schools?.cogitant === pure.id);
+  const alreadyHas = { domains: { primary: "cogitant" }, schools: { cogitant: "cog_instrumented" } };
+  step13.apply(alreadyHas, { content: { schools } });
+  check("193b: backfill is idempotent — an existing schools map is untouched", alreadyHas.schools.cogitant === "cog_instrumented");
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

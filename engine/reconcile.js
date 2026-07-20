@@ -21,6 +21,7 @@ import { fallbackPersonalArc } from "./personalArc.js";
 import { seedStandingAtCreation } from "./standing.js";
 import { namesMatch } from "./namematch.js";
 import { affiliationOf, regionHomeTradition, buildPeopleVocab } from "./affiliation.js";
+import { defaultSchoolsForDomains } from "./substrate.js"; // SNG-193b §3.2: seed a school per practised domain on old saves
 
 // ---------- character migration steps (extensible registry) ----------
 // Each step: { version, id, playerFacing, apply(entity, ctx) → { notes?, offers?, warnings? } }.
@@ -317,6 +318,19 @@ export const CHARACTER_STEPS = [
         return (typeof inner === "string" && inner.trim()) ? inner : "(a scene whose summary was lost to a formatting error)";
       });
       return n ? { notes: [`repaired ${n} chronicle entr${n === 1 ? "y" : "ies"} that were not text`] } : {};
+    }
+  },
+  {
+    version: 13, id: "school-backfill", playerFacing: false,
+    // SNG-193b §3.2 / §5 Q3. A character built before schools has no `schools` map. The band seam already
+    // falls back to each tradition's pure/root school SILENTLY, so this changes no behaviour — it just
+    // makes the field consistently present, so the GM's school block and a future adoptSchool have a base
+    // to read and write. Defaults every practised domain to its pure/root school. Idempotent: a save that
+    // already has a schools map is left untouched; a folk-only (no-domain) character gets an empty map.
+    apply: (c, ctx) => {
+      if (c.schools && typeof c.schools === "object") return {};
+      c.schools = defaultSchoolsForDomains(c.domains, ctx.content?.schools);
+      return {};
     }
   },
   {

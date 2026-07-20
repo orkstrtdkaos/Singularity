@@ -28,12 +28,110 @@ export const SUBSTRATE_TUNING = {
   maxChancePenalty: 65, // factor 0 → −65 to success chance (drives to the d100 floor)
   energyK: 0.6,         // thin/crowded substrate strains: energy × (1 + energyK·(1−factor))
   gateBelow: 0.18,      // factor under this → the craft is effectively OFF (a hard, explained gate)
+  materialFloor: 0.7,   // SNG-193b §4: a material root/extension is never STARVED — the augmented craft
+                        //   degrades TOWARD its pure form (this floor), never to zero. Sits with crowdFloor.
+};
+
+// SNG-193b: a source's characteristic band — what a craft LEANS ON decides its best-ground, not the
+// tradition it roots in. A tradition is a ROOT; a school is what it reaches WITH, and the reach sets the
+// band. material leans on nothing (a flat floor — never starved, no band); inherent/natural want THIN
+// ground (a dense lattice is interference, apparatus between them and the thing); lattice wants DENSE
+// (the machine running); wild thrives in the ungoverned gaps (widest band). Centres track SNG-172's
+// source classification and are AUDITED against the per-tradition bands, never fight them (existing
+// saves without a school keep the tradition's authored band — see schoolForTradition's fallback).
+const SOURCE_BAND = {
+  material: null,                            // a FLOOR — never starved, no band ("the pure never loses")
+  natural:  { center: 0.20, width: 0.24 },   // thin ground is BEST (naturals 0.18–0.36)
+  inherent: { center: 0.15, width: 0.22 },   // thin is a clear signal; dense is interference
+  lattice:  { center: 0.90, width: 0.20 },   // dense helps until it interferes (lattice 0.58–0.98)
+  wild:     { center: 0.32, width: 0.34 },   // ungoverned; thrives in the unreached gaps, widest band
 };
 
 /** A tradition's band {center, width}, or null for the untuned (folk/learned) — substrate-neutral. */
 export function bandFor(tradition, data) { // registry:internal
   const b = data?.substrateBand?.[tradition];
   return b && b.center != null ? { center: b.center, width: b.width ?? 0.18 } : null;
+}
+
+/** SNG-193b Q3: the character's SCHOOL for a tradition — or the tradition's PURE/root school as a SILENT
+ *  fallback (every save that predates schools has no `character.schools`, and must keep working). Returns
+ *  the school object {id, name, extension, why} or null when schools.json / the tradition isn't loaded.
+ *  `schoolsData` is `CONTENT.schools` (schools.json) — the content→engine edge the band resolution reads.
+ *  The pure school (extension null) is preferred as the fallback so an un-schooled character leans on
+ *  nothing new — their band stays the tradition's authored one (zero regression). */
+export function schoolForTradition(character, traditionId, schoolsData) { // registry:internal
+  const trad = schoolsData?.traditionSchools?.[traditionId];
+  if (!trad) return null;
+  const list = trad.schools || [];
+  const chosen = character?.schools?.[traditionId];
+  if (chosen) { const s = list.find(x => x.id === chosen); if (s) return s; }
+  return list.find(x => x.extension === null) || list.find(x => x.extension === trad.root) || list[0] || null;
+}
+
+/** SNG-193b Section 3.3 — the LOAD-BEARING seam. The band a craft resolves at reads the SCHOOL, not the
+ *  tradition: the EXTENSION source sets it. Two practitioners of one tradition with different schools get
+ *  OPPOSITE best-grounds (the reaching mind wants thin ground; the instrumented wants dense). A PURE
+ *  school (extension null) leans on nothing new, so it keeps the tradition's own authored band — which is
+ *  also the un-schooled fallback, so no existing save shifts. An unmodelled extension source likewise
+ *  falls back to the tradition band rather than going neutral. */
+export function bandForSchool(traditionId, school, substrateData) { // registry:internal
+  const ext = school ? school.extension : undefined;
+  if (ext !== undefined && ext !== null && Object.prototype.hasOwnProperty.call(SOURCE_BAND, ext)) return SOURCE_BAND[ext];
+  return bandFor(traditionId, substrateData); // pure school, no school, or an extension we don't model
+}
+
+/** SNG-193b Section 3.2: the school map a fresh character starts with — each practised domain defaults to
+ *  its tradition's PURE/root school (the orthodoxy for material peoples, the never-starved safe start for
+ *  the rest). A story-earned adoptSchool op, or a later creation pick, moves a domain to an augmented
+ *  school and shifts that craft's best-ground. Returns {} when schools aren't loaded — the band seam then
+ *  falls back on its own, so an un-schooled save is identical either way. */
+export function defaultSchoolsForDomains(domains, schoolsData) { // registry:internal
+  const out = {};
+  if (!domains || !schoolsData?.traditionSchools) return out;
+  for (const tid of [domains.primary, domains.secondary, domains.tertiary]) {
+    if (!tid || out[tid]) continue;
+    const s = schoolForTradition(null, tid, schoolsData);
+    if (s) out[tid] = s.id;
+  }
+  return out;
+}
+
+/** SNG-193b Section 3.2 — the ONE validated write-seam for a character's school (a creation pick, or a
+ *  teacher of that people once the fiction earns it). Sets character.schools[traditionId] only when the
+ *  school genuinely belongs to that tradition; a bad id is REFUSED (returns false) rather than silently
+ *  corrupting the map into a dead reference the band seam would then fall back through. */
+export function setCharacterSchool(character, traditionId, schoolId, schoolsData) { // registry:internal
+  const list = schoolsData?.traditionSchools?.[traditionId]?.schools || [];
+  if (!character || !list.some(s => s.id === schoolId)) return false;
+  character.schools = character.schools || {};
+  character.schools[traditionId] = schoolId;
+  return true;
+}
+
+/** SNG-193b Section 3.6: the GM-facing note on the character's schools — one line per practised domain,
+ *  naming the CURRENT school, what it reaches WITH, and its best-ground, so the GM describes the craft as
+ *  THIS school does it (not generically by tradition) and knows what a teacher of that people would open.
+ *  Lists the tradition's other school ids so a story-earned adoptSchool has valid targets. null when
+ *  nothing is loaded or practised. */
+export function schoolsDetailForGM(character, schoolsData) { // registry:internal
+  const domains = character?.domains;
+  if (!domains || !schoolsData?.traditionSchools) return null;
+  const ground = ext => ext === null || ext === "material" ? "never at a loss anywhere, but never peaks (a floor, not a spike)"
+    : ext === "inherent" ? "best in THIN, still ground; a dense lattice is interference between them and the thing"
+    : ext === "lattice" ? "best in DENSE, machine-thick country; starves in the thin"
+    : ext === "wild" ? "best in the ungoverned gaps, where the current runs untamed"
+    : ext === "natural" ? "best in thin, living ground; improved by a little lattice, never needing it"
+    : "its own ground";
+  const lines = [];
+  for (const tid of [domains.primary, domains.secondary, domains.tertiary]) {
+    if (!tid) continue;
+    const trad = schoolsData.traditionSchools[tid];
+    const cur = schoolForTradition(character, tid, schoolsData);
+    if (!trad || !cur) continue;
+    const others = (trad.schools || []).filter(s => s.id !== cur.id).map(s => s.id);
+    lines.push(`- ${tid}: **${cur.name}** [${cur.id}${cur.extension ? " · joined to " + cur.extension : " · pure"}] — ${ground(cur.extension)}.${others.length ? ` Other schools of this people: ${others.join(", ")}.` : ""}`);
+  }
+  return lines.length ? lines.join("\n") : null;
 }
 
 /** A place's effective density for a wielder carrying `carried` charge, clamped to [0,1]. */
@@ -54,14 +152,23 @@ export function bandFactor(band, eff, t = SUBSTRATE_TUNING) { // registry:inter
   return Math.max(t.crowdFloor, 1 - t.crowdSlope * (eff - hi)); // interference — mild, floored
 }
 
-/** The full substrate verdict for a craft at a place. `data` = the_substrate.json. Pure. */
-export function substrateVerdict({ tradition, density, carried = 0, data, tuning = SUBSTRATE_TUNING }) {
-  const band = bandFor(tradition, data);
+/** The full substrate verdict for a craft at a place. `data` = the_substrate.json. Pure.
+ *  SNG-193b: pass the character's `school` (from schoolForTradition) and the tradition's `root` and the
+ *  band reads the SCHOOL's extension source, floored by a material root. Omit both and it is the legacy
+ *  per-tradition verdict — every un-schooled save resolves exactly as before. */
+export function substrateVerdict({ tradition, school = null, root = null, density, carried = 0, data, tuning = SUBSTRATE_TUNING }) {
+  // §3.3: the school's extension source sets the band; absent a school, the tradition's own band.
+  const band = school ? bandForSchool(tradition, school, data) : bandFor(tradition, data);
   const eff = effectiveDensity(density, carried);
-  const factor = bandFactor(band, eff, tuning);
-  const side = !band ? "neutral"
+  let factor = bandFactor(band, eff, tuning);
+  let side = !band ? "neutral"
     : eff < band.center - band.width ? "starved"
     : eff > band.center + band.width ? "crowded" : "full";
+  // §4: the FLOOR is the root's. A material ROOT — or a material-EXTENSION school — is never STARVED: the
+  // augmented craft degrades TOWARD its pure form (materialFloor), never to zero. The floor bites only on
+  // the starved side; interference from ABUNDANCE still applies. "The material school is the one that travels."
+  const hasFloor = root === "material" || school?.extension === "material";
+  if (hasFloor && side === "starved" && factor < tuning.materialFloor) { factor = tuning.materialFloor; side = "floored"; }
   return {
     factor,
     side,

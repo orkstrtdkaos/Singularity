@@ -5912,6 +5912,26 @@ await (async () => {
   const rec2 = char2.generated.npc["tam-oren"];
   reconcileGeneratedNpcWithMeet(char2, npcUpdates, { type: "npc", hint: "a wandering tinker met on the road" }, rec2);
   check("190 §2: an unrelated generateRequest does NOT merge into the meet (no false dedup)", rec2.id === "tam-oren" && !!char2.generated.npc["tam-oren"] && char2.npcRegistry["silas-mother"].name === "Silas's Mother");
+
+  // SNG-190 §5a: a wrong-typed sceneSummary must never corrupt the permanent chronicle. Live path
+  // coerces before the push; the reconcile step repairs saves already carrying [object Object].
+  const rc190 = await import("../engine/reconcile.js");
+  const chronStep = rc190.CHARACTER_STEPS.find(x => x.id === "chronicle-string-repair");
+  check("190 §5a: the chronicle repair step is registered", !!chronStep);
+  const chronSave = { chronicle: ["a real summary", { text: "an object with text" }, { junk: 1 }, "another string"] };
+  chronStep.apply(chronSave);
+  check("190 §5a: string entries are untouched", chronSave.chronicle[0] === "a real summary" && chronSave.chronicle[3] === "another string");
+  check("190 §5a: an object with a text field is recovered to that text", chronSave.chronicle[1] === "an object with text");
+  check("190 §5a: a bare object becomes an honest marker, never [object Object]", chronSave.chronicle[2].startsWith("(a scene whose summary was lost") && !chronSave.chronicle.some(e => typeof e !== "string"));
+  const chronSnap = JSON.stringify(chronSave.chronicle);
+  chronStep.apply(chronSave);
+  check("190 §5a: re-running the repair changes nothing (idempotent)", JSON.stringify(chronSave.chronicle) === chronSnap);
+  check("190 §5a: the LIVE push coerces the summary first (no raw object reaches the chronicle)",
+    /turn\.sceneSummary = coerceSceneSummary\(turn\.sceneSummary, turn\.narration\)/.test(appSrc190) && /function coerceSceneSummary/.test(appSrc190));
+
+  // SNG-190 §5b: the time clamp no longer silently truncates a multi-day journey, and reports when it must.
+  check("190 §5b: the per-turn time ceiling is raised to a week and a truncation is recorded, not silent",
+    /const HOURS_CAP = 168/.test(appSrc190) && /character\._timeClampNote = \{ asked/.test(appSrc190));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

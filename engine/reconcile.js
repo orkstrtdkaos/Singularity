@@ -300,6 +300,26 @@ export const CHARACTER_STEPS = [
     }
   },
   {
+    version: 12, id: "chronicle-string-repair", playerFacing: true,
+    // SNG-190 §5 / SNG-189 §1. A wrong-typed sceneSummary (an object the model returned where a string
+    // was asked) was pushed RAW into the permanent chronicle and rendered "[object Object]" — a scene
+    // of the story lost, unrecoverable. The live path now coerces before the push (app.js
+    // coerceSceneSummary); this repairs saves ALREADY corrupted: an object entry yields its own text
+    // field if it has one, else a plain honest marker rather than a glitch string. Idempotent — a
+    // string entry is left exactly as it was.
+    apply: (c) => {
+      if (!Array.isArray(c.chronicle)) return {};
+      let n = 0;
+      c.chronicle = c.chronicle.map(e => {
+        if (typeof e === "string") return e;
+        n++;
+        const inner = e && typeof e === "object" ? (e.text || e.summary || e.sceneSummary) : null;
+        return (typeof inner === "string" && inner.trim()) ? inner : "(a scene whose summary was lost to a formatting error)";
+      });
+      return n ? { notes: [`repaired ${n} chronicle entr${n === 1 ? "y" : "ies"} that were not text`] } : {};
+    }
+  },
+  {
     version: 6, id: "place-containment", playerFacing: true,
     // SNG-154 stage 4. Repair a save whose place hierarchy was scrambled before `parentId` existed.
     // Containment used to be inferred per-write from wherever the engine last believed the

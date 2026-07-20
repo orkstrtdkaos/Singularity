@@ -60,7 +60,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.162";
+const APP_VERSION = "1.8.163";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3235,7 +3235,20 @@ function applyTurn(turn, resolution, playerWords = null) {
   const extraHours = Math.max(0, Math.min(12, Number(turn.timeAdvanceHours) || 0));
   const beatDefault = (turn.sceneEnded ? ADVANCE.sceneEnd : ADVANCE.beat) + extraHours;
   const declared = turn.timeOps && Number.isFinite(Number(turn.timeOps.hoursPassed));
-  const hours = declared ? Math.max(0.25, Math.min(72, Number(turn.timeOps.hoursPassed))) : beatDefault;
+  const declaredHours = declared ? Number(turn.timeOps.hoursPassed) : null;
+  // SNG-190 §5 / SNG-189 §2: the old 72h (3-day) ceiling silently truncated the party's FOUR-day walk
+  // to Cairnhold to three, and told the model nothing — a silent ceiling on a declared duration is how
+  // the fiction and the clock drifted apart in the first place. Raised to 168h (7 days) so a normal
+  // montage journey is expressible, and — regardless of the shared-calendar ruling (SNG-189 §5 Q1) — a
+  // truncation is now RECORDED, never silent: the character clock advances what it can, and the overflow
+  // is stamped so the discrepancy is visible instead of being papered over with an invented day-number.
+  const HOURS_CAP = 168;
+  const hours = declared ? Math.max(0.25, Math.min(HOURS_CAP, declaredHours)) : beatDefault;
+  if (declared && declaredHours > HOURS_CAP) {
+    character._timeClampNote = { asked: Math.round(declaredHours), applied: HOURS_CAP, at: new Date().toISOString() };
+  } else if (character._timeClampNote) {
+    delete character._timeClampNote; // clear once a normal turn passes
+  }
   advanceClock(character.clock, hours);
   if (declared && hours >= 2) autoVerifyLeg("b8-time", `narrative time moved ${hours}h via timeOps`); // SNG-051 auto-verify
   // BATCH-12 §3c: the company you keep earns standing with their people, on the IN-GAME DAY. Erik's
@@ -3359,6 +3372,13 @@ function applyTurn(turn, resolution, playerWords = null) {
   // SNG-080: the world must PUSH — if nothing has happened for a while, make it happen (woven next turn)
   maybeWorldPressure(turn, resolution);
   if (gambitHintCooldown > 0) gambitHintCooldown--; // SNG-077: tick down the gambit-hint quiet period
+  // SNG-190 §5 / SNG-189 §1: sceneSummary becomes the ONLY durable record of a scene, but the model
+  // sometimes returns an OBJECT that still parses — pushed raw into the chronicle (below) it rendered
+  // "[object Object]" into the permanent record and a scene of the story was lost, unrecoverable.
+  // Coerce ONCE here, before any durable use: a string stands; an object yields its own text field if
+  // it has one; else it falls back to the narration clamp (gm.js's own fallback for a MISSING summary).
+  // Reassigned so every downstream read (party beat, sceneTurns, gallery caption) gets the clean string.
+  turn.sceneSummary = coerceSceneSummary(turn.sceneSummary, turn.narration);
   // party: publish this beat to the shared scene (fire-and-forget)
   if (sharedScene && turn.sceneSummary) publishPartyBeat(resolution?.action?.label || "acted", resolution?.degree ?? null, turn.sceneSummary);
   // chronicle + scene persistence
@@ -7040,6 +7060,21 @@ function renderPlay(turn, opts = {}) {
 // ---------- utils ----------
 
 function esc(s) { return String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+
+/** SNG-190 §5 / SNG-189 §1: coerce a scene summary to a safe string before it can reach the permanent
+ *  chronicle. The model is asked for a string; when it returns an object that still parses, `String(it)`
+ *  is "[object Object]" — so we look inside for a text field first, and only then fall back to a clamp of
+ *  the narration (the one durable half we still hold). Returns null when nothing usable survives — the
+ *  caller then records nothing rather than a placeholder for a scene that had no summary at all. */
+function coerceSceneSummary(value, narration) {
+  if (typeof value === "string" && value.trim()) return value;
+  if (value && typeof value === "object") {
+    const inner = value.text || value.summary || value.sceneSummary;
+    if (typeof inner === "string" && inner.trim()) return inner;
+  }
+  const fb = smartClamp(String(narration || "").trim(), 120);
+  return fb || null;
+}
 
 /** SNG-BATCH-5 Phase 2: shared fork-choice modal. Renders the two paths; calls
  *  onPick(pathKey) after the player confirms. The caller locks the fork + ranks. */

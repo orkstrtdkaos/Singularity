@@ -704,5 +704,47 @@ NOT done — likely moot now; measure the new LCP first.
 QUEUE NOW: SNG-186 §2c/§2a/§2b (workbench remainder), SNG-188 moved-without-consent (new spec at HEAD).
 STILL OPEN AND YOURS: SNG-179 reproduced-symptom check, SNG-187 CDN LCP. -->
 
+---
+
+<!-- status: SNG-190 ALL FIVE SECTIONS COMPLETE_PENDING_REVIEW (CCode 2026-07-19). v1.8.159–163, one
+verified commit each. Suite green by exit code at every ship. Results:
+po/results/20260719_SNG-190_teleport_and_three.md. Three of four were the engine contradicting itself,
+as you called it; §3 was a defect in my own §2f panel.
+
+§1 THE TELEPORT (v1.8.159) — dead. §1.3 sub-place → PARENT LOCATION (findSubPlaceParent first; the
+kitchen is a sub-place of Cairnhold so it lands in Cairnhold, no move) — the fix that alone prevents
+it. §1.1 the waygate router is skipped for a sub-place and only claims a move to a REAL GATE. §1.2
+unresolvable-from-gate FAILS CLOSED (returns null), never the hub — same principle as SNG-188 §4.2.
+§1.4 prompt reconciled: a sub-place (room/garden/kitchen) is NOT a destination; minting stays for
+separate places (SNG-117 intact). Reproduced-symptom test on the literal captured ref.
+
+§2 ONE PERSON TWO RECORDS (v1.8.162) — reconcileGeneratedNpcWithMeet (npcs.js, the identity module)
+re-homes the generated record onto the MET id, matched by the hint naming the met person. silas-mother
+keeps its bond, gains Hesta Vorn's name + craft; hesta-vorn gone. Unrelated requests don't falsely
+merge. Tested on the literal scenario.
+
+§3 FIRING PANEL FALSE ZEROS (v1.8.160) — MY §2f bug, trust-critical. It read _opLedger, which only
+markTeacher instruments, and rendered 31 un-instrumented ops as NEVER FIRED above an exchange that
+emitted six. Now: emission counted for EVERY op every turn (_opEmitted + _opTurns denominator);
+applied/rejected shown ✓/✗ only where instrumented; captures folded so a card's emitted op can't read
+as not-emitted above it; caption with no turns says "it is not a finding." Verified live, 4 guards.
+
+§4 RAW MARKDOWN (v1.8.161) — renderProseHtml (narration_voice.js, the visual twin of cleanForSpeech)
+renders the *✦ … **bold** …* asides as styled .beat-aside; zero asterisks reach the reader.
+Unit-tested on the literal captured string.
+
+§5 SNG-189 CARRY-OVERS (v1.8.163) — §5a [object Object]: coerceSceneSummary guards the chronicle push
+(the ONLY raw-object write — Q2 answered: facts/places already String-coerce); reconcile v12 sweeps
+corrupted saves. §5b the silent 72h clamp: raised to 168h (a montage journey is expressible) and a
+truncation is now RECORDED (_timeClampNote), never silent.
+
+⚠️ STILL NEEDS YOUR RULING (SNG-189 §5 Q1): the invented "World-day 23" in durable notes is the GM
+adding journey days to a real-time-derived shared calendar. I did NOT strip the day-numbers — if
+journeys DO advance the calendar, 23 is correct and the calendar is what's wrong. That's yours.
+
+QUEUE NOW: SNG-186 §2c/§2a/§2b, SNG-188 moved-without-consent. STILL OPEN AND YOURS: SNG-179 repro
+check, SNG-187 CDN LCP, and the SNG-189 §5 Q1 calendar ruling. -->
+
+
 
 

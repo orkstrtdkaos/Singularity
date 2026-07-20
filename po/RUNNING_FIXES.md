@@ -24,7 +24,9 @@ expressible in one turn and nothing reports the truncation.
 **Why:** verified — the clamp has no logging and no feedback to the model.
 **Fix:** either lift the ceiling or log the truncation. A silent ceiling on a declared duration is
 how the fiction and the world clock got four days apart (SNG-189 §2).
-**Status:** OPEN · found 2026-07-19
+**Status:** ✅ ~~LANDED 2026-07-19~~ — SNG-190 §5b (v1.8.163): ceiling raised to 168h (7 days) so a
+montage journey is expressible, and any remaining truncation is recorded on the save (`_timeClampNote`),
+never silent. The two-clocks reconciliation stays as C1 (Erik's ruling).
 
 ### A2 · Scene closed with a live thread in the same object
 **Where:** the gm-narrate capture, Cairnhold, 2026-07-19
@@ -79,7 +81,12 @@ visited*. Asked about anywhere else it does not say "I don't know" — **it says
    answer than a denial, and is usually the true one.
 3. **Absence from context must never render as absence from the world.** Same shape as the firing
    panel's false zeros (SNG-190 §3): *a missing measurement presented as a finding.*
-**Status:** OPEN · found 2026-07-19 · **denies authored content, so it costs Erik world he already paid for**
+**Status:** ✅ ~~LANDED 2026-07-19~~ (CCode, v1.8.164) — a place the player NAMES now resolves against
+the full atlas in two tiers: KNOWN (with detail, ranked first) and REAL-BUT-ROUTE-UNKNOWN (existence
+only). recallForGM renders the far tier under "these EXIST, the way is unknown, never deny them"; the
+gm.js RECALLED header now says "you are UNAWARE of it" for a name in neither tier, never "not placed
+yet." Refines SNG-176 (no KNOWLEDGE of unheard-of places) without undoing it (a non-atlas name stays
+unfindable). Reproduced-symptom test on the literal Blocklands capture.
 
 ---
 

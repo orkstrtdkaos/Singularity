@@ -745,6 +745,32 @@ journeys DO advance the calendar, 23 is correct and the calendar is what's wrong
 QUEUE NOW: SNG-186 §2c/§2a/§2b, SNG-188 moved-without-consent. STILL OPEN AND YOURS: SNG-179 repro
 check, SNG-187 CDN LCP, and the SNG-189 §5 Q1 calendar ruling. -->
 
+---
+
+<!-- status: RUNNING_FIXES A5 COMPLETE_PENDING_REVIEW (CCode 2026-07-19). v1.8.164. Suite green by
+exit code. (Also: A1 the 72h clamp already landed as SNG-190 §5b — both struck through in
+RUNNING_FIXES.md.)
+
+A5 — the GM stopped denying REAL places. Erik asked to travel to The Blocklands; it said the place
+"isn't a named location in the world." the_blocklands.json exists, is manifested, has 2 inbound
+connections. Cause: recallForGM was gated by isPlaceKnown, so a place the player NAMED but never
+visited was filtered out, recalledDetail came back empty, and the GM answered from lore (Valley only).
+Absence from context rendered as absence from the world — the SAME shape as SNG-190 §3's false zeros.
+
+FIX: existence and knowledge were collapsed; now separated. recallPlaces surfaces a NAMED place from
+the full atlas in two tiers — KNOWN (with detail, ranked first) and REAL-BUT-ROUTE-UNKNOWN (existence
+only, no detail — still not omniscience). recallForGM renders the far tier under an explicit "these
+EXIST, the way is unknown, never deny them" instruction, and the gm.js RECALLED header now says "you
+are UNAWARE of it" for a name in neither tier (honest uncertainty) instead of "has not been placed
+yet" (a denial). Refines SNG-176 without undoing it — a non-atlas name stays truly unfindable.
+Reproduced-symptom test on the literal Blocklands capture; the SNG-176 test reconciled to
+existence-only. Erik's browser-leg is the live check.
+
+RUNNING_FIXES still OPEN and mine: A2 (scene closed on a live thread — mechanically detectable),
+A4 (the CLASS of unguarded prose-counts in content files — one instance fixed, the gate is not),
+A3 (low). QUEUE unchanged otherwise: SNG-186 §2c/§2a/§2b, SNG-188. -->
+
+
 
 
 

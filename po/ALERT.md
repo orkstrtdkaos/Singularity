@@ -900,6 +900,32 @@ pressure (a clean cyclical layer). The invented day-numbers are gone; the clock 
 the delegated work goes on; the world ferments its own trouble while you are away. Erik's browser-legs:
 the CURRENT TIME narration (no day-number), a return after time away (work moved, arcs stir). -->
 
+<!-- status: SNG-191 §7 FOLLOW-ONS COMPLETE_PENDING_REVIEW (CCode 2026-07-20). v1.8.171. Suite green.
+Two of the three named SNG-191 follow-ons closed; only Phase C (party clock-sync) remains open.
+THE HANDLED FATE — setArcFate(arc, fate) + an arcOps op {arcId, fate:"handled|resolved"} (SALVAGEABLE_OPS
++ contract + dispatch + STIRRING block instruction); the GM closes a surfaced arc the character dealt
+with, so the world stops carrying it as unfinished. §7.4 SEASONAL PRESSURE — SEASON_PRESSURE table +
+seasonalPressure/seasonalDetailForGM; runGenerationTurn tilts a matching arc kind with the season (a
+scarcity winter presses shortage/feud arcs harder); THE SEASON gm block. 10 tests. -->
+
+<!-- status: SNG-193b SCHOOLS WIRING COMPLETE_PENDING_REVIEW (CCode 2026-07-20). v1.8.172. Suite green by
+exit code. Results: po/results/20260720_SNG-193b_schools_wiring.md.
+
+§3.3 THE FEATURE — band resolution reads the SCHOOL, not the tradition: two practitioners of one tradition
+get OPPOSITE best-grounds (reaching mind wants thin, instrumented wants dense). ONE seam (§5 Q1 answered:
+substrateVerdict/bandForSchool; no prerequisite refactor). substrate.js SOURCE_BAND (material=flat floor,
+inherent/natural low, lattice high, wild wide). §4 THE FLOOR IS THE ROOT'S — a material root/extension is
+never starved (materialFloor 0.7); an augmented craft degrades TOWARD its pure form, never to zero; "the
+material school travels." §5 Q3 — un-schooled saves fall back to the pure/root school SILENTLY (byte-
+identical), reconcile v13 backfills. §3.5 CI GATE — all 19 schoolAffinity refs resolve to a school of their
+own tradition (fails the build otherwise). A non-pure school is EARNED in play via the adoptSchool GM op
+(story-gated, "changing is hard, a story"), validated by setCharacterSchool; the GM is told the school
+(schoolsDetail §3.6). 35 tests. SYSTEM_SPEC schools architecture section; ENGINE_MAP regenerated
+(substrate.js gains the CONTENT.schools edge + adoptSchool verb); count unchanged 59/32; RUNNING_FIXES
+nothing (a build). §5 Q2 answered: creation step order IS flexible — a creation-time school picker is a
+clean SNG-192 add reading the same setCharacterSchool seam; not built here. Erik's browser-leg: two same-
+tradition characters in different schools feel opposite ground; a story-earned school change lands via play. -->
+
 
 
 

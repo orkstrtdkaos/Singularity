@@ -939,6 +939,26 @@ nothing (a build). §5 Q2 answered: creation step order IS flexible — a creati
 clean SNG-192 add reading the same setCharacterSchool seam; not built here. Erik's browser-leg: two same-
 tradition characters in different schools feel opposite ground; a story-earned school change lands via play. -->
 
+<!-- status: SNG-194 THE GM OFFERS COMPLETE_PENDING_REVIEW (CCode 2026-07-20). v1.8.173. Suite green by exit
+code. Results: po/results/20260720_SNG-194_the_gm_offers.md. Built per Erik's steer ("the engine work next")
+using SNG-195 §4b as the trigger design.
+
+THE OUTCOME — the world OFFERS, not only responds: the GM introduces ONE thing the player isn't reaching
+for, rarely, drawn from something already true. §4b THE ENGINE DECIDES, THE MODEL NEVER JUDGES —
+pacing.roomForAnOffer is a pure gate (a grip = encounter/gambit/intent/world-already-pushing is never room;
+else a positive opening lull||arrived, off OFFER_COOLDOWN). The short unconditional invitation reaches the
+prompt ONLY when the engine set it — the same fix as the ops that fired 0× in 16 levels (don't ask a model
+to judge in one clause; compute it). §3 THE OFFER OP {thing, from} — from REQUIRED (attribution is the whole
+difference from a random-encounter table), COUNTED via logOpOutcome (SNG-190 §3), resets turnsSinceOffer. §5
+answered: Q1 fears was NOT in the turn prompt (only wants) — npcFearsForGM adds it, surfaced only inside a
+room-gated offer (the richest NON-hostile-surprise source); Q2 no rate-limit counter (per §4a it lands
+mid-duel) — scene-state gate instead; Q3 distinct op, yes. Invariants (non-blocking, declinable, not-always-
+trouble, foreseeable) in the block. 24 tests. SYSTEM_SPEC §13 'the world OFFERS' + latentarcs API drift
+fixed (markHandled→setArcFate); ENGINE_MAP regenerated; count unchanged 59/32. Follow-on flagged: feed an
+ignored offer's `from` into seedArc so an offered thread persists as a latent arc (turns a beat into a
+commitment — not built). Erik's browser-leg: arrive somewhere quiet and someone turned down scenes ago is
+at the door; never mid-duel. -->
+
 
 
 

@@ -96,6 +96,43 @@ duel as readily as in a quiet moment. **The trigger should be scene-state, not a
 - the player is mid-plan or mid-question
 - something arrived unprompted in the last scene or two
 
-**The rule in one line: an offer arrives in a GAP, never in a GRIP.** Rarity then takes care of itself
-— gaps are naturally uncommon — and the offer lands where it reads as the world breathing rather than
-the game interrupting.
+## §4a — ⚠ CORRECTED. Erik: *"will the GM even know what that means?"*
+
+I originally closed this section with *"an offer arrives in a GAP, never in a GRIP."* **Erik struck
+it and he is right.** "Grip" is defined nowhere; a model reading it has to guess. And the danger is
+specific: **a memorable line gets copied into a prompt verbatim, while the precise version underneath
+it gets summarised away.** A tidy aphorism in a spec is a liability, not a flourish.
+
+**But the better fix is not rewording — it is not asking the model at all.**
+
+## §4b — THE ENGINE DECIDES, THE MODEL NEVER JUDGES
+
+Almost every condition in §4 is **engine state, already tracked**: `sceneState` (the authoritative
+anchor — setting, npcsPresent, threads), `encounterState`, an open gambit, `_pendingIntent`,
+`intentRung`, whether the last turn closed a scene, whether an offer fired recently.
+
+**So the engine computes whether there is room, and the invitation only enters the prompt when there
+is.** The GM never evaluates "gap" versus "grip" — **it either sees the instruction this turn or it
+does not.**
+
+```
+roomForAnOffer = no live encounter
+               && no open gambit
+               && no unresolved intent this turn
+               && no offer in the last N scenes
+               && (a scene just closed || the player arrived || the beat is a lull)
+```
+
+**This is SNG-179's lesson applied before the fact: derive, do not demand.** We already know that
+asking a model to make a fine judgement in one clause of a very long prompt is how ops end up firing
+zero times in sixteen levels. **Do not ask it to judge scene-appropriateness in prose. Compute it and
+ask only when the answer is yes.**
+
+When the invitation does appear, it can then be **short and unconditional** — which is exactly the
+shape that fires:
+
+> *"There is room in this beat. Introduce ONE thing the player is not reaching for, drawn from what
+> these people want or fear, what is stirring, or what this place is. Name what it came from."*
+
+**No hedging, no aptness test, no metaphor.** The engine already made the judgement the hedging would
+have been protecting against.

@@ -31,7 +31,9 @@
       "native": true
     }
   ],
-  "alignment": {},
+  "alignment": {
+    "spectrum": -0.03
+  },
   "attunement": 1,
   "maxHealth": 30,
   "health": 30,
@@ -63,7 +65,23 @@
       "pinned": true
     }
   ],
-  "deeds": [],
+  "deeds": [
+    {
+      "at": "2026-07-20T15:55:34.797Z",
+      "locationId": "the_marchward",
+      "communityId": "riven.marchward",
+      "description": "Swore a blood oath on his father Andyr's name to seek honorable vengeance against Jarl Kjotve Olafsson",
+      "tags": [
+        "oath",
+        "honor",
+        "vengeance"
+      ],
+      "weight": 1,
+      "spread": [],
+      "day": 1,
+      "worldDay": 20
+    }
+  ],
   "relationships": {},
   "chronicle": [],
   "currentLocationId": "the_marchward",
@@ -84,14 +102,19 @@
         "player": "I’ll sit against the tree with Freki and think back about everything I’ve experienced, the raid on Javiksholm, the death of my father by Kjotves hand. Think about the burning hatred and lust for revenge.",
         "summary": "Brynjar sits against a birch in the Marchward square and turns the memory of the raid over in his hands — his father's death, Kjotve's cowardice, the weight of unfinished business.",
         "narration": "The birch bark is cold through your shirt. Freki's weight is warm against your leg, steady as breathing.\n\nYou close your eyes and it comes easy — too easy. The raid doesn't take effort to recall. It comes back the way cold water comes back when you've been under it: all at once, total. The sound first — not the clash of weapons but the dogs barking, then stopping. The smell of thatch catching. Then the light of it, orange and wrong through the smoke. Your father's voice saying *go*, the single flat word that meant he'd already decided how this ended.\n\nYou looked back. You shouldn't have, but you did. You watched Kjotve Olafsson move — not like a warrior caught in a fight, but like a man ticking a task off a list. Andyr was still standing when the spear went into his back from behind. Not Kjotve's hand. Kjotve's *order*. That detail sits in your chest like a bone splinter, the specific cowardice of it. The duel was real until Kjotve was losing, and then it stopped being a duel, and Andyr fell, and Kjotve stood over him and said something you couldn't hear across the burning square.\n\nFreki shifts, pushing his flank harder against your leg. You open your eyes. The square is still here — the warrior on the bench, the anchor-stone at the far corner, cookfire smoke going straight up in cold still air.\n\nThe hatred isn't hot. That's what surprises you, still, when you look at it directly. It doesn't burn. It sits heavy and patient in your ribcage the way a stone sits at the bottom of still water. Kjotve has the village, the fields, the shore. He has Andyr's land and Andyr's name on no grave. And you are here, on the far side of the world, alive because your father told you to be.\n\nYou don't know yet what you're going to do with that. But you know it isn't finished."
+      },
+      {
+        "player": "I’ll swear to myself and in somewhat my father, “I will kill Kjotve for what he has done. I will kill him but I will do it with more honor than that spineless serpent has ever had. I swear it, to all the gods above and especially to you father.” I’ll scratch Freki behind the ears once more and pat him in the head. Then, I’ll stand and walk over to the square.",
+        "summary": "Brynjar swears a blood oath on his father's name — to kill Kjotve with more honor than the Jarl ever showed — then walks into the Marchward square.",
+        "narration": "You speak it quiet enough that only Freki hears — and the birch bark behind you, and whatever gods are awake at this hour in a border town between war and false peace. *I will kill Kjotve for what he has done. I will kill him but I will do it with more honor than that spineless serpent has ever had. I swear it, to all the gods above and especially to you, father.* The words feel different said aloud. Heavier. A thing you can't take back, which is exactly what you wanted.\n\nFreki tilts his head into your hand when you scratch behind his ears — that slow lean into pressure, the small surrender of it. You pat the broad skull once and he holds still under it, watching the square with you for one more moment, like he understood the weight of what just passed.\n\nYou stand. The cold comes back into your legs from the packed earth. You roll your shoulders once and walk out into the square proper — mud underfoot, the smell of cookfire and early morning damp, the well at the center and the notice board beside it. Three bills tacked to the board, edges already curling in the spring air. The Redline warrior on the bench near the Wardhouse turns his head a fraction when you cross toward the well — not a challenge, just the same professional accounting he's been running all morning. From here you can hear the tavern argument more clearly: a woman's voice, sharp and certain, and a lower reply that keeps trying to end the conversation and failing."
       }
     ],
     "lastTurn": {
-      "narration": "The birch bark is cold through your shirt. Freki's weight is warm against your leg, steady as breathing.\n\nYou close your eyes and it comes easy — too easy. The raid doesn't take effort to recall. It comes back the way cold water comes back when you've been under it: all at once, total. The sound first — not the clash of weapons but the dogs barking, then stopping. The smell of thatch catching. Then the light of it, orange and wrong through the smoke. Your father's voice saying *go*, the single flat word that meant he'd already decided how this ended.\n\nYou looked back. You shouldn't have, but you did. You watched Kjotve Olafsson move — not like a warrior caught in a fight, but like a man ticking a task off a list. Andyr was still standing when the spear went into his back from behind. Not Kjotve's hand. Kjotve's *order*. That detail sits in your chest like a bone splinter, the specific cowardice of it. The duel was real until Kjotve was losing, and then it stopped being a duel, and Andyr fell, and Kjotve stood over him and said something you couldn't hear across the burning square.\n\nFreki shifts, pushing his flank harder against your leg. You open your eyes. The square is still here — the warrior on the bench, the anchor-stone at the far corner, cookfire smoke going straight up in cold still air.\n\nThe hatred isn't hot. That's what surprises you, still, when you look at it directly. It doesn't burn. It sits heavy and patient in your ribcage the way a stone sits at the bottom of still water. Kjotve has the village, the fields, the shore. He has Andyr's land and Andyr's name on no grave. And you are here, on the far side of the world, alive because your father told you to be.\n\nYou don't know yet what you're going to do with that. But you know it isn't finished.",
-      "sceneSummary": "Brynjar sits against a birch in the Marchward square and turns the memory of the raid over in his hands — his father's death, Kjotve's cowardice, the weight of unfinished business.",
+      "narration": "You speak it quiet enough that only Freki hears — and the birch bark behind you, and whatever gods are awake at this hour in a border town between war and false peace. *I will kill Kjotve for what he has done. I will kill him but I will do it with more honor than that spineless serpent has ever had. I swear it, to all the gods above and especially to you, father.* The words feel different said aloud. Heavier. A thing you can't take back, which is exactly what you wanted.\n\nFreki tilts his head into your hand when you scratch behind his ears — that slow lean into pressure, the small surrender of it. You pat the broad skull once and he holds still under it, watching the square with you for one more moment, like he understood the weight of what just passed.\n\nYou stand. The cold comes back into your legs from the packed earth. You roll your shoulders once and walk out into the square proper — mud underfoot, the smell of cookfire and early morning damp, the well at the center and the notice board beside it. Three bills tacked to the board, edges already curling in the spring air. The Redline warrior on the bench near the Wardhouse turns his head a fraction when you cross toward the well — not a challenge, just the same professional accounting he's been running all morning. From here you can hear the tavern argument more clearly: a woman's voice, sharp and certain, and a lower reply that keeps trying to end the conversation and failing.",
+      "sceneSummary": "Brynjar swears a blood oath on his father's name — to kill Kjotve with more honor than the Jarl ever showed — then walks into the Marchward square.",
       "choices": [
         {
-          "label": "Read the notice board — cross the square and see what's posted",
+          "label": "Read the notice board — see what the Marchward is posting this morning",
           "attribute": "mental",
           "subAttribute": "reason",
           "difficulty": 0,
@@ -101,17 +124,7 @@
           "trivial": true
         },
         {
-          "label": "Go into the tavern — that argument has a name in it",
-          "attribute": "social",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "scout"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Speak to the warrior on the bench — he's been watching the square with the same attention you have",
+          "label": "Walk toward the Redline warrior — he's been reading this square longer than you have",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
@@ -121,9 +134,19 @@
           "trivial": true
         },
         {
-          "label": "Go into the Wardhouse — someone's working before full morning",
+          "label": "Go to the Wardhouse — someone is working before full morning and that usually means something",
           "attribute": "social",
-          "subAttribute": "presence",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "negotiate"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Cross to the tavern — that argument has a name in it and you want to know whose",
+          "attribute": "mental",
+          "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
             "scout"
@@ -133,76 +156,88 @@
       ],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
-        "xp": 0
+        "energy": 0
       },
       "scene": {
-        "setting": "The Marchward's central square — wide mud-packed junction, early morning pale spring light, cookfire smoke rising straight in still air. Brynjar is leaning against a birch at the square's edge, Freki settled at his left leg.",
+        "setting": "The Marchward's central square — wide mud-packed junction, early morning pale spring light, cookfire smoke rising straight in still air. Brynjar is standing in the square proper, near the well at its center. Freki is at his side.",
         "npcsPresent": [
           {
-            "name": "Scarred Redline warrior",
-            "state": "Sitting still on the bench near the Wardhouse, bowl set aside, has glanced at Brynjar and looked back to the square — professional, not hostile."
+            "name": "Redline warrior",
+            "state": "Sitting on the bench near the Wardhouse, has noted Brynjar's movement into the square with a fraction-turn of his head — watching, not threatening"
           }
         ],
         "objects": [
           "Stone well at the square's center",
-          "Public notice board — three bills tacked",
+          "Public notice board — three bills tacked, edges curling",
           "Wardhouse — low stone building, lamplight under the door",
-          "Tavern across the square — argument audible, a woman's voice cutting through, a name mentioned",
+          "Tavern across the square — argument audible, a woman's voice cutting through",
           "Waygate anchor-stone at the far corner, unmarked and alone"
         ],
         "threads": [
+          "Blood oath sworn — Kjotve Olafsson, alive and holding Javiksholm, is now the shape of everything",
           "The Redline warrior watching the square — what does he want here?",
           "The notice board's three bills, unread",
-          "An argument in the tavern with a name in it",
-          "Someone working in the Wardhouse before full morning",
-          "Kjotve Olafsson — alive, holds Javiksholm, owes Andyr a grave"
+          "An argument in the tavern with a woman's voice pressing hard",
+          "Someone working in the Wardhouse before full morning"
         ]
       },
       "codexUpdates": [
         {
-          "topic": "kjotve-olafsson",
-          "label": "Kjotve Olafsson",
-          "kind": "person",
-          "fact": "Jarl who led the raid on Javiksholm. Won Andyr's land by having a spearman strike Andyr from behind mid-duel — a formal fight turned to murder when Kjotve was losing. Now holds Javiksholm's fields and shore. Andyr's body was thrown into the ocean.",
-          "links": [
-            "brynjar-andyrsson-thread",
-            "javiksholm"
-          ]
-        },
-        {
-          "topic": "javiksholm",
-          "label": "Javiksholm",
-          "kind": "place",
-          "fact": "Brynjar's home village — raided and razed by Kjotve Olafsson. Andyr died here, struck from behind. The longhouse was burned. Kjotve now holds the fertile fields and the oceanfront.",
+          "topic": "brynjar-andyrsson-thread",
+          "label": "The Oath on Kjotve",
+          "kind": "event",
+          "fact": "Brynjar swore aloud, to his father and the gods, to kill Kjotve Olafsson — but to do it with more honor than Kjotve ever showed. The oath is spoken and cannot be unsaid.",
           "links": [
             "kjotve-olafsson",
-            "brynjar-andyrsson-thread"
+            "javiksholm"
           ]
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "Brynjar has sworn a blood oath to kill Kjotve Olafsson with honor — spoken aloud in the Marchward square on World-day 20.",
+          "subjectId": "kjotve-olafsson"
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A quiet moment against the birch, an oath spoken, a short walk to the square's center"
+      },
+      "deeds": [
+        {
+          "description": "Swore a blood oath on his father Andyr's name to seek honorable vengeance against Jarl Kjotve Olafsson",
+          "tags": [
+            "oath",
+            "honor",
+            "vengeance"
+          ],
+          "weight": 1,
+          "communityId": "riven.marchward"
         }
       ]
     },
     "sceneState": {
-      "setting": "The Marchward's central square — wide mud-packed junction, early morning pale spring light, cookfire smoke rising straight in still air. Brynjar is leaning against a birch at the square's edge, Freki settled at his left leg.",
+      "setting": "The Marchward's central square — wide mud-packed junction, early morning pale spring light, cookfire smoke rising straight in still air. Brynjar is standing in the square proper, near the well at its center. Freki is at his side.",
       "npcsPresent": [
         {
-          "name": "Scarred Redline warrior",
-          "state": "Sitting still on the bench near the Wardhouse, bowl set aside, has glanced at Brynjar and looked back to the square — pr"
+          "name": "Redline warrior",
+          "state": "Sitting on the bench near the Wardhouse, has noted Brynjar's movement into the square with a fraction-turn of his head —"
         }
       ],
       "objects": [
         "Stone well at the square's center",
-        "Public notice board — three bills tacked",
+        "Public notice board — three bills tacked, edges curling",
         "Wardhouse — low stone building, lamplight under the door",
-        "Tavern across the square — argument audible, a woman's voice cutting through, a ",
+        "Tavern across the square — argument audible, a woman's voice cutting through",
         "Waygate anchor-stone at the far corner, unmarked and alone"
       ],
       "threads": [
+        "Blood oath sworn — Kjotve Olafsson, alive and holding Javiksholm, is now the shape of everything",
         "The Redline warrior watching the square — what does he want here?",
         "The notice board's three bills, unread",
-        "An argument in the tavern with a name in it",
-        "Someone working in the Wardhouse before full morning",
-        "Kjotve Olafsson — alive, holds Javiksholm, owes Andyr a grave"
+        "An argument in the tavern with a woman's voice pressing hard",
+        "Someone working in the Wardhouse before full morning"
       ]
     }
   },
@@ -338,7 +373,7 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-20T02:28:15.360Z",
+    "lastSharedReadAt": "2026-07-20T15:51:32.954Z",
     "lastTickWorldDay": 20,
     "lastCanonWorldDay": 20
   },
@@ -418,17 +453,34 @@
         "aliases": [],
         "createdDay": 1,
         "updatedDay": 1
+      },
+      "brynjar-andyrsson-thread": {
+        "id": "brynjar-andyrsson-thread",
+        "label": "The Oath on Kjotve",
+        "kind": "event",
+        "facts": [
+          "[d1] Brynjar swore aloud, to his father and the gods, to kill Kjotve Olafsson — but to do it with more honor than Kjotve ever showed. The oath is spoken and cannot be unsaid."
+        ],
+        "links": [
+          "kjotve-olafsson",
+          "javiksholm"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "leadership": 13.65,
-    "cerebral": 1
+    "leadership": 13.30875,
+    "cerebral": 0.975,
+    "strategic": 1,
+    "ruthless": 1
   },
   "aptitudes": [
     "banner"
   ],
-  "actionCount": 1,
+  "actionCount": 2,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -531,8 +583,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784515295662,
-  "rev": 16,
+  "updatedAt": 1784562934805,
+  "rev": 19,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -542,7 +594,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 4
+    "riven_marches": 5
   },
   "practice": {
     "schemaVersion": 1,
@@ -562,8 +614,17 @@
     ]
   },
   "customAbilities": {},
-  "companionBonds": {},
-  "establishedFacts": [],
+  "companionBonds": {
+    "bristle": 0.5
+  },
+  "establishedFacts": [
+    {
+      "id": "kjotve-olafsson",
+      "text": "Brynjar has sworn a blood oath to kill Kjotve Olafsson with honor — spoken aloud in the Marchward square on World-day 20.",
+      "day": 1,
+      "subjectId": "kjotve-olafsson"
+    }
+  ],
   "teachers": {},
   "foreclosed": [
     "stillhold",
@@ -580,6 +641,14 @@
       "startDay": 20,
       "endDay": 20,
       "beats": 3
+    },
+    {
+      "id": "sess-2",
+      "startedAt": "2026-07-20T15:55:34.797Z",
+      "lastAt": "2026-07-20T15:55:34.797Z",
+      "startDay": 20,
+      "endDay": 20,
+      "beats": 1
     }
   ],
   "_pendingArrival": null

@@ -375,7 +375,12 @@ export function salvageNarration(raw) {
 // name and gates it against the contract so the two can never drift. Exported so the dev "see the
 // machine" panel (SNG-186 §2f) shows a firing count for EVERY documented op — including the ones at
 // zero, which is the whole point: three ops read zero for sixteen levels (SNG-183 §3c).
-export const SALVAGEABLE_OPS = ["questUpdates", "stageOps", "standingOps", "npcUpdates", "placeUpdates", "codexUpdates", "deeds", "ledgerEvents", "encounterOps", "characterDeltas", "scene", "relationshipDeltas", "timeOps", "moveTo", "stateOps", "itemUpdates", "gambitOps", "markDefiningMoment", "markTeacher", "offerPromotion", "offerAcquisition", "offerIntent", "generateRequest", "imagePrompt", "unlockSubstrate", "unlockPrecursor", "factUpdates", "discovery", "newEncounter", "newAbility", "delegateOps", "arcOps", "adoptSchool", "offer"];
+// SNG-195 G4: SALVAGEABLE_OPS advertises what the MODEL is told to emit (the contract) so a truncated
+// reply can be recovered. The legacy `relationshipDeltas` top-level op is NOT in the contract — the model
+// is told to move a bond via `npcUpdates.relationshipDelta` — so it was removed from here: an op the model
+// never emits cannot be salvaged, and listing it was the one true salvage↔contract asymmetry the SNG-195
+// audit found. Its inbound dispatch survives as pure legacy tolerance (app.js), so an old reply still works.
+export const SALVAGEABLE_OPS = ["questUpdates", "stageOps", "standingOps", "npcUpdates", "placeUpdates", "codexUpdates", "deeds", "ledgerEvents", "encounterOps", "characterDeltas", "scene", "timeOps", "moveTo", "stateOps", "itemUpdates", "gambitOps", "markDefiningMoment", "markTeacher", "offerPromotion", "offerAcquisition", "offerIntent", "generateRequest", "imagePrompt", "unlockSubstrate", "unlockPrecursor", "factUpdates", "discovery", "newEncounter", "newAbility", "delegateOps", "arcOps", "adoptSchool", "offer"];
 
 export function salvageOps(raw) {
   const out = {};

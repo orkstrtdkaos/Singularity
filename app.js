@@ -62,7 +62,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.175";
+const APP_VERSION = "1.8.176";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3177,8 +3177,9 @@ function applyTurn(turn, resolution, playerWords = null) {
   // people & places remember (typed ops, clamped)
   const memCtx = { locationId: location.id, day: readClock(character.clock).day, entities: codexEntities(), rules: CONTENT.rules, affiliate: affiliateNpc };
   applyNpcUpdates(character, turn.npcUpdates || [], memCtx);
-  // legacy relationshipDeltas: tolerated but may only UPDATE existing people —
-  // this path once minted duplicate id-named registry entries
+  // legacy relationshipDeltas: tolerated but may only UPDATE existing people — this path once minted
+  // duplicate id-named registry entries. SNG-195 G4: intentionally NOT in the contract or SALVAGEABLE_OPS
+  // (the model is told to use npcUpdates.relationshipDelta); this inbound tolerance stays for old replies.
   applyNpcUpdates(character, (turn.relationshipDeltas || []).map(r => ({
     op: "update", npcId: r.npcId, relationshipDelta: clampInt(r.delta || 0, -2, 2), note: r.note
   })), memCtx);
@@ -3232,6 +3233,9 @@ function applyTurn(turn, resolution, playerWords = null) {
   // ability's OWN powerSystem (validated) — a wrong-system id can't unlock anything (mirrors the seed guard).
   // wild_current opens its list here; its learn-gate reader lands with SNG-140 (until then the unlock is inert, by design).
   const SUBSTRATE_ACCESS = { precursor: "precursorAccess", living_current: "livingCurrentAccess", wild_current: "wildCurrentAccess" };
+  // SNG-195 G4: unlockLivingCurrent/unlockWildCurrent are LEGACY aliases — the contract tells the model to
+  // emit `unlockSubstrate` for living/wild current too (SUBSTRATE_ACCESS routes by the ability's powerSystem).
+  // They stay here as inbound tolerance for old replies; they are deliberately not in the contract/salvage.
   for (const u of [turn.unlockSubstrate, turn.unlockPrecursor, turn.unlockLivingCurrent, turn.unlockWildCurrent]) {
     if (!u?.abilityId || !u?.via) continue;
     const ab = fullCatalog()[u.abilityId];
@@ -3364,7 +3368,7 @@ function applyTurn(turn, resolution, playerWords = null) {
   // journey montage, a long vigil — or a quick exchange), the GM declares it via
   // timeOps.hoursPassed and the engine advances the clock to match, INSTEAD of the fixed
   // beat default. Narration LEADS the clock, never trails. Fallback = old beat behavior.
-  const extraHours = Math.max(0, Math.min(12, Number(turn.timeAdvanceHours) || 0));
+  const extraHours = Math.max(0, Math.min(12, Number(turn.timeAdvanceHours) || 0)); // SNG-195 G4: timeAdvanceHours is a legacy alias of timeOps (contract op) — inbound tolerance only, not advertised
   const beatDefault = (turn.sceneEnded ? ADVANCE.sceneEnd : ADVANCE.beat) + extraHours;
   const declared = turn.timeOps && Number.isFinite(Number(turn.timeOps.hoursPassed));
   const declaredHours = declared ? Number(turn.timeOps.hoursPassed) : null;

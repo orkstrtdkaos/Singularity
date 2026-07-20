@@ -6304,6 +6304,19 @@ await (async () => {
   check("195 G2: teacherOfferDetail is a registered GM context row", /key: "teacherOfferDetail"/.test(regSrcG2));
 }
 
+// --- SNG-195 G4: contract cleanup — the salvage↔contract asymmetry, and the legacy dispatch aliases ---
+{
+  const gm4 = await import("../engine/gm.js");
+  const appSrcG4 = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+  // relationshipDeltas: removed from the salvage vocab (the model is told to use npcUpdates.relationshipDelta,
+  // so it never emits the top-level op — an op that is never emitted cannot be salvaged), yet STILL dispatched.
+  check("195 G4: relationshipDeltas is gone from SALVAGEABLE_OPS (the one salvage↔contract asymmetry, closed)", !gm4.SALVAGEABLE_OPS.includes("relationshipDeltas"));
+  check("195 G4: but the legacy relationshipDeltas dispatch survives as inbound tolerance", /turn\.relationshipDeltas \|\| \[\]/.test(appSrcG4));
+  // the three undocumented dispatch aliases are now explicitly marked legacy at their sites.
+  check("195 G4: the unlock aliases are marked legacy (contract routes living/wild via unlockSubstrate)", /unlockLivingCurrent\/unlockWildCurrent are LEGACY aliases/.test(appSrcG4) && /SUBSTRATE_ACCESS routes by the ability's powerSystem/.test(appSrcG4));
+  check("195 G4: timeAdvanceHours is marked a legacy alias of timeOps", /timeAdvanceHours is a legacy alias of timeOps/.test(appSrcG4));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

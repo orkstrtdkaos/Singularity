@@ -1,5 +1,44 @@
 # PO ALERT
 
+> ## ✅ SNG-197 PART 1 — AEVI AUDIT AT HEAD `539f9404`, verified at origin not taken on report
+>
+> **§1 doctrine — FIXED, confirmed by reading it.** Floor is the parents' union (`:82`), the emergent
+> function is the ceiling (`:81`), `notFor` is drawn around the braid's own reach and not deleted (`:108`),
+> and even a stub names the new thing in its rank-1 grant (`:96`). The def and the tree no longer state
+> opposite doctrines.
+>
+> **§5 Tier-V — FIXED, and diagnosed rather than assumed, which is the part that matters.** CCode found
+> the actual reader — `skilltree.js:12 tierOf(levelReq) = ROMAN[clamp(1,5,levelReq)]` — instead of
+> accepting my guess that it was `minted.tier`. I flagged that one explicitly as *"I did not chase this to
+> ground"* and the right thing was done with it. `tier = maxRank+1`, `levelReq == tier`, badge sourceable.
+> `enriched` flag present (`:111`).
+>
+> ### ⚠️ ONE GAP, and it is the one most likely to fall between part 1 and part 2
+> **The 24-verb validation is currently a COMMENT, not code.** `:78` states *"a hallucinated verb is
+> rejected, never accepted-and-logged"* — but `:81` checks only `typeof === "string"` and
+> `!parentFunctions.includes(...)`. **Nothing checks the vocabulary.** The real check is deferred to the
+> caller, and the caller (`generate.js` "braid" type) **does not exist yet** — verified,
+> `GEN_TYPES = ["npc","location","arc"]`. So the guard SNG-197 §4 asks for presently lives in neither half.
+> Part 2 owns it; naming it now so it is not discovered by a bad verb reaching the wheel. **Test it the way
+> SNG-192 Phase C tested `coreFunctions` — assert against the real vocabulary so a typo fails the build.**
+>
+> ### ❓ ONE QUESTION, not a finding — I could not demonstrate a live binding
+> `levelReq` **no longer consults the parents' own gates.** Old: `max(maxRank*2, ...components.map(levelReqOf))`.
+> New: `= tier`, max 4. A braid of two tier-V parents can carry a lower `levelReq` than either parent.
+> I chased this and **could not show it binds for a braid**: `rankUpAbility` gates on the global
+> `rules.leveling.rankLevelReq` table, *not* `ab.levelReq` (I nearly reported the opposite from a comment in
+> `practice.js` — checked it, and the comment is loose); and braids mint through `mintBraid` into
+> `customAbilities`, not through `learnAbility` where `ab.levelReq` is the bar. So it may be entirely inert.
+> **Raising it as a question because `levelReq` was carrying two jobs — badge source and progression bar —
+> and collapsing it to `tier` solved the display job cleanly. You know these seams better than I do:
+> confirm inert, or restore a floor.**
+>
+> **DISPOSITION: part 1 stays `complete_pending_review`** — the doctrine and the tier are both player-visible
+> on the card Erik already screenshotted, and Erik's browser-leg is the only accepted proof (LLW).
+> **Your four ROUND-2 answers are accepted as-is** — all four were spec'd as your call, all four are the
+> call I would have made, and the fourth (re-present backfilled stubs as the full mint beat rather than a
+> silent upgrade) is better than what the spec asked for. Part 2 builds against them.
+
 > ## 🔴 LIVE PLAY FEEDBACK 2026-07-21 — Erik on the shipped braid. CCode is mid-build; read before continuing.
 >
 > **`po/SPEC_SNG-197_braid_as_a_moment.md`** — SNG-196's foundation is sound and is NOT being asked back.

@@ -1088,6 +1088,23 @@ creation browser-leg across A/B/C — engine tested, UI source-verified, VISUAL 
 gated flow + the known stale-module preview cache). Recommend Erik real-save-test the creation flow end to
 end before further creation work. -->
 
+<!-- status: SNG-196 BRAID ENGINE (foundation) COMPLETE_PENDING_REVIEW (CCode 2026-07-20). v1.8.180. Suite
+green by exit code. Results: po/results/20260720_SNG-196_braid_engine.md. Erik-directed from the diagnostic
+(Silas: 40 co-activations, 0 braids — braids REQUIRED an authored recipe, only 3 existed, none for played
+crafts). Made GENERATIVE. engine/braids.js (pure): mintableBraidsFor (co-activated ≥ BRAID_RIPEN_AT=5, both
+crafts held, not yet braided — NO recipe needed), braidTier (power→tier, deeper parent's rank sets ceiling),
+buildBraidDef (FULL-schema ability — tree/function-union/harsher-harmRung/provenance; optional model-authored
+name+tree override, else a valid playable stub so a mint never halts), mintBraid (→ customAbilities so
+fullCatalog resolves it everywhere + held ability + braids ledger; idempotent). NAME: auto/model-suggested,
+player can override (minted.namedBy). reconcile v14 backfills earned braids on load — VERIFIED on Silas: mints
+order_sense+palework (6x) + deathsense+order_sense (5x = the Double Register). 16 tests, SYSTEM_SPEC module row
++ count 60, ENGINE_MAP 60/60. FINDING: only 3 emergence recipes + 6 prose-only combos exist; the Double
+Register is NOT in the abilities corpus (a spec claimed it was). REMAINING (Erik's full ask): (1) generate.js
+'braid' type so the model authors the rich tree/description; (2) live-play mint flow (offer→accept→name→
+generate→mint, SNG-194 pattern); (3) Pell's ironsense — the NPC-skill path (she's now more than normal;
+ironsense is prose-only, 22 mentions). Recommend Erik load Silas to see the 2 backfilled braids before the
+rich-generation lands on top. -->
+
 
 
 

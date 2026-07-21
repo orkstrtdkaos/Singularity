@@ -179,81 +179,86 @@
         "player": "Ask Cy — quietly, before she arrives — whether it has seen this pattern before in the old service-ways",
         "summary": "Cy names the threshold-mark — a terminus-seal, pre-Transition, one of four beneath the valley, three intact — and Tessvel arrives as the second bell ends.",
         "narration": "You keep your voice low, the way you would in a library or a church. You ask Cy whether it has seen this pattern before — the circular impression, the boundary pressed into the substrate like an old scar.\n\nCy's lens irises once, slowly. It does not turn to look at you. It says, after a moment, in its careful antique phrasing, \"The pattern is consistent with a terminus-seal. Origin: pre-Transition. Function: to hold a boundary against propagation. This maintenance unit has catalogued four such seals in the old service-ways beneath the valley.\" A pause. \"Three are intact. One is not.\"\n\nIt does not say which one. It does not say where. It picks up its lamp and holds it at the angle it always holds it, and you are not sure whether the omission is intentional or simply the way Cy answers questions — everything accurate, nothing complete.\n\nOutside, the second bell finishes its count. In the passage beyond the open gate, you hear the measured step of someone who walks like she is always on time."
+      },
+      {
+        "player": "Say nothing yet — let her come to the table and start her own morning routine before you introduce yourself or your questions.",
+        "summary": "Tessvel arrives at the Annex on time, files her first log entries without looking up, and notices Loki with careful, cataloguing attention.",
+        "narration": "Tessvel comes through the gate with the precise, unhurried step of someone who has timed this walk many times. She sets a leather satchel down on the table, buckles it open, and draws out a bound log — green cover, the spine inked in her own hand with a date range. She does not look up. She sets the log flat, opens it to a marked page, and draws a pen from inside her coat pocket. Then she fills in two lines without consulting anything, because she already knows what goes there.\n\nOnly then does she see you.\n\nShe does not startle. Her pen-hand stills. She looks at you the way she looked at Cy on the plaza — a careful, cataloguing attention, taking in the fact of you before deciding what category to put it in. Her gaze moves to Cy, then back. She says, \"You are early,\" and it is not a complaint. It is a data point she is filing.\n\nShe glances at the open gate. The attention-deflection is still there, thinning at the edges — she does not appear to notice it, but she does not close the gate behind her either, leaving the passage open the way wrights do in a room where they expect to be accountable for what they are doing.\n\nShe pulls the single chair out for herself, then appears to remember she is not alone, and leaves it where it is — a small, deliberate correction. \"There is only one chair,\" she says to you, without apology. \"I can bring a second from the passage if you require it.\""
       }
     ],
     "lastTurn": {
-      "narration": "You keep your voice low, the way you would in a library or a church. You ask Cy whether it has seen this pattern before — the circular impression, the boundary pressed into the substrate like an old scar.\n\nCy's lens irises once, slowly. It does not turn to look at you. It says, after a moment, in its careful antique phrasing, \"The pattern is consistent with a terminus-seal. Origin: pre-Transition. Function: to hold a boundary against propagation. This maintenance unit has catalogued four such seals in the old service-ways beneath the valley.\" A pause. \"Three are intact. One is not.\"\n\nIt does not say which one. It does not say where. It picks up its lamp and holds it at the angle it always holds it, and you are not sure whether the omission is intentional or simply the way Cy answers questions — everything accurate, nothing complete.\n\nOutside, the second bell finishes its count. In the passage beyond the open gate, you hear the measured step of someone who walks like she is always on time.",
-      "sceneSummary": "Cy names the threshold-mark — a terminus-seal, pre-Transition, one of four beneath the valley, three intact — and Tessvel arrives as the second bell ends.",
+      "narration": "Tessvel comes through the gate with the precise, unhurried step of someone who has timed this walk many times. She sets a leather satchel down on the table, buckles it open, and draws out a bound log — green cover, the spine inked in her own hand with a date range. She does not look up. She sets the log flat, opens it to a marked page, and draws a pen from inside her coat pocket. Then she fills in two lines without consulting anything, because she already knows what goes there.\n\nOnly then does she see you.\n\nShe does not startle. Her pen-hand stills. She looks at you the way she looked at Cy on the plaza — a careful, cataloguing attention, taking in the fact of you before deciding what category to put it in. Her gaze moves to Cy, then back. She says, \"You are early,\" and it is not a complaint. It is a data point she is filing.\n\nShe glances at the open gate. The attention-deflection is still there, thinning at the edges — she does not appear to notice it, but she does not close the gate behind her either, leaving the passage open the way wrights do in a room where they expect to be accountable for what they are doing.\n\nShe pulls the single chair out for herself, then appears to remember she is not alone, and leaves it where it is — a small, deliberate correction. \"There is only one chair,\" she says to you, without apology. \"I can bring a second from the passage if you require it.\"",
+      "sceneSummary": "Tessvel arrives at the Annex on time, files her first log entries without looking up, and notices Loki with careful, cataloguing attention.",
       "choices": [
         {
-          "label": "Let Tessvel settle in before raising the seal or the log divergence — watch how she handles her own space first.",
-          "attribute": "social",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask Cy — in front of Tessvel — which of the four seals is not intact. Let her hear the answer.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 15,
-          "intentTags": [
-            "gamble",
-            "study"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Open with the variance log — tell Tessvel you already know about the eleven-day divergence and ask what she has found that the automats haven't.",
+          "label": "Tell her no chair needed — you prefer to stand — and introduce yourself properly. Let her set the pace.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "negotiate",
+            "calm"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Accept her offer and ask her to fetch a second chair — use the moment she steps into the passage to glance at the open log on the table.",
+          "attribute": "mental",
+          "subAttribute": "wits",
+          "difficulty": 15,
+          "intentTags": [
+            "scout"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Ask her directly about the variance log — you know it exists, you know it diverges. Show her you came prepared.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 0,
+          "intentTags": [
             "study"
           ],
           "trivial": true
         },
         {
-          "label": "Say nothing yet — let her come to the table and start her own morning routine before you introduce yourself or your questions.",
+          "label": "Let the room breathe a moment longer — then show her something about the terminus-seal at the threshold, and watch how she reacts to the fact that you can read it.",
           "attribute": "mental",
-          "subAttribute": "wits",
-          "difficulty": 0,
+          "subAttribute": "insight",
+          "difficulty": 15,
           "intentTags": [
-            "careful",
+            "study",
             "scout"
           ],
-          "trivial": true
+          "trivial": false
         }
       ],
       "scene": {
-        "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, narrow room, morning light now past its sharpest angle and softening. The second bell has just finished. The gate is open. Footsteps are audible in the passage outside.",
+        "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, narrow room, morning light past its sharpest angle and softening down the center of the long table. Second bell has ended. Gate is open to the passage.",
         "npcsPresent": [
           {
-            "name": "Cy",
-            "state": "Standing at the near end of the table, lamp held at its habitual angle, lens stilled — not tracking anything at the moment."
+            "name": "Tessvel Cairn",
+            "state": "Standing beside the table, pen in hand, green-spine log open to a marked page — she has just noticed Loki; pen-hand stilled, cataloguing attention."
           },
           {
-            "name": "Tessvel Cairn",
-            "state": "Audible in the passage outside — measured steps, on time."
+            "name": "Cy",
+            "state": "Standing at the near end of the table, lamp at its habitual angle, lens stilled."
           }
         ],
         "objects": [
-          "Long work table — morning light spread and softening down its center",
+          "Long work table — morning light softening down its center",
+          "Tessvel's green-spine log — open to a marked page, two fresh lines just filled",
+          "Tessvel's leather satchel — open on the table",
+          "Tessvel's pen — in her right hand",
           "Shelves of bound logs — dates inked on spines, floor to ceiling",
           "Pressure-gauge at the door frame — needle in the green",
-          "One chair — at the near end of the table",
-          "Open gate doorway — partial attention-deflection still in place, thinning"
+          "One chair — at the near end of the table, pulled out but left where it stands",
+          "Open gate doorway — attention-deflection still in place, thinning at the edges"
         ],
         "threads": [
-          "Terminus-seal at the threshold — pre-Transition, one of four beneath the valley; Cy says three are intact and one is not, but did not say which",
-          "Attention-deflection is partial and thinning — will fail under deliberate attention or as foot-traffic thickens",
-          "Tessvel is arriving now — second bell has ended, her step is in the passage",
-          "Tessvel's hand-log has diverged from automated markers for eleven days — her records are on these shelves",
+          "Tessvel has noticed Loki but not yet been introduced or told why he is here",
+          "The attention-deflection is thinning — will fail under deliberate attention or as foot-traffic thickens",
+          "Terminus-seal at the threshold — pre-Transition boundary; Cy said three of four are intact, one is not",
+          "Tessvel's hand-log has diverged from automated markers for eleven days — the open log is on the table",
           "The ring-form residue at the intake matches regulated nanite deposition — no senior wright has acted on it"
         ]
       },
@@ -262,54 +267,45 @@
           "op": "update",
           "npcId": "tessvel-cairn",
           "name": "Tessvel Cairn",
-          "note": "Her footsteps are audible in the passage — she is arriving at the second bell exactly, as expected.",
-          "status": "active",
-          "statusNote": "Arriving at the Pressure-Routing Annex — second bell has just ended, she is in the passage outside."
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "terminus-seals-beneath-valley",
-          "label": "Terminus-Seals Beneath the Valley",
-          "kind": "mystery",
-          "fact": "Cy has catalogued four terminus-seals in the old service-ways beneath the valley — pre-Transition boundary-marks designed to hold a limit against propagation. Three are intact. One is not. Cy did not say which.",
-          "links": [
-            "the-water-crisis",
-            "ring-form-residue-at-eastern-intake",
-            "intake-plaza",
-            "tessvel-cairn"
-          ]
+          "note": "Arrived on time, filed first log entries from memory, noticed Loki with careful cataloguing attention — offered a second chair without apology.",
+          "learned": [
+            "Arrives at the Annex at the second bell exactly; fills log entries from memory before looking up"
+          ],
+          "statusNote": "At her workstation in the Pressure-Routing Annex — standing beside the table, pen in hand, log open."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange while waiting — the second bell has now finished sounding."
+        "why": "Tessvel arrived at second bell — a short interval from Loki's earlier wait"
       }
     },
     "sceneState": {
-      "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, narrow room, morning light now past its sharpest angle and softening. The second bell has just finished. The gate is open. Footsteps are audible in the passage outside.",
+      "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, narrow room, morning light past its sharpest angle and softening down the center of the long table. Second bell has ended. Gate is open to the passage.",
       "npcsPresent": [
         {
-          "name": "Cy",
-          "state": "Standing at the near end of the table, lamp held at its habitual angle, lens stilled — not tracking anything at the mome"
+          "name": "Tessvel Cairn",
+          "state": "Standing beside the table, pen in hand, green-spine log open to a marked page — she has just noticed Loki; pen-hand stil"
         },
         {
-          "name": "Tessvel Cairn",
-          "state": "Audible in the passage outside — measured steps, on time."
+          "name": "Cy",
+          "state": "Standing at the near end of the table, lamp at its habitual angle, lens stilled."
         }
       ],
       "objects": [
-        "Long work table — morning light spread and softening down its center",
+        "Long work table — morning light softening down its center",
+        "Tessvel's green-spine log — open to a marked page, two fresh lines just filled",
+        "Tessvel's leather satchel — open on the table",
+        "Tessvel's pen — in her right hand",
         "Shelves of bound logs — dates inked on spines, floor to ceiling",
         "Pressure-gauge at the door frame — needle in the green",
-        "One chair — at the near end of the table",
-        "Open gate doorway — partial attention-deflection still in place, thinning"
+        "One chair — at the near end of the table, pulled out but left where it stands",
+        "Open gate doorway — attention-deflection still in place, thinning at the edges"
       ],
       "threads": [
-        "Terminus-seal at the threshold — pre-Transition, one of four beneath the valley; Cy says three are intact and one is not, but did not say which",
-        "Attention-deflection is partial and thinning — will fail under deliberate attention or as foot-traffic thickens",
-        "Tessvel is arriving now — second bell has ended, her step is in the passage",
-        "Tessvel's hand-log has diverged from automated markers for eleven days — her records are on these shelves",
+        "Tessvel has noticed Loki but not yet been introduced or told why he is here",
+        "The attention-deflection is thinning — will fail under deliberate attention or as foot-traffic thickens",
+        "Terminus-seal at the threshold — pre-Transition boundary; Cy said three of four are intact, one is not",
+        "Tessvel's hand-log has diverged from automated markers for eleven days — the open log is on the table",
         "The ring-form residue at the intake matches regulated nanite deposition — no senior wright has acted on it"
       ]
     }
@@ -339,7 +335,6 @@
       },
       "relationship": 4,
       "history": [
-        "[d1] Turned to face Loki properly when he treated her work as genuinely important. Revealed that her hand-log has diverged from the automated tally-markers for eleven days.",
         "[d1] Loki offered to sit with the log and work through what the divergence means — and added a wink. She named her posting end time: the second bell. Not warm, but considering.",
         "[d1] Your bond becomes romantic.",
         "[d1] Your bond deepens — courting.",
@@ -348,17 +343,18 @@
         "[d1] Loki kissed her hand and confirmed the meeting at the Annex; she agreed and walked toward the main works without hurrying — and looked at Cy longer than she looked at most things.",
         "[d1] Walked away from the plaza with her characteristic precision — paused at the edge, looked back once to confirm Loki was watching, then departed toward the main works.",
         "[d1] Not yet arrived — meeting window still open between second and third bell.",
-        "[d1] Her footsteps are audible in the passage — she is arriving at the second bell exactly, as expected."
+        "[d1] Her footsteps are audible in the passage — she is arriving at the second bell exactly, as expected.",
+        "[d1] Arrived on time, filed first log entries from memory, noticed Loki with careful cataloguing attention — offered a second chair without apology."
       ],
       "knownFacts": [
-        "Writes and records for a living, or does so as a posting duty",
         "Fixes things rather than replacing them — coat has three different-fabric patches, each applied neatly",
         "Sensitive about junior status — straightened when older wrights passed",
         "Her hand-log records what is actually present in the water; the automated markers record only what they are calibrated to expect. The two have not agreed for eleven days.",
         "Her posting ends at the second bell",
         "Her workstation is in the Pressure-Routing Annex, east side of the main works, third gate left of the big wheel",
         "She describes the space as mostly shelving and a long table, but notes the light is good in the mornings",
-        "Cy caught her attention — she studied it with real focus before she answered"
+        "Cy caught her attention — she studied it with real focus before she answered",
+        "Arrives at the Annex at the second bell exactly; fills log entries from memory before looking up"
       ],
       "skillsObserved": [
         "Precise handwriting, official posting procedure",
@@ -368,7 +364,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Arriving at the Pressure-Routing Annex — second bell has just ended, she is in the passage outside.",
+      "statusNote": "At her workstation in the Pressure-Routing Annex — standing beside the table, pen in hand, log open.",
       "domains": {
         "primary": "wright"
       },
@@ -459,7 +455,7 @@
     "lastSharedReadAt": "2026-07-21T21:10:36.252Z",
     "lastTickWorldDay": 21,
     "lastCanonWorldDay": 21,
-    "turnsSinceOffer": 16,
+    "turnsSinceOffer": 17,
     "recentOffers": [
       {
         "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
@@ -630,18 +626,18 @@
     }
   },
   "tendencies": {
-    "devotion": 9.336882357947554,
-    "cerebral": 6.231470178239705,
-    "social": 7.628584750172369,
-    "strategic": 4.191781889257636,
-    "cautious": 1.7129983458266511,
-    "amorous": 5.764323519284622,
-    "generous": 0.7763296208564376
+    "devotion": 9.103460298998865,
+    "cerebral": 6.075683423783712,
+    "social": 7.43787013141806,
+    "strategic": 5.0869873420261955,
+    "cautious": 2.6701733871809847,
+    "amorous": 5.620215431302506,
+    "generous": 0.7569213803350267
   },
   "aptitudes": [
     "faithful"
   ],
-  "actionCount": 16,
+  "actionCount": 17,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -760,8 +756,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784671327803,
-  "rev": 35,
+  "updatedAt": 1784671425977,
+  "rev": 36,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -910,7 +906,7 @@
           "entityId": "tessvel-cairn",
           "type": "npc",
           "birthWeight": 2,
-          "engagementScore": 21,
+          "engagementScore": 23,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -970,6 +966,10 @@
             {
               "kind": "interact",
               "day": 1
+            },
+            {
+              "kind": "interact",
+              "day": 1
             }
           ],
           "createdDay": 1,
@@ -998,7 +998,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_gearlands": 17
+    "the_gearlands": 18
   },
   "opLossPending": false,
   "sessions": [
@@ -1013,10 +1013,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-21T17:40:12.510Z",
-      "lastAt": "2026-07-21T22:02:07.802Z",
+      "lastAt": "2026-07-21T22:03:45.976Z",
       "startDay": 21,
       "endDay": 21,
-      "beats": 16
+      "beats": 17
     }
   ],
   "establishedFacts": [],
@@ -1029,20 +1029,20 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 16,
-    "choices": 16,
+    "sceneSummary": 17,
+    "choices": 17,
     "characterDeltas": 4,
-    "scene": 16,
+    "scene": 17,
     "placeUpdates": 3,
     "codexUpdates": 11,
-    "timeOps": 16,
+    "timeOps": 17,
     "offer": 1,
     "generateRequest": 2,
     "sceneEnded": 2,
-    "npcUpdates": 11,
+    "npcUpdates": 12,
     "moveTo": 1
   },
-  "_opTurns": 16,
+  "_opTurns": 17,
   "customAbilities": {},
   "companionBonds": {},
   "practice": {

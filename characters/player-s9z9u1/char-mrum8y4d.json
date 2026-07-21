@@ -118,68 +118,77 @@
         "player": "Try to get a sense of what the young woman's tastes and wants are before you approach - make modifications to your affect and shift your hairstyle to get the best possible first impression... then introduce yourself while studying her notice very intently.",
         "summary": "Loki reads the young wright before approaching, adjusts his manner, and introduces himself at the notices board — the dense lattice leaves a slight roughness in the working.",
         "narration": "You hang back for a moment near the quay railing and watch her work. She moves with the particular efficiency of someone who has been doing a routine task long enough that her attention has gone elsewhere — the notice goes up straight, the pin driven home with a single practiced push, and then she rocks back and reads it critically, as though checking someone else's work. Rust-orange coat, rolled sleeves, hands that are ink-stained at the right fingertip on the right hand — she writes things down for a living, or records them. The coat has three different patches on the left sleeve, each a different fabric, each applied neatly. A person who fixes what breaks rather than replacing it.\n\nThere is something else, too. The way she squared her shoulders when the two older wrights passed — a very small straightening, gone before they had turned the corner. She is junior here, or she feels herself to be, and she does not want it visible. That is useful to know.\n\nYou run a hand through your hair — a small thing, unremarkable to anyone watching — and let the Misdirect settle into the shape of you, shifting your affect from the measuring quiet you had at the sampling fixture toward something easier and more interested. Not performance. A different true thing. The lattice is dense this close to the intake works, and for a moment it presses back against the adjustment, crowding the signal with its own constant noise. You feel the seam of it — a slight roughness in the shift, like a coat that doesn't quite lie flat. You let it ride rather than force it.\n\nThen you step up beside her and look at the notice, genuinely. The ink is still dark. It is a maintenance posting, three columns of careful handwriting, a seal from the district authority at the bottom. 'Loki,' you say, without looking away from the page. 'New to the plaza. That's your hand on the posting?'"
+      },
+      {
+        "player": "Ask her directly what she records here — lean into the junior-wright dynamic and treat her role as genuinely important.",
+        "summary": "Loki reads the hand-kept variance log at the notices board and learns it has diverged from the automated markers for eleven days.",
+        "narration": "You lean in and read the notice she has just pinned — three columns of careful handwriting, every entry dated and cross-referenced. The title at the top reads: EASTERN INTAKE — PARTICULATE VARIANCE LOG, SPRING INTERVAL. Below it, a column of timestamps, a column of readings, and a narrow third column of notes in a smaller hand.\n\nYou say, with genuine interest, that this is thorough work. You say you have not seen a variance log kept by hand before — most places you have been through rely on the automated tally-markers. You ask her what the hand-log catches that the markers miss.\n\nShe turns from the board and looks at you properly for the first time. Her expression is cautious, the way a person is cautious when they expect to be dismissed and are not yet sure they won't be. She says the tally-markers record what they are calibrated to expect. She says her log records what is actually there. She adds, after a short pause, that those two things have not agreed for eleven days.\n\nCy, at your shoulder, irises its lens once. It says nothing. But the lamp it carries tilts a fraction toward the notice, the way it tilts toward things it finds significant."
       }
     ],
     "lastTurn": {
-      "narration": "You hang back for a moment near the quay railing and watch her work. She moves with the particular efficiency of someone who has been doing a routine task long enough that her attention has gone elsewhere — the notice goes up straight, the pin driven home with a single practiced push, and then she rocks back and reads it critically, as though checking someone else's work. Rust-orange coat, rolled sleeves, hands that are ink-stained at the right fingertip on the right hand — she writes things down for a living, or records them. The coat has three different patches on the left sleeve, each a different fabric, each applied neatly. A person who fixes what breaks rather than replacing it.\n\nThere is something else, too. The way she squared her shoulders when the two older wrights passed — a very small straightening, gone before they had turned the corner. She is junior here, or she feels herself to be, and she does not want it visible. That is useful to know.\n\nYou run a hand through your hair — a small thing, unremarkable to anyone watching — and let the Misdirect settle into the shape of you, shifting your affect from the measuring quiet you had at the sampling fixture toward something easier and more interested. Not performance. A different true thing. The lattice is dense this close to the intake works, and for a moment it presses back against the adjustment, crowding the signal with its own constant noise. You feel the seam of it — a slight roughness in the shift, like a coat that doesn't quite lie flat. You let it ride rather than force it.\n\nThen you step up beside her and look at the notice, genuinely. The ink is still dark. It is a maintenance posting, three columns of careful handwriting, a seal from the district authority at the bottom. 'Loki,' you say, without looking away from the page. 'New to the plaza. That's your hand on the posting?'",
-      "sceneSummary": "Loki reads the young wright before approaching, adjusts his manner, and introduces himself at the notices board — the dense lattice leaves a slight roughness in the working.",
+      "narration": "You lean in and read the notice she has just pinned — three columns of careful handwriting, every entry dated and cross-referenced. The title at the top reads: EASTERN INTAKE — PARTICULATE VARIANCE LOG, SPRING INTERVAL. Below it, a column of timestamps, a column of readings, and a narrow third column of notes in a smaller hand.\n\nYou say, with genuine interest, that this is thorough work. You say you have not seen a variance log kept by hand before — most places you have been through rely on the automated tally-markers. You ask her what the hand-log catches that the markers miss.\n\nShe turns from the board and looks at you properly for the first time. Her expression is cautious, the way a person is cautious when they expect to be dismissed and are not yet sure they won't be. She says the tally-markers record what they are calibrated to expect. She says her log records what is actually there. She adds, after a short pause, that those two things have not agreed for eleven days.\n\nCy, at your shoulder, irises its lens once. It says nothing. But the lamp it carries tilts a fraction toward the notice, the way it tilts toward things it finds significant.",
+      "sceneSummary": "Loki reads the hand-kept variance log at the notices board and learns it has diverged from the automated markers for eleven days.",
       "choices": [
         {
-          "label": "Keep the conversation easy — ask what the posting says and let her explain it.",
+          "label": "Ask her what changed eleven days ago — and whether anyone above her in the intake hierarchy has seen this divergence.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
+          "trivial": true,
           "intentTags": [
-            "persuade"
+            "negotiate"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null
         },
         {
-          "label": "Compliment the handwriting specifically — you noticed she checked her own work, so she cares about it.",
+          "label": "Ask to read the full log — every entry, not just today's posting.",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
+          "trivial": true,
           "intentTags": [
-            "flirt"
+            "study"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null
         },
         {
-          "label": "Ask her directly what she records here — lean into the junior-wright dynamic and treat her role as genuinely important.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "persuade"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Glance back toward the sampling fixture and mention the fourth vial — see if she already knows about the reading.",
+          "label": "Tell her what you saw at the sampling fixture — the ring-form residue — and watch her face when you say it.",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 15,
+          "trivial": false,
           "intentTags": [
             "study",
-            "careful"
+            "negotiate"
           ],
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null
+        },
+        {
+          "label": "Use See the Made Thing on the notice itself — read how it was constructed and what it is actually recording versus what it appears to record.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 0,
+          "trivial": false,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "see_the_made_thing",
+          "energyCost": 1
         }
       ],
       "scene": {
-        "setting": "Intake Plaza, Pressureholt — outdoor, cobbled, open morning light. The Echo River runs visibly gray-green under the Eastern Intake. Early spring chill. Loki and Cy are now at the notices board, standing beside the young woman in the rust-orange coat.",
+        "setting": "Intake Plaza, Pressureholt — outdoor, cobbled, open morning light. The Echo River runs visibly gray-green under the Eastern Intake. Early spring chill. Loki and Cy are at the notices board, standing beside the young woman in the rust-orange coat.",
         "npcsPresent": [
+          {
+            "name": "Tessvel Cairn",
+            "state": "Turned to face Loki properly, cautious but no longer entirely dismissive — waiting for his next question."
+          },
           {
             "name": "Vessa Torquen",
             "state": "Back at the sampling fixture, studying the fourth vial, back to Loki."
-          },
-          {
-            "name": "Two older wrights",
-            "state": "Moving away from the notices board area, speaking quietly."
-          },
-          {
-            "name": "Young woman in rust-orange coat",
-            "state": "Standing at the lower rail of the notices board, having just pinned her posting — now reading it critically."
           },
           {
             "name": "Gray-haired woman in work apron",
@@ -188,38 +197,34 @@
         ],
         "objects": [
           "Sampling fixture on the quay — four graduated vials, one outside variance",
-          "Fresh notice on the lower rail — three columns of careful handwriting, maintenance authority seal, ink still dark",
-          "Notices board dense with maintenance schedules and duty rosters"
+          "Fresh notice on the lower rail — Eastern Intake Particulate Variance Log, Spring Interval — three columns: timestamps, readings, hand-noted observations",
+          "Notices board dense with maintenance schedules and duty rosters",
+          "Cy's lamp, angled slightly toward the notice"
         ],
         "threads": [
-          "The young wright has not yet responded to Loki's introduction",
-          "The fresh notice — what does it record or announce?",
-          "The gray-haired woman staring at the river — worry not yet explained",
-          "Vessa is not fooled and still wants a straight answer about what Cy is",
-          "The ring-form residue — consistent with regulated nanite deposition"
+          "Tessvel's log has diverged from the automated markers for eleven days — she has not said whether anyone senior knows",
+          "The ring-form residue at the sampling fixture matches a regulated nanite deposition pattern",
+          "The gray-haired woman at the water's edge — her worry unexplained",
+          "Vessa is not fooled and still wants a straight answer about what Cy is"
         ]
       },
       "npcUpdates": [
         {
-          "op": "meet",
+          "op": "update",
           "npcId": "tessvel-cairn",
           "name": "Tessvel Cairn",
           "role": "Junior wright on posting-duty at the Eastern Intake notice board",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "description": "Young, rust-orange coat with three mismatched patches on the left sleeve, ink-stained at the right fingertip. Efficient, self-critical, sensitive about her junior rank.",
-          "note": "Loki observed her before approaching — the straightening posture when seniors passed, the careful handwriting, the patches. He introduced himself while reading her fresh posting.",
+          "note": "Turned to face Loki properly when he treated her work as genuinely important. Revealed that her hand-log has diverged from the automated tally-markers for eleven days.",
           "learned": [
-            "Writes and records for a living, or does so as a posting duty",
-            "Fixes things rather than replacing them — coat has three different-fabric patches, each applied neatly",
-            "Sensitive about junior status — straightened when older wrights passed"
+            "Her hand-log records what is actually present in the water; the automated markers record only what they are calibrated to expect. The two have not agreed for eleven days."
           ],
           "skillsObserved": [
-            "Precise handwriting, official posting procedure"
+            "Keeps a detailed hand-written variance log alongside automated systems",
+            "Notices and records divergence independently"
           ],
-          "relationshipDelta": 0,
+          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "At the notices board, Intake Plaza — just finished pinning a fresh maintenance posting"
+          "statusNote": "At the notices board, now facing Loki — cautious but engaged after being treated as competent."
         }
       ],
       "codexUpdates": [
@@ -228,32 +233,41 @@
           "label": "Tessvel Cairn",
           "kind": "person",
           "entityId": "tessvel-cairn",
-          "fact": "Junior wright on posting-duty at the Eastern Intake. Precise, self-critical, patches her coat rather than replacing it. Sensitive about her rank relative to the senior wrights here.",
+          "fact": "Her hand-kept variance log at the Eastern Intake has diverged from the automated tally-markers for eleven days — she records what is actually there; the markers record what they are calibrated to expect.",
           "links": [
             "intake-plaza",
-            "the-water-crisis"
+            "the-water-crisis",
+            "ring-form-residue-at-eastern-intake"
+          ]
+        },
+        {
+          "topic": "the-water-crisis",
+          "label": "The Water Crisis",
+          "kind": "event",
+          "entityId": null,
+          "fact": "The hand-log and the automated markers at the Eastern Intake have disagreed for eleven days — the divergence predates the current gray-green discoloration or runs alongside it, and no senior wright has visibly acted on it yet.",
+          "links": [
+            "intake-plaza",
+            "tessvel-cairn",
+            "ring-form-residue-at-eastern-intake"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief observation and approach — a few minutes at the notices board"
+        "why": "A brief conversation at the notices board."
       }
     },
     "sceneState": {
-      "setting": "Intake Plaza, Pressureholt — outdoor, cobbled, open morning light. The Echo River runs visibly gray-green under the Eastern Intake. Early spring chill. Loki and Cy are now at the notices board, standing beside the young woman in the rust-orange coat.",
+      "setting": "Intake Plaza, Pressureholt — outdoor, cobbled, open morning light. The Echo River runs visibly gray-green under the Eastern Intake. Early spring chill. Loki and Cy are at the notices board, standing beside the young woman in the rust-orange coat.",
       "npcsPresent": [
+        {
+          "name": "Tessvel Cairn",
+          "state": "Turned to face Loki properly, cautious but no longer entirely dismissive — waiting for his next question."
+        },
         {
           "name": "Vessa Torquen",
           "state": "Back at the sampling fixture, studying the fourth vial, back to Loki."
-        },
-        {
-          "name": "Two older wrights",
-          "state": "Moving away from the notices board area, speaking quietly."
-        },
-        {
-          "name": "Young woman in rust-orange coat",
-          "state": "Standing at the lower rail of the notices board, having just pinned her posting — now reading it critically."
         },
         {
           "name": "Gray-haired woman in work apron",
@@ -262,15 +276,15 @@
       ],
       "objects": [
         "Sampling fixture on the quay — four graduated vials, one outside variance",
-        "Fresh notice on the lower rail — three columns of careful handwriting, maintenan",
-        "Notices board dense with maintenance schedules and duty rosters"
+        "Fresh notice on the lower rail — Eastern Intake Particulate Variance Log, Spring",
+        "Notices board dense with maintenance schedules and duty rosters",
+        "Cy's lamp, angled slightly toward the notice"
       ],
       "threads": [
-        "The young wright has not yet responded to Loki's introduction",
-        "The fresh notice — what does it record or announce?",
-        "The gray-haired woman staring at the river — worry not yet explained",
-        "Vessa is not fooled and still wants a straight answer about what Cy is",
-        "The ring-form residue — consistent with regulated nanite deposition"
+        "Tessvel's log has diverged from the automated markers for eleven days — she has not said whether anyone senior knows",
+        "The ring-form residue at the sampling fixture matches a regulated nanite deposition pattern",
+        "The gray-haired woman at the water's edge — her worry unexplained",
+        "Vessa is not fooled and still wants a straight answer about what Cy is"
       ]
     }
   },
@@ -297,22 +311,26 @@
         "locationId": "pressureholt",
         "day": 1
       },
-      "relationship": 0,
+      "relationship": 1,
       "history": [
-        "[d1] Loki observed her before approaching — the straightening posture when seniors passed, the careful handwriting, the patches. He introduced himself while reading her fresh posting."
+        "[d1] Loki observed her before approaching — the straightening posture when seniors passed, the careful handwriting, the patches. He introduced himself while reading her fresh posting.",
+        "[d1] Turned to face Loki properly when he treated her work as genuinely important. Revealed that her hand-log has diverged from the automated tally-markers for eleven days."
       ],
       "knownFacts": [
         "Writes and records for a living, or does so as a posting duty",
         "Fixes things rather than replacing them — coat has three different-fabric patches, each applied neatly",
-        "Sensitive about junior status — straightened when older wrights passed"
+        "Sensitive about junior status — straightened when older wrights passed",
+        "Her hand-log records what is actually present in the water; the automated markers record only what they are calibrated to expect. The two have not agreed for eleven days."
       ],
       "skillsObserved": [
-        "Precise handwriting, official posting procedure"
+        "Precise handwriting, official posting procedure",
+        "Keeps a detailed hand-written variance log alongside automat",
+        "Notices and records divergence independently"
       ],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the notices board, Intake Plaza — just finished pinning a fresh maintenance posting",
+      "statusNote": "At the notices board, now facing Loki — cautious but engaged after being treated as competent.",
       "domains": {
         "primary": "wright"
       },
@@ -393,7 +411,7 @@
     "lastSharedReadAt": "2026-07-21T17:13:37.964Z",
     "lastTickWorldDay": 21,
     "lastCanonWorldDay": 21,
-    "turnsSinceOffer": 4,
+    "turnsSinceOffer": 5,
     "recentOffers": [
       {
         "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
@@ -441,12 +459,17 @@
         "label": "The Water Crisis — Pressureholt Intake",
         "kind": "event",
         "facts": [
-          "[d1] The Echo River runs gray-green past the Eastern Intake in Pressureholt. Cy measured particulate variance eleven-point-three above baseline. Enginewrights are sampling it but have not yet announced a cause."
+          "[d1] The Echo River runs gray-green past the Eastern Intake in Pressureholt. Cy measured particulate variance eleven-point-three above baseline. Enginewrights are sampling it but have not yet announced a cause.",
+          "[d1] The hand-log and the automated markers at the Eastern Intake have disagreed for eleven days — the divergence predates the current gray-green discoloration or runs alongside it, and no senior wright has visibly acted on it yet."
         ],
         "links": [
-          "intake-plaza"
+          "intake-plaza",
+          "tessvel-cairn",
+          "ring-form-residue-at-eastern-intake"
         ],
-        "aliases": [],
+        "aliases": [
+          "The Water Crisis"
+        ],
         "createdDay": 1,
         "updatedDay": 1
       },
@@ -489,11 +512,13 @@
         "kind": "person",
         "facts": [
           "[d1] Junior wright on posting-duty at the Eastern Intake notice board — the person who makes the official record legible, correctly sequenced, and properly stamped",
-          "[d1] Junior wright on posting-duty at the Eastern Intake. Precise, self-critical, patches her coat rather than replacing it. Sensitive about her rank relative to the senior wrights here."
+          "[d1] Junior wright on posting-duty at the Eastern Intake. Precise, self-critical, patches her coat rather than replacing it. Sensitive about her rank relative to the senior wrights here.",
+          "[d1] Her hand-kept variance log at the Eastern Intake has diverged from the automated tally-markers for eleven days — she records what is actually there; the markers record what they are calibrated to expect."
         ],
         "links": [
           "intake-plaza",
-          "the-water-crisis"
+          "the-water-crisis",
+          "ring-form-residue-at-eastern-intake"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -503,16 +528,16 @@
     }
   },
   "tendencies": {
-    "devotion": 12.65163046875,
-    "cerebral": 0.9268593749999999,
-    "social": 4.876250000000001,
-    "strategic": 1.975,
-    "cautious": 1
+    "devotion": 12.335339707031249,
+    "cerebral": 0.9036878906249999,
+    "social": 5.75434375,
+    "strategic": 1.9256250000000001,
+    "cautious": 0.975
   },
   "aptitudes": [
     "faithful"
   ],
-  "actionCount": 4,
+  "actionCount": 5,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -631,8 +656,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784658199181,
-  "rev": 18,
+  "updatedAt": 1784658482865,
+  "rev": 20,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -781,7 +806,7 @@
           "entityId": "tessvel-cairn",
           "type": "npc",
           "birthWeight": 2,
-          "engagementScore": 3,
+          "engagementScore": 6,
           "tier": "established",
           "rating": "R+",
           "provenance": {
@@ -801,17 +826,32 @@
             {
               "kind": "fact",
               "day": 1
+            },
+            {
+              "kind": "interact",
+              "day": 1
+            },
+            {
+              "kind": "fact",
+              "day": 1
             }
           ],
           "createdDay": 1,
           "repaired": false,
           "stubbed": false,
           "romanceEligible": true,
-          "lastAttentionDay": 1
+          "lastAttentionDay": 1,
+          "depthTier": "established"
         },
         "peopleSource": "generated",
         "domainsSource": "generated",
-        "image": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20early%20twenties%2C%20lean%20and%20upright%20with%20the%20unconscious%20posture%20of%20someone%20accustomed%20to%20working%20in%20confined%20valve-spaces.%20Rust-orange%20apprentice's%20coat%2C%20sleeves%20rolled%20to%20the%20elbow%2C%20character%20portrait%2C%20named%20Tessvel%20Cairn%2C%20Junior%20wright%20on%20posting-duty%20at%20the%20Eastern%20Intake%20notice%20board%20%E2%80%94%20the%20person%20who%20makes%20the%20official%2C%20Economical%20to%20the%20point%20of%20clipped.%20Speaks%20in%20specifications%20and%20corrections%20%E2%80%94%20not%20rudely%2C%20but%20as%20so%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=43130&nologo=true"
+        "image": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20early%20twenties%2C%20lean%20and%20upright%20with%20the%20unconscious%20posture%20of%20someone%20accustomed%20to%20working%20in%20confined%20valve-spaces.%20Rust-orange%20apprentice's%20coat%2C%20sleeves%20rolled%20to%20the%20elbow%2C%20character%20portrait%2C%20named%20Tessvel%20Cairn%2C%20Junior%20wright%20on%20posting-duty%20at%20the%20Eastern%20Intake%20notice%20board%20%E2%80%94%20the%20person%20who%20makes%20the%20official%2C%20Economical%20to%20the%20point%20of%20clipped.%20Speaks%20in%20specifications%20and%20corrections%20%E2%80%94%20not%20rudely%2C%20but%20as%20so%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=43130&nologo=true",
+        "history": "Tessvel came up through the Wrights' formal apprenticeship track rather than the more common route of attaching to a senior wright as a personal assistant. She sat the syllogist examinations twice — passing on the second attempt with a margin narrow enough that she does not volunteer the number — and her figurist certification came later, added because the posting-duty role required it and she…",
+        "relationships": {
+          "supervising_wright": "Her supervising wright, Ondreth Vasse, is the one who made the temporary promise and has since developed a reliable habit of not meeting her eyes when the pressure-routing roster comes up. She does not consider him malicious — she considers him a man who resolved a staffing problem and has found it easier not to revisit the resolution. She is polite to him. She is also keeping the written record of every conversation in which he confirmed the arrangement was temporary.",
+          "senior_wrights_behind_on_inspections": "She knows which ones are running late and who is signing off on their behalf, and they know she knows. This has produced a wary mutual courtesy. None of them have explicitly asked her silence; she has not explicitly offered it. The arrangement holds because no one has needed to test it yet.",
+          "player": "The player is logged in her mind as someone who came to the notice board and engaged with her as though the work she was doing was real work — not as a clerk to be talked past. She did not make a production of this. She answered what was asked, offered one unsolicited technical observation about what they were looking at, and noted that they did not seem bothered by the caliper. She would recognize them again and would give them slightly more of her attention than the baseline, which for Tessvel is more than it sounds."
+        }
       }
     },
     "location": {},
@@ -820,7 +860,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_gearlands": 5
+    "the_gearlands": 6
   },
   "opLossPending": false,
   "sessions": [
@@ -835,10 +875,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-21T17:40:12.510Z",
-      "lastAt": "2026-07-21T18:23:19.178Z",
+      "lastAt": "2026-07-21T18:28:02.863Z",
       "startDay": 21,
       "endDay": 21,
-      "beats": 4
+      "beats": 5
     }
   ],
   "establishedFacts": [],
@@ -851,19 +891,19 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 5,
-    "choices": 5,
+    "sceneSummary": 6,
+    "choices": 6,
     "characterDeltas": 2,
-    "scene": 5,
+    "scene": 6,
     "placeUpdates": 1,
-    "codexUpdates": 4,
-    "timeOps": 5,
+    "codexUpdates": 5,
+    "timeOps": 6,
     "offer": 1,
     "generateRequest": 2,
     "sceneEnded": 1,
-    "npcUpdates": 3
+    "npcUpdates": 4
   },
-  "_opTurns": 5,
+  "_opTurns": 6,
   "customAbilities": {},
   "companionBonds": {},
   "practice": {

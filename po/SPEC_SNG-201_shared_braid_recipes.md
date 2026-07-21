@@ -35,11 +35,10 @@ The second finder's experience must not be diminished — they still earned it t
 - Their mint **moment still fires** — but it is a *recognition* beat, not a *creation* beat: this craft has
   a name already, and someone found it first. Both framings are cool; they are different kinds of cool, and
   the copy should know which it is delivering.
-- ⚠️ **Rename scope must be decided and is a design call for Erik, not an engineering default:** can the
-  second finder rename *their own instance*, or is the world-name fixed for everyone? Recommend: **the
-  world-name is fixed; a player may set a personal nickname that renders for them only.** First-finder
-  authorship means nothing if the fifth finder can overwrite it globally — but a player's relationship with
-  their own craft shouldn't be hostage to a stranger's taste. Erik ratifies.
+- ✅ **Rename scope RATIFIED (Erik, 2026-07-21): the world-name is FIXED once landed; a player may set a
+  personal nickname that renders for them only.** First-finder authorship means nothing if the fifth
+  finder can overwrite it globally — but a player's relationship with their own craft isn't hostage to a
+  stranger's taste. This is now a build requirement, not an option.
 - Tier/levelReq/energy stay **per-character** (they derive from the *adopter's* ranks via `braidTier`).
   The recipe shares the identity and the prose, never the numbers. Two players can hold the same braid at
   different tiers, exactly as two players hold the same authored ability at different ranks.
@@ -77,7 +76,7 @@ by whatever name Erik confirms for it — with first-finder attribution intact.
 - **A stub never promotes** (§1). The recipe is the enriched def or nothing yet.
 - **One pairing, one recipe** — contest losers become personal variants, never parallel recipes.
 - **Numbers never shared** — tier/levelReq/energy always derive from the adopter.
-- **World-name is stable** once landed; personal nicknames render locally (pending Erik's §2 ratification).
+- **World-name is stable** once landed; personal nicknames render locally (Erik-ratified 2026-07-21).
 - **Never a halted mint** — sync failure degrades to local mint, contends later.
 
 ## OPEN QUESTIONS — CCODE ROUND 2

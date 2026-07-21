@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 1,
-  "xp": 26,
+  "xp": 36,
   "attributes": {
     "physical": 3,
     "mental": 3,
@@ -54,13 +54,13 @@
   "alignment": {
     "mechanical_spiritual": -0.020000000000000004,
     "falsehood_truth": -0.04000000000000001,
-    "spectrumId": -0.09072531249999999
+    "spectrumId": -0.08618904687499998
   },
   "attunement": 1,
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 83,
+  "energy": 82,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -153,128 +153,139 @@
         "player": "Head toward the Pressure-Routing Annex — third gate left of the big wheel — ahead of the second bell.",
         "summary": "Loki arrives at the Pressure-Routing Annex ahead of Tessvel — three gates left of the big wheel, morning light across the long table, Cy pausing in the doorway with a click it does not explain.",
         "narration": "You leave the intake plaza as the morning chill begins to soften — just barely, the way early spring concedes warmth in small installments. Cy falls in beside you at its habitual distance, lamp swinging in a short arc, legs picking their way over the cobblestones with unnerving precision.\n\nThe main works are easy to find. The big wheel is visible from three streets over — a weathered iron circle, taller than two men, turning at a steady pace that suggests it has never once been asked to stop. You count the gates left of it: one, two, three. The third gate is narrower than the others, framed in dark timber with a pressure-gauge mounted at eye level, its needle sitting just inside the green.\n\nInside, the Pressure-Routing Annex is exactly what Tessvel described and nothing more: shelving, a long table, stacks of bound logs with dates inked on the spines. The morning light comes in from the east through a high, narrow window and lays itself across the table in a clean pale bar. The room smells of machine oil and paper. Cy stops in the doorway, lens irising slowly around the space. It makes a small sound — a single, measured click — and does not explain it.\n\nTessvel is not here yet. The second bell has not rung. You have arrived first, which means you have a moment to look at what she works with before she arrives to explain it."
+      },
+      {
+        "player": "Ask Cy why it stopped... evaluate the space for privacy in case Tessvel wants to have some intimate moments.  Prepare to impress her with your technical knowhow, while you see if she wants to have intimate play... so where in the room would lend itself best for that...",
+        "summary": "Loki tried to read the Annex for privacy and found none — the room is bright, narrow, and open to the gate; Cy cited an anomalous resonance signature and would not explain it further.",
+        "narration": "You ask Cy why it stopped.\n\nCy's lens irises once, slowly, and it says: \"Anomalous resonance signature. Classification: pending. Recommend standby.\" Then it steps fully into the room and resumes walking as if nothing happened, its lamp swinging at its habitual angle. It will not say more. It never does.\n\nYou turn your attention to the room itself — trying to read it the way you'd read a mechanism, looking for the quiet corners, the angles where two people might exist without the rest of the world having opinions about it. The Annex does not cooperate. It is narrow, brightly lit from a high east-facing window that sends morning light in a clean bar straight down the center of the long table — illuminating everything, hiding nothing. The shelves run floor to ceiling on both sides. There is exactly one chair. The pressure-gauge at the door frame ticks softly, and anyone passing the third gate left of the big wheel can see straight in through the open doorway. You are standing in what amounts to a well-lit cabinet. The lattice here is dense — you can feel it the way you feel a crowd, all signal and no clarity — and when you try to get a quiet read on the space, the interference folds back on itself and tells you nothing useful. The room is functional. It is warm enough. It is exactly as private as a notice board.\n\nCy has already begun examining the pressure-gauge at the door frame, its legs planted with the careful stillness of something that has found an interesting problem."
       }
     ],
     "lastTurn": {
-      "narration": "You leave the intake plaza as the morning chill begins to soften — just barely, the way early spring concedes warmth in small installments. Cy falls in beside you at its habitual distance, lamp swinging in a short arc, legs picking their way over the cobblestones with unnerving precision.\n\nThe main works are easy to find. The big wheel is visible from three streets over — a weathered iron circle, taller than two men, turning at a steady pace that suggests it has never once been asked to stop. You count the gates left of it: one, two, three. The third gate is narrower than the others, framed in dark timber with a pressure-gauge mounted at eye level, its needle sitting just inside the green.\n\nInside, the Pressure-Routing Annex is exactly what Tessvel described and nothing more: shelving, a long table, stacks of bound logs with dates inked on the spines. The morning light comes in from the east through a high, narrow window and lays itself across the table in a clean pale bar. The room smells of machine oil and paper. Cy stops in the doorway, lens irising slowly around the space. It makes a small sound — a single, measured click — and does not explain it.\n\nTessvel is not here yet. The second bell has not rung. You have arrived first, which means you have a moment to look at what she works with before she arrives to explain it.",
-      "sceneSummary": "Loki arrives at the Pressure-Routing Annex ahead of Tessvel — three gates left of the big wheel, morning light across the long table, Cy pausing in the doorway with a click it does not explain.",
+      "narration": "You ask Cy why it stopped.\n\nCy's lens irises once, slowly, and it says: \"Anomalous resonance signature. Classification: pending. Recommend standby.\" Then it steps fully into the room and resumes walking as if nothing happened, its lamp swinging at its habitual angle. It will not say more. It never does.\n\nYou turn your attention to the room itself — trying to read it the way you'd read a mechanism, looking for the quiet corners, the angles where two people might exist without the rest of the world having opinions about it. The Annex does not cooperate. It is narrow, brightly lit from a high east-facing window that sends morning light in a clean bar straight down the center of the long table — illuminating everything, hiding nothing. The shelves run floor to ceiling on both sides. There is exactly one chair. The pressure-gauge at the door frame ticks softly, and anyone passing the third gate left of the big wheel can see straight in through the open doorway. You are standing in what amounts to a well-lit cabinet. The lattice here is dense — you can feel it the way you feel a crowd, all signal and no clarity — and when you try to get a quiet read on the space, the interference folds back on itself and tells you nothing useful. The room is functional. It is warm enough. It is exactly as private as a notice board.\n\nCy has already begun examining the pressure-gauge at the door frame, its legs planted with the careful stillness of something that has found an interesting problem.",
+      "sceneSummary": "Loki tried to read the Annex for privacy and found none — the room is bright, narrow, and open to the gate; Cy cited an anomalous resonance signature and would not explain it further.",
       "choices": [
         {
-          "label": "Look over the shelves and log spines — see what the room itself can tell you before Tessvel arrives.",
+          "label": "Ask Cy directly what it meant by 'anomalous resonance signature' — press for specifics",
           "attribute": "mental",
           "subAttribute": "reason",
-          "axes": {
-            "mechanical_spiritual": -0.4
-          },
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
             "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Use See the Made Thing on the pressure-gauge at the door — read how the instrument is built and whether it is reading true.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "mechanical_spiritual": -0.5
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "see_the_made_thing",
-          "energyCost": 1,
           "trivial": false
         },
         {
-          "label": "Watch what Cy is doing in the doorway — it clicked once and stopped; ask it what it found.",
+          "label": "Browse the shelves of bound logs while you wait — see if Tessvel's variance log is findable without touching anything that isn't yours",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "mechanical_spiritual": -0.3
-          },
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
-            "study"
+            "scout",
+            "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
+          "trivial": false
         },
         {
-          "label": "Wait for Tessvel — settle at the table, get comfortable, and let her find you already at home in her space.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "falsehood_truth": -0.1
-          },
+          "label": "Wait at the long table and prepare your opening — you know the ring-form residue, the eleven-day divergence, and what nanite deposition looks like; have it ready when she arrives",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "difficulty": 0,
           "intentTags": [
             "plan"
           ],
-          "abilityId": null,
-          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Step back to the gate and watch for Tessvel — meet her at the door rather than waiting inside",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
           "trivial": true
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
       "scene": {
-        "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, third gate left of the big wheel. A narrow room: shelving, a long table, stacked bound logs with dates on their spines. Morning light in a clean pale bar from a high east-facing window. Early spring; the big wheel audible turning outside.",
-        "npcsPresent": [],
+        "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, third gate left of the big wheel. Narrow room: floor-to-ceiling shelving on both sides, long table with morning light straight down its center from a high east-facing window. One chair. Open doorway visible to anyone passing the gate outside. Early spring morning; big wheel audible turning.",
+        "npcsPresent": [
+          {
+            "name": "Cy",
+            "state": "Examining the pressure-gauge at the door frame — legs planted, lens fixed on the mechanism, lamp angled toward it."
+          }
+        ],
         "objects": [
-          "Long work table — pale bar of morning light across it",
-          "Shelves of bound logs — dates inked on spines",
-          "Pressure-gauge at the door frame — needle in the green",
-          "Cy — in the doorway, lens irising, lamp lit"
+          "Long work table — pale bar of morning light straight down its center",
+          "Shelves of bound logs — dates inked on spines, floor to ceiling",
+          "Pressure-gauge at the door frame — needle in the green; Cy examining it",
+          "One chair — at the near end of the table",
+          "Open gate doorway — visible from the passage outside"
         ],
         "threads": [
-          "Tessvel confirmed the meeting window between the second and third bell — she has not yet arrived",
-          "Cy clicked once in the doorway and has not explained it",
-          "Tessvel's hand-log has diverged from the automated markers for eleven days — her records are somewhere in this room",
-          "The ring-form residue at the intake matches a regulated nanite deposition pattern — no senior wright has acted on it"
+          "Cy named an 'anomalous resonance signature' in the doorway and will not elaborate",
+          "Tessvel has not yet arrived — meeting window is between the second and third bell",
+          "Tessvel's hand-log has diverged from automated markers for eleven days — her records are somewhere on these shelves",
+          "The ring-form residue at the intake matches regulated nanite deposition — no senior wright has acted on it",
+          "The room offers no privacy — open doorway, bright light, one chair"
         ]
       },
-      "moveTo": {
-        "location": "pressure-routing-annex",
-        "why": "walked from the intake plaza — third gate left of the big wheel"
-      },
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "short walk from the intake plaza to the Annex ahead of the second bell"
-      },
-      "placeUpdates": [
+      "codexUpdates": [
         {
-          "note": "Loki arrived at the Pressure-Routing Annex ahead of Tessvel — morning light on the long table, Cy paused in the doorway with an unexplained click",
-          "subPlace": {
-            "name": "Pressure-Routing Annex",
-            "parent": "Pressureholt",
-            "note": "Tessvel Cairn's workstation — east side of the main works, third gate left of the big wheel. Shelving, a long table, stacked bound logs, a pressure-gauge at the door, good morning light from the east. Loki arrived here ahead of the second bell.",
-            "visited": true
-          }
+          "topic": "pressure-routing-annex",
+          "label": "Pressure-Routing Annex",
+          "kind": "place",
+          "entityId": "intake-plaza",
+          "fact": "The Annex is narrow, well-lit, and entirely open — a high east window sends light straight down the table and the gate is visible from the passage outside. No privacy. One chair. Cy flagged an anomalous resonance signature in the doorway and would not classify it.",
+          "links": [
+            "tessvel-cairn",
+            "the-water-crisis",
+            "ring-form-residue-at-eastern-intake"
+          ]
         }
       ],
-      "sceneEnded": false
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "cy",
+          "name": "Cy",
+          "role": "Companion",
+          "note": "Named an 'anomalous resonance signature' at the Annex doorway — classification pending — then resumed normal movement without elaborating. Now examining the pressure-gauge at the door frame.",
+          "learned": [
+            "Flagged anomalous resonance signature at the Pressure-Routing Annex doorway — will not classify it"
+          ],
+          "skillsObserved": [
+            "Anomalous resonance detection"
+          ],
+          "status": "active",
+          "statusNote": "In the Pressure-Routing Annex, examining the door-frame pressure-gauge."
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A short wait and exchange in the Annex while Tessvel makes her way from the plaza"
+      }
     },
     "sceneState": {
-      "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, third gate left of the big wheel. A narrow room: shelving, a long table, stacked bound logs with dates on their spines. Morning light in a clean pale bar from a high east-facing window. Early spring; the big wheel audible turning outside.",
-      "npcsPresent": [],
+      "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, third gate left of the big wheel. Narrow room: floor-to-ceiling shelving on both sides, long table with morning light straight down its center from a high east-facing window. One chair. Open doorway visible to anyone passing the gate outside. Early spring morning; big wheel audible turning.",
+      "npcsPresent": [
+        {
+          "name": "Cy",
+          "state": "Examining the pressure-gauge at the door frame — legs planted, lens fixed on the mechanism, lamp angled toward it."
+        }
+      ],
       "objects": [
-        "Long work table — pale bar of morning light across it",
-        "Shelves of bound logs — dates inked on spines",
-        "Pressure-gauge at the door frame — needle in the green",
-        "Cy — in the doorway, lens irising, lamp lit"
+        "Long work table — pale bar of morning light straight down its center",
+        "Shelves of bound logs — dates inked on spines, floor to ceiling",
+        "Pressure-gauge at the door frame — needle in the green; Cy examining it",
+        "One chair — at the near end of the table",
+        "Open gate doorway — visible from the passage outside"
       ],
       "threads": [
-        "Tessvel confirmed the meeting window between the second and third bell — she has not yet arrived",
-        "Cy clicked once in the doorway and has not explained it",
-        "Tessvel's hand-log has diverged from the automated markers for eleven days — her records are somewhere in this room",
-        "The ring-form residue at the intake matches a regulated nanite deposition pattern — no senior wright has acted on it"
+        "Cy named an 'anomalous resonance signature' in the doorway and will not elaborate",
+        "Tessvel has not yet arrived — meeting window is between the second and third bell",
+        "Tessvel's hand-log has diverged from automated markers for eleven days — her records are somewhere on these shelves",
+        "The ring-form residue at the intake matches regulated nanite deposition — no senior wright has acted on it",
+        "The room offers no privacy — open doorway, bright light, one chair"
       ]
     }
   },
@@ -422,7 +433,7 @@
     "lastSharedReadAt": "2026-07-21T21:10:36.252Z",
     "lastTickWorldDay": 21,
     "lastCanonWorldDay": 21,
-    "turnsSinceOffer": 11,
+    "turnsSinceOffer": 12,
     "recentOffers": [
       {
         "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
@@ -536,22 +547,39 @@
         "createdDay": 1,
         "entityId": "tessvel-cairn",
         "updatedDay": 1
+      },
+      "intake-plaza": {
+        "id": "intake-plaza",
+        "label": "Pressure-Routing Annex",
+        "kind": "place",
+        "facts": [
+          "[d1] The Annex is narrow, well-lit, and entirely open — a high east window sends light straight down the table and the gate is visible from the passage outside. No privacy. One chair. Cy flagged an anomalous resonance signature in the doorway and would not classify it."
+        ],
+        "links": [
+          "tessvel-cairn",
+          "the-water-crisis",
+          "ring-form-residue-at-eastern-intake"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "intake-plaza",
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "devotion": 10.596899324690373,
-    "cerebral": 2.7263296208564376,
-    "social": 7.632425070547324,
-    "strategic": 1.6542433971620178,
-    "cautious": 0.8375915934997556,
-    "amorous": 5.516580849609374,
-    "generous": 0.8810956933593749
+    "devotion": 10.331976841573113,
+    "cerebral": 3.6581713803350264,
+    "social": 8.44161444378364,
+    "strategic": 3.612887312232967,
+    "cautious": 0.8166518036622618,
+    "amorous": 6.37866632836914,
+    "generous": 0.8590683010253904
   },
   "aptitudes": [
     "faithful"
   ],
-  "actionCount": 11,
+  "actionCount": 12,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -670,8 +698,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784668301717,
-  "rev": 30,
+  "updatedAt": 1784668592805,
+  "rev": 31,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -900,7 +928,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_gearlands": 12
+    "the_gearlands": 13
   },
   "opLossPending": false,
   "sessions": [
@@ -915,10 +943,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-21T17:40:12.510Z",
-      "lastAt": "2026-07-21T21:11:41.715Z",
+      "lastAt": "2026-07-21T21:16:32.803Z",
       "startDay": 21,
       "endDay": 21,
-      "beats": 11
+      "beats": 12
     }
   ],
   "establishedFacts": [],
@@ -931,26 +959,26 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 11,
-    "choices": 11,
+    "sceneSummary": 12,
+    "choices": 12,
     "characterDeltas": 3,
-    "scene": 11,
+    "scene": 12,
     "placeUpdates": 3,
-    "codexUpdates": 6,
-    "timeOps": 11,
+    "codexUpdates": 7,
+    "timeOps": 12,
     "offer": 1,
     "generateRequest": 2,
     "sceneEnded": 2,
-    "npcUpdates": 8,
+    "npcUpdates": 9,
     "moveTo": 1
   },
-  "_opTurns": 11,
+  "_opTurns": 12,
   "customAbilities": {},
   "companionBonds": {},
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "see_the_made_thing": 2,
+      "see_the_made_thing": 3,
       "falsecraft": 1,
       "the_wrong_reality": 1,
       "the_misdirect": 1

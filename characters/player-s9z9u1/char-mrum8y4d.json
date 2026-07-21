@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 1,
-  "xp": 77,
+  "xp": 80,
   "attributes": {
     "physical": 3,
     "mental": 3,
@@ -62,7 +62,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 57,
+  "energy": 56,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -220,14 +220,47 @@
         "player": "Say nothing yet — turn to the second entry and read it the same way, building the pattern before you name the conclusion.",
         "summary": "Second spike entry read — pressure-drop in the lower routing channel preceded the count by four minutes; Tessvel begins annotating in step.",
         "narration": "You say nothing. You turn the page.\n\nThe second spike entry sits three days after the first — a different date, the same shape. You place your finger at the top of the column and read downward, the same way you read the first. Tessvel watches your finger move and does not look at your face.\n\nThe particulate count rose again before the valve opened. Not in the river. In the works. And this time the intake log shows a pressure-drop in the lower routing channel that preceded the count by four minutes exactly. Something moved through the channel before the morning cycle ran. Something that left a trace.\n\nYou tap the column once with one fingertip and say nothing. You turn to the third entry.\n\nTessvel's pen finds the page. She does not write a word. She draws a small bracket in the margin beside the pressure-drop figure — her own annotation, made in real time, matching yours. She is not watching the methodology anymore. She is doing it."
+      },
+      {
+        "player": "Turn to the third entry and keep reading — let the pattern finish building itself.",
+        "summary": "Third spike entry: six-minute pressure-drop before particulate — the interval is lengthening. A single low chord rose through the floor and was gone; Cy looked at the stone and did not explain. Tessvel heard it and turned to the fourth entry.",
+        "narration": "You turn to the third entry.\n\nThe shape is the same. Particulate rise before the valve. A pressure-drop in the lower routing channel — this time six minutes ahead, not four. The interval is lengthening. Something is moving more slowly, or moving further, or both.\n\nYou tap the column. Tessvel's pen is already moving. She does not wait for you to name it — she draws the bracket herself, precise and small, and writes the interval figure in the margin without looking up.\n\nThen something happens that has nothing to do with the log.\n\nUnder the floor, very briefly, something hums. Not the works — you know that sound, the steady pull and push of the pressure-wheel. This is lower. Older. A single chord, clean as a tuning fork, that comes up through the stone into the soles of your boots and is gone before you can decide whether you heard it. Cy's lens rotates, slow, toward the floor. It does not iris. It simply looks, the way it looks at things it already knows are there.\n\nTessvel lifts her head. She heard it too — or felt it. She does not say anything. She looks at her pen, then at the margin note she just made, then at you. She says, carefully, \"The fourth entry is the most recent.\" Her voice is steady. It is the voice she uses when she is deciding something."
       }
     ],
     "lastTurn": {
-      "narration": "You say nothing. You turn the page.\n\nThe second spike entry sits three days after the first — a different date, the same shape. You place your finger at the top of the column and read downward, the same way you read the first. Tessvel watches your finger move and does not look at your face.\n\nThe particulate count rose again before the valve opened. Not in the river. In the works. And this time the intake log shows a pressure-drop in the lower routing channel that preceded the count by four minutes exactly. Something moved through the channel before the morning cycle ran. Something that left a trace.\n\nYou tap the column once with one fingertip and say nothing. You turn to the third entry.\n\nTessvel's pen finds the page. She does not write a word. She draws a small bracket in the margin beside the pressure-drop figure — her own annotation, made in real time, matching yours. She is not watching the methodology anymore. She is doing it.",
-      "sceneSummary": "Second spike entry read — pressure-drop in the lower routing channel preceded the count by four minutes; Tessvel begins annotating in step.",
+      "narration": "You turn to the third entry.\n\nThe shape is the same. Particulate rise before the valve. A pressure-drop in the lower routing channel — this time six minutes ahead, not four. The interval is lengthening. Something is moving more slowly, or moving further, or both.\n\nYou tap the column. Tessvel's pen is already moving. She does not wait for you to name it — she draws the bracket herself, precise and small, and writes the interval figure in the margin without looking up.\n\nThen something happens that has nothing to do with the log.\n\nUnder the floor, very briefly, something hums. Not the works — you know that sound, the steady pull and push of the pressure-wheel. This is lower. Older. A single chord, clean as a tuning fork, that comes up through the stone into the soles of your boots and is gone before you can decide whether you heard it. Cy's lens rotates, slow, toward the floor. It does not iris. It simply looks, the way it looks at things it already knows are there.\n\nTessvel lifts her head. She heard it too — or felt it. She does not say anything. She looks at her pen, then at the margin note she just made, then at you. She says, carefully, \"The fourth entry is the most recent.\" Her voice is steady. It is the voice she uses when she is deciding something.",
+      "sceneSummary": "Third spike entry: six-minute pressure-drop before particulate — the interval is lengthening. A single low chord rose through the floor and was gone; Cy looked at the stone and did not explain. Tessvel heard it and turned to the fourth entry.",
       "choices": [
         {
-          "label": "Turn to the third entry and keep reading — let the pattern finish building itself.",
+          "label": "Turn to the fourth entry and read it the same way — finish the pattern, then name what it means",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "mechanical_spiritual": -0.3
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "see_the_made_thing",
+          "energyCost": 1,
+          "trivial": false
+        },
+        {
+          "label": "Pause — ask Tessvel what she heard, and watch her face when she answers",
+          "attribute": "social",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Look to Cy — ask it, plainly, whether it recognises the sound",
           "attribute": "mental",
           "subAttribute": "reason",
           "axes": {},
@@ -235,128 +268,122 @@
           "intentTags": [
             "study"
           ],
-          "abilityId": "see_the_made_thing",
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Pause on the pressure-drop — ask her if that channel feeds the old lower service-way.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Glance at Cy — it stationed itself on that old boundary-impression; check whether it is reacting to the second entry's data.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Note that she just annotated it herself — tell her she already knows the methodology.",
+          "label": "Name the pattern before the fourth entry — tell Tessvel what the three entries already prove, then turn the page together",
           "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.1
+          },
           "difficulty": 0,
           "intentTags": [
-            "flirt"
+            "study",
+            "persuade"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         }
       ],
       "scene": {
-        "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, narrow room, morning light full down the center of the long table. Gate open to passage. Cy stationed at the threshold in a wide maintenance stance, lamp dimmed, holding the perimeter.",
+        "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, narrow room, morning light full down the center of the long table. Gate open to passage.",
         "npcsPresent": [
           {
             "name": "Tessvel Cairn",
-            "state": "Seated close, pen in hand — she has just drawn a small margin bracket beside the pressure-drop figure on the second entry, annotating in step with Loki's read."
+            "state": "Seated close, pen in hand — she has just drawn the margin bracket on the third entry and has looked up at Loki, deciding something. Her voice was careful. The fourth entry is before her."
           },
           {
             "name": "Cy",
-            "state": "Positioned at the threshold in a wide three-leg stance, lamp dimmed to almost nothing, holding the room's signal inward."
+            "state": "Positioned at the threshold in a wide three-leg stance, lamp dimmed to almost nothing, holding the room's signal inward. Its lens has rotated toward the floor and is simply watching the stone."
           }
         ],
         "objects": [
           "Long work table — morning light full down its center",
-          "Tessvel's green-spine log — open, turned to share, second spike entry now showing with her fresh margin bracket",
-          "Tessvel's pen — in hand, just annotated",
+          "Tessvel's green-spine log — open, turned to share, third spike entry now annotated in the margin",
+          "Tessvel's pen — in hand, margin figure written",
           "Tessvel's leather satchel — open on the table",
           "Shelves of bound logs — dates inked on spines, floor to ceiling",
           "Pressure-gauge at the door frame — needle still",
           "Cy's dimmed lamp — at the threshold"
         ],
         "threads": [
-          "Second spike entry read — pressure-drop in lower routing channel precedes particulate count by four minutes; source still unnamed",
-          "Third and fourth spike entries still unread — pattern not yet complete",
-          "Tessvel has begun annotating in step — she is doing the methodology now, not just watching it",
+          "Third spike entry read — pressure-drop six minutes before particulate; interval is lengthening; source still unnamed",
+          "Fourth spike entry still unread — pattern not yet complete",
+          "A low chord came up through the floor and was gone — Cy looked at the stone; Tessvel heard it",
           "Cy holding the threshold on the old boundary-impression — not yet classified",
           "Four-entries-for-four-buttons arrangement — standing"
         ]
       },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "tessvel-cairn",
+          "name": "Tessvel Cairn",
+          "note": "Drew the third entry's margin bracket herself, without prompting — she is running the methodology now. Heard the low chord from below and looked up at Loki rather than away. Said the fourth entry is the most recent in a careful, decided voice.",
+          "learned": [
+            "Third spike entry shows a six-minute pressure-drop before particulate — interval is lengthening compared to entry two's four minutes",
+            "She heard or felt the low chord through the floor and responded by naming the next step rather than the anomaly"
+          ],
+          "skillsObserved": [
+            "Applies the methodology independently — brackets third entry without prompting"
+          ],
+          "status": "active",
+          "statusNote": "At the Annex table, pen in hand, third entry annotated — looking at Loki and deciding something before they turn to the fourth."
+        }
+      ],
       "codexUpdates": [
         {
           "topic": "pressure-routing-annex",
           "label": "Pressure-Routing Annex",
           "kind": "mystery",
           "entityId": "pressure-routing-annex",
-          "fact": "Second spike entry: a pressure-drop in the lower routing channel preceded the particulate count by exactly four minutes — something moved through the channel before the morning intake cycle ran.",
+          "fact": "A low, clean chord rose through the floor of the Annex — a single note, not the works, not the pressure-wheel. Older. Cy's lens turned toward the stone and watched. Tessvel heard it. The sound and the terminus-seal may be the same thing briefly speaking.",
           "links": [
+            "tessvel-cairn",
             "the-water-crisis",
             "ring-form-residue-at-eastern-intake",
-            "tessvel-cairn"
+            "terminus-seals-beneath-the-valley"
           ]
-        }
-      ],
-      "npcUpdates": [
+        },
         {
-          "op": "update",
-          "npcId": "tessvel-cairn",
-          "name": "Tessvel Cairn",
-          "note": "Drew a margin bracket in real time alongside Loki's read of the second entry — she is no longer watching the methodology, she is applying it.",
-          "learned": [
-            "Second spike entry shows a pressure-drop in the lower routing channel four minutes before the particulate count — something moved through before the morning cycle ran"
-          ],
-          "skillsObserved": [
-            "Annotates in real time, matching an unfamiliar methodology on first contact"
-          ],
-          "status": "active",
-          "statusNote": "At the Annex table, pen now moving — annotating the second spike entry in step with Loki's read."
+          "topic": "terminus-seals-beneath-the-valley",
+          "label": "Terminus-Seals Beneath the Valley",
+          "kind": "mystery",
+          "fact": "Something beneath the Annex floor hummed a single chord and went quiet — the sensation came up through the stone. Cy watched the floor without explanation. The chord may be one of the four terminus-seals briefly activating, or briefly failing.",
+          "links": [
+            "pressure-routing-annex",
+            "the-water-crisis",
+            "ring-form-residue-at-eastern-intake"
+          ]
+        },
+        {
+          "topic": "the-water-crisis",
+          "label": "The Water Crisis — Pressureholt Intake",
+          "kind": "event",
+          "fact": "Third spike entry: pressure-drop in the lower routing channel preceded particulate count by six minutes — the interval is lengthening across the three entries read so far (entry two: four minutes; entry three: six minutes). Something is moving more slowly, or moving further, through the system.",
+          "links": [
+            "tessvel-cairn",
+            "ring-form-residue-at-eastern-intake",
+            "pressure-routing-annex"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A quiet turn of pages and a close read — a few minutes only."
-      }
+        "why": "a short exchange over the third log entry"
+      },
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, narrow room, morning light full down the center of the long table. Gate open to passage. Cy stationed at the threshold in a wide maintenance stance, lamp dimmed, holding the perimeter.",
+      "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, narrow room, morning light full down the center of the long table. Gate open to passage.",
       "npcsPresent": [
         {
           "name": "Tessvel Cairn",
-          "state": "Seated close, pen in hand — she has just drawn a small margin bracket beside the pressure-drop figure on the second entr"
+          "state": "Seated close, pen in hand — she has just drawn the margin bracket on the third entry and has looked up at Loki, deciding"
         },
         {
           "name": "Cy",
@@ -365,17 +392,17 @@
       ],
       "objects": [
         "Long work table — morning light full down its center",
-        "Tessvel's green-spine log — open, turned to share, second spike entry now showin",
-        "Tessvel's pen — in hand, just annotated",
+        "Tessvel's green-spine log — open, turned to share, third spike entry now annotat",
+        "Tessvel's pen — in hand, margin figure written",
         "Tessvel's leather satchel — open on the table",
         "Shelves of bound logs — dates inked on spines, floor to ceiling",
         "Pressure-gauge at the door frame — needle still",
         "Cy's dimmed lamp — at the threshold"
       ],
       "threads": [
-        "Second spike entry read — pressure-drop in lower routing channel precedes particulate count by four minutes; source still unnamed",
-        "Third and fourth spike entries still unread — pattern not yet complete",
-        "Tessvel has begun annotating in step — she is doing the methodology now, not just watching it",
+        "Third spike entry read — pressure-drop six minutes before particulate; interval is lengthening; source still unnamed",
+        "Fourth spike entry still unread — pattern not yet complete",
+        "A low chord came up through the floor and was gone — Cy looked at the stone; Tessvel heard it",
         "Cy holding the threshold on the old boundary-impression — not yet classified",
         "Four-entries-for-four-buttons arrangement — standing"
       ]
@@ -406,7 +433,6 @@
       },
       "relationship": 7,
       "history": [
-        "[d1] Not yet arrived — meeting window still open between second and third bell.",
         "[d1] Her footsteps are audible in the passage — she is arriving at the second bell exactly, as expected.",
         "[d1] Arrived on time, filed first log entries from memory, noticed Loki with careful cataloguing attention — offered a second chair without apology.",
         "[d1] Loki opened with a two-axis compliment — professional competence plus physical charm — and offered to file a report with her supervisor or her boyfriend. She confirmed, precisely, that she has no boyfriend. Then she remembered herself and noted there is no posted authorization for him to be here…",
@@ -415,30 +441,31 @@
         "[d1] Loki claimed independent methodology; Tessvel did not dismiss it — she asked to see it applied to the four spike entries in her log, using the same level voice she uses for everything",
         "[d1] Turned the log to share it rather than guard it — a small, precise act of collaboration. Waiting for the methodology to be demonstrated.",
         "[d1] Watched Loki invoke the working and Cy take the threshold — did not object, did not comment. Picked up her pen when Loki began the read. Asked which direction he reads from — genuinely methodological, not rhetorical.",
-        "[d1] Drew a margin bracket in real time alongside Loki's read of the second entry — she is no longer watching the methodology, she is applying it."
+        "[d1] Drew a margin bracket in real time alongside Loki's read of the second entry — she is no longer watching the methodology, she is applying it.",
+        "[d1] Drew the third entry's margin bracket herself, without prompting — she is running the methodology now. Heard the low chord from below and looked up at Loki rather than away. Said the fourth entry is the most recent in a careful, decided voice."
       ],
       "knownFacts": [
-        "She did not move from the room despite discomfort — she stayed and asked for an accounting",
-        "She has documented the divergence on forty-one dates — far more than Loki knew",
         "She has not shared the log with a senior wright because no senior wright has asked — she does not volunteer conclusions she cannot yet support",
         "She said independent research is not technically a violation — and she was deciding something as she said it",
         "She has checked the spike entries against schedule, maintenance windows, and weather-linked intake variance — nothing fits",
         "The working changed the room's signal quality — she felt it as the pressure-gauge going still",
         "Cy stationed at a threshold has a function she does not have a classification for",
-        "Second spike entry shows a pressure-drop in the lower routing channel four minutes before the particulate count — something moved through before the morning cycle ran"
+        "Second spike entry shows a pressure-drop in the lower routing channel four minutes before the particulate count — something moved through before the morning cycle ran",
+        "Third spike entry shows a six-minute pressure-drop before particulate — interval is lengthening compared to entry two's four minutes",
+        "She heard or felt the low chord through the floor and responded by naming the next step rather than the anomaly"
       ],
       "skillsObserved": [
-        "Notices and records divergence independently",
         "Resistance to social misdirection",
         "Precise verbal recalibration under pressure",
         "Holds incomplete conclusions until she can support them — do",
         "Precise methodological questioning under unusual conditions",
-        "Annotates in real time, matching an unfamiliar methodology o"
+        "Annotates in real time, matching an unfamiliar methodology o",
+        "Applies the methodology independently — brackets third entry"
       ],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the Annex table, pen now moving — annotating the second spike entry in step with Loki's read.",
+      "statusNote": "At the Annex table, pen in hand, third entry annotated — looking at Loki and deciding something before they turn to the fourth.",
       "domains": {
         "primary": "wright"
       },
@@ -531,7 +558,7 @@
     "lastSharedReadAt": "2026-07-21T21:10:36.252Z",
     "lastTickWorldDay": 21,
     "lastCanonWorldDay": 21,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
@@ -584,12 +611,14 @@
         "kind": "event",
         "facts": [
           "[d1] The Echo River runs gray-green past the Eastern Intake in Pressureholt. Cy measured particulate variance eleven-point-three above baseline. Enginewrights are sampling it but have not yet announced a cause.",
-          "[d1] The hand-log and the automated markers at the Eastern Intake have disagreed for eleven days — the divergence predates the current gray-green discoloration or runs alongside it, and no senior wright has visibly acted on it yet."
+          "[d1] The hand-log and the automated markers at the Eastern Intake have disagreed for eleven days — the divergence predates the current gray-green discoloration or runs alongside it, and no senior wright has visibly acted on it yet.",
+          "[d1] Third spike entry: pressure-drop in the lower routing channel preceded particulate count by six minutes — the interval is lengthening across the three entries read so far (entry two: four minutes; entry three: six minutes). Something is moving more slowly, or moving further, through the system."
         ],
         "links": [
           "intake-plaza",
           "tessvel-cairn",
-          "ring-form-residue-at-eastern-intake"
+          "ring-form-residue-at-eastern-intake",
+          "pressure-routing-annex"
         ],
         "aliases": [
           "The Water Crisis"
@@ -685,12 +714,14 @@
         "facts": [
           "[d1] Something beneath the Annex doorway is older than the building — pre-Annex, pre-current works, the impression surviving through lattice noise before it was drowned. Could not be classified. Cy aimed its lens at the spot and did not explain.",
           "[d1] The threshold holds a circular boundary-impression — old enough that the substrate has grown around it like scar tissue. Not a mechanism: a boundary. Something was meant to stop here, or to be stopped. The shape is pre-Annex, pre-works. Function still unread.",
-          "[d1] Second spike entry: a pressure-drop in the lower routing channel preceded the particulate count by exactly four minutes — something moved through the channel before the morning intake cycle ran."
+          "[d1] Second spike entry: a pressure-drop in the lower routing channel preceded the particulate count by exactly four minutes — something moved through the channel before the morning intake cycle ran.",
+          "[d1] A low, clean chord rose through the floor of the Annex — a single note, not the works, not the pressure-wheel. Older. Cy's lens turned toward the stone and watched. Tessvel heard it. The sound and the terminus-seal may be the same thing briefly speaking."
         ],
         "links": [
           "tessvel-cairn",
           "the-water-crisis",
-          "ring-form-residue-at-eastern-intake"
+          "ring-form-residue-at-eastern-intake",
+          "terminus-seals-beneath-the-valley"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -702,13 +733,15 @@
         "label": "Terminus-Seals Beneath the Valley",
         "kind": "mystery",
         "facts": [
-          "[d1] Cy has catalogued four terminus-seals in the old service-ways beneath the valley — pre-Transition boundary-marks designed to hold a limit against propagation. Three are intact. One is not. Cy did not say which."
+          "[d1] Cy has catalogued four terminus-seals in the old service-ways beneath the valley — pre-Transition boundary-marks designed to hold a limit against propagation. Three are intact. One is not. Cy did not say which.",
+          "[d1] Something beneath the Annex floor hummed a single chord and went quiet — the sensation came up through the stone. Cy watched the floor without explanation. The chord may be one of the four terminus-seals briefly activating, or briefly failing."
         ],
         "links": [
           "the-water-crisis",
           "ring-form-residue-at-eastern-intake",
           "intake-plaza",
-          "tessvel-cairn"
+          "tessvel-cairn",
+          "pressure-routing-annex"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -717,20 +750,20 @@
     }
   },
   "tendencies": {
-    "devotion": 7.624981818200222,
-    "cerebral": 7.063941360527051,
-    "social": 13.419460640638222,
-    "strategic": 5.235817833920808,
-    "cautious": 4.187139782289561,
-    "amorous": 10.132469349551348,
-    "generous": 1.5150866784682244,
-    "ruthless": 0.8590683010253904
+    "devotion": 7.434357272745217,
+    "cerebral": 7.8873428265138745,
+    "social": 13.083974124622266,
+    "strategic": 5.104922388072787,
+    "cautious": 4.082461287732322,
+    "amorous": 9.879157615812565,
+    "generous": 1.4772095115065187,
+    "ruthless": 0.8375915934997556
   },
   "aptitudes": [
     "silver_tongue",
     "charmer"
   ],
-  "actionCount": 24,
+  "actionCount": 25,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -857,8 +890,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784673217450,
-  "rev": 43,
+  "updatedAt": 1784673382627,
+  "rev": 44,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1007,7 +1040,7 @@
           "entityId": "tessvel-cairn",
           "type": "npc",
           "birthWeight": 2,
-          "engagementScore": 42,
+          "engagementScore": 44,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -1021,10 +1054,6 @@
           },
           "attentionHistory": [
             {
-              "kind": "fact",
-              "day": 1
-            },
-            {
               "kind": "interact",
               "day": 1
             },
@@ -1106,6 +1135,10 @@
             },
             {
               "kind": "fact",
+              "day": 1
+            },
+            {
+              "kind": "interact",
               "day": 1
             },
             {
@@ -1143,7 +1176,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_gearlands": 25
+    "the_gearlands": 26
   },
   "opLossPending": false,
   "sessions": [
@@ -1158,10 +1191,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-21T17:40:12.510Z",
-      "lastAt": "2026-07-21T22:33:37.449Z",
+      "lastAt": "2026-07-21T22:36:22.626Z",
       "startDay": 21,
       "endDay": 21,
-      "beats": 24
+      "beats": 25
     }
   ],
   "establishedFacts": [],
@@ -1174,26 +1207,26 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 24,
-    "choices": 24,
+    "sceneSummary": 25,
+    "choices": 25,
     "characterDeltas": 8,
-    "scene": 24,
+    "scene": 25,
     "placeUpdates": 3,
-    "codexUpdates": 18,
-    "timeOps": 24,
+    "codexUpdates": 19,
+    "timeOps": 25,
     "offer": 2,
     "generateRequest": 2,
-    "sceneEnded": 5,
-    "npcUpdates": 19,
+    "sceneEnded": 6,
+    "npcUpdates": 20,
     "moveTo": 1
   },
-  "_opTurns": 24,
+  "_opTurns": 25,
   "customAbilities": {},
   "companionBonds": {},
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "see_the_made_thing": 6,
+      "see_the_made_thing": 7,
       "falsecraft": 2,
       "the_wrong_reality": 2,
       "the_misdirect": 1,

@@ -62,9 +62,33 @@
 > player-confers-a-name. And codex **search** leaves the NOTABLE + merge sections unfiltered while printing
 > *"Nothing cataloged yet"* over six visible entries.
 >
-> **➡️ Sequencing is yours** — SNG-197 rides the braid work you are already in; SNG-198 and SNG-199 are
-> separate passes. ROUND 2 on all three. ⚠️ **SNG-198, SNG-199 and SNG-134 all touch the codex/accumulated
-> state ledger** — if they should be sequenced or merged, say so BEFORE any of them build. SNG-198 §OQ5 asks directly whether it collides with SNG-134; I would rather find that
+> **`po/SPEC_SNG-200_companion_is_a_character.md`** — Erik on Huginn (Marrow), bond 10 / stage 2:
+> *"progress seems to have stopped and he's basically the same as he started."*
+>
+> ⛔ **`companions.js:27` — `stage: b >= stage2At ? 2 : 1`. A ternary. There are two stages, ever.**
+> `growBond:40-41` can emit exactly two events in a bond's lifetime. Meanwhile
+> `content/packs/valley/companions/marrow.json` **authors three stages**, and `companionsForGM:71` already
+> does `c.stages.find(st => st.stage === b.stage)` — **it would surface stage 3 the moment `bondOf` could
+> return it.** Content authored, reader built, one boolean between them (L4 + L1 in one seam).
+> So Huginn is at the **terminal state of the whole companion system** and hit it at bond 8; the last two
+> points bought nothing. ⚠️ Bond caps at 10, final stage fires at 8 — **the top 20% of the scale is inert.**
+> **Existing saves must reach the new stages on reconcile — Erik does not regrind a maxed bond.**
+>
+> Beyond the unblock, Erik wants a real **companion arc** peer to SNG-133's personal arc — evolved form
+> mechanically distinct and *"really cool and useful"*, gaining memory of deeds witnessed. ⛔ **Not every
+> arc is an ascension** — Marrow's stage 3 is a debt between two people, not a power-up; a system that can
+> only express *becomes stronger* would lose the best content already authored.
+> Also: **`GEN_TYPES = ["npc","location","arc"]` — companion is not generatable** (verified `generate.js:24`),
+> and companions reach the codex through **neither** path.
+>
+> ⚠️ **THIRD instance of one shape this batch:** two paths do a job, one complete, one silent — SNG-185
+> (domain stamping), SNG-199 (codex mirror), now SNG-200 (companions fall through both). `generate.js:295`
+> auto-mirrors to codex; `npcs.js` never does. **Three local fixes or one missing shared primitive? Your
+> call — you have the clearest view of all three seams.**
+>
+> **➡️ Sequencing is yours** — SNG-197 rides the braid work you are already in; SNG-198, SNG-199 and SNG-200
+> are separate passes. ROUND 2 on all four. ⚠️ **SNG-198, SNG-199, SNG-200 and SNG-134 all touch the codex/accumulated
+> state ledger — four tickets on one surface** — if they should be sequenced or merged, say so BEFORE any of them build. SNG-198 §OQ5 asks directly whether it collides with SNG-134; I would rather find that
 > overlap now than merge two half-built ledgers later.
 
 

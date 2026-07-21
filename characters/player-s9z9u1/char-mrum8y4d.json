@@ -53,7 +53,7 @@
   ],
   "alignment": {
     "mechanical_spiritual": -0.020000000000000004,
-    "falsehood_truth": -0.03212,
+    "falsehood_truth": -0.030514,
     "spectrumId": -0.08187959453124997,
     "value": -0.04000000000000001,
     "demonic_angelic": -0.020000000000000004
@@ -205,72 +205,68 @@
         "player": "Answer her question directly — tell her the methodology is yours and you will demonstrate it rigorously if she has the patience for independent research",
         "summary": "Loki claimed the methodology as his own; Tessvel — steady, precise, and quietly considering — asked to see it applied to the four spike entries in her log.",
         "narration": "You meet her eyes — no deflection, no lean into charm. You tell her that the methodology is yours. Not filed anywhere, not drawn from a posted procedure, not authorized by a senior wright. Yours. You developed it yourself from what the variance was showing you, and you will demonstrate it rigorously if she has the patience for independent research.\n\nTessvel is very still. Her pen hand rests on the table, not reaching for anything. She looks at you the way she looked at the eleven-day log — as something that has not yet been classified and therefore cannot be dismissed. Then she says, quietly and without much expression, that independent research is not technically a violation. It is not technically a procedure either, she adds. She says this as if she is deciding something as the words leave her.\n\nShe pulls the green-spine log a few degrees toward her. She says that she has documented the divergence on forty-one dates. She has not shared the log with a senior wright because no senior wright has asked, and she is not in the habit of volunteering conclusions she cannot yet support. She looks up from the log and at you again. She says that if you have a methodology, she would see it applied to the last four entries — the ones that spiked above the mean. Her voice is level and carries a particular careful weight that is, Loki, extremely close to the sound of someone taking you seriously.\n\nCy has not moved from the far end of the table. Its lens is very slightly open."
+      },
+      {
+        "player": "Pull your chair closer to the log, close enough that she would have to move to put distance between you — and begin without preamble",
+        "summary": "Loki pulls close; Tessvel turns the log to share it — the four spike entries open between them, and she asks plainly for what his methodology finds that hers has not.",
+        "narration": "You pull the chair forward — the legs scrape once against the stone floor, a short declarative sound in the quiet room. You stop when you are close enough that the log sits between you like a shared problem rather than her documentation. She would have to stand to put distance between you, and she does not stand.\n\nTessvel's eyes drop to the log, then back to you. She does not move the book. She turns it instead, rotating it precisely so the spine faces the window and the text runs the same direction for both of you. It is a small gesture and it is not a small gesture.\n\n\"The four entries,\" she says. Her voice is even. She turns to the first marked page — a date eleven days back, the tally-marker number in one column, her hand-count in the other, the gap between them circled in a different ink. \"They do not cluster. I have checked for schedule correlation, for maintenance windows, for weather-linked intake variance. Nothing fits.\" She sets her pen in the gutter of the open page, not writing yet. \"Show me what yours finds that mine has not.\"\n\nCy has not moved from the far end of the table. Its lens is a small crescent of open iris, aimed precisely at the circled entry."
       }
     ],
     "lastTurn": {
-      "narration": "You meet her eyes — no deflection, no lean into charm. You tell her that the methodology is yours. Not filed anywhere, not drawn from a posted procedure, not authorized by a senior wright. Yours. You developed it yourself from what the variance was showing you, and you will demonstrate it rigorously if she has the patience for independent research.\n\nTessvel is very still. Her pen hand rests on the table, not reaching for anything. She looks at you the way she looked at the eleven-day log — as something that has not yet been classified and therefore cannot be dismissed. Then she says, quietly and without much expression, that independent research is not technically a violation. It is not technically a procedure either, she adds. She says this as if she is deciding something as the words leave her.\n\nShe pulls the green-spine log a few degrees toward her. She says that she has documented the divergence on forty-one dates. She has not shared the log with a senior wright because no senior wright has asked, and she is not in the habit of volunteering conclusions she cannot yet support. She looks up from the log and at you again. She says that if you have a methodology, she would see it applied to the last four entries — the ones that spiked above the mean. Her voice is level and carries a particular careful weight that is, Loki, extremely close to the sound of someone taking you seriously.\n\nCy has not moved from the far end of the table. Its lens is very slightly open.",
-      "sceneSummary": "Loki claimed the methodology as his own; Tessvel — steady, precise, and quietly considering — asked to see it applied to the four spike entries in her log.",
+      "narration": "You pull the chair forward — the legs scrape once against the stone floor, a short declarative sound in the quiet room. You stop when you are close enough that the log sits between you like a shared problem rather than her documentation. She would have to stand to put distance between you, and she does not stand.\n\nTessvel's eyes drop to the log, then back to you. She does not move the book. She turns it instead, rotating it precisely so the spine faces the window and the text runs the same direction for both of you. It is a small gesture and it is not a small gesture.\n\n\"The four entries,\" she says. Her voice is even. She turns to the first marked page — a date eleven days back, the tally-marker number in one column, her hand-count in the other, the gap between them circled in a different ink. \"They do not cluster. I have checked for schedule correlation, for maintenance windows, for weather-linked intake variance. Nothing fits.\" She sets her pen in the gutter of the open page, not writing yet. \"Show me what yours finds that mine has not.\"\n\nCy has not moved from the far end of the table. Its lens is a small crescent of open iris, aimed precisely at the circled entry.",
+      "sceneSummary": "Loki pulls close; Tessvel turns the log to share it — the four spike entries open between them, and she asks plainly for what his methodology finds that hers has not.",
       "choices": [
         {
-          "label": "Open the log to the first spike entry and walk her through your read of what the variance is actually measuring",
+          "label": "Work the first spike entry — look at what See the Made Thing reads in the numbers themselves, not just the gap",
           "attribute": "mental",
-          "subAttribute": "reason",
+          "subAttribute": "insight",
           "axes": {
             "mechanical_spiritual": -0.3,
             "falsehood_truth": 0.2
           },
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
-            "study",
-            "careful"
+            "study"
           ],
           "abilityId": "see_the_made_thing",
           "energyCost": 1,
           "trivial": false
         },
         {
-          "label": "Tell her the spike entries aren't a measurement problem — they're a response. Ask Cy to confirm the dates against the old service-way records",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "mechanical_spiritual": -0.2
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "plan"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Set the methodology aside for just a moment — tell her the thing about the senior wrights that she already knows but hasn't said aloud yet",
+          "label": "Ask her what she thinks caused the first spike — her hypothesis, before yours",
           "attribute": "social",
-          "subAttribute": "insight",
-          "axes": {
-            "falsehood_truth": 0.1
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "persuade",
-            "careful"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Pull your chair closer to the log, close enough that she would have to move to put distance between you — and begin without preamble",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {
-            "falsehood_truth": 0
-          },
+          "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "romantic",
-            "careful"
+            "study",
+            "negotiate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Look at where Cy's lens is aimed — the circled entry — and ask Cy aloud what it is reading",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Before the numbers — tell her that she just did something most engineers don't do, and name it exactly",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
           ],
           "abilityId": null,
           "energyCost": null,
@@ -282,29 +278,28 @@
         "npcsPresent": [
           {
             "name": "Tessvel Cairn",
-            "state": "Log pulled a few degrees toward her, hand resting on the cover — looking at Loki with a precise, deciding attention"
+            "state": "Seated across from Loki, log turned to share — open to the first spike entry, her pen resting in the gutter of the page, waiting"
           },
           {
             "name": "Cy",
-            "state": "At the far end of the table, lens slightly open, lamp at its habitual angle, very still"
+            "state": "At the far end of the table, lens a small crescent of open iris aimed at the circled entry in the log, very still"
           }
         ],
         "objects": [
-          "Long work table — morning light full down its center",
-          "Tessvel's green-spine log — open, pulled toward her, forty-one documented entries visible",
+          "Long work table — morning light full down its center, chair pulled close",
+          "Tessvel's green-spine log — open, turned to share, first spike entry showing — tally-marker number, hand-count, gap circled in different ink",
+          "Tessvel's pen — resting in the gutter of the open page",
           "Tessvel's leather satchel — open on the table",
-          "Tessvel's pen — resting against her hand, not yet lifted",
           "Shelves of bound logs — dates inked on spines, floor to ceiling",
           "Pressure-gauge at the door frame — needle in the green",
-          "One chair — Loki seated in it",
           "Open gate doorway"
         ],
         "threads": [
-          "Tessvel asked to see the methodology applied to the four spike entries — the ask is in the air",
-          "The eleven-day variance is open between them, literally",
-          "Tessvel has not shared the log with a senior wright — that fact is now acknowledged between them",
-          "Cy's lens is open — it is attending to something",
-          "Terminus-seal at the threshold — pre-Transition boundary, unresolved"
+          "Tessvel has turned the log to share it — she is waiting for the methodology to be demonstrated on the first spike entry",
+          "Four spike entries marked in the log — no cluster, no schedule or weather correlation found by Tessvel",
+          "Cy's lens is aimed at the circled entry — it is attending to something",
+          "Terminus-seal at the threshold — pre-Transition boundary, unresolved",
+          "Tessvel has not shared the log with a senior wright — that fact is acknowledged between them"
         ]
       },
       "npcUpdates": [
@@ -312,76 +307,71 @@
           "op": "update",
           "npcId": "tessvel-cairn",
           "name": "Tessvel Cairn",
-          "role": "Junior wright on posting-duty at the Eastern Intake notice board",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Loki claimed independent methodology; Tessvel did not dismiss it — she asked to see it applied to the four spike entries in her log, using the same level voice she uses for everything",
+          "note": "Turned the log to share it rather than guard it — a small, precise act of collaboration. Waiting for the methodology to be demonstrated.",
           "learned": [
-            "She has documented the divergence on forty-one dates — far more than Loki knew",
-            "She has not shared the log with a senior wright because no senior wright has asked — she does not volunteer conclusions she cannot yet support",
-            "She said independent research is not technically a violation — and she was deciding something as she said it"
+            "She has checked the spike entries against schedule, maintenance windows, and weather-linked intake variance — nothing fits"
           ],
-          "skillsObserved": [
-            "Holds incomplete conclusions until she can support them — does not preemptively share upward"
-          ],
-          "relationshipDelta": 1,
+          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At her workstation in the Annex — log pulled toward her, giving Loki the chance to demonstrate"
+          "statusNote": "At the Annex table, log open and shared, waiting for Loki's demonstration on the first spike entry"
         }
       ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "a short exchange at the table — pulling close, Tessvel turning the log, a question asked"
+      },
+      "deeds": [],
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "factUpdates": [],
+      "placeUpdates": [],
       "codexUpdates": [
         {
           "topic": "tessvel-cairn",
           "label": "Tessvel Cairn",
           "kind": "person",
           "entityId": "tessvel-cairn",
-          "fact": "She has documented the variance on forty-one dates and withheld the log from senior wrights — not as defiance but as epistemic discipline: she does not share conclusions she cannot yet support. When Loki claimed independent methodology, she asked to see it applied to the four spike entries. She is taking him seriously.",
+          "fact": "She has tested the four spike entries against schedule correlation, maintenance windows, and weather-linked intake variance and found nothing fitting — the pattern has no ordinary cause she can name",
           "links": [
-            "intake-plaza",
             "the-water-crisis",
             "ring-form-residue-at-eastern-intake",
             "pressure-routing-annex"
           ]
         }
       ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "a direct exchange, a decision settling"
-      },
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
-        "xp": 0
-      }
+        "energy": 0
+      },
+      "sceneEnded": false
     },
     "sceneState": {
       "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, narrow room, morning light full down the center of the long table. Second bell ended. Gate open to the passage.",
       "npcsPresent": [
         {
           "name": "Tessvel Cairn",
-          "state": "Log pulled a few degrees toward her, hand resting on the cover — looking at Loki with a precise, deciding attention"
+          "state": "Seated across from Loki, log turned to share — open to the first spike entry, her pen resting in the gutter of the page,"
         },
         {
           "name": "Cy",
-          "state": "At the far end of the table, lens slightly open, lamp at its habitual angle, very still"
+          "state": "At the far end of the table, lens a small crescent of open iris aimed at the circled entry in the log, very still"
         }
       ],
       "objects": [
-        "Long work table — morning light full down its center",
-        "Tessvel's green-spine log — open, pulled toward her, forty-one documented entrie",
+        "Long work table — morning light full down its center, chair pulled close",
+        "Tessvel's green-spine log — open, turned to share, first spike entry showing — t",
+        "Tessvel's pen — resting in the gutter of the open page",
         "Tessvel's leather satchel — open on the table",
-        "Tessvel's pen — resting against her hand, not yet lifted",
         "Shelves of bound logs — dates inked on spines, floor to ceiling",
         "Pressure-gauge at the door frame — needle in the green",
-        "One chair — Loki seated in it",
         "Open gate doorway"
       ],
       "threads": [
-        "Tessvel asked to see the methodology applied to the four spike entries — the ask is in the air",
-        "The eleven-day variance is open between them, literally",
-        "Tessvel has not shared the log with a senior wright — that fact is now acknowledged between them",
-        "Cy's lens is open — it is attending to something",
-        "Terminus-seal at the threshold — pre-Transition boundary, unresolved"
+        "Tessvel has turned the log to share it — she is waiting for the methodology to be demonstrated on the first spike entry",
+        "Four spike entries marked in the log — no cluster, no schedule or weather correlation found by Tessvel",
+        "Cy's lens is aimed at the circled entry — it is attending to something",
+        "Terminus-seal at the threshold — pre-Transition boundary, unresolved",
+        "Tessvel has not shared the log with a senior wright — that fact is acknowledged between them"
       ]
     }
   },
@@ -410,7 +400,6 @@
       },
       "relationship": 7,
       "history": [
-        "[d1] Gave Loki directions to the Pressure-Routing Annex and confirmed the meeting window between the second and third bell — said it this time as a confirmation, not a schedule.",
         "[d1] Loki kissed her hand and confirmed the meeting at the Annex; she agreed and walked toward the main works without hurrying — and looked at Cy longer than she looked at most things.",
         "[d1] Walked away from the plaza with her characteristic precision — paused at the edge, looked back once to confirm Loki was watching, then departed toward the main works.",
         "[d1] Not yet arrived — meeting window still open between second and third bell.",
@@ -419,17 +408,18 @@
         "[d1] Loki opened with a two-axis compliment — professional competence plus physical charm — and offered to file a report with her supervisor or her boyfriend. She confirmed, precisely, that she has no boyfriend. Then she remembered herself and noted there is no posted authorization for him to be here…",
         "[d1] Did not ask Loki to leave after his offer. Set him to work on the eleven-day variance instead. Said 'nobody else has asked' with faint weight.",
         "[d1] Loki's combined truth-and-charm approach — backed by a touch of The Wrong Reality — found no purchase. She felt the seam of something off, filed it as a question, and declined neither half of the offer. She is still here. So is her question.",
-        "[d1] Loki claimed independent methodology; Tessvel did not dismiss it — she asked to see it applied to the four spike entries in her log, using the same level voice she uses for everything"
+        "[d1] Loki claimed independent methodology; Tessvel did not dismiss it — she asked to see it applied to the four spike entries in her log, using the same level voice she uses for everything",
+        "[d1] Turned the log to share it rather than guard it — a small, precise act of collaboration. Waiting for the methodology to be demonstrated."
       ],
       "knownFacts": [
-        "She has no boyfriend — volunteered precisely, then seemed to hear herself say it",
         "She considers an unposted observer a procedural violation and named it — but has not acted on it yet",
         "The variance between her hand-log and the automated tally-markers has been running eleven days and no senior wright has acted on it — she knows this and she knows it is wrong",
         "She can feel when the framing of a moment is being worked — she doesn't name it as a craft, but she notices the wrongness and converts it to a question rather than accepting it",
         "She did not move from the room despite discomfort — she stayed and asked for an accounting",
         "She has documented the divergence on forty-one dates — far more than Loki knew",
         "She has not shared the log with a senior wright because no senior wright has asked — she does not volunteer conclusions she cannot yet support",
-        "She said independent research is not technically a violation — and she was deciding something as she said it"
+        "She said independent research is not technically a violation — and she was deciding something as she said it",
+        "She has checked the spike entries against schedule, maintenance windows, and weather-linked intake variance — nothing fits"
       ],
       "skillsObserved": [
         "Precise handwriting, official posting procedure",
@@ -442,7 +432,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At her workstation in the Annex — log pulled toward her, giving Loki the chance to demonstrate",
+      "statusNote": "At the Annex table, log open and shared, waiting for Loki's demonstration on the first spike entry",
       "domains": {
         "primary": "wright"
       },
@@ -535,7 +525,7 @@
     "lastSharedReadAt": "2026-07-21T21:10:36.252Z",
     "lastTickWorldDay": 21,
     "lastCanonWorldDay": 21,
-    "turnsSinceOffer": 21,
+    "turnsSinceOffer": 22,
     "recentOffers": [
       {
         "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
@@ -642,7 +632,8 @@
           "[d1] Confirmed she has no boyfriend — stated precisely and without hesitation, then caught herself and added that there is no posted authorization for an observer in the Annex. Both pieces delivered in the same exact voice.",
           "[d1] When offered the choice between flirtation and work, she answered the flattery precisely and then put Loki to work — she did not ask him to leave, and she said 'nobody else has asked' about the variance with faint weight.",
           "[d1] She felt the seam of The Wrong Reality and named it as a procedural question rather than reacting with offense or acceptance — she is more resistant to social-lattice work than the dense substrate around her, and she knows something was off even if she cannot classify what.",
-          "[d1] She has documented the variance on forty-one dates and withheld the log from senior wrights — not as defiance but as epistemic discipline: she does not share conclusions she cannot yet support. When Loki claimed independent methodology, she asked to see it applied to the four spike entries. She is…"
+          "[d1] She has documented the variance on forty-one dates and withheld the log from senior wrights — not as defiance but as epistemic discipline: she does not share conclusions she cannot yet support. When Loki claimed independent methodology, she asked to see it applied to the four spike entries. She is…",
+          "[d1] She has tested the four spike entries against schedule correlation, maintenance windows, and weather-linked intake variance and found nothing fitting — the pattern has no ordinary cause she can name"
         ],
         "links": [
           "intake-plaza",
@@ -711,20 +702,21 @@
     }
   },
   "tendencies": {
-    "devotion": 8.226686834990716,
-    "cerebral": 5.49052153734438,
-    "social": 13.426481919803878,
-    "strategic": 4.597048860751728,
-    "cautious": 2.4130033558645954,
-    "amorous": 9.906405002971836,
-    "generous": 1.6346456855639233,
-    "ruthless": 0.9268593749999999
+    "devotion": 8.021019664115947,
+    "cerebral": 5.35325849891077,
+    "social": 13.090819871808781,
+    "strategic": 4.4821226392329345,
+    "cautious": 3.3526782719679806,
+    "amorous": 10.65874487789754,
+    "generous": 1.5937795434248252,
+    "ruthless": 0.9036878906249999
   },
   "aptitudes": [
     "silver_tongue",
-    "faithful"
+    "faithful",
+    "charmer"
   ],
-  "actionCount": 21,
+  "actionCount": 22,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -851,8 +843,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784672765173,
-  "rev": 40,
+  "updatedAt": 1784672899366,
+  "rev": 41,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1001,7 +993,7 @@
           "entityId": "tessvel-cairn",
           "type": "npc",
           "birthWeight": 2,
-          "engagementScore": 35,
+          "engagementScore": 38,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -1097,6 +1089,14 @@
             {
               "kind": "fact",
               "day": 1
+            },
+            {
+              "kind": "interact",
+              "day": 1
+            },
+            {
+              "kind": "fact",
+              "day": 1
             }
           ],
           "createdDay": 1,
@@ -1125,7 +1125,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_gearlands": 22
+    "the_gearlands": 23
   },
   "opLossPending": false,
   "sessions": [
@@ -1140,10 +1140,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-21T17:40:12.510Z",
-      "lastAt": "2026-07-21T22:26:05.172Z",
+      "lastAt": "2026-07-21T22:28:19.365Z",
       "startDay": 21,
       "endDay": 21,
-      "beats": 21
+      "beats": 22
     }
   ],
   "establishedFacts": [],
@@ -1156,20 +1156,20 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 21,
-    "choices": 21,
-    "characterDeltas": 6,
-    "scene": 21,
+    "sceneSummary": 22,
+    "choices": 22,
+    "characterDeltas": 7,
+    "scene": 22,
     "placeUpdates": 3,
-    "codexUpdates": 15,
-    "timeOps": 21,
+    "codexUpdates": 16,
+    "timeOps": 22,
     "offer": 1,
     "generateRequest": 2,
-    "sceneEnded": 4,
-    "npcUpdates": 16,
+    "sceneEnded": 5,
+    "npcUpdates": 17,
     "moveTo": 1
   },
-  "_opTurns": 21,
+  "_opTurns": 22,
   "customAbilities": {},
   "companionBonds": {},
   "practice": {

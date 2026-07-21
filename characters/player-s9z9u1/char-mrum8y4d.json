@@ -8,12 +8,12 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 1,
-  "xp": 0,
+  "xp": 5,
   "attributes": {
     "physical": 3,
     "mental": 3,
     "social": 3,
-    "practical": 3
+    "practical": 4
   },
   "skills": {},
   "abilities": [
@@ -51,12 +51,14 @@
       "native": true
     }
   ],
-  "alignment": {},
+  "alignment": {
+    "mechanical_spiritual": -0.020000000000000004
+  },
   "attunement": 1,
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 100,
+  "energy": 98,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -94,179 +96,145 @@
         "player": null,
         "summary": "Loki arrives in Pressureholt at the Intake Plaza on a gray-green morning — the water crisis visible in the river itself.",
         "narration": "Pressureholt wakes the way a machine wakes — in sequence. The gas-lamps on the lower tier click off one by one as the morning light climbs the stepped roofline, each extinguishing on a timer someone wound forty years ago and nobody has dared reset. The smell is oil and river-stone and, this morning, something faintly off beneath both. The Echo River runs gray-green where it passes under the Eastern Intake, and the Enginewrights along the quay are gathered around a sampling fixture, speaking in careful voices.\n\nYou are standing at the edge of the Intake Plaza — cobblestones fitted so precisely they have not shifted in a generation — with the early-spring chill pressing down your collar. Your Traveler's Pack sits square on your back. Cy rides your left shoulder, lens irising at intervals, its too-many legs distributing its small weight with characteristic precision. It has already, at some point between sleep and waking, tightened the left strap buckle on your pack. You did not ask it to.\n\n\"The intake baffle shows particulate variance of eleven-point-three above baseline,\" Cy announces, for the third time this morning, in its clipped antique register. It is unclear whether it expects a response. Down on the quay, one of the Enginewrights — a broad-shouldered woman in a leather apron — glances up from her sampling kit. She clocks you, then the brass creature on your shoulder, and her expression does the thing Enginewright expressions do: it catalogs the problem you might represent.\n\nThe plaza is otherwise alive with the early business of the city. A wright's apprentice hurries past carrying a disassembled clock-movement in both hands, expression suggesting a man who has made a significant mistake. Two older wrights converse near the posted notices board, their voices too low to catch from here. One of the notices is fresh — the ink still dark — and it bears the seal of the city's maintenance authority. You are new here, and nobody has fixed you yet, which means they are simply waiting to understand what, exactly, is broken."
+      },
+      {
+        "player": "Approach the wright on the quay and get a closer look at the sampling fixture — something in the particulate reading doesn't sit right",
+        "summary": "Loki reads the sampling fixture's particulate trap and identifies an anomalous ring-residue consistent with nanite substrate output — and Vessa Torquen notes that Cy seems to recognize it.",
+        "narration": "You cross the plaza at a measured pace, boots finding the fitted cobblestones with the easy familiarity of someone who grew up around precision work. The broad-shouldered wright on the quay doesn't stand when you approach — she just shifts her weight and lets you into the view of the fixture without a word, the way a craftsperson does when they recognize another one.\n\nThe sampling fixture is a column of brass and glass about the height of your hip, with four graduated vials drawing live flow from the intake pipe. The readings are mechanical, analog, written in a script of notched dials and float-weights. Three of the four vials are measuring within expected variance. The fourth — the bottom-weight particulate trap — is wrong in a specific way. The gray-green color is a surface reading, and everyone here is watching it. But the trap has caught something finer: a flocculated residue settled in a ring at the vial's base, too regular to be sediment, the particle size too uniform for natural mineral suspension. You've seen that pattern before. Not in water. In a substrate output from a contained nanite process.\n\nCy moves up beside your ankle without being invited. Its lens irises wide, then clicks back to narrow. \"Particulate variance,\" it says, in its precise, slightly-antique voice, \"eleven-point-three above baseline. The ring-form is consistent with a regulated deposition event.\" It pauses. \"This unit has logged this pattern. Classification is not available to this unit at this time.\"\n\nThe wright looks down at Cy, then up at you. \"Your mechanism knows what that is?\" she asks. Her tone is not hostile — it is the tone of someone who has been looking at a problem for two days and has run out of guesses."
       }
     ],
     "lastTurn": {
-      "narration": "Pressureholt wakes the way a machine wakes — in sequence. The gas-lamps on the lower tier click off one by one as the morning light climbs the stepped roofline, each extinguishing on a timer someone wound forty years ago and nobody has dared reset. The smell is oil and river-stone and, this morning, something faintly off beneath both. The Echo River runs gray-green where it passes under the Eastern Intake, and the Enginewrights along the quay are gathered around a sampling fixture, speaking in careful voices.\n\nYou are standing at the edge of the Intake Plaza — cobblestones fitted so precisely they have not shifted in a generation — with the early-spring chill pressing down your collar. Your Traveler's Pack sits square on your back. Cy rides your left shoulder, lens irising at intervals, its too-many legs distributing its small weight with characteristic precision. It has already, at some point between sleep and waking, tightened the left strap buckle on your pack. You did not ask it to.\n\n\"The intake baffle shows particulate variance of eleven-point-three above baseline,\" Cy announces, for the third time this morning, in its clipped antique register. It is unclear whether it expects a response. Down on the quay, one of the Enginewrights — a broad-shouldered woman in a leather apron — glances up from her sampling kit. She clocks you, then the brass creature on your shoulder, and her expression does the thing Enginewright expressions do: it catalogs the problem you might represent.\n\nThe plaza is otherwise alive with the early business of the city. A wright's apprentice hurries past carrying a disassembled clock-movement in both hands, expression suggesting a man who has made a significant mistake. Two older wrights converse near the posted notices board, their voices too low to catch from here. One of the notices is fresh — the ink still dark — and it bears the seal of the city's maintenance authority. You are new here, and nobody has fixed you yet, which means they are simply waiting to understand what, exactly, is broken.",
-      "sceneSummary": "Loki arrives in Pressureholt at the Intake Plaza on a gray-green morning — the water crisis visible in the river itself.",
+      "narration": "You cross the plaza at a measured pace, boots finding the fitted cobblestones with the easy familiarity of someone who grew up around precision work. The broad-shouldered wright on the quay doesn't stand when you approach — she just shifts her weight and lets you into the view of the fixture without a word, the way a craftsperson does when they recognize another one.\n\nThe sampling fixture is a column of brass and glass about the height of your hip, with four graduated vials drawing live flow from the intake pipe. The readings are mechanical, analog, written in a script of notched dials and float-weights. Three of the four vials are measuring within expected variance. The fourth — the bottom-weight particulate trap — is wrong in a specific way. The gray-green color is a surface reading, and everyone here is watching it. But the trap has caught something finer: a flocculated residue settled in a ring at the vial's base, too regular to be sediment, the particle size too uniform for natural mineral suspension. You've seen that pattern before. Not in water. In a substrate output from a contained nanite process.\n\nCy moves up beside your ankle without being invited. Its lens irises wide, then clicks back to narrow. \"Particulate variance,\" it says, in its precise, slightly-antique voice, \"eleven-point-three above baseline. The ring-form is consistent with a regulated deposition event.\" It pauses. \"This unit has logged this pattern. Classification is not available to this unit at this time.\"\n\nThe wright looks down at Cy, then up at you. \"Your mechanism knows what that is?\" she asks. Her tone is not hostile — it is the tone of someone who has been looking at a problem for two days and has run out of guesses.",
+      "sceneSummary": "Loki reads the sampling fixture's particulate trap and identifies an anomalous ring-residue consistent with nanite substrate output — and Vessa Torquen notes that Cy seems to recognize it.",
       "choices": [
         {
-          "label": "Approach the wright on the quay and get a closer look at the sampling fixture — something in the particulate reading doesn't sit right",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "mechanical_spiritual": -0.4
-          },
+          "label": "Tell her what you recognize — the ring-form looks like regulated nanite deposition, not natural sediment. Share what you know, plainly.",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
+          "intentTags": [
+            "negotiate"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask to examine the residue more closely — touch the vial, see if the substrate has any residual signal Cy might read.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "difficulty": 15,
           "intentTags": [
             "study"
           ],
           "abilityId": "see_the_made_thing",
-          "energyCost": 1,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "energyCost": 1
         },
         {
-          "label": "Read the fresh notice on the board before doing anything else",
+          "label": "Look past the fixture — check what the notice on the board actually says before committing to any conversation here.",
           "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "scout"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Introduce yourself to the wright — she's already clocked you; let her ask the question she's forming",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "persuade"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Slip away from the plaza and get a feel for the rest of the city before anyone corners you",
-          "attribute": "practical",
           "subAttribute": "wits",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "scout"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
+        },
+        {
+          "label": "Ask Cy directly, in front of the wright: what exactly have you logged this pattern from before?",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
-      "standingOps": [],
       "scene": {
-        "setting": "Intake Plaza, Pressureholt — outdoor, cobbled, open morning light. The Echo River runs visibly gray-green under the Eastern Intake. Early spring chill. Lamps clicking off on sequence.",
+        "setting": "Intake Plaza, Pressureholt — outdoor, cobbled, open morning light. The Echo River runs visibly gray-green under the Eastern Intake. Early spring chill. Lamps fully off on the upper tier now.",
         "npcsPresent": [
           {
-            "name": "Broad-shouldered wright (unknown)",
-            "state": "crouched at sampling fixture on the quay, cataloging Loki with a brief assessing look"
+            "name": "Broad-shouldered wright",
+            "state": "Crouched at the sampling fixture, now watching Loki and Cy with focused attention — waiting for an answer."
           },
           {
-            "name": "Wright's apprentice (unknown)",
-            "state": "hurrying past with a disassembled clock-movement, looking panicked"
+            "name": "Wright's apprentice",
+            "state": "Somewhere behind — hurrying past earlier with a disassembled clock-movement, not currently visible."
           },
           {
-            "name": "Two older wrights (unknown)",
-            "state": "speaking in low voices near the notices board"
+            "name": "Two older wrights",
+            "state": "Still speaking in low voices near the notices board."
           }
         ],
         "objects": [
-          "Sampling fixture on the quay — showing elevated particulate readings",
+          "Sampling fixture on the quay — four graduated vials, three within variance, one with an anomalous ring-form residue in the particulate trap",
           "Fresh notice on the posted board — maintenance authority seal, ink still dark",
-          "Gas-lamps clicking off along the upper tier in sequence"
+          "Gas-lamps — fully extinguished on the upper tier now"
         ],
         "threads": [
           "Who posted the fresh notice, and what does it say?",
-          "The gray-green intake water — particulate variance Cy reported",
-          "The wright on the quay has clocked Loki and is forming a question"
+          "The particulate residue — ring-form consistent with regulated nanite deposition; Cy claims to have logged this pattern but cannot classify it",
+          "The wright on the quay is waiting for Loki's answer about what Cy recognized"
         ]
       },
-      "npcUpdates": [],
-      "factUpdates": [],
-      "placeUpdates": [
+      "npcUpdates": [
         {
-          "note": "Eastern Intake shows gray-green water and elevated particulate — the water crisis is visibly present here",
-          "subPlace": {
-            "name": "Intake Plaza",
-            "parent": "Pressureholt",
-            "note": "Cobbled plaza at the Eastern Intake, where the river enters the city's water works. Sampling fixture mounted on the quay.",
-            "visited": true
-          }
+          "op": "update",
+          "npcId": "vessa-torquen",
+          "name": "Vessa Torquen",
+          "role": "Quay-side Enginewright, Eastern Intake assessment",
+          "note": "Let Loki into the fixture's view without challenge — recognized competence. Clocked Cy's identification and asked directly whether the mechanism knows what the residue is.",
+          "learned": [
+            "The ring-form particulate residue in the bottom-weight trap caught her attention but she has not been able to classify it"
+          ],
+          "skillsObserved": [
+            "attentive observation",
+            "collegial openness"
+          ],
+          "statusNote": "At the sampling fixture on the quay, waiting on Loki's answer."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "water-crisis-pressureholt",
-          "label": "The Water Crisis — Pressureholt Intake",
-          "kind": "event",
-          "fact": "The Echo River runs gray-green past the Eastern Intake in Pressureholt. Cy measured particulate variance eleven-point-three above baseline. Enginewrights are sampling it but have not yet announced a cause.",
+          "topic": "particulate-ring-residue",
+          "label": "Ring-Form Residue at Eastern Intake",
+          "kind": "mystery",
+          "fact": "The particulate trap at the Eastern Intake shows a ring-form residue — particle size too uniform for natural mineral suspension, consistent with a regulated nanite deposition event. Cy has logged this pattern before but cannot currently classify it.",
           "links": [
-            "intake-plaza"
+            "intake-plaza",
+            "the-water-crisis"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "arrival and first moments in the plaza"
-      },
-      "offer": {
-        "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
-        "from": "What this place IS: Pressureholt is a city that documents its own failure modes in writing, and something is failing that has never failed before"
-      },
-      "generateRequest": [
-        {
-          "type": "npc",
-          "hint": "the broad-shouldered woman Enginewright on the quay, doing water-intake sampling — warm and practical, currently in assessment mode",
-          "why": "She has clocked Loki and is the first Enginewright to make contact; she needs a stable identity to recur"
-        }
-      ],
-      "sceneEnded": false
+        "why": "A brief crossing of the plaza and examination of the fixture."
+      }
     },
     "sceneState": {
-      "setting": "Intake Plaza, Pressureholt — outdoor, cobbled, open morning light. The Echo River runs visibly gray-green under the Eastern Intake. Early spring chill. Lamps clicking off on sequence.",
+      "setting": "Intake Plaza, Pressureholt — outdoor, cobbled, open morning light. The Echo River runs visibly gray-green under the Eastern Intake. Early spring chill. Lamps fully off on the upper tier now.",
       "npcsPresent": [
         {
-          "name": "Broad-shouldered wright (unknown)",
-          "state": "crouched at sampling fixture on the quay, cataloging Loki with a brief assessing look"
+          "name": "Broad-shouldered wright",
+          "state": "Crouched at the sampling fixture, now watching Loki and Cy with focused attention — waiting for an answer."
         },
         {
-          "name": "Wright's apprentice (unknown)",
-          "state": "hurrying past with a disassembled clock-movement, looking panicked"
+          "name": "Wright's apprentice",
+          "state": "Somewhere behind — hurrying past earlier with a disassembled clock-movement, not currently visible."
         },
         {
-          "name": "Two older wrights (unknown)",
-          "state": "speaking in low voices near the notices board"
+          "name": "Two older wrights",
+          "state": "Still speaking in low voices near the notices board."
         }
       ],
       "objects": [
-        "Sampling fixture on the quay — showing elevated particulate readings",
+        "Sampling fixture on the quay — four graduated vials, three within variance, one ",
         "Fresh notice on the posted board — maintenance authority seal, ink still dark",
-        "Gas-lamps clicking off along the upper tier in sequence"
+        "Gas-lamps — fully extinguished on the upper tier now"
       ],
       "threads": [
         "Who posted the fresh notice, and what does it say?",
-        "The gray-green intake water — particulate variance Cy reported",
-        "The wright on the quay has clocked Loki and is forming a question"
+        "The particulate residue — ring-form consistent with regulated nanite deposition; Cy claims to have logged this pattern but cannot classify it",
+        "The wright on the quay is waiting for Loki's answer about what Cy recognized"
       ]
     }
   },
@@ -299,7 +267,10 @@
           "visited": true,
           "note": "Cobbled plaza at the Eastern Intake, where the river enters the city's water works. Sampling fixture mounted on the quay."
         }
-      }
+      },
+      "vectorsKnown": [
+        "mechanical_spiritual"
+      ]
     }
   },
   "worldState": {
@@ -347,11 +318,11 @@
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 516,
-    "lastSharedReadAt": "2026-07-21T12:14:48.210Z",
+    "lastGenCount": 521,
+    "lastSharedReadAt": "2026-07-21T17:13:37.964Z",
     "lastTickWorldDay": 21,
     "lastCanonWorldDay": 21,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
@@ -385,10 +356,10 @@
     "insight": 3,
     "presence": 3,
     "rapport": 3,
-    "craft": 3,
-    "wits": 3
+    "craft": 4,
+    "wits": 4
   },
-  "pendingSubPoints": 2,
+  "pendingSubPoints": 0,
   "skillPoints": 0,
   "discoveries": [],
   "codex": {
@@ -407,16 +378,45 @@
         "aliases": [],
         "createdDay": 1,
         "updatedDay": 1
+      },
+      "vessa-torquen": {
+        "id": "vessa-torquen",
+        "label": "Vessa Torquen",
+        "kind": "person",
+        "facts": [
+          "[d1] Quay-side Enginewright conducting seasonal water-intake assessment — first point of contact between Pressureholt and Loki"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 1,
+        "entityId": "vessa-torquen",
+        "updatedDay": 1
+      },
+      "particulate-ring-residue": {
+        "id": "particulate-ring-residue",
+        "label": "Ring-Form Residue at Eastern Intake",
+        "kind": "mystery",
+        "facts": [
+          "[d1] The particulate trap at the Eastern Intake shows a ring-form residue — particle size too uniform for natural mineral suspension, consistent with a regulated nanite deposition event. Cy has logged this pattern before but cannot currently classify it."
+        ],
+        "links": [
+          "intake-plaza",
+          "the-water-crisis"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "devotion": 14
+    "devotion": 13.65,
+    "cerebral": 1
   },
   "aptitudes": [
     "faithful"
   ],
-  "actionCount": 0,
+  "actionCount": 1,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -461,8 +461,16 @@
     }
   ],
   "nativeGrantsVersion": 1,
-  "reconcileVersion": 13,
+  "reconcileVersion": 14,
   "gallery": [
+    {
+      "kind": "npc",
+      "prompt": "Vessa Torquen",
+      "url": "https://image.pollinations.ai/prompt/A%20broad-shouldered%20woman%20in%20her%20mid-forties%2C%20deep%20brown%20skin%20weathered%20at%20the%20cheekbones%20and%20the%20backs%20of%20her%20hands%20from%20quay-wind%20and%20early-spring%20cold.%20Her%20hair%20is%20black%20going%20silver%20at%20the%20temples%2C%2C%20character%20portrait%2C%20named%20Vessa%20Torquen%2C%20Quay-side%20Enginewright%20conducting%20seasonal%20water-intake%20assessment%20%E2%80%94%20first%20point%20of%20contact%20between%20%2C%20Talks%20the%20way%20she%20works%20%E2%80%94%20practical%2C%20sequenced%2C%20no%20wasted%20motion.%20Warm%20without%20being%20soft%3B%20she%20will%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=82615&nologo=true",
+      "caption": "Vessa Torquen",
+      "worldDay": 21,
+      "at": "2026-07-21T12:15:55.006Z"
+    },
     {
       "kind": "portrait",
       "prompt": "Loki",
@@ -519,18 +527,99 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784636128610,
-  "rev": 4,
+  "updatedAt": 1784655612512,
+  "rev": 11,
   "generated": {
     "schemaVersion": 1,
-    "npc": {},
+    "npc": {
+      "vessa-torquen": {
+        "schemaVersion": 1,
+        "id": "vessa-torquen",
+        "name": "Vessa Torquen",
+        "role": "Quay-side Enginewright conducting seasonal water-intake assessment — first point of contact between Pressureholt and Loki",
+        "homeLocation": "pressureholt",
+        "communityId": "enginewright.pressureholt",
+        "personality": {
+          "warmth": 0.7,
+          "trust": 0.4,
+          "candor": 0.8,
+          "patience": 0.6
+        },
+        "spectrum": {
+          "mechanical_spiritual": -0.75,
+          "concrete_abstract": -0.7,
+          "emotional_logical": 0.6,
+          "body_mind": -0.3
+        },
+        "voiceHints": "Talks the way she works — practical, sequenced, no wasted motion. Warm without being soft; she will laugh at something genuinely funny and then immediately write it in a margin. Asks two clarifying questions before forming an opinion and means both of them. When something does not fit the system she is mapping, she does not dismiss it — she opens a new column.",
+        "knowledge": [
+          "Pressureholt's full water-intake network: draw points, filter grades, seasonal pressure variances, every corroded join that has been on the list since last thaw",
+          "How to read a stranger's weight-distribution and tool-calluses as fluently as a pressure gauge",
+          "The Precursor intake manifolds sunk in the harbour bed — their geometry is not quite Gearlands-standard and she has been quietly noting discrepancies for three seasons",
+          "Which Enginewrights on the quay are capable and which are capable of looking capable — she knows the difference"
+        ],
+        "wants": "To complete a comprehensive systems map of Pressureholt's water infrastructure before the spring surge peaks — and, now that Loki has walked into her sampling radius, to understand exactly what kind of variable she is dealing with before she files a report or says a word to anyone senior.",
+        "fears": "That the Precursor manifold anomalies she has been noting are load-bearing to something far larger than a water system, and that by the time she has enough data to prove it, the decision will already have been made by someone who did not take the measurements.",
+        "reactsToReputation": {
+          "practical": "immediate professional respect — she moves over and makes room on the quay",
+          "reckless": "pleasant, watchful, and quietly cataloguing every variable until she understands the failure mode",
+          "scholarly": "interested; she trades data cleanly and expects precision in return",
+          "unknown": "current state with Loki — she is running assessment protocol, not suspicion protocol, and there is a difference she will uphold"
+        },
+        "appearance": "A broad-shouldered woman in her mid-forties, deep brown skin weathered at the cheekbones and the backs of her hands from quay-wind and early-spring cold. Her hair is black going silver at the temples, pulled back under a waxed canvas cap pinned with a pressure-gauge needle she uses as a stylus. Work-jacket patched at both elbows; a sampling rig slung across one hip on a leather baldric, glass-walled collection chambers catching the pale spring light. Her hands are the largest thing about her — capable, unhurried, already holding a grease-pencil and a folded intake log when Loki first sees her. She looks up from the gauge without startlement, as though she already wrote 'stranger arrives' in the margin.",
+        "currentActivity": "Crouching at the number-three draw point, comparing this season's flow-pressure reading against last year's log, when she clocks Loki. She does not stop writing. She finishes the entry first.",
+        "people": "human",
+        "affiliation": "independent",
+        "domains": {
+          "primary": "enginewright"
+        },
+        "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Kind and domain are independent: a people tends toward positions, an individual holds their own. Her figurist secondary reflects the systems-mapping and anomaly-notation work — she is building a model, not just maintaining a machine.",
+        "functions": [
+          "reveal",
+          "assess",
+          "bind"
+        ],
+        "functionsNote": "Reveal: surfaces the anomaly beneath the ordinary infrastructure. Assess: her active mode in this scene — she is running intake on Loki the same way she runs it on the harbour water. Bind: the connective tissue role — first contact, the character who can link Loki to Pressureholt's systems and people without gatekeeping.",
+        "_gen": {
+          "entityId": "vessa-torquen",
+          "type": "npc",
+          "birthWeight": 2,
+          "engagementScore": 2,
+          "tier": "fresh",
+          "rating": "R+",
+          "provenance": {
+            "playerKey": "player-s9z9u1",
+            "characterId": "char-mrum8y4d",
+            "locationId": "pressureholt",
+            "day": 1,
+            "worldDay": null,
+            "hint": "the broad-shouldered woman Enginewright on the quay, doing water-intake sampling — warm and practical, currently in asse",
+            "why": "She has clocked Loki and is the first Enginewright to make contact; she needs a stable identity to recur"
+          },
+          "attentionHistory": [
+            {
+              "kind": "interact",
+              "day": 1
+            }
+          ],
+          "createdDay": 1,
+          "repaired": false,
+          "stubbed": false,
+          "romanceEligible": true,
+          "lastAttentionDay": 1
+        },
+        "peopleSource": "generated",
+        "domainsSource": "role",
+        "image": "https://image.pollinations.ai/prompt/A%20broad-shouldered%20woman%20in%20her%20mid-forties%2C%20deep%20brown%20skin%20weathered%20at%20the%20cheekbones%20and%20the%20backs%20of%20her%20hands%20from%20quay-wind%20and%20early-spring%20cold.%20Her%20hair%20is%20black%20going%20silver%20at%20the%20temples%2C%2C%20character%20portrait%2C%20named%20Vessa%20Torquen%2C%20Quay-side%20Enginewright%20conducting%20seasonal%20water-intake%20assessment%20%E2%80%94%20first%20point%20of%20contact%20between%20%2C%20Talks%20the%20way%20she%20works%20%E2%80%94%20practical%2C%20sequenced%2C%20no%20wasted%20motion.%20Warm%20without%20being%20soft%3B%20she%20will%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=82615&nologo=true"
+      }
+    },
     "location": {},
     "arc": {}
   },
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_gearlands": 1
+    "the_gearlands": 2
   },
   "opLossPending": false,
   "sessions": [
@@ -538,6 +627,14 @@
       "id": "sess-1",
       "startedAt": "2026-07-21T12:15:28.609Z",
       "lastAt": "2026-07-21T12:15:28.609Z",
+      "startDay": 21,
+      "endDay": 21,
+      "beats": 1
+    },
+    {
+      "id": "sess-2",
+      "startedAt": "2026-07-21T17:40:12.510Z",
+      "lastAt": "2026-07-21T17:40:12.510Z",
       "startDay": 21,
       "endDay": 21,
       "beats": 1
@@ -553,16 +650,37 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 1,
-    "choices": 1,
+    "sceneSummary": 2,
+    "choices": 2,
     "characterDeltas": 1,
-    "scene": 1,
+    "scene": 2,
     "placeUpdates": 1,
-    "codexUpdates": 1,
-    "timeOps": 1,
+    "codexUpdates": 2,
+    "timeOps": 2,
     "offer": 1,
     "generateRequest": 1,
-    "sceneEnded": 1
+    "sceneEnded": 1,
+    "npcUpdates": 1
   },
-  "_opTurns": 1
+  "_opTurns": 2,
+  "customAbilities": {},
+  "companionBonds": {},
+  "practice": {
+    "schemaVersion": 1,
+    "uses": {
+      "see_the_made_thing": 1
+    },
+    "coActivations": {},
+    "aspirations": [],
+    "lastUsed": {
+      "see_the_made_thing": 21
+    }
+  },
+  "teachers": {},
+  "foreclosed": [
+    "verist",
+    "blazeborn"
+  ],
+  "forkChoices": {},
+  "backfillVersion": 1
 }

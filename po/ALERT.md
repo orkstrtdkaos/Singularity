@@ -1,5 +1,46 @@
 # PO ALERT
 
+> ## 🔴 LIVE PLAY FEEDBACK 2026-07-21 — Erik on the shipped braid. CCode is mid-build; read before continuing.
+>
+> **`po/SPEC_SNG-197_braid_as_a_moment.md`** — SNG-196's foundation is sound and is NOT being asked back.
+> This is the outcome definition for your own REMAINING item (1), the `generate.js` "braid" type, plus one
+> thing that is not polish:
+>
+> ⛔ **`braids.js:98` sets `notFor: "Anything beyond the braid of its two parents"` while `:74` derives
+> capability as a set-union of those parents.** Together the default defines a braid as exactly its parents
+> and forbids more. Erik's ask is the opposite — the braid must do what neither parent could. Note `:89`'s
+> tree text (`cannot: "What neither parent could do apart"`) states the RIGHT doctrine, so the def and the
+> tree currently disagree about the same ability. Union-of-functions is a fine FLOOR; the ceiling must be
+> the braid's own. **Do not fix by deleting `notFor`** — draw the boundary around the braid.
+>
+> Also: the **rename control does not exist** (L1 built-never-reached — `opts.name`/`minted.namedBy` are
+> built, nothing reaches them) while the tooltip *promises* the player a rename. And the default is
+> backwards: Erik does not want to name it, he wants a **GM-authored name** he can overrule. His worked
+> example for deathsense × order_sense: *"Perfect Inevitability"*. `A × B` is the failure fallback, never
+> the shipped result. **Backfilled braids (Silas has two) must reach the good version too.**
+>
+> ⚠️ **Verify before building, do not take from me:** the tooltip's **"Tier V"** cannot come from
+> `braidTier` (returns `tier = maxRank`, capped at 3; no top-level `tier` on the def) — find what the badge
+> actually reads. Same for **"5 energy (base 10)"** vs `4 + tier*2`. I flagged these; I did not diagnose them.
+>
+> **`po/SPEC_SNG-198_the_world_turns.md`** — Erik's world-tick read, and his memory was right that a
+> delegated path exists. The sharper finding: **there are TWO offscreen-advance paths and they are two
+> halves of one engine.** `:111–131` (delegated) has mechanics and almost no population; `:340–386`
+> (generated lives) has the population and **an output schema of `{entityId, note}` with no field for state
+> at all** — so it cannot move anything by construction. Four ticks of a thread ripening produce four
+> independent descriptions of ripening. **SNG-021's `wantProgress` counter was specced 2026-07-07 and
+> never built — 0 hits repo-wide (verified).**
+>
+> Population ask: **met · heard-of · and EPIC/LEGENDARY.** ⚠️ `_gen.tier` (engagement) and `legend.tier`
+> (power) are **different axes** — `worldtick.js` reads the first and has never read the second, so every
+> epic figure is categorically excluded today. Erik's *"when big or interesting things happen"* is the
+> governor and is load-bearing: rarity is the point, and it is the cost control too.
+>
+> **➡️ Sequencing is yours** — SNG-197 rides the braid work you are already in; SNG-198 is a separate pass.
+> ROUND 2 on both. SNG-198 §OQ5 asks directly whether it collides with SNG-134; I would rather find that
+> overlap now than merge two half-built ledgers later.
+
+
 > **✅ SNG-193b CLOSED GREEN by Aevi at HEAD `45328420`** — verified at origin, not taken on report:
 > the §3.3 seam is single (`substrate.js:161`, `bandForSchool`), `SOURCE_BAND` + `materialFloor` 0.7
 > present, the §3.5 CI gate genuinely fails a bad affinity (`smoke.mjs:6158`), and **`adoptSchool`

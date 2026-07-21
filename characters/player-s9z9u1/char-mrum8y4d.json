@@ -54,7 +54,7 @@
   "alignment": {
     "mechanical_spiritual": -0.020000000000000004,
     "falsehood_truth": -0.04000000000000001,
-    "spectrumId": -0.0475
+    "spectrumId": -0.045125
   },
   "attunement": 1,
   "maxHealth": 30,
@@ -133,51 +133,57 @@
         "player": "Ask what she does when her posting ends — keep the thread open without pressing it",
         "summary": "Loki asks Tessvel what follows her posting — she names ten free minutes between the second and third bell, and leaves the rest unsaid.",
         "narration": "The second bell is not yet rung. The plaza holds its early-morning chill — the kind that settles into cobblestones and doesn't lift until midday, if the season agrees to cooperate.\n\nYou ask her, lightly, what she does when the posting ends. Not pressing. Just leaving a door open in the wall of the conversation.\n\nTessvel looks at the notice board for a moment before she answers. She does not look at you. She straightens one corner of the log she just pinned, even though it does not need it. Then she says that she usually writes up her notes from the morning and files them before the shift changes. She says it the way someone says a routine thing when they are deciding whether to say the less routine thing underneath it.\n\nThen she glances sideways at you. \"The filing takes about ten minutes,\" she says. \"After that, I am unassigned until the third bell.\" She does not say anything else. She picks up her ink stylus and caps it, which is something to do with her hands.\n\nCy has moved without announcement to a cobblestone near your left boot. Its lens irises briefly toward Tessvel's hand-log, and then toward you. It does not speak. You get the distinct sense it is noting something in whatever passes for its records."
+      },
+      {
+        "player": "Ok - it's a date then... can I meet you at your place? I'm new here.  It's important to see where you work to know how to best help you think through what you have here.",
+        "summary": "Loki proposes meeting Tessvel at her workstation — she gives him directions to the Pressure-Routing Annex and confirms the window between bells.",
+        "narration": "You let the offer land easy, like it was always going to be said. You tell her it is a date, then — and you mean it exactly as much as you let it sound like you mean it, which is quite a lot. You say you are new here and that you would like to see where she works. You say it plainly: it helps to understand the place before you can help with the problem inside it.\n\nTessvel looks at you for a moment. Not calculating — more the way someone looks at a door they have just decided to open. She caps her stylus and slides it into her coat pocket, the one without a patch. She says her work station is in the Pressure-Routing Annex, east side of the main works, third gate left of the big wheel. She says this precisely, the way she writes dates. She adds that it is not impressive to look at — it is mostly shelving and a long table — but that the light is good in the mornings.\n\nShe picks up her log and tucks it under her arm. The second bell is still not rung. The gray-green water moves below the quay, and Cy clicks quietly at your heel, lens turned toward the river rather than the conversation, which is the closest thing to tact you have ever seen from it. Tessvel glances down at Cy — not worried, not unkind — and then looks back at you with something that might be the beginning of a question she has decided to save for later.\n\n\"Between the second and third bell,\" she says again, and this time it is not a schedule. It is a confirmation."
       }
     ],
     "lastTurn": {
-      "narration": "The second bell is not yet rung. The plaza holds its early-morning chill — the kind that settles into cobblestones and doesn't lift until midday, if the season agrees to cooperate.\n\nYou ask her, lightly, what she does when the posting ends. Not pressing. Just leaving a door open in the wall of the conversation.\n\nTessvel looks at the notice board for a moment before she answers. She does not look at you. She straightens one corner of the log she just pinned, even though it does not need it. Then she says that she usually writes up her notes from the morning and files them before the shift changes. She says it the way someone says a routine thing when they are deciding whether to say the less routine thing underneath it.\n\nThen she glances sideways at you. \"The filing takes about ten minutes,\" she says. \"After that, I am unassigned until the third bell.\" She does not say anything else. She picks up her ink stylus and caps it, which is something to do with her hands.\n\nCy has moved without announcement to a cobblestone near your left boot. Its lens irises briefly toward Tessvel's hand-log, and then toward you. It does not speak. You get the distinct sense it is noting something in whatever passes for its records.",
-      "sceneSummary": "Loki asks Tessvel what follows her posting — she names ten free minutes between the second and third bell, and leaves the rest unsaid.",
+      "narration": "You let the offer land easy, like it was always going to be said. You tell her it is a date, then — and you mean it exactly as much as you let it sound like you mean it, which is quite a lot. You say you are new here and that you would like to see where she works. You say it plainly: it helps to understand the place before you can help with the problem inside it.\n\nTessvel looks at you for a moment. Not calculating — more the way someone looks at a door they have just decided to open. She caps her stylus and slides it into her coat pocket, the one without a patch. She says her work station is in the Pressure-Routing Annex, east side of the main works, third gate left of the big wheel. She says this precisely, the way she writes dates. She adds that it is not impressive to look at — it is mostly shelving and a long table — but that the light is good in the mornings.\n\nShe picks up her log and tucks it under her arm. The second bell is still not rung. The gray-green water moves below the quay, and Cy clicks quietly at your heel, lens turned toward the river rather than the conversation, which is the closest thing to tact you have ever seen from it. Tessvel glances down at Cy — not worried, not unkind — and then looks back at you with something that might be the beginning of a question she has decided to save for later.\n\n\"Between the second and third bell,\" she says again, and this time it is not a schedule. It is a confirmation.",
+      "sceneSummary": "Loki proposes meeting Tessvel at her workstation — she gives him directions to the Pressure-Routing Annex and confirms the window between bells.",
       "choices": [
         {
-          "label": "\"Walk with me after the filing — show me where the Echo River enters the works. I want to see the intake itself, not just the readings.\"",
+          "label": "Wait here at the plaza until the second bell rings, watching the water and the sampling fixture",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask Cy what it makes of the gray-green water while you wait — it has been watching the river",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Approach the gray-haired woman still standing at the water's edge — her worry has been there since you arrived",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "romantic",
-            "flirt"
+            "help",
+            "persuade"
           ],
           "trivial": true
         },
         {
-          "label": "\"Ten minutes is plenty of time to get coffee if you know where to go. Do you know where to go?\"",
-          "attribute": "social",
-          "subAttribute": "presence",
+          "label": "Head toward the Pressure-Routing Annex now — arrive early and see the place before Tessvel does",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
-            "flirt",
-            "romantic"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "\"I'll be here when the posting ends.\" Plain. Direct. No performance.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "romantic"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Or say or do something else.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "intentTags": [
-            "romantic"
+            "scout",
+            "travel"
           ],
           "trivial": true
         }
@@ -187,7 +193,7 @@
         "npcsPresent": [
           {
             "name": "Tessvel Cairn",
-            "state": "Standing at the notices board, ink stylus now capped and held, having just named her ten free minutes between bells — waiting to see what Loki does with that."
+            "state": "Tucked her log under her arm after giving directions — standing at the notices board, something held back in her expression, a question saved for later."
           },
           {
             "name": "Vessa Torquen",
@@ -202,11 +208,11 @@
           "Sampling fixture on the quay — four graduated vials, one outside variance",
           "Fresh notice on the lower rail — Eastern Intake Particulate Variance Log, Spring",
           "Notices board dense with maintenance schedules and duty rosters",
-          "Cy's lamp, angled slightly toward the notice",
-          "Tessvel's capped ink stylus, held in her right hand"
+          "Cy's lamp, angled toward the river",
+          "Tessvel's capped ink stylus, now in her coat pocket"
         ],
         "threads": [
-          "Tessvel has named ten free minutes between the second and third bell — an opening, not yet an appointment",
+          "Tessvel confirmed the window between the second and third bell at the Pressure-Routing Annex — east side of the main works, third gate left of the big wheel",
           "Tessvel's log has diverged from the automated markers for eleven days — no senior wright has visibly acted on it",
           "The ring-form residue at the sampling fixture matches a regulated nanite deposition pattern",
           "The gray-haired woman at the water's edge — her worry unexplained",
@@ -218,14 +224,47 @@
           "op": "update",
           "npcId": "tessvel-cairn",
           "name": "Tessvel Cairn",
-          "note": "Named ten free minutes between the second and third bell without being asked directly — an opening left in the air.",
-          "statusNote": "At the notices board in Intake Plaza — has named her free window between the second and third bell, waiting to see what Loki does with it.",
-          "status": "active"
+          "role": "Junior wright on posting-duty at the Eastern Intake notice board",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "Gave Loki directions to the Pressure-Routing Annex and confirmed the meeting window between the second and third bell — said it this time as a confirmation, not a schedule.",
+          "learned": [
+            "Her workstation is in the Pressure-Routing Annex, east side of the main works, third gate left of the big wheel",
+            "She describes the space as mostly shelving and a long table, but notes the light is good in the mornings"
+          ],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "Departing the notices board at the second bell — will be at the Pressure-Routing Annex in the window between second and third bell.",
+          "bondType": "romantic",
+          "bondStage": "courting"
+        }
+      ],
+      "placeUpdates": [
+        {
+          "subPlace": {
+            "name": "Pressure-Routing Annex",
+            "parent": "Pressureholt",
+            "note": "Tessvel Cairn's workstation — east side of the main works, third gate left of the big wheel. Mostly shelving and a long table; good morning light. Meeting window confirmed between the second and third bell.",
+            "visited": false
+          }
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "tessvel-cairn",
+          "label": "Tessvel Cairn",
+          "kind": "person",
+          "entityId": "tessvel-cairn",
+          "fact": "Her workstation is in the Pressure-Routing Annex — east side of the main works, third gate left of the big wheel. She has confirmed a meeting there between the second and third bell.",
+          "links": [
+            "intake-plaza",
+            "the-water-crisis"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange at the notices board — the posting is still ongoing, the second bell not yet rung."
+        "why": "A brief exchange at the notices board — a direction given, a time confirmed"
       }
     },
     "sceneState": {
@@ -233,7 +272,7 @@
       "npcsPresent": [
         {
           "name": "Tessvel Cairn",
-          "state": "Standing at the notices board, ink stylus now capped and held, having just named her ten free minutes between bells — wa"
+          "state": "Tucked her log under her arm after giving directions — standing at the notices board, something held back in her express"
         },
         {
           "name": "Vessa Torquen",
@@ -248,11 +287,11 @@
         "Sampling fixture on the quay — four graduated vials, one outside variance",
         "Fresh notice on the lower rail — Eastern Intake Particulate Variance Log, Spring",
         "Notices board dense with maintenance schedules and duty rosters",
-        "Cy's lamp, angled slightly toward the notice",
-        "Tessvel's capped ink stylus, held in her right hand"
+        "Cy's lamp, angled toward the river",
+        "Tessvel's capped ink stylus, now in her coat pocket"
       ],
       "threads": [
-        "Tessvel has named ten free minutes between the second and third bell — an opening, not yet an appointment",
+        "Tessvel confirmed the window between the second and third bell at the Pressure-Routing Annex — east side of the main works, third gate left of the big wheel",
         "Tessvel's log has diverged from the automated markers for eleven days — no senior wright has visibly acted on it",
         "The ring-form residue at the sampling fixture matches a regulated nanite deposition pattern",
         "The gray-haired woman at the water's edge — her worry unexplained",
@@ -283,21 +322,24 @@
         "locationId": "pressureholt",
         "day": 1
       },
-      "relationship": 2,
+      "relationship": 3,
       "history": [
         "[d1] Loki observed her before approaching — the straightening posture when seniors passed, the careful handwriting, the patches. He introduced himself while reading her fresh posting.",
         "[d1] Turned to face Loki properly when he treated her work as genuinely important. Revealed that her hand-log has diverged from the automated tally-markers for eleven days.",
         "[d1] Loki offered to sit with the log and work through what the divergence means — and added a wink. She named her posting end time: the second bell. Not warm, but considering.",
         "[d1] Your bond becomes romantic.",
         "[d1] Your bond deepens — courting.",
-        "[d1] Named ten free minutes between the second and third bell without being asked directly — an opening left in the air."
+        "[d1] Named ten free minutes between the second and third bell without being asked directly — an opening left in the air.",
+        "[d1] Gave Loki directions to the Pressure-Routing Annex and confirmed the meeting window between the second and third bell — said it this time as a confirmation, not a schedule."
       ],
       "knownFacts": [
         "Writes and records for a living, or does so as a posting duty",
         "Fixes things rather than replacing them — coat has three different-fabric patches, each applied neatly",
         "Sensitive about junior status — straightened when older wrights passed",
         "Her hand-log records what is actually present in the water; the automated markers record only what they are calibrated to expect. The two have not agreed for eleven days.",
-        "Her posting ends at the second bell"
+        "Her posting ends at the second bell",
+        "Her workstation is in the Pressure-Routing Annex, east side of the main works, third gate left of the big wheel",
+        "She describes the space as mostly shelving and a long table, but notes the light is good in the mornings"
       ],
       "skillsObserved": [
         "Precise handwriting, official posting procedure",
@@ -307,7 +349,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the notices board in Intake Plaza — has named her free window between the second and third bell, waiting to see what Loki does with it.",
+      "statusNote": "Departing the notices board at the second bell — will be at the Pressure-Routing Annex in the window between second and third bell.",
       "domains": {
         "primary": "wright"
       },
@@ -334,6 +376,13 @@
           "day": 1,
           "visited": true,
           "note": "Cobbled plaza at the Eastern Intake, where the river enters the city's water works. Sampling fixture mounted on the quay."
+        },
+        "pressure-routing-annex": {
+          "name": "Pressure-Routing Annex",
+          "parentId": "pressureholt",
+          "day": 1,
+          "visited": false,
+          "note": "Tessvel Cairn's workstation — east side of the main works, third gate left of the big wheel. Mostly shelving and a long table; good morning light. Meeting window confirmed between the second and…"
         }
       },
       "vectorsKnown": [
@@ -390,7 +439,7 @@
     "lastSharedReadAt": "2026-07-21T17:13:37.964Z",
     "lastTickWorldDay": 21,
     "lastCanonWorldDay": 21,
-    "turnsSinceOffer": 7,
+    "turnsSinceOffer": 8,
     "recentOffers": [
       {
         "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
@@ -492,7 +541,8 @@
         "facts": [
           "[d1] Junior wright on posting-duty at the Eastern Intake notice board — the person who makes the official record legible, correctly sequenced, and properly stamped",
           "[d1] Junior wright on posting-duty at the Eastern Intake. Precise, self-critical, patches her coat rather than replacing it. Sensitive about her rank relative to the senior wrights here.",
-          "[d1] Her hand-kept variance log at the Eastern Intake has diverged from the automated tally-markers for eleven days — she records what is actually there; the markers record what they are calibrated to expect."
+          "[d1] Her hand-kept variance log at the Eastern Intake has diverged from the automated tally-markers for eleven days — she records what is actually there; the markers record what they are calibrated to expect.",
+          "[d1] Her workstation is in the Pressure-Routing Annex — east side of the main works, third gate left of the big wheel. She has confirmed a meeting there between the second and third bell."
         ],
         "links": [
           "intake-plaza",
@@ -507,18 +557,18 @@
     }
   },
   "tendencies": {
-    "devotion": 11.72628230899658,
-    "cerebral": 0.8590683010253904,
-    "social": 7.42022302734375,
-    "strategic": 1.8305472656250001,
-    "cautious": 0.9268593749999999,
-    "amorous": 2.975,
-    "generous": 0.975
+    "devotion": 11.433125251271665,
+    "cerebral": 0.8375915934997556,
+    "social": 8.234717451660156,
+    "strategic": 1.784783583984375,
+    "cautious": 0.9036878906249999,
+    "amorous": 3.9006250000000002,
+    "generous": 0.9506249999999999
   },
   "aptitudes": [
     "faithful"
   ],
-  "actionCount": 7,
+  "actionCount": 8,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -637,8 +687,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784658900993,
-  "rev": 22,
+  "updatedAt": 1784660061387,
+  "rev": 23,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -787,7 +837,7 @@
           "entityId": "tessvel-cairn",
           "type": "npc",
           "birthWeight": 2,
-          "engagementScore": 10,
+          "engagementScore": 13,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -823,6 +873,14 @@
             {
               "kind": "interact",
               "day": 1
+            },
+            {
+              "kind": "interact",
+              "day": 1
+            },
+            {
+              "kind": "fact",
+              "day": 1
             }
           ],
           "createdDay": 1,
@@ -849,7 +907,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_gearlands": 8
+    "the_gearlands": 9
   },
   "opLossPending": false,
   "sessions": [
@@ -864,10 +922,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-21T17:40:12.510Z",
-      "lastAt": "2026-07-21T18:35:00.991Z",
+      "lastAt": "2026-07-21T18:54:21.384Z",
       "startDay": 21,
       "endDay": 21,
-      "beats": 7
+      "beats": 8
     }
   ],
   "establishedFacts": [],
@@ -880,19 +938,19 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 8,
-    "choices": 8,
+    "sceneSummary": 9,
+    "choices": 9,
     "characterDeltas": 2,
-    "scene": 8,
-    "placeUpdates": 1,
-    "codexUpdates": 5,
-    "timeOps": 8,
+    "scene": 9,
+    "placeUpdates": 2,
+    "codexUpdates": 6,
+    "timeOps": 9,
     "offer": 1,
     "generateRequest": 2,
     "sceneEnded": 1,
-    "npcUpdates": 6
+    "npcUpdates": 7
   },
-  "_opTurns": 8,
+  "_opTurns": 9,
   "customAbilities": {},
   "companionBonds": {},
   "practice": {

@@ -148,117 +148,133 @@
         "player": "Watch her walk and take full detailed note off all the best of her features - what are her dimensions and attributes... how well does she move?  Watch her walk away and see if she looks back to see you watching.",
         "summary": "Loki watches Tessvel walk away — she moves with efficient precision, pauses at the plaza's edge, and looks back once before she goes.",
         "narration": "Tessvel walks away at no particular hurry, and you watch her go with the careful attention you give to things worth understanding.\n\nShe moves well. Not a trained walk — nothing self-conscious about it — but efficient in the way that people who spend their days navigating tight machinery corridors learn to be. Her stride is even and unhurried, each foot placed with the same quiet precision she gives her handwriting. She is not tall, but she carries herself at her full height, which amounts to the same thing. The rust-orange coat falls to mid-thigh and she has her hands in its pockets now, the patched left sleeve catching the early light. Her hair — dark, pinned up with what looks like a spare tightening-rod rather than a proper pin — stays in place as she walks, though one piece at the nape of her neck has come loose and moves with her pace. Her frame is lean and capable-looking, the kind that comes from actual work rather than intention.\n\nAt the edge of the plaza, where the cobblestones meet the passage leading toward the main works, she pauses. She does not make a show of it. She simply stops, half-turns, and looks back once — a measured look, not a lingering one, the way you check a reading before you file it. Her eyes find you exactly where she left you. Then she turns and goes.\n\nCy's lens irises once beside your ankle, tracking her departure. It clicks quietly, twice, and says nothing."
+      },
+      {
+        "player": "Head toward the Pressure-Routing Annex — third gate left of the big wheel — ahead of the second bell.",
+        "summary": "Loki arrives at the Pressure-Routing Annex ahead of Tessvel — three gates left of the big wheel, morning light across the long table, Cy pausing in the doorway with a click it does not explain.",
+        "narration": "You leave the intake plaza as the morning chill begins to soften — just barely, the way early spring concedes warmth in small installments. Cy falls in beside you at its habitual distance, lamp swinging in a short arc, legs picking their way over the cobblestones with unnerving precision.\n\nThe main works are easy to find. The big wheel is visible from three streets over — a weathered iron circle, taller than two men, turning at a steady pace that suggests it has never once been asked to stop. You count the gates left of it: one, two, three. The third gate is narrower than the others, framed in dark timber with a pressure-gauge mounted at eye level, its needle sitting just inside the green.\n\nInside, the Pressure-Routing Annex is exactly what Tessvel described and nothing more: shelving, a long table, stacks of bound logs with dates inked on the spines. The morning light comes in from the east through a high, narrow window and lays itself across the table in a clean pale bar. The room smells of machine oil and paper. Cy stops in the doorway, lens irising slowly around the space. It makes a small sound — a single, measured click — and does not explain it.\n\nTessvel is not here yet. The second bell has not rung. You have arrived first, which means you have a moment to look at what she works with before she arrives to explain it."
       }
     ],
     "lastTurn": {
-      "narration": "Tessvel walks away at no particular hurry, and you watch her go with the careful attention you give to things worth understanding.\n\nShe moves well. Not a trained walk — nothing self-conscious about it — but efficient in the way that people who spend their days navigating tight machinery corridors learn to be. Her stride is even and unhurried, each foot placed with the same quiet precision she gives her handwriting. She is not tall, but she carries herself at her full height, which amounts to the same thing. The rust-orange coat falls to mid-thigh and she has her hands in its pockets now, the patched left sleeve catching the early light. Her hair — dark, pinned up with what looks like a spare tightening-rod rather than a proper pin — stays in place as she walks, though one piece at the nape of her neck has come loose and moves with her pace. Her frame is lean and capable-looking, the kind that comes from actual work rather than intention.\n\nAt the edge of the plaza, where the cobblestones meet the passage leading toward the main works, she pauses. She does not make a show of it. She simply stops, half-turns, and looks back once — a measured look, not a lingering one, the way you check a reading before you file it. Her eyes find you exactly where she left you. Then she turns and goes.\n\nCy's lens irises once beside your ankle, tracking her departure. It clicks quietly, twice, and says nothing.",
-      "sceneSummary": "Loki watches Tessvel walk away — she moves with efficient precision, pauses at the plaza's edge, and looks back once before she goes.",
+      "narration": "You leave the intake plaza as the morning chill begins to soften — just barely, the way early spring concedes warmth in small installments. Cy falls in beside you at its habitual distance, lamp swinging in a short arc, legs picking their way over the cobblestones with unnerving precision.\n\nThe main works are easy to find. The big wheel is visible from three streets over — a weathered iron circle, taller than two men, turning at a steady pace that suggests it has never once been asked to stop. You count the gates left of it: one, two, three. The third gate is narrower than the others, framed in dark timber with a pressure-gauge mounted at eye level, its needle sitting just inside the green.\n\nInside, the Pressure-Routing Annex is exactly what Tessvel described and nothing more: shelving, a long table, stacks of bound logs with dates inked on the spines. The morning light comes in from the east through a high, narrow window and lays itself across the table in a clean pale bar. The room smells of machine oil and paper. Cy stops in the doorway, lens irising slowly around the space. It makes a small sound — a single, measured click — and does not explain it.\n\nTessvel is not here yet. The second bell has not rung. You have arrived first, which means you have a moment to look at what she works with before she arrives to explain it.",
+      "sceneSummary": "Loki arrives at the Pressure-Routing Annex ahead of Tessvel — three gates left of the big wheel, morning light across the long table, Cy pausing in the doorway with a click it does not explain.",
       "choices": [
         {
-          "label": "Go and speak to the gray-haired woman at the water's edge — her worry has gone unexplained long enough.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "help"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Look more closely at the fourth vial in Vessa Torquen's sampling fixture — the one outside variance.",
+          "label": "Look over the shelves and log spines — see what the room itself can tell you before Tessvel arrives.",
           "attribute": "mental",
           "subAttribute": "reason",
+          "axes": {
+            "mechanical_spiritual": -0.4
+          },
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Let Cy examine the sampling fixture on the quay — see what a Precursor maintenance-thing makes of the ring-form residue.",
+          "label": "Use See the Made Thing on the pressure-gauge at the door — read how the instrument is built and whether it is reading true.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 15,
+          "axes": {
+            "mechanical_spiritual": -0.5
+          },
+          "difficulty": 0,
           "intentTags": [
             "study"
           ],
+          "abilityId": "see_the_made_thing",
+          "energyCost": 1,
           "trivial": false
         },
         {
-          "label": "Head toward the Pressure-Routing Annex — third gate left of the big wheel — ahead of the second bell.",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Watch what Cy is doing in the doorway — it clicked once and stopped; ask it what it found.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "mechanical_spiritual": -0.3
+          },
           "difficulty": 0,
           "intentTags": [
-            "travel"
+            "study"
           ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Wait for Tessvel — settle at the table, get comfortable, and let her find you already at home in her space.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": -0.1
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
       "scene": {
-        "setting": "Intake Plaza, Pressureholt — outdoor, cobbled, open morning light. The Echo River runs visibly gray-green under the Eastern Intake. Early spring chill. Second bell not yet rung.",
-        "npcsPresent": [
-          {
-            "name": "Vessa Torquen",
-            "state": "Back at the sampling fixture, still studying the fourth vial, back to Loki."
-          },
-          {
-            "name": "Gray-haired woman in work apron",
-            "state": "Still at the water's edge, staring at the river with a worried expression."
-          }
-        ],
+        "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, third gate left of the big wheel. A narrow room: shelving, a long table, stacked bound logs with dates on their spines. Morning light in a clean pale bar from a high east-facing window. Early spring; the big wheel audible turning outside.",
+        "npcsPresent": [],
         "objects": [
-          "Sampling fixture on the quay — four graduated vials, one outside variance",
-          "Fresh notice on the lower rail — Eastern Intake Particulate Variance Log, Spring",
-          "Notices board dense with maintenance schedules and duty rosters",
-          "Cy's lamp, angled toward the river"
+          "Long work table — pale bar of morning light across it",
+          "Shelves of bound logs — dates inked on spines",
+          "Pressure-gauge at the door frame — needle in the green",
+          "Cy — in the doorway, lens irising, lamp lit"
         ],
         "threads": [
-          "Tessvel confirmed the meeting window between the second and third bell at the Pressure-Routing Annex — third gate left of the big wheel",
-          "Tessvel looked back once before leaving — a measured look, then gone",
-          "Tessvel's log has diverged from the automated markers for eleven days — no senior wright has visibly acted on it",
-          "The ring-form residue at the sampling fixture matches a regulated nanite deposition pattern",
-          "The gray-haired woman at the water's edge — her worry still unexplained"
+          "Tessvel confirmed the meeting window between the second and third bell — she has not yet arrived",
+          "Cy clicked once in the doorway and has not explained it",
+          "Tessvel's hand-log has diverged from the automated markers for eleven days — her records are somewhere in this room",
+          "The ring-form residue at the intake matches a regulated nanite deposition pattern — no senior wright has acted on it"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "tessvel-cairn",
-          "name": "Tessvel Cairn",
-          "note": "Walked away from the plaza with her characteristic precision — paused at the edge, looked back once to confirm Loki was watching, then departed toward the main works.",
-          "statusNote": "Departing the plaza — walking toward the Pressure-Routing Annex ahead of the second bell; meeting confirmed between bells."
-        }
-      ],
+      "moveTo": {
+        "location": "pressure-routing-annex",
+        "why": "walked from the intake plaza — third gate left of the big wheel"
+      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief observation beat at the plaza — a few quiet minutes watching her go"
-      }
-    },
-    "sceneState": {
-      "setting": "Intake Plaza, Pressureholt — outdoor, cobbled, open morning light. The Echo River runs visibly gray-green under the Eastern Intake. Early spring chill. Second bell not yet rung.",
-      "npcsPresent": [
+        "why": "short walk from the intake plaza to the Annex ahead of the second bell"
+      },
+      "placeUpdates": [
         {
-          "name": "Vessa Torquen",
-          "state": "Back at the sampling fixture, still studying the fourth vial, back to Loki."
-        },
-        {
-          "name": "Gray-haired woman in work apron",
-          "state": "Still at the water's edge, staring at the river with a worried expression."
+          "note": "Loki arrived at the Pressure-Routing Annex ahead of Tessvel — morning light on the long table, Cy paused in the doorway with an unexplained click",
+          "subPlace": {
+            "name": "Pressure-Routing Annex",
+            "parent": "Pressureholt",
+            "note": "Tessvel Cairn's workstation — east side of the main works, third gate left of the big wheel. Shelving, a long table, stacked bound logs, a pressure-gauge at the door, good morning light from the east. Loki arrived here ahead of the second bell.",
+            "visited": true
+          }
         }
       ],
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, third gate left of the big wheel. A narrow room: shelving, a long table, stacked bound logs with dates on their spines. Morning light in a clean pale bar from a high east-facing window. Early spring; the big wheel audible turning outside.",
+      "npcsPresent": [],
       "objects": [
-        "Sampling fixture on the quay — four graduated vials, one outside variance",
-        "Fresh notice on the lower rail — Eastern Intake Particulate Variance Log, Spring",
-        "Notices board dense with maintenance schedules and duty rosters",
-        "Cy's lamp, angled toward the river"
+        "Long work table — pale bar of morning light across it",
+        "Shelves of bound logs — dates inked on spines",
+        "Pressure-gauge at the door frame — needle in the green",
+        "Cy — in the doorway, lens irising, lamp lit"
       ],
       "threads": [
-        "Tessvel confirmed the meeting window between the second and third bell at the Pressure-Routing Annex — third gate left of the big wheel",
-        "Tessvel looked back once before leaving — a measured look, then gone",
-        "Tessvel's log has diverged from the automated markers for eleven days — no senior wright has visibly acted on it",
-        "The ring-form residue at the sampling fixture matches a regulated nanite deposition pattern",
-        "The gray-haired woman at the water's edge — her worry still unexplained"
+        "Tessvel confirmed the meeting window between the second and third bell — she has not yet arrived",
+        "Cy clicked once in the doorway and has not explained it",
+        "Tessvel's hand-log has diverged from the automated markers for eleven days — her records are somewhere in this room",
+        "The ring-form residue at the intake matches a regulated nanite deposition pattern — no senior wright has acted on it"
       ]
     }
   },
@@ -332,7 +348,8 @@
     "pressureholt": {
       "visits": 1,
       "notes": [
-        "[d1] Eastern Intake shows gray-green water and elevated particulate — the water crisis is visibly present here"
+        "[d1] Eastern Intake shows gray-green water and elevated particulate — the water crisis is visibly present here",
+        "[d1] Loki arrived at the Pressure-Routing Annex ahead of Tessvel — morning light on the long table, Cy paused in the doorway with an unexplained click"
       ],
       "flags": {},
       "subPlaces": {
@@ -347,8 +364,8 @@
           "name": "Pressure-Routing Annex",
           "parentId": "pressureholt",
           "day": 1,
-          "visited": false,
-          "note": "Tessvel Cairn's workstation — east side of the main works, third gate left of the big wheel. Mostly shelving and a long table; good morning light. Meeting window confirmed between the second and…"
+          "visited": true,
+          "note": "Tessvel Cairn's workstation — east side of the main works, third gate left of the big wheel. Shelving, a long table, stacked bound logs, a pressure-gauge at the door, good morning light from the…"
         }
       },
       "vectorsKnown": [
@@ -401,11 +418,11 @@
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 521,
-    "lastSharedReadAt": "2026-07-21T17:13:37.964Z",
+    "lastGenCount": 525,
+    "lastSharedReadAt": "2026-07-21T21:10:36.252Z",
     "lastTickWorldDay": 21,
     "lastCanonWorldDay": 21,
-    "turnsSinceOffer": 10,
+    "turnsSinceOffer": 11,
     "recentOffers": [
       {
         "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
@@ -523,18 +540,18 @@
     }
   },
   "tendencies": {
-    "devotion": 10.868614691990127,
-    "cerebral": 2.7962355085707054,
-    "social": 7.828128277484435,
-    "strategic": 1.6966598945251465,
-    "cautious": 0.8590683010253904,
-    "amorous": 5.6580316406249995,
-    "generous": 0.9036878906249999
+    "devotion": 10.596899324690373,
+    "cerebral": 2.7263296208564376,
+    "social": 7.632425070547324,
+    "strategic": 1.6542433971620178,
+    "cautious": 0.8375915934997556,
+    "amorous": 5.516580849609374,
+    "generous": 0.8810956933593749
   },
   "aptitudes": [
     "faithful"
   ],
-  "actionCount": 10,
+  "actionCount": 11,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -653,8 +670,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784662137025,
-  "rev": 25,
+  "updatedAt": 1784668301717,
+  "rev": 30,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -862,7 +879,9 @@
           "stubbed": false,
           "romanceEligible": true,
           "lastAttentionDay": 1,
-          "depthTier": "established"
+          "depthTier": "established",
+          "promotedWorldDay": 21,
+          "canonTier": "variant"
         },
         "peopleSource": "generated",
         "domainsSource": "generated",
@@ -881,7 +900,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_gearlands": 11
+    "the_gearlands": 12
   },
   "opLossPending": false,
   "sessions": [
@@ -896,10 +915,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-21T17:40:12.510Z",
-      "lastAt": "2026-07-21T19:28:57.025Z",
+      "lastAt": "2026-07-21T21:11:41.715Z",
       "startDay": 21,
       "endDay": 21,
-      "beats": 10
+      "beats": 11
     }
   ],
   "establishedFacts": [],
@@ -914,15 +933,16 @@
   "_opEmitted": {
     "sceneSummary": 11,
     "choices": 11,
-    "characterDeltas": 2,
+    "characterDeltas": 3,
     "scene": 11,
-    "placeUpdates": 2,
+    "placeUpdates": 3,
     "codexUpdates": 6,
     "timeOps": 11,
     "offer": 1,
     "generateRequest": 2,
-    "sceneEnded": 1,
-    "npcUpdates": 9
+    "sceneEnded": 2,
+    "npcUpdates": 8,
+    "moveTo": 1
   },
   "_opTurns": 11,
   "customAbilities": {},

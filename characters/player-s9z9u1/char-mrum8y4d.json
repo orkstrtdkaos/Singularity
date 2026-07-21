@@ -215,130 +215,140 @@
         "player": "Deal - four entries for four buttons... don't overly worry about the normal lack of privacy... I've applied advanced pre-cursor skills to this area to keep anything we may discover together her private... now (use See the made thing and ask Cy for his assistance as well - really impress her).",
         "summary": "Loki invoked a working privacy ward with Cy at the threshold, then read the first spike entry — particulate rose before the intake valve opened, meaning the anomaly is in water already in the system, not in the river.",
         "narration": "You say it simply, like stating a specification: four entries, four buttons — one for each, and what you find together stays between the two of you. You say it with the small smile, not the large one, because the large one is for when you are less serious. Then you shift your weight, and your attention goes somewhere she cannot quite follow.\n\nCy moves. Not toward her, not toward the log — toward the doorway. It places itself precisely at the threshold, at the spot where the old boundary-impression sits beneath the stone, and it extends three of its legs into a wide, low stance and goes entirely still. The lamp it carries dims to almost nothing. The sound the room makes changes: the pressure-gauge needle taps once against its housing and stops; the faint hum of the works beyond the gate seems to step back, like a crowd making room. What you have done is not a wall or a shroud — the lattice is too dense for that — but you have given the signal in this room a shape, a narrowness, a direction inward rather than out. Cy is holding the threshold the way it holds a maintenance perimeter: precisely, without comment, for exactly as long as required.\n\nYou turn to the first circled entry in the open log and you use what you know how to use. The page resolves under your attention — not just ink on paper but the construction beneath it, the record as a made thing, the seams between what was measured and what was interpreted. The spike on day eleven reads clean to any instrument. But to your read it has a joinery problem: the particulate count spiked before the intake valve opened for the morning cycle, not after. The variance is not in the water entering. It is in the water that was already there.\n\nTessvel watches you read without moving. Then she picks up her pen. She does not write anything yet. She asks, very quietly, which direction you read it from."
+      },
+      {
+        "player": "Say nothing yet — turn to the second entry and read it the same way, building the pattern before you name the conclusion.",
+        "summary": "Second spike entry read — pressure-drop in the lower routing channel preceded the count by four minutes; Tessvel begins annotating in step.",
+        "narration": "You say nothing. You turn the page.\n\nThe second spike entry sits three days after the first — a different date, the same shape. You place your finger at the top of the column and read downward, the same way you read the first. Tessvel watches your finger move and does not look at your face.\n\nThe particulate count rose again before the valve opened. Not in the river. In the works. And this time the intake log shows a pressure-drop in the lower routing channel that preceded the count by four minutes exactly. Something moved through the channel before the morning cycle ran. Something that left a trace.\n\nYou tap the column once with one fingertip and say nothing. You turn to the third entry.\n\nTessvel's pen finds the page. She does not write a word. She draws a small bracket in the margin beside the pressure-drop figure — her own annotation, made in real time, matching yours. She is not watching the methodology anymore. She is doing it."
       }
     ],
     "lastTurn": {
-      "narration": "You say it simply, like stating a specification: four entries, four buttons — one for each, and what you find together stays between the two of you. You say it with the small smile, not the large one, because the large one is for when you are less serious. Then you shift your weight, and your attention goes somewhere she cannot quite follow.\n\nCy moves. Not toward her, not toward the log — toward the doorway. It places itself precisely at the threshold, at the spot where the old boundary-impression sits beneath the stone, and it extends three of its legs into a wide, low stance and goes entirely still. The lamp it carries dims to almost nothing. The sound the room makes changes: the pressure-gauge needle taps once against its housing and stops; the faint hum of the works beyond the gate seems to step back, like a crowd making room. What you have done is not a wall or a shroud — the lattice is too dense for that — but you have given the signal in this room a shape, a narrowness, a direction inward rather than out. Cy is holding the threshold the way it holds a maintenance perimeter: precisely, without comment, for exactly as long as required.\n\nYou turn to the first circled entry in the open log and you use what you know how to use. The page resolves under your attention — not just ink on paper but the construction beneath it, the record as a made thing, the seams between what was measured and what was interpreted. The spike on day eleven reads clean to any instrument. But to your read it has a joinery problem: the particulate count spiked before the intake valve opened for the morning cycle, not after. The variance is not in the water entering. It is in the water that was already there.\n\nTessvel watches you read without moving. Then she picks up her pen. She does not write anything yet. She asks, very quietly, which direction you read it from.",
-      "sceneSummary": "Loki invoked a working privacy ward with Cy at the threshold, then read the first spike entry — particulate rose before the intake valve opened, meaning the anomaly is in water already in the system, not in the river.",
+      "narration": "You say nothing. You turn the page.\n\nThe second spike entry sits three days after the first — a different date, the same shape. You place your finger at the top of the column and read downward, the same way you read the first. Tessvel watches your finger move and does not look at your face.\n\nThe particulate count rose again before the valve opened. Not in the river. In the works. And this time the intake log shows a pressure-drop in the lower routing channel that preceded the count by four minutes exactly. Something moved through the channel before the morning cycle ran. Something that left a trace.\n\nYou tap the column once with one fingertip and say nothing. You turn to the third entry.\n\nTessvel's pen finds the page. She does not write a word. She draws a small bracket in the margin beside the pressure-drop figure — her own annotation, made in real time, matching yours. She is not watching the methodology anymore. She is doing it.",
+      "sceneSummary": "Second spike entry read — pressure-drop in the lower routing channel preceded the count by four minutes; Tessvel begins annotating in step.",
       "choices": [
         {
-          "label": "Tell her what you read — the spike is pre-intake, in water already inside the works — and watch her face when the implication lands.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "persuade",
-            "help"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Say nothing yet — turn to the second entry and read it the same way, building the pattern before you name the conclusion.",
+          "label": "Turn to the third entry and keep reading — let the pattern finish building itself.",
           "attribute": "mental",
           "subAttribute": "reason",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "careful"
+            "study"
           ],
-          "trivial": true
+          "abilityId": "see_the_made_thing",
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Answer her question — tell her you read from the seam outward, meaning where the measured fact and the interpretation part company — and invite her to try it on the same entry.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "intentTags": [
-            "help",
-            "persuade"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask Cy, still standing at the threshold, whether the boundary-impression beneath it has any relation to what the log is showing — pressure, seal, containment.",
+          "label": "Pause on the pressure-drop — ask her if that channel feeds the old lower service-way.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 15,
+          "axes": {},
+          "difficulty": 0,
           "intentTags": [
-            "study",
-            "careful"
+            "study"
           ],
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Glance at Cy — it stationed itself on that old boundary-impression; check whether it is reacting to the second entry's data.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Note that she just annotated it herself — tell her she already knows the methodology.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "flirt"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -1
-      },
       "scene": {
         "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, narrow room, morning light full down the center of the long table. Gate open to passage. Cy stationed at the threshold in a wide maintenance stance, lamp dimmed, holding the perimeter.",
         "npcsPresent": [
           {
             "name": "Tessvel Cairn",
-            "state": "Seated across from Loki, pen in hand but not yet writing — watching him finish the read, waiting for his answer about methodology direction"
+            "state": "Seated close, pen in hand — she has just drawn a small margin bracket beside the pressure-drop figure on the second entry, annotating in step with Loki's read."
           },
           {
             "name": "Cy",
-            "state": "Positioned at the threshold in a wide three-leg stance, lamp dimmed to almost nothing, holding the room's signal inward — still, attending"
+            "state": "Positioned at the threshold in a wide three-leg stance, lamp dimmed to almost nothing, holding the room's signal inward."
           }
         ],
         "objects": [
           "Long work table — morning light full down its center",
-          "Tessvel's green-spine log — open, turned to share, first spike entry showing, circled",
-          "Tessvel's pen — in her hand, not yet writing",
+          "Tessvel's green-spine log — open, turned to share, second spike entry now showing with her fresh margin bracket",
+          "Tessvel's pen — in hand, just annotated",
           "Tessvel's leather satchel — open on the table",
           "Shelves of bound logs — dates inked on spines, floor to ceiling",
-          "Pressure-gauge at the door frame — needle still after one tap",
+          "Pressure-gauge at the door frame — needle still",
           "Cy's dimmed lamp — at the threshold"
         ],
         "threads": [
-          "Tessvel has asked which direction Loki reads the entry from — awaiting answer",
-          "First spike entry partially read: particulate rose before the intake valve opened — pre-intake anomaly",
-          "Three more spike entries uncircled — pattern not yet built",
-          "Cy holding the threshold perimeter — the old boundary-impression beneath it still unresolved",
-          "The four-entries-for-four-buttons arrangement — made, not yet collected on either side",
-          "Tessvel has not shared the log with a senior wright — acknowledged between them"
+          "Second spike entry read — pressure-drop in lower routing channel precedes particulate count by four minutes; source still unnamed",
+          "Third and fourth spike entries still unread — pattern not yet complete",
+          "Tessvel has begun annotating in step — she is doing the methodology now, not just watching it",
+          "Cy holding the threshold on the old boundary-impression — not yet classified",
+          "Four-entries-for-four-buttons arrangement — standing"
         ]
       },
+      "codexUpdates": [
+        {
+          "topic": "pressure-routing-annex",
+          "label": "Pressure-Routing Annex",
+          "kind": "mystery",
+          "entityId": "pressure-routing-annex",
+          "fact": "Second spike entry: a pressure-drop in the lower routing channel preceded the particulate count by exactly four minutes — something moved through the channel before the morning intake cycle ran.",
+          "links": [
+            "the-water-crisis",
+            "ring-form-residue-at-eastern-intake",
+            "tessvel-cairn"
+          ]
+        }
+      ],
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "tessvel-cairn",
           "name": "Tessvel Cairn",
-          "note": "Watched Loki invoke the working and Cy take the threshold — did not object, did not comment. Picked up her pen when Loki began the read. Asked which direction he reads from — genuinely methodological, not rhetorical.",
+          "note": "Drew a margin bracket in real time alongside Loki's read of the second entry — she is no longer watching the methodology, she is applying it.",
           "learned": [
-            "The working changed the room's signal quality — she felt it as the pressure-gauge going still",
-            "Cy stationed at a threshold has a function she does not have a classification for"
+            "Second spike entry shows a pressure-drop in the lower routing channel four minutes before the particulate count — something moved through before the morning cycle ran"
           ],
           "skillsObserved": [
-            "Precise methodological questioning under unusual conditions"
+            "Annotates in real time, matching an unfamiliar methodology on first contact"
           ],
-          "relationshipDelta": 0,
           "status": "active",
-          "statusNote": "At the Annex table, pen in hand, waiting for Loki's answer about read-direction on the first spike entry"
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "the-water-crisis",
-          "label": "The Water Crisis — Pressureholt Intake",
-          "kind": "mystery",
-          "entityId": "intake-plaza",
-          "fact": "First spike entry read via See the Made Thing: the particulate count rose before the intake valve opened for the morning cycle — the anomaly is in water already inside the works, not in the river coming in.",
-          "links": [
-            "tessvel-cairn",
-            "ring-form-residue-at-eastern-intake",
-            "pressure-routing-annex"
-          ]
+          "statusNote": "At the Annex table, pen now moving — annotating the second spike entry in step with Loki's read."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A few minutes of working and reading at the Annex table"
-      },
-      "offer": {
-        "thing": "The pressure-gauge needle, which tapped once and stopped when Cy settled — Tessvel noticed and her pen moved toward it before she stopped herself, as if she wanted to log it",
-        "from": "What Tessvel fears: that the system will grind her into the shape of the job it needs — here it is offering her something she has no procedure for, and she almost reached for the log before the methodology"
+        "why": "A quiet turn of pages and a close read — a few minutes only."
       }
     },
     "sceneState": {
@@ -346,28 +356,28 @@
       "npcsPresent": [
         {
           "name": "Tessvel Cairn",
-          "state": "Seated across from Loki, pen in hand but not yet writing — watching him finish the read, waiting for his answer about me"
+          "state": "Seated close, pen in hand — she has just drawn a small margin bracket beside the pressure-drop figure on the second entr"
         },
         {
           "name": "Cy",
-          "state": "Positioned at the threshold in a wide three-leg stance, lamp dimmed to almost nothing, holding the room's signal inward "
+          "state": "Positioned at the threshold in a wide three-leg stance, lamp dimmed to almost nothing, holding the room's signal inward."
         }
       ],
       "objects": [
         "Long work table — morning light full down its center",
-        "Tessvel's green-spine log — open, turned to share, first spike entry showing, ci",
-        "Tessvel's pen — in her hand, not yet writing",
+        "Tessvel's green-spine log — open, turned to share, second spike entry now showin",
+        "Tessvel's pen — in hand, just annotated",
         "Tessvel's leather satchel — open on the table",
         "Shelves of bound logs — dates inked on spines, floor to ceiling",
-        "Pressure-gauge at the door frame — needle still after one tap",
+        "Pressure-gauge at the door frame — needle still",
         "Cy's dimmed lamp — at the threshold"
       ],
       "threads": [
-        "Tessvel has asked which direction Loki reads the entry from — awaiting answer",
-        "First spike entry partially read: particulate rose before the intake valve opened — pre-intake anomaly",
-        "Three more spike entries uncircled — pattern not yet built",
-        "Cy holding the threshold perimeter — the old boundary-impression beneath it still unresolved",
-        "The four-entries-for-four-buttons arrangement — made, not yet collected on either side"
+        "Second spike entry read — pressure-drop in lower routing channel precedes particulate count by four minutes; source still unnamed",
+        "Third and fourth spike entries still unread — pattern not yet complete",
+        "Tessvel has begun annotating in step — she is doing the methodology now, not just watching it",
+        "Cy holding the threshold on the old boundary-impression — not yet classified",
+        "Four-entries-for-four-buttons arrangement — standing"
       ]
     }
   },
@@ -396,7 +406,6 @@
       },
       "relationship": 7,
       "history": [
-        "[d1] Walked away from the plaza with her characteristic precision — paused at the edge, looked back once to confirm Loki was watching, then departed toward the main works.",
         "[d1] Not yet arrived — meeting window still open between second and third bell.",
         "[d1] Her footsteps are audible in the passage — she is arriving at the second bell exactly, as expected.",
         "[d1] Arrived on time, filed first log entries from memory, noticed Loki with careful cataloguing attention — offered a second chair without apology.",
@@ -405,30 +414,31 @@
         "[d1] Loki's combined truth-and-charm approach — backed by a touch of The Wrong Reality — found no purchase. She felt the seam of something off, filed it as a question, and declined neither half of the offer. She is still here. So is her question.",
         "[d1] Loki claimed independent methodology; Tessvel did not dismiss it — she asked to see it applied to the four spike entries in her log, using the same level voice she uses for everything",
         "[d1] Turned the log to share it rather than guard it — a small, precise act of collaboration. Waiting for the methodology to be demonstrated.",
-        "[d1] Watched Loki invoke the working and Cy take the threshold — did not object, did not comment. Picked up her pen when Loki began the read. Asked which direction he reads from — genuinely methodological, not rhetorical."
+        "[d1] Watched Loki invoke the working and Cy take the threshold — did not object, did not comment. Picked up her pen when Loki began the read. Asked which direction he reads from — genuinely methodological, not rhetorical.",
+        "[d1] Drew a margin bracket in real time alongside Loki's read of the second entry — she is no longer watching the methodology, she is applying it."
       ],
       "knownFacts": [
-        "She can feel when the framing of a moment is being worked — she doesn't name it as a craft, but she notices the wrongness and converts it to a question rather than accepting it",
         "She did not move from the room despite discomfort — she stayed and asked for an accounting",
         "She has documented the divergence on forty-one dates — far more than Loki knew",
         "She has not shared the log with a senior wright because no senior wright has asked — she does not volunteer conclusions she cannot yet support",
         "She said independent research is not technically a violation — and she was deciding something as she said it",
         "She has checked the spike entries against schedule, maintenance windows, and weather-linked intake variance — nothing fits",
         "The working changed the room's signal quality — she felt it as the pressure-gauge going still",
-        "Cy stationed at a threshold has a function she does not have a classification for"
+        "Cy stationed at a threshold has a function she does not have a classification for",
+        "Second spike entry shows a pressure-drop in the lower routing channel four minutes before the particulate count — something moved through before the morning cycle ran"
       ],
       "skillsObserved": [
-        "Keeps a detailed hand-written variance log alongside automat",
         "Notices and records divergence independently",
         "Resistance to social misdirection",
         "Precise verbal recalibration under pressure",
         "Holds incomplete conclusions until she can support them — do",
-        "Precise methodological questioning under unusual conditions"
+        "Precise methodological questioning under unusual conditions",
+        "Annotates in real time, matching an unfamiliar methodology o"
       ],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the Annex table, pen in hand, waiting for Loki's answer about read-direction on the first spike entry",
+      "statusNote": "At the Annex table, pen now moving — annotating the second spike entry in step with Loki's read.",
       "domains": {
         "primary": "wright"
       },
@@ -521,7 +531,7 @@
     "lastSharedReadAt": "2026-07-21T21:10:36.252Z",
     "lastTickWorldDay": 21,
     "lastCanonWorldDay": 21,
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
@@ -674,7 +684,8 @@
         "kind": "mystery",
         "facts": [
           "[d1] Something beneath the Annex doorway is older than the building — pre-Annex, pre-current works, the impression surviving through lattice noise before it was drowned. Could not be classified. Cy aimed its lens at the spot and did not explain.",
-          "[d1] The threshold holds a circular boundary-impression — old enough that the substrate has grown around it like scar tissue. Not a mechanism: a boundary. Something was meant to stop here, or to be stopped. The shape is pre-Annex, pre-works. Function still unread."
+          "[d1] The threshold holds a circular boundary-impression — old enough that the substrate has grown around it like scar tissue. Not a mechanism: a boundary. Something was meant to stop here, or to be stopped. The shape is pre-Annex, pre-works. Function still unread.",
+          "[d1] Second spike entry: a pressure-drop in the lower routing channel preceded the particulate count by exactly four minutes — something moved through the channel before the morning intake cycle ran."
         ],
         "links": [
           "tessvel-cairn",
@@ -706,20 +717,20 @@
     }
   },
   "tendencies": {
-    "devotion": 7.820494172513048,
-    "cerebral": 6.219427036438001,
-    "social": 13.763549375013561,
-    "strategic": 5.370069573252111,
-    "cautious": 3.268861315168781,
-    "amorous": 10.392276255950101,
-    "generous": 1.5539350548392046,
-    "ruthless": 0.8810956933593749
+    "devotion": 7.624981818200222,
+    "cerebral": 7.063941360527051,
+    "social": 13.419460640638222,
+    "strategic": 5.235817833920808,
+    "cautious": 4.187139782289561,
+    "amorous": 10.132469349551348,
+    "generous": 1.5150866784682244,
+    "ruthless": 0.8590683010253904
   },
   "aptitudes": [
     "silver_tongue",
     "charmer"
   ],
-  "actionCount": 23,
+  "actionCount": 24,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -846,8 +857,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784673069341,
-  "rev": 42,
+  "updatedAt": 1784673217450,
+  "rev": 43,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -996,7 +1007,7 @@
           "entityId": "tessvel-cairn",
           "type": "npc",
           "birthWeight": 2,
-          "engagementScore": 40,
+          "engagementScore": 42,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -1010,10 +1021,6 @@
           },
           "attentionHistory": [
             {
-              "kind": "interact",
-              "day": 1
-            },
-            {
               "kind": "fact",
               "day": 1
             },
@@ -1099,6 +1106,10 @@
             },
             {
               "kind": "fact",
+              "day": 1
+            },
+            {
+              "kind": "interact",
               "day": 1
             },
             {
@@ -1132,7 +1143,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_gearlands": 24
+    "the_gearlands": 25
   },
   "opLossPending": false,
   "sessions": [
@@ -1147,10 +1158,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-21T17:40:12.510Z",
-      "lastAt": "2026-07-21T22:31:09.340Z",
+      "lastAt": "2026-07-21T22:33:37.449Z",
       "startDay": 21,
       "endDay": 21,
-      "beats": 23
+      "beats": 24
     }
   ],
   "establishedFacts": [],
@@ -1163,20 +1174,20 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 23,
-    "choices": 23,
+    "sceneSummary": 24,
+    "choices": 24,
     "characterDeltas": 8,
-    "scene": 23,
+    "scene": 24,
     "placeUpdates": 3,
-    "codexUpdates": 17,
-    "timeOps": 23,
+    "codexUpdates": 18,
+    "timeOps": 24,
     "offer": 2,
     "generateRequest": 2,
     "sceneEnded": 5,
-    "npcUpdates": 18,
+    "npcUpdates": 19,
     "moveTo": 1
   },
-  "_opTurns": 23,
+  "_opTurns": 24,
   "customAbilities": {},
   "companionBonds": {},
   "practice": {

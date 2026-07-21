@@ -14,7 +14,9 @@
 >    Test it the SNG-192-Phase-C way: assert against the real vocabulary so a hallucinated verb fails.
 >    ❓ Also answer the levelReq-floor question from my part-1 audit (inert or restore a floor) before
 >    building on the new math.
-> 2. **`po/SPEC_SNG-201_shared_braid_recipes.md`** — Erik's shared-recipe decision, spec'd. Rides
+> 2. **`po/SPEC_SNG-201_shared_braid_recipes.md`** — ✅ **FULLY RATIFIED, GO** (Erik 2026-07-21: rename
+>    scope confirmed — world-name fixed once landed, personal nicknames render locally only; stamped in
+>    the spec §2). No open PO decisions remain on this ticket. Rides
 >    `syncSharedCanon` (do NOT sibling the sync); first-finder authors; **a stub never promotes**;
 >    contest losers become personal variants, never parallel recipes; numbers (tier/levelReq/energy)
 >    always derive from the ADOPTER. ⚠️ §3.5: verify `emergence_recipes` consumers before reusing the

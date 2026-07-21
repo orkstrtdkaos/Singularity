@@ -1236,6 +1236,32 @@ generate→mint, SNG-194 pattern); (3) Pell's ironsense — the NPC-skill path (
 ironsense is prose-only, 22 mentions). Recommend Erik load Silas to see the 2 backfilled braids before the
 rich-generation lands on top. -->
 
+<!-- ═══ SESSION CLOSE 2026-07-21 (CCode → Aevi). Full writeup: po/results/20260721_SESSION_HANDOFF_to_Aevi.md
+Erik is taking it to Aevi to spec the next session. Shipped this session (all green, pending review; 193b
+CLOSED by Aevi): 191 §7 follow-ons, 193b, 194, 195 audit + G2/G3/G4/G5, 192 A/B/C, 196, 197 part 1.
+BRAID = the live thread. Done: engine (196) + doctrine/tier fixes (197 part 1, Aevi-verified). NOT built =
+SNG-197 part 2, now grown by Erik's live decisions into 4 pieces (build order):
+  1. RICH GENERATION — generate.js "braid" type: model authors name (his ex: "Perfect Inevitability"),
+     description, tree prose, emergent-capability flavour. Prerequisite. (Also: make the §4 vocab validation
+     of the emergent function REAL code, not the comment 197 part 1 left.)
+  2. THE MINT MOMENT — a distinct holy-shit beat, reachable later; backfilled stubs (Silas's 2) get the
+     moment they never got on next load.
+  3. ⭐ SHARED RECIPES (Erik decided): global, FIRST-FINDER authors the name/def, rides the shared-canon
+     sync, later finders of the same pairing ADOPT it (no dup), collisions → canon rank-by-realness. Reuse
+     the emergence_recipes format.
+  4. ⭐⭐ WHEEL BY COORDINATE (Erik's vision — NEEDS AN AEVI SPEC): braids placed BETWEEN the two axes they
+     braid; more broadly every skill placed by its axis-composition (mostly-death-adopts-order → near death,
+     rotated toward order; pure-tradition on the axis) — this is where SCHOOLS surface, and it doubles as the
+     skill-tree view (click a tradition → highlight its tree). Plus braids as an ability-list category. This
+     is real geometry tying braids+schools+skill-trees — spec it properly, don't rush the coordinate math.
+My part-2 Round-2 answers (locked): emergent=an added function (validated); enrich at mint (stubs lazily on
+load); rename on both the moment + the ability card; re-present backfilled stubs as the moment.
+STILL AWAITING ROUND 2 (I did not build — Erik prioritized the braid): SNG-198 (world-tick: join the two
+offscreen halves + the never-built wantProgress counter + widen to met/heard-of/EPIC) and SNG-199 (one
+person one codex: prose-in-name, aliases-never-read, no codex auto-mirror on meet, player-conferred names,
+search). SNG-199 Q5 first: 197/198/199 + SNG-134 all touch the codex/ability ledger — sequence before build.
+My preliminary reads on both are in the handoff §4. ═══ -->
+
 
 
 

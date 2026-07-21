@@ -1,0 +1,568 @@
+{
+  "schemaVersion": 1,
+  "id": "char-mrum8y4d",
+  "playerKey": "player-s9z9u1",
+  "name": "Loki",
+  "origin": "enginewright",
+  "nativeTradition": "enginewright",
+  "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
+  "background": "precursor_marked",
+  "level": 1,
+  "xp": 0,
+  "attributes": {
+    "physical": 3,
+    "mental": 3,
+    "social": 3,
+    "practical": 3
+  },
+  "skills": {},
+  "abilities": [
+    {
+      "abilityId": "the_misdirect",
+      "level": 1
+    },
+    {
+      "abilityId": "hunters_strike",
+      "level": 1
+    },
+    {
+      "abilityId": "see_the_made_thing",
+      "level": 1,
+      "native": true
+    },
+    {
+      "abilityId": "falsecraft",
+      "level": 1,
+      "native": true
+    },
+    {
+      "abilityId": "the_wrong_reality",
+      "level": 1,
+      "native": true
+    },
+    {
+      "abilityId": "the_better_story",
+      "level": 1,
+      "native": true
+    },
+    {
+      "abilityId": "the_false_target",
+      "level": 1,
+      "native": true
+    }
+  ],
+  "alignment": {},
+  "attunement": 1,
+  "maxHealth": 30,
+  "health": 30,
+  "maxEnergy": 100,
+  "energy": 100,
+  "inventory": [
+    {
+      "id": "travelers_pack",
+      "name": "Traveler's Pack",
+      "kind": "tool",
+      "qty": 1,
+      "description": "A worn canvas pack with good straps — bedroll, flint, mess kit, fifty small comforts of the road.",
+      "bonusTags": [
+        "retreat",
+        "careful"
+      ],
+      "consumable": false
+    },
+    {
+      "id": "waterskin",
+      "name": "Waterskin",
+      "kind": "consumable",
+      "qty": 1,
+      "description": "Boiled and refilled at the last clean spring. Worth more every week the river runs gray.",
+      "effects": {
+        "energy": 10
+      },
+      "consumable": true,
+      "pinned": true
+    }
+  ],
+  "deeds": [],
+  "relationships": {},
+  "chronicle": [],
+  "currentLocationId": "pressureholt",
+  "activeScene": {
+    "locationId": "pressureholt",
+    "turns": [
+      {
+        "player": null,
+        "summary": "Loki arrives in Pressureholt at the Intake Plaza on a gray-green morning — the water crisis visible in the river itself.",
+        "narration": "Pressureholt wakes the way a machine wakes — in sequence. The gas-lamps on the lower tier click off one by one as the morning light climbs the stepped roofline, each extinguishing on a timer someone wound forty years ago and nobody has dared reset. The smell is oil and river-stone and, this morning, something faintly off beneath both. The Echo River runs gray-green where it passes under the Eastern Intake, and the Enginewrights along the quay are gathered around a sampling fixture, speaking in careful voices.\n\nYou are standing at the edge of the Intake Plaza — cobblestones fitted so precisely they have not shifted in a generation — with the early-spring chill pressing down your collar. Your Traveler's Pack sits square on your back. Cy rides your left shoulder, lens irising at intervals, its too-many legs distributing its small weight with characteristic precision. It has already, at some point between sleep and waking, tightened the left strap buckle on your pack. You did not ask it to.\n\n\"The intake baffle shows particulate variance of eleven-point-three above baseline,\" Cy announces, for the third time this morning, in its clipped antique register. It is unclear whether it expects a response. Down on the quay, one of the Enginewrights — a broad-shouldered woman in a leather apron — glances up from her sampling kit. She clocks you, then the brass creature on your shoulder, and her expression does the thing Enginewright expressions do: it catalogs the problem you might represent.\n\nThe plaza is otherwise alive with the early business of the city. A wright's apprentice hurries past carrying a disassembled clock-movement in both hands, expression suggesting a man who has made a significant mistake. Two older wrights converse near the posted notices board, their voices too low to catch from here. One of the notices is fresh — the ink still dark — and it bears the seal of the city's maintenance authority. You are new here, and nobody has fixed you yet, which means they are simply waiting to understand what, exactly, is broken."
+      }
+    ],
+    "lastTurn": {
+      "narration": "Pressureholt wakes the way a machine wakes — in sequence. The gas-lamps on the lower tier click off one by one as the morning light climbs the stepped roofline, each extinguishing on a timer someone wound forty years ago and nobody has dared reset. The smell is oil and river-stone and, this morning, something faintly off beneath both. The Echo River runs gray-green where it passes under the Eastern Intake, and the Enginewrights along the quay are gathered around a sampling fixture, speaking in careful voices.\n\nYou are standing at the edge of the Intake Plaza — cobblestones fitted so precisely they have not shifted in a generation — with the early-spring chill pressing down your collar. Your Traveler's Pack sits square on your back. Cy rides your left shoulder, lens irising at intervals, its too-many legs distributing its small weight with characteristic precision. It has already, at some point between sleep and waking, tightened the left strap buckle on your pack. You did not ask it to.\n\n\"The intake baffle shows particulate variance of eleven-point-three above baseline,\" Cy announces, for the third time this morning, in its clipped antique register. It is unclear whether it expects a response. Down on the quay, one of the Enginewrights — a broad-shouldered woman in a leather apron — glances up from her sampling kit. She clocks you, then the brass creature on your shoulder, and her expression does the thing Enginewright expressions do: it catalogs the problem you might represent.\n\nThe plaza is otherwise alive with the early business of the city. A wright's apprentice hurries past carrying a disassembled clock-movement in both hands, expression suggesting a man who has made a significant mistake. Two older wrights converse near the posted notices board, their voices too low to catch from here. One of the notices is fresh — the ink still dark — and it bears the seal of the city's maintenance authority. You are new here, and nobody has fixed you yet, which means they are simply waiting to understand what, exactly, is broken.",
+      "sceneSummary": "Loki arrives in Pressureholt at the Intake Plaza on a gray-green morning — the water crisis visible in the river itself.",
+      "choices": [
+        {
+          "label": "Approach the wright on the quay and get a closer look at the sampling fixture — something in the particulate reading doesn't sit right",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "mechanical_spiritual": -0.4
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "see_the_made_thing",
+          "energyCost": 1,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Read the fresh notice on the board before doing anything else",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "scout"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Introduce yourself to the wright — she's already clocked you; let her ask the question she's forming",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "persuade"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Slip away from the plaza and get a feel for the rest of the city before anyone corners you",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "scout"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
+      "standingOps": [],
+      "scene": {
+        "setting": "Intake Plaza, Pressureholt — outdoor, cobbled, open morning light. The Echo River runs visibly gray-green under the Eastern Intake. Early spring chill. Lamps clicking off on sequence.",
+        "npcsPresent": [
+          {
+            "name": "Broad-shouldered wright (unknown)",
+            "state": "crouched at sampling fixture on the quay, cataloging Loki with a brief assessing look"
+          },
+          {
+            "name": "Wright's apprentice (unknown)",
+            "state": "hurrying past with a disassembled clock-movement, looking panicked"
+          },
+          {
+            "name": "Two older wrights (unknown)",
+            "state": "speaking in low voices near the notices board"
+          }
+        ],
+        "objects": [
+          "Sampling fixture on the quay — showing elevated particulate readings",
+          "Fresh notice on the posted board — maintenance authority seal, ink still dark",
+          "Gas-lamps clicking off along the upper tier in sequence"
+        ],
+        "threads": [
+          "Who posted the fresh notice, and what does it say?",
+          "The gray-green intake water — particulate variance Cy reported",
+          "The wright on the quay has clocked Loki and is forming a question"
+        ]
+      },
+      "npcUpdates": [],
+      "factUpdates": [],
+      "placeUpdates": [
+        {
+          "note": "Eastern Intake shows gray-green water and elevated particulate — the water crisis is visibly present here",
+          "subPlace": {
+            "name": "Intake Plaza",
+            "parent": "Pressureholt",
+            "note": "Cobbled plaza at the Eastern Intake, where the river enters the city's water works. Sampling fixture mounted on the quay.",
+            "visited": true
+          }
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "water-crisis-pressureholt",
+          "label": "The Water Crisis — Pressureholt Intake",
+          "kind": "event",
+          "fact": "The Echo River runs gray-green past the Eastern Intake in Pressureholt. Cy measured particulate variance eleven-point-three above baseline. Enginewrights are sampling it but have not yet announced a cause.",
+          "links": [
+            "intake-plaza"
+          ]
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "arrival and first moments in the plaza"
+      },
+      "offer": {
+        "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
+        "from": "What this place IS: Pressureholt is a city that documents its own failure modes in writing, and something is failing that has never failed before"
+      },
+      "generateRequest": [
+        {
+          "type": "npc",
+          "hint": "the broad-shouldered woman Enginewright on the quay, doing water-intake sampling — warm and practical, currently in assessment mode",
+          "why": "She has clocked Loki and is the first Enginewright to make contact; she needs a stable identity to recur"
+        }
+      ],
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "Intake Plaza, Pressureholt — outdoor, cobbled, open morning light. The Echo River runs visibly gray-green under the Eastern Intake. Early spring chill. Lamps clicking off on sequence.",
+      "npcsPresent": [
+        {
+          "name": "Broad-shouldered wright (unknown)",
+          "state": "crouched at sampling fixture on the quay, cataloging Loki with a brief assessing look"
+        },
+        {
+          "name": "Wright's apprentice (unknown)",
+          "state": "hurrying past with a disassembled clock-movement, looking panicked"
+        },
+        {
+          "name": "Two older wrights (unknown)",
+          "state": "speaking in low voices near the notices board"
+        }
+      ],
+      "objects": [
+        "Sampling fixture on the quay — showing elevated particulate readings",
+        "Fresh notice on the posted board — maintenance authority seal, ink still dark",
+        "Gas-lamps clicking off along the upper tier in sequence"
+      ],
+      "threads": [
+        "Who posted the fresh notice, and what does it say?",
+        "The gray-green intake water — particulate variance Cy reported",
+        "The wright on the quay has clocked Loki and is forming a question"
+      ]
+    }
+  },
+  "clock": {
+    "schemaVersion": 1,
+    "day": 1,
+    "hour": 8,
+    "realAnchor": null
+  },
+  "companions": [
+    "coil"
+  ],
+  "companionNames": {
+    "coil": "Cy"
+  },
+  "quests": [],
+  "npcRegistry": {},
+  "placeMemory": {
+    "pressureholt": {
+      "visits": 1,
+      "notes": [
+        "[d1] Eastern Intake shows gray-green water and elevated particulate — the water crisis is visibly present here"
+      ],
+      "flags": {},
+      "subPlaces": {
+        "intake-plaza": {
+          "name": "Intake Plaza",
+          "parentId": "pressureholt",
+          "day": 1,
+          "visited": true,
+          "note": "Cobbled plaza at the Eastern Intake, where the river enters the city's water works. Sampling fixture mounted on the quay."
+        }
+      }
+    }
+  },
+  "worldState": {
+    "schemaVersion": 1,
+    "lastTickDay": 1,
+    "eventStages": {
+      "water_crisis": {
+        "stage": 1,
+        "sinceDay": 1
+      }
+    },
+    "spectrumDrift": {},
+    "news": [
+      {
+        "day": 1,
+        "worldDay": 21,
+        "text": "The Water Crisis stands at Discoloration across the valley: The Echo River runs gray-green on bad mornings. Fish catches are down. Communities murmur but cooperate."
+      },
+      {
+        "day": 1,
+        "worldDay": 13,
+        "text": "Word reaches you: Sow killed cleanly in the north wood — boar sounder now reduced; piglets scattered north into deeper scrub (near millbrook)"
+      },
+      {
+        "day": 1,
+        "worldDay": 13,
+        "text": "Word reaches you: Bull boar taken on the scrub oak ridge north of Millbrook — the hunt party completed the job, both animals down. (near millbrook)"
+      },
+      {
+        "day": 1,
+        "worldDay": 17,
+        "text": "This reaches your area — Fendt has left the Edge District and is walking to Millbrook — his testimony names Overseer Grael explicitly; when he arrives, the paper becomes a political event in both settlements. (near radiant plateau edge)",
+        "impactsLocal": true
+      },
+      {
+        "day": 1,
+        "worldDay": 18,
+        "text": "This reaches your area — Two road opportunists at the limestone bend were disarmed and sent to Mara Wells in Millbrook for honest work — Silas Weir's name given as introduction (near millbrook)",
+        "impactsLocal": true
+      },
+      {
+        "day": 1,
+        "worldDay": 19,
+        "text": "Word reaches you: Compound rune-work — Wither and The Raised Thing — bound an eleven-year rising in the old Ashwarden warden post at Raven's Home. (near gen-ashwarden-march-road)"
+      }
+    ],
+    "unseenNews": [],
+    "lastGenCount": 516,
+    "lastSharedReadAt": "2026-07-21T12:14:48.210Z",
+    "lastTickWorldDay": 21,
+    "lastCanonWorldDay": 21,
+    "turnsSinceOffer": 0,
+    "recentOffers": [
+      {
+        "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
+        "from": "What this place IS: Pressureholt is a city that documents its own failure modes in writing, and something is failing that has never failed…"
+      }
+    ]
+  },
+  "domains": {
+    "primary": "veilwright",
+    "secondary": "umbral",
+    "tertiary": "horizon"
+  },
+  "schools": {
+    "veilwright": "vei_falsecraft",
+    "umbral": "umb_instrument",
+    "horizon": "hor_walking"
+  },
+  "form": "Tall and lean, dark hair that falls to the chin in loose waves when it isn't pinned or braided into something asymmetrical and slightly wrong. Eyes that hold one expression while the mouth holds another. Moves like someone who has already decided where the exit is.",
+  "bio": {
+    "hometown": "He doesn't know, but he's a construct from the time before the Transition. His parents were extremely wealthy but they were always traveling and enjoying their nanite powers.",
+    "residence": "A town on the edge of the chaos and machine regions.  His family is not like him and he learned a few years ago that he was adopted.  His family is a mix - his adopted father was a dwarf and his mother is a Nymph-touched human.",
+    "livelihood": "Occasionally he finds the problem with ancient technology and fixes it, but only when it amuses him.",
+    "hobbies": "Pranking the locals, playing skill challenges trying to mimic others or change his appearance to trick people, learning about, fixing, and using precursor artifacts.",
+    "motivation": "The town, although not small, has become too small for him.  They tolerate his crazy antics well enough, but he's looking for meaning and wants to see more of the great machine... He also want to answer the question under it all - where did he come from?",
+    "story": "His mother is an enchantress in the Fae wilds and his father is a giant... he was human once, but the nanites continued to transform him into a larger and larger giant over the years.  Loki has some innate nanite powers himself - he's discovering them over time and developing them through use and study of precursor tech and the great machine.  He has some trouble making friends and his adoptive family likes him well enough, But he's seen most of the know precursor sites in his area and he wants to set out to the unknown areas to find more. There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you."
+  },
+  "subAttributes": {
+    "strength": 3,
+    "agility": 3,
+    "reason": 3,
+    "insight": 3,
+    "presence": 3,
+    "rapport": 3,
+    "craft": 3,
+    "wits": 3
+  },
+  "pendingSubPoints": 2,
+  "skillPoints": 0,
+  "discoveries": [],
+  "codex": {
+    "schemaVersion": 1,
+    "topics": {
+      "water-crisis-pressureholt": {
+        "id": "water-crisis-pressureholt",
+        "label": "The Water Crisis — Pressureholt Intake",
+        "kind": "event",
+        "facts": [
+          "[d1] The Echo River runs gray-green past the Eastern Intake in Pressureholt. Cy measured particulate variance eleven-point-three above baseline. Enginewrights are sampling it but have not yet announced a cause."
+        ],
+        "links": [
+          "intake-plaza"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
+      }
+    }
+  },
+  "tendencies": {
+    "devotion": 14
+  },
+  "aptitudes": [
+    "faithful"
+  ],
+  "actionCount": 0,
+  "grantsVersion": 1,
+  "precursorAccess": [],
+  "livingCurrentAccess": [],
+  "wildCurrentAccess": [],
+  "braidDiscount": 0,
+  "grantedAptitudes": [
+    "faithful"
+  ],
+  "peopleDisposition": {
+    "veilwright": 4,
+    "umbral": 2,
+    "horizon": 1,
+    "verist": -1
+  },
+  "standingLedger": [
+    {
+      "at": 1,
+      "kind": "seed",
+      "entries": [
+        {
+          "people": "veilwright",
+          "delta": 4,
+          "why": "born to this people"
+        },
+        {
+          "people": "umbral",
+          "delta": 2,
+          "why": "kin to this people"
+        },
+        {
+          "people": "horizon",
+          "delta": 1,
+          "why": "a hand in this people's craft"
+        },
+        {
+          "people": "verist",
+          "delta": -1,
+          "why": "the far side of the circle from your own"
+        }
+      ],
+      "text": "Your birth and training are known: veilwright +4, umbral +2, horizon +1, verist -1."
+    }
+  ],
+  "nativeGrantsVersion": 1,
+  "reconcileVersion": 13,
+  "gallery": [
+    {
+      "kind": "portrait",
+      "prompt": "Loki",
+      "url": "https://image.pollinations.ai/prompt/Tall%20and%20lean%2C%20dark%20hair%20that%20falls%20to%20the%20chin%20in%20loose%20waves%20when%20it%20isn't%20pinned%20or%20braided%20into%20something%20asymmetrical%20and%20slightly%20wrong.%20Eyes%20that%20hold%20one%20expression%20while%20the%20mouth%20holds%20another.%20Moves%20like%20someo%2C%20full-body%20character%20portrait%2C%20named%20Loki%2C%20of%20the%20enginewright%2C%20precursor%20marked%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20The%20town%2C%20although%20not%20small%2C%20has%20become%20too%20small%20for%20him.%20They%20tolerate%20his%20crazy%20antics%20well%20enough%2C%20but%20he's%20lookin%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=39749&nologo=true",
+      "caption": "Loki — enginewright",
+      "worldDay": 21,
+      "at": "2026-07-21T12:14:47.487Z"
+    }
+  ],
+  "portrait": "https://image.pollinations.ai/prompt/Tall%20and%20lean%2C%20dark%20hair%20that%20falls%20to%20the%20chin%20in%20loose%20waves%20when%20it%20isn't%20pinned%20or%20braided%20into%20something%20asymmetrical%20and%20slightly%20wrong.%20Eyes%20that%20hold%20one%20expression%20while%20the%20mouth%20holds%20another.%20Moves%20like%20someo%2C%20full-body%20character%20portrait%2C%20named%20Loki%2C%20of%20the%20enginewright%2C%20precursor%20marked%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20The%20town%2C%20although%20not%20small%2C%20has%20become%20too%20small%20for%20him.%20They%20tolerate%20his%20crazy%20antics%20well%20enough%2C%20but%20he's%20lookin%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=39749&nologo=true",
+  "personalArc": {
+    "id": "loki-thread",
+    "name": "The Thread of He Doesn'T Know, But He'S A Construct From The Time Before The Transition. His Parents Were Extremely Wealthy But They Were Always Traveling And Enjoying Their Nanite Powers.",
+    "arcId": "loki_personal_arc",
+    "boundToCharacter": "Loki",
+    "boundToPlayer": "player-s9z9u1",
+    "region": "valley",
+    "tier": "personal",
+    "premise": "Loki carries an unfinished thing: The town, although not small, has become too small for him.  They tolerate his crazy antics well enough, but he's looking for meaning and wants to see more of the great machine... He also want to answer the question under it all - where did he come from?. The valley will give them the chance to face it.",
+    "stakes": "who they become when the thing they left behind finally catches up",
+    "legendNpc": null,
+    "legend": null,
+    "stages": [
+      {
+        "id": "s1",
+        "objective": "a first sign of The town, although not small, has become too small for him.  They tolerate his crazy antics well enough, but he's looking for meaning and wants to see more of the great machine... He also want to answer the question under it all - where did he come from? surfaces in the valley"
+      },
+      {
+        "id": "s2",
+        "objective": "the thread deepens — what it costs to pull it becomes clear"
+      },
+      {
+        "id": "s3",
+        "objective": "the reckoning — and the choice of what to do with it"
+      }
+    ],
+    "routes": {
+      "veilwright": "answer it as your people would",
+      "seek": "seek the truth of it, wherever it leads"
+    },
+    "outcomes": [
+      {
+        "id": "veilwright",
+        "name": "Veilwright",
+        "effects": []
+      },
+      {
+        "id": "seek",
+        "name": "Seek",
+        "effects": []
+      }
+    ],
+    "structured": true,
+    "source": "personal_fallback",
+    "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
+  },
+  "updatedAt": 1784636128610,
+  "rev": 4,
+  "generated": {
+    "schemaVersion": 1,
+    "npc": {},
+    "location": {},
+    "arc": {}
+  },
+  "company": [],
+  "_pinsInitialized": true,
+  "regionsKnown": {
+    "the_gearlands": 1
+  },
+  "opLossPending": false,
+  "sessions": [
+    {
+      "id": "sess-1",
+      "startedAt": "2026-07-21T12:15:28.609Z",
+      "lastAt": "2026-07-21T12:15:28.609Z",
+      "startDay": 21,
+      "endDay": 21,
+      "beats": 1
+    }
+  ],
+  "establishedFacts": [],
+  "_opLedger": {
+    "offer": {
+      "applied": 1,
+      "rejected": 0,
+      "lastWhy": null
+    }
+  },
+  "_pendingArrival": null,
+  "_opEmitted": {
+    "sceneSummary": 1,
+    "choices": 1,
+    "characterDeltas": 1,
+    "scene": 1,
+    "placeUpdates": 1,
+    "codexUpdates": 1,
+    "timeOps": 1,
+    "offer": 1,
+    "generateRequest": 1,
+    "sceneEnded": 1
+  },
+  "_opTurns": 1
+}

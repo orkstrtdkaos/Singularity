@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 1,
-  "xp": 44,
+  "xp": 57,
   "attributes": {
     "physical": 3,
     "mental": 3,
@@ -53,15 +53,16 @@
   ],
   "alignment": {
     "mechanical_spiritual": -0.020000000000000004,
-    "falsehood_truth": -0.04000000000000001,
+    "falsehood_truth": -0.068,
     "spectrumId": -0.08618904687499998,
-    "value": -0.04000000000000001
+    "value": -0.04000000000000001,
+    "demonic_angelic": -0.020000000000000004
   },
   "attunement": 1,
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 68,
+  "energy": 66,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -184,126 +185,190 @@
         "player": "Say nothing yet — let her come to the table and start her own morning routine before you introduce yourself or your questions.",
         "summary": "Tessvel arrives at the Annex on time, files her first log entries without looking up, and notices Loki with careful, cataloguing attention.",
         "narration": "Tessvel comes through the gate with the precise, unhurried step of someone who has timed this walk many times. She sets a leather satchel down on the table, buckles it open, and draws out a bound log — green cover, the spine inked in her own hand with a date range. She does not look up. She sets the log flat, opens it to a marked page, and draws a pen from inside her coat pocket. Then she fills in two lines without consulting anything, because she already knows what goes there.\n\nOnly then does she see you.\n\nShe does not startle. Her pen-hand stills. She looks at you the way she looked at Cy on the plaza — a careful, cataloguing attention, taking in the fact of you before deciding what category to put it in. Her gaze moves to Cy, then back. She says, \"You are early,\" and it is not a complaint. It is a data point she is filing.\n\nShe glances at the open gate. The attention-deflection is still there, thinning at the edges — she does not appear to notice it, but she does not close the gate behind her either, leaving the passage open the way wrights do in a room where they expect to be accountable for what they are doing.\n\nShe pulls the single chair out for herself, then appears to remember she is not alone, and leaves it where it is — a small, deliberate correction. \"There is only one chair,\" she says to you, without apology. \"I can bring a second from the passage if you require it.\""
+      },
+      {
+        "player": "Tell her you came to observer her... two primary axes... one, how proficient she is at her work  and two.. .how cuter she is while performing it.  Tell her you will write a report for either her supervisor, or her boyfriend... (indicating you are verifying she doesn't have one) upon request.",
+        "summary": "Loki opened with a two-axis compliment and a bureaucratic flirtation; Tessvel confirmed she has no boyfriend and that she also has no posted authorization for him — both pieces of information delivered with exactly the same precise voice.",
+        "narration": "You let the silence hold for one more breath after her pen-hand stills. Then you smile — not the wide, performative kind, but the smaller one, the one that knows something. You say that you came to observe her on two axes. The first, you say, is professional — how proficient she is at her work. You pause just long enough that she might think that is the whole of it. The second, you say, is that she is remarkably cute while performing it, and you wanted that on record somewhere.\n\nHer pen does not move. She is looking at you with the same measuring attention she gave the log entries, but the quality of it has changed — there is something behind her eyes now that is calculating a response and has not yet decided which one. A faint color has come into her face, just above the collar of the rust-orange coat.\n\nYou add, pleasantly, that you are prepared to file a report with her supervisor, or with her boyfriend — and here you let the word sit between you for a moment, open like a question you are pretending is not a question — upon request, whichever seems most applicable.\n\nThe color in her face deepens one shade. She says, very precisely, that she does not have a boyfriend. She says it the way she filled in those two log lines — from memory, because she already knows what goes there. Then she seems to hear herself say it and her chin comes up a degree, and she adds that she also does not generally allow observers in the Annex without a posted authorization. Her pen-hand is still not moving. She is waiting to see what you do with all of that."
       }
     ],
     "lastTurn": {
-      "narration": "Tessvel comes through the gate with the precise, unhurried step of someone who has timed this walk many times. She sets a leather satchel down on the table, buckles it open, and draws out a bound log — green cover, the spine inked in her own hand with a date range. She does not look up. She sets the log flat, opens it to a marked page, and draws a pen from inside her coat pocket. Then she fills in two lines without consulting anything, because she already knows what goes there.\n\nOnly then does she see you.\n\nShe does not startle. Her pen-hand stills. She looks at you the way she looked at Cy on the plaza — a careful, cataloguing attention, taking in the fact of you before deciding what category to put it in. Her gaze moves to Cy, then back. She says, \"You are early,\" and it is not a complaint. It is a data point she is filing.\n\nShe glances at the open gate. The attention-deflection is still there, thinning at the edges — she does not appear to notice it, but she does not close the gate behind her either, leaving the passage open the way wrights do in a room where they expect to be accountable for what they are doing.\n\nShe pulls the single chair out for herself, then appears to remember she is not alone, and leaves it where it is — a small, deliberate correction. \"There is only one chair,\" she says to you, without apology. \"I can bring a second from the passage if you require it.\"",
-      "sceneSummary": "Tessvel arrives at the Annex on time, files her first log entries without looking up, and notices Loki with careful, cataloguing attention.",
+      "narration": "You let the silence hold for one more breath after her pen-hand stills. Then you smile — not the wide, performative kind, but the smaller one, the one that knows something. You say that you came to observe her on two axes. The first, you say, is professional — how proficient she is at her work. You pause just long enough that she might think that is the whole of it. The second, you say, is that she is remarkably cute while performing it, and you wanted that on record somewhere.\n\nHer pen does not move. She is looking at you with the same measuring attention she gave the log entries, but the quality of it has changed — there is something behind her eyes now that is calculating a response and has not yet decided which one. A faint color has come into her face, just above the collar of the rust-orange coat.\n\nYou add, pleasantly, that you are prepared to file a report with her supervisor, or with her boyfriend — and here you let the word sit between you for a moment, open like a question you are pretending is not a question — upon request, whichever seems most applicable.\n\nThe color in her face deepens one shade. She says, very precisely, that she does not have a boyfriend. She says it the way she filled in those two log lines — from memory, because she already knows what goes there. Then she seems to hear herself say it and her chin comes up a degree, and she adds that she also does not generally allow observers in the Annex without a posted authorization. Her pen-hand is still not moving. She is waiting to see what you do with all of that.",
+      "sceneSummary": "Loki opened with a two-axis compliment and a bureaucratic flirtation; Tessvel confirmed she has no boyfriend and that she also has no posted authorization for him — both pieces of information delivered with exactly the same precise voice.",
       "choices": [
         {
-          "label": "Tell her no chair needed — you prefer to stand — and introduce yourself properly. Let her set the pace.",
+          "label": "Produce a perfectly straight face and say you can have the authorization drafted — you just need her to tell you who to send it to, and her name, for the report.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": -0.3
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "flirt",
+            "deceive"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Lean back, easy, and tell her the authorization is already filed — point to the open gate, where the attention-deflection is still thinning at its edges, and let her notice Cy standing quietly at the end of the table.",
+          "attribute": "social",
+          "subAttribute": "wits",
+          "axes": {
+            "falsehood_truth": -0.2
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "flirt",
+            "feint"
+          ],
+          "abilityId": "falsecraft",
+          "energyCost": 6,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Let the professional axis do some work — tell her you actually do want to look at her variance log, because what you saw at the intake this morning suggests someone here has been doing real work that nobody upstairs has noticed yet.",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "calm"
+            "negotiate",
+            "flirt"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Accept her offer and ask her to fetch a second chair — use the moment she steps into the passage to glance at the open log on the table.",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "difficulty": 15,
-          "intentTags": [
-            "scout"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Ask her directly about the variance log — you know it exists, you know it diverges. Show her you came prepared.",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "label": "Step closer to the table — not all the way, just enough to change the geometry of the room — and ask her name before you do anything else, because the report needs a name.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "flirt",
+            "woo"
           ],
-          "trivial": true
-        },
-        {
-          "label": "Let the room breathe a moment longer — then show her something about the terminus-seal at the threshold, and watch how she reacts to the fact that you can read it.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "scout"
-          ],
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
-      "scene": {
-        "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, narrow room, morning light past its sharpest angle and softening down the center of the long table. Second bell has ended. Gate is open to the passage.",
-        "npcsPresent": [
-          {
-            "name": "Tessvel Cairn",
-            "state": "Standing beside the table, pen in hand, green-spine log open to a marked page — she has just noticed Loki; pen-hand stilled, cataloguing attention."
-          },
-          {
-            "name": "Cy",
-            "state": "Standing at the near end of the table, lamp at its habitual angle, lens stilled."
-          }
-        ],
-        "objects": [
-          "Long work table — morning light softening down its center",
-          "Tessvel's green-spine log — open to a marked page, two fresh lines just filled",
-          "Tessvel's leather satchel — open on the table",
-          "Tessvel's pen — in her right hand",
-          "Shelves of bound logs — dates inked on spines, floor to ceiling",
-          "Pressure-gauge at the door frame — needle in the green",
-          "One chair — at the near end of the table, pulled out but left where it stands",
-          "Open gate doorway — attention-deflection still in place, thinning at the edges"
-        ],
-        "threads": [
-          "Tessvel has noticed Loki but not yet been introduced or told why he is here",
-          "The attention-deflection is thinning — will fail under deliberate attention or as foot-traffic thickens",
-          "Terminus-seal at the threshold — pre-Transition boundary; Cy said three of four are intact, one is not",
-          "Tessvel's hand-log has diverged from automated markers for eleven days — the open log is on the table",
-          "The ring-form residue at the intake matches regulated nanite deposition — no senior wright has acted on it"
-        ]
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
       },
+      "ledgerEvents": [],
+      "questUpdates": [],
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "tessvel-cairn",
           "name": "Tessvel Cairn",
-          "note": "Arrived on time, filed first log entries from memory, noticed Loki with careful cataloguing attention — offered a second chair without apology.",
+          "role": "Junior wright on posting-duty at the Eastern Intake notice board",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "Loki opened with a two-axis compliment — professional competence plus physical charm — and offered to file a report with her supervisor or her boyfriend. She confirmed, precisely, that she has no boyfriend. Then she remembered herself and noted there is no posted authorization for him to be here. Her pen-hand did not move throughout.",
           "learned": [
-            "Arrives at the Annex at the second bell exactly; fills log entries from memory before looking up"
+            "She has no boyfriend — volunteered precisely, then seemed to hear herself say it",
+            "She considers an unposted observer a procedural violation and named it — but has not acted on it yet"
           ],
-          "statusNote": "At her workstation in the Pressure-Routing Annex — standing beside the table, pen in hand, log open."
+          "skillsObserved": [],
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "Standing at the Annex table, pen in hand, log open — flushed, waiting to see what Loki does next with the information she just gave him",
+          "bondType": "courting",
+          "bondStage": "courting"
+        }
+      ],
+      "factUpdates": [],
+      "placeUpdates": [],
+      "codexUpdates": [
+        {
+          "topic": "tessvel-cairn",
+          "label": "Tessvel Cairn",
+          "kind": "person",
+          "entityId": "tessvel-cairn",
+          "fact": "Confirmed she has no boyfriend — stated precisely and without hesitation, then caught herself and added that there is no posted authorization for an observer in the Annex. Both pieces delivered in the same exact voice.",
+          "links": [
+            "pressure-routing-annex",
+            "the-water-crisis"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "Tessvel arrived at second bell — a short interval from Loki's earlier wait"
-      }
+        "why": "a brief charged exchange at the table — a few minutes at most"
+      },
+      "scene": {
+        "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, narrow room, morning light now fully soft down the center of the long table. Second bell ended. Gate open to the passage, attention-deflection thinning at its edges.",
+        "npcsPresent": [
+          {
+            "name": "Tessvel Cairn",
+            "state": "Standing at the table, pen-hand still, green-spine log open to a marked page — two lines filled, chin lifted one degree, color in her face above the collar, waiting."
+          },
+          {
+            "name": "Cy",
+            "state": "Standing at the near end of the table, lamp at its habitual angle, lens stilled, observing nothing in particular."
+          }
+        ],
+        "objects": [
+          "Long work table — morning light soft down its center",
+          "Tessvel's green-spine log — open to a marked page, two fresh lines filled",
+          "Tessvel's leather satchel — open on the table",
+          "Tessvel's pen — in her right hand, unmoving",
+          "Shelves of bound logs — dates inked on spines, floor to ceiling",
+          "Pressure-gauge at the door frame — needle in the green",
+          "One chair — at the near end of the table, pulled out",
+          "Open gate doorway — attention-deflection thinning at the edges"
+        ],
+        "threads": [
+          "Tessvel has confirmed she has no boyfriend and that Loki has no posted authorization — both stated with equal precision; neither resolved",
+          "The attention-deflection is thinning — will fail under deliberate attention",
+          "Terminus-seal at the threshold — pre-Transition boundary; Cy said three of four are intact, one is not",
+          "Tessvel's hand-log has diverged from automated markers for eleven days — the open log is on the table",
+          "The ring-form residue at the intake matches regulated nanite deposition — no senior wright has acted on it"
+        ]
+      },
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, narrow room, morning light past its sharpest angle and softening down the center of the long table. Second bell has ended. Gate is open to the passage.",
+      "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, narrow room, morning light now fully soft down the center of the long table. Second bell ended. Gate open to the passage, attention-deflection thinning at its edges.",
       "npcsPresent": [
         {
           "name": "Tessvel Cairn",
-          "state": "Standing beside the table, pen in hand, green-spine log open to a marked page — she has just noticed Loki; pen-hand stil"
+          "state": "Standing at the table, pen-hand still, green-spine log open to a marked page — two lines filled, chin lifted one degree,"
         },
         {
           "name": "Cy",
-          "state": "Standing at the near end of the table, lamp at its habitual angle, lens stilled."
+          "state": "Standing at the near end of the table, lamp at its habitual angle, lens stilled, observing nothing in particular."
         }
       ],
       "objects": [
-        "Long work table — morning light softening down its center",
-        "Tessvel's green-spine log — open to a marked page, two fresh lines just filled",
+        "Long work table — morning light soft down its center",
+        "Tessvel's green-spine log — open to a marked page, two fresh lines filled",
         "Tessvel's leather satchel — open on the table",
-        "Tessvel's pen — in her right hand",
+        "Tessvel's pen — in her right hand, unmoving",
         "Shelves of bound logs — dates inked on spines, floor to ceiling",
         "Pressure-gauge at the door frame — needle in the green",
-        "One chair — at the near end of the table, pulled out but left where it stands",
-        "Open gate doorway — attention-deflection still in place, thinning at the edges"
+        "One chair — at the near end of the table, pulled out",
+        "Open gate doorway — attention-deflection thinning at the edges"
       ],
       "threads": [
-        "Tessvel has noticed Loki but not yet been introduced or told why he is here",
-        "The attention-deflection is thinning — will fail under deliberate attention or as foot-traffic thickens",
+        "Tessvel has confirmed she has no boyfriend and that Loki has no posted authorization — both stated with equal precision; neither resolved",
+        "The attention-deflection is thinning — will fail under deliberate attention",
         "Terminus-seal at the threshold — pre-Transition boundary; Cy said three of four are intact, one is not",
         "Tessvel's hand-log has diverged from automated markers for eleven days — the open log is on the table",
         "The ring-form residue at the intake matches regulated nanite deposition — no senior wright has acted on it"
@@ -333,9 +398,8 @@
         "locationId": "pressureholt",
         "day": 1
       },
-      "relationship": 4,
+      "relationship": 5,
       "history": [
-        "[d1] Loki offered to sit with the log and work through what the divergence means — and added a wink. She named her posting end time: the second bell. Not warm, but considering.",
         "[d1] Your bond becomes romantic.",
         "[d1] Your bond deepens — courting.",
         "[d1] Named ten free minutes between the second and third bell without being asked directly — an opening left in the air.",
@@ -344,17 +408,18 @@
         "[d1] Walked away from the plaza with her characteristic precision — paused at the edge, looked back once to confirm Loki was watching, then departed toward the main works.",
         "[d1] Not yet arrived — meeting window still open between second and third bell.",
         "[d1] Her footsteps are audible in the passage — she is arriving at the second bell exactly, as expected.",
-        "[d1] Arrived on time, filed first log entries from memory, noticed Loki with careful cataloguing attention — offered a second chair without apology."
+        "[d1] Arrived on time, filed first log entries from memory, noticed Loki with careful cataloguing attention — offered a second chair without apology.",
+        "[d1] Loki opened with a two-axis compliment — professional competence plus physical charm — and offered to file a report with her supervisor or her boyfriend. She confirmed, precisely, that she has no boyfriend. Then she remembered herself and noted there is no posted authorization for him to be here…"
       ],
       "knownFacts": [
-        "Fixes things rather than replacing them — coat has three different-fabric patches, each applied neatly",
-        "Sensitive about junior status — straightened when older wrights passed",
         "Her hand-log records what is actually present in the water; the automated markers record only what they are calibrated to expect. The two have not agreed for eleven days.",
         "Her posting ends at the second bell",
         "Her workstation is in the Pressure-Routing Annex, east side of the main works, third gate left of the big wheel",
         "She describes the space as mostly shelving and a long table, but notes the light is good in the mornings",
         "Cy caught her attention — she studied it with real focus before she answered",
-        "Arrives at the Annex at the second bell exactly; fills log entries from memory before looking up"
+        "Arrives at the Annex at the second bell exactly; fills log entries from memory before looking up",
+        "She has no boyfriend — volunteered precisely, then seemed to hear herself say it",
+        "She considers an unposted observer a procedural violation and named it — but has not acted on it yet"
       ],
       "skillsObserved": [
         "Precise handwriting, official posting procedure",
@@ -364,7 +429,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At her workstation in the Pressure-Routing Annex — standing beside the table, pen in hand, log open.",
+      "statusNote": "Standing at the Annex table, pen in hand, log open — flushed, waiting to see what Loki does next with the information she just gave him",
       "domains": {
         "primary": "wright"
       },
@@ -455,7 +520,7 @@
     "lastSharedReadAt": "2026-07-21T21:10:36.252Z",
     "lastTickWorldDay": 21,
     "lastCanonWorldDay": 21,
-    "turnsSinceOffer": 17,
+    "turnsSinceOffer": 18,
     "recentOffers": [
       {
         "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
@@ -558,12 +623,14 @@
           "[d1] Junior wright on posting-duty at the Eastern Intake notice board — the person who makes the official record legible, correctly sequenced, and properly stamped",
           "[d1] Junior wright on posting-duty at the Eastern Intake. Precise, self-critical, patches her coat rather than replacing it. Sensitive about her rank relative to the senior wrights here.",
           "[d1] Her hand-kept variance log at the Eastern Intake has diverged from the automated tally-markers for eleven days — she records what is actually there; the markers record what they are calibrated to expect.",
-          "[d1] Her workstation is in the Pressure-Routing Annex — east side of the main works, third gate left of the big wheel. She has confirmed a meeting there between the second and third bell."
+          "[d1] Her workstation is in the Pressure-Routing Annex — east side of the main works, third gate left of the big wheel. She has confirmed a meeting there between the second and third bell.",
+          "[d1] Confirmed she has no boyfriend — stated precisely and without hesitation, then caught herself and added that there is no posted authorization for an observer in the Annex. Both pieces delivered in the same exact voice."
         ],
         "links": [
           "intake-plaza",
           "the-water-crisis",
-          "ring-form-residue-at-eastern-intake"
+          "ring-form-residue-at-eastern-intake",
+          "pressure-routing-annex"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -626,18 +693,19 @@
     }
   },
   "tendencies": {
-    "devotion": 9.103460298998865,
-    "cerebral": 6.075683423783712,
-    "social": 7.43787013141806,
-    "strategic": 5.0869873420261955,
-    "cautious": 2.6701733871809847,
-    "amorous": 5.620215431302506,
-    "generous": 0.7569213803350267
+    "devotion": 8.875873791523894,
+    "cerebral": 5.923791338189119,
+    "social": 9.25192337813261,
+    "strategic": 4.95981265847554,
+    "cautious": 2.60341905250146,
+    "amorous": 6.479710045519943,
+    "generous": 0.7379983458266509,
+    "ruthless": 1
   },
   "aptitudes": [
     "faithful"
   ],
-  "actionCount": 17,
+  "actionCount": 18,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -756,8 +824,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784671425977,
-  "rev": 36,
+  "updatedAt": 1784671866721,
+  "rev": 37,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -906,7 +974,7 @@
           "entityId": "tessvel-cairn",
           "type": "npc",
           "birthWeight": 2,
-          "engagementScore": 23,
+          "engagementScore": 26,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -970,6 +1038,14 @@
             {
               "kind": "interact",
               "day": 1
+            },
+            {
+              "kind": "interact",
+              "day": 1
+            },
+            {
+              "kind": "fact",
+              "day": 1
             }
           ],
           "createdDay": 1,
@@ -998,7 +1074,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_gearlands": 18
+    "the_gearlands": 19
   },
   "opLossPending": false,
   "sessions": [
@@ -1013,10 +1089,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-21T17:40:12.510Z",
-      "lastAt": "2026-07-21T22:03:45.976Z",
+      "lastAt": "2026-07-21T22:11:06.719Z",
       "startDay": 21,
       "endDay": 21,
-      "beats": 17
+      "beats": 18
     }
   ],
   "establishedFacts": [],
@@ -1029,20 +1105,20 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 17,
-    "choices": 17,
-    "characterDeltas": 4,
-    "scene": 17,
+    "sceneSummary": 18,
+    "choices": 18,
+    "characterDeltas": 5,
+    "scene": 18,
     "placeUpdates": 3,
-    "codexUpdates": 11,
-    "timeOps": 17,
+    "codexUpdates": 12,
+    "timeOps": 18,
     "offer": 1,
     "generateRequest": 2,
-    "sceneEnded": 2,
-    "npcUpdates": 12,
+    "sceneEnded": 3,
+    "npcUpdates": 13,
     "moveTo": 1
   },
-  "_opTurns": 17,
+  "_opTurns": 18,
   "customAbilities": {},
   "companionBonds": {},
   "practice": {
@@ -1051,7 +1127,8 @@
       "see_the_made_thing": 5,
       "falsecraft": 2,
       "the_wrong_reality": 1,
-      "the_misdirect": 1
+      "the_misdirect": 1,
+      "the_better_story": 1
     },
     "coActivations": {
       "falsecraft+the_wrong_reality": 1,
@@ -1073,7 +1150,8 @@
       "see_the_made_thing": 21,
       "falsecraft": 21,
       "the_wrong_reality": 21,
-      "the_misdirect": 21
+      "the_misdirect": 21,
+      "the_better_story": 21
     }
   },
   "teachers": {},

@@ -91,6 +91,16 @@
     {
       "abilityId": "light_borne",
       "level": 1
+    },
+    {
+      "abilityId": "braid_order_sense_palework",
+      "level": 1,
+      "braided": true
+    },
+    {
+      "abilityId": "braid_deathsense_order_sense",
+      "level": 1,
+      "braided": true
     }
   ],
   "alignment": {
@@ -1690,14 +1700,19 @@
         "player": "Use Order-Sense on the older mark itself — press attention into its angle and interval and try to read what tradition shaped it.",
         "summary": "Order-Sense reads the older mark's tradition — adjacent to Silas's father's lineage, a generation earlier, the same stopping point. The third line is a problem older than his father.",
         "narration": "You shift the Waymarker's angle slightly in your joined grip, pressing your attention into the older mark rather than through it. Order-Sense runs conserved and quiet — not a surge, just a careful look at what is already there.\n\nThe mark's groove angle is off from your father's by a measurable degree. Not much. Enough. Your father's closing spirals sit at a tight, disciplined interval — each one placed with the same hand, the same spacing. The older mark's angle is looser, wider in its arc, the interval longer between its reference points. Two craftsmen who knew the same destination but walked different roads to reach it.\n\nThe tradition reads as adjacent to your father's, not identical. The structural intent is the same — a datum mark, setting up what comes after, not finishing the work itself. But the grammar of it is older. The line of thinking that produced it would have been your father's teacher's, or a craftsman working from that same lineage a generation back. It reached the same stopping point. It did not, either, name a reason for stopping.\n\nVeth speaks quietly from across the table. \"Whoever made that mark,\" she says, \"stopped at the same place your father stopped. That is not coincidence. That is a limit.\"\n\nPell's thumb lifts from the disc and rests against the back of your hand instead. The shadow-build thins another degree. The older mark is still visible at the third line's lower edge — an open datum in a grammar that predates your father's work by some years, waiting, as it has waited, for someone to close what it set up."
+      },
+      {
+        "player": "Without moving the scene forward at all - we are going to all instantly be transport back to Silas's mother's house in Cairnhold. The scene will pick up from that location just as it is.",
+        "summary": "The shadow-build releases its last light at the kitchen table in Cairnhold — the older mark fades, the three-line structure held in memory, Ama still watching the place where it was.",
+        "narration": "The shadow-build releases the last of its held light. The older mark at the third line's edge dims to nothing, and the kitchen is simply a kitchen again — lamp burning low, warmth from the banked hearth, the smell of dried herbs and cooling flatbread. Nothing has moved. Ama's hands are still folded in her lap. Pell's thumb still rests against the back of Silas's hand, the Waymarker warm between your joined grip. Veth sits with her palms flat on the table. Huginn has not shifted from the back of the chair.\n\nThe image is gone, but what it showed is not. Three lines. Two closed. One open, marked by a hand a generation older than your father's — the same tradition, the same stopping point, and no explanation yet for either.\n\nAma has not spoken since Veth named the shared limit. Her expression has not changed. She is watching the place where the older mark was, the way a person watches a door that has just closed — not waiting for it to open again, but not ready to look away."
       }
     ],
     "lastTurn": {
-      "narration": "You shift the Waymarker's angle slightly in your joined grip, pressing your attention into the older mark rather than through it. Order-Sense runs conserved and quiet — not a surge, just a careful look at what is already there.\n\nThe mark's groove angle is off from your father's by a measurable degree. Not much. Enough. Your father's closing spirals sit at a tight, disciplined interval — each one placed with the same hand, the same spacing. The older mark's angle is looser, wider in its arc, the interval longer between its reference points. Two craftsmen who knew the same destination but walked different roads to reach it.\n\nThe tradition reads as adjacent to your father's, not identical. The structural intent is the same — a datum mark, setting up what comes after, not finishing the work itself. But the grammar of it is older. The line of thinking that produced it would have been your father's teacher's, or a craftsman working from that same lineage a generation back. It reached the same stopping point. It did not, either, name a reason for stopping.\n\nVeth speaks quietly from across the table. \"Whoever made that mark,\" she says, \"stopped at the same place your father stopped. That is not coincidence. That is a limit.\"\n\nPell's thumb lifts from the disc and rests against the back of your hand instead. The shadow-build thins another degree. The older mark is still visible at the third line's lower edge — an open datum in a grammar that predates your father's work by some years, waiting, as it has waited, for someone to close what it set up.",
-      "sceneSummary": "Order-Sense reads the older mark's tradition — adjacent to Silas's father's lineage, a generation earlier, the same stopping point. The third line is a problem older than his father.",
+      "narration": "The shadow-build releases the last of its held light. The older mark at the third line's edge dims to nothing, and the kitchen is simply a kitchen again — lamp burning low, warmth from the banked hearth, the smell of dried herbs and cooling flatbread. Nothing has moved. Ama's hands are still folded in her lap. Pell's thumb still rests against the back of Silas's hand, the Waymarker warm between your joined grip. Veth sits with her palms flat on the table. Huginn has not shifted from the back of the chair.\n\nThe image is gone, but what it showed is not. Three lines. Two closed. One open, marked by a hand a generation older than your father's — the same tradition, the same stopping point, and no explanation yet for either.\n\nAma has not spoken since Veth named the shared limit. Her expression has not changed. She is watching the place where the older mark was, the way a person watches a door that has just closed — not waiting for it to open again, but not ready to look away.",
+      "sceneSummary": "The shadow-build releases its last light at the kitchen table in Cairnhold — the older mark fades, the three-line structure held in memory, Ama still watching the place where it was.",
       "choices": [
         {
-          "label": "Ask Ama directly — does she know the older mark's maker, or did Cassiel's father ever speak of the third line?",
+          "label": "Ask Ama directly — she shifted when Veth named the older mark. She knows something about who that craftsman was.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
@@ -1707,17 +1722,7 @@
           "trivial": true
         },
         {
-          "label": "Let the build finally fade — seal the Waymarker and speak the sequence aloud: Millbrook, Stillwater's Trouble, the Crossing, Edvar Crane.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 0,
-          "intentTags": [
-            "plan"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Before the image goes, trace the older mark's interval against the two finished channels — see if its stopping point maps to a physical location you could walk to.",
+          "label": "Read the room with Order-Sense — lay it lightly over the kitchen and see if the house itself holds any structure that connects to the third line's tradition.",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 15,
@@ -1725,137 +1730,92 @@
             "study"
           ],
           "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false
+          "energyCost": 2
         },
         {
-          "label": "Name what you now know — the third line predates your father, it set a limit neither of them could pass, and Edvar Crane may know why. Let the build go and get some sleep.",
+          "label": "Name what you know aloud — lay out the third line's shape for Pell and Veth plainly, and ask whether either of them reads a tradition in that groove angle.",
           "attribute": "mental",
           "subAttribute": "reason",
           "difficulty": 0,
           "intentTags": [
-            "plan"
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Let the moment settle. Set the Waymarker down, let Pell release your hand, and give Ama the space to speak in her own time.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "calm"
           ],
           "trivial": true
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -2
-      },
       "scene": {
-        "setting": "The kitchen of Ama's house on Cairnhold's center lane, night. The table lamp burns low. The shadow-build is thinning to its last degrees — the third line's older mark still faintly visible at the lower edge.",
+        "setting": "The kitchen of Ama's house on Cairnhold's center lane, night. The table lamp burns low. The shadow-build has fully faded — the kitchen is a kitchen again, the older mark gone, only the warmth of the Waymarker remaining.",
         "npcsPresent": [
           {
             "name": "Ama",
-            "state": "Sitting back, hands folded in her lap, watching the older mark in the thinning image — her expression has not changed, but she has not looked away."
+            "state": "Hands folded in her lap, watching the place where the older mark was — expression unchanged, not yet ready to look away."
           },
           {
             "name": "Pell Ran Marsh",
-            "state": "Thumb resting against the back of Silas's hand, disc still between their joined grip, watching the build's last edge."
+            "state": "Thumb resting against the back of Silas's hand, the disc still in their joined grip, watching Ama."
           },
           {
             "name": "Veth (Stillwater) Ondra",
-            "state": "Hands flat on the table, the observation spoken — waiting, unhurried."
+            "state": "Hands flat on the table, the observation already spoken — waiting, unhurried."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the back of Silas's chair, head canted toward the fading image. Still."
+            "state": "Perched on the back of Silas's chair, head canted toward the place the image was. Still."
           }
         ],
         "objects": [
           "Father's Sealed Letter — open on the table",
           "Waymarker — warm from use, held in Silas and Pell's joined grip",
-          "Shadow-build — thinning to its last degrees, older mark still faintly visible",
           "Table lamp, burning low",
           "Kitchen warmth, the last of the evening fire"
         ],
         "threads": [
           "The older mark's maker — tradition adjacent to the father's, a generation earlier, same stopping point; identity still unknown",
-          "Ama's expression has not changed — she has not looked away from the older mark",
+          "Ama's expression has not changed — she has not looked away from where the older mark was",
           "The third line's open datum: a problem older than Silas's father",
           "Edvar Crane — last known at the Crossing; holds the second thread"
         ]
-      },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "veth-stillwater-ondra",
-          "name": "Veth (Stillwater) Ondra",
-          "note": "Named the shared stopping point as a limit — plain, unhurried, correct.",
-          "learned": [
-            "The older mark's craftsman stopped at the same place as Silas's father — named by Veth as a structural limit, not coincidence."
-          ],
-          "statusNote": "Hands flat on the kitchen table in Cairnhold — the limit named, watching the build's final edge."
-        },
-        {
-          "op": "update",
-          "npcId": "pell-ran-marsh",
-          "name": "Pell Ran Marsh",
-          "note": "Holding the disc through the Order-Sense read — thumb shifted to the back of Silas's hand as the image thinned.",
-          "statusNote": "Holding Silas's hand at the kitchen table in Cairnhold — the older mark read, the build nearly gone."
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "the-third-line",
-          "label": "The Third Line — The Older Mark",
-          "kind": "mystery",
-          "fact": "The older mark beneath Silas's father's work reads as adjacent in tradition — the same lineage, a generation back. Its groove angle and interval differ measurably from the father's. It reached the same stopping point and left no closing mark, only an open datum. Two craftsmen, a generation apart, hit the same limit. Veth named it plainly: that is not coincidence, that is a structural limit.",
-          "links": [
-            "the-water-crisis",
-            "the-second-thread",
-            "stillwaters-trouble",
-            "edvar-crane"
-          ]
-        },
-        {
-          "topic": "edvar-crane",
-          "label": "Edvar Crane",
-          "kind": "person",
-          "fact": "The second thread of the Waymarker's unfinished work. Last known at the Crossing. If the older mark predates Silas's father by a generation, Crane may know who made it — or may be connected to that lineage directly.",
-          "links": [
-            "the-second-thread",
-            "the-third-line",
-            "the-water-crisis"
-          ]
-        }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A careful Order-Sense read on the older mark — conserved, brief."
       }
     },
     "sceneState": {
-      "setting": "The kitchen of Ama's house on Cairnhold's center lane, night. The table lamp burns low. The shadow-build is thinning to its last degrees — the third line's older mark still faintly visible at the lower edge.",
+      "setting": "The kitchen of Ama's house on Cairnhold's center lane, night. The table lamp burns low. The shadow-build has fully faded — the kitchen is a kitchen again, the older mark gone, only the warmth of the Waymarker remaining.",
       "npcsPresent": [
         {
           "name": "Ama",
-          "state": "Sitting back, hands folded in her lap, watching the older mark in the thinning image — her expression has not changed, b"
+          "state": "Hands folded in her lap, watching the place where the older mark was — expression unchanged, not yet ready to look away."
         },
         {
           "name": "Pell Ran Marsh",
-          "state": "Thumb resting against the back of Silas's hand, disc still between their joined grip, watching the build's last edge."
+          "state": "Thumb resting against the back of Silas's hand, the disc still in their joined grip, watching Ama."
         },
         {
           "name": "Veth (Stillwater) Ondra",
-          "state": "Hands flat on the table, the observation spoken — waiting, unhurried."
+          "state": "Hands flat on the table, the observation already spoken — waiting, unhurried."
         },
         {
           "name": "Huginn",
-          "state": "Perched on the back of Silas's chair, head canted toward the fading image. Still."
+          "state": "Perched on the back of Silas's chair, head canted toward the place the image was. Still."
         }
       ],
       "objects": [
         "Father's Sealed Letter — open on the table",
         "Waymarker — warm from use, held in Silas and Pell's joined grip",
-        "Shadow-build — thinning to its last degrees, older mark still faintly visible",
         "Table lamp, burning low",
         "Kitchen warmth, the last of the evening fire"
       ],
       "threads": [
         "The older mark's maker — tradition adjacent to the father's, a generation earlier, same stopping point; identity still unknown",
-        "Ama's expression has not changed — she has not looked away from the older mark",
+        "Ama's expression has not changed — she has not looked away from where the older mark was",
         "The third line's open datum: a problem older than Silas's father",
         "Edvar Crane — last known at the Crossing; holds the second thread"
       ]
@@ -1864,7 +1824,7 @@
   "clock": {
     "schemaVersion": 1,
     "day": 12,
-    "hour": 21,
+    "hour": 22,
     "realAnchor": null
   },
   "companions": [
@@ -3928,26 +3888,6 @@
     "news": [
       {
         "day": 6,
-        "worldDay": 18,
-        "text": "Word has spread beyond millbrook: Silas Weir bound death-runes into the assembled spear at an open-sky fire, with Pell Marsh's maker's mark seated into the blade and Huginn witness at the stone ring."
-      },
-      {
-        "day": 6,
-        "worldDay": 18,
-        "text": "Word has spread beyond millbrook: Delivered a dressed bull and sow to Aldric's smokehouse — a significant haul by village standards, carried down from the north wood by three hunters."
-      },
-      {
-        "day": 6,
-        "worldDay": 18,
-        "text": "Word has spread beyond millbrook: Persuaded Fendt to commit his testimony to paper and walk to Millbrook — moved the falsified ledger thread from evidence-held to evidence-carried."
-      },
-      {
-        "day": 6,
-        "worldDay": 18,
-        "text": "Word has spread beyond millbrook: Persuaded Calvar — pre-Transition filtration engineer and author of the seventh-band specification — to leave the Edge District and travel to Millbrook to attest against Overseer Grael"
-      },
-      {
-        "day": 6,
         "worldDay": 19,
         "text": "Calvar: Calvar ran a manual recalibration of the seventh-band sensor overnight and found a three-point drift he cannot yet attribute to instrument error or source change — he has written nothing down, but he has not looked away from the window."
       },
@@ -4025,14 +3965,34 @@
         "day": 12,
         "worldDay": 20,
         "text": "Siol — Elven traveler at the Hub plaza, tall, pale coat, bir: Siol remained at the Hub plaza through the cold part of the morning, watching the Waygate with the particular stillness of someone who has decided not to leave yet but has not decided why."
+      },
+      {
+        "day": 12,
+        "worldDay": 21,
+        "text": "Vash: Vash spent the quiet hours between grinds tracing back what she overheard against the small things she knows about the array's optical layer — a particular phrase she'd dismissed as jargon now sits wrong in her, not quite matching the geometry it should describe, and she has not yet decided whether that wrongness is hers or theirs."
+      },
+      {
+        "day": 12,
+        "worldDay": 21,
+        "text": "Calvar: A subtle drift appeared in the seventh-band readings overnight — within tolerance, technically, but not within the pattern Calvar has memorized across fifteen years, and he has been sitting with that deviation since before dawn, deciding whether it is the window finally failing him or finally telling him something new."
+      },
+      {
+        "day": 12,
+        "worldDay": 21,
+        "text": "Pip Cotter, Mara's Errand-Runner: On the return leg Pip talked a market-stall keeper into letting her carry a folded note two streets over, which was small and unnecessary and made the whole trip feel properly used."
+      },
+      {
+        "day": 12,
+        "worldDay": 21,
+        "text": "Siol — Elven traveler at the Hub plaza, tall, pale coat, bir: Siol remained at the Hub plaza through the cooler part of the morning, watching the foot-traffic shift, neither departing nor inquiring — present in the way that costs nothing yet, and costs something."
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-20T22:02:52.221Z",
-    "lastTickWorldDay": 20,
-    "lastCanonWorldDay": 20,
-    "lastGenCount": 502,
-    "turnsSinceOffer": 3,
+    "lastSharedReadAt": "2026-07-21T14:24:42.799Z",
+    "lastTickWorldDay": 21,
+    "lastCanonWorldDay": 21,
+    "lastGenCount": 518,
+    "turnsSinceOffer": 4,
     "recentOffers": [
       {
         "thing": "The shadow-build showed Calvar's drainage failure precisely — the sleeve geometry, the collar, the east-bend junction — before it showed…",
@@ -4631,7 +4591,8 @@
         "kind": "person",
         "facts": [
           "[d2] Child courier and small-task helper for Mara Wells",
-          "[d12] [while away] On the return leg Pip talked her way into carrying a small bundle of waxed cord to a chandler two streets off her route, arriving back to Mara later than expected but plainly satisfied with herself."
+          "[d12] [while away] On the return leg Pip talked her way into carrying a small bundle of waxed cord to a chandler two streets off her route, arriving back to Mara later than expected but plainly satisfied with herself.",
+          "[d12] [while away] On the return leg Pip talked a market-stall keeper into letting her carry a folded note two streets over, which was small and unnecessary and made the whole trip feel properly used."
         ],
         "links": [],
         "aliases": [],
@@ -5003,7 +4964,6 @@
         "label": "Calvar — the Engineer",
         "kind": "person",
         "facts": [
-          "[d3] The diagram Calvar left with Leth is not a full array schematic — it is specifically the seventh-band section, a proof-of-authorship anchor. He brought Leth the piece that establishes he designed the ",
           "[d3] Calvar left the diagram with Leth with specific verbal instructions: hold it off the shelves, under the cord, until someone came asking about the seventh band or the lower filtration ledge. He anticip",
           "[d3] Deathsense read him at close range — his own ending is decades off, nothing urgent. The arrangement he is attending is a decision's ending: he left instructions with Leth and has been waiting three da",
           "[d3] Opened his door on the first knock and said 'I wondered what shape it would come in' — he was expecting someone to arrive and is willing to receive them. He looked at Huginn for a long beat without fl",
@@ -5026,7 +4986,8 @@
           "[d5] Calvar brought to Mara Wells's store on World-day 18 mid-morning — she recognized his purpose immediately, used Dara's phrase back unprompted, and extended her hand to him first. The briefing chain be",
           "[d5] Calvar placed the document roll on Mara's counter and named himself witness, not authority — deferring to local knowledge on whose hands it belongs in. His first diagnostic question was intake sleeve ",
           "[d6] [while away] Calvar ran a manual recalibration of the seventh-band sensor overnight and found a three-point drift he cannot yet attribute to instrument error or source change — he has written nothing down, but he has not looked away from the window.",
-          "[d12] [while away] Calvar noticed a drift of 0.003 in the seventh-band baseline reading and spent the night re-checking his instruments rather than the sky, unwilling to admit whether he is hoping to find instrument error or confirm the drift is real."
+          "[d12] [while away] Calvar noticed a drift of 0.003 in the seventh-band baseline reading and spent the night re-checking his instruments rather than the sky, unwilling to admit whether he is hoping to find instrument error or confirm the drift is real.",
+          "[d12] [while away] A subtle drift appeared in the seventh-band readings overnight — within tolerance, technically, but not within the pattern Calvar has memorized across fifteen years, and he has been sitting with that deviation since before dawn, deciding whether it is the window finally failing him or…"
         ],
         "links": [
           "vash-lens-grinder-east-room",
@@ -5089,7 +5050,8 @@
           "[d4] [while away] While dressing her wheel's edge before first light, Vash reconstructed the overheard phrase word by word and realized the term she couldn't place was a pre-Transition calibration interval",
           "[d6] [while away] Vash paused her wheel mid-grind this morning and spent an hour reworking the fragment she overheard into a sequence of optical terms she does know, arriving at an arrangement that almost coheres — close enough that her uncertainty has sharpened from fog into a specific question.",
           "[d6] Seven unfinished seventh-band lens-blanks found abandoned in a dry hollow beneath a market stall — same spec as Vash's work; the grinding is precise and deliberate, the abandonment not voluntary. To be brought to Calvar or Vash for identification.",
-          "[d12] [while away] Vash spent the evening re-grinding a lens she'd already finished, turning the fragment of overheard conversation over in her mind until she placed it — the word used wasn't a maintenance term, it was a calibration term, and that distinction has been quietly unsettling her ever since."
+          "[d12] [while away] Vash spent the evening re-grinding a lens she'd already finished, turning the fragment of overheard conversation over in her mind until she placed it — the word used wasn't a maintenance term, it was a calibration term, and that distinction has been quietly unsettling her ever since.",
+          "[d12] [while away] Vash spent the quiet hours between grinds tracing back what she overheard against the small things she knows about the array's optical layer — a particular phrase she'd dismissed as jargon now sits wrong in her, not quite matching the geometry it should describe, and she has not yet…"
         ],
         "links": [
           "leth-archive-complaint",
@@ -5407,21 +5369,21 @@
     }
   },
   "tendencies": {
-    "strategic": 12.740625061417163,
-    "cerebral": 21.045801598572574,
-    "social": 10.494480301423245,
-    "generous": 3.3057599793282577,
-    "cautious": 4.294318187076971,
-    "physical": 0.17877275297391904,
-    "risky": 0.18747864763931524,
-    "ruthless": 0.05977551797568094,
-    "carousing": 0.6511630007322085,
-    "amorous": 1.4165806608175924,
-    "patient": 0.3725738047636141,
-    "stealth": 0.02316914348197074,
-    "devotion": 0.4733244006694838,
-    "craft": 1.3930129064981986,
-    "leadership": 0.11793351166042693
+    "strategic": 13.422109434881733,
+    "cerebral": 20.519656558608258,
+    "social": 10.232118293887664,
+    "generous": 3.2231159798450513,
+    "cautious": 4.186960232400047,
+    "physical": 0.17430343414957106,
+    "risky": 0.18279168144833235,
+    "ruthless": 0.058281130026288916,
+    "carousing": 0.6348839257139032,
+    "amorous": 1.3811661442971526,
+    "patient": 0.3632594596445238,
+    "stealth": 0.022589914894921473,
+    "devotion": 0.4614912906527467,
+    "craft": 1.3581875838357436,
+    "leadership": 0.11498517386891625
   },
   "aptitudes": [
     "strategist",
@@ -5429,9 +5391,9 @@
     "scholar",
     "sage"
   ],
-  "actionCount": 636,
+  "actionCount": 637,
   "grantsVersion": 1,
-  "reconcileVersion": 13,
+  "reconcileVersion": 14,
   "gallery": [
     {
       "kind": "moment",
@@ -5779,8 +5741,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784600464075,
-  "rev": 977,
+  "updatedAt": 1784645607313,
+  "rev": 988,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -6002,6 +5964,10 @@
             {
               "worldDay": 20,
               "note": "On the return leg Pip talked her way into carrying a small bundle of waxed cord to a chandler two streets off her route, arriving back to Mara later than expected but plainly satisfied with herself."
+            },
+            {
+              "worldDay": 21,
+              "note": "On the return leg Pip talked a market-stall keeper into letting her carry a folded note two streets over, which was small and unnecessary and made the whole trip feel properly used."
             }
           ]
         },
@@ -6187,6 +6153,10 @@
             {
               "worldDay": 20,
               "note": "Calvar noticed a drift of 0.003 in the seventh-band baseline reading and spent the night re-checking his instruments rather than the sky, unwilling to admit whether he is hoping to find instrument error or confirm the drift is real."
+            },
+            {
+              "worldDay": 21,
+              "note": "A subtle drift appeared in the seventh-band readings overnight — within tolerance, technically, but not within the pattern Calvar has memorized across fifteen years, and he has been sitting with that deviation since before dawn, deciding whether it is the window finally failing him or finally telling him something new."
             }
           ]
         },
@@ -6297,6 +6267,10 @@
             {
               "worldDay": 20,
               "note": "Vash spent the evening re-grinding a lens she'd already finished, turning the fragment of overheard conversation over in her mind until she placed it — the word used wasn't a maintenance term, it was a calibration term, and that distinction has been quietly unsettling her ever since."
+            },
+            {
+              "worldDay": 21,
+              "note": "Vash spent the quiet hours between grinds tracing back what she overheard against the small things she knows about the array's optical layer — a particular phrase she'd dismissed as jargon now sits wrong in her, not quite matching the geometry it should describe, and she has not yet decided whether that wrongness is hers or theirs."
             }
           ]
         },
@@ -6441,6 +6415,10 @@
             {
               "worldDay": 20,
               "note": "Siol remained at the Hub plaza through the cold part of the morning, watching the Waygate with the particular stillness of someone who has decided not to leave yet but has not decided why."
+            },
+            {
+              "worldDay": 21,
+              "note": "Siol remained at the Hub plaza through the cooler part of the morning, watching the foot-traffic shift, neither departing nor inquiring — present in the way that costs nothing yet, and costs something."
             }
           ]
         },
@@ -7483,6 +7461,144 @@
       "powerSystem": "learned",
       "taughtBy": "Marrow (bond)",
       "effectTags": []
+    },
+    "braid_order_sense_palework": {
+      "id": "braid_order_sense_palework",
+      "name": "Order-Sense × Palework",
+      "tradition": "lattice",
+      "powerSystem": "lattice",
+      "levelReq": 6,
+      "energyCost": 10,
+      "attribute": "mental",
+      "functions": [
+        "reveal",
+        "foresee",
+        "hinder",
+        "strike"
+      ],
+      "harmRung": "lethal",
+      "effectTags": [],
+      "nativeOrCombination": "combination",
+      "description": "A braid earned in play: Order-Sense and Palework, channelled together until they became one craft.",
+      "notFor": "Anything beyond the braid of its two parents.",
+      "narrationHints": "Order-Sense braided with Palework.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Order-Sense × Palework I",
+          "grants": "Order-Sense and Palework, run as one craft — the move only their braiding makes.",
+          "cannot": "What neither parent could do apart.",
+          "functions": [
+            "reveal",
+            "foresee",
+            "hinder",
+            "strike"
+          ]
+        },
+        {
+          "rank": 2,
+          "name": "Order-Sense × Palework II",
+          "grants": "The braid deepens; the two crafts answer together more surely.",
+          "cannot": "What neither parent could do apart.",
+          "functions": [
+            "reveal",
+            "foresee",
+            "hinder",
+            "strike"
+          ]
+        },
+        {
+          "rank": 3,
+          "name": "Order-Sense × Palework III",
+          "grants": "The braid deepens; the two crafts answer together more surely.",
+          "cannot": "What neither parent could do apart.",
+          "functions": [
+            "reveal",
+            "foresee",
+            "hinder",
+            "strike"
+          ]
+        }
+      ],
+      "minted": {
+        "kind": "braid",
+        "from": [
+          "order_sense",
+          "palework"
+        ],
+        "mintedAt": null,
+        "namedBy": "auto",
+        "tier": 3,
+        "sourceNames": [
+          "Order-Sense",
+          "Palework"
+        ]
+      }
+    },
+    "braid_deathsense_order_sense": {
+      "id": "braid_deathsense_order_sense",
+      "name": "Deathsense × Order-Sense",
+      "tradition": "ashwarden",
+      "powerSystem": "ashwarden",
+      "levelReq": 6,
+      "energyCost": 10,
+      "attribute": "mental",
+      "functions": [
+        "foresee",
+        "reveal"
+      ],
+      "harmRung": "none",
+      "effectTags": [],
+      "nativeOrCombination": "combination",
+      "description": "A braid earned in play: Deathsense and Order-Sense, channelled together until they became one craft.",
+      "notFor": "Anything beyond the braid of its two parents.",
+      "narrationHints": "Deathsense braided with Order-Sense.",
+      "tree": [
+        {
+          "rank": 1,
+          "name": "Deathsense × Order-Sense I",
+          "grants": "Deathsense and Order-Sense, run as one craft — the move only their braiding makes.",
+          "cannot": "What neither parent could do apart.",
+          "functions": [
+            "foresee",
+            "reveal"
+          ]
+        },
+        {
+          "rank": 2,
+          "name": "Deathsense × Order-Sense II",
+          "grants": "The braid deepens; the two crafts answer together more surely.",
+          "cannot": "What neither parent could do apart.",
+          "functions": [
+            "foresee",
+            "reveal"
+          ]
+        },
+        {
+          "rank": 3,
+          "name": "Deathsense × Order-Sense III",
+          "grants": "The braid deepens; the two crafts answer together more surely.",
+          "cannot": "What neither parent could do apart.",
+          "functions": [
+            "foresee",
+            "reveal"
+          ]
+        }
+      ],
+      "minted": {
+        "kind": "braid",
+        "from": [
+          "deathsense",
+          "order_sense"
+        ],
+        "mintedAt": null,
+        "namedBy": "auto",
+        "tier": 3,
+        "sourceNames": [
+          "Deathsense",
+          "Order-Sense"
+        ]
+      }
     }
   },
   "precursorAccess": [],
@@ -7608,7 +7724,7 @@
   "regionsKnown": {
     "valley": 435,
     "the_palelands": 6,
-    "the_center": 24
+    "the_center": 25
   },
   "foreclosed": [
     "rootkin",
@@ -7691,7 +7807,9 @@
       "lastAt": "2026-07-20T18:59:23.039Z",
       "startDay": 20,
       "endDay": 20,
-      "beats": 9
+      "beats": 9,
+      "_recapError": null,
+      "recap": "Day twenty passed through Silas's hands like water through cupped palms — nothing to show for it, nothing lost either, just the quiet weight of a man holding still. No deed marked the hours, no door opened or closed, no blade drawn and no word sworn. Sometimes a day like this is the world pressing pause, letting a man feel the shape of what he's carrying before it asks him to carry more. He sat with it, and the sitting was enough."
     },
     {
       "id": "sess-7",
@@ -7705,6 +7823,14 @@
       "id": "sess-8",
       "startedAt": "2026-07-21T02:21:04.071Z",
       "lastAt": "2026-07-21T02:21:04.071Z",
+      "startDay": 21,
+      "endDay": 21,
+      "beats": 1
+    },
+    {
+      "id": "sess-9",
+      "startedAt": "2026-07-21T14:53:27.311Z",
+      "lastAt": "2026-07-21T14:53:27.311Z",
       "startDay": 21,
       "endDay": 21,
       "beats": 1
@@ -7897,13 +8023,13 @@
   "_opEmitted": {
     "sceneSummary": 12,
     "choices": 12,
-    "characterDeltas": 7,
+    "characterDeltas": 6,
     "scene": 12,
-    "npcUpdates": 12,
+    "npcUpdates": 11,
     "factUpdates": 2,
     "placeUpdates": 2,
-    "codexUpdates": 11,
-    "timeOps": 10,
+    "codexUpdates": 10,
+    "timeOps": 9,
     "imagePrompt": 1,
     "sceneEnded": 4,
     "itemUpdates": 1,
@@ -7922,5 +8048,27 @@
       "rejected": 0,
       "lastWhy": null
     }
-  }
+  },
+  "braids": [
+    {
+      "id": "braid_order_sense_palework",
+      "from": [
+        "order_sense",
+        "palework"
+      ],
+      "name": "Order-Sense × Palework",
+      "tier": 3,
+      "mintedAt": null
+    },
+    {
+      "id": "braid_deathsense_order_sense",
+      "from": [
+        "deathsense",
+        "order_sense"
+      ],
+      "name": "Deathsense × Order-Sense",
+      "tier": 3,
+      "mintedAt": null
+    }
+  ]
 }

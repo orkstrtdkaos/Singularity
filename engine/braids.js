@@ -1,0 +1,120 @@
+// braids.js — SNG-196. The generative core, made real. Co-activating two crafts in one action builds a
+// count in the practice ledger (SNG-173) — and past a threshold the character has EARNED a BRAID: a NEW,
+// full-schema ability, minted onto them, that neither parent could do alone. NO authored recipe is
+// required — that absence was the whole gap (Silas: 40 co-activations, 0 braids, because only 3 recipes
+// existed and none touched his crafts). This is what makes the system GENERATIVE.
+//
+//   • The braid is a REAL ability def (tree, functions, harmRung, tradition) stored in customAbilities, so
+//     fullCatalog() resolves it everywhere (rank-up, coverage, the skill wheel) with no special-casing.
+//   • TIER scales with POWER: a braid of two mastered crafts is a capstone; two basics, a modest craft.
+//   • The name is the model's suggestion OR the player's — buildBraidDef takes an authored override; the
+//     stub it falls back to is itself a valid, playable craft, so a mint never halts on a bad model reply.
+//
+// Pure, no I/O, fully testable. app.js owns the async generation + the mint op; generate.js authors the
+// rich tree; this owns the mechanics: what is mintable, at what tier, and the minted shape.
+
+import { discoveryKey } from "./progression.js"; // the SAME co-activation key the ledger is written with
+import { smartClamp } from "./namematch.js";
+
+export const BRAID_RIPEN_AT = 5; // co-activations before a pairing is EARNED as a braid — a clearly deliberate
+//   pattern (Silas's Double Register sits at 5, and Erik treats it as canon). Tunable; a lower bar risks
+//   braid-spam from incidental pairings, a higher one is the unreachability this ticket exists to fix.
+const HARM_ORDER = ["none", "restraint", "wounding", "lethal", "atrocity"]; // harsher parent sets the braid's rung
+const ROMAN = ["I", "II", "III"];
+
+/** SNG-196: the pairings a character has EARNED the right to braid — co-activated at least `threshold`
+ *  times, both crafts still held, and not already braided. GENERATIVE: an authored recipe is NOT required.
+ *  Returns candidates richest-first (most co-activated). Pure — reads only the practice ledger + catalog. */
+export function mintableBraidsFor(character, { catalog = {}, threshold = BRAID_RIPEN_AT } = {}) {
+  const co = character?.practice?.coActivations || {};
+  const owned = new Set((character?.abilities || []).map(a => a.abilityId));
+  const braided = new Set((character?.braids || []).map(b => braidKey(b.from)));
+  const out = [];
+  for (const [key, n] of Object.entries(co)) {
+    if ((n || 0) < threshold) continue;
+    const comps = key.split("+").filter(Boolean);
+    if (comps.length !== 2) continue;                       // pairwise braids only (the ledger is pairwise)
+    if (!comps.every(id => owned.has(id))) continue;        // you must still hold both crafts
+    if (braided.has(braidKey(comps))) continue;             // not already braided
+    const sources = comps.map(id => catalog[id]).filter(Boolean);
+    if (sources.length !== 2) continue;                     // both defs resolvable
+    out.push({ components: comps, coActivations: n, sources, ...braidTier(character, comps, catalog) });
+  }
+  return out.sort((a, b) => b.coActivations - a.coActivations);
+}
+
+/** The stable identity of a braid = its two components, order-independent. */
+export function braidKey(components = []) { return [...components].sort().join("+"); } // registry:internal
+
+/** SNG-196: a braid's TIER + learn-gate, scaled to the POWER of the two crafts braided — the character's
+ *  current RANK in each source (a braid of two rank-3 masteries is a capstone) and the sources' own gates.
+ *  Pure. Returns { tier: 1..3, maxRank, levelReq, sourceRanks }. */
+export function braidTier(character, components, catalog = {}) { // registry:internal
+  const rankOf = id => (character?.abilities || []).find(a => a.abilityId === id)?.level || 1;
+  const levelReqOf = id => catalog[id]?.levelReq || 1;
+  const sourceRanks = components.map(rankOf);
+  const maxRank = Math.min(3, Math.max(1, ...(sourceRanks.length ? sourceRanks : [1]))); // the DEEPER parent sets the ceiling
+  const tier = maxRank; // a braid draws on your mastery of one craft joined to the other; capped at rank 3
+  const levelReq = Math.max(1, Math.min(9, Math.max(maxRank * 2, ...components.map(levelReqOf))));
+  return { tier, maxRank, levelReq, sourceRanks };
+}
+
+/** SNG-196: a VALID, full-schema braid ability def — the fallback the model enriches, and a real playable
+ *  craft on its own. Unions the sources' functions, takes the harsher harmRung, derives the gate from
+ *  braidTier, and scaffolds a `tier`-deep tree. `opts.authored` (from generate.js "braid" type) overrides
+ *  name/description/tree when the model gave good ones; `opts.name` is the player's chosen name (wins over
+ *  the model's suggestion). Pure. */
+export function buildBraidDef(character, components, catalog = {}, opts = {}) {
+  const sources = components.map(id => catalog[id]).filter(Boolean);
+  if (sources.length !== 2) return null;
+  const { tier, maxRank, levelReq } = braidTier(character, components, catalog);
+  const authored = opts.authored || {};
+  const srcNames = sources.map(s => s.name || s.id);
+  const harmRung = sources.map(s => s.harmRung || "none").sort((a, b) => HARM_ORDER.indexOf(b) - HARM_ORDER.indexOf(a))[0] || "none";
+  const functions = [...new Set(sources.flatMap(s => s.functions || []))];
+  const tradition = sources[0]?.tradition || sources[0]?.powerSystem || "learned";
+  const namedByPlayer = !!opts.name;
+  const name = smartClamp(String(opts.name || authored.name || `${srcNames[0]} × ${srcNames[1]}`), 60);
+  const id = "braid_" + braidKey(components).replace(/[^a-z0-9]+/gi, "_");
+  // the tree: use the model's ranks when present + valid, else scaffold `maxRank` deep.
+  let tree = Array.isArray(authored.tree) ? authored.tree.filter(n => n && n.name).slice(0, maxRank).map((n, i) => ({
+    rank: i + 1, name: smartClamp(String(n.name), 60), grants: smartClamp(String(n.grants || "The braid runs as one craft."), 200),
+    cannot: smartClamp(String(n.cannot || "What neither parent could do alone."), 160), functions
+  })) : [];
+  while (tree.length < maxRank) {
+    const r = tree.length + 1;
+    tree.push({
+      rank: r, name: `${name} ${ROMAN[r - 1] || r}`,
+      grants: r === 1 ? `${srcNames[0]} and ${srcNames[1]}, run as one craft — the move only their braiding makes.` : `The braid deepens; the two crafts answer together more surely.`,
+      cannot: "What neither parent could do apart.", functions
+    });
+  }
+  return {
+    id, name, tradition, powerSystem: tradition,
+    levelReq, energyCost: Math.max(4, Math.min(15, 4 + tier * 2)),
+    attribute: sources[0]?.attribute || "practical",
+    functions, harmRung, effectTags: [], nativeOrCombination: "combination",
+    description: smartClamp(String(authored.description || `A braid earned in play: ${srcNames.join(" and ")}, channelled together until they became one craft.`), 400),
+    notFor: "Anything beyond the braid of its two parents.",
+    narrationHints: smartClamp(String(authored.description || `${srcNames.join(" braided with ")}.`), 200),
+    tree,
+    minted: { kind: "braid", from: [...components], mintedAt: null, namedBy: namedByPlayer ? "player" : (authored.name ? "gm" : "auto"), tier, sourceNames: srcNames }
+  };
+}
+
+/** SNG-196: mint a braid onto the character — the full def into customAbilities (so fullCatalog resolves
+ *  it), a held-ability entry, and a `braids` ledger row for provenance + de-dupe. Idempotent by braidKey;
+ *  returns the minted def, or null if this pairing was already braided or the def is invalid. Pure. */
+export function mintBraid(character, def, { at = null } = {}) {
+  if (!character || !def?.id || !def?.minted?.from) return null;
+  const key = braidKey(def.minted.from);
+  character.braids = character.braids || [];
+  if (character.braids.some(b => braidKey(b.from) === key)) return null; // already braided this pairing
+  def.minted.mintedAt = at;
+  character.customAbilities = character.customAbilities || {};
+  character.customAbilities[def.id] = def;                              // resolvable everywhere via fullCatalog()
+  character.abilities = character.abilities || [];
+  if (!character.abilities.some(a => a.abilityId === def.id)) character.abilities.push({ abilityId: def.id, level: 1, braided: true });
+  character.braids.push({ id: def.id, from: [...def.minted.from], name: def.name, tier: def.minted.tier, mintedAt: at });
+  return def;
+}

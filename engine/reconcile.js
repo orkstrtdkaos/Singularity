@@ -22,6 +22,7 @@ import { seedStandingAtCreation } from "./standing.js";
 import { namesMatch } from "./namematch.js";
 import { affiliationOf, regionHomeTradition, buildPeopleVocab } from "./affiliation.js";
 import { defaultSchoolsForDomains } from "./substrate.js"; // SNG-193b §3.2: seed a school per practised domain on old saves
+import { mintableBraidsFor, buildBraidDef, mintBraid } from "./braids.js"; // SNG-196: mint the braids a character already earned
 
 // ---------- character migration steps (extensible registry) ----------
 // Each step: { version, id, playerFacing, apply(entity, ctx) → { notes?, offers?, warnings? } }.
@@ -331,6 +332,28 @@ export const CHARACTER_STEPS = [
       if (c.schools && typeof c.schools === "object") return {};
       c.schools = defaultSchoolsForDomains(c.domains, ctx.content?.schools);
       return {};
+    }
+  },
+  {
+    version: 14, id: "braid-backfill", playerFacing: true,
+    // SNG-196. The generative core was unreachable: the co-activation ledger filled and NOTHING minted a
+    // braid, because braids required an authored recipe and only 3 existed — none for the crafts people
+    // play (Silas: 40 co-activations, 0 braids). This mints the braids a character has ALREADY EARNED —
+    // every pairing co-activated past the threshold, both crafts still held — as full-schema abilities in
+    // customAbilities. Idempotent: mintBraid skips a pairing already braided, so it never double-mints on
+    // a later login. The rich tree/name is the model's job in play; the stub minted here is itself playable
+    // and the player can rename + deepen it. GENERATIVE — no authored recipe required, which is the fix.
+    apply: (c, ctx) => {
+      const catalog = { ...(ctx.content?.abilities || {}), ...(c.customAbilities || {}) };
+      const mintable = mintableBraidsFor(c, { catalog });
+      const names = [];
+      for (const m of mintable) {
+        const def = buildBraidDef(c, m.components, catalog);
+        if (def && mintBraid(c, def, { at: null })) names.push(def.name);
+      }
+      return names.length
+        ? { notes: [`Braids you had already earned, made real (${names.length}): ${names.join(", ")}. A braid is a craft neither parent could do alone — rename it and deepen it in play.`] }
+        : {};
     }
   },
   {

@@ -6387,6 +6387,50 @@ await (async () => {
   check("192 §4: picking a shape toggles the lens and never touches the picks", /state\.archetype = \(state\.archetype === b\.dataset\.arch\) \? null : b\.dataset\.arch/.test(appSrcC) && /biases the suggestions, never touches the picks/.test(appSrcC));
 }
 
+// --- SNG-196: the generative braid mint engine — co-activation EARNS a full-schema, tiered, minted craft ---
+{
+  const br = await import("../engine/braids.js");
+  const catalog = {
+    a: { id: "a", name: "Aye", tradition: "marcher", levelReq: 2, functions: ["strike"], harmRung: "wounding" },
+    b: { id: "b", name: "Bee", tradition: "marcher", levelReq: 3, functions: ["reveal", "conceal"], harmRung: "none" }
+  };
+  const char = { level: 6, abilities: [{ abilityId: "a", level: 2 }, { abilityId: "b", level: 3 }], practice: { coActivations: { "a+b": 5, "a+z": 9 } } };
+  // GENERATIVE: no authored recipe — a co-activated pairing with both crafts held is mintable.
+  const mintable = br.mintableBraidsFor(char, { catalog, threshold: 5 });
+  check("196: a pairing co-activated ≥ threshold with both crafts held is mintable (no recipe needed)", mintable.length === 1 && mintable[0].components.slice().sort().join("+") === "a+b");
+  check("196: a pairing missing one craft is NOT mintable (you must still hold both)", !mintable.some(m => m.components.includes("z")));
+  check("196: below the threshold → not mintable", br.mintableBraidsFor({ ...char, practice: { coActivations: { "a+b": 4 } } }, { catalog, threshold: 5 }).length === 0);
+  // TIER scales with POWER — the deeper parent's rank sets the ceiling.
+  const t = br.braidTier(char, ["a", "b"], catalog);
+  check("196: tier scales with the ranks of the crafts braided (deeper parent sets the ceiling)", t.tier === 3 && t.maxRank === 3 && t.levelReq >= 3);
+  // a minted braid is a FULL-schema ability.
+  const def = br.buildBraidDef(char, ["a", "b"], catalog);
+  check("196: a minted braid is a FULL-schema ability (id/name/tree/functions/harmRung/provenance)", !!def.id && !!def.name && Array.isArray(def.tree) && def.tree.length === t.maxRank && def.nativeOrCombination === "combination");
+  check("196: functions are the UNION of both parents", ["strike", "reveal", "conceal"].every(f => def.functions.includes(f)));
+  check("196: the braid takes the HARSHER parent's harm rung", def.harmRung === "wounding");
+  check("196: provenance records the two parents + how it was named", br.braidKey(def.minted.from) === "a+b" && def.minted.namedBy === "auto");
+  // naming: the player wins; the model can author name + tree.
+  const named = br.buildBraidDef(char, ["a", "b"], catalog, { name: "The Grey Register" });
+  check("196: a PLAYER name wins over the auto/model name", named.name === "The Grey Register" && named.minted.namedBy === "player");
+  const authored = br.buildBraidDef(char, ["a", "b"], catalog, { authored: { name: "Woven Edge", description: "A real braid.", tree: [{ name: "First Weave", grants: "x", cannot: "y" }] } });
+  check("196: a MODEL-authored name + tree enriches the stub", authored.name === "Woven Edge" && authored.tree[0].name === "First Weave" && authored.minted.namedBy === "gm");
+  // MINT: adds everywhere + idempotent.
+  const c2 = { level: 6, abilities: [{ abilityId: "a", level: 2 }, { abilityId: "b", level: 3 }], practice: { coActivations: { "a+b": 5 } } };
+  const minted = br.mintBraid(c2, br.buildBraidDef(c2, ["a", "b"], catalog));
+  check("196: minting adds the full def to customAbilities + a held ability + a braids ledger row", !!c2.customAbilities[minted.id] && c2.abilities.some(a => a.abilityId === minted.id && a.braided) && c2.braids.length === 1);
+  check("196: minting is idempotent — the same pairing never braids twice", br.mintBraid(c2, br.buildBraidDef(c2, ["a", "b"], catalog)) === null && c2.braids.length === 1);
+  check("196: after minting, the pairing is no longer mintable", br.mintableBraidsFor(c2, { catalog, threshold: 5 }).length === 0);
+  // reconcile v14 — backfill the braids a save already earned.
+  const rc = await import("../engine/reconcile.js");
+  const step14 = rc.CHARACTER_STEPS.find(s => s.id === "braid-backfill");
+  check("196: reconcile has the braid-backfill step (v14)", !!step14 && step14.version === 14 && rc.topReconcileVersion("character") >= 14);
+  const old = { level: 6, abilities: [{ abilityId: "a", level: 2 }, { abilityId: "b", level: 3 }], practice: { coActivations: { "a+b": 6 } } };
+  step14.apply(old, { content: { abilities: catalog } });
+  check("196: the backfill mints a save's already-earned braids into customAbilities", (old.braids || []).length === 1 && Object.keys(old.customAbilities || {}).length === 1);
+  step14.apply(old, { content: { abilities: catalog } });
+  check("196: the backfill is idempotent — no double-mint on the next login", old.braids.length === 1);
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

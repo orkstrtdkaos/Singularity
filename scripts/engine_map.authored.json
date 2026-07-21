@@ -310,5 +310,10 @@
     "purpose": "The world moves while you are away — on re-entry after in-game days pass, active events advance on their own clocks, delegated work progresses and arcs ferment, so a crisis ignored worsens and time away is time the world used.",
     "playerVisibleSurface": "The away-digest news on return — what advanced, what a delegated crew did, what stirred in the world.",
     "whatMakesItFire": "Re-entering play after in-game days have passed (runWorldTick plus the SNG-191 generation turn on the world count)."
+  },
+  "braids.js": {
+    "purpose": "SNG-196: the generative core made real — co-activating two crafts in one action EARNS a braid past a threshold, a new full-schema ability minted onto the character that neither parent could do alone. No authored recipe required (that absence was the gap); tier scales with the power of the two crafts braided.",
+    "playerVisibleSurface": "A new craft on your sheet, named by you or the game, with its own rank tree — and the notice when a pairing you have leaned on becomes a braid you can mint.",
+    "whatMakesItFire": "A pairing co-activated past BRAID_RIPEN_AT with both crafts still held (mintableBraidsFor); the reconcile v14 backfill mints the braids a save already earned. GENERATIVE — no recipe gate."
   }
 }

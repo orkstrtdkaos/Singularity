@@ -6400,15 +6400,22 @@ await (async () => {
   check("196: a pairing co-activated ≥ threshold with both crafts held is mintable (no recipe needed)", mintable.length === 1 && mintable[0].components.slice().sort().join("+") === "a+b");
   check("196: a pairing missing one craft is NOT mintable (you must still hold both)", !mintable.some(m => m.components.includes("z")));
   check("196: below the threshold → not mintable", br.mintableBraidsFor({ ...char, practice: { coActivations: { "a+b": 4 } } }, { catalog, threshold: 5 }).length === 0);
-  // TIER scales with POWER — the deeper parent's rank sets the ceiling.
+  // TIER scales with POWER — the deeper parent sets the ceiling; a braid reads one tier BEYOND its parents.
   const t = br.braidTier(char, ["a", "b"], catalog);
-  check("196: tier scales with the ranks of the crafts braided (deeper parent sets the ceiling)", t.tier === 3 && t.maxRank === 3 && t.levelReq >= 3);
+  check("196/197 §5: maxRank is the deeper parent's rank; tier is one beyond (a fusion is more); levelReq == tier (sourceable badge)", t.maxRank === 3 && t.tier === 4 && t.levelReq === 4);
   // a minted braid is a FULL-schema ability.
   const def = br.buildBraidDef(char, ["a", "b"], catalog);
   check("196: a minted braid is a FULL-schema ability (id/name/tree/functions/harmRung/provenance)", !!def.id && !!def.name && Array.isArray(def.tree) && def.tree.length === t.maxRank && def.nativeOrCombination === "combination");
   check("196: functions are the UNION of both parents", ["strike", "reveal", "conceal"].every(f => def.functions.includes(f)));
   check("196: the braid takes the HARSHER parent's harm rung", def.harmRung === "wounding");
   check("196: provenance records the two parents + how it was named", br.braidKey(def.minted.from) === "a+b" && def.minted.namedBy === "auto");
+  // SNG-197 §1: the FLOOR is the union; the CEILING is the braid's OWN — an emergent function neither parent had.
+  check("197 §1: notFor is drawn around the BRAID's own reach, NOT 'anything beyond the parents'", /outside this braid's own reach/.test(def.notFor) && !/beyond the braid of its two parents/.test(def.notFor));
+  const withEmergent = br.buildBraidDef(char, ["a", "b"], catalog, { authored: { emergentFunction: "bind" } });
+  check("197 §1: an emergent function (neither parent had) becomes REAL in functions — union is FLOOR, braid's own is CEILING", !def.functions.includes("bind") && withEmergent.functions.includes("bind") && withEmergent.minted.emergent === "bind");
+  check("197 §1: even a stub names the NEW thing at the narration level (the rank-1 grant)", /the move only their joining makes/.test(def.tree[0].grants));
+  check("197 §5: energy derives from craft DEPTH (4 + maxRank*2), not the +1 display tier", def.energyCost === 4 + 3 * 2);
+  check("197: provenance flags whether the def was model-enriched (drives re-presenting stubs)", def.minted.enriched === false && withEmergent.minted.enriched === true);
   // naming: the player wins; the model can author name + tree.
   const named = br.buildBraidDef(char, ["a", "b"], catalog, { name: "The Grey Register" });
   check("196: a PLAYER name wins over the auto/model name", named.name === "The Grey Register" && named.minted.namedBy === "player");

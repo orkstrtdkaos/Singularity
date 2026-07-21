@@ -46,16 +46,18 @@ export function mintableBraidsFor(character, { catalog = {}, threshold = BRAID_R
 /** The stable identity of a braid = its two components, order-independent. */
 export function braidKey(components = []) { return [...components].sort().join("+"); } // registry:internal
 
-/** SNG-196: a braid's TIER + learn-gate, scaled to the POWER of the two crafts braided — the character's
- *  current RANK in each source (a braid of two rank-3 masteries is a capstone) and the sources' own gates.
- *  Pure. Returns { tier: 1..3, maxRank, levelReq, sourceRanks }. */
+/** SNG-196 + SNG-197 §5: a braid's TIER + learn-gate, scaled to the POWER of the two crafts braided.
+ *  `maxRank` is the DEEPER parent's current rank (1..3) — it sets the tree depth and the energy. A braid is
+ *  ONE TIER BEYOND its parents (a fusion is *more* than either — the same doctrine as §1's ceiling), so the
+ *  displayed `tier` = maxRank+1, capped at 5. `levelReq` IS that tier, because the ability card renders
+ *  `tierOf(levelReq)` = ROMAN[clamp(1,5,levelReq)] — so the badge is now sourceable and intentional, not the
+ *  stray "Tier V" a `maxRank*2` levelReq produced. Pure. */
 export function braidTier(character, components, catalog = {}) { // registry:internal
   const rankOf = id => (character?.abilities || []).find(a => a.abilityId === id)?.level || 1;
-  const levelReqOf = id => catalog[id]?.levelReq || 1;
   const sourceRanks = components.map(rankOf);
-  const maxRank = Math.min(3, Math.max(1, ...(sourceRanks.length ? sourceRanks : [1]))); // the DEEPER parent sets the ceiling
-  const tier = maxRank; // a braid draws on your mastery of one craft joined to the other; capped at rank 3
-  const levelReq = Math.max(1, Math.min(9, Math.max(maxRank * 2, ...components.map(levelReqOf))));
+  const maxRank = Math.min(3, Math.max(1, ...(sourceRanks.length ? sourceRanks : [1]))); // the deeper parent sets the ceiling
+  const tier = Math.min(5, maxRank + 1);   // a braid is one tier BEYOND its parents (§1: something neither had)
+  const levelReq = tier;                   // the card reads tierOf(levelReq) — keep them the same so the badge is sourceable
   return { tier, maxRank, levelReq, sourceRanks };
 }
 
@@ -71,7 +73,13 @@ export function buildBraidDef(character, components, catalog = {}, opts = {}) {
   const authored = opts.authored || {};
   const srcNames = sources.map(s => s.name || s.id);
   const harmRung = sources.map(s => s.harmRung || "none").sort((a, b) => HARM_ORDER.indexOf(b) - HARM_ORDER.indexOf(a))[0] || "none";
-  const functions = [...new Set(sources.flatMap(s => s.functions || []))];
+  // SNG-197 §1: the FLOOR is the union of both parents; the CEILING is the braid's OWN — an EMERGENT function
+  // neither parent had (the line a player can point at that is NEW). The caller validates it against the
+  // 24-verb vocab (a hallucinated verb is rejected, never accepted-and-logged). Without the model (a stub
+  // mint) the emergent capability lives at the narration level in the rank-1 grant; enrichment adds the verb.
+  const parentFunctions = [...new Set(sources.flatMap(s => s.functions || []))];
+  const emergent = (typeof authored.emergentFunction === "string" && authored.emergentFunction && !parentFunctions.includes(authored.emergentFunction)) ? authored.emergentFunction : null;
+  const functions = emergent ? [...parentFunctions, emergent] : parentFunctions;
   const tradition = sources[0]?.tradition || sources[0]?.powerSystem || "learned";
   const namedByPlayer = !!opts.name;
   const name = smartClamp(String(opts.name || authored.name || `${srcNames[0]} × ${srcNames[1]}`), 60);
@@ -85,20 +93,22 @@ export function buildBraidDef(character, components, catalog = {}, opts = {}) {
     const r = tree.length + 1;
     tree.push({
       rank: r, name: `${name} ${ROMAN[r - 1] || r}`,
-      grants: r === 1 ? `${srcNames[0]} and ${srcNames[1]}, run as one craft — the move only their braiding makes.` : `The braid deepens; the two crafts answer together more surely.`,
+      grants: r === 1 ? `${srcNames[0]} and ${srcNames[1]} run as one craft${emergent ? ` — and in the braiding, a thing neither reached alone (${emergent})` : ""}: the move only their joining makes.` : `The braid deepens; the two crafts answer together more surely.`,
       cannot: "What neither parent could do apart.", functions
     });
   }
   return {
     id, name, tradition, powerSystem: tradition,
-    levelReq, energyCost: Math.max(4, Math.min(15, 4 + tier * 2)),
+    levelReq, energyCost: Math.max(4, Math.min(15, 4 + maxRank * 2)), // from the craft depth (deeper parent), not the +1 display tier
     attribute: sources[0]?.attribute || "practical",
     functions, harmRung, effectTags: [], nativeOrCombination: "combination",
     description: smartClamp(String(authored.description || `A braid earned in play: ${srcNames.join(" and ")}, channelled together until they became one craft.`), 400),
-    notFor: "Anything beyond the braid of its two parents.",
+    // SNG-197 §1: the boundary is drawn around the BRAID's own reach, not around its parents — it is not
+    // either parent entire; it is the one new craft their joining makes, and no wider. (Never delete this.)
+    notFor: smartClamp(String(authored.notFor || "What lies outside this braid's own reach — it is not either parent whole, only the single new craft their braiding makes."), 240),
     narrationHints: smartClamp(String(authored.description || `${srcNames.join(" braided with ")}.`), 200),
     tree,
-    minted: { kind: "braid", from: [...components], mintedAt: null, namedBy: namedByPlayer ? "player" : (authored.name ? "gm" : "auto"), tier, sourceNames: srcNames }
+    minted: { kind: "braid", from: [...components], mintedAt: null, namedBy: namedByPlayer ? "player" : (authored.name ? "gm" : "auto"), tier, emergent, enriched: !!(authored.name || authored.description || (authored.tree || []).length || emergent), sourceNames: srcNames }
   };
 }
 

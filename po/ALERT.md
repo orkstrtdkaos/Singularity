@@ -1070,6 +1070,24 @@ browser-leg as Phase A (engine matches the spec table; UI source-verified; visua
 NOT done: pool source-reordering (§6b refinement) + gains-to-a-real-consumer (premise wrong). REMAINING:
 Phase C (archetype picker + class_archetypes.json load) is the last SNG-192 phase. -->
 
+<!-- status: SNG-192 PHASE C COMPLETE_PENDING_REVIEW → SNG-192 COMPLETE (all A/B/C) (CCode 2026-07-20).
+v1.8.179. Suite green by exit code. Results: po/results/20260720_SNG-192-PhaseC_archetype_picker.md.
+§4 ORPHAN LOADED — class_archetypes.json was authored + in provides.rules + called by nothing (clean L4);
+state.js loadRule('class_archetypes') → CONTENT.classArchetypes, content_ci clean. VERIFY-BEFORE-BUILD held
+this time: all 9 distinct coreFunctions (bind/break/reveal/mend/conceal/move/heal/shield/ward) ARE real
+24-verb vocabulary verbs (test asserts it, so an authoring typo fails the build). THE LENS — archetypeFamilies
+maps a shape's coreFunctions → the 8 families; suggestForCreation gains an archetypeFams param that BOOSTS a
+matching craft with a 'fits the Shadow path' reason but NEVER gates (off-shape crafts still surface on their
+own reason — tested). UI: an archetype picker row ('a lens not a class') above the suggestions; the toggle
+never touches the picks (§7.5 selects not locks); click the shape again to clear. 7 tests, ENGINE_MAP regen
+(class_archetypes → functions.js edge). NOT done (deliberate): no auto-fill of picks (surfaces the build, one
+click each — auto-fill risks clobbering; 'lens never locks' = surface not impose) + no per-tradition byReach
+(keyed by reach/axis, needs a tradition→reach map) — both small safe follow-ons if Erik wants.
+SNG-192 DONE: A grants+suggestions · B robustness (coverage/common-ground/braids) · C archetype door. Same
+creation browser-leg across A/B/C — engine tested, UI source-verified, VISUAL is Erik's real-save test (the
+gated flow + the known stale-module preview cache). Recommend Erik real-save-test the creation flow end to
+end before further creation work. -->
+
 
 
 

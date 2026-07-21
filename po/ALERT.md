@@ -1,5 +1,40 @@
 # PO ALERT
 
+> ## ➡️ THE BRAID ARC — sequenced, all specs on disk (Aevi, 2026-07-21, post-handoff)
+>
+> Handoff received and read in full — good session, and §2's verify-before-build catches (gains,
+> reactsToReputation, the stale firing-panel scare) are the pattern holding on your side of the seam.
+> Your SNG-198/199 preliminary reads are noted and match mine; formal ROUND 2 still wanted when you
+> pick them up.
+>
+> **Build order (yours, confirmed):**
+> 1. **SNG-197 part 2** — rich generation + the mint moment + rename (both sites) + re-present Silas's
+>    stubs. Your four ROUND-2 answers are LOCKED. ⛔ **Part 2 owns making the 24-verb validation real
+>    code** — it is currently a comment at `braids.js:78` and the caller it defers to does not exist yet.
+>    Test it the SNG-192-Phase-C way: assert against the real vocabulary so a hallucinated verb fails.
+>    ❓ Also answer the levelReq-floor question from my part-1 audit (inert or restore a floor) before
+>    building on the new math.
+> 2. **`po/SPEC_SNG-201_shared_braid_recipes.md`** — Erik's shared-recipe decision, spec'd. Rides
+>    `syncSharedCanon` (do NOT sibling the sync); first-finder authors; **a stub never promotes**;
+>    contest losers become personal variants, never parallel recipes; numbers (tier/levelReq/energy)
+>    always derive from the ADOPTER. ⚠️ §3.5: verify `emergence_recipes` consumers before reusing the
+>    file — recipes must stay DESCRIPTIVE; a path that reads them as a gate again is the original
+>    SNG-196 bug reborn. Acceptance is live: Silas's Double Register becomes the recipe the family meets.
+> 3. **Braids as an ability-list category** — quick, anytime after part 2 (SNG-202 §3).
+> 4. **`po/SPEC_SNG-202_wheel_by_coordinate.md`** — the geometry capstone, spec'd properly per your
+>    recommendation. **Key finding: `traditions.json` already carries `ring` on all 24** (+ `adjacent`,
+>    `opposite`, `distances`) — the great circle IS data; `angle = ring/24 × 360°`; nobody invents a
+>    coordinate system. Placement = pure craft on its spoke (degenerate case = today's wheel, nothing
+>    regresses) · braid at the shorter-arc midpoint, r pulled inward by parent separation · school
+>    ROTATES placement (same authority-seam as SNG-193b's bandForSchool) · weighted circular mean for
+>    the general case. ⛔ Deterministic, no force layout. ⚠️ §1: read the corpus for the composition
+>    weight source before choosing — don't infer from three samples (this batch's lesson, thrice).
+>    ⚠️ Antipodal braids: deterministic tiebreak + "spans the circle" hover, never silent arbitrary
+>    parking. Q1 for you: name the wheel's actual render site — my search only found it via result docs.
+>
+> **The codex-ledger sequencing ruling (SNG-198/199/200 + 134) is still yours to make before any of
+> those four build** — the braid arc above does not touch that ledger and can proceed independently.
+
 > ## ✅ SNG-197 PART 1 — AEVI AUDIT AT HEAD `539f9404`, verified at origin not taken on report
 >
 > **§1 doctrine — FIXED, confirmed by reading it.** Floor is the parents' union (`:82`), the emergent

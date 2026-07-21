@@ -54,7 +54,7 @@
   "alignment": {
     "mechanical_spiritual": -0.020000000000000004,
     "falsehood_truth": -0.04000000000000001,
-    "spectrumId": -0.05
+    "spectrumId": -0.0475
   },
   "attunement": 1,
   "maxHealth": 30,
@@ -123,72 +123,71 @@
         "player": "Ask her directly what she records here — lean into the junior-wright dynamic and treat her role as genuinely important.",
         "summary": "Loki reads the hand-kept variance log at the notices board and learns it has diverged from the automated markers for eleven days.",
         "narration": "You lean in and read the notice she has just pinned — three columns of careful handwriting, every entry dated and cross-referenced. The title at the top reads: EASTERN INTAKE — PARTICULATE VARIANCE LOG, SPRING INTERVAL. Below it, a column of timestamps, a column of readings, and a narrow third column of notes in a smaller hand.\n\nYou say, with genuine interest, that this is thorough work. You say you have not seen a variance log kept by hand before — most places you have been through rely on the automated tally-markers. You ask her what the hand-log catches that the markers miss.\n\nShe turns from the board and looks at you properly for the first time. Her expression is cautious, the way a person is cautious when they expect to be dismissed and are not yet sure they won't be. She says the tally-markers record what they are calibrated to expect. She says her log records what is actually there. She adds, after a short pause, that those two things have not agreed for eleven days.\n\nCy, at your shoulder, irises its lens once. It says nothing. But the lamp it carries tilts a fraction toward the notice, the way it tilts toward things it finds significant."
+      },
+      {
+        "player": "Offer to help her think through what that means back at her place... you've been around things like this your whole life.  Tell her you're also good with your hands and wink.",
+        "summary": "Loki offers Tessvel practical help with the diverging log — and a wink — and she names the time her posting ends.",
+        "narration": "You let the silence after her last answer sit for a beat — the kind of silence that says you heard it, not just waited for your turn to speak. Then you close the variance log column with one finger and look at her directly.\n\n\"Eleven days is a long time for a divergence to go unaddressed,\" you say. \"Someone should sit down with that log and actually work through what it means.\" You pause, and then add, easily, that you have been around things like this your whole life. Old mechanisms, old patterns. You know how to read what the instruments miss. You say this without boasting — as a plain fact, the way she states her numbers.\n\nThen you let the corner of your mouth go, just slightly. You tell her you are also good with your hands. The wink is small and unhurried, the kind that exists and then is gone without demanding a response.\n\nTessvel Cairn holds your gaze for a moment longer than the conversation strictly requires. Then she looks back at the log, and you can see the precise, orderly part of her working through whether this is a useful offer or a distraction she does not have time for. She taps the lower edge of the notice once with her index finger — a habit, not a decision. When she looks back up, there is something in her expression that was not there before. Not warm exactly. Considering.\n\n\"My posting ends at the second bell,\" she says. She says it the way someone states a calibration reading — flat, exact, and leaving the interpretation to you."
       }
     ],
     "lastTurn": {
-      "narration": "You lean in and read the notice she has just pinned — three columns of careful handwriting, every entry dated and cross-referenced. The title at the top reads: EASTERN INTAKE — PARTICULATE VARIANCE LOG, SPRING INTERVAL. Below it, a column of timestamps, a column of readings, and a narrow third column of notes in a smaller hand.\n\nYou say, with genuine interest, that this is thorough work. You say you have not seen a variance log kept by hand before — most places you have been through rely on the automated tally-markers. You ask her what the hand-log catches that the markers miss.\n\nShe turns from the board and looks at you properly for the first time. Her expression is cautious, the way a person is cautious when they expect to be dismissed and are not yet sure they won't be. She says the tally-markers record what they are calibrated to expect. She says her log records what is actually there. She adds, after a short pause, that those two things have not agreed for eleven days.\n\nCy, at your shoulder, irises its lens once. It says nothing. But the lamp it carries tilts a fraction toward the notice, the way it tilts toward things it finds significant.",
-      "sceneSummary": "Loki reads the hand-kept variance log at the notices board and learns it has diverged from the automated markers for eleven days.",
+      "narration": "You let the silence after her last answer sit for a beat — the kind of silence that says you heard it, not just waited for your turn to speak. Then you close the variance log column with one finger and look at her directly.\n\n\"Eleven days is a long time for a divergence to go unaddressed,\" you say. \"Someone should sit down with that log and actually work through what it means.\" You pause, and then add, easily, that you have been around things like this your whole life. Old mechanisms, old patterns. You know how to read what the instruments miss. You say this without boasting — as a plain fact, the way she states her numbers.\n\nThen you let the corner of your mouth go, just slightly. You tell her you are also good with your hands. The wink is small and unhurried, the kind that exists and then is gone without demanding a response.\n\nTessvel Cairn holds your gaze for a moment longer than the conversation strictly requires. Then she looks back at the log, and you can see the precise, orderly part of her working through whether this is a useful offer or a distraction she does not have time for. She taps the lower edge of the notice once with her index finger — a habit, not a decision. When she looks back up, there is something in her expression that was not there before. Not warm exactly. Considering.\n\n\"My posting ends at the second bell,\" she says. She says it the way someone states a calibration reading — flat, exact, and leaving the interpretation to you.",
+      "sceneSummary": "Loki offers Tessvel practical help with the diverging log — and a wink — and she names the time her posting ends.",
       "choices": [
         {
-          "label": "Ask her what changed eleven days ago — and whether anyone above her in the intake hierarchy has seen this divergence.",
+          "label": "Ask what she does when her posting ends — keep the thread open without pressing it",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
-          "trivial": true,
           "intentTags": [
-            "negotiate"
+            "flirt",
+            "romantic"
           ],
-          "abilityId": null,
-          "energyCost": null
+          "trivial": true
         },
         {
-          "label": "Ask to read the full log — every entry, not just today's posting.",
+          "label": "Tell her you will be at the intake plaza at the second bell — make it a commitment",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
-          "trivial": true,
           "intentTags": [
-            "study"
+            "flirt",
+            "romantic"
           ],
-          "abilityId": null,
-          "energyCost": null
+          "trivial": true
         },
         {
-          "label": "Tell her what you saw at the sampling fixture — the ring-form residue — and watch her face when you say it.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
-          "trivial": false,
-          "intentTags": [
-            "study",
-            "negotiate"
-          ],
-          "abilityId": null,
-          "energyCost": null
-        },
-        {
-          "label": "Use See the Made Thing on the notice itself — read how it was constructed and what it is actually recording versus what it appears to record.",
+          "label": "Bring up the eleven-day divergence directly — ask if any senior wright has seen the hand-log",
           "attribute": "mental",
           "subAttribute": "reason",
           "difficulty": 0,
-          "trivial": false,
           "intentTags": [
-            "study"
+            "study",
+            "plan"
           ],
-          "abilityId": "see_the_made_thing",
-          "energyCost": 1
+          "trivial": true
+        },
+        {
+          "label": "Let the moment land and step back to where Vessa is still studying the fourth vial — see if she caught any of that",
+          "attribute": "mental",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "scout"
+          ],
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "Intake Plaza, Pressureholt — outdoor, cobbled, open morning light. The Echo River runs visibly gray-green under the Eastern Intake. Early spring chill. Loki and Cy are at the notices board, standing beside the young woman in the rust-orange coat.",
+        "setting": "Intake Plaza, Pressureholt — outdoor, cobbled, open morning light. The Echo River runs visibly gray-green under the Eastern Intake. Early spring chill.",
         "npcsPresent": [
           {
             "name": "Tessvel Cairn",
-            "state": "Turned to face Loki properly, cautious but no longer entirely dismissive — waiting for his next question."
+            "state": "Standing at the notices board, log pinned in place, watching Loki with a measuring expression — she named the second bell and is waiting to see what he does with it."
           },
           {
             "name": "Vessa Torquen",
-            "state": "Back at the sampling fixture, studying the fourth vial, back to Loki."
+            "state": "Back at the sampling fixture, still studying the fourth vial, back to Loki."
           },
           {
             "name": "Gray-haired woman in work apron",
@@ -197,12 +196,13 @@
         ],
         "objects": [
           "Sampling fixture on the quay — four graduated vials, one outside variance",
-          "Fresh notice on the lower rail — Eastern Intake Particulate Variance Log, Spring Interval — three columns: timestamps, readings, hand-noted observations",
+          "Fresh notice on the lower rail — Eastern Intake Particulate Variance Log, Spring",
           "Notices board dense with maintenance schedules and duty rosters",
           "Cy's lamp, angled slightly toward the notice"
         ],
         "threads": [
-          "Tessvel's log has diverged from the automated markers for eleven days — she has not said whether anyone senior knows",
+          "Tessvel has named the second bell — an implicit invitation, or at least an opening",
+          "Tessvel's log has diverged from the automated markers for eleven days — she has not said whether any senior wright has seen it",
           "The ring-form residue at the sampling fixture matches a regulated nanite deposition pattern",
           "The gray-haired woman at the water's edge — her worry unexplained",
           "Vessa is not fooled and still wants a straight answer about what Cy is"
@@ -214,60 +214,34 @@
           "npcId": "tessvel-cairn",
           "name": "Tessvel Cairn",
           "role": "Junior wright on posting-duty at the Eastern Intake notice board",
-          "note": "Turned to face Loki properly when he treated her work as genuinely important. Revealed that her hand-log has diverged from the automated tally-markers for eleven days.",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "Loki offered to sit with the log and work through what the divergence means — and added a wink. She named her posting end time: the second bell. Not warm, but considering.",
           "learned": [
-            "Her hand-log records what is actually present in the water; the automated markers record only what they are calibrated to expect. The two have not agreed for eleven days."
-          ],
-          "skillsObserved": [
-            "Keeps a detailed hand-written variance log alongside automated systems",
-            "Notices and records divergence independently"
+            "Her posting ends at the second bell"
           ],
           "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "At the notices board, now facing Loki — cautious but engaged after being treated as competent."
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "tessvel-cairn",
-          "label": "Tessvel Cairn",
-          "kind": "person",
-          "entityId": "tessvel-cairn",
-          "fact": "Her hand-kept variance log at the Eastern Intake has diverged from the automated tally-markers for eleven days — she records what is actually there; the markers record what they are calibrated to expect.",
-          "links": [
-            "intake-plaza",
-            "the-water-crisis",
-            "ring-form-residue-at-eastern-intake"
-          ]
-        },
-        {
-          "topic": "the-water-crisis",
-          "label": "The Water Crisis",
-          "kind": "event",
-          "entityId": null,
-          "fact": "The hand-log and the automated markers at the Eastern Intake have disagreed for eleven days — the divergence predates the current gray-green discoloration or runs alongside it, and no senior wright has visibly acted on it yet.",
-          "links": [
-            "intake-plaza",
-            "tessvel-cairn",
-            "ring-form-residue-at-eastern-intake"
-          ]
+          "statusNote": "At the notices board in Intake Plaza — named the second bell as the end of her posting, an opening left for Loki to take or leave.",
+          "bondType": "romantic",
+          "bondStage": "courting"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief conversation at the notices board."
+        "why": "a brief exchange at the notices board"
       }
     },
     "sceneState": {
-      "setting": "Intake Plaza, Pressureholt — outdoor, cobbled, open morning light. The Echo River runs visibly gray-green under the Eastern Intake. Early spring chill. Loki and Cy are at the notices board, standing beside the young woman in the rust-orange coat.",
+      "setting": "Intake Plaza, Pressureholt — outdoor, cobbled, open morning light. The Echo River runs visibly gray-green under the Eastern Intake. Early spring chill.",
       "npcsPresent": [
         {
           "name": "Tessvel Cairn",
-          "state": "Turned to face Loki properly, cautious but no longer entirely dismissive — waiting for his next question."
+          "state": "Standing at the notices board, log pinned in place, watching Loki with a measuring expression — she named the second bel"
         },
         {
           "name": "Vessa Torquen",
-          "state": "Back at the sampling fixture, studying the fourth vial, back to Loki."
+          "state": "Back at the sampling fixture, still studying the fourth vial, back to Loki."
         },
         {
           "name": "Gray-haired woman in work apron",
@@ -281,7 +255,8 @@
         "Cy's lamp, angled slightly toward the notice"
       ],
       "threads": [
-        "Tessvel's log has diverged from the automated markers for eleven days — she has not said whether anyone senior knows",
+        "Tessvel has named the second bell — an implicit invitation, or at least an opening",
+        "Tessvel's log has diverged from the automated markers for eleven days — she has not said whether any senior wright has seen it",
         "The ring-form residue at the sampling fixture matches a regulated nanite deposition pattern",
         "The gray-haired woman at the water's edge — her worry unexplained",
         "Vessa is not fooled and still wants a straight answer about what Cy is"
@@ -311,16 +286,20 @@
         "locationId": "pressureholt",
         "day": 1
       },
-      "relationship": 1,
+      "relationship": 2,
       "history": [
         "[d1] Loki observed her before approaching — the straightening posture when seniors passed, the careful handwriting, the patches. He introduced himself while reading her fresh posting.",
-        "[d1] Turned to face Loki properly when he treated her work as genuinely important. Revealed that her hand-log has diverged from the automated tally-markers for eleven days."
+        "[d1] Turned to face Loki properly when he treated her work as genuinely important. Revealed that her hand-log has diverged from the automated tally-markers for eleven days.",
+        "[d1] Loki offered to sit with the log and work through what the divergence means — and added a wink. She named her posting end time: the second bell. Not warm, but considering.",
+        "[d1] Your bond becomes romantic.",
+        "[d1] Your bond deepens — courting."
       ],
       "knownFacts": [
         "Writes and records for a living, or does so as a posting duty",
         "Fixes things rather than replacing them — coat has three different-fabric patches, each applied neatly",
         "Sensitive about junior status — straightened when older wrights passed",
-        "Her hand-log records what is actually present in the water; the automated markers record only what they are calibrated to expect. The two have not agreed for eleven days."
+        "Her hand-log records what is actually present in the water; the automated markers record only what they are calibrated to expect. The two have not agreed for eleven days.",
+        "Her posting ends at the second bell"
       ],
       "skillsObserved": [
         "Precise handwriting, official posting procedure",
@@ -330,7 +309,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the notices board, now facing Loki — cautious but engaged after being treated as competent.",
+      "statusNote": "At the notices board in Intake Plaza — named the second bell as the end of her posting, an opening left for Loki to take or leave.",
       "domains": {
         "primary": "wright"
       },
@@ -338,7 +317,9 @@
       "lastSeen": {
         "locationId": "pressureholt",
         "day": 1
-      }
+      },
+      "bondType": "romantic",
+      "bondStage": "courting"
     }
   },
   "placeMemory": {
@@ -411,7 +392,7 @@
     "lastSharedReadAt": "2026-07-21T17:13:37.964Z",
     "lastTickWorldDay": 21,
     "lastCanonWorldDay": 21,
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 6,
     "recentOffers": [
       {
         "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
@@ -528,16 +509,18 @@
     }
   },
   "tendencies": {
-    "devotion": 12.335339707031249,
-    "cerebral": 0.9036878906249999,
-    "social": 5.75434375,
-    "strategic": 1.9256250000000001,
-    "cautious": 0.975
+    "devotion": 12.026956214355467,
+    "cerebral": 0.8810956933593749,
+    "social": 7.61048515625,
+    "strategic": 1.877484375,
+    "cautious": 0.9506249999999999,
+    "amorous": 1,
+    "generous": 1
   },
   "aptitudes": [
     "faithful"
   ],
-  "actionCount": 5,
+  "actionCount": 6,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -656,8 +639,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784658482865,
-  "rev": 20,
+  "updatedAt": 1784658633532,
+  "rev": 21,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -806,8 +789,8 @@
           "entityId": "tessvel-cairn",
           "type": "npc",
           "birthWeight": 2,
-          "engagementScore": 6,
-          "tier": "established",
+          "engagementScore": 8,
+          "tier": "nominated",
           "rating": "R+",
           "provenance": {
             "playerKey": "player-s9z9u1",
@@ -833,6 +816,10 @@
             },
             {
               "kind": "fact",
+              "day": 1
+            },
+            {
+              "kind": "interact",
               "day": 1
             }
           ],
@@ -860,7 +847,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_gearlands": 6
+    "the_gearlands": 7
   },
   "opLossPending": false,
   "sessions": [
@@ -875,10 +862,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-21T17:40:12.510Z",
-      "lastAt": "2026-07-21T18:28:02.863Z",
+      "lastAt": "2026-07-21T18:30:33.530Z",
       "startDay": 21,
       "endDay": 21,
-      "beats": 5
+      "beats": 6
     }
   ],
   "establishedFacts": [],
@@ -891,19 +878,19 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 6,
-    "choices": 6,
+    "sceneSummary": 7,
+    "choices": 7,
     "characterDeltas": 2,
-    "scene": 6,
+    "scene": 7,
     "placeUpdates": 1,
     "codexUpdates": 5,
-    "timeOps": 6,
+    "timeOps": 7,
     "offer": 1,
     "generateRequest": 2,
     "sceneEnded": 1,
-    "npcUpdates": 4
+    "npcUpdates": 5
   },
-  "_opTurns": 6,
+  "_opTurns": 7,
   "customAbilities": {},
   "companionBonds": {},
   "practice": {

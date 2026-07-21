@@ -6363,6 +6363,30 @@ await (async () => {
   check("192 §6c: coherence↔divergence is framed, never a penalty", /Coherence makes you strong here; divergence makes you new/.test(appSrcB) && /Off-source picks are seeds/.test(appSrcB));
 }
 
+// --- SNG-192 Phase C §4: the archetype lens (load the orphan; bias suggestions toward a shape, never lock) ---
+{
+  const fn = await import("../engine/functions.js");
+  const rjcC = (rel) => JSON.parse(readFileSync(join(root, rel), "utf8"));
+  const arch = rjcC("content/packs/core/rules/class_archetypes.json");
+  const fnIndex = fn.buildFunctionIndex(rjcC("content/packs/core/rules/function_vocabulary.json"));
+  const shadow = arch.archetypes.find(a => /Shadow/.test(a.archetype));
+  const fams = fn.archetypeFamilies(shadow.coreFunctions, fnIndex);
+  check("192 §4: an archetype's coreFunctions map to families (conceal/move/reveal → INFLUENCE/MOVE/KNOW)", fams.has("INFLUENCE") && fams.has("MOVE") && fams.has("KNOW"));
+  check("192 §4: EVERY archetype's coreFunctions are real vocabulary verbs (the premise HELD this time)", arch.archetypes.every(a => (a.coreFunctions || []).every(v => fn.familyOfVerb(v, fnIndex))));
+
+  const learnable = [{ id: "sneak", name: "Sneak", functions: ["conceal"], tradition: "umbral" }, { id: "smash", name: "Smash", functions: ["strike"], tradition: "marcher" }];
+  const catalog = Object.fromEntries(learnable.map(a => [a.id, a]));
+  const sug = fn.suggestForCreation({ learnable, character: { domains: { primary: "umbral" }, attributes: {}, abilities: [] }, prologueTags: {}, fnIndex, traditionIndex: {}, catalog, primary: "umbral", archetypeFams: fams, archetypeName: "Shadow / Stealth", max: 5 });
+  check("192 §4: the lens boosts a matching craft with a 'fits the … path' reason", sug.some(s => s.abilityId === "sneak" && /fits the Shadow \/ Stealth path/.test(s.why)));
+  check("192 §4: the lens NEVER gates — an off-shape craft still surfaces when it earns its own reason", fn.suggestForCreation({ learnable, character: { domains: { primary: "marcher" }, attributes: {}, abilities: [] }, prologueTags: { marcher: 1 }, fnIndex, traditionIndex: {}, catalog, primary: "marcher", archetypeFams: fams, archetypeName: "Shadow / Stealth", max: 5 }).some(x => x.abilityId === "smash"));
+
+  const stateSrcC = readFileSync(new URL('../engine/state.js', import.meta.url), 'utf8');
+  check("192 §4: class_archetypes.json is loaded into CONTENT (the L4 orphan, now wired)", /loadRule\("class_archetypes"/.test(stateSrcC) && /schools, classArchetypes/.test(stateSrcC));
+  const appSrcC = readFileSync(new URL('../app.js', import.meta.url), 'utf8');
+  check("192 §4: the ability step renders the archetype picker (a lens, not a class)", /A shape to start from — optional, a lens not a class/.test(appSrcC) && /archetypeFamilies\(selectedArch\.coreFunctions/.test(appSrcC));
+  check("192 §4: picking a shape toggles the lens and never touches the picks", /state\.archetype = \(state\.archetype === b\.dataset\.arch\) \? null : b\.dataset\.arch/.test(appSrcC) && /biases the suggestions, never touches the picks/.test(appSrcC));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

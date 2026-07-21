@@ -28,7 +28,7 @@ import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal } from "./engine/traditions.js";
 import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs } from "./engine/companions.js";
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady } from "./engine/company.js";
-import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, suggestForCreation, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
+import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, suggestForCreation, archetypeFamilies, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
 import { toolkitForGM } from "./engine/toolkit.js";
 import { fallbackPersonalArc, buildPersonalArcPrompt, sanitizePersonalArc } from "./engine/personalArc.js";
 import { assembleGMContext } from "./engine/gm_registry.js"; // BATCH-11 §23: the GM context is a DECLARED registry, iterated — never hand-listed
@@ -62,7 +62,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.178";
+const APP_VERSION = "1.8.179";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2294,11 +2294,17 @@ function renderCreate() {
     state.abilities = state.abilities.filter(id => choosable.some(a => a.id === id)).slice(0, maxAbilities());
     const abTitle = (a) => { const r1 = a.tree?.find(x => x.rank === 1); return esc((r1 ? "Rank 1 “" + r1.name + "” — CAN: " + r1.grants + " | CANNOT: " + r1.cannot : a.description) + (a.notFor ? " | NOT FOR: " + a.notFor : "")); };
     const abBtn = (a, extraCls = "", whyHtml = "") => `<button class="opt ${extraCls} ${state.abilities.includes(a.id) ? "selected" : ""}" data-ab="${a.id}" title="${abTitle(a)}">${esc(a.name)}${whyHtml}</button>`;
-    // SNG-192 §3: suggestions with a REASON drawn from what the player actually DID (prologue) or WROTE (bio).
+    // SNG-192 §4: the archetype LENS (optional front door) — pick a shape (Magus, Shadow, Seer…) and the
+    // suggestions lean toward its coreFunctions. A lens, never a class: it biases, the player changes any of it.
+    const archetypes = CONTENT.classArchetypes?.archetypes || [];
+    const selectedArch = archetypes.find(a => a.archetype === state.archetype) || null;
+    const archetypeFams = selectedArch ? archetypeFamilies(selectedArch.coreFunctions, FN_INDEX) : null;
+    // SNG-192 §3: suggestions with a REASON drawn from the shape chosen (§4), what the player DID (prologue) or WROTE (bio).
     const suggestions = suggestForCreation({
       learnable: choosable, character: { domains: state.domains, attributes: state.attrs, abilities: state.abilities.map(id => ({ abilityId: id })) },
       prologueTags: state.prologue?.tags || {}, bio: state.bio || {}, fnIndex: FN_INDEX,
-      traditionIndex: CONTENT.traditionIndex, catalog: fullCatalog(), primary: state.domains?.primary || null, max: 5
+      traditionIndex: CONTENT.traditionIndex, catalog: fullCatalog(), primary: state.domains?.primary || null,
+      archetypeFams, archetypeName: selectedArch?.archetype || null, max: 5
     });
     const byTrad = {};
     for (const a of choosable) { const t = traditionOf(a, CONTENT.traditionIndex) || a.powerSystem || "folk"; (byTrad[t] = byTrad[t] || []).push(a); }
@@ -2333,6 +2339,9 @@ function renderCreate() {
       ${grantIds.length ? `<div class="sys-group"><div class="sys-label">Yours by right of being ${esc(traditionLabel(state.domains?.primary || state.nativeTradition || state.origin))}</div>
         <p class="hint" style="margin:0 0 6px">Already yours — you don't spend a pick on these.</p>
         <div class="opt-row">${grantIds.map(id => { const g = fullCatalog()[id]; return g ? `<span class="opt" style="opacity:.6;cursor:default;border-style:dashed" title="${abTitle(g)}">✓ ${esc(g.name)}</span>` : ""; }).join("")}</div></div>` : ""}
+      ${archetypes.length ? `<div class="sys-group"><div class="sys-label">A shape to start from — optional, a lens not a class</div>
+        <div class="opt-row">${archetypes.map(a => `<button class="opt ${state.archetype === a.archetype ? "selected" : ""}" data-arch="${esc(a.archetype)}" title="${esc(a.whatItIsHere)}">${esc(a.archetype)}</button>`).join("")}</div>
+        ${selectedArch ? `<p class="hint" style="margin-top:6px">${esc(selectedArch.whatItIsHere)} <em>${esc(selectedArch.signature)}</em> The suggestions below lean toward this shape now — change any, or click ${esc(selectedArch.archetype)} again to clear.</p>` : `<p class="hint" style="margin-top:4px">Pick a shape — Magus, Shadow, Seer, Warden… — to see a build lean your way, or ignore it and choose freely.</p>`}</div>` : ""}
       ${suggestions.length ? `<div class="sys-group"><div class="sys-label">Suggested for you</div>
         <div class="opt-row" style="flex-direction:column;align-items:stretch;gap:6px">${suggestions.map(s => { const a = abById[s.abilityId]; return a ? abBtn(a, "", ` <span class="hint" style="opacity:.75">— ${esc(s.why)}</span>`) : ""; }).join("")}</div></div>` : ""}
       <details ${suggestions.length ? "" : "open"} style="margin-top:4px">
@@ -2351,6 +2360,11 @@ function renderCreate() {
       const id = b.dataset.ab;
       if (state.abilities.includes(id)) state.abilities = state.abilities.filter(x => x !== id);
       else if (state.abilities.length < maxAbilities()) state.abilities.push(id);
+      renderAbilityStep();
+    };
+    // SNG-192 §4: the archetype lens toggles — it biases the suggestions, never touches the picks (never locks).
+    for (const b of app.querySelectorAll("[data-arch]")) b.onclick = () => {
+      state.archetype = (state.archetype === b.dataset.arch) ? null : b.dataset.arch;
       renderAbilityStep();
     };
     document.getElementById("ab-back").onclick = () => renderDomainStep();

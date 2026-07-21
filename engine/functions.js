@@ -93,25 +93,38 @@ export function recommendSkills(character, learnable = [], opts = {}) {
 
 function prettyTrad(t) { return String(t || "").replace(/[-_]+/g, " ").replace(/\b\w/g, c => c.toUpperCase()); }
 
+/** SNG-192 §4: the function FAMILIES an archetype leans on — its `coreFunctions` verbs mapped through the
+ *  vocabulary (e.g. Shadow's conceal/move/reveal → INFLUENCE/MOVE/KNOW). A lens, never a class: this only
+ *  BIASES the suggestions toward the recognisable shape, and the player changes any of it. Pure.
+ *  `coreFunctions` comes from `CONTENT.classArchetypes` (class_archetypes.json) — the content→engine edge. */
+export function archetypeFamilies(coreFunctions = [], index) {
+  const out = new Set();
+  for (const verb of coreFunctions || []) { const fam = familyOfVerb(verb, index); if (fam) out.add(fam); }
+  return out;
+}
+
 /** SNG-192 §3: creation suggestions, each with a REASON drawn from the player's OWN input. recommendSkills
  *  scores coverage + native + play-style, but a fresh character has no play-style yet — so the signal that
  *  matters at creation is the PROLOGUE (a revealed preference: the paths the player actually chose), with
  *  the bio as a lighter, honest nudge. Grants are excluded upstream (never suggest what is already free).
  *  Only crafts that earn a reason are returned — a suggestion without a reason is just a different wall. Pure. */
-export function suggestForCreation({ learnable = [], character = {}, prologueTags = {}, bio = {}, fnIndex = null, traditionIndex = null, catalog = {}, primary = null, max = 5 } = {}) {
+export function suggestForCreation({ learnable = [], character = {}, prologueTags = {}, bio = {}, fnIndex = null, traditionIndex = null, catalog = {}, primary = null, archetypeFams = null, archetypeName = null, max = 5 } = {}) {
   const base = recommendSkills(character, learnable, { fnIndex, traditionIndex, primary, catalog, max: learnable.length });
   const byId = new Map(base.map(s => [s.abilityId, s]));
   const favTrad = Object.entries(prologueTags || {}).filter(([, n]) => n > 0).sort((a, b) => b[1] - a[1]);
   const favOf = trad => favTrad.find(([t]) => t === trad)?.[1] || 0;
   const bioText = Object.values(bio || {}).filter(v => typeof v === "string").join(" ").toLowerCase();
+  const lens = archetypeFams instanceof Set && archetypeFams.size ? archetypeFams : null; // SNG-192 §4: the archetype lens biases, never gates
   const scored = learnable.filter(ab => ab && ab.id).map(ab => {
     const s = byId.get(ab.id) || { abilityId: ab.id, name: ab.name || ab.id, families: familiesOfAbility(ab, fnIndex), score: 0, why: "a craft within your reach", cost: ab.energyCost ?? null };
+    const fams = familiesOfAbility(ab, fnIndex);
     const trad = traditionIndex ? traditionOf(ab, traditionIndex) : null;
-    let bonus = 0, why = s.why;
+    let bonus = 0, why = null;
+    if (lens && fams.some(f => lens.has(f))) { bonus += 3; why = `fits the ${archetypeName || "chosen"} path`; } // the explicit shape the player chose — the strongest steer
     const n = favOf(trad);
-    if (n > 0) { bonus += 2 + Math.min(3, n); why = `you took the ${prettyTrad(trad)} path ${n === 1 ? "once" : n + " times"} in your prologue`; }
-    else if (bioText) { const hit = String(ab.name || "").toLowerCase().split(/[\s—-]+/).find(w => w.length > 3 && bioText.includes(w)); if (hit) { bonus += 2; why = "it echoes what you wrote about yourself"; } }
-    return { ...s, score: (s.score || 0) + bonus, why };
+    if (n > 0) { bonus += 2 + Math.min(3, n); if (!why) why = `you took the ${prettyTrad(trad)} path ${n === 1 ? "once" : n + " times"} in your prologue`; }
+    else if (bioText) { const hit = String(ab.name || "").toLowerCase().split(/[\s—-]+/).find(w => w.length > 3 && bioText.includes(w)); if (hit) { bonus += 2; if (!why) why = "it echoes what you wrote about yourself"; } }
+    return { ...s, score: (s.score || 0) + bonus, why: why || s.why };
   }).filter(s => s.score > 0);
   scored.sort((a, b) => b.score - a.score || (a.cost ?? 99) - (b.cost ?? 99));
   return scored.slice(0, Math.max(0, max));

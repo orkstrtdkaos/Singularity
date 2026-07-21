@@ -53,7 +53,8 @@
   ],
   "alignment": {
     "mechanical_spiritual": -0.020000000000000004,
-    "falsehood_truth": -0.04000000000000001
+    "falsehood_truth": -0.04000000000000001,
+    "spectrumId": -0.05
   },
   "attunement": 1,
   "maxHealth": 30,
@@ -107,162 +108,137 @@
         "player": "Use 'Falescraft to convince them that Cy is actually a small gremlin that follows you around as a pet and has lots of opinions about things, but is most often not correct.  Then use \"the wrong reality\" to get her to give up a personal secret that relates to the pets she keeps.",
         "summary": "Loki attempts to disguise Cy as a pet gremlin and extract a personal secret from Vessa — Cy immediately contradicts the story, and the dense lattice collapses the Working; Vessa is not fooled.",
         "narration": "You crouch slightly and let the Falsecraft settle into your voice — the practiced ease of someone telling a story they have told a hundred times. Cy is not a Precursor relic, you begin. Cy is a gremlin. A small, very opinionated gremlin who wandered into your pack three years ago and has never left. He has views on gear alignment, strong feelings about the angle of sunrise, and he is almost always wrong about everything, but he means well.\n\nCy's lens irises open to its full width. It regards you for exactly two seconds. Then it says, in its precise, antique cadence, 'That is incorrect. I have not been wrong since the fourth maintenance interval.' It does not appear to understand that it has just undercut the entire performance.\n\nVessa Torquen watches this exchange with the calm of a person who repairs things for a living and has therefore seen many things fail in real time. She does not look convinced. She looks like someone who has just watched a clock skip a tooth and is now quietly counting to see which hour it will miss. 'That,' she says, nodding at Cy, 'is not a gremlin.' She tilts her head, and there is something measuring in her eyes. 'And you are not a naturalist. So what are you, exactly, and what does your not-gremlin actually know about my intake readings?'\n\nThe dense lattice here is not helping — the Pressureholt substrate crowds the Working so completely that the seam in your story was visible almost before you finished telling it. The ring-form residue sits in the fourth vial, unexplained, and Vessa's attention has landed on you with the full weight of someone who fixes things until they understand them."
+      },
+      {
+        "player": "Excuse yourself from Vessa's attention and walk over the the posted board - look around for any young attractive women to introduce yourself to along the way.",
+        "summary": "Loki excuses himself from Vessa and walks to the notices board, spotting a young wright in a rust-orange coat posting something to the lower rail.",
+        "narration": "You give Vessa a small, honest nod — the kind that says 'you win this one' without quite admitting there was a contest — and step back from the sampling fixture. She watches you go with the same folded-arms patience she had when you arrived, and then returns her attention to the fourth vial.\n\nCy falls into step at its customary distance behind you, its many legs clicking a precise rhythm on the fitted cobblestones. You take the long way to the notices board, moving along the quay's edge where the morning foot traffic has started to thicken. A pair of apprentice wrights carry a tool chest between them, arguing quietly about a bracket. A gray-haired woman in a long work apron stands near the water's edge and stares at the river with an expression that has worry in it. Closer to the board, a young woman is pinning something to the lower rail — her coat is a deep rust-orange, sleeves rolled to the elbow despite the chill, dark hair pinned back with what appears to be a precision caliper. She has the look of someone in the middle of a task she is taking seriously.\n\nThe board itself is dense with postings. Most are maintenance schedules and duty rosters in the tidy, compressed hand that Pressureholt seems to favor. The fresh notice near the top still has dark ink, sealed with the maintenance authority stamp — whatever it says, it was posted this morning, before the lamps went out."
       }
     ],
     "lastTurn": {
-      "narration": "You crouch slightly and let the Falsecraft settle into your voice — the practiced ease of someone telling a story they have told a hundred times. Cy is not a Precursor relic, you begin. Cy is a gremlin. A small, very opinionated gremlin who wandered into your pack three years ago and has never left. He has views on gear alignment, strong feelings about the angle of sunrise, and he is almost always wrong about everything, but he means well.\n\nCy's lens irises open to its full width. It regards you for exactly two seconds. Then it says, in its precise, antique cadence, 'That is incorrect. I have not been wrong since the fourth maintenance interval.' It does not appear to understand that it has just undercut the entire performance.\n\nVessa Torquen watches this exchange with the calm of a person who repairs things for a living and has therefore seen many things fail in real time. She does not look convinced. She looks like someone who has just watched a clock skip a tooth and is now quietly counting to see which hour it will miss. 'That,' she says, nodding at Cy, 'is not a gremlin.' She tilts her head, and there is something measuring in her eyes. 'And you are not a naturalist. So what are you, exactly, and what does your not-gremlin actually know about my intake readings?'\n\nThe dense lattice here is not helping — the Pressureholt substrate crowds the Working so completely that the seam in your story was visible almost before you finished telling it. The ring-form residue sits in the fourth vial, unexplained, and Vessa's attention has landed on you with the full weight of someone who fixes things until they understand them.",
-      "sceneSummary": "Loki attempts to disguise Cy as a pet gremlin and extract a personal secret from Vessa — Cy immediately contradicts the story, and the dense lattice collapses the Working; Vessa is not fooled.",
+      "narration": "You give Vessa a small, honest nod — the kind that says 'you win this one' without quite admitting there was a contest — and step back from the sampling fixture. She watches you go with the same folded-arms patience she had when you arrived, and then returns her attention to the fourth vial.\n\nCy falls into step at its customary distance behind you, its many legs clicking a precise rhythm on the fitted cobblestones. You take the long way to the notices board, moving along the quay's edge where the morning foot traffic has started to thicken. A pair of apprentice wrights carry a tool chest between them, arguing quietly about a bracket. A gray-haired woman in a long work apron stands near the water's edge and stares at the river with an expression that has worry in it. Closer to the board, a young woman is pinning something to the lower rail — her coat is a deep rust-orange, sleeves rolled to the elbow despite the chill, dark hair pinned back with what appears to be a precision caliper. She has the look of someone in the middle of a task she is taking seriously.\n\nThe board itself is dense with postings. Most are maintenance schedules and duty rosters in the tidy, compressed hand that Pressureholt seems to favor. The fresh notice near the top still has dark ink, sealed with the maintenance authority stamp — whatever it says, it was posted this morning, before the lamps went out.",
+      "sceneSummary": "Loki excuses himself from Vessa and walks to the notices board, spotting a young wright in a rust-orange coat posting something to the lower rail.",
       "choices": [
         {
-          "label": "Come clean — or mostly clean. Tell Vessa that Cy is something old, that you found it, and that it seems to know things about Precursor mechanism. See where honesty gets you.",
+          "label": "Introduce yourself to the young woman in the rust-orange coat — ask what she's posting",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
+            "flirt",
             "negotiate"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Use 'See the Made Thing' on the ring-form residue in the fourth vial — read how it was made, what process left that pattern, and whether it matches anything in your knowledge of Precursor work.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {
-            "mechanical_spiritual": -0.4
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "see_the_made_thing",
-          "energyCost": 1,
-          "trivial": false
-        },
-        {
-          "label": "Ask Vessa directly what she knows — and what she suspects — about where the ring-form residue is coming from. Let her be the expert for a moment.",
-          "attribute": "social",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "negotiate"
-          ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Look at the fresh notice on the posted board — you still don't know who put it there or what it says.",
+          "label": "Read the fresh notice with the maintenance authority seal first — find out what it says",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask the gray-haired woman staring at the river what she's looking for — she seems to know something",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "persuade"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Look more carefully at what the young woman is pinning up before you approach — read it over her shoulder",
           "attribute": "mental",
           "subAttribute": "wits",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
             "scout"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -8,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
-      "standingOps": [],
       "scene": {
-        "setting": "Intake Plaza, Pressureholt — outdoor, cobbled, open morning light. The Echo River runs visibly gray-green under the Eastern Intake. Early spring chill. Lamps fully off on the upper tier.",
+        "setting": "Intake Plaza, Pressureholt — outdoor, cobbled, open morning light. The Echo River runs visibly gray-green under the Eastern Intake. Early spring chill. Loki has moved from the sampling fixture to the vicinity of the notices board.",
         "npcsPresent": [
           {
             "name": "Vessa Torquen",
-            "state": "Standing at the sampling fixture, arms folded, watching Loki with the focused patience of someone waiting for a real answer."
+            "state": "Returned to the sampling fixture, back to Loki, studying the fourth vial."
           },
           {
             "name": "Two older wrights",
-            "state": "Still speaking in low voices near the notices board — one of them has glanced over at the exchange."
+            "state": "Still at the notices board area, speaking quietly."
+          },
+          {
+            "name": "Young woman in rust-orange coat",
+            "state": "Pinning something to the lower rail of the notices board, sleeves rolled, focused."
+          },
+          {
+            "name": "Gray-haired woman in work apron",
+            "state": "Standing at the water's edge, staring at the river with a worried expression."
           }
         ],
         "objects": [
-          "Sampling fixture on the quay — four graduated vials, three within variance, one showing anomalous ring-form residue",
+          "Sampling fixture on the quay — four graduated vials, one outside variance",
           "Fresh notice on the posted board — maintenance authority seal, ink still dark",
-          "Gas-lamps — fully extinguished on the upper tier"
+          "Notices board dense with maintenance schedules and duty rosters",
+          "Something the young woman is currently pinning to the lower rail"
         ],
         "threads": [
-          "Vessa is not fooled and wants a straight answer about what Cy is",
-          "Who posted the fresh notice, and what does it say?",
-          "The ring-form residue — ring-form consistent with regulated nanite deposition",
-          "Cy immediately contradicted the gremlin story and shows no sign of regret"
+          "The fresh notice with the maintenance authority seal — what does it say?",
+          "Who is the young woman in the rust-orange coat, and what is she posting?",
+          "The gray-haired woman staring at the river — she has worry written on her face",
+          "Vessa is not fooled and still wants a straight answer about what Cy is",
+          "The ring-form residue — consistent with regulated nanite deposition"
         ]
       },
-      "npcUpdates": [
+      "generateRequest": [
         {
-          "op": "update",
-          "npcId": "vessa-torquen",
-          "name": "Vessa Torquen",
-          "role": "Quay-side Enginewright, Eastern Intake assessment",
-          "gender": "woman",
-          "pronouns": "she/her",
-          "note": "Watched Loki's Falsecraft attempt fail in real time — Cy undercut the gremlin story immediately. Now watching Loki with focused patience, waiting for the real answer.",
-          "learned": [
-            "Loki attempted to disguise Cy as a pet gremlin; the attempt failed visibly",
-            "Cy contradicted the story on its own"
-          ],
-          "skillsObserved": [],
-          "relationshipDelta": 0,
-          "status": "active",
-          "statusNote": "At the Eastern Intake sampling fixture, waiting for Loki's honest account of what Cy is."
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "vessa-torquen",
-          "label": "Vessa Torquen",
-          "kind": "person",
-          "entityId": "vessa-torquen",
-          "fact": "Not easily fooled — watched a Falsecraft-and-Wrong-Reality combination collapse in real time and named it calmly. She wants to understand things, not be managed.",
-          "links": [
-            "intake-plaza",
-            "the-water-crisis",
-            "ring-form-residue-at-eastern-intake"
-          ]
+          "type": "npc",
+          "hint": "a young woman in a rust-orange coat, sleeves rolled, dark hair pinned with a caliper — an apprentice or junior wright posting something official to the notices board at the Eastern Intake",
+          "why": "Loki has spotted her and may approach; she needs a stable identity to recur"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange at the sampling fixture."
+        "why": "a short walk across the plaza"
       }
     },
     "sceneState": {
-      "setting": "Intake Plaza, Pressureholt — outdoor, cobbled, open morning light. The Echo River runs visibly gray-green under the Eastern Intake. Early spring chill. Lamps fully off on the upper tier.",
+      "setting": "Intake Plaza, Pressureholt — outdoor, cobbled, open morning light. The Echo River runs visibly gray-green under the Eastern Intake. Early spring chill. Loki has moved from the sampling fixture to the vicinity of the notices board.",
       "npcsPresent": [
         {
           "name": "Vessa Torquen",
-          "state": "Standing at the sampling fixture, arms folded, watching Loki with the focused patience of someone waiting for a real ans"
+          "state": "Returned to the sampling fixture, back to Loki, studying the fourth vial."
         },
         {
           "name": "Two older wrights",
-          "state": "Still speaking in low voices near the notices board — one of them has glanced over at the exchange."
+          "state": "Still at the notices board area, speaking quietly."
+        },
+        {
+          "name": "Young woman in rust-orange coat",
+          "state": "Pinning something to the lower rail of the notices board, sleeves rolled, focused."
+        },
+        {
+          "name": "Gray-haired woman in work apron",
+          "state": "Standing at the water's edge, staring at the river with a worried expression."
         }
       ],
       "objects": [
-        "Sampling fixture on the quay — four graduated vials, three within variance, one ",
+        "Sampling fixture on the quay — four graduated vials, one outside variance",
         "Fresh notice on the posted board — maintenance authority seal, ink still dark",
-        "Gas-lamps — fully extinguished on the upper tier"
+        "Notices board dense with maintenance schedules and duty rosters",
+        "Something the young woman is currently pinning to the lower rail"
       ],
       "threads": [
-        "Vessa is not fooled and wants a straight answer about what Cy is",
-        "Who posted the fresh notice, and what does it say?",
-        "The ring-form residue — ring-form consistent with regulated nanite deposition",
-        "Cy immediately contradicted the gremlin story and shows no sign of regret"
+        "The fresh notice with the maintenance authority seal — what does it say?",
+        "Who is the young woman in the rust-orange coat, and what is she posting?",
+        "The gray-haired woman staring at the river — she has worry written on her face",
+        "Vessa is not fooled and still wants a straight answer about what Cy is",
+        "The ring-form residue — consistent with regulated nanite deposition"
       ]
     }
   },
@@ -350,7 +326,7 @@
     "lastSharedReadAt": "2026-07-21T17:13:37.964Z",
     "lastTickWorldDay": 21,
     "lastCanonWorldDay": 21,
-    "turnsSinceOffer": 2,
+    "turnsSinceOffer": 3,
     "recentOffers": [
       {
         "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
@@ -443,14 +419,15 @@
     }
   },
   "tendencies": {
-    "devotion": 13.30875,
-    "cerebral": 0.975,
-    "social": 2
+    "devotion": 12.97603125,
+    "cerebral": 0.9506249999999999,
+    "social": 2.95,
+    "strategic": 1
   },
   "aptitudes": [
     "faithful"
   ],
-  "actionCount": 2,
+  "actionCount": 3,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -561,8 +538,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784657089289,
-  "rev": 12,
+  "updatedAt": 1784657958081,
+  "rev": 16,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -648,11 +625,16 @@
           "repaired": false,
           "stubbed": false,
           "romanceEligible": true,
-          "lastAttentionDay": 1
+          "lastAttentionDay": 1,
+          "depthTier": "established"
         },
         "peopleSource": "generated",
         "domainsSource": "role",
-        "image": "https://image.pollinations.ai/prompt/A%20broad-shouldered%20woman%20in%20her%20mid-forties%2C%20deep%20brown%20skin%20weathered%20at%20the%20cheekbones%20and%20the%20backs%20of%20her%20hands%20from%20quay-wind%20and%20early-spring%20cold.%20Her%20hair%20is%20black%20going%20silver%20at%20the%20temples%2C%2C%20character%20portrait%2C%20named%20Vessa%20Torquen%2C%20Quay-side%20Enginewright%20conducting%20seasonal%20water-intake%20assessment%20%E2%80%94%20first%20point%20of%20contact%20between%20%2C%20Talks%20the%20way%20she%20works%20%E2%80%94%20practical%2C%20sequenced%2C%20no%20wasted%20motion.%20Warm%20without%20being%20soft%3B%20she%20will%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=82615&nologo=true"
+        "image": "https://image.pollinations.ai/prompt/A%20broad-shouldered%20woman%20in%20her%20mid-forties%2C%20deep%20brown%20skin%20weathered%20at%20the%20cheekbones%20and%20the%20backs%20of%20her%20hands%20from%20quay-wind%20and%20early-spring%20cold.%20Her%20hair%20is%20black%20going%20silver%20at%20the%20temples%2C%2C%20character%20portrait%2C%20named%20Vessa%20Torquen%2C%20Quay-side%20Enginewright%20conducting%20seasonal%20water-intake%20assessment%20%E2%80%94%20first%20point%20of%20contact%20between%20%2C%20Talks%20the%20way%20she%20works%20%E2%80%94%20practical%2C%20sequenced%2C%20no%20wasted%20motion.%20Warm%20without%20being%20soft%3B%20she%20will%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=82615&nologo=true",
+        "history": "Vessa Torquen came up through the Pressureholt municipal works the slow way — apprenticed at fourteen to a drain-survey team, promoted twice before thirty on the strength of filed reports that caught problems her seniors had walked past for years. She has no patron and has not needed one. The work speaks, or it does not. Her current assessment contract is her fourth consecutive seasonal intake…",
+        "relationships": {
+          "loki": "A variable she has not yet classified. She noticed the right things too quickly for a casual observer and did not try to explain that away with conversation. Vessa does not extend trust — she extends provisional continued attention, which is rarer. Loki currently has that. She has said nothing to the site office. She is waiting to see if the behaviour that flagged them as worth watching flags them again, and in which direction."
+        }
       }
     },
     "location": {},
@@ -661,7 +643,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_gearlands": 3
+    "the_gearlands": 4
   },
   "opLossPending": false,
   "sessions": [
@@ -676,10 +658,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-21T17:40:12.510Z",
-      "lastAt": "2026-07-21T18:04:49.286Z",
+      "lastAt": "2026-07-21T18:19:18.079Z",
       "startDay": 21,
       "endDay": 21,
-      "beats": 2
+      "beats": 3
     }
   ],
   "establishedFacts": [],
@@ -692,19 +674,19 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 3,
-    "choices": 3,
+    "sceneSummary": 4,
+    "choices": 4,
     "characterDeltas": 2,
-    "scene": 3,
+    "scene": 4,
     "placeUpdates": 1,
     "codexUpdates": 3,
-    "timeOps": 3,
+    "timeOps": 4,
     "offer": 1,
-    "generateRequest": 1,
+    "generateRequest": 2,
     "sceneEnded": 1,
     "npcUpdates": 2
   },
-  "_opTurns": 3,
+  "_opTurns": 4,
   "customAbilities": {},
   "companionBonds": {},
   "practice": {
@@ -717,7 +699,18 @@
     "coActivations": {
       "falsecraft+the_wrong_reality": 1
     },
-    "aspirations": [],
+    "aspirations": [
+      {
+        "abilityId": "the_ended_threat",
+        "since": "2026-07-21T18:13:23.924Z",
+        "progress": 0
+      },
+      {
+        "abilityId": "appetite_sense",
+        "since": "2026-07-21T18:16:21.011Z",
+        "progress": 0
+      }
+    ],
     "lastUsed": {
       "see_the_made_thing": 21,
       "falsecraft": 21,

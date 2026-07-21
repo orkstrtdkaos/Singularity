@@ -54,7 +54,7 @@
   "alignment": {
     "mechanical_spiritual": -0.034,
     "falsehood_truth": -0.030514,
-    "spectrumId": -0.12389633406445309,
+    "spectrumId": -0.11770151736123043,
     "value": -0.04000000000000001,
     "demonic_angelic": -0.020000000000000004
   },
@@ -235,84 +235,68 @@
         "player": "Let it sink in and wait patiently for the buttons..",
         "summary": "Loki read all four spike entries with Tessvel Cairn in the Pressure-Routing Annex — the interval between pressure-drop and particulate count has grown from four to nine minutes across four entries, meaning something moves deeper into the lower routing channel with each pass. The pattern is named. The silence holds.",
         "narration": "The silence after the ninth minute sits in the room like a held breath.\n\nTessvel does not fill it. She is looking at the four brackets in the margin of her log — three in her own careful hand, one in yours — and her expression is the still face of someone doing arithmetic they already know the answer to. Her pen is on the table. She has not picked it up.\n\nCy holds the threshold without moving. The lamp stays dimmed. The pressure-gauge needle does not shift.\n\nYou wait. The pattern is named. The room knows it. There is nothing to add until Tessvel decides what to do with what she knows."
+      },
+      {
+        "player": "Continue to wait, but look at the buttons on her uniform... if she still doesn't get it - ask if your assistance warrants a reward.",
+        "summary": "Loki waited out the silence, noted her four mismatched buttons, and proposed a bargain — the pattern confirmed in exchange for access to the lower routing channel.",
+        "narration": "The silence holds another beat. You let your eyes drop from the log to her coat — the rust-orange fabric, the three mismatched patches on the left sleeve. And the buttons. Four of them down the front, each a different material: bone, brass, dark glass, and one that might be ceramic. Not regulation. Personal. Collected, maybe, or replaced one at a time as the originals failed.\n\nYou look back up at her face. She is still doing her arithmetic.\n\nShe does not get it.\n\nYou reach out and set one finger lightly on the edge of her open log, just below the fourth bracket. \"I've shown you something your methodology couldn't find,\" you say to her. \"Four entries. Four intervals. A pattern that has no ordinary cause.\" You pause just long enough for the weight to settle. \"It seems to me that warrants something in return. You mentioned the Intake's pressure-routing team. I'm curious what a confirmed pattern like this would be worth to someone who wanted access to the lower routing channel.\"\n\nTessvel looks at your finger on the log. Then at you. Her expression shifts — not alarm, not offense. Something more like recalibration. She was still holding the pattern at arm's length, thinking about what to do with it. You have just named the next step for her, and she does not love that you were faster.\n\n\"What kind of access,\" she says carefully, \"are you asking about?\""
       }
     ],
     "lastTurn": {
-      "narration": "The silence after the ninth minute sits in the room like a held breath.\n\nTessvel does not fill it. She is looking at the four brackets in the margin of her log — three in her own careful hand, one in yours — and her expression is the still face of someone doing arithmetic they already know the answer to. Her pen is on the table. She has not picked it up.\n\nCy holds the threshold without moving. The lamp stays dimmed. The pressure-gauge needle does not shift.\n\nYou wait. The pattern is named. The room knows it. There is nothing to add until Tessvel decides what to do with what she knows.",
-      "sceneSummary": "Loki read all four spike entries with Tessvel Cairn in the Pressure-Routing Annex — the interval between pressure-drop and particulate count has grown from four to nine minutes across four entries, meaning something moves deeper into the lower routing channel with each pass. The pattern is named. The silence holds.",
+      "narration": "The silence holds another beat. You let your eyes drop from the log to her coat — the rust-orange fabric, the three mismatched patches on the left sleeve. And the buttons. Four of them down the front, each a different material: bone, brass, dark glass, and one that might be ceramic. Not regulation. Personal. Collected, maybe, or replaced one at a time as the originals failed.\n\nYou look back up at her face. She is still doing her arithmetic.\n\nShe does not get it.\n\nYou reach out and set one finger lightly on the edge of her open log, just below the fourth bracket. \"I've shown you something your methodology couldn't find,\" you say to her. \"Four entries. Four intervals. A pattern that has no ordinary cause.\" You pause just long enough for the weight to settle. \"It seems to me that warrants something in return. You mentioned the Intake's pressure-routing team. I'm curious what a confirmed pattern like this would be worth to someone who wanted access to the lower routing channel.\"\n\nTessvel looks at your finger on the log. Then at you. Her expression shifts — not alarm, not offense. Something more like recalibration. She was still holding the pattern at arm's length, thinking about what to do with it. You have just named the next step for her, and she does not love that you were faster.\n\n\"What kind of access,\" she says carefully, \"are you asking about?\"",
+      "sceneSummary": "Loki waited out the silence, noted her four mismatched buttons, and proposed a bargain — the pattern confirmed in exchange for access to the lower routing channel.",
       "choices": [
         {
-          "label": "Ask her directly: who else in Pressureholt would need to see this log right now",
+          "label": "Name the access plainly — you want to go into the lower routing channel yourself and follow the pressure-drops to their source.",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
+          "difficulty": 15,
+          "intentTags": [
+            "negotiate"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Let her lead — say you do not know yet what you need, but you will know it when you see it. Ask what she can offer.",
+          "attribute": "social",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
             "negotiate"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": false
         },
         {
-          "label": "Ask Cy — quietly, so Tessvel hears — whether it recognizes the shape of what moves through the lower routing channel",
+          "label": "Show her the boundary-impression — tell her there is something old beneath the Annex floor, and the pattern and the chord and the threshold-mark are the same thing. She should know that before she decides what she is offering.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 15,
+          "difficulty": 0,
+          "intentTags": [
+            "plan"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Ask about the buttons — set aside the bargain for a moment and ask her about the four mismatched buttons. You want to know if that is coincidence.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Tell her what the chord through the floor was — or what you think it was — and watch how she takes it",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "persuade"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Say nothing more — let her speak first, whatever she needs to say",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "calm"
-          ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "xp": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [],
-      "standingOps": [],
       "scene": {
-        "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, narrow room, morning light full down the center of the long table. Gate open to passage.",
+        "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, morning light full down the center of the long table. Gate open to passage.",
         "npcsPresent": [
           {
             "name": "Tessvel Cairn",
-            "state": "Seated close, pen set down on the table — four margin brackets drawn. Looking at the brackets, expression still and calculated."
+            "state": "Looking at Loki across the open log, pen still set down, expression recalibrating — she has been asked a question she did not expect to be asked first."
           },
           {
             "name": "Cy",
-            "state": "Positioned at the threshold in a wide three-leg stance, lamp dimmed to almost nothing, holding the room's signal inward."
+            "state": "Holding the threshold in a wide three-leg stance, lamp dimmed to almost nothing, holding the room's signal inward."
           }
         ],
         "objects": [
@@ -328,8 +312,8 @@
           "The pattern is named — something moves deeper into the lower routing channel with each pass; source and destination still unnamed",
           "The low chord through the floor — Cy watched the stone; Tessvel heard it; function unread",
           "Cy holding the threshold on the old boundary-impression — not yet classified",
-          "Tessvel has the log and the pattern; she has not yet said what she intends to do with it",
-          "Four-entries-for-four-buttons arrangement — standing"
+          "Tessvel has been asked what kind of access she can offer — she has not yet answered",
+          "Four-mismatched-buttons detail noted — four entries, four buttons; coincidence unresolved"
         ]
       },
       "npcUpdates": [
@@ -337,27 +321,33 @@
           "op": "update",
           "npcId": "tessvel-cairn",
           "name": "Tessvel Cairn",
-          "note": "Sitting with the completed pattern in front of her — four brackets, silence held, pen down. Has not yet spoken after the ninth-minute interval was named.",
-          "statusNote": "At the Annex table, pen set down, four margin brackets drawn — sitting with the completed pattern, waiting.",
-          "status": "active"
+          "role": "Junior wright on posting-duty at the Eastern Intake notice board",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "Loki named the bargain directly — access to the lower routing channel in exchange for the confirmed pattern. She recalibrated rather than refused. Asked what kind of access plainly.",
+          "learned": [
+            "Loki is willing to trade the pattern for access to the lower routing channel",
+            "Loki noticed the four mismatched buttons on her coat"
+          ],
+          "statusNote": "At the Annex table, pen down, recalibrating — has been asked what access she can offer and has not yet answered.",
+          "relationshipDelta": 0
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief pause while the silence settles after naming the pattern"
-      },
-      "sceneEnded": false
+        "why": "a short exchange at the table"
+      }
     },
     "sceneState": {
-      "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, narrow room, morning light full down the center of the long table. Gate open to passage.",
+      "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, morning light full down the center of the long table. Gate open to passage.",
       "npcsPresent": [
         {
           "name": "Tessvel Cairn",
-          "state": "Seated close, pen set down on the table — four margin brackets drawn. Looking at the brackets, expression still and calc"
+          "state": "Looking at Loki across the open log, pen still set down, expression recalibrating — she has been asked a question she di"
         },
         {
           "name": "Cy",
-          "state": "Positioned at the threshold in a wide three-leg stance, lamp dimmed to almost nothing, holding the room's signal inward."
+          "state": "Holding the threshold in a wide three-leg stance, lamp dimmed to almost nothing, holding the room's signal inward."
         }
       ],
       "objects": [
@@ -373,8 +363,8 @@
         "The pattern is named — something moves deeper into the lower routing channel with each pass; source and destination still unnamed",
         "The low chord through the floor — Cy watched the stone; Tessvel heard it; function unread",
         "Cy holding the threshold on the old boundary-impression — not yet classified",
-        "Tessvel has the log and the pattern; she has not yet said what she intends to do with it",
-        "Four-entries-for-four-buttons arrangement — standing"
+        "Tessvel has been asked what kind of access she can offer — she has not yet answered",
+        "Four-mismatched-buttons detail noted — four entries, four buttons; coincidence unresolved"
       ]
     }
   },
@@ -403,7 +393,6 @@
       },
       "relationship": 7,
       "history": [
-        "[d1] Loki opened with a two-axis compliment — professional competence plus physical charm — and offered to file a report with her supervisor or her boyfriend. She confirmed, precisely, that she has no boyfriend. Then she remembered herself and noted there is no posted authorization for him to be here…",
         "[d1] Did not ask Loki to leave after his offer. Set him to work on the eleven-day variance instead. Said 'nobody else has asked' with faint weight.",
         "[d1] Loki's combined truth-and-charm approach — backed by a touch of The Wrong Reality — found no purchase. She felt the seam of something off, filed it as a question, and declined neither half of the offer. She is still here. So is her question.",
         "[d1] Loki claimed independent methodology; Tessvel did not dismiss it — she asked to see it applied to the four spike entries in her log, using the same level voice she uses for everything",
@@ -412,17 +401,18 @@
         "[d1] Drew a margin bracket in real time alongside Loki's read of the second entry — she is no longer watching the methodology, she is applying it.",
         "[d1] Drew the third entry's margin bracket herself, without prompting — she is running the methodology now. Heard the low chord from below and looked up at Loki rather than away. Said the fourth entry is the most recent in a careful, decided voice.",
         "[d1] Set her pen down after the fourth entry — confirmed the pattern without being asked. Four brackets drawn, one in her own hand. Still face of someone whose conclusion landed exactly where she feared it would.",
-        "[d1] Sitting with the completed pattern in front of her — four brackets, silence held, pen down. Has not yet spoken after the ninth-minute interval was named."
+        "[d1] Sitting with the completed pattern in front of her — four brackets, silence held, pen down. Has not yet spoken after the ninth-minute interval was named.",
+        "[d1] Loki named the bargain directly — access to the lower routing channel in exchange for the confirmed pattern. She recalibrated rather than refused. Asked what kind of access plainly."
       ],
       "knownFacts": [
-        "She said independent research is not technically a violation — and she was deciding something as she said it",
-        "She has checked the spike entries against schedule, maintenance windows, and weather-linked intake variance — nothing fits",
         "The working changed the room's signal quality — she felt it as the pressure-gauge going still",
         "Cy stationed at a threshold has a function she does not have a classification for",
         "Second spike entry shows a pressure-drop in the lower routing channel four minutes before the particulate count — something moved through before the morning cycle ran",
         "Third spike entry shows a six-minute pressure-drop before particulate — interval is lengthening compared to entry two's four minutes",
         "She heard or felt the low chord through the floor and responded by naming the next step rather than the anomaly",
-        "Fourth spike entry: nine-minute pressure-drop before particulate — the interval has grown from four to nine across four entries. Whatever moves through the lower routing channel is going deeper, or…"
+        "Fourth spike entry: nine-minute pressure-drop before particulate — the interval has grown from four to nine across four entries. Whatever moves through the lower routing channel is going deeper, or…",
+        "Loki is willing to trade the pattern for access to the lower routing channel",
+        "Loki noticed the four mismatched buttons on her coat"
       ],
       "skillsObserved": [
         "Resistance to social misdirection",
@@ -435,7 +425,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the Annex table, pen set down, four margin brackets drawn — sitting with the completed pattern, waiting.",
+      "statusNote": "At the Annex table, pen down, recalibrating — has been asked what access she can offer and has not yet answered.",
       "domains": {
         "primary": "wright"
       },
@@ -528,7 +518,7 @@
     "lastSharedReadAt": "2026-07-21T22:39:52.873Z",
     "lastTickWorldDay": 21,
     "lastCanonWorldDay": 21,
-    "turnsSinceOffer": 4,
+    "turnsSinceOffer": 5,
     "recentOffers": [
       {
         "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
@@ -722,20 +712,20 @@
     }
   },
   "tendencies": {
-    "devotion": 7.0672858824034215,
-    "cerebral": 8.472905274454753,
-    "social": 12.437952902219042,
-    "strategic": 5.852866845161693,
-    "cautious": 4.880889761650538,
-    "amorous": 9.391374208531818,
-    "generous": 1.4042722918758843,
-    "ruthless": 0.7962355085707052
+    "devotion": 6.890603735343336,
+    "cerebral": 9.261082642593385,
+    "social": 13.127004079663566,
+    "strategic": 5.706545174032651,
+    "cautious": 4.758867517609274,
+    "amorous": 9.156589853318522,
+    "generous": 1.3691654845789871,
+    "ruthless": 0.7763296208564376
   },
   "aptitudes": [
     "silver_tongue",
     "charmer"
   ],
-  "actionCount": 27,
+  "actionCount": 28,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -862,8 +852,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784678247076,
-  "rev": 48,
+  "updatedAt": 1784678381351,
+  "rev": 49,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1012,7 +1002,7 @@
           "entityId": "tessvel-cairn",
           "type": "npc",
           "birthWeight": 2,
-          "engagementScore": 48,
+          "engagementScore": 50,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -1034,10 +1024,6 @@
               "day": 1
             },
             {
-              "kind": "interact",
-              "day": 1
-            },
-            {
               "kind": "fact",
               "day": 1
             },
@@ -1099,6 +1085,10 @@
             },
             {
               "kind": "fact",
+              "day": 1
+            },
+            {
+              "kind": "interact",
               "day": 1
             },
             {
@@ -1148,7 +1138,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_gearlands": 28
+    "the_gearlands": 29
   },
   "opLossPending": false,
   "sessions": [
@@ -1163,10 +1153,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-21T17:40:12.510Z",
-      "lastAt": "2026-07-21T23:57:27.074Z",
+      "lastAt": "2026-07-21T23:59:41.350Z",
       "startDay": 21,
       "endDay": 21,
-      "beats": 27
+      "beats": 28
     }
   ],
   "establishedFacts": [],
@@ -1179,21 +1169,21 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 26,
-    "choices": 26,
+    "sceneSummary": 27,
+    "choices": 27,
     "characterDeltas": 9,
-    "scene": 26,
+    "scene": 27,
     "placeUpdates": 3,
     "codexUpdates": 19,
-    "timeOps": 26,
+    "timeOps": 27,
     "offer": 2,
     "generateRequest": 2,
     "sceneEnded": 7,
-    "npcUpdates": 21,
+    "npcUpdates": 22,
     "moveTo": 1,
     "gambitApt": 1
   },
-  "_opTurns": 26,
+  "_opTurns": 27,
   "customAbilities": {},
   "companionBonds": {},
   "practice": {

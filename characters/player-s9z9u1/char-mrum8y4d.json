@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 1,
-  "xp": 67,
+  "xp": 72,
   "attributes": {
     "physical": 3,
     "mental": 3,
@@ -53,7 +53,7 @@
   ],
   "alignment": {
     "mechanical_spiritual": -0.020000000000000004,
-    "falsehood_truth": -0.049600000000000005,
+    "falsehood_truth": -0.03212,
     "spectrumId": -0.08187959453124997,
     "value": -0.04000000000000001,
     "demonic_angelic": -0.020000000000000004
@@ -62,7 +62,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 64,
+  "energy": 59,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -200,95 +200,111 @@
         "player": "Tell her something true about the log variance, then ask her to unbutton the top button of her uniform.  Tell her that for every demonstration of cuteness you will use it to power your insights. use the wrong reality if that will asssist.",
         "summary": "Loki offered truth and a touch of charm together; Tessvel named both halves precisely and declined neither — the variance is real, the flattery is filed, and nothing has moved yet.",
         "narration": "You lean forward, elbows on the table, and you tell her something true. You say the variance has been running eleven days and no senior wright has touched it. You say that means either nobody noticed, or nobody wanted to. You say she noticed. You say she kept a second log. You say that is not clerical work — that is engineering, and she knows it. All of that is true, and you deliver it plainly, because truth lands better than most things you could build. Then you pause. Then you say, with the small smile, that for every demonstration of her considerable charm she allows, you will pour the resulting inspiration directly into the problem in front of you. And you ask her — quiet, light, a question rather than a push — to unbutton the top button of her uniform.\n\nSomething shifts in the room. Not dramatically — Tessvel does not move. She looks at you for a long moment, and what happens behind her eyes is not warmth or offense. It is a very precise recalibration. She picks up her pen. She sets it down again. She says, evenly, that she has heard the first part before — that nobody noticed, or nobody wanted to. She says she does not know which yet either. Then she says that the second part, the button part, is a non-standard approach to intake-variance analysis, and she would like to know where exactly it appears in the methodology.\n\nShe is not asking you to leave. She is also not unbuttoning anything. She is looking at you the way someone looks at a number that does not divide cleanly — interested in what it means, not yet sure what to do with it. The Wrong Reality found nothing to grip. The lattice here is too dense, too literal. The fabric of the room did not bend. Tessvel herself is more resistant than the substrate — she felt the seam of it, you think, the small wrongness in the air, and she filed it as a question rather than accepting the frame you offered."
+      },
+      {
+        "player": "Answer her question directly — tell her the methodology is yours and you will demonstrate it rigorously if she has the patience for independent research",
+        "summary": "Loki claimed the methodology as his own; Tessvel — steady, precise, and quietly considering — asked to see it applied to the four spike entries in her log.",
+        "narration": "You meet her eyes — no deflection, no lean into charm. You tell her that the methodology is yours. Not filed anywhere, not drawn from a posted procedure, not authorized by a senior wright. Yours. You developed it yourself from what the variance was showing you, and you will demonstrate it rigorously if she has the patience for independent research.\n\nTessvel is very still. Her pen hand rests on the table, not reaching for anything. She looks at you the way she looked at the eleven-day log — as something that has not yet been classified and therefore cannot be dismissed. Then she says, quietly and without much expression, that independent research is not technically a violation. It is not technically a procedure either, she adds. She says this as if she is deciding something as the words leave her.\n\nShe pulls the green-spine log a few degrees toward her. She says that she has documented the divergence on forty-one dates. She has not shared the log with a senior wright because no senior wright has asked, and she is not in the habit of volunteering conclusions she cannot yet support. She looks up from the log and at you again. She says that if you have a methodology, she would see it applied to the last four entries — the ones that spiked above the mean. Her voice is level and carries a particular careful weight that is, Loki, extremely close to the sound of someone taking you seriously.\n\nCy has not moved from the far end of the table. Its lens is very slightly open."
       }
     ],
     "lastTurn": {
-      "narration": "You lean forward, elbows on the table, and you tell her something true. You say the variance has been running eleven days and no senior wright has touched it. You say that means either nobody noticed, or nobody wanted to. You say she noticed. You say she kept a second log. You say that is not clerical work — that is engineering, and she knows it. All of that is true, and you deliver it plainly, because truth lands better than most things you could build. Then you pause. Then you say, with the small smile, that for every demonstration of her considerable charm she allows, you will pour the resulting inspiration directly into the problem in front of you. And you ask her — quiet, light, a question rather than a push — to unbutton the top button of her uniform.\n\nSomething shifts in the room. Not dramatically — Tessvel does not move. She looks at you for a long moment, and what happens behind her eyes is not warmth or offense. It is a very precise recalibration. She picks up her pen. She sets it down again. She says, evenly, that she has heard the first part before — that nobody noticed, or nobody wanted to. She says she does not know which yet either. Then she says that the second part, the button part, is a non-standard approach to intake-variance analysis, and she would like to know where exactly it appears in the methodology.\n\nShe is not asking you to leave. She is also not unbuttoning anything. She is looking at you the way someone looks at a number that does not divide cleanly — interested in what it means, not yet sure what to do with it. The Wrong Reality found nothing to grip. The lattice here is too dense, too literal. The fabric of the room did not bend. Tessvel herself is more resistant than the substrate — she felt the seam of it, you think, the small wrongness in the air, and she filed it as a question rather than accepting the frame you offered.",
-      "sceneSummary": "Loki offered truth and a touch of charm together; Tessvel named both halves precisely and declined neither — the variance is real, the flattery is filed, and nothing has moved yet.",
+      "narration": "You meet her eyes — no deflection, no lean into charm. You tell her that the methodology is yours. Not filed anywhere, not drawn from a posted procedure, not authorized by a senior wright. Yours. You developed it yourself from what the variance was showing you, and you will demonstrate it rigorously if she has the patience for independent research.\n\nTessvel is very still. Her pen hand rests on the table, not reaching for anything. She looks at you the way she looked at the eleven-day log — as something that has not yet been classified and therefore cannot be dismissed. Then she says, quietly and without much expression, that independent research is not technically a violation. It is not technically a procedure either, she adds. She says this as if she is deciding something as the words leave her.\n\nShe pulls the green-spine log a few degrees toward her. She says that she has documented the divergence on forty-one dates. She has not shared the log with a senior wright because no senior wright has asked, and she is not in the habit of volunteering conclusions she cannot yet support. She looks up from the log and at you again. She says that if you have a methodology, she would see it applied to the last four entries — the ones that spiked above the mean. Her voice is level and carries a particular careful weight that is, Loki, extremely close to the sound of someone taking you seriously.\n\nCy has not moved from the far end of the table. Its lens is very slightly open.",
+      "sceneSummary": "Loki claimed the methodology as his own; Tessvel — steady, precise, and quietly considering — asked to see it applied to the four spike entries in her log.",
       "choices": [
         {
-          "label": "Answer her question directly — tell her the methodology is yours and you will demonstrate it rigorously if she has the patience for independent research",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.3
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "flirt",
-            "negotiate"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Step back from the charm entirely — acknowledge she felt the seam of something and ask her what she thinks she noticed",
+          "label": "Open the log to the first spike entry and walk her through your read of what the variance is actually measuring",
           "attribute": "mental",
-          "subAttribute": "insight",
+          "subAttribute": "reason",
           "axes": {
-            "falsehood_truth": 0.5
+            "mechanical_spiritual": -0.3,
+            "falsehood_truth": 0.2
           },
           "difficulty": 15,
           "intentTags": [
             "study",
-            "negotiate"
+            "careful"
           ],
+          "abilityId": "see_the_made_thing",
+          "energyCost": 1,
           "trivial": false
         },
         {
-          "label": "Put the log between you both and get to work on the variance — let the work do what the charm didn't",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Tell her the spike entries aren't a measurement problem — they're a response. Ask Cy to confirm the dates against the old service-way records",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {
-            "mechanical_spiritual": -0.3
+            "mechanical_spiritual": -0.2
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "plan"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
+        },
+        {
+          "label": "Set the methodology aside for just a moment — tell her the thing about the senior wrights that she already knows but hasn't said aloud yet",
+          "attribute": "social",
+          "subAttribute": "insight",
+          "axes": {
+            "falsehood_truth": 0.1
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "persuade",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false
+        },
+        {
+          "label": "Pull your chair closer to the log, close enough that she would have to move to put distance between you — and begin without preamble",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0
           },
           "difficulty": 0,
           "intentTags": [
-            "plan",
+            "romantic",
             "careful"
           ],
-          "trivial": true
-        },
-        {
-          "label": "Head out of the Annex and let this morning settle — come back to Tessvel when the ground is better",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "travel"
-          ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         }
       ],
       "scene": {
-        "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, narrow room, morning light soft and full down the center of the long table. Second bell ended. Gate open to the passage, attention-deflection thinning at its edges.",
+        "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, narrow room, morning light full down the center of the long table. Second bell ended. Gate open to the passage.",
         "npcsPresent": [
           {
             "name": "Tessvel Cairn",
-            "state": "Pen set down again, looking at Loki with a precise, recalibrating attention — not offended, not warm, filing the exchange as an open question"
+            "state": "Log pulled a few degrees toward her, hand resting on the cover — looking at Loki with a precise, deciding attention"
           },
           {
             "name": "Cy",
-            "state": "Standing at the near end of the table, lamp at its habitual angle, lens stilled — noting, as it does"
+            "state": "At the far end of the table, lens slightly open, lamp at its habitual angle, very still"
           }
         ],
         "objects": [
-          "Long work table — morning light soft down its center",
-          "Tessvel's green-spine log — open to a marked page, fresh entries and the eleven-day variance both visible",
+          "Long work table — morning light full down its center",
+          "Tessvel's green-spine log — open, pulled toward her, forty-one documented entries visible",
           "Tessvel's leather satchel — open on the table",
-          "Tessvel's pen — set down with deliberate care",
+          "Tessvel's pen — resting against her hand, not yet lifted",
           "Shelves of bound logs — dates inked on spines, floor to ceiling",
           "Pressure-gauge at the door frame — needle in the green",
           "One chair — Loki seated in it",
-          "Open gate doorway — attention-deflection thinning at its edges"
+          "Open gate doorway"
         ],
         "threads": [
-          "Tessvel has not asked Loki to leave — the exchange is open, both halves of it",
-          "She felt the seam of The Wrong Reality and named it as a question rather than an answer — she knows something was off",
-          "The eleven-day variance is on the table, literally and otherwise",
-          "Tessvel's methodical question — 'where exactly does that appear in the methodology' — is still in the air",
-          "Terminus-seal at the threshold — pre-Transition boundary, unresolved",
-          "Cy has catalogued four terminus-seals beneath the valley — one is not intact, location unstated"
+          "Tessvel asked to see the methodology applied to the four spike entries — the ask is in the air",
+          "The eleven-day variance is open between them, literally",
+          "Tessvel has not shared the log with a senior wright — that fact is now acknowledged between them",
+          "Cy's lens is open — it is attending to something",
+          "Terminus-seal at the threshold — pre-Transition boundary, unresolved"
         ]
       },
       "npcUpdates": [
@@ -299,17 +315,18 @@
           "role": "Junior wright on posting-duty at the Eastern Intake notice board",
           "gender": "woman",
           "pronouns": "she/her",
-          "note": "Loki's combined truth-and-charm approach — backed by a touch of The Wrong Reality — found no purchase. She felt the seam of something off, filed it as a question, and declined neither half of the offer. She is still here. So is her question.",
+          "note": "Loki claimed independent methodology; Tessvel did not dismiss it — she asked to see it applied to the four spike entries in her log, using the same level voice she uses for everything",
           "learned": [
-            "She can feel when the framing of a moment is being worked — she doesn't name it as a craft, but she notices the wrongness and converts it to a question rather than accepting it",
-            "She did not move from the room despite discomfort — she stayed and asked for an accounting"
+            "She has documented the divergence on forty-one dates — far more than Loki knew",
+            "She has not shared the log with a senior wright because no senior wright has asked — she does not volunteer conclusions she cannot yet support",
+            "She said independent research is not technically a violation — and she was deciding something as she said it"
           ],
           "skillsObserved": [
-            "Resistance to social misdirection",
-            "Precise verbal recalibration under pressure"
+            "Holds incomplete conclusions until she can support them — does not preemptively share upward"
           ],
+          "relationshipDelta": 1,
           "status": "active",
-          "statusNote": "At her workstation in the Annex — pen set down, holding her question open, neither inviting nor dismissing"
+          "statusNote": "At her workstation in the Annex — log pulled toward her, giving Loki the chance to demonstrate"
         }
       ],
       "codexUpdates": [
@@ -318,45 +335,52 @@
           "label": "Tessvel Cairn",
           "kind": "person",
           "entityId": "tessvel-cairn",
-          "fact": "She felt the seam of The Wrong Reality and named it as a procedural question rather than reacting with offense or acceptance — she is more resistant to social-lattice work than the dense substrate around her, and she knows something was off even if she cannot classify what.",
+          "fact": "She has documented the variance on forty-one dates and withheld the log from senior wrights — not as defiance but as epistemic discipline: she does not share conclusions she cannot yet support. When Loki claimed independent methodology, she asked to see it applied to the four spike entries. She is taking him seriously.",
           "links": [
-            "pressure-routing-annex",
-            "the-water-crisis"
+            "intake-plaza",
+            "the-water-crisis",
+            "ring-form-residue-at-eastern-intake",
+            "pressure-routing-annex"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short exchange at the Annex table — a few minutes of back-and-forth"
+        "why": "a direct exchange, a decision settling"
+      },
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "xp": 0
       }
     },
     "sceneState": {
-      "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, narrow room, morning light soft and full down the center of the long table. Second bell ended. Gate open to the passage, attention-deflection thinning at its edges.",
+      "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, narrow room, morning light full down the center of the long table. Second bell ended. Gate open to the passage.",
       "npcsPresent": [
         {
           "name": "Tessvel Cairn",
-          "state": "Pen set down again, looking at Loki with a precise, recalibrating attention — not offended, not warm, filing the exchang"
+          "state": "Log pulled a few degrees toward her, hand resting on the cover — looking at Loki with a precise, deciding attention"
         },
         {
           "name": "Cy",
-          "state": "Standing at the near end of the table, lamp at its habitual angle, lens stilled — noting, as it does"
+          "state": "At the far end of the table, lens slightly open, lamp at its habitual angle, very still"
         }
       ],
       "objects": [
-        "Long work table — morning light soft down its center",
-        "Tessvel's green-spine log — open to a marked page, fresh entries and the eleven-",
+        "Long work table — morning light full down its center",
+        "Tessvel's green-spine log — open, pulled toward her, forty-one documented entrie",
         "Tessvel's leather satchel — open on the table",
-        "Tessvel's pen — set down with deliberate care",
+        "Tessvel's pen — resting against her hand, not yet lifted",
         "Shelves of bound logs — dates inked on spines, floor to ceiling",
         "Pressure-gauge at the door frame — needle in the green",
         "One chair — Loki seated in it",
-        "Open gate doorway — attention-deflection thinning at its edges"
+        "Open gate doorway"
       ],
       "threads": [
-        "Tessvel has not asked Loki to leave — the exchange is open, both halves of it",
-        "She felt the seam of The Wrong Reality and named it as a question rather than an answer — she knows something was off",
-        "The eleven-day variance is on the table, literally and otherwise",
-        "Tessvel's methodical question — 'where exactly does that appear in the methodology' — is still in the air",
+        "Tessvel asked to see the methodology applied to the four spike entries — the ask is in the air",
+        "The eleven-day variance is open between them, literally",
+        "Tessvel has not shared the log with a senior wright — that fact is now acknowledged between them",
+        "Cy's lens is open — it is attending to something",
         "Terminus-seal at the threshold — pre-Transition boundary, unresolved"
       ]
     }
@@ -384,9 +408,8 @@
         "locationId": "pressureholt",
         "day": 1
       },
-      "relationship": 6,
+      "relationship": 7,
       "history": [
-        "[d1] Named ten free minutes between the second and third bell without being asked directly — an opening left in the air.",
         "[d1] Gave Loki directions to the Pressure-Routing Annex and confirmed the meeting window between the second and third bell — said it this time as a confirmation, not a schedule.",
         "[d1] Loki kissed her hand and confirmed the meeting at the Annex; she agreed and walked toward the main works without hurrying — and looked at Cy longer than she looked at most things.",
         "[d1] Walked away from the plaza with her characteristic precision — paused at the edge, looked back once to confirm Loki was watching, then departed toward the main works.",
@@ -395,29 +418,31 @@
         "[d1] Arrived on time, filed first log entries from memory, noticed Loki with careful cataloguing attention — offered a second chair without apology.",
         "[d1] Loki opened with a two-axis compliment — professional competence plus physical charm — and offered to file a report with her supervisor or her boyfriend. She confirmed, precisely, that she has no boyfriend. Then she remembered herself and noted there is no posted authorization for him to be here…",
         "[d1] Did not ask Loki to leave after his offer. Set him to work on the eleven-day variance instead. Said 'nobody else has asked' with faint weight.",
-        "[d1] Loki's combined truth-and-charm approach — backed by a touch of The Wrong Reality — found no purchase. She felt the seam of something off, filed it as a question, and declined neither half of the offer. She is still here. So is her question."
+        "[d1] Loki's combined truth-and-charm approach — backed by a touch of The Wrong Reality — found no purchase. She felt the seam of something off, filed it as a question, and declined neither half of the offer. She is still here. So is her question.",
+        "[d1] Loki claimed independent methodology; Tessvel did not dismiss it — she asked to see it applied to the four spike entries in her log, using the same level voice she uses for everything"
       ],
       "knownFacts": [
-        "She describes the space as mostly shelving and a long table, but notes the light is good in the mornings",
-        "Cy caught her attention — she studied it with real focus before she answered",
-        "Arrives at the Annex at the second bell exactly; fills log entries from memory before looking up",
         "She has no boyfriend — volunteered precisely, then seemed to hear herself say it",
         "She considers an unposted observer a procedural violation and named it — but has not acted on it yet",
         "The variance between her hand-log and the automated tally-markers has been running eleven days and no senior wright has acted on it — she knows this and she knows it is wrong",
         "She can feel when the framing of a moment is being worked — she doesn't name it as a craft, but she notices the wrongness and converts it to a question rather than accepting it",
-        "She did not move from the room despite discomfort — she stayed and asked for an accounting"
+        "She did not move from the room despite discomfort — she stayed and asked for an accounting",
+        "She has documented the divergence on forty-one dates — far more than Loki knew",
+        "She has not shared the log with a senior wright because no senior wright has asked — she does not volunteer conclusions she cannot yet support",
+        "She said independent research is not technically a violation — and she was deciding something as she said it"
       ],
       "skillsObserved": [
         "Precise handwriting, official posting procedure",
         "Keeps a detailed hand-written variance log alongside automat",
         "Notices and records divergence independently",
         "Resistance to social misdirection",
-        "Precise verbal recalibration under pressure"
+        "Precise verbal recalibration under pressure",
+        "Holds incomplete conclusions until she can support them — do"
       ],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At her workstation in the Annex — pen set down, holding her question open, neither inviting nor dismissing",
+      "statusNote": "At her workstation in the Annex — log pulled toward her, giving Loki the chance to demonstrate",
       "domains": {
         "primary": "wright"
       },
@@ -427,7 +452,9 @@
         "day": 1
       },
       "bondType": "romantic",
-      "bondStage": "courting"
+      "bondStage": "courting",
+      "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Tessvel%20Cairn%2C%20woman%2C%20Junior%20wright%20on%20posting-duty%20at%20the%20Eastern%20Intake%20notice%20board%2C%20courting%20romantic%20to%20Loki%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=98414&nologo=true",
+      "_portraitTier": "devoted"
     }
   },
   "placeMemory": {
@@ -508,7 +535,7 @@
     "lastSharedReadAt": "2026-07-21T21:10:36.252Z",
     "lastTickWorldDay": 21,
     "lastCanonWorldDay": 21,
-    "turnsSinceOffer": 20,
+    "turnsSinceOffer": 21,
     "recentOffers": [
       {
         "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
@@ -614,7 +641,8 @@
           "[d1] Her workstation is in the Pressure-Routing Annex — east side of the main works, third gate left of the big wheel. She has confirmed a meeting there between the second and third bell.",
           "[d1] Confirmed she has no boyfriend — stated precisely and without hesitation, then caught herself and added that there is no posted authorization for an observer in the Annex. Both pieces delivered in the same exact voice.",
           "[d1] When offered the choice between flirtation and work, she answered the flattery precisely and then put Loki to work — she did not ask him to leave, and she said 'nobody else has asked' about the variance with faint weight.",
-          "[d1] She felt the seam of The Wrong Reality and named it as a procedural question rather than reacting with offense or acceptance — she is more resistant to social-lattice work than the dense substrate around her, and she knows something was off even if she cannot classify what."
+          "[d1] She felt the seam of The Wrong Reality and named it as a procedural question rather than reacting with offense or acceptance — she is more resistant to social-lattice work than the dense substrate around her, and she knows something was off even if she cannot classify what.",
+          "[d1] She has documented the variance on forty-one dates and withheld the log from senior wrights — not as defiance but as epistemic discipline: she does not share conclusions she cannot yet support. When Loki claimed independent methodology, she asked to see it applied to the four spike entries. She is…"
         ],
         "links": [
           "intake-plaza",
@@ -683,20 +711,20 @@
     }
   },
   "tendencies": {
-    "devotion": 8.4376275230674,
-    "cerebral": 5.631304140866031,
-    "social": 12.745109661337311,
-    "strategic": 4.71492190846331,
-    "cautious": 2.4748752367842006,
-    "amorous": 9.134774362022396,
-    "generous": 1.67655967750146,
-    "ruthless": 0.9506249999999999
+    "devotion": 8.226686834990716,
+    "cerebral": 5.49052153734438,
+    "social": 13.426481919803878,
+    "strategic": 4.597048860751728,
+    "cautious": 2.4130033558645954,
+    "amorous": 9.906405002971836,
+    "generous": 1.6346456855639233,
+    "ruthless": 0.9268593749999999
   },
   "aptitudes": [
     "silver_tongue",
     "faithful"
   ],
-  "actionCount": 20,
+  "actionCount": 21,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -743,6 +771,14 @@
   "nativeGrantsVersion": 1,
   "reconcileVersion": 14,
   "gallery": [
+    {
+      "kind": "portrait",
+      "prompt": "a person, character portrait, named Tessvel Cairn, woman, Junior wright on posting-duty at the Eastern Intake notice board, courting romantic to Loki",
+      "url": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Tessvel%20Cairn%2C%20woman%2C%20Junior%20wright%20on%20posting-duty%20at%20the%20Eastern%20Intake%20notice%20board%2C%20courting%20romantic%20to%20Loki%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=98414&nologo=true",
+      "caption": "Tessvel Cairn — courting · devoted",
+      "worldDay": 21,
+      "at": "2026-07-21T22:26:05.173Z"
+    },
     {
       "kind": "npc",
       "prompt": "Tessvel Cairn",
@@ -815,8 +851,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784672586871,
-  "rev": 39,
+  "updatedAt": 1784672765173,
+  "rev": 40,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -965,7 +1001,7 @@
           "entityId": "tessvel-cairn",
           "type": "npc",
           "birthWeight": 2,
-          "engagementScore": 32,
+          "engagementScore": 35,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -1053,6 +1089,14 @@
             {
               "kind": "fact",
               "day": 1
+            },
+            {
+              "kind": "interact",
+              "day": 1
+            },
+            {
+              "kind": "fact",
+              "day": 1
             }
           ],
           "createdDay": 1,
@@ -1081,7 +1125,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_gearlands": 21
+    "the_gearlands": 22
   },
   "opLossPending": false,
   "sessions": [
@@ -1096,10 +1140,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-21T17:40:12.510Z",
-      "lastAt": "2026-07-21T22:23:06.870Z",
+      "lastAt": "2026-07-21T22:26:05.172Z",
       "startDay": 21,
       "endDay": 21,
-      "beats": 20
+      "beats": 21
     }
   ],
   "establishedFacts": [],
@@ -1112,20 +1156,20 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 20,
-    "choices": 20,
-    "characterDeltas": 5,
-    "scene": 20,
+    "sceneSummary": 21,
+    "choices": 21,
+    "characterDeltas": 6,
+    "scene": 21,
     "placeUpdates": 3,
-    "codexUpdates": 14,
-    "timeOps": 20,
+    "codexUpdates": 15,
+    "timeOps": 21,
     "offer": 1,
     "generateRequest": 2,
     "sceneEnded": 4,
-    "npcUpdates": 15,
+    "npcUpdates": 16,
     "moveTo": 1
   },
-  "_opTurns": 20,
+  "_opTurns": 21,
   "customAbilities": {},
   "companionBonds": {},
   "practice": {

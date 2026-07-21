@@ -1705,37 +1705,32 @@
         "player": "Without moving the scene forward at all - we are going to all instantly be transport back to Silas's mother's house in Cairnhold. The scene will pick up from that location just as it is.",
         "summary": "The shadow-build releases its last light at the kitchen table in Cairnhold — the older mark fades, the three-line structure held in memory, Ama still watching the place where it was.",
         "narration": "The shadow-build releases the last of its held light. The older mark at the third line's edge dims to nothing, and the kitchen is simply a kitchen again — lamp burning low, warmth from the banked hearth, the smell of dried herbs and cooling flatbread. Nothing has moved. Ama's hands are still folded in her lap. Pell's thumb still rests against the back of Silas's hand, the Waymarker warm between your joined grip. Veth sits with her palms flat on the table. Huginn has not shifted from the back of the chair.\n\nThe image is gone, but what it showed is not. Three lines. Two closed. One open, marked by a hand a generation older than your father's — the same tradition, the same stopping point, and no explanation yet for either.\n\nAma has not spoken since Veth named the shared limit. Her expression has not changed. She is watching the place where the older mark was, the way a person watches a door that has just closed — not waiting for it to open again, but not ready to look away."
+      },
+      {
+        "player": "Let the moment settle. Set the Waymarker down, let Pell release your hand, and give Ama the space to speak in her own time.",
+        "summary": "Ama speaks at last — Silas's father came home from the third channel three days before he stopped, named the older hand to himself alone, and wrote the name Edvar Crane into the letter rather than speak it aloud. The kitchen settles into the weight of what that means.",
+        "narration": "You set the Waymarker down on the table between the lamp and the open letter. The disc makes a small, flat sound against the wood — nothing dramatic, just the weight of it finding its place. Pell releases your hand, and you feel the absence of the grip the way you feel a fire's warmth when you step away from it: not painful, only noticeable.\n\nNobody speaks. Huginn has not moved from the back of the chair. Veth keeps her palms flat on the table. Ama's gaze lifts slowly from the place where the older mark was, and she looks at the Waymarker for a long moment before she looks at you.\n\n'Your father came home from that third channel three days before he stopped going back,' she says. Her voice is even — not careful, just already settled with the thing she is saying. 'He sat in this chair. He did not eat. He said there was a hand in it before his, and that the hand had reached the same wall, and that the wall was not structural.' She pauses. 'I did not know what that meant. I did not ask.'\n\nShe folds her hands again in her lap — the same gesture she has used all evening, the gesture of a woman who knows what she has and what she is giving away. 'He never named Edvar Crane to me,' she says. 'He named the name to the letter. That is the only reason I know it.'"
       }
     ],
     "lastTurn": {
-      "narration": "The shadow-build releases the last of its held light. The older mark at the third line's edge dims to nothing, and the kitchen is simply a kitchen again — lamp burning low, warmth from the banked hearth, the smell of dried herbs and cooling flatbread. Nothing has moved. Ama's hands are still folded in her lap. Pell's thumb still rests against the back of Silas's hand, the Waymarker warm between your joined grip. Veth sits with her palms flat on the table. Huginn has not shifted from the back of the chair.\n\nThe image is gone, but what it showed is not. Three lines. Two closed. One open, marked by a hand a generation older than your father's — the same tradition, the same stopping point, and no explanation yet for either.\n\nAma has not spoken since Veth named the shared limit. Her expression has not changed. She is watching the place where the older mark was, the way a person watches a door that has just closed — not waiting for it to open again, but not ready to look away.",
-      "sceneSummary": "The shadow-build releases its last light at the kitchen table in Cairnhold — the older mark fades, the three-line structure held in memory, Ama still watching the place where it was.",
+      "narration": "You set the Waymarker down on the table between the lamp and the open letter. The disc makes a small, flat sound against the wood — nothing dramatic, just the weight of it finding its place. Pell releases your hand, and you feel the absence of the grip the way you feel a fire's warmth when you step away from it: not painful, only noticeable.\n\nNobody speaks. Huginn has not moved from the back of the chair. Veth keeps her palms flat on the table. Ama's gaze lifts slowly from the place where the older mark was, and she looks at the Waymarker for a long moment before she looks at you.\n\n'Your father came home from that third channel three days before he stopped going back,' she says. Her voice is even — not careful, just already settled with the thing she is saying. 'He sat in this chair. He did not eat. He said there was a hand in it before his, and that the hand had reached the same wall, and that the wall was not structural.' She pauses. 'I did not know what that meant. I did not ask.'\n\nShe folds her hands again in her lap — the same gesture she has used all evening, the gesture of a woman who knows what she has and what she is giving away. 'He never named Edvar Crane to me,' she says. 'He named the name to the letter. That is the only reason I know it.'",
+      "sceneSummary": "Ama speaks at last — Silas's father came home from the third channel three days before he stopped, named the older hand to himself alone, and wrote the name Edvar Crane into the letter rather than speak it aloud. The kitchen settles into the weight of what that means.",
       "choices": [
         {
-          "label": "Ask Ama directly — she shifted when Veth named the older mark. She knows something about who that craftsman was.",
+          "label": "Ask Ama what she thought the wall was — not structural, she said. Did she ever form her own understanding of it?",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "persuade"
+            "calm",
+            "study"
           ],
           "trivial": true
         },
         {
-          "label": "Read the room with Order-Sense — lay it lightly over the kitchen and see if the house itself holds any structure that connects to the third line's tradition.",
+          "label": "Ask whether your father seemed afraid of the wall — or only stopped by it. There is a difference, and she would know which.",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 2
-        },
-        {
-          "label": "Name what you know aloud — lay out the third line's shape for Pell and Veth plainly, and ask whether either of them reads a tradition in that groove angle.",
-          "attribute": "mental",
-          "subAttribute": "reason",
           "difficulty": 0,
           "intentTags": [
             "study"
@@ -1743,7 +1738,7 @@
           "trivial": true
         },
         {
-          "label": "Let the moment settle. Set the Waymarker down, let Pell release your hand, and give Ama the space to speak in her own time.",
+          "label": "Say nothing more tonight. The letter has given what it has. Thank Ama, and let the evening find its close.",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
@@ -1751,73 +1746,120 @@
             "calm"
           ],
           "trivial": true
+        },
+        {
+          "label": "Ask Veth what she makes of it — a wall that is not structural, reached by two different hands. She has Ashwarden March ground under her feet; she may have a name for that kind of limit.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        }
+      ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "silass-mother",
+          "name": "Ama",
+          "note": "Named aloud what she saw three days before Silas's father stopped — he came home saying there was a hand before his and that the wall was not structural. She did not ask what it meant. She never knew Edvar Crane's name; he sealed it into the letter instead of speaking it.",
+          "learned": [
+            "Silas's father came home three days before he stopped the work — sat in the kitchen chair, did not eat, named the older hand and the wall that was not structural",
+            "She never asked what 'not structural' meant — she is telling Silas now that she did not ask",
+            "He never named Edvar Crane aloud to her — only sealed the name into the letter"
+          ],
+          "statusNote": "Seated at the kitchen table in Cairnhold — has spoken what she has been holding all evening."
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "the-third-line",
+          "label": "The Third Line — A Wall That Is Not Structural",
+          "kind": "mystery",
+          "fact": "Silas's father came home three days before he stopped the work. He told Ama there was a hand before his in the third channel, and that the wall they both reached was not structural. He never explained what that meant. He sealed Edvar Crane's name into the letter rather than speaking it aloud — a choice that reads like caution.",
+          "links": [
+            "the-second-thread",
+            "the-water-crisis",
+            "stillwaters-trouble",
+            "calvar"
+          ]
         }
       ],
       "scene": {
-        "setting": "The kitchen of Ama's house on Cairnhold's center lane, night. The table lamp burns low. The shadow-build has fully faded — the kitchen is a kitchen again, the older mark gone, only the warmth of the Waymarker remaining.",
+        "setting": "The kitchen of Ama's house on Cairnhold's center lane, night. The table lamp burns low. The Waymarker sits on the table between the lamp and the open letter. The kitchen is still and warm.",
         "npcsPresent": [
           {
             "name": "Ama",
-            "state": "Hands folded in her lap, watching the place where the older mark was — expression unchanged, not yet ready to look away."
+            "state": "Hands folded in her lap, looking at Silas — she has said what she has been holding, and is waiting to see what he does with it."
           },
           {
             "name": "Pell Ran Marsh",
-            "state": "Thumb resting against the back of Silas's hand, the disc still in their joined grip, watching Ama."
+            "state": "Hand released from Silas's, watching Ama with quiet attention."
           },
           {
             "name": "Veth (Stillwater) Ondra",
-            "state": "Hands flat on the table, the observation already spoken — waiting, unhurried."
+            "state": "Palms flat on the table, listening — her expression unchanged, unhurried."
           },
           {
             "name": "Huginn",
-            "state": "Perched on the back of Silas's chair, head canted toward the place the image was. Still."
+            "state": "Perched on the back of Silas's chair, still, head level."
           }
         ],
         "objects": [
+          "Waymarker — set down on the table, warm, between the lamp and the letter",
           "Father's Sealed Letter — open on the table",
-          "Waymarker — warm from use, held in Silas and Pell's joined grip",
           "Table lamp, burning low",
           "Kitchen warmth, the last of the evening fire"
         ],
         "threads": [
-          "The older mark's maker — tradition adjacent to the father's, a generation earlier, same stopping point; identity still unknown",
-          "Ama's expression has not changed — she has not looked away from where the older mark was",
-          "The third line's open datum: a problem older than Silas's father",
-          "Edvar Crane — last known at the Crossing; holds the second thread"
+          "The wall that is not structural — what did Silas's father mean, and does Ama have her own understanding of it?",
+          "The older mark's maker — tradition adjacent, a generation earlier, same stopping point; identity still unknown",
+          "Edvar Crane — sealed into the letter, not spoken; last known at the Crossing",
+          "The third line's open datum: a problem older than Silas's father"
         ]
+      },
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A brief settling pause — the shadow-build fades, the room breathes, Ama speaks."
       }
     },
     "sceneState": {
-      "setting": "The kitchen of Ama's house on Cairnhold's center lane, night. The table lamp burns low. The shadow-build has fully faded — the kitchen is a kitchen again, the older mark gone, only the warmth of the Waymarker remaining.",
+      "setting": "The kitchen of Ama's house on Cairnhold's center lane, night. The table lamp burns low. The Waymarker sits on the table between the lamp and the open letter. The kitchen is still and warm.",
       "npcsPresent": [
         {
           "name": "Ama",
-          "state": "Hands folded in her lap, watching the place where the older mark was — expression unchanged, not yet ready to look away."
+          "state": "Hands folded in her lap, looking at Silas — she has said what she has been holding, and is waiting to see what he does w"
         },
         {
           "name": "Pell Ran Marsh",
-          "state": "Thumb resting against the back of Silas's hand, the disc still in their joined grip, watching Ama."
+          "state": "Hand released from Silas's, watching Ama with quiet attention."
         },
         {
           "name": "Veth (Stillwater) Ondra",
-          "state": "Hands flat on the table, the observation already spoken — waiting, unhurried."
+          "state": "Palms flat on the table, listening — her expression unchanged, unhurried."
         },
         {
           "name": "Huginn",
-          "state": "Perched on the back of Silas's chair, head canted toward the place the image was. Still."
+          "state": "Perched on the back of Silas's chair, still, head level."
         }
       ],
       "objects": [
+        "Waymarker — set down on the table, warm, between the lamp and the letter",
         "Father's Sealed Letter — open on the table",
-        "Waymarker — warm from use, held in Silas and Pell's joined grip",
         "Table lamp, burning low",
         "Kitchen warmth, the last of the evening fire"
       ],
       "threads": [
-        "The older mark's maker — tradition adjacent to the father's, a generation earlier, same stopping point; identity still unknown",
-        "Ama's expression has not changed — she has not looked away from where the older mark was",
-        "The third line's open datum: a problem older than Silas's father",
-        "Edvar Crane — last known at the Crossing; holds the second thread"
+        "The wall that is not structural — what did Silas's father mean, and does Ama have her own understanding of it?",
+        "The older mark's maker — tradition adjacent, a generation earlier, same stopping point; identity still unknown",
+        "Edvar Crane — sealed into the letter, not spoken; last known at the Crossing",
+        "The third line's open datum: a problem older than Silas's father"
       ]
     }
   },
@@ -3992,7 +4034,7 @@
     "lastTickWorldDay": 21,
     "lastCanonWorldDay": 21,
     "lastGenCount": 518,
-    "turnsSinceOffer": 4,
+    "turnsSinceOffer": 5,
     "recentOffers": [
       {
         "thing": "The shadow-build showed Calvar's drainage failure precisely — the sleeve geometry, the collar, the east-bend junction — before it showed…",
@@ -5369,21 +5411,21 @@
     }
   },
   "tendencies": {
-    "strategic": 13.422109434881733,
-    "cerebral": 20.519656558608258,
-    "social": 10.232118293887664,
-    "generous": 3.2231159798450513,
-    "cautious": 4.186960232400047,
-    "physical": 0.17430343414957106,
-    "risky": 0.18279168144833235,
-    "ruthless": 0.058281130026288916,
-    "carousing": 0.6348839257139032,
-    "amorous": 1.3811661442971526,
-    "patient": 0.3632594596445238,
-    "stealth": 0.022589914894921473,
-    "devotion": 0.4614912906527467,
-    "craft": 1.3581875838357436,
-    "leadership": 0.11498517386891625
+    "strategic": 13.086556699009689,
+    "cerebral": 20.00666514464305,
+    "social": 9.976315336540472,
+    "generous": 3.142538080348925,
+    "cautious": 4.082286226590045,
+    "physical": 0.1699458482958318,
+    "risky": 0.17822188941212405,
+    "ruthless": 0.05682410177563169,
+    "carousing": 0.6190118275710556,
+    "amorous": 1.3466369906897238,
+    "patient": 0.35417797315341065,
+    "stealth": 0.022025167022548437,
+    "devotion": 0.449954008386428,
+    "craft": 1.32423289423985,
+    "leadership": 0.11211054452219335
   },
   "aptitudes": [
     "strategist",
@@ -5391,7 +5433,7 @@
     "scholar",
     "sage"
   ],
-  "actionCount": 637,
+  "actionCount": 638,
   "grantsVersion": 1,
   "reconcileVersion": 14,
   "gallery": [
@@ -5741,8 +5783,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784645607313,
-  "rev": 988,
+  "updatedAt": 1784645790267,
+  "rev": 989,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -7724,7 +7766,7 @@
   "regionsKnown": {
     "valley": 435,
     "the_palelands": 6,
-    "the_center": 25
+    "the_center": 26
   },
   "foreclosed": [
     "rootkin",
@@ -7830,10 +7872,10 @@
     {
       "id": "sess-9",
       "startedAt": "2026-07-21T14:53:27.311Z",
-      "lastAt": "2026-07-21T14:53:27.311Z",
+      "lastAt": "2026-07-21T14:56:30.265Z",
       "startDay": 21,
       "endDay": 21,
-      "beats": 1
+      "beats": 2
     }
   ],
   "company": [
@@ -8021,22 +8063,22 @@
     "the_crossing": "https://image.pollinations.ai/prompt/The%20Crossing%3A%20Every%20axis%20crosses%20here%20at%20nothing%2C%20and%20the%20result%20is%20not%20grey%20%E2%80%94%20it%20is%20CROWDED.%20The%20Crossing%20leans%20toward%20no%20pole%2C%20which%20is%20precisely%20why%20it%20can%20hold%20them%20all%3A%20an%20Umbral%20and%20a%20Blazeborn%20drink%20at%20the%20same%20table%20because%20neither%20has%20the%20standing%20to%20make%20the%20other%20leave.%20The%20poles%20are%20lonely%20places.%20The%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=24144&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 12,
-    "choices": 12,
-    "characterDeltas": 6,
-    "scene": 12,
-    "npcUpdates": 11,
+    "sceneSummary": 13,
+    "choices": 13,
+    "characterDeltas": 7,
+    "scene": 13,
+    "npcUpdates": 12,
     "factUpdates": 2,
     "placeUpdates": 2,
-    "codexUpdates": 10,
-    "timeOps": 9,
+    "codexUpdates": 11,
+    "timeOps": 10,
     "imagePrompt": 1,
     "sceneEnded": 4,
     "itemUpdates": 1,
     "questUpdates": 1,
     "offer": 1
   },
-  "_opTurns": 12,
+  "_opTurns": 13,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

@@ -526,6 +526,87 @@
         "birthWeight": 23,
         "rivalId": "siol-elven-traveler-at-the-hub-plaza-tal"
       }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "tessvel-cairn",
+      "name": "Tessvel Cairn",
+      "role": "Junior wright on posting-duty at the Eastern Intake notice board — the person who makes the official record legible, correctly sequenced, and properly stamped",
+      "homeLocation": "pressureholt_eastern_intake",
+      "communityId": "wright.pressureholt",
+      "personality": {
+        "warmth": 0.3,
+        "trust": 0.2,
+        "candor": 0.8,
+        "patience": 0.5
+      },
+      "spectrum": {
+        "mechanical_spiritual": -0.7,
+        "emotional_logical": -0.6,
+        "concrete_abstract": -0.8
+      },
+      "voiceHints": "Economical to the point of clipped. Speaks in specifications and corrections — not rudely, but as someone for whom imprecision wastes load-bearing capacity. If she likes you she will explain the system. If she doesn't, she will cite the regulation. Both sound identical from the outside.",
+      "knowledge": [
+        "The Intake's notice protocols: sequencing, stamp-order, supersession rules for conflicting postings",
+        "Basic pressure-gauge calibration and the common failure modes that produce false readings at the Eastern valves",
+        "Which senior wrights are running behind on their inspection cycles and who is quietly covering for whom",
+        "The caliper in her hair is not decorative — she has used it to measure clearance tolerances in the field and will do so mid-conversation without apology"
+      ],
+      "wants": "To complete her apprenticeship without a single incorrectly filed document, and to be assigned to the Intake's pressure-routing team rather than continued posting-duty — which she considers clerical rather than engineering.",
+      "fears": "That she will be kept in administrative work because she is good at it, and the system will grind her into the shape of the job it needs rather than the job she trained for.",
+      "reactsToReputation": {
+        "wright_or_technical": "immediately useful — gives exact information, asks exact questions in return",
+        "official_or_credentialed": "courteous and correct, slightly watchful for anything that requires a countersignature",
+        "unknown_or_outsider": "not hostile, but she will ask your business at the board before she will look you in the face",
+        "charming_or_evasive": "unmoved; tries harder to get a straight answer, which she will document"
+      },
+      "appearance": "A young woman in her early twenties, lean and upright with the unconscious posture of someone accustomed to working in confined valve-spaces. Rust-orange apprentice's coat, sleeves rolled to the elbows, the cuffs darkened with graphite dust and a faint grease-shadow at the right thumb. Dark hair pulled back and pinned at the crown with a small vernier caliper, points down — a habit, not a fashion. Her hands are already at the board before the rest of her arrives, smoothing the new posting flat and checking its alignment against the ruled border with the careful attention of someone who will be held responsible if it is crooked.",
+      "currentActivity": "Posting a sealed Intake Authority notice — early-spring valve-inspection schedule, newly ratified — to the Eastern board. She is pressing the stamp firmly, waiting the required count, then logging the posting time in a small ledger kept inside her left breast pocket.",
+      "people": "human",
+      "domains": {
+        "primary": "wright",
+        "secondary": "syllogist",
+        "tertiary": "figurist"
+      },
+      "domainsNote": "Derived from this NPC's authored spectrum against the great circle (SNG-174). Kind and domain are independent: a people tends toward positions, an individual holds their own. Her figurist tertiary is nascent and mostly expressed as precision drafting and an instinct for reading technical diagrams faster than her peers can — she has not named it that herself.",
+      "functions": [
+        "reveal",
+        "bind",
+        "order"
+      ],
+      "functionsNote": "Reveal: she knows where information is filed and what it officially means. Bind: postings she makes are legally binding Intake records. Order: her presence at the board enforces procedural sequence — she will interrupt anything that violates posting protocol, regardless of who is doing it.",
+      "peopleSource": "generated",
+      "domainsSource": "generated",
+      "image": "https://image.pollinations.ai/prompt/A%20young%20woman%20in%20her%20early%20twenties%2C%20lean%20and%20upright%20with%20the%20unconscious%20posture%20of%20someone%20accustomed%20to%20working%20in%20confined%20valve-spaces.%20Rust-orange%20apprentice's%20coat%2C%20sleeves%20rolled%20to%20the%20elbow%2C%20character%20portrait%2C%20named%20Tessvel%20Cairn%2C%20Junior%20wright%20on%20posting-duty%20at%20the%20Eastern%20Intake%20notice%20board%20%E2%80%94%20the%20person%20who%20makes%20the%20official%2C%20Economical%20to%20the%20point%20of%20clipped.%20Speaks%20in%20specifications%20and%20corrections%20%E2%80%94%20not%20rudely%2C%20but%20as%20so%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=43130&nologo=true",
+      "history": "Tessvel came up through the Wrights' formal apprenticeship track rather than the more common route of attaching to a senior wright as a personal assistant. She sat the syllogist examinations twice — passing on the second attempt with a margin narrow enough that she does not volunteer the number — and her figurist certification came later, added because the posting-duty role required it and she…",
+      "relationships": {
+        "supervising_wright": "Her supervising wright, Ondreth Vasse, is the one who made the temporary promise and has since developed a reliable habit of not meeting her eyes when the pressure-routing roster comes up. She does not consider him malicious — she considers him a man who resolved a staffing problem and has found it easier not to revisit the resolution. She is polite to him. She is also keeping the written record of every conversation in which he confirmed the arrangement was temporary.",
+        "senior_wrights_behind_on_inspections": "She knows which ones are running late and who is signing off on their behalf, and they know she knows. This has produced a wary mutual courtesy. None of them have explicitly asked her silence; she has not explicitly offered it. The arrangement holds because no one has needed to test it yet.",
+        "player": "The player is logged in her mind as someone who came to the notice board and engaged with her as though the work she was doing was real work — not as a clerk to be talked past. She did not make a production of this. She answered what was asked, offered one unsolicited technical observation about what they were looking at, and noted that they did not seem bothered by the caliper. She would recognize them again and would give them slightly more of her attention than the baseline, which for Tessvel is more than it sounds."
+      },
+      "_canon": {
+        "entityId": "tessvel-cairn",
+        "type": "npc",
+        "weight": 10,
+        "rating": "R+",
+        "tier": "variant",
+        "provenance": {
+          "playerKey": "player-s9z9u1",
+          "characterId": "char-mrum8y4d",
+          "locationId": "pressureholt",
+          "day": 1,
+          "worldDay": null,
+          "hint": "a young woman in a rust-orange coat, sleeves rolled, dark hair pinned with a caliper — an apprentice or junior wright po",
+          "why": "Loki has spotted her and may approach; she needs a stable identity to recur"
+        },
+        "contributedBy": {
+          "playerKey": "player-s9z9u1",
+          "characterId": "char-mrum8y4d"
+        },
+        "promotedWorldDay": 21,
+        "birthWeight": 2,
+        "rivalId": "tessvel-cairn"
+      }
     }
   ]
 }

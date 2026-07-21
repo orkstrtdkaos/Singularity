@@ -54,7 +54,7 @@
   "alignment": {
     "mechanical_spiritual": -0.020000000000000004,
     "falsehood_truth": -0.04000000000000001,
-    "spectrumId": -0.04286875
+    "spectrumId": -0.09072531249999999
   },
   "attunement": 1,
   "maxHealth": 30,
@@ -143,70 +143,56 @@
         "player": "Take her hand quckly and kiss it.  then tell her you'll meet her there. And you'll bring Cy for her to meet as well.",
         "summary": "Loki kisses Tessvel's hand and confirms the meeting at the Pressure-Routing Annex — she agrees, and walks away at no particular hurry.",
         "narration": "You take her hand before the moment can thin out — quick, certain, the way you do everything that matters — and bring it to your lips. The back of her knuckles. A brief press, not a performance.\n\nTessvel goes very still. Not startled, exactly. More the way a well-calibrated instrument goes still when something unexpected registers on it, and it is deciding whether to log the reading.\n\nYou straighten and tell her you will meet her at the Annex between the bells. Then you add — easily, as though it is a small thing — that you will bring Cy. You say it with a slight tip of your head toward the brass-dark shape at your heel, its lens already irised toward her, lamp angled politely away.\n\nSomething moves in Tessvel's expression. Quick, and then controlled. She looks at Cy for a moment longer than she looks at most things. Then she says, carefully, that she will be there, and she tucks her log under her arm and turns toward the main works without looking back — though she walks, you notice, at no particular hurry."
+      },
+      {
+        "player": "Watch her walk and take full detailed note off all the best of her features - what are her dimensions and attributes... how well does she move?  Watch her walk away and see if she looks back to see you watching.",
+        "summary": "Loki watches Tessvel walk away — she moves with efficient precision, pauses at the plaza's edge, and looks back once before she goes.",
+        "narration": "Tessvel walks away at no particular hurry, and you watch her go with the careful attention you give to things worth understanding.\n\nShe moves well. Not a trained walk — nothing self-conscious about it — but efficient in the way that people who spend their days navigating tight machinery corridors learn to be. Her stride is even and unhurried, each foot placed with the same quiet precision she gives her handwriting. She is not tall, but she carries herself at her full height, which amounts to the same thing. The rust-orange coat falls to mid-thigh and she has her hands in its pockets now, the patched left sleeve catching the early light. Her hair — dark, pinned up with what looks like a spare tightening-rod rather than a proper pin — stays in place as she walks, though one piece at the nape of her neck has come loose and moves with her pace. Her frame is lean and capable-looking, the kind that comes from actual work rather than intention.\n\nAt the edge of the plaza, where the cobblestones meet the passage leading toward the main works, she pauses. She does not make a show of it. She simply stops, half-turns, and looks back once — a measured look, not a lingering one, the way you check a reading before you file it. Her eyes find you exactly where she left you. Then she turns and goes.\n\nCy's lens irises once beside your ankle, tracking her departure. It clicks quietly, twice, and says nothing."
       }
     ],
     "lastTurn": {
-      "narration": "You take her hand before the moment can thin out — quick, certain, the way you do everything that matters — and bring it to your lips. The back of her knuckles. A brief press, not a performance.\n\nTessvel goes very still. Not startled, exactly. More the way a well-calibrated instrument goes still when something unexpected registers on it, and it is deciding whether to log the reading.\n\nYou straighten and tell her you will meet her at the Annex between the bells. Then you add — easily, as though it is a small thing — that you will bring Cy. You say it with a slight tip of your head toward the brass-dark shape at your heel, its lens already irised toward her, lamp angled politely away.\n\nSomething moves in Tessvel's expression. Quick, and then controlled. She looks at Cy for a moment longer than she looks at most things. Then she says, carefully, that she will be there, and she tucks her log under her arm and turns toward the main works without looking back — though she walks, you notice, at no particular hurry.",
-      "sceneSummary": "Loki kisses Tessvel's hand and confirms the meeting at the Pressure-Routing Annex — she agrees, and walks away at no particular hurry.",
+      "narration": "Tessvel walks away at no particular hurry, and you watch her go with the careful attention you give to things worth understanding.\n\nShe moves well. Not a trained walk — nothing self-conscious about it — but efficient in the way that people who spend their days navigating tight machinery corridors learn to be. Her stride is even and unhurried, each foot placed with the same quiet precision she gives her handwriting. She is not tall, but she carries herself at her full height, which amounts to the same thing. The rust-orange coat falls to mid-thigh and she has her hands in its pockets now, the patched left sleeve catching the early light. Her hair — dark, pinned up with what looks like a spare tightening-rod rather than a proper pin — stays in place as she walks, though one piece at the nape of her neck has come loose and moves with her pace. Her frame is lean and capable-looking, the kind that comes from actual work rather than intention.\n\nAt the edge of the plaza, where the cobblestones meet the passage leading toward the main works, she pauses. She does not make a show of it. She simply stops, half-turns, and looks back once — a measured look, not a lingering one, the way you check a reading before you file it. Her eyes find you exactly where she left you. Then she turns and goes.\n\nCy's lens irises once beside your ankle, tracking her departure. It clicks quietly, twice, and says nothing.",
+      "sceneSummary": "Loki watches Tessvel walk away — she moves with efficient precision, pauses at the plaza's edge, and looks back once before she goes.",
       "choices": [
         {
-          "label": "Watch Vessa Torquen at the sampling fixture — she was still studying that fourth vial",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "scout"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Approach the gray-haired woman at the water's edge — her worry has gone unexplained",
+          "label": "Go and speak to the gray-haired woman at the water's edge — her worry has gone unexplained long enough.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "help",
+            "help"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Look more closely at the fourth vial in Vessa Torquen's sampling fixture — the one outside variance.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 0,
+          "intentTags": [
             "study"
           ],
           "trivial": true
         },
         {
-          "label": "Head to the Pressure-Routing Annex now — third gate left of the big wheel — to be there before the second bell rings",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Let Cy examine the sampling fixture on the quay — see what a Precursor maintenance-thing makes of the ring-form residue.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": false
+        },
+        {
+          "label": "Head toward the Pressure-Routing Annex — third gate left of the big wheel — ahead of the second bell.",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "difficulty": 0,
           "intentTags": [
             "travel"
           ],
           "trivial": true
-        },
-        {
-          "label": "Let Cy examine the sampling fixture while you wait for the second bell — see what it makes of the ring-form residue",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "craft"
-          ],
-          "trivial": true
-        }
-      ],
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "tessvel-cairn",
-          "name": "Tessvel Cairn",
-          "note": "Loki kissed her hand and confirmed the meeting at the Annex; she agreed and walked toward the main works without hurrying — and looked at Cy longer than she looked at most things.",
-          "learned": [
-            "Cy caught her attention — she studied it with real focus before she answered"
-          ],
-          "relationshipDelta": 1,
-          "status": "active",
-          "statusNote": "Departing the notices board — walking toward the Pressure-Routing Annex ahead of the second bell.",
-          "bondType": "courting",
-          "bondStage": "courting"
         }
       ],
       "scene": {
@@ -229,16 +215,24 @@
         ],
         "threads": [
           "Tessvel confirmed the meeting window between the second and third bell at the Pressure-Routing Annex — third gate left of the big wheel",
-          "Tessvel looked at Cy with focused attention before she answered — she has not seen anything like it",
+          "Tessvel looked back once before leaving — a measured look, then gone",
           "Tessvel's log has diverged from the automated markers for eleven days — no senior wright has visibly acted on it",
           "The ring-form residue at the sampling fixture matches a regulated nanite deposition pattern",
-          "The gray-haired woman at the water's edge — her worry still unexplained",
-          "Vessa is not fooled and still wants a straight answer about what Cy is"
+          "The gray-haired woman at the water's edge — her worry still unexplained"
         ]
       },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "tessvel-cairn",
+          "name": "Tessvel Cairn",
+          "note": "Walked away from the plaza with her characteristic precision — paused at the edge, looked back once to confirm Loki was watching, then departed toward the main works.",
+          "statusNote": "Departing the plaza — walking toward the Pressure-Routing Annex ahead of the second bell; meeting confirmed between bells."
+        }
+      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief exchange at the notices board"
+        "why": "A brief observation beat at the plaza — a few quiet minutes watching her go"
       }
     },
     "sceneState": {
@@ -261,7 +255,7 @@
       ],
       "threads": [
         "Tessvel confirmed the meeting window between the second and third bell at the Pressure-Routing Annex — third gate left of the big wheel",
-        "Tessvel looked at Cy with focused attention before she answered — she has not seen anything like it",
+        "Tessvel looked back once before leaving — a measured look, then gone",
         "Tessvel's log has diverged from the automated markers for eleven days — no senior wright has visibly acted on it",
         "The ring-form residue at the sampling fixture matches a regulated nanite deposition pattern",
         "The gray-haired woman at the water's edge — her worry still unexplained"
@@ -300,7 +294,8 @@
         "[d1] Your bond deepens — courting.",
         "[d1] Named ten free minutes between the second and third bell without being asked directly — an opening left in the air.",
         "[d1] Gave Loki directions to the Pressure-Routing Annex and confirmed the meeting window between the second and third bell — said it this time as a confirmation, not a schedule.",
-        "[d1] Loki kissed her hand and confirmed the meeting at the Annex; she agreed and walked toward the main works without hurrying — and looked at Cy longer than she looked at most things."
+        "[d1] Loki kissed her hand and confirmed the meeting at the Annex; she agreed and walked toward the main works without hurrying — and looked at Cy longer than she looked at most things.",
+        "[d1] Walked away from the plaza with her characteristic precision — paused at the edge, looked back once to confirm Loki was watching, then departed toward the main works."
       ],
       "knownFacts": [
         "Writes and records for a living, or does so as a posting duty",
@@ -320,7 +315,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Departing the notices board — walking toward the Pressure-Routing Annex ahead of the second bell.",
+      "statusNote": "Departing the plaza — walking toward the Pressure-Routing Annex ahead of the second bell; meeting confirmed between bells.",
       "domains": {
         "primary": "wright"
       },
@@ -410,7 +405,7 @@
     "lastSharedReadAt": "2026-07-21T17:13:37.964Z",
     "lastTickWorldDay": 21,
     "lastCanonWorldDay": 21,
-    "turnsSinceOffer": 9,
+    "turnsSinceOffer": 10,
     "recentOffers": [
       {
         "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
@@ -528,18 +523,18 @@
     }
   },
   "tendencies": {
-    "devotion": 11.147297119989874,
-    "cerebral": 0.8166518036622618,
-    "social": 8.028849515368652,
-    "strategic": 1.7401639943847658,
-    "cautious": 0.8810956933593749,
-    "amorous": 5.803109375,
-    "generous": 0.9268593749999999
+    "devotion": 10.868614691990127,
+    "cerebral": 2.7962355085707054,
+    "social": 7.828128277484435,
+    "strategic": 1.6966598945251465,
+    "cautious": 0.8590683010253904,
+    "amorous": 5.6580316406249995,
+    "generous": 0.9036878906249999
   },
   "aptitudes": [
     "faithful"
   ],
-  "actionCount": 9,
+  "actionCount": 10,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -658,8 +653,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784660589541,
-  "rev": 24,
+  "updatedAt": 1784662137025,
+  "rev": 25,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -808,7 +803,7 @@
           "entityId": "tessvel-cairn",
           "type": "npc",
           "birthWeight": 2,
-          "engagementScore": 15,
+          "engagementScore": 17,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -856,6 +851,10 @@
             {
               "kind": "interact",
               "day": 1
+            },
+            {
+              "kind": "interact",
+              "day": 1
             }
           ],
           "createdDay": 1,
@@ -882,7 +881,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_gearlands": 10
+    "the_gearlands": 11
   },
   "opLossPending": false,
   "sessions": [
@@ -897,10 +896,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-21T17:40:12.510Z",
-      "lastAt": "2026-07-21T19:03:09.538Z",
+      "lastAt": "2026-07-21T19:28:57.025Z",
       "startDay": 21,
       "endDay": 21,
-      "beats": 9
+      "beats": 10
     }
   ],
   "establishedFacts": [],
@@ -913,19 +912,19 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 10,
-    "choices": 10,
+    "sceneSummary": 11,
+    "choices": 11,
     "characterDeltas": 2,
-    "scene": 10,
+    "scene": 11,
     "placeUpdates": 2,
     "codexUpdates": 6,
-    "timeOps": 10,
+    "timeOps": 11,
     "offer": 1,
     "generateRequest": 2,
     "sceneEnded": 1,
-    "npcUpdates": 8
+    "npcUpdates": 9
   },
-  "_opTurns": 10,
+  "_opTurns": 11,
   "customAbilities": {},
   "companionBonds": {},
   "practice": {

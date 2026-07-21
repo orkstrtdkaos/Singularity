@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 1,
-  "xp": 41,
+  "xp": 44,
   "attributes": {
     "physical": 3,
     "mental": 3,
@@ -61,7 +61,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 69,
+  "energy": 68,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -169,14 +169,30 @@
         "player": "Examine the anomalous resonance signature Cy flagged — use See the Made Thing to read what it actually is before Tessvel arrives",
         "summary": "Loki's attempt to read the anomalous resonance at the Annex doorway failed — the works' dense lattice-noise drowned the signal, leaving only an impression of something old, pre-Annex, unclassifiable.",
         "narration": "You crouch at the doorway where Cy stopped — the pressure-gauge to your left, the threshold itself unremarkable to the eye — and you reach through the lattice with See the Made Thing, trying to read whatever Cy flagged. The dense signal-noise of the works closes around you immediately. It is like trying to hear a single voice in a market at full cry. You find the doorway's material facts: timber, iron threshold-plate, the faint harmonic of the attention-deflection you laid there yourself. Below that, something else — a texture that doesn't belong to the room. But the lattice is too loud. The signal crowds the shape before you can hold it still enough to read. You get an impression only: old, not this building's old, older than the Annex by a long way, and then the surrounding noise rolls back over it and the reading collapses. You are left with a headache at the bridge of your nose and nothing you could write down.\n\nCy, from the far end of the table, clicks twice. Its lens is aimed at the doorway, not at you. It does not offer a translation.\n\nThe bell has not rung yet, but it will soon. The morning light is past its sharpest angle and has begun to spread, and the sounds from the main works outside have picked up — more footsteps, a pipe-joint being hammered somewhere two passages over. The partial attention-deflection at the door is already thin against that rising traffic."
+      },
+      {
+        "player": "Step fully across the threshold and try again from inside — the lattice may read differently a half-pace deeper",
+        "summary": "Loki reads the threshold deeper — an old boundary, pre-Annex, pressed into the substrate like scar tissue; the second bell sounds.",
+        "narration": "You step across the threshold and crouch on the inside of the doorway, where the timber meets the iron plate. The lattice here is still loud — the works breathe into every corner of this room — but you are past the outer ring of it now, and something shifts. The signal-noise does not quiet, but it layers differently, the way a crowd sounds different when you are in it rather than at its edge.\n\nYou reach again with See the Made Thing. This time you hold a shape before it dissolves. Old. That is the clearest word for it — old in a way that has nothing to do with the timber or the iron plate, which are new by comparison. The impression is of something laid down before the works were built, before the Annex was built, before whatever stood here before the Annex. It is not a signal. It is a record — the ghost of a function, pressed into the substrate so long ago that the substrate has grown around it the way scar tissue grows around wire.\n\nYou cannot read what the function was. The lattice-noise is still too thick for that. But the shape of it is circular — a boundary, not a mechanism. Something was meant to stop here, or to be stopped here. Cy's lens tracks toward you from the far end of the table, irises, and then looks away, as if it already knew what you would find and has no comment to add.\n\nFrom outside, faint and clear, the second bell begins to sound through the works."
       }
     ],
     "lastTurn": {
-      "narration": "You crouch at the doorway where Cy stopped — the pressure-gauge to your left, the threshold itself unremarkable to the eye — and you reach through the lattice with See the Made Thing, trying to read whatever Cy flagged. The dense signal-noise of the works closes around you immediately. It is like trying to hear a single voice in a market at full cry. You find the doorway's material facts: timber, iron threshold-plate, the faint harmonic of the attention-deflection you laid there yourself. Below that, something else — a texture that doesn't belong to the room. But the lattice is too loud. The signal crowds the shape before you can hold it still enough to read. You get an impression only: old, not this building's old, older than the Annex by a long way, and then the surrounding noise rolls back over it and the reading collapses. You are left with a headache at the bridge of your nose and nothing you could write down.\n\nCy, from the far end of the table, clicks twice. Its lens is aimed at the doorway, not at you. It does not offer a translation.\n\nThe bell has not rung yet, but it will soon. The morning light is past its sharpest angle and has begun to spread, and the sounds from the main works outside have picked up — more footsteps, a pipe-joint being hammered somewhere two passages over. The partial attention-deflection at the door is already thin against that rising traffic.",
-      "sceneSummary": "Loki's attempt to read the anomalous resonance at the Annex doorway failed — the works' dense lattice-noise drowned the signal, leaving only an impression of something old, pre-Annex, unclassifiable.",
+      "narration": "You step across the threshold and crouch on the inside of the doorway, where the timber meets the iron plate. The lattice here is still loud — the works breathe into every corner of this room — but you are past the outer ring of it now, and something shifts. The signal-noise does not quiet, but it layers differently, the way a crowd sounds different when you are in it rather than at its edge.\n\nYou reach again with See the Made Thing. This time you hold a shape before it dissolves. Old. That is the clearest word for it — old in a way that has nothing to do with the timber or the iron plate, which are new by comparison. The impression is of something laid down before the works were built, before the Annex was built, before whatever stood here before the Annex. It is not a signal. It is a record — the ghost of a function, pressed into the substrate so long ago that the substrate has grown around it the way scar tissue grows around wire.\n\nYou cannot read what the function was. The lattice-noise is still too thick for that. But the shape of it is circular — a boundary, not a mechanism. Something was meant to stop here, or to be stopped here. Cy's lens tracks toward you from the far end of the table, irises, and then looks away, as if it already knew what you would find and has no comment to add.\n\nFrom outside, faint and clear, the second bell begins to sound through the works.",
+      "sceneSummary": "Loki reads the threshold deeper — an old boundary, pre-Annex, pressed into the substrate like scar tissue; the second bell sounds.",
       "choices": [
         {
-          "label": "Ask Cy directly — describe what you sensed, and see if it can classify 'old, before this building' from its side",
+          "label": "Wait at the table and say nothing to Tessvel about the threshold — let her arrive and watch how she crosses it",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask Cy — quietly, before she arrives — whether it has seen this pattern before in the old service-ways",
           "attribute": "mental",
           "subAttribute": "reason",
           "difficulty": 0,
@@ -186,44 +202,34 @@
           "trivial": true
         },
         {
-          "label": "Step fully across the threshold and try again from inside — the lattice may read differently a half-pace deeper",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
+          "label": "Mark the exact boundary with a chalk line on the floor so the shape is visible — and explain it when Tessvel arrives",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "difficulty": 0,
           "intentTags": [
             "study",
             "careful"
           ],
-          "abilityId": "see_the_made_thing"
-        },
-        {
-          "label": "Leave it — take a seat at the table and look ready and at ease when Tessvel arrives",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "intentTags": [
-            "plan"
-          ],
           "trivial": true
         },
         {
-          "label": "Have a look at the nearest shelf of bound logs — eleven days of divergence is recorded somewhere in this room",
+          "label": "Greet Tessvel the moment she steps through — watch whether she hesitates or flinches at the threshold without knowing why",
           "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 0,
+          "subAttribute": "insight",
+          "difficulty": 15,
           "intentTags": [
-            "study",
-            "scout"
+            "scout",
+            "study"
           ],
-          "trivial": true
+          "trivial": false
         }
       ],
       "scene": {
-        "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, third gate left of the big wheel. Narrow room: floor-to-ceiling shelving both sides, long table with morning light now spread and softening from the high east window. One chair. Open gate doorway with a partial attention-deflection across its threshold — growing thin against rising foot-traffic outside.",
+        "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, third gate left of the big wheel. Narrow room: floor-to-ceiling shelving both sides, long table with morning light spread and softening from the high east window. One chair. The second bell is sounding outside.",
         "npcsPresent": [
           {
             "name": "Cy",
-            "state": "At the far end of the table — lens aimed at the doorway, lamp angled down, clicked twice, not moving."
+            "state": "At the far end of the table — lens briefly tracked toward Loki, now angled away, lamp at its habitual angle. Not moving."
           }
         ],
         "objects": [
@@ -231,12 +237,12 @@
           "Shelves of bound logs — dates inked on spines, floor to ceiling",
           "Pressure-gauge at the door frame — needle in the green",
           "One chair — at the near end of the table",
-          "Open gate doorway — partial attention-deflection across its threshold, thinning"
+          "Open gate doorway — partial attention-deflection across its threshold, thinning; old circular boundary-impression in the substrate at the threshold, now partially read"
         ],
         "threads": [
-          "Anomalous resonance at the threshold — impression only: old, pre-Annex; could not be read through lattice noise",
-          "Attention-deflection is partial and thinning — will fail under deliberate attention or when the bell rings and gate traffic thickens",
-          "Tessvel has not yet arrived — window is between second and third bell, closing",
+          "Old boundary-record at the threshold — circular, pre-Annex, function unread; something was meant to stop here or be stopped here",
+          "Attention-deflection is partial and thinning — will fail under deliberate attention or as foot-traffic thickens",
+          "Tessvel has not yet arrived — window is closing; second bell now sounding",
           "Tessvel's hand-log has diverged from automated markers for eleven days — her records are on these shelves",
           "The ring-form residue at the intake matches regulated nanite deposition — no senior wright has acted on it"
         ]
@@ -247,7 +253,7 @@
           "label": "Pressure-Routing Annex",
           "kind": "mystery",
           "entityId": "pressure-routing-annex",
-          "fact": "Something beneath the Annex doorway is older than the building — pre-Annex, pre-current works, the impression surviving through lattice noise before it was drowned. Could not be classified. Cy aimed its lens at the spot and did not explain.",
+          "fact": "The threshold holds a circular boundary-impression — old enough that the substrate has grown around it like scar tissue. Not a mechanism: a boundary. Something was meant to stop here, or to be stopped. The shape is pre-Annex, pre-works. Function still unread.",
           "links": [
             "tessvel-cairn",
             "the-water-crisis",
@@ -257,15 +263,15 @@
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A quick attempted reading at the threshold — a few minutes at most"
+        "why": "a short wait and examination before the second bell"
       }
     },
     "sceneState": {
-      "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, third gate left of the big wheel. Narrow room: floor-to-ceiling shelving both sides, long table with morning light now spread and softening from the high east window. One chair. Open gate doorway with a partial attention-deflection across its threshold — growing thin against rising foot-traffic outside.",
+      "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, third gate left of the big wheel. Narrow room: floor-to-ceiling shelving both sides, long table with morning light spread and softening from the high east window. One chair. The second bell is sounding outside.",
       "npcsPresent": [
         {
           "name": "Cy",
-          "state": "At the far end of the table — lens aimed at the doorway, lamp angled down, clicked twice, not moving."
+          "state": "At the far end of the table — lens briefly tracked toward Loki, now angled away, lamp at its habitual angle. Not moving."
         }
       ],
       "objects": [
@@ -273,12 +279,12 @@
         "Shelves of bound logs — dates inked on spines, floor to ceiling",
         "Pressure-gauge at the door frame — needle in the green",
         "One chair — at the near end of the table",
-        "Open gate doorway — partial attention-deflection across its threshold, thinning"
+        "Open gate doorway — partial attention-deflection across its threshold, thinning;"
       ],
       "threads": [
-        "Anomalous resonance at the threshold — impression only: old, pre-Annex; could not be read through lattice noise",
-        "Attention-deflection is partial and thinning — will fail under deliberate attention or when the bell rings and gate traffic thickens",
-        "Tessvel has not yet arrived — window is between second and third bell, closing",
+        "Old boundary-record at the threshold — circular, pre-Annex, function unread; something was meant to stop here or be stopped here",
+        "Attention-deflection is partial and thinning — will fail under deliberate attention or as foot-traffic thickens",
+        "Tessvel has not yet arrived — window is closing; second bell now sounding",
         "Tessvel's hand-log has diverged from automated markers for eleven days — her records are on these shelves",
         "The ring-form residue at the intake matches regulated nanite deposition — no senior wright has acted on it"
       ]
@@ -429,7 +435,7 @@
     "lastSharedReadAt": "2026-07-21T21:10:36.252Z",
     "lastTickWorldDay": 21,
     "lastCanonWorldDay": 21,
-    "turnsSinceOffer": 14,
+    "turnsSinceOffer": 15,
     "recentOffers": [
       {
         "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
@@ -567,7 +573,8 @@
         "label": "Pressure-Routing Annex",
         "kind": "mystery",
         "facts": [
-          "[d1] Something beneath the Annex doorway is older than the building — pre-Annex, pre-current works, the impression surviving through lattice noise before it was drowned. Could not be classified. Cy aimed its lens at the spot and did not explain."
+          "[d1] Something beneath the Annex doorway is older than the building — pre-Annex, pre-current works, the impression surviving through lattice noise before it was drowned. Could not be classified. Cy aimed its lens at the spot and did not explain.",
+          "[d1] The threshold holds a circular boundary-impression — old enough that the substrate has grown around it like scar tissue. Not a mechanism: a boundary. Something was meant to stop here, or to be stopped. The shape is pre-Annex, pre-works. Function still unread."
         ],
         "links": [
           "tessvel-cairn",
@@ -582,18 +589,18 @@
     }
   },
   "tendencies": {
-    "devotion": 9.821835485020438,
-    "cerebral": 4.4775491684309845,
-    "social": 8.024809730621822,
-    "strategic": 4.409501001191464,
-    "cautious": 0.7763296208564376,
-    "amorous": 6.0637196784059135,
-    "generous": 0.8166518036622618
+    "devotion": 9.576289597894927,
+    "cerebral": 5.36561043922021,
+    "social": 7.824189487356276,
+    "strategic": 4.299263476161678,
+    "cautious": 1.7569213803350268,
+    "amorous": 5.912126686445766,
+    "generous": 0.7962355085707052
   },
   "aptitudes": [
     "faithful"
   ],
-  "actionCount": 14,
+  "actionCount": 15,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -712,8 +719,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784670237870,
-  "rev": 33,
+  "updatedAt": 1784671164942,
+  "rev": 34,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -946,7 +953,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_gearlands": 15
+    "the_gearlands": 16
   },
   "opLossPending": false,
   "sessions": [
@@ -961,10 +968,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-21T17:40:12.510Z",
-      "lastAt": "2026-07-21T21:43:57.868Z",
+      "lastAt": "2026-07-21T21:59:24.941Z",
       "startDay": 21,
       "endDay": 21,
-      "beats": 14
+      "beats": 15
     }
   ],
   "establishedFacts": [],
@@ -977,26 +984,26 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 14,
-    "choices": 14,
+    "sceneSummary": 15,
+    "choices": 15,
     "characterDeltas": 4,
-    "scene": 14,
+    "scene": 15,
     "placeUpdates": 3,
-    "codexUpdates": 9,
-    "timeOps": 14,
+    "codexUpdates": 10,
+    "timeOps": 15,
     "offer": 1,
     "generateRequest": 2,
     "sceneEnded": 2,
     "npcUpdates": 10,
     "moveTo": 1
   },
-  "_opTurns": 14,
+  "_opTurns": 15,
   "customAbilities": {},
   "companionBonds": {},
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "see_the_made_thing": 4,
+      "see_the_made_thing": 5,
       "falsecraft": 2,
       "the_wrong_reality": 1,
       "the_misdirect": 1

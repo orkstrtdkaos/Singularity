@@ -36,8 +36,35 @@
 > epic figure is categorically excluded today. Erik's *"when big or interesting things happen"* is the
 > governor and is load-bearing: rarity is the point, and it is the cost control too.
 >
-> **➡️ Sequencing is yours** — SNG-197 rides the braid work you are already in; SNG-198 is a separate pass.
-> ROUND 2 on both. SNG-198 §OQ5 asks directly whether it collides with SNG-134; I would rather find that
+> **`po/SPEC_SNG-199_one_person_one_codex.md`** — Erik's codex + identity read. Six defects, four with a
+> line number, and they compound.
+>
+> ⛔ **`npcs.js` never calls `applyCodexUpdates`. Not once.** (Verified — the only codex auto-mirror in the
+> engine is `worldtick.js:364`.) Meeting a person creates no codex node; reaching a place creates none. The
+> codex is populated *entirely* by the GM volunteering `codexUpdates` — L2 on the player's primary memory
+> surface. The inversion: **the codex reliably records what people did while Erik was away and unreliably
+> records that he met them.** That is why his mother and Cairnhold are absent — not a resolution failure,
+> a write that never happened.
+>
+> ⛔ **`prettifyNpcName:63` early-returns any string with a capital and no dot/underscore as "already
+> human-shaped."** It is a slug prettifier standing in a validator's position, so a descriptive clause in
+> the `name` field *becomes* the name — then `:83` cuts it with a raw `.slice(0,60)` while **the very next
+> line** uses `smartClamp` (SNG-152's word-boundary clamp) for `description`. Result: an NPC named
+> *"Siol — Elven traveler at the Hub plaza, tall, pale coat, bir"*.
+>
+> ⛔ **`findExistingNpc:49–58` never reads `aliases`** — which the same module maintains across five write
+> sites. Identity ledger written, never opened (L1). Under that matcher *Hesta Vorn* / *Maret Weir* /
+> *Silas's Mother* are **guaranteed** three records, and `suggestMerges` is not offering the pair.
+> ⛔ **Do not fix by loosening string matching** — the signal is relational ("my mother"), not lexical.
+>
+> Also: **"Ama Dreya"** — the player conferred a name, the GM *used it in narration* (gallery caption) and
+> recorded it nowhere. `nameNpc`/`nameExtend` model world-reveals-a-name; there is no op for
+> player-confers-a-name. And codex **search** leaves the NOTABLE + merge sections unfiltered while printing
+> *"Nothing cataloged yet"* over six visible entries.
+>
+> **➡️ Sequencing is yours** — SNG-197 rides the braid work you are already in; SNG-198 and SNG-199 are
+> separate passes. ROUND 2 on all three. ⚠️ **SNG-198, SNG-199 and SNG-134 all touch the codex/accumulated
+> state ledger** — if they should be sequenced or merged, say so BEFORE any of them build. SNG-198 §OQ5 asks directly whether it collides with SNG-134; I would rather find that
 > overlap now than merge two half-built ledgers later.
 
 

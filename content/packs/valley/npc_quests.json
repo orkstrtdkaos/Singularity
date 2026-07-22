@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "note": "SNG-203 tier-6 exemplars — the taste generate('npc_quest') authors against. Both drawn from existing NPCs' authored wants.",
+  "npcQuests": [
+    {
+      "schemaVersion": 1,
+      "id": "npcq_ilma_the_missing_page",
+      "name": "The Missing Page",
+      "giver": "keeper_ilma",
+      "want": "Thirty years a keeper, and she cannot abide a record with a hole in it — a single ledger page has gone missing from the district archive and it is making her teeth itch.",
+      "task": "Find the missing archive page (last seen in the Edge District record room) and return it to Keeper Ilma.",
+      "reward": "Ilma's good regard — and she tells you one true thing about the district she would not tell a stranger.",
+      "effect": { "type": "disposition", "people": "verist", "delta": 1 },
+      "promotable": true
+    },
+    {
+      "schemaVersion": 1,
+      "id": "npcq_tam_the_late_fare",
+      "name": "The Late Fare",
+      "giver": "the_ferryman_tam",
+      "want": "Tam the ferryman is owed a fare by someone who crossed his river three days ago and has not come back to pay — and Tam does not chase debts, he just stops carrying people, which is worse.",
+      "task": "Find the traveler who owes Tam a crossing-fare and either collect it or settle it yourself.",
+      "reward": "Free passage across Tam's river for the rest of your time in the valley, and a ferryman who remembers you kindly.",
+      "effect": { "type": "codex_fact", "text": "Tam the ferryman owes you a good turn; his crossings are open to you." },
+      "promotable": false
+    }
+  ]
+}

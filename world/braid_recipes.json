@@ -35,6 +35,41 @@
         "characterName": "Silas Weir"
       },
       "foundWorldDay": 22
+    },
+    "deathsense+order_sense": {
+      "braidKey": "deathsense+order_sense",
+      "name": "Undying Ledger",
+      "description": "Where Deathsense reads the cold signatures of endings and Order-Sense traces the rigid lattice of what-must-be, The Undying Ledger fuses both into a single sovereign perception: the practitioner sees not merely that death approaches, nor merely that patterns hold their shape — but reads the precise architecture of fate itself, the numbered threads that bind each living thing to its appointed…",
+      "notFor": "The Undying Ledger cannot create new fates, resurrect the dead, alter an entry already fulfilled, or perceive anything outside the axis of endings and structured order — it is blind to chaos, to love, to chance that has not yet…",
+      "emergentFunction": "bind",
+      "tree": [
+        {
+          "name": "Pale Inscription",
+          "grants": "The practitioner reads the death-pattern of any creature within sight simultaneously — not sequentially as raw Deathsense demands — perceiving every nearby ending as a single illuminated page…",
+          "cannot": "Cannot yet distinguish which threads are mutable and which are fixed; all entries look equally inevitable at this rank."
+        },
+        {
+          "name": "The Sealed Margin",
+          "grants": "The practitioner identifies the one moment in a target's near future where their fate-thread is thinnest and most legible. Intervening in that exact moment — a strike, a word, a touch — lands with…",
+          "cannot": "Cannot yet enforce the binding; the practitioner sees the appointed moment but cannot yet compel the target toward it against their will."
+        },
+        {
+          "name": "Writ of Completion",
+          "grants": "The Ledger's true power made manifest: the practitioner binds a target to their own foreseen entry, tethering them to the Ledger's record of their end. The bound target finds every escape route…",
+          "cannot": "Cannot rewrite the entry itself — it can only enforce what is already recorded. A fate the Ledger does not yet contain cannot be bound. Binding two targets…"
+        }
+      ],
+      "namedBy": "player",
+      "sourceNames": [
+        "Deathsense",
+        "Order-Sense"
+      ],
+      "contributedBy": {
+        "playerKey": "player-s9z9u1",
+        "characterId": "char-mrhs8286",
+        "characterName": "Silas Weir"
+      },
+      "foundWorldDay": 22
     }
   }
 }

@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 18,
-  "xp": 1747,
+  "xp": 1758,
   "attributes": {
     "physical": 4,
     "mental": 6,
@@ -120,7 +120,7 @@
   "maxHealth": 115,
   "health": 115,
   "maxEnergy": 185,
-  "energy": 155,
+  "energy": 151,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1686,55 +1686,22 @@
         "player": "Look at her and tell her she's beautiful... trace the scars you can see from her bare back and shoulders... kiss her neck.",
         "summary": "Silas traces Pell's scars and tells her she's beautiful — the evening finds its pace, unhurried.",
         "narration": "The tallow stub has burned another quarter-inch since you filled the basin. The room is very quiet.\n\nYou set the cloth on the basin's rim and look at her — the line of her back in the low light, the places where the brigandine's edge has left its long familiar mark across the shoulder, the older scars that predate anything you know about her. There is a short one below the left shoulder blade that curves like a parenthesis, and a longer one at the side of her ribs that she has never explained and you have never pushed. In the tallow light they read like a record kept in the only material that holds.\n\nYou tell her she is beautiful. You say it plainly, the way she taught you to say the things that matter — without preamble, without softening it into something smaller. You trace the parenthesis scar with one finger, slow, and then the longer one at her ribs, and you feel her breathe in and hold it for a moment.\n\nThen you lean forward and press your mouth to the side of her neck — just below the ear, where the hair is loose and the skin is warm from the basin's work. She doesn't move away. She turns her head the smallest amount, which is Pell for come here, and you stay there while the stub burns and the basin cools and the Waymarker on the shelf catches nothing but the dark."
+      },
+      {
+        "player": "Put some attention on the places that tended to bear the most weight from the brigadine - use the Kept Breath on them to bolster her in those places so that in the future she'll not be discomfited by it at all. Then tell her you want her.",
+        "summary": "Silas tends the armor-worn places with The Kept Breath — two hold, one defers — then tells Pell plainly that he wants her. She covers his hand with hers and says his name.",
+        "narration": "You bring your hands to her shoulders and hold them there a moment before doing anything else. The left one, the one that rides high — you can feel where the brigandine's collar-rib has pressed its argument into the muscle across years of use. You set your thumbs at the base of her neck and let the craft settle in, quiet and conserved, the way The Kept Breath works best: not a surge, but a patient recalibration, the body told where its own threshold is and reminded it can hold there. You work the attention down the line of her spine, the places where the plate rows end and the strain concentrates — the hip-points, the shoulders, the small of her back where she braces a swing. The craft does not heal anything that is not ending. That is the honest limit of it. But it finds the wear that was about to become something worse, and holds it at enough.\n\nIt does not take completely. The left shoulder resists — that set is too old, too habitual, the kind of pattern the body has decided is just how things are now. The Kept Breath can tell it otherwise, but it cannot make the body believe it in a single evening. You feel that clearly through your palms: two points hold, one defers. Pell notices. She makes a small sound that is not quite a question, and she turns her head a degree to the side — not to look at you, just to orient.\n\nYou tell her you want her. You say it plainly, in the same register you use when you mean something you are not going to walk back. The room holds the words for a moment after they land.\n\nShe is quiet. Not retreating — you know the difference by now. She brings her right hand up and covers your left where it rests on her shoulder, and she holds it there, unhurried. Then she says, low and without looking at you: 'I know.' A pause, the tallow flame not moving. 'Silas.' Just the name. The way she uses it when she has decided something."
       }
     ],
     "lastTurn": {
-      "narration": "The tallow stub has burned another quarter-inch since you filled the basin. The room is very quiet.\n\nYou set the cloth on the basin's rim and look at her — the line of her back in the low light, the places where the brigandine's edge has left its long familiar mark across the shoulder, the older scars that predate anything you know about her. There is a short one below the left shoulder blade that curves like a parenthesis, and a longer one at the side of her ribs that she has never explained and you have never pushed. In the tallow light they read like a record kept in the only material that holds.\n\nYou tell her she is beautiful. You say it plainly, the way she taught you to say the things that matter — without preamble, without softening it into something smaller. You trace the parenthesis scar with one finger, slow, and then the longer one at her ribs, and you feel her breathe in and hold it for a moment.\n\nThen you lean forward and press your mouth to the side of her neck — just below the ear, where the hair is loose and the skin is warm from the basin's work. She doesn't move away. She turns her head the smallest amount, which is Pell for come here, and you stay there while the stub burns and the basin cools and the Waymarker on the shelf catches nothing but the dark.",
-      "sceneSummary": "Silas traces Pell's scars and tells her she's beautiful — the evening finds its pace, unhurried.",
-      "choices": [
-        {
-          "label": "Stay with her — let the evening be only this.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "romantic"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask about the parenthesis scar — you've never pushed, but tonight feels like you could.",
-          "attribute": "social",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "romantic",
-            "comfort"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Say nothing more — let the quiet hold the rest of it.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "intentTags": [
-            "romantic"
-          ],
-          "trivial": true
-        }
-      ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
+      "narration": "You bring your hands to her shoulders and hold them there a moment before doing anything else. The left one, the one that rides high — you can feel where the brigandine's collar-rib has pressed its argument into the muscle across years of use. You set your thumbs at the base of her neck and let the craft settle in, quiet and conserved, the way The Kept Breath works best: not a surge, but a patient recalibration, the body told where its own threshold is and reminded it can hold there. You work the attention down the line of her spine, the places where the plate rows end and the strain concentrates — the hip-points, the shoulders, the small of her back where she braces a swing. The craft does not heal anything that is not ending. That is the honest limit of it. But it finds the wear that was about to become something worse, and holds it at enough.\n\nIt does not take completely. The left shoulder resists — that set is too old, too habitual, the kind of pattern the body has decided is just how things are now. The Kept Breath can tell it otherwise, but it cannot make the body believe it in a single evening. You feel that clearly through your palms: two points hold, one defers. Pell notices. She makes a small sound that is not quite a question, and she turns her head a degree to the side — not to look at you, just to orient.\n\nYou tell her you want her. You say it plainly, in the same register you use when you mean something you are not going to walk back. The room holds the words for a moment after they land.\n\nShe is quiet. Not retreating — you know the difference by now. She brings her right hand up and covers your left where it rests on her shoulder, and she holds it there, unhurried. Then she says, low and without looking at you: 'I know.' A pause, the tallow flame not moving. 'Silas.' Just the name. The way she uses it when she has decided something.",
+      "sceneSummary": "Silas tends the armor-worn places with The Kept Breath — two hold, one defers — then tells Pell plainly that he wants her. She covers his hand with hers and says his name.",
       "scene": {
-        "setting": "A small stone room in Ama's house in Cairnhold — warm from the day's cooking, tallow stub burned a little further down on the shelf beside the Waymarker and the father's letter. Night, early spring.",
+        "setting": "A small stone room in Ama's house in Cairnhold — warm from the day's cooking, tallow stub burned further down on the shelf beside the Waymarker and the father's letter. Night, early spring.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Seated on the edge of the bed, back to Silas, head turned slightly — the smallest of invitations."
+            "state": "Seated on the edge of the bed, back to Silas — her right hand covering his left where it rests on her shoulder, head turned slightly, very still."
           },
           {
             "name": "Huginn",
@@ -1752,29 +1719,82 @@
         "threads": [
           "The parenthesis scar below Pell's left shoulder blade — she has never explained it.",
           "The March-or-Marsh question — a door she has not yet decided to open.",
-          "The evening still open between them."
+          "Pell has said his name in the way she uses when she has decided something — the evening still open between them.",
+          "The left shoulder's old set did not fully hold — the Kept Breath reached it but could not make it believe."
         ]
       },
+      "choices": [
+        {
+          "label": "Turn her gently — let her face you, and let whatever follows follow.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask her what she decided — the name, the way she said it, you want to know what it means.",
+          "attribute": "social",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Say nothing. Put your arms around her from behind and stay.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Come back to the left shoulder — try a slower, more patient approach to what the Kept Breath could not fully reach tonight.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "difficulty": 15,
+          "intentTags": [
+            "sustain",
+            "careful"
+          ],
+          "abilityId": "the_kept_breath",
+          "energyCost": 2,
+          "trivial": false
+        }
+      ],
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "pell",
+          "npcId": "pell-ran-marsh",
           "name": "Pell Ran Marsh",
-          "note": "Received Silas's plainly spoken compliment and the tracing of her scars without deflecting — turned her head the smallest amount in answer. The evening is still open.",
-          "statusNote": "In Silas's quarters in Ama's house in Cairnhold — the stub burning lower, the basin cooling, the evening unhurried."
+          "note": "Held Silas's hand on her shoulder and said his name — the way she uses it when she has decided something. The left shoulder's old set is too habitual for a single evening; she noticed the limit of the craft plainly.",
+          "statusNote": "In Silas's quarters in Ama's house in Cairnhold — her hand over his, the evening still open.",
+          "learned": [
+            "The Kept Breath reached the armor-worn places but the left shoulder's set is too old to fully hold in one pass — she registered this."
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a quiet intimate beat — a few minutes passing in the warm room"
+        "why": "a quiet exchange in the room, no real time passing"
+      },
+      "characterDeltas": {
+        "health": 0,
+        "energy": -2
       }
     },
     "sceneState": {
-      "setting": "A small stone room in Ama's house in Cairnhold — warm from the day's cooking, tallow stub burned a little further down on the shelf beside the Waymarker and the father's letter. Night, early spring.",
+      "setting": "A small stone room in Ama's house in Cairnhold — warm from the day's cooking, tallow stub burned further down on the shelf beside the Waymarker and the father's letter. Night, early spring.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Seated on the edge of the bed, back to Silas, head turned slightly — the smallest of invitations."
+          "state": "Seated on the edge of the bed, back to Silas — her right hand covering his left where it rests on her shoulder, head tur"
         },
         {
           "name": "Huginn",
@@ -1792,7 +1812,8 @@
       "threads": [
         "The parenthesis scar below Pell's left shoulder blade — she has never explained it.",
         "The March-or-Marsh question — a door she has not yet decided to open.",
-        "The evening still open between them."
+        "Pell has said his name in the way she uses when she has decided something — the evening still open between them.",
+        "The left shoulder's old set did not fully hold — the Kept Breath reached it but could not make it believe."
       ]
     }
   },
@@ -2639,7 +2660,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d12] Said nothing at the promise — sat back, shoulders settled. Heard what she needed.",
         "[d12] Named the second layer of the Waymarker as the load-bearing reason for the Crossing leg. The sequence landed for her as structural, not exploratory.",
         "[d12] Took Silas's hand without hesitation and fed ironsense into the Waymarker — read the shadow-build from the inside out and named the load-bearing truth: the father was watching the Disputed Zone accumulation, not just the hollow.",
         "[d12] Named the accumulation plainly — not one thing, but where three lines end. Her ironsense and the Waymarker worked together to resolve the northern edge.",
@@ -2648,17 +2668,18 @@
         "[d12] Released Silas's hand when the Waymarker was set down; followed him to his quarters without prompting, watching him with quiet attention.",
         "[d12] Named what she sees in Silas — a man building toward something, not merely traveling toward it. Said she doesn't know what the post means for her yet. Acknowledged she'd like to know about her father's line. Hair undone, bracer off, said yes.",
         "[d12] Named the March question as a door not yet decided — held Silas's hands at her shoulders for a moment before turning back to face him. The evening quiet between them.",
-        "[d12] Received Silas's plainly spoken compliment and the tracing of her scars without deflecting — turned her head the smallest amount in answer. The evening is still open."
+        "[d12] Received Silas's plainly spoken compliment and the tracing of her scars without deflecting — turned her head the smallest amount in answer. The evening is still open.",
+        "[d12] Held Silas's hand on her shoulder and said his name — the way she uses it when she has decided something. The left shoulder's old set is too habitual for a single evening; she noticed the limit of the craft plainly."
       ],
       "knownFacts": [
-        "The chalk ward-marks at Stillwater's Trouble's mouth are load-bearing, not decorative — the same hand that left room in the Waymarker's locating layer placed them to last",
         "The Wright's finish connects the Waymarker's open second layer to the hollow's structure — the same hand, building toward something unfinished",
         "The drainage channel runs through or past an unfinished deliberate accumulation at the Disputed Zone's upper reach — same intention as Stillwater's Trouble, older",
         "The Disputed Zone accumulation sits at the convergence of three structural channels — two finished, one left open",
         "The older mark in the third line is a builder's datum — set to guide what comes after, not to finish. Both craftsmen stopped at the same place, and that is a shared limit, not coincidence.",
         "Distinguishes between a man traveling toward something and a man building toward something — Silas is the second kind, and this matters to her.",
         "Would like to know more about her father's line — the March or Marsh question is not closed for her.",
-        "The March-or-Marsh question feels to her like a door she has not yet decided whether to open — not wrong, not right, simply waiting."
+        "The March-or-Marsh question feels to her like a door she has not yet decided whether to open — not wrong, not right, simply waiting.",
+        "The Kept Breath reached the armor-worn places but the left shoulder's set is too old to fully hold in one pass — she registered this."
       ],
       "skillsObserved": [
         "precise diagnosis of a failed rune-work attempt from positio",
@@ -2669,7 +2690,7 @@
         "reading a structural mark's pressure and interval from an ir"
       ],
       "status": "active",
-      "statusNote": "In Silas's quarters in Ama's house in Cairnhold — the stub burning lower, the basin cooling, the evening unhurried.",
+      "statusNote": "In Silas's quarters in Ama's house in Cairnhold — her hand over his, the evening still open.",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 12
@@ -4203,7 +4224,7 @@
     "lastTickWorldDay": 22,
     "lastCanonWorldDay": 22,
     "lastGenCount": 548,
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "The shadow-build showed Calvar's drainage failure precisely — the sleeve geometry, the collar, the east-bend junction — before it showed…",
@@ -5605,21 +5626,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 11.826162818872527,
-    "cerebral": 18.079781023003186,
-    "social": 13.770444112688093,
-    "generous": 2.8398736090392567,
-    "cautious": 3.6891126290346485,
-    "physical": 0.15357800516693645,
-    "risky": 0.16105696330604438,
-    "ruthless": 0.051351252670280914,
-    "carousing": 0.5593934927296134,
-    "amorous": 4.191939541553994,
-    "patient": 0.32006634546484347,
-    "stealth": 0.01990387672727011,
-    "devotion": 0.4066179887169946,
-    "craft": 1.1966932308918488,
-    "leadership": 0.10131294149608104
+    "strategic": 11.530508748400713,
+    "cerebral": 17.627786497428104,
+    "social": 15.42618300987089,
+    "generous": 2.7688767688132754,
+    "cautious": 3.5968848133087823,
+    "physical": 0.14973855503776304,
+    "risky": 0.15703053922339327,
+    "ruthless": 0.05006747135352389,
+    "carousing": 0.5454086554113731,
+    "amorous": 5.087141053015144,
+    "patient": 0.31206468682822236,
+    "stealth": 0.019406279809088357,
+    "devotion": 0.39645253899906974,
+    "craft": 1.1667759001195526,
+    "leadership": 0.09878011795867901
   },
   "aptitudes": [
     "strategist",
@@ -5627,7 +5648,7 @@
     "scholar",
     "sage"
   ],
-  "actionCount": 642,
+  "actionCount": 643,
   "grantsVersion": 1,
   "reconcileVersion": 16,
   "gallery": [
@@ -5977,8 +5998,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784755982256,
-  "rev": 1007,
+  "updatedAt": 1784756405519,
+  "rev": 1008,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -7640,7 +7661,8 @@
       "the_grey_road": 1,
       "the_grey_hand": 1,
       "the_shielding_word": 1,
-      "boundary_stone": 5
+      "boundary_stone": 5,
+      "the_kept_breath": 1
     },
     "coActivations": {
       "lightsense+numen_sense": 1,
@@ -7686,7 +7708,8 @@
       "order_sense": 21,
       "boundary_stone": 19,
       "palework": 19,
-      "the_shadow_work": 20
+      "the_shadow_work": 20,
+      "the_kept_breath": 22
     }
   },
   "companionBonds": {
@@ -7988,7 +8011,7 @@
   "regionsKnown": {
     "valley": 435,
     "the_palelands": 6,
-    "the_center": 30
+    "the_center": 31
   },
   "foreclosed": [
     "rootkin",
@@ -8102,10 +8125,10 @@
     {
       "id": "sess-10",
       "startedAt": "2026-07-22T20:59:08.612Z",
-      "lastAt": "2026-07-22T21:33:02.253Z",
+      "lastAt": "2026-07-22T21:40:05.517Z",
       "startDay": 22,
       "endDay": 22,
-      "beats": 4
+      "beats": 5
     }
   ],
   "company": [
@@ -8293,22 +8316,22 @@
     "the_crossing": "https://image.pollinations.ai/prompt/The%20Crossing%3A%20Every%20axis%20crosses%20here%20at%20nothing%2C%20and%20the%20result%20is%20not%20grey%20%E2%80%94%20it%20is%20CROWDED.%20The%20Crossing%20leans%20toward%20no%20pole%2C%20which%20is%20precisely%20why%20it%20can%20hold%20them%20all%3A%20an%20Umbral%20and%20a%20Blazeborn%20drink%20at%20the%20same%20table%20because%20neither%20has%20the%20standing%20to%20make%20the%20other%20leave.%20The%20poles%20are%20lonely%20places.%20The%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=24144&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 16,
-    "choices": 16,
-    "characterDeltas": 8,
-    "scene": 16,
-    "npcUpdates": 15,
+    "sceneSummary": 17,
+    "choices": 17,
+    "characterDeltas": 9,
+    "scene": 17,
+    "npcUpdates": 16,
     "factUpdates": 2,
     "placeUpdates": 2,
     "codexUpdates": 10,
-    "timeOps": 13,
+    "timeOps": 14,
     "imagePrompt": 1,
     "sceneEnded": 6,
     "itemUpdates": 1,
     "questUpdates": 1,
     "offer": 2
   },
-  "_opTurns": 16,
+  "_opTurns": 17,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

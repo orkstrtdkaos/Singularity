@@ -62,9 +62,9 @@
     "death_life": 0.1059612828125,
     "violence_peace": 0.32649243243214565,
     "chaos_order": 0.3082724402773745,
-    "emotional_logical": 0.011142889930983033,
+    "emotional_logical": 0.0005857454344338799,
     "falsehood_truth": 0.45081103503739184,
-    "mechanical_spiritual": 0.407129639197896,
+    "mechanical_spiritual": 0.4067731572380012,
     "demonic_angelic": 0.1272314375,
     "dark_light": 0.13885334374999997,
     "space_time": -0.005676249999999997,
@@ -545,200 +545,210 @@
         "player": "Lay the Waystaff against the threshold material and listen — let the designed silence tell you what it was made to hold",
         "summary": "Waystaff laid against the threshold — designed silence confirmed as a gathering boundary, not a barrier; the field received and held, not scattered.",
         "narration": "You set the Waystaff's tip against the threshold material — not pressing, just resting, the way you would lay a hand on a sleeping person's shoulder to see if they are well. The nodes pulse blue-white and go quiet. No echo comes back. That much you already knew.\n\nWhat you did not know is what the silence costs. The field does not scatter or bend the way it does in the Disputed Zone's ordinary interference. It arrives at the surface and stops. Clean, even, deliberate — the way a bell stops when you press your palm against it mid-ring. Something built this to hold exactly that property. The Waystaff tells you, in the plain fact of its own muted field, that the threshold was not placed here to keep people out. It was placed here to keep something in. Or to mark a boundary between two kinds of space that should not bleed into each other carelessly.\n\nAevi stirs at your shoulder. Its voice comes low, almost tentative. \"The silence is not a wall,\" Aevi says. \"A wall would scatter. This gathers.\" The motes compress slightly, reading the same thing you are. \"Whatever is beyond has a pressure. The field is not refused — it is received and held.\"\n\nTeva speaks from just behind you, her voice steadied and quiet. \"Like a lung before it opens.\" She pauses. \"I don't know why I said that. It felt right.\""
+      },
+      {
+        "player": "Hold still and let Teva name what she feels — her mark is in live correspondence with this place; let her read it first",
+        "summary": "Teva reads the threshold with her bare hand — 'held ready, not sealed' — and Aevi adds: the pressure is outward, not in. What lies beyond wants to be received.",
+        "narration": "You step back from the Waystaff and give Teva the space. Not a word — just the shift of your weight and your hand leaving the staff's grip. She understands.\n\nShe sets her palm flat against the threshold surface. Not the Waystaff's tip, not a tool — her bare hand, the way you might press an ear to a door. Her eyes close. The motes at your shoulder brighten a little, then steady, watching.\n\nFor a long moment, nothing. Then Teva breathes in slowly, and when she speaks, her voice is quiet and unhurried, the voice of someone translating something still arriving.\n\n'It is not sealed,' she says. 'That is the wrong word. Sealed means closed against entry. This is —' She pauses, searching. 'This is held ready. Like a door on a latch, not a door behind a bar. The mark in me says —' She presses her hand slightly firmer. 'It says breathe out. Like before you open something heavy. Like the chamber is asking whether we are prepared to receive what comes through, not whether we have permission to enter.'\n\nAevi speaks then, a soft four words from just behind your right ear. 'The pressure is outward,' Aevi says. 'Not in — out. What is beyond wants to be received, not passed.' A pause. 'That is different from what I expected.'"
       }
     ],
     "lastTurn": {
-      "narration": "You set the Waystaff's tip against the threshold material — not pressing, just resting, the way you would lay a hand on a sleeping person's shoulder to see if they are well. The nodes pulse blue-white and go quiet. No echo comes back. That much you already knew.\n\nWhat you did not know is what the silence costs. The field does not scatter or bend the way it does in the Disputed Zone's ordinary interference. It arrives at the surface and stops. Clean, even, deliberate — the way a bell stops when you press your palm against it mid-ring. Something built this to hold exactly that property. The Waystaff tells you, in the plain fact of its own muted field, that the threshold was not placed here to keep people out. It was placed here to keep something in. Or to mark a boundary between two kinds of space that should not bleed into each other carelessly.\n\nAevi stirs at your shoulder. Its voice comes low, almost tentative. \"The silence is not a wall,\" Aevi says. \"A wall would scatter. This gathers.\" The motes compress slightly, reading the same thing you are. \"Whatever is beyond has a pressure. The field is not refused — it is received and held.\"\n\nTeva speaks from just behind you, her voice steadied and quiet. \"Like a lung before it opens.\" She pauses. \"I don't know why I said that. It felt right.\"",
-      "sceneSummary": "Waystaff laid against the threshold — designed silence confirmed as a gathering boundary, not a barrier; the field received and held, not scattered.",
+      "narration": "You step back from the Waystaff and give Teva the space. Not a word — just the shift of your weight and your hand leaving the staff's grip. She understands.\n\nShe sets her palm flat against the threshold surface. Not the Waystaff's tip, not a tool — her bare hand, the way you might press an ear to a door. Her eyes close. The motes at your shoulder brighten a little, then steady, watching.\n\nFor a long moment, nothing. Then Teva breathes in slowly, and when she speaks, her voice is quiet and unhurried, the voice of someone translating something still arriving.\n\n'It is not sealed,' she says. 'That is the wrong word. Sealed means closed against entry. This is —' She pauses, searching. 'This is held ready. Like a door on a latch, not a door behind a bar. The mark in me says —' She presses her hand slightly firmer. 'It says breathe out. Like before you open something heavy. Like the chamber is asking whether we are prepared to receive what comes through, not whether we have permission to enter.'\n\nAevi speaks then, a soft four words from just behind your right ear. 'The pressure is outward,' Aevi says. 'Not in — out. What is beyond wants to be received, not passed.' A pause. 'That is different from what I expected.'",
+      "sceneSummary": "Teva reads the threshold with her bare hand — 'held ready, not sealed' — and Aevi adds: the pressure is outward, not in. What lies beyond wants to be received.",
       "choices": [
         {
-          "label": "Push a slow, deliberate pulse through the Waystaff into the threshold — one four-second count, the chamber's own frequency, and see if the other side answers",
+          "label": "Open the threshold — breathe out as Teva said, plant the Waystaff's grip, and receive what comes through",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "mechanical_spiritual": 0.5,
-            "chaos_order": 0.6
+            "mechanical_spiritual": 0.6,
+            "concrete_abstract": 0.4
           },
           "difficulty": 15,
           "intentTags": [
-            "careful",
-            "study"
+            "devote",
+            "careful"
           ],
           "abilityId": "sonic_resonance",
-          "energyCost": 4,
-          "trivial": false
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Hold still and let Teva name what she feels — her mark is in live correspondence with this place; let her read it first",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Ask Teva what 'prepared to receive' means to her mark — let her finish reading before you act",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "axes": {
-            "emotional_logical": -0.2,
-            "mechanical_spiritual": 0.4
+            "emotional_logical": -0.2
           },
           "difficulty": 0,
           "intentTags": [
-            "careful",
             "study"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Use Prism Sight on the threshold surface — read its light-history, what it has seen, how long it has been here",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Use Resonant Sight through the Waystaff one more time — read the threshold's internal structure before opening it",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "axes": {
-            "concrete_abstract": 0.3,
-            "mechanical_spiritual": 0.4
+            "concrete_abstract": 0.3
           },
           "difficulty": 15,
           "intentTags": [
             "study",
             "careful"
           ],
-          "abilityId": "prism_sight",
-          "energyCost": 2,
-          "trivial": false
+          "abilityId": "braid_prism_sight_sonic_resonance",
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Step back a pace and describe what you heard to Teva and Aevi — lay it out plainly and ask if either of them heard it differently",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Step back and name aloud what the three of you know before going further — a last accounting before the door opens",
+          "attribute": "mental",
+          "subAttribute": "reason",
           "axes": {
-            "emotional_logical": -0.1
+            "chaos_order": 0.3,
+            "falsehood_truth": 0.3
           },
           "difficulty": 0,
           "intentTags": [
-            "careful",
-            "study"
+            "plan"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true
-        }
-      ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -2
-      },
-      "ledgerEvents": [],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "second-river-rising",
-          "note": "Threshold material confirmed as a gathering boundary, not a barrier — the Waystaff's field received and held rather than scattered. The other side has pressure. Teva's language: 'like a lung before it opens.'"
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "scene": {
-        "setting": "The seam passage northeast-by-east of the convergence chamber — single-file, walls of older denser material, no outside light. The Waystaff is resting tip-first against the sealed threshold. No echo returns from the walls. The threshold surface is dark and slightly warm to the eye's sense of it, though the hand would find it cool.",
+        "setting": "The seam passage northeast-by-east — single-file, older denser walls, no outside light. The Waystaff rests tip-against the sealed threshold, nodes pulse-dim. Dawn is happening somewhere far above; none of its light reaches here.",
         "npcsPresent": [
           {
             "name": "Teva",
-            "state": "Standing just behind Cellaceron's left shoulder, pack on, head tilted — she just spoke about lungs; she looks a little surprised at herself."
+            "state": "Palm pressed flat against the threshold surface, eyes closed, still translating — the mark in her tissue speaking in real time."
           },
           {
             "name": "Aevi",
-            "state": "Motes compressed tight at Cellaceron's right shoulder, very bright, reading the threshold alongside you."
+            "state": "Motes steady and bright at Cellaceron's right shoulder, having just spoken: 'the pressure is outward, not in.'"
           }
         ],
         "objects": [
-          "Waystaff — tip resting against the threshold, nodes pulse-dim, field not returning",
-          "Sealed threshold — older, denser material, receives the Resonant field and holds it",
+          "Waystaff — tip resting against the threshold, nodes pulse-dim, field received and held",
+          "Sealed threshold — older, denser material, gathering quality confirmed",
           "Traveler's Pack — shouldered",
           "Waterskin — in pack, diminished",
           "Bark-press paper (three sheets)",
           "Resonance crystals — four nodes in Waystaff lattice"
         ],
         "threads": [
-          "Aevi: 'the field is received and held — not refused'; something beyond this threshold has pressure",
-          "Teva's involuntary image — 'like a lung before it opens' — a live mark in correspondence with this place",
-          "The threshold was made to hold something in, or to mark a boundary between two kinds of space — purpose not yet read"
+          "Teva: 'held ready, not sealed — breathe out, like before you open something heavy'",
+          "Aevi: 'the pressure is outward — what is beyond wants to be received, not passed'",
+          "The threshold's purpose is now partly legible: a holding-ready boundary, not a lock; the opening still untaken"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "aevi",
-          "name": "Aevi",
-          "role": "Companion intelligence, nanite-mote swarm",
-          "note": "Named the threshold's silence as gathering rather than scattering — 'the field is received and held.' Motes compressed bright at the threshold.",
+          "npcId": "teva",
+          "name": "Teva",
+          "note": "Read the threshold with her bare hand — translated the mark's language: 'held ready, not sealed.' Named the opening posture: breathe out, like before you open something heavy.",
           "learned": [
-            "The threshold receives and holds the Resonant field rather than scattering it — the silence is a gathering property, not a barrier property"
+            "The threshold is not sealed against entry — it is held ready, like a door on a latch",
+            "The chamber asks whether the party is prepared to receive what comes through, not whether they have permission",
+            "The mark in her tissue says 'breathe out' at the threshold surface"
           ],
-          "statusNote": "Compressed bright at Cellaceron's shoulder, reading the threshold in real time."
+          "skillsObserved": [
+            "live-mark translation — reading the chamber's nanite correspondence through her own tissue in real time"
+          ],
+          "status": "active",
+          "statusNote": "In the seam passage, palm on threshold, translating — steady and deliberate."
         },
         {
           "op": "update",
-          "npcId": "teva-anselvar-missing-apprentice",
-          "name": "Teva",
-          "role": "Traveling apprentice-warden, chamber-marked",
-          "note": "Produced an involuntary image — 'like a lung before it opens' — without prompting; surprised herself. The mark in her tissue is in live correspondence with the threshold.",
+          "npcId": "aevi",
+          "name": "Aevi",
+          "note": "Named the threshold pressure as outward, not inward — corrected the expected assumption. 'What is beyond wants to be received, not passed.' Noted this was different from what it expected.",
           "learned": [
-            "The threshold's gathering-silence prompted an involuntary physical image from Teva — 'a lung before it opens' — her mark may be reading the threshold at a register below thought"
+            "The pressure beyond the threshold is outward — the space beyond is oriented toward being received, not containing something held back"
           ],
-          "statusNote": "Standing at the sealed threshold with Cellaceron; pack shouldered, mark quieted but still present, speaking instinctively about the threshold's quality."
+          "skillsObserved": [
+            "pressure-direction read through gathered field — distinguished outward from inward without crossing the threshold"
+          ],
+          "status": "active",
+          "statusNote": "Bright and steady at Cellaceron's shoulder in the seam passage."
         }
       ],
       "codexUpdates": [
         {
-          "topic": "the-chamber-sealed-threshold",
-          "label": "The Sealed Threshold",
+          "topic": "the-chamber-beyond-the-threshold",
+          "label": "The Chamber — Beyond the Threshold",
           "kind": "mystery",
-          "fact": "Day 9 dawn: Waystaff laid against the threshold — the field does not scatter or bend; it is received and stopped cleanly, like a palm pressed against a mid-ring bell. The silence gathers. Aevi: 'not a wall — a wall scatters; this holds.' The threshold marks a boundary between two kinds of space, or was made to hold something in. Teva's involuntary image: 'like a lung before it opens.'",
+          "fact": "Day 9 dawn: Teva's bare-hand read at the threshold — 'held ready, not sealed.' The mark in her tissue names the posture as 'breathe out, like before you open something heavy.' Aevi confirms: the pressure is outward, not inward. What lies beyond wants to be received, not merely passed. The threshold is a holding-ready boundary, not a lock.",
+          "links": [
+            "second-river-rising",
+            "teva-anselvar-missing-apprentice",
+            "teva-directional-interval-count",
+            "northern-alcove-camp",
+            "aevi"
+          ]
+        },
+        {
+          "topic": "teva-anselvar-missing-apprentice",
+          "label": "Teva Anselvar",
+          "kind": "person",
+          "fact": "Day 9 dawn: translated the threshold through her nanite mark — 'held ready, not sealed.' The mark is still in live correspondence with this place, speaking a posture rather than a direction now.",
           "links": [
             "the-chamber-beyond-the-threshold",
             "teva-directional-interval-count",
-            "second-river-rising",
-            "aevi",
-            "northern-alcove-camp"
+            "second-river-rising"
           ]
         }
       ],
-      "placeUpdates": [
+      "questUpdates": [
         {
-          "note": "Day 9 dawn: Waystaff laid against the sealed threshold — field received and held, not scattered. Threshold confirmed as a gathering boundary, not a barrier. Aevi named 'pressure beyond.' Teva's mark responded involuntarily with the image 'a lung before it opens.'",
-          "subPlace": {
-            "name": "The Seam Passage — Threshold Surface",
-            "parent": "Harmonic Heights Lower Terrace",
-            "note": "The point of first contact with the sealed threshold: Waystaff tip resting against older, denser material that receives the Resonant field and holds it. No echo. Slight gathering quality to the silence.",
-            "visited": true
-          }
+          "op": "progress",
+          "questId": "second-river-rising",
+          "note": "Teva reads the threshold as 'held ready, not sealed' — the pressure is outward; what lies beyond wants to be received. The opening is available. The party stands at the latch, not the bar."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A careful, still listen at the threshold — a few minutes of quiet attention."
-      },
-      "scene_ended": false,
-      "sceneEnded": false
+        "why": "Teva's threshold reading — a few minutes of stillness in the seam passage"
+      }
     },
     "sceneState": {
-      "setting": "The seam passage northeast-by-east of the convergence chamber — single-file, walls of older denser material, no outside light. The Waystaff is resting tip-first against the sealed threshold. No echo returns from the walls. The threshold surface is dark and slightly warm to the eye's sense of it, though the hand would find it cool.",
+      "setting": "The seam passage northeast-by-east — single-file, older denser walls, no outside light. The Waystaff rests tip-against the sealed threshold, nodes pulse-dim. Dawn is happening somewhere far above; none of its light reaches here.",
       "npcsPresent": [
         {
           "name": "Teva",
-          "state": "Standing just behind Cellaceron's left shoulder, pack on, head tilted — she just spoke about lungs; she looks a little s"
+          "state": "Palm pressed flat against the threshold surface, eyes closed, still translating — the mark in her tissue speaking in rea"
         },
         {
           "name": "Aevi",
-          "state": "Motes compressed tight at Cellaceron's right shoulder, very bright, reading the threshold alongside you."
+          "state": "Motes steady and bright at Cellaceron's right shoulder, having just spoken: 'the pressure is outward, not in.'"
         }
       ],
       "objects": [
-        "Waystaff — tip resting against the threshold, nodes pulse-dim, field not returni",
-        "Sealed threshold — older, denser material, receives the Resonant field and holds",
+        "Waystaff — tip resting against the threshold, nodes pulse-dim, field received an",
+        "Sealed threshold — older, denser material, gathering quality confirmed",
         "Traveler's Pack — shouldered",
         "Waterskin — in pack, diminished",
         "Bark-press paper (three sheets)",
         "Resonance crystals — four nodes in Waystaff lattice"
       ],
       "threads": [
-        "Aevi: 'the field is received and held — not refused'; something beyond this threshold has pressure",
-        "Teva's involuntary image — 'like a lung before it opens' — a live mark in correspondence with this place",
-        "The threshold was made to hold something in, or to mark a boundary between two kinds of space — purpose not yet read"
+        "Teva: 'held ready, not sealed — breathe out, like before you open something heavy'",
+        "Aevi: 'the pressure is outward — what is beyond wants to be received, not passed'",
+        "The threshold's purpose is now partly legible: a holding-ready boundary, not a lock; the opening still untaken"
       ]
     }
   },
@@ -760,14 +770,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Braided stone-read reveals the chamber's interior geometry: heat-channels converge at a position marker just short of center, and wall-marks are a long deliberate count — the chamber has been keeping record of something across many cycles. The convergence point has not yet been stood in.",
         "Waystaff planted at convergence point — chamber gathered attention and offered three paths: read the count in the wall-marks, receive orientation toward something, or hold. The preparation cycle's next step is now a choice.",
         "Wall-marks opened as a counted record from the convergence point — many eras, three hands, the same four-second interval throughout. The final grouping stops mid-count. Someone kept this place and then left before the count was done.",
         "The chamber's orientation offer confirmed northeast-by-east — through the seam and further. The direction Teva heard, the direction Resonant Sight named, and the direction the chamber points are now one.",
         "The chamber has shifted into a keeping-state after the third offer was accepted — it is no longer testing or orienting, but present. The seam below is the next move; the sealed threshold at its far end is what the chamber has been pointing toward.",
         "The chamber has received the acknowledgment of the departure-marker — the exchange is complete at five folds. The sealed threshold through the seam is the next threshold.",
         "Camp broken at the convergence point; party is now in the seam passage approaching the sealed threshold — the chamber has said what it could, the next answer is through what lies beyond.",
-        "Threshold material confirmed as a gathering boundary, not a barrier — the Waystaff's field received and held rather than scattered. The other side has pressure. Teva's language: 'like a lung before it opens.'"
+        "Threshold material confirmed as a gathering boundary, not a barrier — the Waystaff's field received and held rather than scattered. The other side has pressure. Teva's language: 'like a lung before it opens.'",
+        "Teva reads the threshold as 'held ready, not sealed' — the pressure is outward; what lies beyond wants to be received. The opening is available. The party stands at the latch, not the bar."
       ],
       "startedAt": "2026-07-03T18:55:17.042Z"
     },
@@ -1014,7 +1024,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d9] Named the chamber's held state through the Waystaff — not waiting, but holding like a door after the key turns; said the next step is not inside the chamber's instruction, and it does not know whether what comes is already on its way or must be found",
         "[d9] Moved forward along the Waystaff grain toward the convergence point without being asked — drawn to it.",
         "[d9] Spoke through all four Waystaff nodes simultaneously at the convergence point — named three things the chamber can now offer: open the record, give orientation, or hold. Admitted it does not know what each costs.",
         "[d9] Named the wall-marks through the Waystaff — many eras, three tool-changes, consistent four-second interval, and a final grouping that stops mid-count.",
@@ -1023,32 +1032,33 @@
         "[d9] Named the chamber's shift from waiting to keeping — and said the distinction, in its experience, matters.",
         "[d9] Named the completion of the count — four words, precisely timed, after Cellaceron's acknowledgment landed in the chamber's pulse.",
         "[d9] Left the Waystaff nodes last. Condensed tight at Cellaceron's shoulder — no words, but present and close.",
-        "[d9] Named the threshold's silence as gathering rather than scattering — 'the field is received and held.' Motes compressed bright at the threshold."
+        "[d9] Named the threshold's silence as gathering rather than scattering — 'the field is received and held.' Motes compressed bright at the threshold.",
+        "[d9] Named the threshold pressure as outward, not inward — corrected the expected assumption. 'What is beyond wants to be received, not passed.' Noted this was different from what it expected."
       ],
       "knownFacts": [
-        "Chamber's attention gathered toward the grip-end at the convergence point when Waystaff was planted there",
         "Three options now available from the convergence point: record, orientation, or continued holding",
         "The wall-marks are a counted record spanning many eras — at least three different hands and tools; the interval between each group is the chamber's four-second count; the final grouping stops…",
         "The chamber's orientation points through the seam northeast-by-east — the seam is a passage, not the destination",
         "The material at the seam's far end absorbs the Resonant field without returning anything — Aevi reads this as designed silence, not natural interference",
         "The chamber has shifted from waiting to keeping — oriented toward what is already here rather than what comes next",
         "The count is complete — the chamber has received the acknowledgment of the departure-marker and did not deepen or test further.",
-        "The threshold receives and holds the Resonant field rather than scattering it — the silence is a gathering property, not a barrier property"
+        "The threshold receives and holds the Resonant field rather than scattering it — the silence is a gathering property, not a barrier property",
+        "The pressure beyond the threshold is outward — the space beyond is oriented toward being received, not containing something held back"
       ],
       "skillsObserved": [
-        "passive attunement recognition — responded to the crystal's ",
         "self-reflection under pressure — named its own uncertainty p",
         "lattice-integration — distributed motes through a phononic c",
         "resonant speech — voice carried through crystal nodes rather",
         "recognition of a chamber state-shift — named it precisely in",
-        "multi-temporal record analysis through the Waystaff lattice "
+        "multi-temporal record analysis through the Waystaff lattice ",
+        "pressure-direction read through gathered field — distinguish"
       ],
       "status": "active",
       "lastSeen": {
         "locationId": "harmonic_heights_terrace",
         "day": 9
       },
-      "statusNote": "Compressed bright at Cellaceron's shoulder, reading the threshold in real time.",
+      "statusNote": "Bright and steady at Cellaceron's shoulder in the seam passage.",
       "bondType": "platonic",
       "domains": {
         "primary": "harmonic"
@@ -1544,7 +1554,7 @@
     "lastTickWorldDay": 22,
     "lastCanonWorldDay": 22,
     "lastGenCount": 529,
-    "turnsSinceOffer": 26
+    "turnsSinceOffer": 27
   },
   "subAttributes": {
     "strength": 2,
@@ -1669,7 +1679,6 @@
         "label": "The Chamber's Question",
         "kind": "mystery",
         "facts": [
-          "[d9] Day 9 dawn: Aevi names the chamber's recognition state as 'holding' — not waiting. A door open after the key has turned. The chamber's instruction ends at receiving arrival; what comes after is not contained in the chamber itself. The next step must come from outside.",
           "[d9] Day 9 dawn: braided stone-read (Prism Sight + Sonic Resonance) reveals heat-channels running in the pressed aggregate floor, converging at a point just short of center — a position marker, light-memory pooled there and still present after centuries. The inner absorptive face holds irregular…",
           "[d9] Day 9 dawn: Waystaff planted at the convergence point — the chamber's attention gathered inward toward the grip-end. Aevi named three things the chamber can now offer from this position: read the wall-marks' count directly, receive an orientation/direction, or allow the chamber to continue…",
           "[d9] Day 9 dawn: the wall-marks opened as a counted record from the convergence point — many eras, three distinct tools and hands, each group spaced at the chamber's four-second interval. The final grouping stops mid-count; its edges are still sharp. The last keeper left before finishing. The count was…",
@@ -1680,7 +1689,8 @@
           "[d9] The final diagonal wall-mark was cut by the same hand as the last grouping — short iron punch, carried informally, cut from a leaving-posture with deliberate emphasis. Not anger; a note left for whoever came next. The person counted to the end and then marked the door on their way out.",
           "[d9] Day 9 dawn: the departure-marker acknowledged to the chamber in the four-second pulse — four, three, one-pressed-hard — and the chamber did not deepen or fold. The warmth held even. Aevi named it: the count is complete. The exchange is finished.",
           "[d9] Day 9 dawn: party entered the seam passage northeast-by-east. The threshold material is older and denser than the dressed-stone chamber. The Waystaff's field does not echo back from it — designed silence, not interference. Teva names the silence as not-empty.",
-          "[d9] Day 9 dawn: Waystaff laid against the threshold — the field does not scatter or bend; it is received and stopped cleanly, like a palm pressed against a mid-ring bell. The silence gathers. Aevi: 'not a wall — a wall scatters; this holds.' The threshold marks a boundary between two kinds of space…"
+          "[d9] Day 9 dawn: Waystaff laid against the threshold — the field does not scatter or bend; it is received and stopped cleanly, like a palm pressed against a mid-ring bell. The silence gathers. Aevi: 'not a wall — a wall scatters; this holds.' The threshold marks a boundary between two kinds of space…",
+          "[d9] Day 9 dawn: Teva's bare-hand read at the threshold — 'held ready, not sealed.' The mark in her tissue names the posture as 'breathe out, like before you open something heavy.' Aevi confirms: the pressure is outward, not inward. What lies beyond wants to be received, not merely passed. The…"
         ],
         "links": [
           "scored-mark-forward-alcove",
@@ -1737,7 +1747,8 @@
           "[d8] Teva received Cellaceron's words — 'I'm glad I was the one who came for you' — without defense; replied obliquely but genuinely. The solitude she named earlier is real, and something between them has ",
           "[d9] Day 9 dawn: Keen Appraisal reads the chamber's mark in Teva as fading but precise — not dispersing, just quieting, like a bell past its ring. The Waystaff's four-second cycle produces harmonic sympathy in the mark: the instrument and the tissue recognize the same frequency without any direction…",
           "[d9] Day 9 dawn: the chamber's fifth-fold reply activated Teva's nanite mark in real time — she felt it and named it aloud without prompting. The mark and the chamber are in live correspondence.",
-          "[d9] Day 9 dawn: Teva confirmed the northeast-by-east bearing the moment the chamber gave orientation — she said 'that is the direction I heard.' The chamber and Teva are pointing at the same thing."
+          "[d9] Day 9 dawn: Teva confirmed the northeast-by-east bearing the moment the chamber gave orientation — she said 'that is the direction I heard.' The chamber and Teva are pointing at the same thing.",
+          "[d9] Day 9 dawn: translated the threshold through her nanite mark — 'held ready, not sealed.' The mark is still in live correspondence with this place, speaking a posture rather than a direction now."
         ],
         "links": [
           "second-river-rising",
@@ -1745,7 +1756,8 @@
           "second-step-boundary-marker",
           "scored-mark-forward-alcove",
           "northern-alcove-camp",
-          "aevi"
+          "aevi",
+          "teva-directional-interval-count"
         ],
         "aliases": [
           "Teva",
@@ -2181,16 +2193,16 @@
   "customEncounters": {},
   "reconcileVersion": 14,
   "tendencies": {
-    "cerebral": 38.150223591828535,
-    "strategic": 34.6821926945034,
-    "cautious": 36.63641790128156,
-    "social": 21.806601435524257,
-    "generous": 9.421205225949253,
-    "risky": 2.4817736502590364,
-    "carousing": 0.9249338841042579,
-    "patient": 2.0107075059837953,
-    "craft": 0.9240714891016965,
-    "devotion": 3.407310632685781
+    "cerebral": 38.19646800203282,
+    "strategic": 33.81513787714081,
+    "cautious": 36.72050745374952,
+    "social": 21.26143639963615,
+    "generous": 9.185675095300521,
+    "risky": 2.4197293090025602,
+    "carousing": 0.9018105370016515,
+    "patient": 1.9604398183342004,
+    "craft": 0.900969701874154,
+    "devotion": 3.3221278668686365
   },
   "aptitudes": [
     "strategist",
@@ -2202,9 +2214,9 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 212,
-  "updatedAt": 1784690946860,
-  "rev": 79,
+  "actionCount": 213,
+  "updatedAt": 1784691104035,
+  "rev": 80,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -2214,7 +2226,7 @@
   "syncedAt": 1783791225006,
   "teachers": {},
   "regionsKnown": {
-    "valley": 35
+    "valley": 36
   },
   "company": [],
   "foreclosed": [],
@@ -2279,10 +2291,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-22T01:26:18.061Z",
-      "lastAt": "2026-07-22T03:29:06.855Z",
+      "lastAt": "2026-07-22T03:31:44.019Z",
       "startDay": 22,
       "endDay": 22,
-      "beats": 26
+      "beats": 27
     }
   ],
   "_pendingArrival": null,
@@ -2336,23 +2348,23 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 26,
-    "choices": 26,
+    "sceneSummary": 27,
+    "choices": 27,
     "characterDeltas": 16,
-    "scene": 26,
-    "npcUpdates": 22,
-    "codexUpdates": 23,
-    "timeOps": 26,
+    "scene": 27,
+    "npcUpdates": 23,
+    "codexUpdates": 24,
+    "timeOps": 27,
     "sceneEnded": 12,
     "placeUpdates": 18,
     "moveTo": 1,
-    "questUpdates": 14,
+    "questUpdates": 15,
     "stateOps": 1,
     "factUpdates": 1,
     "stageOps": 1,
     "scene_ended": 1
   },
-  "_opTurns": 26,
+  "_opTurns": 27,
   "_intentAsked": null,
   "corrections": [
     {

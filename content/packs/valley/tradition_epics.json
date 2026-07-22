@@ -2,7 +2,7 @@
  "schemaVersion": 1,
  "id": "tradition_epics",
  "kind": "lore",
- "note": "SNG-208/209 (2026-07-22, Erik direction): several epics per tradition, varied on alignment AND role, so players help their tradition's epics and hinder rivals, and a tradition can be at war with itself. Each carries arcAffinity (SNG-208 offscreen push), rivals, deathRoad (SNG-209 \u2014 the depth their craft retrieves from), offscreenVerbs. COMPLETE: all 24 traditions carry epics (41 figures). Death-road depths 0-3 all represented, with distinct roads per craft (attendance, soul-retrieval, vessel-building, regrowth, bargain, diagnosis, grace, time-reversal, churn, abstraction-waystation, and the anti-roads that only look like return). Any NPC/player can still rise to epic; this is the authored floor, not a closed cast. \u00b7 2026-07-22 ARCHETYPE PASS: added 21 figures whose motivations are NOT death (founder, betrayer, prodigy, seeker, champion, lover, exile, mad-genius, trickster, avenger, collector, builder, peacemaker, redeemer, visionary, heretic, free-spirit) \u2014 deathRoad null on these; and tagged every figure with an `archetype` so the roster reads by iconic motivation, not just death-relationship. Death is now ONE thing legends do among many.",
+ "note": "SNG-208/209 (2026-07-22, Erik direction): several epics per tradition, varied on alignment AND role, so players help their tradition's epics and hinder rivals, and a tradition can be at war with itself. Each carries arcAffinity (SNG-208 offscreen push), rivals, deathRoad (SNG-209 \u2014 the depth their craft retrieves from), offscreenVerbs. COMPLETE: all 24 traditions carry epics (41 figures). Death-road depths 0-3 all represented, with distinct roads per craft (attendance, soul-retrieval, vessel-building, regrowth, bargain, diagnosis, grace, time-reversal, churn, abstraction-waystation, and the anti-roads that only look like return). Any NPC/player can still rise to epic; this is the authored floor, not a closed cast. \u00b7 2026-07-22 ARCHETYPE PASS: added 21 figures whose motivations are NOT death (founder, betrayer, prodigy, seeker, champion, lover, exile, mad-genius, trickster, avenger, collector, builder, peacemaker, redeemer, visionary, heretic, free-spirit) \u2014 deathRoad null on these; and tagged every figure with an `archetype` so the roster reads by iconic motivation, not just death-relationship. Death is now ONE thing legends do among many. \u00b7 DEDUP 2026-07-22: the_edge_that_holds aliases kesh_ardent; iselde_the_wanderer aliases iselde_wend; neth_the_stayed aliases ashwarden_teacher_neth (SNG-203 tradition-arc teacher = the epic, one figure). Canonical = epic record; old ids resolve via aliases.",
  "designLaws": [
   "Several per tradition, VARIED \u2014 a hero and a villain of the same craft, so helping your tradition is not a monolith; different ROLES (saint/reaper/maker/sovereign) so 'epic' has range.",
   "Same-tradition rivalry is the richest conflict \u2014 Neth vs Morvane, Vael vs Halcyon, the Walker vs the Thornmother: one craft at war with itself.",
@@ -41,7 +41,10 @@
     "buries the unmourned by name",
     "sits a passing through to its end"
    ],
-   "archetype": "the master"
+   "archetype": "the master",
+   "aliases": [
+    "ashwarden_teacher_neth"
+   ]
   },
   {
    "id": "morvane_the_harvest",
@@ -701,7 +704,10 @@
     "ends exactly what must end",
     "holds a line that should have broken"
    ],
-   "archetype": "the protector"
+   "archetype": "the protector",
+   "aliases": [
+    "kesh_ardent"
+   ]
   },
   {
    "id": "the_ender_who_forgot",
@@ -1702,6 +1708,9 @@
     "carries news between forgotten places",
     "reads a road no one else remembers",
     "belongs a little less to anywhere"
+   ],
+   "aliases": [
+    "iselde_wend"
    ]
   },
   {

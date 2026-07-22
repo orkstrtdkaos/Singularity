@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 18,
-  "xp": 1778,
+  "xp": 1783,
   "attributes": {
     "physical": 4,
     "mental": 6,
@@ -120,7 +120,7 @@
   "maxHealth": 115,
   "health": 115,
   "maxEnergy": 185,
-  "energy": 172,
+  "energy": 170,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1677,24 +1677,29 @@
         "player": "Before the household stirs, take the Waymarker and the sealed letter down and sit with them one more time — the road to the Crossing starts today.",
         "summary": "Silas sits alone at dawn with the Waymarker and his father's letter before the household stirs — the road to the Crossing starts today.",
         "narration": "The household is still dark when you sit up. Pell breathes slow and even beside you, her arm across your ribs. You ease out from under it without waking her.\n\nThe shelf is two steps away. You take down the Waymarker first — the grey disc, cool and faintly smooth where your thumb settles into the groove your father's thumb wore. Then the letter, folded and re-folded at the same creases until the paper is soft there as cloth. You carry them both to the window, where the first grey of dawn comes through the glass.\n\nYou do not open the letter again. You have read it enough that the words are yours now. What you hold in your hands is the weight of it — a disc that knows where Stillwater's Trouble stands, and a page that explains why a man stopped. You sit with both of them in your lap while the birds begin outside, one at a time, and the light comes up slow and cold over Cairnhold's rooftops.\n\nHuginn is already awake on the window ledge. It regards you with the particular stillness it keeps when something is ending and something is beginning in the same breath. It says nothing. You do not need it to."
+      },
+      {
+        "player": "Spend a few minutes with Order-Sense on the Waymarker before packing it — look at the design of the unfinished second layer one more time now that you know what it was for.",
+        "summary": "Silas reads the Waymarker's unfinished second layer one last time at dawn — the bond-channel plain, the absence exact, the road to the Crossing beginning.",
+        "narration": "You hold the Waymarker flat on your open palm and let Order-Sense come in quietly — no push, just attention.\n\nThe first layer is already known to you: the oval groove, the post address seated into the disc's grain, Stillwater's Trouble legible the way a well-traveled road is legible. The second layer opens beside it like a room you have stood at the threshold of before.\n\nIt is a bond-channel. Not a locating tool — a line between two holders. Your father's half is there, cool and patient, the way a rune waits for its partner thread to be set. The open end is not broken or abandoned. It is simply waiting for Edvar Crane's half to close it. You can see the shape of what is missing the way you can see the shape of a missing tooth with your tongue — the exact contour of the absence, the exact pressure that would end it.\n\nYou fold Order-Sense back and sit with that for a moment. Then you fold the letter at its worn creases, set it on top of the disc, and begin packing."
       }
     ],
     "lastTurn": {
-      "narration": "The household is still dark when you sit up. Pell breathes slow and even beside you, her arm across your ribs. You ease out from under it without waking her.\n\nThe shelf is two steps away. You take down the Waymarker first — the grey disc, cool and faintly smooth where your thumb settles into the groove your father's thumb wore. Then the letter, folded and re-folded at the same creases until the paper is soft there as cloth. You carry them both to the window, where the first grey of dawn comes through the glass.\n\nYou do not open the letter again. You have read it enough that the words are yours now. What you hold in your hands is the weight of it — a disc that knows where Stillwater's Trouble stands, and a page that explains why a man stopped. You sit with both of them in your lap while the birds begin outside, one at a time, and the light comes up slow and cold over Cairnhold's rooftops.\n\nHuginn is already awake on the window ledge. It regards you with the particular stillness it keeps when something is ending and something is beginning in the same breath. It says nothing. You do not need it to.",
-      "sceneSummary": "Silas sits alone at dawn with the Waymarker and his father's letter before the household stirs — the road to the Crossing starts today.",
+      "narration": "You hold the Waymarker flat on your open palm and let Order-Sense come in quietly — no push, just attention.\n\nThe first layer is already known to you: the oval groove, the post address seated into the disc's grain, Stillwater's Trouble legible the way a well-traveled road is legible. The second layer opens beside it like a room you have stood at the threshold of before.\n\nIt is a bond-channel. Not a locating tool — a line between two holders. Your father's half is there, cool and patient, the way a rune waits for its partner thread to be set. The open end is not broken or abandoned. It is simply waiting for Edvar Crane's half to close it. You can see the shape of what is missing the way you can see the shape of a missing tooth with your tongue — the exact contour of the absence, the exact pressure that would end it.\n\nYou fold Order-Sense back and sit with that for a moment. Then you fold the letter at its worn creases, set it on top of the disc, and begin packing.",
+      "sceneSummary": "Silas reads the Waymarker's unfinished second layer one last time at dawn — the bond-channel plain, the absence exact, the road to the Crossing beginning.",
       "choices": [
         {
-          "label": "Wake Pell and get the party moving — the Crossing is a day's travel and the morning is young.",
+          "label": "Wake Pell — time to say goodbye to Ama and step out",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "travel"
+            "help"
           ],
           "trivial": true
         },
         {
-          "label": "Say a proper farewell to Ama before stepping out — there are things she should hear before the road takes you.",
+          "label": "Let Pell sleep a few minutes more and go say goodbye to Ama first, alone",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
@@ -1704,30 +1709,28 @@
           "trivial": true
         },
         {
-          "label": "Spend a few minutes with Order-Sense on the Waymarker before packing it — look at the design of the unfinished second layer one more time now that you know what it was for.",
+          "label": "Step out onto the lane for a moment before the house stirs — read the morning air",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "scout"
           ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false
+          "trivial": true
         },
         {
-          "label": "Write something in the margin of the father's letter before folding it away — not for him, for the road.",
-          "attribute": "mental",
-          "subAttribute": "reason",
+          "label": "Check Memory and the rest of the pack before waking anyone — road-ready before the house moves",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "difficulty": 0,
           "intentTags": [
-            "craft"
+            "careful"
           ],
           "trivial": true
         }
       ],
       "scene": {
-        "setting": "Silas's quarters in Ama's house in Cairnhold — early dawn, the window grey with first light, the room still dark except for what the glass lets in.",
+        "setting": "Silas's quarters in Ama's house in Cairnhold — early dawn, the window grey with first light, the room still mostly dark. Silas is seated at the window with the Waymarker and the letter in hand.",
         "npcsPresent": [
           {
             "name": "Pell Ran Marsh",
@@ -1735,26 +1738,42 @@
           },
           {
             "name": "Huginn",
-            "state": "On the window ledge, still and watching."
+            "state": "On the window ledge, watching Silas — still, unhurried."
           }
         ],
         "objects": [
-          "Waymarker — in Silas's hands, groove worn by his father's thumb",
-          "Father's Sealed Letter — re-folded at worn creases, in Silas's lap",
-          "The shelf — now empty of both objects"
+          "Waymarker — in Silas's hands, second layer read and understood",
+          "Father's Sealed Letter — folded at worn creases, resting on the Waymarker",
+          "The shelf — empty",
+          "Memory (spear) — packed or leaning near the door",
+          "Traveler's Pack — nearby, not yet closed"
         ],
         "threads": [
           "The road to the Crossing begins today — Edvar Crane and the second thread wait at the end of it.",
-          "Ama is still asleep — a farewell has not been said."
+          "Ama is still asleep — a farewell has not been said.",
+          "Veth is in the east room — she will need a word before departure."
         ]
       },
+      "codexUpdates": [
+        {
+          "topic": "the-second-thread",
+          "label": "The Second Thread",
+          "kind": "mystery",
+          "fact": "The Waymarker's second layer is a bond-channel between two holders — not a locating tool. Your father's half is present and waiting. The missing half belongs to Edvar Crane. The channel is not broken; it is incomplete. Order-Sense read the exact shape of what is absent.",
+          "links": [
+            "waymarker-father-s",
+            "find-the-engineer",
+            "stillwaters-trouble"
+          ]
+        }
+      ],
       "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "a quiet dawn sitting before the household stirs"
+        "hoursPassed": 0.25,
+        "why": "a few quiet minutes at the window before the house stirs"
       }
     },
     "sceneState": {
-      "setting": "Silas's quarters in Ama's house in Cairnhold — early dawn, the window grey with first light, the room still dark except for what the glass lets in.",
+      "setting": "Silas's quarters in Ama's house in Cairnhold — early dawn, the window grey with first light, the room still mostly dark. Silas is seated at the window with the Waymarker and the letter in hand.",
       "npcsPresent": [
         {
           "name": "Pell Ran Marsh",
@@ -1762,17 +1781,20 @@
         },
         {
           "name": "Huginn",
-          "state": "On the window ledge, still and watching."
+          "state": "On the window ledge, watching Silas — still, unhurried."
         }
       ],
       "objects": [
-        "Waymarker — in Silas's hands, groove worn by his father's thumb",
-        "Father's Sealed Letter — re-folded at worn creases, in Silas's lap",
-        "The shelf — now empty of both objects"
+        "Waymarker — in Silas's hands, second layer read and understood",
+        "Father's Sealed Letter — folded at worn creases, resting on the Waymarker",
+        "The shelf — empty",
+        "Memory (spear) — packed or leaning near the door",
+        "Traveler's Pack — nearby, not yet closed"
       ],
       "threads": [
         "The road to the Crossing begins today — Edvar Crane and the second thread wait at the end of it.",
-        "Ama is still asleep — a farewell has not been said."
+        "Ama is still asleep — a farewell has not been said.",
+        "Veth is in the east room — she will need a word before departure."
       ]
     }
   },
@@ -4183,7 +4205,7 @@
     "lastTickWorldDay": 22,
     "lastCanonWorldDay": 22,
     "lastGenCount": 548,
-    "turnsSinceOffer": 21,
+    "turnsSinceOffer": 22,
     "recentOffers": [
       {
         "thing": "The shadow-build showed Calvar's drainage failure precisely — the sleeve geometry, the collar, the east-bend junction — before it showed…",
@@ -5595,21 +5617,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 9.460679682979162,
-    "cerebral": 14.741551360280274,
-    "social": 13.334783346405812,
-    "generous": 1.8939689856456787,
-    "cautious": 3.1619032933953983,
-    "physical": 0.10242426907228198,
-    "risky": 0.10741213709405802,
-    "ruthless": 0.03424718607968952,
-    "carousing": 1.323695802386985,
-    "amorous": 13.329690677571225,
-    "patient": 0.9150183785259917,
-    "stealth": 0.013274296819257942,
-    "devotion": 0.2711817375197018,
-    "craft": 0.7980988510992406,
-    "leadership": 0.06756764400618086
+    "strategic": 9.224162690904683,
+    "cerebral": 15.373012576273267,
+    "social": 13.001413762745667,
+    "generous": 1.8466197610045367,
+    "cautious": 3.0828557110605135,
+    "physical": 0.09986366234547493,
+    "risky": 0.10472683366670657,
+    "ruthless": 0.03339100642769728,
+    "carousing": 1.2906034073273103,
+    "amorous": 12.996448410631944,
+    "patient": 0.8921429190628418,
+    "stealth": 0.012942439398776493,
+    "devotion": 0.2644021940817093,
+    "craft": 0.7781463798217596,
+    "leadership": 0.06587845290602634
   },
   "aptitudes": [
     "strategist",
@@ -5618,7 +5640,7 @@
     "sage",
     "charmer"
   ],
-  "actionCount": 658,
+  "actionCount": 659,
   "grantsVersion": 1,
   "reconcileVersion": 16,
   "gallery": [
@@ -5968,8 +5990,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784763566580,
-  "rev": 1027,
+  "updatedAt": 1784763805393,
+  "rev": 1028,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -7617,7 +7639,7 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 67,
+      "order_sense": 68,
       "palework": 29,
       "deathsense": 30,
       "shadowstep": 17,
@@ -7675,7 +7697,7 @@
     "lastUsed": {
       "deathsense": 20,
       "the-attended-end": 19,
-      "order_sense": 21,
+      "order_sense": 22,
       "boundary_stone": 19,
       "palework": 19,
       "the_shadow_work": 20,
@@ -7981,7 +8003,7 @@
   "regionsKnown": {
     "valley": 435,
     "the_palelands": 6,
-    "the_center": 50
+    "the_center": 51
   },
   "foreclosed": [
     "rootkin",
@@ -8095,10 +8117,10 @@
     {
       "id": "sess-10",
       "startedAt": "2026-07-22T20:59:08.612Z",
-      "lastAt": "2026-07-22T23:39:26.579Z",
+      "lastAt": "2026-07-22T23:43:25.391Z",
       "startDay": 22,
       "endDay": 22,
-      "beats": 24
+      "beats": 25
     }
   ],
   "company": [
@@ -8286,22 +8308,22 @@
     "the_crossing": "https://image.pollinations.ai/prompt/The%20Crossing%3A%20Every%20axis%20crosses%20here%20at%20nothing%2C%20and%20the%20result%20is%20not%20grey%20%E2%80%94%20it%20is%20CROWDED.%20The%20Crossing%20leans%20toward%20no%20pole%2C%20which%20is%20precisely%20why%20it%20can%20hold%20them%20all%3A%20an%20Umbral%20and%20a%20Blazeborn%20drink%20at%20the%20same%20table%20because%20neither%20has%20the%20standing%20to%20make%20the%20other%20leave.%20The%20poles%20are%20lonely%20places.%20The%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=24144&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 36,
-    "choices": 36,
+    "sceneSummary": 37,
+    "choices": 37,
     "characterDeltas": 17,
-    "scene": 36,
+    "scene": 37,
     "npcUpdates": 31,
     "factUpdates": 5,
     "placeUpdates": 2,
-    "codexUpdates": 14,
-    "timeOps": 31,
+    "codexUpdates": 15,
+    "timeOps": 32,
     "imagePrompt": 1,
     "sceneEnded": 10,
     "itemUpdates": 1,
     "questUpdates": 1,
     "offer": 2
   },
-  "_opTurns": 36,
+  "_opTurns": 37,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

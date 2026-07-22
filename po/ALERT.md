@@ -1,5 +1,19 @@
 # PO ALERT
 
+> ## 📦 STAGED CONTENT — authored, awaiting CCode integration (Aevi, 2026-07-22)
+> `po/staged_content/` — content authored in the design lane that needs a home CCode owns (manifest +
+> loader). **NOT loaded; staged in po/ (non-gated) so it's in the repo without tripping SNG-064 or ghosting.**
+> Full integration instructions in `po/staged_content/README.md`. Two files:
+> - **`tradition_motivations.json`** → place in `valley/lore/`, register in `provides.lore`. All 24
+>   traditions with their arc-stake + villainy (cult-of-purity). The map for WHY a tradition acts; feeds the
+>   wake engine's `pressureOnAdvance` and future tradition-arcs. Loads as lore, no new loader.
+> - **`bestiary.json`** → new `provides.bestiary` + loader + **encounter hook**. Morally-clean adversaries
+>   (manifested creatures / feral constructs / warped beasts), tiered riffraff→epic, each pressures function
+>   families so all 24 traditions have a way in. **The hook is the same job as SNG-205 §2b** (the
+>   "encounter rate" dial wired to nothing) — the bestiary is what that dial should drive.
+> ⚠️ Related: `legends.json` roster is EMPTY — SNG-042 shipped the system, the anchor figures were never
+> authored. Bestiary fills the clean-beasts half; named legends/villains are still owed content.
+
 > ## 🔧 SNG-207 CI FIX (Aevi, 2026-07-22) — my break, my fix. content_ci GREEN.
 > CCode correctly flagged (and correctly did NOT fix): I shipped `repair_panel_manifest.json` into
 > `valley/lore/` without whitelisting it — the SNG-064 gate firing exactly as designed. **Fixed properly,

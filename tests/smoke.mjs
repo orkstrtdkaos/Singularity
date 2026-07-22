@@ -15,7 +15,7 @@ import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, tou
 import { sanitizeScene, buildTurnContext, sanitizeIntent, narrativeRegister, ratingRegister, renderSceneHistory, tierParts, bluntnessDirective } from "../engine/gm.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, findExistingNpc, prettifyNpcName, relationshipBand, advanceBond, relationshipLabel, isPartnerAdjacent, knownPeopleAt, npcPortraitTier, backfillNpcGender } from "../engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
-import { initWorldState, runWorldTick, advanceGeneratedOffscreen, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "../engine/worldtick.js";
+import { initWorldState, runWorldTick, advanceGeneratedOffscreen, applyWantOutcome, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "../engine/worldtick.js";
 import { assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "../engine/gambit.js";
 import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, autoAdvancePracticedRanks, markDefiningMoment, meetsStandingBar, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy, nativeGrantIdsFor, applyNativeGrants, retroNativeGrants, seedInnateSubstrate } from "../engine/progression.js";
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, liaisonMultiplierFor, roleBadges, COMPANY_ROLES } from "../engine/company.js";
@@ -6495,6 +6495,54 @@ await (async () => {
   newRecipe.braidKey = "a+c"; // pretend a different pairing
   const merged2 = rp.mergeRecipes(store, [newRecipe]);
   check("201 §3.2: a genuinely new pairing lands as first-finder", merged2.published.length === 1 && store.recipes["a+c"]);
+}
+
+// --- SNG-198: the world TURNS — an offscreen tick moves COUNTABLE state, not just prose ---
+{
+  // §2 the state machine (pure): progress accumulates, done resolves, a stall/problem never moves the
+  // counter (unguardrailed — a stall is a stall), a resolved want stays resolved.
+  const ws = { wantProgress: {} };
+  check("198 §2: 'progress' advances the counter", applyWantOutcome(ws, "vash", "progress", 10).moved === true && ws.wantProgress.vash.progress === 1);
+  check("198 §2: a 'stall' is honest — the counter does NOT move", applyWantOutcome(ws, "vash", "stall", 11).moved === false && ws.wantProgress.vash.progress === 1);
+  check("198 §2: a 'problem' does not soften into progress (§4b)", applyWantOutcome(ws, "vash", "problem", 12).moved === false && ws.wantProgress.vash.progress === 1);
+  applyWantOutcome(ws, "vash", "progress", 13); applyWantOutcome(ws, "vash", "progress", 14); // -> 3
+  const resolving = applyWantOutcome(ws, "vash", "progress", 15); // -> 4, threshold
+  check("198 §2: reaching the threshold RESOLVES the want (an end, not a treadmill)", resolving.resolved === true && ws.wantProgress.vash.status === "resolved");
+  check("198 §2: a resolved want stays resolved and never moves again", applyWantOutcome(ws, "vash", "progress", 16).moved === false && ws.wantProgress.vash.progress === 4);
+  check("198 §2: 'done' resolves immediately", (() => { applyWantOutcome(ws, "calvar", "done", 10); return ws.wantProgress.calvar.status === "resolved"; })());
+
+  // §2 the loop CLOSES: two ticks apart produce different world-state, the model SEES how far it's come,
+  // and a resolved figure drops out of the next tick.
+  await (async () => {
+    const npcSchema = JSON.parse(readFileSync(join(root, "schemas/npc.schema.json"), "utf8"));
+    const character = { id: "p198", level: 5 };
+    const est = await generate("npc", { character, day: 1, location: { id: "row", name: "The Row", spectrum: {} } },
+      { callJSON: async () => ({ name: "Rell", role: "stall-boss", spectrum: {}, fears: "irrelevance", wants: "to own the market row", homeLocation: "row" }), schema: npcSchema });
+    recordAttention(est, "interact", 1); recordAttention(est, "interact", 1); // established
+    const D = (n) => Date.UTC(2026, 6, n);
+    await advanceGeneratedOffscreen({ character, now: D(1) }); // anchor
+    let seenProgress = [];
+    const evolve = async ({ entities, progressOf }) => { seenProgress.push(progressOf(entities[0].id)); return { developments: [{ entityId: est.id, outcome: "progress", note: "took two more stalls" }] }; };
+    await advanceGeneratedOffscreen({ character, now: D(5), evolveFn: evolve });
+    await advanceGeneratedOffscreen({ character, now: D(9), evolveFn: evolve });
+    check("198 §2: the counter PERSISTS between ticks (two ticks apart = different state)", character.worldState.wantProgress[est.id].progress === 2);
+    check("198 §2: the model is shown how far the want has travelled (tick N+1 reads tick N)", /just beginning/.test(seenProgress[0]) && /1\/4/.test(seenProgress[1]));
+    // run it to resolution, then confirm it drops out of the population
+    await advanceGeneratedOffscreen({ character, now: D(13), evolveFn: evolve });
+    await advanceGeneratedOffscreen({ character, now: D(17), evolveFn: evolve }); // 4th progress -> resolved
+    check("198 §2: the want RESOLVES after enough ticks", character.worldState.wantProgress[est.id].status === "resolved");
+    // resolved → excluded from the population, so even a progress-returning pass cannot advance it further
+    const post = await advanceGeneratedOffscreen({ character, now: D(21), evolveFn: async () => ({ developments: [{ entityId: est.id, outcome: "progress", note: "should not fire" }] }) });
+    check("198 §2: a resolved figure is no longer advanced (stops ripening forever)", post.length === 0 && character.worldState.wantProgress[est.id].progress === 4);
+    // news derives from what MOVED: a stall produces no news line
+    const c2 = { id: "p198b", level: 5 };
+    const e2 = await generate("npc", { character: c2, day: 1, location: { id: "row", name: "The Row", spectrum: {} } },
+      { callJSON: async () => ({ name: "Sib", role: "tinker", spectrum: {}, fears: "x", wants: "to leave", homeLocation: "row" }), schema: npcSchema });
+    recordAttention(e2, "interact", 1); recordAttention(e2, "interact", 1);
+    await advanceGeneratedOffscreen({ character: c2, now: D(1) });
+    const stalled = await advanceGeneratedOffscreen({ character: c2, now: D(5), evolveFn: async () => ({ developments: [{ entityId: e2.id, outcome: "stall", note: "nothing came of it" }] }) });
+    check("198 §2: a stall accrues no news (colour without movement is not a headline)", stalled.length === 0 && c2.worldState.wantProgress[e2.id].progress === 0);
+  })();
 }
 
 // --- SNG-199 §5 + SNG-205 §1: the codex knows who you met (mirrors + the Teva recovery) ---

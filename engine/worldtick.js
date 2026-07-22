@@ -337,6 +337,44 @@ export async function syncSharedCanon({ character, profile, content, region = "v
  *  fabricates — no drastic/contradicting/future-dated turns), applied as an accumulated
  *  fact on the entity's codex node + an away-digest item DATED on the shared absolute clock
  *  (on-or-before now). Never throws. evolveFn + now injectable for tests. */
+// SNG-198 §2: the missing HALF of SNG-021 (specced 2026-07-07, never built — `wantProgress` was 0 hits
+// repo-wide). An offscreen figure's want now carries a COUNTER that persists between ticks, so a thread
+// ripening across four ticks is measurably further along than after one, and the model can SEE how far it
+// has travelled when it writes the fifth. The `progress|stall|problem|done` enum is Path A's proven shape
+// (delegated work), extended to the generated population. A want that reaches the threshold RESOLVES —
+// resolution is a legitimate end, not a loop that ripens forever. UNGUARDRAILED (§4b): a stall is a real
+// stall, a problem real; nothing softened to keep the world tidy.
+const WANT_OUTCOMES = ["progress", "stall", "problem", "done"];
+const WANT_THRESHOLD = 4; // progress steps to resolve a want (tunable). "Four ticks of a thread ripening."
+
+/** The persistent per-figure want state, keyed by entityId on worldState. Pure accessor + mutator. */
+function wantState(ws, id) {
+  ws.wantProgress = ws.wantProgress || {};
+  return ws.wantProgress[id] || (ws.wantProgress[id] = { progress: 0, status: "active", updatedWorldDay: null });
+}
+/** Apply one offscreen outcome to a figure's want state. Returns { moved, resolved } — `moved` is whether
+ *  the countable state changed (drives whether it is news vs pure colour). Pure but for the ws mutation. */
+export function applyWantOutcome(ws, id, outcome, worldDay) {
+  const st = wantState(ws, id);
+  if (st.status === "resolved") return { moved: false, resolved: true };
+  let moved = false;
+  if (outcome === "progress") { st.progress += 1; moved = true; }
+  else if (outcome === "done") { st.progress = WANT_THRESHOLD; moved = true; }
+  // stall / problem: the note is real, the counter does not advance (a stall is a stall — §4b)
+  if (st.progress >= WANT_THRESHOLD) st.status = "resolved";
+  st.lastOutcome = outcome;
+  st.updatedWorldDay = worldDay;
+  return { moved, resolved: st.status === "resolved" };
+}
+/** A short read of how far a figure's want has travelled, for the NEXT tick's prompt — so tick N+1 can see
+ *  tick N (the whole point). */
+function wantProgressLine(ws, id) {
+  const st = ws.wantProgress?.[id];
+  if (!st || !st.progress) return "just beginning";
+  if (st.status === "resolved") return "resolved";
+  return `${st.progress}/${WANT_THRESHOLD} of the way there${st.lastOutcome === "problem" ? " (last tick: a problem)" : st.lastOutcome === "stall" ? " (last tick: stalled)" : ""}`;
+}
+
 export async function advanceGeneratedOffscreen({ character, evolveFn = aiGeneratedEvolution, now = Date.now() } = {}) {
   if (!character?.generated) return [];
   if (!character.worldState) character.worldState = initWorldState(1);
@@ -347,22 +385,32 @@ export async function advanceGeneratedOffscreen({ character, evolveFn = aiGenera
   if (ws.lastTickWorldDay == null) { ws.lastTickWorldDay = currentWorldDay; return []; }
   if (elapsedWorldDays <= 0) return [];
 
+  // established generated figures/threads whose want has NOT already resolved (a resolved want stops
+  // ripening — §2: resolution is an end, not a treadmill).
   const established = [...generatedRecords(character, "npc"), ...generatedRecords(character, "arc")]
-    .filter(r => r._gen && (r._gen.tier === "established" || r._gen.tier === "nominated"));
+    .filter(r => r._gen && (r._gen.tier === "established" || r._gen.tier === "nominated"))
+    .filter(r => ws.wantProgress?.[r.id]?.status !== "resolved");
   ws.lastTickWorldDay = currentWorldDay; // advance the baseline even if nothing's established yet
   if (!established.length || !evolveFn) return [];
 
   const news = [];
   try {
-    const result = await evolveFn({ character, entities: established.slice(0, 4), elapsedWorldDays, currentWorldDay });
+    const result = await evolveFn({ character, entities: established.slice(0, 4), elapsedWorldDays, currentWorldDay, progressOf: (id) => wantProgressLine(ws, id) });
     for (const dev of (result?.developments || []).slice(0, 4)) {
       const rec = established.find(r => r.id === dev.entityId);
       if (!rec || !dev.note) continue;
+      // SNG-198 §2: the outcome MOVES state (or honestly does not); the note is the colour on top of it.
+      const outcome = WANT_OUTCOMES.includes(dev.outcome) ? dev.outcome : "progress";
+      const { moved, resolved } = applyWantOutcome(ws, rec.id, outcome, currentWorldDay);
       const note = smartClamp(dev.note, 600);
-      rec._gen.offscreen = [...(rec._gen.offscreen || []), { worldDay: currentWorldDay, note }].slice(-8);
+      rec._gen.offscreen = [...(rec._gen.offscreen || []), { worldDay: currentWorldDay, note, outcome }].slice(-8);
       // accumulate the development on the entity's codex node so it "moved on" + surfaces
       try { applyCodexUpdates(character, [{ entityId: rec.id, label: rec.name, kind: rec._gen.type === "npc" ? "person" : "lore", fact: `[while away] ${note}` }], { day: ws.lastTickDay ?? null }); } catch { /* codex mirror is a convenience */ }
-      news.push({ text: `${rec.name}: ${note}`, worldDay: currentWorldDay });
+      // News is DERIVED from what MOVED / a real problem / a resolution — not from every sentence (§2, §4b).
+      const headline = resolved ? `${rec.name}: ${note} — and that thread has run its course.`
+        : outcome === "problem" ? `${rec.name} has hit trouble — ${note}`
+        : `${rec.name}: ${note}`;
+      if (moved || outcome === "problem") news.push({ text: headline, worldDay: currentWorldDay });
     }
   } catch (err) { console.warn("[offscreen-gen] skipped:", err.message); return []; }
 
@@ -374,13 +422,14 @@ export async function advanceGeneratedOffscreen({ character, evolveFn = aiGenera
   return news;
 }
 
-/** The AI pass: what an established generated figure/thread did offscreen, in-grain. */
-async function aiGeneratedEvolution({ entities, elapsedWorldDays, currentWorldDay }) {
+/** The AI pass: what an established generated figure/thread did offscreen, in-grain. SNG-198 §2: it is shown
+ *  HOW FAR each want has already travelled (progressOf) and must return a countable OUTCOME, not just prose. */
+async function aiGeneratedEvolution({ entities, elapsedWorldDays, currentWorldDay, progressOf = () => "just beginning" }) {
   const list = entities.map(e => e._gen.type === "npc"
-    ? `- ${e.id}: ${e.name} (npc) — wants: ${e.wants || "?"}; role: ${e.role || "?"}; disposition: ${JSON.stringify(e.spectrum || e.poleIntensity || {})}`
-    : `- ${e.id}: ${e.name} (arc) — tension: ${e.tendency || "?"}; pressure: ${e.pressure || "?"}`
+    ? `- ${e.id}: ${e.name} (npc) — wants: ${e.wants || "?"}; role: ${e.role || "?"}; progress so far: ${progressOf(e.id)}`
+    : `- ${e.id}: ${e.name} (arc) — tension: ${e.tendency || "?"}; pressure: ${e.pressure || "?"}; progress so far: ${progressOf(e.id)}`
   ).join("\n");
-  const sys = `You advance the OFFSCREEN lives of established figures and threads in an RPG while the player was away. ${elapsedWorldDays} world-days passed. For AT MOST 4 of them, decide ONE small, grounded, IN-GRAIN development that follows from their want/tension + disposition — no drastic turns, nothing that contradicts what's known, NOTHING set in the future. Reply ONLY JSON: {"developments":[{"entityId":"exact-id-from-the-list","note":"one sentence: what moved for them while away"}]}`;
+  const sys = `You advance the OFFSCREEN lives of established figures and threads in an RPG while the player was away. ${elapsedWorldDays} world-days passed. Each figure has a want/tension and HOW FAR it has already travelled toward it. For AT MOST 4 of them, decide ONE small, grounded, IN-GRAIN development that follows from their want/tension + how far along they already are — no drastic turns, nothing that contradicts what's known, NOTHING set in the future. Choose an OUTCOME per figure: "progress" (moved closer), "stall" (no real movement this time), "problem" (a genuine setback — do not soften it), or "done" (the want is reached/resolved). Most figures move rarely — a "stall" is a fine, honest answer. Reply ONLY JSON: {"developments":[{"entityId":"exact-id","outcome":"progress|stall|problem|done","note":"one sentence: what moved (or didn't) for them while away"}]}`;
   const content = `World-days passed: ${elapsedWorldDays} (now world-day ${currentWorldDay}).\n\nESTABLISHED FIGURES & THREADS:\n${list}`;
   return callClaudeJSON([{ role: "user", content }], { task: "world-tick", system: sys, maxTokens: 1024 });
 }

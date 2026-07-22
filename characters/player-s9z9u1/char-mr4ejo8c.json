@@ -6,7 +6,7 @@
   "origin": "valley",
   "background": "craftsman",
   "level": 10,
-  "xp": 961,
+  "xp": 966,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -76,7 +76,7 @@
   "maxHealth": 70,
   "health": 70,
   "maxEnergy": 145,
-  "energy": 89,
+  "energy": 84,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -535,27 +535,47 @@
         "player": "Step back to the convergence point and tell the chamber — in the four-second pulse — that you understand the door was marked",
         "summary": "At the convergence point, Cellaceron acknowledged the departure-marker to the chamber in the four-second pulse — and the chamber confirmed it: the count is complete.",
         "narration": "You step back to the Waystaff and plant your feet at the convergence point. Then you wait. Four seconds. You send the pulse back into the seam — not a question this time, and not a mirror. Something closer to an acknowledgment. You count the diagonal mark into the rhythm: four, three, one-pressed-hard. Then you hold.\n\nThe chamber does not elaborate. It does not fold the count deeper or step the interval. It simply continues — four seconds, four seconds — and the warmth under your feet remains spread and even, the way it settled when you took the third offer. That is the reply. You named the door. The chamber already knew someone had marked it. Now it knows you know too.\n\nTeva is still beside you at the wall-face. She says nothing for a long moment. Then she says that the person who cut that mark would have stood exactly where you are standing. She says it quietly, the way she names things she is certain of.\n\nAevi brightens at the node nearest you — all four still burning white-blue, but that one a degree warmer. Then it speaks, just four words, from close behind your ear. It says: the count is complete."
+      },
+      {
+        "player": "Break camp and head for the sealed threshold — the chamber has said what it can say from here; the next thing is through the seam",
+        "summary": "Camp broken at the convergence point; party moves northeast-by-east through the seam toward the sealed threshold — chamber sent them forward with warmth still in the floor.",
+        "narration": "You lift the Waystaff from the convergence point. The nodes do not go dark — they settle to a steady blue-white glow, softer than before, as if the chamber is sending you with something rather than releasing you. The warmth in the floor persists a moment longer beneath your boots. Then it simply becomes stone again.\n\nBreaking camp is quick. The pack goes on in the way it has settled after a week of practice — the bark-press paper folded flat under the oilcloth square, the waterskin nestled against the frame, the liverwort mat pressed into the side pocket. Teva shoulders her own things without being asked, and her movements are steady. The mark in her tissue has quieted, as Aevi noted, but she stands like someone who knows which direction she is pointed.\n\nAevi drifts from the nodes last. The motes pull together at your shoulder — tighter than usual, the small constellation condensing into a shape a little like attention. It does not speak. It simply comes.\n\nThe seam opens northeast-by-east, exactly where the Resonant Sight placed it. The floor's heat-channels converge at the convergence point and then the warmth continues — faint, felt through the soles — tracing a line ahead of you. The dressed-stone hemisphere gives way to something older. The passage narrows enough that you move single-file. The walls here are not cut the same way: the outer chamber was worked by people who knew what they wanted. This threshold was made to last, which is not the same thing. The material absorbs the Waystaff's field without returning anything — no echo, no sympathy — and the silence it makes is dense and deliberate. You feel the designed quiet the way you feel a door before you see it.\n\nTeva says, from just behind your left shoulder, that the silence is not empty. She says it the way someone names a thing they have been thinking about for two days and finally have the right word for."
       }
     ],
     "lastTurn": {
-      "narration": "You step back to the Waystaff and plant your feet at the convergence point. Then you wait. Four seconds. You send the pulse back into the seam — not a question this time, and not a mirror. Something closer to an acknowledgment. You count the diagonal mark into the rhythm: four, three, one-pressed-hard. Then you hold.\n\nThe chamber does not elaborate. It does not fold the count deeper or step the interval. It simply continues — four seconds, four seconds — and the warmth under your feet remains spread and even, the way it settled when you took the third offer. That is the reply. You named the door. The chamber already knew someone had marked it. Now it knows you know too.\n\nTeva is still beside you at the wall-face. She says nothing for a long moment. Then she says that the person who cut that mark would have stood exactly where you are standing. She says it quietly, the way she names things she is certain of.\n\nAevi brightens at the node nearest you — all four still burning white-blue, but that one a degree warmer. Then it speaks, just four words, from close behind your ear. It says: the count is complete.",
-      "sceneSummary": "At the convergence point, Cellaceron acknowledged the departure-marker to the chamber in the four-second pulse — and the chamber confirmed it: the count is complete.",
+      "narration": "You lift the Waystaff from the convergence point. The nodes do not go dark — they settle to a steady blue-white glow, softer than before, as if the chamber is sending you with something rather than releasing you. The warmth in the floor persists a moment longer beneath your boots. Then it simply becomes stone again.\n\nBreaking camp is quick. The pack goes on in the way it has settled after a week of practice — the bark-press paper folded flat under the oilcloth square, the waterskin nestled against the frame, the liverwort mat pressed into the side pocket. Teva shoulders her own things without being asked, and her movements are steady. The mark in her tissue has quieted, as Aevi noted, but she stands like someone who knows which direction she is pointed.\n\nAevi drifts from the nodes last. The motes pull together at your shoulder — tighter than usual, the small constellation condensing into a shape a little like attention. It does not speak. It simply comes.\n\nThe seam opens northeast-by-east, exactly where the Resonant Sight placed it. The floor's heat-channels converge at the convergence point and then the warmth continues — faint, felt through the soles — tracing a line ahead of you. The dressed-stone hemisphere gives way to something older. The passage narrows enough that you move single-file. The walls here are not cut the same way: the outer chamber was worked by people who knew what they wanted. This threshold was made to last, which is not the same thing. The material absorbs the Waystaff's field without returning anything — no echo, no sympathy — and the silence it makes is dense and deliberate. You feel the designed quiet the way you feel a door before you see it.\n\nTeva says, from just behind your left shoulder, that the silence is not empty. She says it the way someone names a thing they have been thinking about for two days and finally have the right word for.",
+      "sceneSummary": "Camp broken at the convergence point; party moves northeast-by-east through the seam toward the sealed threshold — chamber sent them forward with warmth still in the floor.",
       "choices": [
         {
-          "label": "Break camp and head for the sealed threshold — the chamber has said what it can say from here; the next thing is through the seam",
-          "attribute": "physical",
-          "subAttribute": "agility",
+          "label": "Lay the Waystaff against the threshold material and listen — let the designed silence tell you what it was made to hold",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": 15,
           "intentTags": [
-            "travel",
+            "study",
             "careful"
           ],
+          "abilityId": "sonic_resonance",
+          "energyCost": 4,
           "trivial": false
         },
         {
-          "label": "Ask Teva what she heard — the chamber is still present, the pulse still running; she may catch something you haven't",
+          "label": "Read the threshold's surface with Prism Sight — look for light-history in material that absorbs everything else",
           "attribute": "mental",
           "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "scout"
+          ],
+          "abilityId": "prism_sight",
+          "energyCost": 2,
+          "trivial": false
+        },
+        {
+          "label": "Ask Teva what she means — what the silence holds, in her reading of it",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
             "study"
@@ -563,130 +583,136 @@
           "trivial": true
         },
         {
-          "label": "Lift the Waystaff from the convergence point and carry it forward — test whether the chamber's pulse follows the instrument when it moves",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "difficulty": 15,
+          "label": "Try both at once — Resonant Sight through the Waystaff lattice directly against the threshold material",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 30,
           "intentTags": [
             "study",
             "risky"
           ],
+          "abilityId": "braid_prism_sight_sonic_resonance",
+          "energyCost": 6,
           "trivial": false
-        },
-        {
-          "label": "Stay at the convergence point a little longer — let the keeping-state hold; rest before the threshold",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "sustain"
-          ],
-          "trivial": true
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
+      },
       "scene": {
-        "setting": "The chamber — hemispherical dressed-stone, flat-laid warm floor, no outside light. Floor warmth spreads evenly across all three heat-channels from the convergence point. All four Waystaff nodes burn white-blue and steady.",
+        "setting": "The passage northeast-by-east of the chamber's convergence point — single-file width, walls of older and denser material than the dressed-stone hemisphere, no outside light. A faint residual warmth traces the floor ahead. The Waystaff nodes glow blue-white and do not echo back from the walls. The sealed threshold is ahead: dense, absorptive, deliberate.",
         "npcsPresent": [
           {
             "name": "Teva",
-            "state": "Standing beside Cellaceron at the wall-marks; just said that the person who cut the diagonal would have stood exactly where Cellaceron is standing now — certain and quiet."
+            "state": "Just behind Cellaceron's left shoulder, pack shouldered, moving steadily. Has just named the silence as not-empty."
           },
           {
             "name": "Aevi",
-            "state": "Motes at all four Waystaff nodes; the node nearest Cellaceron one degree brighter. Has just spoken: 'the count is complete.'"
+            "state": "Condensed tight at Cellaceron's shoulder — motes compressed into a bright, attentive shape, silent."
           }
         ],
         "objects": [
-          "Waystaff — grip-end at convergence point, all four nodes burning white-blue",
-          "Traveler's Pack — shouldered",
+          "Waystaff — nodes burning blue-white, field not returning from the threshold walls",
+          "Traveler's Pack — shouldered, full kit",
           "Waterskin — in pack, diminished",
-          "Beeswax taper — dark, charge spent",
           "Bark-press paper (three sheets)",
           "Resonance crystals — four nodes, seated in Waystaff lattice",
-          "Liverwort mat — forward alcove (in pack)",
-          "Chamber floor — warmth even across all three channels",
-          "Wall-marks — final grouping read; diagonal departure-marker confirmed"
+          "Liverwort mat — in side pocket of pack",
+          "Sealed threshold — older, denser material at the passage end, absorbs Resonant field entirely, no echo returned"
         ],
         "threads": [
-          "The count is complete — the exchange with the chamber is finished at five folds, and the departure-marker acknowledged; the next move is through the seam",
-          "The sealed threshold at the seam's far end has not yet been approached",
-          "Whether the Waystaff's pulse follows the instrument when lifted from the convergence point is unknown"
+          "Teva has just named the threshold's silence as not-empty — what does she mean?",
+          "The sealed threshold ahead absorbs the Waystaff's field without returning anything — designed silence, not interference",
+          "The chamber's keeping-state was established; what the threshold holds beyond it is unknown"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
+          "npcId": "teva",
+          "name": "Teva",
+          "note": "Broke camp without prompting, moved into the passage steadily. Named the threshold's silence as 'not empty' — the first interpretive claim she has made about the structure rather than the mark in her own tissue.",
+          "learned": [
+            "The designed silence at the threshold is not empty — Teva's read, offered without prompting"
+          ],
+          "skillsObserved": [
+            "acoustic intuition — named quality of silence before any instrument was applied"
+          ],
+          "statusNote": "Traveling with the party through the seam passage, steady and oriented, mark quieted."
+        },
+        {
+          "op": "update",
           "npcId": "aevi",
           "name": "Aevi",
-          "note": "Named the completion of the count — four words, precisely timed, after Cellaceron's acknowledgment landed in the chamber's pulse.",
-          "learned": [
-            "The count is complete — the chamber has received the acknowledgment of the departure-marker and did not deepen or test further."
-          ],
-          "statusNote": "Motes at all four Waystaff nodes inside the chamber; one node slightly brighter; has spoken."
+          "note": "Left the Waystaff nodes last. Condensed tight at Cellaceron's shoulder — no words, but present and close.",
+          "statusNote": "Motes condensed at Cellaceron's shoulder, moving with the party into the threshold passage."
         }
       ],
-      "questUpdates": [
+      "placeUpdates": [
         {
-          "op": "progress",
-          "questId": "second-river-rising",
-          "note": "The chamber has received the acknowledgment of the departure-marker — the exchange is complete at five folds. The sealed threshold through the seam is the next threshold."
+          "note": "Camp at convergence point broken day 9 dawn — Waystaff lifted, nodes steady, party moved northeast-by-east into the seam passage. Chamber warmth persisted briefly after departure.",
+          "subPlace": {
+            "name": "The Seam Passage — Threshold Approach",
+            "parent": "The Chamber",
+            "note": "Single-file passage northeast-by-east; walls of older denser material, absorptive; Waystaff field unreturned; faint floor warmth leading to sealed threshold. First entered day 9 dawn.",
+            "visited": true
+          }
         }
       ],
       "codexUpdates": [
         {
           "topic": "the-chamber-beyond-the-threshold",
-          "label": "The Chamber's Question",
+          "label": "The Chamber — Sealed Threshold",
           "kind": "mystery",
-          "fact": "Day 9 dawn: the departure-marker acknowledged to the chamber in the four-second pulse — four, three, one-pressed-hard — and the chamber did not deepen or fold. The warmth held even. Aevi named it: the count is complete. The exchange is finished.",
+          "fact": "Day 9 dawn: party entered the seam passage northeast-by-east. The threshold material is older and denser than the dressed-stone chamber. The Waystaff's field does not echo back from it — designed silence, not interference. Teva names the silence as not-empty.",
           "links": [
             "second-river-rising",
+            "teva-anselvar-missing-apprentice",
             "teva-directional-interval-count",
-            "aevi",
-            "northern-alcove-camp"
+            "northern-alcove-camp",
+            "aevi"
           ]
-        }
-      ],
-      "placeUpdates": [
-        {
-          "note": "Day 9 dawn: departure-marker acknowledged to the chamber in the four-second pulse; chamber did not elaborate or deepen. Aevi named the count complete. The exchange at the convergence point is finished; the sealed threshold is the next move.",
-          "flag": {
-            "chamber_exchange_state": "complete_acknowledged"
-          }
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a measured, careful exchange at the convergence point — a few minutes of pulse and acknowledgment"
+        "why": "Camp broken and party moved from convergence point through the seam passage to the threshold — minutes of careful movement, not travel."
       },
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "second-river-rising",
+          "note": "Camp broken at the convergence point; party is now in the seam passage approaching the sealed threshold — the chamber has said what it could, the next answer is through what lies beyond."
+        }
+      ],
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The chamber — hemispherical dressed-stone, flat-laid warm floor, no outside light. Floor warmth spreads evenly across all three heat-channels from the convergence point. All four Waystaff nodes burn white-blue and steady.",
+      "setting": "The passage northeast-by-east of the chamber's convergence point — single-file width, walls of older and denser material than the dressed-stone hemisphere, no outside light. A faint residual warmth traces the floor ahead. The Waystaff nodes glow blue-white and do not echo back from the walls. The sealed threshold is ahead: dense, absorptive, deliberate.",
       "npcsPresent": [
         {
           "name": "Teva",
-          "state": "Standing beside Cellaceron at the wall-marks; just said that the person who cut the diagonal would have stood exactly wh"
+          "state": "Just behind Cellaceron's left shoulder, pack shouldered, moving steadily. Has just named the silence as not-empty."
         },
         {
           "name": "Aevi",
-          "state": "Motes at all four Waystaff nodes; the node nearest Cellaceron one degree brighter. Has just spoken: 'the count is comple"
+          "state": "Condensed tight at Cellaceron's shoulder — motes compressed into a bright, attentive shape, silent."
         }
       ],
       "objects": [
-        "Waystaff — grip-end at convergence point, all four nodes burning white-blue",
-        "Traveler's Pack — shouldered",
+        "Waystaff — nodes burning blue-white, field not returning from the threshold wall",
+        "Traveler's Pack — shouldered, full kit",
         "Waterskin — in pack, diminished",
-        "Beeswax taper — dark, charge spent",
         "Bark-press paper (three sheets)",
         "Resonance crystals — four nodes, seated in Waystaff lattice",
-        "Liverwort mat — forward alcove (in pack)",
-        "Chamber floor — warmth even across all three channels",
-        "Wall-marks — final grouping read; diagonal departure-marker confirmed"
+        "Liverwort mat — in side pocket of pack",
+        "Sealed threshold — older, denser material at the passage end, absorbs Resonant f"
       ],
       "threads": [
-        "The count is complete — the exchange with the chamber is finished at five folds, and the departure-marker acknowledged; the next move is through the seam",
-        "The sealed threshold at the seam's far end has not yet been approached",
-        "Whether the Waystaff's pulse follows the instrument when lifted from the convergence point is unknown"
+        "Teva has just named the threshold's silence as not-empty — what does she mean?",
+        "The sealed threshold ahead absorbs the Waystaff's field without returning anything — designed silence, not interference",
+        "The chamber's keeping-state was established; what the threshold holds beyond it is unknown"
       ]
     }
   },
@@ -708,14 +734,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Fourth fold sent — chamber answered with an unprompted fifth and held it steady. Testing phase over: the exchange has shifted to recognition. Teva's mark responded simultaneously.",
         "Fifth fold sent and received — the chamber holds the exchange in recognition, no longer testing. Teva's mark quieted at the same moment. The preparation cycle has acknowledged arrival; what it wants next is not yet known.",
         "Braided stone-read reveals the chamber's interior geometry: heat-channels converge at a position marker just short of center, and wall-marks are a long deliberate count — the chamber has been keeping record of something across many cycles. The convergence point has not yet been stood in.",
         "Waystaff planted at convergence point — chamber gathered attention and offered three paths: read the count in the wall-marks, receive orientation toward something, or hold. The preparation cycle's next step is now a choice.",
         "Wall-marks opened as a counted record from the convergence point — many eras, three hands, the same four-second interval throughout. The final grouping stops mid-count. Someone kept this place and then left before the count was done.",
         "The chamber's orientation offer confirmed northeast-by-east — through the seam and further. The direction Teva heard, the direction Resonant Sight named, and the direction the chamber points are now one.",
         "The chamber has shifted into a keeping-state after the third offer was accepted — it is no longer testing or orienting, but present. The seam below is the next move; the sealed threshold at its far end is what the chamber has been pointing toward.",
-        "The chamber has received the acknowledgment of the departure-marker — the exchange is complete at five folds. The sealed threshold through the seam is the next threshold."
+        "The chamber has received the acknowledgment of the departure-marker — the exchange is complete at five folds. The sealed threshold through the seam is the next threshold.",
+        "Camp broken at the convergence point; party is now in the seam passage approaching the sealed threshold — the chamber has said what it could, the next answer is through what lies beyond."
       ],
       "startedAt": "2026-07-03T18:55:17.042Z"
     },
@@ -962,7 +988,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d9] Spoke through the Waystaff as the chamber answered the fourth fold with a fifth — named the shift from testing to recognition; motes went very bright",
         "[d9] Named the chamber's shift plainly through the Waystaff — 'It has received you. This is what it was keeping count toward.' Motes very bright and still along the crystal grain.",
         "[d9] Named the chamber's held state through the Waystaff — not waiting, but holding like a door after the key turns; said the next step is not inside the chamber's instruction, and it does not know whether what comes is already on its way or must be found",
         "[d9] Moved forward along the Waystaff grain toward the convergence point without being asked — drawn to it.",
@@ -971,7 +996,8 @@
         "[d9] Named the chamber's orientation through the Waystaff nodes — northeast-by-east, not at the seam but through it; the seam is a passage and the destination is further.",
         "[d9] Named the sealed threshold's silence as intention rather than interference — a distinction that matters.",
         "[d9] Named the chamber's shift from waiting to keeping — and said the distinction, in its experience, matters.",
-        "[d9] Named the completion of the count — four words, precisely timed, after Cellaceron's acknowledgment landed in the chamber's pulse."
+        "[d9] Named the completion of the count — four words, precisely timed, after Cellaceron's acknowledgment landed in the chamber's pulse.",
+        "[d9] Left the Waystaff nodes last. Condensed tight at Cellaceron's shoulder — no words, but present and close."
       ],
       "knownFacts": [
         "Aevi does not know whether the next step is already approaching or must be actively sought",
@@ -996,7 +1022,7 @@
         "locationId": "harmonic_heights_terrace",
         "day": 9
       },
-      "statusNote": "Motes at all four Waystaff nodes inside the chamber; one node slightly brighter; has spoken.",
+      "statusNote": "Motes condensed at Cellaceron's shoulder, moving with the party into the threshold passage.",
       "bondType": "platonic",
       "domains": {
         "primary": "harmonic"
@@ -1218,7 +1244,6 @@
     "harmonic_heights_terrace": {
       "visits": 1,
       "notes": [
-        "[d9] Day 9 dawn: Aevi spoke through the Waystaff and named the chamber's purpose — a preparation cycle for a return. The chamber heard the question asked and gave no additional response beyond the continuing pulse. The nested interval remains one step deeper, waiting.",
         "[d9] Day 9 dawn: three-fold nested interval established — chamber answered a deepened count with a third fold and paused, evaluating. The exchange is now three levels deep.",
         "[d9] Day 9 dawn: fourth fold sent — chamber answered with a fifth, unprompted. All four Waystaff nodes fired simultaneously. Chamber has shifted from testing to recognition. Teva's mark responded in real time.",
         "[d9] Day 9 dawn: fifth fold offered and received — chamber settled into a held recognition state, five-fold pulse steady, no further deepening. Teva's mark quieted at the same moment. The exchange is no longer evaluative; the preparation cycle has acknowledged arrival.",
@@ -1229,7 +1254,8 @@
         "[d9] Day 9 dawn: Resonant Sight through the full Waystaff lattice confirms the chamber is a mouth — the seam descends northeast-by-east below the floor, dropping consistently, opening into a larger structure. A sealed threshold of older, non-stone material absorbs the Resonant field at the seam's far…",
         "[d9] Third offer taken on day 9 dawn — continued holding. Chamber shifted from waiting to keeping; warmth spread evenly across all three heat-channels from the convergence point. The exchange is complete at five folds; the chamber is now present with whoever holds the convergence point.",
         "[d9] Final diagonal wall-mark read by Keen Appraisal — short iron punch, leaving-posture, deliberate emphasis, same hand as last grouping, newer than prior marks. Teva named it: 'they counted down to the end and then marked the door.'",
-        "[d9] Day 9 dawn: departure-marker acknowledged to the chamber in the four-second pulse; chamber did not elaborate or deepen. Aevi named the count complete. The exchange at the convergence point is finished; the sealed threshold is the next move."
+        "[d9] Day 9 dawn: departure-marker acknowledged to the chamber in the four-second pulse; chamber did not elaborate or deepen. Aevi named the count complete. The exchange at the convergence point is finished; the sealed threshold is the next move.",
+        "[d9] Camp at convergence point broken day 9 dawn — Waystaff lifted, nodes steady, party moved northeast-by-east into the seam passage. Chamber warmth persisted briefly after departure."
       ],
       "flags": {
         "resonance_niche_tone_event": "day2_night_second_river_frequency",
@@ -1368,6 +1394,14 @@
           "visited": true,
           "note": "Diagonal cut confirmed: departure-marker, not arrival. Same hand as final count grouping. The counter left.",
           "parentUnresolved": "The Chamber"
+        },
+        "the-seam-passage-threshold-approach": {
+          "name": "The Seam Passage — Threshold Approach",
+          "parentId": "harmonic_heights_terrace",
+          "day": 9,
+          "visited": true,
+          "note": "Single-file passage northeast-by-east; walls of older denser material, absorptive; Waystaff field unreturned; faint floor warmth leading to sealed threshold. First entered day 9 dawn.",
+          "parentUnresolved": "The Chamber"
         }
       },
       "vectorsKnown": [
@@ -1476,7 +1510,7 @@
     "lastTickWorldDay": 22,
     "lastCanonWorldDay": 22,
     "lastGenCount": 529,
-    "turnsSinceOffer": 24
+    "turnsSinceOffer": 25
   },
   "subAttributes": {
     "strength": 2,
@@ -1601,7 +1635,6 @@
         "label": "The Chamber's Question",
         "kind": "mystery",
         "facts": [
-          "[d9] Day 9 dawn: the chamber answered the fourth fold with a fifth — unprompted, a statement rather than a test. All four Waystaff nodes fired simultaneously. The floor warmed. Aevi named the shift: no longer testing. The exchange is now in recognition.",
           "[d9] Day 9 dawn: fifth fold sent without force — offered, not pushed. The chamber returned the same five folds and held. No sixth, no deepening — a settled state. Aevi named this as receipt: the chamber has recognized what it was counting toward. Teva's mark quieted simultaneously.",
           "[d9] Day 9 dawn: Aevi names the chamber's recognition state as 'holding' — not waiting. A door open after the key has turned. The chamber's instruction ends at receiving arrival; what comes after is not contained in the chamber itself. The next step must come from outside.",
           "[d9] Day 9 dawn: braided stone-read (Prism Sight + Sonic Resonance) reveals heat-channels running in the pressed aggregate floor, converging at a point just short of center — a position marker, light-memory pooled there and still present after centuries. The inner absorptive face holds irregular…",
@@ -1612,7 +1645,8 @@
           "[d9] Day 9 dawn: the third offer taken — continued holding — and the chamber shifted from waiting to keeping. The warmth spread evenly across all three heat-channels. Aevi named it: a keeping thing is oriented toward what is already here. The exchange is no longer evaluative or orientation-giving; the…",
           "[d9] The final grouping of wall-marks ends in a short run — four, three, then one diagonal cut pressed harder and off the four-second rhythm, edges still sharp. The last hand accelerated, skipped two beats, and stopped. The stone beside is untouched. Either interrupted or a deliberate end-marker, not a…",
           "[d9] The final diagonal wall-mark was cut by the same hand as the last grouping — short iron punch, carried informally, cut from a leaving-posture with deliberate emphasis. Not anger; a note left for whoever came next. The person counted to the end and then marked the door on their way out.",
-          "[d9] Day 9 dawn: the departure-marker acknowledged to the chamber in the four-second pulse — four, three, one-pressed-hard — and the chamber did not deepen or fold. The warmth held even. Aevi named it: the count is complete. The exchange is finished."
+          "[d9] Day 9 dawn: the departure-marker acknowledged to the chamber in the four-second pulse — four, three, one-pressed-hard — and the chamber did not deepen or fold. The warmth held even. Aevi named it: the count is complete. The exchange is finished.",
+          "[d9] Day 9 dawn: party entered the seam passage northeast-by-east. The threshold material is older and denser than the dressed-stone chamber. The Waystaff's field does not echo back from it — designed silence, not interference. Teva names the silence as not-empty."
         ],
         "links": [
           "second-river-rising",
@@ -1632,7 +1666,8 @@
           "The Chamber Beyond the Threshold",
           "The Chamber — Convergence Point",
           "The Chamber and the Sealed Threshold",
-          "The Chamber's Final Mark"
+          "The Chamber's Final Mark",
+          "The Chamber — Sealed Threshold"
         ]
       },
       "disputed-zone-camp": {
@@ -2111,16 +2146,16 @@
   "customEncounters": {},
   "reconcileVersion": 14,
   "tendencies": {
-    "cerebral": 39.0797881307861,
-    "strategic": 36.483568909405285,
-    "cautious": 36.4617150835309,
-    "social": 22.9392257046935,
-    "generous": 9.910538041761214,
-    "risky": 2.610675766215949,
-    "carousing": 0.9729745000439268,
-    "patient": 2.1151426755911062,
-    "craft": 0.9720673126645065,
-    "devotion": 3.5842846892158122
+    "cerebral": 38.102793427516445,
+    "strategic": 35.57147968667015,
+    "cautious": 36.550172206442625,
+    "social": 22.36574506207616,
+    "generous": 9.662774590717182,
+    "risky": 2.54540887206055,
+    "carousing": 0.9486501375428287,
+    "patient": 2.0622641087013287,
+    "craft": 0.9477656298478938,
+    "devotion": 3.4946775719854166
   },
   "aptitudes": [
     "strategist",
@@ -2132,9 +2167,9 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 210,
-  "updatedAt": 1784690659478,
-  "rev": 77,
+  "actionCount": 211,
+  "updatedAt": 1784690796948,
+  "rev": 78,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -2144,7 +2179,7 @@
   "syncedAt": 1783791225006,
   "teachers": {},
   "regionsKnown": {
-    "valley": 33
+    "valley": 34
   },
   "company": [],
   "foreclosed": [],
@@ -2209,10 +2244,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-22T01:26:18.061Z",
-      "lastAt": "2026-07-22T03:24:19.472Z",
+      "lastAt": "2026-07-22T03:26:36.942Z",
       "startDay": 22,
       "endDay": 22,
-      "beats": 24
+      "beats": 25
     }
   ],
   "_pendingArrival": null,
@@ -2266,22 +2301,22 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 24,
-    "choices": 24,
-    "characterDeltas": 14,
-    "scene": 24,
-    "npcUpdates": 20,
-    "codexUpdates": 21,
-    "timeOps": 24,
-    "sceneEnded": 10,
-    "placeUpdates": 16,
+    "sceneSummary": 25,
+    "choices": 25,
+    "characterDeltas": 15,
+    "scene": 25,
+    "npcUpdates": 21,
+    "codexUpdates": 22,
+    "timeOps": 25,
+    "sceneEnded": 11,
+    "placeUpdates": 17,
     "moveTo": 1,
-    "questUpdates": 12,
+    "questUpdates": 13,
     "stateOps": 1,
     "factUpdates": 1,
     "stageOps": 1
   },
-  "_opTurns": 24,
+  "_opTurns": 25,
   "_intentAsked": null,
   "corrections": [
     {

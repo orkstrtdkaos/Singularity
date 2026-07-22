@@ -18,7 +18,12 @@
     "connectsTo": { "type": "array", "items": { "type": "string" }, "description": "other arc ids this feeds; a generated local face may connect up to a greater arc where apt" },
     "convergenceNote": { "type": "string" },
     "claimedNodes": { "type": "array", "items": { "type": "object" } },
-    "stages": { "type": "array", "items": { "type": "string" }, "description": "optional ordered beats the arc moves through as it advances" },
+    "stages": { "type": "array", "description": "optional ordered beats the arc moves through as it advances. Authored greater-arcs use the OBJECT form (SNG-204): each stage names what its advance makes MORE LIKELY (pressureOnAdvance) — the lore-bounded input the wake generator reasons from. A bare string is still accepted for a simple generated thread.", "items": { "type": ["string", "object"], "properties": {
+      "stage": { "type": "integer", "description": "1-based ordinal of the beat" },
+      "name": { "type": "string" },
+      "publicFace": { "type": "string", "description": "what the world visibly shows at this stage" },
+      "pressureOnAdvance": { "type": "string", "description": "SNG-204: what advancing through this stage makes MORE LIKELY — the wake generator's lore-bounded input" }
+    } } },
     "factions": { "type": "array", "items": { "type": "string" } },
     "rating": { "type": "string", "description": "content-rating tag stamped at generation (SNG-BATCH-9 §3)" }
   }

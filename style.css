@@ -344,14 +344,20 @@ img[data-lightbox] { cursor: zoom-in; }
 .world-arcs { margin-top: 14px; }
 .world-arcs-head { font-family: var(--font-display, var(--font-ui)); font-size: 15px; margin: 0 0 2px; color: var(--accent); }
 .world-arc { border-left: 3px solid var(--border); padding: 6px 10px; margin-bottom: 8px; background: rgba(255,255,255,0.02); border-radius: 0 6px 6px 0; }
-.world-arc.moved { border-left-color: var(--accent); background: rgba(212,162,74,0.06); }
+.world-arc.advanced { border-left-color: var(--accent); background: rgba(212,162,74,0.06); }
+.world-arc.receded { border-left-color: var(--accent2, #6a8caf); background: rgba(106,140,175,0.07); }
+.world-arc.contested { border-left-color: var(--danger); background: rgba(180,80,80,0.06); }
 .world-arc-top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
 .world-arc-name { font-weight: 600; color: var(--ink); }
 .world-arc-stage { font-family: var(--font-ui); font-size: 11px; color: var(--ink-dim); white-space: nowrap; }
-.world-arc.moved .world-arc-stage { color: var(--accent); }
+.world-arc.advanced .world-arc-stage { color: var(--accent); }
+.world-arc.receded .world-arc-stage { color: var(--accent2, #6a8caf); }
+.world-arc.contested .world-arc-stage { color: var(--danger); }
 .world-arc-track { display: flex; gap: 3px; margin: 5px 0; }
 .wat-pip { flex: 1; height: 4px; border-radius: 2px; background: var(--border); }
 .wat-pip.on { background: var(--accent); }
+.world-arc.receded .wat-pip.on { background: var(--accent2, #6a8caf); }
+.world-arc.contested .wat-pip.on { background: var(--danger); }
 .world-arc-face { margin: 3px 0 0; font-size: 12.5px; color: var(--ink-dim); font-style: italic; }
 .map-edge.spine { stroke: var(--accent2); stroke-width: 2.5; opacity: .7; }           /* the Axis Gate's twelve roads */
 /* SNG-080 danger, findable on the map (graduated ring + chip) */

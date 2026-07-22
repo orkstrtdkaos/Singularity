@@ -39,31 +39,53 @@ function findGreaterArc(content, arcId) {
   return (content?.greaterArcs || []).find(a => a.id === arcId) || null;
 }
 
-/** This world's EFFECTIVE stage for an arc: the furthest of the authored default (`currentStage`) and this
- *  campaign's progress (`worldState.arcStages`). Forward-only — a hold never regresses it. Module-internal;
- *  its behaviour is covered through the exported worldArcsPublic. */
+/** SNG-203 Phase 2B: this actor's own net signed push on an arc (advance +, retreat −), + what everyone
+ *  ELSE has pushed as of the last sync. Old 2A saves stored a forward-only `stage`; read it as a +push. */
+function arcPushes(character, arcId) {
+  const local = character?.worldState?.arcStages?.[arcId];
+  if (!local) return { mine: 0, others: 0, legacyStage: null };
+  const mine = Number.isFinite(local.push) ? local.push
+    : (Number.isFinite(local.stage) ? null : 0);          // a 2A save: fall back to its cached stage
+  return { mine: mine ?? 0, others: Number.isFinite(local.othersPush) ? local.othersPush : 0, legacyStage: mine == null ? local.stage : null };
+}
+
+/** This world's EFFECTIVE stage for an arc: the authored base moved by the NET of every actor's signed
+ *  pushes (this actor's + everyone else's from the last sync), clamped to the arc's real stage range. Not
+ *  forward-only — a net-negative push pulls the arc BACK. Module-internal; covered through worldArcsPublic. */
 function arcStageNow(content, character, arcId) {
   const arc = findGreaterArc(content, arcId);
-  const authored = arc?.currentStage ?? 1;
-  const local = character?.worldState?.arcStages?.[arcId]?.stage;
-  return Math.max(authored, Number.isFinite(local) ? local : authored);
+  const base = arc?.currentStage ?? 1;
+  const total = (arc?.stages || []).length || base;
+  const { mine, others, legacyStage } = arcPushes(character, arcId);
+  if (legacyStage != null) return Math.max(1, Math.min(total, legacyStage)); // 2A back-compat
+  return Math.max(1, Math.min(total, base + mine + others));
 }
 
 /** SNG-203 §3: the PUBLIC face of where the world arcs stand — the readable "state of the world" every
  *  player sees. Only the current stage's `publicFace` + stage name/number surface; the arc's `tendency`,
- *  `ifIgnored`, and per-stage `pressureOnAdvance` (GM-EYES / the wake seed) NEVER leak here. Structured data
- *  reused by the GM block and the player-facing world-map readout. */
+ *  `ifIgnored`, and per-stage `pressureOnAdvance` (GM-EYES / the wake seed) NEVER leak here. Carries the
+ *  DIRECTION the world has moved (advanced / receded / held) and whether it is CONTESTED (this actor and the
+ *  rest of the valley pushing opposite ways) — a receding or contested arc is a feature of a shared world,
+ *  not a bug. Structured data reused by the GM block and the player-facing world-map readout. */
 export function worldArcsPublic(content, character) {
   return (content?.greaterArcs || []).map(arc => {
-    const stageNum = arcStageNow(content, character, arc.id);
+    const base = arc.currentStage ?? 1;
     const total = (arc.stages || []).length || 1;
+    const stageNum = arcStageNow(content, character, arc.id);
     const def = (arc.stages || []).find(s => s.stage === stageNum) || (arc.stages || [])[Math.max(0, stageNum - 1)] || null;
-    const moved = (character?.worldState?.arcStages?.[arc.id]?.stage ?? (arc.currentStage ?? 1)) > (arc.currentStage ?? 1);
+    const { mine, others } = arcPushes(character, arc.id);
+    const net = mine + others;
+    // direction is the NET PRESSURE on the arc, not its stage-vs-base — so downward pressure reads "receded"
+    // even while the stage is clamped at its authored floor (a base-1 arc can't sit below stage 1, but the
+    // valley can still be pulling it back). The actual backward MOVE surfaces as the stage number dropping +
+    // the "pushed back to…" news when the canonical stage falls between syncs.
+    const direction = net > 0 ? "advanced" : net < 0 ? "receded" : "held";
+    const contested = (mine > 0 && others < 0) || (mine < 0 && others > 0);
     return {
       arcId: arc.id, name: arc.name, stageNum, total,
       stageName: def?.name || `Stage ${stageNum}`,
       publicFace: def?.publicFace || arc.tendency || "", // tendency is the authored fallback surface line (not the sealed truth)
-      moved, // has THIS world pushed it past the authored default?
+      moved: stageNum !== base, direction, contested,
     };
   });
 }
@@ -73,8 +95,9 @@ export function worldArcsPublic(content, character) {
 export function worldArcsForGM(content, character) {
   const arcs = worldArcsPublic(content, character);
   if (!arcs.length) return null;
-  const lines = arcs.map(a => `- ${a.name} — ${a.stageName} (stage ${a.stageNum}/${a.total})${a.moved ? " ⤴ MOVED on the shared clock" : ""}: ${a.publicFace}`);
-  return `THE WORLD'S GREATER ARCS — the shared, public state of the valley (every traveler knows this much; the arcs' hidden direction is yours alone to know). Reference them as the weather of the wider world; when one has MOVED, the change is felt everywhere:\n${lines.join("\n")}`;
+  const mark = a => a.contested ? " ⚔ CONTESTED (pushed both ways)" : a.direction === "advanced" ? " ⤴ ADVANCED on the shared clock" : a.direction === "receded" ? " ⤵ RECEDED — pushed back on the shared clock" : "";
+  const lines = arcs.map(a => `- ${a.name} — ${a.stageName} (stage ${a.stageNum}/${a.total})${mark(a)}: ${a.publicFace}`);
+  return `THE WORLD'S GREATER ARCS — the shared, public state of the valley (every traveler knows this much; the arcs' hidden direction is yours alone to know). Reference them as the weather of the wider world; when one has ADVANCED, RECEDED, or is CONTESTED, the change is felt everywhere — an arc pulled backward is as real as one pushed forward:\n${lines.join("\n")}`;
 }
 
 /** Region view for the GM: content events overlaid with this campaign's stages. */
@@ -273,20 +296,6 @@ export async function syncSharedWorld({ character, content }) {
         }
       }
     }
-    // SNG-203 §3: greater-arc stages merge to the furthest ANY player has pushed them — one valley's arcs
-    // for everyone. Forward-only (an arc never un-advances on merge), same doctrine as eventStages.
-    if (remote?.arcStages) {
-      ws.arcStages = ws.arcStages || {};
-      for (const [arcId, st] of Object.entries(remote.arcStages)) {
-        const local = ws.arcStages[arcId];
-        if (!local || (st.stage ?? 0) > (local.stage ?? 0)) {
-          ws.arcStages[arcId] = { ...st };
-          const arc = findGreaterArc(content, arcId);
-          const def = arc && (arc.stages || []).find(s => s.stage === st.stage);
-          if (arc && def) news.push({ text: `Across the valley, ${arc.name} has moved to ${def.name || `stage ${st.stage}`}: ${def.publicFace || ""}`.trim(), worldDay: absoluteWorldDay() });
-        }
-      }
-    }
     if (remote?.spectrumDrift) {
       for (const [ax, v] of Object.entries(remote.spectrumDrift)) {
         if (Math.abs(v) > Math.abs(ws.spectrumDrift[ax] || 0)) ws.spectrumDrift[ax] = v;
@@ -310,9 +319,44 @@ export async function syncSharedWorld({ character, content }) {
       schemaVersion: 1, regionId: "valley",
       calendar: remote?.calendar || { day: ws.lastTickDay, season: "late-spring", year: 15 },
       activeEvents: (content.region.activeEvents || []).map(({ eventId, stage }) => ({ eventId, stage: ws.eventStages[eventId]?.stage ?? stage })),
-      eventStages: ws.eventStages, arcStages: ws.arcStages || {}, spectrumDrift: ws.spectrumDrift,
+      eventStages: ws.eventStages, spectrumDrift: ws.spectrumDrift,
       worldFlags: remote?.worldFlags || {}, lastTick: new Date().toISOString()
     }, `world-tick: consolidated by ${character.name}`);
+    // SNG-203 Phase 2B: greater arcs are a NET VECTOR of per-actor pushes, in their own shared file. Each
+    // actor owns byActor[characterId]; the canonical stage is base + Σ pushes, so an arc moves BOTH ways —
+    // one player countering another pulls it BACK. pushMergedFile re-merges the loser onto the winner, so
+    // concurrent pushes never clobber (a per-actor key makes the union safe). A no-push player just reads.
+    const me = character.id;
+    let mergedArcs = null;
+    if (me && ws.arcStages && Object.values(ws.arcStages).some(s => Number.isFinite(s.push))) {
+      await pushMergedFile("world/arcs/valley.json", (remoteArcs) => {
+        const arcs = remoteArcs?.arcs ? { ...remoteArcs.arcs } : {};
+        for (const [arcId, st] of Object.entries(ws.arcStages)) {
+          if (!Number.isFinite(st.push)) continue;
+          arcs[arcId] = { byActor: { ...(arcs[arcId]?.byActor || {}), [me]: st.push } };
+        }
+        mergedArcs = arcs;
+        return { schemaVersion: 1, region: "valley", arcs, lastTick: new Date().toISOString() };
+      }, `arcs: ${character.name || me} pushed the world`);
+    } else {
+      mergedArcs = (await fetchRepoJSON("world/arcs/valley.json"))?.arcs || null;
+    }
+    // learn what everyone ELSE has pushed → update othersPush; news when the CANONICAL stage shifts (either way).
+    if (mergedArcs) {
+      ws.arcStages = ws.arcStages || {};
+      for (const [arcId, entry] of Object.entries(mergedArcs)) {
+        const others = Object.entries(entry.byActor || {}).filter(([id]) => id !== me).reduce((s, [, v]) => s + (Number.isFinite(v) ? v : 0), 0);
+        const before = arcStageNow(content, character, arcId);
+        ws.arcStages[arcId] = { ...(ws.arcStages[arcId] || {}), othersPush: others };
+        const after = arcStageNow(content, character, arcId);
+        if (after !== before) {
+          const arc = findGreaterArc(content, arcId);
+          const def = arc && (arc.stages || []).find(s => s.stage === after);
+          const verb = after > before ? "moved forward to" : "was pushed back to";
+          if (arc && def) news.push({ text: `Across the valley, ${arc.name} ${verb} ${def.name || `stage ${after}`}: ${def.publicFace || ""}`.trim(), worldDay: absoluteWorldDay() });
+        }
+      }
+    }
   } catch (err) {
     console.warn("[sharedworld] consolidation skipped:", err.message);
   }

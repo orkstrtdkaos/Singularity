@@ -2,7 +2,7 @@
  "schemaVersion": 1,
  "id": "legends",
  "kind": "world_structure",
- "note": "Authored anchor figures for SNG-042 (Legends & Villains). High-power universal-role instances the living world deploys in dramatic beats and threads through recurrence. First-draft canon (Aevi 2026-07-11); broadened 2026-07-22 to cover the death axis, the wild half, and the arc antagonists (villains drawn from tradition cult-of-purity) \u2014 Erik reshapes; the generate path mints mid/low-tier figures in-grain from these as taste.",
+ "note": "Authored anchor figures for SNG-042 (Legends & Villains). High-power universal-role instances the living world deploys in dramatic beats and threads through recurrence. First-draft canon (Aevi 2026-07-11); broadened 2026-07-22 to cover the death axis, the wild half, and the arc antagonists (villains drawn from tradition cult-of-purity) \u2014 Erik reshapes; the generate path mints mid/low-tier figures in-grain from these as taste. \u00b7 2026-07-22: arcAffinity + rivals + offscreenVerbs added (SNG-198B epic-actor hook \u2014 epics nudge their arc offscreen and act against named rivals).",
  "principle": "A world feels large when greatness passes through it. Heroes are witnessed, not owned; villains scale from riffraff to arc. Every figure is a disposition made person \u2014 power expressed through the local grain.",
  "tiers": {
   "legendary": "arc-scale; hand-authored anchors (this file) + rare generation at high birth-weight; recur as the measure others are held against",
@@ -177,7 +177,19 @@
    "reactsToReputation": {
     "any": "sees the character as raw material to be improved \u2014 the more remarkable, the more he wants to correct them"
    },
-   "threading": "His 'patched' appear as riffraff-tier, wrong in small unplaceable ways; his Editors are regional lieutenants; Iselde fears him; he is the arc-scale rewriting-of-truth threat \u2014 the cold terminus of Noesis and the pure falsehood pole made person."
+   "threading": "His 'patched' appear as riffraff-tier, wrong in small unplaceable ways; his Editors are regional lieutenants; Iselde fears him; he is the arc-scale rewriting-of-truth threat \u2014 the cold terminus of Noesis and the pure falsehood pole made person.",
+   "arcAffinity": {
+    "arcId": "arc_what_wakes_beneath",
+    "dir": 1,
+    "weight": 3
+   },
+   "rivals": [
+    "maren_ossitide"
+   ],
+   "offscreenVerbs": [
+    "rewrites an entry that should not change",
+    "wakes something better left sleeping"
+   ]
   },
   {
    "id": "overseer_grael",
@@ -217,7 +229,17 @@
     "seeking": "a smooth, dangerous cordiality",
     "truthful": "quiet alarm and quieter countermeasures"
    },
-   "threading": "DIRECTLY threads the live Fendt event \u2014 Fendt is his instrument, the accountability-board anomaly is his fingerprint, and the thirty-year keeper who 'has never seen this before' is the thread that could bring him down. The player's current world is ALREADY seeded with this regional villain."
+   "threading": "DIRECTLY threads the live Fendt event \u2014 Fendt is his instrument, the accountability-board anomaly is his fingerprint, and the thirty-year keeper who 'has never seen this before' is the thread that could bring him down. The player's current world is ALREADY seeded with this regional villain.",
+   "arcAffinity": {
+    "arcId": "arc_block_bleed",
+    "dir": 1,
+    "weight": 1
+   },
+   "rivals": [],
+   "offscreenVerbs": [
+    "tightens a ledger around someone's throat",
+    "buries a report that would have helped"
+   ]
   },
   {
    "id": "maren_ossitide",
@@ -259,7 +281,20 @@
     "balanced": "grave respect",
     "seeking": "will teach the hardest thing if you can carry it"
    },
-   "threading": "The measure of the ashwarden craft. A character walking the ashwarden tradition-arc may find that the teacher Neth speaks of Maren the way students speak of a master's master. Deploys where death is mishandled."
+   "threading": "The measure of the ashwarden craft. A character walking the ashwarden tradition-arc may find that the teacher Neth speaks of Maren the way students speak of a master's master. Deploys where death is mishandled.",
+   "arcAffinity": {
+    "arcId": "arc_what_wakes_beneath",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "the_hollow_king"
+   ],
+   "offscreenVerbs": [
+    "attends an ending no one sent for",
+    "buries the unmourned",
+    "stays where others would leave"
+   ]
   },
   {
    "id": "the_hollow_king",
@@ -301,7 +336,21 @@
     "seeking": "generous, patient, ruinous",
     "violent": "amused"
    },
-   "threading": "The abyssal cult-of-purity made sovereign \u2014 the bargain with no floor. Deploys as an escalating temptation across an arc; his riffraff are lesser bargainers who foreshadow him. Never fought head-on; outlasted or out-wanted."
+   "threading": "The abyssal cult-of-purity made sovereign \u2014 the bargain with no floor. Deploys as an escalating temptation across an arc; his riffraff are lesser bargainers who foreshadow him. Never fought head-on; outlasted or out-wanted.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": 1,
+    "weight": 2
+   },
+   "rivals": [
+    "maren_ossitide",
+    "the_last_walker"
+   ],
+   "offscreenVerbs": [
+    "closes a bargain that hollows someone",
+    "grants exactly what was asked",
+    "gains a court by giving"
+   ]
   },
   {
    "id": "cinder_vael",
@@ -343,7 +392,20 @@
     "seeking": "will teach you to make, never to stop",
     "violent": "baffled that you'd break what could be improved"
    },
-   "threading": "The wright cult-of-purity \u2014 creation with no restraint, the arc antagonist native to the Manifestation Storm. Her makings ARE the storm in miniature. A character shaping a birth ('Present at the Birth') may meet her on the other side of the choice."
+   "threading": "The wright cult-of-purity \u2014 creation with no restraint, the arc antagonist native to the Manifestation Storm. Her makings ARE the storm in miniature. A character shaping a birth ('Present at the Birth') may meet her on the other side of the choice.",
+   "arcAffinity": {
+    "arcId": "arc_manifestation_storm",
+    "dir": 1,
+    "weight": 3
+   },
+   "rivals": [
+    "the_last_walker"
+   ],
+   "offscreenVerbs": [
+    "builds another impossible thing",
+    "seeds three wonders from one",
+    "floods a district with making"
+   ]
   },
   {
    "id": "the_last_walker",
@@ -385,7 +447,21 @@
     "seeking": "will grant a hearing in the Moot no one else can",
     "violent": "wary \u2014 the wood remembers axes"
    },
-   "threading": "The rootkin hero at the heart of the Green Schism \u2014 the counterweight to the Rootbound seal. A character walking 'The Moot That Will Not End' may need her to earn a hearing. Deploys where life and the human world are being forced apart."
+   "threading": "The rootkin hero at the heart of the Green Schism \u2014 the counterweight to the Rootbound seal. A character walking 'The Moot That Will Not End' may need her to earn a hearing. Deploys where life and the human world are being forced apart.",
+   "arcAffinity": {
+    "arcId": "arc_green_schism",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "cinder_vael",
+    "the_hollow_king"
+   ],
+   "offscreenVerbs": [
+    "wins a word in the Moot",
+    "keeps a promise to the wood",
+    "walks a path the Rootbound sealed"
+   ]
   }
  ]
 }

@@ -406,7 +406,7 @@
    "id": "what_the_water_remembers",
    "name": "What the Water Remembers",
    "region": "valley",
-   "tier": "regional",
+   "tier": "world",
    "giver": "water_keeper",
    "legend": "archive_guardian",
    "axis": "death_life",
@@ -554,6 +554,13 @@
       {
        "type": "xp",
        "amount": 45
+      },
+      {
+       "type": "arc_stage",
+       "arcId": "arc_what_wakes_beneath",
+       "from": 1,
+       "to": 2,
+       "note": "engaging the reclamation site advances What Wakes Beneath on the shared clock \u2014 the tremor became a stirring, and everyone sees it"
       }
      ]
     },
@@ -607,10 +614,21 @@
       {
        "type": "xp",
        "amount": 50
+      },
+      {
+       "type": "arc_stage",
+       "arcId": "arc_what_wakes_beneath",
+       "from": 1,
+       "to": 2,
+       "note": "engaging the reclamation site advances What Wakes Beneath on the shared clock \u2014 the tremor became a stirring, and everyone sees it"
       }
      ]
     }
-   ]
+   ],
+   "arcId": "arc_what_wakes_beneath",
+   "arcStageFrom": 1,
+   "arcStageTo": 2,
+   "publicFace": "The Valley's poisoned water was traced to a built source under the Disputed Zone \u2014 and someone did something about it."
   }
  ]
 }

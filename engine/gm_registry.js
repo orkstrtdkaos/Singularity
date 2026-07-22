@@ -33,7 +33,7 @@
 // failure §23 exists to stop (challengeTypes: 45 values, read by nothing).
 
 import { loreForLocation, eventsForGM } from "./state.js";
-import { buildRegionView, newsForGM } from "./worldtick.js";
+import { buildRegionView, newsForGM, worldArcsForGM } from "./worldtick.js";
 import { inventoryForGM } from "./inventory.js";
 import { companionsForGM, activeCompanions } from "./companions.js";
 import { questsForGM, structuredQuestsForGM, traditionArcForGM, npcQuestsForGM } from "./quests.js";
@@ -169,6 +169,10 @@ export const GM_CONTEXT = [
   { key: "newsDetail", builder: "worldtick.newsForGM", carries: ["world-tick news"],
     reachedBy: "always", spec: "§19", views: ["turn", "ask"],
     build: (env) => newsForGM(env.character) },
+  // SNG-203 §3: the shared, public state of the valley's greater arcs (truth sealed) — so the GM weaves the moving world.
+  { key: "worldArcsDetail", builder: "worldtick.worldArcsForGM", carries: ["greater arcs' public stage", "what has moved on the shared clock"],
+    reachedBy: "always", spec: "SNG-203 §3", views: ["turn", "ask"],
+    build: (env) => worldArcsForGM(env.CONTENT, env.character) },
 
   // ---- turn-only: pass-throughs from runGM's own parameters ----
   { key: "resolution", builder: "runGM param (resolve.resolveAction)", carries: ["this action's mechanical outcome"],

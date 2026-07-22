@@ -317,6 +317,30 @@ function applyQuestEffects(character, quest, effects, ctx = {}) {
         if (e.location) { const l = e.location; character.locationState[l] = { ...(character.locationState[l] || {}), change: e.change || null, questId: quest.id }; applied.push({ type: "location_state", location: e.location, change: e.change }); }
         break;
       }
+      // SNG-203 §3: a tier-1 world_arc_quest advances a greater arc on the SHARED clock. Forward-only (a
+      // "hold" outcome, from==to, records engagement but never regresses); an advance broadcasts as a
+      // propagating world_event so every other player's next load sees the arc has moved. The arc's hidden
+      // direction (pressureOnAdvance/tendency) never rides along — only the authored public `note`.
+      case "arc_stage": {
+        if (e.arcId && Number.isFinite(e.to)) {
+          character.worldState = character.worldState || {};
+          character.worldState.arcStages = character.worldState.arcStages || {};
+          const cur = character.worldState.arcStages[e.arcId]?.stage;
+          const from = Number.isFinite(e.from) ? e.from : (cur ?? 1);
+          const next = Math.max(Number.isFinite(cur) ? cur : from, e.to);   // forward-only
+          const advanced = next > (Number.isFinite(cur) ? cur : from);
+          character.worldState.arcStages[e.arcId] = { stage: next, sinceDay: ctx.worldDay ?? null, byQuest: quest.id };
+          if (advanced) {
+            const ev = { kind: "arc_stage", arcId: e.arcId, questId: quest.id, questTitle: quest.title, stage: next,
+              text: smartClamp(e.note || `A greater arc of the valley advanced to stage ${next} — and everyone can see it.`, 800),
+              worldDay: ctx.worldDay ?? null, propagates: e.propagates !== false };
+            character.worldEvents.push(ev);
+            if (typeof ctx.recordEvent === "function") { try { ctx.recordEvent(ev); } catch { /* sink optional */ } }
+          }
+          applied.push({ type: "arc_stage", arcId: e.arcId, stage: next, advanced });
+        }
+        break;
+      }
       case "quest_seed": {
         if (e.text) { pinFact(`A thread opens: ${e.text}`, false); applied.push({ type: "quest_seed", text: e.text }); }
         break;

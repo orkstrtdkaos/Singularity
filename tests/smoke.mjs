@@ -15,7 +15,7 @@ import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, tou
 import { sanitizeScene, buildTurnContext, sanitizeIntent, narrativeRegister, ratingRegister, renderSceneHistory, tierParts, bluntnessDirective } from "../engine/gm.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, findExistingNpc, prettifyNpcName, relationshipBand, advanceBond, relationshipLabel, isPartnerAdjacent, knownPeopleAt, npcPortraitTier, backfillNpcGender } from "../engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
-import { initWorldState, runWorldTick, advanceGeneratedOffscreen, applyWantOutcome, offscreenPopulation, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "../engine/worldtick.js";
+import { initWorldState, runWorldTick, advanceGeneratedOffscreen, applyWantOutcome, offscreenPopulation, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, worldArcsForGM } from "../engine/worldtick.js";
 import { assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "../engine/gambit.js";
 import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, autoAdvancePracticedRanks, markDefiningMoment, meetsStandingBar, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy, nativeGrantIdsFor, applyNativeGrants, retroNativeGrants, seedInnateSubstrate } from "../engine/progression.js";
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, liaisonMultiplierFor, roleBadges, COMPANY_ROLES } from "../engine/company.js";
@@ -6810,6 +6810,56 @@ await (async () => {
   const oneTaken = npcQuestsForGM({ quests: [{ id: errands[0].id }] }, CONTENT203, { knownGivers: knownBoth });
   check("203: an already-taken errand drops out of the offer list", oneTaken !== null && !oneTaken.includes(errands[0].id) && oneTaken.includes(errands[1].id));
   check("203: a present-in-scene giver is reachable even without the registry", npcQuestsForGM({}, CONTENT203, { presentNpcIds: [errands[0].giver] }) !== null);
+}
+
+// ---- SNG-203 Phase 2: the arc_stage broadcast + the shared world-arc progress surface ----
+{
+  const ga203 = JSON.parse(readFileSync(join(root, "content/packs/valley/lore/greater_arcs.json"), "utf8"));
+  const CONTENT203P2 = { greaterArcs: ga203.arcs };
+  const arc = ga203.arcs[0]; // arc_the_poles_pull — 4 stages, currentStage 1
+
+  // worldArcsPublic reads the authored default when this world hasn't moved the arc; surfaces the stage's public face.
+  const pub0 = worldArcsPublic(CONTENT203P2, { worldState: initWorldState(1) });
+  const row0 = pub0.find(r => r.arcId === arc.id);
+  check("203P2 §3: an untouched arc reads its authored stage + that stage's public face", row0.stageNum === (arc.currentStage ?? 1) && row0.moved === false && row0.publicFace === arc.stages[0].publicFace);
+  check("203P2 §3: the public surface NEVER leaks the arc's hidden direction (pressureOnAdvance / ifIgnored)", !/pressureOnAdvance|ifIgnored/.test(JSON.stringify(pub0)) && !pub0.some(r => r.publicFace === arc.stages[0].pressureOnAdvance));
+
+  // the arc_stage effect: an ADVANCE writes arcStages forward + broadcasts a propagating world_event.
+  const q203 = { id: "wq_test", name: "The Deep Test", stakes: "the whole valley pays if ignored", scale: "world",
+    stages: [{ id: "s1", objective: "engage the site", condition: "do it", change: "engaged" }], routes: {},
+    outcomes: [
+      { id: "advance", name: "Advanced", summary: "moved", effects: [{ type: "arc_stage", arcId: arc.id, from: 1, to: 2, note: "the drift became strain, and everyone sees it" }] },
+      { id: "hold", name: "Held", summary: "held", effects: [{ type: "arc_stage", arcId: arc.id, from: 1, to: 1, note: "held here" }] }] };
+  const advChar = { name: "A", quests: [], xp: 0, chronicle: [], worldState: initWorldState(1) };
+  startStructuredQuest(advChar, q203, { worldDay: 10 });
+  const evs = [];
+  resolveStructuredQuest(advChar, "wq_test", "advance", { worldDay: 10, recordEvent: e => evs.push(e) });
+  check("203P2 §1: an arc_stage advance writes the arc forward on worldState.arcStages", advChar.worldState.arcStages[arc.id]?.stage === 2);
+  check("203P2 §1: the advance BROADCASTS as a propagating world_event (kind arc_stage)", evs.some(e => e.kind === "arc_stage" && e.arcId === arc.id && e.stage === 2 && e.propagates === true) && advChar.worldEvents.some(e => e.kind === "arc_stage"));
+  check("203P2 §1: only the authored public note broadcasts", advChar.worldEvents.find(e => e.kind === "arc_stage").text.includes("everyone sees it"));
+  const row1 = worldArcsPublic(CONTENT203P2, advChar).find(r => r.arcId === arc.id);
+  check("203P2 §3: worldArcsPublic reflects the advance (stage 2, MOVED, stage-2 public face)", row1.stageNum === 2 && row1.moved === true && row1.publicFace === arc.stages[1].publicFace);
+
+  // a HOLD outcome records engagement but never advances / never broadcasts an advance.
+  const holdChar = { name: "H", quests: [], xp: 0, chronicle: [], worldState: initWorldState(1) };
+  startStructuredQuest(holdChar, q203, { worldDay: 10 });
+  const hevs = [];
+  resolveStructuredQuest(holdChar, "wq_test", "hold", { worldDay: 10, recordEvent: e => hevs.push(e) });
+  check("203P2 §1: a HOLD outcome does not advance the arc + does not broadcast an advance", (holdChar.worldState.arcStages[arc.id]?.stage ?? 1) === 1 && !hevs.some(e => e.kind === "arc_stage"));
+
+  // forward-only: an arc already ahead is never pulled back by a lower 1→2 effect.
+  const fwd = { name: "F", quests: [], xp: 0, chronicle: [], worldState: { ...initWorldState(1), arcStages: { [arc.id]: { stage: 3 } } } };
+  startStructuredQuest(fwd, q203, { worldDay: 10 });
+  resolveStructuredQuest(fwd, "wq_test", "advance", { worldDay: 10, recordEvent: () => {} });
+  check("203P2 §1: forward-only — a 1→2 effect never pulls an arc already at stage 3 backward", fwd.worldState.arcStages[arc.id].stage === 3);
+
+  // worldArcsForGM names the stage + public face and marks a moved arc; wiring assertions for sync + player surface.
+  const gm203 = worldArcsForGM(CONTENT203P2, advChar);
+  check("203P2 §3: worldArcsForGM names each arc's stage + public face + marks the moved one", /THE WORLD'S GREATER ARCS/.test(gm203) && gm203.includes(arc.stages[1].publicFace) && /MOVED on the shared clock/.test(gm203));
+  const wtSrc203 = readFileSync(join(root, "engine/worldtick.js"), "utf8");
+  check("203P2 §3: syncSharedWorld merges arcStages forward-only + pushes them back", /remote\?\.arcStages/.test(wtSrc203) && /arcStages: ws\.arcStages/.test(wtSrc203));
+  const appSrc203 = readFileSync(join(root, "app.js"), "utf8");
+  check("203P2 §3: the world map renders the shared arc-progress readout (worldArcsPublic)", /worldArcsPublic\(CONTENT, character\)/.test(appSrc203) && /class="world-arcs"/.test(appSrc203));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

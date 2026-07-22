@@ -25,7 +25,56 @@ const NEWS_CAP = 20;
 const NEWS_TRAVEL_DAYS = 3;
 
 export function initWorldState(day = 1) {
-  return { schemaVersion: 1, lastTickDay: day, eventStages: {}, spectrumDrift: {}, news: [], unseenNews: [] };
+  return { schemaVersion: 1, lastTickDay: day, eventStages: {}, arcStages: {}, spectrumDrift: {}, news: [], unseenNews: [] };
+}
+
+// ---------- SNG-203 Phase 2: the shared world-arc clock ----------
+// A greater arc (greater_arcs.json) carries an authored `currentStage` and a numbered `stages[]` ladder,
+// each stage with a `publicFace` (what everyone sees) and a GM-EYES `pressureOnAdvance`/`tendency` (sealed).
+// A tier-1 world_arc_quest's `arc_stage` effect advances the arc on the SHARED clock — the same forward-only
+// eventStages machinery, so one player moving an arc is a world event every other player's next load sees.
+
+/** The greater arc def by id (content.greaterArcs is the arcs array). Module-internal. */
+function findGreaterArc(content, arcId) {
+  return (content?.greaterArcs || []).find(a => a.id === arcId) || null;
+}
+
+/** This world's EFFECTIVE stage for an arc: the furthest of the authored default (`currentStage`) and this
+ *  campaign's progress (`worldState.arcStages`). Forward-only — a hold never regresses it. Module-internal;
+ *  its behaviour is covered through the exported worldArcsPublic. */
+function arcStageNow(content, character, arcId) {
+  const arc = findGreaterArc(content, arcId);
+  const authored = arc?.currentStage ?? 1;
+  const local = character?.worldState?.arcStages?.[arcId]?.stage;
+  return Math.max(authored, Number.isFinite(local) ? local : authored);
+}
+
+/** SNG-203 §3: the PUBLIC face of where the world arcs stand — the readable "state of the world" every
+ *  player sees. Only the current stage's `publicFace` + stage name/number surface; the arc's `tendency`,
+ *  `ifIgnored`, and per-stage `pressureOnAdvance` (GM-EYES / the wake seed) NEVER leak here. Structured data
+ *  reused by the GM block and the player-facing world-map readout. */
+export function worldArcsPublic(content, character) {
+  return (content?.greaterArcs || []).map(arc => {
+    const stageNum = arcStageNow(content, character, arc.id);
+    const total = (arc.stages || []).length || 1;
+    const def = (arc.stages || []).find(s => s.stage === stageNum) || (arc.stages || [])[Math.max(0, stageNum - 1)] || null;
+    const moved = (character?.worldState?.arcStages?.[arc.id]?.stage ?? (arc.currentStage ?? 1)) > (arc.currentStage ?? 1);
+    return {
+      arcId: arc.id, name: arc.name, stageNum, total,
+      stageName: def?.name || `Stage ${stageNum}`,
+      publicFace: def?.publicFace || arc.tendency || "", // tendency is the authored fallback surface line (not the sealed truth)
+      moved, // has THIS world pushed it past the authored default?
+    };
+  });
+}
+
+/** SNG-203 §3: the shared world-arc progress surface as a GM block — the world's public state, so the GM can
+ *  weave "the arcs are moving" into play without inventing it. Truth stays sealed (see worldArcsPublic). */
+export function worldArcsForGM(content, character) {
+  const arcs = worldArcsPublic(content, character);
+  if (!arcs.length) return null;
+  const lines = arcs.map(a => `- ${a.name} — ${a.stageName} (stage ${a.stageNum}/${a.total})${a.moved ? " ⤴ MOVED on the shared clock" : ""}: ${a.publicFace}`);
+  return `THE WORLD'S GREATER ARCS — the shared, public state of the valley (every traveler knows this much; the arcs' hidden direction is yours alone to know). Reference them as the weather of the wider world; when one has MOVED, the change is felt everywhere:\n${lines.join("\n")}`;
 }
 
 /** Region view for the GM: content events overlaid with this campaign's stages. */
@@ -224,6 +273,20 @@ export async function syncSharedWorld({ character, content }) {
         }
       }
     }
+    // SNG-203 §3: greater-arc stages merge to the furthest ANY player has pushed them — one valley's arcs
+    // for everyone. Forward-only (an arc never un-advances on merge), same doctrine as eventStages.
+    if (remote?.arcStages) {
+      ws.arcStages = ws.arcStages || {};
+      for (const [arcId, st] of Object.entries(remote.arcStages)) {
+        const local = ws.arcStages[arcId];
+        if (!local || (st.stage ?? 0) > (local.stage ?? 0)) {
+          ws.arcStages[arcId] = { ...st };
+          const arc = findGreaterArc(content, arcId);
+          const def = arc && (arc.stages || []).find(s => s.stage === st.stage);
+          if (arc && def) news.push({ text: `Across the valley, ${arc.name} has moved to ${def.name || `stage ${st.stage}`}: ${def.publicFace || ""}`.trim(), worldDay: absoluteWorldDay() });
+        }
+      }
+    }
     if (remote?.spectrumDrift) {
       for (const [ax, v] of Object.entries(remote.spectrumDrift)) {
         if (Math.abs(v) > Math.abs(ws.spectrumDrift[ax] || 0)) ws.spectrumDrift[ax] = v;
@@ -247,7 +310,7 @@ export async function syncSharedWorld({ character, content }) {
       schemaVersion: 1, regionId: "valley",
       calendar: remote?.calendar || { day: ws.lastTickDay, season: "late-spring", year: 15 },
       activeEvents: (content.region.activeEvents || []).map(({ eventId, stage }) => ({ eventId, stage: ws.eventStages[eventId]?.stage ?? stage })),
-      eventStages: ws.eventStages, spectrumDrift: ws.spectrumDrift,
+      eventStages: ws.eventStages, arcStages: ws.arcStages || {}, spectrumDrift: ws.spectrumDrift,
       worldFlags: remote?.worldFlags || {}, lastTick: new Date().toISOString()
     }, `world-tick: consolidated by ${character.name}`);
   } catch (err) {

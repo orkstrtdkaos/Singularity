@@ -41,7 +41,7 @@ import { resolveWaygateTransit, routeGmMoveTo } from "./engine/waygate.js"; // S
 import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./engine/entityDetail.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent } from "./engine/places.js";
-import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "./engine/worldtick.js";
+import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic } from "./engine/worldtick.js";
 import { addAssignment } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
 import { setArcFate } from "./engine/latentarcs.js"; // SNG-191 §7: the player closing a surfaced arc (the handled/resolved fate)
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
@@ -65,7 +65,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.196";
+const APP_VERSION = "1.8.197";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4636,11 +4636,25 @@ function renderMapWorld() {
     </g>`;
   }).join("");
   const rows = Math.ceil(nodes.length / cols);
+  // SNG-203 §3: the shared, PUBLIC state of the valley's greater arcs — everyone sees where they stand. The
+  // arcs' hidden direction stays sealed; only the current stage's public face shows. A ⤴ marks an arc THIS
+  // world has pushed past its authored default (someone, maybe you, moved it — and it's a shared world).
+  const arcs = worldArcsPublic(CONTENT, character);
+  const arcPanel = arcs.length ? `<div class="world-arcs">
+    <h3 class="world-arcs-head">The World Stands…</h3>
+    <p class="hint" style="margin:0 0 8px">The valley's greater arcs, and where they've reached — shared canon, the same for every traveler.</p>
+    ${arcs.map(a => `<div class="world-arc ${a.moved ? "moved" : ""}">
+      <div class="world-arc-top"><span class="world-arc-name">${esc(a.name)}</span><span class="world-arc-stage">${esc(a.stageName)} · ${a.stageNum}/${a.total}${a.moved ? " ⤴" : ""}</span></div>
+      <div class="world-arc-track">${Array.from({ length: a.total }, (_, i) => `<span class="wat-pip ${i < a.stageNum ? "on" : ""}"></span>`).join("")}</div>
+      <p class="world-arc-face">${esc(a.publicFace)}</p>
+    </div>`).join("")}
+  </div>` : "";
   chrome(`<div class="screen" style="max-width:900px">
     <h2>World Map</h2>
     <p class="hint" style="margin-bottom:8px">${nodes.length} regions${nodes.reduce((n, r) => n + r.gates.length, 0) ? ` · ${nodes.reduce((n, r) => n + r.gates.length, 0)} waygates` : ""}. The scale where the question is <em>which Reach am I in</em>.</p>
     ${mapTierBar()}
     <div class="graph-wrap"><svg id="skill-svg" viewBox="0 0 800 ${Math.max(220, rows * ch + 30)}" class="world-map" preserveAspectRatio="xMidYMid meet"><g class="graph-vp">${cells}</g></svg></div>
+    ${arcPanel}
     <button class="btn secondary" id="map-back" style="margin-top:12px">Back</button>
   </div>`);
   for (const g of app.querySelectorAll("[data-mapregion]")) g.onclick = () => { mapTier = "region"; mapFocus = g.dataset.mapregion; renderMap(); };

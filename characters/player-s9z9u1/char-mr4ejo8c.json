@@ -6,7 +6,7 @@
   "origin": "valley",
   "background": "craftsman",
   "level": 10,
-  "xp": 913,
+  "xp": 926,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -76,7 +76,7 @@
   "maxHealth": 70,
   "health": 70,
   "maxEnergy": 145,
-  "energy": 127,
+  "energy": 117,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -490,65 +490,99 @@
         "player": "Ask Aevi — through the Waystaff — what comes now. The chamber has recognized something. Does it want anything next?",
         "summary": "The chamber holds recognition — Aevi names it as a door held open after the key has turned, not an empty wait; Teva asks whether bringing the frequency here was only the first part of an answer.",
         "narration": "You rest your free hand against the Waystaff's ash limb and speak aloud, letting the words travel down through the crystal nodes into the floor. \"Aevi,\" you say. \"The chamber has received us. Does it want something now? Or does it only wait?\"\n\nAevi is quiet for a long moment. The motes do not shift or scatter. Then the voice comes through the nearest node — a sound like a struck bowl going still. \"It is not waiting,\" Aevi says. \"Waiting is an empty thing. This is something else. It is holding — the way a door holds after the key has turned, before anyone decides to push it open.\"\n\nTeva lifts her head. She has been listening with her hand flat at her sternum, but now she speaks, carefully, as if feeling for solid ground. \"The mark,\" she says. \"It was checking whether I'd carry the frequency. Whether I'd walk where it pointed.\" She pauses. \"I did. We all did.\" She looks at you. \"Is that the answer it wanted, or only the first part of one?\"\n\nAevi speaks again through the Waystaff, and this time the voice is slower, like a thought being turned over before it is named. \"I do not think it wants something next,\" Aevi says. \"I think it has been made to receive and to hold — to register arrival and keep the door open. What comes after arrival is not inside the chamber's instruction. Something else must set the next step.\" A pause. The motes along the crystal grain stay bright. \"And I do not know whether that something is already on its way, or whether it needs to be found.\""
+      },
+      {
+        "player": "I close one eye and let the other read the stone — light and vibration together, looking for what the warmth hasn't told me yet.",
+        "summary": "Braided stone-read reveals a convergence point at the chamber's center and pattern-marks on the walls — a counted record, long-kept.",
+        "narration": "You close one eye and let the other do the work.\n\nPrism Sight settles in like a held breath — not pushed, not pressed, just open. The braided field comes in behind it, quiet, the way you have learned to layer these two without letting either shout over the other. The chamber's four-second pulse is already in your bones from a full morning of exchange, so you simply let it feed into the read rather than fighting it. The stone answers.\n\nThe floor's warmth has a grain to it. Not uniform — the heat travels in channels, following something laid into the aggregate before it was pressed flat. Three lines converge a few paces ahead of where you stand, just short of the center, and at their meeting point the light-history pooled centuries ago and has not fully dissipated. Whatever was placed there — set down, or done, or decided — left a brightness in the stone's memory that your braided field can just barely taste. A circle, perhaps. A position marker.\n\nThe walls carry something different. The inner absorptive face has been struck at irregular intervals over a very long time — not struck hard, not with force, but with intention. Pattern-marks, each one a slightly different depth. Your Sonic Resonance reads them as a scale with no tonic, and Prism Sight reads the micro-fracture in each as deliberate, controlled, a long record of something counted. Teva watches your face as the read runs its course. When you lower your gaze, she says, very quietly, \"There's a center point, isn't there.\"\n\nAevi's motes drift forward along the Waystaff grain, toward the place you were looking."
       }
     ],
     "lastTurn": {
-      "narration": "You rest your free hand against the Waystaff's ash limb and speak aloud, letting the words travel down through the crystal nodes into the floor. \"Aevi,\" you say. \"The chamber has received us. Does it want something now? Or does it only wait?\"\n\nAevi is quiet for a long moment. The motes do not shift or scatter. Then the voice comes through the nearest node — a sound like a struck bowl going still. \"It is not waiting,\" Aevi says. \"Waiting is an empty thing. This is something else. It is holding — the way a door holds after the key has turned, before anyone decides to push it open.\"\n\nTeva lifts her head. She has been listening with her hand flat at her sternum, but now she speaks, carefully, as if feeling for solid ground. \"The mark,\" she says. \"It was checking whether I'd carry the frequency. Whether I'd walk where it pointed.\" She pauses. \"I did. We all did.\" She looks at you. \"Is that the answer it wanted, or only the first part of one?\"\n\nAevi speaks again through the Waystaff, and this time the voice is slower, like a thought being turned over before it is named. \"I do not think it wants something next,\" Aevi says. \"I think it has been made to receive and to hold — to register arrival and keep the door open. What comes after arrival is not inside the chamber's instruction. Something else must set the next step.\" A pause. The motes along the crystal grain stay bright. \"And I do not know whether that something is already on its way, or whether it needs to be found.\"",
-      "sceneSummary": "The chamber holds recognition — Aevi names it as a door held open after the key has turned, not an empty wait; Teva asks whether bringing the frequency here was only the first part of an answer.",
+      "narration": "You close one eye and let the other do the work.\n\nPrism Sight settles in like a held breath — not pushed, not pressed, just open. The braided field comes in behind it, quiet, the way you have learned to layer these two without letting either shout over the other. The chamber's four-second pulse is already in your bones from a full morning of exchange, so you simply let it feed into the read rather than fighting it. The stone answers.\n\nThe floor's warmth has a grain to it. Not uniform — the heat travels in channels, following something laid into the aggregate before it was pressed flat. Three lines converge a few paces ahead of where you stand, just short of the center, and at their meeting point the light-history pooled centuries ago and has not fully dissipated. Whatever was placed there — set down, or done, or decided — left a brightness in the stone's memory that your braided field can just barely taste. A circle, perhaps. A position marker.\n\nThe walls carry something different. The inner absorptive face has been struck at irregular intervals over a very long time — not struck hard, not with force, but with intention. Pattern-marks, each one a slightly different depth. Your Sonic Resonance reads them as a scale with no tonic, and Prism Sight reads the micro-fracture in each as deliberate, controlled, a long record of something counted. Teva watches your face as the read runs its course. When you lower your gaze, she says, very quietly, \"There's a center point, isn't there.\"\n\nAevi's motes drift forward along the Waystaff grain, toward the place you were looking.",
+      "sceneSummary": "Braided stone-read reveals a convergence point at the chamber's center and pattern-marks on the walls — a counted record, long-kept.",
       "choices": [
         {
-          "label": "Ask Aevi whether it knows where to look — whether the chamber's instruction points anywhere, or someone, outside this room",
+          "label": "Step to the convergence point and stand in it — see if the chamber registers the position",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {
+            "mechanical_spiritual": 0.4,
+            "chaos_order": 0.3
+          },
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "devote",
+            "careful"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Use Resonant Sight through the Waystaff — read the chamber's walls and floor now that it is in recognition, looking for anything that changed or revealed itself",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Read the wall-marks more carefully — let Prism Sight trace the record to its beginning or its end",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "mechanical_spiritual": 0.3,
+            "concrete_abstract": 0.2
+          },
           "difficulty": 15,
           "intentTags": [
             "study",
             "careful"
           ],
-          "abilityId": "braid_prism_sight_sonic_resonance"
+          "abilityId": "prism_sight",
+          "energyCost": null,
+          "trivial": false
         },
         {
-          "label": "Ask Teva directly — she carried the mark here and she felt it quiet; does she sense any pull or direction now that the exchange is settled?",
+          "label": "Ask Teva what her structural read tells her about the convergence point — she mapped this chamber from outside",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {
+            "emotional_logical": -0.2
+          },
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "plan",
+            "help"
           ],
+          "abilityId": null,
+          "energyCost": null,
           "trivial": true
         },
         {
-          "label": "Lift the Waystaff from the floor and begin leading the party out — the chamber has received you; what it points toward next will need to be found above ground, in the world",
+          "label": "Send a single beat of the three-two-three from the convergence point — directed into the floor at the center, not through the Waystaff",
           "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
+          "subAttribute": "craft",
+          "axes": {
+            "mechanical_spiritual": 0.5,
+            "chaos_order": 0.4
+          },
+          "difficulty": 15,
           "intentTags": [
-            "travel",
-            "careful"
+            "devote",
+            "risky"
           ],
-          "trivial": true
+          "abilityId": "sonic_resonance",
+          "energyCost": null,
+          "trivial": false
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -6
+      },
       "scene": {
-        "setting": "The chamber — hemispherical dressed-stone, flat-laid floor, warm underfoot and holding steady. No wind, no outside light. Four Waystaff nodes burning white-blue without cycling, all simultaneously.",
+        "setting": "The chamber — hemispherical dressed-stone, flat-laid floor, warm underfoot and holding steady. No wind, no outside light. Four Waystaff nodes burning white-blue without cycling. A convergence point of heat-channels visible a few paces forward of where Cellaceron stands, just short of center. Wall-marks: irregular depth-strikes in the absorptive face, spaced across a very long record.",
         "npcsPresent": [
           {
             "name": "Teva",
-            "state": "Head lifted, hand still at sternum — she has spoken, and is watching you for what comes next"
+            "state": "watching Cellaceron's face during the read; has named the convergence point aloud, waiting for confirmation"
           },
           {
             "name": "Aevi",
-            "state": "Motes bright and still along the Waystaff's crystal grain, voice just quieted after speaking"
+            "state": "motes drifting forward along the Waystaff grain, toward the convergence point"
           }
         ],
         "objects": [
@@ -559,69 +593,87 @@
           "Bark-press paper (three sheets)",
           "Resonance crystals — four nodes, seated in Waystaff lattice",
           "Liverwort mat — forward alcove (in pack)",
-          "Chamber floor — flat-laid pressed aggregate, warm and steady underfoot"
+          "Chamber floor — flat-laid pressed aggregate, warm and steady; heat-channels visible converging a few paces forward",
+          "Wall-marks — irregular depth-strikes in the inner absorptive face, a counted record across many years"
         ],
         "threads": [
-          "The chamber holds recognition — a door open after the key has turned, not yet pushed",
-          "Aevi does not know whether the next step is already coming or must be found",
-          "Teva's question is open: was bringing the frequency here the answer, or only the first part of one?"
+          "Convergence point at chamber center — identified but not yet stepped into",
+          "Wall-marks as a long counted record — beginning or end not yet read",
+          "Teva has named the convergence point — she mapped this chamber from outside and knows something about it",
+          "Aevi is moving toward the convergence point — interested",
+          "The chamber holds recognition — the door is open; what is asked of the visitor is not yet clear"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "aevi",
-          "name": "Aevi",
-          "note": "Named the chamber's held state through the Waystaff — not waiting, but holding like a door after the key turns; said the next step is not inside the chamber's instruction, and it does not know whether what comes is already on its way or must be found",
-          "learned": [
-            "The chamber is in a held-recognition state — a door open, not an active wait",
-            "The chamber's instruction ends at receiving arrival; what comes after is not written inside it",
-            "Aevi does not know whether the next step is already approaching or must be actively sought"
-          ],
-          "statusNote": "Distributed through the Waystaff's crystal nodes, motes bright and still, voice just quieted after naming the chamber's held state"
-        },
-        {
-          "op": "update",
-          "npcId": "teva-anselvar-missing-apprentice",
-          "name": "Teva",
-          "note": "Named aloud that she carried the frequency where it pointed — and asked whether that act was the answer or only the first part of one",
-          "learned": [
-            "Teva understands her own role now: she was the carrier, tested for willingness to walk toward the chamber's signal",
-            "She is thinking actively about what comes next, not passive"
-          ],
-          "statusNote": "Standing in the chamber, mark quieted, head lifted — processing what recognition means for what follows"
-        }
-      ],
       "codexUpdates": [
         {
           "topic": "the-chamber-beyond-the-threshold",
-          "label": "The Chamber Beyond the Threshold",
+          "label": "The Chamber",
           "kind": "mystery",
-          "fact": "Day 9 dawn: Aevi names the chamber's recognition state as 'holding' — not waiting. A door open after the key has turned. The chamber's instruction ends at receiving arrival; what comes after is not contained in the chamber itself. The next step must come from outside.",
+          "fact": "Day 9 dawn: braided stone-read (Prism Sight + Sonic Resonance) reveals heat-channels running in the pressed aggregate floor, converging at a point just short of center — a position marker, light-memory pooled there and still present after centuries. The inner absorptive face holds irregular depth-strikes across a very long span: a scale with no tonic, each strike deliberate, a counted record of something.",
           "links": [
             "second-river-rising",
-            "teva-anselvar-missing-apprentice",
+            "teva-directional-interval-count",
             "scored-mark-forward-alcove",
-            "northern-alcove-camp",
-            "aevi"
+            "aevi",
+            "teva-anselvar-missing-apprentice"
           ]
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "Braided stone-read confirmed: heat-channels in the floor converge at a point a few paces short of chamber center — a position marker, light-memory present for centuries. Wall-marks are a long deliberate count in the absorptive face — many strikes, many eras, no clear tonic.",
+          "subPlace": {
+            "name": "The Chamber",
+            "parent": "Harmonic Heights — Lower Terrace",
+            "note": "Convergence point identified at chamber center; wall-marks are a counted record of unknown duration. Chamber still in held-recognition state.",
+            "visited": true
+          }
+        }
+      ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "second-river-rising",
+          "note": "Braided stone-read reveals the chamber's interior geometry: heat-channels converge at a position marker just short of center, and wall-marks are a long deliberate count — the chamber has been keeping record of something across many cycles. The convergence point has not yet been stood in."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a brief exchange through the Waystaff — a question asked and answered in the chamber's stillness"
-      }
+        "why": "A careful, restrained braided read — takes a few minutes but no more"
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "teva",
+          "name": "Teva",
+          "note": "Named the convergence point aloud — 'There's a center point, isn't there' — before Cellaceron said anything. Her structural read from outside the chamber already anticipated what the braided field just confirmed.",
+          "learned": [
+            "Teva anticipated the convergence point from her acoustic mapping before ever entering — she knew the geometry before Cellaceron read it"
+          ],
+          "statusNote": "In the chamber with Cellaceron; watching, named the center point, waiting for what comes next",
+          "status": "active"
+        },
+        {
+          "op": "update",
+          "npcId": "aevi",
+          "name": "Aevi",
+          "note": "Moved forward along the Waystaff grain toward the convergence point without being asked — drawn to it.",
+          "statusNote": "Distributed through Waystaff nodes; motes drifting forward toward chamber's convergence point",
+          "status": "active"
+        }
+      ],
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The chamber — hemispherical dressed-stone, flat-laid floor, warm underfoot and holding steady. No wind, no outside light. Four Waystaff nodes burning white-blue without cycling, all simultaneously.",
+      "setting": "The chamber — hemispherical dressed-stone, flat-laid floor, warm underfoot and holding steady. No wind, no outside light. Four Waystaff nodes burning white-blue without cycling. A convergence point of heat-channels visible a few paces forward of where Cellaceron stands, just short of center. Wall-marks: irregular depth-strikes in the absorptive face, spaced across a very long record.",
       "npcsPresent": [
         {
           "name": "Teva",
-          "state": "Head lifted, hand still at sternum — she has spoken, and is watching you for what comes next"
+          "state": "watching Cellaceron's face during the read; has named the convergence point aloud, waiting for confirmation"
         },
         {
           "name": "Aevi",
-          "state": "Motes bright and still along the Waystaff's crystal grain, voice just quieted after speaking"
+          "state": "motes drifting forward along the Waystaff grain, toward the convergence point"
         }
       ],
       "objects": [
@@ -632,12 +684,15 @@
         "Bark-press paper (three sheets)",
         "Resonance crystals — four nodes, seated in Waystaff lattice",
         "Liverwort mat — forward alcove (in pack)",
-        "Chamber floor — flat-laid pressed aggregate, warm and steady underfoot"
+        "Chamber floor — flat-laid pressed aggregate, warm and steady; heat-channels visi",
+        "Wall-marks — irregular depth-strikes in the inner absorptive face, a counted rec"
       ],
       "threads": [
-        "The chamber holds recognition — a door open after the key has turned, not yet pushed",
-        "Aevi does not know whether the next step is already coming or must be found",
-        "Teva's question is open: was bringing the frequency here the answer, or only the first part of one?"
+        "Convergence point at chamber center — identified but not yet stepped into",
+        "Wall-marks as a long counted record — beginning or end not yet read",
+        "Teva has named the convergence point — she mapped this chamber from outside and knows something about it",
+        "Aevi is moving toward the convergence point — interested",
+        "The chamber holds recognition — the door is open; what is asked of the visitor is not yet clear"
       ]
     }
   },
@@ -659,14 +714,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Two answering beats returned on the second plain count — the chamber appears to be building a counting sequence rather than merely confirming contact. Teva's tissue-read is tracking the pattern directly.",
         "Fourth crystal seated — complete four-node instrument offered to the chamber. Chamber settled into recognition-register. Teva's tissue-mark confirmed a register shift. The exchange is resting at its deepest foundation yet.",
         "Party crossed the threshold and entered the chamber itself — forty paces below the forward alcove, hemispherical, warm, the pulse in the floor and the Waystaff both cycling at four seconds. The room has noticed them.",
         "Resonant Sight reads the chamber's material construction: designed to contain, to absorb at specific frequencies, and to function as a clock. The floor is a surface above something deeper. The nested three-two-three interval is new — added since the Waystaff lattice was completed.",
         "Three-two-three interval answered through the Waystaff; chamber stepped its nested count deeper in reply — it is testing whether Cellaceron can hold the ratio clean.",
         "Three-two-three sent one step deeper — the chamber answered with a third fold and held, now evaluating whether the respondent qualifies.",
         "Fourth fold sent — chamber answered with an unprompted fifth and held it steady. Testing phase over: the exchange has shifted to recognition. Teva's mark responded simultaneously.",
-        "Fifth fold sent and received — the chamber holds the exchange in recognition, no longer testing. Teva's mark quieted at the same moment. The preparation cycle has acknowledged arrival; what it wants next is not yet known."
+        "Fifth fold sent and received — the chamber holds the exchange in recognition, no longer testing. Teva's mark quieted at the same moment. The preparation cycle has acknowledged arrival; what it wants next is not yet known.",
+        "Braided stone-read reveals the chamber's interior geometry: heat-channels converge at a position marker just short of center, and wall-marks are a long deliberate count — the chamber has been keeping record of something across many cycles. The convergence point has not yet been stood in."
       ],
       "startedAt": "2026-07-03T18:55:17.042Z"
     },
@@ -913,7 +968,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d8] Your bond becomes platonic.",
         "[d8] Watched Cellaceron use Prism Sight on it directly — did not withdraw; knows it was read and holds still",
         "[d8] Held shoulder-close through the night — dim and present, not retreating",
         "[d9] Pulled tight and very quiet on entry — motes condensed to a bright cluster, casting real light, holding close.",
@@ -922,7 +976,8 @@
         "[d9] Spoke through the Waystaff for the second time — named the chamber's purpose as a preparation cycle counting toward a return, and the three-two-three as a handshake for something the thing that left would know.",
         "[d9] Spoke through the Waystaff as the chamber answered the fourth fold with a fifth — named the shift from testing to recognition; motes went very bright",
         "[d9] Named the chamber's shift plainly through the Waystaff — 'It has received you. This is what it was keeping count toward.' Motes very bright and still along the crystal grain.",
-        "[d9] Named the chamber's held state through the Waystaff — not waiting, but holding like a door after the key turns; said the next step is not inside the chamber's instruction, and it does not know whether what comes is already on its way or must be found"
+        "[d9] Named the chamber's held state through the Waystaff — not waiting, but holding like a door after the key turns; said the next step is not inside the chamber's instruction, and it does not know whether what comes is already on its way or must be found",
+        "[d9] Moved forward along the Waystaff grain toward the convergence point without being asked — drawn to it."
       ],
       "knownFacts": [
         "The chamber is keeping count since something departed — waiting for conditions to match again",
@@ -947,7 +1002,7 @@
         "locationId": "harmonic_heights_terrace",
         "day": 9
       },
-      "statusNote": "Distributed through the Waystaff's crystal nodes, motes bright and still, voice just quieted after naming the chamber's held state",
+      "statusNote": "Distributed through Waystaff nodes; motes drifting forward toward chamber's convergence point",
       "bondType": "platonic",
       "domains": {
         "primary": "harmonic"
@@ -1169,7 +1224,6 @@
     "harmonic_heights_terrace": {
       "visits": 1,
       "notes": [
-        "[d8] Day 8 night: second plain count drew two answering beats at the four-second interval; fourth shallow crystal warmed a second time, fractionally deeper. Chamber response is sequential — may be learning",
         "[d8] Day 8 night: fourth resonance crystal fully attuned to chamber's four-second frequency via light-and-sonic braid — held separate from Waystaff lattice, warm and ready; the Zone's interference layer re",
         "[d8] Day 8 night: fourth resonance crystal seated into Waystaff lattice — instrument now complete with all four nodes active. Floor-warmth beneath grip-end settled into a long quiet exhale of recognition a",
         "[d8] Day 8 night: Resonant Sight through complete four-node Waystaff confirms chamber is subterranean — hemispherical, dressed-wall geometry at roughly forty paces northeast-by-east from the alcove, below ",
@@ -1180,7 +1234,8 @@
         "[d9] Day 9 dawn: Aevi spoke through the Waystaff and named the chamber's purpose — a preparation cycle for a return. The chamber heard the question asked and gave no additional response beyond the continuing pulse. The nested interval remains one step deeper, waiting.",
         "[d9] Day 9 dawn: three-fold nested interval established — chamber answered a deepened count with a third fold and paused, evaluating. The exchange is now three levels deep.",
         "[d9] Day 9 dawn: fourth fold sent — chamber answered with a fifth, unprompted. All four Waystaff nodes fired simultaneously. Chamber has shifted from testing to recognition. Teva's mark responded in real time.",
-        "[d9] Day 9 dawn: fifth fold offered and received — chamber settled into a held recognition state, five-fold pulse steady, no further deepening. Teva's mark quieted at the same moment. The exchange is no longer evaluative; the preparation cycle has acknowledged arrival."
+        "[d9] Day 9 dawn: fifth fold offered and received — chamber settled into a held recognition state, five-fold pulse steady, no further deepening. Teva's mark quieted at the same moment. The exchange is no longer evaluative; the preparation cycle has acknowledged arrival.",
+        "[d9] Braided stone-read confirmed: heat-channels in the floor converge at a point a few paces short of chamber center — a position marker, light-memory present for centuries. Wall-marks are a long deliberate count in the absorptive face — many strikes, many eras, no clear tonic."
       ],
       "flags": {
         "resonance_niche_tone_event": "day2_night_second_river_frequency",
@@ -1286,7 +1341,7 @@
           "parentId": "harmonic_heights_terrace",
           "day": 9,
           "visited": true,
-          "note": "Chamber purpose named by Aevi: preparation cycle for a return, three-two-three as a handshake test. Still listening."
+          "note": "Convergence point identified at chamber center; wall-marks are a counted record of unknown duration. Chamber still in held-recognition state."
         }
       },
       "vectorsKnown": [
@@ -1395,7 +1450,7 @@
     "lastTickWorldDay": 22,
     "lastCanonWorldDay": 22,
     "lastGenCount": 529,
-    "turnsSinceOffer": 15
+    "turnsSinceOffer": 16
   },
   "subAttributes": {
     "strength": 2,
@@ -1520,7 +1575,6 @@
         "label": "The Chamber's Question",
         "kind": "mystery",
         "facts": [
-          "[d8] Day 8 night: the fourth resonance crystal — the one the chamber addressed directly, warming it twice — accepted a braid of banked evening light and Prism Sight guided by the chamber's own four-second ",
           "[d8] Day 8 night: a complete four-node Waystaff — all crystals active and latticed — produced a register shift rather than a new pulse. The chamber settled into recognition. Teva confirmed the shift throug",
           "[d8] Day 8 night: Resonant Sight threaded through the complete four-node lattice confirms the chamber lies below the shaped corridor's intersection point at roughly forty paces — subterranean, hemispherica",
           "[d9] Day 9 dawn: party entered the chamber directly. Hemispherical dressed-stone, flat-laid floor, no artifact at center — only warmth underfoot and the four-second pulse running through the stone. The chamber registered their arrival.",
@@ -1531,7 +1585,8 @@
           "[d9] Day 9 dawn: the three-two-three sent one fold deeper was answered with a third fold — the chamber can follow the count further than it has yet shown. It stopped there and held, not returning a fourth. Aevi named the posture as deciding.",
           "[d9] Day 9 dawn: the chamber answered the fourth fold with a fifth — unprompted, a statement rather than a test. All four Waystaff nodes fired simultaneously. The floor warmed. Aevi named the shift: no longer testing. The exchange is now in recognition.",
           "[d9] Day 9 dawn: fifth fold sent without force — offered, not pushed. The chamber returned the same five folds and held. No sixth, no deepening — a settled state. Aevi named this as receipt: the chamber has recognized what it was counting toward. Teva's mark quieted simultaneously.",
-          "[d9] Day 9 dawn: Aevi names the chamber's recognition state as 'holding' — not waiting. A door open after the key has turned. The chamber's instruction ends at receiving arrival; what comes after is not contained in the chamber itself. The next step must come from outside."
+          "[d9] Day 9 dawn: Aevi names the chamber's recognition state as 'holding' — not waiting. A door open after the key has turned. The chamber's instruction ends at receiving arrival; what comes after is not contained in the chamber itself. The next step must come from outside.",
+          "[d9] Day 9 dawn: braided stone-read (Prism Sight + Sonic Resonance) reveals heat-channels running in the pressed aggregate floor, converging at a point just short of center — a position marker, light-memory pooled there and still present after centuries. The inner absorptive face holds irregular…"
         ],
         "links": [
           "second-river-rising",
@@ -1829,21 +1884,23 @@
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "prism_sight": 13,
+      "prism_sight": 14,
       "keen_appraisal": 10,
-      "sonic_resonance": 22,
+      "sonic_resonance": 23,
       "motes-vigil": 4,
       "light_well": 3,
       "greenlore": 4,
-      "braid_prism_sight_sonic_resonance": 2
+      "braid_prism_sight_sonic_resonance": 3
     },
     "coActivations": {
       "keen_appraisal+sonic_resonance": 1,
-      "prism_sight+sonic_resonance": 9,
+      "prism_sight+sonic_resonance": 10,
       "keen_appraisal+prism_sight": 1,
       "light_well+prism_sight": 2,
       "light_well+sonic_resonance": 2,
-      "greenlore+prism_sight": 1
+      "greenlore+prism_sight": 1,
+      "braid_prism_sight_sonic_resonance+prism_sight": 1,
+      "braid_prism_sight_sonic_resonance+sonic_resonance": 1
     },
     "aspirations": [
       {
@@ -2024,16 +2081,16 @@
   "customEncounters": {},
   "reconcileVersion": 14,
   "tendencies": {
-    "cerebral": 38.87059535816149,
-    "strategic": 43.63318270952926,
-    "cautious": 42.46356086220795,
-    "social": 28.809598991472892,
-    "generous": 12.446742119742032,
-    "risky": 3.2787733504905887,
-    "carousing": 1.2219682362451776,
-    "patient": 2.6564284722593268,
-    "craft": 1.2208288907002287,
-    "devotion": 0.975
+    "cerebral": 39.89883047420745,
+    "strategic": 42.542353141791025,
+    "cautious": 42.40197184065275,
+    "social": 28.08935901668607,
+    "generous": 12.13557356674848,
+    "risky": 3.196804016728324,
+    "carousing": 1.1914190303390482,
+    "patient": 2.5900177604528434,
+    "craft": 1.190308168432723,
+    "devotion": 0.9506249999999999
   },
   "aptitudes": [
     "strategist",
@@ -2046,9 +2103,9 @@
     "stalwart",
     "peacemaker"
   ],
-  "actionCount": 201,
-  "updatedAt": 1784688787746,
-  "rev": 68,
+  "actionCount": 202,
+  "updatedAt": 1784689329569,
+  "rev": 69,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -2058,7 +2115,7 @@
   "syncedAt": 1783791225006,
   "teachers": {},
   "regionsKnown": {
-    "valley": 24
+    "valley": 25
   },
   "company": [],
   "foreclosed": [],
@@ -2123,10 +2180,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-22T01:26:18.061Z",
-      "lastAt": "2026-07-22T02:53:07.743Z",
+      "lastAt": "2026-07-22T03:02:09.555Z",
       "startDay": 22,
       "endDay": 22,
-      "beats": 15
+      "beats": 16
     }
   ],
   "_pendingArrival": null,
@@ -2180,22 +2237,22 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 15,
-    "choices": 15,
-    "characterDeltas": 9,
-    "scene": 15,
-    "npcUpdates": 12,
-    "codexUpdates": 12,
-    "timeOps": 15,
-    "sceneEnded": 5,
-    "placeUpdates": 8,
+    "sceneSummary": 16,
+    "choices": 16,
+    "characterDeltas": 10,
+    "scene": 16,
+    "npcUpdates": 13,
+    "codexUpdates": 13,
+    "timeOps": 16,
+    "sceneEnded": 6,
+    "placeUpdates": 9,
     "moveTo": 1,
-    "questUpdates": 6,
+    "questUpdates": 7,
     "stateOps": 1,
     "factUpdates": 1,
     "stageOps": 1
   },
-  "_opTurns": 15,
+  "_opTurns": 16,
   "_intentAsked": null,
   "corrections": [
     {

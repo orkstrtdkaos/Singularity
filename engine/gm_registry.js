@@ -47,7 +47,7 @@ import { codexForGM } from "./codex.js";
 import { factsForGM } from "./facts.js";
 import { evolvedItemsForGM } from "./evolution.js";
 import { emergenceNoticeForGM } from "./practice.js";
-import { detectAnomalies, anomaliesForGM } from "./corrections.js";
+import { detectAnomalies, anomaliesForGM, repairPanelForGM } from "./corrections.js";
 import { toolkitForGM } from "./toolkit.js";
 import { combinationsAvailableFor } from "./skilltree.js";
 import { teachersForGM } from "./company.js";
@@ -236,6 +236,10 @@ export const GM_CONTEXT = [
   { key: "anomalyDetail", builder: "corrections.detectAnomalies→anomaliesForGM (SNG-137)", carries: ["POSSIBLE ERROR repairs"],
     reachedBy: "Repair panel", spec: "§11", views: ["turn"],
     build: (env) => anomaliesForGM(detectAnomalies(env.character, { rules: env.CONTENT.rules })) },
+  // SNG-207 §6.2: the authoritative Repair-panel capability — so the GM never hallucinates a fix-screen control or deflects to a missing one.
+  { key: "repairPanelDetail", builder: "corrections.repairPanelForGM (SNG-207)", carries: ["exact fix-screen capability", "act-don't-deflect rule"],
+    reachedBy: "always (any state-fix ask)", spec: "SNG-207 §6.2", views: ["turn"],
+    build: (env) => repairPanelForGM(env.CONTENT.repairPanelManifest) },
   // SNG-175 §3.3: teachers appeared in NONE of the 48 rows. The teacher GATE existed — it decided
   // what a player was permitted to learn — but nothing ever made a teacher ACT. Erik held a Radiant
   // teacher and a bound Ashwarden teacher and was taught nothing, because permission is not

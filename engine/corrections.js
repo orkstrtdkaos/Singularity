@@ -270,6 +270,21 @@ export function detectAnomalies(character, { rules = {} } = {}) {
 
 /** SNG-137: render the anomalies as a GM POSSIBLE ERROR block (advisory — the GM may emit the matching
  *  stateOp to repair). Empty string when clean. */
+/** SNG-207 §6.2: the AUTHORITATIVE Repair-panel capability, for the GM's context — so it can neither
+ *  hallucinate a fix-screen control nor deflect to a missing one. Renders Aevi's authored manifest
+ *  (content/packs/core/rules/repair_panel_manifest.json) verbatim as a prompt block. The governing rule:
+ *  the GM PREFERS emitting the op itself in-turn; the panel is the player-facing fallback for the SAME ops,
+ *  never a different capability, and never a control that isn't on this list. Returns null if unloaded. */
+export function repairPanelForGM(manifest) {
+  if (!manifest || !manifest.ops || typeof manifest.ops !== "object") return null;
+  const ops = Object.entries(manifest.ops).map(([op, desc]) => `  • ${op} — ${desc}`).join("\n");
+  const cannot = (manifest.cannotDoHere || []).map(c => `  • ${c}`).join("\n");
+  return `THE REPAIR PANEL — its EXACT capability (${manifest.theRule || "these ops and no others"}).\n`
+    + `Every fix below, YOU can emit in-turn (prefer that — ACT, don't deflect); the panel is the player-facing FALLBACK for the SAME ops, never a different power:\n${ops}\n`
+    + (cannot ? `What the panel CANNOT do (do NOT send the player there for these):\n${cannot}\n` : "")
+    + `⛔ Refer the player to the Repair panel ONLY for a control ON THIS LIST — never invent one, and never make it the first answer to something you can fix yourself this turn.`;
+}
+
 export function anomaliesForGM(anomalies = []) {
   if (!anomalies.length) return "";
   return anomalies.slice(0, 5).map(a => `- ${a.note}${a.kind === "dupNpc" ? ` → mergeEntity fromId:"${a.fromId}" intoId:"${a.intoId}"` : a.kind === "rankOverPractice" ? ` → correctAbilityRank id:"${a.abilityId}" to:${a.suggestRank ?? a.level - 1}` : a.kind === "vitalDesync" ? ` → correctVital vital:"${a.vital}" to:${a.max}` : ""}`).join("\n");

@@ -42,7 +42,7 @@ import { applyCodexUpdates as applyCodexUpdatesGen } from "../engine/codex.js";
 import { ensureCanonStore, promotionCandidates, buildCanonRecord, findCanonCollision, resolveContradiction, promoteInto, mergeCanonStores, lensDecision, canonForViewer, adaptView, AUTHORED_CANON_WEIGHT, contributionsBy } from "../engine/canon.js";
 import { sanitizeImagePrompt, assembleImagePrompt, characterPromptSeed, npcPromptSeed, imageURLFor, ensureImage, isMinorSubject, addGalleryImage, ensureGallery, itemProvenancePhrase, deleteGalleryImage } from "../engine/art.js";
 import { planPlayerDedup, dedupePlayers, resolvePlayerKey, findProfileByName, resolveLocationId, deleteCharacter, saveCharacter, listCharacters } from "../engine/state.js";
-import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM } from "../engine/corrections.js";
+import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM, repairPanelForGM } from "../engine/corrections.js";
 import { isEventfulTurn, pressureTier, pressureDirective } from "../engine/pacing.js";
 import { revokeAdultGate } from "../engine/playerprofile.js";
 import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, convexHull, regionShape, knownOverlay, isPlaceKnown } from "../engine/worldmap.js";
@@ -3395,7 +3395,7 @@ await (async () => {
   const gmSrc142 = readFileSync(join(root, "engine/gm.js"), "utf8");
   check("SNG-142: rule 16B (offer the toolkit, lightly) is in the GM contract with the ≤1/never-on-clear-intent discipline", /16B\. OFFER THE TOOLKIT — LIGHTLY[\s\S]{0,600}NEVER when the player already stated a clear intent/.test(gmSrc142));
   check("SNG-142: rule 16B forbids committing another player's party character (agency guard)", /never commit another player's PARTY character/i.test(gmSrc142));
-  check("SNG-142: the TOOLKIT scene block is rendered (toolkitDetail), guarded + destructured", /if \(toolkitDetail\) scene\.push\(/.test(gmSrc142) && /anomalyDetail, toolkitDetail[,\s\w]* \} = ctx/.test(gmSrc142));
+  check("SNG-142: the TOOLKIT scene block is rendered (toolkitDetail), guarded + destructured", /if \(toolkitDetail\) scene\.push\(/.test(gmSrc142) && /anomalyDetail,[\s\w,]*toolkitDetail[,\s\w]* \} = ctx/.test(gmSrc142));
 })();
 
 // --- SNG-143: NPC sex/gender as explicit data (the Pell-rendered-male fix) + OOC item-evolution routing ---
@@ -6880,6 +6880,30 @@ await (async () => {
   check("203P2 §3: the shared arc clock is a per-actor net vector via pushMergedFile (world/arcs), not forward-only", /world\/arcs\/valley\.json/.test(wtSrc203) && /pushMergedFile/.test(wtSrc203) && /byActor/.test(wtSrc203));
   const appSrc203 = readFileSync(join(root, "app.js"), "utf8");
   check("203P2 §3: the world map renders the arc readout with direction (advanced/receded/contested)", /worldArcsPublic\(CONTENT, character\)/.test(appSrc203) && /class="world-arcs"/.test(appSrc203) && /receded/.test(appSrc203) && /contested/.test(appSrc203));
+}
+
+// ---- SNG-207 Phase 1a: the GM knows the Repair panel's EXACT capability — no hallucinated / deflected fixes ----
+{
+  const manifest = JSON.parse(readFileSync(join(root, "content/packs/core/rules/repair_panel_manifest.json"), "utf8"));
+  // the authored manifest is complete + shaped for the prompt.
+  check("207: the panel manifest names its ops + theRule + what it CANNOT do", manifest.ops && Object.keys(manifest.ops).length >= 12 && !!manifest.theRule && Array.isArray(manifest.cannotDoHere) && manifest.cannotDoHere.length >= 1);
+  // every manifest op is a REAL corrections.js op (no phantom capability advertised to the GM).
+  const realOps = new Set(["correctField", "correctDomain", "removeEntity", "unstickQuest", "reanchorLocation", "fixCodexFact", "correctAbilityRank", "correctBond", "correctVital", "correctAttribute", "mergeEntity", "correctNpcGender"]);
+  check("207: every op the manifest advertises is a real corrections.js op (nothing hallucinated)", Object.keys(manifest.ops).every(op => realOps.has(op)));
+
+  // repairPanelForGM renders the capability + the act-don't-deflect rule; null when unloaded.
+  const block = repairPanelForGM(manifest);
+  check("207 §6.2: repairPanelForGM renders every op + the CANNOT list for the GM's context", realOps.size === Object.keys(manifest.ops).length && [...realOps].every(op => block.includes(op)) && block.includes("CANNOT"));
+  check("207 §5: the block tells the GM to ACT (emit in-turn), panel is the FALLBACK, never invent a control", /ACT, don't deflect|prefer that/i.test(block) && /FALLBACK/i.test(block) && /never invent/i.test(block));
+  check("207: repairPanelForGM returns null when the manifest is absent (unloaded → no block, no crash)", repairPanelForGM(null) === null && repairPanelForGM({}) === null);
+
+  // wiring: state.js loads it, gm_registry surfaces it, gm.js consumes it + the prompt carries act-don't-deflect.
+  const stateSrc = readFileSync(join(root, "engine/state.js"), "utf8");
+  check("207: state.js loads the manifest into CONTENT.repairPanelManifest", /loadRule\("repair_panel_manifest"/.test(stateSrc) && /repairPanelManifest/.test(stateSrc));
+  const regSrc = readFileSync(join(root, "engine/gm_registry.js"), "utf8");
+  check("207: gm_registry surfaces repairPanelDetail from the manifest", /repairPanelDetail/.test(regSrc) && /repairPanelForGM\(env\.CONTENT\.repairPanelManifest\)/.test(regSrc));
+  const gmSrc = readFileSync(join(root, "engine/gm.js"), "utf8");
+  check("207 §5: gm.js consumes repairPanelDetail + the stateOps contract says ACT DON'T DEFLECT", /repairPanelDetail\) scene\.push/.test(gmSrc) && /ACT, DON'T DEFLECT/.test(gmSrc) && /never send the player to the panel for a control|not in that capability|hallucinated capability/i.test(gmSrc));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

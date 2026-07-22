@@ -28,7 +28,7 @@ import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode,
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal } from "./engine/traditions.js";
-import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs } from "./engine/companions.js";
+import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs, companionCodexUpdate } from "./engine/companions.js";
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady } from "./engine/company.js";
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, suggestForCreation, archetypeFamilies, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
 import { toolkitForGM } from "./engine/toolkit.js";
@@ -64,7 +64,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.187";
+const APP_VERSION = "1.8.188";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3461,8 +3461,8 @@ function applyTurn(turn, resolution, playerWords = null) {
     const comps = activeCompanions(character, CONTENT.companions);
     for (const c of comps) {
       const unlocked = [];
-      if ((turn.deeds || []).length) unlocked.push(...growBond(character, c.id, "deed", CONTENT.rules).events);
-      if (resolution?.equipHelpers?.includes(c.name)) unlocked.push(...growBond(character, c.id, "assist", CONTENT.rules).events);
+      if ((turn.deeds || []).length) unlocked.push(...growBond(character, c.id, "deed", CONTENT.rules, c.stages).events);
+      if (resolution?.equipHelpers?.includes(c.name)) unlocked.push(...growBond(character, c.id, "assist", CONTENT.rules, c.stages).events);
       if (unlocked.includes("grant") && c.bondGrants) {
         const def = sanitizeNewAbility(c.bondGrants);
         if (def && !character.abilities.some(a => a.abilityId === def.id)) {
@@ -3474,11 +3474,19 @@ function applyTurn(turn, resolution, playerWords = null) {
 *✦ Your bond with ${c.name} deepens into something new: **${def.name}**.*`;
         }
       }
-      if (unlocked.includes("stage2")) {
-        const st = (c.stages || []).find(x => x.stage === 2);
-        if (st) turn.narration += `
+      // SNG-200 §1+§4: a stage was REACHED — its own beat (however many stages the companion authors, not
+      // a hardcoded 2), and the companion's codex node updates to the new stage. Marrow's third stage
+      // ("The One Who Stays") is now a moment, not an unreachable line in a JSON file.
+      const stageEvent = unlocked.find(e => typeof e === "string" && e.startsWith("stage:"));
+      if (stageEvent) {
+        const stageNum = Number(stageEvent.split(":")[1]);
+        const st = (c.stages || []).find(x => x.stage === stageNum);
+        if (st) {
+          turn.narration += `
 
-*✦ ${c.name} has changed — ${st.name}.*`;
+*✦ ${c.name} has changed — **${st.name}**.${st.narrationHints ? ` ${st.narrationHints}` : ""}*`;
+          try { applyCodexUpdates(character, [companionCodexUpdate(c, { stage: stageNum })], { day: readClock(character.clock).day }); } catch { /* codex is a mirror — never break the turn */ }
+        }
       }
     }
   }
@@ -7124,7 +7132,7 @@ function renderPlay(turn, opts = {}) {
       // SNG-135: ONE tight flex row per member — name · inline badge · compact action. Roster/roles/recruit
       // gating (SNG-126) unchanged; the companion description moves to the row title (hover) instead of a
       // printed line. data-rename/part/partally/recruit hooks are identical — layout only.
-      const compBody = comps.length ? `<div class="company-group"><div class="sys-label">Companions</div>${comps.map(id => { const c = CONTENT.companions[id]; const dn = character.companionNames?.[id] || c.name; const b = bondOf(character, c.id, CONTENT.rules); return `<div class="company-row" title="${esc(c.role)}${c.appearance ? " — " + c.appearance : ""}"><span class="company-name">${esc(dn)}${dn !== c.name ? ` <span class="hint">(${esc(c.name)})</span>` : ""}</span><span class="company-badge ${b.bond >= 3 ? "on" : ""}" title="bond grows through shared deeds, assists, and encounters">bond ${b.bond}${b.stage === 2 ? " · s2" : ""}</span><span class="company-actions"><button class="company-action companion-rename" data-rename="${esc(id)}" title="Name them">✎</button><button class="company-action companion-part" data-part="${esc(id)}" title="Part ways">✕</button></span></div>`; }).join("")}</div>` : "";
+      const compBody = comps.length ? `<div class="company-group"><div class="sys-label">Companions</div>${comps.map(id => { const c = CONTENT.companions[id]; const dn = character.companionNames?.[id] || c.name; const b = bondOf(character, c.id, CONTENT.rules, c.stages); return `<div class="company-row" title="${esc(c.role)}${c.appearance ? " — " + c.appearance : ""}"><span class="company-name">${esc(dn)}${dn !== c.name ? ` <span class="hint">(${esc(c.name)})</span>` : ""}</span><span class="company-badge ${b.bond >= 3 ? "on" : ""}" title="bond grows through shared deeds, assists, and encounters — s${b.stageCount} is their deepest">bond ${b.bond}${b.stage > 1 ? ` · s${b.stage}` : ""}</span><span class="company-actions"><button class="company-action companion-rename" data-rename="${esc(id)}" title="Name them">✎</button><button class="company-action companion-part" data-part="${esc(id)}" title="Part ways">✕</button></span></div>`; }).join("")}</div>` : "";
       const allyBody = (roster.length || recruitable.length) ? `<div class="company-group"><div class="sys-label">Allies</div>${
         roster.map(r => `<div class="company-row" title="${esc(roleBadges(r.roles))}${r.teaches ? " · teaches " + traditionLabel(r.teaches) : ""}${r.liaisonFor ? " · liaison" : ""}"><span class="company-name">${esc(r.name)}</span><span class="company-badge" title="roles they hold in your company">${esc(roleBadges(r.roles))}</span>${r.teaches ? `<span class="company-badge on" title="a trainer — their presence lets you learn this people's capstones">⚔</span>` : ""}${r.liaisonFor ? `<span class="company-badge" title="a liaison — faster standing with their people">🤝</span>` : ""}<span class="company-actions">${r.recruited ? `<button class="company-action ally-part" data-partally="${esc(r.npcId)}" title="Part ways">✕</button>` : ""}</span></div>`).join("")
       }${recruitable.map(p => `<div class="company-row" title="${esc(p.label || "at your side")}"><span class="company-name">${esc(p.name)}</span><span class="company-badge hint">${esc(p.label || "at your side")}</span><span class="company-actions"><button class="company-action recruit" data-recruit="${esc(p.id)}" title="Ask them to travel with you">＋</button></span></div>`).join("")}</div>` : "";
@@ -7391,6 +7399,8 @@ function renderPlay(turn, opts = {}) {
     if (busy) return;
     const c = CONTENT.companions[btn.dataset.join];
     character.companions = [...(character.companions || []), c.id];
+    // SNG-200 §4: a companion joins the codex the moment they join you (the person half of "who you met").
+    try { applyCodexUpdates(character, [companionCodexUpdate(c, { stage: 1 })], { day: (() => { try { return readClock(character.clock).day; } catch { return null; } })() }); } catch { /* mirror only */ }
     saveCharacter(character);
     renderPlay(null, { thinking: `${c.name} arrives…` });
     const result = await runGM({ resolution: null, playerInput: `(${c.name} has just joined the character as a traveling companion. Introduce them into the current scene naturally — their arrival, how they read the situation — then continue the scene.)` });

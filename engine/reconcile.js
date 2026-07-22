@@ -24,6 +24,7 @@ import { affiliationOf, regionHomeTradition, buildPeopleVocab } from "./affiliat
 import { defaultSchoolsForDomains } from "./substrate.js"; // SNG-193b §3.2: seed a school per practised domain on old saves
 import { mintableBraidsFor, buildBraidDef, mintBraid } from "./braids.js"; // SNG-196: mint the braids a character already earned
 import { findExistingNpc, prettifyNpcName, REGISTRY_CAP } from "./npcs.js"; // SNG-199/205: registry + codex backfill
+import { bondOf, companionCodexUpdate, companionStageCount } from "./companions.js"; // SNG-200: stage + codex backfill
 
 // ---------- character migration steps (extensible registry) ----------
 // Each step: { version, id, playerFacing, apply(entity, ctx) → { notes?, offers?, warnings? } }.
@@ -407,6 +408,37 @@ export const CHARACTER_STEPS = [
       if (registered.length) notes.push(`People the story already established, now known: ${registered.join(", ")}.`);
       if (mirrored > 0) notes.push(`Your codex now records the people you've met and the places you've walked (${mirrored} added).`);
       return notes.length ? { notes } : {};
+    }
+  },
+  {
+    version: 16, id: "companion-stages-and-codex", playerFacing: true,
+    // SNG-200 §1 + §4. Stage is now LIVE-DERIVED from bond against the companion's authored stages[] (not
+    // a stored value), so a maxed bond reaches its true top stage the instant the ladder ships — Huginn at
+    // bond 10 becomes stage 3 ("The One Who Stays") with no regrind. This step does the parts live
+    // derivation can't: (a) give every current companion the codex node the new mirror writes going forward
+    // (§4 — companions were in NEITHER the npc nor generated codex path), and (b) name, once, any companion
+    // whose relationship has reached a stage the old two-stage cap kept hidden. Idempotent: codex dedupes;
+    // the note fires once via the version gate. hooks never surface (§5). Never fabricates — reads the bond
+    // the save already holds.
+    apply: (c, ctx) => {
+      const cat = ctx.content?.companions || {};
+      const rules = ctx.content?.rules;
+      const notes = [];
+      for (const entry of c.companions || []) {
+        const id = typeof entry === "string" ? entry : entry?.id;
+        const def = cat[id];
+        if (!def) continue;
+        const name = c.companionNames?.[id] || def.name;
+        const b = bondOf(c, id, rules, def.stages);
+        try { applyCodexUpdates(c, [companionCodexUpdate({ ...def, name, id }, { stage: b.stage })], { day: null }); } catch { /* mirror only */ }
+        // name a companion sitting at a stage beyond the old ceiling (stage ≥ 3, or its authored top when > 2)
+        const top = companionStageCount(def.stages);
+        if (b.stage >= 3 || (b.stage === top && top > 2)) {
+          const st = (def.stages || []).find(x => x.stage === b.stage);
+          if (st) notes.push(`${name} has grown into ${st.name}.`);
+        }
+      }
+      return notes.length ? { notes: [`Your companions' stories can deepen further than they could: ${notes.join(" ")}`] } : {};
     }
   },
   {

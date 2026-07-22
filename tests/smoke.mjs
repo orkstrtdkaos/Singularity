@@ -6551,6 +6551,57 @@ await (async () => {
   check("199 §6: an empty RESULT says the search found nothing — distinct from an empty codex", /No entries match/.test(appSrc199) && /Nothing cataloged yet/.test(appSrc199));
 }
 
+// --- SNG-200: a companion is a character — the stage ladder reaches the authored top + the codex knows it ---
+{
+  const co = await import("../engine/companions.js");
+  const rc200 = await import("../engine/reconcile.js");
+  const rules = { companions: { tiers: { stage2At: 8, grantAt: 6, maxBond: 10 }, bondGrowth: { encounter: 1.5, deed: 0.5 } } };
+  const marrow = { id: "marrow", name: "Marrow", role: "attending bird", hooks: "GM-EYES-ONLY: may be an Ashwarden proper", bondGrants: { id: "attended_end" }, stages: [
+    { stage: 1, name: "The Attending Bird", narrationHints: "Watches." },
+    { stage: 2, name: "The Told Truth", narrationHints: "Tells you plainly." },
+    { stage: 3, name: "The One Who Stays", narrationHints: "It did not leave." }
+  ] };
+  const bristle = { id: "bristle", name: "Bristle", role: "boar", stages: [{ stage: 1, name: "Wary" }, { stage: 2, name: "Yours" }] };
+
+  // §1 — the ladder: 3 authored stages, the final reaches the TOP of the scale; stage 2 unchanged at 8.
+  check("200 §1: a 3-stage companion's thresholds span to the top (stage 2 at 8, stage 3 at 10)", JSON.stringify(co.companionStageThresholds(3, rules)) === "[8,10]");
+  check("200 §1: a 2-stage companion is unchanged (its milestone stays at stage2At)", JSON.stringify(co.companionStageThresholds(2, rules)) === "[8]");
+  check("200 §1: bond 10 reaches the AUTHORED third stage (was capped at 2 forever — Huginn)", co.companionStageForBond(10, 3, rules) === 3);
+  check("200 §1: bond 8 is stage 2, bond 7 is stage 1 (no regression at the old threshold)", co.companionStageForBond(8, 3, rules) === 2 && co.companionStageForBond(7, 3, rules) === 1);
+  check("200 §1: stage never exceeds the authored count (a 2-stage companion tops at 2)", co.companionStageForBond(10, 2, rules) === 2);
+
+  // bondOf with the def's stages; the legacy 2-stage read when no stages passed.
+  const hug = { companionBonds: { marrow: 10, bristle: 10 } };
+  check("200 §1: bondOf(with stages) returns the real stage + stageCount", (() => { const b = co.bondOf(hug, "marrow", rules, marrow.stages); return b.stage === 3 && b.stageCount === 3; })());
+  check("200 §1: bondOf(no stages) keeps the legacy 2-stage read (back-compat)", co.bondOf(hug, "marrow", rules).stage === 2);
+
+  // growBond emits a stage event for EVERY authored stage crossed — and keeps the legacy "stage2" alias.
+  const gc = { companionBonds: { marrow: 9.5 } };
+  const ev = co.growBond(gc, "marrow", "encounter", rules, marrow.stages).events; // 9.5 -> 11 clamps to 10, crosses stage-3 (10)
+  check("200 §1: crossing the top threshold emits stage:3 (the authored final stage becomes an event)", ev.includes("stage:3") && gc.companionBonds.marrow === 10);
+  const gc2 = { companionBonds: { bristle: 7.5 } };
+  const ev2 = co.growBond(gc2, "bristle", "encounter", rules, bristle.stages).events; // 7.5 -> 9, crosses stage-2 (8)
+  check("200 §1: crossing stage 2 still emits both stage:2 and the legacy stage2 alias", ev2.includes("stage:2") && ev2.includes("stage2"));
+
+  // §4 — the codex payload: a person node with the stage prose, and NEVER the GM-eyes-only hook.
+  const cx = co.companionCodexUpdate(marrow, { stage: 3 });
+  check("200 §4: a companion's codex node is a person node carrying the stage prose", cx.kind === "person" && cx.label === "Marrow" && /The One Who Stays/.test(cx.fact) && cx.entityId === "companion-marrow");
+  check("200 §5: the codex node NEVER carries the GM-eyes-only hook", !/Ashwarden proper|GM-EYES-ONLY/.test(JSON.stringify(cx)));
+
+  // §1+§4 recovery — an existing maxed bond lands its top stage in the codex + a player-facing note, idempotent.
+  const step16 = rc200.CHARACTER_STEPS.find(s => s.id === "companion-stages-and-codex");
+  check("200: reconcile has the companion-stages-and-codex step (v16)", !!step16 && step16.version === 16 && rc200.topReconcileVersion("character") >= 16);
+  const save = { companions: ["marrow"], companionBonds: { marrow: 10 }, codex: { topics: {} } };
+  const ctx200 = { content: { companions: { marrow }, rules } };
+  const out16 = step16.apply(save, ctx200);
+  check("200 §4: the recovery gives an existing companion a codex node", Object.values(save.codex.topics).some(t => t.entityId === "companion-marrow" && t.kind === "person"));
+  check("200 §1: the recovery names the companion's now-reachable top stage (what's next for Huginn)", (out16.notes || []).some(n => /The One Who Stays/.test(n)));
+  check("200 §5: the recovery note never leaks the hook", !(out16.notes || []).some(n => /Ashwarden proper|GM-EYES/.test(n)));
+  const topicN = Object.keys(save.codex.topics).length;
+  step16.apply(save, ctx200);
+  check("200: the recovery is idempotent (second run adds no topic)", Object.keys(save.codex.topics).length === topicN);
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

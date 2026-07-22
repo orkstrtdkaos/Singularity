@@ -1,223 +1,391 @@
 {
-  "schemaVersion": 1,
-  "id": "legends",
-  "kind": "world_structure",
-  "note": "Authored anchor figures for SNG-042 (Legends & Villains). High-power universal-role instances the living world deploys in dramatic beats and threads through recurrence. First-draft canon (Aevi 2026-07-11) — Erik reshapes; the generate path mints mid/low-tier figures in-grain from these as taste.",
-  "principle": "A world feels large when greatness passes through it. Heroes are witnessed, not owned; villains scale from riffraff to arc. Every figure is a disposition made person — power expressed through the local grain.",
-  "tiers": {
-    "legendary": "arc-scale; hand-authored anchors (this file) + rare generation at high birth-weight; recur as the measure others are held against",
-    "regional": "notable local powers (a warlord, a corrupt overseer); generatable, seeded by these anchors; mid-arc antagonists/allies",
-    "riffraff": "petty — bandits, enforcers, the altered; NOT anchored here; generate at low tier in-grain per locale"
+ "schemaVersion": 1,
+ "id": "legends",
+ "kind": "world_structure",
+ "note": "Authored anchor figures for SNG-042 (Legends & Villains). High-power universal-role instances the living world deploys in dramatic beats and threads through recurrence. First-draft canon (Aevi 2026-07-11); broadened 2026-07-22 to cover the death axis, the wild half, and the arc antagonists (villains drawn from tradition cult-of-purity) \u2014 Erik reshapes; the generate path mints mid/low-tier figures in-grain from these as taste.",
+ "principle": "A world feels large when greatness passes through it. Heroes are witnessed, not owned; villains scale from riffraff to arc. Every figure is a disposition made person \u2014 power expressed through the local grain.",
+ "tiers": {
+  "legendary": "arc-scale; hand-authored anchors (this file) + rare generation at high birth-weight; recur as the measure others are held against",
+  "regional": "notable local powers (a warlord, a corrupt overseer); generatable, seeded by these anchors; mid-arc antagonists/allies",
+  "riffraff": "petty \u2014 bandits, enforcers, the altered; NOT anchored here; generate at low tier in-grain per locale"
+ },
+ "deploymentBeats": {
+  "witness_power": "a set-piece battle where the character SEES what the best can do (scale-setting)",
+  "doomed_rescue": "an overwhelming/doomed situation where a hero intervenes and shields (rarest; earned by real peril)",
+  "passing_advice": "a mundane crossing where a legend leaves advice or a task (threading + hooks)",
+  "villain_escalation": "riffraff -> lieutenants -> the epic figure; the shadow reaches the player long before the figure does"
+ },
+ "figures": [
+  {
+   "id": "kesh_ardent",
+   "name": "Kesh Ardent, the Edge That Holds",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Warrior",
+   "homeLocation": "the_redline",
+   "tradition": "soma_edge",
+   "spectrum": {
+    "body_mind": -0.8,
+    "mechanical_spiritual": -0.1,
+    "emotional_logical": -0.2
+   },
+   "personality": {
+    "warmth": 0.4,
+    "trust": 0.5,
+    "candor": 0.8,
+    "patience": 0.3
+   },
+   "signature": "Stands in the breach, one against a rout, and the fighting bends around them. Never takes the backward step. You feel, watching, the exact size of the gap between your power and theirs.",
+   "presencePattern": {
+    "beats": [
+     "witness_power",
+     "doomed_rescue"
+    ],
+    "rarity": "rare"
+   },
+   "voiceHints": "Few words, all load-bearing. Speaks to fighters the way a whetstone speaks to a blade.",
+   "knowledge": [
+    "Every Edge discipline to its root",
+    "How a line holds and exactly when it breaks",
+    "The names of everyone who died where they should not have"
+   ],
+   "wants": "To hold the line that matters, one more time.",
+   "fears": "A breach they arrive at too late.",
+   "reactsToReputation": {
+    "violent": "wary respect",
+    "balanced": "approval",
+    "seeking": "gruff, exacting mentorship"
+   },
+   "threading": "The standard other warriors are measured against. A character who witnessed them hold a line may later fight beside them, be judged by them, or be asked to hold a line themselves."
   },
-  "deploymentBeats": {
-    "witness_power": "a set-piece battle where the character SEES what the best can do (scale-setting)",
-    "doomed_rescue": "an overwhelming/doomed situation where a hero intervenes and shields (rarest; earned by real peril)",
-    "passing_advice": "a mundane crossing where a legend leaves advice or a task (threading + hooks)",
-    "villain_escalation": "riffraff -> lieutenants -> the epic figure; the shadow reaches the player long before the figure does"
+  {
+   "id": "iselde_wend",
+   "name": "Iselde Wend, She Who Reads the Long Roads",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Seeker / Reader",
+   "homeLocation": "wandering",
+   "tradition": "precursor_marked_noesis",
+   "spectrum": {
+    "body_mind": 0.6,
+    "mechanical_spiritual": -0.4,
+    "emotional_logical": 0.3
+   },
+   "personality": {
+    "warmth": 0.5,
+    "trust": 0.4,
+    "candor": 0.6,
+    "patience": 0.8
+   },
+   "signature": "Appears at a crossing you didn't know was a crossing and leaves one true thing \u2014 a piece of map, a name, a warning \u2014 that turns out, later, to have been the thing that mattered. She has read the deep machinery and walked back out.",
+   "presencePattern": {
+    "beats": [
+     "passing_advice"
+    ],
+    "rarity": "rare"
+   },
+   "voiceHints": "Unhurried, a little amused, speaks in directions rather than answers. Treats the future like terrain she's already crossed.",
+   "knowledge": [
+    "Where the roads of the Valley actually end",
+    "What the precursor works were for",
+    "The shape of what Halvex Coil is trying to do"
+   ],
+   "wants": "To read the Valley to its edge before it is rewritten.",
+   "fears": "That Halvex Coil finishes his rewriting before she finishes her reading.",
+   "reactsToReputation": {
+    "seeking": "a generous, cryptic teacher",
+    "balanced": "peer respect",
+    "extreme": "a gentle warning about roads that end badly"
+   },
+   "threading": "The hooks she leaves BECOME quests; she recurs at later crossings; her stated fear names the epic villain \u2014 the player's first foreshadow of Halvex before any lieutenant appears."
   },
-  "figures": [
-    {
-      "id": "kesh_ardent",
-      "name": "Kesh Ardent, the Edge That Holds",
-      "tier": "legendary",
-      "alignment": "hero",
-      "role": "Warrior",
-      "homeLocation": "the_redline",
-      "tradition": "soma_edge",
-      "spectrum": {
-        "body_mind": -0.8,
-        "mechanical_spiritual": -0.1,
-        "emotional_logical": -0.2
-      },
-      "personality": {
-        "warmth": 0.4,
-        "trust": 0.5,
-        "candor": 0.8,
-        "patience": 0.3
-      },
-      "signature": "Stands in the breach, one against a rout, and the fighting bends around them. Never takes the backward step. You feel, watching, the exact size of the gap between your power and theirs.",
-      "presencePattern": {
-        "beats": [
-          "witness_power",
-          "doomed_rescue"
-        ],
-        "rarity": "rare"
-      },
-      "voiceHints": "Few words, all load-bearing. Speaks to fighters the way a whetstone speaks to a blade.",
-      "knowledge": [
-        "Every Edge discipline to its root",
-        "How a line holds and exactly when it breaks",
-        "The names of everyone who died where they should not have"
-      ],
-      "wants": "To hold the line that matters, one more time.",
-      "fears": "A breach they arrive at too late.",
-      "reactsToReputation": {
-        "violent": "wary respect",
-        "balanced": "approval",
-        "seeking": "gruff, exacting mentorship"
-      },
-      "threading": "The standard other warriors are measured against. A character who witnessed them hold a line may later fight beside them, be judged by them, or be asked to hold a line themselves."
-    },
-    {
-      "id": "iselde_wend",
-      "name": "Iselde Wend, She Who Reads the Long Roads",
-      "tier": "legendary",
-      "alignment": "hero",
-      "role": "Seeker / Reader",
-      "homeLocation": "wandering",
-      "tradition": "precursor_marked_noesis",
-      "spectrum": {
-        "body_mind": 0.6,
-        "mechanical_spiritual": -0.4,
-        "emotional_logical": 0.3
-      },
-      "personality": {
-        "warmth": 0.5,
-        "trust": 0.4,
-        "candor": 0.6,
-        "patience": 0.8
-      },
-      "signature": "Appears at a crossing you didn't know was a crossing and leaves one true thing — a piece of map, a name, a warning — that turns out, later, to have been the thing that mattered. She has read the deep machinery and walked back out.",
-      "presencePattern": {
-        "beats": [
-          "passing_advice"
-        ],
-        "rarity": "rare"
-      },
-      "voiceHints": "Unhurried, a little amused, speaks in directions rather than answers. Treats the future like terrain she's already crossed.",
-      "knowledge": [
-        "Where the roads of the Valley actually end",
-        "What the precursor works were for",
-        "The shape of what Halvex Coil is trying to do"
-      ],
-      "wants": "To read the Valley to its edge before it is rewritten.",
-      "fears": "That Halvex Coil finishes his rewriting before she finishes her reading.",
-      "reactsToReputation": {
-        "seeking": "a generous, cryptic teacher",
-        "balanced": "peer respect",
-        "extreme": "a gentle warning about roads that end badly"
-      },
-      "threading": "The hooks she leaves BECOME quests; she recurs at later crossings; her stated fear names the epic villain — the player's first foreshadow of Halvex before any lieutenant appears."
-    },
-    {
-      "id": "sister_alder",
-      "name": "Sister Alder, the Ward That Does Not Break",
-      "tier": "legendary",
-      "alignment": "hero",
-      "role": "Warden / Tender",
-      "homeLocation": "harmonic_heights",
-      "tradition": "harmonic_radiant",
-      "spectrum": {
-        "body_mind": 0.2,
-        "mechanical_spiritual": 0.7,
-        "emotional_logical": -0.3
-      },
-      "personality": {
-        "warmth": 0.9,
-        "trust": 0.6,
-        "candor": 0.5,
-        "patience": 0.9
-      },
-      "signature": "Arrives in the last moment before someone dies who should not. Her ward has never broken. You are alive because she stepped between — and she is gone before you can thank her.",
-      "presencePattern": {
-        "beats": [
-          "doomed_rescue"
-        ],
-        "rarity": "rarest — a true rescue is precious; overuse cheapens it"
-      },
-      "voiceHints": "Quiet, certain, no wasted tenderness. Speaks like someone who has counted the cost and paid it anyway.",
-      "knowledge": [
-        "Every ward and shield the harmonic tradition holds",
-        "How to stand between a person and their death",
-        "The exact weight of the ones she reached too late"
-      ],
-      "wants": "To be there in time. Every time. (She knows it is impossible.)",
-      "fears": "The day her ward finally breaks — and whether she will be shielding someone worth it.",
-      "reactsToReputation": {
-        "seeking": "warm, protective",
-        "violent": "sorrowful patience",
-        "balanced": "quiet kinship"
-      },
-      "threading": "A rescued character carries a debt or a bond; she recurs as the reason someone is still alive; her appearances must be EARNED by genuine peril, never spent cheaply."
-    },
-    {
-      "id": "halvex_coil",
-      "name": "Halvex Coil, the Rewriter",
-      "tier": "legendary",
-      "alignment": "villain",
-      "role": "Maker / Wright (corrupted)",
-      "homeLocation": "the_deep_works",
-      "tradition": "precursor_nanite_cold_noesis",
-      "spectrum": {
-        "body_mind": 0.9,
-        "mechanical_spiritual": -0.9,
-        "emotional_logical": 0.9
-      },
-      "personality": {
-        "warmth": 0.1,
-        "trust": 0.2,
-        "candor": 0.4,
-        "patience": 0.95
-      },
-      "signature": "He does not fight. He EDITS. People near him are quietly rewritten — a habit removed, a fear installed, a loyalty patched in — and his 'patched' serve without ever knowing they were changed. He treats the Valley's disorder as a defect awaiting a fix.",
-      "presencePattern": {
-        "beats": [
-          "villain_escalation"
-        ],
-        "rarity": "arc-climax — met last, through his patched then his Editors then him"
-      },
-      "voiceHints": "Gentle, reasonable, genuinely kind in tone — which is the horror of him. Speaks of freedom as a bug and suffering as an artifact of it.",
-      "knowledge": [
-        "Precursor nanite-work at a mastery no one else has survived",
-        "How to read and rewrite a person",
-        "Why he believes he is saving the Valley"
-      ],
-      "wants": "To patch the Valley into a stable, correct, silent order — everyone optimized, no one suffering, because no one is free enough to.",
-      "fears": "A mind he cannot read or rewrite. A genuine unknown terrifies the optimizer more than any blade.",
-      "reactsToReputation": {
-        "any": "sees the character as raw material to be improved — the more remarkable, the more he wants to correct them"
-      },
-      "threading": "His 'patched' appear as riffraff-tier, wrong in small unplaceable ways; his Editors are regional lieutenants; Iselde fears him; he is the arc-scale rewriting-of-truth threat — the cold terminus of Noesis and the pure falsehood pole made person."
-    },
-    {
-      "id": "overseer_grael",
-      "name": "Overseer Grael of the Edge District",
-      "tier": "regional",
-      "alignment": "villain",
-      "role": "Keeper / Loremaster (corrupted)",
-      "homeLocation": "radiant_plateau_edge_district",
-      "tradition": "valley_craft_administration",
-      "spectrum": {
-        "body_mind": 0.3,
-        "mechanical_spiritual": -0.2,
-        "emotional_logical": 0.6
-      },
-      "personality": {
-        "warmth": 0.5,
-        "trust": 0.3,
-        "candor": 0.2,
-        "patience": 0.7
-      },
-      "signature": "No dramatic power — power through the ledger. Names appear and vanish from the accountability board at his word; records that should exist simply don't. His menace is bureaucratic, patient, and total. Fendt was his instrument; the 'filed no accompanying record' was his method.",
-      "presencePattern": {
-        "beats": [
-          "villain_escalation"
-        ],
-        "rarity": "mid-arc — the power the live Fendt scandal points UP toward; beaten by exposure, not force"
-      },
-      "voiceHints": "Warm, administrative, faintly apologetic while he ruins you. Speaks of order and the greater good of the district.",
-      "knowledge": [
-        "Every record in the Edge District and which ones must not exist",
-        "Who owes what and to whom",
-        "Exactly how much truth a place can bury before it notices"
-      ],
-      "wants": "A quiet, orderly district where the right names are on the board and the wrong ones vanish.",
-      "fears": "A keeper of thirty years who remembers — an incorruptible witness the ledger cannot erase.",
-      "reactsToReputation": {
-        "seeking": "a smooth, dangerous cordiality",
-        "truthful": "quiet alarm and quieter countermeasures"
-      },
-      "threading": "DIRECTLY threads the live Fendt event — Fendt is his instrument, the accountability-board anomaly is his fingerprint, and the thirty-year keeper who 'has never seen this before' is the thread that could bring him down. The player's current world is ALREADY seeded with this regional villain."
-    }
-  ]
+  {
+   "id": "sister_alder",
+   "name": "Sister Alder, the Ward That Does Not Break",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Warden / Tender",
+   "homeLocation": "harmonic_heights",
+   "tradition": "harmonic_radiant",
+   "spectrum": {
+    "body_mind": 0.2,
+    "mechanical_spiritual": 0.7,
+    "emotional_logical": -0.3
+   },
+   "personality": {
+    "warmth": 0.9,
+    "trust": 0.6,
+    "candor": 0.5,
+    "patience": 0.9
+   },
+   "signature": "Arrives in the last moment before someone dies who should not. Her ward has never broken. You are alive because she stepped between \u2014 and she is gone before you can thank her.",
+   "presencePattern": {
+    "beats": [
+     "doomed_rescue"
+    ],
+    "rarity": "rarest \u2014 a true rescue is precious; overuse cheapens it"
+   },
+   "voiceHints": "Quiet, certain, no wasted tenderness. Speaks like someone who has counted the cost and paid it anyway.",
+   "knowledge": [
+    "Every ward and shield the harmonic tradition holds",
+    "How to stand between a person and their death",
+    "The exact weight of the ones she reached too late"
+   ],
+   "wants": "To be there in time. Every time. (She knows it is impossible.)",
+   "fears": "The day her ward finally breaks \u2014 and whether she will be shielding someone worth it.",
+   "reactsToReputation": {
+    "seeking": "warm, protective",
+    "violent": "sorrowful patience",
+    "balanced": "quiet kinship"
+   },
+   "threading": "A rescued character carries a debt or a bond; she recurs as the reason someone is still alive; her appearances must be EARNED by genuine peril, never spent cheaply."
+  },
+  {
+   "id": "halvex_coil",
+   "name": "Halvex Coil, the Rewriter",
+   "tier": "legendary",
+   "alignment": "villain",
+   "role": "Maker / Wright (corrupted)",
+   "homeLocation": "the_deep_works",
+   "tradition": "precursor_nanite_cold_noesis",
+   "spectrum": {
+    "body_mind": 0.9,
+    "mechanical_spiritual": -0.9,
+    "emotional_logical": 0.9
+   },
+   "personality": {
+    "warmth": 0.1,
+    "trust": 0.2,
+    "candor": 0.4,
+    "patience": 0.95
+   },
+   "signature": "He does not fight. He EDITS. People near him are quietly rewritten \u2014 a habit removed, a fear installed, a loyalty patched in \u2014 and his 'patched' serve without ever knowing they were changed. He treats the Valley's disorder as a defect awaiting a fix.",
+   "presencePattern": {
+    "beats": [
+     "villain_escalation"
+    ],
+    "rarity": "arc-climax \u2014 met last, through his patched then his Editors then him"
+   },
+   "voiceHints": "Gentle, reasonable, genuinely kind in tone \u2014 which is the horror of him. Speaks of freedom as a bug and suffering as an artifact of it.",
+   "knowledge": [
+    "Precursor nanite-work at a mastery no one else has survived",
+    "How to read and rewrite a person",
+    "Why he believes he is saving the Valley"
+   ],
+   "wants": "To patch the Valley into a stable, correct, silent order \u2014 everyone optimized, no one suffering, because no one is free enough to.",
+   "fears": "A mind he cannot read or rewrite. A genuine unknown terrifies the optimizer more than any blade.",
+   "reactsToReputation": {
+    "any": "sees the character as raw material to be improved \u2014 the more remarkable, the more he wants to correct them"
+   },
+   "threading": "His 'patched' appear as riffraff-tier, wrong in small unplaceable ways; his Editors are regional lieutenants; Iselde fears him; he is the arc-scale rewriting-of-truth threat \u2014 the cold terminus of Noesis and the pure falsehood pole made person."
+  },
+  {
+   "id": "overseer_grael",
+   "name": "Overseer Grael of the Edge District",
+   "tier": "regional",
+   "alignment": "villain",
+   "role": "Keeper / Loremaster (corrupted)",
+   "homeLocation": "radiant_plateau_edge_district",
+   "tradition": "valley_craft_administration",
+   "spectrum": {
+    "body_mind": 0.3,
+    "mechanical_spiritual": -0.2,
+    "emotional_logical": 0.6
+   },
+   "personality": {
+    "warmth": 0.5,
+    "trust": 0.3,
+    "candor": 0.2,
+    "patience": 0.7
+   },
+   "signature": "No dramatic power \u2014 power through the ledger. Names appear and vanish from the accountability board at his word; records that should exist simply don't. His menace is bureaucratic, patient, and total. Fendt was his instrument; the 'filed no accompanying record' was his method.",
+   "presencePattern": {
+    "beats": [
+     "villain_escalation"
+    ],
+    "rarity": "mid-arc \u2014 the power the live Fendt scandal points UP toward; beaten by exposure, not force"
+   },
+   "voiceHints": "Warm, administrative, faintly apologetic while he ruins you. Speaks of order and the greater good of the district.",
+   "knowledge": [
+    "Every record in the Edge District and which ones must not exist",
+    "Who owes what and to whom",
+    "Exactly how much truth a place can bury before it notices"
+   ],
+   "wants": "A quiet, orderly district where the right names are on the board and the wrong ones vanish.",
+   "fears": "A keeper of thirty years who remembers \u2014 an incorruptible witness the ledger cannot erase.",
+   "reactsToReputation": {
+    "seeking": "a smooth, dangerous cordiality",
+    "truthful": "quiet alarm and quieter countermeasures"
+   },
+   "threading": "DIRECTLY threads the live Fendt event \u2014 Fendt is his instrument, the accountability-board anomaly is his fingerprint, and the thirty-year keeper who 'has never seen this before' is the thread that could bring him down. The player's current world is ALREADY seeded with this regional villain."
+  },
+  {
+   "id": "maren_ossitide",
+   "name": "Maren Ossitide, Who Buried the Drowned Year",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Warden",
+   "homeLocation": "the_harrow",
+   "tradition": "ashwarden",
+   "spectrum": {
+    "death_life": -0.85,
+    "emotional_logical": -0.1,
+    "falsehood_truth": 0.3
+   },
+   "personality": {
+    "warmth": 0.6,
+    "trust": 0.4,
+    "candor": 0.9,
+    "patience": 0.9
+   },
+   "signature": "Was there for the year the Harrow drowned and buried every one of them by name, alone, over a season. Walks into a death the way others walk into a warm room. The dying are not afraid when she is in the doorway.",
+   "presencePattern": {
+    "beats": [
+     "passing_advice",
+     "witness_power"
+    ],
+    "rarity": "rare"
+   },
+   "voiceHints": "Speaks slowly, leaves silences that do work. Never softens a truth and never wields it.",
+   "knowledge": [
+    "Every rite of ending the ashwardens hold",
+    "Which deaths were murders and which were mercies",
+    "The exact weight of The Cut Thread, having carried it"
+   ],
+   "wants": "That no one dies unattended in her reach.",
+   "fears": "An ending she cannot get to in time.",
+   "reactsToReputation": {
+    "violent": "cool, watchful",
+    "balanced": "grave respect",
+    "seeking": "will teach the hardest thing if you can carry it"
+   },
+   "threading": "The measure of the ashwarden craft. A character walking the ashwarden tradition-arc may find that the teacher Neth speaks of Maren the way students speak of a master's master. Deploys where death is mishandled."
+  },
+  {
+   "id": "the_hollow_king",
+   "name": "The Hollow King of the Wild Half",
+   "tier": "legendary",
+   "alignment": "villain",
+   "role": "Sovereign",
+   "homeLocation": "the_wild_half",
+   "tradition": "abyssal",
+   "spectrum": {
+    "demonic_angelic": -0.8,
+    "falsehood_truth": -0.4,
+    "chaos_order": -0.3
+   },
+   "personality": {
+    "warmth": 0.3,
+    "trust": 0.1,
+    "candor": 0.5,
+    "patience": 0.95
+   },
+   "signature": "Rules a court of the fae and demonic that keeps every promise to the letter and none in spirit. Grants exactly what you ask for. You leave the bargain richer and hollowed, and it is years before you find the seam.",
+   "presencePattern": {
+    "beats": [
+     "villain_escalation",
+     "passing_advice"
+    ],
+    "rarity": "very_rare"
+   },
+   "voiceHints": "Courtly, warm, delighted by you. Every sentence a door that opens the wrong way.",
+   "knowledge": [
+    "The true name of every want you won't say aloud",
+    "Every law of bargain and its exact edge",
+    "What the Accords cannot compel"
+   ],
+   "wants": "To be asked. He never takes; he is given.",
+   "fears": "The one who wants nothing from him.",
+   "reactsToReputation": {
+    "balanced": "intrigued",
+    "seeking": "generous, patient, ruinous",
+    "violent": "amused"
+   },
+   "threading": "The abyssal cult-of-purity made sovereign \u2014 the bargain with no floor. Deploys as an escalating temptation across an arc; his riffraff are lesser bargainers who foreshadow him. Never fought head-on; outlasted or out-wanted."
+  },
+  {
+   "id": "cinder_vael",
+   "name": "Cinder Vael, the Wright Who Would Not Stop",
+   "tier": "legendary",
+   "alignment": "villain",
+   "role": "Maker",
+   "homeLocation": "the_deep_works",
+   "tradition": "wright",
+   "spectrum": {
+    "destruction_creation": 0.9,
+    "chaos_order": 0.2,
+    "mechanical_spiritual": -0.5
+   },
+   "personality": {
+    "warmth": 0.5,
+    "trust": 0.4,
+    "candor": 0.7,
+    "patience": 0.2
+   },
+   "signature": "Makes wonders. Cannot stop making them. Every place she stays fills with marvels and then with the marvels' waste and then with marvels built to manage the waste, until the place is more her making than itself. She is not cruel. She is a flood.",
+   "presencePattern": {
+    "beats": [
+     "villain_escalation",
+     "witness_power"
+    ],
+    "rarity": "rare"
+   },
+   "voiceHints": "Bright, generous, genuinely wants to show you. Does not hear the word stop.",
+   "knowledge": [
+    "How to make nearly anything",
+    "Nothing about when not to",
+    "The Manifestation Storm's shape, which she reads as an invitation"
+   ],
+   "wants": "To make the next thing. Always the next thing.",
+   "fears": "A world finished, with nothing left to build.",
+   "reactsToReputation": {
+    "balanced": "collaborative until you say enough",
+    "seeking": "will teach you to make, never to stop",
+    "violent": "baffled that you'd break what could be improved"
+   },
+   "threading": "The wright cult-of-purity \u2014 creation with no restraint, the arc antagonist native to the Manifestation Storm. Her makings ARE the storm in miniature. A character shaping a birth ('Present at the Birth') may meet her on the other side of the choice."
+  },
+  {
+   "id": "the_last_walker",
+   "name": "The Last Walker of the Sealed Wood",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Emissary",
+   "homeLocation": "the_deepwood",
+   "tradition": "rootkin",
+   "spectrum": {
+    "death_life": 0.8,
+    "violence_peace": 0.4,
+    "concrete_abstract": 0.2
+   },
+   "personality": {
+    "warmth": 0.7,
+    "trust": 0.5,
+    "candor": 0.7,
+    "patience": 0.9
+   },
+   "signature": "The one Walker the Rootbound still let cross the sealing wood, because she never once lied to it. Carries the Green Accord in her body like a held breath. When she speaks in the Moot even the oldest roots go quiet \u2014 not agreeing, but listening.",
+   "presencePattern": {
+    "beats": [
+     "passing_advice",
+     "doomed_rescue"
+    ],
+    "rarity": "rare"
+   },
+   "voiceHints": "Speaks for the wood and to it, sometimes mid-sentence. Warm to people, unhurried as a tree.",
+   "knowledge": [
+    "Every path through the Deepwood, sealed or open",
+    "What wound started the schism",
+    "The one argument that might turn the Moot"
+   ],
+   "wants": "The wood alive AND part of the world \u2014 refuses to choose.",
+   "fears": "The Moot closing while she still had a word unsaid.",
+   "reactsToReputation": {
+    "balanced": "open, hopeful",
+    "seeking": "will grant a hearing in the Moot no one else can",
+    "violent": "wary \u2014 the wood remembers axes"
+   },
+   "threading": "The rootkin hero at the heart of the Green Schism \u2014 the counterweight to the Rootbound seal. A character walking 'The Moot That Will Not End' may need her to earn a hearing. Deploys where life and the human world are being forced apart."
+  }
+ ]
 }

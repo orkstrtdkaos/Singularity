@@ -6,7 +6,7 @@
   "origin": "valley",
   "background": "craftsman",
   "level": 10,
-  "xp": 946,
+  "xp": 951,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -76,7 +76,7 @@
   "maxHealth": 70,
   "health": 70,
   "maxEnergy": 145,
-  "energy": 97,
+  "energy": 95,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -520,167 +520,180 @@
         "player": "Ask the chamber for the third thing — take the offer of continued holding, and see what holding now means to it",
         "summary": "The third offer taken — continued holding — and the chamber shifted from waiting to keeping: recognition settled, pulse steady, the Waystaff nodes burning bright in the chamber's patient dark.",
         "narration": "You do not lift the Waystaff. You do not shift your weight. You simply stay at the convergence point and make no further request — letting the chamber know that you are here, and that here is enough for now.\n\nThe pulse does not change. Four seconds, four seconds, four seconds — the same patient interval it has kept for longer than anyone in this valley has been alive. But something settles. The warmth beneath your boot spreads wider, no longer leaning toward the northeast channel but spreading evenly across all three, the way a hand opens flat after a long grip. It is not permission, exactly. It is recognition of a different kind — that someone has come here without wanting to take anything away.\n\nTeva lets out a slow breath beside you. She says, quietly, that the sound changed. Not the pitch — the character. She says it is the difference between a door held open for someone expected and a door held open for someone who has arrived.\n\nAevi speaks from the nearest node, its voice level and unhurried. It says the chamber is not waiting anymore. It is keeping. It says the distinction, in its experience, matters: a waiting thing is oriented toward what comes next, but a keeping thing is oriented toward what is already here. The chamber has shifted from one to the other. The five-fold pulse holds steady, and the Waystaff's nodes are very still and very bright."
+      },
+      {
+        "player": "Study the wall-marks' final grouping directly — move close to the incomplete count and read what the last hand left",
+        "summary": "The final wall-mark grouping read — a short run ending in one off-rhythm diagonal cut, sharp-edged, the hand that made it either interrupted or deliberately done.",
+        "narration": "You step away from the convergence point carefully — the Waystaff stays planted, nodes still burning, the chamber's keeping-pulse unchanged beneath your feet. The wall-marks are three paces to your left, in the curved face of the absorptive inner layer. You bring your face close to the final grouping.\n\nThe marks are clean. Not worn, not crumbling — the edges are still sharp enough that the last hand must have been here relatively recently, by this chamber's measure of time. A short run of strikes: four, then three, then a single mark cut deeper and at a slight diagonal. Then nothing. The stone beside it is untouched.\n\nTeva moves up beside you without being asked. She says, quietly, that the diagonal one is different — pressed harder, like someone making a decision rather than continuing a count. She is right. The previous hands kept a steady rhythm. This last one accelerated at the end, skipped two beats of the four-second interval, and then cut that final mark off-rhythm and stopped.\n\nSomething interrupted them. Or someone chose to stop and leave a marker instead of a continuation."
       }
     ],
     "lastTurn": {
-      "narration": "You do not lift the Waystaff. You do not shift your weight. You simply stay at the convergence point and make no further request — letting the chamber know that you are here, and that here is enough for now.\n\nThe pulse does not change. Four seconds, four seconds, four seconds — the same patient interval it has kept for longer than anyone in this valley has been alive. But something settles. The warmth beneath your boot spreads wider, no longer leaning toward the northeast channel but spreading evenly across all three, the way a hand opens flat after a long grip. It is not permission, exactly. It is recognition of a different kind — that someone has come here without wanting to take anything away.\n\nTeva lets out a slow breath beside you. She says, quietly, that the sound changed. Not the pitch — the character. She says it is the difference between a door held open for someone expected and a door held open for someone who has arrived.\n\nAevi speaks from the nearest node, its voice level and unhurried. It says the chamber is not waiting anymore. It is keeping. It says the distinction, in its experience, matters: a waiting thing is oriented toward what comes next, but a keeping thing is oriented toward what is already here. The chamber has shifted from one to the other. The five-fold pulse holds steady, and the Waystaff's nodes are very still and very bright.",
-      "sceneSummary": "The third offer taken — continued holding — and the chamber shifted from waiting to keeping: recognition settled, pulse steady, the Waystaff nodes burning bright in the chamber's patient dark.",
+      "narration": "You step away from the convergence point carefully — the Waystaff stays planted, nodes still burning, the chamber's keeping-pulse unchanged beneath your feet. The wall-marks are three paces to your left, in the curved face of the absorptive inner layer. You bring your face close to the final grouping.\n\nThe marks are clean. Not worn, not crumbling — the edges are still sharp enough that the last hand must have been here relatively recently, by this chamber's measure of time. A short run of strikes: four, then three, then a single mark cut deeper and at a slight diagonal. Then nothing. The stone beside it is untouched.\n\nTeva moves up beside you without being asked. She says, quietly, that the diagonal one is different — pressed harder, like someone making a decision rather than continuing a count. She is right. The previous hands kept a steady rhythm. This last one accelerated at the end, skipped two beats of the four-second interval, and then cut that final mark off-rhythm and stopped.\n\nSomething interrupted them. Or someone chose to stop and leave a marker instead of a continuation.",
+      "sceneSummary": "The final wall-mark grouping read — a short run ending in one off-rhythm diagonal cut, sharp-edged, the hand that made it either interrupted or deliberately done.",
       "choices": [
         {
-          "label": "Study the wall-marks' final grouping directly — move close to the incomplete count and read what the last hand left",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "keen_appraisal",
-          "energyCost": 2,
-          "trivial": false
-        },
-        {
-          "label": "Ask Teva what changed in the sound — she heard the shift before you named it; she may carry more of this than she's said",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Record the final grouping exactly — charcoal impression on bark-press paper, pattern and spacing both, before leaving the chamber",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "careful",
+            "craft"
           ],
-          "trivial": true
+          "trivial": true,
+          "abilityId": null,
+          "energyCost": null,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Begin the descent — the chamber has given what it holds; the seam is northeast-by-east and the structure below is waiting",
+          "label": "Ask Teva directly — has she seen that diagonal mark pattern anywhere in her niche triangulation notes",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "trivial": true,
+          "abilityId": null,
+          "energyCost": null,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Keen Appraisal on that final diagonal mark — read who cut it, how long ago, and whether they were leaving or arriving",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "trivial": false,
+          "abilityId": "keen_appraisal",
+          "energyCost": 2,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Take everything you have and go — the chamber is keeping now; the seam is the next move, and the sealed threshold will not read itself",
           "attribute": "physical",
           "subAttribute": "agility",
-          "difficulty": 15,
+          "axes": {},
+          "difficulty": 0,
           "intentTags": [
             "travel",
             "careful"
           ],
-          "trivial": false
-        },
-        {
-          "label": "Make a record on bark-press paper before leaving — mark the count, the bearing, what Aevi named — so the keeping is not only in the chamber's walls",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "difficulty": 0,
-          "intentTags": [
-            "craft"
-          ],
-          "trivial": true
+          "trivial": true,
+          "abilityId": null,
+          "energyCost": null,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "scene": {
-        "setting": "The chamber — hemispherical dressed-stone, flat-laid warm floor, no outside light. The floor warmth now spreads evenly across all three heat-channels beneath the convergence point. All four Waystaff nodes burn white-blue and very still.",
+        "setting": "The chamber — hemispherical dressed-stone, flat-laid warm floor, no outside light. Floor warmth spreads evenly across all three heat-channels. All four Waystaff nodes burn white-blue and very still. Cellaceron stands three paces from the convergence point, close to the final wall-mark grouping on the absorptive inner face.",
         "npcsPresent": [
           {
             "name": "Teva",
-            "state": "Two paces to Cellaceron's left, hand dropped from her sternum to her side — something in her posture has eased. Listening."
+            "state": "Standing beside Cellaceron at the wall-marks, having named the diagonal cut as pressed harder — a decision rather than a continuation."
           },
           {
             "name": "Aevi",
-            "state": "Motes settled at all four Waystaff nodes, very still and very bright — named the shift from waiting to keeping."
+            "state": "Motes settled at all four Waystaff nodes, very still and very bright."
           }
         ],
         "objects": [
-          "Waystaff — grip-end at convergence point, all four nodes burning white-blue and steady",
+          "Waystaff — grip-end at convergence point, all four nodes burning white-blue",
           "Traveler's Pack — shouldered",
           "Waterskin — in pack, diminished",
           "Beeswax taper — dark, charge spent",
           "Bark-press paper (three sheets)",
           "Resonance crystals — four nodes, seated in Waystaff lattice",
           "Liverwort mat — forward alcove (in pack)",
-          "Chamber floor — warmth now even across all three channels from the convergence point",
-          "Wall-marks — read as a multi-era count: irregular courses, three distinct hands, final grouping incomplete"
+          "Chamber floor — warmth even across all three channels",
+          "Wall-marks — final grouping: four, then three, then one diagonal cut off-rhythm; edges still sharp; stone beside it untouched"
         ],
         "threads": [
-          "The third offer taken — the chamber is now keeping rather than waiting; what this enables or forecloses is not yet known",
-          "The final wall-mark grouping stopped mid-count; the last hand left before finishing",
-          "Teva named the sound-shift before it was spoken — she may carry more knowledge of this place than she has said",
-          "The seam drops northeast-by-east below the chamber floor into a larger structure; a sealed threshold of older material lies at its far end",
-          "Aevi named the distinction between waiting and keeping — and said, in its experience, it matters"
+          "The final mark was cut off-rhythm and the hand stopped — interrupted, or a deliberate choice to leave a marker rather than continue",
+          "The seam drops northeast-by-east below the chamber floor; the sealed threshold at its far end has not yet been approached",
+          "Teva may know more about this place than she has said",
+          "The chamber is in keeping-state; the exchange is complete at five folds"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "aevi",
-          "name": "Aevi",
-          "note": "Named the chamber's shift from waiting to keeping — and said the distinction, in its experience, matters.",
+          "npcId": "teva",
+          "name": "Teva",
+          "note": "Named the diagonal cut as pressed harder than the surrounding marks — read it as a decision rather than continuation; observant without prompting.",
           "learned": [
-            "The chamber has shifted from waiting to keeping — oriented toward what is already here rather than what comes next"
+            "The final wall-mark grouping ends with an off-rhythm diagonal cut, edges still sharp, pressed harder than the rest — the last hand either stopped deliberately or was interrupted"
           ],
-          "statusNote": "Motes at all four Waystaff nodes, very still and bright — named the chamber's state-shift with precision."
+          "skillsObserved": [
+            "acoustic pattern recognition — distinguished a rhythm-break and pressure difference in the wall-marks without being asked"
+          ],
+          "statusNote": "In the chamber at the wall-marks beside Cellaceron; mark still quieted after the five-fold exchange."
         }
       ],
       "codexUpdates": [
         {
           "topic": "the-chamber-beyond-the-threshold",
-          "label": "The Chamber Beyond the Threshold",
+          "label": "The Chamber's Final Mark",
           "kind": "mystery",
-          "fact": "Day 9 dawn: the third offer taken — continued holding — and the chamber shifted from waiting to keeping. The warmth spread evenly across all three heat-channels. Aevi named it: a keeping thing is oriented toward what is already here. The exchange is no longer evaluative or orientation-giving; the chamber is simply present with its keeper.",
+          "fact": "The final grouping of wall-marks ends in a short run — four, three, then one diagonal cut pressed harder and off the four-second rhythm, edges still sharp. The last hand accelerated, skipped two beats, and stopped. The stone beside is untouched. Either interrupted or a deliberate end-marker, not a continuation.",
           "links": [
-            "second-river-rising",
-            "teva-anselvar-missing-apprentice",
             "teva-directional-interval-count",
-            "northern-alcove-camp",
+            "second-river-rising",
+            "scored-mark-forward-alcove",
             "aevi"
           ]
         }
       ],
-      "placeUpdates": [
-        {
-          "note": "Third offer taken on day 9 dawn — continued holding. Chamber shifted from waiting to keeping; warmth spread evenly across all three heat-channels from the convergence point. The exchange is complete at five folds; the chamber is now present with whoever holds the convergence point.",
-          "subPlace": {
-            "name": "The Chamber — Convergence Point (Holding State)",
-            "parent": "The Chamber",
-            "note": "Third offer taken; chamber now in keeping-state. Warmth even, nodes steady. The wall-mark record and orientation both available as established knowledge. The seam below remains the next threshold.",
-            "visited": true
-          }
-        }
-      ],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "second-river-rising",
-          "note": "The chamber has shifted into a keeping-state after the third offer was accepted — it is no longer testing or orienting, but present. The seam below is the next move; the sealed threshold at its far end is what the chamber has been pointing toward."
-        }
-      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A quiet exchange at the convergence point — the third offer taken in stillness, no movement required"
+        "why": "A short step to the wall and a close read — a few minutes inside the chamber."
+      },
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0
       },
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The chamber — hemispherical dressed-stone, flat-laid warm floor, no outside light. The floor warmth now spreads evenly across all three heat-channels beneath the convergence point. All four Waystaff nodes burn white-blue and very still.",
+      "setting": "The chamber — hemispherical dressed-stone, flat-laid warm floor, no outside light. Floor warmth spreads evenly across all three heat-channels. All four Waystaff nodes burn white-blue and very still. Cellaceron stands three paces from the convergence point, close to the final wall-mark grouping on the absorptive inner face.",
       "npcsPresent": [
         {
           "name": "Teva",
-          "state": "Two paces to Cellaceron's left, hand dropped from her sternum to her side — something in her posture has eased. Listenin"
+          "state": "Standing beside Cellaceron at the wall-marks, having named the diagonal cut as pressed harder — a decision rather than a"
         },
         {
           "name": "Aevi",
-          "state": "Motes settled at all four Waystaff nodes, very still and very bright — named the shift from waiting to keeping."
+          "state": "Motes settled at all four Waystaff nodes, very still and very bright."
         }
       ],
       "objects": [
-        "Waystaff — grip-end at convergence point, all four nodes burning white-blue and ",
+        "Waystaff — grip-end at convergence point, all four nodes burning white-blue",
         "Traveler's Pack — shouldered",
         "Waterskin — in pack, diminished",
         "Beeswax taper — dark, charge spent",
         "Bark-press paper (three sheets)",
         "Resonance crystals — four nodes, seated in Waystaff lattice",
         "Liverwort mat — forward alcove (in pack)",
-        "Chamber floor — warmth now even across all three channels from the convergence p",
-        "Wall-marks — read as a multi-era count: irregular courses, three distinct hands,"
+        "Chamber floor — warmth even across all three channels",
+        "Wall-marks — final grouping: four, then three, then one diagonal cut off-rhythm;"
       ],
       "threads": [
-        "The third offer taken — the chamber is now keeping rather than waiting; what this enables or forecloses is not yet known",
-        "The final wall-mark grouping stopped mid-count; the last hand left before finishing",
-        "Teva named the sound-shift before it was spoken — she may carry more knowledge of this place than she has said",
-        "The seam drops northeast-by-east below the chamber floor into a larger structure; a sealed threshold of older material lies at its far end",
-        "Aevi named the distinction between waiting and keeping — and said, in its experience, it matters"
+        "The final mark was cut off-rhythm and the hand stopped — interrupted, or a deliberate choice to leave a marker rather than continue",
+        "The seam drops northeast-by-east below the chamber floor; the sealed threshold at its far end has not yet been approached",
+        "Teva may know more about this place than she has said",
+        "The chamber is in keeping-state; the exchange is complete at five folds"
       ]
     }
   },
@@ -1462,7 +1475,7 @@
     "lastTickWorldDay": 22,
     "lastCanonWorldDay": 22,
     "lastGenCount": 529,
-    "turnsSinceOffer": 21
+    "turnsSinceOffer": 22
   },
   "subAttributes": {
     "strength": 2,
@@ -1587,7 +1600,6 @@
         "label": "The Chamber's Question",
         "kind": "mystery",
         "facts": [
-          "[d9] Day 9 dawn: Aevi joined the Waystaff and spoke through it — naming that it has known the chamber's pattern longer than its own memory. The chamber was still listening when the words were spoken. The relationship between Aevi and this place predates the current journey.",
           "[d9] Day 9 dawn: Aevi names the chamber's function — a preparation cycle counting toward a return. Something was here and moved on; the chamber has been keeping count ever since, waiting for conditions to match again. The three-two-three ratio is a handshake for whatever that thing was. The chamber…",
           "[d9] Day 9 dawn: the three-two-three sent one fold deeper was answered with a third fold — the chamber can follow the count further than it has yet shown. It stopped there and held, not returning a fourth. Aevi named the posture as deciding.",
           "[d9] Day 9 dawn: the chamber answered the fourth fold with a fifth — unprompted, a statement rather than a test. All four Waystaff nodes fired simultaneously. The floor warmed. Aevi named the shift: no longer testing. The exchange is now in recognition.",
@@ -1598,7 +1610,8 @@
           "[d9] Day 9 dawn: the wall-marks opened as a counted record from the convergence point — many eras, three distinct tools and hands, each group spaced at the chamber's four-second interval. The final grouping stops mid-count; its edges are still sharp. The last keeper left before finishing. The count was…",
           "[d9] Day 9 dawn: the chamber's second offer — orientation — confirmed northeast-by-east as the direction, but Aevi named it as pointing through the seam, not at it. The seam is a passage; the destination is further than the seam itself. The warmth in the floor leaned to confirm it.",
           "[d9] Day 9 dawn: Resonant Sight through the Waystaff confirms the chamber is the topmost face of a considerably larger structure — the seam drops northeast-by-east at a shallow, consistent angle, the way a dry riverbed falls toward a confluence. At the seam's far end the material changes: older…",
-          "[d9] Day 9 dawn: the third offer taken — continued holding — and the chamber shifted from waiting to keeping. The warmth spread evenly across all three heat-channels. Aevi named it: a keeping thing is oriented toward what is already here. The exchange is no longer evaluative or orientation-giving; the…"
+          "[d9] Day 9 dawn: the third offer taken — continued holding — and the chamber shifted from waiting to keeping. The warmth spread evenly across all three heat-channels. Aevi named it: a keeping thing is oriented toward what is already here. The exchange is no longer evaluative or orientation-giving; the…",
+          "[d9] The final grouping of wall-marks ends in a short run — four, three, then one diagonal cut pressed harder and off the four-second rhythm, edges still sharp. The last hand accelerated, skipped two beats, and stopped. The stone beside is untouched. Either interrupted or a deliberate end-marker, not a…"
         ],
         "links": [
           "second-river-rising",
@@ -1617,7 +1630,8 @@
           "The Chamber",
           "The Chamber Beyond the Threshold",
           "The Chamber — Convergence Point",
-          "The Chamber and the Sealed Threshold"
+          "The Chamber and the Sealed Threshold",
+          "The Chamber's Final Mark"
         ]
       },
       "disputed-zone-camp": {
@@ -1900,7 +1914,7 @@
     "schemaVersion": 1,
     "uses": {
       "prism_sight": 14,
-      "keen_appraisal": 10,
+      "keen_appraisal": 11,
       "sonic_resonance": 23,
       "motes-vigil": 4,
       "light_well": 3,
@@ -2096,16 +2110,16 @@
   "customEncounters": {},
   "reconcileVersion": 14,
   "tendencies": {
-    "cerebral": 39.00717207589997,
-    "strategic": 39.36257202923075,
-    "cautious": 38.28705415374463,
-    "social": 24.749413258827424,
-    "generous": 10.692601606107955,
-    "risky": 2.8166902516532772,
-    "carousing": 1.049754176618138,
-    "patient": 2.282053494459293,
-    "craft": 1.0487754009765575,
-    "devotion": 2.788216593499756
+    "cerebral": 39.031992774002475,
+    "strategic": 38.378507728499976,
+    "cautious": 37.32987779990101,
+    "social": 24.13067792735674,
+    "generous": 10.425286565955256,
+    "risky": 2.746272995361945,
+    "carousing": 1.0235103222026845,
+    "patient": 2.2250021570978107,
+    "craft": 1.0225560159521436,
+    "devotion": 2.7185111786622618
   },
   "aptitudes": [
     "strategist",
@@ -2117,9 +2131,9 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 207,
-  "updatedAt": 1784690228013,
-  "rev": 74,
+  "actionCount": 208,
+  "updatedAt": 1784690329377,
+  "rev": 75,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -2129,7 +2143,7 @@
   "syncedAt": 1783791225006,
   "teachers": {},
   "regionsKnown": {
-    "valley": 30
+    "valley": 31
   },
   "company": [],
   "foreclosed": [],
@@ -2194,10 +2208,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-22T01:26:18.061Z",
-      "lastAt": "2026-07-22T03:17:08.006Z",
+      "lastAt": "2026-07-22T03:18:49.376Z",
       "startDay": 22,
       "endDay": 22,
-      "beats": 21
+      "beats": 22
     }
   ],
   "_pendingArrival": null,
@@ -2251,14 +2265,14 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 21,
-    "choices": 21,
-    "characterDeltas": 12,
-    "scene": 21,
-    "npcUpdates": 18,
-    "codexUpdates": 18,
-    "timeOps": 21,
-    "sceneEnded": 8,
+    "sceneSummary": 22,
+    "choices": 22,
+    "characterDeltas": 13,
+    "scene": 22,
+    "npcUpdates": 19,
+    "codexUpdates": 19,
+    "timeOps": 22,
+    "sceneEnded": 9,
     "placeUpdates": 14,
     "moveTo": 1,
     "questUpdates": 11,
@@ -2266,7 +2280,7 @@
     "factUpdates": 1,
     "stageOps": 1
   },
-  "_opTurns": 21,
+  "_opTurns": 22,
   "_intentAsked": null,
   "corrections": [
     {

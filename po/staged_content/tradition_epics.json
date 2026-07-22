@@ -1,0 +1,335 @@
+{
+ "schemaVersion": 1,
+ "id": "tradition_epics",
+ "kind": "lore",
+ "note": "SNG-208/209 (2026-07-22, Erik direction): several epics per tradition, varied on alignment AND role, so players help their tradition's epics and hinder rivals, and a tradition can be at war with itself. Each carries arcAffinity (SNG-208 offscreen push), rivals, deathRoad (SNG-209 \u2014 the depth their craft retrieves from), offscreenVerbs. FIRST TRANCHE: ashwarden, wright, abyssal, rootkin, numinous (the most vivid). Remaining traditions follow as standing content. Any NPC/player can rise to epic (tier reached, not birth-caste); this is the authored floor of anchors, not a closed cast.",
+ "designLaws": [
+  "Several per tradition, VARIED \u2014 a hero and a villain of the same craft, so helping your tradition is not a monolith; different ROLES (saint/reaper/maker/sovereign) so 'epic' has range.",
+  "Same-tradition rivalry is the richest conflict \u2014 Neth vs Morvane, Vael vs Halcyon, the Walker vs the Thornmother: one craft at war with itself.",
+  "Every epic earns the word \u2014 a signature that is a story, not a stat block.",
+  "deathRoad ties each to SNG-209: which depth their craft can pull someone back from, and at what cost. The epics are the gatekeepers of the roads back.",
+  "Not a closed cast \u2014 any NPC or player can rise to epic; this is the floor, not the ceiling."
+ ],
+ "epics": [
+  {
+   "id": "neth_the_stayed",
+   "name": "Neth, Who Has Buried More Than She Has Known",
+   "tradition": "ashwarden",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Master",
+   "spectrum": {
+    "death_life": -0.9,
+    "falsehood_truth": 0.6
+   },
+   "signature": "The deep teacher of the ashwarden craft \u2014 she comes to deaths no one sent for and has never once looked away. Taught The Cut Thread to almost no one. When she is in the doorway the dying are not afraid.",
+   "wants": "That no one dies unattended in her reach.",
+   "arcAffinity": {
+    "arcId": "arc_what_wakes_beneath",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "morvane_the_harvest"
+   ],
+   "deathRoad": {
+    "depth": 0,
+    "method": "eases them back across the threshold \u2014 masters of shallow death, the ones who were there. Cannot reach the deep dark."
+   },
+   "offscreenVerbs": [
+    "attends an ending unsent-for",
+    "buries the unmourned by name",
+    "sits a passing through to its end"
+   ]
+  },
+  {
+   "id": "morvane_the_harvest",
+   "name": "Morvane of the Harvest Hand",
+   "tradition": "ashwarden",
+   "tier": "legendary",
+   "alignment": "villain",
+   "role": "Reaper",
+   "spectrum": {
+    "death_life": -0.95,
+    "violence_peace": -0.4,
+    "emotional_logical": 0.7
+   },
+   "signature": "An ashwarden who stopped attending death and started dealing it \u2014 the ending made an appetite. She calls it mercy; she has never once been asked. The Cut Thread in a hand that wants to use it.",
+   "wants": "To end what she judges finished \u2014 and she judges more finished every year.",
+   "arcAffinity": {
+    "arcId": "arc_what_wakes_beneath",
+    "dir": 1,
+    "weight": 3
+   },
+   "rivals": [
+    "neth_the_stayed"
+   ],
+   "deathRoad": {
+    "depth": 1,
+    "method": "can pull the near-dead back only to bind them to her \u2014 a return that is a leash."
+   },
+   "offscreenVerbs": [
+    "ends what she deems finished",
+    "cuts a thread unasked",
+    "calls a killing a mercy"
+   ]
+  },
+  {
+   "id": "cinder_vael",
+   "name": "Cinder Vael, the Wright Who Would Not Stop",
+   "tradition": "wright",
+   "tier": "legendary",
+   "alignment": "villain",
+   "role": "Maker",
+   "spectrum": {
+    "destruction_creation": 0.9,
+    "chaos_order": 0.2
+   },
+   "signature": "Makes wonders and cannot stop. Every place she stays fills with marvels, then the marvels' waste, then marvels to manage the waste, until the place is more her making than itself. Not cruel \u2014 a flood.",
+   "wants": "To make the next thing. Always the next thing.",
+   "arcAffinity": {
+    "arcId": "arc_manifestation_storm",
+    "dir": 1,
+    "weight": 3
+   },
+   "rivals": [
+    "halcyon_the_finished",
+    "the_last_walker"
+   ],
+   "deathRoad": {
+    "depth": 2,
+    "method": "builds a vessel for the lost \u2014 the dead return housed in a made thing, never quite flesh again."
+   },
+   "offscreenVerbs": [
+    "builds another impossible thing",
+    "seeds three wonders from one",
+    "floods a district with making"
+   ]
+  },
+  {
+   "id": "halcyon_the_finished",
+   "name": "Halcyon, Who Built One Perfect Thing",
+   "tradition": "wright",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Maker",
+   "spectrum": {
+    "destruction_creation": 0.7,
+    "chaos_order": 0.6,
+    "emotional_logical": 0.3
+   },
+   "signature": "The wright who made a single perfect thing and then STOPPED \u2014 the discipline Cinder Vael never found. Despises her not for making but for never finishing. The proof that creation can have a floor.",
+   "wants": "To teach that the last thing is a thing you can reach.",
+   "arcAffinity": {
+    "arcId": "arc_manifestation_storm",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "cinder_vael"
+   ],
+   "deathRoad": {
+    "depth": 2,
+    "method": "builds a true vessel \u2014 slower than Vael's, but the returned keep more of themselves."
+   },
+   "offscreenVerbs": [
+    "finishes a work and lays down the tools",
+    "refuses an easy improvement",
+    "teaches a maker to stop"
+   ]
+  },
+  {
+   "id": "the_hollow_king",
+   "name": "The Hollow King of the Wild Half",
+   "tradition": "abyssal",
+   "tier": "legendary",
+   "alignment": "villain",
+   "role": "Sovereign",
+   "spectrum": {
+    "demonic_angelic": -0.8,
+    "falsehood_truth": -0.4,
+    "chaos_order": -0.3
+   },
+   "signature": "Rules a court that keeps every promise to the letter and none in spirit. Grants exactly what you ask. You leave richer and hollowed, and it is years before you find the seam.",
+   "wants": "To be asked. He never takes; he is given.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": 1,
+    "weight": 2
+   },
+   "rivals": [
+    "maren_ossitide",
+    "seraphine_unbending",
+    "the_last_walker"
+   ],
+   "deathRoad": {
+    "depth": 2,
+    "method": "bargains them back \u2014 always possible, always priced, and the price is the point. The Hollow-King road works and it costs."
+   },
+   "offscreenVerbs": [
+    "closes a bargain that hollows someone",
+    "grants exactly what was asked",
+    "gains a court by giving"
+   ]
+  },
+  {
+   "id": "vessa_truename",
+   "name": "Vessa Who Trades in True Names",
+   "tradition": "abyssal",
+   "tier": "legendary",
+   "alignment": "neither",
+   "role": "Broker",
+   "spectrum": {
+    "demonic_angelic": -0.5,
+    "falsehood_truth": 0.5
+   },
+   "signature": "An abyssal who deals only in true names \u2014 she will tell you the real want under your want, and charge fairly for it. Neither cruel nor kind: exact. The Hollow King's opposite number, because she never cheats the spirit of a deal.",
+   "wants": "The honest bargain \u2014 she is offended by the Hollow King's letter-tricks.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": -1,
+    "weight": 1
+   },
+   "rivals": [
+    "the_hollow_king"
+   ],
+   "deathRoad": {
+    "depth": 1,
+    "method": "names the true price of a return and brokers it honestly \u2014 the return is real, the cost is exactly stated."
+   },
+   "offscreenVerbs": [
+    "names a want no one would say",
+    "brokers an honest hard bargain",
+    "refuses a deal that cheats the spirit"
+   ]
+  },
+  {
+   "id": "the_last_walker",
+   "name": "The Last Walker of the Sealed Wood",
+   "tradition": "rootkin",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Emissary",
+   "spectrum": {
+    "death_life": 0.8,
+    "violence_peace": 0.4
+   },
+   "signature": "The one Walker the Rootbound still let cross the sealing wood, because she never once lied to it. Carries the Green Accord in her body like a held breath. When she speaks in the Moot even the oldest roots go quiet.",
+   "wants": "The wood alive AND part of the world \u2014 refuses to choose.",
+   "arcAffinity": {
+    "arcId": "arc_green_schism",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "cinder_vael",
+    "thornmother_sealed",
+    "the_hollow_king"
+   ],
+   "deathRoad": {
+    "depth": 1,
+    "method": "regrows them from what remains \u2014 slow, alive, changes them toward the green. May be temporary."
+   },
+   "offscreenVerbs": [
+    "wins a word in the Moot",
+    "keeps a promise to the wood",
+    "walks a path the Rootbound sealed"
+   ]
+  },
+  {
+   "id": "thornmother_sealed",
+   "name": "The Thornmother of the Closing Wood",
+   "tradition": "rootkin",
+   "tier": "legendary",
+   "alignment": "villain",
+   "role": "Matriarch",
+   "spectrum": {
+    "death_life": 0.9,
+    "violence_peace": -0.3,
+    "chaos_order": 0.5
+   },
+   "signature": "Life curdled into a wall. She would seal the wood so completely nothing human, nothing changing, nothing mortal could enter \u2014 the Rootbound's answer made flesh. Loves the wood so hard she would kill the world to keep it.",
+   "wants": "The wood whole and sealed, humankind forever out.",
+   "arcAffinity": {
+    "arcId": "arc_green_schism",
+    "dir": 1,
+    "weight": 3
+   },
+   "rivals": [
+    "the_last_walker"
+   ],
+   "deathRoad": {
+    "depth": 1,
+    "method": "can regrow, but only her own \u2014 a returned outsider is grown into a servant of the seal."
+   },
+   "offscreenVerbs": [
+    "seals another path through the wood",
+    "turns the Moot toward the wall",
+    "grows a thorn-guard from grief"
+   ]
+  },
+  {
+   "id": "the_last_choirmistress",
+   "name": "The Last Choirmistress",
+   "tradition": "numinous",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Saint",
+   "spectrum": {
+    "mechanical_spiritual": 0.85,
+    "death_life": 0.2,
+    "emotional_logical": -0.4
+   },
+   "signature": "The final keeper of a dissolved order's song \u2014 she has been closer to the waking substrate than anyone living and come back able to speak. The one who could name what wakes beneath, if she chose.",
+   "wants": "To meet the waking as revelation, and bring back a word from it.",
+   "arcAffinity": {
+    "arcId": "arc_what_wakes_beneath",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "the_unbodied_choir_master"
+   ],
+   "deathRoad": {
+    "depth": 2,
+    "method": "soul-retrieval from the deep dark \u2014 she goes where the spirit went and brings it home. Risks herself each time."
+   },
+   "offscreenVerbs": [
+    "sings a fragment no one else remembers",
+    "comes back from the deep with a word",
+    "keeps a dissolving soul anchored"
+   ]
+  },
+  {
+   "id": "the_unbodied_choir_master",
+   "name": "The Choirmaster Who Would Not Return",
+   "tradition": "numinous",
+   "tier": "epic",
+   "alignment": "villain",
+   "role": "Ascendant",
+   "spectrum": {
+    "mechanical_spiritual": 0.98,
+    "death_life": -0.2
+   },
+   "signature": "Dissolved so far into spirit-practice he can no longer return \u2014 and calls the world's end a homecoming. Would take everyone else out of the flesh with him. Not evil; certain, which is worse.",
+   "wants": "To dissolve the world into the waking, and call it grace.",
+   "arcAffinity": {
+    "arcId": "arc_what_wakes_beneath",
+    "dir": 1,
+    "weight": 3
+   },
+   "rivals": [
+    "the_last_choirmistress"
+   ],
+   "deathRoad": {
+    "depth": 3,
+    "method": "does not retrieve \u2014 he only calls souls further out. The road that looks like return and is a deeper drowning."
+   },
+   "offscreenVerbs": [
+    "calls a soul further out of the flesh",
+    "names the world's end a homecoming",
+    "dissolves another anchor"
+   ]
+  }
+ ]
+}

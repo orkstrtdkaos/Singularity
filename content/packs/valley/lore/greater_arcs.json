@@ -26,7 +26,30 @@
     "arc_precursor_waking",
     "arc_what_wakes_beneath"
    ],
-   "convergenceNote": "This is the Valley's local 'foreclose or hold open' written across the whole world. Every regional arc is a front of this one."
+   "convergenceNote": "This is the Valley's local 'foreclose or hold open' written across the whole world. Every regional arc is a front of this one.",
+   "currentStage": 1,
+   "stages": [
+    {
+     "stage": 1,
+     "name": "Drift",
+     "publicFace": "Each Reach is leaning harder into its own extreme; travelers notice the edges of the world getting sharper."
+    },
+    {
+     "stage": 2,
+     "name": "Strain",
+     "publicFace": "The pull between poles is straining the places caught between them; border regions report the world feeling less negotiable."
+    },
+    {
+     "stage": 3,
+     "name": "Fracture",
+     "publicFace": "Somewhere a Reach has pulled hard enough to tear its neighbor; the poles are no longer only intensifying, they are breaking things."
+    },
+    {
+     "stage": 4,
+     "name": "The Snap",
+     "publicFace": "The dispositions have pulled past what the middle can hold. What happens to the space between the poles is the open question of the age."
+    }
+   ]
   },
   {
    "id": "arc_what_wakes_beneath",
@@ -78,6 +101,29 @@
       "water_keeper"
      ]
     }
+   ],
+   "currentStage": 1,
+   "stages": [
+    {
+     "stage": 1,
+     "name": "Tremor",
+     "publicFace": "Deep sites report faint stirrings; the Valley's poisoned water is the nearest and least of them."
+    },
+    {
+     "stage": 2,
+     "name": "Stirring",
+     "publicFace": "The substrate that runs the crafts is flickering in more than one place at once; something under everything is coming back online."
+    },
+    {
+     "stage": 3,
+     "name": "Waking",
+     "publicFace": "Crafts surge and fail without warning; the manifestations flicker. The deep system is waking whether or not anyone is ready."
+    },
+    {
+     "stage": 4,
+     "name": "Awake",
+     "publicFace": "The engine of the imagined world has turned over. Whether it was met, sealed, or unleashed is now the shape of the world to come."
+    }
    ]
   },
   {
@@ -102,7 +148,30 @@
     "arc_what_wakes_beneath",
     "arc_block_bleed"
    ],
-   "convergenceNote": "The framework's propagation-vs-foreclosure at the level of reality itself: manifestation is pure creation, and pure creation without limit is its own danger (see the Forge of Ends)."
+   "convergenceNote": "The framework's propagation-vs-foreclosure at the level of reality itself: manifestation is pure creation, and pure creation without limit is its own danger (see the Forge of Ends).",
+   "currentStage": 1,
+   "stages": [
+    {
+     "stage": 1,
+     "name": "First Bloom",
+     "publicFace": "A new domain has manifested where none was; scholars argue whether it is the first of many."
+    },
+    {
+     "stage": 2,
+     "name": "The Blooming",
+     "publicFace": "New domains are appearing and old ones bleeding at the edges; creatures out of native fiction are being seen awake."
+    },
+    {
+     "stage": 3,
+     "name": "The Storm",
+     "publicFace": "Manifestation is outpacing anyone's ability to map it; the world is remaking its own furniture faster than it can be named."
+    },
+    {
+     "stage": 4,
+     "name": "The New Ground",
+     "publicFace": "The storm has settled into a changed world. What manifested and what was lost is the new map."
+    }
+   ]
   },
   {
    "id": "arc_block_bleed",
@@ -123,6 +192,24 @@
    "connectsTo": [
     "arc_manifestation_storm",
     "arc_precursor_waking"
+   ],
+   "currentStage": 1,
+   "stages": [
+    {
+     "stage": 1,
+     "name": "Seepage",
+     "publicFace": "Block-logic is leaking out of the Glitchlands into the Gearlands; matter is resolving into craftable units where it shouldn't."
+    },
+    {
+     "stage": 2,
+     "name": "The Bleed",
+     "publicFace": "Two ordered-creative dispositions are crossing where they were never meant to; the Gearlands' grammar is destabilizing."
+    },
+    {
+     "stage": 3,
+     "name": "The Resolve",
+     "publicFace": "The bleeding grammar has reached a threshold \u2014 either the crossing settles into a new stable form, or it unravels both sides."
+    }
    ]
   },
   {
@@ -147,7 +234,25 @@
     "arc_glade_accord",
     "arc_the_poles_pull"
    ],
-   "convergenceNote": "The Valley's failing-Accord is the small visible end of a civil argument spanning a domain and a century of Ent-memory."
+   "convergenceNote": "The Valley's failing-Accord is the small visible end of a civil argument spanning a domain and a century of Ent-memory.",
+   "currentStage": 1,
+   "stages": [
+    {
+     "stage": 1,
+     "name": "The Argument",
+     "publicFace": "The Deepwood's Moot is arguing, glacially, whether to seal the wood from humankind; the Rootbound are gaining ground."
+    },
+    {
+     "stage": 2,
+     "name": "The Leaning",
+     "publicFace": "The Moot is leaning toward the seal; Thornwake feels the Green Accord beginning to withdraw from it."
+    },
+    {
+     "stage": 3,
+     "name": "The Sealing",
+     "publicFace": "The wood is closing. Whether the life-disposition retreats from the human valley entirely rests on what happens before the Moot's decision lands."
+    }
+   ]
   }
  ],
  "convergence": "These five greater arcs all feed the single world-question: as the substrate wakes (What Wakes Beneath), the poles pull harder (The Poles Pull) and reality manifests anew (The Second Manifestation), and the whole world tends toward foreclosure \u2014 pole by pole, domain by domain \u2014 unless someone holds the aperture open. The Valley's six arcs are the near, local, playable faces of these. A character's whole journey, across Reaches and domains, is which way they tip the world: toward the pure dead poles, or toward the open, mixed, living middle. The map is the argument, and the player is a vote in it."

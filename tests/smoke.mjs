@@ -6940,6 +6940,52 @@ await (async () => {
   check("207b: the call site feeds the trace (this turn's narration) + the item catalog to applyStateOps", /traceText: String\(turn\.narration/.test(appSrc207b) && /items: CONTENT\.items/.test(appSrc207b));
 }
 
+// ---- SNG-207b: the AUTHOR god-mode — a separate surface, no fairness, safety untouched, everything logged ----
+{
+  const am = await import("../engine/authormode.js");
+  const R = { leveling: { xpPerLevel: 100, subPointPerLevel: 1, skillPointPerLevel: 1 } };
+  const base = () => ({ name: "Author", level: 1, xp: 0, skillPoints: 0, health: 20, maxHealth: 20, energy: 20, maxEnergy: 20, attunement: 0, abilities: [], inventory: [], worldState: initWorldState(1) });
+
+  // addXp drives the level via the game's OWN rule (the "give me 500xp" the fair GM refuses).
+  const c1 = base(); am.applyAuthorOps(c1, [{ op: "addXp", amount: 250 }], { rules: R });
+  check("207b-god: addXp adds xp and the level FOLLOWS the game's rule (250xp @100/lvl → L3)", c1.xp === 250 && c1.level === 3 && c1.skillPoints >= 2);
+
+  // setLevel raises with per-level rewards / lowers bare — the "make me level 10" the fair GM refuses.
+  const c2 = base(); am.applyAuthorOps(c2, [{ op: "setLevel", to: 10 }], { rules: R });
+  check("207b-god: setLevel raises to the target WITH per-level rewards (L10, reserves + points grew)", c2.level === 10 && c2.maxHealth > 20 && c2.skillPoints >= 9);
+  am.applyAuthorOps(c2, [{ op: "setLevel", to: 4 }], { rules: R });
+  check("207b-god: setLevel can also LOWER (author's call)", c2.level === 4);
+
+  // setSkillPoints + restoreVitals + setVital (god may RAISE a vital; the fair correctVital may only lower).
+  const c3 = base(); c3.health = 5;
+  am.applyAuthorOps(c3, [{ op: "setSkillPoints", to: 7 }, { op: "restoreVitals" }, { op: "setVital", vital: "maxHealth", to: 99 }], { rules: R });
+  check("207b-god: setSkillPoints sets directly; restoreVitals fills; setVital RAISES a max (fair mode cannot)", c3.skillPoints === 7 && c3.health === 20 && c3.maxHealth === 99);
+
+  // grantAbility bypasses domain gates; refuses unknown / duplicate.
+  const c4 = base();
+  const g4 = am.applyAuthorOps(c4, [{ op: "grantAbility", abilityId: "my_craft" }, { op: "grantAbility", abilityId: "nope" }], { abilities: { my_craft: { id: "my_craft", name: "My Craft" } } });
+  check("207b-god: grantAbility grants a real craft (bypassing gates) + refuses an unknown one", c4.abilities.some(a => a.abilityId === "my_craft") && g4.refused.some(x => /no ability/.test(x.reason)));
+
+  // grantItem MAY carry power (effects) — unlike the fair grantStoryItem, which strips them.
+  const c5 = base();
+  am.applyAuthorOps(c5, [{ op: "grantItem", name: "Godblade", kind: "weapon", effects: { energy: 10 } }], { items: {} });
+  check("207b-god: grantItem may carry effects (god-mode grants power the fair path won't)", c5.inventory.some(i => i.name === "Godblade" && i.effects?.energy === 10));
+
+  // setArcStage forces an arc's canonical stage (author override, via the net model).
+  const ga = JSON.parse(readFileSync(join(root, "content/packs/valley/lore/greater_arcs.json"), "utf8")).arcs;
+  const c6 = base(); const arc = ga[0];
+  am.applyAuthorOps(c6, [{ op: "setArcStage", arcId: arc.id, stage: 3 }], { greaterArcs: ga });
+  check("207b-god: setArcStage forces the canonical arc stage (author override)", worldArcsPublic({ greaterArcs: ga }, c6).find(r => r.arcId === arc.id).stageNum === 3);
+
+  // accountability + the §0 guards.
+  check("207b-god: every edit is logged to the authorEdits ledger (accountable god-mode)", (c2.authorEdits || []).length >= 2 && c5.authorEdits.some(e => e.kind === "grantItem"));
+  check("207b-god: SAFETY is never a god-mode lever — no rating/minor op exists (overrides fairness, never safety)", !am.AUTHOR_OPS.some(op => /rating|minor|safe/i.test(op)));
+  const corrSrc = readFileSync(join(root, "engine/corrections.js"), "utf8");
+  check("207b-god: the fair stateOps path carries NO skipFairness seam (§0 — god-mode is its own door)", !/skipFairness/.test(corrSrc));
+  const appSrcGod = readFileSync(join(root, "app.js"), "utf8");
+  check("207b-god: the Author panel is DEV-GATED (nav + render both guard on devEnabled)", /nav-author/.test(appSrcGod) && /function renderAuthorPanel[\s\S]{0,90}devEnabled\(\) \|\| !character/.test(appSrcGod));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

@@ -14,6 +14,7 @@ import { namesToAvoid } from "./engine/namematch.js";
 import { affiliationOf, regionHomeTradition, buildPeopleVocab } from "./engine/affiliation.js"; // SNG-185
 import { applyQuestUpdates, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, slugify, advanceStructuredQuest } from "./engine/quests.js";
 import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM } from "./engine/corrections.js";
+import { applyAuthorOps, AUTHOR_OPS } from "./engine/authormode.js"; // SNG-207b: the author god-mode (dev-gated, separate surface)
 import { getApiKey, setApiKey, callClaude, callClaudeJSON, parseLooseJSON, setCallObserver } from "./engine/claude.js";
 import { armDevCapture, recordCall, annotateLatest, devCaptures, clearCaptures } from "./engine/devcapture.js"; // SNG-186 §2f: see the machine
 import { unearnedDepth, generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight, NOMINATE_AT, buildBraidPrompt, validateBraidAuthored } from "./engine/generate.js";
@@ -65,7 +66,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.200";
+const APP_VERSION = "1.8.201";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -359,6 +360,7 @@ function chrome(inner) {
         <button id="nav-feedback" title="Feedback / bug report — your version, location, character and last turn attach automatically">⚑ Feedback</button>
         ${devEnabled() ? `<button id="nav-dev" title="Dev preview-legs checklist">🧪 Legs</button>` : ""}
         ${devEnabled() ? `<button id="nav-machine" title="SNG-186 §2f — see the machine: the assembled prompt, raw response, parsed result and ops fired for recent model calls">🔬 Machine</button>` : ""}
+        ${devEnabled() ? `<button id="nav-author" title="SNG-207b — AUTHOR god-mode: set anything on this character (xp, level, items, abilities, world arcs), no fairness check. Dev only.">⚙ Author</button>` : ""}
       </div>
     </div>
     ${inner}`;
@@ -370,6 +372,8 @@ function chrome(inner) {
   if (devBtn) devBtn.onclick = () => renderPreviewLegs();
   const machBtn = document.getElementById("nav-machine");
   if (machBtn) machBtn.onclick = () => renderMachine();
+  const authBtn = document.getElementById("nav-author");
+  if (authBtn) authBtn.onclick = () => renderAuthorPanel();
 }
 
 // ---------- SNG-053: image lightbox (click any portrait/scene/moment art → larger view) ----------
@@ -1063,6 +1067,63 @@ function renderMachine() {
   if (knowAll) knowAll.onclick = () => { devKnowEverything(); renderMachine(); };
   const knowNone = document.getElementById("mach-know-none");
   if (knowNone) knowNone.onclick = () => { devKnowNothing(); renderMachine(); };
+}
+
+// ---------- SNG-207b: AUTHOR god-mode panel (dev-gated) ----------
+// The deliberately-separate surface (SNG-207 §0): Erik-as-author sets anything on the save with NO fairness
+// check — the god door, distinct from the fair in-fiction GM. Dev-gated; every edit logged to authorEdits.
+// It never exposes rating/minor: those are safety, not state, and god-mode overrides fairness, never safety.
+function renderAuthorPanel() {
+  if (!devEnabled() || !character) { renderRoster(); return; }
+  const arcs = CONTENT.greaterArcs || [];
+  const edits = character.authorEdits || [];
+  const now = `L${character.level} · ${character.xp || 0} xp · ${character.skillPoints || 0} sp · ${character.health}/${character.maxHealth} hp · ${character.energy}/${character.maxEnergy} en · ${(character.abilities || []).length} crafts · ${(character.inventory || []).length} items`;
+  const vitals = ["health", "energy", "maxHealth", "maxEnergy", "attunement"];
+  chrome(`<div class="screen" style="max-width:760px">
+    <h2>⚙ Author — god-mode <span class="dev-badge">DEV</span></h2>
+    <p class="hint" style="margin-bottom:6px">Erik-as-<strong>author</strong>, not the character. No fairness, no trace — this is the separate god-mode surface (SNG-207b), never the in-fiction GM. Safety (content-rating, minor-safety) lives in its own controls and is never touched here. Every edit is logged below.</p>
+    <div class="cs-block" style="font-family:var(--font-ui);font-size:12px;margin-bottom:10px">${esc(now)}</div>
+
+    <h3>Progression</h3>
+    <div class="author-row"><label>Add XP</label><input id="au-xp" type="number" value="100"><button class="btn secondary" data-au="addXp">Apply</button></div>
+    <div class="author-row"><label>Set level</label><input id="au-level" type="number" value="${character.level}" min="1" max="50"><button class="btn secondary" data-au="setLevel">Apply</button></div>
+    <div class="author-row"><label>Set skill points</label><input id="au-sp" type="number" value="${character.skillPoints || 0}" min="0"><button class="btn secondary" data-au="setSkillPoints">Apply</button></div>
+    <div class="author-row"><label>Restore vitals</label><button class="btn secondary" data-au="restoreVitals">Full heal + energy</button></div>
+    <div class="author-row"><label>Set vital</label><select id="au-vital">${vitals.map(v => `<option value="${v}">${v}</option>`).join("")}</select><input id="au-vital-to" type="number" value="0" min="0"><button class="btn secondary" data-au="setVital">Apply</button></div>
+
+    <h3>Grant</h3>
+    <div class="author-row"><label>Grant ability</label><input id="au-abil" placeholder="ability id (e.g. the_cut_thread)"><button class="btn secondary" data-au="grantAbility">Grant</button></div>
+    <div class="author-row"><label>Grant item</label><input id="au-item" placeholder="item name"><button class="btn secondary" data-au="grantItem">Grant</button></div>
+
+    ${arcs.length ? `<h3>World arcs</h3>${arcs.map(a => `<div class="author-row"><label>${esc(a.name)}</label><select id="au-arc-${esc(a.id)}">${Array.from({ length: (a.stages || []).length }, (_, i) => `<option value="${i + 1}">stage ${i + 1}${(a.stages[i]?.name) ? " — " + esc(a.stages[i].name) : ""}</option>`).join("")}</select><button class="btn secondary" data-au="setArcStage" data-arc="${esc(a.id)}">Set</button></div>`).join("")}` : ""}
+
+    <div id="au-status" class="hint" style="margin-top:10px;min-height:1.2em"></div>
+    <h3>Recent author edits (${edits.length})</h3>
+    <div class="author-log">${edits.slice(-12).reverse().map(e => `<div>· ${esc(e.kind)}${e.to != null ? ` → ${esc(String(e.to))}` : ""}${e.id ? ` (${esc(e.id)})` : ""}${e.name ? ` (${esc(e.name)})` : ""}${e.vital ? ` [${esc(e.vital)}]` : ""}${e.arcId ? ` [${esc(e.arcId)}]` : ""}</div>`).join("") || "<div class='hint'>(none yet)</div>"}</div>
+    <button class="btn secondary" id="au-back" style="margin-top:12px">Back</button>
+  </div>`);
+
+  const ctx = () => ({ rules: CONTENT.rules, items: CONTENT.items || {}, abilities: fullCatalog(), greaterArcs: CONTENT.greaterArcs || [], worldDay: absoluteWorldDay(), nowISO: new Date().toISOString() });
+  const status = document.getElementById("au-status");
+  const numVal = id => Number(document.getElementById(id)?.value);
+  const runAuthor = (op) => {
+    if (!AUTHOR_OPS.includes(op.op)) { status.textContent = "✗ unknown author op"; return; } // guard: only the known god-mode vocabulary
+    const r = applyAuthorOps(character, [op], ctx());
+    if (r.applied.length) { saveCharacter(character); status.textContent = "✓ " + JSON.stringify(r.applied[0]); status.style.color = "var(--accent)"; setTimeout(() => renderAuthorPanel(), 350); }
+    else { status.textContent = "✗ " + (r.refused[0]?.reason || "nothing applied"); status.style.color = "var(--danger)"; }
+  };
+  for (const b of app.querySelectorAll("[data-au]")) b.onclick = () => {
+    const which = b.dataset.au;
+    if (which === "addXp") return runAuthor({ op: "addXp", amount: numVal("au-xp") });
+    if (which === "setLevel") return runAuthor({ op: "setLevel", to: numVal("au-level") });
+    if (which === "setSkillPoints") return runAuthor({ op: "setSkillPoints", to: numVal("au-sp") });
+    if (which === "restoreVitals") return runAuthor({ op: "restoreVitals" });
+    if (which === "setVital") return runAuthor({ op: "setVital", vital: document.getElementById("au-vital").value, to: numVal("au-vital-to") });
+    if (which === "grantAbility") return runAuthor({ op: "grantAbility", abilityId: (document.getElementById("au-abil").value || "").trim() });
+    if (which === "grantItem") return runAuthor({ op: "grantItem", name: (document.getElementById("au-item").value || "").trim() });
+    if (which === "setArcStage") { const arcId = b.dataset.arc; return runAuthor({ op: "setArcStage", arcId, stage: Number(document.getElementById("au-arc-" + arcId)?.value) }); }
+  };
+  document.getElementById("au-back").onclick = () => renderRoster();
 }
 
 // ---------- settings ----------

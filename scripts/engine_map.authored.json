@@ -16,6 +16,11 @@
     "three lines when a spec touches it. The gate WARNS on an undescribed module and FAILS on a partly",
     "described one, because a partial description reads as complete."
   ],
+  "authormode.js": {
+    "purpose": "SNG-207b: the AUTHOR god-mode — Erik-as-author (not the character, not the in-fiction GM) sets anything on the save with NO fairness or trace check, via a DELIBERATELY SEPARATE entry point (applyAuthorOps), never a skipFairness flag on the fair-GM stateOps. It crosses fairness (grants xp/levels/power items/abilities, forces arc stages) but never safety — rating/minor are not state, so they are simply never exposed.",
+    "playerVisibleSurface": "A dev-gated '⚙ Author' panel (next to 🔬 Machine): set XP/level/skill-points, restore or raise vitals, grant an ability or a power item, force any world-arc stage. Every edit shows in a Recent-author-edits log. Invisible outside dev mode.",
+    "whatMakesItFire": "renderAuthorPanel's controls call applyAuthorOps with one op each (guarded by AUTHOR_OPS), then saveCharacter + re-render. Every op appends to character.authorEdits (append-only, separate from the fair-GM corrections ledger) so even god-mode leaves an audit trail."
+  },
   "namematch.js": {
     "purpose": "The one name-resolution primitive — slugify and fuzzy-match an entity the same way everywhere, so codex, quests and inventory can never disagree about what the GM just named.",
     "playerVisibleSurface": "Indirect but constant: every id the player sees, and the quest panel's \"couldn't match\" note when the GM names something that does not resolve.",

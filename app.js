@@ -64,7 +64,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.184";
+const APP_VERSION = "1.8.185";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1088,7 +1088,7 @@ function renderSettings(note = "") {
       <select id="set-pacing">
         ${[["calm", "Calm — the world is mostly quiet"], ["balanced", "Balanced — something turns up now and then"], ["eventful", "Eventful — the world is busy around you"], ["relentless", "Relentless — barely a quiet moment"]].map(([v, label]) => `<option value="${v}" ${(profile.pacing || "eventful") === v ? "selected" : ""}>${esc(label)}</option>`).join("")}
       </select>
-      <div class="hint">How often random encounters (a windfall, a stranger, a chase, a fight) surface in play — a per-character preference. Danger still skews dangerous places toward trouble and kind places toward grace; this only sets the frequency. A new player or a family member might enjoy <em>Eventful</em>.</div></div>
+      <div class="hint">How often random encounters (a windfall, a stranger, a chase, a fight) surface in play — a per-character preference. Danger still skews dangerous places toward trouble and kind places toward grace; this only sets the frequency. <strong>Quiet, intimate, and intense scenes stay uninterrupted no matter how high this is set</strong> — the world waits, so a tender or charged moment is never broken by a chance encounter. A new player or a family member might enjoy <em>Eventful</em>.</div></div>
     <div class="field"><label>Narration — plainness</label>
       <select id="set-plainness">
         ${[["plain", "Plain — say what's there, first-read words"], ["balanced", "Balanced — the place sets the voice"], ["lyrical", "Lyrical — reach for image and the felt-unnamed"]].map(([v, label]) => `<option value="${v}" ${(profile.plainness || "balanced") === v ? "selected" : ""}>${esc(label)}</option>`).join("")}

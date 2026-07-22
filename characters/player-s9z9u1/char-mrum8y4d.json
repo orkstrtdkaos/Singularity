@@ -54,7 +54,7 @@
   "alignment": {
     "mechanical_spiritual": -0.034,
     "falsehood_truth": -0.030514,
-    "spectrumId": -0.10622561941851044,
+    "spectrumId": -0.10091433844758492,
     "value": -0.04000000000000001,
     "demonic_angelic": -0.020000000000000004
   },
@@ -102,24 +102,31 @@
         "player": "Stay a moment longer while Cy examines what he will of what is under the chamber... ask, out of genuine curiosity if you can feel her unique buttons... they are facinating.",
         "summary": "Loki asked to examine Cy's maintenance interfaces; Cy consented, held still, and warned about the third catch.",
         "narration": "Cy has already moved. While you stood reading the last of the spike entries, the little mechanism slipped off the table edge and crossed the Annex floor on its many precise legs, stopping just short of the stone threshold where the old boundary-impression sits scar-deep in the substrate. Its lens irises down to a narrow ring. It does not touch anything. It simply looks, with the focused patience of something that has been looking at the same class of problem for a very long time.\n\nYou crouch beside it. The threshold is cool under your fingers — fitted stone, old mortar, and then that circular impression where the substrate has grown around whatever was first laid here. You can feel the seam of it, the slight ridge where old material meets new. Cy's legs make small precise adjustments on the floor without stepping across the line.\n\n\"Cy,\" you say, genuinely curious rather than coy about it. \"Your buttons. May I?\" You gesture at the articulated segments along its back — the small raised catches that you have always assumed are access-points for something, calibration ports or maintenance latches, each one slightly different from the last.\n\nCy's lens turns up toward you. There is a pause of approximately two seconds, which for Cy is a long time. Then it says, \"The current assignment may examine the maintenance interfaces. Gentle contact only. The third catch from the anterior end is sensitive.\" It holds very still, which is how you know this is a kind of trust."
+      },
+      {
+        "player": "I'm sorry... I was actually asking Tessvel if I could handle her buttons.. i notice they are fairly unique and made from different materials.",
+        "summary": "Tessvel showed Loki her salvaged buttons — brass, bone, Precursor resin, and a river stone — and admitted she doesn't know the origin of the bone one.",
+        "narration": "You pull your attention from the threshold stone and look back toward the doorway. Tessvel is standing in the frame, log tucked under one arm, head tilted at the precise angle of someone who is deciding whether a statement was professional or not.\n\nShe glances down at her coat. The three patches on the left sleeve are odd enough, but the buttons are stranger still — each one a different material, different size, salvaged from something older than the coat itself. Brass, bone, a dark resin piece that might be Precursor composite, and one that appears to be a flattened river stone with a hole bored through it.\n\nYou tell her they are genuinely fascinating, that you noticed them when you first met, and you would like a closer look if she will allow it. The request is entirely honest.\n\nTessvel is quiet for a moment. Then she steps fully into the Annex, sets the log on the near end of the table, and holds out her left arm with the careful deliberateness of someone presenting a piece of equipment for inspection. 'Four sources,' she says. 'The brass one came off a pressure-valve housing. The resin is from the old routing board — the previous wright cut it down when the board was decommissioned. I bored the stone myself.' She pauses. 'The bone one I found. I don't know what it's from.' She says this last part as if it is a filing error she has been meaning to correct for some time."
       }
     ],
     "lastTurn": {
-      "narration": "Cy has already moved. While you stood reading the last of the spike entries, the little mechanism slipped off the table edge and crossed the Annex floor on its many precise legs, stopping just short of the stone threshold where the old boundary-impression sits scar-deep in the substrate. Its lens irises down to a narrow ring. It does not touch anything. It simply looks, with the focused patience of something that has been looking at the same class of problem for a very long time.\n\nYou crouch beside it. The threshold is cool under your fingers — fitted stone, old mortar, and then that circular impression where the substrate has grown around whatever was first laid here. You can feel the seam of it, the slight ridge where old material meets new. Cy's legs make small precise adjustments on the floor without stepping across the line.\n\n\"Cy,\" you say, genuinely curious rather than coy about it. \"Your buttons. May I?\" You gesture at the articulated segments along its back — the small raised catches that you have always assumed are access-points for something, calibration ports or maintenance latches, each one slightly different from the last.\n\nCy's lens turns up toward you. There is a pause of approximately two seconds, which for Cy is a long time. Then it says, \"The current assignment may examine the maintenance interfaces. Gentle contact only. The third catch from the anterior end is sensitive.\" It holds very still, which is how you know this is a kind of trust.",
-      "sceneSummary": "Loki asked to examine Cy's maintenance interfaces; Cy consented, held still, and warned about the third catch.",
+      "narration": "You pull your attention from the threshold stone and look back toward the doorway. Tessvel is standing in the frame, log tucked under one arm, head tilted at the precise angle of someone who is deciding whether a statement was professional or not.\n\nShe glances down at her coat. The three patches on the left sleeve are odd enough, but the buttons are stranger still — each one a different material, different size, salvaged from something older than the coat itself. Brass, bone, a dark resin piece that might be Precursor composite, and one that appears to be a flattened river stone with a hole bored through it.\n\nYou tell her they are genuinely fascinating, that you noticed them when you first met, and you would like a closer look if she will allow it. The request is entirely honest.\n\nTessvel is quiet for a moment. Then she steps fully into the Annex, sets the log on the near end of the table, and holds out her left arm with the careful deliberateness of someone presenting a piece of equipment for inspection. 'Four sources,' she says. 'The brass one came off a pressure-valve housing. The resin is from the old routing board — the previous wright cut it down when the board was decommissioned. I bored the stone myself.' She pauses. 'The bone one I found. I don't know what it's from.' She says this last part as if it is a filing error she has been meaning to correct for some time.",
+      "sceneSummary": "Tessvel showed Loki her salvaged buttons — brass, bone, Precursor resin, and a river stone — and admitted she doesn't know the origin of the bone one.",
       "choices": [
         {
-          "label": "Feel each catch carefully — start from the front, honor the warning about the third",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "Examine the bone button closely — use See the Made Thing to read what it was made from",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "trivial": true
+          "abilityId": "see_the_made_thing",
+          "energyCost": 1,
+          "trivial": false
         },
         {
-          "label": "Ask Cy what the old boundary-impression in the threshold is — it was here before the Annex, and Cy is looking at it hard",
+          "label": "Handle each button and tell her what you know about their sources — especially the Precursor resin piece",
           "attribute": "mental",
           "subAttribute": "reason",
           "difficulty": 0,
@@ -129,34 +136,36 @@
           "trivial": true
         },
         {
-          "label": "Study the boundary-impression yourself with See the Made Thing — read how it was built and what it was meant to stop",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
+          "label": "Ask why she kept the bone one if she doesn't know its origin — that's an unusual thing for someone who files everything",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
           "intentTags": [
-            "study"
+            "persuade"
           ],
-          "abilityId": "see_the_made_thing",
-          "energyCost": 1,
-          "trivial": false
+          "trivial": true
         },
         {
-          "label": "Wait and watch — let Cy finish whatever it is doing at the threshold before moving anything",
+          "label": "Check on Cy — it has been very still at the threshold for a while now",
           "attribute": "mental",
           "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
-            "careful"
+            "scout"
           ],
           "trivial": true
         }
       ],
       "scene": {
-        "setting": "Interior, Pressure-Routing Annex, morning light from the east window. Long table to one side with the open log. Cy is crouched at the stone threshold near the far wall, lens narrowed, not crossing the line.",
+        "setting": "Interior, Pressure-Routing Annex, morning light from the east window. Long table to one side. Tessvel stands at the near end of the table, left arm extended, coat-sleeve with its mismatched buttons presented for inspection.",
         "npcsPresent": [
           {
+            "name": "Tessvel Cairn",
+            "state": "Standing at the table's near end, left arm extended, watching Loki with careful attention — the same look she gives anomalous data"
+          },
+          {
             "name": "Cy",
-            "state": "Holding perfectly still at the old boundary-impression in the threshold, lens irised to a narrow ring, awaiting gentle examination of its maintenance interfaces"
+            "state": "Still crouched at the stone threshold near the far wall, lens irised to a narrow ring, not crossing the line"
           }
         ],
         "objects": [
@@ -164,9 +173,11 @@
           "Pressure-gauge at the door",
           "Open intake log — four spike entries read",
           "Old circular boundary-impression in the threshold stone",
-          "Cy's maintenance interfaces (articulated catches along its back segments, each slightly different)"
+          "Tessvel's coat-sleeve: four mismatched buttons — brass (pressure-valve housing), Precursor resin (old routing board), river stone (bored by Tessvel), bone (origin unknown)",
+          "Cy's maintenance interfaces (articulated catches along its back segments)"
         ],
         "threads": [
+          "The bone button's origin is unresolved — Tessvel has never filed it",
           "Cy warned specifically about the third catch from the anterior end — sensitive, reason unstated",
           "The boundary-impression in the threshold predates the Annex — Cy is examining it without explanation",
           "Tessvel confirmed channel access and asked for time on the personal offer — she knows where to find Loki"
@@ -175,26 +186,45 @@
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "cy",
-          "name": "Cy",
-          "note": "Consented to Loki examining its maintenance interfaces; warned about the third catch; held very still — a form of trust",
+          "npcId": "tessvel-cairn",
+          "name": "Tessvel Cairn",
+          "note": "Held out her arm for button-inspection — presented each source with precise documentation, admitted the bone one is unclassified",
           "learned": [
-            "Has maintenance interfaces — articulated catches along its back, each slightly different; the third from the front is sensitive for an unstated reason"
+            "Brass button: from a decommissioned pressure-valve housing",
+            "Resin button: cut from the old routing board by the previous wright",
+            "River stone button: bored by Tessvel herself",
+            "Bone button: found, origin unknown — the one gap in her otherwise filed record"
           ],
-          "statusNote": "At the Annex threshold, examining the old boundary-impression; holding still for examination"
+          "statusNote": "At the Annex table, left arm extended, watching Loki examine her buttons — the personal offer still pending"
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "tessvel-cairn",
+          "label": "Tessvel Cairn",
+          "kind": "person",
+          "entityId": "tessvel-cairn",
+          "fact": "Her four salvaged coat-buttons each have a documented source — except the bone one, which she found and has never classified. It is the only gap in her otherwise meticulous record.",
+          "links": [
+            "pressure-routing-annex"
+          ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a quiet moment crouched at the threshold with Cy"
+        "why": "a brief exchange at the table"
       }
     },
     "sceneState": {
-      "setting": "Interior, Pressure-Routing Annex, morning light from the east window. Long table to one side with the open log. Cy is crouched at the stone threshold near the far wall, lens narrowed, not crossing the line.",
+      "setting": "Interior, Pressure-Routing Annex, morning light from the east window. Long table to one side. Tessvel stands at the near end of the table, left arm extended, coat-sleeve with its mismatched buttons presented for inspection.",
       "npcsPresent": [
         {
+          "name": "Tessvel Cairn",
+          "state": "Standing at the table's near end, left arm extended, watching Loki with careful attention — the same look she gives anom"
+        },
+        {
           "name": "Cy",
-          "state": "Holding perfectly still at the old boundary-impression in the threshold, lens irised to a narrow ring, awaiting gentle e"
+          "state": "Still crouched at the stone threshold near the far wall, lens irised to a narrow ring, not crossing the line"
         }
       ],
       "objects": [
@@ -202,9 +232,11 @@
         "Pressure-gauge at the door",
         "Open intake log — four spike entries read",
         "Old circular boundary-impression in the threshold stone",
-        "Cy's maintenance interfaces (articulated catches along its back segments, each s"
+        "Tessvel's coat-sleeve: four mismatched buttons — brass (pressure-valve housing),",
+        "Cy's maintenance interfaces (articulated catches along its back segments)"
       ],
       "threads": [
+        "The bone button's origin is unresolved — Tessvel has never filed it",
         "Cy warned specifically about the third catch from the anterior end — sensitive, reason unstated",
         "The boundary-impression in the threshold predates the Annex — Cy is examining it without explanation",
         "Tessvel confirmed channel access and asked for time on the personal offer — she knows where to find Loki"
@@ -236,7 +268,6 @@
       },
       "relationship": 9,
       "history": [
-        "[d1] Loki claimed independent methodology; Tessvel did not dismiss it — she asked to see it applied to the four spike entries in her log, using the same level voice she uses for everything",
         "[d1] Turned the log to share it rather than guard it — a small, precise act of collaboration. Waiting for the methodology to be demonstrated.",
         "[d1] Watched Loki invoke the working and Cy take the threshold — did not object, did not comment. Picked up her pen when Loki began the read. Asked which direction he reads from — genuinely methodological, not rhetorical.",
         "[d1] Drew a margin bracket in real time alongside Loki's read of the second entry — she is no longer watching the methodology, she is applying it.",
@@ -245,17 +276,18 @@
         "[d1] Sitting with the completed pattern in front of her — four brackets, silence held, pen down. Has not yet spoken after the ninth-minute interval was named.",
         "[d1] Loki named the bargain directly — access to the lower routing channel in exchange for the confirmed pattern. She recalibrated rather than refused. Asked what kind of access plainly.",
         "[d1] Received a direct romantic proposition alongside the channel-access trade; went still, colored, confirmed the channel access, asked for time on the rest — did not refuse.",
-        "[d1] Said 'time, not a refusal' — confirmed channel access by end-of-shift, left the personal offer open with 'I know where to find you.'"
+        "[d1] Said 'time, not a refusal' — confirmed channel access by end-of-shift, left the personal offer open with 'I know where to find you.'",
+        "[d1] Held out her arm for button-inspection — presented each source with precise documentation, admitted the bone one is unclassified"
       ],
       "knownFacts": [
-        "She heard or felt the low chord through the floor and responded by naming the next step rather than the anomaly",
-        "Fourth spike entry: nine-minute pressure-drop before particulate — the interval has grown from four to nine across four entries. Whatever moves through the lower routing channel is going deeper, or…",
-        "Loki is willing to trade the pattern for access to the lower routing channel",
         "Loki noticed the four mismatched buttons on her coat",
         "Loki proposed access to the lower routing channel AND a more personal arrangement — she noted both as received",
         "She confirmed lower routing channel access will be arranged",
         "She asked for time to consider the personal offer — not a refusal",
-        "She processes personal propositions the way she processes anomalous data — not dismissal, classification-pending"
+        "She processes personal propositions the way she processes anomalous data — not dismissal, classification-pending",
+        "Brass button: from a decommissioned pressure-valve housing",
+        "Resin button: cut from the old routing board by the previous wright",
+        "River stone button: bored by Tessvel herself"
       ],
       "skillsObserved": [
         "Resistance to social misdirection",
@@ -268,7 +300,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the Annex table, hands folded on her open log — the offer is live, the channel access is coming, and she knows where to find Loki.",
+      "statusNote": "At the Annex table, left arm extended, watching Loki examine her buttons — the personal offer still pending",
       "domains": {
         "primary": "wright"
       },
@@ -371,7 +403,7 @@
     "lastSharedReadAt": "2026-07-22T00:04:22.675Z",
     "lastTickWorldDay": 22,
     "lastCanonWorldDay": 22,
-    "turnsSinceOffer": 8,
+    "turnsSinceOffer": 9,
     "recentOffers": [
       {
         "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
@@ -489,7 +521,8 @@
           "[d1] She has tested the four spike entries against schedule correlation, maintenance windows, and weather-linked intake variance and found nothing fitting — the pattern has no ordinary cause she can name",
           "[d1] Received a direct romantic proposition with genuine charm — went still, colored, confirmed channel access, and asked for time rather than refusing. The interest registered.",
           "[d1] [while away] Tessvel reorganized the Eastern Intake's backlog of unsequenced notices dating three weeks prior, completing the task in half the expected time and leaving a brief, unsolicited margin annotation on the pressure-routing schedule pointing out a filing inconsistency — her way of…",
-          "[d1] Said 'time, not a refusal' to the personal offer — classified it as pending rather than rejected; confirmed lower routing channel access by end-of-shift and said she knows where to find Loki."
+          "[d1] Said 'time, not a refusal' to the personal offer — classified it as pending rather than rejected; confirmed lower routing channel access by end-of-shift and said she knows where to find Loki.",
+          "[d1] Her four salvaged coat-buttons each have a documented source — except the bone one, which she found and has never classified. It is the only gap in her otherwise meticulous record."
         ],
         "links": [
           "intake-plaza",
@@ -569,20 +602,20 @@
     }
   },
   "tendencies": {
-    "devotion": 6.386620671512989,
-    "cerebral": 9.583721269937453,
-    "social": 14.117511796899421,
-    "strategic": 5.289164893413168,
-    "cautious": 4.410800973079133,
-    "amorous": 12.338121148578146,
-    "generous": 1.269023865308452,
-    "ruthless": 0.7195483871809846
+    "devotion": 6.2269551547251645,
+    "cerebral": 10.344128238189016,
+    "social": 14.764574001976936,
+    "strategic": 5.156935771077839,
+    "cautious": 4.300530948752154,
+    "amorous": 12.029668119863693,
+    "generous": 1.2372982686757408,
+    "ruthless": 0.70155967750146
   },
   "aptitudes": [
     "silver_tongue",
     "charmer"
   ],
-  "actionCount": 31,
+  "actionCount": 32,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -709,8 +742,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784678885023,
-  "rev": 54,
+  "updatedAt": 1784678978701,
+  "rev": 55,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -865,7 +898,7 @@
           "entityId": "tessvel-cairn",
           "type": "npc",
           "birthWeight": 2,
-          "engagementScore": 56,
+          "engagementScore": 59,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -891,14 +924,6 @@
               "day": 1
             },
             {
-              "kind": "interact",
-              "day": 1
-            },
-            {
-              "kind": "interact",
-              "day": 1
-            },
-            {
               "kind": "fact",
               "day": 1
             },
@@ -956,6 +981,14 @@
             },
             {
               "kind": "interact",
+              "day": 1
+            },
+            {
+              "kind": "interact",
+              "day": 1
+            },
+            {
+              "kind": "fact",
               "day": 1
             },
             {
@@ -1007,7 +1040,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_gearlands": 32
+    "the_gearlands": 33
   },
   "opLossPending": false,
   "sessions": [
@@ -1022,10 +1055,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-21T17:40:12.510Z",
-      "lastAt": "2026-07-22T00:08:05.023Z",
+      "lastAt": "2026-07-22T00:09:38.699Z",
       "startDay": 21,
       "endDay": 22,
-      "beats": 31
+      "beats": 32
     }
   ],
   "establishedFacts": [],
@@ -1038,21 +1071,21 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 29,
-    "choices": 29,
+    "sceneSummary": 30,
+    "choices": 30,
     "characterDeltas": 9,
-    "scene": 29,
+    "scene": 30,
     "placeUpdates": 3,
-    "codexUpdates": 20,
-    "timeOps": 29,
+    "codexUpdates": 21,
+    "timeOps": 30,
     "offer": 2,
     "generateRequest": 2,
     "sceneEnded": 8,
-    "npcUpdates": 24,
+    "npcUpdates": 25,
     "moveTo": 1,
     "gambitApt": 1
   },
-  "_opTurns": 29,
+  "_opTurns": 30,
   "customAbilities": {},
   "companionBonds": {},
   "practice": {

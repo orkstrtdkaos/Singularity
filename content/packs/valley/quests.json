@@ -629,6 +629,611 @@
    "arcStageFrom": 1,
    "arcStageTo": 2,
    "publicFace": "The Valley's poisoned water was traced to a built source under the Disputed Zone \u2014 and someone did something about it."
+  },
+  {
+   "id": "the_light_that_will_not_dim",
+   "name": "The Light That Will Not Dim",
+   "region": "valley",
+   "tier": "world",
+   "arcId": "arc_the_poles_pull",
+   "arcStageFrom": 1,
+   "arcStageTo": 2,
+   "publicFace": "A Reach is pulling harder toward its own pole, and someone tried to hold the middle.",
+   "giver": "high_luminary",
+   "legend": "the_high_luminary",
+   "axis": "dark_light",
+   "traditions": [
+    "radiant",
+    "umbral",
+    "verist",
+    "stillhold",
+    "lattice",
+    "abyssal"
+   ],
+   "premise": "High Luminary Sera has buried a set of readings, and the reason she buried them is worse than the readings: the Radiant Reach is drifting toward its own extreme faster than the Accords can hold, and the light is winning ground it should share. She wants the truth out before it is forced out \u2014 but the truth is that her own people are the ones pulling.",
+   "stakes": "If you walk away: the buried readings stay buried, the Radiant leadership keeps drifting toward the pole, and the balance the Accords maintain between light and dark loses a Reach's worth of ground \u2014 the first Reach to pull free of the middle, and the proof to the others that it can be done. The poles pull harder everywhere once one of them wins.",
+   "stages": [
+    {
+     "id": "s1",
+     "objective": "Learn what Sera's engineer buried.",
+     "condition": "Obtain the suppressed readings (from Sera, the engineer, or the Radiant archive) OR witness the drift directly at a filtration array.",
+     "change": "Codex: the Radiant Reach is intensifying past the Accord's tolerance \u2014 and someone chose to hide it."
+    },
+    {
+     "id": "s2",
+     "objective": "Find who benefits from the light winning.",
+     "condition": "Identify the faction inside the Radiant leadership pushing the drift (via the readings' chain, a defector, or the Cult of the Unlit's mirror-accusation).",
+     "change": "Codex: the pull has a party behind it, not just a tendency. The middle has an enemy with a name."
+    },
+    {
+     "id": "s3",
+     "objective": "Decide whether the middle is worth holding.",
+     "condition": "Resolve \u2014 see outcomes.",
+     "change": "The Radiant Reach's drift is checked, accelerated, or turned \u2014 and the other Reaches watch which."
+    }
+   ],
+   "routes": {
+    "verist": "Bring the buried readings before the Accord council, plainly, and let the drift be seen for what it is.",
+    "stillhold": "Broker between the Radiant hardliners and the Accord \u2014 hold the middle by keeping both poles in the room.",
+    "umbral": "Give the Unlit their due \u2014 let the dark's counter-claim stand as the balance the light forgot, without letting either win.",
+    "radiant": "Argue the light back toward its own better nature \u2014 a Radiant who refuses the extreme is the strongest answer to the drift.",
+    "lattice": "Take the readings apart until the drift is undeniable arithmetic, not a matter of whose word to trust.",
+    "abyssal": "Name what the drifting faction actually fears \u2014 the dark, the middle, being ordinary \u2014 and offer them a way to stop pulling that isn't surrender."
+   },
+   "outcomes": [
+    {
+     "id": "middle_held",
+     "name": "The Middle Held",
+     "summary": "The drift is checked; the Accord holds; the light shares its ground again.",
+     "narration": [
+      "Sera's readings land where they had to, and the Radiant leadership \u2014 some of it furious, some of it relieved \u2014 steps back from the pole.",
+      "The Accord holds. The other Reaches, who were watching to see whether a pole could be made to stop pulling, see that it can.",
+      "Sera is spent and vindicated and not entirely grateful to have been made honest. She will remember which you made her.",
+      "Stillhold disposition toward you: strongly raised \u2014 you kept the room together when it wanted to split."
+     ],
+     "effects": [
+      {
+       "type": "npc_state",
+       "npc": "high_luminary",
+       "state": "vindicated",
+       "note": "made honest against her own people; owes you and resents the debt a little"
+      },
+      {
+       "type": "disposition",
+       "people": "stillhold",
+       "delta": 2
+      },
+      {
+       "type": "codex_fact",
+       "text": "The Radiant Reach's drift toward the pole was checked; the Accord held. The first proof that a pulling pole can be made to stop."
+      },
+      {
+       "type": "arc_stage",
+       "arcId": "arc_the_poles_pull",
+       "from": 1,
+       "to": 1,
+       "note": "holding the middle keeps the arc from advancing \u2014 the pull is checked here, though it continues elsewhere"
+      },
+      {
+       "type": "world_event",
+       "text": "Word spreads that a Reach was pulled back from its own extreme \u2014 the Accords gain a precedent, and the pulling factions everywhere gain a warning.",
+       "propagates": true,
+       "delayDays": 5
+      },
+      {
+       "type": "xp",
+       "amount": 45
+      }
+     ]
+    },
+    {
+     "id": "let_it_win",
+     "name": "Let the Light Win",
+     "summary": "The drift completes; the Radiant Reach pulls free of the middle.",
+     "narration": [
+      "You do not stop it, or you help it \u2014 and the Radiant Reach pulls hard enough to break the Accord's hold on it. The light wins its ground.",
+      "It is not a disaster you can point at. It is brighter now, and cleaner, and less willing to share the world with the dark \u2014 and the other Reaches have just learned that a pole can win.",
+      "Sera got her truth out and lost the thing the truth was supposed to protect. She does not thank you.",
+      "This is the arc's fork answered toward the pole: the middle lost a Reach, and the pull got stronger everywhere."
+     ],
+     "effects": [
+      {
+       "type": "npc_state",
+       "npc": "high_luminary",
+       "state": "estranged",
+       "note": "her truth freed the drift instead of checking it; she holds you partly responsible"
+      },
+      {
+       "type": "codex_fact",
+       "text": "The Radiant Reach pulled free of the Accord's middle. The first pole to win \u2014 and proof to the others that winning is possible."
+      },
+      {
+       "type": "arc_stage",
+       "arcId": "arc_the_poles_pull",
+       "from": 1,
+       "to": 2,
+       "note": "a pole winning advances The Poles Pull \u2014 the drift becomes strain, everywhere"
+      },
+      {
+       "type": "world_event",
+       "text": "The Radiant Reach has broken toward its pole; across the Reaches, the pulling factions take heart and pull harder.",
+       "propagates": true,
+       "delayDays": 6
+      },
+      {
+       "type": "quest_seed",
+       "text": "One pole winning teaches the others. The next Reach to pull will not bury its readings \u2014 it will point at the Radiants and say it was allowed."
+      },
+      {
+       "type": "xp",
+       "amount": 45
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "present_at_the_birth",
+   "name": "Present at the Birth",
+   "region": "valley",
+   "tier": "world",
+   "arcId": "arc_manifestation_storm",
+   "arcStageFrom": 1,
+   "arcStageTo": 2,
+   "publicFace": "A new domain is manifesting, and someone was there to shape what it becomes.",
+   "giver": "maker_orrin",
+   "legend": null,
+   "axis": "destruction_creation",
+   "traditions": [
+    "wright",
+    "lattice",
+    "verist",
+    "rootkin",
+    "abyssal",
+    "radiant"
+   ],
+   "premise": "Orrin Nine-Thumbs has felt it before anyone: a domain is about to bloom where none was, the substrate stirring into new fiction the way it did at the Transition. He has spent his life rebuilding one lost device and he knows what a birth costs. He wants someone there when it manifests \u2014 because whoever is present when a domain is born helps decide what it is.",
+   "stakes": "If you walk away: the domain manifests unwitnessed and unshaped, seeded by whatever the substrate happened to be dreaming \u2014 and an unshaped bloom is as likely to be a wound in the world as a wonder. Worse, it teaches the storm that no one is watching; the next bloom comes faster, and the one after that.",
+   "stages": [
+    {
+     "id": "s1",
+     "objective": "Reach the site before it blooms.",
+     "condition": "Find the manifestation site Orrin sensed (follow the substrate-density signs, his device's reading, or a creature already appearing out of native context).",
+     "change": "Codex: a domain is about to be born, and you are close enough to matter to it."
+    },
+    {
+     "id": "s2",
+     "objective": "Understand what wants to manifest.",
+     "condition": "Read the seed-fiction before it sets \u2014 deathsense/lifesense the bloom, take apart its logic, or speak with whatever is already emerging from it.",
+     "change": "Codex: the shape the bloom is reaching for is known \u2014 and it can still be turned."
+    },
+    {
+     "id": "s3",
+     "objective": "Shape the birth, or refuse to.",
+     "condition": "Resolve \u2014 see outcomes.",
+     "change": "The domain is born shaped, stemmed, or wild \u2014 and the storm learns whether it is watched."
+    }
+   ],
+   "routes": {
+    "wright": "Build into the seed \u2014 give the manifesting domain a made thing to organize around, so it blooms as craft rather than chaos.",
+    "verist": "Name the domain true as it forms \u2014 a bloom given an honest fiction sets cleaner than one left to dream itself.",
+    "rootkin": "Let it be alive \u2014 tend the bloom toward life-disposition, so what is born can grow rather than only appear.",
+    "lattice": "Order the seed's logic before it sets, so the domain manifests coherent instead of bleeding at its edges.",
+    "abyssal": "Go into the bloom and name what it fears to become \u2014 a domain shaped by its own dread is a wound; one that faces it is a wonder.",
+    "radiant": "Stem it \u2014 if what wants to manifest is dangerous, hold the aperture shut and let this bloom pass unborn."
+   },
+   "outcomes": [
+    {
+     "id": "shaped",
+     "name": "Born Shaped",
+     "summary": "You were present, and the domain manifested as something the world can hold.",
+     "narration": [
+      "The domain blooms with you inside its birth, and it sets toward what you turned it toward \u2014 a new place in the world, coherent, alive, seeded with a fiction someone chose on purpose.",
+      "Orrin weeps, which he would deny. He has spent his life on one device to catch a moment like this and he got to see it caught.",
+      "The storm noticed that this one was watched. That cuts both ways \u2014 a shaped bloom is proof the storm can be met, and proof it is worth meeting.",
+      "Wright disposition toward you: raised \u2014 you built into a birth instead of only witnessing it."
+     ],
+     "effects": [
+      {
+       "type": "location_state",
+       "location": "the_new_domain",
+       "change": "manifested and shaped \u2014 a coherent new place, seeded with a chosen fiction"
+      },
+      {
+       "type": "npc_state",
+       "npc": "maker_orrin",
+       "state": "fulfilled",
+       "note": "saw a birth caught after a lifetime building toward it; bound to you for it"
+      },
+      {
+       "type": "ally",
+       "npc": "maker_orrin",
+       "note": "the maker who felt the storm first; will bring you the next bloom before anyone else knows"
+      },
+      {
+       "type": "disposition",
+       "people": "wright",
+       "delta": 2
+      },
+      {
+       "type": "codex_fact",
+       "text": "A domain was born shaped, with you present at its manifestation. Proof the storm can be met rather than only endured."
+      },
+      {
+       "type": "arc_stage",
+       "arcId": "arc_manifestation_storm",
+       "from": 1,
+       "to": 2,
+       "note": "a witnessed shaped birth advances the storm consciously \u2014 the blooming begins on terms someone chose"
+      },
+      {
+       "type": "world_event",
+       "text": "A new domain manifested shaped rather than wild \u2014 the first bloom of the storm that someone was present to author.",
+       "propagates": true,
+       "delayDays": 5
+      },
+      {
+       "type": "xp",
+       "amount": 50
+      }
+     ]
+    },
+    {
+     "id": "stemmed",
+     "name": "Held Shut",
+     "summary": "You judged the bloom too dangerous and held the aperture closed.",
+     "narration": [
+      "You decide what wants to manifest should not, and you hold the aperture shut until the bloom passes unborn. The domain that wanted to be is not.",
+      "Orrin understands and is grieved by it \u2014 a birth refused is still a death of a kind, and he has spent his life on the other choice.",
+      "The storm's pressure did not vanish; it moved. What wanted to bloom here will try again elsewhere, and you will not be there to judge it next time.",
+      "This is foreclosure at the smallest scale of the largest storm: you kept a wound from opening and closed a wonder with it."
+     ],
+     "effects": [
+      {
+       "type": "npc_state",
+       "npc": "maker_orrin",
+       "state": "grieved",
+       "note": "understands the refusal, mourns the birth; his faith in you holds but is quieter"
+      },
+      {
+       "type": "codex_fact",
+       "text": "A manifestation was held shut before it could bloom \u2014 a wound prevented, a wonder foreclosed. The storm's pressure moved elsewhere."
+      },
+      {
+       "type": "arc_stage",
+       "arcId": "arc_manifestation_storm",
+       "from": 1,
+       "to": 1,
+       "note": "stemming a bloom holds the storm here \u2014 but the pressure displaces rather than dissipates"
+      },
+      {
+       "type": "world_event",
+       "text": "A bloom was stemmed in the valley; substrate pressure that wanted to manifest here surfaces somewhere with no one to hold it shut.",
+       "propagates": true,
+       "delayDays": 7
+      },
+      {
+       "type": "quest_seed",
+       "text": "What you refused to let bloom here will try to bloom elsewhere, unwitnessed. Foreclosure is a choice with a cost that arrives late."
+      },
+      {
+       "type": "xp",
+       "amount": 40
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "the_seam_in_the_gears",
+   "name": "The Seam in the Gears",
+   "region": "valley",
+   "tier": "regional",
+   "arcId": "arc_block_bleed",
+   "arcStageFrom": 1,
+   "arcStageTo": 2,
+   "publicFace": "Block-logic is bleeding into the Gearlands, and someone reached the seam it comes through.",
+   "giver": "maker_orrin",
+   "legend": null,
+   "axis": "chaos_order",
+   "traditions": [
+    "wright",
+    "lattice",
+    "verist",
+    "umbral",
+    "abyssal",
+    "stillhold"
+   ],
+   "premise": "Matter in the Gearlands is starting to resolve into craftable units where it shouldn't \u2014 block-logic diffusing out of the Glitchlands' seam, two ordered-creative dispositions cross-contaminating. Orrin's own workshop is on the edge of it, and his tools are beginning to behave like something they aren't. He wants the seam found before the bleed reaches the Gearlands' heart.",
+   "stakes": "If you walk away: the bleed spreads inward, the Gearlands' grammar destabilizes, and the makers who built their whole craft on matter behaving one way lose the ground under it. Two ways of ordering the world cross where they were never meant to, and neither survives the crossing whole.",
+   "stages": [
+    {
+     "id": "s1",
+     "objective": "Trace the bleed to where it enters.",
+     "condition": "Follow the block-logic contamination upstream to the Glitchlands seam (via the changed matter, Orrin's misbehaving tools, or a Blocklander who knows the fault).",
+     "change": "Codex: the seam is found \u2014 the exact place two grammars are crossing."
+    },
+    {
+     "id": "s2",
+     "objective": "Understand what the crossing is doing.",
+     "condition": "Read the seam's logic \u2014 take apart how block-units are resolving in gear-matter, or get someone native to the Blocklands to explain what leaks.",
+     "change": "Codex: the bleed's mechanism is known, and with it, the three things you could do about it."
+    },
+    {
+     "id": "s3",
+     "objective": "Stem it, harness it, or ride it in.",
+     "condition": "Resolve \u2014 see outcomes.",
+     "change": "The seam is sealed, tapped, or opened wider \u2014 and the Gearlands' grammar holds, changes, or breaks."
+    }
+   ],
+   "routes": {
+    "lattice": "Order the seam shut \u2014 impose a grammar strict enough that the two logics stop cross-contaminating.",
+    "wright": "Harness it \u2014 build a device that uses the crossing on purpose, so the bleed becomes a tool instead of a wound.",
+    "verist": "Name what each side actually is, plainly, so the crossing stops pretending to be one thing and becomes two again.",
+    "umbral": "Go into the seam unseen and learn what rides the bleed before deciding whether it should be stopped.",
+    "abyssal": "Name what the crossing wants \u2014 to resolve, to become craftable, to be ordered \u2014 and bargain with that want.",
+    "stillhold": "Broker between the makers who want it sealed and the ones who want it harnessed, before they tear the Gearlands apart arguing."
+   },
+   "outcomes": [
+    {
+     "id": "sealed",
+     "name": "The Seam Sealed",
+     "summary": "The bleed is stopped; the Gearlands' grammar holds.",
+     "narration": [
+      "You find the seam and close it \u2014 impose enough order that the two logics stop crossing, and the Gearlands' matter behaves like itself again.",
+      "Orrin's tools settle back into what they were. He is relieved and a little wistful \u2014 there was something in the crossing he half-wanted to understand before it closed.",
+      "The Blocklands lost a leak they may not have known they had. Somewhere a Glitchlander notices the seam is shut and wonders who did it.",
+      "Lattice disposition toward you: raised \u2014 you held a grammar together under strain."
+     ],
+     "effects": [
+      {
+       "type": "location_state",
+       "location": "the_glitchlands_seam",
+       "change": "sealed \u2014 the two grammars no longer cross here"
+      },
+      {
+       "type": "npc_state",
+       "npc": "maker_orrin",
+       "state": "relieved",
+       "note": "his craft's ground is stable again; half-wishes he'd learned more from the bleed first"
+      },
+      {
+       "type": "disposition",
+       "people": "lattice",
+       "delta": 2
+      },
+      {
+       "type": "codex_fact",
+       "text": "The Glitchlands seam bleeding block-logic into the Gearlands has been sealed. The two grammars are separate again."
+      },
+      {
+       "type": "arc_stage",
+       "arcId": "arc_block_bleed",
+       "from": 1,
+       "to": 1,
+       "note": "sealing the seam holds the bleed at stage 1 \u2014 stopped here, though the Glitchlands still leak elsewhere"
+      },
+      {
+       "type": "world_event",
+       "text": "The Gearlands seam was sealed; the block-bleed is checked, and the Blocklands notice a leak has closed.",
+       "propagates": true,
+       "delayDays": 4
+      },
+      {
+       "type": "xp",
+       "amount": 40
+      }
+     ]
+    },
+    {
+     "id": "harnessed",
+     "name": "The Crossing Harnessed",
+     "summary": "You didn't seal it \u2014 you built something that uses it.",
+     "narration": [
+      "You don't close the seam. You build into it \u2014 a device, a method, a way of making that uses the crossing of two grammars on purpose. The bleed becomes a tool.",
+      "Orrin is transformed. This is the thing his whole life of rebuilding was reaching for: not a wound repaired but a new way of making, found at the edge where two orders meet.",
+      "It is not safe. A harnessed bleed is still a bleed, and what you built will need tending, and the Blocklands will eventually want to know what you're doing with their leak.",
+      "This is the arc's fork answered toward creation: the crossing advances, but on terms someone chose to build rather than suffer."
+     ],
+     "effects": [
+      {
+       "type": "location_state",
+       "location": "the_glitchlands_seam",
+       "change": "harnessed \u2014 the crossing runs through a built device, tapped rather than sealed"
+      },
+      {
+       "type": "npc_state",
+       "npc": "maker_orrin",
+       "state": "transformed",
+       "note": "found a new way of making at the seam; bound to you and to the work now"
+      },
+      {
+       "type": "ally",
+       "npc": "maker_orrin",
+       "note": "partner in the harnessed crossing; his craft and yours are tied to it"
+      },
+      {
+       "type": "codex_fact",
+       "text": "The Gearlands seam was harnessed rather than sealed \u2014 the block-bleed runs through a built device now, a new way of making at the edge of two grammars."
+      },
+      {
+       "type": "arc_stage",
+       "arcId": "arc_block_bleed",
+       "from": 1,
+       "to": 2,
+       "note": "harnessing the crossing advances the bleed consciously \u2014 the grammars cross on built terms"
+      },
+      {
+       "type": "world_event",
+       "text": "Someone in the Gearlands is using the block-bleed on purpose; the Blocklands will eventually come asking what, and why.",
+       "propagates": true,
+       "delayDays": 8
+      },
+      {
+       "type": "quest_seed",
+       "text": "A harnessed bleed is a leak someone decided to keep. The Blocklands do not yet know their seam feeds a Gearlands device \u2014 and may not agree to it."
+      },
+      {
+       "type": "xp",
+       "amount": 50
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "the_moot_that_will_not_end",
+   "name": "The Moot That Will Not End",
+   "region": "valley",
+   "tier": "regional",
+   "arcId": "arc_green_schism",
+   "arcStageFrom": 1,
+   "arcStageTo": 2,
+   "publicFace": "The Deepwood argues whether to seal itself from humankind, and someone spoke into the argument.",
+   "giver": "warden_isolde",
+   "legend": null,
+   "axis": "death_life",
+   "traditions": [
+    "rootkin",
+    "verist",
+    "stillhold",
+    "abyssal",
+    "umbral",
+    "radiant"
+   ],
+   "premise": "The Deepwood's Standing Moot has argued for a generation over whether to seal the wood from humankind, and the Rootbound faction is finally winning. Warden Isolde has kept the Green Accord between the Glade and Thornwake her whole life, and she can feel it withdrawing. She wants someone to speak into the Moot before the sealing becomes final \u2014 someone the wood might actually hear.",
+   "stakes": "If you walk away: the Rootbound win the Moot, the wood seals, the Green Accord withdraws from Thornwake, and the life-disposition retreats from the human world one Deepwood's worth. The Walkers who argued for openness are proven fools, and every wood that was watching learns that sealing is what wisdom does.",
+   "stages": [
+    {
+     "id": "s1",
+     "objective": "Earn the standing to speak in the Moot.",
+     "condition": "Prove yourself to the wood \u2014 heal something in it, keep a promise to a Rootkin, or win the Old Stag's word (he can grant you a hearing the Rootbound can't refuse).",
+     "change": "Codex: the Moot will hear you. That is not the same as agreeing with you."
+    },
+    {
+     "id": "s2",
+     "objective": "Learn why the Rootbound want the seal.",
+     "condition": "Understand the Rootbound case (via Vaskar's grief, the Burnscar's old grudge, or the wound in the wood that started the argument) \u2014 the seal is not malice, it is fear with a reason.",
+     "change": "Codex: the seal has a cause, and the cause can be answered \u2014 or can't."
+    },
+    {
+     "id": "s3",
+     "objective": "Turn the Moot, or let it close.",
+     "condition": "Resolve \u2014 see outcomes.",
+     "change": "The wood seals, holds open, or finds a third thing no one in the Moot had named."
+    }
+   ],
+   "routes": {
+    "rootkin": "Argue as one of the wood's own \u2014 a Rootkin voice for openness is the only kind the Rootbound cannot dismiss as human.",
+    "stillhold": "Broker the Moot \u2014 hold the Rootbound and the Walkers in one argument long enough to find the thing neither faction had named.",
+    "verist": "Name the wound plainly \u2014 the grudge under the seal, said aloud in the Moot, may lose its power to close the wood.",
+    "abyssal": "Name what the Rootbound fear \u2014 humankind, the burn, the loss of the wood itself \u2014 and offer a way to keep the wood that isn't a wall.",
+    "umbral": "Heal the Burnscar's grudge unseen, before the Moot votes, so the wood's oldest wound stops arguing for the seal.",
+    "radiant": "Make the case for the Accord in the open \u2014 that a wood that shares itself is more alive than one that survives sealed."
+   },
+   "outcomes": [
+    {
+     "id": "held_open",
+     "name": "The Wood Held Open",
+     "summary": "The Moot turns; the Accord holds; the wood stays part of the world.",
+     "narration": [
+      "You speak, or you heal the thing the argument was really about, and the Moot turns \u2014 the Rootbound do not win, and the Green Accord holds between the Glade and Thornwake.",
+      "Isolde has kept the Accord her whole life and just watched someone else help keep it. She is grateful in the careful way of someone who does not trust gratitude.",
+      "The Old Stag, who wanted to pass the Accord on cleanly, sees that there is someone able to receive it. That is its own quiet ending.",
+      "Rootkin disposition toward you: strongly raised \u2014 you argued for the wood's life and the wood heard you."
+     ],
+     "effects": [
+      {
+       "type": "npc_state",
+       "npc": "warden_isolde",
+       "state": "vindicated",
+       "note": "the Accord she guarded holds; trusts you with the wood's business now"
+      },
+      {
+       "type": "npc_state",
+       "npc": "the_old_stag",
+       "state": "at_peace",
+       "note": "found someone able to receive the Accord; his passing-on has an heir"
+      },
+      {
+       "type": "disposition",
+       "people": "rootkin",
+       "delta": 3
+      },
+      {
+       "type": "codex_fact",
+       "text": "The Deepwood's Moot turned from the seal; the Green Accord holds. The wood stays part of the human world."
+      },
+      {
+       "type": "arc_stage",
+       "arcId": "arc_green_schism",
+       "from": 1,
+       "to": 1,
+       "note": "turning the Moot holds the schism at stage 1 \u2014 the seal is refused here, though other woods still argue it"
+      },
+      {
+       "type": "world_event",
+       "text": "The Deepwood chose to stay open; woods that were watching learn that sharing, not sealing, can be what wisdom does.",
+       "propagates": true,
+       "delayDays": 6
+      },
+      {
+       "type": "xp",
+       "amount": 45
+      }
+     ]
+    },
+    {
+     "id": "let_it_seal",
+     "name": "The Wood Sealed",
+     "summary": "The Rootbound win; the wood closes; the Accord withdraws.",
+     "narration": [
+      "The Moot ends the way it was going to \u2014 the Rootbound win, the wood seals, and the Green Accord withdraws from Thornwake like a tide going out.",
+      "Isolde does not blame you, which is worse than if she did. She kept the Accord her whole life and watched it end, and she will spend what's left tending a border that no longer opens.",
+      "The life-disposition retreats from the human world by one Deepwood, and the Walkers who argued for openness are, in the wood's memory, the fools who nearly let humankind back in.",
+      "This is the schism answered toward the seal: the wood survives, closed, and the world is a little less alive for it."
+     ],
+     "effects": [
+      {
+       "type": "npc_state",
+       "npc": "warden_isolde",
+       "state": "bereaved",
+       "note": "the Accord she guarded her whole life has ended; tends a closed border now, and does not blame you, which is worse"
+      },
+      {
+       "type": "npc_state",
+       "npc": "the_old_stag",
+       "state": "withdrawn",
+       "note": "the Accord had no one to pass to; he goes back into the wood with it unpassed"
+      },
+      {
+       "type": "codex_fact",
+       "text": "The Deepwood sealed itself from humankind; the Green Accord withdrew from Thornwake. The life-disposition retreated from the world by one wood."
+      },
+      {
+       "type": "arc_stage",
+       "arcId": "arc_green_schism",
+       "from": 1,
+       "to": 2,
+       "note": "the seal winning advances the schism \u2014 the Accord's withdrawal becomes visible, and other woods take the lesson"
+      },
+      {
+       "type": "world_event",
+       "text": "The Deepwood sealed; across the woods, the sealing factions gain their proof that closing is what survives.",
+       "propagates": true,
+       "delayDays": 6
+      },
+      {
+       "type": "quest_seed",
+       "text": "One wood sealing teaches the others. The next Moot will not argue as long \u2014 the Deepwood already showed them how it ends."
+      },
+      {
+       "type": "xp",
+       "amount": 45
+      }
+     ]
+    }
+   ]
   }
  ]
 }

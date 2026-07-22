@@ -6906,6 +6906,40 @@ await (async () => {
   check("207 §5: gm.js consumes repairPanelDetail + the stateOps contract says ACT DON'T DEFLECT", /repairPanelDetail\) scene\.push/.test(gmSrc) && /ACT, DON'T DEFLECT/.test(gmSrc) && /never send the player to the panel for a control|not in that capability|hallucinated capability/i.test(gmSrc));
 }
 
+// ---- SNG-207 Phase 1b: the coverage-hole ops — register / grant / advance, judged against a fiction trace ----
+{
+  // registerEstablishedNpc — REPAIR (the meet that never fired), but guarded by a trace so no one is invented.
+  const teva = { name: "T", npcRegistry: {}, establishedFacts: [{ text: "Teva, the ferryman's daughter, pulled you from the river.", subjectId: "teva" }], chronicle: [], inventory: [], quests: [], corrections: [] };
+  const r1 = applyStateOps(teva, [{ op: "registerEstablishedNpc", npcId: "teva", name: "Teva", role: "the ferryman's daughter", why: "met in play, never registered" }], { worldDay: 5 });
+  check("207b: registerEstablishedNpc registers an established person (trace in facts) + writes the codex mirror", r1.applied.some(a => a.registeredNpc === "teva") && !!teva.npcRegistry.teva && Object.values(teva.codex?.topics || {}).some(t => t.entityId === "teva"));
+  const r2 = applyStateOps({ name: "T", npcRegistry: {}, establishedFacts: [], chronicle: [] }, [{ op: "registerEstablishedNpc", name: "Nobody Atall", why: "make them up" }], {});
+  check("207b: registerEstablishedNpc REFUSES someone with NO trace in the fiction (never invents a person)", r2.applied.length === 0 && r2.refused.some(x => /no trace/.test(x.reason)));
+  const r3 = applyStateOps({ name: "T", npcRegistry: { teva: { id: "teva", name: "Teva" } }, establishedFacts: [{ text: "Teva" }] }, [{ op: "registerEstablishedNpc", npcId: "teva", name: "Teva", why: "x" }], {});
+  check("207b: registerEstablishedNpc REFUSES someone already known (nothing to register)", r3.refused.some(x => /already known/.test(x.reason)));
+
+  // grantStoryItem — the GRANT rung: judged against a trace; a story item carries NO stats (power is earned).
+  const gch = { name: "G", inventory: [], establishedFacts: [], chronicle: [], npcRegistry: {}, corrections: [] };
+  const g1 = applyStateOps(gch, [{ op: "grantStoryItem", name: "the ferryman's knife", kind: "tool", description: "a worn river-knife", why: "Teva pressed it into your hand" }], { traceText: "Teva pressed the ferryman's knife into your hand as you left the crossing." });
+  check("207b: grantStoryItem records an item the story conferred (trace in this turn's narration), with NO stats", g1.applied.some(a => /knife/i.test(a.grantedItem)) && gch.inventory.some(i => /knife/i.test(i.name)) && !(gch.inventory.find(i => /knife/i.test(i.name)).effects || []).length);
+  const g2 = applyStateOps({ name: "G", inventory: [], establishedFacts: [], chronicle: [] }, [{ op: "grantStoryItem", name: "a legendary flaming sword", why: "I want it" }], { traceText: "You walk into the quiet town." });
+  check("207b: grantStoryItem REFUSES an item with no trace — a wish, not a grant", g2.applied.length === 0 && g2.refused.some(x => /didn't give you/.test(x.reason)));
+
+  // gmAdvanceQuest — the tracker catches up; FORWARD only, never a resolution or a reward.
+  const qch = { name: "Q", quests: [], xp: 0, chronicle: [], domains: {}, corrections: [] };
+  startStructuredQuest(qch, { id: "qadv", name: "The Errand", stakes: "someone pays if ignored", stages: [{ id: "s1", objective: "a", condition: "c", change: "did A" }, { id: "s2", objective: "b", condition: "c", change: "did B" }, { id: "s3", objective: "c", condition: "c", change: "did C" }], routes: {}, outcomes: [{ id: "o", name: "done", effects: [] }] }, {});
+  const a1 = applyStateOps(qch, [{ op: "gmAdvanceQuest", questId: "qadv", toStage: "s3", why: "you did this in narration; the tracker missed it" }], {});
+  check("207b: gmAdvanceQuest moves a structured quest FORWARD to a real stage + records the intervening changes", a1.applied.some(a => a.advancedQuest === "qadv") && qch.quests[0].stageIndex === 2 && qch.quests[0].progress.includes("did A") && qch.quests[0].progress.includes("did B"));
+  const a2 = applyStateOps(qch, [{ op: "gmAdvanceQuest", questId: "qadv", toStage: "s1", why: "back" }], {});
+  check("207b: gmAdvanceQuest REFUSES a backward move (a stuck/wrong state is unstickQuest's job)", a2.refused.some(x => /only moves a quest FORWARD/.test(x.reason)));
+
+  // everything logged + reversible; the doctrine + the trace-check are wired into the prompt.
+  check("207b: every new op is logged + reversible in the corrections ledger", teva.corrections.some(c => c.kind === "registerNpc") && gch.corrections.some(c => c.kind === "grantItem") && qch.corrections.some(c => c.kind === "advanceQuest"));
+  const gmSrc207b = readFileSync(join(root, "engine/gm.js"), "utf8");
+  check("207b: the GM prompt carries the four-rung doctrine + the new ops + the trace requirement", /FOUR-RUNG DOCTRINE/.test(gmSrc207b) && /registerEstablishedNpc\|grantStoryItem\|gmAdvanceQuest/.test(gmSrc207b) && /checks the FICTION'S OWN RECORD for a trace/.test(gmSrc207b));
+  const appSrc207b = readFileSync(join(root, "app.js"), "utf8");
+  check("207b: the call site feeds the trace (this turn's narration) + the item catalog to applyStateOps", /traceText: String\(turn\.narration/.test(appSrc207b) && /items: CONTENT\.items/.test(appSrc207b));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

@@ -13,7 +13,8 @@
 import { SUBS, syncParentAttributes } from "./progression.js";
 import { isMinorSubject } from "./art.js";
 import { smartClamp } from "./namematch.js"; // SNG-152 (missed in the first sweep — see below)
-import { BOND_TYPES, ROMANTIC_STAGES } from "./npcs.js";
+import { BOND_TYPES, ROMANTIC_STAGES, applyNpcUpdates } from "./npcs.js"; // SNG-207 §2: register-established-NPC reuses the canonical meet path (registry + codex mirror)
+import { addItem } from "./inventory.js"; // SNG-207 §2: grant-story-conferred-item
 
 const CORRECTABLE_FIELDS = new Set(["background", "origin", "nativeTradition", "form"]);
 const DOMAIN_SLOTS = new Set(["primary", "secondary", "tertiary"]);
@@ -27,6 +28,21 @@ export function ensureCorrections(character) { if (!character.corrections) chara
 function log(character, entry, ctx) {
   ensureCorrections(character);
   character.corrections.push({ ...entry, worldDay: ctx.worldDay ?? null, at: ctx.nowISO || null });
+}
+
+/** SNG-207 §4/Q1: does the FICTION'S OWN RECORD show a trace of `needle` (an item/person the story is said
+ *  to have conferred/established)? Checks the durable established-facts ledger (SNG-205 signal) + the
+ *  chronicle beats + this turn's GM narration (ctx.traceText) — never the player's own request. This is what
+ *  makes "the story gave it to me" CHECKABLE, not just assertable: a grant/register with no trace anywhere in
+ *  the fiction is a wish, and refused. Case-insensitive substring / subjectId match; needs ≥3 chars. Pure. */
+function hasFictionTrace(character, needle, ctx = {}) {
+  const n = String(needle || "").toLowerCase().trim();
+  if (n.length < 3) return false;
+  const hit = s => String(s || "").toLowerCase().includes(n);
+  if ((character.establishedFacts || []).some(f => hit(f.text) || String(f.subjectId || "").toLowerCase() === n)) return true;
+  if ((character.chronicle || []).some(c => hit(typeof c === "string" ? c : (c?.text || c?.summary || c?.outcome || "")))) return true;
+  if (hit(ctx.traceText)) return true;
+  return false;
 }
 
 /** Apply a bounded set of GM correction ops. Returns { applied:[], refused:[], notes:[] }. */
@@ -109,6 +125,56 @@ export function applyStateOps(character, ops = [], ctx = {}) {
         character.currentLocationId = dest;
         log(character, { kind: "location", from, to: dest, why }, ctx);
         applied.push({ location: dest });
+        break;
+      }
+      // SNG-207 §2: register a person the FICTION clearly established but `meet` never fired for (the Teva
+      // case). This is REPAIR — the story met them, the engine missed it — but a trace-check still guards
+      // against inventing a person: the name must appear in the fiction's own record. Reuses the canonical
+      // meet path (applyNpcUpdates), so the codex mirror (SNG-199) fires exactly as a real meet would.
+      case "registerEstablishedNpc": {
+        const name = String(op.name || "").trim();
+        const npcId = op.npcId ? slug(op.npcId) : slug(name);
+        if (!npcId || !name) { refused.push({ op, reason: "need a name to register an established person" }); break; }
+        const existing = character.npcRegistry?.[npcId];
+        if (existing && !existing._filledFromGenerate) { refused.push({ op, reason: `"${name}" is already known — nothing to register` }); break; }
+        if (!hasFictionTrace(character, name, ctx)) { refused.push({ op, reason: `no trace of "${name}" in the story — register is for someone the fiction established, not a new person to invent` }); break; }
+        applyNpcUpdates(character, [{ op: "meet", npcId, name, role: op.role, description: op.description, gender: op.gender, pronouns: op.pronouns }],
+          { locationId: character.currentLocationId || null, day: ctx.worldDay ?? null });
+        log(character, { kind: "registerNpc", id: npcId, name, why }, ctx);
+        applied.push({ registeredNpc: npcId, name });
+        break;
+      }
+      // SNG-207 §2/§4: record an item the NARRATIVE clearly conferred but the engine never wrote. This is the
+      // GRANT rung — judged against a trace: the item must appear in the fiction's own record, else it is a
+      // wish and refused. A story item is a NARRATIVE object (name + description only); mechanical power is
+      // earned through play (items grow — SNG evolution), never granted here, so no effects/bonuses ride in.
+      case "grantStoryItem": {
+        const name = String(op.name || "").trim();
+        if (!name) { refused.push({ op, reason: "need an item name" }); break; }
+        if (!hasFictionTrace(character, name, ctx)) { refused.push({ op, reason: `the story didn't give you "${name}" — a grant records what the fiction conferred, not what you'd like to have` }); break; }
+        character.inventory = character.inventory || [];
+        const kind = ["quest", "tool", "consumable", "weapon", "misc"].includes(op.kind) ? op.kind : "misc";
+        const item = addItem(character, { name, kind, description: op.description }, ctx.items || {}); // no effects/bonusTags — power is earned, not granted
+        log(character, { kind: "grantItem", name: item.name, why }, ctx);
+        applied.push({ grantedItem: item.name });
+        break;
+      }
+      // SNG-207 §2: advance a structured quest the GM judges was completed in play but the tracker missed.
+      // FORWARD-ONLY to a real stage (a backward move is unstickQuest's job); it catches the tracker up —
+      // it never resolves the quest or hands out the outcome's rewards (those are earned at resolution).
+      case "gmAdvanceQuest": {
+        const q = (character.quests || []).find(x => x.id === op.questId);
+        if (!q) { refused.push({ op, reason: `no quest "${op.questId}"` }); break; }
+        if (!q.structured || !Array.isArray(q.stages)) { refused.push({ op, reason: "only a structured quest has stages to advance" }); break; }
+        const si = q.stages.findIndex(s => s.id === op.toStage);
+        if (si < 0) { refused.push({ op, reason: `no stage "${op.toStage}" in "${q.id}"` }); break; }
+        const from = q.stageIndex || 0;
+        if (si <= from) { refused.push({ op, reason: "gmAdvanceQuest only moves a quest FORWARD — a stuck/wrong state is unstickQuest's job" }); break; }
+        q.stageIndex = si;
+        q.progress = q.progress || [];
+        for (let i = from; i < si; i++) { const ch = q.stages[i]?.change; if (ch && !q.progress.includes(ch)) q.progress.push(ch); } // the tracker catches up on the intervening changes
+        log(character, { kind: "advanceQuest", id: q.id, from, to: si, why }, ctx);
+        applied.push({ advancedQuest: q.id, toStage: op.toStage });
         break;
       }
       case "fixCodexFact": {
@@ -231,6 +297,9 @@ export function describeCorrection(a) {
   if (a.attribute) return `a mis-set ${a.attribute} was corrected (${a.from}→${a.to})`;
   if (a.merged) return `two records for one person were merged`;
   if (a.npcGender) return `a person's gender was set right`;
+  if (a.registeredNpc) return `${a.name || "someone you'd met"} is now on your record of known people`;
+  if (a.grantedItem) return `${a.grantedItem} was added to what you carry`;
+  if (a.advancedQuest) return `a quest caught up to where the story left it`;
   return "corrected";
 }
 

@@ -445,142 +445,207 @@
         "player": "Finish eating in quiet and then go. The corridor entrance is sixty paces south. The day has its own answer.",
         "summary": "Dawn provisions finished; the party steps out of the alcove and moves south toward the corridor entrance.",
         "narration": "You eat without hurrying. The flatbread is dense and a little stale at the edges, which is exactly what you want from trail food — it sits in the stomach and stays there. The hard cheese comes apart in slow crumbles. Teva finishes her portion before you finish yours, then folds her hands around the returned waterskin and holds it like something warm, though it isn't.\n\nAevi drifts a little wider, a slow morning circuit of the alcove. The motes are teal now, fully awake, trailing a faint shimmer as they pass through the interference-bent light coming off the tree line. The Waystaff cycles on. Four seconds, blue-white, four seconds. Neither of you have said anything for a few minutes, and neither of you seem to need to.\n\nTeva stands first. She dusts flatbread crumbs from her palms with a neat, habitual knock — something she probably does without thinking after every meal at the Heights. She picks up her satchel from the berm and settles it across her shoulder, then looks south down the shallow slope toward the corridor entrance. You cannot see it from here, but you both know the sixty paces exactly.\n\nYou shoulder the Traveler's Pack, seat the Waystaff in your grip, and step out of the alcove into the Zone's thin dawn light. The interference shimmer is quieter in the morning — still present, still bending things slightly, but less insistent than at night. The ground is damp. Your boots find purchase on packed earth and old root. Sixty paces south, the corridor waits."
+      },
+      {
+        "player": "Head r8ght in to the chamber. You've both been there before.",
+        "summary": "The party enters the chamber — hemispherical, dressed stone, warm underfoot, the four-second pulse present and attentive.",
+        "narration": "You step through the corridor entrance without breaking stride. The shaped stone edges pass your shoulders, and the light changes immediately — from the Zone's bent interference-shimmer to something darker and more deliberate. The corridor walls are dressed stone, smooth, slightly warm under the hand if you let it trail. You have been here before. So has Teva.\n\nShe stays at your left, one step back, and her breathing steadies as she walks. The corridor slopes down. Twenty paces, thirty. The air is cooler here and carries no wind at all — the shimmer-draft from the tree line does not reach this far in. Aevi condenses tight, motes pulling close into a bright teal cluster, casting real light against the stone. The Waystaff cycles at your hip. Four seconds, blue-white, four seconds.\n\nAt forty paces the floor changes. Packed earth gives way to something older — flat-laid stone, fitted without mortar, and faintly warm through your boots. The corridor opens. The chamber is hemispherical, dressed-wall geometry exactly as Resonant Sight described it. The ceiling curves up and away into a darkness the motes do not quite fill. The walls hold no visible decoration, but they are not bare — the stone itself is slightly reflective, as if the surface was worked to catch and keep. In the center of the floor there is nothing. No artifact, no seat, no obvious mechanism. Only the warmth underfoot, and the four-second pulse moving through it, and the sense that the room has noticed you.\n\nTeva says nothing. She stops just inside the entrance and looks up at the ceiling, and you can see in the set of her jaw that she is counting."
       }
     ],
     "lastTurn": {
-      "narration": "You eat without hurrying. The flatbread is dense and a little stale at the edges, which is exactly what you want from trail food — it sits in the stomach and stays there. The hard cheese comes apart in slow crumbles. Teva finishes her portion before you finish yours, then folds her hands around the returned waterskin and holds it like something warm, though it isn't.\n\nAevi drifts a little wider, a slow morning circuit of the alcove. The motes are teal now, fully awake, trailing a faint shimmer as they pass through the interference-bent light coming off the tree line. The Waystaff cycles on. Four seconds, blue-white, four seconds. Neither of you have said anything for a few minutes, and neither of you seem to need to.\n\nTeva stands first. She dusts flatbread crumbs from her palms with a neat, habitual knock — something she probably does without thinking after every meal at the Heights. She picks up her satchel from the berm and settles it across her shoulder, then looks south down the shallow slope toward the corridor entrance. You cannot see it from here, but you both know the sixty paces exactly.\n\nYou shoulder the Traveler's Pack, seat the Waystaff in your grip, and step out of the alcove into the Zone's thin dawn light. The interference shimmer is quieter in the morning — still present, still bending things slightly, but less insistent than at night. The ground is damp. Your boots find purchase on packed earth and old root. Sixty paces south, the corridor waits.",
-      "sceneSummary": "Dawn provisions finished; the party steps out of the alcove and moves south toward the corridor entrance.",
+      "narration": "You step through the corridor entrance without breaking stride. The shaped stone edges pass your shoulders, and the light changes immediately — from the Zone's bent interference-shimmer to something darker and more deliberate. The corridor walls are dressed stone, smooth, slightly warm under the hand if you let it trail. You have been here before. So has Teva.\n\nShe stays at your left, one step back, and her breathing steadies as she walks. The corridor slopes down. Twenty paces, thirty. The air is cooler here and carries no wind at all — the shimmer-draft from the tree line does not reach this far in. Aevi condenses tight, motes pulling close into a bright teal cluster, casting real light against the stone. The Waystaff cycles at your hip. Four seconds, blue-white, four seconds.\n\nAt forty paces the floor changes. Packed earth gives way to something older — flat-laid stone, fitted without mortar, and faintly warm through your boots. The corridor opens. The chamber is hemispherical, dressed-wall geometry exactly as Resonant Sight described it. The ceiling curves up and away into a darkness the motes do not quite fill. The walls hold no visible decoration, but they are not bare — the stone itself is slightly reflective, as if the surface was worked to catch and keep. In the center of the floor there is nothing. No artifact, no seat, no obvious mechanism. Only the warmth underfoot, and the four-second pulse moving through it, and the sense that the room has noticed you.\n\nTeva says nothing. She stops just inside the entrance and looks up at the ceiling, and you can see in the set of her jaw that she is counting.",
+      "sceneSummary": "The party enters the chamber — hemispherical, dressed stone, warm underfoot, the four-second pulse present and attentive.",
       "choices": [
         {
-          "label": "Approach the corridor entrance carefully — read the walls and ground before stepping inside",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "scout",
-            "careful"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Press the Waystaff grip-end to the corridor floor at the threshold — see whether the four-second cycle changes when you step back inside",
+          "label": "Place the Waystaff grip-end to the floor at the chamber's center and return the four-second count — let the instrument do what it was made for",
           "attribute": "practical",
           "subAttribute": "craft",
+          "axes": {
+            "mechanical_spiritual": 0.4,
+            "chaos_order": 0.3
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "careful",
+            "sustain"
+          ],
+          "abilityId": "sonic_resonance",
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Open Resonant Sight — let Prism Sight and Sonic Resonance braid together and read the chamber's walls, floor, and ceiling for what they are actually made of and how they are shaped",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "mechanical_spiritual": 0.5,
+            "concrete_abstract": 0.3
+          },
           "difficulty": 15,
           "intentTags": [
             "study",
             "careful"
           ],
-          "abilityId": "sonic_resonance"
+          "abilityId": "braid_prism_sight_sonic_resonance",
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Ask Teva what she remembers from her first crossing of this threshold — before she ran the corridor in the dark",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Use Resonant Sight to read the corridor entrance from outside first — the seam, the walls, what the braid shows before you commit to entering",
+          "label": "Hold still and say nothing — let the chamber acknowledge you first before you offer anything back",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 15,
+          "axes": {
+            "emotional_logical": -0.2,
+            "mechanical_spiritual": 0.3
+          },
+          "difficulty": 0,
           "intentTags": [
-            "scout",
+            "careful",
+            "guard"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Teva what she hears from inside the chamber right now — her tissue still holds the four-second mark; she may be receiving something you are not",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "emotional_logical": 0.1
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "careful",
             "study"
           ],
-          "abilityId": "braid_prism_sight_sonic_resonance",
-          "energyCost": 6
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
       "scene": {
-        "setting": "Fifty paces south of the alcove camp, Disputed Zone — dawn. Packed earth and old root underfoot, interference-bent light seeping horizontal through the shimmer at the tree line to the west. The corridor entrance is ten paces ahead: a dark seam in the hillside, shaped stone edges barely visible where the scrub thins.",
+        "setting": "The chamber — hemispherical, dressed-stone walls, flat-laid stone floor fitted without mortar. Warm underfoot. Forty paces northeast-by-east from the corridor entrance, below the forward alcove. No visible light source; Aevi's motes cast real teal light against the curved ceiling. No wind.",
         "npcsPresent": [
           {
             "name": "Teva",
-            "state": "Walking south at Cellaceron's left, satchel settled on her shoulder, watching the corridor entrance."
+            "state": "Standing just inside the entrance, looking up at the ceiling, jaw set, counting silently."
           },
           {
             "name": "Aevi",
-            "state": "Drifting a slow circuit ahead of the party — teal, awake, motes slightly condensed as they near the corridor."
+            "state": "Pulled tight into a bright cluster near Cellaceron's shoulder, casting steady light, very quiet."
           }
         ],
         "objects": [
           "Waystaff — in hand, four nodes cycling blue-white at the four-second interval",
           "Traveler's Pack — shouldered",
-          "Waterskin — returned to pack, diminished",
+          "Waterskin — in pack, diminished",
           "Beeswax taper — dark, charge spent",
           "Bark-press paper (three sheets)",
           "Resonance crystals — untuned (four nodes, in pack)",
-          "Liverwort mat — forward alcove (in pack)"
+          "Liverwort mat — forward alcove (in pack)",
+          "Chamber floor — flat-laid dressed stone, faintly warm, the four-second pulse moving through it"
         ],
         "threads": [
-          "The corridor entrance is ten paces ahead — threshold not yet crossed",
-          "The chamber is forty paces beyond and below",
-          "The three-two-three interval in the chamber's last reply is still unresolved"
+          "The chamber has noticed the party's arrival — it is counting too",
+          "The three-two-three interval in the chamber's last reply is still unresolved",
+          "Teva is receiving something through her tissue-mark; she has not spoken yet"
         ]
       },
-      "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "dawn meal eaten and camp broken — short but real elapsed time"
+      "moveTo": {
+        "location": "the chamber",
+        "why": "walked forty paces northeast-by-east down the shaped corridor from the entrance"
       },
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "short walk down the corridor from the entrance to the chamber"
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "teva-anselvar-missing-apprentice",
+          "name": "Teva",
+          "note": "Entered the chamber at Cellaceron's left — stopped just inside the entrance, looking up at the ceiling, counting. The mark in her tissue is responding to the floor-pulse.",
+          "statusNote": "Inside the chamber with Cellaceron; the four-second mark in her tissue is active and she is counting it.",
+          "status": "active"
+        },
+        {
+          "op": "update",
+          "npcId": "aevi",
+          "name": "Aevi",
+          "note": "Pulled tight and very quiet on entry — motes condensed to a bright cluster, casting real light, holding close.",
+          "statusNote": "Inside the chamber, pulled close to Cellaceron, bright and still.",
+          "status": "active"
+        }
+      ],
       "placeUpdates": [
         {
-          "note": "Alcove camp broken at dawn day 9 — provisions consumed, Waystaff lifted from pulse-point, party moving south toward corridor entrance.",
+          "note": "Party entered the chamber on day 9 dawn — floor warm underfoot, four-second pulse present, chamber appeared to register arrival. No artifacts or visible mechanism at center.",
           "subPlace": {
-            "name": "Northern Alcove Camp",
-            "parent": "Harmonic Heights Lower Terrace",
-            "note": "Camp broken day 9 dawn; party departed south toward corridor entrance.",
+            "name": "The Chamber",
+            "parent": "Disputed Zone — Shaped Corridor",
+            "note": "Hemispherical, dressed-stone walls, flat-laid floor fitted without mortar. Warm, no wind, faintly reflective stone. Chamber is active and attending.",
             "visited": true
           }
         }
       ],
       "codexUpdates": [
         {
-          "topic": "northern-alcove-camp",
-          "label": "Northern Alcove Camp — Zone Base",
-          "kind": "place",
-          "fact": "Day 9 dawn: camp broken after morning provisions. Party moving south toward the corridor entrance. Waystaff lifted from pulse-point after a full night of cycling.",
+          "topic": "the-chamber-beyond-the-threshold",
+          "label": "The Chamber",
+          "kind": "mystery",
+          "fact": "Day 9 dawn: party entered the chamber directly. Hemispherical dressed-stone, flat-laid floor, no artifact at center — only warmth underfoot and the four-second pulse running through the stone. The chamber registered their arrival.",
           "links": [
-            "the-chamber-beyond-the-threshold",
             "second-river-rising",
-            "teva-anselvar-missing-apprentice"
+            "teva-directional-interval-count",
+            "northern-alcove-camp",
+            "scored-mark-forward-alcove"
           ]
         }
-      ]
+      ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "second-river-rising",
+          "note": "Party crossed the threshold and entered the chamber itself — forty paces below the forward alcove, hemispherical, warm, the pulse in the floor and the Waystaff both cycling at four seconds. The room has noticed them."
+        }
+      ],
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Fifty paces south of the alcove camp, Disputed Zone — dawn. Packed earth and old root underfoot, interference-bent light seeping horizontal through the shimmer at the tree line to the west. The corridor entrance is ten paces ahead: a dark seam in the hillside, shaped stone edges barely visible where the scrub thins.",
+      "setting": "The chamber — hemispherical, dressed-stone walls, flat-laid stone floor fitted without mortar. Warm underfoot. Forty paces northeast-by-east from the corridor entrance, below the forward alcove. No visible light source; Aevi's motes cast real teal light against the curved ceiling. No wind.",
       "npcsPresent": [
         {
           "name": "Teva",
-          "state": "Walking south at Cellaceron's left, satchel settled on her shoulder, watching the corridor entrance."
+          "state": "Standing just inside the entrance, looking up at the ceiling, jaw set, counting silently."
         },
         {
           "name": "Aevi",
-          "state": "Drifting a slow circuit ahead of the party — teal, awake, motes slightly condensed as they near the corridor."
+          "state": "Pulled tight into a bright cluster near Cellaceron's shoulder, casting steady light, very quiet."
         }
       ],
       "objects": [
         "Waystaff — in hand, four nodes cycling blue-white at the four-second interval",
         "Traveler's Pack — shouldered",
-        "Waterskin — returned to pack, diminished",
+        "Waterskin — in pack, diminished",
         "Beeswax taper — dark, charge spent",
         "Bark-press paper (three sheets)",
         "Resonance crystals — untuned (four nodes, in pack)",
-        "Liverwort mat — forward alcove (in pack)"
+        "Liverwort mat — forward alcove (in pack)",
+        "Chamber floor — flat-laid dressed stone, faintly warm, the four-second pulse mov"
       ],
       "threads": [
-        "The corridor entrance is ten paces ahead — threshold not yet crossed",
-        "The chamber is forty paces beyond and below",
-        "The three-two-three interval in the chamber's last reply is still unresolved"
+        "The chamber has noticed the party's arrival — it is counting too",
+        "The three-two-three interval in the chamber's last reply is still unresolved",
+        "Teva is receiving something through her tissue-mark; she has not spoken yet"
       ]
     }
   },
@@ -602,14 +667,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "The chamber's four-second pulse traveled northeast-by-east through the seam beneath the alcove camp and pulled the conserved charge from the banked beeswax taper — recognizing it as a tuned vessel. Th",
         "The Waystaff speaks the four-second frequency back into the seam without giving up its charge — the chamber recognizes it as a reply-capable instrument, not merely a tuned vessel to draw from. An exch",
         "The chamber distinguishes between a reflected signal and a deliberately shaped reply — it has adjusted its response accordingly. A harmonic fold in the return pulse suggests the exchange can carry str",
         "Chamber's harmonic fold parsed: the elaboration is a three-two-three interval ratio nested inside the four-count — a structured sub-pulse with directional preference. The chamber is asking something, ",
         "The chamber refused the mirrored three-two-three ratio — went silent mid-beat. The exchange is not about reflection; the chamber wants a distinct answer, not its own question returned.",
         "The plain four-second count returned without framing drew a single answering beat from the chamber and warmed the fourth shallow crystal — the chamber responds to honesty of repetition, not elaboration or mirroring.",
         "Two answering beats returned on the second plain count — the chamber appears to be building a counting sequence rather than merely confirming contact. Teva's tissue-read is tracking the pattern directly.",
-        "Fourth crystal seated — complete four-node instrument offered to the chamber. Chamber settled into recognition-register. Teva's tissue-mark confirmed a register shift. The exchange is resting at its deepest foundation yet."
+        "Fourth crystal seated — complete four-node instrument offered to the chamber. Chamber settled into recognition-register. Teva's tissue-mark confirmed a register shift. The exchange is resting at its deepest foundation yet.",
+        "Party crossed the threshold and entered the chamber itself — forty paces below the forward alcove, hemispherical, warm, the pulse in the floor and the Waystaff both cycling at four seconds. The room has noticed them."
       ],
       "startedAt": "2026-07-03T18:55:17.042Z"
     },
@@ -856,7 +921,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d8] Pulled fractionally tighter at the second answering beat — motes condensed further but still silent, attention absolute on the northeast-by-east bearing",
         "[d8] Brightened one fractional step when the fourth crystal seated full — acknowledgment without speech; still locked northeast-by-east at berm-crest",
         "[d8] Held hard-white contraction through the crystal seating — no speech, no movement, bearing locked northeast-by-east throughout",
         "[d8] One outermost mote pulsed once on the bearing-confirmation — first movement since the shimmer crossing; still silent.",
@@ -865,7 +929,8 @@
         "[d8] Received Cellaceron's plain answer — no, not frightened, clarified — and settled shoulder-close for the first time since the shimmer crossing. Said aloud it was checking whether it",
         "[d8] Your bond becomes platonic.",
         "[d8] Watched Cellaceron use Prism Sight on it directly — did not withdraw; knows it was read and holds still",
-        "[d8] Held shoulder-close through the night — dim and present, not retreating"
+        "[d8] Held shoulder-close through the night — dim and present, not retreating",
+        "[d9] Pulled tight and very quiet on entry — motes condensed to a bright cluster, casting real light, holding close."
       ],
       "knownFacts": [
         "The fourth crystal's attunement via light-and-sonic braid was recognized — Aevi's brightening was immediate and involuntary",
@@ -888,9 +953,9 @@
       "status": "active",
       "lastSeen": {
         "locationId": "harmonic_heights_terrace",
-        "day": 8
+        "day": 9
       },
-      "statusNote": "Shoulder-close in alcove camp, morning; settled after the night's disclosures",
+      "statusNote": "Inside the chamber, pulled close to Cellaceron, bright and still.",
       "bondType": "platonic",
       "domains": {
         "primary": "harmonic"
@@ -1112,7 +1177,6 @@
     "harmonic_heights_terrace": {
       "visits": 1,
       "notes": [
-        "[d8] Resonant Sight (conserved) reads a subsurface seam beneath the forward alcove's diagonal, running northeast-by-east — intersection with corridor estimated at forty paces in. Diagonal author knew the s",
         "[d8] Day 8 night: Keen Appraisal on the forward alcove's diagonal groove failed in Zone interference — three temporal layers, unsequenceable. Fragment recovered: small hand, precise short stroke, confidenc",
         "[d8] Beeswax taper's banked evening light pulled out by the chamber's four-second ground-pulse on day 8 night — charge gone, taper now dark. Camp lighting lost. The pulse traveled northeast-by-east through",
         "[d8] Day 8 night: Waystaff placed grip-end to pulse-point floor — three charged crystals began cycling blue-white at four-second interval, repeating the seam's frequency back into the ground without surren",
@@ -1123,7 +1187,8 @@
         "[d8] Day 8 night: fourth resonance crystal fully attuned to chamber's four-second frequency via light-and-sonic braid — held separate from Waystaff lattice, warm and ready; the Zone's interference layer re",
         "[d8] Day 8 night: fourth resonance crystal seated into Waystaff lattice — instrument now complete with all four nodes active. Floor-warmth beneath grip-end settled into a long quiet exhale of recognition a",
         "[d8] Day 8 night: Resonant Sight through complete four-node Waystaff confirms chamber is subterranean — hemispherical, dressed-wall geometry at roughly forty paces northeast-by-east from the alcove, below ",
-        "[d9] Alcove camp broken at dawn day 9 — provisions consumed, Waystaff lifted from pulse-point, party moving south toward corridor entrance."
+        "[d9] Alcove camp broken at dawn day 9 — provisions consumed, Waystaff lifted from pulse-point, party moving south toward corridor entrance.",
+        "[d9] Party entered the chamber on day 9 dawn — floor warm underfoot, four-second pulse present, chamber appeared to register arrival. No artifacts or visible mechanism at center."
       ],
       "flags": {
         "resonance_niche_tone_event": "day2_night_second_river_frequency",
@@ -1223,6 +1288,14 @@
           "visited": true,
           "note": "Diagonal groove holds multiple temporal interference layers — Keen Appraisal failed here at night; attempt again in less",
           "parentId": "harmonic_heights_terrace"
+        },
+        "the-chamber": {
+          "name": "The Chamber",
+          "parentId": "harmonic_heights_terrace",
+          "day": 9,
+          "visited": true,
+          "note": "Hemispherical, dressed-stone walls, flat-laid floor fitted without mortar. Warm, no wind, faintly reflective stone. Chamber is active and attending.",
+          "parentUnresolved": "Disputed Zone — Shaped Corridor"
         }
       },
       "vectorsKnown": [
@@ -1331,7 +1404,7 @@
     "lastTickWorldDay": 22,
     "lastCanonWorldDay": 22,
     "lastGenCount": 529,
-    "turnsSinceOffer": 6
+    "turnsSinceOffer": 7
   },
   "subAttributes": {
     "strength": 2,
@@ -1456,7 +1529,6 @@
         "label": "The Chamber's Question",
         "kind": "mystery",
         "facts": [
-          "[d5] Teva experienced the chamber's communication as structure, not tone — a shape-of-a-question. She believes it was asking whether anyone was still listening. She answered, and waited in synchrony until ",
           "[d5] What Teva followed was not a discrete pitch or tonal frequency — it was directional, like a compass bearing, getting cleaner as Heights-field interference stripped away. It converges with Brin's ascen",
           "[d8] Day 8 night: the chamber's four-second pulse traveled northeast-by-east through the seam beneath the alcove camp and pulled the conserved charge from a banked beeswax taper — it recognized the vessel ",
           "[d8] The Waystaff's grain-locked lattice geometry allows it to repeat the chamber's four-second frequency back into the seam without surrendering its charge — the chamber recognizes this as a reply, not a ",
@@ -1467,7 +1539,8 @@
           "[d8] Day 8 night: a second plain four-second count drew two answering beats — each clean and separate at the interval, with the fourth shallow crystal warming a fraction deeper. The chamber may be learning",
           "[d8] Day 8 night: the fourth resonance crystal — the one the chamber addressed directly, warming it twice — accepted a braid of banked evening light and Prism Sight guided by the chamber's own four-second ",
           "[d8] Day 8 night: a complete four-node Waystaff — all crystals active and latticed — produced a register shift rather than a new pulse. The chamber settled into recognition. Teva confirmed the shift throug",
-          "[d8] Day 8 night: Resonant Sight threaded through the complete four-node lattice confirms the chamber lies below the shaped corridor's intersection point at roughly forty paces — subterranean, hemispherica"
+          "[d8] Day 8 night: Resonant Sight threaded through the complete four-node lattice confirms the chamber lies below the shaped corridor's intersection point at roughly forty paces — subterranean, hemispherica",
+          "[d9] Day 9 dawn: party entered the chamber directly. Hemispherical dressed-stone, flat-laid floor, no artifact at center — only warmth underfoot and the four-second pulse running through the stone. The chamber registered their arrival."
         ],
         "links": [
           "the-chamber-beyond-the-threshold",
@@ -1480,7 +1553,7 @@
           "teva-directional-interval-count"
         ],
         "createdDay": 5,
-        "updatedDay": 8,
+        "updatedDay": 9,
         "aliases": [
           "The Sub-Threshold Directional Signal",
           "The Chamber",
@@ -1945,15 +2018,15 @@
   "customEncounters": {},
   "reconcileVersion": 14,
   "tendencies": {
-    "cerebral": 43.1321987381095,
-    "strategic": 54.79934295803219,
-    "cautious": 48.8109876717858,
-    "social": 33.9691050117898,
-    "generous": 15.631985745128029,
-    "risky": 4.117843672126857,
-    "carousing": 0.34078263695154287,
-    "patient": 3.3362346236326355,
-    "craft": 1.5332510011914646
+    "cerebral": 42.05389376965676,
+    "strategic": 53.42935938408139,
+    "cautious": 47.59071297999116,
+    "social": 33.119877386495055,
+    "generous": 15.241186101499828,
+    "risky": 4.0148975803236855,
+    "carousing": 0.3322630710277543,
+    "patient": 3.2528287580418196,
+    "craft": 1.494919726161678
   },
   "aptitudes": [
     "strategist",
@@ -1966,9 +2039,9 @@
     "stalwart",
     "peacemaker"
   ],
-  "actionCount": 192,
-  "updatedAt": 1784685876855,
-  "rev": 58,
+  "actionCount": 193,
+  "updatedAt": 1784686454699,
+  "rev": 59,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -1978,7 +2051,7 @@
   "syncedAt": 1783791225006,
   "teachers": {},
   "regionsKnown": {
-    "valley": 15
+    "valley": 16
   },
   "company": [],
   "foreclosed": [],
@@ -2043,10 +2116,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-22T01:26:18.061Z",
-      "lastAt": "2026-07-22T02:04:36.831Z",
+      "lastAt": "2026-07-22T02:14:14.689Z",
       "startDay": 22,
       "endDay": 22,
-      "beats": 6
+      "beats": 7
     }
   ],
   "_pendingArrival": null,
@@ -2100,16 +2173,18 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 6,
-    "choices": 6,
+    "sceneSummary": 7,
+    "choices": 7,
     "characterDeltas": 5,
-    "scene": 6,
-    "npcUpdates": 5,
-    "codexUpdates": 3,
-    "timeOps": 6,
-    "sceneEnded": 3,
-    "placeUpdates": 1
+    "scene": 7,
+    "npcUpdates": 6,
+    "codexUpdates": 4,
+    "timeOps": 7,
+    "sceneEnded": 4,
+    "placeUpdates": 2,
+    "moveTo": 1,
+    "questUpdates": 1
   },
-  "_opTurns": 6,
+  "_opTurns": 7,
   "_intentAsked": null
 }

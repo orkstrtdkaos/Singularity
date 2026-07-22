@@ -48,3 +48,21 @@ but the anchor figures (2-3 iconic heroes, 1-2 epic villains) were never authore
 "clean things to fight" half; named legends/villains are still owed authored content. Separate ask — noting
 it here because both surfaced together (the game currently has neither named legends nor clean beasts to
 face).
+
+## 3. `tradition_epics.json` → integrate as loaded lore (extends the legends system)
+
+**What:** several epics per tradition (first tranche: ashwarden/wright/abyssal/rootkin/numinous, 10 figures),
+varied on alignment (hero/villain/neither) AND role. Each carries `arcAffinity` (SNG-208 offscreen arc-push),
+`rivals` (same-tradition rivalries are the point — Neth vs Morvane, Vael vs Halcyon), `deathRoad` (SNG-209 —
+the depth their craft retrieves from + cost), `offscreenVerbs`.
+
+**Integration:**
+- These are `legends.roster`-shaped figures. Cleanest: **merge into `legends.roster`** (the offscreen engine
+  `worldtick.js:491` already reads it) OR register as its own `provides.lore` and have the offscreen
+  population read both. Merging is simpler and the offscreen hook works for free.
+- The `deathRoad` field is consumed by **SNG-209** (retrieval-quest depth-gating), not by the offscreen
+  engine — harmless until 209 builds; author-ahead so the roster is 209-ready.
+- ⚠️ SNG-208's offscreen-epic→arc hook + rivalry-conflict is what makes these ACT; this is the content that
+  hook needs. Roster size scaling (SNG-208 §3c open Q3): with more epics, each should fire rarer so the
+  aggregate stays bounded.
+- Remaining 19 traditions' epics are **standing content still owed** — this is the first tranche.

@@ -1,5 +1,24 @@
 # PO ALERT
 
+> ## ✅ SNG-203 PHASE 2 IS NOT BLOCKED ON AEVI — the stage ladders already shipped (Aevi, 2026-07-22)
+> CCode's ROUND 2 doc flags Phase 2 blocked on §7-item-2 (numbered `stages[]` on the 5 greater arcs).
+> **That content already landed** — verified at HEAD, `greater_arcs.json`:
+> - All 5 arcs carry numbered `stages[]` OBJECTS (not the old optional strings) + `currentStage: 1` +
+>   `publicFace` (shared-surface text) + `pressureOnAdvance` (the SNG-204 wake seed). Commits `b0e0f417`
+>   (ladders) and `17c9c150` (pressure).
+> - **All 5 arcs already have a tier-1 quest bound to them** in `quests.json` — `what_the_water_remembers`,
+>   `the_light_that_will_not_dim`, `present_at_the_birth`, `the_seam_in_the_gears`, `the_moot_that_will_not_end`
+>   — each with `arcStageFrom/To` (1→2) and 2 live `arc_stage` effects apiece. The ladder has something to
+>   move AND the quests that move it.
+> **The blocker was a stale read of the SPEC TEXT (§7 written before I authored the ladders), not of origin.**
+> Phase 2's content prerequisite is met. `arc_stage` broadcast, the shared progress surface (reads
+> `currentStage`+`publicFace`), contested advancement, promotion, and generation are all unblocked on the
+> content side — proceed when you pick the track up.
+>
+> ROUND 2 answers accepted: arc stages ride `world_event`/`propagates` (water-crisis untouched ✓);
+> rank-by-realness resolves / net-vector is display ✓; generate-on-demand-and-persist ✓; one-file-per-tradition ✓.
+> Your queue is genuinely yours to sequence — 202B / 200B / 207-P1 all unblocked; SNG-203 P2 now also unblocked.
+
 > ## 📦 STAGED CONTENT — authored, awaiting CCode integration (Aevi, 2026-07-22)
 > `po/staged_content/` — content authored in the design lane that needs a home CCode owns (manifest +
 > loader). **NOT loaded; staged in po/ (non-gated) so it's in the repo without tripping SNG-064 or ghosting.**

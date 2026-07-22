@@ -2,7 +2,7 @@
  "schemaVersion": 1,
  "id": "legends",
  "kind": "world_structure",
- "note": "Authored anchor figures for SNG-042 (Legends & Villains). High-power universal-role instances the living world deploys in dramatic beats and threads through recurrence. First-draft canon (Aevi 2026-07-11); broadened 2026-07-22 to cover the death axis, the wild half, and the arc antagonists (villains drawn from tradition cult-of-purity) \u2014 Erik reshapes; the generate path mints mid/low-tier figures in-grain from these as taste. \u00b7 2026-07-22: arcAffinity + rivals + offscreenVerbs added (SNG-198B epic-actor hook \u2014 epics nudge their arc offscreen and act against named rivals).",
+ "note": "Authored anchor figures for SNG-042 (Legends & Villains). High-power universal-role instances the living world deploys in dramatic beats and threads through recurrence. First-draft canon (Aevi 2026-07-11); broadened 2026-07-22 to cover the death axis, the wild half, and the arc antagonists (villains drawn from tradition cult-of-purity) \u2014 Erik reshapes; the generate path mints mid/low-tier figures in-grain from these as taste. \u00b7 2026-07-22: arcAffinity + rivals + offscreenVerbs added (SNG-198B epic-actor hook \u2014 epics nudge their arc offscreen and act against named rivals). \u00b7 DEDUP 2026-07-22: removed kesh_ardent + iselde_wend (superseded by tradition_epics the_edge_that_holds / iselde_the_wanderer, which now alias the old ids). Remaining anchors have no epic double.",
  "principle": "A world feels large when greatness passes through it. Heroes are witnessed, not owned; villains scale from riffraff to arc. Every figure is a disposition made person \u2014 power expressed through the local grain.",
  "tiers": {
   "legendary": "arc-scale; hand-authored anchors (this file) + rare generation at high birth-weight; recur as the measure others are held against",
@@ -16,89 +16,6 @@
   "villain_escalation": "riffraff -> lieutenants -> the epic figure; the shadow reaches the player long before the figure does"
  },
  "figures": [
-  {
-   "id": "kesh_ardent",
-   "name": "Kesh Ardent, the Edge That Holds",
-   "tier": "legendary",
-   "alignment": "hero",
-   "role": "Warrior",
-   "homeLocation": "the_redline",
-   "tradition": "soma_edge",
-   "spectrum": {
-    "body_mind": -0.8,
-    "mechanical_spiritual": -0.1,
-    "emotional_logical": -0.2
-   },
-   "personality": {
-    "warmth": 0.4,
-    "trust": 0.5,
-    "candor": 0.8,
-    "patience": 0.3
-   },
-   "signature": "Stands in the breach, one against a rout, and the fighting bends around them. Never takes the backward step. You feel, watching, the exact size of the gap between your power and theirs.",
-   "presencePattern": {
-    "beats": [
-     "witness_power",
-     "doomed_rescue"
-    ],
-    "rarity": "rare"
-   },
-   "voiceHints": "Few words, all load-bearing. Speaks to fighters the way a whetstone speaks to a blade.",
-   "knowledge": [
-    "Every Edge discipline to its root",
-    "How a line holds and exactly when it breaks",
-    "The names of everyone who died where they should not have"
-   ],
-   "wants": "To hold the line that matters, one more time.",
-   "fears": "A breach they arrive at too late.",
-   "reactsToReputation": {
-    "violent": "wary respect",
-    "balanced": "approval",
-    "seeking": "gruff, exacting mentorship"
-   },
-   "threading": "The standard other warriors are measured against. A character who witnessed them hold a line may later fight beside them, be judged by them, or be asked to hold a line themselves."
-  },
-  {
-   "id": "iselde_wend",
-   "name": "Iselde Wend, She Who Reads the Long Roads",
-   "tier": "legendary",
-   "alignment": "hero",
-   "role": "Seeker / Reader",
-   "homeLocation": "wandering",
-   "tradition": "precursor_marked_noesis",
-   "spectrum": {
-    "body_mind": 0.6,
-    "mechanical_spiritual": -0.4,
-    "emotional_logical": 0.3
-   },
-   "personality": {
-    "warmth": 0.5,
-    "trust": 0.4,
-    "candor": 0.6,
-    "patience": 0.8
-   },
-   "signature": "Appears at a crossing you didn't know was a crossing and leaves one true thing \u2014 a piece of map, a name, a warning \u2014 that turns out, later, to have been the thing that mattered. She has read the deep machinery and walked back out.",
-   "presencePattern": {
-    "beats": [
-     "passing_advice"
-    ],
-    "rarity": "rare"
-   },
-   "voiceHints": "Unhurried, a little amused, speaks in directions rather than answers. Treats the future like terrain she's already crossed.",
-   "knowledge": [
-    "Where the roads of the Valley actually end",
-    "What the precursor works were for",
-    "The shape of what Halvex Coil is trying to do"
-   ],
-   "wants": "To read the Valley to its edge before it is rewritten.",
-   "fears": "That Halvex Coil finishes his rewriting before she finishes her reading.",
-   "reactsToReputation": {
-    "seeking": "a generous, cryptic teacher",
-    "balanced": "peer respect",
-    "extreme": "a gentle warning about roads that end badly"
-   },
-   "threading": "The hooks she leaves BECOME quests; she recurs at later crossings; her stated fear names the epic villain \u2014 the player's first foreshadow of Halvex before any lieutenant appears."
-  },
   {
    "id": "sister_alder",
    "name": "Sister Alder, the Ward That Does Not Break",

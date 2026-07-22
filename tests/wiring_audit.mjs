@@ -154,6 +154,29 @@ check("APP_VERSION matches index.html's cache stamp (feedback reports name the r
   !!appVersion && stamps.length > 0 && stamps.every(s => s === appVersion),
   `APP_VERSION=${appVersion}, index.html stamps=${[...new Set(stamps)].join("/")}`);
 
+// ---------- 3c. unread-writes: every gameplay control the Settings screen writes has a live reader ----------
+// SNG-205 §3: the batch's recurring bug is a dial the UI writes that NOTHING reads — `encounterRate` was the
+// cautionary tale (Erik maxed it, saw no change, because it had zero consumers; the real control is
+// `pacing`). This extends the audit's "a value with no reader" principle (the gm-registry parity above) from
+// the GM context to player-facing GAMEPLAY controls: each must be WRITTEN by the Settings screen AND reach
+// the ENGINE, where gameplay consumes it. Pure-UI prefs (ttsVoice/readAloud) are app-side and excluded — this
+// guards the "dial that should DO something" class. Add a new gameplay dial → add it here; if it has no
+// engine reader it is not wired, and this fails instead of a player discovering it.
+const engineSrc = readdirSync(join(root, "engine")).filter(f => f.endsWith(".js")).map(f => read("engine/" + f)).join("\n");
+const GAMEPLAY_CONTROLS = {
+  pacing: "encounter frequency (resolvePacing)",
+  plainness: "narration plainness (SNG-144)",
+  bluntness: "narration bluntness (SNG-144)",
+  contentGenerator: "canon-author weight boost (SNG-132)",
+};
+for (const [key, what] of Object.entries(GAMEPLAY_CONTROLS)) {
+  const written = new RegExp("profile\\." + key + "\\s*=").test(appSrc);
+  const readByEngine = new RegExp("\\b" + key + "\\b").test(engineSrc);
+  check(`player control '${key}' is written by Settings AND read by the engine (${what})`, written && readByEngine,
+    `${!written ? "not written by the Settings screen" : ""}${!readByEngine ? `${!written ? "; " : ""}no engine module reads it — an unwired dial (SNG-205 §2b, the encounterRate class)` : ""}`);
+}
+check("unread-writes guard can fail (encounterRate — a phantom control — reaches no engine reader)", !/\bencounterRate\b/.test(engineSrc));
+
 // ---------- CCODE-12 / SNG-165 §6: the three standing guards ----------
 // The reachability audit found eight capabilities built, tested, and unreachable — and then caught
 // its own author 90 minutes later on code with eight passing tests. These convert that one-off

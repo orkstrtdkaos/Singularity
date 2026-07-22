@@ -405,6 +405,18 @@ export function offscreenPopulation(character, content = {}, { worldDay = 0, rng
     const greats = (content.legends?.roster || []).filter(f => f.tier === "legendary" || f.tier === "epic");
     if (greats.length) { const f = greats[Math.floor(rng() * greats.length)]; add(f.id, f.name, "npc", f.wants || f.signature, "legend"); }
   }
+  // 4. HEARD OF, not met (§3.2) — a codex PERSON node with no registry entry is exactly "known of, not met."
+  //    SNG-199 made MEETING write the registry, so this marker exists for free (met people were filtered out
+  //    above by their registry entry; generated/legend already `seen`). Appended LAST + low priority so the
+  //    batch cap prefers the people the player actually knows; their descriptor is what he knows of them.
+  //    Companions (companion-*) are their own thing, not offscreen figures.
+  for (const t of Object.values(character?.codex?.topics || {})) {
+    if (t.kind !== "person") continue;
+    const id = t.entityId || t.id;
+    if (!id || seen.has(id) || String(id).startsWith("companion-") || character?.npcRegistry?.[id]) continue;
+    const fact = (t.facts || []).slice(-1)[0] || t.label;
+    add(id, t.label, "npc", `known of: ${String(fact).replace(/^\[[^\]]*\]\s*/, "")}`, "heardof");
+  }
   return out;
 }
 
@@ -462,7 +474,8 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
  *  HOW FAR each want has already travelled (progressOf) and must return a countable OUTCOME, not just prose. */
 async function aiGeneratedEvolution({ entities, elapsedWorldDays, currentWorldDay, progressOf = () => "just beginning" }) {
   const who = (e) => e.source === "legend" ? ", a GREAT FIGURE of the world — a rare, weighty stirring, not a small errand"
-    : e.source === "met" ? ", someone the player has met" : "";
+    : e.source === "met" ? ", someone the player has met"
+    : e.source === "heardof" ? ", someone the player has only HEARD OF — a distant name; a small shift in it is how the world reads as alive when he finds it changed" : "";
   const list = entities.map(e =>
     `- ${e.id}: ${e.name} (${e.kind}${who(e)}) — ${e.kind === "arc" ? "tension" : "wants"}: ${e.descriptor || "?"}; progress so far: ${progressOf(e.id)}`
   ).join("\n");

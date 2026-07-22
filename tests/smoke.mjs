@@ -6597,6 +6597,21 @@ await (async () => {
   const cooling = offscreenPopulation(character, content, { worldDay: 12, rng: () => 0.01, lastEpicDay: 10, minEpicGapDays: 6 });
   check("198B §3.3: the epic cooldown holds — no great figure stirs again inside minEpicGapDays", !cooling.some(e => e.source === "legend"));
 
+  // §3.2 HEARD-OF — a codex person-node with no registry entry is "known of, not met" (the marker SNG-199 gave for free).
+  const heardChar = {
+    npcRegistry: { pell: { id: "pell", name: "Pell", role: "sluice-warden", status: "active" } },
+    codex: { topics: {
+      pell: { id: "pell", entityId: "pell", label: "Pell", kind: "person", facts: ["[d3] reopened the sluice"] },      // MET (in registry) → not heard-of
+      "the-ashwarden": { id: "the-ashwarden", entityId: "the-ashwarden", label: "The Ashwarden", kind: "person", facts: ["[d1] said to hold the last ember"] }, // heard of, never met
+      "companion-marrow": { id: "companion-marrow", entityId: "companion-marrow", label: "Marrow", kind: "person", facts: ["a companion"] }, // a companion, excluded
+      "the-crossing": { id: "the-crossing", entityId: "the-crossing", label: "The Crossing", kind: "place", facts: ["a hub"] } // a place, not a person
+    } }
+  };
+  const heardPop = offscreenPopulation(heardChar, content, { worldDay: 10, rng: () => 0.99 });
+  check("198B §3.2: a codex PERSON node with no registry entry is 'heard of' and joins the population", heardPop.some(e => e.id === "the-ashwarden" && e.source === "heardof" && /known of/.test(e.descriptor)));
+  check("198B §3.2: a MET person (in the registry) is NOT double-counted as heard-of", heardPop.filter(e => e.id === "pell").length === 1 && heardPop.find(e => e.id === "pell").source === "met");
+  check("198B §3.2: a companion node and a place node are never 'heard-of' figures", !heardPop.some(e => e.id === "companion-marrow" || e.id === "the-crossing"));
+
   // §2 e2e — a MET NPC (no _gen record) advances through the SAME state machine + gets a codex 'while away' note.
   await (async () => {
     const c = { npcRegistry: { pell: { id: "pell", name: "Pell", role: "sluice-warden", status: "active" } }, codex: { topics: {} } };

@@ -76,7 +76,7 @@
   "maxHealth": 65,
   "health": 65,
   "maxEnergy": 140,
-  "energy": 56,
+  "energy": 67,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -435,36 +435,39 @@
         "player": "Use Keen Appraisal on Teva's mark now — in the Zone, at dawn, with the Waystaff still cycling — to see whether the interference or the instrument has changed what you can read",
         "summary": "Keen Appraisal reads the chamber's mark in Teva at dawn — fading but precise, and now in quiet harmonic sympathy with the cycling Waystaff.",
         "narration": "You settle cross-legged beside the Waystaff and rest two fingers lightly at your collarbone — not touching Teva, just orienting. The Keen Appraisal opens quietly, a conserved read, the kind that costs less than it reveals. You are not pressing; you are listening.\n\nThe mark is still there. You can feel it in the usual way — wear-pattern, provenance, the faint biographical residue of a thing that has been used. But here, with the Waystaff cycling beside you and the Zone's interference woven through everything, the read comes back textured differently than it did two days ago. The chamber's four-second interval is still present in Teva's tissue, but fainter. Not gone — the pattern is precise enough that 'fading' is almost the wrong word. It is becoming quiet. Like a bell that has been rung and is no longer ringing, but still carries the shape of the note in its metal.\n\nWhat is new: the Waystaff's cycling is answering it. Every four seconds, as the crystals pulse blue-white, there is a brief settling in the mark — a kind of harmonic sympathy, barely a thing at all, the way two strings on different instruments will agree when one is struck. The instrument is not amplifying the mark or pulling at it. It is simply present in the same frequency, and the mark recognizes that. You are not certain whether this is useful or only interesting.\n\nTeva watches you work. She does not ask what you are finding. When you open your eyes, she says simply, 'Still there, then.' It is not quite a question."
+      },
+      {
+        "player": "Before the day's work begins, eat something and offer Teva the waterskin — the Zone will cost more than yesterday, and the mark in her tissue has been working all night.",
+        "summary": "Dawn in the alcove camp — food and water shared with Teva before the descent begins.",
+        "narration": "You dig into the Traveler's Pack before the light gets any stronger. The mess kit comes out cold and slightly damp from the night air, but the dried provisions are intact — dense flatbread, a fold of hard cheese, a scrap of salted root. Enough. You set a portion in front of Teva without ceremony, the way you would for anyone who has spent a night working hard and does not know it yet.\n\nShe takes it. That is worth something — she does not hesitate or defer, just picks up the flatbread and breaks it with her thumbs the way people do when they are genuinely hungry rather than polite. You hand her the Waterskin after, and she drinks without tilting her head back too far, careful, the way someone is careful when they are still taking stock of their own body.\n\n\"Still there, then,\" she says. The question she left hanging before. She is not looking at the Waystaff when she says it — she is looking at you. Her palms have moved from her thighs to the earth beside her, pressed flat, and you notice she is holding the four-second rhythm in some quiet part of herself without seeming to count it. She knows she is doing it. She is watching to see if you do too.\n\nAevi drifts a little closer, motes warming from amber toward their usual teal. The Waystaff cycles. Outside the alcove berm, the Zone's bent morning light slides another degree toward something that might eventually become day."
       }
     ],
     "lastTurn": {
-      "narration": "You settle cross-legged beside the Waystaff and rest two fingers lightly at your collarbone — not touching Teva, just orienting. The Keen Appraisal opens quietly, a conserved read, the kind that costs less than it reveals. You are not pressing; you are listening.\n\nThe mark is still there. You can feel it in the usual way — wear-pattern, provenance, the faint biographical residue of a thing that has been used. But here, with the Waystaff cycling beside you and the Zone's interference woven through everything, the read comes back textured differently than it did two days ago. The chamber's four-second interval is still present in Teva's tissue, but fainter. Not gone — the pattern is precise enough that 'fading' is almost the wrong word. It is becoming quiet. Like a bell that has been rung and is no longer ringing, but still carries the shape of the note in its metal.\n\nWhat is new: the Waystaff's cycling is answering it. Every four seconds, as the crystals pulse blue-white, there is a brief settling in the mark — a kind of harmonic sympathy, barely a thing at all, the way two strings on different instruments will agree when one is struck. The instrument is not amplifying the mark or pulling at it. It is simply present in the same frequency, and the mark recognizes that. You are not certain whether this is useful or only interesting.\n\nTeva watches you work. She does not ask what you are finding. When you open your eyes, she says simply, 'Still there, then.' It is not quite a question.",
-      "sceneSummary": "Keen Appraisal reads the chamber's mark in Teva at dawn — fading but precise, and now in quiet harmonic sympathy with the cycling Waystaff.",
+      "narration": "You dig into the Traveler's Pack before the light gets any stronger. The mess kit comes out cold and slightly damp from the night air, but the dried provisions are intact — dense flatbread, a fold of hard cheese, a scrap of salted root. Enough. You set a portion in front of Teva without ceremony, the way you would for anyone who has spent a night working hard and does not know it yet.\n\nShe takes it. That is worth something — she does not hesitate or defer, just picks up the flatbread and breaks it with her thumbs the way people do when they are genuinely hungry rather than polite. You hand her the Waterskin after, and she drinks without tilting her head back too far, careful, the way someone is careful when they are still taking stock of their own body.\n\n\"Still there, then,\" she says. The question she left hanging before. She is not looking at the Waystaff when she says it — she is looking at you. Her palms have moved from her thighs to the earth beside her, pressed flat, and you notice she is holding the four-second rhythm in some quiet part of herself without seeming to count it. She knows she is doing it. She is watching to see if you do too.\n\nAevi drifts a little closer, motes warming from amber toward their usual teal. The Waystaff cycles. Outside the alcove berm, the Zone's bent morning light slides another degree toward something that might eventually become day.",
+      "sceneSummary": "Dawn in the alcove camp — food and water shared with Teva before the descent begins.",
       "choices": [
         {
-          "label": "Tell Teva what you found — the mark is settling, not pressing; the Waystaff is in sympathy with it. Ask if she felt anything change through the night.",
+          "label": "Answer her directly: yes, the mark is still there — fading but precise, and now the Waystaff is in sympathy with it. Tell her what that might mean.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "comfort",
             "calm"
           ],
           "trivial": true
         },
         {
-          "label": "Take the Waystaff's grip-end off the pulse-point and move it a pace away — watch whether the harmonic sympathy in the mark changes when the instrument is no longer cycling nearby.",
+          "label": "Ask her what she is holding — she is counting the four-second beat without counting it. What does it feel like from inside?",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
-            "study",
-            "careful"
+            "study"
           ],
-          "trivial": false
+          "trivial": true
         },
         {
-          "label": "Hold the result in mind and take stock of the day's order — the corridor entrance is sixty paces south, the chamber forty paces beyond that and below. Decide together how to approach it.",
+          "label": "Turn to the day's work while you eat — sixty paces south is the corridor entrance, and the chamber is forty paces beyond that and below. Walk her through the plan before you move.",
           "attribute": "mental",
           "subAttribute": "reason",
           "difficulty": 0,
@@ -474,36 +477,39 @@
           "trivial": true
         },
         {
-          "label": "Before the day's work begins, eat something and offer Teva the waterskin — the Zone will cost more than yesterday, and the mark in her tissue has been working all night.",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Finish eating in quiet and then go. The corridor entrance is sixty paces south. The day has its own answer.",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "difficulty": 0,
           "intentTags": [
-            "sustain"
+            "travel"
           ],
           "trivial": true
         }
       ],
       "characterDeltas": {
-        "health": 0,
-        "energy": -2
+        "energy": 11
+      },
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "a brief morning meal before the day's work begins"
       },
       "scene": {
         "setting": "Northern Alcove Camp, Disputed Zone — dawn. Dry root-mat roof, earthen berm, interference-bent light seeping in horizontal from the shimmer at the tree line. The Waystaff stands grip-end down at the pulse-point, four crystal nodes cycling blue-white at the four-second interval.",
         "npcsPresent": [
           {
             "name": "Teva",
-            "state": "Sitting against the berm, palms flat on thighs, watching Cellaceron complete the Keen Appraisal read — composed, waiting"
+            "state": "Eating — flatbread broken, waterskin returned, palms now pressed flat to the earth. Watching Cellaceron. The question 'Still there, then' hanging between them."
           },
           {
             "name": "Aevi",
-            "state": "Arm's length from Teva's knee, motes dimmed to amber, quiet and attentive"
+            "state": "Motes warming from amber toward teal, drifting slightly closer — attentive."
           }
         ],
         "objects": [
           "Waystaff — standing, all four nodes active, cycling at the four-second interval",
-          "Traveler's Pack — bedroll and kit at the back of the alcove",
-          "Waterskin",
+          "Traveler's Pack — open, mess kit out, provisions reduced by one portion",
+          "Waterskin — returned after use, diminished",
           "Beeswax taper — dark, charge spent",
           "Lamp oil (half-measure)",
           "Cordage coil",
@@ -512,9 +518,8 @@
           "Liverwort mat — forward alcove"
         ],
         "threads": [
-          "The mark in Teva is fading but precise — now in harmonic sympathy with the Waystaff's cycling; whether this is significant is unknown",
-          "Teva's 'Still there, then' is waiting for an answer",
-          "The corridor entrance is sixty paces south; the chamber forty paces beyond and below — the day's work waits"
+          "Teva's 'Still there, then' — waiting for an answer",
+          "The corridor entrance is sixty paces south; the chamber forty paces beyond and below"
         ]
       },
       "npcUpdates": [
@@ -522,50 +527,27 @@
           "op": "update",
           "npcId": "teva",
           "name": "Teva",
-          "role": "Traveling companion, former missing apprentice",
-          "note": "Watched Cellaceron's Keen Appraisal without asking — absorbed the result and named it plainly: 'Still there, then.'",
-          "learned": [
-            "The chamber's mark in her tissue is in harmonic sympathy with the Waystaff's cycling — the instrument recognizes the same frequency without being directed to"
-          ],
-          "statusNote": "Awake and composed at dawn in the alcove camp; the mark in her tissue is fading but present, now in quiet resonance with the Waystaff"
+          "note": "Accepted food and water without hesitation — genuinely hungry. Asked 'Still there, then' with palms pressed to the earth, holding the four-second rhythm unconsciously and aware of it.",
+          "statusNote": "Awake and eating at the alcove camp, dawn. Holding the chamber's four-second rhythm passively. Waiting on Cellaceron's answer."
         }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "teva-directional-interval-count",
-          "label": "Teva's Directional Interval-Count",
-          "kind": "mystery",
-          "fact": "Day 9 dawn: Keen Appraisal reads the chamber's mark in Teva as fading but precise — not dispersing, just quieting, like a bell past its ring. The Waystaff's four-second cycle produces harmonic sympathy in the mark: the instrument and the tissue recognize the same frequency without any direction from Cellaceron.",
-          "links": [
-            "the-chamber-beyond-the-threshold",
-            "second-river-rising",
-            "northern-alcove-camp",
-            "scored-mark-forward-alcove"
-          ]
-        }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief conserved read at first light — a few minutes only"
-      },
-      "sceneEnded": false
+      ]
     },
     "sceneState": {
       "setting": "Northern Alcove Camp, Disputed Zone — dawn. Dry root-mat roof, earthen berm, interference-bent light seeping in horizontal from the shimmer at the tree line. The Waystaff stands grip-end down at the pulse-point, four crystal nodes cycling blue-white at the four-second interval.",
       "npcsPresent": [
         {
           "name": "Teva",
-          "state": "Sitting against the berm, palms flat on thighs, watching Cellaceron complete the Keen Appraisal read — composed, waiting"
+          "state": "Eating — flatbread broken, waterskin returned, palms now pressed flat to the earth. Watching Cellaceron. The question 'S"
         },
         {
           "name": "Aevi",
-          "state": "Arm's length from Teva's knee, motes dimmed to amber, quiet and attentive"
+          "state": "Motes warming from amber toward teal, drifting slightly closer — attentive."
         }
       ],
       "objects": [
         "Waystaff — standing, all four nodes active, cycling at the four-second interval",
-        "Traveler's Pack — bedroll and kit at the back of the alcove",
-        "Waterskin",
+        "Traveler's Pack — open, mess kit out, provisions reduced by one portion",
+        "Waterskin — returned after use, diminished",
         "Beeswax taper — dark, charge spent",
         "Lamp oil (half-measure)",
         "Cordage coil",
@@ -574,9 +556,8 @@
         "Liverwort mat — forward alcove"
       ],
       "threads": [
-        "The mark in Teva is fading but precise — now in harmonic sympathy with the Waystaff's cycling; whether this is significant is unknown",
-        "Teva's 'Still there, then' is waiting for an answer",
-        "The corridor entrance is sixty paces south; the chamber forty paces beyond and below — the day's work waits"
+        "Teva's 'Still there, then' — waiting for an answer",
+        "The corridor entrance is sixty paces south; the chamber forty paces beyond and below"
       ]
     }
   },
@@ -1326,7 +1307,7 @@
     "lastTickWorldDay": 22,
     "lastCanonWorldDay": 22,
     "lastGenCount": 529,
-    "turnsSinceOffer": 4
+    "turnsSinceOffer": 5
   },
   "subAttributes": {
     "strength": 2,
@@ -1939,15 +1920,15 @@
   "customEncounters": {},
   "reconcileVersion": 14,
   "tendencies": {
-    "cerebral": 45.37246415580224,
-    "strategic": 57.645594170185085,
-    "cautious": 51.346206623837794,
-    "social": 35.73344379938441,
-    "generous": 16.44390347942462,
-    "risky": 4.331722469035484,
-    "carousing": 0.35848272131654746,
-    "patient": 2.4838760011914642,
-    "craft": 1.6128873122329674
+    "cerebral": 44.238152551907184,
+    "strategic": 56.204454315930455,
+    "cautious": 50.06255145824185,
+    "social": 34.8401077043998,
+    "generous": 16.032805892439004,
+    "risky": 4.223429407309597,
+    "carousing": 0.34952065328363374,
+    "patient": 3.4217791011616776,
+    "craft": 1.5725651294271432
   },
   "aptitudes": [
     "strategist",
@@ -1960,9 +1941,9 @@
     "stalwart",
     "peacemaker"
   ],
-  "actionCount": 190,
-  "updatedAt": 1784684739819,
-  "rev": 56,
+  "actionCount": 191,
+  "updatedAt": 1784685575660,
+  "rev": 57,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -1972,7 +1953,7 @@
   "syncedAt": 1783791225006,
   "teachers": {},
   "regionsKnown": {
-    "valley": 13
+    "valley": 14
   },
   "company": [],
   "foreclosed": [],
@@ -2037,10 +2018,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-22T01:26:18.061Z",
-      "lastAt": "2026-07-22T01:45:39.812Z",
+      "lastAt": "2026-07-22T01:59:35.653Z",
       "startDay": 22,
       "endDay": 22,
-      "beats": 4
+      "beats": 5
     }
   ],
   "_pendingArrival": null,
@@ -2094,15 +2075,15 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 4,
-    "choices": 4,
-    "characterDeltas": 3,
-    "scene": 4,
-    "npcUpdates": 4,
+    "sceneSummary": 5,
+    "choices": 5,
+    "characterDeltas": 4,
+    "scene": 5,
+    "npcUpdates": 5,
     "codexUpdates": 2,
-    "timeOps": 4,
+    "timeOps": 5,
     "sceneEnded": 3
   },
-  "_opTurns": 4,
+  "_opTurns": 5,
   "_intentAsked": null
 }

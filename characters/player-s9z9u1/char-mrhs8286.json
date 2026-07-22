@@ -104,7 +104,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.3495736791470318,
+    "spectrumId": -0.3320949951896802,
     "violence_peace": 0.1030845625,
     "chaos_order": 0.25700971191540173,
     "mechanical_spiritual": 0.2580372847905887,
@@ -1669,7 +1669,134 @@
     "The evening at Ama's table winds down — Ama shows Veth to the east room, Huginn takes the window ledge, and Silas brings Pell to his quarters. The Waymarker and the father's letter rest on the shelf. The household settles."
   ],
   "currentLocationId": "the_crossing",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "the_crossing",
+    "turns": [
+      {
+        "player": "Talk to Pell as we get ready for the evening - ask her about everything... all the task stuff but then more importantly about her new family, the Warden post, the Waymarker, if she wants you to massage her shoulders and give her a sponge bath... ",
+        "summary": "Silas and Pell talk through the fellowship and the road, then something quieter — she names what she sees in him, and what she does not yet know about herself.",
+        "narration": "The room is small and warm — the kind of warmth a stone house holds after a day of cooking, not fierce but present. A single tallow stub burns on the shelf beside the Waymarker and the folded letter. Pell is already sitting on the edge of the bed with her boots off, working at the lace of her right bracer with the focused patience she brings to anything that requires two hands in a small space.\n\nYou pull the door and sit beside her. You ask about the fellowship first — Calvar, the valve work, the east-channel crews — and she answers with the short, sure sentences she uses when she has already thought something through. Calvar will do the job exactly right, she says. He would probably have done it without being asked. Aldric will keep the accounts honest because he keeps accounts honest as a matter of character and not because anyone told him to. She loosens the bracer and sets it on the floor. She says she is less certain about Fendt and more certain about Mara, and that those two facts together probably balance.\n\nThen you ask about the rest. You ask about Ama, about the Waymarker on the shelf, about whether she has thought about what a warden post means for the two of them in practice. She is quiet for a moment. Not hesitant — processing, which is different. She says your mother is a woman who finishes what she is doing before she turns, and she means that as a compliment, and she thinks you should know it landed that way. She says she doesn't know yet what the post means for her, only that when you planted Memory in the hollow floor and named every space in that post aloud, she understood for the first time that you are not a man who is traveling toward something. You are a man who is building toward something. That distinction matters to her. She says it the way she says anything load-bearing — once, plainly, without circling back.\n\nWhen you ask about her father's line — the March or Marsh question, the blank her father left — she looks at her hands for a second. She says she doesn't know. She says she is beginning to think she would like to. Then you ask if she wants her shoulders seen to, and the particular quality of her silence shifts. She reaches back and undoes her hair without ceremony. She says: yes."
+      }
+    ],
+    "lastTurn": {
+      "narration": "The room is small and warm — the kind of warmth a stone house holds after a day of cooking, not fierce but present. A single tallow stub burns on the shelf beside the Waymarker and the folded letter. Pell is already sitting on the edge of the bed with her boots off, working at the lace of her right bracer with the focused patience she brings to anything that requires two hands in a small space.\n\nYou pull the door and sit beside her. You ask about the fellowship first — Calvar, the valve work, the east-channel crews — and she answers with the short, sure sentences she uses when she has already thought something through. Calvar will do the job exactly right, she says. He would probably have done it without being asked. Aldric will keep the accounts honest because he keeps accounts honest as a matter of character and not because anyone told him to. She loosens the bracer and sets it on the floor. She says she is less certain about Fendt and more certain about Mara, and that those two facts together probably balance.\n\nThen you ask about the rest. You ask about Ama, about the Waymarker on the shelf, about whether she has thought about what a warden post means for the two of them in practice. She is quiet for a moment. Not hesitant — processing, which is different. She says your mother is a woman who finishes what she is doing before she turns, and she means that as a compliment, and she thinks you should know it landed that way. She says she doesn't know yet what the post means for her, only that when you planted Memory in the hollow floor and named every space in that post aloud, she understood for the first time that you are not a man who is traveling toward something. You are a man who is building toward something. That distinction matters to her. She says it the way she says anything load-bearing — once, plainly, without circling back.\n\nWhen you ask about her father's line — the March or Marsh question, the blank her father left — she looks at her hands for a second. She says she doesn't know. She says she is beginning to think she would like to. Then you ask if she wants her shoulders seen to, and the particular quality of her silence shifts. She reaches back and undoes her hair without ceremony. She says: yes.",
+      "sceneSummary": "Silas and Pell talk through the fellowship and the road, then something quieter — she names what she sees in him, and what she does not yet know about herself.",
+      "choices": [
+        {
+          "label": "Sit behind her and work out what the road has put in her shoulders — hands and full attention on her.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Ask the question that's sitting in you — what she means when she says you're building toward something, and whether she is too.",
+          "attribute": "social",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Go slowly — the sponge bath, the warmth, whatever the evening becomes at its own pace.",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        },
+        {
+          "label": "Say nothing for a minute. Let the room be what it is.",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
+        }
+      ],
+      "scene": {
+        "setting": "A small stone room in Ama's house in Cairnhold — warm from the day's cooking, a single tallow stub burning on the shelf beside the Waymarker and the father's letter. Night, early spring.",
+        "npcsPresent": [
+          {
+            "name": "Pell",
+            "state": "Sitting on the edge of the bed, bracer on the floor, hair undone, waiting."
+          }
+        ],
+        "objects": [
+          "Waymarker on the shelf",
+          "Father's sealed letter on the shelf",
+          "Tallow stub burning",
+          "Pell's bracer on the floor",
+          "Memory (spear) leaned in the corner"
+        ],
+        "threads": [
+          "Pell has said yes to the shoulder work and what follows — the evening is open.",
+          "The question of her father's line — March or Marsh — sits unresolved, and she has said she would like to know."
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "role": "Village blacksmith, traveling companion",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "Named what she sees in Silas — a man building toward something, not merely traveling toward it. Said she doesn't know what the post means for her yet. Acknowledged she'd like to know about her father's line. Hair undone, bracer off, said yes.",
+          "learned": [
+            "Distinguishes between a man traveling toward something and a man building toward something — Silas is the second kind, and this matters to her.",
+            "Would like to know more about her father's line — the March or Marsh question is not closed for her."
+          ],
+          "statusNote": "In Silas's quarters in Ama's house in Cairnhold — the evening open between them.",
+          "relationshipDelta": 0
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A quiet evening conversation, the kind that takes time but moves slowly."
+      },
+      "sceneEnded": false
+    },
+    "sceneState": {
+      "setting": "A small stone room in Ama's house in Cairnhold — warm from the day's cooking, a single tallow stub burning on the shelf beside the Waymarker and the father's letter. Night, early spring.",
+      "npcsPresent": [
+        {
+          "name": "Pell",
+          "state": "Sitting on the edge of the bed, bracer on the floor, hair undone, waiting."
+        }
+      ],
+      "objects": [
+        "Waymarker on the shelf",
+        "Father's sealed letter on the shelf",
+        "Tallow stub burning",
+        "Pell's bracer on the floor",
+        "Memory (spear) leaned in the corner"
+      ],
+      "threads": [
+        "Pell has said yes to the shoulder work and what follows — the evening is open.",
+        "The question of her father's line — March or Marsh — sits unresolved, and she has said she would like to know."
+      ]
+    }
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 12,
@@ -2513,7 +2640,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d12] Watched the Waymarker seating with full attention — read the finish the way she reads iron.",
         "[d12] Leaned forward on both elbows watching the shadow-post — reading the technique's finish the way she reads iron. Has something forming.",
         "[d12] Named the ward-marks at Stillwater's Trouble as load-bearing — traced the same Wright's hand through the Waymarker's open layer and the chalk marks at the hollow's mouth. Read the finish, not the spectacle, and said so plainly.",
         "[d12] Said nothing at the promise — sat back, shoulders settled. Heard what she needed.",
@@ -2522,17 +2648,18 @@
         "[d12] Named the accumulation plainly — not one thing, but where three lines end. Her ironsense and the Waymarker worked together to resolve the northern edge.",
         "[d12] Read the older mark's angle and interval from the shadow-build — named it as a builder's datum, and named the shared stopping-point as a limit both craftsmen reached.",
         "[d12] Holding the disc through the Order-Sense read — thumb shifted to the back of Silas's hand as the image thinned.",
-        "[d12] Released Silas's hand when the Waymarker was set down; followed him to his quarters without prompting, watching him with quiet attention."
+        "[d12] Released Silas's hand when the Waymarker was set down; followed him to his quarters without prompting, watching him with quiet attention.",
+        "[d12] Named what she sees in Silas — a man building toward something, not merely traveling toward it. Said she doesn't know what the post means for her yet. Acknowledged she'd like to know about her father's line. Hair undone, bracer off, said yes."
       ],
       "knownFacts": [
-        "Silas's mother will ask for embarrassing stories when given the opening",
-        "Silas's mother read her correctly and said so plainly — craft-language first, bread board right, hinge-bolt stopped in time",
         "The shadow-map of Stillwater's Trouble shows the chalk ward-marks as bright strokes — she read them clearly",
         "The chalk ward-marks at Stillwater's Trouble's mouth are load-bearing, not decorative — the same hand that left room in the Waymarker's locating layer placed them to last",
         "The Wright's finish connects the Waymarker's open second layer to the hollow's structure — the same hand, building toward something unfinished",
         "The drainage channel runs through or past an unfinished deliberate accumulation at the Disputed Zone's upper reach — same intention as Stillwater's Trouble, older",
         "The Disputed Zone accumulation sits at the convergence of three structural channels — two finished, one left open",
-        "The older mark in the third line is a builder's datum — set to guide what comes after, not to finish. Both craftsmen stopped at the same place, and that is a shared limit, not coincidence."
+        "The older mark in the third line is a builder's datum — set to guide what comes after, not to finish. Both craftsmen stopped at the same place, and that is a shared limit, not coincidence.",
+        "Distinguishes between a man traveling toward something and a man building toward something — Silas is the second kind, and this matters to her.",
+        "Would like to know more about her father's line — the March or Marsh question is not closed for her."
       ],
       "skillsObserved": [
         "precise diagnosis of a failed rune-work attempt from positio",
@@ -2543,7 +2670,7 @@
         "reading a structural mark's pressure and interval from an ir"
       ],
       "status": "active",
-      "statusNote": "With Silas in his quarters in Ama's house in Cairnhold — the evening done, the night beginning.",
+      "statusNote": "In Silas's quarters in Ama's house in Cairnhold — the evening open between them.",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 12
@@ -4077,7 +4204,7 @@
     "lastTickWorldDay": 22,
     "lastCanonWorldDay": 22,
     "lastGenCount": 548,
-    "turnsSinceOffer": 6,
+    "turnsSinceOffer": 7,
     "recentOffers": [
       {
         "thing": "The shadow-build showed Calvar's drainage failure precisely — the sleeve geometry, the collar, the east-bend junction — before it showed…",
@@ -5475,21 +5602,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 12.759392781534446,
-    "cerebral": 19.506498516026973,
-    "social": 11.726907453126959,
-    "generous": 3.0639746283402016,
-    "cautious": 3.980229070925294,
-    "physical": 0.165697202088436,
-    "risky": 0.17376634217682094,
-    "ruthless": 0.055403499231240896,
-    "carousing": 0.6035365318817791,
-    "amorous": 1.3129710659224807,
-    "patient": 0.3453235238245754,
-    "stealth": 0.021474537846984727,
-    "devotion": 0.4387051581767673,
-    "craft": 1.2911270718838537,
-    "leadership": 0.10930778090913851
+    "strategic": 12.440407961996085,
+    "cerebral": 19.018836053126297,
+    "social": 13.433734766798784,
+    "generous": 2.9873752626316965,
+    "cautious": 3.8807233441521616,
+    "physical": 0.1615547720362251,
+    "risky": 0.1694221836224004,
+    "ruthless": 0.05401841175045987,
+    "carousing": 0.5884481185847347,
+    "amorous": 1.2801467892744187,
+    "patient": 0.33669043572896096,
+    "stealth": 0.020937674400810107,
+    "devotion": 0.4277375292223481,
+    "craft": 1.2588488950867573,
+    "leadership": 0.10657508638641004
   },
   "aptitudes": [
     "strategist",
@@ -5497,7 +5624,7 @@
     "scholar",
     "sage"
   ],
-  "actionCount": 639,
+  "actionCount": 640,
   "grantsVersion": 1,
   "reconcileVersion": 16,
   "gallery": [
@@ -5847,8 +5974,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784753948615,
-  "rev": 1004,
+  "updatedAt": 1784755340581,
+  "rev": 1005,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -7858,7 +7985,7 @@
   "regionsKnown": {
     "valley": 435,
     "the_palelands": 6,
-    "the_center": 27
+    "the_center": 28
   },
   "foreclosed": [
     "rootkin",
@@ -7972,10 +8099,10 @@
     {
       "id": "sess-10",
       "startedAt": "2026-07-22T20:59:08.612Z",
-      "lastAt": "2026-07-22T20:59:08.612Z",
+      "lastAt": "2026-07-22T21:22:20.579Z",
       "startDay": 22,
       "endDay": 22,
-      "beats": 1
+      "beats": 2
     }
   ],
   "company": [
@@ -8163,22 +8290,22 @@
     "the_crossing": "https://image.pollinations.ai/prompt/The%20Crossing%3A%20Every%20axis%20crosses%20here%20at%20nothing%2C%20and%20the%20result%20is%20not%20grey%20%E2%80%94%20it%20is%20CROWDED.%20The%20Crossing%20leans%20toward%20no%20pole%2C%20which%20is%20precisely%20why%20it%20can%20hold%20them%20all%3A%20an%20Umbral%20and%20a%20Blazeborn%20drink%20at%20the%20same%20table%20because%20neither%20has%20the%20standing%20to%20make%20the%20other%20leave.%20The%20poles%20are%20lonely%20places.%20The%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=24144&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 13,
-    "choices": 13,
+    "sceneSummary": 14,
+    "choices": 14,
     "characterDeltas": 7,
-    "scene": 13,
-    "npcUpdates": 12,
+    "scene": 14,
+    "npcUpdates": 13,
     "factUpdates": 2,
     "placeUpdates": 2,
     "codexUpdates": 10,
-    "timeOps": 10,
+    "timeOps": 11,
     "imagePrompt": 1,
-    "sceneEnded": 5,
+    "sceneEnded": 6,
     "itemUpdates": 1,
     "questUpdates": 1,
     "offer": 1
   },
-  "_opTurns": 13,
+  "_opTurns": 14,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

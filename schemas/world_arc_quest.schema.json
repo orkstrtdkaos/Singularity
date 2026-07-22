@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "World-Arc Quest",
+  "description": "SNG-203 tier 1. A quest that is a player's HANDLE on a greater arc (greater_arcs.json). Its resolution advances the named arc's stage on the SHARED clock — every other player's next load sees the world moved. Extends quest_structure.json (all its required fields still apply: premise, stakes, axis, traditions, stages, routes, outcomes, consequences) and ADDS the arc-binding + shared-broadcast fields. The distinguishing effect type is `arc_stage`: a world_event with teeth that moves greater_arcs.json[arcId].currentStage. GM can generate new world-arc quests via generate('world_arc_quest', ctx) against this schema, binding to any active arc that has a stage ladder.",
+  "type": "object",
+  "required": ["id", "name", "arcId", "arcStageFrom", "arcStageTo", "premise", "stakes", "axis", "traditions", "stages", "routes", "outcomes"],
+  "properties": {
+    "schemaVersion": { "type": "integer" },
+    "id": { "type": "string", "description": "stable slug; generated arcs mint via the SNG-019 resolver" },
+    "name": { "type": "string" },
+    "tier": { "type": "string", "const": "world", "description": "always 'world' for this schema" },
+    "arcId": { "type": "string", "description": "the greater_arcs.json arc this quest is a handle on. MUST reference an existing arc id." },
+    "arcStageFrom": { "type": "integer", "description": "the arc stage this quest departs FROM. Requires the arc to carry a numbered stage ladder (SNG-203 §7 authors these onto the 5 greater arcs)." },
+    "arcStageTo": { "type": "integer", "description": "the arc stage a completing outcome moves the arc TO. May be lower than From — a world arc CAN move backward (contested advancement is a feature, §3)." },
+    "premise": { "type": "string", "description": "the situation, plainly. Two sentences. (quest_structure.json)" },
+    "stakes": { "type": "string", "description": "what is at risk and WHO PAYS if the player walks away. Mandatory. At world scale, the 'who pays' is often everyone. (quest_structure.json)" },
+    "axis": { "type": "string", "description": "the tension-axis this quest lives on. (quest_structure.json)" },
+    "traditions": { "type": "array", "items": { "type": "string" }, "description": "which peoples' crafts open routes. (quest_structure.json)" },
+    "stages": {
+      "type": "array", "minItems": 2, "maxItems": 5,
+      "description": "2-5 stages, each engine-testable. (quest_structure.json shape)",
+      "items": {
+        "type": "object",
+        "required": ["id", "objective", "condition", "change"],
+        "properties": {
+          "id": { "type": "string" },
+          "objective": { "type": "string", "description": "one sentence, player-statable" },
+          "condition": { "type": "string", "description": "ENGINE-TESTABLE: place reached / person spoken to / thing obtained / truth learned / roll passed. Never vague 'investigate further'." },
+          "change": { "type": "string", "description": "what shifts in the world when this stage lands" }
+        }
+      }
+    },
+    "routes": { "type": "object", "description": "tradition-keyed approaches; a quest with one solution is a lock, not a story. (quest_structure.json)" },
+    "outcomes": {
+      "type": "array", "minItems": 2, "maxItems": 4,
+      "description": "2-4 BRANCHED endings — which success, not success/fail. At least one outcome MUST carry an `arc_stage` effect (that is what makes this a world-arc quest and not a regional one).",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "summary", "narration", "effects"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "summary": { "type": "string" },
+          "narration": { "type": "array", "items": { "type": "string" } },
+          "effects": {
+            "type": "array", "minItems": 1,
+            "description": "machine-readable deltas. Same vocabulary as quest_structure.json PLUS `arc_stage`. At least one durable+findable effect required; at least one outcome must include an `arc_stage`.",
+            "items": {
+              "type": "object",
+              "required": ["type"],
+              "properties": {
+                "type": { "type": "string", "enum": ["npc_state", "disposition", "codex_fact", "world_event", "location_state", "quest_seed", "ally", "xp", "arc_stage"] }
+              }
+            }
+          }
+        }
+      }
+    },
+    "sharedBroadcast": {
+      "type": "boolean", "default": true,
+      "description": "world-arc outcomes are broadcast to the shared clock — every player's next load sees the change. Distinguishes an arc move (public) from a personal codex fact (private). Default true; an `arc_stage` effect implies it."
+    },
+    "publicFace": {
+      "type": "string",
+      "description": "the ONE-LINE public statement of what visibly changed, for the shared 'state of the world' surface (§3). NEVER contains the arc's GM-EYES-ONLY truth — only what any observer would see. Rating-lens applies."
+    }
+  },
+  "designLaws": [
+    "A world-arc quest MUST move a real arc. If arcStageFrom == arcStageTo across all outcomes, it is a regional quest wearing a world costume — reject.",
+    "The public face is mandatory and spoiler-free: the shared surface shows THAT the world moved and what an observer sees, never WHY at the truth layer.",
+    "Contested advancement is legitimate: two players can move one arc opposite ways. Backward motion is a feature and must read as one.",
+    "Everything quest_structure.json's designLaws require (no clean exit, never punish the route, findable later, someone permanently changed) still holds — a world quest is a quest first."
+  ]
+}

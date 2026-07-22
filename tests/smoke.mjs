@@ -6456,6 +6456,33 @@ await (async () => {
   check("196: the backfill mints a save's already-earned braids into customAbilities", (old.braids || []).length === 1 && Object.keys(old.customAbilities || {}).length === 1);
   step14.apply(old, { content: { abilities: catalog } });
   check("196: the backfill is idempotent — no double-mint on the next login", old.braids.length === 1);
+
+  // --- SNG-201: found once, known forever — shared braid recipes (adopt over duplicate) ---
+  const rp = await import("../engine/recipes.js");
+  // the first finder's ENRICHED braid becomes the recipe; a stub never promotes.
+  const firstDef = br.buildBraidDef(char, ["a", "b"], catalog, { authored: { name: "Perfect Inevitability", description: "The ending seen before it arrives.", emergentFunction: "foresee", tree: [{ name: "The Read", grants: "sees the ending", cannot: "unmakes nothing" }] }, functionVocab: fnVocab });
+  const recipe = rp.buildRecipeRecord(firstDef, { worldDay: 5, contributedBy: { playerKey: "erik", characterId: "silas", characterName: "Silas" } });
+  check("201 §1: an ENRICHED braid becomes a recipe carrying name/prose/emergent, keyed by the pairing", recipe && recipe.braidKey === "a+b" && recipe.name === "Perfect Inevitability" && recipe.emergentFunction === "foresee");
+  check("201 §1: the recipe shares NO numbers — tier/levelReq/energy are absent (they derive from the adopter)", !("levelReq" in recipe) && !("tier" in recipe) && !("energyCost" in recipe));
+  const stubDef = br.buildBraidDef(char, ["a", "b"], catalog); // no authored → stub, enriched === false
+  check("201 §1: a STUB never promotes (the failure fallback is never the world's recipe)", rp.buildRecipeRecord(stubDef, {}) === null);
+  // a SECOND finder at DIFFERENT ranks adopts: same name/emergent, but the numbers are the ADOPTER's own.
+  const store = rp.ensureRecipeStore({});
+  rp.mergeRecipes(store, [recipe]);
+  check("201: recipeFor finds the landed recipe by pairing (order-independent)", rp.recipeFor(store, ["b", "a"]).name === "Perfect Inevitability");
+  const weakChar = { level: 3, abilities: [{ abilityId: "a", level: 1 }, { abilityId: "b", level: 1 }], practice: { coActivations: { "a+b": 5 } } };
+  const adoptedDef = br.buildBraidDef(weakChar, ["a", "b"], catalog, { authored: rp.recipeToAuthored(rp.recipeFor(store, ["a", "b"])), functionVocab: fnVocab });
+  check("201 §2: the adopter gets the world's NAME + EMERGENT reach", adoptedDef.name === "Perfect Inevitability" && adoptedDef.functions.includes("foresee"));
+  check("201 §2: but the NUMBERS are the adopter's own (rank-1 parents → lower tier than the first finder's rank-3)", adoptedDef.levelReq < firstDef.levelReq && adoptedDef.energyCost <= firstDef.energyCost);
+  // merge is first-PUT-wins: a second finder does NOT overwrite the landed recipe; they adopt it.
+  const rivalRecipe = rp.buildRecipeRecord(br.buildBraidDef(weakChar, ["a", "b"], catalog, { authored: { name: "Death's Order", description: "x", emergentFunction: "bind", tree: [{ name: "r", grants: "g", cannot: "c" }] }, functionVocab: fnVocab }), { worldDay: 6, contributedBy: { playerKey: "kaylyn", characterId: "brk", characterName: "Brooklyn" } });
+  const merged = rp.mergeRecipes(store, [rivalRecipe]);
+  check("201 §3.2: first-PUT-wins — a later finder does NOT overwrite the world-name; they ADOPT it (one pairing, one recipe)", store.recipes["a+b"].name === "Perfect Inevitability" && merged.adopted.length === 1 && merged.adopted[0].recipe.name === "Perfect Inevitability" && merged.published.length === 0);
+  // a genuinely NEW pairing publishes as first-finder.
+  const newRecipe = rp.buildRecipeRecord(br.buildBraidDef({ level: 6, abilities: [{ abilityId: "a", level: 2 }], practice: {} }, ["a", "b"], catalog, { authored: { name: "Newthing", description: "y", emergentFunction: "ward", tree: [{ name: "n", grants: "g", cannot: "c" }] }, functionVocab: fnVocab }), { worldDay: 7, contributedBy: { playerKey: "p", characterId: "c", characterName: "C" } });
+  newRecipe.braidKey = "a+c"; // pretend a different pairing
+  const merged2 = rp.mergeRecipes(store, [newRecipe]);
+  check("201 §3.2: a genuinely new pairing lands as first-finder", merged2.published.length === 1 && store.recipes["a+c"]);
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

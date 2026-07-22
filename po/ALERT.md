@@ -1,5 +1,34 @@
 # PO ALERT
 
+> ## 🌊 SNG-204 — THE WAKE ENGINE (Aevi, 2026-07-21) — spec'd + pressure vocabulary shipped, awaiting ROUND 2
+> `po/SPEC_SNG-204_wake_engine.md`. Erik: *"when big quests complete/advance they create WAKE the GM
+> generates from — imagine the thing below wakes and walks the world, what are the next quests and arcs?
+> The generation engine picks these up and continues them with inference based on lore + the outcome."*
+>
+> **THE FINDING: the loop is open by one missing reader.** `applyQuestEffects` (`quests.js:278`) writes
+> `quest_seed` (`:320` — pins *"A thread opens: {text}"*) and `world_event` (`:306`) to durable/findable
+> stores — and **NOTHING reads them back to generate.** `generate()` (`generate.js:317`) takes a generic
+> context with no triggering-consequence notion; the world-tick never reads seeds/worldEvents to spawn.
+> So `quest_seed`'s own text — *"a thread opens"* — is a promise the engine never keeps. **Closing that
+> reader IS the feature.**
+>
+> **My half shipped:** the spec (wake contract, lore-bounded inference discipline, chain bounds), and the
+> **`pressureOnAdvance` vocabulary on all 18 greater-arc stage transitions** — the authored inference seed
+> that tells the generator what each advance makes MORE LIKELY (e.g. What Wakes Beneath 2→3 pushes toward
+> the seal-vs-open schism going live + Watcher-fragments activating + a race to the aperture). This is the
+> content that makes wake-generation land in-lore instead of generic. `connectsTo` already maps cross-arc
+> pressure (WWB feeds arc_manifestation_storm).
+>
+> **CCode's half (the loop-closing engine):** promote applied-effects → a wake record with open/close
+> lifecycle; **wake-aware `generate()`** (triggering wake in context; world-tick or resolution reads open
+> wakes and generates against them); chain bounds (decay, depth-throttle, de-dup, cost governor);
+> `connectsTo`-driven cross-arc pressure. **Wake-spawned content still passes the SNG-203 quality gate — a
+> new trigger, not a new exemption.**
+>
+> **Sequencing:** SNG-204 is the KEYSTONE but depends on SNG-203's tiers + `arc_stage` — it builds AFTER
+> the SNG-203 engine. §OQ4 (two players resolve one world-wake differently → contest-winner's aftermath, or
+> both as competing net-vector pressure?) is the SAME question as SNG-203 §OQ2 — decide them together.
+
 > ## 📐 SNG-203 — THE QUEST HIERARCHY (Aevi, 2026-07-21) — spec'd, awaiting ROUND 2
 >
 > `po/SPEC_SNG-203_quest_hierarchy.md`. Erik's vision: **quests AND world arcs coexist; world arcs are

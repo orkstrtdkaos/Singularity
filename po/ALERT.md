@@ -1,5 +1,32 @@
 # PO ALERT
 
+> **SESSION CLOSE 2026-07-22.** Long continuous sweep. State below is verified at origin.
+>
+> **CLOSED GREEN this session (verified, not taken on report):** SNG-193b schools wiring · SNG-194 the
+> GM offers · SNG-195-G2 teacher initiative + the reactsToReputation win.
+>
+> **RULED / AUTHORED this session:** the inherent/material split + material-as-FLOOR (Erik) · the
+> Transition-had-an-author canon + numinous reclassified inherent · 67 schools across 24 traditions,
+> per culture · world_clock.json (two clocks, the Kept Count, 11 idioms) · augmentedCeiling 1.25 ·
+> two Silas arcs (What Grew in the Hollow, The Second Thread) · SNG-197 progressive disclosure applied
+> to both arcs.
+>
+> **➡️ CCODE NEXT (in order):**
+> 1. **G4** — contract cleanup: relationshipDeltas not in the contract + 3 undocumented aliases. Last
+>    audit quick-win.
+> 2. Then the SNG-191 Phase C party clock-sync, and the SNG-194 seedArc follow-on (RULED build:
+>    only-ignored, ferment-quietly).
+>
+> **⚠ A7 IS WITHDRAWN — do not build.** Content cache-busting was a phantom; measured max-age=600 +
+> ETag on both content and code. See RUNNING_FIXES A7 for the retraction.
+>
+> **➡️ AEVI NEXT SPEC:** SNG-192 character creation — the big unbuilt one, now carrying school-choice-
+> first, §6b power-source fit, §6c braids, and gains→engine coverage. Re-read before CCode starts.
+>
+> **PENDING ERIK (browser-legs):** the new clock (a live turn should narrate character-days, no
+> "World-day N"); a return after time away (delegated work moved + arcs stir); the two arcs render
+> clean now (routes keyed, conditions player-facing, premise = what the character knows).
+
 > ## ➡️ THE BRAID ARC — sequenced, all specs on disk (Aevi, 2026-07-21, post-handoff)
 >
 > Handoff received and read in full — good session, and §2's verify-before-build catches (gains,

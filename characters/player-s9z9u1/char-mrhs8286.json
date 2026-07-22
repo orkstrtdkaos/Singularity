@@ -104,7 +104,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.23191432098702813,
+    "spectrumId": -0.22031860493767672,
     "violence_peace": 0.1030845625,
     "chaos_order": 0.25700971191540173,
     "mechanical_spiritual": 0.2580372847905887,
@@ -1766,51 +1766,93 @@
         "player": "Ask her if the lingerie she purchases was magically enhanced for conception.",
         "summary": "Silas asked whether the iridescent fabric was crafted toward conception; Pell named it beautiful work and nothing more, dry and exact, and the room settled into the quiet before sleep.",
         "narration": "The dark is quiet and complete. Pell is still against him, her chin at his collarbone, her breathing even and slow.\n\nSilas asks it plainly, the way he asks most things when the hour is late and there is no reason to dress a question in ceremony.\n\nHe asks whether the lingerie she bought — the black iridescent fabric, the shimmer still moving at the edge of reach with no light to account for it — whether it was made for this. Crafted for it, specifically. Enhanced toward conception.\n\nPell is quiet for a moment.\n\n\"No,\" she says finally. Her voice is the register she uses when she is being exact. \"It was made well. That is all it is.\"\n\nA pause. Her thumb resumes its slow movement at his side.\n\n\"The Wrights who make that cloth work in beauty,\" she says. \"Not in outcomes.\" Another small pause, and then, dry and level: \"We did the rest ourselves.\"\n\nHuginn shifts in its corner. Once. The sound of a bird that has heard enough and is now repositioning for sleep.\n\nThe shimmer at the fabric's edge continues its slow, sourceless movement. The thing is beautifully made, and Pell has named what it is and what it is not, and the room has no more business tonight except the quiet that follows an ending well attended."
+      },
+      {
+        "player": "The Wright's must have made you then... if they work in beauty.  Did you notice the vibrations from under the ground?",
+        "summary": "Silas and Pell settle into the dark of Ama's house in Cairnhold — the child named, the fabric named, the floor's buried hum confirmed between them, and sleep arriving at last.",
+        "narration": "The dark is still.\n\nPell makes a small sound that is not quite a laugh — the sound she makes when something is technically correct and she finds that satisfying. \"The Wright's make most things worth looking at,\" she says. \"Yes. Probably one of ours.\"\n\nA pause. Her thumb has resumed its slow movement at his side.\n\n\"The fabric is well within what a journeyman does in a good season,\" she says. \"Nothing exotic in it. Just someone who cared about the hand-feel and the finish. That is not nothing.\"\n\nHer tone closes the question cleanly and without ceremony, the way she closes most questions when the answer is plain and she has given it.\n\nThen, a beat later, she lifts her chin slightly.\n\n\"The floor,\" she says. Her voice has shifted — not alarmed, just attentive. The shift a diagnostician makes when a detail they filed away resurfaces. \"Once. Low and tonal. I noticed it.\"\n\nShe settles again, unhurried.\n\n\"Not a creak,\" she says. \"Not the house settling. Something underneath it — a held note, then gone.\" Her thumb resumes. \"Huginn noticed it too. I watched him move.\"\n\nShe says nothing else. She does not need to. She has named it, filed it alongside the other things they will think about in the morning, and her breathing returns to its even pace.\n\nThe room holds its quiet. The window-glow is unchanged. Outside, early spring does nothing dramatic."
       }
     ],
     "lastTurn": {
-      "narration": "The dark is quiet and complete. Pell is still against him, her chin at his collarbone, her breathing even and slow.\n\nSilas asks it plainly, the way he asks most things when the hour is late and there is no reason to dress a question in ceremony.\n\nHe asks whether the lingerie she bought — the black iridescent fabric, the shimmer still moving at the edge of reach with no light to account for it — whether it was made for this. Crafted for it, specifically. Enhanced toward conception.\n\nPell is quiet for a moment.\n\n\"No,\" she says finally. Her voice is the register she uses when she is being exact. \"It was made well. That is all it is.\"\n\nA pause. Her thumb resumes its slow movement at his side.\n\n\"The Wrights who make that cloth work in beauty,\" she says. \"Not in outcomes.\" Another small pause, and then, dry and level: \"We did the rest ourselves.\"\n\nHuginn shifts in its corner. Once. The sound of a bird that has heard enough and is now repositioning for sleep.\n\nThe shimmer at the fabric's edge continues its slow, sourceless movement. The thing is beautifully made, and Pell has named what it is and what it is not, and the room has no more business tonight except the quiet that follows an ending well attended.",
-      "sceneSummary": "Silas asked whether the iridescent fabric was crafted toward conception; Pell named it beautiful work and nothing more, dry and exact, and the room settled into the quiet before sleep.",
+      "narration": "The dark is still.\n\nPell makes a small sound that is not quite a laugh — the sound she makes when something is technically correct and she finds that satisfying. \"The Wright's make most things worth looking at,\" she says. \"Yes. Probably one of ours.\"\n\nA pause. Her thumb has resumed its slow movement at his side.\n\n\"The fabric is well within what a journeyman does in a good season,\" she says. \"Nothing exotic in it. Just someone who cared about the hand-feel and the finish. That is not nothing.\"\n\nHer tone closes the question cleanly and without ceremony, the way she closes most questions when the answer is plain and she has given it.\n\nThen, a beat later, she lifts her chin slightly.\n\n\"The floor,\" she says. Her voice has shifted — not alarmed, just attentive. The shift a diagnostician makes when a detail they filed away resurfaces. \"Once. Low and tonal. I noticed it.\"\n\nShe settles again, unhurried.\n\n\"Not a creak,\" she says. \"Not the house settling. Something underneath it — a held note, then gone.\" Her thumb resumes. \"Huginn noticed it too. I watched him move.\"\n\nShe says nothing else. She does not need to. She has named it, filed it alongside the other things they will think about in the morning, and her breathing returns to its even pace.\n\nThe room holds its quiet. The window-glow is unchanged. Outside, early spring does nothing dramatic.",
+      "sceneSummary": "Silas and Pell settle into the dark of Ama's house in Cairnhold — the child named, the fabric named, the floor's buried hum confirmed between them, and sleep arriving at last.",
       "choices": [
         {
-          "label": "Sleep — let the night close and wake to the road in the morning.",
+          "label": "Sleep — let the morning come",
           "attribute": "physical",
-          "subAttribute": "strength",
+          "subAttribute": "agility",
           "difficulty": 0,
+          "trivial": true,
           "intentTags": [
             "sustain"
-          ],
-          "trivial": true
+          ]
         },
         {
-          "label": "Ask about the scar below her left shoulder blade — the parenthesis she has never explained.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "comfort"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask where she found the fabric — she has not said.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
+          "label": "Lie awake and use Order-Sense on the floor — read what the structure of the house sits on",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "chaos_order": 0.5,
+            "mechanical_spiritual": 0.3
+          },
+          "difficulty": 15,
+          "trivial": false,
           "intentTags": [
             "study"
           ],
-          "trivial": true
+          "abilityId": "order_sense",
+          "energyCost": 2
         },
         {
-          "label": "Say nothing more. Hold her in the dark until sleep takes you both.",
-          "attribute": "physical",
-          "subAttribute": "strength",
+          "label": "Wake Huginn quietly and ask what he made of the tone",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
+          "trivial": true,
           "intentTags": [
+            "study"
+          ]
+        },
+        {
+          "label": "Sleep — but set a light watch, the Boundary-Stone ward seated at the door",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "trivial": true,
+          "intentTags": [
+            "guard",
             "sustain"
           ],
-          "trivial": true
+          "abilityId": "boundary_stone",
+          "energyCost": 2
+        }
+      ],
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "note": "Named the iridescent fabric as standard Wright journeyman work — no enhancement toward conception. Confirmed she noticed the floor's buried hum and watched Huginn move when it happened.",
+          "learned": [
+            "The iridescent fabric is Wright-made at journeyman level — beauty only, nothing exotic.",
+            "She noticed the floor's tonal vibration and flagged Huginn's response to it."
+          ],
+          "statusNote": "Settled in Silas's quarters in Ama's house — the questions named, sleep arriving.",
+          "status": "active"
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "precursor-signs-in-the-valley",
+          "label": "Precursor Signs in the Valley",
+          "kind": "mystery",
+          "fact": "Pell confirmed she heard the buried hum from beneath Ama's house floor on World-day 12 night — a single low tonal note, then gone. She watched Huginn move in response. Two witnesses, one event.",
+          "links": [
+            "order-sense",
+            "the-water-crisis",
+            "what-the-water-remembers",
+            "the-second-thread"
+          ]
         }
       ],
       "scene": {
@@ -1818,11 +1860,11 @@
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Head lifted slightly, chin at his collarbone, thumb moving slow at his side — present and settled."
+            "state": "Settled against Silas, breathing even, the floor's hum named and filed, sleep arriving."
           },
           {
             "name": "Huginn",
-            "state": "Repositioned in the corner, face to wall, the sound of a bird that has decided this is a matter for sleep."
+            "state": "In the corner, face to wall — confirmed by Pell to have moved when the hum happened. Still now."
           }
         ],
         "objects": [
@@ -1831,38 +1873,20 @@
           "Tallow stub — spent, dark",
           "Pell's bracer on the floor",
           "Pell's shirt — set aside",
-          "The black iridescent fabric — at the edge of reach, shimmer still moving in no light",
+          "The black iridescent fabric — at the edge of reach, shimmer still in no light",
           "Memory (spear) leaned in the corner",
           "Wash-basin, water cooled, cloth folded on its rim"
         ],
         "threads": [
-          "Pell said she didn't name her want for fear it would sound like pressure — thread named and closed, both of them have spoken it.",
+          "The buried hum beneath the floor — named by both Pell and Huginn's reaction; not yet read.",
           "The parenthesis scar below Pell's left shoulder blade — she has never explained it.",
           "The March-or-Marsh question — a door she has not yet decided to open.",
-          "The black iridescent fabric — where did she find it; she has not said.",
-          "Something beneath the floorboards hummed once — a buried tone in the structure of the house, now gone."
+          "The black iridescent fabric — where she found it, still unsaid."
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "pell-ran-marsh",
-          "name": "Pell Ran Marsh",
-          "note": "Named the iridescent fabric plainly: made well, not crafted toward an outcome. Dry, exact, unhurried. The Wrights who make it work in beauty, not in results.",
-          "learned": [
-            "The iridescent fabric is Wright-made for beauty, not enhanced toward conception — Pell named this directly."
-          ],
-          "statusNote": "In Silas's quarters in Ama's house in Cairnhold — the night settled, the question answered, sleep close."
-        }
-      ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "xp": 0
-      },
       "timeOps": {
-        "hoursPassed": 0,
-        "why": "A brief exchange only — no time has passed beyond the beat."
+        "hoursPassed": 0.25,
+        "why": "a short quiet exchange in the dark before sleep"
       }
     },
     "sceneState": {
@@ -1870,11 +1894,11 @@
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Head lifted slightly, chin at his collarbone, thumb moving slow at his side — present and settled."
+          "state": "Settled against Silas, breathing even, the floor's hum named and filed, sleep arriving."
         },
         {
           "name": "Huginn",
-          "state": "Repositioned in the corner, face to wall, the sound of a bird that has decided this is a matter for sleep."
+          "state": "In the corner, face to wall — confirmed by Pell to have moved when the hum happened. Still now."
         }
       ],
       "objects": [
@@ -1883,16 +1907,15 @@
         "Tallow stub — spent, dark",
         "Pell's bracer on the floor",
         "Pell's shirt — set aside",
-        "The black iridescent fabric — at the edge of reach, shimmer still moving in no l",
+        "The black iridescent fabric — at the edge of reach, shimmer still in no light",
         "Memory (spear) leaned in the corner",
         "Wash-basin, water cooled, cloth folded on its rim"
       ],
       "threads": [
-        "Pell said she didn't name her want for fear it would sound like pressure — thread named and closed, both of them have spoken it.",
+        "The buried hum beneath the floor — named by both Pell and Huginn's reaction; not yet read.",
         "The parenthesis scar below Pell's left shoulder blade — she has never explained it.",
         "The March-or-Marsh question — a door she has not yet decided to open.",
-        "The black iridescent fabric — where did she find it; she has not said.",
-        "Something beneath the floorboards hummed once — a buried tone in the structure of the house, now gone."
+        "The black iridescent fabric — where she found it, still unsaid."
       ]
     }
   },
@@ -2739,7 +2762,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d12] Took the lead fully in the last of the tallow light — answered 'more' without softening it, mouth at his throat, hand at his ribs. The dark is hers.",
         "[d12] Led fully — shirt off without ceremony, the word 'mold you' tested and accepted, settled in to work with a craftsman's unhurried patience.",
         "[d12] Held still and let Silas look — received the moment plainly, said 'there' as a receipt.",
         "[d12] Received 'goddess-touched' with dry confirmation rather than flattery — the expression of a smith whose material just showed better grain than expected. Moved past ceremony and into the work without hesitation.",
@@ -2748,17 +2770,18 @@
         "[d12] Answered the soul bond's felt question without words — weight shifted forward, choice made at full load, decisive and wholly hers. Unhurried.",
         "[d12] The crescendo reached together — the soul bond's choice held and made complete a second time, in the only register that needs no words. She is close, unhurried, not releasing.",
         "[d12] Named plainly that she felt the merger seat through the bond, and that she had wanted it before Silas asked — held it back for fear it would read as pressure, and waited for the bond to carry it instead.",
-        "[d12] Named the iridescent fabric plainly: made well, not crafted toward an outcome. Dry, exact, unhurried. The Wrights who make it work in beauty, not in results."
+        "[d12] Named the iridescent fabric plainly: made well, not crafted toward an outcome. Dry, exact, unhurried. The Wrights who make it work in beauty, not in results.",
+        "[d12] Named the iridescent fabric as standard Wright journeyman work — no enhancement toward conception. Confirmed she noticed the floor's buried hum and watched Huginn move when it happened."
       ],
       "knownFacts": [
-        "Silas noticed the iridescent fabric specifically and named it aloud — she registered that it was seen.",
-        "Silas speaks the name Ran in this context — she now knows the weight he puts on it here.",
         "The name Ran in Silas's mouth has grain — she hears the difference between a signal and a claim.",
         "The soul bond asked what language could not — she understood it before it finished forming, and answered in the only register that suited her: a commitment, not a yielding.",
         "The soul bond's question answered again at the crescendo — the choice to try for a child held at full load, not a yielding but a holding.",
         "She felt the soul-merger seat at the moment it happened — bond carried the information cleanly.",
         "She wanted the child before Silas asked, and chose silence over what might have sounded like pressure.",
-        "The iridescent fabric is Wright-made for beauty, not enhanced toward conception — Pell named this directly."
+        "The iridescent fabric is Wright-made for beauty, not enhanced toward conception — Pell named this directly.",
+        "The iridescent fabric is Wright-made at journeyman level — beauty only, nothing exotic.",
+        "She noticed the floor's tonal vibration and flagged Huginn's response to it."
       ],
       "skillsObserved": [
         "precise diagnosis of a failed rune-work attempt from positio",
@@ -2769,7 +2792,7 @@
         "reading a structural mark's pressure and interval from an ir"
       ],
       "status": "active",
-      "statusNote": "In Silas's quarters in Ama's house in Cairnhold — the night settled, the question answered, sleep close.",
+      "statusNote": "Settled in Silas's quarters in Ama's house — the questions named, sleep arriving.",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 12
@@ -4303,7 +4326,7 @@
     "lastTickWorldDay": 22,
     "lastCanonWorldDay": 22,
     "lastGenCount": 548,
-    "turnsSinceOffer": 17,
+    "turnsSinceOffer": 18,
     "recentOffers": [
       {
         "thing": "The shadow-build showed Calvar's drainage failure precisely — the sleeve geometry, the collar, the east-bend junction — before it showed…",
@@ -4770,7 +4793,8 @@
           "[d2] The sealed original east-channel bed within Millbrook carries a CCW stain 30-40 years old — the system's footprint reaches into the village itself. The channel seal was deliberate containment, part of",
           "[d2] Order-Sense on Fen's intake confirms a three-gate staged release sequence running southwest to northeast: Fen's intake (southernmost), east furlong valve (middle), buried vault head northeast of the w",
           "[d6] A thin line of brightness moved through water pooled in the Hub Coliseum's upper bench seam — traveling laterally and slow, like a thread drawn from beneath. Gone in three seconds. Not lamplight, not sun. Huginn noticed it.",
-          "[d12] A single buried hum rose through the floorboards of Ama's house in Cairnhold and faded in three heartbeats — not a structural creak, something tonal. Huginn noted it. The house sits on the center lane, close to the cairn-line."
+          "[d12] A single buried hum rose through the floorboards of Ama's house in Cairnhold and faded in three heartbeats — not a structural creak, something tonal. Huginn noted it. The house sits on the center lane, close to the cairn-line.",
+          "[d12] Pell confirmed she heard the buried hum from beneath Ama's house floor on World-day 12 night — a single low tonal note, then gone. She watched Huginn move in response. Two witnesses, one event."
         ],
         "links": [
           "order-sense",
@@ -5714,21 +5738,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 10.468968081929324,
-    "cerebral": 14.18044008138418,
-    "social": 12.651407737132212,
-    "generous": 2.0958220258277334,
-    "cautious": 3.498888638652215,
-    "physical": 0.11334031376855598,
-    "risky": 0.11885977250372434,
-    "ruthless": 0.03789713952679371,
-    "carousing": 0.41283147230064743,
-    "amorous": 12.592501012380408,
-    "patient": 1.0125380543642735,
-    "stealth": 0.014689028100262912,
-    "devotion": 0.30008340305650183,
-    "craft": 0.8831576248601353,
-    "leadership": 0.07476878323494007
+    "strategic": 10.20724387988109,
+    "cerebral": 14.825929079349576,
+    "social": 13.335122543703907,
+    "generous": 2.04342647518204,
+    "cautious": 3.41141642268591,
+    "physical": 0.11050680592434207,
+    "risky": 0.11588827819113123,
+    "ruthless": 0.036949711038623864,
+    "carousing": 0.40251068549313124,
+    "amorous": 12.277688487070897,
+    "patient": 0.9872246030051666,
+    "stealth": 0.01432180239775634,
+    "devotion": 0.2925813179800893,
+    "craft": 0.8610786842386319,
+    "leadership": 0.07289956365406657
   },
   "aptitudes": [
     "strategist",
@@ -5737,7 +5761,7 @@
     "sage",
     "charmer"
   ],
-  "actionCount": 654,
+  "actionCount": 655,
   "grantsVersion": 1,
   "reconcileVersion": 16,
   "gallery": [
@@ -6087,8 +6111,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784763192992,
-  "rev": 1023,
+  "updatedAt": 1784763290956,
+  "rev": 1024,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8100,7 +8124,7 @@
   "regionsKnown": {
     "valley": 435,
     "the_palelands": 6,
-    "the_center": 46
+    "the_center": 47
   },
   "foreclosed": [
     "rootkin",
@@ -8214,10 +8238,10 @@
     {
       "id": "sess-10",
       "startedAt": "2026-07-22T20:59:08.612Z",
-      "lastAt": "2026-07-22T23:33:12.991Z",
+      "lastAt": "2026-07-22T23:34:50.955Z",
       "startDay": 22,
       "endDay": 22,
-      "beats": 20
+      "beats": 21
     }
   ],
   "company": [
@@ -8405,22 +8429,22 @@
     "the_crossing": "https://image.pollinations.ai/prompt/The%20Crossing%3A%20Every%20axis%20crosses%20here%20at%20nothing%2C%20and%20the%20result%20is%20not%20grey%20%E2%80%94%20it%20is%20CROWDED.%20The%20Crossing%20leans%20toward%20no%20pole%2C%20which%20is%20precisely%20why%20it%20can%20hold%20them%20all%3A%20an%20Umbral%20and%20a%20Blazeborn%20drink%20at%20the%20same%20table%20because%20neither%20has%20the%20standing%20to%20make%20the%20other%20leave.%20The%20poles%20are%20lonely%20places.%20The%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=24144&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 32,
-    "choices": 32,
+    "sceneSummary": 33,
+    "choices": 33,
     "characterDeltas": 15,
-    "scene": 32,
-    "npcUpdates": 30,
+    "scene": 33,
+    "npcUpdates": 31,
     "factUpdates": 5,
     "placeUpdates": 2,
-    "codexUpdates": 13,
-    "timeOps": 28,
+    "codexUpdates": 14,
+    "timeOps": 29,
     "imagePrompt": 1,
     "sceneEnded": 8,
     "itemUpdates": 1,
     "questUpdates": 1,
     "offer": 2
   },
-  "_opTurns": 32,
+  "_opTurns": 33,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

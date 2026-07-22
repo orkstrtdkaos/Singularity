@@ -1,5 +1,33 @@
 # PO ALERT
 
+> ## 📐 SNG-203 — THE QUEST HIERARCHY (Aevi, 2026-07-21) — spec'd, awaiting ROUND 2
+>
+> `po/SPEC_SNG-203_quest_hierarchy.md`. Erik's vision: **quests AND world arcs coexist; world arcs are
+> SHARED and visibly progressing (it IS a shared world); each tradition has a find-teacher → learn-ultimate
+> path; a six-tier quest hierarchy, every tier GM-generatable.**
+>
+> Six tiers: (1) world-arc quest [SHARED stage advance] · (2) tradition-arc + player-arc · (3) augmenting ·
+> (4) regional · (5) local · (6) npc/errand. **Key structural insight: `quest_structure.json` is already
+> tiers 3–5** — the real new work is a heavier schema above (world-arc, carries shared-stage machinery) and
+> a lighter one below (npc_quest, drops branched-outcome). So: **two new schemas + tradition arcs**, not six
+> systems.
+>
+> **⚠️ CORRECTION LOGGED (me, this session):** I overstepped — edited `manifest.json` + `world/regions/valley.json`
+> + retired `water_crisis` unilaterally. Those are engine/world-state = CCode's lane. **All reverted; engine
+> is back to prior state; water_crisis is active exactly as before.** The only thing I kept is the additive
+> content: the quest `what_the_water_remembers` (validated vs quest_structure) + a reframed claimed-node on
+> arc_what_wakes_beneath. **The water-crisis wiring question is now IN this spec as a CCode decision (§7.4,
+> §OQ1) where it belonged.**
+>
+> **My deliverables (prose/schema/content — my lane):** 3 new schemas · numbered stages authored onto the 5
+> greater arcs (the missing floor) · one exemplar per new tier (incl. the **ashwarden tradition arc**, Silas's
+> own, playable) · water-quest reclassified as the tier-1 exemplar. **CCode's (structure):** loaders/GEN_TYPES,
+> the shared world-arc **progress surface** everyone reads, contested-advancement resolution, npc_quest→quest
+> promotion, and the tier-1-stage ↔ event-system architecture call.
+>
+> **§OQ5:** schema-authoring (my part) is parallelizable with your braid build — I can produce the schemas +
+> exemplar content without blocking on engine work. Say whether to start now or queue behind the braid arc.
+
 > **SESSION CLOSE 2026-07-22.** Long continuous sweep. State below is verified at origin.
 >
 > **CLOSED GREEN this session (verified, not taken on report):** SNG-193b schools wiring · SNG-194 the

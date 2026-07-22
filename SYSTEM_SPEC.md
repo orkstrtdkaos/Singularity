@@ -757,10 +757,18 @@ and each is specced, not yet built:
   SNG-137's repair working, not a bug — but *which write set a rank ahead of practice* is the upstream
   question.
 
-### 25.7 Version intent — past 1.8.x
-The 1.8.x line has carried ~180 point releases and no longer signals scale. **Intent: the world-model
-cluster (25.1–25.5) is a generational change, not an increment.** Recommendation: cut **v1.9.0** as the line
-when the quest-hierarchy + wake + capable-GM work lands, headlined by *the world that continues itself.* A
-2.0 is reserved for a larger architectural break than this is. **The bump is a CCode action** (it touches
-`index.html`/`app.js`) taken on PM approval — recorded here as intent, not performed as a doc edit.
+### 25.7 Version intent — the road to 2.0 (PM-approved 2026-07-22)
+The 1.8.x line carried ~180 point releases and no longer signals scale. **Two milestones, both PM-approved:**
+
+- **v1.9.0 — the line opens here.** Cut when the first of the world-model cluster lands; 1.9.x carries the
+  cluster as it ships. Headline: *the world that continues itself.* This is the working line for everything
+  in §25.
+- **v2.0.0 — the cluster complete.** When **every current spec in §25 is delivered** — the quest hierarchy
+  (25.1), tradition arcs (25.2), shared progressing world (25.3), the wake engine (25.4), the capable-and-
+  fair GM Phase 1 (25.5), and the live-play break specs (25.6, SNG-197 part 2 · 198 · 199 · 200 · 202 · 205
+  · 206) — the game cuts **2.0.0**. 2.0 is not a further architectural break; **2.0 IS this cluster, whole.**
+  The generational change is the world-model becoming a system, and 2.0 marks the moment it is all live.
+
+**Both bumps are CCode actions** (they touch `index.html`/`app.js`) taken on this standing approval —
+recorded here as intent. 1.9.x is the road; **2.0.0 is reached when §25's rows are all struck.**
 

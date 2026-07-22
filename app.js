@@ -64,7 +64,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.189";
+const APP_VERSION = "1.8.190";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2081,7 +2081,7 @@ async function maybeTick() {
   await runWorldTick({ character, content: CONTENT, currentDay });
   try { await runGenerationTurn({ character, content: CONTENT }); } catch (e) { console.warn("[generation] turn skipped:", e?.message); } // SNG-191 §7: the world's own agenda foments on the world count
   await syncSharedWorld({ character, content: CONTENT }); // one valley for everyone (no-op without sync)
-  const offscreen = await advanceGeneratedOffscreen({ character }); // SNG-BATCH-9 Phase 2: your established grown world moved on while away
+  const offscreen = await advanceGeneratedOffscreen({ character, content: CONTENT }); // SNG-BATCH-9 Phase 2 + SNG-198B: your grown world AND the people/great figures you know moved on while away
   if (offscreen && offscreen.length) autoVerifyLeg("b9p2-offscreen", "an established entity advanced offscreen; away-digest dated"); // SNG-051 auto-verify
   // SNG-BATCH-9 Phase 3: earn nominated entities into shared canon + read the shared world back
   // through THIS viewer's rating-lens. No-op without sync. Never throws.

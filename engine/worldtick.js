@@ -375,8 +375,41 @@ function wantProgressLine(ws, id) {
   return `${st.progress}/${WANT_THRESHOLD} of the way there${st.lastOutcome === "problem" ? " (last tick: a problem)" : st.lastOutcome === "stall" ? " (last tick: stalled)" : ""}`;
 }
 
-export async function advanceGeneratedOffscreen({ character, evolveFn = aiGeneratedEvolution, now = Date.now() } = {}) {
-  if (!character?.generated) return [];
+/** SNG-198B §3: the offscreen POPULATION — everyone whose life plausibly moves while the player is away,
+ *  across the sources §1 kept separate, unified into a common {id, name, kind, descriptor, source} the
+ *  state machine advances. Generated figures + MET NPCs move on ordinary ticks; EPIC/LEGENDARY figures —
+ *  the specific gap Erik named, `legend.tier` that worldtick has NEVER read — move RARELY (a cooldown + a
+ *  rare roll, so the great become daily furniture if they tick every day: rarity is the point). Pure; rng
+ *  and the epic cooldown injected. */
+export function offscreenPopulation(character, content = {}, { worldDay = 0, rng = Math.random, lastEpicDay = null, minEpicGapDays = 6, epicRate = 0.34 } = {}) {
+  const out = [];
+  const seen = new Set();
+  const add = (id, name, kind, descriptor, source) => { if (id && name && !seen.has(id)) { seen.add(id); out.push({ id, name, kind, descriptor: descriptor || "their own ends", source }); } };
+  // 1. established/nominated generated figures + threads (the original Phase-2 population)
+  for (const r of [...generatedRecords(character, "npc"), ...generatedRecords(character, "arc")]) {
+    if (!r._gen || (r._gen.tier !== "established" && r._gen.tier !== "nominated")) continue;
+    const isArc = r._gen.type === "arc";
+    add(r.id, r.name, isArc ? "arc" : "npc", isArc ? (r.tendency || r.pressure) : (r.wants || r.role), "generated");
+  }
+  // 2. MET NPCs — anyone in the registry with a want the world can carry (their authored catalog want, else
+  //    their role/standing). Authored-vs-generated is not a reason a person's life stops (§3.1).
+  for (const n of Object.values(character?.npcRegistry || {})) {
+    if (n.status === "dead" || n.status === "departed") continue;
+    const want = content.npcs?.[n.id]?.wants || n.role || null;
+    if (!want) continue;
+    add(n.id, n.name, "npc", want, "met");
+  }
+  // 3. EPIC / LEGENDARY (§3.3). A cooldown + a rare roll → at most one great figure stirs, most ticks none.
+  const coolOk = lastEpicDay == null || (worldDay - lastEpicDay) >= minEpicGapDays;
+  if (coolOk && rng() < epicRate) {
+    const greats = (content.legends?.roster || []).filter(f => f.tier === "legendary" || f.tier === "epic");
+    if (greats.length) { const f = greats[Math.floor(rng() * greats.length)]; add(f.id, f.name, "npc", f.wants || f.signature, "legend"); }
+  }
+  return out;
+}
+
+export async function advanceGeneratedOffscreen({ character, content = {}, evolveFn = aiGeneratedEvolution, now = Date.now(), rng = Math.random } = {}) {
+  if (!character) return [];
   if (!character.worldState) character.worldState = initWorldState(1);
   const ws = character.worldState;
   const currentWorldDay = absoluteWorldDay(now);
@@ -385,31 +418,34 @@ export async function advanceGeneratedOffscreen({ character, evolveFn = aiGenera
   if (ws.lastTickWorldDay == null) { ws.lastTickWorldDay = currentWorldDay; return []; }
   if (elapsedWorldDays <= 0) return [];
 
-  // established generated figures/threads whose want has NOT already resolved (a resolved want stops
-  // ripening — §2: resolution is an end, not a treadmill).
-  const established = [...generatedRecords(character, "npc"), ...generatedRecords(character, "arc")]
-    .filter(r => r._gen && (r._gen.tier === "established" || r._gen.tier === "nominated"))
-    .filter(r => ws.wantProgress?.[r.id]?.status !== "resolved");
-  ws.lastTickWorldDay = currentWorldDay; // advance the baseline even if nothing's established yet
-  if (!established.length || !evolveFn) return [];
+  // SNG-198B: the widened population, minus anyone whose want has already resolved (§2 — a resolved want
+  // stops ripening). Batched (cap 4), never fanned out (§5 cost).
+  const population = offscreenPopulation(character, content, { worldDay: currentWorldDay, rng, lastEpicDay: ws.lastEpicOffscreenDay })
+    .filter(e => ws.wantProgress?.[e.id]?.status !== "resolved");
+  ws.lastTickWorldDay = currentWorldDay; // advance the baseline even if nobody's in scope
+  if (!population.length || !evolveFn) return [];
+  const batch = population.slice(0, 4);
 
   const news = [];
   try {
-    const result = await evolveFn({ character, entities: established.slice(0, 4), elapsedWorldDays, currentWorldDay, progressOf: (id) => wantProgressLine(ws, id) });
+    const result = await evolveFn({ character, entities: batch, elapsedWorldDays, currentWorldDay, progressOf: (id) => wantProgressLine(ws, id) });
     for (const dev of (result?.developments || []).slice(0, 4)) {
-      const rec = established.find(r => r.id === dev.entityId);
-      if (!rec || !dev.note) continue;
+      const fig = batch.find(e => e.id === dev.entityId);
+      if (!fig || !dev.note) continue;
       // SNG-198 §2: the outcome MOVES state (or honestly does not); the note is the colour on top of it.
       const outcome = WANT_OUTCOMES.includes(dev.outcome) ? dev.outcome : "progress";
-      const { moved, resolved } = applyWantOutcome(ws, rec.id, outcome, currentWorldDay);
+      const { moved, resolved } = applyWantOutcome(ws, fig.id, outcome, currentWorldDay);
+      if (fig.source === "legend" && moved) ws.lastEpicOffscreenDay = currentWorldDay; // stamp the epic cooldown
       const note = smartClamp(dev.note, 600);
-      rec._gen.offscreen = [...(rec._gen.offscreen || []), { worldDay: currentWorldDay, note, outcome }].slice(-8);
-      // accumulate the development on the entity's codex node so it "moved on" + surfaces
-      try { applyCodexUpdates(character, [{ entityId: rec.id, label: rec.name, kind: rec._gen.type === "npc" ? "person" : "lore", fact: `[while away] ${note}` }], { day: ws.lastTickDay ?? null }); } catch { /* codex mirror is a convenience */ }
+      // keep the per-record offscreen log for generated figures (their existing surface); the codex node
+      // carries the "moved on" fact for EVERYONE — generated, met, or legendary — all resolvable by id.
+      const genRec = character.generated?.npc?.[fig.id] || character.generated?.arc?.[fig.id];
+      if (genRec?._gen) genRec._gen.offscreen = [...(genRec._gen.offscreen || []), { worldDay: currentWorldDay, note, outcome }].slice(-8);
+      try { applyCodexUpdates(character, [{ entityId: fig.id, label: fig.name, kind: fig.kind === "arc" ? "lore" : "person", fact: `[while away] ${note}` }], { day: ws.lastTickDay ?? null }); } catch { /* codex mirror is a convenience */ }
       // News is DERIVED from what MOVED / a real problem / a resolution — not from every sentence (§2, §4b).
-      const headline = resolved ? `${rec.name}: ${note} — and that thread has run its course.`
-        : outcome === "problem" ? `${rec.name} has hit trouble — ${note}`
-        : `${rec.name}: ${note}`;
+      const headline = resolved ? `${fig.name}: ${note} — and that thread has run its course.`
+        : outcome === "problem" ? `${fig.name} has hit trouble — ${note}`
+        : `${fig.name}: ${note}`;
       if (moved || outcome === "problem") news.push({ text: headline, worldDay: currentWorldDay });
     }
   } catch (err) { console.warn("[offscreen-gen] skipped:", err.message); return []; }
@@ -425,9 +461,10 @@ export async function advanceGeneratedOffscreen({ character, evolveFn = aiGenera
 /** The AI pass: what an established generated figure/thread did offscreen, in-grain. SNG-198 §2: it is shown
  *  HOW FAR each want has already travelled (progressOf) and must return a countable OUTCOME, not just prose. */
 async function aiGeneratedEvolution({ entities, elapsedWorldDays, currentWorldDay, progressOf = () => "just beginning" }) {
-  const list = entities.map(e => e._gen.type === "npc"
-    ? `- ${e.id}: ${e.name} (npc) — wants: ${e.wants || "?"}; role: ${e.role || "?"}; progress so far: ${progressOf(e.id)}`
-    : `- ${e.id}: ${e.name} (arc) — tension: ${e.tendency || "?"}; pressure: ${e.pressure || "?"}; progress so far: ${progressOf(e.id)}`
+  const who = (e) => e.source === "legend" ? ", a GREAT FIGURE of the world — a rare, weighty stirring, not a small errand"
+    : e.source === "met" ? ", someone the player has met" : "";
+  const list = entities.map(e =>
+    `- ${e.id}: ${e.name} (${e.kind}${who(e)}) — ${e.kind === "arc" ? "tension" : "wants"}: ${e.descriptor || "?"}; progress so far: ${progressOf(e.id)}`
   ).join("\n");
   const sys = `You advance the OFFSCREEN lives of established figures and threads in an RPG while the player was away. ${elapsedWorldDays} world-days passed. Each figure has a want/tension and HOW FAR it has already travelled toward it. For AT MOST 4 of them, decide ONE small, grounded, IN-GRAIN development that follows from their want/tension + how far along they already are — no drastic turns, nothing that contradicts what's known, NOTHING set in the future. Choose an OUTCOME per figure: "progress" (moved closer), "stall" (no real movement this time), "problem" (a genuine setback — do not soften it), or "done" (the want is reached/resolved). Most figures move rarely — a "stall" is a fine, honest answer. Reply ONLY JSON: {"developments":[{"entityId":"exact-id","outcome":"progress|stall|problem|done","note":"one sentence: what moved (or didn't) for them while away"}]}`;
   const content = `World-days passed: ${elapsedWorldDays} (now world-day ${currentWorldDay}).\n\nESTABLISHED FIGURES & THREADS:\n${list}`;

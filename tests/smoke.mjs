@@ -15,7 +15,7 @@ import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, tou
 import { sanitizeScene, buildTurnContext, sanitizeIntent, narrativeRegister, ratingRegister, renderSceneHistory, tierParts, bluntnessDirective } from "../engine/gm.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, findExistingNpc, prettifyNpcName, relationshipBand, advanceBond, relationshipLabel, isPartnerAdjacent, knownPeopleAt, npcPortraitTier, backfillNpcGender } from "../engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
-import { initWorldState, runWorldTick, advanceGeneratedOffscreen, applyWantOutcome, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "../engine/worldtick.js";
+import { initWorldState, runWorldTick, advanceGeneratedOffscreen, applyWantOutcome, offscreenPopulation, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM } from "../engine/worldtick.js";
 import { assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "../engine/gambit.js";
 import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, autoAdvancePracticedRanks, markDefiningMoment, meetsStandingBar, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy, nativeGrantIdsFor, applyNativeGrants, retroNativeGrants, seedInnateSubstrate } from "../engine/progression.js";
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, liaisonMultiplierFor, roleBadges, COMPANY_ROLES } from "../engine/company.js";
@@ -6542,6 +6542,56 @@ await (async () => {
     await advanceGeneratedOffscreen({ character: c2, now: D(1) });
     const stalled = await advanceGeneratedOffscreen({ character: c2, now: D(5), evolveFn: async () => ({ developments: [{ entityId: e2.id, outcome: "stall", note: "nothing came of it" }] }) });
     check("198 §2: a stall accrues no news (colour without movement is not a headline)", stalled.length === 0 && c2.worldState.wantProgress[e2.id].progress === 0);
+  })();
+}
+
+// --- SNG-198B: the offscreen population widens to who the player KNOWS + the EPIC figures Erik named ---
+{
+  const content = {
+    npcs: { pell: { id: "pell", name: "Pell", wants: "to reopen the drowned sluice" } },
+    legends: { roster: [
+      { id: "kesh", name: "Kesh Ardent", tier: "legendary", wants: "to hold the last breach on the Redline" },
+      { id: "riff", name: "A Cutpurse", tier: "riffraff", wants: "a full purse" }
+    ] }
+  };
+  const character = {
+    npcRegistry: {
+      pell: { id: "pell", name: "Pell", role: "sluice-warden", status: "active" },
+      gone: { id: "gone", name: "Departed One", role: "traveler", status: "departed" }
+    }
+  };
+  // §3.1 met NPCs — a registry person with a want (authored catalog want beats the bare role) is in scope.
+  const metPop = offscreenPopulation(character, content, { worldDay: 10, rng: () => 0.99 }); // rng high → no epic this call
+  check("198B §3.1: a MET NPC with a want joins the offscreen population (authored catalog want)", metPop.some(e => e.id === "pell" && e.source === "met" && /drowned sluice/.test(e.descriptor)));
+  check("198B §3.1: a departed/dead NPC is never in scope (their life has ended for the world)", !metPop.some(e => e.id === "gone"));
+
+  // §3.3 EPIC — the specific gap: legend.tier, never read by worldtick until now. Rare, cooldown-gated,
+  // and only legendary/epic tiers (a riffraff cutpurse is not a world-mover).
+  const epicPop = offscreenPopulation(character, content, { worldDay: 10, rng: () => 0.01, lastEpicDay: null }); // rng low → epic fires
+  check("198B §3.3: an EPIC/LEGENDARY figure stirs on a rare roll (worldtick finally reads legend.tier)", epicPop.some(e => e.id === "kesh" && e.source === "legend" && /the last breach/.test(e.descriptor)));
+  check("198B §3.3: a riffraff-tier figure is NOT a world-mover (only the great stir offscreen)", !epicPop.some(e => e.id === "riff"));
+  const cooling = offscreenPopulation(character, content, { worldDay: 12, rng: () => 0.01, lastEpicDay: 10, minEpicGapDays: 6 });
+  check("198B §3.3: the epic cooldown holds — no great figure stirs again inside minEpicGapDays", !cooling.some(e => e.source === "legend"));
+
+  // §2 e2e — a MET NPC (no _gen record) advances through the SAME state machine + gets a codex 'while away' note.
+  await (async () => {
+    const c = { npcRegistry: { pell: { id: "pell", name: "Pell", role: "sluice-warden", status: "active" } }, codex: { topics: {} } };
+    const D = (n) => Date.UTC(2026, 7, n);
+    await advanceGeneratedOffscreen({ character: c, content, now: D(1), rng: () => 0.99 }); // anchor
+    const news = await advanceGeneratedOffscreen({ character: c, content, now: D(5), rng: () => 0.99,
+      evolveFn: async () => ({ developments: [{ entityId: "pell", outcome: "progress", note: "cleared the first grate" }] }) });
+    check("198B §2: a MET NPC advances countable state offscreen (wantProgress, no _gen record needed)", c.worldState.wantProgress.pell?.progress === 1);
+    check("198B §2: the met NPC's offscreen development lands on their codex node", (c.codex.topics.pell?.facts || []).some(f => /while away/.test(f) && /first grate/.test(f)) && news.length === 1);
+  })();
+
+  // §2 e2e — a LEGEND advancing stamps the epic cooldown (rarity governor is real state, not just a roll).
+  await (async () => {
+    const c = { codex: { topics: {} } };
+    const D = (n) => Date.UTC(2026, 7, n);
+    await advanceGeneratedOffscreen({ character: c, content, now: D(1), rng: () => 0.01 }); // anchor
+    await advanceGeneratedOffscreen({ character: c, content, now: D(5), rng: () => 0.01,
+      evolveFn: async ({ entities }) => ({ developments: entities.filter(e => e.source === "legend").map(e => ({ entityId: e.id, outcome: "progress", note: "held the breach another week" })) }) });
+    check("198B §3.3: a great figure moving STAMPS the epic cooldown (the governor is stateful)", c.worldState.lastEpicOffscreenDay === absoluteWorldDay(D(5)));
   })();
 }
 

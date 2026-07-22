@@ -1,5 +1,33 @@
 # PO ALERT
 
+> ## 🐛 SNG-205 — TWO LIVE BREAKS (Aevi, 2026-07-21) — both diagnosed at origin vs live saves
+> `po/SPEC_SNG-205_two_live_breaks.md`.
+>
+> **(1) Teva known nowhere (Cellaceron `char-mr4ejo8c`).** Verified: "Teva" appears **169×** in the save —
+> `establishedFacts` (keyed `{id:teva,subjectId:teva}`), codex (39), active quest text (12), activeScene,
+> deeds, portrait — **but is NOT in `npcRegistry`.** `knownPeopleAt` (`npcs.js:196`) iterates `npcRegistry`
+> ONLY. The registry write is op-gated (`meet` op, `reconcileGeneratedNpcWithMeet:22`) and **no meet op ever
+> fired for her** — she entered through narration. **This is the READ-SIDE TWIN of SNG-199 §5** (write skipped,
+> reader has no fallback). Fix: back-fill registry from established/quest/chronicle subjects; Cellaceron
+> recovers on next load. ⚠️ established ≠ mentioned; caps hold. **Decide together with SNG-199 — same seam.**
+>
+> **(2) The dials "don't do anything" (Loki `char-mrum8y4d`) — THREE things, not one:**
+> - **§2a R+/Blunt ARE built** (SNG-144, v1.8.104) and the R+ register is ratified to be exactly what Erik
+>   wants (*"take all of it… stopping short is the error"*). But SNG-144's own verify says the **live-prompt
+>   effect was never headless-testable.** CCode: check (i) is `ratingDetail` firing for Loki's profile, (ii)
+>   did R+/blunt persist to the READ (not stale-defaulted; adultVerified stuck), (iii) **is an over-cautious
+>   FLOORS block neutralizing the permission that precedes it** — most likely cause. ⛔ R+ ceiling/AUP do NOT
+>   move; this is about the permitted register reaching the page.
+> - **§2b "encounter rate" is wired to NOTHING** — `encounterRate`/`encounterFrequency`/`encounterChance` =
+>   **0 hits repo-wide.** Erik maxed it and saw no change because there is no consumer. Wire it or rename it.
+> - **§2c don't conflate** — frequency (2b) and register (2a) are different failures with different fixes;
+>   fixing one won't fix the other. **Product Q for Erik: was "encounter rate" your proxy for "charged
+>   romance more OFTEN"? If so that control may not exist at all** — a separate ask.
+>
+> **§3 common shape:** fact/config written, reader never fires (L1/L2, the batch's recurring family —
+> SNG-185/199/200). Worth an **unread-writes audit**: for every player-set control + established fact, is
+> there a live reader? CCode's judgment on whether that's one audit or case-by-case.
+
 > ## 🌊 SNG-204 — THE WAKE ENGINE (Aevi, 2026-07-21) — spec'd + pressure vocabulary shipped, awaiting ROUND 2
 > `po/SPEC_SNG-204_wake_engine.md`. Erik: *"when big quests complete/advance they create WAKE the GM
 > generates from — imagine the thing below wakes and walks the world, what are the next quests and arcs?

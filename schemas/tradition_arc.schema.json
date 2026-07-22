@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Tradition Arc",
+  "description": "SNG-203 tier 2. A three-beat authored path per tradition: find the teacher (The Finding) -> prove the tradition's values under pressure (The Proving) -> learn the capstone as a SCENE (The Ultimate). One per traditionId. Gates on DEMONSTRATED DISPOSITION, not level — you reach the ashwarden teacher by acting like one along the death axis. Ties into the teacher-gate already built (SNG-100b: tier IV-V abilities gate on teachers[trad]={met,willing}) and the capstone band (SNG-130). Each beat's `quest` is a full quest_structure-shaped object OR a ref to one; the arc is the ordered spine that binds the three. GM generates the other 23 via generate('tradition_arc', ctx) against this schema, in-grain for the tradition's axis/disposition/craft.",
+  "type": "object",
+  "required": ["id", "traditionId", "capstoneAbility", "beats"],
+  "properties": {
+    "schemaVersion": { "type": "integer" },
+    "id": { "type": "string", "description": "e.g. 'tradition_arc_ashwarden'" },
+    "traditionId": { "type": "string", "description": "MUST match a traditions.json traditionId" },
+    "teacher": {
+      "type": "object",
+      "description": "the tradition's master. A legend-tier or named NPC; may be authored or minted.",
+      "required": ["npcId", "name"],
+      "properties": {
+        "npcId": { "type": "string" },
+        "name": { "type": "string" },
+        "disposition": { "type": "string", "description": "what the teacher embodies — the tradition's values made a person" }
+      }
+    },
+    "capstoneAbility": {
+      "type": "string",
+      "description": "the ability id the tradition's Ultimate beat makes learnable. MUST reference an existing ability (SNG-203 §4 guard: verify capstone coverage before authoring the Proving beat). For ashwarden: 'the_cut_thread'."
+    },
+    "beats": {
+      "type": "array", "minItems": 3, "maxItems": 3,
+      "description": "exactly three, ordered: finding -> proving -> ultimate.",
+      "items": {
+        "type": "object",
+        "required": ["beat", "name", "gate", "quest"],
+        "properties": {
+          "beat": { "type": "string", "enum": ["finding", "proving", "ultimate"] },
+          "name": { "type": "string" },
+          "gate": {
+            "type": "string",
+            "description": "what UNLOCKS this beat. Finding: demonstrate the tradition's disposition (act on its axis), never a level bar. Proving: the teacher found + willing. Ultimate: the proving passed."
+          },
+          "quest": {
+            "description": "a full quest_structure-shaped object for this beat, OR a string ref to a quest id. The finding/proving carry real stages+routes+outcomes; the ultimate's outcome is the capstone-learning SCENE.",
+            "oneOf": [
+              { "type": "string" },
+              { "type": "object" }
+            ]
+          }
+        }
+      }
+    },
+    "ultimateIsAScene": {
+      "type": "boolean", "const": true,
+      "description": "learning the capstone is a narrated moment (SNG-197 moment-doctrine), never a menu unlock. The teacher gives it; the giving is played."
+    }
+  },
+  "designLaws": [
+    "Find, then prove, then receive. You do not buy a tradition's ultimate skill; you become the kind of person it is given to.",
+    "The Proving IS the tradition's values under pressure — for a HARM people it costs blood, for a KNOW people it costs a comfortable ignorance, for ashwarden it is an ending attended rather than fought. The proving must be the tradition, not a generic trial.",
+    "The gate is disposition, not level. A low-level character who acts like an ashwarden reaches the teacher before a high-level one who does not.",
+    "The capstone must already exist (SNG-130 / verify). Never promise a skill the game cannot grant.",
+    "The Ultimate is a scene. The moment doctrine (SNG-197) applies: the player should feel they were GIVEN something, by someone, at a cost."
+  ]
+}

@@ -9,16 +9,20 @@
   "activeEvents": [
     {
       "eventId": "water_crisis",
-      "stage": 1
+      "stage": 2
     }
   ],
   "eventStages": {
     "water_crisis": {
-      "stage": 1,
-      "sinceDay": 1
+      "stage": 2,
+      "sinceDay": 13
     }
   },
-  "spectrumDrift": {},
+  "spectrumDrift": {
+    "death_life": -0.1,
+    "violence_peace": -0.1,
+    "falsehood_truth": -0.05
+  },
   "worldFlags": {},
-  "lastTick": "2026-07-22T20:05:31.907Z"
+  "lastTick": "2026-07-22T23:44:52.046Z"
 }

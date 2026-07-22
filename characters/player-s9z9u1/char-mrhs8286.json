@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 18,
-  "xp": 1783,
+  "xp": 1788,
   "attributes": {
     "physical": 4,
     "mental": 6,
@@ -120,7 +120,7 @@
   "maxHealth": 115,
   "health": 115,
   "maxEnergy": 185,
-  "energy": 185,
+  "energy": 183,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1692,46 +1692,29 @@
         "player": "Pay particular attention to everyone's faces.. especially Pell's... wondering if anyone heard anything in the night.  Then ask how everyone slept.",
         "summary": "Breakfast at Ama's table — Pell names the buried hum heard again before dawn, and Huginn confirms it.",
         "narration": "The kitchen fills by degrees. Veth arrives first, road coat already on, and wraps both hands around the mug you set out for her without a word. Ama follows a minute later, her hair pinned but her eyes still soft from sleep. She looks at the pot, then at you, and something in her face settles — the particular satisfaction of a thing done properly without being asked.\n\nPell comes last. Her boots are on. Her mug finds her hand and she sits beside you, close enough that her shoulder touches yours. You watch her face over the rim of your own mug. She is awake — fully, practically awake — but there is something around her eyes that is not tiredness. A held quality. You have seen it before: she heard something in the night and has not yet decided whether it was worth naming.\n\nHuginn is already on the window ledge, watching the eggs with the flat attention of a creature that has nowhere better to be.\n\nYou ask, easy and unhurried, how everyone slept.\n\nAma says she slept well, thank you, and means it. Veth says she slept adequately, which from her is a warm report. Pell takes a slow sip of her mug. Then she says, without drama, that she heard the floor again. One note. Low. Maybe an hour before dawn. She watched for Huginn's reaction and got it — one small sideways tilt of the head, one half-second of complete stillness, then nothing.\n\nHuginn, from the window ledge, croaks once. Drily. As if agreeing it was not nothing."
+      },
+      {
+        "player": "Use Order-Sense on the kitchen floor itself — the cairn-line runs under this house; look at what the design says about what is beneath.",
+        "summary": "Silas reads Order-Sense through the kitchen floor — the cairn-line passes beneath the house, deliberate and old, running north by northeast and downward toward an unknown terminus.",
+        "narration": "You set your mug down and press one hand flat against the kitchen floorboards. Order-Sense comes in quietly — the same restrained reach you used on the Waymarker an hour ago.\n\nThe floor is old hardwood over packed earth, and the packed earth sits over something older. The cairn-line runs beneath this house the way a buried beam runs beneath a road — structural, deliberate, part of a design that predates the house by a long margin. You can see its shape without straining: a channel of intention, laid down by someone who was thinking in terms of the whole district's design, not a single building. It does not branch here. It passes through.\n\nWhat it passes toward is harder to read at this reach — you get direction, not destination. North by northeast, and downward. Not toward the Stillwater's Trouble hollow. Somewhere else. Somewhere the line was meant to go before it stopped.\n\nHuginn tilts his head on the window ledge. One slow rotation, then back to the eggs.\n\nPell watches your hand on the floor. She does not ask. She knows that look."
       }
     ],
     "lastTurn": {
-      "narration": "The kitchen fills by degrees. Veth arrives first, road coat already on, and wraps both hands around the mug you set out for her without a word. Ama follows a minute later, her hair pinned but her eyes still soft from sleep. She looks at the pot, then at you, and something in her face settles — the particular satisfaction of a thing done properly without being asked.\n\nPell comes last. Her boots are on. Her mug finds her hand and she sits beside you, close enough that her shoulder touches yours. You watch her face over the rim of your own mug. She is awake — fully, practically awake — but there is something around her eyes that is not tiredness. A held quality. You have seen it before: she heard something in the night and has not yet decided whether it was worth naming.\n\nHuginn is already on the window ledge, watching the eggs with the flat attention of a creature that has nowhere better to be.\n\nYou ask, easy and unhurried, how everyone slept.\n\nAma says she slept well, thank you, and means it. Veth says she slept adequately, which from her is a warm report. Pell takes a slow sip of her mug. Then she says, without drama, that she heard the floor again. One note. Low. Maybe an hour before dawn. She watched for Huginn's reaction and got it — one small sideways tilt of the head, one half-second of complete stillness, then nothing.\n\nHuginn, from the window ledge, croaks once. Drily. As if agreeing it was not nothing.",
-      "sceneSummary": "Breakfast at Ama's table — Pell names the buried hum heard again before dawn, and Huginn confirms it.",
+      "narration": "You set your mug down and press one hand flat against the kitchen floorboards. Order-Sense comes in quietly — the same restrained reach you used on the Waymarker an hour ago.\n\nThe floor is old hardwood over packed earth, and the packed earth sits over something older. The cairn-line runs beneath this house the way a buried beam runs beneath a road — structural, deliberate, part of a design that predates the house by a long margin. You can see its shape without straining: a channel of intention, laid down by someone who was thinking in terms of the whole district's design, not a single building. It does not branch here. It passes through.\n\nWhat it passes toward is harder to read at this reach — you get direction, not destination. North by northeast, and downward. Not toward the Stillwater's Trouble hollow. Somewhere else. Somewhere the line was meant to go before it stopped.\n\nHuginn tilts his head on the window ledge. One slow rotation, then back to the eggs.\n\nPell watches your hand on the floor. She does not ask. She knows that look.",
+      "sceneSummary": "Silas reads Order-Sense through the kitchen floor — the cairn-line passes beneath the house, deliberate and old, running north by northeast and downward toward an unknown terminus.",
       "choices": [
         {
-          "label": "Ask Pell what direction the hum seemed to come from — and whether it felt the same as the first time or different.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Use Order-Sense on the kitchen floor itself — the cairn-line runs under this house; look at what the design says about what is beneath.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 15,
-          "intentTags": [
-            "study"
-          ],
-          "abilityId": "order_sense",
-          "energyCost": 2,
-          "trivial": false
-        },
-        {
-          "label": "File it and eat — serve the eggs, sit, let the farewell to Ama be a real one before the road pulls you out the door.",
+          "label": "Ask Pell if 'north by northeast and down' means anything to her — she grew up on these roads",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "sustain"
+            "study"
           ],
           "trivial": true
         },
         {
-          "label": "Ask Huginn directly — look it in the eye across the kitchen and wait.",
+          "label": "Ask Ama directly — she has lived over this line her whole life; does she know where it goes?",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
@@ -1739,26 +1722,49 @@
             "study"
           ],
           "trivial": true
+        },
+        {
+          "label": "Let it rest for now — pack the read away and focus on the road ahead; the Crossing and Edvar Crane come first",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 0,
+          "intentTags": [
+            "plan"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Reach further with Order-Sense — push toward where the line terminates, even if the Crossing is thin ground for it",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "risky"
+          ],
+          "abilityId": "order_sense",
+          "energyCost": 2,
+          "trivial": false
         }
       ],
       "scene": {
-        "setting": "Ama's kitchen in Cairnhold — early morning, fire going strong, the pot of oats ready, grey-white light at the window beginning to warm toward proper morning.",
+        "setting": "Ama's kitchen in Cairnhold — early morning, fire going strong, the pot of oats ready, grey-white light at the window warming toward proper morning. Silas has one hand flat on the kitchen floor.",
         "npcsPresent": [
           {
             "name": "Ama",
-            "state": "Seated at the kitchen table, mug in hand, settled and warm — the cook-smell of a proper breakfast doing its work on her expression."
+            "state": "Seated at the kitchen table, mug in hand, watching Silas's hand on the floor with quiet attention."
           },
           {
             "name": "Veth Ondra",
-            "state": "Seated across from Ama, road coat on, both hands around her mug — present and listening."
+            "state": "Seated across from Ama, road coat on, both hands around her mug — watching and saying nothing."
           },
           {
             "name": "Pell Ran Marsh",
-            "state": "Seated beside Silas, boots on, mug in hand — has just named the buried hum heard again before dawn, watching for a reaction."
+            "state": "Seated beside Silas, boots on, mug in hand — watching his face with that held, knowing quality."
           },
           {
             "name": "Huginn",
-            "state": "On the window ledge — croaked once in confirmation, now watching the eggs again with professional patience."
+            "state": "On the window ledge — tilted his head once, then returned to watching the eggs."
           }
         ],
         "objects": [
@@ -1766,78 +1772,53 @@
           "Four eggs warming at the fireside",
           "Dried fruit softened in steam",
           "Mugs set out and filled",
-          "Traveler's Pack — packed, near the door",
+          "Traveler's Pack — packed, near the door, Waymarker and father's letter inside",
           "Memory (spear) — leaning near the door"
         ],
         "threads": [
-          "Pell heard the buried hum again — one low note, roughly an hour before dawn; Huginn confirmed it with a tilt and a moment of stillness.",
+          "The cairn-line runs north by northeast and downward beneath the house — direction known, terminus unknown.",
+          "Pell heard the buried hum again before dawn; Huginn confirmed it.",
           "Farewell to Ama has not been said formally — the parting is still ahead.",
           "The road to the Crossing starts today."
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "pell-ran-marsh",
-          "name": "Pell Ran Marsh",
-          "note": "Named the buried hum heard again before dawn — one low note, approximately an hour before first light; watched Huginn's response and got it, a half-second of complete stillness.",
-          "learned": [
-            "The floor hum recurred before dawn on the morning of departure — second confirmed instance at this house; Huginn's reaction was identical to the first."
-          ],
-          "statusNote": "At the kitchen table in Ama's house — boots on, mug in hand, the hum named plainly, waiting."
-        },
-        {
-          "op": "update",
-          "npcId": "huginn",
-          "name": "Huginn",
-          "note": "Confirmed Pell's account of the pre-dawn hum with a single croak — unmistakable acknowledgment, then back to watching the eggs.",
-          "learned": [
-            "The hum beneath Ama's house recurred before dawn on the morning of departure — Huginn noted it with a half-second of full stillness."
-          ],
-          "statusNote": "On the kitchen window ledge — watching the eggs; has confirmed the hum a second time."
-        }
-      ],
       "codexUpdates": [
         {
-          "topic": "precursor-signs-in-the-valley",
-          "label": "Precursor Signs in the Valley",
+          "topic": "the-cairn-line",
+          "label": "The Cairn-Line",
           "kind": "mystery",
-          "fact": "The buried hum beneath Ama's house recurred a second time — one low tonal note roughly an hour before dawn on the morning of departure. Pell heard it and watched Huginn's response: a half-second of complete stillness, then nothing. Two witnesses on two separate nights at the same location.",
+          "fact": "Order-Sense through Ama's kitchen floor confirmed: the cairn-line passes beneath the house as a deliberate structural channel, predating the building by a long margin. It does not branch here — it runs north by northeast and downward, toward an unknown terminus that is not Stillwater's Trouble.",
           "links": [
-            "order-sense",
-            "the-second-thread",
+            "precursor-signs-in-the-valley",
             "the-water-crisis",
+            "the-second-thread",
             "what-the-water-remembers"
           ]
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "the household woke, gathered, and breakfast came to the table — a half-hour of early morning"
-      },
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
+        "hoursPassed": 0.25,
+        "why": "a brief, quiet moment of craft at the breakfast table"
       }
     },
     "sceneState": {
-      "setting": "Ama's kitchen in Cairnhold — early morning, fire going strong, the pot of oats ready, grey-white light at the window beginning to warm toward proper morning.",
+      "setting": "Ama's kitchen in Cairnhold — early morning, fire going strong, the pot of oats ready, grey-white light at the window warming toward proper morning. Silas has one hand flat on the kitchen floor.",
       "npcsPresent": [
         {
           "name": "Ama",
-          "state": "Seated at the kitchen table, mug in hand, settled and warm — the cook-smell of a proper breakfast doing its work on her "
+          "state": "Seated at the kitchen table, mug in hand, watching Silas's hand on the floor with quiet attention."
         },
         {
           "name": "Veth Ondra",
-          "state": "Seated across from Ama, road coat on, both hands around her mug — present and listening."
+          "state": "Seated across from Ama, road coat on, both hands around her mug — watching and saying nothing."
         },
         {
           "name": "Pell Ran Marsh",
-          "state": "Seated beside Silas, boots on, mug in hand — has just named the buried hum heard again before dawn, watching for a react"
+          "state": "Seated beside Silas, boots on, mug in hand — watching his face with that held, knowing quality."
         },
         {
           "name": "Huginn",
-          "state": "On the window ledge — croaked once in confirmation, now watching the eggs again with professional patience."
+          "state": "On the window ledge — tilted his head once, then returned to watching the eggs."
         }
       ],
       "objects": [
@@ -1845,11 +1826,12 @@
         "Four eggs warming at the fireside",
         "Dried fruit softened in steam",
         "Mugs set out and filled",
-        "Traveler's Pack — packed, near the door",
+        "Traveler's Pack — packed, near the door, Waymarker and father's letter inside",
         "Memory (spear) — leaning near the door"
       ],
       "threads": [
-        "Pell heard the buried hum again — one low note, roughly an hour before dawn; Huginn confirmed it with a tilt and a moment of stillness.",
+        "The cairn-line runs north by northeast and downward beneath the house — direction known, terminus unknown.",
+        "Pell heard the buried hum again before dawn; Huginn confirmed it.",
         "Farewell to Ama has not been said formally — the parting is still ahead.",
         "The road to the Crossing starts today."
       ]
@@ -4266,7 +4248,7 @@
     "lastTickWorldDay": 22,
     "lastCanonWorldDay": 22,
     "lastGenCount": 551,
-    "turnsSinceOffer": 24,
+    "turnsSinceOffer": 25,
     "recentOffers": [
       {
         "thing": "The shadow-build showed Calvar's drainage failure precisely — the sleeve geometry, the collar, the east-bend junction — before it showed…",
@@ -5679,21 +5661,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 9.743719658041263,
-    "cerebral": 15.613970080319774,
-    "social": 13.3594689582101,
-    "generous": 2.7304429103049377,
-    "cautious": 2.9306397103269006,
-    "physical": 0.0949328940171671,
-    "risky": 0.09955594625441293,
-    "ruthless": 0.03174232548532972,
-    "carousing": 1.2268798640905243,
-    "amorous": 12.35474877035699,
-    "patient": 0.848093362434114,
-    "stealth": 0.012303406453461903,
-    "devotion": 0.25134733574892487,
-    "craft": 0.7397254023180602,
-    "leadership": 0.06262570429379129
+    "strategic": 9.500126666590232,
+    "cerebral": 16.22362082831178,
+    "social": 13.025482234254847,
+    "generous": 2.662181837547314,
+    "cautious": 2.857373717568728,
+    "physical": 0.09255957166673792,
+    "risky": 0.0970670475980526,
+    "ruthless": 0.030948767348196477,
+    "carousing": 1.1962078674882612,
+    "amorous": 12.045880051098065,
+    "patient": 0.8268910283732611,
+    "stealth": 0.011995821292125355,
+    "devotion": 0.24506365235520175,
+    "craft": 0.7212322672601087,
+    "leadership": 0.0610600616864465
   },
   "aptitudes": [
     "strategist",
@@ -5702,7 +5684,7 @@
     "sage",
     "charmer"
   ],
-  "actionCount": 661,
+  "actionCount": 662,
   "grantsVersion": 1,
   "reconcileVersion": 16,
   "gallery": [
@@ -6052,8 +6034,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784764658640,
-  "rev": 1033,
+  "updatedAt": 1784764752293,
+  "rev": 1034,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -7701,7 +7683,7 @@
     "uses": {
       "numen_sense": 3,
       "lightsense": 2,
-      "order_sense": 68,
+      "order_sense": 69,
       "palework": 29,
       "deathsense": 30,
       "shadowstep": 17,
@@ -8067,7 +8049,7 @@
   "regionsKnown": {
     "valley": 435,
     "the_palelands": 6,
-    "the_center": 53
+    "the_center": 54
   },
   "foreclosed": [
     "rootkin",
@@ -8181,10 +8163,10 @@
     {
       "id": "sess-10",
       "startedAt": "2026-07-22T20:59:08.612Z",
-      "lastAt": "2026-07-22T23:57:38.638Z",
+      "lastAt": "2026-07-22T23:59:12.292Z",
       "startDay": 22,
       "endDay": 22,
-      "beats": 27
+      "beats": 28
     }
   ],
   "company": [
@@ -8372,22 +8354,22 @@
     "the_crossing": "https://image.pollinations.ai/prompt/The%20Crossing%3A%20Every%20axis%20crosses%20here%20at%20nothing%2C%20and%20the%20result%20is%20not%20grey%20%E2%80%94%20it%20is%20CROWDED.%20The%20Crossing%20leans%20toward%20no%20pole%2C%20which%20is%20precisely%20why%20it%20can%20hold%20them%20all%3A%20an%20Umbral%20and%20a%20Blazeborn%20drink%20at%20the%20same%20table%20because%20neither%20has%20the%20standing%20to%20make%20the%20other%20leave.%20The%20poles%20are%20lonely%20places.%20The%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=24144&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 38,
-    "choices": 38,
+    "sceneSummary": 39,
+    "choices": 39,
     "characterDeltas": 19,
-    "scene": 38,
+    "scene": 39,
     "npcUpdates": 33,
     "factUpdates": 5,
     "placeUpdates": 2,
-    "codexUpdates": 15,
-    "timeOps": 33,
+    "codexUpdates": 16,
+    "timeOps": 34,
     "imagePrompt": 1,
     "sceneEnded": 10,
     "itemUpdates": 1,
     "questUpdates": 1,
     "offer": 2
   },
-  "_opTurns": 38,
+  "_opTurns": 39,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

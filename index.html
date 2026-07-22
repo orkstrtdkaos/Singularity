@@ -1,21 +1,21 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Singularity â€” The Valley of Echoes</title>
+  <title>Singularity — The Valley of Echoes</title>
   <link rel="stylesheet" href="style.css?v=1.8.183">
 </head>
 <body>
   <div id="app">
-    <div class="boot">Loading the Valleyâ€¦</div>
+    <div class="boot">Loading the Valley…</div>
   </div>
   <script type="module" src="app.js?v=1.8.183"></script>
   <!-- CCODE-08: BOOT WATCHDOG. Deliberately a CLASSIC script, not a module, and deliberately inline:
        it must survive the exact failure it reports on. A module that fails to fetch (GitHub Pages
        returned 503 on engine/canon.js on 2026-07-18) dies at module-graph RESOLUTION, before app.js
-       runs a single line â€” so boot()'s own try/catch never fires, and the static "Loading the
-       Valleyâ€¦" above sits there forever with nobody left to replace it. Law 5 says a hiccup must
+       runs a single line — so boot()'s own try/catch never fires, and the static "Loading the
+       Valley…" above sits there forever with nobody left to replace it. Law 5 says a hiccup must
        never leave the player stranded with no message and no way forward. -->
   <script>
   (function () {
@@ -26,7 +26,7 @@
       if (!src) return;
       var name = String(src).split("/").slice(-1)[0].split("?")[0];
       // A failed NESTED import reports against the entry script, not the module that actually
-      // 503'd â€” so naming app.js here would point the player (and me) at the wrong file. Only
+      // 503'd — so naming app.js here would point the player (and me) at the wrong file. Only
       // name a file we can actually blame; otherwise stay honest and unspecific.
       if (name === "app.js" || name === "style.css") return;
       failed.push(name);
@@ -40,7 +40,7 @@
     }
 
     function giveUp() {
-      if (!stranded()) return;                       // the app booted â€” nothing to do
+      if (!stranded()) return;                       // the app booted — nothing to do
       var app = document.getElementById("app");
       var what = failed.length ? failed.slice(0, 3).join(", ") : "";
       app.innerHTML =
@@ -50,13 +50,13 @@
             (what
               ? 'Part of the game failed to download (<code>' + what + '</code>). '
               : 'Part of the game failed to download. ') +
-            'This is usually a passing hiccup with the host, not your save â€” nothing has been lost.' +
+            'This is usually a passing hiccup with the host, not your save — nothing has been lost.' +
           '</div>' +
           '<div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">' +
             '<button id="boot-retry" style="padding:8px 14px;cursor:pointer">Try again</button>' +
             '<button id="boot-hard" style="padding:8px 14px;cursor:pointer" title="Reload past a cached bad copy of a file">Reload fresh</button>' +
           '</div>' +
-          '<div style="margin-top:10px;font-size:12px;opacity:.6">If â€œTry againâ€ keeps failing, use â€œReload freshâ€ â€” a failed file can stay cached.</div>' +
+          '<div style="margin-top:10px;font-size:12px;opacity:.6">If “Try again” keeps failing, use “Reload fresh” — a failed file can stay cached.</div>' +
         '</div>';
       document.getElementById("boot-retry").onclick = function () { location.reload(); };
       // Cache-bust every asset: a browser will happily re-serve the copy that failed.

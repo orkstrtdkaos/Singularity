@@ -18,6 +18,17 @@ doctrine that governs the new reach.
 
 ---
 
+## §0 — ERIK'S RULING (2026-07-21): fair GM FIRST, god-mode SECOND
+
+Erik confirmed both surfaces are wanted, and **sequenced them**: the **capable-and-fair in-fiction GM is
+Phase 1 and builds now**; the **author/dev god-mode is Phase 2 and is explicitly deferred** to a later
+ticket (SNG-207b). This whole spec below is Phase 1. The god-mode is out of scope here except for the one
+guard it imposes on Phase 1: the fair-GM's grant ops must be built so that a future no-fairness author lever
+is a *separate surface calling different entry points*, not a flag that loosens these ops. Build the fair
+grant path clean; do not leave a `skipFairness` seam in it for Phase 2 to flip — Phase 2 gets its own door.
+
+---
+
 ## §1 — WHAT EXISTS TODAY (verified at origin)
 
 The GM already has three lever-sets:

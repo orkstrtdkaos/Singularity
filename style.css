@@ -749,6 +749,8 @@ img[data-lightbox] { cursor: zoom-in; }
 .wheel-node.trad-related .wheel-node-label { fill:var(--ink); }
 .wheel-trad { cursor: pointer; }
 .wheel-trad .hit { fill: transparent; }
+.wheel-trad:hover .wheel-pole-label { fill: var(--ink); text-decoration: underline; }
+.wheel-trad:hover .label-hit { fill: color-mix(in srgb, var(--accent) 12%, transparent); }
 .wheel-trad.trad-sel circle:not(.hit) { stroke-width: 3.5; }
 .wheel-trad.trad-sel .wheel-pole-label { fill: var(--accent); font-weight: 600; }
 .wheel-trad.trad-sel-opp circle:not(.hit) { stroke: var(--danger); }

@@ -65,7 +65,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.195";
+const APP_VERSION = "1.8.196";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -5116,10 +5116,14 @@ function renderSkillWheel(selectedId = null, status = "") {
     ${/* tradition ring nodes + pole labels */""}
     ${ringNodes.map(rn => { const lp = wheelPt(rn.ang, S.rNode + 30);
       const selCls = !wheelSelTrad ? "" : rn.t === wheelSelTrad ? "trad-sel" : rn.t === selTradOpp ? "trad-sel-opp" : ringDistance(rn.t, wheelSelTrad, idx) === 1 ? "trad-sel-adj" : "trad-sel-dim";
-      return `<g class="wheel-trad ${rn.closed ? "closed" : rn.isPrimary ? "primary" : rn.isSecondary ? "secondary" : rn.isTertiary ? "tertiary" : rn.kin ? "kin" : ""} ${selCls}" data-wheeltrad="${esc(rn.t)}"><title>${esc(traditionLabel(rn.t))} — tap to light its crafts, braids and its antipode</title>
-        <circle class="hit" cx="${rn.x}" cy="${rn.y}" r="15"/>
+      const poleLbl = String(rn.pole).slice(0, 12);
+      const lw = Math.max(52, poleLbl.length * 6.6); // SNG-202B: the pole-label WORDS are the reliable click target —
+      return `<g class="wheel-trad ${rn.closed ? "closed" : rn.isPrimary ? "primary" : rn.isSecondary ? "secondary" : rn.isTertiary ? "tertiary" : rn.kin ? "kin" : ""} ${selCls}" data-wheeltrad="${esc(rn.t)}"><title>${esc(traditionLabel(rn.t))} — tap the label to light its crafts, braids and its antipode</title>
+        ${/* a generous hit box behind the label (outside the rim, in clear space where no ability node overlaps it — the rim node gets covered by capstones landing there) */""}
+        <rect class="hit label-hit" x="${(lp.x - lw / 2).toFixed(1)}" y="${(lp.y - 9).toFixed(1)}" width="${lw.toFixed(1)}" height="22" rx="5"/>
+        <circle class="hit" cx="${rn.x}" cy="${rn.y}" r="11"/>
         <circle cx="${rn.x}" cy="${rn.y}" r="7" fill="${rn.closed ? "transparent" : traditionColor(rn.t)}" stroke="${traditionColor(rn.t)}"/>
-        <text x="${lp.x}" y="${lp.y + 3}" text-anchor="middle" class="wheel-pole-label">${esc(String(rn.pole).slice(0, 12))}</text></g>`; }).join("")}
+        <text x="${lp.x}" y="${lp.y + 3}" text-anchor="middle" class="wheel-pole-label">${esc(poleLbl)}</text></g>`; }).join("")}
     ${/* ability nodes — SNG-129: function SHAPES (silhouette = primary family) + precursor SEALED state +
         de-collided labels (owned/selected always; matched added at zoom). */""}
     ${(() => {

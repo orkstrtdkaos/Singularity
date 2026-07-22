@@ -6591,6 +6591,7 @@ await (async () => {
   check("202B §1: buildWheelModel leans spoke crafts by composition (compositionAngle + leanOffset)", /leanOffset\(ang0, compositionAngle\(ab\.axes, axisPoles, n\)/.test(appSrc202));
   // §2 wired: the wheel is a browse surface — click a tradition / click a braid highlights across the wheel.
   check("202B §2: a tradition ring node is clickable (data-wheeltrad) + toggles wheelSelTrad", /data-wheeltrad=/.test(appSrc202) && /wheelSelTrad = wheelSelTrad === t \? null : t/.test(appSrc202));
+  check("202B §2: the pole-label WORDS carry a hit target (rim node gets covered by capstones)", /class="hit label-hit"/.test(appSrc202) && /poleLbl\.length \* 6\.6/.test(appSrc202));
   check("202B §2: a clicked tradition highlights its crafts + braids-with-a-parent, dims the rest (tradRelOf)", /parentTrads[\s\S]{0,40}includes\(wheelSelTrad\)/.test(appSrc202) && /trad-" \+ tradRelOf\(nd\)/.test(appSrc202));
   check("202B §2: the foreclosure line to the antipode is drawn as geometry (wheel-foreclose)", /wheel-foreclose/.test(appSrc202) && /only a braid crosses this axis/.test(appSrc202));
   check("202B §2: a selected braid lights both parent spokes + the joining arc", /selBraidParents\.length !== 2[\s\S]*?wheel-braid-parent[\s\S]*?wheel-braid-arc/.test(appSrc202));

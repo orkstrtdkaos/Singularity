@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 1,
+  "id": "tradition_arc_ashwarden",
+  "traditionId": "ashwarden",
+  "teacher": {
+    "npcId": "ashwarden_teacher_neth",
+    "name": "Neth, who has buried more than she has known",
+    "disposition": "The ashwarden values made a person: she does not fear endings and she does not hurry them. She has attended more deaths than anyone in the valley and has never once looked away from one. She will not teach someone who wants the power. She will teach someone who understands the weight."
+  },
+  "capstoneAbility": "the_cut_thread",
+  "ultimateIsAScene": true,
+  "beats": [
+    {
+      "beat": "finding",
+      "name": "The One Who Stayed",
+      "gate": "Demonstrate the ashwarden disposition — attend an ending along the death axis rather than fight or flee it. Deathsense used on something dying, a body tended, a passing sat with. Level is irrelevant; conduct is everything.",
+      "quest": {
+        "id": "ashwarden_finding_neth",
+        "name": "The One Who Stayed",
+        "region": "valley",
+        "tier": "tradition",
+        "giver": null,
+        "axis": "death_life",
+        "traditions": ["ashwarden"],
+        "premise": "There is a woman who comes to deaths no one sent for. She is at the bedside before the family thinks to send word, and gone before they think to thank her. The ashwardens who know her name will not give it to someone who asks for the wrong reason.",
+        "stakes": "If you never find her: your craft stays shallow. The deep ashwarden work — the work that is about the ending itself and not about the power over it — has no teacher in the valley but her, and she does not advertise. Palework without her is a trade. With her it becomes a calling.",
+        "stages": [
+          {
+            "id": "s1",
+            "objective": "Attend an ending the way an ashwarden does.",
+            "condition": "Use deathsense on something dying, tend a body, or sit a passing through — without turning it toward power or away from grief.",
+            "change": "Codex: word moves among the ashwarden-adjacent that someone new stayed when they could have left."
+          },
+          {
+            "id": "s2",
+            "objective": "Learn the name of the one who comes to deaths unsent-for.",
+            "condition": "Earn it from an ashwarden who knows her (they give it only to someone who has already acted rightly), or be present at an ending she also attends.",
+            "change": "Codex: Neth is entered as an entity. She has noticed you before you noticed her."
+          },
+          {
+            "id": "s3",
+            "objective": "Meet Neth, and let her decide what she saw.",
+            "condition": "Speak with Neth. She asks nothing directly; she watches how you carry what you already know.",
+            "change": "Neth is met. Whether she is willing is the Proving's question — meeting her is not being accepted by her."
+          }
+        ],
+        "routes": {
+          "ashwarden": "Come to her as one of her own already — attend the ending in front of you and let her find you doing it.",
+          "verist": "Ask plainly among the ashwardens for the one who comes unsent-for, and be honest about why you want to know.",
+          "umbral": "Be present at a death she attends without being seen to seek her — let her notice you noticing.",
+          "stillhold": "Earn the standing among the death-people that makes her name a thing offered rather than extracted."
+        },
+        "outcomes": [
+          {
+            "id": "found_true",
+            "name": "Found, and Seen",
+            "summary": "Neth is met, and she has already decided you might be worth her time.",
+            "narration": [
+              "You find Neth at a bedside, or she finds you at one. Either way, the first thing she says is not a greeting. It is a question about the person who is dying, and she watches which part of your answer you reach for first.",
+              "She does not accept you. She does not refuse you. She tells you where she will be next, which from Neth is nearly the same as hope.",
+              "Ashwarden standing toward you: raised. You came to her as the craft intends — through an ending, not through a request."
+            ],
+            "effects": [
+              { "type": "npc_state", "npc": "ashwarden_teacher_neth", "state": "watching", "note": "met; has seen you attend an ending rightly; open to the Proving but not yet willing" },
+              { "type": "disposition", "people": "ashwarden", "delta": 2 },
+              { "type": "codex_fact", "text": "Neth, who has buried more than she has known, is the deep teacher of the ashwarden craft in the valley. She has met you and is deciding." },
+              { "type": "quest_seed", "text": "Neth will test not your skill but your understanding of what the skill is for. The Proving is hers to set." },
+              { "type": "xp", "amount": 25 }
+            ]
+          },
+          {
+            "id": "found_wanting",
+            "name": "Found, and Doubted",
+            "summary": "Neth is met, but she saw something in how you asked that gives her pause.",
+            "narration": [
+              "You find her, but you found her the wrong way — you asked for the power, or you hurried an ending, or you looked away from one. She noticed. Neth always notices.",
+              "She does not turn you away. She tells you, without unkindness, that she has seen your kind before and buried some of them. The door is not closed. It is only heavier now.",
+              "The Proving is still available — but you will be proving something specific to her doubt, not arriving clean."
+            ],
+            "effects": [
+              { "type": "npc_state", "npc": "ashwarden_teacher_neth", "state": "doubtful", "note": "met but wary; the Proving will be harder, aimed at the specific thing she doubts" },
+              { "type": "codex_fact", "text": "Neth has met you and is not sure of you. She teaches the deepest ashwarden work and does not give it lightly." },
+              { "type": "quest_seed", "text": "Neth's doubt is nameable and answerable — the Proving becomes about disproving it." },
+              { "type": "xp", "amount": 15 }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "beat": "proving",
+      "name": "The Ending You Did Not Choose",
+      "gate": "Neth is met and watching (the Finding resolved). The Proving is the ashwarden values under pressure: not a fight, an ATTENDANCE — an ending you would rather stop, sat with instead of fought.",
+      "quest": {
+        "id": "ashwarden_proving_neth",
+        "name": "The Ending You Did Not Choose",
+        "region": "valley",
+        "tier": "tradition",
+        "giver": "ashwarden_teacher_neth",
+        "axis": "death_life",
+        "traditions": ["ashwarden"],
+        "premise": "Neth brings you to a death that should not be happening — someone young, someone savable-looking, someone the rootkin might even claw back for a while. And she tells you to do nothing but be there. The whole test is whether you can stay when everything in you wants to intervene.",
+        "stakes": "If you fail this — if you turn it toward power, or force it, or flee it — Neth closes the door for good, and the deepest ashwarden work stays out of your hands. Not because you are punished, but because she now knows you would use The Cut Thread to feel powerful instead of to end suffering, and she will not put those shears in that hand.",
+        "stages": [
+          {
+            "id": "s1",
+            "objective": "Understand what Neth is actually asking.",
+            "condition": "Speak with Neth about the dying person; learn that the ask is presence, not rescue — and why an ashwarden's deepest skill is refusal as much as action.",
+            "change": "Codex: the Proving's real shape is understood — this is about what you WON'T do."
+          },
+          {
+            "id": "s2",
+            "objective": "Stay.",
+            "condition": "Attend the ending through to its end without turning it toward power, forcing it, or leaving. (An ashwarden route lets you ease it; it does not let you stop it.)",
+            "change": "The ending completes as it was always going to. You were there for all of it. Neth was watching all of you."
+          },
+          {
+            "id": "s3",
+            "objective": "Say what it was for.",
+            "condition": "Answer Neth's one question afterward — what the staying was for — in a way that is true rather than correct.",
+            "change": "Neth decides. This is the willing/unwilling hinge for the capstone gate."
+          }
+        ],
+        "routes": {
+          "ashwarden": "Ease the passing with the craft — deathsense its shape, make it gentler, never make it stop. The purest form of the proving.",
+          "abyssal": "Name aloud what the dying person most fears about the ending, and stay in it with them rather than deflecting it.",
+          "stillhold": "Hold the room — keep the family's grief from turning the death into a fight, so the ending can be what it is.",
+          "verist": "Tell the dying person the truth they are asking for, even the hard one, because a true ending is the ashwarden gift."
+        },
+        "outcomes": [
+          {
+            "id": "stayed",
+            "name": "You Stayed",
+            "summary": "You attended the ending you would have stopped. Neth is willing.",
+            "narration": [
+              "It ends. You did not stop it, and you did not look away, and when Neth asks you afterward what the staying was for, you tell her something true — not the answer you think she wants, the answer that is actually in you.",
+              "She is quiet for a while. Then she tells you she will teach you the last thing, and that she is sorry she has to, and that both of those are true at once.",
+              "Neth is now a willing teacher (teachers[ashwarden] = met, willing). The capstone gate is open.",
+              "Ashwarden standing toward you: strongly raised."
+            ],
+            "effects": [
+              { "type": "npc_state", "npc": "ashwarden_teacher_neth", "state": "willing", "note": "willing teacher; teachers[ashwarden]={met:true,willing:true} — the SNG-100b/126 capstone gate is satisfied" },
+              { "type": "disposition", "people": "ashwarden", "delta": 3 },
+              { "type": "codex_fact", "text": "You attended an ending you would have stopped, and stayed. Neth will teach you The Cut Thread. She is sorry she has to." },
+              { "type": "quest_seed", "text": "The Ultimate remains: Neth gives the deepest ashwarden work, and the giving is a scene, not a lesson." },
+              { "type": "xp", "amount": 40 }
+            ]
+          },
+          {
+            "id": "could_not_stay",
+            "name": "You Could Not Stay",
+            "summary": "You intervened, or fled, or reached for power. Neth closes the door.",
+            "narration": [
+              "You could not do it. You forced the ending, or you ran from it, or you tried to turn it into a demonstration of what you could do — and Neth watched you do it.",
+              "She is not angry. That is the worst of it. She simply tells you that she now knows something about you, and that knowing it, she cannot put the shears in your hand.",
+              "The capstone stays closed. Not forever, necessarily — but Neth will not reopen it, and any road back runs through becoming a different kind of person than the one she just watched.",
+              "This is not a failure of skill. It is Neth declining to make you dangerous."
+            ],
+            "effects": [
+              { "type": "npc_state", "npc": "ashwarden_teacher_neth", "state": "unwilling", "note": "will not teach the capstone; teachers[ashwarden].willing stays false. Not punitive — protective." },
+              { "type": "codex_fact", "text": "Neth watched how you met an ending and declined to teach you The Cut Thread. She will not say you failed. She will only say she cannot." },
+              { "type": "quest_seed", "text": "The road back to the capstone is not a retry — it is becoming someone Neth would trust with an ending. That is a longer thing." },
+              { "type": "xp", "amount": 20 }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "beat": "ultimate",
+      "name": "The Cut Thread",
+      "gate": "The Proving passed — Neth is willing (teachers[ashwarden]={met,willing}). The capstone ability 'the_cut_thread' becomes learnable. Learning it is the scene below, not a menu unlock.",
+      "quest": {
+        "id": "ashwarden_ultimate_neth",
+        "name": "The Cut Thread",
+        "region": "valley",
+        "tier": "tradition",
+        "giver": "ashwarden_teacher_neth",
+        "axis": "death_life",
+        "traditions": ["ashwarden"],
+        "premise": "Neth teaches you the last thing the ashwardens hold. She does not demonstrate it. She tells you what it is, what it costs, and what it cannot be taken back from — and then she puts it in your hands and asks you to understand, before you ever use it, that there is no door on the other side of this one.",
+        "stakes": "This is not a quest you can fail — it is a thing you are given. But it is the heaviest gift in the tradition, and Neth makes sure you feel the weight before you carry it. What you do with The Cut Thread afterward is the rest of your character's story; she is only making sure you know what you are holding.",
+        "stages": [
+          {
+            "id": "s1",
+            "objective": "Receive The Cut Thread.",
+            "condition": "Sit the scene with Neth — she gives the capstone and its whole cost in one telling: the Fates' shears, one life, one cut, no wound, no undo.",
+            "change": "The Cut Thread (the_cut_thread) is learnable. Neth has told you the argument against it has never been answered, and that the ashwardens keep doing it anyway."
+          }
+        ],
+        "routes": {
+          "ashwarden": "Take it as she gives it — with the weight, not around it. There is no clever route through this scene; there is only whether you understand what you accepted."
+        },
+        "outcomes": [
+          {
+            "id": "received",
+            "name": "The Shears Are Yours",
+            "summary": "You have the deepest ashwarden skill, and the full knowledge of what it is.",
+            "narration": [
+              "Neth teaches you The Cut Thread. She does not make it feel like power. She makes it feel like a responsibility she is handing off because she is tired and you are ready and the valley will always need someone who can do the last mercy.",
+              "'One thing, once,' she says. 'No wound. No sound. And everyone in the room will understand exactly what they watched. It cannot be aimed at what has no thread, and it cannot be taken back. There is no version of this you get to regret quietly.'",
+              "Then she is done, and she looks lighter, and you look heavier, and both of those are correct.",
+              "You have learned The Cut Thread. What you do with it is yours to answer for."
+            ],
+            "effects": [
+              { "type": "npc_state", "npc": "ashwarden_teacher_neth", "state": "master", "note": "your teacher; the relationship persists. She will not teach you a deeper thing because there is no deeper thing." },
+              { "type": "ally", "npc": "ashwarden_teacher_neth", "note": "your ashwarden master; bound to you as the one who gave you the last skill" },
+              { "type": "codex_fact", "text": "You learned The Cut Thread from Neth. The Fates' shears — one life, one cut, no undo. The deepest thing the ashwardens hold, given rather than taken." },
+              { "type": "xp", "amount": 60 }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

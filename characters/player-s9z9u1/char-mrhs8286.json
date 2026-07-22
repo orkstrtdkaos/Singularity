@@ -1711,14 +1711,19 @@
         "player": "\"That IS the start of it... but I never imagined Pell Ran Marsh would be so timid... show me how you heat my forge!\"",
         "summary": "Silas calls Pell timid; she corrects the diagnosis with both hands and without apology.",
         "narration": "Pell goes still.\n\nNot the stillness of being caught — the stillness of someone recalibrating very fast, the way she would if a weld she had called sound turned out to have a flaw she had not expected and rather liked. Her eyes narrow by a fraction. The tallow stub is nearly spent now, and the last of its light catches the line of her jaw and the edge of that expression.\n\n\"Timid,\" she says. She says it the way she repeats a measurement back before she corrects it.\n\nShe sets your hand down on the sheet between you, deliberate as setting down a tool she intends to pick up again. Then she shifts — knees tucking under her, weight forward — and she takes your face in both hands the way she takes a piece of work she has decided she is done being patient with. Her thumbs find the line of your jaw. Her eyes hold yours at very close range, and there is nothing soft in them and nothing uncertain, and that is somehow the warmest thing in the room.\n\n\"I was bringing you up to temperature,\" she says, low and even. \"That is not timid. That is craft.\" Her left hand slides back into your hair. \"This,\" she says, and she pulls your mouth to hers, and the kiss is not a warmup — it is the weld itself, the moment the metal stops being separate things."
+      },
+      {
+        "player": "\"That was a good turn at the bellows... heat me more.\"",
+        "summary": "Silas asks for more heat; Pell answers without words — takes the lead fully in the last of the tallow light and into the dark after.",
+        "narration": "Pell does not answer with words.\n\nShe pulls back just enough to look at you — hands still at your face, thumbs at your jaw, the last guttering inch of the tallow stub throwing its final yellow light across the both of you. The look she gives you is not soft. It is the look of a smith who has been told the metal is ready and intends to prove it is not, actually, quite ready yet.\n\n\"More,\" she says back to you, very quiet, as if she is reading the word off a specification she finds interesting. \"Alright.\"\n\nShe shifts forward. The hand at your jaw moves — fingertips tracing down the side of your throat, slow and deliberate, feeling for the pulse the way she would feel for heat in a weld. When she finds it she presses, just enough to name it. Then her mouth follows where her hand was, and she is not in any hurry at all. Her other hand finds the hem of your shirt and moves underneath it, palm flat against your ribs — warm, measuring, the touch of someone taking stock before she commits. She says, against your throat, \"You are going to need to stop talking.\"\n\nThe tallow stub catches its last breath and goes out. The room goes dark and warm, and Pell does not pause."
       }
     ],
     "lastTurn": {
-      "narration": "Pell goes still.\n\nNot the stillness of being caught — the stillness of someone recalibrating very fast, the way she would if a weld she had called sound turned out to have a flaw she had not expected and rather liked. Her eyes narrow by a fraction. The tallow stub is nearly spent now, and the last of its light catches the line of her jaw and the edge of that expression.\n\n\"Timid,\" she says. She says it the way she repeats a measurement back before she corrects it.\n\nShe sets your hand down on the sheet between you, deliberate as setting down a tool she intends to pick up again. Then she shifts — knees tucking under her, weight forward — and she takes your face in both hands the way she takes a piece of work she has decided she is done being patient with. Her thumbs find the line of your jaw. Her eyes hold yours at very close range, and there is nothing soft in them and nothing uncertain, and that is somehow the warmest thing in the room.\n\n\"I was bringing you up to temperature,\" she says, low and even. \"That is not timid. That is craft.\" Her left hand slides back into your hair. \"This,\" she says, and she pulls your mouth to hers, and the kiss is not a warmup — it is the weld itself, the moment the metal stops being separate things.",
-      "sceneSummary": "Silas calls Pell timid; she corrects the diagnosis with both hands and without apology.",
+      "narration": "Pell does not answer with words.\n\nShe pulls back just enough to look at you — hands still at your face, thumbs at your jaw, the last guttering inch of the tallow stub throwing its final yellow light across the both of you. The look she gives you is not soft. It is the look of a smith who has been told the metal is ready and intends to prove it is not, actually, quite ready yet.\n\n\"More,\" she says back to you, very quiet, as if she is reading the word off a specification she finds interesting. \"Alright.\"\n\nShe shifts forward. The hand at your jaw moves — fingertips tracing down the side of your throat, slow and deliberate, feeling for the pulse the way she would feel for heat in a weld. When she finds it she presses, just enough to name it. Then her mouth follows where her hand was, and she is not in any hurry at all. Her other hand finds the hem of your shirt and moves underneath it, palm flat against your ribs — warm, measuring, the touch of someone taking stock before she commits. She says, against your throat, \"You are going to need to stop talking.\"\n\nThe tallow stub catches its last breath and goes out. The room goes dark and warm, and Pell does not pause.",
+      "sceneSummary": "Silas asks for more heat; Pell answers without words — takes the lead fully in the last of the tallow light and into the dark after.",
       "choices": [
         {
-          "label": "Meet her there — hands, weight, the whole answer.",
+          "label": "Let the silence hold — follow her lead into the dark, no words.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
@@ -1728,7 +1733,7 @@
           "trivial": true
         },
         {
-          "label": "Pull back just enough to look at her — tell her that is what you wanted to see.",
+          "label": "Reach for her in the dark — find the parenthesis scar below her left shoulder blade and trace it slowly, waiting to see what she does.",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
@@ -1738,9 +1743,19 @@
           "trivial": true
         },
         {
-          "label": "Laugh against her mouth — tell her you'll note the distinction between timid and deliberate.",
+          "label": "Put your hands to work — cover hers where they rest on your ribs and match her pace, but let her know you are here and not passive.",
           "attribute": "social",
           "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "romantic"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Take her at her word and stop talking entirely — but after, when the dark has settled, ask her quietly about the scar.",
+          "attribute": "social",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
             "romantic"
@@ -1749,21 +1764,21 @@
         }
       ],
       "scene": {
-        "setting": "The small stone room in Ama's house in Cairnhold — tallow stub at its last guttering inch, the room warm and dim, night outside, early spring.",
+        "setting": "The small stone room in Ama's house in Cairnhold — the tallow stub has just gone out, the room now dark and warm, night outside, early spring.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Both hands on Silas's face, close, the weld made — no uncertainty in her at all."
+            "state": "Mouth at Silas's throat, palm flat against his ribs, entirely unhurried — she has the lead and the dark."
           },
           {
             "name": "Huginn",
-            "state": "On Memory's haft in the corner — wings close, attending to the wall with great deliberate interest."
+            "state": "On Memory's haft in the corner — has not moved; attending to the wall with great deliberate interest, as it has been since this began."
           }
         ],
         "objects": [
           "Waymarker on the shelf",
           "Father's sealed letter on the shelf",
-          "Tallow stub guttering at its last inch",
+          "Tallow stub — spent, dark",
           "Pell's bracer on the floor",
           "Memory (spear) leaned in the corner",
           "Wash-basin, water cooled, cloth folded on its rim"
@@ -1771,7 +1786,7 @@
         "threads": [
           "The parenthesis scar below Pell's left shoulder blade — she has never explained it.",
           "The March-or-Marsh question — a door she has not yet decided to open.",
-          "The evening is fully open and unhurried — Pell has the lead."
+          "The room is dark now; Pell has the lead and the night is long."
         ]
       },
       "npcUpdates": [
@@ -1779,38 +1794,34 @@
           "op": "update",
           "npcId": "pell-ran-marsh",
           "name": "Pell Ran Marsh",
-          "note": "Called timid; corrected it without words first and then with a very clear one. She has the lead and both hands on his face.",
-          "statusNote": "In Silas's quarters in Ama's house — holding his face in both hands, the lead entirely hers.",
-          "relationshipDelta": 0
+          "note": "Took the lead fully in the last of the tallow light — answered 'more' without softening it, mouth at his throat, hand at his ribs. The dark is hers.",
+          "statusNote": "In Silas's quarters in Ama's house — fully in the lead, the room dark, no hesitation in her at all.",
+          "learned": [
+            "Silas goes still when he decides to stop deciding — she reads it immediately and moves on it."
+          ]
         }
       ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0,
-        "xp": 0
-      },
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a short, charged exchange — the beat is a moment, not a watch"
+        "why": "a short charged beat in the room's last light"
       }
     },
     "sceneState": {
-      "setting": "The small stone room in Ama's house in Cairnhold — tallow stub at its last guttering inch, the room warm and dim, night outside, early spring.",
+      "setting": "The small stone room in Ama's house in Cairnhold — the tallow stub has just gone out, the room now dark and warm, night outside, early spring.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Both hands on Silas's face, close, the weld made — no uncertainty in her at all."
+          "state": "Mouth at Silas's throat, palm flat against his ribs, entirely unhurried — she has the lead and the dark."
         },
         {
           "name": "Huginn",
-          "state": "On Memory's haft in the corner — wings close, attending to the wall with great deliberate interest."
+          "state": "On Memory's haft in the corner — has not moved; attending to the wall with great deliberate interest, as it has been sin"
         }
       ],
       "objects": [
         "Waymarker on the shelf",
         "Father's sealed letter on the shelf",
-        "Tallow stub guttering at its last inch",
+        "Tallow stub — spent, dark",
         "Pell's bracer on the floor",
         "Memory (spear) leaned in the corner",
         "Wash-basin, water cooled, cloth folded on its rim"
@@ -1818,7 +1829,7 @@
       "threads": [
         "The parenthesis scar below Pell's left shoulder blade — she has never explained it.",
         "The March-or-Marsh question — a door she has not yet decided to open.",
-        "The evening is fully open and unhurried — Pell has the lead."
+        "The room is dark now; Pell has the lead and the night is long."
       ]
     }
   },
@@ -2665,7 +2676,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d12] Holding the disc through the Order-Sense read — thumb shifted to the back of Silas's hand as the image thinned.",
         "[d12] Released Silas's hand when the Waymarker was set down; followed him to his quarters without prompting, watching him with quiet attention.",
         "[d12] Named what she sees in Silas — a man building toward something, not merely traveling toward it. Said she doesn't know what the post means for her yet. Acknowledged she'd like to know about her father's line. Hair undone, bracer off, said yes.",
         "[d12] Named the March question as a door not yet decided — held Silas's hands at her shoulders for a moment before turning back to face him. The evening quiet between them.",
@@ -2674,17 +2684,18 @@
         "[d12] The left shoulder yielded a degree under the patient second pass — she breathed out and covered his hand with hers. The evening holds.",
         "[d12] Turned the evening's language back with a smith's precision — read Silas's palm, pressed her lips to his wrist, pulled him toward her. The invitation landed and is not ambiguous.",
         "[d12] Turned the lead back to herself — read his palm, pressed her lips to his wrist, and named it the start of warming him up. The invitation is open.",
-        "[d12] Called timid; corrected it without words first and then with a very clear one. She has the lead and both hands on his face."
+        "[d12] Called timid; corrected it without words first and then with a very clear one. She has the lead and both hands on his face.",
+        "[d12] Took the lead fully in the last of the tallow light — answered 'more' without softening it, mouth at his throat, hand at his ribs. The dark is hers."
       ],
       "knownFacts": [
-        "The older mark in the third line is a builder's datum — set to guide what comes after, not to finish. Both craftsmen stopped at the same place, and that is a shared limit, not coincidence.",
         "Distinguishes between a man traveling toward something and a man building toward something — Silas is the second kind, and this matters to her.",
         "Would like to know more about her father's line — the March or Marsh question is not closed for her.",
         "The March-or-Marsh question feels to her like a door she has not yet decided whether to open — not wrong, not right, simply waiting.",
         "The Kept Breath reached the armor-worn places but the left shoulder's set is too old to fully hold in one pass — she registered this.",
         "The left shoulder's old set yielded slightly under a slow, conserved second pass — not dissolved, but a degree loosened.",
         "She leads when she has decided — and she decided some time before the motion",
-        "Silas goes still when he decides to stop deciding — she read it the moment it happened."
+        "Silas goes still when he decides to stop deciding — she read it the moment it happened.",
+        "Silas goes still when he decides to stop deciding — she reads it immediately and moves on it."
       ],
       "skillsObserved": [
         "precise diagnosis of a failed rune-work attempt from positio",
@@ -2695,7 +2706,7 @@
         "reading a structural mark's pressure and interval from an ir"
       ],
       "status": "active",
-      "statusNote": "In Silas's quarters in Ama's house — holding his face in both hands, the lead entirely hers.",
+      "statusNote": "In Silas's quarters in Ama's house — fully in the lead, the room dark, no hesitation in her at all.",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 12
@@ -4229,7 +4240,7 @@
     "lastTickWorldDay": 22,
     "lastCanonWorldDay": 22,
     "lastGenCount": 548,
-    "turnsSinceOffer": 6,
+    "turnsSinceOffer": 7,
     "recentOffers": [
       {
         "thing": "The shadow-build showed Calvar's drainage failure precisely — the sleeve geometry, the collar, the east-bend junction — before it showed…",
@@ -6003,8 +6014,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784759670898,
-  "rev": 1012,
+  "updatedAt": 1784760656858,
+  "rev": 1013,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8016,7 +8027,7 @@
   "regionsKnown": {
     "valley": 435,
     "the_palelands": 6,
-    "the_center": 35
+    "the_center": 36
   },
   "foreclosed": [
     "rootkin",
@@ -8130,10 +8141,10 @@
     {
       "id": "sess-10",
       "startedAt": "2026-07-22T20:59:08.612Z",
-      "lastAt": "2026-07-22T22:34:30.896Z",
+      "lastAt": "2026-07-22T22:50:56.856Z",
       "startDay": 22,
       "endDay": 22,
-      "beats": 9
+      "beats": 10
     }
   ],
   "company": [
@@ -8321,22 +8332,22 @@
     "the_crossing": "https://image.pollinations.ai/prompt/The%20Crossing%3A%20Every%20axis%20crosses%20here%20at%20nothing%2C%20and%20the%20result%20is%20not%20grey%20%E2%80%94%20it%20is%20CROWDED.%20The%20Crossing%20leans%20toward%20no%20pole%2C%20which%20is%20precisely%20why%20it%20can%20hold%20them%20all%3A%20an%20Umbral%20and%20a%20Blazeborn%20drink%20at%20the%20same%20table%20because%20neither%20has%20the%20standing%20to%20make%20the%20other%20leave.%20The%20poles%20are%20lonely%20places.%20The%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=24144&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 21,
-    "choices": 21,
+    "sceneSummary": 22,
+    "choices": 22,
     "characterDeltas": 12,
-    "scene": 21,
-    "npcUpdates": 20,
+    "scene": 22,
+    "npcUpdates": 21,
     "factUpdates": 2,
     "placeUpdates": 2,
     "codexUpdates": 10,
-    "timeOps": 18,
+    "timeOps": 19,
     "imagePrompt": 1,
     "sceneEnded": 7,
     "itemUpdates": 1,
     "questUpdates": 1,
     "offer": 2
   },
-  "_opTurns": 21,
+  "_opTurns": 22,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "recipes": {
+    "order_sense+palework": {
+      "braidKey": "order_sense+palework",
+      "name": "Ashen Meridian",
+      "description": "Where Order-Sense traced the invisible lattice of what-is and Palework read the pale threads of what-will-be, the Ashen Meridian fuses both into a single sovereign perception: the practitioner sees not merely the structure of the present moment nor the drift of futures, but the exact seam where fate is load-bearing — the one thread whose breaking would unravel a chain of events entirely. Ash…",
+      "notFor": "The Ashen Meridian cannot heal what has already occurred, reverse damage already taken, or compel a person's will — it forecloses futures, it does not rewrite the past, and it holds no sway over the living heart.",
+      "emergentFunction": "bind",
+      "tree": [
+        {
+          "name": "Pale Lattice Reading",
+          "grants": "The practitioner perceives both the structural order of a space or object and its probable futures simultaneously — a door is seen as a door and as the three most likely events that will pass…",
+          "cannot": "Cannot yet distinguish which future-thread is load-bearing; all probable threads appear with equal weight, making binding impossible at this rank."
+        },
+        {
+          "name": "Meridian Strike",
+          "grants": "Strikes land not on the body but on the causal structure around a target — disrupting the ordered sequence of their intended action before it completes. A swordsman mid-swing finds the motion…",
+          "cannot": "Cannot hold the disruption beyond one action; the causal structure reasserts itself, and the practitioner cannot yet permanently foreclose any thread."
+        },
+        {
+          "name": "Bound Meridian",
+          "grants": "The practitioner identifies the single load-bearing future-thread in any foreseeable chain and seals it — the foreseen event is bound from occurring for as long as concentration is maintained, or…",
+          "cannot": "Cannot bind more than one thread at a time; cannot bind events in which the practitioner is the sole cause; cannot bind death already in motion."
+        }
+      ],
+      "namedBy": "gm",
+      "sourceNames": [
+        "Order-Sense",
+        "Palework"
+      ],
+      "contributedBy": {
+        "playerKey": "player-s9z9u1",
+        "characterId": "char-mrhs8286",
+        "characterName": "Silas Weir"
+      },
+      "foundWorldDay": 22
+    }
+  }
+}

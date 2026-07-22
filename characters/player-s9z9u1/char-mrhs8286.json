@@ -1736,14 +1736,19 @@
         "player": "Shift the lead - \"Pell - (thrust) - Ran ",
         "summary": "Silas passes the lead with a thrust gesture and speaks the name Ran; Pell receives both without ceremony and answers in kind.",
         "narration": "You give her the gesture — a short forward push of the hip, unmistakable, the kind of clear signal that needs no translation at an anvil or anywhere else. Pell reads it instantly. She always reads iron from the inside, and you are not iron tonight only in the strictest technical sense.\n\nShe takes the shift without breaking rhythm. Her hands reset — one at your hip, one flat at your sternum, the smith's instinct for load-bearing contact finding the right points without searching. She is present in the particular way she is always present when the work is worth doing: unhurried, precise, none of the performance that would make this about being watched.\n\n'Ran,' you say, and she hears the weight in it — the middle name, the one she found in the spear-binding and pressed like a rune into cooling iron and has not worn out with use since. Her breath changes slightly. Not surprise. Something closer to the expression she made when the order-sense capacitor closed on her idiom instead of yours: the material showing better grain than expected.\n\nShe brings her mouth to your jaw and says nothing. She says it very thoroughly."
+      },
+      {
+        "player": "Take the lead back — her name again, differently this time, and move.",
+        "summary": "Silas takes the lead back with her name, differently said; Pell shifts without releasing, her forehead to his in the complete dark.",
+        "narration": "The word comes out of you differently this time.\n\nNot the thrust-signal, not the lead-pass — this is you taking it back, and she knows the difference before you finish the first syllable. Her name in your mouth has grain to it, the way iron has grain when it is cooling and you can feel it changing under your hands. She hears that grain.\n\nYou move, and she moves with you, and the specific thing that happens is that her hands do not release — they shift, redistributing load, adjusting pressure, because she is a smith and she does not let go of a thing just because the job has changed. One hand finds your jaw instead. Her thumb is at the corner of your mouth and she tilts your head with a blacksmith's economy, no wasted effort, as if she is setting an angle for a clean strike.\n\n'Ran,' you say again, and it is not the same word.\n\nShe makes a sound low in her throat that is not a word and is not an answer and is also both of those things. Her forehead comes to yours. The dark is complete now. The window-glow is not enough to see by and neither of you are looking anyway — you are attending to each other by other means, the way a smith locates a flaw by sound and heat and the feeling in the wrist, not by sight.\n\nHuginn, in the corner, has pressed itself so completely against the stone that it is achieving something geometrically improbable. It is absolutely not thinking about this."
       }
     ],
     "lastTurn": {
-      "narration": "You give her the gesture — a short forward push of the hip, unmistakable, the kind of clear signal that needs no translation at an anvil or anywhere else. Pell reads it instantly. She always reads iron from the inside, and you are not iron tonight only in the strictest technical sense.\n\nShe takes the shift without breaking rhythm. Her hands reset — one at your hip, one flat at your sternum, the smith's instinct for load-bearing contact finding the right points without searching. She is present in the particular way she is always present when the work is worth doing: unhurried, precise, none of the performance that would make this about being watched.\n\n'Ran,' you say, and she hears the weight in it — the middle name, the one she found in the spear-binding and pressed like a rune into cooling iron and has not worn out with use since. Her breath changes slightly. Not surprise. Something closer to the expression she made when the order-sense capacitor closed on her idiom instead of yours: the material showing better grain than expected.\n\nShe brings her mouth to your jaw and says nothing. She says it very thoroughly.",
-      "sceneSummary": "Silas passes the lead with a thrust gesture and speaks the name Ran; Pell receives both without ceremony and answers in kind.",
+      "narration": "The word comes out of you differently this time.\n\nNot the thrust-signal, not the lead-pass — this is you taking it back, and she knows the difference before you finish the first syllable. Her name in your mouth has grain to it, the way iron has grain when it is cooling and you can feel it changing under your hands. She hears that grain.\n\nYou move, and she moves with you, and the specific thing that happens is that her hands do not release — they shift, redistributing load, adjusting pressure, because she is a smith and she does not let go of a thing just because the job has changed. One hand finds your jaw instead. Her thumb is at the corner of your mouth and she tilts your head with a blacksmith's economy, no wasted effort, as if she is setting an angle for a clean strike.\n\n'Ran,' you say again, and it is not the same word.\n\nShe makes a sound low in her throat that is not a word and is not an answer and is also both of those things. Her forehead comes to yours. The dark is complete now. The window-glow is not enough to see by and neither of you are looking anyway — you are attending to each other by other means, the way a smith locates a flaw by sound and heat and the feeling in the wrist, not by sight.\n\nHuginn, in the corner, has pressed itself so completely against the stone that it is achieving something geometrically improbable. It is absolutely not thinking about this.",
+      "sceneSummary": "Silas takes the lead back with her name, differently said; Pell shifts without releasing, her forehead to his in the complete dark.",
       "choices": [
         {
-          "label": "Let the night run its full course — no words, no hurry, nowhere else to be.",
+          "label": "Stay in this — let it continue at its own pace, no words, only the dark and the heat of the work.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
@@ -1753,7 +1758,7 @@
           "trivial": true
         },
         {
-          "label": "Say her name back — the full one, Pell Ran Marsh — and see what it does.",
+          "label": "Say something — her full name, or the other one. The one she gave you at the forge.",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
@@ -1763,9 +1768,9 @@
           "trivial": true
         },
         {
-          "label": "Press your palm flat against the parenthesis scar below her shoulder blade and wait — not asking, just present.",
-          "attribute": "social",
-          "subAttribute": "insight",
+          "label": "Go still against her — let her feel the weight of you settled, the way iron settles when the heat has done its work.",
+          "attribute": "physical",
+          "subAttribute": "strength",
           "difficulty": 0,
           "intentTags": [
             "romantic"
@@ -1773,9 +1778,9 @@
           "trivial": true
         },
         {
-          "label": "Take the lead back — her name again, differently this time, and move.",
+          "label": "After — when the work is done and the dark is just the dark again — ask her about the iridescent fabric. Where it came from. You have been patient.",
           "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
             "romantic"
@@ -1784,15 +1789,15 @@
         }
       ],
       "scene": {
-        "setting": "Silas's small stone room in Ama's house, Cairnhold — dark, warm, early spring night, tallow spent, faint window-glow only.",
+        "setting": "Silas's small stone room in Ama's house, Cairnhold — complete dark now, tallow spent, window-glow too faint to see by. Early spring night, warm and still.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Has taken the lead — hands reset at hip and sternum, mouth at his jaw, unhurried and entirely herself."
+            "state": "Forehead to Silas's, one hand at his jaw, thumb at the corner of his mouth — the lead's weight redistributed but her hands not released."
           },
           {
             "name": "Huginn",
-            "state": "Pressed face-first into the corner of the wall, motionless, extremely invested in the stone."
+            "state": "Pressed face-first into the corner of the wall, geometrically committed to ignoring everything."
           }
         ],
         "objects": [
@@ -1801,7 +1806,7 @@
           "Tallow stub — spent, dark",
           "Pell's bracer on the floor",
           "Pell's shirt — set aside",
-          "The black iridescent fabric — at the edge of reach, shimmer still moving when the window-glow catches it",
+          "The black iridescent fabric — at the edge of reach, shimmer still moving when the light catches it",
           "Memory (spear) leaned in the corner",
           "Wash-basin, water cooled, cloth folded on its rim"
         ],
@@ -1815,26 +1820,30 @@
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "pell-ran-marsh",
+          "npcId": "pell",
           "name": "Pell Ran Marsh",
-          "note": "Received the thrust-gesture and the name Ran without breaking rhythm — hands reset with a smith's load-bearing instinct, mouth at his jaw, unhurried. The name landed.",
+          "note": "Received the name-as-lead-return with a sound and a forehead pressed to his — her hands redistributed but not released; attending by feel in the complete dark.",
           "learned": [
-            "Silas speaks the name Ran in this context — she now knows the weight he puts on it here."
+            "The name Ran in Silas's mouth has grain — she hears the difference between a signal and a claim."
           ],
-          "statusNote": "In Silas's quarters in Ama's house — has taken the lead, fully present, the night long."
+          "statusNote": "In Silas's quarters in Ama's house — in the complete dark, forehead to his, the night long."
         }
-      ]
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "a sustained moment in the dark — time moving slowly and with purpose"
+      }
     },
     "sceneState": {
-      "setting": "Silas's small stone room in Ama's house, Cairnhold — dark, warm, early spring night, tallow spent, faint window-glow only.",
+      "setting": "Silas's small stone room in Ama's house, Cairnhold — complete dark now, tallow spent, window-glow too faint to see by. Early spring night, warm and still.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Has taken the lead — hands reset at hip and sternum, mouth at his jaw, unhurried and entirely herself."
+          "state": "Forehead to Silas's, one hand at his jaw, thumb at the corner of his mouth — the lead's weight redistributed but her han"
         },
         {
           "name": "Huginn",
-          "state": "Pressed face-first into the corner of the wall, motionless, extremely invested in the stone."
+          "state": "Pressed face-first into the corner of the wall, geometrically committed to ignoring everything."
         }
       ],
       "objects": [
@@ -2698,7 +2707,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d12] Held Silas's hand on her shoulder and said his name — the way she uses it when she has decided something. The left shoulder's old set is too habitual for a single evening; she noticed the limit of the craft plainly.",
         "[d12] The left shoulder yielded a degree under the patient second pass — she breathed out and covered his hand with hers. The evening holds.",
         "[d12] Turned the evening's language back with a smith's precision — read Silas's palm, pressed her lips to his wrist, pulled him toward her. The invitation landed and is not ambiguous.",
         "[d12] Turned the lead back to herself — read his palm, pressed her lips to his wrist, and named it the start of warming him up. The invitation is open.",
@@ -2707,17 +2715,18 @@
         "[d12] Led fully — shirt off without ceremony, the word 'mold you' tested and accepted, settled in to work with a craftsman's unhurried patience.",
         "[d12] Held still and let Silas look — received the moment plainly, said 'there' as a receipt.",
         "[d12] Received 'goddess-touched' with dry confirmation rather than flattery — the expression of a smith whose material just showed better grain than expected. Moved past ceremony and into the work without hesitation.",
-        "[d12] Received the thrust-gesture and the name Ran without breaking rhythm — hands reset with a smith's load-bearing instinct, mouth at his jaw, unhurried. The name landed."
+        "[d12] Received the thrust-gesture and the name Ran without breaking rhythm — hands reset with a smith's load-bearing instinct, mouth at his jaw, unhurried. The name landed.",
+        "[d12] Received the name-as-lead-return with a sound and a forehead pressed to his — her hands redistributed but not released; attending by feel in the complete dark."
       ],
       "knownFacts": [
-        "The left shoulder's old set yielded slightly under a slow, conserved second pass — not dissolved, but a degree loosened.",
         "She leads when she has decided — and she decided some time before the motion",
         "Silas goes still when he decides to stop deciding — she read it the moment it happened.",
         "Silas goes still when he decides to stop deciding — she reads it immediately and moves on it.",
         "Says 'mold you' as a specification she finds worth meeting, not a metaphor.",
         "Silas goes still to hold something, not to hesitate — she reads the difference immediately.",
         "Silas noticed the iridescent fabric specifically and named it aloud — she registered that it was seen.",
-        "Silas speaks the name Ran in this context — she now knows the weight he puts on it here."
+        "Silas speaks the name Ran in this context — she now knows the weight he puts on it here.",
+        "The name Ran in Silas's mouth has grain — she hears the difference between a signal and a claim."
       ],
       "skillsObserved": [
         "precise diagnosis of a failed rune-work attempt from positio",
@@ -2728,7 +2737,7 @@
         "reading a structural mark's pressure and interval from an ir"
       ],
       "status": "active",
-      "statusNote": "In Silas's quarters in Ama's house — has taken the lead, fully present, the night long.",
+      "statusNote": "In Silas's quarters in Ama's house — in the complete dark, forehead to his, the night long.",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 12
@@ -4262,7 +4271,7 @@
     "lastTickWorldDay": 22,
     "lastCanonWorldDay": 22,
     "lastGenCount": 548,
-    "turnsSinceOffer": 11,
+    "turnsSinceOffer": 12,
     "recentOffers": [
       {
         "thing": "The shadow-build showed Calvar's drainage failure precisely — the sleeve geometry, the collar, the east-bend junction — before it showed…",
@@ -5664,21 +5673,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 11.584716571435829,
-    "cerebral": 15.691745157254282,
-    "social": 12.920841208856618,
-    "generous": 2.319187904994766,
-    "cautious": 3.8717887834397646,
-    "physical": 0.12541975492243085,
-    "risky": 0.13152745957624784,
-    "ruthless": 0.04193609311350145,
-    "carousing": 0.45682970479457113,
-    "amorous": 10.77807585829673,
-    "patient": 1.1204510593408437,
-    "stealth": 0.01625453682919645,
-    "devotion": 0.33206531388725485,
-    "craft": 0.9772816854382482,
-    "leadership": 0.0827373964071038
+    "strategic": 11.295098657149932,
+    "cerebral": 15.299451528322924,
+    "social": 12.597820178635203,
+    "generous": 2.261208207369897,
+    "cautious": 3.7749940638537702,
+    "physical": 0.12228426104937007,
+    "risky": 0.12823927308684163,
+    "ruthless": 0.04088769078566391,
+    "carousing": 0.4454089621747068,
+    "amorous": 11.508623961839312,
+    "patient": 1.0924397828573225,
+    "stealth": 0.01584817340846654,
+    "devotion": 0.32376368104007347,
+    "craft": 0.952849643302292,
+    "leadership": 0.0806689614969262
   },
   "aptitudes": [
     "strategist",
@@ -5687,7 +5696,7 @@
     "sage",
     "charmer"
   ],
-  "actionCount": 650,
+  "actionCount": 651,
   "grantsVersion": 1,
   "reconcileVersion": 16,
   "gallery": [
@@ -6037,8 +6046,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784761890751,
-  "rev": 1017,
+  "updatedAt": 1784762011784,
+  "rev": 1018,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -8050,7 +8059,7 @@
   "regionsKnown": {
     "valley": 435,
     "the_palelands": 6,
-    "the_center": 40
+    "the_center": 41
   },
   "foreclosed": [
     "rootkin",
@@ -8164,10 +8173,10 @@
     {
       "id": "sess-10",
       "startedAt": "2026-07-22T20:59:08.612Z",
-      "lastAt": "2026-07-22T23:11:30.749Z",
+      "lastAt": "2026-07-22T23:13:31.783Z",
       "startDay": 22,
       "endDay": 22,
-      "beats": 14
+      "beats": 15
     }
   ],
   "company": [
@@ -8355,22 +8364,22 @@
     "the_crossing": "https://image.pollinations.ai/prompt/The%20Crossing%3A%20Every%20axis%20crosses%20here%20at%20nothing%2C%20and%20the%20result%20is%20not%20grey%20%E2%80%94%20it%20is%20CROWDED.%20The%20Crossing%20leans%20toward%20no%20pole%2C%20which%20is%20precisely%20why%20it%20can%20hold%20them%20all%3A%20an%20Umbral%20and%20a%20Blazeborn%20drink%20at%20the%20same%20table%20because%20neither%20has%20the%20standing%20to%20make%20the%20other%20leave.%20The%20poles%20are%20lonely%20places.%20The%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=24144&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 26,
-    "choices": 26,
+    "sceneSummary": 27,
+    "choices": 27,
     "characterDeltas": 12,
-    "scene": 26,
-    "npcUpdates": 25,
+    "scene": 27,
+    "npcUpdates": 26,
     "factUpdates": 2,
     "placeUpdates": 2,
     "codexUpdates": 10,
-    "timeOps": 22,
+    "timeOps": 23,
     "imagePrompt": 1,
     "sceneEnded": 8,
     "itemUpdates": 1,
     "questUpdates": 1,
     "offer": 2
   },
-  "_opTurns": 26,
+  "_opTurns": 27,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

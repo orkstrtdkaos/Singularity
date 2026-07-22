@@ -6,7 +6,7 @@
   "origin": "valley",
   "background": "craftsman",
   "level": 10,
-  "xp": 951,
+  "xp": 956,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -76,7 +76,7 @@
   "maxHealth": 70,
   "health": 70,
   "maxEnergy": 145,
-  "energy": 95,
+  "energy": 91,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -525,87 +525,74 @@
         "player": "Study the wall-marks' final grouping directly — move close to the incomplete count and read what the last hand left",
         "summary": "The final wall-mark grouping read — a short run ending in one off-rhythm diagonal cut, sharp-edged, the hand that made it either interrupted or deliberately done.",
         "narration": "You step away from the convergence point carefully — the Waystaff stays planted, nodes still burning, the chamber's keeping-pulse unchanged beneath your feet. The wall-marks are three paces to your left, in the curved face of the absorptive inner layer. You bring your face close to the final grouping.\n\nThe marks are clean. Not worn, not crumbling — the edges are still sharp enough that the last hand must have been here relatively recently, by this chamber's measure of time. A short run of strikes: four, then three, then a single mark cut deeper and at a slight diagonal. Then nothing. The stone beside it is untouched.\n\nTeva moves up beside you without being asked. She says, quietly, that the diagonal one is different — pressed harder, like someone making a decision rather than continuing a count. She is right. The previous hands kept a steady rhythm. This last one accelerated at the end, skipped two beats of the four-second interval, and then cut that final mark off-rhythm and stopped.\n\nSomething interrupted them. Or someone chose to stop and leave a marker instead of a continuation."
+      },
+      {
+        "player": "Use Keen Appraisal on that final diagonal mark — read who cut it, how long ago, and whether they were leaving or arriving",
+        "summary": "Keen Appraisal reads the final diagonal — cut by the same hand as the last grouping, from a posture already turning to leave, pressed with deliberate emphasis: a marker left, not a wound.",
+        "narration": "You press two fingers to the diagonal cut — not touching the stone itself, just resting close, the way Keen Appraisal wants, reading the wear-memory without disturbing it. The energy moves economically, a single steady draw, and the history comes back in pieces.\n\nThe tool was a short iron punch, not a chisel. Someone carried it in a belt-pouch, not a warden's case. The cut was made from a standing position — you can tell by the angle of impact — with the weight behind it slightly off-center, the way a person leans when they are already turned to leave. Not arriving. Leaving, or mid-departure. The mark itself is pressed harder than the others in the grouping, but not in anger. Deliberate emphasis. A note left, not a wound.\n\nHow long ago is harder to fix here, inside the chamber's four-second field. The stone's own memory hums at the interval, and Keen Appraisal has to step around it the way you'd step around a bright lamp to read a letter. What you get is not precise: the mark is old, but newer than the grouping before it. The same era as the final hand in the full count. The same person, almost certainly — iron punch, similar grip, the posture of someone who has been here before and knows the walls.\n\nTeva says it quietly, right beside your shoulder. She says, \"They counted down to the end and then marked the door.\"\n\nAevi brightens one node — a single mote at the nearest crystal, brighter than the others. It does not speak yet. It is deciding whether to agree."
       }
     ],
     "lastTurn": {
-      "narration": "You step away from the convergence point carefully — the Waystaff stays planted, nodes still burning, the chamber's keeping-pulse unchanged beneath your feet. The wall-marks are three paces to your left, in the curved face of the absorptive inner layer. You bring your face close to the final grouping.\n\nThe marks are clean. Not worn, not crumbling — the edges are still sharp enough that the last hand must have been here relatively recently, by this chamber's measure of time. A short run of strikes: four, then three, then a single mark cut deeper and at a slight diagonal. Then nothing. The stone beside it is untouched.\n\nTeva moves up beside you without being asked. She says, quietly, that the diagonal one is different — pressed harder, like someone making a decision rather than continuing a count. She is right. The previous hands kept a steady rhythm. This last one accelerated at the end, skipped two beats of the four-second interval, and then cut that final mark off-rhythm and stopped.\n\nSomething interrupted them. Or someone chose to stop and leave a marker instead of a continuation.",
-      "sceneSummary": "The final wall-mark grouping read — a short run ending in one off-rhythm diagonal cut, sharp-edged, the hand that made it either interrupted or deliberately done.",
+      "narration": "You press two fingers to the diagonal cut — not touching the stone itself, just resting close, the way Keen Appraisal wants, reading the wear-memory without disturbing it. The energy moves economically, a single steady draw, and the history comes back in pieces.\n\nThe tool was a short iron punch, not a chisel. Someone carried it in a belt-pouch, not a warden's case. The cut was made from a standing position — you can tell by the angle of impact — with the weight behind it slightly off-center, the way a person leans when they are already turned to leave. Not arriving. Leaving, or mid-departure. The mark itself is pressed harder than the others in the grouping, but not in anger. Deliberate emphasis. A note left, not a wound.\n\nHow long ago is harder to fix here, inside the chamber's four-second field. The stone's own memory hums at the interval, and Keen Appraisal has to step around it the way you'd step around a bright lamp to read a letter. What you get is not precise: the mark is old, but newer than the grouping before it. The same era as the final hand in the full count. The same person, almost certainly — iron punch, similar grip, the posture of someone who has been here before and knows the walls.\n\nTeva says it quietly, right beside your shoulder. She says, \"They counted down to the end and then marked the door.\"\n\nAevi brightens one node — a single mote at the nearest crystal, brighter than the others. It does not speak yet. It is deciding whether to agree.",
+      "sceneSummary": "Keen Appraisal reads the final diagonal — cut by the same hand as the last grouping, from a posture already turning to leave, pressed with deliberate emphasis: a marker left, not a wound.",
       "choices": [
         {
-          "label": "Record the final grouping exactly — charcoal impression on bark-press paper, pattern and spacing both, before leaving the chamber",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "careful",
-            "craft"
-          ],
-          "trivial": true,
-          "abilityId": null,
-          "energyCost": null,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Teva directly — has she seen that diagonal mark pattern anywhere in her niche triangulation notes",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "trivial": true,
-          "abilityId": null,
-          "energyCost": null,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Use Keen Appraisal on that final diagonal mark — read who cut it, how long ago, and whether they were leaving or arriving",
+          "label": "Ask Aevi what it decided — whether it agrees with Teva's reading",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Press the Appraisal a little further — read the punch-tool's own wear, find out how many times it was used in this chamber",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "keen_appraisal",
+          "energyCost": 2
+        },
+        {
+          "label": "Step back to the convergence point and tell the chamber — in the four-second pulse — that you understand the door was marked",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": 15,
           "intentTags": [
             "study",
-            "careful"
+            "devote"
           ],
-          "trivial": false,
-          "abilityId": "keen_appraisal",
-          "energyCost": 2,
-          "encounterId": null,
-          "emergenceId": null
+          "abilityId": "sonic_resonance",
+          "energyCost": 4
         },
         {
-          "label": "Take everything you have and go — the chamber is keeping now; the seam is the next move, and the sealed threshold will not read itself",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "axes": {},
+          "label": "Name what you know aloud — to Teva and Aevi both — then lift the Waystaff and prepare to move toward the seam",
+          "attribute": "social",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "travel",
-            "careful"
+            "lead"
           ],
-          "trivial": true,
-          "abilityId": null,
-          "energyCost": null,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         }
       ],
+      "characterDeltas": {
+        "energy": -2
+      },
       "scene": {
-        "setting": "The chamber — hemispherical dressed-stone, flat-laid warm floor, no outside light. Floor warmth spreads evenly across all three heat-channels. All four Waystaff nodes burn white-blue and very still. Cellaceron stands three paces from the convergence point, close to the final wall-mark grouping on the absorptive inner face.",
+        "setting": "The chamber — hemispherical dressed-stone, flat-laid warm floor, no outside light. Floor warmth spreads evenly across all three heat-channels. All four Waystaff nodes burn white-blue and very still. Cellaceron stands close to the final wall-mark grouping on the absorptive inner face, two fingers near the diagonal cut.",
         "npcsPresent": [
           {
             "name": "Teva",
-            "state": "Standing beside Cellaceron at the wall-marks, having named the diagonal cut as pressed harder — a decision rather than a continuation."
+            "state": "Standing beside Cellaceron at the wall-marks; just named the diagonal cut as a door-marker, voice quiet and certain."
           },
           {
             "name": "Aevi",
-            "state": "Motes settled at all four Waystaff nodes, very still and very bright."
+            "state": "Motes settled at all four Waystaff nodes — one node slightly brighter than the others, deciding whether to agree with Teva's reading."
           }
         ],
         "objects": [
@@ -617,65 +604,56 @@
           "Resonance crystals — four nodes, seated in Waystaff lattice",
           "Liverwort mat — forward alcove (in pack)",
           "Chamber floor — warmth even across all three channels",
-          "Wall-marks — final grouping: four, then three, then one diagonal cut off-rhythm; edges still sharp; stone beside it untouched"
+          "Wall-marks — final grouping: four, then three, then one diagonal cut off-rhythm; read — short iron punch, leaving-posture, deliberate emphasis, same hand as last grouping, newer than prior marks"
         ],
         "threads": [
-          "The final mark was cut off-rhythm and the hand stopped — interrupted, or a deliberate choice to leave a marker rather than continue",
+          "Aevi has brightened one node and has not yet spoken — deciding whether to agree with Teva's 'marked the door' reading",
+          "The diagonal cut reads as a departure-marker, not an arrival — left by someone who knew this place and was leaving it deliberately",
           "The seam drops northeast-by-east below the chamber floor; the sealed threshold at its far end has not yet been approached",
-          "Teva may know more about this place than she has said",
           "The chamber is in keeping-state; the exchange is complete at five folds"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "teva",
-          "name": "Teva",
-          "note": "Named the diagonal cut as pressed harder than the surrounding marks — read it as a decision rather than continuation; observant without prompting.",
-          "learned": [
-            "The final wall-mark grouping ends with an off-rhythm diagonal cut, edges still sharp, pressed harder than the rest — the last hand either stopped deliberately or was interrupted"
-          ],
-          "skillsObserved": [
-            "acoustic pattern recognition — distinguished a rhythm-break and pressure difference in the wall-marks without being asked"
-          ],
-          "statusNote": "In the chamber at the wall-marks beside Cellaceron; mark still quieted after the five-fold exchange."
-        }
-      ],
       "codexUpdates": [
         {
           "topic": "the-chamber-beyond-the-threshold",
-          "label": "The Chamber's Final Mark",
+          "label": "The Chamber's Question",
           "kind": "mystery",
-          "fact": "The final grouping of wall-marks ends in a short run — four, three, then one diagonal cut pressed harder and off the four-second rhythm, edges still sharp. The last hand accelerated, skipped two beats, and stopped. The stone beside is untouched. Either interrupted or a deliberate end-marker, not a continuation.",
+          "fact": "The final diagonal wall-mark was cut by the same hand as the last grouping — short iron punch, carried informally, cut from a leaving-posture with deliberate emphasis. Not anger; a note left for whoever came next. The person counted to the end and then marked the door on their way out.",
           "links": [
-            "teva-directional-interval-count",
+            "teva-anselvar-missing-apprentice",
             "second-river-rising",
+            "northern-alcove-camp",
             "scored-mark-forward-alcove",
             "aevi"
           ]
         }
       ],
+      "placeUpdates": [
+        {
+          "note": "Final diagonal wall-mark read by Keen Appraisal — short iron punch, leaving-posture, deliberate emphasis, same hand as last grouping, newer than prior marks. Teva named it: 'they counted down to the end and then marked the door.'",
+          "subPlace": {
+            "name": "The Chamber — Wall-Mark Final Grouping",
+            "parent": "The Chamber",
+            "note": "Diagonal cut confirmed: departure-marker, not arrival. Same hand as final count grouping. The counter left.",
+            "visited": true
+          }
+        }
+      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short step to the wall and a close read — a few minutes inside the chamber."
-      },
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
-      "sceneEnded": false
+        "why": "A careful, quiet read of the diagonal mark — a few minutes of close attention."
+      }
     },
     "sceneState": {
-      "setting": "The chamber — hemispherical dressed-stone, flat-laid warm floor, no outside light. Floor warmth spreads evenly across all three heat-channels. All four Waystaff nodes burn white-blue and very still. Cellaceron stands three paces from the convergence point, close to the final wall-mark grouping on the absorptive inner face.",
+      "setting": "The chamber — hemispherical dressed-stone, flat-laid warm floor, no outside light. Floor warmth spreads evenly across all three heat-channels. All four Waystaff nodes burn white-blue and very still. Cellaceron stands close to the final wall-mark grouping on the absorptive inner face, two fingers near the diagonal cut.",
       "npcsPresent": [
         {
           "name": "Teva",
-          "state": "Standing beside Cellaceron at the wall-marks, having named the diagonal cut as pressed harder — a decision rather than a"
+          "state": "Standing beside Cellaceron at the wall-marks; just named the diagonal cut as a door-marker, voice quiet and certain."
         },
         {
           "name": "Aevi",
-          "state": "Motes settled at all four Waystaff nodes, very still and very bright."
+          "state": "Motes settled at all four Waystaff nodes — one node slightly brighter than the others, deciding whether to agree with Te"
         }
       ],
       "objects": [
@@ -690,9 +668,9 @@
         "Wall-marks — final grouping: four, then three, then one diagonal cut off-rhythm;"
       ],
       "threads": [
-        "The final mark was cut off-rhythm and the hand stopped — interrupted, or a deliberate choice to leave a marker rather than continue",
+        "Aevi has brightened one node and has not yet spoken — deciding whether to agree with Teva's 'marked the door' reading",
+        "The diagonal cut reads as a departure-marker, not an arrival — left by someone who knew this place and was leaving it deliberately",
         "The seam drops northeast-by-east below the chamber floor; the sealed threshold at its far end has not yet been approached",
-        "Teva may know more about this place than she has said",
         "The chamber is in keeping-state; the exchange is complete at five folds"
       ]
     }
@@ -1225,7 +1203,6 @@
     "harmonic_heights_terrace": {
       "visits": 1,
       "notes": [
-        "[d9] Resonant Sight confirms chamber walls are a pressed aggregate in variable courses — outer containment layer, inner absorptive face, floor as top surface of a deeper structure. Ceiling height is calculated for four-second echo return from floor level. A nested three-two-three interval has appeared…",
         "[d9] Three-two-three interval answered through the Waystaff on day 9 dawn — chamber replied by stepping the nested count one degree deeper. The exchange is now evaluative: the chamber is testing the precision of the response.",
         "[d9] Day 9 dawn: Aevi spoke through the Waystaff and named the chamber's purpose — a preparation cycle for a return. The chamber heard the question asked and gave no additional response beyond the continuing pulse. The nested interval remains one step deeper, waiting.",
         "[d9] Day 9 dawn: three-fold nested interval established — chamber answered a deepened count with a third fold and paused, evaluating. The exchange is now three levels deep.",
@@ -1236,7 +1213,8 @@
         "[d9] Wall-marks read from convergence point on day 9 dawn — a multi-era count, three hands, consistent four-second interval throughout, final grouping stopping mid-count with edges still sharp. Someone kept this place across generations and left before the end.",
         "[d9] Day 9 dawn: chamber gave orientation — northeast-by-east, through the seam, destination further than the seam. Warmth in the floor confirmed the bearing by leaning. Third offer (continued holding) not yet taken.",
         "[d9] Day 9 dawn: Resonant Sight through the full Waystaff lattice confirms the chamber is a mouth — the seam descends northeast-by-east below the floor, dropping consistently, opening into a larger structure. A sealed threshold of older, non-stone material absorbs the Resonant field at the seam's far…",
-        "[d9] Third offer taken on day 9 dawn — continued holding. Chamber shifted from waiting to keeping; warmth spread evenly across all three heat-channels from the convergence point. The exchange is complete at five folds; the chamber is now present with whoever holds the convergence point."
+        "[d9] Third offer taken on day 9 dawn — continued holding. Chamber shifted from waiting to keeping; warmth spread evenly across all three heat-channels from the convergence point. The exchange is complete at five folds; the chamber is now present with whoever holds the convergence point.",
+        "[d9] Final diagonal wall-mark read by Keen Appraisal — short iron punch, leaving-posture, deliberate emphasis, same hand as last grouping, newer than prior marks. Teva named it: 'they counted down to the end and then marked the door.'"
       ],
       "flags": {
         "resonance_niche_tone_event": "day2_night_second_river_frequency",
@@ -1367,6 +1345,14 @@
           "visited": true,
           "note": "Third offer taken; chamber now in keeping-state. Warmth even, nodes steady. The wall-mark record and orientation both available as established knowledge. The seam below remains the next threshold.",
           "parentUnresolved": "The Chamber"
+        },
+        "the-chamber-wall-mark-final-grouping": {
+          "name": "The Chamber — Wall-Mark Final Grouping",
+          "parentId": "harmonic_heights_terrace",
+          "day": 9,
+          "visited": true,
+          "note": "Diagonal cut confirmed: departure-marker, not arrival. Same hand as final count grouping. The counter left.",
+          "parentUnresolved": "The Chamber"
         }
       },
       "vectorsKnown": [
@@ -1475,7 +1461,7 @@
     "lastTickWorldDay": 22,
     "lastCanonWorldDay": 22,
     "lastGenCount": 529,
-    "turnsSinceOffer": 22
+    "turnsSinceOffer": 23
   },
   "subAttributes": {
     "strength": 2,
@@ -1600,7 +1586,6 @@
         "label": "The Chamber's Question",
         "kind": "mystery",
         "facts": [
-          "[d9] Day 9 dawn: Aevi names the chamber's function — a preparation cycle counting toward a return. Something was here and moved on; the chamber has been keeping count ever since, waiting for conditions to match again. The three-two-three ratio is a handshake for whatever that thing was. The chamber…",
           "[d9] Day 9 dawn: the three-two-three sent one fold deeper was answered with a third fold — the chamber can follow the count further than it has yet shown. It stopped there and held, not returning a fourth. Aevi named the posture as deciding.",
           "[d9] Day 9 dawn: the chamber answered the fourth fold with a fifth — unprompted, a statement rather than a test. All four Waystaff nodes fired simultaneously. The floor warmed. Aevi named the shift: no longer testing. The exchange is now in recognition.",
           "[d9] Day 9 dawn: fifth fold sent without force — offered, not pushed. The chamber returned the same five folds and held. No sixth, no deepening — a settled state. Aevi named this as receipt: the chamber has recognized what it was counting toward. Teva's mark quieted simultaneously.",
@@ -1611,7 +1596,8 @@
           "[d9] Day 9 dawn: the chamber's second offer — orientation — confirmed northeast-by-east as the direction, but Aevi named it as pointing through the seam, not at it. The seam is a passage; the destination is further than the seam itself. The warmth in the floor leaned to confirm it.",
           "[d9] Day 9 dawn: Resonant Sight through the Waystaff confirms the chamber is the topmost face of a considerably larger structure — the seam drops northeast-by-east at a shallow, consistent angle, the way a dry riverbed falls toward a confluence. At the seam's far end the material changes: older…",
           "[d9] Day 9 dawn: the third offer taken — continued holding — and the chamber shifted from waiting to keeping. The warmth spread evenly across all three heat-channels. Aevi named it: a keeping thing is oriented toward what is already here. The exchange is no longer evaluative or orientation-giving; the…",
-          "[d9] The final grouping of wall-marks ends in a short run — four, three, then one diagonal cut pressed harder and off the four-second rhythm, edges still sharp. The last hand accelerated, skipped two beats, and stopped. The stone beside is untouched. Either interrupted or a deliberate end-marker, not a…"
+          "[d9] The final grouping of wall-marks ends in a short run — four, three, then one diagonal cut pressed harder and off the four-second rhythm, edges still sharp. The last hand accelerated, skipped two beats, and stopped. The stone beside is untouched. Either interrupted or a deliberate end-marker, not a…",
+          "[d9] The final diagonal wall-mark was cut by the same hand as the last grouping — short iron punch, carried informally, cut from a leaving-posture with deliberate emphasis. Not anger; a note left for whoever came next. The person counted to the end and then marked the door on their way out."
         ],
         "links": [
           "second-river-rising",
@@ -1914,7 +1900,7 @@
     "schemaVersion": 1,
     "uses": {
       "prism_sight": 14,
-      "keen_appraisal": 11,
+      "keen_appraisal": 12,
       "sonic_resonance": 23,
       "motes-vigil": 4,
       "light_well": 3,
@@ -2110,16 +2096,16 @@
   "customEncounters": {},
   "reconcileVersion": 14,
   "tendencies": {
-    "cerebral": 39.031992774002475,
-    "strategic": 38.378507728499976,
-    "cautious": 37.32987779990101,
-    "social": 24.13067792735674,
-    "generous": 10.425286565955256,
-    "risky": 2.746272995361945,
-    "carousing": 1.0235103222026845,
-    "patient": 2.2250021570978107,
-    "craft": 1.0225560159521436,
-    "devotion": 2.7185111786622618
+    "cerebral": 39.05619295465241,
+    "strategic": 37.419045035287475,
+    "cautious": 37.396630854903485,
+    "social": 23.52741097917282,
+    "generous": 10.164654401806374,
+    "risky": 2.6776161704778962,
+    "carousing": 0.9979225641476173,
+    "patient": 2.1693771031703655,
+    "craft": 0.99699211555334,
+    "devotion": 2.650548399195705
   },
   "aptitudes": [
     "strategist",
@@ -2131,9 +2117,9 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 208,
-  "updatedAt": 1784690329377,
-  "rev": 75,
+  "actionCount": 209,
+  "updatedAt": 1784690543317,
+  "rev": 76,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -2143,7 +2129,7 @@
   "syncedAt": 1783791225006,
   "teachers": {},
   "regionsKnown": {
-    "valley": 31
+    "valley": 32
   },
   "company": [],
   "foreclosed": [],
@@ -2208,10 +2194,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-22T01:26:18.061Z",
-      "lastAt": "2026-07-22T03:18:49.376Z",
+      "lastAt": "2026-07-22T03:22:23.309Z",
       "startDay": 22,
       "endDay": 22,
-      "beats": 22
+      "beats": 23
     }
   ],
   "_pendingArrival": null,
@@ -2265,22 +2251,22 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 22,
-    "choices": 22,
-    "characterDeltas": 13,
-    "scene": 22,
+    "sceneSummary": 23,
+    "choices": 23,
+    "characterDeltas": 14,
+    "scene": 23,
     "npcUpdates": 19,
-    "codexUpdates": 19,
-    "timeOps": 22,
+    "codexUpdates": 20,
+    "timeOps": 23,
     "sceneEnded": 9,
-    "placeUpdates": 14,
+    "placeUpdates": 15,
     "moveTo": 1,
     "questUpdates": 11,
     "stateOps": 1,
     "factUpdates": 1,
     "stageOps": 1
   },
-  "_opTurns": 22,
+  "_opTurns": 23,
   "_intentAsked": null,
   "corrections": [
     {

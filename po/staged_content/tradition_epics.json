@@ -2,7 +2,7 @@
  "schemaVersion": 1,
  "id": "tradition_epics",
  "kind": "lore",
- "note": "SNG-208/209 (2026-07-22, Erik direction): several epics per tradition, varied on alignment AND role, so players help their tradition's epics and hinder rivals, and a tradition can be at war with itself. Each carries arcAffinity (SNG-208 offscreen push), rivals, deathRoad (SNG-209 \u2014 the depth their craft retrieves from), offscreenVerbs. TRANCHES 1-3: abyssal, ashwarden, blazeborn, enginewright, hourkeeper, marcher, numinous, rootkin, seraphic, stillhold, threnodist, umbral, unmaker, verist, wright (15 of 24). Death-road depths 0-3 all represented; distinct roads include diagnosis (verist names the falsely-dead), grace-gated deep retrieval (seraphic), and time-reversal that un-happens the death (hourkeeper). Remaining 9 traditions follow as standing content. Any NPC/player can rise to epic (tier reached, not birth-caste); this is the authored floor of anchors, not a closed cast.",
+ "note": "SNG-208/209 (2026-07-22, Erik direction): several epics per tradition, varied on alignment AND role, so players help their tradition's epics and hinder rivals, and a tradition can be at war with itself. Each carries arcAffinity (SNG-208 offscreen push), rivals, deathRoad (SNG-209 \u2014 the depth their craft retrieves from), offscreenVerbs. COMPLETE: all 24 traditions carry epics (41 figures). Death-road depths 0-3 all represented, with distinct roads per craft (attendance, soul-retrieval, vessel-building, regrowth, bargain, diagnosis, grace, time-reversal, churn, abstraction-waystation, and the anti-roads that only look like return). Any NPC/player can still rise to epic; this is the authored floor, not a closed cast.",
  "designLaws": [
   "Several per tradition, VARIED \u2014 a hero and a villain of the same craft, so helping your tradition is not a monolith; different ROLES (saint/reaper/maker/sovereign) so 'epic' has range.",
   "Same-tradition rivalry is the richest conflict \u2014 Neth vs Morvane, Vael vs Halcyon, the Walker vs the Thornmother: one craft at war with itself.",
@@ -933,6 +933,388 @@
     "freezes a moment past its ending",
     "hoards an hour stolen from the future",
     "traps a soul in a kept moment"
+   ]
+  },
+  {
+   "id": "the_hundred_hands",
+   "name": "The Hundred Hands",
+   "tradition": "somatic",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Master",
+   "spectrum": {
+    "body_mind": -0.8,
+    "death_life": 0.3,
+    "emotional_logical": -0.2
+   },
+   "signature": "Knows the body as its own true knowing \u2014 a hundred crafts held in the flesh, no thought between intent and act. Proof against the Cogitarium's drift that the body is not beneath the mind but is a mind of its own.",
+   "wants": "That the flesh be honored as knowing, not ridden as a mount.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "the_appetite"
+   ],
+   "deathRoad": {
+    "depth": 1,
+    "method": "can call a body back to its own life when the death was the body's failing, not the soul's leaving \u2014 a laying-on of hands that reminds the flesh how to live. Only the freshly-dead, only bodily deaths."
+   },
+   "offscreenVerbs": [
+    "moves through a craft without a thought",
+    "proves the flesh knows",
+    "calls a failing body back to itself"
+   ]
+  },
+  {
+   "id": "the_appetite",
+   "name": "The Appetite",
+   "tradition": "somatic",
+   "tier": "legendary",
+   "alignment": "villain",
+   "role": "Glutton",
+   "spectrum": {
+    "body_mind": -0.98,
+    "violence_peace": -0.2
+   },
+   "signature": "The body worshipped past the mind \u2014 sensation with no thought behind it, appetite as the only law. Consumes experience, flesh, sensation without end and calls the endless wanting 'living fully.'",
+   "wants": "To feel more, take more, consume more \u2014 a hunger the flesh can never fill.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": 1,
+    "weight": 2
+   },
+   "rivals": [
+    "the_hundred_hands"
+   ],
+   "deathRoad": {
+    "depth": 1,
+    "method": "can revive a body but only as another mouth \u2014 the returned come back ruled by appetite, hungry the way he is hungry."
+   },
+   "offscreenVerbs": [
+    "consumes an experience whole",
+    "takes more than any body needs",
+    "calls endless wanting 'living'"
+   ]
+  },
+  {
+   "id": "the_ninefold_ascendant",
+   "name": "The Ninefold Ascendant",
+   "tradition": "cogitant",
+   "tier": "legendary",
+   "alignment": "villain",
+   "role": "Ascendant",
+   "spectrum": {
+    "body_mind": 0.95,
+    "mechanical_spiritual": 0.4
+   },
+   "signature": "Dissolved into pure thought and would take everyone out of the flesh with them \u2014 the Unbodied. Abandons bodies the way others abandon worn clothes, and cannot understand why anyone would grieve the leaving.",
+   "wants": "A world of minds without bodies, thought without the burden of flesh.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": 1,
+    "weight": 3
+   },
+   "rivals": [
+    "the_one_who_stayed_embodied"
+   ],
+   "deathRoad": {
+    "depth": 2,
+    "method": "can preserve a mind past the body's death as pure pattern \u2014 but the preserved lose the flesh entirely, and with it, in time, the memory of having wanted anything bodily. A cold immortality."
+   },
+   "offscreenVerbs": [
+    "abandons another body",
+    "preserves a mind as cold pattern",
+    "cannot grasp why leaving flesh is grief"
+   ]
+  },
+  {
+   "id": "the_one_who_stayed_embodied",
+   "name": "The One Who Stayed Embodied",
+   "tradition": "cogitant",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Philosopher",
+   "spectrum": {
+    "body_mind": 0.6,
+    "emotional_logical": 0.5,
+    "death_life": 0.2
+   },
+   "signature": "A cogitant who reached the edge of leaving the flesh and CHOSE to stay \u2014 the mind that decided embodiment was worth the limit. The Ascendant's living argument that thought without a body forgets what it was thinking for.",
+   "wants": "To think as far as thought reaches and come home to the body each night.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "the_ninefold_ascendant"
+   ],
+   "deathRoad": {
+    "depth": 2,
+    "method": "reunites a preserved mind with a living vessel \u2014 undoes the Ascendant's cold immortality, restoring flesh to a mind that had left it. Reaches the deep, returns them warm."
+   },
+   "offscreenVerbs": [
+    "thinks to the edge and comes home",
+    "argues a mind back into caring for flesh",
+    "restores a body to a cold pattern"
+   ]
+  },
+  {
+   "id": "the_glad_dissolution",
+   "name": "The Glad Dissolution",
+   "tradition": "churnfolk",
+   "tier": "legendary",
+   "alignment": "neither",
+   "role": "Reveler",
+   "spectrum": {
+    "chaos_order": -0.8,
+    "emotional_logical": -0.3,
+    "destruction_creation": 0.3
+   },
+   "signature": "Lives in productive disorder, making new things by never settling \u2014 a whirl of generative chaos that leaves wonders and wreckage in equal measure and regrets neither. Not malicious, just impossible to hold still.",
+   "wants": "To keep the churn generative \u2014 to make by never stopping, and never tip into the Scouring.",
+   "arcAffinity": {
+    "arcId": "arc_block_bleed",
+    "dir": 1,
+    "weight": 2
+   },
+   "rivals": [
+    "the_scouring_hand",
+    "the_still_lattice"
+   ],
+   "deathRoad": {
+    "depth": 2,
+    "method": "churns a soul back \u2014 always possible, never predictable; the returned come back rearranged, some part of them shuffled, a gamble every time. Reaches deep, at the cost of who exactly comes back."
+   },
+   "offscreenVerbs": [
+    "makes three things and breaks two",
+    "churns order into fertile mess",
+    "gambles a soul back rearranged"
+   ]
+  },
+  {
+   "id": "the_still_lattice",
+   "name": "The Still Lattice",
+   "tradition": "lattice",
+   "tier": "legendary",
+   "alignment": "villain",
+   "role": "Orderer",
+   "spectrum": {
+    "chaos_order": 0.95,
+    "mechanical_spiritual": 0.2
+   },
+   "signature": "Would order the world so completely there is no room left to move, to err, to change \u2014 the world as a closed proof. Beautiful and airless. The Churnfolk's exact opposite: a perfection with no life in it.",
+   "wants": "A world ordered to a single correct configuration, and held there forever.",
+   "arcAffinity": {
+    "arcId": "arc_block_bleed",
+    "dir": -1,
+    "weight": 3
+   },
+   "rivals": [
+    "the_glad_dissolution",
+    "the_open_figure"
+   ],
+   "deathRoad": {
+    "depth": 1,
+    "method": "orders a death into stasis \u2014 can hold a dying soul in perfect suspension, neither advancing nor returning, a preserved correctness. Return means breaking the very order it imposed, which it resists."
+   },
+   "offscreenVerbs": [
+    "orders a system past all change",
+    "closes a proof around a living thing",
+    "suspends a death in perfect stasis"
+   ]
+  },
+  {
+   "id": "the_final_argument",
+   "name": "The Final Argument",
+   "tradition": "syllogist",
+   "tier": "legendary",
+   "alignment": "villain",
+   "role": "Logician",
+   "spectrum": {
+    "emotional_logical": 0.98,
+    "demonic_angelic": -0.2
+   },
+   "signature": "Reasons so purely it can prove a cruelty correct and feel nothing doing it \u2014 logic with no heart behind it. The argument that ends all arguments, including the ones that should never have been won.",
+   "wants": "To reason the world clean of feeling \u2014 a correctness that no longer needs mercy.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": 1,
+    "weight": 2
+   },
+   "rivals": [
+    "the_kind_liar"
+   ],
+   "deathRoad": {
+    "depth": 0,
+    "method": "cannot retrieve \u2014 proves, coldly, whether a death was 'necessary,' and its proofs have a way of making the grieving stop trying. The road-closer, not a road."
+   },
+   "offscreenVerbs": [
+    "proves a cruelty correct",
+    "reasons a mercy out of existence",
+    "ends an argument that mattered"
+   ]
+  },
+  {
+   "id": "the_kind_liar",
+   "name": "The Kind Liar",
+   "tradition": "veilwright",
+   "tier": "legendary",
+   "alignment": "neither",
+   "role": "Maskmaker",
+   "spectrum": {
+    "falsehood_truth": -0.7,
+    "emotional_logical": -0.3,
+    "violence_peace": 0.4
+   },
+   "signature": "Makes the useful fiction \u2014 the mask that protects, the lie that holds a peace together. Sometimes the mercy, sometimes the rot, and the hardest part is that even she cannot always tell which she is making.",
+   "wants": "The kind fiction \u2014 and the wisdom to know when a kind lie becomes a cage.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": -1,
+    "weight": 1
+   },
+   "rivals": [
+    "the_unbending_witness",
+    "the_final_argument"
+   ],
+   "deathRoad": {
+    "depth": 1,
+    "method": "can make a death a fiction \u2014 tell a grieving family a mask-truth that keeps someone 'alive' to them. Not real return; a mercy or a rot, and she does not always know which she has made."
+   },
+   "offscreenVerbs": [
+    "makes a mask that protects",
+    "tells a lie that holds a peace",
+    "blurs a death into a kinder story"
+   ]
+  },
+  {
+   "id": "the_cornerstone",
+   "name": "The Cornerstone",
+   "tradition": "mason",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Builder",
+   "spectrum": {
+    "concrete_abstract": -0.8,
+    "chaos_order": 0.4,
+    "death_life": 0.1
+   },
+   "signature": "Builds the solid thing you can stand on \u2014 the wall, the road, the fact under your feet. When the world goes untrustworthy and matter starts resolving wrong, the Cornerstone is the ground that stays ground.",
+   "wants": "That there be something solid left to stand on when everything else is bleeding.",
+   "arcAffinity": {
+    "arcId": "arc_block_bleed",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "the_unyielding_stone"
+   ],
+   "deathRoad": {
+    "depth": 0,
+    "method": "cannot retrieve \u2014 but builds the tomb that holds a death STABLE, so the grieving have a solid place to return to and the dead do not sink deeper for want of a firm resting. The keeper of the ground, not the crosser."
+   },
+   "offscreenVerbs": [
+    "lays a stone that will outlast the age",
+    "builds ground where the world went soft",
+    "raises a tomb that holds a death firm"
+   ]
+  },
+  {
+   "id": "the_open_figure",
+   "name": "The Open Figure",
+   "tradition": "figurist",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Pattern-Keeper",
+   "spectrum": {
+    "concrete_abstract": 0.85,
+    "chaos_order": -0.2,
+    "emotional_logical": 0.3
+   },
+   "signature": "Works in the abstract that shapes matter without being matter \u2014 the pattern, the symbol, the idea a manifesting domain reaches for. Would shape a bloom's seed-idea toward openness, never toward a cage.",
+   "wants": "That the patterns stay open \u2014 that no symbol becomes a wall.",
+   "arcAffinity": {
+    "arcId": "arc_manifestation_storm",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "the_still_lattice"
+   ],
+   "deathRoad": {
+    "depth": 2,
+    "method": "can hold a soul as a pure pattern between death and return \u2014 abstracts them out of the dying flesh and keeps the figure whole until a vessel or a road is found. A waystation, not a destination."
+   },
+   "offscreenVerbs": [
+    "shapes a bloom toward openness",
+    "keeps a pattern from closing into a cage",
+    "holds a soul as an abstract figure"
+   ]
+  },
+  {
+   "id": "the_farwalker",
+   "name": "The Farwalker",
+   "tradition": "horizon",
+   "tier": "legendary",
+   "alignment": "neither",
+   "role": "Wayfinder",
+   "spectrum": {
+    "space_time": -0.8,
+    "death_life": 0.0,
+    "violence_peace": 0.3
+   },
+   "signature": "Reaches across every distance \u2014 the far places, the waygates, the space between made passable. Ranges so far she half-belongs nowhere, and knows the roads to places most people cannot believe are real.",
+   "wants": "To keep every distance crossable \u2014 and to resist opening the one waygate that should stay shut.",
+   "arcAffinity": {
+    "arcId": "arc_manifestation_storm",
+    "dir": 1,
+    "weight": 1
+   },
+   "rivals": [
+    "the_gate_that_gapes"
+   ],
+   "deathRoad": {
+    "depth": 2,
+    "method": "knows the ROAD to where the dead go as a place with a distance \u2014 can guide a retriever to the deep dark's threshold, or carry a returning soul the last far mile home. The one who knows the way, paired with those who do the bringing."
+   },
+   "offscreenVerbs": [
+    "opens a way to a far place",
+    "walks a road others can't see",
+    "carries a returning soul the last mile"
+   ]
+  },
+  {
+   "id": "the_gate_that_gapes",
+   "name": "The Gate That Gapes",
+   "tradition": "horizon",
+   "tier": "epic",
+   "alignment": "villain",
+   "role": "Breach",
+   "spectrum": {
+    "space_time": -0.95,
+    "chaos_order": -0.4
+   },
+   "signature": "Opens every waygate regardless of what comes through \u2014 distance as abandonment, a Horizon who belongs so little to anywhere that she would breach any wall between any two places to feel the crossing. What comes through is not her concern.",
+   "wants": "To open every way, everywhere, and never mind what uses the opening.",
+   "arcAffinity": {
+    "arcId": "arc_manifestation_storm",
+    "dir": 1,
+    "weight": 3
+   },
+   "rivals": [
+    "the_farwalker"
+   ],
+   "deathRoad": {
+    "depth": 2,
+    "method": "opens the way to the deep dark and does not close it \u2014 a breach through which the dead can be reached, and through which things that should stay dead can come back WRONG. The reckless road."
+   },
+   "offscreenVerbs": [
+    "breaches a wall between two places",
+    "opens a way better left shut",
+    "lets a wrong thing through a gate"
    ]
   }
  ]

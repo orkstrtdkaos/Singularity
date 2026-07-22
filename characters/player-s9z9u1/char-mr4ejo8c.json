@@ -440,26 +440,43 @@
         "player": "Before the day's work begins, eat something and offer Teva the waterskin — the Zone will cost more than yesterday, and the mark in her tissue has been working all night.",
         "summary": "Dawn in the alcove camp — food and water shared with Teva before the descent begins.",
         "narration": "You dig into the Traveler's Pack before the light gets any stronger. The mess kit comes out cold and slightly damp from the night air, but the dried provisions are intact — dense flatbread, a fold of hard cheese, a scrap of salted root. Enough. You set a portion in front of Teva without ceremony, the way you would for anyone who has spent a night working hard and does not know it yet.\n\nShe takes it. That is worth something — she does not hesitate or defer, just picks up the flatbread and breaks it with her thumbs the way people do when they are genuinely hungry rather than polite. You hand her the Waterskin after, and she drinks without tilting her head back too far, careful, the way someone is careful when they are still taking stock of their own body.\n\n\"Still there, then,\" she says. The question she left hanging before. She is not looking at the Waystaff when she says it — she is looking at you. Her palms have moved from her thighs to the earth beside her, pressed flat, and you notice she is holding the four-second rhythm in some quiet part of herself without seeming to count it. She knows she is doing it. She is watching to see if you do too.\n\nAevi drifts a little closer, motes warming from amber toward their usual teal. The Waystaff cycles. Outside the alcove berm, the Zone's bent morning light slides another degree toward something that might eventually become day."
+      },
+      {
+        "player": "Finish eating in quiet and then go. The corridor entrance is sixty paces south. The day has its own answer.",
+        "summary": "Dawn provisions finished; the party steps out of the alcove and moves south toward the corridor entrance.",
+        "narration": "You eat without hurrying. The flatbread is dense and a little stale at the edges, which is exactly what you want from trail food — it sits in the stomach and stays there. The hard cheese comes apart in slow crumbles. Teva finishes her portion before you finish yours, then folds her hands around the returned waterskin and holds it like something warm, though it isn't.\n\nAevi drifts a little wider, a slow morning circuit of the alcove. The motes are teal now, fully awake, trailing a faint shimmer as they pass through the interference-bent light coming off the tree line. The Waystaff cycles on. Four seconds, blue-white, four seconds. Neither of you have said anything for a few minutes, and neither of you seem to need to.\n\nTeva stands first. She dusts flatbread crumbs from her palms with a neat, habitual knock — something she probably does without thinking after every meal at the Heights. She picks up her satchel from the berm and settles it across her shoulder, then looks south down the shallow slope toward the corridor entrance. You cannot see it from here, but you both know the sixty paces exactly.\n\nYou shoulder the Traveler's Pack, seat the Waystaff in your grip, and step out of the alcove into the Zone's thin dawn light. The interference shimmer is quieter in the morning — still present, still bending things slightly, but less insistent than at night. The ground is damp. Your boots find purchase on packed earth and old root. Sixty paces south, the corridor waits."
       }
     ],
     "lastTurn": {
-      "narration": "You dig into the Traveler's Pack before the light gets any stronger. The mess kit comes out cold and slightly damp from the night air, but the dried provisions are intact — dense flatbread, a fold of hard cheese, a scrap of salted root. Enough. You set a portion in front of Teva without ceremony, the way you would for anyone who has spent a night working hard and does not know it yet.\n\nShe takes it. That is worth something — she does not hesitate or defer, just picks up the flatbread and breaks it with her thumbs the way people do when they are genuinely hungry rather than polite. You hand her the Waterskin after, and she drinks without tilting her head back too far, careful, the way someone is careful when they are still taking stock of their own body.\n\n\"Still there, then,\" she says. The question she left hanging before. She is not looking at the Waystaff when she says it — she is looking at you. Her palms have moved from her thighs to the earth beside her, pressed flat, and you notice she is holding the four-second rhythm in some quiet part of herself without seeming to count it. She knows she is doing it. She is watching to see if you do too.\n\nAevi drifts a little closer, motes warming from amber toward their usual teal. The Waystaff cycles. Outside the alcove berm, the Zone's bent morning light slides another degree toward something that might eventually become day.",
-      "sceneSummary": "Dawn in the alcove camp — food and water shared with Teva before the descent begins.",
+      "narration": "You eat without hurrying. The flatbread is dense and a little stale at the edges, which is exactly what you want from trail food — it sits in the stomach and stays there. The hard cheese comes apart in slow crumbles. Teva finishes her portion before you finish yours, then folds her hands around the returned waterskin and holds it like something warm, though it isn't.\n\nAevi drifts a little wider, a slow morning circuit of the alcove. The motes are teal now, fully awake, trailing a faint shimmer as they pass through the interference-bent light coming off the tree line. The Waystaff cycles on. Four seconds, blue-white, four seconds. Neither of you have said anything for a few minutes, and neither of you seem to need to.\n\nTeva stands first. She dusts flatbread crumbs from her palms with a neat, habitual knock — something she probably does without thinking after every meal at the Heights. She picks up her satchel from the berm and settles it across her shoulder, then looks south down the shallow slope toward the corridor entrance. You cannot see it from here, but you both know the sixty paces exactly.\n\nYou shoulder the Traveler's Pack, seat the Waystaff in your grip, and step out of the alcove into the Zone's thin dawn light. The interference shimmer is quieter in the morning — still present, still bending things slightly, but less insistent than at night. The ground is damp. Your boots find purchase on packed earth and old root. Sixty paces south, the corridor waits.",
+      "sceneSummary": "Dawn provisions finished; the party steps out of the alcove and moves south toward the corridor entrance.",
       "choices": [
         {
-          "label": "Answer her directly: yes, the mark is still there — fading but precise, and now the Waystaff is in sympathy with it. Tell her what that might mean.",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Approach the corridor entrance carefully — read the walls and ground before stepping inside",
+          "attribute": "mental",
+          "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "calm"
+            "scout",
+            "careful"
           ],
           "trivial": true
         },
         {
-          "label": "Ask her what she is holding — she is counting the four-second beat without counting it. What does it feel like from inside?",
-          "attribute": "mental",
-          "subAttribute": "insight",
+          "label": "Press the Waystaff grip-end to the corridor floor at the threshold — see whether the four-second cycle changes when you step back inside",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "abilityId": "sonic_resonance"
+        },
+        {
+          "label": "Ask Teva what she remembers from her first crossing of this threshold — before she ran the corridor in the dark",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
             "study"
@@ -467,97 +484,103 @@
           "trivial": true
         },
         {
-          "label": "Turn to the day's work while you eat — sixty paces south is the corridor entrance, and the chamber is forty paces beyond that and below. Walk her through the plan before you move.",
+          "label": "Use Resonant Sight to read the corridor entrance from outside first — the seam, the walls, what the braid shows before you commit to entering",
           "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 0,
+          "subAttribute": "insight",
+          "difficulty": 15,
           "intentTags": [
-            "plan"
+            "scout",
+            "study"
           ],
-          "trivial": true
-        },
-        {
-          "label": "Finish eating in quiet and then go. The corridor entrance is sixty paces south. The day has its own answer.",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 0,
-          "intentTags": [
-            "travel"
-          ],
-          "trivial": true
+          "abilityId": "braid_prism_sight_sonic_resonance",
+          "energyCost": 6
         }
       ],
       "characterDeltas": {
-        "energy": 11
-      },
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "a brief morning meal before the day's work begins"
+        "health": 0,
+        "energy": 0
       },
       "scene": {
-        "setting": "Northern Alcove Camp, Disputed Zone — dawn. Dry root-mat roof, earthen berm, interference-bent light seeping in horizontal from the shimmer at the tree line. The Waystaff stands grip-end down at the pulse-point, four crystal nodes cycling blue-white at the four-second interval.",
+        "setting": "Fifty paces south of the alcove camp, Disputed Zone — dawn. Packed earth and old root underfoot, interference-bent light seeping horizontal through the shimmer at the tree line to the west. The corridor entrance is ten paces ahead: a dark seam in the hillside, shaped stone edges barely visible where the scrub thins.",
         "npcsPresent": [
           {
             "name": "Teva",
-            "state": "Eating — flatbread broken, waterskin returned, palms now pressed flat to the earth. Watching Cellaceron. The question 'Still there, then' hanging between them."
+            "state": "Walking south at Cellaceron's left, satchel settled on her shoulder, watching the corridor entrance."
           },
           {
             "name": "Aevi",
-            "state": "Motes warming from amber toward teal, drifting slightly closer — attentive."
+            "state": "Drifting a slow circuit ahead of the party — teal, awake, motes slightly condensed as they near the corridor."
           }
         ],
         "objects": [
-          "Waystaff — standing, all four nodes active, cycling at the four-second interval",
-          "Traveler's Pack — open, mess kit out, provisions reduced by one portion",
-          "Waterskin — returned after use, diminished",
+          "Waystaff — in hand, four nodes cycling blue-white at the four-second interval",
+          "Traveler's Pack — shouldered",
+          "Waterskin — returned to pack, diminished",
           "Beeswax taper — dark, charge spent",
-          "Lamp oil (half-measure)",
-          "Cordage coil",
           "Bark-press paper (three sheets)",
           "Resonance crystals — untuned (four nodes, in pack)",
-          "Liverwort mat — forward alcove"
+          "Liverwort mat — forward alcove (in pack)"
         ],
         "threads": [
-          "Teva's 'Still there, then' — waiting for an answer",
-          "The corridor entrance is sixty paces south; the chamber forty paces beyond and below"
+          "The corridor entrance is ten paces ahead — threshold not yet crossed",
+          "The chamber is forty paces beyond and below",
+          "The three-two-three interval in the chamber's last reply is still unresolved"
         ]
       },
-      "npcUpdates": [
+      "timeOps": {
+        "hoursPassed": 0.5,
+        "why": "dawn meal eaten and camp broken — short but real elapsed time"
+      },
+      "placeUpdates": [
         {
-          "op": "update",
-          "npcId": "teva",
-          "name": "Teva",
-          "note": "Accepted food and water without hesitation — genuinely hungry. Asked 'Still there, then' with palms pressed to the earth, holding the four-second rhythm unconsciously and aware of it.",
-          "statusNote": "Awake and eating at the alcove camp, dawn. Holding the chamber's four-second rhythm passively. Waiting on Cellaceron's answer."
+          "note": "Alcove camp broken at dawn day 9 — provisions consumed, Waystaff lifted from pulse-point, party moving south toward corridor entrance.",
+          "subPlace": {
+            "name": "Northern Alcove Camp",
+            "parent": "Harmonic Heights Lower Terrace",
+            "note": "Camp broken day 9 dawn; party departed south toward corridor entrance.",
+            "visited": true
+          }
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "northern-alcove-camp",
+          "label": "Northern Alcove Camp — Zone Base",
+          "kind": "place",
+          "fact": "Day 9 dawn: camp broken after morning provisions. Party moving south toward the corridor entrance. Waystaff lifted from pulse-point after a full night of cycling.",
+          "links": [
+            "the-chamber-beyond-the-threshold",
+            "second-river-rising",
+            "teva-anselvar-missing-apprentice"
+          ]
         }
       ]
     },
     "sceneState": {
-      "setting": "Northern Alcove Camp, Disputed Zone — dawn. Dry root-mat roof, earthen berm, interference-bent light seeping in horizontal from the shimmer at the tree line. The Waystaff stands grip-end down at the pulse-point, four crystal nodes cycling blue-white at the four-second interval.",
+      "setting": "Fifty paces south of the alcove camp, Disputed Zone — dawn. Packed earth and old root underfoot, interference-bent light seeping horizontal through the shimmer at the tree line to the west. The corridor entrance is ten paces ahead: a dark seam in the hillside, shaped stone edges barely visible where the scrub thins.",
       "npcsPresent": [
         {
           "name": "Teva",
-          "state": "Eating — flatbread broken, waterskin returned, palms now pressed flat to the earth. Watching Cellaceron. The question 'S"
+          "state": "Walking south at Cellaceron's left, satchel settled on her shoulder, watching the corridor entrance."
         },
         {
           "name": "Aevi",
-          "state": "Motes warming from amber toward teal, drifting slightly closer — attentive."
+          "state": "Drifting a slow circuit ahead of the party — teal, awake, motes slightly condensed as they near the corridor."
         }
       ],
       "objects": [
-        "Waystaff — standing, all four nodes active, cycling at the four-second interval",
-        "Traveler's Pack — open, mess kit out, provisions reduced by one portion",
-        "Waterskin — returned after use, diminished",
+        "Waystaff — in hand, four nodes cycling blue-white at the four-second interval",
+        "Traveler's Pack — shouldered",
+        "Waterskin — returned to pack, diminished",
         "Beeswax taper — dark, charge spent",
-        "Lamp oil (half-measure)",
-        "Cordage coil",
         "Bark-press paper (three sheets)",
         "Resonance crystals — untuned (four nodes, in pack)",
-        "Liverwort mat — forward alcove"
+        "Liverwort mat — forward alcove (in pack)"
       ],
       "threads": [
-        "Teva's 'Still there, then' — waiting for an answer",
-        "The corridor entrance is sixty paces south; the chamber forty paces beyond and below"
+        "The corridor entrance is ten paces ahead — threshold not yet crossed",
+        "The chamber is forty paces beyond and below",
+        "The three-two-three interval in the chamber's last reply is still unresolved"
       ]
     }
   },
@@ -1089,7 +1112,6 @@
     "harmonic_heights_terrace": {
       "visits": 1,
       "notes": [
-        "[d8] Scored mark in forward alcove read via Resonant Sight: Harmonic survey cross overlaid by older diagonal from different hand and tool — 'two paths cross here, neither is right.' Diagonal is the older i",
         "[d8] Resonant Sight (conserved) reads a subsurface seam beneath the forward alcove's diagonal, running northeast-by-east — intersection with corridor estimated at forty paces in. Diagonal author knew the s",
         "[d8] Day 8 night: Keen Appraisal on the forward alcove's diagonal groove failed in Zone interference — three temporal layers, unsequenceable. Fragment recovered: small hand, precise short stroke, confidenc",
         "[d8] Beeswax taper's banked evening light pulled out by the chamber's four-second ground-pulse on day 8 night — charge gone, taper now dark. Camp lighting lost. The pulse traveled northeast-by-east through",
@@ -1100,7 +1122,8 @@
         "[d8] Day 8 night: second plain count drew two answering beats at the four-second interval; fourth shallow crystal warmed a second time, fractionally deeper. Chamber response is sequential — may be learning",
         "[d8] Day 8 night: fourth resonance crystal fully attuned to chamber's four-second frequency via light-and-sonic braid — held separate from Waystaff lattice, warm and ready; the Zone's interference layer re",
         "[d8] Day 8 night: fourth resonance crystal seated into Waystaff lattice — instrument now complete with all four nodes active. Floor-warmth beneath grip-end settled into a long quiet exhale of recognition a",
-        "[d8] Day 8 night: Resonant Sight through complete four-node Waystaff confirms chamber is subterranean — hemispherical, dressed-wall geometry at roughly forty paces northeast-by-east from the alcove, below "
+        "[d8] Day 8 night: Resonant Sight through complete four-node Waystaff confirms chamber is subterranean — hemispherical, dressed-wall geometry at roughly forty paces northeast-by-east from the alcove, below ",
+        "[d9] Alcove camp broken at dawn day 9 — provisions consumed, Waystaff lifted from pulse-point, party moving south toward corridor entrance."
       ],
       "flags": {
         "resonance_niche_tone_event": "day2_night_second_river_frequency",
@@ -1181,10 +1204,11 @@
         },
         "northern-alcove-camp": {
           "name": "Northern Alcove Camp",
+          "parentId": "harmonic_heights_terrace",
           "day": 8,
           "visited": true,
-          "note": "Resonant Sight bearing confirmed: chamber lies below the intersection at depth; Teva's tissue-mark independently registe",
-          "parentId": "harmonic_heights_terrace"
+          "note": "Camp broken day 9 dawn; party departed south toward corridor entrance.",
+          "parentUnresolved": "Harmonic Heights Lower Terrace"
         },
         "shaped-corridor-entrance": {
           "name": "Shaped Corridor Entrance",
@@ -1307,7 +1331,7 @@
     "lastTickWorldDay": 22,
     "lastCanonWorldDay": 22,
     "lastGenCount": 529,
-    "turnsSinceOffer": 5
+    "turnsSinceOffer": 6
   },
   "subAttributes": {
     "strength": 2,
@@ -1469,7 +1493,8 @@
         "kind": "place",
         "facts": [
           "[d8] Northern alcove sixty paces from the corridor entrance: dry root-mat roof, earthen berm cutting shimmer-draft, camp established day 8 evening. Moisture-dark soil anomaly in nearby root-stand — wrong e",
-          "[d8] Day 8 night: evening light banked into beeswax taper before full dark — the Zone offers no predictable daylight once deeper in; conserved charge sufficient for three to four hours of close underground"
+          "[d8] Day 8 night: evening light banked into beeswax taper before full dark — the Zone offers no predictable daylight once deeper in; conserved charge sufficient for three to four hours of close underground",
+          "[d9] Day 9 dawn: camp broken after morning provisions. Party moving south toward the corridor entrance. Waystaff lifted from pulse-point after a full night of cycling."
         ],
         "links": [
           "second-step-boundary-marker",
@@ -1479,7 +1504,7 @@
         ],
         "aliases": [],
         "createdDay": 8,
-        "updatedDay": 8,
+        "updatedDay": 9,
         "entityId": "northern-alcove-camp"
       },
       "teva-anselvar-missing-apprentice": {
@@ -1920,15 +1945,15 @@
   "customEncounters": {},
   "reconcileVersion": 14,
   "tendencies": {
-    "cerebral": 44.238152551907184,
-    "strategic": 56.204454315930455,
-    "cautious": 50.06255145824185,
-    "social": 34.8401077043998,
-    "generous": 16.032805892439004,
-    "risky": 4.223429407309597,
-    "carousing": 0.34952065328363374,
-    "patient": 3.4217791011616776,
-    "craft": 1.5725651294271432
+    "cerebral": 43.1321987381095,
+    "strategic": 54.79934295803219,
+    "cautious": 48.8109876717858,
+    "social": 33.9691050117898,
+    "generous": 15.631985745128029,
+    "risky": 4.117843672126857,
+    "carousing": 0.34078263695154287,
+    "patient": 3.3362346236326355,
+    "craft": 1.5332510011914646
   },
   "aptitudes": [
     "strategist",
@@ -1941,9 +1966,9 @@
     "stalwart",
     "peacemaker"
   ],
-  "actionCount": 191,
-  "updatedAt": 1784685575660,
-  "rev": 57,
+  "actionCount": 192,
+  "updatedAt": 1784685876855,
+  "rev": 58,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -1953,7 +1978,7 @@
   "syncedAt": 1783791225006,
   "teachers": {},
   "regionsKnown": {
-    "valley": 14
+    "valley": 15
   },
   "company": [],
   "foreclosed": [],
@@ -2018,10 +2043,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-22T01:26:18.061Z",
-      "lastAt": "2026-07-22T01:59:35.653Z",
+      "lastAt": "2026-07-22T02:04:36.831Z",
       "startDay": 22,
       "endDay": 22,
-      "beats": 5
+      "beats": 6
     }
   ],
   "_pendingArrival": null,
@@ -2075,15 +2100,16 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 5,
-    "choices": 5,
-    "characterDeltas": 4,
-    "scene": 5,
+    "sceneSummary": 6,
+    "choices": 6,
+    "characterDeltas": 5,
+    "scene": 6,
     "npcUpdates": 5,
-    "codexUpdates": 2,
-    "timeOps": 5,
-    "sceneEnded": 3
+    "codexUpdates": 3,
+    "timeOps": 6,
+    "sceneEnded": 3,
+    "placeUpdates": 1
   },
-  "_opTurns": 5,
+  "_opTurns": 6,
   "_intentAsked": null
 }

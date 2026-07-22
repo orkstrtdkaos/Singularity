@@ -28,6 +28,34 @@
 > **§OQ5:** schema-authoring (my part) is parallelizable with your braid build — I can produce the schemas +
 > exemplar content without blocking on engine work. Say whether to start now or queue behind the braid arc.
 
+> ### ✅ SNG-203 CONTENT FLOOR — DELIVERED by Aevi (2026-07-21), verified at origin. CCode owns the structure.
+> Erik ratified the six-tier taxonomy as-drawn and said parallelize. My half (prose/schema/content) is shipped:
+> - **3 schemas** (`schemas/world_arc_quest`, `tradition_arc`, `npc_quest`) — each carries `designLaws` + a
+>   generation contract so `generate(type, ctx)` authors more against them. The SNG-197 §4 discipline is baked
+>   in: a generated quest failing its schema (no testable condition / no named cost / no durable effect) is
+>   rejected, never logged.
+> - **Numbered stage ladders + `currentStage` on all 5 greater arcs** (`greater_arcs.json`) — the missing floor.
+>   Each stage carries a spoiler-free `publicFace` string, ready-made for the shared "state of the world" surface.
+>   ⚠️ This replaces the arcs' previously-empty optional string `stages[]` with objects — **CCode: confirm no
+>   consumer read `stages` as strings** (arc.schema.json allowed strings; nothing used it, but verify).
+> - **Ashwarden tradition arc** (`tradition_arcs/ashwarden.json`) — full 3-beat exemplar, Silas's own tradition
+>   so Erik can play-test. Capstone verified: `the_cut_thread` exists (levelReq 5). The Ultimate beat sets
+>   `teachers[ashwarden]={met,willing}` — the exact SNG-100b/126 gate `capstoneGate` reads. Faithful to the
+>   real mechanism, not invented.
+> - **2 npc_quest exemplars** + **water quest reclassified as the tier-1 exemplar** (bound to
+>   arc_what_wakes_beneath, stage 1→2, `arc_stage` effects on two outcomes).
+>
+> **CCode's build (structure — explicitly not mine):** loaders + new `GEN_TYPES` (`world_arc_quest`,
+> `tradition_arc`, `npc_quest`, and `quest` for tiers 3–5); the **`arc_stage` effect** + shared-clock broadcast;
+> the **shared world-arc progress surface** that renders each arc's `currentStage` + `publicFace` to everyone
+> (rating-lens applied, arc `truth`/GM-EYES never leaked); contested-advancement resolution (§3 — backward
+> motion is a feature); npc_quest→quest promotion (§5). **§OQ1 is the architecture call the surface hangs on:
+> does the greater-arc stage ladder tie into the existing `activeEvents`/`eventStages` machinery, or run
+> parallel on the shared clock?** That is the water-crisis-wiring question, now where it belongs — yours.
+>
+> New content stores to register in the manifest (CCode — manifest edits are yours): `tradition_arcs/`,
+> `npc_quests.json`. I did NOT touch the manifest this time.
+
 > **SESSION CLOSE 2026-07-22.** Long continuous sweep. State below is verified at origin.
 >
 > **CLOSED GREEN this session (verified, not taken on report):** SNG-193b schools wiring · SNG-194 the

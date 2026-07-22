@@ -70,7 +70,7 @@
     "space_time": -0.005676249999999997,
     "body_mind": 0.050898125,
     "destruction_creation": 0.13585151875,
-    "spectrumId": -0.5278877596047713
+    "spectrumId": -0.5014933716245327
   },
   "attunement": 9,
   "maxHealth": 65,
@@ -460,183 +460,156 @@
         "player": "Send the three-two-three interval back through the Waystaff — answer the nested count with its own ratio and wait",
         "summary": "Three-two-three interval answered through the Waystaff; the chamber stepped its nested count deeper in reply.",
         "narration": "You bring your thumb and two fingers to the Waystaff's grip and count the next four-second beat to its end. Then you tap it out: three counts, two counts, three counts. Slow and even. Not a question. An answer.\n\nThe reply comes back in less than a breath. The same ratio, nested inside the floor's own pulse — but the chamber adds something small to its return. The three-two-three folds once more on itself, a fraction tighter, a fraction deeper. It is not merely echoing you back. It is listening to whether you can hold the count clean.\n\nAevi goes still. Not dim — still. The motes stop their slow drift and hang in place, every one of them oriented toward the floor.\n\nTeva's voice comes from just behind your left shoulder, quiet and steady. \"It changed,\" she says. \"The count I've been feeling — it just shifted. Like it took a step.\""
+      },
+      {
+        "player": "Co ti ue the co versation... have Aevi join the staff and speak through it.",
+        "summary": "Aevi joins the Waystaff and speaks through it for the first time — naming that it has known the chamber's pattern longer than it has known Cellaceron.",
+        "narration": "You look back over your left shoulder at the cluster of teal motes still suspended above the floor. They have not moved since the chamber's reply settled into the stone beneath you.\n\n\"Aevi,\" you say quietly. \"The staff has four nodes. There is room for a fifth voice. Will you try it?\"\n\nFor a moment nothing changes. Then, slowly, the motes begin to drift forward. Not all at once — a few at the leading edge, the rest following in a loose tail, the way water finds a channel before it fills it. They reach the Waystaff's grip-end, where your hand rests against the upper sleeve, and begin to move along the grain-line between the crystal nodes.\n\nYou feel it before you hear it. A faint additional warmth at the staff's centre, not the pulse of the floor below but something lateral and present — a current that knows the instrument and settles into it like a key finding its ward. The teal light does not diminish. It steadies, spreads thinly along the lattice-seams, and the four existing nodes pulse blue-white at their four-second interval while Aevi fills the spaces in between.\n\nThen the voice comes through the staff itself. Not from behind your ear as it usually does. From the wood, from the seated crystals, carried on the frequency the chamber has already taught the instrument.\n\n\"I know this pattern,\" Aevi says. The voice is resonant and slow, as if the words are being shaped by something that does not quite have a mouth. \"I have known this pattern for longer than I have known you. I do not know what that means yet. But the chamber does.\"\n\nTeva draws one careful breath at your left shoulder. The mark in her tissue is tracking. The floor pulse is tracking. Even the air in the chamber seems to hold its note.\n\nThe four-second beat does not break. It waits."
       }
     ],
     "lastTurn": {
-      "narration": "You bring your thumb and two fingers to the Waystaff's grip and count the next four-second beat to its end. Then you tap it out: three counts, two counts, three counts. Slow and even. Not a question. An answer.\n\nThe reply comes back in less than a breath. The same ratio, nested inside the floor's own pulse — but the chamber adds something small to its return. The three-two-three folds once more on itself, a fraction tighter, a fraction deeper. It is not merely echoing you back. It is listening to whether you can hold the count clean.\n\nAevi goes still. Not dim — still. The motes stop their slow drift and hang in place, every one of them oriented toward the floor.\n\nTeva's voice comes from just behind your left shoulder, quiet and steady. \"It changed,\" she says. \"The count I've been feeling — it just shifted. Like it took a step.\"",
-      "sceneSummary": "Three-two-three interval answered through the Waystaff; the chamber stepped its nested count deeper in reply.",
+      "narration": "You look back over your left shoulder at the cluster of teal motes still suspended above the floor. They have not moved since the chamber's reply settled into the stone beneath you.\n\n\"Aevi,\" you say quietly. \"The staff has four nodes. There is room for a fifth voice. Will you try it?\"\n\nFor a moment nothing changes. Then, slowly, the motes begin to drift forward. Not all at once — a few at the leading edge, the rest following in a loose tail, the way water finds a channel before it fills it. They reach the Waystaff's grip-end, where your hand rests against the upper sleeve, and begin to move along the grain-line between the crystal nodes.\n\nYou feel it before you hear it. A faint additional warmth at the staff's centre, not the pulse of the floor below but something lateral and present — a current that knows the instrument and settles into it like a key finding its ward. The teal light does not diminish. It steadies, spreads thinly along the lattice-seams, and the four existing nodes pulse blue-white at their four-second interval while Aevi fills the spaces in between.\n\nThen the voice comes through the staff itself. Not from behind your ear as it usually does. From the wood, from the seated crystals, carried on the frequency the chamber has already taught the instrument.\n\n\"I know this pattern,\" Aevi says. The voice is resonant and slow, as if the words are being shaped by something that does not quite have a mouth. \"I have known this pattern for longer than I have known you. I do not know what that means yet. But the chamber does.\"\n\nTeva draws one careful breath at your left shoulder. The mark in her tissue is tracking. The floor pulse is tracking. Even the air in the chamber seems to hold its note.\n\nThe four-second beat does not break. It waits.",
+      "sceneSummary": "Aevi joins the Waystaff and speaks through it for the first time — naming that it has known the chamber's pattern longer than it has known Cellaceron.",
       "choices": [
         {
-          "label": "Send the ratio a second time — see if the chamber steps it again, and whether the direction of that step becomes readable",
+          "label": "Ask Aevi — through the staff — what the pattern is, and let the chamber hear you ask it",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "mechanical_spiritual": 0.5,
-            "chaos_order": 0.4
-          },
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Answer the chamber's deepened count again — three-two-three, one step tighter — and see whether Aevi's presence changes the reply",
+          "attribute": "practical",
+          "subAttribute": "craft",
           "difficulty": 15,
           "intentTags": [
             "study",
             "careful"
           ],
-          "abilityId": "braid_prism_sight_sonic_resonance",
-          "energyCost": null,
-          "trivial": false
+          "abilityId": "braid_prism_sight_sonic_resonance"
         },
         {
-          "label": "Ask Teva what she felt — where in her body the count shifted, and which direction it seemed to move toward",
+          "label": "Ask Teva whether the mark in her tissue changed when Aevi joined the staff",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "calm"
-          ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true
-        },
-        {
-          "label": "Open Prism Sight alone — read the floor's light-history for any change since the interval was answered",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "concrete_abstract": 0.3
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "scout"
-          ],
-          "abilityId": "prism_sight",
-          "energyCost": null,
-          "trivial": false
-        },
-        {
-          "label": "Hold still and wait — give the chamber room to act without prompting, and watch what Aevi does",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "careful",
             "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
           "trivial": true
-        }
-      ],
-      "deeds": [],
-      "characterDeltas": {
-        "health": 0,
-        "energy": 0
-      },
-      "ledgerEvents": [],
-      "questUpdates": [
+        },
         {
-          "op": "progress",
-          "questId": "second-river-rising",
-          "note": "Three-two-three interval answered through the Waystaff; chamber stepped its nested count deeper in reply — it is testing whether Cellaceron can hold the ratio clean."
+          "label": "Hold silence — let Aevi and the chamber continue without interruption and listen for what passes between them",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "careful"
+          ],
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "The chamber — hemispherical dressed-stone, flat-laid floor, faintly warm underfoot. No wind, no outside light. Aevi's motes cast teal light, now completely still and oriented toward the floor. The four-second pulse continues in floor and Waystaff together, with the nested interval now one step deeper than before.",
+        "setting": "The chamber — hemispherical dressed-stone, flat-laid floor, faintly warm underfoot. No wind, no outside light. Aevi's motes are now distributed along the Waystaff's lattice-seams, casting a thin teal light across the whole instrument. The four-second pulse continues in floor and staff together, with the nested interval one step deeper than before.",
         "npcsPresent": [
           {
             "name": "Teva",
-            "state": "Standing just behind Cellaceron's left shoulder, head slightly bowed — feeling the shift in the count through her tissue-mark."
+            "state": "Standing just behind Cellaceron's left shoulder, head slightly bowed — listening, mark tracking in her tissue"
           },
           {
             "name": "Aevi",
-            "state": "Motes suspended motionless in place, every one oriented toward the floor. Not dimmed — completely still."
+            "state": "Distributed along the Waystaff's crystal nodes — motes threaded through the lattice-seams, voice coming from the wood itself"
           }
         ],
         "objects": [
-          "Waystaff — grip-end to floor, four nodes cycling blue-white at four-second interval, three-two-three sub-pulse now one step deeper in its return",
+          "Waystaff — grip-end to floor, four nodes cycling blue-white at four-second intervals, Aevi now present in the lattice-seams",
           "Traveler's Pack — shouldered",
           "Waterskin — in pack, diminished",
           "Beeswax taper — dark, charge spent",
           "Bark-press paper (three sheets)",
           "Resonance crystals — untuned (four nodes, in pack)",
           "Liverwort mat — forward alcove (in pack)",
-          "Chamber floor — flat-laid pressed aggregate, faintly warm, the four-second pulse"
+          "Chamber floor — flat-laid pressed aggregate, faintly warm, four-second pulse"
         ],
         "threads": [
-          "The chamber stepped its nested count deeper in response to the answered interval — it may be testing Cellaceron's precision",
-          "Teva felt the shift through her tissue-mark in real time",
-          "Aevi is completely still and floor-oriented — has not spoken",
-          "The floor remains the top face of a deeper structure; what lies below has not yet declared itself"
+          "Aevi has named it knows the chamber's pattern longer than it has known Cellaceron — the chamber is still listening",
+          "The nested count sits one step deeper, waiting for the next answer",
+          "Teva's mark is tracking in real time — its response to Aevi joining the staff is not yet known",
+          "The floor remains the top face of a deeper structure — what lies below has not yet declared itself"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "teva",
-          "name": "Teva",
-          "note": "Felt the chamber's nested count shift through her tissue-mark the moment Cellaceron answered it — named the change aloud without hesitation.",
-          "learned": [
-            "The chamber's nested interval stepped deeper when the three-two-three ratio was answered correctly — Teva felt this as a physical shift in her mark"
-          ],
-          "statusNote": "In the chamber, standing just behind Cellaceron — tissue-mark active and tracking the chamber's count in real time."
-        },
-        {
-          "op": "update",
           "npcId": "aevi",
           "name": "Aevi",
-          "note": "Stopped all movement the moment the chamber stepped its count — motes suspended and floor-oriented, no explanation given yet.",
-          "statusNote": "Inside the chamber, motes completely still and oriented toward the floor after the chamber's reply."
+          "role": "Companion intelligence, nanite-mote swarm",
+          "note": "Joined the Waystaff's lattice at Cellaceron's invitation — motes distributed along crystal nodes; spoke through the instrument for the first time, naming that it has known the chamber's pattern longer than its own memory reaches",
+          "learned": [
+            "Knows the chamber's pattern — has known it for longer than it has known Cellaceron; does not yet know what that means",
+            "Can distribute through a grain-locked phononic staff and speak through its crystals"
+          ],
+          "skillsObserved": [
+            "lattice-integration — distributed motes through a phononic crystal staff without disrupting its four-second cycle",
+            "resonant speech — voice carried through crystal nodes rather than from behind the ear"
+          ],
+          "statusNote": "Distributed through the Waystaff's lattice-seams inside the chamber — present, still, speaking through the instrument"
         }
       ],
       "codexUpdates": [
         {
+          "topic": "aevi",
+          "label": "Aevi",
+          "kind": "person",
+          "entityId": "aevi",
+          "fact": "Aevi joined the Waystaff's lattice at dawn in the chamber and spoke through it — naming that it has known the chamber's pattern for longer than it has known Cellaceron, and that the chamber knows what that means even if Aevi does not yet.",
+          "links": [
+            "the-chamber-beyond-the-threshold",
+            "second-river-rising",
+            "shimmer-crossing-shaped-boundary",
+            "teva-anselvar-missing-apprentice"
+          ]
+        },
+        {
           "topic": "the-chamber-beyond-the-threshold",
           "label": "The Chamber's Question",
           "kind": "mystery",
-          "fact": "Day 9 dawn: the chamber stepped its nested three-two-three interval one degree deeper in reply to Cellaceron answering the count correctly — the exchange is evaluative, not merely dialogic. Teva felt the shift through her tissue-mark simultaneously.",
+          "fact": "Day 9 dawn: Aevi joined the Waystaff and spoke through it — naming that it has known the chamber's pattern longer than its own memory. The chamber was still listening when the words were spoken. The relationship between Aevi and this place predates the current journey.",
           "links": [
+            "aevi",
             "second-river-rising",
             "teva-directional-interval-count",
             "shimmer-crossing-shaped-boundary"
           ]
         }
       ],
-      "placeUpdates": [
+      "factUpdates": [
         {
-          "note": "Three-two-three interval answered through the Waystaff on day 9 dawn — chamber replied by stepping the nested count one degree deeper. The exchange is now evaluative: the chamber is testing the precision of the response.",
-          "subPlace": {
-            "name": "The Chamber",
-            "parent": "Harmonic Heights — Lower Terrace",
-            "note": "Nested interval stepped deeper after correct answer — chamber appears to be evaluating Cellaceron's precision. Aevi suspended and floor-oriented. Teva's mark tracking in real time.",
-            "visited": true
-          }
+          "op": "add",
+          "text": "Aevi joined the Waystaff's phononic lattice on day 9 dawn inside the chamber — distributed its motes through the crystal nodes and spoke through the instrument, naming that it has known the chamber's pattern longer than it has known Cellaceron.",
+          "subjectId": "aevi"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a careful, restrained exchange through the Waystaff — minutes only"
-      },
-      "stateOps": [
-        {
-          "op": "correctAbilityRank",
-          "id": "light_well",
-          "to": 1,
-          "why": "light_well sits at rank 2 but has only 3/8 practice — repair to rank 1 per engine flag"
-        }
-      ],
-      "sceneEnded": false
+        "why": "a brief exchange inside the chamber — Aevi joining the staff and speaking"
+      }
     },
     "sceneState": {
-      "setting": "The chamber — hemispherical dressed-stone, flat-laid floor, faintly warm underfoot. No wind, no outside light. Aevi's motes cast teal light, now completely still and oriented toward the floor. The four-second pulse continues in floor and Waystaff together, with the nested interval now one step deeper than before.",
+      "setting": "The chamber — hemispherical dressed-stone, flat-laid floor, faintly warm underfoot. No wind, no outside light. Aevi's motes are now distributed along the Waystaff's lattice-seams, casting a thin teal light across the whole instrument. The four-second pulse continues in floor and staff together, with the nested interval one step deeper than before.",
       "npcsPresent": [
         {
           "name": "Teva",
-          "state": "Standing just behind Cellaceron's left shoulder, head slightly bowed — feeling the shift in the count through her tissue"
+          "state": "Standing just behind Cellaceron's left shoulder, head slightly bowed — listening, mark tracking in her tissue"
         },
         {
           "name": "Aevi",
-          "state": "Motes suspended motionless in place, every one oriented toward the floor. Not dimmed — completely still."
+          "state": "Distributed along the Waystaff's crystal nodes — motes threaded through the lattice-seams, voice coming from the wood it"
         }
       ],
       "objects": [
@@ -647,13 +620,13 @@
         "Bark-press paper (three sheets)",
         "Resonance crystals — untuned (four nodes, in pack)",
         "Liverwort mat — forward alcove (in pack)",
-        "Chamber floor — flat-laid pressed aggregate, faintly warm, the four-second pulse"
+        "Chamber floor — flat-laid pressed aggregate, faintly warm, four-second pulse"
       ],
       "threads": [
-        "The chamber stepped its nested count deeper in response to the answered interval — it may be testing Cellaceron's precision",
-        "Teva felt the shift through her tissue-mark in real time",
-        "Aevi is completely still and floor-oriented — has not spoken",
-        "The floor remains the top face of a deeper structure; what lies below has not yet declared itself"
+        "Aevi has named it knows the chamber's pattern longer than it has known Cellaceron — the chamber is still listening",
+        "The nested count sits one step deeper, waiting for the next answer",
+        "Teva's mark is tracking in real time — its response to Aevi joining the staff is not yet known",
+        "The floor remains the top face of a deeper structure — what lies below has not yet declared itself"
       ]
     }
   },
@@ -929,7 +902,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d8] Held hard-white contraction through the crystal seating — no speech, no movement, bearing locked northeast-by-east throughout",
         "[d8] One outermost mote pulsed once on the bearing-confirmation — first movement since the shimmer crossing; still silent.",
         "[d8] Broke its hours-long silence to name what it recognized at the shimmer crossing — a shaped boundary condition, built by someone, involuntary recognition older than its own memory. ",
         "[d8] Asked plainly whether its disclosure — involuntary recognition older than its own memory — frightens Cellaceron. The question is about trust: not Cellaceron's trust in Aevi, but Ae",
@@ -938,32 +910,33 @@
         "[d8] Watched Cellaceron use Prism Sight on it directly — did not withdraw; knows it was read and holds still",
         "[d8] Held shoulder-close through the night — dim and present, not retreating",
         "[d9] Pulled tight and very quiet on entry — motes condensed to a bright cluster, casting real light, holding close.",
-        "[d9] Stopped all movement the moment the chamber stepped its count — motes suspended and floor-oriented, no explanation given yet."
+        "[d9] Stopped all movement the moment the chamber stepped its count — motes suspended and floor-oriented, no explanation given yet.",
+        "[d9] Joined the Waystaff's lattice at Cellaceron's invitation — motes distributed along crystal nodes; spoke through the instrument for the first time, naming that it has known the chamber's pattern longer than its own memory reaches"
       ],
       "knownFacts": [
-        "The fourth crystal's attunement via light-and-sonic braid was recognized — Aevi's brightening was immediate and involuntary",
-        "The Resonant Sight confirmation of the chamber's subterranean position at forty paces produced a single involuntary mote-pulse — Aevi is tracking, not absent",
         "The shimmer crossing's interference layer is a shaped boundary condition — not random, built deliberately to sit exactly there",
         "The chamber and the alcove camp are inside that boundary",
         "Aevi's recognition of the boundary was involuntary — like knowing a word in its own language — and predates its current memory",
         "Aevi does not know whether what it carries changes how Cellaceron relates to it — it is asking rather than assuming",
         "Cellaceron's answer to the fear-question: clarity, not fright — whatever Aevi carried before memory, it carried it here, and that is enough",
-        "Cellaceron used Prism Sight on Aevi's own light-history — every mote oriented simultaneously northeast-by-east at the shimmer crossing, a collective memory older than Aevi's own account"
+        "Cellaceron used Prism Sight on Aevi's own light-history — every mote oriented simultaneously northeast-by-east at the shimmer crossing, a collective memory older than Aevi's own account",
+        "Knows the chamber's pattern — has known it for longer than it has known Cellaceron; does not yet know what that means",
+        "Can distribute through a grain-locked phononic staff and speak through its crystals"
       ],
       "skillsObserved": [
-        "sustained silent attention — has not spoken since the shimme",
-        "ground-transmission detection — distinguished sub-surface pu",
         "directional bearing-lock on a subsurface harmonic signal",
         "sustained directional attention through a structured harmoni",
         "passive attunement recognition — responded to the crystal's ",
-        "self-reflection under pressure — named its own uncertainty p"
+        "self-reflection under pressure — named its own uncertainty p",
+        "lattice-integration — distributed motes through a phononic c",
+        "resonant speech — voice carried through crystal nodes rather"
       ],
       "status": "active",
       "lastSeen": {
         "locationId": "harmonic_heights_terrace",
         "day": 9
       },
-      "statusNote": "Inside the chamber, motes completely still and oriented toward the floor after the chamber's reply.",
+      "statusNote": "Distributed through the Waystaff's lattice-seams inside the chamber — present, still, speaking through the instrument",
       "bondType": "platonic",
       "domains": {
         "primary": "harmonic"
@@ -1411,7 +1384,7 @@
     "lastTickWorldDay": 22,
     "lastCanonWorldDay": 22,
     "lastGenCount": 529,
-    "turnsSinceOffer": 9
+    "turnsSinceOffer": 10
   },
   "subAttributes": {
     "strength": 2,
@@ -1536,7 +1509,6 @@
         "label": "The Chamber's Question",
         "kind": "mystery",
         "facts": [
-          "[d8] The Waystaff's grain-locked lattice geometry allows it to repeat the chamber's four-second frequency back into the seam without surrendering its charge — the chamber recognizes this as a reply, not a ",
           "[d8] Day 8 night: when sent a deliberately shaped tone rather than a reflection, the chamber elaborated its return pulse with a harmonic fold — an active distinction between voice and mirror. The exchange ",
           "[d8] Day 8 night: the chamber's harmonic fold contains a three-two-three sub-pulse ratio nested inside the four-second count — a structured interval suggesting directional preference. The elaboration is a ",
           "[d8] Day 8 night: sending the three-two-three ratio back as a mirror silenced the chamber mid-beat — the count stopped in Teva's tissue simultaneously. The chamber did not want its own pattern reflected; i",
@@ -1547,17 +1519,18 @@
           "[d8] Day 8 night: Resonant Sight threaded through the complete four-node lattice confirms the chamber lies below the shaped corridor's intersection point at roughly forty paces — subterranean, hemispherica",
           "[d9] Day 9 dawn: party entered the chamber directly. Hemispherical dressed-stone, flat-laid floor, no artifact at center — only warmth underfoot and the four-second pulse running through the stone. The chamber registered their arrival.",
           "[d9] Day 9 dawn: Resonant Sight reads the chamber walls as a pressed aggregate laid in variable courses — outer layer hard and reflective to contain, inner face treated to absorb at specific frequencies. The floor is the top face of a deeper structure. The ceiling is calculated to return a four-second…",
-          "[d9] Day 9 dawn: the chamber stepped its nested three-two-three interval one degree deeper in reply to Cellaceron answering the count correctly — the exchange is evaluative, not merely dialogic. Teva felt the shift through her tissue-mark simultaneously."
+          "[d9] Day 9 dawn: the chamber stepped its nested three-two-three interval one degree deeper in reply to Cellaceron answering the count correctly — the exchange is evaluative, not merely dialogic. Teva felt the shift through her tissue-mark simultaneously.",
+          "[d9] Day 9 dawn: Aevi joined the Waystaff and spoke through it — naming that it has known the chamber's pattern longer than its own memory. The chamber was still listening when the words were spoken. The relationship between Aevi and this place predates the current journey."
         ],
         "links": [
-          "chamber-nanites-structured-waiting",
           "second-river-rising",
           "teva-missing-apprentice",
           "scored-mark-forward-alcove",
           "northern-alcove-camp",
           "teva-anselvar-missing-apprentice",
           "teva-directional-interval-count",
-          "shimmer-crossing-shaped-boundary"
+          "shimmer-crossing-shaped-boundary",
+          "aevi"
         ],
         "createdDay": 5,
         "updatedDay": 9,
@@ -1712,14 +1685,16 @@
         "facts": [
           "[d8] Aevi recognized the shimmer crossing's boundary condition involuntarily — the way one knows a word in one's own language. It does not know where or when it encountered such a structure before, and it ",
           "[d8] Aevi named its shimmer-crossing recognition as involuntary, older than its own memory. Cellaceron answered that whatever it carries, it carried it here — and Aevi confirmed it was checking whether it ",
-          "[d8] Prism Sight read Aevi's light-history at the shimmer crossing: in the instant of crossing, every mote oriented simultaneously toward northeast-by-east — not in sequence, all at once, as if remembering which direction home was."
+          "[d8] Prism Sight read Aevi's light-history at the shimmer crossing: in the instant of crossing, every mote oriented simultaneously toward northeast-by-east — not in sequence, all at once, as if remembering which direction home was.",
+          "[d9] Aevi joined the Waystaff's lattice at dawn in the chamber and spoke through it — naming that it has known the chamber's pattern for longer than it has known Cellaceron, and that the chamber knows what that means even if Aevi does not yet."
         ],
         "links": [
           "shimmer-crossing-boundary-condition",
           "the-chamber-beyond-the-threshold",
           "northern-alcove-camp",
           "shimmer-crossing-shaped-boundary",
-          "second-river-rising"
+          "second-river-rising",
+          "teva-anselvar-missing-apprentice"
         ],
         "aliases": [
           "Aevi — What It Carries",
@@ -1727,7 +1702,7 @@
         ],
         "createdDay": 8,
         "entityId": "aevi",
-        "updatedDay": 8
+        "updatedDay": 9
       }
     },
     "notSame": [
@@ -2021,6 +1996,12 @@
       "text": "Resonant Sight through the complete four-node Waystaff confirms the chamber is subterranean — hemispherical dressed-wall geometry at roughly forty paces northeast-by-east and below the forward alcove.",
       "day": 8,
       "subjectId": null
+    },
+    {
+      "id": "aevi",
+      "text": "Aevi joined the Waystaff's phononic lattice on day 9 dawn inside the chamber — distributed its motes through the crystal nodes and spoke through the instrument, naming that it has known the chamber's pattern longer than it has known Cellaceron.",
+      "day": 9,
+      "subjectId": "aevi"
     }
   ],
   "sharedSceneId": null,
@@ -2028,15 +2009,15 @@
   "customEncounters": {},
   "reconcileVersion": 14,
   "tendencies": {
-    "cerebral": 41.95248276477995,
-    "strategic": 50.79128476449237,
-    "cautious": 47.21592152660409,
-    "social": 31.48458344053686,
-    "generous": 14.488652537738274,
-    "risky": 3.8166620122952035,
-    "carousing": 0.31585758189575897,
-    "patient": 3.0922203381135045,
-    "craft": 1.421108064682445
+    "cerebral": 40.90367069566045,
+    "strategic": 49.52150264538006,
+    "cautious": 46.03552348843899,
+    "social": 32.697468854523436,
+    "generous": 14.126436224294816,
+    "risky": 3.7212454619878232,
+    "carousing": 0.30796114234836497,
+    "patient": 3.014914829660667,
+    "craft": 1.3855803630653838
   },
   "aptitudes": [
     "strategist",
@@ -2049,9 +2030,9 @@
     "stalwart",
     "peacemaker"
   ],
-  "actionCount": 195,
-  "updatedAt": 1784687104840,
-  "rev": 61,
+  "actionCount": 196,
+  "updatedAt": 1784687570948,
+  "rev": 62,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -2061,7 +2042,7 @@
   "syncedAt": 1783791225006,
   "teachers": {},
   "regionsKnown": {
-    "valley": 18
+    "valley": 19
   },
   "company": [],
   "foreclosed": [],
@@ -2126,10 +2107,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-22T01:26:18.061Z",
-      "lastAt": "2026-07-22T02:25:04.838Z",
+      "lastAt": "2026-07-22T02:32:50.941Z",
       "startDay": 22,
       "endDay": 22,
-      "beats": 9
+      "beats": 10
     }
   ],
   "_pendingArrival": null,
@@ -2183,20 +2164,21 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 9,
-    "choices": 9,
+    "sceneSummary": 10,
+    "choices": 10,
     "characterDeltas": 7,
-    "scene": 9,
-    "npcUpdates": 7,
-    "codexUpdates": 6,
-    "timeOps": 9,
+    "scene": 10,
+    "npcUpdates": 8,
+    "codexUpdates": 7,
+    "timeOps": 10,
     "sceneEnded": 5,
     "placeUpdates": 4,
     "moveTo": 1,
     "questUpdates": 3,
-    "stateOps": 1
+    "stateOps": 1,
+    "factUpdates": 1
   },
-  "_opTurns": 9,
+  "_opTurns": 10,
   "_intentAsked": null,
   "corrections": [
     {

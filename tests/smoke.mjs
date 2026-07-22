@@ -479,6 +479,18 @@ const davan = merged.find(n => n.id.startsWith("davan"));
 check("merge keeps history and facts from both", davan.history.length === 2 && davan.knownFacts.includes("knows the sluices"));
 check("id-shaped names prettified, community token dropped", merged.some(n => n.name === "Elder Woman"));
 check("prettify leaves human names alone", prettifyNpcName("Mara Wells") === "Mara Wells");
+// SNG-199: a descriptive CLAUSE in the name field is not a name — keep only the leading name segment.
+check("199: a descriptive clause becomes just the name (not the whole sentence)", prettifyNpcName("Siol — Elven traveler at the Hub plaza, tall, pale coat, bir") === "Siol");
+check("199: a comma-clause name keeps only the leading part", prettifyNpcName("Maren, warden of the sonic gate") === "Maren");
+check("199: an id-shaped name still prettifies (no regression)", prettifyNpcName("davan_channel_worker") === "Davan Channel Worker");
+check("199: prettify never exceeds 60 chars on a word boundary", prettifyNpcName("A_very_long_identifier_that_keeps_going_and_going_past_sixty_characters_easily").length <= 60);
+// SNG-199: findExistingNpc reads the aliases the module maintains — a person met again under a known
+// alias resolves to the existing record instead of forking a duplicate.
+{
+  const reg = { "hesta-vorn": { id: "hesta-vorn", name: "Hesta Vorn", aliases: ["Silas's Mother", "silas-mother"] } };
+  check("199: findExistingNpc matches a known ALIAS, not just id/name (no duplicate fork)", findExistingNpc(reg, "new-id", "Silas's Mother")?.id === "hesta-vorn");
+  check("199: an unrelated name still finds nothing (no over-merge)", findExistingNpc(reg, "veth", "Veth") === null);
+}
 
 // --- v0.8.2: exhaustion + narrative rest ---
 const tired = { ...char, energy: 0 };

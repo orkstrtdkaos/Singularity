@@ -51,6 +51,11 @@ export function findExistingNpc(reg, id, name = "") {
   const nameNorm = slugify(name);
   for (const n of Object.values(reg)) {
     if (nameNorm && slugify(n.name) === nameNorm) return n;
+    // SNG-199: this module MAINTAINS `aliases` across five write sites (a renamed or re-revealed person
+    // keeps their prior names) — but the matcher never READ them, so a person met again under a name the
+    // registry already knew as an alias forked a second record. Match the alias ledger that was being
+    // written all along. Exact slug-match only (an explicit prior name), never a lexical loosening.
+    if (nameNorm && (n.aliases || []).some(a => slugify(a) === nameNorm)) return n;
     const a = n.id.split("-")[0], b = id.split("-")[0];
     if (a === b && (n.id.startsWith(id) || id.startsWith(n.id) || a === id || b === n.id)) return n;
   }
@@ -60,10 +65,20 @@ export function findExistingNpc(reg, id, name = "") {
 /** Names that are really ids ("davan_channel_worker", "millbrook.elder_woman")
  *  become readable ("Davan Channel Worker", "Elder Woman"). */
 export function prettifyNpcName(name, dropTokens = []) {
-  if (!/[._]/.test(name) && /[A-Z]/.test(name)) return name; // already human-shaped
-  const words = String(name).split(/[._\-\s]+/).filter(w => w && !dropTokens.includes(w.toLowerCase()));
-  if (!words.length) return name;
-  return words.map(w => w[0].toUpperCase() + w.slice(1)).join(" ").slice(0, 60);
+  let raw = String(name || "").trim();
+  // SNG-199: a descriptive CLAUSE is not a name. "Siol — Elven traveler at the Hub plaza, tall, pale
+  // coat, bir" reached the name field and this function — a slug-prettifier standing where a VALIDATOR
+  // should be — passed it straight through because it had a capital and no ._ , then a raw slice cut it
+  // mid-word. A name is a few words, not a sentence: when the input carries a clause break (comma,
+  // semicolon, a spaced dash) or runs long, keep only the leading name segment, and always clamp on a
+  // word boundary (smartClamp), never a raw mid-word cut.
+  if (/[,;]|\s[—–-]\s/.test(raw) || raw.split(/\s+/).length > 5) {
+    raw = raw.split(/\s*[,;]\s*|\s+[—–-]\s+/)[0].split(/\s+/).slice(0, 4).join(" ").trim();
+  }
+  if (!/[._]/.test(raw) && /[A-Z]/.test(raw)) return smartClamp(raw, 60); // already human-shaped
+  const words = raw.split(/[._\-\s]+/).filter(w => w && !dropTokens.includes(w.toLowerCase()));
+  if (!words.length) return smartClamp(raw, 60);
+  return smartClamp(words.map(w => w[0].toUpperCase() + w.slice(1)).join(" "), 60);
 }
 
 export function applyNpcUpdates(character, updates = [], ctx = {}) {

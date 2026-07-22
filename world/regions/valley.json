@@ -6,8 +6,18 @@
     "season": "late-spring",
     "year": 15
   },
-  "activeEvents": [],
-  "eventStages": {},
+  "activeEvents": [
+    {
+      "eventId": "water_crisis",
+      "stage": 1
+    }
+  ],
+  "eventStages": {
+    "water_crisis": {
+      "stage": 1,
+      "sinceDay": 2
+    }
+  },
   "spectrumDrift": {},
   "worldFlags": {},
   "lastTick": "2026-07-22T01:15:58.913Z"

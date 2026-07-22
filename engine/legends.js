@@ -13,6 +13,8 @@
 //   4. Threading — legends recur as high-weight codex entities (handled by weight + codex).
 //   5. Governors — rare, power-appropriate (tier scales to arc), rating-aware.
 
+import { smartClamp } from "./namematch.js"; // SNG-208 wiring: legendsForGM clamps authored prose to the GM
+
 /** Birth-weight floor per power tier — legendary sits high so the weight system treats it as
  *  durable, recurring canon (the measure others are held against). */
 export const LEGEND_TIER_WEIGHT = { legendary: 50, epic: 45, regional: 16, notable: 10, riffraff: 3 };
@@ -113,4 +115,35 @@ export function legendDeploymentForGM(deployment, { ratingPreset = "PG-13" } = {
     ? `${deployment.figure.name} (${deployment.figure.legend.tier} ${deployment.figure.legend.alignment}). Signature: ${deployment.figure.legend.signature}`
     : `a ${deployment.tier} ${deployment.alignment} the world grows for this moment`;
   return `## A GREAT FIGURE (SNG-042 — deploy RARELY + in-grain; the engine chose this beat, you narrate it). BEAT: ${BEAT_DIR[deployment.beatType]}. FIGURE: ${who}. Keep their power legible and EARNED, never a deus ex machina that steals the player's agency — they witness, are aided, or are warned; the choice stays theirs. Respect the ${ratingPreset} ceiling in any violence.`;
+}
+
+const clampSig = s => smartClamp(String(s || "").replace(/\s+/g, " ").trim(), 220);
+/** The legends the character has a REASON to reach — so the great figures are PURSUABLE, not just ambient
+ *  (SNG-208 made them act offstage; this makes them things the player can seek). A legend whose `tradition`
+ *  the character PRACTICES is the legendary deep-teacher of that craft — the SNG-203 Finding-beat target;
+ *  a legend whose `homeLocation` is HERE is a present force whose `want` is a quest waiting. Dead legends
+ *  (SNG-208 §3b) are gone. `opts.practiced` (Set of traditions) + `opts.deadIds` (Set) are supplied by the
+ *  caller so this stays a pure read with no cross-module import. Caps per group to avoid a dump. Pure. */
+export function legendsForGM(character, content, opts = {}) {
+  const roster = content?.legends?.roster || [];
+  if (!roster.length) return null;
+  const practiced = opts.practiced instanceof Set ? opts.practiced : new Set();
+  const dead = opts.deadIds instanceof Set ? opts.deadIds : new Set();
+  const here = character?.currentLocationId;
+  const teachers = [], forces = [];
+  for (const f of roster) {
+    if (dead.has(f.id)) continue;
+    const atHome = !!(here && f.homeLocation && f.homeLocation === here);
+    if (f.tradition && practiced.has(f.tradition) && teachers.length < 4) {
+      const role = f.role || (f.alignment === "villain" ? "dark master" : "master");
+      teachers.push(`- ${f.name} — the legendary ${role} of the ${f.tradition} craft${f.signature ? `: ${clampSig(f.signature)}` : ""}${atHome ? " — and a presence HERE" : ""}. Seeking them is the deep-teacher arc (SNG-203 Finding beat); the pursuit is the quest, woven in the fiction, never a menu.`);
+    } else if (atHome && forces.length < 3) {
+      forces.push(`- ${f.name}${f.role ? ` (${f.role})` : ""} — ${f.alignment === "villain" ? "a great adversary" : "a great figure"} whose presence touches this place. They want: ${clampSig(f.wants) || "their own ends"}. Aiding or opposing that want is a quest waiting — offer it in the fiction.`);
+    }
+  }
+  if (!teachers.length && !forces.length) return null;
+  const parts = [];
+  if (teachers.length) parts.push(`LEGENDARY TEACHERS you could seek — the craft this character practices has great masters out there; pursuing one is an arc with the deepest teaching at its end (do not force it; offer the possibility when the fiction reaches for it):\n${teachers.join("\n")}`);
+  if (forces.length) parts.push(`GREAT FIGURES near you — a want you could aid or oppose, the seed of a quest (in the fiction, never a list):\n${forces.join("\n")}`);
+  return parts.join("\n\n");
 }

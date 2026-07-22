@@ -36,7 +36,8 @@ import { loreForLocation, eventsForGM } from "./state.js";
 import { buildRegionView, newsForGM, worldArcsForGM } from "./worldtick.js";
 import { inventoryForGM } from "./inventory.js";
 import { companionsForGM, activeCompanions } from "./companions.js";
-import { questsForGM, structuredQuestsForGM, traditionArcForGM, npcQuestsForGM } from "./quests.js";
+import { questsForGM, structuredQuestsForGM, traditionArcForGM, npcQuestsForGM, practicedTraditions } from "./quests.js";
+import { legendsForGM } from "./legends.js"; // SNG-208 wiring: legends pursuable as teachers + wants-as-quests
 import { npcRegistryForGM, npcQuestSeedBlock } from "./npcs.js";
 import { placeMemoryForGM, recallForGM } from "./places.js";
 import { assignmentsForGM } from "./assignments.js"; // SNG-191 §4: delegated commitments the world is honouring
@@ -173,6 +174,13 @@ export const GM_CONTEXT = [
   { key: "worldArcsDetail", builder: "worldtick.worldArcsForGM", carries: ["greater arcs' public stage", "what has moved on the shared clock"],
     reachedBy: "always", spec: "SNG-203 §3", views: ["turn", "ask"],
     build: (env) => worldArcsForGM(env.CONTENT, env.character) },
+  // SNG-208 wiring: the great figures the character can PURSUE — legendary teachers of a craft they practice, and near-by wants to aid/oppose.
+  { key: "legendsPursuableDetail", builder: "legends.legendsForGM (SNG-208)", carries: ["legendary teachers to seek", "great figures' wants as quest hooks"],
+    reachedBy: "always (a practiced tradition or a legend at hand)", spec: "SNG-208 wiring", views: ["turn", "ask"],
+    build: (env) => legendsForGM(env.character, env.CONTENT, {
+      practiced: practicedTraditions(env.character, env.CONTENT),
+      deadIds: new Set(Object.entries(env.character?.worldState?.epicStatus || {}).filter(([, s]) => s?.status === "dead").map(([id]) => id))
+    }) },
 
   // ---- turn-only: pass-throughs from runGM's own parameters ----
   { key: "resolution", builder: "runGM param (resolve.resolveAction)", carries: ["this action's mechanical outcome"],

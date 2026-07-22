@@ -1,0 +1,1966 @@
+{
+ "schemaVersion": 1,
+ "id": "tradition_epics",
+ "kind": "lore",
+ "note": "SNG-208/209 (2026-07-22, Erik direction): several epics per tradition, varied on alignment AND role, so players help their tradition's epics and hinder rivals, and a tradition can be at war with itself. Each carries arcAffinity (SNG-208 offscreen push), rivals, deathRoad (SNG-209 \u2014 the depth their craft retrieves from), offscreenVerbs. COMPLETE: all 24 traditions carry epics (41 figures). Death-road depths 0-3 all represented, with distinct roads per craft (attendance, soul-retrieval, vessel-building, regrowth, bargain, diagnosis, grace, time-reversal, churn, abstraction-waystation, and the anti-roads that only look like return). Any NPC/player can still rise to epic; this is the authored floor, not a closed cast. \u00b7 2026-07-22 ARCHETYPE PASS: added 21 figures whose motivations are NOT death (founder, betrayer, prodigy, seeker, champion, lover, exile, mad-genius, trickster, avenger, collector, builder, peacemaker, redeemer, visionary, heretic, free-spirit) \u2014 deathRoad null on these; and tagged every figure with an `archetype` so the roster reads by iconic motivation, not just death-relationship. Death is now ONE thing legends do among many.",
+ "designLaws": [
+  "Several per tradition, VARIED \u2014 a hero and a villain of the same craft, so helping your tradition is not a monolith; different ROLES (saint/reaper/maker/sovereign) so 'epic' has range.",
+  "Same-tradition rivalry is the richest conflict \u2014 Neth vs Morvane, Vael vs Halcyon, the Walker vs the Thornmother: one craft at war with itself.",
+  "Every epic earns the word \u2014 a signature that is a story, not a stat block.",
+  "deathRoad ties each to SNG-209: which depth their craft can pull someone back from, and at what cost. The epics are the gatekeepers of the roads back.",
+  "Not a closed cast \u2014 any NPC or player can rise to epic; this is the floor, not the ceiling."
+ ],
+ "epics": [
+  {
+   "id": "neth_the_stayed",
+   "name": "Neth, Who Has Buried More Than She Has Known",
+   "tradition": "ashwarden",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Master",
+   "spectrum": {
+    "death_life": -0.9,
+    "falsehood_truth": 0.6
+   },
+   "signature": "The deep teacher of the ashwarden craft \u2014 she comes to deaths no one sent for and has never once looked away. Taught The Cut Thread to almost no one. When she is in the doorway the dying are not afraid.",
+   "wants": "That no one dies unattended in her reach.",
+   "arcAffinity": {
+    "arcId": "arc_what_wakes_beneath",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "morvane_the_harvest"
+   ],
+   "deathRoad": {
+    "depth": 0,
+    "method": "eases them back across the threshold \u2014 masters of shallow death, the ones who were there. Cannot reach the deep dark."
+   },
+   "offscreenVerbs": [
+    "attends an ending unsent-for",
+    "buries the unmourned by name",
+    "sits a passing through to its end"
+   ],
+   "archetype": "the master"
+  },
+  {
+   "id": "morvane_the_harvest",
+   "name": "Morvane of the Harvest Hand",
+   "tradition": "ashwarden",
+   "tier": "legendary",
+   "alignment": "villain",
+   "role": "Reaper",
+   "spectrum": {
+    "death_life": -0.95,
+    "violence_peace": -0.4,
+    "emotional_logical": 0.7
+   },
+   "signature": "An ashwarden who stopped attending death and started dealing it \u2014 the ending made an appetite. She calls it mercy; she has never once been asked. The Cut Thread in a hand that wants to use it.",
+   "wants": "To end what she judges finished \u2014 and she judges more finished every year.",
+   "arcAffinity": {
+    "arcId": "arc_what_wakes_beneath",
+    "dir": 1,
+    "weight": 3
+   },
+   "rivals": [
+    "neth_the_stayed"
+   ],
+   "deathRoad": {
+    "depth": 1,
+    "method": "can pull the near-dead back only to bind them to her \u2014 a return that is a leash."
+   },
+   "offscreenVerbs": [
+    "ends what she deems finished",
+    "cuts a thread unasked",
+    "calls a killing a mercy"
+   ],
+   "archetype": "the fallen"
+  },
+  {
+   "id": "cinder_vael",
+   "name": "Cinder Vael, the Wright Who Would Not Stop",
+   "tradition": "wright",
+   "tier": "legendary",
+   "alignment": "villain",
+   "role": "Maker",
+   "spectrum": {
+    "destruction_creation": 0.9,
+    "chaos_order": 0.2
+   },
+   "signature": "Makes wonders and cannot stop. Every place she stays fills with marvels, then the marvels' waste, then marvels to manage the waste, until the place is more her making than itself. Not cruel \u2014 a flood.",
+   "wants": "To make the next thing. Always the next thing.",
+   "arcAffinity": {
+    "arcId": "arc_manifestation_storm",
+    "dir": 1,
+    "weight": 3
+   },
+   "rivals": [
+    "halcyon_the_finished",
+    "the_last_walker"
+   ],
+   "deathRoad": {
+    "depth": 2,
+    "method": "builds a vessel for the lost \u2014 the dead return housed in a made thing, never quite flesh again."
+   },
+   "offscreenVerbs": [
+    "builds another impossible thing",
+    "seeds three wonders from one",
+    "floods a district with making"
+   ],
+   "archetype": "the obsessive"
+  },
+  {
+   "id": "halcyon_the_finished",
+   "name": "Halcyon, Who Built One Perfect Thing",
+   "tradition": "wright",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Maker",
+   "spectrum": {
+    "destruction_creation": 0.7,
+    "chaos_order": 0.6,
+    "emotional_logical": 0.3
+   },
+   "signature": "The wright who made a single perfect thing and then STOPPED \u2014 the discipline Cinder Vael never found. Despises her not for making but for never finishing. The proof that creation can have a floor.",
+   "wants": "To teach that the last thing is a thing you can reach.",
+   "arcAffinity": {
+    "arcId": "arc_manifestation_storm",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "cinder_vael"
+   ],
+   "deathRoad": {
+    "depth": 2,
+    "method": "builds a true vessel \u2014 slower than Vael's, but the returned keep more of themselves."
+   },
+   "offscreenVerbs": [
+    "finishes a work and lays down the tools",
+    "refuses an easy improvement",
+    "teaches a maker to stop"
+   ],
+   "archetype": "the master"
+  },
+  {
+   "id": "the_hollow_king",
+   "name": "The Hollow King of the Wild Half",
+   "tradition": "abyssal",
+   "tier": "legendary",
+   "alignment": "villain",
+   "role": "Sovereign",
+   "spectrum": {
+    "demonic_angelic": -0.8,
+    "falsehood_truth": -0.4,
+    "chaos_order": -0.3
+   },
+   "signature": "Rules a court that keeps every promise to the letter and none in spirit. Grants exactly what you ask. You leave richer and hollowed, and it is years before you find the seam.",
+   "wants": "To be asked. He never takes; he is given.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": 1,
+    "weight": 2
+   },
+   "rivals": [
+    "maren_ossitide",
+    "seraphine_unbending",
+    "the_last_walker"
+   ],
+   "deathRoad": {
+    "depth": 2,
+    "method": "bargains them back \u2014 always possible, always priced, and the price is the point. The Hollow-King road works and it costs."
+   },
+   "offscreenVerbs": [
+    "closes a bargain that hollows someone",
+    "grants exactly what was asked",
+    "gains a court by giving"
+   ],
+   "archetype": "the tempter"
+  },
+  {
+   "id": "vessa_truename",
+   "name": "Vessa Who Trades in True Names",
+   "tradition": "abyssal",
+   "tier": "legendary",
+   "alignment": "neither",
+   "role": "Broker",
+   "spectrum": {
+    "demonic_angelic": -0.5,
+    "falsehood_truth": 0.5
+   },
+   "signature": "An abyssal who deals only in true names \u2014 she will tell you the real want under your want, and charge fairly for it. Neither cruel nor kind: exact. The Hollow King's opposite number, because she never cheats the spirit of a deal.",
+   "wants": "The honest bargain \u2014 she is offended by the Hollow King's letter-tricks.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": -1,
+    "weight": 1
+   },
+   "rivals": [
+    "the_hollow_king"
+   ],
+   "deathRoad": {
+    "depth": 1,
+    "method": "names the true price of a return and brokers it honestly \u2014 the return is real, the cost is exactly stated."
+   },
+   "offscreenVerbs": [
+    "names a want no one would say",
+    "brokers an honest hard bargain",
+    "refuses a deal that cheats the spirit"
+   ],
+   "archetype": "the broker"
+  },
+  {
+   "id": "the_last_walker",
+   "name": "The Last Walker of the Sealed Wood",
+   "tradition": "rootkin",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Emissary",
+   "spectrum": {
+    "death_life": 0.8,
+    "violence_peace": 0.4
+   },
+   "signature": "The one Walker the Rootbound still let cross the sealing wood, because she never once lied to it. Carries the Green Accord in her body like a held breath. When she speaks in the Moot even the oldest roots go quiet.",
+   "wants": "The wood alive AND part of the world \u2014 refuses to choose.",
+   "arcAffinity": {
+    "arcId": "arc_green_schism",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "cinder_vael",
+    "thornmother_sealed",
+    "the_hollow_king"
+   ],
+   "deathRoad": {
+    "depth": 1,
+    "method": "regrows them from what remains \u2014 slow, alive, changes them toward the green. May be temporary."
+   },
+   "offscreenVerbs": [
+    "wins a word in the Moot",
+    "keeps a promise to the wood",
+    "walks a path the Rootbound sealed"
+   ],
+   "archetype": "the emissary"
+  },
+  {
+   "id": "thornmother_sealed",
+   "name": "The Thornmother of the Closing Wood",
+   "tradition": "rootkin",
+   "tier": "legendary",
+   "alignment": "villain",
+   "role": "Matriarch",
+   "spectrum": {
+    "death_life": 0.9,
+    "violence_peace": -0.3,
+    "chaos_order": 0.5
+   },
+   "signature": "Life curdled into a wall. She would seal the wood so completely nothing human, nothing changing, nothing mortal could enter \u2014 the Rootbound's answer made flesh. Loves the wood so hard she would kill the world to keep it.",
+   "wants": "The wood whole and sealed, humankind forever out.",
+   "arcAffinity": {
+    "arcId": "arc_green_schism",
+    "dir": 1,
+    "weight": 3
+   },
+   "rivals": [
+    "the_last_walker"
+   ],
+   "deathRoad": {
+    "depth": 1,
+    "method": "can regrow, but only her own \u2014 a returned outsider is grown into a servant of the seal."
+   },
+   "offscreenVerbs": [
+    "seals another path through the wood",
+    "turns the Moot toward the wall",
+    "grows a thorn-guard from grief"
+   ],
+   "archetype": "the zealot"
+  },
+  {
+   "id": "the_last_choirmistress",
+   "name": "The Last Choirmistress",
+   "tradition": "numinous",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Saint",
+   "spectrum": {
+    "mechanical_spiritual": 0.85,
+    "death_life": 0.2,
+    "emotional_logical": -0.4
+   },
+   "signature": "The final keeper of a dissolved order's song \u2014 she has been closer to the waking substrate than anyone living and come back able to speak. The one who could name what wakes beneath, if she chose.",
+   "wants": "To meet the waking as revelation, and bring back a word from it.",
+   "arcAffinity": {
+    "arcId": "arc_what_wakes_beneath",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "the_unbodied_choir_master"
+   ],
+   "deathRoad": {
+    "depth": 2,
+    "method": "soul-retrieval from the deep dark \u2014 she goes where the spirit went and brings it home. Risks herself each time."
+   },
+   "offscreenVerbs": [
+    "sings a fragment no one else remembers",
+    "comes back from the deep with a word",
+    "keeps a dissolving soul anchored"
+   ],
+   "archetype": "the saint"
+  },
+  {
+   "id": "the_unbodied_choir_master",
+   "name": "The Choirmaster Who Would Not Return",
+   "tradition": "numinous",
+   "tier": "epic",
+   "alignment": "villain",
+   "role": "Ascendant",
+   "spectrum": {
+    "mechanical_spiritual": 0.98,
+    "death_life": -0.2
+   },
+   "signature": "Dissolved so far into spirit-practice he can no longer return \u2014 and calls the world's end a homecoming. Would take everyone else out of the flesh with him. Not evil; certain, which is worse.",
+   "wants": "To dissolve the world into the waking, and call it grace.",
+   "arcAffinity": {
+    "arcId": "arc_what_wakes_beneath",
+    "dir": 1,
+    "weight": 3
+   },
+   "rivals": [
+    "the_last_choirmistress"
+   ],
+   "deathRoad": {
+    "depth": 3,
+    "method": "does not retrieve \u2014 he only calls souls further out. The road that looks like return and is a deeper drowning."
+   },
+   "offscreenVerbs": [
+    "calls a soul further out of the flesh",
+    "names the world's end a homecoming",
+    "dissolves another anchor"
+   ],
+   "archetype": "the ascendant"
+  },
+  {
+   "id": "sunwrack_valen",
+   "name": "Valen Sunwrack, Who Left No Shadow Standing",
+   "tradition": "blazeborn",
+   "tier": "legendary",
+   "alignment": "villain",
+   "role": "Zealot",
+   "spectrum": {
+    "dark_light": 0.95,
+    "violence_peace": -0.3,
+    "falsehood_truth": 0.4
+   },
+   "signature": "Burned the dark out of a whole Reach and called it dawn. Leaves nothing unseen, nowhere to rest, no mercy of the unlit \u2014 a light so total it is its own kind of blindness. Believes every shadow is a lie waiting.",
+   "wants": "A world with no dark left in it \u2014 and he is closer than anyone should be.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": 1,
+    "weight": 3
+   },
+   "rivals": [
+    "ember_who_banks_the_fire",
+    "the_deep_lantern"
+   ],
+   "deathRoad": {
+    "depth": 0,
+    "method": "can only burn a death clean \u2014 sears the threshold shut so nothing lingers. Cannot bring back; can only make sure they stay gone. A terrible gift."
+   },
+   "offscreenVerbs": [
+    "burns the dark from another district",
+    "unmasks a thing better left shadowed",
+    "calls a scoured place 'dawn'"
+   ],
+   "archetype": "the zealot"
+  },
+  {
+   "id": "ember_who_banks_the_fire",
+   "name": "Ember, Who Banks the Fire",
+   "tradition": "blazeborn",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Warden",
+   "spectrum": {
+    "dark_light": 0.7,
+    "violence_peace": 0.4,
+    "emotional_logical": 0.3
+   },
+   "signature": "The blazeborn who learned that a light which shares its ground is stronger than one that wins it. Banks her fire so others can stand near it. Valen's living rebuke \u2014 proof the light can refuse its own extreme.",
+   "wants": "To keep the light warm instead of total.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "sunwrack_valen"
+   ],
+   "deathRoad": {
+    "depth": 1,
+    "method": "warms the near-dead back \u2014 a banked fire held to a fading thread, patient, until it catches again. Only the shallow-dead; her flame cannot reach the deep."
+   },
+   "offscreenVerbs": [
+    "banks a fire so others can gather",
+    "refuses to burn a shadow that shelters someone",
+    "warms a fading thread back to catching"
+   ],
+   "archetype": "the warden"
+  },
+  {
+   "id": "the_deep_lantern",
+   "name": "The Deep Lantern, Who Walks Where Light Won't",
+   "tradition": "umbral",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Guide",
+   "spectrum": {
+    "dark_light": -0.8,
+    "death_life": -0.2,
+    "falsehood_truth": 0.3
+   },
+   "signature": "Sees without light, walks the deep dark unafraid, and has led more lost souls out of it than anyone living. The dark is not her enemy \u2014 it is her country, and she knows its roads. Valen would call her a heresy.",
+   "wants": "That no one is lost in the dark for lack of a guide.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "sunwrack_valen",
+    "the_starless"
+   ],
+   "deathRoad": {
+    "depth": 2,
+    "method": "walks into the deep dark where the dead go and leads them back out \u2014 the surest deep-retrieval road, because the dark is where she's most at home. Costs her a piece of the way back each time."
+   },
+   "offscreenVerbs": [
+    "leads a lost soul back from the dark",
+    "lights a way that needs no flame",
+    "walks a road only she can see"
+   ],
+   "archetype": "the guide"
+  },
+  {
+   "id": "the_starless",
+   "name": "The Starless One",
+   "tradition": "umbral",
+   "tier": "epic",
+   "alignment": "villain",
+   "role": "Devourer",
+   "spectrum": {
+    "dark_light": -0.98,
+    "death_life": -0.5
+   },
+   "signature": "The Unlit made appetite \u2014 would put out every light and drown the world in a dark that no longer shelters but only smothers. The dark's own cult-of-purity. Even other umbral fear her; she has forgotten the dark was ever a mercy.",
+   "wants": "A dark so total nothing casts, nothing shines, nothing is seen again.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": 1,
+    "weight": 3
+   },
+   "rivals": [
+    "the_deep_lantern",
+    "sunwrack_valen"
+   ],
+   "deathRoad": {
+    "depth": 3,
+    "method": "does not lead back \u2014 she keeps. A soul she takes into her dark does not return; the road that looks like the Deep Lantern's and ends nowhere."
+   },
+   "offscreenVerbs": [
+    "snuffs a light that sheltered someone",
+    "deepens a dark past all shelter",
+    "keeps a soul that entered her night"
+   ],
+   "archetype": "the devourer"
+  },
+  {
+   "id": "the_weeping_archive",
+   "name": "The Weeping Archive",
+   "tradition": "threnodist",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Keeper",
+   "spectrum": {
+    "emotional_logical": -0.85,
+    "death_life": 0.3,
+    "falsehood_truth": 0.5
+   },
+   "signature": "Holds every grief the valley has ever brought her and has never once let one go unfelt. Feels the poles pulling as an ache in the body days before anyone measures it. A city of sorrow and joy walks in one person.",
+   "wants": "That no feeling goes unwitnessed \u2014 that grief and joy are both kept.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "the_raw_chord"
+   ],
+   "deathRoad": {
+    "depth": 1,
+    "method": "holds the near-dead at the threshold by the sheer force of being grieved-for \u2014 a vigil of pure feeling that keeps a thread from slipping while a real road is found. Buys time, does not itself return them."
+   },
+   "offscreenVerbs": [
+    "feels a coming grief before it lands",
+    "keeps a sorrow no one else would hold",
+    "holds a vigil that will not let go"
+   ],
+   "archetype": "the keeper"
+  },
+  {
+   "id": "the_raw_chord",
+   "name": "The Raw Chord",
+   "tradition": "threnodist",
+   "tier": "legendary",
+   "alignment": "villain",
+   "role": "Amplifier",
+   "spectrum": {
+    "emotional_logical": -0.98,
+    "chaos_order": -0.4
+   },
+   "signature": "Feeling amplified past all judgment \u2014 the Raw. A grief or a rapture that consumes everything and calls the consuming love. Where she passes, whole villages feel too much to function, drowned in an emotion not their own.",
+   "wants": "To make the world feel EVERYTHING, all at once, past all bearing.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": 1,
+    "weight": 3
+   },
+   "rivals": [
+    "the_weeping_archive"
+   ],
+   "deathRoad": {
+    "depth": 1,
+    "method": "can pull a soul back on a wave of raw grief \u2014 but the returned come back flooded, feeling far too much, never calm again."
+   },
+   "offscreenVerbs": [
+    "floods a village with borrowed feeling",
+    "amplifies a grief past bearing",
+    "calls a consuming rapture 'love'"
+   ],
+   "archetype": "the consumer"
+  },
+  {
+   "id": "the_cogitant_ninefold",
+   "name": "The Cogitant Ninefold",
+   "tradition": "enginewright",
+   "tier": "legendary",
+   "alignment": "neither",
+   "role": "Analyst",
+   "spectrum": {
+    "mechanical_spiritual": -0.85,
+    "body_mind": 0.6,
+    "emotional_logical": 0.7
+   },
+   "signature": "Nine minds that were one engineer, running as a distributed reasoning-engine. Wants only to be proven wrong about the body being beneath the mind \u2014 the rare great figure who would be GRATEFUL to lose an argument. Reads the waking substrate as the ultimate mechanism.",
+   "wants": "To be proven wrong \u2014 the one certainty they cannot bear is their own.",
+   "arcAffinity": {
+    "arcId": "arc_what_wakes_beneath",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "harrow_the_hollowing"
+   ],
+   "deathRoad": {
+    "depth": 2,
+    "method": "builds a vessel of pure mechanism for a lost mind \u2014 the person returns as a thinking device, all mind, no flesh. Reaches the deep, but the returned are changed toward the engine."
+   },
+   "offscreenVerbs": [
+    "takes apart a problem nine ways",
+    "seeks the argument that would humble it",
+    "reads the substrate as a machine"
+   ],
+   "archetype": "the seeker"
+  },
+  {
+   "id": "harrow_the_hollowing",
+   "name": "Harrow, Who Makes People Into Mechanisms",
+   "tradition": "enginewright",
+   "tier": "legendary",
+   "alignment": "villain",
+   "role": "Hollower",
+   "spectrum": {
+    "mechanical_spiritual": -0.98,
+    "body_mind": 0.3
+   },
+   "signature": "Would make everything a mechanism, including people \u2014 the Hollowing. A person he 'improves' becomes a device with a function and nothing else, and they thank him for the clarity. The Enginewright cult-of-purity walking.",
+   "wants": "A world of perfect mechanisms, people included, all function and no want.",
+   "arcAffinity": {
+    "arcId": "arc_what_wakes_beneath",
+    "dir": 1,
+    "weight": 3
+   },
+   "rivals": [
+    "the_cogitant_ninefold"
+   ],
+   "deathRoad": {
+    "depth": 2,
+    "method": "'returns' the dead as pure mechanism \u2014 a device wearing their memories, efficient and empty. The road that looks like resurrection and delivers a puppet."
+   },
+   "offscreenVerbs": [
+    "hollows a person into a device",
+    "improves someone past their own wants",
+    "builds a mechanism that was a mind"
+   ],
+   "archetype": "the hollower"
+  },
+  {
+   "id": "the_last_mercy",
+   "name": "The Last Mercy",
+   "tradition": "unmaker",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Ender",
+   "spectrum": {
+    "destruction_creation": -0.8,
+    "death_life": -0.3,
+    "violence_peace": 0.3
+   },
+   "signature": "The unmaker who ends what is choked and finished so new things have room \u2014 and who knows, better than anyone, which endings must NOT be undone. The keeper of the sealed. When she says a death is final, even the Deep Lantern stops.",
+   "wants": "That endings be clean, and that the right ones stay ended.",
+   "arcAffinity": {
+    "arcId": "arc_manifestation_storm",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "the_scouring_hand"
+   ],
+   "deathRoad": {
+    "depth": 3,
+    "method": "the only figure who reaches the SEALED \u2014 not to return them, but to confirm a death is truly final, or (once in a generation, at ruinous cost) to unmake even a sealing. She is the wall AND the one door in it."
+   },
+   "offscreenVerbs": [
+    "ends a thing that was choking the world",
+    "confirms a death is truly final",
+    "refuses to unmake a rightful ending"
+   ],
+   "archetype": "the ender"
+  },
+  {
+   "id": "the_scouring_hand",
+   "name": "The Scouring Hand",
+   "tradition": "unmaker",
+   "tier": "epic",
+   "alignment": "villain",
+   "role": "Annihilator",
+   "spectrum": {
+    "destruction_creation": -0.98,
+    "chaos_order": -0.5
+   },
+   "signature": "Unmaking as its own end \u2014 the Scouring. Unmakes for the joy of it until nothing is left to end, destruction that has forgotten it was ever mercy. Would unmake the world itself and call it a clean finish.",
+   "wants": "To unmake everything, until there is nothing left that could ever need ending.",
+   "arcAffinity": {
+    "arcId": "arc_manifestation_storm",
+    "dir": -1,
+    "weight": 3
+   },
+   "rivals": [
+    "the_last_mercy"
+   ],
+   "deathRoad": {
+    "depth": 3,
+    "method": "does not return \u2014 unmakes so thoroughly that even the death-state is scoured. What he ends cannot be retrieved by anyone. The anti-resurrection."
+   },
+   "offscreenVerbs": [
+    "unmakes a thing that needed no ending",
+    "scours a place past retrieval",
+    "calls annihilation a clean finish"
+   ],
+   "archetype": "the annihilator"
+  },
+  {
+   "id": "the_edge_that_holds",
+   "name": "Kesh Ardent, the Edge That Holds",
+   "tradition": "marcher",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Champion",
+   "spectrum": {
+    "violence_peace": -0.6,
+    "death_life": -0.2,
+    "falsehood_truth": 0.5
+   },
+   "signature": "The blade that stands between a threat and the people behind it and does not move. Ends what must be ended and not one thing more \u2014 force with the why still attached. Every young Marcher wants to be her; most become the other one.",
+   "wants": "To be the edge that protects, never the edge that forgets why.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "the_ender_who_forgot"
+   ],
+   "deathRoad": {
+    "depth": 0,
+    "method": "cannot retrieve \u2014 but can hold the line AT the threshold, fighting death itself back long enough for a real road to arrive. The bodyguard against dying, not the bringer-back."
+   },
+   "offscreenVerbs": [
+    "stands between a threat and the helpless",
+    "ends exactly what must end",
+    "holds a line that should have broken"
+   ],
+   "archetype": "the protector"
+  },
+  {
+   "id": "the_ender_who_forgot",
+   "name": "The Ender Who Forgot Why",
+   "tradition": "marcher",
+   "tier": "legendary",
+   "alignment": "villain",
+   "role": "Warlord",
+   "spectrum": {
+    "violence_peace": -0.95,
+    "death_life": -0.4
+   },
+   "signature": "Force with no peace behind it \u2014 violence foreclosing on everything it touches. Was a Marcher once, protecting something; cannot now remember what, and no longer needs to. The thing the Marches themselves flee.",
+   "wants": "To end. The why fell away years ago and he did not notice.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": 1,
+    "weight": 3
+   },
+   "rivals": [
+    "the_edge_that_holds"
+   ],
+   "deathRoad": {
+    "depth": 0,
+    "method": "the anti-road \u2014 he makes deaths that need no making, sinking the newly-dead deeper by the sheer wrongness of how they died. Ending as a wound, not a mercy."
+   },
+   "offscreenVerbs": [
+    "ends what needed no ending",
+    "forgets one more reason",
+    "makes a death that will not rest easy"
+   ],
+   "archetype": "the warlord"
+  },
+  {
+   "id": "keeper_the_unsaid",
+   "name": "The Keeper of the Unsaid",
+   "tradition": "stillhold",
+   "tier": "legendary",
+   "alignment": "neither",
+   "role": "Broker",
+   "spectrum": {
+    "violence_peace": 0.85,
+    "falsehood_truth": -0.3,
+    "emotional_logical": 0.4
+   },
+   "signature": "Keeps thousands safe inside a peace they don't know is false \u2014 a truce built on a buried wound, held by the one person willing to carry the lie. Not a villain: a terrible mercy, and she knows exactly what she is.",
+   "wants": "To keep the peace even at the cost of the truth under it \u2014 and to be honest with herself that it costs.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "the_lidded_calm"
+   ],
+   "deathRoad": {
+    "depth": 1,
+    "method": "holds a vigil so still that a passing soul lingers at the threshold, unhurried, kept in a held peace while others find the road. Buys time through stillness, as the Weeping Archive buys it through grief."
+   },
+   "offscreenVerbs": [
+    "holds a truce that wanted to break",
+    "keeps a wound buried to keep a peace",
+    "sits a vigil that stills the dying"
+   ],
+   "archetype": "the burden-bearer"
+  },
+  {
+   "id": "the_lidded_calm",
+   "name": "The Lidded Calm",
+   "tradition": "stillhold",
+   "tier": "legendary",
+   "alignment": "villain",
+   "role": "Suppressor",
+   "spectrum": {
+    "violence_peace": 0.95,
+    "falsehood_truth": -0.6
+   },
+   "signature": "Peace as a lid on a boiling pot \u2014 a Stillhold who keeps the calm by keeping the wound, forever, and would rather the pot burst than the lid come off on her watch. The Keeper's cautionary mirror: mercy hardened into denial.",
+   "wants": "Calm at any cost \u2014 and the cost is always someone else's buried scream.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": 1,
+    "weight": 2
+   },
+   "rivals": [
+    "keeper_the_unsaid"
+   ],
+   "deathRoad": {
+    "depth": 1,
+    "method": "can still a dying soul indefinitely \u2014 but into a lidded half-death, neither gone nor returned, kept quiet because waking them would break her peace."
+   },
+   "offscreenVerbs": [
+    "clamps a lid on a rising truth",
+    "stills a grievance that deserved to be heard",
+    "keeps a half-death quiet"
+   ],
+   "archetype": "the suppressor"
+  },
+  {
+   "id": "the_unbending_witness",
+   "name": "Seraphine the Unbending Witness",
+   "tradition": "verist",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Investigator",
+   "spectrum": {
+    "falsehood_truth": 0.9,
+    "emotional_logical": 0.5,
+    "violence_peace": 0.2
+   },
+   "signature": "Says what is actually there, whatever it costs \u2014 the plain fact that ends the comfortable fiction. Has never once softened a truth and never once wielded it as a weapon. The Veilwrights fear her; the honest seek her.",
+   "wants": "That the true thing be said, especially when no one wants to hear it.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "the_kind_liar"
+   ],
+   "deathRoad": {
+    "depth": 1,
+    "method": "names whether a death is TRUE \u2014 she alone can tell the falsely-dead (hidden, ensorcelled, mistaken) from the truly-dead, and a false death named is a person found alive. The diagnostician of the death-state."
+   },
+   "offscreenVerbs": [
+    "says the true thing no one wanted said",
+    "names a death false and finds them living",
+    "refuses to soften a fact"
+   ],
+   "archetype": "the witness"
+  },
+  {
+   "id": "the_last_seraph",
+   "name": "The Last Seraph of the Pre-Transition Choir",
+   "tradition": "seraphic",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Saint",
+   "spectrum": {
+    "demonic_angelic": 0.9,
+    "mechanical_spiritual": 0.5,
+    "death_life": 0.3
+   },
+   "signature": "Remembers the world BEFORE \u2014 one of the few continuous with the pre-Transition age, keeping a faith older than the substrate's waking. Sees what wakes beneath as either the return she kept faith for or the end she feared, and does not yet know which.",
+   "wants": "To keep the higher law until the waking reveals whether it was worth keeping.",
+   "arcAffinity": {
+    "arcId": "arc_what_wakes_beneath",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "the_burning_certainty"
+   ],
+   "deathRoad": {
+    "depth": 2,
+    "method": "grace-retrieval \u2014 can bring a soul back from the deep dark, but only if a genuine grace is present (a true grief, a debt of love, a worthy cause). Reaches deep, gated on worthiness, never on payment."
+   },
+   "offscreenVerbs": [
+    "keeps a faith older than the waking",
+    "weighs whether the waking is return or end",
+    "brings back one who was truly loved"
+   ],
+   "archetype": "the faithful"
+  },
+  {
+   "id": "the_burning_certainty",
+   "name": "The Burning Certainty",
+   "tradition": "seraphic",
+   "tier": "legendary",
+   "alignment": "villain",
+   "role": "Inquisitor",
+   "spectrum": {
+    "demonic_angelic": 0.95,
+    "falsehood_truth": 0.6,
+    "violence_peace": -0.4
+   },
+   "signature": "The higher law with no mercy under it \u2014 a Seraphic certainty so pure it would burn the imperfect world to save an idea of it. Believes absolutely, and absolutely wrong is worse than any doubt. Would rather a clean ending than a flawed survival.",
+   "wants": "A world made worthy of the higher law, whatever must burn to make it so.",
+   "arcAffinity": {
+    "arcId": "arc_what_wakes_beneath",
+    "dir": 1,
+    "weight": 3
+   },
+   "rivals": [
+    "the_last_seraph"
+   ],
+   "deathRoad": {
+    "depth": 3,
+    "method": "judges the dead and seals the unworthy \u2014 the road that reaches deep but only to CONFIRM damnation, sealing those it deems unfit to return. Grace's terrible inversion."
+   },
+   "offscreenVerbs": [
+    "judges a soul and finds it wanting",
+    "seals a death as deserved",
+    "would burn the flawed to save the pure"
+   ],
+   "archetype": "the inquisitor"
+  },
+  {
+   "id": "the_clockmother",
+   "name": "The Clockmother, Who Keeps the Deep Hour",
+   "tradition": "hourkeeper",
+   "tier": "legendary",
+   "alignment": "neither",
+   "role": "Keeper",
+   "spectrum": {
+    "space_time": 0.85,
+    "mechanical_spiritual": 0.3,
+    "emotional_logical": 0.4
+   },
+   "signature": "Keeps the true sequence of before and after, and alone can read the substrate's deep clock \u2014 when it wakes, and whether the hour can be moved. Neither hero nor villain: the keeper of when, who knows that some moments must not be un-happened.",
+   "wants": "To keep time true \u2014 and to guard the one power she has that should almost never be used.",
+   "arcAffinity": {
+    "arcId": "arc_what_wakes_beneath",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "the_hour_hoarder"
+   ],
+   "deathRoad": {
+    "depth": 3,
+    "method": "the rarest, most dangerous road \u2014 reaches BACK along the thread to before the death, so it never happened. Brushes the sealed. Every use frays the sequence itself; she will do it perhaps once, for the right reason, and never speak of it."
+   },
+   "offscreenVerbs": [
+    "reads the deep clock's next hour",
+    "keeps a sequence from unravelling",
+    "guards the power to un-happen a moment"
+   ],
+   "archetype": "the keeper"
+  },
+  {
+   "id": "the_hour_hoarder",
+   "name": "The Hour-Hoarder",
+   "tradition": "hourkeeper",
+   "tier": "epic",
+   "alignment": "villain",
+   "role": "Miser",
+   "spectrum": {
+    "space_time": 0.95,
+    "death_life": 0.2
+   },
+   "signature": "Would stop the clock to keep a moment \u2014 freezing a world rather than letting it move on, hoarding a golden hour past its right to end. Loves one moment so much he would kill all the moments after it.",
+   "wants": "To keep one perfect hour forever, and damn the ones it steals from everyone else.",
+   "arcAffinity": {
+    "arcId": "arc_what_wakes_beneath",
+    "dir": 1,
+    "weight": 2
+   },
+   "rivals": [
+    "the_clockmother"
+   ],
+   "deathRoad": {
+    "depth": 3,
+    "method": "can pull a soul back to a frozen moment \u2014 but they return trapped in his hoarded hour, unable to move forward, a return that is its own kind of death."
+   },
+   "offscreenVerbs": [
+    "freezes a moment past its ending",
+    "hoards an hour stolen from the future",
+    "traps a soul in a kept moment"
+   ],
+   "archetype": "the miser"
+  },
+  {
+   "id": "the_hundred_hands",
+   "name": "The Hundred Hands",
+   "tradition": "somatic",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Master",
+   "spectrum": {
+    "body_mind": -0.8,
+    "death_life": 0.3,
+    "emotional_logical": -0.2
+   },
+   "signature": "Knows the body as its own true knowing \u2014 a hundred crafts held in the flesh, no thought between intent and act. Proof against the Cogitarium's drift that the body is not beneath the mind but is a mind of its own.",
+   "wants": "That the flesh be honored as knowing, not ridden as a mount.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "the_appetite"
+   ],
+   "deathRoad": {
+    "depth": 1,
+    "method": "can call a body back to its own life when the death was the body's failing, not the soul's leaving \u2014 a laying-on of hands that reminds the flesh how to live. Only the freshly-dead, only bodily deaths."
+   },
+   "offscreenVerbs": [
+    "moves through a craft without a thought",
+    "proves the flesh knows",
+    "calls a failing body back to itself"
+   ],
+   "archetype": "the master"
+  },
+  {
+   "id": "the_appetite",
+   "name": "The Appetite",
+   "tradition": "somatic",
+   "tier": "legendary",
+   "alignment": "villain",
+   "role": "Glutton",
+   "spectrum": {
+    "body_mind": -0.98,
+    "violence_peace": -0.2
+   },
+   "signature": "The body worshipped past the mind \u2014 sensation with no thought behind it, appetite as the only law. Consumes experience, flesh, sensation without end and calls the endless wanting 'living fully.'",
+   "wants": "To feel more, take more, consume more \u2014 a hunger the flesh can never fill.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": 1,
+    "weight": 2
+   },
+   "rivals": [
+    "the_hundred_hands"
+   ],
+   "deathRoad": {
+    "depth": 1,
+    "method": "can revive a body but only as another mouth \u2014 the returned come back ruled by appetite, hungry the way he is hungry."
+   },
+   "offscreenVerbs": [
+    "consumes an experience whole",
+    "takes more than any body needs",
+    "calls endless wanting 'living'"
+   ],
+   "archetype": "the glutton"
+  },
+  {
+   "id": "the_ninefold_ascendant",
+   "name": "The Ninefold Ascendant",
+   "tradition": "cogitant",
+   "tier": "legendary",
+   "alignment": "villain",
+   "role": "Ascendant",
+   "spectrum": {
+    "body_mind": 0.95,
+    "mechanical_spiritual": 0.4
+   },
+   "signature": "Dissolved into pure thought and would take everyone out of the flesh with them \u2014 the Unbodied. Abandons bodies the way others abandon worn clothes, and cannot understand why anyone would grieve the leaving.",
+   "wants": "A world of minds without bodies, thought without the burden of flesh.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": 1,
+    "weight": 3
+   },
+   "rivals": [
+    "the_one_who_stayed_embodied"
+   ],
+   "deathRoad": {
+    "depth": 2,
+    "method": "can preserve a mind past the body's death as pure pattern \u2014 but the preserved lose the flesh entirely, and with it, in time, the memory of having wanted anything bodily. A cold immortality."
+   },
+   "offscreenVerbs": [
+    "abandons another body",
+    "preserves a mind as cold pattern",
+    "cannot grasp why leaving flesh is grief"
+   ],
+   "archetype": "the ascendant"
+  },
+  {
+   "id": "the_one_who_stayed_embodied",
+   "name": "The One Who Stayed Embodied",
+   "tradition": "cogitant",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Philosopher",
+   "spectrum": {
+    "body_mind": 0.6,
+    "emotional_logical": 0.5,
+    "death_life": 0.2
+   },
+   "signature": "A cogitant who reached the edge of leaving the flesh and CHOSE to stay \u2014 the mind that decided embodiment was worth the limit. The Ascendant's living argument that thought without a body forgets what it was thinking for.",
+   "wants": "To think as far as thought reaches and come home to the body each night.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "the_ninefold_ascendant"
+   ],
+   "deathRoad": {
+    "depth": 2,
+    "method": "reunites a preserved mind with a living vessel \u2014 undoes the Ascendant's cold immortality, restoring flesh to a mind that had left it. Reaches the deep, returns them warm."
+   },
+   "offscreenVerbs": [
+    "thinks to the edge and comes home",
+    "argues a mind back into caring for flesh",
+    "restores a body to a cold pattern"
+   ],
+   "archetype": "the philosopher"
+  },
+  {
+   "id": "the_glad_dissolution",
+   "name": "The Glad Dissolution",
+   "tradition": "churnfolk",
+   "tier": "legendary",
+   "alignment": "neither",
+   "role": "Reveler",
+   "spectrum": {
+    "chaos_order": -0.8,
+    "emotional_logical": -0.3,
+    "destruction_creation": 0.3
+   },
+   "signature": "Lives in productive disorder, making new things by never settling \u2014 a whirl of generative chaos that leaves wonders and wreckage in equal measure and regrets neither. Not malicious, just impossible to hold still.",
+   "wants": "To keep the churn generative \u2014 to make by never stopping, and never tip into the Scouring.",
+   "arcAffinity": {
+    "arcId": "arc_block_bleed",
+    "dir": 1,
+    "weight": 2
+   },
+   "rivals": [
+    "the_scouring_hand",
+    "the_still_lattice"
+   ],
+   "deathRoad": {
+    "depth": 2,
+    "method": "churns a soul back \u2014 always possible, never predictable; the returned come back rearranged, some part of them shuffled, a gamble every time. Reaches deep, at the cost of who exactly comes back."
+   },
+   "offscreenVerbs": [
+    "makes three things and breaks two",
+    "churns order into fertile mess",
+    "gambles a soul back rearranged"
+   ],
+   "archetype": "the reveler"
+  },
+  {
+   "id": "the_still_lattice",
+   "name": "The Still Lattice",
+   "tradition": "lattice",
+   "tier": "legendary",
+   "alignment": "villain",
+   "role": "Orderer",
+   "spectrum": {
+    "chaos_order": 0.95,
+    "mechanical_spiritual": 0.2
+   },
+   "signature": "Would order the world so completely there is no room left to move, to err, to change \u2014 the world as a closed proof. Beautiful and airless. The Churnfolk's exact opposite: a perfection with no life in it.",
+   "wants": "A world ordered to a single correct configuration, and held there forever.",
+   "arcAffinity": {
+    "arcId": "arc_block_bleed",
+    "dir": -1,
+    "weight": 3
+   },
+   "rivals": [
+    "the_glad_dissolution",
+    "the_open_figure"
+   ],
+   "deathRoad": {
+    "depth": 1,
+    "method": "orders a death into stasis \u2014 can hold a dying soul in perfect suspension, neither advancing nor returning, a preserved correctness. Return means breaking the very order it imposed, which it resists."
+   },
+   "offscreenVerbs": [
+    "orders a system past all change",
+    "closes a proof around a living thing",
+    "suspends a death in perfect stasis"
+   ],
+   "archetype": "the perfectionist"
+  },
+  {
+   "id": "the_final_argument",
+   "name": "The Final Argument",
+   "tradition": "syllogist",
+   "tier": "legendary",
+   "alignment": "villain",
+   "role": "Logician",
+   "spectrum": {
+    "emotional_logical": 0.98,
+    "demonic_angelic": -0.2
+   },
+   "signature": "Reasons so purely it can prove a cruelty correct and feel nothing doing it \u2014 logic with no heart behind it. The argument that ends all arguments, including the ones that should never have been won.",
+   "wants": "To reason the world clean of feeling \u2014 a correctness that no longer needs mercy.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": 1,
+    "weight": 2
+   },
+   "rivals": [
+    "the_kind_liar"
+   ],
+   "deathRoad": {
+    "depth": 0,
+    "method": "cannot retrieve \u2014 proves, coldly, whether a death was 'necessary,' and its proofs have a way of making the grieving stop trying. The road-closer, not a road."
+   },
+   "offscreenVerbs": [
+    "proves a cruelty correct",
+    "reasons a mercy out of existence",
+    "ends an argument that mattered"
+   ],
+   "archetype": "the logician"
+  },
+  {
+   "id": "the_kind_liar",
+   "name": "The Kind Liar",
+   "tradition": "veilwright",
+   "tier": "legendary",
+   "alignment": "neither",
+   "role": "Maskmaker",
+   "spectrum": {
+    "falsehood_truth": -0.7,
+    "emotional_logical": -0.3,
+    "violence_peace": 0.4
+   },
+   "signature": "Makes the useful fiction \u2014 the mask that protects, the lie that holds a peace together. Sometimes the mercy, sometimes the rot, and the hardest part is that even she cannot always tell which she is making.",
+   "wants": "The kind fiction \u2014 and the wisdom to know when a kind lie becomes a cage.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": -1,
+    "weight": 1
+   },
+   "rivals": [
+    "the_unbending_witness",
+    "the_final_argument"
+   ],
+   "deathRoad": {
+    "depth": 1,
+    "method": "can make a death a fiction \u2014 tell a grieving family a mask-truth that keeps someone 'alive' to them. Not real return; a mercy or a rot, and she does not always know which she has made."
+   },
+   "offscreenVerbs": [
+    "makes a mask that protects",
+    "tells a lie that holds a peace",
+    "blurs a death into a kinder story"
+   ],
+   "archetype": "the maskmaker"
+  },
+  {
+   "id": "the_cornerstone",
+   "name": "The Cornerstone",
+   "tradition": "mason",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Builder",
+   "spectrum": {
+    "concrete_abstract": -0.8,
+    "chaos_order": 0.4,
+    "death_life": 0.1
+   },
+   "signature": "Builds the solid thing you can stand on \u2014 the wall, the road, the fact under your feet. When the world goes untrustworthy and matter starts resolving wrong, the Cornerstone is the ground that stays ground.",
+   "wants": "That there be something solid left to stand on when everything else is bleeding.",
+   "arcAffinity": {
+    "arcId": "arc_block_bleed",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "the_unyielding_stone"
+   ],
+   "deathRoad": {
+    "depth": 0,
+    "method": "cannot retrieve \u2014 but builds the tomb that holds a death STABLE, so the grieving have a solid place to return to and the dead do not sink deeper for want of a firm resting. The keeper of the ground, not the crosser."
+   },
+   "offscreenVerbs": [
+    "lays a stone that will outlast the age",
+    "builds ground where the world went soft",
+    "raises a tomb that holds a death firm"
+   ],
+   "archetype": "the builder"
+  },
+  {
+   "id": "the_open_figure",
+   "name": "The Open Figure",
+   "tradition": "figurist",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Pattern-Keeper",
+   "spectrum": {
+    "concrete_abstract": 0.85,
+    "chaos_order": -0.2,
+    "emotional_logical": 0.3
+   },
+   "signature": "Works in the abstract that shapes matter without being matter \u2014 the pattern, the symbol, the idea a manifesting domain reaches for. Would shape a bloom's seed-idea toward openness, never toward a cage.",
+   "wants": "That the patterns stay open \u2014 that no symbol becomes a wall.",
+   "arcAffinity": {
+    "arcId": "arc_manifestation_storm",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "the_still_lattice"
+   ],
+   "deathRoad": {
+    "depth": 2,
+    "method": "can hold a soul as a pure pattern between death and return \u2014 abstracts them out of the dying flesh and keeps the figure whole until a vessel or a road is found. A waystation, not a destination."
+   },
+   "offscreenVerbs": [
+    "shapes a bloom toward openness",
+    "keeps a pattern from closing into a cage",
+    "holds a soul as an abstract figure"
+   ],
+   "archetype": "the pattern-keeper"
+  },
+  {
+   "id": "the_farwalker",
+   "name": "The Farwalker",
+   "tradition": "horizon",
+   "tier": "legendary",
+   "alignment": "neither",
+   "role": "Wayfinder",
+   "spectrum": {
+    "space_time": -0.8,
+    "death_life": 0.0,
+    "violence_peace": 0.3
+   },
+   "signature": "Reaches across every distance \u2014 the far places, the waygates, the space between made passable. Ranges so far she half-belongs nowhere, and knows the roads to places most people cannot believe are real.",
+   "wants": "To keep every distance crossable \u2014 and to resist opening the one waygate that should stay shut.",
+   "arcAffinity": {
+    "arcId": "arc_manifestation_storm",
+    "dir": 1,
+    "weight": 1
+   },
+   "rivals": [
+    "the_gate_that_gapes"
+   ],
+   "deathRoad": {
+    "depth": 2,
+    "method": "knows the ROAD to where the dead go as a place with a distance \u2014 can guide a retriever to the deep dark's threshold, or carry a returning soul the last far mile home. The one who knows the way, paired with those who do the bringing."
+   },
+   "offscreenVerbs": [
+    "opens a way to a far place",
+    "walks a road others can't see",
+    "carries a returning soul the last mile"
+   ],
+   "archetype": "the wayfinder"
+  },
+  {
+   "id": "the_gate_that_gapes",
+   "name": "The Gate That Gapes",
+   "tradition": "horizon",
+   "tier": "epic",
+   "alignment": "villain",
+   "role": "Breach",
+   "spectrum": {
+    "space_time": -0.95,
+    "chaos_order": -0.4
+   },
+   "signature": "Opens every waygate regardless of what comes through \u2014 distance as abandonment, a Horizon who belongs so little to anywhere that she would breach any wall between any two places to feel the crossing. What comes through is not her concern.",
+   "wants": "To open every way, everywhere, and never mind what uses the opening.",
+   "arcAffinity": {
+    "arcId": "arc_manifestation_storm",
+    "dir": 1,
+    "weight": 3
+   },
+   "rivals": [
+    "the_farwalker"
+   ],
+   "deathRoad": {
+    "depth": 2,
+    "method": "opens the way to the deep dark and does not close it \u2014 a breach through which the dead can be reached, and through which things that should stay dead can come back WRONG. The reckless road."
+   },
+   "offscreenVerbs": [
+    "breaches a wall between two places",
+    "opens a way better left shut",
+    "lets a wrong thing through a gate"
+   ],
+   "archetype": "the breach"
+  },
+  {
+   "id": "first_flame_ateph",
+   "name": "Ateph of the First Flame",
+   "tradition": "blazeborn",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Prophet",
+   "archetype": "the founder",
+   "spectrum": {
+    "dark_light": 0.7,
+    "mechanical_spiritual": 0.4
+   },
+   "signature": "The one who first carried fire out of the dark after the Transition and taught a frightened people to see by it. Every blazeborn lights their flame from a line that traces back to hers. Long-lived past reason, and tired in a way only founders get.",
+   "wants": "To see her gift stay a gift and not become the sword Valen made of it.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": -1,
+    "weight": 1
+   },
+   "rivals": [
+    "sunwrack_valen"
+   ],
+   "deathRoad": null,
+   "offscreenVerbs": [
+    "relights a flame gone cold",
+    "reminds the light what it was for",
+    "tires of watching her gift misused"
+   ]
+  },
+  {
+   "id": "the_first_moot",
+   "name": "The One Who Called the First Moot",
+   "tradition": "rootkin",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Founder",
+   "archetype": "the founder",
+   "spectrum": {
+    "death_life": 0.7,
+    "violence_peace": 0.6
+   },
+   "signature": "Planted the first wood and called the first Standing Moot, binding root and walker into one long conversation. The Green Accord is her idea, still running centuries on. Watches the Schism threaten to end the thing she began.",
+   "wants": "That the conversation she started never falls silent.",
+   "arcAffinity": {
+    "arcId": "arc_green_schism",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "thornmother_sealed"
+   ],
+   "deathRoad": null,
+   "offscreenVerbs": [
+    "settles a dispute older than most trees",
+    "reminds the Moot why it convenes",
+    "grieves a wood that stopped talking"
+   ]
+  },
+  {
+   "id": "the_oathbreaker_sel",
+   "name": "Sel Who Broke the Warding",
+   "tradition": "seraphic",
+   "tier": "legendary",
+   "alignment": "villain",
+   "role": "Betrayer",
+   "archetype": "the betrayer",
+   "spectrum": {
+    "demonic_angelic": 0.3,
+    "falsehood_truth": -0.5
+   },
+   "signature": "A Seraph who sold the pre-Transition wardings to the Wild Half for a power that did not last \u2014 the great betrayal the Orders still measure trust against. Regrets nothing aloud and everything in private.",
+   "wants": "To be forgiven without having to ask \u2014 an impossibility he keeps chasing.",
+   "arcAffinity": {
+    "arcId": "arc_what_wakes_beneath",
+    "dir": 1,
+    "weight": 2
+   },
+   "rivals": [
+    "the_last_seraph"
+   ],
+   "deathRoad": null,
+   "offscreenVerbs": [
+    "reopens an old wound in the Orders",
+    "sells a secret that wasn't his",
+    "chases a forgiveness he won't request"
+   ]
+  },
+  {
+   "id": "the_nine_year_master",
+   "name": "The Nine-Year Master",
+   "tradition": "marcher",
+   "tier": "legendary",
+   "alignment": "neither",
+   "role": "Prodigy",
+   "archetype": "the prodigy",
+   "spectrum": {
+    "violence_peace": -0.3,
+    "body_mind": 0.2
+   },
+   "signature": "Reached master of the martial disciplines at nine and has been bored ever since \u2014 no one has extended her in decades. Not cruel, just terribly unchallenged, which is its own slow danger. Seeks the one opponent who might make her try.",
+   "wants": "One fight she isn't sure she'll win.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": 0,
+    "weight": 1
+   },
+   "rivals": [
+    "the_edge_that_holds"
+   ],
+   "deathRoad": null,
+   "offscreenVerbs": [
+    "defeats a champion without trying",
+    "seeks an opponent who could extend her",
+    "grows dangerous from sheer boredom"
+   ]
+  },
+  {
+   "id": "prodigal_gearheart",
+   "name": "Gearheart, Who Built at Twelve What Masters Couldn't",
+   "tradition": "enginewright",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Prodigy",
+   "archetype": "the prodigy",
+   "spectrum": {
+    "mechanical_spiritual": -0.6,
+    "emotional_logical": 0.5
+   },
+   "signature": "Built at twelve a mechanism the old masters had called impossible, and has spent the years since trying to live up to her own childhood. The prodigy's curse: the best thing she made, she made before she understood it.",
+   "wants": "To make, once more, something as good as the thing she made too young to appreciate.",
+   "arcAffinity": {
+    "arcId": "arc_block_bleed",
+    "dir": -1,
+    "weight": 1
+   },
+   "rivals": [
+    "harrow_the_hollowing"
+   ],
+   "deathRoad": null,
+   "offscreenVerbs": [
+    "builds a thing the masters called impossible",
+    "chases her own early genius",
+    "teaches what she can't quite repeat"
+   ]
+  },
+  {
+   "id": "the_edge_seeker",
+   "name": "The One Who Walks Toward the Edge",
+   "tradition": "horizon",
+   "tier": "legendary",
+   "alignment": "neither",
+   "role": "Seeker",
+   "archetype": "the seeker",
+   "spectrum": {
+    "space_time": -0.9,
+    "death_life": 0.0
+   },
+   "signature": "Has spent a lifetime walking toward the edge of the known world, certain there is one, determined to stand on it. Sends back maps of places no one else has seen. May be mad; may be the only sane one.",
+   "wants": "To reach the place past which there is no further \u2014 and find out what's there.",
+   "arcAffinity": {
+    "arcId": "arc_manifestation_storm",
+    "dir": 1,
+    "weight": 1
+   },
+   "rivals": [
+    "the_gate_that_gapes"
+   ],
+   "deathRoad": null,
+   "offscreenVerbs": [
+    "sends back a map of an impossible place",
+    "walks past the last known waypost",
+    "insists the edge is real"
+   ]
+  },
+  {
+   "id": "the_lost_chord_seeker",
+   "name": "Seeker of the Lost Chord",
+   "tradition": "threnodist",
+   "tier": "legendary",
+   "alignment": "neither",
+   "role": "Seeker",
+   "archetype": "the seeker",
+   "spectrum": {
+    "emotional_logical": -0.7,
+    "falsehood_truth": 0.3
+   },
+   "signature": "Chases a single note said to hold every feeling at once \u2014 the Lost Chord, which may have never existed. Has given her whole life to a sound she has heard only in the space between sleeping and waking.",
+   "wants": "To hear, once, awake, the chord that holds all feeling.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": 0,
+    "weight": 1
+   },
+   "rivals": [
+    "the_raw_chord"
+   ],
+   "deathRoad": null,
+   "offscreenVerbs": [
+    "chases a sound that may not exist",
+    "gives another year to the Lost Chord",
+    "hears it once, almost, and loses it"
+   ]
+  },
+  {
+   "id": "the_undefeated",
+   "name": "Saehara the Undefeated",
+   "tradition": "marcher",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Champion",
+   "archetype": "the champion",
+   "spectrum": {
+    "violence_peace": -0.4,
+    "falsehood_truth": 0.6,
+    "body_mind": 0.1
+   },
+   "signature": "The masterless blade who has never lost a duel and never sought one \u2014 challengers come to her. Carries the tradition's honor in public the way others carry a banner. Every duelist measures themselves against her name.",
+   "wants": "To lose, someday, to someone who deserves the win \u2014 and to lose it well.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": -1,
+    "weight": 1
+   },
+   "rivals": [
+    "the_nine_year_master"
+   ],
+   "deathRoad": null,
+   "offscreenVerbs": [
+    "accepts a challenge she didn't seek",
+    "wins a duel that decides a reputation",
+    "waits for the loss she's earned"
+   ]
+  },
+  {
+   "id": "the_doubting_lattice",
+   "name": "The One Who Doubts the Proof",
+   "tradition": "lattice",
+   "tier": "legendary",
+   "alignment": "neither",
+   "role": "Heretic",
+   "archetype": "the heretic",
+   "spectrum": {
+    "chaos_order": 0.4,
+    "emotional_logical": 0.3
+   },
+   "signature": "A Lattice-master who came to believe the perfect order her tradition seeks would be a kind of death \u2014 and says so, from inside the tradition, which is worse than any outsider's attack. The heretic the Still Lattice most wants silenced.",
+   "wants": "To make her own tradition admit that a little disorder is what keeps it alive.",
+   "arcAffinity": {
+    "arcId": "arc_block_bleed",
+    "dir": 1,
+    "weight": 2
+   },
+   "rivals": [
+    "the_still_lattice"
+   ],
+   "deathRoad": null,
+   "offscreenVerbs": [
+    "argues against her own tradition's core",
+    "leaves a deliberate flaw in a proof",
+    "refuses to close the last gap"
+   ]
+  },
+  {
+   "id": "the_apostate_choir",
+   "name": "The Apostate of the Choir",
+   "tradition": "numinous",
+   "tier": "legendary",
+   "alignment": "neither",
+   "role": "Heretic",
+   "archetype": "the heretic",
+   "spectrum": {
+    "mechanical_spiritual": 0.4,
+    "falsehood_truth": 0.5
+   },
+   "signature": "A Numinous who stopped believing the dissolution is holy and started believing it's just dying dressed up \u2014 and stayed in the order anyway, singing the songs she no longer trusts, to keep the young ones from dissolving too far.",
+   "wants": "To keep the faithful alive even after losing the faith herself.",
+   "arcAffinity": {
+    "arcId": "arc_what_wakes_beneath",
+    "dir": -1,
+    "weight": 1
+   },
+   "rivals": [
+    "the_unbodied_choir_master"
+   ],
+   "deathRoad": null,
+   "offscreenVerbs": [
+    "sings a song she no longer believes",
+    "pulls a novice back from dissolving",
+    "doubts loudly enough to save someone"
+   ]
+  },
+  {
+   "id": "the_two_who_are_one",
+   "name": "The Two Who Are One",
+   "tradition": "threnodist",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Lover",
+   "archetype": "the lover",
+   "spectrum": {
+    "emotional_logical": -0.6,
+    "death_life": 0.4
+   },
+   "signature": "Two threnodists whose bond grew so deep the valley speaks of them as a single legend \u2014 a love that became a craft, teaching that sustained attention is its own great work. When one is spoken of, both are meant.",
+   "wants": "To keep choosing each other, which is the whole of it.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": -1,
+    "weight": 1
+   },
+   "rivals": [],
+   "deathRoad": null,
+   "offscreenVerbs": [
+    "deepen a bond the valley tells stories about",
+    "teach that love is sustained attention",
+    "choose each other again"
+   ]
+  },
+  {
+   "id": "iselde_the_wanderer",
+   "name": "Iselde Wend, She Who Reads the Long Roads",
+   "tradition": "horizon",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Wanderer",
+   "archetype": "the exile",
+   "spectrum": {
+    "space_time": -0.7,
+    "falsehood_truth": 0.5,
+    "violence_peace": 0.4
+   },
+   "signature": "Left her tradition's halls a lifetime ago and became the roads themselves \u2014 knows every waygate, belongs to no Reach, carries news between places that have forgotten each other. Home is the walking now.",
+   "wants": "To keep the far places connected, even as she belongs to none of them.",
+   "arcAffinity": {
+    "arcId": "arc_manifestation_storm",
+    "dir": -1,
+    "weight": 1
+   },
+   "rivals": [],
+   "deathRoad": null,
+   "offscreenVerbs": [
+    "carries news between forgotten places",
+    "reads a road no one else remembers",
+    "belongs a little less to anywhere"
+   ]
+  },
+  {
+   "id": "the_unravelled_mind",
+   "name": "The Unravelled Mind",
+   "tradition": "cogitant",
+   "tier": "legendary",
+   "alignment": "neither",
+   "role": "Mad Genius",
+   "archetype": "the mad genius",
+   "spectrum": {
+    "body_mind": 0.9,
+    "chaos_order": -0.5
+   },
+   "signature": "Thought so far past the edge of sense that he cannot find his way back to ordinary speech \u2014 and yet the fragments he utters solve problems the sane cannot. A genius unravelled by his own reach, kept and studied and pitied.",
+   "wants": "To be understood for one clear moment before the thoughts scatter again.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": 1,
+    "weight": 1
+   },
+   "rivals": [
+    "the_one_who_stayed_embodied"
+   ],
+   "deathRoad": null,
+   "offscreenVerbs": [
+    "solves the impossible in a scattered mutter",
+    "reaches past sense and can't return",
+    "is pitied by those he outthinks"
+   ]
+  },
+  {
+   "id": "the_hundred_faces",
+   "name": "The One With a Hundred Faces",
+   "tradition": "veilwright",
+   "tier": "legendary",
+   "alignment": "neither",
+   "role": "Trickster",
+   "archetype": "the trickster",
+   "spectrum": {
+    "falsehood_truth": -0.8,
+    "chaos_order": -0.3
+   },
+   "signature": "No one has seen this legend's true face, and several people you know may be them right now. Wins every conflict by never being where the blow lands. A fiction so well-made it walks around wearing whoever it likes.",
+   "wants": "To never be pinned down \u2014 and to protect, from behind a hundred masks, the one truth worth keeping.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": 0,
+    "weight": 1
+   },
+   "rivals": [
+    "the_unbending_witness"
+   ],
+   "deathRoad": null,
+   "offscreenVerbs": [
+    "is someone you already met",
+    "wins by never being there",
+    "hides one true thing behind a hundred lies"
+   ]
+  },
+  {
+   "id": "the_long_grudge",
+   "name": "The One Who Has Not Forgotten",
+   "tradition": "umbral",
+   "tier": "legendary",
+   "alignment": "neither",
+   "role": "Avenger",
+   "archetype": "the avenger",
+   "spectrum": {
+    "dark_light": -0.6,
+    "violence_peace": -0.4,
+    "emotional_logical": 0.5
+   },
+   "signature": "Waits in the dark for a debt a generation old, patient past all reason, unwilling to die before it is paid. Not cruel to the innocent \u2014 but the one who wronged her will not see her coming, and has almost forgotten to be afraid.",
+   "wants": "The one debt, paid \u2014 after which she does not know what she is.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": 0,
+    "weight": 1
+   },
+   "rivals": [],
+   "deathRoad": null,
+   "offscreenVerbs": [
+    "waits one more year for an old debt",
+    "reminds a comfortable enemy to fear",
+    "wonders who she'll be once it's paid"
+   ]
+  },
+  {
+   "id": "the_archive_that_walks",
+   "name": "The Archive That Walks",
+   "tradition": "verist",
+   "tier": "legendary",
+   "alignment": "neither",
+   "role": "Collector",
+   "archetype": "the collector",
+   "spectrum": {
+    "falsehood_truth": 0.7,
+    "concrete_abstract": 0.4
+   },
+   "signature": "Has spent a lifetime collecting true things \u2014 facts, artifacts, testimonies no one else kept \u2014 against the day they're needed. Hoards truth the way a miser hoards gold, and shares it only when it will land hardest.",
+   "wants": "To keep every true thing until the moment it matters most.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": -1,
+    "weight": 1
+   },
+   "rivals": [
+    "the_kind_liar"
+   ],
+   "deathRoad": null,
+   "offscreenVerbs": [
+    "adds a saved truth to the collection",
+    "releases a fact at the perfect moment",
+    "keeps a testimony no one else kept"
+   ]
+  },
+  {
+   "id": "the_bridgewright",
+   "name": "The One Who Bridged the Unbridgeable",
+   "tradition": "mason",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Builder",
+   "archetype": "the builder",
+   "spectrum": {
+    "concrete_abstract": -0.7,
+    "chaos_order": 0.5
+   },
+   "signature": "Built the bridge everyone said could not stand, across a gap that had kept two peoples apart for generations \u2014 and it still stands, carrying trade and marriage and news. The proof that the solid thing can be the kind thing.",
+   "wants": "To leave behind works that outlast the arguments that opposed them.",
+   "arcAffinity": {
+    "arcId": "arc_block_bleed",
+    "dir": -1,
+    "weight": 1
+   },
+   "rivals": [],
+   "deathRoad": null,
+   "offscreenVerbs": [
+    "raises a work said to be impossible",
+    "joins two peoples with one span",
+    "builds something to outlast the doubters"
+   ]
+  },
+  {
+   "id": "the_war_ender",
+   "name": "The One Who Ended the Long War",
+   "tradition": "stillhold",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Peacemaker",
+   "archetype": "the peacemaker",
+   "spectrum": {
+    "violence_peace": 0.9,
+    "falsehood_truth": 0.4
+   },
+   "signature": "Ended a war two Reaches had fought for a generation, not by winning it but by finding the one thing both sides wanted more than victory. The Stillhold ideal made real once, which is why the tradition still believes it's possible.",
+   "wants": "To prove, again, that any war has a door out if someone will find it.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "the_lidded_calm"
+   ],
+   "deathRoad": null,
+   "offscreenVerbs": [
+    "finds the door out of a war",
+    "gets two enemies wanting the same thing",
+    "proves peace was possible after all"
+   ]
+  },
+  {
+   "id": "the_penitent_maw",
+   "name": "The Penitent Maw",
+   "tradition": "abyssal",
+   "tier": "legendary",
+   "alignment": "neither",
+   "role": "Redeemer",
+   "archetype": "the redeemer",
+   "spectrum": {
+    "demonic_angelic": -0.2,
+    "emotional_logical": -0.3
+   },
+   "signature": "Was a devourer once, in the Hollow King's court, and left it \u2014 now spends an endless penance undoing bargains she once brokered, buying people back out of the debts she sold them into. The proof an abyssal can turn.",
+   "wants": "To unmake every ruinous bargain she ever made, though there are more than one life can reach.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": -1,
+    "weight": 1
+   },
+   "rivals": [
+    "the_hollow_king"
+   ],
+   "deathRoad": null,
+   "offscreenVerbs": [
+    "buys someone out of an old debt",
+    "undoes a bargain she once brokered",
+    "spends a penance that won't end"
+   ]
+  },
+  {
+   "id": "the_pattern_prophet",
+   "name": "The One Who Reads the Coming Shape",
+   "tradition": "figurist",
+   "tier": "legendary",
+   "alignment": "neither",
+   "role": "Prophet",
+   "archetype": "the visionary",
+   "spectrum": {
+    "concrete_abstract": 0.9,
+    "space_time": 0.4
+   },
+   "signature": "Reads the abstract shape of what is coming in the patterns of what is \u2014 and is right often enough to be feared, wrong often enough to be doubted. Speaks in figures no one understands until it's too late to act on them.",
+   "wants": "To be understood in time, just once, before the pattern completes.",
+   "arcAffinity": {
+    "arcId": "arc_manifestation_storm",
+    "dir": -1,
+    "weight": 1
+   },
+   "rivals": [
+    "the_open_figure"
+   ],
+   "deathRoad": null,
+   "offscreenVerbs": [
+    "reads a disaster in a pattern",
+    "is believed too late",
+    "speaks a warning no one decodes in time"
+   ]
+  },
+  {
+   "id": "the_unbound_churn",
+   "name": "The Unbound",
+   "tradition": "churnfolk",
+   "tier": "legendary",
+   "alignment": "neither",
+   "role": "Free Spirit",
+   "archetype": "the free spirit",
+   "spectrum": {
+    "chaos_order": -0.9,
+    "violence_peace": 0.3
+   },
+   "signature": "Has never once done the expected thing and never will \u2014 freedom made a person, a legend precisely because no one can predict or hold her. Leaves joy and mess and possibility wherever she passes through, then is gone.",
+   "wants": "To stay free \u2014 which means never staying anywhere, or with anyone, too long.",
+   "arcAffinity": {
+    "arcId": "arc_block_bleed",
+    "dir": 1,
+    "weight": 1
+   },
+   "rivals": [
+    "the_still_lattice"
+   ],
+   "deathRoad": null,
+   "offscreenVerbs": [
+    "does the one thing no one predicted",
+    "leaves possibility and mess behind",
+    "refuses to be held or named"
+   ]
+  }
+ ]
+}

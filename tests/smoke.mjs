@@ -46,7 +46,7 @@ import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM, rep
 import { isEventfulTurn, pressureTier, pressureDirective } from "../engine/pacing.js";
 import { revokeAdultGate } from "../engine/playerprofile.js";
 import { autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, convexHull, regionShape, knownOverlay, isPlaceKnown } from "../engine/worldmap.js";
-import { loadLegends, tierBirthWeight, tierForArc, legendSurfacing, legendDeploymentForGM, LEGEND_TIER_WEIGHT } from "../engine/legends.js";
+import { loadLegends, tierBirthWeight, tierForArc, legendSurfacing, legendDeploymentForGM, LEGEND_TIER_WEIGHT, legendsForGM } from "../engine/legends.js";
 import { buildTraditionIndex, traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal } from "../engine/traditions.js";
 
 // stub localStorage for worldtime settings in Node
@@ -7058,6 +7058,32 @@ await (async () => {
   check("200B §2c: companionsForGM surfaces the memory as shared history (in character, never a list)", /witnessed at your side/.test(block) && /pulled the child/.test(block) && /never as a list/.test(block));
   const appSrcC = readFileSync(join(root, "app.js"), "utf8");
   check("200B §2c: each active companion records the deed it witnessed at the deed site", /noteCompanionWitnessed\(character, c\.id/.test(appSrcC));
+}
+
+// ---- SNG-208 wiring: the 62 tradition-epics are LOADED, and legends are PURSUABLE (teachers + wants-as-quests) ----
+{
+  const roster = [
+    { id: "neth", name: "Neth", tradition: "ashwarden", alignment: "hero", role: "Master", signature: "the deep teacher who comes to deaths no one sent for", wants: "that no one dies unattended", homeLocation: "the_harrow" },
+    { id: "morvane", name: "Morvane", tradition: "ashwarden", alignment: "villain", role: "Reaper", signature: "the harvest hand", wants: "the tally complete" },
+    { id: "vael", name: "Cinder Vael", tradition: "wright", alignment: "villain", wants: "to finish the one perfect thing", homeLocation: "the_deep_works" },
+  ];
+  const content = { legends: { roster } };
+  const asTeacher = legendsForGM({ currentLocationId: "elsewhere" }, content, { practiced: new Set(["ashwarden"]) });
+  check("208-wire: a legend of a PRACTICED tradition surfaces as a legendary teacher to seek", /LEGENDARY TEACHERS/.test(asTeacher) && /Neth/.test(asTeacher) && /Morvane/.test(asTeacher) && /deep-teacher arc/.test(asTeacher));
+  check("208-wire: a legend of an UNpracticed tradition is not surfaced as this character's teacher", !/Cinder Vael/.test(asTeacher));
+  const atHome = legendsForGM({ currentLocationId: "the_deep_works" }, content, { practiced: new Set() });
+  check("208-wire: a legend whose home is HERE surfaces as a great figure with a want-as-quest", /GREAT FIGURES near you/.test(atHome) && /Cinder Vael/.test(atHome) && /aid or oppose/i.test(atHome));
+  const withDead = legendsForGM({ currentLocationId: "e" }, content, { practiced: new Set(["ashwarden"]), deadIds: new Set(["neth"]) });
+  check("208-wire: a DEAD legend is never surfaced as pursuable (SNG-208 §3b)", !/Neth/.test(withDead) && /Morvane/.test(withDead));
+  check("208-wire: no practiced legend + none at hand → null (no dump)", legendsForGM({ currentLocationId: "nowhere" }, content, { practiced: new Set(["blazeborn"]) }) === null);
+
+  // the integration: the 62 staged epics are loaded content, merged into the roster, and the GM sees pursuable legends.
+  const epicFile = JSON.parse(readFileSync(join(root, "content/packs/valley/tradition_epics.json"), "utf8"));
+  check("208-wire: the 62 tradition-epics are loaded content (all arcAffinity → real arcs, all tradition → real ring)", epicFile.epics.length === 62);
+  const stSrc = readFileSync(join(root, "engine/state.js"), "utf8");
+  check("208-wire: state.js merges the epics into ONE legends roster (staged → loaded, epics win overlaps)", /tradition_epics\.json/.test(stSrc) && /epics win on overlap/.test(stSrc));
+  const gmSrc208w = readFileSync(join(root, "engine/gm.js"), "utf8");
+  check("208-wire: the GM sees the pursuable legends (registry row consumed)", /legendsPursuableDetail\) world\.push/.test(gmSrc208w));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

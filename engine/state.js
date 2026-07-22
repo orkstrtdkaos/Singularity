@@ -196,7 +196,17 @@ export async function loadContent() {
     loadRule("helper_text", { entries: [] }),                                                      // SNG-084 in-context help
     loadRule("the_substrate", null),                                                               // SNG-090 the substrate model
     fetchJSON("content/packs/valley/prologue.json").catch(() => null),                             // SNG-062 the Prologue → form on a miss
-    fetchJSON("content/packs/valley/lore/legends.json").then(loadLegends).catch(() => ({ roster: [], beats: {}, tiers: {} }))
+    // SNG-042 anchors + the tradition-epics roster (SNG-208 content: 62 epics, 2–3 per tradition, all 24).
+    // Merged into ONE roster, deduped by id (the comprehensive epics win the 3 overlaps) so they plug into the
+    // whole living-world stack — offscreen actions, arc-lean, rival clashes — automatically.
+    Promise.all([
+      fetchJSON("content/packs/valley/lore/legends.json").catch(() => ({ figures: [] })),
+      fetchJSON("content/packs/valley/tradition_epics.json").catch(() => ({ epics: [] }))
+    ]).then(([lf, ef]) => {
+      const byId = {};
+      for (const f of [...(lf.figures || []), ...(ef.epics || [])]) if (f?.id) byId[f.id] = f; // last wins → epics win on overlap
+      return loadLegends({ ...lf, figures: Object.values(byId) });
+    }).catch(() => ({ roster: [], beats: {}, tiers: {} }))
   ]);
   const genSchemas = {}; // SNG-BATCH-9 validation schemas that generate(type, context) authors against
   if (genNpc) genSchemas.npc = genNpc;

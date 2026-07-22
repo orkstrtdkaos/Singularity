@@ -1,5 +1,31 @@
 # PO ALERT
 
+> ## 🛠️ SNG-207 — THE ULTIMATELY-CAPABLE GM (Aevi, 2026-07-21) — spec'd + panel manifest shipped
+> `po/SPEC_SNG-207_ultimately_capable_gm.md`. Erik: *"if I ASK the GM to fix location/known-people/inventory/
+> quest/ANYTHING, it should be ABLE to — its own fairness judgment + character-knowledge check, but all the
+> levers. It deflects to the fix screen, sometimes hallucinating that screen can fix the issue."*
+>
+> **The machinery mostly EXISTS** — SNG-070/137 built GM-proposed `stateOps` (12 repair ops) + "acknowledge
+> means emit." Erik wants the NEXT GEN. Three gaps produce the deflection:
+> - **GAP A (coverage):** legitimate asks with NO op — register-an-established-NPC (SNG-205 Teva!),
+>   grant-a-story-conferred-item, GM-advance-a-quest-done-in-play, reanchor+generate. Between "repair a
+>   value" and "grant power" sits a space with no lever, so the GM narrates around it or deflects.
+> - **GAP B (deflection + hallucination):** the GM CAN emit the op in-turn (SNG-137) but sends the player to
+>   a screen — and sometimes to a control that **doesn't exist**. Same class as a hallucinated rule.
+> - **The doctrine (§4):** the bound on "do anything" is the GM's FAIRNESS JUDGMENT, which requires the
+>   capability to be PRESENT. Four-rung ladder: **repair free · grant-what-the-fiction-conferred judged ·
+>   pure advancement earned · minor/rating floors absolute (engine, never GM-judgment).** "If the fiction
+>   already granted it, recording it is repair, not inflation" — the line moves from engine-forbids-category
+>   to GM-judges-whether-earned. All logged + reversible (SNG-070 ledger).
+>
+> **Shipped (mine):** the **`repair_panel_manifest.json`** — authoritative list of what the fix screen
+> actually does (12 ops + 4 explicit cannots), for GM context, so it can neither hallucinate nor mis-deflect
+> a control. **CCode:** close GAP A ops, the §5 "act don't deflect" prompt contract, wire the manifest in.
+>
+> ⚠️ **§OQ5 for Erik:** does "do ANYTHING" mean a **dev/GM-god mode** (Machine-panel, Erik-as-author sets
+> anything, no fairness gate) DISTINCT from the fair-play GM (grants fairness-judged)? Two surfaces —
+> conflating them turns a fair GM into a cheat console. Likely BOTH are wanted; they should stay distinct.
+
 > ## 🎚️ SNG-206 — RANK-UP: the 8/8 that won't advance is a HIDDEN SECOND GATE (Aevi, 2026-07-21) — reproduced live
 > Erik: characters hit 8/8 uses and don't rank up; also saw a "rank 2→1 fix."
 >

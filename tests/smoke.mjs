@@ -6545,6 +6545,24 @@ await (async () => {
   })();
 }
 
+// --- SNG-202: the wheel is a MAP — a braid is placed by its composition (between its two axes) ---
+{
+  const wg = await import("../engine/wheelgeom.js");
+  // the shorter-arc midpoint on the 24-ring
+  check("202 §1: the midpoint takes the SHORTER arc (0,4 → 2, clockwise)", wg.ringMidpoint(0, 4, 24) === 2);
+  check("202 §1: the shorter arc can be counter-clockwise (0,20 → 22, not 10)", wg.ringMidpoint(0, 20, 24) === 22);
+  check("202 §1: order-independent (4,0 == 0,4)", wg.ringMidpoint(4, 0, 24) === wg.ringMidpoint(0, 4, 24));
+  // the antipodal case: two equal midpoints → deterministic (clockwise from the lower ring), never arbitrary
+  check("202 §1: an ANTIPODAL pairing resolves deterministically (0,12 → 6, clockwise from the lower)", wg.ringMidpoint(0, 12, 24) === 6);
+  check("202 §1: antipodal is deterministic + stable (2,14 → 8, always)", wg.ringMidpoint(2, 14, 24) === 8 && wg.ringMidpoint(14, 2, 24) === 8);
+  check("202 §1: separation is the circular distance capped at n/2 (0,20 → 4; 0,12 → 12)", wg.ringSeparation(0, 20, 24) === 4 && wg.ringSeparation(0, 12, 24) === 12);
+  // braid placement: angle from composition, radius pulled inward by how far the parents sit apart
+  const adj = wg.braidPlacement(0, 2, 24), cross = wg.braidPlacement(0, 12, 24);
+  check("202 §1: adjacent-parent braid sits near the RIM (rFactor high), NOT flagged antipodal", adj.rFactor > 0.8 && adj.antipodal === false && adj.midPos === 1);
+  check("202 §1: a cross-circle (antipodal) braid sinks to the CENTRE (rFactor 0) + is flagged 'spans the circle'", cross.rFactor === 0 && cross.antipodal === true);
+  check("202 §1: the degenerate single-tradition case is its own spoke angle (nothing regresses)", Math.abs(wg.braidPlacement(0, 0, 24).ang - (-Math.PI / 2)) < 1e-9 && wg.braidPlacement(0, 0, 24).rFactor === 1);
+}
+
 // --- SNG-198B: the offscreen population widens to who the player KNOWS + the EPIC figures Erik named ---
 {
   const content = {

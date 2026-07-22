@@ -19,6 +19,7 @@ import { armDevCapture, recordCall, annotateLatest, devCaptures, clearCaptures }
 import { unearnedDepth, generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight, NOMINATE_AT, buildBraidPrompt, validateBraidAuthored } from "./engine/generate.js";
 import { mintableBraidsFor, buildBraidDef, mintBraid, braidKey } from "./engine/braids.js"; // SNG-197 p2: in-play braid mint + the moment
 import { ensureRecipeStore, buildRecipeRecord, recipeFor, recipeToAuthored, mergeRecipes, firstFinderName } from "./engine/recipes.js"; // SNG-201: shared braid recipes
+import { braidPlacement } from "./engine/wheelgeom.js"; // SNG-202: place a braid on the wheel by its composition
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, ghList, fetchRepoJSON, raceTimeout } from "./engine/sync.js";
 import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates } from "./engine/inventory.js";
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
@@ -64,7 +65,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.190";
+const APP_VERSION = "1.8.191";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -4890,16 +4891,17 @@ function buildWheelModel() {
   const owned = new Set((character.abilities || []).map(a => a.abilityId));
   const domains = character.domains || {};
   const nodes = [];
-  // group abilities: pole-tradition spokes · folk centre · precursor outer ring
-  const byTrad = {}, folk = [], precursor = [];
+  // group abilities: pole-tradition spokes · folk centre · precursor outer ring · SNG-202 braids by composition
+  const byTrad = {}, folk = [], precursor = [], braidAbs = [];
   for (const ab of Object.values(cat)) {
+    if (ab.minted && Array.isArray(ab.minted.from) && ab.minted.from.length === 2) { braidAbs.push(ab); continue; } // SNG-202: placed between its two axes, not on a parent's spoke
     const trad = traditionOf(ab, idx);
     if (ab.powerSystem === "precursor") { precursor.push(ab); continue; }
     if (trad && isFolkTradition(trad, idx)) { folk.push(ab); continue; }
     if (trad && posOf(trad) >= 0) { (byTrad[trad] = byTrad[trad] || []).push(ab); continue; }
     if (!trad || ab.powerSystem === "learned") { folk.push(ab); continue; } // ungoverned/learned → centre
   }
-  const mk = (ab, x, y, ang) => {
+  const mk = (ab, x, y, ang, extra = {}) => {
     const trad = traditionOf(ab, idx);
     const v = domainAccess(ab, ab.levelReq || 1, domains, idx);
     const isOwned = owned.has(ab.id);
@@ -4910,7 +4912,8 @@ function buildWheelModel() {
       functions: ab.functions || [], families: familiesOfAbility(ab, FN_INDEX), energyCost: ab.energyCost ?? null,
       effCost: (() => { try { return effectiveEnergyCost(ab, character, CONTENT.rules); } catch { return ab.energyCost ?? null; } })(),
       reachable: v.allowed && !isOwned && (character.level || 1) >= (ab.levelReq || 1),
-      precursorUnlocked: ab.powerSystem === "precursor" && (character.precursorAccess || []).includes(ab.id) }); // SNG-129: narrative-earned
+      precursorUnlocked: ab.powerSystem === "precursor" && (character.precursorAccess || []).includes(ab.id), // SNG-129: narrative-earned
+      ...extra });
   };
   // spokes: fan same-tier abilities by a small angular offset around the spoke
   for (const [trad, abs] of Object.entries(byTrad)) {
@@ -4932,6 +4935,27 @@ function buildWheelModel() {
   // precursor: outside the ring, spread all the way round (not axis-aligned)
   precursor.sort((a, b) => a.name.localeCompare(b.name)).forEach((ab, i) => {
     const a = (i / Math.max(1, precursor.length)) * Math.PI * 2 - Math.PI / 2; const p = wheelPt(a, WHEEL.rPrecursor); mk(ab, p.x, p.y, a);
+  });
+  // SNG-202 §1: a braid is placed by its COMPOSITION — the angular midpoint of its two parents (shorter arc)
+  // with radius pulled inward by how far apart they sit. Adjacent-tradition braids hug the rim between
+  // neighbours; a cross-circle braid sinks toward the centre (and reads as "spans the circle"). A braid whose
+  // parent is folk/ungoverned (no ring spoke) falls back to the resolvable spoke, else the folk centre — never
+  // a fake angle. Deterministic (engine/wheelgeom.js), never a force layout (§4). Small stable nudge keeps a
+  // cluster of centre-braids legible at 380px without breaking determinism.
+  braidAbs.sort((a, b) => a.name.localeCompare(b.name)).forEach((ab, bi) => {
+    const pos = (ab.minted.from || []).map(pid => { const p = cat[pid]; const tr = p ? traditionOf(p, idx) : null; return tr != null && posOf(tr) >= 0 ? posOf(tr) : -1; });
+    const [pa, pb] = pos;
+    if (pa >= 0 && pb >= 0) {
+      const pl = braidPlacement(pa, pb, n);
+      const nudge = pl.rFactor < 0.15 ? (bi % 3 - 1) * 0.12 : 0;                 // deep-centre braids: a stable, deterministic fan so they don't stack
+      const r = WHEEL.rInner + (WHEEL.rNode - WHEEL.rInner) * pl.rFactor;
+      const p = wheelPt(pl.ang + nudge, Math.max(WHEEL.rFolk + 18, r));
+      mk(ab, p.x, p.y, pl.ang + nudge, { braid: true, antipodal: pl.antipodal, braidFrom: ab.minted.sourceNames || [] });
+    } else {
+      const one = pa >= 0 ? pa : pb;
+      if (one >= 0) { const a = wheelAngle(one, n); const p = wheelPt(a, WHEEL.rInner + 22); mk(ab, p.x, p.y, a, { braid: true, braidFrom: ab.minted.sourceNames || [] }); }
+      else { const a = -Math.PI / 2 + (bi * 0.5); const p = wheelPt(a, WHEEL.rFolk + 8); mk(ab, p.x, p.y, a, { braid: true, braidFrom: ab.minted.sourceNames || [] }); }
+    }
   });
   return { idx, order, n, nodes, posOf };
 }
@@ -5087,10 +5111,11 @@ function renderSkillWheel(selectedId = null, status = "") {
         const opened = nd.isPrecursor && nd.precursorUnlocked;
         const fill = nd.owned ? traditionColor(nd.cls) : sealed ? "transparent" : "#20242c";
         const stroke = nd.closed ? "var(--danger)" : traditionColor(nd.cls);
-        const cls = `wheel-node ${nd.owned ? "owned" : ""} ${nd.closed ? "closed" : ""} ${nd.barred ? "barred" : ""} ${nd.dim ? "dim" : ""} ${nd.isFolk ? "folk" : ""} ${nd.isPrecursor ? "precursor" : ""} ${sealed ? "precursor-sealed" : ""} ${opened ? "precursor-open" : ""} ${selectedId === nd.id ? "selected" : ""} ${filterOn ? (matched ? "fn-match" : "fn-dim") : ""}`;
+        const cls = `wheel-node ${nd.owned ? "owned" : ""} ${nd.closed ? "closed" : ""} ${nd.barred ? "barred" : ""} ${nd.dim ? "dim" : ""} ${nd.isFolk ? "folk" : ""} ${nd.isPrecursor ? "precursor" : ""} ${sealed ? "precursor-sealed" : ""} ${opened ? "precursor-open" : ""} ${nd.braid ? "braid" : ""} ${nd.antipodal ? "braid-antipodal" : ""} ${selectedId === nd.id ? "selected" : ""} ${filterOn ? (matched ? "fn-match" : "fn-dim") : ""}`;
         const secondaries = (nd.families || []).slice(1, 3);
         const lbl = labelAt[nd.id];
-        const title = nd.name + " — " + traditionLabel(nd.cls) + " · Tier " + nd.tier + ((nd.functions || []).length ? " · " + nd.functions.join(", ") : "") + (nd.effCost != null ? " · ⚡" + nd.effCost : "") + (sealed ? " · SEALED (precursor — earned through play, never bought)" : nd.owned ? " (owned)" : nd.closed ? " · CLOSED (your antipode)" : nd.barred ? " · barred" : nd.dim ? " · costs more" : "");
+        const braidNote = nd.braid ? ` · braid of ${(nd.braidFrom || []).join(" × ") || "two crafts"}${nd.antipodal ? " — spans the circle (an antipodal braid, the far poles joined)" : " — placed between its two axes"}` : "";
+        const title = nd.name + " — " + (nd.braid ? "a braid" : traditionLabel(nd.cls)) + " · Tier " + nd.tier + braidNote + ((nd.functions || []).length ? " · " + nd.functions.join(", ") : "") + (nd.effCost != null ? " · ⚡" + nd.effCost : "") + (sealed ? " · SEALED (precursor — earned through play, never bought)" : nd.owned ? " (owned)" : nd.closed ? " · CLOSED (your antipode)" : nd.barred ? " · barred" : nd.dim ? " · costs more" : "");
         return `<g class="${cls}" data-wheelnode="${esc(nd.id)}"><title>${esc(title)}</title>
           <circle class="hit" cx="${nd.x}" cy="${nd.y}" r="13"/>
           ${wheelNodeShape(sealed ? "ring" : shapeOfFamily(fam), nd.x, nd.y, r, { fill, stroke, sw: sealed ? 1.3 : 1.5, cls: sealed ? "precursor-seal-shape" : "" })}

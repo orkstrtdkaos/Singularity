@@ -316,6 +316,11 @@
     "playerVisibleSurface": "A new craft on your sheet, named by you or the game, with its own rank tree — and the mint MOMENT when a pairing you have leaned on becomes a braid, with the one thing it can now do that neither parent could.",
     "whatMakesItFire": "A pairing co-activated past BRAID_RIPEN_AT with both crafts still held (mintableBraidsFor); the reconcile v14 backfill mints the braids a save already earned. GENERATIVE — no recipe gate."
   },
+  "wheelgeom.js": {
+    "purpose": "SNG-202: place a craft on the great circle by its COMPOSITION. The angular authority is the ONE circle the world already carries — a tradition's ring position — so nobody invents a second coordinate system. The headline two-point case: a braid sits at the shorter-arc midpoint of its two parents, radius pulled inward by their separation (adjacent parents hug the rim; a cross-circle braid sinks to the centre). The antipodal case is deterministic (clockwise from the lower ring) and flagged 'spans the circle'.",
+    "playerVisibleSurface": "On the skill wheel, a braid is drawn BETWEEN the two axes it braids — not on one parent's spoke — so you can see your build's shape; the deep cross-circle braids sit toward the centre, the antipodal ones read as spanning the wheel.",
+    "whatMakesItFire": "buildWheelModel calls braidPlacement for every minted braid (a customAbility with minted.from of two parents) to compute its (angle, radius) from the parents' ring positions. Pure + deterministic — no force layout, same composition same position every load."
+  },
   "recipes.js": {
     "purpose": "SNG-201: found once, known forever — a braid pairing anyone has already found becomes a global RECIPE; a later finder ADOPTS its name/prose/emergent reach instead of minting a duplicate. The discovery stays theirs (bond, moment, rank-1); the craft is the world's, with first-finder attribution. A NEW store (not emergence_recipes, which is prescriptive) that stays DESCRIPTIVE — never a gate (the SNG-196 regression). Numbers are never shared: tier/levelReq/energy derive from each adopter.",
     "playerVisibleSurface": "When you braid a pairing someone found first, a RECOGNITION moment ('first found by <name> — and now yours too') instead of a creation one; the world learns the crafts you find first, under your name.",

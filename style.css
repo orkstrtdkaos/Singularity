@@ -321,6 +321,10 @@ img[data-lightbox] { cursor: zoom-in; }
 .wheel-node-strike { stroke: var(--danger); stroke-width: 1.5; }
 .wheel-node.barred { opacity: .4; }
 .wheel-node.dim { opacity: .6; }
+/* SNG-202: a braid is placed between its two axes — mark it as a made thing, not a spoke craft. A ring of
+   its own, brighter toward the centre; the antipodal ("spans the circle") braid gets a second, wider halo. */
+.wheel-node.braid .wnode-shape { stroke: var(--accent); stroke-width: 2.2; filter: drop-shadow(0 0 3px color-mix(in srgb, var(--accent) 55%, transparent)); }
+.wheel-node.braid-antipodal .wnode-shape { stroke: var(--accent2, var(--accent)); filter: drop-shadow(0 0 5px color-mix(in srgb, var(--accent2, var(--accent)) 65%, transparent)); }
 .wheel-node.precursor .wnode-shape { stroke-dasharray: 2 2; }
 .wheel-node.selected .wnode-shape { stroke-width: 4; }
 /* SNG-129: precursor SEALED — narrative-locked, not tier-locked; a dashed hollow ring + ✦ mark */

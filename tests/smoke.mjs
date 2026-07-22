@@ -15,7 +15,7 @@ import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, tou
 import { sanitizeScene, buildTurnContext, sanitizeIntent, narrativeRegister, ratingRegister, renderSceneHistory, tierParts, bluntnessDirective } from "../engine/gm.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, findExistingNpc, prettifyNpcName, relationshipBand, advanceBond, relationshipLabel, isPartnerAdjacent, knownPeopleAt, npcPortraitTier, backfillNpcGender } from "../engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
-import { initWorldState, runWorldTick, advanceGeneratedOffscreen, applyWantOutcome, offscreenPopulation, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, worldArcsForGM } from "../engine/worldtick.js";
+import { initWorldState, runWorldTick, advanceGeneratedOffscreen, applyWantOutcome, offscreenPopulation, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, worldArcsForGM, effectiveEpicStatus, applyEpicArcPush, resolveEpicClash, applyEpicClashOutcome } from "../engine/worldtick.js";
 import { assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "../engine/gambit.js";
 import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, autoAdvancePracticedRanks, markDefiningMoment, meetsStandingBar, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy, nativeGrantIdsFor, applyNativeGrants, retroNativeGrants, seedInnateSubstrate } from "../engine/progression.js";
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, liaisonMultiplierFor, roleBadges, COMPANY_ROLES } from "../engine/company.js";
@@ -6984,6 +6984,61 @@ await (async () => {
   check("207b-god: the fair stateOps path carries NO skipFairness seam (§0 — god-mode is its own door)", !/skipFairness/.test(corrSrc));
   const appSrcGod = readFileSync(join(root, "app.js"), "utf8");
   check("207b-god: the Author panel is DEV-GATED (nav + render both guard on devEnabled)", /nav-author/.test(appSrcGod) && /function renderAuthorPanel[\s\S]{0,90}devEnabled\(\) \|\| !character/.test(appSrcGod));
+}
+
+// ---- SNG-208: legends as living actors — they lean on the arcs, and clash with each other ----
+{
+  const seq = (arr) => { let i = 0; return () => arr[i++ % arr.length]; };
+  const A = { id: "a", name: "Cinder", legend: { weight: 8 }, arcAffinity: { arcId: "arc_x", dir: 1, weight: 3 }, rivals: ["b"] };
+  const B = { id: "b", name: "Walker", legend: { weight: 8 }, arcAffinity: { arcId: "arc_x", dir: -1, weight: 2 } };
+
+  // §3a — an epic leans on its arc; a wounded one at half, a stopped one not at all, a dead one never.
+  const ws = initWorldState(1);
+  applyEpicArcPush(ws, A, 5);
+  check("208 §3a: an epic's offscreen action leans on its arcAffinity arc (+dir·weight)", ws.epicArcPushes.a.push === 3 && ws.epicArcPushes.a.arcId === "arc_x");
+  applyEpicArcPush(ws, A, 6);
+  check("208 §3a: the lean ACCUMULATES across actions (capped at ±6)", ws.epicArcPushes.a.push === 6);
+  ws.epicStatus = { b: { status: "wounded", woundedUntilDay: 20 } };
+  const wb = applyEpicArcPush(ws, B, 5);
+  check("208 §3a: a WOUNDED epic pushes at HALF", ws.epicArcPushes.b.push === -1 && wb.dir === -1);
+  ws.epicStatus.b = { status: "dead" };
+  applyEpicArcPush(ws, B, 5);
+  check("208 §3a: a DEAD epic pushes nothing (their pressure ends)", ws.epicArcPushes.b.push === -1); // unchanged from the wounded push
+
+  // §3a integration — the epic lean moves the CANONICAL arc stage (folded into the net, via worldArcsPublic).
+  const arcContent = { greaterArcs: [{ id: "arc_x", name: "The Test Arc", currentStage: 1, stages: [{ stage: 1, name: "one", publicFace: "1" }, { stage: 2, name: "two", publicFace: "2" }, { stage: 3, name: "three", publicFace: "3" }, { stage: 4, name: "four", publicFace: "4" }] }] };
+  check("208 §3a: the epic lean MOVES the canonical arc stage (base 1 + epic push 6 → clamped to top)", worldArcsPublic(arcContent, { worldState: ws }).find(r => r.arcId === "arc_x").stageNum === 4);
+
+  // effectiveEpicStatus expiry.
+  check("208: a wounded epic RECOVERS after its wound heals (expiry)", effectiveEpicStatus({ epicStatus: { z: { status: "wounded", woundedUntilDay: 10 } } }, "z", 12) === "active" && effectiveEpicStatus({ epicStatus: { z: { status: "wounded", woundedUntilDay: 10 } } }, "z", 8) === "wounded");
+
+  // §3b — clash resolution is deterministic from the roll; margin sets how decisive.
+  const killed = resolveEpicClash(A, B, seq([0.1, 0.05])); // aWins, margin .4>.3, r2 .05<.12 → killed candidate
+  check("208 §3b: a decisive + rare clash produces a KILLED candidate (winner A over B)", killed.kind === "killed" && killed.winnerId === "a" && killed.loserId === "b");
+  check("208 §3b: a near-even clash STALEMATES (no one prevails)", resolveEpicClash(A, B, seq([0.5, 0.5])).kind === "stalemate");
+  check("208 §3b: a clear-but-not-lethal clash WOUNDS or STOPS the loser", ["wounded", "stopped"].includes(resolveEpicClash(A, B, seq([0.3, 0.3])).kind));
+
+  // §3b apply — wounded sets a durable status; killed makes a landmark (dead + broadcast + graveyard codex).
+  const ws2 = initWorldState(1);
+  const wRes = applyEpicClashOutcome(ws2, A, B, "wounded", 5);
+  check("208 §3b: a WOUNDED outcome sets a durable, expiring status on the loser", ws2.epicStatus.b.status === "wounded" && ws2.epicStatus.b.woundedUntilDay === 13 && wRes.news.length);
+  const kRes = applyEpicClashOutcome(ws2, A, B, "killed", 30);
+  check("208 §3b: a KILLED outcome removes the loser (dead) + broadcasts a world_event + writes a graveyard codex record", ws2.epicStatus.b.status === "dead" && ws2.epicStatus.b.killedBy === "a" && kRes.event?.kind === "epic_death" && kRes.event.propagates === true && /graveyard|Killed by/i.test(kRes.codex.fact));
+
+  // §3b death GATE — a second kill too soon is downgraded (deaths stay landmarks, never a run of them).
+  const ws3 = initWorldState(1); ws3.lastEpicDeathDay = 30;
+  const c = { id: "c", name: "C", legend: { weight: 8 } };
+  const gate = applyEpicClashOutcome(ws3, A, c, "killed", 35); // only 5 days after the last death
+  check("208 §3b: DEATH IS A LANDMARK — a killed candidate too soon after the last death is downgraded to stopped", gate.finalKind === "stopped" && ws3.epicStatus.c.status === "stopped" && !gate.event);
+
+  // §3c — epics now lean toward presence (own rate), and dead epics never stir.
+  const wtSrc208 = readFileSync(join(root, "engine/worldtick.js"), "utf8");
+  check("208 §3c: epics have their OWN rate leaning toward presence (rate up, cooldown down from the rarity default)", /epicRate = 0\.6/.test(wtSrc208) && /minEpicGapDays = 3/.test(wtSrc208));
+  const deadRoster = { legends: { roster: [{ id: "a", name: "A", tier: "legendary" }, { id: "b", name: "B", tier: "legendary" }] } };
+  const popNoDead = offscreenPopulation({ worldState: { epicStatus: { a: { status: "dead" }, b: { status: "dead" } } } }, deadRoster, { worldDay: 100, rng: () => 0.01 });
+  check("208 §3b/§3c: a DEAD epic never stirs again (filtered from the offscreen population)", !popNoDead.some(e => e.source === "legend"));
+  // and the offscreen tick wires the arc-push + clash on a moved legend.
+  check("208: the offscreen tick applies the arc-push + resolves clashes when a legend moves", /applyEpicArcPush\(ws, def/.test(wtSrc208) && /resolveEpicClash\(def, rivalDef/.test(wtSrc208) && /applyEpicClashOutcome/.test(wtSrc208));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

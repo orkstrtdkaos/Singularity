@@ -40,25 +40,29 @@ function findGreaterArc(content, arcId) {
 }
 
 /** SNG-203 Phase 2B: this actor's own net signed push on an arc (advance +, retreat −), + what everyone
- *  ELSE has pushed as of the last sync. Old 2A saves stored a forward-only `stage`; read it as a +push. */
+ *  ELSE has pushed as of the last sync. SNG-208 §3a: `epic` = the ambient pressure the legends lean on this
+ *  arc from offstage (local — offscreen developments are per-player). Old 2A saves stored a forward-only
+ *  `stage`; read it as a +push. */
 function arcPushes(character, arcId) {
+  const epic = Object.values(character?.worldState?.epicArcPushes || {}).filter(e => e.arcId === arcId).reduce((s, e) => s + (Number.isFinite(e.push) ? e.push : 0), 0);
   const local = character?.worldState?.arcStages?.[arcId];
-  if (!local) return { mine: 0, others: 0, legacyStage: null };
+  if (!local) return { mine: 0, others: 0, epic, legacyStage: null };
   const mine = Number.isFinite(local.push) ? local.push
     : (Number.isFinite(local.stage) ? null : 0);          // a 2A save: fall back to its cached stage
-  return { mine: mine ?? 0, others: Number.isFinite(local.othersPush) ? local.othersPush : 0, legacyStage: mine == null ? local.stage : null };
+  return { mine: mine ?? 0, others: Number.isFinite(local.othersPush) ? local.othersPush : 0, epic, legacyStage: mine == null ? local.stage : null };
 }
 
 /** This world's EFFECTIVE stage for an arc: the authored base moved by the NET of every actor's signed
- *  pushes (this actor's + everyone else's from the last sync), clamped to the arc's real stage range. Not
- *  forward-only — a net-negative push pulls the arc BACK. Module-internal; covered through worldArcsPublic. */
+ *  pushes — this actor's + everyone else's (from the last sync) + the EPICS leaning on it from offstage
+ *  (SNG-208) — clamped to the arc's real stage range. Not forward-only — a net-negative push pulls the arc
+ *  BACK. Module-internal; covered through worldArcsPublic. */
 function arcStageNow(content, character, arcId) {
   const arc = findGreaterArc(content, arcId);
   const base = arc?.currentStage ?? 1;
   const total = (arc?.stages || []).length || base;
-  const { mine, others, legacyStage } = arcPushes(character, arcId);
+  const { mine, others, epic, legacyStage } = arcPushes(character, arcId);
   if (legacyStage != null) return Math.max(1, Math.min(total, legacyStage)); // 2A back-compat
-  return Math.max(1, Math.min(total, base + mine + others));
+  return Math.max(1, Math.min(total, base + mine + others + epic));
 }
 
 /** SNG-203 §3: the PUBLIC face of where the world arcs stand — the readable "state of the world" every
@@ -73,14 +77,15 @@ export function worldArcsPublic(content, character) {
     const total = (arc.stages || []).length || 1;
     const stageNum = arcStageNow(content, character, arc.id);
     const def = (arc.stages || []).find(s => s.stage === stageNum) || (arc.stages || [])[Math.max(0, stageNum - 1)] || null;
-    const { mine, others } = arcPushes(character, arc.id);
-    const net = mine + others;
+    const { mine, others, epic } = arcPushes(character, arc.id);
+    const net = mine + others + epic; // SNG-208: the epics' offstage lean is part of the net pressure
     // direction is the NET PRESSURE on the arc, not its stage-vs-base — so downward pressure reads "receded"
     // even while the stage is clamped at its authored floor (a base-1 arc can't sit below stage 1, but the
     // valley can still be pulling it back). The actual backward MOVE surfaces as the stage number dropping +
     // the "pushed back to…" news when the canonical stage falls between syncs.
     const direction = net > 0 ? "advanced" : net < 0 ? "receded" : "held";
-    const contested = (mine > 0 && others < 0) || (mine < 0 && others > 0);
+    // contested: the player and the rest of the world (other players + epics) pulling opposite ways.
+    const contested = (mine > 0 && (others + epic) < 0) || (mine < 0 && (others + epic) > 0);
     return {
       arcId: arc.id, name: arc.name, stageNum, total,
       stageName: def?.name || `Stage ${stageNum}`,
@@ -473,6 +478,93 @@ export function applyWantOutcome(ws, id, outcome, worldDay) {
   st.updatedWorldDay = worldDay;
   return { moved, resolved: st.status === "resolved" };
 }
+// ---------- SNG-208: legends as living actors — they move the arcs, and each other ----------
+
+/** A figure's EFFECTIVE epic status, with expiry: a `wounded` epic recovers after `woundedUntilDay`, a
+ *  `stopped` one after `stoppedUntilDay`; `dead` is permanent. Pure read (does not mutate). */
+export function effectiveEpicStatus(ws, id, worldDay) {
+  const st = ws?.epicStatus?.[id];
+  if (!st || st.status === "active") return "active";
+  if (st.status === "dead") return "dead";
+  if (st.status === "wounded") return (st.woundedUntilDay != null && worldDay >= st.woundedUntilDay) ? "active" : "wounded";
+  if (st.status === "stopped") return (st.stoppedUntilDay != null && worldDay >= st.stoppedUntilDay) ? "active" : "stopped";
+  return "active";
+}
+
+const EPIC_PUSH_CAP = 6;
+/** SNG-208 §3a: an epic's offscreen action leans on its `arcAffinity` arc — the ambient pressure the arcs
+ *  breathe even in a session where the player never touches an arc quest. Accumulated LOCALLY (offscreen
+ *  developments are already per-player-generated, so folding this into the local arcStageNow keeps it
+ *  consistent and works offline — no cross-player double-count). A `stopped` epic pushes nothing this cycle;
+ *  a `wounded` one pushes at half. Returns the applied push or null. */
+export function applyEpicArcPush(ws, figure, worldDay) {
+  const aff = figure?.arcAffinity;
+  if (!aff?.arcId || !aff.dir) return null;
+  const status = effectiveEpicStatus(ws, figure.id, worldDay);
+  if (status === "dead") return null;
+  const blunt = status === "stopped" ? 0 : status === "wounded" ? 0.5 : 1;
+  if (blunt === 0) return null;
+  ws.epicArcPushes = ws.epicArcPushes || {};
+  const cur = ws.epicArcPushes[figure.id] || { arcId: aff.arcId, push: 0 };
+  cur.push = Math.max(-EPIC_PUSH_CAP, Math.min(EPIC_PUSH_CAP, cur.push + aff.dir * Math.max(1, aff.weight || 1) * blunt));
+  ws.epicArcPushes[figure.id] = cur;
+  return { arcId: aff.arcId, push: cur.push, dir: aff.dir };
+}
+
+/** SNG-208 §3b: resolve an epic-vs-rival clash into one of Erik's outcomes. Pure — relative legend weight
+ *  sets the odds, a roll decides, the MARGIN sets how decisive (a near-toss-up stalemates; only a decisive,
+ *  rare roll is a `killed` CANDIDATE — the death GATE itself lives in applyEpicClashOutcome). `a` is the one
+ *  who stirred, `b` the rival. Returns {winnerId, loserId, winnerName, loserName, kind, margin}. */
+export function resolveEpicClash(a, b, rng = Math.random) {
+  const wa = a?.legend?.weight ?? 5, wb = b?.legend?.weight ?? 5;
+  const pA = wa / (wa + wb);
+  const roll = rng();
+  const aWins = roll < pA;
+  const winner = aWins ? a : b, loser = aWins ? b : a;
+  const margin = Math.abs(roll - pA);
+  const r2 = rng();
+  let kind;
+  if (margin < 0.08) kind = "stalemate";
+  else if (margin > 0.30 && r2 < 0.12) kind = "killed";   // decisive + rare → a KILLED candidate (still gated on apply)
+  else if (r2 < 0.45) kind = "wounded";
+  else kind = "stopped";
+  return { winnerId: winner.id, loserId: loser.id, winnerName: winner.name, loserName: loser.name, kind, margin };
+}
+
+/** SNG-208 §3b: apply a clash outcome durably. `wounded` → the loser acts at half for 8 days; `stopped` →
+ *  blunted for 3; `killed` → dead + a broadcast world_event + a codex graveyard record (WHO, by WHOM, so the
+ *  player can seek the killer — §3d). ⛔ Death is a LANDMARK: gated behind a long cooldown (a `killed`
+ *  candidate too soon after the last epic death is DOWNGRADED to `stopped`), so a legend never quietly
+ *  vanishes. Mutates ws.epicStatus. Returns { finalKind, news:[], event|null, codex|null }. */
+export function applyEpicClashOutcome(ws, winner, loser, kind, worldDay, { deathCooldownDays = 20 } = {}) {
+  ws.epicStatus = ws.epicStatus || {};
+  const st = ws.epicStatus[loser.id] || { status: "active" };
+  if (st.status === "dead") return { finalKind: "already_dead", news: [], event: null, codex: null };
+  let finalKind = kind, event = null, codex = null;
+  const news = [];
+  if (kind === "stalemate") { news.push(`${winner.name} and ${loser.name} met — and neither could break the other.`); ws.epicStatus[loser.id] = st; return { finalKind: "stalemate", news, event, codex }; }
+  if (kind === "killed") {
+    const tooSoon = ws.lastEpicDeathDay != null && (worldDay - ws.lastEpicDeathDay) < deathCooldownDays;
+    if (tooSoon) finalKind = "stopped"; // GATE: a second death too soon is downgraded — deaths stay landmarks
+  }
+  if (finalKind === "killed") {
+    st.status = "dead"; st.diedWorldDay = worldDay; st.killedBy = winner.id;
+    ws.lastEpicDeathDay = worldDay;
+    event = { kind: "epic_death", figureId: loser.id, killerId: winner.id, worldDay, propagates: true,
+      text: `A legend has fallen: ${winner.name} has killed ${loser.name}. The world is one great figure lighter, and ${winner.name} the more feared for it.` };
+    codex = { entityId: loser.id, label: loser.name, kind: "person", fact: `[fell offscreen] Killed by ${winner.name}. Their unfinished work is loose in the world.` };
+    news.push(event.text);
+  } else if (finalKind === "wounded") {
+    st.status = "wounded"; st.woundedUntilDay = worldDay + 8; st.woundedBy = winner.id;
+    news.push(`${winner.name} bested ${loser.name} — ${loser.name} withdraws to lick their wounds.`);
+  } else { // stopped
+    st.status = "stopped"; st.stoppedUntilDay = worldDay + 3; st.stoppedBy = winner.id;
+    news.push(`${winner.name} checked ${loser.name} — for now, ${loser.name}'s designs are held.`);
+  }
+  ws.epicStatus[loser.id] = st;
+  return { finalKind, news, event, codex };
+}
+
 /** A short read of how far a figure's want has travelled, for the NEXT tick's prompt — so tick N+1 can see
  *  tick N (the whole point). */
 function wantProgressLine(ws, id) {
@@ -488,7 +580,7 @@ function wantProgressLine(ws, id) {
  *  the specific gap Erik named, `legend.tier` that worldtick has NEVER read — move RARELY (a cooldown + a
  *  rare roll, so the great become daily furniture if they tick every day: rarity is the point). Pure; rng
  *  and the epic cooldown injected. */
-export function offscreenPopulation(character, content = {}, { worldDay = 0, rng = Math.random, lastEpicDay = null, minEpicGapDays = 6, epicRate = 0.34 } = {}) {
+export function offscreenPopulation(character, content = {}, { worldDay = 0, rng = Math.random, lastEpicDay = null, minEpicGapDays = 3, epicRate = 0.6 } = {}) {
   const out = [];
   const seen = new Set();
   const add = (id, name, kind, descriptor, source) => { if (id && name && !seen.has(id)) { seen.add(id); out.push({ id, name, kind, descriptor: descriptor || "their own ends", source }); } };
@@ -506,10 +598,12 @@ export function offscreenPopulation(character, content = {}, { worldDay = 0, rng
     if (!want) continue;
     add(n.id, n.name, "npc", want, "met");
   }
-  // 3. EPIC / LEGENDARY (§3.3). A cooldown + a rare roll → at most one great figure stirs, most ticks none.
+  // 3. EPIC / LEGENDARY (§3.3 / SNG-208 §3c). Their OWN rate — leaning toward presence now (Erik: "make sure
+  //    their actions show up fairly frequently"), still a cooldown so it is felt, not a flood. Dead epics
+  //    (SNG-208 §3b) are gone from the world and never stir again.
   const coolOk = lastEpicDay == null || (worldDay - lastEpicDay) >= minEpicGapDays;
   if (coolOk && rng() < epicRate) {
-    const greats = (content.legends?.roster || []).filter(f => f.tier === "legendary" || f.tier === "epic");
+    const greats = (content.legends?.roster || []).filter(f => (f.tier === "legendary" || f.tier === "epic") && effectiveEpicStatus(character?.worldState, f.id, worldDay) !== "dead");
     if (greats.length) { const f = greats[Math.floor(rng() * greats.length)]; add(f.id, f.name, "npc", f.wants || f.signature, "legend"); }
   }
   // 4. HEARD OF, not met (§3.2) — a codex PERSON node with no registry entry is exactly "known of, not met."
@@ -554,7 +648,28 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
       // SNG-198 §2: the outcome MOVES state (or honestly does not); the note is the colour on top of it.
       const outcome = WANT_OUTCOMES.includes(dev.outcome) ? dev.outcome : "progress";
       const { moved, resolved } = applyWantOutcome(ws, fig.id, outcome, currentWorldDay);
-      if (fig.source === "legend" && moved) ws.lastEpicOffscreenDay = currentWorldDay; // stamp the epic cooldown
+      if (fig.source === "legend" && moved) {
+        ws.lastEpicOffscreenDay = currentWorldDay; // stamp the epic cooldown
+        const def = (content.legends?.roster || []).find(f => f.id === fig.id);
+        if (def) {
+          // SNG-208 §3a: this epic leans on its arc from offstage (the ambient pressure the arcs breathe).
+          applyEpicArcPush(ws, def, currentWorldDay);
+          // SNG-208 §3b: sometimes the stir IS a clash with a living rival — resolved into a durable outcome.
+          const liveRivals = (def.rivals || []).filter(rid => effectiveEpicStatus(ws, rid, currentWorldDay) !== "dead");
+          if (liveRivals.length && rng() < 0.4) {
+            const rid = liveRivals[Math.floor(rng() * liveRivals.length)];
+            const rivalDef = (content.legends?.roster || []).find(f => f.id === rid);
+            if (rivalDef) {
+              const clash = resolveEpicClash(def, rivalDef, rng);
+              const winner = clash.winnerId === def.id ? def : rivalDef, loser = clash.loserId === def.id ? def : rivalDef;
+              const res = applyEpicClashOutcome(ws, winner, loser, clash.kind, currentWorldDay);
+              for (const line of res.news) news.push({ text: line, worldDay: currentWorldDay });
+              if (res.event) { character.worldEvents = character.worldEvents || []; character.worldEvents.push(res.event); }
+              if (res.codex) { try { applyCodexUpdates(character, [res.codex], { day: ws.lastTickDay ?? null }); } catch { /* graveyard record is a convenience */ } }
+            }
+          }
+        }
+      }
       const note = smartClamp(dev.note, 600);
       // keep the per-record offscreen log for generated figures (their existing surface); the codex node
       // carries the "moved on" fact for EVERYONE — generated, met, or legendary — all resolvable by id.

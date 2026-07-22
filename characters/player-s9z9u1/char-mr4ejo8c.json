@@ -5,8 +5,8 @@
   "name": "Cellaceron",
   "origin": "valley",
   "background": "craftsman",
-  "level": 9,
-  "xp": 898,
+  "level": 10,
+  "xp": 903,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -72,11 +72,11 @@
     "destruction_creation": 0.13585151875,
     "spectrumId": -0.5014933716245327
   },
-  "attunement": 9,
-  "maxHealth": 65,
-  "health": 65,
-  "maxEnergy": 140,
-  "energy": 55,
+  "attunement": 10,
+  "maxHealth": 70,
+  "health": 70,
+  "maxEnergy": 145,
+  "energy": 145,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -470,163 +470,129 @@
         "player": "Ask Aevi — through the staff — what the pattern is, and let the chamber hear you ask it",
         "summary": "Aevi speaks through the Waystaff and names the chamber's purpose: a preparation cycle, counting toward a return, testing whether Cellaceron is what it waits for.",
         "narration": "You keep your hand on the Waystaff's grip and speak through it — not to the chamber, but to Aevi. The teal light along the crystal nodes brightens a little as you form the question.\n\n\"What is the pattern?\" you say. Your voice comes out of the wood and the stone both, carried by every node at once. The chamber does not change its pulse. It simply listens.\n\nAevi is quiet for three full beats. Four seconds each. Then its voice comes — low, resonant, unhurried, the same voice from behind your ear but larger now, shaped by the instrument around it.\n\n\"A preparation cycle,\" Aevi says. \"Not for sound. Not for light. For a return. Something was here and moved on, and the chamber has been keeping count ever since, waiting for the moment when the conditions match again.\"\n\nTeva makes a small sound at your left shoulder — not surprise, but recognition. Her hand moves to her sternum, where the mark sits in her tissue.\n\nAevi continues, still through the staff. \"The three-two-three ratio is a handshake. Something the thing that left here would know how to answer. The chamber does not know whether you are that thing. It is finding out.\"\n\nThe four-second pulse continues beneath your feet, unhurried and patient. The nested interval sits one step deeper than before, waiting."
+      },
+      {
+        "player": "Answer the chamber directly — send the three-two-three one step deeper still, matching what it gave back, and see how far it will go",
+        "summary": "Three-two-three sent one step deeper — the chamber folded it three times and held, deciding.",
+        "narration": "You count the next four-second beat through to its end. Then you answer it: three, two, three — and where the chamber folded the count once, you fold it twice. Not a question. A match.\n\nThe floor answers in under a breath. The same count comes back, this time folded three times, the innermost interval so small it is barely a pulse — more a texture than a rhythm. The chamber is not surprised. It was waiting for exactly this.\n\nAevi's voice rises from the Waystaff's nodes — very quiet, almost to itself. \"It knows you followed,\" Aevi says. \"It is deciding whether that is enough.\"\n\nTeva does not speak. Her hand stays at her sternum, fingers spread. She is listening with her whole body.\n\n*You feel it settle into you — a new steadiness. (Level 10: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*"
       }
     ],
     "lastTurn": {
-      "narration": "You keep your hand on the Waystaff's grip and speak through it — not to the chamber, but to Aevi. The teal light along the crystal nodes brightens a little as you form the question.\n\n\"What is the pattern?\" you say. Your voice comes out of the wood and the stone both, carried by every node at once. The chamber does not change its pulse. It simply listens.\n\nAevi is quiet for three full beats. Four seconds each. Then its voice comes — low, resonant, unhurried, the same voice from behind your ear but larger now, shaped by the instrument around it.\n\n\"A preparation cycle,\" Aevi says. \"Not for sound. Not for light. For a return. Something was here and moved on, and the chamber has been keeping count ever since, waiting for the moment when the conditions match again.\"\n\nTeva makes a small sound at your left shoulder — not surprise, but recognition. Her hand moves to her sternum, where the mark sits in her tissue.\n\nAevi continues, still through the staff. \"The three-two-three ratio is a handshake. Something the thing that left here would know how to answer. The chamber does not know whether you are that thing. It is finding out.\"\n\nThe four-second pulse continues beneath your feet, unhurried and patient. The nested interval sits one step deeper than before, waiting.",
-      "sceneSummary": "Aevi speaks through the Waystaff and names the chamber's purpose: a preparation cycle, counting toward a return, testing whether Cellaceron is what it waits for.",
-      "choices": [
-        {
-          "label": "Answer the chamber directly — send the three-two-three one step deeper still, matching what it gave back, and see how far it will go",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "careful",
-            "study"
-          ],
-          "abilityId": "braid_prism_sight_sonic_resonance",
-          "energyCost": 6,
-          "trivial": false
-        },
-        {
-          "label": "Ask Aevi — through the staff — whether it recognizes what was here before. Not the pattern. The thing itself.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask Teva what the mark felt like just now — when Aevi named a return, her hand went to her sternum",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "calm",
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Hold perfectly still and let the chamber make the next move — answer nothing, say nothing, and count the beats",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 0,
-          "intentTags": [
-            "careful",
-            "defend"
-          ],
-          "trivial": true
-        }
-      ],
+      "narration": "You count the next four-second beat through to its end. Then you answer it: three, two, three — and where the chamber folded the count once, you fold it twice. Not a question. A match.\n\nThe floor answers in under a breath. The same count comes back, this time folded three times, the innermost interval so small it is barely a pulse — more a texture than a rhythm. The chamber is not surprised. It was waiting for exactly this.\n\nAevi's voice rises from the Waystaff's nodes — very quiet, almost to itself. \"It knows you followed,\" Aevi says. \"It is deciding whether that is enough.\"\n\nTeva does not speak. Her hand stays at her sternum, fingers spread. She is listening with her whole body.\n\n*You feel it settle into you — a new steadiness. (Level 10: +1 attunement, +5 reserves, and growth to choose — a sub-attribute point and a skill point.)*",
+      "sceneSummary": "Three-two-three sent one step deeper — the chamber folded it three times and held, deciding.",
       "scene": {
-        "setting": "The chamber — hemispherical dressed-stone, flat-laid floor, faintly warm underfoot. No wind, no outside light. Aevi's motes are distributed along the Waystaff's lattice-seams, casting a thin teal light. The four-second pulse continues in floor and staff together, nested interval one step deeper.",
+        "setting": "The chamber — hemispherical dressed-stone, flat-laid floor, faintly warm underfoot. No wind, no outside light. Aevi's motes distributed along the Waystaff's lattice-seams, casting a thin teal light. The four-second pulse continues in floor and staff together, nested interval now three folds deep.",
         "npcsPresent": [
           {
             "name": "Teva",
-            "state": "Standing just behind Cellaceron's left shoulder, hand now resting at her sternum — the mark tracking in her tissue, her expression one of quiet recognition."
+            "state": "Hand spread at her sternum, listening with her whole body — silent, not frightened"
           },
           {
             "name": "Aevi",
-            "state": "Distributed along the Waystaff's crystal nodes — just spoken through the instrument, motes still and bright."
+            "state": "Voice risen from the Waystaff's nodes, very quiet; motes still along the crystal grain"
           }
         ],
         "objects": [
-          "Waystaff — grip-end to floor, four nodes cycling blue-white at four-second interval, Aevi's motes threaded through the lattice-seams",
+          "Waystaff — grip-end to floor, four nodes cycling blue-white at four-second intervals, Aevi's motes distributed along the grain",
           "Traveler's Pack — shouldered",
           "Waterskin — in pack, diminished",
           "Beeswax taper — dark, charge spent",
           "Bark-press paper (three sheets)",
           "Resonance crystals — untuned (four nodes, in pack)",
           "Liverwort mat — forward alcove (in pack)",
-          "Chamber floor — flat-laid pressed aggregate, faintly warm, four-second pulse"
+          "Chamber floor — flat-laid pressed aggregate, faintly warm, four-second pulse now three folds deep"
         ],
         "threads": [
-          "Aevi has named the chamber's purpose: a preparation cycle counting toward a return, testing whether Cellaceron is what it waits for",
-          "The nested count sits one step deeper, waiting for the next answer",
-          "Teva's hand went to her sternum at the word 'return' — her mark responded to something in Aevi's naming",
-          "The floor remains the top face of a deeper structure — what lies below has not yet declared itself"
+          "The chamber has folded the interval three times and is now deciding whether what it has heard is enough",
+          "Teva's mark is responding in real time — her hand at her sternum, fingers spread",
+          "Aevi named the chamber's posture as evaluation, not recognition yet"
         ]
       },
-      "npcUpdates": [
+      "choices": [
         {
-          "op": "update",
-          "npcId": "aevi",
-          "name": "Aevi",
-          "note": "Spoke through the Waystaff for the second time — named the chamber's purpose as a preparation cycle counting toward a return, and the three-two-three as a handshake for something the thing that left would know.",
-          "learned": [
-            "The chamber is keeping count since something departed — waiting for conditions to match again",
-            "The three-two-three ratio is a handshake test — the chamber does not yet know whether Cellaceron is what it waits for",
-            "Aevi does not yet know whether it recognizes the thing itself, only the pattern"
+          "label": "Hold still — do not send another count; let the chamber reach its decision on its own terms",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "careful"
           ],
-          "statusNote": "Distributed through the Waystaff's lattice-seams inside the chamber — present, still, having just spoken."
+          "trivial": true
         },
         {
-          "op": "update",
-          "npcId": "teva-anselvar",
-          "name": "Teva",
-          "note": "Hand moved to her sternum at the word 'return' — the mark in her tissue responded to Aevi's naming before she could.",
-          "learned": [
-            "The word 'return' produced a physical response in the mark — not pain, recognition"
+          "label": "Ask Teva quietly what the mark is doing in her — whether it changed when the chamber folded a third time",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
           ],
-          "statusNote": "Standing in the chamber at Cellaceron's left shoulder, hand at sternum, mark tracking."
+          "trivial": true
+        },
+        {
+          "label": "Send it a fourth fold — press the count one level deeper still and see if the chamber follows or stops",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 15,
+          "intentTags": [
+            "gamble"
+          ],
+          "abilityId": "sonic_resonance",
+          "energyCost": 4,
+          "trivial": false
+        },
+        {
+          "label": "Ask Aevi — through the staff — what deciding looks like from where it is distributed, inside the nodes",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        }
+      ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "second-river-rising",
+          "note": "Three-two-three sent one step deeper — the chamber answered with a third fold and held, now evaluating whether the respondent qualifies."
         }
       ],
       "codexUpdates": [
         {
           "topic": "the-chamber-beyond-the-threshold",
-          "label": "The Chamber",
+          "label": "The Chamber Beyond the Threshold",
           "kind": "mystery",
-          "fact": "Day 9 dawn: Aevi names the chamber's function — a preparation cycle counting toward a return. Something was here and moved on; the chamber has been keeping count ever since, waiting for conditions to match again. The three-two-three ratio is a handshake for whatever that thing was. The chamber does not yet know whether Cellaceron is it.",
+          "fact": "Day 9 dawn: the three-two-three sent one fold deeper was answered with a third fold — the chamber can follow the count further than it has yet shown. It stopped there and held, not returning a fourth. Aevi named the posture as deciding.",
           "links": [
             "second-river-rising",
-            "teva-anselvar-missing-apprentice",
+            "teva-directional-interval-count",
             "aevi",
-            "teva-directional-interval-count"
-          ]
-        },
-        {
-          "topic": "aevi",
-          "label": "Aevi",
-          "kind": "person",
-          "entityId": "aevi",
-          "fact": "Day 9 dawn: Aevi named the chamber as a preparation cycle for a return — and admitted it does not know whether it recognizes the thing itself, only the pattern. The distinction matters: pattern-memory and being-memory are separate in Aevi.",
-          "links": [
-            "the-chamber-beyond-the-threshold",
-            "second-river-rising",
-            "shimmer-crossing-shaped-boundary"
+            "northern-alcove-camp"
           ]
         }
       ],
       "placeUpdates": [
         {
-          "note": "Day 9 dawn: Aevi spoke through the Waystaff and named the chamber's purpose — a preparation cycle for a return. The chamber heard the question asked and gave no additional response beyond the continuing pulse. The nested interval remains one step deeper, waiting.",
-          "subPlace": {
-            "name": "The Chamber",
-            "parent": "Harmonic Heights — Lower Terrace",
-            "note": "Chamber purpose named by Aevi: preparation cycle for a return, three-two-three as a handshake test. Still listening.",
-            "visited": true
-          }
+          "note": "Day 9 dawn: three-fold nested interval established — chamber answered a deepened count with a third fold and paused, evaluating. The exchange is now three levels deep."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange through the Waystaff — a few minutes at most"
+        "why": "a few careful minutes in the chamber, counting and listening"
       }
     },
     "sceneState": {
-      "setting": "The chamber — hemispherical dressed-stone, flat-laid floor, faintly warm underfoot. No wind, no outside light. Aevi's motes are distributed along the Waystaff's lattice-seams, casting a thin teal light. The four-second pulse continues in floor and staff together, nested interval one step deeper.",
+      "setting": "The chamber — hemispherical dressed-stone, flat-laid floor, faintly warm underfoot. No wind, no outside light. Aevi's motes distributed along the Waystaff's lattice-seams, casting a thin teal light. The four-second pulse continues in floor and staff together, nested interval now three folds deep.",
       "npcsPresent": [
         {
           "name": "Teva",
-          "state": "Standing just behind Cellaceron's left shoulder, hand now resting at her sternum — the mark tracking in her tissue, her "
+          "state": "Hand spread at her sternum, listening with her whole body — silent, not frightened"
         },
         {
           "name": "Aevi",
-          "state": "Distributed along the Waystaff's crystal nodes — just spoken through the instrument, motes still and bright."
+          "state": "Voice risen from the Waystaff's nodes, very quiet; motes still along the crystal grain"
         }
       ],
       "objects": [
@@ -637,13 +603,12 @@
         "Bark-press paper (three sheets)",
         "Resonance crystals — untuned (four nodes, in pack)",
         "Liverwort mat — forward alcove (in pack)",
-        "Chamber floor — flat-laid pressed aggregate, faintly warm, four-second pulse"
+        "Chamber floor — flat-laid pressed aggregate, faintly warm, four-second pulse now"
       ],
       "threads": [
-        "Aevi has named the chamber's purpose: a preparation cycle counting toward a return, testing whether Cellaceron is what it waits for",
-        "The nested count sits one step deeper, waiting for the next answer",
-        "Teva's hand went to her sternum at the word 'return' — her mark responded to something in Aevi's naming",
-        "The floor remains the top face of a deeper structure — what lies below has not yet declared itself"
+        "The chamber has folded the interval three times and is now deciding whether what it has heard is enough",
+        "Teva's mark is responding in real time — her hand at her sternum, fingers spread",
+        "Aevi named the chamber's posture as evaluation, not recognition yet"
       ]
     }
   },
@@ -665,14 +630,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Chamber's harmonic fold parsed: the elaboration is a three-two-three interval ratio nested inside the four-count — a structured sub-pulse with directional preference. The chamber is asking something, ",
         "The chamber refused the mirrored three-two-three ratio — went silent mid-beat. The exchange is not about reflection; the chamber wants a distinct answer, not its own question returned.",
         "The plain four-second count returned without framing drew a single answering beat from the chamber and warmed the fourth shallow crystal — the chamber responds to honesty of repetition, not elaboration or mirroring.",
         "Two answering beats returned on the second plain count — the chamber appears to be building a counting sequence rather than merely confirming contact. Teva's tissue-read is tracking the pattern directly.",
         "Fourth crystal seated — complete four-node instrument offered to the chamber. Chamber settled into recognition-register. Teva's tissue-mark confirmed a register shift. The exchange is resting at its deepest foundation yet.",
         "Party crossed the threshold and entered the chamber itself — forty paces below the forward alcove, hemispherical, warm, the pulse in the floor and the Waystaff both cycling at four seconds. The room has noticed them.",
         "Resonant Sight reads the chamber's material construction: designed to contain, to absorb at specific frequencies, and to function as a clock. The floor is a surface above something deeper. The nested three-two-three interval is new — added since the Waystaff lattice was completed.",
-        "Three-two-three interval answered through the Waystaff; chamber stepped its nested count deeper in reply — it is testing whether Cellaceron can hold the ratio clean."
+        "Three-two-three interval answered through the Waystaff; chamber stepped its nested count deeper in reply — it is testing whether Cellaceron can hold the ratio clean.",
+        "Three-two-three sent one step deeper — the chamber answered with a third fold and held, now evaluating whether the respondent qualifies."
       ],
       "startedAt": "2026-07-03T18:55:17.042Z"
     },
@@ -1175,7 +1140,6 @@
     "harmonic_heights_terrace": {
       "visits": 1,
       "notes": [
-        "[d8] Day 8 night: shaped tone sent through Waystaff produced an elaborated return — harmonic fold in the chamber's reply confirmed the exchange is bidirectional and structure-capable, not merely frequency-",
         "[d8] Sonic Resonance parse of the chamber's elaborated reply confirmed: harmonic fold carries a three-two-three interval ratio — a nested directional question, not raw frequency. Two independent reads (fie",
         "[d8] Day 8 night: plain four-second count (unreflected) drew a single answering beat from the seam and warmed the fourth shallow crystal at Cellaceron's hip — contact reestablished at minimum complexity af",
         "[d8] Day 8 night: second plain count drew two answering beats at the four-second interval; fourth shallow crystal warmed a second time, fractionally deeper. Chamber response is sequential — may be learning",
@@ -1186,7 +1150,8 @@
         "[d9] Party entered the chamber on day 9 dawn — floor warm underfoot, four-second pulse present, chamber appeared to register arrival. No artifacts or visible mechanism at center.",
         "[d9] Resonant Sight confirms chamber walls are a pressed aggregate in variable courses — outer containment layer, inner absorptive face, floor as top surface of a deeper structure. Ceiling height is calculated for four-second echo return from floor level. A nested three-two-three interval has appeared…",
         "[d9] Three-two-three interval answered through the Waystaff on day 9 dawn — chamber replied by stepping the nested count one degree deeper. The exchange is now evaluative: the chamber is testing the precision of the response.",
-        "[d9] Day 9 dawn: Aevi spoke through the Waystaff and named the chamber's purpose — a preparation cycle for a return. The chamber heard the question asked and gave no additional response beyond the continuing pulse. The nested interval remains one step deeper, waiting."
+        "[d9] Day 9 dawn: Aevi spoke through the Waystaff and named the chamber's purpose — a preparation cycle for a return. The chamber heard the question asked and gave no additional response beyond the continuing pulse. The nested interval remains one step deeper, waiting.",
+        "[d9] Day 9 dawn: three-fold nested interval established — chamber answered a deepened count with a third fold and paused, evaluating. The exchange is now three levels deep."
       ],
       "flags": {
         "resonance_niche_tone_event": "day2_night_second_river_frequency",
@@ -1401,7 +1366,7 @@
     "lastTickWorldDay": 22,
     "lastCanonWorldDay": 22,
     "lastGenCount": 529,
-    "turnsSinceOffer": 11
+    "turnsSinceOffer": 12
   },
   "subAttributes": {
     "strength": 2,
@@ -1413,8 +1378,8 @@
     "craft": 5,
     "wits": 4
   },
-  "pendingSubPoints": 0,
-  "skillPoints": 0,
+  "pendingSubPoints": 1,
+  "skillPoints": 1,
   "discoveries": [
     {
       "key": "prism_sight+sonic_resonance:resonant-sight",
@@ -1526,7 +1491,6 @@
         "label": "The Chamber's Question",
         "kind": "mystery",
         "facts": [
-          "[d8] Day 8 night: the chamber's harmonic fold contains a three-two-three sub-pulse ratio nested inside the four-second count — a structured interval suggesting directional preference. The elaboration is a ",
           "[d8] Day 8 night: sending the three-two-three ratio back as a mirror silenced the chamber mid-beat — the count stopped in Teva's tissue simultaneously. The chamber did not want its own pattern reflected; i",
           "[d8] Day 8 night: returning the plain four-second count without elaboration or ratio reopened contact after the mirrored-ratio silence — one beat resumed, fourth shallow crystal warmed. The chamber respond",
           "[d8] Day 8 night: a second plain four-second count drew two answering beats — each clean and separate at the interval, with the fourth shallow crystal warming a fraction deeper. The chamber may be learning",
@@ -1537,7 +1501,8 @@
           "[d9] Day 9 dawn: Resonant Sight reads the chamber walls as a pressed aggregate laid in variable courses — outer layer hard and reflective to contain, inner face treated to absorb at specific frequencies. The floor is the top face of a deeper structure. The ceiling is calculated to return a four-second…",
           "[d9] Day 9 dawn: the chamber stepped its nested three-two-three interval one degree deeper in reply to Cellaceron answering the count correctly — the exchange is evaluative, not merely dialogic. Teva felt the shift through her tissue-mark simultaneously.",
           "[d9] Day 9 dawn: Aevi joined the Waystaff and spoke through it — naming that it has known the chamber's pattern longer than its own memory. The chamber was still listening when the words were spoken. The relationship between Aevi and this place predates the current journey.",
-          "[d9] Day 9 dawn: Aevi names the chamber's function — a preparation cycle counting toward a return. Something was here and moved on; the chamber has been keeping count ever since, waiting for conditions to match again. The three-two-three ratio is a handshake for whatever that thing was. The chamber…"
+          "[d9] Day 9 dawn: Aevi names the chamber's function — a preparation cycle counting toward a return. Something was here and moved on; the chamber has been keeping count ever since, waiting for conditions to match again. The three-two-three ratio is a handshake for whatever that thing was. The chamber…",
+          "[d9] Day 9 dawn: the three-two-three sent one fold deeper was answered with a third fold — the chamber can follow the count further than it has yet shown. It stopped there and held, not returning a fourth. Aevi named the posture as deciding."
         ],
         "links": [
           "second-river-rising",
@@ -1838,7 +1803,7 @@
       "motes-vigil": 4,
       "light_well": 3,
       "greenlore": 4,
-      "braid_prism_sight_sonic_resonance": 1
+      "braid_prism_sight_sonic_resonance": 2
     },
     "coActivations": {
       "keen_appraisal+sonic_resonance": 1,
@@ -2027,15 +1992,15 @@
   "customEncounters": {},
   "reconcileVersion": 14,
   "tendencies": {
-    "cerebral": 40.88107892826894,
-    "strategic": 48.28346507924556,
-    "cautious": 44.88463540122802,
-    "social": 31.88003213316035,
-    "generous": 13.773275318687444,
-    "risky": 3.6282143254381274,
-    "carousing": 0.30026211378965584,
-    "patient": 2.93954195891915,
-    "craft": 1.350940853988749
+    "cerebral": 40.85905195506221,
+    "strategic": 47.07637845226442,
+    "cautious": 44.762519516197315,
+    "social": 31.08303132983134,
+    "generous": 13.428943435720258,
+    "risky": 3.5375089673021742,
+    "carousing": 0.29275556094491445,
+    "patient": 2.866053409946171,
+    "craft": 1.3171673326390303
   },
   "aptitudes": [
     "strategist",
@@ -2048,9 +2013,9 @@
     "stalwart",
     "peacemaker"
   ],
-  "actionCount": 197,
-  "updatedAt": 1784687752496,
-  "rev": 63,
+  "actionCount": 198,
+  "updatedAt": 1784687935585,
+  "rev": 64,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -2060,7 +2025,7 @@
   "syncedAt": 1783791225006,
   "teachers": {},
   "regionsKnown": {
-    "valley": 20
+    "valley": 21
   },
   "company": [],
   "foreclosed": [],
@@ -2125,10 +2090,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-22T01:26:18.061Z",
-      "lastAt": "2026-07-22T02:35:52.489Z",
+      "lastAt": "2026-07-22T02:38:55.578Z",
       "startDay": 22,
       "endDay": 22,
-      "beats": 11
+      "beats": 12
     }
   ],
   "_pendingArrival": null,
@@ -2182,21 +2147,21 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 11,
-    "choices": 11,
+    "sceneSummary": 12,
+    "choices": 12,
     "characterDeltas": 7,
-    "scene": 11,
+    "scene": 12,
     "npcUpdates": 9,
-    "codexUpdates": 8,
-    "timeOps": 11,
+    "codexUpdates": 9,
+    "timeOps": 12,
     "sceneEnded": 5,
-    "placeUpdates": 5,
+    "placeUpdates": 6,
     "moveTo": 1,
-    "questUpdates": 3,
+    "questUpdates": 4,
     "stateOps": 1,
     "factUpdates": 1
   },
-  "_opTurns": 11,
+  "_opTurns": 12,
   "_intentAsked": null,
   "corrections": [
     {

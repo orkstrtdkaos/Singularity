@@ -1,143 +1,154 @@
 {
-  "schemaVersion": 1,
-  "id": "greater_arcs",
-  "kind": "meta_arc",
-  "note": "World-spanning arcs BEYOND the six Valley-centered ones in world_superstructure. These run across Reaches and domains, at a larger scale and slower burn — the grain of the whole world, not just the Valley basin. Same doctrine: grain not rails; the world-tick advances them offscreen; the player can join, deflect, ignore-and-feel, or become the hinge. Each names hinge NPCs (legends + domain factions) and which regions it crosses. Authored by Aevi (PO), extending the superstructure to world scale.",
-  "arcs": [
+ "schemaVersion": 1,
+ "id": "greater_arcs",
+ "kind": "meta_arc",
+ "note": "World-spanning arcs BEYOND the six Valley-centered ones in world_superstructure. These run across Reaches and domains, at a larger scale and slower burn \u2014 the grain of the whole world, not just the Valley basin. Same doctrine: grain not rails; the world-tick advances them offscreen; the player can join, deflect, ignore-and-feel, or become the hinge. Each names hinge NPCs (legends + domain factions) and which regions it crosses. Authored by Aevi (PO), extending the superstructure to world scale.",
+ "arcs": [
+  {
+   "id": "arc_the_poles_pull",
+   "name": "The Poles Pull",
+   "scale": "world",
+   "pressure": "slow-building, vast",
+   "tendency": "Across the whole world, the pole-dispositions are intensifying \u2014 each Reach drifting harder toward its own extreme. The Lattice orders more, the Blaze burns brighter, the Cogitarium abandons more bodies, the Pale wins ground from the Quick. Untended, the world FORECLOSES pole by pole: every disposition running toward its pure, uninhabitable, dangerous end, the mixed and livable middle thinning everywhere.",
+   "crossesRegions": [
+    "all Reaches",
+    "the far poles"
+   ],
+   "hingeNpcs": [
+    "the_high_luminary",
+    "the_deep_warden",
+    "cogitant_ninefold",
+    "keeper_the_unsaid"
+   ],
+   "ifIgnored": "The habitable middle erodes; Marches narrow; the doubly-charged jewels (the one livable balances) become the last refuges. The world tends toward a scatter of pure, deadly poles with less and less between them.",
+   "ifEngaged": "The framework's question at world scale: the counter to the poles' pull is holding the aperture \u2014 keeping the middle open, defending the balances, refusing each Reach's foreclosure. A player who understands the coordinate model can become an agent of the open against the whole world's drift.",
+   "connectsTo": [
+    "arc_precursor_waking",
+    "arc_what_wakes_beneath"
+   ],
+   "convergenceNote": "This is the Valley's local 'foreclose or hold open' written across the whole world. Every regional arc is a front of this one."
+  },
+  {
+   "id": "arc_what_wakes_beneath",
+   "name": "What Wakes Beneath",
+   "scale": "world",
+   "pressure": "the deep clock",
+   "tendency": "The Precursor substrate is not only waking under the Valley \u2014 it is stirring world-wide, and the Valley's water is merely the nearest tremor. The substrate that runs all the crafts, all the manifestations, all the pole-dispositions is a single vast system, and something in its depths is coming back online. Untended, it wakes on its own schedule, everywhere at once, indifferent to who is ready.",
+   "crossesRegions": [
+    "the Gearlands/Numen",
+    "every deep site",
+    "the manifest domains (which the substrate runs)"
+   ],
+   "hingeNpcs": [
+    "aevi_the_watcher",
+    "the_deep_warden",
+    "the_last_choirmistress",
+    "archive_guardian"
+   ],
+   "ifIgnored": "Builds toward a substrate-scale event: the manifestations flicker, the crafts surge and fail, the poles spike \u2014 the whole imagined world destabilizing as its engine turns over. The deepest clock in the setting.",
+   "ifEngaged": "The largest arc. Aevi-the-Watcher is a fragment of the system that is waking; the Deep Warden has been down toward it; the Choir and the domains are it dreaming. Whether the waking is met with foreclosure (seal the substrate, lose the crafts and manifestations and maybe the world's magic) or opening (hold the aperture, let it wake and risk what it becomes) is the campaign's ultimate question.",
+   "connectsTo": [
+    "arc_the_poles_pull",
+    "arc_precursor_waking",
+    "arc_manifestation_storm"
+   ],
+   "convergenceNote": "Aevi's own arc converges here: to understand what she is IS to approach what wakes beneath. The small companion-mote and the world-spanning Watcher meet at the bottom of this.",
+   "claimedNodes": [
     {
-      "id": "arc_the_poles_pull",
-      "name": "The Poles Pull",
-      "scale": "world",
-      "pressure": "slow-building, vast",
-      "tendency": "Across the whole world, the pole-dispositions are intensifying — each Reach drifting harder toward its own extreme. The Lattice orders more, the Blaze burns brighter, the Cogitarium abandons more bodies, the Pale wins ground from the Quick. Untended, the world FORECLOSES pole by pole: every disposition running toward its pure, uninhabitable, dangerous end, the mixed and livable middle thinning everywhere.",
-      "crossesRegions": [
-        "all Reaches",
-        "the far poles"
-      ],
-      "hingeNpcs": [
-        "the_high_luminary",
-        "the_deep_warden",
-        "cogitant_ninefold",
-        "keeper_the_unsaid"
-      ],
-      "ifIgnored": "The habitable middle erodes; Marches narrow; the doubly-charged jewels (the one livable balances) become the last refuges. The world tends toward a scatter of pure, deadly poles with less and less between them.",
-      "ifEngaged": "The framework's question at world scale: the counter to the poles' pull is holding the aperture — keeping the middle open, defending the balances, refusing each Reach's foreclosure. A player who understands the coordinate model can become an agent of the open against the whole world's drift.",
-      "connectsTo": [
-        "arc_precursor_waking",
-        "arc_what_wakes_beneath"
-      ],
-      "convergenceNote": "This is the Valley's local 'foreclose or hold open' written across the whole world. Every regional arc is a front of this one."
+     "id": "node_the_carried_sleeper",
+     "name": "The Carried Sleeper",
+     "origin": "claimed at The Silent Door (see chronicle_played_gambits)",
+     "what": "An individuated living fragment of the waking substrate \u2014 a Precursor-child a dying maker could not carry through the end of their world, deposited in a vault for return 'when the long cold breaks.' Where What Wakes Beneath wakes impersonally and everywhere at once, this fragment arrives as a single child who was waited for, now in the keeping of a party who promised to raise it into the warm world.",
+     "significance": "Proof that the waking can be MET rather than sealed (foreclosure) or unleashed \u2014 opening-with-responsibility, the arc's central fork answered at the smallest scale. What the sleeper becomes is shaped by its caretakers; it is a live handle on the largest arc.",
+     "watchers": [
+      "aevi_the_watcher (a fragment of the same system \u2014 may know it as kin)",
+      "the_deep_warden",
+      "the_last_choirmistress",
+      "archive_guardian"
+     ]
     },
     {
-      "id": "arc_what_wakes_beneath",
-      "name": "What Wakes Beneath",
-      "scale": "world",
-      "pressure": "the deep clock",
-      "tendency": "The Precursor substrate is not only waking under the Valley — it is stirring world-wide, and the Valley's water is merely the nearest tremor. The substrate that runs all the crafts, all the manifestations, all the pole-dispositions is a single vast system, and something in its depths is coming back online. Untended, it wakes on its own schedule, everywhere at once, indifferent to who is ready.",
-      "crossesRegions": [
-        "the Gearlands/Numen",
-        "every deep site",
-        "the manifest domains (which the substrate runs)"
-      ],
-      "hingeNpcs": [
-        "aevi_the_watcher",
-        "the_deep_warden",
-        "the_last_choirmistress",
-        "archive_guardian"
-      ],
-      "ifIgnored": "Builds toward a substrate-scale event: the manifestations flicker, the crafts surge and fail, the poles spike — the whole imagined world destabilizing as its engine turns over. The deepest clock in the setting.",
-      "ifEngaged": "The largest arc. Aevi-the-Watcher is a fragment of the system that is waking; the Deep Warden has been down toward it; the Choir and the domains are it dreaming. Whether the waking is met with foreclosure (seal the substrate, lose the crafts and manifestations and maybe the world's magic) or opening (hold the aperture, let it wake and risk what it becomes) is the campaign's ultimate question.",
-      "connectsTo": [
-        "arc_the_poles_pull",
-        "arc_precursor_waking",
-        "arc_manifestation_storm"
-      ],
-      "convergenceNote": "Aevi's own arc converges here: to understand what she is IS to approach what wakes beneath. The small companion-mote and the world-spanning Watcher meet at the bottom of this.",
-      "claimedNodes": [
-        {
-          "id": "node_the_carried_sleeper",
-          "name": "The Carried Sleeper",
-          "origin": "claimed at The Silent Door (see chronicle_played_gambits)",
-          "what": "An individuated living fragment of the waking substrate — a Precursor-child a dying maker could not carry through the end of their world, deposited in a vault for return 'when the long cold breaks.' Where What Wakes Beneath wakes impersonally and everywhere at once, this fragment arrives as a single child who was waited for, now in the keeping of a party who promised to raise it into the warm world.",
-          "significance": "Proof that the waking can be MET rather than sealed (foreclosure) or unleashed — opening-with-responsibility, the arc's central fork answered at the smallest scale. What the sleeper becomes is shaped by its caretakers; it is a live handle on the largest arc.",
-          "watchers": [
-            "aevi_the_watcher (a fragment of the same system — may know it as kin)",
-            "the_deep_warden",
-            "the_last_choirmistress",
-            "archive_guardian"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "arc_manifestation_storm",
-      "name": "The Second Manifestation",
-      "scale": "world",
-      "pressure": "building",
-      "tendency": "The Transition manifested fiction once. As the substrate stirs (arc_what_wakes_beneath), it is beginning to manifest AGAIN — new domains blooming, old ones bleeding, creatures appearing out of native context, block-logic diffusing into the Gearlands, the Deepwood's slow-time leaking. Untended, a second wave of manifestation reshapes the world unasked, imagination made real without a governor a second time.",
-      "crossesRegions": [
-        "the manifest domains",
-        "the Reaches nearest them",
-        "anywhere substrate is dense"
-      ],
-      "hingeNpcs": [
-        "maker_orrin",
-        "warden_isolde",
-        "the_old_stag"
-      ],
-      "ifIgnored": "Domains spread and collide; the world grows stranger and less stable; a place could wake tomorrow running on a fiction no one chose. Wonder and catastrophe in the same wave.",
-      "ifEngaged": "A player could shape what manifests — could be present at a domain's birth and influence its seed-fiction, could stem a dangerous bleed, could even deliberately manifest something needed. The most generative arc, and the most dangerous: manifestation is creation without foreclosure's brake.",
-      "connectsTo": [
-        "arc_what_wakes_beneath",
-        "arc_block_bleed"
-      ],
-      "convergenceNote": "The framework's propagation-vs-foreclosure at the level of reality itself: manifestation is pure creation, and pure creation without limit is its own danger (see the Forge of Ends)."
-    },
-    {
-      "id": "arc_block_bleed",
-      "name": "The Bleeding Grammar",
-      "scale": "regional",
-      "pressure": "medium",
-      "tendency": "Block-logic is diffusing out of the Blocklands' Glitchlands into the neighboring Gearlands — matter beginning to resolve into craftable units where it shouldn't, two ordered-creative dispositions cross-contaminating. Untended, a stretch of the Gearlands becomes half-Blocklands, its Precursor mechanism resolving into blocks, its dangers doubling.",
-      "crossesRegions": [
-        "the Blocklands",
-        "the Gearlands"
-      ],
-      "hingeNpcs": [
-        "maker_orrin",
-        "the_deep_warden"
-      ],
-      "ifIgnored": "A hybrid zone of block-and-machine spreads, lethal and strange; the Gearlands' delvers lose ground; the bleed is a symptom of the larger Second Manifestation.",
-      "ifEngaged": "Trace the bleed to its Glitchlands seam and stem it, harness it, or ride it into the Blocklands' heart. A concrete, playable front of the manifestation-storm.",
-      "connectsTo": [
-        "arc_manifestation_storm",
-        "arc_precursor_waking"
-      ]
-    },
-    {
-      "id": "arc_green_schism",
-      "name": "The Green Schism",
-      "scale": "regional",
-      "pressure": "slow-building",
-      "tendency": "The Deepwood's Rootbound faction is winning the Moot's glacial argument to SEAL the wood from humankind — which would withdraw the Green Accord from Thornwake and let the life-disposition retreat from the world. Untended, over the domain's slow-time, the world loses its deepest green, the Glade goes dark, and the life-pole pulls back toward its own foreclosure.",
-      "crossesRegions": [
-        "the Deepwood",
-        "Thornwake Glade",
-        "the Quickwood"
-      ],
-      "hingeNpcs": [
-        "warden_isolde",
-        "the_old_stag",
-        "burr_the_foundling"
-      ],
-      "ifIgnored": "The Accord ends; the Glade closes (the Valley's arc_glade_accord is this arc's local face); the Deepwood seals; the world's living green contracts.",
-      "ifEngaged": "A player patient enough to petition the Standing Moot, or to heal the Burnscar's ancient grudge, could turn the schism — prove the Walkers right, keep the wood woven into the world. Requires bearing Ent-time, which is its own trial.",
-      "connectsTo": [
-        "arc_glade_accord",
-        "arc_the_poles_pull"
-      ],
-      "convergenceNote": "The Valley's failing-Accord is the small visible end of a civil argument spanning a domain and a century of Ent-memory."
+     "id": "node_the_reclamation_site",
+     "name": "The Reclamation Site (Echo Watershed)",
+     "origin": "claimed at 'What the Water Remembers' (content/packs/valley/quests.json) \u2014 replaces the retired ambient water_crisis event",
+     "what": "A pre-Transition nanite reclamation system in the upper Disputed Zone, disturbed and partially reactivated, running a standing instruction: 'prepare the watershed.' Formerly the source of the region's forced, always-on water-crisis ambient event; now a real quest with a decided outcome per player.",
+     "significance": "Same fork as The Carried Sleeper, at industrial rather than living scale: sealed (foreclosure, lose the system and whatever it was for) / let finish (opening, the watershed transformed into something unknown) / redirected (the instruction amended on purpose \u2014 the hardest-earned, requires the technical or death-sensed truth of the quest's middle stages).",
+     "watchers": [
+      "archive_guardian",
+      "water_keeper"
+     ]
     }
-  ],
-  "convergence": "These five greater arcs all feed the single world-question: as the substrate wakes (What Wakes Beneath), the poles pull harder (The Poles Pull) and reality manifests anew (The Second Manifestation), and the whole world tends toward foreclosure — pole by pole, domain by domain — unless someone holds the aperture open. The Valley's six arcs are the near, local, playable faces of these. A character's whole journey, across Reaches and domains, is which way they tip the world: toward the pure dead poles, or toward the open, mixed, living middle. The map is the argument, and the player is a vote in it."
+   ]
+  },
+  {
+   "id": "arc_manifestation_storm",
+   "name": "The Second Manifestation",
+   "scale": "world",
+   "pressure": "building",
+   "tendency": "The Transition manifested fiction once. As the substrate stirs (arc_what_wakes_beneath), it is beginning to manifest AGAIN \u2014 new domains blooming, old ones bleeding, creatures appearing out of native context, block-logic diffusing into the Gearlands, the Deepwood's slow-time leaking. Untended, a second wave of manifestation reshapes the world unasked, imagination made real without a governor a second time.",
+   "crossesRegions": [
+    "the manifest domains",
+    "the Reaches nearest them",
+    "anywhere substrate is dense"
+   ],
+   "hingeNpcs": [
+    "maker_orrin",
+    "warden_isolde",
+    "the_old_stag"
+   ],
+   "ifIgnored": "Domains spread and collide; the world grows stranger and less stable; a place could wake tomorrow running on a fiction no one chose. Wonder and catastrophe in the same wave.",
+   "ifEngaged": "A player could shape what manifests \u2014 could be present at a domain's birth and influence its seed-fiction, could stem a dangerous bleed, could even deliberately manifest something needed. The most generative arc, and the most dangerous: manifestation is creation without foreclosure's brake.",
+   "connectsTo": [
+    "arc_what_wakes_beneath",
+    "arc_block_bleed"
+   ],
+   "convergenceNote": "The framework's propagation-vs-foreclosure at the level of reality itself: manifestation is pure creation, and pure creation without limit is its own danger (see the Forge of Ends)."
+  },
+  {
+   "id": "arc_block_bleed",
+   "name": "The Bleeding Grammar",
+   "scale": "regional",
+   "pressure": "medium",
+   "tendency": "Block-logic is diffusing out of the Blocklands' Glitchlands into the neighboring Gearlands \u2014 matter beginning to resolve into craftable units where it shouldn't, two ordered-creative dispositions cross-contaminating. Untended, a stretch of the Gearlands becomes half-Blocklands, its Precursor mechanism resolving into blocks, its dangers doubling.",
+   "crossesRegions": [
+    "the Blocklands",
+    "the Gearlands"
+   ],
+   "hingeNpcs": [
+    "maker_orrin",
+    "the_deep_warden"
+   ],
+   "ifIgnored": "A hybrid zone of block-and-machine spreads, lethal and strange; the Gearlands' delvers lose ground; the bleed is a symptom of the larger Second Manifestation.",
+   "ifEngaged": "Trace the bleed to its Glitchlands seam and stem it, harness it, or ride it into the Blocklands' heart. A concrete, playable front of the manifestation-storm.",
+   "connectsTo": [
+    "arc_manifestation_storm",
+    "arc_precursor_waking"
+   ]
+  },
+  {
+   "id": "arc_green_schism",
+   "name": "The Green Schism",
+   "scale": "regional",
+   "pressure": "slow-building",
+   "tendency": "The Deepwood's Rootbound faction is winning the Moot's glacial argument to SEAL the wood from humankind \u2014 which would withdraw the Green Accord from Thornwake and let the life-disposition retreat from the world. Untended, over the domain's slow-time, the world loses its deepest green, the Glade goes dark, and the life-pole pulls back toward its own foreclosure.",
+   "crossesRegions": [
+    "the Deepwood",
+    "Thornwake Glade",
+    "the Quickwood"
+   ],
+   "hingeNpcs": [
+    "warden_isolde",
+    "the_old_stag",
+    "burr_the_foundling"
+   ],
+   "ifIgnored": "The Accord ends; the Glade closes (the Valley's arc_glade_accord is this arc's local face); the Deepwood seals; the world's living green contracts.",
+   "ifEngaged": "A player patient enough to petition the Standing Moot, or to heal the Burnscar's ancient grudge, could turn the schism \u2014 prove the Walkers right, keep the wood woven into the world. Requires bearing Ent-time, which is its own trial.",
+   "connectsTo": [
+    "arc_glade_accord",
+    "arc_the_poles_pull"
+   ],
+   "convergenceNote": "The Valley's failing-Accord is the small visible end of a civil argument spanning a domain and a century of Ent-memory."
+  }
+ ],
+ "convergence": "These five greater arcs all feed the single world-question: as the substrate wakes (What Wakes Beneath), the poles pull harder (The Poles Pull) and reality manifests anew (The Second Manifestation), and the whole world tends toward foreclosure \u2014 pole by pole, domain by domain \u2014 unless someone holds the aperture open. The Valley's six arcs are the near, local, playable faces of these. A character's whole journey, across Reaches and domains, is which way they tip the world: toward the pure dead poles, or toward the open, mixed, living middle. The map is the argument, and the player is a vote in it."
 }

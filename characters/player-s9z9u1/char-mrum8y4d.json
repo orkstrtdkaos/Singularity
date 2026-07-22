@@ -54,7 +54,7 @@
   "alignment": {
     "mechanical_spiritual": -0.034,
     "falsehood_truth": -0.030514,
-    "spectrumId": -0.1118164414931689,
+    "spectrumId": -0.10622561941851044,
     "value": -0.04000000000000001,
     "demonic_angelic": -0.020000000000000004
   },
@@ -95,7 +95,122 @@
     "Loki read the four spike entries with Tessvel Cairn in the Pressure-Routing Annex, named the pattern — something moves deeper into the lower routing channel with each morning pass — and proposed both channel access and a more personal arrangement; Tessvel confirmed the access, asked for time on the rest, and left Loki knowing exactly where to find them."
   ],
   "currentLocationId": "pressureholt",
-  "activeScene": null,
+  "activeScene": {
+    "locationId": "pressureholt",
+    "turns": [
+      {
+        "player": "Stay a moment longer while Cy examines what he will of what is under the chamber... ask, out of genuine curiosity if you can feel her unique buttons... they are facinating.",
+        "summary": "Loki asked to examine Cy's maintenance interfaces; Cy consented, held still, and warned about the third catch.",
+        "narration": "Cy has already moved. While you stood reading the last of the spike entries, the little mechanism slipped off the table edge and crossed the Annex floor on its many precise legs, stopping just short of the stone threshold where the old boundary-impression sits scar-deep in the substrate. Its lens irises down to a narrow ring. It does not touch anything. It simply looks, with the focused patience of something that has been looking at the same class of problem for a very long time.\n\nYou crouch beside it. The threshold is cool under your fingers — fitted stone, old mortar, and then that circular impression where the substrate has grown around whatever was first laid here. You can feel the seam of it, the slight ridge where old material meets new. Cy's legs make small precise adjustments on the floor without stepping across the line.\n\n\"Cy,\" you say, genuinely curious rather than coy about it. \"Your buttons. May I?\" You gesture at the articulated segments along its back — the small raised catches that you have always assumed are access-points for something, calibration ports or maintenance latches, each one slightly different from the last.\n\nCy's lens turns up toward you. There is a pause of approximately two seconds, which for Cy is a long time. Then it says, \"The current assignment may examine the maintenance interfaces. Gentle contact only. The third catch from the anterior end is sensitive.\" It holds very still, which is how you know this is a kind of trust."
+      }
+    ],
+    "lastTurn": {
+      "narration": "Cy has already moved. While you stood reading the last of the spike entries, the little mechanism slipped off the table edge and crossed the Annex floor on its many precise legs, stopping just short of the stone threshold where the old boundary-impression sits scar-deep in the substrate. Its lens irises down to a narrow ring. It does not touch anything. It simply looks, with the focused patience of something that has been looking at the same class of problem for a very long time.\n\nYou crouch beside it. The threshold is cool under your fingers — fitted stone, old mortar, and then that circular impression where the substrate has grown around whatever was first laid here. You can feel the seam of it, the slight ridge where old material meets new. Cy's legs make small precise adjustments on the floor without stepping across the line.\n\n\"Cy,\" you say, genuinely curious rather than coy about it. \"Your buttons. May I?\" You gesture at the articulated segments along its back — the small raised catches that you have always assumed are access-points for something, calibration ports or maintenance latches, each one slightly different from the last.\n\nCy's lens turns up toward you. There is a pause of approximately two seconds, which for Cy is a long time. Then it says, \"The current assignment may examine the maintenance interfaces. Gentle contact only. The third catch from the anterior end is sensitive.\" It holds very still, which is how you know this is a kind of trust.",
+      "sceneSummary": "Loki asked to examine Cy's maintenance interfaces; Cy consented, held still, and warned about the third catch.",
+      "choices": [
+        {
+          "label": "Feel each catch carefully — start from the front, honor the warning about the third",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask Cy what the old boundary-impression in the threshold is — it was here before the Annex, and Cy is looking at it hard",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Study the boundary-impression yourself with See the Made Thing — read how it was built and what it was meant to stop",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": "see_the_made_thing",
+          "energyCost": 1,
+          "trivial": false
+        },
+        {
+          "label": "Wait and watch — let Cy finish whatever it is doing at the threshold before moving anything",
+          "attribute": "mental",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "careful"
+          ],
+          "trivial": true
+        }
+      ],
+      "scene": {
+        "setting": "Interior, Pressure-Routing Annex, morning light from the east window. Long table to one side with the open log. Cy is crouched at the stone threshold near the far wall, lens narrowed, not crossing the line.",
+        "npcsPresent": [
+          {
+            "name": "Cy",
+            "state": "Holding perfectly still at the old boundary-impression in the threshold, lens irised to a narrow ring, awaiting gentle examination of its maintenance interfaces"
+          }
+        ],
+        "objects": [
+          "Long Annex table with stacked bound logs",
+          "Pressure-gauge at the door",
+          "Open intake log — four spike entries read",
+          "Old circular boundary-impression in the threshold stone",
+          "Cy's maintenance interfaces (articulated catches along its back segments, each slightly different)"
+        ],
+        "threads": [
+          "Cy warned specifically about the third catch from the anterior end — sensitive, reason unstated",
+          "The boundary-impression in the threshold predates the Annex — Cy is examining it without explanation",
+          "Tessvel confirmed channel access and asked for time on the personal offer — she knows where to find Loki"
+        ]
+      },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "cy",
+          "name": "Cy",
+          "note": "Consented to Loki examining its maintenance interfaces; warned about the third catch; held very still — a form of trust",
+          "learned": [
+            "Has maintenance interfaces — articulated catches along its back, each slightly different; the third from the front is sensitive for an unstated reason"
+          ],
+          "statusNote": "At the Annex threshold, examining the old boundary-impression; holding still for examination"
+        }
+      ],
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "a quiet moment crouched at the threshold with Cy"
+      }
+    },
+    "sceneState": {
+      "setting": "Interior, Pressure-Routing Annex, morning light from the east window. Long table to one side with the open log. Cy is crouched at the stone threshold near the far wall, lens narrowed, not crossing the line.",
+      "npcsPresent": [
+        {
+          "name": "Cy",
+          "state": "Holding perfectly still at the old boundary-impression in the threshold, lens irised to a narrow ring, awaiting gentle e"
+        }
+      ],
+      "objects": [
+        "Long Annex table with stacked bound logs",
+        "Pressure-gauge at the door",
+        "Open intake log — four spike entries read",
+        "Old circular boundary-impression in the threshold stone",
+        "Cy's maintenance interfaces (articulated catches along its back segments, each s"
+      ],
+      "threads": [
+        "Cy warned specifically about the third catch from the anterior end — sensitive, reason unstated",
+        "The boundary-impression in the threshold predates the Annex — Cy is examining it without explanation",
+        "Tessvel confirmed channel access and asked for time on the personal offer — she knows where to find Loki"
+      ]
+    }
+  },
   "clock": {
     "schemaVersion": 1,
     "day": 1,
@@ -256,7 +371,7 @@
     "lastSharedReadAt": "2026-07-22T00:04:22.675Z",
     "lastTickWorldDay": 22,
     "lastCanonWorldDay": 22,
-    "turnsSinceOffer": 7,
+    "turnsSinceOffer": 8,
     "recentOffers": [
       {
         "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
@@ -454,20 +569,20 @@
     }
   },
   "tendencies": {
-    "devotion": 6.5503801759107585,
-    "cerebral": 8.803816687115336,
-    "social": 13.453858253230177,
-    "strategic": 5.424784506064788,
-    "cautious": 4.523898433927316,
-    "amorous": 12.65448322931092,
-    "generous": 1.3015629387778995,
-    "ruthless": 0.7379983458266509
+    "devotion": 6.386620671512989,
+    "cerebral": 9.583721269937453,
+    "social": 14.117511796899421,
+    "strategic": 5.289164893413168,
+    "cautious": 4.410800973079133,
+    "amorous": 12.338121148578146,
+    "generous": 1.269023865308452,
+    "ruthless": 0.7195483871809846
   },
   "aptitudes": [
     "silver_tongue",
     "charmer"
   ],
-  "actionCount": 30,
+  "actionCount": 31,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -594,8 +709,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784678747831,
-  "rev": 53,
+  "updatedAt": 1784678885023,
+  "rev": 54,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -892,7 +1007,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_gearlands": 31
+    "the_gearlands": 32
   },
   "opLossPending": false,
   "sessions": [
@@ -907,10 +1022,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-21T17:40:12.510Z",
-      "lastAt": "2026-07-22T00:05:47.830Z",
+      "lastAt": "2026-07-22T00:08:05.023Z",
       "startDay": 21,
       "endDay": 22,
-      "beats": 30
+      "beats": 31
     }
   ],
   "establishedFacts": [],
@@ -923,21 +1038,21 @@
   },
   "_pendingArrival": null,
   "_opEmitted": {
-    "sceneSummary": 28,
-    "choices": 28,
+    "sceneSummary": 29,
+    "choices": 29,
     "characterDeltas": 9,
-    "scene": 28,
+    "scene": 29,
     "placeUpdates": 3,
     "codexUpdates": 20,
-    "timeOps": 28,
+    "timeOps": 29,
     "offer": 2,
     "generateRequest": 2,
     "sceneEnded": 8,
-    "npcUpdates": 23,
+    "npcUpdates": 24,
     "moveTo": 1,
     "gambitApt": 1
   },
-  "_opTurns": 28,
+  "_opTurns": 29,
   "customAbilities": {},
   "companionBonds": {},
   "practice": {

@@ -742,6 +742,21 @@ img[data-lightbox] { cursor: zoom-in; }
 .wheel-node.fn-dim { opacity:0.22; }
 .wheel-node.fn-match .wnode-shape { stroke-width:2.4; }
 .wheel-node.fn-match .wheel-node-label { fill:var(--ink); }
+/* SNG-202B §2: click a tradition → its crafts + braids light, neighbours dim-highlight, the rest fade. */
+.wheel-node.trad-dim { opacity:0.16; }
+.wheel-node.trad-adjacent { opacity:0.6; }
+.wheel-node.trad-related .wnode-shape { stroke-width:2.6; filter: drop-shadow(0 0 3px color-mix(in srgb, var(--accent) 45%, transparent)); }
+.wheel-node.trad-related .wheel-node-label { fill:var(--ink); }
+.wheel-trad { cursor: pointer; }
+.wheel-trad .hit { fill: transparent; }
+.wheel-trad.trad-sel circle:not(.hit) { stroke-width: 3.5; }
+.wheel-trad.trad-sel .wheel-pole-label { fill: var(--accent); font-weight: 600; }
+.wheel-trad.trad-sel-opp circle:not(.hit) { stroke: var(--danger); }
+.wheel-trad.trad-sel-opp .wheel-pole-label { fill: var(--danger); }
+.wheel-trad.trad-sel-dim { opacity: 0.3; }
+.wheel-foreclose { stroke: var(--danger); stroke-width: 2; stroke-dasharray: 6 5; opacity: .7; pointer-events: none; }
+.wheel-braid-parent { stroke: var(--accent); stroke-width: 2.5; opacity: .85; pointer-events: none; }
+.wheel-braid-arc { stroke: var(--accent); stroke-width: 2; opacity: .7; stroke-dasharray: 3 3; pointer-events: none; }
 
 /* SNG-135: tighten the Company section — one clean flex row per member */
 .company-group { margin-bottom: 6px; }

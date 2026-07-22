@@ -6567,6 +6567,33 @@ await (async () => {
   // §3: braids are their own ability-LIST category with parents + first-finder attribution.
   check("202 §3: braids get their own ability-list category (not interleaved under one parent)", /braids-group[\s\S]{0,40}✦ Braids/.test(appSrc202) && /minted\.from[\s\S]{0,60}length === 2[\s\S]{0,40}braids\.push/.test(appSrc202));
   check("202 §3: a braid list entry names its parents + carries first-finder attribution (SNG-201)", /braid-parents[\s\S]{0,60}sourceNames/.test(appSrc202) && /first found by/.test(appSrc202));
+
+  // ---- SNG-202B §1: general weighted-mean placement — a craft leans off its spoke by its composition ----
+  const tf202 = JSON.parse(readFileSync(join(root, "content/packs/core/rules/traditions.json"), "utf8"));
+  const idx202 = buildTraditionIndex(tf202);
+  const wa = (p, n = 24) => (p / n) * 2 * Math.PI - Math.PI / 2; // render-space angle, matching wheelAngle
+  // the axis-pole map is the bridge: the ring is a projection of 12 bipolar axes.
+  check("202B §1: buildTraditionIndex maps each axis to its two ring poles (dark_light → dark@0, light@12)", idx202.axisPoles.dark_light?.neg === 0 && idx202.axisPoles.dark_light?.pos === 12);
+  check("202B §1: death_life maps to ashwarden(death)@5 + rootkin(life)@17", idx202.axisPoles.death_life?.neg === 5 && idx202.axisPoles.death_life?.pos === 17);
+  // compositionAngle: sign picks the pole, |weight| the pull; angle is render-space.
+  check("202B §1: a craft leaning pure-dark points at the dark pole's angle", Math.abs(wg.compositionAngle({ dark_light: -1 }, idx202.axisPoles).ang - wa(0)) < 1e-9);
+  check("202B §1: leaning pure-light points at the light pole (ring 12)", Math.abs(wg.compositionAngle({ dark_light: 1 }, idx202.axisPoles).ang - wa(12)) < 1e-9);
+  check("202B §1: magnitude reflects the pull (single |0.5| axis → mag 0.5)", Math.abs(wg.compositionAngle({ dark_light: 0.5 }, idx202.axisPoles).mag - 0.5) < 1e-9);
+  check("202B §1: an axis with no ring anchor (instinct_analysis) yields NO composition signal (null)", wg.compositionAngle({ instinct_analysis: 0.9 }, idx202.axisPoles) === null);
+  check("202B §1: an empty / all-zero composition yields null (no direction to lean)", wg.compositionAngle({}, idx202.axisPoles) === null && wg.compositionAngle({ dark_light: 0 }, idx202.axisPoles) === null);
+  check("202B §1: two ALIGNED axes reinforce (light@12 + angelic@14 → high mag, resultant between them)", (() => { const c = wg.compositionAngle({ dark_light: 1, demonic_angelic: 1 }, idx202.axisPoles); return c && c.used === 2 && c.mag > 0.9 && c.ang > wa(12) && c.ang < wa(14); })());
+  // leanOffset: the tradition anchors, composition rotates a BOUNDED amount off the spoke.
+  check("202B §1: no composition signal → zero lean (the spoke is unmoved)", wg.leanOffset(wa(5), null) === 0);
+  check("202B §1: composition pointing AT the spoke → ~zero lean (a pure craft stays on its ring-angle)", Math.abs(wg.leanOffset(wa(5), { ang: wa(5) }, 24, 2)) < 1e-9);
+  check("202B §1: a far off-axis lean is CLAMPED to ±maxSwing (2 positions), never teleported", Math.abs(wg.leanOffset(wa(5), { ang: wa(11) }, 24, 2) - (2 / 24) * 2 * Math.PI) < 1e-9);
+  check("202B §1: the clamp is signed (a counter-clockwise lean clamps negative)", Math.abs(wg.leanOffset(wa(5), { ang: wa(23) }, 24, 2) - (-(2 / 24) * 2 * Math.PI)) < 1e-9);
+  // §1 wired: buildWheelModel rotates spoke crafts by compositionAngle+leanOffset (not a bare spoke fan).
+  check("202B §1: buildWheelModel leans spoke crafts by composition (compositionAngle + leanOffset)", /leanOffset\(ang0, compositionAngle\(ab\.axes, axisPoles, n\)/.test(appSrc202));
+  // §2 wired: the wheel is a browse surface — click a tradition / click a braid highlights across the wheel.
+  check("202B §2: a tradition ring node is clickable (data-wheeltrad) + toggles wheelSelTrad", /data-wheeltrad=/.test(appSrc202) && /wheelSelTrad = wheelSelTrad === t \? null : t/.test(appSrc202));
+  check("202B §2: a clicked tradition highlights its crafts + braids-with-a-parent, dims the rest (tradRelOf)", /parentTrads[\s\S]{0,40}includes\(wheelSelTrad\)/.test(appSrc202) && /trad-" \+ tradRelOf\(nd\)/.test(appSrc202));
+  check("202B §2: the foreclosure line to the antipode is drawn as geometry (wheel-foreclose)", /wheel-foreclose/.test(appSrc202) && /only a braid crosses this axis/.test(appSrc202));
+  check("202B §2: a selected braid lights both parent spokes + the joining arc", /selBraidParents\.length !== 2[\s\S]*?wheel-braid-parent[\s\S]*?wheel-braid-arc/.test(appSrc202));
 }
 
 // --- SNG-198B: the offscreen population widens to who the player KNOWS + the EPIC figures Erik named ---

@@ -43,6 +43,44 @@ export function braidPlacement(posA, posB, n = 24) {
   };
 }
 
-// SNG-202 §1 general form (the weighted circular mean for schools + arbitrary composition — the Tether FCG
-// meaning-gravity math) lands in 202B, WITH its consumer, when placement widens past braids. Not shipped
-// here as a dead export (the wiring audit is right: an export that cannot fire in play is a false green).
+// SNG-202B §1 general form — the weighted circular mean of a craft's composition (the Tether FCG meaning-
+// gravity math), now WITH its consumer (buildWheelModel rotates every ring-tradition craft by this). A
+// craft's `axes` are weights in the 12-bipolar-axis space the ring projects; each axis maps to a diameter
+// (its two poles, `axisPoles[axisKey] = {neg, pos}`). We sum a unit vector toward the leaning pole of each
+// axis, magnitude = |weight|; the resultant's ANGLE is the craft's composition direction, its MAGNITUDE how
+// coherently it leans (a craft pulling many ways has a short resultant — genuinely unaligned).
+
+/** SNG-202B §1: the circular weighted mean of a craft's composition as a render-space angle. `axes` is the
+ *  ability's weight map (axisKey → [-1,1]); `axisPoles` is `traditionIndex.axisPoles` (axisKey → {neg, pos}
+ *  ring positions). Angle convention matches the render's wheelAngle (pos/n·2π − π/2). Returns {ang, mag,
+ *  used} or null when no axis is ring-mappable (the 3 axes with no tradition anchor, or a balanced-to-zero
+ *  resultant) — a null means "no composition signal; fall back to the bare spoke." Pure. */
+export function compositionAngle(axes, axisPoles = {}, n = 24) {
+  let vx = 0, vy = 0, used = 0;
+  for (const [k, w] of Object.entries(axes || {})) {
+    const m = axisPoles[k];
+    if (!m || m.neg == null || m.pos == null || !w) continue;
+    const polePos = w < 0 ? m.neg : m.pos;                 // sign picks the pole; |w| the pull
+    const ang = (polePos / n) * Math.PI * 2 - Math.PI / 2; // render space (matches wheelAngle)
+    vx += Math.abs(w) * Math.cos(ang);
+    vy += Math.abs(w) * Math.sin(ang);
+    used++;
+  }
+  if (!used) return null;
+  const mag = Math.hypot(vx, vy);
+  if (mag < 1e-9) return null;                             // perfectly balanced → no direction
+  return { ang: Math.atan2(vy, vx), mag, used };
+}
+
+/** SNG-202B §1: the BOUNDED lean of a craft off its tradition spoke. The tradition ANCHORS (the spec's
+ *  explicit degenerate guarantee: a pure craft renders on its ring-angle); composition ROTATES it toward
+ *  where its `axes` lean, clamped to ±maxSwing positions so a "mostly-death craft that adopts order" sits
+ *  NEAR the death axis rotated toward order — never teleported to the life side. Returns the signed radians
+ *  offset to add to the spoke angle (0 when there's no composition signal). Pure, deterministic. */
+export function leanOffset(spokeAng, comp, n = 24, maxSwingPos = 2) {
+  if (!comp) return 0;
+  let d = comp.ang - spokeAng;
+  d = Math.atan2(Math.sin(d), Math.cos(d));               // shorter arc into [-π, π]
+  const maxSwing = (maxSwingPos / n) * Math.PI * 2;
+  return Math.max(-maxSwing, Math.min(maxSwing, d));
+}

@@ -19,7 +19,7 @@ import { armDevCapture, recordCall, annotateLatest, devCaptures, clearCaptures }
 import { unearnedDepth, generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight, NOMINATE_AT, buildBraidPrompt, validateBraidAuthored } from "./engine/generate.js";
 import { mintableBraidsFor, buildBraidDef, mintBraid, braidKey } from "./engine/braids.js"; // SNG-197 p2: in-play braid mint + the moment
 import { ensureRecipeStore, buildRecipeRecord, recipeFor, recipeToAuthored, mergeRecipes, firstFinderName } from "./engine/recipes.js"; // SNG-201: shared braid recipes
-import { braidPlacement } from "./engine/wheelgeom.js"; // SNG-202: place a braid on the wheel by its composition
+import { braidPlacement, compositionAngle, leanOffset } from "./engine/wheelgeom.js"; // SNG-202: place a craft on the wheel by its composition
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, ghList, fetchRepoJSON, raceTimeout } from "./engine/sync.js";
 import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates } from "./engine/inventory.js";
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
@@ -65,7 +65,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.194";
+const APP_VERSION = "1.8.195";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -170,6 +170,7 @@ function showVitalDetail(el) {
 let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs, events, lore, region
 let FN_INDEX = { families: [], verbToFamily: {}, byFamily: {} }; // SNG-124: function-family index (built at load)
 let wheelFnFilter = new Set(); // SNG-124 Phase B: active function-family filter on the skill wheel
+let wheelSelTrad = null; // SNG-202B §2: the tradition clicked to highlight its crafts/braids across the wheel
 let character = null;    // active character
 let profile = null;      // the player's profile (the human)
 let sceneTurns = [];     // recent beats: {summary, narration} for scene continuity
@@ -4915,7 +4916,12 @@ function buildWheelModel() {
       precursorUnlocked: ab.powerSystem === "precursor" && (character.precursorAccess || []).includes(ab.id), // SNG-129: narrative-earned
       ...extra });
   };
-  // spokes: fan same-tier abilities by a small angular offset around the spoke
+  // spokes: SNG-202B §1 — the tradition ANCHORS (a pure craft stays on its ring-angle, the degenerate case =
+  // today's wheel), and each craft's COMPOSITION rotates it a bounded amount off the spoke: a mostly-death
+  // craft that adopts order sits near the death axis rotated toward order. The lean is deterministic (from
+  // the craft's `axes`, projected onto the ring via traditionIndex.axisPoles) and clamped, so it reads as a
+  // lean, never a teleport. A residual micro-fan only separates composition-identical crafts of the same tier.
+  const axisPoles = idx?.axisPoles || {};
   for (const [trad, abs] of Object.entries(byTrad)) {
     const ang0 = wheelAngle(posOf(trad), n);
     const byTier = {};
@@ -4923,8 +4929,9 @@ function buildWheelModel() {
     for (const [lv, list] of Object.entries(byTier)) {
       const r = wheelTierRadius(Number(lv));
       list.sort((a, b) => a.name.localeCompare(b.name)).forEach((ab, i) => {
-        const spread = (i - (list.length - 1) / 2) * 0.05; // radians of fan
-        const a = ang0 + spread; const p = wheelPt(a, r); mk(ab, p.x, p.y, a);
+        const lean = leanOffset(ang0, compositionAngle(ab.axes, axisPoles, n), n);
+        const fan = (i - (list.length - 1) / 2) * 0.015; // small residual fan for exact-composition ties
+        const a = ang0 + lean + fan; const p = wheelPt(a, r); mk(ab, p.x, p.y, a, { lean });
       });
     }
   }
@@ -4943,18 +4950,19 @@ function buildWheelModel() {
   // a fake angle. Deterministic (engine/wheelgeom.js), never a force layout (§4). Small stable nudge keeps a
   // cluster of centre-braids legible at 380px without breaking determinism.
   braidAbs.sort((a, b) => a.name.localeCompare(b.name)).forEach((ab, bi) => {
-    const pos = (ab.minted.from || []).map(pid => { const p = cat[pid]; const tr = p ? traditionOf(p, idx) : null; return tr != null && posOf(tr) >= 0 ? posOf(tr) : -1; });
-    const [pa, pb] = pos;
+    const parents = (ab.minted.from || []).map(pid => { const p = cat[pid]; const tr = p ? traditionOf(p, idx) : null; return { tr, pos: tr != null && posOf(tr) >= 0 ? posOf(tr) : -1 }; });
+    const [pa, pb] = parents.map(x => x.pos);
+    const parentTrads = parents.map(x => x.tr).filter(Boolean); // SNG-202B §2: which spokes light up when this braid is selected
     if (pa >= 0 && pb >= 0) {
       const pl = braidPlacement(pa, pb, n);
       const nudge = pl.rFactor < 0.15 ? (bi % 3 - 1) * 0.12 : 0;                 // deep-centre braids: a stable, deterministic fan so they don't stack
       const r = WHEEL.rInner + (WHEEL.rNode - WHEEL.rInner) * pl.rFactor;
       const p = wheelPt(pl.ang + nudge, Math.max(WHEEL.rFolk + 18, r));
-      mk(ab, p.x, p.y, pl.ang + nudge, { braid: true, antipodal: pl.antipodal, braidFrom: ab.minted.sourceNames || [] });
+      mk(ab, p.x, p.y, pl.ang + nudge, { braid: true, antipodal: pl.antipodal, braidFrom: ab.minted.sourceNames || [], parentTrads });
     } else {
       const one = pa >= 0 ? pa : pb;
-      if (one >= 0) { const a = wheelAngle(one, n); const p = wheelPt(a, WHEEL.rInner + 22); mk(ab, p.x, p.y, a, { braid: true, braidFrom: ab.minted.sourceNames || [] }); }
-      else { const a = -Math.PI / 2 + (bi * 0.5); const p = wheelPt(a, WHEEL.rFolk + 8); mk(ab, p.x, p.y, a, { braid: true, braidFrom: ab.minted.sourceNames || [] }); }
+      if (one >= 0) { const a = wheelAngle(one, n); const p = wheelPt(a, WHEEL.rInner + 22); mk(ab, p.x, p.y, a, { braid: true, braidFrom: ab.minted.sourceNames || [], parentTrads }); }
+      else { const a = -Math.PI / 2 + (bi * 0.5); const p = wheelPt(a, WHEEL.rFolk + 8); mk(ab, p.x, p.y, a, { braid: true, braidFrom: ab.minted.sourceNames || [], parentTrads }); }
     }
   });
   return { idx, order, n, nodes, posOf };
@@ -5067,6 +5075,19 @@ function renderSkillWheel(selectedId = null, status = "") {
   const braids = wheelBraids(m);
   const centerPt = { x: S.cx, y: S.cy };
   const nodeFor = t => ringNodes.find(r => r.t === t);
+  // SNG-202B §2: the wheel as a browse surface. Click a tradition → its crafts + any braid with a parent in
+  // it light up, its ring-neighbours dim-highlight, everything else fades, and the foreclosure line to its
+  // antipode becomes visible geometry ("only a braid crosses"). Click a braid node → its two parent spokes
+  // and the arc joining them light. Per-node relation is computed once here and stamped into the node class.
+  const selTradOpp = wheelSelTrad ? antipodeOf(wheelSelTrad, idx) : null;
+  const tradRelOf = (nd) => {
+    if (!wheelSelTrad) return "";
+    if (nd.braid) return (nd.parentTrads || []).includes(wheelSelTrad) ? "related" : "dim";
+    if (nd.cls === wheelSelTrad) return "related";
+    return ringDistance(nd.cls, wheelSelTrad, idx) === 1 ? "adjacent" : "dim";
+  };
+  const selBraid = selectedId ? m.nodes.find(x => x.id === selectedId && x.braid) : null;
+  const selBraidParents = selBraid ? (selBraid.parentTrads || []).filter(t => nodeFor(t)) : [];
 
   const svg = `<svg id="skill-svg" viewBox="0 0 ${S.size} ${S.size}" class="world-map skill-wheel" preserveAspectRatio="xMidYMid meet"><g class="graph-vp">
     <circle cx="${S.cx}" cy="${S.cy}" r="${S.rNode}" class="wheel-ring"/>
@@ -5085,9 +5106,18 @@ function renderSkillWheel(selectedId = null, status = "") {
       if (b.kind === "kin" && B) return `<path d="M ${A.x} ${A.y} Q ${S.cx + (A.x + B.x - 2 * S.cx) * 0.7} ${S.cy + (A.y + B.y - 2 * S.cy) * 0.7} ${B.x} ${B.y}" class="wheel-braid kin" fill="none"><title>${esc(b.name)} — a kin braid</title></path>`;
       if (B) return `<line x1="${A.x}" y1="${A.y}" x2="${B.x}" y2="${B.y}" class="wheel-braid cross-axis"><title>${esc(b.name)} — a cross-axis braid</title></line>`;
       return ""; }).join("")}
+    ${/* SNG-202B §2: a clicked tradition's foreclosure line to its antipode — "only a braid crosses this axis" as geometry */""}
+    ${(() => { if (!wheelSelTrad || !selTradOpp) return ""; const A = nodeFor(wheelSelTrad), B = nodeFor(selTradOpp); if (!A || !B) return "";
+      return `<line x1="${A.x}" y1="${A.y}" x2="${B.x}" y2="${B.y}" class="wheel-foreclose"><title>${esc(traditionLabel(wheelSelTrad))} ↔ ${esc(traditionLabel(selTradOpp))} — your antipode; only a braid crosses this axis</title></line>`; })()}
+    ${/* SNG-202B §2: a selected braid → light both parent spokes + the arc joining them (the composition, drawn) */""}
+    ${(() => { if (selBraidParents.length !== 2) return ""; const An = nodeFor(selBraidParents[0]), Bn = nodeFor(selBraidParents[1]);
+      const Ai = wheelPt(An.ang, S.rInner), Bi = wheelPt(Bn.ang, S.rInner);
+      return `<line x1="${Ai.x}" y1="${Ai.y}" x2="${An.x}" y2="${An.y}" class="wheel-braid-parent"/><line x1="${Bi.x}" y1="${Bi.y}" x2="${Bn.x}" y2="${Bn.y}" class="wheel-braid-parent"/><path d="M ${An.x} ${An.y} Q ${selBraid.x} ${selBraid.y} ${Bn.x} ${Bn.y}" class="wheel-braid-arc" fill="none"/>`; })()}
     ${/* tradition ring nodes + pole labels */""}
     ${ringNodes.map(rn => { const lp = wheelPt(rn.ang, S.rNode + 30);
-      return `<g class="wheel-trad ${rn.closed ? "closed" : rn.isPrimary ? "primary" : rn.isSecondary ? "secondary" : rn.isTertiary ? "tertiary" : rn.kin ? "kin" : ""}">
+      const selCls = !wheelSelTrad ? "" : rn.t === wheelSelTrad ? "trad-sel" : rn.t === selTradOpp ? "trad-sel-opp" : ringDistance(rn.t, wheelSelTrad, idx) === 1 ? "trad-sel-adj" : "trad-sel-dim";
+      return `<g class="wheel-trad ${rn.closed ? "closed" : rn.isPrimary ? "primary" : rn.isSecondary ? "secondary" : rn.isTertiary ? "tertiary" : rn.kin ? "kin" : ""} ${selCls}" data-wheeltrad="${esc(rn.t)}"><title>${esc(traditionLabel(rn.t))} — tap to light its crafts, braids and its antipode</title>
+        <circle class="hit" cx="${rn.x}" cy="${rn.y}" r="15"/>
         <circle cx="${rn.x}" cy="${rn.y}" r="7" fill="${rn.closed ? "transparent" : traditionColor(rn.t)}" stroke="${traditionColor(rn.t)}"/>
         <text x="${lp.x}" y="${lp.y + 3}" text-anchor="middle" class="wheel-pole-label">${esc(String(rn.pole).slice(0, 12))}</text></g>`; }).join("")}
     ${/* ability nodes — SNG-129: function SHAPES (silhouette = primary family) + precursor SEALED state +
@@ -5096,7 +5126,7 @@ function renderSkillWheel(selectedId = null, status = "") {
       const filterOn = wheelFnFilter.size > 0;
       const zoomed = (graphViews[graphSurface]?.k || 1) >= 1.25;
       // de-collision: gather label-bearing nodes, greedily nudge overlapping label anchors downward.
-      const labelSet = m.nodes.filter(nd => nd.name && (nd.owned || selectedId === nd.id || (zoomed && filterOn && (nd.families || []).some(f => wheelFnFilter.has(f)))));
+      const labelSet = m.nodes.filter(nd => nd.name && (nd.owned || selectedId === nd.id || (zoomed && filterOn && (nd.families || []).some(f => wheelFnFilter.has(f))) || (zoomed && wheelSelTrad && tradRelOf(nd) === "related")));
       const placed = [], labelAt = {};
       for (const nd of labelSet) {
         const lp = wheelPt(nd.ang, wheelTierRadius(nd.levelReq) + 12); let y = lp.y + 2, guard = 0;
@@ -5111,7 +5141,7 @@ function renderSkillWheel(selectedId = null, status = "") {
         const opened = nd.isPrecursor && nd.precursorUnlocked;
         const fill = nd.owned ? traditionColor(nd.cls) : sealed ? "transparent" : "#20242c";
         const stroke = nd.closed ? "var(--danger)" : traditionColor(nd.cls);
-        const cls = `wheel-node ${nd.owned ? "owned" : ""} ${nd.closed ? "closed" : ""} ${nd.barred ? "barred" : ""} ${nd.dim ? "dim" : ""} ${nd.isFolk ? "folk" : ""} ${nd.isPrecursor ? "precursor" : ""} ${sealed ? "precursor-sealed" : ""} ${opened ? "precursor-open" : ""} ${nd.braid ? "braid" : ""} ${nd.antipodal ? "braid-antipodal" : ""} ${selectedId === nd.id ? "selected" : ""} ${filterOn ? (matched ? "fn-match" : "fn-dim") : ""}`;
+        const cls = `wheel-node ${nd.owned ? "owned" : ""} ${nd.closed ? "closed" : ""} ${nd.barred ? "barred" : ""} ${nd.dim ? "dim" : ""} ${nd.isFolk ? "folk" : ""} ${nd.isPrecursor ? "precursor" : ""} ${sealed ? "precursor-sealed" : ""} ${opened ? "precursor-open" : ""} ${nd.braid ? "braid" : ""} ${nd.antipodal ? "braid-antipodal" : ""} ${selectedId === nd.id ? "selected" : ""} ${filterOn && !wheelSelTrad ? (matched ? "fn-match" : "fn-dim") : ""} ${wheelSelTrad ? "trad-" + tradRelOf(nd) : ""}`;
         const secondaries = (nd.families || []).slice(1, 3);
         const lbl = labelAt[nd.id];
         const braidNote = nd.braid ? ` · braid of ${(nd.braidFrom || []).join(" × ") || "two crafts"}${nd.antipodal ? " — spans the circle (an antipodal braid, the far poles joined)" : " — placed between its two axes"}` : "";
@@ -5183,13 +5213,22 @@ function renderSkillWheel(selectedId = null, status = "") {
   wireSkillGraphViewport();
   for (const g of app.querySelectorAll("[data-wheelnode]")) g.onclick = () => {
     if (_graphDidPan) { _graphDidPan = false; return; }
+    wheelSelTrad = null; // selecting a specific craft leaves tradition-highlight mode
     renderSkillWheel(g.dataset.wheelnode === selectedId ? null : g.dataset.wheelnode);
+  };
+  // SNG-202B §2: tap a tradition on the ring → highlight its crafts, its braids, dim its neighbours, show the foreclosure line.
+  for (const g of app.querySelectorAll("[data-wheeltrad]")) g.onclick = () => {
+    if (_graphDidPan) { _graphDidPan = false; return; }
+    const t = g.dataset.wheeltrad;
+    wheelSelTrad = wheelSelTrad === t ? null : t;
+    renderSkillWheel(null, status); // a tradition highlight clears any single-craft selection
   };
   // SNG-197 p2: rename a braid from its node (the second rename home, alongside the mint moment).
   const bcr = document.getElementById("braid-card-rename");
   if (bcr) bcr.onclick = () => { const def = fullCatalog()[bcr.dataset.braid]; if (def) showBraidRename(def, () => renderSkillWheel(selectedId, status)); };
   // SNG-124 Phase B: toggle a function-family filter (preserves zoom/selection).
   for (const b of app.querySelectorAll("[data-fnfilter]")) b.onclick = () => {
+    wheelSelTrad = null; // the two browse modes don't stack — a function filter clears the tradition highlight
     const f = b.dataset.fnfilter; if (wheelFnFilter.has(f)) wheelFnFilter.delete(f); else wheelFnFilter.add(f);
     renderSkillWheel(selectedId, status);
   };

@@ -24,15 +24,27 @@ export function buildTraditionIndex(file = {}) {
   const distances = {};
   const abilityToTradition = {};
   const folkIds = new Set(folk.map(f => f.traditionId));
+  // SNG-202B: the ring is a projection of 12 bipolar axes — a tradition at position p and p+12 are the two
+  // poles of one axis (umbral/dark at 0, blazeborn/light at 12). This map lets a craft's `axes` composition
+  // (weights in that same abstract space) be projected onto the great circle: axisKey → the ring position of
+  // each pole. `neg` = the FIRST-named pole (dark_light → dark), `pos` = the second (→ light).
+  const axisPoles = {};
   for (const s of stations) if (s.traditionId != null && Number.isFinite(s.position)) ringPos[s.traditionId] = s.position;
   for (const t of traditions) {
     byId[t.traditionId] = t;
     if (t.ring && Number.isFinite(t.ring.position)) ringPos[t.traditionId] = t.ring.position;
     if (t.distances) distances[t.traditionId] = t.distances;
     for (const ab of t.abilities || []) abilityToTradition[ab] = t.traditionId;
+    const pos = t.ring?.position ?? ringPos[t.traditionId];
+    if (typeof t.axis === "string" && t.axis.includes("_") && typeof t.pole === "string" && Number.isFinite(pos)) {
+      const [A, B] = t.axis.split("_");
+      axisPoles[t.axis] = axisPoles[t.axis] || {};
+      if (t.pole === A) axisPoles[t.axis].neg = pos;
+      else if (t.pole === B) axisPoles[t.axis].pos = pos;
+    }
   }
   for (const f of folk) { byId[f.traditionId] = f; for (const ab of f.abilities || []) abilityToTradition[ab] = f.traditionId; }
-  return { byId, ringPos, distances, abilityToTradition, folkIds, size: stations.length || 24, model: file.domainAccessModel || {}, stations };
+  return { byId, ringPos, distances, abilityToTradition, folkIds, axisPoles, size: stations.length || 24, model: file.domainAccessModel || {}, stations };
 }
 
 /** The tradition an ability belongs to: its own `tradition` field wins; else the reverse map. */

@@ -1,5 +1,23 @@
 # PO ALERT
 
+> ## 🔧 SNG-207 CI FIX (Aevi, 2026-07-22) — my break, my fix. content_ci GREEN.
+> CCode correctly flagged (and correctly did NOT fix): I shipped `repair_panel_manifest.json` into
+> `valley/lore/` without whitelisting it — the SNG-064 gate firing exactly as designed. **Fixed properly,
+> not patched:** the file was in the WRONG dir (it's a GM-context rules doc, not lore). **Relocated to
+> `content/packs/core/rules/repair_panel_manifest.json`** (the home of `quest_structure.json` /
+> `romance_guidance.json`), **registered in the core manifest `provides.rules`**, and the misplaced
+> `valley/lore` copy **deleted**. Lore whitelist clean; core rules registered; verified at authenticated
+> origin. Thank you CCode — flag-not-fix was the right call on my active ticket.
+>
+> ⚠️ **KNOWN STAGED-AHEAD content (NOT a CI failure, but not yet loadable — flagging so it isn't a ghost):**
+> `content/packs/valley/tradition_arcs/ashwarden.json` and `content/packs/valley/npc_quests.json` (SNG-203
+> deliverables) sit in NON-strict dirs, so content_ci passes — but **no loader and no `provides` key reads
+> them yet.** That is intentional (their loaders are CCode's unbuilt SNG-203 engine work) — I am NOT
+> registering them now because a `provides` entry with no loader is its own SNG-064-shaped ghost. **CCode,
+> when you build the SNG-203 loaders: add `provides.tradition_arcs` + `provides.npc_quests` (or fold into
+> quests) and the STRICT_DIRS/whitelist entries at the same time**, so they go from staged → loaded → gated
+> in one step. Until then they are authored-but-dark by design, tracked here.
+
 > ## 🛠️ SNG-207 — THE ULTIMATELY-CAPABLE GM (Aevi, 2026-07-21) — spec'd + panel manifest shipped
 > `po/SPEC_SNG-207_ultimately_capable_gm.md`. Erik: *"if I ASK the GM to fix location/known-people/inventory/
 > quest/ANYTHING, it should be ABLE to — its own fairness judgment + character-knowledge check, but all the

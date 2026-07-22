@@ -2,7 +2,7 @@
  "schemaVersion": 1,
  "id": "tradition_epics",
  "kind": "lore",
- "note": "SNG-208/209 (2026-07-22, Erik direction): several epics per tradition, varied on alignment AND role, so players help their tradition's epics and hinder rivals, and a tradition can be at war with itself. Each carries arcAffinity (SNG-208 offscreen push), rivals, deathRoad (SNG-209 \u2014 the depth their craft retrieves from), offscreenVerbs. FIRST TRANCHE: ashwarden, wright, abyssal, rootkin, numinous (the most vivid). Remaining traditions follow as standing content. Any NPC/player can rise to epic (tier reached, not birth-caste); this is the authored floor of anchors, not a closed cast.",
+ "note": "SNG-208/209 (2026-07-22, Erik direction): several epics per tradition, varied on alignment AND role, so players help their tradition's epics and hinder rivals, and a tradition can be at war with itself. Each carries arcAffinity (SNG-208 offscreen push), rivals, deathRoad (SNG-209 \u2014 the depth their craft retrieves from), offscreenVerbs. TRANCHES 1-2: ashwarden, wright, abyssal, rootkin, numinous, blazeborn, umbral, threnodist, enginewright, unmaker (10 of 24). Death-road depths 0-3 all represented (the dark/death/ending traditions anchor the deep end). Remaining 14 traditions follow as standing content. Any NPC/player can rise to epic (tier reached, not birth-caste); this is the authored floor of anchors, not a closed cast.",
  "designLaws": [
   "Several per tradition, VARIED \u2014 a hero and a villain of the same craft, so helping your tradition is not a monolith; different ROLES (saint/reaper/maker/sovereign) so 'epic' has range.",
   "Same-tradition rivalry is the richest conflict \u2014 Neth vs Morvane, Vael vs Halcyon, the Walker vs the Thornmother: one craft at war with itself.",
@@ -329,6 +329,325 @@
     "calls a soul further out of the flesh",
     "names the world's end a homecoming",
     "dissolves another anchor"
+   ]
+  },
+  {
+   "id": "sunwrack_valen",
+   "name": "Valen Sunwrack, Who Left No Shadow Standing",
+   "tradition": "blazeborn",
+   "tier": "legendary",
+   "alignment": "villain",
+   "role": "Zealot",
+   "spectrum": {
+    "dark_light": 0.95,
+    "violence_peace": -0.3,
+    "falsehood_truth": 0.4
+   },
+   "signature": "Burned the dark out of a whole Reach and called it dawn. Leaves nothing unseen, nowhere to rest, no mercy of the unlit \u2014 a light so total it is its own kind of blindness. Believes every shadow is a lie waiting.",
+   "wants": "A world with no dark left in it \u2014 and he is closer than anyone should be.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": 1,
+    "weight": 3
+   },
+   "rivals": [
+    "ember_who_banks_the_fire",
+    "the_deep_lantern"
+   ],
+   "deathRoad": {
+    "depth": 0,
+    "method": "can only burn a death clean \u2014 sears the threshold shut so nothing lingers. Cannot bring back; can only make sure they stay gone. A terrible gift."
+   },
+   "offscreenVerbs": [
+    "burns the dark from another district",
+    "unmasks a thing better left shadowed",
+    "calls a scoured place 'dawn'"
+   ]
+  },
+  {
+   "id": "ember_who_banks_the_fire",
+   "name": "Ember, Who Banks the Fire",
+   "tradition": "blazeborn",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Warden",
+   "spectrum": {
+    "dark_light": 0.7,
+    "violence_peace": 0.4,
+    "emotional_logical": 0.3
+   },
+   "signature": "The blazeborn who learned that a light which shares its ground is stronger than one that wins it. Banks her fire so others can stand near it. Valen's living rebuke \u2014 proof the light can refuse its own extreme.",
+   "wants": "To keep the light warm instead of total.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "sunwrack_valen"
+   ],
+   "deathRoad": {
+    "depth": 1,
+    "method": "warms the near-dead back \u2014 a banked fire held to a fading thread, patient, until it catches again. Only the shallow-dead; her flame cannot reach the deep."
+   },
+   "offscreenVerbs": [
+    "banks a fire so others can gather",
+    "refuses to burn a shadow that shelters someone",
+    "warms a fading thread back to catching"
+   ]
+  },
+  {
+   "id": "the_deep_lantern",
+   "name": "The Deep Lantern, Who Walks Where Light Won't",
+   "tradition": "umbral",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Guide",
+   "spectrum": {
+    "dark_light": -0.8,
+    "death_life": -0.2,
+    "falsehood_truth": 0.3
+   },
+   "signature": "Sees without light, walks the deep dark unafraid, and has led more lost souls out of it than anyone living. The dark is not her enemy \u2014 it is her country, and she knows its roads. Valen would call her a heresy.",
+   "wants": "That no one is lost in the dark for lack of a guide.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "sunwrack_valen",
+    "the_starless"
+   ],
+   "deathRoad": {
+    "depth": 2,
+    "method": "walks into the deep dark where the dead go and leads them back out \u2014 the surest deep-retrieval road, because the dark is where she's most at home. Costs her a piece of the way back each time."
+   },
+   "offscreenVerbs": [
+    "leads a lost soul back from the dark",
+    "lights a way that needs no flame",
+    "walks a road only she can see"
+   ]
+  },
+  {
+   "id": "the_starless",
+   "name": "The Starless One",
+   "tradition": "umbral",
+   "tier": "epic",
+   "alignment": "villain",
+   "role": "Devourer",
+   "spectrum": {
+    "dark_light": -0.98,
+    "death_life": -0.5
+   },
+   "signature": "The Unlit made appetite \u2014 would put out every light and drown the world in a dark that no longer shelters but only smothers. The dark's own cult-of-purity. Even other umbral fear her; she has forgotten the dark was ever a mercy.",
+   "wants": "A dark so total nothing casts, nothing shines, nothing is seen again.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": 1,
+    "weight": 3
+   },
+   "rivals": [
+    "the_deep_lantern",
+    "sunwrack_valen"
+   ],
+   "deathRoad": {
+    "depth": 3,
+    "method": "does not lead back \u2014 she keeps. A soul she takes into her dark does not return; the road that looks like the Deep Lantern's and ends nowhere."
+   },
+   "offscreenVerbs": [
+    "snuffs a light that sheltered someone",
+    "deepens a dark past all shelter",
+    "keeps a soul that entered her night"
+   ]
+  },
+  {
+   "id": "the_weeping_archive",
+   "name": "The Weeping Archive",
+   "tradition": "threnodist",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Keeper",
+   "spectrum": {
+    "emotional_logical": -0.85,
+    "death_life": 0.3,
+    "falsehood_truth": 0.5
+   },
+   "signature": "Holds every grief the valley has ever brought her and has never once let one go unfelt. Feels the poles pulling as an ache in the body days before anyone measures it. A city of sorrow and joy walks in one person.",
+   "wants": "That no feeling goes unwitnessed \u2014 that grief and joy are both kept.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "the_raw_chord"
+   ],
+   "deathRoad": {
+    "depth": 1,
+    "method": "holds the near-dead at the threshold by the sheer force of being grieved-for \u2014 a vigil of pure feeling that keeps a thread from slipping while a real road is found. Buys time, does not itself return them."
+   },
+   "offscreenVerbs": [
+    "feels a coming grief before it lands",
+    "keeps a sorrow no one else would hold",
+    "holds a vigil that will not let go"
+   ]
+  },
+  {
+   "id": "the_raw_chord",
+   "name": "The Raw Chord",
+   "tradition": "threnodist",
+   "tier": "legendary",
+   "alignment": "villain",
+   "role": "Amplifier",
+   "spectrum": {
+    "emotional_logical": -0.98,
+    "chaos_order": -0.4
+   },
+   "signature": "Feeling amplified past all judgment \u2014 the Raw. A grief or a rapture that consumes everything and calls the consuming love. Where she passes, whole villages feel too much to function, drowned in an emotion not their own.",
+   "wants": "To make the world feel EVERYTHING, all at once, past all bearing.",
+   "arcAffinity": {
+    "arcId": "arc_the_poles_pull",
+    "dir": 1,
+    "weight": 3
+   },
+   "rivals": [
+    "the_weeping_archive"
+   ],
+   "deathRoad": {
+    "depth": 1,
+    "method": "can pull a soul back on a wave of raw grief \u2014 but the returned come back flooded, feeling far too much, never calm again."
+   },
+   "offscreenVerbs": [
+    "floods a village with borrowed feeling",
+    "amplifies a grief past bearing",
+    "calls a consuming rapture 'love'"
+   ]
+  },
+  {
+   "id": "the_cogitant_ninefold",
+   "name": "The Cogitant Ninefold",
+   "tradition": "enginewright",
+   "tier": "legendary",
+   "alignment": "neither",
+   "role": "Analyst",
+   "spectrum": {
+    "mechanical_spiritual": -0.85,
+    "body_mind": 0.6,
+    "emotional_logical": 0.7
+   },
+   "signature": "Nine minds that were one engineer, running as a distributed reasoning-engine. Wants only to be proven wrong about the body being beneath the mind \u2014 the rare great figure who would be GRATEFUL to lose an argument. Reads the waking substrate as the ultimate mechanism.",
+   "wants": "To be proven wrong \u2014 the one certainty they cannot bear is their own.",
+   "arcAffinity": {
+    "arcId": "arc_what_wakes_beneath",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "harrow_the_hollowing"
+   ],
+   "deathRoad": {
+    "depth": 2,
+    "method": "builds a vessel of pure mechanism for a lost mind \u2014 the person returns as a thinking device, all mind, no flesh. Reaches the deep, but the returned are changed toward the engine."
+   },
+   "offscreenVerbs": [
+    "takes apart a problem nine ways",
+    "seeks the argument that would humble it",
+    "reads the substrate as a machine"
+   ]
+  },
+  {
+   "id": "harrow_the_hollowing",
+   "name": "Harrow, Who Makes People Into Mechanisms",
+   "tradition": "enginewright",
+   "tier": "legendary",
+   "alignment": "villain",
+   "role": "Hollower",
+   "spectrum": {
+    "mechanical_spiritual": -0.98,
+    "body_mind": 0.3
+   },
+   "signature": "Would make everything a mechanism, including people \u2014 the Hollowing. A person he 'improves' becomes a device with a function and nothing else, and they thank him for the clarity. The Enginewright cult-of-purity walking.",
+   "wants": "A world of perfect mechanisms, people included, all function and no want.",
+   "arcAffinity": {
+    "arcId": "arc_what_wakes_beneath",
+    "dir": 1,
+    "weight": 3
+   },
+   "rivals": [
+    "the_cogitant_ninefold"
+   ],
+   "deathRoad": {
+    "depth": 2,
+    "method": "'returns' the dead as pure mechanism \u2014 a device wearing their memories, efficient and empty. The road that looks like resurrection and delivers a puppet."
+   },
+   "offscreenVerbs": [
+    "hollows a person into a device",
+    "improves someone past their own wants",
+    "builds a mechanism that was a mind"
+   ]
+  },
+  {
+   "id": "the_last_mercy",
+   "name": "The Last Mercy",
+   "tradition": "unmaker",
+   "tier": "legendary",
+   "alignment": "hero",
+   "role": "Ender",
+   "spectrum": {
+    "destruction_creation": -0.8,
+    "death_life": -0.3,
+    "violence_peace": 0.3
+   },
+   "signature": "The unmaker who ends what is choked and finished so new things have room \u2014 and who knows, better than anyone, which endings must NOT be undone. The keeper of the sealed. When she says a death is final, even the Deep Lantern stops.",
+   "wants": "That endings be clean, and that the right ones stay ended.",
+   "arcAffinity": {
+    "arcId": "arc_manifestation_storm",
+    "dir": -1,
+    "weight": 2
+   },
+   "rivals": [
+    "the_scouring_hand"
+   ],
+   "deathRoad": {
+    "depth": 3,
+    "method": "the only figure who reaches the SEALED \u2014 not to return them, but to confirm a death is truly final, or (once in a generation, at ruinous cost) to unmake even a sealing. She is the wall AND the one door in it."
+   },
+   "offscreenVerbs": [
+    "ends a thing that was choking the world",
+    "confirms a death is truly final",
+    "refuses to unmake a rightful ending"
+   ]
+  },
+  {
+   "id": "the_scouring_hand",
+   "name": "The Scouring Hand",
+   "tradition": "unmaker",
+   "tier": "epic",
+   "alignment": "villain",
+   "role": "Annihilator",
+   "spectrum": {
+    "destruction_creation": -0.98,
+    "chaos_order": -0.5
+   },
+   "signature": "Unmaking as its own end \u2014 the Scouring. Unmakes for the joy of it until nothing is left to end, destruction that has forgotten it was ever mercy. Would unmake the world itself and call it a clean finish.",
+   "wants": "To unmake everything, until there is nothing left that could ever need ending.",
+   "arcAffinity": {
+    "arcId": "arc_manifestation_storm",
+    "dir": -1,
+    "weight": 3
+   },
+   "rivals": [
+    "the_last_mercy"
+   ],
+   "deathRoad": {
+    "depth": 3,
+    "method": "does not return \u2014 unmakes so thoroughly that even the death-state is scoured. What he ends cannot be retrieved by anyone. The anti-resurrection."
+   },
+   "offscreenVerbs": [
+    "unmakes a thing that needed no ending",
+    "scours a place past retrieval",
+    "calls annihilation a clean finish"
    ]
   }
  ]

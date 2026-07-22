@@ -10,7 +10,7 @@ import { newProfile, updateProfile, aptitudeMods, deriveAptitudes, grantAptitude
 import { normalizeInventory, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, resolveInventoryItem, dedupeInventory, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates } from "../engine/inventory.js";
 import { newClock, readClock, advanceClock, getWorldEpoch, absoluteWorldDay, worldDate, worldDayAt, relativeWorldDays } from "../engine/worldtime.js";
 import { companionBonus, companionsForGM, activeCompanions, partnerAdjacentNpcs } from "../engine/companions.js";
-import { applyQuestUpdates, questsForGM, slugify, resolveQuest, dedupeQuests, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, threadTouched } from "../engine/quests.js";
+import { applyQuestUpdates, questsForGM, slugify, resolveQuest, dedupeQuests, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, threadTouched, traditionArcForGM, npcQuestsForGM, practicedTraditions, traditionArcBeat } from "../engine/quests.js";
 import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, touchSession, endSession, sessionLog, buildSessionPrompt, authorshipStats, crossCharacterAuthorship } from "../engine/chronicle.js";
 import { sanitizeScene, buildTurnContext, sanitizeIntent, narrativeRegister, ratingRegister, renderSceneHistory, tierParts, bluntnessDirective } from "../engine/gm.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, findExistingNpc, prettifyNpcName, relationshipBand, advanceBond, relationshipLabel, isPartnerAdjacent, knownPeopleAt, npcPortraitTier, backfillNpcGender } from "../engine/npcs.js";
@@ -6737,6 +6737,51 @@ await (async () => {
   const topicN = Object.keys(save.codex.topics).length;
   step16.apply(save, ctx200);
   check("200: the recovery is idempotent (second run adds no topic)", Object.keys(save.codex.topics).length === topicN);
+}
+
+// ---- SNG-203: the quest hierarchy — tradition arcs (tier 2) + npc errands (tier 6) load, gate, and surface ----
+{
+  const arc = JSON.parse(readFileSync(join(root, "content/packs/valley/tradition_arcs/ashwarden.json"), "utf8"));
+  const errandsFile = JSON.parse(readFileSync(join(root, "content/packs/valley/npc_quests.json"), "utf8"));
+  const errands = errandsFile.npcQuests;
+
+  // The authored floor is schema-shaped: a tradition arc has the three-beat spine and a capstone that must
+  // exist BEFORE its proving beat can promise it (the §GUARDS capstone-before-proving rule).
+  check("203: ashwarden arc is keyed + capstone-bearing", arc.traditionId === "ashwarden" && !!arc.capstoneAbility && Array.isArray(arc.beats) && arc.beats.length === 3);
+  check("203: the three beats are finding → proving → ultimate", arc.beats.map(b => b.beat).join(",") === "finding,proving,ultimate");
+  check("203: every beat hands a real quest with a testable stage", arc.beats.every(b => b.quest && b.quest.id && Array.isArray(b.quest.stages) && b.quest.stages.length));
+  // errands are the light schema: giver/want/task/reward/effect, no branched outcomes required.
+  check("203: npc errands carry giver+want+task+reward+effect", errands.length >= 2 && errands.every(q => q.id && q.giver && q.want && q.task && q.reward && q.effect));
+
+  // practicedTraditions: an owned ashwarden ability makes the tradition "practiced" via the catalog lookup.
+  const CONTENT203 = { traditionArcs: { ashwarden: arc }, abilities: { pale_touch: { id: "pale_touch", tradition: "ashwarden" }, [arc.capstoneAbility]: { id: arc.capstoneAbility, tradition: "ashwarden" } }, traditionIndex: { abilityToTradition: { pale_touch: "ashwarden" } }, npcQuests: errands };
+  const practicer = { abilities: [{ abilityId: "pale_touch", level: 2 }] };
+  check("203: practicedTraditions reads owned-ability tradition from the catalog", practicedTraditions(practicer, CONTENT203).has("ashwarden"));
+  check("203: a foreclosed tradition drops out of the practiced set", !practicedTraditions({ abilities: [{ abilityId: "pale_touch" }], foreclosed: ["ashwarden"] }, CONTENT203).has("ashwarden"));
+
+  // traditionArcBeat: the beat is chosen from teacher standing, mirroring the arc's own gate language.
+  check("203: no teacher → the FINDING beat", traditionArcBeat(arc, practicer).beat === "finding");
+  check("203: teacher met, not willing → the PROVING beat", traditionArcBeat(arc, { teachers: { ashwarden: { met: true } } }).beat === "proving");
+  check("203: teacher willing → the ULTIMATE beat", traditionArcBeat(arc, { teachers: { ashwarden: { met: true, willing: true } } }).beat === "ultimate");
+  check("203: owning the capstone → the arc is COMPLETE", traditionArcBeat(arc, { abilities: [{ abilityId: arc.capstoneAbility }] }).beat === "complete");
+
+  // traditionArcForGM surfaces the live beat for a practiced tradition and honors the capstone-is-a-scene doctrine.
+  const finding = traditionArcForGM(practicer, CONTENT203);
+  check("203: the GM block names the FINDING beat + its quest for a practicing character", /FINDING beat/.test(finding) && /THE QUEST it hands/.test(finding));
+  const ultimate = traditionArcForGM({ abilities: [{ abilityId: "pale_touch" }], teachers: { ashwarden: { met: true, willing: true } } }, CONTENT203);
+  check("203: the ULTIMATE beat carries the SNG-197 capstone-is-a-scene doctrine", /CAPSTONE DOCTRINE/.test(ultimate) && /menu unlock/.test(ultimate));
+  check("203: a character who practices nothing sees no tradition arc", traditionArcForGM({ abilities: [] }, CONTENT203) === null);
+  check("203: a completed arc is not surfaced (nothing left to offer)", traditionArcForGM({ abilities: [{ abilityId: arc.capstoneAbility }], teachers: { ashwarden: { met: true, willing: true } } }, CONTENT203) === null);
+
+  // npcQuestsForGM: reachability is the known-giver gate; taken/done errands drop out.
+  const knownBoth = new Set(errands.map(q => q.giver));
+  const offered = npcQuestsForGM({ npcRegistry: {} }, CONTENT203, { knownGivers: knownBoth });
+  check("203: errands from known givers are offered with want+task+reward", /ERRAND \[/.test(offered) && /TASK:/.test(offered) && /REWARD:/.test(offered));
+  const noneKnown = npcQuestsForGM({}, CONTENT203, { knownGivers: new Set() });
+  check("203: an errand from an unknown giver is NOT offered", noneKnown === null);
+  const oneTaken = npcQuestsForGM({ quests: [{ id: errands[0].id }] }, CONTENT203, { knownGivers: knownBoth });
+  check("203: an already-taken errand drops out of the offer list", oneTaken !== null && !oneTaken.includes(errands[0].id) && oneTaken.includes(errands[1].id));
+  check("203: a present-in-scene giver is reachable even without the registry", npcQuestsForGM({}, CONTENT203, { presentNpcIds: [errands[0].giver] }) !== null);
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

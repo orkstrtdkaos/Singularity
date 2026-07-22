@@ -36,7 +36,7 @@ import { loreForLocation, eventsForGM } from "./state.js";
 import { buildRegionView, newsForGM } from "./worldtick.js";
 import { inventoryForGM } from "./inventory.js";
 import { companionsForGM, activeCompanions } from "./companions.js";
-import { questsForGM, structuredQuestsForGM } from "./quests.js";
+import { questsForGM, structuredQuestsForGM, traditionArcForGM, npcQuestsForGM } from "./quests.js";
 import { npcRegistryForGM, npcQuestSeedBlock } from "./npcs.js";
 import { placeMemoryForGM, recallForGM } from "./places.js";
 import { assignmentsForGM } from "./assignments.js"; // SNG-191 §4: delegated commitments the world is honouring
@@ -147,6 +147,14 @@ export const GM_CONTEXT = [
   { key: "structuredQuestsDetail", builder: "quests.structuredQuestsForGM", carries: ["active structured quests", "stages", "personalArc once taken"],
     reachedBy: "quest log 'Take it on'", spec: "§14", views: ["turn", "ask", "quest"],
     build: (env) => structuredQuestsForGM(env.character, { npcs: env.CONTENT.npcs }) },
+  // SNG-203 tier-2: the character's live tradition arc (finding→proving→ultimate), gated on teacher standing.
+  { key: "traditionArcDetail", builder: "quests.traditionArcForGM", carries: ["tradition arc beat", "teacher", "the beat's quest", "capstone-is-a-scene"],
+    reachedBy: "always (a practiced tradition with an authored arc)", spec: "SNG-203 §4", views: ["turn", "ask", "quest"],
+    build: (env) => traditionArcForGM(env.character, env.CONTENT) },
+  // SNG-203 tier-6: offerable NPC errands whose giver the character already knows (in the registry).
+  { key: "npcErrandsDetail", builder: "quests.npcQuestsForGM", carries: ["offerable errands", "giver want/task/reward"],
+    reachedBy: "always (a known errand-giver)", spec: "SNG-203 §5", views: ["turn", "ask"],
+    build: (env) => npcQuestsForGM(env.character, env.CONTENT, { knownGivers: new Set(Object.keys(env.character.npcRegistry || {})) }) },
   { key: "codexDetail", builder: "codex.codexForGM", carries: ["codex topics", "known facts"],
     reachedBy: "codex screen", spec: "§13", views: ["turn", "ask", "quest"],
     build: (env) => codexForGM(env.character, { playerInput: env.playerInput || env.exactWords || "", locationId: env.character.currentLocationId, questTitles: env.focusQuest ? [env.focusQuest.title] : (env.character.quests || []).filter(q => q.status === "active").map(q => q.title) }) },

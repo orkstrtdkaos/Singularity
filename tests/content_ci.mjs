@@ -22,7 +22,7 @@ const check = (label, cond, detail = "") => cond ? ok(label) : fail(label + (det
 // this set is content the engine cannot see — exactly what bit quests. Keep in sync with state.js.
 const HANDLED = {
   core: new Set(["spectrums", "rules", "abilities", "items"]),
-  valley: new Set(["locations", "npcs", "events", "companions", "lore", "encounters", "items", "quests"]),
+  valley: new Set(["locations", "npcs", "events", "companions", "lore", "encounters", "items", "quests", "tradition_arcs", "npc_quests"]),
 };
 
 const PACKS = [
@@ -35,7 +35,7 @@ const PACKS = [
 // reads ONLY through the manifest (no hardcoded paths, no positional rules[0]). This is the check that
 // was missing: it used to cover the VALLEY manifest only, so an unlisted core rules or ability file
 // (attribute_gates jumping to rules[0]; 4 reach_* files never loading) sailed straight through.
-const STRICT_DIRS = { core: ["rules", "abilities"], valley: ["locations", "npcs", "events", "companions", "encounters", "items", "lore"] };
+const STRICT_DIRS = { core: ["rules", "abilities"], valley: ["locations", "npcs", "events", "companions", "encounters", "items", "lore", "tradition_arcs"] };
 
 for (const pack of PACKS) {
   const m = rj(pack.manifest);

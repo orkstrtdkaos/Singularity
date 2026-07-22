@@ -10,6 +10,7 @@
 // existing quest doesn't fork a duplicate. Giver/location tie to codex entityIds.
 
 import { namesMatch, resolveByName, smartClamp } from "./namematch.js";
+import { traditionOf } from "./traditions.js";
 
 /** Resolve an incoming quest op to an existing quest: exact id → slugified-title id →
  *  title/alias fuzzy. Returns the quest or null. */
@@ -481,4 +482,82 @@ export function structuredQuestsForGM(character, opts = {}) {
     }
     return line;
   }).join("\n");
+}
+
+/** SNG-203 tier-2 (Tradition Arc): the traditions a character actually practices — the union of the
+ *  teachers they've engaged and the traditions of the abilities they own. Foreclosed traditions drop out.
+ *  This is the interest signal that decides which tradition arcs are worth surfacing at all. */
+export function practicedTraditions(character, content = {}) {
+  const set = new Set(Object.keys(character?.teachers || {}));
+  const catalog = content.abilities || {};
+  const index = content.traditionIndex;
+  for (const o of (character?.abilities || [])) {
+    const ab = catalog[o.abilityId];
+    const t = ab ? traditionOf(ab, index) : (index?.abilityToTradition?.[o.abilityId] || null);
+    if (t) set.add(t);
+  }
+  for (const f of (character?.foreclosed || [])) set.delete(f);
+  return set;
+}
+
+/** SNG-203 §4: the tradition arc's CURRENT beat, chosen from the character's standing with its teacher.
+ *  finding → they practice the craft but haven't found the deep teacher · proving → teacher met, not yet
+ *  committed · ultimate → teacher willing, the capstone is learnable · complete → capstone owned. The
+ *  gate mirrors the arc's own authored gate language (teachers[trad] = {met, willing}) exactly. */
+export function traditionArcBeat(arc, character) {
+  if (!arc || !Array.isArray(arc.beats)) return null;
+  const beatBy = (name) => arc.beats.find(b => b.beat === name) || null;
+  const owns = arc.capstoneAbility && (character?.abilities || []).some(a => a.abilityId === arc.capstoneAbility);
+  if (owns) return { beat: "complete", def: null };
+  const t = character?.teachers?.[arc.traditionId] || null;
+  if (t && t.met && t.willing) return { beat: "ultimate", def: beatBy("ultimate") };
+  if (t && t.met) return { beat: "proving", def: beatBy("proving") };
+  return { beat: "finding", def: beatBy("finding") };
+}
+
+/** GM block for the character's live tradition arcs: for each tradition they practice that has an authored
+ *  arc, name the teacher, the beat they're on, its gate, and the one quest that beat hands the player. The
+ *  ultimate beat carries the SNG-197 doctrine — the capstone is learned in a SCENE, never a menu unlock. */
+export function traditionArcForGM(character, content = {}, opts = {}) {
+  const arcs = content.traditionArcs || {};
+  if (!arcs || !Object.keys(arcs).length) return null;
+  const practiced = opts.traditions || practicedTraditions(character, content);
+  const lines = [];
+  for (const trad of practiced) {
+    const arc = arcs[trad];
+    if (!arc) continue;
+    const at = traditionArcBeat(arc, character);
+    if (!at || at.beat === "complete") continue;
+    const teacher = arc.teacher || {};
+    const q = at.def?.quest || null;
+    let line = `- TRADITION ARC [${trad}] — teacher: ${teacher.name || "unfound"}. This character is on the ${at.beat.toUpperCase()} beat`;
+    if (at.def?.name) line += ` ("${at.def.name}")`;
+    line += ".";
+    if (at.def?.gate) line += `\n  GATE (how the beat opens): ${at.def.gate}`;
+    if (q) line += `\n  THE QUEST it hands: [${q.id}] ${q.name || q.title || "?"} — ${q.premise || q.stakes || ""}`;
+    if (at.beat === "ultimate") line += `\n  ⚑ CAPSTONE DOCTRINE: learning ${arc.capstoneAbility} is a SCENE the teacher gives, not a menu unlock (SNG-197). Bring the giving into the fiction; the weight is the point.`;
+    lines.push(line);
+  }
+  return lines.length ? lines.join("\n") : null;
+}
+
+/** SNG-203 tier-6 (NPC Quest / errand): the offerable errands whose giver the character can actually reach —
+ *  the giver is present in the scene or already known (in the codex/registry). Skips errands already taken
+ *  or done. Deliberately light: an errand names a want and a task, not stakes — it is texture, not spine. */
+export function npcQuestsForGM(character, content = {}, opts = {}) {
+  const pool = content.npcQuests || [];
+  if (!Array.isArray(pool) || !pool.length) return null;
+  const known = opts.knownGivers instanceof Set ? opts.knownGivers : null;
+  const present = new Set([opts.locationGiver, ...(opts.presentNpcIds || [])].filter(Boolean));
+  const takenIds = new Set((character?.quests || []).map(q => q.id).filter(Boolean));
+  const npcqState = character?.npcQuests || {}; // { [id]: "offered"|"active"|"done" }
+  const lines = [];
+  for (const nq of pool) {
+    if (!nq || !nq.id || !nq.giver) continue;
+    if (takenIds.has(nq.id) || npcqState[nq.id] === "done") continue;
+    const reachable = present.has(nq.giver) || (known ? known.has(nq.giver) : true);
+    if (!reachable) continue;
+    lines.push(`- ERRAND [${nq.id}] from ${nq.giver}: ${nq.want}\n  TASK: ${nq.task}  →  REWARD: ${nq.reward}${nq.promotable ? "  (may grow into a real quest — promotable)" : ""}`);
+  }
+  return lines.length ? `NPC ERRANDS the GM may offer (light texture — not logged as real quests unless promoted):\n${lines.join("\n")}` : null;
 }

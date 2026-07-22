@@ -104,6 +104,10 @@ export async function loadContent() {
   const encountersP = jAll((valley.provides.encounters || []).map(valleyPath));
   const loreP = Promise.all(loreProvides.map(p => fetchText(valleyPath(p))));
   const questsP = jSettled((valley.provides.quests || []).map(valleyPath));
+  // SNG-203: the quest hierarchy's new tiers — tradition arcs (tier 2, keyed by traditionId) + npc quests
+  // (tier 6, the errand tier). Independent, tolerant fetches like everything else; a miss disables the tier.
+  const traditionArcsP = jSettled((valley.provides.tradition_arcs || []).map(valleyPath));
+  const npcQuestsP = jSettled((valley.provides.npc_quests || []).map(valleyPath));
 
   // ability-arch v2: tolerant defaults so the engine can read the new fields before the content
   // classification pass tags every ability. rankProgression defaults to "use" (depth is earned, not
@@ -164,6 +168,12 @@ export async function loadContent() {
   // accept an aggregated file ({quests:[…]}), a bare array, or a single standalone quest/arc object.
   let quests = [];
   for (const r of await questsP) if (r.status === "fulfilled") { const qf = r.value; quests = quests.concat(qf.quests || (Array.isArray(qf) ? qf : (qf && qf.id ? [qf] : []))); }
+  // SNG-203: tradition arcs keyed by traditionId (the GM finds the right one for a character's people); npc
+  // quests as a flat list (the errand pool). Same tolerant shapes as quests: {tradition_arcs:[…]}/{npcQuests:[…]}/bare.
+  const traditionArcs = {};
+  for (const r of await traditionArcsP) if (r.status === "fulfilled") { const f = r.value; for (const ta of (f.tradition_arcs || f.traditionArcs || (Array.isArray(f) ? f : (f && f.traditionId ? [f] : [])))) if (ta && ta.traditionId) traditionArcs[ta.traditionId] = ta; }
+  let npcQuests = [];
+  for (const r of await npcQuestsP) if (r.status === "fulfilled") { const f = r.value; npcQuests = npcQuests.concat(f.npcQuests || f.npc_quests || (Array.isArray(f) ? f : (f && f.id ? [f] : []))); }
   // SNG-187: the tail is all INDEPENDENT fetches — the region, the generative substrate grammar +
   // arcs + gen schemas (SNG-BATCH-9, optional: a miss disables generation), origins/backgrounds
   // (SNG-063), terrain regions (SNG-082), the Accords (SNG-089), helper text (SNG-084), the substrate
@@ -219,7 +229,7 @@ export async function loadContent() {
   // SNG-187: a content-count canary at boot — cheap observability, and the proof that parallelising
   // the loaders did not silently drop or reorder any manifest group (the counts must not move).
   console.log(`[loadContent] abilities=${Object.keys(abilities).length} items=${Object.keys(items).length} locations=${Object.keys(locations).length} npcs=${Object.keys(npcs).length} challengerPools=${Object.keys(challengerPools).length} events=${Object.keys(events).length} companions=${Object.keys(companions).length} encounters=${Object.keys(encounters).length} lore=${Object.keys(lore).length} quests=${quests.length} abilitiesWithAccord=${Object.values(abilities).filter(a => a.accord).length} legendsInNpcs=${legends.roster.filter(f => f.id && npcs[f.id]).length}`);
-  const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, challengerPools, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, regions, accords, helpText, substrateModel, romanceGuidance, skillBattle, functionVocabulary, worldClock, schools, classArchetypes, startingLocation: valley.startingLocation };
+  const content = { spectrums, rules, emergence, attributeGates, skillCapacity, locationAffinities, intensity, branchForks, abilities, items, locations, npcs, challengerPools, events, companions, encounters, randomEncounters, lore, region, substrate, greaterArcs, genSchemas, legends, traditions, traditionIndex, prologue, origins, backgrounds, quests, traditionArcs, npcQuests, regions, accords, helpText, substrateModel, romanceGuidance, skillBattle, functionVocabulary, worldClock, schools, classArchetypes, startingLocation: valley.startingLocation };
   // SNG-022: bring every loaded record up to current (derive missing additive fields,
   // flag dangling cross-refs). In-memory only — Pages files are static.
   try { reconcileContent(content); } catch (err) { console.warn("[loadContent] reconcile skipped:", err.message); }

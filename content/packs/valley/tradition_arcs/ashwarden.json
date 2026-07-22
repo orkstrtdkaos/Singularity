@@ -3,7 +3,7 @@
   "id": "tradition_arc_ashwarden",
   "traditionId": "ashwarden",
   "teacher": {
-    "npcId": "ashwarden_teacher_neth",
+    "npcId": "neth_the_stayed",
     "name": "Neth, who has buried more than she has known",
     "disposition": "The ashwarden values made a person: she does not fear endings and she does not hurry them. She has attended more deaths than anyone in the valley and has never once looked away from one. She will not teach someone who wants the power. She will teach someone who understands the weight."
   },
@@ -61,7 +61,7 @@
               "Ashwarden standing toward you: raised. You came to her as the craft intends — through an ending, not through a request."
             ],
             "effects": [
-              { "type": "npc_state", "npc": "ashwarden_teacher_neth", "state": "watching", "note": "met; has seen you attend an ending rightly; open to the Proving but not yet willing" },
+              { "type": "npc_state", "npc": "neth_the_stayed", "state": "watching", "note": "met; has seen you attend an ending rightly; open to the Proving but not yet willing" },
               { "type": "disposition", "people": "ashwarden", "delta": 2 },
               { "type": "codex_fact", "text": "Neth, who has buried more than she has known, is the deep teacher of the ashwarden craft in the valley. She has met you and is deciding." },
               { "type": "quest_seed", "text": "Neth will test not your skill but your understanding of what the skill is for. The Proving is hers to set." },
@@ -78,7 +78,7 @@
               "The Proving is still available — but you will be proving something specific to her doubt, not arriving clean."
             ],
             "effects": [
-              { "type": "npc_state", "npc": "ashwarden_teacher_neth", "state": "doubtful", "note": "met but wary; the Proving will be harder, aimed at the specific thing she doubts" },
+              { "type": "npc_state", "npc": "neth_the_stayed", "state": "doubtful", "note": "met but wary; the Proving will be harder, aimed at the specific thing she doubts" },
               { "type": "codex_fact", "text": "Neth has met you and is not sure of you. She teaches the deepest ashwarden work and does not give it lightly." },
               { "type": "quest_seed", "text": "Neth's doubt is nameable and answerable — the Proving becomes about disproving it." },
               { "type": "xp", "amount": 15 }
@@ -96,7 +96,7 @@
         "name": "The Ending You Did Not Choose",
         "region": "valley",
         "tier": "tradition",
-        "giver": "ashwarden_teacher_neth",
+        "giver": "neth_the_stayed",
         "axis": "death_life",
         "traditions": ["ashwarden"],
         "premise": "Neth brings you to a death that should not be happening — someone young, someone savable-looking, someone the rootkin might even claw back for a while. And she tells you to do nothing but be there. The whole test is whether you can stay when everything in you wants to intervene.",
@@ -139,7 +139,7 @@
               "Ashwarden standing toward you: strongly raised."
             ],
             "effects": [
-              { "type": "npc_state", "npc": "ashwarden_teacher_neth", "state": "willing", "note": "willing teacher; teachers[ashwarden]={met:true,willing:true} — the SNG-100b/126 capstone gate is satisfied" },
+              { "type": "npc_state", "npc": "neth_the_stayed", "state": "willing", "note": "willing teacher; teachers[ashwarden]={met:true,willing:true} — the SNG-100b/126 capstone gate is satisfied" },
               { "type": "disposition", "people": "ashwarden", "delta": 3 },
               { "type": "codex_fact", "text": "You attended an ending you would have stopped, and stayed. Neth will teach you The Cut Thread. She is sorry she has to." },
               { "type": "quest_seed", "text": "The Ultimate remains: Neth gives the deepest ashwarden work, and the giving is a scene, not a lesson." },
@@ -157,7 +157,7 @@
               "This is not a failure of skill. It is Neth declining to make you dangerous."
             ],
             "effects": [
-              { "type": "npc_state", "npc": "ashwarden_teacher_neth", "state": "unwilling", "note": "will not teach the capstone; teachers[ashwarden].willing stays false. Not punitive — protective." },
+              { "type": "npc_state", "npc": "neth_the_stayed", "state": "unwilling", "note": "will not teach the capstone; teachers[ashwarden].willing stays false. Not punitive — protective." },
               { "type": "codex_fact", "text": "Neth watched how you met an ending and declined to teach you The Cut Thread. She will not say you failed. She will only say she cannot." },
               { "type": "quest_seed", "text": "The road back to the capstone is not a retry — it is becoming someone Neth would trust with an ending. That is a longer thing." },
               { "type": "xp", "amount": 20 }
@@ -175,7 +175,7 @@
         "name": "The Cut Thread",
         "region": "valley",
         "tier": "tradition",
-        "giver": "ashwarden_teacher_neth",
+        "giver": "neth_the_stayed",
         "axis": "death_life",
         "traditions": ["ashwarden"],
         "premise": "Neth teaches you the last thing the ashwardens hold. She does not demonstrate it. She tells you what it is, what it costs, and what it cannot be taken back from — and then she puts it in your hands and asks you to understand, before you ever use it, that there is no door on the other side of this one.",
@@ -203,8 +203,8 @@
               "You have learned The Cut Thread. What you do with it is yours to answer for."
             ],
             "effects": [
-              { "type": "npc_state", "npc": "ashwarden_teacher_neth", "state": "master", "note": "your teacher; the relationship persists. She will not teach you a deeper thing because there is no deeper thing." },
-              { "type": "ally", "npc": "ashwarden_teacher_neth", "note": "your ashwarden master; bound to you as the one who gave you the last skill" },
+              { "type": "npc_state", "npc": "neth_the_stayed", "state": "master", "note": "your teacher; the relationship persists. She will not teach you a deeper thing because there is no deeper thing." },
+              { "type": "ally", "npc": "neth_the_stayed", "note": "your ashwarden master; bound to you as the one who gave you the last skill" },
               { "type": "codex_fact", "text": "You learned The Cut Thread from Neth. The Fates' shears — one life, one cut, no undo. The deepest thing the ashwardens hold, given rather than taken." },
               { "type": "xp", "amount": 60 }
             ]

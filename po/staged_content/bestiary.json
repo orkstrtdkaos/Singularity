@@ -1,0 +1,121 @@
+{
+ "schemaVersion": 1,
+ "id": "bestiary",
+ "kind": "bestiary",
+ "note": "SNG (world-design 2026-07-22, Erik direction): morally-clean adversaries \u2014 things a character can fight and kill without it being a person with a story. Three classes. Power-tiered (riffraff/notable/regional/epic) to scale. Each entry carries the tradition-function families it PRESSURES (so the fight tests craft, not just HP) and the arc it reads from. This is the GM's pool for 'something to fight' that doesn't cost the player a moral choice \u2014 the counterpart to the challenger_pool (which is people) and legends (which are named figures).",
+ "designLaws": [
+  "No person. A bestiary entry has no name of its own, no want, no story being ended. If it would be a tragedy to kill, it belongs in NPCs, not here.",
+  "A hazard, not a villain. Its 'motivation' is at most an instinct or a broken directive \u2014 never a grievance, never a plea.",
+  "Every entry pressures FUNCTION FAMILIES, not just deals damage. A fight should ask something of the character's craft \u2014 a thing that must be sensed, unmade, warded, or outmaneuvered, so 22 of 24 traditions that don't fight-by-hitting still have a way in.",
+  "Tied to the world. Each class reads from an arc \u2014 killing them is also reading the world's temperature."
+ ],
+ "classes": {
+  "manifested_creature": {
+   "concept": "A creature bled out of native fiction by the Manifestation Storm \u2014 a thing from a domain that manifested wrong, 'wrong for here,' flagged by how badly it fits the place it's in. Not evil; misplaced, and dangerous the way a wild animal in a kitchen is dangerous.",
+   "readsFromArc": "arc_manifestation_storm",
+   "morallyClean": "It was dreamed into being by the substrate, not born. Ending it returns borrowed fiction; there is no one to mourn."
+  },
+  "feral_construct": {
+   "concept": "A mechanism whose maker is gone and whose directive rots \u2014 a pre-Transition device or Enginewright construct still running an order it no longer understands, turned dangerous by a purpose with no one to serve.",
+   "readsFromArc": "arc_what_wakes_beneath",
+   "morallyClean": "It is a broken tool, not a mind. Stopping it is repair by other means; the only tragedy is the maker who left it, and they are long gone."
+  },
+  "substrate_warped_beast": {
+   "concept": "A real animal the stirring substrate touched \u2014 a wolf, a river-thing, a bird-flock \u2014 warped past its own nature into something that hunts wrong and cannot be calmed. The saddest of the three, but past saving: the animal it was is already gone.",
+   "readsFromArc": "arc_what_wakes_beneath",
+   "morallyClean": "The creature it was is already lost to the warp. A clean end is the last mercy its original nature can be given \u2014 closer to putting down than to killing."
+  }
+ },
+ "roster": [
+  {
+   "id": "glimmerling_swarm",
+   "class": "manifested_creature",
+   "tier": "riffraff",
+   "name": "glimmerlings",
+   "look": "A flickering swarm of palm-sized things that are almost birds, almost lights, almost nothing \u2014 bled from a domain of pure attention.",
+   "danger": "Individually harmless; a swarm blinds and disorients, and they feed on whatever a person is looking at.",
+   "pressures": [
+    "KNOW (sense which are real)",
+    "WARD (shield the eyes)",
+    "UNMAKE (dispel the flicker)"
+   ],
+   "clean": "They wink out like the fiction they are. No blood, no cry."
+  },
+  {
+   "id": "hollow_pace",
+   "class": "feral_construct",
+   "tier": "riffraff",
+   "name": "a hollow-pace",
+   "look": "A waist-high walking frame, pre-Transition, still executing a patrol route for a wall that fell centuries ago. Rusted, patient, wrong.",
+   "danger": "Strikes anything that crosses its dead route; relentless, tireless, no judgment left in it.",
+   "pressures": [
+    "UNMAKE (break the directive)",
+    "MOVE (leave its route)",
+    "KNOW (read the old logic)"
+   ],
+   "clean": "You are switching off a machine that forgot how to stop. Its maker mourned it long ago."
+  },
+  {
+   "id": "warpling_hare",
+   "class": "substrate_warped_beast",
+   "tier": "riffraff",
+   "name": "a warpling",
+   "look": "Was a hare. Is now too many legs and a hunger that doesn't match its size, moving in stutters the eye can't track.",
+   "danger": "Fast, erratic, bites what it can't eat; travels in warped warrens.",
+   "pressures": [
+    "MOVE (match the stutter)",
+    "HARM (end it fast)",
+    "KNOW (predict the warp)"
+   ],
+   "clean": "The hare is already gone. What's left is a wound wearing its shape."
+  },
+  {
+   "id": "the_wrong_stag",
+   "class": "substrate_warped_beast",
+   "tier": "notable",
+   "name": "the wrong stag",
+   "look": "A great beast that was a stag, antlers grown into a lattice that hums, eyes that track things not present. It walks the tree-line and the wood goes quiet.",
+   "danger": "Charges with the lattice leading; the hum unmakes small craft; it does not flee and cannot be driven.",
+   "pressures": [
+    "WARD (against the hum)",
+    "HARM (bring down something large)",
+    "KNOW (read where it'll charge)",
+    "UNMAKE (silence the lattice)"
+   ],
+   "clean": "The old stag of the wood would weep to see it. Ending it is the mercy the warp denied."
+  },
+  {
+   "id": "tessellith",
+   "class": "manifested_creature",
+   "tier": "regional",
+   "name": "a tessellith",
+   "look": "A block-logic manifestation the size of a cart \u2014 matter that resolved into a crawling geometry of interlocking units, bled from the Blocklands seam.",
+   "danger": "Resolves what it touches into its own grammar \u2014 ground, tools, a careless limb \u2014 growing as it goes.",
+   "pressures": [
+    "UNMAKE (break the grammar)",
+    "KNOW (read the pattern)",
+    "WARD (against resolution)",
+    "SHAPE (impose your own order)"
+   ],
+   "readsAlsoFrom": "arc_block_bleed",
+   "clean": "It is the bleed made flesh \u2014 geometry, not a being. You are correcting a grammar error that grew teeth."
+  },
+  {
+   "id": "the_unmoored_choir",
+   "class": "manifested_creature",
+   "tier": "epic",
+   "name": "the unmoored choir",
+   "look": "A domain-scale manifestation: a drifting region of half-formed voices and light where a bloom set WRONG, a place that is almost a creature and almost a weather.",
+   "danger": "Everything inside it starts to un-belong \u2014 craft frays, memory loosens, the self blurs toward the choir. It spreads at its edges.",
+   "pressures": [
+    "WARD (hold the self)",
+    "KNOW (map the un-belonging)",
+    "UNMAKE (collapse the bloom)",
+    "SHAPE (give it a true fiction)",
+    "MOVE (survive inside it)"
+   ],
+   "readsAlsoFrom": "arc_manifestation_storm",
+   "clean": "A birth that went wrong and never became anyone. Ending it is the stemming 'Present at the Birth' offers \u2014 grief for a wonder, not a death."
+  }
+ ]
+}

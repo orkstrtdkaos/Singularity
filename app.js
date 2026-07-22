@@ -16,7 +16,8 @@ import { applyQuestUpdates, questsForGM, isRealQuest, startStructuredQuest, comp
 import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM } from "./engine/corrections.js";
 import { getApiKey, setApiKey, callClaude, callClaudeJSON, parseLooseJSON, setCallObserver } from "./engine/claude.js";
 import { armDevCapture, recordCall, annotateLatest, devCaptures, clearCaptures } from "./engine/devcapture.js"; // SNG-186 §2f: see the machine
-import { unearnedDepth, generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight, NOMINATE_AT } from "./engine/generate.js";
+import { unearnedDepth, generate, ensureGenerated, generatedRecords, recordAttention, livingWorldForGM, isSurfaceable, findGenerated, nominationsFor, effectiveWeight, NOMINATE_AT, buildBraidPrompt, validateBraidAuthored } from "./engine/generate.js";
+import { mintableBraidsFor, buildBraidDef, mintBraid } from "./engine/braids.js"; // SNG-197 p2: in-play braid mint + the moment
 import { syncEnabled, getSyncConfig, setSyncConfig, backupSaves, appendLedger, fetchRemoteCharacter, resolveSaveConflict, pushMergedFile, ghList, fetchRepoJSON, raceTimeout } from "./engine/sync.js";
 import { normalizeInventory, fromCatalog, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, nameItem, displayName, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates } from "./engine/inventory.js";
 import { newClock, readClock, advanceClock, getTimeSettings, setTimeSettings, ADVANCE, TIME_MODES, absoluteWorldDay, worldCount, worldDate, relativeWorldDays, getWorldEpoch, setWorldEpoch } from "./engine/worldtime.js";
@@ -62,7 +63,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.181";
+const APP_VERSION = "1.8.182";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -230,6 +231,8 @@ let pressureStreak = 0;         // pressures applied in the current idle streak 
 let pendingPressure = null;     // a world-pressure directive to weave into the next GM turn
 let pendingSubstrateNote = null; // SNG-090: a "the lattice is thin/crowded here" note for the next GM turn
 let pendingRankAdvances = []; // ability-arch v2: abilities that auto-advanced to rank 2 through use, to toast
+let pendingBraidMoments = []; // SNG-197 p2: minted/enriched braids awaiting their MOMENT modal (drained after render)
+let _braidMomentOpen = false; // one moment on screen at a time (a burst chains, never stacks)
 
 // ---------- boot ----------
 
@@ -1429,6 +1432,9 @@ function migrate(c) {
     saveCharacter(c);
     enrichPersonalArc(c);
   }
+  // SNG-197 p2: braids backfilled as stubs (before the moment existed) get the moment they never got —
+  // enriched in place + re-presented, one per load. Best-effort, non-blocking.
+  if ((c.braids || []).some(b => c.customAbilities?.[b.id]?.minted && c.customAbilities[b.id].minted.presented !== true)) presentBackfilledBraids(c);
   return c;
 }
 
@@ -3173,7 +3179,160 @@ async function runGM({ resolution, playerInput, exactWords, itemAdvance }) {
       }
     } catch (err) { console.warn("[art] moment art skipped:", err?.message); }
   }
+  // SNG-197 p2: a co-activation that ripened this turn earns a braid — authored, minted, given its moment.
+  await maybeMintBraids(result.turn);
   return result;
+}
+
+// ---------- SNG-197 part 2: the braid is a MOMENT ----------
+// A braid earned in play (or backfilled before this existed) gets its own beat — the two crafts named,
+// what they became, the new name, and the ONE thing it can now do that neither parent could. Never a
+// system notification (§3): its own modal, reachable + renameable again from the skill wheel node.
+
+function braidEmergentLine(def) {
+  const verb = def?.minted?.emergent;
+  const grant = def?.tree?.[0]?.grants || "";
+  if (verb) return `<div class="braid-moment-new">✦ It can now <strong>${esc(verb)}</strong> — ${esc(grant)}</div>`;
+  return grant ? `<div class="braid-moment-new">✦ ${esc(grant)}</div>` : "";
+}
+
+/** The player overrules the GM's name (§2: the name is the GM's, and the player's only if they want it).
+ *  Persists onto the live def + held row + save; a player name is never later overwritten by enrichment. */
+function renameBraid(def, name) {
+  const clean = String(name || "").trim().slice(0, 60);
+  if (!clean || !def) return;
+  def.name = clean;
+  def.minted = def.minted || {};
+  def.minted.namedBy = "player";
+  if (character.customAbilities?.[def.id]) character.customAbilities[def.id].name = clean;
+  const held = (character.braids || []).find(b => b.id === def.id);
+  if (held) held.name = clean;
+  saveCharacter(character);
+}
+
+/** A small rename popover reachable from the braid's node on the skill wheel (§2: the control is reachable
+ *  from wherever the braid is shown, not only the mint beat). Reuses the .help-overlay surface. */
+function showBraidRename(def, onDone) {
+  if (!def) return;
+  document.getElementById("help-pop")?.remove();
+  const pop = document.createElement("div");
+  pop.id = "help-pop"; pop.className = "help-overlay";
+  const close = () => { pop.remove(); if (onDone) onDone(); };
+  pop.innerHTML = `<div class="help-card" role="dialog" aria-label="Rename braid">
+    <div class="help-short">Rename <strong>${esc(def.name)}</strong> — the GM named it; the name is yours if you want it.</div>
+    <div class="braid-moment-rename"><input id="braid-rename-in" maxlength="60" value="${esc(def.name)}"><button class="link-btn" id="braid-rename-go">Save</button></div>
+    <div class="help-foot"><button class="btn" id="help-close">Done</button></div>
+  </div>`;
+  document.body.appendChild(pop);
+  pop.addEventListener("click", ev => { if (ev.target === pop) close(); });
+  document.getElementById("help-close").onclick = close;
+  document.getElementById("braid-rename-go").onclick = () => { const v = String(document.getElementById("braid-rename-in").value || "").trim(); if (v) { renameBraid(def, v); close(); } };
+}
+
+/** The mint MOMENT modal — reuses the .help-overlay surface (phone tap-away identical) with its own
+ *  celebratory .braid-moment styling. Carries the optional rename control inline. */
+function showBraidMoment(def) {
+  if (!def) return;
+  _braidMomentOpen = true;
+  document.getElementById("help-pop")?.remove();
+  const parents = (def.minted?.sourceNames || []).map(esc).join("</strong> and <strong>");
+  const pop = document.createElement("div");
+  pop.id = "help-pop"; pop.className = "help-overlay";
+  const close = () => { pop.remove(); _braidMomentOpen = false; flushBraidMoments(); };
+  pop.innerHTML = `<div class="help-card braid-moment" role="dialog" aria-label="A braid forms">
+    <div class="braid-moment-kicker">✦ A BRAID FORMS ✦</div>
+    <div class="braid-moment-parents"><strong>${parents}</strong></div>
+    <div class="braid-moment-arrow">braided together into</div>
+    <h2 class="braid-moment-name" id="braid-name">${esc(def.name)}</h2>
+    <p class="braid-moment-desc">${esc(def.description || "")}</p>
+    ${braidEmergentLine(def)}
+    <div class="braid-moment-rename">
+      <input id="braid-rename-in" maxlength="60" placeholder="…or name it yourself" value="${def.minted?.namedBy === "player" ? esc(def.name) : ""}">
+      <button class="link-btn" id="braid-rename-go">Make it mine</button>
+    </div>
+    <div class="help-foot"><button class="btn" id="braid-moment-close">Hold it close</button></div>
+  </div>`;
+  document.body.appendChild(pop);
+  pop.addEventListener("click", ev => { if (ev.target === pop) close(); });
+  document.getElementById("braid-moment-close").onclick = close;
+  document.getElementById("braid-rename-go").onclick = () => {
+    const v = String(document.getElementById("braid-rename-in").value || "").trim();
+    if (!v) return;
+    renameBraid(def, v);
+    document.getElementById("braid-name").textContent = def.name;
+  };
+}
+
+/** Show the next queued braid moment (one on screen at a time; a burst chains on dismiss, never stacks). */
+function flushBraidMoments() {
+  if (_braidMomentOpen || !pendingBraidMoments.length) return;
+  showBraidMoment(pendingBraidMoments.shift());
+}
+
+/** SNG-197 p2: mint any braid a co-activation ripened THIS turn — authored rich, minted, given its moment.
+ *  Async but never blocks the turn: on ANY failure the stub still mints and the moment still fires. One per
+ *  turn (the richest) so a burst of pairings doesn't spam. */
+async function maybeMintBraids(turn) {
+  try {
+    const catalog = fullCatalog();
+    const mintable = mintableBraidsFor(character, { catalog });
+    if (!mintable.length) return;
+    const def = await authorAndMintBraid(mintable[0], catalog);
+    if (!def) return;
+    turn.narration = (turn.narration || "") + `\n\n*✦ A braid forms — **${(def.minted?.sourceNames || []).join(" and ")}** become **${def.name}**.*`;
+    pendingBraidMoments.push(def);
+    setTimeout(flushBraidMoments, 350);
+  } catch (err) { console.warn("[braid] mint skipped:", err?.message); }
+}
+
+/** Author (best-effort) + mint one mintable pairing. The model authors name/description/emergent verb; a
+ *  hallucinated verb is dropped by the validator AND buildBraidDef (§4). On any authoring failure the stub
+ *  mints (SNG-196: the stub is itself playable). Returns the minted def, or null if already braided. */
+async function authorAndMintBraid(m, catalog) {
+  const vocab = Object.keys(FN_INDEX?.verbToFamily || {}); // the real 24 verbs
+  let authored = {};
+  try {
+    const { system, user } = buildBraidPrompt(m.components, m.sources, { vocab, maxRank: m.maxRank, coActivations: m.coActivations });
+    const raw = await callClaudeJSON([{ role: "user", content: user }], { task: "generate", system });
+    authored = validateBraidAuthored(raw, { parentFunctions: [...new Set(m.sources.flatMap(s => s.functions || []))], vocab, maxRank: m.maxRank });
+    if (authored._rejected?.emergentFunction) console.warn("[braid] rejected hallucinated emergent verb:", authored._rejected.emergentFunction);
+  } catch (err) { console.warn("[braid] authoring skipped, minting stub:", err?.message); authored = {}; }
+  const def = buildBraidDef(character, m.components, catalog, { authored, functionVocab: vocab });
+  if (!def) return null;
+  if (!mintBraid(character, def, { at: absoluteWorldDay() })) return null;
+  def.minted.presented = true;
+  saveCharacter(character);
+  return def;
+}
+
+/** SNG-197 p2 (ROUND 2 answer 4): braids backfilled before this existed (Silas's two) arrived as stubs and
+ *  never got a moment. On load, enrich the stub in place and RE-PRESENT it — the moment it never got, not a
+ *  silent upgrade. One per load, best-effort, non-blocking (mirrors enrichPersonalArc). */
+async function presentBackfilledBraids(c) {
+  try {
+    const catalog = { ...CONTENT.abilities, ...(c.customAbilities || {}) };
+    const pending = (c.braids || []).map(b => c.customAbilities?.[b.id]).filter(d => d && d.minted && d.minted.presented !== true);
+    if (!pending.length) return;
+    let shown = pending[0];
+    if (!shown.minted.enriched && shown.minted.namedBy !== "player") {
+      const vocab = Object.keys(FN_INDEX?.verbToFamily || {});
+      const sources = (shown.minted.from || []).map(id => catalog[id]).filter(Boolean);
+      const maxRank = (shown.tree || []).length || 1;
+      if (sources.length === 2) {
+        try {
+          const { system, user } = buildBraidPrompt(shown.minted.from, sources, { vocab, maxRank });
+          const raw = await callClaudeJSON([{ role: "user", content: user }], { task: "generate", system });
+          const authored = validateBraidAuthored(raw, { parentFunctions: [...new Set(sources.flatMap(s => s.functions || []))], vocab, maxRank });
+          const rich = buildBraidDef(c, shown.minted.from, catalog, { authored, functionVocab: vocab });
+          if (rich) { rich.minted.mintedAt = shown.minted.mintedAt; c.customAbilities[shown.id] = rich; shown = rich; }
+        } catch (err) { console.warn("[braid] backfill enrich skipped:", err?.message); }
+      }
+    }
+    shown.minted.presented = true;
+    saveCharacter(c);
+    pendingBraidMoments.push(shown);
+    setTimeout(flushBraidMoments, 1200); // after the play screen has settled
+  } catch (err) { console.warn("[braid] re-present skipped:", err?.message); }
 }
 
 function applyTurn(turn, resolution, playerWords = null) {
@@ -4868,6 +5027,7 @@ function renderSkillWheel(selectedId = null, status = "") {
     ${(selAb?.functions || []).length ? `<div style="margin:4px 0">${functionChips(selAb)}</div>` : ""}
     <p class="map-details-desc">${esc(selAb?.description || "")}</p>
     ${selAb?.notFor ? `<div class="hint"><em>cannot: ${esc(selAb.notFor)}</em></div>` : ""}
+    ${selAb?.minted?.kind === "braid" && sel.owned ? `<div class="hint" style="margin-top:4px"><button class="link-btn" id="braid-card-rename" data-braid="${esc(selAb.id)}">✎ Rename this braid</button></div>` : ""}
     ${sealedSel
       ? `<div class="precursor-seal-note">Precursor crafts aren't taught or bought. <strong>A door opens only when the fiction earns it</strong> — walking the Old Roads, a precursor-touched teacher, a discovery in play. There's no button; keep playing toward it, and one day it may open.</div>`
       : sel.precursorUnlocked ? `<div class="hint" style="color:var(--accent)">✦ a door has opened — this precursor craft was earned, and can be learned.</div>${skillSelectionActions(selAb)}`
@@ -4905,6 +5065,9 @@ function renderSkillWheel(selectedId = null, status = "") {
     if (_graphDidPan) { _graphDidPan = false; return; }
     renderSkillWheel(g.dataset.wheelnode === selectedId ? null : g.dataset.wheelnode);
   };
+  // SNG-197 p2: rename a braid from its node (the second rename home, alongside the mint moment).
+  const bcr = document.getElementById("braid-card-rename");
+  if (bcr) bcr.onclick = () => { const def = fullCatalog()[bcr.dataset.braid]; if (def) showBraidRename(def, () => renderSkillWheel(selectedId, status)); };
   // SNG-124 Phase B: toggle a function-family filter (preserves zoom/selection).
   for (const b of app.querySelectorAll("[data-fnfilter]")) b.onclick = () => {
     const f = b.dataset.fnfilter; if (wheelFnFilter.has(f)) wheelFnFilter.delete(f); else wheelFnFilter.add(f);

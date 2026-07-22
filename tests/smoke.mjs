@@ -6411,11 +6411,31 @@ await (async () => {
   check("196: provenance records the two parents + how it was named", br.braidKey(def.minted.from) === "a+b" && def.minted.namedBy === "auto");
   // SNG-197 §1: the FLOOR is the union; the CEILING is the braid's OWN — an emergent function neither parent had.
   check("197 §1: notFor is drawn around the BRAID's own reach, NOT 'anything beyond the parents'", /outside this braid's own reach/.test(def.notFor) && !/beyond the braid of its two parents/.test(def.notFor));
-  const withEmergent = br.buildBraidDef(char, ["a", "b"], catalog, { authored: { emergentFunction: "bind" } });
-  check("197 §1: an emergent function (neither parent had) becomes REAL in functions — union is FLOOR, braid's own is CEILING", !def.functions.includes("bind") && withEmergent.functions.includes("bind") && withEmergent.minted.emergent === "bind");
+  // SNG-197 §4: the emergent verb is validated against the REAL 24-verb vocabulary (function_vocabulary.json),
+  // not a hand-copied list — a hallucinated verb fails the build the SNG-192-Phase-C way.
+  const fnVocab = Object.keys(buildFunctionIndex(JSON.parse(readFileSync(join(root, "content/packs/core/rules/function_vocabulary.json"), "utf8"))).verbToFamily);
+  check("197 §4: the real vocab is the 24 authored verbs (not a copy that can drift)", fnVocab.length === 24 && fnVocab.includes("bind") && !fnVocab.includes("teleport"));
+  const withEmergent = br.buildBraidDef(char, ["a", "b"], catalog, { authored: { emergentFunction: "bind" }, functionVocab: fnVocab });
+  check("197 §1/§4: a REAL vocab verb neither parent had becomes the emergent CEILING (union is FLOOR)", !def.functions.includes("bind") && withEmergent.functions.includes("bind") && withEmergent.minted.emergent === "bind");
+  const halluc = br.buildBraidDef(char, ["a", "b"], catalog, { authored: { emergentFunction: "teleport" }, functionVocab: fnVocab });
+  check("197 §4: a HALLUCINATED emergent verb (not in the 24) is REJECTED, never minted", !halluc.functions.includes("teleport") && halluc.minted.emergent === null);
+  const noVocab = br.buildBraidDef(char, ["a", "b"], catalog, { authored: { emergentFunction: "bind" } });
+  check("197 §4: with no vocab to check against, an emergent verb is UNVERIFIABLE → rejected (not accepted-and-logged)", noVocab.minted.emergent === null);
+  check("197 §4: isLegalEmergent — real verb ok, hallucination rejected, a parent's own verb is not 'emergent'", br.isLegalEmergent("bind", ["strike"], fnVocab) === true && br.isLegalEmergent("teleport", ["strike"], fnVocab) === false && br.isLegalEmergent("strike", ["strike"], fnVocab) === false);
   check("197 §1: even a stub names the NEW thing at the narration level (the rank-1 grant)", /the move only their joining makes/.test(def.tree[0].grants));
   check("197 §5: energy derives from craft DEPTH (4 + maxRank*2), not the +1 display tier", def.energyCost === 4 + 3 * 2);
   check("197: provenance flags whether the def was model-enriched (drives re-presenting stubs)", def.minted.enriched === false && withEmergent.minted.enriched === true);
+  // SNG-197 part 2: the braid AUTHORING path (generate.js) — prompt names only real available verbs; the
+  // validator drops a hallucination and records the miss; a valid reply becomes the `authored` bag.
+  const gen = await import("../engine/generate.js");
+  const braidPrompt = gen.buildBraidPrompt(["a", "b"], [catalog.a, catalog.b], { vocab: fnVocab, maxRank: 3, coActivations: 12 });
+  check("197 p2: the authoring prompt offers only verbs the parents LACK (bind available; strike/reveal excluded)", /\bbind\b/.test(braidPrompt.system) && !/ALLOWED emergent verbs[^\n]*\bstrike\b/.test(braidPrompt.system) && /JSON object/.test(braidPrompt.system));
+  const goodAuthored = gen.validateBraidAuthored({ name: "Perfect Inevitability", description: "Death read as order and order read as death.", emergentFunction: "foresee", notFor: "It does not raise the dead.", tree: [{ name: "The Read", grants: "sees the ending", cannot: "unmakes nothing" }] }, { parentFunctions: ["strike", "reveal", "conceal"], vocab: fnVocab, maxRank: 3 });
+  check("197 p2: a valid model reply validates into the authored bag (name/description/emergent/tree)", goodAuthored.name === "Perfect Inevitability" && goodAuthored.emergentFunction === "foresee" && goodAuthored.tree.length === 1 && !goodAuthored._rejected.emergentFunction);
+  const badAuthored = gen.validateBraidAuthored({ name: "Bad Braid", emergentFunction: "teleport" }, { parentFunctions: ["strike"], vocab: fnVocab, maxRank: 2 });
+  check("197 p2: the validator DROPS a hallucinated verb and records the miss", badAuthored.emergentFunction === undefined && badAuthored._rejected.emergentFunction === "teleport");
+  const authoredBraid = br.buildBraidDef(char, ["a", "b"], catalog, { authored: goodAuthored, functionVocab: fnVocab });
+  check("197 p2: the authored bag feeds buildBraidDef — GM name + validated emergent land on the minted def", authoredBraid.name === "Perfect Inevitability" && authoredBraid.minted.namedBy === "gm" && authoredBraid.functions.includes("foresee"));
   // naming: the player wins; the model can author name + tree.
   const named = br.buildBraidDef(char, ["a", "b"], catalog, { name: "The Grey Register" });
   check("196: a PLAYER name wins over the auto/model name", named.name === "The Grey Register" && named.minted.namedBy === "player");

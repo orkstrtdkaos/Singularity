@@ -17,9 +17,10 @@
 //    all generative metadata lives in a `_gen` sidecar.
 
 import { slugify } from "./quests.js";
-import { namesMatch } from "./namematch.js";
+import { namesMatch, smartClamp } from "./namematch.js";
 import { affiliationOf, regionHomeTradition } from "./affiliation.js";   // SNG-185: the ONE affiliation impl
 import { validate, missingRequired, defaultFor } from "./genschema.js";
+import { isLegalEmergent } from "./braids.js";   // SNG-197 §4: the ONE emergent-verb gate (no second impl to drift)
 
 export const GEN_TYPES = ["npc", "location", "arc"];
 const DEFAULT_SESSION_CAP = 6; // governor: mints per scene/session before we prefer reuse-only
@@ -620,4 +621,72 @@ export function describeDisposition(loc = {}) { // registry:internal
   const sp = loc.spectrum || {};
   const ax = Object.entries(sp).filter(([, v]) => Math.abs(v) > 0.2).slice(0, 4);
   return ax.map(([a, v]) => `${a} ${v > 0 ? "+" : ""}${v}`).join(", ");
+}
+
+// ---------- SNG-197 part 2: the braid authoring path (the "braid" generation type) ----------
+// A braid is NOT a persisted world-entity like npc/location/arc — it mints onto the character via
+// engine/braids.js (buildBraidDef → mintBraid), not into the generated store. So instead of routing
+// through generate()/GEN_TYPES, it gets its own pure pair: build the prompt, validate the reply. The
+// MODEL authors name/description/tree-prose/emergent-flavour + names ONE emergent verb; the ENGINE
+// (braids.js) owns tier/energy/harmRung/legality. A model verb outside the 24-verb vocabulary is
+// rejected here AND again in buildBraidDef — the SNG-197 §4 gate, in two places, never a hallucination.
+
+/** Build the braid-authoring prompt. Pure: (components, sources, opts) → { system, user }. `sources` are the
+ *  two parent ability defs; `opts.vocab` is the 24-verb list (so the model picks a REAL verb the parents
+ *  lack); `opts.example` is Erik's bar (deathsense × order_sense → "Perfect Inevitability"). The mint is an
+ *  ULTIMATE-CREATION moment — the prompt is written to reach for that, not a bland A×B concatenation. */
+export function buildBraidPrompt(components = [], sources = [], opts = {}) {
+  const vocab = Array.isArray(opts.vocab) ? opts.vocab : [];
+  const parentFns = [...new Set(sources.flatMap(s => s.functions || []))];
+  const emergentPool = vocab.filter(v => !parentFns.includes(v));   // the verbs actually available as NEW
+  const a = sources[0] || {}, b = sources[1] || {};
+  const nameOf = s => s.name || s.id || "a craft";
+  const tradition = a.tradition || a.powerSystem || "learned";
+  const system = [
+    `You are naming and describing a BRAID — the fusion of two crafts a character has practised together until they became one new thing. This is an ULTIMATE CREATION MOMENT; the player should read it and think "that's COOL". Never bland, never just the two names joined.`,
+    `The braid's FLOOR is everything both parents could do. Its CEILING is ONE new capability NEITHER parent had alone — the reason the braiding matters. Name that capability with exactly one verb from the ALLOWED list; do not invent a verb.`,
+    `ALLOWED emergent verbs (choose ONE the parents lack): ${emergentPool.join(", ") || "(none available — omit emergentFunction)"}.`,
+    `Output ONE JSON object and nothing else: { "name": string, "description": string, "emergentFunction": one allowed verb, "notFor": string, "tree": [ { "name": string, "grants": string, "cannot": string } ] }.`,
+    `The name should be evocative and in the ${tradition} idiom, of the FUSED craft — like "Perfect Inevitability" for a fusion of deathsense and order-sense, not "Deathsense × Order-Sense".`,
+    opts.rating ? `CONTENT CEILING: no more intense than ${opts.rating}. Absolute floors always apply.` : ""
+  ].filter(Boolean).join("\n\n");
+  const user = [
+    `PARENT 1: ${nameOf(a)} — functions [${(a.functions || []).join(", ") || "—"}]${a.tradition ? `, ${a.tradition}` : ""}.`,
+    `PARENT 2: ${nameOf(b)} — functions [${(b.functions || []).join(", ") || "—"}]${b.tradition ? `, ${b.tradition}` : ""}.`,
+    opts.coActivations ? `Practised together ${opts.coActivations} times — this braiding is EARNED, not incidental.` : "",
+    `Author the braid now: a name worthy of the moment, a description that goes BEYOND either parent, the ONE emergent verb that is the new reach, what it still cannot do, and up to ${Math.max(1, opts.maxRank || 1)} tree rank(s).`,
+  ].filter(Boolean).join("\n");
+  return { system, user };
+}
+
+/** Validate a model braid reply into the `authored` shape buildBraidDef consumes. Pure. Drops anything
+ *  malformed (buildBraidDef then falls back — a mint NEVER halts). The emergentFunction is gated through the
+ *  SAME isLegalEmergent used at mint: a verb outside the 24-verb vocab, or one a parent already had, is
+ *  dropped and recorded in `_rejected` so the caller can log the miss (SNG-179's record-the-miss pattern).
+ *  `opts`: { parentFunctions, vocab, maxRank }. Returns { name?, description?, notFor?, emergentFunction?,
+ *  tree?, _rejected }. */
+export function validateBraidAuthored(raw, opts = {}) {
+  const out = { _rejected: {} };
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) return out;
+  const parentFunctions = opts.parentFunctions || [];
+  const vocab = opts.vocab || null;
+  const maxRank = Math.max(1, opts.maxRank || 1);
+  if (typeof raw.name === "string" && raw.name.trim()) out.name = smartClamp(raw.name.trim(), 60);
+  if (typeof raw.description === "string" && raw.description.trim()) out.description = smartClamp(raw.description.trim(), 400);
+  if (typeof raw.notFor === "string" && raw.notFor.trim()) out.notFor = smartClamp(raw.notFor.trim(), 240);
+  const verb = typeof raw.emergentFunction === "string" ? raw.emergentFunction.trim() : "";
+  if (verb) {
+    if (isLegalEmergent(verb, parentFunctions, vocab)) out.emergentFunction = verb;
+    else out._rejected.emergentFunction = verb;   // hallucinated / already-a-parent → dropped, recorded
+  }
+  if (Array.isArray(raw.tree)) {
+    const tree = raw.tree.filter(n => n && typeof n === "object" && typeof n.name === "string" && n.name.trim()).slice(0, maxRank)
+      .map(n => ({
+        name: smartClamp(String(n.name).trim(), 60),
+        grants: smartClamp(String(n.grants || "").trim(), 200) || undefined,
+        cannot: smartClamp(String(n.cannot || "").trim(), 160) || undefined,
+      }));
+    if (tree.length) out.tree = tree;
+  }
+  return out;
 }

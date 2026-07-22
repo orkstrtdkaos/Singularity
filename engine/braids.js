@@ -46,6 +46,20 @@ export function mintableBraidsFor(character, { catalog = {}, threshold = BRAID_R
 /** The stable identity of a braid = its two components, order-independent. */
 export function braidKey(components = []) { return [...components].sort().join("+"); } // registry:internal
 
+/** SNG-197 §4: is `verb` a LEGAL emergent function for a braid — the CEILING a player can point at as NEW?
+ *  Three conditions, all required: it is a non-empty string; NEITHER parent already had it (an emergent is
+ *  by definition something new); and it is a real verb from the 24-verb function vocabulary
+ *  (function_vocabulary.json) — never a model hallucination. `vocab` is the set of valid verbs
+ *  (`Object.keys(buildFunctionIndex(...).verbToFamily)`). Without a vocab to check against, NOTHING is legal:
+ *  a verb that cannot be verified is REJECTED, not accepted-and-logged — the SNG-192 Phase C gate, applied to
+ *  generated rather than authored content. This is the code the SNG-197 part-1 comment deferred to part 2. Pure. */
+export function isLegalEmergent(verb, parentFunctions = [], vocab = null) {
+  if (typeof verb !== "string" || !verb) return false;
+  if ((parentFunctions || []).includes(verb)) return false;   // not emergent if a parent already reached it
+  const set = vocab instanceof Set ? vocab : Array.isArray(vocab) ? new Set(vocab) : null;
+  return !!set && set.has(verb);
+}
+
 /** SNG-196 + SNG-197 §5: a braid's TIER + learn-gate, scaled to the POWER of the two crafts braided.
  *  `maxRank` is the DEEPER parent's current rank (1..3) — it sets the tree depth and the energy. A braid is
  *  ONE TIER BEYOND its parents (a fusion is *more* than either — the same doctrine as §1's ceiling), so the
@@ -73,12 +87,14 @@ export function buildBraidDef(character, components, catalog = {}, opts = {}) {
   const authored = opts.authored || {};
   const srcNames = sources.map(s => s.name || s.id);
   const harmRung = sources.map(s => s.harmRung || "none").sort((a, b) => HARM_ORDER.indexOf(b) - HARM_ORDER.indexOf(a))[0] || "none";
-  // SNG-197 §1: the FLOOR is the union of both parents; the CEILING is the braid's OWN — an EMERGENT function
-  // neither parent had (the line a player can point at that is NEW). The caller validates it against the
-  // 24-verb vocab (a hallucinated verb is rejected, never accepted-and-logged). Without the model (a stub
-  // mint) the emergent capability lives at the narration level in the rank-1 grant; enrichment adds the verb.
+  // SNG-197 §1+§4: the FLOOR is the union of both parents; the CEILING is the braid's OWN — an EMERGENT
+  // function neither parent had (the line a player can point at that is NEW). isLegalEmergent enforces the
+  // 24-verb vocab HERE, in code (part 1 left it a comment): a hallucinated verb is REJECTED, not
+  // accepted-and-logged. Pass the vocab via opts.functionVocab (Object.keys(fnIndex.verbToFamily)); without
+  // it, no emergent verb is minted. A stub mint (no authored, no vocab) keeps the emergent at the narration
+  // level in the rank-1 grant; enrichment adds the validated verb.
   const parentFunctions = [...new Set(sources.flatMap(s => s.functions || []))];
-  const emergent = (typeof authored.emergentFunction === "string" && authored.emergentFunction && !parentFunctions.includes(authored.emergentFunction)) ? authored.emergentFunction : null;
+  const emergent = isLegalEmergent(authored.emergentFunction, parentFunctions, opts.functionVocab) ? authored.emergentFunction : null;
   const functions = emergent ? [...parentFunctions, emergent] : parentFunctions;
   const tradition = sources[0]?.tradition || sources[0]?.powerSystem || "learned";
   const namedByPlayer = !!opts.name;

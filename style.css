@@ -616,6 +616,22 @@ img[data-lightbox] { cursor: zoom-in; }
 .help-card .help-more { margin-top:8px; color:var(--ink-dim); font-size:13.5px; line-height:1.55; }
 .help-card .help-foot { display:flex; gap:8px; justify-content:space-between; align-items:center; margin-top:14px; }
 
+/* SNG-197 p2: the braid MOMENT — an ULTIMATE-CREATION beat, not a system notification. */
+.help-card.braid-moment { max-width:460px; text-align:center; border-color:var(--accent);
+  background:radial-gradient(120% 120% at 50% 0%, color-mix(in srgb, var(--accent) 14%, var(--panel)) 0%, var(--panel) 62%);
+  box-shadow:0 8px 40px color-mix(in srgb, var(--accent) 30%, rgba(0,0,0,0.5)); animation:braidRise 420ms ease-out; }
+@keyframes braidRise { from { opacity:0; transform:translateY(10px) scale(0.98); } to { opacity:1; transform:none; } }
+.braid-moment .braid-moment-kicker { font-size:11.5px; letter-spacing:0.22em; color:var(--accent); font-weight:700; }
+.braid-moment .braid-moment-parents { margin-top:10px; font-size:15px; color:var(--ink-dim); }
+.braid-moment .braid-moment-arrow { margin:4px 0; font-size:12px; color:var(--ink-dim); font-style:italic; opacity:0.8; }
+.braid-moment .braid-moment-name { margin:6px 0 4px; font-size:26px; line-height:1.15; color:var(--accent); }
+.braid-moment .braid-moment-desc { font-size:14px; color:var(--ink); line-height:1.55; margin:8px 0; }
+.braid-moment .braid-moment-new { margin:10px 0 4px; padding:9px 12px; border-radius:9px; font-size:13.5px; line-height:1.5;
+  background:color-mix(in srgb, var(--accent) 12%, transparent); border:1px solid color-mix(in srgb, var(--accent) 40%, transparent); color:var(--ink); }
+.braid-moment-rename { display:flex; gap:8px; align-items:center; justify-content:center; margin-top:12px; }
+.braid-moment-rename input { flex:1; max-width:280px; padding:7px 10px; border-radius:8px; border:1px solid var(--border); background:var(--bg); color:var(--ink); font-size:13.5px; }
+.braid-moment .help-foot { justify-content:center; }
+
 /* SNG-104 — vitals x/y readout + tap/hover detail */
 .vital-row { display:flex; align-items:center; gap:6px; }
 .vital-num {

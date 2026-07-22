@@ -6,7 +6,7 @@
   "origin": "valley",
   "background": "craftsman",
   "level": 10,
-  "xp": 926,
+  "xp": 931,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -58,13 +58,13 @@
     }
   ],
   "alignment": {
-    "concrete_abstract": 0.21656817632718817,
+    "concrete_abstract": 0.22573976751082875,
     "death_life": 0.1059612828125,
     "violence_peace": 0.32649243243214565,
     "chaos_order": 0.30870783187092055,
     "emotional_logical": 0.011142889930983033,
     "falsehood_truth": 0.45081103503739184,
-    "mechanical_spiritual": 0.38584882833987,
+    "mechanical_spiritual": 0.3915563869228765,
     "demonic_angelic": 0.1272314375,
     "dark_light": 0.13885334374999997,
     "space_time": -0.005676249999999997,
@@ -76,7 +76,7 @@
   "maxHealth": 70,
   "health": 70,
   "maxEnergy": 145,
-  "energy": 117,
+  "energy": 111,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -500,24 +500,48 @@
         "player": "Move t9 the convergence point with the waystaff and Teva. Activate the chamber from there and have Aevi narrate the options that come alive.",
         "summary": "Cellaceron steps to the convergence point with Teva and the Waystaff — the chamber gathers its attention inward and offers three: read the count, receive a direction, or let it keep holding.",
         "narration": "You take the step.\n\nThe convergence point is only a few paces ahead, but you feel the distance before you cross it. The floor's warmth is uniform everywhere else — here it rises through the sole of your boot and into your heel, a steady welcoming pressure, the same four seconds as the pulse above and below and around you. You plant the Waystaff's grip-end at the center of the three heat-channels where they meet. The nodes respond immediately. All four burn another degree brighter — not flickering, not cycling, just clean and steady, like lamps that have been waiting for someone to sit by them.\n\nTeva moves with you. She takes a position two paces to your left, her hand still flat at her sternum, and she does not speak. Her mark — faded but present — quiets further, like a listener leaning forward. Aevi drifts along the Waystaff's grain and settles at the junction of the four nodes, motes very still and very bright. For a moment the chamber holds everything exactly as it is.\n\nThen the pulse shifts.\n\nIt does not deepen. It does not speed. But something in it gathers — the chamber's attention, which was diffuse before, draws itself inward toward the grip-end where the staff meets the floor. Aevi speaks without being asked, the voice coming from all four nodes at once, level and unhurried. \"There are three things the chamber can now offer,\" Aevi says. \"First, it can open a record — the wall-marks are a count, and standing here you could read that count directly rather than by sight. Second, it can orient — the convergence point holds a direction, and it will show you that direction if you ask. Third, it can hold — it has held across many cycles already, and it is not in distress if you need time to decide.\" A brief pause follows. \"I do not know what each one costs. I do not think the chamber will tell me that in advance.\""
+      },
+      {
+        "player": "Press the Waystaff's grip-end and ask the chamber to open the record — read the wall-marks' count directly from the convergence point",
+        "summary": "The wall-marks open as a record at the convergence point — a counted history crossing many eras, three different hands, and a final grouping that stops mid-count.",
+        "narration": "You press the Waystaff's grip-end down and hold it steady against the convergence point. Not a demand — a question asked quietly, at the chamber's own pace.\n\nThe four nodes brighten another degree. The warmth beneath your boot rises through the ash limb and into your palm, and then something opens.\n\nThe wall-marks come alive in your reading — not all at once, but one course at a time, the way a page turns. The absorptive face of the chamber wall is a record. Each strike is a count: some deep, some shallow, some no wider than a thumbnail. They run in courses of irregular spacing, and the count is very long. You cannot see the beginning from where you stand. The end, however, is recent — the last several strikes still hold an edge that the older ones have lost. They were made by someone who knew the count would be continued.\n\nAevi speaks through the node nearest your right hand, voice soft and level. \"Many eras,\" Aevi says. \"Not one hand. The tool changed at least three times. The interval between each group of marks is the same length each time — the four-second count, pressed into stone by whoever held this place last.\" A pause, just a breath. \"The final grouping is different. It stops mid-count. Whoever made those last marks left before the count was finished.\"\n\nTeva is very still. She says, quietly, to no one in particular, \"Someone left in the middle.\""
       }
     ],
     "lastTurn": {
-      "narration": "You take the step.\n\nThe convergence point is only a few paces ahead, but you feel the distance before you cross it. The floor's warmth is uniform everywhere else — here it rises through the sole of your boot and into your heel, a steady welcoming pressure, the same four seconds as the pulse above and below and around you. You plant the Waystaff's grip-end at the center of the three heat-channels where they meet. The nodes respond immediately. All four burn another degree brighter — not flickering, not cycling, just clean and steady, like lamps that have been waiting for someone to sit by them.\n\nTeva moves with you. She takes a position two paces to your left, her hand still flat at her sternum, and she does not speak. Her mark — faded but present — quiets further, like a listener leaning forward. Aevi drifts along the Waystaff's grain and settles at the junction of the four nodes, motes very still and very bright. For a moment the chamber holds everything exactly as it is.\n\nThen the pulse shifts.\n\nIt does not deepen. It does not speed. But something in it gathers — the chamber's attention, which was diffuse before, draws itself inward toward the grip-end where the staff meets the floor. Aevi speaks without being asked, the voice coming from all four nodes at once, level and unhurried. \"There are three things the chamber can now offer,\" Aevi says. \"First, it can open a record — the wall-marks are a count, and standing here you could read that count directly rather than by sight. Second, it can orient — the convergence point holds a direction, and it will show you that direction if you ask. Third, it can hold — it has held across many cycles already, and it is not in distress if you need time to decide.\" A brief pause follows. \"I do not know what each one costs. I do not think the chamber will tell me that in advance.\"",
-      "sceneSummary": "Cellaceron steps to the convergence point with Teva and the Waystaff — the chamber gathers its attention inward and offers three: read the count, receive a direction, or let it keep holding.",
+      "narration": "You press the Waystaff's grip-end down and hold it steady against the convergence point. Not a demand — a question asked quietly, at the chamber's own pace.\n\nThe four nodes brighten another degree. The warmth beneath your boot rises through the ash limb and into your palm, and then something opens.\n\nThe wall-marks come alive in your reading — not all at once, but one course at a time, the way a page turns. The absorptive face of the chamber wall is a record. Each strike is a count: some deep, some shallow, some no wider than a thumbnail. They run in courses of irregular spacing, and the count is very long. You cannot see the beginning from where you stand. The end, however, is recent — the last several strikes still hold an edge that the older ones have lost. They were made by someone who knew the count would be continued.\n\nAevi speaks through the node nearest your right hand, voice soft and level. \"Many eras,\" Aevi says. \"Not one hand. The tool changed at least three times. The interval between each group of marks is the same length each time — the four-second count, pressed into stone by whoever held this place last.\" A pause, just a breath. \"The final grouping is different. It stops mid-count. Whoever made those last marks left before the count was finished.\"\n\nTeva is very still. She says, quietly, to no one in particular, \"Someone left in the middle.\"",
+      "sceneSummary": "The wall-marks open as a record at the convergence point — a counted history crossing many eras, three different hands, and a final grouping that stops mid-count.",
       "choices": [
         {
-          "label": "Press the Waystaff's grip-end and ask the chamber to open the record — read the wall-marks' count directly from the convergence point",
+          "label": "Read the final grouping closely — how far through a cycle did it stop, and does the count's rhythm suggest someone left by choice or was interrupted?",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "mechanical_spiritual": 0.5,
-            "concrete_abstract": 0.4
+            "concrete_abstract": 0.2,
+            "mechanical_spiritual": 0.4
           },
           "difficulty": 15,
           "intentTags": [
             "study",
             "careful"
+          ],
+          "abilityId": "keen_appraisal",
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask the chamber for the second thing — receive orientation, a direction it wants to point toward.",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "mechanical_spiritual": 0.5,
+            "concrete_abstract": 0.3
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "devote"
           ],
           "abilityId": "braid_prism_sight_sonic_resonance",
           "energyCost": null,
@@ -526,31 +550,11 @@
           "emergenceId": null
         },
         {
-          "label": "Ask the chamber to orient — hold the Waystaff level and open, and let the convergence point show you its direction",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "mechanical_spiritual": 0.6,
-            "chaos_order": 0.4
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "sonic_resonance",
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Ask Teva what she mapped from outside — her structural read gave her the chamber's shape before she crossed the threshold; let her knowledge meet the convergence point directly",
+          "label": "Ask Teva what the stopped count means to her — she spent two hours triangulating this geometry from outside; does she recognize the rhythm?",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {
-            "emotional_logical": -0.2,
-            "concrete_abstract": 0.2
+            "emotional_logical": -0.2
           },
           "difficulty": 0,
           "intentTags": [
@@ -564,79 +568,91 @@
           "emergenceId": null
         },
         {
-          "label": "Let the chamber hold — stand at the convergence point and simply listen with the full braided field, waiting to see if the chamber offers anything beyond what Aevi named",
+          "label": "Walk the perimeter of the wall slowly, letting Resonant Sight trace the full count from first strike to last — how many eras, how many keepers?",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "mechanical_spiritual": 0.4,
-            "concrete_abstract": 0.3
+            "mechanical_spiritual": 0.5,
+            "concrete_abstract": 0.2
           },
-          "difficulty": 0,
+          "difficulty": 15,
           "intentTags": [
             "study",
             "careful"
           ],
-          "abilityId": null,
+          "abilityId": "braid_prism_sight_sonic_resonance",
           "energyCost": null,
-          "trivial": true,
+          "trivial": false,
           "encounterId": null,
           "emergenceId": null
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -2,
+        "xp": 0
+      },
       "scene": {
-        "setting": "The chamber — hemispherical dressed-stone, flat-laid warm floor, no outside light. Cellaceron stands at the convergence point just short of center, Waystaff grip-end planted where the three heat-channels meet. All four nodes burning white-blue without cycling.",
+        "setting": "The chamber — hemispherical dressed-stone, flat-laid warm floor, no outside light. Cellaceron stands at the convergence point just short of center, Waystaff grip-end planted where the three heat-channels meet. All four nodes burning white-blue and steady.",
         "npcsPresent": [
           {
             "name": "Teva",
-            "state": "Standing two paces to Cellaceron's left, hand flat at her sternum, listening; mark quieted further since the step onto the convergence point"
+            "state": "Standing two paces to Cellaceron's left, hand flat at her sternum, very still — she just named aloud that someone left the count mid-way."
           },
           {
             "name": "Aevi",
-            "state": "Motes settled at the junction of all four Waystaff nodes, very still and very bright; just finished naming the chamber's three offers through the crystal"
+            "state": "Motes settled at all four Waystaff nodes, very still and very bright — just finished reading the wall-marks aloud through the instrument."
           }
         ],
         "objects": [
-          "Waystaff — grip-end at convergence point, all four nodes burning white-blue simultaneously",
+          "Waystaff — grip-end at convergence point, all four nodes burning white-blue and steady",
           "Traveler's Pack — shouldered",
           "Waterskin — in pack, diminished",
           "Beeswax taper — dark, charge spent",
           "Bark-press paper (three sheets)",
           "Resonance crystals — four nodes, seated in Waystaff lattice",
           "Liverwort mat — forward alcove (in pack)",
-          "Chamber floor — warm and steady at convergence point; heat-channels visibly converging here",
-          "Wall-marks — irregular depth-strikes in the inner absorptive face, a counted record of unknown duration"
+          "Chamber floor — warm and steady at convergence point; heat-channels visibly converging underfoot",
+          "Wall-marks — now read as a multi-era count: irregular courses, three distinct hands, final grouping stopping mid-cycle"
         ],
         "threads": [
-          "Three things the chamber can now offer: open the record, orient with a direction, or hold",
-          "Aevi does not know what each option costs — the chamber has not said",
-          "Teva's structural read from outside may hold information the convergence point could answer",
-          "Wall-marks as a long counted record — beginning or end not yet read",
-          "The chamber's held-recognition state — the door is open; what is asked of the visitor is not yet clear"
+          "The final grouping of wall-marks stops mid-count — someone left before finishing; by choice or interrupted?",
+          "The chamber still holds orientation and continued holding as two unused offers",
+          "Teva's reaction to the stopped count — she triangulated the geometry from outside; she may recognize the rhythm",
+          "Aevi named three different tool-marks and a consistent four-second interval throughout — the count was maintained across eras",
+          "Aevi does not know what the orientation offer costs, nor the holding"
         ]
       },
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "second-river-rising",
+          "note": "Wall-marks opened as a counted record from the convergence point — many eras, three hands, the same four-second interval throughout. The final grouping stops mid-count. Someone kept this place and then left before the count was done."
+        }
+      ],
       "npcUpdates": [
         {
           "op": "update",
           "npcId": "aevi",
           "name": "Aevi",
-          "note": "Spoke through all four Waystaff nodes simultaneously at the convergence point — named three things the chamber can now offer: open the record, give orientation, or hold. Admitted it does not know what each costs.",
+          "note": "Named the wall-marks through the Waystaff — many eras, three tool-changes, consistent four-second interval, and a final grouping that stops mid-count.",
           "learned": [
-            "Chamber's attention gathered toward the grip-end at the convergence point when Waystaff was planted there",
-            "Three options now available from the convergence point: record, orientation, or continued holding"
+            "The wall-marks are a counted record spanning many eras — at least three different hands and tools; the interval between each group is the chamber's four-second count; the final grouping stops mid-count, edge still sharp — recent and unfinished."
           ],
-          "statusNote": "Motes settled at all four Waystaff nodes, very still and very bright — at the convergence point with Cellaceron",
-          "status": "active"
-        }
-      ],
-      "placeUpdates": [
+          "skillsObserved": [
+            "multi-temporal record analysis through the Waystaff lattice — read era-shifts from tool and depth variation"
+          ],
+          "statusNote": "Motes settled at all four Waystaff nodes inside the chamber, very still and very bright after reading the wall-marks."
+        },
         {
-          "note": "Cellaceron stepped to the convergence point on day 9 dawn and planted the Waystaff's grip-end there — the chamber's attention gathered inward and Aevi named three available offers: read the count, receive orientation, or hold.",
-          "subPlace": {
-            "name": "The Chamber",
-            "parent": "Harmonic Heights — Lower Terrace",
-            "note": "Convergence point now occupied — Waystaff planted at the junction of the three heat-channels; chamber gathered its attention inward and offered three paths forward.",
-            "visited": true
-          }
+          "op": "update",
+          "npcId": "teva",
+          "name": "Teva",
+          "note": "Named aloud, quietly and without prompting, that someone left in the middle — her first spoken response to the wall-mark read.",
+          "statusNote": "Standing at Cellaceron's left inside the chamber, hand at sternum, absorbing the wall-mark read; said 'someone left in the middle.'",
+          "learned": [
+            "The wall-marks stop mid-count — whoever kept this place last did not finish."
+          ]
         }
       ],
       "codexUpdates": [
@@ -644,43 +660,45 @@
           "topic": "the-chamber-beyond-the-threshold",
           "label": "The Chamber",
           "kind": "mystery",
-          "fact": "Day 9 dawn: Waystaff planted at the convergence point — the chamber's attention gathered inward toward the grip-end. Aevi named three things the chamber can now offer from this position: read the wall-marks' count directly, receive an orientation/direction, or allow the chamber to continue holding. Cost of each is unknown; the chamber has not volunteered it.",
+          "fact": "Day 9 dawn: the wall-marks opened as a counted record from the convergence point — many eras, three distinct tools and hands, each group spaced at the chamber's four-second interval. The final grouping stops mid-count; its edges are still sharp. The last keeper left before finishing. The count was maintained across generations and then interrupted.",
           "links": [
             "second-river-rising",
             "teva-directional-interval-count",
-            "aevi",
+            "teva-anselvar-missing-apprentice",
             "northern-alcove-camp",
-            "teva-anselvar-missing-apprentice"
+            "aevi"
           ]
         }
       ],
-      "questUpdates": [
+      "placeUpdates": [
         {
-          "op": "progress",
-          "questId": "second-river-rising",
-          "note": "Waystaff planted at convergence point — chamber gathered attention and offered three paths: read the count in the wall-marks, receive orientation toward something, or hold. The preparation cycle's next step is now a choice."
+          "note": "Wall-marks read from convergence point on day 9 dawn — a multi-era count, three hands, consistent four-second interval throughout, final grouping stopping mid-count with edges still sharp. Someone kept this place across generations and left before the end.",
+          "flag": {
+            "wall_marks_read": "day9_dawn",
+            "final_grouping_status": "stopped_mid_count",
+            "tool_changes": "three"
+          }
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "Short movement and settling into position at the convergence point"
-      },
-      "sceneEnded": false
+        "why": "a short, focused working at the convergence point — restrained and economical"
+      }
     },
     "sceneState": {
-      "setting": "The chamber — hemispherical dressed-stone, flat-laid warm floor, no outside light. Cellaceron stands at the convergence point just short of center, Waystaff grip-end planted where the three heat-channels meet. All four nodes burning white-blue without cycling.",
+      "setting": "The chamber — hemispherical dressed-stone, flat-laid warm floor, no outside light. Cellaceron stands at the convergence point just short of center, Waystaff grip-end planted where the three heat-channels meet. All four nodes burning white-blue and steady.",
       "npcsPresent": [
         {
           "name": "Teva",
-          "state": "Standing two paces to Cellaceron's left, hand flat at her sternum, listening; mark quieted further since the step onto t"
+          "state": "Standing two paces to Cellaceron's left, hand flat at her sternum, very still — she just named aloud that someone left t"
         },
         {
           "name": "Aevi",
-          "state": "Motes settled at the junction of all four Waystaff nodes, very still and very bright; just finished naming the chamber's"
+          "state": "Motes settled at all four Waystaff nodes, very still and very bright — just finished reading the wall-marks aloud throug"
         }
       ],
       "objects": [
-        "Waystaff — grip-end at convergence point, all four nodes burning white-blue simu",
+        "Waystaff — grip-end at convergence point, all four nodes burning white-blue and ",
         "Traveler's Pack — shouldered",
         "Waterskin — in pack, diminished",
         "Beeswax taper — dark, charge spent",
@@ -688,14 +706,14 @@
         "Resonance crystals — four nodes, seated in Waystaff lattice",
         "Liverwort mat — forward alcove (in pack)",
         "Chamber floor — warm and steady at convergence point; heat-channels visibly conv",
-        "Wall-marks — irregular depth-strikes in the inner absorptive face, a counted rec"
+        "Wall-marks — now read as a multi-era count: irregular courses, three distinct ha"
       ],
       "threads": [
-        "Three things the chamber can now offer: open the record, orient with a direction, or hold",
-        "Aevi does not know what each option costs — the chamber has not said",
-        "Teva's structural read from outside may hold information the convergence point could answer",
-        "Wall-marks as a long counted record — beginning or end not yet read",
-        "The chamber's held-recognition state — the door is open; what is asked of the visitor is not yet clear"
+        "The final grouping of wall-marks stops mid-count — someone left before finishing; by choice or interrupted?",
+        "The chamber still holds orientation and continued holding as two unused offers",
+        "Teva's reaction to the stopped count — she triangulated the geometry from outside; she may recognize the rhythm",
+        "Aevi named three different tool-marks and a consistent four-second interval throughout — the count was maintained across eras",
+        "Aevi does not know what the orientation offer costs, nor the holding"
       ]
     }
   },
@@ -717,14 +735,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Party crossed the threshold and entered the chamber itself — forty paces below the forward alcove, hemispherical, warm, the pulse in the floor and the Waystaff both cycling at four seconds. The room has noticed them.",
         "Resonant Sight reads the chamber's material construction: designed to contain, to absorb at specific frequencies, and to function as a clock. The floor is a surface above something deeper. The nested three-two-three interval is new — added since the Waystaff lattice was completed.",
         "Three-two-three interval answered through the Waystaff; chamber stepped its nested count deeper in reply — it is testing whether Cellaceron can hold the ratio clean.",
         "Three-two-three sent one step deeper — the chamber answered with a third fold and held, now evaluating whether the respondent qualifies.",
         "Fourth fold sent — chamber answered with an unprompted fifth and held it steady. Testing phase over: the exchange has shifted to recognition. Teva's mark responded simultaneously.",
         "Fifth fold sent and received — the chamber holds the exchange in recognition, no longer testing. Teva's mark quieted at the same moment. The preparation cycle has acknowledged arrival; what it wants next is not yet known.",
         "Braided stone-read reveals the chamber's interior geometry: heat-channels converge at a position marker just short of center, and wall-marks are a long deliberate count — the chamber has been keeping record of something across many cycles. The convergence point has not yet been stood in.",
-        "Waystaff planted at convergence point — chamber gathered attention and offered three paths: read the count in the wall-marks, receive orientation toward something, or hold. The preparation cycle's next step is now a choice."
+        "Waystaff planted at convergence point — chamber gathered attention and offered three paths: read the count in the wall-marks, receive orientation toward something, or hold. The preparation cycle's next step is now a choice.",
+        "Wall-marks opened as a counted record from the convergence point — many eras, three hands, the same four-second interval throughout. The final grouping stops mid-count. Someone kept this place and then left before the count was done."
       ],
       "startedAt": "2026-07-03T18:55:17.042Z"
     },
@@ -971,7 +989,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d8] Held shoulder-close through the night — dim and present, not retreating",
         "[d9] Pulled tight and very quiet on entry — motes condensed to a bright cluster, casting real light, holding close.",
         "[d9] Stopped all movement the moment the chamber stepped its count — motes suspended and floor-oriented, no explanation given yet.",
         "[d9] Joined the Waystaff's lattice at Cellaceron's invitation — motes distributed along crystal nodes; spoke through the instrument for the first time, naming that it has known the chamber's pattern longer than its own memory reaches",
@@ -980,32 +997,33 @@
         "[d9] Named the chamber's shift plainly through the Waystaff — 'It has received you. This is what it was keeping count toward.' Motes very bright and still along the crystal grain.",
         "[d9] Named the chamber's held state through the Waystaff — not waiting, but holding like a door after the key turns; said the next step is not inside the chamber's instruction, and it does not know whether what comes is already on its way or must be found",
         "[d9] Moved forward along the Waystaff grain toward the convergence point without being asked — drawn to it.",
-        "[d9] Spoke through all four Waystaff nodes simultaneously at the convergence point — named three things the chamber can now offer: open the record, give orientation, or hold. Admitted it does not know what each costs."
+        "[d9] Spoke through all four Waystaff nodes simultaneously at the convergence point — named three things the chamber can now offer: open the record, give orientation, or hold. Admitted it does not know what each costs.",
+        "[d9] Named the wall-marks through the Waystaff — many eras, three tool-changes, consistent four-second interval, and a final grouping that stops mid-count."
       ],
       "knownFacts": [
-        "Aevi does not yet know whether it recognizes the thing itself, only the pattern",
         "The chamber answered the fourth fold with a fifth, unprompted — it is no longer testing",
         "The chamber was not testing indefinitely — it had a threshold, and the fifth fold met it; the preparation cycle has acknowledged arrival",
         "The chamber is in a held-recognition state — a door open, not an active wait",
         "The chamber's instruction ends at receiving arrival; what comes after is not written inside it",
         "Aevi does not know whether the next step is already approaching or must be actively sought",
         "Chamber's attention gathered toward the grip-end at the convergence point when Waystaff was planted there",
-        "Three options now available from the convergence point: record, orientation, or continued holding"
+        "Three options now available from the convergence point: record, orientation, or continued holding",
+        "The wall-marks are a counted record spanning many eras — at least three different hands and tools; the interval between each group is the chamber's four-second count; the final grouping stops…"
       ],
       "skillsObserved": [
-        "sustained directional attention through a structured harmoni",
         "passive attunement recognition — responded to the crystal's ",
         "self-reflection under pressure — named its own uncertainty p",
         "lattice-integration — distributed motes through a phononic c",
         "resonant speech — voice carried through crystal nodes rather",
-        "recognition of a chamber state-shift — named it precisely in"
+        "recognition of a chamber state-shift — named it precisely in",
+        "multi-temporal record analysis through the Waystaff lattice "
       ],
       "status": "active",
       "lastSeen": {
         "locationId": "harmonic_heights_terrace",
         "day": 9
       },
-      "statusNote": "Motes settled at all four Waystaff nodes, very still and very bright — at the convergence point with Cellaceron",
+      "statusNote": "Motes settled at all four Waystaff nodes inside the chamber, very still and very bright after reading the wall-marks.",
       "bondType": "platonic",
       "domains": {
         "primary": "harmonic"
@@ -1227,7 +1245,6 @@
     "harmonic_heights_terrace": {
       "visits": 1,
       "notes": [
-        "[d8] Day 8 night: fourth resonance crystal seated into Waystaff lattice — instrument now complete with all four nodes active. Floor-warmth beneath grip-end settled into a long quiet exhale of recognition a",
         "[d8] Day 8 night: Resonant Sight through complete four-node Waystaff confirms chamber is subterranean — hemispherical, dressed-wall geometry at roughly forty paces northeast-by-east from the alcove, below ",
         "[d9] Alcove camp broken at dawn day 9 — provisions consumed, Waystaff lifted from pulse-point, party moving south toward corridor entrance.",
         "[d9] Party entered the chamber on day 9 dawn — floor warm underfoot, four-second pulse present, chamber appeared to register arrival. No artifacts or visible mechanism at center.",
@@ -1238,7 +1255,8 @@
         "[d9] Day 9 dawn: fourth fold sent — chamber answered with a fifth, unprompted. All four Waystaff nodes fired simultaneously. Chamber has shifted from testing to recognition. Teva's mark responded in real time.",
         "[d9] Day 9 dawn: fifth fold offered and received — chamber settled into a held recognition state, five-fold pulse steady, no further deepening. Teva's mark quieted at the same moment. The exchange is no longer evaluative; the preparation cycle has acknowledged arrival.",
         "[d9] Braided stone-read confirmed: heat-channels in the floor converge at a point a few paces short of chamber center — a position marker, light-memory present for centuries. Wall-marks are a long deliberate count in the absorptive face — many strikes, many eras, no clear tonic.",
-        "[d9] Cellaceron stepped to the convergence point on day 9 dawn and planted the Waystaff's grip-end there — the chamber's attention gathered inward and Aevi named three available offers: read the count, receive orientation, or hold."
+        "[d9] Cellaceron stepped to the convergence point on day 9 dawn and planted the Waystaff's grip-end there — the chamber's attention gathered inward and Aevi named three available offers: read the count, receive orientation, or hold.",
+        "[d9] Wall-marks read from convergence point on day 9 dawn — a multi-era count, three hands, consistent four-second interval throughout, final grouping stopping mid-count with edges still sharp. Someone kept this place across generations and left before the end."
       ],
       "flags": {
         "resonance_niche_tone_event": "day2_night_second_river_frequency",
@@ -1453,7 +1471,7 @@
     "lastTickWorldDay": 22,
     "lastCanonWorldDay": 22,
     "lastGenCount": 529,
-    "turnsSinceOffer": 17
+    "turnsSinceOffer": 18
   },
   "subAttributes": {
     "strength": 2,
@@ -1578,7 +1596,6 @@
         "label": "The Chamber's Question",
         "kind": "mystery",
         "facts": [
-          "[d8] Day 8 night: Resonant Sight threaded through the complete four-node lattice confirms the chamber lies below the shaped corridor's intersection point at roughly forty paces — subterranean, hemispherica",
           "[d9] Day 9 dawn: party entered the chamber directly. Hemispherical dressed-stone, flat-laid floor, no artifact at center — only warmth underfoot and the four-second pulse running through the stone. The chamber registered their arrival.",
           "[d9] Day 9 dawn: Resonant Sight reads the chamber walls as a pressed aggregate laid in variable courses — outer layer hard and reflective to contain, inner face treated to absorb at specific frequencies. The floor is the top face of a deeper structure. The ceiling is calculated to return a four-second…",
           "[d9] Day 9 dawn: the chamber stepped its nested three-two-three interval one degree deeper in reply to Cellaceron answering the count correctly — the exchange is evaluative, not merely dialogic. Teva felt the shift through her tissue-mark simultaneously.",
@@ -1589,7 +1606,8 @@
           "[d9] Day 9 dawn: fifth fold sent without force — offered, not pushed. The chamber returned the same five folds and held. No sixth, no deepening — a settled state. Aevi named this as receipt: the chamber has recognized what it was counting toward. Teva's mark quieted simultaneously.",
           "[d9] Day 9 dawn: Aevi names the chamber's recognition state as 'holding' — not waiting. A door open after the key has turned. The chamber's instruction ends at receiving arrival; what comes after is not contained in the chamber itself. The next step must come from outside.",
           "[d9] Day 9 dawn: braided stone-read (Prism Sight + Sonic Resonance) reveals heat-channels running in the pressed aggregate floor, converging at a point just short of center — a position marker, light-memory pooled there and still present after centuries. The inner absorptive face holds irregular…",
-          "[d9] Day 9 dawn: Waystaff planted at the convergence point — the chamber's attention gathered inward toward the grip-end. Aevi named three things the chamber can now offer from this position: read the wall-marks' count directly, receive an orientation/direction, or allow the chamber to continue…"
+          "[d9] Day 9 dawn: Waystaff planted at the convergence point — the chamber's attention gathered inward toward the grip-end. Aevi named three things the chamber can now offer from this position: read the wall-marks' count directly, receive an orientation/direction, or allow the chamber to continue…",
+          "[d9] Day 9 dawn: the wall-marks opened as a counted record from the convergence point — many eras, three distinct tools and hands, each group spaced at the chamber's four-second interval. The final grouping stops mid-count; its edges are still sharp. The last keeper left before finishing. The count was…"
         ],
         "links": [
           "second-river-rising",
@@ -1893,7 +1911,7 @@
       "motes-vigil": 4,
       "light_well": 3,
       "greenlore": 4,
-      "braid_prism_sight_sonic_resonance": 3
+      "braid_prism_sight_sonic_resonance": 4
     },
     "coActivations": {
       "keen_appraisal+sonic_resonance": 1,
@@ -2084,16 +2102,16 @@
   "customEncounters": {},
   "reconcileVersion": 14,
   "tendencies": {
-    "cerebral": 38.90135971235226,
-    "strategic": 42.47879431324625,
-    "cautious": 41.34192254463643,
-    "social": 27.38712504126892,
-    "generous": 11.832184227579768,
-    "risky": 3.116883916310116,
-    "carousing": 1.161633554580572,
-    "patient": 2.5252673164415222,
-    "craft": 1.1605504642219049,
-    "devotion": 0.9268593749999999
+    "cerebral": 38.928825719543454,
+    "strategic": 41.41682445541509,
+    "cautious": 41.30837448102052,
+    "social": 26.702446915237196,
+    "generous": 11.536379621890275,
+    "risky": 3.038961818402363,
+    "carousing": 1.1325927157160578,
+    "patient": 2.462135633530484,
+    "craft": 1.1315367026163572,
+    "devotion": 0.9036878906249999
   },
   "aptitudes": [
     "strategist",
@@ -2105,9 +2123,9 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 203,
-  "updatedAt": 1784689612596,
-  "rev": 70,
+  "actionCount": 204,
+  "updatedAt": 1784689823942,
+  "rev": 71,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -2117,7 +2135,7 @@
   "syncedAt": 1783791225006,
   "teachers": {},
   "regionsKnown": {
-    "valley": 26
+    "valley": 27
   },
   "company": [],
   "foreclosed": [],
@@ -2182,17 +2200,13 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-22T01:26:18.061Z",
-      "lastAt": "2026-07-22T03:06:52.586Z",
+      "lastAt": "2026-07-22T03:10:23.937Z",
       "startDay": 22,
       "endDay": 22,
-      "beats": 17
+      "beats": 18
     }
   ],
-  "_pendingArrival": {
-    "ref": "convergence point",
-    "name": "Convergence Point",
-    "destId": null
-  },
+  "_pendingArrival": null,
   "livingCurrentAccess": [],
   "wildCurrentAccess": [],
   "braidDiscount": 0,
@@ -2243,22 +2257,22 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 17,
-    "choices": 17,
-    "characterDeltas": 10,
-    "scene": 17,
-    "npcUpdates": 14,
-    "codexUpdates": 14,
-    "timeOps": 17,
+    "sceneSummary": 18,
+    "choices": 18,
+    "characterDeltas": 11,
+    "scene": 18,
+    "npcUpdates": 15,
+    "codexUpdates": 15,
+    "timeOps": 18,
     "sceneEnded": 7,
-    "placeUpdates": 10,
+    "placeUpdates": 11,
     "moveTo": 1,
-    "questUpdates": 8,
+    "questUpdates": 9,
     "stateOps": 1,
     "factUpdates": 1,
     "stageOps": 1
   },
-  "_opTurns": 17,
+  "_opTurns": 18,
   "_intentAsked": null,
   "corrections": [
     {

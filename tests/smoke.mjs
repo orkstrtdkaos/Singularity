@@ -9,7 +9,7 @@ import { recordDeed, standingWith, reputationSummary, knownTags } from "../engin
 import { newProfile, updateProfile, aptitudeMods, deriveAptitudes, grantAptitudes, fadingAptitudes, ensureCharacterStyle, defaultRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, ensureRating, RATING_LEVEL } from "../engine/playerprofile.js";
 import { normalizeInventory, addItem, removeItem, consumeItem, equipmentBonus, inventoryForGM, resolveInventoryItem, dedupeInventory, itemUses, ensurePins, togglePin, pinnedItems, applyItemUpdates } from "../engine/inventory.js";
 import { newClock, readClock, advanceClock, getWorldEpoch, absoluteWorldDay, worldDate, worldDayAt, relativeWorldDays } from "../engine/worldtime.js";
-import { companionBonus, companionsForGM, activeCompanions, partnerAdjacentNpcs } from "../engine/companions.js";
+import { companionBonus, companionsForGM, activeCompanions, partnerAdjacentNpcs, noteCompanionWitnessed, companionMemoryForGM } from "../engine/companions.js";
 import { applyQuestUpdates, questsForGM, slugify, resolveQuest, dedupeQuests, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, threadTouched, traditionArcForGM, npcQuestsForGM, practicedTraditions, traditionArcBeat } from "../engine/quests.js";
 import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, touchSession, endSession, sessionLog, buildSessionPrompt, authorshipStats, crossCharacterAuthorship } from "../engine/chronicle.js";
 import { sanitizeScene, buildTurnContext, sanitizeIntent, narrativeRegister, ratingRegister, renderSceneHistory, tierParts, bluntnessDirective } from "../engine/gm.js";
@@ -7039,6 +7039,25 @@ await (async () => {
   check("208 §3b/§3c: a DEAD epic never stirs again (filtered from the offscreen population)", !popNoDead.some(e => e.source === "legend"));
   // and the offscreen tick wires the arc-push + clash on a moved legend.
   check("208: the offscreen tick applies the arc-push + resolves clashes when a legend moves", /applyEpicArcPush\(ws, def/.test(wtSrc208) && /resolveEpicClash\(def, rivalDef/.test(wtSrc208) && /applyEpicClashOutcome/.test(wtSrc208));
+}
+
+// ---- SNG-200B §2c: a companion gains MEMORY — it carries the deeds it witnessed at your side ----
+{
+  const ch = { companionMemory: {} };
+  noteCompanionWitnessed(ch, "marrow", { description: "You pulled the child from the flood.", weight: 3, day: 5 });
+  noteCompanionWitnessed(ch, "marrow", { description: "You lied to the ferryman about the crossing.", weight: -2, day: 6 });
+  check("200B §2c: a companion remembers a witnessed deed", ch.companionMemory.marrow.length === 2 && /pulled the child/.test(ch.companionMemory.marrow[0].text));
+  check("200B §2c: memory dedupes on text (the same deed is never double-recorded)", noteCompanionWitnessed(ch, "marrow", { description: "You pulled the child from the flood.", weight: 3, day: 5 }) === null && ch.companionMemory.marrow.length === 2);
+  for (let i = 0; i < 15; i++) noteCompanionWitnessed(ch, "marrow", { description: `a minor thing ${i}`, weight: 1, day: 10 + i });
+  check("200B §2c: memory caps (12), keeping the most SIGNIFICANT — the weight-3 rescue survives the trivia", ch.companionMemory.marrow.length === 12 && ch.companionMemory.marrow.some(m => /pulled the child/.test(m.text)));
+  check("200B §2c: companionMemoryForGM returns recent shared history, null when none", /pulled the child|minor thing/.test(companionMemoryForGM(ch, "marrow")) && companionMemoryForGM(ch, "nobody") === null);
+
+  const marrow = { id: "marrow", name: "Marrow", role: "a corvid", assistTags: [], stages: [{ stage: 1, name: "Watches", narrationHints: "h" }] };
+  const gmc = { companionMemory: { marrow: [{ text: "You pulled the child from the flood.", weight: 3, day: 5 }] }, companionBonds: { marrow: 2 } };
+  const block = companionsForGM([marrow], gmc, { companions: { tiers: {} } });
+  check("200B §2c: companionsForGM surfaces the memory as shared history (in character, never a list)", /witnessed at your side/.test(block) && /pulled the child/.test(block) && /never as a list/.test(block));
+  const appSrcC = readFileSync(join(root, "app.js"), "utf8");
+  check("200B §2c: each active companion records the deed it witnessed at the deed site", /noteCompanionWitnessed\(character, c\.id/.test(appSrcC));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

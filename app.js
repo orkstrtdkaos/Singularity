@@ -30,7 +30,7 @@ import { locationImage, sceneImage, itemImage, npcImage, getArtMode, setArtMode,
 import { walkingDays, autoMapPositions, coordForGenerated, iconForTags, terrainClass, kgOverlayEntities, regionShape, knownOverlay, isPlaceKnown, worldTierNodes, regionTierNodes, locationTierNodes, interiorLayout } from "./engine/worldmap.js";
 import { legendSurfacing, legendDeploymentForGM } from "./engine/legends.js";
 import { traditionOf, isFolkTradition, ringDistance, antipodeOf, neighborsOf, ringOrder, domainAccess, inferDomains, crystallizeDomains, reconcileStartingAbilities, isKinAdjacent, kinSecondaryOptions, domainsLegal } from "./engine/traditions.js";
-import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs, companionCodexUpdate } from "./engine/companions.js";
+import { companionBonus, companionsForGM, activeCompanions, ensureBonds, bondOf, growBond, partnerAdjacentNpcs, companionCodexUpdate, noteCompanionWitnessed } from "./engine/companions.js";
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, roleBadges, teacherOfferReady } from "./engine/company.js";
 import { buildFunctionIndex, familiesOfAbility, functionCoverage, recommendSkills, suggestForCreation, archetypeFamilies, FAMILY_GLYPH, FAMILY_COLOR, FUNCTION_FAMILIES, FAMILY_SHAPE, shapeOfFamily, familyClass } from "./engine/functions.js";
 import { toolkitForGM } from "./engine/toolkit.js";
@@ -66,7 +66,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.202";
+const APP_VERSION = "1.8.203";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -3524,7 +3524,11 @@ function applyTurn(turn, resolution, playerWords = null) {
     const comps = activeCompanions(character, CONTENT.companions);
     for (const c of comps) {
       const unlocked = [];
-      if ((turn.deeds || []).length) unlocked.push(...growBond(character, c.id, "deed", CONTENT.rules, c.stages).events);
+      if ((turn.deeds || []).length) {
+        unlocked.push(...growBond(character, c.id, "deed", CONTENT.rules, c.stages).events);
+        // SNG-200B §2c: a companion present for a deed REMEMBERS it — its shared history with the character.
+        for (const deed of turn.deeds) noteCompanionWitnessed(character, c.id, { ...deed, day: dayNow });
+      }
       if (resolution?.equipHelpers?.includes(c.name)) unlocked.push(...growBond(character, c.id, "assist", CONTENT.rules, c.stages).events);
       if (unlocked.includes("grant") && c.bondGrants) {
         const def = sanitizeNewAbility(c.bondGrants);

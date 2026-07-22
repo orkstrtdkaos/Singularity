@@ -4,6 +4,7 @@
 // with them. Same law as everywhere: data describes, engine computes, GM narrates.
 
 import { isPartnerAdjacent, relationshipLabel } from "./npcs.js";
+import { smartClamp } from "./namematch.js"; // SNG-200B §2c: a companion's witnessed-deed memory is model prose
 
 /** SNG-108: romantic partners at the party-adjacent stage travel with you in all but the mechanics.
  *  They are NOT recruited companions (no catalog def / assistTags) — they're a companion by
@@ -72,6 +73,40 @@ export function companionCodexUpdate(c, bondInfo = null) {
   return { entityId: `companion-${c?.id || c?.canonicalName || c?.name || "unknown"}`, label: c?.name || "A companion", kind: "person", fact };
 }
 
+const COMPANION_MEMORY_CAP = 12;
+/** SNG-200B §2c: a companion GAINS MEMORY — it carries the deeds it witnessed at your side, so it can refer
+ *  to your shared history in character ("it did not leave, and it did not lie to you"). Erik named this: a
+ *  companion that cannot refer to what it has been through is being relabelled, not evolving. Each active
+ *  companion witnesses each deed of the turn; the memory keeps the most SIGNIFICANT (by |weight|, oldest
+ *  dropped first) up to a cap, in chronological order for narration. Deduped on text. Returns the entry or null. */
+export function noteCompanionWitnessed(character, companionId, deed) {
+  if (!companionId || !deed?.description) return null;
+  character.companionMemory = character.companionMemory || {};
+  const mem = character.companionMemory[companionId] || (character.companionMemory[companionId] = []);
+  const entry = { text: smartClamp(String(deed.description), 200), weight: Math.max(-3, Math.min(3, deed.weight | 0)), day: deed.day ?? null };
+  if (mem.some(m => m.text === entry.text)) return null; // already remembered
+  mem.push(entry);
+  if (mem.length > COMPANION_MEMORY_CAP) {
+    // drop the LEAST significant (lowest |weight|, oldest on a tie) — keep what mattered, stay chronological
+    let worst = 0;
+    for (let i = 1; i < mem.length; i++) {
+      const less = Math.abs(mem[i].weight) < Math.abs(mem[worst].weight);
+      const tie = Math.abs(mem[i].weight) === Math.abs(mem[worst].weight) && (mem[i].day ?? 0) < (mem[worst].day ?? 0);
+      if (less || tie) worst = i;
+    }
+    mem.splice(worst, 1);
+  }
+  return entry;
+}
+
+/** SNG-200B §2c: the companion's remembered shared history, for the GM — so it speaks to what it lived
+ *  through with the character, not just what it can do. The most recent few, in the companion's voice-frame. */
+export function companionMemoryForGM(character, companionId) {
+  const mem = character?.companionMemory?.[companionId];
+  if (!mem?.length) return null;
+  return mem.slice(-4).map(m => m.text).join("; ");
+}
+
 /** Grow a bond through shared life: deeds witnessed, assists used, encounters
  *  weathered. GM has NO op for this — engine-owned entirely. Returns events. */
 export function growBond(character, companionId, kind, rules, stages = null) {
@@ -124,7 +159,10 @@ export function companionsForGM(activeCompanions, character = null, rules = null
     const b = character && rules ? bondOf(character, c.id, rules, c.stages) : null;
     const stageDef = b && c.stages ? c.stages.find(st => st.stage === b.stage) : null;
     const bondLine = b ? `\nBond with the character: ${b.bond} (${b.bond >= 6 ? "deep" : b.bond >= 3 ? "grown" : b.bond <= -3 ? "strained" : "forming"}), stage ${b.stage}${stageDef ? ` "${stageDef.name}" — ${stageDef.narrationHints}` : ""}` : "";
-    return companionLine(c) + bondLine;
+    // SNG-200B §2c: the companion's MEMORY — what it has been through with you, to speak to as shared history.
+    const memory = character ? companionMemoryForGM(character, c.id) : null;
+    const memLine = memory ? `\nWhat it has witnessed at your side (its memory — let it refer to this as shared history, in character; never as a list): ${memory}` : "";
+    return companionLine(c) + bondLine + memLine;
   }).join("\n\n");
 }
 

@@ -620,7 +620,8 @@
        "arcId": "arc_what_wakes_beneath",
        "from": 1,
        "to": 2,
-       "note": "engaging the reclamation site advances What Wakes Beneath on the shared clock \u2014 the tremor became a stirring, and everyone sees it"
+       "note": "engaging the reclamation site advances What Wakes Beneath on the shared clock \u2014 the tremor became a stirring, and everyone sees it",
+       "weight": 2
       }
      ]
     }
@@ -752,7 +753,8 @@
        "arcId": "arc_the_poles_pull",
        "from": 1,
        "to": 2,
-       "note": "a pole winning advances The Poles Pull \u2014 the drift becomes strain, everywhere"
+       "note": "a pole winning advances The Poles Pull \u2014 the drift becomes strain, everywhere",
+       "weight": 2
       },
       {
        "type": "world_event",
@@ -1215,7 +1217,8 @@
        "arcId": "arc_green_schism",
        "from": 1,
        "to": 2,
-       "note": "the seal winning advances the schism \u2014 the Accord's withdrawal becomes visible, and other woods take the lesson"
+       "note": "the seal winning advances the schism \u2014 the Accord's withdrawal becomes visible, and other woods take the lesson",
+       "weight": 2
       },
       {
        "type": "world_event",
@@ -1230,6 +1233,158 @@
       {
        "type": "xp",
        "amount": 45
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "the_maker_who_would_not_stop",
+   "name": "The Maker Who Would Not Stop",
+   "region": "valley",
+   "tier": "world",
+   "arcId": "arc_manifestation_storm",
+   "arcStageFrom": 2,
+   "arcStageTo": 1,
+   "legendBound": "cinder_vael",
+   "publicFace": "Someone found the source of the valley's runaway blooming \u2014 and slowed it.",
+   "giver": "maker_orrin",
+   "axis": "destruction_creation",
+   "traditions": [
+    "unmaker",
+    "wright",
+    "verist",
+    "lattice",
+    "stillhold",
+    "abyssal"
+   ],
+   "premise": "The Manifestation Storm has a face now, and it is a wright's. Cinder Vael makes wonders and cannot stop, and the valley's runaway blooming traces to her workshop \u2014 every marvel she builds seeds three more, and the storm is her making, multiplied. Orrin knew her once. He does not want her stopped. He wants her stopped WELL.",
+   "stakes": "If you walk away: Vael keeps making, the blooming keeps accelerating, and the storm advances past anyone's ability to shape a single birth \u2014 the world drowns in wonders that no one chose. She is not cruel. She is a flood, and floods do not stop themselves.",
+   "stages": [
+    {
+     "id": "s1",
+     "objective": "Trace the runaway blooming to its source.",
+     "condition": "Follow the manifestation-density back to Vael's workshop (via Orrin's reading, the pattern of the blooms, or a marvel that leads home).",
+     "change": "Codex: the storm has a maker. Cinder Vael, the Wright Who Would Not Stop."
+    },
+    {
+     "id": "s2",
+     "objective": "Understand why she cannot stop.",
+     "condition": "Reach Vael and learn what drives her \u2014 not malice, a hunger for the next thing that has no floor. Orrin can tell you what she was; she can show you what she became.",
+     "change": "Codex: Vael's making is compulsion, not choice. Stopping her means stopping the compulsion, not defeating a villain."
+    },
+    {
+     "id": "s3",
+     "objective": "Slow the flood.",
+     "condition": "Resolve \u2014 see outcomes. Reaching a TRUE slowing (not just breaking her tools) requires the unmaker's clean-ending craft or a verist truth she cannot make around.",
+     "change": "The storm's acceleration is broken, redirected, or left to run \u2014 and the world map shows whether the blooming receded."
+    }
+   ],
+   "routes": {
+    "unmaker": "End her workshop cleanly \u2014 not smash it, unmake it, so the compulsion has nothing to build with and the making finally stops.",
+    "verist": "Name the flood to her face \u2014 that she is not creating, she is drowning the world \u2014 a truth she cannot make her way around.",
+    "stillhold": "Get between Vael and the next thing \u2014 hold her still long enough that the compulsion has to be felt instead of fed.",
+    "lattice": "Order her making \u2014 impose a structure that lets her build without the exponential seeding, so the wonder stays and the flood stops.",
+    "wright": "Make WITH her toward a finish \u2014 give her the one thing she's never built: a made thing that completes, that needs no next.",
+    "abyssal": "Name what she fears \u2014 a world finished, with nothing left to build \u2014 and offer her a way to stop that isn't death."
+   },
+   "outcomes": [
+    {
+     "id": "unmade_clean",
+     "name": "The Flood Stemmed",
+     "summary": "Vael's runaway making is stopped, and the storm recedes.",
+     "narration": [
+      "You stop her \u2014 cleanly, the way the quest demanded, not by breaking her but by ending the compulsion that drove the making. Vael goes quiet for the first time in years.",
+      "The blooming slows. Then it recedes. Across the valley the manifestation pressure that traced to her workshop eases, and the storm steps back from Blooming toward its first, slower stirring.",
+      "Orrin got what he wanted: she was stopped well. He grieves the maker and is grateful for the mercy, both at once.",
+      "This is a greater arc PULLED BACK \u2014 the Manifestation Storm recedes on the shared clock, and the next traveler to open the world map sees it moved backward, which almost never happens. A legend was at the center of it, so it moved hard.",
+      "Unmaker disposition toward you: strongly raised \u2014 you ended something well, which is the whole of their craft."
+     ],
+     "effects": [
+      {
+       "type": "npc_state",
+       "npc": "cinder_vael",
+       "state": "stilled",
+       "note": "the compulsion ended, not the maker; she is quiet, grieving, and free \u2014 will not drive the storm again"
+      },
+      {
+       "type": "npc_state",
+       "npc": "maker_orrin",
+       "state": "grateful",
+       "note": "his old friend was stopped well; owes you a debt of manner, not just outcome"
+      },
+      {
+       "type": "disposition",
+       "people": "unmaker",
+       "delta": 3
+      },
+      {
+       "type": "codex_fact",
+       "text": "Cinder Vael's runaway making was ended cleanly. The Manifestation Storm, which was her flood multiplied, has receded."
+      },
+      {
+       "type": "arc_stage",
+       "arcId": "arc_manifestation_storm",
+       "from": 2,
+       "to": 1,
+       "weight": 3,
+       "note": "The valley's runaway blooming was traced to one maker and stopped \u2014 the storm recedes, stepping back toward its first stirring."
+      },
+      {
+       "type": "world_event",
+       "text": "The Manifestation Storm has RECEDED \u2014 the runaway blooming, traced to a single maker, was stopped, and the world map shows an arc pulled backward for once.",
+       "propagates": true,
+       "delayDays": 5
+      },
+      {
+       "type": "quest_seed",
+       "text": "A flood held back is not a flood gone. Vael is stilled, not cured \u2014 and the storm's pressure, denied here, may find another maker who cannot stop."
+      },
+      {
+       "type": "xp",
+       "amount": 55
+      }
+     ]
+    },
+    {
+     "id": "let_her_make",
+     "name": "Let the Flood Run",
+     "summary": "You don't stop her; the storm keeps accelerating.",
+     "narration": [
+      "You leave Vael to her making, or you fail to end the compulsion, and the flood runs on. The wonders keep coming, three from every one, and the world keeps filling.",
+      "It is not a defeat you can point at \u2014 everything she makes is beautiful. It is only that there is more of it every day, and less room for anything that isn't hers.",
+      "Orrin stops asking. He knew how this went; he only hoped.",
+      "The Manifestation Storm advances \u2014 the flood feeds it, and it moves toward the Blooming and past it.",
+      "The storm was already at Blooming; this pushes it further, hard, because a legend drives it."
+     ],
+     "effects": [
+      {
+       "type": "npc_state",
+       "npc": "cinder_vael",
+       "state": "unstopped",
+       "note": "makes on, unchecked; the storm is hers and she does not know she is drowning the world"
+      },
+      {
+       "type": "codex_fact",
+       "text": "Cinder Vael was left to her making. The Manifestation Storm accelerates, fed by a flood of wonders no one chose."
+      },
+      {
+       "type": "arc_stage",
+       "arcId": "arc_manifestation_storm",
+       "from": 2,
+       "to": 3,
+       "weight": 3,
+       "note": "A single maker's runaway making was left unchecked \u2014 the storm surges forward, hard, toward a world remade faster than it can be named."
+      },
+      {
+       "type": "world_event",
+       "text": "The Manifestation Storm surges \u2014 a maker who would not stop drives the blooming past anyone's ability to shape it.",
+       "propagates": true,
+       "delayDays": 5
+      },
+      {
+       "type": "xp",
+       "amount": 40
       }
      ]
     }

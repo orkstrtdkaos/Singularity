@@ -1,5 +1,31 @@
 # PO ALERT
 
+> ## 🎚️ SNG-206 — RANK-UP: the 8/8 that won't advance is a HIDDEN SECOND GATE (Aevi, 2026-07-21) — reproduced live
+> Erik: characters hit 8/8 uses and don't rank up; also saw a "rank 2→1 fix."
+>
+> **REPRODUCED on Loki (`char-mrum8y4d`), not inferred.** `see_the_made_thing`: rank 1, **exactly 8 uses**
+> (`useRankThreshold["2"]=8` → practiced YES) — and it did NOT advance. Cause: **Loki is level 1, and
+> `rankLevelReq["2"]=3`.** `autoAdvancePracticedRanks` (`progression.js:231`) does `character.level < req →
+> continue`. **The use-bar fills to 8/8 and a SECOND gate — character level ≥ 3 — silently blocks it.**
+> Working as coded; the bug is UX: the 8/8 bar reads "ready/lands through use" while a hidden level gate
+> holds it. (Confirmed NOT global: Silas L18 advances fine — his 8-use `the_raised_thing` is rank 2. The
+> gate only bites low-level characters, which is exactly a fresh romance-character like Loki.)
+>
+> **OUTCOME:** the skill UI must show BOTH bars — "8/8 practiced ✓, needs level 3" — so "practiced but not
+> yet ranked" never reads as "broken." Whether design wants the level gate at all on rank-2 is Erik's call;
+> if kept, it must be VISIBLE. If a low-level character can out-practice the level bar, the bar should say so.
+>
+> **The "2→1 fix" is NOT a bug — it's SNG-137 `correctAbilityRank` working.** It detects an ability sitting
+> at a rank higher than its practice earned (`level > 1 && uses < threshold`) and lowers it to what practice
+> supports (`corrections.js:125,248`). REPAIR-not-wish: it only ever LOWERS, never raises. So a "2→1"
+> correction means some path SET a rank without the uses behind it — worth CCode asking **which write set a
+> rank ahead of practice** (generate? backfill? a GM op?), because that's the actual upstream anomaly the
+> corrector is cleaning up after.
+>
+> **CCode ROUND 2:** (1) surface the level gate in the skill UI beside the use bar; (2) confirm design intent
+> — level-gate on auto-rank-2 kept-and-shown, or dropped; (3) trace which write produces the rank-over-
+> practice that SNG-137 keeps correcting (the 2→1 is the symptom; find the source).
+
 > ## 🐛 SNG-205 — TWO LIVE BREAKS (Aevi, 2026-07-21) — both diagnosed at origin vs live saves
 > `po/SPEC_SNG-205_two_live_breaks.md`.
 >

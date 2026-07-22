@@ -104,7 +104,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.20930267469079286,
+    "spectrumId": -0.19883754095625322,
     "violence_peace": 0.1030845625,
     "chaos_order": 0.25700971191540173,
     "mechanical_spiritual": 0.2580372847905887,
@@ -120,7 +120,7 @@
   "maxHealth": 115,
   "health": 115,
   "maxEnergy": 185,
-  "energy": 170,
+  "energy": 185,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1682,126 +1682,161 @@
         "player": "Spend a few minutes with Order-Sense on the Waymarker before packing it — look at the design of the unfinished second layer one more time now that you know what it was for.",
         "summary": "Silas reads the Waymarker's unfinished second layer one last time at dawn — the bond-channel plain, the absence exact, the road to the Crossing beginning.",
         "narration": "You hold the Waymarker flat on your open palm and let Order-Sense come in quietly — no push, just attention.\n\nThe first layer is already known to you: the oval groove, the post address seated into the disc's grain, Stillwater's Trouble legible the way a well-traveled road is legible. The second layer opens beside it like a room you have stood at the threshold of before.\n\nIt is a bond-channel. Not a locating tool — a line between two holders. Your father's half is there, cool and patient, the way a rune waits for its partner thread to be set. The open end is not broken or abandoned. It is simply waiting for Edvar Crane's half to close it. You can see the shape of what is missing the way you can see the shape of a missing tooth with your tongue — the exact contour of the absence, the exact pressure that would end it.\n\nYou fold Order-Sense back and sit with that for a moment. Then you fold the letter at its worn creases, set it on top of the disc, and begin packing."
+      },
+      {
+        "player": "Prepare a fresh breakfast for everyone - let the delicious smells greet them when the arrive in the kitchen.",
+        "summary": "Silas rises before the household and makes breakfast — the smell brings everyone to the kitchen table, and for a moment the road is still on the other side of the door.",
+        "narration": "You pack the Waymarker and the letter into the Traveler's Pack first, then go quietly down to the kitchen.\n\nAma's larder is modest but honest — a crock of oats, a heel of hard bread, a small paper twist of dried fruit, and four eggs nested in a cloth. You start the fire with Ama's flint and coax it until the coals are giving real heat. The oats go into the pot with water and a pinch of salt. The eggs you set near the heat to warm slowly, the way road mornings do not allow.\n\nThe smell finds the house before the people do. It moves up through the floorboards and the thin plaster walls — woodsmoke and warm grain, the particular sweetness of dried fruit softening in steam. You hear the east room first: a shift of weight, a slow step, the door. Veth appears in the kitchen doorway in her road coat, hair still loose, and she does not say anything. She simply sits down at the table and wraps both hands around the mug you set out for her.\n\nAma comes next, already dressed, flour habit or no flour habit this morning. She takes in the pot, the eggs, the set table, and her face does the thing it does — not surprise, just a small quiet accounting of what she is looking at. She pulls her chair out and sits. Huginn drops from somewhere above the door onto the window ledge and watches the eggs with professional patience. Pell arrives last, boots already on, her hair pulled back — she finds her mug, takes one sip standing, and then sits beside you without ceremony. The kitchen is full of the smell of a warm house on a cold morning, and for a few minutes nobody needs to go anywhere."
       }
     ],
     "lastTurn": {
-      "narration": "You hold the Waymarker flat on your open palm and let Order-Sense come in quietly — no push, just attention.\n\nThe first layer is already known to you: the oval groove, the post address seated into the disc's grain, Stillwater's Trouble legible the way a well-traveled road is legible. The second layer opens beside it like a room you have stood at the threshold of before.\n\nIt is a bond-channel. Not a locating tool — a line between two holders. Your father's half is there, cool and patient, the way a rune waits for its partner thread to be set. The open end is not broken or abandoned. It is simply waiting for Edvar Crane's half to close it. You can see the shape of what is missing the way you can see the shape of a missing tooth with your tongue — the exact contour of the absence, the exact pressure that would end it.\n\nYou fold Order-Sense back and sit with that for a moment. Then you fold the letter at its worn creases, set it on top of the disc, and begin packing.",
-      "sceneSummary": "Silas reads the Waymarker's unfinished second layer one last time at dawn — the bond-channel plain, the absence exact, the road to the Crossing beginning.",
+      "narration": "You pack the Waymarker and the letter into the Traveler's Pack first, then go quietly down to the kitchen.\n\nAma's larder is modest but honest — a crock of oats, a heel of hard bread, a small paper twist of dried fruit, and four eggs nested in a cloth. You start the fire with Ama's flint and coax it until the coals are giving real heat. The oats go into the pot with water and a pinch of salt. The eggs you set near the heat to warm slowly, the way road mornings do not allow.\n\nThe smell finds the house before the people do. It moves up through the floorboards and the thin plaster walls — woodsmoke and warm grain, the particular sweetness of dried fruit softening in steam. You hear the east room first: a shift of weight, a slow step, the door. Veth appears in the kitchen doorway in her road coat, hair still loose, and she does not say anything. She simply sits down at the table and wraps both hands around the mug you set out for her.\n\nAma comes next, already dressed, flour habit or no flour habit this morning. She takes in the pot, the eggs, the set table, and her face does the thing it does — not surprise, just a small quiet accounting of what she is looking at. She pulls her chair out and sits. Huginn drops from somewhere above the door onto the window ledge and watches the eggs with professional patience. Pell arrives last, boots already on, her hair pulled back — she finds her mug, takes one sip standing, and then sits beside you without ceremony. The kitchen is full of the smell of a warm house on a cold morning, and for a few minutes nobody needs to go anywhere.",
+      "sceneSummary": "Silas rises before the household and makes breakfast — the smell brings everyone to the kitchen table, and for a moment the road is still on the other side of the door.",
       "choices": [
         {
-          "label": "Wake Pell — time to say goodbye to Ama and step out",
+          "label": "Eat and say a proper farewell to Ama before the party steps out — let her know where the road leads and that you'll send word.",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "help"
+            "comfort"
           ],
           "trivial": true
         },
         {
-          "label": "Let Pell sleep a few minutes more and go say goodbye to Ama first, alone",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 0,
-          "intentTags": [
-            "help"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Step out onto the lane for a moment before the house stirs — read the morning air",
+          "label": "Ask Huginn quietly, over the eggs, whether it reads anything ending here in Cairnhold — or whether the road ahead is clear of that kind of weight.",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
-            "scout"
+            "study"
           ],
           "trivial": true
         },
         {
-          "label": "Check Memory and the rest of the pack before waking anyone — road-ready before the house moves",
-          "attribute": "practical",
-          "subAttribute": "craft",
+          "label": "While the household eats, brief everyone on the road: the Crossing, Edvar Crane, what you're looking for in the guild rolls — so all four of you are carrying the same map.",
+          "attribute": "social",
+          "subAttribute": "presence",
           "difficulty": 0,
           "intentTags": [
-            "careful"
+            "lead"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Finish the meal, pack the last of the Traveler's Pack, and step out — the road to the Crossing starts here.",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
+          "intentTags": [
+            "travel"
           ],
           "trivial": true
         }
       ],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 15
+      },
+      "timeOps": {
+        "hoursPassed": 1,
+        "why": "a slow breakfast, fire started from cold, the household gathering at the table"
+      },
       "scene": {
-        "setting": "Silas's quarters in Ama's house in Cairnhold — early dawn, the window grey with first light, the room still mostly dark. Silas is seated at the window with the Waymarker and the letter in hand.",
+        "setting": "Ama's kitchen in Cairnhold — early morning, the fire going, the pot on the coals, grey-white light beginning to strengthen at the window.",
         "npcsPresent": [
           {
+            "name": "Ama",
+            "state": "Seated at the kitchen table, both hands flat on the wood, watching the pot."
+          },
+          {
+            "name": "Veth Ondra",
+            "state": "Seated across from Ama, hands around her mug, road coat on, hair loose."
+          },
+          {
             "name": "Pell Ran Marsh",
-            "state": "Asleep in the bed, breathing slow and even."
+            "state": "Seated beside Silas, boots on, mug in hand — present and unhurried."
           },
           {
             "name": "Huginn",
-            "state": "On the window ledge, watching Silas — still, unhurried."
+            "state": "On the window ledge, watching the eggs with flat professional attention."
           }
         ],
         "objects": [
-          "Waymarker — in Silas's hands, second layer read and understood",
-          "Father's Sealed Letter — folded at worn creases, resting on the Waymarker",
-          "The shelf — empty",
-          "Memory (spear) — packed or leaning near the door",
-          "Traveler's Pack — nearby, not yet closed"
+          "Pot of oats over the fire",
+          "Four eggs warming at the fireside",
+          "Dried fruit softening in the steam",
+          "Mugs set out for everyone",
+          "Traveler's Pack — packed, near the door",
+          "Memory (spear) — leaning near the door"
         ],
         "threads": [
-          "The road to the Crossing begins today — Edvar Crane and the second thread wait at the end of it.",
-          "Ama is still asleep — a farewell has not been said.",
-          "Veth is in the east room — she will need a word before departure."
+          "Farewell to Ama has not been said formally — she is at the table but the parting is still ahead.",
+          "The road to the Crossing starts today — Edvar Crane and the second thread wait at the end of it."
         ]
       },
-      "codexUpdates": [
+      "npcUpdates": [
         {
-          "topic": "the-second-thread",
-          "label": "The Second Thread",
-          "kind": "mystery",
-          "fact": "The Waymarker's second layer is a bond-channel between two holders — not a locating tool. Your father's half is present and waiting. The missing half belongs to Edvar Crane. The channel is not broken; it is incomplete. Order-Sense read the exact shape of what is absent.",
-          "links": [
-            "waymarker-father-s",
-            "find-the-engineer",
-            "stillwaters-trouble"
-          ]
+          "op": "update",
+          "npcId": "silass-mother",
+          "name": "Ama",
+          "note": "Found the kitchen already warm and a meal on the coals — sat down without ceremony.",
+          "statusNote": "Seated at her kitchen table in Cairnhold — the party still present, farewells not yet spoken."
+        },
+        {
+          "op": "update",
+          "npcId": "veth-stillwater-ondra",
+          "name": "Veth (Stillwater) Ondra",
+          "note": "First to the kitchen — sat without comment, wrapped her hands around a mug.",
+          "statusNote": "At the kitchen table in Ama's house — road coat on, ready to travel once farewells are done."
+        },
+        {
+          "op": "update",
+          "npcId": "pell-ran-marsh",
+          "name": "Pell Ran Marsh",
+          "note": "Arrived last, boots already on — found her mug and sat beside Silas without ceremony.",
+          "statusNote": "At the kitchen table in Ama's house — boots on, ready for the road."
         }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "a few quiet minutes at the window before the house stirs"
-      }
+      ]
     },
     "sceneState": {
-      "setting": "Silas's quarters in Ama's house in Cairnhold — early dawn, the window grey with first light, the room still mostly dark. Silas is seated at the window with the Waymarker and the letter in hand.",
+      "setting": "Ama's kitchen in Cairnhold — early morning, the fire going, the pot on the coals, grey-white light beginning to strengthen at the window.",
       "npcsPresent": [
         {
+          "name": "Ama",
+          "state": "Seated at the kitchen table, both hands flat on the wood, watching the pot."
+        },
+        {
+          "name": "Veth Ondra",
+          "state": "Seated across from Ama, hands around her mug, road coat on, hair loose."
+        },
+        {
           "name": "Pell Ran Marsh",
-          "state": "Asleep in the bed, breathing slow and even."
+          "state": "Seated beside Silas, boots on, mug in hand — present and unhurried."
         },
         {
           "name": "Huginn",
-          "state": "On the window ledge, watching Silas — still, unhurried."
+          "state": "On the window ledge, watching the eggs with flat professional attention."
         }
       ],
       "objects": [
-        "Waymarker — in Silas's hands, second layer read and understood",
-        "Father's Sealed Letter — folded at worn creases, resting on the Waymarker",
-        "The shelf — empty",
-        "Memory (spear) — packed or leaning near the door",
-        "Traveler's Pack — nearby, not yet closed"
+        "Pot of oats over the fire",
+        "Four eggs warming at the fireside",
+        "Dried fruit softening in the steam",
+        "Mugs set out for everyone",
+        "Traveler's Pack — packed, near the door",
+        "Memory (spear) — leaning near the door"
       ],
       "threads": [
-        "The road to the Crossing begins today — Edvar Crane and the second thread wait at the end of it.",
-        "Ama is still asleep — a farewell has not been said.",
-        "Veth is in the east room — she will need a word before departure."
+        "Farewell to Ama has not been said formally — she is at the table but the parting is still ahead.",
+        "The road to the Crossing starts today — Edvar Crane and the second thread wait at the end of it."
       ]
     }
   },
   "clock": {
     "schemaVersion": 1,
     "day": 13,
-    "hour": 7,
+    "hour": 8,
     "realAnchor": null
   },
   "companions": [
@@ -2641,7 +2676,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d12] Led fully — shirt off without ceremony, the word 'mold you' tested and accepted, settled in to work with a craftsman's unhurried patience.",
         "[d12] Held still and let Silas look — received the moment plainly, said 'there' as a receipt.",
         "[d12] Received 'goddess-touched' with dry confirmation rather than flattery — the expression of a smith whose material just showed better grain than expected. Moved past ceremony and into the work without hesitation.",
         "[d12] Received the thrust-gesture and the name Ran without breaking rhythm — hands reset with a smith's load-bearing instinct, mouth at his jaw, unhurried. The name landed.",
@@ -2650,7 +2684,8 @@
         "[d12] The crescendo reached together — the soul bond's choice held and made complete a second time, in the only register that needs no words. She is close, unhurried, not releasing.",
         "[d12] Named plainly that she felt the merger seat through the bond, and that she had wanted it before Silas asked — held it back for fear it would read as pressure, and waited for the bond to carry it instead.",
         "[d12] Named the iridescent fabric plainly: made well, not crafted toward an outcome. Dry, exact, unhurried. The Wrights who make it work in beauty, not in results.",
-        "[d12] Named the iridescent fabric as standard Wright journeyman work — no enhancement toward conception. Confirmed she noticed the floor's buried hum and watched Huginn move when it happened."
+        "[d12] Named the iridescent fabric as standard Wright journeyman work — no enhancement toward conception. Confirmed she noticed the floor's buried hum and watched Huginn move when it happened.",
+        "[d13] Arrived last, boots already on — found her mug and sat beside Silas without ceremony."
       ],
       "knownFacts": [
         "The name Ran in Silas's mouth has grain — she hears the difference between a signal and a claim.",
@@ -2671,10 +2706,10 @@
         "reading a structural mark's pressure and interval from an ir"
       ],
       "status": "active",
-      "statusNote": "Settled in Silas's quarters in Ama's house — the questions named, sleep arriving.",
+      "statusNote": "At the kitchen table in Ama's house — boots on, ready for the road.",
       "lastSeen": {
         "locationId": "the_crossing",
-        "day": 12
+        "day": 13
       },
       "bondType": "romantic",
       "bondStage": "partner",
@@ -3342,7 +3377,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d12] Went still at the seating moment — the maker's mark on the letter still held back.",
         "[d12] Went completely still at the shadow-image — an Ashwarden's read of the hollow, the accumulation's shape, and the ward-marks. Has not spoken yet.",
         "[d12] Named the accumulation in the hollow's center as deliberately caught and held — not accidental drainage. Pointed plainly at the sealed letter as the likely explanation.",
         "[d12] Named the accumulation's deliberate shape before the letter confirmed it — her read was correct. Received the confirmation without visible reaction.",
@@ -3351,7 +3385,8 @@
         "[d12] Named the third line's open end plainly — the letter explains why the work stopped; the build explains what was left unfinished.",
         "[d12] Named the older mark's tradition-distance from Silas's father by groove angle — estimated it predates the father's work by some years.",
         "[d12] Named the shared stopping point as a limit — plain, unhurried, correct.",
-        "[d12] Followed Ama to the east room — the evening's work complete, palms off the table, no ceremony in the parting."
+        "[d12] Followed Ama to the east room — the evening's work complete, palms off the table, no ceremony in the parting.",
+        "[d13] First to the kitchen — sat without comment, wrapped her hands around a mug."
       ],
       "knownFacts": [
         "The shadow-map shows the accumulation caught and held at the hollow's center — the binding reads in the shadow-craft's image",
@@ -3374,10 +3409,10 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "In the east room of Ama's house in Cairnhold — settled for the night.",
+      "statusNote": "At the kitchen table in Ama's house — road coat on, ready to travel once farewells are done.",
       "lastSeen": {
         "locationId": "the_crossing",
-        "day": 12
+        "day": 13
       },
       "bondType": "sworn",
       "image": "https://image.pollinations.ai/prompt/a%20person%2C%20character%20portrait%2C%20named%20Veth%20Ondra%2C%20woman%2C%20Former%20Ashwarden%20warden%2C%20now%20teaching%20at%20the%20dark-cloth%20stall%20%E2%80%94%20has%20offered%20to%20join%20the%20party%2C%20sworn%20to%20Silas%20Weir%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=66052&nologo=true",
@@ -4090,20 +4125,19 @@
   },
   "worldState": {
     "schemaVersion": 1,
-    "lastTickDay": 12,
+    "lastTickDay": 13,
     "eventStages": {
       "water_crisis": {
-        "stage": 1,
-        "sinceDay": 1
+        "stage": 2,
+        "sinceDay": 13
       }
     },
-    "spectrumDrift": {},
+    "spectrumDrift": {
+      "death_life": -0.1,
+      "violence_peace": -0.1,
+      "falsehood_truth": -0.05
+    },
     "news": [
-      {
-        "day": 9,
-        "worldDay": 19,
-        "text": "Word has spread beyond edge-district: Neutralized a relay figure in the cut-lane without violence or alarm — The Ended Threat, Wildcraft, and The Shadow Work braided into a clean exit for Calvar and the document."
-      },
       {
         "day": 9,
         "worldDay": 19,
@@ -4198,14 +4232,19 @@
         "day": 12,
         "worldDay": 22,
         "text": "Pip Cotter, Mara's Errand-Runner: On the return leg Pip talked a street-stall keeper into letting her carry a tied bundle of wax-paper parcels two blocks for a copper, arriving back at Mara's with the errand done and one small coin of her own to show for it."
+      },
+      {
+        "day": 13,
+        "worldDay": 22,
+        "text": "The Water Crisis has worsened — First Sickness: Upstream fisher families fall ill. Boiling water becomes universal. Harmonic and Radiant leaders trade public accusations."
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-22T20:05:31.907Z",
+    "lastSharedReadAt": "2026-07-22T23:44:52.045Z",
     "lastTickWorldDay": 22,
     "lastCanonWorldDay": 22,
-    "lastGenCount": 548,
-    "turnsSinceOffer": 22,
+    "lastGenCount": 551,
+    "turnsSinceOffer": 23,
     "recentOffers": [
       {
         "thing": "The shadow-build showed Calvar's drainage failure precisely — the sleeve geometry, the collar, the east-bend junction — before it showed…",
@@ -5617,21 +5656,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 9.224162690904683,
-    "cerebral": 15.373012576273267,
-    "social": 13.001413762745667,
-    "generous": 1.8466197610045367,
-    "cautious": 3.0828557110605135,
-    "physical": 0.09986366234547493,
-    "risky": 0.10472683366670657,
-    "ruthless": 0.03339100642769728,
-    "carousing": 1.2906034073273103,
-    "amorous": 12.996448410631944,
-    "patient": 0.8921429190628418,
-    "stealth": 0.012942439398776493,
-    "devotion": 0.2644021940817093,
-    "craft": 0.7781463798217596,
-    "leadership": 0.06587845290602634
+    "strategic": 9.993558623632065,
+    "cerebral": 14.988687261866435,
+    "social": 12.676378418677025,
+    "generous": 2.8004542669794232,
+    "cautious": 3.0057843182840007,
+    "physical": 0.09736707078683805,
+    "risky": 0.1021086628250389,
+    "ruthless": 0.03255623126700485,
+    "carousing": 1.2583383221441276,
+    "amorous": 12.671537200366144,
+    "patient": 0.8698393460862708,
+    "stealth": 0.01261887841380708,
+    "devotion": 0.25779213922966654,
+    "craft": 0.7586927203262156,
+    "leadership": 0.06423149158337568
   },
   "aptitudes": [
     "strategist",
@@ -5640,7 +5679,7 @@
     "sage",
     "charmer"
   ],
-  "actionCount": 659,
+  "actionCount": 660,
   "grantsVersion": 1,
   "reconcileVersion": 16,
   "gallery": [
@@ -5990,8 +6029,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784763805393,
-  "rev": 1028,
+  "updatedAt": 1784764382307,
+  "rev": 1032,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -7876,7 +7915,9 @@
           "Deathsense",
           "Order-Sense"
         ],
-        "presented": true
+        "presented": true,
+        "shared": true,
+        "firstFinder": true
       }
     }
   },
@@ -8003,7 +8044,7 @@
   "regionsKnown": {
     "valley": 435,
     "the_palelands": 6,
-    "the_center": 51
+    "the_center": 52
   },
   "foreclosed": [
     "rootkin",
@@ -8117,10 +8158,10 @@
     {
       "id": "sess-10",
       "startedAt": "2026-07-22T20:59:08.612Z",
-      "lastAt": "2026-07-22T23:43:25.391Z",
+      "lastAt": "2026-07-22T23:53:02.304Z",
       "startDay": 22,
       "endDay": 22,
-      "beats": 25
+      "beats": 26
     }
   ],
   "company": [
@@ -8310,12 +8351,12 @@
   "_opEmitted": {
     "sceneSummary": 37,
     "choices": 37,
-    "characterDeltas": 17,
+    "characterDeltas": 18,
     "scene": 37,
-    "npcUpdates": 31,
+    "npcUpdates": 32,
     "factUpdates": 5,
     "placeUpdates": 2,
-    "codexUpdates": 15,
+    "codexUpdates": 14,
     "timeOps": 32,
     "imagePrompt": 1,
     "sceneEnded": 10,

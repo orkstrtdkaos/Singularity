@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NPC Quest (Errand)",
+  "description": "SNG-203 tier 6. The lightest tier — an errand. quest_structure.json's own rule: 'if you cannot name the cost of ignoring it, it is an errand, not a quest.' Errands are the texture of a living world; they are legitimate but must NOT be logged as, or held to the standard of, real quests. This schema DROPS the branched-outcome and multi-route requirements a real quest demands, and keeps only: giver, want, task (one testable objective), reward, and a single effect. An npc_quest that GROWS real stakes gets PROMOTED to quest_structure (the promotion path is a seam, SNG-203 §5). GM generates these freely via generate('npc_quest', ctx) from any NPC's want — this is the highest-volume, lowest-cost generation tier.",
+  "type": "object",
+  "required": ["id", "giver", "want", "task", "reward", "effect"],
+  "properties": {
+    "schemaVersion": { "type": "integer" },
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "giver": { "type": "string", "description": "npc id — the quest belongs to one person's want" },
+    "want": { "type": "string", "description": "the NPC's want, from their record — WHY they ask. Not a plot; a person needing a small thing." },
+    "task": { "type": "string", "description": "ONE engine-testable objective. place reached / person spoken to / thing obtained / thing delivered. Single step — an errand with multiple gated stages is a quest; promote it." },
+    "reward": { "type": "string", "description": "small and concrete — coin, an item, a fact, a favor, standing. Named, not vague." },
+    "effect": {
+      "type": "object",
+      "description": "ONE machine-readable delta, usually a disposition bump or a codex fact. The errand's mark on the world is small by design.",
+      "required": ["type"],
+      "properties": {
+        "type": { "type": "string", "enum": ["disposition", "codex_fact", "ally", "npc_state", "xp", "quest_seed"] }
+      }
+    },
+    "promotable": {
+      "type": "boolean", "default": false,
+      "description": "true if this errand can reveal real stakes on completion and be promoted to a full quest_structure quest. The GM sets this when the want has a shadow (SNG-203 §5)."
+    }
+  },
+  "designLaws": [
+    "An errand is not a quest and must not be logged as one. Naming it honestly is the point of a separate tier.",
+    "One step, one reward, one small mark. An errand that needs stages is a quest wearing errand's clothes — promote it, do not cram it.",
+    "The best errands make a person slightly warmer or a place slightly known. That is enough. Not everything must matter to the world.",
+    "Promotion is a gift, not a bait-and-switch: an errand that turns out to matter should feel like the world had depth, not like the errand lied."
+  ]
+}

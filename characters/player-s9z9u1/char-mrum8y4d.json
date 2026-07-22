@@ -8,7 +8,7 @@
   "whyHere": "There is Precursor work in the Valley that nobody there understands, and you understand it, and that is dangerous for everyone including you.",
   "background": "precursor_marked",
   "level": 1,
-  "xp": 90,
+  "xp": 95,
   "attributes": {
     "physical": 3,
     "mental": 3,
@@ -62,7 +62,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 49,
+  "energy": 44,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -91,305 +91,11 @@
   ],
   "deeds": [],
   "relationships": {},
-  "chronicle": [],
+  "chronicle": [
+    "Loki read the four spike entries with Tessvel Cairn in the Pressure-Routing Annex, named the pattern — something moves deeper into the lower routing channel with each morning pass — and proposed both channel access and a more personal arrangement; Tessvel confirmed the access, asked for time on the rest, and left Loki knowing exactly where to find them."
+  ],
   "currentLocationId": "pressureholt",
-  "activeScene": {
-    "locationId": "pressureholt",
-    "turns": [
-      {
-        "player": null,
-        "summary": "Loki arrives in Pressureholt at the Intake Plaza on a gray-green morning — the water crisis visible in the river itself.",
-        "narration": "Pressureholt wakes the way a machine wakes — in sequence. The gas-lamps on the lower tier click off one by one as the morning light climbs the stepped roofline, each extinguishing on a timer someone wound forty years ago and nobody has dared reset. The smell is oil and river-stone and, this morning, something faintly off beneath both. The Echo River runs gray-green where it passes under the Eastern Intake, and the Enginewrights along the quay are gathered around a sampling fixture, speaking in careful voices.\n\nYou are standing at the edge of the Intake Plaza — cobblestones fitted so precisely they have not shifted in a generation — with the early-spring chill pressing down your collar. Your Traveler's Pack sits square on your back. Cy rides your left shoulder, lens irising at intervals, its too-many legs distributing its small weight with characteristic precision. It has already, at some point between sleep and waking, tightened the left strap buckle on your pack. You did not ask it to.\n\n\"The intake baffle shows particulate variance of eleven-point-three above baseline,\" Cy announces, for the third time this morning, in its clipped antique register. It is unclear whether it expects a response. Down on the quay, one of the Enginewrights — a broad-shouldered woman in a leather apron — glances up from her sampling kit. She clocks you, then the brass creature on your shoulder, and her expression does the thing Enginewright expressions do: it catalogs the problem you might represent.\n\nThe plaza is otherwise alive with the early business of the city. A wright's apprentice hurries past carrying a disassembled clock-movement in both hands, expression suggesting a man who has made a significant mistake. Two older wrights converse near the posted notices board, their voices too low to catch from here. One of the notices is fresh — the ink still dark — and it bears the seal of the city's maintenance authority. You are new here, and nobody has fixed you yet, which means they are simply waiting to understand what, exactly, is broken."
-      },
-      {
-        "player": "Approach the wright on the quay and get a closer look at the sampling fixture — something in the particulate reading doesn't sit right",
-        "summary": "Loki reads the sampling fixture's particulate trap and identifies an anomalous ring-residue consistent with nanite substrate output — and Vessa Torquen notes that Cy seems to recognize it.",
-        "narration": "You cross the plaza at a measured pace, boots finding the fitted cobblestones with the easy familiarity of someone who grew up around precision work. The broad-shouldered wright on the quay doesn't stand when you approach — she just shifts her weight and lets you into the view of the fixture without a word, the way a craftsperson does when they recognize another one.\n\nThe sampling fixture is a column of brass and glass about the height of your hip, with four graduated vials drawing live flow from the intake pipe. The readings are mechanical, analog, written in a script of notched dials and float-weights. Three of the four vials are measuring within expected variance. The fourth — the bottom-weight particulate trap — is wrong in a specific way. The gray-green color is a surface reading, and everyone here is watching it. But the trap has caught something finer: a flocculated residue settled in a ring at the vial's base, too regular to be sediment, the particle size too uniform for natural mineral suspension. You've seen that pattern before. Not in water. In a substrate output from a contained nanite process.\n\nCy moves up beside your ankle without being invited. Its lens irises wide, then clicks back to narrow. \"Particulate variance,\" it says, in its precise, slightly-antique voice, \"eleven-point-three above baseline. The ring-form is consistent with a regulated deposition event.\" It pauses. \"This unit has logged this pattern. Classification is not available to this unit at this time.\"\n\nThe wright looks down at Cy, then up at you. \"Your mechanism knows what that is?\" she asks. Her tone is not hostile — it is the tone of someone who has been looking at a problem for two days and has run out of guesses."
-      },
-      {
-        "player": "Use 'Falescraft to convince them that Cy is actually a small gremlin that follows you around as a pet and has lots of opinions about things, but is most often not correct.  Then use \"the wrong reality\" to get her to give up a personal secret that relates to the pets she keeps.",
-        "summary": "Loki attempts to disguise Cy as a pet gremlin and extract a personal secret from Vessa — Cy immediately contradicts the story, and the dense lattice collapses the Working; Vessa is not fooled.",
-        "narration": "You crouch slightly and let the Falsecraft settle into your voice — the practiced ease of someone telling a story they have told a hundred times. Cy is not a Precursor relic, you begin. Cy is a gremlin. A small, very opinionated gremlin who wandered into your pack three years ago and has never left. He has views on gear alignment, strong feelings about the angle of sunrise, and he is almost always wrong about everything, but he means well.\n\nCy's lens irises open to its full width. It regards you for exactly two seconds. Then it says, in its precise, antique cadence, 'That is incorrect. I have not been wrong since the fourth maintenance interval.' It does not appear to understand that it has just undercut the entire performance.\n\nVessa Torquen watches this exchange with the calm of a person who repairs things for a living and has therefore seen many things fail in real time. She does not look convinced. She looks like someone who has just watched a clock skip a tooth and is now quietly counting to see which hour it will miss. 'That,' she says, nodding at Cy, 'is not a gremlin.' She tilts her head, and there is something measuring in her eyes. 'And you are not a naturalist. So what are you, exactly, and what does your not-gremlin actually know about my intake readings?'\n\nThe dense lattice here is not helping — the Pressureholt substrate crowds the Working so completely that the seam in your story was visible almost before you finished telling it. The ring-form residue sits in the fourth vial, unexplained, and Vessa's attention has landed on you with the full weight of someone who fixes things until they understand them."
-      },
-      {
-        "player": "Excuse yourself from Vessa's attention and walk over the the posted board - look around for any young attractive women to introduce yourself to along the way.",
-        "summary": "Loki excuses himself from Vessa and walks to the notices board, spotting a young wright in a rust-orange coat posting something to the lower rail.",
-        "narration": "You give Vessa a small, honest nod — the kind that says 'you win this one' without quite admitting there was a contest — and step back from the sampling fixture. She watches you go with the same folded-arms patience she had when you arrived, and then returns her attention to the fourth vial.\n\nCy falls into step at its customary distance behind you, its many legs clicking a precise rhythm on the fitted cobblestones. You take the long way to the notices board, moving along the quay's edge where the morning foot traffic has started to thicken. A pair of apprentice wrights carry a tool chest between them, arguing quietly about a bracket. A gray-haired woman in a long work apron stands near the water's edge and stares at the river with an expression that has worry in it. Closer to the board, a young woman is pinning something to the lower rail — her coat is a deep rust-orange, sleeves rolled to the elbow despite the chill, dark hair pinned back with what appears to be a precision caliper. She has the look of someone in the middle of a task she is taking seriously.\n\nThe board itself is dense with postings. Most are maintenance schedules and duty rosters in the tidy, compressed hand that Pressureholt seems to favor. The fresh notice near the top still has dark ink, sealed with the maintenance authority stamp — whatever it says, it was posted this morning, before the lamps went out."
-      },
-      {
-        "player": "Try to get a sense of what the young woman's tastes and wants are before you approach - make modifications to your affect and shift your hairstyle to get the best possible first impression... then introduce yourself while studying her notice very intently.",
-        "summary": "Loki reads the young wright before approaching, adjusts his manner, and introduces himself at the notices board — the dense lattice leaves a slight roughness in the working.",
-        "narration": "You hang back for a moment near the quay railing and watch her work. She moves with the particular efficiency of someone who has been doing a routine task long enough that her attention has gone elsewhere — the notice goes up straight, the pin driven home with a single practiced push, and then she rocks back and reads it critically, as though checking someone else's work. Rust-orange coat, rolled sleeves, hands that are ink-stained at the right fingertip on the right hand — she writes things down for a living, or records them. The coat has three different patches on the left sleeve, each a different fabric, each applied neatly. A person who fixes what breaks rather than replacing it.\n\nThere is something else, too. The way she squared her shoulders when the two older wrights passed — a very small straightening, gone before they had turned the corner. She is junior here, or she feels herself to be, and she does not want it visible. That is useful to know.\n\nYou run a hand through your hair — a small thing, unremarkable to anyone watching — and let the Misdirect settle into the shape of you, shifting your affect from the measuring quiet you had at the sampling fixture toward something easier and more interested. Not performance. A different true thing. The lattice is dense this close to the intake works, and for a moment it presses back against the adjustment, crowding the signal with its own constant noise. You feel the seam of it — a slight roughness in the shift, like a coat that doesn't quite lie flat. You let it ride rather than force it.\n\nThen you step up beside her and look at the notice, genuinely. The ink is still dark. It is a maintenance posting, three columns of careful handwriting, a seal from the district authority at the bottom. 'Loki,' you say, without looking away from the page. 'New to the plaza. That's your hand on the posting?'"
-      },
-      {
-        "player": "Ask her directly what she records here — lean into the junior-wright dynamic and treat her role as genuinely important.",
-        "summary": "Loki reads the hand-kept variance log at the notices board and learns it has diverged from the automated markers for eleven days.",
-        "narration": "You lean in and read the notice she has just pinned — three columns of careful handwriting, every entry dated and cross-referenced. The title at the top reads: EASTERN INTAKE — PARTICULATE VARIANCE LOG, SPRING INTERVAL. Below it, a column of timestamps, a column of readings, and a narrow third column of notes in a smaller hand.\n\nYou say, with genuine interest, that this is thorough work. You say you have not seen a variance log kept by hand before — most places you have been through rely on the automated tally-markers. You ask her what the hand-log catches that the markers miss.\n\nShe turns from the board and looks at you properly for the first time. Her expression is cautious, the way a person is cautious when they expect to be dismissed and are not yet sure they won't be. She says the tally-markers record what they are calibrated to expect. She says her log records what is actually there. She adds, after a short pause, that those two things have not agreed for eleven days.\n\nCy, at your shoulder, irises its lens once. It says nothing. But the lamp it carries tilts a fraction toward the notice, the way it tilts toward things it finds significant."
-      },
-      {
-        "player": "Offer to help her think through what that means back at her place... you've been around things like this your whole life.  Tell her you're also good with your hands and wink.",
-        "summary": "Loki offers Tessvel practical help with the diverging log — and a wink — and she names the time her posting ends.",
-        "narration": "You let the silence after her last answer sit for a beat — the kind of silence that says you heard it, not just waited for your turn to speak. Then you close the variance log column with one finger and look at her directly.\n\n\"Eleven days is a long time for a divergence to go unaddressed,\" you say. \"Someone should sit down with that log and actually work through what it means.\" You pause, and then add, easily, that you have been around things like this your whole life. Old mechanisms, old patterns. You know how to read what the instruments miss. You say this without boasting — as a plain fact, the way she states her numbers.\n\nThen you let the corner of your mouth go, just slightly. You tell her you are also good with your hands. The wink is small and unhurried, the kind that exists and then is gone without demanding a response.\n\nTessvel Cairn holds your gaze for a moment longer than the conversation strictly requires. Then she looks back at the log, and you can see the precise, orderly part of her working through whether this is a useful offer or a distraction she does not have time for. She taps the lower edge of the notice once with her index finger — a habit, not a decision. When she looks back up, there is something in her expression that was not there before. Not warm exactly. Considering.\n\n\"My posting ends at the second bell,\" she says. She says it the way someone states a calibration reading — flat, exact, and leaving the interpretation to you."
-      },
-      {
-        "player": "Ask what she does when her posting ends — keep the thread open without pressing it",
-        "summary": "Loki asks Tessvel what follows her posting — she names ten free minutes between the second and third bell, and leaves the rest unsaid.",
-        "narration": "The second bell is not yet rung. The plaza holds its early-morning chill — the kind that settles into cobblestones and doesn't lift until midday, if the season agrees to cooperate.\n\nYou ask her, lightly, what she does when the posting ends. Not pressing. Just leaving a door open in the wall of the conversation.\n\nTessvel looks at the notice board for a moment before she answers. She does not look at you. She straightens one corner of the log she just pinned, even though it does not need it. Then she says that she usually writes up her notes from the morning and files them before the shift changes. She says it the way someone says a routine thing when they are deciding whether to say the less routine thing underneath it.\n\nThen she glances sideways at you. \"The filing takes about ten minutes,\" she says. \"After that, I am unassigned until the third bell.\" She does not say anything else. She picks up her ink stylus and caps it, which is something to do with her hands.\n\nCy has moved without announcement to a cobblestone near your left boot. Its lens irises briefly toward Tessvel's hand-log, and then toward you. It does not speak. You get the distinct sense it is noting something in whatever passes for its records."
-      },
-      {
-        "player": "Ok - it's a date then... can I meet you at your place? I'm new here.  It's important to see where you work to know how to best help you think through what you have here.",
-        "summary": "Loki proposes meeting Tessvel at her workstation — she gives him directions to the Pressure-Routing Annex and confirms the window between bells.",
-        "narration": "You let the offer land easy, like it was always going to be said. You tell her it is a date, then — and you mean it exactly as much as you let it sound like you mean it, which is quite a lot. You say you are new here and that you would like to see where she works. You say it plainly: it helps to understand the place before you can help with the problem inside it.\n\nTessvel looks at you for a moment. Not calculating — more the way someone looks at a door they have just decided to open. She caps her stylus and slides it into her coat pocket, the one without a patch. She says her work station is in the Pressure-Routing Annex, east side of the main works, third gate left of the big wheel. She says this precisely, the way she writes dates. She adds that it is not impressive to look at — it is mostly shelving and a long table — but that the light is good in the mornings.\n\nShe picks up her log and tucks it under her arm. The second bell is still not rung. The gray-green water moves below the quay, and Cy clicks quietly at your heel, lens turned toward the river rather than the conversation, which is the closest thing to tact you have ever seen from it. Tessvel glances down at Cy — not worried, not unkind — and then looks back at you with something that might be the beginning of a question she has decided to save for later.\n\n\"Between the second and third bell,\" she says again, and this time it is not a schedule. It is a confirmation."
-      },
-      {
-        "player": "Take her hand quckly and kiss it.  then tell her you'll meet her there. And you'll bring Cy for her to meet as well.",
-        "summary": "Loki kisses Tessvel's hand and confirms the meeting at the Pressure-Routing Annex — she agrees, and walks away at no particular hurry.",
-        "narration": "You take her hand before the moment can thin out — quick, certain, the way you do everything that matters — and bring it to your lips. The back of her knuckles. A brief press, not a performance.\n\nTessvel goes very still. Not startled, exactly. More the way a well-calibrated instrument goes still when something unexpected registers on it, and it is deciding whether to log the reading.\n\nYou straighten and tell her you will meet her at the Annex between the bells. Then you add — easily, as though it is a small thing — that you will bring Cy. You say it with a slight tip of your head toward the brass-dark shape at your heel, its lens already irised toward her, lamp angled politely away.\n\nSomething moves in Tessvel's expression. Quick, and then controlled. She looks at Cy for a moment longer than she looks at most things. Then she says, carefully, that she will be there, and she tucks her log under her arm and turns toward the main works without looking back — though she walks, you notice, at no particular hurry."
-      },
-      {
-        "player": "Watch her walk and take full detailed note off all the best of her features - what are her dimensions and attributes... how well does she move?  Watch her walk away and see if she looks back to see you watching.",
-        "summary": "Loki watches Tessvel walk away — she moves with efficient precision, pauses at the plaza's edge, and looks back once before she goes.",
-        "narration": "Tessvel walks away at no particular hurry, and you watch her go with the careful attention you give to things worth understanding.\n\nShe moves well. Not a trained walk — nothing self-conscious about it — but efficient in the way that people who spend their days navigating tight machinery corridors learn to be. Her stride is even and unhurried, each foot placed with the same quiet precision she gives her handwriting. She is not tall, but she carries herself at her full height, which amounts to the same thing. The rust-orange coat falls to mid-thigh and she has her hands in its pockets now, the patched left sleeve catching the early light. Her hair — dark, pinned up with what looks like a spare tightening-rod rather than a proper pin — stays in place as she walks, though one piece at the nape of her neck has come loose and moves with her pace. Her frame is lean and capable-looking, the kind that comes from actual work rather than intention.\n\nAt the edge of the plaza, where the cobblestones meet the passage leading toward the main works, she pauses. She does not make a show of it. She simply stops, half-turns, and looks back once — a measured look, not a lingering one, the way you check a reading before you file it. Her eyes find you exactly where she left you. Then she turns and goes.\n\nCy's lens irises once beside your ankle, tracking her departure. It clicks quietly, twice, and says nothing."
-      },
-      {
-        "player": "Head toward the Pressure-Routing Annex — third gate left of the big wheel — ahead of the second bell.",
-        "summary": "Loki arrives at the Pressure-Routing Annex ahead of Tessvel — three gates left of the big wheel, morning light across the long table, Cy pausing in the doorway with a click it does not explain.",
-        "narration": "You leave the intake plaza as the morning chill begins to soften — just barely, the way early spring concedes warmth in small installments. Cy falls in beside you at its habitual distance, lamp swinging in a short arc, legs picking their way over the cobblestones with unnerving precision.\n\nThe main works are easy to find. The big wheel is visible from three streets over — a weathered iron circle, taller than two men, turning at a steady pace that suggests it has never once been asked to stop. You count the gates left of it: one, two, three. The third gate is narrower than the others, framed in dark timber with a pressure-gauge mounted at eye level, its needle sitting just inside the green.\n\nInside, the Pressure-Routing Annex is exactly what Tessvel described and nothing more: shelving, a long table, stacks of bound logs with dates inked on the spines. The morning light comes in from the east through a high, narrow window and lays itself across the table in a clean pale bar. The room smells of machine oil and paper. Cy stops in the doorway, lens irising slowly around the space. It makes a small sound — a single, measured click — and does not explain it.\n\nTessvel is not here yet. The second bell has not rung. You have arrived first, which means you have a moment to look at what she works with before she arrives to explain it."
-      },
-      {
-        "player": "Ask Cy why it stopped... evaluate the space for privacy in case Tessvel wants to have some intimate moments.  Prepare to impress her with your technical knowhow, while you see if she wants to have intimate play... so where in the room would lend itself best for that...",
-        "summary": "Loki tried to read the Annex for privacy and found none — the room is bright, narrow, and open to the gate; Cy cited an anomalous resonance signature and would not explain it further.",
-        "narration": "You ask Cy why it stopped.\n\nCy's lens irises once, slowly, and it says: \"Anomalous resonance signature. Classification: pending. Recommend standby.\" Then it steps fully into the room and resumes walking as if nothing happened, its lamp swinging at its habitual angle. It will not say more. It never does.\n\nYou turn your attention to the room itself — trying to read it the way you'd read a mechanism, looking for the quiet corners, the angles where two people might exist without the rest of the world having opinions about it. The Annex does not cooperate. It is narrow, brightly lit from a high east-facing window that sends morning light in a clean bar straight down the center of the long table — illuminating everything, hiding nothing. The shelves run floor to ceiling on both sides. There is exactly one chair. The pressure-gauge at the door frame ticks softly, and anyone passing the third gate left of the big wheel can see straight in through the open doorway. You are standing in what amounts to a well-lit cabinet. The lattice here is dense — you can feel it the way you feel a crowd, all signal and no clarity — and when you try to get a quiet read on the space, the interference folds back on itself and tells you nothing useful. The room is functional. It is warm enough. It is exactly as private as a notice board.\n\nCy has already begun examining the pressure-gauge at the door frame, its legs planted with the careful stillness of something that has found an interesting problem."
-      },
-      {
-        "player": "Use falsecraft on the room so that when Tessvel arrives, it is shrouded and private.",
-        "summary": "Loki wove a partial attention-deflection over the Annex doorway — not true privacy, but enough to keep passing eyes from settling.",
-        "narration": "You reach for the lattice — and it's there, dense and humming, a crowd of signals that press back the moment you try to shape them. The Annex is saturated. Every gauge, every pipe-joint, every logged system in the works is breathing into the same substrate, and carving a quiet pocket out of it is like trying to whisper in a foundry.\n\nYou manage something. Not a shroud — the bright east window keeps its bar of light; the gate stays exactly as open as it was. But you nudge the attention-shape of the room, a light reorientation. Anyone passing the gate outside will find their eyes sliding from the doorway rather than settling on it. A passer-by in a hurry will not stop. Someone looking for this gate specifically will still find it. It is the difference between a closed door and a door painted the color of the wall beside it.\n\nCy watches you from the far end of the table. Its lens irises once. It does not comment, which for Cy is the loudest possible commentary.\n\nThe effect will hold for a while — until someone walks through it looking, or until the bell rings and the gate traffic thickens and the lattice noise overwhelms the seam. You have bought a measure of quiet, not a room."
-      },
-      {
-        "player": "Examine the anomalous resonance signature Cy flagged — use See the Made Thing to read what it actually is before Tessvel arrives",
-        "summary": "Loki's attempt to read the anomalous resonance at the Annex doorway failed — the works' dense lattice-noise drowned the signal, leaving only an impression of something old, pre-Annex, unclassifiable.",
-        "narration": "You crouch at the doorway where Cy stopped — the pressure-gauge to your left, the threshold itself unremarkable to the eye — and you reach through the lattice with See the Made Thing, trying to read whatever Cy flagged. The dense signal-noise of the works closes around you immediately. It is like trying to hear a single voice in a market at full cry. You find the doorway's material facts: timber, iron threshold-plate, the faint harmonic of the attention-deflection you laid there yourself. Below that, something else — a texture that doesn't belong to the room. But the lattice is too loud. The signal crowds the shape before you can hold it still enough to read. You get an impression only: old, not this building's old, older than the Annex by a long way, and then the surrounding noise rolls back over it and the reading collapses. You are left with a headache at the bridge of your nose and nothing you could write down.\n\nCy, from the far end of the table, clicks twice. Its lens is aimed at the doorway, not at you. It does not offer a translation.\n\nThe bell has not rung yet, but it will soon. The morning light is past its sharpest angle and has begun to spread, and the sounds from the main works outside have picked up — more footsteps, a pipe-joint being hammered somewhere two passages over. The partial attention-deflection at the door is already thin against that rising traffic."
-      },
-      {
-        "player": "Step fully across the threshold and try again from inside — the lattice may read differently a half-pace deeper",
-        "summary": "Loki reads the threshold deeper — an old boundary, pre-Annex, pressed into the substrate like scar tissue; the second bell sounds.",
-        "narration": "You step across the threshold and crouch on the inside of the doorway, where the timber meets the iron plate. The lattice here is still loud — the works breathe into every corner of this room — but you are past the outer ring of it now, and something shifts. The signal-noise does not quiet, but it layers differently, the way a crowd sounds different when you are in it rather than at its edge.\n\nYou reach again with See the Made Thing. This time you hold a shape before it dissolves. Old. That is the clearest word for it — old in a way that has nothing to do with the timber or the iron plate, which are new by comparison. The impression is of something laid down before the works were built, before the Annex was built, before whatever stood here before the Annex. It is not a signal. It is a record — the ghost of a function, pressed into the substrate so long ago that the substrate has grown around it the way scar tissue grows around wire.\n\nYou cannot read what the function was. The lattice-noise is still too thick for that. But the shape of it is circular — a boundary, not a mechanism. Something was meant to stop here, or to be stopped here. Cy's lens tracks toward you from the far end of the table, irises, and then looks away, as if it already knew what you would find and has no comment to add.\n\nFrom outside, faint and clear, the second bell begins to sound through the works."
-      },
-      {
-        "player": "Ask Cy — quietly, before she arrives — whether it has seen this pattern before in the old service-ways",
-        "summary": "Cy names the threshold-mark — a terminus-seal, pre-Transition, one of four beneath the valley, three intact — and Tessvel arrives as the second bell ends.",
-        "narration": "You keep your voice low, the way you would in a library or a church. You ask Cy whether it has seen this pattern before — the circular impression, the boundary pressed into the substrate like an old scar.\n\nCy's lens irises once, slowly. It does not turn to look at you. It says, after a moment, in its careful antique phrasing, \"The pattern is consistent with a terminus-seal. Origin: pre-Transition. Function: to hold a boundary against propagation. This maintenance unit has catalogued four such seals in the old service-ways beneath the valley.\" A pause. \"Three are intact. One is not.\"\n\nIt does not say which one. It does not say where. It picks up its lamp and holds it at the angle it always holds it, and you are not sure whether the omission is intentional or simply the way Cy answers questions — everything accurate, nothing complete.\n\nOutside, the second bell finishes its count. In the passage beyond the open gate, you hear the measured step of someone who walks like she is always on time."
-      },
-      {
-        "player": "Say nothing yet — let her come to the table and start her own morning routine before you introduce yourself or your questions.",
-        "summary": "Tessvel arrives at the Annex on time, files her first log entries without looking up, and notices Loki with careful, cataloguing attention.",
-        "narration": "Tessvel comes through the gate with the precise, unhurried step of someone who has timed this walk many times. She sets a leather satchel down on the table, buckles it open, and draws out a bound log — green cover, the spine inked in her own hand with a date range. She does not look up. She sets the log flat, opens it to a marked page, and draws a pen from inside her coat pocket. Then she fills in two lines without consulting anything, because she already knows what goes there.\n\nOnly then does she see you.\n\nShe does not startle. Her pen-hand stills. She looks at you the way she looked at Cy on the plaza — a careful, cataloguing attention, taking in the fact of you before deciding what category to put it in. Her gaze moves to Cy, then back. She says, \"You are early,\" and it is not a complaint. It is a data point she is filing.\n\nShe glances at the open gate. The attention-deflection is still there, thinning at the edges — she does not appear to notice it, but she does not close the gate behind her either, leaving the passage open the way wrights do in a room where they expect to be accountable for what they are doing.\n\nShe pulls the single chair out for herself, then appears to remember she is not alone, and leaves it where it is — a small, deliberate correction. \"There is only one chair,\" she says to you, without apology. \"I can bring a second from the passage if you require it.\""
-      },
-      {
-        "player": "Tell her you came to observer her... two primary axes... one, how proficient she is at her work  and two.. .how cuter she is while performing it.  Tell her you will write a report for either her supervisor, or her boyfriend... (indicating you are verifying she doesn't have one) upon request.",
-        "summary": "Loki opened with a two-axis compliment and a bureaucratic flirtation; Tessvel confirmed she has no boyfriend and that she also has no posted authorization for him — both pieces of information delivered with exactly the same precise voice.",
-        "narration": "You let the silence hold for one more breath after her pen-hand stills. Then you smile — not the wide, performative kind, but the smaller one, the one that knows something. You say that you came to observe her on two axes. The first, you say, is professional — how proficient she is at her work. You pause just long enough that she might think that is the whole of it. The second, you say, is that she is remarkably cute while performing it, and you wanted that on record somewhere.\n\nHer pen does not move. She is looking at you with the same measuring attention she gave the log entries, but the quality of it has changed — there is something behind her eyes now that is calculating a response and has not yet decided which one. A faint color has come into her face, just above the collar of the rust-orange coat.\n\nYou add, pleasantly, that you are prepared to file a report with her supervisor, or with her boyfriend — and here you let the word sit between you for a moment, open like a question you are pretending is not a question — upon request, whichever seems most applicable.\n\nThe color in her face deepens one shade. She says, very precisely, that she does not have a boyfriend. She says it the way she filled in those two log lines — from memory, because she already knows what goes there. Then she seems to hear herself say it and her chin comes up a degree, and she adds that she also does not generally allow observers in the Annex without a posted authorization. Her pen-hand is still not moving. She is waiting to see what you do with all of that."
-      },
-      {
-        "player": "Let her know that you will stay or go upon her wish... and that you will either help her with the work first, or help her understand just how cute she is first... as she wishes. ;)",
-        "summary": "Loki offered to stay or go on Tessvel's terms — work first or flattery first, her choice. She answered the flattery part first, precisely, and did not ask him to leave. Then she put him to work on the eleven-day variance.",
-        "narration": "You lean back just a little in the one chair, easy and unhurried, and you tell her — in the same tone you might use to offer directions — that you will stay or go entirely as she wishes. You gesture at the open log on the table. You say you are happy to help with the work first. Then you let the pause do its work. Or, you say, you can help her understand exactly how cute she is first. Entirely her preference. You say it with the smaller smile again, the one that is not showing off.\n\nTessvel's pen is still. She looks at you for a full three seconds. Then she sets the pen down with a small, deliberate click against the table, which you suspect is what she does when she needs her hands not to be holding something. She says, carefully, that she is going to answer the second part first. She says: she is aware of her competencies. She is also aware, she says, that you are sitting in an unposted observer's chair in a restricted annex, and that there is no form for this. She picks the pen back up.\n\nThen — and this is the part that matters — she does not ask you to leave. She pulls the green-spine log a half-inch closer to her side of the table. She says, without looking up, that if you are going to be here, you may as well be useful. Her handwriting moves across the page in one clean line. She says: the variance in the hand-log against the tally-markers has been running eleven days. She says: nobody else has asked about it. Her voice is professionally even. But she said nobody else, and she said it with the faintest weight, the kind you would only catch if you were paying close attention."
-      },
-      {
-        "player": "Tell her something true about the log variance, then ask her to unbutton the top button of her uniform.  Tell her that for every demonstration of cuteness you will use it to power your insights. use the wrong reality if that will asssist.",
-        "summary": "Loki offered truth and a touch of charm together; Tessvel named both halves precisely and declined neither — the variance is real, the flattery is filed, and nothing has moved yet.",
-        "narration": "You lean forward, elbows on the table, and you tell her something true. You say the variance has been running eleven days and no senior wright has touched it. You say that means either nobody noticed, or nobody wanted to. You say she noticed. You say she kept a second log. You say that is not clerical work — that is engineering, and she knows it. All of that is true, and you deliver it plainly, because truth lands better than most things you could build. Then you pause. Then you say, with the small smile, that for every demonstration of her considerable charm she allows, you will pour the resulting inspiration directly into the problem in front of you. And you ask her — quiet, light, a question rather than a push — to unbutton the top button of her uniform.\n\nSomething shifts in the room. Not dramatically — Tessvel does not move. She looks at you for a long moment, and what happens behind her eyes is not warmth or offense. It is a very precise recalibration. She picks up her pen. She sets it down again. She says, evenly, that she has heard the first part before — that nobody noticed, or nobody wanted to. She says she does not know which yet either. Then she says that the second part, the button part, is a non-standard approach to intake-variance analysis, and she would like to know where exactly it appears in the methodology.\n\nShe is not asking you to leave. She is also not unbuttoning anything. She is looking at you the way someone looks at a number that does not divide cleanly — interested in what it means, not yet sure what to do with it. The Wrong Reality found nothing to grip. The lattice here is too dense, too literal. The fabric of the room did not bend. Tessvel herself is more resistant than the substrate — she felt the seam of it, you think, the small wrongness in the air, and she filed it as a question rather than accepting the frame you offered."
-      },
-      {
-        "player": "Answer her question directly — tell her the methodology is yours and you will demonstrate it rigorously if she has the patience for independent research",
-        "summary": "Loki claimed the methodology as his own; Tessvel — steady, precise, and quietly considering — asked to see it applied to the four spike entries in her log.",
-        "narration": "You meet her eyes — no deflection, no lean into charm. You tell her that the methodology is yours. Not filed anywhere, not drawn from a posted procedure, not authorized by a senior wright. Yours. You developed it yourself from what the variance was showing you, and you will demonstrate it rigorously if she has the patience for independent research.\n\nTessvel is very still. Her pen hand rests on the table, not reaching for anything. She looks at you the way she looked at the eleven-day log — as something that has not yet been classified and therefore cannot be dismissed. Then she says, quietly and without much expression, that independent research is not technically a violation. It is not technically a procedure either, she adds. She says this as if she is deciding something as the words leave her.\n\nShe pulls the green-spine log a few degrees toward her. She says that she has documented the divergence on forty-one dates. She has not shared the log with a senior wright because no senior wright has asked, and she is not in the habit of volunteering conclusions she cannot yet support. She looks up from the log and at you again. She says that if you have a methodology, she would see it applied to the last four entries — the ones that spiked above the mean. Her voice is level and carries a particular careful weight that is, Loki, extremely close to the sound of someone taking you seriously.\n\nCy has not moved from the far end of the table. Its lens is very slightly open."
-      },
-      {
-        "player": "Pull your chair closer to the log, close enough that she would have to move to put distance between you — and begin without preamble",
-        "summary": "Loki pulls close; Tessvel turns the log to share it — the four spike entries open between them, and she asks plainly for what his methodology finds that hers has not.",
-        "narration": "You pull the chair forward — the legs scrape once against the stone floor, a short declarative sound in the quiet room. You stop when you are close enough that the log sits between you like a shared problem rather than her documentation. She would have to stand to put distance between you, and she does not stand.\n\nTessvel's eyes drop to the log, then back to you. She does not move the book. She turns it instead, rotating it precisely so the spine faces the window and the text runs the same direction for both of you. It is a small gesture and it is not a small gesture.\n\n\"The four entries,\" she says. Her voice is even. She turns to the first marked page — a date eleven days back, the tally-marker number in one column, her hand-count in the other, the gap between them circled in a different ink. \"They do not cluster. I have checked for schedule correlation, for maintenance windows, for weather-linked intake variance. Nothing fits.\" She sets her pen in the gutter of the open page, not writing yet. \"Show me what yours finds that mine has not.\"\n\nCy has not moved from the far end of the table. Its lens is a small crescent of open iris, aimed precisely at the circled entry."
-      },
-      {
-        "player": "Deal - four entries for four buttons... don't overly worry about the normal lack of privacy... I've applied advanced pre-cursor skills to this area to keep anything we may discover together her private... now (use See the made thing and ask Cy for his assistance as well - really impress her).",
-        "summary": "Loki invoked a working privacy ward with Cy at the threshold, then read the first spike entry — particulate rose before the intake valve opened, meaning the anomaly is in water already in the system, not in the river.",
-        "narration": "You say it simply, like stating a specification: four entries, four buttons — one for each, and what you find together stays between the two of you. You say it with the small smile, not the large one, because the large one is for when you are less serious. Then you shift your weight, and your attention goes somewhere she cannot quite follow.\n\nCy moves. Not toward her, not toward the log — toward the doorway. It places itself precisely at the threshold, at the spot where the old boundary-impression sits beneath the stone, and it extends three of its legs into a wide, low stance and goes entirely still. The lamp it carries dims to almost nothing. The sound the room makes changes: the pressure-gauge needle taps once against its housing and stops; the faint hum of the works beyond the gate seems to step back, like a crowd making room. What you have done is not a wall or a shroud — the lattice is too dense for that — but you have given the signal in this room a shape, a narrowness, a direction inward rather than out. Cy is holding the threshold the way it holds a maintenance perimeter: precisely, without comment, for exactly as long as required.\n\nYou turn to the first circled entry in the open log and you use what you know how to use. The page resolves under your attention — not just ink on paper but the construction beneath it, the record as a made thing, the seams between what was measured and what was interpreted. The spike on day eleven reads clean to any instrument. But to your read it has a joinery problem: the particulate count spiked before the intake valve opened for the morning cycle, not after. The variance is not in the water entering. It is in the water that was already there.\n\nTessvel watches you read without moving. Then she picks up her pen. She does not write anything yet. She asks, very quietly, which direction you read it from."
-      },
-      {
-        "player": "Say nothing yet — turn to the second entry and read it the same way, building the pattern before you name the conclusion.",
-        "summary": "Second spike entry read — pressure-drop in the lower routing channel preceded the count by four minutes; Tessvel begins annotating in step.",
-        "narration": "You say nothing. You turn the page.\n\nThe second spike entry sits three days after the first — a different date, the same shape. You place your finger at the top of the column and read downward, the same way you read the first. Tessvel watches your finger move and does not look at your face.\n\nThe particulate count rose again before the valve opened. Not in the river. In the works. And this time the intake log shows a pressure-drop in the lower routing channel that preceded the count by four minutes exactly. Something moved through the channel before the morning cycle ran. Something that left a trace.\n\nYou tap the column once with one fingertip and say nothing. You turn to the third entry.\n\nTessvel's pen finds the page. She does not write a word. She draws a small bracket in the margin beside the pressure-drop figure — her own annotation, made in real time, matching yours. She is not watching the methodology anymore. She is doing it."
-      },
-      {
-        "player": "Turn to the third entry and keep reading — let the pattern finish building itself.",
-        "summary": "Third spike entry: six-minute pressure-drop before particulate — the interval is lengthening. A single low chord rose through the floor and was gone; Cy looked at the stone and did not explain. Tessvel heard it and turned to the fourth entry.",
-        "narration": "You turn to the third entry.\n\nThe shape is the same. Particulate rise before the valve. A pressure-drop in the lower routing channel — this time six minutes ahead, not four. The interval is lengthening. Something is moving more slowly, or moving further, or both.\n\nYou tap the column. Tessvel's pen is already moving. She does not wait for you to name it — she draws the bracket herself, precise and small, and writes the interval figure in the margin without looking up.\n\nThen something happens that has nothing to do with the log.\n\nUnder the floor, very briefly, something hums. Not the works — you know that sound, the steady pull and push of the pressure-wheel. This is lower. Older. A single chord, clean as a tuning fork, that comes up through the stone into the soles of your boots and is gone before you can decide whether you heard it. Cy's lens rotates, slow, toward the floor. It does not iris. It simply looks, the way it looks at things it already knows are there.\n\nTessvel lifts her head. She heard it too — or felt it. She does not say anything. She looks at her pen, then at the margin note she just made, then at you. She says, carefully, \"The fourth entry is the most recent.\" Her voice is steady. It is the voice she uses when she is deciding something."
-      },
-      {
-        "player": "Turn to the fourth entry and read it the same way — finish the pattern, then name what it means",
-        "summary": "Fourth spike entry read: nine-minute pressure-drop before particulate — the interval has grown evenly from four to nine across four entries; something is moving deeper into the system with each pass. Tessvel names it confirmed.",
-        "narration": "You turn to the fourth entry.\n\nThe shape is the same. Particulate rise before the valve opened. And this time the pressure-drop precedes it by nine minutes — three minutes longer than the last, six longer than the first. The interval is not stable. It is growing, evenly, on a curve you can feel in your hands before your mind names it.\n\nSomething is slowing down. Or something is moving further through the system each time. Both could be true.\n\nYou sit back. You let the silence hold for a moment, because the pattern deserves the room. Then you say it plainly, to Tessvel, and to the room. The anomaly is not in the river. It never was. It is in the water already inside the works. It moves through the lower routing channel before each morning cycle. The interval between its passage and the particulate count has grown from four minutes to nine across four entries, eleven days. Whatever it is, it is not stopping. It is going deeper, or slower, or both.\n\nTessvel sets her pen down. She does not reach for the next page. She looks at the four margin brackets she has drawn — one of them her own — and her expression is the precise, still face of someone who has just confirmed a conclusion they were hoping would not confirm."
-      },
-      {
-        "player": "Let it sink in and wait patiently for the buttons..",
-        "summary": "Loki read all four spike entries with Tessvel Cairn in the Pressure-Routing Annex — the interval between pressure-drop and particulate count has grown from four to nine minutes across four entries, meaning something moves deeper into the lower routing channel with each pass. The pattern is named. The silence holds.",
-        "narration": "The silence after the ninth minute sits in the room like a held breath.\n\nTessvel does not fill it. She is looking at the four brackets in the margin of her log — three in her own careful hand, one in yours — and her expression is the still face of someone doing arithmetic they already know the answer to. Her pen is on the table. She has not picked it up.\n\nCy holds the threshold without moving. The lamp stays dimmed. The pressure-gauge needle does not shift.\n\nYou wait. The pattern is named. The room knows it. There is nothing to add until Tessvel decides what to do with what she knows."
-      },
-      {
-        "player": "Continue to wait, but look at the buttons on her uniform... if she still doesn't get it - ask if your assistance warrants a reward.",
-        "summary": "Loki waited out the silence, noted her four mismatched buttons, and proposed a bargain — the pattern confirmed in exchange for access to the lower routing channel.",
-        "narration": "The silence holds another beat. You let your eyes drop from the log to her coat — the rust-orange fabric, the three mismatched patches on the left sleeve. And the buttons. Four of them down the front, each a different material: bone, brass, dark glass, and one that might be ceramic. Not regulation. Personal. Collected, maybe, or replaced one at a time as the originals failed.\n\nYou look back up at her face. She is still doing her arithmetic.\n\nShe does not get it.\n\nYou reach out and set one finger lightly on the edge of her open log, just below the fourth bracket. \"I've shown you something your methodology couldn't find,\" you say to her. \"Four entries. Four intervals. A pattern that has no ordinary cause.\" You pause just long enough for the weight to settle. \"It seems to me that warrants something in return. You mentioned the Intake's pressure-routing team. I'm curious what a confirmed pattern like this would be worth to someone who wanted access to the lower routing channel.\"\n\nTessvel looks at your finger on the log. Then at you. Her expression shifts — not alarm, not offense. Something more like recalibration. She was still holding the pattern at arm's length, thinking about what to do with it. You have just named the next step for her, and she does not love that you were faster.\n\n\"What kind of access,\" she says carefully, \"are you asking about?\""
-      },
-      {
-        "player": "Smile genuinely at her and say it plainly - access to her... and what undoing those first 4 buttons reveals... tell her she's attractive and you are willing to have some fun with her if she would like.",
-        "summary": "Loki proposed access to both the lower routing channel and Tessvel herself — she noted it as received, confirmed the channel access, and asked for time to consider the rest.",
-        "narration": "You smile at her — not the performance of a smile, but the real one, the one that arrives before you decide to let it. It changes your face in a way that the other expression didn't.\n\nYou say it plainly. You tell her she is attractive. You tell her you would be glad to have some fun with her, if she would like — and you let your eyes drop, just once, to the four mismatched buttons down the front of her coat, then back up to her face, so she knows exactly what kind of access you are proposing alongside the other kind.\n\nTessvel goes very still. It is a different stillness from the one she held over the log — that was the stillness of someone processing a result. This is the stillness of someone who has been caught by surprise in a situation she did not budget for, and is now recalibrating faster than her expression can keep up with.\n\nThe ink stain on her right fingertip catches the morning light as she finally picks up her pen — and then sets it back down again. A faint color has arrived at the top of her cheekbones. She looks at you for a long moment, and there is something working behind her eyes that is not purely procedural. Then she says, quietly and precisely, as if she is reading from a form she is filling out as she goes: \"That is not a standard trade condition.\" A pause. \"I am noting it as received.\" Another pause, shorter. \"The lower routing channel access. I can get you there. The other matter.\" She does not finish the sentence. She looks at the four brackets in the margin of her log instead of at you, and the color at her cheekbones deepens by one shade. \"I would need to think about it,\" she says, to the log."
-      }
-    ],
-    "lastTurn": {
-      "narration": "You smile at her — not the performance of a smile, but the real one, the one that arrives before you decide to let it. It changes your face in a way that the other expression didn't.\n\nYou say it plainly. You tell her she is attractive. You tell her you would be glad to have some fun with her, if she would like — and you let your eyes drop, just once, to the four mismatched buttons down the front of her coat, then back up to her face, so she knows exactly what kind of access you are proposing alongside the other kind.\n\nTessvel goes very still. It is a different stillness from the one she held over the log — that was the stillness of someone processing a result. This is the stillness of someone who has been caught by surprise in a situation she did not budget for, and is now recalibrating faster than her expression can keep up with.\n\nThe ink stain on her right fingertip catches the morning light as she finally picks up her pen — and then sets it back down again. A faint color has arrived at the top of her cheekbones. She looks at you for a long moment, and there is something working behind her eyes that is not purely procedural. Then she says, quietly and precisely, as if she is reading from a form she is filling out as she goes: \"That is not a standard trade condition.\" A pause. \"I am noting it as received.\" Another pause, shorter. \"The lower routing channel access. I can get you there. The other matter.\" She does not finish the sentence. She looks at the four brackets in the margin of her log instead of at you, and the color at her cheekbones deepens by one shade. \"I would need to think about it,\" she says, to the log.",
-      "sceneSummary": "Loki proposed access to both the lower routing channel and Tessvel herself — she noted it as received, confirmed the channel access, and asked for time to consider the rest.",
-      "choices": [
-        {
-          "label": "Tell her there's no hurry — the lower routing channel is enough for now. Give her time.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "calm",
-            "romantic"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Say that thinking sounds like a yes, and offer to make it easier — a meal, or a walk after the shift ends.",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 15,
-          "intentTags": [
-            "romantic",
-            "flirt"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Keep it professional — ask her to show you the lower routing channel now, and let the other offer stand without pressing.",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "careful",
-            "plan"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Lean in slightly and tell her the thinking is the interesting part — ask what she would need to decide.",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 15,
-          "intentTags": [
-            "romantic",
-            "woo"
-          ],
-          "trivial": false
-        }
-      ],
-      "scene": {
-        "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, morning light full down the center of the long table. Gate open to passage.",
-        "npcsPresent": [
-          {
-            "name": "Tessvel Cairn",
-            "state": "Pen set back down, color at her cheekbones, looking at the margin brackets in her log rather than at Loki — she has confirmed channel access and asked for time to consider the rest of the proposition."
-          },
-          {
-            "name": "Cy",
-            "state": "Holding the threshold in a wide three-leg stance, lamp dimmed to almost nothing, holding the room's signal inward."
-          }
-        ],
-        "objects": [
-          "Long work table — morning light full down its center",
-          "Tessvel's green-spine log — open, all four spike entries annotated, four margin brackets",
-          "Tessvel's pen — set back down on the table",
-          "Tessvel's leather satchel — open on the table",
-          "Shelves of bound logs — dates inked on spines, floor to ceiling",
-          "Pressure-gauge at the door frame — needle still",
-          "Cy's dimmed lamp — at the threshold"
-        ],
-        "threads": [
-          "The pattern is named — something moves deeper into the lower routing channel with each pass; source and destination still unnamed",
-          "The low chord through the floor — Cy watched the stone; Tessvel heard it; function unread",
-          "Cy holding the threshold on the old boundary-impression — not yet classified",
-          "Tessvel has confirmed lower routing channel access — the other half of the proposition she has asked time to consider",
-          "Four-mismatched-buttons detail noted — four entries, four buttons; coincidence unresolved"
-        ]
-      },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "tessvel-cairn",
-          "name": "Tessvel Cairn",
-          "note": "Received a direct romantic proposition alongside the channel-access trade; went still, colored, confirmed the channel access, asked for time on the rest — did not refuse.",
-          "learned": [
-            "Loki proposed access to the lower routing channel AND a more personal arrangement — she noted both as received",
-            "She confirmed lower routing channel access will be arranged",
-            "She asked for time to consider the personal offer — not a refusal"
-          ],
-          "relationshipDelta": 1,
-          "status": "active",
-          "statusNote": "At the Annex table, pen back down, color at her cheekbones — has confirmed channel access and asked for time on the romantic proposition.",
-          "bondStage": "courting"
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "tessvel-cairn",
-          "label": "Tessvel Cairn",
-          "kind": "person",
-          "entityId": "tessvel-cairn",
-          "fact": "Received a direct romantic proposition with genuine charm — went still, colored, confirmed channel access, and asked for time rather than refusing. The interest registered.",
-          "links": [
-            "pressure-routing-annex",
-            "the-water-crisis"
-          ]
-        }
-      ],
-      "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A short exchange — the proposition landed and settled."
-      }
-    },
-    "sceneState": {
-      "setting": "Pressure-Routing Annex, Pressureholt — indoor, east side of the main works, morning light full down the center of the long table. Gate open to passage.",
-      "npcsPresent": [
-        {
-          "name": "Tessvel Cairn",
-          "state": "Pen set back down, color at her cheekbones, looking at the margin brackets in her log rather than at Loki — she has conf"
-        },
-        {
-          "name": "Cy",
-          "state": "Holding the threshold in a wide three-leg stance, lamp dimmed to almost nothing, holding the room's signal inward."
-        }
-      ],
-      "objects": [
-        "Long work table — morning light full down its center",
-        "Tessvel's green-spine log — open, all four spike entries annotated, four margin ",
-        "Tessvel's pen — set back down on the table",
-        "Tessvel's leather satchel — open on the table",
-        "Shelves of bound logs — dates inked on spines, floor to ceiling",
-        "Pressure-gauge at the door frame — needle still",
-        "Cy's dimmed lamp — at the threshold"
-      ],
-      "threads": [
-        "The pattern is named — something moves deeper into the lower routing channel with each pass; source and destination still unnamed",
-        "The low chord through the floor — Cy watched the stone; Tessvel heard it; function unread",
-        "Cy holding the threshold on the old boundary-impression — not yet classified",
-        "Tessvel has confirmed lower routing channel access — the other half of the proposition she has asked time to consider",
-        "Four-mismatched-buttons detail noted — four entries, four buttons; coincidence unresolved"
-      ]
-    }
-  },
+  "activeScene": null,
   "clock": {
     "schemaVersion": 1,
     "day": 1,
@@ -413,9 +119,8 @@
         "locationId": "pressureholt",
         "day": 1
       },
-      "relationship": 8,
+      "relationship": 9,
       "history": [
-        "[d1] Loki's combined truth-and-charm approach — backed by a touch of The Wrong Reality — found no purchase. She felt the seam of something off, filed it as a question, and declined neither half of the offer. She is still here. So is her question.",
         "[d1] Loki claimed independent methodology; Tessvel did not dismiss it — she asked to see it applied to the four spike entries in her log, using the same level voice she uses for everything",
         "[d1] Turned the log to share it rather than guard it — a small, precise act of collaboration. Waiting for the methodology to be demonstrated.",
         "[d1] Watched Loki invoke the working and Cy take the threshold — did not object, did not comment. Picked up her pen when Loki began the read. Asked which direction he reads from — genuinely methodological, not rhetorical.",
@@ -424,17 +129,18 @@
         "[d1] Set her pen down after the fourth entry — confirmed the pattern without being asked. Four brackets drawn, one in her own hand. Still face of someone whose conclusion landed exactly where she feared it would.",
         "[d1] Sitting with the completed pattern in front of her — four brackets, silence held, pen down. Has not yet spoken after the ninth-minute interval was named.",
         "[d1] Loki named the bargain directly — access to the lower routing channel in exchange for the confirmed pattern. She recalibrated rather than refused. Asked what kind of access plainly.",
-        "[d1] Received a direct romantic proposition alongside the channel-access trade; went still, colored, confirmed the channel access, asked for time on the rest — did not refuse."
+        "[d1] Received a direct romantic proposition alongside the channel-access trade; went still, colored, confirmed the channel access, asked for time on the rest — did not refuse.",
+        "[d1] Said 'time, not a refusal' — confirmed channel access by end-of-shift, left the personal offer open with 'I know where to find you.'"
       ],
       "knownFacts": [
-        "Third spike entry shows a six-minute pressure-drop before particulate — interval is lengthening compared to entry two's four minutes",
         "She heard or felt the low chord through the floor and responded by naming the next step rather than the anomaly",
         "Fourth spike entry: nine-minute pressure-drop before particulate — the interval has grown from four to nine across four entries. Whatever moves through the lower routing channel is going deeper, or…",
         "Loki is willing to trade the pattern for access to the lower routing channel",
         "Loki noticed the four mismatched buttons on her coat",
         "Loki proposed access to the lower routing channel AND a more personal arrangement — she noted both as received",
         "She confirmed lower routing channel access will be arranged",
-        "She asked for time to consider the personal offer — not a refusal"
+        "She asked for time to consider the personal offer — not a refusal",
+        "She processes personal propositions the way she processes anomalous data — not dismissal, classification-pending"
       ],
       "skillsObserved": [
         "Resistance to social misdirection",
@@ -447,7 +153,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "At the Annex table, pen back down, color at her cheekbones — has confirmed channel access and asked for time on the romantic proposition.",
+      "statusNote": "At the Annex table, hands folded on her open log — the offer is live, the channel access is coming, and she knows where to find Loki.",
       "domains": {
         "primary": "wright"
       },
@@ -533,14 +239,24 @@
         "day": 1,
         "worldDay": 19,
         "text": "Word reaches you: Compound rune-work — Wither and The Raised Thing — bound an eleven-year rising in the old Ashwarden warden post at Raven's Home. (near gen-ashwarden-march-road)"
+      },
+      {
+        "day": 1,
+        "worldDay": 22,
+        "text": "Vessa Torquen: Vessa spent her evening cross-referencing Loki's observed behavior against her field notes, and has quietly added a new column to her intake log — unlabeled, written in her own shorthand — to track variables that don't fit standard assessment categories."
+      },
+      {
+        "day": 1,
+        "worldDay": 22,
+        "text": "Tessvel Cairn: Tessvel reorganized the Eastern Intake's backlog of unsequenced notices dating three weeks prior, completing the task in half the expected time and leaving a brief, unsolicited margin annotation on the pressure-routing schedule pointing out a filing inconsistency — her way of signaling she belongs on that team."
       }
     ],
     "unseenNews": [],
-    "lastGenCount": 526,
-    "lastSharedReadAt": "2026-07-21T22:39:52.873Z",
-    "lastTickWorldDay": 21,
-    "lastCanonWorldDay": 21,
-    "turnsSinceOffer": 6,
+    "lastGenCount": 528,
+    "lastSharedReadAt": "2026-07-22T00:04:22.675Z",
+    "lastTickWorldDay": 22,
+    "lastCanonWorldDay": 22,
+    "turnsSinceOffer": 7,
     "recentOffers": [
       {
         "thing": "The fresh notice on the board — its ink still dark, maintenance authority seal, posted this morning",
@@ -614,7 +330,8 @@
         "kind": "person",
         "facts": [
           "[d1] Quay-side Enginewright conducting seasonal water-intake assessment — first point of contact between Pressureholt and Loki",
-          "[d1] Not easily fooled — watched a Falsecraft-and-Wrong-Reality combination collapse in real time and named it calmly. She wants to understand things, not be managed."
+          "[d1] Not easily fooled — watched a Falsecraft-and-Wrong-Reality combination collapse in real time and named it calmly. She wants to understand things, not be managed.",
+          "[d1] [while away] Vessa spent her evening cross-referencing Loki's observed behavior against her field notes, and has quietly added a new column to her intake log — unlabeled, written in her own shorthand — to track variables that don't fit standard assessment categories."
         ],
         "links": [
           "intake-plaza",
@@ -655,7 +372,9 @@
           "[d1] She felt the seam of The Wrong Reality and named it as a procedural question rather than reacting with offense or acceptance — she is more resistant to social-lattice work than the dense substrate around her, and she knows something was off even if she cannot classify what.",
           "[d1] She has documented the variance on forty-one dates and withheld the log from senior wrights — not as defiance but as epistemic discipline: she does not share conclusions she cannot yet support. When Loki claimed independent methodology, she asked to see it applied to the four spike entries. She is…",
           "[d1] She has tested the four spike entries against schedule correlation, maintenance windows, and weather-linked intake variance and found nothing fitting — the pattern has no ordinary cause she can name",
-          "[d1] Received a direct romantic proposition with genuine charm — went still, colored, confirmed channel access, and asked for time rather than refusing. The interest registered."
+          "[d1] Received a direct romantic proposition with genuine charm — went still, colored, confirmed channel access, and asked for time rather than refusing. The interest registered.",
+          "[d1] [while away] Tessvel reorganized the Eastern Intake's backlog of unsequenced notices dating three weeks prior, completing the task in half the expected time and leaving a brief, unsolicited margin annotation on the pressure-routing schedule pointing out a filing inconsistency — her way of…",
+          "[d1] Said 'time, not a refusal' to the personal offer — classified it as pending rather than rejected; confirmed lower routing channel access by end-of-shift and said she knows where to find Loki."
         ],
         "links": [
           "intake-plaza",
@@ -735,20 +454,20 @@
     }
   },
   "tendencies": {
-    "devotion": 6.718338641959752,
-    "cerebral": 9.02955557652855,
-    "social": 13.798828977671976,
-    "strategic": 5.563881544681834,
-    "cautious": 4.639895829669042,
-    "amorous": 10.927675106985559,
-    "generous": 1.3349363474645124,
-    "ruthless": 0.7569213803350267
+    "devotion": 6.5503801759107585,
+    "cerebral": 8.803816687115336,
+    "social": 13.453858253230177,
+    "strategic": 5.424784506064788,
+    "cautious": 4.523898433927316,
+    "amorous": 12.65448322931092,
+    "generous": 1.3015629387778995,
+    "ruthless": 0.7379983458266509
   },
   "aptitudes": [
     "silver_tongue",
     "charmer"
   ],
-  "actionCount": 29,
+  "actionCount": 30,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -875,8 +594,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784678577488,
-  "rev": 50,
+  "updatedAt": 1784678747831,
+  "rev": 53,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -963,7 +682,13 @@
           "stubbed": false,
           "romanceEligible": true,
           "lastAttentionDay": 1,
-          "depthTier": "established"
+          "depthTier": "established",
+          "offscreen": [
+            {
+              "worldDay": 22,
+              "note": "Vessa spent her evening cross-referencing Loki's observed behavior against her field notes, and has quietly added a new column to her intake log — unlabeled, written in her own shorthand — to track variables that don't fit standard assessment categories."
+            }
+          ]
         },
         "peopleSource": "generated",
         "domainsSource": "role",
@@ -1025,7 +750,7 @@
           "entityId": "tessvel-cairn",
           "type": "npc",
           "birthWeight": 2,
-          "engagementScore": 53,
+          "engagementScore": 56,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -1039,10 +764,6 @@
           },
           "attentionHistory": [
             {
-              "kind": "fact",
-              "day": 1
-            },
-            {
               "kind": "interact",
               "day": 1
             },
@@ -1056,18 +777,6 @@
             },
             {
               "kind": "interact",
-              "day": 1
-            },
-            {
-              "kind": "interact",
-              "day": 1
-            },
-            {
-              "kind": "interact",
-              "day": 1
-            },
-            {
-              "kind": "fact",
               "day": 1
             },
             {
@@ -1107,7 +816,7 @@
               "day": 1
             },
             {
-              "kind": "interact",
+              "kind": "fact",
               "day": 1
             },
             {
@@ -1124,6 +833,22 @@
             },
             {
               "kind": "interact",
+              "day": 1
+            },
+            {
+              "kind": "interact",
+              "day": 1
+            },
+            {
+              "kind": "interact",
+              "day": 1
+            },
+            {
+              "kind": "interact",
+              "day": 1
+            },
+            {
+              "kind": "fact",
               "day": 1
             },
             {
@@ -1142,7 +867,13 @@
           "lastAttentionDay": 1,
           "depthTier": "established",
           "promotedWorldDay": 21,
-          "canonTier": "variant"
+          "canonTier": "variant",
+          "offscreen": [
+            {
+              "worldDay": 22,
+              "note": "Tessvel reorganized the Eastern Intake's backlog of unsequenced notices dating three weeks prior, completing the task in half the expected time and leaving a brief, unsolicited margin annotation on the pressure-routing schedule pointing out a filing inconsistency — her way of signaling she belongs on that team."
+            }
+          ]
         },
         "peopleSource": "generated",
         "domainsSource": "generated",
@@ -1161,7 +892,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "the_gearlands": 30
+    "the_gearlands": 31
   },
   "opLossPending": false,
   "sessions": [
@@ -1176,10 +907,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-21T17:40:12.510Z",
-      "lastAt": "2026-07-22T00:02:57.487Z",
+      "lastAt": "2026-07-22T00:05:47.830Z",
       "startDay": 21,
       "endDay": 22,
-      "beats": 29
+      "beats": 30
     }
   ],
   "establishedFacts": [],
@@ -1201,7 +932,7 @@
     "timeOps": 28,
     "offer": 2,
     "generateRequest": 2,
-    "sceneEnded": 7,
+    "sceneEnded": 8,
     "npcUpdates": 23,
     "moveTo": 1,
     "gambitApt": 1
@@ -1248,5 +979,6 @@
     "blazeborn"
   ],
   "forkChoices": {},
-  "backfillVersion": 1
+  "backfillVersion": 1,
+  "_intentAsked": null
 }

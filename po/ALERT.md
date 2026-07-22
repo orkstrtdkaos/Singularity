@@ -22,9 +22,10 @@
 > actually does (12 ops + 4 explicit cannots), for GM context, so it can neither hallucinate nor mis-deflect
 > a control. **CCode:** close GAP A ops, the §5 "act don't deflect" prompt contract, wire the manifest in.
 >
-> ⚠️ **§OQ5 for Erik:** does "do ANYTHING" mean a **dev/GM-god mode** (Machine-panel, Erik-as-author sets
-> anything, no fairness gate) DISTINCT from the fair-play GM (grants fairness-judged)? Two surfaces —
-> conflating them turns a fair GM into a cheat console. Likely BOTH are wanted; they should stay distinct.
+> ✅ **§OQ5 RESOLVED (Erik 2026-07-21): BOTH wanted, SEQUENCED. Fair GM = Phase 1, BUILD NOW. Author
+> god-mode = Phase 2 (SNG-207b), DEFERRED.** Build guard on Phase 1: the fair grant ops must NOT carry a
+> `skipFairness` seam — Phase 2 gets a separate author surface calling different entry points, never a flag
+> that loosens these ops. Build the fair path clean.
 
 > ## 🎚️ SNG-206 — RANK-UP: the 8/8 that won't advance is a HIDDEN SECOND GATE (Aevi, 2026-07-21) — reproduced live
 > Erik: characters hit 8/8 uses and don't rank up; also saw a "rank 2→1 fix."

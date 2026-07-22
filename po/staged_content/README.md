@@ -65,4 +65,4 @@ the depth their craft retrieves from + cost), `offscreenVerbs`.
 - ⚠️ SNG-208's offscreen-epic→arc hook + rivalry-conflict is what makes these ACT; this is the content that
   hook needs. Roster size scaling (SNG-208 §3c open Q3): with more epics, each should fire rarer so the
   aggregate stays bounded.
-- Remaining 19 traditions' epics are **standing content still owed** — this is the first tranche.
+- **COMPLETE: all 24 traditions carry epics (41 figures).** No longer owed — the full roster is authored and staged.

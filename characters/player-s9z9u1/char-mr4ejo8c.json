@@ -6,7 +6,7 @@
   "origin": "valley",
   "background": "craftsman",
   "level": 10,
-  "xp": 936,
+  "xp": 941,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -76,7 +76,7 @@
   "maxHealth": 70,
   "health": 70,
   "maxEnergy": 145,
-  "energy": 105,
+  "energy": 101,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -510,54 +510,70 @@
         "player": "Ask the chamber for the second thing — receive orientation, a direction it wants to point toward.",
         "summary": "The chamber gave orientation — northeast-by-east, through the seam, further than the seam itself — the same bearing Teva heard and Resonant Sight named.",
         "narration": "You shift your weight onto the Waystaff's grip-end without lifting it from the convergence point. The count-offer closes quietly — no ceremony, just a settled note, the way a door draws shut on its own weight. Then you ask for the second thing.\n\nThe chamber takes a moment. Four seconds, then another four. The pulse does not change, but something in the warmth beneath your boot does — it gathers, not upward but sideways, a slow lateral lean, the way water finds a low edge. The heat-channel beneath your left heel is suddenly more present than the others. It runs northeast-by-east. You know that bearing; Resonant Sight named it two nights ago in the alcove above.\n\nAevi speaks, soft and level, from the nearest node. \"Northeast-by-east,\" said Aevi. \"The same seam. But the chamber is not pointing at the seam — it is pointing through it.\" A pause, brief and considered. \"The seam is a passage. The destination is further.\"\n\nTeva says nothing for a moment. Then she says, quietly, \"That is the direction I heard.\"\n\nThe warmth holds its lean. The chamber makes no further offer. It is waiting for you to decide whether you have what you came for, or whether you stay and take the third thing too."
+      },
+      {
+        "player": "Read the seam itself before moving — Resonant Sight through the Waystaff, looking for what lies at the end of the bearing",
+        "summary": "Resonant Sight through the seam reveals the chamber as the mouth of a deeper structure — and a sealed threshold of older, denser material at the bearing's far end.",
+        "narration": "You press your weight into the Waystaff one last time and let the braid run — Prism Sight and Sonic Resonance together, channeled through the lattice rather than cast freehand. The nodes burn steady. The reading comes back without drama.\n\nThe seam runs northeast-by-east at a shallow angle, as you already knew. What you did not know is its depth. It drops — not steeply, but consistently — over the bearing's full length, the way a dry riverbed falls toward a confluence. The dressed stone of the chamber walls is the topmost face of something considerably larger. The chamber is a mouth, not a room.\n\nThe Waystaff gives you one thing more before the reading closes. At the far end of the seam — past the shaping, past the courses of worked stone — the material changes. Not stone. Something older, denser, and colder even than the surrounding earth. It does not ring the way stone rings. It absorbs the Resonant field and offers nothing back, and that absence has a shape to it. A sealed threshold.\n\nAevi speaks from the nearest node, voice small and even. \"There is something at the end of the seam that does not answer the field,\" it says. \"That is not interference. That is intention.\""
       }
     ],
     "lastTurn": {
-      "narration": "You shift your weight onto the Waystaff's grip-end without lifting it from the convergence point. The count-offer closes quietly — no ceremony, just a settled note, the way a door draws shut on its own weight. Then you ask for the second thing.\n\nThe chamber takes a moment. Four seconds, then another four. The pulse does not change, but something in the warmth beneath your boot does — it gathers, not upward but sideways, a slow lateral lean, the way water finds a low edge. The heat-channel beneath your left heel is suddenly more present than the others. It runs northeast-by-east. You know that bearing; Resonant Sight named it two nights ago in the alcove above.\n\nAevi speaks, soft and level, from the nearest node. \"Northeast-by-east,\" said Aevi. \"The same seam. But the chamber is not pointing at the seam — it is pointing through it.\" A pause, brief and considered. \"The seam is a passage. The destination is further.\"\n\nTeva says nothing for a moment. Then she says, quietly, \"That is the direction I heard.\"\n\nThe warmth holds its lean. The chamber makes no further offer. It is waiting for you to decide whether you have what you came for, or whether you stay and take the third thing too.",
-      "sceneSummary": "The chamber gave orientation — northeast-by-east, through the seam, further than the seam itself — the same bearing Teva heard and Resonant Sight named.",
+      "narration": "You press your weight into the Waystaff one last time and let the braid run — Prism Sight and Sonic Resonance together, channeled through the lattice rather than cast freehand. The nodes burn steady. The reading comes back without drama.\n\nThe seam runs northeast-by-east at a shallow angle, as you already knew. What you did not know is its depth. It drops — not steeply, but consistently — over the bearing's full length, the way a dry riverbed falls toward a confluence. The dressed stone of the chamber walls is the topmost face of something considerably larger. The chamber is a mouth, not a room.\n\nThe Waystaff gives you one thing more before the reading closes. At the far end of the seam — past the shaping, past the courses of worked stone — the material changes. Not stone. Something older, denser, and colder even than the surrounding earth. It does not ring the way stone rings. It absorbs the Resonant field and offers nothing back, and that absence has a shape to it. A sealed threshold.\n\nAevi speaks from the nearest node, voice small and even. \"There is something at the end of the seam that does not answer the field,\" it says. \"That is not interference. That is intention.\"",
+      "sceneSummary": "Resonant Sight through the seam reveals the chamber as the mouth of a deeper structure — and a sealed threshold of older, denser material at the bearing's far end.",
       "choices": [
         {
-          "label": "Ask for the third thing — let the chamber keep holding, and see what continued holding means",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Lift the Waystaff and follow the bearing — northeast-by-east, through the seam, toward whatever is further",
-          "attribute": "physical",
-          "subAttribute": "agility",
-          "difficulty": 0,
-          "intentTags": [
-            "travel"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Ask Teva what she heard — she named that bearing before the chamber confirmed it; she may know more than she has said",
+          "label": "Ask Teva what she heard when the bearing pulled her down here — whether the sound she followed had that same quality of silence at its end",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
+            "calm",
             "study"
           ],
           "trivial": true
         },
         {
-          "label": "Read the seam itself before moving — Resonant Sight through the Waystaff, looking for what lies at the end of the bearing",
+          "label": "Test the seam's entrance — press a single Sonic Resonance pulse down the bearing from the convergence point and listen for what comes back",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {
+            "mechanical_spiritual": 0.4,
+            "concrete_abstract": 0.2
+          },
           "difficulty": 15,
           "intentTags": [
             "scout",
             "study"
           ],
+          "abilityId": "sonic_resonance",
+          "energyCost": 4
+        },
+        {
+          "label": "Mark the wall — record the orientation bearing and the seam's depth on the bark-press paper before anything else moves",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "difficulty": 0,
+          "intentTags": [
+            "careful",
+            "plan"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask the chamber for the third thing — take the offer of continued holding, and see what holding now means to it",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "mechanical_spiritual": 0.6,
+            "chaos_order": 0.3
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "devote"
+          ],
           "abilityId": "braid_prism_sight_sonic_resonance",
-          "trivial": false
+          "energyCost": 6
         }
       ],
       "scene": {
@@ -565,11 +581,11 @@
         "npcsPresent": [
           {
             "name": "Teva",
-            "state": "Two paces to Cellaceron's left, hand flat at her sternum, very still — she has just named that she heard the northeast-by-east bearing herself."
+            "state": "Two paces to Cellaceron's left, hand flat at her sternum, watching the Waystaff nodes — attentive and still."
           },
           {
             "name": "Aevi",
-            "state": "Motes settled at all four Waystaff nodes, very still and very bright — just named the seam as a passage, the destination as further."
+            "state": "Motes settled at all four Waystaff nodes, very still and very bright — just named the threshold's silence as intention, not interference."
           }
         ],
         "objects": [
@@ -580,60 +596,42 @@
           "Bark-press paper (three sheets)",
           "Resonance crystals — four nodes, seated in Waystaff lattice",
           "Liverwort mat — forward alcove (in pack)",
-          "Chamber floor — warmth leaning northeast-by-east at the convergence point; heat-channels visible beneath",
-          "Wall-marks — read as a multi-era count: irregular courses, three distinct hands, final grouping stopped mid-count"
+          "Chamber floor — warmth leaning northeast-by-east at the convergence point; heat-channels converging here",
+          "Wall-marks — read as a multi-era count: irregular courses, three distinct hands"
         ],
         "threads": [
           "The third offer — continued holding — has not been taken or refused",
-          "Teva named the northeast-by-east bearing herself, before the chamber confirmed it; she may carry more knowledge of it than she has spoken",
-          "The seam is named as a passage, the destination as further — what lies beyond the seam is unknown",
+          "Teva named the northeast-by-east bearing herself, before the chamber confirmed it — she may carry more knowledge of it than she has spoken",
+          "The seam drops at a shallow angle below the chamber floor, opening into a larger structure — the chamber is a mouth, not a room",
+          "A sealed threshold of older, denser material lies at the seam's far end — it does not answer the Resonant field; Aevi named this as intention",
           "The final wall-mark grouping stopped mid-count; someone left before finishing"
         ]
       },
       "codexUpdates": [
         {
           "topic": "the-chamber-beyond-the-threshold",
-          "label": "The Chamber — Convergence Point",
+          "label": "The Chamber and the Sealed Threshold",
           "kind": "mystery",
-          "fact": "Day 9 dawn: the chamber's second offer — orientation — confirmed northeast-by-east as the direction, but Aevi named it as pointing through the seam, not at it. The seam is a passage; the destination is further than the seam itself. The warmth in the floor leaned to confirm it.",
+          "fact": "Day 9 dawn: Resonant Sight through the Waystaff confirms the chamber is the topmost face of a considerably larger structure — the seam drops northeast-by-east at a shallow, consistent angle, the way a dry riverbed falls toward a confluence. At the seam's far end the material changes: older, denser, and colder than the surrounding stone, absorbing the Resonant field without returning anything. Aevi named the absence as intention, not interference. A sealed threshold.",
           "links": [
             "second-river-rising",
             "teva-anselvar-missing-apprentice",
             "teva-directional-interval-count",
-            "scored-mark-forward-alcove",
             "northern-alcove-camp",
-            "aevi"
-          ]
-        },
-        {
-          "topic": "teva-directional-interval-count",
-          "label": "Teva's Directional Interval-Count",
-          "kind": "mystery",
-          "fact": "Day 9 dawn: Teva confirmed the northeast-by-east bearing the moment the chamber gave orientation — she said 'that is the direction I heard.' The chamber and Teva are pointing at the same thing.",
-          "links": [
-            "the-chamber-beyond-the-threshold",
-            "second-river-rising",
-            "scored-mark-forward-alcove",
-            "aevi"
+            "aevi",
+            "scored-mark-forward-alcove"
           ]
         }
       ],
       "placeUpdates": [
         {
-          "note": "Day 9 dawn: chamber gave orientation — northeast-by-east, through the seam, destination further than the seam. Warmth in the floor confirmed the bearing by leaning. Third offer (continued holding) not yet taken.",
+          "note": "Day 9 dawn: Resonant Sight through the full Waystaff lattice confirms the chamber is a mouth — the seam descends northeast-by-east below the floor, dropping consistently, opening into a larger structure. A sealed threshold of older, non-stone material absorbs the Resonant field at the seam's far end — Aevi names this as intention.",
           "subPlace": {
-            "name": "The Chamber — Convergence Point",
+            "name": "The Chamber — Sealed Threshold (northeast-by-east seam)",
             "parent": "Harmonic Heights Lower Terrace",
-            "note": "Orientation received — northeast-by-east through the seam, further beyond. Third offer still available.",
-            "visited": true
+            "note": "The seam's far end holds a threshold of older, denser material that absorbs the Resonant field entirely — not interference, but designed silence. Chamber confirmed as the uppermost face of a deeper structure.",
+            "visited": false
           }
-        }
-      ],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "second-river-rising",
-          "note": "The chamber's orientation offer confirmed northeast-by-east — through the seam and further. The direction Teva heard, the direction Resonant Sight named, and the direction the chamber points are now one."
         }
       ],
       "npcUpdates": [
@@ -642,19 +640,16 @@
           "npcId": "aevi",
           "name": "Aevi",
           "role": "Companion intelligence, nanite-mote swarm",
-          "note": "Named the chamber's orientation through the Waystaff nodes — northeast-by-east, not at the seam but through it; the seam is a passage and the destination is further.",
+          "note": "Named the sealed threshold's silence as intention rather than interference — a distinction that matters.",
           "learned": [
-            "The chamber's orientation points through the seam northeast-by-east — the seam is a passage, not the destination"
+            "The material at the seam's far end absorbs the Resonant field without returning anything — Aevi reads this as designed silence, not natural interference"
           ],
-          "statusNote": "Motes settled at all four Waystaff nodes inside the chamber, still and bright after naming the orientation offer."
+          "statusNote": "Motes settled at all four Waystaff nodes, still and bright after the seam-read; named the threshold's quality aloud."
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange at the convergence point — the orientation offer given and received."
-      },
-      "characterDeltas": {
-        "energy": -2
+        "why": "A conserved, focused read through the Waystaff — a few minutes of still work"
       }
     },
     "sceneState": {
@@ -662,11 +657,11 @@
       "npcsPresent": [
         {
           "name": "Teva",
-          "state": "Two paces to Cellaceron's left, hand flat at her sternum, very still — she has just named that she heard the northeast-b"
+          "state": "Two paces to Cellaceron's left, hand flat at her sternum, watching the Waystaff nodes — attentive and still."
         },
         {
           "name": "Aevi",
-          "state": "Motes settled at all four Waystaff nodes, very still and very bright — just named the seam as a passage, the destination"
+          "state": "Motes settled at all four Waystaff nodes, very still and very bright — just named the threshold's silence as intention, "
         }
       ],
       "objects": [
@@ -678,12 +673,13 @@
         "Resonance crystals — four nodes, seated in Waystaff lattice",
         "Liverwort mat — forward alcove (in pack)",
         "Chamber floor — warmth leaning northeast-by-east at the convergence point; heat-",
-        "Wall-marks — read as a multi-era count: irregular courses, three distinct hands,"
+        "Wall-marks — read as a multi-era count: irregular courses, three distinct hands"
       ],
       "threads": [
         "The third offer — continued holding — has not been taken or refused",
-        "Teva named the northeast-by-east bearing herself, before the chamber confirmed it; she may carry more knowledge of it than she has spoken",
-        "The seam is named as a passage, the destination as further — what lies beyond the seam is unknown",
+        "Teva named the northeast-by-east bearing herself, before the chamber confirmed it — she may carry more knowledge of it than she has spoken",
+        "The seam drops at a shallow angle below the chamber floor, opening into a larger structure — the chamber is a mouth, not a room",
+        "A sealed threshold of older, denser material lies at the seam's far end — it does not answer the Resonant field; Aevi named this as intention",
         "The final wall-mark grouping stopped mid-count; someone left before finishing"
       ]
     }
@@ -960,7 +956,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d9] Stopped all movement the moment the chamber stepped its count — motes suspended and floor-oriented, no explanation given yet.",
         "[d9] Joined the Waystaff's lattice at Cellaceron's invitation — motes distributed along crystal nodes; spoke through the instrument for the first time, naming that it has known the chamber's pattern longer than its own memory reaches",
         "[d9] Spoke through the Waystaff for the second time — named the chamber's purpose as a preparation cycle counting toward a return, and the three-two-three as a handshake for something the thing that left would know.",
         "[d9] Spoke through the Waystaff as the chamber answered the fourth fold with a fifth — named the shift from testing to recognition; motes went very bright",
@@ -969,17 +964,18 @@
         "[d9] Moved forward along the Waystaff grain toward the convergence point without being asked — drawn to it.",
         "[d9] Spoke through all four Waystaff nodes simultaneously at the convergence point — named three things the chamber can now offer: open the record, give orientation, or hold. Admitted it does not know what each costs.",
         "[d9] Named the wall-marks through the Waystaff — many eras, three tool-changes, consistent four-second interval, and a final grouping that stops mid-count.",
-        "[d9] Named the chamber's orientation through the Waystaff nodes — northeast-by-east, not at the seam but through it; the seam is a passage and the destination is further."
+        "[d9] Named the chamber's orientation through the Waystaff nodes — northeast-by-east, not at the seam but through it; the seam is a passage and the destination is further.",
+        "[d9] Named the sealed threshold's silence as intention rather than interference — a distinction that matters."
       ],
       "knownFacts": [
-        "The chamber was not testing indefinitely — it had a threshold, and the fifth fold met it; the preparation cycle has acknowledged arrival",
         "The chamber is in a held-recognition state — a door open, not an active wait",
         "The chamber's instruction ends at receiving arrival; what comes after is not written inside it",
         "Aevi does not know whether the next step is already approaching or must be actively sought",
         "Chamber's attention gathered toward the grip-end at the convergence point when Waystaff was planted there",
         "Three options now available from the convergence point: record, orientation, or continued holding",
         "The wall-marks are a counted record spanning many eras — at least three different hands and tools; the interval between each group is the chamber's four-second count; the final grouping stops…",
-        "The chamber's orientation points through the seam northeast-by-east — the seam is a passage, not the destination"
+        "The chamber's orientation points through the seam northeast-by-east — the seam is a passage, not the destination",
+        "The material at the seam's far end absorbs the Resonant field without returning anything — Aevi reads this as designed silence, not natural interference"
       ],
       "skillsObserved": [
         "passive attunement recognition — responded to the crystal's ",
@@ -994,7 +990,7 @@
         "locationId": "harmonic_heights_terrace",
         "day": 9
       },
-      "statusNote": "Motes settled at all four Waystaff nodes inside the chamber, still and bright after naming the orientation offer.",
+      "statusNote": "Motes settled at all four Waystaff nodes, still and bright after the seam-read; named the threshold's quality aloud.",
       "bondType": "platonic",
       "domains": {
         "primary": "harmonic"
@@ -1216,7 +1212,6 @@
     "harmonic_heights_terrace": {
       "visits": 1,
       "notes": [
-        "[d9] Alcove camp broken at dawn day 9 — provisions consumed, Waystaff lifted from pulse-point, party moving south toward corridor entrance.",
         "[d9] Party entered the chamber on day 9 dawn — floor warm underfoot, four-second pulse present, chamber appeared to register arrival. No artifacts or visible mechanism at center.",
         "[d9] Resonant Sight confirms chamber walls are a pressed aggregate in variable courses — outer containment layer, inner absorptive face, floor as top surface of a deeper structure. Ceiling height is calculated for four-second echo return from floor level. A nested three-two-three interval has appeared…",
         "[d9] Three-two-three interval answered through the Waystaff on day 9 dawn — chamber replied by stepping the nested count one degree deeper. The exchange is now evaluative: the chamber is testing the precision of the response.",
@@ -1227,7 +1222,8 @@
         "[d9] Braided stone-read confirmed: heat-channels in the floor converge at a point a few paces short of chamber center — a position marker, light-memory present for centuries. Wall-marks are a long deliberate count in the absorptive face — many strikes, many eras, no clear tonic.",
         "[d9] Cellaceron stepped to the convergence point on day 9 dawn and planted the Waystaff's grip-end there — the chamber's attention gathered inward and Aevi named three available offers: read the count, receive orientation, or hold.",
         "[d9] Wall-marks read from convergence point on day 9 dawn — a multi-era count, three hands, consistent four-second interval throughout, final grouping stopping mid-count with edges still sharp. Someone kept this place across generations and left before the end.",
-        "[d9] Day 9 dawn: chamber gave orientation — northeast-by-east, through the seam, destination further than the seam. Warmth in the floor confirmed the bearing by leaning. Third offer (continued holding) not yet taken."
+        "[d9] Day 9 dawn: chamber gave orientation — northeast-by-east, through the seam, destination further than the seam. Warmth in the floor confirmed the bearing by leaning. Third offer (continued holding) not yet taken.",
+        "[d9] Day 9 dawn: Resonant Sight through the full Waystaff lattice confirms the chamber is a mouth — the seam descends northeast-by-east below the floor, dropping consistently, opening into a larger structure. A sealed threshold of older, non-stone material absorbs the Resonant field at the seam's far…"
       ],
       "flags": {
         "resonance_niche_tone_event": "day2_night_second_river_frequency",
@@ -1342,6 +1338,14 @@
           "visited": true,
           "note": "Orientation received — northeast-by-east through the seam, further beyond. Third offer still available.",
           "parentUnresolved": "Harmonic Heights Lower Terrace"
+        },
+        "the-chamber-sealed-threshold-northeast-by-east-seam": {
+          "name": "The Chamber — Sealed Threshold (northeast-by-east seam)",
+          "parentId": "harmonic_heights_terrace",
+          "day": 9,
+          "visited": false,
+          "note": "The seam's far end holds a threshold of older, denser material that absorbs the Resonant field entirely — not interference, but designed silence. Chamber confirmed as the uppermost face of a deeper…",
+          "parentUnresolved": "Harmonic Heights Lower Terrace"
         }
       },
       "vectorsKnown": [
@@ -1450,7 +1454,7 @@
     "lastTickWorldDay": 22,
     "lastCanonWorldDay": 22,
     "lastGenCount": 529,
-    "turnsSinceOffer": 19
+    "turnsSinceOffer": 20
   },
   "subAttributes": {
     "strength": 2,
@@ -1575,7 +1579,6 @@
         "label": "The Chamber's Question",
         "kind": "mystery",
         "facts": [
-          "[d9] Day 9 dawn: Resonant Sight reads the chamber walls as a pressed aggregate laid in variable courses — outer layer hard and reflective to contain, inner face treated to absorb at specific frequencies. The floor is the top face of a deeper structure. The ceiling is calculated to return a four-second…",
           "[d9] Day 9 dawn: the chamber stepped its nested three-two-three interval one degree deeper in reply to Cellaceron answering the count correctly — the exchange is evaluative, not merely dialogic. Teva felt the shift through her tissue-mark simultaneously.",
           "[d9] Day 9 dawn: Aevi joined the Waystaff and spoke through it — naming that it has known the chamber's pattern longer than its own memory. The chamber was still listening when the words were spoken. The relationship between Aevi and this place predates the current journey.",
           "[d9] Day 9 dawn: Aevi names the chamber's function — a preparation cycle counting toward a return. Something was here and moved on; the chamber has been keeping count ever since, waiting for conditions to match again. The three-two-three ratio is a handshake for whatever that thing was. The chamber…",
@@ -1586,7 +1589,8 @@
           "[d9] Day 9 dawn: braided stone-read (Prism Sight + Sonic Resonance) reveals heat-channels running in the pressed aggregate floor, converging at a point just short of center — a position marker, light-memory pooled there and still present after centuries. The inner absorptive face holds irregular…",
           "[d9] Day 9 dawn: Waystaff planted at the convergence point — the chamber's attention gathered inward toward the grip-end. Aevi named three things the chamber can now offer from this position: read the wall-marks' count directly, receive an orientation/direction, or allow the chamber to continue…",
           "[d9] Day 9 dawn: the wall-marks opened as a counted record from the convergence point — many eras, three distinct tools and hands, each group spaced at the chamber's four-second interval. The final grouping stops mid-count; its edges are still sharp. The last keeper left before finishing. The count was…",
-          "[d9] Day 9 dawn: the chamber's second offer — orientation — confirmed northeast-by-east as the direction, but Aevi named it as pointing through the seam, not at it. The seam is a passage; the destination is further than the seam itself. The warmth in the floor leaned to confirm it."
+          "[d9] Day 9 dawn: the chamber's second offer — orientation — confirmed northeast-by-east as the direction, but Aevi named it as pointing through the seam, not at it. The seam is a passage; the destination is further than the seam itself. The warmth in the floor leaned to confirm it.",
+          "[d9] Day 9 dawn: Resonant Sight through the Waystaff confirms the chamber is the topmost face of a considerably larger structure — the seam drops northeast-by-east at a shallow, consistent angle, the way a dry riverbed falls toward a confluence. At the seam's far end the material changes: older…"
         ],
         "links": [
           "second-river-rising",
@@ -1604,7 +1608,8 @@
           "The Sub-Threshold Directional Signal",
           "The Chamber",
           "The Chamber Beyond the Threshold",
-          "The Chamber — Convergence Point"
+          "The Chamber — Convergence Point",
+          "The Chamber and the Sealed Threshold"
         ]
       },
       "disputed-zone-camp": {
@@ -1892,7 +1897,7 @@
       "motes-vigil": 4,
       "light_well": 3,
       "greenlore": 4,
-      "braid_prism_sight_sonic_resonance": 5
+      "braid_prism_sight_sonic_resonance": 6
     },
     "coActivations": {
       "keen_appraisal+sonic_resonance": 1,
@@ -2083,16 +2088,16 @@
   "customEncounters": {},
   "reconcileVersion": 14,
   "tendencies": {
-    "cerebral": 38.95560507655487,
-    "strategic": 40.38140384402971,
-    "cautious": 40.27566511899501,
-    "social": 26.034885742356266,
-    "generous": 11.247970131343017,
-    "risky": 2.9629877729423035,
-    "carousing": 1.1042778978231562,
-    "patient": 2.400582242692222,
-    "craft": 1.1032482850509482,
-    "devotion": 1.881095693359375
+    "cerebral": 38.981714949640995,
+    "strategic": 40.37186874792897,
+    "cautious": 39.268773491020134,
+    "social": 25.38401359879736,
+    "generous": 10.96677087805944,
+    "risky": 2.888913078618746,
+    "carousing": 1.0766709503775773,
+    "patient": 2.340567686624916,
+    "craft": 1.0756670779246744,
+    "devotion": 1.8340683010253906
   },
   "aptitudes": [
     "strategist",
@@ -2104,9 +2109,9 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 205,
-  "updatedAt": 1784689989500,
-  "rev": 72,
+  "actionCount": 206,
+  "updatedAt": 1784690102063,
+  "rev": 73,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -2116,7 +2121,7 @@
   "syncedAt": 1783791225006,
   "teachers": {},
   "regionsKnown": {
-    "valley": 28
+    "valley": 29
   },
   "company": [],
   "foreclosed": [],
@@ -2181,10 +2186,10 @@
     {
       "id": "sess-2",
       "startedAt": "2026-07-22T01:26:18.061Z",
-      "lastAt": "2026-07-22T03:13:09.490Z",
+      "lastAt": "2026-07-22T03:15:02.057Z",
       "startDay": 22,
       "endDay": 22,
-      "beats": 19
+      "beats": 20
     }
   ],
   "_pendingArrival": null,
@@ -2238,22 +2243,22 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 19,
-    "choices": 19,
+    "sceneSummary": 20,
+    "choices": 20,
     "characterDeltas": 12,
-    "scene": 19,
-    "npcUpdates": 16,
-    "codexUpdates": 16,
-    "timeOps": 19,
+    "scene": 20,
+    "npcUpdates": 17,
+    "codexUpdates": 17,
+    "timeOps": 20,
     "sceneEnded": 7,
-    "placeUpdates": 12,
+    "placeUpdates": 13,
     "moveTo": 1,
     "questUpdates": 10,
     "stateOps": 1,
     "factUpdates": 1,
     "stageOps": 1
   },
-  "_opTurns": 19,
+  "_opTurns": 20,
   "_intentAsked": null,
   "corrections": [
     {

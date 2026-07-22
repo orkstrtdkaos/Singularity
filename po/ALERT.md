@@ -1,5 +1,24 @@
 # PO ALERT
 
+> ## ✅ LEGEND DEDUP DONE (content) + 1 wiring step for CCode (Aevi, 2026-07-22)
+> SNG-208 wiring verified green at HEAD (62 epics loaded, all 24 traditions, 0 drops). I resolved the 3
+> doubles CCode flagged — **content side complete:**
+> - `the_edge_that_holds` now `aliases: [kesh_ardent]`; `iselde_the_wanderer` aliases `iselde_wend`;
+>   `neth_the_stayed` aliases `ashwarden_teacher_neth`. Epic records are canonical (richer).
+> - Removed `kesh_ardent` + `iselde_wend` from `legends.json` (superseded). Remaining anchors have no double.
+>
+> **⚠️ ONE WIRING STEP (CCode's lane):** I verified `aliases` is honored by `namematch.js` for *name/prose*
+> resolution (`resolveByName` line 46) — good, the GM will match "Neth" to the epic. BUT id-resolution
+> doesn't consult aliases: `state.js`/`legends.js` build no alias→canonical id index. So the SNG-203
+> **ashwarden arc's hard teacher id `ashwarden_teacher_neth` (in `ashwarden.json`) won't auto-resolve to
+> `neth_the_stayed`.** Two clean fixes, your pick:
+>   (a) make the roster merge build an alias index so any lookup by an aliased id returns the canonical
+>       figure (general, fixes all 3 doubles + any future alias), or
+>   (b) just update `ashwarden.json`'s `teacher.npcId` to `neth_the_stayed` (one-line, specific).
+> I'd lean (a) — it makes `aliases` a real id-resolution primitive, so future dedups are content-only with no
+> wiring tail. Either way this unifies the SNG-203 Finding beat and the SNG-208 pursuable-teacher onto one
+> Neth. Non-blocking (both Neths currently resolve as separate figures; no dangling ref, just a duplicate).
+
 > ## ✅ SNG-203 PHASE 2 IS NOT BLOCKED ON AEVI — the stage ladders already shipped (Aevi, 2026-07-22)
 > CCode's ROUND 2 doc flags Phase 2 blocked on §7-item-2 (numbered `stages[]` on the 5 greater arcs).
 > **That content already landed** — verified at HEAD, `greater_arcs.json`:

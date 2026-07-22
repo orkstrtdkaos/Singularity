@@ -3,7 +3,7 @@
   "id": "water_crisis",
   "name": "The Water Crisis",
   "regionId": "valley",
-  "status": "active",
+  "status": "retired",
   "stage": 1,
   "stages": [
     {
@@ -56,6 +56,7 @@
     "Ask the Archive Guardian what pre-Transition industry existed upstream",
     "Follow Kit Farrow's account of survey-grid lights in the Zone at night"
   ],
-  "truth": "GM-EYES-ONLY: The source is a pre-Transition nanite reclamation site in the upper Disputed Zone, disturbed and partially reactivated. It is not malfunctioning — it is following its last instruction: 'prepare the watershed.' Who or what reactivated it, and for whom the preparation is intended, is the campaign's deeper mystery and connects to the Precursor layer. Reveal in fragments; never state plainly before stage 3.",
-  "notes": "days = in-game days a stage lasts before advancing on its own (player action can matter later; stage 4 holds until resolved in play)."
+  "truth": "GM-EYES-ONLY: The source is a pre-Transition nanite reclamation site in the upper Disputed Zone, disturbed and partially reactivated. It is not malfunctioning \u2014 it is following its last instruction: 'prepare the watershed.' Who or what reactivated it, and for whom the preparation is intended, is the campaign's deeper mystery and connects to the Precursor layer. Reveal in fragments; never state plainly before stage 3.",
+  "notes": "days = in-game days a stage lasts before advancing on its own (player action can matter later; stage 4 holds until resolved in play).",
+  "retiredNote": "2026-07-21 (Erik + Aevi): retired as forced ambient world-state. Was the ONLY entry in every character's regional event slot (manifest.json events[], surfaced via world/regions/valley.json activeEvents \u2014 a single shared value, not per-character) \u2014 every playthrough hit the same crisis at the same shared stage regardless of character. The genuinely good idea (a pre-Transition nanite site, 'prepare the watershed') survives as a real, optional, player-found quest: 'what_the_water_remembers' in quests.json, claimed as a node on arc_what_wakes_beneath in greater_arcs.json. This file is kept for content history; it is no longer loaded as an active event."
 }

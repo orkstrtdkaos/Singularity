@@ -4,6 +4,7 @@
 // them per-location and feeds them back on every return visit.
 
 import { smartClamp, normName } from "./namematch.js"; // SNG-152 + SNG-176
+import { applyCodexUpdates } from "./codex.js"; // SNG-199 §5: reaching a place writes the codex — direct, never injected
 
 // SNG-154: the sub-place cap was an inline 12. It is load-bearing (unbounded interiors would grow
 // the save the way unbounded scene history did in CCODE-02), so it stays a cap — but it is named
@@ -42,11 +43,21 @@ export function findSubPlaceParent(character, nameOrSlug) {
   return null;
 }
 
-export function notePlaceVisit(character, locationId, day = null) {
+export function notePlaceVisit(character, locationId, day = null, name = null) {
   character.placeMemory = character.placeMemory || {};
+  const first = !character.placeMemory[locationId];
   const p = character.placeMemory[locationId] || (character.placeMemory[locationId] = { visits: 0, notes: [], flags: {} });
   p.visits += 1;
   p.lastVisit = day;
+  // SNG-199 §5: the FIRST arrival writes the codex — the place half of "the codex knows who you met."
+  // Cairnhold was walked and never recorded because only a volunteered GM codexUpdate could write it.
+  // Once per place; resolveTopic dedupes; the topic cap holds inside applyCodexUpdates. `name` is
+  // optional (callers pass the location's display name); without it the id prettifies.
+  if (first) {
+    const label = name ? String(name) : String(locationId).replace(/[_-]+/g, " ").replace(/\b\w/g, ch => ch.toUpperCase());
+    try { applyCodexUpdates(character, [{ entityId: locationId, label: smartClamp(label, 60), kind: "place", fact: "you have walked here" }], { day }); }
+    catch { /* the codex is a mirror — never let it break a visit */ }
+  }
   return p;
 }
 

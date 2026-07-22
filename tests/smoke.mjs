@@ -6497,6 +6497,60 @@ await (async () => {
   check("201 §3.2: a genuinely new pairing lands as first-finder", merged2.published.length === 1 && store.recipes["a+c"]);
 }
 
+// --- SNG-199 §5 + SNG-205 §1: the codex knows who you met (mirrors + the Teva recovery) ---
+{
+  const { applyNpcUpdates } = await import("../engine/npcs.js");
+  const { notePlaceVisit } = await import("../engine/places.js");
+  const { ensureCodex } = await import("../engine/codex.js");
+  const rc = await import("../engine/reconcile.js");
+
+  // §5a — MEETING someone writes the codex, mandatorily (no GM codexUpdates involved).
+  const c1 = { npcRegistry: {}, codex: { topics: {} } };
+  applyNpcUpdates(c1, [{ op: "meet", npcId: "teva", name: "Teva", role: "sonic warden apprentice" }], { day: 3 });
+  const tevaNode = Object.values(c1.codex.topics).find(t => t.entityId === "teva" || t.id === "teva");
+  check("199 §5: a meet op writes a person codex node (the mandatory mirror)", !!tevaNode && tevaNode.kind === "person" && tevaNode.label === "Teva");
+  const topicsAfterMeet = Object.keys(c1.codex.topics).length;
+  applyNpcUpdates(c1, [{ npcId: "teva", note: "helped with the resonance" }], { day: 4 });
+  check("199 §5: the mirror fires on CREATE only — later updates add no duplicate topic", Object.keys(c1.codex.topics).length === topicsAfterMeet);
+
+  // §5b — REACHING a place writes the codex on FIRST arrival only.
+  notePlaceVisit(c1, "cairnhold", 5, "Cairnhold");
+  const cairn = Object.values(c1.codex.topics).find(t => t.entityId === "cairnhold");
+  check("199 §5: first arrival writes a place codex node with the display name", !!cairn && cairn.kind === "place" && cairn.label === "Cairnhold");
+  const topicsAfterVisit = Object.keys(c1.codex.topics).length;
+  notePlaceVisit(c1, "cairnhold", 6, "Cairnhold");
+  check("199 §5: a return visit adds no duplicate topic (visits still count)", Object.keys(c1.codex.topics).length === topicsAfterVisit && c1.placeMemory.cairnhold.visits === 2);
+
+  // §5 + SNG-205 §1 — the v15 recovery on a TEVA-SHAPED save: established + codex-person + quest-present,
+  // absent from npcRegistry (her meet op never fired); a registry person with no codex node; a walked place.
+  const step15 = rc.CHARACTER_STEPS.find(s => s.id === "codex-knows-who-you-met");
+  check("199/205: reconcile has the codex-knows-who-you-met step (v15)", !!step15 && step15.version === 15 && rc.topReconcileVersion("character") >= 15);
+  const old = {
+    establishedFacts: [{ id: "teva", subjectId: "teva", text: "Teva is under Cellaceron's protection", day: 9 },
+                       { id: "f2", subjectId: "the-hub", text: "The Hub hums at dusk", day: 9 }],   // subject with a PLACE topic — must NOT register as a person
+    codex: { topics: {
+      teva: { id: "teva", label: "Teva", kind: "person", facts: [], links: [], aliases: [] },
+      "the-hub": { id: "the-hub", label: "The Hub", kind: "place", facts: [], links: [], aliases: [] }
+    } },
+    npcRegistry: { maren: { id: "maren", name: "Maren", role: "warden", firstMet: { locationId: null, day: 1 }, history: [], knownFacts: [], skillsObserved: [], relationship: 0, status: "active" } },
+    placeMemory: { millbrook: { visits: 4, lastVisit: 8, notes: [], flags: {} } }
+  };
+  const out15 = step15.apply(old, { content: { locations: { millbrook: { id: "millbrook", name: "Millbrook" } } } });
+  check("205 §1: TEVA RECOVERS — established + person-codex, absent from the registry → registered", !!old.npcRegistry.teva && old.npcRegistry.teva.name === "Teva");
+  check("205 §1: established ≠ mentioned — a PLACE-kind subject is never registered as a person", !old.npcRegistry["the-hub"]);
+  check("199 §5: a registry person with no codex node gets one retro-mirrored (Maren)", Object.values(old.codex.topics).some(t => t.entityId === "maren" && t.kind === "person"));
+  check("199 §5: a walked place gets its codex node retro-mirrored with the content name (Millbrook)", Object.values(old.codex.topics).some(t => t.entityId === "millbrook" && t.kind === "place" && t.label === "Millbrook"));
+  check("199/205: the recovery is player-facing and says so", (out15.notes || []).length >= 1);
+  const regCount = Object.keys(old.npcRegistry).length, topicCount = Object.keys(old.codex.topics).length;
+  step15.apply(old, { content: { locations: { millbrook: { id: "millbrook", name: "Millbrook" } } } });
+  check("199/205: the recovery is idempotent by construction (second run adds nothing)", Object.keys(old.npcRegistry).length === regCount && Object.keys(old.codex.topics).length === topicCount);
+
+  // §6 — codex search filters EVERYTHING above the list + the empty state distinguishes no-results from empty.
+  const appSrc199 = readFileSync(join(root, "app.js"), "utf8");
+  check("199 §6: the NOTABLE row and merge suggestions filter by the active search", /nominationsFor\(character\)\.filter\(n => !q \|\|/.test(appSrc199) && /suggestMerges\(character\) : \[\]\)\s*\.filter\(s => !q \|\|/.test(appSrc199));
+  check("199 §6: an empty RESULT says the search found nothing — distinct from an empty codex", /No entries match/.test(appSrc199) && /Nothing cataloged yet/.test(appSrc199));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

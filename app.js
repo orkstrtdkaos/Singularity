@@ -64,7 +64,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.186";
+const APP_VERSION = "1.8.187";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -911,7 +911,7 @@ function devJumpTo(ref) {
   const day = (() => { try { return readClock(character.clock).day; } catch { return null; } })();
   character.currentLocationId = id;
   addKnownPlace(id);
-  try { notePlaceVisit(character, id, day); } catch { /* convenience */ }
+  try { notePlaceVisit(character, id, day, CONTENT.locations[id]?.name); } catch { /* convenience */ }
   try { notePerception(character, id, CONTENT.locations[id], { visited: true, usedAbilityIds: [] }, CONTENT.rules); } catch { /* convenience */ }
   try { ensureLocationImage(id); } catch { /* art never blocks */ }
   character.activeScene = null; sceneTurns = []; sceneState = null; // land fresh at the new place
@@ -3808,7 +3808,7 @@ function applyTurn(turn, resolution, playerWords = null) {
       character.currentLocationId = destId;
       addKnownPlace(destId);
       noteGeneratedAttention(destId, "revisit", readClock(character.clock).day);
-      notePlaceVisit(character, destId, readClock(character.clock).day);
+      notePlaceVisit(character, destId, readClock(character.clock).day, CONTENT.locations[destId]?.name);
       try { notePerception(character, destId, CONTENT.locations[destId], { visited: true, usedAbilityIds: [] }, CONTENT.rules); } catch { /* perception is a convenience */ }
       try { ensureLocationImage(destId); } catch { /* art never blocks a move */ }
     }
@@ -4525,7 +4525,7 @@ async function travelTo(locId) {
   sceneTurns = [];
   sceneState = null;
   advanceClock(character.clock, ADVANCE.travel);
-  notePlaceVisit(character, locId, readClock(character.clock).day);
+  notePlaceVisit(character, locId, readClock(character.clock).day, CONTENT.locations[locId]?.name);
   notePerception(character, locId, CONTENT.locations[locId], { visited: true, usedAbilityIds: [] }, CONTENT.rules);
   try { ensureLocationImage(locId); } catch { /* SNG-046 L3: art is a convenience; never block travel */ }
   saveCharacter(character);
@@ -6369,7 +6369,12 @@ async function maybeAdjudicateMerges(query = "") {
 function renderCodexScreen(query = "", openTopicId = null, mergeMode = false) {
   const results = searchCodex(character, query);
   const open = openTopicId ? character.codex?.topics?.[openTopicId] : null;
-  const suggestions = !open ? suggestMerges(character) : [];
+  // SNG-199 §6: search filters EVERYTHING it is displayed above — the NOTABLE row and the merge
+  // suggestions are entry lists too, and rendering them unfiltered under an active search told the
+  // player "cairnhold: nothing" beneath six visible entries.
+  const q = String(query || "").trim().toLowerCase();
+  const suggestions = (!open ? suggestMerges(character) : [])
+    .filter(s => !q || String(s.a).toLowerCase().includes(q) || String(s.b).toLowerCase().includes(q));
   if (!open) maybeAdjudicateMerges(query); // SNG-153: tidy the codex itself, off the play loop
   chrome(`<div class="screen" style="max-width:720px">
     <h2>Codex — what ${esc(character.name)} knows</h2>
@@ -6415,14 +6420,14 @@ function renderCodexScreen(query = "", openTopicId = null, mergeMode = false) {
       ${(() => {
         // SNG-BATCH-9 Phase 2 §3: entities that grew into 'notable' (nominated) surface as
         // promotion candidates toward shared canon. Surfacing only — tap to open + ⭐/keep.
-        const noms = nominationsFor(character);
+        const noms = nominationsFor(character).filter(n => !q || String(n.name).toLowerCase().includes(q)); // SNG-199 §6
         if (!noms.length) return "";
         return `<div class="codex-nominations"><div class="codex-group-title">★ Notable — grown into your world's canon</div>
           ${noms.slice(0, 6).map(n => `<button class="opt codex-nom" data-topic="${esc(n.id)}" title="weight ${n.weight}${n.rating ? ` · ${n.rating}` : ""} — a candidate to become shared-world canon">★ ${esc(n.name)} <span class="cost">${esc(n.type)}</span></button>`).join("")}</div>`;
       })()}
       ${/* SNG-153: a RECEIPT of what the codex did on its own — with a one-tap undo, because
             auto-merge is only safe while it stays reversible (Erik's condition). */""}
-      ${character._codexDigest ? `<div class="codex-digest insight" style="margin-bottom:8px">${esc(character._codexDigest)}${(character.codex?.mergeUndo || []).length ? ` <button class="opt codex-sug-btn dim" id="codex-undo">Undo the last merge</button>` : ""}</div>` : ""}
+      ${character._codexDigest && !q ? `<div class="codex-digest insight" style="margin-bottom:8px">${esc(character._codexDigest)}${(character.codex?.mergeUndo || []).length ? ` <button class="opt codex-sug-btn dim" id="codex-undo">Undo the last merge</button>` : ""}</div>` : ""}
       ${suggestions.length ? `<div class="codex-suggestions"><div class="codex-group-title">These look like the same thing — your call</div>
         ${suggestions.map((s, i) => `<div class="codex-sug-row"><span class="codex-sug-pair">«${esc(s.a)}» ↔ «${esc(s.b)}»</span>
           <button class="opt codex-sug-btn" data-sugmerge="${i}">Merge</button>
@@ -6449,7 +6454,9 @@ function renderCodexScreen(query = "", openTopicId = null, mergeMode = false) {
                   return lt ? `<button class="codex-link" data-topic="${esc(l)}">${esc(lt.label)}</button>` : "";
                 }).join(" ")}</div>` : ""}
               </div>`).join("")}</div>`).join("");
-        })() : "<div class='insight'>Nothing cataloged yet — knowledge accumulates as you learn things that matter.</div>"}
+        })() : (q
+          ? `<div class='insight'>No entries match “${esc(query)}” — you may not know of it yet.</div>`  /* SNG-199 §6: an empty RESULT is not an empty CODEX */
+          : "<div class='insight'>Nothing cataloged yet — knowledge accumulates as you learn things that matter.</div>")}
       </div>`}
     <button class="btn secondary" id="codex-back" style="margin-top:12px">Back to the valley</button>
   </div>`);

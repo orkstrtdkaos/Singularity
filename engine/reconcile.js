@@ -13,7 +13,7 @@
 // backfill.js remains the XP/bonds/practice credit pass (extend, don't replace) —
 // reconcile is the umbrella for everything schema/feature-shaped that came after.
 
-import { mergeCodexTopics } from "./codex.js";
+import { mergeCodexTopics, ensureCodex, applyCodexUpdates } from "./codex.js";
 import { dedupeQuests } from "./quests.js";
 import { dedupeInventory } from "./inventory.js";
 import { inferDomains } from "./traditions.js";
@@ -23,6 +23,7 @@ import { namesMatch } from "./namematch.js";
 import { affiliationOf, regionHomeTradition, buildPeopleVocab } from "./affiliation.js";
 import { defaultSchoolsForDomains } from "./substrate.js"; // SNG-193b §3.2: seed a school per practised domain on old saves
 import { mintableBraidsFor, buildBraidDef, mintBraid } from "./braids.js"; // SNG-196: mint the braids a character already earned
+import { findExistingNpc, prettifyNpcName, REGISTRY_CAP } from "./npcs.js"; // SNG-199/205: registry + codex backfill
 
 // ---------- character migration steps (extensible registry) ----------
 // Each step: { version, id, playerFacing, apply(entity, ctx) → { notes?, offers?, warnings? } }.
@@ -354,6 +355,58 @@ export const CHARACTER_STEPS = [
       return names.length
         ? { notes: [`Braids you had already earned, made real (${names.length}): ${names.join(", ")}. A braid is a craft neither parent could do alone — rename it and deepen it in play.`] }
         : {};
+    }
+  },
+  {
+    version: 15, id: "codex-knows-who-you-met", playerFacing: true,
+    // SNG-199 §5 + SNG-205 §1. Two recoveries for the same seam — "the fact is written and the reader
+    // never fires" — on saves from before the mandatory mirrors existed:
+    //  (a) TEVA: a person who is an established-fact SUBJECT with a person-kind codex node is demonstrably
+    //      KNOWN — but knownPeopleAt reads only npcRegistry, and her registry write was op-gated on a
+    //      `meet` that never fired (she entered through narration). Back-fill the registry from the two
+    //      independent signals. Established ≠ mentioned: a keyed subjectId + a person codex topic, never
+    //      every name spoken once. Registry cap holds.
+    //  (b) THE CODEX MIRROR, retroactively: people already in the registry and places already walked get
+    //      the codex node the new mirrors would have written (applyCodexUpdates dedupes via resolveTopic;
+    //      the 60-topic cap holds inside it — people first, they are the load-bearing half).
+    // Idempotent: version-gated AND by construction (existing records resolve, never duplicate).
+    apply: (c, ctx) => {
+      ensureCodex(c);
+      const topics = c.codex.topics;
+      const reg = c.npcRegistry = c.npcRegistry || {};
+      // (a) registry back-fill from established facts × person-kind codex nodes
+      const registered = [];
+      for (const f of c.establishedFacts || []) {
+        const sid = f.subjectId;
+        if (!sid) continue;
+        const t = topics[sid] || Object.values(topics).find(x => x.entityId === sid);
+        if (!t || t.kind !== "person") continue;                      // both signals or nothing
+        if (findExistingNpc(reg, sid, t.label || sid)) continue;      // already known (aliases included)
+        if (Object.keys(reg).length >= REGISTRY_CAP) break;           // keep the people who matter
+        reg[sid] = {
+          id: sid, name: prettifyNpcName(String(t.label || sid)), role: "", description: "",
+          firstMet: { locationId: null, day: f.day ?? t.createdDay ?? null }, relationship: 0,
+          history: [`[d${f.day ?? "?"}] Known from what has passed between you.`],
+          knownFacts: [], skillsObserved: [], status: "active", gender: null, pronouns: null,
+          _backfilledFrom: "establishedFacts"
+        };
+        registered.push(reg[sid].name);
+      }
+      // (b) retro-mirror: registry people + walked places into the codex (one update per call —
+      // applyCodexUpdates caps its batch at 4; per-entity calls keep every mirror counted)
+      const before = Object.keys(topics).length;
+      for (const n of Object.values(reg)) {
+        try { applyCodexUpdates(c, [{ entityId: n.id, label: n.name, kind: "person", fact: n.role || "met in play" }], { day: n.firstMet?.day ?? null }); } catch { /* mirror only */ }
+      }
+      for (const [locId, p] of Object.entries(c.placeMemory || {})) {
+        const label = ctx.content?.locations?.[locId]?.name || String(locId).replace(/[_-]+/g, " ").replace(/\b\w/g, ch => ch.toUpperCase());
+        try { applyCodexUpdates(c, [{ entityId: locId, label: String(label).slice(0, 60), kind: "place", fact: "you have walked here" }], { day: p?.lastVisit ?? null }); } catch { /* mirror only */ }
+      }
+      const mirrored = Object.keys(topics).length - before;
+      const notes = [];
+      if (registered.length) notes.push(`People the story already established, now known: ${registered.join(", ")}.`);
+      if (mirrored > 0) notes.push(`Your codex now records the people you've met and the places you've walked (${mirrored} added).`);
+      return notes.length ? { notes } : {};
     }
   },
   {

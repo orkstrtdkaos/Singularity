@@ -8,6 +8,7 @@
 import { slugify } from "./quests.js";
 import { smartClamp, normName } from "./namematch.js"; // SNG-152: model prose clamps on a word boundary, never mid-word
 import { isMinorSubject } from "./art.js";
+import { applyCodexUpdates } from "./codex.js"; // SNG-199 §5: meeting someone MUST write the codex — direct, never injected
 
 /** SNG-190 §2: a generateRequest:npc in the SAME turn as an op:"meet" for that person is ONE person.
  *  Both ops are mandatory by the contract (rule 14 + the generateRequest rule) and nothing reconciled
@@ -34,7 +35,8 @@ export function reconcileGeneratedNpcWithMeet(character, npcUpdates, req, rec) {
   return rec.id;
 }
 
-const CAPS = { registry: 40, history: 10, knownFacts: 8, skills: 6 };
+export const REGISTRY_CAP = 40; // SNG-199/205: shared with the reconcile registry-backfill — one cap, one home
+const CAPS = { registry: REGISTRY_CAP, history: 10, knownFacts: 8, skills: 6 };
 
 // SNG-108: relationship KIND + arc, orthogonal to the −10..+10 score. The score is INTENSITY; the
 // bondType is the NATURE of the bond; a romantic bond additionally carries a growth STAGE tended by
@@ -107,6 +109,16 @@ export function applyNpcUpdates(character, updates = [], ctx = {}) {
         gender: u.gender ? String(u.gender).slice(0, 40) : null,       // SNG-143: sex/gender is explicit DATA, captured the first time they appear (never inferred at render)
         pronouns: u.pronouns ? String(u.pronouns).slice(0, 40) : null
       };
+      // SNG-199 §5: meeting a person WRITES THE CODEX — the one mandatory mirror. Before this, the
+      // codex was populated only by the GM volunteering codexUpdates (L2 permission-isn't-initiative),
+      // so it reliably recorded what people did while the player was AWAY and unreliably recorded that
+      // they MET them. Direct call, not injected — an optional dep a caller forgets is this bug reborn.
+      // Once per person (create only, not every update); resolveTopic dedupes; the 60-topic cap holds
+      // inside applyCodexUpdates. GM codexUpdates stay the channel for everything INTERESTING; this is
+      // the floor for everything factual.
+      try {
+        applyCodexUpdates(character, [{ entityId: id, label: n.name, kind: "person", fact: n.role || "met in play" }], { day: ctx.day ?? null });
+      } catch { /* the codex is a mirror — never let it break the meet */ }
     }
     // updates are additive/evolving — never silently rewrite identity
     if (u.name && !n.name) n.name = String(u.name).slice(0, 60);

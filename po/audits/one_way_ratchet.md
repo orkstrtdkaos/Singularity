@@ -1,6 +1,10 @@
 # AUDIT — The One-Way Ratchet: bidirectional mechanics that only move one way
 ## Aevi (design lane) · 2026-07-22 · grounded at origin, not asserted
 
+> **STATUS: PARKED (Erik, 2026-07-22).** Documented finding, NOT queued for a spec. Do not build from this
+> yet. Indexed in `po/discussions/` for later. When Erik greenlights, the spec it seeds is "the negative
+> half of the relational ledger" (R1/R2 below; R3/R4 already specced as SNG-198/204).
+
 **The class.** A recurring failure shape across the engine: a mechanic is BUILT to move in two directions
 (or to produce a consequence), the clamp/contract allows it, and in live play it only ever moves ONE way —
 almost always the additive/favorable one. The world ratchets. Nothing is earned that cannot be lost, so

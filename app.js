@@ -64,7 +64,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.183";
+const APP_VERSION = "1.8.184";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2982,7 +2982,17 @@ function rankProgress(character, abId) {
   const uses = character.practice?.uses?.[abId] || 0;
   if (owned.level === 1) {
     const need = rules.practice?.useRankThreshold?.["2"] ?? 8;
-    return { text: `rank 1 · practiced ${Math.min(uses, need)}/${need} → rank 2 lands through use`, ripe: false, uses, need };
+    // SNG-206: the use-bar filled to 8/8 and read "lands through use" while a HIDDEN second gate —
+    // character level ≥ rankLevelReq["2"] — silently held the rank (autoAdvancePracticedRanks bails on
+    // character.level < req). It only bites low-level characters (a fresh romance-character like Loki).
+    // Show BOTH bars so "practiced but not yet ranked" never reads as ready-or-broken.
+    const req = rules.leveling?.rankLevelReq?.["2"] ?? 1;
+    const practiced = uses >= need;
+    const levelBlocked = practiced && (character.level || 1) < req;
+    const text = levelBlocked
+      ? `rank 1 · practiced ${need}/${need} ✓ — needs level ${req} to rank up`
+      : `rank 1 · practiced ${Math.min(uses, need)}/${need} → rank 2 lands through use`;
+    return { text, ripe: false, uses, need, levelBlocked };
   }
   // rank 2 → mastery is a defining moment (GM), gated on practice + rank3Min
   const need = rules.practice?.useRankThreshold?.["3"] ?? 16;

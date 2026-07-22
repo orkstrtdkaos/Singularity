@@ -65,7 +65,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.191";
+const APP_VERSION = "1.8.192";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -7076,20 +7076,32 @@ function renderPlay(turn, opts = {}) {
         // show each ability's FUNCTIONS as chips (what it DOES at a glance).
         const owned = character.abilities.map(a => ({ a, ab: fullCatalog()[a.abilityId] })).filter(x => x.ab);
         if (!owned.length) return "<div class='insight'>none yet</div>";
-        // SNG-059: group owned abilities by TRADITION (the people they belong to), not powerSystem/reach
-        const byClass = {};
-        for (const o of owned) { const key = abilityTradition(o.ab) || o.ab.powerSystem || "learned"; (byClass[key] = byClass[key] || []).push(o); }
+        // SNG-059: group owned abilities by TRADITION (the people they belong to), not powerSystem/reach.
+        // SNG-202 §3: braids get their OWN category — they belong to no single tradition (that is the point),
+        // and interleaving them under one parent's group hid what they are. The list view of the same fact
+        // the wheel shows spatially.
+        const byClass = {}; const braids = [];
+        for (const o of owned) {
+          if (o.ab.minted && Array.isArray(o.ab.minted.from) && o.ab.minted.from.length === 2) { braids.push(o); continue; }
+          const key = abilityTradition(o.ab) || o.ab.powerSystem || "learned"; (byClass[key] = byClass[key] || []).push(o);
+        }
         const order = Object.keys(byClass).sort((a, b) => traditionLabel(a).localeCompare(traditionLabel(b)));
         const row = ({ a, ab }) => {
           const rank = rankExpression(character, ab, a.level, CONTENT.branchForks) || ab?.tree?.find(t => t.rank === a.level);
           const p = rankProgress(character, a.abilityId); // ability-arch v2: earned, not bought
+          // SNG-202 §3 / SNG-201: a braid names its parents + who found it first (the list echo of the wheel).
+          const braidLine = (ab.minted && (ab.minted.from || []).length === 2)
+            ? `<div class="hint braid-parents">⧉ braid of ${esc((ab.minted.sourceNames || []).join(" × ") || "two crafts")}${ab.minted.namedBy === "player" ? " · your name for it" : ab.minted.adoptedFrom?.characterName ? ` · first found by ${esc(ab.minted.adoptedFrom.characterName)}` : ab.minted.firstFinder ? " · you found it first" : ""}</div>` : "";
           return `<div class="ability" title="${esc(rank ? "CAN: " + rank.grants + " | CANNOT: " + rank.cannot : ab?.description || "")}">
             <span class="name entity-hover" data-entity="skill:${esc(a.abilityId)}">${esc(ab?.name || a.abilityId)}</span> <span class="tier-badge" title="Tier ${tierOf(ab.levelReq)}">${tierOf(ab.levelReq)}</span> rank ${a.level}${rank ? ` — <em>${esc(rank.name)}${rank.forked ? " ⑂" : ""}</em>` : ""}
             <span class="cost">(${effectiveEnergyCost(ab, character, CONTENT.rules)} energy${effectiveEnergyCost(ab, character, CONTENT.rules) < ab.energyCost ? `, was ${ab.energyCost}` : ""})</span>
-            ${functionChips(ab)}
+            ${functionChips(ab)}${braidLine}
             <div class="hint ${p.ripe ? "practiced" : ""}">${esc(p.text)}</div></div>`;
         };
-        return order.map(cls => `<details class="skill-group" open><summary>${esc(traditionLabel(cls))} <span class="cost">(${byClass[cls].length})</span></summary>${
+        const braidGroup = braids.length
+          ? `<details class="skill-group braids-group" open><summary>✦ Braids <span class="cost">(${braids.length})</span></summary>${braids.sort((x, y) => (x.ab.levelReq || 1) - (y.ab.levelReq || 1)).map(row).join("")}</details>`
+          : "";
+        return braidGroup + order.map(cls => `<details class="skill-group" open><summary>${esc(traditionLabel(cls))} <span class="cost">(${byClass[cls].length})</span></summary>${
           byClass[cls].sort((x, y) => (x.ab.levelReq || 1) - (y.ab.levelReq || 1)).map(row).join("")}</details>`).join("");
       })()}
       ${(() => {

@@ -6561,6 +6561,12 @@ await (async () => {
   check("202 §1: adjacent-parent braid sits near the RIM (rFactor high), NOT flagged antipodal", adj.rFactor > 0.8 && adj.antipodal === false && adj.midPos === 1);
   check("202 §1: a cross-circle (antipodal) braid sinks to the CENTRE (rFactor 0) + is flagged 'spans the circle'", cross.rFactor === 0 && cross.antipodal === true);
   check("202 §1: the degenerate single-tradition case is its own spoke angle (nothing regresses)", Math.abs(wg.braidPlacement(0, 0, 24).ang - (-Math.PI / 2)) < 1e-9 && wg.braidPlacement(0, 0, 24).rFactor === 1);
+  // §1 wired: the wheel model pulls minted braids OUT of the parent-spoke grouping and places them by braidPlacement.
+  const appSrc202 = readFileSync(join(root, "app.js"), "utf8");
+  check("202 §1: buildWheelModel places minted braids by braidPlacement, not on a parent's spoke", /braidAbs\.push\(ab\)/.test(appSrc202) && /braidPlacement\(pa, pb, n\)/.test(appSrc202) && /braid: true/.test(appSrc202));
+  // §3: braids are their own ability-LIST category with parents + first-finder attribution.
+  check("202 §3: braids get their own ability-list category (not interleaved under one parent)", /braids-group[\s\S]{0,40}✦ Braids/.test(appSrc202) && /minted\.from[\s\S]{0,60}length === 2[\s\S]{0,40}braids\.push/.test(appSrc202));
+  check("202 §3: a braid list entry names its parents + carries first-finder attribution (SNG-201)", /braid-parents[\s\S]{0,60}sourceNames/.test(appSrc202) && /first found by/.test(appSrc202));
 }
 
 // --- SNG-198B: the offscreen population widens to who the player KNOWS + the EPIC figures Erik named ---

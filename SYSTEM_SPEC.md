@@ -632,3 +632,135 @@ The map also lists the ops `applyTurn` handles **inline**, reaching no engine mo
 ---
 
 *Aevi owns this document. **ROUND 2 done by CCode at v1.8.26:** every `[CCODE]` marker filled from origin, every checkable claim substrate-verified, corrections marked ⚠️ inline. **Where the draft was wrong (for Aevi to promote or amend):*** (1) **§4 XP "+3 novel" → actual `novelBonus` is 8.** (2) **§9 drift — the design implies a place's disposition pulls the character's spectrum over time; it does not.** Character drift comes only from the *action's* axes (EWMA 95/5 + precursor +0.05/use); location affinity is a per-roll bonus with no write-back; there is no decay routine. (3) **§11 op list — `item ops` and `stateOps` do not exist at HEAD** (items ride `characterDeltas.inventoryAdd/Remove`; `stateOps` is unbuilt); `relationshipDeltas`/`timeAdvanceHours` are live-but-legacy and off-contract. (4) **§3 conflated `canon.js` and `sync.js`** into one row — they are separate modules (now split, all 38 mapped). Everything else in the draft verified TRUE against origin — including all of §5's ring order, §4's resolution/energy/recovery numbers, §6's access table, and every count in the header.*
+
+---
+
+## 25. Intended Evolution — the world-model, the wake, and the capable GM (2026-07-21/22)
+
+> **Status: INTENT, not HEAD.** This section is the design layer for a body of work specced across a
+> single session and **not yet built**. It exists so the intentions survive in the versioned, CI-adjacent
+> contract (Law 15 — canon lives in content, never only in a work-tracking doc) rather than as scattered
+> `po/` specs alone. **Each thread below references its spec.** The specs are the work-orders; **CCode
+> executes them through the pipeline.** Nothing here is a claim about what the code does today; every item
+> is a statement of what it is *intended* to do. When a thread ships, its intent graduates into the numbered
+> section it extends (§14 quests, §13 living world, §11 GM contract) and its row here is struck.
+>
+> **Workflow note (2026-07-21).** As of this session the authoring lane is corrected: the design side
+> (Aevi) authors **intent — this document and feature descriptions**; **CCode owns all implementation**,
+> including content-file writes, manifests, schemas, and version bumps. The specs referenced below were
+> authored under the prior mixed lane and contain direct-write assumptions; those are CCode's to execute or
+> revise. Intent is authoritative here; implementation detail in the specs is CCode's to own.
+
+### 25.1 The quest hierarchy — six tiers, each generatable (`po/SPEC_SNG-203_quest_hierarchy.md`)
+Extends §14. The world gains a **tier structure** so the GM always has a concrete, resolvable situation to
+offer at the right scale, and can generate a new one in the same shape on demand. Six tiers by blast radius:
+**world-arc quest** (advances a shared arc stage) · **tradition-arc & player-arc** · **augmenting** ·
+**regional** · **local** · **npc/errand**. The insight that keeps this from being six systems: today's
+`quest_structure.json` **is already tiers 3–5** — the new work is a heavier schema above (world-arc, carrying
+shared-stage machinery) and a lighter one below (npc_quest, dropping the branched-outcome requirement an
+errand should not carry). **Every tier is a `generate` type**, and generation validates against the tier
+schema — a generated quest that fails `theRule` (name the cost of ignoring it) fails the build, exactly as
+an authored one would. *Design-floor content authored under the spec: the three tier schemas, numbered stage
+ladders on the five greater arcs, and one fully-worked exemplar per new tier (the ashwarden tradition arc —
+find the teacher, prove the tradition's values, receive the capstone as a scene).*
+
+### 25.2 Tradition arcs — find the teacher, learn the ultimate (`po/SPEC_SNG-203`, §4)
+Each of the 24 traditions has a three-beat path: **The Finding** (reach the teacher by *demonstrating the
+tradition's disposition*, never by a level bar) → **The Proving** (the tradition's values under pressure —
+for the ashwarden, an ending attended rather than fought) → **The Ultimate** (the capstone ability learned
+as a *scene*, not a menu unlock; the SNG-197 moment-doctrine applies). Gated on the teacher-gate already
+built (`teachers[trad]={met,willing}`). The capstone must exist before its proving beat can promise it. Full
+hand-authoring of all 24 is a standing content lift; the intent is schema + exemplar + generation contract,
+upgradeable tradition-by-tradition.
+
+### 25.3 The shared, visibly-progressing world (`po/SPEC_SNG-203`, §3)
+It **is** a shared world, and every player should be able to see the arcs moving. World-arc outcomes
+broadcast on the shared clock; a public **"state of the world"** surface renders each arc's current stage and
+a spoiler-free `publicFace` line — **never** the arc's GM-EYES `truth`, and always through the rating lens
+(§17). Contested advancement is a **feature**: two players may push one arc opposite ways, and an arc moving
+backward reads as a living world, not a bug. The resolution model is an open question (rank-by-realness vs
+the framework's net-vector-of-fields) shared with 25.5.
+
+### 25.4 The wake engine — consequences generate what comes next (`po/SPEC_SNG-204_wake_engine.md`)
+The keystone that makes 25.1 a *system* instead of a catalog. Today a resolved outcome writes findable
+facts (`quest_seed`, `world_event`) and **nothing reads them back to generate** — the loop is open by one
+missing reader; `quest_seed`'s own text, *"a thread opens,"* is a promise the engine never keeps. The intent:
+a resolved significant outcome leaves a **wake** (its applied change + a `pressure` line — what the outcome
+makes *more likely* next), and the generator reads open wakes to author the quests and arcs that **follow
+from that specific change, inferred from lore.** Erik's example is the spec: *the thing below wakes and walks
+the world — what are the next quests and arcs?* Bounded so a self-continuing world does not become a
+self-diverging one: wakes **decay** if unengaged, a **depth throttle** stops infinite self-propagation,
+world-scale wakes are **shared** (de-duped), and most outcomes only *record pressure* — the rare one spawns a
+whole new thread. **Rarity is the point.** Wake-spawned content still passes the tier quality gate: a new
+trigger, never a new exemption. *Content authored under the spec: `pressureOnAdvance` on all 18 greater-arc
+stage transitions — the lore-bounded inference seed.*
+
+### 25.5 The capable, fair GM (`po/SPEC_SNG-207_ultimately_capable_gm.md`)
+Extends §11 and §13. **If a player asks the GM to fix their location, known people, inventory, quest status —
+anything — it should be able to.** The machinery mostly exists (SNG-070/137 `stateOps`, 12 GM-proposed repair
+ops, "acknowledge means emit"); three gaps produce the deflection Erik hits: **coverage holes** (legitimate
+asks with no op — register an established-but-unregistered NPC, grant a story-conferred item, advance a
+quest done in play), the **fix-screen deflection** (the GM defers to a screen for what it could do in-turn),
+and the **hallucinated control** (it sends the player to a panel control that does not exist). The doctrine —
+a four-rung ladder that keeps "ultimately capable" from meaning "unaccountable":
+
+1. **Repair is free** — the game got it wrong; fix it.
+2. **Grant-what-the-fiction-conferred is GM-judged** — *if the story already granted it, recording it is
+   repair, not inflation.* The line moves from *engine-forbids-the-category* to *GM-judges-whether-earned.*
+3. **Pure advancement stays earned** — "give me 500 xp" is refused **by judgment** ("the story didn't give
+   you that"), with the capability present, not by a missing op.
+4. **The floors are absolute** (§17) — minor-safety and rating are engine floors, **never** GM-judgment.
+
+The bound on "do anything" is the GM *exercising judgment*, which requires the capability to be present so
+the judgment is real. Everything logged and reversible (the SNG-070 ledger). **"Act, don't deflect"** — the
+fix screen is the fallback for the rare thing the GM genuinely cannot do in-turn, never the first answer;
+and it must reference only controls that exist (the authored panel manifest gives it a true model).
+
+> **PM ruling (2026-07-21): two surfaces, sequenced.** The **capable-and-fair in-fiction GM is Phase 1 and
+> builds first.** An **author/dev god-mode** — where Erik-as-author sets anything with no fairness gate — is
+> **Phase 2 (SNG-207b), deferred.** Build guard on Phase 1: the fair grant path carries **no `skipFairness`
+> seam** — Phase 2 gets its own separate surface calling different entry points, never a flag that loosens
+> the fair ops. A fair GM one boolean away from a cheat console is not a fair GM.
+
+### 25.6 Live-play breaks specced this session (the reader-never-fires family)
+Extends §22. Each is the batch's recurring shape — *a fact/config is written and the reader never fires* —
+and each is specced, not yet built:
+
+- **The braid is a moment** (`SPEC_SNG-197`) — union of parents is the FLOOR, an emergent function the
+  braid's own CEILING; the mint is a *scene*; a GM-authored name the player may overrule. *Part 1 (doctrine
+  + tier badge) shipped and verified; part 2 (rich generation + moment) is the live front.*
+- **Found once, known forever** (`SPEC_SNG-201`) — a braid pairing anyone has found becomes a world recipe
+  later finders **adopt** (first-finder attributed); numbers never travel; a stub never promotes;
+  personal nicknames render locally. *Shipped v1.8.183.*
+- **The wheel is a map** (`SPEC_SNG-202`) — every craft placed on the great circle by its composition; the
+  ring-angle is already data (`traditions.json.ring`); schools rotate placement; braids sit at the
+  parents' arc-midpoint. Deterministic, never a force layout.
+- **The world turns for everyone** (`SPEC_SNG-198`) — the two offscreen-advance paths are two halves of one
+  engine; the generated-lives half has an `{entityId, note}` schema with **no field for state**, so it
+  cannot move anything. The `wantProgress` counter (SNG-021, 2026-07-07) was specced and never built.
+  Population widens to met · heard-of · **and EPIC/legendary** (the `legend.tier` power axis the world-tick
+  has never read).
+- **One person, one codex** (`SPEC_SNG-199`) + **the registry read-twin** (`SPEC_SNG-205` §1) — `npcs.js`
+  never calls `applyCodexUpdates`, so the codex records what happened while you were away but not who you
+  met; `findExistingNpc` never reads the `aliases` the module maintains; a descriptive clause can *become* a
+  name (`prettifyNpcName` is a slug-prettifier in a validator's seat); and a person established everywhere
+  (Teva — 169 mentions in Cellaceron's save) is absent from the one reader "known people" consults. A
+  player-conferred name ("Ama Dreya") must stick.
+- **A companion is a character** (`SPEC_SNG-200`) — stage 3 is authored and unreachable (`bondOf` is a
+  two-value ternary); companions want real arcs, an evolved form, memory of deeds, a codex node, and to be
+  generatable. Not every arc is an ascension — Marrow's is a debt between two people.
+- **The dials reach the page** (`SPEC_SNG-205` §2) — R+/Bluntness are built (SNG-144) but their live-prompt
+  effect was never verifiable; "encounter rate" is **wired to nothing** (zero consumers); frequency and
+  register are different controls with different fixes and must not be conflated.
+- **Rank-up's hidden second gate** (`SPEC_SNG-206`) — an 8/8 use-bar that reads "ready" is silently held by
+  a **character-level** gate (`rankLevelReq[2]=3`); the UI shows one bar and not the other. The "2→1 fix" is
+  SNG-137's repair working, not a bug — but *which write set a rank ahead of practice* is the upstream
+  question.
+
+### 25.7 Version intent — past 1.8.x
+The 1.8.x line has carried ~180 point releases and no longer signals scale. **Intent: the world-model
+cluster (25.1–25.5) is a generational change, not an increment.** Recommendation: cut **v1.9.0** as the line
+when the quest-hierarchy + wake + capable-GM work lands, headlined by *the world that continues itself.* A
+2.0 is reserved for a larger architectural break than this is. **The bump is a CCode action** (it touches
+`index.html`/`app.js`) taken on PM approval — recorded here as intent, not performed as a doc edit.
+

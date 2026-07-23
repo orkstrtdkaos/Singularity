@@ -7641,6 +7641,26 @@ await (async () => {
   check("215 §B: the bag + popup are styled (grid + modal + larger detail image)", /\.bag-grid \{ display: grid/.test(cssA) && /\.item-detail-modal \{/.test(cssA) && /\.item-detail-sheet \.item-img/.test(cssA));
 }
 
+// ---- SNG-215 §C-1: every TRAIT reads in two registers — LORE + MECHANICS (derived fallback + authored) ----
+{
+  const appSrcC = readFileSync(join(root, "app.js"), "utf8");
+  const cssC = readFileSync(join(root, "style.css"), "utf8");
+  const stateC = readFileSync(join(root, "engine/state.js"), "utf8");
+
+  // the readout lookup: authored (trait_readouts) wins, else DERIVE from existing data for each trait kind.
+  check("215 §C: traitReadout(kind,id) — authored trait_readouts wins, else a derived fallback", /function traitReadout\(kind, id\)/.test(appSrcC) && /CONTENT\.trait_readouts\?\.\[kind\]\?\.\[id\]/.test(appSrcC));
+  check("215 §C: MECHANICS are DERIVED for each trait — background affinity, origin native craft, tradition families, aspiration progress, form is cosmetic", /background.*affinity/is.test(appSrcC) && /native craft/.test(appSrcC) && /traditionFamilies\(id\)/.test(appSrcC) && /Cosmetic — your form leads/.test(appSrcC));
+  check("215 §C: a tradition's granted FUNCTION FAMILIES are derived by unioning its abilities' families", /function traditionFamilies\(tradId\)/.test(appSrcC) && /familiesOfAbility\(ab, FN_INDEX\)/.test(appSrcC));
+
+  // the traits are TAPPABLE — the shared popover shows the readout.
+  check("215 §C: origin + background + form + tradition + aspiration are all tappable (data-trait)", /data-trait="origin:/.test(appSrcC) && /data-trait="background:/.test(appSrcC) && /data-trait="form:self"/.test(appSrcC) && /data-trait="tradition:/.test(appSrcC) && /data-trait="aspiration:/.test(appSrcC));
+  check("215 §C: a delegated [data-trait] handler opens the lore+mechanics readout on the shared popover", /const el = e\.target\.closest\?\.\("\[data-trait\]"\)/.test(appSrcC) && /traitReadout\(s\.slice/.test(appSrcC) && /showPopoverText\(txt\)/.test(appSrcC));
+  check("215 §C: the tappable trait is styled (a dotted underline signals it)", /\.trait-tap \{ cursor: pointer/.test(cssC));
+
+  // the content shell is READY — Aevi's trait_readouts.json loads (optional; derived fallback until then).
+  check("215 §C: trait_readouts is wired into loadContent (Aevi drops the file; optional load, empty fallback)", /loadRule\("trait_readouts", \{ readouts: \{\} \}\)/.test(stateC) && /trait_readouts: traitReadoutsDoc/.test(stateC));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

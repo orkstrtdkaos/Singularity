@@ -67,7 +67,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.233";
+const APP_VERSION = "1.8.234";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -124,6 +124,9 @@ app.addEventListener("click", e => {
   el.title = on ? "Boosted — the GM leans toward suggesting this when it fits (tap to clear). A nudge, never a force." : "Boost — nudge the GM to surface this craft in your options when it fits. Never forces it, never changes a roll.";
   try { saveCharacter(character); } catch { /* best-effort */ }
 });
+// SNG-215 §C: tap a TRAIT (background / origin / tradition / form / aspiration) → its LORE + MECHANICS readout,
+// on the one shared popover surface. Authored (trait_readouts) wins; else derived from existing data.
+app.addEventListener("click", e => { const el = e.target.closest?.("[data-trait]"); if (!el || !character) return; e.preventDefault(); e.stopPropagation(); const s = el.dataset.trait; const i = s.indexOf(":"); const txt = traitReadout(s.slice(0, i), s.slice(i + 1)); if (txt) showPopoverText(txt); });
 
 // SNG-134: resolve "kind:id" → the shared detail text, gathering the live values the pure formatters need.
 function entityHover(spec) {
@@ -5953,6 +5956,55 @@ function aptitudeChips() {
   }).join("")}</div>`;
 }
 
+// SNG-215 §C: the FUNCTION FAMILIES a tradition grants — derived by unioning its abilities' families (there is
+// no authored tradition→families table). Used in the derived MECHANICS readout for the tradition trait.
+function traditionFamilies(tradId) {
+  const fams = new Set();
+  for (const ab of Object.values(fullCatalog())) if (abilityTradition(ab) === tradId) for (const f of familiesOfAbility(ab, FN_INDEX)) fams.add(f);
+  return [...fams].map(f => f.charAt(0) + f.slice(1).toLowerCase());
+}
+
+// SNG-215 §C: a trait's two-register readout — LORE (what it means) + MECHANICS (what it DOES). Aevi's authored
+// `CONTENT.trait_readouts[kind][id]` wins; otherwise DERIVE both from data that already exists (so it renders
+// before every readout is authored). Erik's ask: tell the player the FUNCTIONAL mechanics, not just the flavour.
+function traitReadout(kind, id) {
+  const authored = CONTENT.trait_readouts?.[kind]?.[id] || CONTENT.trait_readouts?.readouts?.[kind]?.[id] || null;
+  let lore = authored?.lore || null, mech = authored?.mechanics || null;
+  const rules = CONTENT.rules || {};
+  if (kind === "background") {
+    const def = (CONTENT.backgrounds || []).find(b => b.id === id) || {};
+    lore = lore || def.description || `A ${id} — a life that shaped who you are.`;
+    mech = mech || `${def.affinity?.length ? `Helps with ${def.affinity.join(", ")} challenges (a soft edge, never a gate).` : "No fixed challenge affinity."}${def.grantsAptitudes?.length ? ` Grants the ${def.grantsAptitudes.join(", ")} aptitude.` : ""}`;
+    return `${def.name || id} — background\n\n${lore}\n\nMECHANICS: ${mech}`;
+  }
+  if (kind === "origin") {
+    const def = (CONTENT.origins || []).find(o => o.id === id) || {};
+    lore = lore || def.whyYouAreHere || def.displayLabel || `Of the ${id}.`;
+    mech = mech || `Your people's native craft is ${def.nativeTradition ? traditionLabel(def.nativeTradition) : "—"}${def.pole ? ` (${def.pole} pole)` : ""} — the most natural road for you to train, learnable by right where others need a teacher.`;
+    return `${def.displayLabel || def.name || id} — origin\n\n${lore}\n\nMECHANICS: ${mech}`;
+  }
+  if (kind === "tradition") {
+    const fams = traditionFamilies(id);
+    lore = lore || `The craft of the ${traditionLabel(id)} — one of the valley's great disciplines.`;
+    mech = mech || `A domain you hold — its crafts train to your tier here. It grants the function families: ${fams.length ? fams.join(", ") : "—"} (what you can DO with it).`;
+    return `${traditionLabel(id)} — domain\n\n${lore}\n\nMECHANICS: ${mech}`;
+  }
+  if (kind === "form") {
+    lore = lore || (character.form || "An ordinary person.");
+    mech = mech || "Cosmetic — your form leads how the portrait is rendered. It carries NO mechanical effect: the game reads your attributes, crafts, and standing, never your appearance.";
+    return `Form\n\n${lore}\n\nMECHANICS: ${mech}`;
+  }
+  if (kind === "aspiration") {
+    const ab = fullCatalog()[id] || {};
+    const asp = (character.practice?.aspirations || []).find(a => a.abilityId === id) || {};
+    const need = rules.practice?.aspirationRipe ?? 10;
+    lore = lore || `A craft you've named as a goal — you're leaning toward ${ab.name || id}.`;
+    mech = mech || `Progress ${Math.min(asp.progress || 0, need)}/${need}. Acting in its power-system (or into its effects) advances it; when ripe you may learn it FREE at level. It also weights the GM's craft suggestions toward it.`;
+    return `${ab.name || id} — aspiration\n\n${lore}\n\nMECHANICS: ${mech}`;
+  }
+  return authored ? `${lore || ""}\n\nMECHANICS: ${mech || ""}` : "";
+}
+
 function renderCharacterScreen() {
   const rules = CONTENT.rules;
   const cap = rules.leveling?.subAttributeCap ?? 20;
@@ -5965,8 +6017,8 @@ function renderCharacterScreen() {
       ${character.portrait ? `<img class="cs-portrait" src="${esc(character.portrait)}" alt="${esc(character.name)}" data-lightbox="portrait" onerror="this.style.display='none'">` : ""}
       <div class="cs-header-text">
         <h2 style="margin:0">${esc(character.name)}</h2>
-        <div class="hint">${esc(character.origin)} · ${esc(character.background)} · level ${character.level} — ${character.xp}/${xpNeed} xp ${infoDot("growth.level")}${character.pendingSubPoints ? ` · <span class="grow-badge">+${character.pendingSubPoints} attribute</span>` : ""}${character.skillPoints ? ` · <span class="grow-badge">${character.skillPoints} skill</span>` : ""}</div>
-        ${character.form ? `<div class="hint" style="margin-top:4px"><em>Form:</em> ${esc(character.form)}</div>` : ""}
+        <div class="hint"><span class="trait-tap" data-trait="origin:${esc(character.origin)}" title="tap: lore + mechanics">${esc(character.origin)}</span> · <span class="trait-tap" data-trait="background:${esc(character.background)}" title="tap: lore + mechanics">${esc(character.background)}</span> · level ${character.level} — ${character.xp}/${xpNeed} xp ${infoDot("growth.level")}${character.pendingSubPoints ? ` · <span class="grow-badge">+${character.pendingSubPoints} attribute</span>` : ""}${character.skillPoints ? ` · <span class="grow-badge">${character.skillPoints} skill</span>` : ""}</div>
+        ${character.form ? `<div class="hint" style="margin-top:4px"><em>Form:</em> <span class="trait-tap" data-trait="form:self" title="tap: lore + mechanics">${esc(character.form)}</span></div>` : ""}
         <div style="margin-top:6px; display:flex; gap:8px; flex-wrap:wrap">
           <button class="opt" id="cs-form" title="Describe this character's physical form / species so the portrait renders it (e.g. an Ent, a construct)">✎ Appearance</button>
           ${imagesEnabled() && !character.portrait ? `<button class="opt" id="cs-gen-portrait">✦ Generate portrait</button>` : ""}
@@ -5995,9 +6047,9 @@ function renderCharacterScreen() {
       const ceilOf = (t, def) => character.domainCeilings?.[t] ?? def;
       const rows = [["primary", 5], ["secondary", 3], ["tertiary", 2]].filter(([k]) => character.domains?.[k]).map(([k, def]) => {
         const t = character.domains[k]; const c = ceilOf(t, def); const promoted = character.domainCeilings?.[t] != null && c > def;
-        return `<div class="codex-fact"><strong>${esc(traditionLabel(t))}</strong> — ${k}${promoted ? " · <em>promoted</em>" : ""}, to Tier ${ROM[c]}</div>`;
+        return `<div class="codex-fact"><strong class="trait-tap" data-trait="tradition:${esc(t)}" title="tap: lore + mechanics">${esc(traditionLabel(t))}</strong> — ${k}${promoted ? " · <em>promoted</em>" : ""}, to Tier ${ROM[c]}</div>`;
       }).join("");
-      const acq = (character.domainsAcquired || []).map(t => `<div class="codex-fact"><strong>${esc(traditionLabel(t))}</strong> — acquired, to Tier ${ROM[ceilOf(t, 1)]}</div>`).join("");
+      const acq = (character.domainsAcquired || []).map(t => `<div class="codex-fact"><strong class="trait-tap" data-trait="tradition:${esc(t)}" title="tap: lore + mechanics">${esc(traditionLabel(t))}</strong> — acquired, to Tier ${ROM[ceilOf(t, 1)]}</div>`).join("");
       const fore = (character.foreclosed || []).length ? `<div class="hint">Foreclosed — reachable only as a braid: ${character.foreclosed.map(traditionLabel).join(", ")}</div>` : "";
       const promos = ["tertiary", "secondary"].map(k => {
         if (!character.domains?.[k]) return ""; const e = promotionEligible(character, k, CONTENT.rules, { catalog: fullCatalog(), traditionIndex: CONTENT.traditionIndex });
@@ -6021,7 +6073,7 @@ function renderCharacterScreen() {
       ${(character.discoveries || []).map(d => `<div class="discovery" title="${esc(d.description)}">✦ ${esc(d.name)} (discovered technique)</div>`).join("")}</div>
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Aspirations <span class="hint" style="text-transform:none">(declare what you're working toward — practice makes it free)</span></h3>
       ${(character.practice?.aspirations || []).map(a => { const ab = fullCatalog()[a.abilityId]; const ripe = aspirationRipe(character, a.abilityId, rules); const need = rules.practice?.aspirationRipe ?? 10;
-        return `<div class="cs-attr"><span class="cs-attr-name" style="width:140px">${esc(ab?.name || a.abilityId)}</span>
+        return `<div class="cs-attr"><span class="cs-attr-name trait-tap" style="width:140px" data-trait="aspiration:${esc(a.abilityId)}" title="tap: lore + mechanics">${esc(ab?.name || a.abilityId)}</span>
           <div class="cs-bar"><div class="cs-fill" style="width:${Math.min(100, (a.progress || 0) / need * 100)}%"></div></div>
           <span class="cs-val">${Math.min(a.progress || 0, need)}/${need}</span>
           ${ripe && character.level >= (learnLevelReq(ab) ?? 99) ? `<button class="grow-btn practiced" data-asplearn="${esc(a.abilityId)}" title="Fully practiced — learn free">✓</button>` : ""}

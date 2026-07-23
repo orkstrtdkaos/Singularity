@@ -7125,6 +7125,29 @@ await (async () => {
   check("204: the world-tick decays wakes + folds their arc-lean into the net", /decayWakes\(character, currentWorldDay\)/.test(wtSrc204) && /wakeArcPush\(ws, arcId\)/.test(wtSrc204));
   const gmSrc204 = readFileSync(join(root, "engine/gm.js"), "utf8");
   check("204 §OQ1: the GM sees the open wakes (wakesDetail consumed)", /wakesDetail\) world\.push/.test(gmSrc204));
+
+  // ---- SNG-204 Phase 2: reading open wakes and GENERATING the next thread ----
+  const chg = { worldState: initWorldState(1) };
+  wake.createWake(chg, { id: "q1", tier: "world", arcId: arc.id, arcStageTo: 2 }, { id: "o1" }, applied, content, { worldDay: 1 });
+  chg.worldState.wakes.push({ id: "wlocal", scale: "local", open: true, depth: 0, strength: 4, source: {}, connectsTo: [] });
+  chg.worldState.wakes.push({ id: "wdeep", scale: "world", open: true, depth: 5, strength: 4, source: {}, connectsTo: [] });
+  const elig = wake.eligibleWakes(chg, 1);
+  check("204P2: eligibleWakes selects a gen-scale, open, in-depth wake carrying pressure", elig.length === 1 && elig[0].scale === "world" && elig[0].depth <= 2);
+  check("204P2: a LOCAL wake never generates (cheap-path only) + a too-DEEP wake is throttled (needs a player)", !elig.some(w => w.id === "wlocal" || w.id === "wdeep"));
+  const wctx = wake.wakeGenerationContext(elig[0], content);
+  check("204P2: the generation context carries the pressure seed + follows-from framing + child depth (throttle)", /FOLLOWS FROM/.test(wctx.hint) && wctx.arcPressure === elig[0].pressure && wctx.parentWakeDepth === (elig[0].depth ?? 0) + 1);
+
+  const chg2 = { worldState: initWorldState(1) };
+  wake.createWake(chg2, { id: "q1", tier: "world", arcId: arc.id, arcStageTo: 2 }, { id: "o1" }, applied, content, { worldDay: 1 });
+  let called = 0;
+  const fake = async () => { called++; return { id: "spawned_thread", name: "The Reckoning", premise: "a faction reacts" }; };
+  const res = await wake.runWakeGeneration({ character: chg2, content, worldDay: 1, generateFn: fake });
+  check("204P2: runWakeGeneration generates the next thread from an eligible wake + returns its news", called === 1 && res.spawned.length === 1 && res.spawned[0].name === "The Reckoning" && /grows from the aftermath/.test(res.news[0]));
+  check("204P2: the wake is CLOSED after spawning (idempotent — never re-generates the same aftermath)", chg2.worldState.wakes[0].spawned === true && chg2.worldState.wakes[0].open === false);
+  check("204P2: a spawned wake is not re-eligible (the loop never re-runs a done aftermath)", (await wake.runWakeGeneration({ character: chg2, content, worldDay: 1, generateFn: fake })).spawned.length === 0);
+  check("204P2: no generator injected → no-op (generation off degrades gracefully)", (await wake.runWakeGeneration({ character: chg2, content, worldDay: 1 })).spawned.length === 0);
+  const appSrcW2 = readFileSync(join(root, "app.js"), "utf8");
+  check("204P2: the generation turn calls runWakeGeneration with the real generate('arc')", /runWakeGeneration\(\{[\s\S]{0,240}generateFn/.test(appSrcW2) && /generate\("arc"/.test(appSrcW2));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

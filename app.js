@@ -43,6 +43,7 @@ import { skillDetail, npcDetail, itemDetail, relationshipsParagraph } from "./en
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, relationshipBand, relationshipLabel, knownPeopleAt, setNpcName, nameIsUnknown, npcPortraitTier, backfillNpcGender, reconcileGeneratedNpcWithMeet, npcFearsForGM, npcReactionsForGM } from "./engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM, findSubPlaceParent } from "./engine/places.js";
 import { initWorldState, runWorldTick, runGenerationTurn, syncSharedWorld, advanceGeneratedOffscreen, syncSharedCanon, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic } from "./engine/worldtick.js";
+import { runWakeGeneration } from "./engine/wake.js"; // SNG-204 Phase 2: open wakes generate the next thread
 import { addAssignment } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
 import { setArcFate } from "./engine/latentarcs.js"; // SNG-191 §7: the player closing a surfaced arc (the handled/resolved fate)
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
@@ -66,7 +67,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.206";
+const APP_VERSION = "1.8.207";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -2143,6 +2144,17 @@ async function maybeTick() {
   const currentDay = readClock(character.clock).day;
   await runWorldTick({ character, content: CONTENT, currentDay });
   try { await runGenerationTurn({ character, content: CONTENT }); } catch (e) { console.warn("[generation] turn skipped:", e?.message); } // SNG-191 §7: the world's own agenda foments on the world count
+  // SNG-204 Phase 2: open wakes generate the NEXT thread — the world continues from its own consequences. The
+  // generator is the real generate("arc", …) call (only fires when generation is on); each eligible wake spawns
+  // at most once, bounded by the depth throttle + count cap in eligibleWakes.
+  try {
+    await runWakeGeneration({ character, content: CONTENT, worldDay: absoluteWorldDay(),
+      generateFn: async (wakeCtx) => generate("arc", {
+        ...wakeCtx, character, location: CONTENT.locations[character.currentLocationId] || {},
+        examples: CONTENT.genArc || [], rating: ratingCeiling(profile), genBudget: 1
+      }, { callJSON: callClaudeJSON, schema: CONTENT.genSchemas?.arc || {}, applyCodexUpdates, codexCtx: { locationId: character.currentLocationId } })
+    });
+  } catch (e) { console.warn("[wake-gen] skipped:", e?.message); }
   await syncSharedWorld({ character, content: CONTENT }); // one valley for everyone (no-op without sync)
   const offscreen = await advanceGeneratedOffscreen({ character, content: CONTENT }); // SNG-BATCH-9 Phase 2 + SNG-198B: your grown world AND the people/great figures you know moved on while away
   if (offscreen && offscreen.length) autoVerifyLeg("b9p2-offscreen", "an established entity advanced offscreen; away-digest dated"); // SNG-051 auto-verify

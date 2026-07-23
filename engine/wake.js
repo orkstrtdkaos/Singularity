@@ -17,7 +17,7 @@ const WAKE_CAP = 24;             // keep the newest N open+closed wakes
 const WAKE_START_STRENGTH = 4;   // pressure at birth; fades one per world-day
 const WAKE_DECAY_DAYS = 10;      // an unengaged wake closes after this — the world moves on (§4 decay)
 const WAKE_ARC_CAP = 4;          // the most a wake's cheap-path lean can move a neighbouring arc
-export const MAX_WAKE_DEPTH = 2; // a wake spawned FROM a wake past this depth needs player engagement (§4 throttle)
+export const MAX_WAKE_DEPTH = 2; // registry:internal — the §4 depth throttle; default of eligibleWakes, exported for the test
 
 function outcomeWakes(quest, applied) {
   if (WAKE_TIERS.has(quest?.tier)) return true;
@@ -106,4 +106,62 @@ export function wakesForGM(character, content = {}) {
     return `- ${arc ? arc.name : "A resolved thread"} left a WAKE (${w.scale}): ${w.pressure}${pushes}. What follows from THIS is the next thread — a faction reacting, a place coping, a person seizing the moment — offer it in the fiction, inferred from the lore, never invented from nothing.`;
   });
   return `WAKES — the aftermath waiting to become the next thing (SNG-204). Open consequences the world has not yet continued from; weave the next quest or situation OUT of them, in-grain (do not force one every beat — a wake is an opportunity, not an obligation):\n${lines.join("\n")}`;
+}
+
+// ---------- SNG-204 Phase 2: reading open wakes and GENERATING the next thread ----------
+const WAKE_GEN_SCALES = new Set(["world", "tradition", "regional"]);
+
+/** Open wakes eligible to GENERATE a new thread from: significant scale, not yet spawned-from, within the
+ *  DEPTH THROTTLE (a wake spawned from a wake past MAX_WAKE_DEPTH needs player engagement, so an unplayed
+ *  corner can't self-propagate to infinity), still carrying pressure. Capped per pass — the COST GOVERNOR:
+ *  generating a full thread is a model call, so most wakes resolve as pressure recorded (the cheap path) and
+ *  only the strongest few spawn. Strongest first. Pure. */
+export function eligibleWakes(character, worldDay, { maxDepth = MAX_WAKE_DEPTH, cap = 2 } = {}) {
+  const wakes = character?.worldState?.wakes || [];
+  return wakes
+    .filter(w => w.open && !w.spawned && WAKE_GEN_SCALES.has(w.scale) && (w.depth ?? 0) <= maxDepth && (w.strength ?? 0) > 0)
+    .sort((a, b) => (b.strength ?? 0) - (a.strength ?? 0))
+    .slice(0, cap);
+}
+
+/** The generation context for a wake — what the generator authors the CONSEQUENCE from. Inference is
+ *  LORE-BOUNDED (§GUARD): the wake's `pressure` (the seed) + the source arc + its connectsTo neighbours are
+ *  the surface; the generator authors what the lore IMPLIES, never free invention. Rides the existing
+ *  generate hooks (hint / why / arcPressure), so no new prompt plumbing. `parentWakeDepth` threads the
+ *  throttle: a thread spawned from a depth-N wake resolves into a depth-(N+1) wake. Pure. */
+export function wakeGenerationContext(wake, content = {}) {
+  const arcs = content?.greaterArcs || [];
+  const arc = wake?.source?.arcId ? arcs.find(a => a.id === wake.source.arcId) : null;
+  const neighbours = (wake?.connectsTo || []).map(id => arcs.find(a => a.id === id)).filter(Boolean).map(a => a.name);
+  return {
+    hint: `a new thread that FOLLOWS FROM what just happened${arc ? ` to ${arc.name}` : ""} — the aftermath of it, not a fresh unrelated situation`,
+    why: `A significant outcome left a wake: ${wake.pressure}. Author the consequence the LORE IMPLIES${neighbours.length ? ` (it presses on ${neighbours.join(", ")})` : ""} — a faction reacting, a place coping, a person seizing the moment — never arbitrary new content.`,
+    arcPressure: wake.pressure,
+    wake: { source: wake.source, pressure: wake.pressure, connectsTo: wake.connectsTo, scale: wake.scale },
+    parentWakeDepth: (wake.depth ?? 0) + 1,
+  };
+}
+
+/** Close a wake once it has been generated-from — so the world never re-spawns the same aftermath (the
+ *  idempotency guard). Marked on ATTEMPT, not just success, so a transient generation failure never becomes
+ *  an infinite per-tick retry (the pressure it left was already recorded via the cheap path). */
+export function markWakeSpawned(wake, spawnedId = null, worldDay = null) { // registry:internal — used by runWakeGeneration; exported for the test
+  if (!wake) return;
+  wake.spawned = true; wake.open = false; wake.spawnedId = spawnedId; wake.spawnedWorldDay = worldDay;
+}
+
+/** SNG-204 Phase 2: read the open wakes and GENERATE the next thread from each — the loop, closed. The AI
+ *  generator is INJECTED (same pattern as the offscreen evolveFn / arc-seed pass): testable with a fake,
+ *  real in prod. `generateFn(wakeCtx) → the minted thread` (or null on stub/failure). Each eligible wake
+ *  spawns at most once; bounded by eligibleWakes (count cap + depth throttle). Returns what the world grew. */
+export async function runWakeGeneration({ character, content = {}, worldDay = 0, generateFn = null } = {}) {
+  if (!generateFn) return { spawned: [], news: [] };
+  const spawned = [], news = [];
+  for (const wake of eligibleWakes(character, worldDay)) {
+    let thread = null;
+    try { thread = await generateFn(wakeGenerationContext(wake, content)); } catch { thread = null; }
+    markWakeSpawned(wake, thread?.id || null, worldDay);
+    if (thread) { spawned.push(thread); news.push(`A new thread grows from the aftermath: ${thread.name || thread.premise || "the world continues"}.`); }
+  }
+  return { spawned, news };
 }

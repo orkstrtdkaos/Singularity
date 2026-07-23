@@ -1,5 +1,18 @@
-# SPEC — SNG-210: The GM narrates travel the save never commits (location desync)
-## Aevi (PO) · 2026-07-22 · awaiting CCode ROUND 2 · verified against a live save
+# SPEC — SNG-210: Commit-on-arrival (stop travel desync at the source)
+## Aevi (PO) · 2026-07-22 · REVISED — the REPAIR already exists; this is the PREVENTION
+
+> **CORRECTION (Aevi, 2026-07-22):** My first draft assumed no location-repair path existed. Wrong —
+> **`reanchorLocation` in `corrections.js` already writes `currentLocationId`, and SNG-207's capable-GM
+> shipped**, so the GM can fix an already-desynced save THIS TURN when asked ("I'm in Cairnhold, the gate
+> misrouted me — fix it" → GM emits reanchorLocation, per gm.js:89 which names "a header in the wrong place"
+> as a repair case). Erik's live case (a Cairnhold house-gate that misrouted to the Hub, never corrected
+> because he hasn't traveled since) is **fixable in play right now.** ⚠️ Caveat: the op REFUSES if `to`
+> doesn't resolve to a real location id (corrections.js:123) — name the place precisely.
+>
+> So SNG-210 is NOT the repair (that exists). SNG-210 is the **PREVENTION**: arrivals should commit
+> AUTOMATICALLY so travel never desyncs in the first place, and the player doesn't have to ask the GM to
+> reanchor after every misfire. The original diagnosis (§1–3 below) stands; only §4 changes.
+
 
 > **Erik, from live play:** the location header reads "THE CROSSING" while the prose is set in Cairnhold and
 > he's "been in Cairnhold this whole time."
@@ -36,11 +49,18 @@ scene/intent result, or an `arrive`/`travelTo` op) that a write-site applies —
 updates already commit. If the signal exists but isn't applied, it's a missing reader (the recurring shape);
 if the GM isn't emitting it, the turn contract needs the field.
 
-## §4 — The live save needs repair too
-Silas is desynced *now*. Beyond the forward fix, a one-time reconcile: set `currentLocationId` to his true
-location (Cairnhold, per the prose + knownPlaces) so the existing save isn't stuck. Same pattern as prior
-`reconcileVersion`/`backfillVersion` passes. ⚠️ Confirm the true location with Erik before writing — the prose
-says Cairnhold, but Erik is the ground truth.
+## §4 — The live save: ALREADY FIXABLE IN PLAY (no reconcile pass needed)
+Silas is desynced now, but the fix already exists: Erik asks the GM to reanchor him to Cairnhold, the GM
+emits `reanchorLocation` (SNG-207 doctrine, Rung-1 repair), and the save corrects — no engine work, no
+backfill. The misroute cause (house-gate → Hub) is a SEPARATE bug worth a look (why did the gate destination
+resolve wrong?), but the STUCK STATE is self-healing through the shipped repair tool the moment Erik asks.
+So this spec drops the reconcile-pass ask entirely; the forward commit (§3) is the only build.
+
+**Sub-finding to check:** the ORIGINAL misroute (entering a Cairnhold house-gate and arriving at the Hub) is
+its own bug — a waygate/travel destination resolving to the wrong place. Worth tracing in `waygate.js`
+whether gate destinations are mismapped. Possibly the same missing-commit shape (the gate fired a move but to
+a stale/default target), possibly a separate destination-resolution bug. Flag for CCode to look at alongside
+§3.
 
 ## GUARDS
 - **Commit on ARRIVAL, not on mention.** Narrating "the road *toward* Cairnhold" is in-transit, not arrived;

@@ -5,6 +5,7 @@
   "note": "SNG-207 — the AUTHORITATIVE list of what the Repair panel / stateOps can actually do, for the GM's context. The GM references this so it can NEVER hallucinate a fix-screen control or deflect to a missing one. Built from corrections.js's real op set. If corrections.js gains/loses an op, this updates. The GM's rule: prefer emitting the op yourself in-turn; the panel is the player-facing fallback for the same ops, not a different capability.",
   "theRule": "The Repair panel exposes exactly these ops and no others. If a fix is not in this list, the panel CANNOT do it — do not send the player there for it. If a fix IS in this list, YOU can emit it in-turn — prefer that over deflecting.",
   "ops": {
+    "correctEntityField": "Fix ANY wrong DESCRIPTIVE field on ANY entity (SNG-213): an NPC's name/role/description/status, a place's or quest's or item's or codex entry's text, a player field. Repair only — the general fix that closes the coverage gaps. Numeric/earned fields (rank/attribute/vital/relationship) are NOT here — they keep their own lower-only ops.",
     "correctField": "Fix a wrongly-set character field: background, origin, nativeTradition, form. Repair only — a field never chosen or set wrong.",
     "correctDomain": "Fix a domain slot (primary/secondary/tertiary) the game GUESSED wrong.",
     "removeEntity": "Remove an entity never actually acquired: a companion, quest, codex fact, or NPC that shouldn't be there.",

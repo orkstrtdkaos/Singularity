@@ -6888,7 +6888,7 @@ await (async () => {
   // the authored manifest is complete + shaped for the prompt.
   check("207: the panel manifest names its ops + theRule + what it CANNOT do", manifest.ops && Object.keys(manifest.ops).length >= 12 && !!manifest.theRule && Array.isArray(manifest.cannotDoHere) && manifest.cannotDoHere.length >= 1);
   // every manifest op is a REAL corrections.js op (no phantom capability advertised to the GM).
-  const realOps = new Set(["correctField", "correctDomain", "removeEntity", "unstickQuest", "reanchorLocation", "fixCodexFact", "correctAbilityRank", "correctBond", "correctVital", "correctAttribute", "mergeEntity", "correctNpcGender"]);
+  const realOps = new Set(["correctEntityField", "correctField", "correctDomain", "removeEntity", "unstickQuest", "reanchorLocation", "fixCodexFact", "correctAbilityRank", "correctBond", "correctVital", "correctAttribute", "mergeEntity", "correctNpcGender"]);
   check("207: every op the manifest advertises is a real corrections.js op (nothing hallucinated)", Object.keys(manifest.ops).every(op => realOps.has(op)));
 
   // repairPanelForGM renders the capability + the act-don't-deflect rule; null when unloaded.
@@ -7148,6 +7148,40 @@ await (async () => {
   check("204P2: no generator injected → no-op (generation off degrades gracefully)", (await wake.runWakeGeneration({ character: chg2, content, worldDay: 1 })).spawned.length === 0);
   const appSrcW2 = readFileSync(join(root, "app.js"), "utf8");
   check("204P2: the generation turn calls runWakeGeneration with the real generate('arc')", /runWakeGeneration\(\{[\s\S]{0,240}generateFn/.test(appSrcW2) && /generate\("arc"/.test(appSrcW2));
+}
+
+// ---- SNG-213: the complete repair surface — the GM can fix any WRONG descriptive field on any entity ----
+{
+  const ch = { npcRegistry: { teva: { id: "teva", name: "Teva", role: "ferryman's daughter", status: "active" } }, corrections: [] };
+  applyStateOps(ch, [{ op: "correctEntityField", kind: "npc", id: "teva", field: "status", to: "departed", why: "she left" }], {});
+  check("213: correctEntityField fixes an NPC's status (an NPC was gender-fixable ONLY before)", ch.npcRegistry.teva.status === "departed");
+  applyStateOps(ch, [{ op: "correctEntityField", kind: "npc", id: "teva", field: "role", to: "the ferry-keeper of the low crossing", why: "x" }], {});
+  check("213: correctEntityField fixes an NPC's role", /ferry-keeper/.test(ch.npcRegistry.teva.role));
+  applyStateOps(ch, [{ op: "correctEntityField", kind: "npc", id: "teva", field: "name", to: "Teva Aldren", why: "her full name" }], {});
+  check("213: correctEntityField renames an NPC + keeps the old name as an ALIAS (refs still resolve)", ch.npcRegistry.teva.name === "Teva Aldren" && (ch.npcRegistry.teva.aliases || []).includes("Teva"));
+  const rr = applyStateOps(ch, [{ op: "correctEntityField", kind: "npc", id: "teva", field: "relationship", to: 5, why: "x" }], {});
+  check("213: correctEntityField REFUSES a numeric/earned field + points to the clamped op (no power leak)", rr.applied.length === 0 && /earned\/clamped/.test(rr.refused[0].reason));
+  check("213: correctEntityField refuses an unknown entity kind", applyStateOps({ corrections: [] }, [{ op: "correctEntityField", kind: "spaceship", field: "name", to: "x" }], {}).refused.length === 1);
+
+  const pc = { background: "craftsman", quests: [{ id: "q1", title: "Old Name", premise: "p" }], inventory: [{ id: "i1", name: "blade", description: "d" }], codex: { topics: { t1: { label: "L", summary: "s" } } }, npcRegistry: {}, corrections: [] };
+  applyStateOps(pc, [{ op: "correctEntityField", kind: "player", field: "background", to: "outcast", why: "x" }], { backgrounds: [{ id: "outcast" }, { id: "craftsman" }] });
+  check("213: correctEntityField fixes a player field (validated background)", pc.background === "outcast");
+  check("213: correctEntityField refuses an invalid player-field value", applyStateOps(pc, [{ op: "correctEntityField", kind: "player", field: "background", to: "wizard" }], { backgrounds: [{ id: "outcast" }] }).applied.length === 0);
+  applyStateOps(pc, [{ op: "correctEntityField", kind: "quest", id: "q1", field: "name", to: "The True Name", why: "x" }], {});
+  check("213: correctEntityField fixes a quest field (name→title)", pc.quests[0].title === "The True Name");
+  applyStateOps(pc, [{ op: "correctEntityField", kind: "item", id: "blade", field: "name", to: "the ferryman's knife", why: "x" }], {});
+  check("213: correctEntityField fixes an item field", pc.inventory[0].name === "the ferryman's knife");
+  applyStateOps(pc, [{ op: "correctEntityField", kind: "codex", id: "t1", field: "summary", to: "the true account", why: "x" }], {});
+  check("213: correctEntityField fixes a codex field", pc.codex.topics.t1.summary === "the true account");
+
+  const ic = { inventory: [{ id: "i1", name: "cursed thing" }], corrections: [] };
+  check("213: removeEntity now removes an ITEM (the missing kind, item-removal gap)", applyStateOps(ic, [{ op: "removeEntity", kind: "item", id: "i1", why: "never had it" }], {}).applied.some(a => a.removed === "item") && ic.inventory.length === 0);
+
+  const gmSrc213 = readFileSync(join(root, "engine/gm.js"), "utf8");
+  check("213 §3: correctEntityField is in the op schema + carries trigger examples (the ask pattern-matches)", /correctEntityField\|correctField/.test(gmSrc213) && /her name is actually X/.test(gmSrc213) && /THE COMPLETE REPAIR VOCABULARY/.test(gmSrc213));
+  check("213 §3: the prompt forbids DEFERRING a reported wrong value + HALLUCINATING a limitation", /NEVER DEFER A REPORTED WRONG VALUE/.test(gmSrc213) && /NEVER HALLUCINATE A LIMITATION/.test(gmSrc213));
+  const man213 = JSON.parse(readFileSync(join(root, "content/packs/core/rules/repair_panel_manifest.json"), "utf8"));
+  check("213 §Q4: the panel manifest lists correctEntityField (panel + GM stay in lockstep)", !!man213.ops.correctEntityField);
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

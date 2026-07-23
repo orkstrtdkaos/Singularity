@@ -12,8 +12,8 @@
 
 import { SUBS, syncParentAttributes } from "./progression.js";
 import { isMinorSubject } from "./art.js";
-import { smartClamp } from "./namematch.js"; // SNG-152 (missed in the first sweep — see below)
-import { BOND_TYPES, ROMANTIC_STAGES, applyNpcUpdates } from "./npcs.js"; // SNG-207 §2: register-established-NPC reuses the canonical meet path (registry + codex mirror)
+import { smartClamp, namesMatch } from "./namematch.js"; // SNG-152 (missed in the first sweep — see below)
+import { BOND_TYPES, ROMANTIC_STAGES, applyNpcUpdates, findExistingNpc } from "./npcs.js"; // SNG-207/213: register + correct reuse the registry helpers
 import { addItem } from "./inventory.js"; // SNG-207 §2: grant-story-conferred-item
 
 const CORRECTABLE_FIELDS = new Set(["background", "origin", "nativeTradition", "form"]);
@@ -22,6 +22,20 @@ const VITALS = new Set(["health", "energy", "maxHealth", "maxEnergy"]);
 const clampN = (v, lo, hi) => Math.max(lo, Math.min(hi, Math.round(Number(v))));
 // fields a correction may NEVER touch — these ADVANCE, they don't repair.
 const FORBIDDEN_FIELDS = new Set(["xp", "level", "skillPoints", "attunement", "health", "energy", "abilities", "inventory", "subAttributes", "attributes", "pendingSubPoints"]);
+
+// SNG-213: the general repair's per-kind correctable-field whitelist — any WRONG *descriptive* field. Numeric
+// / earned / clamped fields (rank, attribute, vital, relationship, xp/level) are DELIBERATELY absent: they
+// keep their specialized clamped ops (correctAbilityRank/correctAttribute/correctVital/correctBond) so
+// generalization never becomes a power leak (§GUARD clamps survive). Editable text only.
+const CORRECTABLE_ENTITY_FIELDS = {
+  player: new Set(["background", "origin", "nativeTradition", "form"]),
+  npc: new Set(["name", "role", "description", "status", "gender", "pronouns"]),
+  location: new Set(["name", "description"]),
+  quest: new Set(["title", "name", "premise", "giver"]),
+  item: new Set(["name", "description"]),
+  codex: new Set(["label", "summary"]),
+};
+const NPC_STATUSES = new Set(["active", "injured", "missing", "departed", "dead"]);
 
 export function ensureCorrections(character) { if (!character.corrections) character.corrections = []; return character.corrections; } // registry:internal
 
@@ -87,6 +101,7 @@ export function applyStateOps(character, ops = [], ctx = {}) {
         else if (op.kind === "quest") { const before = (character.quests || []).length; character.quests = (character.quests || []).filter(q => q.id !== id); removed = character.quests.length !== before; }
         else if (op.kind === "codex") { if (character.codex?.topics?.[id]) { delete character.codex.topics[id]; removed = true; } }
         else if (op.kind === "npc") { if (character.npcRegistry?.[id]) { delete character.npcRegistry[id]; removed = true; } }
+        else if (op.kind === "item") { const before = (character.inventory || []).length; character.inventory = (character.inventory || []).filter(i => i.id !== id && i.name !== id && !namesMatch(i.name, String(id || ""))); removed = character.inventory.length !== before; } // SNG-213: the item-removal gap
         else if (op.kind === "ability") {
           // SNG-070: STRIP an ability the character should never have had (the Silas case: Blazeborn
           // work off an Ashwarden). Removal is a REPAIR — it never grants; grandfathering is the
@@ -97,7 +112,7 @@ export function applyStateOps(character, ops = [], ctx = {}) {
           if (character.customAbilities) delete character.customAbilities[id];
           removed = character.abilities.length !== before;
         }
-        else { refused.push({ op, reason: "removable kinds are ability/companion/quest/codex/npc" }); break; }
+        else { refused.push({ op, reason: "removable kinds are ability/companion/quest/codex/npc/item" }); break; }
         if (removed) { log(character, { kind: "remove", entity: op.kind, id, why }, ctx); applied.push({ removed: op.kind, id }); }
         else refused.push({ op, reason: `no ${op.kind} "${id}" to remove` });
         break;
@@ -272,6 +287,57 @@ export function applyStateOps(character, ops = [], ctx = {}) {
         applied.push({ npcGender: op.id });
         break;
       }
+      // SNG-213: THE GENERAL REPAIR — fix any WRONG descriptive field on any entity. {kind, id, field, to}.
+      // Closes the coverage gaps (an NPC's name/role/description/status, a place's/quest's/item's/codex's
+      // text, a player field) that had no op, so a willing GM no longer finds every fix refused. Still
+      // repair-not-wish: only the whitelisted descriptive fields; numeric/earned fields keep their own clamped
+      // ops. A repair is FREE (no trace needed — the game got a value wrong); the FICTION-conferred creates
+      // go through registerEstablished/grantStoryItem, still trace-gated.
+      case "correctEntityField": {
+        const kind = op.kind, field = String(op.field || "");
+        const allowed = CORRECTABLE_ENTITY_FIELDS[kind];
+        if (!allowed) { refused.push({ op, reason: `"${kind}" is not a correctable entity kind` }); break; }
+        if (!allowed.has(field)) { refused.push({ op, reason: `"${field}" is not a repairable field on a ${kind}${/rank|attribute|vital|xp|level|skill|relationship|bond/i.test(field) ? " — that's earned/clamped; use its own op (correctAbilityRank/correctAttribute/correctVital/correctBond) so it can only LOWER, never inflate" : ""}` }); break; }
+        const to = op.to, id = op.id;
+        let target = null;
+        if (kind === "player") {
+          if (field === "background" && backgrounds.length && !backgrounds.some(b => b.id === to)) { refused.push({ op, reason: `"${to}" is not a real background` }); break; }
+          if ((field === "origin" || field === "nativeTradition") && idx && to && !idx.byId?.[to] && !/^(valleyfolk|harmonic|radiant_plateau|valley)$/.test(String(to))) { refused.push({ op, reason: `"${to}" is not a real people` }); break; }
+          const from = character[field] ?? null;
+          character[field] = field === "form" ? smartClamp(String(to ?? ""), 300) : smartClamp(String(to ?? ""), 60);
+          target = { field, from, to: character[field] };
+        } else if (kind === "npc") {
+          const rec = character.npcRegistry?.[id] || findExistingNpc(character.npcRegistry || {}, slug(id || ""), String(to || ""));
+          if (!rec) { refused.push({ op, reason: `no known person "${id}" — if the fiction established them but they're not on your list, use registerEstablishedNpc` }); break; }
+          if (field === "status") { if (!NPC_STATUSES.has(to)) { refused.push({ op, reason: `status must be one of ${[...NPC_STATUSES].join("/")}` }); break; } rec.status = to; }
+          else if (field === "name") { if (rec.name && rec.name !== rec.id) { rec.aliases = [...new Set([...(rec.aliases || []), rec.name])]; } rec.name = smartClamp(String(to), 60); if (rec.image) { delete rec.image; delete rec._portraitTier; } } // keep the old placeholder as an alias so refs resolve; re-mint the portrait
+          else if (field === "gender" || field === "pronouns") { rec[field] = smartClamp(String(to), 40) || null; if (field === "gender" && rec.image) { delete rec.image; delete rec._portraitTier; } }
+          else rec[field] = smartClamp(String(to), field === "description" ? 600 : 120);
+          target = { field, id: rec.id, name: rec.name };
+        } else if (kind === "location") {
+          character.locationState = character.locationState || {};
+          character.locationState[id] = { ...(character.locationState[id] || {}), [field]: smartClamp(String(to), field === "description" ? 600 : 120) };
+          target = { field, id };
+        } else if (kind === "quest") {
+          const q = (character.quests || []).find(x => x.id === slug(String(id || "")) || x.title === id || x.id === id);
+          if (!q) { refused.push({ op, reason: `no quest "${id}"` }); break; }
+          q[field === "name" ? "title" : field] = smartClamp(String(to), 300);
+          target = { field, id: q.id };
+        } else if (kind === "item") {
+          const it = (character.inventory || []).find(i => i.id === id || i.name === id || namesMatch(i.name, String(id || "")));
+          if (!it) { refused.push({ op, reason: `no item "${id}" in your pack` }); break; }
+          it[field] = smartClamp(String(to), field === "description" ? 400 : 60);
+          target = { field, name: it.name };
+        } else if (kind === "codex") {
+          const t = character.codex?.topics?.[id];
+          if (!t) { refused.push({ op, reason: `no codex topic "${id}"` }); break; }
+          if (field === "label") t.label = smartClamp(String(to), 100); else t.summary = smartClamp(String(to), 400);
+          target = { field, id };
+        }
+        log(character, { kind: "field", entity: kind, field, to: typeof to === "string" ? smartClamp(to, 120) : to, why }, ctx);
+        applied.push({ correctedField: field, entity: kind, ...target });
+        break;
+      }
       case "refuse": {
         // the GM declined an advance in fiction — record it so the ledger shows the ask was made.
         refused.push({ op, reason: op.what ? `declined: ${smartClamp(String(op.what), 160)}` : "declined an advance" }); // SNG-152
@@ -297,6 +363,7 @@ export function describeCorrection(a) {
   if (a.attribute) return `a mis-set ${a.attribute} was corrected (${a.from}→${a.to})`;
   if (a.merged) return `two records for one person were merged`;
   if (a.npcGender) return `a person's gender was set right`;
+  if (a.correctedField) return `${a.entity === "player" ? "your " : a.entity + "'s "}${a.field}${a.name ? ` (${a.name})` : ""} was set right`;
   if (a.registeredNpc) return `${a.name || "someone you'd met"} is now on your record of known people`;
   if (a.grantedItem) return `${a.grantedItem} was added to what you carry`;
   if (a.advancedQuest) return `a quest caught up to where the story left it`;

@@ -218,73 +218,111 @@
         "player": "Ask Ragnar — does he know anything in the Marches that leaves a mark like that? A craft, a people, a rumor",
         "summary": "Ragnar names what he knows: Stillhold sends quiet operatives carrying binding-cords; the shimmer may be part of that craft, and at least one man dropped a trail he couldn't explain.",
         "narration": "You stand from the mud and brush your knee clean, then look at Ragnar. \"That shimmer,\" you say, keeping your voice level. \"You've walked the Marches longer than I have. Anything here that leaves a mark like that — pressed into a footprint, gone before you can name it? A craft, a people, a rumor?\"\n\nRagnar is quiet for a moment. Not the quiet of someone who doesn't know — the quiet of someone deciding how much of what they know is useful here. He turns his head and watches Freki's line south before he answers.\n\n\"There's talk,\" he says. \"Stillhold sends people out sometimes — not travelers. Quiet ones. The kind who don't check in at Wardhouses.\" He pauses. \"Word among the dueling circuit is they carry something — a cord, a knot, a mark. Not a weapon. The Marchers call it a binding. What it binds, nobody's said plainly to me.\" He looks at your hand — at the cloth bundle. \"Your cord. The knot. That's the same talk.\"\n\nFreki is thirty yards ahead and pulling. Ragnar's eyes follow it south, then come back to you. \"I've never seen the shimmer myself. But I've heard a man describe a set of prints that wasn't right, and he couldn't say why, and he dropped the trail.\" He says it flat, the way he says everything — not to frighten you, just because it is what he knows."
+      },
+      {
+        "player": "Press south hard — Freki is pulling and the trail is cooling; get answers from what you find, not what you're told",
+        "summary": "Half a mile south, the trail splits at the waypost — the heavier follower turned east into an ash copse while Sera continued south; Ragnar names it plainly: a watching position, not pursuit.",
+        "narration": "You leave the question in the mud and move. Freki is already twenty yards south, wire coat catching the flat morning light, nose working the lane without pause. You match its pace and Ragnar comes with you, dropping half a step back and right — the instinctive positioning of someone who has walked dangerous roads before and knows how bodies fall.\n\nThe Stillhold road here is a pale chalk track hemmed by elder scrub, the first green of spring barely showing in the hedgerow roots. Puddles have formed where the ruts are deepest and the prints are clear in them — Sera's light outside-edge stride, the heavier follower's toe-heavy cut. The gap between the tracks has been closing, yard by yard. Whoever was behind her was gaining.\n\nHalf a mile south the lane crests a low ridge and the country opens: a wide, flat verge of brown marsh grass, a copse of ash to the east still bare-branched, and a stone waypost leaning slightly west at the junction where the chalk track meets a broader road running east-west. Freki stops at the waypost. It drops its nose to the ground, circles once, and sits — the particular sitting that means the trail has changed, not ended. The heavier prints turn off here, east into the ash copse. Sera's lighter stride continues south, steady, unchanged.\n\nRagnar steps up beside you, looks at the split, then at the copse. \"Someone peeled off,\" he says flatly. \"Sera kept going. The follower didn't.\" He watches the ash trees a moment. \"That copse has a clear line to this junction. You could watch the road from in there without being on it.\""
       }
     ],
     "lastTurn": {
-      "narration": "You stand from the mud and brush your knee clean, then look at Ragnar. \"That shimmer,\" you say, keeping your voice level. \"You've walked the Marches longer than I have. Anything here that leaves a mark like that — pressed into a footprint, gone before you can name it? A craft, a people, a rumor?\"\n\nRagnar is quiet for a moment. Not the quiet of someone who doesn't know — the quiet of someone deciding how much of what they know is useful here. He turns his head and watches Freki's line south before he answers.\n\n\"There's talk,\" he says. \"Stillhold sends people out sometimes — not travelers. Quiet ones. The kind who don't check in at Wardhouses.\" He pauses. \"Word among the dueling circuit is they carry something — a cord, a knot, a mark. Not a weapon. The Marchers call it a binding. What it binds, nobody's said plainly to me.\" He looks at your hand — at the cloth bundle. \"Your cord. The knot. That's the same talk.\"\n\nFreki is thirty yards ahead and pulling. Ragnar's eyes follow it south, then come back to you. \"I've never seen the shimmer myself. But I've heard a man describe a set of prints that wasn't right, and he couldn't say why, and he dropped the trail.\" He says it flat, the way he says everything — not to frighten you, just because it is what he knows.",
-      "sceneSummary": "Ragnar names what he knows: Stillhold sends quiet operatives carrying binding-cords; the shimmer may be part of that craft, and at least one man dropped a trail he couldn't explain.",
+      "narration": "You leave the question in the mud and move. Freki is already twenty yards south, wire coat catching the flat morning light, nose working the lane without pause. You match its pace and Ragnar comes with you, dropping half a step back and right — the instinctive positioning of someone who has walked dangerous roads before and knows how bodies fall.\n\nThe Stillhold road here is a pale chalk track hemmed by elder scrub, the first green of spring barely showing in the hedgerow roots. Puddles have formed where the ruts are deepest and the prints are clear in them — Sera's light outside-edge stride, the heavier follower's toe-heavy cut. The gap between the tracks has been closing, yard by yard. Whoever was behind her was gaining.\n\nHalf a mile south the lane crests a low ridge and the country opens: a wide, flat verge of brown marsh grass, a copse of ash to the east still bare-branched, and a stone waypost leaning slightly west at the junction where the chalk track meets a broader road running east-west. Freki stops at the waypost. It drops its nose to the ground, circles once, and sits — the particular sitting that means the trail has changed, not ended. The heavier prints turn off here, east into the ash copse. Sera's lighter stride continues south, steady, unchanged.\n\nRagnar steps up beside you, looks at the split, then at the copse. \"Someone peeled off,\" he says flatly. \"Sera kept going. The follower didn't.\" He watches the ash trees a moment. \"That copse has a clear line to this junction. You could watch the road from in there without being on it.\"",
+      "sceneSummary": "Half a mile south, the trail splits at the waypost — the heavier follower turned east into an ash copse while Sera continued south; Ragnar names it plainly: a watching position, not pursuit.",
       "choices": [
         {
-          "label": "Press south hard — Freki is pulling and the trail is cooling; get answers from what you find, not what you're told",
+          "label": "Go into the ash copse — find what the follower was doing in there",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 15,
+          "intentTags": [
+            "scout",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Stay on Sera's trail — she kept going south; that's the priority",
           "attribute": "physical",
           "subAttribute": "agility",
           "difficulty": 0,
           "intentTags": [
-            "travel"
+            "travel",
+            "careful"
           ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Ask Ragnar what happened to the man who dropped the trail — who was he and what was he following",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Look at the knotted cord in the cloth bundle now — Ragnar just named it; study the pattern against what he described",
+          "label": "Use Read the Fight — read the ground here for what the follower did at this junction",
           "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 15,
-          "intentTags": [
-            "study"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Keep moving, but ask Ragnar as you go — what does 'binding' mean to the Marchers? What does it bind?",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "subAttribute": "insight",
           "difficulty": 0,
           "intentTags": [
             "study",
-            "travel"
+            "careful"
           ],
-          "trivial": true
+          "abilityId": "read_the_fight",
+          "energyCost": 3,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Ragnar — he saw movement before dawn; was it one person or two he saw at the fork?",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "negotiate"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "inventoryAdd": [],
+        "inventoryRemove": [],
+        "xp": 0
+      },
+      "ledgerEvents": [],
+      "questUpdates": [],
       "scene": {
-        "setting": "The south branch of the east fork, forty yards past the split, early spring morning, overcast and flat-lit. The shimmer in the heavier prints has gone. Freki is thirty yards south and pulling.",
+        "setting": "The junction where the chalk Stillhold track meets a broader east-west road, half a mile south of the east fork. Open flat verge, an ash copse to the east, a leaning waypost. Overcast, flat spring light.",
         "npcsPresent": [
           {
             "name": "Ragnar Solmyr",
-            "state": "Standing at Brynjar's shoulder, watching Freki's line south, waiting for the next move."
+            "state": "Standing at Brynjar's shoulder, watching the ash copse to the east. Alert, unhurried."
+          },
+          {
+            "name": "Freki",
+            "state": "Sitting at the waypost. The trail has changed — it has marked the split and is waiting."
           }
         ],
         "objects": [
-          "Cloth bundle in Brynjar's hand — dried white-flowered sprig, knotted cord",
-          "Two sets of boot-prints heading south — lighter confirmed as Sera's, heavier follower's prints toe-heavy and deliberate",
-          "The heel-strike where the shimmer was — now only mud, no trace remaining"
+          "Leaning waypost at the junction",
+          "Boot-prints in the chalk mud — Sera's lighter stride continuing south, heavier follower's prints turning east toward the ash copse",
+          "Ash copse to the east — bare-branched, clear line of sight to the junction",
+          "Broader east-west road running through the junction",
+          "Cloth bundle in Brynjar's hand — dried white-flowered sprig, knotted cord"
         ],
         "threads": [
-          "The shimmer is gone without being identified — Ragnar links it to Stillhold operatives and a 'binding' cord; what it does is still unnamed",
-          "The knotted cord in the cloth bundle may be the same craft Ragnar described",
-          "The heavier follower's identity still unestablished — possibly a Stillhold operative",
-          "Sera is somewhere ahead on the Stillhold road, roughly four miles out",
-          "The man who dropped a trail he couldn't explain — Ragnar knows that story"
+          "The heavier follower turned into the ash copse here — watching position, not pursuit; what were they doing and are they still there?",
+          "Sera continued south, steady — she may not know she was followed, or may not have known the follower stopped",
+          "The shimmer in the heavier prints remains unnamed and unidentified",
+          "Ragnar saw two people at the fork before dawn — the number now matters"
         ]
       },
       "npcUpdates": [
@@ -292,67 +330,83 @@
           "op": "update",
           "npcId": "ragnar-solmyr",
           "name": "Ragnar Solmyr",
-          "role": "Redline Warrior, walking south with Brynjar",
-          "note": "Named what he knows of Stillhold operatives — quiet people carrying binding-cords, not weapons. Linked the knotted cord in the bundle to the same talk. Mentioned a man who dropped an inexplicable trail.",
+          "note": "Named the split plainly — the follower peeled east into the ash copse while Sera continued south; identified it as a watching position.",
           "learned": [
-            "Stillhold sends quiet operatives out — not travelers; they don't check in at Wardhouses",
-            "The Marchers call whatever they carry a 'binding' — a cord, a knot, a mark; not a weapon",
-            "At least one person dropped a trail they couldn't explain after encountering something like the shimmer"
+            "The heavier follower left Sera's trail at the waypost junction and entered the ash copse — a position with a clear line of sight to the road"
           ],
-          "status": "active",
-          "statusNote": "Walking south on the Stillhold road trail with Brynjar and Freki; has shared what he knows of Stillhold operatives and binding-cords"
+          "skillsObserved": [
+            "tactical ground-reading"
+          ],
+          "statusNote": "At Brynjar's shoulder at the waypost junction, watching the ash copse"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "stillhold-operatives",
-          "label": "Stillhold Operatives",
-          "kind": "faction",
-          "fact": "Ragnar names them: quiet people the Stillhold sends out who don't check in at Wardhouses. They carry something — a cord, a knot, a mark — the Marchers call it a binding. At least one man dropped a trail after encountering something he couldn't explain.",
+          "topic": "sera-of-the-stillhold",
+          "label": "Sera of the Stillhold",
+          "kind": "mystery",
+          "fact": "At the waypost junction half a mile south of the Marchward east fork, Sera's trail continued south unchanged while her heavier follower turned east into an ash copse — a watching position with a clear line to the junction road. The follower stopped pursuing and began observing.",
           "links": [
-            "sera-of-the-stillhold",
             "the-stillhold",
             "the-marchward",
-            "brynjar-andyrsson-thread"
-          ]
-        },
-        {
-          "topic": "the-binding-cord",
-          "label": "The Binding Cord",
-          "kind": "mystery",
-          "fact": "The Marchers' word for what Stillhold operatives carry — a cord or knot, not a weapon. May be connected to the shimmer pressed into the heavier follower's heel-strike. The cloth bundle's knotted cord may be an example of this craft.",
-          "links": [
-            "stillhold-operatives",
-            "sera-of-the-stillhold",
+            "ragnar-solmyr",
             "brynjar-andyrsson-thread",
-            "the-stillhold"
+            "stillhold-operatives"
           ]
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.25,
-        "why": "A brief exchange at the fork while Freki pulls south"
-      }
+        "hoursPassed": 0.5,
+        "why": "Half a mile of fast walking on the Stillhold road to reach the waypost junction"
+      },
+      "placeUpdates": [
+        {
+          "subPlace": {
+            "name": "Waypost Junction",
+            "parent": "East Fork",
+            "note": "Where the chalk Stillhold track meets a broader east-west road — the heavier follower's prints turn east here into an ash copse; Sera's prints continue south unchanged. Freki marked the split.",
+            "visited": true
+          }
+        },
+        {
+          "subPlace": {
+            "name": "Ash Copse",
+            "parent": "East Fork",
+            "note": "A stand of bare-branched ash east of the waypost junction. Clear line of sight to the road — the heavier follower's prints lead into it. A watching position.",
+            "visited": false
+          }
+        }
+      ],
+      "offer": {
+        "thing": "Freki sitting rather than ranging — the particular stillness that means the trail changed here, not ended, and Freki is waiting to be told which fork matters more",
+        "from": "Freki's established read: it holds trails without being commanded, and its sitting is information the same way a growl is information — the companion offering the fork as a genuine question"
+      },
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The south branch of the east fork, forty yards past the split, early spring morning, overcast and flat-lit. The shimmer in the heavier prints has gone. Freki is thirty yards south and pulling.",
+      "setting": "The junction where the chalk Stillhold track meets a broader east-west road, half a mile south of the east fork. Open flat verge, an ash copse to the east, a leaning waypost. Overcast, flat spring light.",
       "npcsPresent": [
         {
           "name": "Ragnar Solmyr",
-          "state": "Standing at Brynjar's shoulder, watching Freki's line south, waiting for the next move."
+          "state": "Standing at Brynjar's shoulder, watching the ash copse to the east. Alert, unhurried."
+        },
+        {
+          "name": "Freki",
+          "state": "Sitting at the waypost. The trail has changed — it has marked the split and is waiting."
         }
       ],
       "objects": [
-        "Cloth bundle in Brynjar's hand — dried white-flowered sprig, knotted cord",
-        "Two sets of boot-prints heading south — lighter confirmed as Sera's, heavier fol",
-        "The heel-strike where the shimmer was — now only mud, no trace remaining"
+        "Leaning waypost at the junction",
+        "Boot-prints in the chalk mud — Sera's lighter stride continuing south, heavier f",
+        "Ash copse to the east — bare-branched, clear line of sight to the junction",
+        "Broader east-west road running through the junction",
+        "Cloth bundle in Brynjar's hand — dried white-flowered sprig, knotted cord"
       ],
       "threads": [
-        "The shimmer is gone without being identified — Ragnar links it to Stillhold operatives and a 'binding' cord; what it does is still unnamed",
-        "The knotted cord in the cloth bundle may be the same craft Ragnar described",
-        "The heavier follower's identity still unestablished — possibly a Stillhold operative",
-        "Sera is somewhere ahead on the Stillhold road, roughly four miles out",
-        "The man who dropped a trail he couldn't explain — Ragnar knows that story"
+        "The heavier follower turned into the ash copse here — watching position, not pursuit; what were they doing and are they still there?",
+        "Sera continued south, steady — she may not know she was followed, or may not have known the follower stopped",
+        "The shimmer in the heavier prints remains unnamed and unidentified",
+        "Ragnar saw two people at the fork before dawn — the number now matters"
       ]
     }
   },
@@ -560,30 +614,31 @@
         "[d1] Read the lighter footprints on sight — identified fast movement versus deliberate, noted same gait for fleeing and purposeful travel. Walking at Brynjar's shoulder.",
         "[d1] Confirmed Brynjar's read of the heavier prints — named it plainly as someone who knew Sera was ahead of them.",
         "[d1] Watched Brynjar's failed read of the shimmer without crowding it; checked the fact plainly and waited.",
-        "[d1] Named what he knows of Stillhold operatives — quiet people carrying binding-cords, not weapons. Linked the knotted cord in the bundle to the same talk. Mentioned a man who dropped an inexplicable trail."
+        "[d1] Named what he knows of Stillhold operatives — quiet people carrying binding-cords, not weapons. Linked the knotted cord in the bundle to the same talk. Mentioned a man who dropped an inexplicable trail.",
+        "[d1] Named the split plainly — the follower peeled east into the ash copse while Sera continued south; identified it as a watching position."
       ],
       "knownFacts": [
-        "He knows the Stillhold road four miles out",
         "Reads fighting stances on sight",
         "Identified Brynjar's collarbone gap as a liability against a patient opponent",
         "Offered it as professional courtesy, not threat",
         "Movement at the south fork before dawn — two people, direction south toward Stillhold road",
         "Stillhold sends quiet operatives out — not travelers; they don't check in at Wardhouses",
         "The Marchers call whatever they carry a 'binding' — a cord, a knot, a mark; not a weapon",
-        "At least one person dropped a trail they couldn't explain after encountering something like the shimmer"
+        "At least one person dropped a trail they couldn't explain after encountering something like the shimmer",
+        "The heavier follower left Sera's trail at the waypost junction and entered the ash copse — a position with a clear line of sight to the road"
       ],
       "skillsObserved": [
-        "knowledge of local roads",
         "silent movement",
         "ground-reading",
         "gait analysis",
         "print-reading",
-        "tactical assessment"
+        "tactical assessment",
+        "tactical ground-reading"
       ],
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "Walking south on the Stillhold road trail with Brynjar and Freki; has shared what he knows of Stillhold operatives and binding-cords",
+      "statusNote": "At Brynjar's shoulder at the waypost junction, watching the ash copse",
       "domains": {
         "primary": "marcher"
       },
@@ -633,6 +688,22 @@
           "day": 1,
           "visited": true,
           "note": "The split in the east lane — north branch to the waygate approach, south branch to the Stillhold road. Visible boot-prints in the spring mud."
+        },
+        "waypost-junction": {
+          "name": "Waypost Junction",
+          "parentId": "the_marchward",
+          "day": 1,
+          "visited": true,
+          "note": "Where the chalk Stillhold track meets a broader east-west road — the heavier follower's prints turn east here into an ash copse; Sera's prints continue south unchanged. Freki marked the split.",
+          "parentUnresolved": "East Fork"
+        },
+        "ash-copse": {
+          "name": "Ash Copse",
+          "parentId": "the_marchward",
+          "day": 1,
+          "visited": false,
+          "note": "A stand of bare-branched ash east of the waypost junction. Clear line of sight to the road — the heavier follower's prints lead into it. A watching position.",
+          "parentUnresolved": "East Fork"
         }
       },
       "vectorsKnown": []
@@ -715,7 +786,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 7,
+    "turnsSinceOffer": 0,
     "recentOffers": [
       {
         "thing": "Doss watching Brynjar with the stillness of someone deciding something — she has not offered it yet, but she is on the edge of it",
@@ -724,6 +795,10 @@
       {
         "thing": "Ragnar volunteered that he saw movement at the east fork before dawn — a detail he'd been holding, waiting for someone who earned it",
         "from": "His nature as a reader of patterns and his days watching the square — he notices, and he gives what he notices to someone who shows up right"
+      },
+      {
+        "thing": "Freki sitting rather than ranging — the particular stillness that means the trail changed here, not ended, and Freki is waiting to be told…",
+        "from": "Freki's established read: it holds trails without being commanded, and its sitting is information the same way a growl is information…"
       }
     ]
   },
@@ -845,7 +920,8 @@
           "[d1] Two sets of prints at the south fork: a lighter frame went first, a heavier follower came ten minutes behind. Sera was not alone — someone tracked her, or met her, on the Stillhold road. Time of passage: roughly three to four hours before the Marchward woke.",
           "[d1] Freki confirmed the lighter prints as Sera's — she was moving fast, not walking. Ragnar reads it as someone who knows where they're going or doesn't want to be seen; the gait is the same either way.",
           "[d1] The heavier follower's prints read as deliberate pursuit — weight forward, toe-heavy, pace quickening as sight-lines opened south. Not a soldier, not a hunter. Someone closing distance on a target they knew was ahead.",
-          "[d1] The shimmer pressed into the heavier follower's heel-strike vanished on direct examination — gone before it could be named, leaving no second trace and no pattern in the surrounding mud."
+          "[d1] The shimmer pressed into the heavier follower's heel-strike vanished on direct examination — gone before it could be named, leaving no second trace and no pattern in the surrounding mud.",
+          "[d1] At the waypost junction half a mile south of the Marchward east fork, Sera's trail continued south unchanged while her heavier follower turned east into an ash copse — a watching position with a clear line to the junction road. The follower stopped pursuing and began observing."
         ],
         "links": [
           "the-stillhold",
@@ -1064,17 +1140,17 @@
     ]
   },
   "tendencies": {
-    "leadership": 8.653976946735796,
-    "cerebral": 5.1364944406492095,
-    "strategic": 3.7529131754873175,
-    "ruthless": 0.6502471642142047,
-    "social": 6.406854726935751,
-    "cautious": 3.756172265625
+    "leadership": 8.4376275230674,
+    "cerebral": 5.008082079632979,
+    "strategic": 3.6590903461001343,
+    "ruthless": 0.6339909851088495,
+    "social": 6.246683358762357,
+    "cautious": 3.662267958984375
   },
   "aptitudes": [
     "banner"
   ],
-  "actionCount": 19,
+  "actionCount": 20,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1200,8 +1276,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784772666248,
-  "rev": 72,
+  "updatedAt": 1784772752292,
+  "rev": 73,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1366,7 +1442,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 22
+    "riven_marches": 23
   },
   "practice": {
     "schemaVersion": 1,
@@ -1432,10 +1508,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-23T01:30:20.702Z",
-      "lastAt": "2026-07-23T02:11:06.246Z",
+      "lastAt": "2026-07-23T02:12:32.291Z",
       "startDay": 23,
       "endDay": 23,
-      "beats": 16
+      "beats": 17
     }
   ],
   "_pendingArrival": null,
@@ -1451,27 +1527,27 @@
     "at": "2026-07-23T01:18:04.353Z"
   },
   "_opEmitted": {
-    "sceneSummary": 15,
-    "choices": 15,
-    "scene": 15,
-    "npcUpdates": 13,
-    "placeUpdates": 3,
+    "sceneSummary": 16,
+    "choices": 16,
+    "scene": 16,
+    "npcUpdates": 14,
+    "placeUpdates": 4,
     "generateRequest": 2,
     "moveTo": 2,
-    "timeOps": 15,
-    "codexUpdates": 14,
-    "sceneEnded": 2,
-    "characterDeltas": 3,
-    "offer": 2,
+    "timeOps": 16,
+    "codexUpdates": 15,
+    "sceneEnded": 3,
+    "characterDeltas": 4,
+    "offer": 3,
     "deeds": 1,
     "standingOps": 1,
     "questUpdates": 2,
     "stageOps": 1
   },
-  "_opTurns": 15,
+  "_opTurns": 16,
   "_opLedger": {
     "offer": {
-      "applied": 2,
+      "applied": 3,
       "rejected": 0,
       "lastWhy": null
     }

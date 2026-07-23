@@ -6,7 +6,7 @@
   "origin": "valley",
   "background": "craftsman",
   "level": 10,
-  "xp": 976,
+  "xp": 981,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -53,7 +53,7 @@
     },
     {
       "abilityId": "braid_prism_sight_sonic_resonance",
-      "level": 1,
+      "level": 2,
       "braided": true
     }
   ],
@@ -76,7 +76,7 @@
   "maxHealth": 70,
   "health": 70,
   "maxEnergy": 145,
-  "energy": 76,
+  "energy": 67,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -856,9 +856,9 @@
     "Cellaceron walks away from the Lower Terrace and sleeps at the Harrow cottage — nothing solved tonight, everything preserved for morning.",
     "Day 8, night: the party rests in the alcove camp — the Waystaff cycling in the earth, the chamber waiting below, everything earned this night held in careful stillness until morning."
   ],
-  "currentLocationId": "harmonic_heights_terrace",
+  "currentLocationId": "gen-the-lower-chamber",
   "activeScene": {
-    "locationId": "harmonic_heights_terrace",
+    "locationId": "gen-the-lower-chamber",
     "turns": [
       {
         "player": "Check on Teva first — she slept through a night in the Zone with the chamber's four-second mark still in her tissue; ask how she is before anything else moves",
@@ -994,84 +994,131 @@
         "player": "Hold the contact — let what came through find its own ground before you move or speak",
         "summary": "The presence from beyond settled without demand — Teva's mark answered it like a name returned, and Aevi confirmed: it has found what it sought. The party stands at the open threshold, ready to cross.",
         "narration": "You do not move. You do not speak. The Waystaff's grip is steady under your hand, and you let the weight of what has come through settle around you the way you would let a room settle after a door opens on a cold morning.\n\nThe frequency from beyond is slower than anything the chamber produced above. It is not a sound you hear with your ears — you feel it in the bones of your forearms, in the place behind your sternum where breath lives. It moves through the passage the way deep water moves: not fast, not urgent, simply present, and aware that it has arrived somewhere it intended to be.\n\nTeva has not moved either. Her palm is still near the threshold surface, not quite touching. Her eyes are open now, and she is looking at nothing in particular — the look of someone listening to two things at once. After a moment she says, quietly, 'My mark is answering it. Not pulling toward it. Just — answering. Like a name given back.'\n\nAevi's motes are very bright at your right shoulder. The swarm does not condense into a shape this time. It simply holds there, radiant and still, and after a long breath it speaks in the voice that comes from just behind your ear. 'It is not asking anything of us,' Aevi says. 'It has found what it came to find. We may move when we are ready.'"
+      },
+      {
+        "player": "Read the room — bring Resonant Sight and Prism Sight together through the Waystaff and let the lattice scoring tell you what it was built to hear",
+        "summary": "Resonant Sight through the Waystaff reads the lower chamber's geometry: built to receive one frequency from one direction, once, and hold it — every surface refers to the convergence point, and the Waystaff's lattice already knows the shape.",
+        "narration": "You settle your weight over the Waystaff and let the braid come up quietly — Prism Sight first, reading the light that the curved walls have been collecting, then Sonic Resonance underneath it, a low hum beneath perception. The two fields find each other through the crystal nodes the way they always do now: not a collision, a conversation.\n\nThe chamber answers immediately. The scored listening-surfaces along the walls are not decorative — each arc is cut at a precise angle to gather and focus a specific frequency band toward the central convergence point in the floor. Three heat-channels in the floor do not intersect by accident. This room was built to receive one thing, from one direction, at one interval. The geometry is deliberate the way a tuning fork is deliberate.\n\nAevi drifts forward a hand's-span toward the convergence point and speaks quietly. 'The lattice is complete,' it says. 'Every surface refers back to the center. Nothing scatters. Whatever this room was made to hear, it was made to hear it once — and hold it.' A pause. 'The nodes in the Waystaff are singing the same geometry back to me. It knows this shape already.'\n\nTeva turns her head toward the convergence point without moving her feet. 'That is where the mark points,' she says. 'That is the direction I heard.' She is not surprised. She is confirming something she already suspected and is relieved to have confirmed."
       }
     ],
     "lastTurn": {
-      "narration": "You do not move. You do not speak. The Waystaff's grip is steady under your hand, and you let the weight of what has come through settle around you the way you would let a room settle after a door opens on a cold morning.\n\nThe frequency from beyond is slower than anything the chamber produced above. It is not a sound you hear with your ears — you feel it in the bones of your forearms, in the place behind your sternum where breath lives. It moves through the passage the way deep water moves: not fast, not urgent, simply present, and aware that it has arrived somewhere it intended to be.\n\nTeva has not moved either. Her palm is still near the threshold surface, not quite touching. Her eyes are open now, and she is looking at nothing in particular — the look of someone listening to two things at once. After a moment she says, quietly, 'My mark is answering it. Not pulling toward it. Just — answering. Like a name given back.'\n\nAevi's motes are very bright at your right shoulder. The swarm does not condense into a shape this time. It simply holds there, radiant and still, and after a long breath it speaks in the voice that comes from just behind your ear. 'It is not asking anything of us,' Aevi says. 'It has found what it came to find. We may move when we are ready.'",
-      "sceneSummary": "The presence from beyond settled without demand — Teva's mark answered it like a name returned, and Aevi confirmed: it has found what it sought. The party stands at the open threshold, ready to cross.",
+      "narration": "You settle your weight over the Waystaff and let the braid come up quietly — Prism Sight first, reading the light that the curved walls have been collecting, then Sonic Resonance underneath it, a low hum beneath perception. The two fields find each other through the crystal nodes the way they always do now: not a collision, a conversation.\n\nThe chamber answers immediately. The scored listening-surfaces along the walls are not decorative — each arc is cut at a precise angle to gather and focus a specific frequency band toward the central convergence point in the floor. Three heat-channels in the floor do not intersect by accident. This room was built to receive one thing, from one direction, at one interval. The geometry is deliberate the way a tuning fork is deliberate.\n\nAevi drifts forward a hand's-span toward the convergence point and speaks quietly. 'The lattice is complete,' it says. 'Every surface refers back to the center. Nothing scatters. Whatever this room was made to hear, it was made to hear it once — and hold it.' A pause. 'The nodes in the Waystaff are singing the same geometry back to me. It knows this shape already.'\n\nTeva turns her head toward the convergence point without moving her feet. 'That is where the mark points,' she says. 'That is the direction I heard.' She is not surprised. She is confirming something she already suspected and is relieved to have confirmed.\n\n*▲ Practiced — **Shatterlight** is fluent now (rank 2), earned through use.*",
+      "sceneSummary": "Resonant Sight through the Waystaff reads the lower chamber's geometry: built to receive one frequency from one direction, once, and hold it — every surface refers to the convergence point, and the Waystaff's lattice already knows the shape.",
       "choices": [
         {
-          "label": "Step through the threshold — all three of you, together, in the same deliberate breath",
+          "label": "Cross the threshold and move to the convergence point — that is where the room and Teva's mark are both pointing",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {
+            "death_life": 0.2,
+            "mechanical_spiritual": 0.3
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Aevi plainly — before you cross, you want to hear what 'from before me' means, here, in this room",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "axes": {
+            "falsehood_truth": 0.4,
+            "mechanical_spiritual": 0.2
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Teva what the mark is telling her now — the room is open and the presence is settled; what does the correspondence feel like from inside it?",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {
+            "death_life": 0.1
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "study",
+            "calm"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Take a charcoal sketch of the wall-scoring geometry on one sheet of bark-press paper before crossing — this room's design should not exist only in memory",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {
+            "chaos_order": 0.3,
+            "mechanical_spiritual": 0.2
+          },
           "difficulty": 0,
           "intentTags": [
             "careful",
-            "travel"
+            "craft"
           ],
-          "trivial": true
-        },
-        {
-          "label": "Ask Aevi plainly — before you cross — what it means by 'again'; what does it remember of this presence?",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "plan"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Use Resonant Sight through the Waystaff before stepping through — read what the space beyond looks like before you are inside it",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 15,
-          "intentTags": [
-            "scout",
-            "study"
-          ],
-          "abilityId": "braid_prism_sight_sonic_resonance",
-          "energyCost": 4,
-          "trivial": false
-        },
-        {
-          "label": "Let Teva lead across — her mark is in live correspondence with whatever is there; she is the right first foot through the door",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "help",
-            "careful"
-          ],
-          "trivial": true
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
+      "deeds": [],
+      "characterDeltas": {
+        "health": 0,
+        "energy": -5
+      },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "second-river-rising",
+          "note": "Resonant Sight confirms the lower chamber was built to receive one frequency from one direction at one interval — the geometry is complete and deliberate, and the convergence point is where both the room and Teva's mark point."
+        }
+      ],
+      "stageOps": [],
       "scene": {
-        "setting": "The seam passage northeast-by-east — single-file, older denser walls, no outside light. The Waystaff grip planted on the floor at the open threshold. The gathering quality has reversed; the presence from beyond is settled and present, no longer pressing.",
+        "setting": "The lower chamber — hemispherical, ceiling intact, walls scored with deliberate curved listening-surfaces. The Waystaff's grip planted at the open threshold. Dawn light does not reach here; Aevi's motes provide the only illumination, very bright.",
         "npcsPresent": [
           {
             "name": "Teva",
-            "state": "Palm near but not touching the threshold surface, eyes open, attending to the correspondence between her mark and the arrived presence — calm, unhurried"
+            "state": "Standing near the threshold, head turned toward the convergence point, palm no longer touching the surface — confirming what her mark has been telling her"
           },
           {
             "name": "Aevi",
-            "state": "Motes very bright at Cellaceron's right shoulder, holding still and radiant, having just spoken: 'It has found what it came to find. We may move when we are ready.'"
+            "state": "Drifted a hand's-span forward toward the convergence point, very bright, having just spoken about the lattice geometry"
           }
         ],
         "objects": [
-          "Waystaff — grip planted on the floor, nodes holding the older slower frequency steadily",
-          "Sealed threshold — no longer closed; tide reversed, presence now on this side of the boundary",
+          "Waystaff — grip planted at the open threshold, lattice nodes singing the chamber's geometry",
+          "Scored listening-surfaces along the curved walls — each arc angled to focus toward the convergence point",
+          "Three heat-channels in the floor converging at the central convergence point",
           "Traveler's Pack — shouldered",
           "Waterskin — in pack",
-          "Bark-press paper (three sheets)",
+          "Bark-press paper — three sheets, one potentially for sketching",
           "Resonance crystals — four nodes in Waystaff lattice"
         ],
         "threads": [
-          "Aevi said 'again' — what does it remember of this presence that it has not yet named?",
-          "Teva's mark is answering the presence 'like a name given back' — what name?",
-          "The threshold is open and the presence has settled; the crossing is the next move",
-          "The space beyond the threshold has not yet been read or entered"
+          "Aevi said 'from before me' — has not yet named what it remembers of this presence",
+          "Teva's mark is in live correspondence with the convergence point — the direction she heard, confirmed",
+          "The threshold is open; the crossing to the convergence point is the next move",
+          "The room was built to receive one thing once — what that thing is has not yet been named"
         ]
       },
       "npcUpdates": [
@@ -1079,66 +1126,89 @@
           "op": "update",
           "npcId": "aevi",
           "name": "Aevi",
-          "note": "Held still and very bright as the presence settled — named plainly that it is not asking anything of us, and that we may move when ready. Did not elaborate on 'again.'",
+          "note": "Named the chamber's lattice as complete — every surface refers to the center, nothing scatters; noted the Waystaff's nodes are already singing the chamber's geometry back",
           "learned": [
-            "The arrived presence is not demanding — it has found what it sought and is simply present"
+            "The lower chamber was built to receive one frequency from one direction, once, and hold it — a complete and deliberate tuning geometry"
           ],
-          "statusNote": "At Cellaceron's right shoulder, very bright and still, the presence settled around the party"
+          "skillsObserved": [
+            "lattice geometry reading — named the chamber's design as a receiving structure, not a broadcasting one"
+          ],
+          "statusNote": "Present in the lower chamber, motes very bright and drifted forward toward the convergence point"
+        },
+        {
+          "op": "update",
+          "npcId": "teva",
+          "name": "Teva",
+          "note": "Confirmed without surprise that the convergence point is the direction the mark has been pointing — relieved to have it confirmed by the Resonant Sight read",
+          "statusNote": "Standing near the open threshold, attending to the live correspondence between her nanite mark and the convergence point"
         }
       ],
-      "questUpdates": [
+      "factUpdates": [
         {
-          "op": "progress",
-          "questId": "second-river-rising",
-          "note": "The presence from beyond the threshold settled without demand — Teva's mark answered it, Aevi confirmed it has found what it sought. The crossing is next. The source of the second river waits on the far side."
+          "op": "add",
+          "text": "Resonant Sight through the Waystaff confirms the lower chamber's scored wall geometry is a complete receiving structure — every listening-surface arc refers to the central convergence point, the three floor heat-channels converge there, and the room was designed to receive one specific frequency from one direction, once, and hold it. Day 9 dawn.",
+          "subjectId": "the-lower-chamber"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "the-chamber-beyond-the-threshold",
-          "label": "The Chamber — Beyond the Threshold",
-          "kind": "mystery",
-          "fact": "Day 9 dawn: the presence that came through the open threshold settled without asking anything. Teva's mark answered it 'like a name given back' — not pulled toward it, simply responding. Aevi named its intent: it has found what it came to find. The party has not yet crossed.",
+          "topic": "the-lower-chamber",
+          "label": "The Lower Chamber",
+          "kind": "place",
+          "entityId": "the-lower-chamber",
+          "fact": "Day 9 dawn: Resonant Sight through the Waystaff lattice reads the chamber's geometry as a complete receiving structure. Every scored listening-surface is angled to focus toward the central convergence point. The three floor heat-channels converge there. The room was not built to broadcast or to hold — it was built to receive one frequency, from one direction, once. The Waystaff's nodes already know the shape.",
           "links": [
+            "aevi",
+            "teva-directional-interval-count",
             "second-river-rising",
             "teva-anselvar-missing-apprentice",
-            "teva-directional-interval-count",
-            "aevi",
             "northern-alcove-camp"
           ]
         }
       ],
+      "placeUpdates": [
+        {
+          "note": "Resonant Sight confirmed: the scored wall arcs are a deliberate receiving geometry, all focused on the central convergence point. Three floor heat-channels converge there. The room was built to receive one thing once.",
+          "subPlace": {
+            "name": "Convergence Point",
+            "parent": "The Lower Chamber",
+            "note": "The geometric focus of the chamber — where every listening-surface arc and all three floor heat-channels meet. Both Teva's nanite mark and the Waystaff lattice point here.",
+            "visited": false
+          }
+        }
+      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A quiet held moment — the presence settling, Teva and Aevi naming what they sense; no more than a few minutes"
+        "why": "a careful, quiet reading through the Waystaff — a few minutes at the threshold"
       },
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The seam passage northeast-by-east — single-file, older denser walls, no outside light. The Waystaff grip planted on the floor at the open threshold. The gathering quality has reversed; the presence from beyond is settled and present, no longer pressing.",
+      "setting": "The lower chamber — hemispherical, ceiling intact, walls scored with deliberate curved listening-surfaces. The Waystaff's grip planted at the open threshold. Dawn light does not reach here; Aevi's motes provide the only illumination, very bright.",
       "npcsPresent": [
         {
           "name": "Teva",
-          "state": "Palm near but not touching the threshold surface, eyes open, attending to the correspondence between her mark and the ar"
+          "state": "Standing near the threshold, head turned toward the convergence point, palm no longer touching the surface — confirming "
         },
         {
           "name": "Aevi",
-          "state": "Motes very bright at Cellaceron's right shoulder, holding still and radiant, having just spoken: 'It has found what it c"
+          "state": "Drifted a hand's-span forward toward the convergence point, very bright, having just spoken about the lattice geometry"
         }
       ],
       "objects": [
-        "Waystaff — grip planted on the floor, nodes holding the older slower frequency s",
-        "Sealed threshold — no longer closed; tide reversed, presence now on this side of",
+        "Waystaff — grip planted at the open threshold, lattice nodes singing the chamber",
+        "Scored listening-surfaces along the curved walls — each arc angled to focus towa",
+        "Three heat-channels in the floor converging at the central convergence point",
         "Traveler's Pack — shouldered",
         "Waterskin — in pack",
-        "Bark-press paper (three sheets)",
+        "Bark-press paper — three sheets, one potentially for sketching",
         "Resonance crystals — four nodes in Waystaff lattice"
       ],
       "threads": [
-        "Aevi said 'again' — what does it remember of this presence that it has not yet named?",
-        "Teva's mark is answering the presence 'like a name given back' — what name?",
-        "The threshold is open and the presence has settled; the crossing is the next move",
-        "The space beyond the threshold has not yet been read or entered"
+        "Aevi said 'from before me' — has not yet named what it remembers of this presence",
+        "Teva's mark is in live correspondence with the convergence point — the direction she heard, confirmed",
+        "The threshold is open; the crossing to the convergence point is the next move",
+        "The room was built to receive one thing once — what that thing is has not yet been named"
       ]
     }
   },
@@ -1160,14 +1230,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "The chamber's orientation offer confirmed northeast-by-east — through the seam and further. The direction Teva heard, the direction Resonant Sight named, and the direction the chamber points are now one.",
         "The chamber has shifted into a keeping-state after the third offer was accepted — it is no longer testing or orienting, but present. The seam below is the next move; the sealed threshold at its far end is what the chamber has been pointing toward.",
         "The chamber has received the acknowledgment of the departure-marker — the exchange is complete at five folds. The sealed threshold through the seam is the next threshold.",
         "Camp broken at the convergence point; party is now in the seam passage approaching the sealed threshold — the chamber has said what it could, the next answer is through what lies beyond.",
         "Threshold material confirmed as a gathering boundary, not a barrier — the Waystaff's field received and held rather than scattered. The other side has pressure. Teva's language: 'like a lung before it opens.'",
         "Teva reads the threshold as 'held ready, not sealed' — the pressure is outward; what lies beyond wants to be received. The opening is available. The party stands at the latch, not the bar.",
         "Threshold opened — day 9 dawn. The older frequency came through and the presence named itself aware 'again'. The party stands at the open boundary, not yet through. The second river's source is on the far side of this door.",
-        "The presence from beyond the threshold settled without demand — Teva's mark answered it, Aevi confirmed it has found what it sought. The crossing is next. The source of the second river waits on the far side."
+        "The presence from beyond the threshold settled without demand — Teva's mark answered it, Aevi confirmed it has found what it sought. The crossing is next. The source of the second river waits on the far side.",
+        "Resonant Sight confirms the lower chamber was built to receive one frequency from one direction at one interval — the geometry is complete and deliberate, and the convergence point is where both the room and Teva's mark point."
       ],
       "startedAt": "2026-07-03T18:55:17.042Z"
     },
@@ -1190,6 +1260,241 @@
       ],
       "startedAt": "2026-07-03T23:49:51.888Z",
       "resolvedAt": "2026-07-05T02:53:20.242Z"
+    },
+    {
+      "id": "what-the-water-remembers",
+      "title": "What the Water Remembers",
+      "structured": true,
+      "status": "active",
+      "premise": "Mara Wells has traced the Echo River's poisoning to a single point upstream in the Disputed Zone — a structure the old maps don't show, drawing power nothing alive built. It is not malfunctioning. It is following an order, and it is nearly finished.",
+      "stakes": "If you walk away: the standoff at the filtration arrays goes live — Millbrook's guards and the Radiant leadership are one bad morning from open conflict over water neither side controls. Whatever the structure was ordered to do finishes without a single living person having chosen it, and finishing is not the same as stopping.",
+      "axis": "death_life",
+      "traditions": [
+        "ashwarden",
+        "lattice",
+        "verist",
+        "umbral",
+        "abyssal",
+        "stillhold"
+      ],
+      "giver": "water_keeper",
+      "legend": "archive_guardian",
+      "region": "valley",
+      "tier": "world",
+      "arcId": "arc_what_wakes_beneath",
+      "locationId": null,
+      "stages": [
+        {
+          "id": "s1",
+          "objective": "Find where the poisoning actually starts.",
+          "condition": "Trace the contamination upstream past the Disputed Zone fringe (Mara's testimony, Kit Farrow's account of survey-grid lights at night) OR obtain the falsified purity reports from the Radiant filtration arrays.",
+          "change": "Codex: the source is a structure, not a spill. Something built this."
+        },
+        {
+          "id": "s2",
+          "objective": "Learn what the structure is.",
+          "condition": "Reach the reclamation site itself, or bring what you've found to the Archive Guardian for identification against pre-Transition record.",
+          "change": "Codex: a pre-Transition nanite reclamation system, still running, still following a standing instruction — 'prepare the watershed.' Linked to What Wakes Beneath."
+        },
+        {
+          "id": "s3",
+          "objective": "Learn what 'prepare' means before deciding what to do about it.",
+          "condition": "Investigate the instruction directly — read the array's own logic, deathsense what kind of thing it is now, or get someone who was there when it stirred to say what they saw.",
+          "change": "Codex: the shape of the instruction is named, or confirmed unreadable. Harmonic and Radiant leaders learn the source is not each other's doing — the standoff cools, but the deeper question does not."
+        },
+        {
+          "id": "s4",
+          "objective": "Decide what the water becomes.",
+          "condition": "Resolve — see outcomes.",
+          "change": "The watershed changes. So does what the district trusts. So, one way or another, does the deeper thing the structure answers to."
+        }
+      ],
+      "routes": {
+        "verist": "Bring the true source before the district, publicly, before either side can keep blaming the other. Truth as the thing that ends a standoff.",
+        "lattice": "Read the array's own instruction set until it's legible enough to touch — not guessed at, known.",
+        "ashwarden": "Deathsense it directly. It isn't alive the way a person is, but something in it isn't finished being anything else either. Read what an ending means to a thing that doesn't fear its own.",
+        "umbral": "Go in unseen. Learn what it's actually doing before anyone upstream decides what story to tell about it.",
+        "abyssal": "Name what the structure wants — to complete its instruction — and treat that want as real enough to bargain with.",
+        "stillhold": "Broker the standoff first. Get Harmonic and Radiant to stand down long enough to act on the real source together, before either faction owns the answer."
+      },
+      "outcomes": [
+        {
+          "id": "sealed",
+          "name": "The Site Sealed",
+          "summary": "The instruction is stopped cold. The water clears. What it was for is buried with it.",
+          "narration": [
+            "The reclamation site goes dark. Within days the Echo River runs clean, and Millbrook's guards stand down from the filtration arrays without a shot fired.",
+            "The Archive Guardian does not forgive this easily — a working pre-Transition system, one of perhaps a handful left running in the world, destroyed rather than understood. He is right to be furious and says so.",
+            "Whatever the substrate was preparing this watershed for will now happen somewhere else, to someone who didn't get a choice in it either — the Valley's tremor was never the only one.",
+            "The district exhales. It does not yet know what it gave up to get that exhale.",
+            "Verist disposition toward you: raised — you gave people the plain truth and a clean ending. Lattice: lowered — you didn't need to understand it, only to stop it."
+          ],
+          "effects": [
+            {
+              "type": "location_state",
+              "location": "the_reclamation_site",
+              "change": "sealed — permanently inert, the instruction halted mid-execution"
+            },
+            {
+              "type": "npc_state",
+              "npc": "archive_guardian",
+              "state": "estranged",
+              "note": "a working pre-Transition system destroyed rather than studied; he will not easily trust your judgment on old things again"
+            },
+            {
+              "type": "disposition",
+              "people": "verist",
+              "delta": 2
+            },
+            {
+              "type": "disposition",
+              "people": "lattice",
+              "delta": -1
+            },
+            {
+              "type": "codex_fact",
+              "text": "The reclamation site beneath the Disputed Zone has been sealed. What it was preparing the Echo watershed for will never be known here."
+            },
+            {
+              "type": "world_event",
+              "text": "Word spreads that the Valley's water crisis had a built source, not a natural one, and that it has been closed for good.",
+              "propagates": true,
+              "delayDays": 4
+            },
+            {
+              "type": "quest_seed",
+              "text": "Foreclosure doesn't stop the substrate waking elsewhere — only here. What wakes beneath continues on its own schedule, everywhere the Valley isn't."
+            },
+            {
+              "type": "xp",
+              "amount": 40
+            }
+          ]
+        },
+        {
+          "id": "let_it_finish",
+          "name": "Let It Finish",
+          "summary": "The instruction completes. The water is not restored. It is something else now.",
+          "narration": [
+            "You do nothing to stop it, or you help it along, and the reclamation system runs its last cycle to completion. The poisoning stops — but not because the water went back to what it was.",
+            "The Echo River no longer sickens anyone. It also no longer behaves entirely like water. Fish return to it changed in ways no one has words for yet. Nobody drowns in it anymore, and nobody has explained why.",
+            "The Archive Guardian is half-vindicated, half-unsettled — this is exactly the kind of thing he wanted preserved and studied, and exactly the kind of thing nobody asked the district's permission to let happen to their river.",
+            "You made the opening choice at the smallest scale the largest arc has to offer. What the water became is shaped, now, by what happens to it next — and by who's watching it.",
+            "Ashwarden disposition toward you: raised — you let a thing finish being what it was becoming instead of forcing it back into what it had been."
+          ],
+          "effects": [
+            {
+              "type": "location_state",
+              "location": "the_reclamation_site",
+              "change": "completed — instruction fulfilled; the site has gone quiet on its own terms"
+            },
+            {
+              "type": "npc_state",
+              "npc": "archive_guardian",
+              "state": "watching",
+              "note": "fascinated and uneasy in equal measure; wants access to study what the water has become"
+            },
+            {
+              "type": "disposition",
+              "people": "ashwarden",
+              "delta": 2
+            },
+            {
+              "type": "codex_fact",
+              "text": "The Echo River is transformed, not restored. Something in the water is different now, and no one fully understands what.",
+              "secret": false
+            },
+            {
+              "type": "world_event",
+              "text": "The Echo watershed has changed in ways that reach past the Valley — the substrate's waking is no longer only a tremor here.",
+              "propagates": true,
+              "delayDays": 6
+            },
+            {
+              "type": "quest_seed",
+              "text": "What the water has become will need tending, or watching, or both — and it will not wait forever to be decided about."
+            },
+            {
+              "type": "xp",
+              "amount": 45
+            },
+            {
+              "type": "arc_stage",
+              "arcId": "arc_what_wakes_beneath",
+              "from": 1,
+              "to": 2,
+              "note": "engaging the reclamation site advances What Wakes Beneath on the shared clock — the tremor became a stirring, and everyone sees it"
+            }
+          ]
+        },
+        {
+          "id": "redirected",
+          "name": "The Instruction Rewritten",
+          "summary": "Neither stopped nor completed — amended. Someone finally reads it well enough to change it on purpose.",
+          "narration": [
+            "You don't shut the system down and you don't let it run blind. You get inside the instruction itself and change one line: prepare the watershed — for what it can safely become, not for whatever it was originally for.",
+            "The water clears. It also carries something new — small, useful, unmistakably still there if you know to look. The district gets its river back and doesn't know it got anything else.",
+            "The Archive Guardian is, briefly, insufferable about being right that this was worth understanding rather than destroying or ignoring.",
+            "This was the hard way. Reaching it took the technical or death-sensed truth of stages 2 and 3, not just a decision at the end — and it shows in what's left standing.",
+            "Lattice disposition toward you: strongly raised — you didn't defeat the thing or surrender to it. You read it well enough to argue with it and won."
+          ],
+          "effects": [
+            {
+              "type": "location_state",
+              "location": "the_reclamation_site",
+              "change": "redirected — running an amended instruction, monitored"
+            },
+            {
+              "type": "npc_state",
+              "npc": "archive_guardian",
+              "state": "ally",
+              "note": "delighted, insufferable, genuinely grateful; will share pre-Transition knowledge more readily now"
+            },
+            {
+              "type": "ally",
+              "npc": "archive_guardian",
+              "note": "trusts your judgment on old and dangerous things going forward"
+            },
+            {
+              "type": "disposition",
+              "people": "lattice",
+              "delta": 3
+            },
+            {
+              "type": "codex_fact",
+              "text": "The reclamation site runs a rewritten instruction now — the water is clear, and something small and new persists in it, watched rather than feared."
+            },
+            {
+              "type": "world_event",
+              "text": "The Valley quietly solved a problem no one else in the world has managed to solve yet — and someone will eventually come asking how.",
+              "propagates": true,
+              "delayDays": 10
+            },
+            {
+              "type": "quest_seed",
+              "text": "A system that can be argued with can be argued with by someone else, too. Not everyone who learns what you did will want the same outcome."
+            },
+            {
+              "type": "xp",
+              "amount": 50
+            },
+            {
+              "type": "arc_stage",
+              "arcId": "arc_what_wakes_beneath",
+              "from": 1,
+              "to": 2,
+              "note": "engaging the reclamation site advances What Wakes Beneath on the shared clock — the tremor became a stirring, and everyone sees it",
+              "weight": 2
+            }
+          ]
+        }
+      ],
+      "stageIndex": 0,
+      "completedStages": [],
+      "progress": [],
+      "aliases": [],
+      "startedAt": "2026-07-23T03:44:10.237Z",
+      "startedWorldDay": 23
     }
   ],
   "npcRegistry": {
@@ -1414,8 +1719,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d9] Named the wall-marks through the Waystaff — many eras, three tool-changes, consistent four-second interval, and a final grouping that stops mid-count.",
-        "[d9] Named the chamber's orientation through the Waystaff nodes — northeast-by-east, not at the seam but through it; the seam is a passage and the destination is further.",
         "[d9] Named the sealed threshold's silence as intention rather than interference — a distinction that matters.",
         "[d9] Named the chamber's shift from waiting to keeping — and said the distinction, in its experience, matters.",
         "[d9] Named the completion of the count — four words, precisely timed, after Cellaceron's acknowledgment landed in the chamber's pulse.",
@@ -1423,32 +1726,34 @@
         "[d9] Named the threshold's silence as gathering rather than scattering — 'the field is received and held.' Motes compressed bright at the threshold.",
         "[d9] Named the threshold pressure as outward, not inward — corrected the expected assumption. 'What is beyond wants to be received, not passed.' Noted this was different from what it expected.",
         "[d9] Named the arriving presence as 'aware of us — not newly'; the word chosen was 'again'. Motes pressed close and very bright at the moment of contact.",
-        "[d9] Held still and very bright as the presence settled — named plainly that it is not asking anything of us, and that we may move when ready. Did not elaborate on 'again.'"
+        "[d9] Held still and very bright as the presence settled — named plainly that it is not asking anything of us, and that we may move when ready. Did not elaborate on 'again.'",
+        "[d9] Crossed the threshold and brightened beyond Kindled Chorus level — drifted toward the lower convergence point, then held and named plainly: 'I know this room. Not from before you. From before me.'",
+        "[d9] Named the chamber's lattice as complete — every surface refers to the center, nothing scatters; noted the Waystaff's nodes are already singing the chamber's geometry back"
       ],
       "knownFacts": [
-        "The chamber's orientation points through the seam northeast-by-east — the seam is a passage, not the destination",
-        "The material at the seam's far end absorbs the Resonant field without returning anything — Aevi reads this as designed silence, not natural interference",
         "The chamber has shifted from waiting to keeping — oriented toward what is already here rather than what comes next",
         "The count is complete — the chamber has received the acknowledgment of the departure-marker and did not deepen or test further.",
         "The threshold receives and holds the Resonant field rather than scattering it — the silence is a gathering property, not a barrier property",
         "The pressure beyond the threshold is outward — the space beyond is oriented toward being received, not containing something held back",
         "What came through the threshold upon opening is aware of the party — not newly aware, but aware 'again', implying prior contact or recognition of some kind",
-        "The arrived presence is not demanding — it has found what it sought and is simply present"
+        "The arrived presence is not demanding — it has found what it sought and is simply present",
+        "Aevi has a pre-Cellaceron memory of this specific chamber — something in the room triggered recognition that precedes its known history",
+        "The lower chamber was built to receive one frequency from one direction, once, and hold it — a complete and deliberate tuning geometry"
       ],
       "skillsObserved": [
-        "lattice-integration — distributed motes through a phononic c",
         "resonant speech — voice carried through crystal nodes rather",
         "recognition of a chamber state-shift — named it precisely in",
         "multi-temporal record analysis through the Waystaff lattice ",
         "pressure-direction read through gathered field — distinguish",
-        "recognition of a returning presence — distinguished 'newly a"
+        "recognition of a returning presence — distinguished 'newly a",
+        "lattice geometry reading — named the chamber's design as a r"
       ],
       "status": "active",
       "lastSeen": {
-        "locationId": "harmonic_heights_terrace",
+        "locationId": "gen-the-lower-chamber",
         "day": 9
       },
-      "statusNote": "At Cellaceron's right shoulder, very bright and still, the presence settled around the party",
+      "statusNote": "Present in the lower chamber, motes very bright and drifted forward toward the convergence point",
       "bondType": "platonic",
       "domains": {
         "primary": "harmonic"
@@ -1670,7 +1975,6 @@
     "harmonic_heights_terrace": {
       "visits": 1,
       "notes": [
-        "[d9] Day 9 dawn: fifth fold offered and received — chamber settled into a held recognition state, five-fold pulse steady, no further deepening. Teva's mark quieted at the same moment. The exchange is no longer evaluative; the preparation cycle has acknowledged arrival.",
         "[d9] Braided stone-read confirmed: heat-channels in the floor converge at a point a few paces short of chamber center — a position marker, light-memory present for centuries. Wall-marks are a long deliberate count in the absorptive face — many strikes, many eras, no clear tonic.",
         "[d9] Cellaceron stepped to the convergence point on day 9 dawn and planted the Waystaff's grip-end there — the chamber's attention gathered inward and Aevi named three available offers: read the count, receive orientation, or hold.",
         "[d9] Wall-marks read from convergence point on day 9 dawn — a multi-era count, three hands, consistent four-second interval throughout, final grouping stopping mid-count with edges still sharp. Someone kept this place across generations and left before the end.",
@@ -1681,7 +1985,8 @@
         "[d9] Day 9 dawn: departure-marker acknowledged to the chamber in the four-second pulse; chamber did not elaborate or deepen. Aevi named the count complete. The exchange at the convergence point is finished; the sealed threshold is the next move.",
         "[d9] Camp at convergence point broken day 9 dawn — Waystaff lifted, nodes steady, party moved northeast-by-east into the seam passage. Chamber warmth persisted briefly after departure.",
         "[d9] Day 9 dawn: Waystaff laid against the sealed threshold — field received and held, not scattered. Threshold confirmed as a gathering boundary, not a barrier. Aevi named 'pressure beyond.' Teva's mark responded involuntarily with the image 'a lung before it opens.'",
-        "[d9] Day 9 dawn: threshold opened — gathering quality reversed, older slower frequency came through from beyond. Party has not yet crossed. Aevi named the presence as aware 'again'."
+        "[d9] Day 9 dawn: threshold opened — gathering quality reversed, older slower frequency came through from beyond. Party has not yet crossed. Aevi named the presence as aware 'again'.",
+        "[d9] The lower chamber entered for the first time on day 9 dawn — hemispherical, ceiling intact, older than the corridor. Scored listening-surfaces on walls and ceiling in deliberate curved rows. Three heat-channels in the floor converging toward a central point. Aevi named it as a place it knew before…"
       ],
       "flags": {
         "resonance_niche_tone_event": "day2_night_second_river_frequency",
@@ -1844,6 +2149,14 @@
           "visited": true,
           "note": "Threshold no longer closed — the tide has reversed; presence from beyond now present at the seam. Waystaff grip planted at floor. Party at the boundary, not yet through.",
           "parentUnresolved": "harmonic_heights"
+        },
+        "the-lower-chamber-first-entry": {
+          "name": "The Lower Chamber — First Entry",
+          "parentId": "harmonic_heights_terrace",
+          "day": 9,
+          "visited": true,
+          "note": "First entered day 9 dawn — older than all above, listening-surfaces scored into walls and ceiling, three heat-channels converging toward a central point. Aevi showed recognition.",
+          "parentUnresolved": "The Seam Passage — Threshold Open"
         }
       },
       "vectorsKnown": [
@@ -1852,6 +2165,23 @@
         "emotional_logical",
         "violence_peace"
       ]
+    },
+    "gen-the-lower-chamber": {
+      "visits": 0,
+      "notes": [
+        "[d9] Resonant Sight confirmed: the scored wall arcs are a deliberate receiving geometry, all focused on the central convergence point. Three floor heat-channels converge there. The room was built to receive one thing once."
+      ],
+      "flags": {},
+      "vectorsKnown": [],
+      "subPlaces": {
+        "convergence-point": {
+          "name": "Convergence Point",
+          "parentId": "gen-the-lower-chamber",
+          "day": 9,
+          "visited": false,
+          "note": "The geometric focus of the chamber — where every listening-surface arc and all three floor heat-channels meet. Both Teva's nanite mark and the Waystaff lattice point here."
+        }
+      }
     }
   },
   "worldState": {
@@ -1971,7 +2301,7 @@
     "lastTickWorldDay": 23,
     "lastCanonWorldDay": 23,
     "lastGenCount": 555,
-    "turnsSinceOffer": 29,
+    "turnsSinceOffer": 31,
     "wantProgress": {
       "elder-senna": {
         "progress": 1,
@@ -2302,7 +2632,8 @@
           "[d9] Day 9 dawn: Aevi named the chamber as a preparation cycle for a return — and admitted it does not know whether it recognizes the thing itself, only the pattern. The distinction matters: pattern-memory and being-memory are separate in Aevi.",
           "[d2] Companion intelligence, nanite-mote swarm",
           "[d?] Kindled Chorus — The motes have brightened and learned to move as one — condensing into near-shapes when speaking, casting real light in the dark, humming harmonics that other nanite fields answer. Old — and less alone than before.",
-          "[d9] At the threshold opening, Aevi named the arriving presence as 'aware of us — not newly'; chose the word 'again'. This implies Aevi has encountered this presence before, or the presence has encountered Aevi — before the current expedition."
+          "[d9] At the threshold opening, Aevi named the arriving presence as 'aware of us — not newly'; chose the word 'again'. This implies Aevi has encountered this presence before, or the presence has encountered Aevi — before the current expedition.",
+          "[d9] Day 9 dawn: on entering the lower chamber, Aevi's motes went brighter than Kindled Chorus and it said plainly — 'I know this room. Not from before you. From before me.' This is the first direct statement that Aevi's history predates its attachment to Cellaceron, and that the memory is of a…"
         ],
         "links": [
           "shimmer-crossing-boundary-condition",
@@ -2311,7 +2642,8 @@
           "shimmer-crossing-shaped-boundary",
           "second-river-rising",
           "teva-anselvar-missing-apprentice",
-          "teva-directional-interval-count"
+          "teva-directional-interval-count",
+          "the-lower-chamber"
         ],
         "aliases": [
           "Aevi — What It Carries",
@@ -2491,6 +2823,26 @@
         "createdDay": 2,
         "entityId": "harmonic-heights-terrace",
         "updatedDay": 2
+      },
+      "the-lower-chamber": {
+        "id": "the-lower-chamber",
+        "label": "The Lower Chamber",
+        "kind": "place",
+        "facts": [
+          "[d9] Day 9 dawn: the chamber beyond the sealed threshold is older than anything above it — hemispherical, ceiling intact, walls scored with deliberate curved listening-surfaces designed to gather and focus. Three heat-channels in the floor converge toward a central point. Aevi named it as known 'from…",
+          "[d9] Day 9 dawn: Resonant Sight through the Waystaff lattice reads the chamber's geometry as a complete receiving structure. Every scored listening-surface is angled to focus toward the central convergence point. The three floor heat-channels converge there. The room was not built to broadcast or to…"
+        ],
+        "links": [
+          "the-chamber-beyond-the-threshold",
+          "second-river-rising",
+          "aevi",
+          "teva-anselvar-missing-apprentice",
+          "teva-directional-interval-count"
+        ],
+        "aliases": [],
+        "createdDay": 9,
+        "updatedDay": 9,
+        "entityId": "the-lower-chamber"
       }
     },
     "notSame": [
@@ -2613,7 +2965,7 @@
       "motes-vigil": 4,
       "light_well": 3,
       "greenlore": 4,
-      "braid_prism_sight_sonic_resonance": 7
+      "braid_prism_sight_sonic_resonance": 8
     },
     "coActivations": {
       "keen_appraisal+sonic_resonance": 1,
@@ -2635,7 +2987,7 @@
     "lastUsed": {
       "prism_sight": 22,
       "keen_appraisal": 22,
-      "braid_prism_sight_sonic_resonance": 22,
+      "braid_prism_sight_sonic_resonance": 23,
       "sonic_resonance": 23
     }
   },
@@ -2803,6 +3155,12 @@
       "text": "The threshold was opened on day 9 dawn by breath-out and planted Waystaff — the gathering quality reversed and an older, slower frequency came through from beyond. Aevi named it 'aware of us — not newly — again.' The threshold is now open; the party has not yet crossed.",
       "day": 9,
       "subjectId": "the-chamber-beyond-the-threshold"
+    },
+    {
+      "id": "the-lower-chamber",
+      "text": "Resonant Sight through the Waystaff confirms the lower chamber's scored wall geometry is a complete receiving structure — every listening-surface arc refers to the central convergence point, the three floor heat-channels converge there, and the room was designed to receive one specific frequency…",
+      "day": 9,
+      "subjectId": "the-lower-chamber"
     }
   ],
   "sharedSceneId": null,
@@ -2810,16 +3168,16 @@
   "customEncounters": {},
   "reconcileVersion": 16,
   "tendencies": {
-    "cerebral": 36.31051739443245,
-    "strategic": 32.14551544445698,
-    "cautious": 36.88243239822064,
-    "social": 20.211652977404114,
-    "generous": 8.732132387470058,
-    "risky": 2.3002551743705584,
-    "carousing": 0.857283641737195,
-    "patient": 2.863643102303949,
-    "craft": 0.8564843228441176,
-    "devotion": 4.133097803441998
+    "cerebral": 35.517685598082345,
+    "strategic": 30.55833061938692,
+    "cautious": 36.03636229855849,
+    "social": 19.213702611644784,
+    "generous": 8.300983350838724,
+    "risky": 2.186680075136012,
+    "carousing": 0.8149552619264209,
+    "patient": 2.7222507241276914,
+    "craft": 0.8141954094036893,
+    "devotion": 3.9290260993970487
   },
   "aptitudes": [
     "strategist",
@@ -2831,19 +3189,38 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 215,
-  "updatedAt": 1784778160906,
-  "rev": 88,
+  "actionCount": 217,
+  "updatedAt": 1784778406359,
+  "rev": 91,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
-    "location": {},
+    "location": {
+      "gen-the-lower-chamber": {
+        "id": "gen-the-lower-chamber",
+        "name": "The Lower Chamber",
+        "regionId": "valley",
+        "descriptionSeed": "A place the road led to — The Lower Chamber. The fiction brought you here before the map knew its name.",
+        "tags": [
+          "transitional"
+        ],
+        "connections": [
+          "harmonic_heights_terrace"
+        ],
+        "_gen": true,
+        "_mintedAs": "transit",
+        "map": {
+          "x": 642.5221357341223,
+          "y": 154.0432512816442
+        }
+      }
+    },
     "arc": {}
   },
   "syncedAt": 1783791225006,
   "teachers": {},
   "regionsKnown": {
-    "valley": 38
+    "valley": 40
   },
   "company": [],
   "foreclosed": [],
@@ -2924,10 +3301,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-23T03:40:42.992Z",
-      "lastAt": "2026-07-23T03:42:40.896Z",
+      "lastAt": "2026-07-23T03:46:46.356Z",
       "startDay": 23,
       "endDay": 23,
-      "beats": 2
+      "beats": 4
     }
   ],
   "_pendingArrival": null,
@@ -2981,24 +3358,24 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 28,
-    "choices": 28,
-    "characterDeltas": 17,
-    "scene": 28,
-    "npcUpdates": 24,
-    "codexUpdates": 25,
-    "timeOps": 28,
-    "sceneEnded": 14,
-    "placeUpdates": 19,
-    "moveTo": 1,
-    "questUpdates": 16,
+    "sceneSummary": 30,
+    "choices": 30,
+    "characterDeltas": 18,
+    "scene": 30,
+    "npcUpdates": 26,
+    "codexUpdates": 27,
+    "timeOps": 30,
+    "sceneEnded": 16,
+    "placeUpdates": 21,
+    "moveTo": 2,
+    "questUpdates": 17,
     "stateOps": 1,
-    "factUpdates": 2,
+    "factUpdates": 3,
     "stageOps": 1,
     "scene_ended": 1,
     "imagePrompt": 1
   },
-  "_opTurns": 28,
+  "_opTurns": 30,
   "_intentAsked": null,
   "corrections": [
     {
@@ -3013,5 +3390,13 @@
   ],
   "_stageOpRefusals": [
     "second-river-rising: no-such-quest"
-  ]
+  ],
+  "knownPlaces": [
+    "gen-the-lower-chamber"
+  ],
+  "_turnApplyError": {
+    "at": "2026-07-23T03:44:26.422Z",
+    "message": "Cannot create property 'engagementScore' on boolean 'true'",
+    "stack": "TypeError: Cannot create property 'engagementScore' on boolean 'true' <-     at recordAttention (https://orkstrtdkaos.github.io/Singularity/engine/generate.js:403:21) <-     at noteGeneratedAttention (https://orkstrtdkaos.github.io/Singularity/app.js?v=1.8.207:1861:7) <-     at applyTurn (https://orkstrtdkaos.github.io/Singularity/app.js?v=1.8.207:3897:7)"
+  }
 }

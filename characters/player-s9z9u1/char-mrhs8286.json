@@ -8,7 +8,7 @@
   "whyHere": "You finished something. Completely. It nearly got you exiled, and you are still not sure they were wrong.",
   "background": "lineage_taught",
   "level": 20,
-  "xp": 1941,
+  "xp": 1946,
   "attributes": {
     "physical": 4,
     "mental": 7,
@@ -118,10 +118,10 @@
   "alignment": {
     "spectrumId": -0.1253172428187714,
     "violence_peace": 0.1030845625,
-    "chaos_order": 0.25700971191540173,
+    "chaos_order": 0.2591592263196316,
     "mechanical_spiritual": 0.2580372847905887,
     "concrete_abstract": -0.021014395762538336,
-    "death_life": -0.18715073658436424,
+    "death_life": -0.18279319975514602,
     "emotional_logical": 0.008330843749999983,
     "falsehood_truth": 0.31383840738235763,
     "demonic_angelic": 0.013499999999999998,
@@ -132,7 +132,7 @@
   "maxHealth": 125,
   "health": 125,
   "maxEnergy": 195,
-  "energy": 178,
+  "energy": 174,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -1716,32 +1716,34 @@
         "player": "Let the answer settle and walk in quiet — keep your attention on the road ahead, the Crossing still a day off",
         "summary": "The party walks the March Road in quiet toward the Crossing — the morning's work settling, the second thread waiting a day ahead.",
         "narration": "You let Pell's last words sit. The hollow knows. That is enough for now, and you have learned not to push past enough.\n\nThe road runs northeast and you walk it. The cairn-line keeps its thirty-yard pace to the west, stones appearing and falling behind at the measured interval, patient as breathing. The melt has softened the heather on either side into something between brown and green — early spring's half-promise, not yet committed. Your boots find the old stone beneath the packed earth and you settle into the rhythm of it.\n\nVeth moves half a step behind your right shoulder, saying nothing. She has a gift for this — the useful silence, the kind that does not press. Huginn rides the pack-frame with its feathers slightly rucked against the damp air, and once, when the cairn-line runs briefly closer to the road at a turn, it shifts its weight and looks west at the stones without comment.\n\nAhead and a day off: the Crossing, and Edvar Crane, and the second thread. The Waymarker is warm against your hip through the pack canvas. The father's letter is folded beneath it. The road holds."
+      },
+      {
+        "player": "Touch the Waymarker and let it read the direction — see if it pulls toward the Crossing or toward something else on this road",
+        "summary": "The Waymarker confirms the Crossing — and names Edvar Crane as the pull beneath the direction.",
+        "narration": "You slip your hand under the pack's canvas flap without breaking stride and close your fingers around the Waymarker. It is warm the way it has been since the bond seated — not body-heat, something steadier than that. You let the sensation come rather than reaching for it.\n\nThe pull is immediate and clean. Northeast. The Crossing, already your destination, and nothing contradicting it. But there is a second quality beneath the direction — not another pull, more like a lean, the way a door that fits well still has a preferred direction. The Crossing is where Edvar Crane is. The Waymarker knows that name. It is pointing at the work, not just the road.\n\nYou release the disc and let it settle back against the canvas. Veth glances over from your right shoulder, reading the small motion. She does not ask. Pell's eyes stay on the road ahead.\n\n\"Straight through,\" you say, mostly to the air. \"Nothing branching.\" Veth gives a single nod. Huginn makes no sound. The cairn-line passes its next stone to the west, patient and indifferent, and the road runs on.\n\n*✦ The Second Thread — A real item enters inventory, unfinished, with its own evolution track. It is not a key and does not open anything yet..*"
       }
     ],
     "lastTurn": {
-      "narration": "You let Pell's last words sit. The hollow knows. That is enough for now, and you have learned not to push past enough.\n\nThe road runs northeast and you walk it. The cairn-line keeps its thirty-yard pace to the west, stones appearing and falling behind at the measured interval, patient as breathing. The melt has softened the heather on either side into something between brown and green — early spring's half-promise, not yet committed. Your boots find the old stone beneath the packed earth and you settle into the rhythm of it.\n\nVeth moves half a step behind your right shoulder, saying nothing. She has a gift for this — the useful silence, the kind that does not press. Huginn rides the pack-frame with its feathers slightly rucked against the damp air, and once, when the cairn-line runs briefly closer to the road at a turn, it shifts its weight and looks west at the stones without comment.\n\nAhead and a day off: the Crossing, and Edvar Crane, and the second thread. The Waymarker is warm against your hip through the pack canvas. The father's letter is folded beneath it. The road holds.",
-      "sceneSummary": "The party walks the March Road in quiet toward the Crossing — the morning's work settling, the second thread waiting a day ahead.",
+      "narration": "You slip your hand under the pack's canvas flap without breaking stride and close your fingers around the Waymarker. It is warm the way it has been since the bond seated — not body-heat, something steadier than that. You let the sensation come rather than reaching for it.\n\nThe pull is immediate and clean. Northeast. The Crossing, already your destination, and nothing contradicting it. But there is a second quality beneath the direction — not another pull, more like a lean, the way a door that fits well still has a preferred direction. The Crossing is where Edvar Crane is. The Waymarker knows that name. It is pointing at the work, not just the road.\n\nYou release the disc and let it settle back against the canvas. Veth glances over from your right shoulder, reading the small motion. She does not ask. Pell's eyes stay on the road ahead.\n\n\"Straight through,\" you say, mostly to the air. \"Nothing branching.\" Veth gives a single nod. Huginn makes no sound. The cairn-line passes its next stone to the west, patient and indifferent, and the road runs on.\n\n*✦ The Second Thread — A real item enters inventory, unfinished, with its own evolution track. It is not a key and does not open anything yet..*",
+      "sceneSummary": "The Waymarker confirms the Crossing — and names Edvar Crane as the pull beneath the direction.",
       "choices": [
         {
-          "label": "Read the road ahead with Order-Sense — look for what the March's design says about the Crossing before you arrive",
+          "label": "Walk and read the road ahead with Order-Sense — see what the road's design says about the Crossing and what waits there",
           "attribute": "mental",
           "subAttribute": "insight",
           "axes": {
-            "chaos_order": 0.6
+            "chaos_order": 0.4
           },
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "careful"
+            "study"
           ],
           "abilityId": "order_sense",
           "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         },
         {
-          "label": "Ask Veth what she knows of Edvar Crane — whether the name means anything to an ashwarden who walked the March for eleven years",
+          "label": "Ask Veth what she knows of the Crossing — she held a warden post on this March for eleven years; she may know the place or the man",
           "attribute": "social",
           "subAttribute": "rapport",
           "axes": {},
@@ -1751,79 +1753,76 @@
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Touch the Waymarker and let it read the direction — see if it pulls toward the Crossing or toward something else on this road",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.1,
-            "chaos_order": 0.3
-          },
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "the-attended-end",
-          "energyCost": 2,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
-        },
-        {
-          "label": "Keep the quiet and watch the road — let Huginn tell you if something is ending before you reach it",
-          "attribute": "mental",
-          "subAttribute": "wits",
+          "label": "Keep walking without speaking — a day is still a day, and the road will show you what it has when it is ready",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "axes": {},
           "difficulty": 0,
           "intentTags": [
-            "guard",
-            "careful"
+            "travel"
           ],
           "abilityId": null,
           "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
+        },
+        {
+          "label": "Tell Pell what the Waymarker said — that it is pulling toward the work, not just the road, and that it knows Edvar Crane's name",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "help"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true
         }
       ],
       "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0
+        "energy": -2
       },
       "ledgerEvents": [],
-      "questUpdates": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "the-second-thread",
+          "note": "The Waymarker confirms the Crossing as the destination and names the pull beneath it as the unfinished work — Edvar Crane is load-bearing, not incidental."
+        }
+      ],
+      "standingOps": [],
       "scene": {
         "setting": "The Ashwarden March Road, midday, early spring — packed earth over old stone running northeast through grey birch and open heather, the cairn-line thirty yards west. Thin cloud, damp ground, good road. The Crossing is a day's walk ahead.",
         "npcsPresent": [
           {
             "name": "Pell",
-            "state": "Walking on Silas's left, quiet now, the morning's answer given and settled — her eyes on the road ahead."
+            "state": "Walking on Silas's left, eyes on the road ahead, the morning's answer still settling in her."
           },
           {
             "name": "Veth (Stillwater) Ondra",
-            "state": "Half a step behind Silas's right shoulder, moving in easy silence."
+            "state": "Half a step behind Silas's right shoulder — read the motion of his hand at the pack, asked nothing."
           },
           {
             "name": "Huginn",
-            "state": "On the pack-frame, rucked slightly against the damp air — shifted once at the cairn-line's nearer turn, said nothing."
+            "state": "On the pack-frame, quiet, no comment given this time."
           }
         ],
         "objects": [
-          "The cairn-line — thirty yards west, set at the measured interval",
+          "The cairn-line — thirty yards west, set at its measured interval",
           "Memory (spear) — road-lashed at Silas's shoulder",
           "Father's Sealed Letter — in the pack",
-          "Waymarker — warm in the hand, against the pack canvas"
+          "Waymarker — warm in the hand, now returned to against the pack canvas"
         ],
         "threads": [
-          "Pell is still working on what the attendance meant — answer given, settling",
-          "The Crossing and Edvar Crane — a day's walk ahead, the second thread waiting",
-          "The lower ford — condition unknown; melt may have taken it"
+          "The Waymarker pulls toward the Crossing and toward Edvar Crane — the work, not just the road",
+          "The Crossing is a day's walk ahead; the second thread waits there",
+          "The lower ford — condition unknown; melt may have taken it",
+          "Pell is still working on what the attendance meant — answer given, settling"
         ]
       },
       "npcUpdates": [
@@ -1831,48 +1830,69 @@
           "op": "update",
           "npcId": "pell-ran-marsh",
           "name": "Pell Ran Marsh",
-          "note": "Gave her honest account of the morning and let it settle into quiet — the attendance still being worked on, no wound in it.",
-          "statusNote": "On the March Road — walking northeast toward the Crossing, the morning's work settling."
+          "note": "Eyes on the road — did not ask about the Waymarker check; the morning is still settling.",
+          "statusNote": "On the March Road — walking northeast toward the Crossing."
         },
         {
           "op": "update",
           "npcId": "veth-stillwater-ondra",
           "name": "Veth (Stillwater) Ondra",
-          "note": "Moving in easy silence behind Silas's right shoulder — the morning's lessons delivered, no pressure on the next one.",
+          "note": "Read Silas's hand-motion at the pack without asking — held the silence correctly.",
           "statusNote": "On the March Road — traveling with Silas toward the Crossing."
         }
       ],
+      "codexUpdates": [
+        {
+          "topic": "the-second-thread",
+          "label": "The Second Thread",
+          "kind": "mystery",
+          "fact": "The Waymarker pulls northeast toward the Crossing — and beneath that direction, a lean toward the unfinished work, as if it knows Edvar Crane's name. The disc is pointing at a maker's intent, not merely a road.",
+          "links": [
+            "what-the-water-remembers",
+            "stillwaters-trouble",
+            "the-water-crisis"
+          ]
+        }
+      ],
       "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "A quiet half-mile walked on the road — unhurried, no stops."
-      }
+        "hoursPassed": 0.25,
+        "why": "A short pause to read the Waymarker while walking — barely a moment off stride."
+      },
+      "stageOps": [
+        {
+          "questId": "the-second-thread",
+          "stageId": "s2",
+          "evidence": "Silas touched the Waymarker mid-road and let it read — it pulled clean toward the Crossing with a secondary lean toward the unfinished work, naming Edvar Crane as load-bearing."
+        }
+      ]
     },
     "sceneState": {
       "setting": "The Ashwarden March Road, midday, early spring — packed earth over old stone running northeast through grey birch and open heather, the cairn-line thirty yards west. Thin cloud, damp ground, good road. The Crossing is a day's walk ahead.",
       "npcsPresent": [
         {
           "name": "Pell",
-          "state": "Walking on Silas's left, quiet now, the morning's answer given and settled — her eyes on the road ahead."
+          "state": "Walking on Silas's left, eyes on the road ahead, the morning's answer still settling in her."
         },
         {
           "name": "Veth (Stillwater) Ondra",
-          "state": "Half a step behind Silas's right shoulder, moving in easy silence."
+          "state": "Half a step behind Silas's right shoulder — read the motion of his hand at the pack, asked nothing."
         },
         {
           "name": "Huginn",
-          "state": "On the pack-frame, rucked slightly against the damp air — shifted once at the cairn-line's nearer turn, said nothing."
+          "state": "On the pack-frame, quiet, no comment given this time."
         }
       ],
       "objects": [
-        "The cairn-line — thirty yards west, set at the measured interval",
+        "The cairn-line — thirty yards west, set at its measured interval",
         "Memory (spear) — road-lashed at Silas's shoulder",
         "Father's Sealed Letter — in the pack",
-        "Waymarker — warm in the hand, against the pack canvas"
+        "Waymarker — warm in the hand, now returned to against the pack canvas"
       ],
       "threads": [
-        "Pell is still working on what the attendance meant — answer given, settling",
-        "The Crossing and Edvar Crane — a day's walk ahead, the second thread waiting",
-        "The lower ford — condition unknown; melt may have taken it"
+        "The Waymarker pulls toward the Crossing and toward Edvar Crane — the work, not just the road",
+        "The Crossing is a day's walk ahead; the second thread waits there",
+        "The lower ford — condition unknown; melt may have taken it",
+        "Pell is still working on what the attendance meant — answer given, settling"
       ]
     }
   },
@@ -2361,15 +2381,19 @@
           "effects": null
         }
       ],
-      "stageIndex": 1,
+      "stageIndex": 2,
       "completedStages": [
-        "s1"
+        "s1",
+        "s2"
       ],
       "progress": [
         "The road sequence established — the Crossing named as the next leg, the Council of Mavens and guild rolls the method, Edvar Crane the target. The sequence is now a real plan, not a direction.",
         "Returned to Stillwater's Trouble — ward intact, Maker's hollow reads as claimed. Waymarker's second layer still open. The Crossing and Edvar Crane remain the next leg.",
         "Codex: Edvar Crane, established as real — his trade, his standing, and whether he is above ground.",
-        "↳ The Waymarker's second layer seated into the warden post, completing the bond between holder and post — the first structural step of the second thread closed."
+        "↳ The Waymarker's second layer seated into the warden post, completing the bond between holder and post — the first structural step of the second thread closed.",
+        "The Waymarker confirms the Crossing as the destination and names the pull beneath it as the unfinished work — Edvar Crane is load-bearing, not incidental.",
+        "A real item enters inventory, unfinished, with its own evolution track. It is not a key and does not open anything yet.",
+        "↳ Silas touched the Waymarker mid-road and let it read — it pulled clean toward the Crossing with a secondary lean toward the unfinished work, naming Edvar Crane as load-bearing."
       ],
       "aliases": [],
       "startedAt": "2026-07-20T19:28:38.637Z",
@@ -2724,7 +2748,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d13] Reports the buried design keeps reading her at each interval — she names it as a fact and gives Silas the chance to meet it. Has no language yet for what her hands already know.",
         "[d13] Walked the approach in silence; stands beside Silas as he reads the post with Order-Sense; does not ask what he sees.",
         "[d13] Standing at Silas's shoulder, present and close, as the bond sealed.",
         "[d13] Named the forge flue dimensions requirement to Cassiel — will send exact specifications in writing before stone is ordered.",
@@ -2733,7 +2756,8 @@
         "[d13] Watched the quiet arc. Her full assessment already given — she is letting the moment stand.",
         "[d13] Fell in beside Silas without ceremony as the party moved out. Nothing wasted.",
         "[d13] Gave her honest account of the morning: the sentry readable through ironsense, the attendance still being processed — the hollow settling when Silas sat with the badger, felt but not yet named.",
-        "[d13] Gave her honest account of the morning and let it settle into quiet — the attendance still being worked on, no wound in it."
+        "[d13] Gave her honest account of the morning and let it settle into quiet — the attendance still being worked on, no wound in it.",
+        "[d13] Eyes on the road — did not ask about the Waymarker check; the morning is still settling."
       ],
       "knownFacts": [
         "She noticed the floor's tonal vibration and flagged Huginn's response to it.",
@@ -2754,7 +2778,7 @@
         "reading structural grain in a shadow-form across open-air fl"
       ],
       "status": "active",
-      "statusNote": "On the March Road — walking northeast toward the Crossing, the morning's work settling.",
+      "statusNote": "On the March Road — walking northeast toward the Crossing.",
       "lastSeen": {
         "locationId": "gen-ashwarden-march-road",
         "day": 13
@@ -3425,7 +3449,6 @@
       },
       "relationship": 10,
       "history": [
-        "[d13] Named plainly that the March felt the bond seat — no elaboration, letting Silas lead.",
         "[d13] Gave her first practical direction for her laboratory space — east wall, clear window, a peg for wet coats. Plain and specific.",
         "[d13] Laboratory requirements confirmed on Cassiel's list in plain order. Standing back now — her part of this walk is done.",
         "[d13] Watched the return flight from the post doorway — satisfied, as if the timeline is confirming itself.",
@@ -3434,7 +3457,8 @@
         "[d13] Gave Silas the first lesson she promised — the difference between an ending that needs witness and one that needs room. Delivered without ceremony, precise, and complete. Huginn acknowledged it.",
         "[d13] Gave the second lesson — named it not as a lesson yet but as a question to carry into the next ending: witness, or room. Will know which when the work shows it.",
         "[d13] Closed the yard without ceremony. The second lesson is still in her, held without pressure, waiting for the next ending.",
-        "[d13] Moving in easy silence behind Silas's right shoulder — the morning's lessons delivered, no pressure on the next one."
+        "[d13] Moving in easy silence behind Silas's right shoulder — the morning's lessons delivered, no pressure on the next one.",
+        "[d13] Read Silas's hand-motion at the pack without asking — held the silence correctly."
       ],
       "knownFacts": [
         "The cairn-line's spacing matches the interval of a large, patient boundary-seat — not markers, but the closest the design gets to the surface.",
@@ -4358,7 +4382,7 @@
     "lastTickWorldDay": 23,
     "lastCanonWorldDay": 23,
     "lastGenCount": 572,
-    "turnsSinceOffer": 8,
+    "turnsSinceOffer": 9,
     "recentOffers": [
       {
         "thing": "Huginn chose the left shoulder — the one nearest the cairn-stones — and has not moved or spoken since Veth named the design. The choice of…",
@@ -5840,21 +5864,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 17.24823728189757,
-    "cerebral": 17.410042304323078,
-    "social": 8.618925345616628,
-    "generous": 3.659613472122204,
-    "cautious": 4.871778411789727,
-    "physical": 0.8343932697592775,
-    "risky": 2.430764454333946,
-    "ruthless": 0.012758655342584488,
-    "carousing": 0.4931376984311491,
-    "amorous": 4.965924172066593,
-    "patient": 0.34088652120435714,
-    "stealth": 0.004945287406620506,
-    "devotion": 1.418195029226021,
-    "craft": 0.8283541276423053,
-    "leadership": 0.02517206173317006
+    "strategic": 16.81703134985013,
+    "cerebral": 17.974791246715,
+    "social": 8.403452211976212,
+    "generous": 3.5681231353191487,
+    "cautious": 5.7499839514949835,
+    "physical": 0.8135334380152955,
+    "risky": 2.369995342975597,
+    "ruthless": 0.012439688959019875,
+    "carousing": 0.48080925597037033,
+    "amorous": 4.841776067764928,
+    "patient": 0.3323643581742482,
+    "stealth": 0.0048216552214549934,
+    "devotion": 1.3827401534953705,
+    "craft": 0.8076452744512477,
+    "leadership": 0.024542760189840807
   },
   "aptitudes": [
     "strategist",
@@ -5863,7 +5887,7 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 697,
+  "actionCount": 698,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6245,8 +6269,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784838661876,
-  "rev": 1108,
+  "updatedAt": 1784838745449,
+  "rev": 1109,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -7995,7 +8019,7 @@
       "palework": 29,
       "deathsense": 33,
       "shadowstep": 19,
-      "the-attended-end": 36,
+      "the-attended-end": 37,
       "wildcraft": 6,
       "the_raised_thing": 12,
       "the_ended_threat": 4,
@@ -8367,7 +8391,7 @@
   "syncedAt": 1784837804626,
   "teachers": {},
   "regionsKnown": {
-    "valley": 463,
+    "valley": 464,
     "the_palelands": 6,
     "the_center": 62
   },
@@ -8492,10 +8516,10 @@
     {
       "id": "sess-11",
       "startedAt": "2026-07-23T11:12:37.094Z",
-      "lastAt": "2026-07-23T20:31:01.864Z",
+      "lastAt": "2026-07-23T20:32:25.439Z",
       "startDay": 23,
       "endDay": 23,
-      "beats": 30
+      "beats": 31
     }
   ],
   "company": [
@@ -8692,28 +8716,29 @@
     "gen-ashwarden-march-road": "https://image.pollinations.ai/prompt/Ashwarden%20March%20Road%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Ashwarden%20March%20Road.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=9497&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 69,
-    "choices": 69,
-    "characterDeltas": 29,
-    "scene": 69,
-    "npcUpdates": 60,
+    "sceneSummary": 70,
+    "choices": 70,
+    "characterDeltas": 30,
+    "scene": 70,
+    "npcUpdates": 61,
     "factUpdates": 6,
     "placeUpdates": 12,
-    "codexUpdates": 37,
-    "timeOps": 64,
+    "codexUpdates": 38,
+    "timeOps": 65,
     "imagePrompt": 2,
     "sceneEnded": 16,
     "itemUpdates": 2,
-    "questUpdates": 2,
+    "questUpdates": 3,
     "offer": 6,
     "moveTo": 4,
     "delegateOps": 1,
     "deeds": 1,
     "standingOps": 1,
     "ledgerEvents": 1,
-    "discovery": 1
+    "discovery": 1,
+    "stageOps": 1
   },
-  "_opTurns": 69,
+  "_opTurns": 70,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

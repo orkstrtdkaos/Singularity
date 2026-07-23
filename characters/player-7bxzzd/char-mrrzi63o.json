@@ -8,7 +8,7 @@
   "whyHere": "You put down the blade, or you were sent away from it, or you are looking for a line worth holding that isn't theirs.",
   "background": "war_leader",
   "level": 1,
-  "xp": 18,
+  "xp": 23,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -40,7 +40,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 83,
+  "energy": 75,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -223,14 +223,19 @@
         "player": "Press south hard — Freki is pulling and the trail is cooling; get answers from what you find, not what you're told",
         "summary": "Half a mile south, the trail splits at the waypost — the heavier follower turned east into an ash copse while Sera continued south; Ragnar names it plainly: a watching position, not pursuit.",
         "narration": "You leave the question in the mud and move. Freki is already twenty yards south, wire coat catching the flat morning light, nose working the lane without pause. You match its pace and Ragnar comes with you, dropping half a step back and right — the instinctive positioning of someone who has walked dangerous roads before and knows how bodies fall.\n\nThe Stillhold road here is a pale chalk track hemmed by elder scrub, the first green of spring barely showing in the hedgerow roots. Puddles have formed where the ruts are deepest and the prints are clear in them — Sera's light outside-edge stride, the heavier follower's toe-heavy cut. The gap between the tracks has been closing, yard by yard. Whoever was behind her was gaining.\n\nHalf a mile south the lane crests a low ridge and the country opens: a wide, flat verge of brown marsh grass, a copse of ash to the east still bare-branched, and a stone waypost leaning slightly west at the junction where the chalk track meets a broader road running east-west. Freki stops at the waypost. It drops its nose to the ground, circles once, and sits — the particular sitting that means the trail has changed, not ended. The heavier prints turn off here, east into the ash copse. Sera's lighter stride continues south, steady, unchanged.\n\nRagnar steps up beside you, looks at the split, then at the copse. \"Someone peeled off,\" he says flatly. \"Sera kept going. The follower didn't.\" He watches the ash trees a moment. \"That copse has a clear line to this junction. You could watch the road from in there without being on it.\""
+      },
+      {
+        "player": "Use Read the Fight — read the ground here for what the follower did at this junction",
+        "summary": "Brynjar reads the junction fully and establishes the follower stopped, watched Sera go south, then withdrew deliberately — the ash copse is empty now.",
+        "narration": "You spend the energy properly this time — not the quick brush of a trained eye but the full press of Read the Fight, the way you'd use it before a duel you couldn't afford to lose. The whole junction opens up under your attention: every disturbed pebble, every mud-bruise, every hesitation in the stride-pattern reads like a sentence.\n\nThe follower stood here for a while. Not paused — *stood*, weight shifting in place, three or four shifts in the same inch of ground. The toe-heavy press that marked their pursuit south from the Marchward changed at this junction: forward lean gone, weight settling back onto the heel. The body language of stopping. Of choosing. The ash copse drew them east, but they didn't just go — they looked south first, because you can see the prints: a half-step south, weight transferred, then pulled back and redirected east. They watched Sera disappear down the chalk road before they moved. That was the last look.\n\nFreki has moved to the copse's edge and stands there, not entering, ears forward and level — the posture it uses for something that was here recently, not something that is here now. Ragnar reads the hound without comment and shifts his footing an inch north, opening a line toward the copse.\n\n\"Empty now,\" you say. It comes out flat, because it is. Whoever stood in that watching position and watched Sera walk south down the Stillhold road has been gone long enough for Freki to decide there's no live threat. But they were here this morning. And they left deliberately — not spooked, not chased off. Done watching and walked away."
       }
     ],
     "lastTurn": {
-      "narration": "You leave the question in the mud and move. Freki is already twenty yards south, wire coat catching the flat morning light, nose working the lane without pause. You match its pace and Ragnar comes with you, dropping half a step back and right — the instinctive positioning of someone who has walked dangerous roads before and knows how bodies fall.\n\nThe Stillhold road here is a pale chalk track hemmed by elder scrub, the first green of spring barely showing in the hedgerow roots. Puddles have formed where the ruts are deepest and the prints are clear in them — Sera's light outside-edge stride, the heavier follower's toe-heavy cut. The gap between the tracks has been closing, yard by yard. Whoever was behind her was gaining.\n\nHalf a mile south the lane crests a low ridge and the country opens: a wide, flat verge of brown marsh grass, a copse of ash to the east still bare-branched, and a stone waypost leaning slightly west at the junction where the chalk track meets a broader road running east-west. Freki stops at the waypost. It drops its nose to the ground, circles once, and sits — the particular sitting that means the trail has changed, not ended. The heavier prints turn off here, east into the ash copse. Sera's lighter stride continues south, steady, unchanged.\n\nRagnar steps up beside you, looks at the split, then at the copse. \"Someone peeled off,\" he says flatly. \"Sera kept going. The follower didn't.\" He watches the ash trees a moment. \"That copse has a clear line to this junction. You could watch the road from in there without being on it.\"",
-      "sceneSummary": "Half a mile south, the trail splits at the waypost — the heavier follower turned east into an ash copse while Sera continued south; Ragnar names it plainly: a watching position, not pursuit.",
+      "narration": "You spend the energy properly this time — not the quick brush of a trained eye but the full press of Read the Fight, the way you'd use it before a duel you couldn't afford to lose. The whole junction opens up under your attention: every disturbed pebble, every mud-bruise, every hesitation in the stride-pattern reads like a sentence.\n\nThe follower stood here for a while. Not paused — *stood*, weight shifting in place, three or four shifts in the same inch of ground. The toe-heavy press that marked their pursuit south from the Marchward changed at this junction: forward lean gone, weight settling back onto the heel. The body language of stopping. Of choosing. The ash copse drew them east, but they didn't just go — they looked south first, because you can see the prints: a half-step south, weight transferred, then pulled back and redirected east. They watched Sera disappear down the chalk road before they moved. That was the last look.\n\nFreki has moved to the copse's edge and stands there, not entering, ears forward and level — the posture it uses for something that was here recently, not something that is here now. Ragnar reads the hound without comment and shifts his footing an inch north, opening a line toward the copse.\n\n\"Empty now,\" you say. It comes out flat, because it is. Whoever stood in that watching position and watched Sera walk south down the Stillhold road has been gone long enough for Freki to decide there's no live threat. But they were here this morning. And they left deliberately — not spooked, not chased off. Done watching and walked away.",
+      "sceneSummary": "Brynjar reads the junction fully and establishes the follower stopped, watched Sera go south, then withdrew deliberately — the ash copse is empty now.",
       "choices": [
         {
-          "label": "Go into the ash copse — find what the follower was doing in there",
+          "label": "Enter the ash copse and read what the watcher left behind — stance, duration, which way they went when they were done",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 15,
@@ -238,175 +243,126 @@
             "scout",
             "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         },
         {
-          "label": "Stay on Sera's trail — she kept going south; that's the priority",
+          "label": "Leave the copse to Ragnar and press south after Sera — the watcher is gone and she is not",
           "attribute": "physical",
           "subAttribute": "agility",
           "difficulty": 0,
           "intentTags": [
-            "travel",
-            "careful"
+            "travel"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Use Read the Fight — read the ground here for what the follower did at this junction",
+          "label": "Use Order-Sense at the junction — map the logic of what happened here: who knew what, and what the watcher's departure tells you about where they went next",
           "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
+          "subAttribute": "reason",
+          "difficulty": 15,
           "intentTags": [
             "study",
-            "careful"
+            "plan"
           ],
-          "abilityId": "read_the_fight",
+          "abilityId": "order_sense",
           "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         },
         {
-          "label": "Ask Ragnar — he saw movement before dawn; was it one person or two he saw at the fork?",
+          "label": "Ask Ragnar to read the copse while you hold the junction — two sets of eyes, two different training, faster answer",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "negotiate"
+            "lead",
+            "careful"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         }
       ],
-      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0,
-        "inventoryAdd": [],
-        "inventoryRemove": [],
-        "xp": 0
+        "energy": -3
       },
-      "ledgerEvents": [],
-      "questUpdates": [],
       "scene": {
-        "setting": "The junction where the chalk Stillhold track meets a broader east-west road, half a mile south of the east fork. Open flat verge, an ash copse to the east, a leaning waypost. Overcast, flat spring light.",
+        "setting": "The waypost junction half a mile south of the Marchward east fork. Flat, open chalk track. Overcast spring light, elder scrub along the road edges, ash copse to the east with bare branches. The junction mud is well-read now.",
         "npcsPresent": [
           {
             "name": "Ragnar Solmyr",
-            "state": "Standing at Brynjar's shoulder, watching the ash copse to the east. Alert, unhurried."
+            "state": "Standing a step north of his last position, line toward the ash copse open. Watching Freki."
           },
           {
             "name": "Freki",
-            "state": "Sitting at the waypost. The trail has changed — it has marked the split and is waiting."
+            "state": "At the copse edge, ears forward and level — something was here recently, nothing live now. Waiting."
           }
         ],
         "objects": [
           "Leaning waypost at the junction",
-          "Boot-prints in the chalk mud — Sera's lighter stride continuing south, heavier follower's prints turning east toward the ash copse",
-          "Ash copse to the east — bare-branched, clear line of sight to the junction",
-          "Broader east-west road running through the junction",
+          "Boot-prints in the chalk mud — Sera's lighter stride continuing south, heavier follower's prints turning east",
+          "Half-step print in the mud south of the junction — the watcher looked south before redirecting east",
+          "Ash copse to the east — bare-branched, Freki at its edge",
           "Cloth bundle in Brynjar's hand — dried white-flowered sprig, knotted cord"
         ],
         "threads": [
-          "The heavier follower turned into the ash copse here — watching position, not pursuit; what were they doing and are they still there?",
-          "Sera continued south, steady — she may not know she was followed, or may not have known the follower stopped",
-          "The shimmer in the heavier prints remains unnamed and unidentified",
-          "Ragnar saw two people at the fork before dawn — the number now matters"
+          "The watcher stood here, watched Sera leave south, then deliberately withdrew — where did they go after the copse?",
+          "Sera continued south unchanged — she may not know she was followed or that the follower stopped",
+          "The shimmer in the heavier prints remains unnamed",
+          "Ragnar saw two people at the east fork before dawn — both accounted for now, or were there others?"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "ragnar-solmyr",
-          "name": "Ragnar Solmyr",
-          "note": "Named the split plainly — the follower peeled east into the ash copse while Sera continued south; identified it as a watching position.",
-          "learned": [
-            "The heavier follower left Sera's trail at the waypost junction and entered the ash copse — a position with a clear line of sight to the road"
-          ],
-          "skillsObserved": [
-            "tactical ground-reading"
-          ],
-          "statusNote": "At Brynjar's shoulder at the waypost junction, watching the ash copse"
-        }
-      ],
       "codexUpdates": [
         {
           "topic": "sera-of-the-stillhold",
           "label": "Sera of the Stillhold",
           "kind": "mystery",
-          "fact": "At the waypost junction half a mile south of the Marchward east fork, Sera's trail continued south unchanged while her heavier follower turned east into an ash copse — a watching position with a clear line to the junction road. The follower stopped pursuing and began observing.",
+          "fact": "At the waypost junction, the follower stopped, watched Sera walk south until she was out of sight, then withdrew deliberately into the ash copse and left — not spooked, not chased. A planned observation with a clean exit. The copse is empty now.",
           "links": [
             "the-stillhold",
             "the-marchward",
             "ragnar-solmyr",
-            "brynjar-andyrsson-thread",
-            "stillhold-operatives"
+            "brynjar-andyrsson-thread"
           ]
         }
       ],
-      "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "Half a mile of fast walking on the Stillhold road to reach the waypost junction"
-      },
-      "placeUpdates": [
+      "npcUpdates": [
         {
-          "subPlace": {
-            "name": "Waypost Junction",
-            "parent": "East Fork",
-            "note": "Where the chalk Stillhold track meets a broader east-west road — the heavier follower's prints turn east here into an ash copse; Sera's prints continue south unchanged. Freki marked the split.",
-            "visited": true
-          }
-        },
-        {
-          "subPlace": {
-            "name": "Ash Copse",
-            "parent": "East Fork",
-            "note": "A stand of bare-branched ash east of the waypost junction. Clear line of sight to the road — the heavier follower's prints lead into it. A watching position.",
-            "visited": false
-          }
+          "op": "update",
+          "npcId": "ragnar-solmyr",
+          "name": "Ragnar Solmyr",
+          "note": "Read Freki's posture without comment and shifted his footing to open a line toward the copse — tactical, unhurried.",
+          "statusNote": "At Brynjar's shoulder at the waypost junction, watching the ash copse edge where Freki stands."
         }
       ],
-      "offer": {
-        "thing": "Freki sitting rather than ranging — the particular stillness that means the trail changed here, not ended, and Freki is waiting to be told which fork matters more",
-        "from": "Freki's established read: it holds trails without being commanded, and its sitting is information the same way a growl is information — the companion offering the fork as a genuine question"
+      "timeOps": {
+        "hoursPassed": 0.25,
+        "why": "A few minutes reading the junction ground carefully"
       },
       "sceneEnded": false
     },
     "sceneState": {
-      "setting": "The junction where the chalk Stillhold track meets a broader east-west road, half a mile south of the east fork. Open flat verge, an ash copse to the east, a leaning waypost. Overcast, flat spring light.",
+      "setting": "The waypost junction half a mile south of the Marchward east fork. Flat, open chalk track. Overcast spring light, elder scrub along the road edges, ash copse to the east with bare branches. The junction mud is well-read now.",
       "npcsPresent": [
         {
           "name": "Ragnar Solmyr",
-          "state": "Standing at Brynjar's shoulder, watching the ash copse to the east. Alert, unhurried."
+          "state": "Standing a step north of his last position, line toward the ash copse open. Watching Freki."
         },
         {
           "name": "Freki",
-          "state": "Sitting at the waypost. The trail has changed — it has marked the split and is waiting."
+          "state": "At the copse edge, ears forward and level — something was here recently, nothing live now. Waiting."
         }
       ],
       "objects": [
         "Leaning waypost at the junction",
         "Boot-prints in the chalk mud — Sera's lighter stride continuing south, heavier f",
-        "Ash copse to the east — bare-branched, clear line of sight to the junction",
-        "Broader east-west road running through the junction",
+        "Half-step print in the mud south of the junction — the watcher looked south befo",
+        "Ash copse to the east — bare-branched, Freki at its edge",
         "Cloth bundle in Brynjar's hand — dried white-flowered sprig, knotted cord"
       ],
       "threads": [
-        "The heavier follower turned into the ash copse here — watching position, not pursuit; what were they doing and are they still there?",
-        "Sera continued south, steady — she may not know she was followed, or may not have known the follower stopped",
-        "The shimmer in the heavier prints remains unnamed and unidentified",
-        "Ragnar saw two people at the fork before dawn — the number now matters"
+        "The watcher stood here, watched Sera leave south, then deliberately withdrew — where did they go after the copse?",
+        "Sera continued south unchanged — she may not know she was followed or that the follower stopped",
+        "The shimmer in the heavier prints remains unnamed",
+        "Ragnar saw two people at the east fork before dawn — both accounted for now, or were there others?"
       ]
     }
   },
@@ -615,7 +571,8 @@
         "[d1] Confirmed Brynjar's read of the heavier prints — named it plainly as someone who knew Sera was ahead of them.",
         "[d1] Watched Brynjar's failed read of the shimmer without crowding it; checked the fact plainly and waited.",
         "[d1] Named what he knows of Stillhold operatives — quiet people carrying binding-cords, not weapons. Linked the knotted cord in the bundle to the same talk. Mentioned a man who dropped an inexplicable trail.",
-        "[d1] Named the split plainly — the follower peeled east into the ash copse while Sera continued south; identified it as a watching position."
+        "[d1] Named the split plainly — the follower peeled east into the ash copse while Sera continued south; identified it as a watching position.",
+        "[d1] Read Freki's posture without comment and shifted his footing to open a line toward the copse — tactical, unhurried."
       ],
       "knownFacts": [
         "Reads fighting stances on sight",
@@ -638,7 +595,7 @@
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "At Brynjar's shoulder at the waypost junction, watching the ash copse",
+      "statusNote": "At Brynjar's shoulder at the waypost junction, watching the ash copse edge where Freki stands.",
       "domains": {
         "primary": "marcher"
       },
@@ -786,7 +743,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 0,
+    "turnsSinceOffer": 1,
     "recentOffers": [
       {
         "thing": "Doss watching Brynjar with the stillness of someone deciding something — she has not offered it yet, but she is on the edge of it",
@@ -921,7 +878,8 @@
           "[d1] Freki confirmed the lighter prints as Sera's — she was moving fast, not walking. Ragnar reads it as someone who knows where they're going or doesn't want to be seen; the gait is the same either way.",
           "[d1] The heavier follower's prints read as deliberate pursuit — weight forward, toe-heavy, pace quickening as sight-lines opened south. Not a soldier, not a hunter. Someone closing distance on a target they knew was ahead.",
           "[d1] The shimmer pressed into the heavier follower's heel-strike vanished on direct examination — gone before it could be named, leaving no second trace and no pattern in the surrounding mud.",
-          "[d1] At the waypost junction half a mile south of the Marchward east fork, Sera's trail continued south unchanged while her heavier follower turned east into an ash copse — a watching position with a clear line to the junction road. The follower stopped pursuing and began observing."
+          "[d1] At the waypost junction half a mile south of the Marchward east fork, Sera's trail continued south unchanged while her heavier follower turned east into an ash copse — a watching position with a clear line to the junction road. The follower stopped pursuing and began observing.",
+          "[d1] At the waypost junction, the follower stopped, watched Sera walk south until she was out of sight, then withdrew deliberately into the ash copse and left — not spooked, not chased. A planned observation with a clean exit. The copse is empty now."
         ],
         "links": [
           "the-stillhold",
@@ -1140,17 +1098,17 @@
     ]
   },
   "tendencies": {
-    "leadership": 8.4376275230674,
-    "cerebral": 5.008082079632979,
-    "strategic": 3.6590903461001343,
-    "ruthless": 0.6339909851088495,
-    "social": 6.246683358762357,
-    "cautious": 3.662267958984375
+    "leadership": 8.226686834990716,
+    "cerebral": 5.8828800276421545,
+    "strategic": 3.567613087447631,
+    "ruthless": 0.6181412104811282,
+    "social": 6.0905162747932975,
+    "cautious": 4.570711260009766
   },
   "aptitudes": [
     "banner"
   ],
-  "actionCount": 20,
+  "actionCount": 21,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1276,8 +1234,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784772752292,
-  "rev": 73,
+  "updatedAt": 1784772829201,
+  "rev": 74,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1442,13 +1400,13 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 23
+    "riven_marches": 24
   },
   "practice": {
     "schemaVersion": 1,
     "uses": {
       "order_sense": 2,
-      "read_the_fight": 1
+      "read_the_fight": 2
     },
     "coActivations": {},
     "aspirations": [
@@ -1508,10 +1466,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-23T01:30:20.702Z",
-      "lastAt": "2026-07-23T02:12:32.291Z",
+      "lastAt": "2026-07-23T02:13:49.200Z",
       "startDay": 23,
       "endDay": 23,
-      "beats": 17
+      "beats": 18
     }
   ],
   "_pendingArrival": null,
@@ -1527,24 +1485,24 @@
     "at": "2026-07-23T01:18:04.353Z"
   },
   "_opEmitted": {
-    "sceneSummary": 16,
-    "choices": 16,
-    "scene": 16,
-    "npcUpdates": 14,
+    "sceneSummary": 17,
+    "choices": 17,
+    "scene": 17,
+    "npcUpdates": 15,
     "placeUpdates": 4,
     "generateRequest": 2,
     "moveTo": 2,
-    "timeOps": 16,
-    "codexUpdates": 15,
-    "sceneEnded": 3,
-    "characterDeltas": 4,
+    "timeOps": 17,
+    "codexUpdates": 16,
+    "sceneEnded": 4,
+    "characterDeltas": 5,
     "offer": 3,
     "deeds": 1,
     "standingOps": 1,
     "questUpdates": 2,
     "stageOps": 1
   },
-  "_opTurns": 16,
+  "_opTurns": 17,
   "_opLedger": {
     "offer": {
       "applied": 3,

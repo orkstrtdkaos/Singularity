@@ -1703,198 +1703,163 @@
         "player": "Touch the post's door and seat the Waymarker's second layer into it — let the bond between holder and post complete now that the work has advanced.",
         "summary": "Silas seats the Waymarker's second layer into the Raven's Home warden post — the bond between holder and post completes, the March registers it, and Veth names it plainly.",
         "narration": "Silas puts his hand flat on the door of the Raven's Home warden post. The wood is cold and faintly damp from the night's frost. He draws the Waymarker from his coat with the other hand and holds it level, the worn groove of his father's thumb under his own.\n\nHe does not force it. He lets the post know he is there — lets Order-Sense open just wide enough to feel the design's full reach, the cairn-line pulling south, the hollow at its center, the accumulation still patient below the frost. Then he sets the Waymarker's second layer against that shape and breathes out steady.\n\nThe bond seats. It does not thunder. There is a small, definite shift — the way a joint clicks home when you have been pressing it at the wrong angle and finally stop. The Waymarker warms slightly in his palm. The post knows him now in the way that the hollow and the cairn-line have always known the work: not as a visitor, but as the holder.\n\nPell stands close at his shoulder. Veth is three paces back on the threshold path, watching the post's face without moving. After a moment she says, quietly, \"The March felt that.\" She does not elaborate. Huginn shifts its feet on the gatepost, settles, and goes still.\n\n*✦ Waymarker (father's) has changed — description, provenance.*\n\n*✦ The Second Thread — Codex: Edvar Crane, established as real — his trade, his standing, and whether he is above ground..*"
+      },
+      {
+        "player": "Step inside and find the keeper.",
+        "summary": "Silas enters the Raven's Home warden post — Cassiel is at the hearth, ash-pan in hand, and receives the news of the seated bond without surprise.",
+        "narration": "Silas pushes the door open. The post's interior is dim — a single east-facing window lets in the early light, pale and still at this hour, and the room smells of cold stone and old smoke from a hearth that has not been lit in a long time. The floor is flagstone, clean of leaves and debris, and the walls hold their plaster without cracks. Whatever Cassiel has done here in the eleven years since Veth left, he has kept the place tight.\n\nHuginn drops from the gatepost and lands on the nearest windowsill inside with the settled authority of a bird claiming a new rook. The light catches its eye for a moment, and then it looks away, south, where the cairn-line runs.\n\nCassiel is at the far end of the room, beside the cold hearth. He is not startled. He has a short-handled brush in one hand and a pan of ash in the other, and he finishes sweeping the last of the old ash before he straightens and turns to look at Silas. His face is the same face from the hollow's rim — contained, a little weathered, carrying eleven years of a particular kind of patience that comes from keeping a post no one visits. He looks at the Waymarker still warm in Silas's hand. Then he looks at the door behind him, where Pell and Veth are standing at the threshold.\n\n\"Bond's seated, then,\" says Cassiel. He sets the brush against the hearthstone and does not make it a question."
       }
     ],
     "lastTurn": {
-      "narration": "Silas puts his hand flat on the door of the Raven's Home warden post. The wood is cold and faintly damp from the night's frost. He draws the Waymarker from his coat with the other hand and holds it level, the worn groove of his father's thumb under his own.\n\nHe does not force it. He lets the post know he is there — lets Order-Sense open just wide enough to feel the design's full reach, the cairn-line pulling south, the hollow at its center, the accumulation still patient below the frost. Then he sets the Waymarker's second layer against that shape and breathes out steady.\n\nThe bond seats. It does not thunder. There is a small, definite shift — the way a joint clicks home when you have been pressing it at the wrong angle and finally stop. The Waymarker warms slightly in his palm. The post knows him now in the way that the hollow and the cairn-line have always known the work: not as a visitor, but as the holder.\n\nPell stands close at his shoulder. Veth is three paces back on the threshold path, watching the post's face without moving. After a moment she says, quietly, \"The March felt that.\" She does not elaborate. Huginn shifts its feet on the gatepost, settles, and goes still.\n\n*✦ Waymarker (father's) has changed — description, provenance.*\n\n*✦ The Second Thread — Codex: Edvar Crane, established as real — his trade, his standing, and whether he is above ground..*",
-      "sceneSummary": "Silas seats the Waymarker's second layer into the Raven's Home warden post — the bond between holder and post completes, the March registers it, and Veth names it plainly.",
+      "narration": "Silas pushes the door open. The post's interior is dim — a single east-facing window lets in the early light, pale and still at this hour, and the room smells of cold stone and old smoke from a hearth that has not been lit in a long time. The floor is flagstone, clean of leaves and debris, and the walls hold their plaster without cracks. Whatever Cassiel has done here in the eleven years since Veth left, he has kept the place tight.\n\nHuginn drops from the gatepost and lands on the nearest windowsill inside with the settled authority of a bird claiming a new rook. The light catches its eye for a moment, and then it looks away, south, where the cairn-line runs.\n\nCassiel is at the far end of the room, beside the cold hearth. He is not startled. He has a short-handled brush in one hand and a pan of ash in the other, and he finishes sweeping the last of the old ash before he straightens and turns to look at Silas. His face is the same face from the hollow's rim — contained, a little weathered, carrying eleven years of a particular kind of patience that comes from keeping a post no one visits. He looks at the Waymarker still warm in Silas's hand. Then he looks at the door behind him, where Pell and Veth are standing at the threshold.\n\n\"Bond's seated, then,\" says Cassiel. He sets the brush against the hearthstone and does not make it a question.",
+      "sceneSummary": "Silas enters the Raven's Home warden post — Cassiel is at the hearth, ash-pan in hand, and receives the news of the seated bond without surprise.",
       "choices": [
         {
-          "label": "Press Order-Sense deeper now that the bond is seated — read what the Waymarker's link to the post shows you about the accumulation below Stillwater's Trouble.",
+          "label": "Tell him yes — and ask what the bond's completion changes for his role as keeper. Does he stay, or does a warden's presence release him?",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "negotiate"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Ask Cassiel directly: what has he observed here — in the hollow, along the cairn-line — in eleven years? A keeper sees what wardens miss.",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Light the hearth before anything else — the post has been cold long enough, and a warden's first act should be heat.",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "difficulty": 0,
+          "intentTags": [
+            "sustain"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Turn Order-Sense on the interior of the post itself — the bond is seated, and the design should show what the post is part of from the inside.",
           "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "chaos_order": 0.4,
-            "death_life": -0.1
-          },
-          "difficulty": 15,
+          "subAttribute": "reason",
+          "difficulty": 0,
           "intentTags": [
             "study"
           ],
           "abilityId": "order_sense",
           "energyCost": 2,
           "trivial": false
-        },
-        {
-          "label": "Ask Veth what she felt — 'What did the March register? What does that mean for the work ahead?'",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Step inside — walk the post now that it knows you, and see how the space reads differently through the bond.",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {
-            "chaos_order": 0.2
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "scout"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Turn south along the cairn-line and let Huginn lead — find the small ending it located before you deal with anything else.",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "axes": {
-            "death_life": -0.2
-          },
-          "difficulty": 0,
-          "intentTags": [
-            "travel",
-            "study"
-          ],
-          "trivial": true
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -2
-      },
       "scene": {
-        "setting": "The Raven's Home warden post on the Ashwarden March Road — early morning, early spring, cold and clear. Silas stands at the post door with his hand on the wood and the Waymarker warm in his other palm. The bond is seated.",
+        "setting": "Inside the Raven's Home warden post — a single flagstone room, cold hearth at the far end, east-facing window letting in pale early-spring light. Dim, clean, smelling of cold stone and old smoke.",
         "npcsPresent": [
           {
+            "name": "Cassiel Ord",
+            "state": "Standing at the hearth with a brush and ash-pan, turned to face Silas — composed, eleven years of a keeper's patience in his expression."
+          },
+          {
             "name": "Pell Marsh",
-            "state": "Standing close at Silas's shoulder, watching the post's face, hand near but not on Memory."
+            "state": "At the threshold behind Silas, watching the room."
           },
           {
             "name": "Veth (Stillwater) Ondra",
-            "state": "Three paces back on the threshold path — watching the post, having just spoken."
+            "state": "At the threshold, three paces back — watching Cassiel."
           },
           {
             "name": "Huginn",
-            "state": "Settled on the gatepost, feet shifted to a new grip, still."
+            "state": "Settled on the nearest windowsill inside, looking south along the cairn-line's direction."
           }
         ],
         "objects": [
-          "Waymarker — warm in Silas's palm, second layer now seated",
-          "Raven's Home warden post door — cold damp wood, binding runes at the lower face, Boundary-Stone at the crown",
-          "Cairn-line — continuing south at long-stride intervals"
+          "Waymarker — warm in Silas's palm, both layers seated",
+          "Cold hearth — ash swept, brush leaning against the stone",
+          "East-facing window — pale early light, Huginn now on the sill",
+          "Flagstone floor — clean",
+          "Father's Sealed Letter — in Silas's inventory"
         ],
         "threads": [
-          "The bond between holder and post is now complete — what it shows about the accumulation is unread",
-          "Veth's words 'the March felt that' — not elaborated on",
-          "Huginn's small ending — still south along the line, still patient",
-          "The Crossing ahead — Edvar Crane, the second thread"
+          "Cassiel's statement 'Bond's seated, then' — waiting for Silas's answer and what follows",
+          "Cassiel's eleven years as keeper — what he has observed along the line and in the hollow",
+          "The post's interior unread by Order-Sense — the bond is seated but the design's full shape from inside is unknown",
+          "Huginn's small ending south along the cairn-line — still patient, still unwitnessed"
         ]
       },
       "npcUpdates": [
         {
-          "op": "update",
-          "npcId": "veth-stillwater-ondra",
-          "name": "Veth (Stillwater) Ondra",
-          "note": "Named plainly that the March felt the bond seat — no elaboration, letting Silas lead.",
-          "statusNote": "At the Raven's Home warden post threshold — witness to the bond seating, waiting to be asked.",
+          "op": "meet",
+          "npcId": "cassiel-ord",
+          "name": "Cassiel Ord",
+          "role": "Keeper of the Raven's Home warden post threshold",
+          "gender": "man",
+          "pronouns": "he/him",
+          "description": "A contained, weathered man carrying eleven years of a particular patience — kept the post tight and clean while it had no warden. Finishes his work before he turns to answer.",
+          "note": "Received the news of the seated bond from inside the post — named it without ceremony, without making it a question.",
           "learned": [
-            "The Waymarker's second layer has seated into the post — the bond between holder and post is complete."
-          ]
-        },
-        {
-          "op": "update",
-          "npcId": "pell-ran-marsh",
-          "name": "Pell Ran Marsh",
-          "note": "Standing at Silas's shoulder, present and close, as the bond sealed.",
-          "statusNote": "At the Raven's Home warden post — the bond witnessed, at Silas's side."
+            "The bond between Silas and the post has seated — he knew it the moment Silas crossed the threshold"
+          ],
+          "skillsObserved": [
+            "reading a significant event plainly, without ceremony or inflation"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "Inside the Raven's Home warden post, ash-pan in hand — keeper of the threshold, eleven years held."
         }
       ],
       "placeUpdates": [
         {
-          "note": "Waymarker's second layer seated into the post on this morning — the bond between Silas Weir and the post is complete. The March registered it.",
-          "flag": {
-            "waymarker_bond": "complete"
-          },
+          "note": "Silas entered the post interior on this morning — cold hearth, Cassiel keeping the place tight, Huginn claimed the east windowsill.",
           "subPlace": {
-            "name": "Raven's Home Warden Post",
-            "parent": "Ashwarden March Road",
-            "note": "Bond between holder and post now fully seated — Waymarker's second layer closed. The post knows Silas Weir as its warden.",
+            "name": "Raven's Home Post Interior",
+            "parent": "Raven's Home Warden Post",
+            "note": "Single flagstone room, cold hearth at the far end, east window — kept clean by Cassiel over eleven years. Huginn on the windowsill.",
             "visited": true
           }
         }
       ],
-      "factUpdates": [
-        {
-          "op": "add",
-          "text": "The Waymarker's second layer is now seated into the Raven's Home warden post — the bond between Silas Weir as holder and the post as place is complete. Veth named that the March felt it.",
-          "subjectId": "silas-weir"
-        }
-      ],
-      "codexUpdates": [
-        {
-          "topic": "precursor-signs-in-the-valley",
-          "label": "Precursor Signs in the Valley",
-          "kind": "mystery",
-          "fact": "The Waymarker's second layer seated cleanly into the Raven's Home post — the bond between holder and post completed without resistance. Veth named that the March felt it register. The design that began with the cairn-line and the accumulation at Stillwater's Trouble now has a living warden bound into it.",
-          "links": [
-            "the-second-thread",
-            "stillwaters-trouble",
-            "what-the-water-remembers",
-            "veth-stillwater-ondra"
-          ]
-        }
-      ],
-      "itemUpdates": [
-        {
-          "name": "Waymarker (father's)",
-          "description": "A small disc of pale grey material — neither quite stone nor quite metal — with a single groove worn into its face in a closed oval. His father's thumb wore that groove. Both layers now seated: the first into Stillwater's Trouble, the second into the Raven's Home warden post. The bond between holder and post is complete. It is warm in the hand in a way stone should not be.",
-          "provenance": "Left by Silas's father for Ama to hold until Silas came asking. Carried from Cairnhold to the March. Both layers now closed."
-        }
-      ],
-      "stageOps": [
-        {
-          "questId": "the-second-thread",
-          "stageId": "s1",
-          "evidence": "The Waymarker's second layer seated into the warden post, completing the bond between holder and post — the first structural step of the second thread closed."
-        }
-      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief, deliberate act at the post door — the bond seating takes a moment, not a march."
+        "why": "A quick step inside and a first exchange — a few minutes at most."
       }
     },
     "sceneState": {
-      "setting": "The Raven's Home warden post on the Ashwarden March Road — early morning, early spring, cold and clear. Silas stands at the post door with his hand on the wood and the Waymarker warm in his other palm. The bond is seated.",
+      "setting": "Inside the Raven's Home warden post — a single flagstone room, cold hearth at the far end, east-facing window letting in pale early-spring light. Dim, clean, smelling of cold stone and old smoke.",
       "npcsPresent": [
         {
+          "name": "Cassiel Ord",
+          "state": "Standing at the hearth with a brush and ash-pan, turned to face Silas — composed, eleven years of a keeper's patience in"
+        },
+        {
           "name": "Pell Marsh",
-          "state": "Standing close at Silas's shoulder, watching the post's face, hand near but not on Memory."
+          "state": "At the threshold behind Silas, watching the room."
         },
         {
           "name": "Veth (Stillwater) Ondra",
-          "state": "Three paces back on the threshold path — watching the post, having just spoken."
+          "state": "At the threshold, three paces back — watching Cassiel."
         },
         {
           "name": "Huginn",
-          "state": "Settled on the gatepost, feet shifted to a new grip, still."
+          "state": "Settled on the nearest windowsill inside, looking south along the cairn-line's direction."
         }
       ],
       "objects": [
-        "Waymarker — warm in Silas's palm, second layer now seated",
-        "Raven's Home warden post door — cold damp wood, binding runes at the lower face,",
-        "Cairn-line — continuing south at long-stride intervals"
+        "Waymarker — warm in Silas's palm, both layers seated",
+        "Cold hearth — ash swept, brush leaning against the stone",
+        "East-facing window — pale early light, Huginn now on the sill",
+        "Flagstone floor — clean",
+        "Father's Sealed Letter — in Silas's inventory"
       ],
       "threads": [
-        "The bond between holder and post is now complete — what it shows about the accumulation is unread",
-        "Veth's words 'the March felt that' — not elaborated on",
-        "Huginn's small ending — still south along the line, still patient",
-        "The Crossing ahead — Edvar Crane, the second thread"
+        "Cassiel's statement 'Bond's seated, then' — waiting for Silas's answer and what follows",
+        "Cassiel's eleven years as keeper — what he has observed along the line and in the hollow",
+        "The post's interior unread by Order-Sense — the bond is seated but the design's full shape from inside is unknown",
+        "Huginn's small ending south along the cairn-line — still patient, still unwitnessed"
       ]
     }
   },
@@ -2299,8 +2264,8 @@
       "title": "The Second Thread",
       "structured": true,
       "status": "active",
-      "premise": "His father left two threads. The first was in a drawer: the Waymarker, and Ama held it until he came asking.\\n\\nThe second could not be left in a drawer, because a drawer holds NOTES and what his father left was WORK — begun, unfinished, and standing somewhere still. He left it with a craftsman named Edvar Crane, at the Crossing, where all roads meet. Fifteen years ago.\\n\\nThe Waymarkers were not surveyors. They were the last people who knew how a waygate is made — and they had never made one. The Numinous built every gate in the world before the Transition, by touching meaning directly, and then dissolved most of the way out of the world that could have taught anyone else. What the Waymarkers held was the leavings: a practice reconstructed backwards from finished gates by people who could not do what the builders did.\\n\\nSilas's father was trying to finish one. **There is a half-made waygate.** A fold begun and never closed, standing since before the post fell — neither open nor shut, and a fold that is neither is not stable, it is WAITING. It is near the Crossing. Everything crosses at the Crossing.",
-      "stakes": "A half-made fold does not stay half-made forever. It resolves, one way or the other, and nobody alive knows which way or when.\\n\\nAnd it cannot be finished by a Numinous, because finishing is not what it needs — it was begun by reaching and it has stopped where reaching ends. **It needs a maker's hand to close it and a warden's contact to let it go, and those are the same man exactly once in a generation.** Silas is a wright who tends endings. That is not a coincidence in his lineage. It is what the lineage was FOR.",
+      "premise": "His father left two threads. The first was in a drawer: the Waymarker, and Ama held it until he came asking.\n\nThe second could not be left in a drawer, because a drawer holds NOTES and what his father left was WORK — begun, unfinished, and standing somewhere still. He left it with a craftsman named Edvar Crane, at the Crossing, where all roads meet. Fifteen years ago.\n\nThe Waymarkers were not surveyors. They were the last people who knew how a waygate is made — and they had never made one. The Numinous built every gate in the world before the Transition, by touching meaning directly, and then dissolved most of the way out of the world that could have taught anyone else. What the Waymarkers held was the leavings: a practice reconstructed backwards from finished gates by people who could not do what the builders did.\n\nSilas's father was trying to finish one. **There is a half-made waygate.** A fold begun and never closed, standing since before the post fell — neither open nor shut, and a fold that is neither is not stable, it is WAITING. It is near the Crossing. Everything crosses at the Crossing.",
+      "stakes": "A half-made fold does not stay half-made forever. It resolves, one way or the other, and nobody alive knows which way or when.\n\nAnd it cannot be finished by a Numinous, because finishing is not what it needs — it was begun by reaching and it has stopped where reaching ends. **It needs a maker's hand to close it and a warden's contact to let it go, and those are the same man exactly once in a generation.** Silas is a wright who tends endings. That is not a coincidence in his lineage. It is what the lineage was FOR.",
       "axis": "space_time",
       "traditions": [
         "wright",
@@ -2348,7 +2313,7 @@
         {
           "id": "s6",
           "objective": "Resolve the fold. Both are real completions; neither is a failure.",
-          "condition": "To FINISH: close the fold as a maker closes a joint, and there is a new way through the world where there was none — the first waygate made since the Transition, made by a man who is not Numinous, by a route the builders did not use. To END it: let it go, cleanly, as an Ashwarden lets things go — and the danger stops, the work stops, and his father's unfinished thing is finished by being concluded.\\n\\n**He can do both because he is both.** That is the whole arc.",
+          "condition": "To FINISH: close the fold as a maker closes a joint, and there is a new way through the world where there was none — the first waygate made since the Transition, made by a man who is not Numinous, by a route the builders did not use. To END it: let it go, cleanly, as an Ashwarden lets things go — and the danger stops, the work stops, and his father's unfinished thing is finished by being concluded.\n\n**He can do both because he is both.** That is the whole arc.",
           "change": "The world map changes, or a standing danger to the Crossing is removed. Either way it is permanent and public."
         }
       ],
@@ -3499,7 +3464,7 @@
     "cassiel-ord": {
       "id": "cassiel-ord",
       "name": "Cassiel Ord",
-      "role": "Keeper of Stillwater's Trouble threshold",
+      "role": "Keeper of the Raven's Home warden post threshold",
       "description": "A lean man in a grey coat, heel-worn boots, the stillness of someone who has been waiting in one place long enough to stop watching the path.",
       "firstMet": {
         "locationId": "gen-stillwater-s-trouble",
@@ -3507,7 +3472,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d6] Turned from below to watch Silas name the post — not yet spoken; his answer to the tending-question still forming",
         "[d6] Watched Silas walk into the hollow and read it — spoke unprompted: 'You are asking me something.' His answer is forming.",
         "[d6] Rose from sitting as the Palework settled the hollow — named the need for a second boundary-stone at the mouth without being asked. Has taken a practical role in the site's next work.",
         "[d6] Watched the second Boundary-Stone seated without speaking — gave a single deliberate nod when the ward extended. His answer is still forming but his body has not moved toward departure.",
@@ -3516,26 +3480,29 @@
         "[d6] Named himself keeper of the threshold — quiet, plain, no preface. His eleven-year answer finished forming inside the completed ward.",
         "[d6] Settled on his bench at the door, looking out over the hollow — arrived, not waiting.",
         "[d6] Remains on the keeper's bench at the door — practical needs as sole keeper not yet addressed before the party's departure.",
-        "[d6] Watched the party depart with a keeper's acknowledgment — one hand raised, then turned back to the hollow's mouth. His work is his now."
+        "[d6] Watched the party depart with a keeper's acknowledgment — one hand raised, then turned back to the hollow's mouth. His work is his now.",
+        "[d13] Received the news of the seated bond from inside the post — named it without ceremony, without making it a question."
       ],
       "knownFacts": [
-        "The hollow quieted after she spoke — not permanently, but enough that the last season's watch was bearable",
         "Has been holding the completion-or-beginning question for eleven years",
         "Cassiel's eleven-year question was whether he was right to have seconded the naming — Veth's answer tells him he was",
         "Silas will not reopen the warden post — the binding is a lock, not a door",
         "Silas is distinguishing between a warden station and a person who tends a closed site",
         "The naming of the post changed how the hollow reads — the site has orientation now, not just suppression",
         "A second stone is needed at the hollow's mouth to hold what enters — the post's stone holds the post; the site needs its own",
-        "Has formally chosen to stay as keeper of the Stillwater's Trouble post — named it himself, unprompted"
+        "Has formally chosen to stay as keeper of the Stillwater's Trouble post — named it himself, unprompted",
+        "The bond between Silas and the post has seated — he knew it the moment Silas crossed the threshold"
       ],
-      "skillsObserved": [],
+      "skillsObserved": [
+        "reading a significant event plainly, without ceremony or inf"
+      ],
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "Remaining at Stillwater's Trouble as keeper — at the bench at the door, watching the hollow's mouth.",
+      "statusNote": "Inside the Raven's Home warden post, ash-pan in hand — keeper of the threshold, eleven years held.",
       "lastSeen": {
-        "locationId": "gen-stillwater-s-trouble",
-        "day": 6
+        "locationId": "gen-ashwarden-march-road",
+        "day": 13
       }
     },
     "silas-mother": {
@@ -4019,7 +3986,8 @@
         "[d6] Binding runes — Wither and The Raised Thing braided in chalk and copper wire — seated in the lower face of the warden post on World-day 19 midday. Stillwater's Trouble held but not ended.",
         "[d6] Boundary-Stone seated at the post's crown on World-day 19 midday — the warden station now functions as a protected refuge. Animals, weather, and casual intrusion turned aside. The post reads as occupied.",
         "[d6] Stillwater's Trouble reached on World-day 19 midday — a hillside bowl, dark close earth, roughly circular and below grade, grey birch stopping at its rim. A figure sits against the far limestone outcrop.",
-        "[d13] Waymarker's second layer seated into the post on this morning — the bond between Silas Weir and the post is complete. The March registered it."
+        "[d13] Waymarker's second layer seated into the post on this morning — the bond between Silas Weir and the post is complete. The March registered it.",
+        "[d13] Silas entered the post interior on this morning — cold hearth, Cassiel keeping the place tight, Huginn claimed the east windowsill."
       ],
       "flags": {
         "binding_seated": true,
@@ -4055,6 +4023,14 @@
           "day": 6,
           "visited": true,
           "note": "A circular depression in the hillside, two miles northwest of the Raven's Home warden post — dark earth, limestone outcrop at the far rim, birch stopping at its edge. Veth's old ground."
+        },
+        "raven-s-home-post-interior": {
+          "name": "Raven's Home Post Interior",
+          "parentId": "gen-ashwarden-march-road",
+          "day": 13,
+          "visited": true,
+          "note": "Single flagstone room, cold hearth at the far end, east window — kept clean by Cassiel over eleven years. Huginn on the windowsill.",
+          "parentUnresolved": "Raven's Home Warden Post"
         }
       },
       "vectorsKnown": []
@@ -4314,11 +4290,11 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-23T11:10:41.715Z",
+    "lastSharedReadAt": "2026-07-23T14:12:52.774Z",
     "lastTickWorldDay": 23,
     "lastCanonWorldDay": 23,
-    "lastGenCount": 563,
-    "turnsSinceOffer": 7,
+    "lastGenCount": 566,
+    "turnsSinceOffer": 8,
     "recentOffers": [
       {
         "thing": "The shadow-build showed Calvar's drainage failure precisely — the sleeve geometry, the collar, the east-bend junction — before it showed…",
@@ -5764,21 +5740,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 13.847739420906267,
-    "cerebral": 17.91534746761672,
-    "social": 11.724954996624298,
-    "generous": 2.970418507219001,
-    "cautious": 3.2182638548052807,
-    "physical": 0.0718567371786729,
-    "risky": 0.07535602425944997,
-    "ruthless": 0.024026444821399467,
-    "carousing": 0.9286516002326498,
-    "amorous": 9.351573492951086,
-    "patient": 0.6419399985466039,
-    "stealth": 0.009312711395577258,
-    "devotion": 0.19025017231860764,
-    "craft": 1.559913972591469,
-    "leadership": 0.04740273453850972
+    "strategic": 14.50154593538361,
+    "cerebral": 17.467463780926302,
+    "social": 11.43183112170869,
+    "generous": 2.896158044538526,
+    "cautious": 3.1378072584351484,
+    "physical": 0.07006031874920608,
+    "risky": 0.07347212365296373,
+    "ruthless": 0.02342578370086448,
+    "carousing": 0.9054353102268335,
+    "amorous": 9.117784155627309,
+    "patient": 0.6258914985829388,
+    "stealth": 0.009079893610687827,
+    "devotion": 0.18549391801064244,
+    "craft": 1.5209161232766824,
+    "leadership": 0.046217666175046974
   },
   "aptitudes": [
     "strategist",
@@ -5787,9 +5763,9 @@
     "sage",
     "charmer"
   ],
-  "actionCount": 672,
+  "actionCount": 673,
   "grantsVersion": 1,
-  "reconcileVersion": 16,
+  "reconcileVersion": 18,
   "gallery": [
     {
       "kind": "moment",
@@ -6137,8 +6113,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784807477051,
-  "rev": 1051,
+  "updatedAt": 1784816042990,
+  "rev": 1063,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -7141,7 +7117,7 @@
           "entityId": "cassiel-ord",
           "type": "npc",
           "birthWeight": 24,
-          "engagementScore": 41,
+          "engagementScore": 43,
           "tier": "nominated",
           "rating": "R+",
           "provenance": {
@@ -7245,13 +7221,17 @@
             {
               "kind": "interact",
               "day": 6
+            },
+            {
+              "kind": "interact",
+              "day": 13
             }
           ],
           "createdDay": 6,
           "repaired": false,
           "stubbed": false,
           "romanceEligible": true,
-          "lastAttentionDay": 6,
+          "lastAttentionDay": 13,
           "promotedWorldDay": 19,
           "canonTier": "canonical"
         },
@@ -7473,7 +7453,19 @@
           "gen-the-ent-grove",
           "gen-ashwarden-march-road"
         ],
-        "_gen": true,
+        "_gen": {
+          "entityId": "gen-waygate",
+          "type": "location",
+          "birthWeight": 1,
+          "engagementScore": 0,
+          "tier": "fresh",
+          "rating": null,
+          "attentionHistory": [],
+          "createdDay": null,
+          "provenance": {
+            "healed": "sng-216-backfill"
+          }
+        },
         "_mintedAs": "transit",
         "map": {
           "x": 409.5058087856015,
@@ -7491,7 +7483,19 @@
         "connections": [
           "gen-waygate"
         ],
-        "_gen": true,
+        "_gen": {
+          "entityId": "gen-center",
+          "type": "location",
+          "birthWeight": 1,
+          "engagementScore": 0,
+          "tier": "fresh",
+          "rating": null,
+          "attentionHistory": [],
+          "createdDay": null,
+          "provenance": {
+            "healed": "sng-216-backfill"
+          }
+        },
         "_mintedAs": "transit",
         "map": {
           "x": 483.2482839825773,
@@ -7509,7 +7513,19 @@
         "connections": [
           "gen-waygate"
         ],
-        "_gen": true,
+        "_gen": {
+          "entityId": "gen-the-ent-grove",
+          "type": "location",
+          "birthWeight": 1,
+          "engagementScore": 0,
+          "tier": "fresh",
+          "rating": null,
+          "attentionHistory": [],
+          "createdDay": null,
+          "provenance": {
+            "healed": "sng-216-backfill"
+          }
+        },
         "_mintedAs": "transit",
         "map": {
           "x": 439.5117053691912,
@@ -7528,7 +7544,19 @@
           "gen-waygate",
           "gen-stillwater-s-trouble"
         ],
-        "_gen": true,
+        "_gen": {
+          "entityId": "gen-ashwarden-march-road",
+          "type": "location",
+          "birthWeight": 1,
+          "engagementScore": 0,
+          "tier": "fresh",
+          "rating": null,
+          "attentionHistory": [],
+          "createdDay": null,
+          "provenance": {
+            "healed": "sng-216-backfill"
+          }
+        },
         "_mintedAs": "transit",
         "map": {
           "x": 336.03134186125055,
@@ -7548,7 +7576,19 @@
         "connections": [
           "gen-ashwarden-march-road"
         ],
-        "_gen": true,
+        "_gen": {
+          "entityId": "gen-stillwater-s-trouble",
+          "type": "location",
+          "birthWeight": 1,
+          "engagementScore": 0,
+          "tier": "fresh",
+          "rating": null,
+          "attentionHistory": [],
+          "createdDay": null,
+          "provenance": {
+            "healed": "sng-216-backfill"
+          }
+        },
         "_mintedAs": "transit",
         "map": {
           "x": 297.8908972987956,
@@ -8170,7 +8210,7 @@
   "syncedAt": 1784477453768,
   "teachers": {},
   "regionsKnown": {
-    "valley": 437,
+    "valley": 438,
     "the_palelands": 6,
     "the_center": 62
   },
@@ -8294,10 +8334,10 @@
     {
       "id": "sess-11",
       "startedAt": "2026-07-23T11:12:37.094Z",
-      "lastAt": "2026-07-23T11:51:17.048Z",
+      "lastAt": "2026-07-23T14:14:02.986Z",
       "startDay": 23,
       "endDay": 23,
-      "beats": 4
+      "beats": 5
     }
   ],
   "company": [
@@ -8487,20 +8527,19 @@
   "_opEmitted": {
     "sceneSummary": 47,
     "choices": 47,
-    "characterDeltas": 22,
+    "characterDeltas": 21,
     "scene": 47,
     "npcUpdates": 41,
-    "factUpdates": 6,
+    "factUpdates": 5,
     "placeUpdates": 5,
-    "codexUpdates": 22,
+    "codexUpdates": 21,
     "timeOps": 42,
     "imagePrompt": 1,
     "sceneEnded": 11,
-    "itemUpdates": 2,
+    "itemUpdates": 1,
     "questUpdates": 2,
     "offer": 2,
-    "moveTo": 2,
-    "stageOps": 1
+    "moveTo": 2
   },
   "_opTurns": 47,
   "schools": {

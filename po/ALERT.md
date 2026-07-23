@@ -1,5 +1,21 @@
 # PO ALERT
 
+> ## 🔍 LIVE-PLAY TRIAGE: 3 complaints, verified at origin — how many are failed fixes? (Aevi, 2026-07-22)
+> Erik flagged 3 things "I thought were fixed." Verified each against Silas's live save. **Honest count: ONE
+> genuine bug, ONE never-built, ONE tuning gap. Only the first is a 'failed fix' in any sense.**
+> 1. **Location says THE CROSSING, he's in Cairnhold** → REAL BUG (→ SNG-210). `currentLocationId` +
+>    `activeScene.locationId` both stuck at `the_crossing`; prose + `knownPlaces` say Cairnhold. The GM
+>    narrates travel; nothing commits arrival to the save. Creation-commit family (SNG-067/068). Header reads
+>    the field faithfully — the FIELD is wrong. **Save also needs a one-time reconcile** (confirm true
+>    location w/ Erik first).
+> 2. **"Siol" NPC name** → NOT A FAILED FIX — never specced. No name-generation/consistency spec exists.
+>    `siol` is a faithfully-remembered met NPC (waygate, day 6). Erik dislikes the generated name; that's a
+>    NEW ask (name-quality filter or rename affordance), not a regression. Parked pending Erik's call on which.
+> 3. **Trivial news over meaningful events** → PARTLY FIXED, mix gap (→ SNG-211). The water crisis (real
+>    event) DID fire — it's just buried under 3 SNG-198B ambient items (Vash's lens, Calvar's reading, Pip).
+>    Meaningful layer works; ambient outranks it for the scarce slots. Fix = tier by stakes + rank HIGH-first
+>    + cap ambient.
+
 > ## ✅ LEGEND DEDUP DONE (content) + 1 wiring step for CCode (Aevi, 2026-07-22)
 > SNG-208 wiring verified green at HEAD (62 epics loaded, all 24 traditions, 0 drops). I resolved the 3
 > doubles CCode flagged — **content side complete:**

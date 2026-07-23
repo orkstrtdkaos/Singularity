@@ -1,5 +1,23 @@
 # PO ALERT
 
+> ## 🔧 COMPLAINT 3 UPDATE + 2 new finds from the codex screenshot (Aevi, 2026-07-22)
+> **Erik clarified complaint 3:** the Crossing/Cairnhold desync is from an EARLIER travel misfire — a
+> Cairnhold house-gate that misrouted to the Hub; never corrected because he hasn't traveled since.
+> **ANSWER TO "can the GM fix it if I ask?": YES.** SNG-207 (capable GM) has SHIPPED — `reanchorLocation` is
+> in the GM's live stateOps vocabulary (gm.js:89 literally names "a header in the wrong place" as a repair),
+> and app.js:3916 applies it. Erik asks the GM "I'm in Cairnhold, the gate misrouted me — fix my location"
+> → GM emits reanchorLocation THIS TURN → save corrects. ⚠️ ONE caveat: the op refuses if `to` doesn't
+> resolve to a real location id — name the Cairnhold place precisely.
+> - **SNG-210 REVISED:** the repair EXISTS (I was wrong to imply otherwise). 210 is now the PREVENTION —
+>   commit-on-arrival so travel stops desyncing — not the repair. Reconcile-pass ask DROPPED.
+> - **NEW sub-bug (in SNG-210):** the ORIGINAL gate-misroute (house-gate → Hub) is its own destination-
+>   resolution bug — trace `waygate.js` for a gate whose destination resolves to a stale/default target.
+> - **NEW UI bug (codex search):** the screenshot shows the codex finding "★ Siol — GROWN INTO CANON" AND
+>   immediately printing "No entries match 'siol' — you may not know of it yet." The empty-state message
+>   fires on ONE pool (personal known-topics) while RESULTS from the OTHER pool (canon-grown) display above
+>   it. Fix: only show "no entries" when BOTH pools are empty. Small UI-logic fix; CCode can locate the
+>   empty-state condition in the codex-search render (the string is a template literal, not grep-indexed).
+
 > ## 🔍 LIVE-PLAY TRIAGE: 3 complaints, verified at origin — how many are failed fixes? (Aevi, 2026-07-22)
 > Erik flagged 3 things "I thought were fixed." Verified each against Silas's live save. **Honest count: ONE
 > genuine bug, ONE never-built, ONE tuning gap. Only the first is a 'failed fix' in any sense.**

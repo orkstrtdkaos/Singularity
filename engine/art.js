@@ -214,6 +214,8 @@ export function assembleImagePrompt(kind, subject = {}, ctx = {}) {
   if (kind === "npc") return npcPromptSeed(subject, ctx.character || {}); // SNG-136: richer seed w/ bond-to-player
   if (kind === "location") return `${subject.name || "a place"}: ${(subject.descriptionSeed || subject.encounterFlavor || "").slice(0, 300)}`;
   if (kind === "item") return `single item on plain dark background, ${subject.name}: ${subject.description || subject.kind || ""}`;
+  // SNG-223: a craft's image — its authored description IS the prompt, grounded in its tradition's aesthetic.
+  if (kind === "ability") return `${subject.name || "a craft"}: ${String(subject.description || subject.effect || "").slice(0, 260)}${subject.tradition ? ` — rendered in the aesthetic of the ${String(subject.tradition).replace(/[-_]+/g, " ")} tradition` : ""}`; // prose-cap-ok: an image PROMPT, not displayed prose (matches the sibling location/item/moment prompt caps)
   if (kind === "moment") return String(subject.prompt || subject).slice(0, 300);
   return String(subject.name || subject || "");
 }

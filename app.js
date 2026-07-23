@@ -67,7 +67,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.224";
+const APP_VERSION = "1.8.225";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -1774,6 +1774,31 @@ function pruneEmptyGalleryTiles(c) {
  *  image on the record, else this character's cached generate-once image. For display. */
 function locationImageFor(locId) {
   return CONTENT.locations[locId]?.image || character?.locationImages?.[locId] || null;
+}
+
+/** SNG-223: an image for a craft — authored (born-with) first, else the per-character generate-once cache
+ *  (`character.abilityImages`, the exact parallel to locationImages). READ-ONLY: never generates. */
+function abilityImageFor(id) {
+  return CONTENT.abilities[id]?.image || character?.abilityImages?.[id] || null;
+}
+
+/** SNG-223: generate-ONCE-and-CACHE a craft's image on FIRST MEANINGFUL CONTACT (opened in the detail panel,
+ *  learned, or minted). Mirrors ensureLocationImage: authored image wins; otherwise mint from the craft's
+ *  authored description + tradition aesthetic, cache on the character (persists, never regen) + gallery.
+ *  Lazy by design — NEVER batch the ~280-craft catalog (quota). No-op when art is off / on failure. */
+function ensureAbilityImage(ab) {
+  if (!imagesEnabled() || !ab || !ab.id) return null;
+  if (ab.image) return ab.image;                             // authored / born-with-image craft
+  character.abilityImages = character.abilityImages || {};
+  if (character.abilityImages[ab.id]) return character.abilityImages[ab.id]; // cached — never regen
+  const url = ensureImage({ id: `ability-${ab.id}`, name: ab.name, description: ab.description || ab.effect || "", tradition: ab.tradition },
+    "ability", { ratingLevel: viewerRatingLevel(), field: "image" });
+  if (url) {
+    character.abilityImages[ab.id] = url;
+    try { addGalleryImage(character, { kind: "ability", prompt: ab.name, url, caption: ab.name, worldDay: absoluteWorldDay() }); } catch { /* gallery is a convenience */ }
+    try { saveCharacter(character); } catch { /* cache best-effort */ }
+  }
+  return url;
 }
 
 /** SNG-046 Layer 3: generate-ONCE-and-CACHE a place's image on discovery/visit. An authored or
@@ -5404,6 +5429,9 @@ function renderSkillWheel(selectedId = null, status = "") {
 
   const sel = selectedId ? m.nodes.find(nd => nd.id === selectedId) : null;
   const selAb = sel ? fullCatalog()[sel.id] : null;
+  // SNG-223: the craft's image — generate-once on this first meaningful contact (the player opened its detail),
+  // cached thereafter; a closed antipode never generates. Glyph fallback if art is off / gen fails.
+  const selImg = selAb && !sel.closed ? ensureAbilityImage(selAb) : null;
   const gateLine = sel ? (sel.closed ? "🚫 CLOSED — your antipode; only a cross-pole braid crosses it"
     : sel.band === "primary" ? "✦ your primary domain — all tiers, no penalty"
     : sel.band === "adjacent" ? (sel.allowed ? "free — kin of your primary (no capstones)" : "🔒 near a people is not being of them — no capstones")
@@ -5417,6 +5445,7 @@ function renderSkillWheel(selectedId = null, status = "") {
     <div class="map-details-head"><h3>${esc(sel.name)}</h3>
       <span class="rep-band" style="border-color:${traditionColor(sel.cls)};color:${traditionColor(sel.cls)}">${esc(traditionLabel(sel.cls))} · Tier ${sel.tier}</span>
       ${sel.owned ? `<span class="rep-band trusted">owned</span>` : sealedSel ? `<span class="rep-band" style="border-color:var(--accent);color:var(--accent)">✦ sealed</span>` : ""}</div>
+    ${selImg ? `<img class="craft-detail-art" src="${esc(selImg)}" alt="${esc(sel.name)}" data-lightbox="${esc(selImg)}">` : ""}
     <div class="hint">${sealedSel ? "✦ a precursor craft of the substrate — outside the poles" : esc(gateLine)}${!sealedSel && sel.effCost != null ? ` · ⚡${sel.effCost} energy${selAb?.energyCost && sel.effCost !== selAb.energyCost ? ` (base ${selAb.energyCost})` : ""}` : ""}</div>
     ${(selAb?.functions || []).length ? `<div style="margin:4px 0">${functionChips(selAb)}</div>` : ""}
     <p class="map-details-desc">${esc(selAb?.description || "")}</p>

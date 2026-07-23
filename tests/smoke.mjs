@@ -7445,6 +7445,18 @@ await (async () => {
   check("222 (Erik): TWO OR MORE parent skills join naturally (A, B and C)", /const strongJoin = arr =>/.test(appSrc222) && /a\.length === 2/.test(appSrc222));
 }
 
+// ---- SNG-223: an image for every craft — the ensureImage pipeline extends to an "ability" type ----
+{
+  const p = assembleImagePrompt("ability", { name: "Undying Ledger", description: "read the death-pattern of any creature within sight", tradition: "ashwarden" });
+  check("223: assembleImagePrompt('ability') builds from the craft's description + tradition aesthetic", /Undying Ledger/.test(p) && /death-pattern/.test(p) && /ashwarden/.test(p));
+  const appSrc223 = readFileSync(join(root, "app.js"), "utf8");
+  check("223: abilityImageFor reads authored image, else the per-character abilityImages cache (parallels locationImages)", /function abilityImageFor/.test(appSrc223) && /character\?\.abilityImages\?\.\[id\]/.test(appSrc223));
+  check("223 GUARD: generate-once-and-cache, lazy — a cached craft image returns immediately, never re-gens", /function ensureAbilityImage/.test(appSrc223) && /if \(character\.abilityImages\[ab\.id\]\) return character\.abilityImages\[ab\.id\]/.test(appSrc223));
+  check("223: the detail panel generates + SHOWS the craft image on first contact (glyph fallback if none)", /const selImg = selAb && !sel\.closed \? ensureAbilityImage\(selAb\)/.test(appSrc223) && /class="craft-detail-art"/.test(appSrc223));
+  const cssSrc223 = readFileSync(join(root, "style.css"), "utf8");
+  check("223: the craft detail art is styled (lightbox)", /\.craft-detail-art/.test(cssSrc223) && /data-lightbox/.test(appSrc223));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

@@ -53,6 +53,22 @@ generateBio's system prompt gains an INTEGRATION directive:
   "✦ Weave in the land" / "✦ Enrich with the valley" signals it BUILDS ON your words, not overwrites — which
   is exactly what would have made Erik comfortable hitting it.
 
+## §2d — Say what the button does, right next to it (Erik, follow-up)
+> Erik: *"put a description of what the button will actually do next to it too."*
+The cheapest fix for the exact hesitation Erik had: a one-line description beside "Weave it for me" so no one
+has to guess (or fear) what it does. After §2 makes it integrative, the copy states the true, now-safe
+behavior:
+- e.g. *"Fills in the blanks and enriches what you've written with the valley's lore — keeps your words, you
+  can still edit."*
+- Place it as a hint line directly under/beside the button (the step already has a `bio-status`/hint slot and
+  a top hint — reuse that styling). Short, plain, present BEFORE the click, not only after.
+- ⛔ The description must match the ACTUAL post-§2 behavior — "keeps your words" is only honest once §2a/§2b
+  ship. Do not label it non-destructive while it still overwrites; the copy and the behavior land together.
+- This generalizes: any action button whose effect isn't obvious (especially ones that touch what the player
+  wrote) deserves a one-line "here's what happens" beside it. Weave is the instance; the principle is
+  "no destructive-looking button without a plain description of what it does." Worth a light pass for other
+  such buttons, but Weave is the one to fix now.
+
 ## §3 — Why this matters
 Character creation is the first real authorship moment; a button that silently overwrites a player's typed
 intent teaches them not to trust the tool at the exact moment they're investing in the character. Making

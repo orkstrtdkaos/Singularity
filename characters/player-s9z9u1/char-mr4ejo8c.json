@@ -6,7 +6,7 @@
   "origin": "valley",
   "background": "craftsman",
   "level": 10,
-  "xp": 971,
+  "xp": 976,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -58,13 +58,13 @@
     }
   ],
   "alignment": {
-    "concrete_abstract": 0.22945277913528728,
+    "concrete_abstract": 0.23798014017852293,
     "death_life": 0.1059612828125,
     "violence_peace": 0.32649243243214565,
     "chaos_order": 0.3082724402773745,
     "emotional_logical": 0.0005857454344338799,
     "falsehood_truth": 0.45081103503739184,
-    "mechanical_spiritual": 0.4067731572380012,
+    "mechanical_spiritual": 0.4164344993761011,
     "demonic_angelic": 0.1272314375,
     "dark_light": 0.13885334374999997,
     "space_time": -0.005676249999999997,
@@ -76,7 +76,7 @@
   "maxHealth": 70,
   "health": 70,
   "maxEnergy": 145,
-  "energy": 80,
+  "energy": 76,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -229,7 +229,93 @@
       "weight": 2,
       "spread": [
         "valley.harmonic_heights",
-        "valley.radiant_plateau"
+        "valley.radiant_plateau",
+        "mason.bedrock",
+        "ashwarden.cairnhold",
+        "seraphic.choirheight",
+        "figurist.cloudform",
+        "domain.deepwood",
+        "blazeborn.glasshome",
+        "valley.greywater_stilts",
+        "rootkin.grovehome",
+        "valley.kestrels_roost",
+        "valley.old_switchback",
+        "enginewright.pressureholt",
+        "unspooling.spindrift",
+        "valley.sunken_choir",
+        "abyssal.halls",
+        "syllogist.axiom",
+        "center.gate",
+        "abyssal.gate",
+        "blazeborn.blaze",
+        "domain.blocklands",
+        "syllogist.bloodless",
+        "wright.ceaseless",
+        "churnfolk.edge",
+        "unmaker.clearing",
+        "somatic.cogitarium",
+        "center.crossing",
+        "figurist.works",
+        "verist.flensing",
+        "somatic.temple",
+        "wright.forge",
+        "hourkeeper.archive",
+        "enginewright.verge",
+        "unspooling.gralloch",
+        "lattice.grand",
+        "center.coliseum",
+        "enginewright.engine",
+        "rootkin.greenward",
+        "threnodist.griefhouse",
+        "wright.cathedral",
+        "veilwright.hall",
+        "umbral.harborward",
+        "rootkin.heartroot",
+        "ashwarden.hollowing",
+        "center.markets",
+        "veilwright.court",
+        "numinous.hermitage",
+        "umbral.market",
+        "veilwright.lastmask",
+        "mason.leaden",
+        "blazeborn.lensward",
+        "ashwarden.long_grey",
+        "horizon.longspan",
+        "riven.marchward",
+        "abyssal.maw",
+        "seraphic.mercyhouse",
+        "somatic.middleway",
+        "numinous.numen",
+        "syllogist.proofhalls",
+        "rootkin.eaves",
+        "ashwarden.quiet_ground",
+        "center.quiethouse",
+        "riven.redline",
+        "unmaker.scour",
+        "unmaker.scouring",
+        "enginewright.serviceways",
+        "hourkeeper.slowhour",
+        "rootkin.orchard",
+        "umbral.stair",
+        "riven.stillhold",
+        "hourkeeper.stopped",
+        "numinous.thinning",
+        "verist.toldground",
+        "verist.stone",
+        "umbral.underlight",
+        "seraphic.unfallen",
+        "horizon.unlanded",
+        "umbral.unlit",
+        "lattice.unplanned",
+        "figurist.untethered",
+        "horizon.wayhouse",
+        "mason.weighingyard",
+        "threnodist.deep",
+        "unspooling.wend",
+        "valley.thornwake_glade",
+        "lattice.tier7",
+        "unspooling.tumbledown",
+        "threnodist.wellspring"
       ]
     },
     {
@@ -245,7 +331,93 @@
       "weight": 2,
       "spread": [
         "valley.harmonic_heights",
-        "valley.radiant_plateau"
+        "valley.radiant_plateau",
+        "mason.bedrock",
+        "ashwarden.cairnhold",
+        "seraphic.choirheight",
+        "figurist.cloudform",
+        "domain.deepwood",
+        "blazeborn.glasshome",
+        "valley.greywater_stilts",
+        "rootkin.grovehome",
+        "valley.kestrels_roost",
+        "valley.old_switchback",
+        "enginewright.pressureholt",
+        "unspooling.spindrift",
+        "valley.sunken_choir",
+        "abyssal.halls",
+        "syllogist.axiom",
+        "center.gate",
+        "abyssal.gate",
+        "blazeborn.blaze",
+        "domain.blocklands",
+        "syllogist.bloodless",
+        "wright.ceaseless",
+        "churnfolk.edge",
+        "unmaker.clearing",
+        "somatic.cogitarium",
+        "center.crossing",
+        "figurist.works",
+        "verist.flensing",
+        "somatic.temple",
+        "wright.forge",
+        "hourkeeper.archive",
+        "enginewright.verge",
+        "unspooling.gralloch",
+        "lattice.grand",
+        "center.coliseum",
+        "enginewright.engine",
+        "rootkin.greenward",
+        "threnodist.griefhouse",
+        "wright.cathedral",
+        "veilwright.hall",
+        "umbral.harborward",
+        "rootkin.heartroot",
+        "ashwarden.hollowing",
+        "center.markets",
+        "veilwright.court",
+        "numinous.hermitage",
+        "umbral.market",
+        "veilwright.lastmask",
+        "mason.leaden",
+        "blazeborn.lensward",
+        "ashwarden.long_grey",
+        "horizon.longspan",
+        "riven.marchward",
+        "abyssal.maw",
+        "seraphic.mercyhouse",
+        "somatic.middleway",
+        "numinous.numen",
+        "syllogist.proofhalls",
+        "rootkin.eaves",
+        "ashwarden.quiet_ground",
+        "center.quiethouse",
+        "riven.redline",
+        "unmaker.scour",
+        "unmaker.scouring",
+        "enginewright.serviceways",
+        "hourkeeper.slowhour",
+        "rootkin.orchard",
+        "umbral.stair",
+        "riven.stillhold",
+        "hourkeeper.stopped",
+        "numinous.thinning",
+        "verist.toldground",
+        "verist.stone",
+        "umbral.underlight",
+        "seraphic.unfallen",
+        "horizon.unlanded",
+        "umbral.unlit",
+        "lattice.unplanned",
+        "figurist.untethered",
+        "horizon.wayhouse",
+        "mason.weighingyard",
+        "threnodist.deep",
+        "unspooling.wend",
+        "valley.thornwake_glade",
+        "lattice.tier7",
+        "unspooling.tumbledown",
+        "threnodist.wellspring"
       ]
     },
     {
@@ -261,7 +433,93 @@
       "weight": 2,
       "spread": [
         "valley.harmonic_heights",
-        "valley.radiant_plateau"
+        "valley.radiant_plateau",
+        "mason.bedrock",
+        "ashwarden.cairnhold",
+        "seraphic.choirheight",
+        "figurist.cloudform",
+        "domain.deepwood",
+        "blazeborn.glasshome",
+        "valley.greywater_stilts",
+        "rootkin.grovehome",
+        "valley.kestrels_roost",
+        "valley.old_switchback",
+        "enginewright.pressureholt",
+        "unspooling.spindrift",
+        "valley.sunken_choir",
+        "abyssal.halls",
+        "syllogist.axiom",
+        "center.gate",
+        "abyssal.gate",
+        "blazeborn.blaze",
+        "domain.blocklands",
+        "syllogist.bloodless",
+        "wright.ceaseless",
+        "churnfolk.edge",
+        "unmaker.clearing",
+        "somatic.cogitarium",
+        "center.crossing",
+        "figurist.works",
+        "verist.flensing",
+        "somatic.temple",
+        "wright.forge",
+        "hourkeeper.archive",
+        "enginewright.verge",
+        "unspooling.gralloch",
+        "lattice.grand",
+        "center.coliseum",
+        "enginewright.engine",
+        "rootkin.greenward",
+        "threnodist.griefhouse",
+        "wright.cathedral",
+        "veilwright.hall",
+        "umbral.harborward",
+        "rootkin.heartroot",
+        "ashwarden.hollowing",
+        "center.markets",
+        "veilwright.court",
+        "numinous.hermitage",
+        "umbral.market",
+        "veilwright.lastmask",
+        "mason.leaden",
+        "blazeborn.lensward",
+        "ashwarden.long_grey",
+        "horizon.longspan",
+        "riven.marchward",
+        "abyssal.maw",
+        "seraphic.mercyhouse",
+        "somatic.middleway",
+        "numinous.numen",
+        "syllogist.proofhalls",
+        "rootkin.eaves",
+        "ashwarden.quiet_ground",
+        "center.quiethouse",
+        "riven.redline",
+        "unmaker.scour",
+        "unmaker.scouring",
+        "enginewright.serviceways",
+        "hourkeeper.slowhour",
+        "rootkin.orchard",
+        "umbral.stair",
+        "riven.stillhold",
+        "hourkeeper.stopped",
+        "numinous.thinning",
+        "verist.toldground",
+        "verist.stone",
+        "umbral.underlight",
+        "seraphic.unfallen",
+        "horizon.unlanded",
+        "umbral.unlit",
+        "lattice.unplanned",
+        "figurist.untethered",
+        "horizon.wayhouse",
+        "mason.weighingyard",
+        "threnodist.deep",
+        "unspooling.wend",
+        "valley.thornwake_glade",
+        "lattice.tier7",
+        "unspooling.tumbledown",
+        "threnodist.wellspring"
       ]
     },
     {
@@ -325,7 +583,93 @@
       "spread": [
         "valley.millbrook",
         "valley.harmonic_heights",
-        "valley.radiant_plateau"
+        "valley.radiant_plateau",
+        "mason.bedrock",
+        "ashwarden.cairnhold",
+        "seraphic.choirheight",
+        "figurist.cloudform",
+        "domain.deepwood",
+        "blazeborn.glasshome",
+        "valley.greywater_stilts",
+        "rootkin.grovehome",
+        "valley.kestrels_roost",
+        "valley.old_switchback",
+        "enginewright.pressureholt",
+        "unspooling.spindrift",
+        "valley.sunken_choir",
+        "abyssal.halls",
+        "syllogist.axiom",
+        "center.gate",
+        "abyssal.gate",
+        "blazeborn.blaze",
+        "domain.blocklands",
+        "syllogist.bloodless",
+        "wright.ceaseless",
+        "churnfolk.edge",
+        "unmaker.clearing",
+        "somatic.cogitarium",
+        "center.crossing",
+        "figurist.works",
+        "verist.flensing",
+        "somatic.temple",
+        "wright.forge",
+        "hourkeeper.archive",
+        "enginewright.verge",
+        "unspooling.gralloch",
+        "lattice.grand",
+        "center.coliseum",
+        "enginewright.engine",
+        "rootkin.greenward",
+        "threnodist.griefhouse",
+        "wright.cathedral",
+        "veilwright.hall",
+        "umbral.harborward",
+        "rootkin.heartroot",
+        "ashwarden.hollowing",
+        "center.markets",
+        "veilwright.court",
+        "numinous.hermitage",
+        "umbral.market",
+        "veilwright.lastmask",
+        "mason.leaden",
+        "blazeborn.lensward",
+        "ashwarden.long_grey",
+        "horizon.longspan",
+        "riven.marchward",
+        "abyssal.maw",
+        "seraphic.mercyhouse",
+        "somatic.middleway",
+        "numinous.numen",
+        "syllogist.proofhalls",
+        "rootkin.eaves",
+        "ashwarden.quiet_ground",
+        "center.quiethouse",
+        "riven.redline",
+        "unmaker.scour",
+        "unmaker.scouring",
+        "enginewright.serviceways",
+        "hourkeeper.slowhour",
+        "rootkin.orchard",
+        "umbral.stair",
+        "riven.stillhold",
+        "hourkeeper.stopped",
+        "numinous.thinning",
+        "verist.toldground",
+        "verist.stone",
+        "umbral.underlight",
+        "seraphic.unfallen",
+        "horizon.unlanded",
+        "umbral.unlit",
+        "lattice.unplanned",
+        "figurist.untethered",
+        "horizon.wayhouse",
+        "mason.weighingyard",
+        "threnodist.deep",
+        "unspooling.wend",
+        "valley.thornwake_glade",
+        "lattice.tier7",
+        "unspooling.tumbledown",
+        "threnodist.wellspring"
       ],
       "_bonusApplied": 0.25,
       "day": 4
@@ -341,7 +685,97 @@
         "diplomacy"
       ],
       "weight": 2,
-      "spread": [],
+      "spread": [
+        "valley.millbrook",
+        "mason.bedrock",
+        "ashwarden.cairnhold",
+        "seraphic.choirheight",
+        "figurist.cloudform",
+        "domain.deepwood",
+        "blazeborn.glasshome",
+        "valley.greywater_stilts",
+        "rootkin.grovehome",
+        "valley.harmonic_heights",
+        "valley.kestrels_roost",
+        "valley.old_switchback",
+        "enginewright.pressureholt",
+        "valley.radiant_plateau",
+        "unspooling.spindrift",
+        "valley.sunken_choir",
+        "abyssal.halls",
+        "syllogist.axiom",
+        "center.gate",
+        "abyssal.gate",
+        "blazeborn.blaze",
+        "domain.blocklands",
+        "syllogist.bloodless",
+        "wright.ceaseless",
+        "churnfolk.edge",
+        "unmaker.clearing",
+        "somatic.cogitarium",
+        "center.crossing",
+        "figurist.works",
+        "verist.flensing",
+        "somatic.temple",
+        "wright.forge",
+        "hourkeeper.archive",
+        "enginewright.verge",
+        "unspooling.gralloch",
+        "lattice.grand",
+        "center.coliseum",
+        "enginewright.engine",
+        "rootkin.greenward",
+        "threnodist.griefhouse",
+        "wright.cathedral",
+        "veilwright.hall",
+        "umbral.harborward",
+        "rootkin.heartroot",
+        "ashwarden.hollowing",
+        "center.markets",
+        "veilwright.court",
+        "numinous.hermitage",
+        "umbral.market",
+        "veilwright.lastmask",
+        "mason.leaden",
+        "blazeborn.lensward",
+        "ashwarden.long_grey",
+        "horizon.longspan",
+        "riven.marchward",
+        "abyssal.maw",
+        "seraphic.mercyhouse",
+        "somatic.middleway",
+        "numinous.numen",
+        "syllogist.proofhalls",
+        "rootkin.eaves",
+        "ashwarden.quiet_ground",
+        "center.quiethouse",
+        "riven.redline",
+        "unmaker.scour",
+        "unmaker.scouring",
+        "enginewright.serviceways",
+        "hourkeeper.slowhour",
+        "rootkin.orchard",
+        "umbral.stair",
+        "riven.stillhold",
+        "hourkeeper.stopped",
+        "numinous.thinning",
+        "verist.toldground",
+        "verist.stone",
+        "umbral.underlight",
+        "seraphic.unfallen",
+        "horizon.unlanded",
+        "umbral.unlit",
+        "lattice.unplanned",
+        "figurist.untethered",
+        "horizon.wayhouse",
+        "mason.weighingyard",
+        "threnodist.deep",
+        "unspooling.wend",
+        "valley.thornwake_glade",
+        "lattice.tier7",
+        "unspooling.tumbledown",
+        "threnodist.wellspring"
+      ],
       "_bonusApplied": 0.25,
       "day": 6
     },
@@ -550,166 +984,152 @@
         "player": "Hold still and let Teva name what she feels — her mark is in live correspondence with this place; let her read it first",
         "summary": "Teva reads the threshold with her bare hand — 'held ready, not sealed' — and Aevi adds: the pressure is outward, not in. What lies beyond wants to be received.",
         "narration": "You step back from the Waystaff and give Teva the space. Not a word — just the shift of your weight and your hand leaving the staff's grip. She understands.\n\nShe sets her palm flat against the threshold surface. Not the Waystaff's tip, not a tool — her bare hand, the way you might press an ear to a door. Her eyes close. The motes at your shoulder brighten a little, then steady, watching.\n\nFor a long moment, nothing. Then Teva breathes in slowly, and when she speaks, her voice is quiet and unhurried, the voice of someone translating something still arriving.\n\n'It is not sealed,' she says. 'That is the wrong word. Sealed means closed against entry. This is —' She pauses, searching. 'This is held ready. Like a door on a latch, not a door behind a bar. The mark in me says —' She presses her hand slightly firmer. 'It says breathe out. Like before you open something heavy. Like the chamber is asking whether we are prepared to receive what comes through, not whether we have permission to enter.'\n\nAevi speaks then, a soft four words from just behind your right ear. 'The pressure is outward,' Aevi says. 'Not in — out. What is beyond wants to be received, not passed.' A pause. 'That is different from what I expected.'"
+      },
+      {
+        "player": "Open the threshold — breathe out as Teva said, plant the Waystaff's grip, and receive what comes through",
+        "summary": "The threshold opened — not as a door but as a tide reversing; what lay beyond came through to meet them, ancient and awake, and Aevi named it: aware again.",
+        "narration": "You breathe out. It is the simplest thing you have done all morning — a slow, deliberate exhale, the way Teva named it, the way the mark in her tissue named it before she did. Then you plant the Waystaff's grip-end against the floor, steady your weight over it, and receive.\n\nThe threshold does not open the way a door opens. There is no sound, no movement of air, no crack of light at a seam. What happens is quieter than that. The gathering quality Aevi named — the way the field is received and held — reverses its direction, gently, the way a tide reverses. What was holding now releases. The designed silence turns outward, and something on the far side of the threshold comes through to meet you.\n\nIt arrives in the Waystaff's nodes first — a frequency older than the four-second count, lower, slower, the way the bedrock of a mountain is lower and slower than the water running over it. Then it is in your hands on the grip, and then it is simply present, the way the warmth in the chamber floor was present: not dramatic, not urgent, but unmistakably awake. Teva makes a small, sharp sound behind you — not fear. Recognition. Her mark has answered.\n\nAevi speaks from your right shoulder, its motes pressed close and very bright. 'It is aware of us,' it says. 'Not newly — the word I want is again.'"
       }
     ],
     "lastTurn": {
-      "narration": "You step back from the Waystaff and give Teva the space. Not a word — just the shift of your weight and your hand leaving the staff's grip. She understands.\n\nShe sets her palm flat against the threshold surface. Not the Waystaff's tip, not a tool — her bare hand, the way you might press an ear to a door. Her eyes close. The motes at your shoulder brighten a little, then steady, watching.\n\nFor a long moment, nothing. Then Teva breathes in slowly, and when she speaks, her voice is quiet and unhurried, the voice of someone translating something still arriving.\n\n'It is not sealed,' she says. 'That is the wrong word. Sealed means closed against entry. This is —' She pauses, searching. 'This is held ready. Like a door on a latch, not a door behind a bar. The mark in me says —' She presses her hand slightly firmer. 'It says breathe out. Like before you open something heavy. Like the chamber is asking whether we are prepared to receive what comes through, not whether we have permission to enter.'\n\nAevi speaks then, a soft four words from just behind your right ear. 'The pressure is outward,' Aevi says. 'Not in — out. What is beyond wants to be received, not passed.' A pause. 'That is different from what I expected.'",
-      "sceneSummary": "Teva reads the threshold with her bare hand — 'held ready, not sealed' — and Aevi adds: the pressure is outward, not in. What lies beyond wants to be received.",
+      "narration": "You breathe out. It is the simplest thing you have done all morning — a slow, deliberate exhale, the way Teva named it, the way the mark in her tissue named it before she did. Then you plant the Waystaff's grip-end against the floor, steady your weight over it, and receive.\n\nThe threshold does not open the way a door opens. There is no sound, no movement of air, no crack of light at a seam. What happens is quieter than that. The gathering quality Aevi named — the way the field is received and held — reverses its direction, gently, the way a tide reverses. What was holding now releases. The designed silence turns outward, and something on the far side of the threshold comes through to meet you.\n\nIt arrives in the Waystaff's nodes first — a frequency older than the four-second count, lower, slower, the way the bedrock of a mountain is lower and slower than the water running over it. Then it is in your hands on the grip, and then it is simply present, the way the warmth in the chamber floor was present: not dramatic, not urgent, but unmistakably awake. Teva makes a small, sharp sound behind you — not fear. Recognition. Her mark has answered.\n\nAevi speaks from your right shoulder, its motes pressed close and very bright. 'It is aware of us,' it says. 'Not newly — the word I want is again.'",
+      "sceneSummary": "The threshold opened — not as a door but as a tide reversing; what lay beyond came through to meet them, ancient and awake, and Aevi named it: aware again.",
       "choices": [
         {
-          "label": "Open the threshold — breathe out as Teva said, plant the Waystaff's grip, and receive what comes through",
+          "label": "Hold the contact — let what came through find its own ground before you move or speak",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "mechanical_spiritual": 0.6,
-            "concrete_abstract": 0.4
-          },
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
-            "devote",
-            "careful"
+            "careful",
+            "sustain"
           ],
-          "abilityId": "sonic_resonance",
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Ask Teva what 'prepared to receive' means to her mark — let her finish reading before you act",
+          "label": "Ask Aevi what it means by 'again' — the motes know something they haven't named yet",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "emotional_logical": -0.2
-          },
           "difficulty": 0,
           "intentTags": [
             "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Use Resonant Sight through the Waystaff one more time — read the threshold's internal structure before opening it",
-          "attribute": "practical",
-          "subAttribute": "craft",
-          "axes": {
-            "concrete_abstract": 0.3
-          },
+          "label": "Step forward through the threshold — the pressure was always outward; the threshold is now open",
+          "attribute": "physical",
+          "subAttribute": "agility",
           "difficulty": 15,
           "intentTags": [
-            "study",
-            "careful"
+            "travel",
+            "risky"
           ],
-          "abilityId": "braid_prism_sight_sonic_resonance",
-          "energyCost": null,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         },
         {
-          "label": "Step back and name aloud what the three of you know before going further — a last accounting before the door opens",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "axes": {
-            "chaos_order": 0.3,
-            "falsehood_truth": 0.3
-          },
+          "label": "Let Teva lead — her mark is in live correspondence with whatever just arrived; she is the most fluent reader in the party",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "plan"
+            "careful",
+            "help"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         }
       ],
+      "characterDeltas": {
+        "energy": -2
+      },
       "scene": {
-        "setting": "The seam passage northeast-by-east — single-file, older denser walls, no outside light. The Waystaff rests tip-against the sealed threshold, nodes pulse-dim. Dawn is happening somewhere far above; none of its light reaches here.",
+        "setting": "The seam passage northeast-by-east — single-file, older denser walls, no outside light. The Waystaff grip planted on the floor at the threshold. The threshold itself is no longer entirely closed — the gathering quality has reversed; a presence from the far side is now present here.",
         "npcsPresent": [
           {
             "name": "Teva",
-            "state": "Palm pressed flat against the threshold surface, eyes closed, still translating — the mark in her tissue speaking in real time."
+            "state": "Palm still near the threshold surface, eyes open now, having made a sound of recognition — her mark has answered"
           },
           {
             "name": "Aevi",
-            "state": "Motes steady and bright at Cellaceron's right shoulder, having just spoken: 'the pressure is outward, not in.'"
+            "state": "Motes pressed close at Cellaceron's right shoulder, very bright, having just spoken: 'It is aware of us — not newly. The word I want is again.'"
           }
         ],
         "objects": [
-          "Waystaff — tip resting against the threshold, nodes pulse-dim, field received and held",
-          "Sealed threshold — older, denser material, gathering quality confirmed",
+          "Waystaff — grip planted on the floor, nodes lit with an older slower frequency than the four-second count",
+          "Sealed threshold — no longer fully closed; the gathering quality has reversed direction",
           "Traveler's Pack — shouldered",
-          "Waterskin — in pack, diminished",
+          "Waterskin — in pack",
           "Bark-press paper (three sheets)",
           "Resonance crystals — four nodes in Waystaff lattice"
         ],
         "threads": [
-          "Teva: 'held ready, not sealed — breathe out, like before you open something heavy'",
-          "Aevi: 'the pressure is outward — what is beyond wants to be received, not passed'",
-          "The threshold's purpose is now partly legible: a holding-ready boundary, not a lock; the opening still untaken"
+          "Aevi: 'aware of us — not newly; the word I want is again' — what does Aevi know that it hasn't said?",
+          "Teva's mark answered the arrival — she recognized something",
+          "The threshold is open but the party has not yet stepped through",
+          "The frequency from beyond is lower and older than anything the chamber above produced"
         ]
       },
       "npcUpdates": [
         {
           "op": "update",
-          "npcId": "teva",
-          "name": "Teva",
-          "note": "Read the threshold with her bare hand — translated the mark's language: 'held ready, not sealed.' Named the opening posture: breathe out, like before you open something heavy.",
+          "npcId": "aevi",
+          "name": "Aevi",
+          "note": "Named the arriving presence as 'aware of us — not newly'; the word chosen was 'again'. Motes pressed close and very bright at the moment of contact.",
           "learned": [
-            "The threshold is not sealed against entry — it is held ready, like a door on a latch",
-            "The chamber asks whether the party is prepared to receive what comes through, not whether they have permission",
-            "The mark in her tissue says 'breathe out' at the threshold surface"
+            "What came through the threshold upon opening is aware of the party — not newly aware, but aware 'again', implying prior contact or recognition of some kind"
           ],
           "skillsObserved": [
-            "live-mark translation — reading the chamber's nanite correspondence through her own tissue in real time"
+            "recognition of a returning presence — distinguished 'newly aware' from 'aware again' with precision at the moment of threshold opening"
           ],
-          "status": "active",
-          "statusNote": "In the seam passage, palm on threshold, translating — steady and deliberate."
+          "statusNote": "At Cellaceron's right shoulder, very bright, having named the arriving presence as an old and renewed awareness"
         },
         {
           "op": "update",
-          "npcId": "aevi",
-          "name": "Aevi",
-          "note": "Named the threshold pressure as outward, not inward — corrected the expected assumption. 'What is beyond wants to be received, not passed.' Noted this was different from what it expected.",
+          "npcId": "teva",
+          "name": "Teva",
+          "note": "Made a small sharp sound of recognition — not fear — the moment the frequency came through. Her nanite mark answered involuntarily.",
           "learned": [
-            "The pressure beyond the threshold is outward — the space beyond is oriented toward being received, not containing something held back"
+            "Her mark is still in live correspondence with the space beyond the threshold — it recognized the arriving frequency before she could name it"
           ],
-          "skillsObserved": [
-            "pressure-direction read through gathered field — distinguished outward from inward without crossing the threshold"
-          ],
-          "status": "active",
-          "statusNote": "Bright and steady at Cellaceron's shoulder in the seam passage."
+          "statusNote": "Palm near threshold, eyes open, mark responding — the most fluent reader of what just arrived"
+        }
+      ],
+      "placeUpdates": [
+        {
+          "note": "Day 9 dawn: threshold opened — gathering quality reversed, older slower frequency came through from beyond. Party has not yet crossed. Aevi named the presence as aware 'again'.",
+          "subPlace": {
+            "name": "The Seam Passage — Threshold Open",
+            "parent": "harmonic_heights",
+            "note": "Threshold no longer closed — the tide has reversed; presence from beyond now present at the seam. Waystaff grip planted at floor. Party at the boundary, not yet through.",
+            "visited": true
+          }
         }
       ],
       "codexUpdates": [
         {
           "topic": "the-chamber-beyond-the-threshold",
-          "label": "The Chamber — Beyond the Threshold",
+          "label": "The Chamber Beyond the Threshold",
           "kind": "mystery",
-          "fact": "Day 9 dawn: Teva's bare-hand read at the threshold — 'held ready, not sealed.' The mark in her tissue names the posture as 'breathe out, like before you open something heavy.' Aevi confirms: the pressure is outward, not inward. What lies beyond wants to be received, not merely passed. The threshold is a holding-ready boundary, not a lock.",
+          "fact": "Day 9 dawn: threshold opened by breath-out and planted Waystaff. No sound, no light, no crack — the gathering quality simply reversed. An older, slower frequency than the four-second count came through. Aevi named it: 'aware of us — not newly. The word I want is again.' Teva's mark answered involuntarily.",
           "links": [
-            "second-river-rising",
-            "teva-anselvar-missing-apprentice",
             "teva-directional-interval-count",
+            "second-river-rising",
+            "aevi",
+            "the-chamber-beyond-the-threshold",
             "northern-alcove-camp",
-            "aevi"
+            "scored-mark-forward-alcove"
           ]
         },
         {
-          "topic": "teva-anselvar-missing-apprentice",
-          "label": "Teva Anselvar",
+          "topic": "aevi",
+          "label": "Aevi",
           "kind": "person",
-          "fact": "Day 9 dawn: translated the threshold through her nanite mark — 'held ready, not sealed.' The mark is still in live correspondence with this place, speaking a posture rather than a direction now.",
+          "entityId": "aevi",
+          "fact": "At the threshold opening, Aevi named the arriving presence as 'aware of us — not newly'; chose the word 'again'. This implies Aevi has encountered this presence before, or the presence has encountered Aevi — before the current expedition.",
           "links": [
             "the-chamber-beyond-the-threshold",
-            "teva-directional-interval-count",
-            "second-river-rising"
+            "second-river-rising",
+            "teva-directional-interval-count"
           ]
         }
       ],
@@ -717,38 +1137,49 @@
         {
           "op": "progress",
           "questId": "second-river-rising",
-          "note": "Teva reads the threshold as 'held ready, not sealed' — the pressure is outward; what lies beyond wants to be received. The opening is available. The party stands at the latch, not the bar."
+          "note": "Threshold opened — day 9 dawn. The older frequency came through and the presence named itself aware 'again'. The party stands at the open boundary, not yet through. The second river's source is on the far side of this door."
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "The threshold was opened on day 9 dawn by breath-out and planted Waystaff — the gathering quality reversed and an older, slower frequency came through from beyond. Aevi named it 'aware of us — not newly — again.' The threshold is now open; the party has not yet crossed.",
+          "subjectId": "the-chamber-beyond-the-threshold"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "Teva's threshold reading — a few minutes of stillness in the seam passage"
-      }
+        "why": "a slow careful breath and the moment of threshold opening"
+      },
+      "imagePrompt": "A single figure stands in a narrow stone passage, both hands on a staff planted upright on the floor, head bowed in a slow exhale. The walls are older and denser than dressed stone — dark, absorptive. At the figure's right shoulder, a tight cluster of teal motes burns very bright. Behind them, a young woman's palm is raised near the passage wall, eyes wide. Ahead: the threshold, and through it, a depth of darker space lit only by the staff's nodes glowing with a low, ancient frequency — blue-white tinged with something older, like starlight through water.",
+      "sceneEnded": false,
+      "momentArt": "https://image.pollinations.ai/prompt/A%20single%20figure%20stands%20in%20a%20narrow%20stone%20passage%2C%20both%20hands%20on%20a%20staff%20planted%20upright%20on%20the%20floor%2C%20head%20bowed%20in%20a%20slow%20exhale.%20The%20walls%20are%20older%20and%20denser%20than%20dressed%20stone%20%E2%80%94%20dark%2C%20absorptive.%20At%20the%20figure's%20right%20shoulder%2C%20a%20tight%20cluster%20of%20teal%20motes%20burns%20very%20bright.%20Behind%20them%2C%20a%20you%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=94702&nologo=true"
     },
     "sceneState": {
-      "setting": "The seam passage northeast-by-east — single-file, older denser walls, no outside light. The Waystaff rests tip-against the sealed threshold, nodes pulse-dim. Dawn is happening somewhere far above; none of its light reaches here.",
+      "setting": "The seam passage northeast-by-east — single-file, older denser walls, no outside light. The Waystaff grip planted on the floor at the threshold. The threshold itself is no longer entirely closed — the gathering quality has reversed; a presence from the far side is now present here.",
       "npcsPresent": [
         {
           "name": "Teva",
-          "state": "Palm pressed flat against the threshold surface, eyes closed, still translating — the mark in her tissue speaking in rea"
+          "state": "Palm still near the threshold surface, eyes open now, having made a sound of recognition — her mark has answered"
         },
         {
           "name": "Aevi",
-          "state": "Motes steady and bright at Cellaceron's right shoulder, having just spoken: 'the pressure is outward, not in.'"
+          "state": "Motes pressed close at Cellaceron's right shoulder, very bright, having just spoken: 'It is aware of us — not newly. The"
         }
       ],
       "objects": [
-        "Waystaff — tip resting against the threshold, nodes pulse-dim, field received an",
-        "Sealed threshold — older, denser material, gathering quality confirmed",
+        "Waystaff — grip planted on the floor, nodes lit with an older slower frequency t",
+        "Sealed threshold — no longer fully closed; the gathering quality has reversed di",
         "Traveler's Pack — shouldered",
-        "Waterskin — in pack, diminished",
+        "Waterskin — in pack",
         "Bark-press paper (three sheets)",
         "Resonance crystals — four nodes in Waystaff lattice"
       ],
       "threads": [
-        "Teva: 'held ready, not sealed — breathe out, like before you open something heavy'",
-        "Aevi: 'the pressure is outward — what is beyond wants to be received, not passed'",
-        "The threshold's purpose is now partly legible: a holding-ready boundary, not a lock; the opening still untaken"
+        "Aevi: 'aware of us — not newly; the word I want is again' — what does Aevi know that it hasn't said?",
+        "Teva's mark answered the arrival — she recognized something",
+        "The threshold is open but the party has not yet stepped through",
+        "The frequency from beyond is lower and older than anything the chamber above produced"
       ]
     }
   },
@@ -770,14 +1201,14 @@
       "locationId": null,
       "status": "active",
       "progress": [
-        "Waystaff planted at convergence point — chamber gathered attention and offered three paths: read the count in the wall-marks, receive orientation toward something, or hold. The preparation cycle's next step is now a choice.",
         "Wall-marks opened as a counted record from the convergence point — many eras, three hands, the same four-second interval throughout. The final grouping stops mid-count. Someone kept this place and then left before the count was done.",
         "The chamber's orientation offer confirmed northeast-by-east — through the seam and further. The direction Teva heard, the direction Resonant Sight named, and the direction the chamber points are now one.",
         "The chamber has shifted into a keeping-state after the third offer was accepted — it is no longer testing or orienting, but present. The seam below is the next move; the sealed threshold at its far end is what the chamber has been pointing toward.",
         "The chamber has received the acknowledgment of the departure-marker — the exchange is complete at five folds. The sealed threshold through the seam is the next threshold.",
         "Camp broken at the convergence point; party is now in the seam passage approaching the sealed threshold — the chamber has said what it could, the next answer is through what lies beyond.",
         "Threshold material confirmed as a gathering boundary, not a barrier — the Waystaff's field received and held rather than scattered. The other side has pressure. Teva's language: 'like a lung before it opens.'",
-        "Teva reads the threshold as 'held ready, not sealed' — the pressure is outward; what lies beyond wants to be received. The opening is available. The party stands at the latch, not the bar."
+        "Teva reads the threshold as 'held ready, not sealed' — the pressure is outward; what lies beyond wants to be received. The opening is available. The party stands at the latch, not the bar.",
+        "Threshold opened — day 9 dawn. The older frequency came through and the presence named itself aware 'again'. The party stands at the open boundary, not yet through. The second river's source is on the far side of this door."
       ],
       "startedAt": "2026-07-03T18:55:17.042Z"
     },
@@ -1024,7 +1455,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d9] Moved forward along the Waystaff grain toward the convergence point without being asked — drawn to it.",
         "[d9] Spoke through all four Waystaff nodes simultaneously at the convergence point — named three things the chamber can now offer: open the record, give orientation, or hold. Admitted it does not know what each costs.",
         "[d9] Named the wall-marks through the Waystaff — many eras, three tool-changes, consistent four-second interval, and a final grouping that stops mid-count.",
         "[d9] Named the chamber's orientation through the Waystaff nodes — northeast-by-east, not at the seam but through it; the seam is a passage and the destination is further.",
@@ -1033,32 +1463,33 @@
         "[d9] Named the completion of the count — four words, precisely timed, after Cellaceron's acknowledgment landed in the chamber's pulse.",
         "[d9] Left the Waystaff nodes last. Condensed tight at Cellaceron's shoulder — no words, but present and close.",
         "[d9] Named the threshold's silence as gathering rather than scattering — 'the field is received and held.' Motes compressed bright at the threshold.",
-        "[d9] Named the threshold pressure as outward, not inward — corrected the expected assumption. 'What is beyond wants to be received, not passed.' Noted this was different from what it expected."
+        "[d9] Named the threshold pressure as outward, not inward — corrected the expected assumption. 'What is beyond wants to be received, not passed.' Noted this was different from what it expected.",
+        "[d9] Named the arriving presence as 'aware of us — not newly'; the word chosen was 'again'. Motes pressed close and very bright at the moment of contact."
       ],
       "knownFacts": [
-        "Three options now available from the convergence point: record, orientation, or continued holding",
         "The wall-marks are a counted record spanning many eras — at least three different hands and tools; the interval between each group is the chamber's four-second count; the final grouping stops…",
         "The chamber's orientation points through the seam northeast-by-east — the seam is a passage, not the destination",
         "The material at the seam's far end absorbs the Resonant field without returning anything — Aevi reads this as designed silence, not natural interference",
         "The chamber has shifted from waiting to keeping — oriented toward what is already here rather than what comes next",
         "The count is complete — the chamber has received the acknowledgment of the departure-marker and did not deepen or test further.",
         "The threshold receives and holds the Resonant field rather than scattering it — the silence is a gathering property, not a barrier property",
-        "The pressure beyond the threshold is outward — the space beyond is oriented toward being received, not containing something held back"
+        "The pressure beyond the threshold is outward — the space beyond is oriented toward being received, not containing something held back",
+        "What came through the threshold upon opening is aware of the party — not newly aware, but aware 'again', implying prior contact or recognition of some kind"
       ],
       "skillsObserved": [
-        "self-reflection under pressure — named its own uncertainty p",
         "lattice-integration — distributed motes through a phononic c",
         "resonant speech — voice carried through crystal nodes rather",
         "recognition of a chamber state-shift — named it precisely in",
         "multi-temporal record analysis through the Waystaff lattice ",
-        "pressure-direction read through gathered field — distinguish"
+        "pressure-direction read through gathered field — distinguish",
+        "recognition of a returning presence — distinguished 'newly a"
       ],
       "status": "active",
       "lastSeen": {
         "locationId": "harmonic_heights_terrace",
         "day": 9
       },
-      "statusNote": "Bright and steady at Cellaceron's shoulder in the seam passage.",
+      "statusNote": "At Cellaceron's right shoulder, very bright, having named the arriving presence as an old and renewed awareness",
       "bondType": "platonic",
       "domains": {
         "primary": "harmonic"
@@ -1280,7 +1711,6 @@
     "harmonic_heights_terrace": {
       "visits": 1,
       "notes": [
-        "[d9] Day 9 dawn: fourth fold sent — chamber answered with a fifth, unprompted. All four Waystaff nodes fired simultaneously. Chamber has shifted from testing to recognition. Teva's mark responded in real time.",
         "[d9] Day 9 dawn: fifth fold offered and received — chamber settled into a held recognition state, five-fold pulse steady, no further deepening. Teva's mark quieted at the same moment. The exchange is no longer evaluative; the preparation cycle has acknowledged arrival.",
         "[d9] Braided stone-read confirmed: heat-channels in the floor converge at a point a few paces short of chamber center — a position marker, light-memory present for centuries. Wall-marks are a long deliberate count in the absorptive face — many strikes, many eras, no clear tonic.",
         "[d9] Cellaceron stepped to the convergence point on day 9 dawn and planted the Waystaff's grip-end there — the chamber's attention gathered inward and Aevi named three available offers: read the count, receive orientation, or hold.",
@@ -1291,7 +1721,8 @@
         "[d9] Final diagonal wall-mark read by Keen Appraisal — short iron punch, leaving-posture, deliberate emphasis, same hand as last grouping, newer than prior marks. Teva named it: 'they counted down to the end and then marked the door.'",
         "[d9] Day 9 dawn: departure-marker acknowledged to the chamber in the four-second pulse; chamber did not elaborate or deepen. Aevi named the count complete. The exchange at the convergence point is finished; the sealed threshold is the next move.",
         "[d9] Camp at convergence point broken day 9 dawn — Waystaff lifted, nodes steady, party moved northeast-by-east into the seam passage. Chamber warmth persisted briefly after departure.",
-        "[d9] Day 9 dawn: Waystaff laid against the sealed threshold — field received and held, not scattered. Threshold confirmed as a gathering boundary, not a barrier. Aevi named 'pressure beyond.' Teva's mark responded involuntarily with the image 'a lung before it opens.'"
+        "[d9] Day 9 dawn: Waystaff laid against the sealed threshold — field received and held, not scattered. Threshold confirmed as a gathering boundary, not a barrier. Aevi named 'pressure beyond.' Teva's mark responded involuntarily with the image 'a lung before it opens.'",
+        "[d9] Day 9 dawn: threshold opened — gathering quality reversed, older slower frequency came through from beyond. Party has not yet crossed. Aevi named the presence as aware 'again'."
       ],
       "flags": {
         "resonance_niche_tone_event": "day2_night_second_river_frequency",
@@ -1446,6 +1877,14 @@
           "visited": true,
           "note": "The point of first contact with the sealed threshold: Waystaff tip resting against older, denser material that receives the Resonant field and holds it. No echo. Slight gathering quality to the…",
           "parentUnresolved": "Harmonic Heights Lower Terrace"
+        },
+        "the-seam-passage-threshold-open": {
+          "name": "The Seam Passage — Threshold Open",
+          "parentId": "harmonic_heights_terrace",
+          "day": 9,
+          "visited": true,
+          "note": "Threshold no longer closed — the tide has reversed; presence from beyond now present at the seam. Waystaff grip planted at floor. Party at the boundary, not yet through.",
+          "parentUnresolved": "harmonic_heights"
         }
       },
       "vectorsKnown": [
@@ -1458,35 +1897,19 @@
   },
   "worldState": {
     "schemaVersion": 1,
-    "lastTickDay": 8,
+    "lastTickDay": 9,
     "eventStages": {
       "water_crisis": {
-        "stage": 1,
-        "sinceDay": 2
+        "stage": 2,
+        "sinceDay": 13
       }
     },
-    "spectrumDrift": {},
+    "spectrumDrift": {
+      "death_life": -0.1,
+      "violence_peace": -0.1,
+      "falsehood_truth": -0.05
+    },
     "news": [
-      {
-        "day": 3,
-        "text": "Word has spread beyond millbrook: Negotiated equal footing with Elder Senna over the river contamination — turned a confrontation into a mutual disclosure."
-      },
-      {
-        "day": 3,
-        "text": "Word has spread beyond millbrook: Negotiated an independent surveyor compact with Elder Senna to investigate the upstream contamination without guild affiliation."
-      },
-      {
-        "day": 3,
-        "text": "Word has spread beyond millbrook: Drew out a witness account that Senna's institutional channels had missed — uncredentialed Heights figure adding something to the foothill seeps three nights prior."
-      },
-      {
-        "day": 7,
-        "text": "Word has spread beyond harmonic_heights: Completed a resonance-crystal translator staff — sleeve, nodes, and lattice alignment all grain-locked and field-confirmed — working from a scratch design and warden-store materials"
-      },
-      {
-        "day": 8,
-        "text": "Word reaches you: Usnea named the coordination between Fendt's pour, the Precursor vent aperture signature, and the six-count in plain speech before Millbrook's assembled elder panel — three witnesses from three vantag ("
-      },
       {
         "day": 8,
         "text": "Word reaches you: Sela crossed the yard and entered the common house threshold before Dresh's first word — the youngest witness is now inside the room's deliberation. (near millbrook)"
@@ -1547,14 +1970,63 @@
         "day": 8,
         "worldDay": 19,
         "text": "Word reaches you: Compound rune-work — Wither and The Raised Thing — bound an eleven-year rising in the old Ashwarden warden post at Raven's Home. (near gen-ashwarden-march-road)"
+      },
+      {
+        "day": 9,
+        "worldDay": 23,
+        "text": "Word has spread beyond millbrook: Negotiated equal footing with Elder Senna over the river contamination — turned a confrontation into a mutual disclosure."
+      },
+      {
+        "day": 9,
+        "worldDay": 23,
+        "text": "Word has spread beyond millbrook: Negotiated an independent surveyor compact with Elder Senna to investigate the upstream contamination without guild affiliation."
+      },
+      {
+        "day": 9,
+        "worldDay": 23,
+        "text": "Word has spread beyond millbrook: Drew out a witness account that Senna's institutional channels had missed — uncredentialed Heights figure adding something to the foothill seeps three nights prior."
+      },
+      {
+        "day": 9,
+        "worldDay": 23,
+        "text": "Word has spread beyond harmonic_heights: Completed a resonance-crystal translator staff — sleeve, nodes, and lattice alignment all grain-locked and field-confirmed — working from a scratch design and warden-store materials"
+      },
+      {
+        "day": 9,
+        "worldDay": 23,
+        "text": "Word has spread beyond harmonic-heights: Returned missing apprentice Teva safely to Warden Maren at the Lower Terrace bulletin board"
+      },
+      {
+        "day": 9,
+        "worldDay": 23,
+        "text": "The Water Crisis stands at First Sickness across the valley: Upstream fisher families fall ill. Boiling water becomes universal. Harmonic and Radiant leaders trade public accusations."
+      },
+      {
+        "day": 9,
+        "worldDay": 23,
+        "text": "Elder Senna: Senna quietly gathered the other two elders after the evening meal and proposed formalizing the watch rotation at the docks, citing recent unease — the others agreed to discuss it tomorrow."
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-22T01:15:58.913Z",
-    "lastTickWorldDay": 22,
-    "lastCanonWorldDay": 22,
-    "lastGenCount": 529,
-    "turnsSinceOffer": 27
+    "lastSharedReadAt": "2026-07-23T03:35:03.517Z",
+    "lastTickWorldDay": 23,
+    "lastCanonWorldDay": 23,
+    "lastGenCount": 555,
+    "turnsSinceOffer": 28,
+    "wantProgress": {
+      "elder-senna": {
+        "progress": 1,
+        "status": "active",
+        "updatedWorldDay": 23,
+        "lastOutcome": "progress"
+      },
+      "sorel": {
+        "progress": 0,
+        "status": "active",
+        "updatedWorldDay": 23,
+        "lastOutcome": "stall"
+      }
+    }
   },
   "subAttributes": {
     "strength": 2,
@@ -1679,7 +2151,6 @@
         "label": "The Chamber's Question",
         "kind": "mystery",
         "facts": [
-          "[d9] Day 9 dawn: braided stone-read (Prism Sight + Sonic Resonance) reveals heat-channels running in the pressed aggregate floor, converging at a point just short of center — a position marker, light-memory pooled there and still present after centuries. The inner absorptive face holds irregular…",
           "[d9] Day 9 dawn: Waystaff planted at the convergence point — the chamber's attention gathered inward toward the grip-end. Aevi named three things the chamber can now offer from this position: read the wall-marks' count directly, receive an orientation/direction, or allow the chamber to continue…",
           "[d9] Day 9 dawn: the wall-marks opened as a counted record from the convergence point — many eras, three distinct tools and hands, each group spaced at the chamber's four-second interval. The final grouping stops mid-count; its edges are still sharp. The last keeper left before finishing. The count was…",
           "[d9] Day 9 dawn: the chamber's second offer — orientation — confirmed northeast-by-east as the direction, but Aevi named it as pointing through the seam, not at it. The seam is a passage; the destination is further than the seam itself. The warmth in the floor leaned to confirm it.",
@@ -1690,7 +2161,8 @@
           "[d9] Day 9 dawn: the departure-marker acknowledged to the chamber in the four-second pulse — four, three, one-pressed-hard — and the chamber did not deepen or fold. The warmth held even. Aevi named it: the count is complete. The exchange is finished.",
           "[d9] Day 9 dawn: party entered the seam passage northeast-by-east. The threshold material is older and denser than the dressed-stone chamber. The Waystaff's field does not echo back from it — designed silence, not interference. Teva names the silence as not-empty.",
           "[d9] Day 9 dawn: Waystaff laid against the threshold — the field does not scatter or bend; it is received and stopped cleanly, like a palm pressed against a mid-ring bell. The silence gathers. Aevi: 'not a wall — a wall scatters; this holds.' The threshold marks a boundary between two kinds of space…",
-          "[d9] Day 9 dawn: Teva's bare-hand read at the threshold — 'held ready, not sealed.' The mark in her tissue names the posture as 'breathe out, like before you open something heavy.' Aevi confirms: the pressure is outward, not inward. What lies beyond wants to be received, not merely passed. The…"
+          "[d9] Day 9 dawn: Teva's bare-hand read at the threshold — 'held ready, not sealed.' The mark in her tissue names the posture as 'breathe out, like before you open something heavy.' Aevi confirms: the pressure is outward, not inward. What lies beyond wants to be received, not merely passed. The…",
+          "[d9] Day 9 dawn: threshold opened by breath-out and planted Waystaff. No sound, no light, no crack — the gathering quality simply reversed. An older, slower frequency than the four-second count came through. Aevi named it: 'aware of us — not newly. The word I want is again.' Teva's mark answered…"
         ],
         "links": [
           "scored-mark-forward-alcove",
@@ -1868,7 +2340,10 @@
           "[d8] Aevi named its shimmer-crossing recognition as involuntary, older than its own memory. Cellaceron answered that whatever it carries, it carried it here — and Aevi confirmed it was checking whether it ",
           "[d8] Prism Sight read Aevi's light-history at the shimmer crossing: in the instant of crossing, every mote oriented simultaneously toward northeast-by-east — not in sequence, all at once, as if remembering which direction home was.",
           "[d9] Aevi joined the Waystaff's lattice at dawn in the chamber and spoke through it — naming that it has known the chamber's pattern for longer than it has known Cellaceron, and that the chamber knows what that means even if Aevi does not yet.",
-          "[d9] Day 9 dawn: Aevi named the chamber as a preparation cycle for a return — and admitted it does not know whether it recognizes the thing itself, only the pattern. The distinction matters: pattern-memory and being-memory are separate in Aevi."
+          "[d9] Day 9 dawn: Aevi named the chamber as a preparation cycle for a return — and admitted it does not know whether it recognizes the thing itself, only the pattern. The distinction matters: pattern-memory and being-memory are separate in Aevi.",
+          "[d2] Companion intelligence, nanite-mote swarm",
+          "[d?] Kindled Chorus — The motes have brightened and learned to move as one — condensing into near-shapes when speaking, casting real light in the dark, humming harmonics that other nanite fields answer. Old — and less alone than before.",
+          "[d9] At the threshold opening, Aevi named the arriving presence as 'aware of us — not newly'; chose the word 'again'. This implies Aevi has encountered this presence before, or the presence has encountered Aevi — before the current expedition."
         ],
         "links": [
           "shimmer-crossing-boundary-condition",
@@ -1876,7 +2351,8 @@
           "northern-alcove-camp",
           "shimmer-crossing-shaped-boundary",
           "second-river-rising",
-          "teva-anselvar-missing-apprentice"
+          "teva-anselvar-missing-apprentice",
+          "teva-directional-interval-count"
         ],
         "aliases": [
           "Aevi — What It Carries",
@@ -1885,6 +2361,177 @@
         "createdDay": 8,
         "entityId": "aevi",
         "updatedDay": 9
+      },
+      "millbrook-elder-woman": {
+        "id": "millbrook-elder-woman",
+        "label": "Elder Woman",
+        "kind": "person",
+        "facts": [
+          "[d?] met in play"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": null,
+        "entityId": "millbrook-elder-woman",
+        "updatedDay": null
+      },
+      "brin-millbrook-child": {
+        "id": "brin-millbrook-child",
+        "label": "Brin Child",
+        "kind": "person",
+        "facts": [
+          "[d?] Millbrook child, dock-edge listener"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": null,
+        "entityId": "brin-millbrook-child",
+        "updatedDay": null
+      },
+      "maret": {
+        "id": "maret",
+        "label": "Maret",
+        "kind": "person",
+        "facts": [
+          "[d?] met in play"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": null,
+        "entityId": "maret",
+        "updatedDay": null
+      },
+      "elder-senna": {
+        "id": "elder-senna",
+        "label": "Elder Senna",
+        "kind": "person",
+        "facts": [
+          "[d?] Village elder, Millbrook",
+          "[d9] [while away] Senna quietly gathered the other two elders after the evening meal and proposed formalizing the watch rotation at the docks, citing recent unease — the others agreed to discuss it tomorrow."
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": null,
+        "entityId": "elder-senna",
+        "updatedDay": 9
+      },
+      "channel-worker-young": {
+        "id": "channel-worker-young",
+        "label": "Channel Worker Young",
+        "kind": "person",
+        "facts": [
+          "[d?] met in play"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": null,
+        "entityId": "channel-worker-young",
+        "updatedDay": null
+      },
+      "davan": {
+        "id": "davan",
+        "label": "Davan",
+        "kind": "person",
+        "facts": [
+          "[d?] met in play"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": null,
+        "entityId": "davan",
+        "updatedDay": null
+      },
+      "sorel": {
+        "id": "sorel",
+        "label": "Sorel",
+        "kind": "person",
+        "facts": [
+          "[d2] Wintering archivist from the Radiant Plateau",
+          "[d9] [while away] Sorel spent the day reorganizing archive crates in the cold storage loft, finding nothing new but keeping the work methodical and close."
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 2,
+        "entityId": "sorel",
+        "updatedDay": 9
+      },
+      "waystation-runner-heights": {
+        "id": "waystation-runner-heights",
+        "label": "Heights Waystation Runner",
+        "kind": "person",
+        "facts": [
+          "[d3] Waystation duty runner, Harmonic Heights Lower Terrace"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 3,
+        "entityId": "waystation-runner-heights",
+        "updatedDay": 3
+      },
+      "tuning-warden-lower-terrace": {
+        "id": "tuning-warden-lower-terrace",
+        "label": "Maren",
+        "kind": "person",
+        "facts": [
+          "[d3] Tuning-warden, Harmonic Heights Lower Terrace"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 3,
+        "entityId": "tuning-warden-lower-terrace",
+        "updatedDay": 3
+      },
+      "waystation-morning-runner": {
+        "id": "waystation-morning-runner",
+        "label": "Waystation morning runner",
+        "kind": "person",
+        "facts": [
+          "[d6] Waystation desk duty, Harmonic Heights Lower Terrace — morning shift"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 6,
+        "entityId": "waystation-morning-runner",
+        "updatedDay": 6
+      },
+      "farren": {
+        "id": "farren",
+        "label": "Farren",
+        "kind": "person",
+        "facts": [
+          "[d6] Retired acoustic geometry specialist, Second Terrace, Harmonic Heights"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 6,
+        "entityId": "farren",
+        "updatedDay": 6
+      },
+      "millbrook": {
+        "id": "millbrook",
+        "label": "Millbrook",
+        "kind": "place",
+        "facts": [
+          "[d?] you have walked here"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": null,
+        "entityId": "millbrook",
+        "updatedDay": null
+      },
+      "harmonic-heights-terrace": {
+        "id": "harmonic-heights-terrace",
+        "label": "Harmonic Heights — Lower Terrace",
+        "kind": "place",
+        "facts": [
+          "[d2] you have walked here"
+        ],
+        "links": [],
+        "aliases": [],
+        "createdDay": 2,
+        "entityId": "harmonic-heights-terrace",
+        "updatedDay": 2
       }
     },
     "notSame": [
@@ -1911,7 +2558,7 @@
     },
     "braid_prism_sight_sonic_resonance": {
       "id": "braid_prism_sight_sonic_resonance",
-      "name": "Prism Sight × Sonic Resonance",
+      "name": "Shatterlight",
       "tradition": "radiant_folk",
       "powerSystem": "radiant_folk",
       "levelReq": 4,
@@ -1922,52 +2569,56 @@
         "bind",
         "break",
         "move",
-        "strike"
+        "strike",
+        "open"
       ],
       "harmRung": "none",
       "effectTags": [],
       "nativeOrCombination": "combination",
-      "description": "A braid earned in play: Prism Sight and Sonic Resonance, channelled together until they became one craft.",
-      "notFor": "What lies outside this braid's own reach — it is not either parent whole, only the single new craft their braiding makes.",
-      "narrationHints": "Prism Sight braided with Sonic Resonance.",
+      "description": "Where Prism Sight splits the world into its hidden frequencies and Sonic Resonance drives those frequencies to sing or shatter, Shatterlight Choir does something neither could achieve alone: it reads the structural truth of a thing — its load-bearing fault lines, its resonant core, its secret geometries — and then sings that truth back at it with surgical precision. Light becomes the score…",
+      "notFor": "It cannot create what it opens — corridors revealed are empty, locks undone hold nothing back. It cannot sustain a structure it has sung apart, nor heal what the resonance has already broken beyond its natural tolerance.",
+      "narrationHints": "Where Prism Sight splits the world into its hidden frequencies and Sonic Resonance drives those frequencies to sing or shatter, Shatterlight Choir does something neither could achieve alone: it…",
       "tree": [
         {
           "rank": 1,
-          "name": "Prism Sight × Sonic Resonance I",
-          "grants": "Prism Sight and Sonic Resonance run as one craft: the move only their joining makes.",
-          "cannot": "What neither parent could do apart.",
+          "name": "Frequency Reading",
+          "grants": "The practitioner sees and hears simultaneously — light refracts into audible harmonics, revealing the resonant signature of any material object within sight range. Hidden seams, concealed…",
+          "cannot": "Cannot yet act on what is read; this rank is pure perception, no manipulation.",
           "functions": [
             "reveal",
             "bind",
             "break",
             "move",
-            "strike"
+            "strike",
+            "open"
           ]
         },
         {
           "rank": 2,
-          "name": "Prism Sight × Sonic Resonance II",
-          "grants": "The braid deepens; the two crafts answer together more surely.",
-          "cannot": "What neither parent could do apart.",
+          "name": "Scored Strike",
+          "grants": "Using a revealed frequency signature, the practitioner may direct a focused sonic pulse along the exact fault line of a structure — bypassing outer integrity to strike, bind, or move an interior…",
+          "cannot": "Cannot open living tissue or flesh-bound seals; works only on stone, wood, metal, and manufactured mechanisms.",
           "functions": [
             "reveal",
             "bind",
             "break",
             "move",
-            "strike"
+            "strike",
+            "open"
           ]
         },
         {
           "rank": 3,
-          "name": "Prism Sight × Sonic Resonance III",
-          "grants": "The braid deepens; the two crafts answer together more surely.",
-          "cannot": "What neither parent could do apart.",
+          "name": "Resonant Key",
+          "grants": "The practitioner's voice alone becomes a master key. By humming the precise chord-shape of a sealed thing — door, vault, ward-glyph, or silence-sealed passage — they open it without touch, without…",
+          "cannot": "Cannot open things that were never meant to be opened at all — flesh sealed by surgery, earth collapsed by ruin, bonds of will or oath. It finds doors; it…",
           "functions": [
             "reveal",
             "bind",
             "break",
             "move",
-            "strike"
+            "strike",
+            "open"
           ]
         }
       ],
@@ -1978,14 +2629,15 @@
           "sonic_resonance"
         ],
         "mintedAt": null,
-        "namedBy": "auto",
+        "namedBy": "player",
         "tier": 4,
-        "emergent": null,
-        "enriched": false,
+        "emergent": "open",
+        "enriched": true,
         "sourceNames": [
           "Prism Sight",
           "Sonic Resonance"
-        ]
+        ],
+        "presented": true
       }
     }
   },
@@ -1998,7 +2650,7 @@
     "uses": {
       "prism_sight": 14,
       "keen_appraisal": 12,
-      "sonic_resonance": 25,
+      "sonic_resonance": 26,
       "motes-vigil": 4,
       "light_well": 3,
       "greenlore": 4,
@@ -2025,7 +2677,7 @@
       "prism_sight": 22,
       "keen_appraisal": 22,
       "braid_prism_sight_sonic_resonance": 22,
-      "sonic_resonance": 22
+      "sonic_resonance": 23
     }
   },
   "precursorAccess": [],
@@ -2186,23 +2838,29 @@
       "text": "Aevi joined the Waystaff's phononic lattice on day 9 dawn inside the chamber — distributed its motes through the crystal nodes and spoke through the instrument, naming that it has known the chamber's pattern longer than it has known Cellaceron.",
       "day": 9,
       "subjectId": "aevi"
+    },
+    {
+      "id": "the-chamber-beyond-the-threshold",
+      "text": "The threshold was opened on day 9 dawn by breath-out and planted Waystaff — the gathering quality reversed and an older, slower frequency came through from beyond. Aevi named it 'aware of us — not newly — again.' The threshold is now open; the party has not yet crossed.",
+      "day": 9,
+      "subjectId": "the-chamber-beyond-the-threshold"
     }
   ],
   "sharedSceneId": null,
   "forkChoices": {},
   "customEncounters": {},
-  "reconcileVersion": 14,
+  "reconcileVersion": 16,
   "tendencies": {
-    "cerebral": 38.19646800203282,
-    "strategic": 33.81513787714081,
-    "cautious": 36.72050745374952,
-    "social": 21.26143639963615,
-    "generous": 9.185675095300521,
-    "risky": 2.4197293090025602,
-    "carousing": 0.9018105370016515,
-    "patient": 1.9604398183342004,
-    "craft": 0.900969701874154,
-    "devotion": 3.3221278668686365
+    "cerebral": 37.241556301982,
+    "strategic": 32.96975943021229,
+    "cautious": 36.80249476740578,
+    "social": 20.729900489645246,
+    "generous": 8.956033217918009,
+    "risky": 2.359236076277496,
+    "carousing": 0.8792652735766102,
+    "patient": 1.9114288228758454,
+    "craft": 0.8784454593273001,
+    "devotion": 4.239074670196921
   },
   "aptitudes": [
     "strategist",
@@ -2214,9 +2872,9 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 213,
-  "updatedAt": 1784691104035,
-  "rev": 80,
+  "actionCount": 214,
+  "updatedAt": 1784778043007,
+  "rev": 87,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -2226,7 +2884,7 @@
   "syncedAt": 1783791225006,
   "teachers": {},
   "regionsKnown": {
-    "valley": 36
+    "valley": 37
   },
   "company": [],
   "foreclosed": [],
@@ -2241,6 +2899,14 @@
   "form": "Cellaceron is a magically powerful human male - weilds the Waystaff a sonic/radiant staff artifact. He protects the attractive sonic warden apprentice Teva.",
   "portrait": "https://image.pollinations.ai/prompt/Cellaceron%20is%20a%20magically%20powerful%20human%20male%20-%20weilds%20the%20Waystaff%20a%20sonic%2Fradiant%20staff%20artifact.%20He%20protects%20the%20attractive%20sonic%20warden%20apprentice%20Teva.%2C%20full-body%20character%20portrait%2C%20named%20Cellaceron%2C%20of%20the%20valley%2C%20craftsman%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20bark-paper%20sketch%20(lattice%20geometry)%2C%20dark%2C%20intense%2C%20dramatic%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=15431&nologo=true",
   "gallery": [
+    {
+      "kind": "moment",
+      "prompt": "A single figure stands in a narrow stone passage, both hands on a staff planted upright on the floor, head bowed in a slow exhale. The walls are older and denser than dressed stone — dark, absorptive.",
+      "url": "https://image.pollinations.ai/prompt/A%20single%20figure%20stands%20in%20a%20narrow%20stone%20passage%2C%20both%20hands%20on%20a%20staff%20planted%20upright%20on%20the%20floor%2C%20head%20bowed%20in%20a%20slow%20exhale.%20The%20walls%20are%20older%20and%20denser%20than%20dressed%20stone%20%E2%80%94%20dark%2C%20absorptive.%20At%20the%20figure's%20right%20shoulder%2C%20a%20tight%20cluster%20of%20teal%20motes%20burns%20very%20bright.%20Behind%20them%2C%20a%20you%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=512&seed=94702&nologo=true",
+      "caption": "The threshold opened — not as a door but as a tide reversing; what lay beyond came through",
+      "worldDay": 23,
+      "at": "2026-07-23T03:40:43.007Z"
+    },
     {
       "kind": "portrait",
       "prompt": "a person, character portrait, named Maren, woman, Tuning-warden, Harmonic Heights Lower Terrace",
@@ -2295,6 +2961,14 @@
       "startDay": 22,
       "endDay": 22,
       "beats": 27
+    },
+    {
+      "id": "sess-3",
+      "startedAt": "2026-07-23T03:40:42.992Z",
+      "lastAt": "2026-07-23T03:40:42.992Z",
+      "startDay": 23,
+      "endDay": 23,
+      "beats": 1
     }
   ],
   "_pendingArrival": null,
@@ -2342,7 +3016,7 @@
         "prism_sight",
         "sonic_resonance"
       ],
-      "name": "Prism Sight × Sonic Resonance",
+      "name": "Shatterlight",
       "tier": 4,
       "mintedAt": null
     }
@@ -2350,19 +3024,20 @@
   "_opEmitted": {
     "sceneSummary": 27,
     "choices": 27,
-    "characterDeltas": 16,
+    "characterDeltas": 17,
     "scene": 27,
     "npcUpdates": 23,
     "codexUpdates": 24,
     "timeOps": 27,
-    "sceneEnded": 12,
-    "placeUpdates": 18,
+    "sceneEnded": 13,
+    "placeUpdates": 19,
     "moveTo": 1,
     "questUpdates": 15,
     "stateOps": 1,
-    "factUpdates": 1,
+    "factUpdates": 2,
     "stageOps": 1,
-    "scene_ended": 1
+    "scene_ended": 1,
+    "imagePrompt": 1
   },
   "_opTurns": 27,
   "_intentAsked": null,

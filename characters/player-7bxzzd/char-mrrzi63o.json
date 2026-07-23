@@ -8,7 +8,7 @@
   "whyHere": "You put down the blade, or you were sent away from it, or you are looking for a line worth holding that isn't theirs.",
   "background": "war_leader",
   "level": 1,
-  "xp": 8,
+  "xp": 11,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -40,7 +40,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 95,
+  "energy": 92,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -188,148 +188,124 @@
         "player": "Get moving immediately — Freki's trail is cooling; trust Ragnar to keep up",
         "summary": "Brynjar, Ragnar, and Freki leave the Marchward by the east lane and follow the trail to the fork, where Freki turns south toward the Stillhold road.",
         "narration": "Ragnar falls into step without a word as you cross back through the square. You push the side door open — Freki is exactly where you left it, head low, the cord-knot's scent still fresh in its nose — and the hound moves the moment your boot clears the threshold.\n\nThe east lane is narrow, mud-soft from the melt, and quiet. No one else is out this side of the Marchward yet. Freki sets a steady pace, not a run — purposeful, nose working low to the ground between strides, occasionally checking a wheel-rut or a boot-print pressed into the mud. You can see the fork maybe a hundred yards ahead: the lane splits, one branch curving north toward the tree-line where the waygate approach begins, the other bending south and wide toward the Stillhold road.\n\nRagnar moves beside you at the same unhurried pace, scanning the lane's edges without being asked. \"Movement I saw was south-fork,\" he says quietly. \"Two people, maybe. Before the light was full.\" He doesn't embellish it, doesn't say which two, doesn't say where they went after the fork — just gives you what he has, plainly, the way someone hands over a tool.\n\nFreki slows as the fork approaches, nose dropping almost to the ground. At the split it pauses, circles once, then angles south — toward the Stillhold road."
+      },
+      {
+        "player": "Pause at the fork — study the ground before committing south (boot-prints, weight, how many, how long ago)",
+        "summary": "At the fork, Brynjar reads two sets of prints heading south — a lighter frame first, a heavier follower ten minutes behind — and glimpses something faintly luminous pressed into the mud.",
+        "narration": "Freki stops at the fork and looks back at you — not impatient, just waiting. Ragnar posts himself at the edge of the north branch, watching that lane's shadows while you crouch over the south-branch ground.\n\nThe mud here is churned enough to read. Two sets of boots came through, both heading south — you can trace the stride-length and the depth of heel-strike to get a rough picture. One set presses harder on the outside edge, a lighter frame moving fast. The other is heavier, wider-toed, a deliberate pace. They were not walking together: the lighter prints come first, the heavier ones overlay them in two or three places, maybe ten minutes behind. How long ago is harder. The melt has been slow this morning and the prints' edges are still crisp enough that you put it at three hours past, maybe four — well before the Marchward was up. But the northbound lane is wet too, and you can't rule out a third person who kept to the firmer ground near the verge.\n\nRagnar doesn't move from his post. \"What does it say?\" he asks, voice low, eyes still on the lane ahead.\n\n\"Two people,\" you say. \"One ahead of the other. Light one went first.\" You stand, brushing mud from your knee. South, toward the Stillhold road, four miles to where Ragnar knows it well — and the trail still live.\n\nAbout twenty yards down the south branch, a thread of something glints in the mud, half-pressed under a boot-print. Not metal. More like the brief, sourceless shimmer you sometimes see under still water on a clear morning — a pale line of light lying quietly in the earth, gone before you can look directly at it, the kind of thing that was never meant for anyone's eyes and doesn't know you're there."
       }
     ],
     "lastTurn": {
-      "narration": "Ragnar falls into step without a word as you cross back through the square. You push the side door open — Freki is exactly where you left it, head low, the cord-knot's scent still fresh in its nose — and the hound moves the moment your boot clears the threshold.\n\nThe east lane is narrow, mud-soft from the melt, and quiet. No one else is out this side of the Marchward yet. Freki sets a steady pace, not a run — purposeful, nose working low to the ground between strides, occasionally checking a wheel-rut or a boot-print pressed into the mud. You can see the fork maybe a hundred yards ahead: the lane splits, one branch curving north toward the tree-line where the waygate approach begins, the other bending south and wide toward the Stillhold road.\n\nRagnar moves beside you at the same unhurried pace, scanning the lane's edges without being asked. \"Movement I saw was south-fork,\" he says quietly. \"Two people, maybe. Before the light was full.\" He doesn't embellish it, doesn't say which two, doesn't say where they went after the fork — just gives you what he has, plainly, the way someone hands over a tool.\n\nFreki slows as the fork approaches, nose dropping almost to the ground. At the split it pauses, circles once, then angles south — toward the Stillhold road.",
-      "sceneSummary": "Brynjar, Ragnar, and Freki leave the Marchward by the east lane and follow the trail to the fork, where Freki turns south toward the Stillhold road.",
+      "narration": "Freki stops at the fork and looks back at you — not impatient, just waiting. Ragnar posts himself at the edge of the north branch, watching that lane's shadows while you crouch over the south-branch ground.\n\nThe mud here is churned enough to read. Two sets of boots came through, both heading south — you can trace the stride-length and the depth of heel-strike to get a rough picture. One set presses harder on the outside edge, a lighter frame moving fast. The other is heavier, wider-toed, a deliberate pace. They were not walking together: the lighter prints come first, the heavier ones overlay them in two or three places, maybe ten minutes behind. How long ago is harder. The melt has been slow this morning and the prints' edges are still crisp enough that you put it at three hours past, maybe four — well before the Marchward was up. But the northbound lane is wet too, and you can't rule out a third person who kept to the firmer ground near the verge.\n\nRagnar doesn't move from his post. \"What does it say?\" he asks, voice low, eyes still on the lane ahead.\n\n\"Two people,\" you say. \"One ahead of the other. Light one went first.\" You stand, brushing mud from your knee. South, toward the Stillhold road, four miles to where Ragnar knows it well — and the trail still live.\n\nAbout twenty yards down the south branch, a thread of something glints in the mud, half-pressed under a boot-print. Not metal. More like the brief, sourceless shimmer you sometimes see under still water on a clear morning — a pale line of light lying quietly in the earth, gone before you can look directly at it, the kind of thing that was never meant for anyone's eyes and doesn't know you're there.",
+      "sceneSummary": "At the fork, Brynjar reads two sets of prints heading south — a lighter frame first, a heavier follower ten minutes behind — and glimpses something faintly luminous pressed into the mud.",
       "choices": [
         {
-          "label": "Press on — follow Freki south down the Stillhold road",
+          "label": "Follow the trail south at a steady pace — trust the read, trust Freki, and close the distance",
           "attribute": "physical",
           "subAttribute": "agility",
           "difficulty": 0,
           "intentTags": [
-            "travel"
+            "travel",
+            "careful"
           ],
           "trivial": true
         },
         {
-          "label": "Pause at the fork — study the ground before committing south (boot-prints, weight, how many, how long ago)",
+          "label": "Crouch and examine that shimmer in the mud before moving — something was pressed here",
           "attribute": "mental",
           "subAttribute": "insight",
           "difficulty": 15,
           "intentTags": [
-            "scout",
-            "study"
+            "study",
+            "careful"
           ],
           "trivial": false
         },
         {
-          "label": "Ask Ragnar exactly what he saw — two people, their builds, their direction, whether either seemed unwilling",
+          "label": "Ask Ragnar what he knows about the heavier-footed person — he's walked this road; does he recognize that gait or that kind of pacer?",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "persuade"
           ],
           "trivial": true
         },
         {
-          "label": "Hold Freki and examine the cloth bundle again — look at the cord-knot properly now that you have daylight and the fork in front of you",
-          "attribute": "mental",
-          "subAttribute": "reason",
-          "difficulty": 15,
+          "label": "Hold up the cloth bundle again — let Freki confirm the lighter set is Sera's and set pace south",
+          "attribute": "practical",
+          "subAttribute": "wits",
+          "difficulty": 0,
           "intentTags": [
-            "study"
+            "careful"
           ],
-          "trivial": false
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "The east lane outside the Crow and Thistle's side door — mud-soft, narrow, empty. The fork is a hundred yards ahead: north branch toward the waygate approach, south branch toward the Stillhold road. Early spring morning, cool, flat light.",
+        "setting": "The south fork of the east lane, just past the junction — mud-soft, two sets of boot-prints visible heading south. Early spring morning, cool and flat-lit. The Stillhold road lies four miles ahead.",
         "npcsPresent": [
           {
             "name": "Ragnar Solmyr",
-            "state": "Walking beside Brynjar, scanning the lane's edges, watching the fork"
+            "state": "Posted at the north branch edge, watching that lane's shadows, waiting on Brynjar's read"
           },
           {
             "name": "Freki",
-            "state": "At the fork, nose to the ground — has turned south toward the Stillhold road"
+            "state": "Standing on the south branch, watching Brynjar, ready to move"
           }
         ],
         "objects": [
           "Cloth bundle (in Brynjar's hand — folded linen, dried white-flowered sprig, knotted cord)",
-          "Mud-soft lane with visible boot-prints and wheel-ruts from the melt",
-          "Fork in the road — north branch to waygate approach, south branch to Stillhold road"
+          "Two sets of boot-prints heading south — lighter frame first, heavier-toed follower behind by ~10 minutes",
+          "A faint, sourceless shimmer half-pressed into the mud twenty yards south — Precursor trace, brief and unexplained"
         ],
         "threads": [
-          "Freki has committed south — Stillhold road",
-          "Ragnar saw two people at the fork before full light — details unconfirmed",
-          "The cord-knot's meaning is still unread",
-          "The trail is live but cooling"
+          "Trail confirmed south — two people, lighter one ahead, heavier one following",
+          "Third person on firmer verge cannot be ruled out",
+          "The shimmer in the mud — glimpsed, unexplained",
+          "The cord-knot's meaning still unread"
         ]
       },
-      "npcUpdates": [
-        {
-          "op": "update",
-          "npcId": "ragnar-solmyr",
-          "name": "Ragnar Solmyr",
-          "note": "Fell into step without hesitation; confirmed the movement he saw was at the south fork, two people, before full light — gave the information plainly and without embellishment",
-          "learned": [
-            "Movement at the south fork before dawn — two people, direction south toward Stillhold road"
-          ],
-          "statusNote": "Walking south down the east lane with Brynjar and Freki, watching the trail's edges"
-        }
-      ],
       "codexUpdates": [
         {
           "topic": "sera-of-the-stillhold",
           "label": "Sera of the Stillhold",
           "kind": "mystery",
-          "fact": "Freki confirmed the trail at the fork goes south — toward the Stillhold road. Ragnar saw two people at the south fork before full light. Sera was not alone when she left, or someone followed her.",
+          "fact": "Two sets of prints at the south fork: a lighter frame went first, a heavier follower came ten minutes behind. Sera was not alone — someone tracked her, or met her, on the Stillhold road. Time of passage: roughly three to four hours before the Marchward woke.",
           "links": [
             "ragnar-solmyr",
-            "the-stillhold",
-            "the-marchward"
+            "the-marchward",
+            "the-stillhold"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "Short walk from the Crow and Thistle side door to the fork — a few minutes at most"
-      },
-      "placeUpdates": [
-        {
-          "note": "The east fork outside the Crow and Thistle side door — muddy, boot-prints visible in the melt. Freki's trail confirms the south branch leads toward the Stillhold road; Ragnar saw two people here before dawn.",
-          "subPlace": {
-            "name": "East Fork",
-            "parent": "The Marchward",
-            "note": "The split in the east lane — north branch to the waygate approach, south branch to the Stillhold road. Visible boot-prints in the spring mud.",
-            "visited": true
-          }
-        }
-      ],
-      "questUpdates": [
-        {
-          "op": "progress",
-          "questId": "brynjar-andyrsson-thread",
-          "note": "Freki's trail leads south toward the Stillhold road — Sera was not alone at the fork, and the hunt is moving"
-        }
-      ]
+        "why": "A careful read of the fork's boot-prints — a few minutes' work"
+      }
     },
     "sceneState": {
-      "setting": "The east lane outside the Crow and Thistle's side door — mud-soft, narrow, empty. The fork is a hundred yards ahead: north branch toward the waygate approach, south branch toward the Stillhold road. Early spring morning, cool, flat light.",
+      "setting": "The south fork of the east lane, just past the junction — mud-soft, two sets of boot-prints visible heading south. Early spring morning, cool and flat-lit. The Stillhold road lies four miles ahead.",
       "npcsPresent": [
         {
           "name": "Ragnar Solmyr",
-          "state": "Walking beside Brynjar, scanning the lane's edges, watching the fork"
+          "state": "Posted at the north branch edge, watching that lane's shadows, waiting on Brynjar's read"
         },
         {
           "name": "Freki",
-          "state": "At the fork, nose to the ground — has turned south toward the Stillhold road"
+          "state": "Standing on the south branch, watching Brynjar, ready to move"
         }
       ],
       "objects": [
         "Cloth bundle (in Brynjar's hand — folded linen, dried white-flowered sprig, knot",
-        "Mud-soft lane with visible boot-prints and wheel-ruts from the melt",
-        "Fork in the road — north branch to waygate approach, south branch to Stillhold r"
+        "Two sets of boot-prints heading south — lighter frame first, heavier-toed follow",
+        "A faint, sourceless shimmer half-pressed into the mud twenty yards south — Precu"
       ],
       "threads": [
-        "Freki has committed south — Stillhold road",
-        "Ragnar saw two people at the fork before full light — details unconfirmed",
-        "The cord-knot's meaning is still unread",
-        "The trail is live but cooling"
+        "Trail confirmed south — two people, lighter one ahead, heavier one following",
+        "Third person on firmer verge cannot be ruled out",
+        "The shimmer in the mud — glimpsed, unexplained",
+        "The cord-knot's meaning still unread"
       ]
     }
   },
@@ -600,7 +576,8 @@
           "visited": true,
           "note": "The split in the east lane — north branch to the waygate approach, south branch to the Stillhold road. Visible boot-prints in the spring mud."
         }
-      }
+      },
+      "vectorsKnown": []
     }
   },
   "worldState": {
@@ -680,7 +657,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 1,
+    "turnsSinceOffer": 2,
     "recentOffers": [
       {
         "thing": "Doss watching Brynjar with the stillness of someone deciding something — she has not offered it yet, but she is on the edge of it",
@@ -806,7 +783,8 @@
           "[d1] Sera left the Crow and Thistle before dawn of her own will — room latched from inside, side door. She spent her evening watching the entrance, thinking-quiet, waiting or watching for someone. Something was left at the third stool from the left at the bar around the same time.",
           "[d1] A second person was present the evening Sera stayed — sat at the third stool, watched her without speaking, left before dawn, left behind a folded linen with a dried white-flowered sprig and a knotted cord. The cord-knot's meaning is unknown. Freki reads the stool as a live trail.",
           "[d1] Freki read the cloth bundle — dried white-flowered sprig and knotted cord — and tracked toward the side door Sera used before dawn. The trail leads east, to a fork: waygate approach north, Stillhold road south.",
-          "[d1] Freki confirmed the trail at the fork goes south — toward the Stillhold road. Ragnar saw two people at the south fork before full light. Sera was not alone when she left, or someone followed her."
+          "[d1] Freki confirmed the trail at the fork goes south — toward the Stillhold road. Ragnar saw two people at the south fork before full light. Sera was not alone when she left, or someone followed her.",
+          "[d1] Two sets of prints at the south fork: a lighter frame went first, a heavier follower came ten minutes behind. Sera was not alone — someone tracked her, or met her, on the Stillhold road. Time of passage: roughly three to four hours before the Marchward woke."
         ],
         "links": [
           "marchward-notice-board",
@@ -991,16 +969,16 @@
     ]
   },
   "tendencies": {
-    "leadership": 10.073677420533784,
-    "cerebral": 1.5755899393264068,
-    "strategic": 3.3429443022168543,
-    "ruthless": 0.7569213803350267,
-    "social": 6.293858963812408
+    "leadership": 9.821835485020438,
+    "cerebral": 2.5362001908432465,
+    "strategic": 4.259370694661433,
+    "ruthless": 0.7379983458266509,
+    "social": 6.136512489717098
   },
   "aptitudes": [
     "banner"
   ],
-  "actionCount": 13,
+  "actionCount": 14,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1126,8 +1104,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784772121604,
-  "rev": 61,
+  "updatedAt": 1784772226517,
+  "rev": 62,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1292,11 +1270,13 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 16
+    "riven_marches": 17
   },
   "practice": {
     "schemaVersion": 1,
-    "uses": {},
+    "uses": {
+      "order_sense": 1
+    },
     "coActivations": {},
     "aspirations": [
       {
@@ -1309,7 +1289,10 @@
         "since": "2026-07-19T16:03:59.776Z",
         "progress": 0
       }
-    ]
+    ],
+    "lastUsed": {
+      "order_sense": 23
+    }
   },
   "customAbilities": {},
   "companionBonds": {
@@ -1351,10 +1334,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-23T01:30:20.702Z",
-      "lastAt": "2026-07-23T02:02:01.601Z",
+      "lastAt": "2026-07-23T02:03:46.516Z",
       "startDay": 23,
       "endDay": 23,
-      "beats": 10
+      "beats": 11
     }
   ],
   "_pendingArrival": null,
@@ -1370,15 +1353,15 @@
     "at": "2026-07-23T01:18:04.353Z"
   },
   "_opEmitted": {
-    "sceneSummary": 10,
-    "choices": 10,
-    "scene": 10,
+    "sceneSummary": 11,
+    "choices": 11,
+    "scene": 11,
     "npcUpdates": 10,
     "placeUpdates": 3,
     "generateRequest": 2,
     "moveTo": 2,
-    "timeOps": 10,
-    "codexUpdates": 10,
+    "timeOps": 11,
+    "codexUpdates": 11,
     "sceneEnded": 2,
     "characterDeltas": 2,
     "offer": 2,
@@ -1386,7 +1369,7 @@
     "standingOps": 1,
     "questUpdates": 1
   },
-  "_opTurns": 10,
+  "_opTurns": 11,
   "_opLedger": {
     "offer": {
       "applied": 2,

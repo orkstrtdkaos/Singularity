@@ -761,6 +761,10 @@ img[data-lightbox] { cursor: zoom-in; }
 .sug-block { border-left: 3px solid var(--accent2); }
 .sug-row { border-bottom: 1px solid var(--border); padding-bottom: 6px; }
 .sug-row .btn { margin-top: 4px; }
+/* SNG-218 §2: the reasoned-suggestion "why-kind" tag — gap/aspiration/strength/synergy. */
+.fit-tag { font-size: 10px; text-transform: uppercase; letter-spacing: .5px; padding: 1px 6px; border-radius: 8px; border: 1px solid var(--border); color: var(--ink-dim); vertical-align: middle; }
+.fit-tag.fit-aspiration { border-color: var(--accent2); color: var(--accent2); }
+.fit-tag.fit-gap { border-color: var(--accent); color: var(--accent); }
 
 /* SNG-124 Phase B: the skill-wheel function overlay */
 .fn-filter-row { display:flex; flex-wrap:wrap; gap:5px; align-items:center; margin:6px 0 8px; }

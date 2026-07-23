@@ -12,7 +12,7 @@ import { newClock, readClock, advanceClock, getWorldEpoch, absoluteWorldDay, wor
 import { companionBonus, companionsForGM, activeCompanions, partnerAdjacentNpcs, noteCompanionWitnessed, companionMemoryForGM } from "../engine/companions.js";
 import { applyQuestUpdates, questsForGM, slugify, resolveQuest, dedupeQuests, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, threadTouched, traditionArcForGM, npcQuestsForGM, practicedTraditions, traditionArcBeat, structuredQuestRecord, normalizeProse } from "../engine/quests.js";
 import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, touchSession, endSession, sessionLog, buildSessionPrompt, authorshipStats, crossCharacterAuthorship } from "../engine/chronicle.js";
-import { sanitizeScene, buildTurnContext, sanitizeIntent, narrativeRegister, ratingRegister, renderSceneHistory, tierParts, bluntnessDirective } from "../engine/gm.js";
+import { sanitizeScene, buildTurnContext, sanitizeIntent, narrativeRegister, ratingRegister, renderSceneHistory, tierParts, bluntnessDirective, suggestNextCrafts } from "../engine/gm.js";
 import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicateNpcs, findExistingNpc, prettifyNpcName, relationshipBand, advanceBond, relationshipLabel, isPartnerAdjacent, knownPeopleAt, npcPortraitTier, backfillNpcGender } from "../engine/npcs.js";
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
 import { initWorldState, runWorldTick, advanceGeneratedOffscreen, applyWantOutcome, offscreenPopulation, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, worldArcsForGM, effectiveEpicStatus, applyEpicArcPush, resolveEpicClash, applyEpicClashOutcome } from "../engine/worldtick.js";
@@ -7329,6 +7329,36 @@ await (async () => {
   const wtSrc211 = readFileSync(join(root, "engine/worldtick.js"), "utf8");
   check("211 Q1: the ambient sources (want-move, wake-fade) stamp tier:'ambient' at emit", /tier: "ambient"/.test(wtSrc211) && /source === "legend" \|\| resolved \|\| outcome === "problem"/.test(wtSrc211));
   check("211: takeUnseenNews ranks via rankNews (surface shaped, ws.news log untouched)", /return rankNews\(items, opts\)/.test(wtSrc211));
+}
+
+// ---- SNG-218 §2: the LLM "next crafts" suggestion — prompt carries the real signals; reachable-only guardrail ----
+{
+  // injected fake (the SNG-198/204/208 pattern) — capture what the prompt assembles, and prove the return shape.
+  let capSys = "", capContent = "", capTask = "";
+  const capture = async (msgs, opts) => { capSys = opts.system; capContent = msgs[0].content; capTask = opts.task; return { picks: [{ abilityId: "death_ward", why: "you read every situation but can't ward a friend", fit: "gap" }], note: "the field is wide this level" }; };
+  const res = await suggestNextCrafts({
+    owned: "Order Sense r3, Deathsense r3", domains: { primary: "ashwarden", secondary: "cogitant", tertiary: "figurist" },
+    tendencies: "cerebral 18, social 13", aptitudes: "scholar, sage", reachablePool: "death_ward · Death-Ward · defense · shields a bonded ally · school:ash_plain · 1pt",
+    aspirations: "hunters_strike 2/10, pattern_sense 0/10", uses: "most-used: Order Sense 71", schools: "ashwarden→ash_plain, cogitant→cog_unaided", skillPoints: 3, level: 19
+  }, capture);
+  check("218 §2: suggestNextCrafts returns the model's picks (id + why + fit)", res.picks[0].abilityId === "death_ward" && res.picks[0].fit === "gap" && !!res.note);
+  check("218 §2: the prompt is REACHABLE-ONLY (the guardrail that stops an unlearnable suggestion)", /SUGGEST ONLY FROM THE REACHABLE LIST/.test(capSys) && /REACHABLE NOW/.test(capContent));
+  check("218 §2: the prompt carries the DECLARED aspirations (the strongest fit-signal, real path)", /hunters_strike 2\/10/.test(capContent) && /ASPIRATIONS/.test(capSys));
+  check("218 §2: the prompt carries play-style tendencies + aptitudes + use counts (the play-fingerprint)", /cerebral 18/.test(capContent) && /scholar, sage/.test(capContent) && /Order Sense 71/.test(capContent));
+  check("218 §2 augmentation: the prompt carries the ADOPTED SCHOOLS + per-craft school-fit (CCode-added signal)", /ADOPTED SCHOOLS/.test(capContent) && /ash_plain/.test(capContent) && /school-fit/.test(capContent));
+  check("218 §2: the call routes to the suggest-next-crafts task (MODEL_MAP convention)", capTask === "suggest-next-crafts");
+
+  // the reachable-only GUARDRAIL is enforced in the render too — a stray model id outside the pool is dropped.
+  const strayFake = async () => ({ picks: [{ abilityId: "in_pool", why: "ok" }, { abilityId: "NOT_in_pool", why: "unlearnable" }], note: "" });
+  const stray = await suggestNextCrafts({ owned: "", domains: {}, tendencies: "", aptitudes: "", reachablePool: "in_pool · X · f · d · school:— · 1pt" }, strayFake);
+  const okIds = new Set(["in_pool"]);
+  const filtered = stray.picks.filter(p => okIds.has(p.abilityId));
+  check("218 §2: a model pick OUTSIDE the reachable set is filtered out (belt-and-suspenders vs the root bug)", filtered.length === 1 && filtered[0].abilityId === "in_pool");
+
+  // the app render wires the fallback + the hard filter (source-level, since it's async DOM).
+  const appSrc218b = readFileSync(join(root, "app.js"), "utf8");
+  check("218 §2: renderLevelUp reads reachableNow (§1 gate) for BOTH the heuristic and the LLM pool", /const reachableNow = learnable\.filter\(ab => canLearnAbility/.test(appSrc218b) && /recommendSkills\(character, reachableNow/.test(appSrc218b));
+  check("218 §2: the render hard-filters model picks against okIds + falls back to the heuristic on failure", /okIds\.has\(p\.abilityId\)/.test(appSrc218b) && /the heuristic on screen stands/.test(appSrc218b));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

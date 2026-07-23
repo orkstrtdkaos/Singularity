@@ -9,7 +9,7 @@ import { recordDeed, standingWith, reputationSummary } from "./engine/reputation
 import { seedStandingAtCreation, accrueStandingForDays, applyStandingOps, standingRoster } from "./engine/standing.js"; // BATCH-12 §3
 import { majorDeeds, majorStateHash, chronicleIsStale, buildChroniclePrompt, touchSession, endSession, sessionLog, buildSessionPrompt, authorshipStats, crossCharacterAuthorship } from "./engine/chronicle.js";
 import { newProfile, updateProfile, aptitudeMods, profileInsight, grantAptitudes, fadingAptitudes, ensureCharacterStyle, ensureRating, ratingCeiling, ratingLevel, isMinorProfile, canSetRating, setRating, setMinorFlag, revokeAdultGate, RATING_ORDER, RATING_LEVEL } from "./engine/playerprofile.js";
-import { gmTurn, parseIntent, gmAsk, generateBio, suggestBuild, extractGambit, sanitizeScene, narrativeRegister, ratingRegister, bluntnessDirective, SALVAGEABLE_OPS } from "./engine/gm.js";
+import { gmTurn, parseIntent, gmAsk, generateBio, suggestBuild, suggestNextCrafts, extractGambit, sanitizeScene, narrativeRegister, ratingRegister, bluntnessDirective, SALVAGEABLE_OPS } from "./engine/gm.js";
 import { namesToAvoid } from "./engine/namematch.js";
 import { affiliationOf, regionHomeTradition, buildPeopleVocab } from "./engine/affiliation.js"; // SNG-185
 import { applyQuestUpdates, questsForGM, isRealQuest, startStructuredQuest, completeQuestStage, resolveStructuredQuest, availableStructuredQuests, routesForCharacter, structuredQuestsForGM, slugify, advanceStructuredQuest } from "./engine/quests.js";
@@ -67,7 +67,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.213";
+const APP_VERSION = "1.8.214";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -5583,6 +5583,10 @@ function renderLevelUp(status = "") {
   });
   const byTrad = {};
   for (const ab of learnable) { const k = abilityTradition(ab) || ab.powerSystem || "folk"; (byTrad[k] = byTrad[k] || []).push(ab); }
+  // SNG-218 §1/§2: the REACHABLE-NOW set — `learnable` filtered through the ONE gate (adds standing, capacity,
+  // affordability). BOTH the suggestion (heuristic fallback + the LLM pick) and the render read this, never the
+  // raw level+domain `learnable` — so no suggestion (heuristic or model) can ever offer a standing-locked craft.
+  const reachableNow = learnable.filter(ab => canLearnAbility(character, ab.id, fullCatalog(), rules, { attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, traditionIndex: CONTENT.traditionIndex }).ok);
 
   const learnRow = ab => {
     const gate = meetsLearnGate(character, ab.id, CONTENT.attributeGates);
@@ -5608,24 +5612,25 @@ function renderLevelUp(status = "") {
     <p class="hint" style="margin-bottom:10px">You have <strong>${sp} skill point${sp === 1 ? "" : "s"}</strong> — points <strong>learn new crafts</strong> (breadth). <strong>Depth is earned through use</strong>, not bought. <span class="cap-line">${breadthUsed(character)} of ${breadthCap(character, CONTENT.skillCapacity)} crafts${cap ? " — at capacity" : ""}</span> ${infoDot("lock.capacity")}</p>
     ${status ? `<div class="cs-block" style="border-left:3px solid var(--accent)">${esc(status)}</div>` : ""}
 
-    ${(() => { // SNG-124: "Suggested for you" — recommend skills that fill FUNCTION-COVERAGE gaps / suit your
-      // build / are ripe. Reads the same learnable set below; each suggestion learns in place (data-lvllearn).
+    ${(() => { // SNG-124 heuristic — the INSTANT suggestion AND the SNG-218 §2 fallback if the LLM call fails.
+      // Reads reachableNow (the §1 gate), never the raw learnable, so it too can't suggest a standing-locked craft.
       const cov = functionCoverage(character, fullCatalog(), FN_INDEX);
-      const suggestions = recommendSkills(character, learnable, {
+      const suggestions = recommendSkills(character, reachableNow, {
         fnIndex: FN_INDEX, traditionIndex: CONTENT.traditionIndex, catalog: fullCatalog(),
-        ripe: new Set(learnable.filter(ab => aspirationRipe(character, ab.id, rules)).map(ab => ab.id)),
+        ripe: new Set(reachableNow.filter(ab => aspirationRipe(character, ab.id, rules)).map(ab => ab.id)),
         effectiveCost: ab => effectiveEnergyCost(ab, character, rules), max: 4
       });
-      if (!suggestions.length) return "";
       const gap = cov.missing.length ? `Your kit has no <strong>${cov.missing.join(", ")}</strong> yet — gaps worth filling.` : `Your kit already touches all ${cov.covered.length} function families.`;
-      return `<div class="cs-block sug-block"><h3 class="codex-title" style="font-size:15px">Suggested for you <span class="hint" style="text-transform:none">— what would round out your kit</span></h3>
-        <div class="hint" style="margin-bottom:6px">${gap}</div>
-        ${suggestions.map(s => { const ab = fullCatalog()[s.abilityId]; return `<div class="cs-ability sug-row">
+      const rows = suggestions.map(s => { const ab = fullCatalog()[s.abilityId]; return `<div class="cs-ability sug-row">
           <div><strong>${esc(s.name)}</strong> ${functionChips(ab)}${s.cost != null ? ` <span class="hint" title="energy to use (effective)">⚡${s.cost}</span>` : ""}</div>
           <div class="hint">✦ ${esc(s.why)}</div>
           <button class="btn" data-lvllearn="${esc(s.abilityId)}">Learn</button>
-        </div>`; }).join("")}
-      </div>`;
+        </div>`; }).join("");
+      // SNG-218 §2: renderLevelUp's async tail replaces this block's inner HTML with a genuinely-reasoned LLM
+      // suggestion when it returns; until then (and on any failure) the instant heuristic stands — never an empty top.
+      return `<div class="cs-block sug-block" id="lvl-suggest"${suggestions.length ? "" : ' style="display:none"'}>
+        <h3 class="codex-title" style="font-size:15px">Suggested for you <span class="hint" style="text-transform:none">— what would round out your kit</span></h3>
+        <div class="hint" style="margin-bottom:6px">${gap}</div>${rows}</div>`;
     })()}
 
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Your crafts ${infoDot("ability.ranks")} <span class="hint" style="text-transform:none">— depth is earned through use, not points</span></h3>
@@ -5646,15 +5651,58 @@ function renderLevelUp(status = "") {
     <button class="btn secondary" id="lvl-back">Done</button>
   </div>`);
 
-  // ability-arch v2: no data-lvlrank handler — depth is earned through use, not bought.
-  for (const b of app.querySelectorAll("[data-lvllearn]")) b.onclick = () => {
+  // ability-arch v2: no data-lvlrank handler — depth is earned through use, not bought. Bind is a function so
+  // the SNG-218 §2 async suggestion swap can re-bind the buttons it re-renders into #lvl-suggest.
+  const bindLearn = () => { for (const b of app.querySelectorAll("[data-lvllearn]")) b.onclick = () => {
     const id = b.dataset.lvllearn;
     const free = aspirationRipe(character, id, rules);
     const r = learnAbility(character, id, fullCatalog(), rules, { free, attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, traditionIndex: CONTENT.traditionIndex });
     if (r.ok) { if (free) dropAspiration(character, id); saveCharacter(character); renderLevelUp(`Learned ${fullCatalog()[id]?.name}${free ? " — no point spent" : ""}.`); }
     else renderLevelUp(r.why);
-  };
+  }; };
+  bindLearn();
   document.getElementById("lvl-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
+
+  // SNG-218 §2: upgrade the instant heuristic to a GENUINELY-REASONED suggestion (async, non-blocking). Reads
+  // the character's real play-fingerprint (tendencies, aptitudes, declared aspirations, use counts, adopted
+  // schools) and picks from reachableNow (the §1 guardrail). Hard-filters the model's ids against that set so a
+  // stray pick can never render a Learn button on an unlearnable craft. On ANY failure the heuristic stays.
+  (async () => {
+    try {
+      const box = document.getElementById("lvl-suggest");
+      if (!box || reachableNow.length < 2) return; // nothing worth reasoning over
+      const cat = fullCatalog();
+      const okIds = new Set(reachableNow.map(a => a.id));
+      const rankOf = id => (character.abilities.find(a => a.abilityId === id)?.level) || 0;
+      const topTend = Object.entries(character.tendencies || {}).filter(([, v]) => v >= 3).sort((a, b) => b[1] - a[1]).slice(0, 6).map(([k, v]) => `${k} ${v}`).join(", ") || "none yet";
+      const usesMap = character.practice?.uses || {};
+      const usesTop = Object.entries(usesMap).sort((a, b) => b[1] - a[1]).slice(0, 6).map(([k, v]) => `${cat[k]?.name || k} ${v}`).join(", ");
+      const usesUnused = (character.abilities || []).filter(a => (usesMap[a.abilityId] || 0) <= 1).map(a => cat[a.abilityId]?.name || a.abilityId).slice(0, 5).join(", ");
+      const asp = (character.practice?.aspirations || []).map(a => `${cat[a.abilityId]?.name || a.abilityId} ${a.progress ?? 0}/10`).join(", ");
+      const schoolsStr = Object.entries(character.schools || {}).map(([dom, sch]) => `${dom}→${sch}`).join(", ");
+      const pool = reachableNow.slice(0, 40).map(ab => {
+        const fam = (familiesOfAbility(ab, FN_INDEX) || []).join("/") || (ab.functions || []).join("/") || "—";
+        const cost = canLearnAbility(character, ab.id, cat, rules, { attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, traditionIndex: CONTENT.traditionIndex }).cost ?? "?";
+        return `${ab.id} · ${ab.name} · ${fam} · ${String(ab.description || ab.effect || "").slice(0, 90)} · school:${ab.schoolAffinity || "—"} · ${cost}pt`;
+      }).join("\n");
+      const res = await suggestNextCrafts({
+        owned: (character.abilities || []).map(a => `${cat[a.abilityId]?.name || a.abilityId} r${rankOf(a.abilityId)}`).join(", "),
+        domains: character.domains || {}, tendencies: topTend, aptitudes: (character.aptitudes || []).join(", ") || "none",
+        reachablePool: pool, aspirations: asp, uses: `most-used: ${usesTop || "—"}${usesUnused ? ` · owned-but-unused: ${usesUnused}` : ""}`,
+        schools: schoolsStr, skillPoints: character.skillPoints || 0, level: character.level || 1
+      });
+      const picks = (res?.picks || []).filter(p => okIds.has(p.abilityId)).slice(0, 4); // §2 guardrail: reachable-only, always
+      if (!picks.length) return;
+      box.style.display = "";
+      box.innerHTML = `<h3 class="codex-title" style="font-size:15px">✨ Suggested for you <span class="hint" style="text-transform:none">— reasoned from how you actually play</span></h3>
+        ${picks.map(p => { const ab = cat[p.abilityId]; return `<div class="cs-ability sug-row">
+          <div><strong>${esc(ab?.name || p.abilityId)}</strong> ${functionChips(ab)}${p.fit ? ` <span class="fit-tag fit-${esc(String(p.fit).replace(/[^a-z]/gi, ""))}">${esc(p.fit)}</span>` : ""}</div>
+          <div class="hint">✦ ${esc(p.why || "")}</div>
+          <button class="btn" data-lvllearn="${esc(p.abilityId)}">Learn</button>
+        </div>`; }).join("")}${res?.note ? `<div class="hint" style="margin-top:6px">${esc(res.note)}</div>` : ""}`;
+      bindLearn();
+    } catch { /* the heuristic on screen stands — never an empty top (spec §2 fallback) */ }
+  })();
 }
 
 /** SNG-118: play-style as tight, tappable aptitude chips (replacing the prose wall). Each chip is colored by

@@ -569,6 +569,61 @@ Use ONLY ids from the lists below. The tertiary MUST be a ring-neighbour of your
   return callClaudeJSON([{ role: "user", content }], { task: "describe-build", system: sys, maxTokens: 1500 });
 }
 
+/** SNG-218 §2 — the LLM "next crafts" suggestion (Aevi-authored prompt; CCode-augmented inputs). Mirrors
+ *  suggestBuild: rich system prompt, honest-reason discipline, strict JSON, ids-ONLY-from-the-reachable-list.
+ *  The caller assembles the context from the character's REAL signals — owned+ranks, domains, play-style
+ *  tendencies (character.tendencies), aptitudes (character.aptitudes), DECLARED aspirations
+ *  (character.practice.aspirations) and use counts (character.practice.uses) — plus THE REACHABLE-NOW pool
+ *  (the §1 canLearnAbility set: allowed + level + STANDING + capacity + affordable). That pool is the guardrail;
+ *  the render also hard-filters picks against it so a stray model id can never offer an unlearnable craft.
+ *  CCode augmentation (per §218b invitation): `schools` — the adopted school per domain — and each reachable
+ *  craft's school-fit, so the model can favour a craft trained the same WAY the character already trains.
+ *  Falls back to the heuristic on any failure (never leaves the top empty). */
+export async function suggestNextCrafts({ owned, domains, tendencies, aptitudes, reachablePool,
+                                         boosted = [], aspirations = [], uses = {}, schools = "", skillPoints = 0, level = 1 },
+                                         callJSON = callClaudeJSON) { // injected for tests (the SNG-198/204/208 pattern)
+  const sys = `You advise a player of SINGULARITY on WHICH CRAFT TO LEARN NEXT at level-up. You are not picking for them — you are naming the 2-4 reachable crafts that best fit WHO THIS CHARACTER HAS BECOME, each with an honest reason, so they can choose well.
+
+WHAT YOU READ:
+- Their OWNED crafts and ranks — what they already lean on, and where they're deep vs. thin.
+- Their PLAY-STYLE tendencies (a behavioural fingerprint accrued from how they actually play — e.g. cerebral, social, strategic, physical, amorous, cautious, ruthless). This is the strongest signal: suggest crafts that fit how they PLAY, not a theoretical "optimal" build. A cerebral, social, non-physical character should rarely be steered into a raw-combat craft they'll never reach for.
+- Their earned APTITUDES (strategist, scholar, charmer…) — who the world already recognises them as.
+- Their DOMAINS — the peoples they can draw from.
+- Their ADOPTED SCHOOLS — the METHOD they train each domain by (a school per domain). A reachable craft trained the SAME WAY they already train (its school matches their adopted school for that people) is a more NATURAL reach — the same discipline, deepened; note when a pick would instead mean a different method.
+- BOOSTED crafts, if any — crafts the PLAYER flagged they want to use more: weight these UP when they fit.
+- ASPIRATIONS — the crafts the player has DECLARED they're working toward (with progress). This is a DIRECT statement of intent: a reachable aspiration craft, or a craft that clearly advances one, is the STRONGEST fit-signal there is. If an aspiration is reachable now, it should almost always be among your picks (tagged fit:"aspiration"), and named as the thing they SAID they wanted.
+- USE COUNTS — which owned crafts they actually lean on vs. barely touch. A high-use craft is their signature; an owned-but-near-zero craft may be worth a "you have this but never use it" note (context for judging what genuinely fills a gap).
+
+⛔ SUGGEST ONLY FROM THE REACHABLE LIST GIVEN. Every craft you name MUST be in the reachable pool — a craft the character can learn RIGHT NOW (domain-allowed, level met, standing met, not already owned). Never suggest something they cannot learn this moment. You MAY, in a rationale, gesture at where a craft LEADS ("and it opens the road toward X") but the PICK itself is always reachable-now.
+
+⛔ EACH PICK CARRIES ITS REASON — grounded in THIS character, not generic. "You read every situation but have no way to WARD a friend — Death-Ward closes that gap" (specific to their kit). NOT "a versatile defensive option" (generic). A reason that could be pasted onto any character is a failure.
+
+⛔ COVER THE GAP, DON'T PILE ON THE STRENGTH. Prefer a pick that gives them something they LACK (a missing function family, a defensive tool for an all-offense kit, a way to act where they're currently helpless) over a fourth craft in the family they already dominate — UNLESS deepening a signature strength is the clearly aspirational move for how they play. Name which it is.
+
+⛔ HONESTLY RANK. Order the picks best-fit first. If the reachable pool is thin (1-2 crafts), suggest those plainly and say the field is narrow this level; never pad to four with poor fits.
+
+Reply with ONLY JSON:
+{"picks":[{"abilityId":"id from the reachable list","why":"one sentence, specific to THIS character's kit and play-style","fit":"gap|aspiration|strength|synergy — which kind of pick this is"}],
+"note":"one optional short line on the shape of the choice this level, or empty string"}
+
+Use ONLY abilityIds from the REACHABLE list. 2-4 picks, best first. If reachable is empty, return {"picks":[],"note":"nothing new is within reach this level — deepen what you have through use"}.`;
+
+  const content =
+`OWNED CRAFTS (id · rank): ${owned}
+DOMAINS: primary ${domains.primary} · secondary ${domains.secondary} · tertiary ${domains.tertiary}
+ADOPTED SCHOOLS (the method they train each domain by): ${schools || "none adopted yet"}
+PLAY-STYLE (higher = more that way): ${tendencies}
+APTITUDES: ${aptitudes}
+${boosted.length ? `BOOSTED (player wants to use more): ${boosted}\n` : ""}ASPIRATIONS (declared goals · progress/10): ${aspirations.length ? aspirations : "none declared"}
+USE COUNTS (leaned-on vs. rarely-used owned crafts): ${uses}
+SKILL POINTS: ${skillPoints} · LEVEL: ${level}
+
+REACHABLE NOW — the ONLY crafts you may suggest (id · name · family · what it does · school-fit · cost):
+${reachablePool}`;
+
+  return callJSON([{ role: "user", content }], { task: "suggest-next-crafts", system: sys, maxTokens: 900 });
+}
+
 /** SNG-088 (follow-on): the player has been TALKING THROUGH a plan with the GM. Read the recent
  *  conversation and extract the goal + the ordered steps they intend (with fallbacks if discussed) so
  *  the gambit builder AUTO-FILLS instead of making them retype it. Same shape as gambitOps. Returns

@@ -8,7 +8,7 @@
   "whyHere": "You put down the blade, or you were sent away from it, or you are looking for a line worth holding that isn't theirs.",
   "background": "war_leader",
   "level": 1,
-  "xp": 11,
+  "xp": 16,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -40,7 +40,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 92,
+  "energy": 86,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -198,14 +198,19 @@
         "player": "Hold up the cloth bundle again — let Freki confirm the lighter set is Sera's and set pace south",
         "summary": "Freki confirms the lighter prints as Sera's and leads south toward the Stillhold road; Ragnar reads the gait and falls in.",
         "narration": "You crouch and hold the cloth bundle low, linen unfolded so the white-flowered sprig catches the air. Freki steps in without being asked. It drops its nose to the bundle — a long, deliberate draw, nostrils working — then swings its head south and presses its muzzle to the lighter set of prints. One sniff, two. It lifts its head and looks at you with the flat certainty of an animal that does not hedge.\n\nThat's her.\n\nRagnar takes one last scan up the north branch, then moves to your shoulder. \"Light-footed one,\" he says, reading the ground for himself, his voice low and matter-of-fact. \"She was moving, not walking. Knows where she's going or afraid of being seen — same gait either way.\" He doesn't say anything else. He doesn't need to.\n\nFreki is already three yards south, picking a line between the deeper ruts where the mud holds a print cleanest. It moves at a tracking pace — steady, head low, covering ground without rushing — and you recognize the shape of it: the hound has the scent and it won't lose it unless the trail goes cold or wet. The Stillhold road is four miles out. At this pace, an hour and a half, maybe less. The figure ahead — Sera, or whoever carries her scent — had a three-to-four-hour lead and a lighter step. The heavier follower is the variable."
+      },
+      {
+        "player": "Use Read the Fight on the prints and the surrounding verge — look for tells of intent in the way the heavier figure was moving (a hunter's crouch, a soldier's set, something rushing)",
+        "summary": "Brynjar reads the heavier follower's prints and confirms a deliberate pursuit — someone who knew Sera was ahead and was closing the gap.",
+        "narration": "You set the cloth bundle aside and let your eyes go wide — not at the prints themselves but at the whole picture they make. Read the Fight is not for tracking; it is for the moment before the first blow, the way a body telegraphs what it intends before it commits. You borrow that same read and apply it to the mud.\n\nThe heavier set of prints tells you something useful. The stride is even, not erratic — no rushing, no stumble into a run. But the toe-pressure is front-loaded: this person was leaning forward, weight carried ahead of the heel, the way someone moves when they are closing distance deliberately. Not a soldier's march, which keeps the weight centred. Not a hunter's crouch, which would show scuffed dirt where they paused to still themselves. This is purposeful approach — a body that knows its target is ahead and is eating the gap between them. The spacing between prints narrows slightly as the trail bends south, which means they picked up pace as the lane straightened and sight-lines opened. Following, not coinciding.\n\nRagnar is watching you work. When you stand he reads your face and gives one slow nod. \"Someone who knew she was ahead of them,\" he says. It is not a question.\n\nFreki is already moving — three yards south, waiting, tail low and straight.\n\n*✦ The Thread of A Northern Village Called Javiksholm But It Was Raided And Razed. — a step forward.*"
       }
     ],
     "lastTurn": {
-      "narration": "You crouch and hold the cloth bundle low, linen unfolded so the white-flowered sprig catches the air. Freki steps in without being asked. It drops its nose to the bundle — a long, deliberate draw, nostrils working — then swings its head south and presses its muzzle to the lighter set of prints. One sniff, two. It lifts its head and looks at you with the flat certainty of an animal that does not hedge.\n\nThat's her.\n\nRagnar takes one last scan up the north branch, then moves to your shoulder. \"Light-footed one,\" he says, reading the ground for himself, his voice low and matter-of-fact. \"She was moving, not walking. Knows where she's going or afraid of being seen — same gait either way.\" He doesn't say anything else. He doesn't need to.\n\nFreki is already three yards south, picking a line between the deeper ruts where the mud holds a print cleanest. It moves at a tracking pace — steady, head low, covering ground without rushing — and you recognize the shape of it: the hound has the scent and it won't lose it unless the trail goes cold or wet. The Stillhold road is four miles out. At this pace, an hour and a half, maybe less. The figure ahead — Sera, or whoever carries her scent — had a three-to-four-hour lead and a lighter step. The heavier follower is the variable.",
-      "sceneSummary": "Freki confirms the lighter prints as Sera's and leads south toward the Stillhold road; Ragnar reads the gait and falls in.",
+      "narration": "You set the cloth bundle aside and let your eyes go wide — not at the prints themselves but at the whole picture they make. Read the Fight is not for tracking; it is for the moment before the first blow, the way a body telegraphs what it intends before it commits. You borrow that same read and apply it to the mud.\n\nThe heavier set of prints tells you something useful. The stride is even, not erratic — no rushing, no stumble into a run. But the toe-pressure is front-loaded: this person was leaning forward, weight carried ahead of the heel, the way someone moves when they are closing distance deliberately. Not a soldier's march, which keeps the weight centred. Not a hunter's crouch, which would show scuffed dirt where they paused to still themselves. This is purposeful approach — a body that knows its target is ahead and is eating the gap between them. The spacing between prints narrows slightly as the trail bends south, which means they picked up pace as the lane straightened and sight-lines opened. Following, not coinciding.\n\nRagnar is watching you work. When you stand he reads your face and gives one slow nod. \"Someone who knew she was ahead of them,\" he says. It is not a question.\n\nFreki is already moving — three yards south, waiting, tail low and straight.\n\n*✦ The Thread of A Northern Village Called Javiksholm But It Was Raided And Razed. — a step forward.*",
+      "sceneSummary": "Brynjar reads the heavier follower's prints and confirms a deliberate pursuit — someone who knew Sera was ahead and was closing the gap.",
       "choices": [
         {
-          "label": "Press south at Freki's pace and stay alert — let the hound lead and watch the road ahead for any sign the gap is closing",
+          "label": "Press south at pace — Freki leads, cover ground before the trail cools further",
           "attribute": "physical",
           "subAttribute": "agility",
           "difficulty": 0,
@@ -216,66 +221,73 @@
           "trivial": true
         },
         {
-          "label": "Ask Ragnar what he makes of the heavier follower — his read of the gait and weight, whether it looks like a warrior's step",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "study"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Use Read the Fight on the prints and the surrounding verge — look for tells of intent in the way the heavier figure was moving (a hunter's crouch, a soldier's set, something rushing)",
+          "label": "Read the shimmer in the mud — crouch and examine what that faint luminescence actually is before moving past it",
           "attribute": "mental",
           "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "study",
-            "careful"
-          ],
-          "abilityId": "read_the_fight",
-          "energyCost": 3,
-          "trivial": false
-        },
-        {
-          "label": "Check the shimmer in the mud before moving on — crouch over it and look at it properly",
-          "attribute": "mental",
-          "subAttribute": "reason",
           "difficulty": 15,
           "intentTags": [
             "study",
             "careful"
           ],
           "trivial": false
+        },
+        {
+          "label": "Ask Ragnar directly — does this read match anyone he knows by gait or habit from the Marchward",
+          "attribute": "social",
+          "subAttribute": "rapport",
+          "difficulty": 0,
+          "intentTags": [
+            "persuade"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Study the verge itself — look for where the follower may have paused, waited, or deviated from Sera's exact path",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "scout"
+          ],
+          "trivial": false
         }
       ],
+      "deeds": [],
       "characterDeltas": {
         "health": 0,
-        "energy": 0
+        "energy": -3
       },
+      "ledgerEvents": [],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "brynjar-andyrsson-thread",
+          "note": "Brynjar reads the heavier follower's prints as deliberate pursuit — a body leaning into the chase, closing distance with intent, pace quickening as sight-lines opened."
+        }
+      ],
       "scene": {
-        "setting": "The south branch of the east fork, mud-soft, moving south toward the Stillhold road. Early spring morning, cool and flat-lit. The Stillhold road lies roughly four miles ahead.",
+        "setting": "The south branch of the east fork, mud-soft, roughly twenty yards past the split. Early spring morning, cool and flat-lit. The Stillhold road lies roughly four miles ahead. The faint shimmer is twenty yards further south, still unexamined.",
         "npcsPresent": [
           {
             "name": "Ragnar Solmyr",
-            "state": "Walking at Brynjar's shoulder, reading the ground, quiet."
+            "state": "Standing at Brynjar's shoulder, watching the trail south, weight on his front foot."
           },
           {
             "name": "Freki",
-            "state": "Three yards ahead on the trail, head low, tracking south at a steady pace."
+            "state": "Three yards south of Brynjar, tail low and straight, waiting for the signal to move."
           }
         ],
         "objects": [
           "Cloth bundle (in Brynjar's hand — dried white-flowered sprig, knotted cord)",
-          "Two sets of boot-prints heading south — lighter frame confirmed as Sera's, heavier follower ten minutes behind",
-          "A faint, sourceless shimmer half-pressed into the mud twenty yards south — glimpsed, unexplained"
+          "Two sets of boot-prints heading south — lighter confirmed as Sera's, heavier confirmed as deliberate pursuit",
+          "A faint, sourceless shimmer pressed into the mud twenty yards south — unexamined"
         ],
         "threads": [
-          "Freki has confirmed the lighter prints as Sera's — trail leads south toward the Stillhold road",
-          "The heavier follower's identity and intent unknown",
           "The shimmer in the mud — glimpsed, still unexplained",
-          "The cord-knot's meaning still unread"
+          "The heavier follower's identity unknown — gait reads as deliberate pursuit, not coincidence",
+          "The cord-knot's meaning still unread",
+          "Sera is somewhere ahead on the Stillhold road, four miles out"
         ]
       },
       "npcUpdates": [
@@ -283,11 +295,11 @@
           "op": "update",
           "npcId": "ragnar-solmyr",
           "name": "Ragnar Solmyr",
-          "note": "Read the lighter footprints on sight — identified fast movement versus deliberate, noted same gait for fleeing and purposeful travel. Walking at Brynjar's shoulder.",
-          "statusNote": "Walking south down the east lane with Brynjar and Freki, reading the trail as he goes.",
+          "note": "Confirmed Brynjar's read of the heavier prints — named it plainly as someone who knew Sera was ahead of them.",
+          "statusNote": "Walking south on the Stillhold road trail with Brynjar and Freki.",
           "skillsObserved": [
-            "ground-reading",
-            "gait analysis"
+            "print-reading",
+            "tactical assessment"
           ]
         }
       ],
@@ -296,42 +308,48 @@
           "topic": "sera-of-the-stillhold",
           "label": "Sera of the Stillhold",
           "kind": "mystery",
-          "fact": "Freki confirmed the lighter prints as Sera's — she was moving fast, not walking. Ragnar reads it as someone who knows where they're going or doesn't want to be seen; the gait is the same either way.",
+          "fact": "The heavier follower's prints read as deliberate pursuit — weight forward, toe-heavy, pace quickening as sight-lines opened south. Not a soldier, not a hunter. Someone closing distance on a target they knew was ahead.",
           "links": [
-            "the-stillhold",
             "ragnar-solmyr",
+            "the-marchward",
             "brynjar-andyrsson-thread"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief pause at the fork to confirm the trail before pressing south."
+        "why": "a short halt at the fork to read the ground"
       },
-      "sceneEnded": false
+      "stageOps": [
+        {
+          "questId": "brynjar-andyrsson-thread",
+          "stageId": "s1",
+          "evidence": "Brynjar used Read the Fight on the pursuit trail and established a concrete lead — a deliberate follower closing on Sera, south toward the Stillhold road."
+        }
+      ]
     },
     "sceneState": {
-      "setting": "The south branch of the east fork, mud-soft, moving south toward the Stillhold road. Early spring morning, cool and flat-lit. The Stillhold road lies roughly four miles ahead.",
+      "setting": "The south branch of the east fork, mud-soft, roughly twenty yards past the split. Early spring morning, cool and flat-lit. The Stillhold road lies roughly four miles ahead. The faint shimmer is twenty yards further south, still unexamined.",
       "npcsPresent": [
         {
           "name": "Ragnar Solmyr",
-          "state": "Walking at Brynjar's shoulder, reading the ground, quiet."
+          "state": "Standing at Brynjar's shoulder, watching the trail south, weight on his front foot."
         },
         {
           "name": "Freki",
-          "state": "Three yards ahead on the trail, head low, tracking south at a steady pace."
+          "state": "Three yards south of Brynjar, tail low and straight, waiting for the signal to move."
         }
       ],
       "objects": [
         "Cloth bundle (in Brynjar's hand — dried white-flowered sprig, knotted cord)",
-        "Two sets of boot-prints heading south — lighter frame confirmed as Sera's, heavi",
-        "A faint, sourceless shimmer half-pressed into the mud twenty yards south — glimp"
+        "Two sets of boot-prints heading south — lighter confirmed as Sera's, heavier con",
+        "A faint, sourceless shimmer pressed into the mud twenty yards south — unexamined"
       ],
       "threads": [
-        "Freki has confirmed the lighter prints as Sera's — trail leads south toward the Stillhold road",
-        "The heavier follower's identity and intent unknown",
         "The shimmer in the mud — glimpsed, still unexplained",
-        "The cord-knot's meaning still unread"
+        "The heavier follower's identity unknown — gait reads as deliberate pursuit, not coincidence",
+        "The cord-knot's meaning still unread",
+        "Sera is somewhere ahead on the Stillhold road, four miles out"
       ]
     }
   },
@@ -395,10 +413,14 @@
           "effects": []
         }
       ],
-      "stageIndex": 0,
-      "completedStages": [],
+      "stageIndex": 1,
+      "completedStages": [
+        "s1"
+      ],
       "progress": [
-        "Freki's trail leads south toward the Stillhold road — Sera was not alone at the fork, and the hunt is moving"
+        "Freki's trail leads south toward the Stillhold road — Sera was not alone at the fork, and the hunt is moving",
+        "Brynjar reads the heavier follower's prints as deliberate pursuit — a body leaning into the chase, closing distance with intent, pace quickening as sight-lines opened.",
+        "↳ Brynjar used Read the Fight on the pursuit trail and established a concrete lead — a deliberate follower closing on Sera, south toward the Stillhold road."
       ],
       "aliases": [],
       "startedAt": "2026-07-19T16:06:41.716Z",
@@ -532,7 +554,8 @@
         "[d1] Named himself when asked directly and committed to walk east without haggling — offered the information that he'd seen movement at the east fork before dawn as if he'd been holding it for someone who'd earn it.",
         "[d1] Crossed the square to deliver an accurate assessment of Brynjar's left-shoulder lead — a gap above the collarbone — then returned to his bench without waiting for a response.",
         "[d1] Fell into step without hesitation; confirmed the movement he saw was at the south fork, two people, before full light — gave the information plainly and without embellishment",
-        "[d1] Read the lighter footprints on sight — identified fast movement versus deliberate, noted same gait for fleeing and purposeful travel. Walking at Brynjar's shoulder."
+        "[d1] Read the lighter footprints on sight — identified fast movement versus deliberate, noted same gait for fleeing and purposeful travel. Walking at Brynjar's shoulder.",
+        "[d1] Confirmed Brynjar's read of the heavier prints — named it plainly as someone who knew Sera was ahead of them."
       ],
       "knownFacts": [
         "His name is Ragnar Solmyr",
@@ -544,17 +567,17 @@
         "Movement at the south fork before dawn — two people, direction south toward Stillhold road"
       ],
       "skillsObserved": [
-        "combat assessment",
-        "silent observation",
         "knowledge of local roads",
         "silent movement",
         "ground-reading",
-        "gait analysis"
+        "gait analysis",
+        "print-reading",
+        "tactical assessment"
       ],
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "Walking south down the east lane with Brynjar and Freki, reading the trail as he goes.",
+      "statusNote": "Walking south on the Stillhold road trail with Brynjar and Freki.",
       "domains": {
         "primary": "marcher"
       },
@@ -668,10 +691,10 @@
       }
     ],
     "unseenNews": [],
-    "lastSharedReadAt": "2026-07-23T01:54:10.287Z",
+    "lastSharedReadAt": "2026-07-23T02:05:37.704Z",
     "lastTickWorldDay": 23,
     "lastCanonWorldDay": 23,
-    "lastGenCount": 553,
+    "lastGenCount": 554,
     "wantProgress": {
       "redline-warrior": {
         "progress": 1,
@@ -686,7 +709,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 3,
+    "turnsSinceOffer": 4,
     "recentOffers": [
       {
         "thing": "Doss watching Brynjar with the stillness of someone deciding something — she has not offered it yet, but she is on the edge of it",
@@ -814,7 +837,8 @@
           "[d1] Freki read the cloth bundle — dried white-flowered sprig and knotted cord — and tracked toward the side door Sera used before dawn. The trail leads east, to a fork: waygate approach north, Stillhold road south.",
           "[d1] Freki confirmed the trail at the fork goes south — toward the Stillhold road. Ragnar saw two people at the south fork before full light. Sera was not alone when she left, or someone followed her.",
           "[d1] Two sets of prints at the south fork: a lighter frame went first, a heavier follower came ten minutes behind. Sera was not alone — someone tracked her, or met her, on the Stillhold road. Time of passage: roughly three to four hours before the Marchward woke.",
-          "[d1] Freki confirmed the lighter prints as Sera's — she was moving fast, not walking. Ragnar reads it as someone who knows where they're going or doesn't want to be seen; the gait is the same either way."
+          "[d1] Freki confirmed the lighter prints as Sera's — she was moving fast, not walking. Ragnar reads it as someone who knows where they're going or doesn't want to be seen; the gait is the same either way.",
+          "[d1] The heavier follower's prints read as deliberate pursuit — weight forward, toe-heavy, pace quickening as sight-lines opened south. Not a soldier, not a hunter. Someone closing distance on a target they knew was ahead."
         ],
         "links": [
           "the-stillhold",
@@ -999,17 +1023,17 @@
     ]
   },
   "tendencies": {
-    "leadership": 9.576289597894927,
-    "cerebral": 2.4727951860721653,
-    "strategic": 4.152886427294897,
-    "ruthless": 0.7195483871809846,
-    "social": 5.98309967747417,
-    "cautious": 1
+    "leadership": 9.336882357947554,
+    "cerebral": 3.410975306420361,
+    "strategic": 4.0490642666125245,
+    "ruthless": 0.70155967750146,
+    "social": 5.833522185537316,
+    "cautious": 1.975
   },
   "aptitudes": [
     "banner"
   ],
-  "actionCount": 15,
+  "actionCount": 16,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1135,8 +1159,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784772287526,
-  "rev": 63,
+  "updatedAt": 1784772371135,
+  "rev": 69,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1301,12 +1325,13 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 18
+    "riven_marches": 19
   },
   "practice": {
     "schemaVersion": 1,
     "uses": {
-      "order_sense": 1
+      "order_sense": 1,
+      "read_the_fight": 1
     },
     "coActivations": {},
     "aspirations": [
@@ -1322,7 +1347,8 @@
       }
     ],
     "lastUsed": {
-      "order_sense": 23
+      "order_sense": 23,
+      "read_the_fight": 23
     }
   },
   "customAbilities": {},
@@ -1365,10 +1391,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-23T01:30:20.702Z",
-      "lastAt": "2026-07-23T02:04:47.526Z",
+      "lastAt": "2026-07-23T02:06:11.133Z",
       "startDay": 23,
       "endDay": 23,
-      "beats": 12
+      "beats": 13
     }
   ],
   "_pendingArrival": null,
@@ -1393,12 +1419,13 @@
     "moveTo": 2,
     "timeOps": 12,
     "codexUpdates": 12,
-    "sceneEnded": 3,
+    "sceneEnded": 2,
     "characterDeltas": 3,
     "offer": 2,
     "deeds": 1,
     "standingOps": 1,
-    "questUpdates": 1
+    "questUpdates": 2,
+    "stageOps": 1
   },
   "_opTurns": 12,
   "_opLedger": {

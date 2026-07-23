@@ -67,7 +67,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.214";
+const APP_VERSION = "1.8.215";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -207,6 +207,8 @@ let CONTENT = null;      // packs: rules, spectrums, abilities, locations, npcs,
 let FN_INDEX = { families: [], verbToFamily: {}, byFamily: {} }; // SNG-124: function-family index (built at load)
 let wheelFnFilter = new Set(); // SNG-124 Phase B: active function-family filter on the skill wheel
 let wheelSelTrad = null; // SNG-202B §2: the tradition clicked to highlight its crafts/braids across the wheel
+let wheelRecommended = new Set(); // SNG-218 §3: the level-up suggestion's picks, lit ON the wheel (browse + highlight)
+let wheelReturnTo = null; // SNG-218 §3: when the wheel is opened FROM level-up, its Back returns there
 let character = null;    // active character
 let profile = null;      // the player's profile (the human)
 let sceneTurns = [];     // recent beats: {summary, narration} for scene continuity
@@ -5054,6 +5056,7 @@ function buildWheelModel() {
       effCost: (() => { try { return effectiveEnergyCost(ab, character, CONTENT.rules); } catch { return ab.energyCost ?? null; } })(),
       reachable: g.ok, learnGate: g.ok ? null : (g.gate || "blocked"), learnGateWhy: g.ok ? null : (g.why || null),
       aspirational: !isOwned && !g.ok && g.gate === "standing", // blocked only by standing → earnable "later"
+      recommended: wheelRecommended.has(ab.id), // SNG-218 §3: a level-up suggestion pick, lit on the wheel
       precursorUnlocked: ab.powerSystem === "precursor" && (character.precursorAccess || []).includes(ab.id), // SNG-129: narrative-earned
       ...extra });
   };
@@ -5282,13 +5285,14 @@ function renderSkillWheel(selectedId = null, status = "") {
         const opened = nd.isPrecursor && nd.precursorUnlocked;
         const fill = nd.owned ? traditionColor(nd.cls) : sealed ? "transparent" : "#20242c";
         const stroke = nd.closed ? "var(--danger)" : traditionColor(nd.cls);
-        const cls = `wheel-node ${nd.owned ? "owned" : ""} ${nd.closed ? "closed" : ""} ${nd.barred ? "barred" : ""} ${nd.dim ? "dim" : ""} ${nd.isFolk ? "folk" : ""} ${nd.isPrecursor ? "precursor" : ""} ${sealed ? "precursor-sealed" : ""} ${opened ? "precursor-open" : ""} ${nd.braid ? "braid" : ""} ${nd.antipodal ? "braid-antipodal" : ""} ${selectedId === nd.id ? "selected" : ""} ${filterOn && !wheelSelTrad ? (matched ? "fn-match" : "fn-dim") : ""} ${wheelSelTrad ? "trad-" + tradRelOf(nd) : ""}`;
+        const cls = `wheel-node ${nd.owned ? "owned" : ""} ${nd.closed ? "closed" : ""} ${nd.barred ? "barred" : ""} ${nd.dim ? "dim" : ""} ${nd.isFolk ? "folk" : ""} ${nd.isPrecursor ? "precursor" : ""} ${sealed ? "precursor-sealed" : ""} ${opened ? "precursor-open" : ""} ${nd.braid ? "braid" : ""} ${nd.antipodal ? "braid-antipodal" : ""} ${selectedId === nd.id ? "selected" : ""} ${filterOn && !wheelSelTrad ? (matched ? "fn-match" : "fn-dim") : ""} ${wheelSelTrad ? "trad-" + tradRelOf(nd) : ""} ${nd.recommended && !nd.owned ? "recommended" : ""} ${nd.aspirational ? "aspirational" : ""}`;
         const secondaries = (nd.families || []).slice(1, 3);
         const lbl = labelAt[nd.id];
         const braidNote = nd.braid ? ` · braid of ${(nd.braidFrom || []).join(" × ") || "two crafts"}${nd.antipodal ? " — spans the circle (an antipodal braid, the far poles joined)" : " — placed between its two axes"}` : "";
         const title = nd.name + " — " + (nd.braid ? "a braid" : traditionLabel(nd.cls)) + " · Tier " + nd.tier + braidNote + ((nd.functions || []).length ? " · " + nd.functions.join(", ") : "") + (nd.effCost != null ? " · ⚡" + nd.effCost : "") + (sealed ? " · SEALED (precursor — earned through play, never bought)" : nd.owned ? " (owned)" : nd.closed ? " · CLOSED (your antipode)" : nd.barred ? " · barred" : nd.dim ? " · costs more" : "");
-        return `<g class="${cls}" data-wheelnode="${esc(nd.id)}"><title>${esc(title)}</title>
+        return `<g class="${cls}" data-wheelnode="${esc(nd.id)}"><title>${esc(title)}${nd.recommended && !nd.owned ? " · ✨ suggested for you this level" : nd.aspirational ? " · later — deepen your standing to open it" : ""}</title>
           <circle class="hit" cx="${nd.x}" cy="${nd.y}" r="13"/>
+          ${nd.recommended && !nd.owned ? `<circle cx="${nd.x}" cy="${nd.y}" r="${(r + 5).toFixed(1)}" class="wheel-reco-halo"/>` : ""}
           ${wheelNodeShape(sealed ? "ring" : shapeOfFamily(fam), nd.x, nd.y, r, { fill, stroke, sw: sealed ? 1.3 : 1.5, cls: sealed ? "precursor-seal-shape" : "" })}
           ${sealed ? `<text x="${nd.x}" y="${(nd.y + 3).toFixed(1)}" text-anchor="middle" class="precursor-mark">✦</text>` : opened ? `<text x="${(nd.x + r + 2).toFixed(1)}" y="${(nd.y - r).toFixed(1)}" class="precursor-mark open">✦</text>` : ""}
           ${!sealed && !nd.closed ? secondaries.map((sf, i) => `<circle cx="${(nd.x + r + 2).toFixed(1)}" cy="${(nd.y - r - 1 + i * 4).toFixed(1)}" r="1.9" fill="${FAMILY_COLOR[sf] || "var(--ink-dim)"}" class="wheel-fn-dot"/>`).join("") : ""}
@@ -5375,7 +5379,7 @@ function renderSkillWheel(selectedId = null, status = "") {
   };
   const fnClear = document.getElementById("fn-filter-clear"); if (fnClear) fnClear.onclick = () => { wheelFnFilter = new Set(); renderSkillWheel(selectedId, status); };
   wireSkillSelectionActions((id, msg) => renderSkillWheel(id, msg)); // SNG-097: learn/deepen in place
-  document.getElementById("wheel-back").onclick = () => { graphViews[graphSurface] = null; renderCharacterScreen(); };
+  document.getElementById("wheel-back").onclick = () => { graphViews[graphSurface] = null; const rt = wheelReturnTo; wheelReturnTo = null; if (rt === "levelup") renderLevelUp(); else renderCharacterScreen(); }; // SNG-218 §3: return to level-up when opened from it
   document.getElementById("wheel-list").onclick = () => { graphViews[graphSurface] = null; renderSkillGraph(); };
 }
 
@@ -5620,6 +5624,7 @@ function renderLevelUp(status = "") {
         ripe: new Set(reachableNow.filter(ab => aspirationRipe(character, ab.id, rules)).map(ab => ab.id)),
         effectiveCost: ab => effectiveEnergyCost(ab, character, rules), max: 4
       });
+      wheelRecommended = new Set(suggestions.map(s => s.abilityId)); // SNG-218 §3: the same picks light up ON the wheel
       const gap = cov.missing.length ? `Your kit has no <strong>${cov.missing.join(", ")}</strong> yet — gaps worth filling.` : `Your kit already touches all ${cov.covered.length} function families.`;
       const rows = suggestions.map(s => { const ab = fullCatalog()[s.abilityId]; return `<div class="cs-ability sug-row">
           <div><strong>${esc(s.name)}</strong> ${functionChips(ab)}${s.cost != null ? ` <span class="hint" title="energy to use (effective)">⚡${s.cost}</span>` : ""}</div>
@@ -5643,6 +5648,10 @@ function renderLevelUp(status = "") {
 
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Learn a new craft ${infoDot("circle.domains")} <span class="hint" style="text-transform:none">— broaden into your domains</span></h3>
       ${cap ? `<div class="hint" style="margin-bottom:6px">You're at capacity — new points now deepen what you know. ${infoDot("lock.capacity")}</div>` : ""}
+      ${/* SNG-218 §3: the WHEEL is the browse + highlight surface — see every craft in its place, your suggested
+          picks lit and standing-locked capstones dimmed as "later". Its detail panel shows what each rank grants.
+          The tradition list below stays as a plain-text alternative. */""}
+      <button class="btn" id="lvl-wheel" style="width:100%; margin-bottom:10px">✦ Browse crafts on the wheel${wheelRecommended.size ? " — your suggested picks are lit ✨" : ""} →</button>
       ${Object.keys(byTrad).length
         ? Object.keys(byTrad).sort((a, b) => traditionLabel(a).localeCompare(traditionLabel(b))).map(k => `<details class="learn-group" ${byTrad[k].some(ab => abilityTradition(ab) === character.domains?.primary) ? "open" : ""}><summary>${esc(traditionLabel(k))} <span class="cost">(${byTrad[k].length})</span></summary>${byTrad[k].sort((a, b) => (a.levelReq || 1) - (b.levelReq || 1)).map(learnRow).join("")}</details>`).join("")
         : "<div class='insight'>nothing new to learn at this level — deepen a craft, or play on to reach the next tier</div>"}
@@ -5662,6 +5671,8 @@ function renderLevelUp(status = "") {
   }; };
   bindLearn();
   document.getElementById("lvl-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
+  // SNG-218 §3: open the wheel as the browse+highlight surface; its Back returns here (wheelReturnTo).
+  const lvlWheel = document.getElementById("lvl-wheel"); if (lvlWheel) lvlWheel.onclick = () => { wheelReturnTo = "levelup"; renderSkillWheel(); };
 
   // SNG-218 §2: upgrade the instant heuristic to a GENUINELY-REASONED suggestion (async, non-blocking). Reads
   // the character's real play-fingerprint (tendencies, aptitudes, declared aspirations, use counts, adopted
@@ -5693,6 +5704,7 @@ function renderLevelUp(status = "") {
       });
       const picks = (res?.picks || []).filter(p => okIds.has(p.abilityId)).slice(0, 4); // §2 guardrail: reachable-only, always
       if (!picks.length) return;
+      wheelRecommended = new Set(picks.map(p => p.abilityId)); // SNG-218 §3: the reasoned picks light up ON the wheel
       box.style.display = "";
       box.innerHTML = `<h3 class="codex-title" style="font-size:15px">✨ Suggested for you <span class="hint" style="text-transform:none">— reasoned from how you actually play</span></h3>
         ${picks.map(p => { const ab = cat[p.abilityId]; return `<div class="cs-ability sug-row">

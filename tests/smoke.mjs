@@ -7359,6 +7359,14 @@ await (async () => {
   const appSrc218b = readFileSync(join(root, "app.js"), "utf8");
   check("218 §2: renderLevelUp reads reachableNow (§1 gate) for BOTH the heuristic and the LLM pool", /const reachableNow = learnable\.filter\(ab => canLearnAbility/.test(appSrc218b) && /recommendSkills\(character, reachableNow/.test(appSrc218b));
   check("218 §2: the render hard-filters model picks against okIds + falls back to the heuristic on failure", /okIds\.has\(p\.abilityId\)/.test(appSrc218b) && /the heuristic on screen stands/.test(appSrc218b));
+
+  // §3: the wheel is the browse+highlight surface — suggestion picks lit, standing-locked capstones dimmed as "later".
+  check("218 §3: the suggestion's picks populate wheelRecommended (heuristic AND the LLM upgrade)", /wheelRecommended = new Set\(suggestions\.map/.test(appSrc218b) && /wheelRecommended = new Set\(picks\.map/.test(appSrc218b));
+  check("218 §3: buildWheelModel stamps `recommended` + `aspirational` onto each node (§1 flag reused)", /recommended: wheelRecommended\.has\(ab\.id\)/.test(appSrc218b) && /aspirational: !isOwned && !g\.ok && g\.gate === "standing"/.test(appSrc218b));
+  check("218 §3: the wheel node carries recommended/aspirational classes (lit halo / dimmed 'later')", /nd\.recommended && !nd\.owned \? "recommended"/.test(appSrc218b) && /nd\.aspirational \? "aspirational"/.test(appSrc218b));
+  check("218 §3: level-up opens the wheel as the browse surface; the wheel returns to level-up (wheelReturnTo)", /wheelReturnTo = "levelup"; renderSkillWheel\(\)/.test(appSrc218b) && /rt === "levelup"\) renderLevelUp\(\)/.test(appSrc218b));
+  const cssSrc218 = readFileSync(join(root, "style.css"), "utf8");
+  check("218 §3: the recommended halo + aspirational dim are styled (reduced-motion respected)", /\.wheel-reco-halo/.test(cssSrc218) && /\.wheel-node\.aspirational \{ opacity/.test(cssSrc218) && /prefers-reduced-motion/.test(cssSrc218));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

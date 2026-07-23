@@ -1,5 +1,18 @@
 # PO ALERT
 
+> ## 🎨 Skill images — the moment gets art + every craft gets a face (Aevi, 2026-07-22 · SNG-222 §5 + SNG-223)
+> Erik: put image-gen on skill discovery, and images for every skill — "keep the amazing scene images going
+> into the celebration and catalogs." Verified: the scene/place/moment images ALL run through ONE generalized
+> `ensureImage(entity, type)` (generate-once-cache, rating-lensed, gallery, lightbox); the moment modal
+> ALREADY renders art. So both asks are EXTENSIONS, not new systems:
+> - **SNG-222 §5** — the discovery moment gets an image via ensureImage('discovery'), prompted from the GM's
+>   authored description; Marrow's Wings' backfill carries its image so Erik SEES the death-shadow wings.
+> - **SNG-223** — every craft gets an image: new 'ability' image type, generate-once-ON-CONTACT (NOT batch
+>   all ~280 — quota disaster), cache like place images, glyph fallback; shows in wheel node (218 §3), detail
+>   panel (218 §4), merged catalog (215 §C), and the moment. One image per craft, reused everywhere.
+> Priority: moment images FIRST (most loaded surface), then owned crafts, then lazy-on-view. CCode owns the
+> pipeline extension; Aevi can author a per-tradition visual-aesthetic guide if wanted.
+
 > ## 🏰 Raven's Home reconcile — buildings authored, now bridge them to the wards (Aevi, 2026-07-22 · SNG-221)
 > Aevi wrote the canonical `the_old_warden_post.json` (buildings/layout — Pell's forge, Veth's lab, Cassiel's
 > keeper's ground, Huginn's Rook, the Maker's hollow). But verified: the WARDS + claim are recorded in the

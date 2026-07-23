@@ -33,7 +33,7 @@
   ],
   "alignment": {
     "spectrum": -0.03,
-    "falsehood_truth": 0.029000000000000005,
+    "falsehood_truth": 0.042550000000000004,
     "spectrumId": 0
   },
   "attunement": 1,
@@ -213,105 +213,78 @@
         "player": "Crouch over the shimmer now — examine it properly before it fades further",
         "summary": "Brynjar crouches over the shimmer in the heavier prints but it vanishes before he can read it — the trail leads south, Freki does not wait.",
         "narration": "You drop to a knee over the heel-strike where the shimmer sits and look at it properly — close, unhurried, the way you would examine a wound to know what made it. The spring mud is soft here, the chalk beneath it pale where the frost has only just let go, and the shimmer is right there: a faint, sourceless thread of light pressed into the toe-print's back edge, the color of ice in shadow.\n\nIt is gone before you can name it. Not faded — gone, the way a spark goes when it hits wet ground. You press one finger into the mud beside the print. Nothing. You shift your weight to read the surrounding ground for any pattern, any second mark. The mud gives you mud: Sera's lighter stride, the follower's toe-heavy press, the ordinary mess of a spring morning on a used road. Whatever left that shimmer is not leaving another.\n\nRagnar watches from a pace back, not crowding your read. \"Gone?\" he asks — plainly, no disappointment in it, just checking the fact.\n\nFreki has not paused. Thirty yards ahead it is already a shape in the road-haze, nose down, moving with the particular certainty of an animal that does not need the light to do its work."
+      },
+      {
+        "player": "Ask Ragnar — does he know anything in the Marches that leaves a mark like that? A craft, a people, a rumor",
+        "summary": "Ragnar names what he knows: Stillhold sends quiet operatives carrying binding-cords; the shimmer may be part of that craft, and at least one man dropped a trail he couldn't explain.",
+        "narration": "You stand from the mud and brush your knee clean, then look at Ragnar. \"That shimmer,\" you say, keeping your voice level. \"You've walked the Marches longer than I have. Anything here that leaves a mark like that — pressed into a footprint, gone before you can name it? A craft, a people, a rumor?\"\n\nRagnar is quiet for a moment. Not the quiet of someone who doesn't know — the quiet of someone deciding how much of what they know is useful here. He turns his head and watches Freki's line south before he answers.\n\n\"There's talk,\" he says. \"Stillhold sends people out sometimes — not travelers. Quiet ones. The kind who don't check in at Wardhouses.\" He pauses. \"Word among the dueling circuit is they carry something — a cord, a knot, a mark. Not a weapon. The Marchers call it a binding. What it binds, nobody's said plainly to me.\" He looks at your hand — at the cloth bundle. \"Your cord. The knot. That's the same talk.\"\n\nFreki is thirty yards ahead and pulling. Ragnar's eyes follow it south, then come back to you. \"I've never seen the shimmer myself. But I've heard a man describe a set of prints that wasn't right, and he couldn't say why, and he dropped the trail.\" He says it flat, the way he says everything — not to frighten you, just because it is what he knows."
       }
     ],
     "lastTurn": {
-      "narration": "You drop to a knee over the heel-strike where the shimmer sits and look at it properly — close, unhurried, the way you would examine a wound to know what made it. The spring mud is soft here, the chalk beneath it pale where the frost has only just let go, and the shimmer is right there: a faint, sourceless thread of light pressed into the toe-print's back edge, the color of ice in shadow.\n\nIt is gone before you can name it. Not faded — gone, the way a spark goes when it hits wet ground. You press one finger into the mud beside the print. Nothing. You shift your weight to read the surrounding ground for any pattern, any second mark. The mud gives you mud: Sera's lighter stride, the follower's toe-heavy press, the ordinary mess of a spring morning on a used road. Whatever left that shimmer is not leaving another.\n\nRagnar watches from a pace back, not crowding your read. \"Gone?\" he asks — plainly, no disappointment in it, just checking the fact.\n\nFreki has not paused. Thirty yards ahead it is already a shape in the road-haze, nose down, moving with the particular certainty of an animal that does not need the light to do its work.",
-      "sceneSummary": "Brynjar crouches over the shimmer in the heavier prints but it vanishes before he can read it — the trail leads south, Freki does not wait.",
+      "narration": "You stand from the mud and brush your knee clean, then look at Ragnar. \"That shimmer,\" you say, keeping your voice level. \"You've walked the Marches longer than I have. Anything here that leaves a mark like that — pressed into a footprint, gone before you can name it? A craft, a people, a rumor?\"\n\nRagnar is quiet for a moment. Not the quiet of someone who doesn't know — the quiet of someone deciding how much of what they know is useful here. He turns his head and watches Freki's line south before he answers.\n\n\"There's talk,\" he says. \"Stillhold sends people out sometimes — not travelers. Quiet ones. The kind who don't check in at Wardhouses.\" He pauses. \"Word among the dueling circuit is they carry something — a cord, a knot, a mark. Not a weapon. The Marchers call it a binding. What it binds, nobody's said plainly to me.\" He looks at your hand — at the cloth bundle. \"Your cord. The knot. That's the same talk.\"\n\nFreki is thirty yards ahead and pulling. Ragnar's eyes follow it south, then come back to you. \"I've never seen the shimmer myself. But I've heard a man describe a set of prints that wasn't right, and he couldn't say why, and he dropped the trail.\" He says it flat, the way he says everything — not to frighten you, just because it is what he knows.",
+      "sceneSummary": "Ragnar names what he knows: Stillhold sends quiet operatives carrying binding-cords; the shimmer may be part of that craft, and at least one man dropped a trail he couldn't explain.",
       "choices": [
         {
-          "label": "Trust Freki and push the pace — the shimmer is gone; what matters is the distance ahead",
+          "label": "Press south hard — Freki is pulling and the trail is cooling; get answers from what you find, not what you're told",
           "attribute": "physical",
           "subAttribute": "agility",
-          "axes": {
-            "violence_peace": -0.2
-          },
           "difficulty": 0,
           "intentTags": [
-            "travel",
-            "careful"
+            "travel"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Ask Ragnar — does he know anything in the Marches that leaves a mark like that? A craft, a people, a rumor",
+          "label": "Ask Ragnar what happened to the man who dropped the trail — who was he and what was he following",
           "attribute": "social",
           "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.3
-          },
           "difficulty": 0,
           "intentTags": [
-            "study",
-            "negotiate"
+            "study"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         },
         {
-          "label": "Use Order-Sense on the road itself — read the structure of the trail as a system, see if the shimmer has a pattern the eye alone missed",
+          "label": "Look at the knotted cord in the cloth bundle now — Ragnar just named it; study the pattern against what he described",
           "attribute": "mental",
           "subAttribute": "reason",
-          "axes": {
-            "falsehood_truth": 0.2
-          },
           "difficulty": 15,
           "intentTags": [
-            "study",
-            "careful"
+            "study"
           ],
-          "abilityId": "order_sense",
-          "energyCost": 3,
-          "trivial": false,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": false
         },
         {
-          "label": "Log it and move — note the position in memory and press south; Freki's trail is what counts now",
-          "attribute": "mental",
-          "subAttribute": "wits",
-          "axes": {},
+          "label": "Keep moving, but ask Ragnar as you go — what does 'binding' mean to the Marchers? What does it bind?",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "travel",
-            "plan"
+            "study",
+            "travel"
           ],
-          "abilityId": null,
-          "energyCost": null,
-          "trivial": true,
-          "encounterId": null,
-          "emergenceId": null
+          "trivial": true
         }
       ],
       "scene": {
-        "setting": "The south branch of the east fork, forty yards past the split, early spring morning, overcast and flat-lit. The shimmer in the heavier prints has vanished without yielding anything. The Stillhold road lies roughly four miles ahead.",
+        "setting": "The south branch of the east fork, forty yards past the split, early spring morning, overcast and flat-lit. The shimmer in the heavier prints has gone. Freki is thirty yards south and pulling.",
         "npcsPresent": [
           {
             "name": "Ragnar Solmyr",
-            "state": "Standing a pace back from Brynjar's crouch, watching the failed read without comment, waiting."
-          },
-          {
-            "name": "Freki",
-            "state": "Thirty yards south and moving, nose down on Sera's trail, not waiting."
+            "state": "Standing at Brynjar's shoulder, watching Freki's line south, waiting for the next move."
           }
         ],
         "objects": [
-          "Cloth bundle (in Brynjar's hand — dried white-flowered sprig, knotted cord)",
-          "Two sets of boot-prints heading south — lighter confirmed as Sera's, heavier follower's",
+          "Cloth bundle in Brynjar's hand — dried white-flowered sprig, knotted cord",
+          "Two sets of boot-prints heading south — lighter confirmed as Sera's, heavier follower's prints toe-heavy and deliberate",
           "The heel-strike where the shimmer was — now only mud, no trace remaining"
         ],
         "threads": [
-          "The shimmer is gone without being identified — its origin unknown",
-          "The heavier follower's identity still unestablished",
-          "The cord-knot's meaning still unread",
-          "Sera is somewhere ahead on the Stillhold road, roughly four miles out"
+          "The shimmer is gone without being identified — Ragnar links it to Stillhold operatives and a 'binding' cord; what it does is still unnamed",
+          "The knotted cord in the cloth bundle may be the same craft Ragnar described",
+          "The heavier follower's identity still unestablished — possibly a Stillhold operative",
+          "Sera is somewhere ahead on the Stillhold road, roughly four miles out",
+          "The man who dropped a trail he couldn't explain — Ragnar knows that story"
         ]
       },
       "npcUpdates": [
@@ -319,50 +292,67 @@
           "op": "update",
           "npcId": "ragnar-solmyr",
           "name": "Ragnar Solmyr",
-          "note": "Watched Brynjar's failed read of the shimmer without crowding it; checked the fact plainly and waited.",
-          "statusNote": "Walking south on the Stillhold road trail with Brynjar and Freki."
+          "role": "Redline Warrior, walking south with Brynjar",
+          "note": "Named what he knows of Stillhold operatives — quiet people carrying binding-cords, not weapons. Linked the knotted cord in the bundle to the same talk. Mentioned a man who dropped an inexplicable trail.",
+          "learned": [
+            "Stillhold sends quiet operatives out — not travelers; they don't check in at Wardhouses",
+            "The Marchers call whatever they carry a 'binding' — a cord, a knot, a mark; not a weapon",
+            "At least one person dropped a trail they couldn't explain after encountering something like the shimmer"
+          ],
+          "status": "active",
+          "statusNote": "Walking south on the Stillhold road trail with Brynjar and Freki; has shared what he knows of Stillhold operatives and binding-cords"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "sera-of-the-stillhold",
-          "label": "Sera of the Stillhold",
-          "kind": "mystery",
-          "fact": "The shimmer pressed into the heavier follower's heel-strike vanished on direct examination — gone before it could be named, leaving no second trace and no pattern in the surrounding mud.",
+          "topic": "stillhold-operatives",
+          "label": "Stillhold Operatives",
+          "kind": "faction",
+          "fact": "Ragnar names them: quiet people the Stillhold sends out who don't check in at Wardhouses. They carry something — a cord, a knot, a mark — the Marchers call it a binding. At least one man dropped a trail after encountering something he couldn't explain.",
           "links": [
+            "sera-of-the-stillhold",
+            "the-stillhold",
             "the-marchward",
-            "ragnar-solmyr",
             "brynjar-andyrsson-thread"
+          ]
+        },
+        {
+          "topic": "the-binding-cord",
+          "label": "The Binding Cord",
+          "kind": "mystery",
+          "fact": "The Marchers' word for what Stillhold operatives carry — a cord or knot, not a weapon. May be connected to the shimmer pressed into the heavier follower's heel-strike. The cloth bundle's knotted cord may be an example of this craft.",
+          "links": [
+            "stillhold-operatives",
+            "sera-of-the-stillhold",
+            "brynjar-andyrsson-thread",
+            "the-stillhold"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A short pause to crouch and examine the prints before pressing on."
+        "why": "A brief exchange at the fork while Freki pulls south"
       }
     },
     "sceneState": {
-      "setting": "The south branch of the east fork, forty yards past the split, early spring morning, overcast and flat-lit. The shimmer in the heavier prints has vanished without yielding anything. The Stillhold road lies roughly four miles ahead.",
+      "setting": "The south branch of the east fork, forty yards past the split, early spring morning, overcast and flat-lit. The shimmer in the heavier prints has gone. Freki is thirty yards south and pulling.",
       "npcsPresent": [
         {
           "name": "Ragnar Solmyr",
-          "state": "Standing a pace back from Brynjar's crouch, watching the failed read without comment, waiting."
-        },
-        {
-          "name": "Freki",
-          "state": "Thirty yards south and moving, nose down on Sera's trail, not waiting."
+          "state": "Standing at Brynjar's shoulder, watching Freki's line south, waiting for the next move."
         }
       ],
       "objects": [
-        "Cloth bundle (in Brynjar's hand — dried white-flowered sprig, knotted cord)",
+        "Cloth bundle in Brynjar's hand — dried white-flowered sprig, knotted cord",
         "Two sets of boot-prints heading south — lighter confirmed as Sera's, heavier fol",
         "The heel-strike where the shimmer was — now only mud, no trace remaining"
       ],
       "threads": [
-        "The shimmer is gone without being identified — its origin unknown",
-        "The heavier follower's identity still unestablished",
-        "The cord-knot's meaning still unread",
-        "Sera is somewhere ahead on the Stillhold road, roughly four miles out"
+        "The shimmer is gone without being identified — Ragnar links it to Stillhold operatives and a 'binding' cord; what it does is still unnamed",
+        "The knotted cord in the cloth bundle may be the same craft Ragnar described",
+        "The heavier follower's identity still unestablished — possibly a Stillhold operative",
+        "Sera is somewhere ahead on the Stillhold road, roughly four miles out",
+        "The man who dropped a trail he couldn't explain — Ragnar knows that story"
       ]
     }
   },
@@ -556,7 +546,7 @@
     "ragnar-solmyr": {
       "id": "ragnar-solmyr",
       "name": "Ragnar Solmyr",
-      "role": "Redline Warrior, visiting the Marchward neutral ground",
+      "role": "Redline Warrior, walking south with Brynjar",
       "description": "Hard-built, jawbone necklace worn smooth with age. Moves without waste and watches a square the way a fisherman watches a river. Reads fighters on sight — yesterday it was your shoulder; today it is your face.",
       "firstMet": {
         "locationId": "the_marchward",
@@ -569,16 +559,18 @@
         "[d1] Fell into step without hesitation; confirmed the movement he saw was at the south fork, two people, before full light — gave the information plainly and without embellishment",
         "[d1] Read the lighter footprints on sight — identified fast movement versus deliberate, noted same gait for fleeing and purposeful travel. Walking at Brynjar's shoulder.",
         "[d1] Confirmed Brynjar's read of the heavier prints — named it plainly as someone who knew Sera was ahead of them.",
-        "[d1] Watched Brynjar's failed read of the shimmer without crowding it; checked the fact plainly and waited."
+        "[d1] Watched Brynjar's failed read of the shimmer without crowding it; checked the fact plainly and waited.",
+        "[d1] Named what he knows of Stillhold operatives — quiet people carrying binding-cords, not weapons. Linked the knotted cord in the bundle to the same talk. Mentioned a man who dropped an inexplicable trail."
       ],
       "knownFacts": [
-        "His name is Ragnar Solmyr",
-        "He observed movement at the east fork before the town was up this morning",
         "He knows the Stillhold road four miles out",
         "Reads fighting stances on sight",
         "Identified Brynjar's collarbone gap as a liability against a patient opponent",
         "Offered it as professional courtesy, not threat",
-        "Movement at the south fork before dawn — two people, direction south toward Stillhold road"
+        "Movement at the south fork before dawn — two people, direction south toward Stillhold road",
+        "Stillhold sends quiet operatives out — not travelers; they don't check in at Wardhouses",
+        "The Marchers call whatever they carry a 'binding' — a cord, a knot, a mark; not a weapon",
+        "At least one person dropped a trail they couldn't explain after encountering something like the shimmer"
       ],
       "skillsObserved": [
         "knowledge of local roads",
@@ -591,7 +583,7 @@
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "Walking south on the Stillhold road trail with Brynjar and Freki.",
+      "statusNote": "Walking south on the Stillhold road trail with Brynjar and Freki; has shared what he knows of Stillhold operatives and binding-cords",
       "domains": {
         "primary": "marcher"
       },
@@ -723,7 +715,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 6,
+    "turnsSinceOffer": 7,
     "recentOffers": [
       {
         "thing": "Doss watching Brynjar with the stillness of someone deciding something — she has not offered it yet, but she is on the edge of it",
@@ -974,6 +966,40 @@
         "createdDay": 1,
         "entityId": "ragnar-solmyr",
         "updatedDay": 1
+      },
+      "stillhold-operatives": {
+        "id": "stillhold-operatives",
+        "label": "Stillhold Operatives",
+        "kind": "faction",
+        "facts": [
+          "[d1] Ragnar names them: quiet people the Stillhold sends out who don't check in at Wardhouses. They carry something — a cord, a knot, a mark — the Marchers call it a binding. At least one man dropped a trail after encountering something he couldn't explain."
+        ],
+        "links": [
+          "sera-of-the-stillhold",
+          "the-stillhold",
+          "the-marchward",
+          "brynjar-andyrsson-thread"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
+      },
+      "the-binding-cord": {
+        "id": "the-binding-cord",
+        "label": "The Binding Cord",
+        "kind": "mystery",
+        "facts": [
+          "[d1] The Marchers' word for what Stillhold operatives carry — a cord or knot, not a weapon. May be connected to the shimmer pressed into the heavier follower's heel-strike. The cloth bundle's knotted cord may be an example of this craft."
+        ],
+        "links": [
+          "stillhold-operatives",
+          "sera-of-the-stillhold",
+          "brynjar-andyrsson-thread",
+          "the-stillhold"
+        ],
+        "aliases": [],
+        "createdDay": 1,
+        "updatedDay": 1
       }
     },
     "mergeUndo": [
@@ -1038,17 +1064,17 @@
     ]
   },
   "tendencies": {
-    "leadership": 8.875873791523894,
-    "cerebral": 4.242558400665856,
-    "strategic": 3.849141718448531,
-    "ruthless": 0.6669201684248254,
-    "social": 5.545492027626411,
-    "cautious": 3.852484375
+    "leadership": 8.653976946735796,
+    "cerebral": 5.1364944406492095,
+    "strategic": 3.7529131754873175,
+    "ruthless": 0.6502471642142047,
+    "social": 6.406854726935751,
+    "cautious": 3.756172265625
   },
   "aptitudes": [
     "banner"
   ],
-  "actionCount": 18,
+  "actionCount": 19,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1174,8 +1200,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784772572159,
-  "rev": 71,
+  "updatedAt": 1784772666248,
+  "rev": 72,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1340,7 +1366,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 21
+    "riven_marches": 22
   },
   "practice": {
     "schemaVersion": 1,
@@ -1406,10 +1432,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-23T01:30:20.702Z",
-      "lastAt": "2026-07-23T02:09:32.159Z",
+      "lastAt": "2026-07-23T02:11:06.246Z",
       "startDay": 23,
       "endDay": 23,
-      "beats": 15
+      "beats": 16
     }
   ],
   "_pendingArrival": null,
@@ -1425,15 +1451,15 @@
     "at": "2026-07-23T01:18:04.353Z"
   },
   "_opEmitted": {
-    "sceneSummary": 14,
-    "choices": 14,
-    "scene": 14,
-    "npcUpdates": 12,
+    "sceneSummary": 15,
+    "choices": 15,
+    "scene": 15,
+    "npcUpdates": 13,
     "placeUpdates": 3,
     "generateRequest": 2,
     "moveTo": 2,
-    "timeOps": 14,
-    "codexUpdates": 13,
+    "timeOps": 15,
+    "codexUpdates": 14,
     "sceneEnded": 2,
     "characterDeltas": 3,
     "offer": 2,
@@ -1442,7 +1468,7 @@
     "questUpdates": 2,
     "stageOps": 1
   },
-  "_opTurns": 14,
+  "_opTurns": 15,
   "_opLedger": {
     "offer": {
       "applied": 2,

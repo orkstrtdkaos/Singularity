@@ -6,7 +6,7 @@
   "origin": "valley",
   "background": "craftsman",
   "level": 10,
-  "xp": 992,
+  "xp": 994,
   "attributes": {
     "physical": 3,
     "mental": 5,
@@ -59,7 +59,7 @@
   ],
   "alignment": {
     "concrete_abstract": 0.23798014017852293,
-    "death_life": 0.11066321867187501,
+    "death_life": 0.11013005773828126,
     "violence_peace": 0.32649243243214565,
     "chaos_order": 0.3082724402773745,
     "emotional_logical": 0.0005857454344338799,
@@ -74,9 +74,9 @@
   },
   "attunement": 10,
   "maxHealth": 70,
-  "health": 70,
+  "health": 68,
   "maxEnergy": 145,
-  "energy": 57,
+  "energy": 53,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -866,53 +866,52 @@
         "player": "Set a steady pace and let Motes' Vigil run ahead of you — let Aevi's perimeter warn of anything before it arrives",
         "summary": "Steady pace northeast-by-east under Motes' Vigil — Aevi's perimeter reads clean but catches a shapeless anomaly on the bearing ahead that the interference layer won't resolve at distance.",
         "narration": "The path northeast-by-east runs along a shallow ridgeline before dropping into a fold of ground the melt has made soft underfoot. You set a measured pace — not hurried, not cautious, simply steady. Aevi drifts wide, the motes spreading thin across thirty or forty paces of ground ahead of you, tasting the air.\n\nThey report back without drama. 'Nothing moving,' Aevi says quietly, voice just behind your shoulder. 'A bird, twice. Root-water seeping through the eastern slope. The interference layer is present but lying low this morning.'\n\nThat last part is the catch. Motes' Vigil runs ahead, but the Zone's interference field is a fine mesh between Aevi and a clean read — not blocking, but blurring the edges. What would normally come as a full breath of warning arrives instead as a feeling: a slight pressure in the air to the northeast, a place where the field thins and then thickens again in a way that does not match the terrain. Something on that line is different. Not a threat yet — not even a shape. A note of difference, held out for you to consider.\n\nAevi dims slightly, the motes drawing inward. 'I cannot name it from here,' Aevi says. 'But it is not the zone itself. The zone has a pattern. This sits outside the pattern.'"
+      },
+      {
+        "player": "Halt here and use Resonant Sight through the Waystaff to probe the anomaly from a safe distance before moving closer.",
+        "summary": "Resonant Sight probe of the anomaly scatters and backlashes — the anomaly is not passive and deflected the read deliberately; a traveler descends the path from the northeast.",
+        "narration": "You stop on the ridgeline and plant the Waystaff's heel into the soft ground. The four phononic nodes along the upper shaft catch the morning light. You let your breath slow, then ease Prism Sight and Sonic Resonance forward together — the braided field that has served you well in stone chambers and alcove walls.\n\nIt does not serve you here.\n\nThe interference layer, low and quiet a moment ago, answers the probe like a hand pushing back. The Waystaff's lattice hums wrong — a single, flat, unhappy note — and the braided field scatters before it reaches the anomaly at all. What comes back is noise: a blur of pressure-directions with no shape to them, a flicker of light-data that resolves into nothing useful, and a brief, sharp pain behind your left eye that fades quickly but leaves a residue of blankness where the read should have been.\n\nAevi pulls inward. The motes dim to almost nothing, and when Aevi speaks, the voice is careful and quiet. 'The anomaly deflected the probe,' Aevi says. 'I do not think it is passive. Something in it turned the field aside — not the zone's own interference, which lies flat this morning. This is different. I cannot tell you what it is. I can tell you it is aware that you looked.'\n\nThe ridgeline ahead is still and pale in the early light. A figure comes up the path from the northeast, moving downhill toward you at an unhurried walk — traveling the opposite direction, pack on their back, head down against the slope's cold draft. They have not yet noticed you standing in the middle of the path with a resonance staff planted in the ground."
       }
     ],
     "lastTurn": {
-      "narration": "The path northeast-by-east runs along a shallow ridgeline before dropping into a fold of ground the melt has made soft underfoot. You set a measured pace — not hurried, not cautious, simply steady. Aevi drifts wide, the motes spreading thin across thirty or forty paces of ground ahead of you, tasting the air.\n\nThey report back without drama. 'Nothing moving,' Aevi says quietly, voice just behind your shoulder. 'A bird, twice. Root-water seeping through the eastern slope. The interference layer is present but lying low this morning.'\n\nThat last part is the catch. Motes' Vigil runs ahead, but the Zone's interference field is a fine mesh between Aevi and a clean read — not blocking, but blurring the edges. What would normally come as a full breath of warning arrives instead as a feeling: a slight pressure in the air to the northeast, a place where the field thins and then thickens again in a way that does not match the terrain. Something on that line is different. Not a threat yet — not even a shape. A note of difference, held out for you to consider.\n\nAevi dims slightly, the motes drawing inward. 'I cannot name it from here,' Aevi says. 'But it is not the zone itself. The zone has a pattern. This sits outside the pattern.'",
-      "sceneSummary": "Steady pace northeast-by-east under Motes' Vigil — Aevi's perimeter reads clean but catches a shapeless anomaly on the bearing ahead that the interference layer won't resolve at distance.",
+      "narration": "You stop on the ridgeline and plant the Waystaff's heel into the soft ground. The four phononic nodes along the upper shaft catch the morning light. You let your breath slow, then ease Prism Sight and Sonic Resonance forward together — the braided field that has served you well in stone chambers and alcove walls.\n\nIt does not serve you here.\n\nThe interference layer, low and quiet a moment ago, answers the probe like a hand pushing back. The Waystaff's lattice hums wrong — a single, flat, unhappy note — and the braided field scatters before it reaches the anomaly at all. What comes back is noise: a blur of pressure-directions with no shape to them, a flicker of light-data that resolves into nothing useful, and a brief, sharp pain behind your left eye that fades quickly but leaves a residue of blankness where the read should have been.\n\nAevi pulls inward. The motes dim to almost nothing, and when Aevi speaks, the voice is careful and quiet. 'The anomaly deflected the probe,' Aevi says. 'I do not think it is passive. Something in it turned the field aside — not the zone's own interference, which lies flat this morning. This is different. I cannot tell you what it is. I can tell you it is aware that you looked.'\n\nThe ridgeline ahead is still and pale in the early light. A figure comes up the path from the northeast, moving downhill toward you at an unhurried walk — traveling the opposite direction, pack on their back, head down against the slope's cold draft. They have not yet noticed you standing in the middle of the path with a resonance staff planted in the ground.",
+      "sceneSummary": "Resonant Sight probe of the anomaly scatters and backlashes — the anomaly is not passive and deflected the read deliberately; a traveler descends the path from the northeast.",
       "choices": [
         {
-          "label": "Press on at the same pace and trust Aevi to sharpen the read as we close the distance.",
-          "attribute": "practical",
-          "subAttribute": "wits",
+          "label": "Hail the traveler plainly — they came from the direction of the anomaly and may know what lies ahead",
+          "attribute": "social",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "travel",
-            "careful"
+            "persuade",
+            "help"
           ],
           "trivial": true
         },
         {
-          "label": "Halt here and use Resonant Sight through the Waystaff to probe the anomaly from a safe distance before moving closer.",
+          "label": "Let the traveler approach and watch how they move — see if their bearing or kit tells you anything before words",
           "attribute": "mental",
           "subAttribute": "insight",
-          "axes": {
-            "death_life": 0.1
-          },
-          "difficulty": 15,
+          "difficulty": 0,
           "intentTags": [
             "scout",
             "study"
           ],
-          "abilityId": "braid_prism_sight_sonic_resonance",
-          "energyCost": 4,
-          "trivial": false
+          "trivial": true
         },
         {
-          "label": "Angle off the direct bearing — find a slightly elevated line with better sightlines before committing to the anomaly.",
+          "label": "Step off the path and wait — let them pass without drawing attention, then follow the ridgeline around toward the anomaly on foot without another probe",
           "attribute": "physical",
           "subAttribute": "agility",
           "difficulty": 0,
           "intentTags": [
-            "scout",
             "careful",
-            "travel"
+            "sneak"
           ],
           "trivial": true
         },
         {
-          "label": "Ask Aevi to describe the pattern of the zone itself — and what exactly sits outside it.",
+          "label": "Ask Aevi to describe everything it caught in the moment before the field scattered — even a partial read may have a usable edge",
           "attribute": "mental",
           "subAttribute": "reason",
           "difficulty": 0,
@@ -922,22 +921,31 @@
           "trivial": true
         }
       ],
+      "characterDeltas": {
+        "health": -2,
+        "energy": -2
+      },
       "scene": {
-        "setting": "Open ridgeline path northeast-by-east of the lower chamber, early spring dawn. The ground is soft from snowmelt, the slope to the east wet and slow-draining. Pale light, no cloud cover yet. The interference layer is present but flat.",
+        "setting": "Open ridgeline path northeast-by-east of the lower chamber, early spring dawn. Soft ground from snowmelt, eastern slope slow-draining. Pale clear light. Waystaff planted heel-first in the ground at the character's feet.",
         "npcsPresent": [
           {
             "name": "Aevi",
-            "state": "Motes drawn in slightly, dimmed — holding a partial read of something ahead on the bearing, unable to name it at distance."
+            "state": "motes pulled tight and dim, hovering close — quiet and alert after the probe backlash"
+          },
+          {
+            "name": "Unknown traveler",
+            "state": "descending the northeast path toward the character, pack on back, head down against the slope's cold draft — has not yet looked up"
           }
         ],
         "objects": [
-          "Waystaff (resonance-crystal translator staff) — carried",
+          "Waystaff — planted heel-first in the soft ground at the character's feet",
           "Traveler's Pack — on back",
           "Waterskin — at hip"
         ],
         "threads": [
-          "Shapeless anomaly ahead on the northeast-by-east bearing — sits outside the zone's own interference pattern; nature and distance unknown.",
-          "Teva's whereabouts — she was traveling with the party; her current position this scene is unconfirmed."
+          "Anomaly ahead on the northeast-by-east bearing — probe deflected; Aevi believes it is aware that the read was attempted",
+          "Traveler descending from the northeast — unknown, approaching",
+          "Teva's whereabouts this scene unconfirmed"
         ]
       },
       "npcUpdates": [
@@ -945,52 +953,61 @@
           "op": "update",
           "npcId": "aevi",
           "name": "Aevi",
-          "note": "Ran Motes' Vigil ahead on the northeast-by-east line — clean read of terrain and bird-movement, but caught a pressure anomaly that sits outside the zone's own interference pattern. Cannot name it at distance.",
+          "note": "Pulled inward after the probe backlash — judged the anomaly as active, not passive, and capable of deflecting a directed read. Named it aware of being looked at.",
           "learned": [
-            "The zone interference layer has a consistent pattern; the anomaly ahead does not match it — it is something else, lying on the bearing."
+            "The anomaly on the northeast-by-east bearing deflected the Resonant Sight probe actively — it is not the zone's own interference",
+            "The anomaly appears to be aware that a scan was attempted"
           ],
-          "statusNote": "Moving northeast-by-east with Cellaceron — Motes' Vigil partial, anomaly flagged, motes drawn slightly inward."
+          "statusNote": "Motes pulled inward and dimmed, hovering close to Cellaceron on the ridgeline path"
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "the-anomaly-northeast",
+          "label": "The Anomaly Ahead",
+          "kind": "mystery",
+          "fact": "Day 9 dawn: a Resonant Sight probe of the anomaly on the northeast-by-east bearing scattered before reaching it — the interference layer pushed back in a directed way inconsistent with passive zone static. Aevi judged it active and aware that it was probed. Nature and distance remain unknown.",
+          "links": [
+            "second-river-rising",
+            "the-preparation-order",
+            "aevi",
+            "teva-directional-interval-count"
+          ]
+        }
+      ],
+      "generateRequest": [
+        {
+          "type": "npc",
+          "hint": "a traveler coming downhill from the northeast, ordinary road-worn look, carrying something that suggests a purpose — not a threat, someone the valley road simply made",
+          "why": "the SOMETHING HAPPENS event calls for a traveler going the other direction who shares something freely — a warning, a meal, true news; they have arrived on the ridgeline path"
         }
       ],
       "timeOps": {
-        "hoursPassed": 0.5,
-        "why": "Half an hour of steady walking along the ridgeline since breaking camp at the lower chamber."
-      },
-      "characterDeltas": {
-        "health": 0,
-        "energy": -3
-      },
-      "codexUpdates": [
-        {
-          "topic": "zone-interference-anomaly",
-          "label": "Anomaly on the Northeast Bearing",
-          "kind": "mystery",
-          "fact": "Day 9 dawn, half an hour northeast-by-east of the lower chamber: Motes' Vigil caught a pressure in the field that sits outside the zone's own interference pattern. Not a creature, not a named threat — a note of difference on the bearing toward the upstream structure. Aevi cannot name it at this distance.",
-          "links": [
-            "the-preparation-order",
-            "second-river-rising",
-            "aevi",
-            "what-the-water-remembers"
-          ]
-        }
-      ]
+        "hoursPassed": 0.25,
+        "why": "brief halt on the ridgeline for the probe attempt"
+      }
     },
     "sceneState": {
-      "setting": "Open ridgeline path northeast-by-east of the lower chamber, early spring dawn. The ground is soft from snowmelt, the slope to the east wet and slow-draining. Pale light, no cloud cover yet. The interference layer is present but flat.",
+      "setting": "Open ridgeline path northeast-by-east of the lower chamber, early spring dawn. Soft ground from snowmelt, eastern slope slow-draining. Pale clear light. Waystaff planted heel-first in the ground at the character's feet.",
       "npcsPresent": [
         {
           "name": "Aevi",
-          "state": "Motes drawn in slightly, dimmed — holding a partial read of something ahead on the bearing, unable to name it at distanc"
+          "state": "motes pulled tight and dim, hovering close — quiet and alert after the probe backlash"
+        },
+        {
+          "name": "Unknown traveler",
+          "state": "descending the northeast path toward the character, pack on back, head down against the slope's cold draft — has not yet"
         }
       ],
       "objects": [
-        "Waystaff (resonance-crystal translator staff) — carried",
+        "Waystaff — planted heel-first in the soft ground at the character's feet",
         "Traveler's Pack — on back",
         "Waterskin — at hip"
       ],
       "threads": [
-        "Shapeless anomaly ahead on the northeast-by-east bearing — sits outside the zone's own interference pattern; nature and distance unknown.",
-        "Teva's whereabouts — she was traveling with the party; her current position this scene is unconfirmed."
+        "Anomaly ahead on the northeast-by-east bearing — probe deflected; Aevi believes it is aware that the read was attempted",
+        "Traveler descending from the northeast — unknown, approaching",
+        "Teva's whereabouts this scene unconfirmed"
       ]
     }
   },
@@ -1504,7 +1521,6 @@
       },
       "relationship": 3,
       "history": [
-        "[d9] Crossed the threshold and brightened beyond Kindled Chorus level — drifted toward the lower convergence point, then held and named plainly: 'I know this room. Not from before you. From before me.'",
         "[d9] Named the chamber's lattice as complete — every surface refers to the center, nothing scatters; noted the Waystaff's nodes are already singing the chamber's geometry back",
         "[d9] Drifted to the convergence point ahead of the party and named the room's long waiting — 'since before the valley had a name for what it was waiting for.' Motes spread wide and very bright, casting real light across the scored walls.",
         "[d9] Named itself plainly at the convergence point: it is — or was — a record, or part of one, and this room was built to receive it. Says it was broken before it could read itself. Does not know who built the room or who sent it here.",
@@ -1513,17 +1529,18 @@
         "[d9] Spoke the full account at the convergence point: named its maker as Verath-Sem, named its cargo as the authentication key to a pre-Transition watershed preparation order. Confirmed: without the key, the order cannot be called off. The break — who interrupted the sending — is not in what the room…",
         "[d9] Named the requirement plainly: the key must be carried to the pre-Transition upstream structure, northeast-by-east. Confirmed the bearing matches Teva's and the chamber's.",
         "[d9] Moving northeast-by-east with Cellaceron — the account given, the bearing confirmed, now traveling toward the upstream site.",
-        "[d9] Ran Motes' Vigil ahead on the northeast-by-east line — clean read of terrain and bird-movement, but caught a pressure anomaly that sits outside the zone's own interference pattern. Cannot name it at distance."
+        "[d9] Ran Motes' Vigil ahead on the northeast-by-east line — clean read of terrain and bird-movement, but caught a pressure anomaly that sits outside the zone's own interference pattern. Cannot name it at distance.",
+        "[d9] Pulled inward after the probe backlash — judged the anomaly as active, not passive, and capable of deflecting a directed read. Named it aware of being looked at."
       ],
       "knownFacts": [
-        "The room held the broken record's pieces in correct order and allowed Aevi to read them — it could not have done so alone",
-        "The cause of the break — who chose it and why — is not in what the room held; that part is still missing",
         "Its maker's name is Verath-Sem",
         "Its cargo was the authentication key to a pre-Transition preparation order lodged in the watershed",
         "The preparation order is the source of the valley's water contamination — it is following its last instruction",
         "The authentication key must be brought to the upstream pre-Transition structure — the chamber was a receiving room, not the site of the order itself",
         "Aevi knows the bearing northeast-by-east but cannot give exact distance or landmarks from the chamber's position",
-        "The zone interference layer has a consistent pattern; the anomaly ahead does not match it — it is something else, lying on the bearing."
+        "The zone interference layer has a consistent pattern; the anomaly ahead does not match it — it is something else, lying on the bearing.",
+        "The anomaly on the northeast-by-east bearing deflected the Resonant Sight probe actively — it is not the zone's own interference",
+        "The anomaly appears to be aware that a scan was attempted"
       ],
       "skillsObserved": [
         "recognition of a chamber state-shift — named it precisely in",
@@ -1538,7 +1555,7 @@
         "locationId": "gen-the-lower-chamber",
         "day": 9
       },
-      "statusNote": "Moving northeast-by-east with Cellaceron — Motes' Vigil partial, anomaly flagged, motes drawn slightly inward.",
+      "statusNote": "Motes pulled inward and dimmed, hovering close to Cellaceron on the ridgeline path",
       "bondType": "platonic",
       "domains": {
         "primary": "harmonic"
@@ -2095,7 +2112,7 @@
     "lastTickWorldDay": 23,
     "lastCanonWorldDay": 23,
     "lastGenCount": 565,
-    "turnsSinceOffer": 5,
+    "turnsSinceOffer": 6,
     "wantProgress": {
       "elder-senna": {
         "progress": 1,
@@ -2722,6 +2739,23 @@
         "aliases": [],
         "createdDay": 9,
         "updatedDay": 9
+      },
+      "the-anomaly-northeast": {
+        "id": "the-anomaly-northeast",
+        "label": "The Anomaly Ahead",
+        "kind": "mystery",
+        "facts": [
+          "[d9] Day 9 dawn: a Resonant Sight probe of the anomaly on the northeast-by-east bearing scattered before reaching it — the interference layer pushed back in a directed way inconsistent with passive zone static. Aevi judged it active and aware that it was probed. Nature and distance remain unknown."
+        ],
+        "links": [
+          "second-river-rising",
+          "the-preparation-order",
+          "aevi",
+          "teva-directional-interval-count"
+        ],
+        "aliases": [],
+        "createdDay": 9,
+        "updatedDay": 9
       }
     },
     "notSame": [
@@ -2846,7 +2880,7 @@
       "motes-vigil": 5,
       "light_well": 3,
       "greenlore": 4,
-      "braid_prism_sight_sonic_resonance": 8
+      "braid_prism_sight_sonic_resonance": 9
     },
     "coActivations": {
       "keen_appraisal+sonic_resonance": 1,
@@ -3068,16 +3102,16 @@
   "customEncounters": {},
   "reconcileVersion": 16,
   "tendencies": {
-    "cerebral": 30.81527530660848,
-    "strategic": 24.955515817230047,
-    "cautious": 35.026535446028646,
-    "social": 16.617764267830022,
-    "generous": 6.77901302563285,
-    "risky": 1.7857562273921548,
-    "carousing": 0.6655346845562624,
-    "patient": 4.007914547864151,
-    "craft": 0.6649141496230565,
-    "devotion": 3.2086462507087012
+    "cerebral": 31.044893423943268,
+    "strategic": 25.331627921799296,
+    "cautious": 34.150872059877926,
+    "social": 16.20232016113427,
+    "generous": 6.609537699992028,
+    "risky": 1.741112321707351,
+    "carousing": 0.6488963174423559,
+    "patient": 3.9077166841675472,
+    "craft": 0.64829129588248,
+    "devotion": 3.1284300944409837
   },
   "aptitudes": [
     "strategist",
@@ -3089,9 +3123,9 @@
     "sage",
     "stalwart"
   ],
-  "actionCount": 225,
-  "updatedAt": 1784812216511,
-  "rev": 103,
+  "actionCount": 226,
+  "updatedAt": 1784813382795,
+  "rev": 104,
   "generated": {
     "schemaVersion": 1,
     "npc": {},
@@ -3120,7 +3154,7 @@
   "syncedAt": 1783791225006,
   "teachers": {},
   "regionsKnown": {
-    "valley": 48
+    "valley": 49
   },
   "company": [],
   "foreclosed": [],
@@ -3217,10 +3251,10 @@
     {
       "id": "sess-4",
       "startedAt": "2026-07-23T13:01:34.634Z",
-      "lastAt": "2026-07-23T13:10:16.495Z",
+      "lastAt": "2026-07-23T13:29:42.783Z",
       "startDay": 23,
       "endDay": 23,
-      "beats": 5
+      "beats": 6
     }
   ],
   "_pendingArrival": null,
@@ -3274,13 +3308,13 @@
     }
   ],
   "_opEmitted": {
-    "sceneSummary": 37,
-    "choices": 37,
-    "characterDeltas": 22,
-    "scene": 37,
-    "npcUpdates": 33,
-    "codexUpdates": 33,
-    "timeOps": 36,
+    "sceneSummary": 38,
+    "choices": 38,
+    "characterDeltas": 23,
+    "scene": 38,
+    "npcUpdates": 34,
+    "codexUpdates": 34,
+    "timeOps": 37,
     "sceneEnded": 20,
     "placeUpdates": 24,
     "moveTo": 2,
@@ -3289,9 +3323,10 @@
     "factUpdates": 5,
     "stageOps": 1,
     "scene_ended": 1,
-    "imagePrompt": 2
+    "imagePrompt": 2,
+    "generateRequest": 1
   },
-  "_opTurns": 37,
+  "_opTurns": 38,
   "_intentAsked": null,
   "corrections": [
     {

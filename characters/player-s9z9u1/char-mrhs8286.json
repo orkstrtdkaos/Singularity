@@ -116,7 +116,7 @@
     }
   ],
   "alignment": {
-    "spectrumId": -0.13961968895156285,
+    "spectrumId": -0.1326387045039847,
     "violence_peace": 0.1030845625,
     "chaos_order": 0.2591592263196316,
     "mechanical_spiritual": 0.2580372847905887,
@@ -1727,110 +1727,200 @@
         "player": "Ask the runner's boy if anyone by the name Crane has left a message or passed through recently",
         "summary": "Silas asks the runner's boy about Crane — no message, no recent passage, a near-miss named and dismissed.",
         "narration": "The runner's boy straightens on his stool when you address him directly. He is perhaps fourteen, with ink on his left index finger and the look of someone who has memorized every name that has passed through this counter in the last month.\n\nYou ask him plainly. Has anyone by the name Crane left a message here, or passed through recently?\n\nHe tips his head to one side and works through it. His lips move slightly — the habit of someone cataloguing out loud without sound. Then he shakes his head, deliberate and certain. 'No Crane on the board,' he says. 'No Crane at the counter. Had a Cray last week — spice-merchant, picking up his usual.' He offers this addition with the professional courtesy of someone who knows the difference between a miss and a near-miss and wants you to know he checked both.\n\nHuginn shifts on your shoulder and says nothing. Its silence is the kind that has an opinion in it."
+      },
+      {
+        "player": "Have the boy send a message to Millbrook, to Mara Wells.  Fill her in on the latest from your end and ensure her that you're finding every assistance you can.  Tell her about Stillwater's Trouble as a potential refuge or exchange of goods/resources/labor.  Ask her to send word about who needs to be convinced by you to help.",
+        "summary": "Silas dictates a message to Mara Wells — Stillwater's Trouble named as a potential refuge and staging point, labor and goods welcome in exchange, and a plain question: who needs to hear from you directly?",
+        "narration": "You turn back to the runner's boy and ask him to take down a message for Millbrook. He pulls a fresh slip from beneath the counter, dips his pen, and waits with the professional patience of someone who has written other people's words all his working life.\n\nYou dictate it plainly. The message is for Mara Wells, chalk-seal on the reply. You tell her the road has been productive. Stillwater's Trouble — the old Raven's Home warden post two miles northwest of the March Road, now reclaimed and named — is open. It has walls, a roof that holds, a forge corner, and an Ashwarden's hand keeping it. If Millbrook's workers or supplies need somewhere to stage, or if there are people the village cannot house through the flood season, the post can take them. Labor and goods are welcome in exchange. You tell her the repair work she is coordinating is known and trusted here, and that you are pressing every resource the Crossing has to offer.\n\nThen you add the question plainly: who needs to hear from you directly? Name the person or the post, and you will go there. She knows the ground better than anyone. Trust her judgment and say so in the last line.\n\nThe runner's boy writes it all down in his careful ledger hand, reads it back to you without being asked, and folds it tight with Millbrook's mark on the outside. He tells you it goes on the next morning run. He sets it in its cubby with the quiet efficiency of someone who has done this ten thousand times and will do it ten thousand more."
       }
     ],
     "lastTurn": {
-      "narration": "The runner's boy straightens on his stool when you address him directly. He is perhaps fourteen, with ink on his left index finger and the look of someone who has memorized every name that has passed through this counter in the last month.\n\nYou ask him plainly. Has anyone by the name Crane left a message here, or passed through recently?\n\nHe tips his head to one side and works through it. His lips move slightly — the habit of someone cataloguing out loud without sound. Then he shakes his head, deliberate and certain. 'No Crane on the board,' he says. 'No Crane at the counter. Had a Cray last week — spice-merchant, picking up his usual.' He offers this addition with the professional courtesy of someone who knows the difference between a miss and a near-miss and wants you to know he checked both.\n\nHuginn shifts on your shoulder and says nothing. Its silence is the kind that has an opinion in it.",
-      "sceneSummary": "Silas asks the runner's boy about Crane — no message, no recent passage, a near-miss named and dismissed.",
+      "narration": "You turn back to the runner's boy and ask him to take down a message for Millbrook. He pulls a fresh slip from beneath the counter, dips his pen, and waits with the professional patience of someone who has written other people's words all his working life.\n\nYou dictate it plainly. The message is for Mara Wells, chalk-seal on the reply. You tell her the road has been productive. Stillwater's Trouble — the old Raven's Home warden post two miles northwest of the March Road, now reclaimed and named — is open. It has walls, a roof that holds, a forge corner, and an Ashwarden's hand keeping it. If Millbrook's workers or supplies need somewhere to stage, or if there are people the village cannot house through the flood season, the post can take them. Labor and goods are welcome in exchange. You tell her the repair work she is coordinating is known and trusted here, and that you are pressing every resource the Crossing has to offer.\n\nThen you add the question plainly: who needs to hear from you directly? Name the person or the post, and you will go there. She knows the ground better than anyone. Trust her judgment and say so in the last line.\n\nThe runner's boy writes it all down in his careful ledger hand, reads it back to you without being asked, and folds it tight with Millbrook's mark on the outside. He tells you it goes on the next morning run. He sets it in its cubby with the quiet efficiency of someone who has done this ten thousand times and will do it ten thousand more.",
+      "sceneSummary": "Silas dictates a message to Mara Wells — Stillwater's Trouble named as a potential refuge and staging point, labor and goods welcome in exchange, and a plain question: who needs to hear from you directly?",
       "choices": [
         {
-          "label": "Ask the boy if he knows where a long-timer at the Crossing would sit — someone who has been here awhile, waiting",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "difficulty": 0,
-          "intentTags": [
-            "persuade"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Step back outside and use Order-Sense on the plaza — read the Crossing's design to find where a man holding a thread would naturally end up",
+          "label": "Head to the Ent grove now — check on the ward and sit with the tree a moment before the afternoon slips away",
           "attribute": "mental",
           "subAttribute": "insight",
+          "axes": {
+            "death_life": -0.2,
+            "mechanical_spiritual": 0.2
+          },
           "difficulty": 0,
           "intentTags": [
-            "study"
+            "travel",
+            "careful"
+          ],
+          "abilityId": "the-attended-end",
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask the boy to also send a second note — to the Hub Council water committee, naming Mara Wells as the Millbrook relay contact and pressing for a meeting sooner than their scheduled three days",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.3,
+            "chaos_order": 0.2
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "negotiate",
+            "lead"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Step outside and wait for Veth to come back from the water-seller cluster — she may have word of Crane already",
+          "attribute": "mental",
+          "subAttribute": "wits",
+          "axes": {},
+          "difficulty": 0,
+          "intentTags": [
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Use Order-Sense on the runner post itself — the Crossing is a place where threads cross; there may be a pattern in what messages have passed through here recently",
+          "attribute": "mental",
+          "subAttribute": "reason",
+          "axes": {
+            "falsehood_truth": 0.3,
+            "chaos_order": 0.2
+          },
+          "difficulty": 15,
+          "intentTags": [
+            "study",
+            "scout"
           ],
           "abilityId": "order_sense",
           "energyCost": 2,
-          "trivial": false
-        },
-        {
-          "label": "Head toward the Ent grove — check the ward, let Huginn walk its edge, and see if the grove has anything to say about who has been near it",
-          "attribute": "mental",
-          "subAttribute": "insight",
-          "difficulty": 0,
-          "intentTags": [
-            "scout"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Leave my own name at the counter — a note that Silas Weir is looking for Edvar Crane, with the Fell Pell at Millbrook as return address",
-          "attribute": "practical",
-          "subAttribute": "wits",
-          "difficulty": 0,
-          "intentTags": [
-            "plan"
-          ],
-          "trivial": true
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
       "scene": {
-        "setting": "Inside the Hub message-runner post — narrow counter, pigeonholed cubbies behind it, the runner's boy on his stool, afternoon light through the open door. Huginn on Silas's shoulder.",
+        "setting": "Inside the Hub message-runner post — narrow counter, pigeonholed cubbies behind it, afternoon light through the open door. The runner's boy has just filed the Millbrook slip into its cubby.",
         "npcsPresent": [
           {
             "name": "Runner's boy",
-            "state": "Sitting up straight now, having given his answer — ink-fingered, professionally attentive."
+            "state": "Settling back onto his stool, the pen capped, the Millbrook slip filed — watching Silas with the mild expectancy of someone waiting to see if there is more."
           },
           {
             "name": "Huginn",
-            "state": "Settled on Silas's shoulder, silent in the way that has an opinion in it."
+            "state": "Still on Silas's shoulder, eye on the pigeonhole shelf with the steady attention of something cataloguing which messages will never be claimed."
           }
         ],
         "objects": [
-          "Two additional folded slips now read and pocketed — Dara Holt's repair update and Pip's general notice",
+          "Freshly filed Millbrook slip in the cubby — morning run, Mara Wells, Silas's message inside",
+          "Two additional slips already read and pocketed — Dara Holt's repair update and Pip's general notice",
           "Mara's relay notice already pocketed",
           "Empty counter surface",
-          "Pigeonholed cubby shelf behind the counter",
-          "Runner's bell above the door"
+          "Pigeonholed cubby shelf behind the counter, several other slips in various cubbies",
+          "Runner's bell above the door",
+          "Ink pot and pen on the counter edge"
         ],
         "threads": [
           "No message from Crane at the runner post — his whereabouts in the Crossing still unknown",
           "Veth moving toward the water-seller cluster to ask after Crane and resources",
           "Pell moving toward the Coliseum gate and forge district",
-          "Ent grove ward unchecked since last visit"
+          "Ent grove ward unchecked since last visit",
+          "Morning run will carry Silas's message to Mara — reply will take at least a day"
         ]
       },
+      "npcUpdates": [
+        {
+          "op": "update",
+          "npcId": "mara-wells",
+          "name": "Mara Wells",
+          "role": "Village supply store operator, Millbrook",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "note": "A message sent via the Hub runner: Stillwater's Trouble named as a potential refuge and staging post, labor and goods welcome in exchange, and a direct question — who needs to hear from Silas personally? Morning run carries it.",
+          "learned": [
+            "Stillwater's Trouble is open — walls, roof, forge corner, Ashwarden keeping it; can take workers or supplies through the flood season in exchange for labor and goods"
+          ],
+          "statusNote": "In her store in Millbrook — relay protocol active; morning run will carry Silas's latest message within the day.",
+          "relationshipDelta": 0
+        }
+      ],
+      "factUpdates": [
+        {
+          "op": "add",
+          "text": "A message sent to Mara Wells via Hub runner on Day 13 afternoon — Stillwater's Trouble named as a staging refuge, labor and goods welcomed in exchange, and a direct question asking who Silas needs to speak to personally. Morning run delivery.",
+          "subjectId": "mara-wells"
+        }
+      ],
+      "codexUpdates": [
+        {
+          "topic": "stillwaters-trouble",
+          "label": "Stillwater's Trouble",
+          "kind": "place",
+          "fact": "Named to Mara Wells via Hub runner as a potential refuge and exchange point — walls, roof, forge corner, Ashwarden keeping it. Labor and goods welcome in exchange for shelter or staging.",
+          "links": [
+            "mara-wells",
+            "millbrook",
+            "what-the-water-remembers",
+            "the-second-thread"
+          ]
+        }
+      ],
+      "questUpdates": [
+        {
+          "op": "progress",
+          "questId": "what-the-water-remembers",
+          "note": "Stillwater's Trouble named to Mara as a resource and refuge — Silas asking her directly who he needs to convince. The network is beginning to reach back toward the source."
+        }
+      ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "a short exchange at the counter"
+        "why": "a short dictation and filing at the runner's counter"
+      },
+      "characterDeltas": {
+        "health": 0,
+        "energy": 0,
+        "xp": 0
       }
     },
     "sceneState": {
-      "setting": "Inside the Hub message-runner post — narrow counter, pigeonholed cubbies behind it, the runner's boy on his stool, afternoon light through the open door. Huginn on Silas's shoulder.",
+      "setting": "Inside the Hub message-runner post — narrow counter, pigeonholed cubbies behind it, afternoon light through the open door. The runner's boy has just filed the Millbrook slip into its cubby.",
       "npcsPresent": [
         {
           "name": "Runner's boy",
-          "state": "Sitting up straight now, having given his answer — ink-fingered, professionally attentive."
+          "state": "Settling back onto his stool, the pen capped, the Millbrook slip filed — watching Silas with the mild expectancy of some"
         },
         {
           "name": "Huginn",
-          "state": "Settled on Silas's shoulder, silent in the way that has an opinion in it."
+          "state": "Still on Silas's shoulder, eye on the pigeonhole shelf with the steady attention of something cataloguing which messages"
         }
       ],
       "objects": [
-        "Two additional folded slips now read and pocketed — Dara Holt's repair update an",
+        "Freshly filed Millbrook slip in the cubby — morning run, Mara Wells, Silas's mes",
+        "Two additional slips already read and pocketed — Dara Holt's repair update and P",
         "Mara's relay notice already pocketed",
         "Empty counter surface",
-        "Pigeonholed cubby shelf behind the counter",
-        "Runner's bell above the door"
+        "Pigeonholed cubby shelf behind the counter, several other slips in various cubbi",
+        "Runner's bell above the door",
+        "Ink pot and pen on the counter edge"
       ],
       "threads": [
         "No message from Crane at the runner post — his whereabouts in the Crossing still unknown",
         "Veth moving toward the water-seller cluster to ask after Crane and resources",
         "Pell moving toward the Coliseum gate and forge district",
-        "Ent grove ward unchecked since last visit"
+        "Ent grove ward unchecked since last visit",
+        "Morning run will carry Silas's message to Mara — reply will take at least a day"
       ]
     }
   },
@@ -2567,7 +2657,9 @@
       ],
       "stageIndex": 0,
       "completedStages": [],
-      "progress": [],
+      "progress": [
+        "Stillwater's Trouble named to Mara as a resource and refuge — Silas asking her directly who he needs to convince. The network is beginning to reach back toward the source."
+      ],
       "aliases": [],
       "startedAt": "2026-07-22T20:49:54.189Z",
       "startedWorldDay": 22
@@ -2748,7 +2840,6 @@
       },
       "relationship": 8,
       "history": [
-        "[d5] Arrived with a folded page in her breast pocket — ledger-eyes reading the room. Document roll on her person.",
         "[d5] Filed the shop name, catalogued the room, holding the document roll — the question of whose hands it reaches is hers to help answer.",
         "[d5] Placed the document roll on the forge block and named its destination without being asked — she knows the carrier already.",
         "[d5] Named Pip Cotter as the document roll's carrier to the district records office — two days from now. Fingers on the roll, waiting for final witness lines tonight.",
@@ -2757,17 +2848,18 @@
         "[d6] Confirmed Bren placed with Aldric on smokehouse deliveries, Curis with Dara's irrigation crew. Named Silas's introduction as the thing that opened the door.",
         "[d9] Pip Cotter left with the document roll on schedule; Mara scratched the departure date into her ledger margin and has been watching the water wheel intake each morning since, noting the color.",
         "[d12] Mara recorded the gray-green intake on two of the past three mornings in her ledger margin and quietly reduced the volume she's drawing from the wheel cistern, rationing stored clean water without announcing it to the village.",
-        "[d13] Relay notice received at Hub on day 13 — intake gray-green four of six mornings, document roll delivered with clerk's initials, two additional sleeve joints flagged by Calvar and Dara at east-bend, Pip's postscript noted."
+        "[d13] Relay notice received at Hub on day 13 — intake gray-green four of six mornings, document roll delivered with clerk's initials, two additional sleeve joints flagged by Calvar and Dara at east-bend, Pip's postscript noted.",
+        "[d13] A message sent via the Hub runner: Stillwater's Trouble named as a potential refuge and staging post, labor and goods welcome in exchange, and a direct question — who needs to hear from Silas personally? Morning run carries it."
       ],
       "knownFacts": [
-        "Bren Thalle is on smokehouse delivery with Aldric for the week",
         "Curis is on irrigation ditch repair with Dara's crew — useful with stone",
         "Pip Cotter departed with the document roll on day 7 — on schedule",
         "The Echo River ran gray-green on two of the past three mornings at Millbrook's intake",
         "The discoloration is consistent enough now to treat as a pattern, not an anomaly — she is managing stock accordingly",
         "Creek ran gray-green four of the past six mornings at Millbrook's intake wheel — Mara has reduced draw volume",
         "Document roll received at district records office, clerk's initials on the receipt slip, Mara holds it",
-        "Calvar and Dara flagged two additional sleeve joints at the east-bend on day 9 — added to repair queue"
+        "Calvar and Dara flagged two additional sleeve joints at the east-bend on day 9 — added to repair queue",
+        "Stillwater's Trouble is open — walls, roof, forge corner, Ashwarden keeping it; can take workers or supplies through the flood season in exchange for labor and goods"
       ],
       "skillsObserved": [
         "rapid trail-kit assembly from known inventory",
@@ -2778,7 +2870,7 @@
         "naming a destination and a carrier without prompting — opera"
       ],
       "status": "active",
-      "statusNote": "In her store — relay notice sent and confirmed received; document roll delivery complete; managing water stock by reduced draw.",
+      "statusNote": "In her store in Millbrook — relay protocol active; morning run will carry Silas's latest message within the day.",
       "lastSeen": {
         "locationId": "the_crossing",
         "day": 13
@@ -4335,7 +4427,7 @@
     "lastTickWorldDay": 23,
     "lastCanonWorldDay": 23,
     "lastGenCount": 573,
-    "turnsSinceOffer": 6,
+    "turnsSinceOffer": 7,
     "recentOffers": [
       {
         "thing": "The hollow receives Silas's presence with the particular quality a place has when it has been waited in before — not the post's clean…",
@@ -5833,21 +5925,21 @@
     ]
   },
   "tendencies": {
-    "strategic": 19.411534534990686,
-    "cerebral": 17.75451440767847,
-    "social": 7.323389271472506,
-    "generous": 4.599969430966166,
-    "cautious": 3.7389107587368007,
-    "physical": 0.5289978110628785,
-    "risky": 1.5410827509707534,
-    "ruthless": 0.008088872469309427,
-    "carousing": 0.312644855222675,
-    "amorous": 3.148351157824348,
-    "patient": 0.21611898138867913,
-    "stealth": 0.0031352676345697233,
-    "devotion": 1.6560442439905056,
-    "craft": 0.525169049402927,
-    "leadership": 0.01595886021543326
+    "strategic": 19.92624617161592,
+    "cerebral": 17.310651547486508,
+    "social": 8.140304539685694,
+    "generous": 4.484970195192012,
+    "cautious": 3.6454379897683804,
+    "physical": 0.5157728657863065,
+    "risky": 1.5025556821964845,
+    "ruthless": 0.007886650657576691,
+    "carousing": 0.3048287338421081,
+    "amorous": 3.0696423788787395,
+    "patient": 0.21071600685396216,
+    "stealth": 0.00305688594370548,
+    "devotion": 1.6146431378907429,
+    "craft": 0.5120398231678538,
+    "leadership": 0.015559888710047428
   },
   "aptitudes": [
     "strategist",
@@ -5855,7 +5947,7 @@
     "tactician",
     "sage"
   ],
-  "actionCount": 715,
+  "actionCount": 716,
   "grantsVersion": 1,
   "reconcileVersion": 19,
   "gallery": [
@@ -6245,8 +6337,8 @@
     }
   ],
   "portrait": "https://image.pollinations.ai/prompt/Pale%20skinned%2C%20dark%20hair%2C%20slight%20framed%20Necromancer%20-%20handsome%20intensity%20in%20the%20eyes%20-%20holding%20the%20Deathbound%20Runic%20Spear%20%22Memory%22%20-%20His%20blacksmith%20lover%20woman%20Pell%20Marsh%20at%20his%20back%2C%20undead%20Raven%20on%20his%20shoulder%20-%20Elder%20%2C%20full-body%20character%20portrait%2C%20named%20Silas%20Weir%2C%20of%20the%20wright%2C%20lineage%20taught%2C%20carrying%20Traveler's%20Pack%2C%20Waterskin%2C%20Belt%20Knife%2C%20You%20took%20the%20short%20way%2C%20and%20the%20short%20way%20was%20wrong.%20The%20air%20here%20tastes%20of%20metal%20and%20the%20light%20falls%20at%20an%20angle%20the%20su%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=512&height=640&seed=13691&nologo=true",
-  "updatedAt": 1784849123995,
-  "rev": 1142,
+  "updatedAt": 1784849535507,
+  "rev": 1143,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -7752,12 +7844,6 @@
   "opLossPending": false,
   "establishedFacts": [
     {
-      "id": "pell",
-      "text": "Pell's forge renamed the Fell Pell on World-day 18 evening — named aloud by Silas Weir at the gathering's opening, received by Pell and the assembled group without ceremony.",
-      "day": 5,
-      "subjectId": "pell"
-    },
-    {
       "id": "f42",
       "text": "The complete accountability chain laid out in full at the Fell Pell on World-day 18 evening — every witness present, every thread spoken, document roll intact. The question of what the truth is for re",
       "day": 5,
@@ -7990,6 +8076,12 @@
       "text": "The first Ashwarden attendance performed in the hollow below the Raven's Home post — the badger's ending witnessed plainly by Silas Weir and Huginn, no craft past the clean reading, no ceremony past the presence. The hollow knows it was attended.",
       "day": 13,
       "subjectId": "stillwaters-trouble"
+    },
+    {
+      "id": "mara-wells",
+      "text": "A message sent to Mara Wells via Hub runner on Day 13 afternoon — Stillwater's Trouble named as a staging refuge, labor and goods welcomed in exchange, and a direct question asking who Silas needs to speak to personally. Morning run delivery.",
+      "day": 13,
+      "subjectId": "mara-wells"
     }
   ],
   "practice": {
@@ -8377,7 +8469,7 @@
   "regionsKnown": {
     "valley": 477,
     "the_palelands": 6,
-    "the_center": 67
+    "the_center": 68
   },
   "foreclosed": [
     "rootkin",
@@ -8500,10 +8592,10 @@
     {
       "id": "sess-11",
       "startedAt": "2026-07-23T11:12:37.094Z",
-      "lastAt": "2026-07-23T23:25:23.994Z",
+      "lastAt": "2026-07-23T23:32:15.502Z",
       "startDay": 23,
       "endDay": 23,
-      "beats": 49
+      "beats": 50
     }
   ],
   "company": [
@@ -8701,19 +8793,19 @@
     "gen-waygate": "https://image.pollinations.ai/prompt/Waygate%3A%20A%20place%20the%20road%20led%20to%20%E2%80%94%20Waygate.%20The%20fiction%20brought%20you%20here%20before%20the%20map%20knew%20its%20name.%2C%20dark%2C%20intense%2C%20cinematic%2C%20mature%20dramatic%20tone%2C%20tasteful%2C%20non-explicit%2C%20no%20nudity%2C%20original%20character%20not%20a%20real%20person%2C%20no%20copyrighted%20characters%2C%20no%20text%2C%20no%20watermark%2C%20no%20signature%2C%20digital%20painting%2C%20atmospheric%20concept%20art%2C%20muted%20earth%20tones%20with%20teal%20and%20gold%20accents%2C%20painterly%2C%20no%20text%2C%20no%20watermark?width=1024&height=320&seed=37923&nologo=true"
   },
   "_opEmitted": {
-    "sceneSummary": 87,
-    "choices": 87,
-    "characterDeltas": 35,
-    "scene": 87,
-    "npcUpdates": 73,
-    "factUpdates": 6,
+    "sceneSummary": 88,
+    "choices": 88,
+    "characterDeltas": 36,
+    "scene": 88,
+    "npcUpdates": 74,
+    "factUpdates": 7,
     "placeUpdates": 15,
-    "codexUpdates": 49,
-    "timeOps": 81,
+    "codexUpdates": 50,
+    "timeOps": 82,
     "imagePrompt": 2,
     "sceneEnded": 18,
     "itemUpdates": 2,
-    "questUpdates": 4,
+    "questUpdates": 5,
     "offer": 8,
     "moveTo": 5,
     "delegateOps": 1,
@@ -8723,7 +8815,7 @@
     "discovery": 2,
     "stageOps": 1
   },
-  "_opTurns": 87,
+  "_opTurns": 88,
   "schools": {
     "ashwarden": "ash_plain",
     "cogitant": "cog_unaided",

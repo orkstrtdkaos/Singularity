@@ -133,24 +133,29 @@
         "player": "I'll ask Halvra \"Are there any caravans or important individuals needing protection travelling through the town? Any bodyguard jobs listed?\"",
         "summary": "Halvra tells Brynjar that bodyguard postings aren't formal here — the Crow and Thistle is where those conversations happen.",
         "narration": "Halvra picks the stylus back up and taps it once against the ledger's edge — thinking, or just giving the question its due weight.\n\n\"Bodyguard work.\" She says it flat, not dismissive. \"Nothing posted formally, no. The Marchward doesn't run a hire-board for that — too easy to abuse on neutral ground.\" She glances toward the square-side window, a narrow rectangle of pale morning light. \"What comes through here, mostly, are travelers who already have their arrangements made before they arrive. Redline folk with escorts, Stillhold messengers in pairs.\" A beat. \"Occasionally someone comes through who didn't plan as well as they thought and starts asking the same question you just asked me.\"\n\nShe turns a page in the ledger — not dismissively, just continuing her work while she talks. \"The Crow and Thistle is where you'd hear about it before I would. Doss keeps an ear on everything that moves through his common room. If a merchant came in last night nervous about the road east, Doss would know before they'd finished their first cup.\" She looks up again, direct. \"You're already going there for the Sera business, unless I misread you.\""
+      },
+      {
+        "player": "Head to the Crow and Thistle — ask Doss about Sera's disappearance and whether anyone needs a road escort east",
+        "summary": "Brynjar retrieves his weapons and crosses to the Crow and Thistle; Doss the innkeep sizes him up immediately and names both his reasons for being there before he can.",
+        "narration": "You lift your axe and shield from the hooks — Halvra logs the checkout with a single mark, no comment — and step back into the square. The morning is cool and damp, mud soft underfoot from the melt, the well rope beaded with condensation. Freki falls in at your left heel the moment you clear the Wardhouse door, tail low, reading the square before you do.\n\nThe Crow and Thistle sits on the south side, a two-story building with a patched roof and a painted sign that has weathered into something closer to a smear than a bird. The door stands open to clear the night's smoke. Inside: low ceiling, four long tables, a fire banked down to orange coals, and the smell of barley mash and tallow. Two men eat at the far end without looking up. Behind the bar a stout woman in her fifties is restacking cups — she watches Freki clear the threshold before she watches you, which tells you something about her.\n\n\"Doss?\" you ask.\n\nShe sets a cup down. \"The same.\" Her eyes move over the axe on your hip, the shield at your back, the hound beside you, and settle on your face. \"Bit early for a drink. Bit early for whatever else you're selling too, probably.\" Not unfriendly — the Marchward's particular brand of honesty, plain enough that it doesn't need to be rude. \"You're here about the Stillhold girl, or you're here about the east road. Or both, which would make you either useful or trouble.\"\n\nFreki walks slowly along the bar's length, nose working the floor. He stops at a spot near the far stool — the third seat from the left — and looks up at you once, then looks back at the floor. Doss watches him do it. She doesn't say anything about it, but her expression changes slightly, the way a careful person's does when they've just noticed something worth thinking about."
       }
     ],
     "lastTurn": {
-      "narration": "Halvra picks the stylus back up and taps it once against the ledger's edge — thinking, or just giving the question its due weight.\n\n\"Bodyguard work.\" She says it flat, not dismissive. \"Nothing posted formally, no. The Marchward doesn't run a hire-board for that — too easy to abuse on neutral ground.\" She glances toward the square-side window, a narrow rectangle of pale morning light. \"What comes through here, mostly, are travelers who already have their arrangements made before they arrive. Redline folk with escorts, Stillhold messengers in pairs.\" A beat. \"Occasionally someone comes through who didn't plan as well as they thought and starts asking the same question you just asked me.\"\n\nShe turns a page in the ledger — not dismissively, just continuing her work while she talks. \"The Crow and Thistle is where you'd hear about it before I would. Doss keeps an ear on everything that moves through his common room. If a merchant came in last night nervous about the road east, Doss would know before they'd finished their first cup.\" She looks up again, direct. \"You're already going there for the Sera business, unless I misread you.\"",
-      "sceneSummary": "Halvra tells Brynjar that bodyguard postings aren't formal here — the Crow and Thistle is where those conversations happen.",
+      "narration": "You lift your axe and shield from the hooks — Halvra logs the checkout with a single mark, no comment — and step back into the square. The morning is cool and damp, mud soft underfoot from the melt, the well rope beaded with condensation. Freki falls in at your left heel the moment you clear the Wardhouse door, tail low, reading the square before you do.\n\nThe Crow and Thistle sits on the south side, a two-story building with a patched roof and a painted sign that has weathered into something closer to a smear than a bird. The door stands open to clear the night's smoke. Inside: low ceiling, four long tables, a fire banked down to orange coals, and the smell of barley mash and tallow. Two men eat at the far end without looking up. Behind the bar a stout woman in her fifties is restacking cups — she watches Freki clear the threshold before she watches you, which tells you something about her.\n\n\"Doss?\" you ask.\n\nShe sets a cup down. \"The same.\" Her eyes move over the axe on your hip, the shield at your back, the hound beside you, and settle on your face. \"Bit early for a drink. Bit early for whatever else you're selling too, probably.\" Not unfriendly — the Marchward's particular brand of honesty, plain enough that it doesn't need to be rude. \"You're here about the Stillhold girl, or you're here about the east road. Or both, which would make you either useful or trouble.\"\n\nFreki walks slowly along the bar's length, nose working the floor. He stops at a spot near the far stool — the third seat from the left — and looks up at you once, then looks back at the floor. Doss watches him do it. She doesn't say anything about it, but her expression changes slightly, the way a careful person's does when they've just noticed something worth thinking about.",
+      "sceneSummary": "Brynjar retrieves his weapons and crosses to the Crow and Thistle; Doss the innkeep sizes him up immediately and names both his reasons for being there before he can.",
       "choices": [
         {
-          "label": "Head to the Crow and Thistle — ask Doss about Sera's disappearance and whether anyone needs a road escort east",
+          "label": "Ask about Sera directly — what did Doss see, what did she hear, and does she think the girl left on her own?",
           "attribute": "social",
           "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "travel"
+            "persuade"
           ],
           "trivial": true
         },
         {
-          "label": "Before you go, take the night-watch posting — a meal, floor space, and honest copper is a foundation while you find your footing",
+          "label": "Ask about the east road first — any caravan, merchant, or traveler needing an arm along the way to the Stillhold?",
           "attribute": "social",
           "subAttribute": "presence",
           "difficulty": 0,
@@ -160,106 +165,142 @@
           "trivial": true
         },
         {
-          "label": "Ask Halvra directly — who came through the gate in the last two days that looks like someone who'd pay for a sword at their back",
+          "label": "Ask both — lay your purposes on the table plainly and see if one thread leads into the other",
           "attribute": "social",
-          "subAttribute": "insight",
-          "difficulty": 15,
-          "intentTags": [
-            "study",
-            "negotiate"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Collect your axe and shield from the rack and step out into the square — get a read on who's moving through the Marchward this morning",
-          "attribute": "mental",
-          "subAttribute": "wits",
+          "subAttribute": "rapport",
           "difficulty": 0,
           "intentTags": [
-            "scout"
+            "persuade",
+            "negotiate"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Let Freki's stop near that third stool hang in the air a moment — ask Doss who usually sits there",
+          "attribute": "mental",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
           ],
           "trivial": true
         }
       ],
       "scene": {
-        "setting": "Inside the Wardhouse — low stone building, north side of the square. Long table, weapons rack with Brynjar's axe and shield checked alongside two shortswords and a crossbow. Charcoal map pinned with river stones. Early morning, lamp burning low.",
+        "setting": "Inside the Crow and Thistle — south side of the Marchward square. Low ceiling, four long tables, banked fire, smoke-smelling air. Morning, door open to the square.",
         "npcsPresent": [
           {
-            "name": "Halvra Stenn",
-            "state": "Stylus in hand, ledger turned to a fresh page, watching Brynjar with the same level attention she gives everything"
-          },
-          {
-            "name": "Freki",
-            "state": "Sitting near the door, watching the room, nose working"
+            "name": "Doss",
+            "state": "Behind the bar, cups restacked, watching Brynjar and Freki with level attention — has already named both reasons he's here"
           }
         ],
         "objects": [
-          "Iron hooks rack — Brynjar's axe and shield checked alongside two shortswords and a crossbow",
-          "Long wooden table",
-          "Charcoal map of the Marchward pinned with river stones",
-          "Open ledger with fresh entries",
-          "Lamp burning low"
+          "Long tables (four)",
+          "Bar with restacked cups",
+          "Banked fire (orange coals)",
+          "Brynjar's axe (on hip) and shield (on back, retrieved from Wardhouse)",
+          "Third stool from the left at the bar — where Freki stopped"
         ],
         "threads": [
-          "Sera of the Stillhold — missing seven days, Crow and Thistle is the next thread; Doss the innkeep knows more",
-          "Night-watch posting still open — meal, floor space, half-copper per watch",
-          "Bodyguard work — no formal board, but the Crow and Thistle common room is where those arrangements get made"
+          "Doss knows why Brynjar is here — Sera and the east road — but hasn't answered yet",
+          "Freki stopped at the third stool — something there worth noting",
+          "Two men eating at the far table, not looking up"
         ]
       },
       "npcUpdates": [
         {
-          "op": "update",
-          "npcId": "halvra-stenn",
-          "name": "Halvra Stenn",
-          "note": "Told Brynjar there's no formal bodyguard hire-board in the Marchward — neutral ground makes it too easy to abuse. Directed him to Doss at the Crow and Thistle for road-work arrangements.",
+          "op": "meet",
+          "npcId": "doss",
+          "name": "Doss",
+          "role": "Innkeep, the Crow and Thistle",
+          "gender": "woman",
+          "pronouns": "she/her",
+          "description": "Stout, fifties, unhurried behind her bar. Reads a stranger the way she reads a tab — fast and without flattery. Noticed Freki before she noticed you.",
+          "note": "Greeted Brynjar before he could state his business; named both his purposes — Sera and the east road — on sight.",
           "learned": [
-            "No formal bodyguard posting board at the Marchward",
-            "Doss at the Crow and Thistle hears about road-escort needs before the Wardhouse does"
+            "Brynjar arrived asking about Sera and road-escort work",
+            "Freki paused at the third stool from the left at the bar"
           ],
-          "statusNote": "On duty at the Wardhouse; has shared what she knows freely and directed Brynjar toward the Crow and Thistle"
+          "skillsObserved": [
+            "quick read of a stranger's intent"
+          ],
+          "relationshipDelta": 0,
+          "status": "active",
+          "statusNote": "On duty at the Crow and Thistle, morning shift"
+        }
+      ],
+      "placeUpdates": [
+        {
+          "subPlace": {
+            "name": "The Crow and Thistle",
+            "parent": "the_marchward",
+            "note": "The inn on the south side of the Marchward square. Doss keeps it. Common room is the real information hub — road-escort arrangements, gossip, and morning meals. Freki paused at the third stool from the left on first visit.",
+            "visited": true
+          }
         }
       ],
       "codexUpdates": [
         {
-          "topic": "crow-and-thistle",
+          "topic": "the-crow-and-thistle",
           "label": "The Crow and Thistle",
           "kind": "place",
-          "fact": "The inn where Doss works and where informal road-escort arrangements get made before anyone posts a formal notice. The common room is the real information hub of the Marchward.",
+          "entityId": "doss",
+          "fact": "Doss is the innkeep — reads strangers fast and without warmth she hasn't decided to spend. Freki paused at the third stool from the left; something there.",
           "links": [
             "sera-of-the-stillhold",
             "halvra-stenn",
             "the-marchward"
           ]
+        },
+        {
+          "topic": "doss",
+          "label": "Doss",
+          "kind": "person",
+          "entityId": "doss",
+          "fact": "Innkeep at the Crow and Thistle. Named Brynjar's two purposes before he stated them. Watched Freki more carefully than she watched Brynjar.",
+          "links": [
+            "the-crow-and-thistle",
+            "sera-of-the-stillhold",
+            "the-marchward"
+          ]
+        }
+      ],
+      "generateRequest": [
+        {
+          "type": "npc",
+          "hint": "Doss, the innkeep at the Crow and Thistle — fifties, stout, sharp, reads strangers faster than they read themselves; keeper of the inn where Sera of the Stillhold last slept",
+          "why": "Doss is a named, established NPC the fiction has introduced as a central information source for the Sera thread and road-escort work"
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "A brief exchange with Halvra — a few minutes at the table"
-      }
+        "why": "A short walk from the Wardhouse to the Crow and Thistle and the first exchange"
+      },
+      "moveTo": {
+        "location": "the_crow_and_thistle",
+        "why": "Walked south across the Marchward square from the Wardhouse"
+      },
+      "sceneEnded": false
     },
     "sceneState": {
-      "setting": "Inside the Wardhouse — low stone building, north side of the square. Long table, weapons rack with Brynjar's axe and shield checked alongside two shortswords and a crossbow. Charcoal map pinned with river stones. Early morning, lamp burning low.",
+      "setting": "Inside the Crow and Thistle — south side of the Marchward square. Low ceiling, four long tables, banked fire, smoke-smelling air. Morning, door open to the square.",
       "npcsPresent": [
         {
-          "name": "Halvra Stenn",
-          "state": "Stylus in hand, ledger turned to a fresh page, watching Brynjar with the same level attention she gives everything"
-        },
-        {
-          "name": "Freki",
-          "state": "Sitting near the door, watching the room, nose working"
+          "name": "Doss",
+          "state": "Behind the bar, cups restacked, watching Brynjar and Freki with level attention — has already named both reasons he's he"
         }
       ],
       "objects": [
-        "Iron hooks rack — Brynjar's axe and shield checked alongside two shortswords and",
-        "Long wooden table",
-        "Charcoal map of the Marchward pinned with river stones",
-        "Open ledger with fresh entries",
-        "Lamp burning low"
+        "Long tables (four)",
+        "Bar with restacked cups",
+        "Banked fire (orange coals)",
+        "Brynjar's axe (on hip) and shield (on back, retrieved from Wardhouse)",
+        "Third stool from the left at the bar — where Freki stopped"
       ],
       "threads": [
-        "Sera of the Stillhold — missing seven days, Crow and Thistle is the next thread; Doss the innkeep knows more",
-        "Night-watch posting still open — meal, floor space, half-copper per watch",
-        "Bodyguard work — no formal board, but the Crow and Thistle common room is where those arrangements get made"
+        "Doss knows why Brynjar is here — Sera and the east road — but hasn't answered yet",
+        "Freki stopped at the third stool — something there worth noting",
+        "Two men eating at the far table, not looking up"
       ]
     }
   },
@@ -431,6 +472,39 @@
       "people": "human",
       "peopleSource": "generated",
       "appearance": "A compact woman somewhere in her mid-forties, hair the colour of old iron worn in a single braid wound close to the head. A small, neat scar through the left eyebrow — not a fighter's scar, an old workplace scar, which tells its own story. Wears the Wardhouse grey, kept better than the building deserves. Her hands are ink-stained at the fingertips and absolutely still when she is waiting for your answer."
+    },
+    "doss": {
+      "id": "doss",
+      "name": "Doss",
+      "role": "Innkeep, the Crow and Thistle",
+      "description": "Stout, fifties, unhurried behind her bar. Reads a stranger the way she reads a tab — fast and without flattery. Noticed Freki before she noticed you.",
+      "firstMet": {
+        "locationId": "the_marchward",
+        "day": 1
+      },
+      "relationship": 0,
+      "history": [
+        "[d1] Greeted Brynjar before he could state his business; named both his purposes — Sera and the east road — on sight."
+      ],
+      "knownFacts": [
+        "Brynjar arrived asking about Sera and road-escort work",
+        "Freki paused at the third stool from the left at the bar"
+      ],
+      "skillsObserved": [
+        "quick read of a stranger's intent"
+      ],
+      "status": "active",
+      "gender": "woman",
+      "pronouns": "she/her",
+      "statusNote": "On duty at the Crow and Thistle, morning shift",
+      "domains": {
+        "primary": "marcher"
+      },
+      "domainsSource": "derived",
+      "lastSeen": {
+        "locationId": "the_marchward",
+        "day": 1
+      }
     }
   },
   "placeMemory": {
@@ -454,6 +528,13 @@
           "day": 1,
           "visited": true,
           "note": "Low stone building on the north side of the square. Intake table, weapons rack, charcoal map. Truce-law check-in point for all Marchward arrivals."
+        },
+        "the-crow-and-thistle": {
+          "name": "The Crow and Thistle",
+          "parentId": "the_marchward",
+          "day": 1,
+          "visited": true,
+          "note": "The inn on the south side of the Marchward square. Doss keeps it. Common room is the real information hub — road-escort arrangements, gossip, and morning meals. Freki paused at the third stool from…"
         }
       }
     }
@@ -535,7 +616,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 4
+    "turnsSinceOffer": 5
   },
   "domains": {
     "primary": "marcher",
@@ -741,20 +822,42 @@
         "aliases": [],
         "createdDay": 1,
         "updatedDay": 1
+      },
+      "doss": {
+        "id": "doss",
+        "label": "Doss",
+        "kind": "person",
+        "facts": [
+          "[d1] Innkeep, the Crow and Thistle",
+          "[d1] Doss is the innkeep — reads strangers fast and without warmth she hasn't decided to spend. Freki paused at the third stool from the left; something there.",
+          "[d1] Innkeep at the Crow and Thistle. Named Brynjar's two purposes before he stated them. Watched Freki more carefully than she watched Brynjar."
+        ],
+        "links": [
+          "sera-of-the-stillhold",
+          "halvra-stenn",
+          "the-marchward",
+          "the-crow-and-thistle"
+        ],
+        "aliases": [
+          "The Crow and Thistle"
+        ],
+        "createdDay": 1,
+        "entityId": "doss",
+        "updatedDay": 1
       }
     }
   },
   "tendencies": {
-    "leadership": 11.72628230899658,
-    "cerebral": 1.8340683010253906,
-    "strategic": 2.784783583984375,
-    "ruthless": 0.8810956933593749,
-    "social": 2.925625
+    "leadership": 11.433125251271665,
+    "cerebral": 1.7882165934997558,
+    "strategic": 2.7151639943847656,
+    "ruthless": 0.8590683010253904,
+    "social": 2.852484375
   },
   "aptitudes": [
     "banner"
   ],
-  "actionCount": 7,
+  "actionCount": 8,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -865,8 +968,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784770901472,
-  "rev": 43,
+  "updatedAt": 1784771035567,
+  "rev": 44,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -951,7 +1054,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 10
+    "riven_marches": 11
   },
   "practice": {
     "schemaVersion": 1,
@@ -1010,10 +1113,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-23T01:30:20.702Z",
-      "lastAt": "2026-07-23T01:41:41.468Z",
+      "lastAt": "2026-07-23T01:43:55.564Z",
       "startDay": 23,
       "endDay": 23,
-      "beats": 4
+      "beats": 5
     }
   ],
   "_pendingArrival": null,
@@ -1029,15 +1132,16 @@
     "at": "2026-07-23T01:18:04.353Z"
   },
   "_opEmitted": {
-    "sceneSummary": 4,
-    "choices": 4,
-    "scene": 4,
-    "npcUpdates": 4,
-    "placeUpdates": 1,
-    "generateRequest": 1,
-    "moveTo": 1,
-    "timeOps": 4,
-    "codexUpdates": 4
+    "sceneSummary": 5,
+    "choices": 5,
+    "scene": 5,
+    "npcUpdates": 5,
+    "placeUpdates": 2,
+    "generateRequest": 2,
+    "moveTo": 2,
+    "timeOps": 5,
+    "codexUpdates": 5,
+    "sceneEnded": 1
   },
-  "_opTurns": 4
+  "_opTurns": 5
 }

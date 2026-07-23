@@ -1,6 +1,14 @@
 # SNG-218 §2 — the LLM "next crafts" suggestion PROMPT (Aevi-authored, ready to wire)
 ## Aevi (PO) · 2026-07-22 · the prompt CCode was waiting on
 
+> **CORRECTION (Aevi, 2026-07-22):** My first draft said aspirations "MAY be absent (Silas has none)."
+> WRONG — I read the wrong path. Aspirations live at **`character.practice.aspirations`** as
+> `[{abilityId, since, progress}]` (Silas is actively working toward `hunters_strike` 2/10 and
+> `pattern_sense` 0/10). They are NOT absent — they're a PRIMARY signal, and the suggestion must read the
+> right path and treat them as first-class. Also found and now folded in: **`character.practice.uses`** —
+> per-craft use counts (order_sense 71, deathsense 31, palework 29, shadowstep 17…) — the real
+> "leaned-on vs. underused" data. Both corrections below.
+
 This is the deliverable the spec assigned to Aevi and I hadn't written yet. It's the `suggestNextCrafts`
 function — mirrors `suggestBuild`'s shape (rich system prompt, honest-cost discipline, strict JSON, ids-only-
 from-the-list). CCode wires the call + feeds the context; the prompt below is authored and final.
@@ -15,14 +23,20 @@ from-the-list). CCode wires the call + feeds the context; the prompt below is au
 - **THE REACHABLE POOL** — the §1-fixed reachable-now crafts (allowed, not owned, level AND standing met).
   The suggestion may ONLY pick from this. CCode passes it in.
 - `boostedCrafts` — SNG-215 A1, may be absent (handle gracefully — weight if present, ignore if not).
-- `aspirations` — MAY be absent (Silas has none). Handle gracefully; don't assume it exists.
+- **`practice.aspirations`** — `[{abilityId, since, progress/10}]`. **VERIFIED PRESENT** (Silas: hunters_strike
+  2/10, pattern_sense 0/10). A PRIMARY signal — a craft on the aspiration list, or one that ADVANCES an
+  aspiration, should be strongly favoured. Read from `character.practice.aspirations`, NOT a top-level field.
+- **`practice.uses`** — per-craft use counts (order_sense 71, deathsense 31…). The "leaned-on vs. underused"
+  signal: a craft the player has BARELY used is a candidate for "you have this but never reach for it," and a
+  heavily-used craft marks their true signature. Pass a compact summary (top-used + owned-but-unused).
 - `standing` per people — may be sparse/empty in a snapshot. Use if present, don't require.
 
 ## The function (author-final)
 ```
 export async function suggestNextCrafts({ owned, domains, tendencies, aptitudes, reachablePool,
-                                          boosted = [], aspirations = [], standing = {},
+                                          boosted = [], aspirations = [], uses = {}, standing = {},
                                           skillPoints = 0, level = 1 }) {
+  // aspirations from character.practice.aspirations [{abilityId, progress}]; uses from character.practice.uses
   const sys = `You advise a player of SINGULARITY on WHICH CRAFT TO LEARN NEXT at level-up. You are not
 picking for them — you are naming the 2-4 reachable crafts that best fit WHO THIS CHARACTER HAS BECOME, each
 with an honest reason, so they can choose well.
@@ -36,7 +50,13 @@ WHAT YOU READ:
 - Their earned APTITUDES (strategist, scholar, charmer…) — who the world already recognises them as.
 - Their DOMAINS — the peoples they can draw from.
 - BOOSTED crafts, if any — crafts the PLAYER flagged they want to use more: weight these UP when they fit.
-- ASPIRATIONS, if any — declared growth goals: favour a craft that advances one.
+- ASPIRATIONS — the crafts the player has DECLARED they're working toward (with progress). This is a DIRECT
+  statement of intent: a reachable aspiration craft, or a craft that clearly advances one, is the STRONGEST
+  fit-signal there is. If an aspiration is reachable now, it should almost always be among your picks (tagged
+  fit:"aspiration"), and named as the thing they SAID they wanted.
+- USE COUNTS — which owned crafts they actually lean on vs. barely touch. A high-use craft is their signature;
+  an owned-but-near-zero craft may be worth a "you have this but never use it" note (not a new-craft pick, but
+  useful context for judging what genuinely fills a gap).
 
 ⛔ SUGGEST ONLY FROM THE REACHABLE LIST GIVEN. Every craft you name MUST be in the reachable pool — a craft
 the character can learn RIGHT NOW (domain-allowed, level met, standing met, not already owned). Never suggest
@@ -68,7 +88,7 @@ Use ONLY abilityIds from the REACHABLE list. 2-4 picks, best first. If reachable
 DOMAINS: primary ${domains.primary} · secondary ${domains.secondary} · tertiary ${domains.tertiary}
 PLAY-STYLE (higher = more that way): ${tendencies}
 APTITUDES: ${aptitudes}
-${boosted.length ? `BOOSTED (player wants to use more): ${boosted}\n` : ""}${aspirations.length ? `ASPIRATIONS: ${aspirations}\n` : ""}SKILL POINTS: ${skillPoints} · LEVEL: ${level}
+${boosted.length ? `BOOSTED (player wants to use more): ${boosted}\n` : ""}ASPIRATIONS (declared goals · progress/10): ${aspirations.length ? aspirations : "none declared"}\nUSE COUNTS (leaned-on vs. rarely-used owned crafts): ${uses}\nSKILL POINTS: ${skillPoints} · LEVEL: ${level}
 
 REACHABLE NOW — the ONLY crafts you may suggest (id · name · family · what it does · cost):
 ${reachablePool}`;
@@ -88,6 +108,10 @@ ${reachablePool}`;
   top-of-modal text (with `why`) and the on-wheel markers — one source, two surfaces.
 - **`fit` tag** ("gap/aspiration/strength/synergy") lets the UI optionally show WHY-kind as a small label; and
   it's a check on the model — a good suggestion set usually isn't four "strength" picks.
+- **aspirations + uses:** read `character.practice.aspirations` ([{abilityId, progress}]) and
+  `character.practice.uses` (id→count). Pass aspirations as "hunters_strike 2/10, pattern_sense 0/10" and a
+  compact use summary (the few most-used + any owned craft with ~0 uses). BOTH are load-bearing signals — a
+  suggestion that ignores a declared aspiration the player can reach NOW has failed the 'rationalized' bar.
 - **tendencies formatting:** pass the tendency map as a compact "cerebral 18, social 13, strategic 11…" list
   (drop near-zero ones) — the prompt reads it as a fingerprint, not raw numbers.
 

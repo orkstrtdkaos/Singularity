@@ -21,6 +21,11 @@
     "playerVisibleSurface": "A dev-gated '⚙ Author' panel (next to 🔬 Machine): set XP/level/skill-points, restore or raise vitals, grant an ability or a power item, force any world-arc stage. Every edit shows in a Recent-author-edits log. Invisible outside dev mode.",
     "whatMakesItFire": "renderAuthorPanel's controls call applyAuthorOps with one op each (guarded by AUTHOR_OPS), then saveCharacter + re-render. Every op appends to character.authorEdits (append-only, separate from the fair-GM corrections ledger) so even god-mode leaves an audit trail."
   },
+  "wake.js": {
+    "purpose": "SNG-204: the wake engine — a resolved SIGNIFICANT outcome (world/tradition/regional tier, or any arc move) leaves a WAKE: a generation-ready trace of what changed (the applied effects), which way it pushes the world (the moved arc's authored pressureOnAdvance — the inference seed), its scale, and the neighbouring arcs it presses on (connectsTo). Closes the loop the world had open: consequences used to land durably and then stop; now they become the next thing. Owns the record + lifecycle + the cheap path; the model-generation path (a full new quest minted FROM a wake) is Phase 2 and reads these open wakes.",
+    "playerVisibleSurface": "The GM weaves the next thread OUT of a resolved consequence (a faction reacting, a place coping, a person seizing the moment) — surfaced as the WAKES block. A wake's lean also moves the connected arcs on the world-map readout; an unengaged wake's window closing shows as world-tick news.",
+    "whatMakesItFire": "resolveStructuredQuest calls createWake after applying a significant outcome's effects; the wake immediately leans (signed by the arc move's direction) on each existing connectsTo neighbour via worldState.wakeArcPushes, which worldtick.arcStageNow folds into the net so the neighbour's stage actually moves. The world-tick calls decayWakes so open wakes fade + close on schedule. gm_registry surfaces wakesForGM."
+  },
   "namematch.js": {
     "purpose": "The one name-resolution primitive — slugify and fuzzy-match an entity the same way everywhere, so codex, quests and inventory can never disagree about what the GM just named.",
     "playerVisibleSurface": "Indirect but constant: every id the player sees, and the quest panel's \"couldn't match\" note when the GM names something that does not resolve.",

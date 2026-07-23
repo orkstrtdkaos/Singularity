@@ -16,6 +16,7 @@ import { applyCodexUpdates } from "./codex.js";
 import { smartClamp } from "./namematch.js"; // SNG-076: word-boundary clamp for the away-digest/news
 import { generatedRecords } from "./generate.js";
 import { syncEnabled, fetchRepoJSON, fetchLedger, pushOwnedFile, pushMergedFile } from "./sync.js";
+import { decayWakes, wakeArcPush } from "./wake.js"; // SNG-204: wakes decay on the tick + lean on connected arcs
 import { absoluteWorldDay, worldDayAt, worldCount, readClock } from "./worldtime.js";
 import { advanceAssignment, progressAgainst } from "./assignments.js"; // SNG-191 §4: the world advances delegated work
 import { seedArc, fomentArc, surfaceableArcs, markSurfaced, seasonalPressure } from "./latentarcs.js"; // SNG-191 §7: the world's own agenda
@@ -44,8 +45,10 @@ function findGreaterArc(content, arcId) {
  *  arc from offstage (local — offscreen developments are per-player). Old 2A saves stored a forward-only
  *  `stage`; read it as a +push. */
 function arcPushes(character, arcId) {
-  const epic = Object.values(character?.worldState?.epicArcPushes || {}).filter(e => e.arcId === arcId).reduce((s, e) => s + (Number.isFinite(e.push) ? e.push : 0), 0);
-  const local = character?.worldState?.arcStages?.[arcId];
+  const ws = character?.worldState;
+  const epic = Object.values(ws?.epicArcPushes || {}).filter(e => e.arcId === arcId).reduce((s, e) => s + (Number.isFinite(e.push) ? e.push : 0), 0)
+    + wakeArcPush(ws, arcId); // SNG-204: a wake's lean on a connected arc is part of the ambient (non-player) pressure
+  const local = ws?.arcStages?.[arcId];
   if (!local) return { mine: 0, others: 0, epic, legacyStage: null };
   const mine = Number.isFinite(local.push) ? local.push
     : (Number.isFinite(local.stage) ? null : 0);          // a 2A save: fall back to its cached stage
@@ -636,10 +639,16 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
   const population = offscreenPopulation(character, content, { worldDay: currentWorldDay, rng, lastEpicDay: ws.lastEpicOffscreenDay })
     .filter(e => ws.wantProgress?.[e.id]?.status !== "resolved");
   ws.lastTickWorldDay = currentWorldDay; // advance the baseline even if nobody's in scope
-  if (!population.length || !evolveFn) return [];
+  const news = [];
+  // SNG-204: open wakes decay over world-time; one nobody engaged closes unspawned (the world moves on). This
+  // runs every tick, even when no figure is in scope — so a wake left unacted-on still fades on schedule.
+  for (const w of decayWakes(character, currentWorldDay)) news.push({ text: `The moment to act on ${w.source.arcId ? String(w.source.arcId).replace(/^arc_/, "").replace(/_/g, " ") : "a passing consequence"} has closed — the world moved on.`, worldDay: currentWorldDay });
+  if (!population.length || !evolveFn) {
+    if (news.length) { const stamped = news.map(n => ({ day: ws.lastTickDay ?? null, worldDay: n.worldDay, text: smartClamp(n.text, 600) })); ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP); ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP); }
+    return news;
+  }
   const batch = population.slice(0, 4);
 
-  const news = [];
   try {
     const result = await evolveFn({ character, entities: batch, elapsedWorldDays, currentWorldDay, progressOf: (id) => wantProgressLine(ws, id) });
     for (const dev of (result?.developments || []).slice(0, 4)) {

@@ -38,6 +38,7 @@ import { inventoryForGM } from "./inventory.js";
 import { companionsForGM, activeCompanions } from "./companions.js";
 import { questsForGM, structuredQuestsForGM, traditionArcForGM, npcQuestsForGM, practicedTraditions } from "./quests.js";
 import { legendsForGM } from "./legends.js"; // SNG-208 wiring: legends pursuable as teachers + wants-as-quests
+import { wakesForGM } from "./wake.js"; // SNG-204: the aftermath waiting to become the next thread
 import { npcRegistryForGM, npcQuestSeedBlock } from "./npcs.js";
 import { placeMemoryForGM, recallForGM } from "./places.js";
 import { assignmentsForGM } from "./assignments.js"; // SNG-191 §4: delegated commitments the world is honouring
@@ -181,6 +182,10 @@ export const GM_CONTEXT = [
       practiced: practicedTraditions(env.character, env.CONTENT),
       deadIds: new Set(Object.entries(env.character?.worldState?.epicStatus || {}).filter(([, s]) => s?.status === "dead").map(([id]) => id))
     }) },
+  // SNG-204: the open WAKES — resolved consequences waiting to become the next thread; the GM weaves them out.
+  { key: "wakesDetail", builder: "wake.wakesForGM (SNG-204)", carries: ["open wakes", "the pressure each pushes", "the next thread to weave"],
+    reachedBy: "always (a significant outcome recently resolved)", spec: "SNG-204 §OQ1", views: ["turn", "ask"],
+    build: (env) => wakesForGM(env.character, env.CONTENT) },
 
   // ---- turn-only: pass-throughs from runGM's own parameters ----
   { key: "resolution", builder: "runGM param (resolve.resolveAction)", carries: ["this action's mechanical outcome"],

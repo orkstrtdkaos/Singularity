@@ -7086,6 +7086,47 @@ await (async () => {
   check("208-wire: the GM sees the pursuable legends (registry row consumed)", /legendsPursuableDetail\) world\.push/.test(gmSrc208w));
 }
 
+// ---- SNG-204: the WAKE ENGINE — a resolved significant outcome leaves a wake the world continues from ----
+{
+  const wake = await import("../engine/wake.js");
+  const ga = JSON.parse(readFileSync(join(root, "content/packs/valley/lore/greater_arcs.json"), "utf8"));
+  const content = { greaterArcs: ga.arcs };
+  const arc = ga.arcs.find(a => a.id === "arc_what_wakes_beneath");
+  const neighbors = (arc.connectsTo || []).filter(n => ga.arcs.some(a => a.id === n)); // only arcs that EXIST
+
+  const ch = { worldState: initWorldState(1) };
+  const quest = { id: "wq", tier: "world", arcId: arc.id, arcStageTo: 2 };
+  const outcome = { id: "let_it_finish", summary: "the water became something else" };
+  const applied = [{ type: "arc_stage", arcId: arc.id, push: 1, delta: 1 }];
+  const w = wake.createWake(ch, quest, outcome, applied, content, { worldDay: 10 });
+  check("204 §2: a world-tier arc outcome leaves a WAKE (provenance + change + scale + open)", !!w && w.source.questId === "wq" && w.scale === "world" && w.change.length === 1 && w.open === true);
+  check("204 §2: the wake's pressure is the moved stage's authored pressureOnAdvance (the inference seed)", !!w.pressure && w.pressure.slice(0, 30) === arc.stages.find(s => s.stage === 2).pressureOnAdvance.slice(0, 30));
+  check("204 §2: the wake is idempotent — the same (quest, outcome) never re-wakes", wake.createWake(ch, quest, outcome, applied, content, { worldDay: 10 }) === null && ch.worldState.wakes.length === 1);
+  check("204 §6.4: the wake leans (+) on the arcs it connectsTo (an advance escalates its neighbours)", neighbors.length >= 1 && neighbors.every(n => ch.worldState.wakeArcPushes[n]?.push === 1) && wake.wakeArcPush(ch.worldState, neighbors[0]) === 1);
+  check("204 §6.4: the wake's lean MOVES a connected arc's canonical stage (folded into the net)", worldArcsPublic(content, ch).find(r => r.arcId === neighbors[0]).stageNum === (ga.arcs.find(a => a.id === neighbors[0]).currentStage ?? 1) + 1);
+
+  const ch2 = { worldState: initWorldState(1) };
+  check("204 §2: an npc/local outcome with no arc move leaves NO wake (rarity is the point)", wake.createWake(ch2, { id: "errand", tier: "npc" }, { id: "done" }, [{ type: "codex_fact" }], content, {}) === null);
+
+  const ch3 = { worldState: initWorldState(1) };
+  wake.createWake(ch3, quest, outcome, applied, content, { worldDay: 1 });
+  const early = wake.decayWakes(ch3, 5);
+  check("204 §4: a fresh wake stays open + its pressure fades with age", early.length === 0 && ch3.worldState.wakes[0].open === true && ch3.worldState.wakes[0].strength < 4);
+  const late = wake.decayWakes(ch3, 20);
+  check("204 §4: an unengaged wake CLOSES after it decays (the world moves on)", late.length === 1 && ch3.worldState.wakes[0].open === false);
+
+  const gm = wake.wakesForGM(ch, content);
+  check("204 §OQ1: wakesForGM surfaces open wakes as the next-thread seed", /WAKES/.test(gm) && /the next thread/.test(gm) && /presses on/.test(gm));
+  check("204 §OQ1: a closed wake is not surfaced (nothing left to continue)", wake.wakesForGM(ch3, content) === null);
+
+  const qSrc204 = readFileSync(join(root, "engine/quests.js"), "utf8");
+  check("204: resolveStructuredQuest creates a wake on resolve (the loop's write side)", /createWake\(character, q, outcome, applied/.test(qSrc204));
+  const wtSrc204 = readFileSync(join(root, "engine/worldtick.js"), "utf8");
+  check("204: the world-tick decays wakes + folds their arc-lean into the net", /decayWakes\(character, currentWorldDay\)/.test(wtSrc204) && /wakeArcPush\(ws, arcId\)/.test(wtSrc204));
+  const gmSrc204 = readFileSync(join(root, "engine/gm.js"), "utf8");
+  check("204 §OQ1: the GM sees the open wakes (wakesDetail consumed)", /wakesDetail\) world\.push/.test(gmSrc204));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

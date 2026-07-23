@@ -11,6 +11,7 @@
 
 import { namesMatch, resolveByName, smartClamp } from "./namematch.js";
 import { traditionOf } from "./traditions.js";
+import { createWake } from "./wake.js"; // SNG-204: a significant outcome leaves a wake the world continues from
 
 /** Resolve an incoming quest op to an existing quest: exact id → slugified-title id →
  *  title/alias fuzzy. Returns the quest or null. */
@@ -418,7 +419,11 @@ export function resolveStructuredQuest(character, questId, outcomeId, ctx = {}) 
     worldDay: ctx.worldDay ?? null, at: ctx.nowISO || null
   });
   character.xp = (character.xp || 0) + xp;
-  return { ok: true, outcome, applied, xp };
+  // SNG-204: a significant outcome leaves a WAKE the world continues from — provenance + the applied change +
+  // the arc's pressure-seed + a lean on the arcs it connects to. Never throws; a wake is additive to the resolve.
+  let wake = null;
+  try { wake = createWake(character, q, outcome, applied, ctx.content || {}, ctx); } catch { /* wake is additive — never block a resolve */ }
+  return { ok: true, outcome, applied, xp, wake };
 }
 
 /** SNG-112: has the player already TOUCHED this quest's thread? True when they already KNOW one

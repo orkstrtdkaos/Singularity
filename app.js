@@ -66,7 +66,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.205";
+const APP_VERSION = "1.8.206";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6096,6 +6096,7 @@ function renderStructuredQuestDetail(q) {
     const day = readClock(character.clock).day;
     const r = resolveStructuredQuest(character, q.id, b.dataset.outcome, {
       worldDay: absoluteWorldDay(), nowISO: new Date().toISOString(),
+      content: CONTENT, // SNG-204: the arcs, so a significant outcome's wake knows its pressure + connectsTo
       liaisonMult: liaisonFactions(character), // SNG-126: a company liaison speeds standing with their people
       // both sinks land the machine-readable effects[] durably: propagating world-events + pinned facts
       recordEvent: ev => applyFactUpdates(character, [{ op: "add", text: ev.text }], { day }),

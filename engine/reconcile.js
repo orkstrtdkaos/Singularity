@@ -499,6 +499,66 @@ export const CHARACTER_STEPS = [
     }
   },
   {
+    version: 19, id: "gen-location-promote", playerFacing: true,
+    // SNG-221. The living world mints gen-locations (a named place the fiction reached before the map knew
+    // it — "gen-stillwater-s-trouble"). Later a CANONICAL file is authored for that place ("the_old_warden_post":
+    // the buildings, the layout, the rich description). Now the buildings live on the canonical id and the
+    // PLAY-STATE (the wards seated, the claim, the visits) lives on the gen id, and nothing links them — one
+    // place split across two ids. This promotes the gen-location to its canonical file: for every canonical
+    // location that DECLARES `supersedes: [genId…]`, any of those gen ids present in this save has its
+    // play-state MIGRATED onto the canonical id, and an alias is recorded so any lingering reference resolves.
+    // GENERAL (§5): scans all canonical locations, not one Stillwater special-case. Canonical wins on
+    // DESCRIPTION (the file's prose); the SAVE wins on STATE — the wards, claim and visits are CARRIED, never
+    // blanked by the file's empty state fields (the one place the layers invert, §GUARD). Runs wherever the
+    // gen id appears — currentLocationId, activeScene, placeMemory, knownPlaces, images — never a partial
+    // migration that leaves a split-brain place. Idempotent: a gen id already aliased is skipped.
+    apply: (c, ctx) => {
+      const locs = ctx.content?.locations || {};
+      c.locationAliases = c.locationAliases || {};
+      let promoted = 0; let name = null;
+      for (const [canonId, loc] of Object.entries(locs)) {
+        for (const genId of (loc.supersedes || [])) {
+          if (!genId || c.locationAliases[genId] === canonId) continue; // already promoted → no-op (idempotent)
+          let moved = false;
+          // placeMemory — the ward notes, the claim, the visits. Merge onto the canonical id; the SAVE's
+          // recorded state wins (canonical placeMemory rarely exists — placeMemory is a save-only overlay).
+          const gm = c.placeMemory?.[genId];
+          if (gm) {
+            c.placeMemory = c.placeMemory || {};
+            const cm = c.placeMemory[canonId] || (c.placeMemory[canonId] = { visits: 0, notes: [], flags: {} });
+            cm.visits = Math.max(cm.visits || 0, gm.visits || 0);
+            for (const n of gm.notes || []) if (!(cm.notes || []).includes(n)) cm.notes = [...(cm.notes || []), n];
+            cm.flags = { ...(cm.flags || {}), ...(gm.flags || {}) }; // save STATE wins on conflict
+            if (gm.name && !cm.name) cm.name = gm.name;
+            // §3c: structure the CLAIM/reactivation as a flag the engine + GM context can READ (not only prose).
+            // The detailed ward text stays in notes (it narrates well); a future ward-mechanic fills `wards`.
+            cm.claim = { ...(cm.claim || {}), reactivated: true, promotedFrom: genId, wards: cm.claim?.wards || [] };
+            delete c.placeMemory[genId];
+            moved = true;
+          }
+          // knownPlaces — keep the place known, under the real id (dedupe).
+          if (Array.isArray(c.knownPlaces) && c.knownPlaces.includes(genId)) {
+            c.knownPlaces = [...new Set(c.knownPlaces.map(p => (p === genId ? canonId : p)))];
+            moved = true;
+          }
+          // the tracked location pointers (ties to SNG-210 — repoint wherever they sit at the gen id).
+          if (c.currentLocationId === genId) { c.currentLocationId = canonId; moved = true; }
+          if (c.activeScene && c.activeScene.locationId === genId) { c.activeScene.locationId = canonId; moved = true; }
+          // images keyed to the gen id.
+          if (c.locationImages && c.locationImages[genId] && !c.locationImages[canonId]) { c.locationImages[canonId] = c.locationImages[genId]; delete c.locationImages[genId]; moved = true; }
+          // the generated pool record: mark it superseded for provenance (don't delete — a hard ref elsewhere
+          // still resolves via the alias below; the canonical file now owns the description).
+          const genRec = c.generated?.location?.[genId];
+          if (genRec) { genRec.supersededBy = canonId; moved = true; }
+          c.locationAliases[genId] = canonId; // the id bridge — belt-and-suspenders for any lingering gen-id ref
+          if (moved) { promoted++; name = loc.name || canonId; }
+        }
+      }
+      if (promoted) console.log(`[reconcile] sng-221: promoted ${promoted} gen-location(s) to their canonical file`);
+      return promoted ? { notes: [`${name} is one place again — its buildings and the work you did there (the wards, the claim) are joined under its true name.`] } : {};
+    }
+  },
+  {
     version: 6, id: "place-containment", playerFacing: true,
     // SNG-154 stage 4. Repair a save whose place hierarchy was scrambled before `parentId` existed.
     // Containment used to be inferred per-write from wherever the engine last believed the

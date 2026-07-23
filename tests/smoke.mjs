@@ -7369,6 +7369,47 @@ await (async () => {
   check("218 §3: the recommended halo + aspirational dim are styled (reduced-motion respected)", /\.wheel-reco-halo/.test(cssSrc218) && /\.wheel-node\.aspirational \{ opacity/.test(cssSrc218) && /prefers-reduced-motion/.test(cssSrc218));
 }
 
+// ---- SNG-221: promote a gen-location to its canonical file — buildings + wards become ONE place ----
+{
+  const locs = { the_old_warden_post: { id: "the_old_warden_post", name: "Raven's Home (the Old Warden Post)", aliases: ["Stillwater's Trouble", "Raven's Home"], supersedes: ["gen-stillwater-s-trouble"] } };
+  // §3a / Q3: travel-by-name (the gen-stub's old name) resolves to the canonical id, not a fresh mint.
+  check("221 §3a: resolveLocationId resolves a superseded gen-location's NAME to the canonical id (travel lands right)", resolveLocationId("Stillwater's Trouble", locs) === "the_old_warden_post" && resolveLocationId("stillwater's trouble", locs) === "the_old_warden_post" && resolveLocationId("Raven's Home", locs) === "the_old_warden_post");
+
+  // §3b: the reconcile migrates the gen-location's play-state onto the canonical id — everywhere it appears.
+  const save = {
+    reconcileVersion: 18,
+    currentLocationId: "gen-stillwater-s-trouble",
+    activeScene: { locationId: "gen-stillwater-s-trouble" },
+    knownPlaces: ["the_crossing", "gen-stillwater-s-trouble"],
+    placeMemory: { "gen-stillwater-s-trouble": { visits: 3, notes: ["Binding runes (Wither and The Raised Thing) seated in the post's lower face, plus a Boundary-Stone chalk mark at the crown."], flags: { claimed: true } } },
+    locationImages: { "gen-stillwater-s-trouble": "data:img" },
+    generated: { schemaVersion: 1, npc: {}, location: { "gen-stillwater-s-trouble": { id: "gen-stillwater-s-trouble", name: "Stillwater's Trouble", _mintedAs: "transit" } }, arc: {} }
+  };
+  const r221 = reconcile(save, "character", { content: { locations: locs } });
+  check("221 §3b: the gen-location's placeMemory (ward notes + visits) moves onto the canonical id", !save.placeMemory["gen-stillwater-s-trouble"] && /Binding runes/.test(save.placeMemory.the_old_warden_post.notes[0]) && save.placeMemory.the_old_warden_post.visits === 3);
+  check("221 §3b: currentLocationId + activeScene repoint to the canonical id (no split-brain)", save.currentLocationId === "the_old_warden_post" && save.activeScene.locationId === "the_old_warden_post");
+  check("221 §3b: knownPlaces keeps the place known, under the real id (deduped)", save.knownPlaces.includes("the_old_warden_post") && !save.knownPlaces.includes("gen-stillwater-s-trouble"));
+  check("221 §3b: the image re-keys to the canonical id", save.locationImages.the_old_warden_post === "data:img" && !save.locationImages["gen-stillwater-s-trouble"]);
+  check("221 §3b: the gen pool record is marked superseded (provenance kept) + the id-alias recorded", save.generated.location["gen-stillwater-s-trouble"].supersededBy === "the_old_warden_post" && save.locationAliases["gen-stillwater-s-trouble"] === "the_old_warden_post");
+  check("221 §3c: the CLAIM is structured — a reactivated flag the engine/GM can READ, not only prose", save.placeMemory.the_old_warden_post.claim?.reactivated === true && save.placeMemory.the_old_warden_post.claim.promotedFrom === "gen-stillwater-s-trouble" && Array.isArray(save.placeMemory.the_old_warden_post.claim.wards));
+  check("221 §3b: the migration surfaces a player-facing note (the place is one again)", (r221.notes || []).some(n => /one place again/.test(n)));
+
+  // idempotent: the in-step guard skips a gen id already aliased (even if the version gate is bypassed).
+  const migratedSnapshot = JSON.stringify(save.placeMemory.the_old_warden_post);
+  const rerun = { ...JSON.parse(JSON.stringify(save)), reconcileVersion: 18 }; // force the step to run again; alias already set
+  reconcile(rerun, "character", { content: { locations: locs } });
+  check("221: idempotent — a gen id already aliased is skipped (no double-migrate)", JSON.stringify(rerun.placeMemory.the_old_warden_post) === migratedSnapshot);
+
+  // §5 general: a save with NO superseded gen-location is left untouched (the scan is safe on every load).
+  const clean = { reconcileVersion: 18, knownPlaces: ["the_crossing"], placeMemory: {} };
+  reconcile(clean, "character", { content: { locations: locs } });
+  check("221 §5: a save with no superseded gen-location is untouched (general scan, safe on every load)", clean.knownPlaces.length === 1 && Object.keys(clean.placeMemory).length === 0);
+
+  check("221: the promote step is registered at version 19", CHARACTER_STEPS.some(s => s.version === 19 && s.id === "gen-location-promote"));
+  const owp = JSON.parse(readFileSync(join(root, "content/packs/valley/locations/the_old_warden_post.json"), "utf8"));
+  check("221: the_old_warden_post declares supersedes + aliases (the authored gen→canonical link)", owp.supersedes?.includes("gen-stillwater-s-trouble") && owp.aliases?.includes("Stillwater's Trouble") && owp.aliases?.includes("Raven's Home"));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

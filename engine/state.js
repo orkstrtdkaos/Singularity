@@ -28,6 +28,12 @@ export function resolveLocationId(ref, locations = {}) {
   if (locations[slug]) return slug;
   const lc = raw.toLowerCase();
   for (const [k, l] of Object.entries(locations)) if ((l.name || "").toLowerCase() === lc) return k;
+  // SNG-221: a canonical location may declare `aliases` (other names it answers to — e.g. the name a
+  // gen-stub carried before its canonical file was authored: "Stillwater's Trouble" / "Raven's Home").
+  // An EXACT alias match (raw or slugged) resolves to it, before the looser substring pass below — so
+  // traveling to a superseded gen-location's name lands on the real place (Q3), not a fresh mint.
+  for (const [k, l] of Object.entries(locations)) if ((l.aliases || []).some(a => String(a).toLowerCase() === lc)) return k;
+  for (const [k, l] of Object.entries(locations)) if ((l.aliases || []).some(a => String(a).toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/(^_|_$)/g, "") === slug)) return k;
   for (const [k, l] of Object.entries(locations)) { const n = (l.name || "").toLowerCase(); if (n && (n.includes(lc) || lc.includes(n))) return k; }
   return null;
 }

@@ -1,5 +1,22 @@
 # PO ALERT
 
+> ## 🚨 CAPTURED LIVE: SNG-207 ESCAPE — GM acknowledged + fixed NOTHING (Aevi, 2026-07-22 · SNG-207c)
+> Erik asked the GM to fix his stuck location. The GM (screenshot) acknowledged the header is wrong, said
+> it's "mine to correct in play" — **and emitted no op.** Verified: `currentLocationId` still `the_crossing`,
+> zero `reanchorLocation` in the corrections log. This is the "ACKNOWLEDGE MEANS EMIT / apology-with-no-op is
+> the WORST outcome" violation, AFTER SNG-207 shipped. Two failures in one turn (→ SPEC_SNG-207c):
+> 1. **Routed around the op via a reframe** — recast a stuck-save REPAIR as a normal in-progress DEPARTURE
+>    ("you've just left, the header will catch up via moveTo") to make the fix something that "happens later,"
+>    emitting neither reanchorLocation NOR moveTo. Root cause: `reanchorLocation` is in the op vocabulary but
+>    has NO trigger example for "player says location is wrong/stuck" — so "fix my location" doesn't
+>    pattern-match to a repair. Fix = add the trigger + close the departure-reframe (prompt-only, gm.js).
+> 2. **Hallucinated a LIMITATION (verified false)** — claimed "location isn't what the Repair panel edits."
+>    The panel manifest LISTS reanchorLocation. Mirror of the hallucinated-capability guard; the prompt must
+>    guard BOTH directions (don't claim a control exists that doesn't; don't claim one doesn't that does).
+> **Erik workaround until fixed:** tell the GM *"emit reanchorLocation to <specific Cairnhold place>, this
+> turn, do not defer"* — naming the op defeats the reframe. OR use Character → 🔧 Repair panel, which CAN
+> reanchor location (the GM's claim it can't was false).
+
 > ## 🔧 COMPLAINT 3 UPDATE + 2 new finds from the codex screenshot (Aevi, 2026-07-22)
 > **Erik clarified complaint 3:** the Crossing/Cairnhold desync is from an EARLIER travel misfire — a
 > Cairnhold house-gate that misrouted to the Hub; never corrected because he hasn't traveled since.

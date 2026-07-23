@@ -67,11 +67,40 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.210";
+const APP_VERSION = "1.8.211";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
 app.addEventListener("click", e => { const b = e.target.closest?.("[data-help]"); if (b) { e.preventDefault(); showHelp(b.dataset.help); } });
+
+// SNG-219: a Back control reachable WITHOUT scrolling, on every screen that has one — Erik's ask ("lots of
+// Back buttons are at the end of content; I'd like some at the top too so I don't scroll all the way down").
+// Global by design: ONE persistent bar (a sibling ABOVE #app, so the app.innerHTML screen swaps never wipe
+// it) that after each render MIRRORS that screen's own bottom back button — same handler, new location, so
+// there is never a second navigation path (GUARD). Bottom buttons stay untouched (pure ADD, per Erik). A
+// screen with no back control (the play screen) hides it. Sticky, in-flow — it pushes content, never covers
+// it. Screen #21 gets this for free: nothing to wire per screen.
+const stickyBack = document.createElement("div");
+stickyBack.id = "sticky-back";
+stickyBack.hidden = true;
+stickyBack.innerHTML = `<button class="btn secondary sticky-back-btn" type="button" aria-label="Back">← Back</button>`;
+app.parentNode.insertBefore(stickyBack, app);
+const _stickyBackBtn = stickyBack.firstElementChild;
+let _stickyBackTarget = null;
+_stickyBackBtn.addEventListener("click", () => { try { _stickyBackTarget?.click(); } catch { /* the screen's own handler owns the nav */ } });
+/** Mirror the current screen's canonical back/close control into the sticky top bar. Prefers an id ending
+ *  in `-back` (the ~18 hand-rendered ones); falls back to a `.secondary` button whose visible text is
+ *  Back/Done. Takes the LAST match (the bottom-anchored one). No match → the bar hides (e.g. the play screen). */
+function refreshStickyBack() {
+  const isBack = b => /-back$/.test(b.id || "") || /^(←\s*)?(back|done)$/i.test((b.textContent || "").trim());
+  const match = [...app.querySelectorAll("button.secondary, button[id$='-back']")].filter(isBack).pop() || null;
+  _stickyBackTarget = match;
+  stickyBack.hidden = !match;
+  if (match) _stickyBackBtn.textContent = /^(←\s*)?done$/i.test((match.textContent || "").trim()) ? "← Done" : "← Back";
+}
+// A screen swap replaces #app's children (app.innerHTML = …) → one childList mutation catches every screen
+// change AND every future screen, with zero per-screen render edits. refreshStickyBack is cheap (one query).
+try { new MutationObserver(refreshStickyBack).observe(app, { childList: true }); refreshStickyBack(); } catch { /* observer optional; the bottom buttons still work */ }
 // SNG-104: vitals detail on tap (phone) / hover (desktop) — mirrors the data-help delegation above.
 app.addEventListener("click", e => { const el = e.target.closest?.("[data-vital]"); if (el) { e.preventDefault(); showVitalDetail(el); } });
 // SNG-106: tap the roll's chance → the full component breakdown (the resolver's retained math, verbatim).

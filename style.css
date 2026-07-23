@@ -23,6 +23,12 @@ input:focus, textarea:focus { outline: 1px solid var(--accent); }
 
 /* ---------- layout ---------- */
 #app { max-width: 1100px; margin: 0 auto; padding: 16px; }
+/* SNG-219: sticky top Back — reachable without scrolling on every screen that has one. Sits ABOVE #app in
+   flow (pushes content, never covers it) and pins to the viewport top through the scroll. Hidden on screens
+   with no back control (the play screen). The gradient masks content scrolling under its lower edge. */
+#sticky-back { position: sticky; top: 0; z-index: 50; max-width: 1100px; margin: 0 auto; padding: 8px 16px 6px; background: linear-gradient(var(--bg) 76%, transparent); }
+#sticky-back[hidden] { display: none; }
+#sticky-back .sticky-back-btn { font-size: 13px; padding: 5px 12px; }
 .layout { display: grid; grid-template-columns: 280px 1fr; gap: 16px; align-items: start; }
 @media (max-width: 800px) {
   .layout { grid-template-columns: 1fr; }

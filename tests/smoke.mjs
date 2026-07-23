@@ -7267,6 +7267,17 @@ await (async () => {
   check("217 §3c: the heal step is registered at version 18 (gate advances past 17)", CHARACTER_STEPS.some(s => s.version === 18 && s.id === "quest-prose-escapes"));
 }
 
+// ---- SNG-219: a sticky top Back control mirrors each screen's own back button (behavior is browser-verified) ----
+{
+  const appSrc219 = readFileSync(join(root, "app.js"), "utf8");
+  check("219: the persistent sticky-back bar is created ABOVE #app (survives app.innerHTML swaps)", /stickyBack\.id = "sticky-back"/.test(appSrc219) && /insertBefore\(stickyBack, app\)/.test(appSrc219));
+  check("219: it MIRRORS the screen's existing back button (same handler, not a second nav path)", /_stickyBackTarget\?\.click\(\)/.test(appSrc219) && /function refreshStickyBack/.test(appSrc219));
+  check("219: it matches -back ids OR Back/Done secondary buttons, LAST one (bottom-anchored)", /-back\$\/\.test/.test(appSrc219) && /\.filter\(isBack\)\.pop\(\)/.test(appSrc219));
+  check("219: a MutationObserver refreshes it on every screen swap (screen #21 free)", /new MutationObserver\(refreshStickyBack\)\.observe\(app, \{ childList: true \}\)/.test(appSrc219));
+  const cssSrc219 = readFileSync(join(root, "style.css"), "utf8");
+  check("219: the bar is sticky + in-flow (pushes content, hides with [hidden])", /#sticky-back \{[^}]*position: sticky/.test(cssSrc219) && /#sticky-back\[hidden\] \{ display: none/.test(cssSrc219));
+}
+
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);
 process.exit(failures === 0 ? 0 : 1);
 

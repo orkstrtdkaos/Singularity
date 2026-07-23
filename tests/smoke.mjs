@@ -7659,6 +7659,13 @@ await (async () => {
 
   // the content shell is READY — Aevi's trait_readouts.json loads (optional; derived fallback until then).
   check("215 §C: trait_readouts is wired into loadContent (Aevi drops the file; optional load, empty fallback)", /loadRule\("trait_readouts", \{ readouts: \{\} \}\)/.test(stateC) && /trait_readouts: traitReadoutsDoc/.test(stateC));
+
+  // §C-2: the merge — the character surface is ONE screen with a Traits | Chronicle tab bar.
+  check("215 §C-2: a Traits | Chronicle tab bar helper drives the merged character surface", /function characterTabBar\(active\)/.test(appSrcC) && /id="tab-traits"/.test(appSrcC) && /id="tab-chronicle"/.test(appSrcC));
+  check("215 §C-2: both surfaces render the tab bar (Traits sheet + Chronicle)", /characterTabBar\("traits"\)/.test(appSrcC) && /characterTabBar\("chronicle"\)/.test(appSrcC));
+  check("215 §C-2: the tabs switch between the two renders", /getElementById\("tab-chronicle"\)[\s\S]{0,60}renderChronicle\(\)/.test(appSrcC) && /getElementById\("tab-traits"\)[\s\S]{0,60}renderCharacterScreen\(\)/.test(appSrcC));
+  check("215 §C-2 dedup: the old standalone 'The Chronicle' button is gone (the tab replaces it), lived-story not duplicated on Traits", !/id="cs-chronicle"/.test(appSrcC) && /the Chronicle tab's job now/.test(appSrcC));
+  check("215 §C-2: the tab bar is styled", /\.char-tabs \{ display: flex/.test(cssC) && /\.char-tab\.on \{/.test(cssC));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

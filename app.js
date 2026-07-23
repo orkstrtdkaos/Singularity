@@ -67,7 +67,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.234";
+const APP_VERSION = "1.8.235";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -6005,6 +6005,15 @@ function traitReadout(kind, id) {
   return authored ? `${lore || ""}\n\nMECHANICS: ${mech || ""}` : "";
 }
 
+// SNG-215 §C-2: the character surface is ONE screen with two tabs — Traits (who you ARE) and Chronicle (who
+// you've BECOME). The bar switches between the two renders; the user sees a single character view with tabs.
+function characterTabBar(active) {
+  return `<div class="char-tabs">
+    <button class="char-tab${active === "traits" ? " on" : ""}" id="tab-traits">Traits</button>
+    <button class="char-tab${active === "chronicle" ? " on" : ""}" id="tab-chronicle">📜 Chronicle</button>
+  </div>`;
+}
+
 function renderCharacterScreen() {
   const rules = CONTENT.rules;
   const cap = rules.leveling?.subAttributeCap ?? 20;
@@ -6027,13 +6036,12 @@ function renderCharacterScreen() {
         </div>
       </div>
     </div>
+    ${characterTabBar("traits")}
     ${Object.values(b).some(v => v) ? `<div class="cs-block"><h3 class="codex-title" style="font-size:15px">Story</h3>
       ${["hometown", "residence", "livelihood", "hobbies", "motivation"].filter(k => b[k]).map(k => `<div class="codex-fact"><strong style="text-transform:capitalize">${k}:</strong> ${esc(b[k])}</div>`).join("")}
-      ${(() => { // SNG-134 P1: the story EVOLVES — show the lived "story so far" (SNG-109 paragraph) once it
-        // exists; the creation seed is the first line, superseded as deeds accrue (not frozen forever).
-        const lived = character.chronicleCache?.text;
-        return lived ? `<p class="map-details-desc" style="margin-top:8px">${esc(lived)}</p><div class="hint">— your story so far, as it has grown</div>`
-          : (b.story ? `<p class="map-details-desc" style="margin-top:8px">${esc(b.story)}</p>` : ""); })()}</div>` : ""}
+      ${(() => { // SNG-215 §C-2 dedup: the lived "story so far" paragraph is the Chronicle tab's job now; the
+        // Traits tab keeps only the bio facts + the creation seed (no longer duplicating the chronicle prose).
+        return (!character.chronicleCache?.text && b.story) ? `<p class="map-details-desc" style="margin-top:8px">${esc(b.story)}</p>` : ""; })()}</div>` : ""}
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Attributes ${infoDot("growth.attributes")} <span class="hint" style="text-transform:none">(knee at ${soft}: full value to there, +5/point beyond, cap ${cap})</span></h3>
       ${SUBS.map(sub => { const v = character.subAttributes?.[sub] ?? 0; return `
         <div class="cs-attr"><span class="cs-attr-name" title="${esc(SUB_DESC[sub])}">${sub}</span>
@@ -6102,7 +6110,6 @@ function renderCharacterScreen() {
       ${activeCompanions(character, CONTENT.companions).map(c => `<div class="codex-fact"><strong>${esc(c.name)}</strong> — assists: ${(c.assistTags || []).join(", ")}</div>`).join("") || "<div class='insight'>traveling alone</div>"}</div>
     ${canLevelUp(character) ? `<button class="btn" id="cs-levelup" style="margin-top:10px; margin-right:8px">⬆ Level Up${character.skillPoints ? ` (${character.skillPoints})` : ""}</button>` : ""}
     <button class="btn secondary" id="cs-skillgraph" style="margin-top:10px; margin-right:8px">✦ Skill Wheel</button>
-    <button class="btn secondary" id="cs-chronicle" style="margin-top:10px; margin-right:8px" title="The story so far — the deeds, bonds, and standing you've accreted, read back to you">📜 The Chronicle</button>
     <button class="btn secondary" id="cs-repair" style="margin-top:10px; margin-right:8px" title="Fix what the game got wrong at creation — domains, background, form, or an ability you never chose. No arguing with the GM.">🔧 Repair character</button>
     <button class="btn secondary" id="cs-back" style="margin-top:10px">Back</button>
   </div>`);
@@ -6146,7 +6153,7 @@ function renderCharacterScreen() {
   const luBtn2 = document.getElementById("cs-levelup"); if (luBtn2) luBtn2.onclick = () => renderLevelUp();
   const sgBtn = document.getElementById("cs-skillgraph"); if (sgBtn) sgBtn.onclick = () => { wheelLearnMode = false; renderSkillWheel(); }; // SNG-218 §3: full kit view (owned crafts shown)
   const repBtn = document.getElementById("cs-repair"); if (repBtn) repBtn.onclick = () => renderRepairScreen();
-  const chrBtn = document.getElementById("cs-chronicle"); if (chrBtn) chrBtn.onclick = () => renderChronicle();
+  const chrTab = document.getElementById("tab-chronicle"); if (chrTab) chrTab.onclick = () => renderChronicle(); // SNG-215 §C-2: the Chronicle tab
   // SNG-053 form editor: describe the character's physical form so the portrait renders it
   const formB = document.getElementById("cs-form");
   if (formB) formB.onclick = () => {
@@ -6634,7 +6641,8 @@ function renderChronicle() {
       ? `<p class="chronicle-para">${esc(cache.text)}</p>${stale ? `<div class="hint">the story has moved on since this was written — regenerate to catch it up</div>` : ""}`
       : `<div class="insight">${getApiKey() ? "Your story is just beginning — generate the chronicle to read it." : "Add your API key in Settings to write the chronicle."}</div>`;
   chrome(`<div class="screen" style="max-width:680px">
-    <h2>The Chronicle</h2>
+    <h2>${esc(character.name)}</h2>
+    ${characterTabBar("chronicle")}
     ${character.portrait ? `<img class="cs-portrait" src="${esc(character.portrait)}" alt="${esc(character.name)}" data-lightbox="portrait" onerror="this.style.display='none'">` : ""}
     <h3 style="margin-top:6px">${esc(character.name)}${character.level ? ` · level ${character.level}` : ""}</h3>
     ${character._chronicleError ? `<div class="hint">${esc(character._chronicleError)}</div>` : ""}
@@ -6726,6 +6734,7 @@ function renderChronicle() {
     const host = document.querySelector(".screen"); if (host) { const d = document.createElement("div"); d.className = "insight"; d.style.marginTop = "6px"; d.textContent = note; host.prepend(d); }
   };
   document.getElementById("chr-back").onclick = () => renderCharacterScreen();
+  const trTab = document.getElementById("tab-traits"); if (trTab) trTab.onclick = () => renderCharacterScreen(); // SNG-215 §C-2: the Traits tab
   if (!cache?.text && !character._chronicleBusy && getApiKey()) ensureChronicleParagraph(false); // write once on first open
 }
 

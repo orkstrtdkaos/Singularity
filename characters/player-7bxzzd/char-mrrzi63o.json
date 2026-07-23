@@ -32,7 +32,8 @@
     }
   ],
   "alignment": {
-    "spectrum": -0.03
+    "spectrum": -0.03,
+    "falsehood_truth": 0.020000000000000004
   },
   "attunement": 1,
   "maxHealth": 30,
@@ -122,19 +123,31 @@
         "player": "Check your weapons at the hooks and ask if there's paid work in the Marchward",
         "summary": "Brynjar checks his weapons at the Wardhouse hooks and learns of two opportunities: a night-watch posting and the missing-person bill for Sera of the Stillhold.",
         "narration": "The axe comes off your hip with a practiced shrug — you set it handle-up on the nearest hook, then work the shield from your back and hang it flat against the wall. The rack takes both without ceremony. The woman behind the ledger watches your hands the whole time, and when the shield settles she marks something brief in the margin.\n\n\"Brynjar Andyrsson,\" she says, as if confirming it against the entry she already made. \"From Javiksholm.\" A pause — not unkind, just the gap where the next question usually sits. \"Blood business, cargo, or message — anything to declare?\"\n\nFreki has stationed himself near the door, nose working the air of the place: old iron, lamp oil, someone's cold breakfast. His ears are low but not flat. Neutral ground reads as neutral to him.\n\nYou answer her question, and then put yours to her plainly: is there paid work in the Marchward? She doesn't look up from the ledger at first — finishes the line she's writing — then sets the stylus down and gives you the honest answer this place is known for.\n\n\"Road-clearing east toward the Stillhold is taken. What's open—\" she turns a page, scans it, turns it back \"—is a night-watch slot. The Wardhouse posts one vacancy a week for travelers with no permanent standing here. Meal, floor space, and a half-copper per watch. It's not glory.\" She looks at you steadily. \"And there's the missing-person bill on the board. No official work in that — but the Marchward would notice if someone brought Sera of the Stillhold back through the south gate.\""
+      },
+      {
+        "player": "Ask Halvra what she knows about the missing woman — the bill said no questions, but she'd know more than the board",
+        "summary": "Halvra fills in what the bill left out — Sera arrived alone, checked in properly, and vanished overnight; the Crow and Thistle is the thread to pull.",
+        "narration": "Halvra looks at you for a moment before she answers — weighing, you think, not whether to tell you, but how much is useful.\n\n\"Sera,\" she says. \"Stillhold family, respectable. Came through the gate seven days back, alone, which is unusual — the Stillhold doesn't send its people out alone unless they have a reason they won't name.\" She sets the stylus down and folds her hands on the ledger. \"She checked in properly, declared no blood business, no cargo. Said she was looking for lodging. I logged her, pointed her toward the Crow and Thistle.\" A pause. \"Next morning, her room was empty and the innkeep hadn't seen her leave. The bill went up that afternoon.\"\n\nFreki has drifted closer to the table during this — not begging, just listening. Halvra glances at him once and says nothing about it.\n\n\"The bill says no questions of the finder,\" she adds, \"which the family wrote themselves. My read is they know roughly what she came here to do, and they'd rather have her back than an accounting.\" She picks up the stylus again, not dismissively — just ready to write whatever comes next. \"The Crow and Thistle would be the starting place. Innkeep's name is Doss. He's thorough when he wants to be.\"\n\nShe leaves it there, open."
       }
     ],
     "lastTurn": {
-      "narration": "The axe comes off your hip with a practiced shrug — you set it handle-up on the nearest hook, then work the shield from your back and hang it flat against the wall. The rack takes both without ceremony. The woman behind the ledger watches your hands the whole time, and when the shield settles she marks something brief in the margin.\n\n\"Brynjar Andyrsson,\" she says, as if confirming it against the entry she already made. \"From Javiksholm.\" A pause — not unkind, just the gap where the next question usually sits. \"Blood business, cargo, or message — anything to declare?\"\n\nFreki has stationed himself near the door, nose working the air of the place: old iron, lamp oil, someone's cold breakfast. His ears are low but not flat. Neutral ground reads as neutral to him.\n\nYou answer her question, and then put yours to her plainly: is there paid work in the Marchward? She doesn't look up from the ledger at first — finishes the line she's writing — then sets the stylus down and gives you the honest answer this place is known for.\n\n\"Road-clearing east toward the Stillhold is taken. What's open—\" she turns a page, scans it, turns it back \"—is a night-watch slot. The Wardhouse posts one vacancy a week for travelers with no permanent standing here. Meal, floor space, and a half-copper per watch. It's not glory.\" She looks at you steadily. \"And there's the missing-person bill on the board. No official work in that — but the Marchward would notice if someone brought Sera of the Stillhold back through the south gate.\"",
-      "sceneSummary": "Brynjar checks his weapons at the Wardhouse hooks and learns of two opportunities: a night-watch posting and the missing-person bill for Sera of the Stillhold.",
+      "narration": "Halvra looks at you for a moment before she answers — weighing, you think, not whether to tell you, but how much is useful.\n\n\"Sera,\" she says. \"Stillhold family, respectable. Came through the gate seven days back, alone, which is unusual — the Stillhold doesn't send its people out alone unless they have a reason they won't name.\" She sets the stylus down and folds her hands on the ledger. \"She checked in properly, declared no blood business, no cargo. Said she was looking for lodging. I logged her, pointed her toward the Crow and Thistle.\" A pause. \"Next morning, her room was empty and the innkeep hadn't seen her leave. The bill went up that afternoon.\"\n\nFreki has drifted closer to the table during this — not begging, just listening. Halvra glances at him once and says nothing about it.\n\n\"The bill says no questions of the finder,\" she adds, \"which the family wrote themselves. My read is they know roughly what she came here to do, and they'd rather have her back than an accounting.\" She picks up the stylus again, not dismissively — just ready to write whatever comes next. \"The Crow and Thistle would be the starting place. Innkeep's name is Doss. He's thorough when he wants to be.\"\n\nShe leaves it there, open.",
+      "sceneSummary": "Halvra fills in what the bill left out — Sera arrived alone, checked in properly, and vanished overnight; the Crow and Thistle is the thread to pull.",
       "choices": [
         {
-          "label": "Declare blood business honestly — Kjotve Olafsson is the name, and you're building toward it",
+          "label": "Ask about Sera's manner when she came in — did she seem frightened, purposeful, watched?",
+          "attribute": "social",
+          "subAttribute": "insight",
+          "difficulty": 0,
+          "intentTags": [
+            "study"
+          ],
+          "trivial": true
+        },
+        {
+          "label": "Take the night-watch posting — declare it to Halvra and get logged for tonight's watch",
           "attribute": "social",
           "subAttribute": "presence",
-          "axes": {
-            "falsehood_truth": 0.8
-          },
           "difficulty": 0,
           "intentTags": [
             "negotiate"
@@ -142,63 +155,48 @@
           "trivial": true
         },
         {
-          "label": "Declare no immediate business — you're passing through, working where you can",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": -0.1
-          },
+          "label": "Head to the Crow and Thistle to find Doss — the innkeep saw Sera last",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "difficulty": 0,
           "intentTags": [
-            "careful"
+            "travel",
+            "scout"
           ],
           "trivial": true
         },
         {
-          "label": "Ask Halvra what she knows about the missing woman — the bill said no questions, but she'd know more than the board",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {
-            "falsehood_truth": 0.4
-          },
+          "label": "Or do something else.",
+          "attribute": "practical",
+          "subAttribute": "wits",
           "difficulty": 0,
-          "intentTags": [
-            "study",
-            "negotiate"
-          ],
-          "trivial": true
-        },
-        {
-          "label": "Accept the night-watch posting on the spot — steady meals and a floor are worth more than pride right now",
-          "attribute": "social",
-          "subAttribute": "rapport",
-          "axes": {},
-          "difficulty": 0,
-          "intentTags": [
-            "plan"
-          ],
+          "intentTags": [],
           "trivial": true
         }
       ],
       "scene": {
-        "setting": "Inside the Wardhouse — low stone building, north side of the square. Long table, weapons rack with Brynjar's axe and shield now added alongside two shortswords and a crossbow. A charcoal map pinned flat with river stones. Early morning, lamplight still burning.",
+        "setting": "Inside the Wardhouse — low stone building, north side of the square. Long table, weapons rack with Brynjar's axe and shield checked alongside two shortswords and a crossbow. Charcoal map pinned with river stones. Early morning, lamp burning low.",
         "npcsPresent": [
           {
             "name": "Halvra Stenn",
-            "state": "Sitting at the far end of the table, ledger open, stylus set down — waiting for Brynjar's declaration and his response to the work options she just laid out"
+            "state": "Sitting at the far end of the table, stylus back in hand, ledger open — waiting to see what Brynjar does next"
+          },
+          {
+            "name": "Freki",
+            "state": "Closer to the table now, listening — nose working the room"
           }
         ],
         "objects": [
-          "Iron hooks rack — Brynjar's axe and shield now checked alongside two shortswords and a crossbow",
+          "Iron hooks rack — Brynjar's axe and shield checked alongside two shortswords and a crossbow",
           "Long wooden table",
           "Charcoal map of the Marchward pinned with river stones",
           "Open ledger with fresh entries",
           "Lamp burning low"
         ],
         "threads": [
-          "Halvra waiting for Brynjar's declaration — blood business, cargo, or message?",
-          "Night-watch posting: meal, floor space, half-copper per watch",
-          "Missing-person bill: Sera of the Stillhold — the Marchward would notice a finder"
+          "Sera of the Stillhold — missing seven days, last known at the Crow and Thistle; Doss the innkeep is the next thread",
+          "Night-watch posting still open — meal, floor space, half-copper per watch",
+          "Halvra waiting to see what Brynjar declares or asks next"
         ]
       },
       "npcUpdates": [
@@ -206,24 +204,27 @@
           "op": "update",
           "npcId": "halvra-stenn",
           "name": "Halvra Stenn",
-          "note": "Informed Brynjar of the night-watch vacancy and mentioned the missing-person bill for Sera of the Stillhold — laid out both opportunities plainly",
+          "note": "Told Brynjar what she knows of Sera: alone, proper check-in, vanished overnight; pointed him toward Doss at the Crow and Thistle",
           "learned": [
-            "Road-clearing east is taken; a weekly night-watch vacancy is open to travelers",
-            "The Marchward would take notice of whoever brought Sera of the Stillhold home"
+            "Sera arrived alone — unusual for a Stillholder",
+            "Sera declared no blood business or cargo, asked for lodging, was sent to the Crow and Thistle",
+            "Sera's room was empty the next morning without the innkeep seeing her leave",
+            "Halvra's read: the family knows why she came and want her back without an accounting"
           ],
-          "statusNote": "On duty at the Wardhouse, waiting for Brynjar's formal declaration"
+          "statusNote": "On duty at the Wardhouse; has shared what she knows of Sera freely"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "marchward-work",
-          "label": "Work in the Marchward",
-          "kind": "lore",
-          "entityId": "the_marchward",
-          "fact": "The Wardhouse posts a weekly night-watch vacancy for travelers without permanent standing — meal, floor space, and a half-copper per watch. Road-clearing east toward the Stillhold is already taken.",
+          "topic": "sera-of-the-stillhold",
+          "label": "Sera of the Stillhold",
+          "kind": "mystery",
+          "fact": "Arrived alone seven days ago — unusual; checked in properly, no declared business, asked for lodging at the Crow and Thistle. Room empty next morning, innkeep Doss didn't see her leave. Family posted the bill knowing roughly why she came but wanting her back without questions.",
           "links": [
-            "sera-of-the-stillhold",
-            "halvra-stenn"
+            "halvra-stenn",
+            "the-marchward",
+            "the-stillhold",
+            "crow-and-thistle"
           ]
         }
       ],
@@ -233,24 +234,28 @@
       }
     },
     "sceneState": {
-      "setting": "Inside the Wardhouse — low stone building, north side of the square. Long table, weapons rack with Brynjar's axe and shield now added alongside two shortswords and a crossbow. A charcoal map pinned flat with river stones. Early morning, lamplight still burning.",
+      "setting": "Inside the Wardhouse — low stone building, north side of the square. Long table, weapons rack with Brynjar's axe and shield checked alongside two shortswords and a crossbow. Charcoal map pinned with river stones. Early morning, lamp burning low.",
       "npcsPresent": [
         {
           "name": "Halvra Stenn",
-          "state": "Sitting at the far end of the table, ledger open, stylus set down — waiting for Brynjar's declaration and his response t"
+          "state": "Sitting at the far end of the table, stylus back in hand, ledger open — waiting to see what Brynjar does next"
+        },
+        {
+          "name": "Freki",
+          "state": "Closer to the table now, listening — nose working the room"
         }
       ],
       "objects": [
-        "Iron hooks rack — Brynjar's axe and shield now checked alongside two shortswords",
+        "Iron hooks rack — Brynjar's axe and shield checked alongside two shortswords and",
         "Long wooden table",
         "Charcoal map of the Marchward pinned with river stones",
         "Open ledger with fresh entries",
         "Lamp burning low"
       ],
       "threads": [
-        "Halvra waiting for Brynjar's declaration — blood business, cargo, or message?",
-        "Night-watch posting: meal, floor space, half-copper per watch",
-        "Missing-person bill: Sera of the Stillhold — the Marchward would notice a finder"
+        "Sera of the Stillhold — missing seven days, last known at the Crow and Thistle; Doss the innkeep is the next thread",
+        "Night-watch posting still open — meal, floor space, half-copper per watch",
+        "Halvra waiting to see what Brynjar declares or asks next"
       ]
     }
   },
@@ -390,18 +395,22 @@
       "relationship": 0,
       "history": [
         "[d1] Logged Brynjar Andyrsson from Javiksholm; noted the razed-village weight without naming it; asked for a declaration of cargo, message, or blood business",
-        "[d1] Informed Brynjar of the night-watch vacancy and mentioned the missing-person bill for Sera of the Stillhold — laid out both opportunities plainly"
+        "[d1] Informed Brynjar of the night-watch vacancy and mentioned the missing-person bill for Sera of the Stillhold — laid out both opportunities plainly",
+        "[d1] Told Brynjar what she knows of Sera: alone, proper check-in, vanished overnight; pointed him toward Doss at the Crow and Thistle"
       ],
       "knownFacts": [
         "Heard of Javiksholm — recognized what a man from a razed village looks like",
         "Road-clearing east is taken; a weekly night-watch vacancy is open to travelers",
-        "The Marchward would take notice of whoever brought Sera of the Stillhold home"
+        "The Marchward would take notice of whoever brought Sera of the Stillhold home",
+        "Sera arrived alone — unusual for a Stillholder",
+        "Sera declared no blood business or cargo, asked for lodging, was sent to the Crow and Thistle",
+        "Sera's room was empty the next morning without the innkeep seeing her leave"
       ],
       "skillsObserved": [],
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "On duty at the Wardhouse, waiting for Brynjar's formal declaration",
+      "statusNote": "On duty at the Wardhouse; has shared what she knows of Sera freely",
       "domains": {
         "primary": "marcher"
       },
@@ -519,7 +528,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 2
+    "turnsSinceOffer": 3
   },
   "domains": {
     "primary": "marcher",
@@ -630,11 +639,15 @@
         "label": "Sera of the Stillhold",
         "kind": "mystery",
         "facts": [
-          "[d1] Missing woman, grey cloak, dark braid, last seen at the Marchward's south gate seven days ago. Her family posted a bill — no payment, no questions asked of the finder. An ink portrait is attached."
+          "[d1] Missing woman, grey cloak, dark braid, last seen at the Marchward's south gate seven days ago. Her family posted a bill — no payment, no questions asked of the finder. An ink portrait is attached.",
+          "[d1] Arrived alone seven days ago — unusual; checked in properly, no declared business, asked for lodging at the Crow and Thistle. Room empty next morning, innkeep Doss didn't see her leave. Family posted the bill knowing roughly why she came but wanting her back without questions."
         ],
         "links": [
           "marchward-notice-board",
-          "the-stillhold"
+          "the-stillhold",
+          "halvra-stenn",
+          "the-marchward",
+          "crow-and-thistle"
         ],
         "aliases": [],
         "createdDay": 1,
@@ -709,16 +722,16 @@
     }
   },
   "tendencies": {
-    "leadership": 12.335339707031249,
-    "cerebral": 0.9036878906249999,
-    "strategic": 1.877484375,
-    "ruthless": 0.9268593749999999,
-    "social": 1
+    "leadership": 12.026956214355467,
+    "cerebral": 1.881095693359375,
+    "strategic": 1.8305472656250001,
+    "ruthless": 0.9036878906249999,
+    "social": 1.975
   },
   "aptitudes": [
     "banner"
   ],
-  "actionCount": 5,
+  "actionCount": 6,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -829,8 +842,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784770512236,
-  "rev": 41,
+  "updatedAt": 1784770686585,
+  "rev": 42,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -915,7 +928,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 8
+    "riven_marches": 9
   },
   "practice": {
     "schemaVersion": 1,
@@ -974,10 +987,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-23T01:30:20.702Z",
-      "lastAt": "2026-07-23T01:35:12.233Z",
+      "lastAt": "2026-07-23T01:38:06.584Z",
       "startDay": 23,
       "endDay": 23,
-      "beats": 2
+      "beats": 3
     }
   ],
   "_pendingArrival": null,
@@ -993,15 +1006,15 @@
     "at": "2026-07-23T01:18:04.353Z"
   },
   "_opEmitted": {
-    "sceneSummary": 2,
-    "choices": 2,
-    "scene": 2,
-    "npcUpdates": 2,
+    "sceneSummary": 3,
+    "choices": 3,
+    "scene": 3,
+    "npcUpdates": 3,
     "placeUpdates": 1,
     "generateRequest": 1,
     "moveTo": 1,
-    "timeOps": 2,
-    "codexUpdates": 2
+    "timeOps": 3,
+    "codexUpdates": 3
   },
-  "_opTurns": 2
+  "_opTurns": 3
 }

@@ -788,6 +788,11 @@ img[data-lightbox] { cursor: zoom-in; }
 .fn-filter { font-family:var(--font-ui); font-size:11px; padding:2px 8px; border-radius:12px; background:transparent; border:1px solid var(--border); color:var(--ink-dim); cursor:pointer; }
 .fn-filter:hover { filter:brightness(1.15); }
 .fn-filter.on { font-weight:600; }
+/* SNG-218 §3 (Erik): the "✨ Suggested" wheel filter — gold, to match the recommended halos. */
+.fn-filter.reco-filter { border-color:var(--accent); color:var(--accent); }
+.fn-filter.reco-filter.on { background:var(--accent); color:var(--bg); border-color:var(--accent); }
+/* SNG-218 §3: the level-up tradition list is now a collapsed fallback (the wheel is the browse surface). */
+.learn-list-fallback > summary { cursor:pointer; margin-top:4px; }
 #fn-filter-clear { color:var(--ink-dim); border-color:var(--border); }
 .wheel-node-label { fill:var(--ink-dim); font-family:var(--font-ui); font-size:8px; pointer-events:none; }
 .wheel-node-label.owned { fill:var(--ink); }

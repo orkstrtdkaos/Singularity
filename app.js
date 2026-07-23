@@ -67,7 +67,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.218";
+const APP_VERSION = "1.8.219";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -209,6 +209,8 @@ let wheelFnFilter = new Set(); // SNG-124 Phase B: active function-family filter
 let wheelSelTrad = null; // SNG-202B §2: the tradition clicked to highlight its crafts/braids across the wheel
 let wheelRecommended = new Set(); // SNG-218 §3: the level-up suggestion's picks, lit ON the wheel (browse + highlight)
 let wheelReturnTo = null; // SNG-218 §3: when the wheel is opened FROM level-up, its Back returns there
+let wheelLearnMode = false; // SNG-218 §3 (Erik): opened from level-up → hide OWNED crafts (you're browsing what to LEARN, not your kit)
+let wheelSuggestFilter = false; // SNG-218 §3 (Erik): the "✨ Suggested" filter — isolate the recommended crafts on the wheel
 let character = null;    // active character
 let profile = null;      // the player's profile (the human)
 let sceneTurns = [];     // recent beats: {summary, narration} for scene continuity
@@ -5278,6 +5280,7 @@ function renderSkillWheel(selectedId = null, status = "") {
         placed.push({ x: lp.x, y }); labelAt[nd.id] = { x: lp.x, y };
       }
       return m.nodes.map(nd => {
+        if (wheelLearnMode && nd.owned && !nd.braid) return ""; // SNG-218 §3: browsing to LEARN — owned crafts are noise
         const r = 5 + (nd.levelReq - 1) * 1.2;
         const matched = filterOn && (nd.families || []).some(f => wheelFnFilter.has(f));
         const fam = (nd.families || [])[0];
@@ -5285,7 +5288,21 @@ function renderSkillWheel(selectedId = null, status = "") {
         const opened = nd.isPrecursor && nd.precursorUnlocked;
         const fill = nd.owned ? traditionColor(nd.cls) : sealed ? "transparent" : "#20242c";
         const stroke = nd.closed ? "var(--danger)" : traditionColor(nd.cls);
-        const cls = `wheel-node ${nd.owned ? "owned" : ""} ${nd.closed ? "closed" : ""} ${nd.barred ? "barred" : ""} ${nd.dim ? "dim" : ""} ${nd.isFolk ? "folk" : ""} ${nd.isPrecursor ? "precursor" : ""} ${sealed ? "precursor-sealed" : ""} ${opened ? "precursor-open" : ""} ${nd.braid ? "braid" : ""} ${nd.antipodal ? "braid-antipodal" : ""} ${selectedId === nd.id ? "selected" : ""} ${filterOn && !wheelSelTrad ? (matched ? "fn-match" : "fn-dim") : ""} ${wheelSelTrad ? "trad-" + tradRelOf(nd) : ""} ${nd.recommended && !nd.owned ? "recommended" : ""} ${nd.aspirational ? "aspirational" : ""}`;
+        // SNG-218 §3 (Erik): the filters STACK (intersection) — a tradition click, function filters and the
+        // "✨ Suggested" filter can all be on at once, so "the death ones" + "which of those heal" + "which are
+        // suggested" compose. A node lights only if it passes EVERY active filter; else it dims. Recommended
+        // nodes keep their halo through the dim (CSS !important), so suggestions stay findable under any filter.
+        const passTrad = !wheelSelTrad || tradRelOf(nd) !== "dim";
+        const passFn = !filterOn || matched;
+        const passSug = !wheelSuggestFilter || (nd.recommended && !nd.owned);
+        const otherFilters = filterOn || wheelSuggestFilter;
+        const anyFilter = wheelSelTrad || otherFilters;
+        const litByFilter = anyFilter && passTrad && passFn && passSug;
+        // A tradition click ALONE keeps its rich related/adjacent/dim relation (SNG-202B). The moment a function
+        // or the ✨-Suggested filter joins it, the highlight becomes the INTERSECTION (Erik: "the death ones" +
+        // "which of those heal" + "which are suggested" compose into one lit set; everything else dims).
+        const filterCls = (wheelSelTrad && !otherFilters) ? ("trad-" + tradRelOf(nd)) : (anyFilter ? (litByFilter ? "fn-match" : "fn-dim") : "");
+        const cls = `wheel-node ${nd.owned ? "owned" : ""} ${nd.closed ? "closed" : ""} ${nd.barred ? "barred" : ""} ${nd.dim ? "dim" : ""} ${nd.isFolk ? "folk" : ""} ${nd.isPrecursor ? "precursor" : ""} ${sealed ? "precursor-sealed" : ""} ${opened ? "precursor-open" : ""} ${nd.braid ? "braid" : ""} ${nd.antipodal ? "braid-antipodal" : ""} ${selectedId === nd.id ? "selected" : ""} ${filterCls} ${nd.recommended && !nd.owned ? "recommended" : ""} ${nd.aspirational ? "aspirational" : ""}`;
         const secondaries = (nd.families || []).slice(1, 3);
         const lbl = labelAt[nd.id];
         const braidNote = nd.braid ? ` · braid of ${(nd.braidFrom || []).join(" × ") || "two crafts"}${nd.antipodal ? " — spans the circle (an antipodal braid, the far poles joined)" : " — placed between its two axes"}` : "";
@@ -5336,7 +5353,9 @@ function renderSkillWheel(selectedId = null, status = "") {
     <div class="fn-filter-row">
       <span class="hint" style="margin-right:2px">By function:</span>
       ${FUNCTION_FAMILIES.map(f => `<button class="fn-filter ${familyClass(f)} ${wheelFnFilter.has(f) ? "on" : ""}" data-fnfilter="${f}" title="${f} — highlight every craft that can ${f.toLowerCase()}" style="${wheelFnFilter.has(f) ? `background:${FAMILY_COLOR[f]};color:var(--bg);border-color:${FAMILY_COLOR[f]}` : `color:${FAMILY_COLOR[f]};border-color:${FAMILY_COLOR[f]}`}">${FAMILY_GLYPH[f]} ${f}</button>`).join("")}
-      ${wheelFnFilter.size ? `<button class="fn-filter" id="fn-filter-clear" title="Clear the function filter">✕ clear</button>` : ""}
+      ${/* SNG-218 §3 (Erik): a "✨ Suggested" filter — isolate the reasoned picks on the wheel; stacks with the rest. */""}
+      ${wheelRecommended.size ? `<button class="fn-filter reco-filter ${wheelSuggestFilter ? "on" : ""}" id="reco-filter" title="Isolate the crafts suggested for you this level">✨ Suggested</button>` : ""}
+      ${(wheelFnFilter.size || wheelSuggestFilter) ? `<button class="fn-filter" id="fn-filter-clear" title="Clear the filters">✕ clear</button>` : ""}
     </div>
     <p class="hint" style="margin-bottom:8px"><span class="grow-badge">${character.skillPoints || 0} skill point${(character.skillPoints || 0) === 1 ? "" : "s"}</span> · ${breadthUsed(character)} of ${breadthCap(character, CONTENT.skillCapacity)} crafts${atCapacity(character, CONTENT.skillCapacity) ? " — at capacity" : ""}</p>
     ${status ? `<div class="cs-block" style="border-left:3px solid var(--accent); margin-bottom:8px">${esc(status)}</div>` : ""}
@@ -5371,15 +5390,16 @@ function renderSkillWheel(selectedId = null, status = "") {
   // SNG-197 p2: rename a braid from its node (the second rename home, alongside the mint moment).
   const bcr = document.getElementById("braid-card-rename");
   if (bcr) bcr.onclick = () => { const def = fullCatalog()[bcr.dataset.braid]; if (def) showBraidRename(def, () => renderSkillWheel(selectedId, status)); };
-  // SNG-124 Phase B: toggle a function-family filter (preserves zoom/selection).
+  // SNG-124 Phase B: toggle a function-family filter (preserves zoom/selection). SNG-218 §3 (Erik): the filters
+  // now STACK — a function filter no longer clears the tradition highlight or the ✨ Suggested filter.
   for (const b of app.querySelectorAll("[data-fnfilter]")) b.onclick = () => {
-    wheelSelTrad = null; // the two browse modes don't stack — a function filter clears the tradition highlight
     const f = b.dataset.fnfilter; if (wheelFnFilter.has(f)) wheelFnFilter.delete(f); else wheelFnFilter.add(f);
     renderSkillWheel(selectedId, status);
   };
-  const fnClear = document.getElementById("fn-filter-clear"); if (fnClear) fnClear.onclick = () => { wheelFnFilter = new Set(); renderSkillWheel(selectedId, status); };
+  const recoFilter = document.getElementById("reco-filter"); if (recoFilter) recoFilter.onclick = () => { wheelSuggestFilter = !wheelSuggestFilter; renderSkillWheel(selectedId, status); }; // SNG-218 §3: isolate the suggested crafts
+  const fnClear = document.getElementById("fn-filter-clear"); if (fnClear) fnClear.onclick = () => { wheelFnFilter = new Set(); wheelSuggestFilter = false; renderSkillWheel(selectedId, status); };
   wireSkillSelectionActions((id, msg) => renderSkillWheel(id, msg)); // SNG-097: learn/deepen in place
-  document.getElementById("wheel-back").onclick = () => { graphViews[graphSurface] = null; const rt = wheelReturnTo; wheelReturnTo = null; if (rt === "levelup") renderLevelUp(); else renderCharacterScreen(); }; // SNG-218 §3: return to level-up when opened from it
+  document.getElementById("wheel-back").onclick = () => { graphViews[graphSurface] = null; const rt = wheelReturnTo; wheelReturnTo = null; wheelLearnMode = false; wheelSuggestFilter = false; if (rt === "levelup") renderLevelUp(); else renderCharacterScreen(); }; // SNG-218 §3: return to level-up when opened from it; reset the browse modes
   document.getElementById("wheel-list").onclick = () => { graphViews[graphSurface] = null; renderSkillGraph(); };
 }
 
@@ -5669,12 +5689,13 @@ function renderLevelUp(status = "") {
 
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Learn a new craft ${infoDot("circle.domains")} <span class="hint" style="text-transform:none">— broaden into your domains</span></h3>
       ${cap ? `<div class="hint" style="margin-bottom:6px">You're at capacity — new points now deepen what you know. ${infoDot("lock.capacity")}</div>` : ""}
-      ${/* SNG-218 §3: the WHEEL is the browse + highlight surface — see every craft in its place, your suggested
-          picks lit and standing-locked capstones dimmed as "later". Its detail panel shows what each rank grants.
-          The tradition list below stays as a plain-text alternative. */""}
+      ${/* SNG-218 §3 (Erik): the WHEEL is the browse surface — every craft in its place, suggested picks lit,
+          owned crafts hidden, standing-locked ones dimmed as "later". Its detail panel shows what each rank
+          grants. The tradition LIST is now a collapsed plain-text fallback, not the default (Erik: don't want
+          to dig through a list). */""}
       <button class="btn" id="lvl-wheel" style="width:100%; margin-bottom:10px">✦ Browse crafts on the wheel${wheelRecommended.size ? " — your suggested picks are lit ✨" : ""} →</button>
       ${Object.keys(byTrad).length
-        ? Object.keys(byTrad).sort((a, b) => traditionLabel(a).localeCompare(traditionLabel(b))).map(k => `<details class="learn-group" ${byTrad[k].some(ab => abilityTradition(ab) === character.domains?.primary) ? "open" : ""}><summary>${esc(traditionLabel(k))} <span class="cost">(${byTrad[k].length})</span></summary>${byTrad[k].sort((a, b) => (a.levelReq || 1) - (b.levelReq || 1)).map(learnRow).join("")}</details>`).join("")
+        ? `<details class="learn-list-fallback"><summary class="hint">Or browse as a plain list ↴</summary><div style="margin-top:6px">${Object.keys(byTrad).sort((a, b) => traditionLabel(a).localeCompare(traditionLabel(b))).map(k => `<details class="learn-group"><summary>${esc(traditionLabel(k))} <span class="cost">(${byTrad[k].length})</span></summary>${byTrad[k].sort((a, b) => (a.levelReq || 1) - (b.levelReq || 1)).map(learnRow).join("")}</details>`).join("")}</div></details>`
         : "<div class='insight'>nothing new to learn at this level — deepen a craft, or play on to reach the next tier</div>"}
     </div>
 
@@ -5693,7 +5714,7 @@ function renderLevelUp(status = "") {
   bindLearn();
   document.getElementById("lvl-back").onclick = () => renderPlay(character.activeScene?.lastTurn || null, {});
   // SNG-218 §3: open the wheel as the browse+highlight surface; its Back returns here (wheelReturnTo).
-  const lvlWheel = document.getElementById("lvl-wheel"); if (lvlWheel) lvlWheel.onclick = () => { wheelReturnTo = "levelup"; renderSkillWheel(); };
+  const lvlWheel = document.getElementById("lvl-wheel"); if (lvlWheel) lvlWheel.onclick = () => { wheelReturnTo = "levelup"; wheelLearnMode = true; renderSkillWheel(); }; // SNG-218 §3: learn-browse — hide owned crafts
 
   // SNG-218 §2: upgrade the instant heuristic to a GENUINELY-REASONED suggestion (async, non-blocking). Reads
   // the character's real play-fingerprint (tendencies, aptitudes, declared aspirations, use counts, adopted
@@ -5908,7 +5929,7 @@ function renderCharacterScreen() {
     renderCharacterScreen();
   };
   const luBtn2 = document.getElementById("cs-levelup"); if (luBtn2) luBtn2.onclick = () => renderLevelUp();
-  const sgBtn = document.getElementById("cs-skillgraph"); if (sgBtn) sgBtn.onclick = () => renderSkillWheel();
+  const sgBtn = document.getElementById("cs-skillgraph"); if (sgBtn) sgBtn.onclick = () => { wheelLearnMode = false; renderSkillWheel(); }; // SNG-218 §3: full kit view (owned crafts shown)
   const repBtn = document.getElementById("cs-repair"); if (repBtn) repBtn.onclick = () => renderRepairScreen();
   const chrBtn = document.getElementById("cs-chronicle"); if (chrBtn) chrBtn.onclick = () => renderChronicle();
   // SNG-053 form editor: describe the character's physical form so the portrait renders it

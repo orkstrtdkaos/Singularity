@@ -7365,7 +7365,7 @@ await (async () => {
   check("218 §3: the suggestion's picks populate wheelRecommended (heuristic AND the LLM upgrade)", /wheelRecommended = new Set\(suggestions\.map/.test(appSrc218b) && /wheelRecommended = new Set\(picks\.map/.test(appSrc218b));
   check("218 §3: buildWheelModel stamps `recommended` + `aspirational` onto each node (§1 flag reused)", /recommended: wheelRecommended\.has\(ab\.id\)/.test(appSrc218b) && /aspirational: !isOwned && !g\.ok && g\.gate === "standing"/.test(appSrc218b));
   check("218 §3: the wheel node carries recommended/aspirational classes (lit halo / dimmed 'later')", /nd\.recommended && !nd\.owned \? "recommended"/.test(appSrc218b) && /nd\.aspirational \? "aspirational"/.test(appSrc218b));
-  check("218 §3: level-up opens the wheel as the browse surface; the wheel returns to level-up (wheelReturnTo)", /wheelReturnTo = "levelup"; renderSkillWheel\(\)/.test(appSrc218b) && /rt === "levelup"\) renderLevelUp\(\)/.test(appSrc218b));
+  check("218 §3: level-up opens the wheel as the browse surface; the wheel returns to level-up (wheelReturnTo)", /wheelReturnTo = "levelup"; wheelLearnMode = true; renderSkillWheel\(\)/.test(appSrc218b) && /rt === "levelup"\) renderLevelUp\(\)/.test(appSrc218b));
   const cssSrc218 = readFileSync(join(root, "style.css"), "utf8");
   check("218 §3: the recommended halo + aspirational dim are styled (reduced-motion respected)", /\.wheel-reco-halo/.test(cssSrc218) && /\.wheel-node\.aspirational \{ opacity/.test(cssSrc218) && /prefers-reduced-motion/.test(cssSrc218));
 
@@ -7374,6 +7374,12 @@ await (async () => {
   check("218 §2 follow-up: the reasoned read is CACHED per level + reused (persists until the next level)", /character\._suggestCache = \{ level: character\.level/.test(appSrc218b) && /const useCachedSuggest =/.test(appSrc218b) && /if \(useCachedSuggest\) return;/.test(appSrc218b));
   check("218 §2 follow-up: a 'reasoning…' spinner shows while it loads, removed on done/fail", /id="lvl-suggest-spin"/.test(appSrc218b) && /const spin = \(\) =>/.test(appSrc218b));
   check("218 §3 follow-up: the recommended halo is bolder (outer ring + ✨ star) + spinner styled", /\.wheel-reco-halo-outer/.test(cssSrc218) && /\.wheel-reco-star/.test(cssSrc218) && /\.spin-dot/.test(cssSrc218) && /wheel-reco-halo-outer/.test(appSrc218b));
+
+  // Erik wheel batch: hide owned in learn-browse · ✨ Suggested filter · filters STACK · list collapsed to a fallback.
+  check("218 §3 wheel: learn-browse HIDES owned crafts (Erik: no reason for known crafts here)", /if \(wheelLearnMode && nd\.owned && !nd\.braid\) return ""/.test(appSrc218b) && /wheelLearnMode = true/.test(appSrc218b) && /wheelLearnMode = false/.test(appSrc218b));
+  check("218 §3 wheel: a ✨ Suggested filter isolates the recommended crafts (toggles wheelSuggestFilter)", /id="reco-filter"/.test(appSrc218b) && /wheelSuggestFilter = !wheelSuggestFilter/.test(appSrc218b));
+  check("218 §3 wheel: tradition/function/suggested filters STACK (intersection, no longer mutually exclusive)", /const litByFilter = anyFilter && passTrad && passFn && passSug/.test(appSrc218b) && !/the two browse modes don't stack/.test(appSrc218b));
+  check("218 §3 wheel: the level-up tradition list is a collapsed fallback (the wheel is primary)", /learn-list-fallback/.test(appSrc218b) && /Or browse as a plain list/.test(appSrc218b));
 }
 
 // ---- SNG-221: promote a gen-location to its canonical file — buildings + wards become ONE place ----

@@ -427,7 +427,7 @@ export async function syncSharedCanon({ character, profile, content, region = "v
       // result's entityId is exactly its local record's id — so it never re-promotes.
       for (const r of lastResults) {
         const target = candidates.find(c => c.record.id === r.entityId)?.record;
-        if (target?._gen) { target._gen.promotedWorldDay = worldDay; target._gen.canonTier = r.outcome === "variant" ? "variant" : "canonical"; }
+        if (target?._gen && typeof target._gen === "object") { target._gen.promotedWorldDay = worldDay; target._gen.canonTier = r.outcome === "variant" ? "variant" : "canonical"; } // SNG-216: never write onto a malformed (boolean) _gen
       }
       // re-read the consolidated store for the viewer slice
       store = await fetchRepoJSON(CANON_PATH(region));
@@ -683,7 +683,7 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
       // keep the per-record offscreen log for generated figures (their existing surface); the codex node
       // carries the "moved on" fact for EVERYONE — generated, met, or legendary — all resolvable by id.
       const genRec = character.generated?.npc?.[fig.id] || character.generated?.arc?.[fig.id];
-      if (genRec?._gen) genRec._gen.offscreen = [...(genRec._gen.offscreen || []), { worldDay: currentWorldDay, note, outcome }].slice(-8);
+      if (genRec?._gen && typeof genRec._gen === "object") genRec._gen.offscreen = [...(genRec._gen.offscreen || []), { worldDay: currentWorldDay, note, outcome }].slice(-8); // SNG-216: never write onto a malformed (boolean) _gen
       try { applyCodexUpdates(character, [{ entityId: fig.id, label: fig.name, kind: fig.kind === "arc" ? "lore" : "person", fact: `[while away] ${note}` }], { day: ws.lastTickDay ?? null }); } catch { /* codex mirror is a convenience */ }
       // News is DERIVED from what MOVED / a real problem / a resolution — not from every sentence (§2, §4b).
       const headline = resolved ? `${fig.name}: ${note} — and that thread has run its course.`

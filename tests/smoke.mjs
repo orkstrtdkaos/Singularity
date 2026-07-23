@@ -7197,6 +7197,8 @@ await (async () => {
   check("216 §3a: effectiveWeight computes on a boolean _gen without throwing", typeof w216 === "number");
   const genSrc216 = readFileSync(join(root, "engine/generate.js"), "utf8");
   check("216 §3a: all five _gen readers type-guard (a boolean can never reach a write)", (genSrc216.match(/typeof g !== "object"|typeof entity\._gen === "object"/g) || []).length >= 5);
+  const wtSrc216 = readFileSync(join(root, "engine/worldtick.js"), "utf8");
+  check("216 §Q3: the two worldtick _gen WRITES type-guard too (no throw from a sibling call site)", (wtSrc216.match(/typeof (target|genRec)\._gen === "object"/g) || []).length === 2);
 
   // §3b — the writer: the transit-mint now emits the tracking OBJECT, never the boolean flag.
   const appSrc216 = readFileSync(join(root, "app.js"), "utf8");

@@ -7368,6 +7368,12 @@ await (async () => {
   check("218 §3: level-up opens the wheel as the browse surface; the wheel returns to level-up (wheelReturnTo)", /wheelReturnTo = "levelup"; renderSkillWheel\(\)/.test(appSrc218b) && /rt === "levelup"\) renderLevelUp\(\)/.test(appSrc218b));
   const cssSrc218 = readFileSync(join(root, "style.css"), "utf8");
   check("218 §3: the recommended halo + aspirational dim are styled (reduced-motion respected)", /\.wheel-reco-halo/.test(cssSrc218) && /\.wheel-node\.aspirational \{ opacity/.test(cssSrc218) && /prefers-reduced-motion/.test(cssSrc218));
+
+  // Erik follow-up: cost on picks · once-per-level cache · spinner while reasoning · bolder halo.
+  check("218 §2 follow-up: reasoned picks carry the skill-point COST (Erik: tell me the cost)", /const suggCost = id =>/.test(appSrc218b) && /Learn\$\{c != null \?/.test(appSrc218b));
+  check("218 §2 follow-up: the reasoned read is CACHED per level + reused (persists until the next level)", /character\._suggestCache = \{ level: character\.level/.test(appSrc218b) && /const useCachedSuggest =/.test(appSrc218b) && /if \(useCachedSuggest\) return;/.test(appSrc218b));
+  check("218 §2 follow-up: a 'reasoning…' spinner shows while it loads, removed on done/fail", /id="lvl-suggest-spin"/.test(appSrc218b) && /const spin = \(\) =>/.test(appSrc218b));
+  check("218 §3 follow-up: the recommended halo is bolder (outer ring + ✨ star) + spinner styled", /\.wheel-reco-halo-outer/.test(cssSrc218) && /\.wheel-reco-star/.test(cssSrc218) && /\.spin-dot/.test(cssSrc218) && /wheel-reco-halo-outer/.test(appSrc218b));
 }
 
 // ---- SNG-221: promote a gen-location to its canonical file — buildings + wards become ONE place ----

@@ -332,15 +332,23 @@ img[data-lightbox] { cursor: zoom-in; }
 .wheel-node.braid .wnode-shape { stroke: var(--accent); stroke-width: 2.2; filter: drop-shadow(0 0 3px color-mix(in srgb, var(--accent) 55%, transparent)); }
 .wheel-node.braid-antipodal .wnode-shape { stroke: var(--accent2, var(--accent)); filter: drop-shadow(0 0 5px color-mix(in srgb, var(--accent2, var(--accent)) 65%, transparent)); }
 .wheel-node.precursor .wnode-shape { stroke-dasharray: 2 2; }
-/* SNG-218 §3: the level-up suggestion's picks LIT on the wheel (a pulsing halo), and standing-locked
-   capstones shown DIMMED + dashed as "later" — reachable-now highlighted, aspirational visible but not offered. */
-.wheel-reco-halo { fill: none; stroke: var(--accent2, var(--accent)); stroke-width: 2; animation: reco-pulse 1.8s ease-in-out infinite; }
-@keyframes reco-pulse { 0%, 100% { opacity: .3; } 50% { opacity: .95; } }
+/* SNG-218 §3: the level-up suggestion's picks LIT on the wheel — a bold gold halo that pulses (Erik: make
+   them obvious), and standing-locked capstones DIMMED + dashed as "later". */
+.wheel-reco-halo { fill: none; stroke: var(--accent); stroke-width: 3.2; filter: drop-shadow(0 0 6px var(--accent)); animation: reco-pulse 1.5s ease-in-out infinite; }
+.wheel-reco-halo-outer { fill: none; stroke: var(--accent); stroke-width: 1.4; animation: reco-pulse-out 1.5s ease-in-out infinite; }
+@keyframes reco-pulse { 0%, 100% { opacity: .6; stroke-width: 3.2; } 50% { opacity: 1; stroke-width: 4.6; } }
+@keyframes reco-pulse-out { 0%, 100% { opacity: .1; } 50% { opacity: .45; } }
+.wheel-reco-star { fill: var(--accent); font-size: 12px; paint-order: stroke; stroke: var(--bg); stroke-width: 2.5px; }
 .wheel-node.recommended { opacity: 1 !important; }
-.wheel-node.recommended .wnode-shape { stroke: var(--accent2, var(--accent)); stroke-width: 2.6; filter: drop-shadow(0 0 4px color-mix(in srgb, var(--accent2, var(--accent)) 65%, transparent)); }
+.wheel-node.recommended .wnode-shape { stroke: var(--accent); stroke-width: 3; filter: drop-shadow(0 0 5px var(--accent)); }
 .wheel-node.aspirational { opacity: .5; }
 .wheel-node.aspirational .wnode-shape { stroke-dasharray: 3 2; }
-@media (prefers-reduced-motion: reduce) { .wheel-reco-halo { animation: none; opacity: .85; } }
+@media (prefers-reduced-motion: reduce) { .wheel-reco-halo, .wheel-reco-halo-outer { animation: none; opacity: .9; } }
+/* SNG-218 §2: the "reasoning…" spinner while the LLM suggestion comes in (Erik: it takes a minute). */
+.sug-spinner { display: flex; align-items: center; gap: 7px; margin-bottom: 6px; color: var(--accent); font-style: italic; }
+.spin-dot { width: 9px; height: 9px; border-radius: 50%; border: 2px solid var(--accent); border-top-color: transparent; animation: spin-rot .7s linear infinite; display: inline-block; flex: 0 0 auto; }
+@keyframes spin-rot { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spin-dot { animation: none; } }
 .wheel-node.selected .wnode-shape { stroke-width: 4; }
 /* SNG-129: precursor SEALED — narrative-locked, not tier-locked; a dashed hollow ring + ✦ mark */
 .wheel-node.precursor-sealed .precursor-seal-shape { stroke-dasharray: 3 2.5; fill: transparent; opacity: .85; }

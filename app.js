@@ -67,7 +67,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.217";
+const APP_VERSION = "1.8.218";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -5292,7 +5292,7 @@ function renderSkillWheel(selectedId = null, status = "") {
         const title = nd.name + " — " + (nd.braid ? "a braid" : traditionLabel(nd.cls)) + " · Tier " + nd.tier + braidNote + ((nd.functions || []).length ? " · " + nd.functions.join(", ") : "") + (nd.effCost != null ? " · ⚡" + nd.effCost : "") + (sealed ? " · SEALED (precursor — earned through play, never bought)" : nd.owned ? " (owned)" : nd.closed ? " · CLOSED (your antipode)" : nd.barred ? " · barred" : nd.dim ? " · costs more" : "");
         return `<g class="${cls}" data-wheelnode="${esc(nd.id)}"><title>${esc(title)}${nd.recommended && !nd.owned ? " · ✨ suggested for you this level" : nd.aspirational ? " · later — deepen your standing to open it" : ""}</title>
           <circle class="hit" cx="${nd.x}" cy="${nd.y}" r="13"/>
-          ${nd.recommended && !nd.owned ? `<circle cx="${nd.x}" cy="${nd.y}" r="${(r + 5).toFixed(1)}" class="wheel-reco-halo"/>` : ""}
+          ${nd.recommended && !nd.owned ? `<circle cx="${nd.x}" cy="${nd.y}" r="${(r + 9).toFixed(1)}" class="wheel-reco-halo-outer"/><circle cx="${nd.x}" cy="${nd.y}" r="${(r + 5.5).toFixed(1)}" class="wheel-reco-halo"/><text x="${(nd.x + r + 3).toFixed(1)}" y="${(nd.y - r - 2).toFixed(1)}" class="wheel-reco-star">✨</text>` : ""}
           ${wheelNodeShape(sealed ? "ring" : shapeOfFamily(fam), nd.x, nd.y, r, { fill, stroke, sw: sealed ? 1.3 : 1.5, cls: sealed ? "precursor-seal-shape" : "" })}
           ${sealed ? `<text x="${nd.x}" y="${(nd.y + 3).toFixed(1)}" text-anchor="middle" class="precursor-mark">✦</text>` : opened ? `<text x="${(nd.x + r + 2).toFixed(1)}" y="${(nd.y - r).toFixed(1)}" class="precursor-mark open">✦</text>` : ""}
           ${!sealed && !nd.closed ? secondaries.map((sf, i) => `<circle cx="${(nd.x + r + 2).toFixed(1)}" cy="${(nd.y - r - 1 + i * 4).toFixed(1)}" r="1.9" fill="${FAMILY_COLOR[sf] || "var(--ink-dim)"}" class="wheel-fn-dot"/>`).join("") : ""}
@@ -5611,13 +5611,35 @@ function renderLevelUp(status = "") {
     </div>`;
   };
 
+  // SNG-218 §2 (Erik follow-up): reasoned-suggestion helpers — the skill-point COST per pick (Erik: "tell me
+  // how much these cost"), ONE shared renderer for both the cached and the fresh LLM render, and the
+  // once-per-LEVEL cache. A reasoned read is taken once at a given level and PERSISTS across leave/return; only
+  // reaching a NEW level (character.level changes) invalidates it → a fresh read (Erik: "another level, another read").
+  const cat0 = fullCatalog();
+  const suggCost = id => { try { return canLearnAbility(character, id, cat0, rules, { attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, traditionIndex: CONTENT.traditionIndex }).cost; } catch { return null; } };
+  const reasonedPicksHTML = (picks, note) => `<h3 class="codex-title" style="font-size:15px">✨ Suggested for you <span class="hint" style="text-transform:none">— reasoned from how you actually play</span></h3>
+    ${picks.map(p => { const ab = cat0[p.abilityId]; const c = suggCost(p.abilityId); const ec = (() => { try { return effectiveEnergyCost(ab, character, rules); } catch { return ab?.energyCost ?? null; } })();
+      return `<div class="cs-ability sug-row">
+        <div><strong>${esc(ab?.name || p.abilityId)}</strong> ${functionChips(ab)}${p.fit ? ` <span class="fit-tag fit-${esc(String(p.fit).replace(/[^a-z]/gi, ""))}">${esc(p.fit)}</span>` : ""}${ec != null ? ` <span class="hint" title="energy to use (effective)">⚡${ec}</span>` : ""}</div>
+        <div class="hint">✦ ${esc(p.why || "")}</div>
+        <button class="btn" data-lvllearn="${esc(p.abilityId)}">Learn${c != null ? ` (${c} pt${c > 1 ? "s" : ""})` : ""}</button>
+      </div>`; }).join("")}${note ? `<div class="hint" style="margin-top:6px">${esc(note)}</div>` : ""}`;
+  const sc = character._suggestCache;
+  const cachedPicks = (sc && sc.level === character.level) ? (sc.picks || []).filter(p => reachableNow.some(a => a.id === p.abilityId)) : [];
+  const useCachedSuggest = cachedPicks.length > 0;
+  if (useCachedSuggest) wheelRecommended = new Set(cachedPicks.map(p => p.abilityId));
+
   chrome(`<div class="screen" style="max-width:720px">
     <h2>⬆ Level Up ${infoDot("ability.ranks")}</h2>
     <p class="hint" style="margin-bottom:10px">You have <strong>${sp} skill point${sp === 1 ? "" : "s"}</strong> — points <strong>learn new crafts</strong> (breadth). <strong>Depth is earned through use</strong>, not bought. <span class="cap-line">${breadthUsed(character)} of ${breadthCap(character, CONTENT.skillCapacity)} crafts${cap ? " — at capacity" : ""}</span> ${infoDot("lock.capacity")}</p>
     ${status ? `<div class="cs-block" style="border-left:3px solid var(--accent)">${esc(status)}</div>` : ""}
 
-    ${(() => { // SNG-124 heuristic — the INSTANT suggestion AND the SNG-218 §2 fallback if the LLM call fails.
-      // Reads reachableNow (the §1 gate), never the raw learnable, so it too can't suggest a standing-locked craft.
+    ${(() => {
+      // SNG-218 §2: a reasoned read already taken at THIS level → show it straight from cache (no spinner, no
+      // re-call). Persists across leave/return until the next level (Erik's ask).
+      if (useCachedSuggest) return `<div class="cs-block sug-block" id="lvl-suggest">${reasonedPicksHTML(cachedPicks, sc?.note)}</div>`;
+      // no cached read → the INSTANT heuristic (also the §2 fallback if the LLM call fails), plus a SPINNER while
+      // the reasoned read comes in (Erik: "it takes a minute — show a spinner"). Reads reachableNow (the §1 gate).
       const cov = functionCoverage(character, fullCatalog(), FN_INDEX);
       const suggestions = recommendSkills(character, reachableNow, {
         fnIndex: FN_INDEX, traditionIndex: CONTENT.traditionIndex, catalog: fullCatalog(),
@@ -5626,16 +5648,15 @@ function renderLevelUp(status = "") {
       });
       wheelRecommended = new Set(suggestions.map(s => s.abilityId)); // SNG-218 §3: the same picks light up ON the wheel
       const gap = cov.missing.length ? `Your kit has no <strong>${cov.missing.join(", ")}</strong> yet — gaps worth filling.` : `Your kit already touches all ${cov.covered.length} function families.`;
-      const rows = suggestions.map(s => { const ab = fullCatalog()[s.abilityId]; return `<div class="cs-ability sug-row">
+      const rows = suggestions.map(s => { const ab = fullCatalog()[s.abilityId]; const c = suggCost(s.abilityId); return `<div class="cs-ability sug-row">
           <div><strong>${esc(s.name)}</strong> ${functionChips(ab)}${s.cost != null ? ` <span class="hint" title="energy to use (effective)">⚡${s.cost}</span>` : ""}</div>
           <div class="hint">✦ ${esc(s.why)}</div>
-          <button class="btn" data-lvllearn="${esc(s.abilityId)}">Learn</button>
+          <button class="btn" data-lvllearn="${esc(s.abilityId)}">Learn${c != null ? ` (${c} pt${c > 1 ? "s" : ""})` : ""}</button>
         </div>`; }).join("");
-      // SNG-218 §2: renderLevelUp's async tail replaces this block's inner HTML with a genuinely-reasoned LLM
-      // suggestion when it returns; until then (and on any failure) the instant heuristic stands — never an empty top.
+      const spinner = reachableNow.length >= 2 ? `<div class="sug-spinner hint" id="lvl-suggest-spin"><span class="spin-dot"></span> reasoning about your next crafts…</div>` : "";
       return `<div class="cs-block sug-block" id="lvl-suggest"${suggestions.length ? "" : ' style="display:none"'}>
         <h3 class="codex-title" style="font-size:15px">Suggested for you <span class="hint" style="text-transform:none">— what would round out your kit</span></h3>
-        <div class="hint" style="margin-bottom:6px">${gap}</div>${rows}</div>`;
+        ${spinner}<div class="hint" style="margin-bottom:6px">${gap}</div>${rows}</div>`;
     })()}
 
     <div class="cs-block"><h3 class="codex-title" style="font-size:15px">Your crafts ${infoDot("ability.ranks")} <span class="hint" style="text-transform:none">— depth is earned through use, not points</span></h3>
@@ -5679,9 +5700,11 @@ function renderLevelUp(status = "") {
   // schools) and picks from reachableNow (the §1 guardrail). Hard-filters the model's ids against that set so a
   // stray pick can never render a Learn button on an unlearnable craft. On ANY failure the heuristic stays.
   (async () => {
+    if (useCachedSuggest) return; // a reasoned read for THIS level is already shown from cache — don't re-call
+    const spin = () => { const s = document.getElementById("lvl-suggest-spin"); if (s) s.remove(); };
     try {
       const box = document.getElementById("lvl-suggest");
-      if (!box || reachableNow.length < 2) return; // nothing worth reasoning over
+      if (!box || reachableNow.length < 2) { spin(); return; } // nothing worth reasoning over
       const cat = fullCatalog();
       const okIds = new Set(reachableNow.map(a => a.id));
       const rankOf = id => (character.abilities.find(a => a.abilityId === id)?.level) || 0;
@@ -5713,19 +5736,19 @@ function renderLevelUp(status = "") {
       const resolvePick = pid => (okIds.has(pid) ? reachableNow.find(a => a.id === pid) : null) || byNorm.get(norm(pid)) || byName.get(norm(pid)) || null;
       const picks = (res?.picks || []).map(p => { const ab = resolvePick(p.abilityId); return ab ? { ...p, abilityId: ab.id } : null; }).filter(Boolean).slice(0, 4);
       if (!picks.length) {
+        spin();
         if ((res?.picks || []).length) console.warn("[level-up] reasoned suggestion returned picks, none matched the reachable pool — heuristic stands. model ids:", (res.picks || []).map(p => p.abilityId), "· pool:", [...okIds].slice(0, 12));
         return;
       }
       wheelRecommended = new Set(picks.map(p => p.abilityId)); // SNG-218 §3: the reasoned picks light up ON the wheel
+      // SNG-218 §2: cache this reasoned read at the CURRENT level so it persists across leave/return until a new
+      // level grants another (Erik's ask); save so it survives a reload too.
+      character._suggestCache = { level: character.level, picks: picks.map(p => ({ abilityId: p.abilityId, why: p.why, fit: p.fit })), note: res?.note || "" };
+      try { saveCharacter(character); } catch { /* the cache is a convenience */ }
       box.style.display = "";
-      box.innerHTML = `<h3 class="codex-title" style="font-size:15px">✨ Suggested for you <span class="hint" style="text-transform:none">— reasoned from how you actually play</span></h3>
-        ${picks.map(p => { const ab = cat[p.abilityId]; return `<div class="cs-ability sug-row">
-          <div><strong>${esc(ab?.name || p.abilityId)}</strong> ${functionChips(ab)}${p.fit ? ` <span class="fit-tag fit-${esc(String(p.fit).replace(/[^a-z]/gi, ""))}">${esc(p.fit)}</span>` : ""}</div>
-          <div class="hint">✦ ${esc(p.why || "")}</div>
-          <button class="btn" data-lvllearn="${esc(p.abilityId)}">Learn</button>
-        </div>`; }).join("")}${res?.note ? `<div class="hint" style="margin-top:6px">${esc(res.note)}</div>` : ""}`;
+      box.innerHTML = reasonedPicksHTML(picks, res?.note); // shared renderer — carries the skill-point cost (Erik's ask)
       bindLearn();
-    } catch (e) { console.warn("[level-up] reasoned suggestion unavailable — heuristic stands:", e?.message || e); } // observable, not silent (why Silas kept the heuristic)
+    } catch (e) { spin(); console.warn("[level-up] reasoned suggestion unavailable — heuristic stands:", e?.message || e); } // observable, not silent (why Silas kept the heuristic)
   })();
 }
 

@@ -14,6 +14,7 @@
 import { applyLevelUps } from "./progression.js";
 import { addItem } from "./inventory.js";
 import { smartClamp } from "./namematch.js";
+import { resolveRetrieval } from "./death.js"; // SNG-209: the author enacts a return/seal on a death state
 
 const clampN = (v, lo, hi) => Math.max(lo, Math.min(hi, Math.round(Number(v) || 0)));
 
@@ -25,7 +26,7 @@ function logEdit(character, entry, ctx) {
 }
 
 /** The god-mode op vocabulary — the fields each op reads, for the panel + the prompt-free direct surface. */
-export const AUTHOR_OPS = ["addXp", "setLevel", "setSkillPoints", "restoreVitals", "setVital", "grantAbility", "grantItem", "setArcStage"];
+export const AUTHOR_OPS = ["addXp", "setLevel", "setSkillPoints", "restoreVitals", "setVital", "grantAbility", "grantItem", "setArcStage", "resolveDeath"];
 
 /** Apply a set of AUTHOR (god-mode) ops directly to the save. Returns { applied:[], refused:[] }.
  *  NO fairness, NO trace, NO earned-ness check — that is the whole point of this surface. Safety floors are
@@ -115,6 +116,19 @@ export function applyAuthorOps(character, ops = [], ctx = {}) {
         character.worldState.arcStages[op.arcId] = { ...prev, push: target - base, othersPush: 0, authorSet: true };
         logEdit(character, { kind: "arcStage", arcId: op.arcId, to: target, note: note(op) }, ctx);
         applied.push({ setArcStage: op.arcId, stage: target });
+        break;
+      }
+      case "resolveDeath": {
+        // SNG-209 §4/§5.5: the author moves a death STATE — RETURN a reachable figure (optionally CHANGED),
+        // SEAL a death one-way, or FAIL an attempt (sinks deeper). Target is an epic status or a met NPC.
+        const id = op.targetId;
+        const target = character.worldState?.epicStatus?.[id] || character.npcRegistry?.[id];
+        if (!target) { refused.push({ op, reason: `no dead figure "${id}" (epic status or npc registry)` }); break; }
+        const outcome = op.outcome === "seal" ? "seal" : op.outcome === "fail" ? "fail" : "return";
+        const res = resolveRetrieval(target, outcome, { currentDay: ctx.worldDay ?? null, changed: op.changed || null });
+        if (!res.ok) { refused.push({ op, reason: res.why || "not in the death state" }); break; }
+        logEdit(character, { kind: "resolveDeath", id, outcome, changed: op.changed || null, note: note(op) }, ctx);
+        applied.push({ resolveDeath: id, outcome });
         break;
       }
       default: refused.push({ op, reason: `unknown author op "${op.op}"` });

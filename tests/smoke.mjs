@@ -40,6 +40,7 @@ import { validate, missingRequired, defaultFor } from "../engine/genschema.js";
 import { generate, ensureGenerated, resolveExisting, mintId, repairEntity, stubEntity, birthWeightOf, buildGeneratePrompt, generatedRecords, GEN_TYPES, isMinorEntity, enforceFloors, recordAttention, effectiveWeight, recomputeTier, isDormant, isSurfaceable, livingWorldForGM, findGenerated, nominationsFor } from "../engine/generate.js";
 import { applyCodexUpdates as applyCodexUpdatesGen } from "../engine/codex.js";
 import { ensureCanonStore, promotionCandidates, buildCanonRecord, findCanonCollision, resolveContradiction, promoteInto, mergeCanonStores, lensDecision, canonForViewer, adaptView, AUTHORED_CANON_WEIGHT, contributionsBy } from "../engine/canon.js";
+import { enterDeathState, deathDepth, isSealed, isRetrievable, deepenDeaths, resolveRetrieval, reachableDeadForGM, DEATH_DEPTH_NAMES } from "../engine/death.js";
 import { sanitizeImagePrompt, assembleImagePrompt, characterPromptSeed, npcPromptSeed, imageURLFor, ensureImage, isMinorSubject, addGalleryImage, ensureGallery, itemProvenancePhrase, deleteGalleryImage } from "../engine/art.js";
 import { planPlayerDedup, dedupePlayers, resolvePlayerKey, findProfileByName, resolveLocationId, deleteCharacter, saveCharacter, listCharacters } from "../engine/state.js";
 import { applyStateOps, describeCorrection, detectAnomalies, anomaliesForGM, repairPanelForGM } from "../engine/corrections.js";
@@ -7480,6 +7481,70 @@ await (async () => {
   check("220 §2a: the weave call passes the player's read() as `bio` (the fear-fix)", /generateBio\(\{ name: state\.name, origin: state\.origin, background: state\.background, attributes: state\.attrs, bio: read\(\) \}\)/.test(appSrc220));
   check("220 §2c: an undo — the pre-weave text is stashed + a 'Revert to what I wrote' restores it", /const before = read\(\)/.test(appSrc220) && /bio-revert/.test(appSrc220) && /renderBioStep\(revertTo\)/.test(appSrc220));
   check("220 §2c/§2d: the button is relabelled + a plain description states it keeps your words", /✦ Weave in the valley/.test(appSrc220) && /keeps your words/.test(appSrc220));
+}
+
+// ---- SNG-209: death is a STATE, not a terminus — depth grades the wall, and the clock sinks the untended ----
+{
+  // §5.4: entering the death state is a STATUS extension, never a delete. Fresh → depth 0 (the threshold).
+  const fell = enterDeathState({ id: "npc-1", name: "Roan", status: "active" }, { diedDay: 100, cause: "a blade" });
+  check("209 §5.4: enterDeathState sets status dead + a deathState record (not a delete)", fell.status === "dead" && !!fell.deathState && fell.deathState.diedDay === 100 && fell.deathState.cause === "a blade");
+  check("209 §2: a fresh death is at THE THRESHOLD (depth 0) — reachable, cheap", deathDepth(fell, 100) === 0 && DEATH_DEPTH_NAMES[0] === "the threshold");
+
+  // §2: depth is COMPUTED from time-dead — threshold → near dark → deep dark as the days pass.
+  check("209 §2: days pass → the near dark (depth 1)", deathDepth(fell, 120) === 1);
+  check("209 §2: a season passes → the deep dark (depth 2)", deathDepth(fell, 200) === 2);
+  check("209 §2: body LOST forces the deep dark even when fresh", deathDepth(enterDeathState({ status: "active" }, { diedDay: 100, bodyStatus: "lost" }), 101) === 2);
+
+  // §2: a GM override wins over the computed depth (computed-with-GM-override, ROUND 2 Q1 recommendation).
+  const forced = enterDeathState({ status: "active" }, { diedDay: 100, depthOverride: 3 });
+  check("209 §2: a GM depthOverride wins over the clock (sealed by fiat)", deathDepth(forced, 101) === 3 && isSealed(forced, 101));
+
+  // §1: retrievable until sealed — a dead figure at a reachable depth is a HOOK, not a void.
+  check("209 §1: a deep-dark death is still RETRIEVABLE (dead ≠ gone)", isRetrievable(fell, 200) && !isSealed(fell, 200));
+  const sealedOne = enterDeathState({ status: "active" }, { diedDay: 100, sealed: true });
+  check("209 §1: a SEALED death is not retrievable (beyond the roads back)", !isRetrievable(sealedOne, 101) && isSealed(sealedOne));
+
+  // §5.6 THE CLOCK: a death untended past sealAfterDays sinks to sealed — and says so once (news).
+  const tended = enterDeathState({ id: "a", name: "A", status: "active" }, { diedDay: 100 });
+  const stale = enterDeathState({ id: "b", name: "B", status: "active" }, { diedDay: 100 });
+  const newlySealed = deepenDeaths([tended, stale], 100 + 130); // 130 > default sealAfterDays (120)
+  check("209 §5.6: deepenDeaths seals a death left untended past the threshold", newlySealed.length === 2 && stale.deathState.sealed === true);
+  check("209 §5.6: the clock is idempotent — an already-sealed death isn't re-sealed (no duplicate news)", deepenDeaths([stale], 100 + 300).length === 0);
+  check("209 §5.6: a still-recent death is NOT swept (the clock only takes the long-neglected)", deepenDeaths([enterDeathState({ status: "active" }, { diedDay: 100 })], 100 + 10).length === 0);
+
+  // §4/§5.5: the retrieval primitive — RETURN restores (optionally CHANGED); FAIL sinks deeper; SEAL is one-way.
+  const back = enterDeathState({ id: "r", name: "R", status: "active" }, { diedDay: 100 });
+  const rr = resolveRetrieval(back, "return", { currentDay: 110, changed: "hollow-eyed" });
+  check("209 §4: resolveRetrieval('return') restores status + records the change, clears the death state", rr.ok && back.status === "active" && !back.deathState && back.returnedFromDeath.changed === "hollow-eyed");
+  const risky = enterDeathState({ status: "active" }, { diedDay: 100 });
+  const fail1 = resolveRetrieval(risky, "fail", { currentDay: 105 }); // day 105 = near dark (1) → fail sinks to deep dark (2)
+  check("209 §4: a FAILED retrieval sinks them deeper (the risk)", fail1.ok && fail1.deepened && deathDepth(risky, 105) === 2);
+  const sealedBack = enterDeathState({ status: "active" }, { diedDay: 100, sealed: true });
+  check("209 §4 GUARD: a sealed death refuses every road (return fails)", resolveRetrieval(sealedBack, "return").ok === false);
+
+  // §5.1/§5.3 WIRING: a killed legend ENTERS the death state via applyEpicClashOutcome (not a bare status flip).
+  const wtSrc209 = readFileSync(join(root, "engine/worldtick.js"), "utf8");
+  check("209 §5.3: an epic KILL calls enterDeathState (the legend is in the death state, reachable, not deleted)", /enterDeathState\(st, \{ diedDay: worldDay/.test(wtSrc209));
+  check("209 §5.6: the offscreen tick runs the CLOCK (deepenDeaths) + surfaces a seal as a real event", /deepenDeaths\(\[\.\.\.deathNames\.keys\(\)\], currentWorldDay/.test(wtSrc209) && /passed beyond the roads back/.test(wtSrc209));
+
+  // §1 WIRING: the reachable dead reach the GM context — a killed-but-unsealed figure surfaces as a hook.
+  const wchar209 = { worldState: { lastTickWorldDay: 150, epicStatus: { "ep-1": enterDeathState({ status: "active" }, { diedDay: 140, cause: "a duel" }) } }, npcRegistry: {} };
+  const content209 = { legends: { roster: [{ id: "ep-1", name: "Vharos the Grey" }] } };
+  const rd = reachableDeadForGM(wchar209, content209, 150);
+  check("209 §1: reachableDeadForGM surfaces a killed-but-unsealed legend as a hook (name + the wall)", Array.isArray(rd) && rd[0]?.name === "Vharos the Grey" && rd[0]?.wall === "the near dark");
+  wchar209.worldState.epicStatus["ep-1"].deathState.sealed = true;
+  check("209 §1: a SEALED death is dropped from the reachable-dead surface (truly gone)", reachableDeadForGM(wchar209, content209, 150) === null);
+  const gmRegSrc209 = readFileSync(join(root, "engine/gm_registry.js"), "utf8");
+  check("209 §1: reachableDeadDetail is a registered GM_CONTEXT surface (turn + ask)", /key: "reachableDeadDetail"/.test(gmRegSrc209) && /reachableDeadForGM/.test(gmRegSrc209));
+
+  // §4/§5.5 WIRING: the author god-mode is the Phase-1 TRIGGER — it enacts a return/seal on a death state.
+  const amod209 = await import("../engine/authormode.js");
+  check("209 §4: 'resolveDeath' is in the AUTHOR_OPS vocabulary", amod209.AUTHOR_OPS.includes("resolveDeath"));
+  const gchar = { worldState: { epicStatus: { "ep-2": enterDeathState({ status: "active" }, { diedDay: 100 }) } }, authorEdits: [] };
+  amod209.applyAuthorOps(gchar, [{ op: "resolveDeath", targetId: "ep-2", outcome: "return", changed: "grey at the temples" }], { worldDay: 120 });
+  check("209 §4: the author op RETURNS a dead figure (status active, the change recorded + logged)", gchar.worldState.epicStatus["ep-2"].status === "active" && gchar.worldState.epicStatus["ep-2"].returnedFromDeath?.changed === "grey at the temples" && gchar.authorEdits.some(e => e.kind === "resolveDeath"));
+  const gres2 = amod209.applyAuthorOps({ worldState: {}, npcRegistry: {} }, [{ op: "resolveDeath", targetId: "ghost" }], {});
+  check("209 §4 GUARD: resolveDeath refuses a target that isn't in any registry", gres2.refused.some(x => /no dead figure/.test(x.reason)));
 }
 
 console.log(failures === 0 ? "\nAll smoke tests passed." : `\n${failures} FAILURE(S)`);

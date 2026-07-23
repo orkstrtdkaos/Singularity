@@ -17,6 +17,7 @@ import { smartClamp } from "./namematch.js"; // SNG-076: word-boundary clamp for
 import { generatedRecords } from "./generate.js";
 import { syncEnabled, fetchRepoJSON, fetchLedger, pushOwnedFile, pushMergedFile } from "./sync.js";
 import { decayWakes, wakeArcPush } from "./wake.js"; // SNG-204: wakes decay on the tick + lean on connected arcs
+import { enterDeathState, deepenDeaths } from "./death.js"; // SNG-209: a killed figure ENTERS the death state; the clock sinks untended deaths toward sealed
 import { absoluteWorldDay, worldDayAt, worldCount, readClock } from "./worldtime.js";
 import { advanceAssignment, progressAgainst } from "./assignments.js"; // SNG-191 §4: the world advances delegated work
 import { seedArc, fomentArc, surfaceableArcs, markSurfaced, seasonalPressure } from "./latentarcs.js"; // SNG-191 §7: the world's own agenda
@@ -552,10 +553,13 @@ export function applyEpicClashOutcome(ws, winner, loser, kind, worldDay, { death
   }
   if (finalKind === "killed") {
     st.status = "dead"; st.diedWorldDay = worldDay; st.killedBy = winner.id;
+    // SNG-209: a killed legend ENTERS the death state (depth 0, fresh) — reachable, for a time — not deleted.
+    // The clock (deepenDeaths) will sink them toward sealed if no one goes after them.
+    enterDeathState(st, { diedDay: worldDay, cause: `killed by ${winner.name}` });
     ws.lastEpicDeathDay = worldDay;
     event = { kind: "epic_death", figureId: loser.id, killerId: winner.id, worldDay, propagates: true,
       text: `A legend has fallen: ${winner.name} has killed ${loser.name}. The world is one great figure lighter, and ${winner.name} the more feared for it.` };
-    codex = { entityId: loser.id, label: loser.name, kind: "person", fact: `[fell offscreen] Killed by ${winner.name}. Their unfinished work is loose in the world.` };
+    codex = { entityId: loser.id, label: loser.name, kind: "person", fact: `[fell offscreen] Killed by ${winner.name}. Their unfinished work is loose in the world — and they are freshly in the death state, still within reach of the roads back, for now.` };
     news.push(event.text);
   } else if (finalKind === "wounded") {
     st.status = "wounded"; st.woundedUntilDay = worldDay + 8; st.woundedBy = winner.id;
@@ -643,6 +647,17 @@ export async function advanceGeneratedOffscreen({ character, content = {}, evolv
   // SNG-204: open wakes decay over world-time; one nobody engaged closes unspawned (the world moves on). This
   // runs every tick, even when no figure is in scope — so a wake left unacted-on still fades on schedule.
   for (const w of decayWakes(character, currentWorldDay)) news.push({ text: `The moment to act on ${w.source.arcId ? String(w.source.arcId).replace(/^arc_/, "").replace(/_/g, " ") : "a passing consequence"} has closed — the world moved on.`, worldDay: currentWorldDay, tier: "ambient" }); // SNG-211: a fade is texture, not a headline
+  // SNG-209 THE CLOCK: a death left untended sinks toward SEALED over world-time — a retrievable death is a
+  // latent hook; a sealed one is beyond the roads back. Only deathState-bearing deaths are on the clock (epic
+  // kills, wired in applyEpicClashOutcome); a pre-209 death without a state reads as "near dark" and is left
+  // alone until someone stamps it. Names resolved for the news line; the seal itself is a real event.
+  const deathNames = new Map();
+  for (const f of (content.legends?.roster || [])) { const st = ws.epicStatus?.[f.id]; if (st) deathNames.set(st, f.name); }
+  for (const n of Object.values(character.npcRegistry || {})) if (n && typeof n === "object") deathNames.set(n, n.name);
+  for (const e of deepenDeaths([...deathNames.keys()], currentWorldDay, content.rules || {})) {
+    const name = deathNames.get(e);
+    if (name) news.push({ text: `${name} has passed beyond the roads back — the dark has closed over them, and no return remains.`, worldDay: currentWorldDay, tier: "event" });
+  }
   if (!population.length || !evolveFn) {
     if (news.length) { const stamped = news.map(n => ({ day: ws.lastTickDay ?? null, worldDay: n.worldDay, text: smartClamp(n.text, 600), tier: n.tier || "event" })); ws.news = [...ws.news, ...stamped].slice(-NEWS_CAP); ws.unseenNews = [...(ws.unseenNews || []), ...stamped].slice(-NEWS_CAP); }
     return news;

@@ -39,6 +39,7 @@ import { companionsForGM, activeCompanions } from "./companions.js";
 import { questsForGM, structuredQuestsForGM, traditionArcForGM, npcQuestsForGM, practicedTraditions } from "./quests.js";
 import { legendsForGM } from "./legends.js"; // SNG-208 wiring: legends pursuable as teachers + wants-as-quests
 import { wakesForGM } from "./wake.js"; // SNG-204: the aftermath waiting to become the next thread
+import { reachableDeadForGM } from "./death.js"; // SNG-209: the dead who are NOT gone — reachable in the death state, latent hooks
 import { npcRegistryForGM, npcQuestSeedBlock } from "./npcs.js";
 import { placeMemoryForGM, recallForGM } from "./places.js";
 import { assignmentsForGM } from "./assignments.js"; // SNG-191 §4: delegated commitments the world is honouring
@@ -186,6 +187,11 @@ export const GM_CONTEXT = [
   { key: "wakesDetail", builder: "wake.wakesForGM (SNG-204)", carries: ["open wakes", "the pressure each pushes", "the next thread to weave"],
     reachedBy: "always (a significant outcome recently resolved)", spec: "SNG-204 §OQ1", views: ["turn", "ask"],
     build: (env) => wakesForGM(env.character, env.CONTENT) },
+  // SNG-209 §1: the reachable DEAD — figures in the death state at a depth the roads back still reach. A killed
+  // figure is a latent hook, not a void; the GM narrates them so death reads as a hard wall, never a delete.
+  { key: "reachableDeadDetail", builder: "death.reachableDeadForGM (SNG-209)", carries: ["the dead still within reach", "how deep each has sunk (the wall)"],
+    reachedBy: "always (a figure has died and is not yet sealed)", spec: "SNG-209 §1", views: ["turn", "ask"],
+    build: (env) => reachableDeadForGM(env.character, env.CONTENT, env.character?.worldState?.lastTickWorldDay ?? null) },
 
   // ---- turn-only: pass-throughs from runGM's own parameters ----
   { key: "resolution", builder: "runGM param (resolve.resolveAction)", carries: ["this action's mechanical outcome"],

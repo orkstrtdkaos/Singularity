@@ -7380,6 +7380,13 @@ await (async () => {
   check("218 §3 wheel: a ✨ Suggested filter isolates the recommended crafts (toggles wheelSuggestFilter)", /id="reco-filter"/.test(appSrc218b) && /wheelSuggestFilter = !wheelSuggestFilter/.test(appSrc218b));
   check("218 §3 wheel: tradition/function/suggested filters STACK (intersection, no longer mutually exclusive)", /const litByFilter = anyFilter && passTrad && passFn && passSug/.test(appSrc218b) && !/the two browse modes don't stack/.test(appSrc218b));
   check("218 §3 wheel: the level-up tradition list is a collapsed fallback (the wheel is primary)", /learn-list-fallback/.test(appSrc218b) && /Or browse as a plain list/.test(appSrc218b));
+
+  // Erik wheel LEGIBILITY pass: zoom levels of detail · de-overlap · folk dartboard · deeper zoom · Infinity guard.
+  check("218 §3 wheel: ZOOM LEVELS OF DETAIL — LOD buckets + a debounced re-render reveal labels on zoom-in", /const wheelLodBucket =/.test(appSrc218b) && /_rerenderWheel && _rerenderWheel\(\)/.test(appSrc218b) && /midZoom && nd\.reachable/.test(appSrc218b) && /deepZoom && !nd\.closed/.test(appSrc218b));
+  check("218 §3 wheel: same-tier crafts DE-OVERLAP (radial stagger across the band)", /rStagger = m > 1/.test(appSrc218b));
+  check("218 §3 wheel: folk crafts get an organized concentric layout (a dartboard, not one crowded ring)", /fRings = fN <= 8 \? 1/.test(appSrc218b) && /folkRing: ring/.test(appSrc218b));
+  check("218 §3 wheel: deeper max zoom for 'way in' clarity (clamp raised to 7)", /Math\.max\(0\.3, Math\.min\(7, k\)\)/.test(appSrc218b));
+  check("218 §3 wheel: pan/zoom guarded against a detached svg — never translate(Infinity/NaN)", /if \(!r\.width \|\| !r\.height\) return null/.test(appSrc218b) && /Number\.isFinite\(tx\)/.test(appSrc218b));
 }
 
 // ---- SNG-221: promote a gen-location to its canonical file — buildings + wards become ONE place ----

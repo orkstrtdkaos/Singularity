@@ -67,7 +67,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.219";
+const APP_VERSION = "1.8.221";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -5015,7 +5015,7 @@ function renderMap(selectedId = null) {
 // Known braids drawn as connections — cross-pole braids as the DIAMETER through the centre. The
 // antipode is dark and struck through, directly across the wheel. Access, lore and geometry, one picture.
 
-const WHEEL = { size: 920, cx: 460, cy: 460, rNode: 355, rInner: 150, rFolk: 78, rPrecursor: 405 };
+const WHEEL = { size: 920, cx: 460, cy: 460, rNode: 405, rInner: 120, rFolk: 66, rPrecursor: 452 }; // SNG-218 §3 (Erik): wider tier band + more room between rings to cut overlap
 function wheelTierRadius(tier) { const t = Math.max(1, Math.min(5, tier || 1)); return WHEEL.rInner + (t - 1) / 4 * (WHEEL.rNode - WHEEL.rInner); }
 function wheelAngle(posIndex, n) { return (posIndex / (n || 24)) * Math.PI * 2 - Math.PI / 2; }
 function wheelPt(ang, r) { return { x: WHEEL.cx + Math.cos(ang) * r, y: WHEEL.cy + Math.sin(ang) * r }; }
@@ -5074,16 +5074,33 @@ function buildWheelModel() {
     for (const ab of abs) (byTier[ab.levelReq || 1] = byTier[ab.levelReq || 1] || []).push(ab);
     for (const [lv, list] of Object.entries(byTier)) {
       const r = wheelTierRadius(Number(lv));
+      const m = list.length;
       list.sort((a, b) => a.name.localeCompare(b.name)).forEach((ab, i) => {
         const lean = leanOffset(ang0, compositionAngle(ab.axes, axisPoles, n), n);
-        const fan = (i - (list.length - 1) / 2) * 0.015; // small residual fan for exact-composition ties
-        const a = ang0 + lean + fan; const p = wheelPt(a, r); mk(ab, p.x, p.y, a, { lean });
+        // SNG-218 §3 (Erik): DE-OVERLAP same-tier crafts. Spread them RADIALLY across a band (keeps them on the
+        // tradition's spoke — the "belongs to this people" reading — while pulling them off one another), with a
+        // light alternating angular fan so a dense tier zig-zags instead of stacking on a single arc.
+        const rStagger = m > 1 ? ((i / (m - 1)) - 0.5) * Math.min(46, 16 + m * 5) : 0;
+        const fan = m > 1 ? ((i % 2) * 2 - 1) * 0.026 + (i - (m - 1) / 2) * 0.006 : 0;
+        const a = ang0 + lean + fan; const p = wheelPt(a, r + rStagger); mk(ab, p.x, p.y, a, { lean });
       });
     }
   }
-  // folk centre: a small ring near the middle
-  folk.sort((a, b) => a.name.localeCompare(b.name)).forEach((ab, i) => {
-    const a = (i / Math.max(1, folk.length)) * Math.PI * 2 - Math.PI / 2; const p = wheelPt(a, WHEEL.rFolk); mk(ab, p.x, p.y, a);
+  // folk centre: SNG-218 §3 (Erik) — the open-to-all crafts get their OWN organized layout, a small concentric
+  // "dartboard" of 1–3 rings instead of one crowded circle, so they're distinguishable and spread. The zoom-LOD
+  // names them as you zoom into the centre (folk are reachable → midZoom labels them). Rings fit inside rInner.
+  const folkSorted = folk.sort((a, b) => a.name.localeCompare(b.name));
+  const fN = folkSorted.length;
+  const fRings = fN <= 8 ? 1 : fN <= 20 ? 2 : 3;
+  const fPer = Math.ceil(fN / fRings);
+  const fInner = WHEEL.rFolk * 0.5, fOuter = WHEEL.rInner - 22;
+  folkSorted.forEach((ab, i) => {
+    const ring = Math.min(fRings - 1, Math.floor(i / fPer));
+    const start = ring * fPer, count = Math.min(fPer, fN - start), idxInRing = i - start;
+    const rr = fRings === 1 ? WHEEL.rFolk : fInner + ring * ((fOuter - fInner) / (fRings - 1));
+    const stag = ring % 2 ? Math.PI / Math.max(1, count) : 0; // offset alternate rings so they interleave, not align
+    const a = (idxInRing / Math.max(1, count)) * Math.PI * 2 - Math.PI / 2 + stag;
+    const p = wheelPt(a, rr); mk(ab, p.x, p.y, a, { folkRing: ring });
   });
   // precursor: outside the ring, spread all the way round (not axis-aligned)
   precursor.sort((a, b) => a.name.localeCompare(b.name)).forEach((ab, i) => {
@@ -5270,9 +5287,17 @@ function renderSkillWheel(selectedId = null, status = "") {
         de-collided labels (owned/selected always; matched added at zoom). */""}
     ${(() => {
       const filterOn = wheelFnFilter.size > 0;
-      const zoomed = (graphViews[graphSurface]?.k || 1) >= 1.25;
-      // de-collision: gather label-bearing nodes, greedily nudge overlapping label anchors downward.
-      const labelSet = m.nodes.filter(nd => nd.name && (nd.owned || selectedId === nd.id || (zoomed && filterOn && (nd.families || []).some(f => wheelFnFilter.has(f))) || (zoomed && wheelSelTrad && tradRelOf(nd) === "related")));
+      // SNG-218 §3 (Erik): ZOOM LEVELS OF DETAIL. Overview stays clean — only your kit, the selected node, and
+      // the ✨-suggested picks are named. Zoom in and the LEARNABLE crafts get labeled; zoom way in and
+      // everything is (except the closed antipode). The wheel re-renders on a zoom-settle so labels appear as
+      // you go (wheelLabelZoomBucket + the debounced re-render in wireSkillGraphViewport).
+      const k = graphViews[graphSurface]?.k || 1;
+      const zoomed = k >= 1.25, midZoom = k >= 2.2, deepZoom = k >= 3.6;
+      const labelSet = m.nodes.filter(nd => nd.name && (
+        nd.owned || selectedId === nd.id || (nd.recommended && !nd.owned) ||
+        (zoomed && filterOn && (nd.families || []).some(f => wheelFnFilter.has(f))) ||
+        (zoomed && wheelSelTrad && tradRelOf(nd) === "related") ||
+        (midZoom && nd.reachable) || (deepZoom && !nd.closed)));
       const placed = [], labelAt = {};
       for (const nd of labelSet) {
         const lp = wheelPt(nd.ang, wheelTierRadius(nd.levelReq) + 12); let y = lp.y + 2, guard = 0;
@@ -5346,7 +5371,7 @@ function renderSkillWheel(selectedId = null, status = "") {
       : skillSelectionActions(selAb)}
   </div>` : "";
 
-  chrome(`<div class="screen" style="max-width:980px">
+  chrome(`<div class="screen" style="max-width:1180px">
     <h2>The Skill Wheel ${infoDot("circle.what")}</h2>
     <p class="hint" style="margin-bottom:8px">The great circle IS your skill tree. Your <strong>people's spoke</strong> runs out to its capstone; <strong>kin</strong> stand beside you; the <strong>folk crafts</strong> sit at the centre (open to all); <strong>precursor</strong> rings the outside; a <strong>braid you know</strong> draws a line through the middle; and your <strong>antipode is dark, struck through</strong>, across the wheel. Depth = mastery. <strong>Tap a node to learn or deepen it here.</strong> Scroll to zoom, drag to pan.</p>
     ${/* SNG-124 Phase B: function-family filter — tap a family to light up every craft that does it, across all traditions (both axes at once). */""}
@@ -5375,6 +5400,8 @@ function renderSkillWheel(selectedId = null, status = "") {
   </div>`);
   setGraphSurface("wheel");   // SNG-168: its own view, not the map's
   wireSkillGraphViewport();
+  _rerenderWheel = () => renderSkillWheel(selectedId, status); // SNG-218 §3: zoom-LOD re-render (preserves zoom/pan via graphViews)
+  _wheelLODBucket = wheelLodBucket(graphViews.wheel?.k || 1);
   for (const g of app.querySelectorAll("[data-wheelnode]")) g.onclick = () => {
     if (_graphDidPan) { _graphDidPan = false; return; }
     wheelSelTrad = null; // selecting a specific craft leaves tradition-highlight mode
@@ -5399,7 +5426,7 @@ function renderSkillWheel(selectedId = null, status = "") {
   const recoFilter = document.getElementById("reco-filter"); if (recoFilter) recoFilter.onclick = () => { wheelSuggestFilter = !wheelSuggestFilter; renderSkillWheel(selectedId, status); }; // SNG-218 §3: isolate the suggested crafts
   const fnClear = document.getElementById("fn-filter-clear"); if (fnClear) fnClear.onclick = () => { wheelFnFilter = new Set(); wheelSuggestFilter = false; renderSkillWheel(selectedId, status); };
   wireSkillSelectionActions((id, msg) => renderSkillWheel(id, msg)); // SNG-097: learn/deepen in place
-  document.getElementById("wheel-back").onclick = () => { graphViews[graphSurface] = null; const rt = wheelReturnTo; wheelReturnTo = null; wheelLearnMode = false; wheelSuggestFilter = false; if (rt === "levelup") renderLevelUp(); else renderCharacterScreen(); }; // SNG-218 §3: return to level-up when opened from it; reset the browse modes
+  document.getElementById("wheel-back").onclick = () => { graphViews[graphSurface] = null; clearTimeout(_wheelLODTimer); _rerenderWheel = null; const rt = wheelReturnTo; wheelReturnTo = null; wheelLearnMode = false; wheelSuggestFilter = false; if (rt === "levelup") renderLevelUp(); else renderCharacterScreen(); }; // SNG-218 §3: reset browse modes + cancel any pending LOD re-render
   document.getElementById("wheel-list").onclick = () => { graphViews[graphSurface] = null; renderSkillGraph(); };
 }
 
@@ -5497,26 +5524,43 @@ let graphViews = {};                       // { [surface]: { k, tx, ty } }
 let graphSurface = "map";                  // which one the current screen is
 const setGraphSurface = (name) => { graphSurface = name; };
 let _graphDidPan = false;  // suppress a node-select when a drag actually panned
+// SNG-218 §3 (Erik): zoom levels of detail — the wheel re-renders itself when a zoom crosses a LOD threshold, so
+// labels appear as you zoom in. `_rerenderWheel` is set by renderSkillWheel to a self-call (preserving zoom/pan).
+let _rerenderWheel = null, _wheelLODBucket = 0, _wheelLODTimer = null;
+const wheelLodBucket = k => k >= 3.6 ? 3 : k >= 2.2 ? 2 : k >= 1.25 ? 1 : 0;
 
 function wireSkillGraphViewport() {
   const svg = document.getElementById("skill-svg");
   const vp = svg?.querySelector(".graph-vp");
   if (!svg || !vp) return;
-  const apply = () => { const v = graphViews[graphSurface] || { k: 1, tx: 0, ty: 0 }; vp.setAttribute("transform", `translate(${v.tx} ${v.ty}) scale(${v.k})`); };
-  const clampK = k => Math.max(0.3, Math.min(4, k));
-  // convert a client point to the SVG's viewBox coordinate space
+  const apply = () => { let v = graphViews[graphSurface] || { k: 1, tx: 0, ty: 0 };
+    if (!Number.isFinite(v.tx) || !Number.isFinite(v.ty) || !Number.isFinite(v.k)) { v = { k: Number.isFinite(v.k) ? v.k : 1, tx: 0, ty: 0 }; graphViews[graphSurface] = v; } // SNG-218 §3: never emit Infinity/NaN
+    vp.setAttribute("transform", `translate(${v.tx} ${v.ty}) scale(${v.k})`); };
+  const clampK = k => Math.max(0.3, Math.min(7, k)); // SNG-218 §3 (Erik): deeper zoom — "way in for clarity"
+  // convert a client point to the SVG's viewBox coordinate space. SNG-218 §3: a zoom event can arrive on a
+  // DETACHED svg (its width is 0 the instant the LOD re-render swaps it), which used to divide by zero →
+  // translate(Infinity NaN). Guard: a zero-size rect returns null and the caller bails, keeping the view finite.
   const toSvg = (clientX, clientY) => {
     const r = svg.getBoundingClientRect();
+    if (!r.width || !r.height) return null;
     const vb = svg.viewBox.baseVal;
     return { x: (clientX - r.left) / r.width * vb.width, y: (clientY - r.top) / r.height * vb.height };
   };
   const zoomAt = (clientX, clientY, factor) => {
     const v = graphViews[graphSurface] || { k: 1, tx: 0, ty: 0 };
     const p = toSvg(clientX, clientY);
+    if (!p) return;
     const k2 = clampK(v.k * factor);
     // keep the point under the cursor fixed: p = (p - t)/k invariant
-    graphViews[graphSurface] = { k: k2, tx: p.x - (p.x - v.tx) * (k2 / v.k), ty: p.y - (p.y - v.ty) * (k2 / v.k) };
+    const tx = p.x - (p.x - v.tx) * (k2 / v.k), ty = p.y - (p.y - v.ty) * (k2 / v.k);
+    graphViews[graphSurface] = { k: k2, tx: Number.isFinite(tx) ? tx : 0, ty: Number.isFinite(ty) ? ty : 0 };
     apply();
+    // SNG-218 §3: on the WHEEL, when a zoom crosses a level-of-detail threshold, re-render (debounced) so the
+    // labels for that detail level appear. Only fires on a threshold crossing — not every zoom tick.
+    if (graphSurface === "wheel" && _rerenderWheel) {
+      const nb = wheelLodBucket(k2);
+      if (nb !== _wheelLODBucket) { clearTimeout(_wheelLODTimer); _wheelLODTimer = setTimeout(() => { _wheelLODBucket = nb; _rerenderWheel && _rerenderWheel(); }, 180); }
+    }
   };
   svg.addEventListener("wheel", (e) => { e.preventDefault(); zoomAt(e.clientX, e.clientY, e.deltaY < 0 ? 1.12 : 1 / 1.12); }, { passive: false });
   // drag to pan (mouse + touch)
@@ -5525,6 +5569,7 @@ function wireSkillGraphViewport() {
   const move = (x, y) => {
     if (!dragging) return;
     const r = svg.getBoundingClientRect(); const vb = svg.viewBox.baseVal;
+    if (!r.width || !r.height) return; // SNG-218 §3: never pan against a detached/zero-size svg (→ Infinity)
     const dx = (x - last.x) / r.width * vb.width, dy = (y - last.y) / r.height * vb.height;
     moved += Math.abs(x - last.x) + Math.abs(y - last.y);
     const v = graphViews[graphSurface] || { k: 1, tx: 0, ty: 0 };

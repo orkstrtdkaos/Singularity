@@ -17,7 +17,7 @@ import { applyNpcUpdates, npcRegistryForGM, migrateRelationships, mergeDuplicate
 import { notePlaceVisit, applyPlaceUpdates, placeMemoryForGM } from "../engine/places.js";
 import { initWorldState, runWorldTick, advanceGeneratedOffscreen, applyWantOutcome, offscreenPopulation, buildRegionView, effectiveLocation, takeUnseenNews, newsForGM, worldArcsPublic, worldArcsForGM, effectiveEpicStatus, applyEpicArcPush, resolveEpicClash, applyEpicClashOutcome } from "../engine/worldtick.js";
 import { assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "../engine/gambit.js";
-import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, autoAdvancePracticedRanks, markDefiningMoment, meetsStandingBar, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy, nativeGrantIdsFor, applyNativeGrants, retroNativeGrants, seedInnateSubstrate } from "../engine/progression.js";
+import { SUBS, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, canLearnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, autoAdvancePracticedRanks, markDefiningMoment, meetsStandingBar, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy, nativeGrantIdsFor, applyNativeGrants, retroNativeGrants, seedInnateSubstrate } from "../engine/progression.js";
 import { ensureCompany, companyRoster, recruit, partCompany, isRecruitable, offeredRoles, trainerFor, liaisonFactions, liaisonMultiplierFor, roleBadges, COMPANY_ROLES } from "../engine/company.js";
 import { standingWithPeople } from "../engine/reputation.js";
 import { seedStandingAtCreation, accrueStandingForDays, companyStandingRates, applyStandingOps, standingFor, standingRoster, dripScale, DRIP, CREATION_SEEDS } from "../engine/standing.js";
@@ -2884,6 +2884,26 @@ await (async () => {
   check("SNG-BATCH-10: no domains (legacy) → the gate is a no-op, learning stays open", learnAbility(b10leg, "bright_burn", b10cat, rules, { traditionIndex: idx }).ok);
   const b10noidx = b10char();
   check("SNG-BATCH-10: no traditionIndex passed → gate is a no-op (backward-safe callers)", learnAbility(b10noidx, "bright_burn", b10cat, rules, {}).ok);
+
+  // ---- SNG-218 §1: ONE reachability gate — canLearnAbility runs EVERY learn-gate term (the Cut-Thread bug) ----
+  // The bug: the wheel's `reachable` checked level but NOT standing, so a standing-locked capstone read
+  // learnable and got a Learn button that then refused. canLearnAbility is now the single source both the
+  // wheel flag and the Learn button read — and it IS the check learnAbility runs before it writes.
+  const cutRules = { ...rules, capstoneStanding: { capstoneTier: 4, capstoneThreshold: 10, requiresTeacher: true } };
+  const cutCat = { the_cut_thread: { id: "the_cut_thread", name: "The Cut Thread", tradition: "umbral", powerSystem: "harmonic", levelReq: 5 } };
+  const cutBase = () => ({ level: 19, skillPoints: 9, origin: "valley", abilities: [], domains: { primary: "umbral", secondary: "veilwright", tertiary: b10tert } });
+  const gLocked = canLearnAbility({ ...cutBase(), peopleDisposition: { umbral: 3 }, teachers: {} }, "the_cut_thread", cutCat, cutRules, { traditionIndex: idx });
+  check("218 §1: the OLD level-only predicate reads a standing-locked capstone as reachable (19 ≥ 5) — the bug", (19 >= 5) === true);
+  check("218 §1: the FIXED gate BLOCKS it on standing — reachable false, gate tagged 'standing' (aspirational)", gLocked.ok === false && gLocked.gate === "standing");
+  check("218 §1: learnAbility refuses IDENTICALLY (single source — the button can't disagree with the write)", learnAbility({ ...cutBase(), peopleDisposition: { umbral: 3 }, teachers: {} }, "the_cut_thread", cutCat, cutRules, { traditionIndex: idx }).ok === false);
+  const gEarned = canLearnAbility({ ...cutBase(), peopleDisposition: { umbral: 12 }, teachers: { umbral: { met: true, willing: true } } }, "the_cut_thread", cutCat, cutRules, { traditionIndex: idx });
+  check("218 §1: earn deep standing + a willing teacher and the SAME gate opens it (reachable now true)", gEarned.ok === true);
+  const cutLearn = { ...cutBase(), peopleDisposition: { umbral: 12 }, teachers: { umbral: { met: true, willing: true } } };
+  check("218 §1: learnAbility then actually learns it (gate ↔ write agree in BOTH directions)", learnAbility(cutLearn, "the_cut_thread", cutCat, cutRules, { traditionIndex: idx }).ok === true && cutLearn.abilities.length === 1);
+  const cutProbe = { ...cutBase(), peopleDisposition: { umbral: 12 }, teachers: { umbral: { met: true, willing: true } } };
+  const cutPts = cutProbe.skillPoints;
+  canLearnAbility(cutProbe, "the_cut_thread", cutCat, cutRules, { traditionIndex: idx });
+  check("218 §1: canLearnAbility is a pure CHECK — never mutates (no ability added, no point spent)", cutProbe.abilities.length === 0 && cutProbe.skillPoints === cutPts);
 })();
 
 // --- SNG-BATCH-10 Phase 3 / SNG-065: structured quests load + resolve with durable consequences ---

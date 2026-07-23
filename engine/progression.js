@@ -441,11 +441,17 @@ export function meetsStandingBar(character, traditionId, tier, rules, opts = {})
   return { ok: true };
 }
 
-/** Learn a new ability (1 skill point), gated by effectiveLevelReq + the SNG-055 domain gate. */
-export function learnAbility(character, abilityId, catalog, rules, opts = {}) {
-  if (character.abilities.some(a => a.abilityId === abilityId)) return { ok: false, why: "already known" };
+/** SNG-218 §1: THE SINGLE LEARN GATE. Run EVERY learn-gate term (access/level, domain, attribute, the
+ *  capstone STANDING bar, capacity, affordability) and return {ok, why, gate?, cost, band, free} WITHOUT
+ *  mutating. `learnAbility` performs this exact check before it writes, and the level-up UI reads it for
+ *  the wheel's `reachable` flag and the Learn button — so suggestion, highlight and button can never
+ *  disagree with the real gate again (the Cut-Thread bug: `reachable` checked level but not standing, so a
+ *  standing-locked capstone read learnable). `gate` tags WHY it's blocked ('standing' → aspirational/"later",
+ *  'capacity'/'cost'/'level'/'domain' → other) so the UI can render the reason without re-deriving it. */
+export function canLearnAbility(character, abilityId, catalog, rules, opts = {}) {
+  if ((character.abilities || []).some(a => a.abilityId === abilityId)) return { ok: false, why: "already known", gate: "owned" };
   const ab = catalog[abilityId];
-  if (!ab) return { ok: false, why: "unknown ability" };
+  if (!ab) return { ok: false, why: "unknown ability", gate: "unknown" };
   // SNG-094: the DOMAIN gate (SNG-055) is authoritative for a character with domains — the legacy
   // effectiveLevelReq gates by `powerSystem === origin`, which returns null for every 24-tradition
   // ability whose powerSystem is an axis-file name (e.g. "reach_death_life"), so a native Ashwarden
@@ -460,14 +466,14 @@ export function learnAbility(character, abilityId, catalog, rules, opts = {}) {
     : innateAccess ? effectiveLevelReq(ab, character, rules)
     : (character?.domains?.primary && idx) ? (domainGateFor(ab, character, idx).allowed ? (ab.levelReq || 1) : null)
     : effectiveLevelReq(ab, character, rules);
-  if (req === null) return { ok: false, why: character?.domains?.primary ? "outside your domains" : "wrong tradition" };
-  if (character.level < req) return { ok: false, why: `requires level ${req}${req !== (ab.levelReq || 1) ? " (cross-training)" : ""}` };
+  if (req === null) return { ok: false, why: character?.domains?.primary ? "outside your domains" : "wrong tradition", gate: "domain" };
+  if (character.level < req) return { ok: false, why: `requires level ${req}${req !== (ab.levelReq || 1) ? " (cross-training)" : ""}`, gate: "level" };
   // SNG-BATCH-10: the great-circle domain gate — antipode closed, tier caps, capstone rule.
   const verdict = domainGateFor(ab, character, opts.traditionIndex);
-  if (!verdict.allowed) return { ok: false, why: verdict.reason || "outside your domains" };
+  if (!verdict.allowed) return { ok: false, why: verdict.reason || "outside your domains", gate: "domain" };
   if (opts.attributeGates) {
     const g = meetsLearnGate(character, abilityId, opts.attributeGates);
-    if (!g.ok) return { ok: false, why: g.why };
+    if (!g.ok) return { ok: false, why: g.why, gate: "attribute" };
   }
   // SNG-100b: the capstone standing bar — Tier IV–V of a pole-tradition additionally requires deep
   // standing with that people (willing teacher + earned reputation). This finally ENFORCES the
@@ -477,11 +483,11 @@ export function learnAbility(character, abilityId, catalog, rules, opts = {}) {
     const trad = traditionOf(ab, idx);
     if (trad && !isFolkTradition(trad, idx)) {
       const bar = meetsStandingBar(character, trad, ab.levelReq || 1, rules);
-      if (!bar.ok) return { ok: false, why: bar.why };
+      if (!bar.ok) return { ok: false, why: bar.why, gate: "standing" }; // aspirational — deepen standing to open it
     }
   }
-  if (opts.skillCapacity && atCapacity(character, opts.skillCapacity)) {
-    return { ok: false, why: "at skill capacity — deepen an owned skill instead of learning a new one" };
+  if (opts.skillCapacity && ab.powerSystem !== "learned" && atCapacity(character, opts.skillCapacity)) {
+    return { ok: false, why: "at skill capacity — deepen an owned skill instead of learning a new one", gate: "capacity" };
   }
   // Affordability last. When domains are set, the ring-distance penalty is the cost multiplier
   // (supersedes the legacy home-class 2x); otherwise fall back to the legacy cross-class cost.
@@ -490,10 +496,18 @@ export function learnAbility(character, abilityId, catalog, rules, opts = {}) {
   const braidCut = (character.braidDiscount && String(ab.powerSystem || "").startsWith("reach_")) ? character.braidDiscount : 0;
   const cost = opts.free ? 0
     : Math.max(1, ((opts.traditionIndex && character?.domains?.primary) ? (verdict.penalty || 1) : skillPointCost(ab, character, opts.skillCapacity)) - braidCut);
-  if (!opts.free && (character.skillPoints || 0) < cost) return { ok: false, why: cost > 1 ? `costs ${cost} points (${verdict.band === "far" ? "distant domain" : "cross-class"})` : "no points" };
-  character.abilities.push({ abilityId, level: 1 });
-  if (!opts.free) character.skillPoints -= cost;
+  if (!opts.free && (character.skillPoints || 0) < cost) return { ok: false, why: cost > 1 ? `costs ${cost} points (${verdict.band === "far" ? "distant domain" : "cross-class"})` : "no points", gate: "cost", cost, band: verdict.band };
   return { ok: true, free: !!opts.free, cost, band: verdict.band };
+}
+
+/** Learn a new ability (1 skill point). Every gate lives in canLearnAbility (§1 single source); this
+ *  runs it, and only on `ok` does it mutate — so a UI check and the real write can never diverge. */
+export function learnAbility(character, abilityId, catalog, rules, opts = {}) {
+  const check = canLearnAbility(character, abilityId, catalog, rules, opts);
+  if (!check.ok) return check;
+  character.abilities.push({ abilityId, level: 1 });
+  if (!opts.free) character.skillPoints = (character.skillPoints || 0) - check.cost;
+  return { ok: true, free: check.free, cost: check.cost, band: check.band };
 }
 
 // ---------- GM-generated abilities (earned in fiction, clamped by engine) ----------

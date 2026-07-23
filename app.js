@@ -47,7 +47,7 @@ import { runWakeGeneration } from "./engine/wake.js"; // SNG-204 Phase 2: open w
 import { addAssignment } from "./engine/assignments.js"; // SNG-191 §4: the world honours delegated work
 import { setArcFate } from "./engine/latentarcs.js"; // SNG-191 §7: the player closing a surfaced arc (the handled/resolved fate)
 import { parseGambitSteps, assessGambit, adaptationPointsFor, executeGambit, rerollStep, gambitResolutionForGM } from "./engine/gambit.js";
-import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, retroNativeGrants, applyNativeGrants, nativeGrantIdsFor, seedInnateSubstrate, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility, autoAdvancePracticedRanks, markDefiningMoment, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy } from "./engine/progression.js";
+import { SUBS, SUB_OF, SUB_DESC, ensureSubAttributes, syncParentAttributes, applyLevelUps, spendSubPoint, rankUpAbility, learnAbility, canLearnAbility, knownDiscovery, recordDiscovery, applyBacklash, abilitiesForGM, retroLevelGrants, retroNativeGrants, applyNativeGrants, nativeGrantIdsFor, seedInnateSubstrate, effectiveEnergyCost, effectiveLevelReq, sanitizeNewAbility, applyNewAbility, autoAdvancePracticedRanks, markDefiningMoment, promotionEligible, promote, acquirable, acquireDomain, recoveryEnergy } from "./engine/progression.js";
 import { ensureCodex, applyCodexUpdates, codexForGM, searchCodex, mergeInto, mergeCodexTopics, suggestMerges, markNotSame, buildMergeAdjudicationPrompt, applyMergeVerdicts, mergeDigest, undoLastMerge } from "./engine/codex.js";
 import { reconcile, topReconcileVersion } from "./engine/reconcile.js";
 import { ensurePractice, recordUse, declareAspiration, dropAspiration, recordAspirationProgress, aspirationRipe, practiceRankReady, ripeCombos, ripeBranches, emergenceNoticeForGM, acceptCombo, acceptBranch, validEmergenceId } from "./engine/practice.js";
@@ -67,7 +67,7 @@ import { lethalOfferClamp, sanitizeNewEncounter, startEncounter, encounterDiffic
 // CCODE-07: MUST match index.html's `?v=` cache stamp — tests/wiring_audit.mjs fails the build on
 // drift. It had silently sat at 1.8.104 across five ships, and it is what stamps `appVersion` on
 // every feedback report — so bug reports were filed against a version that hadn't been running.
-const APP_VERSION = "1.8.212";
+const APP_VERSION = "1.8.213";
 const app = document.getElementById("app");
 // SNG-084: one delegated listener drives every ⓘ helper dot — it survives chrome() re-renders (those
 // replace app's CHILDREN, not app itself). Each dot carries a data-help id into the authored copy.
@@ -5040,13 +5040,20 @@ function buildWheelModel() {
     const trad = traditionOf(ab, idx);
     const v = domainAccess(ab, ab.levelReq || 1, domains, idx);
     const isOwned = owned.has(ab.id);
+    // SNG-218 §1: ONE gate. canLearnAbility runs every learn-gate term (level + domain + attribute + the
+    // capstone STANDING bar + capacity + affordability), so `reachable` can never again disagree with the
+    // Learn action — the Cut-Thread bug was `reachable` checking level but not standing. `learnGate` tags
+    // WHY a blocked craft is blocked; `aspirational` = not owned, blocked ONLY by standing (earnable "later",
+    // §3 renders it dimmed rather than hard-barred).
+    const g = isOwned ? { ok: false, gate: "owned" } : canLearnAbility(character, ab.id, cat, CONTENT.rules, { attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, traditionIndex: idx });
     nodes.push({ id: ab.id, name: ab.name, tier: tierOf(ab.levelReq), levelReq: ab.levelReq || 1, cls: trad || ab.powerSystem || "learned",
       x, y, ang, owned: isOwned, band: v.band, allowed: v.allowed, penalty: v.penalty, closed: v.band === "closed",
       barred: !v.allowed && v.band !== "closed", dim: v.penalty > 1, isFolk: trad && isFolkTradition(trad, idx), isPrecursor: ab.powerSystem === "precursor",
-      // SNG-124: function overlay + cost-at-a-glance. `reachable` = learnable now (allowed, not owned, level met).
+      // SNG-124: function overlay + cost-at-a-glance.
       functions: ab.functions || [], families: familiesOfAbility(ab, FN_INDEX), energyCost: ab.energyCost ?? null,
       effCost: (() => { try { return effectiveEnergyCost(ab, character, CONTENT.rules); } catch { return ab.energyCost ?? null; } })(),
-      reachable: v.allowed && !isOwned && (character.level || 1) >= (ab.levelReq || 1),
+      reachable: g.ok, learnGate: g.ok ? null : (g.gate || "blocked"), learnGateWhy: g.ok ? null : (g.why || null),
+      aspirational: !isOwned && !g.ok && g.gate === "standing", // blocked only by standing → earnable "later"
       precursorUnlocked: ab.powerSystem === "precursor" && (character.precursorAccess || []).includes(ab.id), // SNG-129: narrative-earned
       ...extra });
   };
@@ -5143,20 +5150,16 @@ function skillSelectionActions(ab) {
     const p = rankProgress(character, ab.id);
     return `<div class="skill-actions">${ladderBlock}<span class="hint ${p.ripe ? "practiced" : ""}">${esc(p.text)}</span></div>`;
   }
-  // not owned → the learn path (same gate as the Level-Up modal's learnRow)
-  const req = learnLevelReq(ab);
-  const dv = domainVerdict(ab);
-  if (req === null || !dv.allowed) return `<div class="skill-actions">${ladderBlock}<span class="hint">🔒 not open to your domains</span></div>`;
-  const gate = meetsLearnGate(character, ab.id, CONTENT.attributeGates);
+  // not owned → the learn path. SNG-218 §1: ONE gate. canLearnAbility runs EVERY term (level, domain,
+  // attribute, the capstone STANDING bar, capacity, affordability), so this button and the wheel's
+  // `reachable` flag can never disagree with learnAbility again — a standing-locked capstone (the Cut
+  // Thread) now shows its real "deepen your standing" reason instead of a Learn button that then refuses.
   const ripe = aspirationRipe(character, ab.id, rules);
-  const cost = character.domains?.primary ? (dv.penalty || 1) : skillPointCost(ab, character, CONTENT.skillCapacity);
-  const capBlock = atCapacity(character, CONTENT.skillCapacity) && ab.powerSystem !== "learned";
-  const levelOk = character.level >= req;
-  const tooPoor = !ripe && sp < cost;
-  const blocked = !gate.ok || capBlock || tooPoor || !levelOk;
+  const verdict = canLearnAbility(character, ab.id, fullCatalog(), rules, { free: ripe, attributeGates: CONTENT.attributeGates, skillCapacity: CONTENT.skillCapacity, traditionIndex: CONTENT.traditionIndex });
+  const cost = verdict.cost ?? (character.domains?.primary ? (domainVerdict(ab).penalty || 1) : skillPointCost(ab, character, CONTENT.skillCapacity));
   return `<div class="skill-actions">${ladderBlock}
-    ${blocked
-      ? `<span class="hint">🔒 ${!levelOk ? `opens at level ${req}` : !gate.ok ? esc(gate.why) : capBlock ? "at capacity — deepen a craft you know instead" : `need ${cost} point${cost > 1 ? "s" : ""} (you have ${sp})`}</span>`
+    ${!verdict.ok
+      ? `<span class="hint">🔒 ${esc(verdict.why || "not learnable yet")}</span>`
       : `<button class="btn" data-skilllearn="${esc(ab.id)}">Learn${ripe ? " (free — practiced)" : ` (${cost} pt${cost > 1 ? "s" : ""})`}</button>`}
   </div>`;
 }

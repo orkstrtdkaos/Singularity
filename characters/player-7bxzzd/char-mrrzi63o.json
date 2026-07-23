@@ -8,7 +8,7 @@
   "whyHere": "You put down the blade, or you were sent away from it, or you are looking for a line worth holding that isn't theirs.",
   "background": "war_leader",
   "level": 1,
-  "xp": 33,
+  "xp": 38,
   "attributes": {
     "physical": 4,
     "mental": 3,
@@ -40,7 +40,7 @@
   "maxHealth": 30,
   "health": 30,
   "maxEnergy": 100,
-  "energy": 67,
+  "energy": 62,
   "inventory": [
     {
       "id": "travelers_pack",
@@ -243,72 +243,104 @@
         "player": "Use Read the Fight — read her stance right now, before a word changes anything",
         "summary": "Brynjar reads Sera's stance on the chalk track — calm, calculated, dangerous — and Freki offers no warning growl.",
         "narration": "You let Read the Fight settle in before you close the distance — not the full press you used at the junction, just the light, economical read of a trained eye doing what it was made for. Her stance tells you what she won't say yet.\n\nShe stopped because she calculated. Not surprise, not fear — the outside-edge weight distribution shifted the moment she turned, settling into something balanced and watchful. Her hands are loose at her sides, which on someone in her thirties with that kind of stillness means she's thought about where they go if she needs them elsewhere. She's assessed Ragnar — you can read it in the slight angle of her shoulders, opened a fraction toward him rather than you, like a person who identified the more dangerous problem first and is keeping it peripheral. She looked at Freki before she looked at either of you, and Freki is watching her with ears forward and no growl.\n\nThat last part you note carefully. No growl.\n\n'You're not Wardhouse,' she says again, not filling the silence — just naming the fact she started with, giving you room to correct it or confirm it."
+      },
+      {
+        "player": "Name yourself plainly and say why you followed her — the cloth bundle, the follower in the ash copse, a question she might want answered",
+        "summary": "Brynjar names himself plainly and lays out what he knows — the bundle, the follower, the ash copse — and Maret recalibrates; she asks how much he knows about the cord.",
+        "narration": "Maret Threnwick has been waiting for this conversation since she turned around. That much is clear from the way she doesn't move when you speak — no flinch, no fresh assessment, just the same still attention she's been holding since she stopped.\n\nYou keep your hands in the open and your voice level. Your name. Your village — a raided village, which earns nothing here except the weight of being true. You tell her about the cloth bundle left at the Crow and Thistle's third stool, the knotted cord and the dried herb sprig. You tell her about the heavier follower who peeled east at the waypost junction into the ash copse and held a line of sight on the road until she was out of view, then withdrew clean. A planned observation, not a chase. You say it the way Ragnar taught you to read it — plain, without elaboration.\n\nSomething shifts in her face. Not surprise — she knew she was followed, or suspected it — but a recalibration, the kind that happens when someone learns the shape of a thing they thought they only half-understood. Her gaze drops to your pack for a moment, then comes back up. \"The bundle,\" she says. Not a question. Her hands stay loose, but the slight angle toward Ragnar eases a fraction.\n\nFreki hasn't moved from its low, forward position on the track. Still no growl. That small fact sits in the air between all of you like a verdict delivered quietly, without ceremony.\n\nMaret looks at you for a moment — not at Ragnar, at you — and when she speaks again her voice is measured and unhurried, the same way everything else about her is measured and unhurried. \"How much do you know about what the cord is for?\""
       }
     ],
     "lastTurn": {
-      "narration": "You let Read the Fight settle in before you close the distance — not the full press you used at the junction, just the light, economical read of a trained eye doing what it was made for. Her stance tells you what she won't say yet.\n\nShe stopped because she calculated. Not surprise, not fear — the outside-edge weight distribution shifted the moment she turned, settling into something balanced and watchful. Her hands are loose at her sides, which on someone in her thirties with that kind of stillness means she's thought about where they go if she needs them elsewhere. She's assessed Ragnar — you can read it in the slight angle of her shoulders, opened a fraction toward him rather than you, like a person who identified the more dangerous problem first and is keeping it peripheral. She looked at Freki before she looked at either of you, and Freki is watching her with ears forward and no growl.\n\nThat last part you note carefully. No growl.\n\n'You're not Wardhouse,' she says again, not filling the silence — just naming the fact she started with, giving you room to correct it or confirm it.",
-      "sceneSummary": "Brynjar reads Sera's stance on the chalk track — calm, calculated, dangerous — and Freki offers no warning growl.",
+      "narration": "Maret Threnwick has been waiting for this conversation since she turned around. That much is clear from the way she doesn't move when you speak — no flinch, no fresh assessment, just the same still attention she's been holding since she stopped.\n\nYou keep your hands in the open and your voice level. Your name. Your village — a raided village, which earns nothing here except the weight of being true. You tell her about the cloth bundle left at the Crow and Thistle's third stool, the knotted cord and the dried herb sprig. You tell her about the heavier follower who peeled east at the waypost junction into the ash copse and held a line of sight on the road until she was out of view, then withdrew clean. A planned observation, not a chase. You say it the way Ragnar taught you to read it — plain, without elaboration.\n\nSomething shifts in her face. Not surprise — she knew she was followed, or suspected it — but a recalibration, the kind that happens when someone learns the shape of a thing they thought they only half-understood. Her gaze drops to your pack for a moment, then comes back up. \"The bundle,\" she says. Not a question. Her hands stay loose, but the slight angle toward Ragnar eases a fraction.\n\nFreki hasn't moved from its low, forward position on the track. Still no growl. That small fact sits in the air between all of you like a verdict delivered quietly, without ceremony.\n\nMaret looks at you for a moment — not at Ragnar, at you — and when she speaks again her voice is measured and unhurried, the same way everything else about her is measured and unhurried. \"How much do you know about what the cord is for?\"",
+      "sceneSummary": "Brynjar names himself plainly and lays out what he knows — the bundle, the follower, the ash copse — and Maret recalibrates; she asks how much he knows about the cord.",
       "choices": [
         {
-          "label": "Name yourself plainly and say why you followed her — the cloth bundle, the follower in the ash copse, a question she might want answered",
-          "attribute": "social",
-          "subAttribute": "rapport",
+          "label": "Produce the cloth bundle — lay it out on the track between you and let her see exactly what you're carrying",
+          "attribute": "practical",
+          "subAttribute": "craft",
+          "axes": {
+            "falsehood_truth": 0.6
+          },
           "difficulty": 0,
           "intentTags": [
-            "persuade"
+            "help",
+            "careful"
           ],
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Produce the cloth bundle — set it where she can see it without speaking first; let her read come before your words do",
-          "attribute": "social",
-          "subAttribute": "presence",
-          "difficulty": 15,
-          "intentTags": [
-            "negotiate"
-          ],
-          "trivial": false
-        },
-        {
-          "label": "Agree with her — 'No. Not Wardhouse. Someone left this behind when you did, and I want to know what it means before you walk through those gates.' Honest and direct.",
+          "label": "Answer honestly: very little — name what you know and what you don't, and ask her to fill the gap",
           "attribute": "social",
           "subAttribute": "rapport",
+          "axes": {
+            "falsehood_truth": 0.7
+          },
           "difficulty": 0,
           "intentTags": [
             "negotiate",
-            "persuade"
+            "careful"
           ],
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
         },
         {
-          "label": "Say nothing and watch how she fills the silence — a person who calculated stopping knows that silence is also information",
-          "attribute": "mental",
+          "label": "Turn it back on her — ask why a Stillhold cloth-warden is walking the Marchward road alone with someone watching her exit",
+          "attribute": "social",
           "subAttribute": "insight",
-          "difficulty": 15,
+          "axes": {
+            "falsehood_truth": 0.4
+          },
+          "difficulty": 0,
           "intentTags": [
-            "study"
+            "study",
+            "plan"
           ],
-          "trivial": false
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": false,
+          "encounterId": null,
+          "emergenceId": null
+        },
+        {
+          "label": "Ask Ragnar's read first — glance at him, give him the opening to say what he knows about the cord before you commit to an answer",
+          "attribute": "social",
+          "subAttribute": "presence",
+          "axes": {
+            "falsehood_truth": 0.3
+          },
+          "difficulty": 0,
+          "intentTags": [
+            "plan",
+            "careful"
+          ],
+          "abilityId": null,
+          "energyCost": null,
+          "trivial": true,
+          "encounterId": null,
+          "emergenceId": null
         }
       ],
-      "characterDeltas": {
-        "health": 0,
-        "energy": -3
-      },
       "scene": {
-        "setting": "The chalk Stillhold track, one mile north of the Stillhold approach. Flat road between elder scrub, spring mud soft in the ruts. Overcast morning light. The Stillhold's grey walls visible as a smudge on the southern horizon.",
+        "setting": "The chalk Stillhold track, one mile north of the Stillhold approach. Flat road between elder scrub, spring mud soft in the ruts. Overcast morning light. The Stillhold's grey walls visible as a smudge one mile south.",
         "npcsPresent": [
           {
-            "name": "Sera (Maret Threnwick)",
-            "state": "Stopped on the track facing Brynjar. Balanced, watchful — shoulders angled slightly toward Ragnar, hands loose at her sides. Has spoken once and is waiting."
+            "name": "Maret Threnwick",
+            "state": "Standing on the track facing Brynjar, hands loose, shoulders slightly less angled toward Ragnar than before. Has asked how much Brynjar knows about the cord. Waiting."
           },
           {
             "name": "Ragnar Solmyr",
-            "state": "Standing at Brynjar's right shoulder, still. Sera has clocked him as the primary concern."
+            "state": "At Brynjar's right shoulder. Still. Watching Maret."
           },
           {
             "name": "Freki",
-            "state": "Low and forward on the track, ears up, watching Sera. No growl."
+            "state": "Low and forward on the track, ears up. No growl. Holding the same watchful read."
           }
         ],
         "objects": [
@@ -318,11 +350,10 @@
           "Stillhold walls visible as a grey smudge one mile south"
         ],
         "threads": [
-          "Sera has named the fact: not Wardhouse — waiting for Brynjar's answer",
-          "Freki reads no hostility from her — a meaningful signal",
-          "The cloth bundle is in the pack, unproduced",
+          "Maret has asked directly: how much do you know about what the cord is for?",
+          "The cloth bundle is in the pack, unproduced — she clocked the pack when you named it",
           "The identity and purpose of the heavier follower remains open",
-          "The Stillhold approach is one mile south — she could still reach it"
+          "The Stillhold approach is one mile south"
         ]
       },
       "npcUpdates": [
@@ -330,52 +361,58 @@
           "op": "update",
           "npcId": "maret-threnwick",
           "name": "Maret Threnwick",
-          "note": "Brynjar read her stance with Read the Fight — she assessed Ragnar as the primary threat, opened slightly toward him, hands loose, calculating. Freki gave no growl.",
+          "note": "Brynjar named himself, named the bundle, and named the follower in the ash copse — clean observation, no threat. She recalibrated and asked how much he knows about the cord's purpose.",
           "learned": [
-            "Reads threat by priority — marked Ragnar as the more dangerous variable before Brynjar",
-            "Hands kept loose and deliberate — a person who has thought about where they go in a crisis",
-            "Freki reads no hostility from her — she carries no hidden aggression in this moment"
+            "Brynjar carries the cloth bundle from the Crow and Thistle",
+            "The heavier follower withdrew cleanly from the ash copse after observing — Brynjar read it as planned, not spontaneous"
           ],
-          "skillsObserved": [
-            "priority threat assessment",
-            "deliberate stillness under pressure"
-          ],
-          "statusNote": "Stopped one mile north of the Stillhold approach, facing Brynjar, Ragnar, and Freki. Waiting for an answer to 'You're not Wardhouse.'"
+          "relationshipDelta": 1,
+          "status": "active",
+          "statusNote": "Stopped on the chalk track one mile north of the Stillhold approach, facing Brynjar — has asked about the cord's purpose and is waiting for his answer"
+        },
+        {
+          "op": "update",
+          "npcId": "ragnar-solmyr",
+          "name": "Ragnar Solmyr",
+          "note": "Standing at Brynjar's right shoulder through the introduction — present but not crowding the exchange. Maret's angle toward him has eased slightly as Brynjar spoke.",
+          "status": "active",
+          "statusNote": "At Brynjar's right shoulder on the chalk track, one mile north of the Stillhold approach"
         }
       ],
       "codexUpdates": [
         {
-          "topic": "sera-of-the-stillhold",
-          "label": "Sera of the Stillhold",
+          "topic": "maret-threnwick",
+          "label": "Maret Threnwick",
           "kind": "person",
           "entityId": "maret-threnwick",
-          "fact": "Read the Fight confirms: she is calm and calculating, not frightened. She clocked Ragnar as the primary threat before Brynjar — a professional read. Her hands stay loose and deliberate. Freki detects no hidden aggression.",
+          "fact": "When Brynjar named the bundle and the follower in the ash copse plainly, she recalibrated — not surprised, but recalculating the shape of what she half-knew. She asked directly how much he knows about the cord's purpose.",
           "links": [
-            "the-stillhold",
-            "ragnar-solmyr",
-            "brynjar-andyrsson-thread"
+            "the-binding-cord",
+            "sera-of-the-stillhold",
+            "brynjar-andyrsson-thread",
+            "the-stillhold"
           ]
         }
       ],
       "timeOps": {
         "hoursPassed": 0.25,
-        "why": "brief moment of assessment on the track"
+        "why": "a short exchange on the track — minutes, not hours"
       }
     },
     "sceneState": {
-      "setting": "The chalk Stillhold track, one mile north of the Stillhold approach. Flat road between elder scrub, spring mud soft in the ruts. Overcast morning light. The Stillhold's grey walls visible as a smudge on the southern horizon.",
+      "setting": "The chalk Stillhold track, one mile north of the Stillhold approach. Flat road between elder scrub, spring mud soft in the ruts. Overcast morning light. The Stillhold's grey walls visible as a smudge one mile south.",
       "npcsPresent": [
         {
-          "name": "Sera (Maret Threnwick)",
-          "state": "Stopped on the track facing Brynjar. Balanced, watchful — shoulders angled slightly toward Ragnar, hands loose at her si"
+          "name": "Maret Threnwick",
+          "state": "Standing on the track facing Brynjar, hands loose, shoulders slightly less angled toward Ragnar than before. Has asked h"
         },
         {
           "name": "Ragnar Solmyr",
-          "state": "Standing at Brynjar's right shoulder, still. Sera has clocked him as the primary concern."
+          "state": "At Brynjar's right shoulder. Still. Watching Maret."
         },
         {
           "name": "Freki",
-          "state": "Low and forward on the track, ears up, watching Sera. No growl."
+          "state": "Low and forward on the track, ears up. No growl. Holding the same watchful read."
         }
       ],
       "objects": [
@@ -385,11 +422,10 @@
         "Stillhold walls visible as a grey smudge one mile south"
       ],
       "threads": [
-        "Sera has named the fact: not Wardhouse — waiting for Brynjar's answer",
-        "Freki reads no hostility from her — a meaningful signal",
-        "The cloth bundle is in the pack, unproduced",
+        "Maret has asked directly: how much do you know about what the cord is for?",
+        "The cloth bundle is in the pack, unproduced — she clocked the pack when you named it",
         "The identity and purpose of the heavier follower remains open",
-        "The Stillhold approach is one mile south — she could still reach it"
+        "The Stillhold approach is one mile south"
       ]
     }
   },
@@ -594,7 +630,6 @@
       },
       "relationship": 2,
       "history": [
-        "[d1] Crossed the square to deliver an accurate assessment of Brynjar's left-shoulder lead — a gap above the collarbone — then returned to his bench without waiting for a response.",
         "[d1] Fell into step without hesitation; confirmed the movement he saw was at the south fork, two people, before full light — gave the information plainly and without embellishment",
         "[d1] Read the lighter footprints on sight — identified fast movement versus deliberate, noted same gait for fleeing and purposeful travel. Walking at Brynjar's shoulder.",
         "[d1] Confirmed Brynjar's read of the heavier prints — named it plainly as someone who knew Sera was ahead of them.",
@@ -603,7 +638,8 @@
         "[d1] Named the split plainly — the follower peeled east into the ash copse while Sera continued south; identified it as a watching position.",
         "[d1] Read Freki's posture without comment and shifted his footing to open a line toward the copse — tactical, unhurried.",
         "[d1] Fell in beside Brynjar without argument when the call south was made. Named the four-mile distance to the Stillhold approach and estimated Sera's lead at two hours.",
-        "[d1] Matched Brynjar's pace for four miles without complaint. Standing at right shoulder now, watchful, not crowding."
+        "[d1] Matched Brynjar's pace for four miles without complaint. Standing at right shoulder now, watchful, not crowding.",
+        "[d1] Standing at Brynjar's right shoulder through the introduction — present but not crowding the exchange. Maret's angle toward him has eased slightly as Brynjar spoke."
       ],
       "knownFacts": [
         "Reads fighting stances on sight",
@@ -626,13 +662,13 @@
       "status": "active",
       "gender": "man",
       "pronouns": "he/him",
-      "statusNote": "On the chalk track one mile north of the Stillhold approach, at Brynjar's right shoulder",
+      "statusNote": "At Brynjar's right shoulder on the chalk track, one mile north of the Stillhold approach",
       "domains": {
         "primary": "marcher"
       },
       "domainsSource": "derived",
       "lastSeen": {
-        "locationId": "the_marchward",
+        "locationId": "the_stillhold",
         "day": 1
       },
       "aliases": [
@@ -648,10 +684,11 @@
         "locationId": "the_marchward",
         "day": 1
       },
-      "relationship": 0,
+      "relationship": 1,
       "history": [
         "[d1] Caught on the chalk track a mile north of the Stillhold approach. Stopped when she heard pursuit, turned, assessed Brynjar, Ragnar, and Freki in that order. Said: 'You're not Wardhouse.' Has not run.",
-        "[d1] Brynjar read her stance with Read the Fight — she assessed Ragnar as the primary threat, opened slightly toward him, hands loose, calculating. Freki gave no growl."
+        "[d1] Brynjar read her stance with Read the Fight — she assessed Ragnar as the primary threat, opened slightly toward him, hands loose, calculating. Freki gave no growl.",
+        "[d1] Brynjar named himself, named the bundle, and named the follower in the ash copse — clean observation, no threat. She recalibrated and asked how much he knows about the cord's purpose."
       ],
       "knownFacts": [
         "Reads a threat assessment rapidly and without showing it",
@@ -659,7 +696,9 @@
         "Registered Ragnar's presence and adjusted her read — he changes her calculus",
         "Reads threat by priority — marked Ragnar as the more dangerous variable before Brynjar",
         "Hands kept loose and deliberate — a person who has thought about where they go in a crisis",
-        "Freki reads no hostility from her — she carries no hidden aggression in this moment"
+        "Freki reads no hostility from her — she carries no hidden aggression in this moment",
+        "Brynjar carries the cloth bundle from the Crow and Thistle",
+        "The heavier follower withdrew cleanly from the ash copse after observing — Brynjar read it as planned, not spontaneous"
       ],
       "skillsObserved": [
         "threat assessment",
@@ -670,7 +709,7 @@
       "status": "active",
       "gender": "woman",
       "pronouns": "she/her",
-      "statusNote": "Stopped one mile north of the Stillhold approach, facing Brynjar, Ragnar, and Freki. Waiting for an answer to 'You're not Wardhouse.'",
+      "statusNote": "Stopped on the chalk track one mile north of the Stillhold approach, facing Brynjar — has asked about the cord's purpose and is waiting for his answer",
       "domains": {
         "primary": "stillhold"
       },
@@ -842,7 +881,7 @@
         "lastOutcome": "stall"
       }
     },
-    "turnsSinceOffer": 4,
+    "turnsSinceOffer": 5,
     "recentOffers": [
       {
         "thing": "Doss watching Brynjar with the stillness of someone deciding something — she has not offered it yet, but she is on the edge of it",
@@ -1161,12 +1200,15 @@
         "kind": "person",
         "facts": [
           "[d1] Stillhold cloth-warden and road-courier who carries sealed records stitched into fabric — and knows exactly who is following her",
-          "[d1] Read the Fight confirms: she is calm and calculating, not frightened. She clocked Ragnar as the primary threat before Brynjar — a professional read. Her hands stay loose and deliberate. Freki detects no hidden aggression."
+          "[d1] Read the Fight confirms: she is calm and calculating, not frightened. She clocked Ragnar as the primary threat before Brynjar — a professional read. Her hands stay loose and deliberate. Freki detects no hidden aggression.",
+          "[d1] When Brynjar named the bundle and the follower in the ash copse plainly, she recalibrated — not surprised, but recalculating the shape of what she half-knew. She asked directly how much he knows about the cord's purpose."
         ],
         "links": [
           "the-stillhold",
           "ragnar-solmyr",
-          "brynjar-andyrsson-thread"
+          "brynjar-andyrsson-thread",
+          "the-binding-cord",
+          "sera-of-the-stillhold"
         ],
         "aliases": [
           "Sera of the Stillhold"
@@ -1238,15 +1280,15 @@
     ]
   },
   "tendencies": {
-    "leadership": 7.624981818200222,
-    "cerebral": 6.45260250562039,
-    "strategic": 4.257300636473531,
-    "ruthless": 0.572929976008282,
-    "social": 5.645052107882243,
-    "cautious": 6.211406581758115
+    "leadership": 7.434357272745217,
+    "cerebral": 6.29128744297988,
+    "strategic": 4.150868120561692,
+    "ruthless": 0.558606726608075,
+    "social": 6.503925805185187,
+    "cautious": 6.056121417214162
   },
   "aptitudes": [],
-  "actionCount": 24,
+  "actionCount": 25,
   "grantsVersion": 1,
   "precursorAccess": [],
   "livingCurrentAccess": [],
@@ -1388,8 +1430,8 @@
     "source": "personal_fallback",
     "notes_for_gm": "A light personal thread seeded from the character's backstory (SNG-133 fallback) — a slow gravity across sessions; the ending is the player's, never foreclosed."
   },
-  "updatedAt": 1784773125437,
-  "rev": 78,
+  "updatedAt": 1784774056885,
+  "rev": 79,
   "generated": {
     "schemaVersion": 1,
     "npc": {
@@ -1639,7 +1681,7 @@
   "company": [],
   "_pinsInitialized": true,
   "regionsKnown": {
-    "riven_marches": 27
+    "riven_marches": 28
   },
   "practice": {
     "schemaVersion": 1,
@@ -1705,10 +1747,10 @@
     {
       "id": "sess-3",
       "startedAt": "2026-07-23T01:30:20.702Z",
-      "lastAt": "2026-07-23T02:18:45.437Z",
+      "lastAt": "2026-07-23T02:34:16.883Z",
       "startDay": 23,
       "endDay": 23,
-      "beats": 21
+      "beats": 22
     }
   ],
   "_pendingArrival": null,
@@ -1724,15 +1766,15 @@
     "at": "2026-07-23T01:18:04.353Z"
   },
   "_opEmitted": {
-    "sceneSummary": 20,
-    "choices": 20,
-    "scene": 20,
-    "npcUpdates": 18,
+    "sceneSummary": 21,
+    "choices": 21,
+    "scene": 21,
+    "npcUpdates": 19,
     "placeUpdates": 5,
     "generateRequest": 3,
     "moveTo": 3,
-    "timeOps": 20,
-    "codexUpdates": 18,
+    "timeOps": 21,
+    "codexUpdates": 19,
     "sceneEnded": 5,
     "characterDeltas": 7,
     "offer": 3,
@@ -1741,7 +1783,7 @@
     "questUpdates": 3,
     "stageOps": 2
   },
-  "_opTurns": 20,
+  "_opTurns": 21,
   "_opLedger": {
     "offer": {
       "applied": 3,
